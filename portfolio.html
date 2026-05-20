@@ -242,6 +242,33 @@
   .li { display: flex; align-items: center; gap: 5px; font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--text3); }
   .ld { width: 10px; height: 2px; border-radius: 1px; }
 
+  /* ── CHART · sélecteur de plage ── */
+  .chart-range-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+  .rng-btn {
+    background: transparent; border: 1px solid var(--border2); border-radius: 100px;
+    padding: 0.25rem 0.75rem; font-family: 'Courier New', monospace; font-size: 0.74rem;
+    color: var(--text3); cursor: pointer; transition: all 0.15s; line-height: 1;
+  }
+  .rng-btn:hover { border-color: var(--text2); color: var(--text2); }
+  .rng-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(232,168,32,0.08); }
+  .chart-custom-range {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; padding: 0.6rem 0.8rem;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+    font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--text3); flex-wrap: wrap;
+  }
+  .chart-custom-range input[type=date] {
+    background: var(--bg); border: 1px solid var(--border2); border-radius: 4px;
+    padding: 4px 8px; color: var(--text2); font-family: 'Courier New', monospace; font-size: 0.78rem;
+    color-scheme: dark;
+  }
+  .chart-custom-range button {
+    background: rgba(232,168,32,0.1); border: 1px solid rgba(232,168,32,0.4); border-radius: 100px;
+    padding: 4px 12px; color: var(--gold); font-family: 'Courier New', monospace; font-size: 0.72rem;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .chart-custom-range button:hover { background: rgba(232,168,32,0.18); }
+  .chart-range-info { color: var(--text3); opacity: 0.7; font-size: 0.72rem; }
+
   /* ── SECTION ── */
   .sec-label { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
 
@@ -534,9 +561,22 @@
   <div class="chart-block">
     <div class="chart-header">
       <h2>Performance depuis le lancement</h2>
-      <div class="legend">
-        <div class="li"><div class="ld" style="background:var(--gold)"></div>Capital Signal (€)</div>
+      <div class="chart-range-tabs" role="tablist" aria-label="Plage temporelle">
+        <button class="rng-btn" data-range="1d" onclick="setChartRange('1d', this)">1J</button>
+        <button class="rng-btn" data-range="1w" onclick="setChartRange('1w', this)">1S</button>
+        <button class="rng-btn" data-range="1m" onclick="setChartRange('1m', this)">1M</button>
+        <button class="rng-btn" data-range="1y" onclick="setChartRange('1y', this)">1A</button>
+        <button class="rng-btn active" data-range="max" onclick="setChartRange('max', this)">Max</button>
+        <button class="rng-btn" data-range="custom" onclick="setChartRange('custom', this)">Plage…</button>
       </div>
+    </div>
+    <div class="chart-custom-range" id="chart-custom-range" style="display:none">
+      <span>Du</span>
+      <input type="date" id="rng-from" onchange="applyCustomRange()">
+      <span>au</span>
+      <input type="date" id="rng-to" onchange="applyCustomRange()">
+      <button onclick="applyCustomRange()">Appliquer</button>
+      <span class="chart-range-info" id="rng-info"></span>
     </div>
     <svg style="width:100%;overflow:visible" viewBox="0 0 600 200" id="perf-chart">
       <defs>
@@ -1019,11 +1059,97 @@ function fmt(n, d=2)  { return Number(n).toFixed(d); }
 function fmtEur(n)    { return Number(n).toLocaleString('fr-FR', {maximumFractionDigits:0}) + ' €'; }
 function sign(n)      { return n >= 0 ? '+' : ''; }
 
+// ── État du sélecteur de plage ────────────────────────────────────────────
+// `_fullHistory` stocke toute l'historique chargée depuis portfolio.json
+// pour permettre de re-filtrer sans refetch quand l'utilisateur change la vue.
+let _fullHistory   = [];
+let _capitalInit   = 20000;
+let _currentRange  = 'max';
+let _currentCustom = null;  // { from: 'YYYY-MM-DD', to: 'YYYY-MM-DD' }
+
+const RANGE_DAYS = { '1d': 1, '1w': 7, '1m': 30, '1y': 365 };
+const RANGE_LBL  = { '1d': '1 jour', '1w': '1 semaine', '1m': '1 mois', '1y': '1 an', 'max': 'depuis le lancement', 'custom': 'plage personnalisée' };
+
+function filterHistoryByRange(history, range, custom) {
+  if (!history || history.length === 0) return [];
+  if (range === 'max') return history.slice();
+  if (range === 'custom') {
+    if (!custom || !custom.from || !custom.to) return history.slice();
+    return history.filter(h => h.date >= custom.from && h.date <= custom.to);
+  }
+  const days = RANGE_DAYS[range];
+  if (!days) return history.slice();
+  // Référence : dernière date dispo (pas Date.now() — le portfolio peut être périmé de 1-2j)
+  const lastDateStr = history[history.length - 1].date;
+  const ref = new Date(lastDateStr);
+  const cutoff = new Date(ref); cutoff.setDate(cutoff.getDate() - days);
+  const cutoffStr = cutoff.toISOString().slice(0, 10);
+  return history.filter(h => h.date >= cutoffStr);
+}
+
+function setChartRange(range, btn) {
+  _currentRange = range;
+  document.querySelectorAll('.rng-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const customRow = document.getElementById('chart-custom-range');
+  customRow.style.display = range === 'custom' ? 'flex' : 'none';
+
+  // Si on passe en custom et qu'aucune date n'est pré-remplie, initialise avec
+  // la plage complète disponible pour faciliter le réglage
+  if (range === 'custom' && _fullHistory.length >= 2) {
+    const fromEl = document.getElementById('rng-from');
+    const toEl   = document.getElementById('rng-to');
+    if (!fromEl.value) fromEl.value = _fullHistory[0].date;
+    if (!toEl.value)   toEl.value   = _fullHistory[_fullHistory.length - 1].date;
+    fromEl.min = _fullHistory[0].date;
+    fromEl.max = _fullHistory[_fullHistory.length - 1].date;
+    toEl.min   = _fullHistory[0].date;
+    toEl.max   = _fullHistory[_fullHistory.length - 1].date;
+  }
+
+  rerenderChart();
+}
+
+function applyCustomRange() {
+  const from = document.getElementById('rng-from').value;
+  const to   = document.getElementById('rng-to').value;
+  const info = document.getElementById('rng-info');
+  if (!from || !to) { info.textContent = '⚠ renseignez les deux dates'; return; }
+  if (from > to)    { info.textContent = '⚠ la date de début doit précéder la date de fin'; return; }
+  _currentCustom = { from, to };
+  info.textContent = '';
+  rerenderChart();
+}
+
+function rerenderChart() {
+  const filtered = filterHistoryByRange(_fullHistory, _currentRange, _currentCustom);
+  const note = document.getElementById('chart-note');
+
+  if (filtered.length < 2) {
+    // Plage trop courte pour la granularité quotidienne — fallback gracieux
+    const fallback = _fullHistory.slice(-Math.max(2, filtered.length));
+    renderChart(fallback, _capitalInit);
+    if (note) {
+      note.textContent = `${RANGE_LBL[_currentRange] || _currentRange} — données insuffisantes (granularité quotidienne, marchés fermés ?). Affichage des ${fallback.length} dernier(s) point(s).`;
+    }
+    return;
+  }
+
+  renderChart(filtered, _capitalInit);
+  if (note) {
+    note.textContent = `${filtered.length} point${filtered.length > 1 ? 's' : ''} · vue ${RANGE_LBL[_currentRange] || _currentRange} — un point s'ajoute chaque jour de marché ouvré`;
+  }
+}
+
 function renderChart(history, capitalInitial = 20000) {
   const svg  = document.getElementById('perf-chart');
   const ns   = 'http://www.w3.org/2000/svg';
   const mk   = (tag, attrs) => { const e = document.createElementNS(ns, tag); Object.entries(attrs).forEach(([k,v]) => e.setAttribute(k,v)); return e; };
   const xMin = 50, xMax = 550, yTop = 22, yBot = 182;
+
+  // ── Clear SVG content (preserve <defs>) — pour permettre les re-renders ────
+  Array.from(svg.children).forEach(child => { if (child.tagName.toLowerCase() !== 'defs') svg.removeChild(child); });
 
   // ── Capital en € ──────────────────────────────────────────────────────────
   const caps = history.map(h => h.capital ?? capitalInitial * (1 + (h.perf ?? 0) / 100));
@@ -1055,13 +1181,35 @@ function renderChart(history, capitalInitial = 20000) {
     svg.appendChild(mk('text', { x:34, y:y+3, 'font-family':'Courier New', 'font-size':7, fill:'#50506c', 'text-anchor':'end' })).textContent = lbl;
   }
 
-  // ── Aire + courbe Signal ───────────────────────────────────────────────────
-  const linePts = pts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
-  const areaPts = linePts + ` ${last.x.toFixed(1)},${yBot} ${pts[0].x.toFixed(1)},${yBot}`;
-  svg.appendChild(mk('polygon', { points: areaPts, fill:'url(#chartGrad)' }));
-  svg.appendChild(mk('polyline', { points: linePts, fill:'none', stroke:'#e8a820', 'stroke-width':2.2, 'stroke-linejoin':'round', 'stroke-linecap':'round' }));
+  // ── Courbe lissée (Catmull-Rom → cubic bezier, tension subtile) ───────────
+  // Évite la sensation de "polyline anguleuse" sans surimposer un effet de spline
+  // exagéré qui fausserait la lecture des valeurs réelles.
+  const smoothPath = (points) => {
+    if (points.length < 2) return '';
+    if (points.length === 2) return `M${points[0].x.toFixed(1)},${points[0].y.toFixed(1)} L${points[1].x.toFixed(1)},${points[1].y.toFixed(1)}`;
+    const t = 0.18;  // tension modérée — courbe douce sans overshoot
+    let d = `M${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
+    for (let i = 0; i < points.length - 1; i++) {
+      const p0 = points[Math.max(0, i - 1)];
+      const p1 = points[i];
+      const p2 = points[i + 1];
+      const p3 = points[Math.min(points.length - 1, i + 2)];
+      const c1x = p1.x + (p2.x - p0.x) * t;
+      const c1y = p1.y + (p2.y - p0.y) * t;
+      const c2x = p2.x - (p3.x - p1.x) * t;
+      const c2y = p2.y - (p3.y - p1.y) * t;
+      d += ` C${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+    }
+    return d;
+  };
+  const pathD = smoothPath(pts);
+  const areaD = pathD + ` L${last.x.toFixed(1)},${yBot} L${pts[0].x.toFixed(1)},${yBot} Z`;
 
-  // ── Marqueurs d'injection (montant seulement, sans les tickers) ───────────
+  // ── Aire dégradée + courbe lissée ─────────────────────────────────────────
+  svg.appendChild(mk('path', { d: areaD, fill:'url(#chartGrad)' }));
+  svg.appendChild(mk('path', { d: pathD, fill:'none', stroke:'#e8a820', 'stroke-width':2.2, 'stroke-linejoin':'round', 'stroke-linecap':'round' }));
+
+  // ── Marqueurs d'injection (verticale + montant) ───────────────────────────
   pts.filter(p => p.note).forEach(p => {
     svg.appendChild(mk('line', { x1:p.x, y1:yTop, x2:p.x, y2:yBot, stroke:'#5080f8', 'stroke-width':0.9, 'stroke-dasharray':'3,3', 'stroke-opacity':0.5 }));
     const amount = p.note.match(/[+\-]?\d+\s*k€?/i)?.[0] ?? '';
@@ -1070,31 +1218,37 @@ function renderChart(history, capitalInitial = 20000) {
     svg.appendChild(t);
   });
 
-  // ── Dots + labels ─────────────────────────────────────────────────────────
+  // ── Axe X : labels espacés (1er, dernier, ~4 intermédiaires) ──────────────
+  // Évite l'effet "alphabet soup" quand on a 14+ points en empilant les dates.
+  // On garde toujours le premier et le dernier, et on choisit ~4 indices
+  // intermédiaires à pas régulier.
+  const maxLabels = 6;
+  const labelIdx = new Set([0, pts.length - 1]);
+  if (pts.length > maxLabels) {
+    const stride = (pts.length - 1) / (maxLabels - 1);
+    for (let i = 1; i < maxLabels - 1; i++) labelIdx.add(Math.round(i * stride));
+  } else {
+    pts.forEach((_, i) => labelIdx.add(i));
+  }
   pts.forEach((p, i) => {
+    if (!labelIdx.has(i)) return;
     const isLast = i === pts.length - 1;
-    svg.appendChild(mk('circle', {
-      cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: isLast ? 4.5 : 3,
-      fill: isLast ? '#e8a820' : '#e8a82077',
-      stroke: '#e8a820', 'stroke-width': isLast ? 0 : 0.7
-    }));
-    const d   = new Date(p.date);
+    const d = new Date(p.date);
     svg.appendChild(mk('text', {
       x: p.x.toFixed(1), y: 197, 'font-family':'Courier New', 'font-size': 7.5,
       fill: isLast ? '#e8a820' : '#50506c', 'text-anchor':'middle'
     })).textContent = d.toLocaleDateString('fr-FR', { day:'numeric', month:'short' });
-    if (!isLast) {
-      svg.appendChild(mk('text', {
-        x: p.x.toFixed(1), y: (p.y - 6).toFixed(1), 'font-family':'Courier New', 'font-size': 7.5,
-        fill: '#e8a82099', 'text-anchor':'middle'
-      })).textContent = (p.cap / 1000).toFixed(1) + ' k€';
-    }
   });
 
-  // ── Box dernier point ─────────────────────────────────────────────────────
+  // ── Anchor du dernier point + box valeur ──────────────────────────────────
+  // Un seul point visible : le dernier (sert d'ancre visuelle pour la box k€)
+  svg.appendChild(mk('circle', {
+    cx: last.x.toFixed(1), cy: last.y.toFixed(1), r: 3.5,
+    fill: '#e8a820', stroke: '#1a1200', 'stroke-width': 1.2
+  }));
   const lastLbl = (last.cap / 1000).toFixed(1) + ' k€';
-  svg.appendChild(mk('rect', { x:(last.x-28).toFixed(1), y:(last.y-17).toFixed(1), width:58, height:17, rx:4, fill:'#1a1200', stroke:'#e8a820', 'stroke-width':0.8, 'stroke-opacity':0.7 }));
-  const lt = mk('text', { x: last.x.toFixed(1), y:(last.y-4).toFixed(1), 'font-family':'Courier New', 'font-size':9.5, fill:'#e8a820', 'text-anchor':'middle', 'font-weight':'bold' });
+  svg.appendChild(mk('rect', { x:(last.x-28).toFixed(1), y:(last.y-19).toFixed(1), width:58, height:17, rx:4, fill:'#1a1200', stroke:'#e8a820', 'stroke-width':0.8, 'stroke-opacity':0.7 }));
+  const lt = mk('text', { x: last.x.toFixed(1), y:(last.y-6).toFixed(1), 'font-family':'Courier New', 'font-size':9.5, fill:'#e8a820', 'text-anchor':'middle', 'font-weight':'bold' });
   lt.textContent = lastLbl;
   svg.appendChild(lt);
 }
@@ -1380,23 +1534,23 @@ async function loadPortfolio() {
         last.benchmark_cac40 = d.benchmark_cac40 ?? last.benchmark_cac40;
       }
     }
-    if (history.length >= 2) {
-      renderChart(history, d.capital_initial);
-    } else {
-      // Fallback : 2 points synthétiques avec dates distinctes pour éviter le doublon de label
+
+    // Fallback si <2 points : génère 2 points synthétiques (départ + actuel) pour
+    // que le sélecteur de plage et le graphe aient quelque chose à filtrer/afficher
+    let workingHistory = history;
+    if (workingHistory.length < 2) {
       const d0 = new Date(d.updated_at);
       d0.setDate(d0.getDate() - 7);
-      const dateDepart = d0.toISOString().slice(0, 10);
-      renderChart([
-        { date: dateDepart,   capital: d.capital_initial },
-        { date: d.updated_at, capital: d.capital_actuel }
-      ], d.capital_initial);
+      workingHistory = [
+        { date: d0.toISOString().slice(0, 10), capital: d.capital_initial, perf: 0 },
+        { date: d.updated_at, capital: d.capital_actuel, perf: d.performance },
+      ];
     }
-    const chartNote = document.getElementById('chart-note');
-    if (chartNote) {
-      const n = history.length || 2;
-      chartNote.textContent = `${n} point${n > 1 ? 's' : ''} de données — un nouveau point s'ajoute chaque lundi`;
-    }
+
+    // Stocke l'historique full pour permettre les re-renders sur changement de plage
+    _fullHistory = workingHistory;
+    _capitalInit = d.capital_initial;
+    rerenderChart();  // utilise _currentRange (défaut 'max')
 
     if (d.mode_panique) document.getElementById('panic-banner').style.display = 'block';
 
