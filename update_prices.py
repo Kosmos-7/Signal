@@ -139,6 +139,24 @@ def main():
 
     max_dd = calc_max_drawdown(history)
 
+    # ── Capital post-liquidation (cash réel si tout vendu aujourd'hui — recalculé chaque jour)
+    # Voir portfolio_agent.main() pour la logique détaillée.
+    import config
+    cash_post_liq             = float(liquidites)
+    frais_si_liquidation      = 0.0
+    pfu_latent_si_liquidation = 0.0
+    pertes_si_liquidation     = 0.0
+    for pos in positions:
+        brut = pos.get("valeur_actuelle", 0)
+        base = pos.get("montant_investi", brut)
+        r = config.apply_sell_cost_and_tax(brut, base)
+        cash_post_liq             += r["cash_recupere_eur"]
+        frais_si_liquidation      += r["frais_vente_eur"]
+        pfu_latent_si_liquidation += r["impot_pfu_eur"]
+        pertes_si_liquidation     += r["perte_reportable_eur"]
+    capital_post_liquidation     = round(cash_post_liq, 2)
+    performance_post_liquidation = round((capital_post_liquidation - capital_initial) / capital_initial * 100, 2)
+
     # ── Met à jour le portfolio (sans toucher aux champs hebdo)
     portfolio["updated_at"]      = today
     portfolio["capital_actuel"]  = capital_actuel
@@ -152,6 +170,12 @@ def main():
     portfolio["nb_negatives"]    = len([p for p in positions if p.get("performance", 0) < 0])
     portfolio["nb_neutres"]      = len([p for p in positions if p.get("performance", 0) == 0.0])
     portfolio["performance_history"] = history
+    # Post-liquidation virtuel (mis à jour quotidiennement car positions fluctuent)
+    portfolio["capital_post_liquidation"]     = capital_post_liquidation
+    portfolio["performance_post_liquidation"] = performance_post_liquidation
+    portfolio["frais_si_liquidation"]         = round(frais_si_liquidation, 2)
+    portfolio["pfu_latent_si_liquidation"]    = round(pfu_latent_si_liquidation, 2)
+    portfolio["pertes_si_liquidation"]        = round(pertes_si_liquidation, 2)
     # VIX (quotidien) — info contextuelle, n'influence pas le scoring (cf config.VIX_DAMPENER_ENABLED)
     if vix_value is not None:
         portfolio["last_known_vix"]            = vix_value
@@ -166,7 +190,8 @@ def main():
         json.dump(portfolio, f, ensure_ascii=False, indent=2)
 
     print(f"\n✓ portfolio.json refreshé")
-    print(f"  Capital   : {capital_actuel:.0f}€ ({performance:+.2f}% YTD)")
+    print(f"  Capital m2m  : {capital_actuel:.0f}€ ({performance:+.2f}% YTD)")
+    print(f"  Capital post-liq : {capital_post_liquidation:.0f}€ ({performance_post_liquidation:+.2f}%)")
     print(f"  vs MSCI   : {vs_benchmark:+.2f}pp (MSCI {bench_msci:+.2f}%)")
     print(f"  Max DD    : {max_dd:+.2f}%")
     if vix_value is not None:

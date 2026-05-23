@@ -146,7 +146,7 @@
   .rule p { font-size: 0.83rem; color: var(--text2); line-height: 1.55; }
 
   /* ── KPI GRID ── */
-  .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 1.75rem; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 1.75rem; }
   .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; position: relative; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
   .kpi:hover { border-color: rgba(232,168,32,0.25); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(232,168,32,0.09), 0 0 24px rgba(232,168,32,0.06), 0 8px 28px rgba(0,0,0,0.5); }
   .kpi-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
@@ -470,7 +470,7 @@
   .footer-right { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); text-align: right; }
 
   /* ── RESPONSIVE ── */
-  /* Tablette : 6 KPI sur 3 colonnes (= 2 rangées) — évite de comprimer trop sur écrans moyens */
+  /* Tablette : 5 KPI sur 3 colonnes (= 2 rangées) — évite de comprimer trop sur écrans moyens */
   @media (max-width: 1100px) and (min-width: 701px) {
     .kpi-grid { grid-template-columns: repeat(3, 1fr); }
   }
@@ -1631,34 +1631,40 @@ async function loadPortfolio() {
         </div>
       </div>`;
 
-    // KPI — 6 cartes "état du portefeuille" (perf/alpha déjà dans le survival block, pas de doublon)
-    const gain      = d.capital_actuel - d.capital_initial;
+    // KPI — 5 cartes "état du portefeuille" (perf/alpha déjà dans le survival block, pas de doublon)
     const investi   = d.capital_actuel - d.liquidites;
     const pctInvesti = (100 - d.pct_liquidites).toFixed(1);
     const nbNeutres = d.nb_neutres ?? (d.nb_positions - d.nb_positives - d.nb_negatives);
     const nSub = nbNeutres > 0
       ? `<span class="up">${d.nb_positives} en gain</span> · <span style="color:var(--text3)">${nbNeutres} neutre${nbNeutres>1?'s':''}</span> · <span class="dn">${d.nb_negatives} en perte</span>`
       : `<span class="up">${d.nb_positives} en gain</span> · <span class="dn">${d.nb_negatives} en perte</span>`;
-    // Friction fiscale + frais (Phase 1) — backward-compat avec ?? 0 si champs absents
-    const fraisCum  = d.total_frais_payes ?? 0;
-    const impotsCum = d.total_impots_payes ?? 0;
-    const frictionTotal = fraisCum + impotsCum;
-    const pertesReportables = d.total_pertes_reportables ?? 0;
-    const creditFiscalReportable = pertesReportables * 0.30;  // 30% PFU sur futures plus-values
-    const perfBrute = d.performance_brute ?? d.performance;
-    const ecartBrutNet = perfBrute - d.performance;
+
+    // Gain net : on distingue PLUS-VALUE LATENTE (mark-to-market) de POST-LIQUIDATION (cash réel après cession totale)
+    // C'est la grosse subtilité fiscale : les +95% sur NVDA ne sont pas "encaissés" tant qu'on n'a pas vendu.
+    // Si on vendait tout aujourd'hui : capital_post_liquidation = liquidités + Σ(brut - frais_vente - PFU sur plus-value latente)
+    const capPostLiq         = d.capital_post_liquidation ?? d.capital_actuel;      // fallback rétrocompat
+    const perfPostLiq        = d.performance_post_liquidation ?? d.performance;
+    const gainLatent         = d.capital_actuel - d.capital_initial;                 // mark-to-market
+    const gainPostLiq        = capPostLiq - d.capital_initial;                       // après cession totale
+    const pfuLatent          = d.pfu_latent_si_liquidation ?? 0;
+    const fraisLatent        = d.frais_si_liquidation ?? 0;
+    const fraisCum           = d.total_frais_payes ?? 0;
+    const impotsCum          = d.total_impots_payes ?? 0;
+    const creditReportable   = (d.total_pertes_reportables ?? 0) * 0.30;
+    const fricTotalSiVendu   = fraisCum + impotsCum + fraisLatent + pfuLatent;
+
     document.getElementById('kpi-grid').innerHTML = `
       <div class="kpi">
-        <div class="kpi-accent" style="background:${gain>=0?'var(--green)':'var(--red)'}"></div>
-        <div class="kpi-label">Valeur totale <span class="kpi-info" data-tip="Ce que vaut le portefeuille en ce moment : actions + liquidités, converti en euros, NET des frais et impôts déjà payés">ⓘ</span></div>
+        <div class="kpi-accent" style="background:${gainLatent>=0?'var(--green)':'var(--red)'}"></div>
+        <div class="kpi-label">Valeur totale <span class="kpi-info" data-tip="Valeur mark-to-market du portefeuille : actions au cours du jour + liquidités, converti en euros. C'est ce que ta plateforme broker affiche.">ⓘ</span></div>
         <div class="kpi-value">${fmtEur(d.capital_actuel)}</div>
         <div class="kpi-sub">départ · ${fmtEur(d.capital_initial)}</div>
       </div>
       <div class="kpi">
-        <div class="kpi-accent" style="background:${gain>=0?'var(--green)':'var(--red)'}"></div>
-        <div class="kpi-label">Gain net <span class="kpi-info" data-tip="Argent gagné ou perdu en euros, après déduction des frais de transaction et de l'impôt PFU 30% sur les plus-values réalisées. C'est la performance réelle après friction.">ⓘ</span></div>
-        <div class="kpi-value ${gain>=0?'up':'dn'}">${sign(gain)}${fmtEur(Math.abs(gain))}</div>
-        <div class="kpi-sub ${gain>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} % net${ecartBrutNet > 0.01 ? ` · brut ${sign(perfBrute)}${fmt(perfBrute,1)}%` : ''}</div>
+        <div class="kpi-accent" style="background:${gainLatent>=0?'var(--green)':'var(--red)'}"></div>
+        <div class="kpi-label">Plus-value latente <span class="kpi-info" data-tip="Différence brute entre valeur actuelle et capital initial. ATTENTION : ce n'est PAS du cash. Les plus-values sur positions ouvertes ne sont taxées qu'au moment de la vente (PFU 30%). Si on liquidait tout aujourd'hui, on aurait ${fmtEur(gainPostLiq)} net (= ${fmtEur(gainLatent)} − ${fmtEur(pfuLatent)} PFU latent − ${fmtEur(fraisLatent)} frais de vente). Le fisc gagne ${fmtEur(impotsCum + pfuLatent)} si on liquide.">ⓘ</span></div>
+        <div class="kpi-value ${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))}</div>
+        <div class="kpi-sub ${gainLatent>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} % latent · si tout vendu : <span style="color:var(--gold)">${sign(gainPostLiq)}${fmtEur(Math.abs(gainPostLiq))}</span> net</div>
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:var(--text3)"></div>
@@ -1668,15 +1674,9 @@ async function loadPortfolio() {
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:var(--blue)"></div>
-        <div class="kpi-label">Liquidités <span class="kpi-info" data-tip="Argent non investi, disponible immédiatement pour de nouveaux achats">ⓘ</span></div>
+        <div class="kpi-label">Liquidités <span class="kpi-info" data-tip="Argent non investi, disponible immédiatement pour de nouveaux achats. Ce chiffre est déjà NET des frais et impôts payés sur les ventes précédentes.">ⓘ</span></div>
         <div class="kpi-value liq">${fmtEur(d.liquidites)}</div>
         <div class="kpi-sub">${fmt(d.pct_liquidites,1)} % du portefeuille</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-accent" style="background:var(--text3)"></div>
-        <div class="kpi-label">Friction réelle <span class="kpi-info" data-tip="Total des frais de transaction (15 bps round-trip) + impôt PFU 30% déjà versés au fisc sur les plus-values réalisées. Le crédit fiscal reportable représente l'impôt évitable sur futurs gains grâce aux pertes encaissées (utilisable 10 ans).">ⓘ</span></div>
-        <div class="kpi-value" style="color:var(--orange)">−${fmtEur(frictionTotal)}</div>
-        <div class="kpi-sub">${fmtEur(fraisCum)} frais · ${fmtEur(impotsCum)} PFU${creditFiscalReportable > 1 ? `<br><span style="color:var(--green);opacity:0.85">+${fmtEur(creditFiscalReportable)} crédit reportable</span>` : ''}</div>
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:var(--text3)"></div>

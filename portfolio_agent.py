@@ -947,6 +947,31 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
     stock_map = {s["ticker"]: s for s in watchlist.get("stocks", [])}
     mode_panique = contexte.get("mode_panique", False)
 
+    # ── Guard : marchés fermés (weekend) ───────────────────────────────────
+    # Physiquement aucun ordre ne peut être exécuté samedi/dimanche.
+    # Y compris les stop-loss R07/R08 qui se reporteront au prochain run ouvré.
+    # Pour Phase 4+ : étendre avec calendrier jours fériés US (Thanksgiving,
+    # July 4, MLK Day, etc.) — actuellement seulement weekend.
+    weekday = datetime.utcnow().weekday()  # 0=lundi … 5=samedi 6=dimanche
+    jours_fr = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
+    if weekday >= 5:
+        decisions = decisions_claude.get("decisions", [])
+        for dec in decisions:
+            action = dec.get("action", "").upper()
+            if action in ("ACHAT", "VENTE"):
+                decisions_bloquees.append({
+                    "date":              today,
+                    "action_tentee":     action,
+                    "ticker":            dec.get("ticker", ""),
+                    "nom":               dec.get("nom", dec.get("ticker", "")),
+                    "raison_claude":     dec.get("raison", ""),
+                    "conviction":        dec.get("conviction", "modérée"),
+                    "bloque_par":        "marche_ferme_weekend",
+                    "explication_blocage": f"Run du {today} ({jours_fr[weekday]}) — tous les marchés sont fermés (weekend). Aucun ordre n'est physiquement exécutable. La décision est reportée au prochain run ouvré (lundi 8h UTC).",
+                })
+        print(f"  🛑 Weekend ({jours_fr[weekday]}) — {sum(1 for d in decisions if d.get('action','').upper() in ('ACHAT','VENTE'))} décision(s) reportée(s) au prochain jour ouvré (aucun ordre exécutable hors marchés)")
+        return positions, liquidites, [], decisions_bloquees
+
     # Mise à jour des prix actuels — valeur_actuelle et performance en EUR
     for pos in positions:
         maj_position(pos, eur_usd, eur_gbp)
@@ -1358,12 +1383,33 @@ Ne jamais inclure de balises markdown ou de backticks.""",
     total_impots_payes     = round(total_impots_payes, 2)
     total_pertes_reportables = round(total_pertes_reportables, 2)
 
-    # Performance nette des frais + impôts : reflète ce qu'on aurait après liquidation
-    # (les impôts sont déjà déduits des liquidités, les frais aussi → capital_actuel
-    # intègre déjà les coûts. Cette variable existe pour la pédagogie : montrer
-    # explicitement la différence entre brut et net.)
-    capital_net_estime = capital_actuel  # cohérent : capital_actuel est déjà net
+    # Performance brute (pédagogique) : ce qu'on aurait sans aucune friction
     performance_brute  = round((capital_actuel + total_frais_payes + total_impots_payes - CAPITAL_INITIAL) / CAPITAL_INITIAL * 100, 2)
+
+    # ── Capital post-liquidation virtuelle (réponse honnête à "combien j'aurais en cash si je vendais tout aujourd'hui ?") ──
+    # capital_actuel = liquidités + valeur marché des positions (mark-to-market).
+    # Mais les positions ouvertes contiennent des plus-values latentes NON TAXÉES.
+    # Si on liquidait tout aujourd'hui, on paierait :
+    #   - frais de vente (15bps × 0.5) sur chaque position
+    #   - PFU 30% sur chaque plus-value latente (les pertes latentes créent du crédit fiscal)
+    # → capital_post_liquidation = liquidités + Σ(brut - frais_vente - PFU_latent)
+    cash_post_liq               = float(liquidites)
+    frais_si_liquidation        = 0.0
+    pfu_latent_si_liquidation   = 0.0
+    pertes_si_liquidation       = 0.0
+    for pos in positions:
+        brut = pos.get("valeur_actuelle", 0)
+        base = pos.get("montant_investi", brut)
+        r = config.apply_sell_cost_and_tax(brut, base)
+        cash_post_liq             += r["cash_recupere_eur"]
+        frais_si_liquidation      += r["frais_vente_eur"]
+        pfu_latent_si_liquidation += r["impot_pfu_eur"]
+        pertes_si_liquidation     += r["perte_reportable_eur"]
+    capital_post_liquidation   = round(cash_post_liq, 2)
+    frais_si_liquidation       = round(frais_si_liquidation, 2)
+    pfu_latent_si_liquidation  = round(pfu_latent_si_liquidation, 2)
+    pertes_si_liquidation      = round(pertes_si_liquidation, 2)
+    performance_post_liquidation = round((capital_post_liquidation - CAPITAL_INITIAL) / CAPITAL_INITIAL * 100, 2)
 
     # ── Historique de performance (upsert : toujours la valeur finale du jour) ──
     history = portfolio.get("performance_history", [])
@@ -1399,6 +1445,12 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         "total_frais_payes":   total_frais_payes,        # cumulé depuis création
         "total_impots_payes":  total_impots_payes,       # cumulé depuis création (PFU)
         "total_pertes_reportables": total_pertes_reportables,  # pertes utilisables fiscalement sur 10 ans
+        # Post-liquidation : cash réel si tout vendu maintenant (= réponse honnête au gain net)
+        "capital_post_liquidation":     capital_post_liquidation,
+        "performance_post_liquidation": performance_post_liquidation,
+        "frais_si_liquidation":         frais_si_liquidation,
+        "pfu_latent_si_liquidation":    pfu_latent_si_liquidation,
+        "pertes_si_liquidation":        pertes_si_liquidation,
         # Phase 2 — Cache VIX pour fallback si fetch échoue au run suivant
         "last_known_vix":      contexte.get("vix"),
         "last_known_vix_source": contexte.get("vix_source"),
@@ -1439,7 +1491,9 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         json.dump(output, f, ensure_ascii=False, indent=2)
 
     print(f"\n✅ portfolio.json généré par Claude")
-    print(f"   Capital   : {capital_actuel:.0f}€  (net : {performance:+.1f}% · brut : {performance_brute:+.1f}%)")
+    print(f"   Capital mark-to-market : {capital_actuel:.0f}€  (net : {performance:+.1f}% · brut : {performance_brute:+.1f}%)")
+    print(f"   Capital post-liquidation : {capital_post_liquidation:.0f}€  ({performance_post_liquidation:+.1f}% net après cession totale)")
+    print(f"   PFU latent à payer si liquidation : {pfu_latent_si_liquidation:.0f}€  ·  Frais vente : {frais_si_liquidation:.0f}€")
     print(f"   vs MSCI   : {vs_bench:+.1f}pp")
     print(f"   Frais cumulés : {total_frais_payes:.0f}€  ·  Impôts cumulés : {total_impots_payes:.0f}€  ·  Pertes reportables : {total_pertes_reportables:.0f}€")
     print(f"   Ordres : {len(nouveaux_ordres)} ({sum(1 for o in nouveaux_ordres if o['type']=='ACHAT')} achats, {sum(1 for o in nouveaux_ordres if o['type']=='VENTE')} ventes)")
