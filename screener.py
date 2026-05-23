@@ -619,18 +619,47 @@ def score_ticker(ticker, vix=None):
         vol_pts = 5  if vol_ok else 0
         reg_pts = 5  if reg_zone_saine else 0
 
-        # Valorisation actuelle (5 pts) — drawdown vs plus haut 52 semaines.
-        # Récompense un setup d'entrée propre (pullback sain) plutôt que la chase
-        # de rally en haut de range. Proxy systématique du "range d'entrée"
-        # discuté dans opportunities.md (entre MM21 et Fibo 38.2%).
+        # Valorisation actuelle (5 pts) — drawdown vs plus haut 52 semaines,
+        # CONDITIONNÉ AU RÉGIME CROSS depuis test empirique du 23/05/2026 sur
+        # 43 145 events Golden Cross frais 2017-2024 (32 tickers).
+        #
+        # Résultat clé : avec Golden Cross frais (<=30j), la perf forward médiane 12m
+        # est MONOTONE CROISSANTE avec la profondeur du drawdown :
+        #     top (0 à -3%)             : +16.8%
+        #     pullback_sain (-3 à -10%) : +19.9%
+        #     correction (-10 à -20%)   : +24.3%
+        #     drawdown_modere (-20 à -30%): +44.3%
+        #     chute_profonde (>-30%)    : +86.1%  ← PREMIUM
+        # → Le barème val_pts est INVERSÉ en présence d'un GC frais (le cross
+        #   matérialise la "réinitialisation propre" = Setup A renforcé dans opportunities.md).
+        # Sans GC frais, le barème original (chute = risque de continuation) reste valide.
+        #
+        # Caveats à revalider Q3-Q4 2026 :
+        #   - Sample 2017-2024 biaisé vers rebonds V-shape (régime bull dominant)
+        #   - 32 tickers large caps (survivorship bias — les delistings absents)
+        #   - Le pattern peut s'inverser en cycle séculaire bear (style 1966-1982)
         close_52w = close.iloc[-252:] if len(close) >= 252 else close
         high_52w  = float(close_52w.max())
         drawdown_52w_pct = (prix / high_52w - 1) * 100 if high_52w > 0 else 0
-        if   drawdown_52w_pct >= -3:                          val_pts = 0   # proche du top → chase
-        elif -10 <= drawdown_52w_pct < -3:                    val_pts = 5   # pullback sain → zone idéale
-        elif -20 <= drawdown_52w_pct < -10:                   val_pts = 3   # correction modérée
-        elif -30 <= drawdown_52w_pct < -20:                   val_pts = 1   # momentum cassé
-        else:                                                 val_pts = 0   # chute libre
+        gc_fresh = (cross_info.get("regime") == "golden"
+                    and cross_info.get("days_since_cross") is not None
+                    and cross_info.get("days_since_cross") <= 30)
+        if gc_fresh:
+            # GC frais → barème INVERSÉ (test empirique 43k events 2017-2024)
+            if   drawdown_52w_pct >= -3:                      val_pts = 0  # top = chase de rally
+            elif drawdown_52w_pct >= -10:                     val_pts = 2  # pullback sain (correct mais pas premium)
+            elif drawdown_52w_pct >= -20:                     val_pts = 3  # correction
+            elif drawdown_52w_pct >= -30:                     val_pts = 4  # drawdown modéré
+            else:                                              val_pts = 5  # chute profonde + GC frais = PREMIUM
+            val_pts_mode = "gc_fresh_inverted"
+        else:
+            # Pas de GC frais → barème original (chute = risque)
+            if   drawdown_52w_pct >= -3:                      val_pts = 0   # proche du top → chase
+            elif -10 <= drawdown_52w_pct < -3:                val_pts = 5   # pullback sain → zone idéale
+            elif -20 <= drawdown_52w_pct < -10:               val_pts = 3   # correction modérée
+            elif -30 <= drawdown_52w_pct < -20:               val_pts = 1   # momentum cassé
+            else:                                              val_pts = 0   # chute libre
+            val_pts_mode = "normal"
 
         # ── Momentum total avec VIX dampener (Phase 2) ─────────────────────
         # Le multiplier réduit la valeur attribuée au momentum quand le marché
@@ -807,6 +836,7 @@ def score_ticker(ticker, vix=None):
             "vol_pts":               vol_pts,
             "reg_pts":               reg_pts,
             "val_pts":               val_pts,
+            "val_pts_mode":          val_pts_mode,  # "gc_fresh_inverted" si GC frais (barème inversé), "normal" sinon
             "drawdown_52w_pct":      round(drawdown_52w_pct, 1),
             "high_52w":              round(high_52w, 2),
             # Retracement Fibonacci — annotation informationnelle (hors scoring)

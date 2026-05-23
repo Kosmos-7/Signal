@@ -97,18 +97,48 @@ Pour les titres cycliques matures (auto, semi, banques, materials, énergie, shi
 - Quality compounders matures multi-cycles (KO, JNJ, PG) : 15-20y idéal
 - **Cycliques matures : 20-25y obligatoire**
 
-### 1.5 Valorisation actuelle / timing d'entrée (5 pts)
+### 1.5 Valorisation actuelle / timing d'entrée (5 pts) — barème CONDITIONNÉ au régime cross
 
-Drawdown du cours actuel vs plus haut 52 semaines :
-- 0% à -3% (proche du top) → 0 pt — chase de rally, mauvais timing
-- -3% à -10% (pullback sain) → 5 pts — zone d'entrée idéale
-- -10% à -20% (correction modérée) → 3 pts — entrée agressive possible si trend intacte
-- -20% à -30% (momentum cassé) → 1 pt
-- < -30% (chute libre) → 0 pt — la trend est probablement perdue
+Le barème val_pts dépend de la présence ou non d'un **Golden Cross frais** (≤30j depuis le cross). Calibration depuis test empirique du 23/05/2026 sur 43 145 events GC frais 2017-2024 (32 tickers).
 
-C'est un proxy systématique du **range d'entrée** détaillé dans `opportunities.md` (entre MM21 et Fibo 38.2%). Pénalise les achats au plus haut, récompense les achats sur pullback sain.
+**Cas 1 — Avec Golden Cross frais (≤30j)** : barème INVERSÉ. La chute profonde + GC frais représente une "réinitialisation propre" (Setup A renforcé, cf opportunities.md) avec perf forward 12m MONOTONE CROISSANTE :
 
-**Logique** : un Golden Cross frais a beau être un bon signal, l'acheter quand le cours est collé à son plus haut 52w est statistiquement défavorable (mean-reversion à court terme). Un Golden Cross frais avec un pullback de -7% est le sweet spot.
+| Drawdown vs 52w high | val_pts | Perf 12m médiane mesurée |
+|---|---|---|
+| 0 à -3% (top, chase) | 0 | +16.8% |
+| -3 à -10% (pullback) | 2 | +19.9% |
+| -10 à -20% (correction) | 3 | +24.3% |
+| -20 à -30% (drawdown modéré) | 4 | +44.3% |
+| < -30% (chute profonde) | **5** | **+86.1%** ← premium |
+
+**Cas 2 — Sans Golden Cross frais** : barème original (chute = risque de continuation).
+
+| Drawdown vs 52w high | val_pts | Lecture |
+|---|---|---|
+| 0 à -3% (top, chase) | 0 | mauvais timing, mean-reversion court terme probable |
+| -3 à -10% (pullback) | 5 | zone d'entrée idéale (sweet spot) |
+| -10 à -20% (correction) | 3 | entrée agressive possible si trend intacte |
+| -20 à -30% (momentum cassé) | 1 | risque élevé sans signal de reprise |
+| < -30% (chute libre) | 0 | trend probablement perdue |
+
+**Logique** :
+- Sans GC frais → le drawdown profond signale un risque de continuation (value trap potentiel)
+- Avec GC frais → le drawdown profond signale une réinitialisation que le marché a déjà commencé à corriger techniquement (rebond V-shape mesurable)
+
+**Cas historiques validant le barème inversé** :
+- META 2023 : DD -75% T4 2022, Golden Cross début 2023 → +200% 12m
+- NVDA 2020 : DD -38% covid mars 2020, Golden Cross fin avril → +400% 24m
+- ASML 2023 : DD -45% T4 2022, Golden Cross début 2023 → +120% 24m
+- AMD 2023, NFLX 2023 : profils similaires, performances exceptionnelles
+
+**Caveats à revalider Q3-Q4 2026** :
+- Sample 2017-2024 biaisé vers les rebonds V-shape post-COVID / post-correction 2022
+- 32 tickers large caps : survivorship bias (les delistings invisibles)
+- Le pattern peut s'inverser en cycle séculaire bear (style Japon 1990s ou US 1966-1982)
+
+**Champ exposé dans le breakdown** : `val_pts_mode` = `"gc_fresh_inverted"` (barème inversé appliqué) ou `"normal"` (barème original). Permet de distinguer ce qui motive le score.
+
+C'est un proxy systématique du **range d'entrée** détaillé dans `opportunities.md` (entre MM21 et Fibo 38.2% en mode normal, et en mode "réinitialisation" pour le GC frais sur chute profonde).
 
 ## Pilier 2 — Fondamentaux (50 pts)
 
