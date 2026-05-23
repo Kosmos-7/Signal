@@ -87,8 +87,12 @@ Profil :
 - Volume confirmé
 - Fondamentaux solides
 - Z-score 0 à +1
+- **ROCE >15% (idéalement >20%)** — qualité business avérée (cf methodology.md "Métriques de qualité business")
+- **EV/EBITDA <15** — multiple raisonnable (au-delà = chase de premium)
 
 C'est la sweet spot. Probabilité historique de +X% à 6-12 mois nettement positive (Jegadeesh-Titman 1993 sur 30+ ans de data).
+
+**Conviction maximale** quand ROCE + EV/EBITDA sont dans la zone 🟢 (qualité haute + valorisation raisonnable). Si momentum frais mais ROCE <10% → conviction plafonnée (qualité business pas validée).
 
 **Source** : Jegadeesh & Titman (1993) *Returns to Buying Winners and Selling Losers*, Journal of Finance — momentum 3-12 mois génère ~1%/mois excess return en US, validé sur 46 pays / 150 ans (AQR).
 
@@ -99,8 +103,13 @@ Profil :
 - RSI <30 (survente extrême)
 - Z-score régression < -2σ (titre largement décroché de sa tendance long terme)
 - Fondamentaux intacts (pas de rupture business)
+- **Distinguer cyclique bas vs dégradation structurelle via ratio ROCE Current/Mean** (cf methodology.md "Métriques de qualité business") :
+  - **ROCE max historique >15% + current <50% de cette max** → **vraie cyclical recovery** (Arkema, Croda exemples session 2026-05)
+  - **ROCE historiquement faible et stable** → **dégradation structurelle** = value trap, skipper (EssilorLuxottica ROCE 6-7% stable)
 
 Il faut un **catalyseur visible** pour le retournement. Sinon c'est juste un titre qui peut continuer à baisser.
+
+**⚠ Préalable obligatoire — vérifier la fiabilité du z-score** : le critère "z<-2σ" n'est applicable que si la fenêtre de régression est suffisamment longue (cf methodology.md section 1.4). Pour les titres avec `regression_window_years` < 7 (spin-offs récents, IPOs, restructurations), le z-score est calculé sur une fenêtre qui peut être biaisée par une phase exceptionnelle (boom ou bust). Dans ces cas, **ne pas appliquer ce setup B sur la base du z extrême** — retomber sur les autres signaux (cross + RSI + fonda + consensus + catalyseur).
 
 ### C. Dual momentum (Antonacci)
 
@@ -111,6 +120,57 @@ Combiner :
 Antonacci (*Dual Momentum*, 2014) backtest 39 ans : 17.4% CAGR vs 8.85% pour ACWI, max drawdown 22.7% vs 60.21% — performance améliorée surtout par évitement des bear markets via le filtre absolu.
 
 **Caveat** : un seul backtest, configuration spécifique. À considérer comme heuristique, pas comme dogme.
+
+### D. Management turnaround bet (plan transformation explicite)
+
+Setup hybride pour les titres classés "structurel faible" par le cadre ROCE Current/Mean (cf methodology.md) MAIS avec un plan de transformation chiffré et daté annoncé par le management.
+
+**Profil identifiable** :
+- Score screener typiquement zone basse (30-50) du fait de fondamentaux dégradés sur l'historique récent
+- ROCE bas (5-10%) + stable sur 3-4 ans (ratio Current/Mean ≈ 1, pas de cycle bas évident)
+- EV/EBITDA cheap absolu (souvent <8) — le marché ne price pas le succès du plan
+- **Plan de transformation chiffré, daté, officiel** (investor day, plan stratégique) avec objectifs précis (marge op cible, FCF cible, dette/EBITDA cible, milestones)
+- **Trimestriels récents confirment l'exécution** conforme au plan (surperformance marché, guidance maintenue)
+- Catalyseur identifiable à 3-6 mois (publications trimestrielles, contrats stratégiques significatifs)
+- Consensus analystes **n'a pas encore intégré** le succès (target mean ≈ cours = bon signe contrarian)
+
+**Différence critique vs narratif basique** :
+- ❌ "Le management va améliorer" → trop vague, ignorer
+- ✅ "Margin op 5% → 6-7% à 2028, FCF >500M€, investment grade visé" → plan actionnable
+
+**Validation requise (couches 3-4 obligatoires) avant tout achat** :
+1. Lire le **plan stratégique officiel** (PDF investor day, page IR)
+2. Vérifier que les **2-3 derniers trimestriels** confirment trajectoire conforme
+3. Identifier des **milestones court terme** mesurables sur Q+1/Q+2
+
+**Sizing recommandé** :
+- Conviction **faible par défaut** (base rate empirique ~30-40% des plans 3 ans atteignent fourchette haute)
+- **1-3% du capital max** — c'est un pari spéculatif, pas une conviction
+- Scale-in patient : 1/3 maintenant, 1/3 sur prochain trimestre confirmant, 1/3 sur 2e trimestre confirmant
+
+**Asymétrie** :
+- Si exécution réussit → upside potentiellement très significatif (+50 à +200% selon ampleur du turnaround)
+- Si exécution échoue → downside limité par valuation déjà décotée (PE bas, EV/EBITDA bas)
+- **Mais haute variance** — pas le profil d'un compounder quality
+
+**Conditions d'invalidation** (vendre / abandonner) :
+- Guidance révisée à la baisse → exécution en danger
+- Milestone manqué (margin op trajectory, FCF, contrats clés)
+- Annonce de pivot stratégique majeur → plan implicitement abandonné
+- 12 mois sans progression visible → base rate défavorable confirmé
+
+**Conditions de renforcement** (passer à conviction modérée) :
+- H1 montre margin op supérieur à cible plan
+- Annonce de contrats stratégiques significatifs (>5% revenue impact)
+- Guidance relevée en cours d'année
+- Premier upgrade analyste significatif
+
+**Anti-pattern — value trap déguisé** :
+Si le plan est uniquement narratif (pas de chiffres précis, pas de dates) OU si trimestriels récents ne montrent pas de progression → c'est un **value trap**, pas un turnaround. Skip.
+
+**Exemples** :
+- ✅ **Valeo plan Elevate 2028** (session 2026-05-15) : plan chiffré (margin op 6-7%, FCF >500M€), Q1 2026 surperforme marché +3pts, guidance maintenue → setup D défendable, conviction faible, sizing 1-3%
+- ⚠ À surveiller : GE Vernova post-spin, Forvia post-rebrand, banks EU en restructuration
 
 ## Anti-pattern : chase de rally
 

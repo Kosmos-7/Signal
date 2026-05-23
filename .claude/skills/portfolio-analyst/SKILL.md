@@ -34,12 +34,14 @@ Avant d'émettre un verdict d'achat/conserve/vente, faire ces 5 checks mécaniqu
    - Si publication <90j → **fetch obligatoire** via `yf.Ticker(t).quarterly_financials` + `quarterly_cashflow`
    - Comparer croissance annuelle (screener) vs trajectoire trimestrielle récente — divergence = nouveau signal
    - **Cross-validation analystes** : si score 30-65 + consensus ≥10 buy/≤2 sell + cours en dégradation 6-12m → suspecter données screener désynchronisées, escalader couche 3 pour vérifier les chiffres annuels publiés (cas Reply 2026-05 : screener +0.6% CA vs réalité +8%)
-2. **Drapeaux de transformation** — quand un de ces signes est présent, traiter `rev_growth_pct` annuel comme **suspect** et chercher la croissance organique via communiqué IR :
+2. **Drapeaux de transformation** — quand un de ces signes est présent, traiter `rev_growth_pct` annuel comme **suspect** ET le z-score régression comme **peu fiable** (cf. methodology.md section 1.4) :
    - M&A significative dans les 24 derniers mois (Kindred chez FDJ, par ex.)
    - Rebrand / changement de raison sociale récent
-   - Spin-off / scission
+   - **Spin-off ou IPO <7 ans** (ex : CEG 2022, GE Vernova 2024, Kenvue 2023) — `regression_window_years` court → pente extrapolée sur cycle exceptionnel, z-score creux
    - Restructuration majeure annoncée
    - L'utilisateur cite explicitement une transformation
+
+   Dans ces cas, **NE PAS appliquer setup B "z<-2σ"** comme critère principal — retomber sur les autres signaux et chercher la croissance organique via communiqué IR.
 3. **Dynamique du signal technique** — lire `signal_dynamics_warning` dans le breakdown du screener si présent. Lire ensemble : magnitude du spread (tendu vs franc), pente de MM21 (renforcement vs résorption), position du cours vs MM200, catalyseur fondamental dans les 30j. Ne pas conclure sur le cross seul.
 4. **Calibration conservative au premier passage** — par défaut conviction "modérée" tant qu'au moins un signal est ambigu. Réserver "forte" aux cas où technique + fondamental + dynamique + base rate sont concordants ET aucune inflexion récente.
 5. **Sur arrivée d'info nouvelle en cours de session, re-dériver de zéro** — pas d'ajustement à la marge du verdict précédent (auto-anchoring sur son propre output). Reset, recompute, recompare.
@@ -75,15 +77,37 @@ Le skill se déclenche pour les questions liées à investissement personnel :
 
 ## Modules de référence
 
-Quand une question le justifie, charge le module pertinent :
+Liste des modules :
 
 - **`frameworks.md`** — Frameworks de décision : pre-mortem, second-level thinking, inversion, resulting bias, base rates, conviction calibration
 - **`biases.md`** — Catalogue des biais cognitifs documentés et heuristiques de détection
 - **`methodology.md`** — Scoring titre (momentum + fondamentaux + analystes), factor lens, position sizing
 - **`selling.md`** — Discipline de vente, anti-disposition, "would I buy today?" test
-- **`opportunities.md`** — Critères de bonne thèse, circle of competence, asymétrie risk/reward, range d'entrée et stratégies de scale-in
+- **`opportunities.md`** — Critères de bonne thèse, circle of competence, asymétrie risk/reward, range d'entrée et stratégies de scale-in, 4 setups (A bull-cycle / B mean-reversion / C dual momentum / D management turnaround bet)
 - **`examples.md`** — Patterns de Q/R archétypaux pour calibrer le ton et la structure
 - **`sources.md`** — Citations académiques vérifiables des concepts utilisés
+
+## ⚠️ Protocole obligatoire de chargement modules (forcing function)
+
+Les modules ne sont PAS auto-chargés. Avant TOUT verdict critique (achat / vente / renforcement / trim / hold critique), exécuter les Read tools suivants :
+
+| Type de question utilisateur | Modules OBLIGATOIRES à Read FIRST |
+|---|---|
+| Décision de vente ou trim | `selling.md` + `biases.md` |
+| Décision d'achat ou entrée scale-in | `opportunities.md` + `methodology.md` |
+| Question chargée émotionnellement (FOMO, panique, regret) | `biases.md` + nommer le biais explicitement |
+| Question stratégique portfolio / réallocation | `frameworks.md` + `methodology.md` |
+| Verdict sur titre en correction profonde | `selling.md` + `opportunities.md` (Setup B/D check) |
+| Suggestion utilisateur contraire à une règle | Re-lire le module pertinent + citer la règle avec ligne exacte |
+
+**Règles strictes** :
+1. **Pas de raccourci par mémoire** — travailler de mémoire approximative est la source #1 d'oscillations et de yes-man
+2. **Pas de cession aux suggestions utilisateur** sans citer la règle exacte qui s'applique
+3. **Re-dérivation complète à chaque nouvelle info** — cf. memory `feedback_verdict_preflight.md` point 4 (anti-anchoring)
+4. **Si oscillation détectée** dans la session (>2 verdicts différents sur même titre sans nouvelle info fondamentale) → STOP, re-lire les modules, reset
+5. **Nommer les biais utilisateur explicitement** (action bias, recency, anchoring, etc.) selon `biases.md` méta-règle ligne 100-102
+
+**Pourquoi** : session 2026-05-21 BABA/Tencent — 5 verdicts différents en 1h faute d'avoir relu `selling.md` ligne 90 (death cross frais → attendre confirmation). Documenté dans memory `feedback_skill_module_loading.md`.
 
 ## Données disponibles — 4 couches à utiliser activement
 
