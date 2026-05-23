@@ -375,28 +375,66 @@ def fibonacci_retracement(close_series, lookback=252):
         return None
 
 # ── UNIVERS ──────────────────────────────────────────────────────────────────
+# Phase 4 light (2026-05-23) — élargissement raisonné de 90 → 125 tickers (+35)
+# Méthodologie : audit critique préalable a montré que l'univers initial était 98%
+# utilisé sur 5 ans de backtest, donc pas de bruit structurel. Les 35 ajouts
+# comblent 10 trous thématiques précis identifiés (cloud infra, cybersec, REITs,
+# Asie directe, etc.), tous validés via yfinance (history 5y + cap > 25B + liquidité OK).
 UNIVERS = [
+    # ─── EUROPE ───────────────────────────────────────────────────────────────
     # CAC 40 — 12 valeurs (liquidité + compatibilité modèle momentum)
     "AIR.PA","AI.PA","CAP.PA","CS.PA","DSY.PA","HO.PA",
     "MC.PA","OR.PA","RMS.PA","SAF.PA","SU.PA","TTE.PA",
     # DAX 40 — 10 valeurs (tech/industrie/finance, vieille industrie exclue)
     "ADS.DE","ALV.DE","DB1.DE","FRE.DE","IFX.DE",
     "LIN.DE","MRK.DE","MUV2.DE","SAP.DE","SIE.DE",
-    # AEX 25 — 7 valeurs (inchangé)
+    # AEX 25 — 7 valeurs
     "ADYEN.AS","ASM.AS","ASML.AS","HEIA.AS","IMCD.AS","PHIA.AS","RAND.AS",
     # OMX Nordics — 2 valeurs
     "NOVO-B.CO","VWS.CO",
     # LSE — 4 valeurs
     "REL.L","LSEG.L","AZN.L","ULVR.L",
-    # S&P 100 — 52 valeurs (ajout AAPL, ADBE, MCD, NEE, PFE, WMT, AMGN)
+    # Énergie verte EU (Phase 4 light, +3) — Iberdrola Espagne, Orsted Danemark, RWE Allemagne
+    "IBE.MC","ORSTED.CO","RWE.DE",
+
+    # ─── ÉTATS-UNIS (S&P 100 + élargissements Phase 4 light) ───────────────────
+    # S&P 100 — 52 valeurs initiales (tech, finance, santé, conso, industrie)
     "AAPL","NVDA","MSFT","GOOGL","AMZN","META","AVGO","TSLA","LLY",
     "V","MA","JPM","UNH","XOM","PG","HD","MRK","ABBV","COST",
     "CRM","NFLX","AMD","ORCL","ACN","TMO","ABT","ISRG","GS",
     "BLK","QCOM","TXN","AMAT","NOW","PANW","INTU","AXP","SPGI",
     "HON","ETN","SYK","VRTX","ADI","REGN","MMC","CI","PLD",
     "ADBE","MCD","NEE","PFE","WMT","AMGN",
-    # Champions APAC — NYSE ADR (données propres yfinance + Finnhub)
+    # Cloud infrastructure pure-play (Phase 4 light, +4) — complète les hyperscalers
+    "DDOG","SNOW","MDB","NET",
+    # Cybersécurité pure-play (Phase 4 light, +3) — PANW déjà présent
+    "CRWD","ZS","FTNT",
+    # Biotech mid-cap (Phase 4 light, +2) — REGN/VRTX/AMGN déjà présents
+    "GILD","BIIB",
+    # Finance : brokers + IB + banque régionale (Phase 4 light, +3)
+    "SCHW","MS","TFC",
+    # REITs (Phase 4 light, +4) — PLD logistique déjà présent
+    "EQIX","AMT","O","WELL",
+    # Semi-conducteurs équipements US (Phase 4 light, +2) — AMAT/ASML/ASM/IFX déjà présents
+    "KLAC","LRCX",
+    # Aérospatial/Défense US (Phase 4 light, +3) — AIR.PA/HO.PA/SAF.PA EU déjà présents
+    "LMT","RTX","NOC",
+    # Luxe US (Phase 4 light, +2)
+    "RACE","EL",
+    # Énergie solaire US (Phase 4 light, +1) — FSLR seul retenu (volatilité ENPH/SEDG)
+    "FSLR",
+    # Fintech crypto (Phase 4 light, +1) — seule expo crypto regulated large-cap
+    "COIN",
+    # Conso discrétionnaire (Phase 4 light, +2)
+    "BKNG","NKE",
+
+    # ─── ASIE ──────────────────────────────────────────────────────────────────
+    # ADR US existants (TSM Taiwan semis, SE Asie SEA, SONY Japon)
     "TSM","SE","SONY",
+    # Asie directe via ADR — Chine (Phase 4 light, +3, prudent vs risque géopol)
+    "BABA","TCEHY","PDD",
+    # Japon via ADR (Phase 4 light, +2) — Toyota + Mitsubishi UFJ
+    "TM","MUFG",
 ]
 
 # ── JUSTIFICATION ─────────────────────────────────────────────────────────────
