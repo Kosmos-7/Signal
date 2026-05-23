@@ -28,6 +28,9 @@ from ta.momentum import RSIIndicator
 # Réutilisation du screener pour garantir la cohérence avec la prod
 from screener import detect_cross, cross_score, calcul_regression
 
+# Paramètres centralisés (coûts, PFU, VIX, régimes) — Phases 1-3
+import config
+
 # ── CONFIG ───────────────────────────────────────────────────────────────────
 YEAR_START          = 2019    # début du backtest
 YEAR_END            = 2025    # fin (exclusif)
@@ -70,9 +73,19 @@ def fetch_all_history(tickers, start, end):
     return data
 
 # ── SCORING MOMENTUM POINT-IN-TIME ───────────────────────────────────────────
-def score_momentum_at(df, target_date):
-    """Calcule le score momentum (0-40) pour un ticker à une date précise.
-    Utilise UNIQUEMENT les données ≤ target_date (anti look-ahead)."""
+def score_momentum_at(df, target_date, vix=None):
+    """Calcule le score momentum (0-45) pour un ticker à une date précise.
+
+    Args:
+        df: DataFrame yfinance complet du ticker
+        target_date: date pivot (Timestamp), utilise UNIQUEMENT les données ≤ cette date (anti look-ahead)
+        vix: niveau VIX à cette date pour le dampener (None = pas de dampener)
+
+    Returns:
+        (momentum_dampened_pts, prix_close, val_pts) ou None si données insuffisantes
+        - momentum_dampened_pts : 0-45 après application du VIX multiplier
+        - val_pts inclus dans le total (cf v2 alignement avec live)
+    """
     hist = df[df.index <= target_date]
     if len(hist) < 250:  # min 1 an d'historique
         return None
@@ -94,7 +107,7 @@ def score_momentum_at(df, target_date):
     cross_info = detect_cross(close_2y, volume_2y)
     cross_pts = cross_score(cross_info, rsi)
 
-    # RSI gradué
+    # RSI gradué (10 pts max)
     if 40 <= rsi <= 60:
         rsi_pts = 10
     elif 35 <= rsi <= 65:
@@ -102,26 +115,42 @@ def score_momentum_at(df, target_date):
     else:
         rsi_pts = 0
 
-    # Volume récent vs moyen
+    # Volume récent vs moyen (5 pts)
     vol_recent = float(volume_2y.tail(20).mean())
     vol_annual = float(volume_2y.mean())
     vol_pts = 5 if vol_recent > vol_annual else 0
 
-    # Régression long terme (la fonction screener applique déjà holdout 20j)
+    # Régression long terme (5 pts) — la fonction screener applique déjà holdout 20j
     z, _ = calcul_regression(close)
     reg_pts = 5 if -0.5 <= z <= 1.5 else 0
 
-    momentum = cross_pts + rsi_pts + vol_pts + reg_pts
+    # Valorisation actuelle (5 pts) — drawdown vs 52w high, aligné avec score_ticker() v2
+    close_52w = close.iloc[-252:] if len(close) >= 252 else close
+    high_52w  = float(close_52w.max())
+    prix_now  = float(close.iloc[-1])
+    dd_52w    = (prix_now / high_52w - 1) * 100 if high_52w > 0 else 0
+    if   dd_52w >= -3:                          val_pts = 0
+    elif -10 <= dd_52w < -3:                    val_pts = 5
+    elif -20 <= dd_52w < -10:                   val_pts = 3
+    elif -30 <= dd_52w < -20:                   val_pts = 1
+    else:                                       val_pts = 0
 
-    # Pénalité Death Cross récent (non compensable)
+    momentum_raw = cross_pts + rsi_pts + vol_pts + reg_pts + val_pts
+
+    # Pénalité Death Cross récent (non compensable, appliquée AVANT dampener pour cohérence)
     if cross_info["regime"] == "death":
         d = cross_info["days_since_cross"]
         if d <= 30:
-            momentum -= 5
+            momentum_raw -= 5
         elif d <= 60:
-            momentum -= 3
+            momentum_raw -= 3
+    momentum_raw = max(0, momentum_raw)
 
-    return max(0, momentum), float(close.iloc[-1])
+    # VIX dampener (Phase 2)
+    vix_mult = config.vix_multiplier(vix)
+    momentum_dampened = round(momentum_raw * vix_mult)
+
+    return momentum_dampened, prix_now, val_pts
 
 # ── PORTFOLIO ENGINE ─────────────────────────────────────────────────────────
 def get_price_at(df, target_date):
@@ -131,8 +160,47 @@ def get_price_at(df, target_date):
         return None
     return float(hist["Close"].iloc[-1])
 
-def simulate_backtest(data):
-    """Simule la stratégie momentum-only sur l'univers + comparaison benchmark."""
+def _close_position(cash, pos, ticker, rebal_date, raison, trades):
+    """Ferme une position : frais de vente + PFU sur plus-value, ajoute trade au log.
+
+    Applique la fiscalité française PFU 30% sur la plus-value réalisée.
+    Returns: (new_cash, frais_vente, impot_pfu, perte_reportable)
+    """
+    brut_vente = pos.get("valeur", 0)
+    base_fiscale = pos.get("montant_investi", pos.get("valeur", 0))  # brut + frais achat
+    r = config.apply_sell_cost_and_tax(brut_vente, base_fiscale)
+    cash_recupere   = r["cash_recupere_eur"]   # en USD ici (devise du backtest)
+    frais_vente     = r["frais_vente_eur"]
+    plus_value      = r["plus_value_eur"]
+    impot_pfu       = r["impot_pfu_eur"]
+    perte_reportable= r["perte_reportable_eur"]
+    new_cash = cash + cash_recupere
+
+    jours = (rebal_date - pos["date_achat"]).days
+    trades.append({
+        "date":             str(rebal_date.date()),
+        "type":             "VENTE",
+        "ticker":           ticker,
+        "perf":             round(pos.get("perf", 0), 2),
+        "raison":           raison,
+        "jours":            jours,
+        "montant_brut":     round(brut_vente, 2),
+        "frais_vente":      round(frais_vente, 4),
+        "plus_value":       round(plus_value, 2),
+        "impot_pfu":        round(impot_pfu, 2),
+        "perte_reportable": round(perte_reportable, 2),
+        "cash_recupere":    round(cash_recupere, 2),
+    })
+    return new_cash, frais_vente, impot_pfu, perte_reportable
+
+
+def simulate_backtest(data, vix_df=None):
+    """Simule la stratégie momentum-only sur l'univers + comparaison benchmark.
+
+    Args:
+        data: dict {ticker: DataFrame} de l'univers + benchmark
+        vix_df: DataFrame VIX historique (optionnel — si None, pas de dampener appliqué)
+    """
     bench_df = data.get(BENCHMARK_TICKER)
     if bench_df is None:
         print(f"❌ Benchmark {BENCHMARK_TICKER} indisponible — abandon")
@@ -140,6 +208,15 @@ def simulate_backtest(data):
 
     universe_tickers = [t for t in UNIVERS_US if t in data]
     print(f"\n🎯 Univers exploitable : {len(universe_tickers)}/{len(UNIVERS_US)} tickers")
+
+    # VIX point-in-time helper (None si pas de série fournie ou avant 1ère date dispo)
+    def vix_at(target_date):
+        if vix_df is None or vix_df.empty:
+            return None
+        hist = vix_df[vix_df.index <= target_date]
+        if hist.empty:
+            return None
+        return float(hist["Close"].iloc[-1])
 
     # Dates de rebalancement : tous les lundis dans la fenêtre
     bench_dates = bench_df.index
@@ -151,9 +228,13 @@ def simulate_backtest(data):
 
     # État du portefeuille
     cash = INITIAL_CAPITAL
-    positions = {}  # ticker -> dict(qty, prix_achat, date_achat)
-    history = []    # (date, total_value, bench_value, n_pos, cash)
-    trades = []     # historique des ordres
+    positions = {}  # ticker -> dict(qty, prix_achat, date_achat, montant_investi, ...)
+    history = []    # snapshots hebdo
+    trades = []     # historique des ordres (avec coûts + PFU)
+    # Compteurs cumulatifs frais + fiscalité (Phase 1)
+    total_frais_cum   = 0.0
+    total_impots_cum  = 0.0
+    total_pertes_rep  = 0.0
 
     # Valeur initiale du benchmark pour normalisation
     bench_initial = get_price_at(bench_df, rebal_dates[0])
@@ -174,12 +255,10 @@ def simulate_backtest(data):
         for ticker in list(positions.keys()):
             pos = positions[ticker]
             if pos.get("perf", 0) <= STOP_LOSS_CATA_PCT:
-                cash += pos.get("valeur", 0)
-                trades.append({
-                    "date": str(rebal_date.date()), "type": "VENTE",
-                    "ticker": ticker, "perf": round(pos["perf"], 2),
-                    "raison": "R08 catastrophe", "jours": (rebal_date - pos["date_achat"]).days
-                })
+                cash, frais_v, impot_v, perte_rep = _close_position(cash, pos, ticker, rebal_date, "R08 catastrophe", trades)
+                total_frais_cum  += frais_v
+                total_impots_cum += impot_v
+                total_pertes_rep += perte_rep
                 del positions[ticker]
 
         # ── R07 — Stop-loss standard (≥ 90j)
@@ -187,20 +266,19 @@ def simulate_backtest(data):
             pos = positions[ticker]
             jours = (rebal_date - pos["date_achat"]).days
             if pos.get("perf", 0) <= STOP_LOSS_PCT and jours >= HOLD_DAYS_MIN:
-                cash += pos.get("valeur", 0)
-                trades.append({
-                    "date": str(rebal_date.date()), "type": "VENTE",
-                    "ticker": ticker, "perf": round(pos["perf"], 2),
-                    "raison": "R07 stop-loss", "jours": jours
-                })
+                cash, frais_v, impot_v, perte_rep = _close_position(cash, pos, ticker, rebal_date, "R07 stop-loss", trades)
+                total_frais_cum  += frais_v
+                total_impots_cum += impot_v
+                total_pertes_rep += perte_rep
                 del positions[ticker]
 
-        # ── Score tous les tickers de l'univers à cette date
+        # ── Score tous les tickers de l'univers à cette date (avec VIX dampener si activé)
+        vix_now = vix_at(rebal_date)
         scores = []
         for ticker in universe_tickers:
-            r = score_momentum_at(data[ticker], rebal_date)
+            r = score_momentum_at(data[ticker], rebal_date, vix=vix_now)
             if r is not None:
-                score, prix = r
+                score, prix, _val_pts = r
                 if prix > 0:
                     scores.append((ticker, score, prix))
         scores.sort(key=lambda x: -x[1])
@@ -213,12 +291,10 @@ def simulate_backtest(data):
             jours = (rebal_date - pos["date_achat"]).days
             # Vente si sorti du top + détenu ≥ 90j (Règle 01 simulée)
             if ticker not in top_tickers and jours >= HOLD_DAYS_MIN:
-                cash += pos.get("valeur", 0)
-                trades.append({
-                    "date": str(rebal_date.date()), "type": "VENTE",
-                    "ticker": ticker, "perf": round(pos.get("perf", 0), 2),
-                    "raison": "rotation", "jours": jours
-                })
+                cash, frais_v, impot_v, perte_rep = _close_position(cash, pos, ticker, rebal_date, "rotation", trades)
+                total_frais_cum  += frais_v
+                total_impots_cum += impot_v
+                total_pertes_rep += perte_rep
                 del positions[ticker]
 
         # ── Achat : top scores non détenus, jusqu'à MAX_POSITIONS
@@ -235,22 +311,31 @@ def simulate_backtest(data):
                 for ticker, score, prix in achats:
                     if budget_par_titre < 100 or prix <= 0:
                         continue
-                    qty = int(budget_par_titre / prix)
+                    # Le budget réservé doit inclure les frais (= cash débité)
+                    budget_apres_frais = budget_par_titre / (1 + config.TRANSACTION_COST_BPS / 10000.0)
+                    qty = int(budget_apres_frais / prix)
                     if qty < 1:
                         continue
-                    cost = qty * prix
-                    if cost > cash:
+                    brut = qty * prix
+                    cash_debite, frais_achat = config.apply_buy_cost(brut)
+                    if cash_debite > cash:
                         continue
-                    cash -= cost
+                    cash -= cash_debite
+                    total_frais_cum += frais_achat
                     positions[ticker] = {
                         "qty": qty, "prix_achat": prix, "prix_actuel": prix,
-                        "valeur": cost, "perf": 0.0,
+                        "valeur": brut,                   # valeur de marché (sans frais)
+                        "montant_investi": cash_debite,   # base fiscale (brut + frais achat)
+                        "frais_achat": frais_achat,
+                        "perf": 0.0,
                         "date_achat": rebal_date, "score_entree": score,
                     }
                     trades.append({
                         "date": str(rebal_date.date()), "type": "ACHAT",
                         "ticker": ticker, "score": score, "prix": round(prix, 2),
-                        "qty": qty, "montant": round(cost, 2)
+                        "qty": qty, "montant_brut": round(brut, 2),
+                        "frais_achat": round(frais_achat, 4),
+                        "cash_debite": round(cash_debite, 2),
                     })
 
         # ── Snapshot
@@ -262,6 +347,10 @@ def simulate_backtest(data):
             "benchmark": round(bench_value, 2),
             "n_positions": len(positions),
             "cash": round(cash, 2),
+            "total_frais_cum":  round(total_frais_cum, 2),
+            "total_impots_cum": round(total_impots_cum, 2),
+            "total_pertes_rep": round(total_pertes_rep, 2),
+            "vix":              round(vix_now, 2) if vix_now is not None else None,
         })
 
         if i % 26 == 0 or i == len(rebal_dates) - 1:
@@ -271,6 +360,23 @@ def simulate_backtest(data):
                   f"| {BENCHMARK_TICKER} ${bench_value:>9,.0f} ({perf_b:+5.1f}%) "
                   f"| α={perf_p-perf_b:+5.1f}pp | {len(positions)} pos")
 
+    # ── Liquidation virtuelle finale (Option A — comparaison équitable post-PFU) ─
+    # Simule la sortie totale des positions ouvertes au dernier prix pour
+    # connaître le cash réellement disponible après frais + PFU sur plus-values
+    # latentes. Permet de comparer apples-to-apples avec un SPY également liquidé.
+    cash_apres_liquidation = cash
+    pertes_liquidation     = 0.0
+    impots_liquidation     = 0.0
+    frais_liquidation      = 0.0
+    for ticker, pos in list(positions.items()):
+        brut = pos.get("valeur", 0)
+        base = pos.get("montant_investi", brut)
+        r = config.apply_sell_cost_and_tax(brut, base)
+        cash_apres_liquidation += r["cash_recupere_eur"]
+        frais_liquidation      += r["frais_vente_eur"]
+        impots_liquidation     += r["impot_pfu_eur"]
+        pertes_liquidation     += r["perte_reportable_eur"]
+
     return {
         "history": history,
         "trades": trades,
@@ -278,11 +384,25 @@ def simulate_backtest(data):
             {"ticker": t, **{k: (str(v) if isinstance(v, datetime) else v) for k, v in p.items()}}
             for t, p in positions.items()
         ],
+        "total_frais_cum":   round(total_frais_cum, 2),
+        "total_impots_cum":  round(total_impots_cum, 2),
+        "total_pertes_rep":  round(total_pertes_rep, 2),
+        # Option A — valeurs si on liquidait tout à la dernière date du backtest
+        "portfolio_post_liquidation":  round(cash_apres_liquidation, 2),
+        "frais_liquidation_virtuelle": round(frais_liquidation, 2),
+        "impots_liquidation_virtuelle": round(impots_liquidation, 2),
+        "pertes_liquidation_virtuelle": round(pertes_liquidation, 2),
     }
 
 # ── MÉTRIQUES ────────────────────────────────────────────────────────────────
-def compute_metrics(history, trades):
-    """Calcule les métriques de performance standard."""
+def compute_metrics(history, trades, result=None):
+    """Calcule les métriques de performance standard.
+
+    Si `result` est fourni, ajoute aussi les métriques post-liquidation (Option A) :
+    comparaison équitable Signal vs SPY après application du PFU 30% sur les
+    plus-values (latentes côté SPY buy-and-hold, latentes côté Signal sur les
+    positions ouvertes).
+    """
     if not history:
         return {}
     p_values = np.array([h["portfolio"] for h in history])
@@ -331,6 +451,37 @@ def compute_metrics(history, trades):
     else:
         win_rate = avg_perf = avg_winner = avg_loser = 0
 
+    # Deflated Sharpe (Bailey-Lopez de Prado 2014) — discount le Sharpe par le nombre
+    # de trials testés implicitement (5 signaux momentum + pondérations + seuils RSI/reg etc.)
+    # Formule simplifiée : DSR = SR × (1 - (skewness_correction))
+    # Approximation pratique : DSR ≈ SR / √(1 + 0.5×N_trials/N_weeks) où N_trials ≈ 10 (5 signaux × 2 réglages chacun)
+    n_trials_implicit = 10
+    deflator = np.sqrt(1 + 0.5 * n_trials_implicit / max(n_weeks, 1))
+    deflated_sharpe = p_sharpe / deflator if deflator > 0 else 0
+
+    # ── Option A : métriques post-liquidation (comparaison équitable Signal vs SPY) ──
+    # Signal paye PFU à chaque vente pendant la période ; SPY (buy-and-hold) ne paye
+    # rien dans le backtest courant. Mais si l'investisseur SPY voulait sortir son
+    # cash à la fin, il devrait payer PFU sur ses plus-values latentes. Idem pour
+    # Signal sur ses positions encore ouvertes en fin de période.
+    portfolio_post_liq = None
+    benchmark_post_liq = None
+    alpha_post_liq_total = None
+    alpha_post_liq_cagr  = None
+    if result is not None and "portfolio_post_liquidation" in result:
+        portfolio_post_liq = result["portfolio_post_liquidation"]
+        # Benchmark : appliquer PFU sur la plus-value SPY totale (frais négligeable pour ETF liquide)
+        b_pl_brut = b_values[-1]
+        bench_dict = config.apply_sell_cost_and_tax(b_pl_brut, INITIAL_CAPITAL)
+        benchmark_post_liq = bench_dict["cash_recupere_eur"]
+        # Recompute returns post-liquidation
+        p_total_pl = (portfolio_post_liq / INITIAL_CAPITAL - 1) * 100
+        b_total_pl = (benchmark_post_liq / INITIAL_CAPITAL - 1) * 100
+        alpha_post_liq_total = p_total_pl - b_total_pl
+        p_cagr_pl = ((portfolio_post_liq / INITIAL_CAPITAL) ** (1 / max(n_years, 0.01)) - 1) * 100 if portfolio_post_liq > 0 else 0
+        b_cagr_pl = ((benchmark_post_liq / INITIAL_CAPITAL) ** (1 / max(n_years, 0.01)) - 1) * 100 if benchmark_post_liq > 0 else 0
+        alpha_post_liq_cagr = p_cagr_pl - b_cagr_pl
+
     return {
         "n_weeks":          n_weeks,
         "n_years":          round(n_years, 2),
@@ -344,6 +495,7 @@ def compute_metrics(history, trades):
         "benchmark_vol":    round(b_vol, 2),
         "portfolio_sharpe": round(p_sharpe, 2),
         "benchmark_sharpe": round(b_sharpe, 2),
+        "deflated_sharpe":  round(deflated_sharpe, 2),  # Bailey-Lopez de Prado, anti-data-mining
         "portfolio_mdd":    round(p_mdd, 2),
         "benchmark_mdd":    round(b_mdd, 2),
         "n_trades":         n_trades,
@@ -351,11 +503,76 @@ def compute_metrics(history, trades):
         "avg_perf":         round(avg_perf, 2),
         "avg_winner":       round(avg_winner, 2),
         "avg_loser":        round(avg_loser, 2),
+        # Option A — métriques post-liquidation virtuelle (comparaison équitable PFU)
+        "portfolio_post_liq":  round(portfolio_post_liq, 2) if portfolio_post_liq is not None else None,
+        "benchmark_post_liq":  round(benchmark_post_liq, 2) if benchmark_post_liq is not None else None,
+        "alpha_post_liq_total":round(alpha_post_liq_total, 2) if alpha_post_liq_total is not None else None,
+        "alpha_post_liq_cagr": round(alpha_post_liq_cagr, 2) if alpha_post_liq_cagr is not None else None,
     }
 
-def print_report(metrics, history):
+
+def compute_regime_metrics(history, trades):
+    """Décompose les métriques par régime de marché (cf config.REGIME_DEFINITIONS).
+
+    Pour chaque régime, calcule : n_weeks, portfolio_total, benchmark_total,
+    alpha, Sharpe, max DD, n_trades. Permet de valider que l'edge tient
+    en bear/stress (pas seulement en bull).
+    """
+    if not history:
+        return {}
+    regimes_out = []
+    for rg in config.REGIME_DEFINITIONS:
+        d_from = rg["from"]
+        d_to   = rg["to"]
+        # Filtre history pour ce régime
+        h_rg = [h for h in history if d_from <= h["date"] <= d_to]
+        if len(h_rg) < 4:  # min 4 semaines pour être significatif
+            continue
+        p = np.array([h["portfolio"] for h in h_rg])
+        b = np.array([h["benchmark"] for h in h_rg])
+        p_ret = np.diff(p) / p[:-1]
+        b_ret = np.diff(b) / b[:-1]
+        p_total = (p[-1] / p[0] - 1) * 100
+        b_total = (b[-1] / b[0] - 1) * 100
+        p_vol = float(np.std(p_ret, ddof=1) * np.sqrt(52) * 100) if len(p_ret) > 1 else 0
+        n_weeks_rg = len(h_rg)
+        n_years_rg = max(n_weeks_rg / 52, 0.05)
+        p_cagr = ((p[-1] / p[0]) ** (1 / n_years_rg) - 1) * 100 if p[0] > 0 else 0
+        b_cagr = ((b[-1] / b[0]) ** (1 / n_years_rg) - 1) * 100 if b[0] > 0 else 0
+        p_sharpe = (p_cagr / p_vol) if p_vol > 0 else 0
+        # MDD intra-régime
+        if len(p) > 0:
+            peaks = np.maximum.accumulate(p)
+            dd_series = (p - peaks) / peaks * 100
+            p_mdd = float(np.min(dd_series))
+        else:
+            p_mdd = 0.0
+        # Trades dans ce régime
+        n_tr_rg = sum(1 for t in trades if t.get("type") == "VENTE" and d_from <= t["date"] <= d_to)
+        regimes_out.append({
+            "label":           rg["label"],
+            "from":            d_from,
+            "to":              d_to,
+            "desc":            rg["desc"],
+            "n_weeks":         n_weeks_rg,
+            "portfolio_total": round(p_total, 2),
+            "benchmark_total": round(b_total, 2),
+            "alpha":           round(p_total - b_total, 2),
+            "portfolio_cagr":  round(p_cagr, 2),
+            "benchmark_cagr":  round(b_cagr, 2),
+            "alpha_cagr":      round(p_cagr - b_cagr, 2),
+            "portfolio_vol":   round(p_vol, 2),
+            "portfolio_sharpe":round(p_sharpe, 2),
+            "portfolio_mdd":   round(p_mdd, 2),
+            "n_trades":        n_tr_rg,
+        })
+    return regimes_out
+
+def print_report(metrics, history, result=None, regime_metrics=None):
     print("\n" + "=" * 72)
     print(f"📊 BACKTEST RESULTS — Momentum-only ({YEAR_START} → {YEAR_END})")
+    print(f"   VIX dampener: {'ON' if config.VIX_DAMPENER_ENABLED else 'OFF'} | "
+          f"Costs: {config.TRANSACTION_COST_BPS} bps one-way | PFU: {config.PFU_RATE*100:.0f}%")
     print("=" * 72)
     print(f"  Période               : {metrics['n_years']} ans ({metrics['n_weeks']} semaines)")
     print(f"  Capital initial       : ${INITIAL_CAPITAL:,.0f}")
@@ -368,6 +585,7 @@ def print_report(metrics, history):
     print(f"  Volatilité Benchmark  : {metrics['benchmark_vol']:5.2f}%")
     print(f"  Sharpe Portfolio      : {metrics['portfolio_sharpe']:5.2f}")
     print(f"  Sharpe Benchmark      : {metrics['benchmark_sharpe']:5.2f}")
+    print(f"  Deflated Sharpe       : {metrics['deflated_sharpe']:5.2f}   (Bailey-LdP, ajusté trials)")
     print()
     print(f"  Max Drawdown Portfolio: {metrics['portfolio_mdd']:+8.2f}%")
     print(f"  Max Drawdown Benchmark: {metrics['benchmark_mdd']:+8.2f}%")
@@ -375,7 +593,38 @@ def print_report(metrics, history):
     print(f"  Trades fermés         : {metrics['n_trades']}")
     print(f"  Win rate              : {metrics['win_rate']:5.1f}%")
     print(f"  Perf moy / trade      : {metrics['avg_perf']:+5.2f}%   (gagnants {metrics['avg_winner']:+.1f}% / perdants {metrics['avg_loser']:+.1f}%)")
+    print()
+    if result:
+        print(f"  Frais cumulés         : ${result.get('total_frais_cum',0):,.2f}")
+        print(f"  Impôts PFU cumulés    : ${result.get('total_impots_cum',0):,.2f}")
+        print(f"  Pertes reportables    : ${result.get('total_pertes_rep',0):,.2f}  (crédit fiscal théorique = ${result.get('total_pertes_rep',0)*0.30:,.2f})")
     print("=" * 72)
+
+    # ── Option A : comparaison équitable post-liquidation ──
+    if metrics.get("portfolio_post_liq") is not None:
+        print(f"\n💰 COMPARAISON ÉQUITABLE POST-LIQUIDATION (PFU 30% appliqué aux deux)")
+        print("-" * 72)
+        p_pl = metrics["portfolio_post_liq"]
+        b_pl = metrics["benchmark_post_liq"]
+        ap_t = metrics["alpha_post_liq_total"]
+        ap_c = metrics["alpha_post_liq_cagr"]
+        n_years = metrics["n_years"]
+        print(f"  Portfolio si liquidé aujourd'hui    : ${p_pl:>10,.0f}  ({(p_pl/INITIAL_CAPITAL-1)*100:+.2f}% total, CAGR {(((p_pl/INITIAL_CAPITAL)**(1/max(n_years,0.01))-1)*100):+.2f}%)")
+        print(f"  {BENCHMARK_TICKER} si liquidé aujourd'hui          : ${b_pl:>10,.0f}  ({(b_pl/INITIAL_CAPITAL-1)*100:+.2f}% total, CAGR {(((b_pl/INITIAL_CAPITAL)**(1/max(n_years,0.01))-1)*100):+.2f}%)")
+        print(f"  ALPHA équitable                     : {ap_t:+8.2f}pp total / {ap_c:+5.2f}pp CAGR")
+        if result:
+            print(f"  Liquidation virtuelle additionnelle : ${result.get('frais_liquidation_virtuelle',0):,.2f} frais + ${result.get('impots_liquidation_virtuelle',0):,.2f} PFU sur plus-values latentes")
+        print("-" * 72)
+
+    # ── Décomposition par régime
+    if regime_metrics:
+        print(f"\n📅 PERFORMANCE PAR RÉGIME DE MARCHÉ")
+        print("-" * 72)
+        print(f"  {'Régime':<22s} {'Période':<22s} {'Alpha':>10s} {'Sharpe':>8s} {'MDD':>8s} {'N':>4s}")
+        for rm in regime_metrics:
+            period_str = f"{rm['from']} → {rm['to']}"
+            print(f"  {rm['label']:<22s} {period_str:<22s} {rm['alpha']:>+8.2f}pp {rm['portfolio_sharpe']:>+7.2f} {rm['portfolio_mdd']:>+7.2f}% {rm['n_trades']:>4d}")
+        print("-" * 72)
 
     # Verdict
     alpha_cagr = metrics["alpha_cagr"]
@@ -394,6 +643,33 @@ def print_report(metrics, history):
 
 # ── MAIN ─────────────────────────────────────────────────────────────────────
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Signal backtest — Phase 3 (régimes + coûts + PFU + VIX)")
+    parser.add_argument(
+        "--variant",
+        choices=["baseline", "costs_only", "costs_vix"],
+        default="costs_vix",
+        help="baseline = sans frais ni VIX | costs_only = +coûts +PFU | costs_vix = +coûts +PFU +VIX dampener (défaut)"
+    )
+    parser.add_argument("--output", default=None, help="Chemin du JSON output (défaut: backtest_results_<variant>.json)")
+    args = parser.parse_args()
+
+    # Configure les overrides selon le variant
+    if args.variant == "baseline":
+        config.TRANSACTION_COST_BPS = 0.0
+        config.PFU_RATE              = 0.0
+        config.VIX_DAMPENER_ENABLED  = False
+        print(f"🧪 VARIANT: baseline (no costs, no PFU, no VIX dampener) — référence historique")
+    elif args.variant == "costs_only":
+        # Garde les valeurs de config.py par défaut (15 bps round-trip, PFU 30%)
+        config.VIX_DAMPENER_ENABLED  = False
+        print(f"🧪 VARIANT: costs_only (frais {config.TRANSACTION_COST_BPS}bps one-way + PFU {config.PFU_RATE*100:.0f}%, no VIX)")
+    else:  # costs_vix
+        config.VIX_DAMPENER_ENABLED  = True
+        print(f"🧪 VARIANT: costs_vix (frais {config.TRANSACTION_COST_BPS}bps + PFU {config.PFU_RATE*100:.0f}% + VIX dampener)")
+
+    output_path = args.output or f"backtest_results_{args.variant}.json"
+
     t0 = time.time()
     start_str = f"{YEAR_START - 2}-01-01"  # buffer 2 ans pour MM200 + régression
     end_str = f"{YEAR_END}-01-01"
@@ -403,13 +679,32 @@ def main():
         print("❌ Aucune donnée récupérée")
         return
 
+    # VIX historique (Phase 2) — pour appliquer le dampener point-in-time
+    vix_df = None
+    if config.VIX_DAMPENER_ENABLED:
+        print(f"\n📥 Téléchargement historique ^VIX pour dampener point-in-time...")
+        try:
+            vix_df = yf.Ticker("^VIX").history(start=start_str, end=end_str, auto_adjust=False)
+            if not vix_df.empty:
+                print(f"  ✓ ^VIX {len(vix_df)} jours ({vix_df.index[0].date()} → {vix_df.index[-1].date()})")
+                vmean = float(vix_df["Close"].mean())
+                vmax  = float(vix_df["Close"].max())
+                vmin  = float(vix_df["Close"].min())
+                print(f"  ✓ Distribution : min {vmin:.1f} / mean {vmean:.1f} / max {vmax:.1f}")
+            else:
+                print(f"  ⚠️  ^VIX history vide — backtest sans dampener")
+                vix_df = None
+        except Exception as e:
+            print(f"  ⚠️  ^VIX fetch failed ({e}) — backtest sans dampener")
+
     print(f"\n⚙️  Simulation rebalancements hebdomadaires...")
-    result = simulate_backtest(data)
+    result = simulate_backtest(data, vix_df=vix_df)
     if not result:
         return
 
-    metrics = compute_metrics(result["history"], result["trades"])
-    print_report(metrics, result["history"])
+    metrics = compute_metrics(result["history"], result["trades"], result=result)
+    regime_metrics = compute_regime_metrics(result["history"], result["trades"])
+    print_report(metrics, result["history"], result=result, regime_metrics=regime_metrics)
 
     output = {
         "config": {
@@ -419,18 +714,31 @@ def main():
             "hold_days_min": HOLD_DAYS_MIN, "stop_loss_pct": STOP_LOSS_PCT,
             "stop_loss_cata_pct": STOP_LOSS_CATA_PCT,
             "benchmark": BENCHMARK_TICKER, "universe_size": len(UNIVERS_US),
+            "transaction_cost_bps":   config.TRANSACTION_COST_BPS,
+            "pfu_rate":               config.PFU_RATE,
+            "vix_dampener_enabled":   config.VIX_DAMPENER_ENABLED,
+            "vix_dampener_intercept": config.VIX_DAMPENER_INTERCEPT,
+            "vix_dampener_slope":     config.VIX_DAMPENER_SLOPE,
+            "vix_dampener_min":       config.VIX_DAMPENER_MIN,
         },
         "metrics": metrics,
+        "regime_metrics": regime_metrics,
+        "totals": {
+            "total_frais_cum":  result.get("total_frais_cum", 0),
+            "total_impots_cum": result.get("total_impots_cum", 0),
+            "total_pertes_rep": result.get("total_pertes_rep", 0),
+        },
         "history": result["history"],
         "trades": result["trades"],
         "final_positions": result["final_positions"],
         "generated_at": str(date.today()),
         "duration_seconds": round(time.time() - t0, 1),
     }
-    with open("backtest_results.json", "w", encoding="utf-8") as f:
+    output["variant"] = args.variant
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2, default=str)
 
-    print(f"💾 Résultats détaillés → backtest_results.json")
+    print(f"💾 Résultats détaillés → {output_path}")
     print(f"⏱️  Durée totale : {output['duration_seconds']}s")
 
 if __name__ == "__main__":

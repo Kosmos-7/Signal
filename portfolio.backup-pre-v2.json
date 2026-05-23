@@ -20,9 +20,9 @@
       "prix_achat": 650.0,
       "prix_actuel": 1383.6,
       "quantite": 3,
-      "montant_investi": 1951.46,
+      "montant_investi": 1950.0,
       "valeur_actuelle": 4150.8,
-      "performance": 112.7,
+      "performance": 112.86,
       "score_entree": 88,
       "poids": 17.8
     },
@@ -36,9 +36,9 @@
       "prix_achat": 115.0,
       "prix_actuel": 219.51,
       "quantite": 20,
-      "montant_investi": 2301.72,
+      "montant_investi": 1957.1,
       "valeur_actuelle": 3783.02,
-      "performance": 64.36,
+      "performance": 93.3,
       "score_entree": 94,
       "poids": 16.2
     },
@@ -52,9 +52,9 @@
       "prix_achat": 341.54,
       "prix_actuel": 449.59,
       "quantite": 3,
-      "montant_investi": 876.48,
+      "montant_investi": 875.82,
       "valeur_actuelle": 1162.23,
-      "performance": 32.6,
+      "performance": 32.7,
       "score_entree": 85,
       "poids": 5.0
     },
@@ -85,9 +85,9 @@
       "prix_achat": 967.93,
       "prix_actuel": 1041.65,
       "quantite": 1,
-      "montant_investi": 828.41,
+      "montant_investi": 827.79,
       "valeur_actuelle": 897.59,
-      "performance": 8.35,
+      "performance": 8.43,
       "score_entree": 89,
       "poids": 3.8
     },
@@ -101,9 +101,9 @@
       "prix_achat": 259.27,
       "prix_actuel": 268.46,
       "quantite": 2,
-      "montant_investi": 518.93,
+      "montant_investi": 441.24,
       "valeur_actuelle": 462.66,
-      "performance": -10.84,
+      "performance": 4.85,
       "score_entree": 90,
       "poids": 2.0
     },
@@ -134,9 +134,9 @@
       "prix_achat": 413.21,
       "prix_actuel": 414.57,
       "quantite": 1,
-      "montant_investi": 413.52,
+      "montant_investi": 351.6,
       "valeur_actuelle": 357.23,
-      "performance": -13.61,
+      "performance": 1.6,
       "score_entree": 100,
       "poids": 1.5
     },
@@ -150,9 +150,9 @@
       "prix_achat": 1060.9,
       "prix_actuel": 1063.75,
       "quantite": 1,
-      "montant_investi": 1061.7,
+      "montant_investi": 902.77,
       "valeur_actuelle": 916.63,
-      "performance": -13.66,
+      "performance": 1.54,
       "score_entree": 93,
       "poids": 3.9
     },
@@ -166,9 +166,9 @@
       "prix_achat": 330.69,
       "prix_actuel": 331.12,
       "quantite": 2,
-      "montant_investi": 661.88,
+      "montant_investi": 562.59,
       "valeur_actuelle": 570.65,
-      "performance": -13.78,
+      "performance": 1.43,
       "score_entree": 93,
       "poids": 2.4
     },
@@ -182,9 +182,9 @@
       "prix_achat": 958.5,
       "prix_actuel": 965.0,
       "quantite": 1,
-      "montant_investi": 959.22,
+      "montant_investi": 958.5,
       "valeur_actuelle": 965.0,
-      "performance": 0.6,
+      "performance": 0.68,
       "score_entree": 93,
       "poids": 4.1
     },
@@ -198,9 +198,9 @@
       "prix_achat": 610.41,
       "prix_actuel": 607.38,
       "quantite": 2,
-      "montant_investi": 1044.92,
+      "montant_investi": 1044.14,
       "valeur_actuelle": 1046.76,
-      "performance": 0.18,
+      "performance": 0.25,
       "score_entree": 84,
       "poids": 4.5
     },
@@ -214,9 +214,9 @@
       "prix_achat": 181.19,
       "prix_actuel": 176.31,
       "quantite": 7,
-      "montant_investi": 1080.07,
+      "montant_investi": 1079.26,
       "valeur_actuelle": 1063.48,
-      "performance": -1.54,
+      "performance": -1.46,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
       "poids": 4.6
@@ -231,9 +231,9 @@
       "prix_achat": 261.9,
       "prix_actuel": 257.9,
       "quantite": 4,
-      "montant_investi": 1048.39,
+      "montant_investi": 1047.6,
       "valeur_actuelle": 1031.6,
-      "performance": -1.6,
+      "performance": -1.53,
       "score_entree": 84,
       "poids": 4.4
     },
@@ -247,9 +247,9 @@
       "prix_achat": 313.77,
       "prix_actuel": 303.0,
       "quantite": 2,
-      "montant_investi": 628.01,
+      "montant_investi": 534.0,
       "valeur_actuelle": 522.19,
-      "performance": -16.85,
+      "performance": -2.21,
       "score_entree": 95,
       "poids": 2.2
     },
@@ -263,9 +263,9 @@
       "prix_achat": 180.58,
       "prix_actuel": 173.58,
       "quantite": 3,
-      "montant_investi": 542.15,
+      "montant_investi": 541.74,
       "valeur_actuelle": 520.74,
-      "performance": -3.95,
+      "performance": -3.88,
       "score_entree": 91,
       "poids": 2.2
     },
@@ -279,9 +279,9 @@
       "prix_achat": 430.55,
       "prix_actuel": 381.51,
       "quantite": 1,
-      "montant_investi": 430.87,
+      "montant_investi": 366.37,
       "valeur_actuelle": 328.75,
-      "performance": -23.7,
+      "performance": -10.27,
       "score_entree": 93,
       "poids": 1.4
     },
@@ -314,7 +314,7 @@
       "qte": 14,
       "prix": 92.16,
       "currency": "GBP",
-      "montant": 1114.96,
+      "montant": 1114.12,
       "raison": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -349,9 +349,7 @@
           "Yahoo Finance",
           "Finnhub"
         ]
-      },
-      "montant_brut_eur": 1114.12,
-      "frais_achat_eur": 0.8356
+      }
     },
     {
       "date": "2026-05-07",
@@ -361,18 +359,13 @@
       "qte": 11,
       "prix": 92.36,
       "currency": "GBP",
-      "montant": 876.62,
+      "montant": 877.28,
       "perf": -4.7,
-      "pnl_eur": -1299.43,
+      "pnl_eur": -183.01,
       "jours": 2,
       "raison": "Position en perte de -17.2% après seulement 2 jours de détention, ce qui déclenche le stop-loss catastrophe à -25% sans condition de durée. La position approche dangereusement ce seuil et aucune thèse d'achat documentée ne justifie un maintien. Le signal Golden Cross (9j) reste présent mais l'ampleur de la perte en 48h suggère un problème de prix d'entrée ou un choc spécifique non anticipé — sortie défensive pour protéger le capital.",
       "conviction": "forte",
-      "source": "Claude AI",
-      "montant_brut_eur": 877.28,
-      "frais_vente_eur": 0.658,
-      "plus_value_eur": -1299.43,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 1299.43
+      "source": "Claude AI"
     },
     {
       "date": "2026-05-06",
@@ -382,7 +375,7 @@
       "qte": 7,
       "prix": 181.19,
       "currency": "USD",
-      "montant": 1080.07,
+      "montant": 1079.26,
       "raison": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -417,9 +410,7 @@
           "Yahoo Finance",
           "Finnhub"
         ]
-      },
-      "montant_brut_eur": 1079.26,
-      "frais_achat_eur": 0.8094
+      }
     },
     {
       "date": "2026-05-06",
@@ -429,7 +420,7 @@
       "qte": 14,
       "prix": 92.01,
       "currency": "USD",
-      "montant": 1095.9,
+      "montant": 1095.08,
       "raison": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -471,9 +462,7 @@
           "url": "https://finnhub.io/api/news?id=5cba82ce36b40ef864ea40c18141f0bdd4feb906439d41a795ede3b896d93db4",
           "source": "Yahoo"
         }
-      },
-      "montant_brut_eur": 1095.08,
-      "frais_achat_eur": 0.8213
+      }
     },
     {
       "date": "2026-05-06",
@@ -483,7 +472,7 @@
       "qte": 3,
       "prix": 398.32,
       "currency": "USD",
-      "montant": 1016.62,
+      "montant": 1015.86,
       "raison": "Score 82/100, z=-3.6σ sous régression — la décote est la plus marquée de la watchlist, similaire à NOW. Death Cross depuis 129j mais croissance CA solide et RSI favorable signalent une divergence bullish potentielle. L'achat d'1 titre mobilise ~400-500€ (estimation) et diversifie sur le secteur fintech/software hors positions déjà lourdes en semi-conducteurs.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -518,9 +507,7 @@
           "Yahoo Finance",
           "Finnhub"
         ]
-      },
-      "montant_brut_eur": 1015.86,
-      "frais_achat_eur": 0.7619
+      }
     },
     {
       "date": "2026-05-06",
@@ -530,18 +517,12 @@
       "qte": 14,
       "prix": 92.01,
       "currency": "USD",
-      "montant": 1093.05,
+      "montant": 1093.87,
       "perf": 0.04,
       "jours": 1,
       "raison": "Death Cross depuis 190j et z=-3.4σ (prix très en dessous de sa régression) — signal fondamental négatif persistant documenté justifiant une sortie anticipée malgré 1j de détention seulement. Score en watchlist tombé à 77/100 (plus bas du top 10). La divergence entre un RSI favorable et un z-score à -3.4σ suggère un piège technique. Signal fondamental majeur documenté : dégradation structurelle du trend.",
       "conviction": "forte",
-      "source": "Claude AI",
-      "montant_brut_eur": 1093.87,
-      "frais_vente_eur": 0.8204,
-      "plus_value_eur": -1103.66,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 1103.66,
-      "pnl_eur": -1103.66
+      "source": "Claude AI"
     },
     {
       "date": "2026-05-06",
@@ -551,18 +532,12 @@
       "qte": 3,
       "prix": 398.32,
       "currency": "USD",
-      "montant": 1013.98,
+      "montant": 1014.74,
       "perf": -2.13,
       "jours": 1,
       "raison": "Death Cross depuis 129j et z=-3.6σ — même logique que NOW : tendance baissière structurelle confirmée avec prix très largement sous la régression. Score 77/100 (co-plus bas du portefeuille en watchlist), performance -2.1% après 1j. Signal fondamental majeur documenté : Death Cross long + déviation négative extrême de la régression justifient la sortie.",
       "conviction": "forte",
-      "source": "Claude AI",
-      "montant_brut_eur": 1014.74,
-      "frais_vente_eur": 0.7611,
-      "plus_value_eur": -1046.55,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 1046.55,
-      "pnl_eur": -1046.55
+      "source": "Claude AI"
     },
     {
       "date": "2026-05-05",
@@ -572,7 +547,7 @@
       "qte": 14,
       "prix": 91.97,
       "currency": "USD",
-      "montant": 1100.81,
+      "montant": 1099.98,
       "raison": "NOW affiche un score de 77/100 avec un z-score à -3.4σ sous sa droite de régression — décote technique majeure sur un titre à forte croissance CA. Le Death Cross (189j) est un signal négatif, mais à ce niveau de décote, le rapport risque/rendement devient asymétrique en faveur du rebond. J'alloue ~500€ (environ 1 titre) pour initier une position contrariante avec horizon 90j minimum, en profitant des liquidités disponibles.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -612,9 +587,7 @@
           "url": "https://finnhub.io/api/news?id=7843b0a89865eeac4cb61dae52559dfa155f62963531e929b534b148b373b0cd",
           "source": "Yahoo"
         }
-      },
-      "montant_brut_eur": 1099.98,
-      "frais_achat_eur": 0.825
+      }
     },
     {
       "date": "2026-05-05",
@@ -624,7 +597,7 @@
       "qte": 3,
       "prix": 406.99,
       "currency": "USD",
-      "montant": 1043.91,
+      "montant": 1043.13,
       "raison": "INTU présente un profil similaire à NOW : z-score à -3.5σ sur un titre fondamentalement solide (croissance CA solide, RSI favorable), malgré un Death Cross de 128j. La décote est l'une des plus fortes de la watchlist. J'initie une position d'environ 1 titre (~500€ estimé) avec la même logique contrariante disciplinée, en diversifiant le pari de retour à la régression avec NOW.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -657,9 +630,7 @@
           "Yahoo Finance",
           "Finnhub"
         ]
-      },
-      "montant_brut_eur": 1043.13,
-      "frais_achat_eur": 0.7823
+      }
     },
     {
       "date": "2026-05-05",
@@ -669,7 +640,7 @@
       "qte": 2,
       "prix": 610.41,
       "currency": "USD",
-      "montant": 1044.92,
+      "montant": 1044.14,
       "raison": "META score 84/100 avec un RSI favorable et une croissance CA solide malgré un Death Cross à 115 jours (signal ancien, affaibli). Le z-score de +0.3σ indique un cours normalisé. Avec 7625€ de liquidités disponibles, l'entrée sur META à environ 580€ (1 titre) diversifie vers les médias/IA avec une conviction modérée. Le Death Cross étant vieux de 115 jours, son signal baissier est considérablement dilué.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -702,9 +673,7 @@
           "Yahoo Finance",
           "Finnhub"
         ]
-      },
-      "montant_brut_eur": 1044.14,
-      "frais_achat_eur": 0.7831
+      }
     },
     {
       "date": "2026-05-05",
@@ -714,7 +683,7 @@
       "qte": 11,
       "prix": 96.92,
       "currency": "GBP",
-      "montant": 1061.09,
+      "montant": 1060.29,
       "raison": "Score 83/100 avec Golden Cross frais (8j) en fenêtre optimale et prix sous sa régression (z=-0.9σ), ce qui représente une opportunité d'entrée à prix attractif. Le secteur Finance est bien représenté dans le portefeuille mais LSEG apporte une diversification géographique (UK) et sectorielle (infrastructures de marché). J'alloue environ 900€ (1 titre estimé) pour tester la position.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -747,9 +716,7 @@
           "Yahoo Finance",
           "Finnhub"
         ]
-      },
-      "montant_brut_eur": 1060.29,
-      "frais_achat_eur": 0.7952
+      }
     },
     {
       "date": "2026-05-05",
@@ -759,7 +726,7 @@
       "qte": 4,
       "prix": 261.9,
       "currency": "EUR",
-      "montant": 1048.39,
+      "montant": 1047.6,
       "raison": "DB1.DE figure à la #9 watchlist avec un score de 84/100, Golden Cross à 30j, z-score modéré à +0.7σ et RSI en zone favorable. C'est une valeur financière européenne non encore représentée au portefeuille, offrant une diversification sectorielle et géographique utile. Entrée en position initiale modeste (~800€) pour tester la conviction.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -792,9 +759,7 @@
           "Yahoo Finance",
           "Finnhub"
         ]
-      },
-      "montant_brut_eur": 1047.6,
-      "frais_achat_eur": 0.7857
+      }
     },
     {
       "date": "2026-05-05",
@@ -804,7 +769,7 @@
       "qte": 3,
       "prix": 341.54,
       "currency": "USD",
-      "montant": 876.48,
+      "montant": 875.82,
       "raison": "AMD score 85/100 avec un Golden Cross de 213 jours encore actif et un z-score de +0.4σ — prix aligné sur sa droite de régression, croissance CA solide. Non représentée en portefeuille, AMD offre une diversification sectorielle complémentaire à NVDA dans les semiconducteurs avec un signal technique sain et aucune surextension de prix. L'utilisation des liquidités disponibles est justifiée ici.",
       "conviction": "modérée",
       "source": "Claude AI",
@@ -832,9 +797,7 @@
         "sources": [
           "Yahoo Finance"
         ]
-      },
-      "montant_brut_eur": 875.82,
-      "frais_achat_eur": 0.6569
+      }
     },
     {
       "date": "2026-05-05",
@@ -844,18 +807,12 @@
       "qte": 1,
       "prix": 397.02,
       "currency": "USD",
-      "montant": 339.11,
+      "montant": 339.36,
       "perf": -0.99,
       "jours": 5,
       "raison": "ADI présente un z-score alarmant de +3.3σ au-dessus de sa droite de régression — signal de surachat majeur — alors que la position est en légère perte (-1.0%) après 5 jours. Le score watchlist est retombé à 85/100 contre 93/100 lors de l'achat. Ce signal fondamental de surachat extrême constitue un signal fondamental majeur documenté justifiant une sortie anticipée avant les 90 jours, conformément à la règle 1.",
       "conviction": "forte",
-      "source": "Claude AI",
-      "montant_brut_eur": 339.36,
-      "frais_vente_eur": 0.2545,
-      "plus_value_eur": -62.2,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 62.2,
-      "pnl_eur": -62.2
+      "source": "Claude AI"
     },
     {
       "date": "2026-05-05",
@@ -865,13 +822,11 @@
       "qte": 1,
       "prix": 967.93,
       "currency": "USD",
-      "montant": 828.41,
+      "montant": 827.79,
       "raison": "LLY score 89/100 avec un Golden Cross solide de 139 jours confirmé, un z-score de +0.5σ (légèrement au-dessus de la régression mais en zone saine) et une croissance CA solide. Le portefeuille manque d'exposition au secteur Santé, ce qui constitue un défaut de diversification sectorielle. 1 titre LLY pour une entrée prudente sur ce secteur défensif/growth.",
       "conviction": "modérée",
       "source": "Claude AI",
-      "score_watchlist": 89,
-      "montant_brut_eur": 827.79,
-      "frais_achat_eur": 0.6208
+      "score_watchlist": 89
     },
     {
       "date": "2026-05-05",
@@ -890,14 +845,8 @@
       "nom": "Microsoft",
       "qte": 5,
       "prix": 399.75,
-      "montant": 1997.25,
-      "raison": "Sortie de watchlist après 118j — Règle 01 respectée",
-      "montant_brut_eur": 1998.75,
-      "frais_vente_eur": 1.4991,
-      "plus_value_eur": -4.25,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 4.25,
-      "pnl_eur": -4.25
+      "montant": 1998.75,
+      "raison": "Sortie de watchlist après 118j — Règle 01 respectée"
     },
     {
       "date": "2026-04-30",
@@ -906,14 +855,8 @@
       "nom": "Airbus",
       "qte": 10,
       "prix": 174.88,
-      "montant": 1688.59,
-      "raison": "Sortie de watchlist après 118j — Règle 01 respectée",
-      "montant_brut_eur": 1748.8,
-      "frais_vente_eur": 1.3116,
-      "plus_value_eur": 196.33,
-      "impot_pfu_eur": 58.9,
-      "perte_reportable_eur": 0.0,
-      "pnl_eur": 196.33
+      "montant": 1748.8,
+      "raison": "Sortie de watchlist après 118j — Règle 01 respectée"
     },
     {
       "date": "2026-04-30",
@@ -922,14 +865,8 @@
       "nom": "LVMH",
       "qte": 2,
       "prix": 451.4,
-      "montant": 902.12,
-      "raison": "Sortie de watchlist après 118j — Règle 01 respectée",
-      "montant_brut_eur": 902.8,
-      "frais_vente_eur": 0.6771,
-      "plus_value_eur": -298.78,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 298.78,
-      "pnl_eur": -298.78
+      "montant": 902.8,
+      "raison": "Sortie de watchlist après 118j — Règle 01 respectée"
     },
     {
       "date": "2026-04-30",
@@ -938,10 +875,8 @@
       "nom": "Broadcom Inc.",
       "qte": 1,
       "prix": 413.21,
-      "montant": 413.52,
-      "raison": "Entrée watchlist — score 100/100 · Technologie",
-      "montant_brut_eur": 413.21,
-      "frais_achat_eur": 0.3099
+      "montant": 413.21,
+      "raison": "Entrée watchlist — score 100/100 · Technologie"
     },
     {
       "date": "2026-04-30",
@@ -950,10 +885,8 @@
       "nom": "JP Morgan Chase & Co.",
       "qte": 2,
       "prix": 313.77,
-      "montant": 628.01,
-      "raison": "Entrée watchlist — score 95/100 · Finance",
-      "montant_brut_eur": 627.54,
-      "frais_achat_eur": 0.4707
+      "montant": 627.54,
+      "raison": "Entrée watchlist — score 95/100 · Finance"
     },
     {
       "date": "2026-04-30",
@@ -962,10 +895,8 @@
       "nom": "ADYEN",
       "qte": 1,
       "prix": 958.5,
-      "montant": 959.22,
-      "raison": "Entrée watchlist — score 93/100 · Technologie",
-      "montant_brut_eur": 958.5,
-      "frais_achat_eur": 0.7189
+      "montant": 958.5,
+      "raison": "Entrée watchlist — score 93/100 · Technologie"
     },
     {
       "date": "2026-04-30",
@@ -974,10 +905,8 @@
       "nom": "Visa Inc.",
       "qte": 2,
       "prix": 330.69,
-      "montant": 661.88,
-      "raison": "Entrée watchlist — score 93/100 · Finance",
-      "montant_brut_eur": 661.38,
-      "frais_achat_eur": 0.496
+      "montant": 661.38,
+      "raison": "Entrée watchlist — score 93/100 · Finance"
     },
     {
       "date": "2026-04-30",
@@ -986,10 +915,8 @@
       "nom": "BlackRock, Inc.",
       "qte": 1,
       "prix": 1060.9,
-      "montant": 1061.7,
-      "raison": "Entrée watchlist — score 93/100 · Finance",
-      "montant_brut_eur": 1060.9,
-      "frais_achat_eur": 0.7957
+      "montant": 1060.9,
+      "raison": "Entrée watchlist — score 93/100 · Finance"
     },
     {
       "date": "2026-04-30",
@@ -998,10 +925,8 @@
       "nom": "Eaton Corporation, PLC",
       "qte": 1,
       "prix": 430.55,
-      "montant": 430.87,
-      "raison": "Entrée watchlist — score 93/100 · Industrie",
-      "montant_brut_eur": 430.55,
-      "frais_achat_eur": 0.3229
+      "montant": 430.55,
+      "raison": "Entrée watchlist — score 93/100 · Industrie"
     },
     {
       "date": "2026-04-30",
@@ -1010,10 +935,8 @@
       "nom": "Analog Devices, Inc.",
       "qte": 1,
       "prix": 401.01,
-      "montant": 401.31,
-      "raison": "Entrée watchlist — score 93/100 · Technologie",
-      "montant_brut_eur": 401.01,
-      "frais_achat_eur": 0.3008
+      "montant": 401.01,
+      "raison": "Entrée watchlist — score 93/100 · Technologie"
     },
     {
       "date": "2026-04-30",
@@ -1022,10 +945,8 @@
       "nom": "Siemens Energy AG",
       "qte": 3,
       "prix": 180.58,
-      "montant": 542.15,
-      "raison": "Entrée watchlist — score 91/100 · Industrie",
-      "montant_brut_eur": 541.74,
-      "frais_achat_eur": 0.4063
+      "montant": 541.74,
+      "raison": "Entrée watchlist — score 91/100 · Industrie"
     },
     {
       "date": "2026-04-30",
@@ -1034,10 +955,8 @@
       "nom": "Amazon.com, Inc.",
       "qte": 2,
       "prix": 259.27,
-      "montant": 518.93,
-      "raison": "Entrée watchlist — score 90/100 · Conso. cycl.",
-      "montant_brut_eur": 518.54,
-      "frais_achat_eur": 0.3889
+      "montant": 518.54,
+      "raison": "Entrée watchlist — score 90/100 · Conso. cycl."
     },
     {
       "date": "2026-02-15",
@@ -1046,14 +965,8 @@
       "nom": "SAP",
       "qte": 10,
       "prix": 198.4,
-      "montant": 1982.51,
-      "raison": "Sortie de watchlist — guidance révisée à la baisse (signal fondamental), Règle 01 exception justifiée",
-      "montant_brut_eur": 1984.0,
-      "frais_vente_eur": 1.488,
-      "plus_value_eur": -1.49,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 1.49,
-      "pnl_eur": -1.49
+      "montant": 1984.0,
+      "raison": "Sortie de watchlist — guidance révisée à la baisse (signal fondamental), Règle 01 exception justifiée"
     },
     {
       "date": "2026-01-02",
@@ -1062,10 +975,8 @@
       "nom": "LVMH",
       "qte": 2,
       "prix": 600.0,
-      "montant": 1200.9,
-      "raison": "Entrée watchlist — score 60/100 · Luxe diversifié",
-      "montant_brut_eur": 1200.0,
-      "frais_achat_eur": 0.9
+      "montant": 1200.0,
+      "raison": "Entrée watchlist — score 60/100 · Luxe diversifié"
     },
     {
       "date": "2026-01-02",
@@ -1074,10 +985,8 @@
       "nom": "Airbus",
       "qte": 10,
       "prix": 155.0,
-      "montant": 1551.16,
-      "raison": "Entrée watchlist — score 75/100 · Aéronautique",
-      "montant_brut_eur": 1550.0,
-      "frais_achat_eur": 1.1625
+      "montant": 1550.0,
+      "raison": "Entrée watchlist — score 75/100 · Aéronautique"
     },
     {
       "date": "2026-01-02",
@@ -1086,10 +995,8 @@
       "nom": "ASML Holding",
       "qte": 3,
       "prix": 650.0,
-      "montant": 1951.46,
-      "raison": "Entrée watchlist — score 88/100 · Équip. semi.",
-      "montant_brut_eur": 1950.0,
-      "frais_achat_eur": 1.4625
+      "montant": 1950.0,
+      "raison": "Entrée watchlist — score 88/100 · Équip. semi."
     },
     {
       "date": "2026-01-02",
@@ -1098,10 +1005,8 @@
       "nom": "Microsoft",
       "qte": 5,
       "prix": 400.0,
-      "montant": 2001.5,
-      "raison": "Entrée watchlist — score 83/100 · Cloud & IA",
-      "montant_brut_eur": 2000.0,
-      "frais_achat_eur": 1.5
+      "montant": 2000.0,
+      "raison": "Entrée watchlist — score 83/100 · Cloud & IA"
     },
     {
       "date": "2026-01-02",
@@ -1110,10 +1015,8 @@
       "nom": "NVIDIA",
       "qte": 20,
       "prix": 115.0,
-      "montant": 2301.72,
-      "raison": "Entrée watchlist — score 94/100 · Semi-conducteurs",
-      "montant_brut_eur": 2300.0,
-      "frais_achat_eur": 1.725
+      "montant": 2300.0,
+      "raison": "Entrée watchlist — score 94/100 · Semi-conducteurs"
     }
   ],
   "biais_detectes": [
@@ -1303,9 +1206,5 @@
       "benchmark_msci": 9.9
     }
   ],
-  "max_drawdown": -0.72,
-  "total_frais_payes": 26.91,
-  "total_impots_payes": 58.9,
-  "total_pertes_reportables": 3816.36,
-  "performance_brute": 17.24
+  "max_drawdown": -0.72
 }

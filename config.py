@@ -1,0 +1,220 @@
+"""
+config.py — Paramètres centralisés de Signal.
+
+Single source of truth pour les constantes utilisées par portfolio_agent.py,
+screener.py, backtest.py, et update_prices.py. Modifier ici se propage partout.
+
+Sections :
+  - COÛTS DE TRANSACTION (Phase 1)
+  - FISCALITÉ FRANÇAISE (Phase 1)
+  - VIX DAMPENER (Phase 2 — futurs paramètres, déjà déclarés)
+  - RÉGIMES DE BACKTEST (Phase 3 — futurs paramètres)
+  - UNIVERS DU SCREENER (Phase 4 — futurs paramètres)
+
+Toute modification doit être documentée par un commentaire indiquant la source
+ou le rationale du choix (ex : "Euronext + Saxo retail : 5bps broker + 10bps slippage estimé").
+"""
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PHASE 1 — COÛTS DE TRANSACTION
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Frais de transaction one-way en basis points (bps = 1/100 de %).
+# Appliqués à l'achat ET à la vente séparément (donc round-trip = 2 × TRANSACTION_COST_BPS).
+# Ordre de grandeur retail réaliste sur courtiers européens :
+#   - Broker fee Saxo/Bourse Direct/DEGIRO : 2-5 bps sur les actions liquides
+#   - Slippage marché (bid-ask + impact) sur ordres market : 3-8 bps en moyenne
+#   - Total one-way conservateur : 7-8 bps
+#   - Total round-trip conservateur : 15 bps (= 0.15%)
+# Référence académique : Frazzini, Israel, Moskowitz (2018) — "Trading Costs", AQR
+# Note : NE PAS confondre bps avec % — 15 bps = 0.15%, PAS 15%.
+TRANSACTION_COST_BPS = 7.5  # one-way ; round-trip = 15 bps
+
+# Seuil minimal en EUR en-dessous duquel un achat est rejeté (budget trop faible
+# pour absorber les coûts fixes). Cohérent avec le seuil 50€ déjà présent dans
+# executer_decisions(), mais on le centralise ici.
+MIN_TRADE_EUR = 50.0
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PHASE 1 — FISCALITÉ FRANÇAISE (PFU sur compte-titres ordinaire)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Prélèvement Forfaitaire Unique (flat tax) sur les plus-values mobilières.
+# Décomposition légale (2026) :
+#   - 12.8% impôt sur le revenu
+#   - 17.2% prélèvements sociaux (CSG + CRDS + autres)
+#   - TOTAL : 30%
+# Source : article 200 A du Code général des impôts.
+# S'applique uniquement à la PLUS-VALUE RÉALISÉE (à la vente), pas aux plus-values latentes.
+PFU_RATE = 0.30
+
+# Variante PEA après 5 ans de détention : 17.2% (prélèvements sociaux uniquement).
+# Non utilisé actuellement (Signal détient des US stocks → compte-titres obligatoire),
+# mais déclaré pour permettre un éventuel toggle PEA dans le futur.
+PEA_TAX_RATE_AFTER_5Y = 0.172
+
+# Régime fiscal actif (un seul à la fois pour le moment).
+# Valeurs possibles : "PFU" (compte-titres, défaut) | "PEA_5Y" (PEA après 5 ans)
+TAX_REGIME = "PFU"
+
+
+def cost_one_way_eur(montant_eur: float) -> float:
+    """Frais one-way sur un montant en EUR (achat OU vente, pas les deux).
+
+    Exemple : trade de 1 000€ → 1 000 × 15/2 / 10000 = 0.75€ one-way,
+              soit 1.50€ round-trip.
+    """
+    return round(montant_eur * TRANSACTION_COST_BPS / 10000.0, 4)
+
+
+def tax_on_gain_eur(plus_value_eur: float) -> float:
+    """Calcule l'impôt PFU sur une plus-value en EUR.
+
+    - Si plus_value_eur <= 0 (perte ou breakeven) : impôt = 0
+    - Sinon : impôt = plus_value_eur × PFU_RATE
+
+    Note : on ne modélise pas le report de pertes des années antérieures
+    (les pertes peuvent compenser des gains sur 10 ans en France).
+    À la place, on enregistre les pertes dans `total_pertes_reportables`
+    pour une future implémentation.
+    """
+    if plus_value_eur <= 0:
+        return 0.0
+    rate = PFU_RATE if TAX_REGIME == "PFU" else PEA_TAX_RATE_AFTER_5Y
+    return round(plus_value_eur * rate, 2)
+
+
+def apply_buy_cost(montant_brut_eur: float) -> tuple[float, float]:
+    """Applique les frais à un achat.
+
+    Args:
+        montant_brut_eur: montant brut (prix × quantité en EUR)
+
+    Returns:
+        (cash_debite_des_liquidites, frais_eur)
+        - cash_debite : ce qui sort des liquidités = brut + frais
+        - frais_eur   : montant des frais (pour journalisation)
+
+    Note : la base fiscale (= montant_investi) inclut les frais d'achat
+    pour réduire la plus-value à la revente. C'est la règle française.
+    """
+    frais = cost_one_way_eur(montant_brut_eur)
+    return round(montant_brut_eur + frais, 2), frais
+
+
+def apply_sell_cost_and_tax(
+    montant_brut_vente_eur: float,
+    montant_investi_eur: float,
+) -> dict:
+    """Applique frais + PFU sur une vente.
+
+    Args:
+        montant_brut_vente_eur: prix × quantité au moment de la vente (en EUR)
+        montant_investi_eur: base fiscale (achat + frais achat, en EUR)
+
+    Returns:
+        dict avec :
+          - frais_vente_eur : frais de vente
+          - brut_net_frais_eur : brut moins frais de vente
+          - plus_value_eur : brut_net_frais - montant_investi (peut être négatif)
+          - impot_pfu_eur : PFU sur plus-value (0 si perte)
+          - cash_recupere_eur : ce qui revient en liquidités (brut - frais - impôt)
+          - perte_reportable_eur : abs(plus-value) si négative, sinon 0
+    """
+    frais_vente = cost_one_way_eur(montant_brut_vente_eur)
+    brut_net_frais = round(montant_brut_vente_eur - frais_vente, 2)
+    plus_value = round(brut_net_frais - montant_investi_eur, 2)
+    impot = tax_on_gain_eur(plus_value)
+    cash_recupere = round(brut_net_frais - impot, 2)
+    perte_reportable = round(abs(plus_value), 2) if plus_value < 0 else 0.0
+    return {
+        "frais_vente_eur": frais_vente,
+        "brut_net_frais_eur": brut_net_frais,
+        "plus_value_eur": plus_value,
+        "impot_pfu_eur": impot,
+        "cash_recupere_eur": cash_recupere,
+        "perte_reportable_eur": perte_reportable,
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PHASE 2 — VIX (indicateur contextuel, dampener DÉSACTIVÉ)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Décision après backtest Phase 3 (2019-2024) :
+# Le dampener a été testé et dégrade légèrement le Sharpe sur cette période
+# (costs_only 0.92 → costs_vix 0.87). L'échantillon 2019-2024 est trop bull-
+# dominated (un seul vrai stress event COVID en V-shape) pour faire émerger
+# le bénéfice théorique du dampener. À retester avec un backtest 2007-2024
+# incluant GFC.
+#
+# Décision actuelle : le VIX continue d'être FETCHÉ et AFFICHÉ pour transparence
+# (dashboard + prompt Claude) mais n'INFLUENCE PLUS le scoring (multiplier = 1.0).
+# Claude peut le citer comme contexte macro dans son analyse éditoriale, sans
+# qu'il y ait une mécanique post-LLM qui dampene les scores.
+#
+# Pour réactiver : flipper VIX_DAMPENER_ENABLED = True (les paramètres restent
+# déclarés et calibrés ci-dessous).
+
+VIX_DAMPENER_INTERCEPT = 1.5
+VIX_DAMPENER_SLOPE     = 0.025
+VIX_DAMPENER_MIN       = 0.20
+VIX_DAMPENER_ENABLED   = False  # désactivé Phase 3 — VIX reste info contextuelle
+
+
+def vix_multiplier(vix: float | None) -> float:
+    """Retourne le multiplier à appliquer aux points momentum du screener.
+
+    Si VIX_DAMPENER_ENABLED=False ou si vix est None/invalide → 1.0 (no-op).
+    """
+    if not VIX_DAMPENER_ENABLED:
+        return 1.0
+    if vix is None or vix <= 0:
+        return 1.0
+    raw = VIX_DAMPENER_INTERCEPT - VIX_DAMPENER_SLOPE * float(vix)
+    return max(VIX_DAMPENER_MIN, min(1.0, raw))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PHASE 3 — RÉGIMES DE BACKTEST (déclarés ici pour cohérence)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Frontières de régime pour le backtest split. Critères objectifs publics.
+# À déclarer EX-ANTE pour éviter le data-snooping sur les bornes.
+REGIME_DEFINITIONS = [
+    {"label": "bull_2019",        "from": "2019-01-01", "to": "2020-02-18", "desc": "Bull market pré-COVID"},
+    {"label": "covid_crash",      "from": "2020-02-19", "to": "2020-04-30", "desc": "Choc COVID -34% S&P puis V-shape"},
+    {"label": "bull_post_covid",  "from": "2020-05-01", "to": "2021-12-31", "desc": "Bull post-COVID +50% S&P"},
+    {"label": "bear_2022",        "from": "2022-01-01", "to": "2022-10-13", "desc": "Bear 2022 taux + tech -25%"},
+    {"label": "recovery_2023_24", "from": "2022-10-14", "to": "2024-12-31", "desc": "Récupération + IA rally"},
+]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PHASE 4 — UNIVERS DU SCREENER (à activer après Phase 3 validée)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Sources d'index pour construire l'univers dynamiquement.
+# Chacun est une liste Wikipedia parsable via pandas.read_html.
+UNIVERSE_INDEX_SOURCES = [
+    {"name": "sp500",      "url": "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"},
+    {"name": "nasdaq100",  "url": "https://en.wikipedia.org/wiki/Nasdaq-100"},
+    {"name": "stoxx600",   "url": "https://en.wikipedia.org/wiki/STOXX_Europe_600"},
+    {"name": "cac40",      "url": "https://en.wikipedia.org/wiki/CAC_40"},
+    {"name": "dax40",      "url": "https://en.wikipedia.org/wiki/DAX"},
+]
+
+# Pré-filtres avant scoring complet (Stage 1)
+UNIVERSE_MIN_MARKET_CAP_USD  = 500_000_000   # 500M$ — exclut microcaps illiquides
+UNIVERSE_MIN_ADV_USD         = 5_000_000     # 5M$ ADV 20j — exclut illiquide
+UNIVERSE_MIN_LISTING_YEARS   = 3             # exclut IPO récentes (MM200 + z-score fiables)
+
+# Cache fondamentaux (les fondamentaux ne bougent que trimestriellement)
+FUNDAMENTALS_CACHE_TTL_DAYS  = 90
+
+# Watchlist finale (taille de la sortie du screener)
+WATCHLIST_SIZE = 25
+
+# Contraintes de diversification sur la watchlist
+WATCHLIST_MAX_PER_SECTOR     = 5
+WATCHLIST_MAX_PER_COUNTRY    = 12

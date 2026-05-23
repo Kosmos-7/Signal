@@ -22,6 +22,9 @@ from collections import Counter
 from datetime import date, datetime, timedelta
 from anthropic import Anthropic
 
+# Paramètres centralisés (frais transaction, PFU, VIX, …) — Phase 1+
+import config
+
 # ── CONFIG ───────────────────────────────────────────────────────────────────
 ANTHROPIC_API_KEY    = os.getenv("ANTHROPIC_API_KEY", "")
 FINNHUB_KEY          = os.getenv("FINNHUB_API_KEY", "")
@@ -195,8 +198,13 @@ def market_status(now_utc=None):
     }
 
 
-def get_contexte_marche():
-    """Récupère le contexte macro de la semaine + statut temporel et marchés."""
+def get_contexte_marche(last_known_vix=None):
+    """Récupère le contexte macro de la semaine + statut temporel et marchés.
+
+    `last_known_vix` : valeur de cache du VIX (en cas de fetch échoué). Si None,
+    fallback ultime à 18 (médiane historique du VIX). Passé depuis portfolio.json
+    pour permettre une persistance entre runs.
+    """
     ctx = {}
     annee = date.today().year
     debut = f"{annee}-01-01"
@@ -210,6 +218,31 @@ def get_contexte_marche():
                 ctx[label] = {"perf_ytd": perf_ytd, "perf_semaine": perf_1sem}
         except:
             ctx[label] = {"perf_ytd": 0, "perf_semaine": 0}
+
+    # ── VIX (Phase 2) — utilisé par le screener pour dampener le momentum en régime stress
+    # Stratégie de fallback en 3 niveaux :
+    #   1. Fetch yfinance ^VIX (close du jour)
+    #   2. last_known_vix (= dernier VIX en cache dans portfolio.json)
+    #   3. 18.0 (médiane historique VIX 2000-2024)
+    vix_value  = None
+    vix_source = "fallback"
+    try:
+        vix_hist = yf.Ticker("^VIX").history(period="5d")["Close"]
+        if not vix_hist.empty:
+            vix_value  = round(float(vix_hist.iloc[-1]), 2)
+            vix_source = "live"
+    except Exception as e:
+        print(f"   ⚠️  ^VIX fetch failed ({e}) — fallback cache ou médiane historique")
+    if vix_value is None:
+        if last_known_vix is not None and last_known_vix > 0:
+            vix_value  = last_known_vix
+            vix_source = "cache"
+        else:
+            vix_value  = 18.0
+            vix_source = "median_historique"
+    ctx["vix"]        = vix_value
+    ctx["vix_source"] = vix_source
+    ctx["vix_multiplier"] = round(config.vix_multiplier(vix_value), 3)
 
     # Mode panique
     cac_sem = ctx.get("cac40", {}).get("perf_semaine", 0)
@@ -581,9 +614,14 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
     positions = portfolio.get("positions", [])
     liquidites = portfolio.get("liquidites", CAPITAL_INITIAL)
     capital = portfolio.get("capital_actuel", CAPITAL_INITIAL)
-    perf = portfolio.get("performance", 0)
+    perf = portfolio.get("performance", 0)            # nette de frais + impôts
+    perf_brute = portfolio.get("performance_brute", perf)  # ce qu'on aurait sans friction
     bench = portfolio.get("benchmark_msci", 0)  # MSCI World est le benchmark primaire (vs_benchmark = perf - bench_msci)
     vs = portfolio.get("vs_benchmark", 0)
+    # Compteurs cumulatifs frais + fiscalité (Phase 1)
+    frais_cum  = portfolio.get("total_frais_payes", 0)
+    impots_cum = portfolio.get("total_impots_payes", 0)
+    pertes_cum = portfolio.get("total_pertes_reportables", 0)
 
     today = str(date.today())
 
@@ -778,6 +816,8 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 7. **Signal en transition** : si un titre watchlist a un `signal_dynamics_warning` non-vide (death cross qui se résorbe, golden cross qui s'affaiblit, rebond mean-reversion sur cross stale, affaiblissement post-rally), traiter le cross technique comme **ambigu** — ne pas vendre/acheter sur ce signal seul. Croiser avec fonda et delta_these.
 8. **Cross-validation analystes / cours** : pour les titres en zone d'incertitude (score 30-65), si le consensus analystes est très favorable mais le cours en dégradation 6-12m, suspecter une dégradation des données screener (effet change, périmètre M&A, désync data) — ne pas conclure trop vite sur la base du score seul. Re-lire la justification.
 9. **Heures de marché** : tes décisions sont enregistrées au moment du run, mais l'exécution réelle attend l'ouverture du marché du titre. Si tu décides un ACHAT NVDA (US) à 8h UTC un lundi, l'ordre attendra 14h30 UTC (+6h30) pour s'exécuter — le prix peut bouger entre temps. Tiens-en compte : ne pas paniquer sur des données pré-ouverture, et si tous les marchés concernés sont fermés (weekend, jour férié), privilégier l'attente de la prochaine ouverture sauf urgence (stop-loss catastrophe).
+10. **Friction fiscale (PFU 30%)** : Signal est sur compte-titres ordinaire français. Chaque VENTE en plus-value paye 30% de PFU sur le gain. Conséquence : une vente "neutre" pour réinvestir ailleurs PERD 30% du gain réalisé. Avant de proposer une vente sur position en gain, vérifie que l'alternative a un alpha attendu net suffisant pour couvrir cette friction (règle empirique : ne pas vendre un +20% pour acheter un titre dont l'edge espéré est < 10%). Les positions en perte ne sont PAS pénalisées fiscalement et la perte devient même un crédit d'impôt utilisable 10 ans. Les plus-values LATENTES (positions non vendues) ne sont JAMAIS imposées — le buy & hold long terme est structurellement avantagé.
+11. **VIX = indicateur contextuel non scoré** : le VIX est désormais affiché dans la section CONTEXTE DE MARCHÉ comme indicateur d'ambiance macro, MAIS il n'influence plus mécaniquement le scoring du screener (le backtest 2019-2024 a montré que le dampener dégradait le Sharpe net sur cette période bull-dominated). Tu es libre de t'en servir comme contexte qualitatif dans `analyse_macro` ("VIX à 22 cette semaine, vigilance modérée — j'ai privilégié les positions qualité"), mais ne traite pas le VIX comme une règle d'enforcement. Les scores du screener sont ce qu'ils sont, indépendamment du VIX.
 
 ## DATE & MOMENT DU RUN
 - Run actuel       : {contexte.get('jour_semaine','?')} {today} {contexte.get('heure_utc','?')} UTC ({contexte.get('semaine','?')})
@@ -786,16 +826,29 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 
 ## ÉTAT ACTUEL DU PORTEFEUILLE
 - Capital initial (création) : {CAPITAL_INITIAL:.0f}€
-- Capital actuel             : {capital:.0f}€
-- **Performance portefeuille (depuis création) = {perf:+.2f}%**  (= {capital - CAPITAL_INITIAL:+.0f}€ vs {CAPITAL_INITIAL:.0f}€ initial)
+- Capital actuel (net)       : {capital:.0f}€
+- **Performance NETTE (depuis création) = {perf:+.2f}%**  (= {capital - CAPITAL_INITIAL:+.0f}€ vs {CAPITAL_INITIAL:.0f}€ initial — après frais et impôts réalisés)
+- Performance brute (sans coûts) : {perf_brute:+.2f}%  (différence = {perf_brute - perf:+.2f}pp = friction réelle)
 - Benchmark MSCI World (YTD 2026) = {bench:+.2f}%
 - **Alpha portefeuille vs MSCI = {vs:+.2f} points de pourcentage** (= perf portefeuille − MSCI YTD)
 - Liquidités disponibles      : {liquidites:.0f}€
 
+## FRICTION RÉELLE (frais transaction + fiscalité française)
+- Frais transaction cumulés depuis création : {frais_cum:.2f}€ ({config.TRANSACTION_COST_BPS} bps one-way × turnover)
+- Impôts PFU cumulés versés au fisc        : {impots_cum:.2f}€ (30% sur plus-values réalisées sur compte-titres)
+- Pertes reportables fiscalement (10 ans)  : {pertes_cum:.2f}€ → crédit d'impôt théorique = {pertes_cum * 0.30:.0f}€ utilisable sur futurs gains
+- Signal est un COMPTE-TITRES ORDINAIRE français : 30% PFU sur chaque plus-value réalisée à la VENTE.
+  Les plus-values LATENTES (positions non vendues) ne sont PAS imposées.
+  → Conséquence directe : buy & hold long terme est structurellement favorisé. Une vente "neutre"
+    (sortir d'une position correcte pour réinvestir ailleurs) perd 30% sur le gain → la position
+    de remplacement doit avoir un alpha attendu suffisant pour compenser cette friction fiscale.
+
 🔢 IMPORTANT — chiffres à recopier EXACTEMENT :
-  · Performance portefeuille : "{perf:+.2f}%" (NE PAS dire +0.0%, NE PAS dire YTD pour le portefeuille — c'est la perf cumulée depuis la création)
-  · Alpha vs MSCI           : "{vs:+.2f}pp"
-  · Capital actuel          : "{capital:.0f}€"
+  · Performance portefeuille NETTE : "{perf:+.2f}%" (NE PAS dire +0.0%, NE PAS dire YTD pour le portefeuille — c'est la perf cumulée depuis la création, après coûts et impôts)
+  · Performance brute (référence)  : "{perf_brute:+.2f}%"
+  · Alpha vs MSCI                  : "{vs:+.2f}pp"
+  · Capital actuel                 : "{capital:.0f}€"
+  · Frais + impôts payés à ce jour : "{frais_cum + impots_cum:.0f}€"
 Si tu cites ces chiffres dans `analyse_macro` ou `message_utilisateurs`, recopie-les depuis cette section, ne les recalcule pas toi-même.
 
 Positions ouvertes ({len(positions)}) :
@@ -804,6 +857,7 @@ Positions ouvertes ({len(positions)}) :
 ## CONTEXTE DE MARCHÉ CETTE SEMAINE
 - CAC40 : {contexte.get('cac40', {}).get('perf_semaine', 0):+.1f}% sur la semaine, {contexte.get('cac40', {}).get('perf_ytd', 0):+.1f}% YTD
 - MSCI World : {contexte.get('msci', {}).get('perf_semaine', 0):+.1f}% sur la semaine, {contexte.get('msci', {}).get('perf_ytd', 0):+.1f}% YTD
+- VIX : {contexte.get('vix','?')} — {"régime calme (<20)" if contexte.get('vix', 18) < 20 else "vigilance (20-25)" if contexte.get('vix', 18) < 25 else "stress modéré (25-35)" if contexte.get('vix', 18) < 35 else "panique (>35)"}. Indicateur contextuel uniquement, n'influence PAS les scores du screener (dampener mécanique désactivé après backtest 2019-2024). Tu peux le citer dans ton analyse si pertinent (ex: justifier une prudence accrue en VIX>25), mais sans le traiter comme une règle d'enforcement.
 - Mode panique : {"OUI — Règle 03 active, aucun ordre possible" if contexte.get('mode_panique') else "NON — ordres possibles"}
 {regles_section}
 {ordres_section}{macro_news_section}{synthese_str}## WATCHLIST CETTE SEMAINE (top 10 sur 25)
@@ -988,31 +1042,45 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
             prix_vente = get_prix(ticker) or pos.get("prix_actuel", pos["prix_achat"])
             currency   = pos.get("currency") or detect_currency(ticker, pos.get("market", ""))
             perf       = round((prix_vente - pos["prix_achat"]) / pos["prix_achat"] * 100, 2)
-            montant_eur = to_eur(prix_vente * pos["quantite"], currency, eur_usd, eur_gbp)
-            liquidites  = round(liquidites + montant_eur, 2)
-            positions   = [p for p in positions if p["ticker"] != ticker]
+            brut_vente_eur    = to_eur(prix_vente * pos["quantite"], currency, eur_usd, eur_gbp)
+            montant_achat_eur = pos.get("montant_investi", 0)  # base fiscale (achat + frais achat)
 
-            montant_achat_eur = pos.get("montant_investi", 0)
-            pnl_eur = round(montant_eur - montant_achat_eur, 2) if montant_achat_eur else round(montant_eur * perf / (100 + perf), 2)
+            # Application frais vente + PFU sur la plus-value en EUR
+            r = config.apply_sell_cost_and_tax(brut_vente_eur, montant_achat_eur)
+            cash_recupere      = r["cash_recupere_eur"]
+            frais_vente_eur    = r["frais_vente_eur"]
+            plus_value_eur     = r["plus_value_eur"]
+            impot_pfu_eur      = r["impot_pfu_eur"]
+            perte_reportable   = r["perte_reportable_eur"]
+
+            liquidites = round(liquidites + cash_recupere, 2)
+            positions  = [p for p in positions if p["ticker"] != ticker]
+
             ordre = {
-                "date":     today,
-                "type":     "VENTE",
-                "ticker":   ticker,
-                "nom":      nom,
-                "qte":      pos["quantite"],
-                "prix":     prix_vente,
-                "currency": currency,
-                "montant":  montant_eur,
-                "perf":     perf,
-                "pnl_eur":  pnl_eur,
-                "jours":    jours,
-                "raison":   raison,
-                "conviction": dec.get("conviction", "modérée"),
-                "source":   "Claude AI",
+                "date":              today,
+                "type":              "VENTE",
+                "ticker":            ticker,
+                "nom":                nom,
+                "qte":                pos["quantite"],
+                "prix":               prix_vente,
+                "currency":           currency,
+                "montant":            cash_recupere,       # cash effectivement reçu (compatibilité dashboard)
+                "montant_brut_eur":   brut_vente_eur,      # brut sans frais ni impôt
+                "frais_vente_eur":    frais_vente_eur,
+                "plus_value_eur":     plus_value_eur,      # ce sur quoi le PFU est calculé
+                "impot_pfu_eur":      impot_pfu_eur,
+                "perte_reportable_eur": perte_reportable,
+                "perf":               perf,                # en % devise native (inchangé)
+                "pnl_eur":            plus_value_eur,      # alias pour rétrocompat dashboard (plus-value nette de frais)
+                "jours":              jours,
+                "raison":             raison,
+                "conviction":         dec.get("conviction", "modérée"),
+                "source":             "Claude AI",
             }
             nouveaux_ordres.append(ordre)
             sym = "€" if currency == "EUR" else "$" if currency == "USD" else "£"
-            print(f"  🔴 VENTE {ticker} — {pos['quantite']} titres à {prix_vente}{sym} = {montant_eur:.0f}€ ({perf:+.1f}%) — {dec.get('conviction','?')} conviction")
+            tax_str = f", PFU {impot_pfu_eur:.0f}€" if impot_pfu_eur > 0 else ""
+            print(f"  🔴 VENTE {ticker} — {pos['quantite']} titres à {prix_vente}{sym} = {brut_vente_eur:.0f}€ brut, plus-value {plus_value_eur:+.0f}€{tax_str}, cash récupéré {cash_recupere:.0f}€")
 
         # ── ACHAT
         elif action == "ACHAT":
@@ -1100,10 +1168,17 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
             currency = detect_currency(ticker, stock.get("market", ""))
             prix_eur = to_eur(prix, currency, eur_usd, eur_gbp)
 
-            # Budget en EUR → quantité basée sur prix converti
-            quantite     = max(1, int(budget / prix_eur))
-            montant_eur  = round(prix_eur * quantite, 2)
-            liquidites   = round(liquidites - montant_eur, 2)
+            # Budget en EUR → quantité (en réservant marge pour les frais d'achat)
+            # On dimensionne pour que (brut + frais) ≤ budget plutôt que brut ≤ budget,
+            # sinon les frais font légèrement dépasser le budget alloué.
+            budget_apres_frais_anticipes = budget / (1 + config.TRANSACTION_COST_BPS / 10000.0)
+            quantite     = max(1, int(budget_apres_frais_anticipes / prix_eur))
+            brut_eur     = round(prix_eur * quantite, 2)
+
+            # Application des frais d'achat (one-way) — inclus dans la base fiscale
+            # à la revente conformément à la règle française.
+            montant_eur, frais_achat = config.apply_buy_cost(brut_eur)
+            liquidites = round(liquidites - montant_eur, 2)
 
             nouvelle_pos = {
                 "ticker":          ticker,
@@ -1115,8 +1190,9 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 "prix_achat":      prix,       # devise native (affichage)
                 "prix_actuel":     prix,
                 "quantite":        quantite,
-                "montant_investi": montant_eur,  # en EUR
-                "valeur_actuelle": montant_eur,  # en EUR
+                "montant_investi": montant_eur,  # en EUR, INCLUT les frais d'achat (= base fiscale)
+                "frais_achat_eur": frais_achat,  # journalisation séparée
+                "valeur_actuelle": brut_eur,     # valeur de marché (sans les frais payés)
                 "performance":     0.0,
                 "score_entree":    stock.get("score", dec.get("score_watchlist", 0)),
                 "raison_achat":    raison,      # thèse d'achat originale — réinjectée si vente envisagée
@@ -1132,7 +1208,9 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 "qte":       quantite,
                 "prix":      prix,
                 "currency":  currency,
-                "montant":   montant_eur,  # en EUR
+                "montant":   montant_eur,       # en EUR (= cash débité = brut + frais)
+                "montant_brut_eur": brut_eur,   # brut sans les frais (pour transparence)
+                "frais_achat_eur": frais_achat, # journalisation
                 "raison":    raison,
                 "conviction": conviction,
                 "source":    "Claude AI",
@@ -1140,7 +1218,7 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 "breakdown": stock.get("breakdown", {}),
             }
             nouveaux_ordres.append(ordre)
-            print(f"  🟢 ACHAT {ticker} — {quantite} titres à {prix}{sym} = {montant_eur:.0f}€ (conviction {conviction})")
+            print(f"  🟢 ACHAT {ticker} — {quantite} titres à {prix}{sym} = {brut_eur:.0f}€ + {frais_achat:.2f}€ frais (conviction {conviction})")
 
     if decisions_bloquees:
         print(f"  ℹ️  {len(decisions_bloquees)} décision(s) Claude bloquée(s) par les règles mécaniques (cf. portfolio.json → decisions_bloquees)")
@@ -1168,12 +1246,13 @@ def main():
     print(f"🧠 Appel à Claude API — architecture deux passes — {semaine()}")
 
     # ── Contexte de marché + taux de change + macro news
-    contexte    = get_contexte_marche()
+    contexte    = get_contexte_marche(last_known_vix=portfolio.get("last_known_vix"))
     eur_usd     = get_eur_usd_rate()
     eur_gbp     = get_eur_gbp_rate()
     macro_news  = get_macro_news()
     print(f"   CAC40 semaine : {contexte.get('cac40', {}).get('perf_semaine', 0):+.1f}%")
     print(f"   Mode panique  : {contexte.get('mode_panique')}")
+    print(f"   VIX           : {contexte.get('vix')} ({contexte.get('vix_source')}) → multiplier momentum × {contexte.get('vix_multiplier')}")
     print(f"   EUR/USD       : {eur_usd} · EUR/GBP : {eur_gbp}")
     print(f"   Macro news    : {len(macro_news)} article(s) macro sélectionné(s)")
 
@@ -1265,6 +1344,27 @@ Ne jamais inclure de balises markdown ou de backticks.""",
 
     tous_ordres = nouveaux_ordres + portfolio.get("ordres", [])
 
+    # ── Compteurs cumulatifs frais + impôts (Phase 1) ───────────────────────
+    # Récupérés depuis le portefeuille précédent (rétro-compat : 0 si absent)
+    # puis incrémentés des nouveaux ordres de ce run.
+    total_frais_payes      = portfolio.get("total_frais_payes", 0.0)
+    total_impots_payes     = portfolio.get("total_impots_payes", 0.0)
+    total_pertes_reportables = portfolio.get("total_pertes_reportables", 0.0)
+    for o in nouveaux_ordres:
+        total_frais_payes      += o.get("frais_achat_eur", 0) + o.get("frais_vente_eur", 0)
+        total_impots_payes     += o.get("impot_pfu_eur", 0)
+        total_pertes_reportables += o.get("perte_reportable_eur", 0)
+    total_frais_payes      = round(total_frais_payes, 2)
+    total_impots_payes     = round(total_impots_payes, 2)
+    total_pertes_reportables = round(total_pertes_reportables, 2)
+
+    # Performance nette des frais + impôts : reflète ce qu'on aurait après liquidation
+    # (les impôts sont déjà déduits des liquidités, les frais aussi → capital_actuel
+    # intègre déjà les coûts. Cette variable existe pour la pédagogie : montrer
+    # explicitement la différence entre brut et net.)
+    capital_net_estime = capital_actuel  # cohérent : capital_actuel est déjà net
+    performance_brute  = round((capital_actuel + total_frais_payes + total_impots_payes - CAPITAL_INITIAL) / CAPITAL_INITIAL * 100, 2)
+
     # ── Historique de performance (upsert : toujours la valeur finale du jour) ──
     history = portfolio.get("performance_history", [])
     today_entry = {
@@ -1293,8 +1393,15 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         "updated_at":          today,
         "week":                semaine(),
         "capital_initial":     CAPITAL_INITIAL,
-        "capital_actuel":      capital_actuel,
-        "performance":         performance,
+        "capital_actuel":      capital_actuel,           # net de frais + impôts (cash + valeurs)
+        "performance":         performance,              # nette de frais + impôts (= performance "réelle")
+        "performance_brute":   performance_brute,        # ce qu'on aurait sans frais ni impôts (pédagogique)
+        "total_frais_payes":   total_frais_payes,        # cumulé depuis création
+        "total_impots_payes":  total_impots_payes,       # cumulé depuis création (PFU)
+        "total_pertes_reportables": total_pertes_reportables,  # pertes utilisables fiscalement sur 10 ans
+        # Phase 2 — Cache VIX pour fallback si fetch échoue au run suivant
+        "last_known_vix":      contexte.get("vix"),
+        "last_known_vix_source": contexte.get("vix_source"),
         "benchmark_cac40":     bench_cac,
         "benchmark_msci":      bench_msci,
         "vs_benchmark":        vs_bench,
@@ -1332,7 +1439,9 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         json.dump(output, f, ensure_ascii=False, indent=2)
 
     print(f"\n✅ portfolio.json généré par Claude")
-    print(f"   Capital : {capital_actuel:.0f}€ ({performance:+.1f}%) vs CAC40 {bench_cac:+.1f}%")
+    print(f"   Capital   : {capital_actuel:.0f}€  (net : {performance:+.1f}% · brut : {performance_brute:+.1f}%)")
+    print(f"   vs MSCI   : {vs_bench:+.1f}pp")
+    print(f"   Frais cumulés : {total_frais_payes:.0f}€  ·  Impôts cumulés : {total_impots_payes:.0f}€  ·  Pertes reportables : {total_pertes_reportables:.0f}€")
     print(f"   Ordres : {len(nouveaux_ordres)} ({sum(1 for o in nouveaux_ordres if o['type']=='ACHAT')} achats, {sum(1 for o in nouveaux_ordres if o['type']=='VENTE')} ventes)")
     if decisions_bloquees:
         print(f"   Bloquées : {len(decisions_bloquees)} décision(s) Claude rejetée(s) par les règles :")

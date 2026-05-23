@@ -47,6 +47,9 @@ import requests
 from datetime import date, timedelta, datetime as _dt
 from ta.momentum import RSIIndicator
 
+# Paramètres centralisés (VIX dampener, etc.) — Phase 2
+import config
+
 # ── FINNHUB (validation croisée) ─────────────────────────────────────────────
 FINNHUB_KEY = os.getenv("FINNHUB_API_KEY", "")
 
@@ -500,7 +503,15 @@ _TECH_SECTORS  = {"Technology", "Communication Services",
                   "Consumer Cyclical"}  # Amazon, Alphabet, Meta classés ici par yfinance
 
 # ── SCORING ──────────────────────────────────────────────────────────────────
-def score_ticker(ticker):
+def score_ticker(ticker, vix=None):
+    """Score 0-100 d'un ticker.
+
+    Args:
+        ticker: symbole yfinance (ex: 'NVDA', 'ASML.AS')
+        vix: niveau VIX actuel pour dampener le momentum en régime stress.
+             None → multiplier 1.0 (no-op). Utile pour les appels standalone
+             (ex: tests, scoring ad-hoc) qui ne passent pas par get_contexte_marche().
+    """
     try:
         data = yf.Ticker(ticker)
         # Fetch max pour avoir suffisamment d'historique pour la régression long terme
@@ -583,7 +594,15 @@ def score_ticker(ticker):
         elif -30 <= drawdown_52w_pct < -20:                   val_pts = 1   # momentum cassé
         else:                                                 val_pts = 0   # chute libre
 
-        momentum_total = cross_pts + rsi_pts + vol_pts + reg_pts + val_pts
+        # ── Momentum total avec VIX dampener (Phase 2) ─────────────────────
+        # Le multiplier réduit la valeur attribuée au momentum quand le marché
+        # est en stress (VIX élevé). Le bucket fondamentaux (50 pts) et analystes
+        # (5 pts) ne sont PAS dampenés — donc en régime panique, le score max
+        # atteignable baisse (intentionnellement : aucune action ne peut sembler
+        # "parfaite" en plein VIX 40+).
+        momentum_raw  = cross_pts + rsi_pts + vol_pts + reg_pts + val_pts
+        vix_mult      = config.vix_multiplier(vix)
+        momentum_total = round(momentum_raw * vix_mult)
 
         # ── Retracement Fibonacci (annotation informationnelle, hors scoring)
         # Fournit le contexte chartiste classique : -10% sur un rally de +20% est très
@@ -732,6 +751,9 @@ def score_ticker(ticker):
 
         breakdown = {
             "momentum":              min(45, momentum_total),
+            "momentum_raw":          momentum_raw,           # Phase 2 : avant VIX dampener
+            "vix_value":             vix,                    # VIX utilisé pour le multiplier
+            "vix_multiplier":        round(vix_mult, 3),     # multiplier appliqué
             "fondamentaux":          min(50, fund_pts),
             "analystes":             min(5, ana_pts),
             # Croisement MM21/MM200
@@ -887,12 +909,30 @@ def main():
     else:
         print(f"⚠ Finnhub non configuré — ajoutez FINNHUB_API_KEY dans les secrets GitHub")
 
+    # VIX dampener (Phase 2) — fetch unique en début de run pour pondérer le momentum
+    # de tous les tickers de manière homogène. Fallback à 18 si fetch échoue
+    # (médiane historique du VIX, neutre — multiplier ≈ 1.0).
+    vix_now = 18.0
+    vix_source = "fallback_18"
+    try:
+        vh = yf.Ticker("^VIX").history(period="5d")["Close"]
+        if not vh.empty:
+            vix_now = round(float(vh.iloc[-1]), 2)
+            vix_source = "live"
+    except Exception as e:
+        print(f"   ⚠️  ^VIX fetch failed ({e}) — fallback 18.0 (médiane historique)")
+    vix_mult = config.vix_multiplier(vix_now)
+    if config.VIX_DAMPENER_ENABLED:
+        print(f"   VIX : {vix_now} ({vix_source}) → multiplier momentum × {vix_mult:.3f}")
+    else:
+        print(f"   VIX : {vix_now} ({vix_source}) [dampener désactivé, multiplier 1.0]")
+
     previous  = load_previous()
     resultats = []
 
     for i, ticker in enumerate(UNIVERS):
         print(f"  [{i+1}/{len(UNIVERS)}] {ticker}…", end=" ")
-        r = score_ticker(ticker)
+        r = score_ticker(ticker, vix=vix_now)
         if r:
             resultats.append(r)
             bd      = r["breakdown"]

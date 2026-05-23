@@ -98,6 +98,21 @@ def main():
         except Exception as e:
             print(f"   ⚠️  Benchmark {label} : {e} — valeur précédente conservée")
 
+    # ── VIX quotidien (Phase 2 — info contextuelle uniquement, n'influence pas le scoring)
+    # Affiché sur le dashboard sous forme de pill colorée. Refresh quotidien pour que la
+    # valeur affichée reflète la réalité du marché du jour (sinon stale jusqu'à 6j entre
+    # 2 runs hebdo).
+    vix_value      = portfolio.get("last_known_vix")
+    vix_source     = portfolio.get("last_known_vix_source", "cache")
+    try:
+        vix_hist = yf.Ticker("^VIX").history(period="5d")["Close"]
+        if not vix_hist.empty:
+            vix_value  = round(float(vix_hist.iloc[-1]), 2)
+            vix_source = "live"
+            print(f"   VIX (live) : {vix_value}")
+    except Exception as e:
+        print(f"   ⚠️  ^VIX : {e} — valeur précédente conservée ({vix_value})")
+
     vs_benchmark = round(performance - bench_msci, 2)
 
     # ── Trie les positions par performance EUR (cohérent avec portfolio_agent)
@@ -137,6 +152,11 @@ def main():
     portfolio["nb_negatives"]    = len([p for p in positions if p.get("performance", 0) < 0])
     portfolio["nb_neutres"]      = len([p for p in positions if p.get("performance", 0) == 0.0])
     portfolio["performance_history"] = history
+    # VIX (quotidien) — info contextuelle, n'influence pas le scoring (cf config.VIX_DAMPENER_ENABLED)
+    if vix_value is not None:
+        portfolio["last_known_vix"]            = vix_value
+        portfolio["last_known_vix_source"]     = vix_source
+        portfolio["last_known_vix_updated_at"] = today
     portfolio["max_drawdown"]    = max_dd
     # Note : on ne touche PAS à : week, ordres, biais_detectes, regles_actives,
     # analyse_claude, macro_news, nb_positions (= len(positions), inchangé)
@@ -149,6 +169,8 @@ def main():
     print(f"  Capital   : {capital_actuel:.0f}€ ({performance:+.2f}% YTD)")
     print(f"  vs MSCI   : {vs_benchmark:+.2f}pp (MSCI {bench_msci:+.2f}%)")
     print(f"  Max DD    : {max_dd:+.2f}%")
+    if vix_value is not None:
+        print(f"  VIX       : {vix_value} ({vix_source})")
 
 
 if __name__ == "__main__":

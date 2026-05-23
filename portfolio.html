@@ -107,6 +107,23 @@
 
   .survival-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.1rem; flex-wrap: wrap; gap: 0.5rem; }
   .survival-title { font-family: Georgia, serif; font-size: 1rem; font-weight: normal; }
+  .vix-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 100px; border: 1px solid var(--border);
+    background: var(--surface2); font-family: 'Courier New', monospace; font-size: 0.74rem;
+    color: var(--text3); transition: all 0.15s;
+  }
+  .vix-pill .vix-label { color: var(--text3); opacity: 0.75; text-transform: uppercase; letter-spacing: 0.4px; font-size: 0.68rem; }
+  .vix-pill .vix-val   { color: var(--text); font-weight: 600; font-size: 0.82rem; }
+  .vix-pill .vix-regime { font-size: 0.7rem; letter-spacing: 0.3px; }
+  .vix-pill.calme      { border-color: rgba(28,200,122,0.25); }
+  .vix-pill.calme .vix-regime      { color: var(--green); }
+  .vix-pill.vigilance  { border-color: rgba(232,168,32,0.25); }
+  .vix-pill.vigilance .vix-regime  { color: var(--gold); }
+  .vix-pill.stress     { border-color: rgba(248,122,32,0.30); }
+  .vix-pill.stress .vix-regime     { color: var(--orange); }
+  .vix-pill.panique    { border-color: rgba(240,84,84,0.35); background: var(--red-dim); }
+  .vix-pill.panique .vix-regime    { color: var(--red); font-weight: 700; }
   .status-pill { display: flex; align-items: center; gap: 6px; font-family: 'Courier New', monospace; font-size: 0.80rem; text-transform: uppercase; letter-spacing: 1px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; font-weight: 600; }
   .sdot { width: 7px; height: 7px; border-radius: 50%; }
   .survival-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.25rem; }
@@ -129,7 +146,7 @@
   .rule p { font-size: 0.83rem; color: var(--text2); line-height: 1.55; }
 
   /* ── KPI GRID ── */
-  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 1.75rem; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 1.75rem; }
   .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; position: relative; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
   .kpi:hover { border-color: rgba(232,168,32,0.25); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(232,168,32,0.09), 0 0 24px rgba(232,168,32,0.06), 0 8px 28px rgba(0,0,0,0.5); }
   .kpi-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
@@ -453,6 +470,11 @@
   .footer-right { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); text-align: right; }
 
   /* ── RESPONSIVE ── */
+  /* Tablette : 6 KPI sur 3 colonnes (= 2 rangées) — évite de comprimer trop sur écrans moyens */
+  @media (max-width: 1100px) and (min-width: 701px) {
+    .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  /* Mobile : 2 colonnes + masquage colonnes Qté/Px achat dans les positions */
   @media (max-width: 700px) {
     main { padding: 2rem 1rem 5rem; }
     header { padding: 0.85rem 1rem; gap: 0.5rem; }
@@ -460,7 +482,6 @@
     nav a { padding: 4px 8px; font-size: 0.78rem; }
     .brand-name { font-size: 1.2rem; }
     .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-    .kpi-grid .kpi:last-child { grid-column: span 2; }
     .threshold-row { grid-template-columns: 1fr; }
     .rules-grid { grid-template-columns: 1fr; }
     .fictif-badge { font-size: 0.74rem; letter-spacing: 0.2px; text-transform: none; }
@@ -1561,11 +1582,27 @@ async function loadPortfolio() {
     sb.className = `survival-block ${panic ? 'panic' : ahead ? 'alive' : 'dead'}`;
     const sc = panic ? 'var(--orange)' : ahead ? 'var(--green)' : 'var(--red)';
     const sl = panic ? 'Mode panique' : ahead ? 'En avance sur le marché' : 'En retard sur le marché';
+
+    // VIX pill — indicateur contextuel de volatilité (informationnel, n'influence pas le scoring)
+    const vix = d.last_known_vix;
+    let vixPillHtml = '';
+    if (vix != null && vix > 0) {
+      let vixRegime, vixClass;
+      if      (vix < 20) { vixRegime = 'calme';     vixClass = 'calme'; }
+      else if (vix < 25) { vixRegime = 'vigilance'; vixClass = 'vigilance'; }
+      else if (vix < 35) { vixRegime = 'stress';    vixClass = 'stress'; }
+      else               { vixRegime = 'panique';   vixClass = 'panique'; }
+      vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX — indice de volatilité implicite S&P 500 (CBOE). Affiché comme contexte macro, n'influence pas les scores du screener."><span class="vix-label">VIX</span><span class="vix-val">${vix.toFixed(1)}</span><span class="vix-regime">${vixRegime}</span></div>`;
+    }
+
     sb.innerHTML = `
       <div class="survival-header">
         <div class="survival-title">Performance vs MSCI World · ${d.week}</div>
-        <div class="status-pill" style="color:${sc}">
-          <div class="sdot" style="background:${sc}"></div>${sl}
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          ${vixPillHtml}
+          <div class="status-pill" style="color:${sc}">
+            <div class="sdot" style="background:${sc}"></div>${sl}
+          </div>
         </div>
       </div>
       <div class="survival-desc">
@@ -1594,7 +1631,7 @@ async function loadPortfolio() {
         </div>
       </div>`;
 
-    // KPI — 5 cartes "état du portefeuille" (perf/alpha déjà dans le survival block, pas de doublon)
+    // KPI — 6 cartes "état du portefeuille" (perf/alpha déjà dans le survival block, pas de doublon)
     const gain      = d.capital_actuel - d.capital_initial;
     const investi   = d.capital_actuel - d.liquidites;
     const pctInvesti = (100 - d.pct_liquidites).toFixed(1);
@@ -1602,18 +1639,26 @@ async function loadPortfolio() {
     const nSub = nbNeutres > 0
       ? `<span class="up">${d.nb_positives} en gain</span> · <span style="color:var(--text3)">${nbNeutres} neutre${nbNeutres>1?'s':''}</span> · <span class="dn">${d.nb_negatives} en perte</span>`
       : `<span class="up">${d.nb_positives} en gain</span> · <span class="dn">${d.nb_negatives} en perte</span>`;
+    // Friction fiscale + frais (Phase 1) — backward-compat avec ?? 0 si champs absents
+    const fraisCum  = d.total_frais_payes ?? 0;
+    const impotsCum = d.total_impots_payes ?? 0;
+    const frictionTotal = fraisCum + impotsCum;
+    const pertesReportables = d.total_pertes_reportables ?? 0;
+    const creditFiscalReportable = pertesReportables * 0.30;  // 30% PFU sur futures plus-values
+    const perfBrute = d.performance_brute ?? d.performance;
+    const ecartBrutNet = perfBrute - d.performance;
     document.getElementById('kpi-grid').innerHTML = `
       <div class="kpi">
         <div class="kpi-accent" style="background:${gain>=0?'var(--green)':'var(--red)'}"></div>
-        <div class="kpi-label">Valeur totale <span class="kpi-info" data-tip="Ce que vaut le portefeuille en ce moment : actions + liquidités, converti en euros">ⓘ</span></div>
+        <div class="kpi-label">Valeur totale <span class="kpi-info" data-tip="Ce que vaut le portefeuille en ce moment : actions + liquidités, converti en euros, NET des frais et impôts déjà payés">ⓘ</span></div>
         <div class="kpi-value">${fmtEur(d.capital_actuel)}</div>
         <div class="kpi-sub">départ · ${fmtEur(d.capital_initial)}</div>
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:${gain>=0?'var(--green)':'var(--red)'}"></div>
-        <div class="kpi-label">Gain net <span class="kpi-info" data-tip="L'argent réellement gagné ou perdu en euros — plus concret qu'un pourcentage">ⓘ</span></div>
+        <div class="kpi-label">Gain net <span class="kpi-info" data-tip="Argent gagné ou perdu en euros, après déduction des frais de transaction et de l'impôt PFU 30% sur les plus-values réalisées. C'est la performance réelle après friction.">ⓘ</span></div>
         <div class="kpi-value ${gain>=0?'up':'dn'}">${sign(gain)}${fmtEur(Math.abs(gain))}</div>
-        <div class="kpi-sub ${gain>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} % depuis le départ</div>
+        <div class="kpi-sub ${gain>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} % net${ecartBrutNet > 0.01 ? ` · brut ${sign(perfBrute)}${fmt(perfBrute,1)}%` : ''}</div>
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:var(--text3)"></div>
@@ -1626,6 +1671,12 @@ async function loadPortfolio() {
         <div class="kpi-label">Liquidités <span class="kpi-info" data-tip="Argent non investi, disponible immédiatement pour de nouveaux achats">ⓘ</span></div>
         <div class="kpi-value liq">${fmtEur(d.liquidites)}</div>
         <div class="kpi-sub">${fmt(d.pct_liquidites,1)} % du portefeuille</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent" style="background:var(--text3)"></div>
+        <div class="kpi-label">Friction réelle <span class="kpi-info" data-tip="Total des frais de transaction (15 bps round-trip) + impôt PFU 30% déjà versés au fisc sur les plus-values réalisées. Le crédit fiscal reportable représente l'impôt évitable sur futurs gains grâce aux pertes encaissées (utilisable 10 ans).">ⓘ</span></div>
+        <div class="kpi-value" style="color:var(--orange)">−${fmtEur(frictionTotal)}</div>
+        <div class="kpi-sub">${fmtEur(fraisCum)} frais · ${fmtEur(impotsCum)} PFU${creditFiscalReportable > 1 ? `<br><span style="color:var(--green);opacity:0.85">+${fmtEur(creditFiscalReportable)} crédit reportable</span>` : ''}</div>
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:var(--text3)"></div>
