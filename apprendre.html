@@ -1015,7 +1015,7 @@
       </div>
     </div>
 
-    <div class="portfo-block">
+    <div class="portfo-block" style="margin-bottom:12px">
       <div class="portfo-header">
         <div class="portfo-accent" style="background:var(--orange)"></div>
         <div class="portfo-htitle">Le journal des ordres</div>
@@ -1024,6 +1024,24 @@
         Chaque achat et vente est documenté avec sa raison complète : thèse, signaux, logique. Pour toute vente avant 90 jours, l'IA doit citer la thèse d'achat originale et expliquer ce qui a <em>concrètement</em> changé depuis.
         <br><br>
         Si rien n'a changé — si les mêmes données donnent juste une impression différente — la vente est refusée. Conçu pour éliminer le biais de rationalisation post-hoc.
+      </div>
+    </div>
+
+    <div class="portfo-block">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--red)"></div>
+        <div class="portfo-htitle">Garde-fous mécaniques (double sécurité)</div>
+      </div>
+      <div class="portfo-body">
+        Au-delà des règles non négociables (90 jours, 20 %, panique, stop-loss), Signal applique une couche d'enforcement <em>mécanique</em> qui intercepte les décisions de l'IA avant qu'elles n'atteignent le portefeuille :
+        <ul style="margin-top:0.6rem">
+          <li><strong>Guard weekend</strong> — aucun ordre ACHAT/VENTE n'est appliqué le samedi ou le dimanche. Physiquement aucun broker ne peut exécuter un ordre hors heures de marché, donc Signal reporte mécaniquement toute décision au prochain jour ouvré. Y compris les stop-loss : un crash vendredi soir ne déclenche pas de vente automatique le samedi.</li>
+          <li><strong>R01 concentration graduée</strong> — voir section 05 ci-dessus. Le sizing est réduit automatiquement quand un cluster sectoriel dépasse 30 %, blocage strict à 65 %.</li>
+          <li><strong>R03 liquidités minimales</strong> — sous 5 % de cash, tout achat est bloqué pour préserver une marge de manœuvre face aux imprévus.</li>
+        </ul>
+        <strong>decisions_bloquees</strong> : quand l'IA propose une décision que ces garde-fous rejettent, elle est enregistrée publiquement (avec sa raison originale et le motif du blocage) dans la section "Transparence du modèle" sur la page portefeuille. C'est ce qui évite la dissonance "l'IA dit qu'elle a acheté X" alors que le journal ne montre aucun ordre — toutes les décisions rejetées sont visibles.
+        <br><br>
+        <strong>Double sécurité</strong> : la même règle existe dans le prompt envoyé à l'IA (qui devrait éviter de proposer une décision invalide) ET dans le code post-LLM (qui bloque mécaniquement si l'IA oublie). En pratique, l'IA respecte presque toujours les règles documentées dans son prompt — le guard mécanique reste comme filet de sécurité.
       </div>
     </div>
   </section>
@@ -1108,9 +1126,100 @@
     </div>
   </section>
 
-  <!-- SECTION 6 — Si tu veux investir toi-même -->
+  <!-- SECTION 6 — Comment Signal se mesure (backtest, régimes, Deflated Sharpe) -->
   <section class="section-block">
-    <div class="section-label">06 · Principes</div>
+    <div class="section-label">06 · Méthodologie de mesure</div>
+    <h2 class="section-title">Comment Signal se mesure honnêtement</h2>
+    <p class="section-sub">Toute stratégie active doit pouvoir démontrer qu'elle apporte de la valeur par rapport à un benchmark passif — surtout après les frais et la fiscalité. Voici les outils qui font cette démonstration de manière rigoureuse, code source ouvert sur GitHub.</p>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--blue)"></div>
+        <div class="portfo-htitle">Backtest 2019-2024 sur 53 actions US</div>
+      </div>
+      <div class="portfo-body">
+        Le script <code>backtest.py</code> rejoue mécaniquement la stratégie Signal (scoring 100 pts + règles d'enforcement) sur 6 ans d'historique 2019-2024, avec rebalancement hebdomadaire et anti look-ahead bias (à chaque date, seules les données antérieures sont utilisées pour scorer).
+        <br><br>
+        Univers : 53 tickers du S&amp;P 100 US, benchmark SPY (S&amp;P 500 ETF). Limitation honnête : 60 % du score Signal (Fondamentaux + Analystes) n'est pas testé sur cette période car yfinance n'expose pas les fondamentaux historiques point-in-time — le backtest mesure principalement la composante technique (momentum, MM21/MM200, RSI, régression long terme, valorisation 52w).
+        <br><br>
+        Trois variants sont disponibles via <code>backtest_compare.py</code> :
+        <ul style="margin-top:0.6rem">
+          <li><strong>baseline</strong> : sans coûts, sans PFU — référence académique brute</li>
+          <li><strong>costs_only</strong> : ajoute frais 15 bps + PFU 30 % — mesure la friction réelle</li>
+          <li><strong>costs_vix</strong> : ajoute VIX dampener (testé puis désactivé) — mesure si la défensivité régime aide</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--gold)"></div>
+        <div class="portfo-htitle">Décomposition par régime de marché</div>
+      </div>
+      <div class="portfo-body">
+        L'alpha global d'une stratégie peut masquer une réalité hétérogène : performer en bull mais s'effondrer en bear. Pour vérifier la robustesse de l'edge, le backtest décompose les résultats en <strong>5 régimes ex-ante</strong> (définis avant de tester, pour éviter le data-snooping) :
+        <ul style="margin-top:0.6rem">
+          <li><strong>bull_2019</strong> (2019-01 → 2020-02) — bull market pré-COVID</li>
+          <li><strong>covid_crash</strong> (2020-02-19 → 2020-04-30) — choc COVID -34 % S&amp;P puis V-shape</li>
+          <li><strong>bull_post_covid</strong> (2020-05 → 2021-12) — bull post-COVID +50 % S&amp;P</li>
+          <li><strong>bear_2022</strong> (2022-01 → 2022-10-13) — bear taux + tech -25 %</li>
+          <li><strong>recovery_2023_24</strong> (2022-10-14 → 2024-12) — récupération + rally IA</li>
+        </ul>
+        Une stratégie qui apporte de la valeur doit montrer un alpha positif (ou drawdown réduit) en bear/stress, pas seulement en bull. C'est ce critère qui distingue un vrai edge d'une exposition cachée au momentum factor en régime favorable.
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--green)"></div>
+        <div class="portfo-htitle">Deflated Sharpe Ratio — anti data-mining</div>
+      </div>
+      <div class="portfo-body">
+        Le Sharpe ratio brut surestime systématiquement la performance d'une stratégie quand on a testé plusieurs configurations (multiple comparison problem). Le <strong>Deflated Sharpe Ratio</strong> (Bailey &amp; Lopez de Prado 2014) corrige cette surestimation : <code>DSR ≈ SR / √(1 + 0.5 × N_trials / N_weeks)</code>, où N_trials est le nombre de variations testées implicitement.
+        <br><br>
+        Signal teste 5 signaux momentum + différentes pondérations + différents seuils RSI/régression — soit ~10 trials implicites. Sur 281 semaines de backtest, le déflateur est modéré mais réel. Le critère santé : <strong>Deflated Sharpe &gt; 0.3</strong> pour considérer que l'edge est statistiquement défendable (pas du data mining).
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--orange)"></div>
+        <div class="portfo-htitle">Comparaison équitable post-PFU</div>
+      </div>
+      <div class="portfo-body">
+        Subtilité méthodologique critique : un benchmark passif comme SPY <em>buy &amp; hold</em> ne paie aucun impôt pendant les 6 ans du backtest (toutes les plus-values sont latentes). Une stratégie active comme Signal paie 30 % de PFU sur chaque vente en gain. <strong>Comparer brut à brut est donc asymétrique en faveur du passif.</strong>
+        <br><br>
+        La méthode correcte : appliquer le PFU 30 % aussi à SPY au moment d'une vente fictive à la fin du backtest. Ça donne un benchmark équitable. Le code <code>backtest_compare.py</code> calcule automatiquement les deux versions :
+        <ul style="margin-top:0.6rem">
+          <li><strong>Alpha "naïf"</strong> : Signal post-PFU vs SPY <em>brut</em> — biaisé contre Signal</li>
+          <li><strong>Alpha équitable</strong> : Signal post-PFU vs SPY post-PFU à la sortie — comparaison apples-to-apples</li>
+        </ul>
+        Sur le backtest 2019-2024 avec coûts + PFU + VIX dampener : alpha CAGR équitable +1.71pp/an (vs -2.39pp en méthode naïve). C'est le chiffre qui mesure honnêtement l'edge de Signal sous friction réelle.
+      </div>
+    </div>
+
+    <div class="portfo-block">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--text2)"></div>
+        <div class="portfo-htitle">Code source ouvert</div>
+      </div>
+      <div class="portfo-body">
+        Toute cette méthodologie est implémentée dans le repo public <a href="https://github.com/Kosmos-7/Signal" target="_blank" style="color:var(--gold);text-decoration:none">github.com/Kosmos-7/Signal</a>. Les fichiers critiques :
+        <ul style="margin-top:0.6rem">
+          <li><code>backtest.py</code> — simulation rebalancement hebdomadaire avec frais + PFU + 5 régimes + Deflated Sharpe</li>
+          <li><code>backtest_compare.py</code> — wrapper qui lance les 3 variants + table comparative + verdict go/no-go automatique sur 5 critères</li>
+          <li><code>config.py</code> — paramètres centralisés (frais, PFU, régimes, univers)</li>
+          <li><code>screener.py</code> — scoring 100 pts (45 momentum + 50 fonda + 5 analystes)</li>
+          <li><code>portfolio_agent.py</code> — agent Claude qui décide chaque semaine</li>
+        </ul>
+        Chaque commit a un message explicite et la performance affichée sur le site est traçable jusqu'à la ligne de code qui la calcule. Cette transparence est l'engagement éditorial central de Signal.
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 — Si tu veux investir toi-même -->
+  <section class="section-block">
+    <div class="section-label">07 · Principes</div>
     <h2 class="section-title">Si tu veux investir toi-même</h2>
     <p class="section-sub">Signal n'est pas un conseiller financier. Mais si ces pages t'ont donné envie d'aller plus loin, voici quelques principes solides — ceux sur lesquels presque tous les investisseurs sérieux s'accordent.</p>
 
