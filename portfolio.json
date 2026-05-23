@@ -1320,5 +1320,6 @@
       "benchmark_msci": 10.36
     }
   ],
-  "max_drawdown": -0.72
+  "max_drawdown": -0.72,
+  "last_known_vix_updated_at": "2026-05-23"
 }
