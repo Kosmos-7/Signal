@@ -625,6 +625,8 @@
 
     <div class="scoring-note">
       Les 25 valeurs avec le score le plus élevé apparaissent sur la watchlist chaque lundi. Un titre peut <span class="badge-in">↑ Entrer</span> ou <span class="badge-out">↓ Sortir</span> selon l'évolution hebdomadaire de son score — momentum qui s'améliore ou se dégrade, publication de résultats, simple recalibrage des signaux.
+      <br><br>
+      <strong>VIX — indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est fetché chaque jour ouvré et affiché sur le dashboard sous forme de pill colorée (calme / vigilance / stress / panique). Une version expérimentale qui dampener le momentum en régime de stress a été testée puis désactivée après un backtest 2019-2024 (le dampener dégradait légèrement le Sharpe sur cette période trop bull). Le VIX reste donc <em>informationnel</em> aujourd'hui : Claude peut le citer dans son analyse éditoriale, mais aucun mécanisme automatique ne modifie le scoring en fonction de sa valeur. À retester avec un backtest incluant 2007-2009.
     </div>
   </section>
 
@@ -1026,9 +1028,89 @@
     </div>
   </section>
 
-  <!-- SECTION 5 — Si tu veux investir toi-même -->
+  <!-- SECTION 5 — Friction réelle (frais + fiscalité) -->
   <section class="section-block">
-    <div class="section-label">05 · Principes</div>
+    <div class="section-label">05 · Friction réelle</div>
+    <h2 class="section-title">Frais, impôts, et ce qu'il reste vraiment</h2>
+    <p class="section-sub">La plupart des simulations de portefeuille affichent leur performance brute, sans frais ni fiscalité. C'est trompeur — un investisseur retail français a deux types de friction structurelle qui réduisent significativement le rendement réel. Signal les modélise explicitement depuis le 23 mai 2026.</p>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--orange)"></div>
+        <div class="portfo-htitle">Frais de transaction — 15 bps round-trip</div>
+      </div>
+      <div class="portfo-body">
+        Chaque achat ET chaque vente est facturé par le courtier + subit du slippage sur le carnet d'ordres. Signal applique <strong>7.5 bps one-way</strong>, soit <strong>15 bps round-trip</strong> (0.15% du montant pour un aller-retour complet). C'est l'ordre de grandeur réaliste retail sur courtiers européens : 2-5 bps de frais broker (Saxo, Bourse Direct, DEGIRO sur actions liquides) + 3-8 bps de slippage sur ordres market.
+        <br><br>
+        Concrètement, un achat de 1 000 € coûte 0.75 € de frais one-way ; un round-trip coûte 1.50 €. Sur 35 transactions cumulées depuis le démarrage, le portefeuille a payé environ 28 € de frais — pas énorme, mais non négligeable sur le long terme.
+        <br><br>
+        Référence : Frazzini, Israel, Moskowitz (2018) <em>"Trading Costs"</em>, AQR Working Paper — montre que les coûts de transaction érodent 2-4pp/an d'alpha gross pour un investisseur retail moyennement actif.
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--red)"></div>
+        <div class="portfo-htitle">PFU 30 % — la flat tax française</div>
+      </div>
+      <div class="portfo-body">
+        Sur un compte-titres ordinaire français, chaque plus-value <em>réalisée</em> (à la vente) est taxée à <strong>30 %</strong> : 12.8 % d'impôt sur le revenu + 17.2 % de prélèvements sociaux. C'est le Prélèvement Forfaitaire Unique, dit "flat tax", instauré en 2018 et codifié à l'article 200 A du CGI.
+        <br><br>
+        <strong>Point capital</strong> : seules les plus-values <strong>réalisées</strong> (= positions effectivement vendues) sont taxées. Les plus-values <strong>latentes</strong> (= positions ouvertes qui montent) ne déclenchent aucun impôt tant qu'on ne vend pas. C'est cette asymétrie qui rend le <em>buy &amp; hold</em> long terme structurellement avantageux : NVDA détenue depuis 5 mois avec +95 % de plus-value latente ne paye aucun impôt — l'impôt n'arrive qu'au moment de la cession.
+        <br><br>
+        <strong>Conséquence pour l'IA</strong> : couper une position en gain pour rotater vers une autre opportunité PERD 30% du gain réalisé. Une vente "neutre" (sortir d'un +20% pour acheter ailleurs) n'est rationnelle que si l'alternative a un alpha attendu suffisant pour couvrir cette friction — règle empirique : ne pas vendre un +20% pour un titre dont l'edge espéré est < 10%.
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--green)"></div>
+        <div class="portfo-htitle">Pertes reportables — un crédit fiscal sur 10 ans</div>
+      </div>
+      <div class="portfo-body">
+        L'autre face de la fiscalité française est avantageuse : une <strong>vente en perte</strong> ne paie aucun impôt (logique, pas de gain) ET la perte devient un <strong>crédit fiscal utilisable contre les futurs gains pendant 10 ans</strong> (article 150-0 D du CGI).
+        <br><br>
+        Exemple concret du portefeuille Signal : la position LSEG.L a été vendue en mai 2026 avec une perte de ~1 300 €. Cette perte n'a généré aucun impôt mais a créé un crédit fiscal théorique de 1 300 € × 30 % = 390 € — utilisable contre des plus-values futures pendant 10 ans.
+        <br><br>
+        À ce jour, le portefeuille a accumulé ~4 000 € de pertes reportables, soit ~1 200 € d'impôts évitables sur les futurs gains. C'est un actif fiscal réel qui contre-balance partiellement les PFU payés.
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--blue)"></div>
+        <div class="portfo-htitle">Latent vs cash post-liquidation</div>
+      </div>
+      <div class="portfo-body">
+        Le KPI "Plus-value latente" affiche la différence brute entre valeur actuelle et capital initial. C'est ce que ton broker affiche. Mais ce n'est <strong>PAS</strong> ce que tu aurais en cash si tu vendais tout.
+        <br><br>
+        Le tooltip ⓘ de la carte affiche en temps réel ce qu'on aurait <em>réellement</em> après cession totale : capital actuel <strong>moins</strong> les frais de vente sur chaque position <strong>moins</strong> le PFU 30 % sur chaque plus-value latente. C'est ce qu'on appelle <code>capital_post_liquidation</code> dans les données.
+        <br><br>
+        <strong>Exemple chiffré du portefeuille au 23 mai 2026</strong> : valeur totale 23 512 € (= +17.6 % brut), mais après liquidation virtuelle on aurait 22 115 € (= +10.6 % net). L'écart de 1 397 € représente l'impôt latent + frais de sortie. Le fisc gagne 1 382 € si on liquide. La pédagogie de cette distinction est essentielle : un portefeuille à +18 % brut peut "valoir" structurellement +11 % en cash réel.
+      </div>
+    </div>
+
+    <div class="portfo-block">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--gold)"></div>
+        <div class="portfo-htitle">Concentration sectorielle graduée (R01 soft penalty)</div>
+      </div>
+      <div class="portfo-body">
+        Pour éviter qu'un secteur ne phagocyte le portefeuille, une règle de concentration s'applique au sizing automatiquement. Initialement binaire (blocage strict dès qu'un cluster dépasse 30 % du capital), elle est devenue <strong>graduée</strong> depuis le 23 mai pour permettre des achats exceptionnels dans un secteur saturé :
+        <ul style="margin-top:0.6rem">
+          <li><strong>&lt; 30 %</strong> : aucune restriction, sizing normal.</li>
+          <li><strong>30-65 %</strong> : <em>soft cap</em> — sizing réduit linéairement (à 40 % de concentration → ×0.71 ; à 50 % → ×0.43 ; à 60 % → ×0.14).</li>
+          <li><strong>Bypass conviction forte</strong> : si l'IA marque <code>conviction="forte"</code>, le sizing factor a un plancher à 0.5 — permettant un achat exceptionnel dans un cluster sursaturé avec une position de taille raisonnable.</li>
+          <li><strong>&gt; 65 %</strong> : blocage strict, aucun achat possible.</li>
+        </ul>
+        Concrètement, le cluster Tech &amp; IA actuellement à 58.8 % du portefeuille est en régime <em>soft</em> avec sizing factor 0.18 — l'IA peut quand même proposer un achat tech à conviction forte (taille effective ~3.5 % du capital), mais devra le justifier solidement.
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — Si tu veux investir toi-même -->
+  <section class="section-block">
+    <div class="section-label">06 · Principes</div>
     <h2 class="section-title">Si tu veux investir toi-même</h2>
     <p class="section-sub">Signal n'est pas un conseiller financier. Mais si ces pages t'ont donné envie d'aller plus loin, voici quelques principes solides — ceux sur lesquels presque tous les investisseurs sérieux s'accordent.</p>
 
