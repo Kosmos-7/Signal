@@ -8,6 +8,11 @@
   "total_frais_payes": 27.53,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 4005.77,
+  "capital_post_liquidation": 22114.69,
+  "performance_post_liquidation": 10.57,
+  "frais_si_liquidation": 15.47,
+  "pfu_latent_si_liquidation": 1381.62,
+  "pertes_si_liquidation": 94.19,
   "last_known_vix": 16.7,
   "last_known_vix_source": "live",
   "benchmark_cac40": -0.97,
@@ -1128,15 +1133,18 @@
     }
   ],
   "biais_detectes": [
-    "Resulting bias inversé : tendance à conserver INTU sur la base d'un bon score fondamental malgré une dynamique de prix qui invalide la thèse mean-reversion",
-    "Anchoring sur le prix d'entrée : la référence à -18.6% comme 'pas encore -25%' peut retarder une décision rationnelle de coupe préventive"
+    "Biais d'action potentiel sur ETN : la perte de -9.1% crée une tentation de 'faire quelque chose' alors que rien de fondamental n'a changé — l'inaction est ici la décision correcte",
+    "Anchoring sur le score d'achat vs score actuel : JPM acheté à 95/100, maintenant 81/100 — attention à ne pas sur-pondérer cette dégradation de score sans chercher le signal fondamental sous-jacent"
   ],
   "regles_actives": [
     {
       "type": "concentration_sectorielle",
       "secteur": "Tech & IA",
-      "message": "Cluster Tech & IA : 62% du portfolio > 30% — aucun nouvel achat dans ce cluster",
-      "bloque": true
+      "pct": 58.8,
+      "regime": "soft",
+      "sizing_factor": 0.18,
+      "message": "Cluster Tech & IA : 59% > 30% — sizing réduit ×0.18 (achats possibles avec conviction forte ou taille réduite)",
+      "bloque": false
     }
   ],
   "decisions_bloquees": [],
@@ -1151,7 +1159,7 @@
       "date": "2026-05-22",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/05/22/treasury-yields-bonds-investing-fed-rate-hikes.html",
-      "resume_fr": "La hausse des rendements obligataires américains remet en question le statut 'sans risque' des bons du Trésor, orientant les investisseurs vers les obligations d'entreprises BBB et le haut rendement."
+      "resume_fr": "La hausse des rendements des Treasuries US rappelle que les obligations 'sans risque' ne le sont pas, et oriente les investisseurs vers des maturités intermédiaires et le haut rendement."
     },
     {
       "headline": "Bank of England has time to gauge impact of Iran war, Bailey says - Reuters",
@@ -1159,7 +1167,7 @@
       "date": "2026-05-20",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQYzg5WlF5YUFPek10UXJYSXdrMnY0dTVDUnJqYUZyWWdKN3J2THFFS0pNUjFobkVZV3BjSGpKRFExM3UzWmpPNW44dkQzeEdYSDJ3ZzdqNm14M2Jua01rR04yRTlFOHRBNHp0SU52TFA5cUpva3NKSzNUM3FWT3NDYTZNQVM4ano0SXd2RDJWTTZXRTZTQUZ1T0hKazNtSFZ0ZUtmVGNkU2cySTR3?oc=5",
-      "resume_fr": "Le gouverneur de la Banque d'Angleterre Bailey indique que l'institution a le temps d'évaluer l'impact économique du conflit en Iran avant d'agir."
+      "resume_fr": "La Banque d'Angleterre indique qu'elle dispose du temps nécessaire pour évaluer l'impact économique de la guerre en Iran avant d'agir sur les taux."
     },
     {
       "headline": "Economic activity holds steady in May, Flash PMIs show",
@@ -1167,7 +1175,7 @@
       "date": "2026-05-21",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-05-21/india-s-economic-activity-holds-steady-in-may-flash-pmis-show",
-      "resume_fr": "Les PMI flash de mai montrent une activité économique stable, tandis que l'Inde prend des mesures de resserrement (prix carburants, importations d'or) pour limiter les chocs."
+      "resume_fr": "Les PMI flash de mai confirment une activité économique stable, tandis que l'Inde prend des mesures préventives (hausse prix carburant, restrictions or) face aux chocs externes."
     },
     {
       "headline": "Iran seeking mechanism with Oman over Hormuz, foreign ministry spokesperson says - Reuters",
@@ -1175,7 +1183,7 @@
       "date": "2026-05-20",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPVWhtb2pob0F0bVI1Yk9yWFlRNnpWSFg2d0p5U1EyYlFnOXZneVNyWEh0MktpUU1udUVFajdMM214UG1LRnIwN1pvV2s5VzVaMkVpb2tNNmpHOEozYlNlaU9HbS1RQ2pUdjRjYmZYZHZ4S1lUQW80V2FaZ1hab0xKVXRzY3FsSkM0SWxuYmdQVl9ZYWppV0xuWDlPNmZfR210QWVPeVFza0IxcTM1Y0R2MUdmV1ZiVkFFTUpuVkFjRl9XbG9OWWppSHc1OGt5Zw?oc=5",
-      "resume_fr": "L'Iran cherche à établir un mécanisme avec Oman pour gérer la situation dans le détroit d'Ormuz, potentiellement sensible pour les marchés pétroliers."
+      "resume_fr": "L'Iran cherche à établir un mécanisme diplomatique via Oman pour sécuriser la navigation dans le détroit d'Hormuz, signalant une reconnaissance du risque géopolitique."
     },
     {
       "headline": "'Doomjobbing' can hurt your job search, experts say: Why it happens and how to avoid it",
@@ -1183,14 +1191,14 @@
       "date": "2026-05-19",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/05/19/doomjobbing-can-hurt-your-job-search-why-it-happens-and-how-to-avoid-it.html",
-      "resume_fr": "Le phénomène de 'doomjobbing' (recherche d'emploi anxiogène) est identifié par des experts comme contre-productif pour les chercheurs d'emploi en période de stress."
+      "resume_fr": ""
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Cette semaine du 19 au 23 mai, le signal macro dominant est venu des taux américains : le 10 ans Treasury a poussé à des niveaux qui commencent à remettre en question le qualificatif 'sans risque' de la dette souveraine américaine, selon CNBC. Les investisseurs obligataires cherchent désormais refuge dans les corporates BBB et le haut rendement — un glissement discret mais significatif de la prime de risque.\n\nPour le portefeuille Signal, la semaine a été calme : +2.0% pour le MSCI World sur la semaine, VIX à 16.7 (régime serein), et notre performance nette cumulée reste à +17.56% depuis la création, soit un alpha de +6.91pp sur le MSCI World. Les 23512€ de capital actuel témoignent d'une progression solide, mais c'est INTU qui concentre l'attention cette semaine avec -18.6% en 17 jours.\n\nSur le plan méthodologique, la décision de vente INTU illustre la discipline R6 (stop-loss -25% sans condition de durée) appliquée de manière préventive. La thèse mean-reversion sur z=-3.6σ ne s'est pas matérialisée : la décote s'est creusée, ce qui est le signal d'échec typique d'un Setup B qui tourne mal. Couper à -18.6% plutôt qu'attendre -25% est un choix de process, pas d'émotion. La perte s'ajoute aux 3816€ de pertes reportables fiscalement — un crédit d'impôt de ~1145€ théorique sur futurs gains.\n\nUn biais à noter cette semaine : la tentation de 'laisser courir' INTU sur la base d'un score 82/100 encore élevé. C'est exactement le resulting bias inversé — un bon score ne compense pas une dynamique de prix qui contredit la thèse. Le titre peut être fondamentalement solide ET en train de descendre plus longtemps que votre patience.\n\nPour la semaine à venir : surveiller si INTU rebondit post-vente (classique), et si AZN.L ou SPGI méritent d'entrer en watchlist active — tous deux au score 76/100 avec des profils techniques propres. La contrainte cluster Tech&IA à 62% reste le facteur limitant principal pour tout nouvel achat de qualité.",
+    "analyse_macro": "Cette semaine du 19 au 23 mai, les marchés ont respiré calmement — MSCI World +2.0% sur la semaine, CAC40 +1.6% — dans un contexte où le VIX à 16.7 confirme un régime de faible volatilité. L'événement de fond reste la remontée des rendements obligataires US : les Treasuries continuent de délivrer une surprise désagréable aux détenteurs long terme, rappelant que le 'risk-free' l'est beaucoup moins qu'annoncé quand les taux montent. CNBC et Bloomberg notent que les investisseurs se repositionnent vers les intermédiaires, les BBBs et le haut rendement — signal indirect que la duration longue est évitée.\n\nSur le plan géopolitique, deux éléments à noter : la Banque d'Angleterre se dit en position d'attente sur l'impact de la guerre Iran, et Téhéran cherche un mécanisme via Oman pour le détroit d'Hormuz. Ces deux nouvelles, combinées, suggèrent que le risque de fermeture du Hormuz est pris au sérieux diplomatiquement mais pas encore pricé dans les marchés energy. Pour Signal, l'exposition est indirecte via ENR.DE (Siemens Energy, -2.9% depuis l'achat).\n\nLe portefeuille Signal affiche une performance nette de +17.56% depuis la création, pour un capital de 23 512€ et un alpha de +7.20pp vs le MSCI World YTD. Une semaine sans décision majeure — et c'est souvent le signe qu'on fait bien les choses. L'inaction est une décision, et cette semaine elle était la bonne. Le seul événement notable est la vente d'INTU ce matin à -19.7% (documentée dans l'historique), exécutée avant que la position n'atteigne le stop-loss catastrophe à -25%.\n\nMéthodologiquement, deux signaux en transition méritent d'être expliqués : JPM affiche un Golden Cross en affaiblissement (pente MM21 négative — R7 active), ce qui m'empêche de traiter ce cross comme un signal positif net. J'ai donc conservé sans renforcer, malgré un score de 81/100. ETN de son côté est à -9.1% en 23 jours de détention — inconfortable, mais le score 93/100 reste intact et R1 bloque toute vente avant le 28 juillet sauf signal fondamental documenté. La discipline coûte parfois en inconfort, rarement en argent.\n\nLa semaine prochaine, je surveille deux choses : l'évolution du z-score d'AVGO (actuellement à +2.0σ, score redescendu à 88/100 vs 100 à l'achat — un z qui continue de monter vers +2.5-3σ serait un signal de trim à documenter) et la confirmation ou non du rebond de NOW/CRM, tous deux détenus depuis 17 jours avec des setups mean-reversion qui demandent de la patience. Le cluster Tech&IA reste saturé à 59% — toute envie d'acheter DDOG (Golden Cross Day-9, volume confirmé, pente +13.1%) sera frustrée par R01 sauf conviction exceptionnelle.",
     "conviction_globale": "haussier",
-    "message_utilisateurs": "Cette semaine, une seule décision active : la vente d'INTU à -18.6%. La position avait été ouverte il y a 17 jours sur une thèse mean-reversion (z=-3.6σ sous régression, RSI favorable) — la décote s'est creusée au lieu de se résorber, ce qui invalide le scénario. Plutôt que d'attendre le seuil stop-loss automatique à -25%, j'ai préféré couper proprement. La perte s'ajoute au stock de pertes fiscalement reportables (maintenant 3816€+), ce qui crée un crédit d'impôt utilisable sur 10 ans.\n\nLe reste du portefeuille (17 positions) est conservé sans changement. ETN surveille à -9.1% — pas encore en zone d'alerte, mais noté. Le cluster Tech&IA à 62% bloque tout nouvel achat dans ce secteur, ce qui est frustrant quand NVDA (93/100) et AVGO (100/100) sont en watchlist top 3 — mais c'est la discipline.\n\nPerformance nette cumulée : +17.56% depuis la création, alpha vs MSCI World : +6.91pp. Capital actuel : 23512€. Les liquidités post-vente INTU seront mises à jour au prochain run.",
-    "nb_decisions": 4
+    "message_utilisateurs": "Run de contrôle du samedi 23 mai (second run de la journée, marchés fermés). Peu de changements opérationnels cette semaine — la principale décision a été la vente d'INTU ce matin à -19.7% pour éviter le stop-loss catastrophe à -25%. Le portefeuille est à +17.56% net depuis la création avec un alpha de +7.20pp vs MSCI World. Deux positions en surveillance rapprochée : ETN à -9.1% (thèse intacte, R1 en vigueur jusqu'au 28 juillet) et JPM dont le Golden Cross montre des signes d'affaiblissement (R7 active). Le cluster Tech&IA à 59% continue de bloquer les nouvelles entrées sectorielles — DDOG avait un setup de Golden Cross Day-9 attractif cette semaine, mais la discipline sectorielle prime. Prochain run vendredi prochain.",
+    "nb_decisions": 2
   },
   "performance_history": [
     {
@@ -1321,11 +1329,5 @@
       "benchmark_msci": 10.36
     }
   ],
-  "max_drawdown": -0.72,
-  "last_known_vix_updated_at": "2026-05-23",
-  "capital_post_liquidation": 22114.69,
-  "performance_post_liquidation": 10.57,
-  "frais_si_liquidation": 15.47,
-  "pfu_latent_si_liquidation": 1381.62,
-  "pertes_si_liquidation": 94.19
+  "max_drawdown": -0.72
 }
