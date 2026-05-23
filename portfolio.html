@@ -1683,7 +1683,7 @@ async function loadPortfolio() {
         <div class="kpi-accent" style="background:${gainLatent>=0?'var(--green)':'var(--red)'}"></div>
         <div class="kpi-label">Plus-value latente <span class="kpi-info" data-tip="Différence brute entre valeur actuelle et capital initial. ATTENTION : ce n'est PAS du cash. Les plus-values sur positions ouvertes ne sont taxées qu'au moment de la vente (PFU 30%). Si on liquidait tout aujourd'hui, on aurait ${fmtEur(gainPostLiq)} net (= ${fmtEur(gainLatent)} − ${fmtEur(pfuLatent)} PFU latent − ${fmtEur(fraisLatent)} frais de vente). Le fisc gagne ${fmtEur(impotsCum + pfuLatent)} si on liquide.">ⓘ</span></div>
         <div class="kpi-value ${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))}</div>
-        <div class="kpi-sub ${gainLatent>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} % latent · si tout vendu : <span style="color:var(--gold)">${sign(gainPostLiq)}${fmtEur(Math.abs(gainPostLiq))}</span> net</div>
+        <div class="kpi-sub ${gainLatent>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} % latent</div>
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:var(--text3)"></div>
