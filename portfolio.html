@@ -703,6 +703,29 @@
 
     <!-- Learnings principaux toujours visibles (v1.7+) -->
 
+    <!-- v1.12 — Bug exécution weekend + UX gain net post-liquidation + R01 graduée -->
+    <div class="learning-item">
+      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-body">
+        <div class="learning-header">
+          <span class="learning-cat lcat-arch">Architecture</span>
+          <span class="learning-version">v1.12</span>
+          <span class="learning-date">23 mai 2026</span>
+        </div>
+        <div class="learning-title">Bug exécution weekend + Gain net trompeur (latent vs réalisé) + R01 trop binaire</div>
+        <div class="learning-prob">Trois défauts détectés lors d'un run manuel le samedi 23/05 :
+          (1) <code>executer_decisions()</code> ne contrôlait pas le jour de semaine — une vente INTU a été appliquée alors que tous les marchés étaient fermés (impossible en réalité, voir ordre marqué <span style="color:var(--red);background:var(--red-dim);padding:0 4px;border-radius:3px;font-size:0.85em">⚠ bug weekend</span> dans le journal).
+          (2) Le KPI "Gain net" affichait <code>capital_actuel − capital_initial</code> = +3 512€, mais ce chiffre mélangeait plus-values latentes (NVDA +95%, ASML +112% non taxées) et perf réalisée. En cas de liquidation totale, le PFU 30% sur les plus-values latentes prendrait ~1 400€, soit un gain net réel ~2 100€.
+          (3) R01 bloquait binairement tout achat dès qu'un cluster dépassait 30%. Avec Tech & IA à 59%, aucun achat tech possible même pour une opportunité exceptionnelle.
+        </div>
+        <div class="learning-fix">
+          (1) Guard <code>weekday >= 5</code> en tête de <code>executer_decisions()</code> qui reporte toute décision ACHAT/VENTE au prochain jour ouvré (motif <code>marche_ferme_weekend</code> dans <code>decisions_bloquees</code>).<br>
+          (2) Calcul de <code>capital_post_liquidation</code> = liquidités + Σ(positions vendues virtuellement avec PFU sur plus-value latente). Le KPI affiche désormais "Plus-value latente" + sub line "si tout vendu : +X € net". Recalculé chaque jour via <code>update_prices.py</code>.<br>
+          (3) R01 graduée : 30-65% = soft cap (sizing réduit linéairement), bypass conviction forte à plancher 0.5, >65% = blocage strict. Permet l'achat exceptionnel d'un titre tech avec conviction forte malgré la saturation.
+        </div>
+      </div>
+    </div>
+
     <!-- v1.10 — Skill integration + signal dynamics + cross-validation analystes -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#6366f1"></div>
@@ -1376,7 +1399,7 @@ function renderOrder(o, idx) {
         <div class="order-type ${orderTypeClass(o.type)}">${o.type}</div>
         <div class="order-name">${o.nom}${o._allerRetour ? (o.type === 'VENTE'
           ? ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug</span>'
-          : ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(248,122,32,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↻ corrigé</span>') : ''}</div>
+          : ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(248,122,32,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↻ corrigé</span>') : ''}${o._bug_weekend_exec ? ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug weekend</span>' : ''}</div>
         <div class="order-right">
           ${joursInfo}
           ${perfBadge}${scoreBadge}
@@ -1400,6 +1423,12 @@ function renderOrder(o, idx) {
                   ? `La vente précédente a été déclenchée par un bug FX (GBP→EUR) corrigé depuis. Cet achat rétablit la position sur la base du bon signal d'entrée.`
                   : `La vente précédente résultait d'un flip-flop entre runs successifs. Cet achat rétablit la position en cohérence avec le signal réel.`}
               </div>`) : ''}
+          ${o._bug_weekend_exec ? `<div class="order-correction-note is-bug">
+                <strong>⚠ Vente exécutée un samedi — bug d'enforcement weekend.</strong>
+                Cet ordre a été déclenché par un run manuel le samedi 23 mai 2026 alors que tous les marchés étaient fermés. En réalité, aucun broker n'aurait pu exécuter cette vente avant l'ouverture du lundi suivant — le prix réalisé serait probablement différent du prix de clôture vendredi affiché ici.
+                <br><br>Cause racine : <code>executer_decisions()</code> ne vérifiait pas le jour de la semaine avant d'appliquer les décisions. Corrigé depuis (commit <a href="https://github.com/Kosmos-7/Signal/commit/12dae5e" target="_blank" style="color:var(--red);text-decoration:underline">12dae5e</a>) : un guard en tête de fonction reporte toute décision ACHAT/VENTE proposée samedi/dimanche au prochain jour ouvré (motif <code>marche_ferme_weekend</code> dans <code>decisions_bloquees</code>).
+                <br><br>L'ordre est conservé dans l'historique pour transparence méthodologique (Signal documente ses erreurs au lieu de les masquer).
+              </div>` : ''}
           <div class="order-raison">${o.raison}</div>
         </div>
       </div>
