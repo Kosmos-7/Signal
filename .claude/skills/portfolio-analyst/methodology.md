@@ -420,6 +420,28 @@ Les paramètres `VIX_DAMPENER_INTERCEPT=1.5 / SLOPE=0.025 / MIN=0.20` restent d�
 - `momentum` : points momentum (= `momentum_raw` × 1.0 = `momentum_raw`)
 - `momentum_raw` : points momentum bruts (identique à `momentum` tant que dampener off)
 
+## R01 Concentration sectorielle — soft penalty graduée (depuis 23/05/2026)
+
+R01 ne fonctionne plus en mode binaire blocage-ou-rien. C'est maintenant une pénalité progressive sur le sizing :
+
+| Concentration cluster | Comportement |
+|---|---|
+| < 30% | Aucune restriction, sizing normal |
+| 30-65% | **Soft cap** : sizing réduit par un facteur `clip(1 - (pct-30)/35, 0.1, 1.0)`. À 40% → ×0.71. À 50% → ×0.43. À 60% → ×0.14. |
+| > 65% | **Blocage strict** — concentration excessive, achat refusé |
+
+**Bypass conviction forte (régime soft uniquement)** : si `conviction="forte"`, le sizing factor a un plancher à 0.5. Cela permet l'achat exceptionnel d'un titre dans un cluster sursaturé sans annihiler le sizing.
+
+**Exemple** : Cluster Tech & IA à 58.8% du portefeuille, achat candidat tech avec conviction modérée. Sans bypass, sizing = 0.18 × 5% = 0.9% du capital. Avec conviction forte + bypass, sizing = 0.5 × 7% = 3.5% du capital — taille raisonnable pour saisir une opportunité exceptionnelle.
+
+**Implications éditoriales** : tu peux désormais proposer un achat dans un cluster saturé. Mais tu dois (a) le justifier sérieusement dans `raison`, (b) marquer `conviction: "forte"` pour bénéficier du sizing plancher 50%. Sinon le sizing automatique sera très petit (souvent <1% du capital) et l'achat peu pertinent. La règle reste de ne PAS forcer si la position de remplacement n'a pas un alpha attendu clairement supérieur aux positions tech déjà détenues.
+
+**Champs exposés** dans `regles_actives` du portfolio.json :
+- `regime` : "soft" ou "strict"
+- `pct` : concentration mesurée du cluster
+- `sizing_factor` : facteur appliqué (uniquement régime soft)
+- `bloque` : true (strict) | false (soft, sizing réduit mais possible)
+
 ## Friction fiscale et coûts de transaction (Signal — compte-titres FR)
 
 Depuis Phase 1 du plan d'amélioration, Signal modélise explicitement les coûts réels d'un investisseur retail français sur compte-titres ordinaire.

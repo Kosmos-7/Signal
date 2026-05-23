@@ -128,7 +128,7 @@
   .sdot { width: 7px; height: 7px; border-radius: 50%; }
   .survival-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.25rem; }
 
-  .threshold-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .threshold-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 1.25rem; }
   .th { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; transition: border-color 0.15s; }
   .th:hover { border-color: rgba(232,168,32,0.22); box-shadow: 0 0 16px rgba(232,168,32,0.05); }
   .th-label { font-size: 0.78rem; font-weight: 500; color: var(--text2); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 5px; }
@@ -1619,16 +1619,6 @@ async function loadPortfolio() {
           <div class="th-value neu">${sign(d.benchmark_msci)}${fmt(d.benchmark_msci,1)} %</div>
           <div class="th-sub">MSCI World · même période</div>
         </div>
-        <div class="th">
-          <div class="th-label">Écart au marché <span class="kpi-info" data-tip="Différence entre notre performance et celle du MSCI World. Positif = on bat le marché. Négatif = on fait moins bien.">ⓘ</span></div>
-          <div class="th-value ${d.vs_benchmark>=0?'up':'dn'}">${sign(d.vs_benchmark)}${fmt(d.vs_benchmark,1)} pts</div>
-          <div class="th-sub">vs MSCI World</div>
-        </div>
-        <div class="th">
-          <div class="th-label">Perte max <span class="kpi-info" data-tip="La plus grosse chute enregistrée depuis un pic du portefeuille. Mesure le pire scénario traversé, indépendamment de la performance finale">ⓘ</span></div>
-          <div class="th-value ${(d.max_drawdown||0)<-5?'dn':'neu'}">${d.max_drawdown != null ? (d.max_drawdown !== 0 ? sign(d.max_drawdown)+fmt(d.max_drawdown,1)+' %' : '0.0 %') : '—'}</div>
-          <div class="th-sub">depuis le dernier sommet atteint</div>
-        </div>
       </div>`;
 
     // KPI — 5 cartes "état du portefeuille" (perf/alpha déjà dans le survival block, pas de doublon)
@@ -1790,8 +1780,12 @@ async function loadPortfolio() {
     const regles = d.regles_actives || [];
     if (regles.length > 0) {
       document.getElementById('regles-section').style.display = 'block';
-      document.getElementById('regles-items').innerHTML = regles.map(r =>
-        `<div class="regle-item"><span class="regle-icon">🚫</span><span class="regle-msg">${r.message}</span></div>`
+      document.getElementById('regles-items').innerHTML = regles.map(r => {
+          const isSoft = r.regime === 'soft';
+          const icon = isSoft ? '⚠️' : '🚫';
+          return `<div class="regle-item"><span class="regle-icon">${icon}</span><span class="regle-msg">${r.message}</span></div>`;
+        }
+
       ).join('');
       if (chips) chips.innerHTML = `<span class="pacc-chip pacc-chip-block">${regles.length} règle${regles.length>1?'s':''} active${regles.length>1?'s':''}</span>` + chips.innerHTML;
     }

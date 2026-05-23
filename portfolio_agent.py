@@ -414,8 +414,11 @@ def calculer_regles_auto(portfolio):
     Règles mécaniques — s'appliquent AVANT Claude et dans executer_decisions().
     Basées sur la valeur du portfolio, pas sur le comptage arbitraire de titres.
 
-    R1 : 1 cluster sectoriel > 30% de la valeur totale → achats bloqués dans ce cluster
-         (clusters = familles corrélées, ex. Tech + Semi-cond + Équip. semi. + Médias IA)
+    R1 : Concentration sectorielle GRADUÉE (passage du binaire au soft penalty)
+         - < 30%               : aucune restriction
+         - 30-65%              : sizing réduit proportionnellement (factor 1.0 → 0.1)
+                                 Forte conviction bypasse à 50% minimum.
+         - > 65%               : blocage strict (concentration excessive)
     R2 : 1 position > 20% du capital → renforcement bloqué
     R3 : Liquidités < 5% du capital → achats bloqués
     """
@@ -428,6 +431,9 @@ def calculer_regles_auto(portfolio):
         return regles
 
     # R1 — Concentration par cluster sectoriel (regroupe les secteurs corrélés)
+    # Soft penalty graduée : informationnelle si 30-65%, blocage strict si >65%.
+    # Le sizing factor effectif est calculé dans executer_decisions() à partir
+    # du pct_concentration exposé ici.
     valeur_par_cluster = {}
     for p in positions:
         s = p.get("sector", "—")
@@ -436,12 +442,33 @@ def calculer_regles_auto(portfolio):
             valeur_par_cluster[cl] = valeur_par_cluster.get(cl, 0) + p.get("valeur_actuelle", 0)
     for cl, val in valeur_par_cluster.items():
         pct = val / capital * 100
-        if pct > 30:
+        if pct > 65:
+            # Blocage strict — concentration excessive
             regles.append({
-                "type":    "concentration_sectorielle",
-                "secteur": cl,  # cluster name (ex. "Tech & IA")
-                "message": f"Cluster {cl} : {pct:.0f}% du portfolio > 30% — aucun nouvel achat dans ce cluster",
-                "bloque":  True,
+                "type":         "concentration_sectorielle",
+                "secteur":      cl,
+                "pct":          round(pct, 1),
+                "regime":       "strict",
+                "message":      f"Cluster {cl} : {pct:.0f}% > 65% — concentration excessive, achats bloqués",
+                "bloque":       True,
+            })
+        elif pct > 30:
+            # Soft penalty : sizing réduit progressivement, bypass partiel si conviction forte
+            # factor = clip(1 - (pct-30)/35, 0.1, 1.0)
+            #   → 30% : 1.00 (intact)
+            #   → 40% : 0.71
+            #   → 50% : 0.43
+            #   → 60% : 0.14
+            #   → 65% : 0.10 (plancher)
+            factor = max(0.1, 1.0 - (pct - 30) / 35.0)
+            regles.append({
+                "type":         "concentration_sectorielle",
+                "secteur":      cl,
+                "pct":          round(pct, 1),
+                "regime":       "soft",
+                "sizing_factor": round(factor, 2),
+                "message":      f"Cluster {cl} : {pct:.0f}% > 30% — sizing réduit ×{factor:.2f} (achats possibles avec conviction forte ou taille réduite)",
+                "bloque":       False,  # n'empêche pas l'achat, juste le sizing
             })
 
     # R2 — Position individuelle > 20% du capital (déjà en portefeuille)
@@ -761,20 +788,34 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
     # le journal n'a aucun ordre" qu'on a vues sur les runs précédents).
     regles_section = ""
     if regles_auto:
+        def _regle_icon(r):
+            # strict blocage : 🚫 ; soft cap : ⚠️ ; le reste : 🚫
+            if r.get("type") == "concentration_sectorielle" and r.get("regime") == "soft":
+                return "⚠️"
+            return "🚫"
         regles_lignes = "\n".join(
-            f"  🚫 [{r.get('type','?')}] {r.get('message','')}" for r in regles_auto
+            f"  {_regle_icon(r)} [{r.get('type','?')}] {r.get('message','')}" for r in regles_auto
         )
         regles_section = (
-            "\n## ⚠ RÈGLES MÉCANIQUES ACTIVES — TES PROPOSITIONS SERONT REJETÉES SI ELLES LES VIOLENT\n"
-            "Ces règles s'appliquent AUTOMATIQUEMENT après ton output JSON, indépendamment de ta conviction.\n"
-            "Si tu proposes une décision qui viole l'une d'elles, elle sera rejetée et n'apparaîtra PAS\n"
-            "dans le journal des ordres. Tiens-en compte AVANT de décider :\n"
+            "\n## ⚠ RÈGLES MÉCANIQUES ACTIVES — INTÈGRE-LES DANS TES DÉCISIONS\n"
+            "Ces règles s'appliquent AUTOMATIQUEMENT après ton output JSON.\n"
+            "Deux régimes possibles :\n"
+            "  🚫 BLOCAGE STRICT : la décision sera REJETÉE et n'apparaîtra PAS dans le journal.\n"
+            "  ⚠️ SOFT CAP : la décision PASSE mais avec un sizing réduit automatiquement (proportionnel\n"
+            "     au dépassement). Avec conviction='forte' le sizing est plancher à 50% du normal.\n"
             f"{regles_lignes}\n"
             "\n"
             "⏳ RAPPEL VENTES : R01 (Règles non négociables ci-dessous) bloque toute vente sur position\n"
             "détenue < 90 jours, SAUF si tu mets `conviction: \"forte\"` ET cites dans `raison` un\n"
             "signal fondamental majeur documenté (résultats, scandale, M&A) — pas juste \"perte\" ou\n"
             "\"Death Cross\". Ne propose pas de vente sur position récente sans ce niveau de justification.\n"
+            "\n"
+            "🌡 CONCENTRATION SECTORIELLE (R01 graduée depuis fix du 23/05) :\n"
+            "  - < 30%   : pas de restriction, sizing normal\n"
+            "  - 30-65%  : soft cap, sizing réduit proportionnellement (à 40%→×0.71, 50%→×0.43, 60%→×0.14)\n"
+            "             → tu PEUX acheter un titre du cluster sursaturé si tu mets conviction='forte'\n"
+            "               (plancher de sizing à 50% du normal) ET justifies l'opportunité exceptionnelle\n"
+            "  - > 65%   : blocage strict (concentration excessive)\n"
             "\n"
             "📝 COHÉRENCE NEWSLETTER : si tu envisages réellement une action que les règles vont bloquer\n"
             "(p. ex. tu trouves PANW excellent mais R01 cluster Tech&IA est saturée), tu peux la\n"
@@ -1129,23 +1170,38 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 continue
 
             # ── Règles mécaniques (enforcement — indépendant du raisonnement Claude)
+            conviction    = dec.get("conviction", "modérée")
+            cluster_sizing_factor = 1.0  # facteur multiplicatif appliqué au sizing (soft cap R01)
             if regles_auto:
                 bloque_motif = None  # capture le motif de blocage pour log + transparence
-                # R3 — Liquidités < 5%
+                # R3 — Liquidités < 5% (toujours blocage strict)
                 if any(r["type"] == "liquidites_faibles" for r in regles_auto):
                     print(f"  🚫 ACHAT {ticker} bloqué — liquidités < 5% (R3)")
                     bloque_motif = ("R03", "Liquidités < 5% du capital — achats bloqués jusqu'à reconstitution de la marge de manœuvre")
                 else:
-                    # R1 — Cluster sectoriel surconcentré (regroupe Tech/Semi/Équip semi/Médias IA)
+                    # R1 — Concentration sectorielle GRADUÉE :
+                    #   - regime=strict  → blocage total
+                    #   - regime=soft    → sizing réduit, bypass partiel si conviction forte
                     stock_tmp = stock_map.get(ticker, {})
                     sect_tick = stock_tmp.get("sector", "")
                     cluster_tick = cluster_for(sect_tick) if sect_tick else ""
-                    if cluster_tick and any(
-                        r["type"] == "concentration_sectorielle" and r.get("secteur") == cluster_tick
-                        for r in regles_auto
-                    ):
-                        print(f"  🚫 ACHAT {ticker} bloqué — cluster {cluster_tick} > 30% du portfolio (R1)")
-                        bloque_motif = ("R01", f"Cluster {cluster_tick} > 30% du portefeuille — aucun achat supplémentaire dans ce cluster (concentration sectorielle)")
+                    cluster_rule = next(
+                        (r for r in regles_auto
+                         if r["type"] == "concentration_sectorielle" and r.get("secteur") == cluster_tick),
+                        None
+                    )
+                    if cluster_rule:
+                        regime = cluster_rule.get("regime", "strict")
+                        pct = cluster_rule.get("pct", "?")
+                        if regime == "strict":
+                            print(f"  🚫 ACHAT {ticker} bloqué — cluster {cluster_tick} à {pct}% > 65% (R1 strict)")
+                            bloque_motif = ("R01", f"Cluster {cluster_tick} à {pct}% > 65% — concentration excessive, achat refusé (R1 blocage strict)")
+                        else:
+                            # Soft : appliquer le sizing_factor
+                            base_factor = cluster_rule.get("sizing_factor", 0.5)
+                            # Conviction forte bypasse partiellement : plancher à 0.5
+                            cluster_sizing_factor = max(base_factor, 0.5) if conviction == "forte" else base_factor
+                            print(f"  ⚠️  ACHAT {ticker} — R1 soft (cluster {cluster_tick} à {pct}%) : sizing × {cluster_sizing_factor:.2f}")
                 if bloque_motif:
                     rule_id, expl = bloque_motif
                     decisions_bloquees.append({
@@ -1156,7 +1212,6 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                     continue
 
             # Allocation dynamique : slots calculés sur l'ensemble des achats décidés (order-independent)
-            conviction    = dec.get("conviction", "modérée")
             nb_open       = len(positions)
             nb_achats_total = sum(1 for d2 in decisions if d2.get("action","").upper() == "ACHAT")
             slots_restants  = max(1, MAX_POSITIONS - nb_open - nb_achats_total)
@@ -1168,6 +1223,9 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 poids_cible = 0.05
             else:
                 poids_cible = 0.03
+
+            # Application du soft cap R01 (cluster_sizing_factor ≤ 1.0)
+            poids_cible *= cluster_sizing_factor
 
             budget = min(capital * poids_cible, capital * POIDS_MAX, equal_weight, liquidites)
             if budget < 50:
