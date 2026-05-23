@@ -1321,5 +1321,10 @@
     }
   ],
   "max_drawdown": -0.72,
-  "last_known_vix_updated_at": "2026-05-23"
+  "last_known_vix_updated_at": "2026-05-23",
+  "capital_post_liquidation": 22114.69,
+  "performance_post_liquidation": 10.57,
+  "frais_si_liquidation": 15.47,
+  "pfu_latent_si_liquidation": 1381.62,
+  "pertes_si_liquidation": 94.19
 }
