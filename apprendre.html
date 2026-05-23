@@ -578,7 +578,7 @@
   <section class="section-block">
     <div class="section-label">02 · L'algorithme</div>
     <h2 class="section-title">Comment Signal choisit ses 25 actions</h2>
-    <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de près de 90 grandes capitalisations européennes et nord-américaines, et retient les 25 avec le meilleur score. Le chiffre exact varie d'une semaine à l'autre selon les données disponibles — il s'affiche dans le bandeau de la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist</a>. Voici comment ce score est calculé.</p>
+    <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong>125 grandes capitalisations</strong> mondiales (USA, Europe, Asie via ADR), et retient les 25 avec le meilleur score. L'univers est construit pour couvrir 13 thèmes : tech mega-cap, semi-conducteurs (incluant équipements), cloud infrastructure pure-play, cybersécurité, REITs, biotech, banques régionales US, défense, luxe, énergie verte EU, conso discrétionnaire, et exposition directe Asie (Chine + Japon ADR). Le chiffre exact varie d'une semaine à l'autre selon les données disponibles — il s'affiche dans le bandeau de la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist</a>. Voici comment le score de chaque action est calculé.</p>
 
     <div class="scoring-block">
       <div class="scoring-row">
@@ -950,7 +950,9 @@
       <div class="portfo-body">
         Le portefeuille est comparé au MSCI World (~1 500 grandes entreprises, 23 pays développés), via l'ETF EUNL coté en euros. C'est la référence honnête : si la sélection active de Signal n'apporte pas de valeur par rapport à un simple ETF passif, autant avoir l'ETF directement.
         <br><br>
-        Le bloc affiche, à chaque mise à jour hebdomadaire, la performance du portefeuille, celle du MSCI World, l'écart entre les deux, et la perte maximale traversée depuis le dernier sommet.
+        Le bloc affiche, à chaque mise à jour, la performance nette du portefeuille et celle du MSCI World sur la même période. L'écart entre les deux (positif = on bat le marché) se lit visuellement.
+        <br><br>
+        <strong>Pill VIX</strong> : à droite du bandeau, le niveau du VIX (indice de volatilité S&P 500, CBOE) s'affiche avec un code couleur — vert si calme (<20), or si vigilance (20-25), orange si stress (25-35), rouge si panique (>35). C'est un indicateur de contexte macro, rafraîchi chaque jour ouvré, qui n'influence pas le scoring du screener (cf section 06) mais que l'IA peut citer dans son analyse éditoriale.
       </div>
     </div>
 
@@ -967,7 +969,7 @@
             <span class="kpi-mini-value">k€</span>
           </div>
           <div class="kpi-mini">
-            <span class="kpi-mini-label">Gain net</span>
+            <span class="kpi-mini-label">Plus-value latente</span>
             <span class="kpi-mini-value">±%</span>
           </div>
           <div class="kpi-mini">
@@ -984,7 +986,9 @@
           </div>
         </div>
         <p style="margin-top:0.75rem">
-          <strong>Valeur totale</strong> = positions en cours + liquidités disponibles. <strong>Gain net</strong> = performance depuis les 20 000 € initiaux. <strong>Investi</strong> = montant actuellement placé en bourse. <strong>Liquidités</strong> = cash disponible pour de nouveaux achats. <strong>Positions</strong> = nombre de titres détenus.
+          <strong>Valeur totale</strong> = positions au cours du jour + liquidités. C'est la valorisation mark-to-market que ta plateforme broker afficherait.<br>
+          <strong>Plus-value latente</strong> = différence brute entre valeur actuelle et capital initial. <strong>ATTENTION : ce n'est PAS du cash.</strong> Les plus-values sur positions ouvertes (par exemple NVDA +95%) ne sont taxées qu'au moment de la vente (PFU 30% en compte-titres français). Le tooltip ⓘ de la carte indique en temps réel ce qu'on aurait <em>réellement</em> en cash si on liquidait tout aujourd'hui (= cf section "Friction réelle" plus bas).<br>
+          <strong>Investi</strong> = montant actuellement placé en bourse. <strong>Liquidités</strong> = cash disponible (déjà net des frais et impôts payés sur les ventes précédentes). <strong>Positions</strong> = nombre de titres détenus.
         </p>
       </div>
     </div>
