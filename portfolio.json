@@ -1,23 +1,23 @@
 {
-  "updated_at": "2026-05-23",
+  "updated_at": "2026-05-24",
   "week": "Sem. 21 · 2026",
   "capital_initial": 20000.0,
-  "capital_actuel": 23511.77,
-  "performance": 17.56,
-  "performance_brute": 17.99,
+  "capital_actuel": 23495.09,
+  "performance": 17.48,
+  "performance_brute": 17.91,
   "total_frais_payes": 27.53,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 4005.77,
-  "capital_post_liquidation": 22114.69,
-  "performance_post_liquidation": 10.57,
-  "frais_si_liquidation": 15.47,
-  "pfu_latent_si_liquidation": 1381.62,
-  "pertes_si_liquidation": 94.19,
+  "capital_post_liquidation": 22102.45,
+  "performance_post_liquidation": 10.51,
+  "frais_si_liquidation": 15.46,
+  "pfu_latent_si_liquidation": 1377.19,
+  "pertes_si_liquidation": 96.03,
   "last_known_vix": 16.7,
   "last_known_vix_source": "live",
   "benchmark_cac40": -0.97,
   "benchmark_msci": 10.36,
-  "vs_benchmark": 7.2,
+  "vs_benchmark": 7.12,
   "mode_panique": false,
   "perf_cac_semaine": 1.61,
   "positions": [
@@ -48,8 +48,8 @@
       "prix_actuel": 215.33,
       "quantite": 20,
       "montant_investi": 1981.9,
-      "valeur_actuelle": 3710.99,
-      "performance": 87.24,
+      "valeur_actuelle": 3706.2,
+      "performance": 87.0,
       "score_entree": 94,
       "poids": 15.8
     },
@@ -64,8 +64,8 @@
       "prix_actuel": 467.51,
       "quantite": 3,
       "montant_investi": 876.48,
-      "valeur_actuelle": 1208.56,
-      "performance": 37.89,
+      "valeur_actuelle": 1207.0,
+      "performance": 37.71,
       "score_entree": 85,
       "poids": 5.1
     },
@@ -80,8 +80,8 @@
       "prix_actuel": 102.13,
       "quantite": 14,
       "montant_investi": 1095.08,
-      "valeur_actuelle": 1232.07,
-      "performance": 12.51,
+      "valeur_actuelle": 1230.48,
+      "performance": 12.36,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
       "poids": 5.2
@@ -97,8 +97,8 @@
       "prix_actuel": 1065.0,
       "quantite": 1,
       "montant_investi": 828.41,
-      "valeur_actuelle": 917.71,
-      "performance": 10.78,
+      "valeur_actuelle": 916.52,
+      "performance": 10.64,
       "score_entree": 89,
       "poids": 3.9
     },
@@ -113,8 +113,8 @@
       "prix_actuel": 266.32,
       "quantite": 2,
       "montant_investi": 446.82,
-      "valeur_actuelle": 458.97,
-      "performance": 2.72,
+      "valeur_actuelle": 458.38,
+      "performance": 2.59,
       "score_entree": 90,
       "poids": 2.0
     },
@@ -129,8 +129,8 @@
       "prix_actuel": 93.26,
       "quantite": 14,
       "montant_investi": 1492.64,
-      "valeur_actuelle": 1511.33,
-      "performance": 1.25,
+      "valeur_actuelle": 1510.63,
+      "performance": 1.21,
       "score_entree": 83,
       "raison_achat": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
       "poids": 6.4
@@ -146,8 +146,8 @@
       "prix_actuel": 1073.0,
       "quantite": 1,
       "montant_investi": 914.17,
-      "valeur_actuelle": 924.6,
-      "performance": 1.14,
+      "valeur_actuelle": 923.41,
+      "performance": 1.01,
       "score_entree": 93,
       "poids": 3.9
     },
@@ -162,8 +162,8 @@
       "prix_actuel": 610.26,
       "quantite": 2,
       "montant_investi": 1044.92,
-      "valeur_actuelle": 1051.72,
-      "performance": 0.65,
+      "valeur_actuelle": 1050.36,
+      "performance": 0.52,
       "score_entree": 84,
       "poids": 4.5
     },
@@ -178,8 +178,8 @@
       "prix_actuel": 180.07,
       "quantite": 7,
       "montant_investi": 1080.07,
-      "valeur_actuelle": 1086.16,
-      "performance": 0.56,
+      "valeur_actuelle": 1084.76,
+      "performance": 0.43,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
       "poids": 4.6
@@ -195,8 +195,8 @@
       "prix_actuel": 414.14,
       "quantite": 1,
       "montant_investi": 356.06,
-      "valeur_actuelle": 356.86,
-      "performance": 0.22,
+      "valeur_actuelle": 356.4,
+      "performance": 0.1,
       "score_entree": 100,
       "poids": 1.5
     },
@@ -227,8 +227,8 @@
       "prix_actuel": 328.88,
       "quantite": 2,
       "montant_investi": 569.91,
-      "valeur_actuelle": 566.79,
-      "performance": -0.55,
+      "valeur_actuelle": 566.06,
+      "performance": -0.68,
       "score_entree": 93,
       "poids": 2.4
     },
@@ -259,8 +259,8 @@
       "prix_actuel": 306.38,
       "quantite": 2,
       "montant_investi": 540.75,
-      "valeur_actuelle": 528.01,
-      "performance": -2.36,
+      "valeur_actuelle": 527.33,
+      "performance": -2.48,
       "score_entree": 95,
       "poids": 2.2
     },
@@ -291,8 +291,8 @@
       "prix_actuel": 391.35,
       "quantite": 1,
       "montant_investi": 371.0,
-      "valeur_actuelle": 337.23,
-      "performance": -9.1,
+      "valeur_actuelle": 336.79,
+      "performance": -9.22,
       "score_entree": 93,
       "poids": 1.4
     }
@@ -1133,8 +1133,9 @@
     }
   ],
   "biais_detectes": [
-    "Biais d'action potentiel sur ETN : la perte de -9.1% crée une tentation de 'faire quelque chose' alors que rien de fondamental n'a changé — l'inaction est ici la décision correcte",
-    "Anchoring sur le score d'achat vs score actuel : JPM acheté à 95/100, maintenant 81/100 — attention à ne pas sur-pondérer cette dégradation de score sans chercher le signal fondamental sous-jacent"
+    "Action bias potentiel : l'absence de nouvelles décisions cette semaine peut sembler 'inactif' — rappel mantra 1 : l'inaction est une décision quand les signaux ne justifient pas d'agir",
+    "Anchoring sur score d'achat vs score actuel (AVGO 100→85, JPM 95→78) : la dégradation du score ne justifie pas une vente si la thèse fondamentale reste intacte et le stop-loss non atteint",
+    "Recency bias post-INTU : la vente en perte fraîche peut induire une prudence excessive sur les positions récentes proches du break-even — à surveiller sur CRM, NOW, META"
   ],
   "regles_actives": [
     {
@@ -1159,7 +1160,7 @@
       "date": "2026-05-22",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/05/22/treasury-yields-bonds-investing-fed-rate-hikes.html",
-      "resume_fr": "La hausse des rendements des Treasuries US rappelle que les obligations 'sans risque' ne le sont pas, et oriente les investisseurs vers des maturités intermédiaires et le haut rendement."
+      "resume_fr": "La hausse des rendements obligataires américains révèle que les bons du Trésor ne sont plus vraiment 'sans risque', ouvrant des opportunités dans les obligations intermédiaires et le haut rendement."
     },
     {
       "headline": "Bank of England has time to gauge impact of Iran war, Bailey says - Reuters",
@@ -1167,15 +1168,31 @@
       "date": "2026-05-20",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQYzg5WlF5YUFPek10UXJYSXdrMnY0dTVDUnJqYUZyWWdKN3J2THFFS0pNUjFobkVZV3BjSGpKRFExM3UzWmpPNW44dkQzeEdYSDJ3ZzdqNm14M2Jua01rR04yRTlFOHRBNHp0SU52TFA5cUpva3NKSzNUM3FWT3NDYTZNQVM4ano0SXd2RDJWTTZXRTZTQUZ1T0hKazNtSFZ0ZUtmVGNkU2cySTR3?oc=5",
-      "resume_fr": "La Banque d'Angleterre indique qu'elle dispose du temps nécessaire pour évaluer l'impact économique de la guerre en Iran avant d'agir sur les taux."
+      "resume_fr": "La Banque d'Angleterre dispose encore de temps pour évaluer l'impact du conflit avec l'Iran sur l'économie britannique, selon le gouverneur Bailey."
     },
     {
-      "headline": "Economic activity holds steady in May, Flash PMIs show",
-      "summary": "To limit the economic shock, India has raised fuel prices, curbed gold imports and tightened currency-market rules",
-      "date": "2026-05-21",
+      "headline": "Americans are 'entrenched' in financial stress amid debt and price pressures",
+      "summary": "Inflation and high debt levels continue cause financial anxiety for many Americans. Nonprofits can help with debt mangement.",
+      "date": "2026-05-24",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/05/24/americans-struggling-with-debt-inflation.html",
+      "resume_fr": "L'inflation et les niveaux d'endettement élevés maintiennent une forte anxiété financière chez les ménages américains, selon plusieurs indicateurs récents."
+    },
+    {
+      "headline": "S&P 500 is set for longest weekly rally since 2023: Markets Wrap",
+      "summary": "Two-year yields hit the highest since February 2025 as Federal Reserve Governor Christopher Waller supports making clear the next rate move is just as likely to be a raise as a cut",
+      "date": "2026-05-23",
       "source": "Bloomberg",
-      "url": "https://www.bloomberg.com/news/articles/2026-05-21/india-s-economic-activity-holds-steady-in-may-flash-pmis-show",
-      "resume_fr": "Les PMI flash de mai confirment une activité économique stable, tandis que l'Inde prend des mesures préventives (hausse prix carburant, restrictions or) face aux chocs externes."
+      "url": "https://www.bloomberg.com/news/articles/2026-05-21/asian-stocks-to-rise-on-optimism-over-iran-talks-markets-wrap",
+      "resume_fr": "Le S&P 500 est en passe d'enregistrer sa plus longue série de hausse hebdomadaire depuis 2023, tandis que le gouverneur de la Fed Waller évoque une possible hausse des taux plutôt qu'une baisse."
+    },
+    {
+      "headline": "Oil swings with market focused on US-Iran peace prospects",
+      "summary": "The war and the curtailment in supplies have seen global stockpiles of crude oil and products being drawn down at a record pace, according to Goldman Sachs Group Inc",
+      "date": "2026-05-23",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com/news/articles/2026-05-21/latest-oil-market-news-and-analysis-for-may-22",
+      "resume_fr": "Les prix du pétrole fluctuent au gré des perspectives d'un accord de paix entre les États-Unis et l'Iran, alors que Goldman Sachs note un drawdown record des stocks mondiaux de brut."
     },
     {
       "headline": "Iran seeking mechanism with Oman over Hormuz, foreign ministry spokesperson says - Reuters",
@@ -1183,22 +1200,14 @@
       "date": "2026-05-20",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPVWhtb2pob0F0bVI1Yk9yWFlRNnpWSFg2d0p5U1EyYlFnOXZneVNyWEh0MktpUU1udUVFajdMM214UG1LRnIwN1pvV2s5VzVaMkVpb2tNNmpHOEozYlNlaU9HbS1RQ2pUdjRjYmZYZHZ4S1lUQW80V2FaZ1hab0xKVXRzY3FsSkM0SWxuYmdQVl9ZYWppV0xuWDlPNmZfR210QWVPeVFza0IxcTM1Y0R2MUdmV1ZiVkFFTUpuVkFjRl9XbG9OWWppSHc1OGt5Zw?oc=5",
-      "resume_fr": "L'Iran cherche à établir un mécanisme diplomatique via Oman pour sécuriser la navigation dans le détroit d'Hormuz, signalant une reconnaissance du risque géopolitique."
-    },
-    {
-      "headline": "'Doomjobbing' can hurt your job search, experts say: Why it happens and how to avoid it",
-      "summary": "Some job seekers are \"doomjobbing\" as a way to cope with the stress of unemployment.",
-      "date": "2026-05-19",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/05/19/doomjobbing-can-hurt-your-job-search-why-it-happens-and-how-to-avoid-it.html",
-      "resume_fr": ""
+      "resume_fr": "L'Iran cherche à établir un mécanisme via Oman pour sécuriser le détroit d'Hormuz, selon son ministère des Affaires étrangères."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Cette semaine du 19 au 23 mai, les marchés ont respiré calmement — MSCI World +2.0% sur la semaine, CAC40 +1.6% — dans un contexte où le VIX à 16.7 confirme un régime de faible volatilité. L'événement de fond reste la remontée des rendements obligataires US : les Treasuries continuent de délivrer une surprise désagréable aux détenteurs long terme, rappelant que le 'risk-free' l'est beaucoup moins qu'annoncé quand les taux montent. CNBC et Bloomberg notent que les investisseurs se repositionnent vers les intermédiaires, les BBBs et le haut rendement — signal indirect que la duration longue est évitée.\n\nSur le plan géopolitique, deux éléments à noter : la Banque d'Angleterre se dit en position d'attente sur l'impact de la guerre Iran, et Téhéran cherche un mécanisme via Oman pour le détroit d'Hormuz. Ces deux nouvelles, combinées, suggèrent que le risque de fermeture du Hormuz est pris au sérieux diplomatiquement mais pas encore pricé dans les marchés energy. Pour Signal, l'exposition est indirecte via ENR.DE (Siemens Energy, -2.9% depuis l'achat).\n\nLe portefeuille Signal affiche une performance nette de +17.56% depuis la création, pour un capital de 23 512€ et un alpha de +7.20pp vs le MSCI World YTD. Une semaine sans décision majeure — et c'est souvent le signe qu'on fait bien les choses. L'inaction est une décision, et cette semaine elle était la bonne. Le seul événement notable est la vente d'INTU ce matin à -19.7% (documentée dans l'historique), exécutée avant que la position n'atteigne le stop-loss catastrophe à -25%.\n\nMéthodologiquement, deux signaux en transition méritent d'être expliqués : JPM affiche un Golden Cross en affaiblissement (pente MM21 négative — R7 active), ce qui m'empêche de traiter ce cross comme un signal positif net. J'ai donc conservé sans renforcer, malgré un score de 81/100. ETN de son côté est à -9.1% en 23 jours de détention — inconfortable, mais le score 93/100 reste intact et R1 bloque toute vente avant le 28 juillet sauf signal fondamental documenté. La discipline coûte parfois en inconfort, rarement en argent.\n\nLa semaine prochaine, je surveille deux choses : l'évolution du z-score d'AVGO (actuellement à +2.0σ, score redescendu à 88/100 vs 100 à l'achat — un z qui continue de monter vers +2.5-3σ serait un signal de trim à documenter) et la confirmation ou non du rebond de NOW/CRM, tous deux détenus depuis 17 jours avec des setups mean-reversion qui demandent de la patience. Le cluster Tech&IA reste saturé à 59% — toute envie d'acheter DDOG (Golden Cross Day-9, volume confirmé, pente +13.1%) sera frustrée par R01 sauf conviction exceptionnelle.",
+    "analyse_macro": "En ce dimanche 25 mai, les marchés nous offrent une semaine paradoxale : le S&P 500 enchaîne sa plus longue série de hausse hebdomadaire depuis 2023 (+2% pour le MSCI World sur la semaine), pendant que le gouverneur de la Fed Christopher Waller torpille les espoirs de baisses de taux en déclarant que la prochaine décision est 'aussi susceptible d'être une hausse qu'une baisse'. Les taux 2 ans américains ont touché leur plus haut depuis février 2025. Le marché monte, mais le plancher des taux courts remonte avec lui — cette combinaison mérite attention.\n\nPour Signal, la semaine est tranquille : portefeuille à +17.48% net depuis la création (alpha +7.20pp vs MSCI World YTD), capital à 23 495€ avec 2 886€ de liquidités disponibles. Les deux géants ASML (+116.6% depuis janvier 2026) et NVDA (+87.0%) continuent de porter le résultat. La vente d'INTU vendredi à -19.7% après 17 jours de détention est la décision douloureuse de la semaine — documentée, assumée, conforme à la discipline stop-loss avant franchissement du seuil catastrophe de -25%.\n\nSur le plan méthodologique, deux points ont guidé l'absence de nouvelles entrées cette semaine. Premièrement, le cluster Tech&IA représente 59% du portefeuille : la règle R01 impose un multiplicateur de sizing ×0.18 — en pratique, toute nouvelle position Tech serait marginale et peu signifiante. DDOG avait le meilleur setup technique de la semaine (Golden Cross Day-9, volume confirmé, score 80/100) mais val=0/5 collé au top 52w et la saturation sectorielle rendent l'entrée peu rationnelle. Frustrant, mais c'est la discipline. Deuxièmement, JPM déclenche R7 (signal en transition) : pente MM21 négative sur un Golden Cross de 22 jours — on ne vend pas, mais on ne renforce pas non plus sur signal ambigu.\n\nLe contexte géopolitique reste en arrière-plan avec l'Iran cherchant un mécanisme via Oman sur le détroit d'Hormuz et la BoE qui observe prudemment l'impact de cette tension. Goldman Sachs note un drawdown record des stocks pétroliers mondiaux. Rien d'assez concret pour modifier les positions, mais ENR.DE (Siemens Energy, -2.9% depuis 24 jours) mérite surveillance dans ce contexte énergétique.\n\nPour la semaine à venir : surveiller DDOG sur un pullback vers -5/-7% (val 3/5 ou mieux) qui rendrait l'entrée cohérente malgré la saturation sectorielle, et garder un œil sur ETN à -9.2% — si la dégradation continue, le seuil de -15% à 90 jours approche. La Fed Waller a remis le dossier taux sur la table ; une prochaine hausse changerait le régime — pas notre scénario central, mais à monitorer.",
     "conviction_globale": "haussier",
-    "message_utilisateurs": "Run de contrôle du samedi 23 mai (second run de la journée, marchés fermés). Peu de changements opérationnels cette semaine — la principale décision a été la vente d'INTU ce matin à -19.7% pour éviter le stop-loss catastrophe à -25%. Le portefeuille est à +17.56% net depuis la création avec un alpha de +7.20pp vs MSCI World. Deux positions en surveillance rapprochée : ETN à -9.1% (thèse intacte, R1 en vigueur jusqu'au 28 juillet) et JPM dont le Golden Cross montre des signes d'affaiblissement (R7 active). Le cluster Tech&IA à 59% continue de bloquer les nouvelles entrées sectorielles — DDOG avait un setup de Golden Cross Day-9 attractif cette semaine, mais la discipline sectorielle prime. Prochain run vendredi prochain.",
-    "nb_decisions": 2
+    "message_utilisateurs": "Semaine calme côté décisions pour Signal. Pas de nouvelles entrées cette semaine — le cluster Tech&IA à 59% plafonne mécaniquement les achats dans ce secteur (règle R01, sizing ×0.18), et les opportunités hors secteur ne présentent pas de setup convaincant au niveau de timing (val_pts).\n\nLa décision douloureuse de vendredi, la vente d'INTU à -19.7% après 17 jours, est documentée dans l'historique : approche du stop-loss catastrophe -25% sans signal de retournement, sortie disciplinée avant franchissement du seuil. Ce n'est pas une belle performance, mais c'est le process correct — un trade perdant avec un bon process reste un bon process.\n\nETN reste sous surveillance à -9.2% depuis 24 jours. Le seuil de stop-loss mécanique à -15% avant 90 jours reste à distance, mais si la dégradation continue, nous agirons. JPM est en signal de transition (R7 déclenchée : pente MM21 négative sur Golden Cross) — on conserve sans renforcer.\n\nPortefeuille à +17.48% net depuis la création, alpha +7.20pp vs MSCI World. Les liquidités de 2 886€ attendent un meilleur point d'entrée — la discipline sur le timing val_pts est non-négociable après les entrées récentes qui ont souffert d'un mauvais timing chartiste.",
+    "nb_decisions": 4
   },
   "performance_history": [
     {
@@ -1325,6 +1334,13 @@
       "date": "2026-05-23",
       "perf": 17.56,
       "capital": 23511.77,
+      "benchmark_cac40": -0.97,
+      "benchmark_msci": 10.36
+    },
+    {
+      "date": "2026-05-24",
+      "perf": 17.48,
+      "capital": 23495.09,
       "benchmark_cac40": -0.97,
       "benchmark_msci": 10.36
     }
