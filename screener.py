@@ -535,10 +535,39 @@ def generer_justification(nom, score, details, alertes):
     return justif
 
 # Fenêtres de régression (en jours de bourse, 252/an)
-_REG_DAYS_TECH = 10 * 252   # 10 ans pour tech/IA (boom récent biaiserait une fenêtre plus longue)
-_REG_DAYS_STD  = 20 * 252   # 20 ans pour les autres secteurs
-_TECH_SECTORS  = {"Technology", "Communication Services",
-                  "Consumer Cyclical"}  # Amazon, Alphabet, Meta classés ici par yfinance
+_REG_DAYS_TECH     = 10 * 252   # 10 ans pour tech/IA (boom récent biaiserait une fenêtre plus longue)
+_REG_DAYS_STD      = 20 * 252   # 20 ans pour les autres secteurs
+_REG_DAYS_CYCLICAL = 25 * 252   # 25 ans pour cycliques matures (capture plusieurs cycles)
+_TECH_SECTORS      = {"Technology", "Communication Services",
+                      "Consumer Cyclical"}  # Amazon, Alphabet, Meta classés ici par yfinance
+
+# Industries cycliques matures : cycles 7-15 ans → fenêtre 10y trop courte (un seul cycle),
+# biais massif vers la phase observée. Documenté dans methodology.md section 1.4.
+# Exemple : Valeo z 10y = +2,11σ (capture chute 2021-2025) vs z 25y = -1,12σ (vraie pente LT +6%/an).
+#
+# IMPORTANT v2.0.2 : "Semiconductors" (designers : NVDA, AMD, AVGO, ADI, TXN, QCOM, MU, INTC, TSM)
+# RETIRÉ car yfinance ne distingue pas designers AI-secular (NVDA) vs memory cyclique (MU).
+# Traiter NVDA comme cyclique 25y est artificiel (NVDA n'existait quasi pas dans son business
+# actuel il y a 25 ans). On garde uniquement "Semiconductor Equipment & Materials" (AMAT,
+# LRCX, KLAC, ASML) qui ont un cycle capex clairement défini (~7 ans).
+# Cas extrêmes (MU, SK Hynix au pic du cycle mémoire) restent attrapés par CHASE z>2,5σ.
+_CYCLICAL_INDUSTRIES = {
+    # Auto (cycles 10-15 ans)
+    "Auto Parts", "Auto Manufacturers", "Auto & Truck Dealerships",
+    # Semi EQUIPMENT uniquement (capex cyclique ~7 ans)
+    # Designers (NVDA, AMD, AVGO, MU, ...) restent en 10y/20y standard
+    "Semiconductor Equipment & Materials",
+    # Banques (cycles taux + crédit)
+    "Banks - Diversified", "Banks - Regional", "Banks—Diversified", "Banks—Regional",
+    # Materials / Energy / Industrials cycliques
+    "Steel", "Aluminum", "Copper", "Other Industrial Metals & Mining",
+    "Oil & Gas E&P", "Oil & Gas Equipment & Services", "Oil & Gas Refining & Marketing",
+    "Oil & Gas Integrated", "Oil & Gas Midstream",
+    "Airlines", "Marine Shipping",
+    "Building Materials", "Building Products & Equipment",
+    "Chemicals", "Specialty Chemicals",
+    "Lumber & Wood Production", "Paper & Paper Products",
+}
 
 # ── SCORING ──────────────────────────────────────────────────────────────────
 def score_ticker(ticker, vix=None):
@@ -585,20 +614,41 @@ def score_ticker(ticker, vix=None):
         info = data.info
 
         # ── Régression log-linéaire long terme
+        # Cycliques matures (auto, semi, banks) : 25 ans pour capturer plusieurs cycles
         # Tech/IA : 10 ans (le boom IA biaiserait une droite sur 20 ans)
         # Autres  : 20 ans, ou tout l'historique disponible si moins
         yf_sector   = info.get("sector", "") or ""
-        reg_days    = _REG_DAYS_TECH if yf_sector in _TECH_SECTORS else _REG_DAYS_STD
+        yf_industry = info.get("industry", "") or ""
+        if yf_industry in _CYCLICAL_INDUSTRIES:
+            reg_days = _REG_DAYS_CYCLICAL  # 25y pour cycliques (cf Valeo, Micron, banks)
+        elif yf_sector in _TECH_SECTORS:
+            reg_days = _REG_DAYS_TECH      # 10y pour tech pure
+        else:
+            reg_days = _REG_DAYS_STD       # 20y par défaut
         close_reg   = close.iloc[-reg_days:] if len(close) >= reg_days else close
         regression_z, reg_pente = calcul_regression(close_reg)
+        # Fallback si NaN (cas observé sur SK Hynix avec fenêtre 25y) : retomber sur fenêtres plus courtes
+        if regression_z is None or (isinstance(regression_z, float) and np.isnan(regression_z)):
+            for fb_days in (_REG_DAYS_STD, _REG_DAYS_TECH):
+                if fb_days < reg_days:
+                    close_fb = close.iloc[-fb_days:] if len(close) >= fb_days else close
+                    z_fb, p_fb = calcul_regression(close_fb)
+                    if z_fb is not None and not (isinstance(z_fb, float) and np.isnan(z_fb)):
+                        regression_z, reg_pente = z_fb, p_fb
+                        reg_days = fb_days  # met à jour pour le breakdown
+                        break
+        # Si toujours NaN après fallbacks, force à 0 pour éviter propagation
+        if regression_z is None or (isinstance(regression_z, float) and np.isnan(regression_z)):
+            regression_z = 0.0
         reg_signal              = reg_signal_label(regression_z)
         reg_zone_saine          = -0.5 <= regression_z <= 1.5
 
-        rev_growth = info.get("revenueGrowth")     or 0
-        margins    = info.get("profitMargins")      or 0
-        peg        = info.get("pegRatio")           or 0
-        debt_eq    = info.get("debtToEquity")       or 0
-        reco       = info.get("recommendationMean") or 3.5
+        rev_growth   = info.get("revenueGrowth")     or 0
+        margins      = info.get("profitMargins")      or 0
+        peg          = info.get("pegRatio")           or 0
+        debt_eq_raw  = info.get("debtToEquity")          # garde None pour distinguer net-cash (=0) vs missing
+        debt_eq      = debt_eq_raw if debt_eq_raw is not None else 0
+        reco         = info.get("recommendationMean") or 3.5
 
         fh_data    = finnhub_fundamentals(ticker)
         confiance, alertes = valider_fondamentaux(info, fh_data)
@@ -732,8 +782,11 @@ def score_ticker(ticker, vix=None):
         # EPS growth (0-5 pts) — plus forward-looking que le CA
         if earnings_growth > 0.15:   fund_pts += 5
         elif earnings_growth > 0.05: fund_pts += 2
-        # Dette/capitaux propres (0-5 pts)
-        if 0 < debt_eq < 100:   fund_pts += 5
+        # Dette/capitaux propres (0-5 pts) — fix v2.0.1 : inclut net-cash (D/E=0)
+        # AVANT : `0 < debt_eq < 100` excluait les entreprises sans dette (DSY, AAPL en net cash)
+        # APRÈS : 0 ≤ debt_eq < 100 inclut net-cash. None reste sans pts (donnée manquante).
+        if debt_eq_raw is not None and 0 <= debt_eq_raw < 100:
+            fund_pts += 5
         fund_pts = min(50, fund_pts)   # cap strict — max 50 pts fondamentaux
         score += fund_pts
 
@@ -758,7 +811,27 @@ def score_ticker(ticker, vix=None):
             dc_days = cross_info["days_since_cross"]
             if   dc_days <= 30: death_pen = -5
             elif dc_days <= 60: death_pen = -3
-        score = max(0, score + death_pen)
+
+        # ── Pénalité CHASE de rally (v2.0.1) ────────────────────────────────
+        # Protège contre les surextensions extrêmes même quand fondamentaux
+        # sont solides (cas Micron z=+5σ avec marges 41%, ou GOOGL z=+2,9σ
+        # post-rally +124%). Le z-score binaire actuel donne 0 pts hors zone saine
+        # mais ne pénalise pas activement — bug majeur.
+        #
+        # Mécanique :
+        #   z > 2,5σ                              → -3 (chase extrême)
+        #   z > 2,0σ ET (RSI > 70 OU dd_52w > -3%) → -2 (chase modéré)
+        # Sinon : 0
+        chase_pen = 0
+        z_valid = (regression_z is not None
+                   and not (isinstance(regression_z, float) and np.isnan(regression_z)))
+        if z_valid:
+            if regression_z > 2.5:
+                chase_pen = -3
+            elif regression_z > 2.0 and (rsi > 70 or drawdown_52w_pct > -3):
+                chase_pen = -2
+
+        score = max(0, score + death_pen + chase_pen)
         stars = 5 if score >= 90 else 4 if score >= 75 else 3 if score >= 60 else 2 if score >= 45 else 1
 
         exchange = info.get("exchange", "")
@@ -849,12 +922,22 @@ def score_ticker(ticker, vix=None):
             "regression_z":          regression_z,
             "regression_signal":     reg_signal,
             "regression_pente_pct":  reg_pente,
-            "regression_window_years": 10 if yf_sector in _TECH_SECTORS else (round(len(close_reg) / 252) if len(close_reg) < _REG_DAYS_STD else 20),
+            "regression_window_years": (
+                25 if yf_industry in _CYCLICAL_INDUSTRIES
+                else 10 if yf_sector in _TECH_SECTORS
+                else (round(len(close_reg) / 252) if len(close_reg) < _REG_DAYS_STD else 20)
+            ),
+            "regression_window_reason": (
+                "cyclical_25y" if yf_industry in _CYCLICAL_INDUSTRIES
+                else "tech_10y" if yf_sector in _TECH_SECTORS
+                else "standard_20y"
+            ),
             # Fondamentaux
             "rev_growth_pct":        round(rev_growth * 100, 1),
             "net_margin_pct":        round(margins * 100, 1),
             "fcf_margin_pct":        round(fcf_margin * 100, 1),
             "death_pen":             death_pen,
+            "chase_pen":             chase_pen,
             "confiance":             round(confiance, 2),
             "sources":               ["Yahoo Finance"] + (["Finnhub"] if fh_data else []),
         }
