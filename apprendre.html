@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="signal.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: auto; }   /* rétablit le scroll naturel (header sticky) */
   :root {
     --bg:        #06060b;
     --surface:   rgba(255,255,255,0.022);
@@ -63,7 +64,7 @@
     z-index: 100;
   }
   header.scrolled {
-    background: transparent;
+    background: rgba(8,11,20,0.62);
     border-bottom-color: rgba(255,255,255,0.07);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);

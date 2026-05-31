@@ -13,7 +13,7 @@
   body{overflow:hidden}
 
   /* RAIL : nom complet + région + secteur */
-  .rail{position:fixed;left:1.4rem;top:5rem;bottom:3rem;z-index:6;width:232px;display:flex;flex-direction:column}
+  .rail{position:fixed;left:1.4rem;top:5rem;bottom:1.4rem;z-index:6;width:232px;display:flex;flex-direction:column}
   .rail-h{display:flex;justify-content:space-between;font:600 .62rem var(--mono);letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;padding:0 .4rem .6rem;border-bottom:1px solid var(--line)}
   .rail-l{overflow-y:auto;flex:1;mask-image:linear-gradient(180deg,transparent,#000 12px,#000 calc(100% - 12px),transparent)}.rail-l::-webkit-scrollbar{width:0}
   .rail-lex{display:block;margin-top:.4rem;padding:.65rem .4rem .1rem;border-top:1px solid var(--line);font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .15s;cursor:pointer;flex:0 0 auto}
@@ -33,7 +33,11 @@
   .row .rr{text-align:right}.row .sc{font:500 .95rem var(--serif);color:var(--text)}.row .xx{font:.55rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-top:1px}
 
   /* STAGE : analyse élargie */
-  .stage{position:fixed;left:262px;right:1.4rem;top:4.6rem;bottom:2.6rem;z-index:5;overflow-y:auto;display:flex;justify-content:center}
+  .stage{position:fixed;left:262px;right:1.4rem;top:4.6rem;bottom:1.4rem;z-index:5;overflow-y:auto;display:flex;flex-direction:column;align-items:center}
+  footer{width:100%;max-width:1060px;margin-top:.5rem;padding:1.4rem 1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:1.2rem;flex-wrap:wrap}
+  footer .footer-legal{font-size:.75rem;color:var(--text3);line-height:1.5;max-width:560px}
+  footer .footer-right{font:.75rem var(--mono);color:var(--text3);white-space:nowrap}
+  @media(max-width:900px){footer{flex-direction:column;align-items:flex-start;gap:.5rem;padding:1.25rem 1rem}}
   .stage::-webkit-scrollbar{width:5px}.stage::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
   .doc{width:100%;max-width:1060px;padding:.5rem 1.5rem 2.5rem;opacity:0;transition:opacity .35s}.doc.on{opacity:1}
   .d-head{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem}
@@ -81,7 +85,7 @@
 </header>
 
 <div class="rail"><div class="rail-h"><span id="rc">—</span><span id="rw"></span></div><div class="rail-l" id="rl"></div><a class="rail-lex" id="lexlink" href="#lexique">Lexique des signaux</a></div>
-<div class="stage"><div class="doc" id="doc"></div></div>
+<div class="stage"><div class="doc" id="doc"></div><footer><div class="footer-legal">Signal est un service éditorial d'information financière. Contenu fourni à titre informatif uniquement. Ne constitue pas un conseil en investissement au sens AMF.</div><div class="footer-right">Bêta</div></footer></div>
 
 <script src="signal-fx.js"></script>
 <script>
