@@ -125,6 +125,11 @@ def bucket_cross_days(d):
     return "ancien"         # ancien / stale
 
 
+# Version du style/prompt éditorial — bumper FORCE la régénération de toutes les fiches
+# (la signature change), p.ex. après un changement de ton ou d'exigence de chiffrage.
+PROMPT_VERSION = "2026-06-sobre-chiffree"
+
+
 def signature(stock):
     """Signature éditoriale stable d'un ticker. On régénère SEULEMENT si elle change.
 
@@ -160,6 +165,7 @@ def signature(stock):
     warn = "warn" if (b.get("signal_dynamics_warning") or "").strip() else "ok"
 
     parts = [
+        PROMPT_VERSION,
         str(stock.get("score", "")),
         str(b.get("cross_type", "")),
         bucket_cross_days(b.get("cross_days_ago")),
@@ -242,6 +248,7 @@ def breakdown_block(stock):
         f"- Drawdown 52s : {fmt(b.get('drawdown_52w_pct'),'%')}"
         + (f"   |   Zone Fibo : {fibo}" if fibo else ""),
         f"- Fondamentaux (PRÉCISE toujours la période dans la prose) : croissance CA {fmt(b.get('rev_growth_pct'),'%')} = dernier trimestre publié en glissement annuel (a/a){(' au ' + b['mrq']) if b.get('mrq') else ''} · marge nette {fmt(b.get('net_margin_pct'),'%')} = TTM, 12 mois glissants · marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM",
+        f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward {fmt(b.get('forward_pe'),'x',1)} · PER courant {fmt(b.get('trailing_pe'),'x',1)} · FCF yield {fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(b.get('peg'),'',2)} · z-score {fmt(b.get('regression_z'),'σ',2)}. NB : un PER courant nettement supérieur au PER forward = bénéfices au creux de cycle (à expliquer, pas à confondre avec « cher »).",
     ]
     if warn:
         lines.append(f"- ⚠ Signal en transition : {warn}")
@@ -286,13 +293,18 @@ Date du jour : {today}.
 {news_block}
 
 ## TON & CONTRAINTES (NON NÉGOCIABLES)
-- Ton NEUTRE, factuel, sobre — analyste rigoureux, jamais promotionnel.
+- Ton PRÉCIS, FACTUEL, CLAIR et posé — analyste rigoureux. Plume vivante mais sobre : une
+  pointe d'esprit pince-sans-rire est bienvenue de loin en loin, JAMAIS lourde, jamais un
+  calembour gratuit, jamais de hype ni de ton promotionnel. Le fond prime sur le trait d'esprit.
 - AUCUNE prétention d'alpha, AUCUN conseil d'achat/vente, AUCUN objectif de cours chiffré.
 - Le score reflète une QUALITÉ à un instant T, JAMAIS un timing. Le momentum est un
   DÉCLENCHEUR, jamais une thèse.
 - Nomme EXPLICITEMENT le type de douve (marque / coût / réseau / coûts de transfert /
   actif réglementaire) et QUESTIONNE sa durabilité (qu'est-ce qui la tuerait ?).
-- Chiffre tes affirmations (CA, marges, FCF, PER forward vs historique en relatif).
+- CHIFFRE TOUT jugement de valorisation avec le NOMBRE fourni (PER forward, PER courant, FCF
+  yield, PEG, z-score). Les qualificatifs vagues SEULS sont interdits (« fourchette haute »,
+  « cher », « tendu » sans chiffre). N'invente JAMAIS un multiple historique ou de pair non
+  fourni : pour le relatif-historique, appuie-toi sur le z-score (seule mesure sourcée ici).
 - `bear` = la VRAIE inversion de thèse (ce qui ferait échouer la thèse / perte permanente),
   PAS seulement « c'est cher ».
 - Reste dans le cercle de compétence : si la durabilité n'est pas évaluable, dis-le.

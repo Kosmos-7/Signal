@@ -646,6 +646,9 @@ def score_ticker(ticker, vix=None):
         rev_growth   = info.get("revenueGrowth")     or 0
         margins      = info.get("profitMargins")      or 0
         peg          = info.get("pegRatio")           or 0
+        forward_pe   = info.get("forwardPE")             # PER forward (bénéfices attendus)
+        trailing_pe  = info.get("trailingPE")            # PER courant (PER courant ≫ forward = bénéfices au creux de cycle)
+        market_cap   = info.get("marketCap") or 0
         debt_eq_raw  = info.get("debtToEquity")          # garde None pour distinguer net-cash (=0) vs missing
         debt_eq      = debt_eq_raw if debt_eq_raw is not None else 0
         reco         = info.get("recommendationMean") or 3.5
@@ -773,6 +776,7 @@ def score_ticker(ticker, vix=None):
         fcf        = info.get("freeCashflow")  or 0
         total_rev  = info.get("totalRevenue")  or 1
         fcf_margin = fcf / total_rev if total_rev > 0 else 0
+        fcf_yield  = (fcf / market_cap * 100) if market_cap else None   # rendement du FCF au prix actuel
         fund_pts = 0
         # Revenue growth (0-15 pts)
         if rev_growth > 0.10:   fund_pts += 15
@@ -945,6 +949,11 @@ def score_ticker(ticker, vix=None):
             "net_margin_pct":        round(margins * 100, 1),      # TTM (12 mois glissants)
             "fcf_margin_pct":        round(fcf_margin * 100, 1),   # TTM (12 mois glissants)
             "mrq":                   mrq_iso,                      # date du dernier trimestre publié — réf. période fondamentaux
+            # Valorisation (alimente la prose éditoriale — cf. generate_analyses.py)
+            "forward_pe":            round(forward_pe, 1) if forward_pe else None,
+            "trailing_pe":           round(trailing_pe, 1) if trailing_pe else None,
+            "fcf_yield_pct":         round(fcf_yield, 2) if fcf_yield is not None else None,
+            "peg":                   round(peg, 2) if peg else None,
             "death_pen":             death_pen,
             "chase_pen":             chase_pen,
             "confiance":             round(confiance, 2),
