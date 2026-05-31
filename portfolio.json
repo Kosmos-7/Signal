@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-05-30",
+  "updated_at": "2026-05-31",
   "week": "Sem. 22 · 2026",
   "capital_initial": 20000.0,
   "capital_actuel": 23785.5,
   "performance": 18.93,
-  "performance_brute": 17.53,
+  "performance_brute": 19.37,
   "total_frais_payes": 28.96,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 4005.77,
@@ -19,7 +19,7 @@
   "benchmark_msci": 10.87,
   "vs_benchmark": 8.06,
   "mode_panique": false,
-  "perf_cac_semaine": 1.51,
+  "perf_cac_semaine": -0.91,
   "positions": [
     {
       "ticker": "ASML.AS",
@@ -1308,18 +1308,23 @@
     }
   ],
   "biais_detectes": [
-    "Biais de statu quo (inaction par confort sur les positions en léger recul comme JPM -4.8%, ETN -5.8%) — assumé ici car R1 bloque les ventes <90j et les fondamentaux restent intacts",
-    "Concentration risk / biais de disponibilité : ASML et NVDA dominent le portefeuille avec +111% et +84% — leur présence écrasante peut masquer la fragilité relative des positions plus récentes"
+    "Action bias — tentation d'agir sur les positions en légère perte (ETN, JPM, DB1.DE) sans signal fondamental qui le justifie",
+    "Recency bias — biais de surestimation des performances récentes d'ASML/NVDA pour relativiser la solidité de l'alpha global"
   ],
   "regles_actives": [
     {
       "type": "concentration_sectorielle",
       "secteur": "Tech & IA",
-      "pct": 62.1,
+      "pct": 63.1,
       "regime": "soft",
       "sizing_factor": 0.1,
-      "message": "Cluster Tech & IA : 62% > 30% — sizing réduit ×0.10 (achats possibles avec conviction forte ou taille réduite)",
+      "message": "Cluster Tech & IA : 63% > 30% — sizing réduit ×0.10 (achats possibles avec conviction forte ou taille réduite)",
       "bloque": false
+    },
+    {
+      "type": "liquidites_faibles",
+      "message": "Liquidités 4.1% < 5% du capital (971€) — achats bloqués",
+      "bloque": true
     }
   ],
   "decisions_bloquees": [],
@@ -1329,43 +1334,51 @@
   "nb_neutres": 0,
   "macro_news": [
     {
-      "headline": "ECB 'will do what is necessary' to tame inflation, Bank of France governor tells CNBC",
-      "summary": "Markets are overwhelmingly pricing in a rate hike from the central bank at its next meeting.",
-      "date": "2026-05-26",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/05/26/ecb-villeroy-inflation-iran-war.html",
-      "resume_fr": "La Banque de France affirme que la BCE fera 'ce qui est nécessaire' pour maîtriser l'inflation, une hausse de taux étant largement anticipée à la prochaine réunion."
-    },
-    {
-      "headline": "UK gilt yields retreat from multi-decade highs as political drama mellows, rate hike expectations ease",
-      "summary": "As bond markets returned from a bank holiday on Tuesday morning, the yield on the benchmark 10-year bond stood at 4.85%.",
-      "date": "2026-05-26",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/05/26/uk-gilt-yields-ease-political-drama-mellows-rate-hikes-ease.html",
-      "resume_fr": "Les rendements des gilts britanniques reculent depuis des sommets multi-décennaux (10 ans à 4.85%) alors que les tensions politiques s'apaisent et que les anticipations de hausse des taux diminuent."
-    },
-    {
-      "headline": "Sri Lanka stuns with 100-bp rate hike as Iran war rattles currency, fuels inflation - Reuters",
-      "summary": "Sri Lanka stuns with 100-bp rate hike as Iran war rattles currency, fuels inflation  Reuters",
-      "date": "2026-05-26",
+      "headline": "US issues new Iran-related counter-terrorism sanctions - Reuters",
+      "summary": "US issues new Iran-related counter-terrorism sanctions  Reuters",
+      "date": "2026-05-29",
       "source": "Reuters",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPTFFMdlBXWlluVzlIZHV6V0YteTBIaGx5bktVOFFtSGM3YWlISjJlRHpnYUFlbVFYSmhQVDV4U3NjNGxTb2hEQlhpX0xsU25ES0Q4OUtmQUxsWmlfMkRIVWJCYkhNS0JGeWY4SDVwQ2l6dmxfWDQwOExlY2h4bmo1dlo1dHZBS3RRdW13R2QyNl9BTXQ3SU00eXZneDRWdzZlSlV6Tmt0ZzN1aEh4Tm5RMUFYdU1kWlV2UU96Y2pTWQ?oc=5",
-      "resume_fr": "Le Sri Lanka relève son taux directeur de 100 points de base de manière surprise pour défendre sa devise face aux tensions géopolitiques liées au conflit iranien et à l'inflation."
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNVm1lQTd2R3dIUWlPenlFSkpzM0tiUC1RcGQ1eTVTNWY2blplYnpiaUVxc0lzNXZ0TE1NbjlwYXotcE1GVEktaHJVMmFseEt3aU45dThXQldxb29XRDBzaXBibkVWVFh6T3Q2TnpYWnMxUFAzTEo3UFI1NFdjaVFGNTB1R2N2R0lTWEtNUEo2NFNsbHUxUnpfSFNtUThGNW9Ib2cyd3NJN2hpekJX?oc=5",
+      "resume_fr": "Les États-Unis imposent de nouvelles sanctions liées à l'Iran dans le cadre de la lutte contre le terrorisme."
     },
     {
-      "headline": "Iran state TV says draft deal with US would reopen Hormuz shipping, end naval blockade - Reuters",
-      "summary": "Iran state TV says draft deal with US would reopen Hormuz shipping, end naval blockade  Reuters",
-      "date": "2026-05-27",
+      "headline": "ECB chief economist sees persistent impact on inflation from Iran war - Reuters",
+      "summary": "ECB chief economist sees persistent impact on inflation from Iran war  Reuters",
+      "date": "2026-05-28",
       "source": "Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPVHB3ZTljSEdNUGlta055MjFRSDNTZGg2WkZmWjdFOUZfRC1Xd2Q2V2FSWmRxd0xPSTBGel91Um5yN3BHRVhhTURxcUFZTHBJckZDU2hvenpkbWg3aGY3cjB1VERORDR6Z00zTEdEbzB4SlBhUG11UkpkcDRTT2lpZmZxNVoxaXNDbHJWUHdkT0Q3d2VqZHFraUY5alIwcGY2WWEtVV9lblgtMy1GOWRIVlU4eVpzU2s2dzVPZFltZC00UXM?oc=5",
-      "resume_fr": "L'Iran évoque un accord préliminaire avec les États-Unis qui rouvrirait le détroit d'Ormuz et mettrait fin au blocus naval, réduisant les risques sur les routes maritimes pétrolières."
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOcW5KRWdFekZoajhnYi15YnZoVUdtbGlXOElzZ0laVlJaOXBWZ25NT1BuVHlRSGN5Tk9ZTkd1M3B1b0h2bkdaa0dMNTZkZk9YbEhPYlpmYUw1X2EtcmhMcHR4akV1akNGSWxDQkUxQVllZnJmQTNxWmY5VVNBT0pVVmdCcW10QmN0NXVITTRaU0tzY3lwamc3aDFoajdSQ0J1VlhTczVJZHIyV2ZFMm9Rak13?oc=5",
+      "resume_fr": "L'économiste en chef de la BCE avertit que le conflit en Iran aura un impact inflationniste durable en zone euro."
+    },
+    {
+      "headline": "Investors and labels are buying into the growing South Asian music business in the U.S.",
+      "summary": "Warner Music Group, the third-largest music label by market share, is tapping into the South Asian music movement with its latest venture, 5 Junction.",
+      "date": "2026-05-30",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/05/30/south-asian-music-warner-records-5-junction.html",
+      "resume_fr": "Warner Music Group mise sur le marché de la musique sud-asiatique aux États-Unis via sa nouvelle entité 5 Junction."
+    },
+    {
+      "headline": "Bessent says ‘we’ll see’ on potential Iran sanctions relief",
+      "summary": "Iran has faced heavy economic sanctions since President Trump withdrew from a nuclear deal, with Tehran demanding sanctions relief as a condition for an agreement with the US",
+      "date": "2026-05-30",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com/news/articles/2026-05-29/bessent-says-we-ll-see-on-iran-sanctions-relief-as-deal-awaits",
+      "resume_fr": "Le secrétaire au Trésor Bessent laisse la porte ouverte à un possible allègement des sanctions contre l'Iran, sans s'engager."
+    },
+    {
+      "headline": "World’s appetite for AI makes China less afraid of stronger Yuan",
+      "summary": "The global AI investment boom is powering a new wave of Chinese exports and making Beijing more comfortable with a stronger yuan.",
+      "date": "2026-05-28",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com/news/articles/2026-05-28/world-s-appetite-for-ai-makes-china-less-afraid-of-stronger-yuan",
+      "resume_fr": "Le boom mondial de l'IA stimule les exportations chinoises et rend Pékin plus à l'aise avec une appréciation du yuan."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Cette semaine s'est terminée dans une ambiance étonnamment sereine pour les marchés — le VIX à 16.29 confirme un régime calme — mais les nouvelles macro de fond méritent attention. La Banque de France a réaffirmé lundi que la BCE 'fera ce qui est nécessaire' pour contenir l'inflation, et les marchés pricent désormais majoritairement une hausse de taux à la prochaine réunion. Pendant ce temps, les gilts britanniques se stabilisent après des sommets multi-décennaux (le 10 ans UK à 4.85% mardi matin), et le Sri Lanka a sorti l'artillerie lourde avec une hausse surprise de 100 points de base pour défendre sa devise face aux tensions liées au conflit iranien.\n\nLa bonne nouvelle du côté géopolitique : l'Iran négocie un accord qui rouvrirait le détroit d'Ormuz et mettrait fin au blocus naval — une décompression pour les marchés de l'énergie si cela se confirme. C'est précisément le type de signal qui peut déplacer rapidement les secteurs cycliques et l'énergie. À surveiller.\n\nCôté portefeuille Signal, la semaine se conclut sur une performance nette cumulée de +17.10% depuis la création (contre +10.83% pour le MSCI World YTD), soit un alpha de +6.80pp. Le capital actuel est de 23 420€. Le portefeuille reste concentré sur les positions Tech&IA historiques (ASML +111.6%, NVDA +84.4%) qui portent l'essentiel de la surperformance — un biais de concentration qu'on assume mais qu'on ne peut pas amplifier davantage : le cluster Tech&IA à 62% déclenche le soft cap R01, bloquant tout nouveau renforcement significatif.\n\nLa décision d'achat de la semaine : ORSTED.CO, énergies renouvelables, #5 watchlist avec score 81/100. Golden Cross frais à 17j, z=-1.7σ sous régression — profil Setup B mean-reversion. Hors cluster sursaturé, ce qui permet d'utiliser les 2 122€ de liquidités de manière disciplinée. La position reste initiée prudemment (~400€) car la val=5/5 avec DD-49.1% reflète une correction historique profonde, pas un simple pullback technique.\n\nPour la semaine à venir : surveiller la confirmation de l'accord Iran/Ormuz (impact direct sur ENR.DE, ETN, et l'énergie en général), et les premiers signaux de la réunion BCE. Si ETN continue de dériver sous -10%, le point de vigilance stop-loss approche — pas de panique, mais les yeux ouverts.",
-    "conviction_globale": "haussier",
-    "message_utilisateurs": "Semaine calme opérationnellement pour Signal — une seule décision d'achat (ORSTED.CO) et pas de vente. Le portefeuille affiche +17.10% net depuis la création pour un alpha de +6.80pp vs MSCI World. La principale contrainte du moment reste la saturation du cluster Tech&IA à 62% : FSLR avait un Golden Cross Day-0 très propre cette semaine, PANW également un setup intéressant — mais les règles de concentration m'interdisent d'y aller. C'est frustrant, mais c'est exactement à ça que sert la discipline : éviter de transformer une bonne perf en sur-concentration risquée. ORSTED.CO représente une diversification sectorielle bienvenue (Services publics / EnR) avec un profil mean-reversion solide. Les 2 122€ de liquidités sont désormais partiellement déployés. Les positions en légère perte (ETN -5.8%, JPM -4.8%, ENR.DE -3.5%) restent dans les limites acceptables et sont bloquées par R1 (<90j) — aucune raison fondamentale documentée de sortir. On surveille.",
-    "nb_decisions": 5
+    "analyse_macro": "Semaine du 26 au 30 mai 2026 — calme trompeur. Le VIX à 15.3 et un MSCI World quasi-flat (-0.1% sur la semaine) cachent une actualité géopolitique qui mérite attention : l'économiste en chef de la BCE a explicitement évoqué un impact inflationniste persistant lié au conflit en Iran, tandis que Washington impose de nouvelles sanctions anti-terroristes liées à Téhéran. Bessent, lui, joue l'ambiguïté avec un 'we'll see' sur un éventuel allègement. En clair : un risque de prime géopolitique sur l'énergie qui n'est pas encore pricé par les marchés — et qui pourrait compliquer la trajectoire de désinflation attendue par la BCE.\n\nPour Signal, la semaine est une non-semaine au sens décisionnel : liquidités à 971€ (sous le plancher des 5% du capital) et cluster Tech&IA à 63% bloquent tout achat. Le portefeuille affiche une performance nette cumulée de +18.93% depuis la création, avec un alpha de +8.06 points de pourcentage sur le MSCI World YTD. Ces chiffres sont solides, mais ils reposent encore beaucoup sur les deux locomotives ASML (+112.9% depuis l'achat en janvier) et NVDA (+82.8%).\n\nMéthodologiquement, trois points à noter cette semaine. D'abord, FSLR affiche un Golden Cross Day-2 avec pente MM21 à +9.6% — le meilleur setup du tableau — mais val=0/5 (cours au sommet 52 semaines) et les contraintes de liquidités et de concentration sectorielle rendent l'entrée impossible. Frustrant, assumé. Ensuite, ENR.DE à -9.7% entre en surveillance renforcée : pas de stop-loss déclenché (seuil catastrophe à -25%), pas de signal fondamental négatif documenté, R01 s'applique — mais on approche d'un territoire qui demandera une réévaluation active d'ici 60 jours. Enfin, META en Death Cross depuis 133j reste en portefeuille avec un z=+0.3σ proche de sa régression : la position est dans la bande de confort, pas de raison d'agir.\n\nLe biais à surveiller cette semaine : l'action bias. Avec un marché calme et des positions en légère dérive négative (ETN, JPM, DB1.DE), l'instinct est d'agir pour 'faire quelque chose'. La discipline ici est précisément de ne pas agir — l'inaction est une décision, rappelle le mantra #1. Aucune des corrections observées ne justifie une sortie anticipée sur position < 90j sans signal fondamental documenté.\n\nSurveillance pour la semaine à venir : l'évolution du discours BCE sur l'inflation (le conflit Iran peut modifier la trajectoire des taux), la reconstitution des liquidités via dividendes ou arbitrage naturel, et ENR.DE / ETN dont les performances devront être re-évaluées si elles continuent de dériver. Si les liquidités repassent au-dessus de 5%, FSLR (en attente d'un pullback à val≥3/5) et AMZN (score 83, Golden Cross 26j, z=+0.2σ propre) seront en tête de liste.",
+    "conviction_globale": "neutre",
+    "message_utilisateurs": "Semaine sans transaction cette semaine — et c'est une décision à part entière. Les liquidités disponibles (971€) sont sous le seuil plancher de 5% du capital, et le cluster Tech & IA à 63% plafonne tout nouvel achat dans le secteur. Aucune vente n'est justifiée non plus : toutes les positions en perte modérée (JPM -5%, ETN -7.4%, ENR.DE -9.7%, DB1.DE -5.5%) restent au-dessus des seuils de stop-loss et ont moins de 90 jours de détention — R01 s'applique strictement. Le meilleur setup de la semaine était FSLR avec un Golden Cross Day-2 et une pente MM21 exceptionnelle à +9.6% — mais val=0/5 (cours au sommet 52 semaines) et les contraintes de concentration rendaient l'entrée à la fois mal timée et bloquée. La discipline, parfois, c'est regarder passer le train. Le portefeuille cumulé reste à +18.93% net depuis la création avec +8.06pp d'alpha sur le MSCI World — on ne casse pas ce qui fonctionne.",
+    "nb_decisions": 4
   },
   "performance_history": [
     {
@@ -1536,8 +1549,14 @@
       "capital": 23785.5,
       "benchmark_cac40": -0.14,
       "benchmark_msci": 10.87
+    },
+    {
+      "date": "2026-05-31",
+      "perf": 18.93,
+      "capital": 23785.5,
+      "benchmark_cac40": -0.14,
+      "benchmark_msci": 10.87
     }
   ],
-  "max_drawdown": -0.83,
-  "last_known_vix_updated_at": "2026-05-30"
+  "max_drawdown": -0.83
 }
