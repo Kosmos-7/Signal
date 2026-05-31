@@ -151,27 +151,25 @@ C'est un proxy systématique du **range d'entrée** détaillé dans `opportuniti
 **Mécanique du fix** (additionnel au scoring 100 pts, appliqué avant le floor à 0) :
 
 ```
-chase_pen = 0   # v2.2 : magnitudes doublées + palier léger
+chase_pen = 0   # v2.2.1 : magnitudes renforcées (palier léger ±2 retiré)
 z > 2,5σ                                  → chase_pen = -6 (chase extrême)
 z > 2,0σ ET (RSI > 70 OU drawdown > -3%)  → chase_pen = -4 (chase confirmé)
-z > 1,5σ (sinon)                          → chase_pen = -2 (chase léger)
 ```
 
 **Logique** :
 - z > 2,5σ seul suffit (surextension statistique massive, indépendamment du contexte court terme)
 - z > 2,0σ + confirmation court terme (RSI surachat OU cours collé au top) = chase confirmé
-- z > 1,5σ sinon = chase léger (tout ce qui sort de la zone saine par le haut est pénalisé)
-- Sinon : 0 pt
+- Sinon : 0 pt — le danger est aux EXTRÊMES ; pénaliser +1,5σ écarterait les compounders sains (qui vivent le plus souvent au-dessus de leur tendance)
 
 **Effet attendu** (validé sur 124 tickers session 2026-05-27) :
 - 10-15 tickers déclenchent une pénalité (5-10% de l'univers)
 - CHASE extrême détecté : MU, INTC, CSCO, CAT, GOOGL, GS, WMT, LRCX, KLAC, ADI, MUFG, TSM, SAN.MC, BNP.PA, AMAT
 - CHASE modéré : SIE.DE, TXN, etc.
 
-**Magnitudes renforcées (v2.2)** : pénalités doublées (−3/−2 → −6/−4) + palier léger −2 ajouté — choix utilisateur assumé « **le timing prime sur la qualité** ». Un business excellent (fonda 48/50) ne peut plus scorer haut en pleine surchauffe : ex. GOOGL z=+2,8σ → −6 (73→67), GS z=+2,7σ → −6 (chute marquée). Caveat : aucun backtest ne valide ces niveaux — c'est un choix éditorial « timing-first », pas un optimum prouvé.
+**Magnitudes renforcées (v2.2.1)** : pénalités doublées (−3/−2 → −6/−4) — choix utilisateur « **le timing prime sur la qualité** », mais SEULEMENT aux extrêmes. Le palier léger ±2 à 1,5σ, d'abord ajouté, a été **retiré** : un compounder vit le plus souvent au-dessus de sa tendance, le pénaliser pour ça écarterait les meilleurs (le risque Nifty-Fifty est à 80×, pas à +1,5σ). Ex. GOOGL z=+2,8σ → −6 (73→67), GS z=+2,7σ → −6. Caveat : aucun backtest ne valide ces niveaux — choix éditorial « timing-first », pas un optimum prouvé.
 
 **Lecture en pratique** :
-- Le breakdown JSON expose `chase_pen` (-6, -4, -2, ou 0) — toujours vérifier ce champ avant de pondérer le score
+- Le breakdown JSON expose `chase_pen` (-6, -4, ou 0) — toujours vérifier ce champ avant de pondérer le score
 - Un score 65+ avec `chase_pen ≤ -4` signale : "business OK mais entrée actuelle dangereuse — attendre pullback"
 - Combiné au champ `regression_window_reason`, permet de différencier chase légitime (cyclical 25y) vs chase tech (10y)
 
@@ -184,11 +182,10 @@ z > 1,5σ (sinon)                          → chase_pen = -2 (chase léger)
 **Mécanique** (additionnel au score 100 pts, plafond 100, appliqué avant le floor à 0) :
 
 ```
-value_bonus = 0   # v2.2 : magnitudes doublées + palier léger
+value_bonus = 0   # v2.2.1 : magnitudes renforcées (palier léger ±2 retiré)
 SI fondamentaux ≥ 40/50  ET  pas un couteau qui tombe :
     z ≤ -2,5σ  → value_bonus = +6  (décote forte)
     z ≤ -2,0σ  → value_bonus = +4  (décote modérée)
-    z ≤ -1,5σ  → value_bonus = +2  (décote légère)
 ```
 
 **Garde-fous « pas un couteau qui tombe »** (cf. `selling.md`, pré-flight) — le bonus ne se déclenche QUE si les trois conditions tiennent :
@@ -199,7 +196,7 @@ SI fondamentaux ≥ 40/50  ET  pas un couteau qui tombe :
 **Logique** : contrepartie disciplinée du CHASE. CHASE dit « trop cher, attends un pullback » ; le bonus dit « décoté ET de qualité ET en stabilisation = Setup B à surveiller ». Il ne récompense **jamais** une décote seule — un titre cheap qui chute encore reste à 0.
 
 **Lecture en pratique** :
-- Le breakdown JSON expose `value_bonus` (+6, +4, +2, ou 0) — un `value_bonus > 0` = candidat mean-reversion sur qualité, à mettre sur le radar.
+- Le breakdown JSON expose `value_bonus` (+6, +4, ou 0) — un `value_bonus > 0` = candidat mean-reversion sur qualité, à mettre sur le radar.
 - Exemple (2026-06) : **MSFT** z=−2,06σ, fonda 48/50, death cross 93j (vieux) + pente MM21 +0,12 % (s'aplatit) → **+4** (66 → 70, entre dans le top 30) ; idem **V** (Visa) z=−2,03σ → +4 (→ 79). NVDA (z sain) intact ; GOOGL/ADI/GS (z > 2,5σ) → CHASE **−6**.
 - **Pas un signal d'achat** : le bonus remonte un titre sur le radar (Setup B), il ne dit pas « achète ». La confirmation du retournement reste à valider (`selling.md` : death cross frais → attendre).
 
