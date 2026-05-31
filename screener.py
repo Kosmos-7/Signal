@@ -380,6 +380,11 @@ def fibonacci_retracement(close_series, lookback=252):
 # capitalisations (pas de bruit structurel). Les 35 ajouts
 # comblent 10 trous thématiques précis identifiés (cloud infra, cybersec, REITs,
 # Asie directe, etc.), tous validés via yfinance (history 5y + cap > 25B + liquidité OK).
+#
+# Assurance rotation (juin 2026, +8 → 133 tickers) : on GARDE le tilt tech (pari momentum
+# assumé) et on ajoute 8 leaders non-tech ultra-liquides (énergie/industrie/matériaux/staples
+# + Nestlé), DORMANTS tant que la tech mène — ils n'entrent dans le top 30 que si leur secteur
+# prend le leadership. Tous validés via yfinance (cap > 25B / liquidité / 5 ans).
 UNIVERS = [
     # ─── EUROPE ───────────────────────────────────────────────────────────────
     # CAC 40 — 12 valeurs (liquidité + compatibilité modèle momentum)
@@ -392,6 +397,8 @@ UNIVERS = [
     "ADYEN.AS","ASM.AS","ASML.AS","HEIA.AS","IMCD.AS","PHIA.AS","RAND.AS",
     # OMX Nordics — 2 valeurs
     "NOVO-B.CO","VWS.CO",
+    # Suisse (assurance rotation, comble un gap géo) — 1 valeur : Nestlé
+    "NESN.SW",
     # LSE — 4 valeurs
     "REL.L","LSEG.L","AZN.L","ULVR.L",
     # Énergie verte EU (Phase 4 light, +3) — Iberdrola Espagne, Orsted Danemark, RWE Allemagne
@@ -427,6 +434,10 @@ UNIVERS = [
     "COIN",
     # Conso discrétionnaire (Phase 4 light, +2)
     "BKNG","NKE",
+
+    # Assurance rotation (juin 2026, +7 US) — leaders non-tech ultra-liquides, dormants tant
+    # que la tech mène, prêts si le leadership tourne (énergie / industrie / matériaux / staples).
+    "CVX","COP","CAT","GE","DE","SHW","KO",
 
     # ─── ASIE ──────────────────────────────────────────────────────────────────
     # ADR US existants (TSM Taiwan semis, SE Asie SEA, SONY Japon)
