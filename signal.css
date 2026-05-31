@@ -52,7 +52,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 .sec-h::after{content:'';flex:1;height:1px;background:var(--line)}
 .sec p{font-size:1.02rem;color:var(--text);line-height:1.75}.sec p+p{margin-top:.55rem}
 .stub{font-style:italic;color:var(--text3);font-size:.8rem}
-.caveat{font:.62rem var(--mono);color:var(--text3);margin-top:.4rem}
 .sep{height:1px;background:linear-gradient(90deg,var(--ac),transparent);margin:1.5rem 0;opacity:.4}
 
 /* ── Tag / pill ── */

@@ -47,6 +47,6 @@ jobs:
             echo "Aucun changement cette semaine."
           else
             WEEK=$(python -c "from datetime import date; d=date.today(); print(f'Sem. {d.isocalendar()[1]} · {d.year}')")
-            git commit -m "update: $WEEK — watchlist + portfolio + archive"
-            git push
+            git commit -m "update: $WEEK — watchlist + portfolio + archive [skip ci]"
+            git pull --rebase --autostash && git push
           fi

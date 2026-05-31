@@ -33,7 +33,7 @@ CAPITAL_INITIAL      = CAPITAL_INITIAL_DEF  # sera écrasé au runtime par la va
 POIDS_MAX            = 0.20
 STOP_LOSS_PCT        = -15.0     # seuil de stop-loss standard (Règle 07, ≥ 90j détenus)
 STOP_LOSS_CATASTROPHE_PCT = -25.0  # stop-loss catastrophe (Règle 08, sans condition de durée)
-MAX_POSITIONS        = 15        # nb max de lignes simultanées
+MAX_POSITIONS        = 20        # nb max de lignes simultanées (15→20 : ~5%/ligne, plafond appliqué à l'achat)
 TICKER_CAC40         = "^FCHI"
 # MSCI World — ETF EUR-denominated (iShares Core MSCI World UCITS, Xetra)
 # Évite le mismatch de devise vs portfolio EUR : avant on utilisait URTH (USD)
@@ -1210,6 +1210,18 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                         "bloque_par": rule_id, "explication_blocage": expl,
                     })
                     continue
+
+            # Plafond de positions (MAX_POSITIONS) : refuser un NOUVEL achat si le portefeuille
+            # est plein (un renforcement d'une ligne déjà ouverte reste autorisé).
+            tickers_ouverts = {p.get("ticker") for p in positions}
+            if ticker not in tickers_ouverts and len(positions) >= MAX_POSITIONS:
+                print(f"  🚫 ACHAT {ticker} — portefeuille plein ({len(positions)}/{MAX_POSITIONS} lignes)")
+                decisions_bloquees.append({
+                    "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
+                    "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                    "bloque_par": "max_positions", "explication_blocage": f"Plafond {MAX_POSITIONS} positions atteint ({len(positions)} ouvertes) — nouvel achat refusé",
+                })
+                continue
 
             # Allocation dynamique : slots calculés sur l'ensemble des achats décidés (order-independent)
             nb_open       = len(positions)

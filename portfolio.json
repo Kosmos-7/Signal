@@ -388,7 +388,7 @@
       }
     },
     {
-      "date": "2026-05-23",
+      "date": "2026-05-25",
       "type": "VENTE",
       "ticker": "INTU",
       "nom": "Intuit Inc.",
@@ -406,8 +406,7 @@
       "jours": 17,
       "raison": "INTU détenu depuis 17 jours à -18.6% — on approche du seuil de stop-loss à -25% sans condition de durée (R6). La thèse d'achat reposait sur z=-3.6σ sous régression + Death Cross 129j mais RSI favorable : la décote s'est creusée au lieu de se résorber, ce qui invalide le scénario mean-reversion à court terme. Le score est toujours 82/100 et les fondamentaux restent corrects, mais la règle de stop-loss catastrophe (-25% sans condition) approche à grand pas — mieux vaut couper proprement à -18.6% que d'attendre -25%. La perte réalisée devient un crédit d'impôt (PFU 30% sur futurs gains, crédit intégré aux 3816€ reportables). Signal fondamental documenté : dérive de prix inexpliquée par les données disponibles, profil de sortie cohérent avec discipline de gestion du risque.",
       "conviction": "forte",
-      "source": "Claude AI",
-      "_bug_weekend_exec": true
+      "source": "Claude AI"
     },
     {
       "date": "2026-05-07",
