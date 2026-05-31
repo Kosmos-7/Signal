@@ -167,7 +167,7 @@ chercherait :
 - Devise/zone géographique préférée ?
 
 Étape 2 : appliquer le scoring sur un univers défini
-Si tu travailles avec Signal, on a déjà 90 tickers scorés. Top 10 actuel:
+Si tu travailles avec Signal, l'univers de tickers est déjà scoré. Top 10 actuel:
 [liste si watchlist accessible]
 
 Si pas dans Signal, donne-moi 5-10 tickers candidats et j'applique le 
@@ -198,9 +198,9 @@ tendances macro de la session, sinon refuser].
 ```
 [Lire portfolio.json si dans repo Signal, sinon demander composition]
 
-Vue d'ensemble:
+Vue d'ensemble (exemple illustratif, chiffres fictifs):
 - Capital actuel: 22,500€ (+12.5% YTD)
-- vs MSCI World: +5.2pp d'alpha
+- vs MSCI World: à titre de comparaison observationnelle (pas une preuve d'alpha)
 - Max drawdown: -3.1%
 - Liquidités: 8% (sain)
 

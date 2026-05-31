@@ -1145,7 +1145,7 @@
         <div class="pacc-section-title">Portefeuille &amp; Performance</div>
         <div class="lex-grid">
           <div class="lex-item"><div class="lex-term">MSCI World</div><div class="lex-def">Indice mondial couvrant ~1 500 grandes et moyennes capitalisations dans 23 pays développés. <em>Benchmark de référence</em> de Signal — toute la performance du portefeuille est mesurée par rapport à cet indice (en euros, via l'ETF EUNL).</div></div>
-          <div class="lex-item"><div class="lex-term">Alpha MSCI</div><div class="lex-def">Écart de performance entre Signal et le MSCI World, exprimé en <em>points de pourcentage (pp)</em>. Un alpha de +5.4 pp signifie que Signal a surperformé l'indice de 5.4 points sur la même période. Objectif : maintenir un alpha positif sur 12 mois glissants.</div></div>
+          <div class="lex-item"><div class="lex-term">Écart au benchmark</div><div class="lex-def">Différence de performance entre Signal et le MSCI World, exprimée en <em>points de pourcentage (pp)</em>. Un écart de +5.4 pp signifie que le portefeuille a fait 5.4 points de mieux que l'indice sur la même période ; un écart négatif, qu'il a fait moins bien. C'est une <em>observation</em> de performance relative, suivie en réel — pas une promesse de surperformance.</div></div>
           <div class="lex-item"><div class="lex-term">Drawdown max</div><div class="lex-def">Perte maximale enregistrée depuis un pic du portefeuille, en %. Mesure le <em>pire scénario traversé</em> : un drawdown de −15% signifie que la valeur a chuté de 15% depuis son plus haut avant de se redresser. Indicateur de risque clé, indépendant de la performance finale.</div></div>
           <div class="lex-item"><div class="lex-term">P&amp;L réalisé</div><div class="lex-def">Profit and Loss — gain ou perte <em>effectivement encaissé</em> sur les positions fermées. Distinct du P&amp;L latent (positions ouvertes), qui peut encore s'inverser. Seul le P&amp;L réalisé est définitif.</div></div>
           <div class="lex-item"><div class="lex-term">Performance en € vs devise locale</div><div class="lex-def">Pour les titres en USD ou GBP, la performance affichée est <em>calculée en euros</em> et intègre la variation du taux de change. Un titre qui monte de +5% en dollars sur une période où le dollar baisse de 10% affiche −5% en €. C'est la performance réelle pour un investisseur en zone euro.</div></div>
@@ -1728,7 +1728,7 @@ async function loadPortfolio() {
         </div>
       </div>`;
 
-    // KPI — 5 cartes "état du portefeuille" (perf/alpha déjà dans le survival block, pas de doublon)
+    // KPI — 5 cartes "état du portefeuille" (perf/écart au benchmark déjà dans le survival block, pas de doublon)
     const investi   = d.capital_actuel - d.liquidites;
     const pctInvesti = (100 - d.pct_liquidites).toFixed(1);
     const nbNeutres = d.nb_neutres ?? (d.nb_positions - d.nb_positives - d.nb_negatives);

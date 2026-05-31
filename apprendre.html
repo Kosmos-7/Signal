@@ -577,7 +577,7 @@
     <h1>Comprendre Signal</h1>
     <p>Tout ce qu'il faut savoir pour lire la watchlist et le portefeuille — expliqué simplement, sans jargon inutile.</p>
     <div class="scoring-note" style="margin-top:1.5rem">
-      <strong>Par où commencer ?</strong> — Débutant : sections 1 et 7. Pour décoder une fiche action : section 3. Curieux de la rigueur (frais, impôts, backtest) : sections 5 et 6. Les passages signalés « pour aller plus loin » sont optionnels en première lecture.
+      <strong>Par où commencer ?</strong> — Débutant : sections 1 et 7. Pour décoder une fiche action : section 3. Curieux de la rigueur (frais, impôts, méthodologie) : sections 5 et 6. Les passages signalés « pour aller plus loin » sont optionnels en première lecture.
     </div>
     <div class="hero-sep"></div>
   </section>
@@ -641,10 +641,10 @@
           <br><br>
           <em style="color:var(--text3)">Pour aller plus loin — détail d'implémentation.</em>
           <br><br>
-          <strong>Le barème valorisation est conditionné au cross</strong> (mise à jour 23/05/2026, validée empiriquement sur 43 145 événements 2017-2024) :
+          <strong>Le barème valorisation est conditionné au cross</strong> (mise à jour 23/05/2026) :
           <ul style="margin-top:0.5rem;line-height:1.55">
             <li><strong>Sans Golden Cross frais</strong> : le drawdown profond signale un risque (chute libre = 0 pt, momentum cassé = 1 pt). C'est la lecture classique "ne pas attraper un couteau qui tombe".</li>
-            <li><strong>Avec Golden Cross frais (≤30j)</strong> : barème <em>inversé</em>. Une chute profonde (−30%+) <em>suivie</em> d'un Golden Cross authentique = setup premium (5 pts max). Le test empirique montre que ces titres surperforment massivement : +86% médiane à 12 mois vs +20% pour les pullbacks sains. C'est le pattern META T4 2022 / NVDA mars 2020 / AMD début 2023.</li>
+            <li><strong>Avec Golden Cross frais (≤30j)</strong> : barème <em>inversé</em>. Une chute profonde (−30%+) <em>suivie</em> d'un Golden Cross authentique est traitée comme un setup premium (5 pts max), sur la logique classique de mean-reversion : une fois la chute purgée et le retournement confirmé techniquement, le point d'entrée redevient favorable. C'est le pattern observé sur META T4 2022 / NVDA mars 2020 / AMD début 2023.</li>
           </ul>
           La logique : sans signal technique de reprise, une chute reste un risque. Mais quand un Golden Cross frais matérialise le retournement, la chute préalable devient un atout (réinitialisation propre, mean-reversion confirmée).
           <br><br>
@@ -1199,79 +1199,56 @@
     </div>
   </section>
 
-  <!-- SECTION 6 — Comment Signal se mesure (backtest, régimes, Deflated Sharpe) -->
+  <!-- SECTION 6 — Méthodologie : méthodes publiques + validation par observation réelle -->
   <section class="section-block" id="s6">
-    <div class="section-label">06 · Méthodologie de mesure</div>
-    <h2 class="section-title">Comment Signal se mesure honnêtement</h2>
-    <p class="section-sub">Toute stratégie active doit pouvoir démontrer qu'elle apporte de la valeur par rapport à un benchmark passif — surtout après les frais et la fiscalité. Voici les outils qui font cette démonstration de manière rigoureuse, code source ouvert sur GitHub.</p>
+    <div class="section-label">06 · Méthodologie</div>
+    <h2 class="section-title">Sur quoi repose la méthode</h2>
+    <p class="section-sub">Signal ne prétend pas avoir trouvé une recette secrète pour battre le marché. La démarche est plus modeste et plus honnête : appliquer de façon disciplinée des méthodes établies et publiques, puis les mettre à l'épreuve par l'observation du portefeuille IA en conditions réelles. C'est une expérimentation, pas une preuve. Code source ouvert sur GitHub.</p>
 
     <div class="scoring-note">
-      <strong>En clair :</strong> on a rejoué la stratégie sur ~6 ans de marché passé pour vérifier qu'elle aurait battu un simple ETF, frais et impôts déduits. Les détails ci-dessous sont pour les curieux et les développeurs.
+      <strong>En clair :</strong> aucune des briques utilisées n'est une invention maison. Ce sont des outils enseignés dans la littérature financière depuis des décennies. La seule chose que Signal teste, c'est si une application disciplinée et systématique de ces outils tient la route, semaine après semaine, sur un vrai portefeuille suivi en public. Les détails ci-dessous sont pour les curieux et les développeurs.
     </div>
 
     <div class="portfo-block" style="margin-bottom:12px">
       <div class="portfo-header">
         <div class="portfo-accent" style="background:var(--blue)"></div>
-        <div class="portfo-htitle">Backtest 2019-2024 sur 53 actions US</div>
+        <div class="portfo-htitle">Des méthodes publiques, pas une boîte noire</div>
       </div>
       <div class="portfo-body">
-        Le script <code>backtest.py</code> rejoue mécaniquement la stratégie Signal (scoring 100 pts + règles d'enforcement) sur 6 ans d'historique 2019-2024, avec rebalancement hebdomadaire et anti look-ahead bias (à chaque date, seules les données antérieures sont utilisées pour scorer).
-        <br><br>
-        Univers : 53 tickers du S&amp;P 100 US (un sous-ensemble historique de 53 valeurs US, contre 125 dans l'univers actuel), benchmark SPY (S&amp;P 500 ETF). Limitation honnête : 60 % du score Signal (Fondamentaux + Analystes) n'est pas testé sur cette période car yfinance n'expose pas les fondamentaux historiques point-in-time — le backtest mesure principalement la composante technique (momentum, MM21/MM200, RSI, régression long terme, valorisation 52w).
-        <br><br>
-        Trois variants sont disponibles via <code>backtest_compare.py</code> :
+        Chaque composante du scoring vient d'un corpus connu et documenté — rien n'est propriétaire :
         <ul style="margin-top:0.6rem">
-          <li><strong>baseline</strong> : sans coûts, sans PFU — référence académique brute</li>
-          <li><strong>costs_only</strong> : ajoute frais 15 bps + PFU 30 % — mesure la friction réelle</li>
-          <li><strong>costs_vix</strong> : ajoute VIX dampener (testé puis désactivé) — mesure si la défensivité régime aide (sur l'indicateur VIX lui-même, voir §4)</li>
+          <li><strong>Analyse technique</strong> (croisements MM21/MM200, RSI, volume, lecture de tendance) : les classiques de John Murphy, <em>Technical Analysis of the Financial Markets</em>.</li>
+          <li><strong>Momentum</strong> (favoriser les titres en tendance haussière établie) : l'effet documenté par Jegadeesh &amp; Titman (1993), l'un des facteurs les plus étudiés en finance académique.</li>
+          <li><strong>Value / qualité fondamentale</strong> (marges, croissance, valorisation rapportée à la croissance, endettement) : l'héritage de Graham &amp; Dodd et de l'analyse fondamentale classique.</li>
+          <li><strong>Régression vers la moyenne</strong> (écart d'un cours à sa tendance long terme via un z-score) : statistique standard, sans secret.</li>
         </ul>
+        L'apport de Signal n'est pas une formule magique : c'est la <strong>discipline</strong> d'appliquer ces règles systématiquement, sans biais émotionnel, et de tout documenter en public. Le scoring complet (100 pts) et les règles sont lisibles ligne à ligne dans <code>screener.py</code>.
       </div>
     </div>
 
     <div class="portfo-block" style="margin-bottom:12px">
       <div class="portfo-header">
         <div class="portfo-accent" style="background:var(--gold)"></div>
-        <div class="portfo-htitle">Décomposition par régime de marché</div>
+        <div class="portfo-htitle">La validation se fait en réel, pas sur du marché passé</div>
       </div>
       <div class="portfo-body">
-        L'alpha global d'une stratégie peut masquer une réalité hétérogène : performer en bull mais s'effondrer en bear. Pour vérifier la robustesse de l'edge, le backtest décompose les résultats en <strong>5 régimes ex-ante</strong> (définis avant de tester, pour éviter le data-snooping) :
-        <ul style="margin-top:0.6rem">
-          <li><strong>bull_2019</strong> (2019-01 → 2020-02) — bull market pré-COVID</li>
-          <li><strong>covid_crash</strong> (2020-02-19 → 2020-04-30) — choc COVID -34 % S&amp;P puis V-shape</li>
-          <li><strong>bull_post_covid</strong> (2020-05 → 2021-12) — bull post-COVID +50 % S&amp;P</li>
-          <li><strong>bear_2022</strong> (2022-01 → 2022-10-13) — bear taux + tech -25 %</li>
-          <li><strong>recovery_2023_24</strong> (2022-10-14 → 2024-12) — récupération + rally IA</li>
-        </ul>
-        Une stratégie qui apporte de la valeur doit montrer un alpha positif (ou drawdown réduit) en bear/stress, pas seulement en bull. C'est ce critère qui distingue un vrai edge d'une exposition cachée au momentum factor en régime favorable.
-      </div>
-    </div>
-
-    <div class="portfo-block" style="margin-bottom:12px">
-      <div class="portfo-header">
-        <div class="portfo-accent" style="background:var(--green)"></div>
-        <div class="portfo-htitle">Deflated Sharpe Ratio — anti data-mining</div>
-      </div>
-      <div class="portfo-body">
-        Le Sharpe ratio brut surestime systématiquement la performance d'une stratégie quand on a testé plusieurs configurations (multiple comparison problem). Le <strong>Deflated Sharpe Ratio</strong> (Bailey &amp; Lopez de Prado 2014) corrige cette surestimation : <code>DSR ≈ SR / √(1 + 0.5 × N_trials / N_weeks)</code>, où N_trials est le nombre de variations testées implicitement.
+        C'est le choix méthodologique central — et il est volontairement modeste. Plutôt que de chercher à « prouver » la méthode en la rejouant sur l'historique (un exercice fragile : il est trop facile, a posteriori, de bricoler des réglages qui auraient bien marché sur une période donnée), Signal met la méthode à l'épreuve <strong>en avant, sur un portefeuille IA réel suivi en public</strong>.
         <br><br>
-        Signal teste 5 signaux momentum + différentes pondérations + différents seuils RSI/régression — soit ~10 trials implicites. Sur 281 semaines de backtest, le déflateur est modéré mais réel. Le critère santé : <strong>Deflated Sharpe &gt; 0.3</strong> pour considérer que l'edge est statistiquement défendable (pas du data mining).
+        Chaque semaine, l'agent prend ses décisions, elles sont horodatées et tracées, et la performance se compare au MSCI World. C'est lent — il faut des mois, voire des années, avant de pouvoir dire quoi que ce soit de sérieux — mais c'est honnête : aucun résultat n'est connu d'avance, aucune période n'est choisie après coup. On observe ce qui se passe, on documente les erreurs, on ajuste.
+        <br><br>
+        Conséquence assumée : à ce stade, Signal ne revendique <strong>aucune surperformance prouvée</strong>. La question « est-ce que cette discipline apporte quelque chose face à un simple ETF ? » reste ouverte, et c'est précisément l'expérience qui est menée sous vos yeux.
       </div>
     </div>
 
     <div class="portfo-block" style="margin-bottom:12px">
       <div class="portfo-header">
         <div class="portfo-accent" style="background:var(--orange)"></div>
-        <div class="portfo-htitle">Comparaison équitable post-PFU</div>
+        <div class="portfo-htitle">Comparer honnêtement : frais et impôts inclus</div>
       </div>
       <div class="portfo-body">
-        Subtilité méthodologique critique : un benchmark passif comme SPY <em>buy &amp; hold</em> ne paie aucun impôt pendant les 6 ans du backtest (toutes les plus-values sont latentes). Une stratégie active comme Signal paie 30 % de PFU sur chaque vente en gain. <strong>Comparer brut à brut est donc asymétrique en faveur du passif.</strong>
+        Pour que l'observation ait du sens, la comparaison portefeuille IA vs ETF doit être équitable. Une stratégie active comme Signal paie des frais à chaque ordre et 30 % de PFU sur chaque plus-value réalisée ; un ETF en <em>buy &amp; hold</em> ne déclenche aucun impôt tant qu'on ne vend pas (plus-values latentes). <strong>Comparer une performance active nette à une performance passive brute serait asymétrique, en faveur du passif sur le papier mais trompeur.</strong>
         <br><br>
-        La méthode correcte : appliquer le PFU 30 % aussi à SPY au moment d'une vente fictive à la fin du backtest. Ça donne un benchmark équitable. Le code <code>backtest_compare.py</code> calcule automatiquement les deux versions :
-        <ul style="margin-top:0.6rem">
-          <li><strong>Alpha "naïf"</strong> : Signal post-PFU vs SPY <em>brut</em> — biaisé contre Signal</li>
-          <li><strong>Alpha équitable</strong> : Signal post-PFU vs SPY post-PFU à la sortie — comparaison apples-to-apples</li>
-        </ul>
-        Sur le backtest 2019-2024 avec coûts + PFU + VIX dampener : alpha CAGR équitable +1.71pp/an (vs -2.39pp en méthode naïve). C'est le chiffre qui mesure honnêtement l'edge de Signal sous friction réelle.
+        C'est pourquoi le portefeuille suivi sur le site affiche sa performance <em>après</em> frais et avec l'impôt latent rendu visible (voir section 5 — la friction réelle et le <code>capital_post_liquidation</code>). L'enjeu n'est pas de produire un chiffre flatteur, mais de regarder en face ce qu'une gestion active doit surmonter avant même de pouvoir prétendre apporter quoi que ce soit.
       </div>
     </div>
 
@@ -1281,15 +1258,14 @@
         <div class="portfo-htitle">Code source ouvert</div>
       </div>
       <div class="portfo-body">
-        Toute cette méthodologie est implémentée dans le repo public <a href="https://github.com/Kosmos-7/Signal" target="_blank" style="color:var(--gold);text-decoration:none">github.com/Kosmos-7/Signal</a>. Les fichiers critiques :
+        Toute la méthode est implémentée dans le repo public <a href="https://github.com/Kosmos-7/Signal" target="_blank" style="color:var(--gold);text-decoration:none">github.com/Kosmos-7/Signal</a>. Les fichiers critiques :
         <ul style="margin-top:0.6rem">
-          <li><code>backtest.py</code> — simulation rebalancement hebdomadaire avec frais + PFU + 5 régimes + Deflated Sharpe</li>
-          <li><code>backtest_compare.py</code> — wrapper qui lance les 3 variants + table comparative + verdict go/no-go automatique sur 5 critères</li>
-          <li><code>config.py</code> — paramètres centralisés (frais, PFU, régimes, univers)</li>
-          <li><code>screener.py</code> — scoring 100 pts (45 momentum + 50 fonda + 5 analystes)</li>
-          <li><code>portfolio_agent.py</code> — agent Claude qui décide chaque semaine</li>
+          <li><code>screener.py</code> — scoring 100 pts (45 momentum + 50 fonda + 5 analystes), application disciplinée des méthodes publiques</li>
+          <li><code>portfolio_agent.py</code> — l'agent Claude qui décide chaque semaine, en réel</li>
+          <li><code>config.py</code> — paramètres centralisés (frais, PFU, univers)</li>
+          <li><code>notes/watchlist_archive/</code> — snapshots hebdomadaires horodatés, la trace point-in-time de l'expérimentation</li>
         </ul>
-        Chaque commit a un message explicite et la performance affichée sur le site est traçable jusqu'à la ligne de code qui la calcule. Cette transparence est l'engagement éditorial central de Signal.
+        Chaque commit a un message explicite et la performance affichée sur le site est traçable jusqu'à la ligne de code qui la calcule. Cette transparence — et l'absence de toute prétention d'alpha non démontrée — est l'engagement éditorial central de Signal.
       </div>
     </div>
   </section>

@@ -14,9 +14,7 @@ WatchRadar-main/.claude/
 *.bak
 *.backup-*
 
-# Test artifacts
-backtest_log.txt
-backtest_results*.json
+# Artifacts
 migration_*_report.txt
 
 # Dev scaffolding (jamais en prod)

@@ -2,7 +2,14 @@
 
 **Date** : 7 mai 2026
 **Décision** : ne pas intégrer dans le scoring de prod
-**Statut** : archivé pour réévaluation future si évidence empirique le justifie
+**Statut** : archivé pour réévaluation future si l'observation en réel le justifie
+
+> **Note de repositionnement (2026-05-31)** : cette note conserve les chiffres de l'exploration
+> backtest d'origine à titre d'archive, mais ils ne valent **pas** preuve d'edge ni « alpha »
+> revendiqué. Conformément à la posture neutre du projet, la seule validation qui compte est
+> l'observation du portefeuille IA en conditions réelles. Les mentions « alpha »/« backtest »
+> ci-dessous sont à lire comme un exercice exploratoire, pas comme une démonstration de
+> surperformance. La conclusion (ne pas ajouter sans évidence forte) reste pleinement valable.
 
 ---
 
@@ -49,7 +56,7 @@ Configuration testée :
 | Métrique | Baseline | + A/D | Δ |
 |---|---|---|---|
 | Portfolio CAGR | +32.35% | +33.49% | +1.14pp |
-| ALPHA CAGR/an | +13.51pp | +14.66pp | **+1.15pp** |
+| Écart vs SPY (pp/an) | +13.51pp | +14.66pp | **+1.15pp** |
 | Sharpe Ratio | 1.68 | 1.76 | +0.08 |
 | Volatilité | 19.29% | 19.05% | -0.24pp |
 | Max Drawdown | -22.70% | -23.72% | -1.02pp |
@@ -87,7 +94,7 @@ Intégrer demande :
 - Maintenir 2 paramètres supplémentaires (fenêtre, seuils)
 - Risque de bugs dans la transition
 
-Pour un gain incertain de 1pp/an sur un alpha déjà à +13.5pp.
+Pour un gain incertain de ~1pp/an, mesuré sur un seul backtest exploratoire qui ne prouve aucun edge en réel.
 
 ### 5. Discipline anti-overengineering
 Le projet a explicitement adopté une posture anti-surengineering — discussions
@@ -103,8 +110,8 @@ en conditions réelles de production :
 1. Plusieurs cas concrets où Signal a clairement raté un retournement (achat
    trop tardif sur titre en accumulation discrète, ou vente trop précoce sur
    titre en distribution silencieuse) — au moins 3-5 cas documentés
-2. Underperformance prolongée vs MSCI World (alpha < +5pp/an sur 6 mois)
-   suggérant que la méthodologie actuelle a perdu son edge
+2. Underperformance prolongée vs MSCI World (écart < +5pp/an sur 6 mois)
+   suggérant que la méthodologie actuelle ne tient pas en réel
 3. Ajout d'une source de données qui permettrait de corriger les biais du
    backtest (composition historique du S&P, données delisted)
 

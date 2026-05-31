@@ -5,6 +5,38 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [2.1.0] — 2026-05-31
+
+### Repositionnement éditorial — posture neutre, retrait du discours de backtest
+
+Recentrage de tout le frontend et de la documentation sur une posture **neutre et honnête** :
+Signal applique de façon disciplinée des **méthodes établies et publiques** (analyse technique
+façon Murphy, momentum Jegadeesh-Titman 1993, value Graham-Dodd, régression vers la moyenne),
+**sans aucune prétention d'alpha**. C'est une **expérimentation** : la méthodologie est mise à
+l'épreuve par l'**observation du portefeuille IA en réel**, pas par des backtests.
+
+- **Retrait de l'infrastructure backtest du récit produit** : la section 6 d'`apprendre.html`
+  (« Comment Signal se mesure honnêtement » → « Sur quoi repose la méthode ») ne s'appuie plus
+  sur `backtest.py` / `backtest_compare.py`, la décomposition par régime, le Deflated Sharpe ni
+  les chiffres d'alpha CAGR. Elle explique désormais les méthodes publiques sous-jacentes et
+  pose la validation **en avant, en conditions réelles** comme choix méthodologique central.
+- **Suppression des revendications d'alpha backtesté** dans le discours : plus aucun « +13,5pp/an »
+  ni « alpha CAGR équitable » présenté comme preuve de surperformance. La friction (frais + PFU)
+  reste documentée, mais comme exigence d'une comparaison honnête, pas comme générateur d'alpha.
+- **`portfolio.html`** : l'entrée de lexique « Alpha MSCI » devient « Écart au benchmark » —
+  on conserve l'observation de performance relative vs MSCI World, on retire le cadrage « alpha »
+  et l'objectif de surperformance. Le bloc de performance et les KPI étaient déjà neutres.
+- **`apprendre.html`** : le barème valorisation conditionné au cross est reformulé sur la logique
+  publique de mean-reversion (plus de claim « +86% médiane » issu d'un test empirique). Tout le
+  socle pédagogique (analyse technique/fondamentale, schémas SVG) est conservé tel quel.
+- **`notes/ad_line_evaluation.md`** : références backtest/alpha neutralisées (voir ci-dessous).
+
+> Note : `backtest.py` et `backtest_compare.py` restent dans le repo comme outils d'exploration
+> internes, mais ne sont plus la base de la communication ni une preuve d'edge. L'historique
+> factuel des versions antérieures est conservé tel quel ci-dessous.
+
+---
+
 ## [1.10.0] — 2026-05-10
 
 > NB : les versions v1.6 → v1.9 ont été tracées dans `portfolio.html` learnings (07 mai 2026)
@@ -49,8 +81,8 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 - **Archive snapshot hebdo** : `notes/watchlist_archive/YYYY-MM-DD.json` créé à chaque run du screener. Permet dans 6+ mois de reconstituer un historique fonda point-in-time pour backtester les 60% du score (Fondamentaux + Analystes) actuellement non testés (limitation reconnue ligne 12-14 de backtest.py).
 
 ### Validation
-- Backtest baseline 2026-05-10 : Alpha CAGR **+13.68pp/an**, Sharpe **1.68 vs 0.95 SPY**, Max DD **-22.70%**, Win rate **65.2%** sur 281 semaines (2019-2024). Cohérent avec methodology.md (+13.5pp).
-- Note honnête : `backtest.py` simule la stratégie momentum-only (top N → achat mécanique). **Il ne simule pas Claude.** Les modifs prompt agent n'apparaîtront pas dans ce backtest. Validation des règles 7/8 nécessite observation live sur 4-8 semaines.
+- À l'époque, un backtest baseline (2019-2024, 281 semaines) était utilisé comme garde-fou de non-régression du moteur de scoring. **Repositionné en v2.1.0** : ces chiffres ne sont plus présentés comme une preuve de surperformance ni un « alpha » revendiqué (cf. note honnête ci-dessous, déjà présente à l'époque).
+- Note honnête : `backtest.py` simule la stratégie momentum-only (top N → achat mécanique). **Il ne simule pas Claude.** Les modifs prompt agent n'apparaîtront pas dans ce backtest. La validation réelle des règles 7/8 passe par l'observation live du portefeuille IA.
 
 ---
 

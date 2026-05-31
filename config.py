@@ -2,13 +2,12 @@
 config.py — Paramètres centralisés de Signal.
 
 Single source of truth pour les constantes utilisées par portfolio_agent.py,
-screener.py, backtest.py, et update_prices.py. Modifier ici se propage partout.
+screener.py et update_prices.py. Modifier ici se propage partout.
 
 Sections :
   - COÛTS DE TRANSACTION (Phase 1)
   - FISCALITÉ FRANÇAISE (Phase 1)
   - VIX DAMPENER (Phase 2 — futurs paramètres, déjà déclarés)
-  - RÉGIMES DE BACKTEST (Phase 3 — futurs paramètres)
   - UNIVERS DU SCREENER (Phase 4 — futurs paramètres)
 
 Toute modification doit être documentée par un commentaire indiquant la source
@@ -141,12 +140,9 @@ def apply_sell_cost_and_tax(
 # PHASE 2 — VIX (indicateur contextuel, dampener DÉSACTIVÉ)
 # ─────────────────────────────────────────────────────────────────────────────
 #
-# Décision après backtest Phase 3 (2019-2024) :
-# Le dampener a été testé et dégrade légèrement le Sharpe sur cette période
-# (costs_only 0.92 → costs_vix 0.87). L'échantillon 2019-2024 est trop bull-
-# dominated (un seul vrai stress event COVID en V-shape) pour faire émerger
-# le bénéfice théorique du dampener. À retester avec un backtest 2007-2024
-# incluant GFC.
+# Décision : le dampener est DÉSACTIVÉ. Approche neutre — on n'ajoute aucune
+# mécanique post-LLM qui modifie les scores selon un régime de marché.
+# Le VIX reste FETCHÉ et AFFICHÉ comme simple information contextuelle.
 #
 # Décision actuelle : le VIX continue d'être FETCHÉ et AFFICHÉ pour transparence
 # (dashboard + prompt Claude) mais n'INFLUENCE PLUS le scoring (multiplier = 1.0).
@@ -176,22 +172,14 @@ def vix_multiplier(vix: float | None) -> float:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# PHASE 3 — RÉGIMES DE BACKTEST (déclarés ici pour cohérence)
+# PHASE 3 — (section retirée : approche neutre, validation via le portefeuille IA)
 # ─────────────────────────────────────────────────────────────────────────────
 
-# Frontières de régime pour le backtest split. Critères objectifs publics.
-# À déclarer EX-ANTE pour éviter le data-snooping sur les bornes.
-REGIME_DEFINITIONS = [
-    {"label": "bull_2019",        "from": "2019-01-01", "to": "2020-02-18", "desc": "Bull market pré-COVID"},
-    {"label": "covid_crash",      "from": "2020-02-19", "to": "2020-04-30", "desc": "Choc COVID -34% S&P puis V-shape"},
-    {"label": "bull_post_covid",  "from": "2020-05-01", "to": "2021-12-31", "desc": "Bull post-COVID +50% S&P"},
-    {"label": "bear_2022",        "from": "2022-01-01", "to": "2022-10-13", "desc": "Bear 2022 taux + tech -25%"},
-    {"label": "recovery_2023_24", "from": "2022-10-14", "to": "2024-12-31", "desc": "Récupération + IA rally"},
-]
+# (Les définitions de régime de backtest ont été retirées — plus de backtest.)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# PHASE 4 — UNIVERS DU SCREENER (à activer après Phase 3 validée)
+# PHASE 4 — UNIVERS DU SCREENER (à activer après validation)
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Sources d'index pour construire l'univers dynamiquement.

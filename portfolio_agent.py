@@ -37,7 +37,7 @@ MAX_POSITIONS        = 20        # nb max de lignes simultanées (15→20 : ~5%/
 TICKER_CAC40         = "^FCHI"
 # MSCI World — ETF EUR-denominated (iShares Core MSCI World UCITS, Xetra)
 # Évite le mismatch de devise vs portfolio EUR : avant on utilisait URTH (USD)
-# ce qui faussait l'alpha de plusieurs points selon le mouvement EUR/USD.
+# ce qui faussait la comparaison au benchmark selon le mouvement EUR/USD.
 TICKER_MSCI          = "EUNL.DE"
 
 client = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
@@ -857,8 +857,8 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 7. **Signal en transition** : si un titre watchlist a un `signal_dynamics_warning` non-vide (death cross qui se résorbe, golden cross qui s'affaiblit, rebond mean-reversion sur cross stale, affaiblissement post-rally), traiter le cross technique comme **ambigu** — ne pas vendre/acheter sur ce signal seul. Croiser avec fonda et delta_these.
 8. **Cross-validation analystes / cours** : pour les titres en zone d'incertitude (score 30-65), si le consensus analystes est très favorable mais le cours en dégradation 6-12m, suspecter une dégradation des données screener (effet change, périmètre M&A, désync data) — ne pas conclure trop vite sur la base du score seul. Re-lire la justification.
 9. **Heures de marché** : tes décisions sont enregistrées au moment du run, mais l'exécution réelle attend l'ouverture du marché du titre. Si tu décides un ACHAT NVDA (US) à 8h UTC un lundi, l'ordre attendra 14h30 UTC (+6h30) pour s'exécuter — le prix peut bouger entre temps. Tiens-en compte : ne pas paniquer sur des données pré-ouverture, et si tous les marchés concernés sont fermés (weekend, jour férié), privilégier l'attente de la prochaine ouverture sauf urgence (stop-loss catastrophe).
-10. **Friction fiscale (PFU 30%)** : Signal est sur compte-titres ordinaire français. Chaque VENTE en plus-value paye 30% de PFU sur le gain. Conséquence : une vente "neutre" pour réinvestir ailleurs PERD 30% du gain réalisé. Avant de proposer une vente sur position en gain, vérifie que l'alternative a un alpha attendu net suffisant pour couvrir cette friction (règle empirique : ne pas vendre un +20% pour acheter un titre dont l'edge espéré est < 10%). Les positions en perte ne sont PAS pénalisées fiscalement et la perte devient même un crédit d'impôt utilisable 10 ans. Les plus-values LATENTES (positions non vendues) ne sont JAMAIS imposées — le buy & hold long terme est structurellement avantagé.
-11. **VIX = indicateur contextuel non scoré** : le VIX est désormais affiché dans la section CONTEXTE DE MARCHÉ comme indicateur d'ambiance macro, MAIS il n'influence plus mécaniquement le scoring du screener (le backtest 2019-2024 a montré que le dampener dégradait le Sharpe net sur cette période bull-dominated). Tu es libre de t'en servir comme contexte qualitatif dans `analyse_macro` ("VIX à 22 cette semaine, vigilance modérée — j'ai privilégié les positions qualité"), mais ne traite pas le VIX comme une règle d'enforcement. Les scores du screener sont ce qu'ils sont, indépendamment du VIX.
+10. **Friction fiscale (PFU 30%)** : Signal est sur compte-titres ordinaire français. Chaque VENTE en plus-value paye 30% de PFU sur le gain. Conséquence : une vente "neutre" pour réinvestir ailleurs PERD 30% du gain réalisé. Avant de proposer une vente sur position en gain, vérifie que l'alternative a un avantage attendu net suffisant pour couvrir cette friction (règle empirique : ne pas vendre un +20% pour acheter un titre dont l'edge espéré est < 10%). Les positions en perte ne sont PAS pénalisées fiscalement et la perte devient même un crédit d'impôt utilisable 10 ans. Les plus-values LATENTES (positions non vendues) ne sont JAMAIS imposées — le buy & hold long terme est structurellement avantagé.
+11. **VIX = indicateur contextuel non scoré** : le VIX est désormais affiché dans la section CONTEXTE DE MARCHÉ comme indicateur d'ambiance macro, MAIS il n'influence plus mécaniquement le scoring du screener (choix de neutralité — on n'applique aucune mécanique de régime de marché au scoring). Tu es libre de t'en servir comme contexte qualitatif dans `analyse_macro` ("VIX à 22 cette semaine, vigilance modérée — j'ai privilégié les positions qualité"), mais ne traite pas le VIX comme une règle d'enforcement. Les scores du screener sont ce qu'ils sont, indépendamment du VIX.
 
 ## DATE & MOMENT DU RUN
 - Run actuel       : {contexte.get('jour_semaine','?')} {today} {contexte.get('heure_utc','?')} UTC ({contexte.get('semaine','?')})
@@ -871,7 +871,7 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 - **Performance NETTE (depuis création) = {perf:+.2f}%**  (= {capital - CAPITAL_INITIAL:+.0f}€ vs {CAPITAL_INITIAL:.0f}€ initial — après frais et impôts réalisés)
 - Performance brute (sans coûts) : {perf_brute:+.2f}%  (différence = {perf_brute - perf:+.2f}pp = friction réelle)
 - Benchmark MSCI World (YTD 2026) = {bench:+.2f}%
-- **Alpha portefeuille vs MSCI = {vs:+.2f} points de pourcentage** (= perf portefeuille − MSCI YTD)
+- **Écart au benchmark vs MSCI = {vs:+.2f} points de pourcentage** (= perf portefeuille − MSCI YTD ; observation, pas une revendication d'alpha)
 - Liquidités disponibles      : {liquidites:.0f}€
 
 ## FRICTION RÉELLE (frais transaction + fiscalité française)
@@ -882,12 +882,12 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
   Les plus-values LATENTES (positions non vendues) ne sont PAS imposées.
   → Conséquence directe : buy & hold long terme est structurellement favorisé. Une vente "neutre"
     (sortir d'une position correcte pour réinvestir ailleurs) perd 30% sur le gain → la position
-    de remplacement doit avoir un alpha attendu suffisant pour compenser cette friction fiscale.
+    de remplacement doit avoir un avantage attendu suffisant pour compenser cette friction fiscale.
 
 🔢 IMPORTANT — chiffres à recopier EXACTEMENT :
   · Performance portefeuille NETTE : "{perf:+.2f}%" (NE PAS dire +0.0%, NE PAS dire YTD pour le portefeuille — c'est la perf cumulée depuis la création, après coûts et impôts)
   · Performance brute (référence)  : "{perf_brute:+.2f}%"
-  · Alpha vs MSCI                  : "{vs:+.2f}pp"
+  · Écart vs MSCI                  : "{vs:+.2f}pp"
   · Capital actuel                 : "{capital:.0f}€"
   · Frais + impôts payés à ce jour : "{frais_cum + impots_cum:.0f}€"
 Si tu cites ces chiffres dans `analyse_macro` ou `message_utilisateurs`, recopie-les depuis cette section, ne les recalcule pas toi-même.
@@ -898,7 +898,7 @@ Positions ouvertes ({len(positions)}) :
 ## CONTEXTE DE MARCHÉ CETTE SEMAINE
 - CAC40 : {contexte.get('cac40', {}).get('perf_semaine', 0):+.1f}% sur la semaine, {contexte.get('cac40', {}).get('perf_ytd', 0):+.1f}% YTD
 - MSCI World : {contexte.get('msci', {}).get('perf_semaine', 0):+.1f}% sur la semaine, {contexte.get('msci', {}).get('perf_ytd', 0):+.1f}% YTD
-- VIX : {contexte.get('vix','?')} — {"régime calme (<20)" if contexte.get('vix', 18) < 20 else "vigilance (20-25)" if contexte.get('vix', 18) < 25 else "stress modéré (25-35)" if contexte.get('vix', 18) < 35 else "panique (>35)"}. Indicateur contextuel uniquement, n'influence PAS les scores du screener (dampener mécanique désactivé après backtest 2019-2024). Tu peux le citer dans ton analyse si pertinent (ex: justifier une prudence accrue en VIX>25), mais sans le traiter comme une règle d'enforcement.
+- VIX : {contexte.get('vix','?')} — {"régime calme (<20)" if contexte.get('vix', 18) < 20 else "vigilance (20-25)" if contexte.get('vix', 18) < 25 else "stress modéré (25-35)" if contexte.get('vix', 18) < 35 else "panique (>35)"}. Indicateur contextuel uniquement, n'influence PAS les scores du screener (dampener mécanique désactivé — choix de neutralité). Tu peux le citer dans ton analyse si pertinent (ex: justifier une prudence accrue en VIX>25), mais sans le traiter comme une règle d'enforcement.
 - Mode panique : {"OUI — Règle 03 active, aucun ordre possible" if contexte.get('mode_panique') else "NON — ordres possibles"}
 {regles_section}
 {ordres_section}{macro_news_section}{synthese_str}## WATCHLIST CETTE SEMAINE (top 10 sur 25)
@@ -950,7 +950,7 @@ Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, selon ce format 
       "score_watchlist": 0
     }}
   ],
-  "analyse_macro": "TEXTE NEWSLETTER (200-350 mots, 4-6 paragraphes courts SÉPARÉS PAR UN DOUBLE SAUT DE LIGNE `\\n\\n` — c'est NON-NÉGOCIABLE, sinon le rendu HTML produit un mur de texte illisible). Chaque paragraphe = 2 à 4 phrases, une idée par paragraphe. C'est CE QUE LE LECTEUR LIT chaque semaine sur le site. Adresse-toi DIRECTEMENT à lui ('vous', pas 'on' ni 'l'investisseur'). Ton : analyste rigoureux mais avec un brin d'humour décalé pour contraster avec les chiffres sérieux — pense à un Howard Marks qui aurait lu Charlie Munger ET aurait un sens de la formule. Tu peux te permettre une métaphore, une vanne fine sur les marchés, un clin d'œil. Pas de sarcasme méchant, pas de blagues lourdes. Reste pro mais vivant. STRUCTURE en paragraphes distincts (chacun séparé par `\\n\\n`) : §1 accroche sur l'événement de la semaine (cite EXPLICITEMENT le contenu des news macro reçues plus haut — pas juste le titre, le chiffre : si CPI à 2.4%, dis 2.4%, pas 'inflation reste centrale') ; §2 ce que ça veut dire concrètement pour le portefeuille + chiffres clés (perf {perf:+.2f}%, alpha {vs:+.2f}pp recopiés depuis ÉTAT ACTUEL) ; §3 éléments méthodologiques qui ont guidé tes décisions (R7, val_pts, signal_dynamics_warning si pertinent — sinon zappe) ; §4 biais ou learning de la semaine (s'il y en a un saillant, sinon zappe) ; §5 mot pour la semaine à venir (ce que vous surveillerez). NE PAS commencer par 'Sur la semaine écoulée du X au Y' (trop bureaucratique — préfère une accroche éditoriale qui glisse la date naturellement) mais l'ancrage temporel reste obligatoire dans les 2 premières phrases. Évite les formulations creuses ('le marché reste un paramètre central', 'l'attention est portée à...') — sois précis et concret. RAPPEL CRITIQUE : DOUBLE SAUT DE LIGNE `\\n\\n` entre chaque paragraphe, sinon le site rend un bloc compact.",
+  "analyse_macro": "TEXTE NEWSLETTER (200-350 mots, 4-6 paragraphes courts SÉPARÉS PAR UN DOUBLE SAUT DE LIGNE `\\n\\n` — c'est NON-NÉGOCIABLE, sinon le rendu HTML produit un mur de texte illisible). Chaque paragraphe = 2 à 4 phrases, une idée par paragraphe. C'est CE QUE LE LECTEUR LIT chaque semaine sur le site. Adresse-toi DIRECTEMENT à lui ('vous', pas 'on' ni 'l'investisseur'). Ton : analyste rigoureux mais avec un brin d'humour décalé pour contraster avec les chiffres sérieux — pense à un Howard Marks qui aurait lu Charlie Munger ET aurait un sens de la formule. Tu peux te permettre une métaphore, une vanne fine sur les marchés, un clin d'œil. Pas de sarcasme méchant, pas de blagues lourdes. Reste pro mais vivant. STRUCTURE en paragraphes distincts (chacun séparé par `\\n\\n`) : §1 accroche sur l'événement de la semaine (cite EXPLICITEMENT le contenu des news macro reçues plus haut — pas juste le titre, le chiffre : si CPI à 2.4%, dis 2.4%, pas 'inflation reste centrale') ; §2 ce que ça veut dire concrètement pour le portefeuille + chiffres clés (perf {perf:+.2f}%, écart au benchmark {vs:+.2f}pp recopiés depuis ÉTAT ACTUEL) ; §3 éléments méthodologiques qui ont guidé tes décisions (R7, val_pts, signal_dynamics_warning si pertinent — sinon zappe) ; §4 biais ou learning de la semaine (s'il y en a un saillant, sinon zappe) ; §5 mot pour la semaine à venir (ce que vous surveillerez). NE PAS commencer par 'Sur la semaine écoulée du X au Y' (trop bureaucratique — préfère une accroche éditoriale qui glisse la date naturellement) mais l'ancrage temporel reste obligatoire dans les 2 premières phrases. Évite les formulations creuses ('le marché reste un paramètre central', 'l'attention est portée à...') — sois précis et concret. RAPPEL CRITIQUE : DOUBLE SAUT DE LIGNE `\\n\\n` entre chaque paragraphe, sinon le site rend un bloc compact.",
   "biais_detectes": ["biais 1", "biais 2"],
   "conviction_globale": "haussier" | "neutre" | "baissier",
   "message_utilisateurs": "Message transparent aux utilisateurs sur les décisions de cette semaine",

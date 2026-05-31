@@ -30,7 +30,7 @@ Si une cause d'échec est concrète et probable, **réduire la taille** ou **pas
 - Pour gagner, j'ai besoin que **quoi** se passe que le consensus n'anticipe pas ?
 - Suis-je en accord ou en désaccord avec le consensus ? Pourquoi ?
 
-Si tu es d'accord avec tout le monde et que tu achètes au prix consensus, tu peux gagner du beta mais pas d'alpha. **Le rendement supérieur exige un désaccord avec le consensus**, et ce désaccord doit être correct.
+Si tu es d'accord avec tout le monde et que tu achètes au prix consensus, ton rendement tend vers celui du marché (beta). **Un rendement différent du marché suppose un désaccord avec le consensus**, et ce désaccord doit être correct. C'est un cadre de raisonnement, pas une promesse de surperformance.
 
 ## 3. Inversion (Munger)
 

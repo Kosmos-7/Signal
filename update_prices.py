@@ -11,7 +11,7 @@ FAIT UNIQUEMENT :
   - Récupère les prix actuels des positions ouvertes (yfinance)
   - Met à jour valeur_actuelle, performance, prix_actuel par position
   - Recalcule capital_actuel et performance globale
-  - Met à jour benchmark MSCI World et alpha
+  - Met à jour le benchmark MSCI World et l'écart au benchmark
   - Upsert l'entrée du jour dans performance_history
   - Recalcule max_drawdown
   - Persiste dans portfolio.json

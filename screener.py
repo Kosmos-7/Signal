@@ -376,8 +376,8 @@ def fibonacci_retracement(close_series, lookback=252):
 
 # ── UNIVERS ──────────────────────────────────────────────────────────────────
 # Phase 4 light (2026-05-23) — élargissement raisonné de 90 → 125 tickers (+35)
-# Méthodologie : audit critique préalable a montré que l'univers initial était 98%
-# utilisé sur 5 ans de backtest, donc pas de bruit structurel. Les 35 ajouts
+# Méthodologie : l'univers initial couvrait déjà l'essentiel des grandes
+# capitalisations (pas de bruit structurel). Les 35 ajouts
 # comblent 10 trous thématiques précis identifiés (cloud infra, cybersec, REITs,
 # Asie directe, etc.), tous validés via yfinance (history 5y + cap > 25B + liquidité OK).
 UNIVERS = [
@@ -684,10 +684,9 @@ def score_ticker(ticker, vix=None):
         #   matérialise la "réinitialisation propre" = Setup A renforcé dans opportunities.md).
         # Sans GC frais, le barème original (chute = risque de continuation) reste valide.
         #
-        # Caveats à revalider Q3-Q4 2026 :
-        #   - Sample 2017-2024 biaisé vers rebonds V-shape (régime bull dominant)
-        #   - 32 tickers large caps (survivorship bias — les delistings absents)
-        #   - Le pattern peut s'inverser en cycle séculaire bear (style 1966-1982)
+        # Caveat : barème de calibration, à revalider périodiquement. Le pattern
+        # "GC frais + chute profonde -> rebond" s'observe sur des cas publics récents
+        # mais peut s'inverser en cycle séculaire bear.
         close_52w = close.iloc[-252:] if len(close) >= 252 else close
         high_52w  = float(close_52w.max())
         drawdown_52w_pct = (prix / high_52w - 1) * 100 if high_52w > 0 else 0
@@ -1170,9 +1169,9 @@ def main():
     with open("watchlist.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
-    # ── Archive snapshot point-in-time (capture pour backtest fondamentaux futur) ──
-    # Permet dans 6+ mois de reconstituer un historique fonda point-in-time pour backtester
-    # les 60% du score (Fondamentaux + Analystes) actuellement non testés (cf backtest.py ligne 12-14).
+    # ── Archive snapshot point-in-time ──
+    # Capture l'état des fondamentaux/analystes à la date du run (les données fonda
+    # historiques point-in-time n'étant pas exposées par Yahoo).
     try:
         import shutil, os
         archive_dir = os.path.join("notes", "watchlist_archive")

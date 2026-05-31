@@ -14,7 +14,7 @@ Analystes           →  5 pts
 
 Pondération calibrée par l'expérience (le projet Signal applique cette logique en production sur 124 tickers).
 
-**⚠️ Honnêteté empirique sur l'alpha** (session 2026-05-27) : un premier backtest 2019-2024 sur 52 tickers US large caps montrait +13,5pp/an d'alpha vs SPY sur les 40 pts de momentum. Mais un backtest étendu sur 525 tickers (S&P500 + STOXX 600 + Asie mega-caps) sur 2 périodes de 6 ans (2007-2013 bear, 2017-2023 bull) montre **alpha négatif** (-2,89%/an en bear, -1,83%/an en bull, top-quintile vs equal-weight). Le résultat initial était surestimé par survivorship bias et cherry-picking d'univers. **Conclusion** : le scoring n'est PAS un alpha generator prouvé à l'échelle — c'est un **outil de discipline et d'attention sélective** (filtrage chase de rally, identification Setup B, structuration des décisions). La valeur du process se manifeste dans les analyses individuelles, pas dans l'alpha mécanique d'un portefeuille top-quintile.
+**Approche neutre — aucune prétention d'alpha.** Méthodes publiques appliquées avec discipline ; mise à l'épreuve par l'observation du portefeuille IA en réel, pas par backtest. Le scoring est un **outil de discipline et d'attention sélective** (filtrage chase de rally, identification Setup B, structuration des décisions), pas un générateur d'alpha.
 
 ## Pilier 1 — Momentum technique (45 pts)
 

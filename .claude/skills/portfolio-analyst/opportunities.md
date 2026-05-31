@@ -69,11 +69,11 @@ Sans catalyseur, le pari est de la "value" pure — peut prendre des années à 
 
 ### 5. Désaccord avec le consensus
 
-Howard Marks (*I Beg to Differ*) : pour un alpha positif, il faut être en désaccord avec le consensus **et avoir raison**.
+Howard Marks (*I Beg to Differ*) : pour espérer un rendement différent du marché, il faut être en désaccord avec le consensus **et avoir raison**. C'est un cadre de raisonnement, pas une promesse de surperformance.
 
 - Si tu es d'accord avec tout le monde, tu paies le prix du consensus → rendement = beta du marché
 - Si tu es en désaccord et tu te trompes → tu perds
-- Si tu es en désaccord et tu as raison → alpha
+- Si tu es en désaccord et tu as raison → rendement différencié possible
 
 **Question explicite** : qu'est-ce que je vois que le consensus ne voit pas (ou refuse de voir) ?
 
