@@ -4,7 +4,7 @@ C'est Claude qui raisonne sur les décisions d'achat/vente chaque semaine.
 
 Il reçoit :
 - L'état actuel du portefeuille (positions, performance, liquidités)
-- La watchlist de la semaine (25 actions scorées)
+- La watchlist de la semaine (30 actions scorées)
 - Le contexte de marché (CAC40, performances sectorielles)
 - Les règles non négociables (patience, taille, panique, stop-loss)
 
@@ -901,7 +901,7 @@ Positions ouvertes ({len(positions)}) :
 - VIX : {contexte.get('vix','?')} — {"régime calme (<20)" if contexte.get('vix', 18) < 20 else "vigilance (20-25)" if contexte.get('vix', 18) < 25 else "stress modéré (25-35)" if contexte.get('vix', 18) < 35 else "panique (>35)"}. Indicateur contextuel uniquement, n'influence PAS les scores du screener (dampener mécanique désactivé — choix de neutralité). Tu peux le citer dans ton analyse si pertinent (ex: justifier une prudence accrue en VIX>25), mais sans le traiter comme une règle d'enforcement.
 - Mode panique : {"OUI — Règle 03 active, aucun ordre possible" if contexte.get('mode_panique') else "NON — ordres possibles"}
 {regles_section}
-{ordres_section}{macro_news_section}{synthese_str}## WATCHLIST CETTE SEMAINE (top 10 sur 25)
+{ordres_section}{macro_news_section}{synthese_str}## WATCHLIST CETTE SEMAINE (top 10 sur {len(tickers_watchlist)})
 {chr(10).join(top10_lines)}
 Tickers watchlist complète : {', '.join(tickers_watchlist)}
 

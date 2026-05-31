@@ -1,6 +1,6 @@
 """
 screener.py — Agent de sélection Signal
-Génère watchlist.json avec les 25 actions les mieux scorées.
+Génère watchlist.json avec les 30 meilleures actions par score (cf. WATCHLIST_SIZE).
 
 Sources de données :
 - Yahoo Finance (yfinance) : prix, indicateurs techniques, fondamentaux US
@@ -534,6 +534,9 @@ def generer_justification(nom, score, details, alertes):
         justif += f" ⚠ {alertes[0]}"
     return justif
 
+# Taille de la watchlist : nombre de titres retenus (top N par score) parmi l'univers.
+WATCHLIST_SIZE = 30
+
 # Fenêtres de régression (en jours de bourse, 252/an)
 _REG_DAYS_TECH     = 10 * 252   # 10 ans pour tech/IA (boom récent biaiserait une fenêtre plus longue)
 _REG_DAYS_STD      = 20 * 252   # 20 ans pour les autres secteurs
@@ -1029,7 +1032,7 @@ def raison_sortie(prev_stock, current_stock=None):
         if "résorption" in dyn_warn:
             parts.append("nuance : le death cross était en cours de résorption (pente MM21 positive) — sortie sur dégradation fonda/momentum global, pas sur le seul cross")
         elif "mean-reversion" in dyn_warn:
-            parts.append("nuance : rebond mean-reversion en cours, mais score global insuffisant pour rester top 25")
+            parts.append(f"nuance : rebond mean-reversion en cours, mais score global insuffisant pour rester dans le top {WATCHLIST_SIZE}")
         elif "affaiblissement" in dyn_warn:
             parts.append(f"nuance : {dyn_warn.split(' — ')[0].lower()} — confirme la sortie")
 
@@ -1121,17 +1124,17 @@ def main():
             time.sleep(0.5)
 
     resultats.sort(key=lambda x: -x["score"])
-    top25 = resultats[:25]
+    top = resultats[:WATCHLIST_SIZE]
 
-    if not top25:
+    if not top:
         print("❌ Aucune action scorée — vérifiez la connexion réseau ou les tickers.")
         return
 
-    current_tickers = {s["ticker"] for s in top25}
-    entrees = [s for s in top25 if s["ticker"] not in previous]
+    current_tickers = {s["ticker"] for s in top}
+    entrees = [s for s in top if s["ticker"] not in previous]
     sorties = [t for t in previous if t not in current_tickers]
 
-    for s in top25:
+    for s in top:
         if s["ticker"] not in previous:
             s["change"] = "new"
         elif s["score"] > previous[s["ticker"]].get("score", 0) + 3:
@@ -1158,14 +1161,14 @@ def main():
             "reason": raison_sortie(prev, current),
         })
 
-    for i, s in enumerate(top25):
+    for i, s in enumerate(top):
         s["rank"] = i + 1
 
     # ── Composition de la sélection : exhaustif, tous secteurs triés desc ────
     from collections import Counter
-    sector_counts = Counter(s["sector"] for s in top25)
+    sector_counts = Counter(s["sector"] for s in top)
     concentration_alerts = [
-        f"{sector} : {n} titre{'s' if n > 1 else ''} sur 25"
+        f"{sector} : {n} titre{'s' if n > 1 else ''} sur {WATCHLIST_SIZE}"
         for sector, n in sector_counts.most_common()
     ]
     if concentration_alerts:
@@ -1179,7 +1182,7 @@ def main():
         "week":                    f"Sem. {d.isocalendar()[1]} · {d.year}",
         "universe_size":           len(resultats),
         "finnhub_active":          bool(FINNHUB_KEY),
-        "stocks":                  top25,
+        "stocks":                  top,
         "changelog":               changelog,
         "concentration_alerts":    concentration_alerts,
         "sector_distribution":     dict(sector_counts.most_common()),
@@ -1201,8 +1204,8 @@ def main():
     except Exception as e:
         print(f"⚠️  Échec archive snapshot : {e}")
 
-    top1 = top25[0]
-    print(f"\n✅ watchlist.json — {len(top25)} actions")
+    top1 = top[0]
+    print(f"\n✅ watchlist.json — {len(top)} actions")
     print(f"   #1 : {top1['name']} ({top1['score']}/100)")
     print(f"   {top1['justification']}")
 

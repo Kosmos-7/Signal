@@ -4,7 +4,7 @@ generate_analyses.py — Génère/rafraîchit le contenu ÉDITORIAL par ticker (
 Contexte
 --------
 Le terminal watchlist (index.html) fusionne DEUX fichiers au render() :
-  - watchlist.json  : 25 tickers + breakdown chiffré (généré par screener.py)
+  - watchlist.json  : 30 tickers + breakdown chiffré (généré par screener.py)
   - analyses.json   : contenu éditorial par ticker (resume / biz / futur / actu / bull / bear)
 
 Jusqu'ici analyses.json était un artefact MANUEL figé : quand le screener faisait
