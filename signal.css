@@ -28,16 +28,18 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,Bl
 .frame i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}.frame i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
 .frame i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}.frame i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
 
-/* ── Header / nav ── */
-header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem}
+/* ── Header / nav ── (transparent au repos, se givre au scroll — comportement partagé, piloté par signal-fx.js) */
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem;background:transparent;border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s}
+header.scrolled{background:rgba(8,11,20,.62);border-bottom-color:var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-icon{flex-shrink:0;display:flex}
 .brand-name{font-family:var(--serif);font-size:1.3rem;letter-spacing:-.5px;color:var(--text)}
 nav{display:flex;gap:1.4rem}
 nav a{font-size:.82rem;color:var(--text3);text-decoration:none;transition:color .15s}
 nav a:hover{color:var(--text2)}nav a.active{color:var(--text)}
 
 /* ── Footer ── */
-footer{position:relative;z-index:5;border-top:1px solid var(--line);padding:1.4rem 2rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem}
+footer{position:relative;z-index:5;border-top:1px solid var(--line);padding:1.4rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:3rem}
 .footer-legal{font-size:.74rem;color:var(--text3);max-width:540px;line-height:1.5}
 .footer-right{font:.74rem var(--mono);color:var(--text3)}
 

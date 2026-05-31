@@ -50,25 +50,8 @@
 
   /* fond géré par le chrome partagé (#fx / #bg / .scan / .frame via signal.css + signal-fx.js) */
 
-  /* ── HEADER ── */
-  header {
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background: transparent;
-    border-bottom: 1px solid transparent;
-    transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
-    z-index: 100;
-  }
-  header.scrolled {
-    background: rgba(8,11,20,0.62);
-    border-bottom-color: rgba(255,255,255,0.07);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-  }
+  /* ── HEADER ── (transparent + frost + padding hérités de signal.css ; sticky car doc qui défile) */
+  header { position: sticky; top: 0; }
   .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
   .brand-icon { flex-shrink: 0; display: flex; }
   .brand-name { font-family: Georgia, serif; font-size: 1.4rem; color: var(--text); letter-spacing: -0.5px; }
@@ -450,20 +433,7 @@
     margin-top: 2.5rem;
   }
 
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    position: relative;
-    z-index: 1;
-  }
-  .footer-legal { font-size: 0.75rem; color: var(--text3); line-height: 1.5; max-width: 560px; }
-  .footer-right  { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); }
+  /* footer : entièrement hérité de signal.css (harmonisé) */
 
   /* ── RESPONSIVE ── */
   @media (max-width: 640px) {
@@ -540,7 +510,7 @@
 <div class="scan" aria-hidden="true"></div>
 <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
-<header id="site-header">
+<header>
   <a class="brand" href="index.html">
     <span class="brand-icon">
       <svg width="30" height="30" viewBox="0 0 28 28" fill="none">
@@ -1384,14 +1354,5 @@
 
 <script src="signal-fx.js"></script>
 <script src="signal-toc.js"></script>
-<script>
-  // ── Scroll header ──
-  const hdr = document.getElementById('site-header');
-  const onScroll = () => {
-    if (window.scrollY > 10) hdr.classList.add('scrolled');
-    else hdr.classList.remove('scrolled');
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-</script>
 </body>
 </html>

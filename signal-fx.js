@@ -19,3 +19,15 @@
   }
   size();draw();window.addEventListener('resize',size);
 })();
+
+/* Header : frost au scroll — partagé par toutes les pages.
+   Écoute la fenêtre ET la .stage : la watchlist (index) ne fait pas défiler la
+   fenêtre (body overflow:hidden) mais sa .stage en interne. Seuil unifié à 10px. */
+(function(){
+  const hdr=document.querySelector('header');if(!hdr)return;
+  const stage=document.querySelector('.stage');
+  const upd=()=>{const s=Math.max(window.scrollY||0,stage?stage.scrollTop:0);hdr.classList.toggle('scrolled',s>10);};
+  window.addEventListener('scroll',upd,{passive:true});
+  if(stage)stage.addEventListener('scroll',upd,{passive:true});
+  upd();
+})();
