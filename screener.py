@@ -855,17 +855,20 @@ def score_ticker(ticker, vix=None):
         # post-rally +124%). Le z-score binaire actuel donne 0 pts hors zone saine
         # mais ne pénalise pas activement — bug majeur.
         #
-        # Mécanique :
-        #   z > 2,5σ                              → -3 (chase extrême)
-        #   z > 2,0σ ET (RSI > 70 OU dd_52w > -3%) → -2 (chase modéré)
+        # Mécanique (v2.2 — magnitudes renforcées + palier léger : le timing prime davantage) :
+        #   z > 2,5σ                                → -6 (chase extrême)
+        #   z > 2,0σ ET (RSI > 70 OU dd_52w > -3%)   → -4 (chase confirmé)
+        #   z > 1,5σ (sinon)                         → -2 (chase léger)
         # Sinon : 0
         chase_pen = 0
         z_valid = (regression_z is not None
                    and not (isinstance(regression_z, float) and np.isnan(regression_z)))
         if z_valid:
-            if regression_z > 2.5:
-                chase_pen = -3
+            if   regression_z > 2.5:
+                chase_pen = -6
             elif regression_z > 2.0 and (rsi > 70 or drawdown_52w_pct > -3):
+                chase_pen = -4
+            elif regression_z > 1.5:
                 chase_pen = -2
 
         # ── Bonus « décote-qualité » (v2.1) — MIROIR de la pénalité CHASE ──────
@@ -877,15 +880,16 @@ def score_ticker(ticker, vix=None):
         #   - qualité solide (fonda ≥ 40/50),
         #   - pas de death cross frais (≤60j),
         #   - MM21 qui ne dévisse pas (pente 5j > -2%).
-        #   z ≤ -2,5σ → +3 (décote forte) | z ≤ -2,0σ → +2 (décote modérée)
+        #   z ≤ -2,5σ → +6 (forte) | z ≤ -2,0σ → +4 (modérée) | z ≤ -1,5σ → +2 (légère)  [v2.2]
         value_bonus = 0
         if z_valid and fund_pts >= 40:
             _dc = cross_info.get("days_since_cross")
             _fresh_death = (cross_info["regime"] == "death" and _dc is not None and _dc <= 60)
             _slope = cross_info.get("slope_mm21_pct") or 0
             if (not _fresh_death) and _slope > -2.0:
-                if   regression_z <= -2.5: value_bonus = 3
-                elif regression_z <= -2.0: value_bonus = 2
+                if   regression_z <= -2.5: value_bonus = 6
+                elif regression_z <= -2.0: value_bonus = 4
+                elif regression_z <= -1.5: value_bonus = 2
 
         score = max(0, min(100, score + death_pen + chase_pen + value_bonus))
         stars = 5 if score >= 90 else 4 if score >= 75 else 3 if score >= 60 else 2 if score >= 45 else 1
