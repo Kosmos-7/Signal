@@ -650,6 +650,15 @@ def score_ticker(ticker, vix=None):
         debt_eq      = debt_eq_raw if debt_eq_raw is not None else 0
         reco         = info.get("recommendationMean") or 3.5
 
+        # Période de réf. des fondamentaux (dernier trimestre publié ; mostRecentQuarter = epoch s).
+        # Temporalités Yahoo : rev_growth = trimestriel a/a (MRQ vs même trim. N-1) ;
+        # net_margin & fcf_margin = TTM (12 mois glissants).
+        _mrq_ts = info.get("mostRecentQuarter")
+        try:
+            mrq_iso = _dt.utcfromtimestamp(int(_mrq_ts)).strftime("%Y-%m-%d") if _mrq_ts else None
+        except Exception:
+            mrq_iso = None
+
         fh_data    = finnhub_fundamentals(ticker)
         confiance, alertes = valider_fondamentaux(info, fh_data)
 
@@ -932,9 +941,10 @@ def score_ticker(ticker, vix=None):
                 else "standard_20y"
             ),
             # Fondamentaux
-            "rev_growth_pct":        round(rev_growth * 100, 1),
-            "net_margin_pct":        round(margins * 100, 1),
-            "fcf_margin_pct":        round(fcf_margin * 100, 1),
+            "rev_growth_pct":        round(rev_growth * 100, 1),   # trimestriel, glissement annuel (MRQ vs même trim. N-1)
+            "net_margin_pct":        round(margins * 100, 1),      # TTM (12 mois glissants)
+            "fcf_margin_pct":        round(fcf_margin * 100, 1),   # TTM (12 mois glissants)
+            "mrq":                   mrq_iso,                      # date du dernier trimestre publié — réf. période fondamentaux
             "death_pen":             death_pen,
             "chase_pen":             chase_pen,
             "confiance":             round(confiance, 2),

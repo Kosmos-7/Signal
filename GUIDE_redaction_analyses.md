@@ -31,6 +31,7 @@ identifiable → ce n'est **pas** une franchise, c'est un « business » (souven
 - **Nommer** le type de douve et **questionner sa durabilité** (qu'est-ce qui la tuerait ?).
 - Traiter le **momentum comme du timing** (déclencheur), jamais comme une thèse.
 - **Chiffrer** (CA, marges, FCF, PER forward vs historique) ; privilégier le **FCF** au bénéfice « ajusté ».
+- **Toujours préciser la temporalité** d'un chiffre fondamental : la croissance du CA fournie est *trimestrielle en glissement annuel* (dernier trimestre publié vs même trimestre N-1), les marges nette & FCF sont en *TTM* (12 mois glissants). Ne jamais écrire « croissance du CA de X % » sans la période.
 - Rester dans le **cercle de compétence** : dire clairement quand la durabilité n'est **pas** évaluable.
 
 **DON'T**
@@ -55,7 +56,7 @@ identifiable → ce n'est **pas** une franchise, c'est un « business » (souven
 ## 4. Exemple appliqué — NVDA
 
 - **`resume`** — « Concepteur dominant des GPU/plateformes de calcul IA. Le score de 90 reflète des
-  fondamentaux exceptionnels (CA +85 %, marge nette 63 %) — une note de *qualité*, pas un timing.
+  fondamentaux exceptionnels (CA +85 % a/a au dernier trim., marge nette 63 % TTM) — une note de *qualité*, pas un timing.
   Débat central : valorisation forward raisonnable (PER 16,7) vs durabilité du cycle IA. »
 - **`biz`** — *(comment)* vente de GPU haut de gamme + réseau + logiciel ; marge brute ~74 % =
   fort pricing power. *(type de douve)* **coûts de transfert** (écosystème CUDA) + effet de réseau

@@ -54,6 +54,7 @@
   .meter{grid-template-columns:104px 1fr 44px}   /* labels en toutes lettres */
 
   .prose{margin-top:1.8rem;max-width:1040px}
+  .metrics-note{font:.62rem var(--mono);color:var(--text3);letter-spacing:.2px;line-height:1.55;margin:-.7rem 0 0}
 
   .bbsec{margin-top:1.9rem}
   .bbsec .sec-h{color:var(--text2)}
@@ -144,16 +145,18 @@ function showLexique(){
       lexi('Pente MM21','Inclinaison de la MM21 : positive = momentum qui se renforce, négative = qui s\'essouffle.')+
       lexi('Drawdown 52 s','Baisse depuis le plus haut des 52 dernières semaines, en %. Le repli déjà encaissé.'))+
     lexsec('Fondamentaux',
-      lexi('Croissance CA','Variation du chiffre d\'affaires sur un an.')+
-      lexi('Marge nette','Bénéfice net rapporté au chiffre d\'affaires.')+
-      lexi('Marge FCF','Free cash-flow (trésorerie réellement générée) rapporté au CA — plus difficile à maquiller comptablement que la marge nette.')+
+      lexi('Croissance CA','Croissance du chiffre d\'affaires du <em>dernier trimestre publié</em>, comparé au même trimestre un an plus tôt (glissement annuel, « a/a »). Ce n\'est pas la croissance annuelle.')+
+      lexi('Marge nette','Bénéfice net rapporté au chiffre d\'affaires, sur les <em>12 derniers mois glissants</em> (TTM).')+
+      lexi('Marge FCF','Free cash-flow (trésorerie réellement générée) rapporté au CA, sur les <em>12 derniers mois</em> (TTM) — plus difficile à maquiller comptablement que la marge nette.')+
       lexi('Consensus analystes','Recommandation moyenne sell-side, échelle Acheter / Conserver / Vendre.'));
   requestAnimationFrame(()=>doc.classList.add('on'));
 }
+function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
+function periodNote(b){ const p=qLabel(b&&b.mrq); const ca=p?'dernier trimestre publié ('+p.q+')':'dernier trimestre publié'; const ttm=p?' au '+p.d:''; return 'Fondamentaux — CA : '+ca+' en glissement annuel (a/a) · marges nette &amp; FCF : 12 mois glissants (TTM)'+ttm+'.'; }
 function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
   const rsi=b.rsi==null?50:Math.max(0,Math.min(100,b.rsi)),zp=Math.max(0,Math.min(100,((b.regression_z==null?0:b.regression_z)+3)/6*100));
   const C=2*Math.PI*52,off=C*(1-s.score/100);
-  const resumeBody=a&&a.resume?a.resume.map(p=>'<p class="resume">'+p+'</p>').join(''):'<p class="resume">'+s.name+' — score '+s.score+'/100. '+stateTag(b)+'. Croissance CA '+fs(b.rev_growth_pct,0)+' %, marge nette '+f(b.net_margin_pct,0)+' %, z-score '+fs(b.regression_z,1)+'σ.</p><p class="resume stub">Synthèse qualitative à générer.</p>';
+  const resumeBody=a&&a.resume?a.resume.map(p=>'<p class="resume">'+p+'</p>').join(''):'<p class="resume">'+s.name+' — score '+s.score+'/100. '+stateTag(b)+'. Croissance CA '+fs(b.rev_growth_pct,0)+' % (dern. trim., a/a), marge nette '+f(b.net_margin_pct,0)+' % (TTM), z-score '+fs(b.regression_z,1)+'σ.</p><p class="resume stub">Synthèse qualitative à générer.</p>';
   const bb=(a&&(a.bull||a.bear))?'<div class="bullbear"><div class="bb bb-bull"><div class="bb-h">▲ Thèse haussière</div>'+bblist(a.bull)+'</div><div class="bb bb-bear"><div class="bb-h">▼ Thèse baissière</div>'+bblist(a.bear)+'</div></div>':'';
   doc.classList.remove('on');
   doc.innerHTML='<div class="d-head"><div><div class="d-tk">'+s.ticker+'</div><div class="d-nm">'+s.name+' · '+s.sector+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div></div>'+
@@ -161,7 +164,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,2)+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
       '<div><div class="qh">Décomposition du score</div>'+meter('Momentum',b.momentum||0,45)+meter('Fondamentaux',b.fondamentaux||0,50)+meter('Analystes',b.analystes||0,5)+'</div></div>'+
-    '<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA',fs(b.rev_growth_pct,1)+'%')+mk('Marge net',f(b.net_margin_pct,1)+'%')+mk('Marge FCF',f(b.fcf_margin_pct,1)+'%')+'</div>'+
+    '<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA · a/a',fs(b.rev_growth_pct,1)+'%')+mk('Marge nette · TTM',f(b.net_margin_pct,1)+'%')+mk('Marge FCF · TTM',f(b.fcf_margin_pct,1)+'%')+'</div><div class="metrics-note">'+periodNote(b)+'</div>'+
     '<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
       '<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div></div>'+
     (bb?sec('Bull vs Bear',bb,'bbsec'):'');

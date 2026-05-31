@@ -241,7 +241,7 @@ def breakdown_block(stock):
         + (f" (fenêtre {b.get('regression_window_years')} ans)" if b.get("regression_window_years") else ""),
         f"- Drawdown 52s : {fmt(b.get('drawdown_52w_pct'),'%')}"
         + (f"   |   Zone Fibo : {fibo}" if fibo else ""),
-        f"- Fondamentaux : croissance CA {fmt(b.get('rev_growth_pct'),'%')} · marge nette {fmt(b.get('net_margin_pct'),'%')} · marge FCF {fmt(b.get('fcf_margin_pct'),'%')}",
+        f"- Fondamentaux (PRÉCISE toujours la période dans la prose) : croissance CA {fmt(b.get('rev_growth_pct'),'%')} = dernier trimestre publié en glissement annuel (a/a){(' au ' + b['mrq']) if b.get('mrq') else ''} · marge nette {fmt(b.get('net_margin_pct'),'%')} = TTM, 12 mois glissants · marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM",
     ]
     if warn:
         lines.append(f"- ⚠ Signal en transition : {warn}")
