@@ -5,7 +5,7 @@ Approche en 3 piliers, validée empiriquement sur des décennies de recherche ac
 ## Scoring synthétique : 100 points
 
 ```
-Momentum technique  →  45 pts  (cross 20 + RSI 10 + vol 5 + reg 5 + valorisation 5)
+Momentum technique  →  45 pts  (cross 20 + RSI 5 + vol 5 + reg 5 + valorisation 5 + pente MM21 5)
 Fondamentaux        →  50 pts
 Analystes           →  5 pts
                        ─────
@@ -43,14 +43,26 @@ Pondération par fraîcheur du signal :
 
 **Lecture dynamique obligatoire** : un cross n'est pas un état figé. Le screener calcule automatiquement un champ `signal_dynamics_warning` dans le breakdown quand le signal est en transition (death cross avec pente MM21 redevenue positive et spread tendu, ou golden cross s'affaiblissant). **Toujours lire ce champ avant de pondérer le cross dans le verdict.** Quand il est non-vide, traiter le signal comme ambigu — pas exploitable seul.
 
-### 1.2 RSI (10 pts)
+### 1.2 RSI (5 pts — v2.1, réduit de 10 à 5)
 
 Mesure de momentum 0-100 sur 14 périodes :
-- Zone idéale 40-60 → 10 pts (momentum sain, ni surachat ni survente)
-- Zone élargie 35-65 → 5 pts
+- Zone idéale 40-60 → 5 pts (momentum sain, ni surachat ni survente)
+- Zone élargie 35-65 → 2 pts
 - Zone surachat (>70) ou survente (<30) → 0 pt (signal extrême, mean-reversion probable)
 
+**Pourquoi 5 et non plus 10 (v2.1)** : le RSI mesure surtout l'*extension* (titre épuisé ou non), déjà couverte par la régression (1.4) et la valorisation (1.5) — c'était du triple-comptage. Les 5 pts récupérés vont à la **pente MM21 (1.2bis)**, le seul vrai signal de *force de tendance* qui n'était pas noté.
+
 Combiné au Cross : Golden Cross + RSI 50 = setup propre. Golden Cross + RSI 75 = signal mature, hausse probablement priced in.
+
+### 1.2bis Pente MM21 (5 pts — v2.1, force de tendance)
+
+Variation de la MM21 sur 5 séances (`slope_mm21_pct`, qui ne servait avant que dans les warnings). Mesure la **vélocité / qualité de la tendance courte**, là où le cross ne donne que sa *direction* :
+- pente ≥ +0,8 % → 5 pts (accélération franche)
+- pente ≥ +0,3 % → 3 pts (hausse nette)
+- pente ≥ 0 % → 1 pt (légèrement positive / s'aplatit)
+- pente < 0 % → 0 pt (MM21 qui dévisse)
+
+Récompense un trend qui *accélère*, pas seulement « au-dessus de la MM200 ». Ex. (2026-06) : GOOGL/ADI pente >1 % → 5/5 ; NVDA qui consolide (+0,47 %) → 3/5 ; MSFT qui s'aplatit (+0,12 %) → 1/5.
 
 ### 1.3 Volume (5 pts)
 

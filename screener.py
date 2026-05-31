@@ -683,17 +683,28 @@ def score_ticker(ticker, vix=None):
         score   = 0
         details = {}
 
-        # Momentum (45 pts) = cross (20) + RSI (10) + volume (5) + régression (5) + valorisation (5)
+        # Momentum (45 pts) = cross (20) + RSI (5) + volume (5) + régression (5) + valorisation (5) + pente MM21 (5)
         vol_ok        = vol_recent > vol_annual
 
-        # RSI gradué : zone stricte 40-60 = 10, élargie 35-65 = 5, hors zone = 0
-        if   40 <= rsi <= 60: rsi_pts = 10
-        elif 35 <= rsi <= 65: rsi_pts = 5
+        # RSI gradué (5 pts, v2.1 — réduit de 10 à 5 : redondant avec régression + valo
+        # qui mesurent déjà l'extension ; les 5 pts récupérés vont à la pente MM21).
+        # Zone stricte 40-60 = 5, élargie 35-65 = 2, hors zone = 0.
+        if   40 <= rsi <= 60: rsi_pts = 5
+        elif 35 <= rsi <= 65: rsi_pts = 2
         else:                 rsi_pts = 0
         rsi_ok = rsi_pts > 0
 
         vol_pts = 5  if vol_ok else 0
         reg_pts = 5  if reg_zone_saine else 0
+
+        # Pente MM21 (5 pts, v2.1) — FORCE de tendance : le seul aspect « qualité du trend »
+        # qu'on ne notait pas (la pente ne servait que dans les warnings). Récupère les 5 pts
+        # retirés au RSI. Pente = variation de la MM21 sur 5 séances (cf. detect_cross).
+        _slope_mm21 = cross_info.get("slope_mm21_pct") or 0
+        if   _slope_mm21 >= 0.8:  slope_pts = 5   # accélération franche
+        elif _slope_mm21 >= 0.3:  slope_pts = 3   # hausse nette
+        elif _slope_mm21 >= 0.0:  slope_pts = 1   # légèrement positive
+        else:                     slope_pts = 0   # MM21 baissière
 
         # Valorisation actuelle (5 pts) — drawdown vs plus haut 52 semaines,
         # CONDITIONNÉ AU RÉGIME CROSS depuis test empirique du 23/05/2026 sur
@@ -742,7 +753,7 @@ def score_ticker(ticker, vix=None):
         # (5 pts) ne sont PAS dampenés — donc en régime panique, le score max
         # atteignable baisse (intentionnellement : aucune action ne peut sembler
         # "parfaite" en plein VIX 40+).
-        momentum_raw  = cross_pts + rsi_pts + vol_pts + reg_pts + val_pts
+        momentum_raw  = cross_pts + rsi_pts + vol_pts + reg_pts + val_pts + slope_pts
         vix_mult      = config.vix_multiplier(vix)
         momentum_total = round(momentum_raw * vix_mult)
 
@@ -954,6 +965,7 @@ def score_ticker(ticker, vix=None):
             "vol_pts":               vol_pts,
             "reg_pts":               reg_pts,
             "val_pts":               val_pts,
+            "slope_pts":             slope_pts,
             "val_pts_mode":          val_pts_mode,  # "gc_fresh_inverted" si GC frais (barème inversé), "normal" sinon
             "drawdown_52w_pct":      round(drawdown_52w_pct, 1),
             "high_52w":              round(high_52w, 2),

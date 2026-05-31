@@ -667,7 +667,7 @@
           <div class="bar-fill" style="width: 45%"></div>
         </div>
         <div class="scoring-desc">
-          L'algorithme évalue si le titre est en tendance haussière claire. Cinq signaux comptent : le Golden Cross (MM21 au-dessus de MM200, avec bonus selon la fraîcheur du croisement), le RSI dans une zone équilibrée (40-60 = 10 pts), le volume des dernières semaines supérieur à la moyenne longue (confirmation), un cours proche de sa trajectoire de régression long terme (zone saine), et la <strong>valorisation actuelle</strong> (5 pts max, mais le barème dépend du régime cross — détaillé plus bas). Un titre qui monte régulièrement avec des volumes croissants <em>et</em> qui offre un point d'entrée correct score bien. Un titre qui oscille sans direction, qui vient de former un Death Cross, ou qui est collé à son plus haut récent (chase de rally), score moins.
+          L'algorithme évalue si le titre est en tendance haussière claire. Six signaux comptent : le Golden Cross (MM21 au-dessus de MM200, avec bonus selon la fraîcheur du croisement), le RSI dans une zone équilibrée (40-60 = 5 pts), la <strong>pente de la MM21</strong> (la force/accélération de la tendance courte, 5 pts), le volume des dernières semaines supérieur à la moyenne longue (confirmation), un cours proche de sa trajectoire de régression long terme (zone saine), et la <strong>valorisation actuelle</strong> (5 pts max, mais le barème dépend du régime cross — détaillé plus bas). Un titre qui monte régulièrement avec des volumes croissants <em>et</em> qui offre un point d'entrée correct score bien. Un titre qui oscille sans direction, qui vient de former un Death Cross, ou qui est collé à son plus haut récent (chase de rally), score moins.
           <br><br>
           <em style="color:var(--text3)">Pour aller plus loin — détail d'implémentation.</em>
           <br><br>
@@ -861,7 +861,7 @@
         <span class="concept-label">RSI (force relative)</span>
         <span class="concept-example">RSI 52</span>
         <div class="concept-body">
-          Le RSI (Relative Strength Index) est un oscillateur entre 0 et 100 qui mesure la vitesse et l'ampleur des variations récentes du cours. Il compare l'amplitude des hausses à celle des baisses sur les 14 derniers jours. Entre 40 et 60 : le titre est équilibré, ni suracheté ni survendu — c'est la zone idéale (10 pts dans le score Signal).
+          Le RSI (Relative Strength Index) est un oscillateur entre 0 et 100 qui mesure la vitesse et l'ampleur des variations récentes du cours. Il compare l'amplitude des hausses à celle des baisses sur les 14 derniers jours. Entre 40 et 60 : le titre est équilibré, ni suracheté ni survendu — c'est la zone idéale (5 pts dans le score Signal).
           <br><br>
           Au-dessus de 70 : le titre monte trop vite par rapport à sa moyenne, risque de correction à court terme. Sous 30 : survendu, potentiel de rebond mais pas automatique — un titre peut rester en survente longtemps si la tendance fondamentale est durablement négative. Un RSI à 52 comme ici est confortable : le titre a de la marge dans les deux sens.
         </div>
