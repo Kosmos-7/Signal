@@ -857,7 +857,26 @@ def score_ticker(ticker, vix=None):
             elif regression_z > 2.0 and (rsi > 70 or drawdown_52w_pct > -3):
                 chase_pen = -2
 
-        score = max(0, score + death_pen + chase_pen)
+        # ── Bonus « décote-qualité » (v2.1) — MIROIR de la pénalité CHASE ──────
+        # Symétrie manquante : CHASE pénalise la surextension (z>2σ), mais une
+        # décote (z<-2σ) ne touchait AUCUN point — un compounder de qualité 2σ sous
+        # sa tendance était noté comme une bulle 2σ au-dessus. On récompense donc la
+        # décote, mais SEULEMENT si c'est un Setup B mean-reversion (opportunities.md),
+        # pas un couteau qui tombe. Garde-fous (selling.md / pré-flight) :
+        #   - qualité solide (fonda ≥ 40/50),
+        #   - pas de death cross frais (≤60j),
+        #   - MM21 qui ne dévisse pas (pente 5j > -2%).
+        #   z ≤ -2,5σ → +3 (décote forte) | z ≤ -2,0σ → +2 (décote modérée)
+        value_bonus = 0
+        if z_valid and fund_pts >= 40:
+            _dc = cross_info.get("days_since_cross")
+            _fresh_death = (cross_info["regime"] == "death" and _dc is not None and _dc <= 60)
+            _slope = cross_info.get("slope_mm21_pct") or 0
+            if (not _fresh_death) and _slope > -2.0:
+                if   regression_z <= -2.5: value_bonus = 3
+                elif regression_z <= -2.0: value_bonus = 2
+
+        score = max(0, min(100, score + death_pen + chase_pen + value_bonus))
         stars = 5 if score >= 90 else 4 if score >= 75 else 3 if score >= 60 else 2 if score >= 45 else 1
 
         exchange = info.get("exchange", "")
@@ -970,6 +989,7 @@ def score_ticker(ticker, vix=None):
             "peg":                   round(peg, 2) if peg else None,
             "death_pen":             death_pen,
             "chase_pen":             chase_pen,
+            "value_bonus":           value_bonus,
             "confiance":             round(confiance, 2),
             "sources":               ["Yahoo Finance"] + (["Finnhub"] if fh_data else []),
         }

@@ -163,6 +163,31 @@ z > 2,0σ ET (RSI > 70 OU drawdown > -3%)  → chase_pen = -2 (chase modéré)
 
 **Limites** : la pénalité ne couvre que les surextensions z-score. Un titre en zone z saine (+0,5σ) mais collé au top avec RSI 80 peut quand même être un chase — c'est le rôle de `val_pts` (section 1.5) avec le barème inversé GC frais.
 
+### 1.7 Bonus « décote-qualité » (v2.1 — miroir symétrique du CHASE)
+
+**Asymétrie corrigée** : la pénalité CHASE (1.6) punit la surextension (z > 2σ), mais la **décote** (z < −2σ) ne touchait aucun point — le z-score binaire (1.4) notait un compounder de qualité 2σ *sous* sa tendance comme une bulle 2σ *au-dessus* (0 pt dans les deux cas). Or une décote sur un titre de qualité qui **ne tombe plus** est précisément le **Setup B** (mean-reversion, `opportunities.md`). D'où le bonus symétrique.
+
+**Mécanique** (additionnel au score 100 pts, plafond 100, appliqué avant le floor à 0) :
+
+```
+value_bonus = 0
+SI fondamentaux ≥ 40/50  ET  pas un couteau qui tombe :
+    z ≤ -2,5σ  → value_bonus = +3  (décote forte)
+    z ≤ -2,0σ  → value_bonus = +2  (décote modérée)
+```
+
+**Garde-fous « pas un couteau qui tombe »** (cf. `selling.md`, pré-flight) — le bonus ne se déclenche QUE si les trois conditions tiennent :
+- **qualité solide** : bucket fondamentaux ≥ 40/50 (sinon = simple value trap, pas un Setup B) ;
+- **pas de death cross frais** (≤ 60j) : décote en plein cassage de tendance = on attend la confirmation, on ne rattrape pas ;
+- **MM21 qui ne dévisse pas** : pente 5j > −2 % (la moyenne courte s'aplatit/se redresse = début de résorption).
+
+**Logique** : contrepartie disciplinée du CHASE. CHASE dit « trop cher, attends un pullback » ; le bonus dit « décoté ET de qualité ET en stabilisation = Setup B à surveiller ». Il ne récompense **jamais** une décote seule — un titre cheap qui chute encore reste à 0.
+
+**Lecture en pratique** :
+- Le breakdown JSON expose `value_bonus` (+3, +2, ou 0) — un `value_bonus > 0` = candidat mean-reversion sur qualité, à mettre sur le radar.
+- Exemple (2026-06) : **MSFT** z=−2,06σ, fonda 48/50, death cross 93j (vieux) + pente MM21 +0,12 % (s'aplatit) → **+2** (65 → 67). NVDA (z sain) et GOOGL/ADI (z > 2σ, CHASE −3) ne le touchent pas.
+- **Pas un signal d'achat** : le bonus remonte un titre sur le radar (Setup B), il ne dit pas « achète ». La confirmation du retournement reste à valider (`selling.md` : death cross frais → attendre).
+
 ## Pilier 2 — Fondamentaux (50 pts)
 
 50 pts répartis sur :
