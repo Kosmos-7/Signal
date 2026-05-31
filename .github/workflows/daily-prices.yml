@@ -40,6 +40,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "Aucun changement de prix (marché fermé ou jour férié)."
           else
-            git commit -m "prices: refresh $(date -u +'%Y-%m-%d')"
-            git push
+            git commit -m "prices: refresh $(date -u +'%Y-%m-%d') [skip ci]"
+            git pull --rebase --autostash && git push
           fi

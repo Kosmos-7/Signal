@@ -120,11 +120,14 @@ def score_momentum_at(df, target_date, vix=None):
     vol_annual = float(volume_2y.mean())
     vol_pts = 5 if vol_recent > vol_annual else 0
 
-    # Régression long terme (5 pts) — la fonction screener applique déjà holdout 20j
+    # Régression long terme (5 pts) — APPROXIMATION v1 : régression sur l'historique
+    # disponible (~9 ans), PAS la fenêtre 10/20/25 ans par industry du live (screener.py).
     z, _ = calcul_regression(close)
     reg_pts = 5 if -0.5 <= z <= 1.5 else 0
 
-    # Valorisation actuelle (5 pts) — drawdown vs 52w high, aligné avec score_ticker() v2
+    # Valorisation actuelle (5 pts) — drawdown vs 52w high, barème NORMAL uniquement.
+    # ⚠ Ce backtest n'implémente PAS le scoring v2 complet : ni val_pts inversé (GC frais),
+    #   ni pénalité CHASE. Approximation de la composante technique, pas une validation de v2.0.2.
     close_52w = close.iloc[-252:] if len(close) >= 252 else close
     high_52w  = float(close_52w.max())
     prix_now  = float(close.iloc[-1])
@@ -631,8 +634,9 @@ def print_report(metrics, history, result=None, regime_metrics=None):
     sharpe_diff = metrics["portfolio_sharpe"] - metrics["benchmark_sharpe"]
     print("\n🎯 VERDICT")
     if alpha_cagr > 1.0 and sharpe_diff > 0:
-        print(f"  ✅ Le momentum produit de l'alpha : +{alpha_cagr:.2f}pp/an avec Sharpe supérieur (+{sharpe_diff:.2f}).")
-        print(f"     Le scoring technique seul (40/100) bat {BENCHMARK_TICKER} sur la période.")
+        print(f"  ↑ Alpha positif sur CET univers/période : +{alpha_cagr:.2f}pp/an, Sharpe +{sharpe_diff:.2f}.")
+        print(f"     ⚠ À NUANCER : univers survivor-biased (gagnants figés rétro-appliqués à 2019)")
+        print(f"     + composante technique v1 seule (pas le scoring v2). Pas une preuve d'alpha robuste.")
     elif abs(alpha_cagr) < 1.0:
         print(f"  ⚠️  Performance équivalente au benchmark (alpha {alpha_cagr:+.2f}pp/an).")
         print(f"     Le scoring n'apporte ni ne détruit de valeur — un ETF ferait pareil.")

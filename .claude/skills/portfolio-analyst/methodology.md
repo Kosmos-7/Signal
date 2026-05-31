@@ -12,7 +12,9 @@ Analystes           →  5 pts
                        100 pts
 ```
 
-Pondération calibrée par l'expérience (le projet Signal applique cette logique en production sur 90 tickers, backtest 2019-2024 : +13.5pp/an d'alpha vs SPY sur les 40 pts de momentum seuls — version actuelle ajoute 5 pts de timing d'entrée).
+Pondération calibrée par l'expérience (le projet Signal applique cette logique en production sur 124 tickers).
+
+**⚠️ Honnêteté empirique sur l'alpha** (session 2026-05-27) : un premier backtest 2019-2024 sur 52 tickers US large caps montrait +13,5pp/an d'alpha vs SPY sur les 40 pts de momentum. Mais un backtest étendu sur 525 tickers (S&P500 + STOXX 600 + Asie mega-caps) sur 2 périodes de 6 ans (2007-2013 bear, 2017-2023 bull) montre **alpha négatif** (-2,89%/an en bear, -1,83%/an en bull, top-quintile vs equal-weight). Le résultat initial était surestimé par survivorship bias et cherry-picking d'univers. **Conclusion** : le scoring n'est PAS un alpha generator prouvé à l'échelle — c'est un **outil de discipline et d'attention sélective** (filtrage chase de rally, identification Setup B, structuration des décisions). La valeur du process se manifeste dans les analyses individuelles, pas dans l'alpha mécanique d'un portefeuille top-quintile.
 
 ## Pilier 1 — Momentum technique (45 pts)
 
@@ -90,55 +92,66 @@ Pour les titres cycliques matures (auto, semi, banques, materials, énergie, shi
 1. Pour tout cyclique mature → **calculer z-score sur 20-25y** (ou max listing), pas 10y
 2. Quand divergence majeure (>1σ) entre fenêtres → **flagger explicitement** et utiliser la fenêtre longue
 3. Comparer plusieurs fenêtres systématiquement pour valider la robustesse du signal
-4. Sectoriels concernés : Auto (Valeo, Forvia, Stellantis), Semi (LRCX, AMAT, KLAC sur cycles 7y), Banks EU/US, Materials (Arkema, Croda), Energy, Shipping, REITs cycliques
+4. Sectoriels concernés : Auto (Valeo, Forvia, Stellantis), **Semi EQUIPMENT uniquement** (LRCX, AMAT, KLAC, ASML sur cycles capex 7y), Banks EU/US, Materials (Arkema, Croda), Energy, Shipping
 
 **Cas contrasté** :
 - Compounders tech matures (MSFT, GOOGL, V, MA, etc.) : 10y suffit car trend LT généralement stable
 - Quality compounders matures multi-cycles (KO, JNJ, PG) : 15-20y idéal
 - **Cycliques matures : 20-25y obligatoire**
 
-### 1.5 Valorisation actuelle / timing d'entrée (5 pts) — barème CONDITIONNÉ au régime cross
+**⚠️ Granularité semi designers vs equipment (v2.0.2)** : yfinance utilise "Semiconductors" pour TOUS les designers (NVDA, AMD, AVGO, MU, INTC, TSM, ADI, TXN, QCOM) sans distinguer :
+- **Memory chips** (Micron, SK Hynix) : ultra-cyclique 7 ans
+- **AI accelerators** (NVDA) : secular winner — pas cyclique au sens classique
+- **Analog industrial** (ADI, TXN) : modérément cyclique
+- **Foundries** (TSM) : capex cyclique
 
-Le barème val_pts dépend de la présence ou non d'un **Golden Cross frais** (≤30j depuis le cross). Calibration depuis test empirique du 23/05/2026 sur 43 145 events GC frais 2017-2024 (32 tickers).
+Le screener Signal v2.0.2 ne traite comme cycliques 25y QUE l'industrie `"Semiconductor Equipment & Materials"` (AMAT, LRCX, KLAC, ASML). Les designers retombent en `tech_10y` standard. NVDA et autres secular winners ne sont plus artificiellement pénalisés. Les bulles memory au pic (MU, SK Hynix à z>+5σ) restent attrapées par la **pénalité CHASE** (section 1.6) qui ne dépend pas de la fenêtre.
 
-**Cas 1 — Avec Golden Cross frais (≤30j)** : barème INVERSÉ. La chute profonde + GC frais représente une "réinitialisation propre" (Setup A renforcé, cf opportunities.md) avec perf forward 12m MONOTONE CROISSANTE :
+**Implémentation production** : voir `_CYCLICAL_INDUSTRIES` dans `screener.py`. Le breakdown JSON expose le champ `regression_window_reason` (`cyclical_25y` / `tech_10y` / `standard_20y`) pour transparence.
 
-| Drawdown vs 52w high | val_pts | Perf 12m médiane mesurée |
-|---|---|---|
-| 0 à -3% (top, chase) | 0 | +16.8% |
-| -3 à -10% (pullback) | 2 | +19.9% |
-| -10 à -20% (correction) | 3 | +24.3% |
-| -20 à -30% (drawdown modéré) | 4 | +44.3% |
-| < -30% (chute profonde) | **5** | **+86.1%** ← premium |
+### 1.5 Valorisation actuelle / timing d'entrée (5 pts)
 
-**Cas 2 — Sans Golden Cross frais** : barème original (chute = risque de continuation).
+Drawdown du cours actuel vs plus haut 52 semaines :
+- 0% à -3% (proche du top) → 0 pt — chase de rally, mauvais timing
+- -3% à -10% (pullback sain) → 5 pts — zone d'entrée idéale
+- -10% à -20% (correction modérée) → 3 pts — entrée agressive possible si trend intacte
+- -20% à -30% (momentum cassé) → 1 pt
+- < -30% (chute libre) → 0 pt — la trend est probablement perdue
 
-| Drawdown vs 52w high | val_pts | Lecture |
-|---|---|---|
-| 0 à -3% (top, chase) | 0 | mauvais timing, mean-reversion court terme probable |
-| -3 à -10% (pullback) | 5 | zone d'entrée idéale (sweet spot) |
-| -10 à -20% (correction) | 3 | entrée agressive possible si trend intacte |
-| -20 à -30% (momentum cassé) | 1 | risque élevé sans signal de reprise |
-| < -30% (chute libre) | 0 | trend probablement perdue |
+C'est un proxy systématique du **range d'entrée** détaillé dans `opportunities.md` (entre MM21 et Fibo 38.2%). Pénalise les achats au plus haut, récompense les achats sur pullback sain.
+
+**Logique** : un Golden Cross frais a beau être un bon signal, l'acheter quand le cours est collé à son plus haut 52w est statistiquement défavorable (mean-reversion à court terme). Un Golden Cross frais avec un pullback de -7% est le sweet spot.
+
+### 1.6 Pénalité CHASE de rally (v2.0.2)
+
+**Bug historique** : le z-score binaire des sections 1.4 donnait 0 pt hors zone saine, mais ne **pénalisait pas activement** les surextensions extrêmes. Conséquence : des titres en bulle technique (Micron z=+5σ, Alphabet z=+2,9σ post-rally +124%, Goldman Sachs z=+2,6σ) pouvaient obtenir 3 étoiles si leurs fondamentaux étaient bons et les analystes optimistes. Le screener disait implicitement "achetable" sur des chases de rally évidentes.
+
+**Mécanique du fix** (additionnel au scoring 100 pts, appliqué avant le floor à 0) :
+
+```
+chase_pen = 0
+z > 2,5σ                                  → chase_pen = -3 (chase extrême)
+z > 2,0σ ET (RSI > 70 OU drawdown > -3%)  → chase_pen = -2 (chase modéré)
+```
 
 **Logique** :
-- Sans GC frais → le drawdown profond signale un risque de continuation (value trap potentiel)
-- Avec GC frais → le drawdown profond signale une réinitialisation que le marché a déjà commencé à corriger techniquement (rebond V-shape mesurable)
+- z > 2,5σ seul suffit (surextension statistique massive, indépendamment du contexte court terme)
+- z > 2,0σ + confirmation court terme (RSI surachat OU cours collé au top) = chase confirmé
+- Sinon : 0 pt (z modérément tendu peut être justifié par un secular trend)
 
-**Cas historiques validant le barème inversé** :
-- META 2023 : DD -75% T4 2022, Golden Cross début 2023 → +200% 12m
-- NVDA 2020 : DD -38% covid mars 2020, Golden Cross fin avril → +400% 24m
-- ASML 2023 : DD -45% T4 2022, Golden Cross début 2023 → +120% 24m
-- AMD 2023, NFLX 2023 : profils similaires, performances exceptionnelles
+**Effet attendu** (validé sur 124 tickers session 2026-05-27) :
+- 10-15 tickers déclenchent une pénalité (5-10% de l'univers)
+- CHASE extrême détecté : MU, INTC, CSCO, CAT, GOOGL, GS, WMT, LRCX, KLAC, ADI, MUFG, TSM, SAN.MC, BNP.PA, AMAT
+- CHASE modéré : SIE.DE, TXN, etc.
 
-**Caveats à revalider Q3-Q4 2026** :
-- Sample 2017-2024 biaisé vers les rebonds V-shape post-COVID / post-correction 2022
-- 32 tickers large caps : survivorship bias (les delistings invisibles)
-- Le pattern peut s'inverser en cycle séculaire bear (style Japon 1990s ou US 1966-1982)
+**Pourquoi -3 pts et pas plus** : la pénalité doit être **dissuasive sans détruire** un score quality. Un titre à 67 (Micron, 3 étoiles) devient 64 (toujours 3 étoiles mais "warning" implicite). Un titre à 62 (SK Hynix) devient 59 → passe à 2 étoiles, signal clair de prudence.
 
-**Champ exposé dans le breakdown** : `val_pts_mode` = `"gc_fresh_inverted"` (barème inversé appliqué) ou `"normal"` (barème original). Permet de distinguer ce qui motive le score.
+**Lecture en pratique** :
+- Le breakdown JSON expose `chase_pen` (-3, -2, ou 0) — toujours vérifier ce champ avant de pondérer le score
+- Un score 65+ avec `chase_pen = -3` signale : "business OK mais entrée actuelle dangereuse — attendre pullback"
+- Combiné au champ `regression_window_reason`, permet de différencier chase légitime (cyclical 25y) vs chase tech (10y)
 
-C'est un proxy systématique du **range d'entrée** détaillé dans `opportunities.md` (entre MM21 et Fibo 38.2% en mode normal, et en mode "réinitialisation" pour le GC frais sur chute profonde).
+**Limites** : la pénalité ne couvre que les surextensions z-score. Un titre en zone z saine (+0,5σ) mais collé au top avec RSI 80 peut quand même être un chase — c'est le rôle de `val_pts` (section 1.5) avec le barème inversé GC frais.
 
 ## Pilier 2 — Fondamentaux (50 pts)
 
@@ -148,7 +161,10 @@ C'est un proxy systématique du **range d'entrée** détaillé dans `opportuniti
 - **Marges nettes** (10 pts) : >20% = max
 - **PEG ratio** (15 pts) : <1 = excellent (15 pts), <2 = correct (10 pts)
 - **Croissance EPS** (5 pts) : >10%/an = max
-- **Endettement** (5 pts) : Debt/Equity < 0.5 = max
+- **Marge de Free Cash Flow** (5 pts) : FCF margin >15% → 5 pts, >5% → 3 pts (complémentaire aux marges nettes — `screener.py` l.775-777)
+- **Endettement** (5 pts) : Debt/Equity < 100% (yfinance scale ×100) → 5 pts. **Fix v2.0.2** : inclut désormais les entreprises net-cash (D/E = 0). Avant le fix, la condition `0 < debt_eq < 100` excluait les net-cash (DSY, AAPL en certaines périodes) qui obtenaient 0 pt à tort. Distinction maintenant : `None` (donnée manquante) → 0 pt | `0 ≤ debt_eq < 100` → 5 pts.
+
+> **Cap** : la somme brute des 6 composants (15+10+15+5+5+5 = 55) est plafonnée à **50 pts** (`min(50, …)`, `screener.py`). Selon le profil du titre, un point gagné peut être silencieusement tronqué.
 
 Sources de données : Yahoo Finance + Finnhub (cross-validation). Quand divergence importante, baisse de la confiance globale.
 
@@ -358,157 +374,3 @@ Pre-mortem: [scénario d'échec plausible]
 ```
 
 Pas de fluff. Pas de "Disclaimer: this is not financial advice" à chaque réponse. Le verdict, les chiffres, les caveats techniques, fini.
-
-## Backtest par régime (Signal — Phase 3)
-
-Depuis Phase 3, le backtest historique (`backtest.py`) reproduit fidèlement les conditions live :
-- Coûts de transaction (15 bps round-trip)
-- PFU 30% sur plus-values réalisées (modélisé en USD pour simplicité)
-- VIX dampener point-in-time (multiplier appliqué au moment de chaque rebalancement)
-- VAL_pts aligné avec le live (drawdown vs 52w high)
-
-### Outils
-
-- **`backtest.py --variant=baseline`** : référence sans coûts ni VIX (mesure pure technique)
-- **`backtest.py --variant=costs_only`** : ajoute frais + PFU (mesure l'impact friction)
-- **`backtest.py --variant=costs_vix`** : ajoute VIX dampener (défaut, mesure défensivité régime)
-- **`backtest_compare.py`** : lance les 3 séquentiellement + table comparative + verdict go/no-go
-
-### Métriques par régime
-
-Le backtest décompose les résultats sur 5 régimes (déclarés ex-ante dans `config.REGIME_DEFINITIONS`) :
-- `bull_2019` (2019-01 → 2020-02) : bull market pré-COVID
-- `covid_crash` (2020-02-19 → 2020-04-30) : choc COVID -34% S&P puis V-shape
-- `bull_post_covid` (2020-05 → 2021-12) : bull post-COVID +50% S&P
-- `bear_2022` (2022-01 → 2022-10-13) : bear 2022 taux + tech -25%
-- `recovery_2023_24` (2022-10-14 → 2024-12) : récupération + IA rally
-
-L'edge doit tenir en bear/stress, pas seulement en bull. Si Signal a un alpha massif en bull et nul en bear, c'est du momentum factor tilt déguisé en alpha (cf FINSABER §5).
-
-### Deflated Sharpe Ratio (Bailey-Lopez de Prado 2014)
-
-Le Sharpe brut est sur-estimé quand on teste plusieurs configurations (5 signaux momentum + pondérations + seuils RSI/régression/val_pts = ~10 trials implicites). Le Deflated Sharpe corrige : `DSR ≈ SR / √(1 + 0.5×N_trials/N_weeks)`.
-
-**Critère santé** : Deflated Sharpe > 0.3 pour considérer que l'edge est statistiquement défendable (pas du data mining).
-
-### Critères go/no-go Phase 4
-
-Avant d'investir dans l'élargissement de l'univers (Phase 4, 2000 tickers), vérifier que :
-1. Alpha CAGR net > +1pp/an sur 2019-2024 cumulé
-2. Sharpe net > 0.5
-3. Drawdown bear 2022 > -20% (en absolu moins pire que SPY)
-4. Deflated Sharpe > 0.3
-5. VIX dampener améliore le Sharpe vs costs_only (sinon il n'apporte rien)
-
-Si NO-GO, deux options : recalibrer les paramètres VIX (intercept/slope/plancher) ou réviser les pondérations 45/50/5.
-
-## VIX : indicateur contextuel non scoré (Phase 2 mise en pause)
-
-Le VIX (indice de volatilité implicite S&P 500, CBOE) est **fetché chaque semaine et affiché** dans le dashboard et le prompt Claude. Mais **il n'influence plus le scoring du screener** depuis Phase 3.
-
-### Pourquoi le dampener mécanique a été désactivé
-
-Le backtest comparatif 2019-2024 (`backtest_compare.py`) a testé l'effet du VIX dampener sur la performance :
-
-| Variant | Sharpe net | Alpha équitable CAGR |
-|---|---|---|
-| costs_only (sans VIX) | 0.92 | +2.56pp |
-| costs_vix (avec VIX dampener) | 0.87 | +1.71pp |
-
-Sur cette période, le dampener **dégrade** légèrement le Sharpe et l'alpha. Raison probable : 2019-2024 a connu un seul vrai épisode de stress (COVID en V-shape), trop court pour que le dampener prouve sa valeur défensive. Pendant le rebond post-COVID, le dampener a bloqué des achats de qualité qui auraient été extrêmement rentables.
-
-Honnêteté méthodologique : on ne maintient pas un mécanisme par croyance théorique alors que les données disent l'inverse. **Décision Phase 3 : désactiver le dampener** (`config.VIX_DAMPENER_ENABLED = False`).
-
-### Ce qui reste actif
-
-Le VIX continue d'être :
-- **Fetché** chaque semaine via `^VIX` yfinance (avec fallback cache puis 18.0 médiane historique)
-- **Persisté** dans `portfolio.json:last_known_vix` pour transparence
-- **Affiché** sur le dashboard sous forme d'une pill colorée (calme/vigilance/stress/panique)
-- **Communiqué à Claude** dans la section CONTEXTE DE MARCHÉ du prompt
-
-Mais le multiplier est forcé à **1.0 pour tous les tickers** → aucun impact sur les scores.
-
-### Usage par Claude
-
-Le VIX devient un **indicateur de contexte qualitatif** que Claude peut citer dans `analyse_macro` quand pertinent :
-
-> *"VIX à 22 cette semaine, vigilance modérée — j'ai privilégié les positions fondamentaux solides plutôt que de chasser le momentum frais."*
-
-Ce n'est PAS une règle d'enforcement. Claude est libre de l'ignorer si non pertinent, ou de s'en servir pour justifier une prudence éditoriale. Les scores du screener restent inchangés.
-
-### Réactivation future
-
-Les paramètres `VIX_DAMPENER_INTERCEPT=1.5 / SLOPE=0.025 / MIN=0.20` restent déclarés dans `config.py`. Pour réactiver, flipper `VIX_DAMPENER_ENABLED = True`. À considérer après :
-- Un backtest 2007-2024 incluant le GFC 2008 (vrai stress test)
-- OU une recalibration moins agressive (intercept=1.7, slope=0.018, min=0.30)
-
-### Champs exposés dans le breakdown
-
-- `vix_value` : niveau VIX utilisé au moment du scoring (toujours rempli)
-- `vix_multiplier` : facteur appliqué (toujours 1.0 tant que dampener désactivé)
-- `momentum` : points momentum (= `momentum_raw` × 1.0 = `momentum_raw`)
-- `momentum_raw` : points momentum bruts (identique à `momentum` tant que dampener off)
-
-## R01 Concentration sectorielle — soft penalty graduée (depuis 23/05/2026)
-
-R01 ne fonctionne plus en mode binaire blocage-ou-rien. C'est maintenant une pénalité progressive sur le sizing :
-
-| Concentration cluster | Comportement |
-|---|---|
-| < 30% | Aucune restriction, sizing normal |
-| 30-65% | **Soft cap** : sizing réduit par un facteur `clip(1 - (pct-30)/35, 0.1, 1.0)`. À 40% → ×0.71. À 50% → ×0.43. À 60% → ×0.14. |
-| > 65% | **Blocage strict** — concentration excessive, achat refusé |
-
-**Bypass conviction forte (régime soft uniquement)** : si `conviction="forte"`, le sizing factor a un plancher à 0.5. Cela permet l'achat exceptionnel d'un titre dans un cluster sursaturé sans annihiler le sizing.
-
-**Exemple** : Cluster Tech & IA à 58.8% du portefeuille, achat candidat tech avec conviction modérée. Sans bypass, sizing = 0.18 × 5% = 0.9% du capital. Avec conviction forte + bypass, sizing = 0.5 × 7% = 3.5% du capital — taille raisonnable pour saisir une opportunité exceptionnelle.
-
-**Implications éditoriales** : tu peux désormais proposer un achat dans un cluster saturé. Mais tu dois (a) le justifier sérieusement dans `raison`, (b) marquer `conviction: "forte"` pour bénéficier du sizing plancher 50%. Sinon le sizing automatique sera très petit (souvent <1% du capital) et l'achat peu pertinent. La règle reste de ne PAS forcer si la position de remplacement n'a pas un alpha attendu clairement supérieur aux positions tech déjà détenues.
-
-**Champs exposés** dans `regles_actives` du portfolio.json :
-- `regime` : "soft" ou "strict"
-- `pct` : concentration mesurée du cluster
-- `sizing_factor` : facteur appliqué (uniquement régime soft)
-- `bloque` : true (strict) | false (soft, sizing réduit mais possible)
-
-## Friction fiscale et coûts de transaction (Signal — compte-titres FR)
-
-Depuis Phase 1 du plan d'amélioration, Signal modélise explicitement les coûts réels d'un investisseur retail français sur compte-titres ordinaire.
-
-### Coûts de transaction
-- **7.5 bps one-way** (broker + slippage estimé), soit **15 bps round-trip** = 0.15% par aller-retour
-- Appliqués automatiquement à chaque ACHAT (déduit des liquidités, ajouté à la base fiscale) et chaque VENTE (réduit le cash récupéré)
-- Référence : Frazzini, Israel, Moskowitz (2018) — "Trading Costs", AQR Working Paper
-
-### Fiscalité française — PFU 30%
-- **Prélèvement Forfaitaire Unique = 30%** (12.8% IR + 17.2% prélèvements sociaux), s'applique sur les **plus-values RÉALISÉES à la vente uniquement**
-- Article 200 A du Code général des impôts
-- **Pas d'impôt sur les plus-values latentes** (positions non vendues) → buy & hold long terme structurellement favorisé
-- Pertes réalisées → **crédit d'impôt utilisable sur 10 ans** contre des futurs gains (article 150-0 D du CGI)
-
-### Conséquences sur la discipline de décision
-
-**Vente d'une position en gain — règle empirique** :
-Une vente avec +X% de plus-value récupère 0.7 × X (après PFU 30%) + frais de vente. Pour qu'une rotation soit fiscalement justifiée :
-- L'alpha attendu de la position de remplacement doit être supérieur à `0.30 × plus-value courante` ÷ taille position
-- En pratique : ne pas vendre un +20% pour un titre dont l'edge espéré est < 8-10%
-
-**Vente d'une position en perte — pas de pénalité fiscale** :
-Le PFU s'applique uniquement aux gains. Une vente en perte génère 0€ d'impôt ET crée un crédit fiscal reportable. C'est l'inverse de la disposition effect classique : couper rapidement les pertes a un bénéfice fiscal réel.
-
-**Plus-values latentes vs réalisées** :
-NVDA +95% détenu depuis 140j = 0€ d'impôt tant qu'on ne vend pas. C'est cette propriété qui rend les positions gagnantes longtemps détenues si précieuses — chaque jour de hold supplémentaire est un crédit d'impôt différé qui peut grossir indéfiniment.
-
-### Lecture du portfolio.json
-
-Champs Phase 1 à connaître :
-- `total_frais_payes` : cumulé depuis création
-- `total_impots_payes` : cumulé PFU versé au fisc
-- `total_pertes_reportables` : crédit fiscal théorique disponible (à multiplier par 30% pour l'impôt évité)
-- `performance` : NETTE de frais + impôts (= la vraie perf)
-- `performance_brute` : sans coûts, pour référence pédagogique uniquement
-- Sur chaque ordre VENTE : `plus_value_eur`, `impot_pfu_eur`, `perte_reportable_eur`, `frais_vente_eur`
-- Sur chaque ordre ACHAT : `frais_achat_eur`, `montant_brut_eur`, et `montant` = base fiscale (= brut + frais)
-
-Quand tu commentes une vente dans `analyse_macro` ou `message_utilisateurs`, mentionne explicitement le PFU si applicable : *"Vente AIR.PA à +12.6%, plus-value 196€ → PFU 59€ → cash net 1689€ ajouté aux liquidités."* C'est la transparence éditoriale.

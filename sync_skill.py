@@ -24,7 +24,12 @@ Tu peux aussi installer un git pre-commit hook (cf README ou doc).
 from pathlib import Path
 import shutil
 import sys
-import filecmp
+
+# Console Windows (cp1252) ne sait pas encoder les emojis de sortie — forcer UTF-8.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 SKILL_NAME = "portfolio-analyst"
 SOURCE = Path.home() / ".claude" / "skills" / SKILL_NAME
@@ -38,14 +43,22 @@ def list_files(root):
     return {p.relative_to(root) for p in root.rglob("*") if p.is_file()}
 
 
+def _read_normalized(path):
+    """Lit un fichier en normalisant les fins de ligne (CRLF/CR → LF).
+    Évite les faux positifs : le repo est en CRLF (git checkout sous Windows),
+    le user-level en LF — comparer octet à octet flaggait les 8 fichiers à tort."""
+    return path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+
+
 def diff_dirs(src, dst):
-    """Retourne (added, removed, modified) entre src et dst."""
+    """Retourne (added, removed, modified) entre src et dst.
+    Comparaison normalisée sur les fins de ligne (cf _read_normalized)."""
     src_files = list_files(src)
     dst_files = list_files(dst)
     added    = src_files - dst_files
     removed  = dst_files - src_files
     common   = src_files & dst_files
-    modified = {f for f in common if not filecmp.cmp(src / f, dst / f, shallow=False)}
+    modified = {f for f in common if _read_normalized(src / f) != _read_normalized(dst / f)}
     return added, removed, modified
 
 

@@ -12,11 +12,15 @@ WatchRadar-main/.claude/
 
 # Backup files
 *.bak
+*.backup-*
 
 # Test artifacts
 backtest_log.txt
-backtest_results.json
-backtest_results_ad.json
+backtest_results*.json
+migration_*_report.txt
+
+# Dev scaffolding (jamais en prod)
+maquette_fiche.html
 
 # OS
 .DS_Store
