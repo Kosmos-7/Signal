@@ -3,1232 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signal — Watchlist boursière commentée</title>
-<meta name="description" content="25 actions à surveiller, sélectionnées automatiquement chaque semaine par un agent IA.">
+<title>Signal — Terminal d'analyse</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="signal.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg:        #08080d;
-    --surface:   #0f0f16;
-    --surface2:  #16161f;
-    --surface3:  #1e1e2a;
-    --border:    #21212e;
-    --border2:   #33334e;
-    --text:      #eeeef8;
-    --text2:     #8888a8;
-    --text3:     #50506c;
-    --gold:      #e8a820;
-    --gold2:     #a07010;
-    --gold-dim:  rgba(232,168,32,0.1);
-    --green:     #1cc87a;
-    --green-dim: rgba(28,200,122,0.1);
-    --red:       #f05454;
-    --red-dim:   rgba(240,84,84,0.1);
-    --blue:      #5080f8;
-    --blue-dim:  rgba(80,128,248,0.1);
-    --orange:     #f87a20;
-    --orange-dim: rgba(248,122,32,0.1);
-    --radius:    10px;
-    --radius-lg: 16px;
-  }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    position: relative;
-  }
-  .dots-bg { display: none; }
+  /* ── index (terminal watchlist) : mise en page propre à la page ── */
+  body{overflow:hidden}
 
-  /* ── HERO CANVAS (stars) ── */
-  .hero-canvas {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-  }
-  .hc-layer { position: absolute; inset: 0; }
-  .hc-space {
-    background: radial-gradient(ellipse 160% 65% at 50% -5%, #071e30 0%, #040d1a 42%, #08080d 72%);
-  }
-  .hc-aurora { display: none; }
-  .hc-clouds { display: none; }
-  .hc-stars {
-    background-image:
-      radial-gradient(circle, rgba(255,255,255,0.60) 1px, transparent 1px),
-      radial-gradient(circle, rgba(255,255,255,0.42) 1px, transparent 1px),
-      radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px),
-      radial-gradient(circle, rgba(200,240,255,0.38) 1px, transparent 1px),
-      radial-gradient(circle, rgba(255,255,255,0.50) 1px, transparent 1px);
-    background-size: 480px 260px, 350px 190px, 290px 215px, 520px 290px, 410px 230px;
-    background-position: 35px 22px, 190px 65px, 95px 130px, 260px 12px, 440px 82px;
-    opacity: 0.72;
-  }
+  /* RAIL : nom complet + région + secteur */
+  .rail{position:fixed;left:1.4rem;top:5rem;bottom:3rem;z-index:6;width:232px;display:flex;flex-direction:column}
+  .rail-h{display:flex;justify-content:space-between;font:600 .62rem var(--mono);letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;padding:0 .4rem .6rem;border-bottom:1px solid var(--line)}
+  .rail-l{overflow-y:auto;flex:1;mask-image:linear-gradient(180deg,transparent,#000 12px,#000 calc(100% - 12px),transparent)}.rail-l::-webkit-scrollbar{width:0}
+  .rail-lex{display:block;margin-top:.4rem;padding:.65rem .4rem .1rem;border-top:1px solid var(--line);font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .15s;cursor:pointer;flex:0 0 auto}
+  .rail-lex::before{content:'§ '}
+  .rail-lex:hover,.rail-lex.active{color:var(--ac)}
+  .lexg{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.8rem;margin-top:.5rem}
+  .lext{font:700 .8rem var(--mono);color:var(--ac);letter-spacing:.3px;margin-bottom:.3rem}
+  .lexd{font-size:.92rem;color:var(--text2);line-height:1.6}
+  .lexd em{font-style:normal;color:var(--text)}
+  @media(max-width:900px){.lexg{grid-template-columns:1fr}}
+  .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:.5rem .4rem;cursor:pointer;border-bottom:1px solid var(--line);transition:padding-left .18s,border-color .18s}
+  .row:hover,.row.sel{padding-left:.7rem}.row.sel{border-left:2px solid var(--ac);margin-left:-2px;padding-left:calc(.7rem - 2px)}
+  .row .nm{font:500 .82rem var(--serif);line-height:1.2;color:var(--text2)}.row:hover .nm,.row.sel .nm{color:#fff}
+  .rl-meta{display:flex;align-items:center;gap:6px;margin-top:4px}
+  .reg{font:600 .52rem var(--mono);letter-spacing:.5px;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:1px 4px}
+  .sct{font:.58rem var(--mono);color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
+  .row .rr{text-align:right}.row .sc{font:500 .95rem var(--serif);color:var(--text)}.row .xx{font:.55rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-top:1px}
 
-  /* ── HEADER ── */
-  header {
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background: transparent;
-    border-bottom: 1px solid transparent;
-    transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
-    z-index: 100;
-  }
-  header.scrolled {
-    background: transparent;
-    border-bottom-color: rgba(255,255,255,0.07);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-  }
-  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-  .brand-icon { flex-shrink: 0; display: flex; }
-  .brand-name { font-family: Georgia, serif; font-size: 1.4rem; color: var(--text); letter-spacing: -0.5px; }
-  nav { display: flex; gap: 0.25rem; }
-  nav a { font-size: 0.88rem; color: var(--text3); text-decoration: none; padding: 5px 12px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
-  nav a:hover { color: var(--text2); background: var(--surface2); }
-  nav a.active { color: var(--text); background: var(--surface2); border: 1px solid var(--border2); }
+  /* STAGE : analyse élargie */
+  .stage{position:fixed;left:262px;right:1.4rem;top:4.6rem;bottom:2.6rem;z-index:5;overflow-y:auto;display:flex;justify-content:center}
+  .stage::-webkit-scrollbar{width:5px}.stage::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+  .doc{width:100%;max-width:1060px;padding:.5rem 1.5rem 2.5rem;opacity:0;transition:opacity .35s}.doc.on{opacity:1}
+  .d-head{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem}
+  .d-tk{font-family:var(--serif);font-size:3.4rem;line-height:.95;letter-spacing:-1px}
+  .d-nm{font-size:.98rem;color:var(--text2);margin-top:.25rem}
+  .d-tagrow{display:flex;align-items:center;gap:10px;margin-top:.85rem}
+  .d-tag{font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
+  .d-reg{font:600 .6rem var(--mono);letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:4px;padding:4px 9px}
 
-  /* ── LAYOUT ── */
-  main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 6rem; position: relative; z-index: 1; }
+  .resume{font-size:1.04rem;line-height:1.75;color:var(--text);font-weight:400;max-width:1040px}.resume + .resume{margin-top:.75rem}
 
-  /* ── PILLS ── */
-  .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 100px; padding: 4px 12px; font-family: 'Courier New', monospace; font-size: 0.80rem; letter-spacing: 0.8px; text-transform: uppercase; }
-  .pill-free { background: var(--green-dim); border: 1px solid rgba(28,200,122,0.2); color: var(--green); }
-  .pill-beta { background: var(--gold-dim);  border: 1px solid rgba(232,168,32,0.2); color: var(--gold); }
-  .pd { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .quant{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:1.8rem 0}
+  .qh{font:600 .6rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem;display:flex;align-items:center;gap:10px}.qh::after{content:'';flex:1;height:1px;background:var(--line)}
+  .meter{grid-template-columns:104px 1fr 44px}   /* labels en toutes lettres */
 
-  /* ── TRACK BAR — proof of life du portefeuille IA en home ── */
-  .track-bar {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    padding: 0.65rem 1rem;
-    margin-bottom: 1.5rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    text-decoration: none;
-    transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
-    font-size: 0.84rem;
-  }
-  .track-bar:hover {
-    border-color: rgba(232,168,32,0.4);
-    box-shadow: 0 0 24px rgba(232,168,32,0.08);
-  }
-  .tb-label { font-family: 'Courier New', monospace; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); }
-  .tb-stat  { font-family: Georgia, serif; color: var(--text); }
-  .tb-stat.up   { color: var(--green); }
-  .tb-stat.dn   { color: var(--red); }
-  .tb-stat.tb-bench  { color: var(--text2); font-family: 'Courier New', monospace; font-size: 0.82rem; }
-  .tb-stat.tb-orders { color: var(--text3); font-family: 'Courier New', monospace; font-size: 0.78rem; }
-  .tb-sep   { color: var(--text3); font-size: 0.76rem; }
-  .tb-arrow { margin-left: auto; color: var(--text3); transition: color 0.18s, transform 0.18s; }
-  .track-bar:hover .tb-arrow { color: var(--gold); transform: translateX(3px); }
-  @media (max-width: 640px) {
-    .track-bar { font-size: 0.78rem; padding: 0.6rem 0.85rem; gap: 7px; }
-    .tb-label { display: none; }
-    .tb-arrow { margin-left: auto; }
-  }
+  .prose{margin-top:1.8rem;max-width:1040px}
 
-  /* ── HERO ── */
-  .hero { margin-bottom: 2.5rem; position: relative; }
-  .hero h1 {
-    font-family: Georgia, serif; font-size: 2.1rem; font-weight: normal; line-height: 1.2; letter-spacing: -0.6px; margin-bottom: 0.85rem; position: relative;
-    background: linear-gradient(120deg, #eeeef8 35%, #1cc87a 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-sep {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(28,200,122,0.22), transparent);
-    margin-bottom: 1.75rem;
-  }
-  .hero p { color: var(--text2); font-size: 0.96rem; max-width: 520px; line-height: 1.75; position: relative; }
-  .update-meta { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; align-items: center; }
-  .umeta { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); }
-  .umeta-sep { color: var(--border2); }
+  .bbsec{margin-top:1.9rem}
+  .bbsec .sec-h{color:var(--text2)}
 
-  /* ── SOURCES ── */
-  .sources-bar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.7rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .src-label { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
-  .src-item { display: flex; align-items: center; gap: 6px; font-size: 0.84rem; color: var(--text2); }
-  .src-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  /* apparition échelonnée des sections (futuriste) */
+  .doc.on .resume,.doc.on .quant,.doc.on .metrics,.doc.on .prose,.doc.on .bbsec{animation:rise .5s ease both}
+  .doc.on .quant{animation-delay:.05s}.doc.on .metrics{animation-delay:.1s}.doc.on .prose{animation-delay:.15s}.doc.on .bbsec{animation-delay:.2s}
 
-  /* ── COMPOSITION SECTORIELLE ── */
-  .concentration-note { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; margin: 1.5rem 0 0; }
-  .conc-label { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 0.85rem; }
-  .conc-rows { display: flex; flex-direction: column; gap: 7px; }
-  .conc-row { display: grid; grid-template-columns: 140px 1fr 42px; align-items: center; gap: 10px; }
-  .conc-sector { font-size: 0.80rem; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .conc-bar-wrap { height: 5px; background: var(--surface3); border-radius: 99px; overflow: hidden; }
-  .conc-bar { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
-  .conc-pct { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-align: right; }
-
-  /* ── CHANGELOG ── */
-  .changelog { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 2rem; }
-  .section-label { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.85rem; }
-  .cl-row { display: grid; grid-template-columns: 86px 70px 1fr; gap: 8px; align-items: start; padding: 7px 0; border-bottom: 1px solid var(--border); }
-  .cl-badge { font-family: 'Courier New', monospace; font-size: 0.75rem; padding: 2px 6px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; text-align: center; font-weight: 600; width: 100%; box-sizing: border-box; }
-  .cl-in  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.2); }
-  .cl-out { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.2); }
-  .cl-ticker { font-family: 'Courier New', monospace; font-size: 0.82rem; color: var(--text); font-weight: 600; white-space: nowrap; }
-  .cl-reason { font-size: 0.81rem; color: var(--text3); line-height: 1.5; padding-top: 1px; }
-  .cl-blurred { filter: blur(3.5px); opacity: 0.5; user-select: none; pointer-events: none; transition: filter 0.25s, opacity 0.25s; }
-  .cl-blurred.cl-reveal { filter: none; opacity: 1; pointer-events: auto; }
-  .cl-more { display: none; }
-  .cl-more.open { display: block; }
-  .cl-toggle { display: block; width: 100%; background: transparent; border: none; border-top: 1px solid var(--border); padding: 9px 0 1px; margin-top: 2px; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); cursor: pointer; text-align: center; transition: color 0.15s; }
-  .cl-toggle:hover { color: var(--gold); }
-
-  /* ── LIST HEADER ── */
-  .list-header { display: grid; grid-template-columns: 36px 1fr 90px 136px; gap: 10px; padding: 0 1.25rem 0.6rem; font-family: 'Courier New', monospace; font-size: 0.70rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; border-bottom: 1px solid var(--border); margin-bottom: 6px; }
-
-  /* ── STOCK CARD ── */
-  .sc {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
-    margin-bottom: 5px;
-    overflow: hidden;
-    transition: border-color 0.18s, box-shadow 0.18s;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
-  }
-  .sc:hover {
-    border-color: rgba(232,168,32,0.28);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(232,168,32,0.1), 0 0 28px rgba(232,168,32,0.07), 0 8px 28px rgba(0,0,0,0.5);
-  }
-  .sc-main { display: grid; grid-template-columns: 36px 1fr 90px 136px; gap: 10px; align-items: center; padding: 0.95rem 1.25rem; cursor: pointer; user-select: none; }
-
-  .rk { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); text-align: right; }
-
-  .sc-name { font-weight: 500; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; line-height: 1.3; }
-  .sc-meta { display: flex; align-items: center; gap: 5px; margin-top: 3px; flex-wrap: wrap; }
-  .sc-ticker { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); }
-  /* Secteur dans la meta sur mobile — caché par défaut */
-  .sc-sector-mob { display: none; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; }
-
-  .bdg { font-family: 'Courier New', monospace; font-size: 0.72rem; padding: 2px 6px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; }
-  .bdg-eu, .bdg-us, .bdg-gb, .bdg-other { background: var(--blue-dim); color: #7aaaff; border: 1px solid rgba(80,128,248,0.2); }
-  .bdg-new { background: var(--gold-dim);  color: var(--gold); border: 1px solid rgba(232,168,32,0.2); }
-  .bdg-up  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.2); }
-  .bdg-dn  { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.2); }
-
-  .sector-pill { font-size: 0.80rem; color: var(--text2); background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; text-align: center; line-height: 1.3; }
-
-  .score-pill { font-family: 'Courier New', monospace; font-weight: 700; font-size: 0.93rem; padding: 5px 12px; border-radius: 8px; text-align: center; letter-spacing: 0.5px; }
-  .score-max  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.22); }
-  .score-high { background: var(--gold-dim);  color: var(--gold);  border: 1px solid rgba(232,168,32,0.22); }
-  .score-mid  { background: rgba(80,128,248,0.08); color: var(--blue); border: 1px solid rgba(80,128,248,0.18); }
-
-  .stars { color: var(--gold); font-size: 0.80rem; letter-spacing: 2px; line-height: 1; }
-
-  .expand-hint { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); text-align: right; margin-top: 4px; transition: color 0.15s; }
-  .sc:hover .expand-hint { color: var(--gold); }
-
-  /* ── DETAIL ── */
-  .sc-detail { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-  .sc-detail.open { max-height: 820px; }
-  .sc-detail-inner { padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--border); background: var(--bg); }
-
-  .justif { font-size: 0.88rem; color: var(--text2); line-height: 1.75; padding: 0.9rem 0; }
-
-  .score-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 0.75rem; }
-  .sb-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.7rem 0.9rem; }
-  .sb-label { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
-  .sb-bar-row { display: flex; align-items: center; gap: 7px; }
-  .sb-track { flex: 1; height: 4px; background: var(--surface3); border-radius: 2px; overflow: hidden; }
-  .sb-fill { height: 4px; border-radius: 2px; background: var(--gold); }
-  .sb-val { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text2); font-weight: 600; min-width: 30px; text-align: right; }
-  .mo-sub { display: block; font-size: 0.75rem; color: var(--text3); margin-top: 4px; font-family: 'Courier New', monospace; }
-
-  .reg-band { margin-bottom: 0.75rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.7rem 0.9rem; }
-  .reg-band-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
-  .reg-label { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; }
-  .reg-signal { font-family: 'Courier New', monospace; font-size: 0.70rem; padding: 2px 8px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
-  .reg-track { position: relative; height: 5px; background: var(--surface3); border-radius: 3px; margin-bottom: 4px; }
-  .reg-zone-ok { position: absolute; top: 0; bottom: 0; background: rgba(28,200,122,0.15); border-radius: 3px; }
-  .reg-cursor { position: absolute; top: -4px; width: 3px; height: 13px; border-radius: 2px; transform: translateX(-50%); transition: left 0.3s ease; }
-  .reg-ticks { display: flex; justify-content: space-between; font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); }
-
-  .cross-block { margin-bottom: 0.75rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.7rem 0.9rem; }
-  .cross-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .cross-badge { font-family: 'Courier New', monospace; font-size: 0.70rem; padding: 2px 8px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
-  .cb-neutral { background: var(--surface3); color: var(--text3); border: 1px solid var(--border2); }
-  .cross-bar-track { position: relative; height: 4px; background: var(--surface3); border-radius: 3px; margin-bottom: 3px; }
-  .cross-bar-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 3px; }
-  .cross-bar-pos { position: absolute; top: -4px; width: 3px; height: 12px; border-radius: 2px; transform: translateX(-50%); }
-  .cross-bar-labels { display: flex; justify-content: space-between; font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); margin-bottom: 7px; }
-  .cross-stats { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 7px; }
-  .cross-stats span { font-family: 'Courier New', monospace; font-size: 0.70rem; color: var(--text2); background: var(--surface3); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; }
-  .cv-ok { color: var(--green) !important; border-color: rgba(28,200,122,0.25) !important; }
-  .cv-no { color: var(--text3) !important; }
-  .cross-interp { font-size: 0.80rem; color: var(--text2); line-height: 1.55; font-style: italic; }
-
-  .detail-meta { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); line-height: 1.8; display: flex; flex-wrap: wrap; gap: 4px 12px; padding-top: 0.5rem; border-top: 1px solid var(--border); margin-top: 0.5rem; }
-  .detail-meta span { white-space: nowrap; }
-
-  /* ── SHOW MORE ── */
-  .show-more-wrap { text-align: center; padding: 1.5rem 0; }
-  .btn-show {
-    background: transparent;
-    border: 1px solid var(--border2);
-    border-radius: 100px;
-    padding: 0.6rem 2rem;
-    font-size: 0.88rem;
-    color: var(--text2);
-    cursor: pointer;
-    transition: all 0.18s;
-    font-family: inherit;
-  }
-  .btn-show:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-    box-shadow: 0 0 20px rgba(232,168,32,0.12);
-  }
-  .hidden { display: none; }
-
-  /* ── PREVIEW BLUR (4th card teaser) ── */
-  #stocks-preview.sc-preview-active {
-    pointer-events: none;
-    user-select: none;
-  }
-  #stocks-preview.sc-preview-active .sc {
-    filter: blur(8px);
-    opacity: 0.55;
-  }
-
-  /* ── SKELETON ── */
-  .skel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; position: relative; margin-bottom: 5px; }
-  .skel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent); animation: shimmer 1.4s infinite; }
-  @keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
-
-  /* (anciens .srt et .fbtn supprimés — remplacés par .filter-select) */
-
-  /* ── HOW IT WORKS ── */
-  .how { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-  .how h2 { font-family: Georgia, serif; font-size: 1.05rem; font-weight: normal; color: var(--text2); margin-bottom: 1.25rem; }
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; transition: border-color 0.18s, box-shadow 0.18s; }
-  .step:hover { border-color: var(--border2); box-shadow: 0 0 0 1px var(--border2), 0 4px 16px rgba(0,0,0,0.4); }
-  .step-num { font-family: 'Courier New', monospace; font-size: 0.70rem; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
-  .step p { font-size: 0.86rem; color: var(--text2); line-height: 1.65; }
-
-  /* ── FILTER BLOCK — 3 picklists self-descriptives, sans labels ── */
-  .filter-block { margin-bottom: 1.25rem; }
-  .filter-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .filter-select {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 7px 30px 7px 14px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.78rem;
-    color: var(--text);
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    color-scheme: dark;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%2350506c' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .filter-select:hover  { border-color: var(--border2); }
-  .filter-select:focus  { outline: none; border-color: rgba(232,168,32,0.5); box-shadow: 0 0 0 2px rgba(232,168,32,0.08); }
-  .filter-select option { background: var(--surface2); color: var(--text); }
-  .filter-count-row { margin-top: 0.5rem; text-align: right; min-height: 14px; }
-  .filter-count     { font-family: 'Courier New', monospace; font-size: 0.70rem; color: var(--text3); }
-  @media (max-width: 600px) { .filter-grid { grid-template-columns: 1fr; gap: 8px; } }
-
-  /* ── ACCORDION ── */
-  .accordion { border: 1px solid var(--border); border-radius: var(--radius-lg); margin-top: 3rem; overflow: hidden; }
-  .accordion-trigger { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; cursor: pointer; background: var(--surface); transition: background 0.15s; gap: 1rem; }
-  .accordion-trigger:hover { background: var(--surface2); }
-  .accordion-trigger-left { display: flex; align-items: center; gap: 10px; }
-  .accordion-label { font-family: Georgia, serif; font-size: 0.95rem; font-weight: normal; color: var(--text2); }
-  .accordion-chips { display: flex; gap: 5px; flex-wrap: wrap; }
-  .accordion-chip { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; text-transform: uppercase; letter-spacing: 0.6px; }
-  .accordion-arrow { font-size: 0.78rem; color: var(--text3); transition: transform 0.22s; flex-shrink: 0; }
-  .accordion-arrow.open { transform: rotate(180deg); }
-  .accordion-body { display: none; border-top: 1px solid var(--border); }
-  .accordion-body.open { display: block; }
-  .accordion-section { padding: 1.75rem 1.25rem; }
-  .accordion-section + .accordion-section { border-top: 1px solid var(--border); }
-  .accordion-section h2 { font-family: Georgia, serif; font-size: 1.05rem; font-weight: normal; color: var(--text2); margin-bottom: 1.25rem; }
-
-  /* ── LEXIQUE ── */
-  .lexique { }
-  .lexique h2 { font-family: Georgia, serif; font-size: 1.05rem; font-weight: normal; color: var(--text2); margin-bottom: 0.5rem; }
-  .lexique-intro { font-size: 0.88rem; color: var(--text3); margin-bottom: 1.75rem; line-height: 1.6; }
-  .lex-cat { font-family: 'Courier New', monospace; font-size: 0.70rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin: 1.5rem 0 0.65rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
-  .lex-cat:first-of-type { margin-top: 0; }
-  .lex-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
-  .lex-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 0.9rem; }
-  .lex-term { font-family: 'Courier New', monospace; font-size: 0.80rem; font-weight: 700; color: var(--gold); letter-spacing: 0.3px; margin-bottom: 0.3rem; }
-  .lex-def { font-size: 0.83rem; color: var(--text2); line-height: 1.6; }
-  .lex-def em { font-style: normal; color: var(--text3); }
-  @media (max-width: 600px) { .lex-grid { grid-template-columns: 1fr; } }
-
-  /* ── FOOTER ── */
-  footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
-  .footer-legal { font-size: 0.78rem; color: var(--text3); max-width: 500px; line-height: 1.55; }
-  .footer-right { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); text-align: right; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 640px) {
-    main { padding: 1.5rem 0.85rem 5rem; }
-    header { padding: 0.85rem 1rem; gap: 0.5rem; }
-    nav { gap: 2px; }
-    nav a { padding: 4px 8px; font-size: 0.78rem; }
-    .brand-name { font-size: 1.2rem; }
-    .hero h1 { font-size: 1.5rem; }
-
-    /* Header de liste : masqué sur mobile */
-    .list-header { display: none; }
-
-    /* Carte : 3 colonnes rang | info | score */
-    .sc-main {
-      grid-template-columns: 20px 1fr auto;
-      gap: 8px;
-      padding: 0.8rem 1rem;
-      align-items: start;
-    }
-    /* Colonne secteur cachée — affiché dans sc-meta */
-    .sector-pill { display: none; }
-    /* Secteur dans la ligne meta */
-    .sc-sector-mob { display: inline-block; }
-
-    /* Score + étoiles compacts */
-    .score-pill { font-size: 0.83rem; padding: 4px 9px; border-radius: 6px; }
-    .stars { font-size: 0.78rem; letter-spacing: 1px; }
-    .expand-hint { font-size: 0.72rem; margin-top: 2px; }
-
-    /* Nom : une seule ligne si possible */
-    .sc-name { font-size: 0.90rem; }
-
-    /* Grilles internes */
-    .steps { grid-template-columns: 1fr; }
-    .score-bars { grid-template-columns: 1fr; }
-    .lex-grid { grid-template-columns: 1fr; }
+  /* repli mobile : rail + stage repassent en flux vertical */
+  @media(max-width:900px){
+    body{overflow:auto}
+    .rail{position:static;left:auto;top:auto;bottom:auto;width:auto;margin:4.6rem 1rem 0}
+    .rail-l{max-height:38vh}
+    .stage{position:static;left:auto;right:auto;top:auto;bottom:auto;margin:1rem 0 0;overflow:visible}
+    .d-tk{font-size:2.6rem}
+    .quant{grid-template-columns:1fr;gap:1rem}
   }
 </style>
 </head>
 <body>
-
-<div class="hero-canvas" aria-hidden="true">
-  <div class="hc-layer hc-space"></div>
-  <div class="hc-layer hc-aurora"></div>
-  <div class="hc-layer hc-clouds"></div>
-  <div class="hc-layer hc-stars"></div>
-</div>
-<div class="dots-bg" aria-hidden="true"></div>
+<div id="fx"></div>
+<canvas id="bg"></canvas>
+<div class="scan"></div>
+<div class="frame"><i></i><i></i><i></i><i></i></div>
 
 <header>
-  <a class="brand" href="index.html">
-    <span class="brand-icon">
-      <svg width="30" height="30" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#1cc87a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
-    <span class="brand-name">Signal</span>
-  </a>
-  <nav>
-    <a href="index.html" class="active">Watchlist</a>
-    <a href="portfolio.html">Portefeuille IA</a>
-    <a href="apprendre.html">Apprendre</a>
-  </nav>
+  <a class="brand" href="index.html"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#22d98a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="brand-name">Signal</span></a>
+  <nav><a href="index.html" class="active">Watchlist</a><a href="portfolio.html">Portefeuille IA</a><a href="apprendre.html">Apprendre</a></nav>
 </header>
 
-<main>
+<div class="rail"><div class="rail-h"><span id="rc">—</span><span id="rw"></span></div><div class="rail-l" id="rl"></div><a class="rail-lex" id="lexlink" href="#lexique">Lexique des signaux</a></div>
+<div class="stage"><div class="doc" id="doc"></div></div>
 
-  <a href="portfolio.html" class="track-bar" id="track-bar" style="display:none">
-    <span class="tb-label">Portefeuille IA</span>
-    <span class="tb-stat" id="tb-perf">—</span>
-    <span class="tb-sep">vs MSCI</span>
-    <span class="tb-stat tb-bench" id="tb-bench">—</span>
-    <span class="tb-sep">·</span>
-    <span class="tb-stat tb-orders" id="tb-orders">—</span>
-    <span class="tb-arrow">→</span>
-  </a>
-
-  <section class="hero">
-    <div class="pill-row">
-      <span class="pill pill-free"><span class="pd"></span>Accès gratuit</span>
-      <span class="pill pill-beta"><span class="pd"></span>Bêta ouverte</span>
-    </div>
-    <h1>25 actions à surveiller</h1>
-    <p>Sélectionnées automatiquement chaque semaine par un agent IA sur un univers de <span id="universe-count">—</span> valeurs. Cliquez sur une action pour voir l'analyse détaillée.</p>
-    <div class="update-meta">
-      <span class="umeta" id="update-date">Chargement…</span>
-      <span class="umeta-sep">·</span>
-      <span class="umeta" id="universe-info"></span>
-    </div>
-  </section>
-  <div class="hero-sep"></div>
-
-  <div class="sources-bar" id="sources-bar" style="display:none">
-    <span class="src-label">Sources</span>
-    <div class="src-item">
-      <div class="src-dot" style="background:var(--gold)"></div>
-      Yahoo Finance — prix, momentum, fondamentaux
-    </div>
-    <div class="src-item" id="fh-src" style="display:none">
-      <div class="src-dot" style="background:var(--blue)"></div>
-      Finnhub — validation croisée
-    </div>
-  </div>
-
-  <div class="changelog" id="changelog-block" style="display:none">
-    <div class="section-label">Changements cette semaine</div>
-    <div id="changelog-rows"></div>
-  </div>
-
-  <div class="filter-block" id="filter-bar" style="display:none">
-    <div class="filter-grid">
-      <select class="filter-select" onchange="setFilter('regime', this.value)">
-        <option value="all">Tous régimes</option>
-        <option value="golden">↑ Golden Cross</option>
-        <option value="death">↓ Death Cross</option>
-      </select>
-      <select class="filter-select" onchange="setFilter('zone', this.value)">
-        <option value="all">Toutes zones</option>
-        <option value="neutre">Zone saine</option>
-        <option value="au-dessus">Au-dessus de la tendance</option>
-        <option value="surachat">Surachat</option>
-        <option value="survente">Survente</option>
-      </select>
-      <select class="filter-select" onchange="setSort(this.value)">
-        <option value="score">Trier par score global</option>
-        <option value="fondamentaux">Trier par fondamentaux</option>
-        <option value="momentum">Trier par momentum</option>
-      </select>
-    </div>
-    <div class="filter-count-row"><span id="filter-count" class="filter-count"></span></div>
-  </div>
-
-  <div class="list-header">
-    <span style="text-align:right">#</span>
-    <span>Action</span>
-    <span style="text-align:center">Secteur</span>
-    <span style="text-align:center">Score</span>
-  </div>
-
-  <div id="stocks-top">
-    <div class="skel" style="height:64px"></div>
-    <div class="skel" style="height:64px"></div>
-    <div class="skel" style="height:64px"></div>
-    <div class="skel" style="height:64px"></div>
-    <div class="skel" style="height:64px"></div>
-  </div>
-
-  <div id="stocks-preview"></div>
-
-  <div class="show-more-wrap" id="show-more-wrap" style="display:none">
-    <button class="btn-show" id="show-more-btn" onclick="showMore()">Voir les suivantes ↓</button>
-  </div>
-
-  <div id="stocks-bottom" class="hidden"></div>
-
-  <div id="concentration-block" class="concentration-note" style="display:none">
-    <span class="conc-label">Composition de la sélection</span>
-    <div id="concentration-items"></div>
-  </div>
-
-  <div class="accordion" id="savoir-plus">
-    <div class="accordion-trigger" onclick="toggleAccordion()">
-      <div class="accordion-trigger-left">
-        <span class="accordion-label">En savoir plus</span>
-        <div class="accordion-chips">
-          <span class="accordion-chip">Scoring</span>
-          <span class="accordion-chip" id="chip-lexique">Lexique · 17 termes</span>
-        </div>
-      </div>
-      <span class="accordion-arrow" id="accordion-arrow">▼</span>
-    </div>
-    <div class="accordion-body" id="accordion-body">
-
-      <div class="accordion-section">
-        <h2>Comment fonctionne le scoring</h2>
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">Momentum · 45 pts</div>
-            <p>Golden/Death Cross MM21/MM200 (jusqu'à 20 pts selon fraîcheur du signal), RSI gradué (10 pts en zone 40–60, 5 pts en 35–65), volume confirmé (5 pts), régression long terme (5 pts), valorisation actuelle (5 pts si pullback sain depuis le plus haut 52 semaines).</p>
-          </div>
-          <div class="step">
-            <div class="step-num">Fondamentaux · 50 pts</div>
-            <p>Croissance du CA (15 pts), marges nettes (10 pts), PEG ratio — 15 pts si PEG &lt; 1 (10 si &lt; 2) —, croissance EPS (5 pts), endettement (5 pts). Sources : Yahoo Finance + Finnhub.</p>
-          </div>
-          <div class="step">
-            <div class="step-num">Analystes · 5 pts</div>
-            <p>Recommandation moyenne des analystes (échelle 1–5). Réduit de 10 à 5 pts : signal lagging à fort biais haussier structurel, et les 5 pts récupérés vont à la <em>valorisation actuelle</em> (timing d'entrée) intégrée au momentum.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-section">
-        <section class="lexique" id="lexique">
-        <h2>Lexique</h2>
-        <p class="lexique-intro">Définitions des indicateurs et métriques utilisés dans le scoring et les fiches détaillées.</p>
-
-    <div class="lex-cat">Signaux techniques — Momentum</div>
-    <div class="lex-grid">
-      <div class="lex-item">
-        <div class="lex-term">Golden Cross</div>
-        <div class="lex-def">La MM21 passe <em>au-dessus</em> de la MM200. Signal haussier : historiquement ~72% de probabilité de hausse à 6 mois dans les 10 premiers jours. La prime se dilue avec le temps.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Death Cross</div>
-        <div class="lex-def">La MM21 passe <em>sous</em> la MM200. Signal baissier, win rate de retournement ~62% dans les 60 premiers jours. Vigilance particulière si confirmé par le volume.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">MM21 / MM200</div>
-        <div class="lex-def">Moyennes mobiles simples du cours de clôture sur <em>21 jours</em> de bourse (~1 mois, dynamique court terme) et <em>200 jours</em> (~10 mois, dynamique longue, proxy du cycle de marché). Image : la MM21 c'est le pouls, la MM200 c'est le rythme cardiaque au repos. Quand le pouls (MM21) monte au-dessus du rythme de fond (MM200), le titre est en accélération. Exemple : NVDA avec MM21=210 et MM200=180 → écart +16%, régime haussier installé.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">RSI (Relative Strength Index)</div>
-        <div class="lex-def">Oscillateur 0–100 calculé sur 14 jours qui compare l'ampleur moyenne des hausses à celle des baisses. <em>RSI 50</em> = équilibre parfait. <em>40–60</em> = zone saine (10 pts). Au-delà de 70 : le titre est monté trop vite, statistiquement plus de 65% des cas connaissent une correction dans les 4 semaines. Sous 30 : survendu, possible rebond technique mais aussi possible alerte fondamentale (les marchés ont parfois raison de baisser).</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Volume confirmé</div>
-        <div class="lex-def">Le volume échangé au jour exact du croisement MM21/MM200 dépasse de <em>+40%</em> la moyenne des 50 jours précédents. Logique Murphy : un cassure sans volume, c'est un mouvement sans conviction collective — souvent un faux signal. Avec volume confirmé, le win rate du Golden Cross passe de ~66% à ~72% (+6 pp), justifiant le bonus de 2 pts dans le score.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Écart MM21/MM200</div>
-        <div class="lex-def">Différence relative entre les deux MM, en %. Calcul : (MM21 − MM200) / MM200 × 100. <em>+5%</em> : régime haussier établi, sain. <em>+15%</em> : tendance forte, tirée. <em>+30% ou plus</em> : extension extrême, mean-reversion statistiquement probable à 3 mois. <em>−10%</em> : régime baissier confirmé. Plus l'écart est large, plus le retour vers la moyenne devient probable.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Pente du MM21</div>
-        <div class="lex-def">Variation du MM21 sur les 5 derniers jours, en %. Mesure l'<em>accélération</em> de la tendance court terme. Une pente positive croissante (+2%/5j) confirme un momentum haussier ; une pente qui fléchit peut signaler un essoufflement prochain.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Win rate</div>
-        <div class="lex-def">Fréquence historique à laquelle un signal s'est traduit par une hausse. Indicateur <em>probabiliste</em>, non prédictif : un win rate de 72% signifie qu'il échoue 28% du temps.</div>
-      </div>
-    </div>
-
-    <div class="lex-cat">Régression &amp; Position de cours</div>
-    <div class="lex-grid">
-      <div class="lex-item">
-        <div class="lex-term">Régression log-linéaire</div>
-        <div class="lex-def">Modélisation de la tendance de fond du cours sur plusieurs années en échelle logarithmique. Donne une "valeur de tendance" autour de laquelle le cours oscille. Plus robuste qu'une simple moyenne.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Z-score (σ)</div>
-        <div class="lex-def">Écart du cours à la droite de régression, exprimé en écarts-types. <em>+2σ</em> : cours très au-dessus de sa tendance (surachat probable). <em>−2σ</em> : cours très en-dessous (potentiel de rattrapage).</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Zone saine</div>
-        <div class="lex-def">Z-score entre −0.5σ et +1.5σ. Le cours est proche de sa tendance long terme : ni surévalué, ni en détresse. C'est la fenêtre d'entrée la plus favorable selon la régression.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Surachat / Survente</div>
-        <div class="lex-def"><em>Surachat</em> : z-score &gt; +2σ — le cours a fortement dépassé sa tendance, risque de correction. <em>Survente</em> : z-score &lt; −2σ — potentiel de rebond, mais peut indiquer une détérioration des fondamentaux.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Pente de tendance</div>
-        <div class="lex-def">Croissance annuelle implicite de la droite de régression, exprimée en %. <em>+25%/an</em> signifie que la tendance long terme du titre progresse de 25% par an en moyenne. Donne le contexte de vitesse de fond, indépendamment des fluctuations.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Fenêtre de régression</div>
-        <div class="lex-def">Durée historique sur laquelle la droite est calculée : <em>10 ans</em> (actions growth / tech) ou <em>20 ans</em> (valeurs matures). Une fenêtre plus longue lisse les cycles mais peut masquer un changement de régime récent.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Valorisation actuelle (timing d'entrée)</div>
-        <div class="lex-def">Drawdown du cours actuel par rapport au plus haut des 52 dernières semaines, sur 5 pts. Récompense un setup d'entrée propre (pullback de <em>−3% à −10%</em> = 5 pts) plutôt que la chase de rally en haut de range (0 à −3% = 0 pt). Correction modérée −10 à −20% = 3 pts ; momentum cassé au-delà.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Retracement de Fibonacci</div>
-        <div class="lex-def">Outil chartiste classique : après un rally identifié (du <em>swing low</em> au <em>swing high</em>), les niveaux <em>23.6%, 38.2%, 50%, 61.8%, 78.6%</em> du repli sont historiquement des zones de rebond statistiquement fréquentes. <strong>Mécanisme</strong> : prophétie auto-réalisatrice — millions de traders et algos surveillent les mêmes niveaux, leur concentration d'ordres crée mécaniquement les rebonds. Annotation informationnelle dans la fiche action — pas dans le score, qui utilise un drawdown 52w plus simple. Permet de contextualiser : un repli de −10% sur un rally de +20% (Fibo 50%) n'a pas le même sens qu'un repli de −10% sur un rally de +500% (Fibo &lt; 23.6%).</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Fibo 23.6%</div>
-        <div class="lex-def">Pullback superficiel. Une correction qui s'arrête ici révèle une <em>force d'achat hystérique</em> — les retardataires achètent à la moindre micro-baisse par peur de manquer le train. Signal d'une tendance exceptionnellement forte.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Fibo 38.2%</div>
-        <div class="lex-def">Premier support véritablement significatif. La correction a purgé les spéculateurs fragiles mais la structure haussière reste solide. <em>Zone d'entrée chartiste classique</em> sur trend saine.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Fibo 50%</div>
-        <div class="lex-def"><strong>Subtilité</strong> : ce niveau ne vient pas vraiment de Fibonacci mais des travaux de <em>Dow et Gann</em>, qui ont observé empiriquement qu'un marché tend à corriger la moitié de son impulsion avant de retrouver un consensus. Inclus par tradition dans les outils Fibo. Ligne de démarcation psychologique où acheteurs et vendeurs s'affrontent à armes égales.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Fibo 61.8% (Golden Zone)</div>
-        <div class="lex-def">Le pivot central de l'analyse technique moderne, dérivé directement de l'inverse du <em>nombre d'or</em> Φ (1/1.618 ≈ 0.618). Le niveau le plus surveillé par les pros — c'est ici que le ratio risque/rendement devient le plus asymétrique possible. Sa cassure définitive est presque toujours le signe d'un effondrement structurel.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Fibo 78.6%</div>
-        <div class="lex-def">L'ultime rempart de la trend. Un repli jusqu'ici révèle une <em>faiblesse sévère</em>. Un rebond reste techniquement possible (parfois violent par panique des vendeurs à découvert) mais la configuration globale est précaire.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Swing low / Swing high</div>
-        <div class="lex-def"><em>Swing high</em> : plus haut des 52 dernières semaines. <em>Swing low</em> : plus bas observé <strong>avant</strong> ce plus haut, dans la même fenêtre. La distance entre les deux mesure la taille du dernier rally et sert de référence pour calculer les niveaux Fibo.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Rally annulé</div>
-        <div class="lex-def">Quand le cours retrace plus de 78.6% du rally identifié, la lecture chartiste considère que le mouvement haussier précédent n'est plus exploitable comme support — la trend est cassée plutôt qu'en simple pullback. Au-delà de 100% (cours sous le swing low), la structure est complètement déstructurée.</div>
-      </div>
-    </div>
-
-    <div class="lex-cat">Fondamentaux</div>
-    <div class="lex-grid">
-      <div class="lex-item">
-        <div class="lex-term">Croissance du CA</div>
-        <div class="lex-def">Variation annuelle du chiffre d'affaires sur les 12 derniers mois. <em>&gt;10%/an</em> : 15 pts (vraie croissance organique). <em>&gt;5%/an</em> : 8 pts (croissance modérée). Mesure si l'entreprise conquiert de nouveaux marchés ou perd du terrain. Image : c'est le "thermomètre commercial" — une marge peut s'améliorer mais si le CA stagne, l'entreprise ne grandit plus. Exemple : NVDA +73% (boom datacenter IA), Coca-Cola +5% (matures stables), Intel −2% (en déclin).</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Marge nette</div>
-        <div class="lex-def">Bénéfice net / chiffre d'affaires, en %. Indique combien de centimes l'entreprise garde sur chaque euro vendu, après tous coûts (production, R&D, intérêts, impôts). <em>&gt;10%</em> : solide (10 pts). <em>&gt;0%</em> : acceptable (5 pts). Repères : MasterCard ~45% (modèle royaltaire), Apple ~25% (premium), Walmart ~3% (volume), compagnie aérienne souvent &lt; 5% ou négative.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">FCF Margin (marge de trésorerie libre)</div>
-        <div class="lex-def">Free Cash Flow / chiffre d'affaires. Mesure la <strong>trésorerie réellement générée</strong> après les investissements (capex). Beaucoup plus dur à maquiller comptablement que la marge nette — l'argent est là ou il n'y est pas. <em>&gt;15%</em> : +5 pts. <em>&gt;5%</em> : +3 pts. Pourquoi ça compte : une entreprise peut afficher 15% de marge nette mais 0% de FCF si tous les profits comptables partent en investissement (cas WeWork, Uber des débuts). Le FCF margin est le bullshit-detector de la rentabilité.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">PEG Ratio</div>
-        <div class="lex-def">Price/Earnings divisé par la croissance annuelle des bénéfices. Ajuste la valorisation à la dynamique de croissance. <em>PEG = 1</em> : valorisation alignée sur la croissance (Peter Lynch : "fair price"). <em>PEG &lt; 1</em> : sous-évalué (15 pts), occasion. <em>PEG &gt; 3</em> : croissance très chère (0 pt), pari sur l'avenir. Exemple concret : un titre à PER 30 avec croissance 30%/an a un PEG = 1 (raisonnable), tandis qu'un PER 20 avec croissance 5% a un PEG = 4 (très cher pour ce qu'il est).</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">EPS Growth</div>
-        <div class="lex-def">Croissance du bénéfice par action (Earnings Per Share). Signal de progression de la rentabilité <em>par actionnaire</em>, qui peut différer de la croissance du CA. <em>&gt;15%</em> : 5 pts. <em>&gt;5%</em> : 2 pts. Subtilité : si une entreprise rachète massivement ses actions (Apple), l'EPS croît plus vite que les bénéfices totaux — la "vraie" croissance opérationnelle est dans le CA, l'EPS reflète aussi l'allocation du capital.</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Dette / Fonds propres</div>
-        <div class="lex-def">Ratio Debt/Equity. Indique combien d'euros empruntés pour 100€ de fonds propres. <em>&lt;100%</em> (D/E &lt; 1) : levier raisonnable (5 pts). <em>200%+</em> : levier élevé, cyclique-dépendant (0 pt). Repères sectoriels : tech &lt; 50% (peu d'actifs lourds), industrie ~80%, banques 500%+ (par construction). Risque : en cas de retournement (taux qui montent, crise), une entreprise endettée voit sa marge nette ravagée par les frais financiers.</div>
-      </div>
-    </div>
-
-    <div class="lex-cat">Score &amp; Consensus</div>
-    <div class="lex-grid">
-      <div class="lex-item">
-        <div class="lex-term">Consensus analystes</div>
-        <div class="lex-def">Moyenne des recommandations sell-side sur une échelle <em>1 (Strong Buy) à 5 (Strong Sell)</em>. Signal utile mais structurellement biaisé vers l'achat et lagging : les révisions interviennent souvent après les événements. Poids réduit à 5 pts pour libérer de l'espace au scoring de timing d'entrée (valorisation actuelle).</div>
-      </div>
-      <div class="lex-item">
-        <div class="lex-term">Score total (★)</div>
-        <div class="lex-def">Somme Momentum (45) + Fondamentaux (50) + Analystes (5) = max 100. Pénalité non compensable : <em>−5 pts</em> si Death Cross ≤ 30j, <em>−3 pts</em> si ≤ 60j (les fondamentaux ne peuvent pas neutraliser ce malus). <em>5 étoiles</em> ≥ 90 · <em>4 étoiles</em> ≥ 75 · <em>3 étoiles</em> ≥ 60. Seules les 25 meilleures valeurs apparaissent.</div>
-      </div>
-        </div>
-        </section>
-      </div>
-
-    </div><!-- /accordion-body -->
-  </div><!-- /accordion -->
-
-</main>
-
-<footer>
-  <div class="footer-legal">Signal est un service éditorial d'information financière. Contenu fourni à titre informatif uniquement. Ne constitue pas un conseil en investissement au sens AMF.</div>
-  <div class="footer-right" id="footer-week">Bêta</div>
-</footer>
-
+<script src="signal-fx.js"></script>
 <script>
-let allStocks = [];
-let activeFilters = { regime: 'all', zone: 'all' };
-let currentSort = 'score';
+const A={};
+const f=(v,d=1)=>v==null?'—':(+v).toFixed(d),fs=(v,d=1)=>v==null?'—':(v>0?'+':'')+(+v).toFixed(d);
+let stocks=[],sel=null;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function setSort(field) {
-  currentSort = field;
-  applyFilters();
+Promise.all([
+  fetch('watchlist.json?v='+Date.now()).then(r=>r.json()),
+  fetch('analyses.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({}))
+]).then(([wl,an])=>{
+  Object.assign(A, an||{});
+  stocks=wl.stocks.slice().sort((a,b)=>b.score-a.score);
+  document.getElementById('rc').textContent=stocks.length+' valeurs';document.getElementById('rw').textContent=(wl.week||'').replace('Sem. ','S');
+  listBuild();
+  document.getElementById('lexlink').addEventListener('click',e=>{e.preventDefault();showLexique();});
+  if(location.hash==='#lexique'){showLexique();}else if(stocks[0])pick(stocks[0]);
+});
+
+function crossShort(b){return b.cross_type==='golden'?'GC':b.cross_type==='death'?'DC':'—';}
+function region(s){return s.badge||'US';}
+function listBuild(){const l=document.getElementById('rl');l.innerHTML='';stocks.forEach(s=>{const b=s.breakdown||{},r=document.createElement('div');r.className='row';s._r=r;
+  r.innerHTML='<div><div class="nm">'+s.name+'</div><div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+(s.sector||'')+'</span></div></div>'+
+    '<span class="rr"><div class="sc">'+s.score+'</div></span>';
+  r.addEventListener('click',()=>pick(s));l.appendChild(r);});}
+
+function stateTag(b){const ct=b.cross_type==='golden'?'GOLDEN CROSS':b.cross_type==='death'?'DEATH CROSS':'CROSS NEUTRE';return ct+(b.cross_days_ago!=null?' · '+b.cross_days_ago+' J':'');}
+function momProse(b){let s='';s+=(b.cross_type==='golden'?'Golden cross':b.cross_type==='death'?'Death cross':'Cross neutre')+(b.cross_days_ago!=null?' il y a '+b.cross_days_ago+' j':'')+' · pente MM21 '+fs(b.cross_slope_mm21_pct,1)+' %. ';s+='RSI '+f(b.rsi,0)+' (réf. 30 / 70). ';s+='Z-score '+fs(b.regression_z,2)+'σ vs régression long terme'+(b.regression_window_years?' ('+b.regression_window_years+' ans)':'')+'. ';s+='Drawdown 52 s '+fs(b.drawdown_52w_pct,1)+' %.';return s;}
+function fondProse(b){let s='Bloc fondamental '+(b.fondamentaux||0)+' / 50. ';if(b.rev_growth_pct!=null)s+='Croissance CA '+fs(b.rev_growth_pct,1)+' %. ';if(b.net_margin_pct!=null)s+='Marge nette '+f(b.net_margin_pct,1)+' %. ';if(b.fcf_margin_pct!=null)s+='Marge FCF '+f(b.fcf_margin_pct,1)+' %. ';s+='Consensus analystes '+(b.analystes||0)+' / 5.';return s;}
+function paras(a){return a.map(p=>'<p>'+p+'</p>').join('');}
+function meter(l,v,m){return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(v/m*100)+'"></span></span><span class="mv">'+v+'/'+m+'</span></div>';}
+function sec(h,body,cls){return'<div class="sec '+(cls||'')+'"><div class="sec-h">'+h+'</div>'+body+'</div>';}
+function mk(k,v){return'<div><span class="k">'+k+'</span><span class="v">'+v+'</span></div>';}
+function bblist(arr){return arr&&arr.length?'<ul>'+arr.map(p=>'<li>'+p+'</li>').join('')+'</ul>':'<p class="stub">—</p>';}
+
+function typeHTML(el,html){const tmp=document.createElement('div');tmp.innerHTML=html;const ps=[...tmp.querySelectorAll('p')];const full=(ps.length?ps.map(p=>p.textContent):[tmp.textContent]).join('  ');el.innerHTML='<p class="resume type-cur" id="rtype"></p>';const t=document.getElementById('rtype');const _tt=performance.now(),dur=Math.min(1500,Math.max(500,full.length*6));(function tick(){const e=Math.min(1,(performance.now()-_tt)/dur);if(t)t.textContent=full.slice(0,Math.floor(e*full.length));if(e<1)requestAnimationFrame(tick);else el.innerHTML=html;})();}
+function pick(s){sel=s;stocks.forEach(o=>o._r&&o._r.classList.toggle('sel',o===s));var ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');render(s);}
+function lexi(t,d){return '<div><div class="lext">'+t+'</div><div class="lexd">'+d+'</div></div>';}
+function lexsec(h,items){return '<div class="sec"><div class="sec-h">'+h+'</div><div class="lexg">'+items+'</div></div>';}
+function showLexique(){
+  sel=null;stocks.forEach(o=>o._r&&o._r.classList.remove('sel'));
+  var ll=document.getElementById('lexlink');if(ll)ll.classList.add('active');
+  if(history.replaceState)history.replaceState(null,'','#lexique');
+  const doc=document.getElementById('doc');doc.classList.remove('on');
+  doc.innerHTML='<div class="d-head"><div><div class="d-tk">Lexique</div><div class="d-nm">Comment lire une fiche · définitions des signaux</div></div></div>'+
+    '<div class="sep"></div>'+
+    lexsec('Le score',
+      lexi('Score /100','Note de synthèse = <em>Momentum 45</em> + <em>Fondamentaux 50</em> + <em>Analystes 5</em>. Indicateur de <em>qualité</em> à un instant T, pas de timing : un score élevé ne garantit pas une hausse imminente.')+
+      lexi('Momentum · 45 pts','Dynamique technique : croisement de moyennes (20 pts), RSI (10), volume (5), position vs régression (5), valorisation conditionnée au régime de cross (5).')+
+      lexi('Fondamentaux · 50 pts','Santé financière concrète : croissance du chiffre d\'affaires, marge nette, marge de free cash-flow, PEG (valorisation rapportée à la croissance), endettement.')+
+      lexi('Analystes · 5 pts','Consensus sell-side (Acheter / Conserver / Vendre). Volontairement peu pondéré : biais acheteur structurel et révisions retardées.')+
+      lexi('Étoiles','Résumé visuel du score : 5★ ≥ 90, 4★ ≥ 75, 3★ ≥ 60.'))+
+    lexsec('Signaux techniques',
+      lexi('Golden Cross / Death Cross','<em>Golden Cross</em> : la MM21 passe au-dessus de la MM200 — signal haussier. <em>Death Cross</em> : MM21 sous MM200 — baissier. Plus le croisement est récent, plus le signal pèse.')+
+      lexi('MM21 / MM200','Moyennes mobiles sur 21 et 200 jours : elles lissent les soubresauts quotidiens. La <em>MM21</em> réagit vite (court terme), la <em>MM200</em> donne la tendance de fond.')+
+      lexi('RSI','Oscillateur 0–100 de la vitesse des variations récentes. <em>Zone saine : 40–60.</em> Au-delà de 70 : surachat. Sous 30 : survente.')+
+      lexi('Z-score (σ)','Écart du cours à sa droite de régression long terme, en écarts-types. <em>−2σ</em> = décote marquée (rebond possible) ; <em>+2σ</em> = cours tendu au-dessus de sa tendance.')+
+      lexi('Pente MM21','Inclinaison de la MM21 : positive = momentum qui se renforce, négative = qui s\'essouffle.')+
+      lexi('Drawdown 52 s','Baisse depuis le plus haut des 52 dernières semaines, en %. Le repli déjà encaissé.'))+
+    lexsec('Fondamentaux',
+      lexi('Croissance CA','Variation du chiffre d\'affaires sur un an.')+
+      lexi('Marge nette','Bénéfice net rapporté au chiffre d\'affaires.')+
+      lexi('Marge FCF','Free cash-flow (trésorerie réellement générée) rapporté au CA — plus difficile à maquiller comptablement que la marge nette.')+
+      lexi('Consensus analystes','Recommandation moyenne sell-side, échelle Acheter / Conserver / Vendre.'));
+  requestAnimationFrame(()=>doc.classList.add('on'));
 }
-
-function setFilter(type, value) {
-  activeFilters[type] = value;
-  applyFilters();
+function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
+  const rsi=b.rsi==null?50:Math.max(0,Math.min(100,b.rsi)),zp=Math.max(0,Math.min(100,((b.regression_z==null?0:b.regression_z)+3)/6*100));
+  const C=2*Math.PI*52,off=C*(1-s.score/100);
+  const resumeBody=a&&a.resume?a.resume.map(p=>'<p class="resume">'+p+'</p>').join(''):'<p class="resume">'+s.name+' — score '+s.score+'/100. '+stateTag(b)+'. Croissance CA '+fs(b.rev_growth_pct,0)+' %, marge nette '+f(b.net_margin_pct,0)+' %, z-score '+fs(b.regression_z,1)+'σ.</p><p class="resume stub">Synthèse qualitative à générer.</p>';
+  const bb=(a&&(a.bull||a.bear))?'<div class="bullbear"><div class="bb bb-bull"><div class="bb-h">▲ Thèse haussière</div>'+bblist(a.bull)+'</div><div class="bb bb-bear"><div class="bb-h">▼ Thèse baissière</div>'+bblist(a.bear)+'</div></div>':'';
+  doc.classList.remove('on');
+  doc.innerHTML='<div class="d-head"><div><div class="d-tk">'+s.ticker+'</div><div class="d-nm">'+s.name+' · '+s.sector+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div></div>'+
+    '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div><div class="rs">'+s.stars+'/5</div></div></div></div>'+
+    '<div class="sep"></div><div id="rzone"></div>'+
+    '<div class="quant"><div><div class="qh">Signaux techniques</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,2)+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
+      '<div><div class="qh">Décomposition du score</div>'+meter('Momentum',b.momentum||0,45)+meter('Fondamentaux',b.fondamentaux||0,50)+meter('Analystes',b.analystes||0,5)+'</div></div>'+
+    '<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA',fs(b.rev_growth_pct,1)+'%')+mk('Marge net',f(b.net_margin_pct,1)+'%')+mk('Marge FCF',f(b.fcf_margin_pct,1)+'%')+'</div>'+
+    '<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
+      '<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div></div>'+
+    (bb?sec('Bull vs Bear',bb,'bbsec'):'');
+  requestAnimationFrame(()=>{doc.classList.add('on');const rz=document.getElementById('rzone');if(rz){reduce?(rz.innerHTML=resumeBody):typeHTML(rz,resumeBody);}const arc=document.getElementById('arc');if(arc)arc.style.strokeDashoffset=off;doc.querySelectorAll('.f').forEach(el=>el.style.width=el.dataset.w+'%');const cu=document.getElementById('cu');const _ct=performance.now();(function up(){const e=Math.min(1,(performance.now()-_ct)/600);if(cu)cu.textContent=Math.round(e*s.score);if(e<1)requestAnimationFrame(up);})();});
 }
-
-function applyFilters() {
-  let filtered = allStocks;
-  if (activeFilters.regime !== 'all') {
-    filtered = filtered.filter(s => (s.breakdown || {}).cross_regime === activeFilters.regime);
-  }
-  if (activeFilters.zone !== 'all') {
-    filtered = filtered.filter(s => (s.breakdown || {}).regression_signal === activeFilters.zone);
-  }
-  filtered = [...filtered].sort((a, b) => {
-    if (currentSort === 'fondamentaux') return (b.breakdown?.fondamentaux||0) - (a.breakdown?.fondamentaux||0);
-    if (currentSort === 'momentum')     return (b.breakdown?.momentum||0) - (a.breakdown?.momentum||0);
-    return b.score - a.score;
-  });
-  const top     = filtered.slice(0, 3);
-  const preview = filtered[3];
-  const rest    = filtered.slice(4);
-  const empty = '<div style="padding:1.5rem 0;color:var(--text3);font-size:0.88rem;font-family:\'Courier New\',monospace">Aucune action ne correspond aux filtres.</div>';
-  document.getElementById('stocks-top').innerHTML     = top.length ? top.map(renderCard).join('') : empty;
-  const previewEl = document.getElementById('stocks-preview');
-  if (preview) {
-    previewEl.innerHTML = renderCard(preview);
-    previewEl.classList.add('sc-preview-active');
-  } else {
-    previewEl.innerHTML = '';
-    previewEl.classList.remove('sc-preview-active');
-  }
-  document.getElementById('stocks-bottom').innerHTML = rest.length ? rest.map(renderCard).join('') : '';
-  document.getElementById('stocks-bottom').classList.add('hidden');
-  const smw = document.getElementById('show-more-wrap');
-  const smb = document.getElementById('show-more-btn');
-  const concBlock = document.getElementById('concentration-block');
-  const hasConc = concBlock && concBlock.querySelector('.conc-row, .conc-item');
-  if (smw && smb) {
-    const total = rest.length + (preview ? 1 : 0);
-    smw.style.display = total > 0 ? 'block' : 'none';
-    if (total > 0) {
-      smb.textContent = `Voir les ${total} suivantes ↓`;
-      // Liste pas encore dépliée → cacher la composition
-      if (hasConc) concBlock.style.display = 'none';
-    } else {
-      // Plus de stocks à révéler → la composition fait sens, on l'affiche
-      if (hasConc) concBlock.style.display = 'block';
-    }
-  }
-  const fc = document.getElementById('filter-count');
-  if (fc) fc.textContent = filtered.length < allStocks.length ? `${filtered.length} / ${allStocks.length}` : '';
-}
-
-function scoreClass(s) {
-  if (s >= 90) return 'score-max';
-  if (s >= 75) return 'score-high';
-  return 'score-mid';
-}
-function starsHTML(n) {
-  return '<span class="stars">' + '★'.repeat(n) + '<span style="opacity:0.25">' + '★'.repeat(5 - n) + '</span></span>';
-}
-function changeHTML(c) {
-  if (c === 'new')  return '<span class="bdg bdg-new">NEW</span>';
-  if (c === 'up')   return '<span class="bdg bdg-up">▲</span>';
-  if (c === 'down') return '<span class="bdg bdg-dn">▼</span>';
-  return '';
-}
-const MARKET_MAP = {
-  // US
-  NMS:'US',NYQ:'US',NGM:'US',NCM:'US',PCX:'US',OBB:'US',ASE:'US',BTS:'US',BATS:'US',
-  // Zone euro + UE
-  PAR:'EU',EPA:'EU',AMS:'EU',FRA:'EU',XETRA:'EU',ETR:'EU',AEB:'EU',GER:'EU',
-  MIL:'EU',BIT:'EU',MCE:'EU',BME:'EU',HEL:'EU',CPH:'EU',OMX:'EU',
-  WSE:'EU',VIE:'EU',ATH:'EU',LIS:'EU',OSL:'EU',
-  // UK
-  LSE:'GB',IOB:'GB',
-  // Suisse
-  EBS:'CH',SWX:'CH',
-  // Canada
-  TSX:'CA',CVE:'CA',TOR:'CA',
-  // Japon
-  TYO:'JP',TSE:'JP',OSA:'JP',
-  // Hong Kong
-  HKG:'HK',HKSE:'HK',
-  // Australie / Corée / Inde / Brésil
-  ASX:'AU',KSC:'KR',KOE:'KR',BSE:'IN',NSI:'IN',SAO:'BR',
-};
-function badgeHTML(b, market) {
-  const label = b || MARKET_MAP[market] || null;
-  if (!label) return '';
-  const cls = label==='EU' ? 'bdg-eu'
-            : label==='US' ? 'bdg-us'
-            : label==='GB' ? 'bdg-gb'
-            : 'bdg-other';
-  return `<span class="bdg ${cls}">${label}</span>`;
-}
-
-function renderCard(s) {
-  const id   = s.ticker.replace(/[^a-zA-Z0-9]/g, '_');
-  const bd   = s.breakdown || {};
-  const mo      = bd.momentum || 0;
-  const fo      = bd.fondamentaux || 0;
-  const an      = bd.analystes || 0;
-  const crossPts = bd.cross_pts != null ? bd.cross_pts : null;
-  const rsiPts   = bd.rsi_pts   != null ? bd.rsi_pts   : null;
-  const volPts   = bd.vol_pts   != null ? bd.vol_pts   : null;
-  const regPts   = bd.reg_pts   != null ? bd.reg_pts   : null;
-  const valPts   = bd.val_pts   != null ? bd.val_pts   : null;
-  const moSub    = (crossPts !== null)
-    ? `<span class="mo-sub">Cross ${crossPts ?? '—'}/20 · RSI ${rsiPts ?? '—'}/10 · Vol ${volPts ?? '—'}/5 · Rég ${regPts ?? '—'}/5${valPts !== null ? ` · Val ${valPts}/5` : ''}</span>`
-    : '';
-  const srcs = (bd.sources || ['Yahoo Finance']).join(' + ');
-
-  const crossRegime = bd.cross_regime || 'neutral';
-  const crossDays   = bd.cross_days_ago   != null ? bd.cross_days_ago   : null;
-  const crossSpread = bd.cross_spread_pct != null ? bd.cross_spread_pct : null;
-  const crossSlope  = bd.cross_slope_mm21_pct != null ? bd.cross_slope_mm21_pct : null;
-  const crossVol    = bd.cross_volume_confirmed || false;
-
-  const crossHTML = (() => {
-    const isGolden = crossRegime === 'golden';
-    const isDeath  = crossRegime === 'death';
-
-    if (!isGolden && !isDeath) {
-      if (crossSpread == null) return '';
-      const sp = crossSpread >= 0 ? `+${crossSpread.toFixed(1)}%` : `${crossSpread.toFixed(1)}%`;
-      return `<div class="cross-block"><div class="cross-header"><span class="reg-label">Croisement MM21 / MM200</span><span class="cross-badge cb-neutral">Neutre · Écart ${sp}</span></div></div>`;
-    }
-
-    const cfg = isGolden ? {
-      color: 'var(--green)', bg: 'rgba(28,200,122,0.08)', border: 'rgba(28,200,122,0.22)',
-      icon: '↑', label: 'Golden Cross',
-      interp: crossDays <= 10  ? 'Signal très frais — probabilité haussière ~72% avec volume confirmé. Fenêtre optimale d\'entrée dans les 10 premiers jours.'
-            : crossDays <= 30  ? 'Signal récent — momentum encore actif, win rate historique ~66%. Tendance haussière en cours d\'établissement.'
-            : crossDays <= 60  ? 'Signal actif — tendance établie. Prime de momentum en légère baisse, mais régime haussier confirmé.'
-            : crossDays <= 180 ? 'Croisement validé — régime haussier maintenu. Signal dilué dans le temps, surveiller les fondamentaux.'
-            : 'Golden Cross ancien — à pondérer avec d\'autres signaux. Vérifier que le régime haussier tient toujours.'
-    } : {
-      color: 'var(--red)', bg: 'rgba(240,84,84,0.08)', border: 'rgba(240,84,84,0.22)',
-      icon: '↓', label: 'Death Cross',
-      interp: crossDays <= 30  ? 'Signal baissier récent — vigilance maximale. Win rate de retournement ~62% dans les 60 premiers jours.'
-            : crossDays <= 90  ? 'Régime baissier confirmé — MM21 sous MM200, tendance négative persistante.'
-            : 'Death Cross ancien — possibilité de consolidation ou rebond. Réévaluer avec l\'état du MM21.'
-    };
-
-    const spreadStr = crossSpread != null ? (crossSpread >= 0 ? `+${crossSpread.toFixed(1)}%` : `${crossSpread.toFixed(1)}%`) : null;
-    const slopeStr  = crossSlope  != null ? (crossSlope  >= 0 ? `+${crossSlope.toFixed(2)}%`  : `${crossSlope.toFixed(2)}%`)  : null;
-    const barPct    = crossDays   != null ? Math.min(100, (crossDays / 180) * 100) : 0;
-
-    return `
-      <div class="cross-block" style="border-color:${cfg.border}">
-        <div class="cross-header">
-          <span class="reg-label">Croisement MM21 / MM200</span>
-          <span class="cross-badge" style="background:${cfg.bg};color:${cfg.color};border:1px solid ${cfg.border}">${cfg.icon} ${cfg.label}</span>
-        </div>
-        <div class="cross-bar-track">
-          <div class="cross-bar-fill" style="width:${barPct.toFixed(1)}%;background:${cfg.color};opacity:0.3"></div>
-          <div class="cross-bar-pos" style="left:${barPct.toFixed(1)}%;background:${cfg.color}"></div>
-        </div>
-        <div class="cross-bar-labels">
-          <span style="color:${cfg.color}">Récent</span>
-          <span>${crossDays != null ? crossDays + 'j' : '—'}</span>
-          <span>Ancien (180j)</span>
-        </div>
-        <div class="cross-stats">
-          ${crossDays   != null ? `<span>${crossDays}j depuis le croisement</span>` : ''}
-          ${spreadStr             ? `<span>Écart ${spreadStr}</span>`               : ''}
-          ${slopeStr              ? `<span>Pente ${slopeStr}/5j</span>`             : ''}
-          ${crossVol ? '<span class="cv-ok">Volume ✓</span>' : '<span class="cv-no">Volume —</span>'}
-        </div>
-        <div class="cross-interp">${cfg.interp}</div>
-        ${bd.signal_dynamics_warning ? `<div class="cross-warn" style="margin-top:8px;padding:7px 10px;background:rgba(232,168,32,0.1);border:1px solid rgba(232,168,32,0.3);border-radius:6px;font-size:0.78rem;color:var(--gold);line-height:1.5"><strong>⚠ Signal en transition :</strong> ${bd.signal_dynamics_warning}</div>` : ''}
-      </div>`;
-  })();
-
-  const regZ      = bd.regression_z    != null ? bd.regression_z   : null;
-  const regSig    = bd.regression_signal || '';
-  const regPente  = bd.regression_pente_pct != null ? bd.regression_pente_pct : null;
-  const regWindow = bd.regression_window_years != null ? bd.regression_window_years : null;
-  const mm21v  = bd.mm21  != null ? bd.mm21.toLocaleString('fr-FR', {maximumFractionDigits:2}) : null;
-  const mm200v = bd.mm200 != null ? bd.mm200.toLocaleString('fr-FR', {maximumFractionDigits:2}) : null;
-
-  const regBandHTML = regZ != null ? (() => {
-    const pct      = Math.max(0, Math.min(100, ((regZ + 3) / 6) * 100));
-    const zoneLeft = ((-0.5 + 3) / 6) * 100;
-    const zoneW    = ((1.5  - (-0.5)) / 6) * 100;
-    const sigColors = {
-      'surachat':      { bg:'rgba(240,84,84,0.15)',   fg:'var(--red)',   tc:'var(--red-dim)',   label:'Surachat' },
-      'au-dessus':     { bg:'rgba(232,168,32,0.12)',  fg:'var(--gold)',  tc:'var(--gold-dim)',  label:'Au-dessus' },
-      'neutre':        { bg:'rgba(28,200,122,0.12)',  fg:'var(--green)', tc:'var(--green-dim)', label:'Zone saine' },
-      'sous tendance': { bg:'rgba(80,128,248,0.1)',   fg:'var(--blue)',  tc:'var(--blue-dim)',  label:'Sous tendance' },
-      'survente':      { bg:'rgba(80,128,248,0.15)',  fg:'var(--blue)',  tc:'var(--blue-dim)',  label:'Survente' },
-    };
-    const c = sigColors[regSig] || sigColors['neutre'];
-    const zStr = regZ >= 0 ? `+${regZ.toFixed(2)}σ` : `${regZ.toFixed(2)}σ`;
-    const penteStr  = regPente  != null ? ` · tendance ${regPente >= 0 ? '+' : ''}${regPente}%/an` : '';
-    const windowStr = regWindow != null ? ` · base ${regWindow} ans` : '';
-    return `
-      <div class="reg-band">
-        <div class="reg-band-header">
-          <span class="reg-label">Régression long terme · distance au cours</span>
-          <span class="reg-signal" style="background:${c.tc};color:${c.fg};border:1px solid ${c.fg}44">${c.label}</span>
-        </div>
-        <div class="reg-track">
-          <div class="reg-zone-ok" style="left:${zoneLeft.toFixed(1)}%;width:${zoneW.toFixed(1)}%"></div>
-          <div class="reg-cursor" style="left:${pct.toFixed(1)}%;background:${c.fg}"></div>
-        </div>
-        <div class="reg-ticks">
-          <span>−3σ</span><span>−2σ</span><span>−1σ</span><span style="color:var(--green)">0</span><span>+1σ</span><span>+2σ</span><span>+3σ</span>
-        </div>
-        <div style="margin-top:5px;font-family:'Courier New',monospace;font-size:0.70rem;color:${c.fg}">${zStr}${penteStr}${windowStr}</div>
-      </div>`;
-  })() : '';
-
-  const metaItems = [
-    bd.rsi           ? `RSI ${bd.rsi}`                : '',
-    mm21v            ? `MM21 ${mm21v}`                : '',
-    mm200v           ? `MM200 ${mm200v}`              : '',
-    bd.rev_growth_pct ? `CA +${bd.rev_growth_pct}%/an` : '',
-    bd.net_margin_pct ? `Marge ${bd.net_margin_pct}%`  : '',
-    srcs             ? `Sources : ${srcs}`            : '',
-  ].filter(Boolean);
-
-  return `
-    <div class="sc" id="sc-${id}">
-      <div class="sc-main" onclick="toggleDetail('${id}')">
-        <div class="rk">${String(s.rank).padStart(2,'0')}</div>
-        <div class="sc-info">
-          <div class="sc-name">
-            ${s.name}
-            ${badgeHTML(s.badge, s.market)}
-            ${changeHTML(s.change)}
-          </div>
-          <div class="sc-meta">
-            <span class="sc-ticker">${s.ticker} · ${s.market}</span>
-            ${s.sector ? `<span class="sc-sector-mob">${s.sector}</span>` : ''}
-          </div>
-        </div>
-        <div class="sector-pill">${(s.sector||'').replace(/ /g,'<br>')}</div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-          <div style="display:flex;align-items:center;gap:7px">
-            ${starsHTML(s.stars)}
-            <div class="score-pill ${scoreClass(s.score)}">${s.score}</div>
-          </div>
-          <div class="expand-hint">↓ analyse</div>
-        </div>
-      </div>
-      <div class="sc-detail" id="detail-${id}">
-        <div class="sc-detail-inner">
-          <div class="justif">${s.justification || 'Analyse non disponible.'}</div>
-          <div class="score-bars">
-            <div class="sb-item">
-              <div class="sb-label">Momentum</div>
-              <div class="sb-bar-row">
-                <div class="sb-track"><div class="sb-fill" style="width:${mo/45*100}%"></div></div>
-                <div class="sb-val">${mo}/45</div>
-              </div>
-              ${moSub}
-            </div>
-            <div class="sb-item">
-              <div class="sb-label">Fondamentaux</div>
-              <div class="sb-bar-row">
-                <div class="sb-track"><div class="sb-fill" style="width:${fo/50*100}%"></div></div>
-                <div class="sb-val">${fo}/50</div>
-              </div>
-            </div>
-            <div class="sb-item">
-              <div class="sb-label">Analystes</div>
-              <div class="sb-bar-row">
-                <div class="sb-track"><div class="sb-fill" style="width:${an/5*100}%"></div></div>
-                <div class="sb-val">${an}/5</div>
-              </div>
-            </div>
-          </div>
-          ${crossHTML}
-          ${regBandHTML}
-          ${(() => {
-            // Valorisation actuelle — version compacte (1 ligne meta)
-            const dd  = bd.drawdown_52w_pct;
-            const vp  = bd.val_pts;
-            const fibo = bd.fibo;
-            if (dd == null || vp == null) return '';
-            const zoneCfg = vp === 5
-              ? { color: 'var(--green)',  label: 'pullback sain' }
-              : vp === 3
-              ? { color: 'var(--gold)',   label: 'correction modérée' }
-              : vp === 1
-              ? { color: 'var(--orange)', label: 'momentum cassé' }
-              : (dd >= -3
-                ? { color: 'var(--red)',  label: 'près du top' }
-                : { color: 'var(--red)',  label: 'chute libre' });
-            const fiboStr = fibo ? ` · ${fibo.closest_fibo}` : '';
-            return `<div style="margin-top:6px;font-family:'Courier New',monospace;font-size:0.72rem;color:var(--text3);padding:6px 10px;background:var(--surface);border-left:2px solid ${zoneCfg.color};border-radius:3px">
-              Valorisation : <span style="color:${zoneCfg.color}">${dd.toFixed(1)}% du top 52w · ${zoneCfg.label} (${vp}/5)</span>${fiboStr}
-            </div>`;
-          })()}
-          <div class="detail-meta">
-            ${metaItems.map(m => `<span>${m}</span>`).join('')}
-          </div>
-        </div>
-      </div>
-    </div>`;
-}
-
-function toggleDetail(id) {
-  const el = document.getElementById('detail-' + id);
-  if (!el) return;
-  const isOpen = el.classList.contains('open');
-  el.classList.toggle('open');
-  const hint = el.closest('.sc').querySelector('.expand-hint');
-  if (hint) hint.textContent = isOpen ? '↓ analyse' : '↑ fermer';
-}
-
-function showMore() {
-  document.getElementById('stocks-preview').classList.remove('sc-preview-active');
-  document.getElementById('stocks-bottom').classList.remove('hidden');
-  document.getElementById('show-more-wrap').style.display = 'none';
-  // Révèle la composition de la sélection (info contextuelle après déroulé complet)
-  const conc = document.getElementById('concentration-block');
-  if (conc && conc.querySelector('.conc-row, .conc-item')) {
-    conc.style.display = 'block';
-  }
-}
-
-function toggleChangelog(count) {
-  const more    = document.getElementById('cl-more');
-  const toggle  = document.getElementById('cl-toggle');
-  const blurred = document.querySelector('.cl-blurred');
-  const isOpen  = more.classList.contains('open');
-  more.classList.toggle('open', !isOpen);
-  if (blurred) blurred.classList.toggle('cl-reveal', !isOpen);
-  toggle.textContent = isOpen
-    ? `Voir les ${count} autre${count > 1 ? 's' : ''} ↓`
-    : 'Réduire ↑';
-}
-
-function toggleAccordion() {
-  const body  = document.getElementById('accordion-body');
-  const arrow = document.getElementById('accordion-arrow');
-  const open  = body.classList.toggle('open');
-  arrow.classList.toggle('open', open);
-}
-
-async function loadWatchlist() {
-  try {
-    const res  = await fetch('watchlist.json?v=' + Date.now());
-    const data = await res.json();
-    const { stocks, changelog, updated_at, week, universe_size, finnhub_active } = data;
-
-    document.getElementById('update-date').textContent  = `Mise à jour · ${updated_at} · ${week}`;
-    document.getElementById('universe-count').textContent = universe_size;
-    document.getElementById('universe-info').textContent = `${universe_size} valeurs analysées`;
-    document.getElementById('footer-week').textContent = week;
-
-    document.getElementById('sources-bar').style.display = 'flex';
-    if (finnhub_active) document.getElementById('fh-src').style.display = 'flex';
-
-    // Composition sectorielle : barres visuelles colorées
-    // Affichage géré par showMore() — visible seulement quand toute la liste est dépliée
-    const conc = data.concentration_alerts || [];
-    if (conc.length > 0) {
-      // Palette de couleurs par secteur
-      const SECTOR_COLORS = {
-        'technologie':      '#5080f8',
-        'tech':             '#5080f8',
-        'finance':          '#e8a820',
-        'santé':            '#1cc87a',
-        'sante':            '#1cc87a',
-        'industrie':        '#f87a20',
-        'énergie':          '#f8c820',
-        'energie':          '#f8c820',
-        'médias':           '#a060f0',
-        'medias':           '#a060f0',
-        'conso':            '#f05454',
-        'consommation':     '#f05454',
-        'immobilier':       '#20d8e8',
-        'matériaux':        '#88c840',
-        'materiaux':        '#88c840',
-        'services':         '#c08050',
-        'semi':             '#8080f8',
-        'défense':          '#808090',
-        'defense':          '#808090',
-      };
-      function colorForSector(name) {
-        const key = name.toLowerCase();
-        for (const [k, v] of Object.entries(SECTOR_COLORS)) {
-          if (key.includes(k)) return v;
-        }
-        return '#50506c';
-      }
-      // Parse "Secteur : N titres sur M" → {name, count, total}
-      const parsed = conc.map(str => {
-        const m = str.match(/^(.+?)\s*:\s*(\d+)\s+titres?\s+sur\s+(\d+)/i);
-        return m ? { name: m[1].trim(), count: +m[2], total: +m[3] } : null;
-      }).filter(Boolean);
-      const maxPct = parsed.length ? Math.max(...parsed.map(p => p.count / p.total)) : 1;
-      document.getElementById('concentration-items').innerHTML =
-        `<div class="conc-rows">` +
-        parsed.map(p => {
-          const pct   = Math.round(p.count / p.total * 100);
-          const color = colorForSector(p.name);
-          const barW  = Math.round(p.count / p.total * 100);
-          return `<div class="conc-row">
-            <span class="conc-sector">${p.name}</span>
-            <div class="conc-bar-wrap"><div class="conc-bar" style="width:${barW}%;background:${color}"></div></div>
-            <span class="conc-pct">${pct}%</span>
-          </div>`;
-        }).join('') +
-        `</div>`;
-    }
-
-    if (changelog && changelog.length > 0) {
-      document.getElementById('changelog-block').style.display = 'block';
-      const clRow = (c, cls = '') => `
-        <div class="cl-row${cls}">
-          <span class="cl-badge ${c.action === 'in' ? 'cl-in' : 'cl-out'}">${c.action === 'in' ? '↑ Entrée' : '↓ Sortie'}</span>
-          <span class="cl-ticker">${c.ticker}</span>
-          <span class="cl-reason">${c.reason}</span>
-        </div>`;
-      const n    = changelog.length;
-      const rest = changelog.slice(3);
-      let html   = changelog.slice(0, 2).map(c => clRow(c)).join('');
-      if (n >= 3) html += clRow(changelog[2], ' cl-blurred');
-      if (rest.length > 0) {
-        html += `<div class="cl-more" id="cl-more">${rest.map(c => clRow(c)).join('')}</div>`;
-        html += `<button class="cl-toggle" id="cl-toggle" onclick="toggleChangelog(${rest.length})">Voir les ${rest.length} autre${rest.length > 1 ? 's' : ''} ↓</button>`;
-      }
-      document.getElementById('changelog-rows').innerHTML = html;
-    }
-
-    allStocks = stocks;
-    // Le bloc filter contient les 3 rows (Régime, Zone, Trier par) — un seul show suffit
-    document.getElementById('filter-bar').style.display = 'block';
-    applyFilters();
-
-  } catch(e) {
-    document.getElementById('stocks-top').innerHTML =
-      '<div style="padding:1rem;color:var(--text3);font-size:0.88rem">Impossible de charger watchlist.json.</div>';
-  }
-}
-
-// ── Compteur lexique dynamique
-(function initLexiqueCount() {
-  const nb   = document.querySelectorAll('.lex-item').length;
-  const chip = document.getElementById('chip-lexique');
-  if (chip) chip.textContent = `Lexique · ${nb} terme${nb > 1 ? 's' : ''}`;
-})();
-
-// ── Track-bar : proof of life du portfolio en home (fetch silencieux)
-(async function initTrackBar() {
-  try {
-    const res = await fetch('portfolio.json?v=' + Date.now());
-    if (!res.ok) return;
-    const d = await res.json();
-    const perf  = d.performance ?? 0;
-    const bench = d.benchmark_msci ?? 0;
-    const vs    = d.vs_benchmark ?? (perf - bench);
-    const nOrd  = (d.ordres || []).length;
-    const sign  = n => n >= 0 ? '+' : '';
-    const cls   = n => n >= 0 ? 'up' : 'dn';
-    const fmt1  = n => Number(n).toFixed(1);
-    const perfEl  = document.getElementById('tb-perf');
-    const benchEl = document.getElementById('tb-bench');
-    const ordEl   = document.getElementById('tb-orders');
-    const bar     = document.getElementById('track-bar');
-    if (perfEl)  { perfEl.textContent  = `${sign(perf)}${fmt1(perf)} %`;  perfEl.classList.add(cls(perf)); }
-    if (benchEl)   benchEl.textContent = `${sign(bench)}${fmt1(bench)} %`;
-    if (ordEl)     ordEl.textContent   = `${nOrd} décision${nOrd > 1 ? 's' : ''}`;
-    if (bar)       bar.style.display   = 'flex';
-  } catch (e) { /* silencieux : si le JSON manque, le bandeau reste caché */ }
-})();
-
-loadWatchlist();
-
-const _hdr = document.querySelector('header');
-const _starsA = document.querySelector('.hc-stars');
-const _onScroll = () => {
-  const sy = window.scrollY;
-  _hdr.classList.toggle('scrolled', sy > 60);
-  if (_starsA) _starsA.style.transform = `translateY(${sy * 0.08}px)`;
-};
-window.addEventListener('scroll', _onScroll, { passive: true });
 </script>
 </body>
 </html>

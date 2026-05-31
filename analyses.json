@@ -1,0 +1,662 @@
+{
+ "NVDA": {
+  "resume": [
+   "NVIDIA est le concepteur dominant de processeurs graphiques (GPU) et de plateformes de calcul accéléré qui équipent l'essentiel de l'infrastructure d'intelligence artificielle mondiale. Le score de 90/100 reflète un Golden Cross récent (24 jours), un RSI neutre (53,7) laissant de la marge de hausse, un cours au plus près de sa droite de régression (z = +0,43) et des fondamentaux exceptionnels (croissance du chiffre d'affaires de 85 %, marge nette de 63 %).",
+   "À environ 211 $ pour une capitalisation de 5 110 Md$, le débat central oppose une valorisation forward raisonnable (<b>PER prévisionnel de 16,7</b>) à un PER historique de 32 et à la question de la <b>durabilité du cycle d'investissement IA</b> des hyperscalers qui porte l'essentiel de la demande."
+  ],
+  "biz": [
+   "Le modèle repose sur la vente de GPU haut de gamme (architectures Blackwell puis Rubin), de solutions réseau (InfiniBand, Spectrum-X, NVLink) et d'un écosystème logiciel propriétaire. La marge brute proche de 74 % traduit un pouvoir de fixation des prix considérable.",
+   "Le moat tient surtout à <b>CUDA</b>, la couche logicielle qui verrouille les développeurs depuis près de deux décennies, complétée par une avance technologique sur les interconnexions et un quasi-monopole sur l'entraînement des grands modèles. La diversification de la clientèle (clouds IA, souverains, entreprises, industrie) représente désormais environ la moitié du chiffre d'affaires data center, ce qui réduit la dépendance aux seuls hyperscalers."
+  ],
+  "futur": [
+   "Les drivers de croissance sont la montée en puissance de Blackwell, l'arrivée de la génération Vera Rubin déjà échantillonnée chez les clients, et l'élargissement aux clients souverains et entreprises. Le consensus analystes reste très favorable (recommandation strong_buy, objectif moyen de 297 $).",
+   "Les risques principaux sont la <b>concentration de la demande</b> sur quelques hyperscalers, le développement de puces maison par ces mêmes clients (Google, Amazon, OpenAI via Broadcom), les restrictions à l'export vers la Chine et tout signe de digestion du capex IA. On surveille la trajectoire séquentielle du data center et la tenue des marges."
+  ],
+  "actu": [
+   "Le 20 mai 2026, NVIDIA a publié des résultats trimestriels record : chiffre d'affaires de 81,6 Md$ (+85 % sur un an) et BPA ajusté de 1,87 $, au-dessus du consensus (78,8 Md$ et 1,76 $). Le segment data center a atteint un record de 75,2 Md$ (+92 % sur un an, +21 % en séquentiel), porté par la montée en puissance des produits Blackwell 300. Le PDG Jensen Huang a décrit des ventes Blackwell « off the charts » avec des GPU cloud en rupture, et indiqué que les échantillons Vera Rubin sont déjà entre les mains des clients."
+  ],
+  "bull": [
+   "Fondamentaux exceptionnels au T1 2026 : chiffre d'affaires +85 % sur un an (81,6 Md$), marge nette de 63 % et data center record à 75,2 Md$ (+92 %), portés par la montee en puissance de Blackwell.",
+   "Signal technique sain : Golden Cross recent (24 jours), RSI neutre a 53,7 laissant de la marge de hausse, et cours quasi sur sa droite de regression (z = +0,43), donc sans excès de valorisation technique.",
+   "PER previsionnel de 16,7 jugé raisonnable face a un PER historique de 32, avec un moat logiciel CUDA verrouillant les developpeurs et un consensus strong_buy (objectif moyen 297 $)."
+  ],
+  "bear": [
+   "Concentration de la demande sur quelques hyperscalers qui developpent leurs propres puces (Google, Amazon, OpenAI via Broadcom), avec un risque de digestion du capex IA.",
+   "Les restrictions a l'export vers la Chine et tout ralentissement sequentiel du data center constituent des points de fragilite pour la croissance.",
+   "Le PER historique de 32 et la valorisation totale (5 110 Md$) laissent peu de place a la deception si le cycle d'investissement IA marque une pause."
+  ]
+ },
+ "AMZN": {
+  "resume": [
+   "Amazon est un conglomérat de commerce en ligne, de cloud (AWS), de publicité et de logistique. Le score de 90/100 s'appuie sur un Golden Cross récent (22 jours), un RSI favorable (58,0), un cours collé à sa droite de régression (z = +0,15) et des fondamentaux solides (croissance du chiffre d'affaires de 16,6 %, marge nette de 12,2 %, mais marge de FCF faible à 1,3 %).",
+   "À environ 271 $ pour 2 910 Md$ de capitalisation, le débat central porte sur l'arbitrage entre une <b>réaccélération d'AWS</b> et un cycle d'investissement très lourd : le PER prévisionnel de 27,4 intègre déjà une forte croissance, tandis que le capex record pèse sur la génération de cash libre à court terme."
+  ],
+  "biz": [
+   "Le modèle combine un commerce de détail à faible marge mais à immense échelle, une marketplace tierce, des abonnements Prime et deux moteurs très rentables : AWS (cloud) et la publicité. AWS et la pub portent l'essentiel de la profitabilité du groupe.",
+   "Le moat repose sur des <b>effets de réseau et d'échelle</b> (logistique propriétaire, base d'utilisateurs Prime) et sur le leadership d'AWS dans le cloud, renforcé par le développement de puces maison (Trainium/Inferentia) qui améliore l'économie de l'IA. Ces avantages cumulés créent de fortes barrières à l'entrée."
+  ],
+  "futur": [
+   "Les drivers sont la reprise de croissance d'AWS, l'essor de la publicité, l'amélioration des marges du retail et l'intégration de l'IA générative. Le consensus analystes est très favorable (strong_buy, objectif moyen de 313 $).",
+   "Les risques tiennent au <b>poids du capex IA</b> (44,2 Md$ au seul T1) qui comprime le FCF, à la cyclicité de la consommation, à la pression concurrentielle sur le cloud (Microsoft, Google) et au risque réglementaire/antitrust. On surveille le taux de croissance d'AWS et la conversion du capex en cash libre."
+  ],
+  "actu": [
+   "Le 29 avril 2026, Amazon a battu les attentes sur toutes les lignes au T1 2026 : chiffre d'affaires de 181,5 Md$ (+17 % sur un an) et BPA dilué de 2,78 $ (vs 1,64 $ attendu). AWS a accéléré à 37,6 Md$ (+28 % sur un an), sa croissance la plus rapide depuis 15 trimestres, et la publicité a progressé de 24 % à 17,2 Md$. Le résultat opérationnel est monté à 23,9 Md$ (contre 18,4 Md$ un an plus tôt), tandis que le capex a atteint 44,2 Md$, principalement consacré à l'infrastructure IA et aux data centers."
+  ],
+  "bull": [
+   "Reacceleration d'AWS au T1 2026 a +28 % sur un an (37,6 Md$), sa croissance la plus rapide depuis 15 trimestres, et publicite en hausse de 24 % a 17,2 Md$.",
+   "BPA dilue de 2,78 $ tres au-dessus des attentes (1,64 $) et resultat operationnel monte a 23,9 Md$, avec un moat d'echelle (logistique, Prime) et des puces maison Trainium ameliorant l'economie de l'IA.",
+   "Configuration technique favorable : Golden Cross recent (22 jours), RSI a 58,0 et cours colle a sa regression (z = +0,15), consensus strong_buy (objectif moyen 313 $)."
+  ],
+  "bear": [
+   "Le capex record de 44,2 Md$ au seul T1 comprime fortement le cash libre, avec une marge de FCF faible a 1,3 %.",
+   "Le PER previsionnel de 27,4 integre deja une forte croissance, ce qui laisse peu de marge en cas de ralentissement de la consommation cyclique.",
+   "Pression concurrentielle sur le cloud (Microsoft, Google) et risque reglementaire/antitrust pesent sur la trajectoire."
+  ]
+ },
+ "AVGO": {
+  "resume": [
+   "Broadcom est un fournisseur de semi-conducteurs (réseau, accélérateurs IA personnalisés, connectivité) et de logiciels d'infrastructure depuis l'acquisition de VMware. Le score de 85/100 reflète un Golden Cross récent (27 jours) et un RSI favorable (53,1), mais le cours se situe nettement <b>au-dessus de sa droite de régression</b> (z = +1,97), ce qui lui retire les points de valorisation.",
+   "À environ 447 $ pour 2 115 Md$ de capitalisation, le débat central oppose une trajectoire de croissance IA spectaculaire à un PER historique très élevé (87) ; le PER prévisionnel de 24,2 montre toutefois que le marché anticipe une forte progression des bénéfices, la question étant le rythme de réalisation des commandes de silicium personnalisé."
+  ],
+  "biz": [
+   "Le modèle associe une activité semi-conducteurs à fortes marges (puces réseau, ASIC IA conçus pour les hyperscalers) et une activité logicielle récurrente (VMware, sécurité, mainframe). La marge brute proche de 77 % et la marge de FCF de 37 % illustrent une rentabilité remarquable.",
+   "Le moat tient à une <b>expertise en silicium personnalisé (XPU/ASIC)</b> difficile à répliquer, à des positions quasi incontournables dans la connectivité réseau, et à des coûts de changement élevés sur la base installée VMware. La conception sur mesure pour les géants du cloud crée des relations clients profondes et durables."
+  ],
+  "futur": [
+   "Les drivers sont l'accélération des accélérateurs IA personnalisés, la conversion de VMware vers un modèle d'abonnement et l'élargissement de la liste de clients hyperscalers. Le consensus analystes est très favorable (strong_buy, objectif moyen de 482 $).",
+   "Les risques sont la <b>valorisation tendue</b> (z = +1,97, à surveiller en cas de déception), la concentration sur quelques clients de silicium personnalisé et la cyclicité du semi-conducteur. On surveille l'exécution du carnet IA et la matérialisation de l'objectif de plus de 100 Md$ de revenus de puces IA en 2027."
+  ],
+  "actu": [
+   "Au T1 fiscal 2026 (publié début février 2026), Broadcom a réalisé un chiffre d'affaires record de 19,31 Md$ (+29 % sur un an). Le revenu IA a atteint 8,4 Md$ (+106 % sur un an), porté par les accélérateurs IA personnalisés et le réseau ; la division semi-conducteurs a progressé de 52 % à 12,5 Md$. Le PDG Hock Tan a guidé un revenu IA de 10,7 Md$ au T2 (chiffre d'affaires total visé d'environ 22 Md$, +47 %) et confirmé une visibilité vers plus de 100 Md$ de revenus de puces IA en 2027, avec l'ajout d'OpenAI comme 6e client de silicium personnalisé (aux côtés de Google, Anthropic, Meta et deux hyperscalers non nommés)."
+  ],
+  "bull": [
+   "Revenu IA en explosion au T1 fiscal 2026 a 8,4 Md$ (+106 % sur un an) et division semi-conducteurs +52 % a 12,5 Md$, avec une visibilite guidee vers plus de 100 Md$ de revenus de puces IA en 2027.",
+   "Rentabilite remarquable : marge brute proche de 77 %, marge de FCF de 37 % et marge nette de 36,6 %, adossees a un moat de silicium personnalise (ASIC/XPU) difficile a repliquer.",
+   "Ajout d'OpenAI comme 6e client de silicium sur mesure et conversion de VMware en abonnement ; consensus strong_buy (objectif moyen 482 $), PER previsionnel de 24,2."
+  ],
+  "bear": [
+   "Valorisation technique tendue : le cours est nettement au-dessus de sa droite de regression (z = +1,97), ce qui lui retire tout point de valorisation dans le screener.",
+   "PER historique tres eleve a 87 et concentration sur quelques clients de silicium personnalise exposent le titre a une correction en cas de deception sur le carnet IA.",
+   "La cyclicite du semi-conducteur reste un risque de fond si le rythme des commandes d'accelerateurs ralentit."
+  ]
+ },
+ "ADI": {
+  "resume": [
+   "Analog Devices est un leader des semi-conducteurs analogiques et de traitement de signal mixte, au service des marchés industriel, automobile, communications et grand public. Le score de 83/100 s'appuie sur un Golden Cross ancien mais établi (245 jours), un RSI neutre (50,9) et d'excellents fondamentaux (croissance du chiffre d'affaires de 37,2 %, marge nette de 26 %, marge de FCF de 30,4 %).",
+   "À environ 414 $ pour 202 Md$ de capitalisation, le débat central est la <b>tension de valorisation</b> : le cours est en zone de surachat sur sa régression (z = +3,3) et le PER historique de 62 reste élevé, même si le PER prévisionnel de 28 reflète l'anticipation d'une reprise cyclique en cours."
+  ],
+  "biz": [
+   "Le modèle repose sur un catalogue très large de composants analogiques à longue durée de vie, vendus à des dizaines de milliers de clients, avec des prix élevés et des cycles produits durables. La marge brute proche de 64 % et la forte génération de cash traduisent un pouvoir de fixation des prix solide.",
+   "Le moat provient de la <b>diversification du catalogue</b> et des coûts de changement élevés : une fois un composant analogique conçu dans un produit client, il y reste souvent des années, ce qui assure des revenus récurrents et une faible obsolescence. La profondeur de la base clients réduit la dépendance à tout marché final unique."
+  ],
+  "futur": [
+   "Les drivers sont la reprise cyclique de l'industriel, l'exposition à l'automatisation, aux tests automatisés (ATE), à l'ADAS automobile et une nouvelle optionalité sur le data center IA. Le consensus analystes est favorable (buy, objectif moyen de 446 $).",
+   "Les risques sont la <b>cyclicité des semi-conducteurs</b>, la valorisation étirée (z = +3,3, prudence selon le screener) et une faiblesse séquentielle persistante de l'automobile en début 2026. On surveille la durabilité de la reprise industrielle et la normalisation des stocks chez les clients."
+  ],
+  "actu": [
+   "Au T1 fiscal 2026 (publié le 18 février 2026), Analog Devices a dépassé les attentes avec un chiffre d'affaires de 3,16 Md$ en hausse sur un an dans tous ses marchés finaux, et un BPA non-GAAP de 2,46 $ (battant le consensus de 6,5 %). L'industriel a bondi de 38 % sur un an à 1,5 Md$, porté par une reprise cyclique et la force de l'ATE et de l'ADAS, la direction anticipant une poursuite de cette dynamique (+20 % en séquentiel attendu). L'automobile a progressé de 8 % sur un an à 794 M$ mais reculé de 8 % en séquentiel, en raison du dénouement des avances liées aux tarifs et au contexte macro."
+  ],
+  "bull": [
+   "Reprise cyclique nette au T1 fiscal 2026 : chiffre d'affaires de 3,16 Md$ en hausse dans tous les marches finaux, industriel +38 % sur un an a 1,5 Md$ et BPA non-GAAP de 2,46 $ battant le consensus de 6,5 %.",
+   "Fondamentaux solides : croissance du CA de 37,2 %, marge nette de 26 % et marge de FCF de 30,4 %, avec un moat de catalogue diversifie et des couts de changement eleves assurant des revenus recurrents.",
+   "Pullback sain de -8,2 % sous le top 52 semaines, RSI neutre a 50,9 et optionalite nouvelle sur le data center IA ; consensus buy (objectif moyen 446 $)."
+  ],
+  "bear": [
+   "Valorisation etiree signalee par le screener : cours en zone de surachat sur sa regression (z = +3,3) et PER historique de 62.",
+   "Faiblesse sequentielle persistante de l'automobile en debut 2026 (-8 % en sequentiel) liee au denouement des avances tarifaires.",
+   "La cyclicite des semi-conducteurs et la normalisation des stocks chez les clients pesent sur la durabilite de la reprise."
+  ]
+ },
+ "ORSTED.CO": {
+  "resume": [
+   "Ørsted est le leader mondial de l'éolien offshore, développeur et exploitant de parcs en mer en Europe, aux États-Unis et en Asie. Le score de 81/100 s'appuie sur un Golden Cross très récent (15 jours), un RSI favorable (57,2) et un cours sous sa droite de régression (z = -1,67), mais sur des fondamentaux fragiles (marge nette de 0,2 %, marge de FCF nettement négative à -26,1 %).",
+   "À environ 164 DKK pour 217 Md DKK de capitalisation, après un effondrement d'environ 48 % sous son plus haut sur 52 semaines, le débat central est un <b>pari de redressement</b> : le titre se traite à un PER prévisionnel de 17 sur des bénéfices normalisés attendus, alors que les dépréciations liées aux taux longs américains continuent de peser sur les résultats publiés."
+  ],
+  "biz": [
+   "Le modèle consiste à développer, construire puis exploiter des parcs éoliens offshore, en cédant souvent des participations à des partenaires pour financer la croissance (farm-down). Les revenus combinent la production d'électricité long terme et des plus-values de cession, ce qui rend la rentabilité volatile d'un trimestre à l'autre.",
+   "Le moat repose sur une <b>expertise d'exécution offshore</b> de premier plan, un portefeuille de projets de 8,1 GW en construction et des positions difficiles à répliquer dans la connectivité et l'ancrage des sites. La nature très capitalistique de l'activité constitue à la fois une barrière à l'entrée et une source de fragilité financière."
+  ],
+  "futur": [
+   "Les drivers sont la mise en service progressive du portefeuille de 8,1 GW, la croissance de la production offshore et la transition énergétique structurelle. Le consensus analystes est mitigé à favorable (buy, objectif moyen d'environ 169 DKK).",
+   "Les risques dominent le dossier : <b>sensibilité aux taux longs américains</b> (source de dépréciations récurrentes), exécution et coûts des projets US, FCF négatif et dépendance au financement. On surveille la finalisation des projets américains (Revolution Wind, Sunrise Wind), la solidité du bilan après l'augmentation de capital et le retour à un cash-flow positif."
+  ],
+  "actu": [
+   "Le 6 mai 2026, Ørsted a présenté un début d'année jugé satisfaisant, avec un EBITDA (hors nouveaux partenariats et indemnités d'annulation) de 9,5 Md DKK, porté par une hausse de 27 % de la production offshore après les montées en puissance de Borkum Riffgrund 3 et Greater Changhua 4. Le résultat net trimestriel s'est élevé à 2,6 Md DKK, affecté par des effets fiscaux non monétaires et des dépréciations liées à la hausse des taux longs américains. Le groupe a franchi des jalons sur son portefeuille de 8,1 GW (première électricité de Revolution Wind, installation des premières turbines à Sunrise Wind, fondations de Hornsea 3 et Baltica 2), après avoir bouclé fin 2025 une augmentation de capital d'environ 60 Md DKK pour renforcer sa structure financière."
+  ],
+  "bull": [
+   "Production offshore en hausse de 27 % au debut 2026 (EBITDA hors elements exceptionnels de 9,5 Md DKK) apres les montees en puissance de Borkum Riffgrund 3 et Greater Changhua 4.",
+   "Pari de redressement avec un cours sous sa droite de regression (z = -1,67), un Golden Cross tres recent (15 jours), un RSI favorable a 57,2 et un PER previsionnel de 17 sur benefices normalises.",
+   "Portefeuille de 8,1 GW en construction avec jalons franchis (premiere electricite de Revolution Wind, turbines a Sunrise Wind) et augmentation de capital d'environ 60 Md DKK fin 2025 renforcant le bilan."
+  ],
+  "bear": [
+   "Fondamentaux fragiles : marge nette de seulement 0,2 % et marge de FCF nettement negative a -26,1 %, traduisant une forte consommation de cash.",
+   "Sensibilite aux taux longs americains source de depreciations recurrentes, et execution/couts incertains des projets US (Revolution Wind, Sunrise Wind).",
+   "Titre en chute d'environ 48 % sous son plus haut 52 semaines, avec une dependance au financement et un retour a un cash-flow positif encore a confirmer."
+  ]
+ },
+ "AMAT": {
+  "resume": [
+   "Applied Materials cote 450 $ pour une capitalisation de ~357 Md$, à seulement -2,5% de son plus haut 52 semaines, ce qui vaut au titre un score Signal de 81/100 mais une pénalité de chase de rally (régression +2,0σ, fenêtre 10 ans). Le débat central oppose un momentum technique tendu à des fondamentaux solides (marge nette 29,3%, consensus <b>strong buy</b>, objectif moyen 511 $) portés par le cycle d'investissement en équipements liés à l'IA."
+  ],
+  "biz": [
+   "Applied Materials est le numéro un mondial des équipements de fabrication de semi-conducteurs (dépôt, gravure, traitement thermique, métrologie), un segment où il vend les machines indispensables aux fonderies comme TSMC, Samsung et aux fabricants de mémoire. Son moat repose sur une intensité de R&D élevée, une base installée immense et des coûts de transition prohibitifs pour les clients, complétés par une division services (Applied Global Services) récurrente.",
+   "Le modèle reste néanmoins cyclique, dépendant des budgets d'investissement (capex) des fondeurs et de la demande finale en puces, avec une croissance du chiffre d'affaires modérée de +11,4% sur la période récente. La rentabilité est excellente avec une marge nette de 29,3% et une marge brute proche de 49%, mais le scoring Signal traite désormais ce profil <b>semi equipment</b> comme cyclique (fenêtre régression 25 ans) par opposition aux designers de puces."
+  ],
+  "futur": [
+   "Les drivers principaux sont la vague d'investissement en infrastructure IA, la montée en puissance du packaging avancé et de la mémoire HBM/DRAM, ainsi que la division services à marge élevée. Le management vise une croissance des dépenses d'équipements semi de plus de 30% et un chiffre d'affaires packaging en hausse de plus de 50% sur 2026, avec une demande concentrée au second semestre.",
+   "Les risques à surveiller sont la nature cyclique du secteur (le segment Semiconductor Systems a reculé de 8% en glissement annuel au T1), l'exposition réglementaire à la Chine et les restrictions à l'export, ainsi qu'une valorisation tendue après le rally (PER prospectif ~27,8). À suivre : la concrétisation du fort biais second semestre, la digestion des stocks clients (contraintes de salles blanches) et les budgets capex des fondeurs."
+  ],
+  "actu": [
+   "Le 12 février 2026, Applied Materials a publié ses résultats du T1 fiscal 2026 : chiffre d'affaires de 7,0 Md$ (haut de la fourchette, -2% en glissement annuel) et BPA ajusté de 2,86 $ battant le consensus de 2,68 $. La société a guidé un T2 à ~8,95 Md$ (±0,5 Md$, soit ~+23% en glissement annuel) et un BPA de 3,36 $, en anticipant une croissance des équipements semi de plus de 20% en 2026 tirée par l'infrastructure IA, avec un chiffre d'affaires services record de 1,56 Md$ (+15%)."
+  ],
+  "bull": [
+   "Fondamentaux solides avec une marge nette de 29,3% et une marge brute proche de 49%, soutenus par un consensus analystes strong buy et un objectif moyen de 511 $ au-dessus du cours de 450 $.",
+   "Position de numéro un mondial des équipements semi (dépôt, gravure, métrologie) avec une base installée immense et des coûts de transition élevés pour les fondeurs comme TSMC et Samsung.",
+   "Le T1 fiscal 2026 a battu le consensus (BPA ajusté 2,86 $ vs 2,68 $) et la guidance T2 (~8,95 Md$, +23% en glissement annuel) anticipe une croissance des équipements semi de plus de 20% tirée par l'infrastructure IA."
+  ],
+  "bear": [
+   "Momentum technique tendu : régression à +2,0σ (fenêtre 10 ans) et cours à seulement -2,5% du plus haut 52 semaines, ce qui déclenche une pénalité de chase de rally dans le scoring.",
+   "Profil cyclique dépendant des budgets capex des fondeurs, avec un segment Semiconductor Systems en recul de 8% en glissement annuel au T1 et une croissance du CA modérée (+11,4%).",
+   "Valorisation tendue après le rally (PER prospectif ~27,8) et exposition réglementaire à la Chine via les restrictions à l'export."
+  ]
+ },
+ "META": {
+  "resume": [
+   "Meta Platforms cote 632 $ pour une capitalisation de ~1 606 Md$, en repli de ~22,6% sous son plus haut 52 semaines, dans une configuration technique de death cross (croisement baissier daté de ~129 jours) qui pèse sur son score Signal de 80/100. Le débat central confronte une croissance publicitaire exceptionnelle (+33,1% de chiffre d'affaires, marge nette 32,8%) à l'explosion des dépenses d'investissement en <b>IA</b>, le marché s'interrogeant sur le retour sur ce capital colossal."
+  ],
+  "biz": [
+   "Meta exploite le plus grand réseau de plateformes sociales au monde (Facebook, Instagram, WhatsApp, Messenger) et tire la quasi-totalité de ses revenus de la publicité ciblée, avec une marge brute de ~81,9% qui illustre la puissance de son moat fondé sur les effets de réseau et la richesse de ses données d'audience. Cette machine publicitaire finance des paris de long terme via la division Reality Labs (réalité virtuelle/augmentée) et désormais l'intelligence artificielle.",
+   "Le moat publicitaire reste très profond, mais le modèle absorbe des pertes structurelles importantes : Reality Labs n'a généré que 402 M$ de revenus au T1 2026 pour une perte d'exploitation de 4,03 Md$. La valorisation est modérée pour la qualité du profil (PER prospectif ~17,5), reflétant l'incertitude sur l'ampleur et le rythme des investissements IA via les <b>Meta Superintelligence Labs</b>."
+  ],
+  "futur": [
+   "Les drivers sont la monétisation croissante de Reels et des messageries, l'amélioration du ciblage publicitaire par l'IA, et le déploiement des modèles Llama et puces internes MTIA. Le management indique anticiper en 2026 un résultat d'exploitation supérieur à celui de 2025 malgré la hausse massive des investissements.",
+   "Les risques principaux sont l'envolée du capex (porté à une fourchette de 125 à 145 Md$, environ le double de 2025) sous l'effet du prix élevé des GPU Nvidia et de l'infrastructure énergétique, le saignement persistant de Reality Labs, et l'exposition réglementaire (concurrence, vie privée). À surveiller : la discipline et le rendement du capital IA, la trajectoire des marges d'exploitation et la dynamique des prix/impressions publicitaires."
+  ],
+  "actu": [
+   "Fin avril 2026, Meta a publié un T1 2026 solide : chiffre d'affaires en hausse de 33% à 56,31 Md$, résultat d'exploitation de 22,87 Md$ et bénéfice net de 26,77 Md$ (BPA dilué de 10,44 $), portés par la hausse des impressions et des prix publicitaires. Le groupe a relevé sa fourchette de capex annuel à 125-145 Md$ (contre 115-135 Md$), invoquant le coût des composants et des centres de données, tandis que Reality Labs affichait une perte d'exploitation de 4,03 Md$ pour 402 M$ de revenus."
+  ],
+  "bull": [
+   "Croissance publicitaire exceptionnelle avec un CA en hausse de 33% à 56,31 Md$ au T1 2026 et une marge nette de 32,8%, portée par la hausse des impressions et des prix.",
+   "Moat très profond fondé sur les effets de réseau (Facebook, Instagram, WhatsApp) avec une marge brute de ~81,9% et une valorisation modérée pour la qualité du profil (PER prospectif ~17,5).",
+   "Le management anticipe un résultat d'exploitation 2026 supérieur à 2025 malgré la hausse des investissements, le z-score de régression étant neutre (+0,24σ) sans signal de surchauffe."
+  ],
+  "bear": [
+   "Configuration technique en death cross (croisement baissier daté de ~129 jours), cours en repli de ~22,6% sous le plus haut 52 semaines avec un spread MM21/MM200 négatif (-7%).",
+   "Envolée du capex porté à 125-145 Md$ pour 2026 (environ le double de 2025) sous l'effet du prix des GPU Nvidia, sans visibilité prouvée sur le retour de ce capital.",
+   "Reality Labs continue de saigner avec une perte d'exploitation de 4,03 Md$ pour seulement 402 M$ de revenus au T1 2026."
+  ]
+ },
+ "DDOG": {
+  "resume": [
+   "Datadog cote 247 $ pour une capitalisation de ~88 Md$, sur ou très près de son plus haut 52 semaines (RSI à 84, en zone de surchauffe) après un Golden Cross frais de 9 jours, ce qui lui vaut un score Signal de 80/100 malgré une pénalité de chase. Le débat central oppose une croissance accélérée portée par l'<b>observabilité IA</b> (+32,2% de chiffre d'affaires) à une valorisation extrême (PER prospectif ~87, PER trailing ~618) et un objectif analyste moyen (224,7 $) déjà sous le cours."
+  ],
+  "biz": [
+   "Datadog édite une plateforme cloud d'observabilité et de surveillance (monitoring d'infrastructure, logs, traces applicatives, sécurité) qui permet aux entreprises de superviser leurs environnements informatiques modernes en un point unique. Son moat repose sur un modèle d'expansion (land-and-expand) très efficace, une plateforme intégrée multi-produits et des coûts de transition élevés une fois l'outil ancré dans les opérations.",
+   "Le modèle est fortement récurrent avec une marge brute logicielle élevée (~79,9%) et une excellente conversion en trésorerie (FCF de ~937 M$, marge FCF ~25,5%), mais la marge nette comptable reste faible (3,7%) du fait de lourdes charges de rémunération en actions et d'investissements. La croissance s'appuie de plus en plus sur les charges de travail liées à l'IA, avec de nouveaux contrats signés avec des hyperscalers pour l'entraînement de modèles."
+  ],
+  "futur": [
+   "Les drivers sont l'adoption de produits dédiés à l'IA et au monitoring de modèles, la poursuite de l'expansion chez les grands comptes (4 550 clients à plus de 100 000 $ de revenu annuel récurrent) et l'élargissement continu du catalogue de modules. La société a relevé sa prévision de chiffre d'affaires 2026 à 4,30-4,34 Md$.",
+   "Les risques à surveiller sont une valorisation très élevée laissant peu de marge d'erreur, la sensibilité du modèle à la consommation cloud (facturation à l'usage, donc cyclique en cas de ralentissement IT), la dilution liée aux actions et une concurrence intense (Splunk, Dynatrace, hyperscalers). À suivre : le maintien de l'accélération de la croissance, la trajectoire de la marge FCF et la décélération guidée pour le T2 (+29-30%)."
+  ],
+  "actu": [
+   "En mai 2026, Datadog a publié un T1 2026 supérieur aux attentes, franchissant pour la première fois le seuil du milliard de dollars de chiffre d'affaires trimestriel à 1,006 Md$ (+32% en glissement annuel, une accélération depuis +29% au trimestre précédent), avec un flux de trésorerie disponible de 289 M$. La société a relevé sa prévision annuelle 2026 à 4,30-4,34 Md$ (contre 4,06-4,10 Md$ auparavant) et son BPA ajusté à 2,36-2,44 $, citant des réservations de nouveaux clients à un niveau record et deux contrats avec des hyperscalers pour des charges d'entraînement IA."
+  ],
+  "bull": [
+   "Croissance accélérée à +32,2% avec un premier trimestre dépassant le milliard de CA (1,006 Md$), une accélération depuis +29% au trimestre précédent, et un Golden Cross frais de 9 jours confirmé en volume.",
+   "Modèle fortement récurrent avec une marge brute logicielle élevée (~79,9%) et une excellente conversion en trésorerie (marge FCF ~25,5%), soutenu par un modèle land-and-expand (4 550 clients à plus de 100 000 $ d'ARR).",
+   "La société a relevé sa prévision de CA 2026 à 4,30-4,34 Md$, citant des réservations record et deux contrats hyperscalers pour des charges d'entraînement IA."
+  ],
+  "bear": [
+   "Valorisation extrême (PER prospectif ~87, PER trailing ~618) laissant très peu de marge d'erreur, avec un objectif analyste moyen (224,7 $) déjà sous le cours de 247 $.",
+   "RSI à 84 en zone de surchauffe, sur ou très près du plus haut 52 semaines, ce qui déclenche une pénalité de chase dans le scoring.",
+   "Marge nette comptable faible (3,7%) du fait de lourdes charges de rémunération en actions, et facturation à l'usage rendant le modèle sensible à un ralentissement de la consommation cloud."
+  ]
+ },
+ "JPM": {
+  "resume": [
+   "JPMorgan Chase cote 299 $ pour une capitalisation de ~802 Md$, à -8% sous son plus haut 52 semaines, avec un score Signal de 78/100 mais un Golden Cross de 22 jours signalé en affaiblissement (pente MM21 négative, signal en transition non exploitable seul). Le débat central oppose une profitabilité record (marge nette 33,9%, BPA en hausse) aux avertissements de Jamie Dimon sur un environnement de risque et de crédit qui se complexifie, ainsi qu'à une révision en baisse de la guidance de marge d'intérêt."
+  ],
+  "biz": [
+   "JPMorgan Chase est la première banque américaine, un établissement diversifié couvrant la banque de détail, la banque d'investissement, la gestion d'actifs et de fortune, ainsi que les activités de marché. Son moat repose sur une échelle considérable, une base de dépôts massive et bon marché, une marque de référence en période de stress (statut de valeur refuge bancaire) et des investissements technologiques que peu de concurrents peuvent égaler.",
+   "Les revenus combinent marge nette d'intérêt (sensible aux taux) et commissions (banque d'investissement, gestion d'actifs, cartes), ce qui confère une certaine résilience face aux cycles, avec une marge nette élevée de 33,9% et une croissance des revenus de +12,7%. En tant que banque, les notions de marge brute et de flux de trésorerie disponible ne s'appliquent pas de manière classique, et le consensus analyste reste à <b>buy</b> avec un objectif moyen de 342 $."
+  ],
+  "futur": [
+   "Les drivers sont la dynamique des revenus de marché et de banque d'investissement, l'évolution de la marge nette d'intérêt selon la trajectoire des taux, ainsi que la solidité du bilan permettant rachats d'actions et dividendes. La valorisation reste raisonnable pour le secteur (PER prospectif ~12,7).",
+   "Les risques à surveiller sont le cycle du crédit (Dimon alerte sur l'assouplissement des standards et le stress potentiel des emprunteurs à effet de levier), les tensions géopolitiques, l'incertitude commerciale et les déficits budgétaires élevés. À suivre : la trajectoire des provisions pour pertes sur créances, l'exécution de la guidance de marge d'intérêt révisée et l'affaiblissement du signal technique."
+  ],
+  "actu": [
+   "Le 14 avril 2026, JPMorgan a publié un T1 2026 supérieur aux attentes : BPA de 5,94 $ (contre 5,45 $ attendu), bénéfice net de 16,5 Md$ et revenus d'environ 50,5 Md$ (+10%), avec une marge nette d'intérêt de ~25,4 Md$. Le titre a toutefois initialement reculé, la banque ayant abaissé de 1,5 Md$ son objectif annuel de marge d'intérêt à 103 Md$ (révision imputée à l'activité de marché), tandis que Jamie Dimon réitérait ses mises en garde sur le crédit et un ensemble de risques de plus en plus complexe."
+  ],
+  "bull": [
+   "Profitabilité record avec une marge nette de 33,9%, un T1 2026 battant le consensus (BPA 5,94 $ vs 5,45 $ attendu) et un bénéfice net de 16,5 Md$.",
+   "Première banque américaine diversifiée (détail, investissement, gestion d'actifs, marchés) avec une base de dépôts massive et bon marché et un statut de valeur refuge bancaire en période de stress.",
+   "Valorisation raisonnable pour le secteur (PER prospectif ~12,7) avec un consensus analystes buy et un objectif moyen de 342 $ au-dessus du cours de 299 $."
+  ],
+  "bear": [
+   "Signal technique en affaiblissement : Golden Cross de 22 jours avec pente MM21 négative (-0,88%), qualifié de signal en transition non exploitable seul.",
+   "Révision en baisse de la guidance de marge d'intérêt (-1,5 Md$ à 103 Md$) et avertissements répétés de Jamie Dimon sur l'assouplissement des standards de crédit et un environnement de risque plus complexe.",
+   "Cours à -8% sous le plus haut 52 semaines avec une régression à +1,4σ (fenêtre 20 ans), et exposition au cycle du crédit via la trajectoire des provisions pour pertes."
+  ]
+ },
+ "TSM": {
+  "resume": [
+   "Taiwan Semiconductor cote 418 $ pour une capitalisation de ~2 170 Md$, en pullback sain de -3,6% sous son plus haut 52 semaines, ce que le scoring Signal qualifie de zone d'entrée favorable malgré une régression à +1,9σ, pour un score de 78/100. Le débat central met en avant une fonderie quasi incontournable pour les puces <b>IA</b> de pointe (croissance +35,1%, marge nette 46,5%, consensus strong buy) face aux risques géopolitiques et à la cyclicité structurelle du secteur."
+  ],
+  "biz": [
+   "TSMC est le leader mondial de la fonderie de semi-conducteurs, fabriquant sous contrat les puces les plus avancées pour Apple, Nvidia, AMD et la quasi-totalité des concepteurs de pointe, sans concevoir ses propres produits. Son moat est exceptionnellement large : avance technologique sur les nœuds avancés (3 nm, bientôt 2 nm), intensité capitalistique colossale et écosystème de fabrication que seuls deux ou trois acteurs au monde peuvent approcher.",
+   "Le modèle dégage des marges remarquables pour un industriel (marge brute ~61,9%, marge nette 46,5%), reflétant un pouvoir de fixation des prix sur les nœuds de pointe où la concurrence est minime. Les technologies avancées (7 nm et au-delà) représentaient 74% du chiffre d'affaires wafer au T1 2026, mais le scoring Signal traite TSMC comme un titre <b>cyclique</b> du semi (fenêtre régression longue)."
+  ],
+  "futur": [
+   "Les drivers sont la demande structurelle en puces IA et calcul haute performance, la montée en puissance du nœud 2 nm, le packaging avancé (CoWoS) et l'expansion géographique (notamment les usines en Arizona). Le management projette une croissance du chiffre d'affaires de plus de 30% en dollars sur 2026, avec un capex élevé proche du haut de la fourchette de 52-56 Md$.",
+   "Les risques à surveiller sont la concentration géographique à Taïwan et les tensions avec la Chine, la cyclicité de la demande en puces, l'intensité capitalistique croissante et la dépendance à quelques très grands clients. À suivre : l'exécution de la montée en cadence du 2 nm, l'évolution des marges face aux coûts des fabs étrangères et les budgets d'investissement IA de ses principaux clients."
+  ],
+  "actu": [
+   "TSMC a publié un T1 2026 record (clos le 31 mars 2026) : chiffre d'affaires consolidé de 35,90 Md$ (+35,1% en glissement annuel) et bénéfice net en hausse de 58,3% (BPA dilué de 3,49 $ par ADR), avec une marge brute de 66,2% et une marge nette de 50,5%. Pour le T2 2026, la direction attend un chiffre d'affaires de 39,0 à 40,2 Md$ et maintient une croissance annuelle supérieure à 30% en dollars, le 3 nm représentant 25% du chiffre d'affaires wafer et le 5 nm 36%."
+  ],
+  "bull": [
+   "Fonderie quasi incontournable pour les puces IA de pointe avec une croissance du CA de +35,1% et une marge nette de 46,5%, le T1 2026 ayant établi un record (bénéfice net +58,3%).",
+   "Pullback sain de -3,6% sous le plus haut 52 semaines (< Fibo 23,6%), qualifié de zone d'entrée favorable par le scoring, avec un consensus strong buy et des points de valorisation maximaux.",
+   "Moat exceptionnellement large (avance sur les nœuds 3 nm puis 2 nm, technologies avancées = 74% du CA wafer) et guidance d'une croissance 2026 supérieure à 30% en dollars."
+  ],
+  "bear": [
+   "Concentration géographique à Taïwan et tensions avec la Chine constituant un risque géopolitique structurel sur l'outil de production.",
+   "Titre traité comme cyclique du semi (fenêtre régression longue), avec une régression à +1,9σ au-dessus de sa droite et une intensité capitalistique croissante (capex proche du haut de 52-56 Md$).",
+   "Dépendance à quelques très grands clients (Apple, Nvidia, AMD) et marges exposées aux coûts plus élevés des fabs étrangères, notamment en Arizona."
+  ]
+ },
+ "BKNG": {
+  "resume": [
+   "Booking Holdings cote autour de <b>167 USD</b>, en repli d'environ 28 % sous son plus-haut 52 semaines de 233 USD, ce qui ramène le PER prospectif à un bas <b>13,6x</b> pour un leader du voyage en ligne dont le chiffre d'affaires progresse encore de 16 %. Le débat central oppose une valorisation devenue modeste et des fondamentaux solides (marge nette 22 %, marge FCF 26 %) à un momentum cassé, matérialisé par un death cross il y a 81 jours et un RSI de 44.",
+   "Le z-score de régression proche de zéro (-0,41) place le titre sur sa tendance longue, sans décote ni surchauffe statistique marquée, le marché arbitrant surtout l'impact des chocs géopolitiques de court terme."
+  ],
+  "biz": [
+   "Booking opère les plateformes Booking.com, Priceline, Agoda, KAYAK et OpenTable, en agrégant l'offre d'hébergements, vols et locations pour une commission par réservation. Le modèle est très capital-léger, ce qui explique une marge brute de 87 % et une conversion en cash élevée.",
+   "Le moat repose sur un effet de réseau à double face (plus d'hôtels attirent plus de voyageurs, et inversement), une notoriété de marque mondiale et des dépenses marketing massives en acquisition. La force de Booking reste l'hôtellerie européenne, où sa part de marché et son pouvoir de négociation sur les commissions sont structurellement forts."
+  ],
+  "futur": [
+   "Les moteurs sont la poursuite de la croissance des nuitées, l'extension dans les locations de vacances face à Airbnb, les paiements connectés et l'intégration d'agents de réservation IA. Pour le T2 2026, la direction guide des nuitées en hausse de seulement 2-4 % et un chiffre d'affaires de +4-6 %, soit une décélération assumée.",
+   "Les risques tiennent à la sensibilité du voyage au cycle économique, à la dépendance au trafic payant de Google et aux chocs géopolitiques. À surveiller : la levée ou non du frein lié au conflit au Moyen-Orient (cancellations élevées) attendu jusqu'à fin juin, et la trajectoire des nuitées face à des comparables exigeants."
+  ],
+  "actu": [
+   "Au T1 2026 (publié le 28 avril 2026), Booking a dépassé les attentes avec un BPA ajusté de <b>1,14 USD</b> (consensus 1,08) et un chiffre d'affaires de 5,5 milliards (+16 %), des réservations brutes de 53,8 milliards (+15 %) et un bénéfice net en forte hausse. La direction a toutefois signalé un pic d'annulations et un ralentissement des nouvelles réservations en mars lié au conflit au Moyen-Orient, intégré dans une guidance trimestrielle prudente."
+  ],
+  "bull": [
+   "Valorisation redevenue modeste avec un PER prospectif de 13,6x après un repli d'environ 30 % sous le plus-haut 52 semaines, alors que les fondamentaux restent solides.",
+   "Croissance du chiffre d'affaires de +16 % au T1 2026 (5,5 Md$) avec un BPA ajusté battant le consensus, portée par un modèle capital-léger très rentable (marge nette 22 %, marge FCF 26 %).",
+   "Le z-score de régression proche de zéro (-0,41) place le titre sur sa tendance longue, sans surévaluation statistique."
+  ],
+  "bear": [
+   "Momentum dégradé avec un death cross installé depuis 81 jours, un RSI à 44 et le cours sous sa MM200, signalant une tendance probablement cassée.",
+   "Décélération assumée : la direction guide seulement +2-4 % de nuitées et +4-6 % de revenus au T2 2026, sur des comparables exigeants.",
+   "Sensibilité au cycle économique, dépendance au trafic payant de Google et choc géopolitique au Moyen-Orient (pic d'annulations) pesant jusqu'à fin juin."
+  ]
+ },
+ "LSEG.L": {
+  "resume": [
+   "London Stock Exchange Group cote environ <b>9 022 GBp</b>, à mi-chemin entre son plancher (6 684) et son sommet (11 435) sur un an, avec un PER prospectif de 16,8x bien inférieur au PER historique de 38x qui reflète des éléments exceptionnels passés. Le titre vient de former un golden cross il y a 21 jours et le z-score de régression de -1,1 suggère une décote modérée par rapport à sa tendance.",
+   "Le débat central porte sur la mue du groupe : longtemps perçu comme un opérateur boursier, LSEG est désormais une plateforme de données financières dont la croissance organique réaccélère (+9,8 % de revenus au T1 2026) grâce au partenariat Microsoft."
+  ],
+  "biz": [
+   "LSEG génère la majorité de ses revenus via des abonnements récurrents aux données et analyses (héritage Refinitiv), complétés par le post-marché (LCH, compensation), les indices FTSE Russell et les revenus de marché capitalistique. Cette bascule vers le récurrent explique une marge brute de 88 % et une marge FCF de 22 %.",
+   "Le moat repose sur des données propriétaires difficiles à répliquer, des coûts de changement élevés pour les clients institutionnels et une position quasi-incontournable dans la compensation de taux via LCH. Le partenariat stratégique avec <b>Microsoft</b> (migration vers Azure et participation d'environ 2 milliards de dollars) renforce la distribution et l'intégration aux écosystèmes IA."
+  ],
+  "futur": [
+   "Les moteurs sont la migration cloud, le déploiement de produits IA (Model-as-a-Service, distribution de données via Anthropic, OpenAI, Databricks, Snowflake) et la montée en gamme de la division Data & Analytics. La croissance reste cependant modérée (+4,6 % sur douze mois glissants), ce qui constitue le principal point de débat sur la prime de valorisation.",
+   "Les risques tiennent à l'exécution de la migration Azure, à la concurrence de Bloomberg et S&P Global sur les données, et à la cyclicité des revenus de marché. À surveiller : l'accélération de la division Data & Analytics (5,1 % au T1) et la conversion des partenariats IA en revenus tangibles."
+  ],
+  "actu": [
+   "Lors du point d'activité du T1 2026 (publié le 23 avril 2026), LSEG a affiché un total des revenus en hausse de <b>9,8 %</b> à taux de change et périmètre constants, avec une Data & Analytics à +5,1 % en accélération. Le groupe a aussi annoncé le lancement du Model-as-a-Service avec Microsoft et la mise à disposition de ses données via des modèles fondationnels (Anthropic, OpenAI, Microsoft), avec 90 clients connectés au protocole MCP depuis décembre 2025."
+  ],
+  "bull": [
+   "Réaccélération de la croissance organique à +9,8 % de revenus au T1 2026, portée par la mue en plateforme de données financières et le partenariat Microsoft.",
+   "Golden cross récent (21 jours) et z-score de régression de -1,1σ indiquant une décote modérée par rapport à la tendance, avec une base d'abonnements récurrents très rentable (marge brute 88 %, marge FCF 22 %).",
+   "Moat de données propriétaires, coûts de changement élevés et position quasi-incontournable dans la compensation de taux (LCH), renforcés par les déploiements IA (Model-as-a-Service)."
+  ],
+  "bear": [
+   "Croissance encore modérée sur douze mois glissants (+4,6 %), ce qui constitue le principal point de débat face à la prime de valorisation.",
+   "Risque d'exécution sur la migration vers Azure et concurrence directe de Bloomberg et S&P Global sur les données financières.",
+   "Marge nette relativement basse (13,4 %) et cyclicité des revenus de marché, avec des partenariats IA encore à convertir en revenus tangibles."
+  ]
+ },
+ "AZN.L": {
+  "resume": [
+   "AstraZeneca cote environ <b>13 802 GBp</b>, proche de son plus-haut 52 semaines (15 732) après un net rebond depuis le plancher de 10 103, pour un PER prospectif de 16,0x et une capitalisation d'environ 214 milliards de livres. Le golden cross est ancien (197 jours) et le z-score de régression légèrement positif (+0,61) traduit un titre en ligne avec sa tendance, sans excès marqué.",
+   "Le débat central oppose une dynamique de croissance et un pipeline exceptionnellement riche à des interrogations sur la présentation comptable des revenus et sur l'ambition de chiffre d'affaires de 80 milliards de dollars à horizon 2030."
+  ],
+  "biz": [
+   "AstraZeneca est un laboratoire pharmaceutique mondial dont les piliers sont l'oncologie (Tagrisso, Imfinzi, Enhertu, Calquence), les maladies rares (post-acquisition Alexion) et la cardio-métabolique/respiratoire. La croissance est tirée par l'oncologie et les maladies rares, avec une marge brute de 81 % et une marge opérationnelle de 28 %.",
+   "Le moat repose sur des brevets, une R&D parmi les plus productives du secteur, une présence forte en Chine et un portefeuille diversifié limitant la dépendance à une molécule unique. La marge FCF reste plus modeste (11 %) en raison de l'intensité des investissements en recherche et des accords de licence."
+  ],
+  "futur": [
+   "Les moteurs sont les lectures de phase III à venir, l'expansion en obésité/diabète et l'élargissement du pipeline oncologique de nouvelle génération. Les risques classiques sont les échecs cliniques, les expirations de brevets, la pression sur les prix aux États-Unis et les tensions réglementaires en Chine.",
+   "À surveiller : la conversion des récents accords (CSPC en obésité, Jacobio, Pinetree) en actifs commercialisables, la trajectoire vers l'objectif 2030 et les débats persistants sur une éventuelle cotation principale aux États-Unis évoquée par la direction."
+  ],
+  "actu": [
+   "Au T1 2026 (publié fin avril 2026), AstraZeneca a publié un chiffre d'affaires de <b>15,3 milliards de dollars</b>, en hausse de 13 % (8 % à taux constants), porté par l'oncologie et les maladies rares, avec un BPA core de 2,58 dollars. Le groupe a confirmé sa guidance 2026 (croissance des revenus à un chiffre moyen-élevé, BPA core en croissance à deux chiffres bas), annoncé des données de phase III positives (tozorakimab en BPCO) et un accord de 1,2 milliard de dollars avec CSPC en obésité."
+  ],
+  "bull": [
+   "Chiffre d'affaires en hausse de +13 % au T1 2026 (15,3 Md$), tiré par l'oncologie et les maladies rares, avec une guidance 2026 confirmée et un BPA core à deux chiffres.",
+   "Pipeline exceptionnellement riche (oncologie, obésité/diabète) avec des données de phase III positives et une R&D parmi les plus productives du secteur.",
+   "Cours proche de son plus-haut 52 semaines après un net rebond, avec un z-score de +0,61 traduisant un titre en ligne avec sa tendance, sans excès."
+  ],
+  "bear": [
+   "Marge FCF modeste (11 %) en raison de l'intensité des investissements en R&D et des accords de licence, malgré une bonne marge opérationnelle.",
+   "Risques sectoriels classiques : échecs cliniques, expirations de brevets, pression sur les prix aux États-Unis et tensions réglementaires en Chine.",
+   "Interrogations persistantes sur la présentation comptable des revenus, l'ambition de 80 Md$ à 2030 et une éventuelle cotation principale aux États-Unis."
+  ]
+ },
+ "GOOGL": {
+  "resume": [
+   "Alphabet cote environ <b>380 USD</b>, tout près de son plus-haut 52 semaines (409) et plus du double de son plancher (162), pour un PER prospectif de 26,2x et une capitalisation dépassant 4 600 milliards de dollars. Le golden cross est ancien (234 jours) mais le z-score de régression de <b>+2,86</b> signale une nette surchauffe statistique par rapport à la tendance longue, ce qui constitue un signal de prudence.",
+   "Le débat central oppose une exécution remarquable (croissance des revenus de 22 %, marge nette de 38 %, accélération du cloud) à une valorisation tendue et à l'incertitude de l'appel antitrust du DOJ."
+  ],
+  "biz": [
+   "Alphabet tire l'essentiel de ses profits de la publicité (Search, YouTube, réseau) tout en montant rapidement en puissance dans Google Cloud et l'IA via Gemini. La publicité reste une machine à cash, ce qui explique une marge opérationnelle de 36 % malgré des investissements massifs.",
+   "Le moat repose sur la domination de la recherche, l'écosystème Android/Chrome, l'audience de YouTube, une infrastructure technique propriétaire (TPU) et des données à très grande échelle. La faible marge FCF affichée (6,6 %) reflète le pic d'investissements en capacité IA, qui pèse temporairement sur la conversion en cash libre."
+  ],
+  "futur": [
+   "Les moteurs sont l'accélération de Google Cloud (+63 % au T1, carnet de commandes proche de 460 milliards), la monétisation de Gemini et l'intégration de l'IA dans la recherche. Le risque majeur est l'appel antitrust du DOJ déposé en février 2026, qui pourrait imposer des remèdes structurels sur la distribution de la recherche.",
+   "Les autres risques sont l'explosion du capex (guidance 2026 relevée à <b>180-190 milliards de dollars</b>) qui pèse sur le cash-flow libre, la disruption de la recherche par les assistants IA concurrents et la valorisation déjà élevée. À surveiller : le retour sur investissement du capex IA et l'évolution du dossier antitrust."
+  ],
+  "actu": [
+   "Au T1 2026 (publié le 29 avril 2026), Alphabet a dépassé les attentes avec un chiffre d'affaires de <b>109,9 milliards de dollars</b> (+22 %), un résultat opérationnel en hausse de 30 %, un BPA de 5,11 dollars (+82 %) et un Google Cloud à +63 %. Le titre a bondi d'environ 10 % après publication, mais la direction a relevé sa guidance de capex 2026 à 180-190 milliards de dollars, tandis que l'appel antitrust du DOJ reste le principal facteur d'incertitude."
+  ],
+  "bull": [
+   "Exécution remarquable au T1 2026 : chiffre d'affaires +22 % (109,9 Md$), résultat opérationnel +30 % et BPA +82 %, avec une marge nette de 38 %.",
+   "Accélération de Google Cloud (+63 %, carnet de commandes proche de 460 Md$) et monétisation de Gemini, adossées à un moat (Search, Android/Chrome, YouTube, TPU).",
+   "Pullback limité (-4,9 % sous le plus-haut) avec un golden cross ancien (234 jours) confirmant une tendance haussière intacte."
+  ],
+  "bear": [
+   "Z-score de régression à +2,86σ signalant une nette surchauffe statistique par rapport à la tendance longue, un signal de prudence sur l'entrée.",
+   "Explosion du capex (guidance 2026 relevée à 180-190 Md$) qui écrase la marge FCF à 6,6 % et dont le retour sur investissement reste à prouver.",
+   "Appel antitrust du DOJ déposé en février 2026, pouvant imposer des remèdes structurels sur la distribution de la recherche, et disruption par les assistants IA concurrents."
+  ]
+ },
+ "V": {
+  "resume": [
+   "Visa cote environ <b>326 USD</b>, proche de son plus-haut 52 semaines (376), pour un PER prospectif de 22,0x et une capitalisation d'environ 620 milliards de dollars. Le titre porte un death cross de 83 jours mais un z-score de régression de <b>-1,98</b> indiquant une décote notable par rapport à sa tendance longue, créant une tension entre signal de momentum dégradé et statistique de valorisation favorable.",
+   "Le débat central oppose une rentabilité exceptionnelle (marge nette 52 %, marge FCF 48 %) et une accélération de la croissance à une valorisation de qualité et à la menace de long terme des nouveaux rails de paiement."
+  ],
+  "biz": [
+   "Visa exploite le plus grand réseau de paiement par cartes au monde, en facturant des frais sur chaque transaction et volume traité, sans porter de risque de crédit. Ce modèle de péage explique des marges hors normes : marge brute de 98 % et marge opérationnelle de 67 %.",
+   "Le moat est l'un des plus puissants de la cote : un effet de réseau quasi inattaquable entre des milliards de cartes et des dizaines de millions de commerçants, des barrières réglementaires et une infrastructure de traitement mondiale. Visa croît avec la bascule structurelle du cash vers le numérique et les paiements transfrontaliers à forte marge."
+  ],
+  "futur": [
+   "Les moteurs sont la croissance des volumes (paiements +9 % au T2), le transfrontalier, les nouveaux flux (Visa Direct, B2B) et l'intégration des stablecoins. La direction a relevé sa guidance d'exercice 2026 vers une croissance du chiffre d'affaires et du BPA à deux chiffres bas à teens.",
+   "Les risques tiennent à la pression réglementaire sur les frais d'interchange, aux litiges antitrust et à la concurrence des paiements de compte à compte et du commerce agentique. À surveiller : la montée des règlements en stablecoins (cadence annuelle de 7 milliards, +50 % en un trimestre) et l'évolution des volumes transfrontaliers."
+  ],
+  "actu": [
+   "Au T2 fiscal 2026 (publié le 28 avril 2026), Visa a affiché un chiffre d'affaires net de <b>11,2 milliards de dollars</b> (+17 %), sa plus forte croissance depuis 2013 hors effets exceptionnels, avec un BPA non-GAAP de 3,31 dollars et un rachat record de 7,9 milliards. Le groupe a relevé sa guidance annuelle, annoncé une nouvelle autorisation de rachat de 20 milliards et détaillé sa stratégie stablecoins (cadence de règlement de 7 milliards par an, neuf blockchains intégrées, plus de 160 programmes de cartes liés)."
+  ],
+  "bull": [
+   "Rentabilité hors normes (marge nette 52 %, marge FCF 48 %, marge opérationnelle 67 %) sur un modèle de péage sans risque de crédit.",
+   "Accélération de la croissance : revenus nets +17 % au T2 fiscal 2026 (11,2 Md$), plus forte hausse depuis 2013, avec guidance relevée et nouveau rachat de 20 Md$.",
+   "Z-score de régression de -1,98σ indiquant une décote notable par rapport à la tendance, et un death cross en cours de résorption (pente MM21 repassée positive)."
+  ],
+  "bear": [
+   "Death cross encore présent depuis 83 jours, signal de momentum en transition non exploitable seul tant que la résorption n'est pas confirmée.",
+   "Pression réglementaire sur les frais d'interchange et litiges antitrust pesant sur le modèle de commissions.",
+   "Menace de long terme des nouveaux rails de paiement (compte à compte, stablecoins) et du commerce agentique sur la position dominante du réseau."
+  ]
+ },
+ "PANW": {
+  "resume": [
+   "Palo Alto Networks cote autour de <b>282 $</b> au plus haut de son histoire (sommet 52 sem. à 283,71 $), porté par un Golden Cross frais de 7 jours et un score de 75/100. Le débat central oppose une exécution opérationnelle de premier ordre à une valorisation tendue : le forward PE ressort à environ <b>71</b> et l'objectif moyen des analystes (230 $) se situe nettement sous le cours, ce qui matérialise la pénalité de chase de rally du screener malgré un consensus 'buy' (49 analystes)."
+  ],
+  "biz": [
+   "Le groupe est le leader de la cybersécurité d'entreprise, organisé autour de trois plateformes (sécurité réseau, cloud avec Prisma, et opérations de sécurité avec Cortex), une stratégie de <b>platformisation</b> visant à remplacer une mosaïque d'outils par une suite intégrée.",
+   "Le moat repose sur des coûts de migration élevés, une marge brute d'environ <b>73,5%</b> et une mécanique de revenus récurrents : la base atteignait environ 1 550 platformisations (+35% sur un an) avec un taux de rétention nette de 119% chez les clients platformisés, signe d'une forte capacité d'expansion."
+  ],
+  "futur": [
+   "Les moteurs sont l'accélération de l'ARR récurrent, la montée en puissance de Cortex/XSIAM dans les opérations de sécurité pilotées par l'IA, et l'intégration de la sécurité des identités via l'acquisition de CyberArk finalisée début 2026.",
+   "Les risques tiennent à la valorisation extrême (forward PE ~71, cours au-dessus de l'objectif analyste moyen), à la digestion d'une acquisition majeure et à une croissance du chiffre d'affaires revenue à environ <b>15%</b>, plus modérée que par le passé ; à surveiller : la marge opérationnelle non-GAAP (30,3% au T2 FY26), le rythme net de nouvelles platformisations et la dilution liée à CyberArk."
+  ],
+  "actu": [
+   "Au T2 FY2026 (publié début 2026), Palo Alto a annoncé un chiffre d'affaires de <b>2,6 Md$</b> (+15%), un BPA non-GAAP de 1,03 $ (+27%) et un record d'environ 110 nouvelles platformisations hors T4. Le 11 février 2026, le groupe a finalisé l'acquisition de <b>CyberArk</b> (45 $ en cash plus 2,2005 actions PANW par titre) pour faire de la sécurité des identités un pilier de sa plateforme à l'ère de l'IA."
+  ],
+  "bull": [
+   "Golden Cross frais de 7 jours et titre au plus haut historique (~282 $), avec une exécution de premier ordre : CA +14,9%, marge brute ~73,5% et rétention nette de 119% chez les clients platformisés.",
+   "La stratégie de platformisation accélère (base ~1 550, +35% sur un an) et l'acquisition de CyberArk finalisée début 2026 ajoute la sécurité des identités comme nouveau pilier de croissance.",
+   "Consensus analystes très favorable (49 analystes, 'buy') porté par la montée de Cortex/XSIAM et de l'ARR récurrent."
+  ],
+  "bear": [
+   "Valorisation tendue avec un forward PE d'environ 71 et un cours au-dessus de l'objectif analyste moyen (230 $), ce qui déclenche la pénalité de chase de rally du screener.",
+   "RSI à 83,6 en survente technique, signe d'un titre potentiellement suracheté après un rally de +83,9% depuis le creux.",
+   "Croissance du CA revenue à ~15%, plus modérée que par le passé, avec une dilution et une digestion à venir liées à l'intégration de CyberArk."
+  ]
+ },
+ "NFLX": {
+  "resume": [
+   "Netflix cote autour de <b>86 $</b> (cours ajusté du split), à environ -36% sous son sommet 52 semaines, avec un Death Cross installé depuis 129 jours et un score de 74/100. Le débat central est un contraste frappant entre des fondamentaux excellents (marge nette ~28,5%, marge de FCF ~55%, croissance du CA de 16%) et un signal technique dégradé : l'objectif moyen des analystes (~115 $) implique un fort potentiel, mais la tendance de prix reste cassée."
+  ],
+  "biz": [
+   "Netflix est le leader mondial du streaming par abonnement, avec une base ayant dépassé <b>325 millions</b> d'abonnés payants ; le groupe ne communique toutefois plus ses chiffres d'abonnés trimestriels, recentrant le récit sur le chiffre d'affaires et la marge.",
+   "Le moat repose sur l'échelle, une bibliothèque de contenus originaux et désormais une mécanique financière puissante : une marge opérationnelle guidée à <b>31,5%</b> pour 2026 et une génération de FCF massive, avec deux relais de croissance que sont la publicité et la répression du partage de comptes."
+  ],
+  "futur": [
+   "Les moteurs sont la montée en charge de la <b>publicité</b> (revenus attendus autour de 3 Md$ en 2026, soit un doublement sur un an), les hausses de prix, les contenus live/sport et les jeux ; le forward PE d'environ 22 reste plus raisonnable que le multiple historique du titre.",
+   "Les risques portent sur l'intensité concurrentielle du streaming, le coût des contenus, la sensibilité des consommateurs aux hausses de prix et le signal technique baissier (Death Cross, drawdown profond) ; à surveiller : la trajectoire des revenus publicitaires, le maintien de la marge opérationnelle et l'éventuelle résorption du croisement baissier."
+  ],
+  "actu": [
+   "Au T1 2026 (publié le 16 avril 2026), Netflix a annoncé un chiffre d'affaires de <b>12,25 Md$</b> (+16,2%, légèrement au-dessus du consensus) et un résultat opérationnel en hausse de 18%. Le groupe a confirmé un objectif annuel de 50,7 à 51,7 Md$ de revenus, indiqué que plus de 60% des nouvelles inscriptions en zones publicitaires choisissaient l'offre avec pub et que le nombre d'annonceurs avait progressé de 70% sur un an, à plus de 4 000 clients."
+  ],
+  "bull": [
+   "Fondamentaux excellents : marge nette ~28,5%, marge de FCF ~55,4% et croissance du CA de 16,2%, avec un objectif annuel confirmé de 50,7 à 51,7 Md$.",
+   "La publicité monte en charge rapidement (revenus attendus ~3 Md$ en 2026, soit un doublement ; +70% d'annonceurs sur un an à plus de 4 000), relais de croissance crédible.",
+   "Forward PE d'environ 22, plus raisonnable que le multiple historique du titre, et objectif analyste moyen (~115 $) très au-dessus du cours (~86 $)."
+  ],
+  "bear": [
+   "Signal technique dégradé : Death Cross installé depuis 129 jours et drawdown profond d'environ -33,8% sous le sommet 52 semaines, tendance de prix cassée.",
+   "Intensité concurrentielle du streaming et coût des contenus élevés, dans un contexte de sensibilité des consommateurs aux hausses de prix.",
+   "Le groupe ne communique plus ses chiffres d'abonnés trimestriels, réduisant la visibilité sur la dynamique réelle de la base."
+  ]
+ },
+ "BLK": {
+  "resume": [
+   "BlackRock cote autour de <b>1 047 $</b>, à environ -14% sous son sommet 52 semaines, dans un pullback que le screener juge sain (zone Fibo 38,2%), avec un Death Cross en cours de résorption (pente MM21 redevenue positive) et un score de 74/100. Le débat central oppose une dynamique de croissance externe exceptionnelle (CA +27%, AUM record) à un signal de croisement encore ambigu ; l'objectif moyen des analystes (~1 251 $) reste sensiblement au-dessus du cours."
+  ],
+  "biz": [
+   "BlackRock est le premier gérant d'actifs mondial, avec des encours sous gestion à un record de <b>13,9 mille milliards de dollars</b>, adossé à la franchise iShares (ETF) et à la plateforme technologique Aladdin qui constitue une barrière à l'entrée majeure.",
+   "Le moat tient à l'échelle, aux effets de réseau d'Aladdin et à une bascule stratégique vers les <b>marchés privés</b> (infrastructure et crédit privé) via les acquisitions de GIP, HPS et Preqin, qui élèvent le mix de marge et la part de revenus récurrents et de commissions de performance."
+  ],
+  "futur": [
+   "Les moteurs sont l'essor des marchés privés (l'équipe Private Financing Solutions issue de HPS et le fonds GIP V clôturé au-dessus de sa cible de 25 Md$), la croissance des revenus technologiques (Aladdin, Preqin) et des flux nets long terme solides ; le forward PE d'environ <b>17</b> reste modéré pour la qualité de la franchise.",
+   "Les risques tiennent à la sensibilité des encours et des commissions aux marchés financiers, à l'intégration de plusieurs acquisitions simultanées et à la pression structurelle sur les frais des produits indiciels ; à surveiller : la résorption effective du Death Cross, les flux nets trimestriels et la contribution croissante des actifs privés."
+  ],
+  "actu": [
+   "Au T1 2026 (publié le 14 avril 2026), BlackRock a annoncé un chiffre d'affaires de <b>6,7 Md$</b> (+27%), un BPA ajusté de 12,53 $ et des encours record de 13,9 mille milliards de dollars (contre 11,6 un an plus tôt), avec 135,9 Md$ de flux nets long terme sur le trimestre. Les revenus de commissions de performance ont plus que triplé à 272 M$ et les revenus technologiques ont progressé de 22% à 530 M$, portés par Aladdin et Preqin."
+  ],
+  "bull": [
+   "Croissance externe exceptionnelle : CA +27%, encours record de 13,9 mille milliards de dollars (contre 11,6 un an plus tôt) et 135,9 Md$ de flux nets long terme au T1 2026.",
+   "Bascule stratégique vers les marchés privés (GIP, HPS, Preqin) qui élève le mix de marge ; les commissions de performance ont plus que triplé à 272 M$ et les revenus tech ont progressé de 22%.",
+   "Death Cross en cours de résorption (pente MM21 redevenue positive), pullback jugé sain en zone Fibo 38,2% (-9,8%), forward PE modéré ~17 et objectif analyste ~1 251 $ au-dessus du cours."
+  ],
+  "bear": [
+   "Le signal de croisement reste ambigu (Death Cross non confirmé résorbé, pénalité death_pen -3), donc non exploitable seul à ce stade.",
+   "Encours et commissions sont sensibles aux marchés financiers, exposant les revenus à un retournement boursier.",
+   "Intégration simultanée de plusieurs acquisitions majeures et pression structurelle persistante sur les frais des produits indiciels."
+  ]
+ },
+ "NOW": {
+  "resume": [
+   "ServiceNow cote autour de <b>124 $</b> (cours ajusté du split), à environ -51% sous son sommet 52 semaines, ce qui place le cours en survente marquée sur sa droite de régression (<b>z = -3,1σ</b>) malgré un Death Cross ancien (203 jours) et un score de 74/100. Le débat central est saisissant : la société a battu toutes ses prévisions au T1 2026, mais le titre s'est effondré, pris dans la peur d'une disruption du modèle SaaS par l'IA ; l'objectif analyste moyen (~142 $) et un consensus 'strong buy' restent toutefois au-dessus du cours."
+  ],
+  "biz": [
+   "ServiceNow édite une plateforme cloud de gestion des flux de travail (Now Platform) couvrant l'IT, le service client, les RH et de plus en plus les opérations métiers, avec une marge brute d'environ <b>76,5%</b> et un modèle d'abonnement très récurrent.",
+   "Le moat repose sur des coûts de migration élevés, une plateforme unifiée difficile à déloger et une marge de FCF d'environ <b>36,6%</b> ; la société pousse aujourd'hui ses agents d'IA (Now Assist) comme nouveau moteur de monétisation au sein de la base installée."
+  ],
+  "futur": [
+   "Les moteurs sont la montée en puissance de <b>Now Assist</b> (en route vers 1,5 Md$ d'ACV en 2026, contre une cible antérieure de 1 Md$), la croissance des obligations de performance restantes (cRPO +21% en devises constantes) et le relèvement de la guidance d'abonnement à 15,74-15,78 Md$.",
+   "Les risques dominants sont le récit 'anti-SaaS' selon lequel les outils d'IA générative pourraient éroder le modèle d'abonnement, la sensibilité aux grands contrats (retards de signatures on-premise au Moyen-Orient liés au conflit régional) et un drawdown technique sévère ; à surveiller : la conversion réelle de Now Assist en revenus, la stabilité de la marge opérationnelle (32% au T1) et une éventuelle reprise du signal."
+  ],
+  "actu": [
+   "Au T1 2026 (publié le 22 avril 2026), ServiceNow a dépassé toutes ses prévisions avec des revenus d'abonnement de <b>3,67 Md$</b> (+19% en devises constantes), une marge opérationnelle non-GAAP de 32% et un cRPO de 12,64 Md$, tout en relevant sa guidance annuelle. Le titre a pourtant chuté d'environ <b>17%</b> le lendemain, sa pire séance historique, plombé par un vent contraire de 75 points de base sur la croissance lié à des retards de contrats on-premise au Moyen-Orient et par les craintes de marché d'une substitution du SaaS par l'IA."
+  ],
+  "bull": [
+   "Survente marquée sur la droite de régression (z = -3,1σ) après un drawdown d'environ -51% sous le sommet, avec un objectif analyste moyen (~142 $) et un consensus 'strong buy' au-dessus du cours.",
+   "Société qui a battu toutes ses prévisions au T1 2026 (revenus d'abonnement 3,67 Md$, +19% en devises constantes, marge opérationnelle non-GAAP 32%) et a relevé sa guidance annuelle.",
+   "Now Assist en route vers 1,5 Md$ d'ACV en 2026 (contre 1 Md$ visé), cRPO +21% et modèle d'abonnement très récurrent (marge brute ~76,5%, marge de FCF ~36,6%)."
+  ],
+  "bear": [
+   "Death Cross ancien (203 jours) et chute d'environ -17% au lendemain du T1 (pire séance historique), tendance technique sévèrement cassée.",
+   "Récit 'anti-SaaS' selon lequel l'IA générative pourrait éroder le modèle d'abonnement, principal vent contraire sur le sentiment.",
+   "Sensibilité aux grands contrats, avec un vent contraire de 75 points de base lié à des retards de signatures on-premise au Moyen-Orient."
+  ]
+ },
+ "ETN": {
+  "resume": [
+   "Eaton cote autour de <b>401 $</b>, à environ -9% sous son sommet 52 semaines, dans un pullback jugé sain par le screener (zone Fibo 23,6%), avec un Golden Cross actif depuis 71 jours et un score de 74/100. Le débat central oppose une demande structurelle exceptionnelle liée aux centres de données à une valorisation déjà généreuse (forward PE ~25) et des tensions de marge à court terme dans l'Electrical Americas ; l'objectif analyste moyen (~452 $) reste au-dessus du cours."
+  ],
+  "biz": [
+   "Eaton est un acteur industriel diversifié de gestion intelligente de l'énergie, dont le coeur de métier est l'équipement électrique (distribution, protection, infrastructure de puissance) complété par l'aérospatiale, le véhicule électrique et les solutions de mobilité.",
+   "Le moat repose sur une base installée étendue, des relations clients longues, une expertise d'ingénierie et un positionnement directement exposé à l'électrification et à l'<b>IA</b> ; la marge brute ressort autour de 37% et la croissance du CA à environ 17%, un profil plus capitalistique que les éditeurs de logiciels de la watchlist."
+  ],
+  "futur": [
+   "Les moteurs sont la croissance explosive des commandes de <b>centres de données</b> (+240% au T1, carnet électrique +48% sur un an) et l'électrification des infrastructures, qui ont conduit Eaton à relever sa guidance de croissance organique 2026 à 9-11%.",
+   "Les risques portent sur des coûts d'intrants plus élevés et des frais de montée en cadence qui ont amené une baisse de 50 points de base de la guidance de marge de l'Electrical Americas (présentée comme temporaire), ainsi que sur la cyclicité industrielle et la valorisation ; à surveiller : la restauration des marges via les hausses de prix, la conversion du carnet de commandes et la durabilité du cycle data center."
+  ],
+  "actu": [
+   "Au T1 2026 (résultats publiés début mai 2026), Eaton a annoncé un chiffre d'affaires record de <b>7,5 Md$</b> (+17%, dont 14% de croissance organique) et un BPA ajusté de 2,81 $, avec des ventes de centres de données en hausse d'environ 50%. Le carnet de commandes data center a atteint 228 gigawatts (soit 12 ans au rythme de construction 2025) et la société a relevé sa guidance de croissance organique tout en maintenant son BPA ajusté annuel à 13,05-13,50 $."
+  ],
+  "bull": [
+   "Demande structurelle exceptionnelle sur les centres de données (commandes +240% au T1, carnet électrique +48% sur un an, backlog data center de 228 GW soit 12 ans de construction), ayant conduit à relever la guidance organique 2026 à 9-11%.",
+   "Golden Cross actif depuis 71 jours et pullback jugé sain (-9,4%, zone Fibo 23,6%), avec un CA record de 7,5 Md$ (+17%) et un objectif analyste moyen (~452 $) au-dessus du cours.",
+   "Positionnement direct sur l'électrification et l'IA, base installée étendue et relations clients longues comme barrières à l'entrée."
+  ],
+  "bear": [
+   "Valorisation déjà généreuse (forward PE ~25) et titre légèrement au-dessus de sa droite de régression (z = +1,44σ).",
+   "Tensions de marge à court terme : guidance de marge de l'Electrical Americas abaissée de 50 points de base à cause de coûts d'intrants et de frais de montée en cadence.",
+   "Profil cyclique et capitalistique (marge de FCF ~9,3% seulement), exposé à un éventuel essoufflement du cycle data center."
+  ]
+ },
+ "VWS.CO": {
+  "resume": [
+   "Vestas, leader mondial des turbines éoliennes, cote autour de <b>180 DKK</b> (cap. ~177 Md DKK) près de ses plus hauts de 52 semaines (203), avec un PER avant de ~16,7x contre un PER historique de ~28x reflétant une normalisation attendue des marges. Le débat central oppose un <b>redressement opérationnel</b> bien réel (carnet de commandes record, marges qui reviennent) à la sensibilité structurelle du secteur aux taux d'intérêt, à l'inflation des coûts et aux décisions politiques sur l'éolien, notamment offshore."
+  ],
+  "biz": [
+   "Le modèle combine la vente et l'installation de turbines onshore et offshore, activité cyclique et à faible marge brute (~13,5%), avec une activité de <b>service de maintenance</b> récurrente et beaucoup plus rentable adossée à la base installée mondiale. Ce mix service offre une visibilité de long terme, avec des contrats représentant près de 40 Md EUR de revenus contractuels futurs attendus.",
+   "Le moat repose sur l'échelle, une présence industrielle et logistique mondiale difficile à répliquer, une vaste base installée qui alimente le service, et un savoir-faire technologique sur les très grandes turbines. La marge nette reste mince (~4,4%) et le secteur demeure soumis à une concurrence intense, notamment des fabricants chinois, ce qui limite le pouvoir de fixation des prix."
+  ],
+  "futur": [
+   "Les drivers sont l'électrification, les objectifs de décarbonation, et surtout la montée en puissance de l'<b>offshore</b> et du service à mesure que la base installée grandit. La consigne 2026 vise un chiffre d'affaires de 20 à 22 Md EUR et une marge EBIT avant éléments exceptionnels de 6 à 8%, soit une nette amélioration de rentabilité.",
+   "Les risques tiennent à la sensibilité aux taux (qui pèsent sur le financement des projets), à l'inflation des intrants, aux goulots d'étranglement sur les chaînes d'approvisionnement et au cadre réglementaire américain. À surveiller : la trajectoire de la marge EBIT trimestre après trimestre, le rythme des prises de commandes offshore et l'évolution du <b>backlog</b> record."
+  ],
+  "actu": [
+   "Au T1 2026 (publié fin avril 2026), Vestas a annoncé un chiffre d'affaires en hausse de 14% à ~4 Md EUR et une marge EBIT de 3,2%, la meilleure marge de premier trimestre depuis 2018, avec des prises de commandes fermes de ~4 504 MW (+44% sur un an) portées par l'<b>offshore au Royaume-Uni</b>. Le carnet de commandes turbines a atteint un record de 36,3 Md EUR, la guidance annuelle a été maintenue et un nouveau programme de rachat d'actions de 100 M EUR a été lancé."
+  ],
+  "bull": [
+   "Redressement opérationnel concret : marge EBIT de 3,2% au T1 2026, meilleure marge de premier trimestre depuis 2018, et guidance 2026 d'une marge EBIT de 6 à 8%.",
+   "Carnet de commandes turbines à un record de 36,3 Md EUR et prises de commandes fermes de ~4 504 MW (+44% sur un an), portées par l'offshore au Royaume-Uni.",
+   "Valorisation alignée sur la tendance (z = +0,03), Golden Cross établi avec volume confirmé et activité de service récurrente (~40 Md EUR de revenus contractuels futurs) qui amortit la cyclicité."
+  ],
+  "bear": [
+   "Rentabilité structurellement mince (marge nette ~4,4%, marge brute ~13,5%) face à une concurrence intense, notamment des fabricants chinois, qui limite le pouvoir de fixation des prix.",
+   "Secteur très sensible aux taux d'intérêt (financement des projets), à l'inflation des intrants et aux goulots d'étranglement des chaînes d'approvisionnement.",
+   "Forte dépendance au cadre réglementaire, en particulier les décisions politiques américaines sur l'éolien offshore, source d'incertitude sur le rythme des commandes."
+  ]
+ },
+ "SPGI": {
+  "resume": [
+   "S&P Global, oligopole mondial de la notation de crédit, des indices et des données financières, cote autour de <b>424 USD</b> (cap. ~125 Md USD), nettement sous ses plus hauts de 52 semaines (579) avec un z-score de régression de -1,43 signalant une décote relative à sa tendance. Le débat central oppose la qualité exceptionnelle du modèle (marge nette ~30%, marge FCF ~34%) à la sensibilité de l'activité de notation aux volumes d'émissions de dette et à la recomposition du portefeuille via la <b>scission Mobility</b>."
+  ],
+  "biz": [
+   "Le modèle s'appuie sur cinq segments — Ratings, Market Intelligence, Indices, Commodity Insights et Mobility — dont les Ratings et les Indices génèrent des marges très élevées. Les <b>indices</b> (familles S&P 500, Dow Jones) et la notation bénéficient d'un effet réseau et d'un statut quasi réglementaire qui en font des actifs à péage extrêmement rentables.",
+   "Le moat est l'un des plus solides de la cote : duopole de fait avec Moody's sur la notation, propriété intellectuelle sur des indices de référence incontournables, données propriétaires et coûts de changement élevés. La marge brute dépasse 70% et la marge FCF ~34%, traduisant un modèle <b>asset-light</b> à très forte conversion de cash."
+  ],
+  "futur": [
+   "Les drivers sont la croissance des actifs indiciels passifs, la demande de données et d'analytique, la reprise des volumes d'émissions obligataires et l'effet relutif des rachats d'actions. La consigne 2026 vise une croissance organique du chiffre d'affaires de 6 à 8% et un BPA dilué de 19,40 à 19,65 USD.",
+   "Les risques tiennent à la cyclicité de la notation (sensible aux taux et au volume d'émissions), à la pression réglementaire et à la bonne exécution de la scission. À surveiller : la finalisation de la <b>scission Mobility</b> prévue mi-2026, les volumes d'émissions obligataires et la trajectoire des marges après réorganisation."
+  ],
+  "actu": [
+   "Au T1 2026, S&P Global a publié un chiffre d'affaires de 4,17 Md USD (+10% sur un an) tiré par les cinq segments, un BPA dilué de 4,69 USD (+32%) et une marge opérationnelle élargie à 48%, aidée par un gain de 175 M USD sur cessions. La direction a relevé la guidance 2026 et a confirmé que la <b>scission de Mobility</b> reste en bonne voie pour mi-2026, avec une émission obligataire publique de 2 Md USD prévue pour financer rachats d'actions et réduction de dette."
+  ],
+  "bull": [
+   "Modèle oligopolistique de très haute qualité : duopole de fait avec Moody's sur la notation, indices de référence incontournables (S&P 500, Dow Jones), marge nette ~30% et marge FCF ~34%.",
+   "Décote relative à sa tendance longue (z = -1,43, -25,5% sous le plus-haut 52 semaines) sur un titre asset-light à très forte conversion de cash.",
+   "T1 2026 solide (CA 4,17 Md USD, +10% ; BPA dilué +32% ; marge opérationnelle 48%) avec guidance 2026 relevée et croissance organique visée de 6 à 8%."
+  ],
+  "bear": [
+   "Signal technique dégradé : Death Cross de 71 jours confirmé en volume et RSI à 46,8, momentum baissier installé.",
+   "Activité de notation cyclique, sensible aux taux et aux volumes d'émissions obligataires qui peuvent se contracter.",
+   "Risque d'exécution sur la scission de Mobility prévue mi-2026, qui recompose le portefeuille et la trajectoire de marges."
+  ]
+ },
+ "NET": {
+  "resume": [
+   "Cloudflare, plateforme cloud de connectivité, sécurité et performance pour Internet, cote autour de <b>242 USD</b> (cap. ~85 Md USD) près de ses plus hauts, avec une valorisation très tendue (PER avant ~159x) qui en fait un pari sur la croissance future. Le débat central oppose une croissance soutenue (+34% de chiffre d'affaires) et un virage agressif vers l'<b>IA agentique</b> à une rentabilité GAAP encore négative (marge nette ~-3,7%) et une valorisation laissant peu de marge d'erreur."
+  ],
+  "biz": [
+   "Le modèle repose sur un réseau mondial de périphérie (edge) distribué dans des centaines de villes, vendu en abonnement et couvrant CDN, sécurité réseau (WAF, anti-DDoS), Zero Trust et, de plus en plus, des services de <b>développeurs et d'inférence IA</b> exécutés à la périphérie. La marge brute élevée (~73%) reflète la nature logicielle et l'effet de levier du réseau propriétaire.",
+   "Le moat tient à l'échelle et à la densité du réseau (difficile et coûteux à répliquer), à un effet de réseau où chaque client renforce la télémétrie de sécurité, et à une plateforme intégrée qui multiplie les opportunités de vente croisée. La dynamique commerciale est portée par les <b>grands comptes</b> (>100K USD), en hausse de 25% sur un an à plus de 4 400 clients, représentant désormais 72% du chiffre d'affaires."
+  ],
+  "futur": [
+   "Les drivers sont l'adoption du Zero Trust, le déplacement de l'inférence IA vers la périphérie et l'expansion chez les grands comptes. La consigne 2026 vise un chiffre d'affaires de 2,805 à 2,813 Md USD (+30%) et un BPA non-GAAP de 1,19 à 1,20 USD.",
+   "Les risques sont la valorisation extrême, la concurrence des hyperscalers, la pression sur la marge brute (-130 pb sur un an, mix produits développeurs moins margés) et l'exécution du <b>plan de restructuration</b>. À surveiller : la matérialisation des revenus IA agentique, la trajectoire du free cash flow et l'impact des suppressions de postes sur l'innovation."
+  ],
+  "actu": [
+   "Au T1 2026 (résultats du 7 mai 2026), Cloudflare a publié un chiffre d'affaires de 639,8 M USD (+34% sur un an), un résultat opérationnel non-GAAP de 73,1 M USD et un free cash flow de 84,1 M USD (13% du chiffre d'affaires). L'événement marquant est l'annonce d'un virage vers un modèle <b>« agentic AI-first »</b> assorti d'une réduction d'environ 20% des effectifs (~1 100 postes) et de charges de restructuration de 140 à 150 M USD attendues surtout aux T2-T3 2026."
+  ],
+  "bull": [
+   "Croissance soutenue (CA +33,5% sur un an, 639,8 M USD au T1 2026) tirée par les grands comptes >100K USD (+25% à plus de 4 400 clients, soit 72% du chiffre d'affaires).",
+   "Virage agressif vers l'IA agentique et l'inférence à la périphérie, adossé à un réseau edge mondial difficile et coûteux à répliquer (marge brute ~73%).",
+   "Génération de cash réelle malgré l'investissement (FCF de 84,1 M USD, soit 13% du CA, marge FCF ~32%), Golden Cross frais (13j) confirmé en volume et cours aligné sur sa tendance (z = +0,4)."
+  ],
+  "bear": [
+   "Valorisation extrême (PER avant ~159x) laissant très peu de marge d'erreur en cas de déception.",
+   "Rentabilité GAAP encore négative (marge nette ~-3,7%) et marge brute sous pression (-130 pb sur un an, mix produits développeurs moins margés).",
+   "Plan de restructuration lourd (~20% des effectifs, soit ~1 100 postes, charges de 140 à 150 M USD) dont l'impact sur l'innovation reste à démontrer, face à la concurrence des hyperscalers."
+  ]
+ },
+ "CRM": {
+  "resume": [
+   "Salesforce, numéro un mondial du CRM, cote autour de <b>191 USD</b> (cap. ~157 Md USD), loin de ses plus hauts de 52 semaines (277) avec un z-score de régression de -2,54 signalant une décote marquée par rapport à sa tendance et un PER avant très modéré de ~12,3x. Le débat central oppose une valorisation devenue raisonnable et une forte génération de cash (marge FCF ~39%) à un ralentissement de la croissance organique (~12-13%) que l'entreprise mise sur l'<b>IA Agentforce</b> pour ré-accélérer."
+  ],
+  "biz": [
+   "Le modèle est un ensemble d'applications SaaS d'entreprise — Sales, Service, Marketing, Commerce, la plateforme Slack et désormais Data 360 et <b>Agentforce</b> — vendues par abonnement avec de forts taux de rétention. La marge brute élevée (~78%) et la marge FCF (~39%) traduisent un modèle logiciel mature à très forte conversion de cash.",
+   "Le moat repose sur des coûts de changement très élevés (le CRM est profondément intégré aux processus commerciaux des clients), un large écosystème de partenaires et d'applications, et des effets de réseau de données. La stratégie consiste à transformer cette base installée en plateforme d'<b>agents IA</b>, où la profondeur des données clients propriétaires constitue un avantage difficile à répliquer."
+  ],
+  "futur": [
+   "Les drivers sont la monétisation d'Agentforce et Data 360, la vente croisée sur la base installée et l'expansion des marges opérationnelles. La consigne relevée pour l'exercice 2027 (FY27) vise un chiffre d'affaires de 45,9 à 46,2 Md USD (+11%) et la cible de prix moyen des analystes (~257 USD) est nettement au-dessus du cours.",
+   "Les risques sont la maturité du marché CRM cœur, la concurrence de Microsoft, la cannibalisation possible des sièges utilisateurs par les agents IA et l'incertitude sur la vitesse d'adoption. À surveiller : la trajectoire de l'<b>ARR Agentforce</b>, l'évolution du taux de croissance organique et la discipline sur les marges et les rachats d'actions."
+  ],
+  "actu": [
+   "Le 27 mai 2026, Salesforce a publié des résultats record pour le premier trimestre de l'exercice 2027 : chiffre d'affaires de 11,13 Md USD, BPA non-GAAP de 3,88 USD (+50% sur un an) et BPA GAAP de 2,42 USD (+52%). L'<b>ARR combiné Agentforce et Data 360</b> a atteint près de 3,4 Md USD (+200%), dont 1,2 Md USD pour Agentforce seul (+205%), et la direction a relevé sa guidance annuelle FY27."
+  ],
+  "bull": [
+   "Décote marquée par rapport à sa tendance (z = -2,54, -36% sous le plus-haut 52 semaines) et PER avant très modéré (~12,3x) pour le numéro un mondial du CRM.",
+   "Forte génération de cash (marge FCF ~39%) et moat de coûts de changement élevés sur une base installée profondément intégrée aux processus clients.",
+   "Traction de l'IA : ARR combiné Agentforce et Data 360 proche de 3,4 Md USD (+200%), dont 1,2 Md USD pour Agentforce seul (+205%), avec guidance FY27 relevée."
+  ],
+  "bear": [
+   "Signal technique cassé : Death Cross de 85 jours confirmé en volume et drawdown de -36%, trend probablement rompue.",
+   "Croissance organique ralentie (~12%) sur un marché CRM cœur mature, avec concurrence directe de Microsoft.",
+   "Risque de cannibalisation des sièges utilisateurs par les agents IA et incertitude sur la vitesse d'adoption d'Agentforce."
+  ]
+ },
+ "TFC": {
+  "resume": [
+   "Truist Financial, l'une des plus grandes banques régionales américaines (issue de la fusion BB&T–SunTrust), cote autour de <b>48 USD</b> (cap. ~60 Md USD) sous ses plus hauts de 52 semaines (56), avec une valorisation modeste (PER avant ~9,4x, PER trailing ~11,9x) typique du secteur bancaire régional. Le débat central oppose une rentabilité solide (marge nette ~30%) et une politique de retour au capital généreuse à une croissance des revenus lente (~5%) et à la sensibilité aux taux, au crédit et à la conjoncture économique."
+  ],
+  "biz": [
+   "Le modèle est celui d'une banque universelle régionale : <b>banque de détail et commerciale</b>, gestion de patrimoine et banque d'investissement, dont les revenus proviennent du revenu net d'intérêts (écart entre taux prêteurs et coût des dépôts) et des commissions. La franchise s'appuie sur une forte densité de dépôts dans le sud-est et le centre-atlantique des États-Unis, régions à démographie favorable.",
+   "Le moat d'une banque régionale repose sur la base de <b>dépôts à faible coût</b>, les coûts de changement pour la clientèle, l'échelle après la fusion et la densité géographique du réseau. La rentabilité dépend fortement de la qualité du crédit et de la gestion du bilan ; la notion de marge FCF est peu pertinente pour une banque, le ratio affiché (0%) reflétant cette spécificité comptable."
+  ],
+  "futur": [
+   "Les drivers sont l'expansion du revenu net d'intérêts à mesure que les dépôts coûteux se reprécisent, la croissance des commissions, le contrôle des coûts post-fusion et un programme de rachats d'actions élargi. La direction a relevé sa guidance 2026 de croissance du <b>revenu net d'intérêts</b> à 2-3% et vise des revenus en hausse d'environ 4%.",
+   "Les risques tiennent à la qualité du crédit (immobilier commercial, défauts) en cas de ralentissement, à la trajectoire des taux et à la concurrence sur les dépôts. À surveiller : l'évolution des provisions pour pertes sur prêts, la marge nette d'intérêts et le rythme d'exécution du <b>rachat d'actions</b> porté de 4 à 5 Md USD."
+  ],
+  "actu": [
+   "Au T1 2026 (résultats publiés en avril 2026), Truist a annoncé un bénéfice net de 1 481 M USD (contre 1 261 M un an plus tôt) et un BPA de 1,09 USD, battant le consensus de ~10% et en hausse de ~25% sur un an. Le <b>revenu net d'intérêts</b> a progressé à 3,60 Md USD, la guidance de croissance du NII 2026 a été relevée à 2-3% et le programme de rachat d'actions a été porté de 4 à 5 Md USD, avec 1,1 Md USD déjà racheté au trimestre."
+  ],
+  "bull": [
+   "Valorisation modeste (PER avant ~9,4x) pour une rentabilité solide (marge nette ~29,6%) et une franchise dense en dépôts à faible coût dans le sud-est et le centre-atlantique américains.",
+   "Dynamique bénéficiaire favorable : BPA T1 2026 de 1,09 USD (+25% sur un an, ~10% au-dessus du consensus) et guidance de croissance du revenu net d'intérêts 2026 relevée à 2-3%.",
+   "Retour au capital généreux avec un programme de rachat d'actions porté de 4 à 5 Md USD (1,1 Md USD déjà exécuté au trimestre), Golden Cross récent (29j) et cours aligné sur sa tendance (z = +0,19)."
+  ],
+  "bear": [
+   "Croissance des revenus lente (~5% sur un an), typique d'une banque régionale à maturité.",
+   "Exposition au risque de crédit (immobilier commercial, défauts) en cas de ralentissement économique, avec une rentabilité dépendante de la qualité du crédit.",
+   "Sensibilité à la trajectoire des taux et à la concurrence sur les dépôts ; le Golden Cross montre une pente MM21 déjà négative (-1,36%)."
+  ]
+ }
+}

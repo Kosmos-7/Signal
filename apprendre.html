@@ -8,29 +8,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="signal.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg:        #08080d;
-    --surface:   #0f0f16;
-    --surface2:  #16161f;
-    --surface3:  #1e1e2a;
-    --border:    #21212e;
-    --border2:   #33334e;
-    --text:      #eeeef8;
-    --text2:     #8888a8;
-    --text3:     #50506c;
-    --gold:      #e8a820;
-    --gold2:     #a07010;
-    --gold-dim:  rgba(232,168,32,0.1);
-    --green:     #1cc87a;
-    --green-dim: rgba(28,200,122,0.1);
-    --red:       #f05454;
-    --red-dim:   rgba(240,84,84,0.1);
-    --blue:      #5080f8;
-    --blue-dim:  rgba(80,128,248,0.1);
-    --orange:    #f87a20;
-    --orange-dim:rgba(248,122,32,0.1);
+    --bg:        #06060b;
+    --surface:   rgba(255,255,255,0.022);
+    --surface2:  rgba(255,255,255,0.04);
+    --surface3:  rgba(255,255,255,0.07);
+    --border:    rgba(255,255,255,0.07);
+    --border2:   rgba(116,182,223,0.30);
+    --text:      #f2f3fc;
+    --text2:     #c6c6e0;
+    --text3:     #8a8aa6;
+    --ac:        #74b6df;
+    --ac-dim:    rgba(116,182,223,0.10);
+    --gold:      #74b6df;   /* accent UI → cyan ; l'or pédagogique vit dans les SVG */
+    --gold2:     #4f8bb0;
+    --gold-dim:  rgba(116,182,223,0.10);
+    --green:     #74b6df;
+    --green-dim: rgba(116,182,223,0.10);
+    --red:       #74b6df;
+    --red-dim:   rgba(116,182,223,0.10);
+    --blue:      #74b6df;
+    --blue-dim:  rgba(116,182,223,0.10);
+    --orange:    #74b6df;
+    --orange-dim:rgba(116,182,223,0.12);
     --radius:    10px;
     --radius-lg: 16px;
   }
@@ -44,25 +47,7 @@
     position: relative;
   }
 
-  /* ── HERO CANVAS ── */
-  .hero-canvas { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
-  .hc-layer { position: absolute; inset: 0; }
-  .hc-space {
-    background: radial-gradient(ellipse 160% 65% at 50% -5%, #071e30 0%, #040d1a 42%, #08080d 72%);
-  }
-  .hc-aurora { display: none; }
-  .hc-clouds { display: none; }
-  .hc-stars {
-    background-image:
-      radial-gradient(circle, rgba(255,255,255,0.60) 1px, transparent 1px),
-      radial-gradient(circle, rgba(255,255,255,0.42) 1px, transparent 1px),
-      radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px),
-      radial-gradient(circle, rgba(200,240,255,0.38) 1px, transparent 1px),
-      radial-gradient(circle, rgba(255,255,255,0.50) 1px, transparent 1px);
-    background-size: 480px 260px, 350px 190px, 290px 215px, 520px 290px, 410px 230px;
-    background-position: 35px 22px, 190px 65px, 95px 130px, 260px 12px, 440px 82px;
-    opacity: 0.72;
-  }
+  /* fond géré par le chrome partagé (#fx / #bg / .scan / .frame via signal.css + signal-fx.js) */
 
   /* ── HEADER ── */
   header {
@@ -87,17 +72,17 @@
   .brand-icon { flex-shrink: 0; display: flex; }
   .brand-name { font-family: Georgia, serif; font-size: 1.4rem; color: var(--text); letter-spacing: -0.5px; }
   nav { display: flex; gap: 0.25rem; }
-  nav a { font-size: 0.88rem; color: var(--text3); text-decoration: none; padding: 5px 12px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
-  nav a:hover { color: var(--text2); background: var(--surface2); }
-  nav a.active { color: var(--text); background: var(--surface2); border: 1px solid var(--border2); font-weight: 500; }
+  nav a { font-size: 0.82rem; color: var(--text3); text-decoration: none; padding: 5px 10px; border-radius: 6px; transition: color 0.15s; }
+  nav a:hover { color: var(--text2); }
+  nav a.active { color: var(--text); }
 
   /* ── LAYOUT ── */
-  main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 6rem; position: relative; z-index: 1; }
+  main { max-width: 850px; margin: 0 auto; padding: 3rem 1.5rem 6rem; position: relative; z-index: 1; }
 
   /* ── PILLS ── */
   .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
   .pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 100px; padding: 4px 12px; font-family: 'Courier New', monospace; font-size: 0.80rem; letter-spacing: 0.8px; text-transform: uppercase; }
-  .pill-beta { background: var(--gold-dim); border: 1px solid rgba(232,168,32,0.2); color: var(--gold); }
+  .pill-beta { background: var(--gold-dim); border: 1px solid rgba(116,182,223,0.2); color: var(--gold); }
   .pd { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 
   /* ── HERO ── */
@@ -109,7 +94,7 @@
     line-height: 1.2;
     letter-spacing: -0.6px;
     margin-bottom: 0.85rem;
-    background: linear-gradient(120deg, #eeeef8 35%, #1cc87a 100%);
+    background: linear-gradient(120deg, #f2f3fc 30%, #74b6df 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -117,7 +102,7 @@
   .hero p { color: var(--text2); font-size: 0.96rem; max-width: 560px; line-height: 1.75; }
   .hero-sep {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(28,200,122,0.22), transparent);
+    background: linear-gradient(90deg, transparent, rgba(116,182,223,0.22), transparent);
     margin: 1.5rem 0 2rem;
   }
 
@@ -163,8 +148,8 @@
     transition: border-color 0.18s, box-shadow 0.18s;
   }
   .brique-card:hover {
-    border-color: rgba(28,200,122,0.2);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 24px rgba(28,200,122,0.05);
+    border-color: rgba(116,182,223,0.2);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 24px rgba(116,182,223,0.05);
   }
   .brique-number {
     font-family: 'Courier New', monospace;
@@ -262,8 +247,8 @@
     padding: 1px 6px;
     white-space: nowrap;
   }
-  .badge-in  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.25); }
-  .badge-out { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.25); }
+  .badge-in  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(116,182,223,0.25); }
+  .badge-out { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(116,182,223,0.25); }
 
   /* ── CONCEPT CARDS — 1 colonne pour confort de lecture ── */
   .concept-grid {
@@ -281,7 +266,7 @@
   }
   .concept-card:hover {
     border-color: var(--border2);
-    box-shadow: 0 0 24px rgba(80,128,248,0.05);
+    box-shadow: 0 0 24px rgba(116,182,223,0.05);
   }
   .concept-label {
     font-family: 'Courier New', monospace;
@@ -496,22 +481,69 @@
     .kpi-mini:nth-child(3), .kpi-mini:nth-child(4), .kpi-mini:nth-child(5) { grid-column: span 2; }
     footer { flex-direction: column; align-items: flex-start; padding: 1.25rem 1rem; }
   }
+
+  /* ════════════════════════════════════════════════════════════
+     ÉPURE — inspiration terminal : à plat, peu de bords, de l'air.
+     ════════════════════════════════════════════════════════════ */
+
+  /* Cartes à plat : ni ombre, ni reflet, ni relief au survol */
+  .brique-card, .scoring-block, .concept-card, .portfo-block, .advice-card,
+  .brique-card:hover, .concept-card:hover { box-shadow: none; }
+
+  /* Blocs explicatifs / diagrammes : sans boîte, le contenu coule */
+  .scoring-block, .portfo-block, .concept-card, .advice-card {
+    background: transparent; border: 0;
+  }
+
+  /* Le brique-grid garde des cellules légères, mais à plat */
+  .brique-card { background: rgba(255,255,255,0.015); border: 1px solid var(--line); }
+
+  /* Plus d'air */
+  main { padding-top: 3.5rem; }
+  .section-block { margin-bottom: 4.2rem; }
+
+  /* En-têtes plus marqués : eyebrow mono cyan + filet, titre plus grand */
+  .section-label {
+    color: var(--ac); display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1rem; font-size: 0.62rem; letter-spacing: 2px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .section-title { font-size: 1.95rem; margin-bottom: 0.5rem; }
+
+  /* Texte de LECTURE en blanc net + taille/interligne alignés sur la watchlist */
+  .section-sub, .brique-body, .scoring-desc, .scoring-note,
+  .concept-body, .portfo-body, .advice-body { color: var(--text); }
+  .section-sub, .scoring-desc, .scoring-note,
+  .concept-body, .portfo-body, .advice-body { font-size: 1rem; line-height: 1.75; }
+  .brique-body { font-size: 0.95rem; line-height: 1.7; }
+
+  /* Structure « scène » comme la watchlist : le contenu est centré dans l'espace
+     situé APRÈS le rail (et non centré dans toute la fenêtre) — équilibré, pas collé. */
+  main { max-width: 1060px; }   /* même largeur que le doc de la watchlist */
+  @media (min-width: 1301px) {
+    /* centré dans la scène [262px → bord], exactement comme la watchlist */
+    main { max-width: 1060px; margin-left: calc(262px + (100vw - 1344px) / 2); margin-right: auto; }
+  }
+  /* la largeur de LIGNE du texte reste lisible (plafonnée comme la watchlist) */
+  .section-sub, .scoring-desc, .scoring-note,
+  .concept-body, .portfo-body, .advice-body { max-width: 1120px; }
+
+  /* Cohérence typo : corps de lecture homogène (1rem partout) */
+  .brique-body, .section-sub { font-size: 1rem; line-height: 1.75; }
 </style>
 </head>
 <body>
 
-<div class="hero-canvas" aria-hidden="true">
-  <div class="hc-layer hc-space"></div>
-  <div class="hc-layer hc-aurora"></div>
-  <div class="hc-layer hc-clouds"></div>
-  <div class="hc-layer hc-stars"></div>
-</div>
+<div id="fx" aria-hidden="true"></div>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="scan" aria-hidden="true"></div>
+<div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <header id="site-header">
   <a class="brand" href="index.html">
     <span class="brand-icon">
       <svg width="30" height="30" viewBox="0 0 28 28" fill="none">
-        <path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#1cc87a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#22d98a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </span>
     <span class="brand-name">Signal</span>
@@ -523,6 +555,17 @@
   </nav>
 </header>
 
+<nav class="toc" aria-label="Sommaire">
+  <div class="toc-h">Sommaire</div>
+  <a href="#s1"><span class="tn">01</span>Fondamentaux</a>
+  <a href="#s2"><span class="tn">02</span>L'algorithme</a>
+  <a href="#s3"><span class="tn">03</span>La fiche action</a>
+  <a href="#s4"><span class="tn">04</span>Portefeuille IA</a>
+  <a href="#s5"><span class="tn">05</span>Friction réelle</a>
+  <a href="#s6"><span class="tn">06</span>Méthodologie</a>
+  <a href="#s7"><span class="tn">07</span>Principes</a>
+</nav>
+
 <main>
 
   <!-- HERO -->
@@ -532,11 +575,14 @@
     </div>
     <h1>Comprendre Signal</h1>
     <p>Tout ce qu'il faut savoir pour lire la watchlist et le portefeuille — expliqué simplement, sans jargon inutile.</p>
+    <div class="scoring-note" style="margin-top:1.5rem">
+      <strong>Par où commencer ?</strong> — Débutant : sections 1 et 7. Pour décoder une fiche action : section 3. Curieux de la rigueur (frais, impôts, backtest) : sections 5 et 6. Les passages signalés « pour aller plus loin » sont optionnels en première lecture.
+    </div>
     <div class="hero-sep"></div>
   </section>
 
   <!-- SECTION 1 — Les 3 briques de base -->
-  <section class="section-block">
+  <section class="section-block" id="s1">
     <div class="section-label">01 · Fondamentaux</div>
     <h2 class="section-title">Les 3 briques de base</h2>
     <p class="section-sub">Avant de lire une fiche Signal, il suffit de comprendre trois concepts. Tout le reste en découle.</p>
@@ -546,7 +592,7 @@
         <span class="brique-number">01 · L'action</span>
         <div class="brique-title">Une part de propriété</div>
         <div class="brique-body">
-          Acheter une action, c'est devenir copropriétaire d'une entreprise cotée en bourse. Apple vaut environ 3 000 milliards de dollars pour ~15 milliards d'actions en circulation : chaque action représente donc une part de ~200 $ du capital de l'entreprise.
+          Acheter une action, c'est devenir copropriétaire d'une entreprise cotée en bourse. Apple vaut environ 4 500 milliards de dollars pour ~14,7 milliards d'actions en circulation : chaque action représente donc une part d'environ 305 $ du capital de l'entreprise.
           <br><br>
           Si Apple génère plus de bénéfices, ouvre de nouveaux marchés ou surprend positivement avec ses résultats, la valeur de ton action monte — d'autres investisseurs sont prêts à payer plus pour la même part. À l'inverse, si Apple perd des clients, rate ses objectifs ou voit sa marge se dégrader, ton action recule. Le cours d'une action reflète, sur le long terme, la santé économique de l'entreprise. À court terme, il fluctue aussi avec le sentiment de marché et l'actualité macro — taux d'intérêt, inflation, géopolitique.
         </div>
@@ -556,7 +602,7 @@
         <span class="brique-number">02 · L'indice</span>
         <div class="brique-title">Un panier de référence</div>
         <div class="brique-body">
-          Un indice est un panier d'actions construit pour représenter un marché ou un segment. Le CAC 40 regroupe les 40 plus grandes capitalisations françaises ; le MSCI World couvre ~1 500 grandes entreprises dans 23 pays développés ; le S&P 500, les 500 plus grandes capitalisations américaines. Chaque indice pèse ses composants selon une méthodologie précise (généralement la capitalisation flottante).
+          Un indice est un panier d'actions construit pour représenter un marché ou un segment. Le CAC 40 regroupe les 40 plus grandes capitalisations françaises ; le MSCI World couvre ~1 300 grandes entreprises dans 23 pays développés ; le S&P 500, les 500 plus grandes capitalisations américaines. Chaque indice pèse ses composants selon une méthodologie précise (généralement la capitalisation flottante — la part des actions réellement échangeable sur le marché).
           <br><br>
           Les indices servent de baromètres pour juger une performance. Sans référence, un rendement de +8 % est impossible à interpréter : il peut être excellent (si le marché a fait −5 % sur la période), normal (marché à +8 %), ou décevant (marché à +20 %). C'est pour cette raison que les fonds, gérants et stratégies sont systématiquement comparés à un benchmark — la seule manière de mesurer si la gestion active apporte vraiment de la valeur.
         </div>
@@ -566,7 +612,7 @@
         <span class="brique-number">03 · La performance</span>
         <div class="brique-title">Battre le marché ou pas ?</div>
         <div class="brique-body">
-          Un investisseur passif qui achète un ETF MSCI World obtient automatiquement la performance du marché mondial — sans sélection de titres, sans timing, pour environ 0,2 % de frais annuels. C'est la baseline disponible pour quiconque ouvre un compte-titres ou un PEA.
+          Un investisseur passif qui achète un ETF MSCI World (un fonds coté qu'on achète comme une action et qui réplique l'indice) obtient automatiquement la performance du marché mondial — sans sélection de titres, sans timing, pour environ 0,2 % de frais annuels. C'est la baseline disponible pour quiconque ouvre un compte-titres ou un PEA.
           <br><br>
           Signal essaie de faire mieux que cette baseline en sélectionnant des actions individuelles à partir de signaux algorithmiques (momentum, fondamentaux, consensus). C'est ce qu'on appelle de la <em>gestion active</em>. La barre est haute : sur 10 ans, environ 85 % des fonds actifs professionnels font moins bien que leur indice de référence (données SPIVA). Si l'IA ne bat pas l'ETF sur la durée, autant avoir l'ETF directement — c'est ce qui rend la comparaison honnête, et le défi réel.
         </div>
@@ -575,10 +621,10 @@
   </section>
 
   <!-- SECTION 2 — Comment Signal choisit ses 25 actions -->
-  <section class="section-block">
+  <section class="section-block" id="s2">
     <div class="section-label">02 · L'algorithme</div>
     <h2 class="section-title">Comment Signal choisit ses 25 actions</h2>
-    <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong>125 grandes capitalisations</strong> mondiales (USA, Europe, Asie via ADR), et retient les 25 avec le meilleur score. L'univers est construit pour couvrir 13 thèmes : tech mega-cap, semi-conducteurs (incluant équipements), cloud infrastructure pure-play, cybersécurité, REITs, biotech, banques régionales US, défense, luxe, énergie verte EU, conso discrétionnaire, et exposition directe Asie (Chine + Japon ADR). Le chiffre exact varie d'une semaine à l'autre selon les données disponibles — il s'affiche dans le bandeau de la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist</a>. Voici comment le score de chaque action est calculé.</p>
+    <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong>125 grandes capitalisations</strong> mondiales (USA, Europe, Asie via ADR — une action étrangère cotée aux US via un certificat), et retient les 25 avec le meilleur score. L'univers est construit pour couvrir 12 thèmes : tech mega-cap, semi-conducteurs (incluant équipements), cloud infrastructure pure-play, cybersécurité, REITs (foncières cotées / immobilier), biotech, banques régionales US, défense, luxe, énergie verte EU, conso discrétionnaire, et exposition directe Asie (Chine + Japon ADR). Le chiffre exact varie d'une semaine à l'autre selon les données disponibles — il s'affiche dans le bandeau de la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist</a>. Voici comment le score de chaque action est calculé.</p>
 
     <div class="scoring-block">
       <div class="scoring-row">
@@ -591,6 +637,8 @@
         </div>
         <div class="scoring-desc">
           L'algorithme évalue si le titre est en tendance haussière claire. Cinq signaux comptent : le Golden Cross (MM21 au-dessus de MM200, avec bonus selon la fraîcheur du croisement), le RSI dans une zone équilibrée (40-60 = 10 pts), le volume des dernières semaines supérieur à la moyenne longue (confirmation), un cours proche de sa trajectoire de régression long terme (zone saine), et la <strong>valorisation actuelle</strong> (5 pts max, mais le barème dépend du régime cross — détaillé plus bas). Un titre qui monte régulièrement avec des volumes croissants <em>et</em> qui offre un point d'entrée correct score bien. Un titre qui oscille sans direction, qui vient de former un Death Cross, ou qui est collé à son plus haut récent (chase de rally), score moins.
+          <br><br>
+          <em style="color:var(--text3)">Pour aller plus loin — détail d'implémentation.</em>
           <br><br>
           <strong>Le barème valorisation est conditionné au cross</strong> (mise à jour 23/05/2026, validée empiriquement sur 43 145 événements 2017-2024) :
           <ul style="margin-top:0.5rem;line-height:1.55">
@@ -633,12 +681,12 @@
     <div class="scoring-note">
       Les 25 valeurs avec le score le plus élevé apparaissent sur la watchlist chaque lundi. Un titre peut <span class="badge-in">↑ Entrer</span> ou <span class="badge-out">↓ Sortir</span> selon l'évolution hebdomadaire de son score — momentum qui s'améliore ou se dégrade, publication de résultats, simple recalibrage des signaux.
       <br><br>
-      <strong>VIX — indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est fetché chaque jour ouvré et affiché sur le dashboard sous forme de pill colorée (calme / vigilance / stress / panique). Une version expérimentale qui dampener le momentum en régime de stress a été testée puis désactivée après un backtest 2019-2024 (le dampener dégradait légèrement le Sharpe sur cette période trop bull). Le VIX reste donc <em>informationnel</em> aujourd'hui : Claude peut le citer dans son analyse éditoriale, mais aucun mécanisme automatique ne modifie le scoring en fonction de sa valeur. À retester avec un backtest incluant 2007-2009.
+      <strong>VIX — indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est suivi chaque jour ouvré mais ne touche pas au scoring : une version expérimentale qui freinait le momentum en régime de stress a été testée puis désactivée (elle dégradait légèrement le Sharpe sur un backtest 2019-2024 trop bull). Le VIX reste donc <em>informationnel</em> — Claude peut le citer, aucun mécanisme automatique ne s'en sert. Détail de l'indicateur et de ses seuils : voir l'indicateur VIX, §4.
     </div>
   </section>
 
   <!-- SECTION 3 — Comment lire une fiche action -->
-  <section class="section-block">
+  <section class="section-block" id="s3">
     <div class="section-label">03 · La fiche action</div>
     <h2 class="section-title">Comment lire une fiche action</h2>
     <p class="section-sub">Cliquer sur une action de la watchlist affiche son analyse détaillée. Voici comment décoder chaque élément.</p>
@@ -683,9 +731,9 @@
               <path d="M 60.0,151.6 L 71.8,147.0 L 83.7,146.7 L 95.5,145.2 L 107.3,143.6 L 119.2,144.1 L 131.0,144.2 L 142.9,142.1 L 154.7,139.3 L 166.5,134.1 L 178.4,126.3 L 190.2,119.7 L 202.0,114.4 L 213.9,110.0 L 225.7,108.7 L 237.6,111.9 L 249.4,117.4 L 261.2,121.1 L 273.1,120.1 L 284.9,116.2 L 296.7,113.4 L 308.6,112.4 L 320.4,111.8 L 332.2,111.2 L 344.1,112.7 L 355.9,110.6 L 367.8,104.3 L 379.6,94.9 L 391.4,88.9 L 403.3,81.5 L 415.1,82.2 L 426.9,85.4 L 438.8,94.9 L 450.6,101.4 L 462.4,105.9 L 474.3,108.7 L 486.1,108.3 L 498.0,107.6 L 509.8,111.8 L 521.6,122.8 L 533.5,131.7 L 545.3,139.5 L 557.1,143.5 L 569.0,146.3 L 580.8,141.0 L 592.7,130.9 L 604.5,120.8 L 616.3,113.1 L 628.2,104.0 L 640.0,100.6" stroke="#e8a820" stroke-width="2.2" fill="none"/>
 
               <!-- Marqueur du Golden Cross (il y a 13j) -->
-              <line x1="605" y1="50" x2="605" y2="240" stroke="#1cc87a" stroke-width="1" stroke-dasharray="3,4" opacity="0.6"/>
-              <circle cx="605" cy="119.2" r="6" fill="none" stroke="#1cc87a" stroke-width="2"/>
-              <text x="540" y="44" fill="#1cc87a" font-family="Inter,sans-serif" font-size="11" font-weight="600">↑ Golden Cross (il y a 13j)</text>
+              <line x1="605" y1="50" x2="605" y2="240" stroke="#22d98a" stroke-width="1" stroke-dasharray="3,4" opacity="0.6"/>
+              <circle cx="605" cy="119.2" r="6" fill="none" stroke="#22d98a" stroke-width="2"/>
+              <text x="540" y="44" fill="#22d98a" font-family="Inter,sans-serif" font-size="11" font-weight="600">↑ Golden Cross (il y a 13j)</text>
 
               <!-- Légendes -->
               <line x1="60" y1="260" x2="80" y2="260" stroke="#e8a820" stroke-width="2.2"/>
@@ -701,11 +749,11 @@
               <text x="640" y="278" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">aujourd'hui</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
-              Données réelles JPM sur 200 jours. La MM21 (or, court terme) a oscillé autour de la MM200 (bleue, long terme) plusieurs fois — c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : MM21 (310.6€) repasse au-dessus de MM200 (302.8€). C'est précisément ce que Signal score 18/20 sur le critère "cross frais".
+              Données réelles JPM sur 200 jours. La MM21 (or, court terme) a oscillé autour de la MM200 (bleue, long terme) plusieurs fois — c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : MM21 (310.6€) repasse au-dessus de MM200 (302.8€). C'est précisément ce que Signal score 17 points (croisement de 11 à 30 j) + 1 point de bonus RSI = 18/20 sur le critère "cross frais".
             </div>
           </div>
 
-          Le Death Cross (MM21 repasse sous MM200) est le signal inverse, baissier. Il est plus fragile en marché sans tendance claire (~38 % de fiabilité dans ces phases) — d'où la pondération plus faible dans le score Signal et la pénalité non compensable s'il est récent.
+          Le Death Cross (MM21 repasse sous MM200) est le signal inverse, baissier. Il est plus fragile en marché sans tendance claire (~38 % de fiabilité dans ces phases) — d'où la pondération plus faible dans le score Signal et une pénalité de −5 points (croisement ≤ 30 j) ou −3 points (≤ 60 j) s'il est récent.
         </div>
       </div>
 
@@ -713,7 +761,7 @@
         <span class="concept-label">Z-score (écart à la tendance)</span>
         <span class="concept-example">Zone saine · +0.4σ</span>
         <div class="concept-body">
-          Le Z-score mesure l'écart du cours actuel par rapport à sa trajectoire long terme, exprimé en écarts-types (σ). Cette trajectoire est calculée par régression log-linéaire sur 10, 20 ou <strong>25 ans</strong> selon l'industrie (depuis v2.0.2) : 10 ans pour la tech (boom IA récent), 20 ans par défaut, et <strong>25 ans pour les cycliques matures</strong> (auto, banks, semi equipment, materials, energy) pour capturer plusieurs cycles complets. Sans cette distinction, des titres comme Valeo (auto) apparaissent en "surchauffe" en 10y (capture une seule descente) alors qu'ils sont en décote sur 25y. +0,4σ = le cours est légèrement au-dessus de sa moyenne historique — encore dans la zone saine. <strong>Au-delà de +2,5σ</strong>, le screener applique une <strong>pénalité CHASE (-3 pts)</strong> active pour signaler les surextensions extrêmes même quand les fondamentaux sont bons (cas Micron z=+5σ, GOOGL post-rally +124%).
+          Le Z-score mesure l'écart du cours actuel par rapport à sa trajectoire long terme, exprimé en écarts-types (σ). Cette trajectoire est calculée par régression log-linéaire sur 10, 20 ou <strong>25 ans</strong> selon l'industrie (depuis v2.0.2) : 10 ans pour la tech (boom IA récent), 20 ans par défaut, et <strong>25 ans pour les cycliques matures</strong> (auto, banks, semi equipment, materials, energy) pour capturer plusieurs cycles complets. Sans cette distinction, des titres comme Valeo (auto) apparaissent en "surchauffe" en 10y (capture une seule descente) alors qu'ils sont en décote sur 25y. +0,4σ = le cours est légèrement au-dessus de sa moyenne historique — encore dans la zone saine. <strong>Au-delà de +2,5σ</strong>, le screener applique une <strong>pénalité CHASE (-3 pts)</strong> active pour signaler les surextensions extrêmes même quand les fondamentaux sont bons (cas Micron z=+5σ, GOOGL post-rally +124%), <strong>et −2 points dès +2σ si le RSI dépasse 70 ou si le cours est collé à son plus haut</strong> (palier modéré).
 
           <div style="margin:1rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
             <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Microsoft (MSFT) · 20 ans · pente +21.7%/an · échelle log</div>
@@ -721,16 +769,16 @@
 
               <!-- Bandes sigma (en log) — du plus extrême en bas vers extrême en haut -->
               <!-- +2σ à +3σ (rouge surachat extrême) -->
-              <path d="M 60.0,180.3 L 69.8,178.1 L 79.7,175.9 L 89.5,173.7 L 99.3,171.5 L 109.2,169.3 L 119.0,167.1 L 128.8,164.9 L 138.6,162.6 L 148.5,160.4 L 158.3,158.2 L 168.1,156.0 L 178.0,153.8 L 187.8,151.6 L 197.6,149.4 L 207.5,147.2 L 217.3,145.0 L 227.1,142.8 L 236.9,140.6 L 246.8,138.3 L 256.6,136.1 L 266.4,133.9 L 276.3,131.7 L 286.1,129.5 L 295.9,127.3 L 305.8,125.1 L 315.6,122.9 L 325.4,120.7 L 335.3,118.5 L 345.1,116.3 L 354.9,114.0 L 364.7,111.8 L 374.6,109.6 L 384.4,107.4 L 394.2,105.2 L 404.1,103.0 L 413.9,100.8 L 423.7,98.6 L 433.6,96.4 L 443.4,94.2 L 453.2,92.0 L 463.1,89.8 L 472.9,87.6 L 482.7,85.4 L 492.5,83.1 L 502.4,80.9 L 512.2,78.7 L 522.0,76.5 L 531.9,74.3 L 541.7,72.1 L 551.5,69.9 L 561.4,67.7 L 571.2,65.5 L 581.0,63.3 L 590.8,61.1 L 600.7,58.9 L 610.5,56.6 L 620.3,54.4 L 630.2,52.2 L 640.0,50.0 L 640.0,60.0 L 630.2,62.2 L 620.3,64.4 L 610.5,66.6 L 600.7,68.8 L 590.8,71.0 L 581.0,73.2 L 571.2,75.4 L 561.4,77.6 L 551.5,79.8 L 541.7,82.0 L 531.9,84.2 L 522.0,86.5 L 512.2,88.7 L 502.4,90.9 L 492.5,93.1 L 482.7,95.3 L 472.9,97.5 L 463.1,99.7 L 453.2,101.9 L 443.4,104.1 L 433.6,106.3 L 423.7,108.5 L 413.9,110.8 L 404.1,113.0 L 394.2,115.2 L 384.4,117.4 L 374.6,119.6 L 364.7,121.8 L 354.9,124.0 L 345.1,126.2 L 335.3,128.4 L 325.4,130.6 L 315.6,132.8 L 305.8,135.1 L 295.9,137.3 L 286.1,139.5 L 276.3,141.7 L 266.4,143.9 L 256.6,146.1 L 246.8,148.3 L 236.9,150.5 L 227.1,152.7 L 217.3,154.9 L 207.5,157.1 L 197.6,159.3 L 187.8,161.5 L 178.0,163.7 L 168.1,166.0 L 158.3,168.2 L 148.5,170.4 L 138.6,172.6 L 128.8,174.8 L 119.0,177.0 L 109.2,179.2 L 99.3,181.4 L 89.5,183.6 L 79.7,185.8 L 69.8,188.0 L 60.0,190.2 Z" fill="#f05454" opacity="0.10"/>
+              <path d="M 60.0,180.3 L 69.8,178.1 L 79.7,175.9 L 89.5,173.7 L 99.3,171.5 L 109.2,169.3 L 119.0,167.1 L 128.8,164.9 L 138.6,162.6 L 148.5,160.4 L 158.3,158.2 L 168.1,156.0 L 178.0,153.8 L 187.8,151.6 L 197.6,149.4 L 207.5,147.2 L 217.3,145.0 L 227.1,142.8 L 236.9,140.6 L 246.8,138.3 L 256.6,136.1 L 266.4,133.9 L 276.3,131.7 L 286.1,129.5 L 295.9,127.3 L 305.8,125.1 L 315.6,122.9 L 325.4,120.7 L 335.3,118.5 L 345.1,116.3 L 354.9,114.0 L 364.7,111.8 L 374.6,109.6 L 384.4,107.4 L 394.2,105.2 L 404.1,103.0 L 413.9,100.8 L 423.7,98.6 L 433.6,96.4 L 443.4,94.2 L 453.2,92.0 L 463.1,89.8 L 472.9,87.6 L 482.7,85.4 L 492.5,83.1 L 502.4,80.9 L 512.2,78.7 L 522.0,76.5 L 531.9,74.3 L 541.7,72.1 L 551.5,69.9 L 561.4,67.7 L 571.2,65.5 L 581.0,63.3 L 590.8,61.1 L 600.7,58.9 L 610.5,56.6 L 620.3,54.4 L 630.2,52.2 L 640.0,50.0 L 640.0,60.0 L 630.2,62.2 L 620.3,64.4 L 610.5,66.6 L 600.7,68.8 L 590.8,71.0 L 581.0,73.2 L 571.2,75.4 L 561.4,77.6 L 551.5,79.8 L 541.7,82.0 L 531.9,84.2 L 522.0,86.5 L 512.2,88.7 L 502.4,90.9 L 492.5,93.1 L 482.7,95.3 L 472.9,97.5 L 463.1,99.7 L 453.2,101.9 L 443.4,104.1 L 433.6,106.3 L 423.7,108.5 L 413.9,110.8 L 404.1,113.0 L 394.2,115.2 L 384.4,117.4 L 374.6,119.6 L 364.7,121.8 L 354.9,124.0 L 345.1,126.2 L 335.3,128.4 L 325.4,130.6 L 315.6,132.8 L 305.8,135.1 L 295.9,137.3 L 286.1,139.5 L 276.3,141.7 L 266.4,143.9 L 256.6,146.1 L 246.8,148.3 L 236.9,150.5 L 227.1,152.7 L 217.3,154.9 L 207.5,157.1 L 197.6,159.3 L 187.8,161.5 L 178.0,163.7 L 168.1,166.0 L 158.3,168.2 L 148.5,170.4 L 138.6,172.6 L 128.8,174.8 L 119.0,177.0 L 109.2,179.2 L 99.3,181.4 L 89.5,183.6 L 79.7,185.8 L 69.8,188.0 L 60.0,190.2 Z" fill="#f0556a" opacity="0.10"/>
               <!-- +1σ à +2σ (orange tendu) -->
               <path d="M 60.0,190.2 L 69.8,188.0 L 79.7,185.8 L 89.5,183.6 L 99.3,181.4 L 109.2,179.2 L 119.0,177.0 L 128.8,174.8 L 138.6,172.6 L 148.5,170.4 L 158.3,168.2 L 168.1,166.0 L 178.0,163.7 L 187.8,161.5 L 197.6,159.3 L 207.5,157.1 L 217.3,154.9 L 227.1,152.7 L 236.9,150.5 L 246.8,148.3 L 256.6,146.1 L 266.4,143.9 L 276.3,141.7 L 286.1,139.5 L 295.9,137.3 L 305.8,135.1 L 315.6,132.8 L 325.4,130.6 L 335.3,128.4 L 345.1,126.2 L 354.9,124.0 L 364.7,121.8 L 374.6,119.6 L 384.4,117.4 L 394.2,115.2 L 404.1,113.0 L 413.9,110.8 L 423.7,108.5 L 433.6,106.3 L 443.4,104.1 L 453.2,101.9 L 463.1,99.7 L 472.9,97.5 L 482.7,95.3 L 492.5,93.1 L 502.4,90.9 L 512.2,88.7 L 522.0,86.5 L 531.9,84.2 L 541.7,82.0 L 551.5,79.8 L 561.4,77.6 L 571.2,75.4 L 581.0,73.2 L 590.8,71.0 L 600.7,68.8 L 610.5,66.6 L 620.3,64.4 L 630.2,62.2 L 640.0,60.0 L 640.0,69.9 L 630.2,72.1 L 620.3,74.3 L 610.5,76.5 L 600.7,78.8 L 590.8,81.0 L 581.0,83.2 L 571.2,85.4 L 561.4,87.6 L 551.5,89.8 L 541.7,92.0 L 531.9,94.2 L 522.0,96.4 L 512.2,98.6 L 502.4,100.8 L 492.5,103.1 L 482.7,105.3 L 472.9,107.5 L 463.1,109.7 L 453.2,111.9 L 443.4,114.1 L 433.6,116.3 L 423.7,118.5 L 413.9,120.7 L 404.1,122.9 L 394.2,125.1 L 384.4,127.3 L 374.6,129.5 L 364.7,131.7 L 354.9,133.9 L 345.1,136.2 L 335.3,138.4 L 325.4,140.6 L 315.6,142.8 L 305.8,145.0 L 295.9,147.2 L 286.1,149.4 L 276.3,151.6 L 266.4,153.8 L 256.6,156.0 L 246.8,158.2 L 236.9,160.5 L 227.1,162.7 L 217.3,164.9 L 207.5,167.1 L 197.6,169.3 L 187.8,171.5 L 178.0,173.7 L 168.1,175.9 L 158.3,178.1 L 148.5,180.3 L 138.6,182.5 L 128.8,184.8 L 119.0,187.0 L 109.2,189.2 L 99.3,191.4 L 89.5,193.6 L 79.7,195.8 L 69.8,198.0 L 60.0,200.2 Z" fill="#e8a820" opacity="0.13"/>
               <!-- Zone saine -0.5σ à +1.5σ (vert) -->
-              <path d="M 60.0,195.2 L 69.8,193.0 L 79.7,190.8 L 89.5,188.6 L 99.3,186.4 L 109.2,184.2 L 119.0,182.0 L 128.8,179.8 L 138.6,177.6 L 148.5,175.4 L 158.3,173.2 L 168.1,171.0 L 178.0,168.7 L 187.8,166.5 L 197.6,164.3 L 207.5,162.1 L 217.3,159.9 L 227.1,157.7 L 236.9,155.5 L 246.8,153.3 L 256.6,151.1 L 266.4,148.9 L 276.3,146.7 L 286.1,144.4 L 295.9,142.2 L 305.8,140.0 L 315.6,137.8 L 325.4,135.6 L 335.3,133.4 L 345.1,131.2 L 354.9,129.0 L 364.7,126.8 L 374.6,124.6 L 384.4,122.4 L 394.2,120.1 L 404.1,117.9 L 413.9,115.7 L 423.7,113.5 L 433.6,111.3 L 443.4,109.1 L 453.2,106.9 L 463.1,104.7 L 472.9,102.5 L 482.7,100.3 L 492.5,98.1 L 502.4,95.8 L 512.2,93.6 L 522.0,91.4 L 531.9,89.2 L 541.7,87.0 L 551.5,84.8 L 561.4,82.6 L 571.2,80.4 L 581.0,78.2 L 590.8,76.0 L 600.7,73.8 L 610.5,71.6 L 620.3,69.4 L 630.2,67.2 L 640.0,64.9 L 640.0,84.8 L 630.2,87.1 L 620.3,89.3 L 610.5,91.5 L 600.7,93.7 L 590.8,95.9 L 581.0,98.1 L 571.2,100.3 L 561.4,102.5 L 551.5,104.7 L 541.7,106.9 L 531.9,109.1 L 522.0,111.3 L 512.2,113.6 L 502.4,115.8 L 492.5,118.0 L 482.7,120.2 L 472.9,122.4 L 463.1,124.6 L 453.2,126.8 L 443.4,129.0 L 433.6,131.2 L 423.7,133.4 L 413.9,135.6 L 404.1,137.8 L 394.2,140.0 L 384.4,142.3 L 374.6,144.5 L 364.7,146.7 L 354.9,148.9 L 345.1,151.1 L 335.3,153.3 L 325.4,155.5 L 315.6,157.7 L 305.8,159.9 L 295.9,162.1 L 286.1,164.3 L 276.3,166.6 L 266.4,168.8 L 256.6,171.0 L 246.8,173.2 L 236.9,175.4 L 227.1,177.6 L 217.3,179.8 L 207.5,182.0 L 197.6,184.2 L 187.8,186.4 L 178.0,188.6 L 168.1,190.9 L 158.3,193.1 L 148.5,195.3 L 138.6,197.5 L 128.8,199.7 L 119.0,201.9 L 109.2,204.1 L 99.3,206.3 L 89.5,208.5 L 79.7,210.7 L 69.8,212.9 L 60.0,215.1 Z" fill="#1cc87a" opacity="0.18"/>
+              <path d="M 60.0,195.2 L 69.8,193.0 L 79.7,190.8 L 89.5,188.6 L 99.3,186.4 L 109.2,184.2 L 119.0,182.0 L 128.8,179.8 L 138.6,177.6 L 148.5,175.4 L 158.3,173.2 L 168.1,171.0 L 178.0,168.7 L 187.8,166.5 L 197.6,164.3 L 207.5,162.1 L 217.3,159.9 L 227.1,157.7 L 236.9,155.5 L 246.8,153.3 L 256.6,151.1 L 266.4,148.9 L 276.3,146.7 L 286.1,144.4 L 295.9,142.2 L 305.8,140.0 L 315.6,137.8 L 325.4,135.6 L 335.3,133.4 L 345.1,131.2 L 354.9,129.0 L 364.7,126.8 L 374.6,124.6 L 384.4,122.4 L 394.2,120.1 L 404.1,117.9 L 413.9,115.7 L 423.7,113.5 L 433.6,111.3 L 443.4,109.1 L 453.2,106.9 L 463.1,104.7 L 472.9,102.5 L 482.7,100.3 L 492.5,98.1 L 502.4,95.8 L 512.2,93.6 L 522.0,91.4 L 531.9,89.2 L 541.7,87.0 L 551.5,84.8 L 561.4,82.6 L 571.2,80.4 L 581.0,78.2 L 590.8,76.0 L 600.7,73.8 L 610.5,71.6 L 620.3,69.4 L 630.2,67.2 L 640.0,64.9 L 640.0,84.8 L 630.2,87.1 L 620.3,89.3 L 610.5,91.5 L 600.7,93.7 L 590.8,95.9 L 581.0,98.1 L 571.2,100.3 L 561.4,102.5 L 551.5,104.7 L 541.7,106.9 L 531.9,109.1 L 522.0,111.3 L 512.2,113.6 L 502.4,115.8 L 492.5,118.0 L 482.7,120.2 L 472.9,122.4 L 463.1,124.6 L 453.2,126.8 L 443.4,129.0 L 433.6,131.2 L 423.7,133.4 L 413.9,135.6 L 404.1,137.8 L 394.2,140.0 L 384.4,142.3 L 374.6,144.5 L 364.7,146.7 L 354.9,148.9 L 345.1,151.1 L 335.3,153.3 L 325.4,155.5 L 315.6,157.7 L 305.8,159.9 L 295.9,162.1 L 286.1,164.3 L 276.3,166.6 L 266.4,168.8 L 256.6,171.0 L 246.8,173.2 L 236.9,175.4 L 227.1,177.6 L 217.3,179.8 L 207.5,182.0 L 197.6,184.2 L 187.8,186.4 L 178.0,188.6 L 168.1,190.9 L 158.3,193.1 L 148.5,195.3 L 138.6,197.5 L 128.8,199.7 L 119.0,201.9 L 109.2,204.1 L 99.3,206.3 L 89.5,208.5 L 79.7,210.7 L 69.8,212.9 L 60.0,215.1 Z" fill="#22d98a" opacity="0.18"/>
               <!-- -2σ à -1σ (bleu décoté) -->
               <path d="M 60.0,220.1 L 69.8,217.9 L 79.7,215.7 L 89.5,213.5 L 99.3,211.3 L 109.2,209.1 L 119.0,206.9 L 128.8,204.7 L 138.6,202.4 L 148.5,200.2 L 158.3,198.0 L 168.1,195.8 L 178.0,193.6 L 187.8,191.4 L 197.6,189.2 L 207.5,187.0 L 217.3,184.8 L 227.1,182.6 L 236.9,180.4 L 246.8,178.1 L 256.6,175.9 L 266.4,173.7 L 276.3,171.5 L 286.1,169.3 L 295.9,167.1 L 305.8,164.9 L 315.6,162.7 L 325.4,160.5 L 335.3,158.3 L 345.1,156.1 L 354.9,153.9 L 364.7,151.6 L 374.6,149.4 L 384.4,147.2 L 394.2,145.0 L 404.1,142.8 L 413.9,140.6 L 423.7,138.4 L 433.6,136.2 L 443.4,134.0 L 453.2,131.8 L 463.1,129.6 L 472.9,127.4 L 482.7,125.2 L 492.5,123.0 L 502.4,120.7 L 512.2,118.5 L 522.0,116.3 L 531.9,114.1 L 541.7,111.9 L 551.5,109.7 L 561.4,107.5 L 571.2,105.3 L 581.0,103.1 L 590.8,100.9 L 600.7,98.7 L 610.5,96.4 L 620.3,94.2 L 630.2,92.0 L 640.0,89.8 L 640.0,99.8 L 630.2,102.0 L 620.3,104.2 L 610.5,106.4 L 600.7,108.6 L 590.8,110.8 L 581.0,113.0 L 571.2,115.2 L 561.4,117.4 L 551.5,119.6 L 541.7,121.8 L 531.9,124.0 L 522.0,126.3 L 512.2,128.5 L 502.4,130.7 L 492.5,132.9 L 482.7,135.1 L 472.9,137.3 L 463.1,139.5 L 453.2,141.7 L 443.4,143.9 L 433.6,146.1 L 423.7,148.3 L 413.9,150.6 L 404.1,152.8 L 394.2,155.0 L 384.4,157.2 L 374.6,159.4 L 364.7,161.6 L 354.9,163.8 L 345.1,166.0 L 335.3,168.2 L 325.4,170.4 L 315.6,172.6 L 305.8,174.9 L 295.9,177.1 L 286.1,179.3 L 276.3,181.5 L 266.4,183.7 L 256.6,185.9 L 246.8,188.1 L 236.9,190.3 L 227.1,192.5 L 217.3,194.7 L 207.5,196.9 L 197.6,199.2 L 187.8,201.4 L 178.0,203.6 L 168.1,205.8 L 158.3,208.0 L 148.5,210.2 L 138.6,212.4 L 128.8,214.6 L 119.0,216.8 L 109.2,219.0 L 99.3,221.2 L 89.5,223.4 L 79.7,225.6 L 69.8,227.8 L 60.0,230.0 Z" fill="#5080f8" opacity="0.10"/>
 
               <!-- Droite de régression long terme (trend log-linéaire) -->
-              <path d="M 60,210.1 L 640,79.9" stroke="#1cc87a" stroke-width="1.8" stroke-dasharray="6,4" opacity="0.85"/>
+              <path d="M 60,210.1 L 640,79.9" stroke="#22d98a" stroke-width="1.8" stroke-dasharray="6,4" opacity="0.85"/>
 
               <!-- Cours réel MSFT 20 ans (en log) -->
               <path d="M 60.0,191.7 L 69.8,188.7 L 79.7,182.6 L 89.5,182.1 L 99.3,184.4 L 109.2,179.6 L 119.0,184.0 L 128.8,188.4 L 138.6,200.8 L 148.5,195.1 L 158.3,187.0 L 168.1,182.5 L 178.0,185.4 L 187.8,187.9 L 197.6,183.2 L 207.5,187.8 L 217.3,184.5 L 227.1,179.2 L 236.9,180.8 L 246.8,180.5 L 256.6,181.3 L 266.4,173.8 L 276.3,173.2 L 286.1,170.2 L 295.9,166.3 L 305.8,163.0 L 315.6,164.3 L 325.4,163.6 L 335.3,157.8 L 345.1,157.7 L 354.9,157.9 L 364.7,153.2 L 374.6,149.5 L 384.4,146.2 L 394.2,140.6 L 404.1,136.3 L 413.9,132.6 L 423.7,131.4 L 433.6,128.5 L 443.4,122.5 L 453.2,120.1 L 463.1,117.7 L 472.9,109.6 L 482.7,107.9 L 492.5,102.7 L 502.4,97.7 L 512.2,93.6 L 522.0,96.1 L 531.9,97.7 L 541.7,101.8 L 551.5,97.2 L 561.4,94.0 L 571.2,88.5 L 581.0,85.5 L 590.8,84.6 L 600.7,82.8 L 610.5,83.8 L 620.3,78.0 L 630.2,80.1 L 640.0,84.4" stroke="#eeeef8" stroke-width="1.5" fill="none"/>
@@ -743,13 +791,13 @@
               <text x="48"  y="85"   fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">403€</text>
 
               <!-- Labels zones à droite -->
-              <text x="650" y="55"  fill="#f05454" font-family="Courier New,monospace" font-size="10">+3σ</text>
-              <text x="650" y="76"  fill="#f05454" font-family="Inter,sans-serif" font-size="9" font-style="italic">surachat</text>
+              <text x="650" y="55"  fill="#f0556a" font-family="Courier New,monospace" font-size="10">+3σ</text>
+              <text x="650" y="76"  fill="#f0556a" font-family="Inter,sans-serif" font-size="9" font-style="italic">surachat</text>
 
               <text x="650" y="95"  fill="#e8a820" font-family="Courier New,monospace" font-size="10">+1σ tendu</text>
 
-              <text x="650" y="135" fill="#1cc87a" font-family="Courier New,monospace" font-size="10" font-weight="700">★ zone saine</text>
-              <text x="650" y="148" fill="#1cc87a" font-family="Inter,sans-serif" font-size="9" font-style="italic">−0.5σ à +1.5σ</text>
+              <text x="650" y="135" fill="#22d98a" font-family="Courier New,monospace" font-size="10" font-weight="700">★ zone saine</text>
+              <text x="650" y="148" fill="#22d98a" font-family="Inter,sans-serif" font-size="9" font-style="italic">−0.5σ à +1.5σ</text>
 
               <text x="650" y="180" fill="#5080f8" font-family="Courier New,monospace" font-size="10">−1σ décoté</text>
 
@@ -762,7 +810,7 @@
 
               <!-- Légende -->
               <text x="60" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">cours réel MSFT (échelle log)</text>
-              <line x1="200" y1="273" x2="220" y2="273" stroke="#1cc87a" stroke-width="1.8" stroke-dasharray="4,3"/>
+              <line x1="200" y1="273" x2="220" y2="273" stroke="#22d98a" stroke-width="1.8" stroke-dasharray="4,3"/>
               <text x="226" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">droite de régression (+21.7%/an)</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
@@ -800,6 +848,7 @@
         <span class="concept-label">Retracement de Fibonacci (annotation chartiste)</span>
         <span class="concept-example">Rally +85% · zone Fibo 38.2%</span>
         <div class="concept-body">
+          <p class="scoring-note" style="margin-top:0"><em>Optionnel — Fibonacci est une annotation de contexte qui ne compte PAS dans le score. À ignorer en première lecture.</em></p>
           <strong>Le problème que ça résout</strong> : un titre vient de monter de +50%, +100% ou +500%. Maintenant il corrige. <em>Jusqu'où va aller la baisse avant que les acheteurs reviennent ?</em> C'est la question que se posent tous les analystes techniques depuis 100 ans.
           <br><br>
           <strong>L'observation empirique</strong> : les marchés ne corrigent pas n'importe où. Ils s'arrêtent à des niveaux récurrents qui correspondent à des proportions du rally précédent : <em>23.6%, 38.2%, 50%, 61.8%, 78.6%</em>. Ces nombres ne sortent pas du chapeau — ils dérivent d'une séquence mathématique millénaire.
@@ -834,54 +883,54 @@
 
               <!-- ZONES COLORÉES entre les niveaux Fibo (du peak en bas vers swing low) -->
               <!-- Zone 1 : 0% → 23.6% (peak à Fibo 23.6%) — chase / FOMO -->
-              <rect x="50" y="50"  width="380" height="52"  fill="#f05454" opacity="0.10"/>
+              <rect x="50" y="50"  width="380" height="52"  fill="#f0556a" opacity="0.10"/>
               <!-- Zone 2 : 23.6% → 38.2% — pullback léger -->
-              <rect x="50" y="102" width="380" height="32"  fill="#1cc87a" opacity="0.10"/>
+              <rect x="50" y="102" width="380" height="32"  fill="#22d98a" opacity="0.10"/>
               <!-- Zone 3 : 38.2% → 50% — ZONE D'ENTRÉE CHARTISTE STANDARD ★ -->
-              <rect x="50" y="134" width="380" height="26"  fill="#1cc87a" opacity="0.28"/>
+              <rect x="50" y="134" width="380" height="26"  fill="#22d98a" opacity="0.28"/>
               <!-- Zone 4 : 50% → 61.8% — Dow/Gann + transition vers Golden Zone -->
               <rect x="50" y="160" width="380" height="26"  fill="#e8a820" opacity="0.18"/>
               <!-- Zone 5 : 61.8% → 78.6% — Golden Zone ★★ -->
               <rect x="50" y="186" width="380" height="37"  fill="#e8a820" opacity="0.28"/>
               <!-- Zone 6 : 78.6% → 100% — rally annulé / ultime rempart -->
-              <rect x="50" y="223" width="380" height="47"  fill="#f05454" opacity="0.18"/>
+              <rect x="50" y="223" width="380" height="47"  fill="#f0556a" opacity="0.18"/>
 
               <!-- axes -->
               <line x1="50" y1="50"  x2="50"  y2="270" stroke="#33334e" stroke-width="1"/>
               <line x1="50" y1="270" x2="430" y2="270" stroke="#33334e" stroke-width="1"/>
 
               <!-- niveaux Fibo (lignes horizontales pointillées) -->
-              <line x1="50" y1="50"  x2="430" y2="50"  stroke="#1cc87a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.85"/>
+              <line x1="50" y1="50"  x2="430" y2="50"  stroke="#22d98a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.85"/>
               <line x1="50" y1="102" x2="430" y2="102" stroke="#8888a8" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
-              <line x1="50" y1="134" x2="430" y2="134" stroke="#1cc87a" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.7"/>
+              <line x1="50" y1="134" x2="430" y2="134" stroke="#22d98a" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.7"/>
               <line x1="50" y1="160" x2="430" y2="160" stroke="#a07010" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
               <line x1="50" y1="186" x2="430" y2="186" stroke="#e8a820" stroke-width="1.6" stroke-dasharray="4,3" opacity="0.95"/>
               <line x1="50" y1="223" x2="430" y2="223" stroke="#f87a20" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
-              <line x1="50" y1="270" x2="430" y2="270" stroke="#f05454" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+              <line x1="50" y1="270" x2="430" y2="270" stroke="#f0556a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
 
               <!-- price curve : 100€ (départ) → 200€ (peak) → 162€ (correction) -->
               <path d="M 50,270 Q 150,260 220,200 Q 290,130 360,50 L 360,50 Q 380,80 410,135" stroke="#5080f8" stroke-width="2.2" fill="none"/>
-              <circle cx="360" cy="50"  r="4" fill="#1cc87a"/>
+              <circle cx="360" cy="50"  r="4" fill="#22d98a"/>
               <circle cx="410" cy="135" r="5" fill="#e8a820" stroke="#fff" stroke-width="1.5"/>
-              <circle cx="50"  cy="270" r="3" fill="#f05454"/>
+              <circle cx="50"  cy="270" r="3" fill="#f0556a"/>
 
               <!-- LABELS DE ZONE à l'intérieur du chart (taille moyenne, italique) -->
-              <text x="240" y="80"  fill="#f05454" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">chase / FOMO</text>
-              <text x="240" y="123" fill="#1cc87a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">pullback léger</text>
-              <text x="240" y="153" fill="#1cc87a" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">★ zone d'entrée saine</text>
+              <text x="240" y="80"  fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">chase / FOMO</text>
+              <text x="240" y="123" fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">pullback léger</text>
+              <text x="240" y="153" fill="#22d98a" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">★ zone d'entrée saine</text>
               <text x="240" y="178" fill="#a07010" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">démarcation Dow/Gann</text>
               <text x="240" y="210" fill="#e8a820" font-family="Inter,sans-serif" font-size="11" font-weight="700" text-anchor="middle">★★ Golden Zone</text>
-              <text x="240" y="252" fill="#f05454" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">rally annulé / ultime rempart</text>
+              <text x="240" y="252" fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">rally annulé / ultime rempart</text>
 
               <!-- LABELS PRIX À DROITE (compact, deux lignes par niveau si besoin) -->
-              <text x="440" y="54"  fill="#1cc87a" font-family="Courier New,monospace" font-size="11" font-weight="700">200€</text>
-              <text x="478" y="54"  fill="#1cc87a" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing high (peak)</text>
+              <text x="440" y="54"  fill="#22d98a" font-family="Courier New,monospace" font-size="11" font-weight="700">200€</text>
+              <text x="478" y="54"  fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing high (peak)</text>
 
               <text x="440" y="106" fill="#8888a8" font-family="Courier New,monospace" font-size="11">176€</text>
               <text x="478" y="106" fill="#8888a8" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 23.6%</text>
 
-              <text x="440" y="138" fill="#1cc87a" font-family="Courier New,monospace" font-size="11" font-weight="700">162€</text>
-              <text x="478" y="138" fill="#1cc87a" font-family="Inter,sans-serif" font-size="10" font-weight="600">Fibo 38.2% ← cours</text>
+              <text x="440" y="138" fill="#22d98a" font-family="Courier New,monospace" font-size="11" font-weight="700">162€</text>
+              <text x="478" y="138" fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-weight="600">Fibo 38.2% ← cours</text>
 
               <text x="440" y="164" fill="#a07010" font-family="Courier New,monospace" font-size="11">150€</text>
               <text x="478" y="164" fill="#a07010" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 50%</text>
@@ -892,14 +941,14 @@
               <text x="440" y="227" fill="#f87a20" font-family="Courier New,monospace" font-size="11">121€</text>
               <text x="478" y="227" fill="#f87a20" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 78.6%</text>
 
-              <text x="440" y="274" fill="#f05454" font-family="Courier New,monospace" font-size="11" font-weight="700">100€</text>
-              <text x="478" y="274" fill="#f05454" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing low</text>
+              <text x="440" y="274" fill="#f0556a" font-family="Courier New,monospace" font-size="11" font-weight="700">100€</text>
+              <text x="478" y="274" fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing low</text>
 
               <!-- Annotations sur la courbe -->
               <text x="170" y="245" fill="#5080f8" font-family="Inter,sans-serif" font-size="10" font-style="italic">rally +100%</text>
-              <text x="375" y="42"  fill="#1cc87a" font-family="Inter,sans-serif" font-size="10" font-weight="600">peak</text>
+              <text x="375" y="42"  fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-weight="600">peak</text>
               <text x="392" y="155" fill="#e8a820" font-family="Inter,sans-serif" font-size="10" font-style="italic">correction</text>
-              <text x="55"  y="285" fill="#f05454" font-family="Inter,sans-serif" font-size="10">départ rally</text>
+              <text x="55"  y="285" fill="#f0556a" font-family="Inter,sans-serif" font-size="10">départ rally</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.5rem;font-style:italic">
               Le cours à 162€ se situe en <span style="color:var(--green);font-weight:600">zone Fibo 38.2% — zone d'entrée saine selon les chartistes</span>. Si la trend tient, le rebond se fera dans cette bande verte. Sinon le prochain palier est 150€ (50%, démarcation Dow/Gann), puis la <span style="color:var(--gold);font-weight:600">Golden Zone à 138€ (61.8%)</span>. Sous 121€ (78.6%), le rally est techniquement annulé — on entre dans la bande rouge.
@@ -910,7 +959,7 @@
           <strong>Pourquoi ça marche en pratique ?</strong> Pas de magie mathématique mystique. C'est une <em>prophétie auto-réalisatrice</em> : des millions de traders et d'algorithmes surveillent <strong>les mêmes niveaux simultanément</strong>. Quand le prix approche du 61.8%, une masse critique d'ordres d'achat se concentre à cet endroit précis — et cette concentration crée mécaniquement le rebond. Le marché respire, comme un sprinteur entre deux accélérations.
           <br><br>
           <strong>Psychologie de chaque zone</strong> :
-          <br>· <em>0% → 23.6%</em> — Force d'achat quasi hystérique, FOMO. Signal d'une tendance exceptionnellement forte. Pas une zone d'entrée — vous chassez le rally.
+          <br>· <em>0% → 23.6%</em> — Force d'achat quasi hystérique, FOMO. Signal d'une tendance exceptionnellement forte. Pas une zone d'entrée — tu chasses le rally.
           <br>· <em>23.6% → 38.2%</em> — Pullback léger, premier support. Les spéculateurs fragiles purgés, structure haussière intacte.
           <br>· <em>38.2% → 50%</em> — <strong style="color:var(--green)">★ Zone d'entrée chartiste classique</strong>. C'est ici que les acheteurs systématiques se positionnent.
           <br>· <em>50% → 61.8%</em> — Démarcation Dow/Gann. Acheteurs et vendeurs s'affrontent à armes égales.
@@ -930,7 +979,7 @@
           <strong>Drawdown 52w vs Fibonacci — quelle différence ?</strong> Le drawdown regarde la chute en absolu (−10% du top). Fibo regarde la <em>proportion du rally</em> retracée. Concrètement : −10% sur un rally de +20% = Fibo 50% (correction profonde), mais −10% sur un rally de +500% = à peine sous le peak (Fibo &lt; 23.6%). Même chute brute, sens chartiste opposé.
           <br><br>
           <strong>Ce que dit la recherche académique</strong> (pour rester honnête) :
-          <br>· Bhattacharya & Kumar (2014, <em>Expert Systems with Applications</em>) sur 3 marchés actions : <em>relation positive entre la largeur de la zone Fibo et la probabilité d'un rebond</em> — mais cela ne prouve pas une stratégie profitable une fois frais et slippage déduits.
+          <br>· Tsinaslanidis, Guijarro & Voukelatos (2022, <em>Expert Systems with Applications</em>) sur 3 marchés actions : <em>relation positive entre la largeur de la zone Fibo et la probabilité d'un rebond</em> — mais cela ne prouve pas une stratégie profitable une fois frais et slippage (l'écart défavorable entre le prix affiché et le prix réellement obtenu) déduits.
           <br>· <strong>Asymétrie documentée</strong> : les niveaux Fibo tiennent mieux en phase haussière qu'en phase baissière (les violations sont plus fréquentes pendant les chutes). Donc Fibo est un meilleur outil pour identifier des supports en bull market que des résistances en bear market.
           <br>· Aucune étude ne valide une utilisation isolée de Fibo. C'est un outil de <em>confluence</em> — sa valeur vient de la convergence avec d'autres signaux (MM200, volume, niveau psychologique). C'est exactement comme ça qu'on l'utilise dans Signal : annotation en complément du score, pas comme métrique seule.
           <br><br>
@@ -939,14 +988,14 @@
           <br>· Le rally minimum considéré par Signal est <em>+15%</em>. En dessous, le retracement n'est pas chartistement significatif → l'annotation Fibo est absente.
           <br>· Un niveau est une <em>zone</em>, pas une ligne. Le prix peut transpercer brièvement (stop hunting institutionnel) avant de rebondir. Penser en épaisseur, pas en parois de béton.
           <br><br>
-          <strong>Pas dans le scoring</strong> — Fibo est une <em>annotation</em>, pas une métrique notée. C'est du contexte chartiste pour pondérer ton verdict (et celui de Claude). Le scoring quantitatif reste sur le drawdown 52w, plus robuste pour comparer 90 tickers de profils très différents.
+          <strong>Pas dans le scoring</strong> — Fibo est une <em>annotation</em>, pas une métrique notée. C'est du contexte chartiste pour pondérer ton verdict (et celui de Claude). Le scoring quantitatif reste sur le drawdown 52w, plus robuste pour comparer 125 tickers de profils très différents.
         </div>
       </div>
     </div>
   </section>
 
   <!-- SECTION 4 — Comment lire le portefeuille IA -->
-  <section class="section-block">
+  <section class="section-block" id="s4">
     <div class="section-label">04 · Le portefeuille IA</div>
     <h2 class="section-title">Comment lire le portefeuille IA</h2>
     <p class="section-sub">L'IA gère un capital fictif de 20 000 € avec des prix réels. Chaque semaine, elle documente ses décisions et les explique publiquement.</p>
@@ -957,7 +1006,7 @@
         <div class="portfo-htitle">Le bloc Performance vs MSCI World</div>
       </div>
       <div class="portfo-body">
-        Le portefeuille est comparé au MSCI World (~1 500 grandes entreprises, 23 pays développés), via l'ETF EUNL coté en euros. C'est la référence honnête : si la sélection active de Signal n'apporte pas de valeur par rapport à un simple ETF passif, autant avoir l'ETF directement.
+        Le portefeuille est comparé au MSCI World (~1 300 grandes entreprises, 23 pays développés), via l'ETF EUNL coté en euros. C'est la référence honnête : si la sélection active de Signal n'apporte pas de valeur par rapport à un simple ETF passif, autant avoir l'ETF directement.
         <br><br>
         Le bloc affiche, à chaque mise à jour, la performance nette du portefeuille et celle du MSCI World sur la même période. L'écart entre les deux (positif = on bat le marché) se lit visuellement.
         <br><br>
@@ -1014,7 +1063,7 @@
           <li><strong>Maximum 20 %</strong> du capital total sur un seul titre — le renforcement d'une position est bloqué au-delà de ce seuil.</li>
           <li><strong>Zéro ordre en mode panique</strong> — si le CAC 40 chute de plus de 5 % sur une semaine, aucun achat ni vente n'est autorisé. L'urgence perçue est un mauvais conseiller.</li>
           <li><strong>Stop-loss à −15 %</strong> après 90 jours de détention — une position en perte sévère sur la durée est sortie automatiquement, hors mode panique.</li>
-          <li><strong>Stop-loss catastrophe à −25 %</strong> sans condition de durée, qui ignore même le mode panique. Bouche le trou des 89 premiers jours où la règle des 90 jours empêcherait sinon toute sortie.</li>
+          <li><strong>Stop-loss catastrophe à −25 %</strong> sans condition de durée, qui ignore même le mode panique. Il couvre la période avant le seuil des 90 jours, où la règle des 90 jours empêcherait sinon toute sortie.</li>
           <li><strong>Liquidités minimales de 5 %</strong> du capital — sous ce seuil, les achats sont bloqués pour conserver un matelas en cas d'opportunité ou d'urgence.</li>
           <li><strong>Lecture dynamique du signal technique</strong> — un cross MM21/MM200 n'est pas un état figé. Si le screener détecte une transition (death cross qui se résorbe avec pente MM21 redevenue positive, golden cross qui s'affaiblit, rebond mean-reversion sur cross stale), le cross est traité comme ambigu — l'IA ne tranche pas sur ce seul signal et exige un croisement avec les fondamentaux.</li>
           <li><strong>Cross-validation analystes ↔ cours</strong> — sur les titres en zone d'incertitude (score 30-65), si le consensus analystes est très favorable mais le cours dégradé sur 6-12 mois, l'IA suspecte une donnée screener désynchronisée (effet change, M&amp;A récent, désync data) et ne tranche pas uniquement sur le score annuel. Croisement avec le dernier communiqué trimestriel obligatoire.</li>
@@ -1043,8 +1092,8 @@
         Au-delà des règles non négociables (90 jours, 20 %, panique, stop-loss), Signal applique une couche d'enforcement <em>mécanique</em> qui intercepte les décisions de l'IA avant qu'elles n'atteignent le portefeuille :
         <ul style="margin-top:0.6rem">
           <li><strong>Guard weekend</strong> — aucun ordre ACHAT/VENTE n'est appliqué le samedi ou le dimanche. Physiquement aucun broker ne peut exécuter un ordre hors heures de marché, donc Signal reporte mécaniquement toute décision au prochain jour ouvré. Y compris les stop-loss : un crash vendredi soir ne déclenche pas de vente automatique le samedi.</li>
-          <li><strong>R01 concentration graduée</strong> — voir section 05 ci-dessus. Le sizing est réduit automatiquement quand un cluster sectoriel dépasse 30 %, blocage strict à 65 %.</li>
-          <li><strong>R03 liquidités minimales</strong> — sous 5 % de cash, tout achat est bloqué pour préserver une marge de manœuvre face aux imprévus.</li>
+          <li><strong>Concentration sectorielle graduée</strong> — la règle de concentration sectorielle (détaillée plus bas, §5). Le sizing est réduit automatiquement quand un cluster sectoriel dépasse 30 %, blocage strict à 65 %.</li>
+          <li><strong>Liquidités minimales</strong> — sous 5 % de cash, tout achat est bloqué pour préserver une marge de manœuvre face aux imprévus.</li>
         </ul>
         <strong>decisions_bloquees</strong> : quand l'IA propose une décision que ces garde-fous rejettent, elle est enregistrée publiquement (avec sa raison originale et le motif du blocage) dans la section "Transparence du modèle" sur la page portefeuille. C'est ce qui évite la dissonance "l'IA dit qu'elle a acheté X" alors que le journal ne montre aucun ordre — toutes les décisions rejetées sont visibles.
         <br><br>
@@ -1054,7 +1103,7 @@
   </section>
 
   <!-- SECTION 5 — Friction réelle (frais + fiscalité) -->
-  <section class="section-block">
+  <section class="section-block" id="s5">
     <div class="section-label">05 · Friction réelle</div>
     <h2 class="section-title">Frais, impôts, et ce qu'il reste vraiment</h2>
     <p class="section-sub">La plupart des simulations de portefeuille affichent leur performance brute, sans frais ni fiscalité. C'est trompeur — un investisseur retail français a deux types de friction structurelle qui réduisent significativement le rendement réel. Signal les modélise explicitement depuis le 23 mai 2026.</p>
@@ -1065,11 +1114,11 @@
         <div class="portfo-htitle">Frais de transaction — 15 bps round-trip</div>
       </div>
       <div class="portfo-body">
-        Chaque achat ET chaque vente est facturé par le courtier + subit du slippage sur le carnet d'ordres. Signal applique <strong>7.5 bps one-way</strong>, soit <strong>15 bps round-trip</strong> (0.15% du montant pour un aller-retour complet). C'est l'ordre de grandeur réaliste retail sur courtiers européens : 2-5 bps de frais broker (Saxo, Bourse Direct, DEGIRO sur actions liquides) + 3-8 bps de slippage sur ordres market.
+        Chaque achat ET chaque vente est facturé par le courtier + subit du slippage sur le carnet d'ordres. Signal applique <strong>7.5 bps one-way</strong> (1 bp = 0,01 % ; 15 bps = 0,15 %), soit <strong>15 bps round-trip</strong> (0.15% du montant pour un aller-retour complet). C'est l'ordre de grandeur réaliste retail sur courtiers européens : 2-5 bps de frais broker (Saxo, Bourse Direct, DEGIRO sur actions liquides) + 3-8 bps de slippage sur ordres market.
         <br><br>
         Concrètement, un achat de 1 000 € coûte 0.75 € de frais one-way ; un round-trip coûte 1.50 €. Sur 35 transactions cumulées depuis le démarrage, le portefeuille a payé environ 28 € de frais — pas énorme, mais non négligeable sur le long terme.
         <br><br>
-        Référence : Frazzini, Israel, Moskowitz (2018) <em>"Trading Costs"</em>, AQR Working Paper — montre que les coûts de transaction érodent 2-4pp/an d'alpha gross pour un investisseur retail moyennement actif.
+        Référence : Frazzini, Israel, Moskowitz (2018) <em>"Trading Costs"</em>, AQR Working Paper. Les coûts de transaction peuvent éroder 2-4pp/an d'alpha (la performance en plus ou en moins vs l'indice de référence) pour un investisseur retail moyennement actif <em>(ordre de grandeur extrapolé ; le papier original porte sur de gros gérants institutionnels et conclut justement à des coûts plus faibles qu'estimé à cette échelle)</em>.
       </div>
     </div>
 
@@ -1111,14 +1160,14 @@
         <br><br>
         Le tooltip ⓘ de la carte affiche en temps réel ce qu'on aurait <em>réellement</em> après cession totale : capital actuel <strong>moins</strong> les frais de vente sur chaque position <strong>moins</strong> le PFU 30 % sur chaque plus-value latente. C'est ce qu'on appelle <code>capital_post_liquidation</code> dans les données.
         <br><br>
-        <strong>Exemple chiffré du portefeuille au 23 mai 2026</strong> : valeur totale 23 512 € (= +17.6 % brut), mais après liquidation virtuelle on aurait 22 115 € (= +10.6 % net). L'écart de 1 397 € représente l'impôt latent + frais de sortie. Le fisc gagne 1 382 € si on liquide. La pédagogie de cette distinction est essentielle : un portefeuille à +18 % brut peut "valoir" structurellement +11 % en cash réel.
+        <strong>Exemple chiffré du portefeuille au 23 mai 2026</strong> : valeur totale 23 512 € (= +17.6 % brut), mais après liquidation virtuelle on aurait 22 115 € (= +10.6 % net). L'écart de 1 397 € représente l'impôt latent + frais de sortie. Le fisc gagne 1 397 € si on liquide. La pédagogie de cette distinction est essentielle : un portefeuille à +18 % brut peut "valoir" structurellement +11 % en cash réel.
       </div>
     </div>
 
     <div class="portfo-block">
       <div class="portfo-header">
         <div class="portfo-accent" style="background:var(--gold)"></div>
-        <div class="portfo-htitle">Concentration sectorielle graduée (R01 soft penalty)</div>
+        <div class="portfo-htitle">Concentration sectorielle graduée (plafond souple)</div>
       </div>
       <div class="portfo-body">
         Pour éviter qu'un secteur ne phagocyte le portefeuille, une règle de concentration s'applique au sizing automatiquement. Initialement binaire (blocage strict dès qu'un cluster dépasse 30 % du capital), elle est devenue <strong>graduée</strong> depuis le 23 mai pour permettre des achats exceptionnels dans un secteur saturé :
@@ -1131,13 +1180,33 @@
         Concrètement, le cluster Tech &amp; IA actuellement à 58.8 % du portefeuille est en régime <em>soft</em> avec sizing factor 0.18 — l'IA peut quand même proposer un achat tech à conviction forte (taille effective ~3.5 % du capital), mais devra le justifier solidement.
       </div>
     </div>
+
+    <div class="portfo-block">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--green)"></div>
+        <div class="portfo-htitle">PEA ou CTO : ça change tout côté impôts</div>
+      </div>
+      <div class="portfo-body">
+        Le portefeuille Signal est modélisé dans un <strong>CTO</strong> (compte-titres ordinaire) — le cas le plus taxé. C'est volontaire : ne pas surévaluer la performance nette affichée.
+        <ul style="margin-top:0.6rem">
+          <li><strong>CTO</strong> : accès au monde entier, aucun plafond. Gains taxés au <strong>PFU de 30 %</strong> (12,8 % d'impôt sur le revenu + 17,2 % de prélèvements sociaux, art. 200 A du CGI).</li>
+          <li><strong>PEA</strong> : réservé aux actions de l'Union européenne, plafonné à 150 000 € de versements. Avantage décisif : après <strong>5 ans de détention</strong>, les gains sont exonérés d'impôt sur le revenu — il ne reste que les 17,2 % de prélèvements sociaux. Sur une même plus-value, un PEA de plus de 5 ans est donc presque <strong>deux fois moins taxé</strong> qu'un CTO.</li>
+          <li><strong>La limite concrète</strong> : la plupart des valeurs suivies par Signal sont américaines, donc non éligibles au PEA ; une réplication réelle en PEA se limiterait aux titres européens de la liste.</li>
+        </ul>
+        <p style="margin-top:0.6rem"><em>Information générale, pas un conseil fiscal. Vérifie le barème en vigueur — les prélèvements sociaux ont évolué en 2026.</em></p>
+      </div>
+    </div>
   </section>
 
   <!-- SECTION 6 — Comment Signal se mesure (backtest, régimes, Deflated Sharpe) -->
-  <section class="section-block">
+  <section class="section-block" id="s6">
     <div class="section-label">06 · Méthodologie de mesure</div>
     <h2 class="section-title">Comment Signal se mesure honnêtement</h2>
     <p class="section-sub">Toute stratégie active doit pouvoir démontrer qu'elle apporte de la valeur par rapport à un benchmark passif — surtout après les frais et la fiscalité. Voici les outils qui font cette démonstration de manière rigoureuse, code source ouvert sur GitHub.</p>
+
+    <div class="scoring-note">
+      <strong>En clair :</strong> on a rejoué la stratégie sur ~6 ans de marché passé pour vérifier qu'elle aurait battu un simple ETF, frais et impôts déduits. Les détails ci-dessous sont pour les curieux et les développeurs.
+    </div>
 
     <div class="portfo-block" style="margin-bottom:12px">
       <div class="portfo-header">
@@ -1147,13 +1216,13 @@
       <div class="portfo-body">
         Le script <code>backtest.py</code> rejoue mécaniquement la stratégie Signal (scoring 100 pts + règles d'enforcement) sur 6 ans d'historique 2019-2024, avec rebalancement hebdomadaire et anti look-ahead bias (à chaque date, seules les données antérieures sont utilisées pour scorer).
         <br><br>
-        Univers : 53 tickers du S&amp;P 100 US, benchmark SPY (S&amp;P 500 ETF). Limitation honnête : 60 % du score Signal (Fondamentaux + Analystes) n'est pas testé sur cette période car yfinance n'expose pas les fondamentaux historiques point-in-time — le backtest mesure principalement la composante technique (momentum, MM21/MM200, RSI, régression long terme, valorisation 52w).
+        Univers : 53 tickers du S&amp;P 100 US (un sous-ensemble historique de 53 valeurs US, contre 125 dans l'univers actuel), benchmark SPY (S&amp;P 500 ETF). Limitation honnête : 60 % du score Signal (Fondamentaux + Analystes) n'est pas testé sur cette période car yfinance n'expose pas les fondamentaux historiques point-in-time — le backtest mesure principalement la composante technique (momentum, MM21/MM200, RSI, régression long terme, valorisation 52w).
         <br><br>
         Trois variants sont disponibles via <code>backtest_compare.py</code> :
         <ul style="margin-top:0.6rem">
           <li><strong>baseline</strong> : sans coûts, sans PFU — référence académique brute</li>
           <li><strong>costs_only</strong> : ajoute frais 15 bps + PFU 30 % — mesure la friction réelle</li>
-          <li><strong>costs_vix</strong> : ajoute VIX dampener (testé puis désactivé) — mesure si la défensivité régime aide</li>
+          <li><strong>costs_vix</strong> : ajoute VIX dampener (testé puis désactivé) — mesure si la défensivité régime aide (sur l'indicateur VIX lui-même, voir §4)</li>
         </ul>
       </div>
     </div>
@@ -1225,7 +1294,7 @@
   </section>
 
   <!-- SECTION 7 — Si tu veux investir toi-même -->
-  <section class="section-block">
+  <section class="section-block" id="s7">
     <div class="section-label">07 · Principes</div>
     <h2 class="section-title">Si tu veux investir toi-même</h2>
     <p class="section-sub">Signal n'est pas un conseiller financier. Mais si ces pages t'ont donné envie d'aller plus loin, voici quelques principes solides — ceux sur lesquels presque tous les investisseurs sérieux s'accordent.</p>
@@ -1234,21 +1303,21 @@
       <div class="advice-card ac-orange">
         <div class="advice-title">N'investis que ce que tu peux perdre</div>
         <div class="advice-body">
-          Les marchés baissent. Parfois beaucoup, parfois longtemps — les crises de 2000, 2008, 2020 ont vu des replis de 30 à 50 %. Une somme dont tu auras besoin dans moins de trois ans ne devrait pas être en bourse. Si une baisse de 30 % de ton portefeuille changerait quelque chose à ta vie quotidienne, c'est que tu investis plus que tu ne peux te le permettre.
+          Les marchés baissent. Parfois beaucoup, parfois longtemps — les crises de 2000, 2008, 2020 ont vu des replis de 30 à près de 60 % (jusqu'à −57 % en 2008). Une somme dont tu auras besoin dans moins de trois ans ne devrait pas être en bourse. Si une baisse de 30 % de ton portefeuille changerait quelque chose à ta vie quotidienne, c'est que tu investis plus que tu ne peux te le permettre.
         </div>
       </div>
 
       <div class="advice-card ac-blue">
         <div class="advice-title">L'ETF mondial bat la majorité des gérants actifs</div>
         <div class="advice-body">
-          Les études SPIVA (S&P Global) le mesurent chaque année : sur 10 ans, environ 85 % des fonds actifs professionnels font moins bien que leur indice de référence. Un ETF MSCI World à 0,2 % de frais annuels est statistiquement un meilleur point de départ que le stock picking — même quand celui-ci est fait par des équipes payées des millions pour ça. C'est contre-intuitif mais documenté depuis des décennies. Signal essaie de faire mieux que cette baseline : c'est ce qui rend l'expérience honnête, et la barre est très haute.
+          Comme vu en intro, ~85 % des fonds actifs professionnels font moins bien que leur indice de référence sur 10 ans (études SPIVA, S&P Global). Un ETF MSCI World à 0,2 % de frais annuels est statistiquement un meilleur point de départ que le stock picking — même quand celui-ci est fait par des équipes payées des millions pour ça. C'est contre-intuitif mais documenté depuis des décennies. Signal essaie de faire mieux que cette baseline : c'est ce qui rend l'expérience honnête, et la barre est très haute.
         </div>
       </div>
 
       <div class="advice-card ac-green">
         <div class="advice-title">Le temps est ton meilleur allié</div>
         <div class="advice-body">
-          Le MSCI World affiche environ +8 % par an en moyenne historique sur 30 ans (dividendes réinvestis, en USD). Avec l'effet des intérêts composés, 10 000 € investis pendant 20 ans deviennent ~46 000 € sans rien faire d'autre que d'attendre. Pendant 30 ans, ~100 000 €.
+          Le MSCI World affiche environ +8 % par an en moyenne historique sur 30 ans (dividendes réinvestis, en USD). Avec l'effet des intérêts composés, 10 000 € investis pendant 20 ans deviennent ~46 000 € sans rien faire d'autre que d'attendre. Pendant 30 ans, ~100 000 € <em>(chiffres bruts en dollars, avant inflation ; en pouvoir d'achat réel, compte plutôt ~5-6 %/an)</em>.
           <br><br>
           La patience — rester investi pendant les corrections, ne pas paniquer aux krachs, ne pas trader — surperforme la grande majorité des stratégies actives. Le pire ennemi du rendement long terme, c'est le réflexe de vendre au mauvais moment.
         </div>
@@ -1265,6 +1334,33 @@
     <div class="resources-block">
       <strong>Aller plus loin →</strong> JL Collins <em>The Simple Path to Wealth</em> &nbsp;·&nbsp; William Bernstein <em>The Four Pillars of Investing</em> &nbsp;·&nbsp; MRV (YouTube, FR) &nbsp;·&nbsp; Finary (FR) &nbsp;·&nbsp; Investopedia (EN)
     </div>
+
+    <div class="portfo-block" style="margin-top:1rem">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--gold)"></div>
+        <div class="portfo-htitle">Mini-glossaire</div>
+      </div>
+      <div class="portfo-body">
+        Les termes techniques croisés au fil de la page, en une ligne chacun :
+        <ul style="margin-top:0.6rem">
+          <li><strong>bps</strong> — 1 bp = 0,01 % ; 15 bps = 0,15 %.</li>
+          <li><strong>alpha</strong> — la performance en plus ou en moins vs l'indice de référence.</li>
+          <li><strong>slippage</strong> — l'écart défavorable entre prix affiché et prix réellement obtenu.</li>
+          <li><strong>ETF</strong> — fonds coté qu'on achète comme une action, réplique un indice.</li>
+          <li><strong>CAGR</strong> — taux de croissance annuel moyen (« pp » = point de pourcentage).</li>
+          <li><strong>mark-to-market</strong> — valoriser au prix de marché actuel.</li>
+          <li><strong>Sharpe ratio</strong> — rendement rapporté au risque.</li>
+          <li><strong>Deflated Sharpe</strong> — version sévère qui pénalise le sur-test de réglages.</li>
+          <li><strong>ADR</strong> — action étrangère cotée aux US via certificat.</li>
+          <li><strong>REIT</strong> — foncière cotée / immobilier.</li>
+          <li><strong>capitalisation flottante</strong> — la part des actions réellement échangeable.</li>
+          <li><strong>buy &amp; hold</strong> — acheter et conserver, sans trader.</li>
+          <li><strong>mean-reversion</strong> — pari qu'un cours très éloigné de sa moyenne y revient.</li>
+          <li><strong>drawdown</strong> — baisse depuis le plus haut.</li>
+          <li><strong>round-trip / one-way</strong> — aller-retour / sens unique.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- Disclaimer final -->
@@ -1279,6 +1375,8 @@
   <div class="footer-right">Bêta</div>
 </footer>
 
+<script src="signal-fx.js"></script>
+<script src="signal-toc.js"></script>
 <script>
   // ── Scroll header ──
   const hdr = document.getElementById('site-header');
@@ -1287,12 +1385,6 @@
     else hdr.classList.remove('scrolled');
   };
   window.addEventListener('scroll', onScroll, { passive: true });
-
-  // ── Parallax stars ──
-  const stars = document.querySelector('.hc-stars');
-  window.addEventListener('scroll', () => {
-    if (stars) stars.style.transform = `translateY(${window.scrollY * 0.12}px)`;
-  }, { passive: true });
 </script>
 </body>
 </html>
