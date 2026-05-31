@@ -146,7 +146,7 @@
       "score": 83,
       "stars": 4,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
         "momentum": 33,
         "momentum_raw": 33,
@@ -589,7 +589,7 @@
       "score": 77,
       "stars": 4,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "momentum": 26,
         "momentum_raw": 26,
@@ -978,7 +978,7 @@
       "score": 74,
       "stars": 3,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "momentum": 19,
         "momentum_raw": 19,
@@ -1032,7 +1032,7 @@
       "score": 74,
       "stars": 3,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
         "momentum": 24,
         "momentum_raw": 24,
@@ -1099,7 +1099,7 @@
       "score": 73,
       "stars": 3,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "momentum": 23,
         "momentum_raw": 23,
@@ -1220,7 +1220,7 @@
       "score": 72,
       "stars": 3,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
         "momentum": 27,
         "momentum_raw": 27,
@@ -1287,7 +1287,7 @@
       "score": 71,
       "stars": 3,
       "badge": "EU",
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "momentum": 38,
         "momentum_raw": 38,
@@ -1395,7 +1395,7 @@
       "score": 71,
       "stars": 3,
       "badge": "EU",
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "momentum": 28,
         "momentum_raw": 28,
@@ -1462,7 +1462,7 @@
       "score": 71,
       "stars": 3,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "momentum": 18,
         "momentum_raw": 18,
@@ -1529,7 +1529,7 @@
       "score": 70,
       "stars": 3,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "momentum": 20,
         "momentum_raw": 20,
@@ -1576,83 +1576,7 @@
       "rank": 25
     }
   ],
-  "changelog": [
-    {
-      "action": "in",
-      "ticker": "TXN",
-      "name": "Texas Instruments Inco",
-      "score": 77,
-      "reason": "Score 77/100 — légèrement au-dessus de sa régression (+1.8σ), RSI en zone favorable, pullback sain -5.9% sous le top 52w (zone d'entrée idéale, < Fibo 23.6%), croissance CA solide (19%/an), marges excellentes (29%), consensus analystes positif."
-    },
-    {
-      "action": "in",
-      "ticker": "INTU",
-      "name": "Intuit Inc.",
-      "score": 74,
-      "reason": "Score 74/100 — prix sous sa droite de régression (-4.5σ), RSI en zone favorable, ⚠ -58.7% sous le top 52w — trend probablement cassée, croissance CA modérée (10%/an), marges excellentes (22%), consensus analystes très favorable."
-    },
-    {
-      "action": "in",
-      "ticker": "GOOGL",
-      "name": "Alphabet Inc.",
-      "score": 73,
-      "reason": "Score 73/100 — prix en surachat régression (+2.8σ) — prudence, RSI en zone favorable, pullback sain -5.5% sous le top 52w (zone d'entrée idéale, < Fibo 23.6%), croissance CA solide (22%/an), marges excellentes (38%), consensus analystes très favorable."
-    },
-    {
-      "action": "in",
-      "ticker": "CS.PA",
-      "name": "AXA",
-      "score": 71,
-      "reason": "Score 71/100 — Golden Cross récent (29j), légèrement au-dessus de sa régression (+1.2σ), RSI en zone favorable, ⚠ près du top 52w (-3.0%) — chase de rally pénalisée, marges positives, consensus analystes très favorable."
-    },
-    {
-      "action": "in",
-      "ticker": "VWS.CO",
-      "name": "Vestas Wind Systems A/",
-      "score": 71,
-      "reason": "Score 71/100 — cours proche de sa droite de régression, RSI en zone favorable, correction modérée -10.5% sous le top (< Fibo 23.6%), croissance CA modérée (14%/an), marges positives, consensus analystes positif."
-    },
-    {
-      "action": "out",
-      "ticker": "AVGO",
-      "name": "Broadcom Inc.",
-      "score": 85,
-      "new_score": 67,
-      "reason": "Score en forte baisse : 85 → 67 (-18 pts) · Momentum quasi-nul (14/40) — tendance qui s'essouffle · Cours largement au-dessus de sa trajectoire long terme (+2.2σ) — risque de correction vers la moyenne."
-    },
-    {
-      "action": "out",
-      "ticker": "NFLX",
-      "name": "Netflix, Inc.",
-      "score": 74,
-      "new_score": 69,
-      "reason": "Score en baisse : 74 → 69 (-5 pts) · Death Cross confirmé (133j) — régime baissier persistant · Momentum quasi-nul (14/40) — tendance qui s'essouffle."
-    },
-    {
-      "action": "out",
-      "ticker": "NOW",
-      "name": "ServiceNow, Inc.",
-      "score": 74,
-      "new_score": 59,
-      "reason": "Score en forte baisse : 74 → 59 (-15 pts) · nuance : rebond mean-reversion en cours, mais score global insuffisant pour rester top 25 · Momentum quasi-nul (9/40) — tendance qui s'essouffle."
-    },
-    {
-      "action": "out",
-      "ticker": "MSFT",
-      "name": "Microsoft Corporation",
-      "score": 73,
-      "new_score": 65,
-      "reason": "Score en forte baisse : 73 → 65 (-8 pts) · Death Cross confirmé (93j) — régime baissier persistant · Momentum quasi-nul (12/40) — tendance qui s'essouffle."
-    },
-    {
-      "action": "out",
-      "ticker": "NET",
-      "name": "Cloudflare, Inc.",
-      "score": 73,
-      "new_score": 67,
-      "reason": "Score en baisse : 73 → 67 (-6 pts)."
-    }
-  ],
+  "changelog": [],
   "concentration_alerts": [
     "Technologie : 11 titres sur 25",
     "Finance : 7 titres sur 25",

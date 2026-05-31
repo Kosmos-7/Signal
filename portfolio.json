@@ -1308,8 +1308,8 @@
     }
   ],
   "biais_detectes": [
-    "Action bias — tentation d'agir sur les positions en légère perte (ETN, JPM, DB1.DE) sans signal fondamental qui le justifie",
-    "Recency bias — biais de surestimation des performances récentes d'ASML/NVDA pour relativiser la solidité de l'alpha global"
+    "Action bias potentiel : avec 19 positions ouvertes et des liquidités faibles, la tentation de 'faire quelque chose' est réelle — mais les règles mécaniques (R01 liquidités, R01 cluster Tech) font le travail de discipline à la place de la volonté.",
+    "FOMO sur FSLR/NVDA : deux setups techniquement attrayants bloqués par des règles légitimes — les nommer explicitement évite de les rationaliser après coup."
   ],
   "regles_actives": [
     {
@@ -1339,7 +1339,7 @@
       "date": "2026-05-29",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNVm1lQTd2R3dIUWlPenlFSkpzM0tiUC1RcGQ1eTVTNWY2blplYnpiaUVxc0lzNXZ0TE1NbjlwYXotcE1GVEktaHJVMmFseEt3aU45dThXQldxb29XRDBzaXBibkVWVFh6T3Q2TnpYWnMxUFAzTEo3UFI1NFdjaVFGNTB1R2N2R0lTWEtNUEo2NFNsbHUxUnpfSFNtUThGNW9Ib2cyd3NJN2hpekJX?oc=5",
-      "resume_fr": "Les États-Unis imposent de nouvelles sanctions liées à l'Iran dans le cadre de la lutte contre le terrorisme."
+      "resume_fr": "Les États-Unis ont imposé de nouvelles sanctions contre l'Iran dans le cadre de la lutte contre le financement du terrorisme."
     },
     {
       "headline": "ECB chief economist sees persistent impact on inflation from Iran war - Reuters",
@@ -1347,7 +1347,15 @@
       "date": "2026-05-28",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOcW5KRWdFekZoajhnYi15YnZoVUdtbGlXOElzZ0laVlJaOXBWZ25NT1BuVHlRSGN5Tk9ZTkd1M3B1b0h2bkdaa0dMNTZkZk9YbEhPYlpmYUw1X2EtcmhMcHR4akV1akNGSWxDQkUxQVllZnJmQTNxWmY5VVNBT0pVVmdCcW10QmN0NXVITTRaU0tzY3lwamc3aDFoajdSQ0J1VlhTczVJZHIyV2ZFMm9Rak13?oc=5",
-      "resume_fr": "L'économiste en chef de la BCE avertit que le conflit en Iran aura un impact inflationniste durable en zone euro."
+      "resume_fr": "L'économiste en chef de la BCE estime que la guerre en Iran aura un impact inflationniste durable sur l'économie européenne."
+    },
+    {
+      "headline": "In deeply red Oklahoma, minimum wage’s biggest 2026 election cycle fight is about to be decided",
+      "summary": "Oklahomans will soon vote on a measure to double the minimum wage, an election issue that may reflect the economic mood and inflation outlook across parties.",
+      "date": "2026-05-31",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/05/31/oklahoma-minimum-wage-2026-election-vote-economy-inflation.html",
+      "resume_fr": "Les Oklahomans voteront prochainement sur un doublement du salaire minimum, scrutin perçu comme un indicateur du climat économique américain."
     },
     {
       "headline": "Investors and labels are buying into the growing South Asian music business in the U.S.",
@@ -1355,7 +1363,7 @@
       "date": "2026-05-30",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/05/30/south-asian-music-warner-records-5-junction.html",
-      "resume_fr": "Warner Music Group mise sur le marché de la musique sud-asiatique aux États-Unis via sa nouvelle entité 5 Junction."
+      "resume_fr": "Warner Music Group investit dans la musique sud-asiatique aux États-Unis via un nouveau label, 5 Junction."
     },
     {
       "headline": "Bessent says ‘we’ll see’ on potential Iran sanctions relief",
@@ -1363,7 +1371,7 @@
       "date": "2026-05-30",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-05-29/bessent-says-we-ll-see-on-iran-sanctions-relief-as-deal-awaits",
-      "resume_fr": "Le secrétaire au Trésor Bessent laisse la porte ouverte à un possible allègement des sanctions contre l'Iran, sans s'engager."
+      "resume_fr": "Le secrétaire au Trésor Bessent se montre prudent sur un éventuel allègement des sanctions contre l'Iran, conditionnées à un accord nucléaire."
     },
     {
       "headline": "World’s appetite for AI makes China less afraid of stronger Yuan",
@@ -1371,14 +1379,14 @@
       "date": "2026-05-28",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-05-28/world-s-appetite-for-ai-makes-china-less-afraid-of-stronger-yuan",
-      "resume_fr": "Le boom mondial de l'IA stimule les exportations chinoises et rend Pékin plus à l'aise avec une appréciation du yuan."
+      "resume_fr": "Le boom mondial des investissements en IA stimule les exportations chinoises et rend Pékin plus à l'aise avec une appréciation du yuan."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Semaine du 26 au 30 mai 2026 — calme trompeur. Le VIX à 15.3 et un MSCI World quasi-flat (-0.1% sur la semaine) cachent une actualité géopolitique qui mérite attention : l'économiste en chef de la BCE a explicitement évoqué un impact inflationniste persistant lié au conflit en Iran, tandis que Washington impose de nouvelles sanctions anti-terroristes liées à Téhéran. Bessent, lui, joue l'ambiguïté avec un 'we'll see' sur un éventuel allègement. En clair : un risque de prime géopolitique sur l'énergie qui n'est pas encore pricé par les marchés — et qui pourrait compliquer la trajectoire de désinflation attendue par la BCE.\n\nPour Signal, la semaine est une non-semaine au sens décisionnel : liquidités à 971€ (sous le plancher des 5% du capital) et cluster Tech&IA à 63% bloquent tout achat. Le portefeuille affiche une performance nette cumulée de +18.93% depuis la création, avec un alpha de +8.06 points de pourcentage sur le MSCI World YTD. Ces chiffres sont solides, mais ils reposent encore beaucoup sur les deux locomotives ASML (+112.9% depuis l'achat en janvier) et NVDA (+82.8%).\n\nMéthodologiquement, trois points à noter cette semaine. D'abord, FSLR affiche un Golden Cross Day-2 avec pente MM21 à +9.6% — le meilleur setup du tableau — mais val=0/5 (cours au sommet 52 semaines) et les contraintes de liquidités et de concentration sectorielle rendent l'entrée impossible. Frustrant, assumé. Ensuite, ENR.DE à -9.7% entre en surveillance renforcée : pas de stop-loss déclenché (seuil catastrophe à -25%), pas de signal fondamental négatif documenté, R01 s'applique — mais on approche d'un territoire qui demandera une réévaluation active d'ici 60 jours. Enfin, META en Death Cross depuis 133j reste en portefeuille avec un z=+0.3σ proche de sa régression : la position est dans la bande de confort, pas de raison d'agir.\n\nLe biais à surveiller cette semaine : l'action bias. Avec un marché calme et des positions en légère dérive négative (ETN, JPM, DB1.DE), l'instinct est d'agir pour 'faire quelque chose'. La discipline ici est précisément de ne pas agir — l'inaction est une décision, rappelle le mantra #1. Aucune des corrections observées ne justifie une sortie anticipée sur position < 90j sans signal fondamental documenté.\n\nSurveillance pour la semaine à venir : l'évolution du discours BCE sur l'inflation (le conflit Iran peut modifier la trajectoire des taux), la reconstitution des liquidités via dividendes ou arbitrage naturel, et ENR.DE / ETN dont les performances devront être re-évaluées si elles continuent de dériver. Si les liquidités repassent au-dessus de 5%, FSLR (en attente d'un pullback à val≥3/5) et AMZN (score 83, Golden Cross 26j, z=+0.2σ propre) seront en tête de liste.",
+    "analyse_macro": "Fin mai 2026, et les marchés naviguent entre deux eaux : le VIX à 15.3 signale une sérénité presque suspecte, pendant que l'économiste en chef de la BCE avertit que la guerre en Iran laissera des traces persistantes sur l'inflation européenne — pas une parenthèse, une cicatrice.\n\nConcrètement pour Signal cette semaine : le portefeuille reste solide à +18.93% net depuis la création (capital à 23 786€), avec un écart au benchmark MSCI World de +8.06 points de pourcentage. Le MSCI lui-même ne bouge presque plus (+10.9% YTD, -0.1% sur la semaine) — ce qui rend l'écart d'autant plus significatif à ce stade. La mauvaise nouvelle du jour : les liquidités tombent à 4.1% du capital (971€), soit sous le seuil de 5% fixé par R01. Résultat mécanique : zéro achat possible cette semaine.\n\nC'est frustrant car la watchlist propose quelques setups intéressants — FSLR notamment, avec un Golden Cross Day-2 (fenêtre signal optimale) et une pente MM21 à +9.6% qui suggère un momentum en accélération. Mais la règle de liquidités minimales existe précisément pour éviter de se retrouver à sec en cas de coup dur, et on ne négocie pas avec les règles de sécurité. Même chose pour NVDA (#1 watchlist, score 91) ou AMZN (#3, score 83) : le cluster Tech&IA à 63% du portefeuille bloquerait de toute façon tout renforcement sectoriel supplémentaire via le soft cap.\n\nLe seul point de surveillance active cette semaine : ENR.DE à -9.7% après 31 jours. On reste dans les clous (stop-loss automatique = -25% sans condition, -15% après 90j), mais la trajectoire mérite attention. Si le titre continue de dériver sur les prochaines semaines sans catalyseur de retournement, la question d'une sortie anticipée se posera avec un vrai signal fondamental documenté — pas juste une lecture de la perte.\n\nPour la semaine à venir : surveiller la reconstitution des liquidités (dividendes éventuels, ou simplement le passage du temps si aucune sortie n'est envisagée), l'évolution du conflit Iran et ses effets sur l'inflation BCE, et la trajectoire de ENR.DE et ETN qui cumulent respectivement -9.7% et -7.4% depuis l'achat il y a 31 jours.",
     "conviction_globale": "neutre",
-    "message_utilisateurs": "Semaine sans transaction cette semaine — et c'est une décision à part entière. Les liquidités disponibles (971€) sont sous le seuil plancher de 5% du capital, et le cluster Tech & IA à 63% plafonne tout nouvel achat dans le secteur. Aucune vente n'est justifiée non plus : toutes les positions en perte modérée (JPM -5%, ETN -7.4%, ENR.DE -9.7%, DB1.DE -5.5%) restent au-dessus des seuils de stop-loss et ont moins de 90 jours de détention — R01 s'applique strictement. Le meilleur setup de la semaine était FSLR avec un Golden Cross Day-2 et une pente MM21 exceptionnelle à +9.6% — mais val=0/5 (cours au sommet 52 semaines) et les contraintes de concentration rendaient l'entrée à la fois mal timée et bloquée. La discipline, parfois, c'est regarder passer le train. Le portefeuille cumulé reste à +18.93% net depuis la création avec +8.06pp d'alpha sur le MSCI World — on ne casse pas ce qui fonctionne.",
-    "nb_decisions": 4
+    "message_utilisateurs": "Semaine calme côté décisions, agitée côté contraintes. Les liquidités sont tombées à 4.1% du capital — sous le seuil minimal de 5% — ce qui bloque mécaniquement tout nouvel achat cette semaine, indépendamment de la qualité des setups disponibles. La watchlist proposait pourtant des opportunités intéressantes (FSLR Day-2 Golden Cross, NVDA #1 avec score 91), mais la règle est la règle.\n\nLe portefeuille affiche +18.93% net depuis la création avec un écart de +8.06pp sur le MSCI World — des chiffres solides qu'on ne mettra pas en danger par impatience. Trois positions méritent une surveillance rapprochée : ENR.DE (-9.7%), ETN (-7.4%) et JPM (-5.0%), toutes détenues depuis 31 jours. Elles restent bien au-dessus des seuils stop-loss, mais si la dégradation se poursuit sans catalyseur positif, la question d'une sortie anticipée se reposera à 60-90 jours avec un signal fondamental documenté.\n\nPrioritaire pour les prochaines semaines : reconstituer un coussin de liquidités suffisant (>5%) pour pouvoir saisir les opportunités qui se présenteront, notamment si des rotations sectorielles créent des fenêtres d'entrée en dehors du cluster Tech&IA déjà saturé à 63%.",
+    "nb_decisions": 3
   },
   "performance_history": [
     {
