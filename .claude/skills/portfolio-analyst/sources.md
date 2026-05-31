@@ -53,14 +53,25 @@ Citations vérifiables des concepts utilisés. Hiérarchisées par solidité.
 ### Howard Marks (Oaktree Capital, ~$200B AUM)
 
 - **Marks, H. (2011).** *The Most Important Thing: Uncommon Sense for the Thoughtful Investor.* Columbia Business School Publishing.
-- Memos : [oaktreecapital.com/insights](https://www.oaktreecapital.com/insights)
-- Concepts clés utilisés : second-level thinking, range d'outcomes, contrarianism intelligent, market temperature
+- Memos : [oaktreecapital.com/insights](https://www.oaktreecapital.com/insights) — dont *Sea Change* (2022, changement de régime taux), *On Bubble Watch* (2025, lecture de positionnement de cycle)
+- Concepts clés utilisés : second-level thinking, range d'outcomes, contrarianism intelligent, market temperature, sea change / régime
+- **Caveat neutre** : memos = lecture de **positionnement** (« où on est »), jamais de timing (« où on va ») ; Marks le répète lui-même. Ne pas en tirer d'appel de marché daté.
 
 ### Charlie Munger / Warren Buffett (Berkshire Hathaway, ~20% CAGR/60 ans)
 
 - **Munger, C. T. (2005).** *Poor Charlie's Almanack: The Wit and Wisdom of Charles T. Munger.*
 - Lettres annuelles Berkshire : [berkshirehathaway.com/letters](https://www.berkshirehathaway.com/letters/letters.html)
-- Concepts utilisés : circle of competence, inversion ("invert, always invert"), avoiding stupidity > seeking brilliance
+- **Buffett, W. (1984).** *The Superinvestors of Graham-and-Doddsville* (Columbia Business School, Hermes).
+  - Utilisé comme **argument épistémique** : un groupe d'investisseurs partageant la méthode Graham-Dodd a surperformé durablement → fissure dans l'EMH forte. Mobilise aussi **risque = perte permanente** (pas volatilité) et **marge de sécurité**.
+  - **Caveat neutre essentiel** : présenté **comme argument sur les limites de l'EMH + cadre de discipline (marge de sécurité), PAS comme promesse d'alpha**. Sélection a posteriori d'un groupe gagnant ; ne pas en faire une preuve qu'on battra le marché.
+- Concepts utilisés : circle of competence, inversion ("invert, always invert"), avoiding stupidity > seeking brilliance, marge de sécurité, risque = perte permanente
+
+### Lettres de dirigeants (allocation du capital & contexte macro)
+
+Sources primaires publiques, utilisées pour `capital_allocation.md` et `frameworks.md` §11 (lecture Dimon). Paraphraser.
+
+- **Bezos, J. — Lettres aux actionnaires Amazon (1997 & 2020).** Pensée long terme, primauté du **free cash flow par action** sur le BPA, réinvestissement à fort ROIIC, *« Day 1 »*. Caveat : récit du gagnant (survivorship) — illustre des principes, ne prouve pas leur reproductibilité.
+- **Dimon, J. — Lettre annuelle JPMorgan (2025).** *Fortress balance sheet*, optionalité contracyclique, lecture macro (dette/stimulus, taux collants, géopolitique). Caveat : vue d'un banquier (intérêt structurel pour la prudence bilancielle) — bloc de **contexte**, pas de timing.
 
 ### Annie Duke (PhD psycho cognitive U Penn, ex-pro poker)
 
@@ -72,7 +83,11 @@ Citations vérifiables des concepts utilisés. Hiérarchisées par solidité.
 
 - **Mauboussin, M. J. (2012).** *The Success Equation: Untangling Skill and Luck in Business, Sports, and Investing.* Harvard Business Review Press.
 - **Mauboussin, M. J. (2008).** *More Than You Know: Finding Financial Wisdom in Unconventional Places.* Columbia Business School Publishing.
-- Concepts utilisés : base rates (outside view), paradox of skill, luck-skill continuum
+- **Mauboussin, M. J. — *Measuring the Moat*** (Credit Suisse/Morgan Stanley, rapports) : cadre d'analyse de la douve, du pouvoir de marché et de la persistance des avantages (alimente `frameworks.md` §9 Moloch/douve).
+- **Mauboussin, M. J. — *Capital Allocation*** (Morgan Stanley) : 8 usages du capital, discipline M&A, arithmétique des rachats, évaluation du management (source principale de `capital_allocation.md`).
+- **Mauboussin, M. J. — *The Base Rate Book*** (Credit Suisse, 2016) : base rates empiriques de croissance/marges/persistance (alimente `frameworks.md` §5).
+- Concepts utilisés : base rates (outside view), paradox of skill, luck-skill continuum, allocation du capital, persistance/fade des fondamentaux
+- **Caveat neutre** : rapports sous **copyright** (Credit Suisse/Morgan Stanley) → **paraphraser, pas de verbatim** ; chiffres datés (2014-2016) à re-sourcer avant usage chiffré.
 
 ### Daniel Kahneman (Nobel Economics 2002)
 
@@ -113,6 +128,20 @@ Citations vérifiables des concepts utilisés. Hiérarchisées par solidité.
 - Émotions comme signaux pas obstacles
 - ABCD framework : Adapting, Building, Cultivating, Developing
 - Decision journal pour discipline
+
+### Corpus IA — mécanique du scaling (alimente `ai_durability_lens.md`)
+
+Deux sous-tiers d'inégale solidité.
+
+**Tier technique (papers/essais robustes, descriptifs)** — utilisés pour la mécanique, pas pour prédire un cours :
+- **Vaswani et al. (2017).** *Attention Is All You Need.* — architecture Transformer, parallélisable (moteur M4).
+- **Hoffmann et al. (2022).** *Training Compute-Optimal Large Language Models* (« Chinchilla »). — lois de scaling compute/données.
+- **Sutton, R. (2019).** *The Bitter Lesson* (essai). — 70 ans : le calcul général bat l'ingénierie spécialisée.
+- **Gwern Branwen — *The Scaling Hypothesis*** (essai). — synthèse de l'hypothèse de scaling.
+
+**Tier essais de parties prenantes (à DÉCOTER)** — Aschenbrenner (*Situational Awareness*), Amodei (*Machines of Loving Grace*), Kokotajlo (*AI 2027*), Hendrycks, Bubeck (*Sparks of AGI*) :
+- **Caveat neutre central** : **auteurs parties prenantes** (biais haussier structurel ; certains **gèrent/conseillent des fonds long-IA**). Prédictions **datées déjà fragiles**. Le **désaccord interne** au corpus est un signal d'incertitude, pas une feuille de route.
+- Usage : **décoter l'optimisme**, ne jamais ancrer une thèse d'investissement sur leurs timelines. Appliquer le pré-flight (`SKILL.md`).
 
 ## Notes sur ce que ce skill ne cite PAS
 

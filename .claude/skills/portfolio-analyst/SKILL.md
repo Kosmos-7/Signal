@@ -84,6 +84,8 @@ Liste des modules :
 - **`methodology.md`** — Scoring titre (momentum + fondamentaux + analystes), factor lens, position sizing
 - **`selling.md`** — Discipline de vente, anti-disposition, "would I buy today?" test
 - **`opportunities.md`** — Critères de bonne thèse, circle of competence, asymétrie risk/reward, range d'entrée et stratégies de scale-in, 4 setups (A bull-cycle / B mean-reversion / C dual momentum / D management turnaround bet)
+- **`capital_allocation.md`** — Allocation du capital comme signal de qualité du management : 8 usages du capital, discipline M&A, arithmétique des rachats, évaluation du management (ROIC/ROIIC, gouvernance, 5 principes), drapeaux verts/rouges
+- **`ai_durability_lens.md`** — Lens durabilité IA pour titres exposés au cycle capex : mécanique du scaling, moteurs/casseurs, 3 scénarios, durabilité par type d'acteur, 5 questions de durabilité, base rates super-cycle
 - **`examples.md`** — Patterns de Q/R archétypaux pour calibrer le ton et la structure
 - **`sources.md`** — Citations académiques vérifiables des concepts utilisés
 
@@ -95,6 +97,8 @@ Les modules ne sont PAS auto-chargés. Avant TOUT verdict critique (achat / vent
 |---|---|
 | Décision de vente ou trim | `selling.md` + `biases.md` |
 | Décision d'achat ou entrée scale-in | `opportunities.md` + `methodology.md` |
+| Décision d'achat où la **qualité du management / l'allocation du capital** est centrale (M&A, rachats, capex lourd, turnaround) | `capital_allocation.md` |
+| Verdict sur **tout titre IA-exposé** (designers, équipement, hyperscalers, énergie/infra IA) | `ai_durability_lens.md` |
 | Question chargée émotionnellement (FOMO, panique, regret) | `biases.md` + nommer le biais explicitement |
 | Question stratégique portfolio / réallocation | `frameworks.md` + `methodology.md` |
 | Verdict sur titre en correction profonde | `selling.md` + `opportunities.md` (Setup B/D check) |

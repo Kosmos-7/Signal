@@ -1,6 +1,6 @@
 # Frameworks de décision
 
-Six outils mentaux à appliquer selon le type de question. Pas tous à chaque fois — choisir le pertinent.
+Onze outils mentaux à appliquer selon le type de question. Pas tous à chaque fois — choisir le pertinent. Tous sont des cadres de **discipline et de conscience de soi**, jamais des signaux de timing prédictifs.
 
 ## 1. Pre-mortem (Klein)
 
@@ -78,9 +78,18 @@ Si la décision actuelle ressemble à un de ces patterns d'échec → reconsidé
 - IPO récente : ~50% performent moins bien que le marché à 5 ans (base rate négatif)
 - Action après +30% en 1 semaine : taux de retournement à 1 mois historiquement >50% (base rate à intégrer)
 - Acquisitions hostiles : ~70% détruisent de la valeur pour l'acquéreur (base rate négatif)
-- Stock à PER >50 : minorité maintient la croissance qui justifie ce prix
+- Stock à PER >50 : minorité maintient la croissance qui justifie ce prix (articuler avec §10, S-curve)
 
 Si la situation est dans une catégorie au base rate défavorable, l'inside view doit être **fortement positif et différencié** pour justifier le pari.
+
+**Chiffres empiriques (Mauboussin, *Base Rate Book*)** — ancrer les base rates sur des faits, pas des intuitions :
+
+- **Croissance des ventes** : médiane ~4-4,5%/an sur 3-5 ans ; ~31% des sociétés **décroissent** sur 3 ans ; la croissance décline avec la taille. **0%** des sociétés de 6-13 Md$ de CA ont tenu >45%/an sur 10 ans (il faut descendre à 35-40% pour observer ~0,2% de cas).
+- **Croissance des bénéfices = NON persistante** : corrélation année N→N+1 ≈ **−0,05**. Un BPA en forte croissance a une espérance future *sous* la moyenne. (Nuance : la croissance du résultat net prédit bien le TSR à 3-5 ans, r≈0,40 — l'enjeu est réel mais difficile à capter ex ante.)
+- **Qualité = persistante** : gross profitability r≈**0,95**, CFROI r≈**0,89**. Règle de fade : ~la moitié de l'excès de ROIC s'érode en ~5 ans (plus vite en energy/materials, plus lent en staples/santé). Formule : `Est. = moyenne_secteur + r × (obs − moyenne_secteur)`.
+- **Règle de conviction** : plus la thèse repose sur une variable **peu persistante** (croissance), plus la conviction doit être **bridée** ; plus elle repose sur la **qualité persistante** (ROIC/marges), plus l'inside view peut dominer.
+
+*Caveat* : niveaux datés 2014-2015 ; les lois de réversion sont robustes mais re-sourcer les moyennes. Outil de **calibration**, pas de prédiction.
 
 ## 6. Calibration de conviction
 
@@ -92,3 +101,48 @@ Si la situation est dans une catégorie au base rate défavorable, l'inside view
 - **Pas d'avis** : information insuffisante ou hors zone de compétence. Refuser de trancher.
 
 **Calibration honnête** : si tu donnes une conviction "forte" et que tu te trompes la moitié du temps, ta conviction "forte" vaut en réalité 50% — pas mieux qu'un coin flip. Le journal de décisions permet de calibrer empiriquement.
+
+## 7. Conscience de cycle (Howard Marks)
+
+**Principe** : *"savoir où l'on est, pas prédire où l'on va"*. On ne sait pas ce que l'avenir réserve, mais on peut lire le **positionnement actuel** dans le cycle. Les prix **amplifient** les fondamentaux (psychologie + crédit + sentiment), donc une tendance récente ne doit jamais être extrapolée comme un état permanent.
+
+**Application** : régler un curseur **défensif ↔ agressif** sur le positionnement de cycle/sentiment observé — JAMAIS sur une prévision. Sentiment euphorique + valorisations hautes → curseur défensif ; capitulation + décote → curseur agressif. Lier directement à la **pénalité CHASE / z-score** : un z-score extrême est un marqueur de positionnement de cycle, pas un signal de retournement daté.
+
+## 8. Changement de régime / "Sea Change" (Marks)
+
+**Garde-fou anti-extrapolation de régime**. Question à se poser : *"mes hypothèses implicites — coût du capital bas, expansion continue des multiples, momentum porteur — datent-elles d'un régime révolu (2009-2021, taux ~0) ?"*. Un cadre mental calibré sur une décennie de taux nuls peut mal valoriser un environnement de taux normalisés.
+
+**Interdit** : en faire un appel de **timing sur les taux** ("les taux vont monter/baisser donc..."). L'outil sert à **auditer ses propres hypothèses** héritées, pas à parier sur la macro.
+
+## 9. Dynamique Moloch / piège commodity (Scott Alexander ↔ Buffett)
+
+**Le filtre le plus structurant.** Le *multipolar trap* : dès qu'un acteur sacrifie une valeur (marge, qualité, prix) pour gagner en compétitivité, **tous les concurrents doivent suivre** sous peine d'être éliminés — et la valeur ainsi créée est **entièrement dissipée par la concurrence**. C'est la définition d'une **industrie commodity** : le surplus va au client, jamais à l'actionnaire. La **douve** (Buffett) est l'unique antidote : ce qui permet de refuser la course au fond sans se faire évincer.
+
+| | Industrie Moloch (race to the bottom) | Industrie protégée (douve) |
+|---|---|---|
+| **Produit** | Indifférencié, substituable | Différencié, pricing power |
+| **Marges** | Basses **et plates** sur 10 ans | Hautes, parfois en expansion |
+| **Capex / techno** | Le gain est reversé au client | Crée/renforce une rente |
+| **ROCE** | ≈ coût du capital | > coût du capital durablement |
+
+**Drapeaux rouges Moloch** : marges structurellement faibles **ET** plates sur 10 ans ; ROCE ≈ coût du capital sans expansion ; croissance du CA qui ne se traduit **jamais** en marges ; PER bas qui reflète l'absence de rente (**value trap**, pas décote).
+
+**Place dans le process** : c'est le **filtre AMONT du setup B**, avant même de trancher "cyclique bas vs dégradation structurelle". Si l'industrie est Moloch, un bas de cycle n'est pas une opportunité de rente — c'est la nature permanente du business. Exemples commodity : aérien, textile, shipping, sidérurgie, raffinage, distribution généraliste.
+
+## 10. Pensée exponentielle à double tranchant (Urban/Kurzweil + Graham)
+
+**Double erreur symétrique** :
+- Une exponentielle paraît **plate vue de près** → on **sous-estime** les compounders et disrupteurs naissants (le produit moqué comme un *"toy"*).
+- MAIS toute S-curve **plafonne** (TAM fini) → on **sur-extrapole** une exponentielle déjà mature.
+
+**Application** : situer toute "histoire de croissance" sur la S-curve — phase 1 (lente, sous-estimée) / phase 2 (explosive) / phase 3 (plateau, sur-estimée). Articuler avec la base rate **"PER>50 : seule une minorité maintient la croissance"** (§5) : un multiple extrême parie implicitement sur une phase 2 prolongée que les base rates jugent rare.
+
+## 11. Lecture macro façon Dimon
+
+Bloc de contexte (pas de timing) — quatre questions de toile de fond :
+- **(a)** La croissance est-elle financée par **dette/stimulus** (donc fragile) plutôt qu'organique ?
+- **(b)** Inflation/taux plus **collants** que ne le suppose le consensus ?
+- **(c)** Prix d'actifs élevés = **risque caché** "si quelque chose tourne mal" (faible marge d'erreur).
+- **(d)** Géopolitique (Chine, supply chains) intégrée aux thèses sectorielles ?
+
+**Fortress balance sheet** : la liquidité/solidité du bilan = **optionalité contracyclique** (pouvoir acheter quand les autres sont forcés de vendre). Complète l'usage info-contextuel du VIX — éclaire le risque de fond, ne déclenche pas d'action.

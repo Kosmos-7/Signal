@@ -16,6 +16,16 @@ Pondération calibrée par l'expérience (le projet Signal applique cette logiqu
 
 **Approche neutre — aucune prétention d'alpha.** Méthodes publiques appliquées avec discipline ; mise à l'épreuve par l'observation du portefeuille IA en réel, pas par backtest. Le scoring est un **outil de discipline et d'attention sélective** (filtrage chase de rally, identification Setup B, structuration des décisions), pas un générateur d'alpha.
 
+### Risque = perte permanente de capital, pas volatilité (Marks / Buffett)
+
+Le risque qui compte n'est **pas** la volatilité (déviation académique). C'est la **perte permanente et irréversible** de capital. Distinguer :
+- **Baisse temporaire traversable** : le cours chute mais la thèse fondamentale reste intacte → pas une perte tant qu'on ne vend pas. Traversable.
+- **Perte définitive** : soit on **vend au creux par panique** (perte réalisée d'un drawdown qui se serait résorbé), soit la **détérioration fondamentale** est réelle (la valeur intrinsèque a baissé, pas juste le cours).
+
+**Inverse de la relation académique** : plus la marge de sécurité (décote vs valeur intrinsèque) est grande, plus le risque baisse **ET** le rendement potentiel monte — les deux dans le même sens, contrairement au dogme « plus de rendement = plus de risque ». Parabole du billet : un actif valant 1$ acheté à 40¢ est **moins** risqué *et* offre **plus** d'upside que le même acheté à 60¢ (la décote plus profonde absorbe davantage l'erreur). Buffett, Washington Post : ~80 M$ de capitalisation pour ~400 M$ d'actifs sous-jacents → la décote massive *était* la protection.
+
+**Caveat décisif** : une décote n'est une *vraie* marge de sécurité que si la **valeur intrinsèque est solidement estimée**. Si l'estimation est creuse (fenêtre régression courte, business en mutation, value trap), la « décote » est illusoire et le risque de perte permanente est intact. La marge de sécurité protège contre l'erreur d'estimation seulement quand l'ancre est fiable (cf. section 1.4 fenêtre courte + value trap dans `opportunities.md`).
+
 ## Pilier 1 — Momentum technique (45 pts)
 
 ### 1.1 Croisement MM21 / MM200 (20 pts)
@@ -162,6 +172,8 @@ z > 2,0σ ET (RSI > 70 OU drawdown > -3%)  → chase_pen = -2 (chase modéré)
 - **PEG ratio** (15 pts) : <1 = excellent (15 pts), <2 = correct (10 pts)
 - **Croissance EPS** (5 pts) : >10%/an = max
 - **Marge de Free Cash Flow** (5 pts) : FCF margin >15% → 5 pts, >5% → 3 pts (complémentaire aux marges nettes — `screener.py` l.775-777)
+
+  > **FCF > BPA (Bezos)** : quand FCF/action et BPA **divergent**, privilégier le FCF/action. Le BPA est flattable par la comptabilité (provisions, amortissements) et les buybacks (mécanique au dénominateur) ; le FCF mesure le cash réellement disponible. Un cours est la **prévision actualisée des flux futurs**, pas un multiple du bénéfice passé — l'ancre de valeur est le cash, pas le résultat « ajusté ». Cohérent avec le `GUIDE_redaction_analyses.md` (« privilégier le FCF au bénéfice ajusté »).
 - **Endettement** (5 pts) : Debt/Equity < 100% (yfinance scale ×100) → 5 pts. **Fix v2.0.2** : inclut désormais les entreprises net-cash (D/E = 0). Avant le fix, la condition `0 < debt_eq < 100` excluait les net-cash (DSY, AAPL en certaines périodes) qui obtenaient 0 pt à tort. Distinction maintenant : `None` (donnée manquante) → 0 pt | `0 ≤ debt_eq < 100` → 5 pts.
 
 > **Cap** : la somme brute des 6 composants (15+10+15+5+5+5 = 55) est plafonnée à **50 pts** (`min(50, …)`, `screener.py`). Selon le profil du titre, un point gagné peut être silencieusement tronqué.
@@ -199,6 +211,18 @@ Exemples session 2026-05 :
 - EssilorLuxottica : current 6.6%, range étroit 6.1-6.6% → structurel faible (PAS recovery)
 
 **Caveat** : avec 4-5y d'historique seulement, on peut louper le vrai max du cycle. Ratio = indicateur directionnel, pas seuil mécanique.
+
+### Trajectoire de la douve (champ qualitatif)
+
+Une douve n'est jamais statique : Buffett rappelle qu'elle est « presque toujours en train de s'élargir ou de se rétrécir ». Au-delà de *nommer* le type de douve (cf. les 5 types du `GUIDE_redaction_analyses.md`), classer sa **direction** :
+
+| Trajectoire | Lecture (signaux) |
+|---|---|
+| **S'élargit** | ROIC/ROCE en hausse tendancielle, part de marché qui gagne, pricing power croissant |
+| **Stable** | ROCE plat à haut niveau, parts stables (±2%/5 ans), pas de disruption visible |
+| **S'érode** | ROCE qui décline, parts instables/perdues, signaux d'overshoot ou de disruption (nouvel entrant, substitut technologique) |
+
+**Alignement avec le ratio ROCE Current/Mean** : une douve qui *s'élargit* se voit dans un ratio Current/Mean >1 soutenu (pas juste un rebond cyclique) ; une douve qui *s'érode* donne un ROCE en baisse séculaire (à distinguer du cycle bas — cf. ci-dessus). À reporter dans le champ `biz` de l'analyse comme qualificatif de durabilité, pas comme score.
 
 ### Cas spécial — Management turnaround bet (pattern hybride)
 
@@ -293,6 +317,19 @@ Cas pédagogiques session 2026-05 :
 - Calibration scoring testée empiriquement, ne pas perturber
 - Métriques utilisées comme outils de **lecture qualitative**, pas comme indicateurs mécaniques
 - Cohérent avec discipline anti-overengineering (cf décision A/D Line dans repo Signal)
+
+### Caveat persistance — une douve identifiée ≠ rendement garanti (Mauboussin)
+
+La persistance d'un ROIC élevé est **rare et régresse vite**. Ordre de grandeur Mauboussin : ~½ de l'excès de rendement sur capital disparaît en ~5 ans (plus vite encore en *energy* / *materials*, plus cyclique) ; et environ **½ des résultats corporate s'expliquent par la chance** ou restent inexpliqués. Conséquence directe :
+- Un ROCE élevé *aujourd'hui* n'est pas extrapolable mécaniquement — d'où l'utilité de la **trajectoire de la douve** (s'élargit/stable/s'érode) plutôt que du seul niveau.
+- Une douve correctement *identifiée* ne **garantit pas** un rendement futur : la régression vers la moyenne joue contre les meilleurs comme contre les pires.
+
+Cohérent avec l'**honnêteté empirique** du skill (posture neutre, pas de prétention d'alpha) : ces métriques calibrent la conviction, elles ne promettent pas la surperformance.
+
+### Pointeurs — modules complémentaires
+
+- **`capital_allocation.md`** : lecture de l'**allocation du capital** (buybacks vs M&A vs dette vs dividende vs réinvestissement) comme signal de **qualité du management** — complément naturel du turnaround bet et de la trajectoire de douve.
+- **`ai_durability_lens.md`** : grille de durabilité spécifique aux titres **IA-exposés** (où la douve peut se déplacer vite — cf. caveat persistance accéléré en secteurs à changement rapide).
 
 ---
 

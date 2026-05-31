@@ -77,6 +77,38 @@ Howard Marks (*I Beg to Differ*) : pour espérer un rendement différent du marc
 
 **Question explicite** : qu'est-ce que je vois que le consensus ne voit pas (ou refuse de voir) ?
 
+## Test « value stick » — qualifier une douve par son mécanisme (Mauboussin)
+
+Les 5 types de douve du `GUIDE_redaction_analyses.md` (marque · coût · réseau · coûts de transfert · réglementaire/localisation) restent la nomenclature. Ce test ne les renomme pas : il **valide** qu'une douve nommée agit réellement. Pour toute douve revendiquée, dire par **quel bout du « value stick »** elle crée de la valeur :
+
+- **Augmente la WTP** (*willingness-to-pay* du client) → le client accepte de **payer plus** : marque, effet de réseau, coûts de transfert, habitude. Mécanisme côté **demande**.
+- **Abaisse la WTS** (*willingness-to-sell* — son propre coût) → l'entreprise produit **moins cher** : échelle, courbe d'apprentissage, accès privilégié à un intrant, productivité. Mécanisme côté **offre**.
+
+**Règle de discipline** : une « marque » qui n'augmente **ni** la WTP **ni** n'abaisse la WTS n'est **pas** une douve — c'est un logo. Si on ne sait pas dire lequel des deux leviers joue, la douve est probablement narrative.
+
+**Réflexe DuPont** (relie le mécanisme au ROIC) : `ROIC = marge × rotation`.
+- Douve de **différenciation** (WTP) → se lit dans la **marge** élevée.
+- Douve de **coût-leadership** (WTS) → se lit dans la **rotation** du capital élevée.
+
+**Repères chiffrés (Mauboussin / Morningstar)** :
+- **Stabilité des parts de marché ≤2% sur 5 ans** = signal favorable de douve (parts qui valsent = pas de douve).
+- **~60% des nouveaux entrants disparaissent <5 ans** (~80% <10 ans) — la survie elle-même est un filtre.
+- **Douve « large »** (Morningstar) = avantage attendu **>20 ans** ; ne concerne que **~17%** des sociétés notées. Rare par construction — à ne pas attribuer à la légère.
+
+À utiliser en amont du scoring quantitatif : si la douve ne passe pas le test value stick, traiter le titre comme un *business* (cyclique/fragile), pas une franchise.
+
+## Grille « founder / great work » (Paul Graham) — filtre qualitatif
+
+Complète les critères chiffrés (jamais un substitut). Cinq questions qualitatives sur le *management* et la *nature de l'avantage* :
+
+- **(a) Obsession authentique vs imitation** : le management résout-il un problème qui l'**obsède** réellement, ou court-il après un **TAM à la mode** ? L'imitation d'une vague (« on fait de l'IA aussi ») est un drapeau.
+- **(b) Avantage qui COMPOSE** : l'edge **s'élargit-il avec l'échelle** (effets réseau, données propriétaires, marque, courbe d'apprentissage) ? Un avantage qui compose rejoint la trajectoire de douve « s'élargit » (cf. `methodology.md`).
+- **(c) Honnêteté intellectuelle du management** : reconnaît ses **erreurs**, allocation du capital **lucide**, pas de persona **PDG-star** ni de guidance gonflée. (Recoupe `capital_allocation.md`.)
+- **(d) Itération vs plan rigide** : capacité à **ajuster** la trajectoire vs s'accrocher à un plan figé démenti par les faits.
+- **(e) Prestige = indicateur retardé** : un secteur/titre **prestigieux** est un signal *lagging* — quand tout le monde l'admire, c'est **déjà cher** (rejoint « désaccord avec le consensus »).
+
+**Usage** : à croiser avec les 5 critères chiffrés et le test value stick. Un titre peut scorer haut quantitativement mais échouer (a)/(c) → conviction plafonnée. Inversement, ce filtre seul ne justifie **jamais** un achat sans les fondamentaux et le setup.
+
 ## Les setups qui marchent statistiquement
 
 ### A. Momentum frais sur titres de qualité (Jegadeesh-Titman)

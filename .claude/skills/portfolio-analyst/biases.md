@@ -1,6 +1,6 @@
 # Biais cognitifs documentés
 
-Six biais à détecter dans les questions de l'utilisateur. Quand tu en repères un, **nomme-le explicitement** et propose un reframe technique.
+Neuf biais à détecter dans les questions de l'utilisateur. Quand tu en repères un, **nomme-le explicitement** et propose un reframe technique.
 
 ## 1. Disposition effect
 
@@ -96,6 +96,42 @@ Six biais à détecter dans les questions de l'utilisateur. Quand tu en repères
 - Volonté de rebalancer fréquemment sans déclencheur fondamental
 
 **Reframe** : *"Ne rien faire est une décision active. Quel signal mécanique précis justifierait une action maintenant ? Si tu ne peux pas l'articuler, l'action est probablement émotionnelle."*
+
+## 7. Pendule peur ↔ avidité (Marks)
+
+**Définition** : le sentiment de marché passe l'essentiel de son temps **aux extrêmes**, rarement au "juste milieu" ; l'excès dans un sens nourrit le retour vers l'autre.
+
+**Détection** :
+- *"Tout le monde achète, faut y aller"* → pôle avidité
+- *"Ça s'effondre, je sors tout"* → pôle peur
+- Conviction qui suit l'humeur ambiante plutôt que les données
+
+**Reframe** : *"Le sentiment extrême est une INFO SUR LE RISQUE, pas un signal d'entrée/sortie en bloc. Au lieu de tout acheter / tout vendre, ajuste ta marge de sécurité et ton sizing. Où est le pendule, et qu'est-ce que ça dit du risque — pas de la direction ?"*
+
+## 8. Psychologie de bulle — FOMO & "no price too high" (Marks)
+
+**Définition** : en fin de cycle haussier, le prix cesse d'être un critère ; la peur de rater remplace l'analyse.
+
+**Marqueurs verbaux à détecter** :
+- *"Cette fois c'est différent"*
+- *"Il n'y a pas de prix trop élevé"* (n'importe quel prix se justifie)
+- *"[Leader] est intouchable"*
+
+**Les 3 stades du bull market** : (1) quelques visionnaires y croient → (2) la majorité s'y met → (3) tous pensent que ça durera **toujours** = sommet. Rappel : *"le changement est plus la règle que la persistance"* — sur le top 20 d'une décennie, peu survivent à la suivante.
+
+**Reframe** : *"Diagnostique l'état psychologique du marché, NE PRÉDIS PAS l'éclatement. À quel stade sommes-nous ? Si le discours est 'aucun prix n'est trop élevé', le risque est élevé — ce qui pilote le sizing et la marge de sécurité, pas un short ou une sortie datée."*
+
+## 9. Sous-estimation de la croissance composée (intuition linéaire)
+
+**Définition** : **miroir constructif du recency bias**. Le cerveau lit une courbe exponentielle comme une droite → on **sous-estime** les compounders et disrupteurs naissants (vus comme un *"toy"* anecdotique).
+
+**Source** : Urban (2015), Graham (2023). À articuler avec §10 des frameworks (S-curve).
+
+**Détection** :
+- *"Ce truc est minuscule / un gadget"* face à une adoption qui double régulièrement → possible sous-extrapolation
+- À l'inverse : *"ça va continuer à ce rythme"* sur un acteur déjà géant → sur-extrapolation d'une exponentielle mature
+
+**Reframe (symétrique)** : *"Lis-tu une exponentielle naissante comme une droite plate (tu sous-estimes) ? OU sur-extrapoles-tu une exponentielle qui approche son plateau (TAM fini) ? Situe l'histoire sur la S-curve avant de juger."*
 
 ## Méta-règle de détection
 
