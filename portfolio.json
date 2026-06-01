@@ -1,25 +1,25 @@
 {
-  "updated_at": "2026-05-31",
-  "week": "Sem. 22 · 2026",
+  "updated_at": "2026-06-01",
+  "week": "Sem. 23 · 2026",
   "capital_initial": 20000.0,
-  "capital_actuel": 23785.5,
-  "performance": 18.93,
-  "performance_brute": 19.37,
+  "capital_actuel": 23751.73,
+  "performance": 18.76,
+  "performance_brute": 19.2,
   "total_frais_payes": 28.96,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 4005.77,
-  "capital_post_liquidation": 22257.21,
-  "performance_post_liquidation": 11.29,
-  "frais_si_liquidation": 17.11,
-  "pfu_latent_si_liquidation": 1511.17,
-  "pertes_si_liquidation": 253.89,
-  "last_known_vix": 15.32,
+  "capital_post_liquidation": 22220.47,
+  "performance_post_liquidation": 11.1,
+  "frais_si_liquidation": 17.09,
+  "pfu_latent_si_liquidation": 1514.18,
+  "pertes_si_liquidation": 297.66,
+  "last_known_vix": 15.86,
   "last_known_vix_source": "live",
-  "benchmark_cac40": -0.14,
-  "benchmark_msci": 10.87,
-  "vs_benchmark": 8.06,
+  "benchmark_cac40": 0.1,
+  "benchmark_msci": 11.23,
+  "vs_benchmark": 7.53,
   "mode_panique": false,
-  "perf_cac_semaine": -0.91,
+  "perf_cac_semaine": 0.37,
   "positions": [
     {
       "ticker": "ASML.AS",
@@ -29,11 +29,11 @@
       "currency": "EUR",
       "date_achat": "2026-01-02",
       "prix_achat": 650.0,
-      "prix_actuel": 1384.8,
+      "prix_actuel": 1383.6,
       "quantite": 3,
       "montant_investi": 1951.46,
-      "valeur_actuelle": 4154.4,
-      "performance": 112.89,
+      "valeur_actuelle": 4150.8,
+      "performance": 112.7,
       "score_entree": 88,
       "poids": 17.5
     },
@@ -48,10 +48,10 @@
       "prix_actuel": 211.14,
       "quantite": 20,
       "montant_investi": 1981.9,
-      "valeur_actuelle": 3621.92,
-      "performance": 82.75,
+      "valeur_actuelle": 3623.48,
+      "performance": 82.83,
       "score_entree": 94,
-      "poids": 15.2
+      "poids": 15.3
     },
     {
       "ticker": "AMD",
@@ -64,8 +64,8 @@
       "prix_actuel": 516.1,
       "quantite": 3,
       "montant_investi": 876.48,
-      "valeur_actuelle": 1327.99,
-      "performance": 51.51,
+      "valeur_actuelle": 1328.56,
+      "performance": 51.58,
       "score_entree": 85,
       "poids": 5.6
     },
@@ -80,8 +80,8 @@
       "prix_actuel": 124.37,
       "quantite": 14,
       "montant_investi": 1095.08,
-      "valeur_actuelle": 1493.42,
-      "performance": 36.38,
+      "valeur_actuelle": 1494.06,
+      "performance": 36.43,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
       "poids": 6.3
@@ -97,8 +97,8 @@
       "prix_actuel": 1105.0,
       "quantite": 1,
       "montant_investi": 828.41,
-      "valeur_actuelle": 947.77,
-      "performance": 14.41,
+      "valeur_actuelle": 948.17,
+      "performance": 14.46,
       "score_entree": 89,
       "poids": 4.0
     },
@@ -114,8 +114,8 @@
       "quantite": 4,
       "montant_investi": 763.89,
       "frais_achat_eur": 0.5725,
-      "valeur_actuelle": 848.61,
-      "performance": 11.09,
+      "valeur_actuelle": 848.98,
+      "performance": 11.14,
       "score_entree": 80,
       "raison_achat": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume — fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1% — momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel — l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
       "poids": 3.6
@@ -131,8 +131,8 @@
       "prix_actuel": 446.77,
       "quantite": 1,
       "montant_investi": 356.06,
-      "valeur_actuelle": 383.2,
-      "performance": 7.62,
+      "valeur_actuelle": 383.36,
+      "performance": 7.67,
       "score_entree": 100,
       "poids": 1.6
     },
@@ -147,8 +147,8 @@
       "prix_actuel": 191.1,
       "quantite": 7,
       "montant_investi": 1080.07,
-      "valeur_actuelle": 1147.35,
-      "performance": 6.23,
+      "valeur_actuelle": 1147.85,
+      "performance": 6.28,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
       "poids": 4.8
@@ -164,8 +164,8 @@
       "prix_actuel": 270.64,
       "quantite": 2,
       "montant_investi": 446.82,
-      "valeur_actuelle": 464.26,
-      "performance": 3.9,
+      "valeur_actuelle": 464.46,
+      "performance": 3.95,
       "score_entree": 90,
       "poids": 2.0
     },
@@ -180,8 +180,8 @@
       "prix_actuel": 632.51,
       "quantite": 2,
       "montant_investi": 1044.92,
-      "valeur_actuelle": 1085.02,
-      "performance": 3.84,
+      "valeur_actuelle": 1085.48,
+      "performance": 3.88,
       "score_entree": 84,
       "poids": 4.6
     },
@@ -193,15 +193,15 @@
       "currency": "EUR",
       "date_achat": "2026-05-27",
       "prix_achat": 164.25,
-      "prix_actuel": 164.15,
+      "prix_actuel": 165.75,
       "quantite": 7,
       "montant_investi": 1150.61,
       "frais_achat_eur": 0.8623,
-      "valeur_actuelle": 1149.05,
-      "performance": -0.14,
+      "valeur_actuelle": 1160.25,
+      "performance": 0.84,
       "score_entree": 81,
       "raison_achat": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression — décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low) — le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique — opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
-      "poids": 4.8
+      "poids": 4.9
     },
     {
       "ticker": "V",
@@ -214,8 +214,8 @@
       "prix_actuel": 326.36,
       "quantite": 2,
       "montant_investi": 569.91,
-      "valeur_actuelle": 559.84,
-      "performance": -1.77,
+      "valeur_actuelle": 560.08,
+      "performance": -1.72,
       "score_entree": 93,
       "poids": 2.4
     },
@@ -230,26 +230,10 @@
       "prix_actuel": 1046.88,
       "quantite": 1,
       "montant_investi": 914.17,
-      "valeur_actuelle": 897.92,
-      "performance": -1.78,
+      "valeur_actuelle": 898.3,
+      "performance": -1.74,
       "score_entree": 93,
       "poids": 3.8
-    },
-    {
-      "ticker": "ADYEN.AS",
-      "nom": "ADYEN",
-      "market": "AMS",
-      "sector": "Technologie",
-      "currency": "EUR",
-      "date_achat": "2026-04-30",
-      "prix_achat": 958.5,
-      "prix_actuel": 939.3,
-      "quantite": 1,
-      "montant_investi": 959.22,
-      "valeur_actuelle": 939.3,
-      "performance": -2.08,
-      "score_entree": 93,
-      "poids": 3.9
     },
     {
       "ticker": "LSEG.L",
@@ -259,11 +243,11 @@
       "currency": "GBP",
       "date_achat": "2026-05-07",
       "prix_achat": 92.16,
-      "prix_actuel": 90.22,
+      "prix_actuel": 90.24,
       "quantite": 14,
       "montant_investi": 1492.64,
-      "valeur_actuelle": 1457.18,
-      "performance": -2.38,
+      "valeur_actuelle": 1458.17,
+      "performance": -2.31,
       "score_entree": 83,
       "raison_achat": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
       "poids": 6.1
@@ -279,8 +263,8 @@
       "prix_actuel": 299.31,
       "quantite": 2,
       "montant_investi": 540.75,
-      "valeur_actuelle": 513.44,
-      "performance": -5.05,
+      "valeur_actuelle": 513.66,
+      "performance": -5.01,
       "score_entree": 95,
       "poids": 2.2
     },
@@ -292,11 +276,11 @@
       "currency": "EUR",
       "date_achat": "2026-05-05",
       "prix_achat": 261.9,
-      "prix_actuel": 247.6,
+      "prix_actuel": 247.0,
       "quantite": 4,
       "montant_investi": 1048.39,
-      "valeur_actuelle": 990.4,
-      "performance": -5.53,
+      "valeur_actuelle": 988.0,
+      "performance": -5.76,
       "score_entree": 84,
       "poids": 4.2
     },
@@ -311,10 +295,26 @@
       "prix_actuel": 400.6,
       "quantite": 1,
       "montant_investi": 371.0,
-      "valeur_actuelle": 343.6,
-      "performance": -7.39,
+      "valeur_actuelle": 343.74,
+      "performance": -7.35,
       "score_entree": 93,
       "poids": 1.4
+    },
+    {
+      "ticker": "ADYEN.AS",
+      "nom": "ADYEN",
+      "market": "AMS",
+      "sector": "Technologie",
+      "currency": "EUR",
+      "date_achat": "2026-04-30",
+      "prix_achat": 958.5,
+      "prix_actuel": 886.3,
+      "quantite": 1,
+      "montant_investi": 959.22,
+      "valeur_actuelle": 886.3,
+      "performance": -7.6,
+      "score_entree": 93,
+      "poids": 3.7
     },
     {
       "ticker": "ENR.DE",
@@ -324,11 +324,11 @@
       "currency": "EUR",
       "date_achat": "2026-04-30",
       "prix_achat": 180.58,
-      "prix_actuel": 163.24,
+      "prix_actuel": 165.64,
       "quantite": 3,
       "montant_investi": 542.15,
-      "valeur_actuelle": 489.72,
-      "performance": -9.67,
+      "valeur_actuelle": 496.92,
+      "performance": -8.34,
       "score_entree": 91,
       "poids": 2.1
     }
@@ -1308,14 +1308,14 @@
     }
   ],
   "biais_detectes": [
-    "Action bias potentiel : avec 19 positions ouvertes et des liquidités faibles, la tentation de 'faire quelque chose' est réelle — mais les règles mécaniques (R01 liquidités, R01 cluster Tech) font le travail de discipline à la place de la volonté.",
-    "FOMO sur FSLR/NVDA : deux setups techniquement attrayants bloqués par des règles légitimes — les nommer explicitement évite de les rationaliser après coup."
+    "Action bias potentiel : tentation d'agir malgré l'absence d'opportunité mécanique valide — liquidités < 5% et cluster saturé justifient l'inaction cette semaine",
+    "Recency bias sur les positions perdantes (ADYEN, ENR.DE, JPM) : la correction récente ne constitue pas en soi un signal de sortie — les fondamentaux n'ont pas changé"
   ],
   "regles_actives": [
     {
       "type": "concentration_sectorielle",
       "secteur": "Tech & IA",
-      "pct": 63.1,
+      "pct": 62.9,
       "regime": "soft",
       "sizing_factor": 0.1,
       "message": "Cluster Tech & IA : 63% > 30% — sizing réduit ×0.10 (achats possibles avec conviction forte ou taille réduite)",
@@ -1329,8 +1329,8 @@
   ],
   "decisions_bloquees": [],
   "nb_positions": 19,
-  "nb_positives": 10,
-  "nb_negatives": 9,
+  "nb_positives": 11,
+  "nb_negatives": 8,
   "nb_neutres": 0,
   "macro_news": [
     {
@@ -1339,15 +1339,15 @@
       "date": "2026-05-29",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNVm1lQTd2R3dIUWlPenlFSkpzM0tiUC1RcGQ1eTVTNWY2blplYnpiaUVxc0lzNXZ0TE1NbjlwYXotcE1GVEktaHJVMmFseEt3aU45dThXQldxb29XRDBzaXBibkVWVFh6T3Q2TnpYWnMxUFAzTEo3UFI1NFdjaVFGNTB1R2N2R0lTWEtNUEo2NFNsbHUxUnpfSFNtUThGNW9Ib2cyd3NJN2hpekJX?oc=5",
-      "resume_fr": "Les États-Unis ont imposé de nouvelles sanctions contre l'Iran dans le cadre de la lutte contre le financement du terrorisme."
+      "resume_fr": "Les États-Unis ont imposé de nouvelles sanctions liées à l'Iran dans le cadre de la lutte contre le terrorisme."
     },
     {
-      "headline": "ECB chief economist sees persistent impact on inflation from Iran war - Reuters",
-      "summary": "ECB chief economist sees persistent impact on inflation from Iran war  Reuters",
-      "date": "2026-05-28",
+      "headline": "More Fed policymakers eye possible rate hike as inflation risks rise - Reuters",
+      "summary": "More Fed policymakers eye possible rate hike as inflation risks rise  Reuters",
+      "date": "2026-05-29",
       "source": "Reuters",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOcW5KRWdFekZoajhnYi15YnZoVUdtbGlXOElzZ0laVlJaOXBWZ25NT1BuVHlRSGN5Tk9ZTkd1M3B1b0h2bkdaa0dMNTZkZk9YbEhPYlpmYUw1X2EtcmhMcHR4akV1akNGSWxDQkUxQVllZnJmQTNxWmY5VVNBT0pVVmdCcW10QmN0NXVITTRaU0tzY3lwamc3aDFoajdSQ0J1VlhTczVJZHIyV2ZFMm9Rak13?oc=5",
-      "resume_fr": "L'économiste en chef de la BCE estime que la guerre en Iran aura un impact inflationniste durable sur l'économie européenne."
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxONHZGRC1lZE9FMWRpVnlkVVFaZWFLWkowZWZjaW8teHlXenZhdVJ3OWw3WW1pejA2YUhHNTRpTExYSGE1bDFKQ1JWdVo5YnNSeDEwMGFsanJreTc2SDR6MlFIRnl5UEMwV3VDXzNGcERrX3ZlRS16c2xscjlNeXZoM2pGM25oNjNCcGJiN2tFbjAydWdyOUZYal9fallKcUo3VWZjd1htTnI?oc=5",
+      "resume_fr": "Plusieurs membres de la Fed envisagent une possible hausse des taux face à la persistance des risques inflationnistes."
     },
     {
       "headline": "In deeply red Oklahoma, minimum wage’s biggest 2026 election cycle fight is about to be decided",
@@ -1355,7 +1355,7 @@
       "date": "2026-05-31",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/05/31/oklahoma-minimum-wage-2026-election-vote-economy-inflation.html",
-      "resume_fr": "Les Oklahomans voteront prochainement sur un doublement du salaire minimum, scrutin perçu comme un indicateur du climat économique américain."
+      "resume_fr": "L'Oklahoma s'apprête à voter sur un doublement du salaire minimum, test révélateur du climat économique américain."
     },
     {
       "headline": "Investors and labels are buying into the growing South Asian music business in the U.S.",
@@ -1371,22 +1371,14 @@
       "date": "2026-05-30",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-05-29/bessent-says-we-ll-see-on-iran-sanctions-relief-as-deal-awaits",
-      "resume_fr": "Le secrétaire au Trésor Bessent se montre prudent sur un éventuel allègement des sanctions contre l'Iran, conditionnées à un accord nucléaire."
-    },
-    {
-      "headline": "World’s appetite for AI makes China less afraid of stronger Yuan",
-      "summary": "The global AI investment boom is powering a new wave of Chinese exports and making Beijing more comfortable with a stronger yuan.",
-      "date": "2026-05-28",
-      "source": "Bloomberg",
-      "url": "https://www.bloomberg.com/news/articles/2026-05-28/world-s-appetite-for-ai-makes-china-less-afraid-of-stronger-yuan",
-      "resume_fr": "Le boom mondial des investissements en IA stimule les exportations chinoises et rend Pékin plus à l'aise avec une appréciation du yuan."
+      "resume_fr": "Le secrétaire au Trésor Bessent adopte une position attentiste sur un éventuel allègement des sanctions contre l'Iran."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Fin mai 2026, et les marchés naviguent entre deux eaux : le VIX à 15.3 signale une sérénité presque suspecte, pendant que l'économiste en chef de la BCE avertit que la guerre en Iran laissera des traces persistantes sur l'inflation européenne — pas une parenthèse, une cicatrice.\n\nConcrètement pour Signal cette semaine : le portefeuille reste solide à +18.93% net depuis la création (capital à 23 786€), avec un écart au benchmark MSCI World de +8.06 points de pourcentage. Le MSCI lui-même ne bouge presque plus (+10.9% YTD, -0.1% sur la semaine) — ce qui rend l'écart d'autant plus significatif à ce stade. La mauvaise nouvelle du jour : les liquidités tombent à 4.1% du capital (971€), soit sous le seuil de 5% fixé par R01. Résultat mécanique : zéro achat possible cette semaine.\n\nC'est frustrant car la watchlist propose quelques setups intéressants — FSLR notamment, avec un Golden Cross Day-2 (fenêtre signal optimale) et une pente MM21 à +9.6% qui suggère un momentum en accélération. Mais la règle de liquidités minimales existe précisément pour éviter de se retrouver à sec en cas de coup dur, et on ne négocie pas avec les règles de sécurité. Même chose pour NVDA (#1 watchlist, score 91) ou AMZN (#3, score 83) : le cluster Tech&IA à 63% du portefeuille bloquerait de toute façon tout renforcement sectoriel supplémentaire via le soft cap.\n\nLe seul point de surveillance active cette semaine : ENR.DE à -9.7% après 31 jours. On reste dans les clous (stop-loss automatique = -25% sans condition, -15% après 90j), mais la trajectoire mérite attention. Si le titre continue de dériver sur les prochaines semaines sans catalyseur de retournement, la question d'une sortie anticipée se posera avec un vrai signal fondamental documenté — pas juste une lecture de la perte.\n\nPour la semaine à venir : surveiller la reconstitution des liquidités (dividendes éventuels, ou simplement le passage du temps si aucune sortie n'est envisagée), l'évolution du conflit Iran et ses effets sur l'inflation BCE, et la trajectoire de ENR.DE et ETN qui cumulent respectivement -9.7% et -7.4% depuis l'achat il y a 31 jours.",
+    "analyse_macro": "Cette semaine du 26 au 31 mai 2026, le signal macro le plus important est venu de la Fed : plusieurs membres du FOMC ont évoqué la possibilité d'une hausse de taux si les risques inflationnistes persistent — une rupture de ton notable après des mois de rhétorique accommodante. Ce n'est pas encore une décision, mais c'est un signal que le marché ne peut pas ignorer longtemps.\n\nPour Signal, la semaine s'est déroulée dans un calme relatif. Le portefeuille affiche +18.76% net depuis la création (contre +10.87% pour le MSCI World YTD), soit un écart de +8.06pp — une avance qui tient malgré un contexte de marché sans grande direction (MSCI +0.6% sur la semaine). Le VIX à 15.86 confirme un régime calme, ce qui autorise une vigilance ordinaire plutôt qu'une posture défensive.\n\nSur le plan décisionnel, la semaine est techniquement vide d'achats — non par manque d'idées, mais par contrainte mécanique : les liquidités sont tombées à 971€ (4.1% du capital), sous le seuil minimal de 5%, et le cluster Tech&IA représente 63% du portefeuille, en zone de soft cap sévère. FSLR (#1 watchlist, Golden Cross Day-2) aurait été un candidat sérieux dans d'autres circonstances. Frustrant, mais c'est exactement la discipline pour laquelle ces règles existent — éviter d'acheter au sommet d'un cluster surchargé avec des liquidités quasi-nulles.\n\nLe point de surveillance prioritaire cette semaine : les positions en légère dégradation (ADYEN.AS -7.6%, ENR.DE -8.3%, ETN -7.3%). Aucune n'approche du stop catastrophe à -25%, et toutes sont bloquées par R01 avant 90j de détention. La règle joue son rôle — elle empêche les sorties réflexes sur des positions jeunes sans signal fondamental documenté.\n\nPour la semaine à venir : surveiller les données d'inflation US et toute communication Fed supplémentaire — une confirmation hawkish pourrait peser sur les valorisations tech, précisément là où Signal est le plus exposé. Si les liquidités se reconstituent (dividendes, ou si une position atteint son stop), FSLR et ADBE (-2.4σ régression) restent les deux candidats prioritaires à l'entrée.",
     "conviction_globale": "neutre",
-    "message_utilisateurs": "Semaine calme côté décisions, agitée côté contraintes. Les liquidités sont tombées à 4.1% du capital — sous le seuil minimal de 5% — ce qui bloque mécaniquement tout nouvel achat cette semaine, indépendamment de la qualité des setups disponibles. La watchlist proposait pourtant des opportunités intéressantes (FSLR Day-2 Golden Cross, NVDA #1 avec score 91), mais la règle est la règle.\n\nLe portefeuille affiche +18.93% net depuis la création avec un écart de +8.06pp sur le MSCI World — des chiffres solides qu'on ne mettra pas en danger par impatience. Trois positions méritent une surveillance rapprochée : ENR.DE (-9.7%), ETN (-7.4%) et JPM (-5.0%), toutes détenues depuis 31 jours. Elles restent bien au-dessus des seuils stop-loss, mais si la dégradation se poursuit sans catalyseur positif, la question d'une sortie anticipée se reposera à 60-90 jours avec un signal fondamental documenté.\n\nPrioritaire pour les prochaines semaines : reconstituer un coussin de liquidités suffisant (>5%) pour pouvoir saisir les opportunités qui se présenteront, notamment si des rotations sectorielles créent des fenêtres d'entrée en dehors du cluster Tech&IA déjà saturé à 63%.",
-    "nb_decisions": 3
+    "message_utilisateurs": "Semaine sans transaction cette semaine — et c'est une bonne nouvelle, pas une mauvaise. Les deux verrous mécaniques ont fonctionné exactement comme prévu : les liquidités sont à 971€ (4.1% du capital, sous le seuil de 5%) et le cluster Tech&IA représente 63% du portefeuille, en zone de restriction sévère. FSLR avait un Golden Cross Day-2 particulièrement propre — dans d'autres conditions, c'était un achat. Ici, la discipline a primé.\n\nLe portefeuille reste à +18.76% net depuis la création, avec +8.06pp d'avance sur le MSCI World. Les positions sous pression (ADYEN -7.6%, ENR.DE -8.3%, ETN -7.3%) sont surveillées mais aucune ne déclenche de stop-loss à ce stade — et toutes sont protégées par la règle des 90 jours qui interdit les ventes sans signal fondamental documenté.\n\nLa news macro la plus importante de la semaine : plusieurs membres de la Fed ont évoqué une possible hausse de taux. Ce n'est pas encore une décision, mais c'est un signal à surveiller — surtout avec 63% d'exposition tech.\n\nProchaine action possible : si les liquidités se reconstituent ou si une position atteint son seuil de stop-loss, FSLR et ADBE sont les candidats en tête de liste.",
+    "nb_decisions": 4
   },
   "performance_history": [
     {
@@ -1564,6 +1556,13 @@
       "capital": 23785.5,
       "benchmark_cac40": -0.14,
       "benchmark_msci": 10.87
+    },
+    {
+      "date": "2026-06-01",
+      "perf": 18.76,
+      "capital": 23751.73,
+      "benchmark_cac40": 0.1,
+      "benchmark_msci": 11.23
     }
   ],
   "max_drawdown": -0.83
