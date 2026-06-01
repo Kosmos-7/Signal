@@ -132,9 +132,10 @@ function showLexique(){
   doc.innerHTML='<div class="d-head"><div><div class="d-tk">Lexique</div><div class="d-nm">Comment lire une fiche · définitions des signaux</div></div></div>'+
     '<div class="sep"></div>'+
     lexsec('Le score',
-      lexi('Score /100','Note de synthèse = <em>Momentum 45</em> + <em>Fondamentaux 50</em> + <em>Analystes 5</em>. Indicateur de <em>qualité</em> à un instant T, pas de timing : un score élevé ne garantit pas une hausse imminente.')+
-      lexi('Momentum · 45 pts','Dynamique technique : croisement de moyennes (20 pts), RSI (10), volume (5), position vs régression (5), valorisation conditionnée au régime de cross (5).')+
-      lexi('Fondamentaux · 50 pts','Santé financière concrète : croissance du chiffre d\'affaires, marge nette, marge de free cash-flow, PEG (valorisation rapportée à la croissance), endettement.')+
+      lexi('Score /100','Note de synthèse = <em>Qualité 45</em> + <em>Valorisation 30</em> + <em>Timing 22</em> + <em>Analystes 3</em>, ± pénalités (chase) / bonus (décote). La qualité et le prix pilotent ; le timing est un garde-fou. Un score élevé ne garantit pas une hausse imminente.')+
+      lexi('Qualité · 45 pts','Durabilité du business — ce que tu possèdes : marge nette (8), marge FCF (8), ROE / qualité du capital (12), croissance du CA plafonnée (10), bilan / dette (7).')+
+      lexi('Valorisation · 30 pts','La marge de sécurité — le prix payé : PEG (valorisation rapportée à la croissance, 15) + FCF yield (rendement du cash au prix actuel, 15).')+
+      lexi('Timing · 22 pts','Garde-fou, pas moteur : croisement de moyennes (10), pente MM21 (4), volume (3), RSI (2), position vs régression (3). Surtout, il pénalise les 2 pièges — chaser un sommet, rattraper un couteau.')+
       lexi('Analystes · 5 pts','Consensus sell-side (Acheter / Conserver / Vendre). Volontairement peu pondéré : biais acheteur structurel et révisions retardées.')+
       lexi('Étoiles','Résumé visuel du score : 5★ ≥ 90, 4★ ≥ 75, 3★ ≥ 60.'))+
     lexsec('Signaux de timing',
@@ -163,7 +164,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div><div class="rs">'+s.stars+'/5</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,2)+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
-      '<div><div class="qh">Décomposition du score</div>'+meter('Momentum',b.momentum||0,45)+meter('Fondamentaux',b.fondamentaux||0,50)+meter('Analystes',b.analystes||0,5)+'</div></div>'+
+      '<div><div class="qh">Décomposition du score</div>'+meter('Qualité',b.qualite||0,45)+meter('Valorisation',b.valorisation||0,30)+meter('Timing',b.timing||0,22)+meter('Analystes',b.analystes||0,3)+'</div></div>'+
     '<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA · a/a',fs(b.rev_growth_pct,1)+'%')+mk('Marge nette · TTM',f(b.net_margin_pct,1)+'%')+mk('Marge FCF · TTM',f(b.fcf_margin_pct,1)+'%')+'</div><div class="metrics-note">'+periodNote(b)+'</div>'+
     '<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
       '<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div></div>'+

@@ -241,7 +241,7 @@ def breakdown_block(stock):
     lines = [
         f"- Nom / secteur / région : {stock.get('name','')} · {stock.get('sector','')} · {stock.get('badge') or 'US'}",
         f"- Score Signal : {stock.get('score','?')}/100  ({stock.get('stars','?')}★)",
-        f"- Décomposition : momentum {b.get('momentum','?')}/45 · fondamentaux {b.get('fondamentaux','?')}/50 · analystes {b.get('analystes','?')}/5",
+        f"- Décomposition : qualité {b.get('qualite','?')}/45 · valorisation {b.get('valorisation','?')}/30 · timing {b.get('timing','?')}/22 · analystes {b.get('analystes','?')}/3",
         f"- Croisement : {b.get('cross_type','?')} (il y a {b.get('cross_days_ago','?')} jours), pente MM21 {fmt(b.get('cross_slope_mm21_pct'),'%')}",
         f"- RSI : {fmt(b.get('rsi'),'',0)}   |   Z-score régression : {fmt(b.get('regression_z'),'σ',2)}"
         + (f" (fenêtre {b.get('regression_window_years')} ans)" if b.get("regression_window_years") else ""),
@@ -297,8 +297,8 @@ Date du jour : {today}.
   pointe d'esprit pince-sans-rire est bienvenue de loin en loin, JAMAIS lourde, jamais un
   calembour gratuit, jamais de hype ni de ton promotionnel. Le fond prime sur le trait d'esprit.
 - AUCUNE prétention d'alpha, AUCUN conseil d'achat/vente, AUCUN objectif de cours chiffré.
-- Le score reflète une QUALITÉ à un instant T, JAMAIS un timing. Le momentum est un
-  DÉCLENCHEUR, jamais une thèse.
+- Le score reflète une QUALITÉ à un instant T, JAMAIS un timing. Le timing technique est un
+  GARDE-FOU (il pénalise chase/couteau), jamais une thèse d'achat.
 - Nomme EXPLICITEMENT le type de douve (marque / coût / réseau / coûts de transfert /
   actif réglementaire) et QUESTIONNE sa durabilité (qu'est-ce qui la tuerait ?).
 - CHIFFRE TOUT jugement de valorisation avec le NOMBRE fourni (PER forward, PER courant, FCF

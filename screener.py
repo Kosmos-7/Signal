@@ -666,6 +666,7 @@ def score_ticker(ticker, vix=None):
         debt_eq_raw  = info.get("debtToEquity")          # garde None pour distinguer net-cash (=0) vs missing
         debt_eq      = debt_eq_raw if debt_eq_raw is not None else 0
         reco         = info.get("recommendationMean") or 3.5
+        roe          = info.get("returnOnEquity")        # ROE — proxy qualité du capital (v3) ; None si absent
 
         # Période de réf. des fondamentaux (dernier trimestre publié ; mostRecentQuarter = epoch s).
         # Temporalités Yahoo : rev_growth = trimestriel a/a (MRQ vs même trim. N-1) ;
@@ -683,26 +684,24 @@ def score_ticker(ticker, vix=None):
         score   = 0
         details = {}
 
-        # Momentum (45 pts) = cross (20) + RSI (5) + volume (5) + régression (5) + valorisation (5) + pente MM21 (5)
-        vol_ok        = vol_recent > vol_annual
+        # ════ TIMING (22 pts) — GARDE-FOU, pas moteur (v3) ════════════════════════
+        # = cross (10) + pente MM21 (4) + volume (3) + RSI (2) + régression zone saine (3).
+        # Apporte PEU en positif ; ce sont ses PÉNALITÉS (CHASE, couteau — plus bas) qui mordent.
+        vol_ok = vol_recent > vol_annual
 
-        # RSI gradué (5 pts, v2.1 — réduit de 10 à 5 : redondant avec régression + valo
-        # qui mesurent déjà l'extension ; les 5 pts récupérés vont à la pente MM21).
-        # Zone stricte 40-60 = 5, élargie 35-65 = 2, hors zone = 0.
-        if   40 <= rsi <= 60: rsi_pts = 5
-        elif 35 <= rsi <= 65: rsi_pts = 2
+        # RSI (0-2) : zone stricte 40-60 = 2, élargie 35-65 = 1, hors = 0
+        if   40 <= rsi <= 60: rsi_pts = 2
+        elif 35 <= rsi <= 65: rsi_pts = 1
         else:                 rsi_pts = 0
         rsi_ok = rsi_pts > 0
 
-        vol_pts = 5  if vol_ok else 0
-        reg_pts = 5  if reg_zone_saine else 0
+        vol_pts = 3  if vol_ok else 0           # confirmation par le volume
+        reg_pts = 3  if reg_zone_saine else 0   # cours dans sa zone de régression saine
 
-        # Pente MM21 (5 pts, v2.1) — FORCE de tendance : le seul aspect « qualité du trend »
-        # qu'on ne notait pas (la pente ne servait que dans les warnings). Récupère les 5 pts
-        # retirés au RSI. Pente = variation de la MM21 sur 5 séances (cf. detect_cross).
+        # Pente MM21 (0-4) — force de tendance (variation MM21 sur 5 séances)
         _slope_mm21 = cross_info.get("slope_mm21_pct") or 0
-        if   _slope_mm21 >= 0.8:  slope_pts = 5   # accélération franche
-        elif _slope_mm21 >= 0.3:  slope_pts = 3   # hausse nette
+        if   _slope_mm21 >= 0.8:  slope_pts = 4   # accélération franche
+        elif _slope_mm21 >= 0.3:  slope_pts = 2   # hausse nette
         elif _slope_mm21 >= 0.0:  slope_pts = 1   # légèrement positive
         else:                     slope_pts = 0   # MM21 baissière
 
@@ -747,22 +746,18 @@ def score_ticker(ticker, vix=None):
             else:                                              val_pts = 0   # chute libre
             val_pts_mode = "normal"
 
-        # ── Momentum total avec VIX dampener (Phase 2) ─────────────────────
-        # Le multiplier réduit la valeur attribuée au momentum quand le marché
-        # est en stress (VIX élevé). Le bucket fondamentaux (50 pts) et analystes
-        # (5 pts) ne sont PAS dampenés — donc en régime panique, le score max
-        # atteignable baisse (intentionnellement : aucune action ne peut sembler
-        # "parfaite" en plein VIX 40+).
-        momentum_raw  = cross_pts + rsi_pts + vol_pts + reg_pts + val_pts + slope_pts
-        vix_mult      = config.vix_multiplier(vix)
-        momentum_total = round(momentum_raw * vix_mult)
+        # Cross MM21/MM200 (0-10) — cross_score rend 0-20, ramené à l'échelle timing v3.
+        cross_pts_t = round(cross_pts / 2)
+
+        # NB v3 : val_pts (drawdown vs 52w) reste calculé pour la justification/affichage,
+        # mais N'ENTRE PLUS dans le score (l'extension est déjà couverte par la régression ;
+        # la décote profonde de qualité est gérée par le bonus décote, plus bas).
+        timing_pts = cross_pts_t + slope_pts + vol_pts + reg_pts + rsi_pts   # max 22
 
         # ── Retracement Fibonacci (annotation informationnelle, hors scoring)
-        # Fournit le contexte chartiste classique : -10% sur un rally de +20% est très
-        # différent de -10% sur un rally de +500%. Ne change pas le score, enrichit la lecture.
         fibo = fibonacci_retracement(close, lookback=252)
 
-        score += momentum_total
+        score += timing_pts
 
         details["cross_regime"]        = cross_info["regime"]
         details["cross_days_ago"]      = cross_info["days_since_cross"]
@@ -796,47 +791,57 @@ def score_ticker(ticker, vix=None):
             _warn_d = "Affaiblissement post-rally sur cross stale — pente MM21 fortement négative malgré cours largement au-dessus de MM200"
         details["signal_dynamics_warning"] = _warn_d
 
-        # Fondamentaux (50 pts, cap strict)
-        earnings_growth = info.get("earningsGrowth") or 0
         fcf        = info.get("freeCashflow")  or 0
         total_rev  = info.get("totalRevenue")  or 1
         fcf_margin = fcf / total_rev if total_rev > 0 else 0
         fcf_yield  = (fcf / market_cap * 100) if market_cap else None   # rendement du FCF au prix actuel
-        fund_pts = 0
-        # Revenue growth (0-15 pts)
-        if rev_growth > 0.10:   fund_pts += 15
-        elif rev_growth > 0.05: fund_pts += 8
-        # Marges nettes (0-10 pts)
-        if margins > 0.10:      fund_pts += 10
-        elif margins > 0:       fund_pts += 5
-        # Free Cash Flow margin (0-5 pts, complémentaire aux marges)
-        if fcf_margin > 0.15:   fund_pts += 5
-        elif fcf_margin > 0.05: fund_pts += 3
-        # PEG ratio (0-15 pts) — sous-valorisation relative à la croissance
-        if   0 < peg < 1:       fund_pts += 15
-        elif 0 < peg < 2:       fund_pts += 10
-        elif 2 <= peg < 3:      fund_pts += 5
-        # EPS growth (0-5 pts) — plus forward-looking que le CA
-        if earnings_growth > 0.15:   fund_pts += 5
-        elif earnings_growth > 0.05: fund_pts += 2
-        # Dette/capitaux propres (0-5 pts) — fix v2.0.1 : inclut net-cash (D/E=0)
-        # AVANT : `0 < debt_eq < 100` excluait les entreprises sans dette (DSY, AAPL en net cash)
-        # APRÈS : 0 ≤ debt_eq < 100 inclut net-cash. None reste sans pts (donnée manquante).
-        if debt_eq_raw is not None and 0 <= debt_eq_raw < 100:
-            fund_pts += 5
-        fund_pts = min(50, fund_pts)   # cap strict — max 50 pts fondamentaux
-        score += fund_pts
+
+        # ════ QUALITÉ (45 pts) — durabilité du business : ce que tu possèdes (v3) ════
+        # marge nette (8) + marge FCF (8) + ROE (12) + croissance CA (10, plafonnée) + dette (7)
+        qualite_pts = 0
+        if   margins > 0.15:    qualite_pts += 8      # marge nette
+        elif margins > 0.08:    qualite_pts += 5
+        elif margins > 0:       qualite_pts += 2
+        if   fcf_margin > 0.15:  qualite_pts += 8     # marge FCF (le cash, dur à maquiller — Bezos)
+        elif fcf_margin > 0.08:  qualite_pts += 5
+        elif fcf_margin > 0:     qualite_pts += 2
+        if roe is not None:                            # ROE — proxy de douve (Mauboussin)
+            if   roe >= 0.25:   qualite_pts += 12
+            elif roe >= 0.15:   qualite_pts += 9
+            elif roe >= 0.08:   qualite_pts += 5
+            elif roe > 0:       qualite_pts += 2
+        if   rev_growth > 0.10: qualite_pts += 10     # croissance CA PLAFONNÉE (ne persiste pas — Mauboussin)
+        elif rev_growth > 0.05: qualite_pts += 6
+        elif rev_growth > 0.02: qualite_pts += 3
+        if debt_eq_raw is not None:                    # bilan / dette (fortress — Dimon ; net-cash valorisé)
+            if   debt_eq_raw < 50:  qualite_pts += 7
+            elif debt_eq_raw < 100: qualite_pts += 4
+        qualite_pts = min(45, qualite_pts)
+        score += qualite_pts
+
+        # ════ VALORISATION (30 pts) — ta marge de sécurité (Buffett) (v3) ════
+        # PEG (15) + FCF yield (15). PER absolu EXCLU : pénaliserait la qualité par construction.
+        valo_pts = 0
+        if   0 < peg < 1:  valo_pts += 15             # PEG : valo relative à la croissance
+        elif 0 < peg < 2:  valo_pts += 10
+        elif 0 < peg < 3:  valo_pts += 5
+        if fcf_yield is not None:                      # FCF yield : cher/pas cher, robuste
+            if   fcf_yield >= 8:   valo_pts += 15
+            elif fcf_yield >= 5:   valo_pts += 11
+            elif fcf_yield >= 3:   valo_pts += 7
+            elif fcf_yield >= 1.5: valo_pts += 3
+        valo_pts = min(30, valo_pts)
+        score += valo_pts
 
         details["rev_growth"] = rev_growth
         details["net_margin"] = margins
         details["peg"]        = peg
         details["reco"]       = reco
 
-        # Consensus analystes (5 pts — signal lagging à fort biais haussier structurel,
-        # réduit pour faire place à la valorisation actuelle dans le bloc momentum)
+        # Consensus analystes (3 pts, v3 — signal lagging à fort biais haussier : cross-check mineur)
         ana_pts = 0
-        if reco < 2.0:   ana_pts = 5
-        elif reco < 2.5: ana_pts = 3
+        if   reco < 2.0: ana_pts = 3
+        elif reco < 2.5: ana_pts = 2
         elif reco < 3.0: ana_pts = 1
         score += ana_pts
 
@@ -881,7 +886,7 @@ def score_ticker(ticker, vix=None):
         #   - MM21 qui ne dévisse pas (pente 5j > -2%).
         #   z ≤ -2,5σ → +6 (forte) | z ≤ -2,0σ → +4 (modérée)  [palier léger ±2 retiré, v2.2.1]
         value_bonus = 0
-        if z_valid and fund_pts >= 40:
+        if z_valid and qualite_pts >= 30:
             _dc = cross_info.get("days_since_cross")
             _fresh_death = (cross_info["regime"] == "death" and _dc is not None and _dc <= 60)
             _slope = cross_info.get("slope_mm21_pct") or 0
@@ -948,12 +953,11 @@ def score_ticker(ticker, vix=None):
             _signal_warning = "Affaiblissement post-rally sur cross stale — pente MM21 fortement négative malgré cours largement au-dessus de MM200"
 
         breakdown = {
-            "momentum":              min(45, momentum_total),
-            "momentum_raw":          momentum_raw,           # Phase 2 : avant VIX dampener
-            "vix_value":             vix,                    # VIX utilisé pour le multiplier
-            "vix_multiplier":        round(vix_mult, 3),     # multiplier appliqué
-            "fondamentaux":          min(50, fund_pts),
-            "analystes":             min(5, ana_pts),
+            "qualite":               qualite_pts,            # v3 : 45 max — durabilité du business
+            "valorisation":          valo_pts,               # v3 : 30 max — marge de sécurité
+            "timing":                timing_pts,             # v3 : 22 max — garde-fou
+            "analystes":             min(3, ana_pts),
+            "vix_value":             vix,
             # Croisement MM21/MM200
             "cross_regime":          cross_info["regime"],
             "cross_type":            cross_info["cross_type"],
@@ -962,7 +966,7 @@ def score_ticker(ticker, vix=None):
             "cross_slope_mm21_pct":  cross_info["slope_mm21_pct"],
             "cross_volume_confirmed":cross_info["volume_confirmed"],
             "signal_dynamics_warning": _signal_warning,
-            "cross_pts":             cross_pts,
+            "cross_pts":             cross_pts_t,
             "rsi_pts":               rsi_pts,
             "vol_pts":               vol_pts,
             "reg_pts":               reg_pts,
@@ -1089,15 +1093,15 @@ def raison_sortie(prev_stock, current_stock=None):
         elif days <= 180:
             parts.append(f"Death Cross confirmé ({days}j) — régime baissier persistant")
 
-    mo = bd.get("momentum", 0)
-    if mo < 15:
-        parts.append(f"Momentum quasi-nul ({mo}/40) — tendance qui s'essouffle")
-    elif mo < 22 and new_score is not None and new_score < prev_score:
-        parts.append(f"Momentum dégradé ({mo}/40)")
+    mo = bd.get("timing", 0)
+    if mo < 6:
+        parts.append(f"Timing quasi-nul ({mo}/22) — tendance qui s'essouffle")
+    elif mo < 9 and new_score is not None and new_score < prev_score:
+        parts.append(f"Timing dégradé ({mo}/22)")
 
-    fund = bd.get("fondamentaux", 0)
-    if fund < 20:
-        parts.append(f"Fondamentaux insuffisants ({fund}/50)")
+    fund = bd.get("qualite", 0) + bd.get("valorisation", 0)
+    if fund < 35:
+        parts.append(f"Qualité + valorisation insuffisantes ({fund}/75)")
 
     reg = bd.get("regression_signal", "")
     if reg == "surachat":

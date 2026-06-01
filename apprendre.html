@@ -660,57 +660,61 @@
     <div class="scoring-block">
       <div class="scoring-row">
         <div class="scoring-header">
-          <span class="scoring-name">Momentum</span>
+          <span class="scoring-name">Qualité du business</span>
           <span class="scoring-pts">45 pts</span>
         </div>
         <div class="bar-track">
           <div class="bar-fill" style="width: 45%"></div>
         </div>
         <div class="scoring-desc">
-          L'algorithme évalue si le titre est en tendance haussière claire. Six signaux comptent : le Golden Cross (MM21 au-dessus de MM200, avec bonus selon la fraîcheur du croisement), le RSI dans une zone équilibrée (40-60 = 5 pts), la <strong>pente de la MM21</strong> (la force/accélération de la tendance courte, 5 pts), le volume des dernières semaines supérieur à la moyenne longue (confirmation), un cours proche de sa trajectoire de régression long terme (zone saine), et la <strong>valorisation actuelle</strong> (5 pts max, mais le barème dépend du régime cross — détaillé plus bas). Un titre qui monte régulièrement avec des volumes croissants <em>et</em> qui offre un point d'entrée correct score bien. Un titre qui oscille sans direction, qui vient de former un Death Cross, ou qui est collé à son plus haut récent (chase de rally), score moins.
-          <br><br>
-          <em style="color:var(--text3)">Pour aller plus loin — détail d'implémentation.</em>
-          <br><br>
-          <strong>Le barème valorisation est conditionné au cross</strong> (mise à jour 23/05/2026) :
-          <ul style="margin-top:0.5rem;line-height:1.55">
-            <li><strong>Sans Golden Cross frais</strong> : le drawdown profond signale un risque (chute libre = 0 pt, momentum cassé = 1 pt). C'est la lecture classique "ne pas attraper un couteau qui tombe".</li>
-            <li><strong>Avec Golden Cross frais (≤30j)</strong> : barème <em>inversé</em>. Une chute profonde (−30%+) <em>suivie</em> d'un Golden Cross authentique est traitée comme un setup premium (5 pts max), sur la logique classique de mean-reversion : une fois la chute purgée et le retournement confirmé techniquement, le point d'entrée redevient favorable. C'est le pattern observé sur META T4 2022 / NVDA mars 2020 / AMD début 2023.</li>
-          </ul>
-          La logique : sans signal technique de reprise, une chute reste un risque. Mais quand un Golden Cross frais matérialise le retournement, la chute préalable devient un atout (réinitialisation propre, mean-reversion confirmée).
-          <br><br>
-          <strong>Lecture dynamique :</strong> un cross n'est pas un état figé. Le screener flag automatiquement les signaux en transition (death cross qui se résorbe, golden qui s'affaiblit, rebond mean-reversion sur cross ancien) via un champ <code>signal_dynamics_warning</code> — pour éviter les lectures binaires d'un signal qui se nuance. Quand ce drapeau est levé, l'IA traite le cross comme ambigu et ne tranche pas dessus seul.
+          La durabilité de l'entreprise — <em>ce que tu possèdes</em>, et le signal le plus fiable (la qualité persiste dans le temps). Cinq dimensions : marge nette, marge de Free Cash Flow (le cash réellement généré, bien plus dur à maquiller que le bénéfice comptable), ROE / qualité du capital employé (un proxy de la « douve »), croissance du chiffre d'affaires (<em>plafonnée</em> : statistiquement la croissance ne persiste pas, on ne sur-récompense pas l'hyper-croissance), et le bilan / endettement (un bilan solide = de l'optionalité).
         </div>
       </div>
 
       <div class="scoring-row">
         <div class="scoring-header">
-          <span class="scoring-name">Fondamentaux</span>
-          <span class="scoring-pts">50 pts</span>
+          <span class="scoring-name">Valorisation</span>
+          <span class="scoring-pts">30 pts</span>
         </div>
         <div class="bar-track">
-          <div class="bar-fill" style="width: 50%"></div>
+          <div class="bar-fill" style="width: 30%"></div>
         </div>
         <div class="scoring-desc">
-          Le cœur du score. Six dimensions sont notées : la croissance du chiffre d'affaires, la marge nette, la marge de Free Cash Flow (la trésorerie réellement générée — bien plus difficile à maquiller comptablement que la marge nette), le PEG ratio (valorisation rapportée à la croissance), la croissance du bénéfice par action (EPS), et l'endettement. Ces 50 points mesurent la santé financière concrète de l'entreprise — pas ce que le marché espère qu'elle deviendra, mais ce qu'elle produit vraiment, trimestre après trimestre.
+          Le prix payé — <em>ta marge de sécurité</em>. Deux mesures : le <strong>PEG</strong> (valorisation rapportée à la croissance — il ne pénalise pas un multiple élevé s'il est justifié par la croissance) et le <strong>FCF yield</strong> (le rendement du cash au prix actuel — cher vs pas cher, robuste et comparable entre secteurs). Le PER absolu est volontairement <em>exclu</em> : il pénaliserait mécaniquement la qualité, qui se paie toujours plus cher. « Ce qui est intelligent à un certain prix devient stupide à un autre » (Buffett).
+        </div>
+      </div>
+
+      <div class="scoring-row">
+        <div class="scoring-header">
+          <span class="scoring-name">Timing</span>
+          <span class="scoring-pts">22 pts</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: 22%"></div>
+        </div>
+        <div class="scoring-desc">
+          Un <strong>garde-fou, pas un moteur</strong>. Croisement de moyennes MM21/MM200 (direction + fraîcheur), pente de la MM21 (force de la tendance), volume (confirmation), RSI sain, et position du cours vs sa régression long terme. Son vrai rôle n'est pas de « faire monter » le score, mais d'éviter <strong>deux pièges d'entrée</strong> : chaser un sommet (pénalité CHASE, jusqu'à −6) et rattraper un couteau qui tombe (death cross frais, jusqu'à −5). À l'inverse, une <strong>décote de qualité qui se stabilise</strong> reçoit un bonus (Setup B, jusqu'à +6).
+          <br><br>
+          <strong>Lecture dynamique :</strong> un cross n'est pas un état figé. Le screener flag automatiquement les signaux en transition (death cross qui se résorbe, golden qui s'affaiblit) via un champ <code>signal_dynamics_warning</code>, pour éviter les lectures binaires.
         </div>
       </div>
 
       <div class="scoring-row">
         <div class="scoring-header">
           <span class="scoring-name">Consensus analystes</span>
-          <span class="scoring-pts">5 pts</span>
+          <span class="scoring-pts">3 pts</span>
         </div>
         <div class="bar-track">
-          <div class="bar-fill" style="width: 5%"></div>
+          <div class="bar-fill" style="width: 3%"></div>
         </div>
         <div class="scoring-desc">
-          Recommandation moyenne des analystes sell-side, sur une échelle Acheter / Conserver / Vendre. Volontairement peu pondéré : la littérature financière documente un biais structurel des analystes vers les recommandations d'achat (conflits d'intérêt, couverture sélective des titres déjà appréciés, relations clients). C'est aussi un signal lagging — les révisions interviennent souvent après les événements. Le poids a été ramené de 10 à 5 pts pour libérer de l'espace au scoring de timing d'entrée (valorisation actuelle), plus actionnable. Signal préfère ses propres signaux quantitatifs, mais le consensus reste utile comme contre-indicateur quand il diverge fortement de l'analyse fondamentale.
+          Recommandation moyenne des analystes sell-side, sur une échelle Acheter / Conserver / Vendre. Volontairement <em>très</em> peu pondéré : la littérature financière documente un biais structurel des analystes vers les recommandations d'achat (conflits d'intérêt, couverture sélective des titres déjà appréciés, relations clients). C'est aussi un signal lagging — les révisions interviennent souvent après les événements. Le poids a été ramené à 3 pts en v3 : un simple contre-indicateur quand le consensus diverge fortement de l'analyse fondamentale, pas un pilier du score.
         </div>
       </div>
     </div>
 
     <div class="scoring-note">
-      Les 30 valeurs avec le score le plus élevé apparaissent sur la watchlist chaque lundi. Un titre peut <span class="badge-in">↑ Entrer</span> ou <span class="badge-out">↓ Sortir</span> selon l'évolution hebdomadaire de son score — momentum qui s'améliore ou se dégrade, publication de résultats, simple recalibrage des signaux.
+      Les 30 valeurs avec le score le plus élevé apparaissent sur la watchlist chaque lundi. Un titre peut <span class="badge-in">↑ Entrer</span> ou <span class="badge-out">↓ Sortir</span> selon l'évolution hebdomadaire de son score — qualité ou valorisation qui évoluent, timing qui se dégrade, publication de résultats, simple recalibrage des signaux.
       <br><br>
       <strong>VIX — indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est suivi chaque jour ouvré mais ne touche pas au scoring : une version expérimentale qui freinait le momentum en régime de stress a été testée puis désactivée (elle dégradait légèrement le Sharpe sur un backtest 2019-2024 trop bull). Le VIX reste donc <em>informationnel</em> — Claude peut le citer, aucun mécanisme automatique ne s'en sert. Détail de l'indicateur et de ses seuils : voir l'indicateur VIX, §4.
     </div>
@@ -731,7 +735,7 @@
         <span class="concept-label">Score global</span>
         <span class="concept-example">★★★★☆ &nbsp;84</span>
         <div class="concept-body">
-          Le chiffre est le score sur 100, somme des trois composantes : momentum (45 pts), fondamentaux (50 pts), consensus analystes (5 pts). Les étoiles sont un résumé visuel : 5★ à partir de 90, 4★ à partir de 75, 3★ à partir de 60.
+          Le chiffre est le score sur 100, somme de quatre composantes — qualité (45 pts), valorisation (30 pts), timing (22 pts), consensus analystes (3 pts) — ajustée de pénalités (chase) et de bonus (décote). Les étoiles sont un résumé visuel : 5★ à partir de 90, 4★ à partir de 75, 3★ à partir de 60.
           <br><br>
           Un score élevé ne garantit pas une hausse imminente — il signale que plusieurs signaux convergent favorablement à un instant T. Le score d'un titre peut rester haut pendant qu'il corrige à court terme : les fondamentaux et la tendance long terme évoluent lentement, le cours peut bouger vite. C'est un indicateur de qualité, pas de timing.
         </div>

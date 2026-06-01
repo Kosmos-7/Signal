@@ -1,18 +1,21 @@
 # Méthodologie d'évaluation d'un titre
 
-Approche en 3 piliers, validée empiriquement sur des décennies de recherche académique.
+Approche en 4 composantes (refonte v3, juin 2026). **Philosophie : la qualité et le prix pilotent le score (75 pts) ; le timing technique n'est qu'un garde-fou (22 pts) qui borne le downside — il pénalise fort les 2 pièges d'entrée (chaser un sommet, rattraper un couteau) mais n'apporte que peu en positif.** Validée empiriquement sur des décennies de recherche académique.
 
 ## Scoring synthétique : 100 points
 
 ```
-Momentum technique  →  45 pts  (cross 20 + RSI 5 + vol 5 + reg 5 + valorisation 5 + pente MM21 5)
-Fondamentaux        →  50 pts
-Analystes           →  5 pts
+Qualité du business →  45 pts  (marge nette 8 + marge FCF 8 + ROE 12 + croissance CA 10 + dette 7)
+Valorisation        →  30 pts  (PEG 15 + FCF yield 15)
+Timing (garde-fou)  →  22 pts  (cross 10 + pente MM21 4 + volume 3 + RSI 2 + régression 3)
+Analystes           →   3 pts
                        ─────
-                       100 pts
+                       100 pts   ± pénalités (chase −6/−4, death −5/−3) / bonus (décote +6/+4)
 ```
 
-Pondération calibrée par l'expérience (le projet Signal applique cette logique en production sur 124 tickers).
+Pondération calibrée par l'expérience (le projet Signal applique cette logique en production sur 133 tickers).
+
+> **Note v3 (juin 2026)** — La structure est passée de 3 piliers (Momentum 45 / Fondamentaux 50 / Analystes 5) à 4 composantes (Qualité 45 / Valorisation 30 / Timing 22 / Analystes 3). Les sections détaillées ci-dessous décrivent la **mécanique** de chaque signal (cross_score, z-score régression, CHASE, décote — toujours valide), mais les **pondérations** citées dans certaines reflètent encore l'ancienne échelle. Pour les points exacts, se référer à la table ci-dessus. La philosophie : qualité + prix pilotent, le timing borne le risque.
 
 **Approche neutre — aucune prétention d'alpha.** Méthodes publiques appliquées avec discipline ; mise à l'épreuve par l'observation du portefeuille IA en réel, pas par backtest. Le scoring est un **outil de discipline et d'attention sélective** (filtrage chase de rally, identification Setup B, structuration des décisions), pas un générateur d'alpha.
 
