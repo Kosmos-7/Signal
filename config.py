@@ -149,8 +149,10 @@ def apply_sell_cost_and_tax(
 # Claude peut le citer comme contexte macro dans son analyse éditoriale, sans
 # qu'il y ait une mécanique post-LLM qui dampene les scores.
 #
-# Pour réactiver : flipper VIX_DAMPENER_ENABLED = True (les paramètres restent
-# déclarés et calibrés ci-dessous).
+# NOTE v3 (2026-06) : le point d'application dans score_ticker a été RETIRÉ par la
+# refonte v3 — flipper VIX_DAMPENER_ENABLED = True ne changerait plus que des logs.
+# Réactiver le dampener exigerait de réintroduire l'application du multiplier dans
+# le bucket timing de screener.score_ticker. Les paramètres restent calibrés ci-dessous.
 
 VIX_DAMPENER_INTERCEPT = 1.5
 VIX_DAMPENER_SLOPE     = 0.025

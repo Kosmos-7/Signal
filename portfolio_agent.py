@@ -50,6 +50,21 @@ def load_json(path, default):
     except:
         return default
 
+def load_portfolio_strict(path="portfolio.json"):
+    """Charge portfolio.json en échouant BRUYAMMENT s'il est corrompu.
+
+    L'ancien fallback silencieux (load_json → portefeuille vide à 10 000 €)
+    aurait ÉCRASÉ tout le portefeuille au run suivant un fichier corrompu.
+    Fichier absent = premier run légitime → portefeuille vide.
+    """
+    if not os.path.exists(path):
+        return portfolio_vide()
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        raise SystemExit(f"❌ {path} illisible ({e}) — abandon SANS écrire pour préserver l'état existant")
+
 def semaine():
     d = date.today()
     return f"Sem. {d.isocalendar()[1]} · {d.year}"
@@ -128,18 +143,30 @@ def get_eur_gbp_rate():
         return 0.86
 
 def detect_currency(ticker, market=""):
-    """Détermine la devise native d'un ticker (EUR / USD / GBP)."""
+    """Détermine la devise native d'un ticker (EUR / USD / GBP / DKK / SEK / NOK).
+
+    Correction 2026-06-10 : Copenhague (.CO), Stockholm (.ST) et Oslo (.OL)
+    étaient mappés EUR alors qu'ils cotent en couronnes — ORSTED.CO a été
+    acheté avec un prix DKK traité comme EUR (quantité 7 au lieu de 52).
+    """
     t = ticker.upper()
     m = (market or "").upper()
-    # Suffixes Yahoo Finance → EUR
+    # Couronnes nordiques (hors zone euro)
+    if t.endswith(".CO") or "CPH" in m:
+        return "DKK"
+    if t.endswith(".ST") or "OMX" in m or "STO" in m:
+        return "SEK"
+    if t.endswith(".OL") or "OSL" in m:
+        return "NOK"
+    # Suffixes Yahoo Finance → EUR (zone euro uniquement)
     if any(t.endswith(s) for s in [".AS", ".PA", ".DE", ".BR", ".MI", ".MC", ".AT",
-                                    ".IS", ".HE", ".CO", ".OL", ".ST", ".VI", ".LI"]):
+                                    ".HE", ".VI", ".LI"]):
         return "EUR"
-    # Codes marché → EUR (zone euro + UE hors UK)
+    # Codes marché → EUR (zone euro)
     EUR_MARKETS = {
         "PAR", "EPA", "AMS", "EURONEXT", "FRA", "XETRA", "ETR", "GER",
-        "MIL", "BIT", "MCE", "BME", "HEL", "CPH", "OMX", "WSE",
-        "VIE", "ATH", "LIS", "OSL",
+        "MIL", "BIT", "MCE", "BME", "HEL", "WSE",
+        "VIE", "ATH", "LIS",
     }
     if any(k in m for k in EUR_MARKETS):
         return "EUR"
@@ -147,6 +174,24 @@ def detect_currency(ticker, market=""):
     if t.endswith(".L") or "LSE" in m or "IOB" in m:
         return "GBP"
     return "USD"
+
+# FX à la volée pour les devises hors USD/GBP (passées en paramètres historiques).
+# Cache par run — un seul fetch par devise.
+_FX_PAIRS    = {"DKK": "EURDKK=X", "SEK": "EURSEK=X", "NOK": "EURNOK=X", "CHF": "EURCHF=X"}
+_FX_FALLBACK = {"DKK": 7.46, "SEK": 11.3, "NOK": 11.6, "CHF": 0.93}
+_fx_cache    = {}
+
+def get_eur_rate(currency):
+    """Taux EUR→devise (convention Yahoo : EURXXX=X = nb XXX pour 1 EUR)."""
+    if currency in _fx_cache:
+        return _fx_cache[currency]
+    try:
+        v = last_valid_close(yf.Ticker(_FX_PAIRS[currency]).history(period="2d")["Close"])
+        rate = round(v, 4) if v else _FX_FALLBACK[currency]
+    except Exception:
+        rate = _FX_FALLBACK.get(currency, 1.0)
+    _fx_cache[currency] = rate
+    return rate
 
 def to_eur(montant, currency, eur_usd, eur_gbp=0.86):
     """Convertit un montant en devise native vers EUR.
@@ -163,6 +208,8 @@ def to_eur(montant, currency, eur_usd, eur_gbp=0.86):
         return round(montant / eur_usd, 2)
     if currency == "GBP":
         return round(montant / eur_gbp, 2)
+    if currency in _FX_PAIRS:   # DKK / SEK / NOK / CHF — fetch à la volée (cache par run)
+        return round(montant / get_eur_rate(currency), 2)
     return round(montant, 2)
 
 def maj_position(pos, eur_usd, eur_gbp=0.86):
@@ -174,6 +221,15 @@ def maj_position(pos, eur_usd, eur_gbp=0.86):
     prix = get_prix(pos["ticker"])
     if not prix or prix != prix:   # None, 0 ou NaN (NaN != NaN) → garde la valeur précédente
         return False
+    # Garde de sanité : un prix qui varie de plus de ×3 / ÷3 d'un run à l'autre est
+    # presque toujours une erreur de données (GBp non converti = ×100, split non
+    # ajusté, devise) — on refuse la maj et on alerte plutôt que de corrompre.
+    prev = pos.get("prix_actuel")
+    if prev and prev == prev and prev > 0:
+        ratio = prix / prev
+        if ratio > 3 or ratio < 1 / 3:
+            print(f"  🚨 {pos['ticker']} : prix {prix} aberrant vs précédent {prev} (×{ratio:.2f}) — maj refusée (split ? devise ?)")
+            return False
     currency = pos.get("currency") or detect_currency(pos["ticker"], pos.get("market", ""))
     pos["currency"]        = currency
     pos["prix_actuel"]     = prix
@@ -257,7 +313,7 @@ def get_contexte_marche(last_known_vix=None):
         except:
             ctx[label] = {"perf_ytd": 0, "perf_semaine": 0}
 
-    # ── VIX (Phase 2) — utilisé par le screener pour dampener le momentum en régime stress
+    # ── VIX — indicateur contextuel (affichage dashboard + prompt) ; hors scoring depuis v3
     # Stratégie de fallback en 3 niveaux :
     #   1. Fetch yfinance ^VIX (close du jour)
     #   2. last_known_vix (= dernier VIX en cache dans portfolio.json)
@@ -1366,7 +1422,7 @@ def main():
 
     today     = str(date.today())
     watchlist = load_json("watchlist.json", {})
-    portfolio = load_json("portfolio.json", portfolio_vide())
+    portfolio = load_portfolio_strict("portfolio.json")
 
     # Lire capital_initial depuis le JSON (pas hardcodé) — corrige le bug post-injection
     global CAPITAL_INITIAL
@@ -1385,7 +1441,7 @@ def main():
     macro_news  = get_macro_news()
     print(f"   CAC40 semaine : {contexte.get('cac40', {}).get('perf_semaine', 0):+.1f}%")
     print(f"   Mode panique  : {contexte.get('mode_panique')}")
-    print(f"   VIX           : {contexte.get('vix')} ({contexte.get('vix_source')}) → multiplier momentum × {contexte.get('vix_multiplier')}")
+    print(f"   VIX           : {contexte.get('vix')} ({contexte.get('vix_source')}) [contextuel, hors scoring]")
     print(f"   EUR/USD       : {eur_usd} · EUR/GBP : {eur_gbp}")
     print(f"   Macro news    : {len(macro_news)} article(s) macro sélectionné(s)")
 
@@ -1447,12 +1503,15 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         print(f"   Conviction globale : {decisions_claude.get('conviction_globale', '?')}")
 
     except json.JSONDecodeError as e:
+        # Échec BRUYANT sans écrire : avant, on publiait "Erreur parsing" en
+        # analyse_macro sur le site (masqué par continue-on-error). Le site garde
+        # l'analyse de la semaine précédente, daily-prices garde les prix frais.
         print(f"❌ Erreur parsing JSON Claude passe 2 : {e}")
         print(f"   Réponse brute : {raw[:200]}")
-        decisions_claude = {"decisions": [], "analyse_macro": "Erreur parsing", "biais_detectes": [], "conviction_globale": "neutre"}
+        raise SystemExit("❌ Passe 2 inexploitable — abandon SANS écrire portfolio.json")
     except Exception as e:
         print(f"❌ Erreur appel Claude passe 2 : {e}")
-        decisions_claude = {"decisions": [], "analyse_macro": f"Erreur : {e}", "biais_detectes": [], "conviction_globale": "neutre"}
+        raise SystemExit("❌ API indisponible (quota ?) — abandon SANS écrire portfolio.json")
 
     # ── Exécution des décisions (avec enforcement mécanique Niveau 2)
     positions, liquidites, nouveaux_ordres, decisions_bloquees = executer_decisions(

@@ -499,18 +499,26 @@ def generer_justification(nom, score, details, alertes):
     if details.get("rsi_ok"):
         points.append("RSI en zone favorable")
 
-    # Valorisation actuelle (timing d'entrée) — surface val_pts + Fibo si pertinent
-    val_pts = details.get("val_pts")
-    dd52w   = details.get("drawdown_52w_pct")
+    # Valorisation actuelle (timing d'entrée, INFORMATIF — hors score depuis v3)
+    # Le wording dépend du mode : en barème inversé (GC frais), val_pts=5 signifie
+    # chute profonde purgée, PAS pullback léger.
+    val_pts  = details.get("val_pts")
+    dd52w    = details.get("drawdown_52w_pct")
+    val_mode = details.get("val_pts_mode", "normal")
     fibo    = details.get("fibo") or {}
     fibo_zone = fibo.get("closest_fibo", "")
-    if val_pts == 5 and dd52w is not None:
-        # Pullback sain — zone d'entrée idéale
+    if val_mode == "gc_fresh_inverted" and dd52w is not None:
+        if val_pts == 5:
+            points.append(f"chute purgée ({dd52w:+.1f}% sous le top 52w) + Golden Cross frais — setup mean-reversion premium")
+        elif val_pts == 0:
+            points.append(f"⚠ collé au top 52w ({dd52w:+.1f}%) malgré le Golden Cross frais — extension à surveiller")
+    elif val_pts == 5 and dd52w is not None:
+        # Pullback sain — zone d'entrée favorable
         zone_str = f", {fibo_zone}" if fibo_zone and "Fibo" in fibo_zone else ""
-        points.append(f"pullback sain {dd52w:+.1f}% sous le top 52w (zone d'entrée idéale{zone_str})")
+        points.append(f"pullback sain {dd52w:+.1f}% sous le top 52w (zone d'entrée favorable{zone_str})")
     elif val_pts == 0 and dd52w is not None and dd52w >= -3:
-        # Près du top — chase de rally
-        points.append(f"⚠ près du top 52w ({dd52w:+.1f}%) — chase de rally pénalisée")
+        # Près du top — risque de chase (la pénalité réelle est z-based, cf. chase_pen)
+        points.append(f"⚠ près du top 52w ({dd52w:+.1f}%) — risque de chase")
     elif val_pts == 0 and dd52w is not None and dd52w <= -30:
         # Chute libre
         points.append(f"⚠ {dd52w:+.1f}% sous le top 52w — trend probablement cassée")
@@ -589,9 +597,9 @@ def score_ticker(ticker, vix=None):
 
     Args:
         ticker: symbole yfinance (ex: 'NVDA', 'ASML.AS')
-        vix: niveau VIX actuel pour dampener le momentum en régime stress.
-             None → multiplier 1.0 (no-op). Utile pour les appels standalone
-             (ex: tests, scoring ad-hoc) qui ne passent pas par get_contexte_marche().
+        vix: niveau VIX actuel — INFORMATIONNEL uniquement depuis v3 (publié dans
+             breakdown["vix_value"], aucun multiplier appliqué au score).
+             None accepté (appels standalone : tests, scoring ad-hoc).
     """
     try:
         data = yf.Ticker(ticker)
@@ -635,10 +643,13 @@ def score_ticker(ticker, vix=None):
         yf_industry = info.get("industry", "") or ""
         if yf_industry in _CYCLICAL_INDUSTRIES:
             reg_days = _REG_DAYS_CYCLICAL  # 25y pour cycliques (cf Valeo, Micron, banks)
+            reg_window_reason = "cyclical_25y"
         elif yf_sector in _TECH_SECTORS:
             reg_days = _REG_DAYS_TECH      # 10y pour tech pure
+            reg_window_reason = "tech_10y"
         else:
             reg_days = _REG_DAYS_STD       # 20y par défaut
+            reg_window_reason = "standard_20y"
         close_reg   = close.iloc[-reg_days:] if len(close) >= reg_days else close
         regression_z, reg_pente = calcul_regression(close_reg)
         # Fallback si NaN (cas observé sur SK Hynix avec fenêtre 25y) : retomber sur fenêtres plus courtes
@@ -649,7 +660,9 @@ def score_ticker(ticker, vix=None):
                     z_fb, p_fb = calcul_regression(close_fb)
                     if z_fb is not None and not (isinstance(z_fb, float) and np.isnan(z_fb)):
                         regression_z, reg_pente = z_fb, p_fb
-                        reg_days = fb_days  # met à jour pour le breakdown
+                        reg_days  = fb_days
+                        close_reg = close_fb   # fenêtre EFFECTIVE — le breakdown publie len(close_reg)
+                        reg_window_reason += f"_fallback_{round(fb_days / 252)}y"  # honnêteté : le z publié n'est PAS celui de la fenêtre doctrine
                         break
         # Si toujours NaN après fallbacks, force à 0 pour éviter propagation
         if regression_z is None or (isinstance(regression_z, float) and np.isnan(regression_z)):
@@ -770,6 +783,7 @@ def score_ticker(ticker, vix=None):
         details["reg_signal"]          = reg_signal
         # v2.0 — valorisation actuelle (timing d'entrée) + retracement Fibonacci
         details["val_pts"]             = val_pts
+        details["val_pts_mode"]        = val_pts_mode   # le wording de la justification en dépend (barème inversé GC frais)
         details["drawdown_52w_pct"]    = drawdown_52w_pct
         details["fibo"]                = fibo
 
@@ -985,16 +999,10 @@ def score_ticker(ticker, vix=None):
             "regression_z":          regression_z,
             "regression_signal":     reg_signal,
             "regression_pente_pct":  reg_pente,
-            "regression_window_years": (
-                25 if yf_industry in _CYCLICAL_INDUSTRIES
-                else 10 if yf_sector in _TECH_SECTORS
-                else (round(len(close_reg) / 252) if len(close_reg) < _REG_DAYS_STD else 20)
-            ),
-            "regression_window_reason": (
-                "cyclical_25y" if yf_industry in _CYCLICAL_INDUSTRIES
-                else "tech_10y" if yf_sector in _TECH_SECTORS
-                else "standard_20y"
-            ),
+            # Fenêtre EFFECTIVE de la régression (après éventuel fallback NaN) —
+            # avant, on republiait la fenêtre doctrine même quand le z venait d'un fallback
+            "regression_window_years":  round(len(close_reg) / 252),
+            "regression_window_reason": reg_window_reason,
             # Fondamentaux
             "rev_growth_pct":        round(rev_growth * 100, 1),   # trimestriel, glissement annuel (MRQ vs même trim. N-1)
             "net_margin_pct":        round(margins * 100, 1),      # TTM (12 mois glissants)
@@ -1142,11 +1150,7 @@ def main():
             vix_source = "live"
     except Exception as e:
         print(f"   ⚠️  ^VIX fetch failed ({e}) — fallback 18.0 (médiane historique)")
-    vix_mult = config.vix_multiplier(vix_now)
-    if config.VIX_DAMPENER_ENABLED:
-        print(f"   VIX : {vix_now} ({vix_source}) → multiplier momentum × {vix_mult:.3f}")
-    else:
-        print(f"   VIX : {vix_now} ({vix_source}) [dampener désactivé, multiplier 1.0]")
+    print(f"   VIX : {vix_now} ({vix_source}) [informationnel — hors scoring depuis v3]")
 
     previous  = load_previous()
     resultats = []

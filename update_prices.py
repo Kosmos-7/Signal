@@ -73,6 +73,10 @@ def main():
             print(f"   ⚠️  {pos['ticker']} : prix indisponible (gardé valeur précédente)")
 
     print(f"   ✓ {success}/{len(positions)} prix mis à jour")
+    if success == 0:
+        # Échec bruyant : bumper updated_at sans AUCUNE donnée fraîche maquillerait
+        # une panne de feed en "mise à jour réussie".
+        raise SystemExit(f"❌ 0/{len(positions)} prix récupérés — abandon sans écrire")
 
     # ── Recalcule capital et performance globale
     val_positions   = sum(p.get("valeur_actuelle", 0) for p in positions)
