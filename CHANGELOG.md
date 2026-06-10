@@ -24,9 +24,13 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
   corrompu), erreur API Claude → exit 1 SANS écrire (plus de « Erreur : … » publié sur le site),
   garde 0/N prix dans update_prices, garde sanité prix ×3 (GBp ×100, splits), cap historique
   52 → 260 entrées, workflows sérialisés (concurrency) + échec explicite sur conflit de rebase.
+- **Screener (hors scoring, gelé)** : le breakdown publie la fenêtre de régression **effective**
+  après fallback NaN (avant : un z 20y pouvait être étiqueté « cyclical_25y ») ; la justification
+  gère le mode val_pts inversé (GC frais) et ne prétend plus qu'une « chase de rally » est
+  pénalisée par val_pts (la pénalité réelle est z-based) ; textes VIX périmés nettoyés.
 - **Docs alignées v3** : docstring screener, methodology.md (sections détaillées), apprendre.html
   (val_pts hors-score, RSI 2 pts, footer), SKILL.md, lexique index.html (analystes 3 pts),
-  WATCHLIST_SIZE unifié (config.py = source unique, 30).
+  WATCHLIST_SIZE unifié (config.py = source unique, 30), learning v3.0.1 publié sur portfolio.html.
 
 ## [3.0.0] — 2026-06-01
 

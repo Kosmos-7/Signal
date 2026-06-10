@@ -775,6 +775,29 @@
 
     <!-- Learnings principaux toujours visibles (v1.7+) -->
 
+    <!-- v3.0.1 — Incident NaN (site figé 8 jours) + correction du ledger des pertes -->
+    <div class="learning-item">
+      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-body">
+        <div class="learning-header">
+          <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
+          <span class="learning-version">v3.0.1</span>
+          <span class="learning-date">10 juin 2026</span>
+        </div>
+        <div class="learning-title">Site figé 8 jours par des NaN silencieux + pertes reportables surestimées de 3 227 €</div>
+        <div class="learning-prob">Trois défauts découverts par l'audit complet du 10/06 :
+          (1) Depuis le 02/06, Yahoo renvoyait un dernier cours <code>NaN</code> pour les places européennes au moment du cron de 22h UTC. Le NaN contaminait capital et benchmarks, puis était écrit tel quel dans <code>portfolio.json</code> — du JSON invalide que le navigateur refusait de lire. <strong>Tous les runs CI restaient verts</strong> : la page est restée figée 8 jours sans aucun signal d'alerte.
+          (2) Trois ventes de début mai (NOW, INTU, LSEG.L) comptaient le rachat du même jour dans leur base de coût : pertes reportables affichées 4 005,77 € au lieu de 778,29 € réels (bug d'une version antérieure du code d'exécution).
+          (3) ORSTED.CO (Copenhague) était valorisé avec son prix DKK traité comme des euros — la détection de devise mappait .CO/.ST/.OL vers EUR.
+        </div>
+        <div class="learning-fix">
+          (1) Tous les fetchs de prix ignorent désormais les closes NaN (<code>last_valid_close</code>), et l'écriture des JSON est atomique et stricte (<code>allow_nan=False</code>) : toute future corruption fait échouer le job <em>bruyamment</em> (CI rouge) au lieu de casser le site en silence. Historique du 02-09/06 reconstruit depuis les cours quotidiens réels.<br>
+          (2) P&amp;L des 3 ventes recalculé sur la tranche réellement vendue (ordres marqués <code>correction</code>) — la transparence du chiffre affiché prime sur le confort de pertes reportables plus élevées.<br>
+          (3) Support DKK/SEK/NOK ajouté, position Ørsted requantifiée 7 → 52 actions (impact valeur quasi nul : la quantité dérivait du même prix mal étiqueté). Garde de sanité ajoutée : un prix qui varie de plus de ×3 entre deux runs est refusé.
+        </div>
+      </div>
+    </div>
+
     <!-- v1.12 — Bug exécution weekend + UX gain net post-liquidation + R01 graduée -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>
