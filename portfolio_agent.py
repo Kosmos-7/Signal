@@ -1533,7 +1533,7 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         history[idx_today] = today_entry
     else:
         history.append(today_entry)
-    history = history[-52:]
+    history = history[-260:]  # ~1 an de jours ouvrés (le cap 52 datait de l'époque hebdo)
     max_dd = calc_max_drawdown(history)
 
     # ── Combine les news macro Finnhub avec les résumés FR de Claude

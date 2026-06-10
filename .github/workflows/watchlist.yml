@@ -9,6 +9,11 @@ on:
 permissions:
   contents: write
 
+# Même groupe que daily-prices.yml : sérialise les commits de données
+concurrency:
+  group: signal-data-commit
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -54,5 +59,6 @@ jobs:
           else
             WEEK=$(python -c "from datetime import date; d=date.today(); print(f'Sem. {d.isocalendar()[1]} · {d.year}')")
             git commit -m "update: $WEEK — watchlist + portfolio + archive [skip ci]"
-            git pull --rebase --autostash && git push
+            git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase — échec explicite (pas de push silencieusement perdu)"; exit 1; }
+            git push
           fi

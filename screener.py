@@ -8,18 +8,18 @@ Sources de données :
 
 Dépendances : pip install yfinance pandas ta numpy requests finnhub-python
 
-─── MODÈLE DE SCORING (100 pts, version v2.0) ───────────────────────────────
-Momentum     (45 pts) = Croisement MM21/MM200 (20 pts, fraîcheur + volume)
-                       + RSI (10 pts, gradué : zone 40-60 = 10, 35-65 = 5)
-                       + Volume (5 pts)
-                       + Régression log-linéaire (5 pts)
-                       + Valorisation actuelle (5 pts, drawdown vs 52w high :
-                         −3 à −10% = 5, −10 à −20% = 3, −20 à −30% = 1, sinon 0)
-Fondamentaux (50 pts) = Rev. growth (15) + Marges nettes (10) + FCF margin (5)
-                       + PEG ratio (15) + EPS growth (5) + Dette (5)
-                       [FCF complémentaire : +5 si >15%, +3 si >5% — cap 50 pts]
-Analystes    (5 pts)  = Reco consensus (signal lagging, réduit vs valorisation)
-Pénalité     Death Cross récent ≤30j : −5 pts | ≤60j : −3 pts
+─── MODÈLE DE SCORING (100 pts, version v3 — commit 4868300) ────────────────
+Qualité      (45 pts) = Marge nette (8) + Marge FCF (8) + ROE (12)
+                       + Croissance CA plafonnée (10) + Dette/bilan (7)
+Valorisation (30 pts) = PEG (15) + FCF yield (15) — PER absolu exclu
+Timing       (22 pts) = Cross MM21/MM200 (10, = cross_score/2) + Pente MM21 (4)
+                       + Volume (3) + RSI (2) + Régression zone saine (3)
+                       → garde-fou : peu de points en positif, pénalités fortes
+Analystes    (3 pts)  = Reco consensus (signal lagging, cross-check mineur)
+Ajustements  Death Cross frais : −5 (≤30j) / −3 (≤60j)
+             CHASE (z>2.5σ : −6 | z>2σ + froth : −4)
+             Décote-qualité (z≤−2.5σ : +6 | z≤−2σ : +4, gate qualité ≥ 30/45)
+Hors score   val_pts (drawdown vs 52w high) et VIX : informationnels uniquement
 
 Annotation chartiste (informationnelle, hors scoring) :
   Retracement Fibonacci sur le dernier rally identifié — niveaux 23.6/38.2/50/61.8/78.6
@@ -546,7 +546,7 @@ def generer_justification(nom, score, details, alertes):
     return justif
 
 # Taille de la watchlist : nombre de titres retenus (top N par score) parmi l'univers.
-WATCHLIST_SIZE = 30
+WATCHLIST_SIZE = config.WATCHLIST_SIZE   # source unique : config.py (30)
 
 # Fenêtres de régression (en jours de bourse, 252/an)
 _REG_DAYS_TECH     = 10 * 252   # 10 ans pour tech/IA (boom récent biaiserait une fenêtre plus longue)
@@ -881,7 +881,7 @@ def score_ticker(ticker, vix=None):
         # sa tendance était noté comme une bulle 2σ au-dessus. On récompense donc la
         # décote, mais SEULEMENT si c'est un Setup B mean-reversion (opportunities.md),
         # pas un couteau qui tombe. Garde-fous (selling.md / pré-flight) :
-        #   - qualité solide (fonda ≥ 40/50),
+        #   - qualité solide (qualite_pts ≥ 30/45 — échelle v3),
         #   - pas de death cross frais (≤60j),
         #   - MM21 qui ne dévisse pas (pente 5j > -2%).
         #   z ≤ -2,5σ → +6 (forte) | z ≤ -2,0σ → +4 (modérée)  [palier léger ±2 retiré, v2.2.1]

@@ -136,7 +136,7 @@ def main():
         history[idx_today] = today_entry
     else:
         history.append(today_entry)
-    history = history[-52:]  # cap à 52 entrées (1 an)
+    history = history[-260:]  # cap à 260 entrées (~1 an de jours OUVRÉS — upsert quotidien depuis daily-prices)
 
     max_dd = calc_max_drawdown(history)
 

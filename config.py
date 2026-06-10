@@ -200,8 +200,8 @@ UNIVERSE_MIN_LISTING_YEARS   = 3             # exclut IPO récentes (MM200 + z-s
 # Cache fondamentaux (les fondamentaux ne bougent que trimestriellement)
 FUNDAMENTALS_CACHE_TTL_DAYS  = 90
 
-# Watchlist finale (taille de la sortie du screener)
-WATCHLIST_SIZE = 25
+# Watchlist finale (taille de la sortie du screener) — SOURCE UNIQUE, lue par screener.py
+WATCHLIST_SIZE = 30
 
 # Contraintes de diversification sur la watchlist
 WATCHLIST_MAX_PER_SECTOR     = 5

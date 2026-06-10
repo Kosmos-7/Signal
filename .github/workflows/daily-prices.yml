@@ -12,6 +12,12 @@ on:
 permissions:
   contents: write
 
+# Sérialise les écritures de portfolio.json avec watchlist.yml (même groupe) :
+# évite la course commit/rebase observée dans l'historique (conflit JSON non auto-mergeable)
+concurrency:
+  group: signal-data-commit
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -41,5 +47,6 @@ jobs:
             echo "Aucun changement de prix (marché fermé ou jour férié)."
           else
             git commit -m "prices: refresh $(date -u +'%Y-%m-%d') [skip ci]"
-            git pull --rebase --autostash && git push
+            git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase sur portfolio.json — échec explicite (pas de push silencieusement perdu)"; exit 1; }
+            git push
           fi
