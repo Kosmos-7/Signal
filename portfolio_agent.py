@@ -54,6 +54,41 @@ def semaine():
     d = date.today()
     return f"Sem. {d.isocalendar()[1]} · {d.year}"
 
+def last_valid_close(close_series):
+    """Dernier Close non-NaN d'une série yfinance.
+
+    Yahoo ajoute parfois une dernière ligne avec Close=NaN pour les places
+    européennes après leur clôture (observé à partir du 2026-06-02 : le cron
+    de 22h UTC a corrompu toutes les positions EU à NaN, rendant le JSON
+    illisible par le navigateur). On ne retient que les closes valides.
+    """
+    try:
+        closes = close_series.dropna()
+        return float(closes.iloc[-1]) if not closes.empty else None
+    except Exception:
+        return None
+
+def save_json_atomic(path, data):
+    """Écriture atomique (tmp + os.replace) et stricte (allow_nan=False).
+
+    allow_nan=False fait échouer le job BRUYAMMENT si un NaN/Infinity se
+    glisse dans les données : un NaN écrit en silence produit un JSON que
+    JSON.parse côté navigateur rejette — site figé sans aucun signal CI.
+    """
+    import tempfile
+    d = os.path.dirname(os.path.abspath(path)) or "."
+    fd, tmp = tempfile.mkstemp(dir=d, suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2, allow_nan=False)
+        os.replace(tmp, path)
+    except Exception:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
+
 def get_prix(ticker):
     try:
         t = yf.Ticker(ticker)
@@ -61,7 +96,10 @@ def get_prix(ticker):
         if hist.empty:
             print(f"  ⚠️  get_prix({ticker}) — historique vide (marché fermé ou ticker invalide)")
             return None
-        prix = float(hist["Close"].iloc[-1])
+        prix = last_valid_close(hist["Close"])
+        if prix is None:
+            print(f"  ⚠️  get_prix({ticker}) — aucun close valide sur 5j (closes NaN)")
+            return None
         try:
             info_curr = getattr(t.fast_info, 'currency', '') or ''
         except Exception:
@@ -76,16 +114,16 @@ def get_prix(ticker):
 def get_eur_usd_rate():
     """Taux EUR/USD du jour via Yahoo Finance (EURUSD=X). Fallback 1.10."""
     try:
-        hist = yf.Ticker("EURUSD=X").history(period="2d")
-        return round(float(hist["Close"].iloc[-1]), 4) if not hist.empty else 1.10
+        v = last_valid_close(yf.Ticker("EURUSD=X").history(period="2d")["Close"])
+        return round(v, 4) if v else 1.10
     except:
         return 1.10
 
 def get_eur_gbp_rate():
     """Taux EUR/GBP du jour via Yahoo Finance (EURGBP=X). Fallback 0.86."""
     try:
-        hist = yf.Ticker("EURGBP=X").history(period="2d")
-        return round(float(hist["Close"].iloc[-1]), 4) if not hist.empty else 0.86
+        v = last_valid_close(yf.Ticker("EURGBP=X").history(period="2d")["Close"])
+        return round(v, 4) if v else 0.86
     except:
         return 0.86
 
@@ -134,7 +172,7 @@ def maj_position(pos, eur_usd, eur_gbp=0.86):
     Retourne True si le prix a pu être récupéré.
     """
     prix = get_prix(pos["ticker"])
-    if not prix:
+    if not prix or prix != prix:   # None, 0 ou NaN (NaN != NaN) → garde la valeur précédente
         return False
     currency = pos.get("currency") or detect_currency(pos["ticker"], pos.get("market", ""))
     pos["currency"]        = currency
@@ -211,7 +249,7 @@ def get_contexte_marche(last_known_vix=None):
 
     for label, ticker in [("cac40", TICKER_CAC40), ("msci", TICKER_MSCI)]:
         try:
-            hist = yf.Ticker(ticker).history(start=debut)["Close"]
+            hist = yf.Ticker(ticker).history(start=debut)["Close"].dropna()
             if len(hist) >= 2:
                 perf_ytd    = round((hist.iloc[-1] - hist.iloc[0]) / hist.iloc[0] * 100, 2)
                 perf_1sem   = round((hist.iloc[-1] - hist.iloc[-5]) / hist.iloc[-5] * 100, 2) if len(hist) >= 5 else 0
@@ -227,7 +265,7 @@ def get_contexte_marche(last_known_vix=None):
     vix_value  = None
     vix_source = "fallback"
     try:
-        vix_hist = yf.Ticker("^VIX").history(period="5d")["Close"]
+        vix_hist = yf.Ticker("^VIX").history(period="5d")["Close"].dropna()
         if not vix_hist.empty:
             vix_value  = round(float(vix_hist.iloc[-1]), 2)
             vix_source = "live"
@@ -1557,8 +1595,7 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         "max_drawdown":         max_dd,
     }
 
-    with open("portfolio.json", "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
+    save_json_atomic("portfolio.json", output)
 
     print(f"\n✅ portfolio.json généré par Claude")
     print(f"   Capital mark-to-market : {capital_actuel:.0f}€  (net : {performance:+.1f}% · brut : {performance_brute:+.1f}%)")

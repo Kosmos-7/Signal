@@ -29,7 +29,8 @@ from datetime import date, datetime
 # Réutilise les fonctions du portfolio_agent pour cohérence stricte
 from portfolio_agent import (
     get_eur_usd_rate, get_eur_gbp_rate, maj_position,
-    calc_max_drawdown, TICKER_CAC40, TICKER_MSCI, CAPITAL_INITIAL_DEF,
+    calc_max_drawdown, save_json_atomic,
+    TICKER_CAC40, TICKER_MSCI, CAPITAL_INITIAL_DEF,
 )
 
 
@@ -88,7 +89,7 @@ def main():
     bench_cac, bench_msci = portfolio.get("benchmark_cac40", 0), portfolio.get("benchmark_msci", 0)
     for label, ticker in [("cac40", TICKER_CAC40), ("msci", TICKER_MSCI)]:
         try:
-            hist = yf.Ticker(ticker).history(start=debut)["Close"]
+            hist = yf.Ticker(ticker).history(start=debut)["Close"].dropna()
             if len(hist) >= 2:
                 ytd = round((hist.iloc[-1] - hist.iloc[0]) / hist.iloc[0] * 100, 2)
                 if label == "cac40":
@@ -105,7 +106,7 @@ def main():
     vix_value      = portfolio.get("last_known_vix")
     vix_source     = portfolio.get("last_known_vix_source", "cache")
     try:
-        vix_hist = yf.Ticker("^VIX").history(period="5d")["Close"]
+        vix_hist = yf.Ticker("^VIX").history(period="5d")["Close"].dropna()
         if not vix_hist.empty:
             vix_value  = round(float(vix_hist.iloc[-1]), 2)
             vix_source = "live"
@@ -185,9 +186,8 @@ def main():
     # Note : on ne touche PAS à : week, ordres, biais_detectes, regles_actives,
     # analyse_claude, macro_news, nb_positions (= len(positions), inchangé)
 
-    # ── Persiste
-    with open("portfolio.json", "w", encoding="utf-8") as f:
-        json.dump(portfolio, f, ensure_ascii=False, indent=2)
+    # ── Persiste (atomique + strict : NaN → échec bruyant du job, cf. incident 2026-06-02)
+    save_json_atomic("portfolio.json", portfolio)
 
     print(f"\n✓ portfolio.json refreshé")
     print(f"  Capital m2m  : {capital_actuel:.0f}€ ({performance:+.2f}% YTD)")
