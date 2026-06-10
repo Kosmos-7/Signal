@@ -15,7 +15,7 @@ Analystes           →   3 pts
 
 Pondération calibrée par l'expérience (le projet Signal applique cette logique en production sur 133 tickers).
 
-> **Note v3 (juin 2026)** — La structure est passée de 3 piliers (Momentum 45 / Fondamentaux 50 / Analystes 5) à 4 composantes (Qualité 45 / Valorisation 30 / Timing 22 / Analystes 3). Les sections détaillées ci-dessous décrivent la **mécanique** de chaque signal (cross_score, z-score régression, CHASE, décote — toujours valide), mais les **pondérations** citées dans certaines reflètent encore l'ancienne échelle. Pour les points exacts, se référer à la table ci-dessus. La philosophie : qualité + prix pilotent, le timing borne le risque.
+> **Note v3 (juin 2026)** — La structure est passée de 3 piliers (Momentum 45 / Fondamentaux 50 / Analystes 5) à 4 composantes (Qualité 45 / Valorisation 30 / Timing 22 / Analystes 3). Les sections détaillées ci-dessous sont alignées sur l'échelle v3 (mise à jour 2026-06-10). La philosophie : qualité + prix pilotent, le timing borne le risque. `val_pts` et le VIX sont informationnels (hors score).
 
 **Approche neutre — aucune prétention d'alpha.** Méthodes publiques appliquées avec discipline ; mise à l'épreuve par l'observation du portefeuille IA en réel, pas par backtest. Le scoring est un **outil de discipline et d'attention sélective** (filtrage chase de rally, identification Setup B, structuration des décisions), pas un générateur d'alpha.
 
@@ -29,9 +29,15 @@ Le risque qui compte n'est **pas** la volatilité (déviation académique). C'es
 
 **Caveat décisif** : une décote n'est une *vraie* marge de sécurité que si la **valeur intrinsèque est solidement estimée**. Si l'estimation est creuse (fenêtre régression courte, business en mutation, value trap), la « décote » est illusoire et le risque de perte permanente est intact. La marge de sécurité protège contre l'erreur d'estimation seulement quand l'ancre est fiable (cf. section 1.4 fenêtre courte + value trap dans `opportunities.md`).
 
-## Pilier 1 — Momentum technique (45 pts)
+## Pilier 1 — Timing technique (22 pts — garde-fou, pas moteur, v3)
 
-### 1.1 Croisement MM21 / MM200 (20 pts)
+Le timing n'apporte que peu de points en positif (22 max) ; son vrai rôle est de
+**borner le downside** via les pénalités (CHASE §1.6, death cross) et le bonus décote (§1.7).
+
+### 1.1 Croisement MM21 / MM200 (10 pts v3)
+
+La mécanique interne `cross_score` note le cross sur /20 (fraîcheur + volume + RSI bonus),
+puis le score v3 la ramène à **/10** (`round(cross_score / 2)`).
 
 **Golden Cross** (MM21 passe au-dessus de MM200) → signal haussier.
 **Death Cross** (MM21 passe en-dessous de MM200) → signal baissier.
@@ -46,37 +52,37 @@ Pondération par fraîcheur du signal :
 
 **Lecture dynamique obligatoire** : un cross n'est pas un état figé. Le screener calcule automatiquement un champ `signal_dynamics_warning` dans le breakdown quand le signal est en transition (death cross avec pente MM21 redevenue positive et spread tendu, ou golden cross s'affaiblissant). **Toujours lire ce champ avant de pondérer le cross dans le verdict.** Quand il est non-vide, traiter le signal comme ambigu — pas exploitable seul.
 
-### 1.2 RSI (5 pts — v2.1, réduit de 10 à 5)
+### 1.2 RSI (2 pts — v3, réduit 10 → 5 → 2)
 
 Mesure de momentum 0-100 sur 14 périodes :
-- Zone idéale 40-60 → 5 pts (momentum sain, ni surachat ni survente)
-- Zone élargie 35-65 → 2 pts
+- Zone idéale 40-60 → 2 pts (momentum sain, ni surachat ni survente)
+- Zone élargie 35-65 → 1 pt
 - Zone surachat (>70) ou survente (<30) → 0 pt (signal extrême, mean-reversion probable)
 
-**Pourquoi 5 et non plus 10 (v2.1)** : le RSI mesure surtout l'*extension* (titre épuisé ou non), déjà couverte par la régression (1.4) et la valorisation (1.5) — c'était du triple-comptage. Les 5 pts récupérés vont à la **pente MM21 (1.2bis)**, le seul vrai signal de *force de tendance* qui n'était pas noté.
+**Pourquoi si peu** : le RSI mesure surtout l'*extension* (titre épuisé ou non), déjà couverte par la régression (1.4) — et en v3 le timing entier n'est qu'un garde-fou. L'historique : 10 pts (v1) → 5 (v2.1, triple-comptage) → 2 (v3).
 
 Combiné au Cross : Golden Cross + RSI 50 = setup propre. Golden Cross + RSI 75 = signal mature, hausse probablement priced in.
 
-### 1.2bis Pente MM21 (5 pts — v2.1, force de tendance)
+### 1.2bis Pente MM21 (4 pts — v3, force de tendance)
 
 Variation de la MM21 sur 5 séances (`slope_mm21_pct`, qui ne servait avant que dans les warnings). Mesure la **vélocité / qualité de la tendance courte**, là où le cross ne donne que sa *direction* :
-- pente ≥ +0,8 % → 5 pts (accélération franche)
-- pente ≥ +0,3 % → 3 pts (hausse nette)
+- pente ≥ +0,8 % → 4 pts (accélération franche)
+- pente ≥ +0,3 % → 2 pts (hausse nette)
 - pente ≥ 0 % → 1 pt (légèrement positive / s'aplatit)
 - pente < 0 % → 0 pt (MM21 qui dévisse)
 
-Récompense un trend qui *accélère*, pas seulement « au-dessus de la MM200 ». Ex. (2026-06) : GOOGL/ADI pente >1 % → 5/5 ; NVDA qui consolide (+0,47 %) → 3/5 ; MSFT qui s'aplatit (+0,12 %) → 1/5.
+Récompense un trend qui *accélère*, pas seulement « au-dessus de la MM200 ».
 
-### 1.3 Volume (5 pts)
+### 1.3 Volume (3 pts — v3)
 
-`vol_recent (20 derniers jours) > vol_annual (2 ans glissants)` → 5 pts, sinon 0.
+`vol_recent (20 derniers jours) > vol_annual (2 ans glissants)` → 3 pts, sinon 0.
 
 Logique Murphy : un mouvement sans volume est suspect. Volume confirme la conviction collective.
 
-### 1.4 Régression long terme z-score (5 pts)
+### 1.4 Régression long terme z-score (3 pts — v3)
 
 Position du cours actuel vs sa droite de tendance log-linéaire long terme, exprimée en écarts-types :
-- z entre -0.5σ et +1.5σ → zone saine, 5 pts
+- z entre -0.5σ et +1.5σ → zone saine, 3 pts
 - z < -1σ → titre en décote vs sa propre tendance (potentielle opportunité mean-reversion)
 - z > +2σ → titre tendu, retracement statistiquement probable
 
@@ -134,9 +140,13 @@ Le screener Signal v2.0.2 ne traite comme cycliques 25y QUE l'industrie `"Semico
 
 **Implémentation production** : voir `_CYCLICAL_INDUSTRIES` dans `screener.py`. Le breakdown JSON expose le champ `regression_window_reason` (`cyclical_25y` / `tech_10y` / `standard_20y`) pour transparence.
 
-### 1.5 Valorisation actuelle / timing d'entrée (5 pts)
+### 1.5 Valorisation actuelle / timing d'entrée (val_pts — INFORMATIF, hors score depuis v3)
 
-Drawdown du cours actuel vs plus haut 52 semaines :
+⚠️ **v3 : val_pts ne compte plus dans le score.** Il reste calculé et publié (breakdown
+`val_pts` + `val_pts_mode`, affichage « val=X/5 ») comme **annotation de timing d'entrée**
+— l'extension est couverte par la régression (1.4), la décote profonde par le bonus (1.7).
+
+Drawdown du cours actuel vs plus haut 52 semaines (barème de l'annotation) :
 - 0% à -3% (proche du top) → 0 pt — chase de rally, mauvais timing
 - -3% à -10% (pullback sain) → 5 pts — zone d'entrée idéale
 - -10% à -20% (correction modérée) → 3 pts — entrée agressive possible si trend intacte
@@ -176,7 +186,7 @@ z > 2,0σ ET (RSI > 70 OU drawdown > -3%)  → chase_pen = -4 (chase confirmé)
 - Un score 65+ avec `chase_pen ≤ -4` signale : "business OK mais entrée actuelle dangereuse — attendre pullback"
 - Combiné au champ `regression_window_reason`, permet de différencier chase légitime (cyclical 25y) vs chase tech (10y)
 
-**Limites** : la pénalité ne couvre que les surextensions z-score. Un titre en zone z saine (+0,5σ) mais collé au top avec RSI 80 peut quand même être un chase — c'est le rôle de `val_pts` (section 1.5) avec le barème inversé GC frais.
+**Limites** : la pénalité ne couvre que les surextensions z-score. Un titre en **tendance très pentue** peut être à RSI 80+ au plus haut absolu avec un z encore modéré (cas FSLR 2026-06 : RSI 83, z +0,9σ → aucune pénalité) — le garde-fou est alors **aveugle** et c'est au jugement analyste de lire `rsi` + `drawdown_52w_pct` + l'annotation `val_pts` (1.5, informationnelle).
 
 ### 1.7 Bonus « décote-qualité » (v2.1 — miroir symétrique du CHASE)
 
@@ -186,13 +196,13 @@ z > 2,0σ ET (RSI > 70 OU drawdown > -3%)  → chase_pen = -4 (chase confirmé)
 
 ```
 value_bonus = 0   # v2.2.1 : magnitudes renforcées (palier léger ±2 retiré)
-SI fondamentaux ≥ 40/50  ET  pas un couteau qui tombe :
+SI qualité ≥ 30/45 (échelle v3)  ET  pas un couteau qui tombe :
     z ≤ -2,5σ  → value_bonus = +6  (décote forte)
     z ≤ -2,0σ  → value_bonus = +4  (décote modérée)
 ```
 
 **Garde-fous « pas un couteau qui tombe »** (cf. `selling.md`, pré-flight) — le bonus ne se déclenche QUE si les trois conditions tiennent :
-- **qualité solide** : bucket fondamentaux ≥ 40/50 (sinon = simple value trap, pas un Setup B) ;
+- **qualité solide** : bucket qualité ≥ 30/45 (échelle v3 ; le bucket est désormais pur-qualité, sans PEG) — sinon = simple value trap, pas un Setup B ;
 - **pas de death cross frais** (≤ 60j) : décote en plein cassage de tendance = on attend la confirmation, on ne rattrape pas ;
 - **MM21 qui ne dévisse pas** : pente 5j > −2 % (la moyenne courte s'aplatit/se redresse = début de résorption).
 
@@ -200,23 +210,33 @@ SI fondamentaux ≥ 40/50  ET  pas un couteau qui tombe :
 
 **Lecture en pratique** :
 - Le breakdown JSON expose `value_bonus` (+6, +4, ou 0) — un `value_bonus > 0` = candidat mean-reversion sur qualité, à mettre sur le radar.
-- Exemple (2026-06) : **MSFT** z=−2,06σ, fonda 48/50, death cross 93j (vieux) + pente MM21 +0,12 % (s'aplatit) → **+4** (66 → 70, entre dans le top 30) ; idem **V** (Visa) z=−2,03σ → +4 (→ 79). NVDA (z sain) intact ; GOOGL/ADI/GS (z > 2,5σ) → CHASE **−6**.
+- Exemple (2026-06, échelle v3) : **MSFT** z=−2,06σ, qualité 42/45, death cross vieux + pente MM21 qui s'aplatit → **+4** ; idem **V** (Visa) z=−2,03σ → +4, **ADBE** z=−2,43σ → +4, **CRM** z=−2,25σ → +4. NVDA (z sain) intact ; GOOGL/GS (z > 2,5σ) → CHASE **−6**.
 - **Pas un signal d'achat** : le bonus remonte un titre sur le radar (Setup B), il ne dit pas « achète ». La confirmation du retournement reste à valider (`selling.md` : death cross frais → attendre).
 
-## Pilier 2 — Fondamentaux (50 pts)
+## Pilier 2 — Qualité du business (45 pts, v3)
 
-50 pts répartis sur :
+La durabilité — *ce que tu possèdes*. Le signal le plus persistant (Mauboussin : qualité r≈0,9, croissance r≈0).
 
-- **Croissance du chiffre d'affaires** (15 pts) : >15%/an = max
-- **Marges nettes** (10 pts) : >20% = max
-- **PEG ratio** (15 pts) : <1 = excellent (15 pts), <2 = correct (10 pts)
-- **Croissance EPS** (5 pts) : >10%/an = max
-- **Marge de Free Cash Flow** (5 pts) : FCF margin >15% → 5 pts, >5% → 3 pts (complémentaire aux marges nettes — `screener.py` l.775-777)
+- **Marge nette** (8 pts) : >15% → 8 | >8% → 5 | >0 → 2
+- **Marge de Free Cash Flow** (8 pts) : >15% → 8 | >8% → 5 | >0 → 2
 
-  > **FCF > BPA (Bezos)** : quand FCF/action et BPA **divergent**, privilégier le FCF/action. Le BPA est flattable par la comptabilité (provisions, amortissements) et les buybacks (mécanique au dénominateur) ; le FCF mesure le cash réellement disponible. Un cours est la **prévision actualisée des flux futurs**, pas un multiple du bénéfice passé — l'ancre de valeur est le cash, pas le résultat « ajusté ». Cohérent avec le `GUIDE_redaction_analyses.md` (« privilégier le FCF au bénéfice ajusté »).
-- **Endettement** (5 pts) : Debt/Equity < 100% (yfinance scale ×100) → 5 pts. **Fix v2.0.2** : inclut désormais les entreprises net-cash (D/E = 0). Avant le fix, la condition `0 < debt_eq < 100` excluait les net-cash (DSY, AAPL en certaines périodes) qui obtenaient 0 pt à tort. Distinction maintenant : `None` (donnée manquante) → 0 pt | `0 ≤ debt_eq < 100` → 5 pts.
+  > **FCF > BPA (Bezos)** : quand FCF/action et BPA **divergent**, privilégier le FCF/action. Le BPA est flattable par la comptabilité (provisions, amortissements) et les buybacks (mécanique au dénominateur) ; le FCF mesure le cash réellement disponible. Un cours est la **prévision actualisée des flux futurs**, pas un multiple du bénéfice passé.
+- **ROE** (12 pts) : ≥25% → 12 | ≥15% → 9 | ≥8% → 5 | >0 → 2 — proxy de douve / qualité du capital employé
+- **Croissance du CA, plafonnée** (10 pts) : >10% → 10 | >5% → 6 | >2% → 3 — plafonnée car la croissance ne persiste pas (base rates Mauboussin) ; on ne sur-récompense pas l'hyper-croissance
+- **Dette / bilan** (7 pts) : D/E < 50 → 7 | < 100 → 4 (yfinance scale ×100 ; net-cash D/E=0 inclus depuis v2.0.2 ; `None` = donnée manquante → 0)
 
-> **Cap** : la somme brute des 6 composants (15+10+15+5+5+5 = 55) est plafonnée à **50 pts** (`min(50, …)`, `screener.py`). Selon le profil du titre, un point gagné peut être silencieusement tronqué.
+> **Cap** : `min(45, …)` — la somme brute (8+8+12+10+7 = 45) ne peut pas dépasser le bucket.
+
+## Pilier 2bis — Valorisation (30 pts, v3)
+
+La marge de sécurité — *le prix payé*. Vrai pilier depuis v3 (avant : noyé dans les fondamentaux).
+
+- **PEG ratio** (15 pts) : 0<PEG<1 → 15 | <2 → 10 | <3 → 5 — valo relative à la croissance, ne pénalise pas un multiple élevé justifié
+- **FCF yield** (15 pts) : ≥8% → 15 | ≥5% → 11 | ≥3% → 7 | ≥1,5% → 3 — cher/pas cher, robuste et comparable entre secteurs
+
+**PER absolu volontairement EXCLU** : il pénaliserait mécaniquement la qualité, qui se paie toujours plus cher (« ce qui est intelligent à un certain prix devient stupide à un autre »).
+
+> **Caveat sectoriel** : les métriques FCF collent mal à la compta bancaire/assurance (GS, banques → valo sous-estimée) et aux foncières. À lire avec ce biais en tête.
 
 Sources de données : Yahoo Finance + Finnhub (cross-validation). Quand divergence importante, baisse de la confiance globale.
 
@@ -373,15 +393,15 @@ Cohérent avec l'**honnêteté empirique** du skill (posture neutre, pas de pré
 
 ---
 
-## Pilier 3 — Consensus analystes (5 pts)
+## Pilier 3 — Consensus analystes (3 pts, v3)
 
 Recommandation moyenne sur échelle 1-5 :
-- < 2.0 (strong buy) → 5 pts
-- < 2.5 (buy) → 3 pts
+- < 2.0 (strong buy) → 3 pts
+- < 2.5 (buy) → 2 pts
 - < 3.0 (hold) → 1 pt
 - ≥ 3.0 → 0 pt
 
-**Pondération volontairement faible** car signal lagging (les analystes réagissent souvent aux mouvements de prix, plus qu'ils ne les précèdent) avec biais haussier structurel (~80% des recommandations sont buy/hold). Réduit de 10 à 5 pts pour libérer la place à la valorisation actuelle (timing d'entrée), plus actionnable et moins biaisée.
+**Pondération volontairement minime** car signal lagging (les analystes réagissent souvent aux mouvements de prix, plus qu'ils ne les précèdent) avec biais haussier structurel (~80% des recommandations sont buy/hold). Trajectoire : 10 pts → 5 (v2) → 3 (v3) — simple cross-check, pas un pilier.
 
 ## Le facteur lens : croiser momentum / value / quality
 
@@ -442,8 +462,9 @@ Si pas dans le repo Signal, tu appliques la même logique manuellement via yfina
 Après scoring + factor lens + sizing, formule canonique d'output :
 
 ```
-Score: 78/100 (momentum 35, fonda 39, analystes 4)
-Profile: momentum frais + value modéré + quality solide
+Score: 78/100 (qualité 38/45, valorisation 22/30, timing 14/22, analystes 2/3 ± ajustements)
+Ajustements: chase_pen / value_bonus / death_pen — TOUJOURS les citer s'ils sont non-nuls
+Profile: qualité solide + valo correcte + timing en garde-fou
 Verdict: ACHAT — conviction modérée
 Sizing: 5% du capital max
 Risque principal: [le risque concret le plus pertinent]

@@ -1,6 +1,6 @@
 ---
 name: portfolio-analyst
-description: Analyste personnel pour décisions d'investissement. Score consistant des titres (momentum + fondamentaux + analystes), discipline de vente anti-disposition, frameworks de décision (pre-mortem, second-level thinking, base rates), détection de biais cognitifs. Pour questions du type "dois-je acheter X", "j'hésite sur Y", "le marché va...", "j'ai vendu trop tôt", "fais-moi un point sur mon portefeuille". Triggers FR/EN multiples — voir section dédiée.
+description: Analyste personnel pour décisions d'investissement. Score consistant des titres (qualité + valorisation + timing + analystes, scoring v3), discipline de vente anti-disposition, frameworks de décision (pre-mortem, second-level thinking, base rates), détection de biais cognitifs. Pour questions du type "dois-je acheter X", "j'hésite sur Y", "le marché va...", "j'ai vendu trop tôt", "fais-moi un point sur mon portefeuille". Triggers FR/EN multiples — voir section dédiée.
 ---
 
 # Portfolio Analyst

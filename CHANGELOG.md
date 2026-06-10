@@ -5,6 +5,59 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.0.1] — 2026-06-10
+
+### Hotfix incident NaN + audit complet (6 auditeurs) — site portfolio figé du 02 au 09/06
+
+- **Incident** : depuis le 02/06, Yahoo renvoie une dernière ligne Close=NaN pour les places
+  EU au moment du cron 22h UTC. Le NaN corrompait portfolio.json (6 positions EU + benchmarks),
+  `json.dump` l'écrivait (non-standard), `JSON.parse` navigateur le rejetait → page figée,
+  CI 100 % verte. Fix : `last_valid_close()` (dropna) sur tous les fetchs + `save_json_atomic()`
+  (tmp+rename, `allow_nan=False` = échec bruyant) + backfill de l'historique 02→09/06.
+- **Ledger corrigé** : 3 ventes de début mai (NOW, INTU, LSEG.L) comptaient le rachat même-jour
+  dans la base de coût → pertes reportables 4 005,77 € → **778,29 €** (−3 227,48 € fictifs).
+  Bug de la version de code de l'époque, non reproductible avec le code actuel.
+- **Devises nordiques** : ORSTED.CO coté en DKK était traité en EUR (`detect_currency` mappait
+  .CO/.ST/.OL → EUR). Support DKK/SEK/NOK ajouté (`get_eur_rate`), position requantifiée 7 → 52
+  actions (impact valeur ≈ nul : l'erreur s'auto-annulait, la quantité dérivant du même prix).
+- **Robustesse** : load strict de portfolio.json (plus de reset silencieux à 10 k€ sur JSON
+  corrompu), erreur API Claude → exit 1 SANS écrire (plus de « Erreur : … » publié sur le site),
+  garde 0/N prix dans update_prices, garde sanité prix ×3 (GBp ×100, splits), cap historique
+  52 → 260 entrées, workflows sérialisés (concurrency) + échec explicite sur conflit de rebase.
+- **Docs alignées v3** : docstring screener, methodology.md (sections détaillées), apprendre.html
+  (val_pts hors-score, RSI 2 pts, footer), SKILL.md, lexique index.html (analystes 3 pts),
+  WATCHLIST_SIZE unifié (config.py = source unique, 30).
+
+## [3.0.0] — 2026-06-01
+
+### Scoring v3 — refonte en 4 composantes (Qualité 45 / Valorisation 30 / Timing 22 / Analystes 3)
+
+La qualité et le prix pilotent le score (75 pts) ; le timing devient un **garde-fou** (22 pts).
+
+- **Qualité (45)** : marge nette 8 + marge FCF 8 + **ROE 12 (nouveau)** + croissance CA plafonnée 10 + dette 7.
+- **Valorisation (30)** : PEG 15 + **FCF yield 15 (nouveau)**. PER absolu exclu (pénaliserait la qualité).
+- **Timing (22)** : cross 10 (échelle interne /20 ÷ 2) + pente MM21 4 + volume 3 + RSI 2 + régression 3.
+- **Analystes** : 5 → 3 pts. Ajustements chase/death/décote inchangés ; gate décote → qualité ≥ 30/45.
+- **val_pts (drawdown 52w) et VIX : informationnels, hors score.**
+- ⚠️ **Breaking change JSON** : clés breakdown renommées — `momentum`/`fondamentaux`/`vix_multiplier`
+  supprimées ; `qualite`/`valorisation`/`timing` ajoutées ; `cross_pts` passe de l'échelle 0-20 à 0-10
+  et `analystes` de max 5 à max 3. Les archives `notes/watchlist_archive/` antérieures au 2026-06-01
+  sont sur l'ancien schéma — ne pas comparer les sous-scores entre schémas.
+- Propagation : index.html (4 meters + lexique), generate_analyses.py, apprendre.html, methodology.md.
+- Scoring **gelé pour le trimestre** — mise à l'épreuve par le portefeuille IA en réel (anti-resulting).
+
+## [2.2.1] — 2026-06-01
+
+- CHASE / décote-qualité : retrait du palier léger ±2 (1,5σ) — ne garder que les extrêmes
+  (un compounder vit le plus souvent au-dessus de sa tendance). Magnitudes finales −6/−4 et +6/+4.
+
+## [2.2.0] — 2026-05-31
+
+- CHASE / décote-qualité renforcés : pénalités/bonus doublés (−3/−2 → −6/−4, +3/+2 → +6/+4) —
+  choix « le timing prime », appliqué aux extrêmes seulement. Ajout puis retrait du 3e palier ±2 (cf. 2.2.1).
+
+---
+
 ## [2.1.0] — 2026-05-31
 
 ### Repositionnement éditorial — posture neutre, retrait du discours de backtest
@@ -31,9 +84,10 @@ l'épreuve par l'**observation du portefeuille IA en réel**, pas par des backte
   socle pédagogique (analyse technique/fondamentale, schémas SVG) est conservé tel quel.
 - **`notes/ad_line_evaluation.md`** : références backtest/alpha neutralisées (voir ci-dessous).
 
-> Note : `backtest.py` et `backtest_compare.py` restent dans le repo comme outils d'exploration
-> internes, mais ne sont plus la base de la communication ni une preuve d'edge. L'historique
-> factuel des versions antérieures est conservé tel quel ci-dessous.
+> Note (corrigée 2026-06-10) : `backtest.py` / `backtest_compare.py` ont été **retirés du repo**
+> lors de ce repositionnement (ils n'existent plus dans l'arbre tracké). Leur logique de scoring
+> était restée à l'échelle v2 — toute comparaison avec les scores v3 serait invalide de toute façon.
+> L'historique factuel des versions antérieures est conservé tel quel ci-dessous.
 
 ---
 

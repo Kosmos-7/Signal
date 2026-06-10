@@ -788,7 +788,7 @@
               <text x="640" y="278" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">aujourd'hui</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
-              Données réelles JPM sur 200 jours. La MM21 (or, court terme) a oscillé autour de la MM200 (bleue, long terme) plusieurs fois — c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : MM21 (310.6€) repasse au-dessus de MM200 (302.8€). C'est précisément ce que Signal score 17 points (croisement de 11 à 30 j) + 1 point de bonus RSI = 18/20 sur le critère "cross frais".
+              Données réelles JPM sur 200 jours. La MM21 (or, court terme) a oscillé autour de la MM200 (bleue, long terme) plusieurs fois — c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : MM21 (310.6€) repasse au-dessus de MM200 (302.8€). C'est précisément ce que Signal note fortement sur le critère "cross frais" : 17 points + 1 bonus RSI = 18 sur l'échelle interne /20, ramenée à <strong>9/10</strong> dans le bucket timing du score v3.
             </div>
           </div>
 
@@ -865,7 +865,7 @@
         <span class="concept-label">RSI (force relative)</span>
         <span class="concept-example">RSI 52</span>
         <div class="concept-body">
-          Le RSI (Relative Strength Index) est un oscillateur entre 0 et 100 qui mesure la vitesse et l'ampleur des variations récentes du cours. Il compare l'amplitude des hausses à celle des baisses sur les 14 derniers jours. Entre 40 et 60 : le titre est équilibré, ni suracheté ni survendu — c'est la zone idéale (5 pts dans le score Signal).
+          Le RSI (Relative Strength Index) est un oscillateur entre 0 et 100 qui mesure la vitesse et l'ampleur des variations récentes du cours. Il compare l'amplitude des hausses à celle des baisses sur les 14 derniers jours. Entre 40 et 60 : le titre est équilibré, ni suracheté ni survendu — c'est la zone idéale (2 pts dans le bucket timing v3).
           <br><br>
           Au-dessus de 70 : le titre monte trop vite par rapport à sa moyenne, risque de correction à court terme. Sous 30 : survendu, potentiel de rebond mais pas automatique — un titre peut rester en survente longtemps si la tendance fondamentale est durablement négative. Un RSI à 52 comme ici est confortable : le titre a de la marge dans les deux sens.
         </div>
@@ -875,9 +875,9 @@
         <span class="concept-label">Valorisation actuelle (timing d'entrée)</span>
         <span class="concept-example">Drawdown −7% · zone idéale</span>
         <div class="concept-body">
-          La 5<sup>e</sup> composante du momentum (5 pts). Mesure simple : à quel pourcentage suis-je sous le plus haut des 52 dernières semaines ? Logique : un Golden Cross frais avec RSI sain n'a pas la même valeur s'il est <em>collé au top 52w</em> (chase de rally, mean-reversion à court terme défavorable) ou s'il est en <em>repli sain de −7%</em> (zone d'entrée propre).
+          Annotation de timing d'entrée — <strong>calculée et affichée, mais hors score depuis la v3</strong> (comme le retracement Fibonacci ci-dessous : l'extension est déjà couverte par la régression, la décote profonde par le bonus décote). Mesure simple : à quel pourcentage suis-je sous le plus haut des 52 dernières semaines ? Logique : un Golden Cross frais avec RSI sain n'a pas la même valeur s'il est <em>collé au top 52w</em> (chase de rally, mean-reversion à court terme défavorable) ou s'il est en <em>repli sain de −7%</em> (zone d'entrée propre).
           <br><br>
-          Barème : <em>0 à −3%</em> du top → 0 pt (chase de rally). <em>−3% à −10%</em> → 5 pts (zone idéale). <em>−10% à −20%</em> → 3 pts (correction modérée). <em>−20% à −30%</em> → 1 pt (momentum cassé). <em>Au-delà de −30%</em> → 0 pt (chute libre).
+          Échelle de l'annotation (val=X/5 sur les fiches) : <em>0 à −3%</em> du top → 0 (chase de rally). <em>−3% à −10%</em> → 5 (zone idéale). <em>−10% à −20%</em> → 3 (correction modérée). <em>−20% à −30%</em> → 1 (momentum cassé). <em>Au-delà de −30%</em> → 0 (chute libre).
           <br><br>
           C'est un proxy <strong>simple et systématique</strong>, applicable à tout titre. Il a une limite — il traite pareil un titre qui a rallié de +20% et celui qui a rallié de +500%. C'est pourquoi le bloc d'annotation Fibonacci ci-dessous le complète.
         </div>
@@ -1300,7 +1300,7 @@
       <div class="portfo-body">
         Toute la méthode est implémentée dans le repo public <a href="https://github.com/Kosmos-7/Signal" target="_blank" style="color:var(--gold);text-decoration:none">github.com/Kosmos-7/Signal</a>. Les fichiers critiques :
         <ul style="margin-top:0.6rem">
-          <li><code>screener.py</code> — scoring 100 pts (45 momentum + 50 fonda + 5 analystes), application disciplinée des méthodes publiques</li>
+          <li><code>screener.py</code> — scoring 100 pts (45 qualité + 30 valorisation + 22 timing + 3 analystes), application disciplinée des méthodes publiques</li>
           <li><code>portfolio_agent.py</code> — l'agent Claude qui décide chaque semaine, en réel</li>
           <li><code>config.py</code> — paramètres centralisés (frais, PFU, univers)</li>
           <li><code>notes/watchlist_archive/</code> — snapshots hebdomadaires horodatés, la trace point-in-time de l'expérimentation</li>
