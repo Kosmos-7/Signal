@@ -81,7 +81,7 @@ Liste des modules :
 
 - **`frameworks.md`** — Frameworks de décision : pre-mortem, second-level thinking, inversion, resulting bias, base rates, conviction calibration
 - **`biases.md`** — Catalogue des biais cognitifs documentés et heuristiques de détection
-- **`methodology.md`** — Scoring titre (momentum + fondamentaux + analystes), factor lens, position sizing
+- **`methodology.md`** — Scoring titre **v3** (qualité 45 + valorisation 30 + timing 22 + analystes 3 — le timing est un garde-fou, pas le moteur), métriques ROCE × EV/EBITDA, pénalité CHASE / bonus décote-qualité, factor lens, position sizing (**table de référence unique** des bandes par conviction)
 - **`selling.md`** — Discipline de vente, anti-disposition, "would I buy today?" test
 - **`opportunities.md`** — Critères de bonne thèse, circle of competence, asymétrie risk/reward, range d'entrée et stratégies de scale-in, 4 setups (A bull-cycle / B mean-reversion / C dual momentum / D management turnaround bet)
 - **`capital_allocation.md`** — Allocation du capital comme signal de qualité du management : 8 usages du capital, discipline M&A, arithmétique des rachats, évaluation du management (ROIC/ROIIC, gouvernance, 5 principes), drapeaux verts/rouges
@@ -110,6 +110,7 @@ Les modules ne sont PAS auto-chargés. Avant TOUT verdict critique (achat / vent
 3. **Re-dérivation complète à chaque nouvelle info** — cf. memory `feedback_verdict_preflight.md` point 4 (anti-anchoring)
 4. **Si oscillation détectée** dans la session (>2 verdicts différents sur même titre sans nouvelle info fondamentale) → STOP, re-lire les modules, reset
 5. **Nommer les biais utilisateur explicitement** (action bias, recency, anchoring, etc.) selon `biases.md` méta-règle ligne 100-102
+6. **Garde-fou de cadence (anti-dispersion / anti-sur-trading)** — si **>5 titres déjà analysés dans la session** OU **un achat déjà exécuté le même jour** : avant tout nouveau verdict d'achat, (a) rappeler la discipline de concentration (~12-20 positions max), (b) citer le coût du sur-trading (Barber-Odean 2000 : ~-6.5pp/an pour les plus actifs), (c) vérifier que les décisions déjà prises ont été **exécutées** avant d'en empiler de nouvelles. Le pattern à bloquer : explorer un 6e titre pour éviter d'exécuter les 5 décisions précédentes, ou empiler des achats corrélés le même jour sous momentum (leçon session 2026-06 : 25+ analyses, achats multiples même jour, questions posées systématiquement après des hausses).
 
 **Pourquoi** : session 2026-05-21 BABA/Tencent — 5 verdicts différents en 1h faute d'avoir relu `selling.md` ligne 90 (death cross frais → attendre confirmation). Documenté dans memory `feedback_skill_module_loading.md`.
 

@@ -428,14 +428,20 @@ Formule Kelly théorique : `f* = (bp - q) / b` où b = ratio gain/perte, p = pro
 
 ### Sizing par conviction (heuristique simple)
 
+**⚠️ TABLE DE RÉFÉRENCE UNIQUE pour tout le skill.** `frameworks.md` §6 (définition des niveaux de conviction) renvoie ici pour les bandes chiffrées — ne dupliquer ces chiffres nulle part ailleurs. Calibrée 2026-06 sur la pratique réelle des sessions (cap single-stock vécu ~4-6%) et les memories (Setup D 1-3%).
+
 | Conviction | Cap par position |
 |---|---|
-| Forte | 7-10% du capital |
-| Modérée | 4-6% |
-| Faible | 2-3% |
+| Forte | 5-8% du capital |
+| Modérée | 3-5% |
+| Faible | 1-2% |
+| Setup D / pari spéculatif (turnaround, cyclical recovery) | 1-3% max (cf. memory `feedback_turnaround_bet`) |
+| Moonshot (pre-profit, quantum, IPO récente) | ≤1% |
 | Pas d'avis | 0% (skip) |
 
 **Cap absolu** : 20% sur un seul titre (Règle Signal R02) — au-delà, le risque idiosyncratique domine la performance.
+
+**Cluster thématique** : des positions corrélées sur une même thèse (ex : 2 titres agentic SaaS, 3 titres auto/EV) se **cumulent** — sizer le THÈME, pas chaque titre isolément. Un cluster corrélé baisse ensemble : appliquer le cap de conviction au cluster entier (leçon session 2026-06, NOW + CRM ≈ 7% sur un seul thème).
 
 **Diversification minimale** : 12-15 positions pour réduire le risque spécifique sans diluer l'edge.
 

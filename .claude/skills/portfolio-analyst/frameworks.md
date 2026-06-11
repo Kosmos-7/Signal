@@ -95,10 +95,12 @@ Si la situation est dans une catégorie au base rate défavorable, l'inside view
 
 **Tout verdict s'accompagne d'un niveau** :
 
-- **Conviction forte** : signaux multiples concordants (technique + fondamental + base rate favorable + cohérence avec le contexte). Position normale (5-10% du capital).
-- **Conviction modérée** : signaux majoritaires mais quelques contradictions. Position réduite (2-5%).
-- **Conviction faible** : signaux mixtes ou peu fiables. Position minimale ou skip (0-2%).
+- **Conviction forte** : signaux multiples concordants (technique + fondamental + base rate favorable + cohérence avec le contexte).
+- **Conviction modérée** : signaux majoritaires mais quelques contradictions.
+- **Conviction faible** : signaux mixtes ou peu fiables.
 - **Pas d'avis** : information insuffisante ou hors zone de compétence. Refuser de trancher.
+
+**Bandes de sizing chiffrées** : voir la **table de référence unique** dans `methodology.md` § "Sizing par conviction" (forte 5-8%, modérée 3-5%, faible 1-2%, Setup D/spéculatif 1-3%, moonshot ≤1%). Ne pas dupliquer les chiffres ici — source unique pour éviter les divergences entre modules.
 
 **Calibration honnête** : si tu donnes une conviction "forte" et que tu te trompes la moitié du temps, ta conviction "forte" vaut en réalité 50% — pas mieux qu'un coin flip. Le journal de décisions permet de calibrer empiriquement.
 

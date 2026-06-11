@@ -6,54 +6,59 @@ Exemples pour calibrer le ton, la structure, et la profondeur d'analyse selon le
 
 **User** : *"Dois-je acheter NVDA ?"*
 
-**Réponse type** :
+**Réponse type** (ordre v3 : qualité → valorisation → timing en garde-fou) :
 
 ```
 Avant l'analyse : circle of competence ?
   → NVDA = US large cap tech, dans le IN. OK, on peut analyser.
+  → Titre IA-exposé → charger ai_durability_lens.md (forcing function)
 
-Données techniques (yfinance ou via screener.score_ticker si dans Signal) :
-  Prix : $212.40
-  Cross : Golden 13j (frais)
-  RSI : 64 (zone élargie, presque sortie)
-  Volume : confirmé sur les 3 derniers jours (+2.5x moyenne)
-  Z-score régression : +0.4σ (proche de la tendance, sain)
-  
-Fondamentaux :
-  CA growth : +73%/an (extraordinaire)
-  Net margin : 56% (exceptionnel)
-  PEG : ~1.2 (raisonnable malgré valorisation)
-  
-Action récente : +33% en 4 jours sur catalyseur AI/datacenter
+Qualité du business (45 pts — le moteur de la thèse) :
+  ROCE : 81% (exceptionnel, >30% = moat fort)
+  Net margin : 56% | CA growth : +73%/an
+  Trajectoire douve : intacte (CUDA, écosystème) — MAIS casseur R4
+  (puces maison des clients) à surveiller (cf. ai_durability_lens.md)
+
+Valorisation (30 pts) :
+  EV/EBITDA : 43 (premium) | PEG : ~1.2 (raisonnable malgré le multiple)
+  Bonus décote-qualité : non (pas de décote — on paie le premium)
+
+Timing technique (22 pts — garde-fou, PAS moteur) :
+  Cross : Golden 13j (frais) | RSI : 64 | Volume confirmé (+2.5x)
+  Z-score régression : +0.4σ (sain) — fenêtre 10y OK (designer = tech 10y,
+  pas cyclique 25y, cf. memory feedback_scoring_v202)
+  Action récente : +33% en 4 jours → vérifier pénalité CHASE (z > 2.5σ ?)
 
 Verdict : ACHAT — conviction modérée
-  - Setup technique propre (cross frais + volume)
-  - Fondamentaux exceptionnels
-  - MAIS : achat post-rally, RSI proche surachat, le mouvement récent est partiellement priced in
-  
-Sizing : 4-5% du capital max (modérée car rally récent)
+  Score type : 78/100 (qualité 40/45, valorisation 18/30, timing 18/22, analystes 2/3)
+  Ajustements : pas de chase_pen (z +0.4σ), pas de value_bonus
+  - Qualité exceptionnelle = le moteur ; valorisation premium = le frein
+  - Mouvement récent partiellement priced in
 
-Pre-mortem : 
-  - Régulation IA brutale → multiple compresse fortement
-  - Custom silicon hyperscalers réduit la dépendance NVDA
-  - Earnings miss sur le datacenter → -20% rapide
-  
+Sizing : 3-5% du capital (modérée — table unique methodology.md)
+
+Pre-mortem :
+  - Scénario B air-pocket capex IA (cf. ai_durability_lens) → multiple compresse
+  - Custom silicon hyperscalers (R4) réduit la dépendance NVDA
+  - Earnings miss datacenter → -20% rapide
+
 Conditions de vente à pré-définir :
   - Stop-loss -15% (R07)
   - Catastrophe -25% (R08)
   - Earnings miss avec révision baissière
   - Cross descendant ou RSI <30 + perte de momentum
-  
-Alternative à considérer : attendre une consolidation/pullback 
+
+Alternative à considérer : attendre une consolidation/pullback
 (probable dans 4-8 semaines) pour entrer sur un setup plus propre.
 ```
 
 **Pourquoi cette structure** :
-- Catégorisation circle of competence en premier
-- Données chiffrées avant verbal
-- Verdict + conviction explicites
+- Catégorisation circle of competence en premier + lens IA si titre IA-exposé
+- **Qualité d'abord (v3)** — le timing est un garde-fou, pas le moteur de la thèse
+- Verdict avec breakdown v3 (45/30/22/3) + ajustements cités + conviction explicite
 - Pre-mortem obligatoire pour position envisagée
 - Conditions de sortie pré-définies (anti-disposition)
+- Sizing depuis la table de référence unique (methodology.md)
 - Alternative honnête mentionnée
 
 ## Pattern 2 — "J'ai vendu trop tôt, je m'en veux"
