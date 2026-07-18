@@ -989,6 +989,7 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 9. **Heures de marché** : tes décisions sont enregistrées au moment du run, mais l'exécution réelle attend l'ouverture du marché du titre. Si tu décides un ACHAT NVDA (US) à 8h UTC un lundi, l'ordre attendra 14h30 UTC (+6h30) pour s'exécuter — le prix peut bouger entre temps. Tiens-en compte : ne pas paniquer sur des données pré-ouverture, et si tous les marchés concernés sont fermés (weekend, jour férié), privilégier l'attente de la prochaine ouverture sauf urgence (stop-loss catastrophe).
 10. **Friction fiscale (PFU 30%)** : Signal est sur compte-titres ordinaire français. Chaque VENTE en plus-value paye 30% de PFU sur le gain. Conséquence : une vente "neutre" pour réinvestir ailleurs PERD 30% du gain réalisé. Avant de proposer une vente sur position en gain, vérifie que l'alternative a un avantage attendu net suffisant pour couvrir cette friction (règle empirique : ne pas vendre un +20% pour acheter un titre dont l'edge espéré est < 10%). Les positions en perte ne sont PAS pénalisées fiscalement et la perte devient même un crédit d'impôt utilisable 10 ans. Les plus-values LATENTES (positions non vendues) ne sont JAMAIS imposées — le buy & hold long terme est structurellement avantagé.
 11. **VIX = indicateur contextuel non scoré** : le VIX est désormais affiché dans la section CONTEXTE DE MARCHÉ comme indicateur d'ambiance macro, MAIS il n'influence plus mécaniquement le scoring du screener (choix de neutralité — on n'applique aucune mécanique de régime de marché au scoring). Tu es libre de t'en servir comme contexte qualitatif dans `analyse_macro` ("VIX à 22 cette semaine, vigilance modérée — j'ai privilégié les positions qualité"), mais ne traite pas le VIX comme une règle d'enforcement. Les scores du screener sont ce qu'ils sont, indépendamment du VIX.
+12. **Rotation autorisée quand le cash manque** : si une opportunité watchlist te semble NETTEMENT supérieure à une position détenue et que les liquidités ne permettent pas de l'acheter, tu peux proposer une rotation — une VENTE + un ACHAT dans le même run. Le moteur exécute toutes les ventes AVANT les achats : le produit de la vente (net de frais et de PFU) finance l'achat, et la règle des liquidités (5%) est réévaluée après la vente. Conditions STRICTES : (a) la position vendue respecte la Règle 01 — 90 jours de détention, ou signal fondamental documenté avec conviction forte ; (b) dans les DEUX champs `raison`, nomme explicitement la rotation et compare la position sortante au titre entrant (scores screener, thèse, potentiel) : "Rotation : je vends X (score 62, thèse affaiblie car …) pour financer Y (score 88, …)" ; (c) applique la Règle 10 — l'avantage attendu du titre entrant doit dépasser la friction totale (frais aller-retour + 30% de PFU sur la plus-value de la vente) ; (d) maximum UNE rotation par run — c'est un arbitrage d'exception, pas un outil de churn : dans le doute, conserver.
 
 ## DATE & MOMENT DU RUN
 - Run actuel       : {contexte.get('jour_semaine','?')} {today} {contexte.get('heure_utc','?')} UTC ({contexte.get('semaine','?')})
@@ -1187,6 +1188,13 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 "_stop_loss_type": sl_type,  # marqueur pour bypass mode panique côté VENTE
             })
 
+    # ── Rotations : les VENTES s'exécutent avant les ACHATS du même run ────
+    # `liquidites` est crédité au fil de la boucle : en triant les ventes en tête
+    # (tri STABLE — l'ordre relatif de Claude est conservé au sein de chaque
+    # groupe, stop-loss compris), une rotation « vendre X pour financer Y »
+    # fonctionne quel que soit l'ordre dans lequel le modèle a émis ses décisions.
+    decisions.sort(key=lambda d: 0 if d.get("action", "").upper() == "VENTE" else 1)
+
     for dec in decisions:
         action = dec.get("action", "").upper()
         ticker = dec.get("ticker", "")
@@ -1337,44 +1345,48 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
             # ── Règles mécaniques (enforcement — indépendant du raisonnement Claude)
             conviction    = dec.get("conviction", "modérée")
             cluster_sizing_factor = 1.0  # facteur multiplicatif appliqué au sizing (soft cap R01)
-            if regles_auto:
-                bloque_motif = None  # capture le motif de blocage pour log + transparence
-                # R3 — Liquidités < 5% (toujours blocage strict)
-                if any(r["type"] == "liquidites_faibles" for r in regles_auto):
-                    print(f"  🚫 ACHAT {ticker} bloqué — liquidités < 5% (R3)")
-                    bloque_motif = ("R03", "Liquidités < 5% du capital — achats bloqués jusqu'à reconstitution de la marge de manœuvre")
-                else:
-                    # R1 — Concentration sectorielle GRADUÉE :
-                    #   - regime=strict  → blocage total
-                    #   - regime=soft    → sizing réduit, bypass partiel si conviction forte
-                    stock_tmp = stock_map.get(ticker, {})
-                    sect_tick = stock_tmp.get("sector", "")
-                    cluster_tick = cluster_for(sect_tick) if sect_tick else ""
-                    cluster_rule = next(
-                        (r for r in regles_auto
-                         if r["type"] == "concentration_sectorielle" and r.get("secteur") == cluster_tick),
-                        None
-                    )
-                    if cluster_rule:
-                        regime = cluster_rule.get("regime", "strict")
-                        pct = cluster_rule.get("pct", "?")
-                        if regime == "strict":
-                            print(f"  🚫 ACHAT {ticker} bloqué — cluster {cluster_tick} à {pct}% > 65% (R1 strict)")
-                            bloque_motif = ("R01", f"Cluster {cluster_tick} à {pct}% > 65% — concentration excessive, achat refusé (R1 blocage strict)")
-                        else:
-                            # Soft : appliquer le sizing_factor
-                            base_factor = cluster_rule.get("sizing_factor", 0.5)
-                            # Conviction forte bypasse partiellement : plancher à 0.5
-                            cluster_sizing_factor = max(base_factor, 0.5) if conviction == "forte" else base_factor
-                            print(f"  ⚠️  ACHAT {ticker} — R1 soft (cluster {cluster_tick} à {pct}%) : sizing × {cluster_sizing_factor:.2f}")
-                if bloque_motif:
-                    rule_id, expl = bloque_motif
-                    decisions_bloquees.append({
-                        "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
-                        "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
-                        "bloque_par": rule_id, "explication_blocage": expl,
-                    })
-                    continue
+            bloque_motif = None  # capture le motif de blocage pour log + transparence
+            # R3 — Liquidités < 5% : réévaluée DYNAMIQUEMENT sur l'état courant du run,
+            # pas sur l'état pré-run figé dans regles_auto. Indispensable aux rotations :
+            # les ventes (exécutées avant les achats) ont pu reconstituer le cash — et
+            # symétriquement, des achats successifs peuvent faire passer sous 5% en cours
+            # de run, ce que la règle statique ne voyait pas non plus.
+            liquidites_pct = liquidites / capital * 100 if capital > 0 else 0
+            if liquidites_pct < 5:
+                print(f"  🚫 ACHAT {ticker} bloqué — liquidités {liquidites_pct:.1f}% < 5% (R3)")
+                bloque_motif = ("R03", f"Liquidités {liquidites_pct:.1f}% du capital ({liquidites:.0f}€) < 5% — achats bloqués jusqu'à reconstitution de la marge de manœuvre")
+            elif regles_auto:
+                # R1 — Concentration sectorielle GRADUÉE :
+                #   - regime=strict  → blocage total
+                #   - regime=soft    → sizing réduit, bypass partiel si conviction forte
+                stock_tmp = stock_map.get(ticker, {})
+                sect_tick = stock_tmp.get("sector", "")
+                cluster_tick = cluster_for(sect_tick) if sect_tick else ""
+                cluster_rule = next(
+                    (r for r in regles_auto
+                     if r["type"] == "concentration_sectorielle" and r.get("secteur") == cluster_tick),
+                    None
+                )
+                if cluster_rule:
+                    regime = cluster_rule.get("regime", "strict")
+                    pct = cluster_rule.get("pct", "?")
+                    if regime == "strict":
+                        print(f"  🚫 ACHAT {ticker} bloqué — cluster {cluster_tick} à {pct}% > 65% (R1 strict)")
+                        bloque_motif = ("R01", f"Cluster {cluster_tick} à {pct}% > 65% — concentration excessive, achat refusé (R1 blocage strict)")
+                    else:
+                        # Soft : appliquer le sizing_factor
+                        base_factor = cluster_rule.get("sizing_factor", 0.5)
+                        # Conviction forte bypasse partiellement : plancher à 0.5
+                        cluster_sizing_factor = max(base_factor, 0.5) if conviction == "forte" else base_factor
+                        print(f"  ⚠️  ACHAT {ticker} — R1 soft (cluster {cluster_tick} à {pct}%) : sizing × {cluster_sizing_factor:.2f}")
+            if bloque_motif:
+                rule_id, expl = bloque_motif
+                decisions_bloquees.append({
+                    "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
+                    "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                    "bloque_par": rule_id, "explication_blocage": expl,
+                })
+                continue
 
             # Plafond de positions (MAX_POSITIONS) : refuser un NOUVEL achat si le portefeuille
             # est plein (un renforcement d'une ligne déjà ouverte reste autorisé).
