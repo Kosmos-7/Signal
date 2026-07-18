@@ -17,9 +17,10 @@ Dépendances : pip install yfinance pandas ta requests anthropic
 import yfinance as yf
 import json
 import os
+import re
 import requests
 from collections import Counter
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone as _timezone
 from anthropic import Anthropic
 
 # Paramètres centralisés (frais transaction, PFU, VIX, …) — Phase 1+
@@ -143,7 +144,7 @@ def get_eur_gbp_rate():
         return 0.86
 
 def detect_currency(ticker, market=""):
-    """Détermine la devise native d'un ticker (EUR / USD / GBP / DKK / SEK / NOK).
+    """Détermine la devise native d'un ticker (EUR / USD / GBP / DKK / SEK / NOK / CHF).
 
     Correction 2026-06-10 : Copenhague (.CO), Stockholm (.ST) et Oslo (.OL)
     étaient mappés EUR alors qu'ils cotent en couronnes — ORSTED.CO a été
@@ -158,6 +159,11 @@ def detect_currency(ticker, market=""):
         return "SEK"
     if t.endswith(".OL") or "OSL" in m:
         return "NOK"
+    # Franc suisse — sans cette branche, un titre .SW était traité en USD :
+    # conversion via EUR/USD (~1.10) au lieu de EUR/CHF (~0.93), ~15-18% d'écart
+    # sur toutes les valeurs (le code CHF de to_eur était inatteignable).
+    if t.endswith(".SW") or "EBS" in m or "SWX" in m:
+        return "CHF"
     # Suffixes Yahoo Finance → EUR (zone euro uniquement)
     if any(t.endswith(s) for s in [".AS", ".PA", ".DE", ".BR", ".MI", ".MC", ".AT",
                                     ".HE", ".VI", ".LI"]):
@@ -292,12 +298,16 @@ def market_status(now_utc=None):
     }
 
 
-def get_contexte_marche(last_known_vix=None):
+def get_contexte_marche(last_known_vix=None, prev_mode_panique=False):
     """Récupère le contexte macro de la semaine + statut temporel et marchés.
 
     `last_known_vix` : valeur de cache du VIX (en cas de fetch échoué). Si None,
     fallback ultime à 18 (médiane historique du VIX). Passé depuis portfolio.json
     pour permettre une persistance entre runs.
+    `prev_mode_panique` : état persisté du run précédent — si le benchmark est
+    infetchable, le mode panique est CONSERVÉ au lieu d'être désarmé (fail-open) :
+    une panne Yahoo pendant un krach est précisément le scénario où la Règle 03
+    doit tenir.
     """
     ctx = {}
     annee = date.today().year
@@ -308,10 +318,15 @@ def get_contexte_marche(last_known_vix=None):
             hist = yf.Ticker(ticker).history(start=debut)["Close"].dropna()
             if len(hist) >= 2:
                 perf_ytd    = round((hist.iloc[-1] - hist.iloc[0]) / hist.iloc[0] * 100, 2)
-                perf_1sem   = round((hist.iloc[-1] - hist.iloc[-5]) / hist.iloc[-5] * 100, 2) if len(hist) >= 5 else 0
+                # 5 séances de bourse = iloc[-6] (iloc[-5] ne couvrait que 4 intervalles
+                # → le seuil panique -5% « sur la semaine » était mesuré sur une fenêtre tronquée)
+                perf_1sem   = round((hist.iloc[-1] - hist.iloc[-6]) / hist.iloc[-6] * 100, 2) if len(hist) >= 6 else 0
                 ctx[label] = {"perf_ytd": perf_ytd, "perf_semaine": perf_1sem}
-        except:
-            ctx[label] = {"perf_ytd": 0, "perf_semaine": 0}
+        except Exception as e:
+            # Ne PAS écrire de 0 : main() retombe alors sur les valeurs persistées de
+            # portfolio.json (même comportement qu'update_prices.py, qui conserve la
+            # valeur précédente) au lieu de publier un benchmark écrasé à zéro.
+            print(f"   ⚠️  Benchmark {label} indisponible ({type(e).__name__}) — valeurs précédentes conservées")
 
     # ── VIX — indicateur contextuel (affichage dashboard + prompt) ; hors scoring depuis v3
     # Stratégie de fallback en 3 niveaux :
@@ -338,9 +353,13 @@ def get_contexte_marche(last_known_vix=None):
     ctx["vix_source"] = vix_source
     ctx["vix_multiplier"] = round(config.vix_multiplier(vix_value), 3)
 
-    # Mode panique
-    cac_sem = ctx.get("cac40", {}).get("perf_semaine", 0)
-    ctx["mode_panique"] = cac_sem < -5.0
+    # Mode panique — sticky si le benchmark est indisponible (jamais fail-open)
+    if "cac40" in ctx:
+        ctx["mode_panique"] = ctx["cac40"]["perf_semaine"] < -5.0
+    else:
+        ctx["mode_panique"] = bool(prev_mode_panique)
+        if prev_mode_panique:
+            print("   ⚠️  Mode panique CONSERVÉ du run précédent (benchmark indisponible)")
 
     # Conscience temporelle
     now_utc = datetime.utcnow()
@@ -352,6 +371,16 @@ def get_contexte_marche(last_known_vix=None):
     ctx["marches"]      = market_status(now_utc)
 
     return ctx
+
+_TAG_RE = re.compile(r"<[^>]*>")
+
+def _texte_externe_sain(s):
+    """Neutralise tout balisage HTML d'une chaîne d'origine externe (news Finnhub).
+
+    Ces textes sont injectés (1) dans les prompts Claude et (2) dans portfolio.json,
+    rendu par le dashboard : aucune balise tierce ne doit survivre en amont.
+    """
+    return _TAG_RE.sub("", str(s or "")).replace("<", "‹").replace(">", "›").strip()
 
 _MACRO_KEYWORDS = [
     # US monetary
@@ -393,8 +422,14 @@ def get_macro_news():
     if not FINNHUB_KEY:
         return []
     try:
-        url = f"https://finnhub.io/api/v1/news?category=general&minId=0&token={FINNHUB_KEY}"
-        r = requests.get(url, timeout=5)
+        # Clé en header (pas en query-string) : une exception requests loggue l'URL
+        # complète — le token ne doit jamais y figurer.
+        r = requests.get(
+            "https://finnhub.io/api/v1/news",
+            params={"category": "general", "minId": 0},
+            headers={"X-Finnhub-Token": FINNHUB_KEY},
+            timeout=5,
+        )
         if r.status_code != 200:
             return []
         articles = r.json()
@@ -421,9 +456,9 @@ def get_macro_news():
             candidates.append({
                 "kw_score":  kw_score,
                 "datetime":  article.get("datetime", 0),
-                "headline":  (article.get("headline") or "")[:140],
-                "summary":   (article.get("summary")  or "")[:600],
-                "source":    source,
+                "headline":  _texte_externe_sain(article.get("headline"))[:140],
+                "summary":   _texte_externe_sain(article.get("summary"))[:600],
+                "source":    _texte_externe_sain(source)[:60],
                 "url":       url_a,
             })
 
@@ -437,7 +472,7 @@ def get_macro_news():
             src = c["source"] or "unknown"
             if per_source_count.get(src, 0) >= _PER_SOURCE_CAP:
                 continue
-            art_date = datetime.utcfromtimestamp(c["datetime"]).strftime("%Y-%m-%d") if c["datetime"] else ""
+            art_date = datetime.fromtimestamp(c["datetime"], tz=_timezone.utc).strftime("%Y-%m-%d") if c["datetime"] else ""
             selected.append({
                 "headline": c["headline"],
                 "summary":  c["summary"],
@@ -451,7 +486,8 @@ def get_macro_news():
 
         return selected
     except Exception as e:
-        print(f"  ⚠️  Macro news — exception : {e}")
+        # type seul — l'exception requests peut contenir l'URL de la requête
+        print(f"  ⚠️  Macro news — exception : {type(e).__name__}")
         return []
 
 def portfolio_vide():
@@ -1200,10 +1236,32 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                     continue
 
             prix_vente = get_prix(ticker) or pos.get("prix_actuel", pos["prix_achat"])
+
+            # Garde anti-aberration (même contrat que maj_position) : un prix ×3/÷3
+            # vs le dernier connu est presque toujours une erreur de données (GBp non
+            # converti, split) — on refuse la vente plutôt que de créditer un cash
+            # fantôme irrécupérable.
+            prev_connu = pos.get("prix_actuel")
+            if prev_connu and prev_connu == prev_connu and prev_connu > 0 and prix_vente:
+                ratio = prix_vente / prev_connu
+                if ratio > 3 or ratio < 1 / 3:
+                    print(f"  🚨 VENTE {ticker} bloquée — prix {prix_vente} aberrant vs {prev_connu} (×{ratio:.2f})")
+                    decisions_bloquees.append({
+                        "date": today, "action_tentee": "VENTE", "ticker": ticker, "nom": nom,
+                        "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                        "bloque_par": "prix_aberrant",
+                        "explication_blocage": f"Prix de vente {prix_vente} incohérent avec le dernier prix connu {prev_connu} (×{ratio:.2f}) — probable erreur de données (devise/split), vente refusée par sécurité",
+                    })
+                    continue
+
             currency   = pos.get("currency") or detect_currency(ticker, pos.get("market", ""))
             perf       = round((prix_vente - pos["prix_achat"]) / pos["prix_achat"] * 100, 2)
             brut_vente_eur    = to_eur(prix_vente * pos["quantite"], currency, eur_usd, eur_gbp)
-            montant_achat_eur = pos.get("montant_investi", 0)  # base fiscale (achat + frais achat)
+            # Base fiscale (achat + frais d'achat). Fallback position legacy sans le
+            # champ : reconstitution depuis prix_achat×quantité — l'ancien défaut de 0
+            # taxait 100% du produit de vente comme plus-value.
+            montant_achat_eur = pos.get("montant_investi") or to_eur(
+                pos["prix_achat"] * pos["quantite"], currency, eur_usd, eur_gbp)
 
             # Application frais vente + PFU sur la plus-value en EUR
             r = config.apply_sell_cost_and_tax(brut_vente_eur, montant_achat_eur)
@@ -1250,6 +1308,19 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                     "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
                     "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
                     "bloque_par": "R03", "explication_blocage": "Mode panique actif (CAC40 < -5% sur la semaine) — aucun achat possible",
+                })
+                continue
+
+            # Garde anti-hallucination : la consigne « tickers watchlist uniquement »
+            # n'existait que dans le prompt. En code : un ticker hors watchlist passait
+            # avec sector="—" et échappait définitivement à la règle de concentration R1.
+            if ticker not in stock_map:
+                print(f"  ✗ ACHAT {ticker} bloqué — hors watchlist (ticker inconnu ou halluciné)")
+                decisions_bloquees.append({
+                    "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
+                    "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                    "bloque_par": "hors_watchlist",
+                    "explication_blocage": f"{ticker} ne figure pas dans la watchlist de la semaine — seuls les titres screenés sont achetables",
                 })
                 continue
 
@@ -1361,12 +1432,34 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
             # On dimensionne pour que (brut + frais) ≤ budget plutôt que brut ≤ budget,
             # sinon les frais font légèrement dépasser le budget alloué.
             budget_apres_frais_anticipes = budget / (1 + config.TRANSACTION_COST_BPS / 10000.0)
-            quantite     = max(1, int(budget_apres_frais_anticipes / prix_eur))
+            quantite     = int(budget_apres_frais_anticipes / prix_eur)
+            if quantite < 1:
+                # L'ancien max(1, …) forçait ici l'achat d'un titre plus cher que le
+                # budget ET que les liquidités → liquidités négatives dans le JSON.
+                print(f"  💰 ACHAT {ticker} bloqué — prix unitaire {prix_eur:.2f}€ > budget {budget:.0f}€")
+                decisions_bloquees.append({
+                    "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
+                    "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                    "bloque_par": "prix_unitaire_trop_eleve",
+                    "explication_blocage": f"Prix unitaire {prix_eur:.2f}€ supérieur au budget alloué {budget:.0f}€ — impossible d'acheter un seul titre sans dépasser l'allocation",
+                })
+                continue
             brut_eur     = round(prix_eur * quantite, 2)
 
             # Application des frais d'achat (one-way) — inclus dans la base fiscale
             # à la revente conformément à la règle française.
             montant_eur, frais_achat = config.apply_buy_cost(brut_eur)
+            if montant_eur > liquidites:
+                # Ceinture + bretelles : quel que soit le chemin de sizing, un ordre
+                # ne doit jamais laisser les liquidités négatives.
+                print(f"  💰 ACHAT {ticker} bloqué — coût total {montant_eur:.2f}€ > liquidités {liquidites:.2f}€")
+                decisions_bloquees.append({
+                    "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
+                    "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                    "bloque_par": "liquidites_insuffisantes",
+                    "explication_blocage": f"Coût total frais inclus {montant_eur:.2f}€ supérieur aux liquidités {liquidites:.2f}€",
+                })
+                continue
             liquidites = round(liquidites - montant_eur, 2)
 
             nouvelle_pos = {
@@ -1435,7 +1528,10 @@ def main():
     print(f"🧠 Appel à Claude API — architecture deux passes — {semaine()}")
 
     # ── Contexte de marché + taux de change + macro news
-    contexte    = get_contexte_marche(last_known_vix=portfolio.get("last_known_vix"))
+    contexte    = get_contexte_marche(
+        last_known_vix=portfolio.get("last_known_vix"),
+        prev_mode_panique=portfolio.get("mode_panique", False),
+    )
     eur_usd     = get_eur_usd_rate()
     eur_gbp     = get_eur_gbp_rate()
     macro_news  = get_macro_news()
@@ -1566,7 +1662,12 @@ Ne jamais inclure de balises markdown ou de backticks.""",
     pertes_si_liquidation       = 0.0
     for pos in positions:
         brut = pos.get("valeur_actuelle", 0)
-        base = pos.get("montant_investi", brut)
+        # Même fallback de base fiscale que le chemin de vente (cohérence du PFU) :
+        # reconstitution depuis prix_achat×quantité si le champ legacy manque.
+        base = pos.get("montant_investi") or to_eur(
+            pos["prix_achat"] * pos["quantite"],
+            pos.get("currency") or detect_currency(pos["ticker"], pos.get("market", "")),
+            eur_usd, eur_gbp)
         r = config.apply_sell_cost_and_tax(brut, base)
         cash_post_liq             += r["cash_recupere_eur"]
         frais_si_liquidation      += r["frais_vente_eur"]

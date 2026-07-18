@@ -1,4 +1,13 @@
 """
+⚠️  SCRIPT ARCHIVÉ (2026-07-18) — NE PLUS EXÉCUTER.
+
+La migration v2 a été appliquée : tous les ordres de portfolio.json portent les
+champs v2 (vérifié lors de l'audit du 2026-07-18 : 27 ACHAT avec frais_achat_eur,
+9 VENTE avec frais_vente_eur). Un re-run recalculerait total_frais_payes /
+performance / performance_brute et écraserait les valeurs maintenues depuis par
+portfolio_agent.py — risque de divergence si les formules ont évolué.
+Conservé dans notes/archive/ pour la traçabilité méthodologique uniquement.
+
 migrate_orders_v2.py — Migration des ordres historiques vers le modèle v2.
 
 Phase 1 du plan : applique rétroactivement aux 34 ordres existants

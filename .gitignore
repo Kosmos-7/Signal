@@ -4,8 +4,20 @@ __pycache__/
 *.pyo
 *.pyd
 
+# Environnements virtuels
+venv/
+.venv/
+
+# Secrets — jamais committables (le projet fonctionne par variables d'environnement)
+.env
+.env.*
+
+# Logs
+*.log
+
 # IDE / Claude Code workspace
 .claude/launch.json
+.claude/settings.local.json
 .claude/scheduled_tasks.lock
 .claude/worktrees/
 WatchRadar-main/.claude/

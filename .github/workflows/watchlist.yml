@@ -37,6 +37,7 @@ jobs:
         run: python screener.py
 
       - name: Run portfolio agent (portfolio.json)
+        id: agent
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -44,6 +45,7 @@ jobs:
         run: python portfolio_agent.py
 
       - name: Generate editorial analyses (analyses.json)
+        id: analyses
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -62,3 +64,13 @@ jobs:
             git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase — échec explicite (pas de push silencieusement perdu)"; exit 1; }
             git push
           fi
+
+      # Le continue-on-error des étapes IA permet de publier la watchlist même si
+      # l'agent/les analyses échouent — MAIS le job doit finir ROUGE pour que
+      # l'échec soit visible (notification GitHub) au lieu de passer des semaines
+      # inaperçu (ex : clé API expirée → portfolio et analyses figés en silence).
+      - name: Signale les échecs IA (après publication)
+        if: steps.agent.outcome == 'failure' || steps.analyses.outcome == 'failure'
+        run: |
+          echo "::error::Étape IA en échec — portfolio_agent: ${{ steps.agent.outcome }}, generate_analyses: ${{ steps.analyses.outcome }}. La watchlist a été publiée, mais les données IA n'ont pas été rafraîchies."
+          exit 1
