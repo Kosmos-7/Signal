@@ -683,7 +683,7 @@
   </div>
 
   <div id="positions" style="margin-bottom:1.75rem">
-    <div class="sec-label">Positions ouvertes · Mis à jour chaque lundi</div>
+    <div class="sec-label">Positions ouvertes · Prix mis à jour chaque jour ouvré · composition revue le lundi</div>
     <div class="pos-header">
       <span>Action</span>
       <span style="text-align:right">Qté</span>
@@ -1416,6 +1416,7 @@ function renderAllocCharts(positions) {
   const GEO_MAP = {
     'NYQ': 'États-Unis', 'NMS': 'États-Unis', 'Nasdaq': 'États-Unis',
     'Euronext': 'Europe', 'AMS': 'Europe', 'EPA': 'Europe', 'GER': 'Europe',
+    'CPH': 'Europe', 'STO': 'Europe', 'OSL': 'Europe', 'HEL': 'Europe',
     'LSE': 'Royaume-Uni',
     'TSX': 'Canada', 'JPX': 'Japon', 'ASX': 'Australie',
   };
@@ -1526,7 +1527,7 @@ function renderOrder(o, idx) {
                 <br><br>Cause racine : <code>executer_decisions()</code> ne vérifiait pas le jour de la semaine avant d'appliquer les décisions. Corrigé depuis (commit <a href="https://github.com/Kosmos-7/Signal/commit/12dae5e" target="_blank" style="color:var(--red);text-decoration:underline">12dae5e</a>) : un guard en tête de fonction reporte toute décision ACHAT/VENTE proposée samedi/dimanche au prochain jour ouvré (motif <code>marche_ferme_weekend</code> dans <code>decisions_bloquees</code>).
                 <br><br>L'ordre est conservé dans l'historique pour transparence méthodologique (Signal documente ses erreurs au lieu de les masquer).
               </div>` : ''}
-          <div class="order-raison">${o.raison}</div>
+          <div class="order-raison">${escHtml(o.raison || '')}</div>
         </div>
       </div>
     </div>`;
@@ -1535,6 +1536,14 @@ function renderOrder(o, idx) {
 function toggleOrder(idx) {
   const el = document.getElementById('order-' + idx);
   if (el) el.classList.toggle('open');
+}
+
+// Échappement HTML global — pour TOUT texte issu de l'IA ou d'une source externe
+// (news Finnhub, raisonnements Claude, messages de règles) injecté en innerHTML.
+function escHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
 function renderMacroNews(news) {
@@ -1548,11 +1557,15 @@ function renderMacroNews(news) {
     return `${iso.slice(8, 10)}/${iso.slice(5, 7)}`;
   };
   list.innerHTML = news.map(n => {
-    const resume   = n.resume_fr ? n.resume_fr : '<em style="color:var(--text3)">Résumé indisponible.</em>';
-    const headline = n.url
-      ? `<a href="${n.url}" target="_blank" rel="noopener">${n.headline}</a>`
-      : n.headline;
-    const meta = `<span class="mn-meta-date">${fmtDate(n.date)}</span>${n.source ? ' · ' + n.source : ''}`;
+    // Données 100% tierces (API Finnhub) : tout est échappé, et l'URL n'est
+    // acceptée qu'en http(s) — le vecteur le plus directement contrôlable de
+    // l'extérieur (headline/url hostile → XSS chez tous les visiteurs).
+    const resume   = n.resume_fr ? escHtml(n.resume_fr) : '<em style="color:var(--text3)">Résumé indisponible.</em>';
+    const safeUrl  = /^https?:\/\//i.test(n.url || '') ? escHtml(n.url) : '';
+    const headline = safeUrl
+      ? `<a href="${safeUrl}" target="_blank" rel="noopener">${escHtml(n.headline)}</a>`
+      : escHtml(n.headline || '');
+    const meta = `<span class="mn-meta-date">${fmtDate(n.date)}</span>${n.source ? ' · ' + escHtml(n.source) : ''}`;
     return `<div class="mn-item">
       <div class="mn-resume">${resume}</div>
       <div class="mn-headline">${meta} — ${headline}</div>
@@ -1900,7 +1913,7 @@ async function loadPortfolio() {
     const chips = document.getElementById('pacc-chips');
     if (biais.length > 0) {
       document.getElementById('bias-section').style.display = 'block';
-      document.getElementById('bias-items').innerHTML = biais.map(b => `<div class="bias-item">${b}</div>`).join('');
+      document.getElementById('bias-items').innerHTML = biais.map(b => `<div class="bias-item">${escHtml(b)}</div>`).join('');
       if (chips) chips.innerHTML = `<span class="pacc-chip pacc-chip-warn">${biais.length} biais</span>` + chips.innerHTML;
     }
     const regles = d.regles_actives || [];
@@ -1909,7 +1922,7 @@ async function loadPortfolio() {
       document.getElementById('regles-items').innerHTML = regles.map(r => {
           const isSoft = r.regime === 'soft';
           const icon = isSoft ? '⚠️' : '🚫';
-          return `<div class="regle-item"><span class="regle-icon">${icon}</span><span class="regle-msg">${r.message}</span></div>`;
+          return `<div class="regle-item"><span class="regle-icon">${icon}</span><span class="regle-msg">${escHtml(r.message || '')}</span></div>`;
         }
 
       ).join('');
@@ -1935,8 +1948,8 @@ async function loadPortfolio() {
             <span class="blocked-rule">bloqué : ${ruleLabel}</span>
             <span class="blocked-conv">${conv}</span>
           </div>
-          <div class="blocked-why">${b.explication_blocage || ''}</div>
-          <div class="blocked-claude-raison">${(b.raison_claude || '').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+          <div class="blocked-why">${escHtml(b.explication_blocage || '')}</div>
+          <div class="blocked-claude-raison">${escHtml(b.raison_claude || '')}</div>
         </div>`;
       }).join('');
       const n = blocked.length;
