@@ -38,7 +38,9 @@ Python 3.13.
 """
 
 import os
+import re
 import sys
+import html
 import json
 import tempfile
 from datetime import date, datetime, timezone
@@ -222,7 +224,10 @@ def fetch_news(ticker, limit=5):
                 except Exception:
                     datestr = ""
 
-        title = (title or "").strip()
+        # Neutralise tout balisage dans des textes d'origine externe avant injection
+        # dans le prompt (défense en profondeur avec _sanitize_html côté sortie).
+        title = re.sub(r"<[^>]*>", "", (title or "")).strip()
+        pub   = re.sub(r"<[^>]*>", "", (pub or "")).strip()
         if not title:
             continue
         prefix = f"{datestr} — " if datestr else ""
@@ -329,11 +334,25 @@ bull et bear EXACTEMENT 3 puces chacun. Chaque § = 2 à 4 phrases."""
 
 
 # ── VALIDATION / PARSING ──────────────────────────────────────────────────────
+def _sanitize_html(text):
+    """Neutralise tout HTML sauf <b>…</b> (le seul balisage du contrat éditorial).
+
+    La contrainte « balises <b> uniquement, pas d'autre HTML » n'existait qu'au
+    niveau du prompt — jamais appliquée en code. Or ces champs sont rendus en
+    innerHTML par index.html sur un site public : sans ce filtre, une injection
+    de prompt via un titre de presse pouvait faire émettre au modèle une balise
+    active (XSS stockée, servie à tous les visiteurs via GitHub Pages).
+    """
+    s = html.escape(str(text), quote=False)
+    return s.replace("&lt;b&gt;", "<b>").replace("&lt;/b&gt;", "</b>")
+
+
 def parse_and_validate(raw):
     """Parse la réponse Claude et valide le schéma. Lève ValueError si invalide.
 
     Même nettoyage que portfolio_agent.py (strip ```json / ```), plus un filet de
     sécurité qui isole le 1er objet {...} si Claude entoure le JSON de prose.
+    Chaque chaîne validée passe par _sanitize_html (allowlist <b> seulement).
     """
     cleaned = raw.strip().replace("```json", "").replace("```", "").strip()
     try:
@@ -357,7 +376,7 @@ def parse_and_validate(raw):
             val = [val]
         if not isinstance(val, list):
             raise ValueError(f"champ {field} n'est pas un tableau")
-        items = [str(x).strip() for x in val if str(x).strip()]
+        items = [_sanitize_html(str(x).strip()) for x in val if str(x).strip()]
         if not items:
             raise ValueError(f"champ {field} vide")
         out[field] = items
@@ -390,6 +409,12 @@ def generate_one(stock, guide):
         ),
         messages=[{"role": "user", "content": prompt}],
     )
+    # Diagnostics explicites : sans ces gardes, une réponse tronquée produisait un
+    # « aucun objet JSON détecté » trompeur, et une réponse vide un IndexError opaque.
+    if getattr(response, "stop_reason", None) == "max_tokens":
+        raise ValueError(f"réponse tronquée à {MAX_TOKENS} tokens (stop_reason=max_tokens) — augmenter MAX_TOKENS ?")
+    if not response.content:
+        raise ValueError("réponse vide du modèle (content=[])")
     raw = response.content[0].text
     analysis = parse_and_validate(raw)
     analysis["_sig"] = signature(stock)
