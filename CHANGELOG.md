@@ -5,6 +5,41 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.1.0] — 2026-07-18
+
+### Rotations de portefeuille + correctifs d'audit complet
+
+- **Rotations (nouveau)** : l'agent peut désormais vendre une position jugée moins
+  attractive pour financer une meilleure opportunité watchlist quand le cash manque.
+  Mécanique : les VENTES d'un run s'exécutent avant les ACHATS (tri stable, stop-loss
+  toujours en tête) et la règle R3 « liquidités < 5 % » est réévaluée dynamiquement en
+  cours de run (l'état pré-run figé bloquait l'achat même après la vente). Doctrine
+  stricte côté prompt (règle 12) : R01 respectée, comparaison explicite sortant/entrant
+  dans les `raison`, friction (frais + PFU) à couvrir, max 1 rotation par run.
+- **Audit complet (4 volets : screener, agent, CI/scripts, frontend/données)** :
+  - screener : watchlist.json écrit de façon atomique + `allow_nan=False` (un NaN
+    faisait planter JSON.parse côté site — classe d'incident 3.0.1) ; gardes NaN
+    MM200/RSI/régression/VIX ; la validation croisée Finnhub est réservée aux tickers
+    US (le strip des suffixes comparait LVMH aux métriques de Moelis & Co et dégradait
+    la confiance jusqu'à ×0.7 sur les valeurs européennes) ; badge `GER` (SAP.DE
+    s'affichait « US ») ; `load_previous` ne fabrique plus un changelog fantôme.
+  - agent : gardes d'exécution en code (achat hors watchlist rejeté, plus de
+    liquidités négatives via `max(1,…)`, coût total ≤ cash, prix de vente aberrant
+    ×3/÷3 refusé, base fiscale reconstituée si `montant_investi` absent — l'ancien
+    défaut taxait 100 % du produit) ; mode panique sticky si le benchmark est
+    infetchable (le fail-open désarmait la Règle 03 pendant les pannes Yahoo) ;
+    fenêtre panique sur 5 vraies séances ; devise CHF (.SW) supportée.
+  - sécurité : sortie IA filtrée en code (allowlist `<b>` seulement) + échappement
+    systématique côté front (news Finnhub, raisons d'ordres, biais, règles) + URLs
+    restreintes à http(s) → fermeture du vecteur XSS stockée via injection de prompt ;
+    clés API Finnhub en header (plus jamais dans une URL loggable).
+  - CI : le job hebdo devient rouge si une étape IA échoue (la watchlist reste
+    publiée) — fini les données figées des semaines sans alerte ; `.gitignore`
+    complété (`.env*`, venv, settings locaux).
+  - divers : `index.html` affiche un message si le JSON est illisible (au lieu d'une
+    page vide), Copenhague classée Europe, libellé « mis à jour chaque lundi »
+    corrigé, `migrate_orders_v2.py` archivé dans `notes/archive/`.
+
 ## [3.0.1] — 2026-06-10
 
 ### Hotfix incident NaN + audit complet (6 auditeurs) — site portfolio figé du 02 au 09/06
