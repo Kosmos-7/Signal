@@ -44,7 +44,7 @@ import json
 import os
 import time
 import requests
-from datetime import date, timedelta, datetime as _dt
+from datetime import date, timedelta, datetime as _dt, timezone as _tz
 from ta.momentum import RSIIndicator
 
 # Paramètres centralisés (VIX dampener, etc.) — Phase 2
@@ -53,15 +53,26 @@ import config
 # ── FINNHUB (validation croisée) ─────────────────────────────────────────────
 FINNHUB_KEY = os.getenv("FINNHUB_API_KEY", "")
 
+_NON_US_SUFFIXES = (".PA",".DE",".AS",".L",".CO",".BR",".MI",".MC",".AT",".IS",
+                    ".HE",".ST",".OL",".OB",".SW",".VI",".LI",".T",".HK",".KS",".TO")
+
 def finnhub_fundamentals(ticker):
     if not FINNHUB_KEY:
         return {}
-    for sfx in (".PA",".DE",".AS",".L",".CO",".BR",".MI",".MC",".AT",".IS",".HE",".ST",".OL",".OB"):
-        ticker = ticker.replace(sfx, "")
-    clean = ticker
+    # Les tickers non-US n'existent pas sous leur symbole Yahoo chez Finnhub, et
+    # retirer le suffixe renvoyait les métriques d'une AUTRE société US homonyme
+    # (MC.PA → MC = Moelis & Co, AI.PA → AI = C3.ai…) : la « validation croisée »
+    # comparait alors deux entreprises différentes et dégradait le score à tort.
+    # → pas de validation Finnhub pour ces titres (yfinance seul fait foi).
+    if any(ticker.endswith(sfx) for sfx in _NON_US_SUFFIXES):
+        return {}
     try:
-        url = f"https://finnhub.io/api/v1/stock/metric?symbol={clean}&metric=all&token={FINNHUB_KEY}"
-        r = requests.get(url, timeout=5)
+        r = requests.get(
+            "https://finnhub.io/api/v1/stock/metric",
+            params={"symbol": ticker, "metric": "all"},
+            headers={"X-Finnhub-Token": FINNHUB_KEY},
+            timeout=5,
+        )
         if r.status_code == 200:
             d = r.json().get("metric", {})
             return {
@@ -74,7 +85,9 @@ def finnhub_fundamentals(ticker):
         else:
             print(f"  ⚠️  Finnhub {ticker} — HTTP {r.status_code} ({'rate limit' if r.status_code==429 else 'token expiré?' if r.status_code==401 else 'erreur'})")
     except Exception as e:
-        print(f"  ⚠️  Finnhub {ticker} — exception : {e}")
+        # Ne jamais logger l'exception brute : les erreurs requests embarquent l'URL
+        # complète de la requête, et donc potentiellement des paramètres sensibles.
+        print(f"  ⚠️  Finnhub {ticker} — exception : {type(e).__name__}")
     return {}
 
 def valider_fondamentaux(yf_data, fh_data):
@@ -629,6 +642,14 @@ def score_ticker(ticker, vix=None):
         vol_recent = float(volume_2y.tail(20).mean())   # volume des 20 derniers jours
         vol_annual  = float(volume_2y.mean())            # moyenne sur 2 ans
 
+        # Garde NaN : le garde d'entrée n'exige que 50 barres alors que la MM200 en
+        # demande 200 — entre les deux, rolling() renvoie NaN, qui traverserait
+        # float()/round() sans lever et finirait sérialisé dans watchlist.json
+        # (token NaN → JSON.parse échoue côté site, incident classe 3.0.1).
+        if any(v != v for v in (prix, mm21, mm200, rsi, vol_recent, vol_annual)):
+            print(f"  ✗ {ticker}: historique insuffisant pour MM200/RSI ({len(close_2y)} barres) — écarté")
+            return None
+
         # ── Croisement MM21/MM200 (2 ans suffisent)
         cross_info = detect_cross(close_2y, volume_2y)
         cross_pts  = cross_score(cross_info, rsi)
@@ -667,6 +688,10 @@ def score_ticker(ticker, vix=None):
         # Si toujours NaN après fallbacks, force à 0 pour éviter propagation
         if regression_z is None or (isinstance(regression_z, float) and np.isnan(regression_z)):
             regression_z = 0.0
+        # reg_pente suit le même contrat : un NaN résiduel serait publié tel quel
+        # dans regression_pente_pct et invaliderait le JSON (cf. garde MM200).
+        if reg_pente is None or (isinstance(reg_pente, float) and np.isnan(reg_pente)):
+            reg_pente = 0.0
         reg_signal              = reg_signal_label(regression_z)
         reg_zone_saine          = -0.5 <= regression_z <= 1.5
 
@@ -686,7 +711,7 @@ def score_ticker(ticker, vix=None):
         # net_margin & fcf_margin = TTM (12 mois glissants).
         _mrq_ts = info.get("mostRecentQuarter")
         try:
-            mrq_iso = _dt.utcfromtimestamp(int(_mrq_ts)).strftime("%Y-%m-%d") if _mrq_ts else None
+            mrq_iso = _dt.fromtimestamp(int(_mrq_ts), tz=_tz.utc).strftime("%Y-%m-%d") if _mrq_ts else None
         except Exception:
             mrq_iso = None
 
@@ -911,11 +936,11 @@ def score_ticker(ticker, vix=None):
         score = max(0, min(100, score + death_pen + chase_pen + value_bonus))
         stars = 5 if score >= 90 else 4 if score >= 75 else 3 if score >= 60 else 2 if score >= 45 else 1
 
-        exchange = info.get("exchange", "")
+        exchange = info.get("exchange") or ""   # `or` : la clé peut exister avec None
         ex_up    = exchange.upper()
         MARKET_BADGE = {
-            # Zone euro + UE
-            "PAR":"EU","EPA":"EU","AMS":"EU","FRA":"EU","XETRA":"EU",
+            # Zone euro + UE ("GER" = code Yahoo effectif pour Xetra, cf. SAP.DE)
+            "PAR":"EU","EPA":"EU","AMS":"EU","FRA":"EU","XETRA":"EU","GER":"EU",
             "ETR":"EU","AEB":"EU","MIL":"EU","BIT":"EU","MCE":"EU",
             "BME":"EU","HEL":"EU","CPH":"EU","OMX":"EU","WSE":"EU",
             "VIE":"EU","ATH":"EU","LIS":"EU","OSL":"EU",
@@ -1025,7 +1050,7 @@ def score_ticker(ticker, vix=None):
         return {
             "ticker":        ticker,
             "name":          nom[:22],
-            "market":        info.get("exchange", "—")[:10],
+            "market":        (info.get("exchange") or "—")[:10],
             "sector":        sector_fr,
             "score":         score,
             "stars":         stars,
@@ -1126,7 +1151,12 @@ def load_previous(path="watchlist.json"):
     try:
         with open(path, encoding="utf-8") as f:
             return {s["ticker"]: s for s in json.load(f).get("stocks", [])}
-    except:
+    except FileNotFoundError:
+        return {}
+    except Exception as e:
+        # Fichier présent mais illisible (JSON tronqué…) : on repart d'un précédent
+        # vide MAIS on le dit — sinon le changelog fabrique 30 fausses « entrées ».
+        print(f"   ⚠️  watchlist précédente illisible ({type(e).__name__}) — changelog reparti de zéro")
         return {}
 
 # ── MAIN ─────────────────────────────────────────────────────────────────────
@@ -1144,7 +1174,7 @@ def main():
     vix_now = 18.0
     vix_source = "fallback_18"
     try:
-        vh = yf.Ticker("^VIX").history(period="5d")["Close"]
+        vh = yf.Ticker("^VIX").history(period="5d")["Close"].dropna()
         if not vh.empty:
             vix_now = round(float(vh.iloc[-1]), 2)
             vix_source = "live"
@@ -1241,8 +1271,14 @@ def main():
         "sector_distribution":     dict(sector_counts.most_common()),
     }
 
-    with open("watchlist.json", "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
+    # Écriture atomique + stricte (même contrat que save_json_atomic de
+    # portfolio_agent.py) : allow_nan=False fait échouer le run bruyamment plutôt
+    # que de publier un token NaN illisible par JSON.parse ; tmp + os.replace
+    # garantit qu'un crash mid-write ne laisse jamais un fichier tronqué.
+    tmp_path = "watchlist.json.tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2, allow_nan=False)
+    os.replace(tmp_path, "watchlist.json")
 
     # ── Archive snapshot point-in-time ──
     # Capture l'état des fondamentaux/analystes à la date du run (les données fonda
