@@ -1284,7 +1284,10 @@ def main():
     # Capture l'état des fondamentaux/analystes à la date du run (les données fonda
     # historiques point-in-time n'étant pas exposées par Yahoo).
     try:
-        import shutil, os
+        # PAS de `import os` local ici : il rendrait `os` local à TOUTE la fonction
+        # et casserait le os.replace() de l'écriture atomique plus haut
+        # (UnboundLocalError — incident du run 2026-07-20).
+        import shutil
         archive_dir = os.path.join("notes", "watchlist_archive")
         os.makedirs(archive_dir, exist_ok=True)
         archive_path = os.path.join(archive_dir, f"{d}.json")
