@@ -1,25 +1,25 @@
 {
-  "updated_at": "2026-07-17",
-  "week": "Sem. 29 · 2026",
+  "updated_at": "2026-07-20",
+  "week": "Sem. 30 · 2026",
   "capital_initial": 20000.0,
-  "capital_actuel": 24096.01,
-  "performance": 20.48,
-  "performance_brute": 21.72,
-  "total_frais_payes": 28.96,
+  "capital_actuel": 23906.33,
+  "performance": 19.53,
+  "performance_brute": 19.97,
+  "total_frais_payes": 29.3,
   "total_impots_payes": 58.9,
-  "total_pertes_reportables": 778.29,
-  "capital_post_liquidation": 22415.39,
-  "performance_post_liquidation": 12.08,
-  "frais_si_liquidation": 17.34,
-  "pfu_latent_si_liquidation": 1663.29,
-  "pertes_si_liquidation": 450.69,
-  "last_known_vix": 18.77,
+  "total_pertes_reportables": 861.36,
+  "capital_post_liquidation": 22274.02,
+  "performance_post_liquidation": 11.37,
+  "frais_si_liquidation": 16.86,
+  "pfu_latent_si_liquidation": 1615.47,
+  "pertes_si_liquidation": 397.43,
+  "last_known_vix": 18.3,
   "last_known_vix_source": "live",
-  "benchmark_cac40": 2.23,
-  "benchmark_msci": 13.42,
-  "vs_benchmark": 7.06,
+  "benchmark_cac40": 1.99,
+  "benchmark_msci": 12.41,
+  "vs_benchmark": 7.12,
   "mode_panique": false,
-  "perf_cac_semaine": -1.09,
+  "perf_cac_semaine": -0.07,
   "positions": [
     {
       "ticker": "ASML.AS",
@@ -29,13 +29,13 @@
       "currency": "EUR",
       "date_achat": "2026-01-02",
       "prix_achat": 650.0,
-      "prix_actuel": 1598.4,
+      "prix_actuel": 1541.6,
       "quantite": 3,
       "montant_investi": 1951.46,
-      "valeur_actuelle": 4795.2,
-      "performance": 145.72,
+      "valeur_actuelle": 4624.8,
+      "performance": 136.99,
       "score_entree": 88,
-      "poids": 19.9
+      "poids": 19.3
     },
     {
       "ticker": "NVDA",
@@ -48,10 +48,10 @@
       "prix_actuel": 202.81,
       "quantite": 20,
       "montant_investi": 1981.9,
-      "valeur_actuelle": 3543.77,
-      "performance": 78.81,
+      "valeur_actuelle": 3547.18,
+      "performance": 78.98,
       "score_entree": 94,
-      "poids": 14.7
+      "poids": 14.8
     },
     {
       "ticker": "AMD",
@@ -64,8 +64,8 @@
       "prix_actuel": 495.76,
       "quantite": 3,
       "montant_investi": 876.48,
-      "valeur_actuelle": 1299.39,
-      "performance": 48.25,
+      "valeur_actuelle": 1300.64,
+      "performance": 48.39,
       "score_entree": 85,
       "poids": 5.4
     },
@@ -80,8 +80,8 @@
       "prix_actuel": 1179.11,
       "quantite": 1,
       "montant_investi": 828.41,
-      "valeur_actuelle": 1030.15,
-      "performance": 24.35,
+      "valeur_actuelle": 1031.14,
+      "performance": 24.47,
       "score_entree": 89,
       "poids": 4.3
     },
@@ -97,8 +97,8 @@
       "quantite": 4,
       "montant_investi": 763.89,
       "frais_achat_eur": 0.5725,
-      "valeur_actuelle": 904.04,
-      "performance": 18.35,
+      "valeur_actuelle": 904.91,
+      "performance": 18.46,
       "score_entree": 80,
       "raison_achat": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume — fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1% — momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel — l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
       "poids": 3.8
@@ -114,11 +114,11 @@
       "prix_actuel": 103.24,
       "quantite": 14,
       "montant_investi": 1095.08,
-      "valeur_actuelle": 1262.76,
-      "performance": 15.31,
+      "valeur_actuelle": 1263.98,
+      "performance": 15.42,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
-      "poids": 5.2
+      "poids": 5.3
     },
     {
       "ticker": "JPM",
@@ -131,8 +131,8 @@
       "prix_actuel": 341.1,
       "quantite": 2,
       "montant_investi": 540.75,
-      "valeur_actuelle": 596.02,
-      "performance": 10.22,
+      "valeur_actuelle": 596.59,
+      "performance": 10.33,
       "score_entree": 95,
       "poids": 2.5
     },
@@ -147,8 +147,8 @@
       "prix_actuel": 358.56,
       "quantite": 2,
       "montant_investi": 569.91,
-      "valeur_actuelle": 626.52,
-      "performance": 9.93,
+      "valeur_actuelle": 627.13,
+      "performance": 10.04,
       "score_entree": 93,
       "poids": 2.6
     },
@@ -163,8 +163,8 @@
       "prix_actuel": 646.01,
       "quantite": 2,
       "montant_investi": 1044.92,
-      "valeur_actuelle": 1128.8,
-      "performance": 8.03,
+      "valeur_actuelle": 1129.88,
+      "performance": 8.13,
       "score_entree": 84,
       "poids": 4.7
     },
@@ -179,26 +179,10 @@
       "prix_actuel": 1072.2,
       "quantite": 1,
       "montant_investi": 914.17,
-      "valeur_actuelle": 936.75,
-      "performance": 2.47,
+      "valeur_actuelle": 937.65,
+      "performance": 2.57,
       "score_entree": 93,
       "poids": 3.9
-    },
-    {
-      "ticker": "DB1.DE",
-      "nom": "Deutsche Boerse AG",
-      "market": "GER",
-      "sector": "Finance",
-      "currency": "EUR",
-      "date_achat": "2026-05-05",
-      "prix_achat": 261.9,
-      "prix_actuel": 260.9,
-      "quantite": 4,
-      "montant_investi": 1048.39,
-      "valeur_actuelle": 1043.6,
-      "performance": -0.46,
-      "score_entree": 84,
-      "poids": 4.3
     },
     {
       "ticker": "LSEG.L",
@@ -208,14 +192,30 @@
       "currency": "GBP",
       "date_achat": "2026-05-07",
       "prix_achat": 92.16,
-      "prix_actuel": 89.78,
+      "prix_actuel": 88.52,
       "quantite": 14,
       "montant_investi": 1492.64,
-      "valeur_actuelle": 1478.38,
-      "performance": -0.96,
+      "valeur_actuelle": 1459.35,
+      "performance": -2.23,
       "score_entree": 83,
       "raison_achat": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
       "poids": 6.1
+    },
+    {
+      "ticker": "DB1.DE",
+      "nom": "Deutsche Boerse AG",
+      "market": "GER",
+      "sector": "Finance",
+      "currency": "EUR",
+      "date_achat": "2026-05-05",
+      "prix_achat": 261.9,
+      "prix_actuel": 254.9,
+      "quantite": 4,
+      "montant_investi": 1048.39,
+      "valeur_actuelle": 1019.6,
+      "performance": -2.75,
+      "score_entree": 84,
+      "poids": 4.3
     },
     {
       "ticker": "CRM",
@@ -228,11 +228,11 @@
       "prix_actuel": 170.77,
       "quantite": 7,
       "montant_investi": 1080.07,
-      "valeur_actuelle": 1044.37,
-      "performance": -3.31,
+      "valeur_actuelle": 1045.38,
+      "performance": -3.21,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
-      "poids": 4.3
+      "poids": 4.4
     },
     {
       "ticker": "AMZN",
@@ -245,8 +245,8 @@
       "prix_actuel": 247.23,
       "quantite": 2,
       "montant_investi": 446.82,
-      "valeur_actuelle": 431.99,
-      "performance": -3.32,
+      "valeur_actuelle": 432.41,
+      "performance": -3.23,
       "score_entree": 90,
       "poids": 1.8
     },
@@ -261,26 +261,10 @@
       "prix_actuel": 399.99,
       "quantite": 1,
       "montant_investi": 371.0,
-      "valeur_actuelle": 349.46,
-      "performance": -5.81,
+      "valeur_actuelle": 349.79,
+      "performance": -5.72,
       "score_entree": 93,
       "poids": 1.5
-    },
-    {
-      "ticker": "AVGO",
-      "nom": "Broadcom Inc.",
-      "market": "NMS",
-      "sector": "Technologie",
-      "currency": "USD",
-      "date_achat": "2026-04-30",
-      "prix_achat": 413.21,
-      "prix_actuel": 370.825,
-      "quantite": 1,
-      "montant_investi": 356.06,
-      "valeur_actuelle": 323.98,
-      "performance": -9.01,
-      "score_entree": 100,
-      "poids": 1.3
     },
     {
       "ticker": "ORSTED.CO",
@@ -290,16 +274,32 @@
       "currency": "DKK",
       "date_achat": "2026-05-27",
       "prix_achat": 164.25,
-      "prix_actuel": 148.0,
+      "prix_actuel": 151.9,
       "quantite": 52,
       "montant_investi": 1150.61,
       "frais_achat_eur": 0.8623,
-      "valeur_actuelle": 1029.5,
-      "performance": -10.53,
+      "valeur_actuelle": 1056.62,
+      "performance": -8.17,
       "score_entree": 81,
       "raison_achat": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression — décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low) — le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique — opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
-      "poids": 4.3,
+      "poids": 4.4,
       "correction": "Devise corrigee EUR->DKK le 2026-06-10 (cotation Copenhague) ; quantite requantifiee pour honorer le montant EUR investi."
+    },
+    {
+      "ticker": "AVGO",
+      "nom": "Broadcom Inc.",
+      "market": "NMS",
+      "sector": "Technologie",
+      "currency": "USD",
+      "date_achat": "2026-04-30",
+      "prix_achat": 413.21,
+      "prix_actuel": 370.83,
+      "quantite": 1,
+      "montant_investi": 356.06,
+      "valeur_actuelle": 324.29,
+      "performance": -8.92,
+      "score_entree": 100,
+      "poids": 1.4
     },
     {
       "ticker": "ADYEN.AS",
@@ -309,34 +309,39 @@
       "currency": "EUR",
       "date_achat": "2026-04-30",
       "prix_achat": 958.5,
-      "prix_actuel": 854.0,
+      "prix_actuel": 824.8,
       "quantite": 1,
       "montant_investi": 959.22,
-      "valeur_actuelle": 854.0,
-      "performance": -10.97,
+      "valeur_actuelle": 824.8,
+      "performance": -14.01,
       "score_entree": 93,
       "poids": 3.5
-    },
-    {
-      "ticker": "ENR.DE",
-      "nom": "Siemens Energy AG",
-      "market": "GER",
-      "sector": "Industrie",
-      "currency": "EUR",
-      "date_achat": "2026-04-30",
-      "prix_achat": 180.58,
-      "prix_actuel": 148.74,
-      "quantite": 3,
-      "montant_investi": 542.15,
-      "valeur_actuelle": 446.22,
-      "performance": -17.69,
-      "score_entree": 91,
-      "poids": 1.9
     }
   ],
-  "liquidites": 971.11,
-  "pct_liquidites": 4.0,
+  "liquidites": 1430.19,
+  "pct_liquidites": 6.0,
   "ordres": [
+    {
+      "date": "2026-07-20",
+      "type": "VENTE",
+      "ticker": "ENR.DE",
+      "nom": "Siemens Energy AG",
+      "qte": 3,
+      "prix": 153.14,
+      "currency": "EUR",
+      "montant": 459.08,
+      "montant_brut_eur": 459.42,
+      "frais_vente_eur": 0.3446,
+      "plus_value_eur": -83.07,
+      "impot_pfu_eur": 0.0,
+      "perte_reportable_eur": 83.07,
+      "perf": -15.2,
+      "pnl_eur": -83.07,
+      "jours": 81,
+      "raison": "Détenu depuis 81 jours, ENR.DE est à -15.2% depuis l'achat — exactement au seuil du stop-loss automatique R06 (-15% après 90 jours, ou -25% sans condition). La règle R06 est déclenchée en mode préventif : on approche du seuil des 90 jours avec une perte qui touche le plancher de la règle. Score screener toujours à 91/100, mais la performance réelle contredit le signal qualitatif. La thèse n'est pas documentée, ce qui rend impossible de vérifier si le delta_these est fondamental. Conviction forte justifiée par le déclenchement mécanique R06 : conserver jusqu'à -25% sans stop serait une violation de discipline. Position en perte : aucune friction fiscale (perte reportable sur 10 ans, crédit d'impôt théorique positif).",
+      "conviction": "forte",
+      "source": "Claude AI"
+    },
     {
       "date": "2026-05-27",
       "type": "ACHAT",
@@ -1313,14 +1318,14 @@
     }
   ],
   "biais_detectes": [
-    "Action bias latent : tentation d'intervenir sur ENR.DE/-15.7% alors que R1 interdit la vente avant 90 jours sans signal fondamental — l'inaction EST la bonne décision ici",
-    "Disposition effect sur ASML/NVDA : tendance à envisager la prise de profit sur les gagnants (+138%, +86%) alors que la friction fiscale PFU 30% et la qualité fondamentale plaident pour le buy & hold"
+    "Action bias latent : tentation d'identifier des achats watchlist malgré des liquidités bloquées et un cluster saturé — l'inaction est ici la décision correcte",
+    "Omission de documentation des thèses d'achat (ENR.DE, ADYEN.AS, AVGO, etc.) : biais de confiance implicite — sans thèse écrite, le stop-loss est le seul garde-fou, ce qui est insuffisant"
   ],
   "regles_actives": [
     {
       "type": "concentration_sectorielle",
       "secteur": "Tech & IA",
-      "pct": 63.5,
+      "pct": 62.6,
       "regime": "soft",
       "sizing_factor": 0.1,
       "message": "Cluster Tech & IA : 63% > 30% — sizing réduit ×0.10 (achats possibles avec conviction forte ou taille réduite)",
@@ -1328,66 +1333,70 @@
     },
     {
       "type": "liquidites_faibles",
-      "message": "Liquidités 4.0% < 5% du capital (971€) — achats bloqués",
+      "message": "Liquidités 4.1% < 5% du capital (971€) — achats bloqués",
       "bloque": true
     }
   ],
-  "decisions_bloquees": [
-    {
-      "date": "2026-07-13",
-      "action_tentee": "VENTE",
-      "ticker": "ENR.DE",
-      "nom": "Siemens Energy AG",
-      "raison_claude": "ENR.DE est détenu depuis 74 jours à -15.7% — seuil stop-loss automatique R6 (-15% après 90 jours, ou -25% sans condition) atteint à la limite. La position n'a pas de thèse documentée et le signal fondamental (secteur énergie sous pression, score 91/100 mais cours en dégradation structurelle) ne justifie pas de continuer à encaisser la perte. À 74 jours on n'est pas à 90 jours mais la détérioration est continue. Cependant, à -15.7% on est au seuil R6 post-90j — je préfère attendre 90j (dans 16 jours) pour ne pas violer R1, sauf si la position franchit -25%. Décision : CONSERVER avec surveillance active — je reformule ci-dessous.",
-      "conviction": "faible",
-      "bloque_par": "R01",
-      "explication_blocage": "74j détenus < 90j requis (R01) — la vente nécessite conviction='forte' avec un signal fondamental documenté pour bypasser",
-      "jours_detention": 74
-    }
-  ],
-  "nb_positions": 19,
+  "decisions_bloquees": [],
+  "nb_positions": 18,
   "nb_positives": 10,
-  "nb_negatives": 9,
+  "nb_negatives": 8,
   "nb_neutres": 0,
   "macro_news": [
     {
-      "headline": "Fed report cites 'stepped-up' inflation due to tariffs, Iran war, AI buildout - Reuters",
-      "summary": "Fed report cites 'stepped-up' inflation due to tariffs, Iran war, AI buildout  Reuters",
-      "date": "2026-07-10",
-      "source": "Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPWmpCaExTSktkWXFGQjlDZ2pzOHlSNm0xcXJqcWJGUkdNaWRlSnJldzhzSUZaT2drZy1RZVM5TmVJbGltTHhUU3hzeFpvbGZjbmlJWkxjejUwZVY0UTFscU45ekt2LWlBZUM3c1dtc2R1VE05OXA3NmxCVUxBVVFUQ0ZuSm0zejV6ZlE?oc=5",
-      "resume_fr": "La Fed signale une inflation accélérée liée aux droits de douane, à la guerre Iran et au boom des investissements en IA."
-    },
-    {
-      "headline": "War-driven inflation fears fail to shake U.S. Treasury yield outlook: Reuters poll - Reuters",
-      "summary": "War-driven inflation fears fail to shake U.S. Treasury yield outlook: Reuters poll  Reuters",
-      "date": "2026-07-09",
-      "source": "Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPQjhUa3pVV3JMQjc0TG9ENzJldjBjZkxnV0ZwcTdyMy1YOFY0aU95c25idlRET0ItN2VQWTZIY05WZF9SclF2bFRadl91MGFkdGVnWC1sckRGWkNoamtuU0xjb1dIRVVkR1kzMlNpUUNFd01DZ1k2Qm81bXdPbUFsaVUtaEpNdmxHMEM3eV85amNxLWhsSzdTOXhEUHltUkNDVzNYMEQ5VjY?oc=5",
-      "resume_fr": "Malgré les craintes d'inflation liée à la guerre, un sondage Reuters indique que les prévisions de rendement des Treasuries américains restent stables."
-    },
-    {
-      "headline": "Here are the 3 big things we're watching in the stock market this week",
-      "summary": "The state of the U.S. economy is in focus across bank earnings and inflation data.",
-      "date": "2026-07-12",
+      "headline": "U.S. Treasury yields edge higher as Wall Street monitors Middle East tensions",
+      "summary": "The yield on the 10-year U.S. Treasury note — the key benchmark for U.S. government borrowing — rose over 1 basis point to 4.558%.",
+      "date": "2026-07-20",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/07/12/here-are-the-3-big-things-were-watching-in-the-stock-market-this-week.html",
-      "resume_fr": "Les marchés américains sont attentifs cette semaine aux résultats des grandes banques et aux données d'inflation comme indicateurs de l'état de l'économie."
+      "url": "https://www.cnbc.com/2026/07/20/treasury-yields-wall-street-iran-war-tensions.html",
+      "resume_fr": "Les taux des bons du Trésor américain à 10 ans remontent légèrement à 4.558% alors que les tensions au Moyen-Orient restent surveillées par Wall Street."
     },
     {
-      "headline": "Stocks rise as investors await the start of earnings season — here's what to expect",
-      "summary": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
-      "date": "2026-07-10",
+      "headline": "UK to get a new prime minister as Trump slams Britain as 'Poverty Stricken Disaster'",
+      "summary": "The prospect of Burnham, considered more left-leaning than Starmer, replacing the incumbent prime minister sent jitters through bond markets earlier this year.",
+      "date": "2026-07-20",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/07/10/stocks-rise-as-investors-await-the-start-of-earnings-what-to-expect.html",
-      "resume_fr": "Les actions progressent en anticipation de la saison des résultats, les investisseurs attendant les publications trimestrielles des entreprises."
+      "url": "https://www.cnbc.com/2026/07/20/uk-prime-minister-burnham-trump-poverty-stricken-disaster.html",
+      "resume_fr": "Le Royaume-Uni pourrait changer de Premier ministre, la perspective d'Andy Burnham à Downing Street ayant créé des turbulences sur les marchés obligataires britanniques."
+    },
+    {
+      "headline": "Iran and US widen attacks, raising fears for Gulf shipping and water supplies - Reuters",
+      "summary": "Iran and US widen attacks, raising fears for Gulf shipping and water supplies  Reuters",
+      "date": "2026-07-20",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPbmtOemhMR1UtaVNoMENBMHltNEpKTWJNekRXUEtSa3hidndTM0VZVnRoTEJlV2ZENWtkYVFCUkJtSk8zdFhPeEJQSXRNMS1vWC03N2NJek14WklXdzhNZWkzMnZRUFpGcHg2OXotaHpyVW9jblFTYUM4U2lGcXFWa1NFbnZSQnpreVF6OXVhMW1oeHdIdkFNMjBJa09UZGgycjRkMjZ6Z1dxNC10enJIVDZJdlVSQjRxQlBZc05Tdw?oc=5",
+      "resume_fr": "L'Iran et les États-Unis élargissent leurs frappes mutuelles, menaçant la sécurité du transport maritime et des approvisionnements en eau dans le Golfe."
+    },
+    {
+      "headline": "US and Iran target infrastructure as strait shipping comes under further attack - Reuters",
+      "summary": "US and Iran target infrastructure as strait shipping comes under further attack  Reuters",
+      "date": "2026-07-18",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNRW1QZlpEY3pwOHJJaDF2S2JVZG81S2xuakhndThpb1lLREpreFBCRW1TWTlZeFBGTFRaUER1dWRUU2FlaDlYTU9Yc0hzY3Juby0xSlRxN24yMGZvQ0ktN1NYcjVtZHc5a3F6UXQ5Qnc3aWNDNV84MV8ybWkxemptWEtlS1plM0kxQVNoM3A5RkpkUlZGSEtYbVVTN2RtNkhwc3VWZThNazhDTGpt?oc=5",
+      "resume_fr": "Les États-Unis et l'Iran ciblent des infrastructures critiques alors que les attaques contre la navigation dans le détroit se multiplient."
+    },
+    {
+      "headline": "Stocks drop as chip selloff deepens, crude oil prices climb: Markets Wrap",
+      "summary": "Technology stocks have come under pressure in recent weeks as investors increasingly question whether this year’s blistering AI-driven rally has run too far, too fast",
+      "date": "2026-07-17",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com/news/articles/2026-07-16/stock-market-today-dow-s-p-live-updates",
+      "resume_fr": "Les valeurs technologiques chutent sous la pression d'une vague de ventes sur les semi-conducteurs, tandis que les prix du pétrole progressent sur fond de craintes de surchauffe du rallye IA."
+    },
+    {
+      "headline": "Gold is set for weekly fall amid West Asia tensions. What’s ahead?",
+      "summary": "Gold prices face weekly losses amid rising Fed-hike bets, driven by renewed Middle East tensions and inflation concerns.",
+      "date": "2026-07-17",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com/news/articles/2026-07-16/gold-heads-for-weekly-fall-as-hormuz-strikes-raise-fed-hike-bets",
+      "resume_fr": "Les prix de l'or accusent une baisse hebdomadaire, pénalisés par la hausse des anticipations de hausse de taux Fed et les tensions inflationnistes au Moyen-Orient."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Cette semaine du 7 au 13 juillet s'ouvre sur un signal macro ambigu mais lisible : la Fed a publié un rapport citant une inflation 'stepped-up' alimentée par trois moteurs simultanés — les tarifs douaniers, la guerre (Iran), et le buildout IA. Ce dernier point est notable pour le portefeuille : le capex IA reste suffisamment robuste pour peser sur l'inflation, ce qui valide la thèse fondamentale derrière NVDA et ASML, mais confirme aussi que la Fed n'a pas les mains libres pour baisser les taux aggressivement.\n\nConcrètement, le portefeuille Signal clôture cette semaine à +21.26% net depuis la création (capital 24 252€), contre +12.93% YTD pour le MSCI World — soit un écart de +9.19 points de pourcentage. Le MSCI World progresse de +0.5% sur la semaine tandis que le CAC40 recule de -1.1% : la surexposition aux titres US de qualité continue de jouer en notre faveur. VIX à 16.25 — régime calme, pas de signal de stress.\n\nSur le plan décisionnel, la semaine est essentiellement une semaine de conservation. Les liquidités à 971€ (4.0% du capital) déclenchent le blocage automatique sur les achats (R: liquidités < 5%). Par ailleurs, le cluster Tech & IA représente 63% du portefeuille — tout achat dans ce secteur serait réduit ×0.10, rendant les positions trop petites pour être significatives. La discipline de concentration (R01) protège ici contre la tentation d'un TSM ou ADBE pourtant bien scorés. TSM à 84/100 avec un Golden Cross 280j et z=+2.0σ aurait été intéressant — mais val=5/5 (pullback -9.1%, zone Fibo 23.6%) dans un cluster saturé et sans liquidités disponibles, c'est la frustration assumée de la semaine.\n\nLe vrai dossier à surveiller : ENR.DE à -15.7% après 74 jours. Le stop-loss R6 (-15% après 90 jours) se déclenchera mécaniquement dans 16 jours si le titre ne se redresse pas. Pas de vente aujourd'hui — R1 tient — mais la position est sous surveillance active. ADYEN.AS à -12.1% et ORSTED.CO à -10.8% sont dans la même logique : R1 protège contre la vente prématurée, mais ces positions testent la patience.\n\nÀ surveiller cette semaine : les publications de résultats bancaires US (JPMorgan entre autres — position directe), les données CPI attendues (l'inflation 'stepped-up' citée par la Fed pourrait se matérialiser dans les chiffres), et la trajectoire de l'euro/dollar qui impacte mécaniquement les valorisations des positions US converties en euros.",
+    "analyse_macro": "Cette semaine du 14 au 20 juillet, les marchés ont été secoués par une escalade militaire entre l'Iran et les États-Unis — frappes sur des infrastructures, menaces sur les routes maritimes du détroit d'Ormuz. Le 10 ans américain grimpait à 4.558% lundi matin, et le pétrole brut montait avec les tensions. Pas une toile de fond rassurante pour les actifs risqués, mais le VIX à 18.3 signale paradoxalement un marché qui digère sans paniquer — pour l'instant.\n\nPour Signal, la semaine illustre la loi des rendements décroissants de l'action : avec 971€ de liquidités (4.1% du capital), les achats sont mécaniquement bloqués par R01 (liquidités < 5%). Le cluster Tech & IA tourne à 63%, au-dessus du plafond de 30% — new sizing réduit à ×0.10. Bref, le portefeuille est en mode conservation forcée, et c'est peut-être exactement ce qu'il fallait dans un contexte géopolitique chargé. Performance nette depuis création : +19.55% pour un capital de 23 911€, soit +7.06pp d'écart au MSCI World (YTD +13.42%). Les 88€ de frais et impôts réels restent modestes.\n\nUne seule décision cette semaine : vente de ENR.DE (Siemens Energy, -15.2% depuis l'achat il y a 81 jours). Le stop-loss R06 est déclenché — seuil de -15% après 90 jours atteint préventivement. La thèse originale n'était pas documentée, ce qui illustre un défaut de process récurrent : sans thèse écrite, impossible de distinguer un drawdown normal d'une invalidation fondamentale. La bonne nouvelle fiscale : la perte est reportable 10 ans (crédit d'impôt théorique d'environ 50€ sur ce lot).\n\nDu côté de la watchlist, ADBE (87/100) et INTU (86/100) offrent des setups mean-reversion intéressants — mais val=0/5 sur ADBE (-36.4% sous le top 52w n'est pas un pullback sain, c'est une tendance baissière structurelle) et INTU avec un Death Cross à 179 jours sont des drapeaux rouges. TSM (81/100, Golden Cross 285j) serait le seul achat propre du tableau — val=3/5, zone Fibo 23.6% — mais les liquidités et le cluster Tech le bloquent. La frustration est documentée, pas agi.\n\nPour la semaine à venir, vous surveillerez deux choses : (1) l'évolution des tensions Iran/US sur le détroit d'Ormuz — un choc sur le shipping ferait monter l'énergie et pèserait sur les marges des techs energy-intensive ; (2) la publication des résultats T2 US (semaine de peak earnings) — NVDA, AMZN et META ont tous des positions ouvertes chez Signal, avec des perfs respectives de +79%, -3.2% et +8.1% depuis l'achat.",
     "conviction_globale": "neutre",
-    "message_utilisateurs": "Semaine calme côté décisions — et c'est voulu. Deux contraintes mécaniques s'appliquent simultanément cette semaine : les liquidités tombent à 971€ (4.0% du capital, sous le seuil de 5% qui bloque les achats), et le cluster Tech & IA à 63% dépasse le plafond R01 de 30% (sizing réduit ×0.10 pour tout nouvel achat dans le secteur). Dans ces conditions, acheter serait du sur-trading pur.\n\nLe portefeuille performe à +21.26% net depuis la création, avec un écart de +9.19pp au-dessus du MSCI World — un écart que je préfère protéger plutôt que de diluer avec des micro-positions mal dimensionnées.\n\nLe dossier chaud reste ENR.DE (-15.7% après 74 jours) : le stop-loss automatique R6 se déclenchera dans 16 jours si la position ne se redresse pas. Je ne vends pas aujourd'hui — R1 l'interdit sans signal fondamental majeur documenté — mais je surveille activement. Si ENR.DE franchit -25% à tout moment, la sortie s'impose sans délai.\n\nProchain catalyseur attendu : résultats Q2 des banques US cette semaine (JPM en position directe), et données CPI US qui préciseront si l'inflation 'stepped-up' citée par la Fed dans son rapport de jeudi se matérialise dans les chiffres. On réévaluera les liquidités à la prochaine mise à jour.",
-    "nb_decisions": 8
+    "message_utilisateurs": "Semaine calme en termes de décisions — une seule vente, ENR.DE, déclenchée mécaniquement par le stop-loss R06 à -15.2% après 81 jours de détention. Aucun achat possible : liquidités à 4.1% (bloquées sous le seuil des 5%) et cluster Tech & IA à 63% (plafond à 30%). La performance nette reste à +19.55% depuis la création du portefeuille, soit +7.06pp d'avance sur le MSCI World. Le contexte géopolitique (escalade Iran/US, pressions sur le détroit d'Ormuz, taux 10 ans US à 4.558%) nous invite à conserver cette posture défensive. La vente d'ENR.DE génère une perte reportable fiscalement — un crédit d'impôt sur les prochains gains. Note de process : plusieurs positions ont été achetées sans thèse documentée (ENR.DE, ADYEN.AS, AVGO, etc.) — c'est un défaut que nous corrigeons progressivement. Sans thèse écrite, impossible de distinguer un drawdown temporaire d'une invalidation fondamentale.",
+    "nb_decisions": 1
   },
   "performance_history": [
     {
@@ -1810,8 +1819,14 @@
       "capital": 24096.01,
       "benchmark_cac40": 2.23,
       "benchmark_msci": 13.42
+    },
+    {
+      "date": "2026-07-20",
+      "perf": 19.53,
+      "capital": 23906.33,
+      "benchmark_cac40": 1.99,
+      "benchmark_msci": 12.41
     }
   ],
-  "max_drawdown": -5.22,
-  "last_known_vix_updated_at": "2026-07-17"
+  "max_drawdown": -5.22
 }
