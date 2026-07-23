@@ -1112,6 +1112,23 @@
 
     <div class="portfo-block" style="margin-bottom:12px">
       <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--green)"></div>
+        <div class="portfo-htitle">Les gestes de gestion (depuis juillet 2026)</div>
+      </div>
+      <div class="portfo-body">
+        Longtemps, l'IA n'a connu que deux gestes : ouvrir une ligne, la fermer entièrement. Depuis la version 3.2, elle dispose de la palette complète d'un gérant — chaque geste sous ses propres garde-fous :
+        <ul style="margin-top:0.6rem">
+          <li><strong>Ouvrir</strong> — acheter un titre de la watchlist (et uniquement de la watchlist : un ticker inventé par l'IA est mécaniquement rejeté). Taille selon la conviction (3 à 7 % du capital), dans la limite du cash disponible.</li>
+          <li><strong>Renforcer</strong> — racheter du même titre : prix de revient moyen pondéré, et le compteur des 90 jours ne repart pas de zéro. Plafond strict : la ligne ne peut jamais dépasser 20 % du capital, même à conviction forte. Doctrine : renforcer uniquement sur des <em>éléments nouveaux</em> (résultats publiés, thèse confirmée par des faits) — jamais « moyenner à la baisse » une position en perte sans catalyseur, le biais d'engagement classique.</li>
+          <li><strong>Alléger</strong> — vendre seulement une fraction d'une position (par exemple 50 %). Le PFU de 30 % ne s'applique qu'à la plus-value de la fraction vendue ; le prix de revient, la date et la thèse d'origine sont conservés sur le reste. Si le reliquat vaudrait moins de 100 €, la vente devient totale (anti-poussière). Usage typique : dégonfler une position qui approche des 20 % après un fort rally, sans sortir de la thèse.</li>
+          <li><strong>Rotation</strong> — vendre une position jugée moins attractive pour financer une meilleure opportunité quand le cash manque. Le moteur exécute toutes les ventes avant les achats du même run, et la règle des 5 % de liquidités est réévaluée après chaque vente. Maximum une rotation par run, comparaison sortant/entrant obligatoire dans la justification, et l'avantage attendu doit couvrir la friction (frais aller-retour + PFU sur la plus-value vendue).</li>
+          <li><strong>Fermer</strong> — vente totale, soumise à la règle des 90 jours et documentée avec la thèse d'origine.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
         <div class="portfo-accent" style="background:var(--orange)"></div>
         <div class="portfo-htitle">Le journal des ordres</div>
       </div>
@@ -1132,7 +1149,8 @@
         <ul style="margin-top:0.6rem">
           <li><strong>Guard weekend</strong> — aucun ordre ACHAT/VENTE n'est appliqué le samedi ou le dimanche. Physiquement aucun broker ne peut exécuter un ordre hors heures de marché, donc Signal reporte mécaniquement toute décision au prochain jour ouvré. Y compris les stop-loss : un crash vendredi soir ne déclenche pas de vente automatique le samedi.</li>
           <li><strong>Concentration sectorielle graduée</strong> — la règle de concentration sectorielle (détaillée plus bas, §5). Le sizing est réduit automatiquement quand un cluster sectoriel dépasse 30 %, blocage strict à 65 %.</li>
-          <li><strong>Liquidités minimales</strong> — sous 5 % de cash, tout achat est bloqué pour préserver une marge de manœuvre face aux imprévus.</li>
+          <li><strong>Liquidités minimales</strong> — sous 5 % de cash, tout achat est bloqué pour préserver une marge de manœuvre face aux imprévus. Le seuil est réévalué en cours de run : une vente qui reconstitue le cash débloque les achats suivants (c'est ce qui rend les rotations possibles), et symétriquement des achats successifs peuvent redéclencher le blocage.</li>
+          <li><strong>Intégrité des ordres</strong> — un ticker hors watchlist est rejeté (anti-hallucination), un achat ne peut jamais dépasser le cash disponible, et un prix de vente incohérent avec le dernier cours connu (×3 ou ÷3 — typiquement une erreur de devise ou un split non ajusté) bloque la vente plutôt que de créditer un gain fantôme.</li>
         </ul>
         <strong>decisions_bloquees</strong> : quand l'IA propose une décision que ces garde-fous rejettent, elle est enregistrée publiquement (avec sa raison originale et le motif du blocage) dans la section "Transparence du modèle" sur la page portefeuille. C'est ce qui évite la dissonance "l'IA dit qu'elle a acheté X" alors que le journal ne montre aucun ordre — toutes les décisions rejetées sont visibles.
         <br><br>
