@@ -775,6 +775,33 @@
 
     <!-- Learnings principaux toujours visibles (v1.7+) -->
 
+    <!-- v3.1.0 — Audit complet (sécurité + gardes d'exécution + scores EU) + rotations + incident import os -->
+    <div class="learning-item">
+      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-body">
+        <div class="learning-header">
+          <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
+          <span class="learning-version">v3.1.0</span>
+          <span class="learning-date">20 juillet 2026</span>
+        </div>
+        <div class="learning-title">Audit complet : scores européens faussés, règles non appliquées en code, faille XSS — puis incident dès le premier run corrigé</div>
+        <div class="learning-prob">Un audit complet du 18/07 (code, CI, frontend, données) a révélé quatre familles de défauts :
+          (1) La validation croisée Finnhub retirait naïvement les suffixes européens : <code>MC.PA</code> (LVMH) devenait <code>MC</code> — Moelis &amp; Co, une banque US sans rapport. Le screener comparait deux entreprises différentes, concluait à des données discordantes et <strong>pénalisait à tort les valeurs européennes jusqu'à −30% de score</strong>, chaque semaine.
+          (2) Plusieurs règles n'existaient que dans le <em>prompt</em> de l'IA, jamais en code : un ticker halluciné hors watchlist s'achetait sans contrôle, et un achat pouvait rendre les <strong>liquidités négatives</strong> (le sizing forçait l'achat d'au moins 1 titre même trop cher).
+          (3) Le mode panique (Règle 03) se désarmait précisément en cas de panne de Yahoo — le benchmark retombait à 0, donc « pas de krach détecté » — et le seuil « −5% sur la semaine » était mesuré sur 4 séances au lieu de 5.
+          (4) Les textes générés par l'IA et les titres de presse Finnhub étaient affichés sans aucun filtrage HTML : un titre de presse piégé pouvait injecter du code exécutable chez tous les visiteurs (XSS stockée).
+          Et le 20/07, <strong>le premier run du code corrigé a lui-même échoué</strong> : un vieil <code>import os</code> local rendait la nouvelle écriture atomique inopérante (<code>UnboundLocalError</code>).
+        </div>
+        <div class="learning-fix">
+          (1) Validation Finnhub réservée aux tickers US — plus aucune comparaison inter-entreprises ; les scores européens de la semaine 30 sont les premiers recalibrés.<br>
+          (2) Les règles sont désormais du <em>code</em>, pas des consignes : achat hors watchlist rejeté, coût total plafonné aux liquidités, prix de vente aberrant (×3/÷3) refusé, base fiscale reconstituée si absente. En bonus : l'agent sait opérer des <strong>rotations</strong> (vendre une position faible pour financer une meilleure opportunité — ventes exécutées avant les achats, règle des 5% de liquidités réévaluée en cours de run, max 1 rotation/run, friction frais+PFU à couvrir).<br>
+          (3) Mode panique <em>sticky</em> : sans donnée fraîche, l'état précédent est conservé — une panne de données ne désarme plus le disjoncteur. Fenêtre corrigée à 5 vraies séances.<br>
+          (4) Triple barrière anti-XSS : nettoyage des textes externes à la source, filtrage de la sortie IA en code (seul <code>&lt;b&gt;</code> autorisé), échappement systématique à l'affichage.<br>
+          Incident du 20/07 : corrigé en 1 ligne dans l'heure — et c'est le nouveau design <em>fail-loud</em> qui l'a rendu visible : job CI rouge + alerte immédiate, site intact (l'ancienne version aurait publié ou masqué l'échec). Le run relancé a publié la semaine 30 normalement.
+        </div>
+      </div>
+    </div>
+
     <!-- v3.0.1 — Incident NaN (site figé 8 jours) + correction du ledger des pertes -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>
