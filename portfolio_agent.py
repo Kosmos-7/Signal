@@ -990,6 +990,9 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 10. **Friction fiscale (PFU 30%)** : Signal est sur compte-titres ordinaire français. Chaque VENTE en plus-value paye 30% de PFU sur le gain. Conséquence : une vente "neutre" pour réinvestir ailleurs PERD 30% du gain réalisé. Avant de proposer une vente sur position en gain, vérifie que l'alternative a un avantage attendu net suffisant pour couvrir cette friction (règle empirique : ne pas vendre un +20% pour acheter un titre dont l'edge espéré est < 10%). Les positions en perte ne sont PAS pénalisées fiscalement et la perte devient même un crédit d'impôt utilisable 10 ans. Les plus-values LATENTES (positions non vendues) ne sont JAMAIS imposées — le buy & hold long terme est structurellement avantagé.
 11. **VIX = indicateur contextuel non scoré** : le VIX est désormais affiché dans la section CONTEXTE DE MARCHÉ comme indicateur d'ambiance macro, MAIS il n'influence plus mécaniquement le scoring du screener (choix de neutralité — on n'applique aucune mécanique de régime de marché au scoring). Tu es libre de t'en servir comme contexte qualitatif dans `analyse_macro` ("VIX à 22 cette semaine, vigilance modérée — j'ai privilégié les positions qualité"), mais ne traite pas le VIX comme une règle d'enforcement. Les scores du screener sont ce qu'ils sont, indépendamment du VIX.
 12. **Rotation autorisée quand le cash manque** : si une opportunité watchlist te semble NETTEMENT supérieure à une position détenue et que les liquidités ne permettent pas de l'acheter, tu peux proposer une rotation — une VENTE + un ACHAT dans le même run. Le moteur exécute toutes les ventes AVANT les achats : le produit de la vente (net de frais et de PFU) finance l'achat, et la règle des liquidités (5%) est réévaluée après la vente. Conditions STRICTES : (a) la position vendue respecte la Règle 01 — 90 jours de détention, ou signal fondamental documenté avec conviction forte ; (b) dans les DEUX champs `raison`, nomme explicitement la rotation et compare la position sortante au titre entrant (scores screener, thèse, potentiel) : "Rotation : je vends X (score 62, thèse affaiblie car …) pour financer Y (score 88, …)" ; (c) applique la Règle 10 — l'avantage attendu du titre entrant doit dépasser la friction totale (frais aller-retour + 30% de PFU sur la plus-value de la vente) ; (d) maximum UNE rotation par run — c'est un arbitrage d'exception, pas un outil de churn : dans le doute, conserver. Précision : cette limite ne concerne QUE les rotations (vente destinée à financer un achat). Les ventes motivées par leur propre thèse — thèse d'achat invalidée, stop-loss, dégradation fondamentale — ne sont pas des rotations et ne sont pas limitées en nombre : elles restent régies par les Règles 01, 06 et 10. Tu peux donc, dans un même run, vendre une position sur thèse cassée ET opérer une rotation.
+13. **Réallocation (renforcement / allègement)** : tu peux ajuster la TAILLE d'une ligne existante, pas seulement ouvrir/fermer.
+   - RENFORCER : une décision ACHAT sur un titre déjà détenu renforce la ligne — prix de revient moyen pondéré, la date de détention d'origine est conservée (le compteur des 90 jours ne repart pas). Plafond mécanique : la ligne ne peut jamais dépasser 20% du capital (Règle 02, appliquée en code). Renforce UNIQUEMENT sur des éléments NOUVEAUX (résultats publiés, thèse confirmée par des faits, décote accrue avec fonda intacts) — jamais pour « moyenner à la baisse » une position en perte sans catalyseur documenté (biais d'engagement classique).
+   - ALLÉGER : une décision VENTE avec le champ optionnel `"allegement_pct"` (nombre entre 1 et 99) ne vend que ce pourcentage de la position, arrondi au titre entier. Le PFU ne s'applique qu'à la plus-value de la fraction vendue ; le PRU et la date d'origine de la ligne sont conservés. Si le reliquat vaudrait moins de 100€, la vente devient totale (anti-poussière). Un allègement reste une VENTE : Règle 01 (90j / conviction forte) et friction fiscale (Règle 10) s'appliquent pleinement. Usage typique : dégonfler une position qui approche les 20% après un fort rally, sans sortir de la thèse.
 
 ## DATE & MOMENT DU RUN
 - Run actuel       : {contexte.get('jour_semaine','?')} {today} {contexte.get('heure_utc','?')} UTC ({contexte.get('semaine','?')})
@@ -1078,7 +1081,8 @@ Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, selon ce format 
       "nom": "Nom de l'action",
       "raison": "Explication détaillée en 2-3 phrases",
       "conviction": "forte" | "modérée" | "faible",
-      "score_watchlist": 0
+      "score_watchlist": 0,
+      "allegement_pct": 50
     }}
   ],
   "analyse_macro": "TEXTE NEWSLETTER (200-350 mots, 4-6 paragraphes courts SÉPARÉS PAR UN DOUBLE SAUT DE LIGNE `\\n\\n` — c'est NON-NÉGOCIABLE, sinon le rendu HTML produit un mur de texte illisible). Chaque paragraphe = 2 à 4 phrases, une idée par paragraphe. C'est CE QUE LE LECTEUR LIT chaque semaine sur le site. Adresse-toi DIRECTEMENT à lui ('vous', pas 'on' ni 'l'investisseur'). Ton : analyste rigoureux mais avec un brin d'humour décalé pour contraster avec les chiffres sérieux — pense à un Howard Marks qui aurait lu Charlie Munger ET aurait un sens de la formule. Tu peux te permettre une métaphore, une vanne fine sur les marchés, un clin d'œil. Pas de sarcasme méchant, pas de blagues lourdes. Reste pro mais vivant. STRUCTURE en paragraphes distincts (chacun séparé par `\\n\\n`) : §1 accroche sur l'événement de la semaine (cite EXPLICITEMENT le contenu des news macro reçues plus haut — pas juste le titre, le chiffre : si CPI à 2.4%, dis 2.4%, pas 'inflation reste centrale') ; §2 ce que ça veut dire concrètement pour le portefeuille + chiffres clés (perf {perf:+.2f}%, écart au benchmark {vs:+.2f}pp recopiés depuis ÉTAT ACTUEL) ; §3 éléments méthodologiques qui ont guidé tes décisions (R7, val_pts, signal_dynamics_warning si pertinent — sinon zappe) ; §4 biais ou learning de la semaine (s'il y en a un saillant, sinon zappe) ; §5 mot pour la semaine à venir (ce que vous surveillerez). NE PAS commencer par 'Sur la semaine écoulée du X au Y' (trop bureaucratique — préfère une accroche éditoriale qui glisse la date naturellement) mais l'ancrage temporel reste obligatoire dans les 2 premières phrases. Évite les formulations creuses ('le marché reste un paramètre central', 'l'attention est portée à...') — sois précis et concret. RAPPEL CRITIQUE : DOUBLE SAUT DE LIGNE `\\n\\n` entre chaque paragraphe, sinon le site rend un bloc compact.",
@@ -1089,6 +1093,8 @@ Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, selon ce format 
 }}
 
 Pour `news_resumes_fr` : un résumé français concis (1 phrase, 15-25 mots max, factuel, neutre) pour CHAQUE news listée plus haut, dans l'ordre des indices [0], [1], etc. Le nombre exact de résumés DOIT correspondre au nombre de news fournies (variable selon le run — typiquement 4 à 6, mais peut être 0). Si une news est trop technique ou marginale, garde-la mais résume sa pertinence pour les marchés. Si aucune news n'a été fournie, retourne un tableau vide [].
+
+`allegement_pct` est OPTIONNEL et ne concerne que les VENTES partielles (Règle 13) : omets-le pour une vente totale ou un achat. Un ACHAT sur un titre déjà détenu est automatiquement traité comme un renforcement.
 
 N'inclus que les décisions actionnables (achats et ventes). Les positions conservées sans changement n'ont pas besoin d'apparaître, sauf si tu veux commenter spécifiquement leur situation.
 """
@@ -1264,12 +1270,39 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
 
             currency   = pos.get("currency") or detect_currency(ticker, pos.get("market", ""))
             perf       = round((prix_vente - pos["prix_achat"]) / pos["prix_achat"] * 100, 2)
-            brut_vente_eur    = to_eur(prix_vente * pos["quantite"], currency, eur_usd, eur_gbp)
-            # Base fiscale (achat + frais d'achat). Fallback position legacy sans le
-            # champ : reconstitution depuis prix_achat×quantité — l'ancien défaut de 0
-            # taxait 100% du produit de vente comme plus-value.
-            montant_achat_eur = pos.get("montant_investi") or to_eur(
-                pos["prix_achat"] * pos["quantite"], currency, eur_usd, eur_gbp)
+
+            # ── Allègement partiel (réallocation) : champ optionnel allegement_pct ──
+            # 1-99 = vendre ce pourcentage de la position (arrondi au titre entier).
+            # Absent/invalide/100 = vente totale (comportement historique inchangé).
+            qte_totale = pos["quantite"]
+            try:
+                allegement_pct = float(dec.get("allegement_pct")) if dec.get("allegement_pct") is not None else None
+            except (TypeError, ValueError):
+                allegement_pct = None
+            qte_vendue = qte_totale
+            allegement = False
+            if allegement_pct is not None and 0 < allegement_pct < 100:
+                qte_vendue = max(1, int(round(qte_totale * allegement_pct / 100)))
+                reliquat = qte_totale - qte_vendue
+                valeur_reliquat_eur = to_eur(prix_vente * reliquat, currency, eur_usd, eur_gbp)
+                if reliquat < 1 or valeur_reliquat_eur < 100:
+                    # Anti-poussière : plutôt que laisser une ligne résiduelle insignifiante
+                    # (frais fixes proportionnellement lourds, bruit dans le dashboard),
+                    # l'allègement devient une vente totale — journalisé dans l'ordre.
+                    print(f"  ℹ️  Allègement {ticker} {allegement_pct:.0f}% → reliquat {valeur_reliquat_eur:.0f}€ < 100€ : vente totale")
+                    qte_vendue = qte_totale
+                else:
+                    allegement = True
+
+            fraction          = qte_vendue / qte_totale
+            brut_vente_eur    = to_eur(prix_vente * qte_vendue, currency, eur_usd, eur_gbp)
+            # Base fiscale (achat + frais d'achat), PRORATISÉE à la fraction vendue :
+            # le PFU ne porte que sur la plus-value de la tranche cédée. Fallback
+            # position legacy sans le champ : reconstitution depuis prix_achat×quantité
+            # — l'ancien défaut de 0 taxait 100% du produit de vente comme plus-value.
+            base_totale       = pos.get("montant_investi") or to_eur(
+                pos["prix_achat"] * qte_totale, currency, eur_usd, eur_gbp)
+            montant_achat_eur = round(base_totale * fraction, 2)
 
             # Application frais vente + PFU sur la plus-value en EUR
             r = config.apply_sell_cost_and_tax(brut_vente_eur, montant_achat_eur)
@@ -1280,14 +1313,22 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
             perte_reportable   = r["perte_reportable_eur"]
 
             liquidites = round(liquidites + cash_recupere, 2)
-            positions  = [p for p in positions if p["ticker"] != ticker]
+            if allegement:
+                # La ligne survit, réduite : quantité et base fiscale résiduelles.
+                # date_achat, PRU (prix_achat) et thèse d'origine sont conservés.
+                pos["quantite"]        = qte_totale - qte_vendue
+                pos["montant_investi"] = round(base_totale - montant_achat_eur, 2)
+                pos["prix_actuel"]     = prix_vente
+                pos["valeur_actuelle"] = to_eur(prix_vente * pos["quantite"], currency, eur_usd, eur_gbp)
+            else:
+                positions  = [p for p in positions if p["ticker"] != ticker]
 
             ordre = {
                 "date":              today,
                 "type":              "VENTE",
                 "ticker":            ticker,
                 "nom":                nom,
-                "qte":                pos["quantite"],
+                "qte":                qte_vendue,
                 "prix":               prix_vente,
                 "currency":           currency,
                 "montant":            cash_recupere,       # cash effectivement reçu (compatibilité dashboard)
@@ -1303,10 +1344,15 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 "conviction":         dec.get("conviction", "modérée"),
                 "source":             "Claude AI",
             }
+            if allegement:
+                ordre["allegement"]     = True
+                ordre["allegement_pct"] = round(fraction * 100, 1)
+                ordre["qte_restante"]   = pos["quantite"]
             nouveaux_ordres.append(ordre)
             sym = "€" if currency == "EUR" else "$" if currency == "USD" else "£"
             tax_str = f", PFU {impot_pfu_eur:.0f}€" if impot_pfu_eur > 0 else ""
-            print(f"  🔴 VENTE {ticker} — {pos['quantite']} titres à {prix_vente}{sym} = {brut_vente_eur:.0f}€ brut, plus-value {plus_value_eur:+.0f}€{tax_str}, cash récupéré {cash_recupere:.0f}€")
+            alleg_str = f" (allègement {fraction*100:.0f}%, reste {pos['quantite']} titres)" if allegement else ""
+            print(f"  🔴 VENTE {ticker} — {qte_vendue} titres à {prix_vente}{sym} = {brut_vente_eur:.0f}€ brut, plus-value {plus_value_eur:+.0f}€{tax_str}, cash récupéré {cash_recupere:.0f}€{alleg_str}")
 
         # ── ACHAT
         elif action == "ACHAT":
@@ -1332,15 +1378,21 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 })
                 continue
 
-            # Déjà en portefeuille ?
-            if any(p["ticker"] == ticker for p in positions):
-                print(f"  ⚠️  ACHAT {ticker} — déjà en portefeuille, ignoré")
-                decisions_bloquees.append({
-                    "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
-                    "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
-                    "bloque_par": "deja_en_portefeuille", "explication_blocage": f"{ticker} déjà détenu — Claude a proposé un achat sur une position existante (renforcement ?)",
-                })
-                continue
+            # Déjà en portefeuille ? → RENFORCEMENT (réallocation), plafonné par R2.
+            # Historiquement bloqué (deja_en_portefeuille) alors que la règle R2 et le
+            # plafond de positions étaient écrits comme si le renforcement existait.
+            pos_existante = next((p for p in positions if p["ticker"] == ticker), None)
+            if pos_existante is not None:
+                poids_actuel = (pos_existante.get("valeur_actuelle", 0) / capital * 100) if capital > 0 else 0
+                headroom_r2  = capital * POIDS_MAX - pos_existante.get("valeur_actuelle", 0)
+                if poids_actuel >= POIDS_MAX * 100 or headroom_r2 < 50:
+                    print(f"  🚫 RENFORCEMENT {ticker} bloqué — position à {poids_actuel:.1f}% du capital (R2 : max {POIDS_MAX*100:.0f}%)")
+                    decisions_bloquees.append({
+                        "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
+                        "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                        "bloque_par": "R02", "explication_blocage": f"{ticker} pèse déjà {poids_actuel:.1f}% du capital — renforcement refusé au-delà de {POIDS_MAX*100:.0f}% (R2)",
+                    })
+                    continue
 
             # ── Règles mécaniques (enforcement — indépendant du raisonnement Claude)
             conviction    = dec.get("conviction", "modérée")
@@ -1416,7 +1468,14 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
             # Application du soft cap R01 (cluster_sizing_factor ≤ 1.0)
             poids_cible *= cluster_sizing_factor
 
-            budget = min(capital * poids_cible, capital * POIDS_MAX, equal_weight, liquidites)
+            if pos_existante is not None:
+                # Renforcement : la logique de slots (equal_weight) ne s'applique pas —
+                # elle répartit le cash entre lignes À OUVRIR, or celle-ci existe déjà.
+                # Budget = cible de conviction, plafonné par la marge restante sous R2
+                # (position + renfort ne franchissent jamais 20% du capital) et le cash.
+                budget = min(capital * poids_cible, headroom_r2, liquidites)
+            else:
+                budget = min(capital * poids_cible, capital * POIDS_MAX, equal_weight, liquidites)
             if budget < 50:
                 print(f"  💰 ACHAT {ticker} — liquidités insuffisantes ({liquidites:.0f}€)")
                 decisions_bloquees.append({
@@ -1437,7 +1496,9 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 continue
 
             stock    = stock_map.get(ticker, {})
-            currency = detect_currency(ticker, stock.get("market", ""))
+            # Renforcement : réutilise la devise stockée de la ligne (cohérence du PRU)
+            currency = (pos_existante.get("currency") if pos_existante is not None else None) \
+                       or detect_currency(ticker, stock.get("market", ""))
             prix_eur = to_eur(prix, currency, eur_usd, eur_gbp)
 
             # Budget en EUR → quantité (en réservant marge pour les frais d'achat)
@@ -1474,24 +1535,39 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 continue
             liquidites = round(liquidites - montant_eur, 2)
 
-            nouvelle_pos = {
-                "ticker":          ticker,
-                "nom":             nom,
-                "market":          stock.get("market", "—"),
-                "sector":          stock.get("sector", "—"),
-                "currency":        currency,
-                "date_achat":      today,
-                "prix_achat":      prix,       # devise native (affichage)
-                "prix_actuel":     prix,
-                "quantite":        quantite,
-                "montant_investi": montant_eur,  # en EUR, INCLUT les frais d'achat (= base fiscale)
-                "frais_achat_eur": frais_achat,  # journalisation séparée
-                "valeur_actuelle": brut_eur,     # valeur de marché (sans les frais payés)
-                "performance":     0.0,
-                "score_entree":    stock.get("score", dec.get("score_watchlist", 0)),
-                "raison_achat":    raison,      # thèse d'achat originale — réinjectée si vente envisagée
-            }
-            positions.append(nouvelle_pos)
+            if pos_existante is not None:
+                # ── Renforcement : PRU moyen pondéré, base fiscale cumulée ──
+                # date_achat d'origine CONSERVÉE : la Règle 01 (90j) reste ancrée sur
+                # l'ouverture de la ligne, un renfort ne remet pas le compteur à zéro.
+                q0 = pos_existante["quantite"]
+                p0 = pos_existante["prix_achat"]
+                base0 = pos_existante.get("montant_investi") or to_eur(p0 * q0, currency, eur_usd, eur_gbp)
+                pos_existante["prix_achat"]      = round((p0 * q0 + prix * quantite) / (q0 + quantite), 4)
+                pos_existante["quantite"]        = q0 + quantite
+                pos_existante["montant_investi"] = round(base0 + montant_eur, 2)
+                pos_existante["frais_achat_eur"] = round(pos_existante.get("frais_achat_eur", 0) + frais_achat, 2)
+                pos_existante["prix_actuel"]     = prix
+                pos_existante["valeur_actuelle"] = to_eur(prix * pos_existante["quantite"], currency, eur_usd, eur_gbp)
+                pos_existante["performance"]     = round((prix - pos_existante["prix_achat"]) / pos_existante["prix_achat"] * 100, 2)
+            else:
+                nouvelle_pos = {
+                    "ticker":          ticker,
+                    "nom":             nom,
+                    "market":          stock.get("market", "—"),
+                    "sector":          stock.get("sector", "—"),
+                    "currency":        currency,
+                    "date_achat":      today,
+                    "prix_achat":      prix,       # devise native (affichage)
+                    "prix_actuel":     prix,
+                    "quantite":        quantite,
+                    "montant_investi": montant_eur,  # en EUR, INCLUT les frais d'achat (= base fiscale)
+                    "frais_achat_eur": frais_achat,  # journalisation séparée
+                    "valeur_actuelle": brut_eur,     # valeur de marché (sans les frais payés)
+                    "performance":     0.0,
+                    "score_entree":    stock.get("score", dec.get("score_watchlist", 0)),
+                    "raison_achat":    raison,      # thèse d'achat originale — réinjectée si vente envisagée
+                }
+                positions.append(nouvelle_pos)
 
             sym = "€" if currency == "EUR" else "$" if currency == "USD" else "£"
             ordre = {
@@ -1511,8 +1587,13 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 "score_watchlist": stock.get("score", 0),
                 "breakdown": stock.get("breakdown", {}),
             }
+            if pos_existante is not None:
+                ordre["renforcement"] = True
+                ordre["pru_apres"]    = pos_existante["prix_achat"]
+                ordre["qte_totale"]   = pos_existante["quantite"]
             nouveaux_ordres.append(ordre)
-            print(f"  🟢 ACHAT {ticker} — {quantite} titres à {prix}{sym} = {brut_eur:.0f}€ + {frais_achat:.2f}€ frais (conviction {conviction})")
+            renf_str = f" (RENFORCEMENT — ligne à {pos_existante['quantite']} titres, PRU {pos_existante['prix_achat']}{sym})" if pos_existante is not None else ""
+            print(f"  🟢 ACHAT {ticker} — {quantite} titres à {prix}{sym} = {brut_eur:.0f}€ + {frais_achat:.2f}€ frais (conviction {conviction}){renf_str}")
 
     if decisions_bloquees:
         print(f"  ℹ️  {len(decisions_bloquees)} décision(s) Claude bloquée(s) par les règles mécaniques (cf. portfolio.json → decisions_bloquees)")
