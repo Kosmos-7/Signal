@@ -5,6 +5,28 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.2.0] — 2026-07-20
+
+### Réallocation : renforcement et allègement des lignes existantes
+
+L'agent ne connaissait que deux gestes — ouvrir une ligne, la fermer entièrement.
+Il sait désormais ajuster les TAILLES (complément naturel des rotations de 3.1.0) :
+
+- **Renforcement** : un ACHAT sur un titre déjà détenu renforce la ligne (PRU moyen
+  pondéré, base fiscale cumulée, date d'origine conservée — le compteur R01 ne repart
+  pas). Plafond R2 (20 % du capital) enfin appliqué en code : blocage si la ligne y est
+  déjà, budget plafonné à la marge restante sinon. L'ancien blocage
+  `deja_en_portefeuille` disparaît — la règle R2 et le plafond de positions, écrits
+  comme si le renforcement existait, cessent d'être du code mort.
+- **Allègement** : une VENTE avec `allegement_pct` (1-99) ne cède que ce pourcentage
+  (arrondi au titre entier). Base fiscale proratisée — le PFU ne porte que sur la
+  fraction vendue ; PRU, date et thèse d'origine conservés sur le reliquat.
+  Anti-poussière : reliquat < 100 € → vente totale. R01 et friction s'appliquent
+  comme à toute vente.
+- **Doctrine (règle 13)** : renforcer uniquement sur éléments nouveaux (jamais
+  « moyenner à la baisse » sans catalyseur documenté) ; alléger typiquement pour
+  dégonfler une position proche des 20 % après un rally, sans sortir de la thèse.
+
 ## [3.1.0] — 2026-07-18
 
 ### Rotations de portefeuille + correctifs d'audit complet
