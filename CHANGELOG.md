@@ -5,6 +5,23 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.2.1] — 2026-07-28
+
+### Hotfix : watchlist 100 % EU publiée le 27/07 (barre Yahoo vide en pré-ouverture US)
+
+- **Incident** : le run hebdo du 27/07 (11h30 UTC, marchés US fermés) a reçu de Yahoo
+  une barre du jour avec Close=NaN pour les titres US. Sans dropna côté screener,
+  MM21/MM200/RSI devenaient NaN et le garde anti-NaN (3.1.0) écartait le titre —
+  94 titres évincés « données indisponibles », watchlist publiée : 30/30 valeurs
+  EU/GB sur les 39 survivants, job CI vert. Même famille que l'incident 3.0.1,
+  corrigé à l'époque dans portfolio/update_prices (`last_valid_close`) mais jamais
+  dans le screener. Détecté par un utilisateur ; aucun impact portefeuille (zéro
+  ordre passé ce jour-là).
+- **Fix** : `dropna` sur les cours avant tout calcul (volume réaligné sur l'index),
+  et **garde de couverture** : si moins de 60 % de l'univers est scoré, le run
+  échoue bruyamment SANS publier — la watchlist précédente reste en ligne et le
+  job passe rouge (même philosophie fail-loud que `allow_nan=False`).
+
 ## [3.2.0] — 2026-07-20
 
 ### Réallocation : renforcement et allègement des lignes existantes

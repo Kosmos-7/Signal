@@ -621,8 +621,16 @@ def score_ticker(ticker, vix=None):
         if len(hist) < 50:
             return None
 
-        close  = hist["Close"].squeeze()
-        volume = hist["Volume"].squeeze()
+        # Purge des barres sans cours AVANT tout calcul (même correctif que
+        # last_valid_close() côté portfolio/update_prices, incident 3.0.1) :
+        # un run pré-ouverture (8h-13h30 UTC) peut recevoir de Yahoo une barre
+        # du jour avec Close=NaN pour les places pas encore ouvertes — sans ce
+        # dropna, MM21/MM200/RSI deviennent NaN et le titre est écarté à tort
+        # (incident du 27/07/2026 : les 94 titres US évincés, watchlist 100% EU).
+        close  = hist["Close"].squeeze().dropna()
+        volume = hist["Volume"].squeeze().reindex(close.index).fillna(0)
+        if len(close) < 50:
+            return None
         # yfinance retourne les prix UK en pence (GBp) — convertir en GBP
         try:
             info_curr = getattr(data.fast_info, 'currency', '') or ''
@@ -1184,6 +1192,7 @@ def main():
 
     previous  = load_previous()
     resultats = []
+    COUVERTURE_MIN = 0.60   # part minimale de l'univers scorée pour accepter de publier
 
     for i, ticker in enumerate(UNIVERS):
         print(f"  [{i+1}/{len(UNIVERS)}] {ticker}…", end=" ")
@@ -1212,6 +1221,20 @@ def main():
     if not top:
         print("❌ Aucune action scorée — vérifiez la connexion réseau ou les tickers.")
         return
+
+    # ── Garde de couverture (fail-loud) ─────────────────────────────────────
+    # Si une trop grande part de l'univers n'a pas pu être scorée (panne de
+    # source, rate-limit, barres NaN massives), publier le classement des
+    # survivants serait mensonger : le 27/07/2026, 94 titres US évincés ont
+    # produit une watchlist 100% EU publiée en silence, job vert. On préfère
+    # échouer bruyamment : la watchlist précédente reste en ligne, le job CI
+    # passe rouge et alerte (même philosophie que allow_nan=False).
+    couverture = len(resultats) / len(UNIVERS)
+    if couverture < COUVERTURE_MIN:
+        print(f"❌ Couverture insuffisante : {len(resultats)}/{len(UNIVERS)} tickers scorés "
+              f"({couverture:.0%} < {COUVERTURE_MIN:.0%}) — watchlist NON publiée.")
+        print("   Panne de source de données probable — la version précédente reste en ligne.")
+        raise SystemExit(1)
 
     current_tickers = {s["ticker"] for s in top}
     entrees = [s for s in top if s["ticker"] not in previous]

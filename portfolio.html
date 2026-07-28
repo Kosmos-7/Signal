@@ -776,6 +776,21 @@
 
     <!-- Learnings principaux toujours visibles (v1.7+) -->
 
+    <!-- v3.2.1 — Watchlist 100% EU publiée 24h (barre Yahoo NaN pré-ouverture US) -->
+    <div class="learning-item">
+      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-body">
+        <div class="learning-header">
+          <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
+          <span class="learning-version">v3.2.1</span>
+          <span class="learning-date">28 juillet 2026</span>
+        </div>
+        <div class="learning-title">Watchlist 100 % européenne publiée pendant 24 h — 94 titres US évincés par une barre Yahoo vide</div>
+        <div class="learning-prob">Le run hebdomadaire du 27/07 tourne à 11h30 UTC, quand les marchés US sont encore fermés. Yahoo a renvoyé ce lundi-là une barre « du jour » avec un cours de clôture <code>NaN</code> pour les titres US. Le screener ne purgeait pas ces barres vides : MM21/MM200/RSI devenaient NaN, et le garde anti-NaN (ajouté en 3.1.0 pour protéger le site) écartait chaque titre avec le motif « données indisponibles ». Résultat : 94 titres évincés, et le top 30 des 39 survivants — publié en toute confiance, CI verte — était composé à 100 % de valeurs européennes et britanniques. C'est la même famille d'incident que le NaN de juin (3.0.1), qui avait été corrigé dans le suivi du portefeuille et les prix quotidiens (<code>last_valid_close</code>)… mais jamais dans le screener. Signalé par un utilisateur. Aucun impact portefeuille : l'IA n'a passé aucun ordre ce jour-là.</div>
+        <div class="learning-fix">Double correction, même philosophie fail-loud que 3.0.1 : (1) les barres sans cours sont purgées <em>avant</em> tout calcul d'indicateur (le dernier cours utilisé redevient le dernier cours <em>valide</em>, comme partout ailleurs dans le pipeline) ; (2) nouveau <strong>garde de couverture</strong> — si moins de 60 % de l'univers a pu être scoré, le run refuse de publier et échoue bruyamment : la watchlist précédente reste en ligne et l'alerte CI part immédiatement, au lieu d'un classement mensonger servi avec un job vert. Leçon : un garde qui écarte silencieusement des données peut transformer une panne bruyante en biais invisible — chaque éviction doit être bornée par un contrôle de couverture globale.</div>
+      </div>
+    </div>
+
     <!-- v3.1.0 — Audit complet (sécurité + gardes d'exécution + scores EU) + rotations + incident import os -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>
