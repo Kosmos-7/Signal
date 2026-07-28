@@ -1,23 +1,23 @@
 {
-  "updated_at": "2026-07-27",
+  "updated_at": "2026-07-28",
   "week": "Sem. 31 · 2026",
   "capital_initial": 20000.0,
-  "capital_actuel": 23858.28,
-  "performance": 19.29,
-  "performance_brute": 20.24,
+  "capital_actuel": 23297.17,
+  "performance": 16.49,
+  "performance_brute": 16.93,
   "total_frais_payes": 29.3,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 861.36,
-  "capital_post_liquidation": 22237.23,
-  "performance_post_liquidation": 11.19,
-  "frais_si_liquidation": 16.82,
-  "pfu_latent_si_liquidation": 1604.25,
-  "pertes_si_liquidation": 408.02,
-  "last_known_vix": 18.67,
+  "capital_post_liquidation": 21850.81,
+  "performance_post_liquidation": 9.25,
+  "frais_si_liquidation": 16.4,
+  "pfu_latent_si_liquidation": 1429.96,
+  "pertes_si_liquidation": 387.75,
+  "last_known_vix": 18.98,
   "last_known_vix_source": "live",
-  "benchmark_cac40": 1.27,
-  "benchmark_msci": 12.57,
-  "vs_benchmark": 6.72,
+  "benchmark_cac40": 3.16,
+  "benchmark_msci": 12.0,
+  "vs_benchmark": 4.49,
   "mode_panique": false,
   "perf_cac_semaine": 1.37,
   "positions": [
@@ -29,13 +29,13 @@
       "currency": "EUR",
       "date_achat": "2026-01-02",
       "prix_achat": 650.0,
-      "prix_actuel": 1561.12,
+      "prix_actuel": 1374.0,
       "quantite": 3,
       "montant_investi": 1951.46,
-      "valeur_actuelle": 4683.36,
-      "performance": 139.99,
+      "valeur_actuelle": 4122.0,
+      "performance": 111.23,
       "score_entree": 88,
-      "poids": 19.6
+      "poids": 17.7
     },
     {
       "ticker": "NVDA",
@@ -45,13 +45,13 @@
       "currency": "USD",
       "date_achat": "2026-01-02",
       "prix_achat": 115.0,
-      "prix_actuel": 196.51,
+      "prix_actuel": 195.74,
       "quantite": 20,
       "montant_investi": 1981.9,
-      "valeur_actuelle": 3455.73,
-      "performance": 74.36,
+      "valeur_actuelle": 3440.07,
+      "performance": 73.57,
       "score_entree": 94,
-      "poids": 14.5
+      "poids": 14.8
     },
     {
       "ticker": "AMD",
@@ -61,13 +61,13 @@
       "currency": "USD",
       "date_achat": "2026-05-05",
       "prix_achat": 341.54,
-      "prix_actuel": 494.95,
+      "prix_actuel": 450.56,
       "quantite": 3,
       "montant_investi": 876.48,
-      "valeur_actuelle": 1305.59,
-      "performance": 48.96,
+      "valeur_actuelle": 1187.77,
+      "performance": 35.52,
       "score_entree": 85,
-      "poids": 5.5
+      "poids": 5.1
     },
     {
       "ticker": "LLY",
@@ -77,13 +77,13 @@
       "currency": "USD",
       "date_achat": "2026-05-05",
       "prix_achat": 967.93,
-      "prix_actuel": 1197.53,
+      "prix_actuel": 1228.83,
       "quantite": 1,
       "montant_investi": 828.41,
-      "valeur_actuelle": 1052.96,
-      "performance": 27.11,
+      "valeur_actuelle": 1079.82,
+      "performance": 30.35,
       "score_entree": 89,
-      "poids": 4.4
+      "poids": 4.6
     },
     {
       "ticker": "NOW",
@@ -93,32 +93,14 @@
       "currency": "USD",
       "date_achat": "2026-05-06",
       "prix_achat": 92.01,
-      "prix_actuel": 105.56,
+      "prix_actuel": 110.24,
       "quantite": 14,
       "montant_investi": 1095.08,
-      "valeur_actuelle": 1299.43,
-      "performance": 18.66,
+      "valeur_actuelle": 1356.2,
+      "performance": 23.84,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
-      "poids": 5.4
-    },
-    {
-      "ticker": "DDOG",
-      "nom": "Datadog, Inc.",
-      "market": "NMS",
-      "sector": "Technologie",
-      "currency": "USD",
-      "date_achat": "2026-05-25",
-      "prix_achat": 222.32,
-      "prix_actuel": 251.86,
-      "quantite": 4,
-      "montant_investi": 763.89,
-      "frais_achat_eur": 0.5725,
-      "valeur_actuelle": 885.82,
-      "performance": 15.96,
-      "score_entree": 80,
-      "raison_achat": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume — fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1% — momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel — l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
-      "poids": 3.7
+      "poids": 5.8
     },
     {
       "ticker": "JPM",
@@ -128,13 +110,13 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 313.77,
-      "prix_actuel": 356.2,
+      "prix_actuel": 356.24,
       "quantite": 2,
       "montant_investi": 540.75,
-      "valeur_actuelle": 626.4,
-      "performance": 15.84,
+      "valeur_actuelle": 626.08,
+      "performance": 15.78,
       "score_entree": 95,
-      "poids": 2.6
+      "poids": 2.7
     },
     {
       "ticker": "V",
@@ -144,13 +126,31 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 330.69,
-      "prix_actuel": 362.53,
+      "prix_actuel": 365.62,
       "quantite": 2,
       "montant_investi": 569.91,
-      "valeur_actuelle": 637.53,
-      "performance": 11.87,
+      "valeur_actuelle": 642.57,
+      "performance": 12.75,
       "score_entree": 93,
-      "poids": 2.7
+      "poids": 2.8
+    },
+    {
+      "ticker": "DDOG",
+      "nom": "Datadog, Inc.",
+      "market": "NMS",
+      "sector": "Technologie",
+      "currency": "USD",
+      "date_achat": "2026-05-25",
+      "prix_achat": 222.32,
+      "prix_actuel": 241.09,
+      "quantite": 4,
+      "montant_investi": 763.89,
+      "frais_achat_eur": 0.5725,
+      "valeur_actuelle": 847.42,
+      "performance": 10.93,
+      "score_entree": 80,
+      "raison_achat": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume — fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1% — momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel — l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
+      "poids": 3.6
     },
     {
       "ticker": "BLK",
@@ -160,29 +160,13 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 1060.9,
-      "prix_actuel": 1062.14,
+      "prix_actuel": 1081.62,
       "quantite": 1,
       "montant_investi": 914.17,
-      "valeur_actuelle": 933.91,
-      "performance": 2.16,
+      "valeur_actuelle": 950.46,
+      "performance": 3.97,
       "score_entree": 93,
-      "poids": 3.9
-    },
-    {
-      "ticker": "META",
-      "nom": "Meta Platforms, Inc.",
-      "market": "NMS",
-      "sector": "Médias & IA",
-      "currency": "USD",
-      "date_achat": "2026-05-05",
-      "prix_achat": 610.41,
-      "prix_actuel": 593.87,
-      "quantite": 2,
-      "montant_investi": 1044.92,
-      "valeur_actuelle": 1044.35,
-      "performance": -0.05,
-      "score_entree": 84,
-      "poids": 4.4
+      "poids": 4.1
     },
     {
       "ticker": "CRM",
@@ -192,14 +176,14 @@
       "currency": "USD",
       "date_achat": "2026-05-06",
       "prix_achat": 181.19,
-      "prix_actuel": 173.6,
+      "prix_actuel": 181.85,
       "quantite": 7,
       "montant_investi": 1080.07,
-      "valeur_actuelle": 1068.5,
-      "performance": -1.07,
+      "valeur_actuelle": 1118.59,
+      "performance": 3.57,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
-      "poids": 4.5
+      "poids": 4.8
     },
     {
       "ticker": "DB1.DE",
@@ -209,13 +193,29 @@
       "currency": "EUR",
       "date_achat": "2026-05-05",
       "prix_achat": 261.9,
-      "prix_actuel": 258.1,
+      "prix_actuel": 264.6,
       "quantite": 4,
       "montant_investi": 1048.39,
-      "valeur_actuelle": 1032.4,
-      "performance": -1.53,
+      "valeur_actuelle": 1058.4,
+      "performance": 0.95,
       "score_entree": 84,
-      "poids": 4.3
+      "poids": 4.5
+    },
+    {
+      "ticker": "META",
+      "nom": "Meta Platforms, Inc.",
+      "market": "NMS",
+      "sector": "Médias & IA",
+      "currency": "USD",
+      "date_achat": "2026-05-05",
+      "prix_achat": 610.41,
+      "prix_actuel": 591.78,
+      "quantite": 2,
+      "montant_investi": 1044.92,
+      "valeur_actuelle": 1040.04,
+      "performance": -0.47,
+      "score_entree": 84,
+      "poids": 4.5
     },
     {
       "ticker": "LSEG.L",
@@ -225,14 +225,14 @@
       "currency": "GBP",
       "date_achat": "2026-05-07",
       "prix_achat": 92.16,
-      "prix_actuel": 89.48,
+      "prix_actuel": 90.38,
       "quantite": 14,
       "montant_investi": 1492.64,
-      "valeur_actuelle": 1464.31,
-      "performance": -1.9,
+      "valeur_actuelle": 1478.7,
+      "performance": -0.93,
       "score_entree": 83,
       "raison_achat": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
-      "poids": 6.1
+      "poids": 6.3
     },
     {
       "ticker": "AVGO",
@@ -242,29 +242,13 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 413.21,
-      "prix_actuel": 383.22,
+      "prix_actuel": 376.125,
       "quantite": 1,
       "montant_investi": 356.06,
-      "valeur_actuelle": 336.96,
-      "performance": -5.36,
+      "valeur_actuelle": 330.51,
+      "performance": -7.18,
       "score_entree": 100,
       "poids": 1.4
-    },
-    {
-      "ticker": "ETN",
-      "nom": "Eaton Corporation, PLC",
-      "market": "NYQ",
-      "sector": "Industrie",
-      "currency": "USD",
-      "date_achat": "2026-04-30",
-      "prix_achat": 430.55,
-      "prix_actuel": 398.64,
-      "quantite": 1,
-      "montant_investi": 371.0,
-      "valeur_actuelle": 350.51,
-      "performance": -5.52,
-      "score_entree": 93,
-      "poids": 1.5
     },
     {
       "ticker": "AMZN",
@@ -274,32 +258,13 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 259.27,
-      "prix_actuel": 231.39,
+      "prix_actuel": 228.85,
       "quantite": 2,
       "montant_investi": 446.82,
-      "valeur_actuelle": 406.91,
-      "performance": -8.93,
+      "valeur_actuelle": 402.2,
+      "performance": -9.99,
       "score_entree": 90,
       "poids": 1.7
-    },
-    {
-      "ticker": "ORSTED.CO",
-      "nom": "ORSTED A/S",
-      "market": "CPH",
-      "sector": "Services pub.",
-      "currency": "DKK",
-      "date_achat": "2026-05-27",
-      "prix_achat": 164.25,
-      "prix_actuel": 149.85,
-      "quantite": 52,
-      "montant_investi": 1150.61,
-      "frais_achat_eur": 0.8623,
-      "valeur_actuelle": 1042.42,
-      "performance": -9.4,
-      "score_entree": 81,
-      "raison_achat": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression — décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low) — le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique — opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
-      "poids": 4.4,
-      "correction": "Devise corrigee EUR->DKK le 2026-06-10 (cotation Copenhague) ; quantite requantifiee pour honorer le montant EUR investi."
     },
     {
       "ticker": "ADYEN.AS",
@@ -309,17 +274,52 @@
       "currency": "EUR",
       "date_achat": "2026-04-30",
       "prix_achat": 958.5,
-      "prix_actuel": 801.0,
+      "prix_actuel": 860.0,
       "quantite": 1,
       "montant_investi": 959.22,
-      "valeur_actuelle": 801.0,
-      "performance": -16.49,
+      "valeur_actuelle": 860.0,
+      "performance": -10.34,
       "score_entree": 93,
-      "poids": 3.4
+      "poids": 3.7
+    },
+    {
+      "ticker": "ETN",
+      "nom": "Eaton Corporation, PLC",
+      "market": "NYQ",
+      "sector": "Industrie",
+      "currency": "USD",
+      "date_achat": "2026-04-30",
+      "prix_achat": 430.55,
+      "prix_actuel": 377.15,
+      "quantite": 1,
+      "montant_investi": 371.0,
+      "valeur_actuelle": 331.41,
+      "performance": -10.67,
+      "score_entree": 93,
+      "poids": 1.4
+    },
+    {
+      "ticker": "ORSTED.CO",
+      "nom": "ORSTED A/S",
+      "market": "CPH",
+      "sector": "Services pub.",
+      "currency": "DKK",
+      "date_achat": "2026-05-27",
+      "prix_achat": 164.25,
+      "prix_actuel": 143.0,
+      "quantite": 52,
+      "montant_investi": 1150.61,
+      "frais_achat_eur": 0.8623,
+      "valeur_actuelle": 994.74,
+      "performance": -13.55,
+      "score_entree": 81,
+      "raison_achat": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression — décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low) — le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique — opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
+      "poids": 4.3,
+      "correction": "Devise corrigee EUR->DKK le 2026-06-10 (cotation Copenhague) ; quantite requantifiee pour honorer le montant EUR investi."
     }
   ],
   "liquidites": 1430.19,
-  "pct_liquidites": 6.0,
+  "pct_liquidites": 6.1,
   "ordres": [
     {
       "date": "2026-07-20",
@@ -1318,33 +1318,41 @@
     }
   ],
   "biais_detectes": [
-    "Biais d'engagement latent : tentation de 'moyenner à la baisse' sur ADYEN ou CRM sans catalyseur documenté — bloqué par la règle anti-averaging R13",
-    "Biais d'inaction forcée vs inaction passive : important de distinguer 'je n'achète pas car la règle R01 bloque le cluster' (décision active) de 'je ne fais rien par flemme' — la transparence éditoriale dans analyse_macro permet de documenter ce delta"
+    "Action bias potentiel : pression implicite à 'faire quelque chose' sur les positions en légère perte à J+89 alors qu'aucun signal fondamental ne le justifie",
+    "Recency bias : le contexte macro chargé (pétrole ~100$, taux 4.69%) pourrait pousser à un pessimisme excessif non étayé par les scores screener qui restent élevés"
   ],
   "regles_actives": [
     {
       "type": "concentration_sectorielle",
       "secteur": "Tech & IA",
-      "pct": 62.7,
+      "pct": 61.3,
       "regime": "soft",
       "sizing_factor": 0.1,
-      "message": "Cluster Tech & IA : 63% > 30% — sizing réduit ×0.10 (achats possibles avec conviction forte ou taille réduite)",
+      "message": "Cluster Tech & IA : 61% > 30% — sizing réduit ×0.10 (achats possibles avec conviction forte ou taille réduite)",
       "bloque": false
     }
   ],
   "decisions_bloquees": [],
   "nb_positions": 18,
-  "nb_positives": 9,
-  "nb_negatives": 9,
+  "nb_positives": 11,
+  "nb_negatives": 7,
   "nb_neutres": 0,
   "macro_news": [
+    {
+      "headline": "Bitcoin ETFs end inflow streak as Fed rate concerns mount",
+      "summary": "Amid fluctuating investor sentiment over Fed rate hikes and legislative uncertainties, Bitcoin ETFs face significant withdrawals, highlighting the fragility of recent crypto gains",
+      "date": "2026-07-27",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com/news/articles/2026-07-27/bitcoin-etfs-end-inflow-streak-as-fed-rate-concerns-mount",
+      "resume_fr": "Les ETF Bitcoin enregistrent des sorties de capitaux alors que les inquiétudes sur les hausses de taux Fed fragilisent le sentiment des investisseurs crypto."
+    },
     {
       "headline": "Oil near $100 puts fed and peers in interest-rate spotlight",
       "summary": "Crude oil’s brief foray above the $100 level it last exceeded two months ago is just one of the potential inflation risks confronting policymakers",
       "date": "2026-07-26",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-07-25/fed-bank-of-england-bank-of-japan-face-100-oil-inflation-test",
-      "resume_fr": "Le retour du pétrole brut au-dessus de 100 dollars/baril relance les inquiétudes inflationnistes et met les banques centrales sous pression."
+      "resume_fr": "Le pétrole brut frôle les 100$/baril, ravivant les risques inflationnistes et mettant les banques centrales sous pression sur leur politique de taux."
     },
     {
       "headline": "Bank of England to hold steady this year but Iran war inflation risks persist: Reuters poll - Reuters",
@@ -1352,7 +1360,7 @@
       "date": "2026-07-24",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPVFpPQnNRUHlzdlVaNzJyS3BnSTZ6VDU3LWxmc18wWWVfVDhKbHAzejlELWozRVEzT0o2REYzQWhiZV96Y2NnZ1JRc25hWmI5cjVMdlRjbTJORmJnV1lXb3ZtOGRSX19YemY0VVpQMk42S0I1SjBOQi03RlFKQXNySlNwMi1HblBsSFF3cHR3ZmRrWHNJekk2bWlkbHRTc1FvU1h2UXJLcDhkMUxXQUFLOU9R?oc=5",
-      "resume_fr": "La Banque d'Angleterre devrait maintenir ses taux inchangés cette année malgré les risques inflationnistes liés au conflit en Iran, selon un sondage Reuters."
+      "resume_fr": "La Banque d'Angleterre devrait maintenir ses taux stables en 2026 malgré les risques inflationnistes persistants liés aux tensions au Moyen-Orient selon Reuters."
     },
     {
       "headline": "Treasury yields retreat, 10-year hovers around January 2025 highs",
@@ -1360,7 +1368,7 @@
       "date": "2026-07-24",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/07/24/treasury-yields-bonds-us-debt.html",
-      "resume_fr": "Les rendements des bons du Trésor américain reculent légèrement, le 10 ans s'établissant autour de 4.69%, proche des plus hauts de janvier 2025."
+      "resume_fr": "Les rendements des bons du Trésor US reculent légèrement, le 10 ans se stabilisant autour de 4.69%, proches des plus hauts de janvier 2025."
     },
     {
       "headline": "Dollar hits new 40-year high versus yen, euro softer after ECB stands pat on rates - Reuters",
@@ -1368,30 +1376,22 @@
       "date": "2026-07-23",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNcmxmYW0zRFBGQlpfRDY2bXdwMk1FNzJQVDVOZXhHMTY3QlAzeG5DRDRqeHRNQk1ELWpLTEtSSGpkVjJrcHVzb3RNQmxHc3d2b1JEMGJ1TEN1bDJKVGFzcFl0d0FjbUNBRTRRMDJVM3BST2htNmwtRExMNGo2RTlSREhGZXZYa0ZneWUzY0s4RXVlTWxmLXI0cEJBSW1UbVJrWjBPNw?oc=5",
-      "resume_fr": "Le dollar atteint un plus haut de 40 ans face au yen ; l'euro s'affaiblit après la décision de la BCE de maintenir ses taux inchangés."
+      "resume_fr": "Le dollar atteint un plus haut de 40 ans face au yen après que la BCE a maintenu ses taux inchangés, l'euro en recul."
     },
     {
-      "headline": "Here are the 3 big things we're watching in the stock market in the week ahead",
-      "summary": "It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data.",
-      "date": "2026-07-26",
+      "headline": "Coca-Cola is about to report earnings. Here's what to expect",
+      "summary": "Coca-Cola stock has risen 19% this year, outstripping the gains of the S&P 500.",
+      "date": "2026-07-28",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/07/26/here-are-the-3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
-      "resume_fr": "La semaine s'annonce chargée à Wall Street avec les résultats des grandes technologiques, la réunion de la Fed et les données d'inflation."
-    },
-    {
-      "headline": "Trump’s tariffs are likely to stick around despite unpopularity",
-      "summary": "Trump, a proponent of protectionist trade policies, asserts that his approach has driven a US economic boom and that tariffs are effective negotiation tools",
-      "date": "2026-07-25",
-      "source": "Bloomberg",
-      "url": "https://www.bloomberg.com/news/articles/2026-07-25/trump-s-tariffs-are-likely-to-stick-around-despite-unpopularity",
-      "resume_fr": "Les droits de douane de Trump semblent pérennes malgré leur impopularité, le président les présentant comme moteur de la croissance économique américaine."
+      "url": "https://www.cnbc.com/2026/07/28/coca-cola-ko-q2-2026-earnings.html",
+      "resume_fr": "Coca-Cola s'apprête à publier ses résultats trimestriels, le titre ayant progressé de 19% depuis le début de l'année, surperformant le S&P 500."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "La semaine du 21 au 27 juillet 2026 s'est jouée sur fond de retour du pétrole au-dessus des 100$/baril — une première depuis deux mois selon Bloomberg — et de taux longs américains qui s'accrochent autour de 4.69% sur le 10 ans. Ce cocktail 'inflation + coûts de financement élevés' est exactement ce que les banques centrales cherchent à éviter, et la Fed réunit justement cette semaine avec, en prime, les résultats des grandes technos américaines en parallèle.\n\nPour Signal, la pause est bienvenue : le portefeuille affiche +19.79% net depuis la création, avec un écart de +7.90pp sur le MSCI World YTD. Pas d'action majeure ce run — la concentration sectorielle Tech & IA à 63% (plafond soft cap R01) neutralise mécaniquement toute velléité d'achat dans le cluster, et les liquidités à 1 430€ restent en réserve stratégique. Le VIX à 17.65 signale un régime calme : pas de panique, pas d'euphorie.\n\nLa décision structurante de la semaine est une décision de NON-action documentée. ADYEN.AS arrive à 88 jours de détention à -13.4% : dans 2 jours, la Règle R06 (stop-loss -15% après 90j) devient applicable. J'ai choisi de ne pas anticiper la vente avant les 90j faute de signal fondamental documenté (Règle 01), mais l'alerte est posée. Si le titre n'a pas rebondi mercredi, la sortie est mécanique — sans état d'âme, c'est la discipline.\n\nApprentissage de la semaine : le coût de l'inaction consciente est différent du coût de l'inaction par passivité. Ne pas acheter parce que la concentration sectorielle est saturée, c'est une décision active. La frustration éditoriale du moment : SAP.DE (score 71, z=-1.5σ, Death Cross vieillissant à 238j) aurait mérité un regard plus approfondi hors cluster Tech — mais c'est bien un titre Technologie, et la règle R01 soft cap à ×0.10 rend l'achat quasi symbolique. Je laisse passer.\n\nPour la semaine à venir : trois dates à surveiller — (1) les résultats Fed mercredi, déterminants pour la trajectoire des taux longs qui compriment les valorisations de growth ; (2) le franchissement des 90j pour ADYEN, AMZN, JPM, V, BLK, ETN et AVGO qui libèrent le stop-loss R06 si les positions se dégradent ; (3) les résultats AMZN attendus — un catalyseur qui pourrait modifier la thèse sur la position en portefeuille.",
+    "analyse_macro": "Cette semaine du 21 au 28 juillet, les marchés naviguent à vue entre deux braises : le pétrole qui frôle les 100$/baril et les taux longs américains qui s'accrochent autour de 4.69% sur le 10 ans — des niveaux qui rappellent janvier 2025 et qui font grincer les modèles de valorisation des croissance stocks. La BCE a laissé ses taux inchangés, le dollar a atteint un plus haut de 40 ans face au yen, et la Banque d'Angleterre se retrouve coincée entre une inflation alimentée par les tensions géopolitiques au Moyen-Orient et une économie britannique qui demande de la douceur. Bref, la macro fait son travail habituel : elle complique tout.\n\nDans ce contexte, Signal affiche +16.29% net depuis la création (+20.24% brut), avec un écart de +6.72pp au MSCI World. Le capital est à 23 257€. Pas de raison de modifier le cap sur la base de ce tableau macro seul — le VIX à 18.98 reste en régime calme, aucune panique, et le mode panique n'est pas déclenché.\n\nLa semaine est dominée par une vigilance accrue sur quatre positions qui atteignent leur J+89 simultanément : AVGO (-7.3%), ETN (-10.6%), AMZN (-10.0%) et ADYEN.AS (-10.2%). Demain, le compteur des 90 jours tourne pour chacune d'elles — le stop-loss R06 à -15% devient mécaniquement activable. Aucune n'a franchi ce seuil aujourd'hui, donc pas de vente. Mais la surveillance passe en mode actif : un run quotidien sur ces quatre lignes est justifié cette semaine.\n\nCôté watchlist, la frustration est réelle et assumée : INTU (#1, score 87, z=-4.0σ, rebond mean-reversion sur Death Cross stale) et ADBE (#2, score 87) présentent des setups B séduisants — mais le cluster Tech & IA est à 61% du portefeuille, soit juste sous le plafond de blocage strict à 65%. Le sizing réduit mécaniquement à ×0.10 rendrait toute entrée symbolique et donc non pertinente. Pas d'achat cette semaine sur ces titres, même si la thèse est solide. Discipline assumée.\n\nLa semaine prochaine, l'œil sera sur trois choses : (1) le passage des J+90 pour AVGO/ETN/AMZN/ADYEN — si l'un d'eux touche -15%, le stop-loss s'exécute mécaniquement ; (2) ORSTED.CO à -13.7% après 62 jours, qui reste la position la plus fragile sans que le seuil -25% soit atteint ; (3) une éventuelle détente sur les taux longs US qui rouvrirait de la marge sur les valorisations croissance. D'ici là, l'inaction est une décision — et cette semaine, c'est la bonne.",
     "conviction_globale": "neutre",
-    "message_utilisateurs": "Semaine calme côté décisions pour Signal — pas d'achat, pas de vente cette semaine. La concentration Tech & IA à 63% du portefeuille neutralise les opportunités d'entrée dans ce cluster (soft cap R01 à ×0.10), et les liquidités restent en réserve.\n\nLe point chaud à surveiller : ADYEN.AS atteint 88 jours de détention à -13.4%. Dans 2 jours (mercredi), la règle stop-loss R06 devient applicable (-15% après 90j). Si le titre ne rebondit pas d'ici là, la sortie sera mécanique. Même vigilance pour CRM (-10.8%, 82j).\n\nLe portefeuille reste à +19.79% net depuis la création, +7.90pp d'écart sur le MSCI World YTD. La discipline paie sur la durée — même quand elle signifie regarder les marchés monter sans agir.",
-    "nb_decisions": 3
+    "message_utilisateurs": "Semaine calme côté décisions actives — et c'est voulu. Quatre positions (AVGO, ETN, AMZN, ADYEN) arrivent à leur J+89 simultanément cette semaine : elles passent toutes sous surveillance stop-loss renforcée à partir de demain. Aucune n'a franchi le seuil de -15% aujourd'hui, donc pas de vente mécanique. ORSTED.CO reste la position la plus tendue à -13.7% après 62 jours — loin du stop-loss absolu à -25%, mais surveillée de près. Côté watchlist, les meilleurs setups de la semaine (INTU, ADBE) sont techniquement séduisants mais le cluster Tech & IA à 61% ne laisse pas de marge d'entrée significative sans contredire la discipline de concentration. La performance nette du portefeuille reste à +16.29% (+6.72pp vs MSCI World). L'essentiel du travail cette semaine : ne pas céder à l'action bias sur des positions solides sous pression temporaire.",
+    "nb_decisions": 5
   },
   "performance_history": [
     {
@@ -1856,8 +1856,14 @@
       "capital": 23858.28,
       "benchmark_cac40": 1.27,
       "benchmark_msci": 12.57
+    },
+    {
+      "date": "2026-07-28",
+      "perf": 16.49,
+      "capital": 23297.17,
+      "benchmark_cac40": 3.16,
+      "benchmark_msci": 12.0
     }
   ],
-  "max_drawdown": -5.22,
-  "last_known_vix_updated_at": "2026-07-27"
+  "max_drawdown": -5.22
 }
