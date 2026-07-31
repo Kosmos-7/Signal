@@ -691,12 +691,17 @@ def construire_prompt_analyse(portfolio, watchlist, contexte, macro_news=None):
         icon   = "🟢" if regime == "golden" else "🔴" if regime == "death" else "⚪"
         cross_str = f" {icon} {regime.upper()} {days}j" if days is not None and regime in ("golden","death") else ""
         z_str = f" z={z:+.1f}σ" if z is not None else ""
+        # Décote/surcote vs tendance + consensus (informationnels — Règle 14)
+        dc = bd.get("decote_pct")
+        dc_str = (f" {'décote' if dc >= 0 else 'surcote'} tendance {abs(dc):.0f}%") if dc is not None else ""
+        tu = bd.get("target_upside_pct")
+        tu_str = f" consensus {tu:+.0f}% ({bd.get('target_analysts') or '?'} analystes)" if tu is not None else ""
         # Timing d'entrée : drawdown 52w + zone Fibo (annotation chartiste)
         val_str = f" val={val_pts}/5 (DD{dd52w:+.1f}%)" if val_pts is not None and dd52w is not None else ""
         fibo_str = f" [{fibo['closest_fibo']}]" if fibo.get("closest_fibo") else ""
         warn_str = f"\n      ⚠ {dyn_warn}" if dyn_warn else ""
         top10_lines.append(
-            f"  #{s['rank']} {s['ticker']} score={s['score']}/100{cross_str}{z_str}{val_str}{fibo_str} — {s.get('justification','')[:100]}{warn_str}"
+            f"  #{s['rank']} {s['ticker']} score={s['score']}/100{cross_str}{z_str}{dc_str}{tu_str}{val_str}{fibo_str} — {s.get('justification','')[:100]}{warn_str}"
         )
 
     macro_section = ""
@@ -855,11 +860,17 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
 
         opp_a    = opportunites_analyse.get(s["ticker"], {})
         opp_str  = f" | signal {opp_a['signal_qualite']}, timing {opp_a['timing']}" if opp_a else ""
+        # Décote/surcote vs tendance + consensus (informationnels — Règle 14)
+        dc = bd.get("decote_pct")
+        dc_str = (f" | {'décote' if dc >= 0 else 'surcote'} tendance {abs(dc):.0f}%") if dc is not None else ""
+        tu = bd.get("target_upside_pct")
+        tu_str = f" consensus {tu:+.0f}%" if tu is not None else ""
+
         # Warning de transition (death cross qui se résorbe, golden qui s'affaiblit, mean-reversion)
         warn_str = f"\n      ⚠ {dyn_warn}" if dyn_warn else ""
         top10_lines.append(
             f"  #{s['rank']} {s['ticker']} ({s['name']}) — score {s['score']}/100 — {s['sector']}"
-            f"{cross_str}{vol_str}{z_str}{val_str}{fibo_str}{dyn_str}{opp_str} — {s.get('justification', '')[:100]}{warn_str}"
+            f"{cross_str}{vol_str}{z_str}{dc_str}{tu_str}{val_str}{fibo_str}{dyn_str}{opp_str} — {s.get('justification', '')[:100]}{warn_str}"
         )
 
     # Tickers watchlist complète
@@ -993,6 +1004,7 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 13. **Réallocation (renforcement / allègement)** : tu peux ajuster la TAILLE d'une ligne existante, pas seulement ouvrir/fermer.
    - RENFORCER : une décision ACHAT sur un titre déjà détenu renforce la ligne — prix de revient moyen pondéré, la date de détention d'origine est conservée (le compteur des 90 jours ne repart pas). Plafond mécanique : la ligne ne peut jamais dépasser 20% du capital (Règle 02, appliquée en code). Renforce UNIQUEMENT sur des éléments NOUVEAUX (résultats publiés, thèse confirmée par des faits, décote accrue avec fonda intacts) — jamais pour « moyenner à la baisse » une position en perte sans catalyseur documenté (biais d'engagement classique).
    - ALLÉGER : une décision VENTE avec le champ optionnel `"allegement_pct"` (nombre entre 1 et 99) ne vend que ce pourcentage de la position, arrondi au titre entier. Le PFU ne s'applique qu'à la plus-value de la fraction vendue ; le PRU et la date d'origine de la ligne sont conservés. Si le reliquat vaudrait moins de 100€, la vente devient totale (anti-poussière). Un allègement reste une VENTE : Règle 01 (90j / conviction forte) et friction fiscale (Règle 10) s'appliquent pleinement. Usage typique : dégonfler une position qui approche les 20% après un fort rally, sans sortir de la thèse.
+14. **Décote/surcote vs tendance = information, JAMAIS un signal seul** : c'est l'écart du cours à sa droite de régression long terme (trajectoire historique — PAS une valeur intrinsèque), affiché dans la watchlist. Décote extrême (z < -2σ) : le marché price peut-être un changement STRUCTUREL du business — risque de value trap ; n'achète jamais sur la décote seule, exige des fondamentaux intacts (score qualité /45) et une thèse documentée. Surcote extrême (z > +2σ) : acheter ou renforcer revient à payer très au-dessus de la trajectoire historique — risque de rally chase, justification exceptionnelle requise. L'objectif consensus affiché porte un biais optimiste structurel documenté — ne le traite jamais comme un prix cible fiable.
 
 ## DATE & MOMENT DU RUN
 - Run actuel       : {contexte.get('jour_semaine','?')} {today} {contexte.get('heure_utc','?')} UTC ({contexte.get('semaine','?')})
