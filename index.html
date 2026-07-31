@@ -85,11 +85,11 @@
   .chx-slider input[type=range]{position:absolute;left:0;right:0;top:0;width:100%;height:34px;background:none;-webkit-appearance:none;appearance:none;pointer-events:none;margin:0}
   .chx-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;pointer-events:auto;width:16px;height:16px;border-radius:50%;background:#0d0d16;border:2px solid var(--ac);cursor:grab}
   .chx-slider input[type=range]::-moz-range-thumb{pointer-events:auto;width:12px;height:12px;border-radius:50%;background:#0d0d16;border:2px solid var(--ac);cursor:grab}
-  .chx-mrow{font-size:.86rem;color:var(--text2);margin-top:.9rem}
+  .chx-mrow{font:.82rem var(--mono);color:var(--text2);margin-top:.9rem;letter-spacing:.2px}
   .chx-mrow .chx-k{color:var(--text3)}
-  .chx-mrow .chx-v{font:700 1.05rem var(--mono);color:var(--ac)}
-  .chx-mrow .chx-v2{font:700 .95rem var(--mono);color:var(--text)}
-  .chx-mrow .chx-z{font:.78rem var(--mono);color:var(--text3)}
+  .chx-mrow .chx-v{font:700 1rem var(--mono);color:var(--ac)}
+  .chx-mrow .chx-v2{font:700 .82rem var(--mono);color:var(--text)}
+  .chx-mrow .chx-z{font:.82rem var(--mono);color:var(--text2)}
   .chx-warn{display:flex;gap:10px;align-items:flex-start;background:rgba(232,168,32,.06);border:1px solid rgba(232,168,32,.28);border-radius:8px;padding:10px 14px;margin:12px 0 0;font-size:.8rem;color:var(--text2);line-height:1.55}
   .chx-warn .chx-ic{flex:none;color:var(--gold);font-size:.95rem;margin-top:1px}
   .chx-warn b{color:var(--text)}
@@ -237,9 +237,6 @@ function buildChart(s){
   const dec=b.decote_pct, zOff=b.regression_z;
   const mlabel=dec==null?'':(dec>=0?'Décote':'Surcote')+' vs tendance '+(b.regression_window_years||'?')+' ans';
   const cons=(b.target_upside_pct!=null)?('Objectif consensus : <span class="chx-v2">'+fs(b.target_upside_pct,0)+' %</span>'+(b.target_analysts?' <span class="chx-k">('+b.target_analysts+' analystes)</span>':'')):'';
-  let warn='';
-  if(zOff!=null&&zOff<=-2)warn='<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Écart extrême (&gt; 2σ sous la tendance) — attention au changement structurel.</b> Si le business est durablement altéré (disruption, concurrence, régulation), la trajectoire passée ne reviendra pas : c\'est le piège de valeur. La décote chiffre un désaccord entre le passé et le prix — elle ne dit pas qui a raison. À croiser avec la qualité (score /45).</div></div>';
-  else if(zOff!=null&&zOff>=2)warn='<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Surcote extrême (&gt; 2σ au-dessus de la tendance) — attention à la chasse au rally.</b> Acheter ici, c\'est payer très au-dessus de la trajectoire historique : le retour vers la tendance est le scénario statistiquement fréquent. À croiser avec la qualité et la thèse.</div></div>';
   host.innerHTML='<div class="qh">Cours &amp; tendance long terme</div>'+
     '<div class="chx-wrap"><svg class="chx-svg" id="chx-svg" viewBox="0 0 '+W+' '+H+'"></svg><div class="chx-tip" id="chx-tip"></div></div>'+
     '<div class="chx-ctrl"><span id="chx-periods">'+presets.map(([m,l],i)=>'<button class="chx-pbtn'+(m===WIN?' on':'')+'" data-m="'+m+'">'+l+'</button>').join(' ')+'</span><span class="chx-rlbl" id="chx-rlbl"></span></div>'+
@@ -249,7 +246,7 @@ function buildChart(s){
       '<span class="chx-k">'+mlabel+' : </span><span class="chx-v" title="Prix de tendance : '+(b.prix_tendance!=null?Math.round(b.prix_tendance)+sym:'—')+'">'+Math.abs(dec).toFixed(0)+' %</span>',
       '<span class="chx-z">z = '+fs(zOff,2)+'σ</span>'
     ].concat(cons?[cons]:[]).join(' <span class="chx-k">·</span> ')+'</div>':'')+
-    warn+
+    '<div id="chx-warnslot"></div>'+
     '<div class="chx-note">Canal recalculé sur la période affichée — décote et z-score restent calculés sur la fenêtre officielle ('+(b.regression_window_years||'?')+' ans). Trajectoire historique, pas une valeur intrinsèque. <a href="apprendre.html#decote" style="color:var(--text3)">Méthode →</a></div>';
   const svg=document.getElementById('chx-svg'),tip=document.getElementById('chx-tip');
   const r0=document.getElementById('chx-r0'),r1=document.getElementById('chx-r1'),selBar=document.getElementById('chx-sel');
@@ -270,6 +267,16 @@ function buildChart(s){
   }
   const trF=t=>Math.exp(F.a+F.b*(t-F.t0));
   function el(n,at){const e=document.createElementNS('http://www.w3.org/2000/svg',n);for(const k in at)e.setAttribute(k,at[k]);svg.appendChild(e);return e}
+  function majWarn(officiel){
+    const slot=document.getElementById('chx-warnslot');if(!slot)return;
+    let zv=null;
+    if(F&&vis.length){const [te,pe]=vis[vis.length-1];zv=(Math.log(pe)-Math.log(trF(te)))/F.sigma;}
+    if(officiel&&zOff!=null)zv=zOff;   // sur la vue officielle, le z du screener fait foi
+    const suf=officiel?'':' <span style="color:var(--text3)">(sur la période affichée)</span>';
+    if(zv!=null&&zv<=-2)slot.innerHTML='<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Écart extrême (&gt; 2σ sous la tendance'+(officiel?'':' de la période')+') — attention au changement structurel.</b>'+suf+' Si le business est durablement altéré (disruption, concurrence, régulation), la trajectoire passée ne reviendra pas : c\'est le piège de valeur. La décote chiffre un désaccord entre le passé et le prix — elle ne dit pas qui a raison. À croiser avec la qualité (score /45).</div></div>';
+    else if(zv!=null&&zv>=2)slot.innerHTML='<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Surcote extrême (&gt; 2σ au-dessus de la tendance'+(officiel?'':' de la période')+') — attention à la chasse au rally.</b>'+suf+' Acheter ici, c\'est payer très au-dessus de la trajectoire historique : le retour vers la tendance est le scénario statistiquement fréquent. À croiser avec la qualité et la thèse.</div></div>';
+    else slot.innerHTML='';
+  }
   function chRender(){
     svg.innerHTML='<defs><clipPath id="chx-plot"><rect x="'+ML+'" y="'+MT+'" width="'+(W-ML-MR)+'" height="'+(H-MT-MB)+'"/></clipPath></defs>';
     vis=D.points.filter(([t])=>t>=t0v&&t<=t1v);
@@ -305,10 +312,14 @@ function buildChart(s){
     if(hasBand){
       const band=(k,op)=>el('polygon',{points:[[X(tb0),Y(trF(tb0)*Math.exp(k*F.sigma))],[X(tb1),Y(trF(tb1)*Math.exp(k*F.sigma))],[X(tb1),Y(trF(tb1)*Math.exp(-k*F.sigma))],[X(tb0),Y(trF(tb0)*Math.exp(-k*F.sigma))]].map(p=>p.join(',')).join(' '),fill:'#74b6df','fill-opacity':op,'clip-path':'url(#chx-plot)'});
       band(2,0.045);band(1,0.07);
+      // liserés des bords ±1σ/±2σ : gardent le canal lisible quand le zoom l'amincit
+      for(const [k,op] of [[2,.14],[1,.22],[-1,.22],[-2,.14]])
+        el('line',{x1:X(tb0),y1:Y(trF(tb0)*Math.exp(k*F.sigma)),x2:X(tb1),y2:Y(trF(tb1)*Math.exp(k*F.sigma)),
+          stroke:'#74b6df','stroke-width':1,opacity:op,'clip-path':'url(#chx-plot)'});
       for(const [k,l] of [[2,'+2σ'],[1,'+1σ'],[-1,'−1σ'],[-2,'−2σ']]){
         const yv=Y(trF(tb1)*Math.exp(k*F.sigma));
-        if(yv>MT&&yv<H-MB&&!chipYs.some(cy=>Math.abs(yv-cy)<12))
-        el('text',{x:W-MR+5,y:yv+3,class:'chx-blabel'}).textContent=l;}
+        if(yv>MT+8&&yv<H-MB-4)
+        el('text',{x:W-MR-6,y:yv-4,'text-anchor':'end',class:'chx-blabel'}).textContent=l;}
       el('line',{x1:X(tb0),y1:Y(trF(tb0)),x2:X(tb1),y2:Y(trF(tb1)),stroke:'#c6c6e0','stroke-width':2,'stroke-dasharray':'6 5',opacity:.85,'clip-path':'url(#chx-plot)'});
     }
     const mmLine=(serie,color)=>{const v=(serie||[]).filter(([t])=>t>=t0v&&t<=t1v);
@@ -327,6 +338,7 @@ function buildChart(s){
       dot21:el('circle',{r:4,fill:'#e0995e',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'}),
       dot200:el('circle',{r:4,fill:'#b59bd6',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'})};
     const officiel=Math.abs(t0v-T_OFF)<1.5&&t1v>=T_MAX-0.1;
+    majWarn(officiel);
     document.getElementById('chx-rlbl').textContent=fmt(t0v)+' → '+fmt(t1v)+(officiel?' · fenêtre officielle du score':' · exploration');
     document.getElementById('chx-lgt').textContent=F?('Tendance '+(F.b>=0?'+':'')+(F.b*12*100).toFixed(1).replace('.',',')+' %/an sur la période'):'Tendance (période trop courte)';
     r0.value=t0v;r1.value=t1v;
@@ -377,7 +389,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   const bb=(a&&(a.bull||a.bear))?'<div class="bullbear"><div class="bb bb-bull"><div class="bb-h">▲ Thèse haussière</div>'+bblist(a.bull)+'</div><div class="bb bb-bear"><div class="bb-h">▼ Thèse baissière</div>'+bblist(a.bear)+'</div></div>':'';
   doc.classList.remove('on');
   doc.innerHTML='<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div></div>'+
-    '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div><div class="rs">'+s.stars+'/5</div></div></div></div>'+
+    '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div id="chartsec"></div>'+
     '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,2)+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
