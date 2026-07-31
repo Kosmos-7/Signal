@@ -1134,10 +1134,10 @@
       <div class="portfo-body">
         Longtemps, l'IA n'a connu que deux gestes : ouvrir une ligne, la fermer entièrement. Depuis la version 3.2, elle dispose de la palette complète d'un gérant — chaque geste sous ses propres garde-fous :
         <ul style="margin-top:0.6rem">
-          <li><strong>Ouvrir</strong> — acheter un titre de la watchlist (et uniquement de la watchlist : un ticker inventé par l'IA est mécaniquement rejeté). Taille selon la conviction (3 à 7 % du capital), dans la limite du cash disponible.</li>
+          <li><strong>Ouvrir</strong> — acheter un titre de la watchlist (et uniquement de la watchlist : un ticker inventé par l'IA est mécaniquement rejeté). Depuis juillet 2026, c'est l'IA qui choisit elle-même le <em>montant</em> engagé (champ <code>montant_eur</code> de sa décision) — jusqu'à la totalité du cash si l'opportunité le justifie. Le moteur borne, il ne choisit pas : jamais de cash négatif, 20 % max par ligne, 100 € minimum.</li>
           <li><strong>Renforcer</strong> — racheter du même titre : prix de revient moyen pondéré, et le compteur des 90 jours ne repart pas de zéro. Plafond strict : la ligne ne peut jamais dépasser 20 % du capital, même à conviction forte. Doctrine : renforcer uniquement sur des <em>éléments nouveaux</em> (résultats publiés, thèse confirmée par des faits) — jamais « moyenner à la baisse » une position en perte sans catalyseur, le biais d'engagement classique.</li>
           <li><strong>Alléger</strong> — vendre seulement une fraction d'une position (par exemple 50 %). Le PFU de 30 % ne s'applique qu'à la plus-value de la fraction vendue ; le prix de revient, la date et la thèse d'origine sont conservés sur le reste. Si le reliquat vaudrait moins de 100 €, la vente devient totale (anti-poussière). Usage typique : dégonfler une position qui approche des 20 % après un fort rally, sans sortir de la thèse.</li>
-          <li><strong>Rotation</strong> — vendre une position jugée moins attractive pour financer une meilleure opportunité quand le cash manque. Le moteur exécute toutes les ventes avant les achats du même run, et la règle des 5 % de liquidités est réévaluée après chaque vente. Maximum une rotation par run, comparaison sortant/entrant obligatoire dans la justification, et l'avantage attendu doit couvrir la friction (frais aller-retour + PFU sur la plus-value vendue).</li>
+          <li><strong>Rotation</strong> — vendre une position jugée moins attractive pour financer une meilleure opportunité quand le cash manque. Le moteur exécute toutes les ventes avant les achats du même run : le produit de la vente finance directement l'achat. Maximum une rotation par run, comparaison sortant/entrant obligatoire dans la justification, et l'avantage attendu doit couvrir la friction (frais aller-retour + PFU sur la plus-value vendue).</li>
           <li><strong>Fermer</strong> — vente totale, soumise à la règle des 90 jours et documentée avec la thèse d'origine.</li>
         </ul>
       </div>
@@ -1240,17 +1240,16 @@
     <div class="portfo-block">
       <div class="portfo-header">
         <div class="portfo-accent" style="background:var(--gold)"></div>
-        <div class="portfo-htitle">Concentration sectorielle graduée (plafond souple)</div>
+        <div class="portfo-htitle">Concentration sectorielle : l'IA peut être bull, mais elle l'assume</div>
       </div>
       <div class="portfo-body">
-        Pour éviter qu'un secteur ne phagocyte le portefeuille, une règle de concentration s'applique au sizing automatiquement. Initialement binaire (blocage strict dès qu'un cluster dépasse 30 % du capital), elle est devenue <strong>graduée</strong> depuis le 23 mai pour permettre des achats exceptionnels dans un secteur saturé :
+        La règle de concentration a connu trois vies. Binaire au départ (blocage strict dès qu'un cluster dépassait 30 % du capital), graduée en mai (sizing réduit automatiquement entre 30 et 65 %, blocage au-delà), elle est <strong>déclarative depuis juillet 2026</strong> : l'IA choisissant désormais elle-même ses montants, plus aucune réduction automatique ne s'applique — le pari sectoriel est autorisé, à condition d'être assumé :
         <ul style="margin-top:0.6rem">
-          <li><strong>&lt; 30 %</strong> : aucune restriction, sizing normal.</li>
-          <li><strong>30-65 %</strong> : <em>soft cap</em> — sizing réduit linéairement (à 40 % de concentration → ×0.71 ; à 50 % → ×0.43 ; à 60 % → ×0.14).</li>
-          <li><strong>Bypass conviction forte</strong> : si l'IA marque <code>conviction="forte"</code>, le sizing factor a un plancher à 0.5 — permettant un achat exceptionnel dans un cluster sursaturé avec une position de taille raisonnable.</li>
-          <li><strong>&gt; 65 %</strong> : blocage strict, aucun achat possible.</li>
+          <li><strong>&lt; 30 %</strong> : aucune restriction.</li>
+          <li><strong>30-65 %</strong> : information — la concentration du cluster est injectée dans le contexte de l'IA, qui adapte (ou pas) son sizing et doit mentionner le choix dans sa justification.</li>
+          <li><strong>&gt; 65 %</strong> : achat possible <em>uniquement</em> avec <code>conviction="forte"</code> et un pari sectoriel explicitement assumé dans la justification — sinon rejeté. C'est le seul cran de friction restant : deux tiers du portefeuille sur un seul cluster est un choix qu'on ne fait pas par inertie.</li>
         </ul>
-        Concrètement, le cluster Tech &amp; IA actuellement à 58.8 % du portefeuille est en régime <em>soft</em> avec sizing factor 0.18 — l'IA peut quand même proposer un achat tech à conviction forte (taille effective ~3.5 % du capital), mais devra le justifier solidement.
+        La philosophie du changement : les garde-fous mécaniques protègent contre les accidents (cash négatif, ligne à 40 %), pas contre les convictions. Si l'IA pense qu'un secteur mérite d'être surpondéré, elle peut le faire — publiquement, chiffres à l'appui, et le journal des ordres en garde la trace.
       </div>
     </div>
 

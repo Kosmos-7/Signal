@@ -317,18 +317,23 @@ function buildChart(s){
         el('line',{x1:X(tb0),y1:Y(trF(tb0)*Math.exp(k*F.sigma)),x2:X(tb1),y2:Y(trF(tb1)*Math.exp(k*F.sigma)),
           stroke:'#74b6df','stroke-width':1,opacity:op,'clip-path':'url(#chx-plot)'});
       // Étiquettes σ dans la MARGE droite, avec placement anti-collision : elles
-      // glissent de quelques px pour s'intercaler entre les pastilles ; si aucune
-      // place propre n'existe, l'étiquette s'efface (jamais posée sur le tracé).
+      // glissent pour s'intercaler entre les pastilles. JAMAIS supprimées (les 4
+      // repères σ doivent toujours être lisibles) : balayage large, et à défaut
+      // de place propre, la position la moins gênée est retenue.
       const placed=chipYs.map(y=>({y,h:9}));
       for(const [k,l] of [[2,'+2σ'],[1,'+1σ'],[-1,'−1σ'],[-2,'−2σ']]){
-        const yv=Y(trF(tb1)*Math.exp(k*F.sigma));
-        if(yv<MT+6||yv>H-MB-4)continue;
-        let spot=null;
-        for(const dy of [0,-6,6,-10,10]){
+        let yv=Y(trF(tb1)*Math.exp(k*F.sigma));
+        if(yv<MT-2||yv>H-MB+2)continue;
+        yv=Math.min(Math.max(yv,MT+4),H-MB-4);
+        let spot=null,best=null,bestD=-1;
+        for(const dy of [0,-4,4,-6,6,-8,8,-10,10,-12,12,-14,14,-16,16,-20,20,-24,24]){
           const cand=yv+dy;
-          if(cand<MT+6||cand>H-MB-4)continue;
-          if(placed.every(p=>Math.abs(cand-p.y)>=11)){spot=cand;break;}
+          if(cand<MT+4||cand>H-MB-4)continue;
+          const d=placed.length?Math.min(...placed.map(p=>Math.abs(cand-p.y))):1e9;
+          if(d>=11){spot=cand;break;}
+          if(d>bestD){bestD=d;best=cand;}
         }
+        if(spot==null)spot=best;
         if(spot!=null){placed.push({y:spot,h:9});
           el('text',{x:W-MR+5,y:spot+3,class:'chx-blabel'}).textContent=l;}}
       el('line',{x1:X(tb0),y1:Y(trF(tb0)),x2:X(tb1),y2:Y(trF(tb1)),stroke:'#c6c6e0','stroke-width':2,'stroke-dasharray':'6 5',opacity:.85,'clip-path':'url(#chx-plot)'});

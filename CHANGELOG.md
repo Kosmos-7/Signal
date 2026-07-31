@@ -5,6 +5,42 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.4.0] — 2026-07-31
+
+### L'agent dimensionne ses achats — règles assouplies, prose fiabilisée
+
+Déclencheur : l'achat SPGI du 31/07 annonçait « 1 titre ~env. 400-500€ » dans sa
+justification alors que le moteur exécutait 3 titres pour 1 078 € — le sizing était
+une formule mécanique (conviction → % du capital) que l'agent ne connaissait pas,
+et sa prose inventait des chiffres. Le plancher de liquidités (5 %) affiché comme
+respecté était en réalité franchi (1,5 % post-trade).
+
+- **Sizing par l'agent (`montant_eur`)** : chaque décision ACHAT porte désormais le
+  montant en euros choisi par l'agent lui-même — nouvelle ligne comme renforcement.
+  Le moteur borne mais ne choisit plus : cash jamais négatif, 20 % max par ligne
+  renforts compris (R2), 100 € minimum (anti-poussière). Fallback conviction
+  (7/4/2 %) si le champ manque. Le montant visé est journalisé dans l'ordre
+  (`montant_vise_eur`) pour comparer demande/exécution.
+- **Discipline de justification** : interdiction explicite dans le prompt d'annoncer
+  un nombre de titres ou un prix unitaire estimé (l'agent ne les connaît pas —
+  quantité et prix d'exécution sont calculés par le moteur) ; il cite à la place le
+  montant engagé et son poids (« j'engage ~1 200 € soit 5 % du capital »).
+- **R1 concentration assouplie** : plus aucune réduction automatique de taille entre
+  30 et 65 % (information injectée dans le contexte, l'agent arbitre). Au-delà de
+  65 %, l'achat reste possible avec `conviction="forte"` et un pari sectoriel
+  explicitement assumé — l'agent peut être bull sur un secteur, publiquement.
+- **R3 plancher de liquidités supprimé** : l'agent peut investir jusqu'à 100 % du
+  cash si l'opportunité le justifie (descendre sous ~5 % doit être motivé dans la
+  justification). Seul garde-fou dur conservé : les liquidités ne peuvent jamais
+  devenir négatives.
+- **Plus-value latente en €** : affichée sur chaque ligne du portefeuille (site),
+  recalculée quotidiennement, injectée dans le contexte de l'agent, et stockée dans
+  `positions[].plus_value_latente_eur`.
+- **Fiche watchlist** : les 4 repères σ de la marge droite ne disparaissent plus
+  quand les pastilles de prix occupent la place (placement anti-collision garanti).
+- Tests : 14 scénarios moteur (all-in, caps R2, cluster forte/modérée, fallback,
+  montant invalide, renforcement, anti-poussière, PV latente) — 14/14.
+
 ## [3.3.0] — 2026-07-28
 
 ### Canal de régression interactif + décote vs tendance sur les fiches

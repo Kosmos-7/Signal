@@ -267,6 +267,8 @@ def maj_position(pos, eur_usd, eur_gbp=0.86):
         pos["performance"] = round(
             (pos["valeur_actuelle"] - pos["montant_investi"]) / pos["montant_investi"] * 100, 2
         )
+        # Plus-value latente en € (avant PFU) — affichée sur chaque ligne du site
+        pos["plus_value_latente_eur"] = round(pos["valeur_actuelle"] - pos["montant_investi"], 2)
     return True
 
 def market_status(now_utc=None):
@@ -544,13 +546,17 @@ def calculer_regles_auto(portfolio):
     Règles mécaniques — s'appliquent AVANT Claude et dans executer_decisions().
     Basées sur la valeur du portfolio, pas sur le comptage arbitraire de titres.
 
-    R1 : Concentration sectorielle GRADUÉE (passage du binaire au soft penalty)
+    R1 : Concentration sectorielle — INFORMATIVE puis DÉCLARATIVE (assoupli 2026-07)
          - < 30%               : aucune restriction
-         - 30-65%              : sizing réduit proportionnellement (factor 1.0 → 0.1)
-                                 Forte conviction bypasse à 50% minimum.
-         - > 65%               : blocage strict (concentration excessive)
-    R2 : 1 position > 20% du capital → renforcement bloqué
-    R3 : Liquidités < 5% du capital → achats bloqués
+         - 30-65%              : information — l'agent size lui-même en connaissance
+                                 de cause (plus de réduction automatique)
+         - > 65%               : achat possible UNIQUEMENT avec conviction='forte'
+                                 (l'agent peut être bull sur un secteur, mais il
+                                 doit l'assumer explicitement)
+    R2 : 1 position > 20% du capital → renforcement bloqué (inchangé, hard cap)
+    R3 : Liquidités faibles — INFORMATIF (assoupli 2026-07) : plus aucun blocage,
+         l'agent peut investir 100% du cash si pertinent. Seul garde-fou dur :
+         le cash ne peut jamais devenir négatif (vérifié à chaque ordre).
     """
     positions  = portfolio.get("positions", [])
     liquidites = portfolio.get("liquidites", CAPITAL_INITIAL)
@@ -561,9 +567,8 @@ def calculer_regles_auto(portfolio):
         return regles
 
     # R1 — Concentration par cluster sectoriel (regroupe les secteurs corrélés)
-    # Soft penalty graduée : informationnelle si 30-65%, blocage strict si >65%.
-    # Le sizing factor effectif est calculé dans executer_decisions() à partir
-    # du pct_concentration exposé ici.
+    # Assoupli 2026-07 : plus de sizing réduit automatique. 30-65% = information
+    # (l'agent size lui-même) ; >65% = conviction forte exigée (pari sectoriel assumé).
     valeur_par_cluster = {}
     for p in positions:
         s = p.get("sector", "—")
@@ -573,32 +578,22 @@ def calculer_regles_auto(portfolio):
     for cl, val in valeur_par_cluster.items():
         pct = val / capital * 100
         if pct > 65:
-            # Blocage strict — concentration excessive
             regles.append({
                 "type":         "concentration_sectorielle",
                 "secteur":      cl,
                 "pct":          round(pct, 1),
-                "regime":       "strict",
-                "message":      f"Cluster {cl} : {pct:.0f}% > 65% — concentration excessive, achats bloqués",
-                "bloque":       True,
+                "regime":       "forte_requise",
+                "message":      f"Cluster {cl} : {pct:.0f}% > 65% — achat possible UNIQUEMENT avec conviction='forte' et un pari sectoriel explicitement assumé dans `raison`",
+                "bloque":       False,  # bloqué seulement si conviction ≠ forte (vérifié à l'exécution)
             })
         elif pct > 30:
-            # Soft penalty : sizing réduit progressivement, bypass partiel si conviction forte
-            # factor = clip(1 - (pct-30)/35, 0.1, 1.0)
-            #   → 30% : 1.00 (intact)
-            #   → 40% : 0.71
-            #   → 50% : 0.43
-            #   → 60% : 0.14
-            #   → 65% : 0.10 (plancher)
-            factor = max(0.1, 1.0 - (pct - 30) / 35.0)
             regles.append({
                 "type":         "concentration_sectorielle",
                 "secteur":      cl,
                 "pct":          round(pct, 1),
-                "regime":       "soft",
-                "sizing_factor": round(factor, 2),
-                "message":      f"Cluster {cl} : {pct:.0f}% > 30% — sizing réduit ×{factor:.2f} (achats possibles avec conviction forte ou taille réduite)",
-                "bloque":       False,  # n'empêche pas l'achat, juste le sizing
+                "regime":       "info",
+                "message":      f"Cluster {cl} : {pct:.0f}% du capital — concentration à intégrer dans ton sizing (aucune réduction automatique, c'est toi qui arbitres)",
+                "bloque":       False,
             })
 
     # R2 — Position individuelle > 20% du capital (déjà en portefeuille)
@@ -612,13 +607,16 @@ def calculer_regles_auto(portfolio):
                 "bloque":  True,
             })
 
-    # R3 — Liquidités < 5% du capital
+    # R3 — Liquidités faibles : INFORMATIF depuis 2026-07 (plus aucun blocage).
+    # L'agent peut investir 100% du cash ; on surface juste l'état pour la
+    # transparence (prompt + site) et pour qu'il motive un cash quasi nul.
     pct_liq = liquidites / capital * 100
     if pct_liq < 5:
         regles.append({
             "type":    "liquidites_faibles",
-            "message": f"Liquidités {pct_liq:.1f}% < 5% du capital ({liquidites:.0f}€) — achats bloqués",
-            "bloque":  True,
+            "regime":  "info",
+            "message": f"Liquidités {pct_liq:.1f}% du capital ({liquidites:.0f}€) — information : aucun blocage, mais tout nouvel achat devra être financé par le cash restant, une vente ou une rotation",
+            "bloque":  False,
         })
 
     return regles
@@ -817,11 +815,12 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
         qte = max(p["quantite"], 1)
         px_achat_eur = round(p.get("montant_investi", p["prix_achat"]) / qte, 2)
         px_actuel_eur = round(p.get("valeur_actuelle", 0) / qte, 2)
+        pv_latente = p.get("valeur_actuelle", 0) - p.get("montant_investi", 0)
         pos_lines.append(
             f"  - {p['ticker']} ({p['nom']}) : {p['quantite']} titres, "
             f"acheté à {px_achat_eur}€/titre ({p.get('montant_investi',0):.0f}€ investis), "
             f"actuel {px_actuel_eur}€/titre ({p.get('valeur_actuelle',0):.0f}€), "
-            f"perf {p.get('performance', 0):+.1f}% (€), {jours}j détenus, "
+            f"perf {p.get('performance', 0):+.1f}% (€) soit {pv_latente:+.0f}€ latents, {jours}j détenus, "
             f"score watchlist actuel: {p.get('score_entree', '?')}/100{etat_str}\n"
             f"    → Thèse d'achat : {raison_achat[:200]}{delta_str}"
         )
@@ -930,9 +929,9 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
     regles_section = ""
     if regles_auto:
         def _regle_icon(r):
-            # strict blocage : 🚫 ; soft cap : ⚠️ ; le reste : 🚫
-            if r.get("type") == "concentration_sectorielle" and r.get("regime") == "soft":
-                return "⚠️"
+            # info : ℹ️ ; conviction forte exigée : ⚠️ ; blocage dur : 🚫
+            if r.get("regime") == "info" or not r.get("bloque", False):
+                return "⚠️" if r.get("regime") == "forte_requise" else "ℹ️"
             return "🚫"
         regles_lignes = "\n".join(
             f"  {_regle_icon(r)} [{r.get('type','?')}] {r.get('message','')}" for r in regles_auto
@@ -940,10 +939,12 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
         regles_section = (
             "\n## ⚠ RÈGLES MÉCANIQUES ACTIVES — INTÈGRE-LES DANS TES DÉCISIONS\n"
             "Ces règles s'appliquent AUTOMATIQUEMENT après ton output JSON.\n"
-            "Deux régimes possibles :\n"
-            "  🚫 BLOCAGE STRICT : la décision sera REJETÉE et n'apparaîtra PAS dans le journal.\n"
-            "  ⚠️ SOFT CAP : la décision PASSE mais avec un sizing réduit automatiquement (proportionnel\n"
-            "     au dépassement). Avec conviction='forte' le sizing est plancher à 50% du normal.\n"
+            "Trois régimes possibles :\n"
+            "  🚫 BLOCAGE DUR : la décision sera REJETÉE et n'apparaîtra PAS dans le journal.\n"
+            "  ⚠️ CONVICTION FORTE EXIGÉE : la décision passe UNIQUEMENT avec conviction='forte'\n"
+            "     et un pari explicitement assumé dans `raison` — sinon rejetée.\n"
+            "  ℹ️ INFORMATION : aucune contrainte mécanique — tu arbitres toi-même (et tu adaptes\n"
+            "     ton `montant_eur` en connaissance de cause).\n"
             f"{regles_lignes}\n"
             "\n"
             "⏳ RAPPEL VENTES : R01 (Règles non négociables ci-dessous) bloque toute vente sur position\n"
@@ -951,22 +952,21 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
             "signal fondamental majeur documenté (résultats, scandale, M&A) — pas juste \"perte\" ou\n"
             "\"Death Cross\". Ne propose pas de vente sur position récente sans ce niveau de justification.\n"
             "\n"
-            "🌡 CONCENTRATION SECTORIELLE (R01 graduée depuis fix du 23/05) :\n"
-            "  - < 30%   : pas de restriction, sizing normal\n"
-            "  - 30-65%  : soft cap, sizing réduit proportionnellement (à 40%→×0.71, 50%→×0.43, 60%→×0.14)\n"
-            "             → tu PEUX acheter un titre du cluster sursaturé si tu mets conviction='forte'\n"
-            "               (plancher de sizing à 50% du normal) ET justifies l'opportunité exceptionnelle\n"
-            "  - > 65%   : blocage strict (concentration excessive)\n"
+            "🌡 CONCENTRATION SECTORIELLE (assouplie 2026-07 — tu peux être bull sur un secteur) :\n"
+            "  - < 30%   : aucune restriction\n"
+            "  - 30-65%  : information seulement — plus AUCUNE réduction automatique de taille.\n"
+            "             Tu peux charger un cluster si ta thèse le justifie ; dis-le dans `raison`\n"
+            "             et assume la corrélation accrue du portefeuille.\n"
+            "  - > 65%   : autorisé UNIQUEMENT avec conviction='forte' + pari sectoriel explicitement\n"
+            "             assumé dans `raison` (sinon l'achat est rejeté). C'est le seul cran de\n"
+            "             friction restant : un portefeuille aux deux tiers sur un seul cluster est\n"
+            "             un choix qu'on ne fait pas par inertie.\n"
             "\n"
-            "📝 COHÉRENCE NEWSLETTER : si tu envisages réellement une action que les règles vont bloquer\n"
-            "(p. ex. tu trouves PANW excellent mais R01 cluster Tech&IA est saturée), tu peux la\n"
-            "mentionner naturellement dans `analyse_macro` comme une frustration assumée — c'est de la\n"
-            "transparence éditoriale. Tournure type : 'PANW avait le meilleur setup du tableau cette\n"
-            "semaine — Golden Cross Day-0, pente MM21 à +6.6% — mais la règle R01 plafonne mon cluster\n"
-            "Tech&IA à 30% et nous sommes à 62%. Frustrant mais c'est la discipline.' Ne pas en\n"
-            "soumettre l'action dans `decisions` (elle sera bloquée et créera une dissonance avec le\n"
-            "journal). L'idée : le lecteur de la newsletter comprend ce que tu aurais voulu faire ET\n"
-            "pourquoi tu ne l'as pas fait, sans qu'on ait besoin d'un bandeau d'alerte sur le site.\n"
+            "📝 COHÉRENCE NEWSLETTER : si tu envisages réellement une action que les règles vont bloquer,\n"
+            "tu peux la mentionner naturellement dans `analyse_macro` comme une frustration assumée —\n"
+            "c'est de la transparence éditoriale. Le lecteur comprend ce que tu aurais voulu faire ET\n"
+            "pourquoi tu ne l'as pas fait. Ne soumets pas l'action dans `decisions` si tu sais qu'elle\n"
+            "sera bloquée (dissonance avec le journal).\n"
         )
 
     # Injection du skill portfolio-analyst — single source of truth
@@ -1000,7 +1000,7 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 9. **Heures de marché** : tes décisions sont enregistrées au moment du run, mais l'exécution réelle attend l'ouverture du marché du titre. Si tu décides un ACHAT NVDA (US) à 8h UTC un lundi, l'ordre attendra 14h30 UTC (+6h30) pour s'exécuter — le prix peut bouger entre temps. Tiens-en compte : ne pas paniquer sur des données pré-ouverture, et si tous les marchés concernés sont fermés (weekend, jour férié), privilégier l'attente de la prochaine ouverture sauf urgence (stop-loss catastrophe).
 10. **Friction fiscale (PFU 30%)** : Signal est sur compte-titres ordinaire français. Chaque VENTE en plus-value paye 30% de PFU sur le gain. Conséquence : une vente "neutre" pour réinvestir ailleurs PERD 30% du gain réalisé. Avant de proposer une vente sur position en gain, vérifie que l'alternative a un avantage attendu net suffisant pour couvrir cette friction (règle empirique : ne pas vendre un +20% pour acheter un titre dont l'edge espéré est < 10%). Les positions en perte ne sont PAS pénalisées fiscalement et la perte devient même un crédit d'impôt utilisable 10 ans. Les plus-values LATENTES (positions non vendues) ne sont JAMAIS imposées — le buy & hold long terme est structurellement avantagé.
 11. **VIX = indicateur contextuel non scoré** : le VIX est désormais affiché dans la section CONTEXTE DE MARCHÉ comme indicateur d'ambiance macro, MAIS il n'influence plus mécaniquement le scoring du screener (choix de neutralité — on n'applique aucune mécanique de régime de marché au scoring). Tu es libre de t'en servir comme contexte qualitatif dans `analyse_macro` ("VIX à 22 cette semaine, vigilance modérée — j'ai privilégié les positions qualité"), mais ne traite pas le VIX comme une règle d'enforcement. Les scores du screener sont ce qu'ils sont, indépendamment du VIX.
-12. **Rotation autorisée quand le cash manque** : si une opportunité watchlist te semble NETTEMENT supérieure à une position détenue et que les liquidités ne permettent pas de l'acheter, tu peux proposer une rotation — une VENTE + un ACHAT dans le même run. Le moteur exécute toutes les ventes AVANT les achats : le produit de la vente (net de frais et de PFU) finance l'achat, et la règle des liquidités (5%) est réévaluée après la vente. Conditions STRICTES : (a) la position vendue respecte la Règle 01 — 90 jours de détention, ou signal fondamental documenté avec conviction forte ; (b) dans les DEUX champs `raison`, nomme explicitement la rotation et compare la position sortante au titre entrant (scores screener, thèse, potentiel) : "Rotation : je vends X (score 62, thèse affaiblie car …) pour financer Y (score 88, …)" ; (c) applique la Règle 10 — l'avantage attendu du titre entrant doit dépasser la friction totale (frais aller-retour + 30% de PFU sur la plus-value de la vente) ; (d) maximum UNE rotation par run — c'est un arbitrage d'exception, pas un outil de churn : dans le doute, conserver. Précision : cette limite ne concerne QUE les rotations (vente destinée à financer un achat). Les ventes motivées par leur propre thèse — thèse d'achat invalidée, stop-loss, dégradation fondamentale — ne sont pas des rotations et ne sont pas limitées en nombre : elles restent régies par les Règles 01, 06 et 10. Tu peux donc, dans un même run, vendre une position sur thèse cassée ET opérer une rotation.
+12. **Rotation autorisée quand le cash manque** : si une opportunité watchlist te semble NETTEMENT supérieure à une position détenue et que les liquidités ne permettent pas de l'acheter, tu peux proposer une rotation — une VENTE + un ACHAT dans le même run. Le moteur exécute toutes les ventes AVANT les achats : le produit de la vente (net de frais et de PFU) finance directement l'achat du même run. Conditions STRICTES : (a) la position vendue respecte la Règle 01 — 90 jours de détention, ou signal fondamental documenté avec conviction forte ; (b) dans les DEUX champs `raison`, nomme explicitement la rotation et compare la position sortante au titre entrant (scores screener, thèse, potentiel) : "Rotation : je vends X (score 62, thèse affaiblie car …) pour financer Y (score 88, …)" ; (c) applique la Règle 10 — l'avantage attendu du titre entrant doit dépasser la friction totale (frais aller-retour + 30% de PFU sur la plus-value de la vente) ; (d) maximum UNE rotation par run — c'est un arbitrage d'exception, pas un outil de churn : dans le doute, conserver. Précision : cette limite ne concerne QUE les rotations (vente destinée à financer un achat). Les ventes motivées par leur propre thèse — thèse d'achat invalidée, stop-loss, dégradation fondamentale — ne sont pas des rotations et ne sont pas limitées en nombre : elles restent régies par les Règles 01, 06 et 10. Tu peux donc, dans un même run, vendre une position sur thèse cassée ET opérer une rotation.
 13. **Réallocation (renforcement / allègement)** : tu peux ajuster la TAILLE d'une ligne existante, pas seulement ouvrir/fermer.
    - RENFORCER : une décision ACHAT sur un titre déjà détenu renforce la ligne — prix de revient moyen pondéré, la date de détention d'origine est conservée (le compteur des 90 jours ne repart pas). Plafond mécanique : la ligne ne peut jamais dépasser 20% du capital (Règle 02, appliquée en code). Renforce UNIQUEMENT sur des éléments NOUVEAUX (résultats publiés, thèse confirmée par des faits, décote accrue avec fonda intacts) — jamais pour « moyenner à la baisse » une position en perte sans catalyseur documenté (biais d'engagement classique).
    - ALLÉGER : une décision VENTE avec le champ optionnel `"allegement_pct"` (nombre entre 1 et 99) ne vend que ce pourcentage de la position, arrondi au titre entier. Le PFU ne s'applique qu'à la plus-value de la fraction vendue ; le PRU et la date d'origine de la ligne sont conservés. Si le reliquat vaudrait moins de 100€, la vente devient totale (anti-poussière). Un allègement reste une VENTE : Règle 01 (90j / conviction forte) et friction fiscale (Règle 10) s'appliquent pleinement. Usage typique : dégonfler une position qui approche les 20% après un fort rally, sans sortir de la thèse.
@@ -1059,6 +1059,15 @@ Pour chaque décision, explique ton raisonnement en tenant compte :
 - Des règles non négociables
 - Des erreurs passées (positions perdantes, biais identifiés)
 
+💶 **SIZING — C'EST TOI QUI DIMENSIONNES CHAQUE ACHAT** :
+- Chaque décision ACHAT (nouvelle ligne OU renforcement) DOIT inclure `"montant_eur"` : le montant en euros que tu engages. C'est TA décision d'allocation — plus aucune taille n'est imposée par le moteur.
+- Bornes mécaniques (le moteur borne, il ne choisit pas) : maximum {liquidites:.0f}€ (les liquidités disponibles — le cash ne peut JAMAIS devenir négatif), maximum 20% du capital par ligne renforts compris (R2 = {capital * POIDS_MAX:.0f}€), minimum 100€ (anti-poussière).
+- Mécanique d'exécution : ton montant est converti en nombre ENTIER de titres (arrondi à l'inférieur) au prix du marché à l'exécution. Le montant réellement investi sera donc ≤ ton `montant_eur`, et la quantité finale dépend du prix d'exécution — tu ne les connais pas à l'avance.
+- Il n'y a PLUS de plancher de liquidités : tu peux engager la totalité du cash si l'opportunité le justifie. Contrepartie à peser : être investi à 100% = zéro optionalité (toute nouvelle entrée exigera une vente ou une rotation). Si tu choisis de descendre sous ~5% de liquidités, explique ce choix dans `raison`.
+- Repères indicatifs — PAS des contraintes (mêmes bandes que la table de sizing du skill) : conviction forte ≈ 5-8% du capital ({capital * 0.05:.0f}-{capital * 0.08:.0f}€), modérée ≈ 3-5% ({capital * 0.03:.0f}-{capital * 0.05:.0f}€), faible ≈ 1-2%. Écarte-t'en librement quand ta thèse le justifie — mais dis pourquoi.
+- Si `montant_eur` est absent, le moteur retombe sur un sizing par défaut selon la conviction — évite : ce serait déléguer ton jugement à une heuristique.
+- ⚠️ DISCIPLINE `raison` : cite le montant que tu engages et son poids (« j'engage ~1 200 € soit 5% du capital »), JAMAIS d'estimation de prix unitaire ou de nombre de titres (« 1 titre ~400-500€ » est INTERDIT : tu ne connais ni le prix d'exécution ni la quantité finale — c'est le moteur qui les calcule, et l'écart entre ton texte et l'ordre publié détruit la crédibilité du journal).
+
 🔍 **SURFACE TON RAISONNEMENT MÉTHODOLOGIQUE** (transparence pour les lecteurs du site) :
 - Si un titre watchlist a un `signal_dynamics_warning` non-vide qui a influencé ta décision (achat, vente, ou conservation), **cite le warning** dans `raison` et explique comment tu l'as croisé avec d'autres signaux.
 - Si tu appliques R7 (signal en transition) ou R8 (cross-validation analystes/cours), **mentionne-le explicitement** dans `raison` (ex : "R8 déclenchée : score 42 + 11 buy + cours -38% sur 1 an, suspect données screener — j'ai croisé avec dernier trimestriel publié").
@@ -1094,6 +1103,7 @@ Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, selon ce format 
       "raison": "Explication détaillée en 2-3 phrases",
       "conviction": "forte" | "modérée" | "faible",
       "score_watchlist": 0,
+      "montant_eur": 1200,
       "allegement_pct": 50
     }}
   ],
@@ -1105,6 +1115,8 @@ Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, selon ce format 
 }}
 
 Pour `news_resumes_fr` : un résumé français concis (1 phrase, 15-25 mots max, factuel, neutre) pour CHAQUE news listée plus haut, dans l'ordre des indices [0], [1], etc. Le nombre exact de résumés DOIT correspondre au nombre de news fournies (variable selon le run — typiquement 4 à 6, mais peut être 0). Si une news est trop technique ou marginale, garde-la mais résume sa pertinence pour les marchés. Si aucune news n'a été fournie, retourne un tableau vide [].
+
+`montant_eur` est OBLIGATOIRE pour chaque ACHAT (cf. section SIZING) : le montant en euros que tu engages, borné mécaniquement par les liquidités, R2 (20%/ligne) et le minimum de 100€. Ignoré pour VENTE et CONSERVER.
 
 `allegement_pct` est OPTIONNEL et ne concerne que les VENTES partielles (Règle 13) : omets-le pour une vente totale ou un achat. Un ACHAT sur un titre déjà détenu est automatiquement traité comme un renforcement.
 
@@ -1408,21 +1420,18 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
 
             # ── Règles mécaniques (enforcement — indépendant du raisonnement Claude)
             conviction    = dec.get("conviction", "modérée")
-            cluster_sizing_factor = 1.0  # facteur multiplicatif appliqué au sizing (soft cap R01)
             bloque_motif = None  # capture le motif de blocage pour log + transparence
-            # R3 — Liquidités < 5% : réévaluée DYNAMIQUEMENT sur l'état courant du run,
-            # pas sur l'état pré-run figé dans regles_auto. Indispensable aux rotations :
-            # les ventes (exécutées avant les achats) ont pu reconstituer le cash — et
-            # symétriquement, des achats successifs peuvent faire passer sous 5% en cours
-            # de run, ce que la règle statique ne voyait pas non plus.
+            # R3 assouplie (2026-07) : plus AUCUN blocage sur liquidités faibles.
+            # L'agent peut investir 100% du cash s'il le juge pertinent — le seul
+            # garde-fou dur restant est « cash jamais négatif » (vérifié plus bas
+            # sur chaque ordre). On log l'information pour la transparence.
             liquidites_pct = liquidites / capital * 100 if capital > 0 else 0
             if liquidites_pct < 5:
-                print(f"  🚫 ACHAT {ticker} bloqué — liquidités {liquidites_pct:.1f}% < 5% (R3)")
-                bloque_motif = ("R03", f"Liquidités {liquidites_pct:.1f}% du capital ({liquidites:.0f}€) < 5% — achats bloqués jusqu'à reconstitution de la marge de manœuvre")
-            elif regles_auto:
-                # R1 — Concentration sectorielle GRADUÉE :
-                #   - regime=strict  → blocage total
-                #   - regime=soft    → sizing réduit, bypass partiel si conviction forte
+                print(f"  ℹ️  ACHAT {ticker} — liquidités {liquidites_pct:.1f}% < 5% (information : plus de plancher imposé)")
+            if regles_auto:
+                # R1 — Concentration sectorielle (assoupli 2026-07) :
+                #   - regime=info           → aucune contrainte, l'agent size en connaissance
+                #   - regime=forte_requise  → achat >65% possible SEULEMENT avec conviction forte
                 stock_tmp = stock_map.get(ticker, {})
                 sect_tick = stock_tmp.get("sector", "")
                 cluster_tick = cluster_for(sect_tick) if sect_tick else ""
@@ -1432,17 +1441,15 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                     None
                 )
                 if cluster_rule:
-                    regime = cluster_rule.get("regime", "strict")
+                    regime = cluster_rule.get("regime", "info")
                     pct = cluster_rule.get("pct", "?")
-                    if regime == "strict":
-                        print(f"  🚫 ACHAT {ticker} bloqué — cluster {cluster_tick} à {pct}% > 65% (R1 strict)")
-                        bloque_motif = ("R01", f"Cluster {cluster_tick} à {pct}% > 65% — concentration excessive, achat refusé (R1 blocage strict)")
+                    if regime == "forte_requise" and conviction != "forte":
+                        print(f"  🚫 ACHAT {ticker} bloqué — cluster {cluster_tick} à {pct}% > 65% et conviction '{conviction}' (R1 : conviction forte exigée)")
+                        bloque_motif = ("R01", f"Cluster {cluster_tick} à {pct}% > 65% — un pari sectoriel de cette ampleur exige conviction='forte' explicitement assumée (reçu : '{conviction}')")
+                    elif regime == "forte_requise":
+                        print(f"  ⚠️  ACHAT {ticker} — cluster {cluster_tick} à {pct}% > 65%, autorisé (conviction forte, pari sectoriel assumé)")
                     else:
-                        # Soft : appliquer le sizing_factor
-                        base_factor = cluster_rule.get("sizing_factor", 0.5)
-                        # Conviction forte bypasse partiellement : plancher à 0.5
-                        cluster_sizing_factor = max(base_factor, 0.5) if conviction == "forte" else base_factor
-                        print(f"  ⚠️  ACHAT {ticker} — R1 soft (cluster {cluster_tick} à {pct}%) : sizing × {cluster_sizing_factor:.2f}")
+                        print(f"  ℹ️  ACHAT {ticker} — cluster {cluster_tick} à {pct}% (information, sizing libre)")
             if bloque_motif:
                 rule_id, expl = bloque_motif
                 decisions_bloquees.append({
@@ -1464,36 +1471,41 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 })
                 continue
 
-            # Allocation dynamique : slots calculés sur l'ensemble des achats décidés (order-independent)
-            nb_open       = len(positions)
-            nb_achats_total = sum(1 for d2 in decisions if d2.get("action","").upper() == "ACHAT")
-            slots_restants  = max(1, MAX_POSITIONS - nb_open - nb_achats_total)
-            equal_weight   = liquidites / slots_restants
+            # ── SIZING : c'est l'AGENT qui dimensionne (montant_eur), le moteur borne ──
+            # Bornes dures : cash disponible (jamais négatif), R2 (20% du capital par
+            # ligne, renforts compris), anti-poussière 100€. Fallback si montant_eur
+            # absent/invalide : heuristique héritée par conviction (7/5/3% du capital).
+            montant_vise = dec.get("montant_eur")
+            try:
+                montant_vise = float(montant_vise) if montant_vise is not None else None
+                if montant_vise is not None and montant_vise <= 0:
+                    montant_vise = None
+            except (TypeError, ValueError):
+                montant_vise = None
 
-            if conviction == "forte":
-                poids_cible = 0.07
-            elif conviction == "modérée":
-                poids_cible = 0.05
+            # Plafond R2 : marge restante sous 20% pour la ligne (nouvelle ou renforcée)
+            plafond_r2 = headroom_r2 if pos_existante is not None else capital * POIDS_MAX
+
+            if montant_vise is not None:
+                budget = min(montant_vise, plafond_r2, liquidites)
+                caps = []
+                if budget < montant_vise - 0.01:
+                    if plafond_r2 <= liquidites and plafond_r2 < montant_vise:
+                        caps.append(f"R2 plafonne à {plafond_r2:.0f}€")
+                    if liquidites < montant_vise:
+                        caps.append(f"liquidités plafonnent à {liquidites:.0f}€")
+                    print(f"  ✂️  ACHAT {ticker} — montant visé {montant_vise:.0f}€ borné ({' + '.join(caps)})")
             else:
-                poids_cible = 0.03
+                poids_cible = {"forte": 0.07, "modérée": 0.04, "faible": 0.02}.get(conviction, 0.04)
+                budget = min(capital * poids_cible, plafond_r2, liquidites)
+                print(f"  ℹ️  ACHAT {ticker} — montant_eur absent, sizing par défaut ({poids_cible*100:.0f}% du capital, conviction {conviction})")
 
-            # Application du soft cap R01 (cluster_sizing_factor ≤ 1.0)
-            poids_cible *= cluster_sizing_factor
-
-            if pos_existante is not None:
-                # Renforcement : la logique de slots (equal_weight) ne s'applique pas —
-                # elle répartit le cash entre lignes À OUVRIR, or celle-ci existe déjà.
-                # Budget = cible de conviction, plafonné par la marge restante sous R2
-                # (position + renfort ne franchissent jamais 20% du capital) et le cash.
-                budget = min(capital * poids_cible, headroom_r2, liquidites)
-            else:
-                budget = min(capital * poids_cible, capital * POIDS_MAX, equal_weight, liquidites)
-            if budget < 50:
-                print(f"  💰 ACHAT {ticker} — liquidités insuffisantes ({liquidites:.0f}€)")
+            if budget < 100:
+                print(f"  💰 ACHAT {ticker} bloqué — budget {budget:.0f}€ < 100€ (anti-poussière)")
                 decisions_bloquees.append({
                     "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
                     "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
-                    "bloque_par": "budget_insuffisant", "explication_blocage": f"Budget calculé {budget:.0f}€ < seuil 50€ — liquidités {liquidites:.0f}€ trop faibles pour cet achat",
+                    "bloque_par": "budget_insuffisant", "explication_blocage": f"Budget exécutable {budget:.0f}€ < 100€ (anti-poussière) — montant visé {montant_vise:.0f}€, liquidités {liquidites:.0f}€, marge R2 {plafond_r2:.0f}€" if montant_vise is not None else f"Budget exécutable {budget:.0f}€ < 100€ (anti-poussière) — liquidités {liquidites:.0f}€ insuffisantes",
                 })
                 continue
 
@@ -1592,6 +1604,7 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 "currency":  currency,
                 "montant":   montant_eur,       # en EUR (= cash débité = brut + frais)
                 "montant_brut_eur": brut_eur,   # brut sans les frais (pour transparence)
+                "montant_vise_eur": montant_vise,  # sizing demandé par l'agent (None = fallback conviction)
                 "frais_achat_eur": frais_achat, # journalisation
                 "raison":    raison,
                 "conviction": conviction,
