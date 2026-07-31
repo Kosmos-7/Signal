@@ -5,6 +5,35 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.3.0] — 2026-07-28
+
+### Canal de régression interactif + décote vs tendance sur les fiches
+
+- **Graphique de fiche (nouveau)** : chaque fiche de la watchlist ouvre désormais sur
+  le cours en échelle log avec sa droite de régression long terme et son canal ±1σ/±2σ,
+  MM21/MM200, pastilles de valeurs, survol (réticule, 4 points, infobulle) compatible
+  tactile. Périodes : fenêtre officielle (10/20/25 ans selon profil) + 20 ans si
+  l'historique le permet + MAX, et curseur libre début/fin. Le canal est **re-fitté sur
+  la période affichée** (exploration, méthode identique au screener — rééchantillonnage
+  mensuel uniforme, fit sur l'axe du temps, holdout 1 mois) ; la légende distingue
+  toujours la vue « fenêtre officielle du score » de l'exploration.
+- **Décote/surcote vs tendance** : écart du cours au prix de tendance, en % de la valeur
+  de tendance (convention Graham). Nommage délibérément honnête — PAS « marge de
+  sécurité » : la référence est une trajectoire historique, pas une valeur intrinsèque
+  (section pédagogique dédiée dans Apprendre + lexique). Avertissement automatique
+  au-delà de 2σ : value trap (décote) / rally chase (surcote).
+- **Objectif consensus analystes** : affiché en potentiel (%), à titre indicatif
+  (correction pence→livres pour les cotations LSE — famille de bug ×100 connue).
+- **charts.json** : payload graphique du top 30 généré par le screener depuis les
+  données déjà téléchargées (zéro appel API supplémentaire) — échantillonnage hebdo
+  (2 ans) + mensuel (au-delà), dernier point à la date réelle de cotation, écriture
+  atomique `allow_nan=False`, fail-soft par titre. Les nouveaux champs du breakdown
+  (`prix_tendance`, `decote_pct`, `regression_sigma`, `target_*`) sont hors signature
+  éditoriale (pas de régénération des fiches Claude).
+- **Agent** : décote/surcote et consensus injectés dans les prompts (passes 1 et 2)
+  avec la règle 14 — « information, jamais un signal seul » (value trap / rally chase /
+  biais optimiste du consensus).
+
 ## [3.2.1] — 2026-07-28
 
 ### Hotfix : watchlist 100 % EU publiée le 27/07 (barre Yahoo vide en pré-ouverture US)
