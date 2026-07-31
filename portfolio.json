@@ -2,22 +2,22 @@
   "updated_at": "2026-07-31",
   "week": "Sem. 31 · 2026",
   "capital_initial": 20000.0,
-  "capital_actuel": 23467.25,
-  "performance": 17.34,
-  "performance_brute": 17.78,
-  "total_frais_payes": 29.3,
+  "capital_actuel": 23481.6,
+  "performance": 17.41,
+  "performance_brute": 17.85,
+  "total_frais_payes": 30.11,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 861.36,
-  "capital_post_liquidation": 21945.66,
-  "performance_post_liquidation": 9.73,
-  "frais_si_liquidation": 16.53,
-  "pfu_latent_si_liquidation": 1505.06,
-  "pertes_si_liquidation": 468.1,
-  "last_known_vix": 16.9,
+  "capital_post_liquidation": 21954.68,
+  "performance_post_liquidation": 9.77,
+  "frais_si_liquidation": 17.35,
+  "pfu_latent_si_liquidation": 1509.57,
+  "pertes_si_liquidation": 469.59,
+  "last_known_vix": 16.76,
   "last_known_vix_source": "live",
   "benchmark_cac40": 3.84,
   "benchmark_msci": 11.65,
-  "vs_benchmark": 5.69,
+  "vs_benchmark": 5.76,
   "mode_panique": false,
   "perf_cac_semaine": 1.64,
   "positions": [
@@ -45,13 +45,13 @@
       "currency": "USD",
       "date_achat": "2026-01-02",
       "prix_achat": 115.0,
-      "prix_actuel": 197.7998,
+      "prix_actuel": 199.06,
       "quantite": 20,
       "montant_investi": 1981.9,
-      "valeur_actuelle": 3434.32,
-      "performance": 73.28,
+      "valeur_actuelle": 3454.1,
+      "performance": 74.28,
       "score_entree": 94,
-      "poids": 14.6
+      "poids": 14.7
     },
     {
       "ticker": "AMD",
@@ -61,11 +61,11 @@
       "currency": "USD",
       "date_achat": "2026-05-05",
       "prix_achat": 341.54,
-      "prix_actuel": 488.565,
+      "prix_actuel": 490.37,
       "quantite": 3,
       "montant_investi": 876.48,
-      "valeur_actuelle": 1272.42,
-      "performance": 45.17,
+      "valeur_actuelle": 1276.34,
+      "performance": 45.62,
       "score_entree": 85,
       "poids": 5.4
     },
@@ -77,12 +77,12 @@
       "currency": "USD",
       "date_achat": "2026-05-25",
       "prix_achat": 222.32,
-      "prix_actuel": 271.91,
+      "prix_actuel": 271.675,
       "quantite": 4,
       "montant_investi": 763.89,
       "frais_achat_eur": 0.5725,
-      "valeur_actuelle": 944.21,
-      "performance": 23.61,
+      "valeur_actuelle": 942.82,
+      "performance": 23.42,
       "score_entree": 80,
       "raison_achat": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume — fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1% — momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel — l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
       "poids": 4.0
@@ -95,14 +95,14 @@
       "currency": "USD",
       "date_achat": "2026-05-06",
       "prix_achat": 92.01,
-      "prix_actuel": 111.23,
+      "prix_actuel": 110.85,
       "quantite": 14,
       "montant_investi": 1095.08,
-      "valeur_actuelle": 1351.87,
-      "performance": 23.45,
+      "valeur_actuelle": 1346.43,
+      "performance": 22.95,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
-      "poids": 5.8
+      "poids": 5.7
     },
     {
       "ticker": "LLY",
@@ -112,11 +112,11 @@
       "currency": "USD",
       "date_achat": "2026-05-05",
       "prix_achat": 967.93,
-      "prix_actuel": 1143.765,
+      "prix_actuel": 1144.12,
       "quantite": 1,
       "montant_investi": 828.41,
-      "valeur_actuelle": 992.94,
-      "performance": 19.86,
+      "valeur_actuelle": 992.64,
+      "performance": 19.82,
       "score_entree": 89,
       "poids": 4.2
     },
@@ -128,11 +128,11 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 313.77,
-      "prix_actuel": 353.19,
+      "prix_actuel": 353.5995,
       "quantite": 2,
       "montant_investi": 540.75,
-      "valeur_actuelle": 613.23,
-      "performance": 13.4,
+      "valeur_actuelle": 613.57,
+      "performance": 13.47,
       "score_entree": 95,
       "poids": 2.6
     },
@@ -144,11 +144,11 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 330.69,
-      "prix_actuel": 365.82,
+      "prix_actuel": 365.88,
       "quantite": 2,
       "montant_investi": 569.91,
-      "valeur_actuelle": 635.16,
-      "performance": 11.45,
+      "valeur_actuelle": 634.88,
+      "performance": 11.4,
       "score_entree": 93,
       "poids": 2.7
     },
@@ -160,11 +160,11 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 259.27,
-      "prix_actuel": 270.65,
+      "prix_actuel": 269.985,
       "quantite": 2,
       "montant_investi": 446.82,
-      "valeur_actuelle": 469.92,
-      "performance": 5.17,
+      "valeur_actuelle": 468.48,
+      "performance": 4.85,
       "score_entree": 90,
       "poids": 2.0
     },
@@ -176,11 +176,11 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 1060.9,
-      "prix_actuel": 1093.23,
+      "prix_actuel": 1093.3199,
       "quantite": 1,
       "montant_investi": 914.17,
-      "valeur_actuelle": 949.07,
-      "performance": 3.82,
+      "valeur_actuelle": 948.57,
+      "performance": 3.76,
       "score_entree": 93,
       "poids": 4.0
     },
@@ -192,11 +192,11 @@
       "currency": "USD",
       "date_achat": "2026-05-06",
       "prix_achat": 181.19,
-      "prix_actuel": 183.0,
+      "prix_actuel": 183.17,
       "quantite": 7,
       "montant_investi": 1080.07,
-      "valeur_actuelle": 1112.08,
-      "performance": 2.96,
+      "valeur_actuelle": 1112.43,
+      "performance": 3.0,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
       "poids": 4.7
@@ -218,6 +218,24 @@
       "poids": 4.5
     },
     {
+      "ticker": "SPGI",
+      "nom": "S&P Global Inc.",
+      "market": "NYQ",
+      "sector": "Finance",
+      "currency": "USD",
+      "date_achat": "2026-07-31",
+      "prix_achat": 413.89,
+      "prix_actuel": 413.89,
+      "quantite": 3,
+      "montant_investi": 1078.08,
+      "frais_achat_eur": 0.808,
+      "valeur_actuelle": 1077.28,
+      "performance": -0.07,
+      "score_entree": 77,
+      "raison_achat": "SPGI affiche un Golden Cross frais à J+1 avec confirmation volume — c'est la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant). Score 77/100, z=-1.4σ sous sa droite de régression (décote de 35% sur tendance) et val=4/5 avec DD-21.8% : le timing d'entrée est propre, on est dans une zone Fibo acceptable, pas au top 52w. Secteur Finance (hors cluster Tech&IA saturé à 62%) — pas de restriction sectorielle. Consensus +25% d'upside analystes. Le contexte macro de taux stables (Fed hold cette semaine) est favorable aux plateformes de données financières comme SPGI dont les revenus d'indices et de ratings sont structurellement résistants. Liquidités disponibles : 1430€ — position initiale modeste (1 titre ~env. 400-500€ range estimé) pour rester au-dessus du plancher de 5% cash. Conviction modérée : Golden Cross J+1 est le meilleur signal timing de la semaine hors cluster saturé.",
+      "poids": 4.6
+    },
+    {
       "ticker": "ETN",
       "nom": "Eaton Corporation, PLC",
       "market": "NYQ",
@@ -225,11 +243,11 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 430.55,
-      "prix_actuel": 414.195,
+      "prix_actuel": 417.05,
       "quantite": 1,
       "montant_investi": 371.0,
-      "valeur_actuelle": 359.58,
-      "performance": -3.08,
+      "valeur_actuelle": 361.83,
+      "performance": -2.47,
       "score_entree": 93,
       "poids": 1.5
     },
@@ -241,11 +259,11 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 413.21,
-      "prix_actuel": 386.999,
+      "prix_actuel": 389.66,
       "quantite": 1,
       "montant_investi": 356.06,
-      "valeur_actuelle": 335.97,
-      "performance": -5.64,
+      "valeur_actuelle": 338.07,
+      "performance": -5.05,
       "score_entree": 100,
       "poids": 1.4
     },
@@ -260,8 +278,8 @@
       "prix_actuel": 83.98,
       "quantite": 14,
       "montant_investi": 1492.64,
-      "valeur_actuelle": 1374.79,
-      "performance": -7.9,
+      "valeur_actuelle": 1374.63,
+      "performance": -7.91,
       "score_entree": 83,
       "raison_achat": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
       "poids": 5.9
@@ -290,13 +308,13 @@
       "currency": "USD",
       "date_achat": "2026-05-05",
       "prix_achat": 610.41,
-      "prix_actuel": 549.49,
+      "prix_actuel": 547.47,
       "quantite": 2,
       "montant_investi": 1044.92,
-      "valeur_actuelle": 954.06,
-      "performance": -8.7,
+      "valeur_actuelle": 949.97,
+      "performance": -9.09,
       "score_entree": 84,
-      "poids": 4.1
+      "poids": 4.0
     },
     {
       "ticker": "ORSTED.CO",
@@ -310,7 +328,7 @@
       "quantite": 52,
       "montant_investi": 1150.61,
       "frais_achat_eur": 0.8623,
-      "valeur_actuelle": 1008.74,
+      "valeur_actuelle": 1008.75,
       "performance": -12.33,
       "score_entree": 81,
       "raison_achat": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression — décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low) — le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique — opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
@@ -318,9 +336,79 @@
       "correction": "Devise corrigee EUR->DKK le 2026-06-10 (cotation Copenhague) ; quantite requantifiee pour honorer le montant EUR investi."
     }
   ],
-  "liquidites": 1430.19,
-  "pct_liquidites": 6.1,
+  "liquidites": 352.11,
+  "pct_liquidites": 1.5,
   "ordres": [
+    {
+      "date": "2026-07-31",
+      "type": "ACHAT",
+      "ticker": "SPGI",
+      "nom": "S&P Global Inc.",
+      "qte": 3,
+      "prix": 413.89,
+      "currency": "USD",
+      "montant": 1078.08,
+      "montant_brut_eur": 1077.27,
+      "frais_achat_eur": 0.808,
+      "raison": "SPGI affiche un Golden Cross frais à J+1 avec confirmation volume — c'est la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant). Score 77/100, z=-1.4σ sous sa droite de régression (décote de 35% sur tendance) et val=4/5 avec DD-21.8% : le timing d'entrée est propre, on est dans une zone Fibo acceptable, pas au top 52w. Secteur Finance (hors cluster Tech&IA saturé à 62%) — pas de restriction sectorielle. Consensus +25% d'upside analystes. Le contexte macro de taux stables (Fed hold cette semaine) est favorable aux plateformes de données financières comme SPGI dont les revenus d'indices et de ratings sont structurellement résistants. Liquidités disponibles : 1430€ — position initiale modeste (1 titre ~env. 400-500€ range estimé) pour rester au-dessus du plancher de 5% cash. Conviction modérée : Golden Cross J+1 est le meilleur signal timing de la semaine hors cluster saturé.",
+      "conviction": "modérée",
+      "source": "Claude AI",
+      "score_watchlist": 77,
+      "breakdown": {
+        "qualite": 38,
+        "valorisation": 17,
+        "timing": 19,
+        "analystes": 3,
+        "vix_value": 16.87,
+        "cross_regime": "golden",
+        "cross_type": "golden",
+        "cross_days_ago": 1,
+        "cross_spread_pct": 0.23,
+        "cross_slope_mm21_pct": 1.85,
+        "cross_volume_confirmed": true,
+        "signal_dynamics_warning": "",
+        "cross_pts": 10,
+        "rsi_pts": 2,
+        "vol_pts": 3,
+        "reg_pts": 0,
+        "val_pts": 4,
+        "slope_pts": 4,
+        "val_pts_mode": "gc_fresh_inverted",
+        "drawdown_52w_pct": -21.8,
+        "high_52w": 529.29,
+        "fibo": null,
+        "rsi": 45.3,
+        "mm21": 434.38,
+        "mm200": 433.37,
+        "regression_z": -1.39,
+        "regression_signal": "sous tendance",
+        "regression_pente_pct": 18.1,
+        "regression_sigma": 0.3052,
+        "prix_tendance": 632.42,
+        "decote_pct": 34.6,
+        "regression_window_years": 20,
+        "regression_window_reason": "standard_20y",
+        "rev_growth_pct": 10.4,
+        "net_margin_pct": 30.5,
+        "fcf_margin_pct": 33.8,
+        "mrq": "2026-06-30",
+        "forward_pe": 20.5,
+        "trailing_pe": 25.2,
+        "fcf_yield_pct": 4.47,
+        "peg": 1.74,
+        "target_mean_price": 518.63,
+        "target_upside_pct": 25.3,
+        "target_analysts": 19,
+        "death_pen": 0,
+        "chase_pen": 0,
+        "value_bonus": 0,
+        "confiance": 1.0,
+        "sources": [
+          "Yahoo Finance",
+          "Finnhub"
+        ]
+      }
+    },
     {
       "date": "2026-07-20",
       "type": "VENTE",
@@ -1318,8 +1406,8 @@
     }
   ],
   "biais_detectes": [
-    "Biais de statu quo (inaction comfort) : tentation de ne rien décider cette semaine faute de signaux nets — assumé explicitement plutôt que rationalisé",
-    "Biais d'engagement latent sur ORSTED : on surveille une position à -12.3% en attendant 90j — risque de rationnel post-hoc si on tarde à exécuter le stop"
+    "Action bias (tentation d'agir sur les positions en léger rouge sans catalyseur fondamental)",
+    "FOMO setup B (INTU/ADBE/ACN présentent des signaux mean-reversion attractifs mais le cluster Tech&IA bloque — la règle de concentration prévient le chasing)"
   ],
   "regles_actives": [
     {
@@ -1333,9 +1421,9 @@
     }
   ],
   "decisions_bloquees": [],
-  "nb_positions": 18,
+  "nb_positions": 19,
   "nb_positives": 12,
-  "nb_negatives": 6,
+  "nb_negatives": 7,
   "nb_neutres": 0,
   "macro_news": [
     {
@@ -1344,7 +1432,7 @@
       "date": "2026-07-30",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/07/30/us-treasury-yields-divided-fed-interest-rates-hold-steady-.html",
-      "resume_fr": "La Fed maintient ses taux inchangés mais les rendements des Treasuries américains continuent de monter, reflétant l'anticipation d'une inflation persistante."
+      "resume_fr": "Les rendements des Treasuries américains ont continué de monter jeudi malgré la décision de la Fed de maintenir ses taux inchangés."
     },
     {
       "headline": "Bank of England keeps rates on hold, awaits clearer sign of Iran war inflation hit - Reuters",
@@ -1352,7 +1440,7 @@
       "date": "2026-07-30",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNcXV6ZUFyTnVCZmxRUVdTancteHlMckpydGNUdmYwdDFtaTllNmhNdkh2S0J1NS1CWDE1VG51Y18wcU41VloxRWZ5LWpTVGlGb2NfeDRkZ1RJeUs5aFFxaHIwVzByUk9md01STlJqVlRqLUNaVWdYN0psNXFGUlpuSVJOWGZ2LWtrNnJxbTlxUUNVNWxvOXJKZXM1alBLbzR4QXBUTjIzMXNwOG4zM2ZQVlZ6enJHZw?oc=5",
-      "resume_fr": "La Banque d'Angleterre maintient ses taux en attendant de mesurer l'impact inflationniste du conflit entre l'Iran et ses adversaires sur l'économie britannique."
+      "resume_fr": "La Banque d'Angleterre maintient ses taux et attend d'évaluer l'impact inflationniste de la guerre contre l'Iran avant d'agir."
     },
     {
       "headline": "Gold holds modest gain after Federal Reserve keeps rates steady",
@@ -1360,7 +1448,7 @@
       "date": "2026-07-30",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-07-29/gold-advances-after-federal-reserve-keeps-interest-rates-on-hold",
-      "resume_fr": "L'or progresse modestement après la décision de statu quo de la Fed, tandis que les investisseurs repoussent leurs anticipations de hausse des taux à plus tard dans l'année."
+      "resume_fr": "L'or progresse légèrement après la décision de la Fed de ne pas modifier ses taux directeurs, les marchés repoussant leurs anticipations de hausse."
     },
     {
       "headline": "Here are the five big takeaways from this week's Fed meeting",
@@ -1368,7 +1456,7 @@
       "date": "2026-07-29",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/07/29/here-are-the-five-big-takeaways-from-this-weeks-fed-meeting.html",
-      "resume_fr": "La Fed a maintenu ses taux cette semaine sans surprise, les cinq points clés de la réunion confirmant une posture attentiste face à l'incertitude économique."
+      "resume_fr": "Résumé des cinq enseignements majeurs de la réunion Fed de cette semaine : pas de changement de taux, comme anticipé."
     },
     {
       "headline": "US intercepts Iranian missile attack as West Asia tensions push oil prices higher",
@@ -1376,7 +1464,7 @@
       "date": "2026-07-29",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-07-28/trump-netanyahu-meet-at-white-house-us-dials-back-iran-threats",
-      "resume_fr": "Les États-Unis ont intercepté des missiles iraniens visant des bases militaires, entraînant une hausse des prix du pétrole et des inquiétudes sur le détroit d'Ormuz."
+      "resume_fr": "Les États-Unis ont intercepté des missiles iraniens ciblant des bases militaires, faisant monter les cours du pétrole brut."
     },
     {
       "headline": "Illicit Iranian gambling network helped pull off a $4 billion sanctions dodge - Reuters",
@@ -1384,14 +1472,14 @@
       "date": "2026-07-31",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPM0c1Y3Z1S3JvRDl6YklGRHdRWXJWWDdOMUJYQ0FURHpwLTByV1N0bzBCZ0ZGWGZoc0FwakZlLTI2S3cxWGxOV010X1I1NWlBVGRRbmdJeW9penZraklmQ2dtVERtdVMwM1ljR2t4QTl0OEZicThhNTZnN1ZJb3dlMC05TXBoOG4ybGpka1hRX2hUVGtkYTVjRHhBbk9CZDlMYWluVk03Yl9HeWt6UnhyMXZTMGtBQTE3S2l6NHoxOW96WTg?oc=5",
-      "resume_fr": "Un réseau iranien illicite a orchestré un contournement de sanctions américaines de 4 milliards de dollars via un système de paris clandestins, selon Reuters."
+      "resume_fr": "Un réseau de jeux illicites lié à l'Iran aurait orchestré un contournement de sanctions américaines à hauteur de 4 milliards de dollars."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "La semaine du 28 juillet au 1er août s'est ouverte sur une Fed qui reste à l'arrêt — taux inchangés, comme attendu — mais les marchés obligataires américains ne l'entendent pas de cette oreille : les Treasury yields continuent de monter malgré la pause, signal que les investisseurs anticipent soit une inflation persistante, soit une prime de risque fiscal qui s'invite dans les courbes. En parallèle, la Banque d'Angleterre a elle aussi fait le choix du statu quo, en attendant de mesurer l'impact inflationniste du conflit iranien sur les prix à la consommation britanniques.\n\nCôté géopolitique, l'escalade Iran-USA ajoute une prime de risque sur le pétrole et les routes maritimes du détroit d'Ormuz. C'est un facteur de volatilité latente — pas immédiatement chiffrable dans les scores du screener, mais à surveiller pour les positions exposées à l'énergie (ETN, ORSTED) et aux financières (JPM, BLK). Pour l'instant, le VIX à 16.9 traduit un marché calme malgré ces tensions : le marché digère, il ne panique pas.\n\nLe portefeuille Signal termine cette semaine à +17.35% net depuis la création (capital à 23 471€), soit +4.23pp au-dessus du MSCI World YTD à +11.71%. La performance est réelle mais je reste humble sur sa composition : une bonne part vient de ASML (+120.5%) et NVDA (+73.4%), deux convictions initiales de janvier qui se sont avérées justes. Le reste du portefeuille est plus hétérogène — plusieurs positions ouvertes en mai en légère perte, dont ORSTED à -12.3% qui approche dangereusement du seuil de stop-loss R06.\n\nAucune décision d'achat cette semaine : le cluster Tech & IA est à 62% du portefeuille, ce qui applique un sizing réduit ×0.10 — rendre ce contexte transparent plutôt que d'empiler des achats sous contrainte. SPGI (#8 watchlist) affiche un Golden Cross Day-1 volume-confirmé avec z=-1.4σ en zone Finance — un setup propre, mais la liquidité disponible (1 430€) et la saturation du cluster limitent l'action. À surveiller en priorité la semaine prochaine.\n\nLa semaine prochaine, trois positions passent le cap des 90 jours (META, LSEG.L, DB1.DE, NOW, AMD, LLY) — c'est le moment d'appliquer le 'would I buy today?' test systématique sur chacune. Pour ORSTED, la surveillance est maximale : si le cours casse 18.82€, le stop-loss R06 devient exécutable dès le 1er août.",
+    "analyse_macro": "Cette dernière semaine de juillet a été dominée par deux signaux contradictoires : la Fed a maintenu ses taux inchangés mercredi — comme attendu — mais le marché obligataire américain a vendu malgré la nouvelle, les rendements longs continuant leur climb. La Banque d'Angleterre a fait de même jeudi, attendant de mieux mesurer l'impact inflationniste de la guerre Iran-Israël sur les prix. Résultat : le MSCI World cède -0.8% sur la semaine pendant que le CAC40 tient (+1.6%), porté par sa moindre exposition aux Treasuries.\n\nPour Signal, cette semaine illustre bien la vertu de l'inaction disciplinée. Le portefeuille affiche +17.40% net depuis la création (vs +11.65% MSCI YTD), soit +5.69pp d'écart — et la meilleure façon de préserver cet avantage par temps de taux volatils est de ne pas churner. Les 18 positions ouvertes sont globalement saines : NVDA +74.2%, ASML +120.5%, DDOG +23.4% portent la performance, et les positions récentes en légère perte (ORSTED -12.3%, META -9.2%) restent dans les clous des règles de stop-loss.\n\nMéthodologiquement, une seule décision d'achat cette semaine : SPGI sur Golden Cross J+1 avec confirmation volume — la fenêtre signal optimale selon la méthodologie. Le timing est propre (val=4/5, DD-21.8%, pas au top 52w). Le cluster Tech&IA à 62% bloque toute entrée sur INTU, ADBE ou ACN malgré des setups de mean-reversion (setup B) intéressants — frustrant, car INTU en particulier à z=-3.9σ avec pente MM21 à +4.6% est un signal de rebond classique. Mais la règle est la règle, et la discipline de concentration existe précisément pour ces moments où tout semble attractif.\n\nLe biais à surveiller cette semaine : l'action bias. Avec plusieurs positions en léger rouge (ORSTED, META, LSEG, ADYEN), il est tentant de 'faire quelque chose'. Or, META passe le cap des 90j dans 3 jours, ORSTED dans 25 jours — les stop-loss automatiques seront actifs à ces dates si les pertes persistent. D'ici là, bouger sans catalyseur fondamental serait du resulting pur.\n\nPour la semaine du 4 août, on surveille : (1) l'évolution des tensions Iran et leur effet sur le pétrole (ETN, positions industrie) ; (2) la publication des résultats trimestriels s'il y en a dans le portefeuille ; (3) la pente de MM21 sur ORSTED — si elle s'inverse, le setup d'origine sera invalidé et on documentera un exit avant le stop-loss automatique.",
     "conviction_globale": "neutre",
-    "message_utilisateurs": "Semaine calme en apparence, mais avec plusieurs dossiers sous surveillance. La Fed a tenu les taux, les obligations américaines ont quand même vendu — signe que le marché ne croit pas à une baisse rapide. Côté portefeuille, pas d'achat cette semaine : le cluster Tech & IA est saturé à 62% (plafond réglementaire à 65%), et les liquidités disponibles (1 430€) sont faibles. SPGI aurait été candidate avec son Golden Cross Day-1, mais la discipline de concentration prime. Le point chaud du moment : ORSTED à -12.3% depuis l'achat il y a 65 jours — le stop-loss à -15% n'est pas encore atteint, mais on s'en approche. La règle R01 m'empêche de vendre avant 90 jours sans signal fondamental documenté. Je surveille. La semaine prochaine, plusieurs positions passent le cap des 90 jours et feront l'objet d'un 'would I buy today?' test rigoureux.",
-    "nb_decisions": 3
+    "message_utilisateurs": "Semaine calme sur le plan des décisions — une seule entrée, SPGI, sur Golden Cross J+1 avec confirmation volume. Le cluster Tech&IA à 62% bloque plusieurs opportunités watchlist intéressantes (INTU notamment à z=-3.9σ), ce qui est une contrainte assumée de notre discipline de concentration. Les 18 positions existantes sont maintenues : les moins-values récentes (ORSTED -12.3%, META -9.2%, LSEG -7.9%) restent dans les limites de nos stop-loss et ne justifient pas de sortie anticipée avant 90j sans signal fondamental majeur. Le portefeuille affiche +17.40% net depuis sa création, +5.69pp au-dessus du MSCI World YTD. On préserve cet avantage en évitant le sur-trading dans un marché où la Fed maintient ses taux et les tensions géopolitiques (Iran) créent de la volatilité de surface sans changer les fondamentaux des positions détenues.",
+    "nb_decisions": 4
   },
   "performance_history": [
     {
@@ -1880,8 +1968,8 @@
     },
     {
       "date": "2026-07-31",
-      "perf": 17.34,
-      "capital": 23467.25,
+      "perf": 17.41,
+      "capital": 23481.6,
       "benchmark_cac40": 3.84,
       "benchmark_msci": 11.65
     }
