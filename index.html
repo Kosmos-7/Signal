@@ -211,6 +211,13 @@ function showLexique(){
    Données : CH[ticker] = {points, mm21, mm200, t_win0, t_last} (t = mois flottant) + breakdown.
    Le canal est RE-FITTÉ sur la période affichée (exploration) ; les métriques décote/z de la
    fiche restent celles du screener (fenêtre officielle). Aucun symbole de devise (nombres bruts). */
+function curSym(t){t=(t||'').toUpperCase();
+  if(/\.(PA|DE|AS|BR|MI|MC|AT|HE|VI|LI|IS)$/.test(t))return' €';
+  if(/\.L$/.test(t))return' £';
+  if(/\.SW$/.test(t))return' CHF';
+  if(/\.(CO|ST|OL)$/.test(t))return' kr';
+  if(/\.T$/.test(t))return' ¥';
+  return' $';}
 function buildChart(s){
   const host=document.getElementById('chartsec'); if(!host)return;
   const D=CH[s.ticker], b=s.breakdown||{};
@@ -218,6 +225,7 @@ function buildChart(s){
   const W=800,H=360,ML=46,MR=44,MT=14,MB=26;
   const T_MIN=D.points[0][0], T_MAX=Math.max(D.t_last,D.points[D.points.length-1][0]), MIN_SPAN=12;
   const WIN=(b.regression_window_years||10)*12;
+  const sym=curSym(s.ticker);
   const T_OFF=Math.max(T_MIN,D.t_win0);           // début de la fenêtre officielle
   let t0v=T_OFF, t1v=T_MAX;
   const MOIS=['janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
@@ -237,7 +245,10 @@ function buildChart(s){
     '<div class="chx-ctrl"><span id="chx-periods">'+presets.map(([m,l],i)=>'<button class="chx-pbtn'+(m===WIN?' on':'')+'" data-m="'+m+'">'+l+'</button>').join(' ')+'</span><span class="chx-rlbl" id="chx-rlbl"></span></div>'+
     '<div class="chx-slider" id="chx-slider"><div class="chx-track"></div><div class="chx-sel" id="chx-sel"></div><input type="range" id="chx-r0"><input type="range" id="chx-r1"></div>'+
     '<div class="chx-legend"><span style="color:var(--ac);font-weight:700">━</span> Cours&nbsp;&nbsp;<span style="color:var(--text2);font-weight:700">┅</span> <span id="chx-lgt">Tendance</span>&nbsp;&nbsp;<span style="color:#e0995e;font-weight:700">━</span> MM21&nbsp;&nbsp;<span style="color:#b59bd6;font-weight:700">━</span> MM200&nbsp;&nbsp;<span class="chx-band"></span> Canal ±1σ / ±2σ</div>'+
-    (dec!=null?'<div class="chx-mrow"><span class="chx-k">'+mlabel+' : </span><span class="chx-v" title="Prix de tendance : '+(b.prix_tendance!=null?b.prix_tendance:'—')+'">'+Math.abs(dec).toFixed(0)+' %</span> <span class="chx-z">· z = '+fs(zOff,2)+'σ</span>'+(cons?' <span class="chx-k">·</span> '+cons:'')+'</div>':'')+
+    (dec!=null?'<div class="chx-mrow">'+[
+      '<span class="chx-k">'+mlabel+' : </span><span class="chx-v" title="Prix de tendance : '+(b.prix_tendance!=null?Math.round(b.prix_tendance)+sym:'—')+'">'+Math.abs(dec).toFixed(0)+' %</span>',
+      '<span class="chx-z">z = '+fs(zOff,2)+'σ</span>'
+    ].concat(cons?[cons]:[]).join(' <span class="chx-k">·</span> ')+'</div>':'')+
     warn+
     '<div class="chx-note">Canal recalculé sur la période affichée — décote et z-score restent calculés sur la fenêtre officielle ('+(b.regression_window_years||'?')+' ans). Trajectoire historique, pas une valeur intrinsèque. <a href="apprendre.html#decote" style="color:var(--text3)">Méthode →</a></div>';
   const svg=document.getElementById('chx-svg'),tip=document.getElementById('chx-tip');
@@ -309,7 +320,7 @@ function buildChart(s){
       if(c.st){rc.setAttribute('stroke',c.st);rc.setAttribute('stroke-width','1');}
       const tx=el('text',{x:W-MR+2+(MR-4)/2,y:c.y+3.5,'text-anchor':'middle'});
       tx.setAttribute('style','font-family:var(--mono);font-size:9.5px;font-weight:700;fill:'+c.tc);
-      tx.textContent=Math.round(c.v);}
+      tx.textContent=Math.round(c.v)+sym.replace(' ','');}
     hoverG={cross:el('line',{y1:MT,y2:H-MB,stroke:'rgba(255,255,255,.18)','stroke-width':1,visibility:'hidden'}),
       dotP:el('circle',{r:4,fill:'#74b6df',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'}),
       dotT:el('circle',{r:4,fill:'#c6c6e0',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'}),
@@ -343,9 +354,9 @@ function buildChart(s){
     const m21=near(D.mm21),m200=near(D.mm200);
     const setDot=(dot,q)=>{if(q&&q[0]>=t0v){dot.setAttribute('cx',X(q[0]));dot.setAttribute('cy',Y(q[1]));dot.setAttribute('visibility','visible');}else dot.setAttribute('visibility','hidden');};
     setDot(hoverG.dot21,m21);setDot(hoverG.dot200,m200);
-    tip.innerHTML='<span class="d">'+fmt(t)+'</span><br>● Cours&nbsp;: <span class="c">'+p.toFixed(p<10?2:0)+'</span><br>'
-      +(tv?'◌ Tendance&nbsp;: <span class="t">'+tv.toFixed(tv<10?2:0)+'</span> · écart '+((p/tv-1)*100>0?'+':'')+((p/tv-1)*100).toFixed(0)+' %':'◌ période trop courte pour une tendance')
-      +(m21&&m200?'<br><span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+'</span> · <span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+'</span>':'');
+    tip.innerHTML='<span class="d">'+fmt(t)+'</span><br>● Cours&nbsp;: <span class="c">'+p.toFixed(p<10?2:0)+sym+'</span><br>'
+      +(tv?'◌ Tendance&nbsp;: <span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span> · écart '+((p/tv-1)*100>0?'+':'')+((p/tv-1)*100).toFixed(0)+' %':'◌ période trop courte pour une tendance')
+      +(m21&&m200?'<br><span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span> · <span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'');
     // positionnement APRÈS écriture du contenu (largeur réelle) : toujours d'un seul côté du réticule
     const wr=svg.parentNode.getBoundingClientRect();
     tip.style.display='block';
