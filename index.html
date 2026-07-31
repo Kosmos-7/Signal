@@ -85,11 +85,11 @@
   .chx-slider input[type=range]{position:absolute;left:0;right:0;top:0;width:100%;height:34px;background:none;-webkit-appearance:none;appearance:none;pointer-events:none;margin:0}
   .chx-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;pointer-events:auto;width:16px;height:16px;border-radius:50%;background:#0d0d16;border:2px solid var(--ac);cursor:grab}
   .chx-slider input[type=range]::-moz-range-thumb{pointer-events:auto;width:12px;height:12px;border-radius:50%;background:#0d0d16;border:2px solid var(--ac);cursor:grab}
-  .chx-mrow{font:.82rem var(--mono);color:var(--text2);margin-top:.9rem;letter-spacing:.2px}
+  .chx-mrow{font:.84rem var(--mono);color:var(--text2);margin-top:.9rem;letter-spacing:.2px}
   .chx-mrow .chx-k{color:var(--text3)}
-  .chx-mrow .chx-v{font:700 1rem var(--mono);color:var(--ac)}
-  .chx-mrow .chx-v2{font:700 .82rem var(--mono);color:var(--text)}
-  .chx-mrow .chx-z{font:.82rem var(--mono);color:var(--text2)}
+  .chx-mrow .chx-v{font-weight:700;color:var(--ac)}
+  .chx-mrow .chx-v2{font-weight:700;color:var(--text)}
+  
   .chx-warn{display:flex;gap:10px;align-items:flex-start;background:rgba(232,168,32,.06);border:1px solid rgba(232,168,32,.28);border-radius:8px;padding:10px 14px;margin:12px 0 0;font-size:.8rem;color:var(--text2);line-height:1.55}
   .chx-warn .chx-ic{flex:none;color:var(--gold);font-size:.95rem;margin-top:1px}
   .chx-warn b{color:var(--text)}
@@ -236,7 +236,7 @@ function buildChart(s){
   const presets=[...pset.entries()].sort((a,c)=>a[0]-c[0]);presets.push([1e9,'MAX']);
   const dec=b.decote_pct, zOff=b.regression_z;
   const mlabel=dec==null?'':(dec>=0?'Décote':'Surcote')+' vs tendance '+(b.regression_window_years||'?')+' ans';
-  const cons=(b.target_upside_pct!=null)?('Objectif consensus : <span class="chx-v2">'+fs(b.target_upside_pct,0)+' %</span>'+(b.target_analysts?' <span class="chx-k">('+b.target_analysts+' analystes)</span>':'')):'';
+  const cons=(b.target_upside_pct!=null)?('<span class="chx-k">Objectif consensus : </span><span class="chx-v2">'+fs(b.target_upside_pct,0)+' %</span>'+(b.target_analysts?' <span class="chx-k">('+b.target_analysts+' analystes)</span>':'')):'';
   host.innerHTML='<div class="qh">Cours &amp; tendance long terme</div>'+
     '<div class="chx-wrap"><svg class="chx-svg" id="chx-svg" viewBox="0 0 '+W+' '+H+'"></svg><div class="chx-tip" id="chx-tip"></div></div>'+
     '<div class="chx-ctrl"><span id="chx-periods">'+presets.map(([m,l],i)=>'<button class="chx-pbtn'+(m===WIN?' on':'')+'" data-m="'+m+'">'+l+'</button>').join(' ')+'</span><span class="chx-rlbl" id="chx-rlbl"></span></div>'+
@@ -244,7 +244,7 @@ function buildChart(s){
     '<div class="chx-legend"><span style="color:var(--ac);font-weight:700">━</span> Cours&nbsp;&nbsp;<span style="color:var(--text2);font-weight:700">┅</span> <span id="chx-lgt">Tendance</span>&nbsp;&nbsp;<span style="color:#e0995e;font-weight:700">━</span> MM21&nbsp;&nbsp;<span style="color:#b59bd6;font-weight:700">━</span> MM200&nbsp;&nbsp;<span class="chx-band"></span> Canal ±1σ / ±2σ</div>'+
     (dec!=null?'<div class="chx-mrow">'+[
       '<span class="chx-k">'+mlabel+' : </span><span class="chx-v" title="Prix de tendance : '+(b.prix_tendance!=null?Math.round(b.prix_tendance)+sym:'—')+'">'+Math.abs(dec).toFixed(0)+' %</span>',
-      '<span class="chx-z">z = '+fs(zOff,1).replace('.',',')+'σ</span>'
+      '<span class="chx-k">z = </span><span class="chx-v2">'+fs(zOff,1).replace('.',',')+'σ</span>'
     ].concat(cons?[cons]:[]).join(' <span class="chx-k">·</span> ')+'</div>':'')+
     '<div id="chx-warnslot"></div>'+
     '<div class="chx-note">Canal recalculé sur la période affichée — décote et z-score restent calculés sur la fenêtre officielle ('+(b.regression_window_years||'?')+' ans). Trajectoire historique, pas une valeur intrinsèque. <a href="apprendre.html#decote" style="color:var(--text3)">Méthode →</a></div>';
