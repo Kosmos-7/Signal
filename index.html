@@ -287,18 +287,10 @@ function buildChart(s){
       hi=Math.max(hi,trHi*Math.exp(2*F.sigma)*1.03);lo=Math.min(lo,trLo*Math.exp(-2*F.sigma)*0.97);}
     X=t=>ML+(t-t0v)/(t1v-t0v)*(W-ML-MR);
     Y=p=>MT+(1-(Math.log(p)-Math.log(lo))/(Math.log(hi)-Math.log(lo)))*(H-MT-MB);
-    // pastilles au bord droit (cours / tendance / MM200) — anti-chevauchement, PAS de point fixe
-    const chips=[];const pEnd=vis[vis.length-1];
-    chips.push({v:pEnd[1],bg:'#74b6df',tc:'#06060b'});
-    if(F)chips.push({v:trF(t1v),bg:'#14141f',tc:'#c6c6e0',st:'#c6c6e0'});
-    const lastIn=se=>{let z=null;for(const q of se){if(q[0]>t1v)break;if(q[0]>=t0v)z=q;}return z;};
-    const c200=lastIn(D.mm200);if(c200)chips.push({v:c200[1],bg:'#b59bd6',tc:'#06060b'});
-    chips.forEach(c=>c.y=Math.max(MT+8,Math.min(H-MB-8,Y(c.v))));
-    chips.sort((a,c)=>a.y-c.y);
-    for(let i=1;i<chips.length;i++)if(chips[i].y-chips[i-1].y<17)chips[i].y=chips[i-1].y+17;
-    for(let i=chips.length-1;i>=0;i--){if(chips[i].y>H-MB-8)chips[i].y=H-MB-8;
-      if(i<chips.length-1&&chips[i+1].y-chips[i].y<17)chips[i].y=chips[i+1].y-17;}
-    const chipYs=chips.map(c=>c.y);
+    // Pastilles de valeurs au bord droit : SUPPRIMÉES (2026-07, demande UX) — elles
+    // masquaient les repères σ une fois sur deux. Les valeurs restent lisibles dans
+    // la ligne de métriques sous le graphe et dans l'infobulle au survol.
+    const chipYs=[];
     // grille Y (log, ticks bornés à ~8)
     const TICKS=[0.2,0.5,1,2,5,10,20,30,50,70,100,150,200,300,450,700,1000,1500,2500,5000,10000];
     const inD=TICKS.filter(p=>p>lo&&p<hi);const stride=Math.max(1,Math.ceil(inD.length/8));
@@ -311,11 +303,16 @@ function buildChart(s){
       el('text',{x:X(y*12),y:H-7,'text-anchor':'middle',class:'chx-axis'}).textContent=y;
     if(hasBand){
       const band=(k,op)=>el('polygon',{points:[[X(tb0),Y(trF(tb0)*Math.exp(k*F.sigma))],[X(tb1),Y(trF(tb1)*Math.exp(k*F.sigma))],[X(tb1),Y(trF(tb1)*Math.exp(-k*F.sigma))],[X(tb0),Y(trF(tb0)*Math.exp(-k*F.sigma))]].map(p=>p.join(',')).join(' '),fill:'#74b6df','fill-opacity':op,'clip-path':'url(#chx-plot)'});
-      band(2,0.045);band(1,0.07);
+      // Intensité ADAPTATIVE : sur 20 ans/MAX l'échelle log s'étire et le canal ne fait
+      // plus que quelques dizaines de px — les opacités fixes devenaient illisibles.
+      // Plus le canal est fin à l'écran, plus fonds et liserés sont soutenus.
+      const h2px=Math.abs(Y(trF(tb1)*Math.exp(-2*F.sigma))-Y(trF(tb1)*Math.exp(2*F.sigma)));
+      const boost=Math.min(2.4,Math.max(1,150/Math.max(h2px,1)));
+      band(2,0.045*boost);band(1,0.07*boost);
       // liserés des bords ±1σ/±2σ : gardent le canal lisible quand le zoom l'amincit
       for(const [k,op] of [[2,.14],[1,.22],[-1,.22],[-2,.14]])
         el('line',{x1:X(tb0),y1:Y(trF(tb0)*Math.exp(k*F.sigma)),x2:X(tb1),y2:Y(trF(tb1)*Math.exp(k*F.sigma)),
-          stroke:'#74b6df','stroke-width':1,opacity:op,'clip-path':'url(#chx-plot)'});
+          stroke:'#74b6df','stroke-width':1,opacity:Math.min(op*boost,.5),'clip-path':'url(#chx-plot)'});
       // Étiquettes σ dans la MARGE droite, avec placement anti-collision : elles
       // glissent pour s'intercaler entre les pastilles. JAMAIS supprimées (les 4
       // repères σ doivent toujours être lisibles) : balayage large, et à défaut
@@ -342,12 +339,6 @@ function buildChart(s){
       if(v.length>1)el('polyline',{points:v.map(([t,p])=>X(t)+','+Y(p)).join(' '),fill:'none',stroke:color,'stroke-width':1.3,opacity:.7,'clip-path':'url(#chx-plot)'});};
     mmLine(D.mm200,'#b59bd6');mmLine(D.mm21,'#e0995e');
     el('polyline',{points:vis.map(([t,p])=>X(t)+','+Y(p)).join(' '),fill:'none',stroke:'#74b6df','stroke-width':2,'stroke-linejoin':'round','clip-path':'url(#chx-plot)'});
-    for(const c of chips){
-      const rc=el('rect',{x:W-MR+2,y:c.y-8,width:MR-4,height:16,rx:3,fill:c.bg});
-      if(c.st){rc.setAttribute('stroke',c.st);rc.setAttribute('stroke-width','1');}
-      const tx=el('text',{x:W-MR+2+(MR-4)/2,y:c.y+3.5,'text-anchor':'middle'});
-      tx.setAttribute('style','font-family:var(--mono);font-size:9.5px;font-weight:700;fill:'+c.tc);
-      tx.textContent=Math.round(c.v)+sym.replace(' ','');}
     hoverG={cross:el('line',{y1:MT,y2:H-MB,stroke:'rgba(255,255,255,.18)','stroke-width':1,visibility:'hidden'}),
       dotP:el('circle',{r:4,fill:'#74b6df',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'}),
       dotT:el('circle',{r:4,fill:'#c6c6e0',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'}),
