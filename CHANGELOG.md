@@ -33,11 +33,15 @@ respecté était en réalité franchi (1,5 % post-trade).
   cash si l'opportunité le justifie (descendre sous ~5 % doit être motivé dans la
   justification). Seul garde-fou dur conservé : les liquidités ne peuvent jamais
   devenir négatives.
-- **Plus-value latente en €** : affichée sur chaque ligne du portefeuille (site),
-  recalculée quotidiennement, injectée dans le contexte de l'agent, et stockée dans
-  `positions[].plus_value_latente_eur`.
-- **Fiche watchlist** : les 4 repères σ de la marge droite ne disparaissent plus
-  quand les pastilles de prix occupent la place (placement anti-collision garanti).
+- **Plus-value latente en €** : colonne dédiée sur chaque ligne du portefeuille
+  (sur mobile elle remplace la colonne Valeur), recalculée quotidiennement, injectée
+  dans le contexte de l'agent, et stockée dans `positions[].plus_value_latente_eur`.
+- **Fiche watchlist — lisibilité du canal** : les pastilles de valeurs au bout du
+  graphe sont supprimées (elles masquaient les repères σ une fois sur deux — les
+  valeurs restent dans la ligne de métriques et l'infobulle au survol) ; les 4
+  repères σ sont garantis dans la marge droite ; l'intensité du canal (fonds +
+  liserés) s'adapte à sa hauteur à l'écran — sur 20 ans/MAX, l'échelle log étirait
+  le tunnel jusqu'à le rendre presque invisible, il reste désormais net.
 - Tests : 14 scénarios moteur (all-in, caps R2, cluster forte/modérée, fallback,
   montant invalide, renforcement, anti-poussière, PV latente) — 14/14.
 
