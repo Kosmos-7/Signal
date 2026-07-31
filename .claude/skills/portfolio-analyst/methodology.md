@@ -447,9 +447,11 @@ Formule Kelly théorique : `f* = (bp - q) / b` où b = ratio gain/perte, p = pro
 
 ### Liquidités
 
-Maintenir au moins 5% en liquidités même en bull market. Donne :
+Recommandation (pas une règle mécanique — le plancher bloquant a été retiré en juillet 2026) : garder ~5% en liquidités même en bull market. Donne :
 - Optionalité (capacité à acheter sur correction)
 - Coussin psychologique (réduit pulsions de vente forcée)
+
+Descendre en dessous — jusqu'à 100% investi — est un choix légitime si l'opportunité le justifie, mais il se motive explicitement : à cash nul, toute nouvelle entrée exige une vente ou une rotation.
 
 ## Intégration Signal (si applicable)
 

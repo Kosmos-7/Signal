@@ -276,6 +276,9 @@
   .pos-row:hover { border-color: var(--border2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px var(--border2), 0 8px 28px rgba(0,0,0,0.5); }
   .pos-row.pos-positive { border-left: 3px solid rgba(28,200,122,0.35); }
   .pos-row.pos-negative { border-left: 3px solid rgba(240,84,84,0.3); }
+  .pos-pv { font-family: var(--mono); font-size: 0.72rem; margin-top: 3px; opacity: 0.85; }
+  .pos-pv.up { color: var(--green); }
+  .pos-pv.dn { color: var(--red); }
   .pos-name { font-weight: 600; font-size: 0.93rem; line-height: 1.2; }
   .pos-ticker { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); margin-top: 2px; }
   .mn { font-family: 'Courier New', monospace; font-size: 0.83rem; color: var(--text2); text-align: right; }
@@ -746,6 +749,7 @@
           <div class="rule"><div class="rule-num">Règle 06 · Stop-loss</div><div class="rule-title">−15 % après 90 jours = sortie</div><p>Une position en perte ≥ 15 % détenue depuis plus de 90 jours est vendue automatiquement, hors mode panique.</p></div>
           <div class="rule"><div class="rule-num">Règle 07 · Catastrophe</div><div class="rule-title">−25 % = sortie immédiate</div><p>Si une position perd 25 % ou plus, vente forcée sans condition de durée — même en mode panique. Garde-fou contre les effondrements rapides.</p></div>
           <div class="rule"><div class="rule-num">Règle 08 · Réallocation</div><div class="rule-title">Rotations &amp; tailles sous contrainte</div><p>Vendre pour financer mieux (1 rotation max par run), renforcer une ligne sous le plafond des 20 %, alléger avec impôt au prorata de la fraction vendue — la friction frais + PFU doit être justifiée à chaque fois.</p></div>
+          <div class="rule"><div class="rule-num">Règle 09 · Sizing</div><div class="rule-title">L'IA dimensionne ses achats</div><p>Le montant de chaque achat est choisi par l'IA elle-même, pas par une formule — jusqu'à 100 % des liquidités si l'opportunité le justifie. Garde-fous : jamais de cash négatif, 20 % max par ligne, et au-delà de 65 % sur un même secteur, une conviction forte explicitement assumée est exigée.</p></div>
         </div>
       </div>
 
@@ -1872,6 +1876,7 @@ async function loadPortfolio() {
           const fillBg = isPos ? 'var(--green)' : 'var(--red)';
           // Prix d'achat en € : montant_investi (toujours en €) / quantité
           const prixAchatEur = p.montant_investi > 0 ? p.montant_investi / p.quantite : p.prix_achat;
+          const pvLatente = p.plus_value_latente_eur ?? (p.montant_investi > 0 ? p.valeur_actuelle - p.montant_investi : 0);
           return `<div class="pos-row ${isPos?'pos-positive':'pos-negative'}">
             <div>
               <div class="pos-name">${p.nom}</div>
@@ -1880,7 +1885,7 @@ async function loadPortfolio() {
             <div class="mn">${p.quantite}</div>
             <div class="mn">${fmtEur(prixAchatEur)}</div>
             <div class="mn">${fmtEur(p.valeur_actuelle)}</div>
-            <div><span class="perf-badge ${isPos?'perf-up':'perf-dn'}">${sign(p.eurPerf)}${fmt(p.eurPerf,1)} %</span></div>
+            <div><span class="perf-badge ${isPos?'perf-up':'perf-dn'}">${sign(p.eurPerf)}${fmt(p.eurPerf,1)} %</span><div class="pos-pv ${isPos?'up':'dn'}">${pvLatente>=0?'+':'−'}${fmtEur(Math.abs(pvLatente))}</div></div>
             <div>
               <div class="poids-wrap">
                 <div class="poids-bar"><div class="poids-fill" style="width:${Math.min(p.poids*3.3,100)}%;background:${fillBg};opacity:0.7"></div></div>
