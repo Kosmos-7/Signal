@@ -129,7 +129,7 @@ def bucket_cross_days(d):
 
 # Version du style/prompt éditorial — bumper FORCE la régénération de toutes les fiches
 # (la signature change), p.ex. après un changement de ton ou d'exigence de chiffrage.
-PROMPT_VERSION = "2026-06-sobre-chiffree"
+PROMPT_VERSION = "2026-07-decote-z1dec"   # z cité à 1 décimale + commentaire décote vs tendance
 
 
 def signature(stock):
@@ -248,12 +248,12 @@ def breakdown_block(stock):
         f"- Score Signal : {stock.get('score','?')}/100  ({stock.get('stars','?')}★)",
         f"- Décomposition : qualité {b.get('qualite','?')}/45 · valorisation {b.get('valorisation','?')}/30 · timing {b.get('timing','?')}/22 · analystes {b.get('analystes','?')}/3",
         f"- Croisement : {b.get('cross_type','?')} (il y a {b.get('cross_days_ago','?')} jours), pente MM21 {fmt(b.get('cross_slope_mm21_pct'),'%')}",
-        f"- RSI : {fmt(b.get('rsi'),'',0)}   |   Z-score régression : {fmt(b.get('regression_z'),'σ',2)}"
+        f"- RSI : {fmt(b.get('rsi'),'',0)}   |   Z-score régression : {fmt(b.get('regression_z'),'σ',1)}"
         + (f" (fenêtre {b.get('regression_window_years')} ans)" if b.get("regression_window_years") else ""),
         f"- Drawdown 52s : {fmt(b.get('drawdown_52w_pct'),'%')}"
         + (f"   |   Zone Fibo : {fibo}" if fibo else ""),
         f"- Fondamentaux (PRÉCISE toujours la période dans la prose) : croissance CA {fmt(b.get('rev_growth_pct'),'%')} = dernier trimestre publié en glissement annuel (a/a){(' au ' + b['mrq']) if b.get('mrq') else ''} · marge nette {fmt(b.get('net_margin_pct'),'%')} = TTM, 12 mois glissants · marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM",
-        f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward {fmt(b.get('forward_pe'),'x',1)} · PER courant {fmt(b.get('trailing_pe'),'x',1)} · FCF yield {fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(b.get('peg'),'',2)} · z-score {fmt(b.get('regression_z'),'σ',2)}. NB : un PER courant nettement supérieur au PER forward = bénéfices au creux de cycle (à expliquer, pas à confondre avec « cher »).",
+        f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward {fmt(b.get('forward_pe'),'x',1)} · PER courant {fmt(b.get('trailing_pe'),'x',1)} · FCF yield {fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(b.get('peg'),'',2)} · z-score {fmt(b.get('regression_z'),'σ',1)}. NB : un PER courant nettement supérieur au PER forward = bénéfices au creux de cycle (à expliquer, pas à confondre avec « cher »).",
     ]
     # Décote/surcote vs tendance + consensus (v3.3.0) — avec les garde-fous d'écriture :
     # jamais « marge de sécurité », caveat structurel obligatoire sur les extrêmes.
