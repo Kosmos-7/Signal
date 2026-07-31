@@ -255,6 +255,29 @@ def breakdown_block(stock):
         f"- Fondamentaux (PRÉCISE toujours la période dans la prose) : croissance CA {fmt(b.get('rev_growth_pct'),'%')} = dernier trimestre publié en glissement annuel (a/a){(' au ' + b['mrq']) if b.get('mrq') else ''} · marge nette {fmt(b.get('net_margin_pct'),'%')} = TTM, 12 mois glissants · marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM",
         f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward {fmt(b.get('forward_pe'),'x',1)} · PER courant {fmt(b.get('trailing_pe'),'x',1)} · FCF yield {fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(b.get('peg'),'',2)} · z-score {fmt(b.get('regression_z'),'σ',2)}. NB : un PER courant nettement supérieur au PER forward = bénéfices au creux de cycle (à expliquer, pas à confondre avec « cher »).",
     ]
+    # Décote/surcote vs tendance + consensus (v3.3.0) — avec les garde-fous d'écriture :
+    # jamais « marge de sécurité », caveat structurel obligatoire sur les extrêmes.
+    dc = b.get("decote_pct")
+    if dc is not None:
+        sens = "décote" if dc >= 0 else "surcote"
+        z_ext = b.get("regression_z")
+        caveat = ""
+        if z_ext is not None and z_ext <= -2:
+            caveat = " ⚠ écart extrême : évoque le risque de piège de valeur (le marché price peut-être un changement structurel) — ne présente JAMAIS la décote comme une opportunité en soi"
+        elif z_ext is not None and z_ext >= 2:
+            caveat = " ⚠ écart extrême : évoque le risque de chasse au rally (payer très au-dessus de la trajectoire historique)"
+        lines.append(
+            f"- {sens.capitalize()} vs tendance ({b.get('regression_window_years','?')} ans) : {abs(dc):.0f}% "
+            f"(prix tendance {fmt(b.get('prix_tendance'),'',0)}). Tu PEUX la commenter dans `futur` ou `resume`, "
+            f"mais appelle-la « {sens} vs tendance », JAMAIS « marge de sécurité » (la référence est une trajectoire "
+            f"historique, pas une valeur intrinsèque).{caveat}"
+        )
+    if b.get("target_upside_pct") is not None:
+        lines.append(
+            f"- Objectif consensus analystes : {fmt(b.get('target_upside_pct'),'%',0)} de potentiel "
+            f"({b.get('target_analysts') or '?'} analystes) — indicatif, biais optimiste structurel documenté ; "
+            f"si consensus et tendance long terme divergent fortement, ce désaccord mérite une phrase."
+        )
     if warn:
         lines.append(f"- ⚠ Signal en transition : {warn}")
     just = stock.get("justification", "")
