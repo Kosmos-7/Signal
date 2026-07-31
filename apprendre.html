@@ -651,7 +651,7 @@
   <section class="section-block" id="s3">
     <div class="section-label">03 · L'algorithme</div>
     <h2 class="section-title">Comment Signal choisit ses 30 actions</h2>
-    <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong>133 grandes capitalisations</strong> mondiales (USA, Europe, Asie via ADR — une action étrangère cotée aux US via un certificat), et retient les 30 avec le meilleur score. L'univers est construit pour couvrir 12 thèmes : tech mega-cap, semi-conducteurs (incluant équipements), cloud infrastructure pure-play, cybersécurité, REITs (foncières cotées / immobilier), biotech, banques régionales US, défense, luxe, énergie verte EU, conso discrétionnaire, et exposition directe Asie (Chine + Japon ADR). Le chiffre exact varie d'une semaine à l'autre selon les données disponibles — il s'affiche dans le bandeau de la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist</a>. Voici comment le score de chaque action est calculé.</p>
+    <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong>133 grandes capitalisations</strong> mondiales (USA, Europe, Asie via ADR — une action étrangère cotée aux US via un certificat), et retient les 30 avec le meilleur score. L'univers est construit pour couvrir 12 thèmes : tech mega-cap, semi-conducteurs (incluant équipements), cloud infrastructure pure-play, cybersécurité, REITs (foncières cotées / immobilier), biotech, banques régionales US, défense, luxe, énergie verte EU, conso discrétionnaire, et exposition directe Asie (Chine + Japon ADR). La composition exacte évolue au fil des semaines selon les données disponibles. Voici comment le score de chaque action de la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist</a> est calculé.</p>
 
     <div class="scoring-note">
       <strong>Comment l'univers est choisi — et ses biais assumés.</strong> Chaque titre passe trois filtres : capitalisation &gt; 25 Md$, au moins 5 ans d'historique de cours, et une liquidité suffisante (le modèle momentum en a besoin). C'est une liste <strong>curée à la main</strong>, donc volontairement orientée : ~63 % US, large-cap uniquement, fortement pondérée tech/croissance — un <strong>pari momentum assumé</strong> sur le leadership actuel, pas un screen neutre de tout le marché. Une petite poche de leaders non-tech (énergie, industrie, matériaux, défensives) sert d'<strong>assurance</strong> si ce leadership tourne. Hors périmètre par construction : small/mid-caps, marchés émergents, value cyclique profonde.
@@ -716,7 +716,7 @@
     <div class="scoring-note">
       Les 30 valeurs avec le score le plus élevé apparaissent sur la watchlist chaque lundi. Un titre peut <span class="badge-in">↑ Entrer</span> ou <span class="badge-out">↓ Sortir</span> selon l'évolution hebdomadaire de son score — qualité ou valorisation qui évoluent, timing qui se dégrade, publication de résultats, simple recalibrage des signaux.
       <br><br>
-      <strong>VIX — indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est suivi chaque jour ouvré mais ne touche pas au scoring : une version expérimentale qui freinait le momentum en régime de stress a été testée puis désactivée (elle dégradait légèrement le Sharpe sur un backtest 2019-2024 trop bull). Le VIX reste donc <em>informationnel</em> — Claude peut le citer, aucun mécanisme automatique ne s'en sert. Détail de l'indicateur et de ses seuils : voir l'indicateur VIX, §4.
+      <strong>VIX — indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est suivi chaque jour ouvré mais ne touche pas au scoring : une version expérimentale qui freinait le momentum en régime de stress a été testée puis désactivée (elle dégradait légèrement le Sharpe sur un backtest 2019-2024 trop bull). Le VIX reste donc <em>informationnel</em> — Claude peut le citer, aucun mécanisme automatique ne s'en sert. Détail de l'indicateur et de ses seuils : voir la pastille VIX, section <a href="#s5" style="color:var(--gold);text-decoration:none">05 · Le portefeuille IA</a>.
     </div>
   </section>
 
@@ -755,19 +755,19 @@
               <line x1="60" y1="121.6" x2="640" y2="121.6" stroke="#21212e" stroke-width="0.5"/>
               <line x1="60" y1="171.4" x2="640" y2="171.4" stroke="#21212e" stroke-width="0.5"/>
               <line x1="60" y1="221.2" x2="640" y2="221.2" stroke="#21212e" stroke-width="0.5"/>
-              <text x="38" y="74"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">325€</text>
-              <text x="38" y="124" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">300€</text>
-              <text x="38" y="174" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">275€</text>
-              <text x="38" y="224" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">250€</text>
+              <text x="38" y="74"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">325 $</text>
+              <text x="38" y="124" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">300 $</text>
+              <text x="38" y="174" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">275 $</text>
+              <text x="38" y="224" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">250 $</text>
 
-              <!-- prix close — discret en arrière-plan -->
-              <path d="M 60.0,137.0 L 71.8,130.9 L 83.7,147.2 L 95.5,150.7 L 107.3,148.9 L 119.2,147.0 L 131.0,131.6 L 142.9,131.2 L 154.7,134.4 L 166.5,112.7 L 178.4,101.2 L 190.2,103.8 L 202.0,109.2 L 213.9,112.2 L 225.7,111.6 L 237.6,132.2 L 249.4,138.1 L 261.2,108.7 L 273.1,104.3 L 284.9,96.5 L 296.7,126.6 L 308.6,131.3 L 320.4,101.5 L 332.2,95.6 L 344.1,107.4 L 355.9,96.7 L 367.8,81.8 L 379.6,80.5 L 391.4,60.2 L 403.3,66.8 L 415.1,106.3 L 426.9,117.5 L 438.8,123.1 L 450.6,90.4 L 462.4,88.4 L 474.3,110.5 L 486.1,129.3 L 498.0,124.1 L 509.8,137.5 L 521.6,149.4 L 533.5,150.7 L 545.3,144.7 L 557.1,158.7 L 569.0,135.4 L 580.8,101.1 L 592.7,109.8 L 604.5,95.7 L 616.3,98.5 L 628.2,96.8 L 640.0,117.4" stroke="#eeeef8" stroke-width="0.8" fill="none" opacity="0.35"/>
+              <!-- cours close — bleu fiche, en arrière-plan -->
+              <path d="M 60.0,137.0 L 71.8,130.9 L 83.7,147.2 L 95.5,150.7 L 107.3,148.9 L 119.2,147.0 L 131.0,131.6 L 142.9,131.2 L 154.7,134.4 L 166.5,112.7 L 178.4,101.2 L 190.2,103.8 L 202.0,109.2 L 213.9,112.2 L 225.7,111.6 L 237.6,132.2 L 249.4,138.1 L 261.2,108.7 L 273.1,104.3 L 284.9,96.5 L 296.7,126.6 L 308.6,131.3 L 320.4,101.5 L 332.2,95.6 L 344.1,107.4 L 355.9,96.7 L 367.8,81.8 L 379.6,80.5 L 391.4,60.2 L 403.3,66.8 L 415.1,106.3 L 426.9,117.5 L 438.8,123.1 L 450.6,90.4 L 462.4,88.4 L 474.3,110.5 L 486.1,129.3 L 498.0,124.1 L 509.8,137.5 L 521.6,149.4 L 533.5,150.7 L 545.3,144.7 L 557.1,158.7 L 569.0,135.4 L 580.8,101.1 L 592.7,109.8 L 604.5,95.7 L 616.3,98.5 L 628.2,96.8 L 640.0,117.4" stroke="#74b6df" stroke-width="1.1" fill="none" opacity="0.55"/>
 
-              <!-- MM200 — courbe bleue, lisse -->
-              <path d="M 60.0,229.8 L 71.8,226.3 L 83.7,223.3 L 95.5,220.6 L 107.3,217.8 L 119.2,215.0 L 131.0,212.1 L 142.9,209.5 L 154.7,207.2 L 166.5,204.7 L 178.4,202.1 L 190.2,199.2 L 202.0,196.3 L 213.9,193.4 L 225.7,190.5 L 237.6,188.0 L 249.4,185.6 L 261.2,182.3 L 273.1,180.1 L 284.9,177.9 L 296.7,176.1 L 308.6,174.8 L 320.4,173.4 L 332.2,171.9 L 344.1,169.9 L 355.9,167.5 L 367.8,164.6 L 379.6,160.6 L 391.4,156.8 L 403.3,153.3 L 415.1,150.4 L 426.9,147.4 L 438.8,144.2 L 450.6,140.2 L 462.4,136.9 L 474.3,134.3 L 486.1,131.9 L 498.0,129.9 L 509.8,128.5 L 521.6,127.3 L 533.5,126.3 L 545.3,125.2 L 557.1,124.1 L 569.0,123.0 L 580.8,121.7 L 592.7,120.5 L 604.5,119.4 L 616.3,118.3 L 628.2,117.1 L 640.0,116.1" stroke="#5080f8" stroke-width="2.2" fill="none"/>
+              <!-- MM200 — courbe violette, lisse -->
+              <path d="M 60.0,229.8 L 71.8,226.3 L 83.7,223.3 L 95.5,220.6 L 107.3,217.8 L 119.2,215.0 L 131.0,212.1 L 142.9,209.5 L 154.7,207.2 L 166.5,204.7 L 178.4,202.1 L 190.2,199.2 L 202.0,196.3 L 213.9,193.4 L 225.7,190.5 L 237.6,188.0 L 249.4,185.6 L 261.2,182.3 L 273.1,180.1 L 284.9,177.9 L 296.7,176.1 L 308.6,174.8 L 320.4,173.4 L 332.2,171.9 L 344.1,169.9 L 355.9,167.5 L 367.8,164.6 L 379.6,160.6 L 391.4,156.8 L 403.3,153.3 L 415.1,150.4 L 426.9,147.4 L 438.8,144.2 L 450.6,140.2 L 462.4,136.9 L 474.3,134.3 L 486.1,131.9 L 498.0,129.9 L 509.8,128.5 L 521.6,127.3 L 533.5,126.3 L 545.3,125.2 L 557.1,124.1 L 569.0,123.0 L 580.8,121.7 L 592.7,120.5 L 604.5,119.4 L 616.3,118.3 L 628.2,117.1 L 640.0,116.1" stroke="#b59bd6" stroke-width="2.2" fill="none"/>
 
-              <!-- MM21 — courbe or, plus volatile -->
-              <path d="M 60.0,151.6 L 71.8,147.0 L 83.7,146.7 L 95.5,145.2 L 107.3,143.6 L 119.2,144.1 L 131.0,144.2 L 142.9,142.1 L 154.7,139.3 L 166.5,134.1 L 178.4,126.3 L 190.2,119.7 L 202.0,114.4 L 213.9,110.0 L 225.7,108.7 L 237.6,111.9 L 249.4,117.4 L 261.2,121.1 L 273.1,120.1 L 284.9,116.2 L 296.7,113.4 L 308.6,112.4 L 320.4,111.8 L 332.2,111.2 L 344.1,112.7 L 355.9,110.6 L 367.8,104.3 L 379.6,94.9 L 391.4,88.9 L 403.3,81.5 L 415.1,82.2 L 426.9,85.4 L 438.8,94.9 L 450.6,101.4 L 462.4,105.9 L 474.3,108.7 L 486.1,108.3 L 498.0,107.6 L 509.8,111.8 L 521.6,122.8 L 533.5,131.7 L 545.3,139.5 L 557.1,143.5 L 569.0,146.3 L 580.8,141.0 L 592.7,130.9 L 604.5,120.8 L 616.3,113.1 L 628.2,104.0 L 640.0,100.6" stroke="#e8a820" stroke-width="2.2" fill="none"/>
+              <!-- MM21 — courbe ambre, plus volatile -->
+              <path d="M 60.0,151.6 L 71.8,147.0 L 83.7,146.7 L 95.5,145.2 L 107.3,143.6 L 119.2,144.1 L 131.0,144.2 L 142.9,142.1 L 154.7,139.3 L 166.5,134.1 L 178.4,126.3 L 190.2,119.7 L 202.0,114.4 L 213.9,110.0 L 225.7,108.7 L 237.6,111.9 L 249.4,117.4 L 261.2,121.1 L 273.1,120.1 L 284.9,116.2 L 296.7,113.4 L 308.6,112.4 L 320.4,111.8 L 332.2,111.2 L 344.1,112.7 L 355.9,110.6 L 367.8,104.3 L 379.6,94.9 L 391.4,88.9 L 403.3,81.5 L 415.1,82.2 L 426.9,85.4 L 438.8,94.9 L 450.6,101.4 L 462.4,105.9 L 474.3,108.7 L 486.1,108.3 L 498.0,107.6 L 509.8,111.8 L 521.6,122.8 L 533.5,131.7 L 545.3,139.5 L 557.1,143.5 L 569.0,146.3 L 580.8,141.0 L 592.7,130.9 L 604.5,120.8 L 616.3,113.1 L 628.2,104.0 L 640.0,100.6" stroke="#e0995e" stroke-width="2.2" fill="none"/>
 
               <!-- Marqueur du Golden Cross (il y a 13j) -->
               <line x1="605" y1="50" x2="605" y2="240" stroke="#22d98a" stroke-width="1" stroke-dasharray="3,4" opacity="0.6"/>
@@ -775,11 +775,11 @@
               <text x="540" y="44" fill="#22d98a" font-family="Inter,sans-serif" font-size="11" font-weight="600">↑ Golden Cross (il y a 13j)</text>
 
               <!-- Légendes -->
-              <line x1="60" y1="260" x2="80" y2="260" stroke="#e8a820" stroke-width="2.2"/>
-              <text x="86" y="263" fill="#e8a820" font-family="Courier New,monospace" font-size="11">MM21</text>
-              <line x1="160" y1="260" x2="180" y2="260" stroke="#5080f8" stroke-width="2.2"/>
-              <text x="186" y="263" fill="#5080f8" font-family="Courier New,monospace" font-size="11">MM200</text>
-              <line x1="270" y1="260" x2="290" y2="260" stroke="#eeeef8" stroke-width="0.8" opacity="0.35"/>
+              <line x1="60" y1="260" x2="80" y2="260" stroke="#e0995e" stroke-width="2.2"/>
+              <text x="86" y="263" fill="#e0995e" font-family="Courier New,monospace" font-size="11">MM21</text>
+              <line x1="160" y1="260" x2="180" y2="260" stroke="#b59bd6" stroke-width="2.2"/>
+              <text x="186" y="263" fill="#b59bd6" font-family="Courier New,monospace" font-size="11">MM200</text>
+              <line x1="270" y1="260" x2="290" y2="260" stroke="#74b6df" stroke-width="1.1" opacity="0.55"/>
               <text x="296" y="263" fill="var(--text3)" font-family="Courier New,monospace" font-size="11">cours close</text>
 
               <!-- Axe temps -->
@@ -788,7 +788,7 @@
               <text x="640" y="278" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">aujourd'hui</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
-              Données réelles JPM sur 200 jours. La MM21 (or, court terme) a oscillé autour de la MM200 (bleue, long terme) plusieurs fois — c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : MM21 (310.6€) repasse au-dessus de MM200 (302.8€). C'est précisément ce que Signal note fortement sur le critère "cross frais" : 17 points + 1 bonus RSI = 18 sur l'échelle interne /20, ramenée à <strong>9/10</strong> dans le bucket timing du score v3.
+              Données réelles JPM sur 200 jours. La MM21 (<span style="color:#e0995e;font-weight:600">ambre</span>, court terme) a oscillé plusieurs fois autour de la MM200 (<span style="color:#b59bd6;font-weight:600">violette</span>, long terme) — c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : la MM21 (310,6 $) est repassée au-dessus de la MM200 (302,8 $). C'est exactement ce que le score récompense le plus dans le bucket timing : un croisement haussier frais et confirmé (<strong>9/10</strong>).
             </div>
           </div>
 
@@ -798,49 +798,49 @@
 
       <div class="concept-card">
         <span class="concept-label">Z-score (écart à la tendance)</span>
-        <span class="concept-example">Zone saine · +0.4σ</span>
+        <span class="concept-example">Zone saine · +0,4σ</span>
         <div class="concept-body">
-          Le Z-score mesure l'écart du cours actuel par rapport à sa trajectoire long terme, exprimé en écarts-types (σ). Cette trajectoire est calculée par régression log-linéaire sur 10, 20 ou <strong>25 ans</strong> selon l'industrie (depuis v2.0.2) : 10 ans pour la tech (boom IA récent), 20 ans par défaut, et <strong>25 ans pour les cycliques matures</strong> (auto, banks, semi equipment, materials, energy) pour capturer plusieurs cycles complets. Sans cette distinction, des titres comme Valeo (auto) apparaissent en "surchauffe" en 10y (capture une seule descente) alors qu'ils sont en décote sur 25y. +0,4σ = le cours est légèrement au-dessus de sa moyenne historique — encore dans la zone saine. <strong>Au-delà de +2,5σ</strong>, le screener applique une <strong>pénalité CHASE graduée (jusqu'à −6 pts)</strong> pour signaler les surextensions, même quand les fondamentaux sont bons (cas Micron z=+5σ, GOOGL post-rally +124%) : <strong>−4 dès +2σ (confirmé), −6 dès +2,5σ</strong>. À l'inverse, un <strong>bonus « décote-qualité » symétrique</strong> (jusqu'à +6 pts) récompense un titre de <em>qualité</em> qui cote nettement <strong>sous</strong> sa tendance (z ≤ −2σ) <strong>sans être un couteau qui tombe</strong> — pas de death cross frais, MM21 qui se stabilise. C'est le pendant du CHASE : il signale une décote de type « mean-reversion sur la qualité » (Setup B), sans jamais récompenser un titre qui chute encore.
+          Le Z-score mesure l'écart entre le cours actuel et sa trajectoire long terme, exprimé en écarts-types (σ). La trajectoire est une régression log-linéaire calculée sur <strong>10, 20 ou 25 ans selon l'industrie</strong> : 10 ans pour la tech (le boom IA fausse les fenêtres longues), 20 ans par défaut, 25 ans pour les cycliques matures (auto, banques, équipement semi, matériaux, énergie) afin de couvrir plusieurs cycles complets — sans quoi une cyclique comme Valeo paraît « en surchauffe » sur 10 ans alors qu'elle est décotée sur 25. Ici, +0,4σ = cours légèrement au-dessus de sa tendance, encore dans la zone saine.
+          <br><br>
+          <strong>Au-delà de +2σ</strong>, le screener applique une pénalité <strong>CHASE</strong> graduée : −4 pts dès +2σ confirmé, −6 dès +2,5σ. Elle signale une surextension même quand les fondamentaux sont excellents (Micron à +5σ, GOOGL après +124 % de rally).
+          <br><br>
+          <strong>Sous −2σ</strong>, le bonus symétrique « décote-qualité » (jusqu'à +6 pts) récompense un titre de <em>qualité</em> nettement sous sa tendance — à condition qu'il ne soit pas un couteau qui tombe : pas de death cross frais, MM21 qui se stabilise. Il parie sur le retour vers la moyenne de la qualité, jamais sur un titre qui chute encore.
 
           <div style="margin:1rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
-            <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Microsoft (MSFT) · 20 ans · pente +21.7%/an · échelle log</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Microsoft (MSFT) · 20 ans · pente +21,7 %/an · échelle log</div>
             <svg viewBox="0 0 720 280" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
 
-              <!-- Bandes sigma (en log) — du plus extrême en bas vers extrême en haut -->
-              <!-- +2σ à +3σ (rouge surachat extrême) -->
-              <path d="M 60.0,180.3 L 69.8,178.1 L 79.7,175.9 L 89.5,173.7 L 99.3,171.5 L 109.2,169.3 L 119.0,167.1 L 128.8,164.9 L 138.6,162.6 L 148.5,160.4 L 158.3,158.2 L 168.1,156.0 L 178.0,153.8 L 187.8,151.6 L 197.6,149.4 L 207.5,147.2 L 217.3,145.0 L 227.1,142.8 L 236.9,140.6 L 246.8,138.3 L 256.6,136.1 L 266.4,133.9 L 276.3,131.7 L 286.1,129.5 L 295.9,127.3 L 305.8,125.1 L 315.6,122.9 L 325.4,120.7 L 335.3,118.5 L 345.1,116.3 L 354.9,114.0 L 364.7,111.8 L 374.6,109.6 L 384.4,107.4 L 394.2,105.2 L 404.1,103.0 L 413.9,100.8 L 423.7,98.6 L 433.6,96.4 L 443.4,94.2 L 453.2,92.0 L 463.1,89.8 L 472.9,87.6 L 482.7,85.4 L 492.5,83.1 L 502.4,80.9 L 512.2,78.7 L 522.0,76.5 L 531.9,74.3 L 541.7,72.1 L 551.5,69.9 L 561.4,67.7 L 571.2,65.5 L 581.0,63.3 L 590.8,61.1 L 600.7,58.9 L 610.5,56.6 L 620.3,54.4 L 630.2,52.2 L 640.0,50.0 L 640.0,60.0 L 630.2,62.2 L 620.3,64.4 L 610.5,66.6 L 600.7,68.8 L 590.8,71.0 L 581.0,73.2 L 571.2,75.4 L 561.4,77.6 L 551.5,79.8 L 541.7,82.0 L 531.9,84.2 L 522.0,86.5 L 512.2,88.7 L 502.4,90.9 L 492.5,93.1 L 482.7,95.3 L 472.9,97.5 L 463.1,99.7 L 453.2,101.9 L 443.4,104.1 L 433.6,106.3 L 423.7,108.5 L 413.9,110.8 L 404.1,113.0 L 394.2,115.2 L 384.4,117.4 L 374.6,119.6 L 364.7,121.8 L 354.9,124.0 L 345.1,126.2 L 335.3,128.4 L 325.4,130.6 L 315.6,132.8 L 305.8,135.1 L 295.9,137.3 L 286.1,139.5 L 276.3,141.7 L 266.4,143.9 L 256.6,146.1 L 246.8,148.3 L 236.9,150.5 L 227.1,152.7 L 217.3,154.9 L 207.5,157.1 L 197.6,159.3 L 187.8,161.5 L 178.0,163.7 L 168.1,166.0 L 158.3,168.2 L 148.5,170.4 L 138.6,172.6 L 128.8,174.8 L 119.0,177.0 L 109.2,179.2 L 99.3,181.4 L 89.5,183.6 L 79.7,185.8 L 69.8,188.0 L 60.0,190.2 Z" fill="#f0556a" opacity="0.10"/>
-              <!-- +1σ à +2σ (orange tendu) -->
-              <path d="M 60.0,190.2 L 69.8,188.0 L 79.7,185.8 L 89.5,183.6 L 99.3,181.4 L 109.2,179.2 L 119.0,177.0 L 128.8,174.8 L 138.6,172.6 L 148.5,170.4 L 158.3,168.2 L 168.1,166.0 L 178.0,163.7 L 187.8,161.5 L 197.6,159.3 L 207.5,157.1 L 217.3,154.9 L 227.1,152.7 L 236.9,150.5 L 246.8,148.3 L 256.6,146.1 L 266.4,143.9 L 276.3,141.7 L 286.1,139.5 L 295.9,137.3 L 305.8,135.1 L 315.6,132.8 L 325.4,130.6 L 335.3,128.4 L 345.1,126.2 L 354.9,124.0 L 364.7,121.8 L 374.6,119.6 L 384.4,117.4 L 394.2,115.2 L 404.1,113.0 L 413.9,110.8 L 423.7,108.5 L 433.6,106.3 L 443.4,104.1 L 453.2,101.9 L 463.1,99.7 L 472.9,97.5 L 482.7,95.3 L 492.5,93.1 L 502.4,90.9 L 512.2,88.7 L 522.0,86.5 L 531.9,84.2 L 541.7,82.0 L 551.5,79.8 L 561.4,77.6 L 571.2,75.4 L 581.0,73.2 L 590.8,71.0 L 600.7,68.8 L 610.5,66.6 L 620.3,64.4 L 630.2,62.2 L 640.0,60.0 L 640.0,69.9 L 630.2,72.1 L 620.3,74.3 L 610.5,76.5 L 600.7,78.8 L 590.8,81.0 L 581.0,83.2 L 571.2,85.4 L 561.4,87.6 L 551.5,89.8 L 541.7,92.0 L 531.9,94.2 L 522.0,96.4 L 512.2,98.6 L 502.4,100.8 L 492.5,103.1 L 482.7,105.3 L 472.9,107.5 L 463.1,109.7 L 453.2,111.9 L 443.4,114.1 L 433.6,116.3 L 423.7,118.5 L 413.9,120.7 L 404.1,122.9 L 394.2,125.1 L 384.4,127.3 L 374.6,129.5 L 364.7,131.7 L 354.9,133.9 L 345.1,136.2 L 335.3,138.4 L 325.4,140.6 L 315.6,142.8 L 305.8,145.0 L 295.9,147.2 L 286.1,149.4 L 276.3,151.6 L 266.4,153.8 L 256.6,156.0 L 246.8,158.2 L 236.9,160.5 L 227.1,162.7 L 217.3,164.9 L 207.5,167.1 L 197.6,169.3 L 187.8,171.5 L 178.0,173.7 L 168.1,175.9 L 158.3,178.1 L 148.5,180.3 L 138.6,182.5 L 128.8,184.8 L 119.0,187.0 L 109.2,189.2 L 99.3,191.4 L 89.5,193.6 L 79.7,195.8 L 69.8,198.0 L 60.0,200.2 Z" fill="#e8a820" opacity="0.13"/>
-              <!-- Zone saine -0.5σ à +1.5σ (vert) -->
-              <path d="M 60.0,195.2 L 69.8,193.0 L 79.7,190.8 L 89.5,188.6 L 99.3,186.4 L 109.2,184.2 L 119.0,182.0 L 128.8,179.8 L 138.6,177.6 L 148.5,175.4 L 158.3,173.2 L 168.1,171.0 L 178.0,168.7 L 187.8,166.5 L 197.6,164.3 L 207.5,162.1 L 217.3,159.9 L 227.1,157.7 L 236.9,155.5 L 246.8,153.3 L 256.6,151.1 L 266.4,148.9 L 276.3,146.7 L 286.1,144.4 L 295.9,142.2 L 305.8,140.0 L 315.6,137.8 L 325.4,135.6 L 335.3,133.4 L 345.1,131.2 L 354.9,129.0 L 364.7,126.8 L 374.6,124.6 L 384.4,122.4 L 394.2,120.1 L 404.1,117.9 L 413.9,115.7 L 423.7,113.5 L 433.6,111.3 L 443.4,109.1 L 453.2,106.9 L 463.1,104.7 L 472.9,102.5 L 482.7,100.3 L 492.5,98.1 L 502.4,95.8 L 512.2,93.6 L 522.0,91.4 L 531.9,89.2 L 541.7,87.0 L 551.5,84.8 L 561.4,82.6 L 571.2,80.4 L 581.0,78.2 L 590.8,76.0 L 600.7,73.8 L 610.5,71.6 L 620.3,69.4 L 630.2,67.2 L 640.0,64.9 L 640.0,84.8 L 630.2,87.1 L 620.3,89.3 L 610.5,91.5 L 600.7,93.7 L 590.8,95.9 L 581.0,98.1 L 571.2,100.3 L 561.4,102.5 L 551.5,104.7 L 541.7,106.9 L 531.9,109.1 L 522.0,111.3 L 512.2,113.6 L 502.4,115.8 L 492.5,118.0 L 482.7,120.2 L 472.9,122.4 L 463.1,124.6 L 453.2,126.8 L 443.4,129.0 L 433.6,131.2 L 423.7,133.4 L 413.9,135.6 L 404.1,137.8 L 394.2,140.0 L 384.4,142.3 L 374.6,144.5 L 364.7,146.7 L 354.9,148.9 L 345.1,151.1 L 335.3,153.3 L 325.4,155.5 L 315.6,157.7 L 305.8,159.9 L 295.9,162.1 L 286.1,164.3 L 276.3,166.6 L 266.4,168.8 L 256.6,171.0 L 246.8,173.2 L 236.9,175.4 L 227.1,177.6 L 217.3,179.8 L 207.5,182.0 L 197.6,184.2 L 187.8,186.4 L 178.0,188.6 L 168.1,190.9 L 158.3,193.1 L 148.5,195.3 L 138.6,197.5 L 128.8,199.7 L 119.0,201.9 L 109.2,204.1 L 99.3,206.3 L 89.5,208.5 L 79.7,210.7 L 69.8,212.9 L 60.0,215.1 Z" fill="#22d98a" opacity="0.18"/>
-              <!-- -2σ à -1σ (bleu décoté) -->
-              <path d="M 60.0,220.1 L 69.8,217.9 L 79.7,215.7 L 89.5,213.5 L 99.3,211.3 L 109.2,209.1 L 119.0,206.9 L 128.8,204.7 L 138.6,202.4 L 148.5,200.2 L 158.3,198.0 L 168.1,195.8 L 178.0,193.6 L 187.8,191.4 L 197.6,189.2 L 207.5,187.0 L 217.3,184.8 L 227.1,182.6 L 236.9,180.4 L 246.8,178.1 L 256.6,175.9 L 266.4,173.7 L 276.3,171.5 L 286.1,169.3 L 295.9,167.1 L 305.8,164.9 L 315.6,162.7 L 325.4,160.5 L 335.3,158.3 L 345.1,156.1 L 354.9,153.9 L 364.7,151.6 L 374.6,149.4 L 384.4,147.2 L 394.2,145.0 L 404.1,142.8 L 413.9,140.6 L 423.7,138.4 L 433.6,136.2 L 443.4,134.0 L 453.2,131.8 L 463.1,129.6 L 472.9,127.4 L 482.7,125.2 L 492.5,123.0 L 502.4,120.7 L 512.2,118.5 L 522.0,116.3 L 531.9,114.1 L 541.7,111.9 L 551.5,109.7 L 561.4,107.5 L 571.2,105.3 L 581.0,103.1 L 590.8,100.9 L 600.7,98.7 L 610.5,96.4 L 620.3,94.2 L 630.2,92.0 L 640.0,89.8 L 640.0,99.8 L 630.2,102.0 L 620.3,104.2 L 610.5,106.4 L 600.7,108.6 L 590.8,110.8 L 581.0,113.0 L 571.2,115.2 L 561.4,117.4 L 551.5,119.6 L 541.7,121.8 L 531.9,124.0 L 522.0,126.3 L 512.2,128.5 L 502.4,130.7 L 492.5,132.9 L 482.7,135.1 L 472.9,137.3 L 463.1,139.5 L 453.2,141.7 L 443.4,143.9 L 433.6,146.1 L 423.7,148.3 L 413.9,150.6 L 404.1,152.8 L 394.2,155.0 L 384.4,157.2 L 374.6,159.4 L 364.7,161.6 L 354.9,163.8 L 345.1,166.0 L 335.3,168.2 L 325.4,170.4 L 315.6,172.6 L 305.8,174.9 L 295.9,177.1 L 286.1,179.3 L 276.3,181.5 L 266.4,183.7 L 256.6,185.9 L 246.8,188.1 L 236.9,190.3 L 227.1,192.5 L 217.3,194.7 L 207.5,196.9 L 197.6,199.2 L 187.8,201.4 L 178.0,203.6 L 168.1,205.8 L 158.3,208.0 L 148.5,210.2 L 138.6,212.4 L 128.8,214.6 L 119.0,216.8 L 109.2,219.0 L 99.3,221.2 L 89.5,223.4 L 79.7,225.6 L 69.8,227.8 L 60.0,230.0 Z" fill="#5080f8" opacity="0.10"/>
+              <!-- Canal de régression ±1σ/±2σ — même langage visuel que les graphiques des fiches -->
+
+              <!-- bande ±2σ -->
+              <path d="M 60,190.2 L 640,60.0 L 640,99.8 L 60,230.0 Z" fill="#74b6df" opacity="0.05"/>
+              <!-- zone saine −0,5σ à +1,5σ — seul surlignage sémantique -->
+              <path d="M 60,195.2 L 640,64.9 L 640,84.8 L 60,215.1 Z" fill="#22d98a" opacity="0.07"/>
+              <!-- liserés σ -->
+              <line x1="60" y1="190.2" x2="640" y2="60.0" stroke="#74b6df" stroke-width="1" opacity="0.14"/>
+              <line x1="60" y1="200.2" x2="640" y2="69.9" stroke="#74b6df" stroke-width="1" opacity="0.22"/>
+              <line x1="60" y1="220.1" x2="640" y2="89.8" stroke="#74b6df" stroke-width="1" opacity="0.22"/>
+              <line x1="60" y1="230.0" x2="640" y2="99.8" stroke="#74b6df" stroke-width="1" opacity="0.14"/>
 
               <!-- Droite de régression long terme (trend log-linéaire) -->
-              <path d="M 60,210.1 L 640,79.9" stroke="#22d98a" stroke-width="1.8" stroke-dasharray="6,4" opacity="0.85"/>
+              <path d="M 60,210.1 L 640,79.9" stroke="#c6c6e0" stroke-width="1.6" stroke-dasharray="6,4" opacity="0.75"/>
 
               <!-- Cours réel MSFT 20 ans (en log) -->
-              <path d="M 60.0,191.7 L 69.8,188.7 L 79.7,182.6 L 89.5,182.1 L 99.3,184.4 L 109.2,179.6 L 119.0,184.0 L 128.8,188.4 L 138.6,200.8 L 148.5,195.1 L 158.3,187.0 L 168.1,182.5 L 178.0,185.4 L 187.8,187.9 L 197.6,183.2 L 207.5,187.8 L 217.3,184.5 L 227.1,179.2 L 236.9,180.8 L 246.8,180.5 L 256.6,181.3 L 266.4,173.8 L 276.3,173.2 L 286.1,170.2 L 295.9,166.3 L 305.8,163.0 L 315.6,164.3 L 325.4,163.6 L 335.3,157.8 L 345.1,157.7 L 354.9,157.9 L 364.7,153.2 L 374.6,149.5 L 384.4,146.2 L 394.2,140.6 L 404.1,136.3 L 413.9,132.6 L 423.7,131.4 L 433.6,128.5 L 443.4,122.5 L 453.2,120.1 L 463.1,117.7 L 472.9,109.6 L 482.7,107.9 L 492.5,102.7 L 502.4,97.7 L 512.2,93.6 L 522.0,96.1 L 531.9,97.7 L 541.7,101.8 L 551.5,97.2 L 561.4,94.0 L 571.2,88.5 L 581.0,85.5 L 590.8,84.6 L 600.7,82.8 L 610.5,83.8 L 620.3,78.0 L 630.2,80.1 L 640.0,84.4" stroke="#eeeef8" stroke-width="1.5" fill="none"/>
-              <circle cx="640" cy="84.4" r="4" fill="#e8a820" stroke="#fff" stroke-width="1.2"/>
+              <path d="M 60.0,191.7 L 69.8,188.7 L 79.7,182.6 L 89.5,182.1 L 99.3,184.4 L 109.2,179.6 L 119.0,184.0 L 128.8,188.4 L 138.6,200.8 L 148.5,195.1 L 158.3,187.0 L 168.1,182.5 L 178.0,185.4 L 187.8,187.9 L 197.6,183.2 L 207.5,187.8 L 217.3,184.5 L 227.1,179.2 L 236.9,180.8 L 246.8,180.5 L 256.6,181.3 L 266.4,173.8 L 276.3,173.2 L 286.1,170.2 L 295.9,166.3 L 305.8,163.0 L 315.6,164.3 L 325.4,163.6 L 335.3,157.8 L 345.1,157.7 L 354.9,157.9 L 364.7,153.2 L 374.6,149.5 L 384.4,146.2 L 394.2,140.6 L 404.1,136.3 L 413.9,132.6 L 423.7,131.4 L 433.6,128.5 L 443.4,122.5 L 453.2,120.1 L 463.1,117.7 L 472.9,109.6 L 482.7,107.9 L 492.5,102.7 L 502.4,97.7 L 512.2,93.6 L 522.0,96.1 L 531.9,97.7 L 541.7,101.8 L 551.5,97.2 L 561.4,94.0 L 571.2,88.5 L 581.0,85.5 L 590.8,84.6 L 600.7,82.8 L 610.5,83.8 L 620.3,78.0 L 630.2,80.1 L 640.0,84.4" stroke="#74b6df" stroke-width="1.5" fill="none"/>
+              <circle cx="640" cy="84.4" r="4" fill="#74b6df" stroke="#fff" stroke-width="1.2"/>
 
               <!-- Labels Y axis (échelle log) -->
-              <text x="48"  y="195"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">20€</text>
-              <text x="48"  y="151"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">55€</text>
-              <text x="48"  y="118"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">148€</text>
-              <text x="48"  y="85"   fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">403€</text>
+              <text x="48"  y="195"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">20 $</text>
+              <text x="48"  y="151"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">55 $</text>
+              <text x="48"  y="118"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">148 $</text>
+              <text x="48"  y="85"   fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">403 $</text>
 
               <!-- Labels zones à droite -->
-              <text x="650" y="55"  fill="#f0556a" font-family="Courier New,monospace" font-size="10">+3σ</text>
-              <text x="650" y="76"  fill="#f0556a" font-family="Inter,sans-serif" font-size="9" font-style="italic">surachat</text>
-
-              <text x="650" y="95"  fill="#e8a820" font-family="Courier New,monospace" font-size="10">+1σ tendu</text>
-
-              <text x="650" y="135" fill="#22d98a" font-family="Courier New,monospace" font-size="10" font-weight="700">★ zone saine</text>
-              <text x="650" y="148" fill="#22d98a" font-family="Inter,sans-serif" font-size="9" font-style="italic">−0.5σ à +1.5σ</text>
-
-              <text x="650" y="180" fill="#5080f8" font-family="Courier New,monospace" font-size="10">−1σ décoté</text>
-
-              <text x="650" y="220" fill="#5080f8" font-family="Courier New,monospace" font-size="10">−3σ survente</text>
+              <text x="650" y="63"  fill="#74b6df" opacity="0.75" font-family="Courier New,monospace" font-size="10">+2σ</text>
+              <text x="650" y="73"  fill="#74b6df" font-family="Courier New,monospace" font-size="10">+1σ</text>
+              <text x="648" y="84"  fill="#22d98a" font-family="Courier New,monospace" font-size="10" font-weight="700">zone saine</text>
+              <text x="650" y="94"  fill="#74b6df" font-family="Courier New,monospace" font-size="10">−1σ</text>
+              <text x="650" y="104" fill="#74b6df" opacity="0.75" font-family="Courier New,monospace" font-size="10">−2σ</text>
 
               <!-- Axe temps -->
               <text x="60"  y="260" fill="var(--text3)" font-family="Courier New,monospace" font-size="9">2006</text>
@@ -848,12 +848,12 @@
               <text x="640" y="260" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">2026</text>
 
               <!-- Légende -->
-              <text x="60" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">cours réel MSFT (échelle log)</text>
-              <line x1="200" y1="273" x2="220" y2="273" stroke="#22d98a" stroke-width="1.8" stroke-dasharray="4,3"/>
-              <text x="226" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">droite de régression (+21.7%/an)</text>
+              <text x="60" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">cours MSFT (échelle log)</text>
+              <line x1="200" y1="273" x2="220" y2="273" stroke="#c6c6e0" stroke-width="1.6" stroke-dasharray="4,3"/>
+              <text x="226" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">droite de régression (+21,7 %/an)</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
-              Données réelles MSFT sur 20 ans, en échelle logarithmique (la trend devient une droite). Pente +21.7%/an. Le cours <span style="color:var(--text2);font-weight:600">(blanc)</span> oscille autour de la <span style="color:var(--green);font-weight:600">droite de régression</span>. On voit clairement les phases : MSFT a passé 2008-2016 en dessous de sa tendance (zone décotée bleue), puis l'a rejointe en 2017-2018, et l'a dépassée en 2020-2021 (zone tendue orange). Aujourd'hui : <span style="color:var(--gold);font-weight:600">−0.45σ</span>, sous la tendance mais dans la zone saine.
+              Données réelles MSFT sur 20 ans, en échelle logarithmique (la tendance devient une droite, pente +21,7 %/an). Le cours <span style="color:#74b6df;font-weight:600">(bleu)</span> oscille autour de sa <span style="color:var(--text2);font-weight:600">droite de régression</span> : sous la tendance de 2008 à 2016, retour en 2017-2018, au-dessus en 2020-2021. Aujourd'hui : <span style="color:var(--gold);font-weight:600">−0,5σ</span>, sous la tendance mais dans la <span style="color:var(--green);font-weight:600">zone saine</span> (−0,5σ à +1,5σ). C'est le même canal ±1σ/±2σ que sur les graphiques des fiches de la watchlist.
             </div>
           </div>
 
@@ -867,7 +867,7 @@
         <div class="concept-body">
           Chez Benjamin Graham, la <strong>marge de sécurité</strong> est le principe fondateur du value investing : n'achetez jamais un actif à son prix estimé — achetez-le nettement en dessous. L'écart entre le prix payé et la valeur estimée est votre coussin d'erreur, mesuré en % de la valeur : payer 60 ce qui « vaut » 100, c'est une marge de 40 % — votre estimation peut être trop optimiste de 40 % avant que vous ayez surpayé.
           <br><br>
-          Chaque fiche de la watchlist affiche désormais une mesure apparentée : la <strong>décote vs tendance</strong>. La référence est le <em>prix de tendance</em> — ce que vaudrait le titre s'il était exactement sur sa droite de régression long terme (celle du Z-score ci-dessus, fenêtre 10/20/25 ans selon le profil). Un titre à 250 dont la tendance dit 578 se paie à 43 centimes pour 1 dollar de trajectoire historique : décote de 57 %. Symétriquement, un titre <em>au-dessus</em> de sa droite affiche une <strong>surcote</strong>. Le canal de régression (±1σ/±2σ) sur le graphique de chaque fiche montre la même information visuellement.
+          Chaque fiche de la watchlist affiche désormais une mesure apparentée : la <strong>décote vs tendance</strong>. La référence est le <em>prix de tendance</em> — ce que vaudrait le titre s'il était exactement sur sa droite de régression long terme (celle du Z-score ci-dessus, fenêtre 10/20/25 ans selon le profil). Un titre à 250 dont la tendance dit 578 se paie à 43 centimes pour 1 dollar de trajectoire historique : décote de 57 %. Symétriquement, un titre <em>au-dessus</em> de sa droite affiche une <strong>surcote</strong>. Le canal de régression (±1σ/±2σ) sur le graphique de chaque fiche montre la même information visuellement — c'est le canal illustré sur le graphique Microsoft ci-dessus.
           <br><br>
           <strong>Pourquoi nous refusons l'étiquette « marge de sécurité »</strong> : chez Graham, la référence est une <em>valeur intrinsèque estimée</em> — issue d'une analyse des profits, du bilan, du business. Notre référence est une <em>trajectoire de prix passée</em> — un rétroviseur statistique, sans aucun contenu fondamental. Coller l'étiquette de Graham sur cette mesure emprunterait l'autorité d'un concept qu'on ne calcule pas, et le mot « sécurité » promettrait une protection qui n'est pas établie. La décote chiffre un <strong>désaccord entre le passé et le prix</strong> — elle ne dit pas qui a raison.
           <br><br>
@@ -938,17 +938,17 @@
 
               <!-- ZONES COLORÉES entre les niveaux Fibo (du peak en bas vers swing low) -->
               <!-- Zone 1 : 0% → 23.6% (peak à Fibo 23.6%) — chase / FOMO -->
-              <rect x="50" y="50"  width="380" height="52"  fill="#f0556a" opacity="0.10"/>
+              <rect x="50" y="50"  width="380" height="52"  fill="#f0556a" opacity="0.06"/>
               <!-- Zone 2 : 23.6% → 38.2% — pullback léger -->
-              <rect x="50" y="102" width="380" height="32"  fill="#22d98a" opacity="0.10"/>
+              <rect x="50" y="102" width="380" height="32"  fill="#22d98a" opacity="0.06"/>
               <!-- Zone 3 : 38.2% → 50% — ZONE D'ENTRÉE CHARTISTE STANDARD ★ -->
-              <rect x="50" y="134" width="380" height="26"  fill="#22d98a" opacity="0.28"/>
+              <rect x="50" y="134" width="380" height="26"  fill="#22d98a" opacity="0.16"/>
               <!-- Zone 4 : 50% → 61.8% — Dow/Gann + transition vers Golden Zone -->
-              <rect x="50" y="160" width="380" height="26"  fill="#e8a820" opacity="0.18"/>
+              <rect x="50" y="160" width="380" height="26"  fill="#e8a820" opacity="0.11"/>
               <!-- Zone 5 : 61.8% → 78.6% — Golden Zone ★★ -->
-              <rect x="50" y="186" width="380" height="37"  fill="#e8a820" opacity="0.28"/>
+              <rect x="50" y="186" width="380" height="37"  fill="#e8a820" opacity="0.16"/>
               <!-- Zone 6 : 78.6% → 100% — rally annulé / ultime rempart -->
-              <rect x="50" y="223" width="380" height="47"  fill="#f0556a" opacity="0.18"/>
+              <rect x="50" y="223" width="380" height="47"  fill="#f0556a" opacity="0.10"/>
 
               <!-- axes -->
               <line x1="50" y1="50"  x2="50"  y2="270" stroke="#33334e" stroke-width="1"/>
@@ -964,7 +964,7 @@
               <line x1="50" y1="270" x2="430" y2="270" stroke="#f0556a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
 
               <!-- price curve : 100€ (départ) → 200€ (peak) → 162€ (correction) -->
-              <path d="M 50,270 Q 150,260 220,200 Q 290,130 360,50 L 360,50 Q 380,80 410,135" stroke="#5080f8" stroke-width="2.2" fill="none"/>
+              <path d="M 50,270 Q 150,260 220,200 Q 290,130 360,50 L 360,50 Q 380,80 410,135" stroke="#74b6df" stroke-width="2.2" fill="none"/>
               <circle cx="360" cy="50"  r="4" fill="#22d98a"/>
               <circle cx="410" cy="135" r="5" fill="#e8a820" stroke="#fff" stroke-width="1.5"/>
               <circle cx="50"  cy="270" r="3" fill="#f0556a"/>
@@ -972,9 +972,9 @@
               <!-- LABELS DE ZONE à l'intérieur du chart (taille moyenne, italique) -->
               <text x="240" y="80"  fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">chase / FOMO</text>
               <text x="240" y="123" fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">pullback léger</text>
-              <text x="240" y="153" fill="#22d98a" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">★ zone d'entrée saine</text>
-              <text x="240" y="178" fill="#a07010" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">démarcation Dow/Gann</text>
-              <text x="240" y="210" fill="#e8a820" font-family="Inter,sans-serif" font-size="11" font-weight="700" text-anchor="middle">★★ Golden Zone</text>
+              <text x="180" y="153" fill="#22d98a" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">★ zone d'entrée saine</text>
+              <text x="160" y="178" fill="#a07010" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">démarcation Dow/Gann</text>
+              <text x="275" y="210" fill="#e8a820" font-family="Inter,sans-serif" font-size="11" font-weight="700" text-anchor="middle">★★ Golden Zone</text>
               <text x="240" y="252" fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">rally annulé / ultime rempart</text>
 
               <!-- LABELS PRIX À DROITE (compact, deux lignes par niveau si besoin) -->
@@ -1000,7 +1000,7 @@
               <text x="478" y="274" fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing low</text>
 
               <!-- Annotations sur la courbe -->
-              <text x="170" y="245" fill="#5080f8" font-family="Inter,sans-serif" font-size="10" font-style="italic">rally +100%</text>
+              <text x="58" y="240" fill="#74b6df" font-family="Inter,sans-serif" font-size="10" font-style="italic">rally +100%</text>
               <text x="375" y="42"  fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-weight="600">peak</text>
               <text x="392" y="155" fill="#e8a820" font-family="Inter,sans-serif" font-size="10" font-style="italic">correction</text>
               <text x="55"  y="285" fill="#f0556a" font-family="Inter,sans-serif" font-size="10">départ rally</text>
