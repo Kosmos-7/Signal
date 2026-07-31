@@ -55,7 +55,7 @@ jobs:
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
-          git add watchlist.json portfolio.json analyses.json notes/watchlist_archive/
+          git add watchlist.json charts.json portfolio.json analyses.json notes/watchlist_archive/
           if git diff --staged --quiet; then
             echo "Aucun changement cette semaine."
           else
