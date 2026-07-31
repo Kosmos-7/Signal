@@ -271,11 +271,17 @@ def calcul_regression(close_series, holdout_days=20):
     +1..+2  : au-dessus de la tendance — normal pour actions en forte hausse
     -0.5..+1: zone neutre / saine — position idéale pour entrer
     < -1.5  : survente relative — rebond possible ou déclin structurel
+
+    Retourne (z_score, pente_annuelle, prix_tendance, sigma) :
+      prix_tendance = exp(droite au dernier point) — même unité que la série passée
+      sigma         = écart-type des résidus in-sample (ddof=1)
+    En échec : (0.0, 0.0, None, None) ; si résidus dégénérés (std < 1e-8) :
+    (0.0, pente, None, None) — un z contre un σ quasi nul n'a pas de sens.
     """
     try:
         prices = close_series.values.astype(float)
         if len(prices) < 30:
-            return 0.0, 0.0
+            return 0.0, 0.0, None, None
         log_p = np.log(prices)
 
         # Holdout : on retire les N derniers jours du fit (mais pas si historique trop court)
@@ -292,7 +298,7 @@ def calcul_regression(close_series, holdout_days=20):
         residuals_in     = log_fit - fitted_in_sample
         std_r            = float(np.std(residuals_in, ddof=1))
         if std_r < 1e-8:
-            return 0.0, round(slope * 252 * 100, 1)
+            return 0.0, round(slope * 252 * 100, 1), None, None
 
         # Mesure du dernier point contre la droite extrapolée
         x_last           = float(n_total - 1)
@@ -300,9 +306,10 @@ def calcul_regression(close_series, holdout_days=20):
         residual_last    = float(log_p[-1] - fitted_last)
         z_score          = residual_last / std_r
         pente_annuelle   = slope * 252 * 100
-        return round(z_score, 2), round(pente_annuelle, 1)
+        prix_tendance    = float(np.exp(fitted_last))   # valeur de la droite au dernier point (unité de la série)
+        return round(z_score, 2), round(pente_annuelle, 1), prix_tendance, std_r
     except Exception:
-        return 0.0, 0.0
+        return 0.0, 0.0, None, None
 
 def reg_signal_label(z):
     if   z >  2.0: return "surachat"
@@ -310,6 +317,49 @@ def reg_signal_label(z):
     elif z > -0.5: return "neutre"
     elif z > -1.5: return "sous tendance"
     else:          return "survente"
+
+def _decote_pct(prix, prix_tendance):
+    """Décote vs droite de tendance : POSITIF = prix SOUS la tendance (décote),
+    NÉGATIF = surcote. None si la tendance est indisponible ou aberrante (≤ 0)."""
+    if prix_tendance is None or prix_tendance <= 0:
+        return None
+    return round((1 - prix / prix_tendance) * 100, 1)
+
+# ── PAYLOAD GRAPHIQUE (charts.json) ──────────────────────────────────────────
+def _mois(ts):
+    """Abscisse compacte des graphes : mois flottant (année*12 + mois 0-based
+    + fraction du jour, base 31). 2 décales suffisent (~9h de résolution)."""
+    return round(ts.year * 12 + (ts.month - 1) + (ts.day - 1) / 31, 2)
+
+def _sample_series(s):
+    """Échantillonne une série de prix pour le payload graphique :
+    hebdo (W-FRI, last) sur les 730 derniers jours, mensuel (ME, last) au-delà —
+    sur tout l'historique. Retourne [[t, valeur], ...] (t = _mois, valeurs 2 déc.).
+
+    Deux pièges gérés explicitement :
+    - le seau W-FRI en cours est étiqueté au vendredi FUTUR : le dernier point
+      est ré-étiqueté à la date réelle de la dernière barre, avec sa vraie valeur ;
+    - au raccord mensuel/hebdo, le dernier seau ME peut être étiqueté APRÈS le
+      premier seau hebdo (étiquette fin de mois vs données arrêtées au cutoff)
+      → on le supprime pour garder des abscisses strictement croissantes.
+    """
+    s = s.dropna()
+    if s.empty:
+        return []
+    last_ts = s.index[-1]
+    cutoff  = last_ts - pd.Timedelta(days=730)
+    old     = s[s.index <= cutoff]
+    recent  = s[s.index >  cutoff]
+    mensuel = old.resample("ME").last().dropna()       if len(old)    else old
+    hebdo   = recent.resample("W-FRI").last().dropna() if len(recent) else recent
+    if len(mensuel) and len(hebdo):
+        mensuel = mensuel[mensuel.index < hebdo.index[0]]
+    combined = pd.concat([mensuel, hebdo])
+    pts = [[_mois(ts), round(float(v), 2)] for ts, v in combined.items()]
+    if pts:
+        # Ré-étiquetage du dernier point à la date réelle de la dernière barre quotidienne
+        pts[-1] = [_mois(last_ts), round(float(s.iloc[-1]), 2)]
+    return pts
 
 # ── RETRACEMENT DE FIBONACCI ─────────────────────────────────────────────────
 def fibonacci_retracement(close_series, lookback=252):
@@ -680,26 +730,36 @@ def score_ticker(ticker, vix=None):
             reg_days = _REG_DAYS_STD       # 20y par défaut
             reg_window_reason = "standard_20y"
         close_reg   = close.iloc[-reg_days:] if len(close) >= reg_days else close
-        regression_z, reg_pente = calcul_regression(close_reg)
+        regression_z, reg_pente, prix_tendance, reg_sigma = calcul_regression(close_reg)
         # Fallback si NaN (cas observé sur SK Hynix avec fenêtre 25y) : retomber sur fenêtres plus courtes
         if regression_z is None or (isinstance(regression_z, float) and np.isnan(regression_z)):
             for fb_days in (_REG_DAYS_STD, _REG_DAYS_TECH):
                 if fb_days < reg_days:
                     close_fb = close.iloc[-fb_days:] if len(close) >= fb_days else close
-                    z_fb, p_fb = calcul_regression(close_fb)
+                    z_fb, p_fb, pt_fb, sg_fb = calcul_regression(close_fb)
                     if z_fb is not None and not (isinstance(z_fb, float) and np.isnan(z_fb)):
                         regression_z, reg_pente = z_fb, p_fb
+                        prix_tendance, reg_sigma = pt_fb, sg_fb  # même fenêtre effective que le z publié
                         reg_days  = fb_days
                         close_reg = close_fb   # fenêtre EFFECTIVE — le breakdown publie len(close_reg)
                         reg_window_reason += f"_fallback_{round(fb_days / 252)}y"  # honnêteté : le z publié n'est PAS celui de la fenêtre doctrine
                         break
-        # Si toujours NaN après fallbacks, force à 0 pour éviter propagation
+        # Si toujours NaN après fallbacks, force à 0 pour éviter propagation —
+        # et une droite invalide ne peut produire ni prix de tendance ni sigma.
         if regression_z is None or (isinstance(regression_z, float) and np.isnan(regression_z)):
-            regression_z = 0.0
+            regression_z  = 0.0
+            prix_tendance = None
+            reg_sigma     = None
         # reg_pente suit le même contrat : un NaN résiduel serait publié tel quel
         # dans regression_pente_pct et invaliderait le JSON (cf. garde MM200).
         if reg_pente is None or (isinstance(reg_pente, float) and np.isnan(reg_pente)):
             reg_pente = 0.0
+        # Sanitize prix_tendance/sigma : exp() peut déborder (inf) et NaN traverserait
+        # round() sans lever — allow_nan=False ferait alors échouer tout le run.
+        if prix_tendance is not None and not (np.isfinite(prix_tendance) and prix_tendance > 0):
+            prix_tendance = None
+        if reg_sigma is not None and not np.isfinite(reg_sigma):
+            reg_sigma = None
         reg_signal              = reg_signal_label(regression_z)
         reg_zone_saine          = -0.5 <= regression_z <= 1.5
 
@@ -944,6 +1004,31 @@ def score_ticker(ticker, vix=None):
         score = max(0, min(100, score + death_pen + chase_pen + value_bonus))
         stars = 5 if score >= 90 else 4 if score >= 75 else 3 if score >= 60 else 2 if score >= 45 else 1
 
+        # ── Décote vs tendance + objectif analystes (informationnels, hors scoring) ──
+        # decote_pct : POSITIF = prix sous la droite de régression (décote), NÉGATIF = surcote.
+        decote_pct = _decote_pct(prix, prix_tendance)
+
+        # targetMeanPrice : yfinance peut renvoyer NaN (float) — le laisser passer
+        # invaliderait watchlist.json (allow_nan=False). Piège pence : les targets UK
+        # arrivent en GBp comme les cours → même conversion /100 que close (famille ×100).
+        _tgt = info.get("targetMeanPrice")
+        try:
+            _tgt = float(_tgt) if _tgt is not None else None
+        except (TypeError, ValueError):
+            _tgt = None
+        if _tgt is not None and not (np.isfinite(_tgt) and _tgt > 0):
+            _tgt = None
+        if _tgt is not None and info_curr == 'GBp':
+            _tgt = _tgt / 100
+        target_mean_price = round(_tgt, 2) if _tgt is not None else None
+        target_upside_pct = round((_tgt / prix - 1) * 100, 1) if (_tgt is not None and prix > 0) else None
+        _n_ana = info.get("numberOfAnalystOpinions")
+        try:
+            # NaN != NaN → écarte les NaN float avant int()
+            target_analysts = int(_n_ana) if (_n_ana is not None and _n_ana == _n_ana) else None
+        except (TypeError, ValueError):
+            target_analysts = None
+
         exchange = info.get("exchange") or ""   # `or` : la clé peut exister avec None
         ex_up    = exchange.upper()
         MARKET_BADGE = {
@@ -1032,6 +1117,9 @@ def score_ticker(ticker, vix=None):
             "regression_z":          regression_z,
             "regression_signal":     reg_signal,
             "regression_pente_pct":  reg_pente,
+            "regression_sigma":      round(reg_sigma, 4) if reg_sigma is not None else None,
+            "prix_tendance":         round(prix_tendance, 2) if prix_tendance is not None else None,  # devise native (GBp déjà → GBP)
+            "decote_pct":            decote_pct,   # POSITIF = décote (prix sous tendance), NÉGATIF = surcote
             # Fenêtre EFFECTIVE de la régression (après éventuel fallback NaN) —
             # avant, on republiait la fenêtre doctrine même quand le z venait d'un fallback
             "regression_window_years":  round(len(close_reg) / 252),
@@ -1046,6 +1134,10 @@ def score_ticker(ticker, vix=None):
             "trailing_pe":           round(trailing_pe, 1) if trailing_pe else None,
             "fcf_yield_pct":         round(fcf_yield, 2) if fcf_yield is not None else None,
             "peg":                   round(peg, 2) if peg else None,
+            # Objectif de cours analystes (informationnel — cf. reco pour la note consensus)
+            "target_mean_price":     target_mean_price,
+            "target_upside_pct":     target_upside_pct,
+            "target_analysts":       target_analysts,
             "death_pen":             death_pen,
             "chase_pen":             chase_pen,
             "value_bonus":           value_bonus,
@@ -1054,6 +1146,20 @@ def score_ticker(ticker, vix=None):
         }
 
         nom = info.get("shortName") or info.get("longName") or ticker
+
+        # ── Payload graphique (charts.json) — fail-soft : un graphe raté ne doit
+        # JAMAIS faire échouer le scoring du ticker (le try englobant retournerait None).
+        try:
+            chart = {
+                "points": _sample_series(close),
+                "mm21":   _sample_series(close.rolling(21).mean().dropna()),
+                "mm200":  _sample_series(close.rolling(200).mean().dropna()),
+                "t_win0": _mois(close_reg.index[0]),   # début de la fenêtre de régression effective
+                "t_last": _mois(close.index[-1]),
+            }
+        except Exception as e:
+            print(f"  ⚠️  {ticker}: payload graphique en échec ({type(e).__name__}) — graphe omis")
+            chart = None
 
         return {
             "ticker":        ticker,
@@ -1066,6 +1172,7 @@ def score_ticker(ticker, vix=None):
             "change":        "stable",
             "breakdown":     breakdown,
             "justification": generer_justification(nom, score, details, alertes),
+            "chart":         chart,   # retiré par main() avant écriture — ne fuit jamais dans watchlist.json
         }
 
     except Exception as e:
@@ -1282,6 +1389,14 @@ def main():
         for alert in concentration_alerts:
             print(f"   · {alert}")
 
+    # ── Extraction du payload graphique ─────────────────────────────────────
+    # "chart" ne doit fuiter ni dans watchlist.json ni dans l'archive : on le
+    # collecte pour le top 30 (entrées non-None seulement) puis on le retire de
+    # TOUS les résultats — top inclus, ce sont les mêmes dicts.
+    charts = {s["ticker"]: s["chart"] for s in top if s.get("chart") is not None}
+    for r in resultats:
+        r.pop("chart", None)
+
     d = date.today()
     output = {
         "updated_at":              str(d),
@@ -1302,6 +1417,14 @@ def main():
     with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2, allow_nan=False)
     os.replace(tmp_path, "watchlist.json")
+
+    # charts.json — payload graphique du top 30. Fichier volumineux : séparateurs
+    # compacts, pas d'indent. Même contrat d'écriture atomique + allow_nan=False.
+    tmp_charts = "charts.json.tmp"
+    with open(tmp_charts, "w", encoding="utf-8") as f:
+        json.dump(charts, f, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+    os.replace(tmp_charts, "charts.json")
+    print(f"📈 charts.json — {len(charts)} graphes")
 
     # ── Archive snapshot point-in-time ──
     # Capture l'état des fondamentaux/analystes à la date du run (les données fonda
