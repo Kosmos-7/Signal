@@ -26,6 +26,12 @@ WatchRadar-main/.claude/
 *.bak
 *.backup-*
 
+# Fichiers temporaires d'écriture atomique. charts/ est balayé en bloc par le
+# `git add charts/` du workflow : un .tmp resté au sol après un run tué serait
+# committé et servi. Le motif ne masque rien au garde anti-oubli du CI, dont le
+# pathspec est '*.json'.
+*.json.tmp
+
 # Artifacts
 migration_*_report.txt
 

@@ -84,6 +84,7 @@
   .chx-pbtn:hover{border-color:rgba(116,182,223,.35)}
   .chx-rlbl{font-family:var(--mono);font-size:.74rem;color:var(--text2);margin-left:auto}
   .chx-legend{font-family:var(--mono);font-size:.72rem;color:var(--text3);margin:2px 0 6px;letter-spacing:.3px}
+  .chx-load{font:.72rem var(--mono);color:var(--text3);letter-spacing:.6px;padding:2.2rem 0;text-align:center;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.012)}
   .chx-band{display:inline-block;width:14px;height:9px;background:rgba(116,182,223,.10);border:1px solid rgba(116,182,223,.25);border-radius:2px;vertical-align:-1px}
   .chx-slider{position:relative;height:34px;margin:6px 6px 0}
   .chx-slider .chx-track{position:absolute;left:0;right:0;top:15px;height:4px;background:rgba(255,255,255,.08);border-radius:2px}
@@ -124,7 +125,9 @@
   .home-meta{font:.66rem var(--mono);color:var(--text3);letter-spacing:.6px;margin-top:.9rem;text-transform:uppercase}
   .home-meta b{color:var(--text2);font-weight:600}
 
-  .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:1rem;margin:1.6rem 0 .4rem}
+  /* Une carte par ligne : à quatre par ligne, le texte devenait illisible et
+     l'œil se perdait. On préfère scroller sur des cartes larges et respirées. */
+  .tgrid{display:flex;flex-direction:column;gap:.85rem;margin:1.6rem 0 .4rem}
   .tcard{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);overflow:hidden;text-decoration:none;color:inherit;transition:border-color .2s,background .2s,transform .2s}
   .tcard:hover,.tcard:focus-visible{border-color:rgba(116,182,223,.42);background:rgba(255,255,255,.04);transform:translateY(-2px);outline:none}
   .tc-img{position:relative;flex:0 0 auto;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;
@@ -143,14 +146,39 @@
   .tc-f{display:flex;justify-content:space-between;align-items:center;gap:8px;font:.6rem var(--mono);color:var(--text3);letter-spacing:1px;text-transform:uppercase;border-top:1px solid var(--line);padding-top:.55rem}
   .tc-go{color:var(--text3);transition:color .2s}.tcard:hover .tc-go{color:var(--ac)}
 
-  /* carte de la watchlist principale : accentuée, pleine largeur, image latérale */
-  .tcard.tc-main{grid-column:1/-1;flex-direction:row;border-color:rgba(116,182,223,.3);background:rgba(116,182,223,.045)}
+  /* Toutes les cartes adoptent la mise en page horizontale : image à gauche,
+     texte à droite. La principale garde son accent et un peu plus d'ampleur. */
+  .tcard{flex-direction:row}
+  .tc-img{aspect-ratio:auto;width:31%;max-width:340px;min-height:158px;border-bottom:0;border-right:1px solid var(--line)}
+  .tc-b{padding:1.05rem 1.3rem 1.1rem;gap:.55rem}
+  .tc-th{-webkit-line-clamp:2;line-clamp:2;max-width:760px}
+  .tcard.tc-main{border-color:rgba(116,182,223,.3);background:rgba(116,182,223,.045)}
   .tcard.tc-main:hover{border-color:rgba(116,182,223,.55);background:rgba(116,182,223,.07)}
-  .tc-main .tc-img{aspect-ratio:auto;width:38%;max-width:420px;border-bottom:0;border-right:1px solid var(--line)}
+  .tc-main .tc-img{width:38%;max-width:420px;min-height:190px}
   .tc-main .tc-b{padding:1.35rem 1.5rem 1.3rem;gap:.62rem}
   .tc-main .tc-l{font-size:1.85rem}
-  .tc-main .tc-th{font-size:.95rem;-webkit-line-clamp:4;line-clamp:4;max-width:640px}
+  .tc-main .tc-th{font-size:.95rem;-webkit-line-clamp:3;line-clamp:3;max-width:640px}
   .tc-main .tc-s{font-size:.68rem}
+
+  /* bandeau de thème au-dessus de la fiche (remplace la vue liste supprimée) */
+  .tbar{border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.018);margin:.1rem 0 1.1rem}
+  .tbar>summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:.5rem .8rem;cursor:pointer;list-style:none}
+  .tbar>summary::-webkit-details-marker{display:none}
+  .tbar>summary:hover{background:rgba(255,255,255,.025)}
+  .tb-k{font:600 .53rem var(--mono);letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 6px}
+  .tb-l{font-family:var(--serif);font-size:1rem;color:var(--text)}
+  .tb-c{font:.62rem var(--mono);color:var(--text3);letter-spacing:.4px}
+  .tb-deg{font:600 .53rem var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-left:2px solid var(--text3);border-radius:3px;padding:2px 6px}
+  .tb-x{margin-left:auto;font:.62rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);transition:color .15s}
+  .tbar>summary:hover .tb-x{color:var(--ac)}
+  .tbar[open] .tb-x{color:var(--ac)}
+  .tbar[open] .tb-x::after{content:' (replier)';letter-spacing:.4px;text-transform:none}
+  .tb-body{padding:0 .85rem .85rem;border-top:1px solid var(--line);margin-top:.1rem;padding-top:.7rem}
+  .tb-body>p{font-size:.88rem;line-height:1.65;color:var(--text2);margin:0 0 .7rem}
+  .tb-n{border-left:2px solid var(--line);padding-left:.7rem;margin-top:.6rem}
+  .tb-n h5{font:600 .55rem var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin:0 0 .25rem}
+  .tb-n p{font-size:.82rem;line-height:1.6;color:var(--text2);margin:0}
+  .crumb-cur{color:var(--text2)}
 
   /* bandeau de couverture partielle — neutre : trait + capitales mono, pas de teinte */
   .cov-warn{border:1px solid var(--line);border-left:2px solid var(--text3);background:rgba(255,255,255,.03);border-radius:5px;padding:.5rem .7rem;font-size:.76rem;line-height:1.5;color:var(--text2)}
@@ -201,9 +229,11 @@
   @media(max-width:900px){
     body.v-home .stage{left:auto}
     .home-t{font-size:2.05rem}
-    .tgrid{grid-template-columns:1fr;gap:.85rem;margin-top:1.3rem}
-    .tcard.tc-main{flex-direction:column}
-    .tc-main .tc-img{width:auto;max-width:none;aspect-ratio:16/9;border-right:0;border-bottom:1px solid var(--line)}
+    .tgrid{gap:.85rem;margin-top:1.3rem}
+    /* sous 900 px la mise en page horizontale ne tient plus : image au-dessus */
+    .tcard,.tcard.tc-main{flex-direction:column}
+    .tc-img,.tc-main .tc-img{width:auto;max-width:none;aspect-ratio:16/9;min-height:0;border-right:0;border-bottom:1px solid var(--line)}
+    .tc-b{padding:1rem 1.05rem 1.1rem}
     .tc-main .tc-b{padding:1rem 1.05rem 1.1rem}
     .tc-main .tc-l{font-size:1.45rem}
     .tc-main .tc-th{font-size:.88rem}
@@ -251,7 +281,26 @@ const f=(v,d=1)=>v==null?'—':(+v).toFixed(d),fs=(v,d=1)=>v==null?'—':(v>0?'+
 let stocks=[],sel=null;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const CH={};   // charts.json : payload graphique par ticker (absent = fiche sans graphe, jamais d'erreur)
+/* Payload graphique : un fichier par titre, chargé à l'ouverture de sa fiche.
+   Avant, charts.json monolithique était téléchargé au premier rendu — 561 Ko
+   bloquants pour 30 titres, et près de 3,5 Mo une fois les 190 titres
+   thématiques inclus. À la demande, c'est 19 Ko par fiche ouverte.
+   CH sert de cache mémoire ; une entrée `null` mémorise une absence (404 ou
+   fichier illisible) pour ne pas re-tenter à chaque ouverture. */
+const CH={}, CHP={};
+function loadChart(tk){
+  if(tk in CH)return Promise.resolve(CH[tk]);
+  if(CHP[tk])return CHP[tk];
+  // Le ticker est déjà restreint à [A-Z0-9.-] côté screener ; encodeURIComponent
+  // couvre malgré tout le cas d'un ticker inattendu dans un chemin d'URL.
+  return CHP[tk]=fetch('charts/'+encodeURIComponent(tk)+'.json?v='+CHV)
+    .then(r=>r.ok?r.json():null).catch(()=>null)
+    .then(d=>{CH[tk]=d;delete CHP[tk];return d;});
+}
+// Version de cache : la date du jour suffit, les données bougent au plus une
+// fois par jour ouvré. Évite un paramètre unique par requête, qui interdirait
+// toute mise en cache navigateur des ~190 fichiers.
+const CHV=new Date().toISOString().slice(0,10);
 
 /* ── universe.json : homepage des watchlists + vues thématiques ──────────────
    Contrat : {updated_at, week, universe_declared, universe_scored,
@@ -282,10 +331,8 @@ const KIND={these:'Thèse',secteur:'Secteur',calcule:'Calculé',principale:'Prin
 Promise.all([
   fetch('watchlist.json?v='+Date.now()).then(r=>{if(!r.ok)throw new Error('watchlist.json HTTP '+r.status);return r.json();}),
   fetch('analyses.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
-  fetch('charts.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
   fetch('universe.json?v='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null)
-]).then(([wl,an,ch,un])=>{
-  Object.assign(CH, ch||{});
+]).then(([wl,an,un])=>{
   Object.assign(A, an||{});
   stocks=(wl.stocks||[]).slice().sort((a,b)=>b.score-a.score);
   stocks.forEach(s=>{WL[s.ticker]=s;});
@@ -357,11 +404,15 @@ function openWl(id,tk){
   document.body.classList.remove('v-home');
   if(!curWl||curWl.id!==meta.id)setWl(meta);
   const ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');
-  if(tk){
-    const s=curList.find(x=>x.ticker===tk)||stockOf(tk);
-    if(!s){ nav(hashOf(id)); return; }                   // ticker inconnu → la vue liste
-    pick(s);
-  } else { sel=null;curList.forEach(o=>o._r&&o._r.classList.remove('sel'));renderWl(meta); }
+  // Ouvrir une watchlist affiche directement sa PREMIÈRE valeur, comme la
+  // watchlist principale l'a toujours fait. Une vue liste intermédiaire
+  // dupliquait exactement le rail de gauche — deux fois la même information
+  // à l'écran, sans rien ajouter.
+  const s=(tk?(curList.find(x=>x.ticker===tk)||stockOf(tk)):curList[0])||curList[0];
+  if(!s){ nav('#/'); return; }             // watchlist vide (ne devrait pas arriver)
+  if(tk&&s.ticker!==tk){ nav(hashOf(id,s.ticker)); return; }   // ticker inconnu → 1re valeur
+  if(!tk){ history.replaceState(null,'',hashOf(id,s.ticker)); navActive(); }
+  pick(s);
 }
 
 /* Un titre hors top 30 n'existe que sous forme compacte dans universe.json :
@@ -556,7 +607,16 @@ function curSym(t){t=(t||'').toUpperCase();
   if(/\.(CO|ST|OL)$/.test(t))return' kr';
   if(/\.T$/.test(t))return' ¥';
   return' $';}
+/* Charge le payload du titre puis dessine. Le rendu est asynchrone : on garde
+   le ticker demandé pour ignorer une réponse tardive si l'utilisateur a changé
+   de fiche entre-temps (sinon le graphe d'un titre s'afficherait sur un autre). */
 function buildChart(s){
+  const host=document.getElementById('chartsec'); if(!host)return;
+  const tk=s.ticker;
+  if(!(tk in CH))host.innerHTML='<div class="chx-load">Chargement du graphique…</div>';
+  loadChart(tk).then(()=>{ if(sel&&sel.ticker!==tk)return; drawChart(s); });
+}
+function drawChart(s){
   const host=document.getElementById('chartsec'); if(!host)return;
   const D=CH[s.ticker], b=s.breakdown||{};
   if(!D||!D.points||D.points.length<24||b.regression_sigma==null){host.innerHTML='';return;}
@@ -742,11 +802,41 @@ function compactMetrics(s){const b=s.breakdown||{},u=s._u||{};
     mk('RSI',f(b.rsi,0))+
     mk('Objectif consensus',(b.target_upside_pct==null?'—':fs(b.target_upside_pct,0)+'%')+(b.target_analysts?' ('+b.target_analysts+')':''))+
   '</div><div class="metrics-note">Chiffres issus du même run du screener que la watchlist principale'+(U.updated_at?' ('+sv(U.updated_at)+')':'')+'. Croissance, marges et bilan détaillés ne sont pas publiés dans les vues thématiques.</div>';}
+/* Titre sans AUCUNE fiche : ne devrait plus arriver depuis que l'éditorial
+   couvre tout l'univers tagué, mais un run partiel (budget de temps épuisé)
+   peut encore laisser un titre sans texte. On le dit plutôt que d'afficher
+   une page à trous. */
 function liteNote(){
-  return '<div class="lite-note"><h4>Analyse détaillée réservée à la watchlist principale</h4>'+
-  '<p>Ce titre est scoré par exactement la même méthode que les autres — les chiffres ci-dessus sortent du même run. En revanche, l\'analyse éditoriale (business, perspectives, thèse haussière et baissière) et le graphique de canal de régression ne sont produits que pour les titres de la <a href="'+hashOf(MAIN)+'">watchlist principale</a>.</p>'+
-  '<p>C\'est un choix assumé : écrire une analyse tenable coûte du temps, et une fiche bâclée vaut moins que pas de fiche. <a href="apprendre.html">Comment lire ces chiffres →</a></p></div>';
+  return '<div class="lite-note"><h4>Analyse pas encore rédigée</h4>'+
+  '<p>Ce titre est scoré par exactement la même méthode que les autres — les chiffres ci-dessus sortent du même run. Son analyse rédigée n\'a simplement pas encore été produite : elles sont générées par ordre de priorité à chaque mise à jour hebdomadaire, et celle-ci attend son tour.</p>'+
+  '<p><a href="apprendre.html">Comment lire ces chiffres →</a></p></div>';
 }
+/* Note de bas de fiche pour le niveau « thematique » : la rubrique Actu est
+   absente par construction, pas par oubli — aucune source datée n'est
+   collectée pour ces titres, et on ne fabrique pas d'actualité. */
+function briefNote(){
+  return '<div class="lite-note"><h4>Fiche courte</h4>'+
+  '<p>Ce titre appartient à une watchlist thématique sans figurer dans le <a href="'+hashOf(MAIN)+'">top 30</a>. Son analyse couvre le business, les perspectives et les deux thèses ; la revue d\'actualité, elle, n\'est produite que pour la watchlist principale — faute de source datée collectée pour ce titre, elle serait inventée.</p></div>';
+}
+/* Bandeau de thème au-dessus de la fiche. La vue liste intermédiaire a été
+   supprimée (elle dupliquait le rail), mais la thèse, son inversion et ses
+   biais ne doivent pas disparaître pour autant : c'est la couche d'honnêteté
+   du dispositif. Repliée par défaut pour ne pas manger la fiche. */
+function themeBar(meta){
+  if(!meta||meta.id===MAIN||!meta.thesis)return '';
+  const deg=meta.status==='degraded'?'<span class="tb-deg">couverture partielle</span>':'';
+  const cnt=meta.eligibles!=null?meta.scores+' retenus / '+meta.eligibles+' éligibles'
+                                :meta.scores+' titres';
+  return '<details class="tbar"><summary><span class="tb-k">'+sv(meta.kind==='calcule'?'calculé':meta.kind==='secteur'?'secteur':'thèse')+
+    '</span><span class="tb-l">'+sv(meta.label)+'</span><span class="tb-c">'+cnt+'</span>'+deg+
+    '<span class="tb-x">thèse ▾</span></summary><div class="tb-body">'+
+    '<p>'+sv(meta.thesis)+'</p>'+
+    (meta.regle_texte?'<div class="tb-n"><h5>Règle de sélection</h5><p>'+sv(meta.regle_texte)+'</p></div>':'')+
+    (meta.inversion?'<div class="tb-n"><h5>Ce qui invaliderait cette thèse</h5><p>'+sv(meta.inversion)+'</p></div>':'')+
+    (meta.biais?'<div class="tb-n"><h5>Biais de ce thème</h5><p>'+sv(meta.biais)+'</p></div>':'')+
+    '</div></details>';
+}
+
 function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
   const compact=!!s._c, hasEd=!!(a&&(a.resume||a.biz||a.futur||a.actu||a.bull||a.bear));
   const score=s.score==null?0:s.score;
@@ -758,11 +848,17 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   const bb=(a&&(a.bull||a.bear))?'<div class="bullbear"><div class="bb bb-bull"><div class="bb-h">▲ Thèse haussière</div>'+bblist(a.bull)+'</div><div class="bb bb-bear"><div class="bb-h">▼ Thèse baissière</div>'+bblist(a.bear)+'</div></div>':'';
   // recouvrement des thèmes, visible depuis la fiche elle-même
   const tt=themesOf(s.ticker).map(id=>{const t=TBY[id];return t?'<a class="ttag" href="'+hashOf(id)+'">'+sv(t.label)+'</a>':'';}).join('');
-  const prose=(compact&&!hasEd)?'<div class="prose">'+liteNote()+'</div>'
+  // Trois cas, distingués par le niveau de fiche publié par le générateur.
+  // Une fiche « thematique » n'a PAS de rubrique Actu par construction : aucune
+  // source datée n'est collectée pour ces titres. Afficher « À générer » y
+  // serait un mensonge — cette rubrique ne viendra jamais.
+  const brief=(a&&a._niveau==='thematique');
+  const prose=!hasEd?'<div class="prose">'+liteNote()+'</div>'
     :'<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
-      '<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div></div>';
+      (brief?'':'<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div>')+'</div>'+
+      (brief?briefNote():'');
   doc.classList.remove('on');
-  doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><a href="'+hashOf(curWl.id)+'">'+sv(curWl.label)+'</a></div>':'')+
+  doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+

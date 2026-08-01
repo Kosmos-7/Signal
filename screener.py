@@ -42,6 +42,7 @@ import pandas as pd
 import numpy as np
 import json
 import os
+import re
 import time
 import requests
 from datetime import date, timedelta, datetime as _dt, timezone as _tz
@@ -372,6 +373,99 @@ def _sample_series(s):
         # Ré-étiquetage du dernier point à la date réelle de la dernière barre quotidienne
         pts[-1] = [_mois(last_ts), round(float(s.iloc[-1]), 2)]
     return pts
+
+# ── ÉCLATEMENT DU PAYLOAD GRAPHIQUE (charts/<TICKER>.json) ───────────────────
+# POURQUOI un fichier par titre plutôt qu'un monolithe : le graphe pèse ~19 Ko
+# par titre. Tant qu'on n'en publiait que 30, un charts.json de 561 Ko passait.
+# Depuis que 184 titres sont tagués par un thème et méritent donc une fiche
+# complète, le monolithe atteindrait ~3,5 Mo — téléchargés intégralement au
+# premier rendu pour n'afficher, au mieux, UN graphe. Le front charge désormais
+# charts/<TICKER>.json à l'ouverture de la fiche : le coût est proportionnel à
+# ce qui est réellement regardé.
+CHARTS_DIR = "charts"
+
+# CONVENTION DE NOMMAGE : charts/<TICKER>.json, ticker VERBATIM, sans encodage.
+# Les tickers Yahoo comportent des points (ASML.AS, 000660.KS) et des tirets
+# (SAAB-B.ST, NOVO-B.CO). Ni l'un ni l'autre n'a de signification particulière
+# dans un nom de fichier (POSIX comme NTFS) ni dans un segment de chemin d'URL
+# — aucun échappement n'est donc nécessaire, et « ASML.AS.json » reste servi en
+# application/json par GitHub Pages, qui se fie à la DERNIÈRE extension.
+# Le garde-fou ci-dessous n'est pas cosmétique : un ticker contenant « / » ou
+# « .. » écrirait hors du dossier. Le jeu autorisé est exactement celui de
+# l'univers actuel ([A-Z0-9.-], vérifié sur les 210 tickers). Il interdit aussi
+# les minuscules, ce qui rend impossible la collision de deux tickers ne
+# différant que par la casse sur un système de fichiers insensible (macOS).
+_TICKER_FICHIER = re.compile(r"[A-Z0-9][A-Z0-9.-]*\Z")
+
+
+def publier_charts(charts, a_publier, dossier=CHARTS_DIR):
+    """Écrit charts/<TICKER>.json pour chaque fiche ouvrable, purge les orphelins.
+
+    charts     : ticker → payload graphique, pour TOUT l'univers scoré.
+    a_publier  : tickers dont le site sait ouvrir une fiche (titres tagués par un
+                 thème + top 30). Le reste de l'univers n'a pas de fiche, donc
+                 pas de graphe à servir.
+
+    POURQUOI la purge : un titre qui quitte tous ses thèmes n'est plus jamais
+    réécrit. Sans suppression explicite son graphe resterait indéfiniment dans
+    le dépôt — et surtout resterait SERVI, donc affichable via une URL périmée
+    portant des données figées à la semaine de sa sortie.
+
+    Même contrat d'écriture que le reste du projet : tmp + os.replace (jamais de
+    fichier tronqué visible par le front), allow_nan=False (un NaN fait échouer
+    le run bruyamment plutôt que de publier un token illisible par JSON.parse),
+    séparateurs compacts.
+
+    Retourne (écrits, purgés, sans_graphe, refusés) — quatre listes de tickers.
+    """
+    os.makedirs(dossier, exist_ok=True)
+
+    ecrits, refuses = [], []
+    for ticker in sorted(a_publier):
+        if ticker not in charts:
+            continue                      # journalisé plus bas via sans_graphe
+        if not _TICKER_FICHIER.match(ticker):
+            refuses.append(ticker)
+            continue
+        chemin = os.path.join(dossier, f"{ticker}.json")
+        tmp = chemin + ".tmp"
+        try:
+            with open(tmp, "w", encoding="utf-8") as f:
+                json.dump(charts[ticker], f, ensure_ascii=False,
+                          separators=(",", ":"), allow_nan=False)
+            os.replace(tmp, chemin)
+        except Exception:
+            # Un .tmp abandonné dans un dossier suivi par git serait committé au
+            # run suivant : on nettoie avant de laisser remonter l'échec.
+            if os.path.exists(tmp):
+                os.remove(tmp)
+            raise
+        ecrits.append(ticker)
+
+    attendus = {f"{t}.json" for t in ecrits}
+    purges = []
+    for nom in sorted(os.listdir(dossier)):
+        if not nom.endswith(".json") or nom in attendus:
+            continue
+        os.remove(os.path.join(dossier, nom))
+        purges.append(nom[:-len(".json")])
+
+    # Doctrine anti-troncature : tout ce qui est omis est journalisé. Une fiche
+    # sans graphe est un manque VISIBLE sur le site — s'il n'est pas tracé côté
+    # run, on l'impute au front et on cherche au mauvais endroit.
+    sans_graphe = sorted(t for t in a_publier if t not in charts)
+
+    print(f"📈 {dossier}/ — {len(ecrits)} graphes écrits"
+          + (f", {len(purges)} purgé(s)" if purges else ""))
+    if purges:
+        print(f"   🧹 purgés (fiche plus ouvrable) : {', '.join(purges)}")
+    if sans_graphe:
+        print(f"   ⚠️  {len(sans_graphe)} fiche(s) sans graphe (payload en échec au "
+              f"scoring) : {', '.join(sans_graphe)}")
+    if refuses:
+        print(f"   ⚠️  {len(refuses)} ticker(s) au nom non écrivable, graphe non publié : "
+              f"{', '.join(refuses)}")
+    return ecrits, purges, sans_graphe, refuses
 
 # ── RETRACEMENT DE FIBONACCI ─────────────────────────────────────────────────
 def fibonacci_retracement(close_series, lookback=252):
@@ -1421,9 +1515,16 @@ def main():
 
     # ── Extraction du payload graphique ─────────────────────────────────────
     # "chart" ne doit fuiter ni dans watchlist.json ni dans l'archive : on le
-    # collecte pour le top 30 (entrées non-None seulement) puis on le retire de
-    # TOUS les résultats — top inclus, ce sont les mêmes dicts.
-    charts = {s["ticker"]: s["chart"] for s in top if s.get("chart") is not None}
+    # collecte puis on le retire de TOUS les résultats — top inclus, ce sont les
+    # mêmes dicts.
+    # On collecte désormais TOUT l'univers scoré, pas seulement le top 30 : le
+    # payload était déjà calculé pour chaque titre (le coût est payé dans
+    # score_ticker) puis jeté pour 180 d'entre eux, ce qui produisait des fiches
+    # thématiques sans canal de régression. Le tri de ce qui est PUBLIÉ se fait
+    # plus bas, une fois les thèmes connus.
+    charts_tous = {r["ticker"]: r["chart"] for r in resultats if r.get("chart") is not None}
+    charts = {s["ticker"]: charts_tous[s["ticker"]]
+              for s in top if s["ticker"] in charts_tous}
     for r in resultats:
         r.pop("chart", None)
 
@@ -1533,6 +1634,19 @@ def main():
               f"panne de source probable, publication interrompue.")
         raise SystemExit(1)
 
+    # Ne publier que les titres RÉELLEMENT listés par au moins un thème. Un titre
+    # retenu par la règle d'un thème calculé mais recalé hors des 12 publiés se
+    # retrouvait dans `stocks` sans figurer dans aucune liste de membres :
+    # inatteignable depuis le site, mais suffisant pour déclencher la génération
+    # d'une fiche éditoriale payante et pour entrer dans l'univers achetable de
+    # l'agent. Tout ce qui est publié ici doit être joignable.
+    publies = {t for th in themes_publies for t in th["members"]}
+    ecartes = sorted(set(par_ticker) - publies)
+    if ecartes:
+        print(f"  ℹ️  {len(ecartes)} titre(s) retenus par une règle mais hors des listes "
+              f"publiées — non exposés : {', '.join(ecartes)}")
+    par_ticker = {k: v for k, v in par_ticker.items() if k in publies}
+
     universe = {
         "updated_at":        str(d),
         "week":              f"Sem. {d.isocalendar()[1]} · {d.year}",
@@ -1567,13 +1681,23 @@ def main():
         json.dump(output, f, ensure_ascii=False, indent=2, allow_nan=False)
     os.replace(tmp_path, "watchlist.json")
 
-    # charts.json — payload graphique du top 30. Fichier volumineux : séparateurs
-    # compacts, pas d'indent. Même contrat d'écriture atomique + allow_nan=False.
+    # charts.json — payload graphique du top 30, monolithique. TRANSITOIRE :
+    # index.html le charge encore au démarrage ; il fait doublon avec charts/
+    # (mêmes données, top 30 uniquement) et sera retiré une fois le front
+    # bascule sur le chargement paresseux. Séparateurs compacts, pas d'indent.
+    # Même contrat d'écriture atomique + allow_nan=False.
     tmp_charts = "charts.json.tmp"
     with open(tmp_charts, "w", encoding="utf-8") as f:
         json.dump(charts, f, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
     os.replace(tmp_charts, "charts.json")
-    print(f"📈 charts.json — {len(charts)} graphes")
+    print(f"📈 charts.json — {len(charts)} graphes (top 30, transitoire)")
+
+    # ── charts/<TICKER>.json — un fichier par fiche ouvrable ────────────────
+    # Périmètre : les titres tagués par un thème (par_ticker) UNION le top 30.
+    # L'union n'est pas redondante : un titre peut être très bien noté sans
+    # appartenir à aucun thème, et sa fiche perdrait son graphe le jour où
+    # charts.json sera retiré.
+    publier_charts(charts_tous, set(par_ticker) | top_tickers)
 
     # ── Archive snapshot point-in-time ──
     # Capture l'état des fondamentaux/analystes à la date du run (les données fonda

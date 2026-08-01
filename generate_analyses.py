@@ -3,29 +3,40 @@ generate_analyses.py — Génère/rafraîchit le contenu ÉDITORIAL par ticker (
 
 Contexte
 --------
-Le terminal watchlist (index.html) fusionne DEUX fichiers au render() :
-  - watchlist.json  : 30 tickers + breakdown chiffré (généré par screener.py)
-  - analyses.json   : contenu éditorial par ticker (resume / biz / futur / actu / bull / bear)
+Le terminal (index.html) fusionne au render() TROIS fichiers :
+  - watchlist.json : 30 tickers + breakdown chiffré COMPLET   (produit par screener.py)
+  - universe.json  : les titres TAGUÉS par un thème, sous forme COMPACTE (screener.py,
+                     watchlists thématiques) — `themes[]` + une carte `stocks{TICKER: {...}}`
+  - analyses.json  : le contenu éditorial par ticker (ce script)
 
-Jusqu'ici analyses.json était un artefact MANUEL figé : quand le screener faisait
-tourner la watchlist, les nouveaux tickers n'avaient pas d'entrée et le front
-affichait "À générer." (fallback de render()).
+Jusqu'en v3.5.0 ce script ne couvrait que les 30 titres de watchlist.json. Depuis
+l'arrivée des watchlists thématiques, le site publie ~184 titres : ceux qui n'étaient
+pas dans le top 30 ouvraient une fiche quasi vide (« À générer. » partout). Ce script
+couvre désormais l'UNION des deux sources.
 
-Ce script comble ce trou : après le screener, il génère via Claude (API Anthropic)
-les analyses des tickers NOUVEAUX ou MODIFIÉS, garde celles inchangées (économie API),
-et purge les orphelins (tickers sortis de la watchlist).
+Deux niveaux de fiche, honnêtement distingués
+---------------------------------------------
+Un titre du top 30 dispose d'un breakdown complet (fondamentaux, multiples, Fibo,
+news). Un titre seulement thématique n'a qu'un breakdown compact (score et ses trois
+composantes, RSI, z-score, décote, cross, consensus). On ne fabrique RIEN à partir de
+ce qui manque : la fiche thématique est plus courte, et le prompt n'énonce que les
+métriques réellement disponibles.
 
-À lancer APRÈS screener.py (qui produit watchlist.json), p. ex. dans le même job CI.
+  niveau « complet »    : resume · biz · futur · actu · bull · bear   (6 champs)
+  niveau « thematique » : resume · biz · futur · bull · bear          (5 champs, pas d'`actu`
+                          faute de source d'actualité datée pour ces titres)
 
-Schéma de sortie (consommé par render() dans index.html, lignes ~153-168) :
+Schéma de sortie (consommé par render() dans index.html) :
   analyses.json = { "<TICKER>": {
       "resume": [str, ...],   # 1-2 paragraphes  -> paras()  -> <p>
       "biz":    [str, ...],   # Business & Moat   -> paras()  -> <p>
       "futur":  [str, ...],   # Perspectives      -> paras()  -> <p>
-      "actu":   [str, ...],   # Actu datée/chiffrée -> paras() -> <p>
+      "actu":   [str, ...],   # Actu datée/chiffrée -> paras() -> <p>   (niveau complet seulement)
       "bull":   [str, ...],   # 3 puces thèse     -> bblist() -> <li>
       "bear":   [str, ...],   # 3 puces inversion -> bblist() -> <li>
-      "_sig":   "<signature>" # interne, non lu par render() — détection de changement
+      "_niveau": "complet" | "thematique"   # niveau de la fiche — EXPLOITABLE par le site
+                              # (il sait ainsi si l'absence d'`actu` est un trou ou un choix)
+      "_sig":   "<signature>" # interne — détection de changement
       "_perime": "AAAA-MM-JJ" # optionnel : la fiche AURAIT dû être régénérée mais le
                               # budget wall-clock a été atteint. Date de la 1re
                               # péremption (pas de la dernière) — donne l'ancienneté
@@ -33,13 +44,24 @@ Schéma de sortie (consommé par render() dans index.html, lignes ~153-168) :
   }, ... }
 
 render() lit a.resume / a.biz / a.futur / a.actu / a.bull / a.bear et n'itère JAMAIS
-sur les clés de l'entrée : `_sig` et `_perime` sont donc invisibles au front (vérifié
-index.html) tant que celui-ci ne décide pas de les exploiter.
-Les strings peuvent contenir des balises inline simples (<b>…</b>) comme les entrées
-existantes — render() les injecte en innerHTML via paras()/bblist().
+sur les clés de l'entrée : `_niveau`, `_sig` et `_perime` sont donc invisibles au front
+tant que celui-ci ne décide pas de les exploiter.
 
-Dépendances : anthropic, yfinance (déjà dans requirements.txt). Pas de nouvelle dépendance.
-Python 3.13.
+Parallélisme
+------------
+À ~45 s par fiche, 184 fiches en séquentiel = 138 min, contre un timeout CI de 45 min :
+la boucle séquentielle n'était plus tenable. La génération passe donc par un pool de
+threads (ANALYSES_MAX_WORKERS, défaut 8) — le travail est 100 % I/O (appel API + news),
+le GIL n'est pas un obstacle. Voir la section « ÉTAT PARTAGÉ » pour le verrou qui protège
+le dictionnaire commun, et « BUDGET » pour la garde wall-clock adaptée à N workers.
+
+Mise en cache du préfixe
+------------------------
+Le guide de rédaction (~1 600 tokens) est identique sur les 184 fiches. Il est isolé
+dans un bloc de contenu propre, marqué `cache_control: ephemeral` : les fiches suivantes
+lisent ce préfixe au dixième du prix d'entrée. Voir `build_prompt()`.
+
+Dépendances : anthropic, yfinance (déjà dans requirements.txt). Python 3.13.
 """
 
 import os
@@ -48,7 +70,9 @@ import sys
 import html
 import json
 import time
+import threading
 import tempfile
+from concurrent.futures import ThreadPoolExecutor, FIRST_COMPLETED, wait
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -71,14 +95,48 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 MODEL = "claude-sonnet-4-6"
 MAX_TOKENS = 3000
 
+# Tarif public du modèle, en dollars par million de tokens. Sert UNIQUEMENT au
+# rapport de coût en fin de run : le projet dépense ici de l'argent réel toutes
+# les semaines, ce chiffre ne doit pas rester invisible.
+# Écriture de cache = 1,25× l'entrée ; lecture de cache = 0,1× l'entrée.
+PRIX_IN_USD_MTOK          = 3.00
+PRIX_OUT_USD_MTOK         = 15.00
+PRIX_CACHE_WRITE_USD_MTOK = 3.75
+PRIX_CACHE_READ_USD_MTOK  = 0.30
+
 WATCHLIST_PATH = Path(__file__).parent / "watchlist.json"
+UNIVERSE_PATH  = Path(__file__).parent / "universe.json"
 ANALYSES_PATH  = Path(__file__).parent / "analyses.json"
 GUIDE_PATH     = Path(__file__).parent / "GUIDE_redaction_analyses.md"
 
-# Les 6 champs éditoriaux attendus par render() (ordre = ordre d'affichage).
-PARA_FIELDS   = ["resume", "biz", "futur", "actu"]   # tableaux de paragraphes -> <p>
-BULLET_FIELDS = ["bull", "bear"]                       # tableaux de puces      -> <li>
-ALL_FIELDS    = PARA_FIELDS + BULLET_FIELDS
+# ── NIVEAUX DE FICHE ─────────────────────────────────────────────────────────
+NIVEAU_COMPLET    = "complet"
+NIVEAU_THEMATIQUE = "thematique"
+
+# Champs éditoriaux attendus par render(), PAR NIVEAU (ordre = ordre d'affichage).
+# `actu` est absent du niveau thématique : aucune source d'actualité datée n'est
+# collectée pour ces titres, et un paragraphe d'actu sans faits sourcés serait
+# exactement le genre de remplissage que ce projet refuse d'écrire.
+CHAMPS_PAR_NIVEAU = {
+    NIVEAU_COMPLET:    ["resume", "biz", "futur", "actu", "bull", "bear"],
+    NIVEAU_THEMATIQUE: ["resume", "biz", "futur", "bull", "bear"],
+}
+BULLET_FIELDS = ["bull", "bear"]                       # tableaux de puces -> <li>
+ALL_FIELDS    = CHAMPS_PAR_NIVEAU[NIVEAU_COMPLET]      # surensemble, pour la purge/lecture
+
+# ── PARALLÉLISME ─────────────────────────────────────────────────────────────
+# 8 workers : à ~45 s la fiche, 184 fiches passent de 138 min à ~17 min, ce qui
+# tient dans le budget wall-clock (1500 s) ET dans le timeout CI de 45 min.
+# Au-delà de ~16 on ne gagne plus rien : on ne fait que multiplier les 429.
+MAX_WORKERS_ENV = os.getenv("ANALYSES_MAX_WORKERS", "8")
+MAX_WORKERS_PLAFOND = 16
+
+# Écriture périodique plutôt qu'à chaque ticker : réécrire 184 fois un fichier de
+# 250 Ko sous verrou coûte plus cher que le crash qu'on cherche à couvrir. On borne
+# la perte des DEUX côtés — en nombre de fiches ET en temps — pour qu'un run lent ne
+# puisse pas accumuler des minutes de travail non persisté.
+WRITE_EVERY_N = 20
+WRITE_EVERY_S = 60.0
 
 # ── BUDGET WALL-CLOCK ─────────────────────────────────────────────────────────
 # Le job CI (.github/workflows/watchlist.yml) a timeout-minutes: 45, et l'étape
@@ -105,8 +163,15 @@ FIRST_TICKER_COST_S = 60.0
 # d'entrée legacy partielle, qui a déjà attendu des semaines sans gêner personne.
 PRIORITY = {"nouveau": 0, "modifié": 1, "complétion": 2}
 
+# À priorité égale, le top 30 passe avant les titres thématiques : c'est la page
+# d'accueil du site, la plus consultée, et la seule dont la fiche est complète.
+RANG_NIVEAU = {NIVEAU_COMPLET: 0, NIVEAU_THEMATIQUE: 1}
+
 # Même init que portfolio_agent.py : client None si pas de clé (géré dans main()).
-client = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
+# max_retries relevé : avec 8 requêtes en vol, un 429 ponctuel est attendu et le SDK
+# le rejoue avec backoff — sans ça, une rafale de limites de débit se transformerait
+# en fiches perdues alors que la seule chose à faire était d'attendre deux secondes.
+client = Anthropic(api_key=ANTHROPIC_API_KEY, max_retries=5) if ANTHROPIC_API_KEY else None
 
 
 # ── UTILITAIRES ───────────────────────────────────────────────────────────────
@@ -136,6 +201,132 @@ def fmt(v, suffix="", dec=1):
         return f"{float(v):.{dec}f}{suffix}"
     except (TypeError, ValueError):
         return str(v)
+
+
+# Suffixe de place de cotation -> région, même table que region() dans index.html.
+# Le breakdown compact n'a AUCUN badge : sans ça, toute valeur européenne ou
+# asiatique thématique serait présentée au modèle comme américaine.
+_REGIONS = {"PA": "EU", "DE": "EU", "AS": "EU", "BR": "EU", "MI": "EU", "MC": "EU",
+            "AT": "EU", "HE": "EU", "VI": "EU", "LI": "EU", "IS": "EU",
+            "L": "UK", "SW": "CH", "CO": "DK", "ST": "SE", "OL": "NO",
+            "T": "JP", "KS": "KR", "KQ": "KR", "HK": "HK", "TO": "CA", "AX": "AU"}
+
+
+def region(stock):
+    """Région d'un titre : badge du screener, sinon suffixe du ticker, sinon US."""
+    if stock.get("badge"):
+        return stock["badge"]
+    parts = str(stock.get("ticker", "")).split(".")
+    if len(parts) > 1:
+        return _REGIONS.get(parts[-1].upper(), "INT")
+    return "US"
+
+
+# ── SOURCES : watchlist.json (complet) + universe.json (compact) ──────────────
+def stock_depuis_universe(ticker, u, labels):
+    """Convertit une entrée COMPACTE de universe.json en objet de forme watchlist.
+
+    Même conversion que fusionner_univers_achetable() dans portfolio_agent.py — un
+    seul contrat compact dans le projet, une seule table de correspondance à relire.
+    Tout ce qui manque vaut None : c'est breakdown_block() qui décide de ne PAS en
+    parler, plutôt que d'écrire « n/d » partout et d'inviter le modèle à broder.
+
+    Le prix n'est volontairement PAS injecté dans le prompt : il n'apporte rien à la
+    prose (le front l'affiche déjà) et il ne peut qu'encourager un objectif de cours,
+    que la charte interdit.
+    """
+    return {
+        "ticker": ticker,
+        "name":   u.get("nom") or ticker,
+        "sector": u.get("secteur") or "",
+        "market": u.get("market") or "",
+        "badge":  None,
+        "score":  u.get("score"),
+        "stars":  None,
+        # Libellés lisibles plutôt qu'identifiants techniques : c'est du contexte de
+        # prompt, « Électrification » parle au modèle, « elec_infra » non.
+        "themes": [labels.get(t, t) for t in (u.get("themes") or [])],
+        "justification": "",
+        "breakdown": {
+            "qualite":                 u.get("qualite"),
+            "valorisation":            u.get("valorisation"),
+            "timing":                  u.get("timing"),
+            "rsi":                     u.get("rsi"),
+            "regression_z":            u.get("z"),
+            "regression_window_years": u.get("fenetre"),
+            "decote_pct":              u.get("decote_pct"),
+            # cross_type ET cross_regime : signature() lit le premier, le contrat
+            # compact publie le second. On aligne les deux plutôt que de dupliquer
+            # la logique de signature par niveau.
+            "cross_type":              u.get("cross") or "",
+            "cross_regime":            u.get("cross") or "",
+            "cross_days_ago":          u.get("cross_j"),
+            "target_upside_pct":       u.get("upside_pct"),
+            "target_analysts":         u.get("analystes"),
+        },
+    }
+
+
+def collecter_sources():
+    """Union des deux sources -> [(stock, niveau)] + libellés de thèmes.
+
+    Le top 30 PRIME : si un ticker est dans les deux, on garde l'objet complet de
+    watchlist.json (breakdown riche) et le niveau « complet ».
+
+    Retourne (items, univers_lisible) où `univers_lisible` dit si universe.json a pu
+    être lu — la purge des orphelins en dépend (cf. main()).
+    """
+    watchlist = load_json(WATCHLIST_PATH, {})
+    stocks = watchlist.get("stocks", []) if isinstance(watchlist, dict) else []
+
+    universe = load_json(UNIVERSE_PATH, {})
+    if not isinstance(universe, dict):
+        universe = {}
+    compacts = universe.get("stocks") or {}
+    if not isinstance(compacts, dict):
+        compacts = {}
+    labels = {}
+    for th in (universe.get("themes") or []):
+        if isinstance(th, dict) and th.get("id"):
+            labels[th["id"]] = th.get("label", th["id"])
+
+    items = []
+    vus = set()
+    for s in stocks:
+        tk = s.get("ticker")
+        if not tk or tk in vus:
+            continue
+        vus.add(tk)
+        items.append((s, NIVEAU_COMPLET))
+
+    ajoutes = 0
+    sans_secteur = []
+    for tk, u in compacts.items():
+        if tk in vus or not isinstance(u, dict):
+            continue
+        if not (u.get("secteur") or "").strip() or u.get("secteur") == "—":
+            # Un titre sans secteur exploitable est le symptôme d'une collecte ratée
+            # (même garde que screener.py). On ne rédige pas sur une donnée douteuse,
+            # mais on le DIT nommément plutôt que de le laisser tomber en silence.
+            sans_secteur.append(tk)
+            continue
+        vus.add(tk)
+        items.append((stock_depuis_universe(tk, u, labels), NIVEAU_THEMATIQUE))
+        ajoutes += 1
+
+    univers_lisible = bool(compacts)
+    if univers_lisible:
+        print(f"🗂  Sources : {len(stocks)} titre(s) watchlist (fiche complète) "
+              f"+ {ajoutes} titre(s) thématique(s) (fiche courte) = {len(items)} au total.")
+    else:
+        print("⚠️  universe.json absent ou vide — seule la watchlist principale sera couverte.")
+        print("   Les fiches thématiques déjà écrites sont CONSERVÉES (aucune purge : "
+              "sans universe.json on ne peut pas distinguer un orphelin d'un titre thématique).")
+    if sans_secteur:
+        print(f"   ⚠️  {len(sans_secteur)} titre(s) thématique(s) écarté(s) — secteur absent "
+              f"(collecte incomplète) : {', '.join(sorted(sans_secteur))}")
+
+    return items, univers_lisible
 
 
 # ── SIGNATURE / DÉTECTION DE CHANGEMENT ──────────────────────────────────────
@@ -185,13 +376,16 @@ def bucket_score(score):
 
 # Version du style/prompt éditorial — bumper FORCE la régénération de toutes les fiches
 # (la signature change), p.ex. après un changement de ton ou d'exigence de chiffrage.
-PROMPT_VERSION = "2026-07-decote-z1dec"   # z cité à 1 décimale + commentaire décote vs tendance
+PROMPT_VERSION = "2026-08-univers-2niveaux"   # union watchlist+univers, prompt à 2 niveaux
 
 
-def signature(stock):
+def signature(stock, niveau):
     """Signature éditoriale stable d'un ticker. On régénère SEULEMENT si elle change.
 
     Composantes = ce qui modifie le *fond* de l'analyse, pas le bruit :
+      - niveau           : complet / thematique. Un titre qui entre dans le top 30 doit
+                           voir sa fiche courte remplacée par une fiche complète (et
+                           inversement) — c'est un changement de fond, pas cosmétique.
       - score bucket     : note de synthèse par paliers de 5 (pilote resume + bull/bear)
       - cross_type       : golden / death / neutre  (régime narratif)
       - cross_days bucket: frais/recent/etabli/ancien (poids du signal, pas le J exact)
@@ -201,6 +395,12 @@ def signature(stock):
     Volontairement EXCLUS : rsi, fibo, drawdown au point de base près, val_pts —
     trop volatils d'un run à l'autre pour justifier un appel API coûteux (testé : un
     RSI 49->72 + cross +1j + z +0.1σ + drawdown -99% ne change PAS la signature).
+    Également exclus : l'appartenance thématique. Un titre qui gagne ou perd un thème
+    reste la même entreprise avec les mêmes chiffres — sa fiche n'a pas à être réécrite.
+
+    Sur un breakdown compact, rev_growth et le warning sont simplement absents : la
+    signature vaut "na"/"ok" de façon STABLE (elle ne clignote pas d'un run à l'autre),
+    et le churn reste piloté par score/cross/z.
 
     NB : le score passe par bucket_score(). Il reste une part de churn de frontière
     (un score qui oscille 72/73 traverse le palier 70/75) — assumée : la corriger
@@ -229,6 +429,7 @@ def signature(stock):
 
     parts = [
         PROMPT_VERSION,
+        niveau,
         bucket_score(stock.get("score")),
         str(b.get("cross_type", "")),
         bucket_cross_days(b.get("cross_days_ago")),
@@ -239,12 +440,12 @@ def signature(stock):
     return "|".join(parts)
 
 
-def entry_is_complete(entry):
-    """True si une entrée analyses.json porte les 6 champs éditoriaux non vides.
+def entry_is_complete(entry, niveau):
+    """True si une entrée analyses.json porte tous les champs de SON niveau, non vides.
     Sert à rattraper une entrée manuelle/legacy incomplète même si _sig coïncide."""
     if not isinstance(entry, dict):
         return False
-    return all(entry.get(f) for f in ALL_FIELDS)
+    return all(entry.get(f) for f in CHAMPS_PAR_NIVEAU.get(niveau, ALL_FIELDS))
 
 
 # ── INPUT PAR TICKER ─────────────────────────────────────────────────────────
@@ -255,6 +456,10 @@ def fetch_news(ticker, limit=5):
     de portfolio_agent.py est macro/Finnhub (general feed), pas par ticker. On s'appuie
     donc sur yfinance .news. Robuste : toute erreur -> []. Retourne une liste de strings
     "AAAA-MM-JJ — Titre (éditeur)".
+
+    Appelé UNIQUEMENT pour les fiches de niveau complet : le niveau thématique n'a pas
+    de champ `actu`, et lancer 154 requêtes yfinance de plus ne servirait qu'à allonger
+    le run et à multiplier les occasions de se faire limiter.
     """
     out = []
     try:
@@ -299,23 +504,86 @@ def fetch_news(ticker, limit=5):
     return out
 
 
-def breakdown_block(stock):
-    """Rend le breakdown chiffré d'un ticker en bloc lisible pour le prompt."""
+def _ligne_decomposition(b):
+    """Décomposition du score, en n'annonçant que les composantes réellement présentes.
+
+    Le breakdown compact ne publie pas `analystes` : l'écrire « analystes ?/3 » ferait
+    croire à une donnée manquante alors qu'elle n'existe simplement pas à ce niveau.
+    """
+    morceaux = []
+    for cle, libelle, total in (("qualite", "qualité", 45), ("valorisation", "valorisation", 30),
+                                ("timing", "timing", 22), ("analystes", "analystes", 3)):
+        v = b.get(cle)
+        if v is not None:
+            morceaux.append(f"{libelle} {v}/{total}")
+    return "- Décomposition : " + " · ".join(morceaux) if morceaux else ""
+
+
+def breakdown_block(stock, niveau):
+    """Rend le breakdown chiffré d'un ticker en bloc lisible pour le prompt.
+
+    Règle unique et non négociable : une ligne n'est écrite QUE si la donnée existe.
+    Un breakdown compact n'a ni fondamentaux, ni multiples, ni Fibo, ni drawdown ; ces
+    lignes disparaissent au lieu d'afficher « n/d » — sans quoi le modèle aurait sous les
+    yeux une liste de trous à commenter, et « None » finirait dans la prose publiée.
+    """
     b = stock.get("breakdown", {}) or {}
-    warn = (b.get("signal_dynamics_warning") or "").strip()
-    fibo = (b.get("fibo") or {}).get("closest_fibo") if isinstance(b.get("fibo"), dict) else None
     lines = [
-        f"- Nom / secteur / région : {stock.get('name','')} · {stock.get('sector','')} · {stock.get('badge') or 'US'}",
-        f"- Score Signal : {stock.get('score','?')}/100  ({stock.get('stars','?')}★)",
-        f"- Décomposition : qualité {b.get('qualite','?')}/45 · valorisation {b.get('valorisation','?')}/30 · timing {b.get('timing','?')}/22 · analystes {b.get('analystes','?')}/3",
-        f"- Croisement : {b.get('cross_type','?')} (il y a {b.get('cross_days_ago','?')} jours), pente MM21 {fmt(b.get('cross_slope_mm21_pct'),'%')}",
-        f"- RSI : {fmt(b.get('rsi'),'',0)}   |   Z-score régression : {fmt(b.get('regression_z'),'σ',1)}"
-        + (f" (fenêtre {b.get('regression_window_years')} ans)" if b.get("regression_window_years") else ""),
-        f"- Drawdown 52s : {fmt(b.get('drawdown_52w_pct'),'%')}"
-        + (f"   |   Zone Fibo : {fibo}" if fibo else ""),
-        f"- Fondamentaux (PRÉCISE toujours la période dans la prose) : croissance CA {fmt(b.get('rev_growth_pct'),'%')} = dernier trimestre publié en glissement annuel (a/a){(' au ' + b['mrq']) if b.get('mrq') else ''} · marge nette {fmt(b.get('net_margin_pct'),'%')} = TTM, 12 mois glissants · marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM",
-        f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward {fmt(b.get('forward_pe'),'x',1)} · PER courant {fmt(b.get('trailing_pe'),'x',1)} · FCF yield {fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(b.get('peg'),'',2)} · z-score {fmt(b.get('regression_z'),'σ',1)}. NB : un PER courant nettement supérieur au PER forward = bénéfices au creux de cycle (à expliquer, pas à confondre avec « cher »).",
+        f"- Nom / secteur / région : {stock.get('name','')} · {stock.get('sector','')} · {region(stock)}",
     ]
+
+    score = stock.get("score")
+    if score is not None:
+        etoiles = f"  ({stock.get('stars')}★)" if stock.get("stars") is not None else ""
+        lines.append(f"- Score Signal : {score}/100{etoiles}")
+
+    ligne_decomp = _ligne_decomposition(b)
+    if ligne_decomp:
+        lines.append(ligne_decomp)
+
+    if b.get("cross_type"):
+        jours = b.get("cross_days_ago")
+        depuis = f" (il y a {jours} jours)" if jours is not None else ""
+        pente = b.get("cross_slope_mm21_pct")
+        pente_txt = f", pente MM21 {fmt(pente,'%')}" if pente is not None else ""
+        lines.append(f"- Croisement : {b['cross_type']}{depuis}{pente_txt}")
+
+    techniques = []
+    if b.get("rsi") is not None:
+        techniques.append(f"RSI : {fmt(b.get('rsi'),'',0)}")
+    if b.get("regression_z") is not None:
+        fenetre = f" (fenêtre {b['regression_window_years']} ans)" if b.get("regression_window_years") else ""
+        techniques.append(f"Z-score régression : {fmt(b.get('regression_z'),'σ',1)}{fenetre}")
+    if techniques:
+        lines.append("- " + "   |   ".join(techniques))
+
+    fibo = (b.get("fibo") or {}).get("closest_fibo") if isinstance(b.get("fibo"), dict) else None
+    if b.get("drawdown_52w_pct") is not None or fibo:
+        bouts = []
+        if b.get("drawdown_52w_pct") is not None:
+            bouts.append(f"Drawdown 52s : {fmt(b.get('drawdown_52w_pct'),'%')}")
+        if fibo:
+            bouts.append(f"Zone Fibo : {fibo}")
+        lines.append("- " + "   |   ".join(bouts))
+
+    # Fondamentaux — niveau complet uniquement (le compact ne les publie pas).
+    if any(b.get(k) is not None for k in ("rev_growth_pct", "net_margin_pct", "fcf_margin_pct")):
+        lines.append(
+            f"- Fondamentaux (PRÉCISE toujours la période dans la prose) : croissance CA "
+            f"{fmt(b.get('rev_growth_pct'),'%')} = dernier trimestre publié en glissement annuel (a/a)"
+            f"{(' au ' + b['mrq']) if b.get('mrq') else ''} · marge nette {fmt(b.get('net_margin_pct'),'%')} "
+            f"= TTM, 12 mois glissants · marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM"
+        )
+
+    if any(b.get(k) is not None for k in ("forward_pe", "trailing_pe", "fcf_yield_pct", "peg")):
+        lines.append(
+            f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward "
+            f"{fmt(b.get('forward_pe'),'x',1)} · PER courant {fmt(b.get('trailing_pe'),'x',1)} · FCF yield "
+            f"{fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(b.get('peg'),'',2)} · z-score "
+            f"{fmt(b.get('regression_z'),'σ',1)}. NB : un PER courant nettement supérieur au PER forward "
+            f"= bénéfices au creux de cycle (à expliquer, pas à confondre avec « cher »)."
+        )
+
     # Décote/surcote vs tendance + consensus (v3.3.0) — avec les garde-fous d'écriture :
     # jamais « marge de sécurité », caveat structurel obligatoire sur les extrêmes.
     dc = b.get("decote_pct")
@@ -329,58 +597,145 @@ def breakdown_block(stock):
             caveat = " ⚠ écart extrême : évoque le risque de chasse au rally (payer très au-dessus de la trajectoire historique)"
         lines.append(
             f"- {sens.capitalize()} vs tendance ({b.get('regression_window_years','?')} ans) : {abs(dc):.0f}% "
-            f"(prix tendance {fmt(b.get('prix_tendance'),'',0)}). Tu PEUX la commenter dans `futur` ou `resume`, "
-            f"mais appelle-la « {sens} vs tendance », JAMAIS « marge de sécurité » (la référence est une trajectoire "
-            f"historique, pas une valeur intrinsèque).{caveat}"
+            + (f"(prix tendance {fmt(b.get('prix_tendance'),'',0)}). " if b.get("prix_tendance") is not None else "")
+            + f"Tu PEUX la commenter dans `futur` ou `resume`, "
+              f"mais appelle-la « {sens} vs tendance », JAMAIS « marge de sécurité » (la référence est une trajectoire "
+              f"historique, pas une valeur intrinsèque).{caveat}"
         )
+
     if b.get("target_upside_pct") is not None:
         lines.append(
             f"- Objectif consensus analystes : {fmt(b.get('target_upside_pct'),'%',0)} de potentiel "
             f"({b.get('target_analysts') or '?'} analystes) — indicatif, biais optimiste structurel documenté ; "
             f"si consensus et tendance long terme divergent fortement, ce désaccord mérite une phrase."
         )
+
+    warn = (b.get("signal_dynamics_warning") or "").strip()
     if warn:
         lines.append(f"- ⚠ Signal en transition : {warn}")
+
     just = stock.get("justification", "")
     if just:
         lines.append(f"- Justification screener : {just}")
+
     return "\n".join(lines)
 
 
 # ── PROMPT ────────────────────────────────────────────────────────────────────
-def build_prompt(stock, guide, news):
-    """Construit le prompt de rédaction éditoriale pour un ticker.
+# Taille minimale d'un préfixe mis en cache : 1024 tokens sur claude-sonnet-4-6.
+# En dessous, l'API ignore silencieusement `cache_control` (aucune erreur, aucun
+# gain). Le guide fait ~5 400 caractères ≈ 1 600 tokens (français ≈ 3,4 car/token) :
+# on garde une marge et on REFUSE de poser le marqueur si le guide a rétréci, plutôt
+# que de croire à un cache qui n'existe pas.
+CACHE_MIN_CHARS = 4000
+_GUIDE_ENTETE = "## GUIDE DE RÉDACTION (autorité éditoriale — applique-le scrupuleusement)\n"
 
-    Intègre : le GUIDE de rédaction (autorité éditoriale), le breakdown chiffré,
-    les news récentes si dispo, le schéma JSON EXACT attendu par le front.
+SYSTEM_PROMPT = (
+    "Tu es un analyste financier éditorial, neutre et factuel, pour un service "
+    "d'information (Bêta/fictif). Tu ne donnes jamais de conseil ni d'objectif de "
+    "cours. Tu réponds UNIQUEMENT en JSON valide, sans texte avant ou après, sans "
+    "balises markdown ni backticks."
+)
+
+
+def bloc_guide(guide):
+    """Bloc de tête IDENTIQUE d'une fiche à l'autre — c'est LUI qu'on met en cache.
+
+    La mise en cache est un match de PRÉFIXE : tout ce qui précède le marqueur doit
+    être identique au bit près d'un appel à l'autre. Ici l'ordre de rendu est
+    system -> messages, et le system prompt est une constante : le préfixe caché
+    couvre donc system + guide, ~1 700 tokens facturés au dixième du prix à partir
+    de la deuxième fiche. Retourne None si le guide est absent ou trop court pour
+    être éligible au cache (l'appelant journalise).
+    """
+    if not guide or len(guide) < CACHE_MIN_CHARS:
+        return None
+    return {
+        "type": "text",
+        "text": _GUIDE_ENTETE + guide,
+        # TTL par défaut (5 min) : à 8 workers une fiche se termine toutes les ~6 s,
+        # le cache ne retombe jamais froid au cours d'un run. Le TTL 1 h coûterait
+        # 2× en écriture pour un bénéfice nul ici.
+        "cache_control": {"type": "ephemeral"},
+    }
+
+
+def build_prompt(stock, guide, news, niveau):
+    """Construit le prompt de rédaction éditoriale d'un ticker, en blocs de contenu.
+
+    Retourne la liste `content` du message user :
+      [ bloc guide (mis en cache) , bloc variable ]
+    Le bloc variable porte tout ce qui change d'un ticker à l'autre — il doit rester
+    APRÈS le marqueur de cache, sinon plus rien n'est mutualisé.
     """
     ticker = stock["ticker"]
     today = str(date.today())
+    champs = CHAMPS_PAR_NIVEAU[niveau]
 
-    news_block = (
-        "Titres de presse récents (à recouper, ne JAMAIS inventer au-delà de ces faits) :\n"
-        + "\n".join(f"  - {n}" for n in news)
-        if news else
-        "Aucune actualité fraîche récupérée pour ce ticker. Pour le champ `actu`, reste "
-        "factuel et général (dernier trimestriel connu, faits structurels datés si tu en "
-        "as) ; n'invente AUCUN chiffre ni AUCUNE date précise non vérifiable."
-    )
+    if niveau == NIVEAU_COMPLET:
+        news_block = (
+            "Titres de presse récents (à recouper, ne JAMAIS inventer au-delà de ces faits) :\n"
+            + "\n".join(f"  - {n}" for n in news)
+            if news else
+            "Aucune actualité fraîche récupérée pour ce ticker. Pour le champ `actu`, reste "
+            "factuel et général (dernier trimestriel connu, faits structurels datés si tu en "
+            "as) ; n'invente AUCUN chiffre ni AUCUNE date précise non vérifiable."
+        )
+        bloc_actu = f"\n## ACTUALITÉ\n{news_block}\n"
+        cadre_donnees = ""
+        schema = (
+            '  "resume": ["§1 : ce que fait la boîte en une phrase + le débat central. Relie le score '
+            f'{stock.get("score","?")}/100 à la qualité, pas au timing.", "§2 (optionnel) : cadrage valorisation en relatif."],\n'
+            '  "biz":    ["§ comment la boîte gagne de l\'argent + marges.", "§ type de douve nommé + durabilité/menace."],\n'
+            '  "futur":  ["§ drivers de croissance.", "§ cadrage prix vs valeur (cher/correct/décoté en relatif, SANS cible chiffrée) + risques."],\n'
+            '  "actu":   ["§ faits récents datés et chiffrés (1 paragraphe dense)."],\n'
+            '  "bull":   ["puce 1 chiffrée", "puce 2 chiffrée", "puce 3 chiffrée"],\n'
+            '  "bear":   ["puce 1 (inversion)", "puce 2 (inversion)", "puce 3 (inversion)"]'
+        )
+        longueurs = ("Contraintes de longueur : resume 1-2 §, biz 2 §, futur 2 §, actu 1 § dense, "
+                     "bull et bear EXACTEMENT 3 puces chacun. Chaque § = 2 à 4 phrases.")
+    else:
+        bloc_actu = ""
+        themes = [t for t in (stock.get("themes") or []) if t]
+        ligne_themes = (
+            f"Ce titre est publié dans les watchlists thématiques suivantes : {', '.join(themes)}. "
+            "C'est un FILTRE du screener (secteur/règle), pas un jugement de qualité : ne bâtis "
+            "aucune thèse sur cette appartenance.\n\n" if themes else ""
+        )
+        # Le cadrage le plus important de tout ce prompt : dire au modèle ce qu'il N'A PAS.
+        cadre_donnees = (
+            f"\n## PÉRIMÈTRE DES DONNÉES (LIS CECI AVANT D'ÉCRIRE)\n{ligne_themes}"
+            "Ce titre ne fait pas partie de la watchlist principale : le screener n'en publie "
+            "qu'un jeu de données RÉDUIT — celui listé ci-dessus, rien de plus. Tu ne disposes "
+            "NI du chiffre d'affaires, NI des marges, NI d'un PER, d'un PEG ou d'un FCF yield, "
+            "NI d'actualité datée pour ce titre.\n"
+            "En conséquence, RÈGLE ABSOLUE : ne cite, n'estime et n'évoque AUCUNE de ces "
+            "métriques — pas même de mémoire, pas même approximativement, pas même en la "
+            "qualifiant (« marges élevées », « valorisation à 30x »). Tout jugement chiffré doit "
+            "s'appuyer exclusivement sur les nombres fournis plus haut. Ce que tu ignores, tu ne "
+            "l'écris pas : une fiche courte et sourcée vaut mieux qu'une fiche complète et devinée.\n"
+            "Tu PEUX en revanche décrire qualitativement l'activité de l'entreprise, son modèle "
+            "économique, son type de douve et les forces qui la menacent — c'est de la "
+            "connaissance générale, pas une donnée financière inventée.\n"
+        )
+        schema = (
+            '  "resume": ["§ unique : ce que fait la boîte en une phrase + le débat central. Relie le score '
+            f'{stock.get("score","?")}/100 à la qualité, pas au timing."],\n'
+            '  "biz":    ["§ comment la boîte gagne de l\'argent + type de douve nommé et sa durabilité."],\n'
+            '  "futur":  ["§ drivers de croissance + cadrage prix vs valeur à partir des SEULS chiffres fournis (score, z-score, décote vs tendance, RSI, consensus), SANS cible chiffrée."],\n'
+            '  "bull":   ["puce 1", "puce 2", "puce 3"],\n'
+            '  "bear":   ["puce 1 (inversion)", "puce 2 (inversion)", "puce 3 (inversion)"]'
+        )
+        longueurs = ("Contraintes de longueur (fiche COURTE) : resume 1 §, biz 1 §, futur 1 §, "
+                     "bull et bear EXACTEMENT 3 puces chacun. Chaque § = 2 à 3 phrases, chaque puce 1 phrase.")
 
-    guide_block = (
-        f"## GUIDE DE RÉDACTION (autorité éditoriale — applique-le scrupuleusement)\n{guide}\n\n"
-        if guide else ""
-    )
-
-    return f"""{guide_block}Tu rédiges la fiche éditoriale du titre {ticker} pour « Signal », un screener
+    variable = f"""Tu rédiges la fiche éditoriale du titre {ticker} pour « Signal », un screener
 d'actions présenté comme un service éditorial d'information financière (statut Bêta/fictif).
 Date du jour : {today}.
 
 ## DONNÉES QUANTITATIVES DU TITRE (issues du screener — source de vérité pour les chiffres techniques)
-{breakdown_block(stock)}
-
-## ACTUALITÉ
-{news_block}
-
+{breakdown_block(stock, niveau)}
+{cadre_donnees}{bloc_actu}
 ## TON & CONTRAINTES (NON NÉGOCIABLES)
 - Ton PRÉCIS, FACTUEL, CLAIR et posé — analyste rigoureux. Plume vivante mais sobre : une
   pointe d'esprit pince-sans-rire est bienvenue de loin en loin, JAMAIS lourde, jamais un
@@ -390,10 +745,10 @@ Date du jour : {today}.
   GARDE-FOU (il pénalise chase/couteau), jamais une thèse d'achat.
 - Nomme EXPLICITEMENT le type de douve (marque / coût / réseau / coûts de transfert /
   actif réglementaire) et QUESTIONNE sa durabilité (qu'est-ce qui la tuerait ?).
-- CHIFFRE TOUT jugement de valorisation avec le NOMBRE fourni (PER forward, PER courant, FCF
-  yield, PEG, z-score). Les qualificatifs vagues SEULS sont interdits (« fourchette haute »,
-  « cher », « tendu » sans chiffre). N'invente JAMAIS un multiple historique ou de pair non
-  fourni : pour le relatif-historique, appuie-toi sur le z-score (seule mesure sourcée ici).
+- CHIFFRE TOUT jugement de valorisation avec les NOMBRES FOURNIS CI-DESSUS, et eux seuls.
+  Les qualificatifs vagues SEULS sont interdits (« fourchette haute », « cher », « tendu »
+  sans chiffre). N'invente JAMAIS un multiple, une marge ou une croissance qui ne figure pas
+  dans les données ci-dessus : pour le relatif-historique, appuie-toi sur le z-score.
 - `bear` = la VRAIE inversion de thèse (ce qui ferait échouer la thèse / perte permanente),
   PAS seulement « c'est cher ».
 - Reste dans le cercle de compétence : si la durabilité n'est pas évaluable, dis-le.
@@ -403,18 +758,20 @@ Date du jour : {today}.
 
 ## FORMAT DE SORTIE — JSON STRICT, RIEN D'AUTRE
 Réponds UNIQUEMENT par un objet JSON valide (pas de texte avant/après, pas de backticks)
-avec EXACTEMENT ces 6 clés, chacune un tableau de chaînes :
+avec EXACTEMENT ces {len(champs)} clés, chacune un tableau de chaînes :
 {{
-  "resume": ["§1 : ce que fait la boîte en une phrase + le débat central. Relie le score {stock.get('score','?')}/100 à la qualité, pas au timing.", "§2 (optionnel) : cadrage valorisation en relatif."],
-  "biz":    ["§ comment la boîte gagne de l'argent + marges.", "§ type de douve nommé + durabilité/menace."],
-  "futur":  ["§ drivers de croissance.", "§ cadrage prix vs valeur (cher/correct/décoté en relatif, SANS cible chiffrée) + risques."],
-  "actu":   ["§ faits récents datés et chiffrés (1 paragraphe dense)."],
-  "bull":   ["puce 1 chiffrée", "puce 2 chiffrée", "puce 3 chiffrée"],
-  "bear":   ["puce 1 (inversion)", "puce 2 (inversion)", "puce 3 (inversion)"]
+{schema}
 }}
 
-Contraintes de longueur : resume 1-2 §, biz 2 §, futur 2 §, actu 1 § dense,
-bull et bear EXACTEMENT 3 puces chacun. Chaque § = 2 à 4 phrases."""
+{longueurs}"""
+
+    guide_bloc = bloc_guide(guide)
+    if guide_bloc is None:
+        # Pas de cache possible : on remet le guide en tête du bloc unique s'il existe,
+        # pour ne pas perdre la spec éditoriale — seul le bénéfice de coût est perdu.
+        entete = (_GUIDE_ENTETE + guide + "\n\n") if guide else ""
+        return [{"type": "text", "text": entete + variable}]
+    return [guide_bloc, {"type": "text", "text": variable}]
 
 
 # ── VALIDATION / PARSING ──────────────────────────────────────────────────────
@@ -431,12 +788,14 @@ def _sanitize_html(text):
     return s.replace("&lt;b&gt;", "<b>").replace("&lt;/b&gt;", "</b>")
 
 
-def parse_and_validate(raw):
-    """Parse la réponse Claude et valide le schéma. Lève ValueError si invalide.
+def parse_and_validate(raw, niveau):
+    """Parse la réponse Claude et valide le schéma DU NIVEAU. Lève ValueError si invalide.
 
     Même nettoyage que portfolio_agent.py (strip ```json / ```), plus un filet de
     sécurité qui isole le 1er objet {...} si Claude entoure le JSON de prose.
     Chaque chaîne validée passe par _sanitize_html (allowlist <b> seulement).
+    Les clés hors périmètre du niveau sont ignorées : si le modèle rédige un `actu`
+    sur une fiche thématique, on ne le publie pas (il ne serait sourcé par rien).
     """
     cleaned = raw.strip().replace("```json", "").replace("```", "").strip()
     try:
@@ -451,7 +810,7 @@ def parse_and_validate(raw):
         raise ValueError("la réponse n'est pas un objet JSON")
 
     out = {}
-    for field in ALL_FIELDS:
+    for field in CHAMPS_PAR_NIVEAU[niveau]:
         val = data.get(field)
         if val is None:
             raise ValueError(f"champ manquant : {field}")
@@ -473,25 +832,21 @@ def parse_and_validate(raw):
     return out
 
 
-def generate_one(stock, guide):
-    """Génère l'analyse d'un seul ticker. Retourne dict (6 champs + _sig) ou lève.
+def generate_one(stock, guide, niveau):
+    """Génère l'analyse d'un seul ticker. Retourne (dict, usage) ou lève.
 
-    Même pattern d'appel que portfolio_agent.py : client.messages.create(model, max_tokens,
-    system, messages), puis response.content[0].text -> nettoyage -> json.loads.
+    Le dict porte les champs du niveau + `_sig` + `_niveau`. `usage` est l'objet
+    d'usage renvoyé par l'API (tokens entrée/sortie/cache) — agrégé en fin de run
+    pour publier le coût réel.
     """
-    news = fetch_news(stock["ticker"])
-    prompt = build_prompt(stock, guide, news)
+    news = fetch_news(stock["ticker"]) if niveau == NIVEAU_COMPLET else []
+    content = build_prompt(stock, guide, news, niveau)
 
     response = client.messages.create(
         model=MODEL,
         max_tokens=MAX_TOKENS,
-        system=(
-            "Tu es un analyste financier éditorial, neutre et factuel, pour un service "
-            "d'information (Bêta/fictif). Tu ne donnes jamais de conseil ni d'objectif de "
-            "cours. Tu réponds UNIQUEMENT en JSON valide, sans texte avant ou après, sans "
-            "balises markdown ni backticks."
-        ),
-        messages=[{"role": "user", "content": prompt}],
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": content}],
     )
     # Diagnostics explicites : sans ces gardes, une réponse tronquée produisait un
     # « aucun objet JSON détecté » trompeur, et une réponse vide un IndexError opaque.
@@ -500,9 +855,126 @@ def generate_one(stock, guide):
     if not response.content:
         raise ValueError("réponse vide du modèle (content=[])")
     raw = response.content[0].text
-    analysis = parse_and_validate(raw)
-    analysis["_sig"] = signature(stock)
-    return analysis
+    analysis = parse_and_validate(raw, niveau)
+    analysis["_niveau"] = niveau
+    analysis["_sig"] = signature(stock, niveau)
+    return analysis, getattr(response, "usage", None)
+
+
+def prechauffer_cache(guide):
+    """Écrit le préfixe partagé dans le cache AVANT de lancer le pool.
+
+    Sans ça, les 8 premières requêtes partent simultanément avec un cache vide :
+    aucune ne peut lire ce que les autres sont en train d'écrire, et on paie 8
+    écritures de cache au lieu d'une. Une requête max_tokens=0 fait le préremplissage
+    (donc l'écriture du cache) et rend la main immédiatement, sans facturer de sortie.
+    Best-effort : toute erreur est journalisée et le run continue — un préchauffage
+    raté coûte quelques centimes, pas une fiche.
+    """
+    bloc = bloc_guide(guide)
+    if bloc is None:
+        print("  ⚠️  Préfixe non éligible au cache (guide absent ou < "
+              f"{CACHE_MIN_CHARS} caractères) — chaque fiche paiera son entrée plein tarif.")
+        return False
+    # max_tokens=0 d'abord (préremplissage seul, zéro token de sortie facturé) ; si le
+    # SDK ou l'API refuse la valeur, 1 token de sortie fait le même travail pour ~0 $.
+    for plafond in (0, 1):
+        try:
+            client.messages.create(
+                model=MODEL,
+                max_tokens=plafond,
+                system=SYSTEM_PROMPT,
+                # Le marqueur reste sur le DERNIER bloc partagé avec les vraies requêtes :
+                # le texte de remplissage vient après, il n'entre pas dans le préfixe caché.
+                messages=[{"role": "user",
+                           "content": [bloc, {"type": "text", "text": "prechauffage"}]}],
+            )
+            print("  ♨️  Préfixe de prompt préchauffé (guide de rédaction mis en cache).")
+            return True
+        except Exception as e:                                    # noqa: BLE001
+            derniere = e
+    print(f"  ⚠️  Préchauffage du cache impossible ({derniere}) — les premières fiches "
+          f"paieront l'écriture du cache, sans autre conséquence.")
+    return False
+
+
+# ── ÉTAT PARTAGÉ (protégé par verrou) ────────────────────────────────────────
+class Etat:
+    """Dictionnaire d'analyses partagé par N workers + compteurs + persistance.
+
+    Pourquoi un verrou : `analyses` est muté par le thread principal à chaque fiche
+    terminée ET sérialisé sur disque périodiquement. `os.replace` garantit
+    l'atomicité du FICHIER, pas la cohérence du DICTIONNAIRE : sans verrou, une
+    sérialisation concurrente d'un dict en cours de mutation lève un
+    « dictionary changed size during iteration » — ou pire, publie un instantané
+    incohérent. Le verrou couvre donc la mutation ET l'écriture.
+
+    Le coût de contention est nul en pratique : une écriture prend ~10 ms là où une
+    fiche prend ~45 s.
+    """
+
+    def __init__(self, analyses):
+        self.lock = threading.Lock()
+        self.analyses = analyses
+        self.ok = 0
+        self.fail = 0
+        self.echecs = []          # (ticker, niveau, raison) — journalisés nominativement
+        self.usage = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0, "fiches": 0}
+        self._depuis_ecriture = 0
+        self._derniere_ecriture = time.monotonic()
+
+    def enregistrer(self, ticker, niveau, analysis, erreur, usage):
+        """Enregistre le résultat d'une fiche. APPELÉE DEPUIS LES WORKERS.
+
+        Retourne (fichier_ecrit, ancienne_conservee) — les deux calculés sous le
+        verrou, pour que l'appelant n'ait jamais à relire le dict partagé sans
+        protection juste pour composer sa ligne de log.
+        """
+        with self.lock:
+            ancienne_conservee = False
+            if analysis is not None:
+                self.analyses[ticker] = analysis
+                self.ok += 1
+            else:
+                self.fail += 1
+                self.echecs.append((ticker, niveau, str(erreur)))
+                ancienne_conservee = ticker in self.analyses
+            self._cumuler_usage(usage)
+            self._depuis_ecriture += 1
+            trop_de_fiches = self._depuis_ecriture >= WRITE_EVERY_N
+            trop_de_temps = (time.monotonic() - self._derniere_ecriture) >= WRITE_EVERY_S
+            ecrit = trop_de_fiches or trop_de_temps
+            if ecrit:
+                self._ecrire_verrou_tenu()
+            return ecrit, ancienne_conservee
+
+    def _cumuler_usage(self, usage):
+        """Agrège les compteurs de tokens (appelé SOUS le verrou)."""
+        if usage is None:
+            return
+        self.usage["fiches"] += 1
+        for cle, attr in (("in", "input_tokens"), ("out", "output_tokens"),
+                          ("cache_write", "cache_creation_input_tokens"),
+                          ("cache_read", "cache_read_input_tokens")):
+            try:
+                self.usage[cle] += int(getattr(usage, attr, 0) or 0)
+            except (TypeError, ValueError):
+                pass
+
+    def _ecrire_verrou_tenu(self):
+        _write(self.analyses)
+        self._depuis_ecriture = 0
+        self._derniere_ecriture = time.monotonic()
+
+    def ecrire(self):
+        """Écriture forcée (fin de run, purge, marques de péremption)."""
+        with self.lock:
+            self._ecrire_verrou_tenu()
+
+    def marquer(self, fn):
+        """Applique une mutation arbitraire au dict sous verrou (ex. _mark_stale)."""
+        with self.lock:
+            fn(self.analyses)
 
 
 # ── BUDGET / ORDONNANCEMENT ───────────────────────────────────────────────────
@@ -518,6 +990,27 @@ def _budget_seconds():
     except (TypeError, ValueError):
         print(f"  ⚠️  ANALYSES_TIME_BUDGET_S illisible ({TIME_BUDGET_S!r}) — défaut 1500 s")
         return 1500.0
+
+
+def _nb_workers():
+    """Lit ANALYSES_MAX_WORKERS, borné à [1, 16].
+
+    Même doctrine que le budget : une valeur illisible retombe sur le défaut, et le
+    bornage est journalisé. 1 worker redonne exactement l'ancien comportement
+    séquentiel, ce qui rend le parallélisme désactivable sans toucher au code.
+    """
+    try:
+        n = int(str(MAX_WORKERS_ENV).strip())
+    except (TypeError, ValueError):
+        print(f"  ⚠️  ANALYSES_MAX_WORKERS illisible ({MAX_WORKERS_ENV!r}) — défaut 8")
+        return 8
+    if n < 1:
+        print(f"  ⚠️  ANALYSES_MAX_WORKERS={n} invalide — ramené à 1 (séquentiel).")
+        return 1
+    if n > MAX_WORKERS_PLAFOND:
+        print(f"  ⚠️  ANALYSES_MAX_WORKERS={n} au-dessus du plafond — ramené à {MAX_WORKERS_PLAFOND}.")
+        return MAX_WORKERS_PLAFOND
+    return n
 
 
 def _neg_score(stock):
@@ -545,7 +1038,7 @@ def _mark_stale(analyses, skipped, elapsed, budget):
     today = str(date.today())
     print(f"\n⏳ Budget wall-clock atteint ({elapsed:.0f}s / {budget:.0f}s) — "
           f"{len(skipped)} fiche(s) NON régénérée(s) ce run :")
-    for stock, reason in skipped:
+    for stock, reason, niveau in skipped:
         tk = stock["ticker"]
         entry = analyses.get(tk)
         if isinstance(entry, dict):
@@ -556,15 +1049,54 @@ def _mark_stale(analyses, skipped, elapsed, budget):
             # Aucune entrée à marquer : le front affiche déjà « À générer. », le trou
             # est visible sans qu'on ait à le signaler dans le JSON.
             etat = "absente — le front affichera « À générer. »"
-        print(f"     · {tk} ({reason}, score {stock.get('score','?')}) — {etat}")
+        print(f"     · {tk} ({reason}, {niveau}, score {stock.get('score','?')}) — {etat}")
     print("   Ces fiches gardent leur ancienne signature : le prochain run les reprendra,\n"
-          "   en tête de file à priorité égale (score décroissant).")
+          "   en tête de file à priorité égale (watchlist d'abord, puis score décroissant).")
     if os.getenv("GITHUB_ACTIONS"):
         # Annotation visible dans le résumé du run sans faire échouer l'étape : un
         # report est un fonctionnement nominal, pas une panne — mais il doit se voir.
         print(f"::warning::{len(skipped)} fiche(s) éditoriale(s) reportées faute de budget "
               f"({elapsed:.0f}s / {budget:.0f}s) : "
-              f"{', '.join(s['ticker'] for s, _ in skipped)}")
+              f"{', '.join(s['ticker'] for s, _, _ in skipped)}")
+
+
+# ── COÛT ──────────────────────────────────────────────────────────────────────
+def cout_usd(usage):
+    """Coût réel du run à partir des compteurs de tokens renvoyés par l'API."""
+    return (usage["in"] * PRIX_IN_USD_MTOK
+            + usage["out"] * PRIX_OUT_USD_MTOK
+            + usage["cache_write"] * PRIX_CACHE_WRITE_USD_MTOK
+            + usage["cache_read"] * PRIX_CACHE_READ_USD_MTOK) / 1_000_000.0
+
+
+def rapport_cout(usage, total_couvert):
+    """Publie le coût du run et son extrapolation. Un run hebdomadaire dépense de
+    l'argent réel : ce chiffre doit apparaître dans le log, pas dans une facture
+    découverte trois mois plus tard."""
+    if not usage["fiches"]:
+        return
+    total = cout_usd(usage)
+    par_fiche = total / usage["fiches"]
+    print(f"\n💰 Coût de ce run : {total:.2f} $ pour {usage['fiches']} fiche(s) "
+          f"({par_fiche:.4f} $/fiche).")
+    print(f"   Tokens — entrée {usage['in']:,} · sortie {usage['out']:,} · "
+          f"cache écrit {usage['cache_write']:,} · cache lu {usage['cache_read']:,}"
+          .replace(",", " "))
+    if usage["cache_read"]:
+        # Économie = ce que ces tokens auraient coûté plein tarif, moins le tarif cache.
+        economie = usage["cache_read"] * (PRIX_IN_USD_MTOK - PRIX_CACHE_READ_USD_MTOK) / 1_000_000.0
+        print(f"   Mise en cache du préfixe : {economie:.2f} $ économisés sur ce run "
+              f"({economie / total * 100:.0f} % du coût total).")
+    else:
+        # Anti-panne silencieuse : un cache qui ne se lit jamais ne se voit pas
+        # autrement que sur la facture.
+        print("   ⚠️  AUCUNE lecture de cache sur ce run — le préfixe partagé n'est pas "
+              "mutualisé (guide trop court, préfixe instable, ou fiches trop espacées).")
+    if total_couvert:
+        print(f"   Extrapolation : régénération complète des {total_couvert} fiches ≈ "
+              f"{par_fiche * total_couvert:.2f} $ ; "
+              f"régime établi (~51 % de churn/semaine) ≈ {par_fiche * total_couvert * 0.51:.2f} $/semaine, "
+              f"soit ≈ {par_fiche * total_couvert * 0.51 * 52:.0f} $/an.")
 
 
 # ── MAIN ──────────────────────────────────────────────────────────────────────
@@ -575,9 +1107,8 @@ def main():
         print("   (analyses.json laissé INCHANGÉ — aucune écriture, sortie propre.)")
         sys.exit(1)
 
-    watchlist = load_json(WATCHLIST_PATH, {})
-    stocks = watchlist.get("stocks", []) if isinstance(watchlist, dict) else []
-    if not stocks:
+    items, univers_lisible = collecter_sources()
+    if not any(n == NIVEAU_COMPLET for _, n in items):
         print("❌ watchlist.json vide ou manquant — rien à générer. Lancez screener.py d'abord.")
         sys.exit(1)
 
@@ -587,124 +1118,206 @@ def main():
         analyses = {}
 
     guide = load_guide()
+    current_tickers = {s["ticker"] for s, _ in items}
 
-    current_tickers = {s["ticker"] for s in stocks if s.get("ticker")}
-
-    # 1) PURGE des orphelins (tickers qui ne sont plus dans la watchlist)
-    orphans = [t for t in analyses if t not in current_tickers]
-    for t in orphans:
-        del analyses[t]
-    if orphans:
-        print(f"🧹 Purge {len(orphans)} orphelin(s) : {', '.join(sorted(orphans))}")
+    # 1) PURGE des orphelins (tickers qui ne sont plus publiés nulle part)
+    #    Garde-fou : sans universe.json, on ne peut pas distinguer un orphelin d'un
+    #    titre thématique — purger reviendrait à détruire 150 fiches sur une lecture
+    #    ratée. On s'abstient et on le dit.
+    orphans = []
+    if univers_lisible:
+        orphans = [t for t in analyses if t not in current_tickers]
+        for t in orphans:
+            del analyses[t]
+        if orphans:
+            print(f"🧹 Purge {len(orphans)} orphelin(s) : {', '.join(sorted(orphans))}")
 
     # 2) DÉTECTION nouveau / modifié via signature
     #    - pas d'entrée               -> "nouveau"
-    #    - signature changée          -> "modifié"
+    #    - signature changée          -> "modifié"  (inclut un changement de NIVEAU)
     #    - signature absente (legacy) -> capturée par "modifié" (None != sig calculée)
     #    - signature identique mais entrée incomplète -> "complétion"
     #    - signature identique ET entrée complète     -> on garde tel quel (0 appel API)
     todo = []
     unmarked = 0
-    for s in stocks:
-        tk = s.get("ticker")
-        if not tk:
-            continue
+    niveaux_poses = 0
+    for s, niveau in items:
+        tk = s["ticker"]
         existing = analyses.get(tk)
-        new_sig = signature(s)
+        new_sig = signature(s, niveau)
         if not existing:
-            todo.append((s, "nouveau"))
+            todo.append((s, "nouveau", niveau))
         elif existing.get("_sig") != new_sig:
-            todo.append((s, "modifié"))
-        elif not entry_is_complete(existing):
-            todo.append((s, "complétion"))
-        elif existing.pop("_perime", None):
-            # À jour et complet, mais elle portait une marque de péremption d'un run
-            # précédent : soit elle a été régénérée depuis, soit sa signature est
-            # revenue à sa valeur d'origine. Dans les deux cas le texte publié
-            # correspond de nouveau au breakdown — la marque doit disparaître, sinon
-            # le site afficherait un avertissement de péremption indéfiniment.
-            unmarked += 1
-        # sinon : à jour et complet -> conservé.
+            todo.append((s, "modifié", niveau))
+        elif not entry_is_complete(existing, niveau):
+            todo.append((s, "complétion", niveau))
+        else:
+            # À jour et complet. On (re)pose le niveau au cas où une entrée legacy ne
+            # le porterait pas encore — le front doit toujours savoir à quoi s'attendre.
+            # C'est compté : une mutation qui ne déclencherait pas d'écriture serait
+            # perdue en silence au prochain chargement.
+            if "_niveau" not in existing:
+                existing["_niveau"] = niveau
+                niveaux_poses += 1
+            if existing.pop("_perime", None):
+                # Elle portait une marque de péremption d'un run précédent : soit elle a
+                # été régénérée depuis, soit sa signature est revenue à sa valeur
+                # d'origine. Dans les deux cas le texte publié correspond de nouveau au
+                # breakdown — la marque doit disparaître, sinon le site afficherait un
+                # avertissement de péremption indéfiniment.
+                unmarked += 1
 
     # File de priorité : le budget ci-dessous ne servira peut-être pas tout le monde,
-    # il doit donc servir d'abord ce qui manque au site. À priorité égale, score
-    # décroissant — c'est le haut de watchlist qui est consulté.
-    todo.sort(key=lambda item: (PRIORITY.get(item[1], 9), _neg_score(item[0])))
+    # il doit donc servir d'abord ce qui manque au site. Puis la watchlist principale
+    # avant les vues thématiques. À rang égal, score décroissant.
+    todo.sort(key=lambda it: (PRIORITY.get(it[1], 9), RANG_NIVEAU.get(it[2], 9), _neg_score(it[0])))
 
     kept = len(current_tickers) - len(todo)
-    print(f"📋 Watchlist : {len(current_tickers)} tickers — "
-          f"{len(todo)} à (re)générer, {kept} inchangé(s) conservé(s)"
-          + (f", {unmarked} marque(s) de péremption levée(s)." if unmarked else "."))
+    n_complets = sum(1 for _, _, n in todo if n == NIVEAU_COMPLET)
+    print(f"📋 Couverture : {len(current_tickers)} tickers — "
+          f"{len(todo)} à (re)générer ({n_complets} complète(s), {len(todo) - n_complets} thématique(s)), "
+          f"{kept} inchangé(s) conservé(s)"
+          + (f", {unmarked} marque(s) de péremption levée(s)" if unmarked else "")
+          + (f", {niveaux_poses} niveau(x) renseigné(s) sur des entrées legacy" if niveaux_poses else "")
+          + ".")
+
+    etat = Etat(analyses)
 
     if not todo:
-        # Rien à régénérer ; on réécrit si on a purgé des orphelins ou levé des marques.
-        if orphans or unmarked:
-            _write(analyses)
-            print("✅ analyses.json mis à jour (purge orphelins / péremptions levées).")
+        # Rien à régénérer ; on réécrit si on a purgé des orphelins, levé des marques
+        # ou complété des entrées legacy — sinon la mutation en mémoire serait perdue.
+        if orphans or unmarked or niveaux_poses:
+            etat.ecrire()
+            print("✅ analyses.json mis à jour (purge orphelins / péremptions levées / niveaux posés).")
         else:
             print("✅ Rien à faire — analyses.json déjà à jour.")
         return
 
-    # 3) GÉNÉRATION incrémentale, robuste par ticker, sous budget wall-clock
+    # 3) GÉNÉRATION incrémentale et PARALLÈLE, robuste par ticker, sous budget wall-clock
     budget = _budget_seconds()
+    workers = _nb_workers()
     started = time.monotonic()
     if budget <= 0:
         print("⏱️  Budget wall-clock DÉSACTIVÉ (ANALYSES_TIME_BUDGET_S <= 0) — "
               "la boucle ira au bout, y compris au-delà du timeout CI de 45 min.")
     else:
-        print(f"⏱️  Budget wall-clock : {budget:.0f}s pour {len(todo)} fiche(s) à générer.")
+        projection = len(todo) * FIRST_TICKER_COST_S / workers
+        print(f"⏱️  Budget wall-clock : {budget:.0f}s · {workers} worker(s) en parallèle · "
+              f"{len(todo)} fiche(s) — projection initiale ≈ {projection / 60:.0f} min "
+              f"(hypothèse pessimiste {FIRST_TICKER_COST_S:.0f}s/fiche, réajustée en cours de run).")
 
-    ok, fail = 0, 0
     durations = []
-    skipped = []
-    for i, (s, reason) in enumerate(todo):
-        # On n'entame une fiche que si on estime pouvoir la FINIR. Une fiche commencée
-        # puis tuée par le timeout CI ne coûte pas qu'elle-même : elle emporte l'étape
-        # de commit, donc tout le travail déjà fait dans ce run, donc la reprise.
-        # Estimation = pire durée observée, volontairement pessimiste : l'asymétrie est
-        # totale entre « une fiche de moins cette semaine » et « le run entier perdu ».
-        if budget > 0:
-            elapsed = time.monotonic() - started
-            estimate = max(durations) if durations else FIRST_TICKER_COST_S
-            if elapsed + estimate > budget:
-                skipped = todo[i:]
+    i = 0                      # index de la 1re fiche NON soumise -> todo[i:] = reportées
+    stop_soumission = False
+
+    def _tache(stock, niveau):
+        """Exécutée dans un worker : génère la fiche PUIS l'enregistre elle-même.
+
+        NE LÈVE JAMAIS : une exception avalée par le pool ferait disparaître une fiche
+        sans le moindre message. Toute la mutation de l'état partagé passe par
+        Etat.enregistrer(), donc par le verrou — c'est le seul point de contact entre
+        les workers et le dictionnaire commun.
+        """
+        t0 = time.monotonic()
+        tk = stock["ticker"]
+        try:
+            analysis, usage = generate_one(stock, guide, niveau)
+            erreur = None
+        except Exception as e:                                    # noqa: BLE001
+            analysis, usage, erreur = None, None, e
+        duree = time.monotonic() - t0
+
+        ecrit, ancienne = etat.enregistrer(tk, niveau, analysis, erreur, usage)
+        # Un print = une écriture : les lignes de N workers s'entrelacent entre elles,
+        # jamais à l'intérieur d'une ligne.
+        if analysis is not None:
+            print(f"     ✅ {tk} généré ({duree:.0f}s)" + (" · analyses.json écrit" if ecrit else ""))
+        elif ancienne:
+            # On garde l'ancienne analyse — mieux qu'un trou affichant « À générer ».
+            print(f"     ⚠️  {tk} échec ({erreur}) — ANCIENNE analyse conservée.")
+        else:
+            print(f"     ✗ {tk} échec ({erreur}) — pas d'analyse, le front affichera « À générer ».")
+        return duree
+
+    executor = ThreadPoolExecutor(max_workers=workers, thread_name_prefix="fiche")
+    en_vol = {}
+    prechauffe_faite = len(todo) < 2      # une seule fiche : rien à mutualiser
+    try:
+        while True:
+            # Remplissage du pool. On n'ENTAME une fiche que si on estime pouvoir la
+            # FINIR : une fiche commencée puis tuée par le timeout CI n'emporte pas
+            # qu'elle-même, elle emporte l'étape de commit, donc tout le run.
+            #
+            # Avec N workers la garde reste per-tâche et cela reste correct : une tâche
+            # soumise MAINTENANT démarre immédiatement (un worker vient de se libérer),
+            # donc elle se termine vers `écoulé + estimation`. Le parallélisme change le
+            # DÉBIT, pas la latence unitaire — la queue de fin est bornée par une fiche,
+            # pas par N. L'estimation reste la pire durée observée (volontairement
+            # pessimiste : l'asymétrie est totale entre « une fiche de moins » et « le
+            # run entier perdu »), et sous parallélisme les durées unitaires s'allongent
+            # un peu (429 rejoués par le SDK) — la pire durée les capture déjà.
+            while not stop_soumission and len(en_vol) < workers and i < len(todo):
+                if budget > 0:
+                    ecoule = time.monotonic() - started
+                    estimation = max(durations) if durations else FIRST_TICKER_COST_S
+                    if ecoule + estimation > budget:
+                        stop_soumission = True
+                        break
+                if not prechauffe_faite:
+                    # Juste avant la PREMIÈRE requête, et pas plus tôt : si le budget
+                    # était déjà épuisé, on ne veut pas avoir payé une écriture de
+                    # cache pour un run qui ne génère rien.
+                    prechauffer_cache(guide)
+                    prechauffe_faite = True
+                s, reason, niveau = todo[i]
+                i += 1
+                print(f"  ✍️  {s['ticker']} ({reason}, {niveau}) — score {s.get('score','?')}…",
+                      flush=True)
+                en_vol[executor.submit(_tache, s, niveau)] = (s, reason, niveau)
+
+            if not en_vol:
                 break
 
-        tk = s["ticker"]
-        print(f"  ✍️  {tk} ({reason}) — score {s.get('score','?')}…", flush=True)
-        t_start = time.monotonic()
-        try:
-            analyses[tk] = generate_one(s, guide)
-            ok += 1
-            print(f"     ✅ {tk} généré.")
-        except Exception as e:
-            fail += 1
-            if tk in analyses:
-                # On garde l'ancienne analyse — mieux qu'un trou affichant « À générer ».
-                print(f"     ⚠️  {tk} échec ({e}) — ANCIENNE analyse conservée.")
-            else:
-                print(f"     ✗ {tk} échec ({e}) — pas d'analyse, le front affichera « À générer ».")
-        # Un échec consomme du temps lui aussi : il compte dans le budget.
-        durations.append(time.monotonic() - t_start)
-        # Écriture (atomique) après chaque ticker : un crash en cours de run ne perd
-        # pas le travail déjà fait. Attention, ce n'est vrai d'un run à l'autre que si
-        # le job atteint son étape de commit — d'où le budget ci-dessus.
-        _write(analyses)
+            termines, _ = wait(list(en_vol), return_when=FIRST_COMPLETED)
+            for fut in termines:
+                en_vol.pop(fut)
+                # _tache ne lève jamais : ce result() ne peut pas exploser ici, et la
+                # durée qu'il renvoie alimente l'estimation du budget ci-dessus.
+                durations.append(fut.result())
+    finally:
+        # wait=True : on ne quitte JAMAIS en laissant des requêtes en vol dont le
+        # résultat serait perdu après avoir été payé.
+        executor.shutdown(wait=True)
 
+    skipped = todo[i:]
     elapsed = time.monotonic() - started
     if skipped:
-        _mark_stale(analyses, skipped, elapsed, budget)
-    # Écriture finale : persiste les marques de péremption, y compris dans le cas
-    # limite où le budget était déjà épuisé avant la première fiche.
-    _write(analyses)
+        etat.marquer(lambda a: _mark_stale(a, skipped, elapsed, budget))
+    # Écriture finale : persiste les dernières fiches et les marques de péremption,
+    # y compris dans le cas limite où le budget était épuisé avant la première fiche.
+    etat.ecrire()
 
-    print(f"\n✅ analyses.json écrit — {ok} généré(s), {fail} échec(s), {kept} conservé(s), "
+    if etat.echecs:
+        # Doctrine anti-troncature silencieuse : un échec par ticker est déjà tracé
+        # au fil de l'eau, mais noyé dans 184 lignes. On le rappelle nominativement.
+        print(f"\n⚠️  {len(etat.echecs)} fiche(s) en échec ce run :")
+        for tk, niveau, raison in etat.echecs:
+            print(f"     · {tk} ({niveau}) — {raison}")
+
+    print(f"\n✅ analyses.json écrit — {etat.ok} généré(s), {etat.fail} échec(s), {kept} conservé(s), "
           f"{len(orphans)} purgé(s), {len(skipped)} reporté(s) — {elapsed:.0f}s écoulées"
           + (f" / {budget:.0f}s de budget." if budget > 0 else " (budget désactivé)."))
-    print(f"   Total entrées : {len(analyses)} (== {len(current_tickers)} si aucun échec sur un nouveau ticker).")
-    # Sortie en SUCCÈS même avec des fiches reportées : un exit non nul déclencherait
-    # l'étape « Signale les échecs IA » du workflow et rendrait le job rouge chaque
-    # semaine pour un fonctionnement nominal — l'alarme finirait par n'être plus lue.
+    if durations:
+        print(f"   Débit : {len(durations)} fiche(s) en {elapsed:.0f}s avec {workers} worker(s) — "
+              f"{sum(durations) / len(durations):.0f}s par fiche en moyenne "
+              f"(pire cas {max(durations):.0f}s), soit un facteur d'accélération de "
+              f"{sum(durations) / elapsed:.1f}× sur le séquentiel.")
+    print(f"   Total entrées : {len(etat.analyses)} (== {len(current_tickers)} si aucun échec sur un nouveau ticker).")
+    rapport_cout(etat.usage, len(current_tickers))
+    # Sortie en SUCCÈS même avec des fiches reportées ou en échec : un exit non nul
+    # déclencherait l'étape « Signale les échecs IA » du workflow et rendrait le job
+    # rouge chaque semaine pour un fonctionnement nominal — l'alarme finirait par
+    # n'être plus lue. Seule une panne dure (clé absente, watchlist vide) sort en 1.
 
 
 def _write(analyses):
@@ -717,6 +1330,10 @@ def _write(analyses):
     allow_nan=False comme screener.py / portfolio_agent.py : un NaN sérialisé en
     `NaN` est refusé par JSON.parse() et casserait le rendu de TOUTES les fiches.
     Mieux vaut échouer ici, bruyamment, que publier un fichier illisible.
+
+    ATTENTION : sous parallélisme, cette fonction doit être appelée avec le verrou
+    d'Etat tenu. os.replace rend l'écriture du FICHIER atomique, il ne protège en
+    rien le dictionnaire pendant sa sérialisation.
     """
     ANALYSES_PATH.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp = tempfile.mkstemp(
