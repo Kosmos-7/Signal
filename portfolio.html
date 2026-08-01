@@ -789,6 +789,21 @@
 
     <!-- Learnings principaux toujours visibles (v1.7+) -->
 
+    <!-- v3.5.0 — Fichier de données produit mais jamais publié (2e occurrence) -->
+    <div class="learning-item">
+      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-body">
+        <div class="learning-header">
+          <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
+          <span class="learning-version">v3.5.0</span>
+          <span class="learning-date">1er août 2026</span>
+        </div>
+        <div class="learning-title">Un fichier de données produit à chaque run, mais jamais publié — deux fois de suite</div>
+        <div class="learning-prob">L'étape de publication automatique liste les fichiers de données un par un. Lors de la mise en service des watchlists thématiques, le nouveau fichier <code>universe.json</code> n'a pas été ajouté à cette liste : il était correctement calculé à chaque exécution, mais ne quittait jamais le serveur de calcul. Le site aurait servi une page de watchlists sans données, avec un job d'intégration parfaitement <strong>vert</strong>. C'est la deuxième occurrence exacte du même défaut — <code>charts.json</code>, qui alimente les graphiques des fiches, avait connu le même sort en v3.3.0. C'est la panne la plus coûteuse à diagnostiquer : aucun test ne casse, aucune alerte ne part, seul le site est incomplet.</div>
+        <div class="learning-fix">Au-delà de l'ajout du fichier manquant, un garde-fou remplace la vigilance : tout fichier de données créé ou modifié à la racine du projet et absent de la publication fait désormais <strong>échouer</strong> l'exécution, avec le nom du fichier oublié. Vérifié dans les deux sens — il détecte l'oubli, et ne se déclenche pas à tort quand tout est en ordre. Corollaire retenu : quand une même erreur se répète, on corrige le mécanisme, pas l'occurrence.</div>
+      </div>
+    </div>
+
     <!-- v3.2.1 — Watchlist 100% EU publiée 24h (barre Yahoo NaN pré-ouverture US) -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>

@@ -383,7 +383,7 @@ function uOf(s){ return (s&&U.stocks[s.ticker])||null; }
 function themesOf(tk){ const u=U.stocks[tk];return (u&&Array.isArray(u.themes))?u.themes:[]; }
 
 const REG={PA:'EU',DE:'EU',AS:'EU',BR:'EU',MI:'EU',MC:'EU',AT:'EU',HE:'EU',VI:'EU',LI:'EU',IS:'EU',
-  L:'UK',SW:'CH',CO:'DK',ST:'SE',OL:'NO',T:'JP',HK:'HK',TO:'CA',AX:'AU'};
+  L:'UK',SW:'CH',CO:'DK',ST:'SE',OL:'NO',T:'JP',KS:'KR',KQ:'KR',HK:'HK',TO:'CA',AX:'AU'};
 function region(s){ if(s.badge)return s.badge; const p=(s.ticker||'').split('.'); return p.length>1?(REG[p[p.length-1].toUpperCase()]||'INT'):'US'; }
 
 function listBuild(){const l=document.getElementById('rl');if(!l)return;l.innerHTML='';curList.forEach(s=>{const r=document.createElement('div');r.className='row';s._r=r;
