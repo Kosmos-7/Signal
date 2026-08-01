@@ -16,6 +16,11 @@ Contrôles par ticker :
 
 Usage : python validate_tickers.py [--all]
         (par défaut : seulement les tickers ABSENTS de l'univers actuel)
+
+        python validate_tickers.py --tickers COHR,CSCO,ASX,6146.T
+        (liste explicite — sert à éprouver des CANDIDATS avant de les inscrire
+        dans themes.py, ce qui est l'ordre correct : on ne déclare un ticker
+        qu'une fois qu'on sait qu'il existe et qu'il passe les filtres)
 """
 import json
 import sys
@@ -129,9 +134,25 @@ def valide(ticker):
 
 def main():
     tout = "--all" in sys.argv
+    explicites = ""
+    for i, arg in enumerate(sys.argv):
+        if arg == "--tickers" and i + 1 < len(sys.argv):
+            explicites = sys.argv[i + 1]
+        elif arg.startswith("--tickers="):
+            explicites = arg.split("=", 1)[1]
+
     declares = themes.univers_thematique()
     actuel = univers_actuel()
-    cibles = declares if tout else sorted(set(declares) - actuel)
+    if explicites:
+        # Mode CANDIDATS : on éprouve une liste avant de l'inscrire dans
+        # themes.py. C'est l'ordre correct — un ticker ne se déclare qu'une fois
+        # qu'on sait qu'il existe chez Yahoo et qu'il passe les filtres.
+        cibles = sorted({t.strip().upper() for t in explicites.split(",") if t.strip()})
+        deja = sorted(set(cibles) & actuel)
+        if deja:
+            print(f"Déjà dans l'univers (validés quand même) : {', '.join(deja)}")
+    else:
+        cibles = declares if tout else sorted(set(declares) - actuel)
 
     print(f"Univers actuel : {len(actuel)} tickers")
     print(f"Déclarés par les thèmes : {len(declares)}")

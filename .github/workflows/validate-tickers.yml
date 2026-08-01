@@ -21,6 +21,10 @@ on:
         description: "Valider TOUS les tickers déclarés (sinon : seulement les nouveaux)"
         type: boolean
         default: false
+      tickers:
+        description: "Liste explicite de CANDIDATS à éprouver, séparés par des virgules (prioritaire)"
+        type: string
+        default: ""
 
 # Ne touche à aucun fichier de données publié : lecture seule côté production.
 permissions:
@@ -43,8 +47,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Valider les tickers déclarés dans themes.py
-        run: python validate_tickers.py ${{ inputs.tout && '--all' || '' }}
+      - name: Valider les tickers
+        run: |
+          if [ -n "${{ inputs.tickers }}" ]; then
+            python validate_tickers.py --tickers "${{ inputs.tickers }}"
+          else
+            python validate_tickers.py ${{ inputs.tout && '--all' || '' }}
+          fi
 
       - name: Publier le rapport en artefact
         if: always()
