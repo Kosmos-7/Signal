@@ -7,7 +7,12 @@ place mal servie ne se voit qu'à l'exécution — et se traduirait en productio
 un thème amputé, publié en silence. On valide donc AVANT d'élargir l'univers.
 
 Contrôles par ticker :
-  - history(period="max") non vide, et profondeur suffisante (5 ans requis)
+  - history(period="max") non vide, et au moins ~200 séances (le plancher du
+    screener : en dessous, MM200/RSI sont incalculables et il écarte le titre).
+    Moins de 5 ans n'est PLUS bloquant depuis le 01/08/2026 (décision
+    propriétaire, entrée des néoclouds CRWV/NBIS) : c'est un avertissement,
+    et le site affiche sur la fiche que la droite de régression n'est pas
+    exploitable en l'état.
   - devise renvoyée par Yahoo, comparée à celle que detect_currency() déduit
     du suffixe : un désaccord est une erreur de conversion en puissance
   - secteur exploitable (sinon le titre échappe à la règle de concentration)
@@ -34,7 +39,11 @@ import themes
 from portfolio_agent import detect_currency
 
 SEUIL_CAP_USD = 25e9
-ANNEES_MIN = 5
+# 5 ans = seuil d'EXPLOITABILITÉ de la régression (avertissement, plus une
+# erreur) ; 200 séances = plancher TECHNIQUE du screener (erreur, car le titre
+# serait écarté au run : MM200 et RSI incalculables).
+ANNEES_REGRESSION = 5
+SEANCES_MIN = 200
 
 # Ordres de grandeur attendus par devise — un prix hors bornes trahit une
 # erreur d'unité (le piège des pence GBp, ×100, a déjà frappé ce projet).
@@ -68,8 +77,14 @@ def valide(ticker):
         r["annees_historique"] = round(jours / 365.25, 1)
         r["dernier_cours"] = round(float(close.iloc[-1]), 2)
         r["derniere_date"] = str(close.index[-1].date())
-        if jours < ANNEES_MIN * 365:
-            r["erreurs"].append(f"historique {r['annees_historique']} ans < {ANNEES_MIN} ans requis")
+        if len(close) < SEANCES_MIN:
+            r["erreurs"].append(
+                f"{len(close)} séances < {SEANCES_MIN} requises — MM200/RSI incalculables, "
+                "le screener écarterait ce titre au run")
+        elif jours < ANNEES_REGRESSION * 365:
+            r["avertissements"].append(
+                f"historique {r['annees_historique']} ans < {ANNEES_REGRESSION} ans : droite de "
+                "régression non exploitable en l'état (la fiche l'affichera)")
 
         # Devise : Yahoo vs déduction par suffixe — le désaccord est critique
         try:

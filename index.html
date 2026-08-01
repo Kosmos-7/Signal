@@ -681,15 +681,24 @@ function drawChart(s){
   }
   const trF=t=>Math.exp(F.a+F.b*(t-F.t0));
   function el(n,at){const e=document.createElementNS('http://www.w3.org/2000/svg',n);for(const k in at)e.setAttribute(k,at[k]);svg.appendChild(e);return e}
+  // Historique de cotation < 5 ans (néoclouds entrés le 01/08/2026, règle
+  // d'exclusion supprimée) : la droite de régression est mathématiquement
+  // calculable mais statistiquement vide — on la montre, et on le DIT. Le
+  // seuil se lit sur la fenêtre EFFECTIVE publiée par le screener : un titre
+  // à l'historique profond ne descend jamais sous 10 ans de fenêtre.
+  const histCourt=(b.regression_window_years!=null&&b.regression_window_years<5)
+    ?'<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Droite de régression non utilisable en l\'état — historique de cotation insuffisant ('+b.regression_window_years+' an'+(b.regression_window_years>1?'s':'')+', 5 ans minimum pour une tendance exploitable).</b> La décote, le z-score et le canal affichés sont indicatifs : trop peu de cycles pour qu\'une trajectoire « normale » existe. À lire pour la thèse et les fondamentaux, pas pour le timing.</div></div>'
+    :'';
   function majWarn(officiel){
     const slot=document.getElementById('chx-warnslot');if(!slot)return;
     let zv=null;
     if(F&&vis.length){const [te,pe]=vis[vis.length-1];zv=(Math.log(pe)-Math.log(trF(te)))/F.sigma;}
     if(officiel&&zOff!=null)zv=zOff;   // sur la vue officielle, le z du screener fait foi
     const suf=officiel?'':' <span style="color:var(--text3)">(sur la période affichée)</span>';
-    if(zv!=null&&zv<=-2)slot.innerHTML='<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Écart extrême (&gt; 2σ sous la tendance'+(officiel?'':' de la période')+') — attention au changement structurel.</b>'+suf+' Si le business est durablement altéré (disruption, concurrence, régulation), la trajectoire passée ne reviendra pas : c\'est le piège de valeur. La décote chiffre un désaccord entre le passé et le prix — elle ne dit pas qui a raison. À croiser avec la qualité (score /45).</div></div>';
-    else if(zv!=null&&zv>=2)slot.innerHTML='<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Surcote extrême (&gt; 2σ au-dessus de la tendance'+(officiel?'':' de la période')+') — attention à la chasse au rally.</b>'+suf+' Acheter ici, c\'est payer très au-dessus de la trajectoire historique : le retour vers la tendance est le scénario statistiquement fréquent. À croiser avec la qualité et la thèse.</div></div>';
-    else slot.innerHTML='';
+    let zw='';
+    if(zv!=null&&zv<=-2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Écart extrême (&gt; 2σ sous la tendance'+(officiel?'':' de la période')+') — attention au changement structurel.</b>'+suf+' Si le business est durablement altéré (disruption, concurrence, régulation), la trajectoire passée ne reviendra pas : c\'est le piège de valeur. La décote chiffre un désaccord entre le passé et le prix — elle ne dit pas qui a raison. À croiser avec la qualité (score /45).</div></div>';
+    else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span><div><b>Surcote extrême (&gt; 2σ au-dessus de la tendance'+(officiel?'':' de la période')+') — attention à la chasse au rally.</b>'+suf+' Acheter ici, c\'est payer très au-dessus de la trajectoire historique : le retour vers la tendance est le scénario statistiquement fréquent. À croiser avec la qualité et la thèse.</div></div>';
+    slot.innerHTML=histCourt+(histCourt?'':zw);   // hist. court : le z-warn serait du bruit sur un z déjà déclaré inexploitable
   }
   function chRender(){
     svg.innerHTML='<defs><clipPath id="chx-plot"><rect x="'+ML+'" y="'+MT+'" width="'+(W-ML-MR)+'" height="'+(H-MT-MB)+'"/></clipPath></defs>';

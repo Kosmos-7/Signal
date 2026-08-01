@@ -89,8 +89,20 @@ THEMES_CURES = [
             "ANET", "COHR", "LITE", "CIEN", "CSCO",
             # 5 — Serveurs et immobilier de centre de données : ce qu'on
             #     assemble et le bâtiment qui l'héberge — la dépense atterrit
-            #     littéralement là.
+            #     littéralement là. S'y ajoutent les NÉOCLOUDS (location de
+            #     calcul GPU), entrés le 01/08/2026 sur décision propriétaire,
+            #     qui a supprimé la règle d'exclusion des historiques < 5 ans :
+            #     la fiche affiche à la place que la droite de régression n'est
+            #     pas exploitable en l'état.
+            #     - CRWV  ~39 Md$, IPO mars 2025 (1,3 an)
+            #     - NBIS  ~48 Md$, reprise oct. 2024 (1,8 an) — ex-Yandex
+            #     - SHAZ  ~1,5 Md$, 0,4 an (~100 séances) : sous le plancher
+            #       TECHNIQUE du screener (MM200/RSI exigent ~200 séances). Il
+            #       restera déclaré-non-scoré jusqu'à ~février 2027 — le run
+            #       l'écartera proprement à chaque semaine d'ici là. Exception
+            #       assumée aussi sur le seuil des 25 Md$.
             "DELL", "HPE", "EQIX", "DLR",
+            "CRWV", "NBIS", "SHAZ",
             # 6 — Plateformes et cloud : les hyperscalers qui commandent et
             #     exploitent les centres de données. Leur place est défendable
             #     parce que leurs capex SONT la dépense d'infrastructure — ils
@@ -201,19 +213,15 @@ ECARTES_VALIDATION = {
     "HUBB":    "capitalisation ~25 Md$, au seuil — écarté faute de marge",
     "MOD":     "capitalisation ~11 Md$ < seuil 25 Md$ (refroidissement)",
     "8036.T":  "symbole introuvable chez Yahoo",
-    # Néoclouds (location de calcul GPU), demandés le 01/08. Thématiquement en
-    # plein dans le maillon serveurs/centres de données, mais le scoring repose
-    # sur un canal de régression d'au moins 5 ans — pas d'historique, pas de
-    # score. Validés via le workflow (run n°3) : capitalisations largement au
-    # seuil, historiques très loin du compte.
-    "CRWV":    "historique 1,3 an < 5 ans requis (IPO mars 2025, ~39 Md$) — éligible en 2030",
-    "NBIS":    "historique 1,8 an < 5 ans requis (~48 Md$) — reprise de cotation oct. 2024 après "
-               "2 ans ½ de suspension, et l'historique antérieur décrit Yandex Russie, une autre "
-               "entreprise ; éligible fin 2029",
-    # Sharon AI : pas de ticker à valider — société non cotée sur une place
-    # majeure (centres de données GPU, Australie/Texas), très loin du seuil de
-    # 25 Md$. Hors périmètre tant qu'elle n'est pas une grande capitalisation cotée.
 }
+# NOTE 01/08/2026 — la règle « historique < 5 ans = exclusion » est SUPPRIMÉE
+# (décision propriétaire, entrée des néoclouds CRWV/NBIS/SHAZ). Un historique
+# court vaut désormais avertissement : la fiche affiche que la droite de
+# régression n'est pas exploitable en l'état. Conséquence : les écartés
+# ci-dessus pour ce seul motif (CEG, GEV, ARM, ALAB, CRDO, GFS) redeviennent
+# des candidats recevables — ils ne sont PAS réintégrés d'office, chacun
+# attend une décision explicite. Le plancher technique demeure : ~200 séances,
+# sans quoi MM200/RSI sont incalculables et le screener écarte le titre au run.
 
 THEMES = THEMES_CURES + THEMES_CALCULES
 THEMES_BY_ID = {t["id"]: t for t in THEMES}
