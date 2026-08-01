@@ -209,50 +209,60 @@ def chrome(pl, index, code, caption, accent):
 
 # ── Les 13 motifs ────────────────────────────────────────────────────────────
 def semis(pl, ac):
-    """Wafer : disque méplat, champs d'insolation en pas-et-répète."""
-    c, r = (480, 258), 172
-    step = 30
-    # champs d'insolation, clippés au disque
-    k = -6
-    while k <= 6:
-        x = c[0] + k * step
-        dy = r * r - (x - c[0]) ** 2
-        if dy > 0:
-            dy = math.sqrt(dy) * 0.988
-            pl.line((x, c[1] - dy), (x, c[1] + dy), BLUE + (44,), 1)
-        y = c[1] + k * step
-        dx = r * r - (y - c[1]) ** 2
-        if dx > 0:
-            dx = math.sqrt(dx) * 0.988
-            pl.line((c[0] - dx, y), (c[0] + dx, y), BLUE + (44,), 1)
-        k += 1
-    # champs déjà insolés : accumulation en pas-et-répète
-    for gx, gy in ((-3, -2), (-2, -2), (-1, -2), (0, -2), (1, -2),
-                   (-3, -1), (-2, -1), (2, -1),
-                   (-3, 0), (-2, 0), (1, 1), (2, 1), (-1, 2), (0, 2)):
-        pl.fill((c[0] + gx * step + 2, c[1] + gy * step + 2,
-                 c[0] + (gx + 1) * step - 2, c[1] + (gy + 1) * step - 2), BLUE + (24,))
+    """Wafer : matrice de champs, insolation en pas-et-répète."""
+    c, r = (480, 256), 171
+    step = 38
+    rng = range(-5, 5)
+
+    def inside(gx, gy, m=0.0):
+        for px, py in ((gx, gy), (gx + 1, gy), (gx, gy + 1), (gx + 1, gy + 1)):
+            if math.hypot(px * step, py * step) > r - m:
+                return False
+        return True
+
+    cells = [(gx, gy) for gy in rng for gx in rng if inside(gx, gy, 3)]
+    order = sorted(cells, key=lambda g: (g[1], g[0]))
+    n_done = int(len(order) * 0.52)
+
+    # matrice de champs
+    for gx, gy in cells:
+        pl.rect((c[0] + gx * step, c[1] + gy * step,
+                 c[0] + (gx + 1) * step, c[1] + (gy + 1) * step), BLUE + (58,), 1)
+    # champs insolés
+    for gx, gy in order[:n_done]:
+        pl.fill((c[0] + gx * step + 1.5, c[1] + gy * step + 1.5,
+                 c[0] + (gx + 1) * step - 1.5, c[1] + (gy + 1) * step - 1.5), BLUE + (30,))
+        pl.line((c[0] + gx * step + 8, c[1] + (gy + 1) * step - 9),
+                (c[0] + (gx + 1) * step - 8, c[1] + (gy + 1) * step - 9), BLUE + (46,), 1)
+
     # bord du wafer, avec méplat
-    pl.arc(c, r, 124, 56, LINE, 2.2)
-    a0, a1 = math.radians(124), math.radians(56)
+    pl.arc(c, r, 126, 54, LINE, 2.4)
+    a0, a1 = math.radians(126), math.radians(54)
     pl.line((c[0] + r * math.cos(a0), c[1] + r * math.sin(a0)),
-            (c[0] + r * math.cos(a1), c[1] + r * math.sin(a1)), LINE, 2.2)
-    pl.circle(c, r - 13, BLUE + (66,), 1)
-    # champ retenu : réticule
-    fx0, fy0 = c[0] - step, c[1] - step
-    fx1, fy1 = c[0] + step, c[1] + step
-    pl.fill((fx0, fy0, fx1, fy1), ac + (26,))
-    pl.rect((fx0, fy0, fx1, fy1), ac + (235,), 2.0)
+            (c[0] + r * math.cos(a1), c[1] + r * math.sin(a1)), LINE, 2.4)
+    pl.arc(c, r - 12, 126, 54, BLUE + (60,), 1)
+
+    # champ courant : réticule
+    gx, gy = order[n_done]
+    fx0, fy0 = c[0] + gx * step, c[1] + gy * step
+    fx1, fy1 = fx0 + step, fy0 + step
+    pl.fill((fx0, fy0, fx1, fy1), ac + (34,))
+    pl.rect((fx0, fy0, fx1, fy1), ac + (245,), 2.2)
     for px, py in ((fx0, fy0), (fx1, fy0), (fx0, fy1), (fx1, fy1)):
-        pl.line((px - 7, py), (px + 7, py), ac + (225,), 1.2)
-        pl.line((px, py - 7), (px, py + 7), ac + (225,), 1.2)
-    pl.cross(c, 11, ac + (185,), 1.2)
+        pl.line((px - 9, py), (px + 9, py), ac + (215,), 1.3)
+        pl.line((px, py - 9), (px, py + 9), ac + (215,), 1.3)
+    pl.cross(((fx0 + fx1) / 2, (fy0 + fy1) / 2), 12, ac + (170,), 1.3)
+    # pas suivant
+    pl.dash((fx1 + 6, (fy0 + fy1) / 2), (fx1 + step - 6, (fy0 + fy1) / 2), ac + (130,), 1, 5, 5)
+    pl.line((fx1 + step - 12, (fy0 + fy1) / 2 - 5), (fx1 + step - 6, (fy0 + fy1) / 2), ac + (130,), 1.2)
+    pl.line((fx1 + step - 12, (fy0 + fy1) / 2 + 5), (fx1 + step - 6, (fy0 + fy1) / 2), ac + (130,), 1.2)
+
     # cotes d'alignement
     pl.dash((c[0] - r - 36, c[1]), (c[0] + r + 36, c[1]), BLUE + (40,), 1, 5, 8)
-    pl.dash((c[0], c[1] - r - 36), (c[0], c[1] + r + 36), BLUE + (40,), 1, 5, 8)
+    pl.dash((c[0], c[1] - r - 36), (c[0], c[1] + r + 30), BLUE + (40,), 1, 5, 8)
     for s2 in (-1, 1):
-        pl.line((c[0] + s2 * (r + 36), c[1] - 7), (c[0] + s2 * (r + 36), c[1] + 7), SOFT, 1.2)
-        pl.line((c[0] - 7, c[1] + s2 * (r + 36)), (c[0] + 7, c[1] + s2 * (r + 36)), SOFT, 1.2)
+        pl.line((c[0] + s2 * (r + 36), c[1] - 8), (c[0] + s2 * (r + 36), c[1] + 8), SOFT, 1.3)
+    pl.line((c[0] - 8, c[1] - r - 36), (c[0] + 8, c[1] - r - 36), SOFT, 1.3)
 
 
 def memoire(pl, ac):
@@ -294,40 +304,46 @@ def memoire(pl, ac):
     pl.dash((px, py + 9), (px, base), ac + (110,), 1, 4, 6)
     pl.dash((px + 12, py), (x1, py), ac + (78,), 1, 5, 7)
     pl.node((px, py), 6, ac + (250,), 1.8)
-    pl.line((px - 30, py - 26), (px - 9, py - 9), ac + (140,), 1.2)
-    pl.line((px - 40, py - 26), (px - 24, py - 26), ac + (140,), 1.2)
+    pl.line((px - 30, py - 27), (px - 9, py - 9), ac + (150,), 1.3)
+    pl.line((px - 74, py - 27), (px - 30, py - 27), ac + (150,), 1.3)
+    pl.line((px - 74, py - 32), (px - 74, py - 22), ac + (110,), 1.2)
 
 
 def ia(pl, ac):
-    """Réseau : couches de nœuds, propagation d'un chemin."""
+    """Réseau : couches de nœuds, front de propagation."""
     cols = [(146, 4), (312, 6), (480, 7), (648, 5), (814, 3)]
-    cy, gap = 256, 62
+    cy, gap = 244, 54
     layers = []
     for x, n in cols:
-        ys = [cy + (i - (n - 1) / 2) * gap for i in range(n)]
-        layers.append([(x, y) for y in ys])
-    # liaisons : chaque nœud vers ses 3 plus proches voisins de la couche suivante
+        layers.append([(x, cy + (i - (n - 1) / 2) * gap) for i in range(n)])
+    # liaisons : 3 plus proches voisins, intensité décroissante avec l'écart
     for a, b in zip(layers, layers[1:]):
         for p in a:
-            near = sorted(b, key=lambda q: abs(q[1] - p[1]))[:3]
-            for q in near:
-                pl.line(p, q, BLUE + (34,), 1)
-    path = [layers[0][3], layers[1][1], layers[2][5], layers[3][1], layers[4][1]]
-    for p, q in zip(path, path[1:]):
-        pl.line(p, q, BLUE + (215,), 2.2)
+            for rank, q in enumerate(sorted(b, key=lambda q: abs(q[1] - p[1]))[:3]):
+                pl.line(p, q, BLUE + (46 - rank * 11,), 1)
+    path = [layers[0][3], layers[1][2], layers[2][2], layers[3][1], layers[4][1]]
+    for i, (p, q) in enumerate(zip(path, path[1:])):
+        pl.line(p, q, BLUE + (140 + i * 28,), 1.6 + i * 0.25)
+        m = ((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)
+        ang = math.atan2(q[1] - p[1], q[0] - p[0])
+        for sg in (1, -1):
+            pl.line(m, (m[0] - 9 * math.cos(ang + sg * 0.5),
+                        m[1] - 9 * math.sin(ang + sg * 0.5)), BLUE + (150 + i * 24,), 1.3)
     for L in layers:
         for p in L:
             pl.node(p, 6, SOFT, 1.3)
-    for p in path[:-1]:
-        pl.node(p, 6, LINE, 1.8, fill=BLUE + (80,))
+    for i, p in enumerate(path[:-1]):
+        pl.node(p, 6, LINE, 1.8, fill=BLUE + (50 + i * 22,))
     q = path[-1]
-    pl.circle(q, 17, ac + (70,), 1.1)
-    pl.node(q, 7, ac + (250,), 2.0, fill=ac + (90,))
-    for i, (x, n) in enumerate(cols):
-        pl.line((x, 442), (x, 452), BLUE + (90,), 1.2)
+    pl.circle(q, 18, ac + (70,), 1.1)
+    pl.circle(q, 27, ac + (34,), 1)
+    pl.node(q, 7.5, ac + (250,), 2.1, fill=ac + (95,))
+    # cotation des couches
+    for x, n in cols:
+        pl.line((x, 444), (x, 454), BLUE + (90,), 1.2)
         for k in range(n):
-            pl.line((x - 7, 436 - k * 4), (x + 7, 436 - k * 4), BLUE + (54,), 1)
-    pl.dash((cols[0][0], 442), (cols[-1][0], 442), BLUE + (44,), 1, 4, 6)
+            pl.line((x - 7, 438 - k * 4), (x + 7, 438 - k * 4), BLUE + (58,), 1)
+    pl.dash((cols[0][0], 444), (cols[-1][0], 444), BLUE + (44,), 1, 4, 6)
 
 
 def robotique(pl, ac):
@@ -362,11 +378,14 @@ def robotique(pl, ac):
     # poste de dépose
     st = pose(1.0)[2]
     pl.dash((st[0] - 6, st[1] + 34), (st[0] + 138, st[1] + 34), BLUE + (56,), 1, 6, 6)
-    pl.rect((st[0] + 46, st[1] - 20, st[0] + 122, st[1] + 32), BLUE + (50,), 1.2)
-    for k in range(4):
-        yy = st[1] + 32 - k * 13
-        pl.line((st[0] + 50, yy), (st[0] + 118, yy), BLUE + (32,), 1)
-    pl.dash((st[0] + 14, st[1] + 6), (st[0] + 44, st[1] + 6), ac + (110,), 1, 5, 5)
+    pl.rect((st[0] + 46, st[1] - 26, st[0] + 126, st[1] + 32), BLUE + (50,), 1.2)
+    for k in range(3):
+        yy = st[1] + 30 - k * 19
+        pl.fill((st[0] + 62, yy - 15, st[0] + 110, yy), BLUE + (26,))
+        pl.rect((st[0] + 62, yy - 15, st[0] + 110, yy), BLUE + (86,), 1.1)
+    pl.dash((st[0] + 16, st[1]), (st[0] + 44, st[1]), ac + (120,), 1, 5, 5)
+    pl.line((st[0] + 38, st[1] - 5), (st[0] + 44, st[1]), ac + (120,), 1.2)
+    pl.line((st[0] + 38, st[1] + 5), (st[0] + 44, st[1]), ac + (120,), 1.2)
 
     # trajectoire
     traj = [pose(i / 90)[2] for i in range(91)]
@@ -383,12 +402,19 @@ def robotique(pl, ac):
     pl.node(base, 4.5, BLUE + (170,), 1.4, fill=BLUE + (110,))
     pl.node(j1, 10, LINE, 2.0)
     pl.node(j2, 8, LINE, 1.8)
+    # pince : deux mors parallèles et la pièce saisie
     d = math.atan2(tip[1] - j2[1], tip[0] - j2[0])
+    ux, uy = math.cos(d), math.sin(d)
+    nx, ny = -uy, ux
     for s in (-1, 1):
-        n = (math.cos(d + s * math.pi / 2) * 10, math.sin(d + s * math.pi / 2) * 10)
-        pl.line((tip[0] + n[0] * 0.5, tip[1] + n[1] * 0.5),
-                (tip[0] + n[0] + math.cos(d) * 15, tip[1] + n[1] + math.sin(d) * 15),
-                ac + (245,), 2.2)
+        a = (tip[0] + nx * 11 * s, tip[1] + ny * 11 * s)
+        b = (a[0] + ux * 22, a[1] + uy * 22)
+        pl.line(a, b, ac + (250,), 2.4)
+    pl.line((tip[0] + nx * 11, tip[1] + ny * 11),
+            (tip[0] - nx * 11, tip[1] - ny * 11), ac + (250,), 2.4)
+    q = (tip[0] + ux * 14, tip[1] + uy * 14)
+    pl.fill((q[0] - 9, q[1] - 9, q[0] + 9, q[1] + 9), ac + (44,))
+    pl.rect((q[0] - 9, q[1] - 9, q[0] + 9, q[1] + 9), ac + (215,), 1.4)
     # secteur angulaire
     pl.arc(base, 70, -122, -56, BLUE + (76,), 1.2)
     for k in range(7):
@@ -398,46 +424,59 @@ def robotique(pl, ac):
 
 
 def finance(pl, ac):
-    """Bilan et contrepartie : deux colonnes, flux croisés."""
-    yc, hh = 252, 132
-    cols = [(188, (0.34, 0.26, 0.40)), (772, (0.46, 0.30, 0.24))]
-    for x, parts in cols:
-        y = yc - hh
-        acc = 0.0
-        for i, p in enumerate(parts):
-            acc += p
-            pl.fill((x - 47, y + 1, x + 47, y + p * 2 * hh - 1), BLUE + (24 + i * 16,))
-            y2 = yc - hh + acc * 2 * hh
-            if i < len(parts) - 1:
-                pl.line((x - 48, y2), (x + 48, y2), BLUE + (110,), 1.2)
-            y = y2
-        pl.rect((x - 48, yc - hh, x + 48, yc + hh), LINE, 1.8)
+    """Bilan et contrepartie : deux bilans, flux croisés."""
+    yc, hh = 250, 130
+
+    def bilan(x):
+        pl.rect((x - 50, yc - hh, x + 50, yc + hh), LINE, 2.0)
+        pl.line((x, yc - hh), (x, yc + hh), BLUE + (130,), 1.4)
+        for sgn, parts in ((-1, (0.30, 0.24, 0.46)), (1, (0.52, 0.28, 0.20))):
+            y = yc - hh
+            for i, pfrac in enumerate(parts):
+                y2 = y + pfrac * 2 * hh
+                x0 = x + (2 if sgn > 0 else -49)
+                x1 = x + (49 if sgn > 0 else -2)
+                pl.fill((x0, y + 1, x1, y2 - 1), BLUE + (22 + i * 18,))
+                for k in range(1, 4):
+                    yy = y + (y2 - y) * k / 4
+                    pl.line((x0 + 6, yy), (x1 - 6, yy), BLUE + (34,), 1)
+                if i < len(parts) - 1:
+                    pl.line((x0, y2), (x1, y2), BLUE + (120,), 1.3)
+                y = y2
         for k in range(9):
             yy = yc - hh + k * 2 * hh / 8
-            pl.line((x - 56, yy), (x - 48, yy), BLUE + (70,), 1)
+            pl.line((x - 58, yy), (x - 50, yy), BLUE + (66,), 1)
 
-    pl.dash((480, 98), (480, 418), BLUE + (56,), 1, 6, 8)
-    pl.line((472, 98), (488, 98), BLUE + (76,), 1)
-    pl.line((472, 418), (488, 418), BLUE + (76,), 1)
+    bilan(186)
+    bilan(774)
 
-    flows = [(-84, -108, 1), (-20, -10, 1), (48, 70, -1), (112, 30, -1), (-132, 118, 1)]
-    for i, (ya, yb, dirn) in enumerate(flows):
-        p0 = (236, yc + ya) if dirn > 0 else (724, yc + ya)
-        p3 = (724, yc + yb) if dirn > 0 else (236, yc + yb)
-        k = 155 * dirn
-        pts = pl.bezier(p0, (p0[0] + k, p0[1]), (p3[0] - k, p3[1]), p3)
-        hot = (i == 2)
-        col = ac + (235,) if hot else BLUE + (86 + 26 * (i % 3),)
-        pl.path(pts, col, 2.1 if hot else 1.5)
+    # axe de contrepartie
+    pl.dash((480, 86), (480, 418), BLUE + (60,), 1, 6, 8)
+    for yy in (86, 418):
+        pl.line((470, yy), (490, yy), BLUE + (80,), 1.2)
+
+    flows = [(-96, -118, 1, 118), (-30, 6, 1, 62), (58, -74, -1, 178),
+             (118, 40, -1, 96), (-6, 116, 1, 210)]
+    for i, (ya, yb, dirn, k) in enumerate(flows):
+        p0 = (240, yc + ya) if dirn > 0 else (720, yc + ya)
+        p3 = (720, yc + yb) if dirn > 0 else (240, yc + yb)
+        hot = (i == 4)
+        c1 = (p0[0] + k * dirn, p0[1])
+        c2 = (p3[0] - k * dirn, p3[1])
+        pts = pl.bezier(p0, c1, c2, p3)
+        col = ac + (245,) if hot else BLUE + (112 + 24 * (i % 3),)
+        pl.path(pts, col, 2.2 if hot else 1.5)
         a, b = pts[-6], pts[-1]
         ang = math.atan2(b[1] - a[1], b[0] - a[0])
-        for s in (1, -1):
-            pl.line(b, (b[0] - 11 * math.cos(ang + s * 0.42),
-                        b[1] - 11 * math.sin(ang + s * 0.42)), col, 1.7)
+        for sg in (1, -1):
+            pl.line(b, (b[0] - 12 * math.cos(ang + sg * 0.42),
+                        b[1] - 12 * math.sin(ang + sg * 0.42)), col, 1.8)
         if hot:
-            pl.node(pts[len(pts) // 2], 5, ac + (250,), 1.5, fill=ac + (110,))
-    pl.text((188, 412), "A", 11.5, INK + (135,), anchor="ms")
-    pl.text((772, 412), "B", 11.5, INK + (135,), anchor="ms")
+            m = pts[len(pts) // 2]
+            pl.circle(m, 14, ac + (80,), 1.1)
+            pl.node(m, 5.5, ac + (250,), 1.6, fill=ac + (110,))
+    pl.text((186, 410), "A", 12, INK + (140,), anchor="ms")
+    pl.text((774, 410), "B", 12, INK + (140,), anchor="ms")
 
 
 def peages(pl, ac):
@@ -542,7 +581,7 @@ def conso(pl, ac):
 
 def sante(pl, ac):
     """Molécule et signal vital : structure liée, tracé rythmé."""
-    c, r = (392, 216), 100
+    c, r = (480, 206), 100
     ring = [(c[0] + r * math.cos(math.radians(-90 + k * 60)),
              c[1] + r * math.sin(math.radians(-90 + k * 60))) for k in range(6)]
     for a, b in zip(ring, ring[1:] + ring[:1]):
@@ -557,7 +596,7 @@ def sante(pl, ac):
         pl.line((a[0] + sgn * nx + dx * 0.20, a[1] + sgn * ny + dy * 0.20),
                 (b[0] + sgn * nx - dx * 0.20, b[1] + sgn * ny - dy * 0.20), MID, 1.6)
     tips = []
-    for idx, ln, off in ((1, 70, -20), (3, 74, 26), (5, 64, 4)):
+    for idx, ln, off in ((1, 72, -18), (5, 68, 18), (2, 62, 30)):
         a = ring[idx]
         ang = math.atan2(a[1] - c[1], a[0] - c[0]) + math.radians(off)
         t = (a[0] + ln * math.cos(ang), a[1] + ln * math.sin(ang))
@@ -569,24 +608,28 @@ def sante(pl, ac):
         pl.node(t, 5.5, SOFT, 1.4)
     pl.circle(c, r + 38, BLUE + (32,), 1)
 
-    # tracé vital
+    # tracé vital : trois cycles identiques, pic central sur l'axe
     yb = 404
-    pts, x = [(88, yb)], 88
-    seq = [(56, 0), (13, -10), (15, 10), (11, 0), (8, 14), (10, -52), (10, 28), (11, -10),
-           (17, 0), (24, -22), (22, 22), (52, 0)]
+    seq = [(60, 0), (12, -9), (12, 0), (10, 0), (5, 8), (8, -54), (8, 14),
+           (8, 0), (16, 0), (20, -20), (22, 0), (68, 0)]
+    x = 124
+    pts = [(88, yb), (124, yb)]
     for _ in range(3):
         for dx, dy in seq:
             x += dx
             pts.append((x, yb + dy))
-            if dy != 0:
-                pts.append((x, yb))
     pts.append((872, yb))
     pl.dash((88, yb), (872, yb), BLUE + (40,), 1, 5, 7)
-    pl.path([(min(max(p[0], 88), 872), p[1]) for p in pts], ac + (235,), 2.1)
-    peak = (392, yb - 52)
-    pl.node(peak, 5, ac + (215,), 1.4)
-    pl.dash((392, 320), (392, yb - 62), BLUE + (56,), 1, 4, 6)
-    pl.line((384, 320), (400, 320), BLUE + (70,), 1)
+    pl.path(pts, ac + (235,), 2.1)
+    peak = (480, yb - 54)
+    pl.node(peak, 5.5, ac + (225,), 1.5)
+    pl.dash((480, 314), (480, yb - 66), BLUE + (66,), 1, 4, 6)
+    pl.line((472, 314), (488, 314), BLUE + (80,), 1)
+    # échelle d'amplitude
+    for k in range(4):
+        yy = yb - k * 18
+        pl.line((872, yy), (880 if k % 2 == 0 else 876, yy), BLUE + (60,), 1)
+    pl.line((880, yb - 54), (880, yb), BLUE + (46,), 1)
 
 
 def defense(pl, ac):
@@ -622,57 +665,78 @@ def defense(pl, ac):
 
 
 def electrification(pl, ac):
-    """Réseau : production, transformation, charge — schéma unifilaire."""
-    y = 244
-    gen, tr, load = (144, y), (472, y), (816, y)
+    """Réseau : schéma unifilaire, transformation, profil de charge."""
+    y = 196
+    gen, tr, load = (140, y), (470, y), (818, y)
     # production
-    pl.circle(gen, 38, LINE, 2.2)
-    xs = [gen[0] - 22 + i * 44 / 44 for i in range(45)]
-    pl.path([(x, gen[1] - 14 * math.sin((x - gen[0] + 22) / 44 * 2 * math.pi))
-             for x in xs], MID, 1.7)
-    pl.line((gen[0], gen[1] + 38), (gen[0], gen[1] + 52), MID, 1.5)
-    pl.line((gen[0] - 22, gen[1] + 52), (gen[0] + 22, gen[1] + 52), MID, 1.5)
+    pl.circle(gen, 42, LINE, 2.3)
+    xs = [gen[0] - 24 + i for i in range(49)]
+    pl.path([(x, gen[1] - 15 * math.sin((x - gen[0] + 24) / 48 * 2 * math.pi))
+             for x in xs], MID, 1.8)
+    pl.line((gen[0], gen[1] + 42), (gen[0], gen[1] + 58), MID, 1.6)
+    pl.line((gen[0] - 24, gen[1] + 58), (gen[0] + 24, gen[1] + 58), MID, 1.6)
     for k in range(5):
-        xx = gen[0] - 18 + k * 9
-        pl.line((xx, gen[1] + 52), (xx - 7, gen[1] + 63), BLUE + (80,), 1.2)
+        xx = gen[0] - 20 + k * 10
+        pl.line((xx, gen[1] + 58), (xx - 8, gen[1] + 70), BLUE + (80,), 1.2)
 
-    # ligne haute tension + isolateurs
-    pl.line((gen[0] + 38, y), (tr[0] - 34, y), LINE, 2.2)
-    pl.line((tr[0] + 34, y), (load[0] - 78, y), LINE, 2.2)
-    for x in (248, 352, 604, 704):
-        pl.line((x, y - 10), (x, y + 10), BLUE + (86,), 1.2)
-        pl.line((x - 5, y - 10), (x + 5, y - 10), BLUE + (86,), 1.2)
-    # pylônes en treillis
-    for x in (300, 654):
-        h0, h1 = y + 14, y + 104
-        pl.path([(x - 28, h1), (x, h0), (x + 28, h1)], BLUE + (62,), 1.3)
-        pl.line((x, h0), (x, h1), BLUE + (40,), 1)
+    # ligne haute tension
+    pl.line((gen[0] + 42, y), (tr[0] - 40, y), LINE, 2.3)
+    # ligne basse tension : double conducteur après transformation
+    pl.line((tr[0] + 40, y - 4), (load[0] - 88, y - 4), LINE, 2.0)
+    pl.line((tr[0] + 40, y + 4), (load[0] - 88, y + 4), LINE, 2.0)
+    for x in (250, 350, 610, 712):
+        pl.line((x, y - 12), (x, y + 12), BLUE + (86,), 1.3)
+        pl.line((x - 6, y - 12), (x + 6, y - 12), BLUE + (86,), 1.3)
+    for x in (296, 664):
+        h0, h1 = y + 16, y + 116
+        pl.path([(x - 30, h1), (x, h0), (x + 30, h1)], BLUE + (66,), 1.4)
+        pl.line((x, h0), (x, h1), BLUE + (44,), 1)
         for k in range(1, 4):
             t = k / 4
-            hw = 28 * t
-            yy = h0 + (h1 - h0) * t
-            pl.line((x - hw, yy), (x + hw, yy), BLUE + (56,), 1)
-        pl.line((x - 28, h1), (x + 28, h1), BLUE + (62,), 1.3)
+            pl.line((x - 30 * t, h0 + (h1 - h0) * t), (x + 30 * t, h0 + (h1 - h0) * t),
+                    BLUE + (58,), 1)
+        pl.line((x - 30, h1), (x + 30, h1), BLUE + (66,), 1.4)
 
     # transformateur
-    pl.circle((tr[0] - 17, y), 34, ac + (245,), 2.3)
-    pl.circle((tr[0] + 17, y), 34, ac + (245,), 2.3)
-    pl.dash((tr[0], y - 58), (tr[0], y + 58), ac + (95,), 1, 4, 6)
-    for s in (-1, 1):
-        pl.line((tr[0] + s * 66, y - 48), (tr[0] + s * 66, y + 48), BLUE + (48,), 1)
+    pl.circle((tr[0] - 20, y), 40, ac + (245,), 2.4)
+    pl.circle((tr[0] + 20, y), 40, ac + (245,), 2.4)
+    pl.dash((tr[0], y - 66), (tr[0], y + 66), ac + (95,), 1, 4, 6)
+    for sg in (-1, 1):
+        pl.line((tr[0] + sg * 78, y - 54), (tr[0] + sg * 78, y + 54), BLUE + (48,), 1)
+        pl.line((tr[0] + sg * 78 - 5, y - 54), (tr[0] + sg * 78 + 5, y - 54), BLUE + (48,), 1)
 
     # charge
     for r in range(3):
         for c2 in range(3):
             x = load[0] - 64 + c2 * 46
-            yy = y - 46 + r * 46
-            pl.fill((x, yy, x + 34, yy + 34), BLUE + (30 + 22 * ((r + c2) % 3),))
-            pl.rect((x, yy, x + 34, yy + 34), BLUE + (125,), 1.2)
-    pl.line((load[0] - 78, y), (load[0] - 64, y), LINE, 2.2)
-    pl.rect((load[0] - 72, y - 54, load[0] + 26, y + 44), BLUE + (58,), 1)
-    step = [(660, 400), (712, 400), (712, 382), (764, 382), (764, 358), (816, 358), (862, 358)]
-    pl.path(step, MID, 1.7)
-    pl.dash((660, 414), (862, 414), BLUE + (36,), 1, 4, 6)
+            yy = y - 64 + r * 46
+            pl.fill((x, yy, x + 36, yy + 36), BLUE + (30 + 22 * ((r + c2) % 3),))
+            pl.rect((x, yy, x + 36, yy + 36), BLUE + (128,), 1.3)
+    pl.line((load[0] - 88, y), (load[0] - 64, y), LINE, 2.3)
+    pl.rect((load[0] - 74, y - 74, load[0] + 78, y + 74), BLUE + (58,), 1)
+
+    # profil d'appel de charge (même vocabulaire que PL·02 et PL·13)
+    x0, x1, base = 104, 872, 434
+    n = 30
+    bw = (x1 - x0) / n
+    prof = []
+    for i in range(n):
+        u = (i + 0.5) / n
+        h = 20 + 96 * (0.28 + 0.72 / (1 + math.exp(-(u - 0.52) * 9))) \
+            + 9 * math.sin(u * 13.0)
+        prof.append(h)
+    for i, h in enumerate(prof):
+        x = x0 + i * bw
+        pl.fill((x + 1.5, base - h, x + bw - 1.5, base), BLUE + (26,))
+        pl.rect((x + 1.5, base - h, x + bw - 1.5, base), BLUE + (72,), 1)
+    step = []
+    for i, h in enumerate(prof):
+        step += [(x0 + i * bw, base - h), (x0 + (i + 1) * bw, base - h)]
+    pl.path(step, MID, 1.6)
+    pl.line((x0, base), (x1, base), BLUE + (90,), 1.2)
+    for i in range(7):
+        x = x0 + i * (x1 - x0) / 6
+        pl.line((x, base), (x, base + 8), BLUE + (66,), 1)
 
 
 def decote(pl, ac):
@@ -697,9 +761,11 @@ def decote(pl, ac):
         if u > 0.60:
             res += 96 * math.exp(-((u - 0.70) ** 2) / 0.006)
         pts.append((x, trend(x) + res))
-    pl.path(pts, BLUE + (62,), 1.4)
     for p in pts:
-        pl.node(p, 4, BLUE + (140,), 1.1)
+        pl.line((p[0], p[1]), (p[0], trend(p[0])), BLUE + (52,), 1)
+    pl.path(pts, BLUE + (70,), 1.4)
+    for p in pts:
+        pl.node(p, 4, BLUE + (150,), 1.1)
 
     hx = pts[23][0]
     hy = pts[23][1]
@@ -781,14 +847,41 @@ PLATES = [
 ]
 
 
+def _palette_image():
+    """Palette fixe : rampes bg→bleu, →ambre, →violet, →encre.
+
+    Quantifier sur une palette IMPOSÉE (plutôt qu'adaptative) garantit deux
+    choses : la note chaude d'une planche ne peut jamais être absorbée par les
+    bleus dominants, et les 13 planches partagent exactement les mêmes teintes —
+    c'est la condition de la série.
+    """
+    cols = [BG]
+    for color, n in ((BLUE, 56), (AMBER, 30), (VIOLET, 30), (INK, 16),
+                     (BRIGHT[:3], 8)):
+        for i in range(1, n + 1):
+            a = i / n
+            cols.append(tuple(int(round(BG[k] * (1 - a) + color[k] * a)) for k in range(3)))
+    flat = [v for c in cols for v in c]
+    flat += [0] * (768 - len(flat))
+    pal = Image.new("P", (1, 1))
+    pal.putpalette(flat)
+    return pal
+
+
+PALETTE = None
+
+
 def render(tid, index, fn, accent, caption):
+    global PALETTE
+    if PALETTE is None:
+        PALETTE = _palette_image()
     pl = Plate(seed=index * 17)
     substrate(pl)
     fn(pl, accent)
     chrome(pl, index, tid.upper(), caption, accent)
     img = pl.img.resize((W, H), Image.LANCZOS)
+    q = img.quantize(palette=PALETTE, dither=Image.Dither.NONE)
     out = os.path.join(OUT_DIR, "%s.png" % tid)
-    q = img.quantize(colors=192, method=Image.MEDIANCUT, dither=Image.NONE)
     q.save(out, optimize=True)
     return out, os.path.getsize(out)
 

@@ -26,10 +26,15 @@ Schéma de sortie (consommé par render() dans index.html, lignes ~153-168) :
       "bull":   [str, ...],   # 3 puces thèse     -> bblist() -> <li>
       "bear":   [str, ...],   # 3 puces inversion -> bblist() -> <li>
       "_sig":   "<signature>" # interne, non lu par render() — détection de changement
+      "_perime": "AAAA-MM-JJ" # optionnel : la fiche AURAIT dû être régénérée mais le
+                              # budget wall-clock a été atteint. Date de la 1re
+                              # péremption (pas de la dernière) — donne l'ancienneté
+                              # réelle du décalage entre le texte et le breakdown.
   }, ... }
 
 render() lit a.resume / a.biz / a.futur / a.actu / a.bull / a.bear et n'itère JAMAIS
-sur les clés de l'entrée : `_sig` est donc invisible au front (vérifié index.html).
+sur les clés de l'entrée : `_sig` et `_perime` sont donc invisibles au front (vérifié
+index.html) tant que celui-ci ne décide pas de les exploiter.
 Les strings peuvent contenir des balises inline simples (<b>…</b>) comme les entrées
 existantes — render() les injecte en innerHTML via paras()/bblist().
 
@@ -42,6 +47,7 @@ import re
 import sys
 import html
 import json
+import time
 import tempfile
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -73,6 +79,31 @@ GUIDE_PATH     = Path(__file__).parent / "GUIDE_redaction_analyses.md"
 PARA_FIELDS   = ["resume", "biz", "futur", "actu"]   # tableaux de paragraphes -> <p>
 BULLET_FIELDS = ["bull", "bear"]                       # tableaux de puces      -> <li>
 ALL_FIELDS    = PARA_FIELDS + BULLET_FIELDS
+
+# ── BUDGET WALL-CLOCK ─────────────────────────────────────────────────────────
+# Le job CI (.github/workflows/watchlist.yml) a timeout-minutes: 45, et l'étape
+# « Commit JSON files » vient APRÈS cette génération. Si la boucle déborde, le job
+# est tué avant le commit : rien n'est poussé, le checkout du run suivant repart du
+# même état, et chaque run hebdomadaire remeurt exactement au même endroit — panne
+# permanente et silencieuse, pas un simple retard. On s'arrête donc nous-mêmes AVANT
+# la limite CI, pour rendre la main à l'étape de commit : c'est le commit, et lui
+# seul, qui rend la reprise incrémentale possible au run suivant.
+#
+# 1500 s ≈ 25 min : le reste des 45 min couvre screener.py, portfolio_agent.py, pip
+# install et le commit/push. Le workflow ne définit pas la variable, c'est donc ce
+# défaut qui s'applique aujourd'hui ; la surcharger permet un run local complet.
+# Valeur <= 0 = budget désactivé (explicitement journalisé, jamais par accident).
+TIME_BUDGET_S = os.getenv("ANALYSES_TIME_BUDGET_S", "1500")
+
+# Coût supposé d'une fiche tant qu'on n'en a mesuré aucune (observé ~45 s : news
+# yfinance + un appel Sonnet de 3000 tokens). Sert uniquement au premier tour.
+FIRST_TICKER_COST_S = 60.0
+
+# Ordre de service du budget : ce qui manque au site passe avant ce qui y est déjà.
+# Un ticker NOUVEAU affiche « À générer. » (trou visible) ; une fiche MODIFIÉE reste
+# lisible, juste décalée par rapport au breakdown ; une COMPLÉTION est un rattrapage
+# d'entrée legacy partielle, qui a déjà attendu des semaines sans gêner personne.
+PRIORITY = {"nouveau": 0, "modifié": 1, "complétion": 2}
 
 # Même init que portfolio_agent.py : client None si pas de clé (géré dans main()).
 client = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
@@ -127,6 +158,31 @@ def bucket_cross_days(d):
     return "ancien"         # ancien / stale
 
 
+def bucket_score(score):
+    """Range le score par tranches de 5 points.
+
+    Le score bouge de quelques points chaque semaine (RSI, drawdown, multiples qui
+    respirent) sans que la thèse change d'un mot : réinjecter le score BRUT faisait
+    de la signature un quasi-hash du run, et régénérait 79 % des fiches par semaine
+    pour des textes qui auraient été identiques à la virgule près. Mesuré sur
+    notes/watchlist_archive/ : le score expliquait 185 des 194 changements de
+    signature, dont 153 à lui seul, alors que 87 % des variations hebdomadaires de
+    score sont < 5 points.
+    5 points = la granularité en dessous de laquelle le discours ne change pas
+    (un 68 et un 72 se rédigent pareil), au-dessus de laquelle il change vraiment
+    (un 68 et un 78 n'ont pas la même thèse). Même idiome que rev_bucket.
+
+    Effet mesuré en rejouant les signatures sur les 6 transitions hebdomadaires des
+    archives : 23,8 -> 15,2 fiches régénérées par semaine sur 30 (79 % -> 51 %).
+    Le résidu n'est PAS du bruit résiduel de score : la moitié vient du
+    franchissement de frontière de palier (cf. note dans signature()).
+    """
+    try:
+        return str(int(round(float(score) / 5.0) * 5))
+    except (TypeError, ValueError):
+        return "na"
+
+
 # Version du style/prompt éditorial — bumper FORCE la régénération de toutes les fiches
 # (la signature change), p.ex. après un changement de ton ou d'exigence de chiffrage.
 PROMPT_VERSION = "2026-07-decote-z1dec"   # z cité à 1 décimale + commentaire décote vs tendance
@@ -136,7 +192,7 @@ def signature(stock):
     """Signature éditoriale stable d'un ticker. On régénère SEULEMENT si elle change.
 
     Composantes = ce qui modifie le *fond* de l'analyse, pas le bruit :
-      - score            : note de synthèse (pilote resume + bull/bear)
+      - score bucket     : note de synthèse par paliers de 5 (pilote resume + bull/bear)
       - cross_type       : golden / death / neutre  (régime narratif)
       - cross_days bucket: frais/recent/etabli/ancien (poids du signal, pas le J exact)
       - regression bucket: survente / neutre / surchauffe (cadrage prix vs valeur)
@@ -145,6 +201,11 @@ def signature(stock):
     Volontairement EXCLUS : rsi, fibo, drawdown au point de base près, val_pts —
     trop volatils d'un run à l'autre pour justifier un appel API coûteux (testé : un
     RSI 49->72 + cross +1j + z +0.1σ + drawdown -99% ne change PAS la signature).
+
+    NB : le score passe par bucket_score(). Il reste une part de churn de frontière
+    (un score qui oscille 72/73 traverse le palier 70/75) — assumée : la corriger
+    demanderait de l'hystérésis, donc de faire dépendre la signature de la signature
+    précédente, ce qui la rendrait non reproductible hors historique.
     """
     b = stock.get("breakdown", {}) or {}
 
@@ -168,7 +229,7 @@ def signature(stock):
 
     parts = [
         PROMPT_VERSION,
-        str(stock.get("score", "")),
+        bucket_score(stock.get("score")),
         str(b.get("cross_type", "")),
         bucket_cross_days(b.get("cross_days_ago")),
         z_bucket,
@@ -444,6 +505,68 @@ def generate_one(stock, guide):
     return analysis
 
 
+# ── BUDGET / ORDONNANCEMENT ───────────────────────────────────────────────────
+def _budget_seconds():
+    """Lit ANALYSES_TIME_BUDGET_S.
+
+    Une valeur illisible retombe sur le défaut plutôt que sur « illimité » : une
+    faute de frappe dans le workflow ne doit pas ressusciter en silence la panne
+    permanente que ce budget existe précisément pour empêcher.
+    """
+    try:
+        return float(str(TIME_BUDGET_S).strip())
+    except (TypeError, ValueError):
+        print(f"  ⚠️  ANALYSES_TIME_BUDGET_S illisible ({TIME_BUDGET_S!r}) — défaut 1500 s")
+        return 1500.0
+
+
+def _neg_score(stock):
+    """Clé de tri « score décroissant ». Score absent/illisible -> traité comme 0,
+    donc servi en dernier : on ne dépense pas le budget sur une donnée douteuse."""
+    try:
+        return -float(stock.get("score"))
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _mark_stale(analyses, skipped, elapsed, budget):
+    """Marque et JOURNALISE les fiches non régénérées faute de budget.
+
+    Deux invariants :
+      - on ne touche PAS `_sig`. C'est l'ancienne signature qui fera re-détecter la
+        fiche comme « modifié » au prochain run : toute la reprise tient à ça.
+      - `_perime` retient la date de la PREMIÈRE péremption (setdefault), pas de la
+        dernière : si une fiche sort du budget trois semaines d'affilée, le site voit
+        l'ancienneté réelle du décalage et non une date perpétuellement fraîche.
+
+    Le listing est exhaustif et nominatif : le projet ne tronque pas en silence, et
+    une file de report qui s'allonge run après run est le symptôme à voir venir.
+    """
+    today = str(date.today())
+    print(f"\n⏳ Budget wall-clock atteint ({elapsed:.0f}s / {budget:.0f}s) — "
+          f"{len(skipped)} fiche(s) NON régénérée(s) ce run :")
+    for stock, reason in skipped:
+        tk = stock["ticker"]
+        entry = analyses.get(tk)
+        if isinstance(entry, dict):
+            entry.setdefault("_perime", today)
+            depuis = entry["_perime"]
+            etat = "périmée depuis " + depuis if depuis != today else "marquée périmée"
+        else:
+            # Aucune entrée à marquer : le front affiche déjà « À générer. », le trou
+            # est visible sans qu'on ait à le signaler dans le JSON.
+            etat = "absente — le front affichera « À générer. »"
+        print(f"     · {tk} ({reason}, score {stock.get('score','?')}) — {etat}")
+    print("   Ces fiches gardent leur ancienne signature : le prochain run les reprendra,\n"
+          "   en tête de file à priorité égale (score décroissant).")
+    if os.getenv("GITHUB_ACTIONS"):
+        # Annotation visible dans le résumé du run sans faire échouer l'étape : un
+        # report est un fonctionnement nominal, pas une panne — mais il doit se voir.
+        print(f"::warning::{len(skipped)} fiche(s) éditoriale(s) reportées faute de budget "
+              f"({elapsed:.0f}s / {budget:.0f}s) : "
+              f"{', '.join(s['ticker'] for s, _ in skipped)}")
+
+
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 def main():
     if not client:
@@ -481,6 +604,7 @@ def main():
     #    - signature identique mais entrée incomplète -> "complétion"
     #    - signature identique ET entrée complète     -> on garde tel quel (0 appel API)
     todo = []
+    unmarked = 0
     for s in stocks:
         tk = s.get("ticker")
         if not tk:
@@ -493,26 +617,62 @@ def main():
             todo.append((s, "modifié"))
         elif not entry_is_complete(existing):
             todo.append((s, "complétion"))
+        elif existing.pop("_perime", None):
+            # À jour et complet, mais elle portait une marque de péremption d'un run
+            # précédent : soit elle a été régénérée depuis, soit sa signature est
+            # revenue à sa valeur d'origine. Dans les deux cas le texte publié
+            # correspond de nouveau au breakdown — la marque doit disparaître, sinon
+            # le site afficherait un avertissement de péremption indéfiniment.
+            unmarked += 1
         # sinon : à jour et complet -> conservé.
+
+    # File de priorité : le budget ci-dessous ne servira peut-être pas tout le monde,
+    # il doit donc servir d'abord ce qui manque au site. À priorité égale, score
+    # décroissant — c'est le haut de watchlist qui est consulté.
+    todo.sort(key=lambda item: (PRIORITY.get(item[1], 9), _neg_score(item[0])))
 
     kept = len(current_tickers) - len(todo)
     print(f"📋 Watchlist : {len(current_tickers)} tickers — "
-          f"{len(todo)} à (re)générer, {kept} inchangé(s) conservé(s).")
+          f"{len(todo)} à (re)générer, {kept} inchangé(s) conservé(s)"
+          + (f", {unmarked} marque(s) de péremption levée(s)." if unmarked else "."))
 
     if not todo:
-        # Rien à régénérer ; on réécrit seulement si on a purgé des orphelins.
-        if orphans:
+        # Rien à régénérer ; on réécrit si on a purgé des orphelins ou levé des marques.
+        if orphans or unmarked:
             _write(analyses)
-            print("✅ analyses.json mis à jour (purge orphelins uniquement).")
+            print("✅ analyses.json mis à jour (purge orphelins / péremptions levées).")
         else:
             print("✅ Rien à faire — analyses.json déjà à jour.")
         return
 
-    # 3) GÉNÉRATION incrémentale, robuste par ticker
+    # 3) GÉNÉRATION incrémentale, robuste par ticker, sous budget wall-clock
+    budget = _budget_seconds()
+    started = time.monotonic()
+    if budget <= 0:
+        print("⏱️  Budget wall-clock DÉSACTIVÉ (ANALYSES_TIME_BUDGET_S <= 0) — "
+              "la boucle ira au bout, y compris au-delà du timeout CI de 45 min.")
+    else:
+        print(f"⏱️  Budget wall-clock : {budget:.0f}s pour {len(todo)} fiche(s) à générer.")
+
     ok, fail = 0, 0
-    for s, reason in todo:
+    durations = []
+    skipped = []
+    for i, (s, reason) in enumerate(todo):
+        # On n'entame une fiche que si on estime pouvoir la FINIR. Une fiche commencée
+        # puis tuée par le timeout CI ne coûte pas qu'elle-même : elle emporte l'étape
+        # de commit, donc tout le travail déjà fait dans ce run, donc la reprise.
+        # Estimation = pire durée observée, volontairement pessimiste : l'asymétrie est
+        # totale entre « une fiche de moins cette semaine » et « le run entier perdu ».
+        if budget > 0:
+            elapsed = time.monotonic() - started
+            estimate = max(durations) if durations else FIRST_TICKER_COST_S
+            if elapsed + estimate > budget:
+                skipped = todo[i:]
+                break
+
         tk = s["ticker"]
         print(f"  ✍️  {tk} ({reason}) — score {s.get('score','?')}…", flush=True)
+        t_start = time.monotonic()
         try:
             analyses[tk] = generate_one(s, guide)
             ok += 1
@@ -524,13 +684,27 @@ def main():
                 print(f"     ⚠️  {tk} échec ({e}) — ANCIENNE analyse conservée.")
             else:
                 print(f"     ✗ {tk} échec ({e}) — pas d'analyse, le front affichera « À générer ».")
+        # Un échec consomme du temps lui aussi : il compte dans le budget.
+        durations.append(time.monotonic() - t_start)
         # Écriture (atomique) après chaque ticker : un crash en cours de run ne perd
-        # pas le travail déjà fait, et le prochain run reprend où on s'est arrêté.
+        # pas le travail déjà fait. Attention, ce n'est vrai d'un run à l'autre que si
+        # le job atteint son étape de commit — d'où le budget ci-dessus.
         _write(analyses)
 
+    elapsed = time.monotonic() - started
+    if skipped:
+        _mark_stale(analyses, skipped, elapsed, budget)
+    # Écriture finale : persiste les marques de péremption, y compris dans le cas
+    # limite où le budget était déjà épuisé avant la première fiche.
+    _write(analyses)
+
     print(f"\n✅ analyses.json écrit — {ok} généré(s), {fail} échec(s), {kept} conservé(s), "
-          f"{len(orphans)} purgé(s).")
+          f"{len(orphans)} purgé(s), {len(skipped)} reporté(s) — {elapsed:.0f}s écoulées"
+          + (f" / {budget:.0f}s de budget." if budget > 0 else " (budget désactivé)."))
     print(f"   Total entrées : {len(analyses)} (== {len(current_tickers)} si aucun échec sur un nouveau ticker).")
+    # Sortie en SUCCÈS même avec des fiches reportées : un exit non nul déclencherait
+    # l'étape « Signale les échecs IA » du workflow et rendrait le job rouge chaque
+    # semaine pour un fonctionnement nominal — l'alarme finirait par n'être plus lue.
 
 
 def _write(analyses):
@@ -539,6 +713,10 @@ def _write(analyses):
     On écrit dans un fichier temporaire du même dossier puis os.replace() : une
     interruption (crash, kill CI) ne peut pas laisser analyses.json tronqué/corrompu,
     ce qui casserait le fetch() JSON du front.
+
+    allow_nan=False comme screener.py / portfolio_agent.py : un NaN sérialisé en
+    `NaN` est refusé par JSON.parse() et casserait le rendu de TOUTES les fiches.
+    Mieux vaut échouer ici, bruyamment, que publier un fichier illisible.
     """
     ANALYSES_PATH.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp = tempfile.mkstemp(
@@ -546,7 +724,7 @@ def _write(analyses):
     )
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as f:
-            json.dump(analyses, f, ensure_ascii=False, indent=2)
+            json.dump(analyses, f, ensure_ascii=False, indent=2, allow_nan=False)
         os.replace(tmp, ANALYSES_PATH)
     except Exception:
         try:

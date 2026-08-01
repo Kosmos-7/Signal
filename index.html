@@ -131,7 +131,7 @@
     background:linear-gradient(140deg,rgba(116,182,223,.14),rgba(116,182,223,.03) 55%,rgba(255,255,255,.015))}
   .tc-img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.045) 0 1px,transparent 1px 9px)}
   .tc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
-  .tc-fb{position:relative;font:600 .62rem var(--mono);letter-spacing:3.5px;text-transform:uppercase;color:var(--text3)}
+  .tc-fb{position:relative;font:600 .6rem var(--mono);letter-spacing:2.4px;text-transform:uppercase;color:var(--text3);text-align:center;line-height:1.9;padding:0 14px;max-width:100%;overflow-wrap:anywhere}
   .tc-b{display:flex;flex-direction:column;flex:1;padding:.9rem 1rem 1rem;gap:.5rem}
   .tc-kind{font:600 .55rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 7px;align-self:flex-start}
   .tc-l{font-family:var(--serif);font-size:1.22rem;line-height:1.15;letter-spacing:-.3px;color:var(--text)}
@@ -208,15 +208,23 @@
     .tc-main .tc-l{font-size:1.45rem}
     .tc-main .tc-th{font-size:.88rem}
     .wl-t{font-size:1.9rem}
+    body.v-index .rail{display:none}          /* la liste large fait déjà le travail */
+    body.v-index .stage{margin-top:4.6rem}
     .wl-notes{grid-template-columns:1fr;gap:.7rem}
     .wrow{grid-template-columns:24px 1fr auto;gap:9px}
     .wl-th{font-size:.95rem}
   }
   @media(max-width:900px){
     body{overflow:auto}
-    .rail{position:static;left:auto;top:auto;bottom:auto;width:auto;margin:4.6rem 1rem 0}
+    /* position:relative et NON static : le rail et la scène doivent conserver
+       leur z-index, sinon leur contenu non positionné repasse SOUS le calque
+       de fond #fx (z-index:0) et devient invisible — c'était déjà le cas du
+       titre de fiche en mobile avant la homepage. */
+    .rail{position:relative;left:auto;top:auto;bottom:auto;width:auto;margin:4.6rem 1rem 0}
     .rail-l{max-height:38vh}
-    .stage{position:static;left:auto;right:auto;top:auto;bottom:auto;margin:1rem 0 0;overflow:visible}
+    .stage{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:1rem 0 0;overflow:visible}
+    .doc{scroll-margin-top:4.2rem}   /* le header fixe ne recouvre pas le haut de la fiche */
+    body.v-home .stage{margin-top:4.6rem}
     .d-tk{font-size:2.6rem}
     .quant{grid-template-columns:1fr;gap:1rem}
   }
@@ -316,9 +324,19 @@ function parseHash(){
   return {v:'home'};
 }
 function nav(h){ if(location.hash===h)route(); else location.hash=h; }
+// La nav du header est écrite à la main dans les 3 pages ; dans index.html les
+// deux entrées pointent sur cette même page, .active suit donc la route.
+function navActive(){
+  const onMain=location.hash.indexOf('#/w/'+MAIN)===0;
+  document.querySelectorAll('header nav a').forEach(a=>{
+    const h=a.getAttribute('href')||'';
+    if(h==='index.html#/')a.classList.toggle('active',!onMain);
+    else if(h==='index.html#/w/'+MAIN)a.classList.toggle('active',onMain);
+  });
+}
 function hashOf(id,tk){ return '#/w/'+id+(tk?'/'+encodeURIComponent(tk):''); }
 function route(){
-  const r=parseHash();
+  const r=parseHash();navActive();
   if(r.v==='lex'){ if(!curWl)setWl(mainMeta()); document.body.classList.remove('v-home'); showLexique(); return; }
   if(r.v==='w'){ openWl(r.id,r.tk); return; }
   showHome();
@@ -406,7 +424,7 @@ function card(meta,main){
     '</div></a>';
 }
 function showHome(){
-  document.body.classList.add('v-home');
+  document.body.classList.add('v-home');document.body.classList.remove('v-index');
   curWl=null;sel=null;
   const ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');
   const doc=document.getElementById('doc');doc.classList.remove('on');
@@ -441,6 +459,9 @@ function wrow(s,i,wlid){
   '</div>';
 }
 function renderWl(meta){
+  // v-index : la vue liste large se suffit à elle-même ; en mobile le rail
+  // ferait doublon (deux fois la même liste, l'une au-dessus de l'autre).
+  document.body.classList.add('v-index');
   const doc=document.getElementById('doc');doc.classList.remove('on');
   const isCalc=meta.kind==='calcule',isMain=meta.id===MAIN;
   doc.innerHTML='<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="tag">'+sv(KIND[meta.kind]||meta.kind||'')+'</span></div>'+
@@ -483,11 +504,14 @@ function mk(k,v){return'<div><span class="k">'+k+'</span><span class="v">'+v+'</
 function bblist(arr){return arr&&arr.length?'<ul>'+arr.map(p=>'<li>'+sv(p)+'</li>').join('')+'</ul>':'<p class="stub">—</p>';}
 
 function typeHTML(el,html){const tmp=document.createElement('div');tmp.innerHTML=html;const ps=[...tmp.querySelectorAll('p')];const full=(ps.length?ps.map(p=>p.textContent):[tmp.textContent]).join('  ');el.innerHTML='<p class="resume type-cur" id="rtype"></p>';const t=document.getElementById('rtype');const _tt=performance.now(),dur=Math.min(1500,Math.max(500,full.length*6));(function tick(){const e=Math.min(1,(performance.now()-_tt)/dur);if(t)t.textContent=full.slice(0,Math.floor(e*full.length));if(e<1)requestAnimationFrame(tick);else el.innerHTML=html;})();}
-function pick(s){sel=s;curList.forEach(o=>o._r&&o._r.classList.toggle('sel',o===s));var ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');const st=document.querySelector('.stage');if(st)st.scrollTop=0;render(s);}
+function pick(s){sel=s;document.body.classList.remove('v-index');curList.forEach(o=>o._r&&o._r.classList.toggle('sel',o===s));var ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');const st=document.querySelector('.stage');if(st)st.scrollTop=0;render(s);
+  // mobile : le rail est AU-DESSUS de la scène en flux vertical — sans ce saut,
+  // choisir un titre ne montre rien tant qu'on n'a pas fait défiler la page.
+  if(matchMedia('(max-width:900px)').matches){const d=document.getElementById('doc');if(d)requestAnimationFrame(()=>d.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'}));}}
 function lexi(t,d){return '<div><div class="lext">'+t+'</div><div class="lexd">'+d+'</div></div>';}
 function lexsec(h,items){return '<div class="sec"><div class="sec-h">'+h+'</div><div class="lexg">'+items+'</div></div>';}
 function showLexique(){
-  sel=null;curList.forEach(o=>o._r&&o._r.classList.remove('sel'));
+  sel=null;document.body.classList.remove('v-index');curList.forEach(o=>o._r&&o._r.classList.remove('sel'));
   var ll=document.getElementById('lexlink');if(ll)ll.classList.add('active');
   // Forme NUE historique : #lexique, jamais « #/lexique ». C'est la cible du
   // seul lien profond entrant du site (portfolio.html) — aucun alias n'est émis.
@@ -711,7 +735,7 @@ function compactMetrics(s){const b=s.breakdown||{},u=s._u||{};
   const dl=b.decote_pct==null?'Décote vs tendance':(b.decote_pct>=0?'Décote vs tendance':'Surcote vs tendance');
   return '<div class="metrics">'+
     mk('Cours',(u.prix!=null?f(u.prix,2)+dev:'—'))+
-    mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+
+    mk('Cross',(b.cross_type||'neutre')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+
     mk(dl,(b.decote_pct==null?'—':Math.abs(b.decote_pct).toFixed(0)+'%'))+
     mk('Z-score'+(b.regression_window_years?' · '+b.regression_window_years+' ans':''),fs(b.regression_z,1).replace('.',',')+'σ')+
     mk('RSI',f(b.rsi,0))+
