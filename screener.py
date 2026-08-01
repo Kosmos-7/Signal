@@ -1641,10 +1641,18 @@ def main():
                                "members":    membres})
 
     # Un thème isolé qui se dégrade est publié avec sa bannière — échouer tout
-    # le run pour ça serait pire que le mal. Trois thèmes dégradés en revanche,
-    # ou un thème entièrement vide, signalent une panne de source : on échoue.
-    if len(degrades) >= 3 or any(t["scores"] == 0 for t in themes_publies):
-        print(f"❌ {len(degrades)} thème(s) dégradé(s) : {', '.join(degrades)} — "
+    # le run pour ça serait pire que le mal. Une proportion notable de thèmes
+    # dégradés, ou un thème entièrement vide, signalent une panne de source.
+    #
+    # Le seuil est PROPORTIONNEL : il valait 3 quand treize thèmes étaient
+    # publiés, ce qui le rendait inatteignable une fois le périmètre resserré à
+    # deux — les deux thèmes auraient pu se vider à moitié sans que rien
+    # n'échoue. Un garde-fou dont le seuil dépend du nombre d'éléments surveillés
+    # doit suivre ce nombre.
+    seuil_degrades = max(2, round(len(themes_publies) * 0.25))
+    if len(degrades) >= seuil_degrades or any(t["scores"] == 0 for t in themes_publies):
+        print(f"❌ {len(degrades)} thème(s) dégradé(s) sur {len(themes_publies)} "
+              f"(seuil {seuil_degrades}) : {', '.join(degrades)} — "
               f"panne de source probable, publication interrompue.")
         raise SystemExit(1)
 
