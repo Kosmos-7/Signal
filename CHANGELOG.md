@@ -5,6 +5,45 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.6.0] — 2026-08-01
+
+### Chaque titre a sa fiche — et les watchlists prennent leur forme définitive
+
+Suite directe des retours utilisateur sur la 3.5.0 : les vues thématiques
+étaient des coquilles (une phrase, pas de graphique, pas d'analyse) et la
+homepage tassait quatre cartes par ligne.
+
+- **Une fiche rédigée pour chacun des ~180 titres tagués**, plus seulement le
+  top 30. Génération parallélisée (8 appels simultanés : 138 min → ~17 min,
+  sous le plafond CI) avec mise en cache du préambule commun — jamais activée
+  jusqu'ici. Deux niveaux honnêtement distingués : fiche complète pour le
+  top 30 ; fiche courte (résumé, business, perspectives, thèses) pour les
+  titres thématiques, SANS rubrique Actu — aucune source datée n'est collectée
+  pour eux, l'afficher « à générer » aurait promis un contenu qui ne viendrait
+  jamais. Coût annuel : ~29 $ → ~80 $, désormais mesuré et publié à chaque run.
+- **Un graphique par titre** (`charts/<TICKER>.json`), chargé à l'ouverture de
+  la fiche. Le payload était déjà calculé pour tout l'univers puis jeté pour
+  tout ce qui n'était pas top 30. Fini le monolithe bloquant : 561 Ko au
+  premier rendu → 0, ~19 Ko par fiche ouverte.
+- **Homepage** : une carte par ligne (le texte était illisible à quatre par
+  ligne), toutes STRICTEMENT identiques — la principale perd son traitement à
+  part et gagne sa planche (« classement / seuil »). Ouvrir une watchlist
+  affiche directement sa première valeur : la vue liste intermédiaire
+  dupliquait le rail de gauche. La thèse du thème, son inversion et ses biais
+  vivent dans un bandeau repliable au-dessus de la fiche.
+- **Incident évité en audit** : le front « graphiques à la demande » a été
+  déployé avant le run de données qui produit `charts/` — le site a servi des
+  fiches sans aucun graphique jusqu'au run correctif. Même famille que
+  l'incident universe.json : publier du code qui attend des données pas encore
+  produites. Leçon consignée.
+- **Photos réelles** : outillage de récolte sur Wikimedia Commons (domaine
+  public/CC0 uniquement, manifeste de provenance versionné) via le runner CI.
+  Verdict de la première récolte : ~41 candidats, qualité insuffisante pour
+  couvrir 13 thèmes avec cohérence — décision d'illustration documentée dans
+  l'audit.
+- Nettoyages d'audit : README (pipeline à jour), apprendre.html (« uniquement
+  de la watchlist » → univers publié ; 125 → 210 tickers), CHANGELOG rattrapé.
+
 ## [3.5.0] — 2026-08-01
 
 ### Watchlists thématiques — une homepage, treize vues, un seul moteur
