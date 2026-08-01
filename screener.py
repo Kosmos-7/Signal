@@ -1447,6 +1447,14 @@ def main():
         themes_de[t] = ths
         if not ths:
             continue          # titre de l'univers historique sans thème : hors universe.json
+        # Un titre sans secteur exploitable est le symptôme d'une collecte ratée
+        # (Linde le 01/08 : secteur absent, qualité 0, score 6/100). Le publier
+        # dans un thème afficherait une ligne vide de sens, et il échapperait à
+        # la règle de concentration sectorielle s'il devenait achetable.
+        if not r.get("sector") or r["sector"] == "—":
+            print(f"  ⚠️  {t} exclu des thèmes — secteur absent (collecte incomplète)")
+            themes_de[t] = []
+            continue
         z = bd.get("regression_z")
         par_ticker[t] = {
             "nom":          r.get("name", t),
@@ -1481,11 +1489,16 @@ def main():
             membres.sort(key=lambda t: (tri(bd_de[t]), t))
             # Une règle large peut sélectionner la moitié de l'univers : on borne
             # la liste publiée, sinon ce n'est plus une watchlist mais un filtre.
-            # `declares` garde le compte AVANT troncature — le site affiche donc
-            # « 20 sur 112 retenus », jamais un total silencieusement tronqué.
-            declares = len(membres)
+            # `eligibles` garde le compte AVANT troncature — le site affiche donc
+            # « 12 retenus sur 48 éligibles », jamais un total silencieusement tronqué.
+            eligibles = len(membres)
             membres = membres[:themes.TOP_PAR_THEME]
+            # Un thème calculé n'a pas de liste déclarée : la notion de couverture
+            # ne s'y applique pas. La rapporter à `eligibles` produisait un taux de
+            # 25 % et un faux « thème dégradé » alors que le bornage est voulu.
+            declares = len(membres)
         else:
+            eligibles = None
             declares = len(th["tickers"])
             membres = [t for t in th["tickers"] if t in par_ticker]
             # Tri par score décroissant, départage par ticker croissant :
@@ -1506,6 +1519,7 @@ def main():
         meta = next(m for m in themes.meta_publique() if m["id"] == th["id"])
         themes_publies.append({**meta,
                                "declares":   declares,
+                               "eligibles":  eligibles,   # thèmes calculés seulement
                                "scores":     len(membres),
                                "couverture": round(couv, 3),
                                "status":     status,
