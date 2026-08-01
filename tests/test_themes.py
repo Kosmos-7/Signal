@@ -45,12 +45,18 @@ def check(nom, cond, detail=""):
 print("— Taxonomie —")
 ids = [t["id"] for t in themes.THEMES]
 check("identifiants uniques", len(ids) == len(set(ids)))
-check("11 curés + 2 calculés", len(themes.THEMES_CURES) == 11 and len(themes.THEMES_CALCULES) == 2)
+check("2 thèmes curés publiés", len(themes.THEMES_CURES) == 2)
 check("chaque thème a thèse, inversion et biais",
       all(t.get("thesis") and t.get("inversion") and t.get("biais") for t in themes.THEMES))
 check("les thèmes calculés publient leur règle en clair",
       all(t.get("regle_texte") for t in themes.THEMES_CALCULES))
-check("aucun thème curé vide", all(len(t["tickers"]) >= 10 for t in themes.THEMES_CURES))
+check("aucun thème curé étriqué", all(len(t["tickers"]) >= 20 for t in themes.THEMES_CURES))
+# Un thème de chaîne de valeur ne vaut que si chaque maillon a un représentant.
+# On ne peut pas tester la sémantique, mais on peut tester la taille minimale
+# qui rend une chaîne à six maillons crédible.
+_infra = themes.THEMES_BY_ID.get("infra-ia")
+check("infra-ia couvre assez de titres pour six maillons",
+      _infra and len(_infra["tickers"]) >= 40, f"{len(_infra['tickers']) if _infra else 0}")
 
 # Doctrine de nommage : ne jamais emprunter le vocabulaire d'un concept non calculé
 interdits = ["moat", "douve", "marge de sécurité", "valeur intrinsèque"]
@@ -89,18 +95,12 @@ screener.FINNHUB_KEY = ""
 check("aucun appel sans clé", not screener._finnhub_appel_emis("NVDA"))
 screener.FINNHUB_KEY = _k
 
-print("\n— Règles calculées —")
-check("décote : retenue sous −1σ avec qualité intacte",
-      themes._regle_decote({"regression_z": -2.0, "qualite": 30}))
-check("décote : écartée si la qualité s'effondre (pas de couteau qui tombe)",
-      not themes._regle_decote({"regression_z": -3.0, "qualite": 12}))
-check("décote : écartée au-dessus du seuil",
-      not themes._regle_decote({"regression_z": -0.5, "qualite": 40}))
-check("décote : z absent ne plante pas", not themes._regle_decote({"qualite": 40}))
-check("qualité : retenue au-dessus du seuil", themes._regle_qualite({"qualite": 35}))
-check("qualité : écartée sous le seuil", not themes._regle_qualite({"qualite": 20}))
+print("\n— Thèmes calculés (mécanisme conservé, aucun publié) —")
+check("aucun thème calculé publié", themes.THEMES_CALCULES == [])
 check("breakdown vide ne plante pas", themes.themes_calcules_pour({}) == [] and
       themes.themes_calcules_pour(None) == [])
+check("breakdown complet ne rattache à rien",
+      themes.themes_calcules_pour({"regression_z": -3.0, "qualite": 40}) == [])
 
 print("\n— Union de l'univers achetable —")
 universe = {

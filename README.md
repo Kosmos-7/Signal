@@ -26,8 +26,8 @@ le retracement Fibonacci et le VIX sont publiés à titre **informationnel** (ho
 ## Architecture
 
 ```
-themes.py ────────────► taxonomie        (13 watchlists : 11 curées + 2 calculées ;
-                                          l'univers du screener en est DÉRIVÉ)
+themes.py ────────────► taxonomie        (2 watchlists thématiques : infra-ia, financials ;
+                                          les tickers déclarés entrent dans l'univers)
 screener.py ──────────► watchlist.json   (210 tickers scorés → top 30, hebdo)
                         universe.json    (thèmes + carte compacte des titres tagués)
                         charts/<T>.json  (canal de régression par titre, chargé à la demande)

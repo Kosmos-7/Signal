@@ -872,8 +872,16 @@ def principale(pl, ac):
     pl.line((x1 - 26, base - 14), (x1 + 4, base - 14), BLUE + (46,), 1)
 
 
+# Les planches suivent les thèmes publiés. Les motifs des thèmes retirés en
+# août 2026 restent définis plus haut : réactiver un thème, c'est réactiver sa
+# ligne ici — aucun dessin à refaire.
 PLATES = [
     ("principale",      0,  principale,      AMBER,  "CLASSEMENT / SEUIL"),
+    ("infra-ia",        1,  ia,              VIOLET, "PROPAGATION / COUCHES"),
+    ("financials",      2,  finance,         VIOLET, "BILAN / CONTREPARTIE"),
+]
+
+PLATES_RETIREES = [
     ("semis",           1,  semis,           AMBER,  "LITHOGRAPHIE / RETICULE"),
     ("memoire",         2,  memoire,         AMBER,  "CYCLE / STOCK"),
     ("ia",              3,  ia,              VIOLET, "PROPAGATION / COUCHES"),

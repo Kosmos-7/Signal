@@ -615,6 +615,20 @@ UNIVERS = [
     "BABA","TCEHY","PDD",
     # Japon via ADR (Phase 4 light, +2) — Toyota + Mitsubishi UFJ
     "TM","MUFG",
+
+    # ─── ÉLARGISSEMENT AOÛT 2026 (+39) ─────────────────────────────────────
+    # Ces titres sont entrés dans l'univers pour alimenter des watchlists
+    # thématiques (santé, conso, défense, robotique, compounders) qui ne sont
+    # plus publiées. Ils RESTENT scorés : ce sont de bons candidats au top 30,
+    # et les retirer rétrécirait la watchlist principale sans rien simplifier.
+    # Ils ont tous passé la validation Yahoo du 01/08 (historique, devise,
+    # secteur, capitalisation).
+    "AME","CPRT","CTAS","DHR","EMR","FAST","ITW","PH","ROK","ROP","RSG","TDG","UNP","WM",
+    "BSX","MDT","NVS","RHHBY","ZTS",
+    "CL","HSY","MDLZ","PEP","PM","AD.AS","DGE.L",
+    "AM.PA","BA.L","LDO.MI","RHM.DE","RR.L","SAAB-B.ST",
+    "NXPI","STM","TRI",
+    "6273.T","6501.T","6861.T","6954.T",
 ]
 
 # ── Élargissement thématique (août 2026) ─────────────────────────────────────
