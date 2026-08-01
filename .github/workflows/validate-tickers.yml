@@ -1,8 +1,17 @@
 # .github/workflows/validate-tickers.yml
-# Workflow TEMPORAIRE de validation — à supprimer une fois les thèmes stabilisés.
-# Raison d'être : l'environnement de développement n'a pas accès à Yahoo Finance
-# (proxy). Les symboles déclarés dans themes.py doivent donc être confrontés à
-# l'API réelle depuis un runner avant d'élargir l'univers de production.
+# Outil de maintenance — à lancer à la main AVANT tout ajout de ticker dans
+# themes.py, jamais après.
+#
+# Raison d'être : l'environnement de développement n'a pas accès à Yahoo Finance,
+# donc un symbole erroné ne se voit qu'en production — sous la forme d'un thème
+# amputé publié en silence. Ce workflow confronte les symboles déclarés à l'API
+# réelle depuis un runner (historique, devise Yahoo vs devise déduite du suffixe,
+# secteur, capitalisation, objectif consensus).
+#
+# Sa première exécution (01/08/2026, 81 symboles) a écarté 3 symboles qui
+# seraient passés en production : deux historiques trop courts pour qu'une
+# régression signifie quoi que ce soit, et un symbole introuvable. Il paie donc
+# déjà son coût — le garder.
 name: Valider les tickers thématiques
 
 on:
