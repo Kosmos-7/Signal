@@ -392,7 +392,9 @@ CHARTS_DIR = "charts"
 # application/json par GitHub Pages, qui se fie à la DERNIÈRE extension.
 # Le garde-fou ci-dessous n'est pas cosmétique : un ticker contenant « / » ou
 # « .. » écrirait hors du dossier. Le jeu autorisé est exactement celui de
-# l'univers actuel ([A-Z0-9.-], vérifié sur les 210 tickers).
+# l'univers actuel ([A-Z0-9.-], vérifié sur les 210 tickers). Il interdit aussi
+# les minuscules, ce qui rend impossible la collision de deux tickers ne
+# différant que par la casse sur un système de fichiers insensible (macOS).
 _TICKER_FICHIER = re.compile(r"[A-Z0-9][A-Z0-9.-]*\Z")
 
 
