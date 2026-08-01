@@ -640,6 +640,11 @@ UNIVERS = [
     "AM.PA","BA.L","LDO.MI","RHM.DE","RR.L","SAAB-B.ST",
     "NXPI","STM","TRI",
     "6273.T","6501.T","6861.T","6954.T",
+    # PLTR est sorti du thème infra-ia le 01/08 (couche logicielle = pari sur
+    # les usages, pas sur l'infrastructure) mais figurait au top 30 : il reste
+    # scoré ici comme n'importe quel candidat, sinon il aurait disparu de la
+    # watchlist principale par simple effet de bord d'une décision de périmètre.
+    "PLTR",
 ]
 
 # ── Élargissement thématique (août 2026) ─────────────────────────────────────

@@ -48,10 +48,11 @@ THEMES_CURES = [
         "thesis": (
             "Chaque dollar investi dans l'IA finit en objets physiques : puces, machines de "
             "gravure et d'assemblage, mémoire, fibre, serveurs, bâtiments, électricité, "
-            "refroidissement. Cette watchlist suit la chaîne complète, maillon par maillon — "
-            "c'est là que l'argent atterrit, quel que soit l'usage qui gagne. Et le vrai goulot "
-            "n'est pas la gravure : c'est l'assemblage et les substrats, là où le pouvoir de "
-            "prix est le plus fort."
+            "refroidissement. Cette watchlist suit la chaîne complète, maillon par maillon, "
+            "des puces jusqu'aux plateformes qui commandent et exploitent les centres de "
+            "données — c'est là que l'argent atterrit, quel que soit l'usage qui gagne. Et le "
+            "vrai goulot n'est pas la gravure : c'est l'assemblage et les substrats, là où le "
+            "pouvoir de prix est le plus fort."
         ),
         "inversion": (
             "Le retour sur investissement applicatif ne se matérialise pas et les hyperscalers "
@@ -61,7 +62,7 @@ THEMES_CURES = [
             "dépendance à un seul fondeur avancé."
         ),
         "biais": (
-            "C'est un thème de CONCENTRATION, pas de diversification : ses six maillons montent "
+            "C'est un thème de CONCENTRATION, pas de diversification : ses maillons montent "
             "et descendent ensemble, et il amplifie le pari tech déjà assumé par la watchlist "
             "principale. Il est aussi transverse aux secteurs (technologie, industrie, services "
             "publics, matériaux) — la règle de concentration sectorielle de l'agent ne le verra "
@@ -90,13 +91,24 @@ THEMES_CURES = [
             #     assemble et le bâtiment qui l'héberge — la dépense atterrit
             #     littéralement là.
             "DELL", "HPE", "EQIX", "DLR",
-            # 6 — Plateformes, données et cloud : qui commande et qui exploite
-            "MSFT", "GOOGL", "AMZN", "META", "ORCL", "PLTR",
-            "SNOW", "DDOG", "MDB", "NET",
+            # 6 — Plateformes et cloud : les hyperscalers qui commandent et
+            #     exploitent les centres de données. Leur place est défendable
+            #     parce que leurs capex SONT la dépense d'infrastructure — ils
+            #     possèdent les bâtiments. La couche logicielle au-dessus
+            #     (PLTR, SNOW, DDOG, MDB, NET) est sortie le 01/08/2026 : c'est
+            #     un pari sur les USAGES, exactement ce que la thèse dit ne pas
+            #     faire. Ces cinq titres restent scorés comme candidats au
+            #     top 30 et formeraient le noyau d'un futur thème Cloud & Data.
+            "MSFT", "GOOGL", "AMZN", "META", "ORCL",
             # 7 — Énergie, conversion et refroidissement : du réseau haute
             #     tension jusqu'à l'étage d'alimentation du rack.
+            # NEE sorti le 01/08/2026 : premier développeur renouvelable au
+            # monde, il contredisait frontalement le texte des biais (« la
+            # production d'électricité renouvelable est exclue — pari de
+            # politique publique »). VST reste : il vend des électrons aux
+            # centres de données, c'est la thèse, pas un pari réglementaire.
             "VRT", "ETN", "SU.PA", "SIE.DE", "ABBN.SW", "ENR.DE",
-            "PWR", "VST", "NEE", "CCJ",
+            "PWR", "VST", "CCJ",
             "MPWR", "ON", "IFX.DE",
         ],
     },
