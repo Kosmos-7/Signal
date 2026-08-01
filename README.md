@@ -26,12 +26,19 @@ le retracement Fibonacci et le VIX sont publiés à titre **informationnel** (ho
 ## Architecture
 
 ```
-screener.py ──────────► watchlist.json   (133 tickers → top 30 scorés, hebdo)
-portfolio_agent.py ───► portfolio.json   (décisions Claude API + règles mécaniques, hebdo)
+themes.py ────────────► taxonomie        (13 watchlists : 11 curées + 2 calculées ;
+                                          l'univers du screener en est DÉRIVÉ)
+screener.py ──────────► watchlist.json   (210 tickers scorés → top 30, hebdo)
+                        universe.json    (thèmes + carte compacte des titres tagués)
+                        charts/<T>.json  (canal de régression par titre, chargé à la demande)
+portfolio_agent.py ───► portfolio.json   (décisions Claude API + règles mécaniques, hebdo ;
+                                          univers achetable = top 30 ∪ titres tagués)
 update_prices.py ─────► portfolio.json   (refresh prix/VIX/benchmarks, quotidien, sans IA)
-generate_analyses.py ─► analyses.json    (fiches éditoriales Claude, hebdo)
+generate_analyses.py ─► analyses.json    (fiches éditoriales Claude — complètes pour le
+                                          top 30, courtes pour les titres thématiques)
 
-index.html      lit watchlist.json + analyses.json
+index.html      homepage des watchlists + fiches — lit watchlist.json, universe.json,
+                analyses.json, et charts/<TICKER>.json à l'ouverture d'une fiche
 portfolio.html  lit portfolio.json
 apprendre.html  page pédagogique statique
 ```
