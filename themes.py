@@ -46,16 +46,12 @@ THEMES_CURES = [
         "sous_titre": "Du silicium au mégawatt",
         "kind": "these",
         "thesis": (
-            "La dépense en intelligence artificielle finit toujours par acheter des choses "
-            "physiques : des puces, des machines pour les graver ET LES ASSEMBLER, de la mémoire, "
-            "de la fibre, des serveurs, des bâtiments, du courant et du refroidissement. Ce thème "
-            "suit cette chaîne maillon par maillon plutôt que de parier sur les usages, parce que "
-            "c'est là que la dépense atterrit avec le moins d'incertitude. Les couches les plus "
-            "rares — lithographie avancée, assemblage 2.5D/3D, mémoire haute bande passante, "
-            "interconnexion optique, raccordement électrique — sont aussi celles où le pouvoir de "
-            "fixation des prix est le plus fort. Contre-intuitif mais documenté : ce qui rationne "
-            "les livraisons d'accélérateurs n'est pas la gravure, c'est la capacité d'assemblage "
-            "et les substrats."
+            "Chaque dollar investi dans l'IA finit en objets physiques : puces, machines de "
+            "gravure et d'assemblage, mémoire, fibre, serveurs, bâtiments, électricité, "
+            "refroidissement. Cette watchlist suit la chaîne complète, maillon par maillon — "
+            "c'est là que l'argent atterrit, quel que soit l'usage qui gagne. Et le vrai goulot "
+            "n'est pas la gravure : c'est l'assemblage et les substrats, là où le pouvoir de "
+            "prix est le plus fort."
         ),
         "inversion": (
             "Le retour sur investissement applicatif ne se matérialise pas et les hyperscalers "
@@ -110,13 +106,12 @@ THEMES_CURES = [
         "sous_titre": "Bilans, flux et péages de marché",
         "kind": "secteur",
         "thesis": (
-            "Trois métiers très différents sous un même libellé, et c'est tout l'intérêt de les "
-            "voir côte à côte. Les BILANS (banques, assureurs) monétisent un écart de taux et un "
-            "risque de crédit : ils gagnent quand les taux sont hauts et les défauts rares. Les "
-            "FLUX (réseaux de paiement) prélèvent une commission sur un volume sans porter ce "
-            "risque. Les PÉAGES (indices, notation, places de marché, données de référence) "
-            "facturent l'accès à une infrastructure que personne ne peut contourner, avec des "
-            "coûts de changement élevés et très peu de capital immobilisé."
+            "Trois métiers, trois moteurs. Les BILANS (banques, assureurs) gagnent quand les "
+            "taux sont hauts et les défauts rares. Les FLUX (réseaux de paiement) prennent une "
+            "commission sur chaque transaction, sans porter le risque de crédit. Les PÉAGES "
+            "(indices, notation, places de marché) facturent un accès que personne ne peut "
+            "contourner. Les voir côte à côte montre lequel de ces moteurs est payé cher — "
+            "et pourquoi."
         ),
         "inversion": (
             "Pour les bilans : une récession de crédit, ou une baisse rapide des taux qui écrase "

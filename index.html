@@ -320,7 +320,7 @@ let curWl=null,curList=[];
 function mainMeta(){
   if(TBY[MAIN])return TBY[MAIN];
   return {id:MAIN,label:'Watchlist principale',sous_titre:'Les meilleurs scores, toutes catégories',kind:'principale',
-    thesis:"Le classement de référence : les meilleurs scores de l'univers, toutes catégories confondues, produits par une seule et même méthode — qualité du business, prix payé, garde-fou de timing. Les watchlists thématiques ne sont que des projections de ce même scoring : un titre n'y est jamais noté deux fois.",
+    thesis:"Les trente meilleurs scores de l'univers, toutes catégories confondues. Une seule méthode : la qualité du business, le prix payé, le timing. C'est le classement de référence — les watchlists thématiques n'en sont que des projections, un titre n'est jamais noté deux fois.",
     inversion:'',biais:'',regle_texte:'',declares:stocks.length,scores:stocks.length,
     couverture:1,status:'ok',members:stocks.map(s=>s.ticker)};
 }
@@ -613,7 +613,19 @@ function buildChart(s){
   const host=document.getElementById('chartsec'); if(!host)return;
   const tk=s.ticker;
   if(!(tk in CH))host.innerHTML='<div class="chx-load">Chargement du graphique…</div>';
-  loadChart(tk).then(()=>{ if(sel&&sel.ticker!==tk)return; drawChart(s); });
+  loadChart(tk).then(d=>{ if(sel&&sel.ticker!==tk)return;
+    // Le fichier charts/<TICKER>.json embarque le breakdown COMPLET du scoring
+    // depuis le run d'août 2026. Pour un titre hors top 30 (breakdown compact
+    // fabriqué depuis universe.json), on promeut la fiche au niveau du top 30
+    // dès que le payload arrive : mêmes métriques, mêmes rubriques. Les anciens
+    // fichiers sans breakdown laissent la fiche compacte — dégradation douce.
+    if(d&&d.breakdown&&s._c&&!s._up){
+      s._up=true; s.breakdown=Object.assign({},s.breakdown,d.breakdown);
+      const dz=document.getElementById('dzone');
+      if(dz){ dz.innerHTML=dataZone(s,s.breakdown,false);
+        dz.querySelectorAll('.f').forEach(el=>el.style.width=el.dataset.w+'%'); }
+    }
+    drawChart(s); });
 }
 function drawChart(s){
   const host=document.getElementById('chartsec'); if(!host)return;
@@ -845,10 +857,22 @@ function themeBar(meta){
     '</div></details>';
 }
 
-function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
-  const compact=!!s._c, hasEd=!!(a&&(a.resume||a.biz||a.futur||a.actu||a.bull||a.bear));
-  const score=s.score==null?0:s.score;
+/* Zone de données chiffrées (jauges + décomposition + rangée de métriques).
+   Isolée dans #dzone parce qu'elle peut être RE-RENDUE seule : une fiche
+   compacte est promue au niveau top 30 quand charts/<TICKER>.json livre le
+   breakdown complet — on remplace alors cette zone sans toucher au résumé
+   (l'animation de frappe repartirait de zéro) ni au graphique. */
+function dataZone(s,b,compact){
   const rsi=b.rsi==null?50:Math.max(0,Math.min(100,b.rsi)),zp=Math.max(0,Math.min(100,((b.regression_z==null?0:b.regression_z)+3)/6*100));
+  return '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,1).replace('.',',')+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
+      '<div><div class="qh">Décomposition du score</div>'+meter('Qualité',b.qualite||0,45)+meter('Valorisation',b.valorisation||0,30)+meter('Timing',b.timing||0,22)+(compact?'':meter('Analystes',b.analystes||0,3))+'</div></div>'+
+    (compact?compactMetrics(s)
+      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA · a/a',fs(b.rev_growth_pct,1)+'%')+mk('Marge nette · TTM',f(b.net_margin_pct,1)+'%')+mk('Marge FCF · TTM',f(b.fcf_margin_pct,1)+'%')+'</div><div class="metrics-note">'+periodNote(b)+'</div>');
+}
+
+function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
+  const compact=!!s._c&&!s._up, hasEd=!!(a&&(a.resume||a.biz||a.futur||a.actu||a.bull||a.bear));
+  const score=s.score==null?0:s.score;
   const C=2*Math.PI*52,off=C*(1-score/100);
   const resumeBody=a&&a.resume?a.resume.map(p=>'<p class="resume">'+sv(p)+'</p>').join('')
     :compact?'<p class="resume">'+sv(s.name)+' — score '+score+'/100 : qualité '+(b.qualite==null?'—':b.qualite+'/45')+', valorisation '+(b.valorisation==null?'—':b.valorisation+'/30')+', timing '+(b.timing==null?'—':b.timing+'/22')+'. '+stateTag(b)+', RSI '+f(b.rsi,0)+', z-score '+fs(b.regression_z,1).replace('.',',')+'σ sur '+(b.regression_window_years||'?')+' ans.</p>'
@@ -871,10 +895,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div id="chartsec"></div>'+
-    '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,1).replace('.',',')+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
-      '<div><div class="qh">Décomposition du score</div>'+meter('Qualité',b.qualite||0,45)+meter('Valorisation',b.valorisation||0,30)+meter('Timing',b.timing||0,22)+(compact?'':meter('Analystes',b.analystes||0,3))+'</div></div>'+
-    (compact?compactMetrics(s)
-      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA · a/a',fs(b.rev_growth_pct,1)+'%')+mk('Marge nette · TTM',f(b.net_margin_pct,1)+'%')+mk('Marge FCF · TTM',f(b.fcf_margin_pct,1)+'%')+'</div><div class="metrics-note">'+periodNote(b)+'</div>')+
+    '<div id="dzone">'+dataZone(s,b,compact)+'</div>'+
     prose+
     (bb?sec('Bull vs Bear',bb,'bbsec'):'');
   requestAnimationFrame(()=>{doc.classList.add('on');const rz=document.getElementById('rzone');if(rz){reduce?(rz.innerHTML=resumeBody):typeHTML(rz,resumeBody);}buildChart(s);const arc=document.getElementById('arc');if(arc)arc.style.strokeDashoffset=off;doc.querySelectorAll('.f').forEach(el=>el.style.width=el.dataset.w+'%');const cu=document.getElementById('cu');const _ct=performance.now();(function up(){const e=Math.min(1,(performance.now()-_ct)/600);if(cu)cu.textContent=Math.round(e*score);if(e<1)requestAnimationFrame(up);})();});

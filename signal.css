@@ -114,7 +114,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 
 /* ── TOC : sommaire de sections (portfolio + apprendre) ──
    Flotte dans la gouttière gauche, à côté du contenu centré. Masqué quand la place manque. */
-.toc{position:fixed;left:1.3rem;top:5.2rem;bottom:2.6rem;z-index:15;width:212px;display:flex;flex-direction:column;overflow-y:auto;mask-image:linear-gradient(180deg,transparent,#000 10px,#000 calc(100% - 10px),transparent)}
+/* Le mask-image fond les 10 premiers px vers le transparent (fondu de scroll) :
+   sans padding, le libellé « Sections » tombait dans cette zone et semblait coupé. */
+.toc{position:fixed;left:1.3rem;top:5.2rem;bottom:2.6rem;z-index:15;width:212px;display:flex;flex-direction:column;overflow-y:auto;padding:12px 0;mask-image:linear-gradient(180deg,transparent,#000 10px,#000 calc(100% - 10px),transparent)}
 .toc::-webkit-scrollbar{width:0}
 .toc-h{font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);padding:0 .45rem .6rem;border-bottom:1px solid var(--line);margin-bottom:.15rem}
 .toc a{position:relative;display:block;font:500 .84rem var(--serif);color:var(--text2);text-decoration:none;padding:.55rem 30px .55rem .45rem;border-bottom:1px solid var(--line);transition:padding-left .18s,color .18s,border-color .18s;line-height:1.25}

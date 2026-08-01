@@ -116,6 +116,27 @@ check("le fichier unitaire est bien plus léger que le monolithe",
 check("les valeurs restent à 2 décimales max (rien de dé-arrondi à l'écriture)",
       max(len(m.group(1)) for m in re.finditer(r"\d+\.(\d+)", brut)) <= 2)
 
+print("\n— Breakdown embarqué (parité de données des fiches thématiques) —")
+# Le breakdown complet voyage avec le graphe pour que les fiches hors top 30
+# affichent les mêmes données que les fiches du top 30. Le dict du chart est
+# copié, jamais muté : il est partagé avec le monolithe charts.json.
+FAUX_BD = {"AAPL": {"qualite": 40, "rev_growth_pct": 12.3, "fibo": None},
+           "ASML.AS": {"qualite": 38, "net_margin_pct": 28.1}}
+d2 = os.path.join(tmpdir, "charts-bd")
+screener.publier_charts(CHARTS, set(TICKERS), d2, breakdowns=FAUX_BD)
+aapl_bd = json.load(open(os.path.join(d2, "AAPL.json"), encoding="utf-8"))
+check("le fichier porte le breakdown fourni sous la clé dédiée",
+      aapl_bd.get("breakdown") == FAUX_BD["AAPL"])
+check("le payload graphique reste intact à côté du breakdown",
+      {k: aapl_bd[k] for k in ("points", "mm21", "mm200", "t_win0", "t_last")} == CHARTS["AAPL"])
+check("un ticker sans breakdown fourni est publié sans la clé (dégradation douce)",
+      "breakdown" not in json.load(open(os.path.join(d2, "8035.T.json"), encoding="utf-8")))
+check("le dict du chart n'est PAS muté (le monolithe partagé reste sans breakdown)",
+      "breakdown" not in CHARTS["AAPL"])
+check("breakdowns=None conserve exactement l'ancien format",
+      json.load(open(os.path.join(DOSSIER, "AAPL.json"), encoding="utf-8")) == CHARTS["AAPL"])
+shutil.rmtree(d2)
+
 print("\n— Purge des orphelins —")
 # Semaine suivante : ORPHELIN.PA a quitté tous ses thèmes et sort du top 30.
 avant = len(fichiers(DOSSIER))

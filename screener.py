@@ -398,13 +398,21 @@ CHARTS_DIR = "charts"
 _TICKER_FICHIER = re.compile(r"[A-Z0-9][A-Z0-9.-]*\Z")
 
 
-def publier_charts(charts, a_publier, dossier=CHARTS_DIR):
+def publier_charts(charts, a_publier, dossier=CHARTS_DIR, breakdowns=None):
     """Écrit charts/<TICKER>.json pour chaque fiche ouvrable, purge les orphelins.
 
     charts     : ticker → payload graphique, pour TOUT l'univers scoré.
     a_publier  : tickers dont le site sait ouvrir une fiche (titres tagués par un
                  thème + top 30). Le reste de l'univers n'a pas de fiche, donc
                  pas de graphe à servir.
+    breakdowns : ticker → breakdown COMPLET du scoring (optionnel). Embarqué
+                 dans chaque fichier sous la clé "breakdown", il donne aux
+                 fiches thématiques les mêmes données que les fiches du top 30
+                 (fondamentaux, marges, fibo…) sans alourdir universe.json, qui
+                 est téléchargé en bloc au premier rendu : le breakdown ne pèse
+                 que sur la fiche réellement ouverte (~2 Ko par fichier). Le
+                 payload est copié, jamais muté — les dicts de `charts` sont
+                 partagés avec le monolithe charts.json transitionnel.
 
     POURQUOI la purge : un titre qui quitte tous ses thèmes n'est plus jamais
     réécrit. Sans suppression explicite son graphe resterait indéfiniment dans
@@ -429,9 +437,12 @@ def publier_charts(charts, a_publier, dossier=CHARTS_DIR):
             continue
         chemin = os.path.join(dossier, f"{ticker}.json")
         tmp = chemin + ".tmp"
+        payload = charts[ticker]
+        if breakdowns and ticker in breakdowns:
+            payload = {**payload, "breakdown": breakdowns[ticker]}
         try:
             with open(tmp, "w", encoding="utf-8") as f:
-                json.dump(charts[ticker], f, ensure_ascii=False,
+                json.dump(payload, f, ensure_ascii=False,
                           separators=(",", ":"), allow_nan=False)
             os.replace(tmp, chemin)
         except Exception:
@@ -1719,7 +1730,13 @@ def main():
     # L'union n'est pas redondante : un titre peut être très bien noté sans
     # appartenir à aucun thème, et sa fiche perdrait son graphe le jour où
     # charts.json sera retiré.
-    publier_charts(charts_tous, set(par_ticker) | top_tickers)
+    # Le breakdown complet voyage avec le graphe : une fiche thématique affiche
+    # ainsi les MÊMES données qu'une fiche du top 30 dès que son graphique est
+    # chargé (l'écart TSM/BLK constaté le 01/08 venait de là — universe.json ne
+    # porte qu'un extrait compact de 19 champs, par choix de poids du fetch
+    # bloquant, pas par manque de données).
+    bd_par_ticker = {r["ticker"]: r["breakdown"] for r in resultats if r.get("breakdown")}
+    publier_charts(charts_tous, set(par_ticker) | top_tickers, breakdowns=bd_par_ticker)
 
     # ── Archive snapshot point-in-time ──
     # Capture l'état des fondamentaux/analystes à la date du run (les données fonda
