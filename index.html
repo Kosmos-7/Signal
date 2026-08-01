@@ -613,7 +613,12 @@ function buildChart(s){
 function drawChart(s){
   const host=document.getElementById('chartsec'); if(!host)return;
   const D=CH[s.ticker], b=s.breakdown||{};
-  if(!D||!D.points||D.points.length<24||b.regression_sigma==null){host.innerHTML='';return;}
+  // Garde volontairement minimale : il faut des points, rien d'autre. L'ancienne
+  // condition sur regression_sigma était un vestige (le canal est re-fitté
+  // client sur la période affichée, la valeur du screener n'est jamais lue) —
+  // elle privait de graphique toutes les fiches thématiques, dont le breakdown
+  // compact ne porte pas ce champ.
+  if(!D||!D.points||D.points.length<24){host.innerHTML='';return;}
   const W=800,H=360,ML=46,MR=44,MT=14,MB=26;
   const T_MIN=D.points[0][0], T_MAX=Math.max(D.t_last,D.points[D.points.length-1][0]), MIN_SPAN=12;
   const WIN=(b.regression_window_years||10)*12;
