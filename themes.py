@@ -201,6 +201,18 @@ ECARTES_VALIDATION = {
     "HUBB":    "capitalisation ~25 Md$, au seuil — écarté faute de marge",
     "MOD":     "capitalisation ~11 Md$ < seuil 25 Md$ (refroidissement)",
     "8036.T":  "symbole introuvable chez Yahoo",
+    # Néoclouds (location de calcul GPU), demandés le 01/08. Thématiquement en
+    # plein dans le maillon serveurs/centres de données, mais le scoring repose
+    # sur un canal de régression d'au moins 5 ans — pas d'historique, pas de
+    # score. Validés via le workflow (run n°3) : capitalisations largement au
+    # seuil, historiques très loin du compte.
+    "CRWV":    "historique 1,3 an < 5 ans requis (IPO mars 2025, ~39 Md$) — éligible en 2030",
+    "NBIS":    "historique 1,8 an < 5 ans requis (~48 Md$) — reprise de cotation oct. 2024 après "
+               "2 ans ½ de suspension, et l'historique antérieur décrit Yandex Russie, une autre "
+               "entreprise ; éligible fin 2029",
+    # Sharon AI : pas de ticker à valider — société non cotée sur une place
+    # majeure (centres de données GPU, Australie/Texas), très loin du seuil de
+    # 25 Md$. Hors périmètre tant qu'elle n'est pas une grande capitalisation cotée.
 }
 
 THEMES = THEMES_CURES + THEMES_CALCULES
