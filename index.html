@@ -32,6 +32,10 @@
   .lexd{font-size:.92rem;color:var(--text2);line-height:1.6}
   .lexd em{font-style:normal;color:var(--text)}
   @media(max-width:900px){.lexg{grid-template-columns:1fr}}
+  /* En-tête de maillon dans le rail (thèmes structurés par couche) */
+  .rl-grp{display:flex;align-items:baseline;gap:7px;font:600 .58rem var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--ac);padding:1rem .4rem .4rem;border-bottom:1px solid var(--line)}
+  .rl-grp .gn{color:var(--text3);letter-spacing:0}
+  .rl-grp:first-child{padding-top:.35rem}
   .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:.5rem .4rem;cursor:pointer;border-bottom:1px solid var(--line);transition:padding-left .18s,border-color .18s}
   .row:hover,.row.sel{padding-left:.7rem}.row.sel{border-left:2px solid var(--ac);margin-left:-2px;padding-left:calc(.7rem - 2px)}
   .row .nm{font:500 .82rem var(--serif);line-height:1.2;color:var(--text2)}.row:hover .nm,.row.sel .nm{color:#fff}
@@ -313,7 +317,7 @@ const U={themes:[],stocks:{},week:'',updated_at:'',universe_declared:null,univer
 const TBY={};              // id de thème → méta
 const WL={};               // ticker → fiche complète (top 30, watchlist.json)
 const MAIN='principale';   // id réservé de la watchlist principale
-let curWl=null,curList=[];
+let curWl=null,curList=[],curGroups=null;
 
 // Descripteur de repli de la watchlist principale — universe.json peut le
 // fournir sous l'id « principale » ; sinon on l'écrit ici, factuellement.
@@ -389,7 +393,26 @@ function route(){
 function wlMeta(id){ return id===MAIN?mainMeta():(TBY[id]&&TBY[id].id!==MAIN?TBY[id]:null); }
 function setWl(meta){
   curWl=meta;
-  curList=(meta.id===MAIN)?stocks.slice():(meta.members||[]).map(stockOf).filter(Boolean);
+  if(meta.id!==MAIN&&Array.isArray(meta.maillons)&&meta.maillons.length){
+    /* Thème structuré par couche : le rail suit l'ordre PHYSIQUE de la chaîne
+       (c'est lui la pédagogie), score décroissant à l'intérieur de chaque
+       maillon. Seuls les titres publiés s'affichent — un déclaré non scoré
+       (ex. SHAZ avant ~février 2027) n'a pas de fiche à ouvrir. Un membre
+       hors maillons (désynchronisation de données) tombe dans « Autres »
+       plutôt que de disparaître en silence. */
+    const pub=new Set(meta.members||[]);
+    curGroups=meta.maillons.map(m=>({label:m.label,
+        stocks:m.tickers.filter(t=>pub.has(t)).map(stockOf).filter(Boolean)
+          .sort((a,b)=>(b.score||0)-(a.score||0))}))
+      .filter(g=>g.stocks.length);
+    const dans=new Set(curGroups.flatMap(g=>g.stocks.map(s=>s.ticker)));
+    const restes=(meta.members||[]).filter(t=>!dans.has(t)).map(stockOf).filter(Boolean);
+    if(restes.length)curGroups.push({label:'Autres',stocks:restes});
+    curList=curGroups.flatMap(g=>g.stocks);
+  }else{
+    curGroups=null;
+    curList=(meta.id===MAIN)?stocks.slice():(meta.members||[]).map(stockOf).filter(Boolean);
+  }
   const rc=document.getElementById('rc'),rn=document.getElementById('rn');
   if(rc)rc.textContent=meta.label;
   if(rn)rn.textContent=curList.length+' val.';
@@ -434,12 +457,16 @@ const REG={PA:'EU',DE:'EU',AS:'EU',BR:'EU',MI:'EU',MC:'EU',AT:'EU',HE:'EU',VI:'E
   L:'UK',SW:'CH',CO:'DK',ST:'SE',OL:'NO',T:'JP',KS:'KR',KQ:'KR',HK:'HK',TO:'CA',AX:'AU'};
 function region(s){ if(s.badge)return s.badge; const p=(s.ticker||'').split('.'); return p.length>1?(REG[p[p.length-1].toUpperCase()]||'INT'):'US'; }
 
-function listBuild(){const l=document.getElementById('rl');if(!l)return;l.innerHTML='';curList.forEach(s=>{const r=document.createElement('div');r.className='row';s._r=r;
-  r.innerHTML='<div><div class="nm">'+sv(s.name)+'</div><div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+sv(s.sector||'')+'</span></div></div>'+
-    '<span class="rr"><div class="sc">'+(s.score==null?'—':s.score)+'</div></span>';
-  r.tabIndex=0;r.setAttribute('role','button');
-  const goto=()=>nav(hashOf(curWl?curWl.id:MAIN,s.ticker));
-  r.addEventListener('click',goto);r.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goto();}});l.appendChild(r);});}
+function listBuild(){const l=document.getElementById('rl');if(!l)return;l.innerHTML='';
+  const ligne=s=>{const r=document.createElement('div');r.className='row';s._r=r;
+    r.innerHTML='<div><div class="nm">'+sv(s.name)+'</div><div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+sv(s.sector||'')+'</span></div></div>'+
+      '<span class="rr"><div class="sc">'+(s.score==null?'—':s.score)+'</div></span>';
+    r.tabIndex=0;r.setAttribute('role','button');
+    const goto=()=>nav(hashOf(curWl?curWl.id:MAIN,s.ticker));
+    r.addEventListener('click',goto);r.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goto();}});l.appendChild(r);};
+  if(curGroups){curGroups.forEach((g,i)=>{const h=document.createElement('div');h.className='rl-grp';
+    h.innerHTML='<span class="gn">'+(i+1)+'</span>'+sv(g.label);l.appendChild(h);g.stocks.forEach(ligne);});}
+  else curList.forEach(ligne);}
 
 /* ══ HOMEPAGE DES WATCHLISTS ════════════════════════════════════════════════ */
 function themeImg(id,label){

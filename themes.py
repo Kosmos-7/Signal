@@ -70,58 +70,82 @@ THEMES_CURES = [
             "production d'électricité renouvelable en est exclue, c'est un pari de politique "
             "publique, pas d'infrastructure IA."
         ),
-        "tickers": [
-            # 1 — Calcul : les processeurs de l'entraînement et de l'inférence
-            "NVDA", "AVGO", "AMD", "MRVL", "QCOM", "INTC",
-            # 2 — Fonderie, équipement, outils de conception ET PACKAGING AVANCÉ.
-            #     L'assemblage 2.5D/3D est le goulot le plus contraignant de la
-            #     chaîne : ce n'est pas la gravure qui rationne les livraisons
-            #     d'accélérateurs, c'est la capacité d'assemblage et les
-            #     substrats. Ce maillon était absent de la première version.
-            "TSM", "ASML.AS", "AMAT", "LRCX", "KLAC", "TER", "ASM.AS",
-            "8035.T", "6857.T", "SNPS", "CDNS",
-            "ASX", "6146.T", "4062.T",
-            # 3 — Mémoire et stockage : la brique vendue au prix spot
-            "MU", "000660.KS", "005930.KS", "WDC", "STX", "NTAP", "4063.T",
-            # 4 — Réseau et interconnexion optique : ce qui relie les
-            #     accélérateurs entre eux, et limite la taille des clusters
-            #     d'entraînement autant que le nombre de puces.
-            "ANET", "COHR", "LITE", "CIEN", "CSCO",
-            # 5 — Serveurs et immobilier de centre de données : ce qu'on
-            #     assemble et le bâtiment qui l'héberge — la dépense atterrit
-            #     littéralement là. S'y ajoutent les NÉOCLOUDS (location de
-            #     calcul GPU), entrés le 01/08/2026 sur décision propriétaire,
-            #     qui a supprimé la règle d'exclusion des historiques < 5 ans :
-            #     la fiche affiche à la place que la droite de régression n'est
-            #     pas exploitable en l'état.
-            #     - CRWV  ~39 Md$, IPO mars 2025 (1,3 an)
-            #     - NBIS  ~48 Md$, reprise oct. 2024 (1,8 an) — ex-Yandex
-            #     - SHAZ  ~1,5 Md$, 0,4 an (~100 séances) : sous le plancher
-            #       TECHNIQUE du screener (MM200/RSI exigent ~200 séances). Il
-            #       restera déclaré-non-scoré jusqu'à ~février 2027 — le run
-            #       l'écartera proprement à chaque semaine d'ici là. Exception
-            #       assumée aussi sur le seuil des 25 Md$.
-            "DELL", "HPE", "EQIX", "DLR",
-            "CRWV", "NBIS", "SHAZ",
-            # 6 — Plateformes et cloud : les hyperscalers qui commandent et
-            #     exploitent les centres de données. Leur place est défendable
-            #     parce que leurs capex SONT la dépense d'infrastructure — ils
-            #     possèdent les bâtiments. La couche logicielle au-dessus
-            #     (PLTR, SNOW, DDOG, MDB, NET) est sortie le 01/08/2026 : c'est
-            #     un pari sur les USAGES, exactement ce que la thèse dit ne pas
-            #     faire. Ces cinq titres restent scorés comme candidats au
-            #     top 30 et formeraient le noyau d'un futur thème Cloud & Data.
-            "MSFT", "GOOGL", "AMZN", "META", "ORCL",
-            # 7 — Énergie, conversion et refroidissement : du réseau haute
-            #     tension jusqu'à l'étage d'alimentation du rack.
-            # NEE sorti le 01/08/2026 : premier développeur renouvelable au
-            # monde, il contredisait frontalement le texte des biais (« la
-            # production d'électricité renouvelable est exclue — pari de
-            # politique publique »). VST reste : il vend des électrons aux
-            # centres de données, c'est la thèse, pas un pari réglementaire.
-            "VRT", "ETN", "SU.PA", "SIE.DE", "ABBN.SW", "ENR.DE",
-            "PWR", "VST", "CCJ",
-            "MPWR", "ON", "IFX.DE",
+        # STRUCTURE PAR MAILLON (01/08/2026) : la chaîne était documentée en
+        # commentaires — elle devient une DONNÉE, publiée dans universe.json,
+        # pour que le site affiche la liste par couche. L'ordre des maillons
+        # est l'ordre physique de la chaîne, c'est lui la pédagogie. Le champ
+        # "tickers" attendu par tout le reste du code est dérivé plus bas
+        # (concaténation dans l'ordre) — une seule source de vérité.
+        "maillons": [
+            {
+                # Les processeurs de l'entraînement et de l'inférence.
+                "label": "Calcul",
+                "tickers": ["NVDA", "AVGO", "AMD", "MRVL", "QCOM", "INTC"],
+            },
+            {
+                # L'assemblage 2.5D/3D est le goulot le plus contraignant de la
+                # chaîne : ce n'est pas la gravure qui rationne les livraisons
+                # d'accélérateurs, c'est la capacité d'assemblage et les
+                # substrats. Ce maillon était absent de la première version.
+                "label": "Fonderie, équipement & packaging",
+                "tickers": ["TSM", "ASML.AS", "AMAT", "LRCX", "KLAC", "TER", "ASM.AS",
+                            "8035.T", "6857.T", "SNPS", "CDNS",
+                            "ASX", "6146.T", "4062.T"],
+            },
+            {
+                # La brique vendue au prix spot.
+                "label": "Mémoire & stockage",
+                "tickers": ["MU", "000660.KS", "005930.KS", "WDC", "STX", "NTAP", "4063.T"],
+            },
+            {
+                # Ce qui relie les accélérateurs entre eux, et limite la taille
+                # des clusters d'entraînement autant que le nombre de puces.
+                "label": "Réseau & interconnexion optique",
+                "tickers": ["ANET", "COHR", "LITE", "CIEN", "CSCO"],
+            },
+            {
+                # Ce qu'on assemble et le bâtiment qui l'héberge — la dépense
+                # atterrit littéralement là. S'y ajoutent les NÉOCLOUDS
+                # (location de calcul GPU), entrés le 01/08/2026 sur décision
+                # propriétaire, qui a supprimé la règle d'exclusion des
+                # historiques < 5 ans : la fiche affiche à la place que la
+                # droite de régression n'est pas exploitable en l'état.
+                #   - CRWV  ~39 Md$, IPO mars 2025 (1,3 an)
+                #   - NBIS  ~48 Md$, reprise oct. 2024 (1,8 an) — ex-Yandex
+                #   - SHAZ  ~1,5 Md$, 0,4 an (~100 séances) : sous le plancher
+                #     TECHNIQUE du screener (MM200/RSI exigent ~200 séances).
+                #     Déclaré-non-scoré jusqu'à ~février 2027 — le run
+                #     l'écartera proprement chaque semaine d'ici là. Exception
+                #     assumée aussi sur le seuil des 25 Md$.
+                "label": "Serveurs, data centers & néoclouds",
+                "tickers": ["DELL", "HPE", "EQIX", "DLR",
+                            "CRWV", "NBIS", "SHAZ"],
+            },
+            {
+                # Les hyperscalers qui commandent et exploitent les centres de
+                # données. Leur place est défendable parce que leurs capex SONT
+                # la dépense d'infrastructure — ils possèdent les bâtiments.
+                # La couche logicielle au-dessus (PLTR, SNOW, DDOG, MDB, NET)
+                # est sortie le 01/08/2026 : c'est un pari sur les USAGES,
+                # exactement ce que la thèse dit ne pas faire. Ces cinq titres
+                # restent scorés comme candidats au top 30 et formeraient le
+                # noyau d'un futur thème Cloud & Data.
+                "label": "Plateformes & cloud",
+                "tickers": ["MSFT", "GOOGL", "AMZN", "META", "ORCL"],
+            },
+            {
+                # Du réseau haute tension jusqu'à l'étage d'alimentation du
+                # rack. NEE sorti le 01/08/2026 : premier développeur
+                # renouvelable au monde, il contredisait frontalement le texte
+                # des biais (« la production d'électricité renouvelable est
+                # exclue — pari de politique publique »). VST reste : il vend
+                # des électrons aux centres de données, c'est la thèse, pas un
+                # pari réglementaire.
+                "label": "Énergie, conversion & refroidissement",
+                "tickers": ["VRT", "ETN", "SU.PA", "SIE.DE", "ABBN.SW", "ENR.DE",
+                            "PWR", "VST", "CCJ",
+                            "MPWR", "ON", "IFX.DE"],
+            },
         ],
     },
     {
@@ -166,6 +190,13 @@ THEMES_CURES = [
         ],
     },
 ]
+
+# Dérivation du champ "tickers" pour les thèmes structurés par maillon : tout
+# le reste du code (univers, projection, agent, tests) lit th["tickers"] — la
+# structure par couche ne doit pas créer une seconde source de vérité.
+for _th in THEMES_CURES:
+    if "maillons" in _th:
+        _th["tickers"] = [t for _m in _th["maillons"] for t in _m["tickers"]]
 
 # ── THÈMES CALCULÉS ──────────────────────────────────────────────────────────
 # Aucun n'est publié dans cette version. Le mécanisme reste en place côté
@@ -272,6 +303,11 @@ def meta_publique():
             "biais":      th["biais"],
             "regle_texte": th.get("regle_texte", ""),
             "declares":   len(th.get("tickers", [])),
+            # Structure par couche (optionnelle) : le site groupe le rail par
+            # maillon quand elle est présente. Tickers DÉCLARÉS — le front
+            # n'affiche que ceux réellement scorés (membres publiés).
+            **({"maillons": [{"label": m["label"], "tickers": list(m["tickers"])}
+                             for m in th["maillons"]]} if "maillons" in th else {}),
         })
     return out
 
