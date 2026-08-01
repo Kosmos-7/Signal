@@ -47,12 +47,15 @@ THEMES_CURES = [
         "kind": "these",
         "thesis": (
             "La dépense en intelligence artificielle finit toujours par acheter des choses "
-            "physiques : des puces, des machines pour les graver, de la mémoire, des câbles, "
-            "des baies, du courant et du refroidissement. Ce thème suit cette chaîne maillon par "
-            "maillon plutôt que de parier sur les usages, parce que c'est là que la dépense "
-            "atterrit avec le moins d'incertitude. Les couches les plus rares — lithographie "
-            "avancée, fonderie de pointe, mémoire haute bande passante, raccordement électrique — "
-            "sont aussi celles où le pouvoir de fixation des prix est le plus fort."
+            "physiques : des puces, des machines pour les graver ET LES ASSEMBLER, de la mémoire, "
+            "de la fibre, des serveurs, des bâtiments, du courant et du refroidissement. Ce thème "
+            "suit cette chaîne maillon par maillon plutôt que de parier sur les usages, parce que "
+            "c'est là que la dépense atterrit avec le moins d'incertitude. Les couches les plus "
+            "rares — lithographie avancée, assemblage 2.5D/3D, mémoire haute bande passante, "
+            "interconnexion optique, raccordement électrique — sont aussi celles où le pouvoir de "
+            "fixation des prix est le plus fort. Contre-intuitif mais documenté : ce qui rationne "
+            "les livraisons d'accélérateurs n'est pas la gravure, c'est la capacité d'assemblage "
+            "et les substrats."
         ),
         "inversion": (
             "Le retour sur investissement applicatif ne se matérialise pas et les hyperscalers "
@@ -73,19 +76,32 @@ THEMES_CURES = [
         "tickers": [
             # 1 — Calcul : les processeurs de l'entraînement et de l'inférence
             "NVDA", "AVGO", "AMD", "MRVL", "QCOM", "INTC",
-            # 2 — Fonderie, équipement et outils de conception : le goulot amont
+            # 2 — Fonderie, équipement, outils de conception ET PACKAGING AVANCÉ.
+            #     L'assemblage 2.5D/3D est le goulot le plus contraignant de la
+            #     chaîne : ce n'est pas la gravure qui rationne les livraisons
+            #     d'accélérateurs, c'est la capacité d'assemblage et les
+            #     substrats. Ce maillon était absent de la première version.
             "TSM", "ASML.AS", "AMAT", "LRCX", "KLAC", "TER", "ASM.AS",
             "8035.T", "6857.T", "SNPS", "CDNS",
+            "ASX", "6146.T", "4062.T",
             # 3 — Mémoire et stockage : la brique vendue au prix spot
             "MU", "000660.KS", "005930.KS", "WDC", "STX", "NTAP", "4063.T",
-            # 4 — Réseau et interconnexion : ce qui relie les accélérateurs
-            "ANET",
-            # 5 — Plateformes, données et cloud : qui commande et qui exploite
+            # 4 — Réseau et interconnexion optique : ce qui relie les
+            #     accélérateurs entre eux, et limite la taille des clusters
+            #     d'entraînement autant que le nombre de puces.
+            "ANET", "COHR", "LITE", "CIEN", "CSCO",
+            # 5 — Serveurs et immobilier de centre de données : ce qu'on
+            #     assemble et le bâtiment qui l'héberge — la dépense atterrit
+            #     littéralement là.
+            "DELL", "HPE", "EQIX", "DLR",
+            # 6 — Plateformes, données et cloud : qui commande et qui exploite
             "MSFT", "GOOGL", "AMZN", "META", "ORCL", "PLTR",
-            "SNOW", "DDOG", "MDB", "NET", "EQIX",
-            # 6 — Énergie, raccordement et refroidissement : la contrainte physique
+            "SNOW", "DDOG", "MDB", "NET",
+            # 7 — Énergie, conversion et refroidissement : du réseau haute
+            #     tension jusqu'à l'étage d'alimentation du rack.
             "VRT", "ETN", "SU.PA", "SIE.DE", "ABBN.SW", "ENR.DE",
             "PWR", "VST", "NEE", "CCJ",
+            "MPWR", "ON", "IFX.DE",
         ],
     },
     {
@@ -153,12 +169,31 @@ THEMES_CALCULES = []
 # CEG et GEV sont les deux acteurs les plus lisibles du raccordement électrique
 # de l'IA, et leur absence ampute le maillon « énergie » du thème infra-IA.
 # CEG franchira les 5 ans en 2027, GEV en 2029.
+#
+# Complément du 01/08 (26 candidats éprouvés pour combler les maillons réseau,
+# packaging, serveurs et conversion de puissance) : 21 retenus, 5 recalés.
+# La perte la plus sensible est ARM — 256 Md$ de capitalisation, mais introduit
+# en bourse en 2023, donc 2,9 ans d'historique. Le maillon « calcul » se prive
+# ainsi du concepteur de l'architecture CPU dominante. Il sera éligible en 2028.
 ECARTES_VALIDATION = {
     "CEG":     "historique 4,5 ans < 5 ans requis (scission 2022)",
     "GEV":     "historique 2,3 ans < 5 ans requis (scission 2024)",
     "ROG.SW":  "symbole introuvable chez Yahoo — remplacé par l'ADR RHHBY",
-    "BESI.AS": "capitalisation ~17 Md$ < seuil 25 Md$",
+    "BESI.AS": "capitalisation ~17 Md$ < seuil 25 Md$ (collage hybride)",
     "EFX":     "capitalisation ~20 Md$ < seuil 25 Md$",
+    # Complément du 01/08
+    "ARM":     "historique 2,9 ans < 5 ans requis (IPO 2023) — éligible en 2028",
+    "ALAB":    "historique 2,4 ans < 5 ans requis (IPO 2024)",
+    "CRDO":    "historique 4,5 ans < 5 ans requis — éligible en 2027",
+    "GFS":     "historique 4,8 ans < 5 ans requis — éligible fin 2026",
+    "AMKR":    "capitalisation ~12 Md$ < seuil 25 Md$ (assemblage)",
+    "6920.T":  "capitalisation ~23 Md$ < seuil 25 Md$ (inspection de masques EUV)",
+    "FN":      "capitalisation ~16 Md$ < seuil 25 Md$ (sous-traitance optique)",
+    "SMCI":    "capitalisation ~18 Md$ < seuil 25 Md$ (serveurs)",
+    "NVT":     "capitalisation ~25 Md$, au seuil — écarté faute de marge",
+    "HUBB":    "capitalisation ~25 Md$, au seuil — écarté faute de marge",
+    "MOD":     "capitalisation ~11 Md$ < seuil 25 Md$ (refroidissement)",
+    "8036.T":  "symbole introuvable chez Yahoo",
 }
 
 THEMES = THEMES_CURES + THEMES_CALCULES
