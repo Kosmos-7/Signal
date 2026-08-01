@@ -1634,6 +1634,19 @@ def main():
               f"panne de source probable, publication interrompue.")
         raise SystemExit(1)
 
+    # Ne publier que les titres RÉELLEMENT listés par au moins un thème. Un titre
+    # retenu par la règle d'un thème calculé mais recalé hors des 12 publiés se
+    # retrouvait dans `stocks` sans figurer dans aucune liste de membres :
+    # inatteignable depuis le site, mais suffisant pour déclencher la génération
+    # d'une fiche éditoriale payante et pour entrer dans l'univers achetable de
+    # l'agent. Tout ce qui est publié ici doit être joignable.
+    publies = {t for th in themes_publies for t in th["members"]}
+    ecartes = sorted(set(par_ticker) - publies)
+    if ecartes:
+        print(f"  ℹ️  {len(ecartes)} titre(s) retenus par une règle mais hors des listes "
+              f"publiées — non exposés : {', '.join(ecartes)}")
+    par_ticker = {k: v for k, v in par_ticker.items() if k in publies}
+
     universe = {
         "updated_at":        str(d),
         "week":              f"Sem. {d.isocalendar()[1]} · {d.year}",

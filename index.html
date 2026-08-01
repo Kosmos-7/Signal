@@ -802,10 +802,21 @@ function compactMetrics(s){const b=s.breakdown||{},u=s._u||{};
     mk('RSI',f(b.rsi,0))+
     mk('Objectif consensus',(b.target_upside_pct==null?'—':fs(b.target_upside_pct,0)+'%')+(b.target_analysts?' ('+b.target_analysts+')':''))+
   '</div><div class="metrics-note">Chiffres issus du même run du screener que la watchlist principale'+(U.updated_at?' ('+sv(U.updated_at)+')':'')+'. Croissance, marges et bilan détaillés ne sont pas publiés dans les vues thématiques.</div>';}
+/* Titre sans AUCUNE fiche : ne devrait plus arriver depuis que l'éditorial
+   couvre tout l'univers tagué, mais un run partiel (budget de temps épuisé)
+   peut encore laisser un titre sans texte. On le dit plutôt que d'afficher
+   une page à trous. */
 function liteNote(){
-  return '<div class="lite-note"><h4>Analyse détaillée réservée à la watchlist principale</h4>'+
-  '<p>Ce titre est scoré par exactement la même méthode que les autres — les chiffres ci-dessus sortent du même run. En revanche, l\'analyse éditoriale (business, perspectives, thèse haussière et baissière) et le graphique de canal de régression ne sont produits que pour les titres de la <a href="'+hashOf(MAIN)+'">watchlist principale</a>.</p>'+
-  '<p>C\'est un choix assumé : écrire une analyse tenable coûte du temps, et une fiche bâclée vaut moins que pas de fiche. <a href="apprendre.html">Comment lire ces chiffres →</a></p></div>';
+  return '<div class="lite-note"><h4>Analyse pas encore rédigée</h4>'+
+  '<p>Ce titre est scoré par exactement la même méthode que les autres — les chiffres ci-dessus sortent du même run. Son analyse rédigée n\'a simplement pas encore été produite : elles sont générées par ordre de priorité à chaque mise à jour hebdomadaire, et celle-ci attend son tour.</p>'+
+  '<p><a href="apprendre.html">Comment lire ces chiffres →</a></p></div>';
+}
+/* Note de bas de fiche pour le niveau « thematique » : la rubrique Actu est
+   absente par construction, pas par oubli — aucune source datée n'est
+   collectée pour ces titres, et on ne fabrique pas d'actualité. */
+function briefNote(){
+  return '<div class="lite-note"><h4>Fiche courte</h4>'+
+  '<p>Ce titre appartient à une watchlist thématique sans figurer dans le <a href="'+hashOf(MAIN)+'">top 30</a>. Son analyse couvre le business, les perspectives et les deux thèses ; la revue d\'actualité, elle, n\'est produite que pour la watchlist principale — faute de source datée collectée pour ce titre, elle serait inventée.</p></div>';
 }
 /* Bandeau de thème au-dessus de la fiche. La vue liste intermédiaire a été
    supprimée (elle dupliquait le rail), mais la thèse, son inversion et ses
@@ -837,9 +848,15 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   const bb=(a&&(a.bull||a.bear))?'<div class="bullbear"><div class="bb bb-bull"><div class="bb-h">▲ Thèse haussière</div>'+bblist(a.bull)+'</div><div class="bb bb-bear"><div class="bb-h">▼ Thèse baissière</div>'+bblist(a.bear)+'</div></div>':'';
   // recouvrement des thèmes, visible depuis la fiche elle-même
   const tt=themesOf(s.ticker).map(id=>{const t=TBY[id];return t?'<a class="ttag" href="'+hashOf(id)+'">'+sv(t.label)+'</a>':'';}).join('');
-  const prose=(compact&&!hasEd)?'<div class="prose">'+liteNote()+'</div>'
+  // Trois cas, distingués par le niveau de fiche publié par le générateur.
+  // Une fiche « thematique » n'a PAS de rubrique Actu par construction : aucune
+  // source datée n'est collectée pour ces titres. Afficher « À générer » y
+  // serait un mensonge — cette rubrique ne viendra jamais.
+  const brief=(a&&a._niveau==='thematique');
+  const prose=!hasEd?'<div class="prose">'+liteNote()+'</div>'
     :'<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
-      '<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div></div>';
+      (brief?'':'<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div>')+'</div>'+
+      (brief?briefNote():'');
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+

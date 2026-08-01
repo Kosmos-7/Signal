@@ -1118,8 +1118,7 @@ def main():
         analyses = {}
 
     guide = load_guide()
-    niveau_de = {s["ticker"]: n for s, n in items}
-    current_tickers = set(niveau_de)
+    current_tickers = {s["ticker"] for s, _ in items}
 
     # 1) PURGE des orphelins (tickers qui ne sont plus publiés nulle part)
     #    Garde-fou : sans universe.json, on ne peut pas distinguer un orphelin d'un
@@ -1141,6 +1140,7 @@ def main():
     #    - signature identique ET entrée complète     -> on garde tel quel (0 appel API)
     todo = []
     unmarked = 0
+    niveaux_poses = 0
     for s, niveau in items:
         tk = s["ticker"]
         existing = analyses.get(tk)
@@ -1154,7 +1154,11 @@ def main():
         else:
             # À jour et complet. On (re)pose le niveau au cas où une entrée legacy ne
             # le porterait pas encore — le front doit toujours savoir à quoi s'attendre.
-            existing.setdefault("_niveau", niveau)
+            # C'est compté : une mutation qui ne déclencherait pas d'écriture serait
+            # perdue en silence au prochain chargement.
+            if "_niveau" not in existing:
+                existing["_niveau"] = niveau
+                niveaux_poses += 1
             if existing.pop("_perime", None):
                 # Elle portait une marque de péremption d'un run précédent : soit elle a
                 # été régénérée depuis, soit sa signature est revenue à sa valeur
@@ -1173,15 +1177,18 @@ def main():
     print(f"📋 Couverture : {len(current_tickers)} tickers — "
           f"{len(todo)} à (re)générer ({n_complets} complète(s), {len(todo) - n_complets} thématique(s)), "
           f"{kept} inchangé(s) conservé(s)"
-          + (f", {unmarked} marque(s) de péremption levée(s)." if unmarked else "."))
+          + (f", {unmarked} marque(s) de péremption levée(s)" if unmarked else "")
+          + (f", {niveaux_poses} niveau(x) renseigné(s) sur des entrées legacy" if niveaux_poses else "")
+          + ".")
 
     etat = Etat(analyses)
 
     if not todo:
-        # Rien à régénérer ; on réécrit si on a purgé des orphelins ou levé des marques.
-        if orphans or unmarked:
+        # Rien à régénérer ; on réécrit si on a purgé des orphelins, levé des marques
+        # ou complété des entrées legacy — sinon la mutation en mémoire serait perdue.
+        if orphans or unmarked or niveaux_poses:
             etat.ecrire()
-            print("✅ analyses.json mis à jour (purge orphelins / péremptions levées).")
+            print("✅ analyses.json mis à jour (purge orphelins / péremptions levées / niveaux posés).")
         else:
             print("✅ Rien à faire — analyses.json déjà à jour.")
         return
@@ -1199,11 +1206,8 @@ def main():
               f"{len(todo)} fiche(s) — projection initiale ≈ {projection / 60:.0f} min "
               f"(hypothèse pessimiste {FIRST_TICKER_COST_S:.0f}s/fiche, réajustée en cours de run).")
 
-    prechauffer_cache(guide)
-
     durations = []
-    skipped = []
-    i = 0
+    i = 0                      # index de la 1re fiche NON soumise -> todo[i:] = reportées
     stop_soumission = False
 
     def _tache(stock, niveau):
@@ -1237,6 +1241,7 @@ def main():
 
     executor = ThreadPoolExecutor(max_workers=workers, thread_name_prefix="fiche")
     en_vol = {}
+    prechauffe_faite = len(todo) < 2      # une seule fiche : rien à mutualiser
     try:
         while True:
             # Remplissage du pool. On n'ENTAME une fiche que si on estime pouvoir la
@@ -1258,6 +1263,12 @@ def main():
                     if ecoule + estimation > budget:
                         stop_soumission = True
                         break
+                if not prechauffe_faite:
+                    # Juste avant la PREMIÈRE requête, et pas plus tôt : si le budget
+                    # était déjà épuisé, on ne veut pas avoir payé une écriture de
+                    # cache pour un run qui ne génère rien.
+                    prechauffer_cache(guide)
+                    prechauffe_faite = True
                 s, reason, niveau = todo[i]
                 i += 1
                 print(f"  ✍️  {s['ticker']} ({reason}, {niveau}) — score {s.get('score','?')}…",
