@@ -5,6 +5,61 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.5.0] — 2026-08-01
+
+### Watchlists thématiques — une homepage, treize vues, un seul moteur
+
+Jusqu'ici Signal publiait une liste : le top 30 d'un univers de 133 titres.
+L'univers passe à 210 titres et se lit désormais par thèse d'investissement,
+sans qu'aucun titre ne soit scoré deux fois.
+
+- **Architecture « un seul scoring, N projections »** : `themes.py` devient la
+  source unique de vérité, l'univers du screener en est dérivé, et une
+  watchlist thématique n'est qu'un filtre + tri sur les mêmes résultats. Coût
+  API marginal : zéro pour tout titre déjà présent. `watchlist.json` est
+  strictement inchangé — trois consommateurs lisent son contrat en dur.
+- **13 watchlists** : 11 curées (semi-conducteurs, mémoire & stockage, IA,
+  robotique, finance, monopoles d'information, compounders industriels,
+  consommation, santé, défense, électrification) et 2 **calculées** par une
+  règle chiffrée sur le breakdown, donc sans aucune liste à maintenir : décote
+  vs tendance et qualité durable. Ces deux-là sortent de notre propre moteur.
+- **Chaque thème publie sa thèse, son inversion et ses biais.** L'inversion
+  — ce qui invaliderait la thèse — est obligatoire : c'est le garde-fou
+  anti-promotion. Mémoire et défense sont publiés en statut « observation »,
+  leur catalyseur étant largement consommé.
+- **Nommage** : le thème « moat » demandé devient *Compounders industriels*.
+  Le screener mesure des marges, un ROE et un endettement — ni la durabilité,
+  ni l'avantage concurrentiel. Même refus d'emprunt de vocabulaire que pour
+  « marge de sécurité ». *Tech* est écarté (c'est le pool par défaut : 15 des
+  30 titres actuels) et *Water* aussi (4 titres éligibles au-dessus de 25 Md$).
+- **Univers achetable élargi** : l'agent peut acheter les ~190 titres tagués,
+  via une union explicite — la garde anti-hallucination n'est pas assouplie, et
+  un titre sans secteur n'est pas rendu achetable. Le prompt explicite le piège
+  du choix élargi (Barber & Odean) : plus de candidats n'autorise pas plus de
+  décisions.
+- **Concentration thématique**, angle mort de la règle R1 : les thèmes
+  transverses se répartissent sur quatre secteurs Yahoo, donc R1 ne les voit
+  jamais comme un bloc alors que leurs composants baissent ensemble. Toute
+  thèse pesant plus de 25 % du capital est signalée.
+- **Devises JPY et KRW** (places de Tokyo et Séoul), jamais gérées jusqu'ici :
+  sans elles un titre japonais était traité en dollars, soit un facteur ~150
+  d'erreur. Le code « TSE » est volontairement écarté de la détection — il
+  désigne Tokyo chez certains fournisseurs et Toronto chez d'autres.
+- **Validation préalable des symboles** (`validate_tickers.py` + workflow
+  dédié) : l'environnement de développement n'ayant pas accès à Yahoo, les 81
+  nouveaux symboles ont été confrontés à l'API réelle depuis un runner avant
+  tout élargissement. 78 validés ; CEG, GEV (historique trop court), ROG.SW
+  (symbole introuvable, remplacé par l'ADR RHHBY), BESI.AS et EFX
+  (capitalisation sous le seuil) écartés — avec leur motif publié.
+- **Garde de couverture par thème** : le seuil global de 60 % ne protégeait
+  plus rien à 210 titres (il faudrait en perdre 84 avant d'échouer), donc un
+  thème vidé par une panne de place serait publié vide, job vert — le mode de
+  panne exact de l'incident du 27/07. Un thème sous 70 % est publié avec sa
+  bannière ; trois thèmes dégradés font échouer le run.
+- **Sleep Finnhub conditionné** aux appels réellement émis : 61 titres non-US
+  court-circuitent la requête sans consommer de quota, soit 30 s de run
+  récupérées chaque semaine.
+
 ## [3.4.0] — 2026-07-31
 
 ### L'agent dimensionne ses achats — règles assouplies, prose fiabilisée
