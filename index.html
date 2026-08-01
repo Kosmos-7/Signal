@@ -152,13 +152,10 @@
   .tc-img{aspect-ratio:auto;width:31%;max-width:340px;min-height:158px;border-bottom:0;border-right:1px solid var(--line)}
   .tc-b{padding:1.05rem 1.3rem 1.1rem;gap:.55rem}
   .tc-th{-webkit-line-clamp:2;line-clamp:2;max-width:760px}
-  .tcard.tc-main{border-color:rgba(116,182,223,.3);background:rgba(116,182,223,.045)}
-  .tcard.tc-main:hover{border-color:rgba(116,182,223,.55);background:rgba(116,182,223,.07)}
-  .tc-main .tc-img{width:38%;max-width:420px;min-height:190px}
-  .tc-main .tc-b{padding:1.35rem 1.5rem 1.3rem;gap:.62rem}
-  .tc-main .tc-l{font-size:1.85rem}
-  .tc-main .tc-th{font-size:.95rem;-webkit-line-clamp:3;line-clamp:3;max-width:640px}
-  .tc-main .tc-s{font-size:.68rem}
+  /* La watchlist principale n'a plus ni taille ni traitement particuliers :
+     toutes les cartes sont strictement identiques. Elle reste identifiable par
+     son contenu — son intitulé et son étiquette PRINCIPALE — plutôt que par un
+     habillage qui la ferait passer pour une catégorie à part. */
 
   /* bandeau de thème au-dessus de la fiche (remplace la vue liste supprimée) */
   .tbar{border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.018);margin:.1rem 0 1.1rem}
@@ -231,12 +228,9 @@
     .home-t{font-size:2.05rem}
     .tgrid{gap:.85rem;margin-top:1.3rem}
     /* sous 900 px la mise en page horizontale ne tient plus : image au-dessus */
-    .tcard,.tcard.tc-main{flex-direction:column}
-    .tc-img,.tc-main .tc-img{width:auto;max-width:none;aspect-ratio:16/9;min-height:0;border-right:0;border-bottom:1px solid var(--line)}
+    .tcard{flex-direction:column}
+    .tc-img{width:auto;max-width:none;aspect-ratio:16/9;min-height:0;border-right:0;border-bottom:1px solid var(--line)}
     .tc-b{padding:1rem 1.05rem 1.1rem}
-    .tc-main .tc-b{padding:1rem 1.05rem 1.1rem}
-    .tc-main .tc-l{font-size:1.45rem}
-    .tc-main .tc-th{font-size:.88rem}
     .wl-t{font-size:1.9rem}
     body.v-index .rail{display:none}          /* la liste large fait déjà le travail */
     body.v-index .stage{margin-top:4.6rem}
