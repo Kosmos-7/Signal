@@ -111,7 +111,11 @@ def valide(ticker):
         if cap:
             # Capitalisation renvoyée en devise locale : conversion grossière
             # suffisante pour un contrôle de seuil.
-            approx = {"JPY": 150, "KRW": 1350, "GBp": 79, "GBP": 0.79,
+            # Yahoo renvoie marketCap dans la devise de COTATION, mais jamais en
+            # pence : pour une valeur londonienne cotée en GBp, la capitalisation
+            # est en livres. Diviser par 79 la sous-estimait d'un facteur 100 —
+            # BAE Systems ressortait à 0,8 Md$ lors de la validation du 01/08.
+            approx = {"JPY": 150, "KRW": 1350, "GBp": 0.79, "GBP": 0.79,
                       "EUR": 0.92, "CHF": 0.88, "DKK": 6.9, "SEK": 10.5, "NOK": 10.8}
             cap_usd = cap / approx.get(devise_yahoo, 1.0)
             r["cap_usd_approx_md"] = round(cap_usd / 1e9, 1)
