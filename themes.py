@@ -79,8 +79,13 @@ THEMES_CURES = [
         "maillons": [
             {
                 # Les processeurs de l'entraînement et de l'inférence.
+                # ARM réintégré le 01/08/2026 (décision propriétaire, après
+                # l'assouplissement de la règle des 5 ans) : 256 Md$, concepteur
+                # de l'architecture CPU dominante — son absence amputait ce
+                # maillon. IPO 2023, 2,9 ans : fiche avec avertissement
+                # régression.
                 "label": "Calcul",
-                "tickers": ["NVDA", "AVGO", "AMD", "MRVL", "QCOM", "INTC"],
+                "tickers": ["NVDA", "AVGO", "AMD", "ARM", "MRVL", "QCOM", "INTC"],
             },
             {
                 # L'assemblage 2.5D/3D est le goulot le plus contraignant de la
@@ -146,9 +151,15 @@ THEMES_CURES = [
                 # exclue — pari de politique publique »). VST reste : il vend
                 # des électrons aux centres de données, c'est la thèse, pas un
                 # pari réglementaire.
+                # CEG et GEV réintégrés le 01/08/2026 (même décision que ARM) :
+                # les deux acteurs les plus lisibles du raccordement électrique
+                # de l'IA, écartés jusqu'ici par la règle des 5 ans (scissions
+                # 2022 et 2024 — 4,5 et 2,3 ans d'historique). CEG vend des
+                # électrons nucléaires aux data centers, comme VST : c'est la
+                # thèse, pas le pari renouvelable que les biais excluent.
                 "label": "Énergie, conversion & refroidissement",
                 "tickers": ["VRT", "ETN", "SU.PA", "SIE.DE", "ABBN.SW", "ENR.DE",
-                            "PWR", "VST", "CCJ",
+                            "PWR", "VST", "CEG", "GEV", "CCJ",
                             "MPWR", "ON", "IFX.DE"],
             },
         ],
@@ -211,36 +222,25 @@ THEMES_CALCULES = []
 
 # ── ÉCARTÉS APRÈS VALIDATION (run CI du 2026-08-01, 81 symboles testés) ──────
 # Ces titres avaient leur place dans une thèse mais échouent aux critères
-# d'inclusion publics du projet. Ils sont listés ici plutôt que supprimés en
-# silence : quelqu'un les cherchera, et l'absence doit avoir une raison lisible.
+# d'inclusion du projet. Ils sont listés ici plutôt que supprimés en silence :
+# quelqu'un les cherchera, et l'absence doit avoir une raison lisible.
 #
-#   CEG      Constellation Energy — 4,5 ans d'historique (scission 2022) < 5 ans
-#   GEV      GE Vernova          — 2,3 ans d'historique (scission 2024) < 5 ans
-#   ROG.SW   Roche               — symbole introuvable côté Yahoo ; remplacé par
-#                                  l'ADR américain RHHBY, servi normalement
-#   BESI.AS  BE Semiconductor    — ~17 Md$ de capitalisation < seuil 25 Md$
-#   EFX      Equifax             — ~20 Md$ de capitalisation < seuil 25 Md$
-#
-# CEG et GEV sont les deux acteurs les plus lisibles du raccordement électrique
-# de l'IA, et leur absence ampute le maillon « énergie » du thème infra-IA.
-# CEG franchira les 5 ans en 2027, GEV en 2029.
-#
-# Complément du 01/08 (26 candidats éprouvés pour combler les maillons réseau,
-# packaging, serveurs et conversion de puissance) : 21 retenus, 5 recalés.
-# La perte la plus sensible est ARM — 256 Md$ de capitalisation, mais introduit
-# en bourse en 2023, donc 2,9 ans d'historique. Le maillon « calcul » se prive
-# ainsi du concepteur de l'architecture CPU dominante. Il sera éligible en 2028.
+# HISTORIQUE DU REGISTRE — CEG, GEV et ARM y ont figuré quelques heures : tous
+# trois écartés le matin du 01/08 par la règle « historique < 5 ans », tous
+# trois RÉINTÉGRÉS le soir même, après que cette règle est devenue un simple
+# avertissement (cf. note plus bas). ARM (256 Md$) rejoint le maillon calcul,
+# CEG et GEV le maillon énergie — leurs fiches porteront l'avertissement
+# régression tant que leurs historiques resteront courts.
 ECARTES_VALIDATION = {
-    "CEG":     "historique 4,5 ans < 5 ans requis (scission 2022)",
-    "GEV":     "historique 2,3 ans < 5 ans requis (scission 2024)",
     "ROG.SW":  "symbole introuvable chez Yahoo — remplacé par l'ADR RHHBY",
     "BESI.AS": "capitalisation ~17 Md$ < seuil 25 Md$ (collage hybride)",
     "EFX":     "capitalisation ~20 Md$ < seuil 25 Md$",
-    # Complément du 01/08
-    "ARM":     "historique 2,9 ans < 5 ans requis (IPO 2023) — éligible en 2028",
-    "ALAB":    "historique 2,4 ans < 5 ans requis (IPO 2024)",
-    "CRDO":    "historique 4,5 ans < 5 ans requis — éligible en 2027",
-    "GFS":     "historique 4,8 ans < 5 ans requis — éligible fin 2026",
+    # Complément du 01/08 — recevables depuis l'assouplissement de la règle
+    # des 5 ans, mais PAS réintégrés d'office : chacun attend une décision
+    # explicite (contrairement à ARM/CEG/GEV, réintégrés sur demande).
+    "ALAB":    "historique 2,4 ans (IPO 2024) — recevable depuis le 01/08, en attente de décision",
+    "CRDO":    "historique 4,5 ans — recevable depuis le 01/08, en attente de décision",
+    "GFS":     "historique 4,8 ans — recevable depuis le 01/08, en attente de décision",
     "AMKR":    "capitalisation ~12 Md$ < seuil 25 Md$ (assemblage)",
     "6920.T":  "capitalisation ~23 Md$ < seuil 25 Md$ (inspection de masques EUV)",
     "FN":      "capitalisation ~16 Md$ < seuil 25 Md$ (sous-traitance optique)",
