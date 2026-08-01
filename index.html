@@ -776,7 +776,11 @@ function drawChart(s){
     const setDot=(dot,q)=>{if(q&&q[0]>=t0v){dot.setAttribute('cx',X(q[0]));dot.setAttribute('cy',Y(q[1]));dot.setAttribute('visibility','visible');}else dot.setAttribute('visibility','hidden');};
     setDot(hoverG.dot21,m21);setDot(hoverG.dot200,m200);
     tip.innerHTML='<span class="d">'+fmt(t)+'</span><br>● Cours&nbsp;: <span class="c">'+p.toFixed(p<10?2:0)+sym+'</span><br>'
-      +(tv?'◌ Tendance&nbsp;: <span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span> · écart '+((p/tv-1)*100>0?'+':'')+((p/tv-1)*100).toFixed(0)+' %':'◌ période trop courte pour une tendance')
+      // « si retour à la tendance : +33 % » plutôt que « écart −25 % » : même
+      // information, lue dans le sens utile — le potentiel si le cours rejoint
+      // sa droite. Le conditionnel est la partie honnête de la phrase : la
+      // tendance est une trajectoire passée, pas un objectif (règle 14).
+      +(tv?'◌ Tendance&nbsp;: <span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span><br>&nbsp;&nbsp;&nbsp;si retour à la tendance&nbsp;: <span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>':'◌ période trop courte pour une tendance')
       +(m21&&m200?'<br><span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span> · <span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'');
     // positionnement APRÈS écriture du contenu (largeur réelle) : toujours d'un seul côté du réticule
     const wr=svg.parentNode.getBoundingClientRect();
