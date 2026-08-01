@@ -555,6 +555,110 @@ def cluster_for(sector):
     """Renvoie le cluster d'un secteur, ou le secteur lui-même s'il n'est pas regroupé."""
     return SECTOR_CLUSTERS.get(sector, sector)
 
+def fusionner_univers_achetable(watchlist, universe):
+    """Union top 30 + titres tagués par un thème, au format `stocks` de la watchlist.
+
+    Les entrées de universe.json sont compactes (pas de justification, pas de
+    breakdown complet). On les convertit au format attendu par le reste du
+    moteur, en marquant leur provenance (`origine`) pour que le prompt puisse
+    distinguer un titre du classement principal d'un titre thématique — les
+    deux n'ont pas le même niveau d'analyse disponible.
+
+    Le top 30 PRIME toujours : si un ticker est dans les deux, on garde l'objet
+    complet de watchlist.json.
+    """
+    stocks = list(watchlist.get("stocks", []))
+    connus = {s["ticker"] for s in stocks}
+    for s in stocks:
+        s.setdefault("origine", "top30")
+        s.setdefault("themes", [])
+
+    # Thèmes de chaque ticker, depuis les listes de membres publiées
+    themes_de = {}
+    for th in universe.get("themes", []):
+        for t in th.get("members", []):
+            themes_de.setdefault(t, []).append(th["id"])
+
+    ajoutes = 0
+    for ticker, u in (universe.get("stocks") or {}).items():
+        if ticker in connus:
+            # Déjà dans le top 30 : on enrichit seulement ses thèmes
+            for s in stocks:
+                if s["ticker"] == ticker:
+                    s["themes"] = u.get("themes", [])
+                    break
+            continue
+        secteur = u.get("secteur") or "—"
+        if secteur == "—":
+            # Sans secteur, le titre échapperait à la règle de concentration :
+            # on préfère ne pas le rendre achetable du tout.
+            continue
+        stocks.append({
+            "ticker":   ticker,
+            "name":     u.get("nom", ticker),
+            "market":   u.get("market", "—"),
+            "sector":   secteur,
+            "score":    u.get("score", 0),
+            "themes":   u.get("themes", []),
+            "origine":  "theme",
+            "breakdown": {
+                "qualite":      u.get("qualite"),
+                "valorisation": u.get("valorisation"),
+                "timing":       u.get("timing"),
+                "regression_z": u.get("z"),
+                "regression_window_years": u.get("fenetre"),
+                "decote_pct":   u.get("decote_pct"),
+                "rsi":          u.get("rsi"),
+                "cross_regime": u.get("cross"),
+                "cross_days_ago": u.get("cross_j"),
+                "target_upside_pct": u.get("upside_pct"),
+                "target_analysts":   u.get("analystes"),
+                "prix":         u.get("prix"),
+                "devise":       u.get("devise"),
+            },
+        })
+        ajoutes += 1
+
+    if ajoutes:
+        print(f"   🗂  Univers achetable élargi : {len(watchlist.get('stocks', []))} (top 30) "
+              f"+ {ajoutes} titres thématiques = {len(stocks)}")
+    return stocks
+
+
+def clusters_thematiques(positions, capital, universe):
+    """Concentration par THÈME, en complément de la concentration sectorielle.
+
+    Pourquoi c'est nécessaire : les thèmes transverses (électrification, IA) se
+    répartissent sur quatre secteurs Yahoo différents. La règle R1, qui raisonne
+    sur les secteurs, ne les verra JAMAIS comme un bloc — alors que leurs
+    composants baissent ensemble, ce qui est précisément le risque que R1 est
+    censée borner. Sans ce calcul, un portefeuille entièrement construit sur un
+    thème serait invisible au garde-fou.
+
+    Retourne : [{"theme", "label", "pct", "tickers"}], trié par poids décroissant.
+    """
+    if not capital or capital <= 0:
+        return []
+    membres = {}
+    labels = {}
+    for th in (universe.get("themes") or []):
+        labels[th["id"]] = th.get("label", th["id"])
+        for t in th.get("members", []):
+            membres.setdefault(t, set()).add(th["id"])
+
+    poids = {}
+    detail = {}
+    for p in positions:
+        for th_id in membres.get(p.get("ticker"), ()):
+            poids[th_id] = poids.get(th_id, 0) + p.get("valeur_actuelle", 0)
+            detail.setdefault(th_id, []).append(p["ticker"])
+
+    out = [{"theme": k, "label": labels.get(k, k),
+            "pct": round(v / capital * 100, 1), "tickers": detail[k]}
+           for k, v in poids.items()]
+    return sorted(out, key=lambda x: -x["pct"])
+
+
 def calculer_regles_auto(portfolio):
     """
     Règles mécaniques — s'appliquent AVANT Claude et dans executer_decisions().
@@ -887,7 +991,54 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
         )
 
     # Tickers watchlist complète
-    tickers_watchlist = [s["ticker"] for s in watchlist.get("stocks", [])]
+    # Le classement principal reste le top 30 : les titres ajoutés par un thème
+    # sont annexés en fin de liste et n'ont pas de rang. On les sépare pour
+    # que « tickers watchlist complète » garde son sens historique.
+    _stocks_all = watchlist.get("stocks", [])
+    tickers_watchlist = [s["ticker"] for s in _stocks_all if s.get("origine", "top30") == "top30"]
+
+    # ── Univers thématique offert à l'achat ─────────────────────────────────
+    themes_section = ""
+    _universe = load_json("universe.json", {})
+    if _universe.get("themes"):
+        _bd_de = {s["ticker"]: s.get("breakdown", {}) or {} for s in _stocks_all}
+        _sc_de = {s["ticker"]: s.get("score", 0) for s in _stocks_all}
+        _lignes = []
+        for th in _universe["themes"]:
+            membres = [t for t in th.get("members", []) if t in _bd_de][:6]
+            if not membres:
+                continue
+            detail = " · ".join(
+                f"{t} {_sc_de.get(t, 0)}"
+                + (f"/z{_bd_de[t]['regression_z']:+.1f}" if _bd_de[t].get("regression_z") is not None else "")
+                for t in membres)
+            deg = "  ⚠ THÈME DÉGRADÉ (couverture partielle)" if th.get("status") == "degraded" else ""
+            _lignes.append(f"  · {th['label']} [{th['id']}] — {th['scores']} titres — {detail}{deg}")
+        if _lignes:
+            themes_section = (
+                "\n## WATCHLISTS THÉMATIQUES — ÉGALEMENT ACHETABLES\n"
+                "Depuis août 2026, l'univers achetable ne se limite plus au top 30 : tu peux acheter\n"
+                "tout titre listé ci-dessous (format « TICKER score/z-score », 6 premiers par thème).\n"
+                "Ce sont les MÊMES titres, scorés par le MÊME moteur — un thème n'est qu'une vue.\n"
+                "\n"
+                "⚠️ CE QUE ÇA CHANGE POUR TOI, ET LE PIÈGE À ÉVITER :\n"
+                "  · Tes candidats à l'achat sont passés de 30 à environ 190. Les travaux sur le\n"
+                "    comportement des investisseurs particuliers (Barber & Odean) montrent que les plus\n"
+                "    actifs sous-performent d'environ 6,5 points par an. Plus de choix n'est PAS une\n"
+                "    autorisation d'agir davantage : le nombre de décisions par semaine doit rester le\n"
+                "    même, seule leur QUALITÉ doit s'améliorer.\n"
+                "  · Un titre hors top 30 n'a PAS de fiche éditoriale ni de graphique publiés. Tu ne\n"
+                "    disposes que de son score et de son breakdown — exige donc une thèse d'autant plus\n"
+                "    explicite dans `raison`, puisque le lecteur n'aura pas d'analyse détaillée à lire.\n"
+                "  · Les thèmes se RECOUVRENT (un titre appartient souvent à 2 ou 3 thèmes) et certains\n"
+                "    sont TRANSVERSES aux secteurs : deux titres de thèmes différents peuvent suivre la\n"
+                "    même thèse et baisser ensemble sans que la règle de concentration sectorielle ne\n"
+                "    le voie. La section des règles mécaniques te signale toute thèse pesant plus de\n"
+                "    25% du capital — traite-la comme une vraie concentration.\n"
+                "  · Un thème n'est PAS une recommandation. Aucun n'est justifié par un backtest, et\n"
+                "    plusieurs sont explicitement en statut « observation » (mémoire, défense : leur\n"
+                "    catalyseur est largement consommé).\n"
+                "\n" + "\n".join(_lignes) + "\n")
 
     # Historique des ordres — Claude doit voir ses décisions passées (ventes notamment)
     # pour éviter les flip-flops (vendre puis racheter sans nouvelle thèse) et apprendre
@@ -1064,6 +1215,7 @@ Positions ouvertes ({len(positions)}) :
 {ordres_section}{macro_news_section}{synthese_str}## WATCHLIST CETTE SEMAINE (top 10 sur {len(tickers_watchlist)})
 {chr(10).join(top10_lines)}
 Tickers watchlist complète : {', '.join(tickers_watchlist)}
+{themes_section}
 
 ## TA MISSION
 Décide des actions à prendre cette semaine en t'appuyant sur l'analyse ci-dessus.
@@ -1657,6 +1809,15 @@ def main():
         print("❌ watchlist.json vide ou manquant")
         return
 
+    # ── Univers achetable élargi aux watchlists thématiques (août 2026) ──────
+    # L'agent pouvait n'acheter que le top 30. Il peut désormais puiser dans les
+    # titres tagués par un thème — une UNION EXPLICITE, jamais un assouplissement
+    # de la garde anti-hallucination : un ticker absent des deux sources reste
+    # rejeté. C'est la distinction qui compte, parce qu'un ticker inconnu arrive
+    # avec sector='—', forme un cluster à lui seul et échappe à la règle de
+    # concentration.
+    watchlist["stocks"] = fusionner_univers_achetable(watchlist, load_json("universe.json", {}))
+
     print(f"🧠 Appel à Claude API — architecture deux passes — {semaine()}")
 
     # ── Contexte de marché + taux de change + macro news
@@ -1683,10 +1844,29 @@ def main():
 
     # ── Niveau 2 : règles mécaniques calculées avant d'appeler Claude
     regles_auto = calculer_regles_auto(portfolio)
+
+    # Concentration THÉMATIQUE — angle mort de R1, qui ne raisonne que sur les
+    # secteurs Yahoo. Informative comme R1 l'est devenue : l'agent arbitre, mais
+    # il ne peut plus ignorer qu'un tiers du portefeuille suit la même thèse.
+    for c in clusters_thematiques(portfolio.get("positions", []),
+                                  portfolio.get("capital_actuel", CAPITAL_INITIAL),
+                                  load_json("universe.json", {})):
+        if c["pct"] >= 25:
+            regles_auto.append({
+                "type":    "concentration_thematique",
+                "theme":   c["theme"],
+                "pct":     c["pct"],
+                "regime":  "info",
+                "message": (f"Thème « {c['label']} » : {c['pct']:.0f}% du capital "
+                            f"({', '.join(c['tickers'])}) — ces titres suivent la MÊME thèse et "
+                            f"baissent ensemble, quelle que soit leur répartition sectorielle"),
+                "bloque":  False,
+            })
+
     if regles_auto:
         print(f"   Règles auto actives : {len(regles_auto)}")
         for r in regles_auto:
-            print(f"     🚫 {r['message']}")
+            print(f"     • {r['message']}")
 
     # ── Passe 1 : analyse neutre (Haiku — rapide et économique)
     analyse = {}
