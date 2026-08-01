@@ -93,9 +93,14 @@ THEMES_CURES = [
                             "ASX", "6146.T", "4062.T"],
             },
             {
-                # La brique vendue au prix spot.
+                # La brique vendue au prix spot. SNDK (SanDisk) ajouté le
+                # 01/08/2026 : scindé de WDC en février 2025 — WDC a gardé les
+                # disques durs, la flash/NAND est repartie sous SNDK. La liste
+                # datait d'avant la scission dans son esprit. ~180 Md$ au boom
+                # NAND, 1,5 an d'historique : fiche avec avertissement
+                # régression, comme les néoclouds.
                 "label": "Mémoire & stockage",
-                "tickers": ["MU", "000660.KS", "005930.KS", "WDC", "STX", "NTAP", "4063.T"],
+                "tickers": ["MU", "000660.KS", "005930.KS", "WDC", "SNDK", "STX", "NTAP", "4063.T"],
             },
             {
                 # Ce qui relie les accélérateurs entre eux, et limite la taille
