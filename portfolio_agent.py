@@ -152,6 +152,18 @@ def detect_currency(ticker, market=""):
     """
     t = ticker.upper()
     m = (market or "").upper()
+    # Asie directe (août 2026, watchlists thématiques) — Tokyo et Séoul.
+    # Attention aux ordres de grandeur : un titre japonais cote couramment
+    # plusieurs milliers de JPY et un coréen plusieurs dizaines de milliers de
+    # KRW. Sans ces branches, ils étaient traités en USD — soit une valorisation
+    # fausse d'un facteur ~150 (JPY) à ~1400 (KRW), pas d'un simple pourcentage.
+    # NB : on n'utilise PAS le code « TSE » comme indice — il désigne Tokyo chez
+    # certains fournisseurs et Toronto chez d'autres. Seuls le suffixe .T et les
+    # codes non ambigus sont retenus.
+    if t.endswith(".T") or "JPX" in m or "TYO" in m:
+        return "JPY"
+    if t.endswith(".KS") or t.endswith(".KQ") or "KSC" in m or "KRX" in m:
+        return "KRW"
     # Couronnes nordiques (hors zone euro)
     if t.endswith(".CO") or "CPH" in m:
         return "DKK"
@@ -183,8 +195,10 @@ def detect_currency(ticker, market=""):
 
 # FX à la volée pour les devises hors USD/GBP (passées en paramètres historiques).
 # Cache par run — un seul fetch par devise.
-_FX_PAIRS    = {"DKK": "EURDKK=X", "SEK": "EURSEK=X", "NOK": "EURNOK=X", "CHF": "EURCHF=X"}
-_FX_FALLBACK = {"DKK": 7.46, "SEK": 11.3, "NOK": 11.6, "CHF": 0.93}
+_FX_PAIRS    = {"DKK": "EURDKK=X", "SEK": "EURSEK=X", "NOK": "EURNOK=X", "CHF": "EURCHF=X",
+                "JPY": "EURJPY=X", "KRW": "EURKRW=X"}
+_FX_FALLBACK = {"DKK": 7.46, "SEK": 11.3, "NOK": 11.6, "CHF": 0.93,
+                "JPY": 170.0, "KRW": 1550.0}
 _fx_cache    = {}
 
 def get_eur_rate(currency):
