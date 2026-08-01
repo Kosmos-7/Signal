@@ -438,9 +438,11 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 640px) {
     header { padding: 0.9rem 1rem; gap: 0.5rem; }
-    nav { gap: 2px; }
-    nav a { padding: 4px 8px; font-size: 0.78rem; }
-    .brand-name { font-size: 1.2rem; }
+    /* 4 entrées depuis l'ajout de la homepage des watchlists : la nav doit
+       tenir sur 390px sans déborder (padding horizontal resserré). */
+    nav { gap: 0; }
+    nav a { padding: 4px 5px; font-size: 0.72rem; white-space: nowrap; }
+    .brand-name { font-size: 1.12rem; }
     main { padding: 2rem 1rem 5rem; }
     .hero h1 { font-size: 1.65rem; }
     .brique-grid { grid-template-columns: 1fr; }
@@ -520,7 +522,8 @@
     <span class="brand-name">Signal</span>
   </a>
   <nav>
-    <a href="index.html">Watchlist</a>
+    <a href="index.html#/">Watchlists</a>
+    <a href="index.html#/w/principale">Principale</a>
     <a href="portfolio.html">Portefeuille IA</a>
     <a href="apprendre.html" class="active">Apprendre</a>
   </nav>
@@ -651,10 +654,12 @@
   <section class="section-block" id="s3">
     <div class="section-label">03 · L'algorithme</div>
     <h2 class="section-title">Comment Signal choisit ses 30 actions</h2>
-    <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong>133 grandes capitalisations</strong> mondiales (USA, Europe, Asie via ADR — une action étrangère cotée aux US via un certificat), et retient les 30 avec le meilleur score. L'univers est construit pour couvrir 12 thèmes : tech mega-cap, semi-conducteurs (incluant équipements), cloud infrastructure pure-play, cybersécurité, REITs (foncières cotées / immobilier), biotech, banques régionales US, défense, luxe, énergie verte EU, conso discrétionnaire, et exposition directe Asie (Chine + Japon ADR). La composition exacte évolue au fil des semaines selon les données disponibles. Voici comment le score de chaque action de la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist</a> est calculé.</p>
+    <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong>210 grandes capitalisations</strong> mondiales (USA, Europe, et depuis août 2026 le Japon et la Corée en cotation directe, en plus des ADR — une action étrangère cotée aux US via un certificat). Les 30 meilleurs scores forment la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist principale</a> ; le reste de l'univers se lit par <a href="index.html#/" style="color:var(--gold);text-decoration:none">watchlists thématiques</a>. Voici comment le score de chaque action est calculé.</p>
 
     <div class="scoring-note">
-      <strong>Comment l'univers est choisi — et ses biais assumés.</strong> Chaque titre passe trois filtres : capitalisation &gt; 25 Md$, au moins 5 ans d'historique de cours, et une liquidité suffisante (le modèle momentum en a besoin). C'est une liste <strong>curée à la main</strong>, donc volontairement orientée : ~63 % US, large-cap uniquement, fortement pondérée tech/croissance — un <strong>pari momentum assumé</strong> sur le leadership actuel, pas un screen neutre de tout le marché. Une petite poche de leaders non-tech (énergie, industrie, matériaux, défensives) sert d'<strong>assurance</strong> si ce leadership tourne. Hors périmètre par construction : small/mid-caps, marchés émergents, value cyclique profonde.
+      <strong>Comment l'univers est choisi — et ses biais assumés.</strong> Chaque titre passe trois filtres : capitalisation &gt; 25 Md$, au moins 5 ans d'historique de cours, et une liquidité suffisante (le modèle momentum en a besoin). C'est une liste <strong>curée à la main</strong>, donc volontairement orientée : majoritairement américaine, large-cap uniquement, fortement pondérée tech/croissance — un <strong>pari momentum assumé</strong> sur le leadership actuel, pas un screen neutre de tout le marché. Une poche de leaders non-tech (énergie, industrie, matériaux, défensives, consommation de base) sert d'<strong>assurance</strong> si ce leadership tourne. Hors périmètre par construction : small/mid-caps, marchés émergents, value cyclique profonde.
+      <br><br>
+      <strong>Les filtres mordent, et on le publie.</strong> Lors de l'élargissement d'août 2026, cinq titres pourtant pertinents ont été écartés par ces règles : Constellation Energy (4,5 ans d'historique) et GE Vernova (2,3 ans) sont les deux acteurs les plus lisibles de l'électrification, mais une régression calculée sur deux ou trois ans se calerait sur le boom lui-même — elle publierait une « décote » mesurée sur la période dont on cherche précisément à savoir si elle est une bulle. BE Semiconductor et Equifax passent sous les 25 Md$. Roche est introuvable sous son symbole suisse chez notre fournisseur de données et n'entre que via son certificat américain. Ces absences sont listées dans le code avec leur motif, plutôt que silencieuses.
     </div>
 
     <div class="scoring-block">
@@ -714,7 +719,15 @@
     </div>
 
     <div class="scoring-note">
-      Les 30 valeurs avec le score le plus élevé apparaissent sur la watchlist chaque lundi. Un titre peut <span class="badge-in">↑ Entrer</span> ou <span class="badge-out">↓ Sortir</span> selon l'évolution hebdomadaire de son score — qualité ou valorisation qui évoluent, timing qui se dégrade, publication de résultats, simple recalibrage des signaux.
+      <strong>Les watchlists thématiques — une seule notation, plusieurs lectures.</strong> Depuis août 2026, l'univers ne se lit plus comme une liste unique. Onze watchlists <em>curées</em> regroupent les titres par thèse d'investissement (semi-conducteurs, mémoire, IA, robotique, finance, monopoles d'information, compounders industriels, consommation, santé, défense, électrification), et deux sont <em>calculées</em> : leurs membres sont sélectionnés par une règle chiffrée sur les résultats du screener, réévaluée à chaque run — la <strong>décote vs tendance</strong> (cours nettement sous sa trajectoire longue, fondamentaux intacts) et la <strong>qualité durable</strong> (meilleurs scores sur le pilier qualité, tous secteurs). Ces deux-là n'ont aucune liste à maintenir.
+      <br><br>
+      Le point important : <strong>aucun titre n'est noté deux fois</strong>. Le screener produit un score unique par titre, et une watchlist thématique n'est qu'un filtre suivi d'un tri sur ces mêmes résultats. Un thème n'est donc ni un scoring alternatif, ni une recommandation : c'est un angle de lecture. Chacun publie sa thèse, <em>ce qui l'invaliderait</em>, et les biais qu'il concentre — le thème semi-conducteurs, par exemple, indique explicitement qu'il <em>renforce</em> le pari tech de la watchlist principale au lieu de le diversifier. Deux thèmes (mémoire, défense) sont publiés en statut « observation » : leur catalyseur est largement consommé.
+      <br><br>
+      Ce découpage n'est justifié par <strong>aucun backtest</strong> et ne prétend améliorer aucune performance. Il structure la lecture d'un univers devenu trop large pour une seule liste de trente lignes — rien de plus. Attention enfin au <strong>recouvrement</strong> : un titre appartient souvent à deux ou trois thèmes, et certains thèmes sont transverses aux secteurs (l'électrification mélange services publics, industrie, matériaux et énergie). Empiler deux watchlists n'est donc pas se diversifier ; c'est parfois acheter deux fois la même thèse.
+    </div>
+
+    <div class="scoring-note">
+      Les 30 valeurs avec le score le plus élevé apparaissent sur la watchlist principale chaque lundi. Un titre peut <span class="badge-in">↑ Entrer</span> ou <span class="badge-out">↓ Sortir</span> selon l'évolution hebdomadaire de son score — qualité ou valorisation qui évoluent, timing qui se dégrade, publication de résultats, simple recalibrage des signaux.
       <br><br>
       <strong>VIX — indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est suivi chaque jour ouvré mais ne touche pas au scoring : une version expérimentale qui freinait le momentum en régime de stress a été testée puis désactivée (elle dégradait légèrement le Sharpe sur un backtest 2019-2024 trop bull). Le VIX reste donc <em>informationnel</em> — Claude peut le citer, aucun mécanisme automatique ne s'en sert. Détail de l'indicateur et de ses seuils : voir la pastille VIX, section <a href="#s5" style="color:var(--gold);text-decoration:none">05 · Le portefeuille IA</a>.
     </div>

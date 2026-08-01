@@ -47,7 +47,7 @@ THEMES_CURES = [
         "tickers": [
             "NVDA", "AVGO", "TSM", "AMD", "INTC", "QCOM", "ADI", "TXN", "MRVL",
             "NXPI", "STM", "IFX.DE", "SNPS", "CDNS",
-            "ASML.AS", "AMAT", "LRCX", "KLAC", "TER", "ASM.AS", "BESI.AS",
+            "ASML.AS", "AMAT", "LRCX", "KLAC", "TER", "ASM.AS",
             "8035.T", "6857.T",
         ],
     },
@@ -61,7 +61,7 @@ THEMES_CURES = [
         "biais": "Statut « observation », pas thèse d'achat : le catalyseur de ce cycle est largement consommé. Le screener ne sait PAS distinguer la mémoire cyclique des concepteurs à croissance séculaire — c'est précisément pourquoi ce thème existe séparément des semi-conducteurs, avec lesquels il partage ses équipementiers.",
         "tickers": [
             "MU", "000660.KS", "005930.KS", "STX", "WDC", "NTAP",
-            "LRCX", "AMAT", "KLAC", "ASM.AS", "BESI.AS",
+            "LRCX", "AMAT", "KLAC", "ASM.AS",
             "8035.T", "6857.T", "4063.T",
         ],
     },
@@ -73,10 +73,13 @@ THEMES_CURES = [
         "thesis": "Suivre la dépense IA là où elle atterrit physiquement, maillon par maillon : silicium, réseau, énergie et refroidissement, plateformes de données, puis applicatif. Le thème n'est PAS « les grandes valeurs tech qui parlent d'IA » — c'est la chaîne qui encaisse le chèque.",
         "inversion": "Le retour sur investissement applicatif ne se matérialise pas et la dépense s'arrête en amont. Toute thèse supposant plus de trois à quatre ans de capex linéaire est un pari de conviction, pas une base statistique.",
         "biais": "Recouvrement massif avec les semi-conducteurs et la watchlist principale. Surtout : ses membres se dispersent sur quatre secteurs différents, donc la règle de concentration sectorielle de l'agent ne les verra JAMAIS comme un bloc alors qu'ils baissent ensemble.",
+        # CEG (Constellation Energy) écarté : 4,5 ans d'historique seulement
+        # (scission de 2022) — sous le minimum de 5 ans du projet. Voir le bloc
+        # ÉCARTÉS APRÈS VALIDATION en fin de fichier.
         "tickers": [
             "NVDA", "AVGO", "TSM", "ASML.AS", "MU", "MRVL", "ANET",
             "MSFT", "GOOGL", "AMZN", "META", "ORCL", "PLTR", "NOW", "CRM", "ADBE",
-            "VRT", "ETN", "SU.PA", "CEG", "PWR",
+            "VRT", "ETN", "SU.PA", "PWR",
         ],
     },
     {
@@ -118,8 +121,10 @@ THEMES_CURES = [
         "inversion": "Régulation des tarifs (le sujet revient périodiquement sur les indices et la notation), ou désintermédiation par des données ouvertes.",
         "biais": "Ces titres se paient structurellement cher — le pilier valorisation du score les pénalise mécaniquement. Un score moyen ne signifie pas ici une entreprise moyenne.",
         "tickers": [
+            # EFX (Equifax) écarté : ~20 Md$ de capitalisation, sous le seuil de
+            # 25 Md$ affiché publiquement par le projet.
             "SPGI", "MCO", "MSCI", "ICE", "CME", "NDAQ",
-            "LSEG.L", "DB1.DE", "REL.L", "TRI", "FICO", "EFX", "V", "MA",
+            "LSEG.L", "DB1.DE", "REL.L", "TRI", "FICO", "V", "MA",
         ],
     },
     {
@@ -157,9 +162,11 @@ THEMES_CURES = [
         "thesis": "La démographie et l'innovation thérapeutique portent une demande peu cyclique. Les fabricants d'outils, d'équipements et de dispositifs captent la dépense de santé sans porter le risque binaire d'un essai clinique — c'est le maillon le moins spéculatif de la chaîne.",
         "inversion": "Pression politique sur les prix des médicaments, falaises de brevets, et concentration croissante du secteur sur une seule classe thérapeutique.",
         "biais": "Périmètre volontairement limité aux grandes capitalisations : la biotech en phase précoce est hors du champ de compétence assumé du projet. C'est le meilleur apport de diversification de l'ensemble des thèmes.",
+        # Roche via son ADR américain (RHHBY) : le symbole suisse ROG.SW est
+        # introuvable côté Yahoo (« quote not found »), l'ADR est servi normalement.
         "tickers": [
             "LLY", "NOVO-B.CO", "AMGN", "VRTX", "REGN", "GILD", "BIIB",
-            "AZN.L", "ROG.SW", "NVS", "MRK", "ABBV", "PFE",
+            "AZN.L", "RHHBY", "NVS", "MRK", "ABBV", "PFE",
             "ISRG", "SYK", "MDT", "BSX", "DHR", "TMO", "ABT", "ZTS",
             "UNH", "CI", "FRE.DE", "MRK.DE", "PHIA.AS",
         ],
@@ -185,8 +192,15 @@ THEMES_CURES = [
         "thesis": "Tout ce qui transporte, transforme et refroidit l'électricité : réseau, transformateurs, production pilotable, nucléaire, refroidissement de centres de données. La contrainte de la décennie n'est plus la puce, c'est le mégawatt disponible et le délai de raccordement.",
         "inversion": "Un cycle de capex de service public classique, exposé au coût du capital et au calendrier réglementaire — deux facteurs qui ont déjà lourdement pénalisé l'éolien offshore.",
         "biais": "Le thème le plus transverse de tous : ses membres se répartissent sur quatre secteurs distincts (services publics, industrie, matériaux, énergie). Un portefeuille entièrement construit dessus serait invisible à la règle de concentration sectorielle — c'est documenté et corrigé côté agent.",
+        # GEV (GE Vernova, 2,3 ans) et CEG (Constellation, 4,5 ans) sont les deux
+        # purs acteurs de l'électrification les plus évidents — et tous deux sont
+        # écartés faute d'historique. Ce n'est pas un détail : sur 2 à 4 ans, la
+        # régression se calerait sur le boom lui-même, et publierait une « décote »
+        # mesurée sur la période dont on cherche justement à savoir si elle est une
+        # bulle. Le thème est donc amputé de ses pure-players les plus lisibles —
+        # c'est dit sur la carte plutôt que masqué.
         "tickers": [
-            "GEV", "CEG", "VST", "PWR", "VRT", "ETN", "EMR",
+            "VST", "PWR", "VRT", "ETN", "EMR",
             "SU.PA", "SIE.DE", "ABBN.SW", "ENR.DE", "CCJ",
             "NEE", "IBE.MC", "RWE.DE", "ORSTED.CO", "VWS.CO", "FSLR", "LIN.DE", "TTE.PA",
         ],
@@ -244,6 +258,27 @@ THEMES_CALCULES = [
         "tri": lambda b: -b.get("qualite", 0),        # décroissant : le meilleur d'abord
     },
 ]
+
+# ── ÉCARTÉS APRÈS VALIDATION (run CI du 2026-08-01, 81 symboles testés) ──────
+# Ces titres avaient leur place dans une thèse mais échouent aux critères
+# d'inclusion publics du projet. Ils sont listés ici plutôt que supprimés en
+# silence : quelqu'un les cherchera, et l'absence doit avoir une raison lisible.
+#
+#   CEG      Constellation Energy — 4,5 ans d'historique (scission 2022) < 5 ans
+#   GEV      GE Vernova          — 2,3 ans d'historique (scission 2024) < 5 ans
+#   ROG.SW   Roche               — symbole introuvable côté Yahoo ; remplacé par
+#                                  l'ADR américain RHHBY, servi normalement
+#   BESI.AS  BE Semiconductor    — ~17 Md$ de capitalisation < seuil 25 Md$
+#   EFX      Equifax             — ~20 Md$ de capitalisation < seuil 25 Md$
+#
+# À réexaminer : CEG franchira les 5 ans en 2027, GEV en 2029.
+ECARTES_VALIDATION = {
+    "CEG":     "historique 4,5 ans < 5 ans requis (scission 2022)",
+    "GEV":     "historique 2,3 ans < 5 ans requis (scission 2024)",
+    "ROG.SW":  "symbole introuvable chez Yahoo — remplacé par l'ADR RHHBY",
+    "BESI.AS": "capitalisation ~17 Md$ < seuil 25 Md$",
+    "EFX":     "capitalisation ~20 Md$ < seuil 25 Md$",
+}
 
 THEMES = THEMES_CURES + THEMES_CALCULES
 THEMES_BY_ID = {t["id"]: t for t in THEMES}

@@ -13,8 +13,14 @@
   body{overflow:hidden}
 
   /* RAIL : nom complet + région + secteur */
-  .rail{position:fixed;left:1.4rem;top:5rem;bottom:1.4rem;z-index:6;width:232px;display:flex;flex-direction:column}
-  .rail-h{display:flex;justify-content:space-between;font:600 .62rem var(--mono);letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;padding:0 .4rem .6rem;border-bottom:1px solid var(--line)}
+  .rail{position:fixed;left:1.4rem;top:4.5rem;bottom:1.4rem;z-index:6;width:232px;display:flex;flex-direction:column}
+  .rail-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:0 .4rem .5rem}
+  .rail-back{font:600 .58rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .15s;white-space:nowrap}
+  .rail-back:hover{color:var(--ac)}
+  .rail-top #rw{font:.58rem var(--mono);color:var(--text3);letter-spacing:.5px}
+  .rail-h{display:flex;justify-content:space-between;gap:8px;font:600 .62rem var(--mono);letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;padding:0 .4rem .6rem;border-bottom:1px solid var(--line)}
+  .rail-h #rc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2)}
+  .rail-h #rn{flex:0 0 auto}
   .rail-l{overflow-y:auto;flex:1;mask-image:linear-gradient(180deg,transparent,#000 12px,#000 calc(100% - 12px),transparent)}.rail-l::-webkit-scrollbar{width:0}
   .rail-lex{display:block;margin-top:.4rem;padding:.65rem .4rem .1rem;border-top:1px solid var(--line);font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .15s;cursor:pointer;flex:0 0 auto}
   .rail-lex::before{content:'§ '}
@@ -103,12 +109,122 @@
     .chx-slider input[type=range]::-moz-range-thumb{width:20px;height:20px}
   }
 
+  /* ══ HOMEPAGE DES WATCHLISTS (vue #/) ══════════════════════════════════
+     Le rail n'a pas de contexte sur la homepage : il disparaît et la scène
+     récupère toute la largeur. Aucune couleur nouvelle — les thèmes se
+     distinguent par la typo (.tag mono capitales) et le trait, jamais par
+     une teinte propre. */
+  body.v-home .rail{display:none}
+  body.v-home .stage{left:1.4rem}
+  body.v-home .doc{max-width:1180px}
+
+  .home-h{padding:.4rem 0 0}
+  .home-t{font-family:var(--serif);font-size:2.7rem;line-height:1;letter-spacing:-1.2px}
+  .home-lead{font-size:1rem;color:var(--text2);line-height:1.7;margin-top:.7rem;max-width:660px}
+  .home-meta{font:.66rem var(--mono);color:var(--text3);letter-spacing:.6px;margin-top:.9rem;text-transform:uppercase}
+  .home-meta b{color:var(--text2);font-weight:600}
+
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:1rem;margin:1.6rem 0 .4rem}
+  .tcard{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);overflow:hidden;text-decoration:none;color:inherit;transition:border-color .2s,background .2s,transform .2s}
+  .tcard:hover,.tcard:focus-visible{border-color:rgba(116,182,223,.42);background:rgba(255,255,255,.04);transform:translateY(-2px);outline:none}
+  .tc-img{position:relative;flex:0 0 auto;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(140deg,rgba(116,182,223,.14),rgba(116,182,223,.03) 55%,rgba(255,255,255,.015))}
+  .tc-img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.045) 0 1px,transparent 1px 9px)}
+  .tc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
+  .tc-fb{position:relative;font:600 .6rem var(--mono);letter-spacing:2.4px;text-transform:uppercase;color:var(--text3);text-align:center;line-height:1.9;padding:0 14px;max-width:100%;overflow-wrap:anywhere}
+  .tc-b{display:flex;flex-direction:column;flex:1;padding:.9rem 1rem 1rem;gap:.5rem}
+  .tc-kind{font:600 .55rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 7px;align-self:flex-start}
+  .tc-l{font-family:var(--serif);font-size:1.22rem;line-height:1.15;letter-spacing:-.3px;color:var(--text)}
+  .tc-s{font:.64rem var(--mono);color:var(--text3);letter-spacing:.4px;margin-top:-.28rem}
+  .tc-th{font-size:.855rem;line-height:1.55;color:var(--text2);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .tc-top{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:.35rem}
+  .tc-chip{font:.62rem var(--mono);color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 6px;letter-spacing:.3px;white-space:nowrap}
+  .tc-chip b{color:var(--text2);font-weight:700;margin-left:5px}
+  .tc-f{display:flex;justify-content:space-between;align-items:center;gap:8px;font:.6rem var(--mono);color:var(--text3);letter-spacing:1px;text-transform:uppercase;border-top:1px solid var(--line);padding-top:.55rem}
+  .tc-go{color:var(--text3);transition:color .2s}.tcard:hover .tc-go{color:var(--ac)}
+
+  /* carte de la watchlist principale : accentuée, pleine largeur, image latérale */
+  .tcard.tc-main{grid-column:1/-1;flex-direction:row;border-color:rgba(116,182,223,.3);background:rgba(116,182,223,.045)}
+  .tcard.tc-main:hover{border-color:rgba(116,182,223,.55);background:rgba(116,182,223,.07)}
+  .tc-main .tc-img{aspect-ratio:auto;width:38%;max-width:420px;border-bottom:0;border-right:1px solid var(--line)}
+  .tc-main .tc-b{padding:1.35rem 1.5rem 1.3rem;gap:.62rem}
+  .tc-main .tc-l{font-size:1.85rem}
+  .tc-main .tc-th{font-size:.95rem;-webkit-line-clamp:4;line-clamp:4;max-width:640px}
+  .tc-main .tc-s{font-size:.68rem}
+
+  /* bandeau de couverture partielle — neutre : trait + capitales mono, pas de teinte */
+  .cov-warn{border:1px solid var(--line);border-left:2px solid var(--text3);background:rgba(255,255,255,.03);border-radius:5px;padding:.5rem .7rem;font-size:.76rem;line-height:1.5;color:var(--text2)}
+  .cov-warn b{display:block;font:600 .55rem var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
+
+  /* ══ VUE D'UNE WATCHLIST (#/w/<id>) ═══════════════════════════════════ */
+  .wl-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:.9rem}
+  .wl-crumb a{font:600 .58rem var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);text-decoration:none}
+  .wl-crumb a:hover{color:var(--ac)}
+  .wl-crumb .sepc{color:var(--text3);opacity:.5}
+  .wl-t{font-family:var(--serif);font-size:2.5rem;line-height:1.02;letter-spacing:-1px}
+  .wl-s{font:.7rem var(--mono);color:var(--text3);letter-spacing:.6px;margin-top:.45rem;text-transform:uppercase}
+  .wl-th{font-size:1.02rem;line-height:1.75;color:var(--text);margin-top:1.1rem;max-width:900px}
+  .wl-rule{margin-top:1rem;border:1px solid var(--line);border-left:2px solid var(--ac);border-radius:5px;padding:.6rem .85rem;font:.78rem var(--mono);color:var(--text2);line-height:1.55;max-width:900px}
+  .wl-rule i{display:block;font:600 .55rem var(--mono);font-style:normal;letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+  .wl-notes{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem;max-width:900px}
+  .wl-note{border:1px solid var(--line);border-radius:8px;padding:.8rem .95rem;background:rgba(255,255,255,.018)}
+  .wl-note h4{font:600 .56rem var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.4rem;font-family:var(--mono)}
+  .wl-note p{font-size:.855rem;line-height:1.62;color:var(--text2)}
+  .wl-cov{font:.64rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-top:1rem;text-transform:uppercase}
+  .wl-covw{margin-top:.9rem;max-width:900px}
+
+  /* liste large : même grammaire que .row du rail, enrichie des tags de thèmes */
+  .wl-listh{display:flex;justify-content:space-between;align-items:center;font:600 .58rem var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin:1.9rem 0 .2rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
+  .wrow{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:.62rem .4rem;cursor:pointer;border-bottom:1px solid var(--line);transition:padding-left .18s,border-color .18s,background .18s}
+  .wrow:hover,.wrow.sel{padding-left:.7rem;background:rgba(255,255,255,.02)}
+  .wrow.sel{border-left:2px solid var(--ac);margin-left:-2px;padding-left:calc(.7rem - 2px)}
+  .wr-n{font:.66rem var(--mono);color:var(--text3);letter-spacing:.5px}
+  .wr-nm{font:500 .96rem var(--serif);line-height:1.2;color:var(--text2)}
+  .wrow:hover .wr-nm,.wrow.sel .wr-nm{color:#fff}
+  .wr-tk{font:.62rem var(--mono);color:var(--text3);letter-spacing:.6px;margin-left:7px}
+  .wr-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+  .ttag{font:600 .54rem var(--mono);letter-spacing:1.1px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:1px 6px;text-decoration:none;transition:color .15s,border-color .15s;white-space:nowrap}
+  .ttag:hover{color:var(--ac);border-color:rgba(116,182,223,.45)}
+  .wr-r{text-align:right}
+  .wr-r .sc{font:500 1.02rem var(--serif);color:var(--text)}
+  .wr-r .xx{font:.55rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-top:1px;white-space:nowrap}
+  .wl-empty{padding:2rem .4rem;color:var(--text3);font-size:.9rem}
+
+  /* ── fiche d'un titre sans analyse éditoriale (hors watchlist principale) ── */
+  .lite-note{border:1px solid var(--line);border-left:2px solid var(--ac);border-radius:8px;padding:1rem 1.2rem;background:rgba(255,255,255,.02);max-width:900px}
+  .lite-note h4{font:600 .58rem var(--mono);letter-spacing:1.7px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;font-family:var(--mono)}
+  .lite-note p{font-size:.93rem;line-height:1.7;color:var(--text2)}.lite-note p+p{margin-top:.5rem}
+  .lite-note a{color:var(--ac);text-decoration:none}
+  .d-themes{display:flex;flex-wrap:wrap;gap:6px;margin-top:.75rem}
+
   /* repli mobile : rail + stage repassent en flux vertical */
   @media(max-width:900px){
+    body.v-home .stage{left:auto}
+    .home-t{font-size:2.05rem}
+    .tgrid{grid-template-columns:1fr;gap:.85rem;margin-top:1.3rem}
+    .tcard.tc-main{flex-direction:column}
+    .tc-main .tc-img{width:auto;max-width:none;aspect-ratio:16/9;border-right:0;border-bottom:1px solid var(--line)}
+    .tc-main .tc-b{padding:1rem 1.05rem 1.1rem}
+    .tc-main .tc-l{font-size:1.45rem}
+    .tc-main .tc-th{font-size:.88rem}
+    .wl-t{font-size:1.9rem}
+    body.v-index .rail{display:none}          /* la liste large fait déjà le travail */
+    body.v-index .stage{margin-top:4.6rem}
+    .wl-notes{grid-template-columns:1fr;gap:.7rem}
+    .wrow{grid-template-columns:24px 1fr auto;gap:9px}
+    .wl-th{font-size:.95rem}
+  }
+  @media(max-width:900px){
     body{overflow:auto}
-    .rail{position:static;left:auto;top:auto;bottom:auto;width:auto;margin:4.6rem 1rem 0}
+    /* position:relative et NON static : le rail et la scène doivent conserver
+       leur z-index, sinon leur contenu non positionné repasse SOUS le calque
+       de fond #fx (z-index:0) et devient invisible — c'était déjà le cas du
+       titre de fiche en mobile avant la homepage. */
+    .rail{position:relative;left:auto;top:auto;bottom:auto;width:auto;margin:4.6rem 1rem 0}
     .rail-l{max-height:38vh}
-    .stage{position:static;left:auto;right:auto;top:auto;bottom:auto;margin:1rem 0 0;overflow:visible}
+    .stage{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:1rem 0 0;overflow:visible}
+    .doc{scroll-margin-top:4.2rem}   /* le header fixe ne recouvre pas le haut de la fiche */
+    body.v-home .stage{margin-top:4.6rem}
     .d-tk{font-size:2.6rem}
     .quant{grid-template-columns:1fr;gap:1rem}
   }
@@ -122,10 +238,10 @@
 
 <header>
   <a class="brand" href="index.html"><span class="brand-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#22d98a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-name">Signal</span></a>
-  <nav><a href="index.html" class="active">Watchlist</a><a href="portfolio.html">Portefeuille IA</a><a href="apprendre.html">Apprendre</a></nav>
+  <nav><a href="index.html#/" class="active">Watchlists</a><a href="index.html#/w/principale">Principale</a><a href="portfolio.html">Portefeuille IA</a><a href="apprendre.html">Apprendre</a></nav>
 </header>
 
-<div class="rail"><div class="rail-h"><span id="rc">—</span><span id="rw"></span></div><div class="rail-l" id="rl"></div><a class="rail-lex" id="lexlink" href="#lexique">Lexique des signaux</a></div>
+<div class="rail"><div class="rail-top"><a class="rail-back" href="#/">← Watchlists</a><span id="rw"></span></div><div class="rail-h"><span id="rc">—</span><span id="rn"></span></div><div class="rail-l" id="rl"></div><a class="rail-lex" id="lexlink" href="#lexique">Lexique des signaux</a></div>
 <div class="stage"><div class="doc" id="doc"></div><footer><div class="footer-legal">Signal est un service éditorial d'information financière. Contenu fourni à titre informatif uniquement. Ne constitue pas un conseil en investissement au sens AMF.</div><div class="footer-right">Bêta</div></footer></div>
 
 <script src="signal-fx.js"></script>
@@ -136,31 +252,245 @@ let stocks=[],sel=null;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const CH={};   // charts.json : payload graphique par ticker (absent = fiche sans graphe, jamais d'erreur)
+
+/* ── universe.json : homepage des watchlists + vues thématiques ──────────────
+   Contrat : {updated_at, week, universe_declared, universe_scored,
+              themes:[{id,label,sous_titre,kind,thesis,inversion,biais,regle_texte,
+                       declares,scores,couverture,status,members:[TICKER…]}],
+              stocks:{TICKER:{nom,score,secteur,market,devise,prix,z,fenetre,
+                              decote_pct,rsi,cross,cross_j,upside_pct,analystes,
+                              qualite,valorisation,timing,themes:[id…],top30}}}
+   Le fichier est OPTIONNEL : s'il manque, la page se replie sur la seule
+   watchlist principale (watchlist.json) sans rien casser. */
+const U={themes:[],stocks:{},week:'',updated_at:'',universe_declared:null,universe_scored:null};
+const TBY={};              // id de thème → méta
+const WL={};               // ticker → fiche complète (top 30, watchlist.json)
+const MAIN='principale';   // id réservé de la watchlist principale
+let curWl=null,curList=[];
+
+// Descripteur de repli de la watchlist principale — universe.json peut le
+// fournir sous l'id « principale » ; sinon on l'écrit ici, factuellement.
+function mainMeta(){
+  if(TBY[MAIN])return TBY[MAIN];
+  return {id:MAIN,label:'Watchlist principale',sous_titre:'Les meilleurs scores, toutes catégories',kind:'principale',
+    thesis:"Le classement de référence : les meilleurs scores de l'univers, toutes catégories confondues, produits par une seule et même méthode — qualité du business, prix payé, garde-fou de timing. Les watchlists thématiques ne sont que des projections de ce même scoring : un titre n'y est jamais noté deux fois.",
+    inversion:'',biais:'',regle_texte:'',declares:stocks.length,scores:stocks.length,
+    couverture:1,status:'ok',members:stocks.map(s=>s.ticker)};
+}
+const KIND={these:'Thèse',secteur:'Secteur',calcule:'Calculé',principale:'Principale'};
+
 Promise.all([
   fetch('watchlist.json?v='+Date.now()).then(r=>{if(!r.ok)throw new Error('watchlist.json HTTP '+r.status);return r.json();}),
   fetch('analyses.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
-  fetch('charts.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({}))
-]).then(([wl,an,ch])=>{
+  fetch('charts.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
+  fetch('universe.json?v='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([wl,an,ch,un])=>{
   Object.assign(CH, ch||{});
   Object.assign(A, an||{});
   stocks=(wl.stocks||[]).slice().sort((a,b)=>b.score-a.score);
-  document.getElementById('rc').textContent=stocks.length+' valeurs';document.getElementById('rw').textContent=(wl.week||'').replace('Sem. ','S');
-  listBuild();
-  document.getElementById('lexlink').addEventListener('click',e=>{e.preventDefault();showLexique();});
-  if(location.hash==='#lexique'){showLexique();}else if(stocks[0])pick(stocks[0]);
+  stocks.forEach(s=>{WL[s.ticker]=s;});
+  if(un&&typeof un==='object'){
+    U.themes=Array.isArray(un.themes)?un.themes:[];
+    U.stocks=(un.stocks&&typeof un.stocks==='object')?un.stocks:{};
+    U.week=un.week||'';U.updated_at=un.updated_at||'';
+    U.universe_declared=un.universe_declared;U.universe_scored=un.universe_scored;
+    U.themes.forEach(t=>{if(t&&t.id)TBY[t.id]=t;});
+  }
+  document.getElementById('rw').textContent=((U.week||wl.week||'')).replace('Sem. ','S');
+  document.getElementById('lexlink').addEventListener('click',e=>{e.preventDefault();nav('#lexique');});
+  window.addEventListener('hashchange',route);
+  route();
 }).catch(err=>{
   // Durcissement post-incident NaN (CHANGELOG 3.0.1) : un JSON corrompu ou un 404
   // laissait la page définitivement vide, sans message. On affiche l'échec.
   console.error(err);
-  const l=document.getElementById('rl');
-  if(l)l.innerHTML='<div style="padding:24px 16px;opacity:.7;font-size:.85rem;line-height:1.5">Données momentanément indisponibles.<br>Rechargez la page dans quelques minutes.</div>';
+  const msg='<div style="padding:24px 16px;opacity:.7;font-size:.85rem;line-height:1.5">Données momentanément indisponibles.<br>Rechargez la page dans quelques minutes.</div>';
+  const l=document.getElementById('rl');if(l)l.innerHTML=msg;
+  const d=document.getElementById('doc');if(d){d.innerHTML=msg;d.classList.add('on');}
 });
 
-function region(s){return s.badge||'US';}
-function listBuild(){const l=document.getElementById('rl');l.innerHTML='';stocks.forEach(s=>{const b=s.breakdown||{},r=document.createElement('div');r.className='row';s._r=r;
+/* ══ ROUTEUR PAR HASH ═══════════════════════════════════════════════════════
+   #/                      homepage des watchlists (défaut, hash vide inclus)
+   #/w/<id>                une watchlist (id = « principale » ou id de thème)
+   #/w/<id>/<TICKER>       fiche d'un titre dans le contexte de sa watchlist
+   #lexique                lexique — FORME NUE HISTORIQUE, cible du seul lien
+                           profond entrant du site (portfolio.html). Jamais
+                           réécrite en « #/lexique » : aucun alias n'est émis. */
+function parseHash(){
+  const h=location.hash||'';
+  if(h==='#lexique')return {v:'lex'};
+  const m=h.match(/^#\/w\/([A-Za-z0-9_-]+)(?:\/([^\/?#]+))?\/?$/);
+  if(m)return {v:'w',id:m[1],tk:m[2]?decodeURIComponent(m[2]).toUpperCase():null};
+  return {v:'home'};
+}
+function nav(h){ if(location.hash===h)route(); else location.hash=h; }
+// La nav du header est écrite à la main dans les 3 pages ; dans index.html les
+// deux entrées pointent sur cette même page, .active suit donc la route.
+function navActive(){
+  const onMain=location.hash.indexOf('#/w/'+MAIN)===0;
+  document.querySelectorAll('header nav a').forEach(a=>{
+    const h=a.getAttribute('href')||'';
+    if(h==='index.html#/')a.classList.toggle('active',!onMain);
+    else if(h==='index.html#/w/'+MAIN)a.classList.toggle('active',onMain);
+  });
+}
+function hashOf(id,tk){ return '#/w/'+id+(tk?'/'+encodeURIComponent(tk):''); }
+function route(){
+  const r=parseHash();navActive();
+  if(r.v==='lex'){ if(!curWl)setWl(mainMeta()); document.body.classList.remove('v-home'); showLexique(); return; }
+  if(r.v==='w'){ openWl(r.id,r.tk); return; }
+  showHome();
+}
+
+function wlMeta(id){ return id===MAIN?mainMeta():(TBY[id]&&TBY[id].id!==MAIN?TBY[id]:null); }
+function setWl(meta){
+  curWl=meta;
+  curList=(meta.id===MAIN)?stocks.slice():(meta.members||[]).map(stockOf).filter(Boolean);
+  const rc=document.getElementById('rc'),rn=document.getElementById('rn');
+  if(rc)rc.textContent=meta.label;
+  if(rn)rn.textContent=curList.length+' val.';
+  listBuild();
+}
+function openWl(id,tk){
+  const meta=wlMeta(id);
+  if(!meta){ nav('#/'); return; }                       // id inconnu → homepage
+  document.body.classList.remove('v-home');
+  if(!curWl||curWl.id!==meta.id)setWl(meta);
+  const ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');
+  if(tk){
+    const s=curList.find(x=>x.ticker===tk)||stockOf(tk);
+    if(!s){ nav(hashOf(id)); return; }                   // ticker inconnu → la vue liste
+    pick(s);
+  } else { sel=null;curList.forEach(o=>o._r&&o._r.classList.remove('sel'));renderWl(meta); }
+}
+
+/* Un titre hors top 30 n'existe que sous forme compacte dans universe.json :
+   on lui fabrique un objet de même forme que ceux de watchlist.json, avec un
+   breakdown partiel. Tout ce qui manque vaut null et s'affiche « — ». */
+const _lite={};
+function stockOf(tk){
+  if(WL[tk])return WL[tk];
+  if(_lite[tk])return _lite[tk];
+  const u=U.stocks[tk];if(!u)return null;
+  const s={ticker:tk,name:u.nom||tk,sector:u.secteur||'',market:u.market||'',score:u.score,badge:null,_c:true,_u:u,
+    breakdown:{qualite:u.qualite,valorisation:u.valorisation,timing:u.timing,
+      rsi:u.rsi,regression_z:u.z,regression_window_years:u.fenetre,decote_pct:u.decote_pct,
+      cross_type:u.cross||'',cross_days_ago:u.cross_j,
+      target_upside_pct:u.upside_pct,target_analysts:u.analystes}};
+  _lite[tk]=s;return s;
+}
+function uOf(s){ return (s&&U.stocks[s.ticker])||null; }
+function themesOf(tk){ const u=U.stocks[tk];return (u&&Array.isArray(u.themes))?u.themes:[]; }
+
+const REG={PA:'EU',DE:'EU',AS:'EU',BR:'EU',MI:'EU',MC:'EU',AT:'EU',HE:'EU',VI:'EU',LI:'EU',IS:'EU',
+  L:'UK',SW:'CH',CO:'DK',ST:'SE',OL:'NO',T:'JP',HK:'HK',TO:'CA',AX:'AU'};
+function region(s){ if(s.badge)return s.badge; const p=(s.ticker||'').split('.'); return p.length>1?(REG[p[p.length-1].toUpperCase()]||'INT'):'US'; }
+
+function listBuild(){const l=document.getElementById('rl');if(!l)return;l.innerHTML='';curList.forEach(s=>{const r=document.createElement('div');r.className='row';s._r=r;
   r.innerHTML='<div><div class="nm">'+sv(s.name)+'</div><div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+sv(s.sector||'')+'</span></div></div>'+
-    '<span class="rr"><div class="sc">'+s.score+'</div></span>';
-  r.tabIndex=0;r.setAttribute('role','button');r.addEventListener('click',()=>pick(s));r.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(s);}});l.appendChild(r);});}
+    '<span class="rr"><div class="sc">'+(s.score==null?'—':s.score)+'</div></span>';
+  r.tabIndex=0;r.setAttribute('role','button');
+  const goto=()=>nav(hashOf(curWl?curWl.id:MAIN,s.ticker));
+  r.addEventListener('click',goto);r.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goto();}});l.appendChild(r);});}
+
+/* ══ HOMEPAGE DES WATCHLISTS ════════════════════════════════════════════════ */
+function themeImg(id,label){
+  return '<div class="tc-img"><span class="tc-fb">'+sv(label||id)+'</span>'+
+    '<img src="assets/themes/'+encodeURIComponent(id)+'.png" alt="" loading="lazy" onerror="this.remove()"></div>';
+}
+function topChips(meta){
+  return (meta.members||[]).slice(0,3).map(tk=>{
+    const u=U.stocks[tk]||(WL[tk]?{score:WL[tk].score}:null);
+    return '<span class="tc-chip">'+sv(tk)+'<b>'+(u&&u.score!=null?u.score:'—')+'</b></span>';
+  }).join('');
+}
+function covWarn(meta){
+  if(meta.status!=='degraded')return '';
+  return '<div class="cov-warn"><b>Couverture partielle</b>'+meta.scores+' titres scorés sur '+meta.declares+
+    ' déclarés ('+Math.round((meta.couverture||0)*100)+' %). Les titres manquants ne sont pas notés zéro — ils sont absents de la vue.</div>';
+}
+function card(meta,main){
+  const n=(meta.members||[]).length;
+  return '<a class="tcard'+(main?' tc-main':'')+'" href="'+hashOf(meta.id)+'">'+
+    themeImg(meta.id,meta.label)+
+    '<div class="tc-b">'+
+      '<span class="tc-kind">'+sv(KIND[meta.kind]||meta.kind||'')+'</span>'+
+      '<div class="tc-l">'+sv(meta.label)+'</div>'+
+      (meta.sous_titre?'<div class="tc-s">'+sv(meta.sous_titre)+'</div>':'')+
+      '<p class="tc-th">'+sv(meta.thesis||'')+'</p>'+
+      (meta.status==='degraded'?covWarn(meta):'')+
+      '<div class="tc-top">'+topChips(meta)+'</div>'+
+      '<div class="tc-f"><span>'+n+' titre'+(n>1?'s':'')+'</span><span class="tc-go">Ouvrir →</span></div>'+
+    '</div></a>';
+}
+function showHome(){
+  document.body.classList.add('v-home');document.body.classList.remove('v-index');
+  curWl=null;sel=null;
+  const ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');
+  const doc=document.getElementById('doc');doc.classList.remove('on');
+  const m=mainMeta();
+  const others=U.themes.filter(t=>t&&t.id&&t.id!==MAIN);
+  const meta=[U.updated_at?'Mise à jour '+sv(U.updated_at):'',U.week?sv(U.week):'',
+    U.universe_scored!=null?'<b>'+U.universe_scored+'</b> titres scorés'+(U.universe_declared!=null?' sur '+U.universe_declared+' déclarés':''):''
+  ].filter(Boolean).join(' · ');
+  doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
+    '<p class="home-lead">Un seul scoring, plusieurs lectures. La watchlist principale classe l\'univers entier ; les vues thématiques n\'en sont que des projections — mêmes chiffres, même méthode, angle différent. Un titre peut appartenir à plusieurs d\'entre elles.</p>'+
+    (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
+    '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
+    (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
+  const st=document.querySelector('.stage');if(st)st.scrollTop=0;
+  requestAnimationFrame(()=>doc.classList.add('on'));
+}
+
+/* ══ VUE D'UNE WATCHLIST ════════════════════════════════════════════════════ */
+function wrow(s,i,wlid){
+  const b=s.breakdown||{},z=b.regression_z;
+  const tags=themesOf(s.ticker).filter(id=>id!==wlid).map(id=>{
+    const t=TBY[id];return t?'<a class="ttag" href="'+hashOf(id)+'">'+sv(t.label)+'</a>':'';
+  }).join('');
+  return '<div class="wrow" data-tk="'+sv(s.ticker)+'" tabindex="0" role="button">'+
+    '<span class="wr-n">'+String(i+1).padStart(2,'0')+'</span>'+
+    '<div><div class="wr-nm">'+sv(s.name)+'<span class="wr-tk">'+sv(s.ticker)+'</span></div>'+
+      '<div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+sv(s.sector||'')+'</span></div>'+
+      (tags?'<div class="wr-tags">'+tags+'</div>':'')+
+    '</div>'+
+    '<div class="wr-r"><div class="sc">'+(s.score==null?'—':s.score)+'</div>'+
+      '<div class="xx">'+(z==null?'—':'z '+fs(z,1).replace('.',',')+'σ')+'</div></div>'+
+  '</div>';
+}
+function renderWl(meta){
+  // v-index : la vue liste large se suffit à elle-même ; en mobile le rail
+  // ferait doublon (deux fois la même liste, l'une au-dessus de l'autre).
+  document.body.classList.add('v-index');
+  const doc=document.getElementById('doc');doc.classList.remove('on');
+  const isCalc=meta.kind==='calcule',isMain=meta.id===MAIN;
+  doc.innerHTML='<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="tag">'+sv(KIND[meta.kind]||meta.kind||'')+'</span></div>'+
+    '<div class="wl-t">'+sv(meta.label)+'</div>'+
+    (meta.sous_titre?'<div class="wl-s">'+sv(meta.sous_titre)+'</div>':'')+
+    (meta.thesis?'<p class="wl-th">'+sv(meta.thesis)+'</p>':'')+
+    (isCalc&&meta.regle_texte?'<div class="wl-rule"><i>Règle de sélection, appliquée à chaque run</i>'+sv(meta.regle_texte)+'</div>':'')+
+    ((meta.inversion||meta.biais)?'<div class="wl-notes">'+
+      (meta.inversion?'<div class="wl-note"><h4>Ce qui invaliderait cette thèse</h4><p>'+sv(meta.inversion)+'</p></div>':'')+
+      (meta.biais?'<div class="wl-note"><h4>Biais de ce thème</h4><p>'+sv(meta.biais)+'</p></div>':'')+
+    '</div>':'')+
+    (meta.status==='degraded'?'<div class="wl-covw">'+covWarn(meta)+'</div>':
+      (meta.declares!=null&&!isMain?'<div class="wl-cov">'+meta.scores+' titres scorés sur '+meta.declares+' déclarés · couverture '+Math.round((meta.couverture||0)*100)+' %</div>':''))+
+    '<div class="wl-listh"><span>'+curList.length+' titre'+(curList.length>1?'s':'')+(isCalc?' — triés par la règle':isMain?' — triés par score':' — meilleur score d\'abord')+'</span><span>Score</span></div>'+
+    (curList.length?'<div id="wlist">'+curList.map((s,i)=>wrow(s,i,meta.id)).join('')+'</div>'
+      :'<p class="wl-empty">Aucun titre scoré dans cette vue pour ce run.</p>');
+  const host=document.getElementById('wlist');
+  if(host)host.addEventListener('click',e=>{
+    if(e.target.closest('.ttag'))return;                 // les tags de thèmes gardent leur lien
+    const r=e.target.closest('.wrow');if(r)nav(hashOf(meta.id,r.dataset.tk));
+  });
+  if(host)host.addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ')return;
+    const r=e.target.closest('.wrow');if(!r||e.target.closest('.ttag'))return;
+    e.preventDefault();nav(hashOf(meta.id,r.dataset.tk));
+  });
+  const st=document.querySelector('.stage');if(st)st.scrollTop=0;
+  requestAnimationFrame(()=>doc.classList.add('on'));
+}
 
 function stateTag(b){const ct=b.cross_type==='golden'?'GOLDEN CROSS':b.cross_type==='death'?'DEATH CROSS':'CROSS NEUTRE';return ct+(b.cross_days_ago!=null?' · '+b.cross_days_ago+' J':'');}
 // Échappe tout HTML sauf <b>…</b> (contrat éditorial). Double protection avec le
@@ -174,15 +504,22 @@ function mk(k,v){return'<div><span class="k">'+k+'</span><span class="v">'+v+'</
 function bblist(arr){return arr&&arr.length?'<ul>'+arr.map(p=>'<li>'+sv(p)+'</li>').join('')+'</ul>':'<p class="stub">—</p>';}
 
 function typeHTML(el,html){const tmp=document.createElement('div');tmp.innerHTML=html;const ps=[...tmp.querySelectorAll('p')];const full=(ps.length?ps.map(p=>p.textContent):[tmp.textContent]).join('  ');el.innerHTML='<p class="resume type-cur" id="rtype"></p>';const t=document.getElementById('rtype');const _tt=performance.now(),dur=Math.min(1500,Math.max(500,full.length*6));(function tick(){const e=Math.min(1,(performance.now()-_tt)/dur);if(t)t.textContent=full.slice(0,Math.floor(e*full.length));if(e<1)requestAnimationFrame(tick);else el.innerHTML=html;})();}
-function pick(s){sel=s;stocks.forEach(o=>o._r&&o._r.classList.toggle('sel',o===s));var ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');render(s);}
+function pick(s){sel=s;document.body.classList.remove('v-index');curList.forEach(o=>o._r&&o._r.classList.toggle('sel',o===s));var ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');const st=document.querySelector('.stage');if(st)st.scrollTop=0;render(s);
+  // mobile : le rail est AU-DESSUS de la scène en flux vertical — sans ce saut,
+  // choisir un titre ne montre rien tant qu'on n'a pas fait défiler la page.
+  if(matchMedia('(max-width:900px)').matches){const d=document.getElementById('doc');if(d)requestAnimationFrame(()=>d.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'}));}}
 function lexi(t,d){return '<div><div class="lext">'+t+'</div><div class="lexd">'+d+'</div></div>';}
 function lexsec(h,items){return '<div class="sec"><div class="sec-h">'+h+'</div><div class="lexg">'+items+'</div></div>';}
 function showLexique(){
-  sel=null;stocks.forEach(o=>o._r&&o._r.classList.remove('sel'));
+  sel=null;document.body.classList.remove('v-index');curList.forEach(o=>o._r&&o._r.classList.remove('sel'));
   var ll=document.getElementById('lexlink');if(ll)ll.classList.add('active');
+  // Forme NUE historique : #lexique, jamais « #/lexique ». C'est la cible du
+  // seul lien profond entrant du site (portfolio.html) — aucun alias n'est émis.
   if(history.replaceState)history.replaceState(null,'','#lexique');
   const doc=document.getElementById('doc');doc.classList.remove('on');
-  doc.innerHTML='<div class="d-head"><div><div class="d-tk">Lexique</div><div class="d-nm">Comment lire une fiche · définitions des signaux</div></div></div>'+
+  const st=document.querySelector('.stage');if(st)st.scrollTop=0;
+  doc.innerHTML='<div class="wl-crumb"><a href="#/">← Watchlists</a>'+(curWl?'<span class="sepc">/</span><a href="'+hashOf(curWl.id)+'">'+sv(curWl.label)+'</a>':'')+'</div>'+
+    '<div class="d-head"><div><div class="d-tk">Lexique</div><div class="d-nm">Comment lire une fiche · définitions des signaux</div></div></div>'+
     '<div class="sep"></div>'+
     lexsec('Le score',
       lexi('Score /100','Note de synthèse = <em>Qualité 45</em> + <em>Valorisation 30</em> + <em>Timing 22</em> + <em>Analystes 3</em>, ± pénalités (chase) / bonus (décote). La qualité et le prix pilotent ; le timing est un garde-fou. Un score élevé ne garantit pas une hausse imminente.')+
@@ -389,23 +726,53 @@ function buildChart(s){
 }
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
 function periodNote(b){ const p=qLabel(b&&b.mrq); const ca=p?'dernier trimestre publié ('+p.q+')':'dernier trimestre publié'; const ttm=p?' au '+p.d:''; return 'Fondamentaux — CA : '+ca+' en glissement annuel (a/a) · marges nette &amp; FCF : 12 mois glissants (TTM)'+ttm+'.'; }
+/* Fiche d'un titre thématique hors watchlist principale : universe.json ne
+   porte qu'un breakdown compact (ni fondamentaux détaillés, ni graphique, ni
+   fiche éditoriale). On publie ce qu'on a, et on le DIT — l'absence est un
+   choix éditorial explicite, pas une panne. */
+function compactMetrics(s){const b=s.breakdown||{},u=s._u||{};
+  const dev=u.devise?' '+u.devise:'';
+  const dl=b.decote_pct==null?'Décote vs tendance':(b.decote_pct>=0?'Décote vs tendance':'Surcote vs tendance');
+  return '<div class="metrics">'+
+    mk('Cours',(u.prix!=null?f(u.prix,2)+dev:'—'))+
+    mk('Cross',(b.cross_type||'neutre')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+
+    mk(dl,(b.decote_pct==null?'—':Math.abs(b.decote_pct).toFixed(0)+'%'))+
+    mk('Z-score'+(b.regression_window_years?' · '+b.regression_window_years+' ans':''),fs(b.regression_z,1).replace('.',',')+'σ')+
+    mk('RSI',f(b.rsi,0))+
+    mk('Objectif consensus',(b.target_upside_pct==null?'—':fs(b.target_upside_pct,0)+'%')+(b.target_analysts?' ('+b.target_analysts+')':''))+
+  '</div><div class="metrics-note">Chiffres issus du même run du screener que la watchlist principale'+(U.updated_at?' ('+sv(U.updated_at)+')':'')+'. Croissance, marges et bilan détaillés ne sont pas publiés dans les vues thématiques.</div>';}
+function liteNote(){
+  return '<div class="lite-note"><h4>Analyse détaillée réservée à la watchlist principale</h4>'+
+  '<p>Ce titre est scoré par exactement la même méthode que les autres — les chiffres ci-dessus sortent du même run. En revanche, l\'analyse éditoriale (business, perspectives, thèse haussière et baissière) et le graphique de canal de régression ne sont produits que pour les titres de la <a href="'+hashOf(MAIN)+'">watchlist principale</a>.</p>'+
+  '<p>C\'est un choix assumé : écrire une analyse tenable coûte du temps, et une fiche bâclée vaut moins que pas de fiche. <a href="apprendre.html">Comment lire ces chiffres →</a></p></div>';
+}
 function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
+  const compact=!!s._c, hasEd=!!(a&&(a.resume||a.biz||a.futur||a.actu||a.bull||a.bear));
+  const score=s.score==null?0:s.score;
   const rsi=b.rsi==null?50:Math.max(0,Math.min(100,b.rsi)),zp=Math.max(0,Math.min(100,((b.regression_z==null?0:b.regression_z)+3)/6*100));
-  const C=2*Math.PI*52,off=C*(1-s.score/100);
-  const resumeBody=a&&a.resume?a.resume.map(p=>'<p class="resume">'+sv(p)+'</p>').join(''):'<p class="resume">'+sv(s.name)+' — score '+s.score+'/100. '+stateTag(b)+'. Croissance CA '+fs(b.rev_growth_pct,0)+' % (dern. trim., a/a), marge nette '+f(b.net_margin_pct,0)+' % (TTM), z-score '+fs(b.regression_z,1).replace('.',',')+'σ.</p><p class="resume stub">Synthèse qualitative à générer.</p>';
+  const C=2*Math.PI*52,off=C*(1-score/100);
+  const resumeBody=a&&a.resume?a.resume.map(p=>'<p class="resume">'+sv(p)+'</p>').join('')
+    :compact?'<p class="resume">'+sv(s.name)+' — score '+score+'/100 : qualité '+(b.qualite==null?'—':b.qualite+'/45')+', valorisation '+(b.valorisation==null?'—':b.valorisation+'/30')+', timing '+(b.timing==null?'—':b.timing+'/22')+'. '+stateTag(b)+', RSI '+f(b.rsi,0)+', z-score '+fs(b.regression_z,1).replace('.',',')+'σ sur '+(b.regression_window_years||'?')+' ans.</p>'
+    :'<p class="resume">'+sv(s.name)+' — score '+score+'/100. '+stateTag(b)+'. Croissance CA '+fs(b.rev_growth_pct,0)+' % (dern. trim., a/a), marge nette '+f(b.net_margin_pct,0)+' % (TTM), z-score '+fs(b.regression_z,1).replace('.',',')+'σ.</p><p class="resume stub">Synthèse qualitative à générer.</p>';
   const bb=(a&&(a.bull||a.bear))?'<div class="bullbear"><div class="bb bb-bull"><div class="bb-h">▲ Thèse haussière</div>'+bblist(a.bull)+'</div><div class="bb bb-bear"><div class="bb-h">▼ Thèse baissière</div>'+bblist(a.bear)+'</div></div>':'';
+  // recouvrement des thèmes, visible depuis la fiche elle-même
+  const tt=themesOf(s.ticker).map(id=>{const t=TBY[id];return t?'<a class="ttag" href="'+hashOf(id)+'">'+sv(t.label)+'</a>':'';}).join('');
+  const prose=(compact&&!hasEd)?'<div class="prose">'+liteNote()+'</div>'
+    :'<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
+      '<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div></div>';
   doc.classList.remove('on');
-  doc.innerHTML='<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div></div>'+
+  doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><a href="'+hashOf(curWl.id)+'">'+sv(curWl.label)+'</a></div>':'')+
+    '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div id="chartsec"></div>'+
     '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,1).replace('.',',')+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
-      '<div><div class="qh">Décomposition du score</div>'+meter('Qualité',b.qualite||0,45)+meter('Valorisation',b.valorisation||0,30)+meter('Timing',b.timing||0,22)+meter('Analystes',b.analystes||0,3)+'</div></div>'+
-    '<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA · a/a',fs(b.rev_growth_pct,1)+'%')+mk('Marge nette · TTM',f(b.net_margin_pct,1)+'%')+mk('Marge FCF · TTM',f(b.fcf_margin_pct,1)+'%')+'</div><div class="metrics-note">'+periodNote(b)+'</div>'+
-    '<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
-      '<div>'+sec('Actu',(a&&a.actu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div></div>'+
+      '<div><div class="qh">Décomposition du score</div>'+meter('Qualité',b.qualite||0,45)+meter('Valorisation',b.valorisation||0,30)+meter('Timing',b.timing||0,22)+(compact?'':meter('Analystes',b.analystes||0,3))+'</div></div>'+
+    (compact?compactMetrics(s)
+      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA · a/a',fs(b.rev_growth_pct,1)+'%')+mk('Marge nette · TTM',f(b.net_margin_pct,1)+'%')+mk('Marge FCF · TTM',f(b.fcf_margin_pct,1)+'%')+'</div><div class="metrics-note">'+periodNote(b)+'</div>')+
+    prose+
     (bb?sec('Bull vs Bear',bb,'bbsec'):'');
-  requestAnimationFrame(()=>{doc.classList.add('on');const rz=document.getElementById('rzone');if(rz){reduce?(rz.innerHTML=resumeBody):typeHTML(rz,resumeBody);}buildChart(s);const arc=document.getElementById('arc');if(arc)arc.style.strokeDashoffset=off;doc.querySelectorAll('.f').forEach(el=>el.style.width=el.dataset.w+'%');const cu=document.getElementById('cu');const _ct=performance.now();(function up(){const e=Math.min(1,(performance.now()-_ct)/600);if(cu)cu.textContent=Math.round(e*s.score);if(e<1)requestAnimationFrame(up);})();});
+  requestAnimationFrame(()=>{doc.classList.add('on');const rz=document.getElementById('rzone');if(rz){reduce?(rz.innerHTML=resumeBody):typeHTML(rz,resumeBody);}buildChart(s);const arc=document.getElementById('arc');if(arc)arc.style.strokeDashoffset=off;doc.querySelectorAll('.f').forEach(el=>el.style.width=el.dataset.w+'%');const cu=document.getElementById('cu');const _ct=performance.now();(function up(){const e=Math.min(1,(performance.now()-_ct)/600);if(cu)cu.textContent=Math.round(e*score);if(e<1)requestAnimationFrame(up);})();});
 }
 </script>
 </body>

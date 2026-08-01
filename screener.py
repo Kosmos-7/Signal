@@ -45,6 +45,8 @@ import os
 import time
 import requests
 from datetime import date, timedelta, datetime as _dt, timezone as _tz
+
+import themes   # taxonomie des watchlists thématiques (source unique de vérité)
 from ta.momentum import RSIIndicator
 
 # Paramètres centralisés (VIX dampener, etc.) — Phase 2
@@ -55,6 +57,16 @@ FINNHUB_KEY = os.getenv("FINNHUB_API_KEY", "")
 
 _NON_US_SUFFIXES = (".PA",".DE",".AS",".L",".CO",".BR",".MI",".MC",".AT",".IS",
                     ".HE",".ST",".OL",".OB",".SW",".VI",".LI",".T",".HK",".KS",".TO")
+
+def _finnhub_appel_emis(ticker):
+    """Un appel HTTP Finnhub est-il réellement émis pour ce ticker ?
+
+    Même condition que le court-circuit de finnhub_fundamentals() ci-dessous —
+    elle sert à ne temporiser QUE lorsqu'une requête a effectivement consommé
+    du quota. Garder les deux alignées : si le court-circuit change, ici aussi.
+    """
+    return bool(FINNHUB_KEY) and not any(ticker.endswith(s) for s in _NON_US_SUFFIXES)
+
 
 def finnhub_fundamentals(ticker):
     if not FINNHUB_KEY:
@@ -510,6 +522,14 @@ UNIVERS = [
     # Japon via ADR (Phase 4 light, +2) — Toyota + Mitsubishi UFJ
     "TM","MUFG",
 ]
+
+# ── Élargissement thématique (août 2026) ─────────────────────────────────────
+# L'univers historique ci-dessus reste la base ; themes.py y ajoute les titres
+# nécessaires aux watchlists thématiques. Un ticker déclaré dans un thème est
+# automatiquement scoré — c'est ce qui garantit qu'aucun thème ne référence un
+# titre absent de l'univers. Les symboles recalés par la validation Yahoo sont
+# documentés dans themes.ECARTES_VALIDATION.
+UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 
 # ── JUSTIFICATION ─────────────────────────────────────────────────────────────
 def generer_justification(nom, score, details, alertes):
@@ -1124,6 +1144,12 @@ def score_ticker(ticker, vix=None):
             # avant, on republiait la fenêtre doctrine même quand le z venait d'un fallback
             "regression_window_years":  round(len(close_reg) / 252),
             "regression_window_reason": reg_window_reason,
+            # Cours et devise natifs — nécessaires aux vues thématiques, qui
+            # affichent des titres hors top 30 (donc absents de watchlist.json).
+            # GBp est déjà converti en GBP plus haut : la devise publiée ici est
+            # celle dans laquelle `prix` est réellement exprimé.
+            "prix":                  round(prix, 2),
+            "devise":                "GBP" if info_curr == "GBp" else (info_curr or ""),
             # Fondamentaux
             "rev_growth_pct":        round(rev_growth * 100, 1),   # trimestriel, glissement annuel (MRQ vs même trim. N-1)
             "net_margin_pct":        round(margins * 100, 1),      # TTM (12 mois glissants)
@@ -1318,8 +1344,12 @@ def main():
         else:
             print("ignoré")
 
-        # 1 appel Finnhub par ticker (fundamentals) → 0.5s suffit largement sous 60 req/min
-        if FINNHUB_KEY:
+        # 1 appel Finnhub par ticker (fundamentals) → 0.5s suffit largement sous 60 req/min.
+        # Conditionné à un appel RÉELLEMENT émis : finnhub_fundamentals() court-circuite
+        # sur les tickers non-US (suffixe de place), pour lesquels aucune requête HTTP
+        # n'est faite. Attendre pour eux ne protégeait d'aucun quota — avec 77 titres
+        # non-US dans l'univers élargi, c'était ~39 s de run gaspillées chaque semaine.
+        if FINNHUB_KEY and _finnhub_appel_emis(ticker):
             time.sleep(0.5)
 
     resultats.sort(key=lambda x: -x["score"])
@@ -1398,6 +1428,111 @@ def main():
         r.pop("chart", None)
 
     d = date.today()
+
+    # ── Projection thématique (universe.json) ───────────────────────────────
+    # Principe : « un seul scoring, N projections ». Chaque titre a été scoré
+    # exactement une fois ci-dessus ; une watchlist thématique n'est qu'un
+    # filtre + tri sur ces mêmes résultats. Coût API marginal : zéro.
+    # watchlist.json n'est PAS touché — trois consommateurs lisent son contrat
+    # en dur (portfolio_agent, generate_analyses, index.html).
+    inv_curés   = themes.themes_par_ticker()
+    top_tickers = {s["ticker"] for s in top}
+    par_ticker  = {}          # ticker → objet compact publié
+    themes_de   = {}          # ticker → tous ses thèmes (curés + calculés)
+
+    for r in resultats:
+        t  = r["ticker"]
+        bd = r.get("breakdown", {}) or {}
+        ths = list(inv_curés.get(t, [])) + themes.themes_calcules_pour(bd)
+        themes_de[t] = ths
+        if not ths:
+            continue          # titre de l'univers historique sans thème : hors universe.json
+        z = bd.get("regression_z")
+        par_ticker[t] = {
+            "nom":          r.get("name", t),
+            "score":        r.get("score", 0),
+            "secteur":      r.get("sector", "—"),
+            "market":       r.get("market", "—"),
+            "devise":       bd.get("devise", ""),
+            "prix":         bd.get("prix"),
+            "z":            round(z, 1) if z is not None else None,
+            "fenetre":      bd.get("regression_window_years"),
+            "decote_pct":   bd.get("decote_pct"),
+            "rsi":          bd.get("rsi"),
+            "cross":        bd.get("cross_regime", ""),
+            "cross_j":      bd.get("cross_days_ago"),
+            "upside_pct":   bd.get("target_upside_pct"),
+            "analystes":    bd.get("target_analysts"),
+            "qualite":      bd.get("qualite"),
+            "valorisation": bd.get("valorisation"),
+            "timing":       bd.get("timing"),
+            "themes":       ths,
+            "top30":        t in top_tickers,
+        }
+
+    scores_par_ticker = {r["ticker"]: r.get("score", 0) for r in resultats}
+    themes_publies, degrades = [], []
+
+    for th in themes.THEMES:
+        if th["kind"] == "calcule":
+            membres = [t for t, ths in themes_de.items() if th["id"] in ths]
+            tri = th["tri"]
+            bd_de = {r["ticker"]: (r.get("breakdown", {}) or {}) for r in resultats}
+            membres.sort(key=lambda t: (tri(bd_de[t]), t))
+            # Une règle large peut sélectionner la moitié de l'univers : on borne
+            # la liste publiée, sinon ce n'est plus une watchlist mais un filtre.
+            # `declares` garde le compte AVANT troncature — le site affiche donc
+            # « 20 sur 112 retenus », jamais un total silencieusement tronqué.
+            declares = len(membres)
+            membres = membres[:themes.TOP_PAR_THEME]
+        else:
+            declares = len(th["tickers"])
+            membres = [t for t in th["tickers"] if t in par_ticker]
+            # Tri par score décroissant, départage par ticker croissant :
+            # l'ordre publié doit être reproductible d'un run à l'autre.
+            membres.sort(key=lambda t: (-scores_par_ticker.get(t, 0), t))
+
+        couv = (len(membres) / declares) if declares else 1.0
+        # Garde de couverture PAR THÈME. Le seuil global (60 % de l'univers) ne
+        # protège plus rien à cette échelle : il faudrait perdre 84 titres sur
+        # 210 avant d'échouer, donc un thème entièrement vidé par une panne de
+        # place de cotation passerait sous le radar et serait publié vide, job
+        # vert. C'est exactement le mode de panne de l'incident du 27/07.
+        status = "ok" if couv >= 0.70 else "degraded"
+        if status == "degraded":
+            degrades.append(th["id"])
+            print(f"   ⚠️  Thème {th['id']} dégradé : {len(membres)}/{declares} titres ({couv:.0%})")
+
+        meta = next(m for m in themes.meta_publique() if m["id"] == th["id"])
+        themes_publies.append({**meta,
+                               "declares":   declares,
+                               "scores":     len(membres),
+                               "couverture": round(couv, 3),
+                               "status":     status,
+                               "members":    membres})
+
+    # Un thème isolé qui se dégrade est publié avec sa bannière — échouer tout
+    # le run pour ça serait pire que le mal. Trois thèmes dégradés en revanche,
+    # ou un thème entièrement vide, signalent une panne de source : on échoue.
+    if len(degrades) >= 3 or any(t["scores"] == 0 for t in themes_publies):
+        print(f"❌ {len(degrades)} thème(s) dégradé(s) : {', '.join(degrades)} — "
+              f"panne de source probable, publication interrompue.")
+        raise SystemExit(1)
+
+    universe = {
+        "updated_at":        str(d),
+        "week":              f"Sem. {d.isocalendar()[1]} · {d.year}",
+        "universe_declared": len(UNIVERS),
+        "universe_scored":   len(resultats),
+        "themes":            themes_publies,
+        "stocks":            par_ticker,
+    }
+    tmp_u = "universe.json.tmp"
+    with open(tmp_u, "w", encoding="utf-8") as f:
+        json.dump(universe, f, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+    os.replace(tmp_u, "universe.json")
+    print(f"🗂  universe.json — {len(themes_publies)} thèmes, {len(par_ticker)} titres tagués"
+          + (f", {len(degrades)} dégradé(s)" if degrades else ""))
     output = {
         "updated_at":              str(d),
         "week":                    f"Sem. {d.isocalendar()[1]} · {d.year}",

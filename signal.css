@@ -130,6 +130,21 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
   .bb-bull{border-right:0;border-bottom:1px solid var(--line)}
   .metrics{grid-template-columns:repeat(3,1fr)}
 }
+/* Header : la nav a gagné une entrée (homepage des watchlists) — sur petit
+   écran elle se resserre au lieu de déborder. Nav dupliquée à l'identique
+   dans les 3 pages, ce réglage est donc partagé. */
+@media(max-width:700px){
+  header{padding:.85rem 1rem;gap:.7rem}
+  .brand-name{font-size:1.12rem}
+  .brand-icon svg{width:24px;height:24px}
+  nav{gap:.72rem}
+  nav a{font-size:.7rem;white-space:nowrap}
+}
+@media(max-width:400px){
+  header{gap:.5rem}
+  nav{gap:.55rem}
+  nav a{font-size:.66rem}
+}
 
 /* ── Scrollbars discrètes ── */
 ::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
