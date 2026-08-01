@@ -1,0 +1,68 @@
+# .github/workflows/fetch-photos.yml
+# Récupère des photographies libres pour illustrer les watchlists thématiques.
+#
+# Pourquoi en CI : l'environnement de développement n'a pas accès aux
+# hébergeurs d'images (proxy réseau). Le runner, lui, a un réseau ouvert.
+#
+# Ce workflow ne publie RIEN directement sur le site : il dépose des CANDIDATS
+# dans assets/themes/candidats/ (plusieurs par thème) accompagnés d'un
+# manifeste de provenance et de licence. Le choix final est fait à l'œil, puis
+# les images retenues sont promues à la main. Une illustration qui n'illustre
+# rien est pire que pas d'illustration.
+name: Chercher des photos de thèmes
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidats:
+        description: "Nombre de candidats par thème"
+        type: string
+        default: "3"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-data-commit
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Pillow
+        run: pip install --quiet Pillow
+
+      - name: Chercher les photos (domaine public / CC0 uniquement)
+        run: python tools/fetch_theme_photos.py --candidats ${{ inputs.candidats || '3' }}
+
+      - name: Publier les candidats en artefact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: photos-candidates
+          path: assets/themes/candidats/
+          retention-days: 7
+
+      - name: Commiter les candidats pour arbitrage visuel
+        run: |
+          git config user.email "bot@signal.fr"
+          git config user.name "Signal Bot"
+          git add assets/themes/candidats/
+          if git diff --staged --quiet; then
+            echo "Aucun candidat nouveau."
+          else
+            git commit -m "chore(assets): candidats photo pour les thèmes [skip ci]"
+            git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase"; exit 1; }
+            git push
+          fi
