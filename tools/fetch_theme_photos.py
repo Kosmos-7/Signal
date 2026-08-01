@@ -40,6 +40,7 @@ LICENCES_KO = ("by-sa", "by-nc", "nd", "fair use", "non-free", "copyright")
 # Requêtes par thème. Plusieurs formulations : Commons est inégalement fourni,
 # et une seule requête donne souvent des résultats hors sujet.
 REQUETES = {
+    "principale":      ["stock market index board", "financial market data screen", "stock exchange display panel"],
     "semis":           ["silicon wafer", "semiconductor fabrication cleanroom", "integrated circuit die"],
     "memoire":         ["DRAM memory module", "computer memory chips", "hard disk drive platter"],
     "ia":              ["data center servers", "server room network", "supercomputer racks"],

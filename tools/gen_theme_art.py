@@ -830,7 +830,50 @@ def qualite(pl, ac):
 
 
 # ── Registre des planches ────────────────────────────────────────────────────
+def principale(pl, ac):
+    """Classement : l'univers entier trié, la tête retenue.
+
+    La watchlist principale n'illustre pas un secteur mais un GESTE — ordonner
+    puis couper. D'où un histogramme de scores décroissants dont seuls les
+    premiers rangs sont retenus, avec le seuil marqué.
+    """
+    x0, x1, base = 104, 872, 430
+    n = 60
+    bw = (x1 - x0) / n
+    garde = 9                      # rangs retenus, proportionnel à 30 sur 210
+
+    def score(i):
+        # décroissance régulière avec un léger palier — l'allure d'un vrai
+        # classement, pas une droite
+        u = i / (n - 1)
+        return 232 * math.exp(-2.35 * u) * (1 + 0.05 * math.sin(u * 13))
+
+    for i in range(n):
+        h = score(i)
+        bx0, bx1 = x0 + i * bw + 1.2, x0 + (i + 1) * bw - 1.2
+        retenu = i < garde
+        col = ac if retenu else BLUE
+        pl.fill((bx0, base - h, bx1, base), col + (58 if retenu else 22,))
+        pl.rect((bx0, base - h, bx1, base), col + (215 if retenu else 52,), 1)
+
+    # seuil de coupe : là où le classement s'arrête
+    cx = x0 + garde * bw
+    pl.line((cx, 150), (cx, base + 16), ac + (200,), 1.6)
+    for y in range(152, int(base) + 14, 11):     # tireté manuel
+        pl.line((cx, y), (cx, y + 5), ac + (235,), 1.6)
+
+    # axe et cote de la zone retenue
+    pl.line((x0, base), (x1, base), LINE, 1.4)
+    pl.line((x0, 132), (cx, 132), ac + (170,), 1.2)
+    for e in (x0, cx):
+        pl.line((e, 126), (e, 138), ac + (170,), 1.2)
+
+    # les rangs suivants continuent hors cadre : le classement ne s'arrête pas
+    pl.line((x1 - 26, base - 14), (x1 + 4, base - 14), BLUE + (46,), 1)
+
+
 PLATES = [
+    ("principale",      0,  principale,      AMBER,  "CLASSEMENT / SEUIL"),
     ("semis",           1,  semis,           AMBER,  "LITHOGRAPHIE / RETICULE"),
     ("memoire",         2,  memoire,         AMBER,  "CYCLE / STOCK"),
     ("ia",              3,  ia,              VIOLET, "PROPAGATION / COUCHES"),
