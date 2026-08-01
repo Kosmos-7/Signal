@@ -19,7 +19,9 @@
   .rail-back:hover{color:var(--ac)}
   .rail-top #rw{font:.58rem var(--mono);color:var(--text3);letter-spacing:.5px}
   .rail-h{display:flex;justify-content:space-between;gap:8px;font:600 .62rem var(--mono);letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;padding:0 .4rem .6rem;border-bottom:1px solid var(--line)}
-  .rail-h #rc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2)}
+  /* Le nom de la watchlist s'affiche en entier, quitte à passer sur deux
+     lignes — « INFRASTRUCTURE DE L'… » tronqué ne nomme rien. */
+  .rail-h #rc{color:var(--text2);line-height:1.45;overflow-wrap:break-word;min-width:0}
   .rail-h #rn{flex:0 0 auto}
   .rail-l{overflow-y:auto;flex:1;mask-image:linear-gradient(180deg,transparent,#000 12px,#000 calc(100% - 12px),transparent)}.rail-l::-webkit-scrollbar{width:0}
   .rail-lex{display:block;margin-top:.4rem;padding:.65rem .4rem .1rem;border-top:1px solid var(--line);font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .15s;cursor:pointer;flex:0 0 auto}
@@ -139,7 +141,9 @@
   .tc-kind{font:600 .55rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 7px;align-self:flex-start}
   .tc-l{font-family:var(--serif);font-size:1.22rem;line-height:1.15;letter-spacing:-.3px;color:var(--text)}
   .tc-s{font:.64rem var(--mono);color:var(--text3);letter-spacing:.4px;margin-top:-.28rem}
-  .tc-th{font-size:.855rem;line-height:1.55;color:var(--text2);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  /* La thèse s'affiche EN ENTIER sur la carte — elle est le contenu, pas un
+     teaser. Les cartes ont des hauteurs différentes, et c'est très bien. */
+  .tc-th{font-size:.855rem;line-height:1.55;color:var(--text2)}
   .tc-top{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:.35rem}
   .tc-chip{font:.62rem var(--mono);color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 6px;letter-spacing:.3px;white-space:nowrap}
   .tc-chip b{color:var(--text2);font-weight:700;margin-left:5px}
@@ -151,7 +155,7 @@
   .tcard{flex-direction:row}
   .tc-img{aspect-ratio:auto;width:31%;max-width:340px;min-height:158px;border-bottom:0;border-right:1px solid var(--line)}
   .tc-b{padding:1.05rem 1.3rem 1.1rem;gap:.55rem}
-  .tc-th{-webkit-line-clamp:2;line-clamp:2;max-width:760px}
+  .tc-th{max-width:760px}
   /* La watchlist principale n'a plus ni taille ni traitement particuliers :
      toutes les cartes sont strictement identiques. Elle reste identifiable par
      son contenu — son intitulé et son étiquette PRINCIPALE — plutôt que par un
@@ -262,7 +266,7 @@
 
 <header>
   <a class="brand" href="index.html"><span class="brand-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#22d98a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-name">Signal</span></a>
-  <nav><a href="index.html#/" class="active">Watchlists</a><a href="index.html#/w/principale">Principale</a><a href="portfolio.html">Portefeuille IA</a><a href="apprendre.html">Apprendre</a></nav>
+  <nav><a href="index.html#/" class="active">Watchlists</a><a href="portfolio.html">Portefeuille IA</a><a href="apprendre.html">Apprendre</a></nav>
 </header>
 
 <div class="rail"><div class="rail-top"><a class="rail-back" href="#/">← Watchlists</a><span id="rw"></span></div><div class="rail-h"><span id="rc">—</span><span id="rn"></span></div><div class="rail-l" id="rl"></div><a class="rail-lex" id="lexlink" href="#lexique">Lexique des signaux</a></div>
@@ -367,12 +371,11 @@ function parseHash(){
 function nav(h){ if(location.hash===h)route(); else location.hash=h; }
 // La nav du header est écrite à la main dans les 3 pages ; dans index.html les
 // deux entrées pointent sur cette même page, .active suit donc la route.
+// Le header n'a plus qu'une entrée pour cette page : « Watchlists » reste
+// active sur toutes ses routes (homepage, thème, fiche, lexique).
 function navActive(){
-  const onMain=location.hash.indexOf('#/w/'+MAIN)===0;
   document.querySelectorAll('header nav a').forEach(a=>{
-    const h=a.getAttribute('href')||'';
-    if(h==='index.html#/')a.classList.toggle('active',!onMain);
-    else if(h==='index.html#/w/'+MAIN)a.classList.toggle('active',onMain);
+    if((a.getAttribute('href')||'')==='index.html#/')a.classList.add('active');
   });
 }
 function hashOf(id,tk){ return '#/w/'+id+(tk?'/'+encodeURIComponent(tk):''); }
@@ -475,11 +478,13 @@ function showHome(){
   const doc=document.getElementById('doc');doc.classList.remove('on');
   const m=mainMeta();
   const others=U.themes.filter(t=>t&&t.id&&t.id!==MAIN);
-  const meta=[U.updated_at?'Mise à jour '+sv(U.updated_at):'',U.week?sv(U.week):'',
-    U.universe_scored!=null?'<b>'+U.universe_scored+'</b> titres scorés'+(U.universe_declared!=null?' sur '+U.universe_declared+' déclarés':''):''
+  // Volontairement sobre : la date et la semaine situent la fraîcheur des
+  // données, le décompte de titres scorés relevait du tableau de bord interne.
+  const meta=[U.updated_at?'Mise à jour '+sv(U.updated_at):'',U.week?sv(U.week):''
   ].filter(Boolean).join(' · ');
   doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
-    '<p class="home-lead">Un seul scoring, plusieurs lectures. La watchlist principale classe l\'univers entier ; les vues thématiques n\'en sont que des projections — mêmes chiffres, même méthode, angle différent. Un titre peut appartenir à plusieurs d\'entre elles.</p>'+
+    '<p class="home-lead">La <b>watchlist principale</b> répond à une question : où sont les meilleurs dossiers cette semaine ? Trente titres, toutes catégories, sélectionnés par un score unique qui pèse la qualité du business, le prix payé et le timing.</p>'+
+    '<p class="home-lead">Les <b>watchlists thématiques</b> répondent à une autre : si vous croyez à une thèse — l\'infrastructure de l\'IA, les métiers de la finance — quels titres l\'incarnent, et lesquels sont les mieux notés en ce moment ? Chaque thème expose sa thèse, ce qui l\'invaliderait et les biais qu\'il concentre, avec les mêmes scores que partout ailleurs. De quoi comparer des titres à l\'intérieur d\'une conviction, sans refaire la recherche titre par titre.</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
