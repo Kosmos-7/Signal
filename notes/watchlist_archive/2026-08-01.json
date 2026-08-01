@@ -1,7 +1,7 @@
 {
   "updated_at": "2026-08-01",
   "week": "Sem. 31 · 2026",
-  "universe_size": 209,
+  "universe_size": 227,
   "finnhub_active": true,
   "stocks": [
     {
@@ -310,7 +310,7 @@
       "score": 83,
       "stars": 4,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
         "qualite": 35,
         "valorisation": 30,
@@ -925,6 +925,87 @@
       "rank": 12
     },
     {
+      "ticker": "GEV",
+      "name": "GE Vernova Inc.",
+      "market": "NYQ",
+      "sector": "Industrie",
+      "score": 75,
+      "stars": 4,
+      "badge": null,
+      "change": "new",
+      "breakdown": {
+        "qualite": 45,
+        "valorisation": 21,
+        "timing": 6,
+        "analystes": 3,
+        "vix_value": 15.99,
+        "cross_regime": "golden",
+        "cross_type": "golden",
+        "cross_days_ago": 999,
+        "cross_spread_pct": 24.43,
+        "cross_slope_mm21_pct": -3.23,
+        "cross_volume_confirmed": false,
+        "signal_dynamics_warning": "Affaiblissement post-rally sur cross stale — pente MM21 fortement négative malgré cours largement au-dessus de MM200",
+        "cross_pts": 4,
+        "rsi_pts": 2,
+        "vol_pts": 0,
+        "reg_pts": 0,
+        "val_pts": 3,
+        "slope_pts": 0,
+        "val_pts_mode": "normal",
+        "drawdown_52w_pct": -15.7,
+        "high_52w": 1174.86,
+        "fibo": {
+          "swing_low": 546.95,
+          "swing_high": 1174.86,
+          "rally_pct": 114.8,
+          "retrace_pct": 29.4,
+          "closest_fibo": "zone Fibo 23.6%",
+          "fibo_levels": {
+            "23.6": 1026.67,
+            "38.2": 935.0,
+            "50.0": 860.9,
+            "61.8": 786.81,
+            "78.6": 681.32
+          }
+        },
+        "rsi": 46.4,
+        "mm21": 1039.97,
+        "mm200": 835.81,
+        "regression_z": -1.79,
+        "regression_signal": "survente",
+        "regression_pente_pct": 91.4,
+        "regression_sigma": 0.128,
+        "prix_tendance": 1245.67,
+        "decote_pct": 20.5,
+        "regression_window_years": 2,
+        "regression_window_reason": "standard_20y",
+        "prix": 990.29,
+        "devise": "USD",
+        "rev_growth_pct": 21.9,
+        "net_margin_pct": 23.0,
+        "fcf_margin_pct": 38.0,
+        "mrq": "2026-06-30",
+        "forward_pe": 39.8,
+        "trailing_pe": 28.4,
+        "fcf_yield_pct": 5.96,
+        "peg": 1.53,
+        "target_mean_price": 1233.1,
+        "target_upside_pct": 24.5,
+        "target_analysts": 34,
+        "death_pen": 0,
+        "chase_pen": 0,
+        "value_bonus": 0,
+        "confiance": 1.0,
+        "sources": [
+          "Yahoo Finance",
+          "Finnhub"
+        ]
+      },
+      "justification": "Score 75/100 — ⚠ affaiblissement post-rally sur cross stale, prix sous sa droite de régression (-1.8σ), RSI en zone favorable, correction modérée -15.7% sous le top (zone Fibo 23.6%), croissance CA solide (22%/an), marges excellentes (23%).",
+      "rank": 13
+    },
+    {
       "ticker": "NVDA",
       "name": "NVIDIA Corporation",
       "market": "NMS",
@@ -989,7 +1070,7 @@
         "forward_pe": 15.6,
         "trailing_pe": 30.8,
         "fcf_yield_pct": 0.95,
-        "peg": 0.52,
+        "peg": 0.55,
         "target_mean_price": 302.83,
         "target_upside_pct": 50.8,
         "target_analysts": 58,
@@ -1003,7 +1084,7 @@
         ]
       },
       "justification": "Score 74/100 — cours proche de sa droite de régression, RSI en zone favorable, correction modérée -14.7% sous le top (zone Fibo 38.2%), croissance CA solide (85%/an), marges excellentes (63%), consensus analystes très favorable.",
-      "rank": 13
+      "rank": 14
     },
     {
       "ticker": "AVGO",
@@ -1084,7 +1165,7 @@
         ]
       },
       "justification": "Score 73/100 — légèrement au-dessus de sa régression (+1.3σ), RSI en zone favorable, correction modérée -19.0% sous le top (zone Fibo 38.2%), croissance CA solide (48%/an), marges excellentes (39%), consensus analystes très favorable.",
-      "rank": 14
+      "rank": 15
     },
     {
       "ticker": "META",
@@ -1152,7 +1233,7 @@
         ]
       },
       "justification": "Score 73/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA solide (28%/an), marges excellentes (30%), consensus analystes très favorable.",
-      "rank": 15
+      "rank": 16
     },
     {
       "ticker": "NTAP",
@@ -1233,7 +1314,7 @@
         ]
       },
       "justification": "Score 73/100 — Golden Cross confirmé (56j), légèrement au-dessus de sa régression (+1.8σ), RSI en zone favorable, ⚠ près du top 52w (-1.1%) — risque de chase, croissance CA modérée (12%/an), marges excellentes (18%).",
-      "rank": 16
+      "rank": 17
     },
     {
       "ticker": "ASML.AS",
@@ -1313,7 +1394,7 @@
         ]
       },
       "justification": "Score 71/100 — légèrement au-dessus de sa régression (+1.4σ), RSI en zone favorable, correction modérée -16.2% sous le top (zone Fibo 23.6%), croissance CA solide (21%/an), marges excellentes (30%), consensus analystes très favorable.",
-      "rank": 17
+      "rank": 18
     },
     {
       "ticker": "ZTS",
@@ -1323,7 +1404,7 @@
       "score": 71,
       "stars": 3,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "qualite": 31,
         "valorisation": 21,
@@ -1381,7 +1462,7 @@
         ]
       },
       "justification": "Score 71/100 — prix sous sa droite de régression (-4.0σ), RSI en zone favorable, ⚠ -49.7% sous le top 52w — trend probablement cassée, marges excellentes (28%), consensus analystes positif.",
-      "rank": 18
+      "rank": 19
     },
     {
       "ticker": "005930.KS",
@@ -1435,7 +1516,7 @@
         "regression_signal": "surachat",
         "regression_pente_pct": 13.4,
         "regression_sigma": 0.2653,
-        "prix_tendance": 105611.68,
+        "prix_tendance": 105611.69,
         "decote_pct": -148.6,
         "regression_window_years": 10,
         "regression_window_reason": "tech_10y",
@@ -1461,7 +1542,7 @@
         ]
       },
       "justification": "Score 70/100 — ⚠ affaiblissement post-rally sur cross stale, prix en surachat régression (+3.4σ) — prudence, RSI en zone favorable, croissance CA solide (130%/an), marges excellentes (31%), consensus analystes très favorable.",
-      "rank": 19
+      "rank": 20
     },
     {
       "ticker": "CB",
@@ -1542,7 +1623,7 @@
         ]
       },
       "justification": "Score 70/100 — légèrement au-dessus de sa régression (+1.1σ), RSI en zone favorable, pullback sain -3.5% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA modérée (6%/an), marges excellentes (18%), consensus analystes positif.",
-      "rank": 20
+      "rank": 21
     },
     {
       "ticker": "QCOM",
@@ -1609,9 +1690,9 @@
         "forward_pe": 14.3,
         "trailing_pe": 16.9,
         "fcf_yield_pct": 6.61,
-        "peg": 0.49,
-        "target_mean_price": 199.43,
-        "target_upside_pct": 35.1,
+        "peg": 0.63,
+        "target_mean_price": 196.27,
+        "target_upside_pct": 33.0,
         "target_analysts": 30,
         "death_pen": 0,
         "chase_pen": 0,
@@ -1623,7 +1704,7 @@
         ]
       },
       "justification": "Score 70/100 — Golden Cross confirmé (56j), prix sous sa droite de régression (-1.6σ), ⚠ -41.0% sous le top 52w — trend probablement cassée, marges excellentes (21%).",
-      "rank": 21
+      "rank": 22
     },
     {
       "ticker": "ADYEN.AS",
@@ -1690,7 +1771,7 @@
         "forward_pe": 18.8,
         "trailing_pe": 26.1,
         "fcf_yield_pct": 1.93,
-        "peg": 1.22,
+        "peg": 1.21,
         "target_mean_price": 1330.29,
         "target_upside_pct": 50.3,
         "target_analysts": 34,
@@ -1703,7 +1784,7 @@
         ]
       },
       "justification": "Score 69/100 — prix sous sa droite de régression (-1.6σ), RSI en zone favorable, ⚠ -41.8% sous le top 52w — trend probablement cassée, croissance CA solide (17%/an), marges excellentes (45%), consensus analystes très favorable.",
-      "rank": 22
+      "rank": 23
     },
     {
       "ticker": "GILD",
@@ -1784,7 +1865,7 @@
         ]
       },
       "justification": "Score 69/100 — Golden Cross frais (9j) — fenêtre signal optimale, cours proche de sa droite de régression, RSI en zone favorable, marges excellentes (31%), consensus analystes très favorable.",
-      "rank": 23
+      "rank": 24
     },
     {
       "ticker": "MRVL",
@@ -1865,7 +1946,7 @@
         ]
       },
       "justification": "Score 69/100 — ⚠ affaiblissement post-rally sur cross stale, légèrement au-dessus de sa régression (+1.9σ), RSI en zone favorable, ⚠ -40.7% sous le top 52w — trend probablement cassée, croissance CA solide (28%/an), marges excellentes (29%).",
-      "rank": 24
+      "rank": 25
     },
     {
       "ticker": "NOW",
@@ -1933,7 +2014,7 @@
         ]
       },
       "justification": "Score 69/100 — prix sous sa droite de régression (-2.5σ), RSI en zone favorable, ⚠ -42.1% sous le top 52w — trend probablement cassée, croissance CA solide (24%/an), marges positives, consensus analystes très favorable.",
-      "rank": 25
+      "rank": 26
     },
     {
       "ticker": "PLTR",
@@ -2014,7 +2095,7 @@
         ]
       },
       "justification": "Score 69/100 — cours proche de sa droite de régression, RSI en zone favorable, ⚠ -40.6% sous le top 52w — trend probablement cassée, croissance CA solide (85%/an), marges excellentes (44%), consensus analystes très favorable.",
-      "rank": 26
+      "rank": 27
     },
     {
       "ticker": "PYPL",
@@ -2095,7 +2176,7 @@
         ]
       },
       "justification": "Score 69/100 — Golden Cross frais (1j) — fenêtre signal optimale, prix sous sa droite de régression (-1.0σ), marges positives.",
-      "rank": 27
+      "rank": 28
     },
     {
       "ticker": "ADI",
@@ -2105,7 +2186,7 @@
       "score": 68,
       "stars": 3,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "qualite": 38,
         "valorisation": 18,
@@ -2176,7 +2257,7 @@
         ]
       },
       "justification": "Score 68/100 — légèrement au-dessus de sa régression (+1.9σ), RSI en zone favorable, correction modérée -17.5% sous le top (zone Fibo 23.6%), croissance CA solide (37%/an), marges excellentes (26%), consensus analystes très favorable.",
-      "rank": 28
+      "rank": 29
     },
     {
       "ticker": "MA",
@@ -2244,117 +2325,21 @@
         ]
       },
       "justification": "Score 68/100 — Golden Cross frais (5j) — fenêtre signal optimale, prix sous sa droite de régression (-1.8σ), croissance CA modérée (14%/an), marges excellentes (46%), consensus analystes très favorable.",
-      "rank": 29
-    },
-    {
-      "ticker": "MCO",
-      "name": "Moody's Corporation",
-      "market": "NYQ",
-      "sector": "Finance",
-      "score": 68,
-      "stars": 3,
-      "badge": null,
-      "change": "stable",
-      "breakdown": {
-        "qualite": 38,
-        "valorisation": 12,
-        "timing": 15,
-        "analystes": 3,
-        "vix_value": 15.99,
-        "cross_regime": "golden",
-        "cross_type": "golden",
-        "cross_days_ago": 12,
-        "cross_spread_pct": 4.47,
-        "cross_slope_mm21_pct": 1.49,
-        "cross_volume_confirmed": false,
-        "signal_dynamics_warning": "",
-        "cross_pts": 9,
-        "rsi_pts": 2,
-        "vol_pts": 0,
-        "reg_pts": 0,
-        "val_pts": 3,
-        "slope_pts": 4,
-        "val_pts_mode": "gc_fresh_inverted",
-        "drawdown_52w_pct": -10.9,
-        "high_52w": 537.16,
-        "fibo": {
-          "swing_low": 465.51,
-          "swing_high": 537.16,
-          "rally_pct": 15.4,
-          "retrace_pct": 82.0,
-          "closest_fibo": "rally annulé (> 78.6%)",
-          "fibo_levels": {
-            "23.6": 520.25,
-            "38.2": 509.79,
-            "50.0": 501.34,
-            "61.8": 492.88,
-            "78.6": 480.85
-          }
-        },
-        "rsi": 48.6,
-        "mm21": 491.31,
-        "mm200": 470.3,
-        "regression_z": -0.56,
-        "regression_signal": "sous tendance",
-        "regression_pente_pct": 17.4,
-        "regression_sigma": 0.3373,
-        "prix_tendance": 578.3,
-        "decote_pct": 17.3,
-        "regression_window_years": 20,
-        "regression_window_reason": "standard_20y",
-        "prix": 478.38,
-        "devise": "USD",
-        "rev_growth_pct": 15.1,
-        "net_margin_pct": 34.3,
-        "fcf_margin_pct": 31.6,
-        "mrq": "2026-06-30",
-        "forward_pe": 25.3,
-        "trailing_pe": 30.4,
-        "fcf_yield_pct": 3.11,
-        "peg": 2.09,
-        "target_mean_price": 558.81,
-        "target_upside_pct": 16.8,
-        "target_analysts": 21,
-        "death_pen": 0,
-        "chase_pen": 0,
-        "value_bonus": 0,
-        "confiance": 1.0,
-        "sources": [
-          "Yahoo Finance",
-          "Finnhub"
-        ]
-      },
-      "justification": "Score 68/100 — Golden Cross récent (12j), prix sous sa droite de régression (-0.6σ), RSI en zone favorable, croissance CA solide (15%/an), marges excellentes (34%), consensus analystes très favorable.",
       "rank": 30
     }
   ],
   "changelog": [
     {
       "action": "in",
-      "ticker": "ZTS",
-      "name": "Zoetis Inc.",
-      "score": 71,
-      "reason": "Score 71/100 — prix sous sa droite de régression (-4.0σ), RSI en zone favorable, ⚠ -49.7% sous le top 52w — trend probablement cassée, marges excellentes (28%), consensus analystes positif."
-    },
-    {
-      "action": "in",
-      "ticker": "ADI",
-      "name": "Analog Devices, Inc.",
-      "score": 68,
-      "reason": "Score 68/100 — légèrement au-dessus de sa régression (+1.9σ), RSI en zone favorable, correction modérée -17.5% sous le top (zone Fibo 23.6%), croissance CA solide (37%/an), marges excellentes (26%), consensus analystes très favorable."
+      "ticker": "GEV",
+      "name": "GE Vernova Inc.",
+      "score": 75,
+      "reason": "Score 75/100 — ⚠ affaiblissement post-rally sur cross stale, prix sous sa droite de régression (-1.8σ), RSI en zone favorable, correction modérée -15.7% sous le top (zone Fibo 23.6%), croissance CA solide (22%/an), marges excellentes (23%)."
     },
     {
       "action": "out",
-      "ticker": "SAP.DE",
-      "name": "SAP SE                ",
-      "score": 68,
-      "new_score": 68,
-      "reason": "Score stable (68 → 68) — d'autres titres ont simplement mieux scoré cette semaine · nuance : rebond mean-reversion en cours, mais score global insuffisant pour rester dans le top 30."
-    },
-    {
-      "action": "out",
-      "ticker": "TXN",
-      "name": "Texas Instruments Inco",
+      "ticker": "MCO",
+      "name": "Moody's Corporation",
       "score": 68,
       "new_score": 68,
       "reason": "Score stable (68 → 68) — d'autres titres ont simplement mieux scoré cette semaine."
@@ -2362,16 +2347,18 @@
   ],
   "concentration_alerts": [
     "Technologie : 17 titres sur 30",
-    "Finance : 7 titres sur 30",
+    "Finance : 6 titres sur 30",
     "Médias & IA : 3 titres sur 30",
     "Santé : 2 titres sur 30",
-    "Conso. cycl. : 1 titre sur 30"
+    "Conso. cycl. : 1 titre sur 30",
+    "Industrie : 1 titre sur 30"
   ],
   "sector_distribution": {
     "Technologie": 17,
-    "Finance": 7,
+    "Finance": 6,
     "Médias & IA": 3,
     "Santé": 2,
-    "Conso. cycl.": 1
+    "Conso. cycl.": 1,
+    "Industrie": 1
   }
 }

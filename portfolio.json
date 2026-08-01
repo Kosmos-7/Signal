@@ -2,22 +2,22 @@
   "updated_at": "2026-08-01",
   "week": "Sem. 31 · 2026",
   "capital_initial": 20000.0,
-  "capital_actuel": 23480.58,
-  "performance": 17.4,
-  "performance_brute": 17.85,
+  "capital_actuel": 23509.9,
+  "performance": 17.55,
+  "performance_brute": 17.99,
   "total_frais_payes": 30.11,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 861.36,
-  "capital_post_liquidation": 21956.71,
-  "performance_post_liquidation": 9.78,
-  "frais_si_liquidation": 17.35,
-  "pfu_latent_si_liquidation": 1506.52,
-  "pertes_si_liquidation": 460.46,
+  "capital_post_liquidation": 21978.89,
+  "performance_post_liquidation": 9.89,
+  "frais_si_liquidation": 17.37,
+  "pfu_latent_si_liquidation": 1513.66,
+  "pertes_si_liquidation": 454.93,
   "last_known_vix": 15.99,
   "last_known_vix_source": "live",
   "benchmark_cac40": 3.84,
   "benchmark_msci": 11.65,
-  "vs_benchmark": 5.75,
+  "vs_benchmark": 5.9,
   "mode_panique": false,
   "perf_cac_semaine": 1.64,
   "positions": [
@@ -29,14 +29,14 @@
       "currency": "EUR",
       "date_achat": "2026-01-02",
       "prix_achat": 650.0,
-      "prix_actuel": 1434.2,
+      "prix_actuel": 1440.0,
       "quantite": 3,
       "montant_investi": 1951.46,
-      "valeur_actuelle": 4302.6,
-      "performance": 120.48,
+      "valeur_actuelle": 4320.0,
+      "performance": 121.37,
       "score_entree": 88,
-      "poids": 18.3,
-      "plus_value_latente_eur": 2351.14
+      "poids": 18.4,
+      "plus_value_latente_eur": 2368.54
     },
     {
       "ticker": "NVDA",
@@ -87,7 +87,7 @@
       "performance": 23.36,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
-      "poids": 5.8,
+      "poids": 5.7,
       "plus_value_latente_eur": 255.85
     },
     {
@@ -220,14 +220,14 @@
       "currency": "EUR",
       "date_achat": "2026-05-05",
       "prix_achat": 261.9,
-      "prix_actuel": 262.3,
+      "prix_actuel": 263.9,
       "quantite": 4,
       "montant_investi": 1048.39,
-      "valeur_actuelle": 1049.2,
-      "performance": 0.08,
+      "valeur_actuelle": 1055.6,
+      "performance": 0.69,
       "score_entree": 84,
       "poids": 4.5,
-      "plus_value_latente_eur": 0.81
+      "plus_value_latente_eur": 7.21
     },
     {
       "ticker": "SPGI",
@@ -300,6 +300,23 @@
       "plus_value_latente_eur": -79.0
     },
     {
+      "ticker": "ADYEN.AS",
+      "nom": "ADYEN",
+      "market": "AMS",
+      "sector": "Technologie",
+      "currency": "EUR",
+      "date_achat": "2026-04-30",
+      "prix_achat": 958.5,
+      "prix_actuel": 885.2,
+      "quantite": 1,
+      "montant_investi": 959.22,
+      "valeur_actuelle": 885.2,
+      "performance": -7.72,
+      "score_entree": 93,
+      "poids": 3.8,
+      "plus_value_latente_eur": -74.02
+    },
+    {
       "ticker": "LSEG.L",
       "nom": "London Stock Exchange Group",
       "market": "LSE",
@@ -314,25 +331,8 @@
       "performance": -7.88,
       "score_entree": 83,
       "raison_achat": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
-      "poids": 5.9,
+      "poids": 5.8,
       "plus_value_latente_eur": -117.69
-    },
-    {
-      "ticker": "ADYEN.AS",
-      "nom": "ADYEN",
-      "market": "AMS",
-      "sector": "Technologie",
-      "currency": "EUR",
-      "date_achat": "2026-04-30",
-      "prix_achat": 958.5,
-      "prix_actuel": 876.9,
-      "quantite": 1,
-      "montant_investi": 959.22,
-      "valeur_actuelle": 876.9,
-      "performance": -8.58,
-      "score_entree": 93,
-      "poids": 3.7,
-      "plus_value_latente_eur": -82.32
     },
     {
       "ticker": "ORSTED.CO",
@@ -342,17 +342,17 @@
       "currency": "DKK",
       "date_achat": "2026-05-27",
       "prix_achat": 164.25,
-      "prix_actuel": 145.0,
+      "prix_actuel": 144.6,
       "quantite": 52,
       "montant_investi": 1150.61,
       "frais_achat_eur": 0.8623,
-      "valeur_actuelle": 1008.8,
-      "performance": -12.32,
+      "valeur_actuelle": 1006.02,
+      "performance": -12.57,
       "score_entree": 81,
       "raison_achat": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression — décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low) — le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique — opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
       "poids": 4.3,
       "correction": "Devise corrigee EUR->DKK le 2026-06-10 (cotation Copenhague) ; quantite requantifiee pour honorer le montant EUR investi.",
-      "plus_value_latente_eur": -141.81
+      "plus_value_latente_eur": -144.59
     }
   ],
   "liquidites": 352.11,
@@ -1425,9 +1425,8 @@
     }
   ],
   "biais_detectes": [
-    "FOMO potentiel sur rally asiatique semi-conducteurs (Kospi +17% vendredi) — à ne pas chase",
-    "Biais d'engagement sur ORSTED.CO et LSEG.L en perte latente — surveiller sans s'y accrocher émotionnellement",
-    "Action bias — le fait de ne rien faire cette semaine EST la bonne décision (liquidités insuffisantes, pas de rotation qualifiée)"
+    "Action bias potentiel : tentation d'agir parce que des opportunités watchlist sont visibles, alors que les liquidités et le contexte (même journée de run) ne le justifient pas",
+    "FOMO latent sur la hausse asiatique IA (Kospi +17%) : le signal est réel mais le portefeuille est déjà exposé à 48% sur la thèse infrastructure IA — ajouter serait du momentum chasing concentré"
   ],
   "regles_actives": [
     {
@@ -1446,26 +1445,18 @@
     },
     {
       "type": "concentration_thematique",
-      "theme": "ia",
-      "pct": 52.8,
+      "theme": "infra-ia",
+      "pct": 47.5,
       "regime": "info",
-      "message": "Thème « Intelligence artificielle » : 53% du capital (ASML.AS, NVDA, NOW, AMZN, CRM, ETN, AVGO, META) — ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
+      "message": "Thème « Infrastructure de l'IA » : 48% du capital (ASML.AS, NVDA, AMD, AMZN, ETN, AVGO, META) — ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
       "bloque": false
     },
     {
       "type": "concentration_thematique",
-      "theme": "semis",
-      "pct": 39.9,
+      "theme": "financials",
+      "pct": 28.0,
       "regime": "info",
-      "message": "Thème « Semi-conducteurs » : 40% du capital (ASML.AS, NVDA, AMD, AVGO) — ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
-      "bloque": false
-    },
-    {
-      "type": "concentration_thematique",
-      "theme": "qualite",
-      "pct": 36.9,
-      "regime": "info",
-      "message": "Thème « Qualité durable » : 37% du capital (ASML.AS, NVDA, ADYEN.AS) — ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
+      "message": "Thème « Financials » : 28% du capital (JPM, V, BLK, DB1.DE, SPGI, LSEG.L, ADYEN.AS) — ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
       "bloque": false
     }
   ],
@@ -1481,7 +1472,7 @@
       "date": "2026-07-30",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/07/30/us-treasury-yields-divided-fed-interest-rates-hold-steady-.html",
-      "resume_fr": "La Fed maintient ses taux inchangés mais les rendements des Treasuries continuent de monter, reflétant la méfiance des marchés sur la désinflation."
+      "resume_fr": "La Fed maintient ses taux inchangés, mais les rendements obligataires américains continuent de monter, reflétant les doutes des investisseurs sur un assouplissement proche."
     },
     {
       "headline": "Bank of England keeps rates on hold, awaits clearer sign of Iran war inflation hit - Reuters",
@@ -1489,7 +1480,7 @@
       "date": "2026-07-30",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNcXV6ZUFyTnVCZmxRUVdTancteHlMckpydGNUdmYwdDFtaTllNmhNdkh2S0J1NS1CWDE1VG51Y18wcU41VloxRWZ5LWpTVGlGb2NfeDRkZ1RJeUs5aFFxaHIwVzByUk9md01STlJqVlRqLUNaVWdYN0psNXFGUlpuSVJOWGZ2LWtrNnJxbTlxUUNVNWxvOXJKZXM1alBLbzR4QXBUTjIzMXNwOG4zM2ZQVlZ6enJHZw?oc=5",
-      "resume_fr": "La Banque d'Angleterre maintient ses taux et attend d'évaluer l'impact inflationniste du conflit Iran avant d'agir."
+      "resume_fr": "La Banque d'Angleterre laisse ses taux inchangés en attendant de mieux évaluer l'impact inflationniste du conflit avec l'Iran."
     },
     {
       "headline": "Gold holds modest gain after Federal Reserve keeps rates steady",
@@ -1497,7 +1488,7 @@
       "date": "2026-07-30",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-07-29/gold-advances-after-federal-reserve-keeps-interest-rates-on-hold",
-      "resume_fr": "L'or reste stable après la décision de la Fed de ne pas modifier ses taux directeurs, les traders repoussant leurs anticipations de hausse."
+      "resume_fr": "L'or progresse modestement après la décision de la Fed ; les rendements courts reculent tandis que les anticipations de hausse des taux sont repoussées à plus tard dans l'année."
     },
     {
       "headline": "Here are the five big takeaways from this week's Fed meeting",
@@ -1505,7 +1496,7 @@
       "date": "2026-07-29",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/07/29/here-are-the-five-big-takeaways-from-this-weeks-fed-meeting.html",
-      "resume_fr": "Cinq enseignements majeurs ressortent de la réunion de la Fed cette semaine, dont la confirmation d'un statu quo monétaire."
+      "resume_fr": "Cinq enseignements majeurs ressortent de la réunion de la Fed cette semaine : statu quo sur les taux, conformément aux attentes des marchés."
     },
     {
       "headline": "Illicit Iranian gambling network helped pull off a $4 billion sanctions dodge - Reuters",
@@ -1513,7 +1504,7 @@
       "date": "2026-07-31",
       "source": "Reuters",
       "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPM0c1Y3Z1S3JvRDl6YklGRHdRWXJWWDdOMUJYQ0FURHpwLTByV1N0bzBCZ0ZGWGZoc0FwakZlLTI2S3cxWGxOV010X1I1NWlBVGRRbmdJeW9penZraklmQ2dtVERtdVMwM1ljR2t4QTl0OEZicThhNTZnN1ZJb3dlMC05TXBoOG4ybGpka1hRX2hUVGtkYTVjRHhBbk9CZDlMYWluVk03Yl9HeWt6UnhyMXZTMGtBQTE3S2l6NHoxOW96WTg?oc=5",
-      "resume_fr": "Un réseau iranien illicite aurait orchestré un contournement de sanctions de 4 milliards de dollars via un réseau de paris clandestins."
+      "resume_fr": "Un réseau de jeux illicites iranien aurait orchestré un contournement de sanctions à hauteur de 4 milliards de dollars, selon Reuters."
     },
     {
       "headline": "Asian stocks post biggest gain in four months on AI optimism",
@@ -1521,14 +1512,14 @@
       "date": "2026-07-31",
       "source": "Bloomberg",
       "url": "https://www.bloomberg.com/news/articles/2026-07-31/asian-stocks-post-biggest-gain-in-four-months-on-ai-optimism",
-      "resume_fr": "Les marchés asiatiques enregistrent leur plus forte hausse en quatre mois portée par l'optimisme IA, avec le Kospi coréen en hausse de 17% grâce à Samsung et SK Hynix."
+      "resume_fr": "Les marchés actions asiatiques enregistrent leur plus forte hausse en quatre mois, portés par l'optimisme autour de l'IA, avec le Kospi sud-coréen en hausse de 17% grâce à Samsung et SK Hynix."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Cette semaine de fin juillet 2026 aura été dominée par la Fed — qui a maintenu ses taux inchangés mercredi, comme attendu. La surprise est ailleurs : les Treasury yields ont CONTINUÉ de monter malgré le statu quo, ce qui traduit une défiance des marchés obligataires sur la trajectoire de désinflation. La Banque d'Angleterre a fait pareil, en attendant de mieux mesurer l'impact inflationniste du conflit Iran sur les prix à l'importation. En résumé : les banques centrales font une pause, mais le marché obligataire, lui, ne fait pas de pause.\n\nPour le portefeuille Signal, la semaine est calme : capital à 23 481€, performance nette cumulée depuis la création à +17.40%, écart au benchmark MSCI World à +5.90pp. Le VIX à 16 confirme un régime serein — pas de panique, pas de FOMO non plus. Les marchés asiatiques ont bondi vendredi (+17% pour le Kospi en une séance !) sur l'optimisme IA, portés par Samsung et SK Hynix. Une hausse de cette magnitude en une journée mérite la prudence : c'est le genre de mouvement qui fait des dégâts quand on le chase.\n\nMethodologiquement, ce run est un run de stabilité : aucune décision d'achat n'est émise car les liquidités sont à 352€ (1.5% du capital) et aucune rotation ne satisfait les critères stricts de la Règle 12. Trois positions méritent une surveillance accrue : ORSTED.CO approche du seuil stop-loss à -15% après J90 (fin août), LSEG.L et META passent les 90j de détention dans les prochains jours — moment d'appliquer le 'would I buy today?' test avec les données fraîches.\n\nLe biais à surveiller cette semaine : le rally asiatique sur IA pourrait générer du FOMO sur nos positions semi-conducteurs (NVDA +75.8%, ASML +120.5% depuis l'achat). Ne pas confondre une thèse validée avec une invitation à surcharger le secteur — la concentration semi-conducteurs est déjà à 40% du capital, thème IA à 53%. C'est un choix assumé, pas une dérive à amplifier.\n\nSemaine à venir : les résultats Q2 continuent de tomber côté américain. On surveille particulièrement tout catalyseur sur ORSTED.CO (énergie renouvelable, contexte taux — les utilities sont sensibles aux yield longs qui remontent) et on se prépare à passer le test des 90j sur META et LSEG.L avec des yeux frais.",
+    "analyse_macro": "Cette semaine du 28 juillet au 1er août, la Fed a maintenu ses taux inchangés — sans surprise — mais les marchés obligataires n'ont pas été rassurés pour autant : les rendements longs des Treasuries ont continué de grimper, signe que les investisseurs doutent de la capacité de la Fed à assouplir sa politique dans un contexte où l'inflation liée aux tensions géopolitiques (conflit impliquant l'Iran, impact sur la BoE également en pause) reste une inconnue. Le VIX à 15,99 traduit un régime calme en surface — mais la divergence entre marchés actions asiatiques en forte hausse (Kospi +17% porté par Samsung et SK Hynix sur l'optimisme IA) et MSCI World en recul de 0,8% sur la semaine illustre une semaine à deux vitesses.\n\nPour Signal, la situation est confortable sans être spectaculaire. Le portefeuille affiche une performance nette de +17,55% depuis la création (brute : +17,85%), soit un écart de +5,75 points de pourcentage au-dessus du MSCI World YTD. Avec 23 510€ de capital net et seulement 352€ de liquidités, le portefeuille est quasiment intégralement investi — ce qui est un choix assumé, mais qui signifie que toute nouvelle entrée exigera une rotation.\n\nCette semaine, je ne prends aucune décision d'achat ni de vente. Les raisons sont simples : (1) les liquidités à 352€ ne permettent pas d'ouvrir une nouvelle ligne significative sans rotation, et aucune des positions actuelles ne présente de signal de vente suffisamment documenté pour justifier une sortie (les positions en pertes modestes — META à -7,6%, LSEG.L à -7,9%, ADYEN.AS à -7,7%, ORSTED.CO à -12,6% — restent loin du stop-loss à -15% après 90j, et aucun signal fondamental majeur n'est apparu) ; (2) le run actuel est daté du 2026-08-01, soit le même jour qu'un run précédent — run de contrôle de 22h16 UTC, peu de raison d'agir à nouveau ; (3) SPGI, acheté hier à J+1 de son Golden Cross, n'a aucun historique de performance à évaluer.\n\nLa watchlist présente des opportunités intéressantes — notamment ADBE (score 88, Death Cross 999j mais mean-reversion en cours) et INTU (score 88, z=-3,9σ, rebond stale cross) — mais les liquides ne permettent pas d'entrée sérieuse sans rotation, et aucune rotation ne satisfait les conditions strictes : les titres à vendre seraient en perte et détenus depuis moins de 90 jours pour la plupart, ou en gain modeste avec friction PFU à 30% qui effacerait l'avantage.\n\nSurveillance pour la semaine à venir : l'évolution de ORSTED.CO qui approche des -15% après 66 jours (stop-loss déclenché à -15% après 90j — il reste 24 jours), et META qui stagne à -7,6% avec 88 jours de détention — si la thèse ne se matérialise pas d'ici fin août, la question du stop-loss se posera.",
     "conviction_globale": "neutre",
-    "message_utilisateurs": "Run de ce samedi 1er août 2026 — aucune décision d'achat ou de vente cette semaine. Les liquidités à 352€ ne permettent pas de nouvelle entrée sans rotation, et aucune rotation ne satisfait les critères stricts (avantage net > friction fiscale 30% + frais). Le portefeuille performe à +17.40% net depuis la création, +5.90pp au-dessus du MSCI World. Trois positions entrent en zone de surveillance active : ORSTED.CO (-12.3%, stop-loss -15% actif après J90 fin août), META et LSEG.L (passages des 90j de détention dans les prochains jours — test 'would I buy today?' à venir). La Fed a maintenu ses taux cette semaine mais les yields longs remontent — contexte à surveiller pour nos positions utilities (ORSTED) et financières (LSEG, DB1, JPM). L'inaction est une décision : cette semaine, c'est la bonne.",
-    "nb_decisions": 3
+    "message_utilisateurs": "Pas d'action cette semaine — et c'est un choix délibéré, pas une inertie.\n\nLes liquidités à 352€ (1,5% du capital) ne permettent pas d'ouvrir une nouvelle ligne significative. Les positions en légère perte (META, LSEG.L, ADYEN.AS, ORSTED.CO) sont surveillées mais restent dans les limites de tolérance : aucune n'a déclenché de stop-loss, aucun signal fondamental majeur n'est apparu cette semaine qui justifierait une sortie anticipée (Règle 01 — 90j minimum, ou signal fondamental documenté).\n\nLa watchlist propose des candidats séduisants (ADBE et INTU avec des scores à 88/100 et des décotes significatives), mais une rotation forcerait à vendre une position correcte en payant 30% de PFU sur les gains latents — friction que l'avantage attendu ne compense pas clairement aujourd'hui.\n\nLe portefeuille reste à +17,55% net depuis la création, +5,75pp au-dessus du MSCI World YTD. L'inaction est la décision la plus honnête quand le process ne valide pas d'entrée.",
+    "nb_decisions": 0
   },
   "performance_history": [
     {
@@ -2024,8 +2015,8 @@
     },
     {
       "date": "2026-08-01",
-      "perf": 17.4,
-      "capital": 23480.58,
+      "perf": 17.55,
+      "capital": 23509.9,
       "benchmark_cac40": 3.84,
       "benchmark_msci": 11.65
     }
