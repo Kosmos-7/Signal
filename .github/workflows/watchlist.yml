@@ -55,7 +55,22 @@ jobs:
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
-          git add watchlist.json charts.json portfolio.json analyses.json notes/watchlist_archive/
+          git add watchlist.json charts.json universe.json portfolio.json analyses.json notes/watchlist_archive/
+
+          # Garde anti-oubli : cette liste explicite a DÉJÀ laissé deux fichiers
+          # au sol (charts.json en v3.3.0, universe.json en v3.5.0). Dans les deux
+          # cas le job était VERT et le site servait un fichier absent — la panne
+          # la plus coûteuse à diagnostiquer, parce que rien ne la signale.
+          # Tout JSON de données modifié ou créé à la racine et NON mis en scène
+          # fait désormais échouer le run.
+          OUBLIES=$(git status --porcelain -- '*.json' ':!package*.json' \
+                    | grep -E '^(\?\?| M|MM| A)' | awk '{print $2}' || true)
+          if [ -n "$OUBLIES" ]; then
+            echo "::error::Fichier(s) de données produits mais absents du commit : $OUBLIES"
+            echo "Ajoutez-les à la ligne 'git add' de ce workflow."
+            exit 1
+          fi
+
           if git diff --staged --quiet; then
             echo "Aucun changement cette semaine."
           else
