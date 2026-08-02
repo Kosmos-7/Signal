@@ -11,6 +11,18 @@
  ],
  "6146.T": [
   {
+   "page": "https://www.disco.co.jp/eg/solution/index.html",
+   "domaine": "disco.co.jp",
+   "conditions": "non établies",
+   "credit": "DISCO Corporation"
+  },
+  {
+   "page": "https://www.disco.co.jp/eg/company/factory.html",
+   "domaine": "disco.co.jp",
+   "conditions": "non établies",
+   "credit": "DISCO Corporation"
+  },
+  {
    "page": "https://www.disco.co.jp/eg/company/index.html",
    "domaine": "disco.co.jp",
    "conditions": "non établies",
@@ -57,6 +69,24 @@
  ],
  "8035.T": [
   {
+   "page": "https://www.tel.com/about/",
+   "domaine": "tel.com",
+   "conditions": "non établies",
+   "credit": "Tokyo Electron"
+  },
+  {
+   "page": "https://www.tel.com/sustainability/",
+   "domaine": "tel.com",
+   "conditions": "non établies",
+   "credit": "Tokyo Electron"
+  },
+  {
+   "page": "https://www.tel.com/museum/",
+   "domaine": "tel.com",
+   "conditions": "non établies",
+   "credit": "Tokyo Electron"
+  },
+  {
    "page": "https://www.tel.com/product/",
    "domaine": "tel.com",
    "conditions": "non établies",
@@ -70,6 +100,24 @@
   }
  ],
  "ASM.AS": [
+  {
+   "page": "https://www.asm.com/about-asm",
+   "domaine": "asm.com",
+   "conditions": "non établies",
+   "credit": "ASM International"
+  },
+  {
+   "page": "https://www.asm.com/careers",
+   "domaine": "asm.com",
+   "conditions": "non établies",
+   "credit": "ASM International"
+  },
+  {
+   "page": "https://www.asm.com/news",
+   "domaine": "asm.com",
+   "conditions": "non établies",
+   "credit": "ASM International"
+  },
   {
    "page": "https://www.asm.com/",
    "domaine": "asm.com",
@@ -202,6 +250,24 @@
   }
  ],
  "ASX": [
+  {
+   "page": "https://www.aseglobal.com/en/services/",
+   "domaine": "aseglobal.com",
+   "conditions": "non établies",
+   "credit": "ASE Technology Holding"
+  },
+  {
+   "page": "https://www.aseglobal.com/en/newsroom/",
+   "domaine": "aseglobal.com",
+   "conditions": "non établies",
+   "credit": "ASE Technology Holding"
+  },
+  {
+   "page": "https://www.aseglobal.com/en/careers/",
+   "domaine": "aseglobal.com",
+   "conditions": "non établies",
+   "credit": "ASE Technology Holding"
+  },
   {
    "page": "https://www.aseglobal.com/en/about/",
    "domaine": "aseglobal.com",
@@ -420,6 +486,18 @@
  ],
  "ACN": [
   {
+   "page": "https://newsroom.accenture.com/",
+   "domaine": "accenture.com",
+   "conditions": "non établies",
+   "credit": "Accenture"
+  },
+  {
+   "page": "https://www.accenture.com/us-en/careers",
+   "domaine": "accenture.com",
+   "conditions": "non établies",
+   "credit": "Accenture"
+  },
+  {
    "page": "https://www.accenture.com/us-en/about/company-index",
    "domaine": "accenture.com",
    "conditions": "non établies",
@@ -435,6 +513,12 @@
   }
  ],
  "PDD": [
+  {
+   "page": "https://www.pddholdings.com/responsibility",
+   "domaine": "pddholdings.com",
+   "conditions": "non établies",
+   "credit": "PDD Holdings"
+  },
   {
    "page": "https://www.pddholdings.com/news",
    "domaine": "pddholdings.com",
@@ -478,6 +562,18 @@
  ],
  "LSEG.L": [
   {
+   "page": "https://www.lseg.com/en/media-centre",
+   "domaine": "lseg.com",
+   "conditions": "non établies",
+   "credit": "London Stock Exchange Group"
+  },
+  {
+   "page": "https://www.lseg.com/en/careers",
+   "domaine": "lseg.com",
+   "conditions": "non établies",
+   "credit": "London Stock Exchange Group"
+  },
+  {
    "page": "https://www.lseg.com/en/about-us",
    "domaine": "lseg.com",
    "conditions": "non établies",
@@ -485,6 +581,18 @@
   }
  ],
  "MA": [
+  {
+   "page": "https://www.mastercard.com/news/",
+   "domaine": "mastercard.com",
+   "conditions": "non établies",
+   "credit": "Mastercard"
+  },
+  {
+   "page": "https://www.mastercard.com/global/en/business.html",
+   "domaine": "mastercard.com",
+   "conditions": "non établies",
+   "credit": "Mastercard"
+  },
   {
    "page": "https://www.mastercard.com/global/en.html",
    "domaine": "mastercard.com",
@@ -516,6 +624,18 @@
  ],
  "BLK": [
   {
+   "page": "https://www.blackrock.com/corporate/newsroom",
+   "domaine": "blackrock.com",
+   "conditions": "non établies",
+   "credit": "BlackRock"
+  },
+  {
+   "page": "https://www.blackrock.com/corporate/careers",
+   "domaine": "blackrock.com",
+   "conditions": "non établies",
+   "credit": "BlackRock"
+  },
+  {
    "page": "https://www.blackrock.com/corporate/about-us",
    "domaine": "blackrock.com",
    "conditions": "non établies",
@@ -523,6 +643,18 @@
   }
  ],
  "KKR": [
+  {
+   "page": "https://www.kkr.com/invest/real-assets",
+   "domaine": "kkr.com",
+   "conditions": "non établies",
+   "credit": "KKR"
+  },
+  {
+   "page": "https://www.kkr.com/news",
+   "domaine": "kkr.com",
+   "conditions": "non établies",
+   "credit": "KKR"
+  },
   {
    "page": "https://www.kkr.com/invest/infrastructure",
    "domaine": "kkr.com",
@@ -544,6 +676,18 @@
  ],
  "MCO": [
   {
+   "page": "https://www.moodys.com/web/en/us/about-us/careers.html",
+   "domaine": "moodys.com",
+   "conditions": "non établies",
+   "credit": "Moody's"
+  },
+  {
+   "page": "https://www.moodys.com/web/en/us/insights.html",
+   "domaine": "moodys.com",
+   "conditions": "non établies",
+   "credit": "Moody's"
+  },
+  {
    "page": "https://www.moodys.com/web/en/us/about.html",
    "domaine": "moodys.com",
    "conditions": "non établies",
@@ -551,6 +695,18 @@
   }
  ],
  "SPGI": [
+  {
+   "page": "https://www.spglobal.com/en/newsroom",
+   "domaine": "spglobal.com",
+   "conditions": "non établies",
+   "credit": "S&P Global"
+  },
+  {
+   "page": "https://www.spglobal.com/en/careers",
+   "domaine": "spglobal.com",
+   "conditions": "non établies",
+   "credit": "S&P Global"
+  },
   {
    "page": "https://www.spglobal.com/",
    "domaine": "spglobal.com",
@@ -565,6 +721,18 @@
   }
  ],
  "MSCI": [
+  {
+   "page": "https://www.msci.com/newsroom",
+   "domaine": "msci.com",
+   "conditions": "non établies",
+   "credit": "MSCI"
+  },
+  {
+   "page": "https://www.msci.com/careers",
+   "domaine": "msci.com",
+   "conditions": "non établies",
+   "credit": "MSCI"
+  },
   {
    "page": "https://www.msci.com/our-solutions",
    "domaine": "msci.com",
@@ -622,6 +790,18 @@
  ],
  "CS.PA": [
   {
+   "page": "https://www.axa.com/en/news",
+   "domaine": "axa.com",
+   "conditions": "non établies",
+   "credit": "AXA"
+  },
+  {
+   "page": "https://www.axa.com/en/about-us/our-businesses",
+   "domaine": "axa.com",
+   "conditions": "non établies",
+   "credit": "AXA"
+  },
+  {
    "page": "https://www.axa.com/",
    "domaine": "axa.com",
    "conditions": "non établies",
@@ -636,6 +816,18 @@
  ],
  "BNP.PA": [
   {
+   "page": "https://group.bnpparibas/en/news",
+   "domaine": "bnpparibas",
+   "conditions": "non établies",
+   "credit": "BNP Paribas"
+  },
+  {
+   "page": "https://group.bnpparibas/en/jobs-careers",
+   "domaine": "bnpparibas",
+   "conditions": "non établies",
+   "credit": "BNP Paribas"
+  },
+  {
    "page": "https://group.bnpparibas/",
    "domaine": "bnpparibas",
    "conditions": "non établies",
@@ -649,6 +841,18 @@
   }
  ],
  "MUV2.DE": [
+  {
+   "page": "https://www.munichre.com/en/company/media-relations.html",
+   "domaine": "munichre.com",
+   "conditions": "non établies",
+   "credit": "Munich Re"
+  },
+  {
+   "page": "https://www.munichre.com/en/careers.html",
+   "domaine": "munichre.com",
+   "conditions": "non établies",
+   "credit": "Munich Re"
+  },
   {
    "page": "https://www.munichre.com/en/company/about-munich-re.html",
    "domaine": "munichre.com",
