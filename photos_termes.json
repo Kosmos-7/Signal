@@ -4,92 +4,92 @@
   "NVDA": {
    "candidats": [
     {
-     "fichier": "Gigabyte AmpereOne Arm Server, Ampere Altra Max ATX Motherboards, Nvidia Grace Hopper, Liquid Cooled.webm",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Gigabyte_AmpereOne_Arm_Server%2C_Ampere_Altra_Max_ATX_Motherboards%2C_Nvidia_Grace_Hopper%2C_Liquid_Cooled.webm/1920px--Gigabyte_AmpereOne_Arm_Server%2C_Ampere_Altra_Max_ATX_Motherboards%2C_Nvidia_Grace_Hopper%2C_Liquid_Cooled.webm.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Gigabyte_AmpereOne_Arm_Server,_Ampere_Altra_Max_ATX_Motherboards,_Nvidia_Grace_Hopper,_Liquid_Cooled.webm",
+     "fichier": "Susan B. Anthony & Alice Stone Blackwell signed NAWSA check.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Susan_B._Anthony_%26_Alice_Stone_Blackwell_signed_NAWSA_check.jpg/1920px-Susan_B._Anthony_%26_Alice_Stone_Blackwell_signed_NAWSA_check.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Susan_B._Anthony_%26_Alice_Stone_Blackwell_signed_NAWSA_check.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "National Museum of American History\n",
+     "score": 0,
+     "terme": "Nvidia Blackwell",
+     "poids": 89951
+    },
+    {
+     "fichier": "RTX 50系显卡来了！NV有哪些干货？ (2160p 60fps VP9-128kbit AAC)-00.18.57.052.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.18.57.052.png/1920px-RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.18.57.052.png",
+     "page": "https://commons.wikimedia.org/wiki/File:RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_(2160p_60fps_VP9-128kbit_AAC)-00.18.57.052.png",
      "licence": "CC BY 3.0",
      "famille": "by",
-     "auteur": "Charbax",
-     "score": 4,
-     "terme": "Jensen Huang Computex",
-     "poids": 43222
+     "auteur": "极客湾Geekerwan",
+     "score": 0,
+     "terme": "Nvidia DGX",
+     "poids": 36479
     },
     {
-     "fichier": "젠슨황이랑 하이파이브하고 왔습니다. (2025-06-07).webm",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/%EC%A0%A0%EC%8A%A8%ED%99%A9%EC%9D%B4%EB%9E%91_%ED%95%98%EC%9D%B4%ED%8C%8C%EC%9D%B4%EB%B8%8C%ED%95%98%EA%B3%A0_%EC%99%94%EC%8A%B5%EB%8B%88%EB%8B%A4._%282025-06-07%29.webm/1920px--%EC%A0%A0%EC%8A%A8%ED%99%A9%EC%9D%B4%EB%9E%91_%ED%95%98%EC%9D%B4%ED%8C%8C%EC%9D%B4%EB%B8%8C%ED%95%98%EA%B3%A0_%EC%99%94%EC%8A%B5%EB%8B%88%EB%8B%A4._%282025-06-07%29.webm.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:%EC%A0%A0%EC%8A%A8%ED%99%A9%EC%9D%B4%EB%9E%91_%ED%95%98%EC%9D%B4%ED%8C%8C%EC%9D%B4%EB%B8%8C%ED%95%98%EA%B3%A0_%EC%99%94%EC%8A%B5%EB%8B%88%EB%8B%A4._(2025-06-07).webm",
+     "fichier": "RTX 50系显卡来了！NV有哪些干货？ (2160p 60fps VP9-128kbit AAC)-00.18.49.165.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.18.49.165.png/1920px-RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.18.49.165.png",
+     "page": "https://commons.wikimedia.org/wiki/File:RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_(2160p_60fps_VP9-128kbit_AAC)-00.18.49.165.png",
      "licence": "CC BY 3.0",
      "famille": "by",
-     "auteur": "눈쟁이",
+     "auteur": "极客湾Geekerwan",
      "score": 0,
-     "terme": "Jensen Huang Computex",
-     "poids": 52133
+     "terme": "Nvidia DGX",
+     "poids": 36763
     },
     {
-     "fichier": "NVIDIA GTC 2025.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/NVIDIA_GTC_2025.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:NVIDIA_GTC_2025.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Jack145945",
+     "fichier": "RTX 50系显卡来了！NV有哪些干货？ (2160p 60fps VP9-128kbit AAC)-00.00.21.904.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.00.21.904.png/1920px-RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.00.21.904.png",
+     "page": "https://commons.wikimedia.org/wiki/File:RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_(2160p_60fps_VP9-128kbit_AAC)-00.00.21.904.png",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "极客湾Geekerwan",
      "score": 0,
-     "terme": "Nvidia GTC",
-     "poids": 76297
+     "terme": "Nvidia DGX",
+     "poids": 40585
     },
     {
-     "fichier": "Jensen huang stanford 2026-04-30 031.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Jensen_huang_stanford_2026-04-30_031.jpg/1920px-Jensen_huang_stanford_2026-04-30_031.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_031.jpg",
+     "fichier": "Nvidia DGX-B200-HGX.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Nvidia_DGX-B200-HGX.jpg/1920px-Nvidia_DGX-B200-HGX.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX-B200-HGX.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Anderseidesvik",
+     "auteur": "Pokiiri",
      "score": 0,
-     "terme": "Jensen Huang Nvidia",
-     "poids": 40179
+     "terme": "Nvidia DGX",
+     "poids": 118815
     },
     {
-     "fichier": "Jensen huang stanford 2026-04-30 029.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Jensen_huang_stanford_2026-04-30_029.jpg/1920px-Jensen_huang_stanford_2026-04-30_029.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_029.jpg",
+     "fichier": "Nvidia DGX metal foam dllu.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Nvidia_DGX_metal_foam_dllu.jpg/1920px-Nvidia_DGX_metal_foam_dllu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_metal_foam_dllu.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Anderseidesvik",
+     "auteur": "Daniel Lu (User:dllu)",
      "score": 0,
-     "terme": "Jensen Huang Nvidia",
-     "poids": 94829
+     "terme": "Nvidia DGX",
+     "poids": 203311
     },
     {
-     "fichier": "Jensen huang stanford 2026-04-30 024.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Jensen_huang_stanford_2026-04-30_024.jpg/1920px-Jensen_huang_stanford_2026-04-30_024.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_024.jpg",
+     "fichier": "Nvidia DGX front view dllu.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Nvidia_DGX_front_view_dllu.jpg/1920px-Nvidia_DGX_front_view_dllu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_front_view_dllu.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Anderseidesvik",
+     "auteur": "Daniel Lu (User:dllu)",
      "score": 0,
-     "terme": "Jensen Huang Nvidia",
-     "poids": 71605
+     "terme": "Nvidia DGX",
+     "poids": 63404
     },
     {
-     "fichier": "Jensen huang stanford 2026-04-30 023.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Jensen_huang_stanford_2026-04-30_023.jpg/1920px-Jensen_huang_stanford_2026-04-30_023.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_023.jpg",
+     "fichier": "Nvidia DGX Spark rear ports dllu.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Nvidia_DGX_Spark_rear_ports_dllu.jpg/1920px-Nvidia_DGX_Spark_rear_ports_dllu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_Spark_rear_ports_dllu.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Anderseidesvik",
+     "auteur": "Daniel Lu (User:dllu)",
      "score": 0,
-     "terme": "Jensen Huang Nvidia",
-     "poids": 93695
-    },
-    {
-     "fichier": "Jensen huang stanford 2026-04-30 010.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Jensen_huang_stanford_2026-04-30_010.jpg/1920px-Jensen_huang_stanford_2026-04-30_010.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_010.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Anderseidesvik",
-     "score": 0,
-     "terme": "Jensen Huang Nvidia",
-     "poids": 70879
+     "terme": "Nvidia DGX",
+     "poids": 64427
     }
    ]
   }
