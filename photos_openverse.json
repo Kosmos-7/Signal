@@ -1,4 +1,2006 @@
 {
- "societes": 0,
- "detail": {}
+ "societes": 59,
+ "arret": "",
+ "detail": {
+  "4062.T": {
+   "nom": "Ibiden",
+   "candidats": [
+    {
+     "fichier": "Ibiden Peugeot DPF 0042",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Ibiden_Peugeot_DPF_0042.JPG",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=44799677",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Michael KR",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 109831
+    },
+    {
+     "fichier": "Ibiden Bussan Company",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Ibiden_Bussan_Company.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=111575923",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "運動会プロテインパワー",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 73854
+    },
+    {
+     "fichier": "Ibiden Regulus Volleyball Club Team Bus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Ibiden_Regulus_Volleyball_Club_Team_Bus.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=131279459",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Mr.ちゅらさん",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 92319
+    }
+   ]
+  },
+  "4063.T": {
+   "nom": "Shin-Etsu Chemical",
+   "candidats": [
+    {
+     "fichier": "Shin-Etsu Polymer factory, 2018 Győr",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Shin-Etsu_Polymer_factory%2C_2018_Gy%C5%91r.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=72143760",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Globetrotter19",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 90845
+    },
+    {
+     "fichier": "Shin-Etsu Chemical Isobe , Gunma - panoramio (1)",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Shin-Etsu_Chemical_Isobe_%2C_Gunma_-_panoramio_%281%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=54658191",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Kaz Ish",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 58148
+    },
+    {
+     "fichier": "Shin-Etsu Chemical Isobe , Gunma - panoramio",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Shin-Etsu_Chemical_Isobe_%2C_Gunma_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=54658189",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Kaz Ish",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 54821
+    }
+   ]
+  },
+  "8035.T": {
+   "nom": "Tokyo Electron",
+   "candidats": [
+    {
+     "fichier": "Tokyo Metropolis - Japan",
+     "url": "https://live.staticflickr.com/7346/13361069414_bff365b36e_b.jpg",
+     "page": "https://www.flickr.com/photos/33756577@N08/13361069414",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Mic V.",
+     "source": "flickr",
+     "score": 0,
+     "poids": 71754
+    },
+    {
+     "fichier": "A Week in Tokyo 61",
+     "url": "https://live.staticflickr.com/5250/5374771876_8cb260ffa6_b.jpg",
+     "page": "https://www.flickr.com/photos/46912242@N02/5374771876",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "localjapantimes",
+     "source": "flickr",
+     "score": 0,
+     "poids": 117620
+    },
+    {
+     "fichier": "Tokyo Electron",
+     "url": "https://live.staticflickr.com/43/93993723_65c680aa29_b.jpg",
+     "page": "https://www.flickr.com/photos/12289199@N00/93993723",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Christian Kock",
+     "source": "flickr",
+     "score": 0,
+     "poids": 55008
+    }
+   ]
+  },
+  "ACN": {
+   "nom": "Accenture",
+   "candidats": [
+    {
+     "fichier": "The Accenture Interactive Network at Chicago Airport",
+     "url": "https://live.staticflickr.com/80/242598138_ed671ae686_b.jpg",
+     "page": "https://www.flickr.com/photos/37996573467@N01/242598138",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "luisvilla",
+     "source": "flickr",
+     "score": 0,
+     "poids": 75335
+    },
+    {
+     "fichier": "The Accenture Interactive Network",
+     "url": "https://live.staticflickr.com/97/242597408_91e3df85fd_b.jpg",
+     "page": "https://www.flickr.com/photos/37996573467@N01/242597408",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "luisvilla",
+     "source": "flickr",
+     "score": 0,
+     "poids": 68707
+    },
+    {
+     "fichier": "Accenture CIO Wayne Ingram at MaRS Global Leadership Series event with Don Tapscott",
+     "url": "https://live.staticflickr.com/7261/7417283792_ee10961dd4_b.jpg",
+     "page": "https://www.flickr.com/photos/33037897@N06/7417283792",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Don Tapscott",
+     "source": "flickr",
+     "score": 0,
+     "poids": 41270
+    }
+   ]
+  },
+  "ALV.DE": {
+   "nom": "Allianz",
+   "candidats": [
+    {
+     "fichier": "Allianz Krankenversicherungen Lichtbild",
+     "url": "https://live.staticflickr.com/7128/7035074879_e5057aab56_b.jpg",
+     "page": "https://www.flickr.com/photos/71651999@N05/7035074879",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "FuFuWolf",
+     "source": "flickr",
+     "score": 0,
+     "poids": 39148
+    },
+    {
+     "fichier": "File:Allianz Arena model at Munich airport.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Allianz_Arena_model_at_Munich_airport.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=7430402",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "User:Mattes",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 65356
+    },
+    {
+     "fichier": "Allianz Arena",
+     "url": "https://live.staticflickr.com/6119/6225481306_ea48b656bd_b.jpg",
+     "page": "https://www.flickr.com/photos/94064020@N00/6225481306",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "JasonParis",
+     "source": "flickr",
+     "score": 0,
+     "poids": 64326
+    }
+   ]
+  },
+  "AMD": {
+   "nom": "Advanced Micro Devices",
+   "candidats": [
+    {
+     "fichier": "KL Advanced Micro Devices AM9080",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/KL_Advanced_Micro_Devices_AM9080.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=7028092",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Konstantin Lanzet",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 26929
+    },
+    {
+     "fichier": "ADVANCED MICRO DEVICES Am386 TM DX-40 NG80386DX-40 D 313NFY9 m AMD 5983D 9312BP MALAYSIA",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/ADVANCED_MICRO_DEVICES_Am386_TM_DX-40_NG80386DX-40_D_313NFY9_m_AMD_5983D_9312BP_MALAYSIA.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=27659887",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Epop",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 113787
+    },
+    {
+     "fichier": "Advanced Micro Devices meeting Boston (55331123297)",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Advanced_Micro_Devices_meeting_Boston_%2855331123297%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=196086504",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Scottish Government",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 77065
+    }
+   ]
+  },
+  "AMZN": {
+   "nom": "Amazon.com",
+   "candidats": [
+    {
+     "fichier": "Amazon.com",
+     "url": "https://live.staticflickr.com/7475/15977126920_347626e4b2_b.jpg",
+     "page": "https://www.flickr.com/photos/39160147@N03/15977126920",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "JeepersMedia",
+     "source": "flickr",
+     "score": 0,
+     "poids": 50791
+    },
+    {
+     "fichier": "Amazon.com",
+     "url": "https://live.staticflickr.com/8621/15544670013_91f04c4cdf_b.jpg",
+     "page": "https://www.flickr.com/photos/39160147@N03/15544670013",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "JeepersMedia",
+     "source": "flickr",
+     "score": 0,
+     "poids": 45663
+    },
+    {
+     "fichier": "Amazon.com",
+     "url": "https://live.staticflickr.com/7462/16162538761_bb4c21cbba_b.jpg",
+     "page": "https://www.flickr.com/photos/39160147@N03/16162538761",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "JeepersMedia",
+     "source": "flickr",
+     "score": 0,
+     "poids": 52348
+    }
+   ]
+  },
+  "ASM.AS": {
+   "nom": "ASM International",
+   "candidats": [
+    {
+     "fichier": "190609 200 Historic Mission San Juan Capistrano - Mission Industries Area, Catalan Furnace",
+     "url": "https://live.staticflickr.com/65535/48106829773_506c94a833_b.jpg",
+     "page": "http://www.flickr.com/photos/131880272@N06/48106829773",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "cultivar413",
+     "source": "flickr",
+     "score": 0,
+     "poids": 129085
+    },
+    {
+     "fichier": "ASM International plaque for the Scranton Iron Furnaces",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/08/ASM_International_plaque_for_the_Scranton_Iron_Furnaces.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=139138713",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "JJonahJackalope",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 155477
+    },
+    {
+     "fichier": "HZ-ASM",
+     "url": "https://live.staticflickr.com/8322/7905643554_99cbf8829b_b.jpg",
+     "page": "https://www.flickr.com/photos/70187256@N08/7905643554",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Kurush Pawar - DXB",
+     "source": "flickr",
+     "score": 0,
+     "poids": 78346
+    }
+   ]
+  },
+  "ASX": {
+   "nom": "ASE Group",
+   "candidats": [
+    {
+     "fichier": "Tarek Esber (@Tarek) and Ahmed Shihab-Eldin (@ASE)",
+     "url": "https://live.staticflickr.com/7188/6994039161_cfa944d47c_b.jpg",
+     "page": "https://www.flickr.com/photos/64323230@N00/6994039161",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "mohamedn",
+     "source": "flickr",
+     "score": 0,
+     "poids": 28507
+    },
+    {
+     "fichier": "2 May 2012 - Welsh MEPs / 2 Mai 2012 - ASE Cymru",
+     "url": "https://live.staticflickr.com/8320/7999759574_b041b6b7f6_b.jpg",
+     "page": "https://www.flickr.com/photos/39069511@N03/7999759574",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "National Assembly For Wales / Cynulliad Cymru",
+     "source": "flickr",
+     "score": 0,
+     "poids": 65380
+    }
+   ]
+  },
+  "AVGO": {
+   "nom": "Broadcom",
+   "candidats": [
+    {
+     "fichier": "Broadcom BCM7019 STB SoC die shot",
+     "url": "https://live.staticflickr.com/4599/38256091465_5cbf598e28_b.jpg",
+     "page": "https://www.flickr.com/photos/140974729@N05/38256091465",
+     "licence": "CC PDM 1.0",
+     "famille": "libre",
+     "auteur": "Martijn Boer",
+     "source": "flickr",
+     "score": 6,
+     "poids": 144193
+    },
+    {
+     "fichier": "Broadcom BCM7019 STB SoC die shot",
+     "url": "https://live.staticflickr.com/4592/25271864218_accbf145f4_b.jpg",
+     "page": "https://www.flickr.com/photos/140974729@N05/25271864218",
+     "licence": "CC PDM 1.0",
+     "famille": "libre",
+     "auteur": "Martijn Boer",
+     "source": "flickr",
+     "score": 6,
+     "poids": 110605
+    },
+    {
+     "fichier": "Broadcom BCM7019 STB SoC die shot",
+     "url": "https://live.staticflickr.com/4635/25271858898_977938f196_b.jpg",
+     "page": "https://www.flickr.com/photos/140974729@N05/25271858898",
+     "licence": "CC PDM 1.0",
+     "famille": "libre",
+     "auteur": "Martijn Boer",
+     "source": "flickr",
+     "score": 6,
+     "poids": 121318
+    }
+   ]
+  },
+  "BAC": {
+   "nom": "Bank of America",
+   "candidats": [
+    {
+     "fichier": "Bank of America Credit Card Scanner Reader Electronic Device",
+     "url": "https://live.staticflickr.com/5546/14333517612_489c05ff31_b.jpg",
+     "page": "https://www.flickr.com/photos/39160147@N03/14333517612",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "JeepersMedia",
+     "source": "flickr",
+     "score": 14,
+     "poids": 45984
+    },
+    {
+     "fichier": "Chip-enabled Bank of America BankAmericard Visa Signature Credit Card",
+     "url": "https://live.staticflickr.com/8669/16293806432_ebe60b8f3c_b.jpg",
+     "page": "https://www.flickr.com/photos/51526368@N03/16293806432",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Aranami",
+     "source": "flickr",
+     "score": 11,
+     "poids": 114063
+    },
+    {
+     "fichier": "Retail Bank of America",
+     "url": "https://live.staticflickr.com/8507/8355122374_66d0fdf491_b.jpg",
+     "page": "https://www.flickr.com/photos/86530412@N02/8355122374",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "ccPixs.com",
+     "source": "flickr",
+     "score": 0,
+     "poids": 55299
+    }
+   ]
+  },
+  "BLK": {
+   "nom": "BlackRock",
+   "candidats": [
+    {
+     "fichier": "CUT OUT PEOPLE BY DAN MacCARTHY [BLACKROCK PUBLIC PARK]-148139",
+     "url": "https://live.staticflickr.com/7870/32832384848_79ed9c0f97_b.jpg",
+     "page": "https://www.flickr.com/photos/80824546@N00/32832384848",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "infomatique",
+     "source": "flickr",
+     "score": 0,
+     "poids": 62351
+    },
+    {
+     "fichier": "CUT OUT PEOPLE BY DAN MacCARTHY [BLACKROCK PUBLIC PARK]-148138",
+     "url": "https://live.staticflickr.com/7838/46707205981_7b4c617e10_b.jpg",
+     "page": "https://www.flickr.com/photos/80824546@N00/46707205981",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "infomatique",
+     "source": "flickr",
+     "score": 0,
+     "poids": 108002
+    },
+    {
+     "fichier": "CUT OUT PEOPLE BY DAN MacCARTHY [BLACKROCK PUBLIC PARK]-148137",
+     "url": "https://live.staticflickr.com/4905/31765813777_5eb616a42c_b.jpg",
+     "page": "https://www.flickr.com/photos/80824546@N00/31765813777",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "infomatique",
+     "source": "flickr",
+     "score": 0,
+     "poids": 140547
+    }
+   ]
+  },
+  "BNP.PA": {
+   "nom": "BNP Paribas",
+   "candidats": [
+    {
+     "fichier": "dingue > Florence Karras, CDO BNP Paribas Cardif se fait implanter sur scène un chip NFC D",
+     "url": "https://live.staticflickr.com/7074/27211055862_6c7787962d_b.jpg",
+     "page": "https://www.flickr.com/photos/8718448@N05/27211055862",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "workflo",
+     "source": "flickr",
+     "score": 6,
+     "poids": 51448
+    },
+    {
+     "fichier": "Claire Liu - BNP Open Challenge Wild Card Winner",
+     "url": "https://live.staticflickr.com/2856/33178606252_925348f1b6_b.jpg",
+     "page": "https://www.flickr.com/photos/40136875@N00/33178606252",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "JCTennis.com",
+     "source": "flickr",
+     "score": 5,
+     "poids": 49260
+    },
+    {
+     "fichier": "Claire Liu - BNP Open Challenge Wild Card Winner",
+     "url": "https://live.staticflickr.com/563/33178609222_b11024e635_b.jpg",
+     "page": "https://www.flickr.com/photos/40136875@N00/33178609222",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "JCTennis.com",
+     "source": "flickr",
+     "score": 5,
+     "poids": 56613
+    }
+   ]
+  },
+  "CB": {
+   "nom": "Chubb",
+   "candidats": [
+    {
+     "fichier": "Cecil Chubb's grave",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Cecil_Chubb%27s_grave.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=74072772",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Richard Avery",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 113890
+    },
+    {
+     "fichier": "Former Chubb's Lock Works - Wolverhampton",
+     "url": "https://live.staticflickr.com/7647/16728831276_688a2cc17b_b.jpg",
+     "page": "https://www.flickr.com/photos/39415781@N06/16728831276",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "ell brown",
+     "source": "flickr",
+     "score": 0,
+     "poids": 84855
+    },
+    {
+     "fichier": "Former Chubb's Lock Works - Wolverhampton",
+     "url": "https://live.staticflickr.com/7633/16132398274_23b2aaf1d6_b.jpg",
+     "page": "https://www.flickr.com/photos/39415781@N06/16132398274",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "ell brown",
+     "source": "flickr",
+     "score": 0,
+     "poids": 96592
+    }
+   ]
+  },
+  "CCJ": {
+   "nom": "Cameco",
+   "candidats": [
+    {
+     "fichier": "Crow Butte Mining, a subsidiary of Cameco,",
+     "url": "https://live.staticflickr.com/7579/15422784303_1e916f55b4_b.jpg",
+     "page": "https://www.flickr.com/photos/69383258@N08/15422784303",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "NRCgov",
+     "source": "flickr",
+     "score": 0,
+     "poids": 57859
+    },
+    {
+     "fichier": "Cameco Nuclear, Port Hope, Ontario_4715",
+     "url": "https://live.staticflickr.com/5264/5857844634_52c8ef448d_b.jpg",
+     "page": "https://www.flickr.com/photos/24854893@N00/5857844634",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Bobolink",
+     "source": "flickr",
+     "score": 0,
+     "poids": 56893
+    },
+    {
+     "fichier": "CAMECO, Port Hope, Ontario_1188",
+     "url": "https://live.staticflickr.com/4063/4614321052_515621c451_b.jpg",
+     "page": "https://www.flickr.com/photos/24854893@N00/4614321052",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Bobolink",
+     "source": "flickr",
+     "score": 0,
+     "poids": 64561
+    }
+   ]
+  },
+  "CEG": {
+   "nom": "Constellation Energy",
+   "candidats": [
+    {
+     "fichier": "Constellation Energy Learning Entrance, Maryland Science Center, 601 Light Street, Baltimo",
+     "url": "https://live.staticflickr.com/903/41707665412_f44e7c228f_b.jpg",
+     "page": "https://www.flickr.com/photos/44034762@N04/41707665412",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Baltimore Heritage",
+     "source": "flickr",
+     "score": -8,
+     "poids": 81628
+    },
+    {
+     "fichier": "Constellation Energy Learning Entrance, Maryland Science Center, 601 Light Street, Baltimo",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Constellation_Energy_Learning_Entrance%2C_Maryland_Science_Center%2C_601_Light_Street%2C_Baltimore%2C_MD_21230_%2841707665412%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=69291622",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Baltimore Heritage from Baltimore, MD, USA",
+     "source": "wikimedia",
+     "score": -8,
+     "poids": 77996
+    }
+   ]
+  },
+  "CIEN": {
+   "nom": "Ciena",
+   "candidats": [
+    {
+     "fichier": "Ciena 2021 - integrante do Nextar",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Ciena_2021_-_integrante_do_Nextar.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=109815457",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "NXT Fãs",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 59836
+    }
+   ]
+  },
+  "CME": {
+   "nom": "CME",
+   "candidats": [
+    {
+     "fichier": "Need CME? Find them here: ACRM VIRTUAL #ACRM2021",
+     "url": "https://live.staticflickr.com/65535/51551488109_e726a8cd91_b.jpg",
+     "page": "https://www.flickr.com/photos/92423552@N07/51551488109",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "ACRM-Rehabilitation",
+     "source": "flickr",
+     "score": 0,
+     "poids": 70313
+    },
+    {
+     "fichier": "Magnificent CME Erupts on the Sun - August 31",
+     "url": "https://live.staticflickr.com/8440/7931832934_dd2d1e6015_b.jpg",
+     "page": "https://www.flickr.com/photos/24662369@N07/7931832934",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "NASA Goddard Photo and Video",
+     "source": "nasa",
+     "score": 0,
+     "poids": 87825
+    },
+    {
+     "fichier": "Earth-Directed X-Class Flare and CME",
+     "url": "https://live.staticflickr.com/3863/15063261720_20e37878c1_b.jpg",
+     "page": "https://www.flickr.com/photos/24662369@N07/15063261720",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "NASA Goddard Photo and Video",
+     "source": "nasa",
+     "score": 0,
+     "poids": 79705
+    }
+   ]
+  },
+  "COHR": {
+   "nom": "Coherent",
+   "candidats": [
+    {
+     "fichier": "Resonant Coherent Imaging End Station",
+     "url": "https://live.staticflickr.com/8387/8570190542_f70c9fe9ce_b.jpg",
+     "page": "https://www.flickr.com/photos/53985028@N06/8570190542",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "SLAC National Accelerator Laboratory",
+     "source": "flickr",
+     "score": 0,
+     "poids": 93319
+    },
+    {
+     "fichier": "Resonant Coherent Imaging End Station",
+     "url": "https://live.staticflickr.com/8519/8570190312_0a7b1641eb_b.jpg",
+     "page": "https://www.flickr.com/photos/53985028@N06/8570190312",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "SLAC National Accelerator Laboratory",
+     "source": "flickr",
+     "score": 0,
+     "poids": 68347
+    },
+    {
+     "fichier": "Resonant Coherent Imaging End Station",
+     "url": "https://live.staticflickr.com/8369/8569093847_b9205865db_b.jpg",
+     "page": "https://www.flickr.com/photos/53985028@N06/8569093847",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "SLAC National Accelerator Laboratory",
+     "source": "flickr",
+     "score": 0,
+     "poids": 88044
+    }
+   ]
+  },
+  "CRM": {
+   "nom": "Salesforce",
+   "candidats": [
+    {
+     "fichier": "Clipper card vending machine at Salesforce Transit Center",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Clipper_card_vending_machine_at_Salesforce_Transit_Center.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=106522791",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Fullmetal2887",
+     "source": "wikimedia",
+     "score": 10,
+     "poids": 95724
+    },
+    {
+     "fichier": "Salesforce Product and Price Book Data Model",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Salesforce_Product_and_Price_Book_Data_Model.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=115934182",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Softbuilder",
+     "source": "wikimedia",
+     "score": 4,
+     "poids": 56195
+    },
+    {
+     "fichier": "Salesforce Content - voting",
+     "url": "https://live.staticflickr.com/3114/2616242074_a897c5d16d_b.jpg",
+     "page": "https://www.flickr.com/photos/47944915@N00/2616242074",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "andrewpeterfogg",
+     "source": "flickr",
+     "score": 0,
+     "poids": 37466
+    }
+   ]
+  },
+  "CS.PA": {
+   "nom": "AXA",
+   "candidats": [
+    {
+     "fichier": "AXA Defender and RL Cable as well as Abus frame locks just arrived at Flying Pigeon LA",
+     "url": "https://live.staticflickr.com/5248/5350577468_89bc40cfb5_b.jpg",
+     "page": "https://www.flickr.com/photos/45152500@N00/5350577468",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "ubrayj02",
+     "source": "flickr",
+     "score": 4,
+     "poids": 91120
+    },
+    {
+     "fichier": "SPAR kolonial mat varehandel hyller (Supermarket interior GROCERY store aisle shelves) Fro",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/SPAR_kolonial_mat_varehandel_hyller_%28Supermarket_interior_GROCERY_store_aisle_shelves%29_Frokostblandinger_gryn_gr%C3%B8t_kjeks_m%C3%BCsli_Axa_%28cereals_oatmeal_biscuits%2C_muesli%29_etc_Tj%C3%B8me_NORWAY_2023-08-31_IMG_1094.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=136721040",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Wolfmann",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 135675
+    },
+    {
+     "fichier": "SPAR kolonial mat varehandel hyller (Supermarket interior GROCERY store aisle shelves) Fro",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/SPAR_kolonial_mat_varehandel_hyller_%28Supermarket_interior_GROCERY_store_aisle_shelves%29_Frokostblandinger_gryn_gr%C3%B8t_kjeks_m%C3%BCsli_Axa_%28cereals_oatmeal_biscuits%2C_muesli%29_etc_Tj%C3%B8me_NORWAY_2023-08-31_IMG_1092.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=136721041",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Wolfmann",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 121992
+    }
+   ]
+  },
+  "CSCO": {
+   "nom": "Cisco Systems",
+   "candidats": [
+    {
+     "fichier": "Sun Workstation, Sun server, HP Proliant, Cisco Systems servers, IBM eServer xSystems - IM",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Sun_Workstation%2C_Sun_server%2C_HP_Proliant%2C_Cisco_Systems_servers%2C_IBM_eServer_xSystems_-_IMG_3666.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=117775575",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Jemimus",
+     "source": "wikimedia",
+     "score": 4,
+     "poids": 69754
+    },
+    {
+     "fichier": "Sun Workstation, Sun server, HP Proliant, Cisco Systems servers, IBM eServer xSystems, HP ",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Sun_Workstation%2C_Sun_server%2C_HP_Proliant%2C_Cisco_Systems_servers%2C_IBM_eServer_xSystems%2C_HP_NetServer%2C_whitebox_FTP_server_-_IMG_3667.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=117775574",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Jemimus",
+     "source": "wikimedia",
+     "score": 4,
+     "poids": 85697
+    },
+    {
+     "fichier": "Cisco Systems 3800 Series Server - AMD AM29DL323GT",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Cisco_Systems_3800_Series_Server_-_AMD_AM29DL323GT.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=86057273",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Crazyblocks",
+     "source": "wikimedia",
+     "score": 4,
+     "poids": 34294
+    }
+   ]
+  },
+  "ETN": {
+   "nom": "Eaton",
+   "candidats": [
+    {
+     "fichier": "Hand of mint chocolate ice cream in eaton hk",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Hand_of_mint_chocolate_ice_cream_in_eaton_hk.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=93805718",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Peachyeung316",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 43940
+    },
+    {
+     "fichier": "Eaton factory, 2018 Győr",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Eaton_factory%2C_2018_Gy%C5%91r.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=72143730",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Globetrotter19",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 86906
+    },
+    {
+     "fichier": "EATON PF6-25-2-003",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/EATON_PF6-25-2-003.JPG",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=19047797",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Dmitry G",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 41438
+    }
+   ]
+  },
+  "FICO": {
+   "nom": "Fair Isaac",
+   "candidats": [
+    {
+     "fichier": "LISTE DES HOMMES PROPOSES A LA SANCTION DU PEUPLE POUR FAIRE PARTIE DU GOUVERNEMENT PROVIS",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/LISTE_DES_HOMMES_PROPOSES_A_LA_SANCTION_DU_PEUPLE_POUR_FAIRE_PARTIE_DU_GOUVERNEMENT_PROVISOIRE%2C_AFF2676.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=139310687",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Anonyme, imprimeur",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 61893
+    },
+    {
+     "fichier": "Fair Isaac stock photo",
+     "url": "https://live.staticflickr.com/4818/46514523381_5679f6a73c_b.jpg",
+     "page": "https://www.flickr.com/photos/146007056@N02/46514523381",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "lendingmemo_com",
+     "source": "flickr",
+     "score": 0,
+     "poids": 98218
+    }
+   ]
+  },
+  "GEV": {
+   "nom": "GE Vernova",
+   "candidats": [
+    {
+     "fichier": "Yasin Kasirga GE Vernova speaker",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Yasin_Kasirga_GE_Vernova_speaker.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=192885862",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Jasonww2",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 103733
+    },
+    {
+     "fichier": "#PakPeter Bertemu Presiden dan CEO GE Vernova Ramesh Singaram: Perkuat Kerja Sama Energi d",
+     "url": "https://live.staticflickr.com/65535/54810718511_21304cc8c3_b.jpg",
+     "page": "https://www.flickr.com/photos/39809323@N03/54810718511",
+     "licence": "CC PDM 1.0",
+     "famille": "libre",
+     "auteur": "U.S. Embassy Jakarta Indonesia",
+     "source": "flickr",
+     "score": -7,
+     "poids": 92106
+    }
+   ]
+  },
+  "GILD": {
+   "nom": "Gilead Sciences",
+   "candidats": [
+    {
+     "fichier": "Visita to Gilead Sciences",
+     "url": "https://live.staticflickr.com/7604/27021011176_ba56b14276_b.jpg",
+     "page": "https://www.flickr.com/photos/39309480@N05/27021011176",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Embajada de EEUU en la Argentina",
+     "source": "flickr",
+     "score": 0,
+     "poids": 75684
+    },
+    {
+     "fichier": "Gilead Sciences Inc, N977GS, Dassault Falcon 7X",
+     "url": "https://live.staticflickr.com/4712/40107568982_d0964282a2_b.jpg",
+     "page": "https://www.flickr.com/photos/130961247@N06/40107568982",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Anna Zvereva",
+     "source": "flickr",
+     "score": 0,
+     "poids": 65935
+    },
+    {
+     "fichier": "Gilead Sciences headquarter (Foster City, CA) - 1",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Gilead_Sciences_headquarter_%28Foster_City%2C_CA%29_-_1.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=126327601",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Suiren2022",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 77350
+    }
+   ]
+  },
+  "GOOGL": {
+   "nom": "Alphabet",
+   "candidats": [
+    {
+     "fichier": "Alphabet & Heart Stamp Kit",
+     "url": "https://live.staticflickr.com/360/32131149236_bdb1461d06_b.jpg",
+     "page": "https://www.flickr.com/photos/94846844@N04/32131149236",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Lisa Zins",
+     "source": "flickr",
+     "score": 0,
+     "poids": 95435
+    },
+    {
+     "fichier": "Turkish alphabet cards Uppercase J and lowercase dotless ı",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Turkish_alphabet_cards_Uppercase_J_and_lowercase_dotless_%C4%B1.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=181627162",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Tevfik Asgin",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 45255
+    },
+    {
+     "fichier": "Alphabets",
+     "url": "https://live.staticflickr.com/3243/3117621085_837f89518f_b.jpg",
+     "page": "https://www.flickr.com/photos/8503402@N08/3117621085",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "kvanhorn",
+     "source": "flickr",
+     "score": 0,
+     "poids": 27067
+    }
+   ]
+  },
+  "ICE": {
+   "nom": "Intercontinental Exchange",
+   "candidats": [
+    {
+     "fichier": "Smoke Outlet @ The world-famous InterContinental Hotel on Park Lane in London, England, Un",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Smoke_Outlet_%40_The_world-famous_InterContinental_Hotel_on_Park_Lane_in_London%2C_England%2C_United_Kingdom%21_Grand_hospitality%21_Enjoy_the_magic%21_%29_%284620823171%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=22414551",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "|| UggBoy♥UggGirl || PHOTO || WORLD || TRAVEL ||",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 126775
+    }
+   ]
+  },
+  "IFX.DE": {
+   "nom": "Infineon",
+   "candidats": [
+    {
+     "fichier": "Sphairon Turbolink 7211 - board - Infineon PSB 50712 E-2372",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Sphairon_Turbolink_7211_-_board_-_Infineon_PSB_50712_E-2372.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=171699716",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "source": "wikimedia",
+     "score": 5,
+     "poids": 112790
+    },
+    {
+     "fichier": "Siemens MT50 - board - Infineon PMB 6850 E-5841",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Siemens_MT50_-_board_-_Infineon_PMB_6850_E-5841.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=178992950",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "source": "wikimedia",
+     "score": 5,
+     "poids": 128738
+    },
+    {
+     "fichier": "Siemens C45 - board - Infineon PMB 6850 E-2310",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Siemens_C45_-_board_-_Infineon_PMB_6850_E-2310.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=85641541",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "source": "wikimedia",
+     "score": 5,
+     "poids": 129744
+    }
+   ]
+  },
+  "INTU": {
+   "nom": "Intuit",
+   "candidats": [
+    {
+     "fichier": "A quite mind is able to hear intuition over fear...",
+     "url": "https://live.staticflickr.com/4201/34670353752_2c1f463990_b.jpg",
+     "page": "https://www.flickr.com/photos/31730451@N03/34670353752",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Neda Andel ~SLooK4U Blog ~ slowly coming back",
+     "source": "flickr",
+     "score": 0,
+     "poids": 99820
+    },
+    {
+     "fichier": "Always trust your intuition",
+     "url": "https://live.staticflickr.com/2481/3648392075_b9a4ae11d7_b.jpg",
+     "page": "https://www.flickr.com/photos/90863480@N00/3648392075",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "theilr",
+     "source": "flickr",
+     "score": 0,
+     "poids": 101054
+    },
+    {
+     "fichier": "Falcon 9 Intuitive Machines IM-2 (54352151872)",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Falcon_9_Intuitive_Machines_IM-2_%2854352151872%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=160745797",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Charles & Maggie Boyer",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 58029
+    }
+   ]
+  },
+  "JPM": {
+   "nom": "JPMorgan Chase",
+   "candidats": [
+    {
+     "fichier": "JPMorgan Chase & Co photoshoot and video feature coverage",
+     "url": "https://live.staticflickr.com/7501/15768952677_702ce0cbef_b.jpg",
+     "page": "https://www.flickr.com/photos/41898857@N04/15768952677",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "SparkFunElectronics",
+     "source": "flickr",
+     "score": 0,
+     "poids": 65219
+    },
+    {
+     "fichier": "Jamie Dimon, CEO of JPMorgan Chase",
+     "url": "https://live.staticflickr.com/8359/8362210873_09d8f76f55_b.jpg",
+     "page": "https://www.flickr.com/photos/44124348109@N01/8362210873",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "jurvetson",
+     "source": "flickr",
+     "score": -7,
+     "poids": 45512
+    },
+    {
+     "fichier": "Sky Lobby in JPMorgan Chase Tower, Houston, Texas",
+     "url": "https://live.staticflickr.com/7532/16250796116_dc46f7b106_b.jpg",
+     "page": "https://www.flickr.com/photos/75683070@N00/16250796116",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Ken Lund",
+     "source": "flickr",
+     "score": -8,
+     "poids": 46420
+    }
+   ]
+  },
+  "KKR": {
+   "nom": "KKR",
+   "candidats": [
+    {
+     "fichier": "Wow!, a chip design centre (KKR would be thrilled)",
+     "url": "https://live.staticflickr.com/4140/4911452755_4d708a019c_b.jpg",
+     "page": "https://www.flickr.com/photos/64924693@N00/4911452755",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Nagarjun",
+     "source": "flickr",
+     "score": 6,
+     "poids": 73322
+    },
+    {
+     "fichier": "kkr+tc",
+     "url": "https://live.staticflickr.com/6105/6292420797_7ee5c72803_b.jpg",
+     "page": "https://www.flickr.com/photos/30692722@N00/6292420797",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "meghantosh",
+     "source": "flickr",
+     "score": 0,
+     "poids": 22539
+    },
+    {
+     "fichier": "Norwegian Air Shuttle Boeing 737-300; LN-KKR@OSL;31.07.2008/524am",
+     "url": "https://live.staticflickr.com/2771/4320911606_94803eee10_b.jpg",
+     "page": "https://www.flickr.com/photos/46423105@N03/4320911606",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Aero Icarus",
+     "source": "flickr",
+     "score": 0,
+     "poids": 52001
+    }
+   ]
+  },
+  "KLAC": {
+   "nom": "KLA Corporation",
+   "candidats": [
+    {
+     "fichier": "Leraar voor de klas, RP-P-1948-322",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Leraar_voor_de_klas%2C_RP-P-1948-322.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=84393945",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Rijksmuseum",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 156324
+    },
+    {
+     "fichier": "Leraar voor de klas, RP-P-1885-A-9199",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Leraar_voor_de_klas%2C_RP-P-1885-A-9199.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=85050373",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Rijksmuseum",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 157441
+    },
+    {
+     "fichier": "KLA Corporation Ann Arbor Township Office",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/KLA_Corporation_Ann_Arbor_Township_Office.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=165163353",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "DontCallMeLateForDinner",
+     "source": "wikimedia",
+     "score": -8,
+     "poids": 87358
+    }
+   ]
+  },
+  "LITE": {
+   "nom": "Lumentum",
+   "candidats": [
+    {
+     "fichier": "Lumentum, Westfield Business Park - geograph.org.uk - 7296980",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Lumentum%2C_Westfield_Business_Park_-_geograph.org.uk_-_7296980.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=158687655",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Derek Harper",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 101327
+    }
+   ]
+  },
+  "LRCX": {
+   "nom": "Lam Research",
+   "candidats": [
+    {
+     "fichier": "Lam Research Theater, Yerba Buena Center, San Francisco",
+     "url": "https://live.staticflickr.com/8498/8297202494_f25b8a8b0c_b.jpg",
+     "page": "https://www.flickr.com/photos/45457437@N00/8297202494",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "David Jones",
+     "source": "flickr",
+     "score": 0,
+     "poids": 79558
+    },
+    {
+     "fichier": "Gebäude von Lam Research in Fremont",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Geb%C3%A4ude_von_Lam_Research_in_Fremont.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=146876687",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Olaf2",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 91565
+    }
+   ]
+  },
+  "LSEG.L": {
+   "nom": "London Stock Exchange Group",
+   "candidats": [
+    {
+     "fichier": "London Stock Exchange",
+     "url": "https://live.staticflickr.com/2051/13056133013_8c7c4781b4_b.jpg",
+     "page": "https://www.flickr.com/photos/10246637@N04/13056133013",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Foreign, Commonwealth & Development Office",
+     "source": "flickr",
+     "score": 0,
+     "poids": 91017
+    },
+    {
+     "fichier": "Occupy London Stock Exchange Protest",
+     "url": "https://live.staticflickr.com/6230/6263321500_423d1ac28f_b.jpg",
+     "page": "https://www.flickr.com/photos/53442856@N06/6263321500",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Valters Krontals",
+     "source": "flickr",
+     "score": 0,
+     "poids": 67410
+    },
+    {
+     "fichier": "Occupy London Stock Exchange Protest",
+     "url": "https://live.staticflickr.com/6058/6262796407_428e906f18_b.jpg",
+     "page": "https://www.flickr.com/photos/53442856@N06/6262796407",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Valters Krontals",
+     "source": "flickr",
+     "score": 0,
+     "poids": 77954
+    }
+   ]
+  },
+  "MPWR": {
+   "nom": "Monolithic Power Systems",
+   "candidats": [
+    {
+     "fichier": "Thomson 22FB3113W - board - Monolithic Power Systems MPS1613-0933",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Thomson_22FB3113W_-_board_-_Monolithic_Power_Systems_MPS1613-0933.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=190602285",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "source": "wikimedia",
+     "score": 5,
+     "poids": 93747
+    }
+   ]
+  },
+  "MRVL": {
+   "nom": "Marvell Technology",
+   "candidats": [
+    {
+     "fichier": "IEC Winner Capung Team with Mr Sehat Sutarja, founder of Marvell Technology",
+     "url": "https://live.staticflickr.com/7159/6633417797_5731d007cc_b.jpg",
+     "page": "https://www.flickr.com/photos/39809323@N03/6633417797",
+     "licence": "CC PDM 1.0",
+     "famille": "libre",
+     "auteur": "U.S. Embassy Jakarta, Indonesia",
+     "source": "flickr",
+     "score": -7,
+     "poids": 56752
+    }
+   ]
+  },
+  "MS": {
+   "nom": "Morgan Stanley",
+   "candidats": [
+    {
+     "fichier": "Morgan Car",
+     "url": "https://live.staticflickr.com/3670/9692529635_0f63fd8dfa_b.jpg",
+     "page": "https://www.flickr.com/photos/48215073@N00/9692529635",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "talk2santosh",
+     "source": "flickr",
+     "score": 3,
+     "poids": 111538
+    },
+    {
+     "fichier": "Morgan 4/4",
+     "url": "https://live.staticflickr.com/320/18715490014_e7cde9febd_b.jpg",
+     "page": "https://www.flickr.com/photos/12357841@N02/18715490014",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Me in ME",
+     "source": "flickr",
+     "score": 0,
+     "poids": 110660
+    },
+    {
+     "fichier": "Morgan 4 4 (18715490014)",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Morgan_4_4_%2818715490014%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=70782757",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Paul VanDerWerf from Brunswick, Maine, USA",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 106744
+    }
+   ]
+  },
+  "MSCI": {
+   "nom": "MSCI",
+   "candidats": [
+    {
+     "fichier": "MSCI World",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/MSCI_World.png",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=19781963",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Jashuah",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 67540
+    },
+    {
+     "fichier": "MSCI Awards Lunch",
+     "url": "https://live.staticflickr.com/7353/9556216808_bd1c4cfeee_b.jpg",
+     "page": "https://www.flickr.com/photos/26254305@N08/9556216808",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "roanokecollege",
+     "source": "flickr",
+     "score": 0,
+     "poids": 96504
+    },
+    {
+     "fichier": "Copenhaver MSCI 2013",
+     "url": "https://live.staticflickr.com/7375/9553028643_6dd72069f0_b.jpg",
+     "page": "https://www.flickr.com/photos/26254305@N08/9553028643",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "roanokecollege",
+     "source": "flickr",
+     "score": 0,
+     "poids": 60123
+    }
+   ]
+  },
+  "MUV2.DE": {
+   "nom": "Munich Re",
+   "candidats": [
+    {
+     "fichier": "IMG_2345 Munich Re Tree",
+     "url": "https://live.staticflickr.com/7259/7844002326_6e8a20039e_b.jpg",
+     "page": "https://www.flickr.com/photos/79575714@N00/7844002326",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "mikemccaffrey",
+     "source": "flickr",
+     "score": 0,
+     "poids": 82110
+    },
+    {
+     "fichier": "File:Wzwz schwabing 13 munich re tree.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Wzwz_schwabing_13_munich_re_tree.JPG",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=33509085",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Wzwz",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 64220
+    },
+    {
+     "fichier": "Semana del Seguro 2023 - MUNICH RE",
+     "url": "https://live.staticflickr.com/65535/52702494320_009d26aa94_b.jpg",
+     "page": "https://www.flickr.com/photos/94195386@N05/52702494320",
+     "licence": "CC PDM 1.0",
+     "famille": "libre",
+     "auteur": "INESE Seguros",
+     "source": "flickr",
+     "score": 0,
+     "poids": 69168
+    }
+   ]
+  },
+  "NBIS": {
+   "nom": "Nebius",
+   "candidats": [
+    {
+     "fichier": "Arkady Volozh CEO Nebius",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Arkady_Volozh_CEO_Nebius.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=162788035",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Mark David.",
+     "source": "wikimedia",
+     "score": -7,
+     "poids": 30501
+    }
+   ]
+  },
+  "NTAP": {
+   "nom": "NetApp",
+   "candidats": [
+    {
+     "fichier": "Trunked 10gig ethernet for NetApp 6030",
+     "url": "https://live.staticflickr.com/1213/866577666_0b3467c924_b.jpg",
+     "page": "https://www.flickr.com/photos/8558461@N08/866577666",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "ChrisDag",
+     "source": "flickr",
+     "score": 0,
+     "poids": 75224
+    },
+    {
+     "fichier": "NetApp DS servers and controller",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/NetApp_DS_servers_and_controller.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=107544234",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Robert",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 64789
+    },
+    {
+     "fichier": "NetApp 6030 Filer Head (fisheye)",
+     "url": "https://live.staticflickr.com/3161/3105130716_cd2979ab51_b.jpg",
+     "page": "https://www.flickr.com/photos/8558461@N08/3105130716",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "ChrisDag",
+     "source": "flickr",
+     "score": 0,
+     "poids": 61448
+    }
+   ]
+  },
+  "ORCL": {
+   "nom": "Oracle",
+   "candidats": [
+    {
+     "fichier": "Oracle installation floppy disk",
+     "url": "https://live.staticflickr.com/7266/7871390896_37bd615126_b.jpg",
+     "page": "https://www.flickr.com/photos/21649179@N00/7871390896",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "fdecomite",
+     "source": "flickr",
+     "score": 5,
+     "poids": 53997
+    },
+    {
+     "fichier": "Oracle's SPARC T3-4 Server",
+     "url": "https://live.staticflickr.com/4086/5006317222_1f810bb88d_b.jpg",
+     "page": "https://www.flickr.com/photos/49034885@N05/5006317222",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Oracle PR",
+     "source": "flickr",
+     "score": 4,
+     "poids": 41848
+    },
+    {
+     "fichier": "Oracle Park - August 2025 - Sarah Stierch - 15",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Oracle_Park_-_August_2025_-_Sarah_Stierch_-_15.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=175283646",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Missvain",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 84336
+    }
+   ]
+  },
+  "PDD": {
+   "nom": "PDD",
+   "candidats": [
+    {
+     "fichier": "Child with PDD being dealt by psychologist Dr. Ramakrushna Biswal",
+     "url": "https://live.staticflickr.com/7391/16533339892_f3df04a34b_b.jpg",
+     "page": "https://www.flickr.com/photos/37313707@N00/16533339892",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Bhakua",
+     "source": "flickr",
+     "score": 0,
+     "poids": 57651
+    },
+    {
+     "fichier": "Gloeocantharellus dingleyae Holotype PDD 30179",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Gloeocantharellus_dingleyae_Holotype_PDD_30179.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=110060933",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Manaaki Whenua – Landcare Research",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 48489
+    },
+    {
+     "fichier": "One more child with PDD with the speech therapist",
+     "url": "https://live.staticflickr.com/8024/7273220086_814381fc77_b.jpg",
+     "page": "https://www.flickr.com/photos/37313707@N00/7273220086",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Bhakua",
+     "source": "flickr",
+     "score": 0,
+     "poids": 85619
+    }
+   ]
+  },
+  "PLTR": {
+   "nom": "Palantir",
+   "candidats": [
+    {
+     "fichier": "Palantir",
+     "url": "https://live.staticflickr.com/3023/5765612483_927df784e3_b.jpg",
+     "page": "https://www.flickr.com/photos/52522100@N07/5765612483",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "TechCrunch",
+     "source": "flickr",
+     "score": 0,
+     "poids": 53692
+    },
+    {
+     "fichier": "Palantir pavilion, World Economic Forum, Davos, Switzerland",
+     "url": "https://live.staticflickr.com/673/32215763362_b62ef08e5f_b.jpg",
+     "page": "https://www.flickr.com/photos/37996580417@N01/32215763362",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "gruntzooki",
+     "source": "flickr",
+     "score": 0,
+     "poids": 93756
+    },
+    {
+     "fichier": "20111010-NodeXL-Twitter-palantir composite wide",
+     "url": "https://live.staticflickr.com/6166/6231853621_876f4f4a5d_b.jpg",
+     "page": "https://www.flickr.com/photos/49503165485@N01/6231853621",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Marc_Smith",
+     "source": "flickr",
+     "score": 0,
+     "poids": 93100
+    }
+   ]
+  },
+  "PWR": {
+   "nom": "Quanta Services",
+   "candidats": [
+    {
+     "fichier": "Susan Rice, Quanta Crews, Flavio Bravo, Kathleen Sebelius, Kate Cox & Lilliana Vazquez",
+     "url": "https://live.staticflickr.com/65535/54110854669_30df4dd2e0_b.jpg",
+     "page": "https://www.flickr.com/photos/22007612@N05/54110854669",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Gage Skidmore",
+     "source": "flickr",
+     "score": 0,
+     "poids": 67475
+    },
+    {
+     "fichier": "Susan Rice, Quanta Crews, Flavio Bravo, Kathleen Sebelius, Kate Cox & Lilliana Vazquez (54",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Susan_Rice%2C_Quanta_Crews%2C_Flavio_Bravo%2C_Kathleen_Sebelius%2C_Kate_Cox_%26_Lilliana_Vazquez_%2854110854669%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=154798359",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Gage Skidmore from Surprise, AZ, United States of America",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 65009
+    }
+   ]
+  },
+  "SCHW": {
+   "nom": "Charles Schwab",
+   "candidats": [
+    {
+     "fichier": "Chip-enabled Charles Schwab Bank Visa Debit Card",
+     "url": "https://live.staticflickr.com/7516/16292864811_64f4324543_b.jpg",
+     "page": "https://www.flickr.com/photos/51526368@N03/16292864811",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Aranami",
+     "source": "flickr",
+     "score": 11,
+     "poids": 65195
+    },
+    {
+     "fichier": "Charles Schwab",
+     "url": "https://live.staticflickr.com/2936/14763506934_9434f24230_b.jpg",
+     "page": "https://www.flickr.com/photos/39160147@N03/14763506934",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "JeepersMedia",
+     "source": "flickr",
+     "score": 0,
+     "poids": 69393
+    },
+    {
+     "fichier": "Charles Schwab",
+     "url": "https://live.staticflickr.com/3855/14579219929_fc105dd57a_b.jpg",
+     "page": "https://www.flickr.com/photos/39160147@N03/14579219929",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "JeepersMedia",
+     "source": "flickr",
+     "score": 0,
+     "poids": 44333
+    }
+   ]
+  },
+  "SIE.DE": {
+   "nom": "Siemens",
+   "candidats": [
+    {
+     "fichier": "Siemens Gigaset AS280 - basestation - board - SiTel SC14480A2M6-1134",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Siemens_Gigaset_AS280_-_basestation_-_board_-_SiTel_SC14480A2M6-1134.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=106362485",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "source": "wikimedia",
+     "score": 5,
+     "poids": 122258
+    },
+    {
+     "fichier": "Siemens Gigaset USB Adapter 54 - board - Intersil ISL3886IK-0313",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Siemens_Gigaset_USB_Adapter_54_-_board_-_Intersil_ISL3886IK-0313.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=79791476",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "source": "wikimedia",
+     "score": 5,
+     "poids": 145889
+    },
+    {
+     "fichier": "Siemens MT50 - board - Infineon PMB 6850 E-5841",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Siemens_MT50_-_board_-_Infineon_PMB_6850_E-5841.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=178992950",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "source": "wikimedia",
+     "score": 5,
+     "poids": 128738
+    }
+   ]
+  },
+  "SNPS": {
+   "nom": "Synopsys",
+   "candidats": [
+    {
+     "fichier": "Synopsys Oregon Building",
+     "url": "https://live.staticflickr.com/5138/5413832481_3161b189c0_b.jpg",
+     "page": "https://www.flickr.com/photos/12567713@N00/5413832481",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "born1945",
+     "source": "flickr",
+     "score": -8,
+     "poids": 58418
+    },
+    {
+     "fichier": "Synopsys Headquarters Mountain View",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Synopsys_Headquarters_Mountain_View.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=118340795",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "LPS.1",
+     "source": "wikimedia",
+     "score": -8,
+     "poids": 83359
+    }
+   ]
+  },
+  "SPGI": {
+   "nom": "S&P Global",
+   "candidats": [
+    {
+     "fichier": "Luciano Gremone - S&P Global Ratings",
+     "url": "https://live.staticflickr.com/5796/31175694355_2b9bb2293f_b.jpg",
+     "page": "https://www.flickr.com/photos/50924847@N07/31175694355",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Portal Abras",
+     "source": "flickr",
+     "score": 0,
+     "poids": 48702
+    },
+    {
+     "fichier": "Luisa Vilhena - S&P Global Ratings",
+     "url": "https://live.staticflickr.com/5621/31175690575_b009461535_b.jpg",
+     "page": "https://www.flickr.com/photos/50924847@N07/31175690575",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Portal Abras",
+     "source": "flickr",
+     "score": 0,
+     "poids": 49627
+    },
+    {
+     "fichier": "Luciano Gremone - S&P Global Ratings (31175694355)",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Luciano_Gremone_-_S%26P_Global_Ratings_%2831175694355%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=114245489",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "ABRAS Associação Brasileira de Supermercados",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 46879
+    }
+   ]
+  },
+  "SU.PA": {
+   "nom": "Schneider Electric",
+   "candidats": [
+    {
+     "fichier": "Schneider Electric Packaging Team Kickaround",
+     "url": "https://live.staticflickr.com/3254/2440916342_e21c014a7b_b.jpg",
+     "page": "https://www.flickr.com/photos/77744839@N00/2440916342",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "wjarrettc",
+     "source": "flickr",
+     "score": 3,
+     "poids": 96666
+    },
+    {
+     "fichier": "Schneider Electric factory",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Schneider_Electric_factory.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=2025468",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Chmee2",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 70629
+    },
+    {
+     "fichier": "Oscars du mécénat d'entreprise 2011 : Fondation Schneider Electric et fondation VINCI",
+     "url": "https://live.staticflickr.com/3402/5733379554_9cf8e5aab5_b.jpg",
+     "page": "https://www.flickr.com/photos/63013916@N02/5733379554",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "ADMICAL",
+     "source": "flickr",
+     "score": 0,
+     "poids": 72434
+    }
+   ]
+  },
+  "TCEHY": {
+   "nom": "Tencent",
+   "candidats": [
+    {
+     "fichier": "Monday Keynote Bo Wang from Tencent",
+     "url": "https://live.staticflickr.com/4075/4896834885_efbc58a43a_b.jpg",
+     "page": "https://www.flickr.com/photos/46982319@N06/4896834885",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Official GDC",
+     "source": "flickr",
+     "score": 0,
+     "poids": 105726
+    },
+    {
+     "fichier": "Monday Keynote Bo Wang from Tencent",
+     "url": "https://live.staticflickr.com/4075/4896834831_9738527e97_b.jpg",
+     "page": "https://www.flickr.com/photos/46982319@N06/4896834831",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Official GDC",
+     "source": "flickr",
+     "score": 0,
+     "poids": 56021
+    },
+    {
+     "fichier": "Tencent binghai building202012",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Tencent_binghai_building202012.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=98164092",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Charlie fong",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 143721
+    }
+   ]
+  },
+  "TER": {
+   "nom": "Teradyne",
+   "candidats": [
+    {
+     "fichier": "A Teradyne TIger tester, I'm at work again, a different machine, different room",
+     "url": "https://live.staticflickr.com/4043/4684789938_daa1e2dbb8_b.jpg",
+     "page": "https://www.flickr.com/photos/9998127@N06/4684789938",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "wbaiv",
+     "source": "flickr",
+     "score": 5,
+     "poids": 74950
+    },
+    {
+     "fichier": "Employee souls at the last days of Megatest Teradyne",
+     "url": "https://live.staticflickr.com/3541/3374931902_258dbe9c6f_b.jpg",
+     "page": "https://www.flickr.com/photos/9998127@N06/3374931902",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "wbaiv",
+     "source": "flickr",
+     "score": 0,
+     "poids": 45489
+    },
+    {
+     "fichier": "Redwood City Malabu Grand Prix, Teradyne/Megatest 'I Survived Indy' company party",
+     "url": "https://live.staticflickr.com/8254/8667238576_3510308378_b.jpg",
+     "page": "https://www.flickr.com/photos/9998127@N06/8667238576",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "wbaiv",
+     "source": "flickr",
+     "score": 0,
+     "poids": 86345
+    }
+   ]
+  },
+  "TFC": {
+   "nom": "Truist Financial",
+   "candidats": [
+    {
+     "fichier": "Truist Financial Center - Hagerstown, Maryland",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Truist_Financial_Center_-_Hagerstown%2C_Maryland.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=119740311",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Farragutful",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 93445
+    },
+    {
+     "fichier": "Charlotte Skyline, BB&T Ballpark (Now Truist Field), Charlotte, North Carolina (4749094187",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Charlotte_Skyline%2C_BB%26T_Ballpark_%28Now_Truist_Field%29%2C_Charlotte%2C_North_Carolina_%2847490941872%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=159839887",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Ken Lund from Reno, Nevada, USA",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 84299
+    }
+   ]
+  },
+  "UBSG.SW": {
+   "nom": "UBS",
+   "candidats": [
+    {
+     "fichier": "UBS machine gun",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/UBS_machine_gun.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=15432466",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Mike1979 Russia",
+     "source": "wikimedia",
+     "score": 5,
+     "poids": 75015
+    },
+    {
+     "fichier": "Elmont-UBS Two-Way Service",
+     "url": "https://live.staticflickr.com/65535/52409589973_6d690f0c5f_b.jpg",
+     "page": "https://www.flickr.com/photos/61135621@N03/52409589973",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "MTAPhotos",
+     "source": "flickr",
+     "score": 0,
+     "poids": 61555
+    },
+    {
+     "fichier": "Elmont-UBS Two-Way Service",
+     "url": "https://live.staticflickr.com/65535/52408578877_acb52f6452_b.jpg",
+     "page": "https://www.flickr.com/photos/61135621@N03/52408578877",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "MTAPhotos",
+     "source": "flickr",
+     "score": 0,
+     "poids": 74048
+    }
+   ]
+  },
+  "VRT": {
+   "nom": "Vertiv",
+   "candidats": [
+    {
+     "fichier": "Ford Trimotor Rudder and Vertival Stabilizer",
+     "url": "https://live.staticflickr.com/65535/53043245347_cd87ff60cc_b.jpg",
+     "page": "https://www.flickr.com/photos/146295701@N02/53043245347",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Eric Friedebach",
+     "source": "flickr",
+     "score": 0,
+     "poids": 49448
+    },
+    {
+     "fichier": "Ford Trimotor Rudder and Vertival Stabilizer",
+     "url": "https://live.staticflickr.com/65535/53043833956_a30309e9d3_b.jpg",
+     "page": "https://www.flickr.com/photos/146295701@N02/53043833956",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Eric Friedebach",
+     "source": "flickr",
+     "score": 0,
+     "poids": 83433
+    },
+    {
+     "fichier": "Vertiv onecore",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Vertiv_onecore.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=182610832",
+     "licence": "CC CC0 1.0",
+     "famille": "libre",
+     "auteur": "Vertiv",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 56215
+    }
+   ]
+  },
+  "VST": {
+   "nom": "Vistra",
+   "candidats": [
+    {
+     "fichier": "Alcazar de segovia - vistra trasera",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Alcazar_de_segovia_-_vistra_trasera.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=110589128",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Antonio Sánchez Corbalán",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 87130
+    },
+    {
+     "fichier": "Vistra do centro de Goiânia a partir do estacionamento do Parthenon Center, fevereiro de 2",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Vistra_do_centro_de_Goi%C3%A2nia_a_partir_do_estacionamento_do_Parthenon_Center%2C_fevereiro_de_2026_%289%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=184691639",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Fronteira",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 82381
+    },
+    {
+     "fichier": "Vistra do centro de Goiânia a partir do estacionamento do Parthenon Center, fevereiro de 2",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/Vistra_do_centro_de_Goi%C3%A2nia_a_partir_do_estacionamento_do_Parthenon_Center%2C_fevereiro_de_2026_%283%29.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=184691619",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Fronteira",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 96938
+    }
+   ]
+  },
+  "ZTS": {
+   "nom": "Zoetis",
+   "candidats": [
+    {
+     "fichier": "ZoetisBuilding",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/ZoetisBuilding.jpg",
+     "page": "https://commons.wikimedia.org/w/index.php?curid=52565806",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Briftrecur at Wikipedia",
+     "source": "wikimedia",
+     "score": 0,
+     "poids": 63605
+    }
+   ]
+  }
+ }
 }
