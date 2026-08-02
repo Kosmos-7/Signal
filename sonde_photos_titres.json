@@ -1,0 +1,967 @@
+{
+ "sondes": 104,
+ "avec_candidat": 89,
+ "sans_candidat": [
+  "000660.KS",
+  "ABBN.SW",
+  "CCJ",
+  "CIEN",
+  "IFX.DE",
+  "JPM",
+  "LITE",
+  "MA",
+  "MSCI",
+  "NBIS",
+  "PWR",
+  "TCEHY",
+  "TER",
+  "VRT",
+  "ZTS"
+ ],
+ "detail": {
+  "000660.KS": {
+   "nom": "SK Hynix",
+   "secteur": "Technologie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "005930.KS": {
+   "nom": "Samsung Electronics",
+   "secteur": "Technologie",
+   "candidats": 1,
+   "exemples": [
+    "17456805020661182164462740776729 samsung phone.jpg"
+   ]
+  },
+  "4062.T": {
+   "nom": "Ibiden",
+   "secteur": "Technologie",
+   "candidats": 2,
+   "exemples": [
+    "Caarte vande Zuijdzee, vertonende wat wech Willem Schouten door ",
+    "Map showing Schouten and Le Maire’s route across the Pacific Oce"
+   ]
+  },
+  "4063.T": {
+   "nom": "Shin-Etsu Chemical",
+   "secteur": "Matériaux",
+   "candidats": 2,
+   "exemples": [
+    "Asahi Mutual Life Insurance Company (head office).jpg",
+    "US Semiconductor Economy.webp"
+   ]
+  },
+  "6146.T": {
+   "nom": "Disco Corporation",
+   "secteur": "Technologie",
+   "candidats": 14,
+   "exemples": [
+    "Buildings in Ōmori 10.jpg",
+    "Buildings in Ōmori 11.jpg",
+    "USAID Strengthens Load Management Capacity in Power Distribution"
+   ]
+  },
+  "6857.T": {
+   "nom": "Advantest",
+   "secteur": "Technologie",
+   "candidats": 2,
+   "exemples": [
+    "Advantest Kitakyushu R&D Center.JPG",
+    "Advantest Kitakyushu R&D Center.JPG"
+   ]
+  },
+  "8035.T": {
+   "nom": "Tokyo Electron",
+   "secteur": "Technologie",
+   "candidats": 3,
+   "exemples": [
+    "Tokyo Electron Europe HQ, Manor Royal, Crawley.JPG",
+    "Tokyo Electron Europe HQ, Manor Royal, Crawley (May 2012) (1).jp",
+    "Tokyo Electron Europe HQ, Manor Royal, Crawley (May 2012) (2).jp"
+   ]
+  },
+  "ABBN.SW": {
+   "nom": "ABB",
+   "secteur": "Industrie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "ACN": {
+   "nom": "Accenture",
+   "secteur": "Technologie",
+   "candidats": 2,
+   "exemples": [
+    "Accenture building Reston.jpg",
+    "Accenture building Reston.jpg"
+   ]
+  },
+  "ADBE": {
+   "nom": "Adobe",
+   "secteur": "Technologie",
+   "candidats": 5,
+   "exemples": [
+    "Fremont Adobe.jpg",
+    "Fremont Adobe 2.jpg",
+    "Fremont Adobe 3.jpg"
+   ]
+  },
+  "ADI": {
+   "nom": "Analog Devices",
+   "secteur": "Technologie",
+   "candidats": 8,
+   "exemples": [
+    "AVATAR Organ Chip FeatureBPS.jpg",
+    "Analog Computing Machine GPN-2000-000354.jpg",
+    "Analogwilm.jpg"
+   ]
+  },
+  "ADYEN.AS": {
+   "nom": "Adyen",
+   "secteur": "Technologie",
+   "candidats": 7,
+   "exemples": [
+    "2024 Adyen-brug, Asd (1) 01.jpg",
+    "2024 Adyen-brug, Asd (1) 02.jpg",
+    "2024 Adyen-brug, Asd (1) 03.jpg"
+   ]
+  },
+  "ALV.DE": {
+   "nom": "Allianz",
+   "secteur": "Finance",
+   "candidats": 4,
+   "exemples": [
+    "Wzwz schwabing 26 allianz building.JPG",
+    "Wzwz schwabing 26 allianz building.JPG",
+    "Neon Allianz nad placówką w Tomaszowie Mazowieckim.jpg"
+   ]
+  },
+  "AMAT": {
+   "nom": "Applied Materials",
+   "secteur": "Technologie",
+   "candidats": 6,
+   "exemples": [
+    "City Fire Department Headquarters, 19 First Street Southwest, Ma",
+    "City Fire Department Headquarters, 19 First Street Southwest, Ma",
+    "City Fire Department Headquarters, 19 First Street Southwest, Ma"
+   ]
+  },
+  "AMD": {
+   "nom": "Advanced Micro Devices",
+   "secteur": "Technologie",
+   "candidats": 3,
+   "exemples": [
+    "AMD@16nm@Jaguar Polaris APU@Scorpio@XBoxOneX@DG5700GDA87IE 1721S",
+    "AMD RDNA-3 Logo.png",
+    "AMD RDNA 2 Logo.png"
+   ]
+  },
+  "AMZN": {
+   "nom": "Amazon.com",
+   "secteur": "Conso. cycl.",
+   "candidats": 7,
+   "exemples": [
+    "2022.07.04 Coach carrying Amazon employees, Tomaszow Mazowiecki,",
+    "Amazon delivery station.jpg",
+    "2022.07.04 Coach carrying Amazon employees, Tomaszow Mazowiecki,"
+   ]
+  },
+  "ANET": {
+   "nom": "Arista Networks",
+   "secteur": "Technologie",
+   "candidats": 11,
+   "exemples": [
+    "Arastra Gulch, Baker's Park. Silverton Quadrangle. San Juan Coun",
+    "Arastra Gulch, Baker's Park. Silverton Quadrangle. San Juan Coun",
+    "Arastra Gulch, Bakers Park San Juan County, Colorado 1874 (16750"
+   ]
+  },
+  "ARM": {
+   "nom": "Arm",
+   "secteur": "Technologie",
+   "candidats": 1,
+   "exemples": [
+    "162nd Aviation Company crewmen arm a UH-1D at Can Tho.jpg"
+   ]
+  },
+  "ASM.AS": {
+   "nom": "ASM International",
+   "secteur": "Technologie",
+   "candidats": 6,
+   "exemples": [
+    "Defilé Weteringplantsoen PK-F-A.02393.jpg",
+    "Fontenay Abbey - Plaque about the hydraulic hammer in the forge.",
+    "Snowy road - DPLA - 3138f1ee59a15f2769ca8d6fefd90ed6.jpg"
+   ]
+  },
+  "ASML.AS": {
+   "nom": "ASML",
+   "secteur": "Technologie",
+   "candidats": 3,
+   "exemples": [
+    "ASML headquarters Veldhoven.jpg",
+    "ASML headquarters Veldhoven.jpg",
+    "ASML headquarters Veldhoven.jpg"
+   ]
+  },
+  "ASX": {
+   "nom": "ASE Group",
+   "secteur": "Technologie",
+   "candidats": 8,
+   "exemples": [
+    "AS14-67-9363 - Apollo 14 - Apollo 14 Mission image - View of the",
+    "AS14-67-9374 - Apollo 14 - Apollo 14 Mission image - View to the",
+    "AS14-67-9378 - Apollo 14 - Apollo 14 Mission image - View of the"
+   ]
+  },
+  "AVGO": {
+   "nom": "Broadcom",
+   "secteur": "Technologie",
+   "candidats": 1,
+   "exemples": [
+    "BCM70015.jpg"
+   ]
+  },
+  "AXP": {
+   "nom": "American Express",
+   "secteur": "Finance",
+   "candidats": 14,
+   "exemples": [
+    "New American Express Building, 1 John Street, Carlton Hill, Brig",
+    "New American Express Building, 1 John Street, Carlton Hill, Brig",
+    "New American Express Building, 1 John Street, Carlton Hill, Brig"
+   ]
+  },
+  "BAC": {
+   "nom": "Bank of America",
+   "secteur": "Finance",
+   "candidats": 2,
+   "exemples": [
+    "World Bank headquarters building, Washington, D.C LCCN2011633462",
+    "Bank of America building.jpg"
+   ]
+  },
+  "BLK": {
+   "nom": "BlackRock",
+   "secteur": "Finance",
+   "candidats": 11,
+   "exemples": [
+    "Arkansas - Little Rock - NARA - 23934029.jpg",
+    "Arkansas - Little Rock - NARA - 23934031.jpg",
+    "Arkansas - Little Rock - NARA - 23934035.jpg"
+   ]
+  },
+  "BNP.PA": {
+   "nom": "BNP Paribas",
+   "secteur": "Finance",
+   "candidats": 3,
+   "exemples": [
+    "Siege BNPP rue Laffitte.jpg",
+    "Siege BNPP rue Taitbout.jpg",
+    "Cetelem-logo-2006.png"
+   ]
+  },
+  "BX": {
+   "nom": "Blackstone",
+   "secteur": "Finance",
+   "candidats": 11,
+   "exemples": [
+    "1940 Census Enumeration District Descriptions - Massachusetts - ",
+    "1940 Census Enumeration District Descriptions - Massachusetts - ",
+    "1940 Census Enumeration District Descriptions - Rhode Island - P"
+   ]
+  },
+  "CB": {
+   "nom": "Chubb",
+   "secteur": "Finance",
+   "candidats": 7,
+   "exemples": [
+    "1940 Census Enumeration District Descriptions - Massachusetts - ",
+    "2021.05.19 Action outside Chubb headquarters in Zurich, Switzerl",
+    "2021.05.19 Action outside Chubb headquarters in Zurich, Switzerl"
+   ]
+  },
+  "CCJ": {
+   "nom": "Cameco",
+   "secteur": "Énergie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "CDNS": {
+   "nom": "Cadence Design Systems",
+   "secteur": "Technologie",
+   "candidats": 4,
+   "exemples": [
+    "Cadence Building 2.jpg",
+    "Exploration Mission-1 patch.png",
+    "Cadence Building 2.jpg"
+   ]
+  },
+  "CEG": {
+   "nom": "Constellation Energy",
+   "secteur": "Services pub.",
+   "candidats": 5,
+   "exemples": [
+    "Chandra Sees Shape of Universe During Formative, Adolescent Year",
+    "Chandra Sees Shape of Universe During Formative, Adolescent Year",
+    "Antennae- Chandra Locates Mother Lode of Planetary Ore in Collid"
+   ]
+  },
+  "CIEN": {
+   "nom": "Ciena",
+   "secteur": "Technologie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "CME": {
+   "nom": "CME",
+   "secteur": "Finance",
+   "candidats": 7,
+   "exemples": [
+    "Chicago.Mercantile.Exchange.jpg",
+    "Iraqi Women's Engagement DVIDS79183.jpg",
+    "USMC-080624-M-1750A-110.jpg"
+   ]
+  },
+  "COHR": {
+   "nom": "Coherent",
+   "secteur": "Technologie",
+   "candidats": 4,
+   "exemples": [
+    "AMH-6670-NA Map of the island of Formosa.jpg",
+    "COHERENT-DILAS Logo color rgb.png",
+    "Microwave Generator (5977434459).jpg"
+   ]
+  },
+  "CRM": {
+   "nom": "Salesforce",
+   "secteur": "Technologie",
+   "candidats": 9,
+   "exemples": [
+    "Salesforce Chief Executive Officer Marc Benioff at the Departmen",
+    "Salesforce Chief Executive Officer Marc Benioff at the Departmen",
+    "Salesforce Chief Executive Officer Marc Benioff at the Departmen"
+   ]
+  },
+  "CRWV": {
+   "nom": "CoreWeave",
+   "secteur": "Technologie",
+   "candidats": 4,
+   "exemples": [
+    "VIEW INSIDE BRICK ADDITION ON SOUTHWEST END OF ORIGINAL MILL, LO",
+    "VIEW OF SOUTHEAST ELEVATION OF GRANITEVILLE MILL COMPLEX. THIS O",
+    "VIEW INSIDE BRICK ADDITION ON SOUTHWEST END OF ORIGINAL MILL, LO"
+   ]
+  },
+  "CS.PA": {
+   "nom": "AXA",
+   "secteur": "Finance",
+   "candidats": 1,
+   "exemples": [
+    "UK - Middlesbrough - AXA.jpg"
+   ]
+  },
+  "CSCO": {
+   "nom": "Cisco Systems",
+   "secteur": "Technologie",
+   "candidats": 3,
+   "exemples": [
+    "Bell telephone magazine (1946) (14569373738).jpg",
+    "Cisco San Jose Main Campus (3).jpg",
+    "Citizen-Soldiers mentor female IT students in Kosovo 151023-A-RN"
+   ]
+  },
+  "DB1.DE": {
+   "nom": "Deutsche Boerse",
+   "secteur": "Finance",
+   "candidats": 1,
+   "exemples": [
+    "ETFs in Central and Eastern Europe.png"
+   ]
+  },
+  "DELL": {
+   "nom": "Dell",
+   "secteur": "Technologie",
+   "candidats": 5,
+   "exemples": [
+    "At the Office (8293396579).jpg",
+    "Historic Columbia River Highway - Shepperd's Dell - NARA - 77192",
+    "Nebo Loop Scenic Byway - Pond at Maple Dell - NARA - 7720639.jpg"
+   ]
+  },
+  "DLR": {
+   "nom": "Digital Realty",
+   "secteur": "Immobilier",
+   "candidats": 14,
+   "exemples": [
+    "A1A Scenic and Historic Coastal Byway - The Visitor Center at Fo",
+    "Dan Stite realty Company and a General Store - NARA - 279802.jpg",
+    "Dan Stite realty Company and a General Store - NARA - 279802.tif"
+   ]
+  },
+  "ENR.DE": {
+   "nom": "Siemens Energy",
+   "secteur": "Industrie",
+   "candidats": 3,
+   "exemples": [
+    "Stennis Space Center observes 2009 Energy Awareness Day (SSC-200",
+    "Zamudio - Parque Científico y Tecnológico de Bizkaia, Gamesa Ele",
+    "Zamudio - Parque Científico y Tecnológico de Bizkaia, sede centr"
+   ]
+  },
+  "EQIX": {
+   "nom": "Equinix",
+   "secteur": "Immobilier",
+   "candidats": 2,
+   "exemples": [
+    "151FrontStreet.JPG",
+    "151FrontStreet2.jpg"
+   ]
+  },
+  "ETN": {
+   "nom": "Eaton",
+   "secteur": "Industrie",
+   "candidats": 11,
+   "exemples": [
+    "'Spotted Tail's' headquarters, by Eaton, Edric L., 1836-.jpg",
+    "'Spotted Tail's' headquarters, by Eaton, Edric L., 1836-.png",
+    "1950 Census Enumeration District Maps - Michigan (MI) - Eaton Co"
+   ]
+  },
+  "FICO": {
+   "nom": "Fair Isaac",
+   "secteur": "Technologie",
+   "candidats": 14,
+   "exemples": [
+    "Frances (Appleton) Longfellow to Isaac Appleton Jewett, 15 April",
+    "Frances (Appleton) Longfellow to Isaac Appleton Jewett, 15 April",
+    "Frances (Appleton) Longfellow to Isaac Appleton Jewett, 15 April"
+   ]
+  },
+  "GEV": {
+   "nom": "GE Vernova",
+   "secteur": "Industrie",
+   "candidats": 1,
+   "exemples": [
+    "58 Charles Street - Cambridge, MA - DSC05693.jpg"
+   ]
+  },
+  "GILD": {
+   "nom": "Gilead Sciences",
+   "secteur": "Santé",
+   "candidats": 1,
+   "exemples": [
+    "Gilead, CT.jpg"
+   ]
+  },
+  "GOOGL": {
+   "nom": "Alphabet",
+   "secteur": "Médias & IA",
+   "candidats": 10,
+   "exemples": [
+    "Almeida Júnior - Saudade (Longing) - Google Art Project.jpg",
+    "Ernst Ludwig Kirchner - Czardas dancers - Google Art Project.jpg",
+    "Frederic Remington - Aiding a Comrade - Google Art Project.jpg"
+   ]
+  },
+  "GS": {
+   "nom": "Goldman Sachs",
+   "secteur": "Finance",
+   "candidats": 2,
+   "exemples": [
+    "Goldman Sachs New World Headquarters.JPG",
+    "GoldmanSachs10KWomen logo (16024972134).jpg"
+   ]
+  },
+  "HPE": {
+   "nom": "Hewlett Packard Enterprise",
+   "secteur": "Technologie",
+   "candidats": 2,
+   "exemples": [
+    "HPE headquarters.jpg",
+    "Dr Abdulla Al Nuaimi at HPE Discover 2026 Las Vegas.png"
+   ]
+  },
+  "HSBA.L": {
+   "nom": "HSBC",
+   "secteur": "Finance",
+   "candidats": 1,
+   "exemples": [
+    "HSBC Asset Management Logo.png"
+   ]
+  },
+  "ICE": {
+   "nom": "Intercontinental Exchange",
+   "secteur": "Finance",
+   "candidats": 3,
+   "exemples": [
+    "BostonHarbor23 2009.jpg",
+    "Boston Financial District skyline.jpg",
+    "Boston downtown skyline Edit MichaLR.jpg"
+   ]
+  },
+  "IFX.DE": {
+   "nom": "Infineon",
+   "secteur": "Technologie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "INTC": {
+   "nom": "Intel",
+   "secteur": "Technologie",
+   "candidats": 10,
+   "exemples": [
+    "Intel Japan Tsukuba Office.jpg",
+    "Intel-Core-3-Badge-2023.png",
+    "Intel-Core-5-Badge-2023.png"
+   ]
+  },
+  "INTU": {
+   "nom": "Intuit",
+   "secteur": "Technologie",
+   "candidats": 3,
+   "exemples": [
+    "Intuit-logo-super-blue (1).png",
+    "Intuit-logo-white.png",
+    "Intuit Logo 2025.jpg"
+   ]
+  },
+  "JPM": {
+   "nom": "JPMorgan Chase",
+   "secteur": "Finance",
+   "candidats": 0,
+   "exemples": []
+  },
+  "KKR": {
+   "nom": "KKR",
+   "secteur": "Finance",
+   "candidats": 5,
+   "exemples": [
+    "KKR Enoshima New Koyo.JPG",
+    "KKR Hotel Hiroshima.JPG",
+    "KKR Hotel Kumamoto 20230227.jpg"
+   ]
+  },
+  "KLAC": {
+   "nom": "KLA Corporation",
+   "secteur": "Technologie",
+   "candidats": 1,
+   "exemples": [
+    "US Semiconductor Economy.webp"
+   ]
+  },
+  "LITE": {
+   "nom": "Lumentum",
+   "secteur": "Technologie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "LRCX": {
+   "nom": "Lam Research",
+   "secteur": "Technologie",
+   "candidats": 1,
+   "exemples": [
+    "View from the Window at Le Gras, Joseph Nicéphore Niépce, uncomp"
+   ]
+  },
+  "LSEG.L": {
+   "nom": "London Stock Exchange Group",
+   "secteur": "Finance",
+   "candidats": 4,
+   "exemples": [
+    "Royal Exchange MET DP823176.jpg",
+    "The Royal Exchange and Bank of England LL.jpg",
+    "ONL (1887) 1.474 - Capel Court.jpg"
+   ]
+  },
+  "MA": {
+   "nom": "Mastercard Incorporate",
+   "secteur": "Finance",
+   "candidats": 0,
+   "exemples": []
+  },
+  "MCO": {
+   "nom": "Moody's",
+   "secteur": "Finance",
+   "candidats": 9,
+   "exemples": [
+    "1940 Census Enumeration District Maps - South Dakota - Moody Cou",
+    "1950 Census Enumeration District Maps - South Dakota (SD) - Mood",
+    "From left, U.S. Army Pfc. Alicia Baum, Maj. Khalid Jaboori and S"
+   ]
+  },
+  "META": {
+   "nom": "Meta Platforms",
+   "secteur": "Médias & IA",
+   "candidats": 4,
+   "exemples": [
+    "Meta Platforms Headquarters Menlo Park California.jpg",
+    "Meta Its your world live drawing 001 s.jpg",
+    "Meta Platforms Headquarters Menlo Park California.jpg"
+   ]
+  },
+  "MPWR": {
+   "nom": "Monolithic Power Systems",
+   "secteur": "Technologie",
+   "candidats": 1,
+   "exemples": [
+    "Monolithicpower logo.jpg"
+   ]
+  },
+  "MRVL": {
+   "nom": "Marvell Technology",
+   "secteur": "Technologie",
+   "candidats": 1,
+   "exemples": [
+    "Marvell 88E1115 1000BASE PHY.jpg"
+   ]
+  },
+  "MS": {
+   "nom": "Morgan Stanley",
+   "secteur": "Finance",
+   "candidats": 8,
+   "exemples": [
+    "Big Red One NCO Recognized at Blackhawks v. Bruins (8).jpg",
+    "KSC-99pp1144.jpg",
+    "NASA Mars Perseverance Live at One Times Square (NHQ202102180101"
+   ]
+  },
+  "MSCI": {
+   "nom": "MSCI",
+   "secteur": "Finance",
+   "candidats": 0,
+   "exemples": []
+  },
+  "MSFT": {
+   "nom": "Microsoft",
+   "secteur": "Technologie",
+   "candidats": 4,
+   "exemples": [
+    "Aerial Microsoft West Campus August 2009.jpg",
+    "Color wires, switches, computers, Microsoft, Redmond, Washington",
+    "Microsoft Monkey Robot, face detail, \"I Love My Job\", tin foil r"
+   ]
+  },
+  "MU": {
+   "nom": "Micron Technology",
+   "secteur": "Technologie",
+   "candidats": 5,
+   "exemples": [
+    "SPHEREx Vela Molecular Ridge (PIA26354).tiff",
+    "SPHEREx’s Dust Cloud Reveal (PIA26352).tiff",
+    "P20221027AS-0751 (52651187029).jpg"
+   ]
+  },
+  "MUV2.DE": {
+   "nom": "Munich Re",
+   "secteur": "Finance",
+   "candidats": 9,
+   "exemples": [
+    "Munich, présentation des étendards des gardes de Hitler (cérémon",
+    "Wzwz schwabing 12 munich re tree.JPG",
+    "Munich ludwigstraße 1842.jpg"
+   ]
+  },
+  "NBIS": {
+   "nom": "Nebius",
+   "secteur": "Médias & IA",
+   "candidats": 0,
+   "exemples": []
+  },
+  "NDAQ": {
+   "nom": "Nasdaq",
+   "secteur": "Finance",
+   "candidats": 13,
+   "exemples": [
+    "Cymer Headquarters.jpg",
+    "NASA Artemis II Crew Rings Nasdaq Closing Bell (NHQ202604300005)",
+    "NASA Artemis II Crew Rings Nasdaq Closing Bell (NHQ202604300020)"
+   ]
+  },
+  "NFLX": {
+   "nom": "Netflix",
+   "secteur": "Médias & IA",
+   "candidats": 9,
+   "exemples": [
+    "Alaska-Yukon-Pacific Exposition, Oregon State Building and band ",
+    "Newsboys' Building and Band, Toledo, Ohio - DPLA - 0b189bc478265",
+    "Newsboys' Building and Band, Toledo, Ohio - DPLA - 0b189bc478265"
+   ]
+  },
+  "NOW": {
+   "nom": "ServiceNow",
+   "secteur": "Technologie",
+   "candidats": 6,
+   "exemples": [
+    "ServiceNowGlobalHQ.jpg",
+    "Manhattan 1931.jpg",
+    "Manhattan 1931.jpg"
+   ]
+  },
+  "NTAP": {
+   "nom": "NetApp",
+   "secteur": "Technologie",
+   "candidats": 3,
+   "exemples": [
+    "Apple One.jpg",
+    "Apple iPad 11 gen. & Apple iPhone 16 (still in a box) (2025-12-0",
+    "NetApp Headquarters Sunnyvale.jpg"
+   ]
+  },
+  "NVDA": {
+   "nom": "NVIDIA",
+   "secteur": "Technologie",
+   "candidats": 3,
+   "exemples": [
+    "NVIDIA GPU workstation.webp",
+    "NVIDIA GPU workstation 2.webp",
+    "NVIDIA cube Blender.webp"
+   ]
+  },
+  "NXPI": {
+   "nom": "NXP Semiconductors",
+   "secteur": "Technologie",
+   "candidats": 2,
+   "exemples": [
+    "NXP Hausbruch 2011.png",
+    "NXP Hausbruch 2011.png"
+   ]
+  },
+  "ON": {
+   "nom": "onsemi",
+   "secteur": "Technologie",
+   "candidats": 7,
+   "exemples": [
+    "Embedded World 2016, EFM32 Happy Gecko.jpg",
+    "Embedded World 2016, MultiTech MultiConnect Dragonfly.jpg",
+    "Embedded World 2016, On Semiconductor (02).jpg"
+   ]
+  },
+  "ORCL": {
+   "nom": "Oracle",
+   "secteur": "Technologie",
+   "candidats": 12,
+   "exemples": [
+    "Oracle Park - August 2025 - Sarah Stierch - 06.jpg",
+    "Oracle Park - August 2025 - Sarah Stierch - 07.jpg",
+    "Oracle Park - August 2025 - Sarah Stierch - 11.jpg"
+   ]
+  },
+  "PDD": {
+   "nom": "PDD",
+   "secteur": "Conso. cycl.",
+   "candidats": 13,
+   "exemples": [
+    "SZ 深圳 Shenzhen 南山區 Nanshan 仙元路 Xianyuan Road 天瓏大廈 Tinno Building",
+    "SZ 深圳 Shenzhen 南山區 Nanshan 仙鼓路 XianGu Road office building facad",
+    "SZ 深圳 Shenzhen 南山區 Nanshan 仙鼓路 XianGu Road office building facad"
+   ]
+  },
+  "PGR": {
+   "nom": "Progressive Corporation",
+   "secteur": "Finance",
+   "candidats": 12,
+   "exemples": [
+    "Airplanes - Engines - Curtiss aeroplane and motor corporation, B",
+    "Airplanes - Engines - Curtiss aeroplane and motor corporation, B",
+    "Airplanes - Manufacturing Plants - Curtiss Aeroplane and Motor C"
+   ]
+  },
+  "PLTR": {
+   "nom": "Palantir",
+   "secteur": "Technologie",
+   "candidats": 4,
+   "exemples": [
+    "Elfe-uk-palantir-2024.jpg",
+    "REUNIÓN CON ALEX KARP, CEO DE PALANTIR TECHNOLOGIES. DAVOS, 21 D",
+    "REUNIÓN CON ALEX KARP, CEO DE PALANTIR TECHNOLOGIES. DAVOS, 21 D"
+   ]
+  },
+  "PWR": {
+   "nom": "Quanta Services",
+   "secteur": "Industrie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "PYPL": {
+   "nom": "PayPal",
+   "secteur": "Finance",
+   "candidats": 3,
+   "exemples": [
+    "EBayTorontoOffice.JPG",
+    "EBayTorontoOffice2.JPG",
+    "PayPal Visit in Wilmington (48745754017).jpg"
+   ]
+  },
+  "QCOM": {
+   "nom": "Qualcomm",
+   "secteur": "Technologie",
+   "candidats": 6,
+   "exemples": [
+    "Ingenuity's Successful Fifth Flight To Airfield B.jpg",
+    "MHealth Attendees at FCC's Headquarters (7345308732).jpg",
+    "MHealth Attendees at FCC's Headquarters (7345308844).jpg"
+   ]
+  },
+  "SCHW": {
+   "nom": "Charles Schwab",
+   "secteur": "Finance",
+   "candidats": 6,
+   "exemples": [
+    "1st Cav. Horse Cav. Detachment Soldiers prepare for the show 140",
+    "American Red Cross - Classes in Red Cross Work - Members of the ",
+    "American Red Cross - Classes in Red Cross Work - Steel Magnate's"
+   ]
+  },
+  "SIE.DE": {
+   "nom": "Siemens",
+   "secteur": "Industrie",
+   "candidats": 5,
+   "exemples": [
+    "Siemens AG - Corporate Headquarters, Munich 01.jpg",
+    "Siemens AG - Corporate Headquarters, Munich 02.jpg",
+    "Siemens AG - Corporate Headquarters, Munich 03.jpg"
+   ]
+  },
+  "SNDK": {
+   "nom": "SanDisk",
+   "secteur": "Technologie",
+   "candidats": 7,
+   "exemples": [
+    "AS10-34-5013 - Apollo 10 - Apollo 10 Mission image - Earth view ",
+    "AS10-34-5014 - Apollo 10 - Apollo 10 Mission image - Earth view ",
+    "Details of Foundation Disk (Duplicate) - NARA - 79437445.jpg"
+   ]
+  },
+  "SNPS": {
+   "nom": "Synopsys",
+   "secteur": "Technologie",
+   "candidats": 6,
+   "exemples": [
+    "Synopsys Headquarters Mountain View.jpg",
+    "SynopsysMarkham.jpg",
+    "SynopsysMarkham2.jpg"
+   ]
+  },
+  "SPGI": {
+   "nom": "S&P Global",
+   "secteur": "Finance",
+   "candidats": 11,
+   "exemples": [
+    "Col. James P. McMahon and group at headquarters of 164th N.Y. In",
+    "Col. James P. McMahon and group at headquarters of 164th N.Y. In",
+    "Headquarters, Alexandria, Va - NARA - 529317.jpg"
+   ]
+  },
+  "STX": {
+   "nom": "Seagate Technology",
+   "secteur": "Technologie",
+   "candidats": 3,
+   "exemples": [
+    "Seagate Technology Headquarters Cupertino.jpg",
+    "Seagate Technology Headquarters Cupertino.jpg",
+    "Seagate building Derry 2005.jpg"
+   ]
+  },
+  "SU.PA": {
+   "nom": "Schneider Electric",
+   "secteur": "Industrie",
+   "candidats": 4,
+   "exemples": [
+    "Opening-ceremony-for-schneider-electric-massachusetts-headquarte",
+    "Opening-ceremony-for-schneider-electric-massachusetts-headquarte",
+    "Anaheim Landing (P5470).jpg"
+   ]
+  },
+  "TCEHY": {
+   "nom": "Tencent",
+   "secteur": "Médias & IA",
+   "candidats": 0,
+   "exemples": []
+  },
+  "TER": {
+   "nom": "Teradyne",
+   "secteur": "Technologie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "TFC": {
+   "nom": "Truist Financial",
+   "secteur": "Finance",
+   "candidats": 1,
+   "exemples": [
+    "TruistPlace.jpg"
+   ]
+  },
+  "TSM": {
+   "nom": "TSMC",
+   "secteur": "Technologie",
+   "candidats": 2,
+   "exemples": [
+    "TSMC booth in NTU.jpg",
+    "Tsmc factory hsinchu.JPG"
+   ]
+  },
+  "UBSG.SW": {
+   "nom": "UBS",
+   "secteur": "Finance",
+   "candidats": 5,
+   "exemples": [
+    "Stamford Cone at the UBS building in Stamford, Connecticut LCCN2",
+    "Stamford Cone at the UBS building in Stamford, Connecticut LCCN2",
+    "Stamford Cone at the UBS building in Stamford, Connecticut LCCN2"
+   ]
+  },
+  "V": {
+   "nom": "Visa",
+   "secteur": "Finance",
+   "candidats": 13,
+   "exemples": [
+    "Israel’s New Membership in the Visa Waiver Program at US Customs",
+    "Israel’s New Membership in the Visa Waiver Program at US Customs",
+    "Israel’s New Membership in the Visa Waiver Program at US Customs"
+   ]
+  },
+  "VRT": {
+   "nom": "Vertiv",
+   "secteur": "Industrie",
+   "candidats": 0,
+   "exemples": []
+  },
+  "VST": {
+   "nom": "Vistra",
+   "secteur": "Services pub.",
+   "candidats": 6,
+   "exemples": [
+    "Deepwater Horizon oil spill - May 24, 2010.jpg",
+    "Deepwater Horizon oil spill - May 24, 2010 - with locator.jpg",
+    "Leonardo da Vinci, Salvator Mundi, c.1500, oil on walnut, 45.4 ×"
+   ]
+  },
+  "WDC": {
+   "nom": "Western Digital",
+   "secteur": "Technologie",
+   "candidats": 4,
+   "exemples": [
+    "Cambridge Police Department headquarters (former) - 5 Western Av",
+    "Cambridge Police Department headquarters (former) - 5 Western Av",
+    "Cambridge Police Department headquarters (former) - 5 Western Av"
+   ]
+  },
+  "WFC": {
+   "nom": "Wells Fargo",
+   "secteur": "Finance",
+   "candidats": 4,
+   "exemples": [
+    "WellsFargo3.jpg",
+    "Wells Fargo Building (Augusta), May 2017 2.jpg",
+    "Wells Fargo Company Express Wagons from Jeffrey Manufacturing Co"
+   ]
+  },
+  "ZTS": {
+   "nom": "Zoetis",
+   "secteur": "Santé",
+   "candidats": 0,
+   "exemples": []
+  }
+ }
+}
