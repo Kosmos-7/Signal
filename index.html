@@ -581,9 +581,12 @@ function railMore(){
 }
 
 /* ══ HOMEPAGE DES WATCHLISTS ════════════════════════════════════════════════ */
+/* Photographies libres de droits (domaine public), une par watchlist. Provenance
+   et licences dans assets/themes/CREDITS.md. Le repli textuel reste en place :
+   une image qui ne charge pas laisse le libellé, jamais un cadre vide. */
 function themeImg(id,label){
   return '<div class="tc-img"><span class="tc-fb">'+sv(label||id)+'</span>'+
-    '<img src="assets/themes/'+encodeURIComponent(id)+'.png" alt="" loading="lazy" onerror="this.remove()"></div>';
+    '<img src="assets/themes/'+encodeURIComponent(id)+'.jpg" alt="" loading="lazy" onerror="this.remove()"></div>';
 }
 function topChips(meta){
   return (meta.members||[]).slice(0,3).map(tk=>{
