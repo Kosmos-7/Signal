@@ -1,0 +1,44 @@
+{
+ "CDNS": {
+  "legende": "Siège de Cadence Design Systems",
+  "source": "File:Cadence Building 2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg",
+  "licence": "Public domain"
+ },
+ "META": {
+  "legende": "Siège de Meta Platforms, Menlo Park",
+  "source": "File:Meta Platforms Headquarters Menlo Park California.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg",
+  "licence": "CC0"
+ },
+ "NOW": {
+  "legende": "Siège mondial de ServiceNow",
+  "source": "File:ServiceNowGlobalHQ.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:ServiceNowGlobalHQ.jpg",
+  "licence": "CC0"
+ },
+ "INTC": {
+  "legende": "Bureaux d'Intel à Tsukuba, Japon",
+  "source": "File:Intel Japan Tsukuba Office.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Intel_Japan_Tsukuba_Office.jpg",
+  "licence": "CC0"
+ },
+ "GS": {
+  "legende": "Siège de Goldman Sachs, New York",
+  "source": "File:Goldman Sachs New World Headquarters.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Goldman_Sachs_New_World_Headquarters.JPG",
+  "licence": "Public domain"
+ },
+ "MSFT": {
+  "legende": "Campus ouest de Microsoft, Redmond",
+  "source": "File:Aerial Microsoft West Campus August 2009.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Aerial_Microsoft_West_Campus_August_2009.jpg",
+  "licence": "Public domain"
+ },
+ "ASML.AS": {
+  "legende": "Siège d'ASML à Veldhoven",
+  "source": "File:ASML headquarters Veldhoven.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:ASML_headquarters_Veldhoven.jpg",
+  "licence": "Public domain"
+ }
+}

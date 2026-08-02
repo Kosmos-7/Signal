@@ -372,6 +372,7 @@ const CHV=new Date().toISOString().slice(0,10);
                               qualite,valorisation,timing,themes:[id…],top30}}}
    Le fichier est OPTIONNEL : s'il manque, la page se replie sur la seule
    watchlist principale (watchlist.json) sans rien casser. */
+const PHOTOS={};   // ticker → {legende} des photos de sociétés vérifiées
 const U={themes:[],stocks:{},week:'',updated_at:'',universe_declared:null,universe_scored:null,activites:null};
 const TBY={};              // id de thème → méta
 const WL={};               // ticker → fiche complète (top 30, watchlist.json)
@@ -392,8 +393,12 @@ const KIND={these:'Thèse',secteur:'Secteur',calcule:'Calculé',principale:'Prin
 Promise.all([
   fetch('watchlist.json?v='+Date.now()).then(r=>{if(!r.ok)throw new Error('watchlist.json HTTP '+r.status);return r.json();}),
   fetch('analyses.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
-  fetch('universe.json?v='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null)
-]).then(([wl,an,un])=>{
+  fetch('universe.json?v='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
+  // Photos de sociétés vérifiées une à une. Fichier facultatif : sans lui, les
+  // fiches gardent leur illustration d'activité.
+  fetch('assets/titres/LEGENDES.json?v='+CHV).then(r=>r.ok?r.json():{}).catch(()=>({}))
+]).then(([wl,an,un,ph])=>{
+  Object.assign(PHOTOS, ph||{});
   Object.assign(A, an||{});
   stocks=(wl.stocks||[]).slice().sort((a,b)=>b.score-a.score);
   stocks.forEach(s=>{WL[s.ticker]=s;});
@@ -603,6 +608,14 @@ function railMore(){
    entreprise sur la fiche d'une autre est un fait faux. Absente si l'activité
    n'est pas connue ou si l'image ne charge pas : jamais de cadre vide. */
 function illuActivite(tk){
+  const P=PHOTOS[tk];
+  if(P){
+    // Photo de la SOCIÉTÉ, vérifiée à l'œil : la légende nomme le lieu, elle
+    // n'a donc pas à dire « illustration », elle montre bien ce qu'elle dit.
+    return '<figure class="d-illu"><img src="assets/titres/'+encodeURIComponent(tk)+
+      '.jpg" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
+      '<figcaption><b>'+sv(P.legende)+'</b></figcaption></figure>';
+  }
   const a=(U.activites&&U.activites.titres)||{}, L=(U.activites&&U.activites.libelles)||{};
   const cle=a[tk]; if(!cle)return '';
   return '<figure class="d-illu"><img src="assets/activites/'+encodeURIComponent(cle)+
