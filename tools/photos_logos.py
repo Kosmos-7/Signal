@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 """Huitième passe : le logo, quand c'est le visuel le plus parlant qu'on ait.
 
-POURQUOI. Sept campagnes ont couvert 83 fiches sur 104, dont 52 avec un objet
-fabriqué. Restent deux populations pour lesquelles la photo est un pis-aller :
-les 21 fiches sans rien, et les 31 illustrées par un immeuble de bureaux qui
-n'apprend rien. Or pour un fournisseur d'indices, une agence de notation ou un
-gestionnaire d'actifs, il n'existe tout simplement pas d'objet à photographier.
-Le logo est alors le seul visuel qui dise immédiatement de quelle société il
-s'agit, et c'est à ce titre qu'il est plus pertinent qu'une façade anonyme.
+LA REGLE, ET ELLE EST STRICTE. On illustre une société par une PHOTO CONCRETE
+DU MONDE REEL. Un logo n'est pas une photo : c'est un signe graphique, il ne
+montre ni un objet, ni un lieu, ni un geste de métier. Il n'intervient donc
+qu'en dernier recours, quand on n'a vraiment rien de mieux.
+
+« Rien de mieux » a un sens précis ici : la fiche ne porte AUCUNE photo de sa
+société, et se rabat sur l'illustration de son activité, qui montre le secteur
+et pas l'entreprise. Vingt et une fiches sont dans ce cas, pour la plupart des
+fournisseurs d'indices, des agences de notation et des gestionnaires d'actifs,
+dont le métier ne produit aucun objet photographiable. Entre une photo de
+secteur qui ne dit pas laquelle et un logo qui la nomme, le logo apprend
+davantage.
+
+CE QUI N'EST PAS VISE. Les fiches qui portent déjà une photo de leur société,
+même un simple bâtiment. Un immeuble avec une enseigne lisible est une photo du
+monde réel montrant cette société précise ; le remplacer par un logo serait un
+recul, pas un progrès.
 
 LA SOURCE. Wikidata P154, la propriété « logo », que la campagne P18 excluait
 volontairement parce qu'on cherchait alors des photographies. On ne retient que
@@ -130,7 +140,7 @@ def main():
     ap.add_argument("--sortie", default="assets/titres/logos")
     ap.add_argument("--tickers", default="")
     ap.add_argument("--tous", action="store_true",
-                    help="toutes les fiches sans photo ou illustrées par un site")
+                    help="les fiches sans AUCUNE photo de leur société")
     a = ap.parse_args()
 
     w = json.load(open("watchlist.json"))
@@ -144,10 +154,10 @@ def main():
     if a.tickers:
         cibles = [t.strip() for t in a.tickers.split(",") if t.strip()]
     elif a.tous:
-        # Celles qui n'ont rien, et celles dont l'image est un site : jamais
-        # celles qui montrent deja un objet fabrique, ou le logo serait un recul.
-        cibles = sorted([t for t in noms if t not in leg]
-                        + [t for t, v in leg.items() if v.get("type") != "produit"])
+        # Uniquement les fiches sans aucune photo. Celles qui en ont une, meme
+        # un batiment, gardent leur photo : c'est du monde reel et c'est bien
+        # cette societe-la. Le logo ne remplace jamais une photo existante.
+        cibles = sorted(t for t in noms if t not in leg)
     else:
         raise SystemExit("préciser --tickers ou --tous")
     inconnus = [t for t in cibles if t not in noms]
