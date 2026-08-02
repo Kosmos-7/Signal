@@ -76,14 +76,17 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      elle dit ce que montre l'image (le maillon), pour qu'on ne la lise jamais
      comme une photo de la société elle-même. */
   .d-illu{position:relative;margin:0 0 1.1rem;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.02)}
-  .d-illu img{display:block;width:100%;height:150px;object-fit:cover}
+  /* Même proportion que les cartes de watchlist (16:9), qui est la bonne :
+     une bande de 150 px écrasait le sujet. Plafonnée sur grand écran pour
+     que l'image ne prenne pas le pas sur les chiffres de la fiche. */
+  .d-illu img{display:block;width:100%;height:auto;aspect-ratio:16/9;max-height:300px;object-fit:cover}
   .d-illu figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .7rem;
     background:linear-gradient(0deg,rgba(6,6,11,.92),rgba(6,6,11,0));
     font:600 .56rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3)}
   .d-illu figcaption b{color:var(--text2);font-weight:600}
   .d-illu .d-cred{display:block;margin-top:2px;font-size:.5rem;letter-spacing:.6px;
     color:var(--text3);opacity:.85;text-transform:none}
-  @media(max-width:900px){.d-illu img{height:118px}}
+  @media(max-width:900px){.d-illu img{max-height:none}}
   .d-tag{font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
   .d-reg{font:600 .6rem var(--mono);letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:4px;padding:4px 9px}
 
