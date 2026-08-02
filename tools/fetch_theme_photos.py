@@ -52,12 +52,19 @@ REQUETES = {
         "trading desk multiple monitors",
     ],
     "infra-ia": [
-        "data center server room aisle",
+        # Les centres de données commerciaux sont presque tous sous licence
+        # contraignante sur Commons. Les laboratoires fédéraux américains, eux,
+        # produisent des œuvres du domaine public par statut : c'est là que se
+        # trouvent les vraies salles de calcul libres de droits.
+        "Oak Ridge supercomputer Summit",
+        "Argonne National Laboratory supercomputer",
+        "NASA supercomputer facility",
+        "Lawrence Livermore supercomputer Sequoia",
+        "NERSC Cori supercomputer",
         "supercomputer racks hall",
+        "data center server room aisle",
         "silicon wafer semiconductor",
-        "server rack cabling datacenter",
         "cleanroom semiconductor fabrication",
-        "fiber optic cables bundle",
         "electrical substation transformer high voltage",
     ],
     "financials": [
