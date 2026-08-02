@@ -1,11 +1,12 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-57 fiches sur 104 portent une photo de leur société ; les autres gardent
+83 fiches sur 104 portent une photo de leur société, dont 73 sous licence
+libre et 10 sous licence non établie ; les autres gardent
 l'illustration de leur activité. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
-## Six sources, par ordre de découverte
+## Sept sources, par ordre de découverte
 
 1. **Recherche textuelle sur Commons.** Cherche des MOTS, se trompe dans 43 %
    des cas : le siège de la Banque mondiale pour Bank of America, un
@@ -81,7 +82,32 @@ crédit : il est AFFICHÉ SUR LA FICHE sous la légende. Les images sont recadr�
 en 16:9 et assombries pour tenir sur fond sombre ; ces adaptations restent sous
 la licence de l'original.
 
-## Photos publiées (42 produits, 31 sites)
+## Septième source : le site des sociétés, licence non établie
+
+Les six premières sources n'acceptaient que le domaine public, CC0, CC-BY et
+CC-BY-SA, et ont couvert 73 fiches. Pour les 31 restantes le fonds libre est
+réellement vide : personne n'a jamais photographié sous licence libre un
+onduleur Liebert ou une salle blanche de Lam Research. Le propriétaire du dépôt
+a explicitement autorisé les visuels dont la licence n'est pas établie.
+
+CE QUI SUIT N'EST PAS UNE LICENCE. Les 10 images ci-dessous ne sont pas libres
+de droit. Le risque est réduit, pas nié :
+
+- elles proviennent du SITE DE LA SOCIÉTÉ elle-même, qui les publie pour que
+  des tiers illustrent des articles la concernant, ce qui est notre usage ; un
+  garde-fou technique refuse toute image servie par un autre domaine, donc les
+  photos de tiers reprises dans la page ;
+- la page d'origine, le domaine et la date de récupération sont consignés
+  ci-dessous, pour qu'un retrait puisse être honoré immédiatement ;
+- la fiche affiche « Photo : <société> » sous la légende.
+
+Écartées à ce titre : la photo Getty Images servie par Munich Re, sous licence
+achetée par elle et non transmissible, et le chantier publié par Quanta
+Services où le camion d'un tiers occupe le premier plan.
+
+Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
+
+## Photos publiées (49 produits, 34 sites)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -179,6 +205,15 @@ la licence de l'original.
 - Page : https://www.flickr.com/photos/39160147@N03/15977126920
 - Licence : CC BY 2.0 — crédit affiché : JeepersMedia · CC BY 2.0
 
+### ANET — Gamme de commutateurs Arista Networks
+
+- Nature : produit
+- Fichier : `assets/titres/ANET.jpg`
+- Source : https://www.arista.com/assets/images/product/Arista-Product-Platforms-Family-800x520.png
+- Page : https://www.arista.com/en/products/platforms
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Arista Networks
+- Récupérée le : 2026-08-02 sur le site officiel
+
 ### ARM — Processeur Exynos à cœurs Arm
 
 - Nature : produit
@@ -243,6 +278,15 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg
 - Licence : Public domain
 
+### CEG — Centrale nucléaire de Calvert Cliffs, exploitée par Constellation
+
+- Nature : site
+- Fichier : `assets/titres/CEG.jpg`
+- Source : https://www.constellationenergy.com/content/dam/constellationenergy/images/about/locations/locations-open-graph-images/calvert-og.jpg
+- Page : https://www.constellationenergy.com/about/locations/calvert-cliffs-clean-energy-center.html
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Constellation Energy
+- Récupérée le : 2026-08-02 sur le site officiel
+
 ### CIEN — Châssis optique Ciena 6500
 
 - Nature : produit
@@ -258,6 +302,15 @@ la licence de l'original.
 - Source : File:Chicago Board of Trade and Continental and Commercial Bank.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Chicago_Board_of_Trade_and_Continental_and_Commercial_Bank.jpg
 - Licence : CC BY-SA 3.0 — crédit affiché : Wynn Diancin · CC BY-SA 3.0
+
+### COHR — Découpe laser industrielle, coeur de métier de Coherent
+
+- Nature : produit
+- Fichier : `assets/titres/COHR.jpg`
+- Source : https://www.coherent.com/content/dam/coherent/site/en/images/photography/lasers/products-lasers-950px.jpg
+- Page : https://www.coherent.com/lasers
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Coherent
+- Récupérée le : 2026-08-02 sur le site officiel
 
 ### CRM — Salesforce Tower dominant le centre de San Francisco
 
@@ -330,6 +383,15 @@ la licence de l'original.
 - Source : File:Ficoheadquarters.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Ficoheadquarters.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Coolcaesar · CC BY-SA 4.0
+
+### GEV — Éolienne GE Vernova vue du ciel
+
+- Nature : produit
+- Fichier : `assets/titres/GEV.jpg`
+- Source : https://www.gevernova.com/content/dam/gepower-new/global/en_US/images/wind-site/homepage/hero-wind-video.JPG
+- Page : https://www.gevernova.com/wind-power
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : GE Vernova
+- Récupérée le : 2026-08-02 sur le site officiel
 
 ### GILD — Truvada, antirétroviral de Gilead Sciences
 
@@ -418,6 +480,24 @@ la licence de l'original.
 - Source : KLA Corporation Ann Arbor Township Office
 - Page : https://commons.wikimedia.org/w/index.php?curid=165163353
 - Licence : CC BY-SA 4.0 — crédit affiché : DontCallMeLateForDinner · CC BY-SA 4.0
+
+### LITE — Plaquette photonique Lumentum
+
+- Nature : produit
+- Fichier : `assets/titres/LITE.jpg`
+- Source : https://www.lumentum.com/_next/image?url=https%3A%2F%2Fmedia.lumentum.com%2Fsites%2Fdefault%2Ffiles%2F2025-11%2Fproducts-new-img.jpg&w=640&q=80
+- Page : https://www.lumentum.com/en/products
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Lumentum
+- Récupérée le : 2026-08-02 sur le site officiel
+
+### LRCX — Salle blanche de Lam Research
+
+- Nature : produit
+- Fichier : `assets/titres/LRCX.jpg`
+- Source : https://www.lamresearch.com/wp-content/uploads/2022/04/LAM-newmachine-130_fix@2x.png
+- Page : https://www.lamresearch.com/products/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Lam Research
+- Récupérée le : 2026-08-02 sur le site officiel
 
 ### META — Siège de Meta Platforms, Menlo Park
 
@@ -611,6 +691,15 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/w/index.php?curid=2025468
 - Licence : CC BY-SA 3.0 — crédit affiché : Chmee2 · CC BY-SA 3.0
 
+### TCEHY — Siège de Tencent à Pékin
+
+- Nature : site
+- Fichier : `assets/titres/TCEHY.jpg`
+- Source : https://www.tencent.com/wp-content/uploads/2022/12/ourstory1-640x360.jpg
+- Page : https://www.tencent.com/en-us/about.html
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Tencent
+- Récupérée le : 2026-08-02 sur le site officiel
+
 ### TER — Bras collaboratif UR16e d'Universal Robots, filiale de Teradyne
 
 - Nature : produit
@@ -651,6 +740,24 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Credit_card_terminal_in_Laos.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Basile Morin · CC BY-SA 4.0
 
+### VRT — Onduleur Liebert de Vertiv
+
+- Nature : produit
+- Fichier : `assets/titres/VRT.jpg`
+- Source : https://www.vertiv.com/49f19f/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-liebert-exl-s1-ups/cp-ups-na-508x635-42362-exl-s1-ups.jpg
+- Page : https://www.vertiv.com/en-us/products-catalog/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Vertiv
+- Récupérée le : 2026-08-02 sur le site officiel
+
+### VST — Tours de refroidissement d'une centrale Vistra
+
+- Nature : site
+- Fichier : `assets/titres/VST.jpg`
+- Source : https://vistracorp.com/wp-content/uploads/2026/01/Beaver-Valley-008.jpg
+- Page : https://vistracorp.com/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Vistra
+- Récupérée le : 2026-08-02 sur le site officiel
+
 ### WDC — SSD Western Digital SN850X
 
 - Nature : produit
@@ -666,3 +773,12 @@ la licence de l'original.
 - Source : File:Wells Fargo ATM Machine, Colorado Springs (54556930636).jpg
 - Page : https://commons.wikimedia.org/wiki/File:Wells_Fargo_ATM_Machine,_Colorado_Springs_(54556930636).jpg
 - Licence : CC BY 2.0 — crédit affiché : Lumen Wilde · CC BY 2.0
+
+### ZTS — Consultation vétérinaire, marché de Zoetis
+
+- Nature : produit
+- Fichier : `assets/titres/ZTS.jpg`
+- Source : https://www.zoetis.com/_config/easset_upload_file81207_2649428_e.jpg
+- Page : https://www.zoetis.com/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Zoetis
+- Récupérée le : 2026-08-02 sur le site officiel

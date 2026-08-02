@@ -92,6 +92,16 @@
   "type": "produit",
   "credit": "JeepersMedia · CC BY 2.0"
  },
+ "ANET": {
+  "legende": "Gamme de commutateurs Arista Networks",
+  "source": "https://www.arista.com/assets/images/product/Arista-Product-Platforms-Family-800x520.png",
+  "page": "https://www.arista.com/en/products/platforms",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Arista Networks",
+  "type": "produit"
+ },
  "ARM": {
   "legende": "Processeur Exynos à cœurs Arm",
   "source": "File:Samsung-Exynos-4412-Quad SoC used in I9300.jpg",
@@ -149,6 +159,15 @@
   "page": "https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg",
   "licence": "Public domain"
  },
+ "CEG": {
+  "legende": "Centrale nucléaire de Calvert Cliffs, exploitée par Constellation",
+  "source": "https://www.constellationenergy.com/content/dam/constellationenergy/images/about/locations/locations-open-graph-images/calvert-og.jpg",
+  "page": "https://www.constellationenergy.com/about/locations/calvert-cliffs-clean-energy-center.html",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Constellation Energy"
+ },
  "CIEN": {
   "legende": "Châssis optique Ciena 6500",
   "source": "File:Ciena 6500.jpg",
@@ -163,6 +182,16 @@
   "page": "https://commons.wikimedia.org/wiki/File:Chicago_Board_of_Trade_and_Continental_and_Commercial_Bank.jpg",
   "licence": "CC BY-SA 3.0",
   "credit": "Wynn Diancin · CC BY-SA 3.0"
+ },
+ "COHR": {
+  "legende": "Découpe laser industrielle, coeur de métier de Coherent",
+  "source": "https://www.coherent.com/content/dam/coherent/site/en/images/photography/lasers/products-lasers-950px.jpg",
+  "page": "https://www.coherent.com/lasers",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Coherent",
+  "type": "produit"
  },
  "CRM": {
   "legende": "Salesforce Tower dominant le centre de San Francisco",
@@ -231,6 +260,16 @@
   "page": "https://commons.wikimedia.org/wiki/File:Ficoheadquarters.jpg",
   "licence": "CC BY-SA 4.0",
   "credit": "Coolcaesar · CC BY-SA 4.0"
+ },
+ "GEV": {
+  "legende": "Éolienne GE Vernova vue du ciel",
+  "source": "https://www.gevernova.com/content/dam/gepower-new/global/en_US/images/wind-site/homepage/hero-wind-video.JPG",
+  "page": "https://www.gevernova.com/wind-power",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : GE Vernova",
+  "type": "produit"
  },
  "GILD": {
   "legende": "Truvada, antirétroviral de Gilead Sciences",
@@ -312,6 +351,26 @@
   "page": "https://commons.wikimedia.org/w/index.php?curid=165163353",
   "licence": "CC BY-SA 4.0",
   "credit": "DontCallMeLateForDinner · CC BY-SA 4.0"
+ },
+ "LITE": {
+  "legende": "Plaquette photonique Lumentum",
+  "source": "https://www.lumentum.com/_next/image?url=https%3A%2F%2Fmedia.lumentum.com%2Fsites%2Fdefault%2Ffiles%2F2025-11%2Fproducts-new-img.jpg&w=640&q=80",
+  "page": "https://www.lumentum.com/en/products",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Lumentum",
+  "type": "produit"
+ },
+ "LRCX": {
+  "legende": "Salle blanche de Lam Research",
+  "source": "https://www.lamresearch.com/wp-content/uploads/2022/04/LAM-newmachine-130_fix@2x.png",
+  "page": "https://www.lamresearch.com/products/",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Lam Research",
+  "type": "produit"
  },
  "META": {
   "legende": "Siège de Meta Platforms, Menlo Park",
@@ -491,6 +550,15 @@
   "licence": "CC BY-SA 3.0",
   "credit": "Chmee2 · CC BY-SA 3.0"
  },
+ "TCEHY": {
+  "legende": "Siège de Tencent à Pékin",
+  "source": "https://www.tencent.com/wp-content/uploads/2022/12/ourstory1-640x360.jpg",
+  "page": "https://www.tencent.com/en-us/about.html",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Tencent"
+ },
  "TER": {
   "legende": "Bras collaboratif UR16e d'Universal Robots, filiale de Teradyne",
   "source": "File:UR16e robot arm.png",
@@ -528,6 +596,25 @@
   "type": "produit",
   "credit": "Basile Morin · CC BY-SA 4.0"
  },
+ "VRT": {
+  "legende": "Onduleur Liebert de Vertiv",
+  "source": "https://www.vertiv.com/49f19f/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-liebert-exl-s1-ups/cp-ups-na-508x635-42362-exl-s1-ups.jpg",
+  "page": "https://www.vertiv.com/en-us/products-catalog/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1/",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Vertiv",
+  "type": "produit"
+ },
+ "VST": {
+  "legende": "Tours de refroidissement d'une centrale Vistra",
+  "source": "https://vistracorp.com/wp-content/uploads/2026/01/Beaver-Valley-008.jpg",
+  "page": "https://vistracorp.com/",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Vistra"
+ },
  "WDC": {
   "legende": "SSD Western Digital SN850X",
   "source": "File:Western Digital SN850X NVME solid state drive 8TB front side.jpg",
@@ -543,5 +630,15 @@
   "licence": "CC BY 2.0",
   "type": "produit",
   "credit": "Lumen Wilde · CC BY 2.0"
+ },
+ "ZTS": {
+  "legende": "Consultation vétérinaire, marché de Zoetis",
+  "source": "https://www.zoetis.com/_config/easset_upload_file81207_2649428_e.jpg",
+  "page": "https://www.zoetis.com/",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Zoetis",
+  "type": "produit"
  }
 }
