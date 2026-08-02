@@ -39,6 +39,12 @@
   "credit": "Photo : Advantest",
   "type": "produit"
  },
+ "8035.T": {
+  "legende": "Usine Tokyo Electron de Nirasaki, au pied des Alpes japonaises",
+  "source": "File:TOKYO ELECTRON TECHNOLOGY SOLUTIONS LIMITED Nirasaki City.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:TOKYO_ELECTRON_TECHNOLOGY_SOLUTIONS_LIMITED_Nirasaki_City.jpg",
+  "licence": "CC0"
+ },
  "ABBN.SW": {
   "legende": "Entraînement sans engrenage ABB",
   "source": "File:ABB gearless mill drive.jpg",
@@ -46,6 +52,13 @@
   "licence": "CC BY-SA 4.0",
   "type": "produit",
   "credit": "Zen wave · CC BY-SA 4.0"
+ },
+ "ACN": {
+  "legende": "Bureaux Accenture à Pyrmont, Sydney",
+  "source": "File:Pyrmont NSW 2009, Australia - panoramio (7).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Pyrmont_NSW_2009,_Australia_-_panoramio_(7).jpg",
+  "licence": "CC BY-SA 3.0",
+  "credit": "Maksym Kozlenko · CC BY-SA 3.0"
  },
  "ADBE": {
   "legende": "Siège mondial d'Adobe, San José",
@@ -595,6 +608,13 @@
   "source": "Synopsys Headquarters Mountain View",
   "page": "https://commons.wikimedia.org/w/index.php?curid=118340795",
   "licence": "CC0 1.0"
+ },
+ "SPGI": {
+  "legende": "Siège de S&P Global, 55 Water Street à New York",
+  "source": "File:S&P Global (55312935517).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:S%26P_Global_(55312935517).jpg",
+  "licence": "CC BY 4.0",
+  "credit": "Ajay Suresh · CC BY 4.0"
  },
  "STX": {
   "legende": "Disque dur Seagate ouvert, plateau et bras de lecture",

@@ -1,8 +1,8 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-89 fiches sur 104 portent une photo de leur société : 57 montrent un
-produit ou une activité, 32 un site. 73 sont sous licence libre et 16
-sous licence non établie. Les 15 autres n'affichent aucune illustration. Priorité au PRODUIT (puce, carte, terminal,
+92 fiches sur 104 portent une photo de leur société : 57 montrent un
+produit ou une activité, 35 un lieu identifiable. 76 sont sous licence
+libre et 16 sous licence non établie. Les 12 autres n'affichent aucune illustration. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
@@ -130,7 +130,7 @@ l'outil des logos et son workflow, le module tools/activites.py, les dix-huit
 images d'activité, la clé « activites » de universe.json et sa production par
 le screener. L'historique git conserve le tout si une décision devait changer.
 
-## Photos publiées (57 produits, 32 sites)
+## Photos publiées (57 produits, 35 lieux)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -173,6 +173,14 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Advantest
 - Récupérée le : 2026-08-02 sur le site officiel
 
+### 8035.T — Usine Tokyo Electron de Nirasaki, au pied des Alpes japonaises
+
+- Nature : site
+- Fichier : `assets/titres/8035.T.jpg`
+- Source : File:TOKYO ELECTRON TECHNOLOGY SOLUTIONS LIMITED Nirasaki City.jpg
+- Page : https://commons.wikimedia.org/wiki/File:TOKYO_ELECTRON_TECHNOLOGY_SOLUTIONS_LIMITED_Nirasaki_City.jpg
+- Licence : CC0
+
 ### ABBN.SW — Entraînement sans engrenage ABB
 
 - Nature : produit
@@ -180,6 +188,14 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : File:ABB gearless mill drive.jpg
 - Page : https://commons.wikimedia.org/wiki/File:ABB_gearless_mill_drive.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Zen wave · CC BY-SA 4.0
+
+### ACN — Bureaux Accenture à Pyrmont, Sydney
+
+- Nature : site
+- Fichier : `assets/titres/ACN.jpg`
+- Source : File:Pyrmont NSW 2009, Australia - panoramio (7).jpg
+- Page : https://commons.wikimedia.org/wiki/File:Pyrmont_NSW_2009,_Australia_-_panoramio_(7).jpg
+- Licence : CC BY-SA 3.0 — crédit affiché : Maksym Kozlenko · CC BY-SA 3.0
 
 ### ADBE — Siège mondial d'Adobe, San José
 
@@ -751,6 +767,14 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : Synopsys Headquarters Mountain View
 - Page : https://commons.wikimedia.org/w/index.php?curid=118340795
 - Licence : CC0 1.0
+
+### SPGI — Siège de S&P Global, 55 Water Street à New York
+
+- Nature : site
+- Fichier : `assets/titres/SPGI.jpg`
+- Source : File:S&P Global (55312935517).jpg
+- Page : https://commons.wikimedia.org/wiki/File:S%26P_Global_(55312935517).jpg
+- Licence : CC BY 4.0 — crédit affiché : Ajay Suresh · CC BY 4.0
 
 ### STX — Disque dur Seagate ouvert, plateau et bras de lecture
 
