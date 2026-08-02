@@ -53,7 +53,10 @@ jobs:
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
-          git add -A photos_web.json assets/ 2>/dev/null || true
+          # Un chemin inexistant fait echouer TOUT le git add, y compris les
+          # chemins valides qui l'accompagnent. On ajoute donc separement.
+          git add -A assets/ || true
+          git add -A photos_web.json || true
           if git diff --staged --quiet; then
             echo "Rien de nouveau."
           else

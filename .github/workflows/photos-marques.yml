@@ -52,7 +52,11 @@ jobs:
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
-          git add -A photos_marques.json assets/ 2>/dev/null || true
+          # Un chemin inexistant fait echouer TOUT le git add, y compris les
+          # chemins valides qui l'accompagnent : si le script meurt avant
+          # d'ecrire son rapport, les images telechargees sont perdues.
+          git add -A assets/ || true
+          git add -A photos_marques.json || true
           if git diff --staged --quiet; then
             echo "Rien de nouveau."
           else

@@ -118,7 +118,10 @@ def main():
     deja = set()
     if os.path.exists("assets/titres/LEGENDES.json"):
         deja = set(json.load(open("assets/titres/LEGENDES.json", encoding="utf-8")))
-    cibles = [t for t in sorted(PAGES) if t not in deja]
+    # « _lisez_moi » est de la documentation, pas une société. Sans ce filtre on
+    # itère dessus et l'on meurt d'un TypeError au dernier tour, après avoir
+    # fait tout le travail et avant d'avoir écrit le rapport.
+    cibles = [t for t in sorted(PAGES) if not t.startswith("_") and t not in deja]
     if a.limite:
         cibles = cibles[: a.limite]
     os.makedirs(a.sortie, exist_ok=True)
