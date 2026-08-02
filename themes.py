@@ -127,7 +127,15 @@ THEMES_CURES = [
                 #     Déclaré-non-scoré jusqu'à ~février 2027 — le run
                 #     l'écartera proprement chaque semaine d'ici là. Exception
                 #     assumée aussi sur le seuil des 25 Md$.
-                "label": "Serveurs, data centers & néoclouds",
+                # Ce maillon VEND de la capacité de calcul : Dell et HPE
+                # vendent les serveurs, Equinix et Digital Realty louent le
+                # mètre carré et le mégawatt, les néoclouds louent l'heure de
+                # GPU. Leur client, c'est le maillon suivant. Les deux étaient
+                # intitulés « serveurs, data centers » et « hyperscalers,
+                # cloud », deux formules qui se recouvraient au point qu'on ne
+                # voyait plus ce qui les séparait : le libellé dit maintenant
+                # le SENS DE LA TRANSACTION, qui est toute la différence.
+                "label": "Vendeurs de capacité · serveurs, colocation, néoclouds",
                 "tickers": ["DELL", "HPE", "EQIX", "DLR",
                             "CRWV", "NBIS", "SHAZ"],
             },
@@ -140,7 +148,12 @@ THEMES_CURES = [
                 # exactement ce que la thèse dit ne pas faire. Ces cinq titres
                 # restent scorés comme candidats au top 30 et formeraient le
                 # noyau d'un futur thème Cloud & Data.
-                "label": "Hyperscalers & cloud",
+                # Ce maillon ACHÈTE la capacité que le précédent vend, et
+                # construit le reste lui-même. C'est le donneur d'ordre du
+                # cycle : ses capex SONT le chiffre d'affaires des six autres
+                # maillons. D'où l'intérêt de ne pas le fondre avec ses
+                # fournisseurs, dont il ne partage ni le modèle ni le risque.
+                "label": "Hyperscalers · acheteurs de capacité",
                 "tickers": ["MSFT", "GOOGL", "AMZN", "META", "ORCL"],
             },
             {
