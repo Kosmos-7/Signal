@@ -206,6 +206,10 @@ def main():
     ap.add_argument("--sortie", default="assets/titres/marques")
     ap.add_argument("--limite", type=int, default=0)
     ap.add_argument("--par-societe", type=int, default=3)
+    ap.add_argument("--termes", default="",
+                    help="recherche ponctuelle, format TICKER=terme|terme ; "
+                         "separer plusieurs societes par des virgules. Evite "
+                         "d'ajouter une carte figee au fichier pour un essai.")
     ap.add_argument("--lieux", action="store_true",
                     help="chercher le LIEU des quinze fiches sans illustration")
     ap.add_argument("--ameliorer", action="store_true",
@@ -216,9 +220,18 @@ def main():
     deja = set()
     if os.path.exists("assets/titres/LEGENDES.json"):
         deja = set(json.load(open("assets/titres/LEGENDES.json", encoding="utf-8")))
-    carte = LIEUX if a.lieux else (AMELIORATIONS if a.ameliorer else MARQUES)
+    if a.termes:
+        carte = {}
+        for bloc in a.termes.split(","):
+            tk, _, liste = bloc.partition("=")
+            termes = [t.strip() for t in liste.split("|") if t.strip()]
+            if not tk.strip() or not termes:
+                raise SystemExit(f"terme mal forme : « {bloc} », attendu TICKER=a|b")
+            carte[tk.strip()] = termes
+    else:
+        carte = LIEUX if a.lieux else (AMELIORATIONS if a.ameliorer else MARQUES)
     # En mode amelioration on vise justement celles qui ont deja une image.
-    cibles = ([t for t in sorted(carte)] if (a.ameliorer or a.lieux)
+    cibles = ([t for t in sorted(carte)] if (a.ameliorer or a.lieux or a.termes)
               else [t for t in sorted(carte) if t not in deja])
     if a.limite:
         cibles = cibles[: a.limite]
@@ -268,7 +281,8 @@ def main():
             print(f"[{i:3d}/{len(cibles)}] {tk:9s} {len(propositions):3d} pistes, "
                   f"rien d'exploitable", flush=True)
 
-    sortie_json = ("photos_lieux.json" if a.lieux
+    sortie_json = ("photos_termes.json" if a.termes
+                   else "photos_lieux.json" if a.lieux
                    else "photos_ameliorer.json" if a.ameliorer else "photos_marques.json")
     with open(sortie_json, "w", encoding="utf-8") as f:
         json.dump({"societes": len(rapport), "detail": rapport}, f,
