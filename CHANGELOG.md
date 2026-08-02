@@ -5,6 +5,93 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.7.0] — 2026-08-02
+
+### L'infrastructure de l'IA prend sa forme, et le site se met à parler humain
+
+Journée de retours utilisateur, presque tous portant sur la même chose : ce
+que le site DIT, et ce qu'il montre sans le dire.
+
+#### Le thème infra-IA, resserré puis structuré
+
+- Cinq éditeurs de logiciels (PLTR, SNOW, DDOG, MDB, NET) sortent : le titre
+  promettait de l'infrastructure, la liste contenait un pari sur les usages,
+  ce que la thèse dit explicitement ne pas faire. NextEra sort aussi, en
+  contradiction frontale avec le texte des biais qui exclut la production
+  renouvelable. Les hyperscalers restent, et la thèse l'assume désormais.
+- La chaîne devient une DONNÉE et non un commentaire : sept maillons publiés
+  dans universe.json, affichés comme en-têtes de groupe dans la liste. Ordre
+  physique de la chaîne, score décroissant à l'intérieur de chaque couche.
+- Entrées : ARM au maillon Compute, Constellation Energy et GE Vernova à
+  l'énergie, SanDisk à la mémoire (scindé de Western Digital en février 2025,
+  la liste datait d'avant), CoreWeave, Nebius et Sharon AI aux néoclouds.
+  De 46 à 60 titres déclarés.
+- Nommage des couches : anglicisme quand c'est le terme de métier (Compute,
+  hyperscalers, packaging), français partout ailleurs.
+
+#### La règle des 5 ans d'historique devient un avertissement
+
+Un titre coté depuis moins de cinq ans n'est plus exclu. À la place, sa fiche
+affiche que la droite de régression n'est pas exploitable en l'état. Seul
+reste bloquant le plancher technique de ~200 séances, sans lequel MM200 et RSI
+sont incalculables. Conséquence assumée : CoreWeave (1,3 an) est publié avec
+un score, et l'avertissement dit ce que ce score ne vaut pas.
+
+#### Ce que le site montrait sans le dire
+
+- **Mouvement au classement** : la watchlist principale marque les entrants et
+  les rangs gagnés ou perdus. Le champ existant mesurait un écart de SCORE, ce
+  qui ne dit rien de la place occupée.
+- **Suite de liste** : « ▾ 54 autres valeurs » sous le rail. Il défilait depuis
+  toujours, mais son seul indice était un dégradé de 12 px.
+- **Parité des fiches** : le breakdown complet voyage dans le fichier graphique,
+  donc une fiche thématique affiche les mêmes données qu'une fiche du top 30.
+- **Actualité pour tous les titres** : la revue d'actualité n'était réservée au
+  top 30 que par règle de catégorie, pas par manque de source. Une fiche sans
+  actualité porte désormais une marque qui distingue « on a cherché, il n'y
+  avait rien » de « on n'a jamais cherché ».
+
+#### Le texte
+
+- **Plus de tirets cadratins** : 1 295 occurrences retirées des textes publiés,
+  et la règle inscrite dans les deux prompts pour que les prochains n'en
+  contiennent pas. C'est la ponctuation qui trahit le plus une machine.
+- **Les étoiles disparaissent de la source** : retirées de l'affichage il y a
+  quelque temps, elles étaient toujours calculées par le screener et injectées
+  dans le prompt éditorial, qui les recopiait dans la prose publiée.
+- **Noms d'usage dans les listes** : TSMC, SK hynix, Munich Re plutôt que la
+  raison sociale tronquée à 22 caractères par le fournisseur de données.
+- Descriptions des watchlists réécrites, plus courtes et plus directes.
+
+#### Interface
+
+- **Graphique en plein écran**, y compris sur iPhone (calque CSS et non l'API
+  Fullscreen, que Safari refuse hors vidéo). Le dessin épouse la forme de
+  l'écran, le zoom choisi est conservé.
+- **Mobile** : ouvrir un thème laisse la liste visible au lieu de sauter à la
+  première fiche. Le libellé « Sections » n'est plus coupé. Les badges décoratifs
+  sont retirés.
+
+#### Illustrations
+
+Trois photographies du domaine public remplacent les planches générées : la
+salle des marchés du NYSE des années 1960, le supercalculateur Sierra du
+laboratoire Lawrence Livermore, une chambre forte de 1967. Aucune ne montre le
+logo d'une société détenue par la watchlist qu'elle illustre — le siège de HSBC
+a été écarté pour cette raison. Provenance et licences dans
+assets/themes/CREDITS.md.
+
+#### Correctifs
+
+- Le plein écran passait SOUS le rail et l'en-tête sur mobile : `.stage` est un
+  contexte d'empilement, un enfant en position:fixed y reste prisonnier quel que
+  soit son z-index. Le bloc est déplacé dans `<body>` le temps du plein écran.
+- La taille de l'univers était écrite en dur dans la page Apprendre et mentait
+  depuis le premier élargissement (210 annoncés, 229 réels). Elle est désormais
+  lue dans les données.
+
+---
+
 ## [3.6.0] — 2026-08-01
 
 ### Chaque titre a sa fiche — et les watchlists prennent leur forme définitive

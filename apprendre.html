@@ -645,7 +645,7 @@ Signal essaie de faire mieux que cette baseline en sélectionnant des actions in
   <section class="section-block" id="s3">
     <div class="section-label">03 · L'algorithme</div>
     <h2 class="section-title">Comment Signal choisit ses 30 actions</h2>
-<p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong>210 grandes capitalisations</strong> mondiales (USA, Europe, et depuis août 2026 le Japon et la Corée en cotation directe, en plus des ADR, une action étrangère cotée aux US via un certificat). Les 30 meilleurs scores forment la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist principale</a> ; le reste de l'univers se lit par <a href="index.html#/" style="color:var(--gold);text-decoration:none">watchlists thématiques</a>. Voici comment le score de chaque action est calculé.</p>
+<p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong id="univ-n">229 grandes capitalisations</strong> mondiales (USA, Europe, et depuis août 2026 le Japon et la Corée en cotation directe, en plus des ADR, une action étrangère cotée aux US via un certificat). Les 30 meilleurs scores forment la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist principale</a> ; le reste de l'univers se lit par <a href="index.html#/" style="color:var(--gold);text-decoration:none">watchlists thématiques</a>. Voici comment le score de chaque action est calculé.</p>
 
     <div class="scoring-note">
 <strong>Comment l'univers est choisi, et ses biais assumés.</strong> Deux filtres d'entrée : capitalisation &gt; 25 Md$ et une liquidité suffisante (le modèle momentum en a besoin). Un historique de cours court n'est <strong>plus une exclusion</strong> depuis août 2026 : un titre coté depuis moins de 5 ans entre, mais sa fiche affiche clairement que sa droite de régression n'est <strong>pas exploitable en l'état</strong>, trop peu de cycles pour qu'une trajectoire « normale » existe. Seule limite technique restante : en dessous d'environ 200 séances de cotation (~10 mois), les indicateurs de base (MM200, RSI) sont incalculables et le titre attend son tour. C'est une liste <strong>curée à la main</strong>, donc volontairement orientée : majoritairement américaine, large-cap, fortement pondérée tech/croissance, un <strong>pari momentum assumé</strong> sur le leadership actuel, pas un screen neutre de tout le marché. Une poche de leaders non-tech (énergie, industrie, matériaux, défensives, consommation de base) sert d'<strong>assurance</strong> si ce leadership tourne. Hors périmètre par construction : small/mid-caps, marchés émergents, value cyclique profonde, avec une exception assumée : Sharon AI (~1,5 Md$), entrée sur décision éditoriale dans le thème infra-IA aux côtés de CoreWeave et Nebius.
@@ -1401,5 +1401,19 @@ Chaque commit a un message explicite et la performance affichée sur le site est
 
 <script src="signal-fx.js"></script>
 <script src="signal-toc.js"></script>
+<script>
+/* La taille de l'univers était écrite en dur dans le texte : elle a menti dès
+   le premier élargissement (210 annoncés pour 229 réels). Un chiffre qu'on
+   publie doit être LU là où il est produit, pas recopié à la main. La valeur
+   en dur reste comme repli si le fichier est indisponible. */
+fetch('universe.json?v=' + new Date().toISOString().slice(0, 10))
+  .then(r => r.ok ? r.json() : null)
+  .then(u => {
+    const n = u && (u.universe_declared || u.universe_scored);
+    const el = document.getElementById('univ-n');
+    if (n && el) el.textContent = n + ' grandes capitalisations';
+  })
+  .catch(() => {});
+</script>
 </body>
 </html>
