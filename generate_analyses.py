@@ -242,7 +242,6 @@ def stock_depuis_universe(ticker, u, labels):
         "market": u.get("market") or "",
         "badge":  None,
         "score":  u.get("score"),
-        "stars":  None,
         # Libellés lisibles plutôt qu'identifiants techniques : c'est du contexte de
         # prompt, « Électrification » parle au modèle, « elec_infra » non.
         "themes": [labels.get(t, t) for t in (u.get("themes") or [])],
@@ -534,8 +533,7 @@ def breakdown_block(stock, niveau):
 
     score = stock.get("score")
     if score is not None:
-        etoiles = f"  ({stock.get('stars')}★)" if stock.get("stars") is not None else ""
-        lines.append(f"- Score Signal : {score}/100{etoiles}")
+        lines.append(f"- Score Signal : {score}/100")
 
     ligne_decomp = _ligne_decomposition(b)
     if ligne_decomp:

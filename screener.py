@@ -1146,7 +1146,6 @@ def score_ticker(ticker, vix=None):
                 elif regression_z <= -2.0: value_bonus = 4
 
         score = max(0, min(100, score + death_pen + chase_pen + value_bonus))
-        stars = 5 if score >= 90 else 4 if score >= 75 else 3 if score >= 60 else 2 if score >= 45 else 1
 
         # ── Décote vs tendance + objectif analystes (informationnels, hors scoring) ──
         # decote_pct : POSITIF = prix sous la droite de régression (décote), NÉGATIF = surcote.
@@ -1321,7 +1320,6 @@ def score_ticker(ticker, vix=None):
             "market":        (info.get("exchange") or "—")[:10],
             "sector":        sector_fr,
             "score":         score,
-            "stars":         stars,
             "badge":         badge,
             "change":        "stable",
             "breakdown":     breakdown,
