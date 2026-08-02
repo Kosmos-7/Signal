@@ -37,8 +37,11 @@ REGISTRE = os.path.join(SORTIE, "SOURCES.json")
 LARGEUR, HAUTEUR = 1700, 744
 
 # Slot = l'ancre de la section que l'image vient clore. « cadrage » place le
-# recadrage vertical : 0.0 garde le haut, 1.0 le bas, 0.5 le centre. Les valeurs
-# ne sont pas décoratives, elles ont été réglées en regardant le résultat.
+# recadrage vertical : 0.0 garde le haut, 1.0 le bas, 0.5 le centre.
+# « luminosite » corrige l'exposition quand le sujet l'impose : une page de
+# journal est un aplat blanc, et sur un fond sombre un aplat blanc en 16/7
+# n'aère pas, il éblouit. Les valeurs ne sont pas décoratives, elles ont été
+# réglées en regardant le résultat.
 ILLUSTRATIONS = {
     "s2": {
         "fichier": "Trading floor of the New York Stock Exchange, New York City "
@@ -57,6 +60,7 @@ ILLUSTRATIONS = {
     "s6": {
         "fichier": "Stock Price Listing Numbers on a Korean Newspaper.jpg",
         "cadrage": 0.5,
+        "luminosite": 0.55,
         "legende": "Cotes de clôture dans un quotidien coréen",
         "credit": "Mk2010 · CC BY-SA 4.0",
     },
@@ -92,7 +96,7 @@ def source(fichier):
     }
 
 
-def prepare(brut, chemin, cadrage):
+def prepare(brut, chemin, cadrage, luminosite):
     from PIL import Image, ImageEnhance
     im = Image.open(io.BytesIO(brut)).convert("RGB")
     cible = LARGEUR / HAUTEUR
@@ -107,7 +111,7 @@ def prepare(brut, chemin, cadrage):
         h = int((im.height - nh) * min(max(cadrage, 0.0), 1.0))
         im = im.crop((0, h, im.width, h + nh))
     im = im.resize((LARGEUR, HAUTEUR), Image.LANCZOS)
-    im = ImageEnhance.Brightness(im).enhance(0.74)
+    im = ImageEnhance.Brightness(im).enhance(luminosite)
     im = ImageEnhance.Color(im).enhance(0.85)
     im.save(chemin, "JPEG", quality=82, optimize=True, progressive=True)
     return os.path.getsize(chemin)
@@ -136,7 +140,7 @@ def main():
         req = urllib.request.Request(src["url"], headers={"User-Agent": UA})
         brut = urllib.request.urlopen(req, timeout=60).read()
         chemin = os.path.join(SORTIE, f"{slot}.jpg")
-        poids = prepare(brut, chemin, cfg["cadrage"])
+        poids = prepare(brut, chemin, cfg["cadrage"], cfg.get("luminosite", 0.74))
         registre[slot] = {
             "legende": cfg["legende"], "credit": cfg["credit"],
             "fichier": cfg["fichier"], "page": src["page"],
