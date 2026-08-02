@@ -84,7 +84,7 @@ THEMES_CURES = [
                 # de l'architecture CPU dominante — son absence amputait ce
                 # maillon. IPO 2023, 2,9 ans : fiche avec avertissement
                 # régression.
-                "label": "Calcul",
+                "label": "Compute — GPU, CPU & accélérateurs",
                 "tickers": ["NVDA", "AVGO", "AMD", "ARM", "MRVL", "QCOM", "INTC"],
             },
             {
@@ -110,7 +110,7 @@ THEMES_CURES = [
             {
                 # Ce qui relie les accélérateurs entre eux, et limite la taille
                 # des clusters d'entraînement autant que le nombre de puces.
-                "label": "Réseau & interconnexion optique",
+                "label": "Réseau & optique",
                 "tickers": ["ANET", "COHR", "LITE", "CIEN", "CSCO"],
             },
             {
@@ -140,7 +140,7 @@ THEMES_CURES = [
                 # exactement ce que la thèse dit ne pas faire. Ces cinq titres
                 # restent scorés comme candidats au top 30 et formeraient le
                 # noyau d'un futur thème Cloud & Data.
-                "label": "Plateformes & cloud",
+                "label": "Hyperscalers & cloud",
                 "tickers": ["MSFT", "GOOGL", "AMZN", "META", "ORCL"],
             },
             {
@@ -157,7 +157,7 @@ THEMES_CURES = [
                 # 2022 et 2024 — 4,5 et 2,3 ans d'historique). CEG vend des
                 # électrons nucléaires aux data centers, comme VST : c'est la
                 # thèse, pas le pari renouvelable que les biais excluent.
-                "label": "Énergie, conversion & refroidissement",
+                "label": "Énergie & refroidissement",
                 "tickers": ["VRT", "ETN", "SU.PA", "SIE.DE", "ABBN.SW", "ENR.DE",
                             "PWR", "VST", "CEG", "GEV", "CCJ",
                             "MPWR", "ON", "IFX.DE"],
