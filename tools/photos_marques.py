@@ -152,6 +152,42 @@ AMELIORATIONS = {
 }
 
 
+# Quinze fiches sans illustration. Elles n'ont ni produit ni marque
+# photographiables : ce sont des banques, des assureurs, des fournisseurs
+# d'indices, des agences de notation. Reste le LIEU, qui est une photo du monde
+# reel attachee a CETTE societe et non a son secteur, exactement comme l'agence
+# UBS de la Bahnhofstrasse ou l'usine Schneider Electric deja publiees.
+#
+# Le premier passage avait echoue faute de connaitre le nom des lieux :
+# « BlackRock headquarters » rend un phare, leur siege s'appelle 50 Hudson
+# Yards ; « London Stock Exchange building » rend le Royal Exchange, qui est un
+# autre batiment. On interroge donc les adresses et les enseignes.
+LIEUX = {
+    "ACN":     ["Accenture Tower Chicago", "Accenture building Dublin",
+                "Accenture office building"],
+    "BLK":     ["50 Hudson Yards", "BlackRock office building"],
+    "BNP.PA":  ["BNP Paribas agence", "BNP Paribas bank branch",
+                "BNP Paribas Fortis branch"],
+    "CS.PA":   ["Tour AXA Puteaux", "AXA agence", "AXA insurance office sign"],
+    "KKR":     ["30 Hudson Yards", "KKR office New York"],
+    "LSEG.L":  ["London Stock Exchange Paternoster Square",
+                "Stock Exchange Tower London", "London Stock Exchange Group office"],
+    "MA":      ["Mastercard office Purchase New York", "Mastercard sign building",
+                "Mastercard acceptance sign"],
+    "MCO":     ["7 World Trade Center", "Moody's headquarters New York"],
+    "MSCI":    ["MSCI office London", "MSCI building"],
+    "MUV2.DE": ["Muenchener Rueckversicherung Koeniginstrasse",
+                "Munich Re headquarters Munich", "Munich Re building"],
+    "PDD":     ["Pinduoduo headquarters Shanghai", "Pinduoduo office"],
+    "SPGI":    ["55 Water Street", "S&P Global office building"],
+    "8035.T":  ["Tokyo Electron headquarters", "Akasaka Biz Tower",
+                "Tokyo Electron Miyagi", "Tokyo Electron Yamanashi"],
+    "6146.T":  ["Disco Corporation Ota Tokyo", "Disco Corporation Hiroshima"],
+    "ASX":     ["ASE Kaohsiung plant", "Advanced Semiconductor Engineering Kaohsiung",
+                "Nanzih Technology Industrial Park"],
+}
+
+
 def chercher_commons(terme, limite=14):
     """Recherche plein texte de Commons, restreinte aux fichiers."""
     try:
@@ -170,6 +206,8 @@ def main():
     ap.add_argument("--sortie", default="assets/titres/marques")
     ap.add_argument("--limite", type=int, default=0)
     ap.add_argument("--par-societe", type=int, default=3)
+    ap.add_argument("--lieux", action="store_true",
+                    help="chercher le LIEU des quinze fiches sans illustration")
     ap.add_argument("--ameliorer", action="store_true",
                     help="repasser sur des fiches DEJA illustrees dont la revue "
                          "d'ensemble a juge l'image faible")
@@ -178,9 +216,9 @@ def main():
     deja = set()
     if os.path.exists("assets/titres/LEGENDES.json"):
         deja = set(json.load(open("assets/titres/LEGENDES.json", encoding="utf-8")))
-    carte = AMELIORATIONS if a.ameliorer else MARQUES
+    carte = LIEUX if a.lieux else (AMELIORATIONS if a.ameliorer else MARQUES)
     # En mode amelioration on vise justement celles qui ont deja une image.
-    cibles = ([t for t in sorted(carte)] if a.ameliorer
+    cibles = ([t for t in sorted(carte)] if (a.ameliorer or a.lieux)
               else [t for t in sorted(carte) if t not in deja])
     if a.limite:
         cibles = cibles[: a.limite]
@@ -230,7 +268,8 @@ def main():
             print(f"[{i:3d}/{len(cibles)}] {tk:9s} {len(propositions):3d} pistes, "
                   f"rien d'exploitable", flush=True)
 
-    sortie_json = "photos_ameliorer.json" if a.ameliorer else "photos_marques.json"
+    sortie_json = ("photos_lieux.json" if a.lieux
+                   else "photos_ameliorer.json" if a.ameliorer else "photos_marques.json")
     with open(sortie_json, "w", encoding="utf-8") as f:
         json.dump({"societes": len(rapport), "detail": rapport}, f,
                   ensure_ascii=False, indent=1)
