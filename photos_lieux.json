@@ -1,0 +1,681 @@
+{
+ "societes": 15,
+ "detail": {
+  "6146.T": {
+   "candidats": [
+    {
+     "fichier": "06 西面全景.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/08/06_%E8%A5%BF%E9%9D%A2%E5%85%A8%E6%99%AF.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:06_%E8%A5%BF%E9%9D%A2%E5%85%A8%E6%99%AF.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Dsc37",
+     "score": 0,
+     "terme": "Disco Corporation Hiroshima",
+     "poids": 65649
+    },
+    {
+     "fichier": "Treasury - Morgenthau, Henry Jr. - Editorial Opinion Reports, March 6 1942-May 1, 1942 - DPLA - 87ab669d958f058dc1017cfff1c68903.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Treasury_-_Morgenthau%2C_Henry_Jr._-_Editorial_Opinion_Reports%2C_March_6_1942-May_1%2C_1942_-_DPLA_-_87ab669d958f058dc1017cfff1c68903.pdf/page1-1280px-Treasury_-_Morgenthau%2C_Henry_Jr._-_Editorial_Opinion_Reports%2C_March_6_1942-May_1%2C_1942_-_DPLA_-_87ab669d958f058dc1017cfff1c68903.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Treasury_-_Morgenthau,_Henry_Jr._-_Editorial_Opinion_Reports,_March_6_1942-May_1,_1942_-_DPLA_-_87ab669d958f058dc1017cfff1c68903.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "President (1933-1945 : Roosevelt). 1933-1945",
+     "score": -12,
+     "terme": "Disco Corporation Ota Tokyo",
+     "poids": 27762
+    }
+   ]
+  },
+  "8035.T": {
+   "candidats": [
+    {
+     "fichier": "赤坂 - panoramio (2).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/%E8%B5%A4%E5%9D%82_-_panoramio_%282%29.jpg/1920px-%E8%B5%A4%E5%9D%82_-_panoramio_%282%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E8%B5%A4%E5%9D%82_-_panoramio_(2).jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "kanesue",
+     "score": 0,
+     "terme": "Akasaka Biz Tower",
+     "poids": 80105
+    },
+    {
+     "fichier": "赤坂 - panoramio (1).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/%E8%B5%A4%E5%9D%82_-_panoramio_%281%29.jpg/1920px-%E8%B5%A4%E5%9D%82_-_panoramio_%281%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E8%B5%A4%E5%9D%82_-_panoramio_(1).jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "kanesue",
+     "score": 0,
+     "terme": "Akasaka Biz Tower",
+     "poids": 83594
+    },
+    {
+     "fichier": "TOKYO ELECTRON TECHNOLOGY SOLUTIONS LIMITED Nirasaki City.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/TOKYO_ELECTRON_TECHNOLOGY_SOLUTIONS_LIMITED_Nirasaki_City.jpg/1920px-TOKYO_ELECTRON_TECHNOLOGY_SOLUTIONS_LIMITED_Nirasaki_City.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:TOKYO_ELECTRON_TECHNOLOGY_SOLUTIONS_LIMITED_Nirasaki_City.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "U-8 wiki",
+     "score": 0,
+     "terme": "Tokyo Electron Yamanashi",
+     "poids": 85192
+    },
+    {
+     "fichier": "Miyagi Prefectural Auditorium (Tokyo Electron Hall Miyagi) viewed from a greenway in Jozenji-dori avenue.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Miyagi_Prefectural_Auditorium_%28Tokyo_Electron_Hall_Miyagi%29_viewed_from_a_greenway_in_Jozenji-dori_avenue.jpg/1920px-Miyagi_Prefectural_Auditorium_%28Tokyo_Electron_Hall_Miyagi%29_viewed_from_a_greenway_in_Jozenji-dori_avenue.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Miyagi_Prefectural_Auditorium_(Tokyo_Electron_Hall_Miyagi)_viewed_from_a_greenway_in_Jozenji-dori_avenue.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "掬茶",
+     "score": 0,
+     "terme": "Tokyo Electron Miyagi",
+     "poids": 147967
+    }
+   ]
+  },
+  "ACN": {
+   "candidats": [
+    {
+     "fichier": "Pyrmont NSW 2009, Australia - panoramio (7).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Pyrmont_NSW_2009%2C_Australia_-_panoramio_%287%29.jpg/1920px-Pyrmont_NSW_2009%2C_Australia_-_panoramio_%287%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Pyrmont_NSW_2009,_Australia_-_panoramio_(7).jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Maksym Kozlenko",
+     "score": 0,
+     "terme": "Accenture office building",
+     "poids": 83604
+    },
+    {
+     "fichier": "CitigroupCenterChicago.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/CitigroupCenterChicago.jpg/1920px-CitigroupCenterChicago.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:CitigroupCenterChicago.jpg",
+     "licence": "CC BY-SA 2.5",
+     "famille": "by-sa",
+     "auteur": "Jarred Trost",
+     "score": 0,
+     "terme": "Accenture Tower Chicago",
+     "poids": 141213
+    },
+    {
+     "fichier": "Citigroup center from ground.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Citigroup_center_from_ground.jpg/1920px-Citigroup_center_from_ground.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Citigroup_center_from_ground.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Trxr4kds at English Wikipedia",
+     "score": 0,
+     "terme": "Accenture Tower Chicago",
+     "poids": 76011
+    },
+    {
+     "fichier": "Citigroup Center, Chicago (16996077180).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Citigroup_Center%2C_Chicago_%2816996077180%29.jpg/1920px-Citigroup_Center%2C_Chicago_%2816996077180%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Citigroup_Center,_Chicago_(16996077180).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Tony Webster from Portland, Oregon, United States",
+     "score": 0,
+     "terme": "Accenture Tower Chicago",
+     "poids": 83374
+    }
+   ]
+  },
+  "ASX": {
+   "candidats": [
+    {
+     "fichier": "汐止-伯爵山莊-日月光中心 - panoramio.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/%E6%B1%90%E6%AD%A2-%E4%BC%AF%E7%88%B5%E5%B1%B1%E8%8E%8A-%E6%97%A5%E6%9C%88%E5%85%89%E4%B8%AD%E5%BF%83_-_panoramio.jpg/1920px-%E6%B1%90%E6%AD%A2-%E4%BC%AF%E7%88%B5%E5%B1%B1%E8%8E%8A-%E6%97%A5%E6%9C%88%E5%85%89%E4%B8%AD%E5%BF%83_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E6%B1%90%E6%AD%A2-%E4%BC%AF%E7%88%B5%E5%B1%B1%E8%8E%8A-%E6%97%A5%E6%9C%88%E5%85%89%E4%B8%AD%E5%BF%83_-_panoramio.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "miling",
+     "score": 0,
+     "terme": "Advanced Semiconductor Engineering Kaohsiung",
+     "poids": 77447
+    },
+    {
+     "fichier": "上海日月光雪景 - panoramio.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/%E4%B8%8A%E6%B5%B7%E6%97%A5%E6%9C%88%E5%85%89%E9%9B%AA%E6%99%AF_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E6%97%A5%E6%9C%88%E5%85%89%E9%9B%AA%E6%99%AF_-_panoramio.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "miling",
+     "score": 0,
+     "terme": "Advanced Semiconductor Engineering Kaohsiung",
+     "poids": 90497
+    },
+    {
+     "fichier": "上海日月光生活區 - panoramio.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/%E4%B8%8A%E6%B5%B7%E6%97%A5%E6%9C%88%E5%85%89%E7%94%9F%E6%B4%BB%E5%8D%80_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E6%97%A5%E6%9C%88%E5%85%89%E7%94%9F%E6%B4%BB%E5%8D%80_-_panoramio.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "miling",
+     "score": 0,
+     "terme": "Advanced Semiconductor Engineering Kaohsiung",
+     "poids": 87110
+    },
+    {
+     "fichier": "R19 Nanzih Technology Industrial Park Station 20240817.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/R19_Nanzih_Technology_Industrial_Park_Station_20240817.jpg/1920px-R19_Nanzih_Technology_Industrial_Park_Station_20240817.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:R19_Nanzih_Technology_Industrial_Park_Station_20240817.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "鐵路Railway",
+     "score": 0,
+     "terme": "Nanzih Technology Industrial Park",
+     "poids": 103952
+    }
+   ]
+  },
+  "BLK": {
+   "candidats": [
+    {
+     "fichier": "IuW23YooZ8.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/IuW23YooZ8.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:IuW23YooZ8.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "句",
+     "score": 0,
+     "terme": "50 Hudson Yards",
+     "poids": 73214
+    },
+    {
+     "fichier": "Hudson Yards May 2017 04.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Hudson_Yards_May_2017_04.jpg/1920px-Hudson_Yards_May_2017_04.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_May_2017_04.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Epicgenius",
+     "score": 0,
+     "terme": "50 Hudson Yards",
+     "poids": 65332
+    },
+    {
+     "fichier": "50 Hudson Yards.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/50_Hudson_Yards.png/1920px-50_Hudson_Yards.png",
+     "page": "https://commons.wikimedia.org/wiki/File:50_Hudson_Yards.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Dazzling4",
+     "score": 0,
+     "terme": "50 Hudson Yards",
+     "poids": 120398
+    },
+    {
+     "fichier": "50 Hudson Yards.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/50_Hudson_Yards.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:50_Hudson_Yards.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Kidfly182",
+     "score": 0,
+     "terme": "50 Hudson Yards",
+     "poids": 68745
+    }
+   ]
+  },
+  "BNP.PA": {
+   "candidats": [
+    {
+     "fichier": "Sint-Eligiuskerk - Bentille - 2013.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Sint-Eligiuskerk_-_Bentille_-_2013.jpg/1920px-Sint-Eligiuskerk_-_Bentille_-_2013.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Sint-Eligiuskerk_-_Bentille_-_2013.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Spotter2",
+     "score": 0,
+     "terme": "BNP Paribas Fortis branch",
+     "poids": 65955
+    },
+    {
+     "fichier": "Siege BNC.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Siege_BNC.jpg/1920px-Siege_BNC.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Siege_BNC.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Boubloub",
+     "score": 0,
+     "terme": "BNP Paribas agence",
+     "poids": 110965
+    },
+    {
+     "fichier": "Nantes - Rue La Fayette - 01.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Nantes_-_Rue_La_Fayette_-_01.jpg/1920px-Nantes_-_Rue_La_Fayette_-_01.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nantes_-_Rue_La_Fayette_-_01.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "François de Dijon",
+     "score": 0,
+     "terme": "BNP Paribas agence",
+     "poids": 114668
+    },
+    {
+     "fichier": "Montagne du Parc 3, 1000 Bruxelles.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Montagne_du_Parc_3%2C_1000_Bruxelles.jpg/1920px-Montagne_du_Parc_3%2C_1000_Bruxelles.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Montagne_du_Parc_3,_1000_Bruxelles.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Tilau",
+     "score": 0,
+     "terme": "BNP Paribas Fortis branch",
+     "poids": 102813
+    }
+   ]
+  },
+  "CS.PA": {
+   "candidats": [
+    {
+     "fichier": "UK - Middlesbrough - AXA.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/UK_-_Middlesbrough_-_AXA.jpg/1920px-UK_-_Middlesbrough_-_AXA.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:UK_-_Middlesbrough_-_AXA.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Insure Our Future",
+     "score": 0,
+     "terme": "AXA agence",
+     "poids": 118849
+    },
+    {
+     "fichier": "Procès-verbal de la Commission Municipale du Vieux Paris, 1904, 4.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Proc%C3%A8s-verbal_de_la_Commission_Municipale_du_Vieux_Paris%2C_1904%2C_4.djvu/page1-1920px-Proc%C3%A8s-verbal_de_la_Commission_Municipale_du_Vieux_Paris%2C_1904%2C_4.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Proc%C3%A8s-verbal_de_la_Commission_Municipale_du_Vieux_Paris,_1904,_4.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCommission Municipale du Vieux Paris",
+     "score": 0,
+     "terme": "Tour AXA Puteaux",
+     "poids": 65757
+    },
+    {
+     "fichier": "Hotel de la vaupaliere54.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Hotel_de_la_vaupaliere54.jpg/1920px-Hotel_de_la_vaupaliere54.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Hotel_de_la_vaupaliere54.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Ralf.treinen",
+     "score": 0,
+     "terme": "AXA agence",
+     "poids": 107794
+    },
+    {
+     "fichier": "General-Guisan-Str. 40 (Westflügel) in Winterthur.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/General-Guisan-Str._40_%28Westfl%C3%BCgel%29_in_Winterthur.jpg/1920px-General-Guisan-Str._40_%28Westfl%C3%BCgel%29_in_Winterthur.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:General-Guisan-Str._40_(Westfl%C3%BCgel)_in_Winterthur.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "JoachimKohler-HB",
+     "score": 0,
+     "terme": "AXA agence",
+     "poids": 105972
+    }
+   ]
+  },
+  "KKR": {
+   "candidats": [
+    {
+     "fichier": "The Great north side, or, Borough of the Bronx, New York (1897) (14784986473).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/The_Great_north_side%2C_or%2C_Borough_of_the_Bronx%2C_New_York_%281897%29_%2814784986473%29.jpg/1920px-The_Great_north_side%2C_or%2C_Borough_of_the_Bronx%2C_New_York_%281897%29_%2814784986473%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Great_north_side,_or,_Borough_of_the_Bronx,_New_York_(1897)_(14784986473).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Internet Archive Book Images",
+     "score": 0,
+     "terme": "KKR office New York",
+     "poids": 115555
+    },
+    {
+     "fichier": "The Great north side, or, Borough of the Bronx, New York (1897) (14761947351).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/The_Great_north_side%2C_or%2C_Borough_of_the_Bronx%2C_New_York_%281897%29_%2814761947351%29.jpg/1920px-The_Great_north_side%2C_or%2C_Borough_of_the_Bronx%2C_New_York_%281897%29_%2814761947351%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Great_north_side,_or,_Borough_of_the_Bronx,_New_York_(1897)_(14761947351).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Internet Archive Book Images",
+     "score": 0,
+     "terme": "KKR office New York",
+     "poids": 91105
+    },
+    {
+     "fichier": "Pier 66 and Hudson Yards (01473)p.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Pier_66_and_Hudson_Yards_%2801473%29p.jpg/1920px-Pier_66_and_Hudson_Yards_%2801473%29p.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Pier_66_and_Hudson_Yards_(01473)p.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rhododendrites",
+     "score": 0,
+     "terme": "30 Hudson Yards",
+     "poids": 90566
+    },
+    {
+     "fichier": "Hudson Yards from Hudson Commons (95131p).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Hudson_Yards_from_Hudson_Commons_%2895131p%29.jpg/1920px-Hudson_Yards_from_Hudson_Commons_%2895131p%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_from_Hudson_Commons_(95131p).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rhododendrites",
+     "score": 0,
+     "terme": "30 Hudson Yards",
+     "poids": 72215
+    }
+   ]
+  },
+  "LSEG.L": {
+   "candidats": [
+    {
+     "fichier": "Paternoster Square.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Paternoster_Square.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Paternoster_Square.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "gren",
+     "score": 0,
+     "terme": "London Stock Exchange Paternoster Square",
+     "poids": 132814
+    },
+    {
+     "fichier": "Paternoster Square in London.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Paternoster_Square_in_London.jpg/1920px-Paternoster_Square_in_London.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Paternoster_Square_in_London.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Ramón Cutanda López",
+     "score": 0,
+     "terme": "London Stock Exchange Paternoster Square",
+     "poids": 145126
+    },
+    {
+     "fichier": "Paternoster Square gate.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Paternoster_Square_gate.jpg/1920px-Paternoster_Square_gate.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Paternoster_Square_gate.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "user:Grenavitar",
+     "score": 0,
+     "terme": "London Stock Exchange Paternoster Square",
+     "poids": 92858
+    },
+    {
+     "fichier": "Paternoster Square (1).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Paternoster_Square_%281%29.jpg/1920px-Paternoster_Square_%281%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Paternoster_Square_(1).jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Kaihsu Tai",
+     "score": 0,
+     "terme": "London Stock Exchange Paternoster Square",
+     "poids": 86479
+    }
+   ]
+  },
+  "MA": {
+   "candidats": [
+    {
+     "fichier": "Old Leumi Card Acceptance Sticker.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Old_Leumi_Card_Acceptance_Sticker.jpg/1920px-Old_Leumi_Card_Acceptance_Sticker.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Old_Leumi_Card_Acceptance_Sticker.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "User:Matan2001",
+     "score": 5,
+     "terme": "Mastercard acceptance sign",
+     "poids": 83646
+    },
+    {
+     "fichier": "Latvia, Riga, Krasta Street, 101 - Circle K gas station WMID4170408.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Latvia%2C_Riga%2C_Krasta_Street%2C_101_-_Circle_K_gas_station_WMID4170408.jpg/1920px-Latvia%2C_Riga%2C_Krasta_Street%2C_101_-_Circle_K_gas_station_WMID4170408.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Latvia,_Riga,_Krasta_Street,_101_-_Circle_K_gas_station_WMID4170408.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "AinarsM",
+     "score": 0,
+     "terme": "Mastercard sign building",
+     "poids": 70235
+    },
+    {
+     "fichier": "54a.Chelsea.NYC.30June2019 (49819969602).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/54a.Chelsea.NYC.30June2019_%2849819969602%29.jpg/1920px-54a.Chelsea.NYC.30June2019_%2849819969602%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:54a.Chelsea.NYC.30June2019_(49819969602).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Elvert Barnes",
+     "score": 0,
+     "terme": "Mastercard acceptance sign",
+     "poids": 42883
+    },
+    {
+     "fichier": "53a.Chelsea.NYC.30June2019 (49819120253).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/53a.Chelsea.NYC.30June2019_%2849819120253%29.jpg/1920px-53a.Chelsea.NYC.30June2019_%2849819120253%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:53a.Chelsea.NYC.30June2019_(49819120253).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Elvert Barnes",
+     "score": 0,
+     "terme": "Mastercard acceptance sign",
+     "poids": 42759
+    }
+   ]
+  },
+  "MCO": {
+   "candidats": [
+    {
+     "fichier": "Wtc-photo.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Wtc-photo.jpg/1920px-Wtc-photo.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wtc-photo.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "National Oceanic and Atmospheric Administration (NOAA)",
+     "score": 0,
+     "terme": "7 World Trade Center",
+     "poids": 138744
+    },
+    {
+     "fichier": "World Trade Center, New York City - aerial view (March 2001).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/World_Trade_Center%2C_New_York_City_-_aerial_view_%28March_2001%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:World_Trade_Center,_New_York_City_-_aerial_view_(March_2001).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Jeffmock",
+     "score": 0,
+     "terme": "7 World Trade Center",
+     "poids": 114822
+    },
+    {
+     "fichier": "One World Trade Center in Winter with Trees.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/One_World_Trade_Center_in_Winter_with_Trees.jpg/1920px-One_World_Trade_Center_in_Winter_with_Trees.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:One_World_Trade_Center_in_Winter_with_Trees.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "aismallard",
+     "score": 0,
+     "terme": "7 World Trade Center",
+     "poids": 166250
+    },
+    {
+     "fichier": "One World Trade Center and Lower Manhattan skyline from the harbor, New York.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/One_World_Trade_Center_and_Lower_Manhattan_skyline_from_the_harbor%2C_New_York.jpg/1920px-One_World_Trade_Center_and_Lower_Manhattan_skyline_from_the_harbor%2C_New_York.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:One_World_Trade_Center_and_Lower_Manhattan_skyline_from_the_harbor,_New_York.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Christian David",
+     "score": 0,
+     "terme": "7 World Trade Center",
+     "poids": 65798
+    }
+   ]
+  },
+  "MSCI": {
+   "candidats": [
+    {
+     "fichier": "Watershed phase of the 1968 soil and water conservation needs inventory (IA CAT71316150).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Watershed_phase_of_the_1968_soil_and_water_conservation_needs_inventory_%28IA_CAT71316150%29.pdf/page1-960px-Watershed_phase_of_the_1968_soil_and_water_conservation_needs_inventory_%28IA_CAT71316150%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Watershed_phase_of_the_1968_soil_and_water_conservation_needs_inventory_(IA_CAT71316150).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUnited States. Soil Conservation Service",
+     "score": -12,
+     "terme": "MSCI building",
+     "poids": 37177
+    },
+    {
+     "fichier": "WKGW-zhengyi-13834 FINAL revision.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/WKGW-zhengyi-13834_FINAL_revision.pdf/page1-960px-WKGW-zhengyi-13834_FINAL_revision.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:WKGW-zhengyi-13834_FINAL_revision.pdf",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rrrwrty",
+     "score": -12,
+     "terme": "MSCI building",
+     "poids": 3585
+    },
+    {
+     "fichier": "The synthetic dyestuffs - and the intermediate products from which they are derived (IA syntheticdyestuf00cain 0).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/The_synthetic_dyestuffs_-_and_the_intermediate_products_from_which_they_are_derived_%28IA_syntheticdyestuf00cain_0%29.pdf/page1-500px-The_synthetic_dyestuffs_-_and_the_intermediate_products_from_which_they_are_derived_%28IA_syntheticdyestuf00cain_0%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_synthetic_dyestuffs_-_and_the_intermediate_products_from_which_they_are_derived_(IA_syntheticdyestuf00cain_0).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCain, John Cannell, 1871-1921\nThorpe, Jocelyn Field, 1872-1940",
+     "score": -12,
+     "terme": "MSCI office London",
+     "poids": 48359
+    },
+    {
+     "fichier": "The essentials of materia medica and therapeutics (IA b28143899).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/The_essentials_of_materia_medica_and_therapeutics_%28IA_b28143899%29.pdf/page1-960px-The_essentials_of_materia_medica_and_therapeutics_%28IA_b28143899%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_essentials_of_materia_medica_and_therapeutics_(IA_b28143899).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nTirard, Nestor, 1853- editor",
+     "score": -12,
+     "terme": "MSCI office London",
+     "poids": 78849
+    }
+   ]
+  },
+  "MUV2.DE": {
+   "candidats": [
+    {
+     "fichier": "Wzwz schwabing 12 munich re tree.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Wzwz_schwabing_12_munich_re_tree.JPG/1920px-Wzwz_schwabing_12_munich_re_tree.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Wzwz_schwabing_12_munich_re_tree.JPG",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Wzwz",
+     "score": 0,
+     "terme": "Munich Re headquarters Munich",
+     "poids": 86314
+    },
+    {
+     "fichier": "Palacio de Nymphenburg, Múnich, Alemania, 2015-07-03, DD 01-18 HDR PAN.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Palacio_de_Nymphenburg%2C_M%C3%BAnich%2C_Alemania%2C_2015-07-03%2C_DD_01-18_HDR_PAN.JPG/1920px-Palacio_de_Nymphenburg%2C_M%C3%BAnich%2C_Alemania%2C_2015-07-03%2C_DD_01-18_HDR_PAN.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Palacio_de_Nymphenburg,_M%C3%BAnich,_Alemania,_2015-07-03,_DD_01-18_HDR_PAN.JPG",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Diego Delso",
+     "score": 0,
+     "terme": "Munich Re building",
+     "poids": 51070
+    },
+    {
+     "fichier": "Münchner Rückversicherungs-Gesellschaft2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg/1920px-M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ricardalovesmonuments",
+     "score": 0,
+     "terme": "Munich Re headquarters Munich",
+     "poids": 147188
+    },
+    {
+     "fichier": "Münchner Rückversicherungs-Gesellschaft 4.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_4.jpg/1920px-M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_4.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_4.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ricardalovesmonuments",
+     "score": 0,
+     "terme": "Munich Re headquarters Munich",
+     "poids": 147638
+    }
+   ]
+  },
+  "PDD": {
+   "candidats": [
+    {
+     "fichier": "HK TKO Spot mall 將軍澳 Tseung Kwan O 尚德廣場 Sheung Tak Estate TKO SPOT Shopping Centre mall shop Sheung Tak Post Office PinDuoDuo logictics lockers August 2025 N13P 02.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/HK_TKO_Spot_mall_%E5%B0%87%E8%BB%8D%E6%BE%B3_Tseung_Kwan_O_%E5%B0%9A%E5%BE%B7%E5%BB%A3%E5%A0%B4_Sheung_Tak_Estate_TKO_SPOT_Shopping_Centre_mall_shop_Sheung_Tak_Post_Office_PinDuoDuo_logictics_lockers_August_2025_N13P_02.jpg/1920px-thumbnail.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:HK_TKO_Spot_mall_%E5%B0%87%E8%BB%8D%E6%BE%B3_Tseung_Kwan_O_%E5%B0%9A%E5%BE%B7%E5%BB%A3%E5%A0%B4_Sheung_Tak_Estate_TKO_SPOT_Shopping_Centre_mall_shop_Sheung_Tak_Post_Office_PinDuoDuo_logictics_lockers_August_2025_N13P_02.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "SevenSwords TinSumh",
+     "score": -11,
+     "terme": "Pinduoduo office",
+     "poids": 70208
+    },
+    {
+     "fichier": "HK TKO Spot mall 將軍澳 Tseung Kwan O 尚德廣場 Sheung Tak Estate TKO SPOT Shopping Centre mall shop Sheung Tak Post Office PinDuoDuo logictics lockers August 2025 N13P 01.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/HK_TKO_Spot_mall_%E5%B0%87%E8%BB%8D%E6%BE%B3_Tseung_Kwan_O_%E5%B0%9A%E5%BE%B7%E5%BB%A3%E5%A0%B4_Sheung_Tak_Estate_TKO_SPOT_Shopping_Centre_mall_shop_Sheung_Tak_Post_Office_PinDuoDuo_logictics_lockers_August_2025_N13P_01.jpg/1920px-thumbnail.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:HK_TKO_Spot_mall_%E5%B0%87%E8%BB%8D%E6%BE%B3_Tseung_Kwan_O_%E5%B0%9A%E5%BE%B7%E5%BB%A3%E5%A0%B4_Sheung_Tak_Estate_TKO_SPOT_Shopping_Centre_mall_shop_Sheung_Tak_Post_Office_PinDuoDuo_logictics_lockers_August_2025_N13P_01.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "SevenSwords TinSumh",
+     "score": -11,
+     "terme": "Pinduoduo office",
+     "poids": 90361
+    }
+   ]
+  },
+  "SPGI": {
+   "candidats": [
+    {
+     "fichier": "Water St Coenties Slip td (2018-08-09) 16 - 55 Water Street Chase.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Water_St_Coenties_Slip_td_%282018-08-09%29_16_-_55_Water_Street_Chase.jpg/1920px-Water_St_Coenties_Slip_td_%282018-08-09%29_16_-_55_Water_Street_Chase.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Water_St_Coenties_Slip_td_(2018-08-09)_16_-_55_Water_Street_Chase.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Tdorante10",
+     "score": 0,
+     "terme": "55 Water Street",
+     "poids": 61947
+    },
+    {
+     "fichier": "Water St Coenties Slip td (2018-08-09) 15 - 55 Water Street, Elevated Acre.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Water_St_Coenties_Slip_td_%282018-08-09%29_15_-_55_Water_Street%2C_Elevated_Acre.jpg/1920px-Water_St_Coenties_Slip_td_%282018-08-09%29_15_-_55_Water_Street%2C_Elevated_Acre.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Water_St_Coenties_Slip_td_(2018-08-09)_15_-_55_Water_Street,_Elevated_Acre.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Tdorante10",
+     "score": 0,
+     "terme": "55 Water Street",
+     "poids": 70872
+    },
+    {
+     "fichier": "S&P Global (55312935517).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/S%26P_Global_%2855312935517%29.jpg/1920px-S%26P_Global_%2855312935517%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:S%26P_Global_(55312935517).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Ajay Suresh",
+     "score": 0,
+     "terme": "S&P Global office building",
+     "poids": 95310
+    },
+    {
+     "fichier": "Photograph, California no. 8, Oakland May 23, 1940, Writers Project, and centers for other P & S projects.... - NARA - 296093.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Photograph%2C_California_no._8%2C_Oakland_May_23%2C_1940%2C_Writers_Project%2C_and_centers_for_other_P_%26_S_projects...._-_NARA_-_296093.tif/lossy-page1-1920px-Photograph%2C_California_no._8%2C_Oakland_May_23%2C_1940%2C_Writers_Project%2C_and_centers_for_other_P_%26_S_projects...._-_NARA_-_296093.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Photograph,_California_no._8,_Oakland_May_23,_1940,_Writers_Project,_and_centers_for_other_P_%26_S_projects...._-_NARA_-_296093.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUnknown authorUnknown author or not provided",
+     "score": 0,
+     "terme": "S&P Global office building",
+     "poids": 95823
+    }
+   ]
+  }
+ }
+}
