@@ -28,6 +28,7 @@ import re
 import sys
 import time
 import unicodedata
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -55,17 +56,64 @@ def _norm(s):
 
 
 def chercher(terme, page_size=20):
-    params = {"q": terme, "license": "cc0,pdm,by,by-sa", "page_size": str(page_size),
-              "mature": "false"}
+    params = {"q": terme, "license": "cc0,pdm,by,by-sa", "page_size": str(page_size)}
     url = API + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"User-Agent": UA,
                                                "Accept": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
             return json.load(r).get("results") or []
+    except urllib.error.HTTPError as e:
+        # Le code ET le corps : un 400 d'Openverse nomme le paramètre fautif,
+        # un 401 dit qu'il faut s'authentifier, un 429 qu'il faut ralentir.
+        # Sans ça on ne voit qu'« HTTPError » et l'on diagnostique à l'aveugle.
+        try:
+            corps = e.read(400).decode("utf-8", "replace").replace("\n", " ")
+        except Exception:
+            corps = ""
+        print(f"      ✗ Openverse « {terme} » : HTTP {e.code} {corps[:200]}")
+        return []
     except Exception as e:
         print(f"      ✗ Openverse « {terme} » : {type(e).__name__}")
         return []
+
+
+def diagnostic():
+    """Interroge l'API de sept manières pour savoir laquelle passe.
+
+    Le premier passage a échoué sur les 740 requêtes avec un simple
+    « HTTPError ». Plutôt que deviner quel paramètre gêne, on essaie chaque
+    hypothèse une fois et on lit le code de retour.
+    """
+    essais = [
+        ("nu", API + "?q=nvidia", {"User-Agent": UA}),
+        ("sans UA", API + "?q=nvidia", {}),
+        ("navigateur", API + "?q=nvidia",
+         {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                        "(KHTML, like Gecko) Chrome/126 Safari/537.36"}),
+        ("+ licence", API + "?q=nvidia&license=cc0,pdm,by,by-sa", {"User-Agent": UA}),
+        ("+ mature", API + "?q=nvidia&mature=false", {"User-Agent": UA}),
+        ("+ page_size", API + "?q=nvidia&page_size=20", {"User-Agent": UA}),
+        ("ancien hôte", "https://api.openverse.engineering/v1/images/?q=nvidia",
+         {"User-Agent": UA}),
+        ("racine", "https://api.openverse.org/v1/", {"User-Agent": UA}),
+    ]
+    for nom, url, entetes in essais:
+        req = urllib.request.Request(url, headers={**entetes, "Accept": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                d = json.loads(r.read(4000).decode("utf-8", "replace") or "{}")
+                n = d.get("result_count", d.get("results") and len(d["results"]))
+                print(f"  ✓ {nom:12s} HTTP {r.status}  résultats={n}")
+        except urllib.error.HTTPError as e:
+            try:
+                corps = e.read(300).decode("utf-8", "replace").replace("\n", " ")
+            except Exception:
+                corps = ""
+            print(f"  ✗ {nom:12s} HTTP {e.code}  {corps[:220]}")
+        except Exception as e:
+            print(f"  ✗ {nom:12s} {type(e).__name__}: {e}")
+        time.sleep(1.0)
 
 
 def retenir(res, nom):
@@ -95,7 +143,13 @@ def main():
     ap.add_argument("--sortie", default="assets/titres/openverse")
     ap.add_argument("--limite", type=int, default=0)
     ap.add_argument("--par-societe", type=int, default=2)
+    ap.add_argument("--diag", action="store_true",
+                    help="tester l'API sous plusieurs formes et sortir")
     a = ap.parse_args()
+
+    if a.diag:
+        diagnostic()
+        return
 
     w = json.load(open("watchlist.json"))
     u = json.load(open("universe.json"))

@@ -14,6 +14,10 @@ on:
         description: "Candidats téléchargés par société"
         type: string
         default: "2"
+      diag:
+        description: "Diagnostic seul : tester l'API et s'arrêter"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -32,13 +36,17 @@ jobs:
         with:
           python-version: '3.13'
       - run: pip install --quiet Pillow
+      - name: Diagnostic de l'API
+        if: inputs.diag == true || inputs.diag == 'true'
+        run: python tools/photos_openverse.py --diag
       - name: Chercher sur Openverse
+        if: ${{ inputs.diag != true && inputs.diag != 'true' }}
         run: |
           python tools/photos_openverse.py \
             --limite ${{ inputs.limite || '0' }} \
             --par-societe ${{ inputs.par_societe || '2' }}
       - name: Publier le rapport
-        if: always()
+        if: ${{ always() && inputs.diag != true && inputs.diag != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: photos-openverse
@@ -47,7 +55,7 @@ jobs:
             assets/titres/openverse/
           retention-days: 7
       - name: Commiter pour arbitrage visuel
-        if: always()
+        if: ${{ always() && inputs.diag != true && inputs.diag != 'true' }}
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
