@@ -300,11 +300,12 @@
   "credit": "Prholenstein · CC BY-SA 4.0"
  },
  "HSBA.L": {
-  "legende": "Tour HSBC, Canary Wharf, Londres",
-  "source": "File:8-Canada-Square (cropped).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:8-Canada-Square_(cropped).jpg",
-  "licence": "CC BY-SA 4.0",
-  "credit": "auteur non précisé · CC BY-SA 4.0"
+  "legende": "Distributeurs HSBC à Hong Kong",
+  "source": "File:HK Causeway Bay Times Square basement interior 10 HSBC ATM.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:HK_Causeway_Bay_Times_Square_basement_interior_10_HSBC_ATM.JPG",
+  "licence": "CC BY-SA 3.0",
+  "type": "produit",
+  "credit": "Wuaiubon · CC BY-SA 3.0"
  },
  "ICE": {
   "legende": "Salle des marchés du New York Stock Exchange, filiale d'Intercontinental Exchange",
@@ -322,10 +323,12 @@
   "credit": "Raimond Spekking · CC BY-SA 4.0"
  },
  "INTC": {
-  "legende": "Bureaux d'Intel à Tsukuba, Japon",
-  "source": "File:Intel Japan Tsukuba Office.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Intel_Japan_Tsukuba_Office.jpg",
-  "licence": "CC0"
+  "legende": "Plaquette de processeurs Pentium d'Intel",
+  "source": "File:Wafer with Pentium chips.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Wafer_with_Pentium_chips.jpg",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "Naotake Murayama from Los Altos, CA, USA · CC BY 2.0"
  },
  "INTU": {
   "legende": "TurboTax d'Intuit, édition 2003",
@@ -371,10 +374,12 @@
   "type": "produit"
  },
  "META": {
-  "legende": "Siège de Meta Platforms, Menlo Park",
-  "source": "File:Meta Platforms Headquarters Menlo Park California.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg",
-  "licence": "CC0"
+  "legende": "Casque Meta Quest 3",
+  "source": "File:Visitor using a Meta Quest 3 VR headset at IPP Greifswald 2025.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Visitor_using_a_Meta_Quest_3_VR_headset_at_IPP_Greifswald_2025.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Siarhei Besarab · CC BY-SA 4.0"
  },
  "MPWR": {
   "legende": "Puce Monolithic Power Systems MPS1613 sur une carte de téléviseur",
@@ -405,12 +410,12 @@
   "licence": "Public domain"
  },
  "MU": {
-  "legende": "Clé USB Crucial, marque de Micron",
-  "source": "File:Crucial 512 MB Gizmo USB 2 pen drive (c 2005) (outside).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Crucial_512_MB_Gizmo_USB_2_pen_drive_(c_2005)_(outside).jpg",
+  "legende": "SSD Crucial MX300, marque de Micron",
+  "source": "File:Crucial SSD MX300 525GB-8478.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Crucial_SSD_MX300_525GB-8478.jpg",
   "licence": "CC BY-SA 4.0",
   "type": "produit",
-  "credit": "Multicherry · CC BY-SA 4.0"
+  "credit": "Raimond Spekking · CC BY-SA 4.0"
  },
  "NDAQ": {
   "legende": "Écrans du MarketSite Nasdaq, Times Square",
@@ -534,12 +539,12 @@
   "licence": "CC0 1.0"
  },
  "STX": {
-  "legende": "Contrôleur d'un disque dur Seagate",
-  "source": "File:Seagate ST9300AG - Seagate 100075-501 on controller board-8912.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg",
-  "licence": "CC BY-SA 4.0",
+  "legende": "Disque dur Seagate ouvert, plateau et bras de lecture",
+  "source": "File:Seagate ST33232A hard disk inner view.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Seagate_ST33232A_hard_disk_inner_view.jpg",
+  "licence": "CC BY-SA 3.0",
   "type": "produit",
-  "credit": "Raimond Spekking · CC BY-SA 4.0"
+  "credit": "Eric Gaba (Sting - fr:Sting)\n\n This  image was created with CombineZP by 11  ( I · CC BY-SA 3.0"
  },
  "SU.PA": {
   "legende": "Usine Schneider Electric",

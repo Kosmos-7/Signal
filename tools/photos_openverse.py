@@ -180,6 +180,9 @@ def main():
     ap.add_argument("--sortie", default="assets/titres/openverse")
     ap.add_argument("--limite", type=int, default=0)
     ap.add_argument("--par-societe", type=int, default=2)
+    ap.add_argument("--tickers", default="",
+                    help="liste de tickers separes par des virgules, y compris "
+                         "des fiches deja illustrees (repasse ciblee)")
     ap.add_argument("--diag", action="store_true",
                     help="tester l'API sous plusieurs formes et sortir")
     a = ap.parse_args()
@@ -196,6 +199,14 @@ def main():
     if os.path.exists("assets/titres/LEGENDES.json"):
         deja = set(json.load(open("assets/titres/LEGENDES.json", encoding="utf-8")))
     cibles = [t for t in sorted(noms) if t not in deja]
+    if a.tickers:
+        # Repasse ciblee : on veut pouvoir revenir sur une fiche DEJA illustree
+        # dont la revue d'ensemble a juge l'image faible.
+        vises = [t.strip() for t in a.tickers.split(",") if t.strip()]
+        inconnus = [t for t in vises if t not in noms]
+        if inconnus:
+            raise SystemExit(f"tickers absents de l'univers : {inconnus}")
+        cibles = vises
     if a.limite:
         cibles = cibles[: a.limite]
     os.makedirs(a.sortie, exist_ok=True)
