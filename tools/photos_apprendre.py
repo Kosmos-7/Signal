@@ -44,8 +44,9 @@ LARGEUR, HAUTEUR = 1700, 531
 # qu'on voit et n'a rien d'accessoire.
 # « luminosite » corrige l'exposition quand le sujet l'impose : une page de
 # journal est un aplat blanc, et sur un fond sombre un aplat blanc n'aère pas,
-# il éblouit. Les valeurs ne sont pas décoratives, elles ont été réglées en
-# regardant le résultat.
+# il éblouit. « contraste » sert au cas inverse, un document pâle dont le tracé
+# disparaît une fois la bande assombrie. Les valeurs ne sont pas décoratives,
+# elles ont été réglées en regardant le résultat.
 # « alt » décrit l'image pour qui ne la voit pas ; « legende » dit ce qu'on
 # regarde. Les deux sont écrits ici et nulle part ailleurs : c'est ce script qui
 # pose les balises dans apprendre.html, pour qu'une légende et son image ne
@@ -53,7 +54,7 @@ LARGEUR, HAUTEUR = 1700, 531
 ILLUSTRATIONS = {
     "s1": {
         "fichier": "Wall Street - New York Stock Exchange.jpg",
-        "cadrage": 0.45,
+        "cadrage": 0.32,
         "legende": "La façade du New York Stock Exchange, Wall Street",
         "credit": "Carlos Delgado · CC BY-SA 3.0",
         "alt": "Façade à colonnes du New York Stock Exchange, drapeaux "
@@ -105,7 +106,7 @@ ILLUSTRATIONS = {
     },
     "s7": {
         "fichier": "Stacks of Canadian Coins (16269886909).jpg",
-        "cadrage": 0.55,
+        "cadrage": 0.82,
         "legende": "Piles de pièces",
         "credit": "KMR Photography · CC BY 2.0",
         "alt": "Trois piles de pièces de monnaie de hauteurs inégales sur une "
@@ -140,8 +141,9 @@ ILLUSTRATIONS = {
         "fichier": "Logbook of the Almira (Ship) of Edgartown, mastered by "
                    "Charles M. Marchant on voyage from 5 Aug. 1869-1870 (1869) "
                    "(14774067644).jpg",
-        "cadrage": 0.4,
-        "luminosite": 0.6,
+        "cadrage": 0.52,
+        "luminosite": 0.62,
+        "contraste": 1.45,
         "legende": "Journal de bord de l'Almira, 1869, calculs de route",
         "credit": "Nantucket Historical Association · sans restriction connue",
         "alt": "Page manuscrite d'un journal de bord de baleinier, colonnes de "
@@ -188,7 +190,7 @@ def source(fichier):
     }
 
 
-def prepare(brut, chemin, cadrage, luminosite):
+def prepare(brut, chemin, cadrage, luminosite, contraste):
     from PIL import Image, ImageEnhance
     im = Image.open(io.BytesIO(brut)).convert("RGB")
     cible = LARGEUR / HAUTEUR
@@ -204,6 +206,8 @@ def prepare(brut, chemin, cadrage, luminosite):
         im = im.crop((0, h, im.width, h + nh))
     im = im.resize((LARGEUR, HAUTEUR), Image.LANCZOS)
     im = ImageEnhance.Brightness(im).enhance(luminosite)
+    if contraste != 1.0:
+        im = ImageEnhance.Contrast(im).enhance(contraste)
     im = ImageEnhance.Color(im).enhance(0.85)
     im.save(chemin, "JPEG", quality=82, optimize=True, progressive=True)
     return os.path.getsize(chemin)
@@ -276,7 +280,8 @@ def main():
         req = urllib.request.Request(src["url"], headers={"User-Agent": UA})
         brut = urllib.request.urlopen(req, timeout=60).read()
         chemin = os.path.join(SORTIE, f"{slot}.jpg")
-        poids = prepare(brut, chemin, cfg["cadrage"], cfg.get("luminosite", 0.74))
+        poids = prepare(brut, chemin, cfg["cadrage"],
+                        cfg.get("luminosite", 0.74), cfg.get("contraste", 1.0))
         registre[slot] = {
             "legende": cfg["legende"], "credit": cfg["credit"],
             "fichier": cfg["fichier"], "page": src["page"],
