@@ -636,8 +636,13 @@ function illuSociete(tk){
   // Le crédit d'auteur n'est pas relégué dans un fichier que personne n'ouvre :
   // les licences CC-BY et CC-BY-SA l'exigent, il s'affiche donc sur la fiche.
   const cr=P.credit?'<span class="d-cred">'+sv(P.credit)+'</span>':'';
+  // L'empreinte du contenu dans l'adresse : une photo remplacee garde le meme
+  // chemin, donc le navigateur et le CDN servaient leur copie en cache et l'on
+  // voyait l'ANCIENNE image sous la NOUVELLE legende. Une image inchangee garde
+  // son adresse et reste en cache ; seule celle qui change est rechargee.
   return '<figure class="d-illu"><img src="assets/titres/'+encodeURIComponent(tk)+
-    '.jpg" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
+    '.jpg'+(P.v?'?v='+encodeURIComponent(P.v):'')+
+    '" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
     '<figcaption><b>'+sv(P.legende)+'</b>'+cr+'</figcaption></figure>';
 }
 function themeImg(id,label){
@@ -645,7 +650,9 @@ function themeImg(id,label){
   const cap=P?'<figcaption class="tc-cap"><b>'+sv(P.legende)+'</b>'+
     (P.credit?'<i>'+sv(P.credit)+'</i>':'')+'</figcaption>':'';
   return '<figure class="tc-img"><span class="tc-fb">'+sv(label||id)+'</span>'+
-    '<img src="assets/themes/'+encodeURIComponent(id)+'.jpg" alt="" loading="lazy" onerror="this.remove()">'+
+    '<img src="assets/themes/'+encodeURIComponent(id)+'.jpg'+
+      (P&&P.v?'?v='+encodeURIComponent(P.v):'')+
+      '" alt="" loading="lazy" onerror="this.remove()">'+
     cap+'</figure>';
 }
 function topChips(meta){
