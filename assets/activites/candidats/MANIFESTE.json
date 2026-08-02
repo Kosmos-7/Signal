@@ -185,7 +185,7 @@
    "largeur": 2193,
    "hauteur": 1490,
    "fichier": "serveurs_3.jpg",
-   "poids": 67609,
+   "poids": 67357,
    "terme": "Argonne supercomputer"
   }
  ],
@@ -367,15 +367,15 @@
    "terme": "payment terminal card reader"
   },
   {
-   "titre": "File:Cash register and change machine, National Cash Register Company, 1959 - National Museum of American History - DSC00006.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Cash_register_and_change_machine%2C_National_Cash_Register_Company%2C_1959_-_National_Museum_of_American_History_-_DSC00006.jpg/1920px-Cash_register_and_change_machine%2C_National_Cash_Register_Company%2C_1959_-_National_Museum_of_American_History_-_DSC00006.jpg",
-   "page": "https://commons.wikimedia.org/wiki/File:Cash_register_and_change_machine,_National_Cash_Register_Company,_1959_-_National_Museum_of_American_History_-_DSC00006.jpg",
-   "licence": "CC0",
-   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:Daderot\" title=\"User:Daderot\">Daderot</a>",
-   "largeur": 5321,
-   "hauteur": 3106,
+   "titre": "File:Cash Register and Typewriter Display - DPLA - 5e499ad84f9cf1b1657611d3df3e147c.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cash_Register_and_Typewriter_Display_-_DPLA_-_5e499ad84f9cf1b1657611d3df3e147c.jpg/1920px-Cash_Register_and_Typewriter_Display_-_DPLA_-_5e499ad84f9cf1b1657611d3df3e147c.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Cash_Register_and_Typewriter_Display_-_DPLA_-_5e499ad84f9cf1b1657611d3df3e147c.jpg",
+   "licence": "Public domain",
+   "auteur": "",
+   "largeur": 2048,
+   "hauteur": 1633,
    "fichier": "paiements_3.jpg",
-   "poids": 53449,
+   "poids": 116037,
    "terme": "cash register machine"
   }
  ],
@@ -431,52 +431,16 @@
  ],
  "peages": [
   {
-   "titre": "File:Wall Street bubbles - Always the same - Keppler 1901.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Wall_Street_bubbles_-_Always_the_same_-_Keppler_1901.jpg/1920px-Wall_Street_bubbles_-_Always_the_same_-_Keppler_1901.jpg",
-   "page": "https://commons.wikimedia.org/wiki/File:Wall_Street_bubbles_-_Always_the_same_-_Keppler_1901.jpg",
+   "titre": "File:Hughes telegraph.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Hughes_telegraph.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hughes_telegraph.jpg",
    "licence": "Public domain",
-   "auteur": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Udo_Keppler\" class=\"extiw\" title=\"w:en:Udo Keppler\"><span title=\"American",
-   "largeur": 3947,
-   "hauteur": 2664,
+   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:Olaf\" title=\"User:Olaf\">Olaf</a>",
+   "largeur": 1600,
+   "hauteur": 1200,
    "fichier": "peages_0.jpg",
-   "poids": 128393,
-   "terme": "stock ticker tape machine"
-  },
-  {
-   "titre": "File:ScotiaPlaza.JPG",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/ScotiaPlaza.JPG/1920px-ScotiaPlaza.JPG",
-   "page": "https://commons.wikimedia.org/wiki/File:ScotiaPlaza.JPG",
-   "licence": "CC0",
-   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:Raysonho\" title=\"User:Raysonho\">Raysonho @ Open Grid Scheduler / Grid Engine<",
-   "largeur": 4928,
-   "hauteur": 3264,
-   "fichier": "peages_1.jpg",
-   "poids": 72673,
-   "terme": "stock exchange display board"
-  },
-  {
-   "titre": "File:John A. Morris, Lottery King in The New York Times on February 11, 1894.png",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/John_A._Morris%2C_Lottery_King_in_The_New_York_Times_on_February_11%2C_1894.png/1920px-John_A._Morris%2C_Lottery_King_in_The_New_York_Times_on_February_11%2C_1894.png",
-   "page": "https://commons.wikimedia.org/wiki/File:John_A._Morris,_Lottery_King_in_The_New_York_Times_on_February_11,_1894.png",
-   "licence": "Public domain",
-   "auteur": "<span lang=\"en\">Anonymous</span><span style=\"display:none\">Unknown author</span>",
-   "largeur": 2427,
-   "hauteur": 4995,
-   "fichier": "peages_2.jpg",
-   "poids": 172294,
-   "terme": "financial newspaper stock listings"
-  },
-  {
-   "titre": "File:St. Louis Post-Dispatch of St. Louis, Missouri on August 2, 1943.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/St._Louis_Post-Dispatch_of_St._Louis%2C_Missouri_on_August_2%2C_1943.jpg",
-   "page": "https://commons.wikimedia.org/wiki/File:St._Louis_Post-Dispatch_of_St._Louis,_Missouri_on_August_2,_1943.jpg",
-   "licence": "Public domain",
-   "auteur": "Unknown author<span style=\"display: none;\">Unknown author</span>",
-   "largeur": 1576,
-   "hauteur": 2046,
-   "fichier": "peages_3.jpg",
-   "poids": 166779,
-   "terme": "financial newspaper stock listings"
+   "poids": 74935,
+   "terme": "telegraph ticker instrument"
   }
  ],
  "tech-logiciel": [
@@ -579,24 +543,280 @@
    "fichier": "finance-generale_0.jpg",
    "poids": 126837,
    "terme": "stock exchange trading floor"
+  },
+  {
+   "titre": "File:Standard Stock and Mining Exchange trading floor, Toronto.png",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Standard_Stock_and_Mining_Exchange_trading_floor%2C_Toronto.png/1920px-Standard_Stock_and_Mining_Exchange_trading_floor%2C_Toronto.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Standard_Stock_and_Mining_Exchange_trading_floor,_Toronto.png",
+   "licence": "Public domain",
+   "auteur": "The Financial Post",
+   "largeur": 2229,
+   "hauteur": 2840,
+   "fichier": "finance-generale_1.jpg",
+   "poids": 127120,
+   "terme": "stock exchange trading floor"
+  },
+  {
+   "titre": "File:Trading floor, New York Stock Exchange, New York, New York LCCN2011630168.tif",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Trading_floor%2C_New_York_Stock_Exchange%2C_New_York%2C_New_York_LCCN2011630168.tif/lossy-page1-1920px-Trading_floor%2C_New_York_Stock_Exchange%2C_New_York%2C_New_York_LCCN2011630168.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Trading_floor,_New_York_Stock_Exchange,_New_York,_New_York_LCCN2011630168.tif",
+   "licence": "Public domain",
+   "auteur": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Carol_M._Highsmith\" class=\"extiw\" title=\"w:en:Carol M. Highsmith\"><span t",
+   "largeur": 3442,
+   "hauteur": 4319,
+   "fichier": "finance-generale_2.jpg",
+   "poids": 127054,
+   "terme": "stock exchange trading floor"
+  },
+  {
+   "titre": "File:Trading floor of the New York Stock Exchange, New York City LCCN2011632435.tif",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Trading_floor_of_the_New_York_Stock_Exchange%2C_New_York_City_LCCN2011632435.tif/lossy-page1-1920px-Trading_floor_of_the_New_York_Stock_Exchange%2C_New_York_City_LCCN2011632435.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Trading_floor_of_the_New_York_Stock_Exchange,_New_York_City_LCCN2011632435.tif",
+   "licence": "Public domain",
+   "auteur": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Carol_M._Highsmith\" class=\"extiw\" title=\"w:en:Carol M. Highsmith\"><span t",
+   "largeur": 4793,
+   "hauteur": 6106,
+   "fichier": "finance-generale_3.jpg",
+   "poids": 117135,
+   "terme": "stock exchange trading floor"
   }
  ],
- "industrie": [],
- "sante": [],
- "conso": [],
+ "industrie": [
+  {
+   "titre": "File:H. W. Hocker Manufacturing Company Factory, 224 Front Street, Lewes, Sussex County, DE HAER DEL,3-LEW,8-2.tif",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/H._W._Hocker_Manufacturing_Company_Factory%2C_224_Front_Street%2C_Lewes%2C_Sussex_County%2C_DE_HAER_DEL%2C3-LEW%2C8-2.tif/lossy-page1-1920px-H._W._Hocker_Manufacturing_Company_Factory%2C_224_Front_Street%2C_Lewes%2C_Sussex_County%2C_DE_HAER_DEL%2C3-LEW%2C8-2.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:H._W._Hocker_Manufacturing_Company_Factory,_224_Front_Street,_Lewes,_Sussex_County,_DE_HAER_DEL,3-LEW,8-2.tif",
+   "licence": "Public domain",
+   "auteur": "<div class=\"fn value\">\n<p>Related names:\n</p>\n<dl><dd>Hocker, Harold W</dd>\n<dd>H. W. Hocker Company</dd></dl></div>",
+   "largeur": 4874,
+   "hauteur": 3869,
+   "fichier": "industrie_0.jpg",
+   "poids": 120340,
+   "terme": "factory production line machinery"
+  },
+  {
+   "titre": "File:H. W. Hocker Manufacturing Company Factory, 224 Front Street, Lewes, Sussex County, DE HAER DEL,3-LEW,8-3.tif",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/H._W._Hocker_Manufacturing_Company_Factory%2C_224_Front_Street%2C_Lewes%2C_Sussex_County%2C_DE_HAER_DEL%2C3-LEW%2C8-3.tif/lossy-page1-1920px-H._W._Hocker_Manufacturing_Company_Factory%2C_224_Front_Street%2C_Lewes%2C_Sussex_County%2C_DE_HAER_DEL%2C3-LEW%2C8-3.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:H._W._Hocker_Manufacturing_Company_Factory,_224_Front_Street,_Lewes,_Sussex_County,_DE_HAER_DEL,3-LEW,8-3.tif",
+   "licence": "Public domain",
+   "auteur": "<div class=\"fn value\">\n<p>Related names:\n</p>\n<dl><dd>Hocker, Harold W</dd>\n<dd>H. W. Hocker Company</dd></dl></div>",
+   "largeur": 4906,
+   "hauteur": 3911,
+   "fichier": "industrie_1.jpg",
+   "poids": 98498,
+   "terme": "factory production line machinery"
+  },
+  {
+   "titre": "File:H. W. Hocker Manufacturing Company Factory, 224 Front Street, Lewes, Sussex County, DE HAER DEL,3-LEW,8-4.tif",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/H._W._Hocker_Manufacturing_Company_Factory%2C_224_Front_Street%2C_Lewes%2C_Sussex_County%2C_DE_HAER_DEL%2C3-LEW%2C8-4.tif/lossy-page1-1920px-H._W._Hocker_Manufacturing_Company_Factory%2C_224_Front_Street%2C_Lewes%2C_Sussex_County%2C_DE_HAER_DEL%2C3-LEW%2C8-4.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:H._W._Hocker_Manufacturing_Company_Factory,_224_Front_Street,_Lewes,_Sussex_County,_DE_HAER_DEL,3-LEW,8-4.tif",
+   "licence": "Public domain",
+   "auteur": "<div class=\"fn value\">\n<p>Related names:\n</p>\n<dl><dd>Hocker, Harold W</dd>\n<dd>H. W. Hocker Company</dd></dl></div>",
+   "largeur": 3916,
+   "hauteur": 4895,
+   "fichier": "industrie_2.jpg",
+   "poids": 102301,
+   "terme": "factory production line machinery"
+  },
+  {
+   "titre": "File:H. W. Hocker Manufacturing Company Factory, 224 Front Street, Lewes, Sussex County, DE HAER DEL,3-LEW,8-5.tif",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/H._W._Hocker_Manufacturing_Company_Factory%2C_224_Front_Street%2C_Lewes%2C_Sussex_County%2C_DE_HAER_DEL%2C3-LEW%2C8-5.tif/lossy-page1-1920px-H._W._Hocker_Manufacturing_Company_Factory%2C_224_Front_Street%2C_Lewes%2C_Sussex_County%2C_DE_HAER_DEL%2C3-LEW%2C8-5.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:H._W._Hocker_Manufacturing_Company_Factory,_224_Front_Street,_Lewes,_Sussex_County,_DE_HAER_DEL,3-LEW,8-5.tif",
+   "licence": "Public domain",
+   "auteur": "<div class=\"fn value\">\n<p>Related names:\n</p>\n<dl><dd>Hocker, Harold W</dd>\n<dd>H. W. Hocker Company</dd></dl></div>",
+   "largeur": 4884,
+   "hauteur": 3904,
+   "fichier": "industrie_3.jpg",
+   "poids": 90897,
+   "terme": "factory production line machinery"
+  }
+ ],
+ "sante": [
+  {
+   "titre": "File:Birnenkolben.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Birnenkolben.jpg/1920px-Birnenkolben.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Birnenkolben.jpg",
+   "licence": "CC0",
+   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:Tinux\" title=\"User:Tinux\">Tinux</a>",
+   "largeur": 3476,
+   "hauteur": 2820,
+   "fichier": "sante_0.jpg",
+   "poids": 59166,
+   "terme": "laboratory glassware flasks"
+  },
+  {
+   "titre": "File:Glassware.JPG",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Glassware.JPG/1920px-Glassware.JPG",
+   "page": "https://commons.wikimedia.org/wiki/File:Glassware.JPG",
+   "licence": "Public domain",
+   "auteur": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Medicuspetrus&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"",
+   "largeur": 3872,
+   "hauteur": 2592,
+   "fichier": "sante_1.jpg",
+   "poids": 43964,
+   "terme": "laboratory glassware flasks"
+  },
+  {
+   "titre": "File:Bronglais General Hospital (Aberystwyth, Wales) - Department guide with lifts.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Bronglais_General_Hospital_%28Aberystwyth%2C_Wales%29_-_Department_guide_with_lifts.jpg/1920px-Bronglais_General_Hospital_%28Aberystwyth%2C_Wales%29_-_Department_guide_with_lifts.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bronglais_General_Hospital_(Aberystwyth,_Wales)_-_Department_guide_with_lifts.jpg",
+   "licence": "CC0",
+   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:Cassolotl\" title=\"User:Cassolotl\">Cassian Lodge</a>",
+   "largeur": 4032,
+   "hauteur": 3024,
+   "fichier": "sante_2.jpg",
+   "poids": 85131,
+   "terme": "MRI scanner room"
+  },
+  {
+   "titre": "File:Bronglais General Hospital (Aberystwyth, Wales) - part of department guide.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Bronglais_General_Hospital_%28Aberystwyth%2C_Wales%29_-_part_of_department_guide.jpg/1920px-Bronglais_General_Hospital_%28Aberystwyth%2C_Wales%29_-_part_of_department_guide.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bronglais_General_Hospital_(Aberystwyth,_Wales)_-_part_of_department_guide.jpg",
+   "licence": "CC0",
+   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:Cassolotl\" title=\"User:Cassolotl\">Cassian Lodge</a>",
+   "largeur": 4032,
+   "hauteur": 3024,
+   "fichier": "sante_3.jpg",
+   "poids": 134285,
+   "terme": "MRI scanner room"
+  }
+ ],
+ "conso": [
+  {
+   "titre": "File:Grocery Store display--01.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Grocery_Store_display--01.jpg/1920px-Grocery_Store_display--01.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Grocery_Store_display--01.jpg",
+   "licence": "CC0",
+   "auteur": "Gary Hoover",
+   "largeur": 2570,
+   "hauteur": 4042,
+   "fichier": "conso_0.jpg",
+   "poids": 101162,
+   "terme": "grocery store interior"
+  },
+  {
+   "titre": "File:Grocery Store display--02.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Grocery_Store_display--02.jpg/1920px-Grocery_Store_display--02.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Grocery_Store_display--02.jpg",
+   "licence": "CC0",
+   "auteur": "Gary Hoover",
+   "largeur": 4128,
+   "hauteur": 2773,
+   "fichier": "conso_1.jpg",
+   "poids": 99593,
+   "terme": "grocery store interior"
+  },
+  {
+   "titre": "File:Grocery Store display--03.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Grocery_Store_display--03.jpg/1920px-Grocery_Store_display--03.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Grocery_Store_display--03.jpg",
+   "licence": "CC0",
+   "auteur": "Gary Hoover",
+   "largeur": 4170,
+   "hauteur": 2794,
+   "fichier": "conso_2.jpg",
+   "poids": 101840,
+   "terme": "grocery store interior"
+  },
+  {
+   "titre": "File:Grocery Store display--04.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Grocery_Store_display--04.jpg/1920px-Grocery_Store_display--04.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Grocery_Store_display--04.jpg",
+   "licence": "CC0",
+   "auteur": "Gary Hoover",
+   "largeur": 2783,
+   "hauteur": 4149,
+   "fichier": "conso_3.jpg",
+   "poids": 104831,
+   "terme": "grocery store interior"
+  }
+ ],
  "energie-reseau": [],
- "materiaux": [],
+ "materiaux": [
+  {
+   "titre": "File:Crew of a Sherman-tank south of Vaucelles.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Crew_of_a_Sherman-tank_south_of_Vaucelles.jpg/1920px-Crew_of_a_Sherman-tank_south_of_Vaucelles.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Crew_of_a_Sherman-tank_south_of_Vaucelles.jpg",
+   "licence": "Public domain",
+   "auteur": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+   "largeur": 2480,
+   "hauteur": 3472,
+   "fichier": "materiaux_0.jpg",
+   "poids": 113733,
+   "terme": "industrial gas tanks"
+  },
+  {
+   "titre": "File:Shuttle external fuel tank jettisoned.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Shuttle_external_fuel_tank_jettisoned.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Shuttle_external_fuel_tank_jettisoned.jpg",
+   "licence": "Public domain",
+   "auteur": "NASA",
+   "largeur": 1824,
+   "hauteur": 1488,
+   "fichier": "materiaux_1.jpg",
+   "poids": 64638,
+   "terme": "industrial gas tanks"
+  },
+  {
+   "titre": "File:Tank Car, Airco Industrial Gases (10588935156).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Tank_Car%2C_Airco_Industrial_Gases_%2810588935156%29.jpg/1920px-Tank_Car%2C_Airco_Industrial_Gases_%2810588935156%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tank_Car,_Airco_Industrial_Gases_(10588935156).jpg",
+   "licence": "CC0",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/101561334@N08\">Gary Todd</a> from Xinzheng, ",
+   "largeur": 4752,
+   "hauteur": 3168,
+   "fichier": "materiaux_2.jpg",
+   "poids": 63978,
+   "terme": "industrial gas tanks"
+  }
+ ],
  "immobilier": [
   {
-   "titre": "File:EXTERIOR ELEVATION OF TEST CELL SE-4 AND THE CENTER EAST CE WINGS OF THE ENGINE RESEARCH BUILDING ERB - NARA - 17418446.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418446.jpg/1920px-EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418446.jpg",
-   "page": "https://commons.wikimedia.org/wiki/File:EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418446.jpg",
+   "titre": "File:EXTERIOR ELEVATION OF TEST CELL SE-4 AND THE CENTER EAST CE WINGS OF THE ENGINE RESEARCH BUILDING ERB - NARA - 17418448.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418448.jpg/1920px-EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418448.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418448.jpg",
    "licence": "Public domain",
    "auteur": "<div class=\"fn value\">\nUnknown author<span style=\"display: none;\">Unknown author</span> or not provided</div>",
    "largeur": 6167,
    "hauteur": 4854,
    "fichier": "immobilier_0.jpg",
-   "poids": 97214,
+   "poids": 75397,
+   "terme": "data center building exterior"
+  },
+  {
+   "titre": "File:EXTERIOR ELEVATION OF TEST CELL SE-4 AND THE CENTER EAST CE WINGS OF THE ENGINE RESEARCH BUILDING ERB - NARA - 17418450.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418450.jpg/1920px-EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418450.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:EXTERIOR_ELEVATION_OF_TEST_CELL_SE-4_AND_THE_CENTER_EAST_CE_WINGS_OF_THE_ENGINE_RESEARCH_BUILDING_ERB_-_NARA_-_17418450.jpg",
+   "licence": "Public domain",
+   "auteur": "<div class=\"fn value\">\nUnknown author<span style=\"display: none;\">Unknown author</span> or not provided</div>",
+   "largeur": 6167,
+   "hauteur": 4854,
+   "fichier": "immobilier_1.jpg",
+   "poids": 88927,
+   "terme": "data center building exterior"
+  },
+  {
+   "titre": "File:EXTERIOR OF LUNAR RECEIVING LABORATORY BUILDING 37 in 1967 (s67-50718).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/EXTERIOR_OF_LUNAR_RECEIVING_LABORATORY_BUILDING_37_in_1967_%28s67-50718%29.jpg/1920px-EXTERIOR_OF_LUNAR_RECEIVING_LABORATORY_BUILDING_37_in_1967_%28s67-50718%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:EXTERIOR_OF_LUNAR_RECEIVING_LABORATORY_BUILDING_37_in_1967_(s67-50718).jpg",
+   "licence": "Public domain",
+   "auteur": "NASA",
+   "largeur": 3000,
+   "hauteur": 2400,
+   "fichier": "immobilier_2.jpg",
+   "poids": 63081,
+   "terme": "data center building exterior"
+  },
+  {
+   "titre": "File:EXTERIOR VIEW OF RAC RESEARCH ANALYSIS CENTER - NARA - 17496902.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/EXTERIOR_VIEW_OF_RAC_RESEARCH_ANALYSIS_CENTER_-_NARA_-_17496902.jpg/1920px-EXTERIOR_VIEW_OF_RAC_RESEARCH_ANALYSIS_CENTER_-_NARA_-_17496902.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:EXTERIOR_VIEW_OF_RAC_RESEARCH_ANALYSIS_CENTER_-_NARA_-_17496902.jpg",
+   "licence": "Public domain",
+   "auteur": "<div class=\"fn value\">\nUnknown author<span style=\"display: none;\">Unknown author</span> or not provided</div>",
+   "largeur": 6219,
+   "hauteur": 4853,
+   "fichier": "immobilier_3.jpg",
+   "poids": 95674,
    "terme": "data center building exterior"
   }
  ]
