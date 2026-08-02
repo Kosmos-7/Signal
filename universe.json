@@ -70,7 +70,7 @@
      ]
     },
     {
-     "label": "Vendeurs de capacité · serveurs, colocation, néoclouds",
+     "label": "Serveurs, data centers & néoclouds",
      "tickers": [
       "DELL",
       "HPE",
@@ -82,7 +82,7 @@
      ]
     },
     {
-     "label": "Hyperscalers · acheteurs de capacité",
+     "label": "Hyperscalers & cloud",
      "tickers": [
       "MSFT",
       "GOOGL",

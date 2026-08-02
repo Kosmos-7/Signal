@@ -130,12 +130,16 @@ THEMES_CURES = [
                 # Ce maillon VEND de la capacité de calcul : Dell et HPE
                 # vendent les serveurs, Equinix et Digital Realty louent le
                 # mètre carré et le mégawatt, les néoclouds louent l'heure de
-                # GPU. Leur client, c'est le maillon suivant. Les deux étaient
-                # intitulés « serveurs, data centers » et « hyperscalers,
-                # cloud », deux formules qui se recouvraient au point qu'on ne
-                # voyait plus ce qui les séparait : le libellé dit maintenant
-                # le SENS DE LA TRANSACTION, qui est toute la différence.
-                "label": "Vendeurs de capacité · serveurs, colocation, néoclouds",
+                # GPU. Leur client, c'est le maillon suivant, et c'est ce qui
+                # justifie de ne pas fondre les deux.
+                # Les libellés « vendeurs de capacité » et « acheteurs de
+                # capacité » ont été essayés le 02/08/2026 pour rendre cette
+                # opposition explicite, puis écartés : le propriétaire du dépôt
+                # préfère les intitulés d'origine, plus descriptifs de ce que
+                # les sociétés SONT que de la place qu'elles occupent dans la
+                # chaîne. L'explication reste ici, où elle sert au lecteur du
+                # code sans alourdir l'interface.
+                "label": "Serveurs, data centers & néoclouds",
                 "tickers": ["DELL", "HPE", "EQIX", "DLR",
                             "CRWV", "NBIS", "SHAZ"],
             },
@@ -153,7 +157,7 @@ THEMES_CURES = [
                 # cycle : ses capex SONT le chiffre d'affaires des six autres
                 # maillons. D'où l'intérêt de ne pas le fondre avec ses
                 # fournisseurs, dont il ne partage ni le modèle ni le risque.
-                "label": "Hyperscalers · acheteurs de capacité",
+                "label": "Hyperscalers & cloud",
                 "tickers": ["MSFT", "GOOGL", "AMZN", "META", "ORCL"],
             },
             {
