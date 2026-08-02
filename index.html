@@ -179,6 +179,16 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
     background:linear-gradient(140deg,rgba(116,182,223,.14),rgba(116,182,223,.03) 55%,rgba(255,255,255,.015))}
   .tc-img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.045) 0 1px,transparent 1px 9px)}
   .tc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
+  /* Légende de l'illustration, comme sur les fiches : on dit ce que montre la
+     photo. Sur la carte elle se pose en bas de l'image, au-dessus du liseré
+     diagonal, et ne gêne pas la lecture de la thèse à côté. */
+  .tc-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:.4rem .6rem;
+    background:linear-gradient(0deg,rgba(6,6,11,.9),rgba(6,6,11,0));
+    font:600 .5rem var(--mono);letter-spacing:1px;text-transform:uppercase;
+    color:var(--text3);line-height:1.35}
+  .tc-cap b{color:var(--text2);font-weight:600}
+  .tc-cap i{display:block;font-style:normal;font-size:.44rem;letter-spacing:.5px;
+    text-transform:none;opacity:.8;margin-top:1px}
   .tc-fb{position:relative;font:600 .6rem var(--mono);letter-spacing:2.4px;text-transform:uppercase;color:var(--text3);text-align:center;line-height:1.9;padding:0 14px;max-width:100%;overflow-wrap:anywhere}
   .tc-b{display:flex;flex-direction:column;flex:1;padding:.9rem 1rem 1rem;gap:.5rem}
   .tc-kind{font:600 .55rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 7px;align-self:flex-start}
@@ -377,7 +387,8 @@ const CHV=new Date().toISOString().slice(0,10);
                               qualite,valorisation,timing,themes:[id…],top30}}}
    Le fichier est OPTIONNEL : s'il manque, la page se replie sur la seule
    watchlist principale (watchlist.json) sans rien casser. */
-const PHOTOS={};   // ticker → {legende} des photos de sociétés vérifiées
+const PHOTOS={};     // ticker → {legende} des photos de sociétés vérifiées
+const PHOTOS_TH={};  // id de watchlist → {legende} de son illustration
 const U={themes:[],stocks:{},week:'',updated_at:'',universe_declared:null,universe_scored:null,activites:null};
 const TBY={};              // id de thème → méta
 const WL={};               // ticker → fiche complète (top 30, watchlist.json)
@@ -401,9 +412,13 @@ Promise.all([
   fetch('universe.json?v='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
   // Photos de sociétés vérifiées une à une. Fichier facultatif : sans lui, les
   // fiches gardent leur illustration d'activité.
-  fetch('assets/titres/LEGENDES.json?v='+CHV).then(r=>r.ok?r.json():{}).catch(()=>({}))
-]).then(([wl,an,un,ph])=>{
+  fetch('assets/titres/LEGENDES.json?v='+CHV).then(r=>r.ok?r.json():{}).catch(()=>({})),
+  // Légendes des illustrations de watchlist. Facultatif comme les autres :
+  // sans le fichier, les cartes gardent leur image sans légende.
+  fetch('assets/themes/LEGENDES.json?v='+CHV).then(r=>r.ok?r.json():{}).catch(()=>({}))
+]).then(([wl,an,un,ph,pt])=>{
   Object.assign(PHOTOS, ph||{});
+  Object.assign(PHOTOS_TH, pt||{});
   Object.assign(A, an||{});
   stocks=(wl.stocks||[]).slice().sort((a,b)=>b.score-a.score);
   stocks.forEach(s=>{WL[s.ticker]=s;});
@@ -631,8 +646,12 @@ function illuActivite(tk){
     '<figcaption>Illustration&nbsp;: <b>'+sv(L[cle]||cle)+'</b></figcaption></figure>';
 }
 function themeImg(id,label){
-  return '<div class="tc-img"><span class="tc-fb">'+sv(label||id)+'</span>'+
-    '<img src="assets/themes/'+encodeURIComponent(id)+'.jpg" alt="" loading="lazy" onerror="this.remove()"></div>';
+  const P=PHOTOS_TH[id];
+  const cap=P?'<figcaption class="tc-cap"><b>'+sv(P.legende)+'</b>'+
+    (P.credit?'<i>'+sv(P.credit)+'</i>':'')+'</figcaption>':'';
+  return '<figure class="tc-img"><span class="tc-fb">'+sv(label||id)+'</span>'+
+    '<img src="assets/themes/'+encodeURIComponent(id)+'.jpg" alt="" loading="lazy" onerror="this.remove()">'+
+    cap+'</figure>';
 }
 function topChips(meta){
   return (meta.members||[]).slice(0,3).map(tk=>{
