@@ -1,8 +1,8 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-98 fiches sur 104 sont illustrées : 55 par un produit ou une
-activité, 32 par un site, 11 par un logo. 84 sont sous licence libre et
-14 sous licence non établie. Les 6 fiches restantes gardent
+87 fiches sur 104 portent une photo de leur société : 55 montrent un
+produit ou une activité, 32 un site. 73 sont sous licence libre et 14
+sous licence non établie. Les 17 autres gardent
 l'illustration de leur activité. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
@@ -108,27 +108,22 @@ Services où le camion d'un tiers occupe le premier plan.
 
 Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 
-## Le logo est un dernier recours, jamais un choix par défaut
+## Pas de logos : décision du propriétaire du dépôt
 
-On illustre une société par une PHOTO CONCRETE DU MONDE REEL. Un logo n'est pas
-une photo : c'est un signe graphique, il ne montre ni objet, ni lieu, ni geste
-de métier. Il n'intervient donc que là où l'on n'a vraiment rien de mieux,
-c'est-à-dire sur les fiches qui ne portaient AUCUNE photo de leur société et se
-rabattaient sur l'illustration de leur activité, laquelle montre le secteur et
-pas l'entreprise. Onze fiches sont dans ce cas, pour l'essentiel des
-fournisseurs d'indices, des agences de notation, des assureurs et des
-gestionnaires d'actifs, dont le métier ne produit aucun objet photographiable.
+Une huitième passe a récupéré onze logos depuis Wikidata P154, pour les fiches
+qui n'avaient aucune photo de leur société. Ils ont été publiés puis RETIRÉS :
+un logo est impersonnel. Il nomme une société sans rien montrer d'elle, ni
+objet, ni lieu, ni geste de métier, et une page pleine de rectangles de marque
+ne ressemble plus à rien.
 
-Aucune fiche portant déjà une photo n'a été convertie au logo, même quand cette
-photo n'est qu'un immeuble : un bâtiment avec une enseigne lisible reste une
-photo du monde réel montrant cette société précise.
+La règle qui s'applique désormais est simple : on illustre par une PHOTO
+CONCRETE DU MONDE REEL, ou bien on garde l'illustration de l'activité, dont la
+légende annonce honnêtement « Illustration : … » et ne prétend donc pas montrer
+l'entreprise. L'outil et son workflow ont été supprimés pour qu'une exécution
+distraite ne réintroduise pas de logos ; l'historique git les conserve si la
+décision devait un jour changer.
 
-Source : Wikidata P154, restreinte à ce que Commons héberge, Commons n'acceptant
-pas les logos non libres. Un logo reste néanmoins une MARQUE, et le droit
-d'auteur n'est pas le droit des marques : l'usage est ici nominatif, il désigne
-la société sur une page qui parle d'elle, comme le fait une encyclopédie.
-
-## Photos publiées
+## Photos publiées (55 produits, 32 sites)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -171,15 +166,6 @@ la société sur une page qui parle d'elle, comme le fait une encyclopédie.
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Advantest
 - Récupérée le : 2026-08-02 sur le site officiel
 
-### 8035.T — Logo de Tokyo Electron
-
-- Nature : logo
-- Fichier : `assets/titres/8035.T.jpg`
-- Source : File:Tokyo Electron logo.svg
-- Page : https://commons.wikimedia.org/wiki/File:Tokyo_Electron_logo.svg
-- Licence : Public domain
-- Marque : Tokyo Electron, usage nominatif
-
 ### ABBN.SW — Entraînement sans engrenage ABB
 
 - Nature : produit
@@ -187,15 +173,6 @@ la société sur une page qui parle d'elle, comme le fait une encyclopédie.
 - Source : File:ABB gearless mill drive.jpg
 - Page : https://commons.wikimedia.org/wiki/File:ABB_gearless_mill_drive.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Zen wave · CC BY-SA 4.0
-
-### ACN — Logo de Accenture
-
-- Nature : logo
-- Fichier : `assets/titres/ACN.jpg`
-- Source : File:Accenture.svg
-- Page : https://commons.wikimedia.org/wiki/File:Accenture.svg
-- Licence : Public domain
-- Marque : Accenture, usage nominatif
 
 ### ADBE — Siège mondial d'Adobe, San José
 
@@ -270,15 +247,6 @@ la société sur une page qui parle d'elle, comme le fait une encyclopédie.
 - Page : https://commons.wikimedia.org/wiki/File:Samsung-Exynos-4412-Quad_SoC_used_in_I9300.jpg
 - Licence : CC BY-SA 3.0 — crédit affiché : Köf3 · CC BY-SA 3.0
 
-### ASM.AS — Logo de ASM International
-
-- Nature : logo
-- Fichier : `assets/titres/ASM.AS.jpg`
-- Source : File:ASM Logo.svg
-- Page : https://commons.wikimedia.org/wiki/File:ASM_Logo.svg
-- Licence : Public domain
-- Marque : ASM International, usage nominatif
-
 ### ASML.AS — Siège d'ASML à Veldhoven
 
 - Nature : site
@@ -310,24 +278,6 @@ la société sur une page qui parle d'elle, comme le fait une encyclopédie.
 - Source : Chip-enabled Bank of America BankAmericard Visa Signature Credit Card
 - Page : https://www.flickr.com/photos/51526368@N03/16293806432
 - Licence : CC BY 2.0 — crédit affiché : Aranami · CC BY 2.0
-
-### BLK — Logo de BlackRock
-
-- Nature : logo
-- Fichier : `assets/titres/BLK.jpg`
-- Source : File:BlackRock wordmark.svg
-- Page : https://commons.wikimedia.org/wiki/File:BlackRock_wordmark.svg
-- Licence : Public domain
-- Marque : BlackRock, usage nominatif
-
-### BNP.PA — Logo de BNP Paribas
-
-- Nature : logo
-- Fichier : `assets/titres/BNP.PA.jpg`
-- Source : File:BNP Paribas.svg
-- Page : https://commons.wikimedia.org/wiki/File:BNP_Paribas.svg
-- Licence : Public domain
-- Marque : BNP Paribas, usage nominatif
 
 ### BX — Siège de Blackstone, New York
 
@@ -403,15 +353,6 @@ la société sur une page qui parle d'elle, comme le fait une encyclopédie.
 - Source : File:San Francisco, California April 2022 Salesforce Tower.jpg
 - Page : https://commons.wikimedia.org/wiki/File:San_Francisco,_California_April_2022_Salesforce_Tower.jpg
 - Licence : CC BY 2.0 — crédit affiché : Sharon Hahn Darlin · CC BY 2.0
-
-### CS.PA — Logo de AXA
-
-- Nature : logo
-- Fichier : `assets/titres/CS.PA.jpg`
-- Source : File:AXA Logo.svg
-- Page : https://commons.wikimedia.org/wiki/File:AXA_Logo.svg
-- Licence : Public domain
-- Marque : AXA, usage nominatif
 
 ### CSCO — Carte d'un commutateur Cisco Catalyst 3750
 
@@ -592,33 +533,6 @@ la société sur une page qui parle d'elle, comme le fait une encyclopédie.
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Lam Research
 - Récupérée le : 2026-08-02 sur le site officiel
 
-### LSEG.L — Logo de London Stock Exchange Group
-
-- Nature : logo
-- Fichier : `assets/titres/LSEG.L.jpg`
-- Source : File:LSE Group logo.svg
-- Page : https://commons.wikimedia.org/wiki/File:LSE_Group_logo.svg
-- Licence : Public domain
-- Marque : London Stock Exchange Group, usage nominatif
-
-### MA — Logo de Mastercard
-
-- Nature : logo
-- Fichier : `assets/titres/MA.jpg`
-- Source : File:Mastercard 2019 logo.svg
-- Page : https://commons.wikimedia.org/wiki/File:Mastercard_2019_logo.svg
-- Licence : Public domain
-- Marque : Mastercard, usage nominatif
-
-### MCO — Logo de Moody's
-
-- Nature : logo
-- Fichier : `assets/titres/MCO.jpg`
-- Source : File:Moody's new logo.png
-- Page : https://commons.wikimedia.org/wiki/File:Moody%27s_new_logo.png
-- Licence : Public domain
-- Marque : Moody's, usage nominatif
-
 ### META — Casque Meta Quest 3
 
 - Nature : produit
@@ -666,15 +580,6 @@ la société sur une page qui parle d'elle, comme le fait une encyclopédie.
 - Source : File:Crucial SSD MX300 525GB-8478.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Crucial_SSD_MX300_525GB-8478.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
-
-### MUV2.DE — Logo de Munich Re
-
-- Nature : logo
-- Fichier : `assets/titres/MUV2.DE.jpg`
-- Source : File:Münchener Rück logo.svg
-- Page : https://commons.wikimedia.org/wiki/File:M%C3%BCnchener_R%C3%BCck_logo.svg
-- Licence : Public domain
-- Marque : Munich Re, usage nominatif
 
 ### NBIS — Centre de données de Nebius
 
@@ -821,15 +726,6 @@ la société sur une page qui parle d'elle, comme le fait une encyclopédie.
 - Source : Synopsys Headquarters Mountain View
 - Page : https://commons.wikimedia.org/w/index.php?curid=118340795
 - Licence : CC0 1.0
-
-### SPGI — Logo de S&P Global
-
-- Nature : logo
-- Fichier : `assets/titres/SPGI.jpg`
-- Source : File:S&P Global logo.svg
-- Page : https://commons.wikimedia.org/wiki/File:S%26P_Global_logo.svg
-- Licence : Public domain
-- Marque : S&P Global, usage nominatif
 
 ### STX — Disque dur Seagate ouvert, plateau et bras de lecture
 
