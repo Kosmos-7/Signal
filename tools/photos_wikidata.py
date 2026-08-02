@@ -124,6 +124,11 @@ def main():
     ap.add_argument("--telecharger", action="store_true")
     ap.add_argument("--sortie", default="assets/titres/candidats")
     ap.add_argument("--limite", type=int, default=0)
+    ap.add_argument("--depuis-rapport", action="store_true",
+                    help="ne pas réinterroger Wikidata : télécharger depuis "
+                         "photos_wikidata.json (les requêtes sont lentes, les "
+                         "téléchargements non — les rejouer gâchait le budget "
+                         "temps du job et l'a fait expirer à 21 images sur 67)")
     a = ap.parse_args()
 
     w = json.load(open("watchlist.json"))
@@ -134,6 +139,11 @@ def main():
 
     print(f"Wikidata : {len(cibles)} sociétés\n", flush=True)
     rapport, familles = {}, {}
+    if a.depuis_rapport and os.path.exists("photos_wikidata.json"):
+        d = json.load(open("photos_wikidata.json", encoding="utf-8"))
+        rapport, familles = d["detail"], d["familles"]
+        print(f"rapport existant réutilisé : {len(rapport)} images\n", flush=True)
+        cibles = []
     for i, tk in enumerate(cibles, 1):
         nom = nom_usage(tk, noms[tk])
         qid, label = entite(nom)

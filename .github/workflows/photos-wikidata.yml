@@ -14,6 +14,10 @@ on:
         description: "Ne traiter que les N premières sociétés (0 = toutes)"
         type: string
         default: "0"
+      depuis_rapport:
+        description: "Réutiliser photos_wikidata.json au lieu de réinterroger Wikidata"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -36,7 +40,8 @@ jobs:
       - name: Interroger Wikidata
         run: |
           python tools/photos_wikidata.py --limite ${{ inputs.limite || '0' }} \
-            ${{ inputs.telecharger && '--telecharger' || '' }}
+            ${{ inputs.telecharger && '--telecharger' || '' }} \
+            ${{ inputs.depuis_rapport && '--depuis-rapport' || '' }}
       - name: Publier le rapport
         if: always()
         uses: actions/upload-artifact@v4
