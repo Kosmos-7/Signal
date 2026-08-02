@@ -1015,6 +1015,33 @@
  ],
  "TSM": [
   {
+   "page": "https://www.tsmc.com/english/dedicatedFoundry/manufacturing",
+   "domaine": "tsmc.com",
+   "cdn": [
+    "tsmc.com"
+   ],
+   "conditions": "page produit ou salle de presse",
+   "credit": "TSMC"
+  },
+  {
+   "page": "https://www.tsmc.com/english/aboutTSMC/TSMC_Fabs",
+   "domaine": "tsmc.com",
+   "cdn": [
+    "tsmc.com"
+   ],
+   "conditions": "page produit ou salle de presse",
+   "credit": "TSMC"
+  },
+  {
+   "page": "https://www.tsmc.com/english/aboutTSMC/company_profile",
+   "domaine": "tsmc.com",
+   "cdn": [
+    "tsmc.com"
+   ],
+   "conditions": "page produit ou salle de presse",
+   "credit": "TSMC"
+  },
+  {
    "page": "https://pr.tsmc.com/english/news",
    "domaine": "tsmc.com",
    "cdn": [
@@ -1145,6 +1172,42 @@
   }
  ],
  "ASML.AS": [
+  {
+   "page": "https://www.asml.com/en/products/euv-lithography-systems/twinscan-exe-5200b",
+   "domaine": "asml.com",
+   "cdn": [
+    "asml.com"
+   ],
+   "conditions": "page produit ou salle de presse",
+   "credit": "ASML"
+  },
+  {
+   "page": "https://www.asml.com/en/products/euv-lithography-systems",
+   "domaine": "asml.com",
+   "cdn": [
+    "asml.com"
+   ],
+   "conditions": "page produit ou salle de presse",
+   "credit": "ASML"
+  },
+  {
+   "page": "https://www.asml.com/en/products/duv-lithography-systems",
+   "domaine": "asml.com",
+   "cdn": [
+    "asml.com"
+   ],
+   "conditions": "page produit ou salle de presse",
+   "credit": "ASML"
+  },
+  {
+   "page": "https://www.asml.com/en/technology/lithography-principles",
+   "domaine": "asml.com",
+   "cdn": [
+    "asml.com"
+   ],
+   "conditions": "page produit ou salle de presse",
+   "credit": "ASML"
+  },
   {
    "page": "https://www.asml.com/en/news/press-releases",
    "domaine": "asml.com",
