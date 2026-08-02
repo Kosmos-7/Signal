@@ -1,0 +1,799 @@
+{
+ "societes": 32,
+ "detail": {
+  "000660.KS": {
+   "nom": "SK Hynix",
+   "label": "SK Hynix",
+   "categorie": "Hynix",
+   "candidats": [
+    {
+     "fichier": "Philips FM02FD00B - board - Hynix HY27UV08AG5M-TPCB-40190.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Philips_FM02FD00B_-_board_-_Hynix_HY27UV08AG5M-TPCB-40190.jpg/1920px-Philips_FM02FD00B_-_board_-_Hynix_HY27UV08AG5M-TPCB-40190.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Philips_FM02FD00B_-_board_-_Hynix_HY27UV08AG5M-TPCB-40190.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "poids": 184305
+    },
+    {
+     "fichier": "Nexus 7 (2012) - board - Hynix H9DA1GH25HAM-MR4EM-4863.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Nexus_7_%282012%29_-_board_-_Hynix_H9DA1GH25HAM-MR4EM-4863.jpg/1920px-Nexus_7_%282012%29_-_board_-_Hynix_H9DA1GH25HAM-MR4EM-4863.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nexus_7_(2012)_-_board_-_Hynix_H9DA1GH25HAM-MR4EM-4863.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "poids": 135303
+    }
+   ]
+  },
+  "005930.KS": {
+   "nom": "Samsung Electronics",
+   "label": "Samsung Electronics",
+   "categorie": "Samsung Electronics",
+   "candidats": [
+    {
+     "fichier": "Samsung Thunders Buss. Card.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Samsung_Thunders_Buss._Card.jpg/1920px-Samsung_Thunders_Buss._Card.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Samsung_Thunders_Buss._Card.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "AliHDemirkan",
+     "score": 5,
+     "poids": 44387
+    }
+   ]
+  },
+  "8035.T": {
+   "nom": "Tokyo Electron",
+   "label": "Tokyo Electron",
+   "categorie": "Tokyo Electron",
+   "candidats": [
+    {
+     "fichier": "Tokyo Electron Device Limited3.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Tokyo_Electron_Device_Limited3.jpg/1920px-Tokyo_Electron_Device_Limited3.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Electron_Device_Limited3.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "MEKO7",
+     "score": 4,
+     "poids": 74562
+    },
+    {
+     "fichier": "Tokyo Electron Device Limited2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tokyo_Electron_Device_Limited2.jpg/1920px-Tokyo_Electron_Device_Limited2.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Electron_Device_Limited2.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "MEKO7",
+     "score": 4,
+     "poids": 70052
+    }
+   ]
+  },
+  "ABBN.SW": {
+   "nom": "ABB",
+   "label": "ABB Group",
+   "categorie": "ABB Group",
+   "candidats": [
+    {
+     "fichier": "ABB gearless mill drive.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/ABB_gearless_mill_drive.jpg/1920px-ABB_gearless_mill_drive.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:ABB_gearless_mill_drive.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Zen wave",
+     "score": 5,
+     "poids": 147615
+    },
+    {
+     "fichier": "ABB Beijing Drive Systems Co Ltd (20241220142204).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/ABB_Beijing_Drive_Systems_Co_Ltd_%2820241220142204%29.jpg/1920px-ABB_Beijing_Drive_Systems_Co_Ltd_%2820241220142204%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:ABB_Beijing_Drive_Systems_Co_Ltd_(20241220142204).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "N509FZ",
+     "score": 5,
+     "poids": 131313
+    }
+   ]
+  },
+  "ADI": {
+   "nom": "Analog Devices",
+   "label": "Analog Devices",
+   "categorie": "Analog Devices, Inc.",
+   "candidats": [
+    {
+     "fichier": "Monitex MoniCam PX520 - camera module - board - Analog Device AD9943KCPZ-8643.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Monitex_MoniCam_PX520_-_camera_module_-_board_-_Analog_Device_AD9943KCPZ-8643.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Monitex_MoniCam_PX520_-_camera_module_-_board_-_Analog_Device_AD9943KCPZ-8643.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 9,
+     "poids": 100147
+    },
+    {
+     "fichier": "Image of GP5 chip next to a pair of dice for size comparison.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Image_of_GP5_chip_next_to_a_pair_of_dice_for_size_comparison.jpg/1920px-Image_of_GP5_chip_next_to_a_pair_of_dice_for_size_comparison.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Image_of_GP5_chip_next_to_a_pair_of_dice_for_size_comparison.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "A. Milia",
+     "score": 6,
+     "poids": 97852
+    }
+   ]
+  },
+  "ADYEN.AS": {
+   "nom": "Adyen",
+   "label": "Adyen",
+   "categorie": "Adyen",
+   "candidats": [
+    {
+     "fichier": "Adyen card payment terminal (9607998259).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Adyen_card_payment_terminal_%289607998259%29.jpg/1920px-Adyen_card_payment_terminal_%289607998259%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Adyen_card_payment_terminal_(9607998259).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Alper Çuğun from Berlin, Germany",
+     "score": 9,
+     "poids": 44912
+    }
+   ]
+  },
+  "AMD": {
+   "nom": "Advanced Micro Devices",
+   "label": "AMD",
+   "categorie": "AMD",
+   "candidats": [
+    {
+     "fichier": "GPU PerfStudio2 Shader Debugger.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/GPU_PerfStudio2_Shader_Debugger.png",
+     "page": "https://commons.wikimedia.org/wiki/File:GPU_PerfStudio2_Shader_Debugger.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "ScotXW",
+     "score": 6,
+     "poids": 67968
+    },
+    {
+     "fichier": "GPU PerfStudio2 Frame Profiler.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/GPU_PerfStudio2_Frame_Profiler.png",
+     "page": "https://commons.wikimedia.org/wiki/File:GPU_PerfStudio2_Frame_Profiler.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "ScotXW",
+     "score": 6,
+     "poids": 66018
+    }
+   ]
+  },
+  "AMZN": {
+   "nom": "Amazon.com",
+   "label": "Amazon",
+   "categorie": "Amazon.com",
+   "candidats": [
+    {
+     "fichier": "2013-02-13 Abrufstatistik Artikel Amazon.com in der deutschsprachigen Wikipedia um den Film die ausgestrahlte TV-Dokumentation Ausgeliefert! Leiharbeiter bei Amazon.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/2013-02-13_Abrufstatistik_Artikel_Amazon.com_in_der_deutschsprachigen_Wikipedia_um_den_Film_die_ausgestrahlte_TV-Dokumentation_Ausgeliefert%21_Leiharbeiter_bei_Amazon.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:2013-02-13_Abrufstatistik_Artikel_Amazon.com_in_der_deutschsprachigen_Wikipedia_um_den_Film_die_ausgestrahlte_TV-Dokumentation_Ausgeliefert!_Leiharbeiter_bei_Amazon.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Wikipedia, many honorably authors like Bernd Schwabe in Hannover",
+     "score": 6,
+     "poids": 43242
+    },
+    {
+     "fichier": "Amazon.de gift card, Ommoord, Rotterdam (2021).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Amazon.de_gift_card%2C_Ommoord%2C_Rotterdam_%282021%29.jpg/1920px-Amazon.de_gift_card%2C_Ommoord%2C_Rotterdam_%282021%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Amazon.de_gift_card,_Ommoord,_Rotterdam_(2021).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Donald Trung Quoc Don (Chữ Hán: 徵國單) - Wikimedia Commons - © CC BY-SA 4.0 Intern",
+     "score": 5,
+     "poids": 27530
+    }
+   ]
+  },
+  "ARM": {
+   "nom": "Arm",
+   "label": "Arm Holdings",
+   "categorie": "ARM Limited",
+   "candidats": [
+    {
+     "fichier": "Samsung-Exynos-4412-Quad SoC used in I9300.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Samsung-Exynos-4412-Quad_SoC_used_in_I9300.jpg/1920px-Samsung-Exynos-4412-Quad_SoC_used_in_I9300.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Samsung-Exynos-4412-Quad_SoC_used_in_I9300.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Köf3",
+     "score": 6,
+     "poids": 71209
+    },
+    {
+     "fichier": "Samsung Galaxy Y S5360 Broadcom-BCM21552 SoC.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Samsung_Galaxy_Y_S5360_Broadcom-BCM21552_SoC.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_Y_S5360_Broadcom-BCM21552_SoC.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Köf3",
+     "score": 6,
+     "poids": 121103
+    }
+   ]
+  },
+  "ASML.AS": {
+   "nom": "ASML",
+   "label": "ASML Holding",
+   "categorie": "ASML",
+   "candidats": [
+    {
+     "fichier": "193i scanner throughput.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/193i_scanner_throughput.png",
+     "page": "https://commons.wikimedia.org/wiki/File:193i_scanner_throughput.png",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Guiding light",
+     "score": 5,
+     "poids": 35262
+    }
+   ]
+  },
+  "AVGO": {
+   "nom": "Broadcom",
+   "label": "Broadcom",
+   "categorie": "Broadcom",
+   "candidats": [
+    {
+     "fichier": "ThinkPad X220 Bluetooth Daughter Card (BDC-3) and BDC slot.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ThinkPad_X220_Bluetooth_Daughter_Card_%28BDC-3%29_and_BDC_slot.jpg/1920px-ThinkPad_X220_Bluetooth_Daughter_Card_%28BDC-3%29_and_BDC_slot.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:ThinkPad_X220_Bluetooth_Daughter_Card_(BDC-3)_and_BDC_slot.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Siarhei V",
+     "score": 5,
+     "poids": 120175
+    },
+    {
+     "fichier": "Laptop internals and Wi-Fi module.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Laptop_internals_and_Wi-Fi_module.jpg/1920px-Laptop_internals_and_Wi-Fi_module.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Laptop_internals_and_Wi-Fi_module.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Daniel Aleksandersen",
+     "score": 5,
+     "poids": 103002
+    }
+   ]
+  },
+  "AXP": {
+   "nom": "American Express",
+   "label": "American Express",
+   "categorie": "American Express",
+   "candidats": [
+    {
+     "fichier": "Centurion Card Invitation Set.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Centurion_Card_Invitation_Set.JPG/1920px-Centurion_Card_Invitation_Set.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Centurion_Card_Invitation_Set.JPG",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Theorb at English Wikipedia",
+     "score": 5,
+     "poids": 57997
+    },
+    {
+     "fichier": "Night scene on the New York Central Railroad., American Express company's special express train LCCN2003674534.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Night_scene_on_the_New_York_Central_Railroad.%2C_American_Express_company%27s_special_express_train_LCCN2003674534.tif/lossy-page1-1920px-Night_scene_on_the_New_York_Central_Railroad.%2C_American_Express_company%27s_special_express_train_LCCN2003674534.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Night_scene_on_the_New_York_Central_Railroad.,_American_Express_company%27s_special_express_train_LCCN2003674534.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Popular Graphic Arts",
+     "score": 3,
+     "poids": 60054
+    }
+   ]
+  },
+  "CME": {
+   "nom": "CME",
+   "label": "CME Group",
+   "categorie": "CME Group",
+   "candidats": [
+    {
+     "fichier": "Marker in the Chicago board of trade.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Marker_in_the_Chicago_board_of_trade.jpg/1920px-Marker_in_the_Chicago_board_of_trade.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Marker_in_the_Chicago_board_of_trade.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "victorgrigas",
+     "score": 5,
+     "poids": 122809
+    },
+    {
+     "fichier": "INFORMAL DINNER TENDERED TO REPRESENTATIVES OF COMMERCIAL ORGANIZATIONS (held by) BOARD OF TRADE OF CITY OF CHICAGO (at) \"GRAND PACIFIC HOTEL, CHICAGO, IL\" (HOTEL;) (NYPL Hades-272740-475708).tiff",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/INFORMAL_DINNER_TENDERED_TO_REPRESENTATIVES_OF_COMMERCIAL_ORGANIZATIONS_%28held_by%29_BOARD_OF_TRADE_OF_CITY_OF_CHICAGO_%28at%29_%22GRAND_PACIFIC_HOTEL%2C_CHICAGO%2C_IL%22_%28HOTEL%3B%29_%28NYPL_Hades-272740-475708%29.tiff/lossy-page1-1920px-thumbnail.tiff.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:INFORMAL_DINNER_TENDERED_TO_REPRESENTATIVES_OF_COMMERCIAL_ORGANIZATIONS_(held_by)_BOARD_OF_TRADE_OF_CITY_OF_CHICAGO_(at)_%22GRAND_PACIFIC_HOTEL,_CHICAGO,_IL%22_(HOTEL;)_(NYPL_Hades-272740-475708).tiff",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Scan by NYPL",
+     "score": 5,
+     "poids": 61345
+    }
+   ]
+  },
+  "CRM": {
+   "nom": "Salesforce",
+   "label": "Salesforce",
+   "categorie": "Salesforce",
+   "candidats": [
+    {
+     "fichier": "Salesforce Product and Price Book Data Model.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Salesforce_Product_and_Price_Book_Data_Model.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Salesforce_Product_and_Price_Book_Data_Model.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Softbuilder",
+     "score": 4,
+     "poids": 56195
+    },
+    {
+     "fichier": "East Point Business Park interior - Novell and Salesforce.com teams - Bye Bye Stream 08.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/East_Point_Business_Park_interior_-_Novell_and_Salesforce.com_teams_-_Bye_Bye_Stream_08.jpg/1920px-East_Point_Business_Park_interior_-_Novell_and_Salesforce.com_teams_-_Bye_Bye_Stream_08.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:East_Point_Business_Park_interior_-_Novell_and_Salesforce.com_teams_-_Bye_Bye_Stream_08.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Bea y Fredi",
+     "score": 3,
+     "poids": 91699
+    }
+   ]
+  },
+  "CSCO": {
+   "nom": "Cisco Systems",
+   "label": "Cisco",
+   "categorie": "Cisco",
+   "candidats": [
+    {
+     "fichier": "EFTA00002629 - Server rack with multiple networking devices and cables connected showing a typical data center setup.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/49/EFTA00002629_-_Server_rack_with_multiple_networking_devices_and_cables_connected_showing_a_typical_data_center_setup.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:EFTA00002629_-_Server_rack_with_multiple_networking_devices_and_cables_connected_showing_a_typical_data_center_setup.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Federal Bureau of Investigation",
+     "score": 4,
+     "poids": 44451
+    },
+    {
+     "fichier": "Cisco Network Emergency Response Vehicle (NERV).png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Cisco_Network_Emergency_Response_Vehicle_%28NERV%29.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Cisco_Network_Emergency_Response_Vehicle_(NERV).png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Sinkorhon",
+     "score": 3,
+     "poids": 87477
+    }
+   ]
+  },
+  "DELL": {
+   "nom": "Dell",
+   "label": "Dell",
+   "categorie": "Dell",
+   "candidats": [
+    {
+     "fichier": "DELL TrueMobile 350 Bluetooth card.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/DELL_TrueMobile_350_Bluetooth_card.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:DELL_TrueMobile_350_Bluetooth_card.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "User:Omegatron",
+     "score": 5,
+     "poids": 27544
+    },
+    {
+     "fichier": "Cake pops for corporate product launch, February 2012.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Cake_pops_for_corporate_product_launch%2C_February_2012.jpg/1920px-Cake_pops_for_corporate_product_launch%2C_February_2012.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cake_pops_for_corporate_product_launch,_February_2012.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Dell Inc.",
+     "score": 4,
+     "poids": 53925
+    }
+   ]
+  },
+  "EQIX": {
+   "nom": "Equinix",
+   "label": "Equinix",
+   "categorie": "Equinix",
+   "candidats": [
+    {
+     "fichier": "Infomart Dallas Interior Lobby.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Infomart_Dallas_Interior_Lobby.jpg/1920px-Infomart_Dallas_Interior_Lobby.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Infomart_Dallas_Interior_Lobby.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Andrew nyr",
+     "score": 3,
+     "poids": 125611
+    },
+    {
+     "fichier": "Infomart Dallas Interior Hallway.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Infomart_Dallas_Interior_Hallway.jpg/1920px-Infomart_Dallas_Interior_Hallway.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Infomart_Dallas_Interior_Hallway.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Andrew nyr",
+     "score": 3,
+     "poids": 59749
+    }
+   ]
+  },
+  "NTAP": {
+   "nom": "NetApp",
+   "label": "NetApp",
+   "categorie": "NetApp",
+   "candidats": [
+    {
+     "fichier": "NetApp Storage Virtual Machine.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/NetApp_Storage_Virtual_Machine.png",
+     "page": "https://commons.wikimedia.org/wiki/File:NetApp_Storage_Virtual_Machine.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Qdrddr",
+     "score": 5,
+     "poids": 44993
+    }
+   ]
+  },
+  "NVDA": {
+   "nom": "NVIDIA",
+   "label": "Nvidia",
+   "categorie": "Nvidia",
+   "candidats": [
+    {
+     "fichier": "Nvidia Jetson TK1 - SD Card Slot (14488611070).png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Nvidia_Jetson_TK1_-_SD_Card_Slot_%2814488611070%29.png/1920px-Nvidia_Jetson_TK1_-_SD_Card_Slot_%2814488611070%29.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_Jetson_TK1_-_SD_Card_Slot_(14488611070).png",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Gareth Halfacree from Bradford, UK",
+     "score": 5,
+     "poids": 59811
+    },
+    {
+     "fichier": "Nvidia Jetson TK1 - Full Board (14672953894).png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Nvidia_Jetson_TK1_-_Full_Board_%2814672953894%29.png/1920px-Nvidia_Jetson_TK1_-_Full_Board_%2814672953894%29.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_Jetson_TK1_-_Full_Board_(14672953894).png",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Gareth Halfacree from Bradford, UK",
+     "score": 5,
+     "poids": 71443
+    }
+   ]
+  },
+  "NXPI": {
+   "nom": "NXP Semiconductors",
+   "label": "NXP Semiconductors",
+   "categorie": "NXP Semiconductors",
+   "candidats": [
+    {
+     "fichier": "NXP ARM processor.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/NXP_ARM_processor.JPG/1920px-NXP_ARM_processor.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:NXP_ARM_processor.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "AAAndrey A",
+     "score": 6,
+     "poids": 80629
+    },
+    {
+     "fichier": "Die mz mit20x - NXP CUL1V2 - John McMaster.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Die_mz_mit20x_-_NXP_CUL1V2_-_John_McMaster.jpg/1920px-Die_mz_mit20x_-_NXP_CUL1V2_-_John_McMaster.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Die_mz_mit20x_-_NXP_CUL1V2_-_John_McMaster.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "John McMaster",
+     "score": 6,
+     "poids": 153512
+    }
+   ]
+  },
+  "ON": {
+   "nom": "onsemi",
+   "label": "onsemi",
+   "categorie": "ON Semiconductor",
+   "candidats": [
+    {
+     "fichier": "Xerox WorkCentre 6605 - scanner part - board 2 - On Semiconductor NCP3064B-8520.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Xerox_WorkCentre_6605_-_scanner_part_-_board_2_-_On_Semiconductor_NCP3064B-8520.jpg/1920px-Xerox_WorkCentre_6605_-_scanner_part_-_board_2_-_On_Semiconductor_NCP3064B-8520.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Xerox_WorkCentre_6605_-_scanner_part_-_board_2_-_On_Semiconductor_NCP3064B-8520.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 10,
+     "poids": 92911
+    },
+    {
+     "fichier": "2N5038 die.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/2N5038_die.jpg/1920px-2N5038_die.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:2N5038_die.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Mister rf",
+     "score": 6,
+     "poids": 157858
+    }
+   ]
+  },
+  "ORCL": {
+   "nom": "Oracle",
+   "label": "Oracle Corporation",
+   "categorie": "Oracle Corporation",
+   "candidats": [
+    {
+     "fichier": "Drive carefully, penguins ahead (4113269859).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Drive_carefully%2C_penguins_ahead_%284113269859%29.jpg/1920px-Drive_carefully%2C_penguins_ahead_%284113269859%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Drive_carefully,_penguins_ahead_(4113269859).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Håkan Dahlström from Malmö, Sweden",
+     "score": 5,
+     "poids": 75369
+    }
+   ]
+  },
+  "QCOM": {
+   "nom": "Qualcomm",
+   "label": "Qualcomm",
+   "categorie": "Qualcomm",
+   "candidats": [
+    {
+     "fichier": "FRITZ!Box 7490 - board - Qualcomm QCA9880-BR4A-5180.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/FRITZ%21Box_7490_-_board_-_Qualcomm_QCA9880-BR4A-5180.jpg/1920px-FRITZ%21Box_7490_-_board_-_Qualcomm_QCA9880-BR4A-5180.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:FRITZ!Box_7490_-_board_-_Qualcomm_QCA9880-BR4A-5180.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 8,
+     "poids": 146988
+    },
+    {
+     "fichier": "FRITZ!Box 7490 - board - Qualcomm QCA9558-AT4A-4692.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/FRITZ%21Box_7490_-_board_-_Qualcomm_QCA9558-AT4A-4692.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:FRITZ!Box_7490_-_board_-_Qualcomm_QCA9558-AT4A-4692.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 8,
+     "poids": 121157
+    }
+   ]
+  },
+  "SNDK": {
+   "nom": "SanDisk",
+   "label": "SanDisk",
+   "categorie": "SanDisk",
+   "candidats": [
+    {
+     "fichier": "Sandisk Extreme III 2GB flash chip.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Sandisk_Extreme_III_2GB_flash_chip.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Sandisk_Extreme_III_2GB_flash_chip.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Uwe Hermann",
+     "score": 6,
+     "poids": 76902
+    },
+    {
+     "fichier": "USB(pcb).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/USB%28pcb%29.jpg/1920px-USB%28pcb%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:USB(pcb).jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "María Tobías",
+     "score": 5,
+     "poids": 40636
+    }
+   ]
+  },
+  "STX": {
+   "nom": "Seagate Technology",
+   "label": "Seagate Technology",
+   "categorie": "Seagate Technology",
+   "candidats": [
+    {
+     "fichier": "Seagate ST9300AG - Seagate 100075-501 on controller board-8912.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg/1920px-Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "poids": 182345
+    },
+    {
+     "fichier": "Seagate ST9300AG - Seagate 100060-503 on controller board-8911.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Seagate_ST9300AG_-_Seagate_100060-503_on_controller_board-8911.jpg/1920px-Seagate_ST9300AG_-_Seagate_100060-503_on_controller_board-8911.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Seagate_ST9300AG_-_Seagate_100060-503_on_controller_board-8911.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "poids": 158904
+    }
+   ]
+  },
+  "SU.PA": {
+   "nom": "Schneider Electric",
+   "label": "Schneider Electric",
+   "categorie": "Schneider Electric",
+   "candidats": [
+    {
+     "fichier": "Unattended Monitoring Server (03411515).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Unattended_Monitoring_Server_%2803411515%29.jpg/1920px-Unattended_Monitoring_Server_%2803411515%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Unattended_Monitoring_Server_(03411515).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "IAEA Imagebank",
+     "score": 4,
+     "poids": 60341
+    },
+    {
+     "fichier": "Vehicle plug-in charging station.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Vehicle_plug-in_charging_station.jpg/1920px-Vehicle_plug-in_charging_station.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Vehicle_plug-in_charging_station.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Vollet Philippe",
+     "score": 3,
+     "poids": 74587
+    }
+   ]
+  },
+  "TER": {
+   "nom": "Teradyne",
+   "label": "Teradyne",
+   "categorie": "Teradyne",
+   "candidats": [
+    {
+     "fichier": "Equipment of Yleisradio's workshop's laboratory, ca. 1938. (15301211259).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Equipment_of_Yleisradio%27s_workshop%27s_laboratory%2C_ca._1938._%2815301211259%29.jpg/1920px-Equipment_of_Yleisradio%27s_workshop%27s_laboratory%2C_ca._1938._%2815301211259%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Equipment_of_Yleisradio%27s_workshop%27s_laboratory,_ca._1938._(15301211259).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nArchives of the Finnish Broadcasting Company Yle",
+     "score": 5,
+     "poids": 78262
+    },
+    {
+     "fichier": "1540 Strobolume by General Radio Corporation - separate control box and strobe on tripod.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/1540_Strobolume_by_General_Radio_Corporation_-_separate_control_box_and_strobe_on_tripod.jpg/1920px-1540_Strobolume_by_General_Radio_Corporation_-_separate_control_box_and_strobe_on_tripod.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:1540_Strobolume_by_General_Radio_Corporation_-_separate_control_box_and_strobe_on_tripod.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "DMahalko (Dale Mahalko)",
+     "score": 3,
+     "poids": 64769
+    }
+   ]
+  },
+  "TSM": {
+   "nom": "TSMC",
+   "label": "TSMC",
+   "categorie": "TSMC",
+   "candidats": [
+    {
+     "fichier": "S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07389-DSC07389.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg/1920px-S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "FritzchensFritz",
+     "score": 6,
+     "poids": 115014
+    },
+    {
+     "fichier": "S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07387-DSC07387.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg/1920px-S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "FritzchensFritz",
+     "score": 6,
+     "poids": 99591
+    }
+   ]
+  },
+  "UBSG.SW": {
+   "nom": "UBS",
+   "label": "UBS",
+   "categorie": "UBS",
+   "candidats": [
+    {
+     "fichier": "Swiss Bank Board Room (UBS)c.1920.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Swiss_Bank_Board_Room_%28UBS%29c.1920.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Swiss_Bank_Board_Room_(UBS)c.1920.png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Swiss Bank Corporation / Bankers Magazine",
+     "score": 5,
+     "poids": 60664
+    }
+   ]
+  },
+  "V": {
+   "nom": "Visa",
+   "label": "Visa Inc.",
+   "categorie": "Visa Inc.",
+   "candidats": [
+    {
+     "fichier": "Credit card terminal in Laos.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Credit_card_terminal_in_Laos.jpg/1920px-Credit_card_terminal_in_Laos.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Credit_card_terminal_in_Laos.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Basile Morin",
+     "score": 9,
+     "poids": 43432
+    },
+    {
+     "fichier": "Piraeus Bank Visa Debit Card (Front).png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Piraeus_Bank_Visa_Debit_Card_%28Front%29.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Piraeus_Bank_Visa_Debit_Card_(Front).png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Filippos Fragkogiannis",
+     "score": 5,
+     "poids": 67609
+    }
+   ]
+  },
+  "WDC": {
+   "nom": "Western Digital",
+   "label": "Western Digital",
+   "categorie": "Western Digital",
+   "candidats": [
+    {
+     "fichier": "Western Digital SN850X NVME solid state drive 8TB front side.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Western_Digital_SN850X_NVME_solid_state_drive_8TB_front_side.jpg/1920px-Western_Digital_SN850X_NVME_solid_state_drive_8TB_front_side.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Western_Digital_SN850X_NVME_solid_state_drive_8TB_front_side.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "4300streetcar",
+     "score": 5,
+     "poids": 57718
+    },
+    {
+     "fichier": "Western Digital SN850X NVME solid state drive 8TB back side.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Western_Digital_SN850X_NVME_solid_state_drive_8TB_back_side.jpg/1920px-Western_Digital_SN850X_NVME_solid_state_drive_8TB_back_side.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Western_Digital_SN850X_NVME_solid_state_drive_8TB_back_side.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "4300streetcar",
+     "score": 5,
+     "poids": 53356
+    }
+   ]
+  },
+  "WFC": {
+   "nom": "Wells Fargo",
+   "label": "Wells Fargo",
+   "categorie": "Wells Fargo",
+   "candidats": [
+    {
+     "fichier": "Wells Fargo ATM Machine, Colorado Springs (54556930636).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Wells_Fargo_ATM_Machine%2C_Colorado_Springs_%2854556930636%29.jpg/1920px-Wells_Fargo_ATM_Machine%2C_Colorado_Springs_%2854556930636%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wells_Fargo_ATM_Machine,_Colorado_Springs_(54556930636).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Lumen Wilde",
+     "score": 5,
+     "poids": 75851
+    }
+   ]
+  }
+ }
+}
