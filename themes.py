@@ -50,7 +50,7 @@ THEMES_CURES = [
             "gravure et d'assemblage, mémoire, fibre, serveurs, bâtiments, électricité, "
             "refroidissement. Cette watchlist suit la chaîne complète, maillon par maillon, "
             "des puces jusqu'aux plateformes qui commandent et exploitent les centres de "
-            "données — c'est là que l'argent atterrit, quel que soit l'usage qui gagne. Et le "
+"données : c'est là que l'argent atterrit, quel que soit l'usage qui gagne. Et le "
             "vrai goulot n'est pas la gravure : c'est l'assemblage et les substrats, là où le "
             "pouvoir de prix est le plus fort."
         ),
@@ -65,7 +65,7 @@ THEMES_CURES = [
             "C'est un thème de CONCENTRATION, pas de diversification : ses maillons montent "
             "et descendent ensemble, et il amplifie le pari tech déjà assumé par la watchlist "
             "principale. Il est aussi transverse aux secteurs (technologie, industrie, services "
-            "publics, matériaux) — la règle de concentration sectorielle de l'agent ne le verra "
+"publics, matériaux), la règle de concentration sectorielle de l'agent ne le verra "
             "jamais comme un bloc, un calcul dédié s'en charge. Périmètre volontaire : la "
             "production d'électricité renouvelable en est exclue, c'est un pari de politique "
             "publique, pas d'infrastructure IA."
@@ -84,7 +84,7 @@ THEMES_CURES = [
                 # de l'architecture CPU dominante — son absence amputait ce
                 # maillon. IPO 2023, 2,9 ans : fiche avec avertissement
                 # régression.
-                "label": "Compute — GPU, CPU & accélérateurs",
+"label": "Compute · GPU, CPU & accélérateurs",
                 "tickers": ["NVDA", "AVGO", "AMD", "ARM", "MRVL", "QCOM", "INTC"],
             },
             {
@@ -174,7 +174,7 @@ THEMES_CURES = [
             "taux sont hauts et les défauts rares. Les FLUX (réseaux de paiement) prennent une "
             "commission sur chaque transaction, sans porter le risque de crédit. Les PÉAGES "
             "(indices, notation, places de marché) facturent un accès que personne ne peut "
-            "contourner. Les voir côte à côte montre lequel de ces moteurs est payé cher — "
+"contourner. Les voir côte à côte montre lequel de ces moteurs est payé cher, "
             "et pourquoi."
         ),
         "inversion": (
@@ -186,7 +186,7 @@ THEMES_CURES = [
         ),
         "biais": (
             "Étiqueté SECTEUR et non thèse : c'est un regroupement par métier, pas une conviction "
-            "sur la finance. Les péages se paient structurellement cher — le pilier valorisation "
+"sur la finance. Les péages se paient structurellement cher, le pilier valorisation "
             "les pénalise mécaniquement, un score moyen n'y signale pas une entreprise moyenne. "
             "À l'inverse les banques affichent des multiples optiquement bas qui reflètent un "
             "risque de bilan que le screener ne mesure pas."
@@ -232,21 +232,21 @@ THEMES_CALCULES = []
 # CEG et GEV le maillon énergie — leurs fiches porteront l'avertissement
 # régression tant que leurs historiques resteront courts.
 ECARTES_VALIDATION = {
-    "ROG.SW":  "symbole introuvable chez Yahoo — remplacé par l'ADR RHHBY",
+"ROG.SW": "symbole introuvable chez Yahoo, remplacé par l'ADR RHHBY",
     "BESI.AS": "capitalisation ~17 Md$ < seuil 25 Md$ (collage hybride)",
     "EFX":     "capitalisation ~20 Md$ < seuil 25 Md$",
     # Complément du 01/08 — recevables depuis l'assouplissement de la règle
     # des 5 ans, mais PAS réintégrés d'office : chacun attend une décision
     # explicite (contrairement à ARM/CEG/GEV, réintégrés sur demande).
-    "ALAB":    "historique 2,4 ans (IPO 2024) — recevable depuis le 01/08, en attente de décision",
-    "CRDO":    "historique 4,5 ans — recevable depuis le 01/08, en attente de décision",
-    "GFS":     "historique 4,8 ans — recevable depuis le 01/08, en attente de décision",
+"ALAB": "historique 2,4 ans (IPO 2024), recevable depuis le 01/08, en attente de décision",
+"CRDO": "historique 4,5 ans, recevable depuis le 01/08, en attente de décision",
+"GFS": "historique 4,8 ans, recevable depuis le 01/08, en attente de décision",
     "AMKR":    "capitalisation ~12 Md$ < seuil 25 Md$ (assemblage)",
     "6920.T":  "capitalisation ~23 Md$ < seuil 25 Md$ (inspection de masques EUV)",
     "FN":      "capitalisation ~16 Md$ < seuil 25 Md$ (sous-traitance optique)",
     "SMCI":    "capitalisation ~18 Md$ < seuil 25 Md$ (serveurs)",
-    "NVT":     "capitalisation ~25 Md$, au seuil — écarté faute de marge",
-    "HUBB":    "capitalisation ~25 Md$, au seuil — écarté faute de marge",
+"NVT": "capitalisation ~25 Md$, au seuil, écarté faute de marge",
+"HUBB": "capitalisation ~25 Md$, au seuil, écarté faute de marge",
     "MOD":     "capitalisation ~11 Md$ < seuil 25 Md$ (refroidissement)",
     "8036.T":  "symbole introuvable chez Yahoo",
 }

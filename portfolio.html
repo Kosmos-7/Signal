@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portefeuille IA — Signal</title>
+<title>Portefeuille IA, Signal</title>
 <meta name="description" content="Portefeuille 100 % fictif géré par une IA. Capital de 20 000 €, prix réels du marché, chaque décision documentée et publiée chaque semaine.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -175,7 +175,7 @@
     z-index: 501;
   }
   .kpi-info:hover::after, .kpi-info:hover::before { opacity: 1; visibility: visible; }
-  /* Tooltip déclenché aussi par le survol de la carte parent — zone plus généreuse,
+/* Tooltip déclenché aussi par le survol de la carte parent, zone plus généreuse,
      pas besoin de viser l'icône ⓘ qui est petite */
   .kpi:hover .kpi-info::after,
   .kpi:hover .kpi-info::before,
@@ -190,7 +190,7 @@
   .neu { color: var(--text2); }
   .liq { color: var(--blue); }
 
-  /* ── MACRO NEWS — sources discrètes en pied du Raisonnement ── */
+/* ── MACRO NEWS, sources discrètes en pied du Raisonnement ── */
   .macro-news-inline { margin-top: 1.1rem; padding-top: 0.85rem; border-top: 1px solid var(--border); opacity: 0.85; }
   .mn-item { padding: 4px 0; }
   .mn-resume { display: none; }  /* on n'affiche plus le résumé long, juste les titres */
@@ -200,7 +200,7 @@
   .mn-meta-date { color: var(--text3); opacity: 0.6; }
   .mn-source-note { margin-top: 0.5rem; font-family: 'Courier New', monospace; font-size: 0.68rem; color: var(--text3); opacity: 0.55; }
 
-  /* ── MOUVEMENT DE LA SEMAINE — intégré dans le flux newsletter (séparateur soft) ── */
+/* ── MOUVEMENT DE LA SEMAINE, intégré dans le flux newsletter (séparateur soft) ── */
   .weekly-pick-inline {
     margin: 0.4rem 0 1.1rem;
     padding: 0.95rem 1rem;
@@ -450,7 +450,7 @@
   /* footer : entièrement hérité de signal.css (harmonisé) */
 
   /* ── RESPONSIVE ── */
-  /* Tablette : 5 KPI sur 3 colonnes (= 2 rangées) — évite de comprimer trop sur écrans moyens */
+/* Tablette : 5 KPI sur 3 colonnes (= 2 rangées), évite de comprimer trop sur écrans moyens */
   @media (max-width: 1100px) and (min-width: 701px) {
     .kpi-grid { grid-template-columns: repeat(3, 1fr); }
   }
@@ -466,7 +466,7 @@
     .kpi-grid { grid-template-columns: repeat(2, 1fr); }
     .threshold-row { grid-template-columns: 1fr; }
     .rules-grid { grid-template-columns: 1fr; }
-    /* Mobile : on cache Qté (col 2), Px achat (col 3) et Valeur (col 4) — on garde
+/* Mobile : on cache Qté (col 2), Px achat (col 3) et Valeur (col 4), on garde
        PV latente (€) + Perf (%) + Poids, les infos les plus utiles d'un coup d'œil
        (la valeur se déduit de l'investi + PV, et reste visible sur desktop) */
     .pos-header, .pos-row { grid-template-columns: 1fr 74px 70px 52px; gap: 6px; }
@@ -483,7 +483,7 @@
   }
 
   /* ════════════════════════════════════════════════════════════
-     ÉPURE — inspiration terminal : à plat, peu de bords, de l'air.
+ÉPURE, inspiration terminal : à plat, peu de bords, de l'air.
      Surcharge volontairement placée en fin de feuille (gagne au cascade).
      ════════════════════════════════════════════════════════════ */
 
@@ -545,7 +545,7 @@
   .hero p, .survival-desc, .wp-raison, .order-raison, .blocked-why, .bias-item, .lex-def { line-height: 1.7; }
 
   /* Structure « scène » comme la watchlist : le contenu est centré dans l'espace
-     situé APRÈS le rail (et non centré dans toute la fenêtre) — équilibré, pas collé. */
+situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas collé. */
   main { max-width: 1060px; }   /* même largeur que le doc de la watchlist */
   @media (min-width: 1301px) {
     /* centré dans la scène [262px → bord], exactement comme la watchlist */
@@ -556,7 +556,7 @@
   .hero p { max-width: 760px; }
   .survival-desc { max-width: 960px; }
 
-  /* Cyan/blanc partout — couleur gardée UNIQUEMENT pour le P&L (vert/rouge) + schémas */
+/* Cyan/blanc partout, couleur gardée UNIQUEMENT pour le P&L (vert/rouge) + schémas */
   .vix-pill.calme, .vix-pill.vigilance, .vix-pill.stress, .vix-pill.panique { border-color: var(--line); background: var(--surface2); }
   .vix-pill.calme .vix-regime, .vix-pill.vigilance .vix-regime, .vix-pill.stress .vix-regime, .vix-pill.panique .vix-regime { color: var(--ac); }
   .survival-block.alive::before, .survival-block.dead::before, .survival-block.panic::before { background: var(--ac); }
@@ -612,7 +612,7 @@
   <div class="hero-sep"></div>
 
   <div id="panic-banner" style="display:none" class="panic-banner">
-    ⚠️ Mode panique activé cette semaine — aucun ordre exécuté (Règle 03).
+⚠️ Mode panique activé cette semaine, aucun ordre exécuté (Règle 03).
   </div>
 
   <div id="survival-block" class="survival-block alive">
@@ -645,7 +645,7 @@
       <div id="macro-news-block" class="macro-news-inline" style="display:none">
         <div class="wp-label">Sources consultées cette semaine</div>
         <div id="macro-news-items"></div>
-        <div class="mn-source-note">Dépêches sélectionnées via Finnhub (agrégateur multi-sources : Reuters, Bloomberg, CNBC, MarketWatch, Yahoo, Seeking Alpha…) — filtrées sur les mots-clés macro (Fed, BCE, inflation, taux, géopol) et plafonnées à 2 par source pour éviter l'écho de chambre.</div>
+<div class="mn-source-note">Dépêches sélectionnées via Finnhub (agrégateur multi-sources : Reuters, Bloomberg, CNBC, MarketWatch, Yahoo, Seeking Alpha…), filtrées sur les mots-clés macro (Fed, BCE, inflation, taux, géopol) et plafonnées à 2 par source pour éviter l'écho de chambre.</div>
       </div>
     </div>
   </div>
@@ -752,9 +752,9 @@
           <div class="rule"><div class="rule-num">Règle 04 · Honnêteté</div><div class="rule-title">Chaque décision documentée</div><p>Chaque achat et vente est expliqué avec les données qui ont motivé la décision.</p></div>
           <div class="rule"><div class="rule-num">Règle 05 · Sources</div><div class="rule-title">Données multi-sources</div><p>Yahoo Finance pour le momentum, Finnhub pour valider les fondamentaux.</p></div>
           <div class="rule"><div class="rule-num">Règle 06 · Stop-loss</div><div class="rule-title">−15 % après 90 jours = sortie</div><p>Une position en perte ≥ 15 % détenue depuis plus de 90 jours est vendue automatiquement, hors mode panique.</p></div>
-          <div class="rule"><div class="rule-num">Règle 07 · Catastrophe</div><div class="rule-title">−25 % = sortie immédiate</div><p>Si une position perd 25 % ou plus, vente forcée sans condition de durée — même en mode panique. Garde-fou contre les effondrements rapides.</p></div>
-          <div class="rule"><div class="rule-num">Règle 08 · Réallocation</div><div class="rule-title">Rotations &amp; tailles sous contrainte</div><p>Vendre pour financer mieux (1 rotation max par run), renforcer une ligne sous le plafond des 20 %, alléger avec impôt au prorata de la fraction vendue — la friction frais + PFU doit être justifiée à chaque fois.</p></div>
-          <div class="rule"><div class="rule-num">Règle 09 · Sizing</div><div class="rule-title">L'IA dimensionne ses achats</div><p>Le montant de chaque achat est choisi par l'IA elle-même, pas par une formule — jusqu'à 100 % des liquidités si l'opportunité le justifie. Garde-fous : jamais de cash négatif, 20 % max par ligne, et au-delà de 65 % sur un même secteur, une conviction forte explicitement assumée est exigée.</p></div>
+<div class="rule"><div class="rule-num">Règle 07 · Catastrophe</div><div class="rule-title">−25 % = sortie immédiate</div><p>Si une position perd 25 % ou plus, vente forcée sans condition de durée, même en mode panique. Garde-fou contre les effondrements rapides.</p></div>
+<div class="rule"><div class="rule-num">Règle 08 · Réallocation</div><div class="rule-title">Rotations &amp; tailles sous contrainte</div><p>Vendre pour financer mieux (1 rotation max par run), renforcer une ligne sous le plafond des 20 %, alléger avec impôt au prorata de la fraction vendue, la friction frais + PFU doit être justifiée à chaque fois.</p></div>
+<div class="rule"><div class="rule-num">Règle 09 · Sizing</div><div class="rule-title">L'IA dimensionne ses achats</div><p>Le montant de chaque achat est choisi par l'IA elle-même, pas par une formule, jusqu'à 100 % des liquidités si l'opportunité le justifie. Garde-fous : jamais de cash négatif, 20 % max par ligne, et au-delà de 65 % sur un même secteur, une conviction forte explicitement assumée est exigée.</p></div>
         </div>
       </div>
 
@@ -780,12 +780,12 @@
       <!-- Learnings -->
       <div class="pacc-section">
         <div class="pacc-section-title">Ce qu'on a appris · Erreurs détectées &amp; corrections appliquées</div>
-        <p style="font-size:0.83rem;color:var(--text3);margin:0 0 1rem;line-height:1.6">Chaque amélioration du modèle est documentée ici — problème identifié, cause, correction appliquée.</p>
+<p style="font-size:0.83rem;color:var(--text3);margin:0 0 1rem;line-height:1.6">Chaque amélioration du modèle est documentée ici, problème identifié, cause, correction appliquée.</p>
   <div class="learnings-block" style="margin-bottom:0">
 
     <!-- Learnings principaux toujours visibles (v1.7+) -->
 
-    <!-- v3.5.0 — Fichier de données produit mais jamais publié (2e occurrence) -->
+<!-- v3.5.0, Fichier de données produit mais jamais publié (2e occurrence) -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>
       <div class="learning-body">
@@ -794,13 +794,13 @@
           <span class="learning-version">v3.5.0</span>
           <span class="learning-date">1er août 2026</span>
         </div>
-        <div class="learning-title">Un fichier de données produit à chaque run, mais jamais publié — deux fois de suite</div>
-        <div class="learning-prob">L'étape de publication automatique liste les fichiers de données un par un. Lors de la mise en service des watchlists thématiques, le nouveau fichier <code>universe.json</code> n'a pas été ajouté à cette liste : il était correctement calculé à chaque exécution, mais ne quittait jamais le serveur de calcul. Le site aurait servi une page de watchlists sans données, avec un job d'intégration parfaitement <strong>vert</strong>. C'est la deuxième occurrence exacte du même défaut — <code>charts.json</code>, qui alimente les graphiques des fiches, avait connu le même sort en v3.3.0. C'est la panne la plus coûteuse à diagnostiquer : aucun test ne casse, aucune alerte ne part, seul le site est incomplet.</div>
-        <div class="learning-fix">Au-delà de l'ajout du fichier manquant, un garde-fou remplace la vigilance : tout fichier de données créé ou modifié à la racine du projet et absent de la publication fait désormais <strong>échouer</strong> l'exécution, avec le nom du fichier oublié. Vérifié dans les deux sens — il détecte l'oubli, et ne se déclenche pas à tort quand tout est en ordre. Corollaire retenu : quand une même erreur se répète, on corrige le mécanisme, pas l'occurrence.</div>
+<div class="learning-title">Un fichier de données produit à chaque run, mais jamais publié, deux fois de suite</div>
+<div class="learning-prob">L'étape de publication automatique liste les fichiers de données un par un. Lors de la mise en service des watchlists thématiques, le nouveau fichier <code>universe.json</code> n'a pas été ajouté à cette liste : il était correctement calculé à chaque exécution, mais ne quittait jamais le serveur de calcul. Le site aurait servi une page de watchlists sans données, avec un job d'intégration parfaitement <strong>vert</strong>. C'est la deuxième occurrence exacte du même défaut, <code>charts.json</code>, qui alimente les graphiques des fiches, avait connu le même sort en v3.3.0. C'est la panne la plus coûteuse à diagnostiquer : aucun test ne casse, aucune alerte ne part, seul le site est incomplet.</div>
+<div class="learning-fix">Au-delà de l'ajout du fichier manquant, un garde-fou remplace la vigilance : tout fichier de données créé ou modifié à la racine du projet et absent de la publication fait désormais <strong>échouer</strong> l'exécution, avec le nom du fichier oublié. Vérifié dans les deux sens, il détecte l'oubli, et ne se déclenche pas à tort quand tout est en ordre. Corollaire retenu : quand une même erreur se répète, on corrige le mécanisme, pas l'occurrence.</div>
       </div>
     </div>
 
-    <!-- v3.2.1 — Watchlist 100% EU publiée 24h (barre Yahoo NaN pré-ouverture US) -->
+<!-- v3.2.1, Watchlist 100% EU publiée 24h (barre Yahoo NaN pré-ouverture US) -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>
       <div class="learning-body">
@@ -809,13 +809,13 @@
           <span class="learning-version">v3.2.1</span>
           <span class="learning-date">28 juillet 2026</span>
         </div>
-        <div class="learning-title">Watchlist 100 % européenne publiée pendant 24 h — 94 titres US évincés par une barre Yahoo vide</div>
-        <div class="learning-prob">Le run hebdomadaire du 27/07 tourne à 11h30 UTC, quand les marchés US sont encore fermés. Yahoo a renvoyé ce lundi-là une barre « du jour » avec un cours de clôture <code>NaN</code> pour les titres US. Le screener ne purgeait pas ces barres vides : MM21/MM200/RSI devenaient NaN, et le garde anti-NaN (ajouté en 3.1.0 pour protéger le site) écartait chaque titre avec le motif « données indisponibles ». Résultat : 94 titres évincés, et le top 30 des 39 survivants — publié en toute confiance, CI verte — était composé à 100 % de valeurs européennes et britanniques. C'est la même famille d'incident que le NaN de juin (3.0.1), qui avait été corrigé dans le suivi du portefeuille et les prix quotidiens (<code>last_valid_close</code>)… mais jamais dans le screener. Signalé par un utilisateur. Aucun impact portefeuille : l'IA n'a passé aucun ordre ce jour-là.</div>
-        <div class="learning-fix">Double correction, même philosophie fail-loud que 3.0.1 : (1) les barres sans cours sont purgées <em>avant</em> tout calcul d'indicateur (le dernier cours utilisé redevient le dernier cours <em>valide</em>, comme partout ailleurs dans le pipeline) ; (2) nouveau <strong>garde de couverture</strong> — si moins de 60 % de l'univers a pu être scoré, le run refuse de publier et échoue bruyamment : la watchlist précédente reste en ligne et l'alerte CI part immédiatement, au lieu d'un classement mensonger servi avec un job vert. Leçon : un garde qui écarte silencieusement des données peut transformer une panne bruyante en biais invisible — chaque éviction doit être bornée par un contrôle de couverture globale.</div>
+<div class="learning-title">Watchlist 100 % européenne publiée pendant 24 h, 94 titres US évincés par une barre Yahoo vide</div>
+<div class="learning-prob">Le run hebdomadaire du 27/07 tourne à 11h30 UTC, quand les marchés US sont encore fermés. Yahoo a renvoyé ce lundi-là une barre « du jour » avec un cours de clôture <code>NaN</code> pour les titres US. Le screener ne purgeait pas ces barres vides : MM21/MM200/RSI devenaient NaN, et le garde anti-NaN (ajouté en 3.1.0 pour protéger le site) écartait chaque titre avec le motif « données indisponibles ». Résultat : 94 titres évincés, et le top 30 des 39 survivants, publié en toute confiance, CI verte, était composé à 100 % de valeurs européennes et britanniques. C'est la même famille d'incident que le NaN de juin (3.0.1), qui avait été corrigé dans le suivi du portefeuille et les prix quotidiens (<code>last_valid_close</code>)… mais jamais dans le screener. Signalé par un utilisateur. Aucun impact portefeuille : l'IA n'a passé aucun ordre ce jour-là.</div>
+<div class="learning-fix">Double correction, même philosophie fail-loud que 3.0.1 : (1) les barres sans cours sont purgées <em>avant</em> tout calcul d'indicateur (le dernier cours utilisé redevient le dernier cours <em>valide</em>, comme partout ailleurs dans le pipeline) ; (2) nouveau <strong>garde de couverture</strong>, si moins de 60 % de l'univers a pu être scoré, le run refuse de publier et échoue bruyamment : la watchlist précédente reste en ligne et l'alerte CI part immédiatement, au lieu d'un classement mensonger servi avec un job vert. Leçon : un garde qui écarte silencieusement des données peut transformer une panne bruyante en biais invisible, chaque éviction doit être bornée par un contrôle de couverture globale.</div>
       </div>
     </div>
 
-    <!-- v3.1.0 — Audit complet (sécurité + gardes d'exécution + scores EU) + rotations + incident import os -->
+<!-- v3.1.0, Audit complet (sécurité + gardes d'exécution + scores EU) + rotations + incident import os -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>
       <div class="learning-body">
@@ -824,25 +824,25 @@
           <span class="learning-version">v3.1.0</span>
           <span class="learning-date">20 juillet 2026</span>
         </div>
-        <div class="learning-title">Audit complet : scores européens faussés, règles non appliquées en code, faille XSS — puis incident dès le premier run corrigé</div>
+<div class="learning-title">Audit complet : scores européens faussés, règles non appliquées en code, faille XSS, puis incident dès le premier run corrigé</div>
         <div class="learning-prob">Un audit complet du 18/07 (code, CI, frontend, données) a révélé quatre familles de défauts :
-          (1) La validation croisée Finnhub retirait naïvement les suffixes européens : <code>MC.PA</code> (LVMH) devenait <code>MC</code> — Moelis &amp; Co, une banque US sans rapport. Le screener comparait deux entreprises différentes, concluait à des données discordantes et <strong>pénalisait à tort les valeurs européennes jusqu'à −30% de score</strong>, chaque semaine.
+(1) La validation croisée Finnhub retirait naïvement les suffixes européens : <code>MC.PA</code> (LVMH) devenait <code>MC</code>, Moelis &amp; Co, une banque US sans rapport. Le screener comparait deux entreprises différentes, concluait à des données discordantes et <strong>pénalisait à tort les valeurs européennes jusqu'à −30% de score</strong>, chaque semaine.
           (2) Plusieurs règles n'existaient que dans le <em>prompt</em> de l'IA, jamais en code : un ticker halluciné hors watchlist s'achetait sans contrôle, et un achat pouvait rendre les <strong>liquidités négatives</strong> (le sizing forçait l'achat d'au moins 1 titre même trop cher).
-          (3) Le mode panique (Règle 03) se désarmait précisément en cas de panne de Yahoo — le benchmark retombait à 0, donc « pas de krach détecté » — et le seuil « −5% sur la semaine » était mesuré sur 4 séances au lieu de 5.
+(3) Le mode panique (Règle 03) se désarmait précisément en cas de panne de Yahoo, le benchmark retombait à 0, donc « pas de krach détecté », et le seuil « −5% sur la semaine » était mesuré sur 4 séances au lieu de 5.
           (4) Les textes générés par l'IA et les titres de presse Finnhub étaient affichés sans aucun filtrage HTML : un titre de presse piégé pouvait injecter du code exécutable chez tous les visiteurs (XSS stockée).
           Et le 20/07, <strong>le premier run du code corrigé a lui-même échoué</strong> : un vieil <code>import os</code> local rendait la nouvelle écriture atomique inopérante (<code>UnboundLocalError</code>).
         </div>
         <div class="learning-fix">
-          (1) Validation Finnhub réservée aux tickers US — plus aucune comparaison inter-entreprises ; les scores européens de la semaine 30 sont les premiers recalibrés.<br>
-          (2) Les règles sont désormais du <em>code</em>, pas des consignes : achat hors watchlist rejeté, coût total plafonné aux liquidités, prix de vente aberrant (×3/÷3) refusé, base fiscale reconstituée si absente. En bonus : l'agent sait opérer des <strong>rotations</strong> (vendre une position faible pour financer une meilleure opportunité — ventes exécutées avant les achats, règle des 5% de liquidités réévaluée en cours de run, max 1 rotation/run, friction frais+PFU à couvrir).<br>
-          (3) Mode panique <em>sticky</em> : sans donnée fraîche, l'état précédent est conservé — une panne de données ne désarme plus le disjoncteur. Fenêtre corrigée à 5 vraies séances.<br>
+(1) Validation Finnhub réservée aux tickers US, plus aucune comparaison inter-entreprises ; les scores européens de la semaine 30 sont les premiers recalibrés.<br>
+(2) Les règles sont désormais du <em>code</em>, pas des consignes : achat hors watchlist rejeté, coût total plafonné aux liquidités, prix de vente aberrant (×3/÷3) refusé, base fiscale reconstituée si absente. En bonus : l'agent sait opérer des <strong>rotations</strong> (vendre une position faible pour financer une meilleure opportunité, ventes exécutées avant les achats, règle des 5% de liquidités réévaluée en cours de run, max 1 rotation/run, friction frais+PFU à couvrir).<br>
+(3) Mode panique <em>sticky</em> : sans donnée fraîche, l'état précédent est conservé, une panne de données ne désarme plus le disjoncteur. Fenêtre corrigée à 5 vraies séances.<br>
           (4) Triple barrière anti-XSS : nettoyage des textes externes à la source, filtrage de la sortie IA en code (seul <code>&lt;b&gt;</code> autorisé), échappement systématique à l'affichage.<br>
-          Incident du 20/07 : corrigé en 1 ligne dans l'heure — et c'est le nouveau design <em>fail-loud</em> qui l'a rendu visible : job CI rouge + alerte immédiate, site intact (l'ancienne version aurait publié ou masqué l'échec). Le run relancé a publié la semaine 30 normalement.
+Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design <em>fail-loud</em> qui l'a rendu visible : job CI rouge + alerte immédiate, site intact (l'ancienne version aurait publié ou masqué l'échec). Le run relancé a publié la semaine 30 normalement.
         </div>
       </div>
     </div>
 
-    <!-- v3.0.1 — Incident NaN (site figé 8 jours) + correction du ledger des pertes -->
+<!-- v3.0.1, Incident NaN (site figé 8 jours) + correction du ledger des pertes -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>
       <div class="learning-body">
@@ -853,19 +853,19 @@
         </div>
         <div class="learning-title">Site figé 8 jours par des NaN silencieux + pertes reportables surestimées de 3 227 €</div>
         <div class="learning-prob">Trois défauts découverts par l'audit complet du 10/06 :
-          (1) Depuis le 02/06, Yahoo renvoyait un dernier cours <code>NaN</code> pour les places européennes au moment du cron de 22h UTC. Le NaN contaminait capital et benchmarks, puis était écrit tel quel dans <code>portfolio.json</code> — du JSON invalide que le navigateur refusait de lire. <strong>Tous les runs CI restaient verts</strong> : la page est restée figée 8 jours sans aucun signal d'alerte.
+(1) Depuis le 02/06, Yahoo renvoyait un dernier cours <code>NaN</code> pour les places européennes au moment du cron de 22h UTC. Le NaN contaminait capital et benchmarks, puis était écrit tel quel dans <code>portfolio.json</code>, du JSON invalide que le navigateur refusait de lire. <strong>Tous les runs CI restaient verts</strong> : la page est restée figée 8 jours sans aucun signal d'alerte.
           (2) Trois ventes de début mai (NOW, INTU, LSEG.L) comptaient le rachat du même jour dans leur base de coût : pertes reportables affichées 4 005,77 € au lieu de 778,29 € réels (bug d'une version antérieure du code d'exécution).
-          (3) ORSTED.CO (Copenhague) était valorisé avec son prix DKK traité comme des euros — la détection de devise mappait .CO/.ST/.OL vers EUR.
+(3) ORSTED.CO (Copenhague) était valorisé avec son prix DKK traité comme des euros, la détection de devise mappait .CO/.ST/.OL vers EUR.
         </div>
         <div class="learning-fix">
           (1) Tous les fetchs de prix ignorent désormais les closes NaN (<code>last_valid_close</code>), et l'écriture des JSON est atomique et stricte (<code>allow_nan=False</code>) : toute future corruption fait échouer le job <em>bruyamment</em> (CI rouge) au lieu de casser le site en silence. Historique du 02-09/06 reconstruit depuis les cours quotidiens réels.<br>
-          (2) P&amp;L des 3 ventes recalculé sur la tranche réellement vendue (ordres marqués <code>correction</code>) — la transparence du chiffre affiché prime sur le confort de pertes reportables plus élevées.<br>
+(2) P&amp;L des 3 ventes recalculé sur la tranche réellement vendue (ordres marqués <code>correction</code>), la transparence du chiffre affiché prime sur le confort de pertes reportables plus élevées.<br>
           (3) Support DKK/SEK/NOK ajouté, position Ørsted requantifiée 7 → 52 actions (impact valeur quasi nul : la quantité dérivait du même prix mal étiqueté). Garde de sanité ajoutée : un prix qui varie de plus de ×3 entre deux runs est refusé.
         </div>
       </div>
     </div>
 
-    <!-- v1.12 — Bug exécution weekend + UX gain net post-liquidation + R01 graduée -->
+<!-- v1.12, Bug exécution weekend + UX gain net post-liquidation + R01 graduée -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#ef4444"></div>
       <div class="learning-body">
@@ -876,7 +876,7 @@
         </div>
         <div class="learning-title">Bug exécution weekend + Gain net trompeur (latent vs réalisé) + R01 trop binaire</div>
         <div class="learning-prob">Trois défauts détectés lors d'un run manuel le samedi 23/05 :
-          (1) <code>executer_decisions()</code> ne contrôlait pas le jour de semaine — une vente INTU a été appliquée alors que tous les marchés étaient fermés (impossible en réalité, voir ordre marqué <span style="color:var(--red);background:var(--red-dim);padding:0 4px;border-radius:3px;font-size:0.85em">⚠ bug weekend</span> dans le journal).
+(1) <code>executer_decisions()</code> ne contrôlait pas le jour de semaine, une vente INTU a été appliquée alors que tous les marchés étaient fermés (impossible en réalité, voir ordre marqué <span style="color:var(--red);background:var(--red-dim);padding:0 4px;border-radius:3px;font-size:0.85em">⚠ bug weekend</span> dans le journal).
           (2) Le KPI "Gain net" affichait <code>capital_actuel − capital_initial</code> = +3 512€, mais ce chiffre mélangeait plus-values latentes (NVDA +95%, ASML +112% non taxées) et perf réalisée. En cas de liquidation totale, le PFU 30% sur les plus-values latentes prendrait ~1 400€, soit un gain net réel ~2 100€.
           (3) R01 bloquait binairement tout achat dès qu'un cluster dépassait 30%. Avec Tech & IA à 59%, aucun achat tech possible même pour une opportunité exceptionnelle.
         </div>
@@ -888,7 +888,7 @@
       </div>
     </div>
 
-    <!-- v1.10 — Skill integration + signal dynamics + cross-validation analystes -->
+<!-- v1.10, Skill integration + signal dynamics + cross-validation analystes -->
     <div class="learning-item">
       <div class="learning-accent" style="background:#6366f1"></div>
       <div class="learning-body">
@@ -898,7 +898,7 @@
           <span class="learning-date">10 mai 2026</span>
         </div>
         <div class="learning-title">L'agent prod n'utilisait pas la discipline méthodologique éprouvée localement</div>
-        <div class="learning-prob">En local Claude Code, les questions portfolio chargeaient automatiquement le skill <code>portfolio-analyst</code> — persona analyste, 5 mantras, pré-flight de 5 checks (fraîcheur données, drapeaux de transformation, dynamique du signal, conviction conservative, anti-auto-anchoring). Mais l'agent prod (<code>portfolio_agent.py</code>) n'y avait pas accès : son prompt contenait juste les règles non négociables. Conséquence : la méthodologie raffinée session après session n'arrivait jamais en production.</div>
+<div class="learning-prob">En local Claude Code, les questions portfolio chargeaient automatiquement le skill <code>portfolio-analyst</code>, persona analyste, 5 mantras, pré-flight de 5 checks (fraîcheur données, drapeaux de transformation, dynamique du signal, conviction conservative, anti-auto-anchoring). Mais l'agent prod (<code>portfolio_agent.py</code>) n'y avait pas accès : son prompt contenait juste les règles non négociables. Conséquence : la méthodologie raffinée session après session n'arrivait jamais en production.</div>
         <div class="learning-fix">Architecture dual-level. Skill committé à <code>&lt;repo&gt;/.claude/skills/portfolio-analyst/</code> (project-level), synchronisé avec le user-level via <code>python sync_skill.py</code>. <code>portfolio_agent.py</code> injecte le <code>SKILL.md</code> au début du prompt passe 2 via <code>load_skill_discipline()</code> en chemin relatif (marche aussi sur le runner GitHub Actions où le user-level n'existe pas).</div>
       </div>
     </div>
@@ -912,7 +912,7 @@
           <span class="learning-date">10 mai 2026</span>
         </div>
         <div class="learning-title">Un cross technique était lu en statique alors que sa dynamique inversait le signal</div>
-        <div class="learning-prob">Le cross MM21/MM200 était traité comme un état figé : "Death Cross frais → vente". Mais un cross peut être en train de se résorber (pente MM21 redevenue positive, spread tendu vers zéro) ou un cross stale &gt;90j peut signaler une mean-reversion en cours (pente fortement positive avec cours largement sous MM200). Cas observé sur Valeo (death cross 29j en résorption — premier verdict "vente forte" trop catégorique) et Reply (rebond mean-reversion sur cross stale 229j que le signal binaire ratait complètement).</div>
+<div class="learning-prob">Le cross MM21/MM200 était traité comme un état figé : "Death Cross frais → vente". Mais un cross peut être en train de se résorber (pente MM21 redevenue positive, spread tendu vers zéro) ou un cross stale &gt;90j peut signaler une mean-reversion en cours (pente fortement positive avec cours largement sous MM200). Cas observé sur Valeo (death cross 29j en résorption, premier verdict "vente forte" trop catégorique) et Reply (rebond mean-reversion sur cross stale 229j que le signal binaire ratait complètement).</div>
         <div class="learning-fix">Champ <code>signal_dynamics_warning</code> ajouté au breakdown screener avec 4 conditions (résorption death, affaiblissement golden, rebond mean-reversion sur cross stale, affaiblissement post-rally). Règle R7 dans le prompt agent : si <code>signal_dynamics_warning</code> non-vide, traiter le cross comme ambigu, ne pas trancher dessus seul. Le cross devient un signal nuancé, plus binaire.</div>
       </div>
     </div>
@@ -927,7 +927,7 @@
         </div>
         <div class="learning-title">La croissance CA annuelle peut masquer la réalité sur titres en transformation</div>
         <div class="learning-prob"><code>rev_growth_pct</code> annuel Yahoo Finance est trompeur quand : effet change important (Dassault Q1 2026 : −4% publié vs +3% à change constant), prix énergies (Veolia 0% annuel vs EBITDA +5.1% pcc), désync data (Reply 0.6% annuel vs +8% organique réel sur chiffres officiels), M&amp;A récent (FDJ +10.6% annuel vs −1% à pcc post-Kindred). Pattern observé sur 3-4 titres consécutifs cette session : score screener tiède (30-65) + consensus analystes très favorable + cours en dégradation 6-12m = donnée annuelle désynchronisée.</div>
-        <div class="learning-fix">Règle R8 dans le prompt agent — si score 30-65 + consensus ≥10 buy/≤2 sell + cours en dégradation 6-12m, suspecter données screener désynchronisées (effet change, M&amp;A, désync) et ne pas trancher uniquement sur le score. Drapeaux de transformation (M&amp;A &lt;24m, rebrand, scission, restructuration) ajoutés à la pré-flight skill comme déclencheur de croisement avec dernier trimestriel + communiqué IR.</div>
+<div class="learning-fix">Règle R8 dans le prompt agent, si score 30-65 + consensus ≥10 buy/≤2 sell + cours en dégradation 6-12m, suspecter données screener désynchronisées (effet change, M&amp;A, désync) et ne pas trancher uniquement sur le score. Drapeaux de transformation (M&amp;A &lt;24m, rebrand, scission, restructuration) ajoutés à la pré-flight skill comme déclencheur de croisement avec dernier trimestriel + communiqué IR.</div>
       </div>
     </div>
 
@@ -940,7 +940,7 @@
           <span class="learning-version">v2.0</span>
           <span class="learning-date">09 mai 2026</span>
         </div>
-        <div class="learning-title">Le scoring ignorait le timing d'entrée — un titre au plus haut scorait comme un titre en pullback sain</div>
+<div class="learning-title">Le scoring ignorait le timing d'entrée, un titre au plus haut scorait comme un titre en pullback sain</div>
         <div class="learning-prob">Un Golden Cross frais avec RSI sain et fondamentaux solides obtenait le même score, qu'il soit collé à son plus haut 52 semaines (chase de rally, mean-reversion court terme statistiquement défavorable) ou en repli de −7% sous ce plus haut (zone d'entrée idéale). La méthodologie récompensait la qualité de la trend mais ignorait la qualité du moment d'entrée. Conséquence pratique : Claude pouvait acheter au top sur des titres parfaitement scorés mais à un timing risqué.</div>
         <div class="learning-fix">Ajout d'une métrique <em>valorisation actuelle</em> (5 pts) dans le bloc momentum, basée sur le drawdown vs plus haut 52w. Pullback −3% à −10% = 5 pts (zone idéale), proche du top 0 à −3% = 0 pt (chase pénalisée), correction modérée −10 à −20% = 3 pts, momentum cassé au-delà = 0 ou 1 pt. Score total reste 100 : 5 pts récupérés en réduisant les analystes de 10 à 5 (signal lagging à fort biais haussier, moins actionnable que le timing d'entrée).</div>
       </div>
@@ -955,7 +955,7 @@
           <span class="learning-date">07 mai 2026</span>
         </div>
         <div class="learning-title">La conversion GBP→EUR utilisait une formule mathématiquement fausse</div>
-        <div class="learning-prob">Pour les positions en livres sterling, la fonction <code>to_eur</code> calculait <code>montant × eur_gbp</code> au lieu de <code>montant / eur_gbp</code>. Avec EUR/GBP ≈ 0.86 cela sous-évaluait toute position GBP de ~26%. Pire : la formule avait été changée entre runs (anciennement <code>montant / (eur_usd × 0.86)</code>), créant une incohérence entre montant_investi (stocké avec l'ancienne formule) et valeur_actuelle (calculée avec la nouvelle). Sur LSEG.L cela a affiché une fausse perte de −17% qui a déclenché à tort le stop-loss catastrophe — vente puis rachat le même jour.</div>
+<div class="learning-prob">Pour les positions en livres sterling, la fonction <code>to_eur</code> calculait <code>montant × eur_gbp</code> au lieu de <code>montant / eur_gbp</code>. Avec EUR/GBP ≈ 0.86 cela sous-évaluait toute position GBP de ~26%. Pire : la formule avait été changée entre runs (anciennement <code>montant / (eur_usd × 0.86)</code>), créant une incohérence entre montant_investi (stocké avec l'ancienne formule) et valeur_actuelle (calculée avec la nouvelle). Sur LSEG.L cela a affiché une fausse perte de −17% qui a déclenché à tort le stop-loss catastrophe, vente puis rachat le même jour.</div>
         <div class="learning-fix">Formule corrigée mathématiquement : <code>montant / eur_gbp</code> (vérifiée par cross-rate via USD). Migration auto dans <code>maj_position</code> : toute position GBP dont <code>montant_investi</code> est inférieur à 0.97× la valeur correcte est rebasée silencieusement au prochain run.</div>
       </div>
     </div>
@@ -969,7 +969,7 @@
           <span class="learning-date">07 mai 2026</span>
         </div>
         <div class="learning-title">L'IA n'avait pas accès à l'historique de ses propres décisions</div>
-        <div class="learning-prob">Le prompt ne contenait que les positions actuellement ouvertes (avec leur thèse d'achat). Aucune information sur les ventes passées ni les positions clôturées. Conséquence : Claude pouvait vendre une position dans un run, puis dans un run suivant le même jour voir le même titre dans la watchlist avec un bon score et le racheter — sans aucune conscience qu'il venait de le vendre. Cas observé sur ServiceNow le 6 mai (vente à 11:53 UTC, rachat à 12:29 UTC, données identiques).</div>
+<div class="learning-prob">Le prompt ne contenait que les positions actuellement ouvertes (avec leur thèse d'achat). Aucune information sur les ventes passées ni les positions clôturées. Conséquence : Claude pouvait vendre une position dans un run, puis dans un run suivant le même jour voir le même titre dans la watchlist avec un bon score et le racheter, sans aucune conscience qu'il venait de le vendre. Cas observé sur ServiceNow le 6 mai (vente à 11:53 UTC, rachat à 12:29 UTC, données identiques).</div>
         <div class="learning-fix">Section "Historique de tes décisions" ajoutée au prompt avec les 50 derniers ordres (ventes annotées avec perf et durée de détention, achats avec leur raison). Coût négligeable en tokens (~1K), mais Claude voit désormais ses propres pas. Garde-fou explicite dans le prompt : "Évite de racheter un titre que tu viens de vendre sauf si une thèse réellement nouvelle le justifie".</div>
       </div>
     </div>
@@ -983,7 +983,7 @@
           <span class="learning-date">07 mai 2026</span>
         </div>
         <div class="learning-title">Un bonus sectoriel caché de +3 pts faussait silencieusement le score</div>
-        <div class="learning-prob">Les secteurs Technology, Healthcare, Industrials et Financial Services recevaient automatiquement +3 points sans que ça apparaisse dans le breakdown affiché. Sur NVDA, la fiche montrait 28+50+10 = 88, mais le score réel était 91 — l'écart venait de ce bonus invisible. Double problème : (1) opacité du calcul (la transparence est cassée si la somme affichée ne correspond pas au total), (2) double-comptage car les fondamentaux mesurent déjà la qualité de croissance qui caractérise ces secteurs.</div>
+<div class="learning-prob">Les secteurs Technology, Healthcare, Industrials et Financial Services recevaient automatiquement +3 points sans que ça apparaisse dans le breakdown affiché. Sur NVDA, la fiche montrait 28+50+10 = 88, mais le score réel était 91, l'écart venait de ce bonus invisible. Double problème : (1) opacité du calcul (la transparence est cassée si la somme affichée ne correspond pas au total), (2) double-comptage car les fondamentaux mesurent déjà la qualité de croissance qui caractérise ces secteurs.</div>
         <div class="learning-fix">Bonus supprimé. La somme Momentum + Fondamentaux + Analystes correspond désormais exactement au score affiché. Les titres tech perdent ~2-3 pts en absolu, ce qui est un nivellement plus honnête.</div>
       </div>
     </div>
@@ -997,7 +997,7 @@
           <span class="learning-date">07 mai 2026</span>
         </div>
         <div class="learning-title">Le benchmark MSCI était comparé en mauvaise devise</div>
-        <div class="learning-prob">L'ETF utilisé pour mesurer "Signal vs marché mondial" était <code>URTH</code>, coté en dollars. Le portfolio Signal est calculé en euros. On soustrayait directement deux performances en devises différentes pour produire l'alpha — un mouvement EUR/USD de 5% sur l'année faussait l'alpha affiché de 5 points de pourcentage, sans aucun rapport avec la qualité des décisions de l'IA.</div>
+<div class="learning-prob">L'ETF utilisé pour mesurer "Signal vs marché mondial" était <code>URTH</code>, coté en dollars. Le portfolio Signal est calculé en euros. On soustrayait directement deux performances en devises différentes pour produire l'alpha, un mouvement EUR/USD de 5% sur l'année faussait l'alpha affiché de 5 points de pourcentage, sans aucun rapport avec la qualité des décisions de l'IA.</div>
         <div class="learning-fix">Bascule sur <code>EUNL.DE</code> (iShares Core MSCI World UCITS, Xetra, coté en euros). Le même indice sous-jacent, mais quoté dans la devise du portfolio. L'alpha mesure désormais ce qu'il prétend mesurer.</div>
       </div>
     </div>
@@ -1012,7 +1012,7 @@
         </div>
         <div class="learning-title">Trou de 89 jours sans aucun stop-loss possible</div>
         <div class="learning-prob">La Règle 07 (stop-loss à −15%) ne se déclenchait qu'à partir de 90 jours de détention. La Règle 01 interdit la vente avant 90 jours sauf signal fondamental majeur. Résultat : une position pouvait perdre 50% dans les 89 premiers jours sans qu'aucun mécanisme ne la sorte. La protection s'activait précisément quand elle n'était plus utile.</div>
-        <div class="learning-fix">Ajout de la Règle 08 — stop-loss catastrophe à −25% sans condition de durée, qui ignore aussi le mode panique. La R07 reste la sortie "ordinaire" sur position mature ; la R08 est le coupe-circuit en cas d'effondrement rapide. Les deux règles ne se chevauchent pas : R08 s'applique d'abord, R07 ensuite si non déclenchée.</div>
+<div class="learning-fix">Ajout de la Règle 08, stop-loss catastrophe à −25% sans condition de durée, qui ignore aussi le mode panique. La R07 reste la sortie "ordinaire" sur position mature ; la R08 est le coupe-circuit en cas d'effondrement rapide. Les deux règles ne se chevauchent pas : R08 s'applique d'abord, R07 ensuite si non déclenchée.</div>
       </div>
     </div>
 
@@ -1025,7 +1025,7 @@
           <span class="learning-date">07 mai 2026</span>
         </div>
         <div class="learning-title">Le z-score de régression était biaisé in-sample</div>
-        <div class="learning-prob">La régression log-linéaire qui mesure l'écart d'un cours à sa tendance long terme était fittée sur l'ensemble des données — y compris le dernier point qu'elle servait à mesurer. Mathématiquement, la droite était tirée vers le point récent, ce qui sous-estimait systématiquement |z|. Tous les "surachat" et "survente" affichés étaient en réalité plus extrêmes que les chiffres.</div>
+<div class="learning-prob">La régression log-linéaire qui mesure l'écart d'un cours à sa tendance long terme était fittée sur l'ensemble des données, y compris le dernier point qu'elle servait à mesurer. Mathématiquement, la droite était tirée vers le point récent, ce qui sous-estimait systématiquement |z|. Tous les "surachat" et "survente" affichés étaient en réalité plus extrêmes que les chiffres.</div>
         <div class="learning-fix">Holdout de 20 jours de bourse : la régression est fittée sur l'historique <em>moins</em> les 20 derniers jours, puis le z-score du dernier point est mesuré contre cette droite extrapolée. La droite n'est plus contaminée par le point qu'elle évalue.</div>
       </div>
     </div>
@@ -1039,7 +1039,7 @@
           <span class="learning-date">07 mai 2026</span>
         </div>
         <div class="learning-title">Les montants investis étaient stockés en devise locale, pas en euros</div>
-        <div class="learning-prob">Pour les positions en USD (NVDA, AMZN, V, BLK…), le champ <code>montant_investi</code> était enregistré en dollars au moment de l'achat. Résultat : les performances individuelles étaient faussées — Visa (V) affichait −18% alors qu'elle était à l'équilibre (montant_investi stocké à 661 $ au lieu de ~563 €), NVDA affichait +54% au lieu de +81% — et le capital total était sous-estimé de plusieurs centaines d'euros.</div>
+<div class="learning-prob">Pour les positions en USD (NVDA, AMZN, V, BLK…), le champ <code>montant_investi</code> était enregistré en dollars au moment de l'achat. Résultat : les performances individuelles étaient faussées, Visa (V) affichait −18% alors qu'elle était à l'équilibre (montant_investi stocké à 661 $ au lieu de ~563 €), NVDA affichait +54% au lieu de +81%, et le capital total était sous-estimé de plusieurs centaines d'euros.</div>
         <div class="learning-fix">Détection automatique des positions legacy : si l'écart entre le montant stocké et le prix × quantité en devise locale est inférieur à 5%, le montant est reconverti en euros. Un garde-fou de date (<code>LEGACY_CUTOFF</code>) évite les faux positifs sur les positions en GBP, dont le taux approche l'euro dans l'approximation utilisée. Toutes les positions sont désormais systématiquement stockées en euros.</div>
       </div>
     </div>
@@ -1053,7 +1053,7 @@
           <span class="learning-date">07 mai 2026</span>
         </div>
         <div class="learning-title">Le graphe de performance restait figé si l'agent tournait deux fois dans la journée</div>
-        <div class="learning-prob">La logique d'historique était en append-only : elle n'ajoutait un point que s'il n'en existait pas pour la date du jour. Si l'agent tournait le matin puis à nouveau l'après-midi avec de nouveaux prix, le graphe conservait les valeurs du matin — capital et performance incorrects jusqu'au lundi suivant.</div>
+<div class="learning-prob">La logique d'historique était en append-only : elle n'ajoutait un point que s'il n'en existait pas pour la date du jour. Si l'agent tournait le matin puis à nouveau l'après-midi avec de nouveaux prix, le graphe conservait les valeurs du matin, capital et performance incorrects jusqu'au lundi suivant.</div>
         <div class="learning-fix">Logique upsert : si une entrée existe déjà pour la date du jour, elle est mise à jour avec les valeurs les plus récentes. Les notes manuelles (annotations d'injection de capital) sont préservées lors de la mise à jour. Un sync défensif côté frontend corrige également le dernier point si le JSON est plus récent que l'historique.</div>
       </div>
     </div>
@@ -1067,7 +1067,7 @@
           <span class="learning-date">06 mai 2026</span>
         </div>
         <div class="learning-title">L'IA achetait et vendait le même titre en 24h</div>
-        <div class="learning-prob">ServiceNow acheté le 05/05 (z=−3.4σ cité comme opportunité) puis vendu le 06/05 (z=−3.4σ cité comme risque). Mêmes données, conclusions opposées — le modèle rationalisait selon l'angle du moment.</div>
+<div class="learning-prob">ServiceNow acheté le 05/05 (z=−3.4σ cité comme opportunité) puis vendu le 06/05 (z=−3.4σ cité comme risque). Mêmes données, conclusions opposées, le modèle rationalisait selon l'angle du moment.</div>
         <div class="learning-fix">Architecture deux passes : Haiku analyse sans décider (passe 1), Sonnet décide sur la base de cette analyse (passe 2). Pour toute vente &lt; 90j, le modèle doit citer la thèse d'achat originale et documenter ce qui a concrètement changé. Si rien n'a changé, la vente est refusée.</div>
       </div>
     </div>
@@ -1081,7 +1081,7 @@
           <span class="learning-date">06 mai 2026</span>
         </div>
         <div class="learning-title">Aucune mémoire du pourquoi d'un achat</div>
-        <div class="learning-prob">Quand l'IA envisageait de vendre, elle ne savait plus pourquoi elle avait acheté. Elle réévaluait la position à partir de zéro — et pouvait donc arriver à la conclusion opposée avec les mêmes signaux.</div>
+<div class="learning-prob">Quand l'IA envisageait de vendre, elle ne savait plus pourquoi elle avait acheté. Elle réévaluait la position à partir de zéro, et pouvait donc arriver à la conclusion opposée avec les mêmes signaux.</div>
         <div class="learning-fix">Chaque achat enregistre maintenant une <code>raison_achat</code> dans le portfolio.json. Cette thèse est relue systématiquement en passe 1 avant toute décision de vente, pour forcer une comparaison explicite avec la situation actuelle.</div>
       </div>
     </div>
@@ -1095,8 +1095,8 @@
           <span class="learning-date">06 mai 2026</span>
         </div>
         <div class="learning-title">On a sur-engineeré le feedback loop</div>
-        <div class="learning-prob">On a construit 3 niveaux d'auto-correction : injection des biais dans le prompt, règles auto-durcissantes, learnings auto-générés. En pratique : injecter des biais dans le prompt pollue le raisonnement de Claude. L'auto-durcissement des seuils n'avait aucune base — juste du bruit qui s'amplifie.</div>
-        <div class="learning-fix">Suppression des niveaux 1 et 3. Règles mécaniques conservées mais recâblées sur la valeur du portfolio (pas le comptage de titres). Les seuils sont assumés comme arbitraires — pas présentés comme académiques.</div>
+<div class="learning-prob">On a construit 3 niveaux d'auto-correction : injection des biais dans le prompt, règles auto-durcissantes, learnings auto-générés. En pratique : injecter des biais dans le prompt pollue le raisonnement de Claude. L'auto-durcissement des seuils n'avait aucune base, juste du bruit qui s'amplifie.</div>
+<div class="learning-fix">Suppression des niveaux 1 et 3. Règles mécaniques conservées mais recâblées sur la valeur du portfolio (pas le comptage de titres). Les seuils sont assumés comme arbitraires, pas présentés comme académiques.</div>
       </div>
     </div>
 
@@ -1112,7 +1112,7 @@
             <span class="learning-date">06 mai 2026</span>
           </div>
           <div class="learning-title">Les gardes de risque comptaient les titres, pas la valeur</div>
-          <div class="learning-prob">Un secteur était "concentré" si ≥ 4 positions y étaient ouvertes — peu importe leur taille. ASML à 25% du portfolio + 3 positions à 1% chacune déclenchait un blocage. 1 position tech à 30% ne déclenchait rien.</div>
+<div class="learning-prob">Un secteur était "concentré" si ≥ 4 positions y étaient ouvertes, peu importe leur taille. ASML à 25% du portfolio + 3 positions à 1% chacune déclenchait un blocage. 1 position tech à 30% ne déclenchait rien.</div>
           <div class="learning-fix">Règles recâblées sur la valeur : 1 secteur > 30% de la valeur totale → bloqué. 1 position > 20% du capital → renforcement bloqué. Liquidités < 5% → achats bloqués.</div>
         </div>
       </div>
@@ -1126,7 +1126,7 @@
             <span class="learning-date">06 mai 2026</span>
           </div>
           <div class="learning-title">Taille max d'une position incohérente avec les règles de risque</div>
-          <div class="learning-prob"><code>POIDS_MAX = 30%</code> dans le code permettait d'ouvrir une position à 30% du capital — mais la règle mécanique bloquait tout renforcement au-delà de 20%. Les deux limites se contredisaient.</div>
+<div class="learning-prob"><code>POIDS_MAX = 30%</code> dans le code permettait d'ouvrir une position à 30% du capital, mais la règle mécanique bloquait tout renforcement au-delà de 20%. Les deux limites se contredisaient.</div>
           <div class="learning-fix"><code>POIDS_MAX</code> ramené à 20%, aligné sur la règle de risque. Une seule limite cohérente, appliquée à la fois à l'ouverture et au renforcement.</div>
         </div>
       </div>
@@ -1140,7 +1140,7 @@
             <span class="learning-date">05 mai 2026</span>
           </div>
           <div class="learning-title">Le consensus analystes représentait 20% du score total</div>
-          <div class="learning-prob">20 pts sur 100 pour le consensus sell-side — alors que la littérature montre que les analystes surnotent structurellement les titres qu'ils couvrent (conflit d'intérêt, biais de confirmation). Un signal lagging à biais haussier surpondéré.</div>
+<div class="learning-prob">20 pts sur 100 pour le consensus sell-side, alors que la littérature montre que les analystes surnotent structurellement les titres qu'ils couvrent (conflit d'intérêt, biais de confirmation). Un signal lagging à biais haussier surpondéré.</div>
           <div class="learning-fix">Réduit à 10 pts, 10 pts redistribués vers les fondamentaux (40 → 50 pts). Sources : Barber &amp; Odean 2001, Jegadeesh &amp; Kim 2004.</div>
         </div>
       </div>
@@ -1154,7 +1154,7 @@
             <span class="learning-date">05 mai 2026</span>
           </div>
           <div class="learning-title">Le RSI était binaire : 10 pts ou 0</div>
-          <div class="learning-prob">Un titre à RSI 39 obtenait 0 pt. Un titre à RSI 41 obtenait 10 pts. Une différence de 2 points de RSI créait un écart de 10% du score total — aucune gradation entre les deux.</div>
+<div class="learning-prob">Un titre à RSI 39 obtenait 0 pt. Un titre à RSI 41 obtenait 10 pts. Une différence de 2 points de RSI créait un écart de 10% du score total, aucune gradation entre les deux.</div>
           <div class="learning-fix">RSI gradué : 10 pts (zone 40–60), 5 pts (zone 35–65), 0 sinon. La transition est progressive, plus cohérente avec la nature continue de l'indicateur.</div>
         </div>
       </div>
@@ -1183,7 +1183,7 @@
           </div>
           <div class="learning-title">La marge nette comptable seule dans les fondamentaux</div>
           <div class="learning-prob">La marge nette peut être gonflée par des éléments non récurrents (cession d'actifs, avantage fiscal ponctuel). Deux entreprises à 12% de marge nette peuvent avoir des profils de trésorerie très différents.</div>
-          <div class="learning-fix">Free Cash Flow margin ajouté : +5 pts si FCF/CA &gt; 15%, +3 pts si &gt; 5%. Le FCF mesure la trésorerie réellement générée — beaucoup plus difficile à maquiller comptablement.</div>
+<div class="learning-fix">Free Cash Flow margin ajouté : +5 pts si FCF/CA &gt; 15%, +3 pts si &gt; 5%. Le FCF mesure la trésorerie réellement générée, beaucoup plus difficile à maquiller comptablement.</div>
         </div>
       </div>
 
@@ -1196,7 +1196,7 @@
             <span class="learning-date">06 mai 2026</span>
           </div>
           <div class="learning-title">Tous les titres sortis affichaient le même message</div>
-          <div class="learning-prob">"Score insuffisant pour rester dans le top 30 cette semaine." — affiché pour 100% des sorties, quelle que soit la vraie raison. Death Cross récent, surachat en régression, fondamentaux dégradés : même message pour tout.</div>
+<div class="learning-prob">"Score insuffisant pour rester dans le top 30 cette semaine.", affiché pour 100% des sorties, quelle que soit la vraie raison. Death Cross récent, surachat en régression, fondamentaux dégradés : même message pour tout.</div>
           <div class="learning-fix">Fonction <code>raison_sortie()</code> analyse le breakdown de chaque titre sorti et génère un message spécifique : raison principale + valeurs chiffrées. Ex. "Death Cross récent (12j), momentum 9/40."</div>
         </div>
       </div>
@@ -1230,20 +1230,20 @@
       <div class="pacc-section">
         <div class="pacc-section-title">Portefeuille &amp; Performance</div>
         <div class="lex-grid">
-          <div class="lex-item"><div class="lex-term">MSCI World</div><div class="lex-def">Indice mondial couvrant ~1 500 grandes et moyennes capitalisations dans 23 pays développés. <em>Benchmark de référence</em> de Signal — toute la performance du portefeuille est mesurée par rapport à cet indice (en euros, via l'ETF EUNL).</div></div>
-          <div class="lex-item"><div class="lex-term">Écart au benchmark</div><div class="lex-def">Différence de performance entre Signal et le MSCI World, exprimée en <em>points de pourcentage (pp)</em>. Un écart de +5.4 pp signifie que le portefeuille a fait 5.4 points de mieux que l'indice sur la même période ; un écart négatif, qu'il a fait moins bien. C'est une <em>observation</em> de performance relative, suivie en réel — pas une promesse de surperformance.</div></div>
+<div class="lex-item"><div class="lex-term">MSCI World</div><div class="lex-def">Indice mondial couvrant ~1 500 grandes et moyennes capitalisations dans 23 pays développés. <em>Benchmark de référence</em> de Signal, toute la performance du portefeuille est mesurée par rapport à cet indice (en euros, via l'ETF EUNL).</div></div>
+<div class="lex-item"><div class="lex-term">Écart au benchmark</div><div class="lex-def">Différence de performance entre Signal et le MSCI World, exprimée en <em>points de pourcentage (pp)</em>. Un écart de +5.4 pp signifie que le portefeuille a fait 5.4 points de mieux que l'indice sur la même période ; un écart négatif, qu'il a fait moins bien. C'est une <em>observation</em> de performance relative, suivie en réel, pas une promesse de surperformance.</div></div>
           <div class="lex-item"><div class="lex-term">Drawdown max</div><div class="lex-def">Perte maximale enregistrée depuis un pic du portefeuille, en %. Mesure le <em>pire scénario traversé</em> : un drawdown de −15% signifie que la valeur a chuté de 15% depuis son plus haut avant de se redresser. Indicateur de risque clé, indépendant de la performance finale.</div></div>
-          <div class="lex-item"><div class="lex-term">P&amp;L réalisé</div><div class="lex-def">Profit and Loss — gain ou perte <em>effectivement encaissé</em> sur les positions fermées. Distinct du P&amp;L latent (positions ouvertes), qui peut encore s'inverser. Seul le P&amp;L réalisé est définitif.</div></div>
+<div class="lex-item"><div class="lex-term">P&amp;L réalisé</div><div class="lex-def">Profit and Loss, gain ou perte <em>effectivement encaissé</em> sur les positions fermées. Distinct du P&amp;L latent (positions ouvertes), qui peut encore s'inverser. Seul le P&amp;L réalisé est définitif.</div></div>
           <div class="lex-item"><div class="lex-term">Performance en € vs devise locale</div><div class="lex-def">Pour les titres en USD ou GBP, la performance affichée est <em>calculée en euros</em> et intègre la variation du taux de change. Un titre qui monte de +5% en dollars sur une période où le dollar baisse de 10% affiche −5% en €. C'est la performance réelle pour un investisseur en zone euro.</div></div>
-          <div class="lex-item"><div class="lex-term">Poids (% du portefeuille)</div><div class="lex-def">Part d'une position dans la valeur totale. <em>Règle 02</em> : aucun titre ne dépasse 20% du capital. Un poids élevé amplifie l'impact de chaque variation — à la hausse comme à la baisse.</div></div>
+<div class="lex-item"><div class="lex-term">Poids (% du portefeuille)</div><div class="lex-def">Part d'une position dans la valeur totale. <em>Règle 02</em> : aucun titre ne dépasse 20% du capital. Un poids élevé amplifie l'impact de chaque variation, à la hausse comme à la baisse.</div></div>
         </div>
       </div>
       <div class="pacc-section">
         <div class="pacc-section-title">Signaux techniques utilisés dans les décisions</div>
         <div class="lex-grid">
-          <div class="lex-item"><div class="lex-term">RSI (Relative Strength Index)</div><div class="lex-def">Oscillateur 0–100 mesurant la vitesse des variations récentes. <em>Zone saine : 40–60.</em> Au-delà de 70 : surachat potentiel. Sous 30 : survente. Un RSI favorable ne suffit pas seul — il est combiné aux signaux de tendance et de régression.</div></div>
+<div class="lex-item"><div class="lex-term">RSI (Relative Strength Index)</div><div class="lex-def">Oscillateur 0–100 mesurant la vitesse des variations récentes. <em>Zone saine : 40–60.</em> Au-delà de 70 : surachat potentiel. Sous 30 : survente. Un RSI favorable ne suffit pas seul, il est combiné aux signaux de tendance et de régression.</div></div>
           <div class="lex-item"><div class="lex-term">Z-score (σ)</div><div class="lex-def">Écart du cours à sa droite de régression long terme, en écarts-types. <em>−3.4σ</em> signifie que le cours est 3.4 déviations sous sa tendance : décote anormale, potentiel de rebond vers la moyenne mais aussi signe possible de détérioration fondamentale.</div></div>
-          <div class="lex-item"><div class="lex-term">Golden Cross / Death Cross</div><div class="lex-def"><em>Golden Cross</em> : la MM21 passe au-dessus de la MM200 — signal haussier. <em>Death Cross</em> : la MM21 passe sous la MM200 — signal baissier. La durée depuis le croisement détermine la prime accordée : un signal récent (&lt;30j) est plus fort qu'un signal ancien (&gt;180j).</div></div>
+<div class="lex-item"><div class="lex-term">Golden Cross / Death Cross</div><div class="lex-def"><em>Golden Cross</em> : la MM21 passe au-dessus de la MM200, signal haussier. <em>Death Cross</em> : la MM21 passe sous la MM200, signal baissier. La durée depuis le croisement détermine la prime accordée : un signal récent (&lt;30j) est plus fort qu'un signal ancien (&gt;180j).</div></div>
         </div>
         <div style="margin-top:0.75rem;font-family:'Courier New',monospace;font-size:0.75rem;color:var(--text3)">Définitions complètes des signaux → <a href="index.html#lexique" style="color:var(--ac);text-decoration:none">Lexique de la Watchlist ↗</a></div>
       </div>
@@ -1287,7 +1287,7 @@ function filterHistoryByRange(history, range, custom) {
   }
   const days = RANGE_DAYS[range];
   if (!days) return history.slice();
-  // Référence : dernière date dispo (pas Date.now() — le portfolio peut être périmé de 1-2j)
+// Référence : dernière date dispo (pas Date.now(), le portfolio peut être périmé de 1-2j)
   const lastDateStr = history[history.length - 1].date;
   const ref = new Date(lastDateStr);
   const cutoff = new Date(ref); cutoff.setDate(cutoff.getDate() - days);
@@ -1335,18 +1335,18 @@ function rerenderChart() {
   const note = document.getElementById('chart-note');
 
   if (filtered.length < 2) {
-    // Plage trop courte pour la granularité quotidienne — fallback gracieux
+// Plage trop courte pour la granularité quotidienne, fallback gracieux
     const fallback = _fullHistory.slice(-Math.max(2, filtered.length));
     renderChart(fallback, _capitalInit);
     if (note) {
-      note.textContent = `${RANGE_LBL[_currentRange] || _currentRange} — données insuffisantes (granularité quotidienne, marchés fermés ?). Affichage des ${fallback.length} dernier(s) point(s).`;
+note.textContent = `${RANGE_LBL[_currentRange] || _currentRange}, données insuffisantes (granularité quotidienne, marchés fermés ?). Affichage des ${fallback.length} dernier(s) point(s).`;
     }
     return;
   }
 
   renderChart(filtered, _capitalInit);
   if (note) {
-    note.textContent = `${filtered.length} point${filtered.length > 1 ? 's' : ''} · vue ${RANGE_LBL[_currentRange] || _currentRange} — un point s'ajoute chaque jour de marché ouvré`;
+note.textContent = `${filtered.length} point${filtered.length > 1 ? 's' : ''} · vue ${RANGE_LBL[_currentRange] || _currentRange}, un point s'ajoute chaque jour de marché ouvré`;
   }
 }
 
@@ -1356,7 +1356,7 @@ function renderChart(history, capitalInitial = 20000) {
   const mk   = (tag, attrs) => { const e = document.createElementNS(ns, tag); Object.entries(attrs).forEach(([k,v]) => e.setAttribute(k,v)); return e; };
   const xMin = 50, xMax = 550, yTop = 22, yBot = 182;
 
-  // ── Clear SVG content (preserve <defs>) — pour permettre les re-renders ────
+// ── Clear SVG content (preserve <defs>), pour permettre les re-renders ────
   Array.from(svg.children).forEach(child => { if (child.tagName.toLowerCase() !== 'defs') svg.removeChild(child); });
 
   // ── Capital en € ──────────────────────────────────────────────────────────
@@ -1395,7 +1395,7 @@ function renderChart(history, capitalInitial = 20000) {
   const smoothPath = (points) => {
     if (points.length < 2) return '';
     if (points.length === 2) return `M${points[0].x.toFixed(1)},${points[0].y.toFixed(1)} L${points[1].x.toFixed(1)},${points[1].y.toFixed(1)}`;
-    const t = 0.18;  // tension modérée — courbe douce sans overshoot
+const t = 0.18; // tension modérée, courbe douce sans overshoot
     let d = `M${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
     for (let i = 0; i < points.length - 1; i++) {
       const p0 = points[Math.max(0, i - 1)];
@@ -1576,9 +1576,9 @@ function renderOrder(o, idx) {
         <div class="order-detail-inner">
           ${o._allerRetour ? (o.type === 'VENTE'
             ? `<div class="order-correction-note is-bug">
-                <strong>⚠ Vente erronée — rachetée le même jour.</strong>
+<strong>⚠ Vente erronée, rachetée le même jour.</strong>
                 ${o.currency === 'GBP'
-                  ? `Cette vente a été déclenchée par un bug de conversion de change (GBP→EUR) qui surévaluait la perte d'une position en livres sterling — le système a vu une fausse perte et déclenché le stop-loss. Le bug a depuis été corrigé.`
+? `Cette vente a été déclenchée par un bug de conversion de change (GBP→EUR) qui surévaluait la perte d'une position en livres sterling, le système a vu une fausse perte et déclenché le stop-loss. Le bug a depuis été corrigé.`
                   : `Cette vente a été décidée lors d'un run, puis Claude a racheté la position dans un run suivant le même jour en réinterprétant les mêmes données avec une conclusion opposée. Cause racine : l'IA ne voyait pas ses ventes récentes dans son contexte. Corrigé depuis : l'historique des 50 derniers ordres est désormais injecté dans le prompt à chaque run.`}
                 Le raisonnement ci-dessous est conservé pour préserver la transparence de l'historique.
               </div>`
@@ -1589,8 +1589,8 @@ function renderOrder(o, idx) {
                   : `La vente précédente résultait d'un flip-flop entre runs successifs. Cet achat rétablit la position en cohérence avec le signal réel.`}
               </div>`) : ''}
           ${o._bug_weekend_exec ? `<div class="order-correction-note is-bug">
-                <strong>⚠ Vente exécutée un samedi — bug d'enforcement weekend.</strong>
-                Cet ordre a été déclenché par un run manuel le samedi 23 mai 2026 alors que tous les marchés étaient fermés. En réalité, aucun broker n'aurait pu exécuter cette vente avant l'ouverture du lundi suivant — le prix réalisé serait probablement différent du prix de clôture vendredi affiché ici.
+<strong>⚠ Vente exécutée un samedi, bug d'enforcement weekend.</strong>
+Cet ordre a été déclenché par un run manuel le samedi 23 mai 2026 alors que tous les marchés étaient fermés. En réalité, aucun broker n'aurait pu exécuter cette vente avant l'ouverture du lundi suivant, le prix réalisé serait probablement différent du prix de clôture vendredi affiché ici.
                 <br><br>Cause racine : <code>executer_decisions()</code> ne vérifiait pas le jour de la semaine avant d'appliquer les décisions. Corrigé depuis (commit <a href="https://github.com/Kosmos-7/Signal/commit/12dae5e" target="_blank" style="color:var(--red);text-decoration:underline">12dae5e</a>) : un guard en tête de fonction reporte toute décision ACHAT/VENTE proposée samedi/dimanche au prochain jour ouvré (motif <code>marche_ferme_weekend</code> dans <code>decisions_bloquees</code>).
                 <br><br>L'ordre est conservé dans l'historique pour transparence méthodologique (Signal documente ses erreurs au lieu de les masquer).
               </div>` : ''}
@@ -1605,7 +1605,7 @@ function toggleOrder(idx) {
   if (el) el.classList.toggle('open');
 }
 
-// Échappement HTML global — pour TOUT texte issu de l'IA ou d'une source externe
+// Échappement HTML global, pour TOUT texte issu de l'IA ou d'une source externe
 // (news Finnhub, raisonnements Claude, messages de règles) injecté en innerHTML.
 function escHtml(s) {
   return String(s == null ? '' : s)
@@ -1625,7 +1625,7 @@ function renderMacroNews(news) {
   };
   list.innerHTML = news.map(n => {
     // Données 100% tierces (API Finnhub) : tout est échappé, et l'URL n'est
-    // acceptée qu'en http(s) — le vecteur le plus directement contrôlable de
+// acceptée qu'en http(s), le vecteur le plus directement contrôlable de
     // l'extérieur (headline/url hostile → XSS chez tous les visiteurs).
     const resume   = n.resume_fr ? escHtml(n.resume_fr) : '<em style="color:var(--text3)">Résumé indisponible.</em>';
     const safeUrl  = /^https?:\/\//i.test(n.url || '') ? escHtml(n.url) : '';
@@ -1635,7 +1635,7 @@ function renderMacroNews(news) {
     const meta = `<span class="mn-meta-date">${fmtDate(n.date)}</span>${n.source ? ' · ' + escHtml(n.source) : ''}`;
     return `<div class="mn-item">
       <div class="mn-resume">${resume}</div>
-      <div class="mn-headline">${meta} — ${headline}</div>
+<div class="mn-headline">${meta}, ${headline}</div>
     </div>`;
   }).join('');
   block.style.display = 'block';
@@ -1781,7 +1781,7 @@ async function loadPortfolio() {
 
     if (d.mode_panique) document.getElementById('panic-banner').style.display = 'block';
 
-    // Bloc Performance vs MSCI — comparaison neutre, plus de dramatisation "survie"
+// Bloc Performance vs MSCI, comparaison neutre, plus de dramatisation "survie"
     const sb    = document.getElementById('survival-block');
     const panic = d.mode_panique;
     const ahead = (d.vs_benchmark ?? 0) >= 0;
@@ -1789,7 +1789,7 @@ async function loadPortfolio() {
     const sc = panic ? 'var(--orange)' : ahead ? 'var(--green)' : 'var(--red)';
     const sl = panic ? 'Mode panique' : ahead ? 'En avance sur le marché' : 'En retard sur le marché';
 
-    // VIX pill — indicateur contextuel de volatilité (informationnel, n'influence pas le scoring)
+// VIX pill, indicateur contextuel de volatilité (informationnel, n'influence pas le scoring)
     const vix = d.last_known_vix;
     let vixPillHtml = '';
     if (vix != null && vix > 0) {
@@ -1798,7 +1798,7 @@ async function loadPortfolio() {
       else if (vix < 25) { vixRegime = 'vigilance'; vixClass = 'vigilance'; }
       else if (vix < 35) { vixRegime = 'stress';    vixClass = 'stress'; }
       else               { vixRegime = 'panique';   vixClass = 'panique'; }
-      vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX — indice de volatilité implicite S&P 500 (CBOE). Affiché comme contexte macro, n'influence pas les scores du screener."><span class="vix-label">VIX</span><span class="vix-val">${vix.toFixed(1)}</span><span class="vix-regime">${vixRegime}</span></div>`;
+vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilité implicite S&P 500 (CBOE). Affiché comme contexte macro, n'influence pas les scores du screener."><span class="vix-label">VIX</span><span class="vix-val">${vix.toFixed(1)}</span><span class="vix-regime">${vixRegime}</span></div>`;
     }
 
     sb.innerHTML = `
@@ -1827,7 +1827,7 @@ async function loadPortfolio() {
         </div>
       </div>`;
 
-    // KPI — 5 cartes "état du portefeuille" (perf/écart au benchmark déjà dans le survival block, pas de doublon)
+// KPI, 5 cartes "état du portefeuille" (perf/écart au benchmark déjà dans le survival block, pas de doublon)
     const investi   = d.capital_actuel - d.liquidites;
     const pctInvesti = (100 - d.pct_liquidites).toFixed(1);
     const nbNeutres = d.nb_neutres ?? (d.nb_positions - d.nb_positives - d.nb_negatives);
@@ -1864,7 +1864,7 @@ async function loadPortfolio() {
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:var(--text3)"></div>
-        <div class="kpi-label">Investi en bourse <span class="kpi-info" data-tip="Part du portefeuille placée dans des actions — ce montant fluctue avec les marchés">ⓘ</span></div>
+<div class="kpi-label">Investi en bourse <span class="kpi-info" data-tip="Part du portefeuille placée dans des actions, ce montant fluctue avec les marchés">ⓘ</span></div>
         <div class="kpi-value">${fmtEur(investi)}</div>
         <div class="kpi-sub">${pctInvesti} % du portefeuille</div>
       </div>
@@ -1876,12 +1876,12 @@ async function loadPortfolio() {
       </div>
       <div class="kpi">
         <div class="kpi-accent" style="background:var(--text3)"></div>
-        <div class="kpi-label">Positions <span class="kpi-info" data-tip="Nombre d'entreprises différentes détenues — diversifier réduit le risque lié à un seul titre">ⓘ</span></div>
+<div class="kpi-label">Positions <span class="kpi-info" data-tip="Nombre d'entreprises différentes détenues, diversifier réduit le risque lié à un seul titre">ⓘ</span></div>
         <div class="kpi-value">${d.nb_positions}</div>
         <div class="kpi-sub">${nSub}</div>
       </div>`;
 
-    // Positions — perf calculée en € + tri desc
+// Positions, perf calculée en € + tri desc
     const pos = d.positions || [];
     const posWithEurPerf = pos.map(p => ({
       ...p,
@@ -2000,7 +2000,7 @@ async function loadPortfolio() {
 
     // Décisions tentées par Claude mais bloquées par les règles mécaniques.
     // Restent en transparence côté accordion (audit/data), sans bannière en haut
-    // de la newsletter — Claude doit lui-même les mentionner dans `analyse_macro`
+// de la newsletter, Claude doit lui-même les mentionner dans `analyse_macro`
     // pour que la narration newsletter reste cohérente avec le journal des ordres.
     const blocked = d.decisions_bloquees || [];
     if (blocked.length > 0) {
@@ -2031,7 +2031,7 @@ async function loadPortfolio() {
   }
 }
 
-// ── Compteurs dynamiques — s'auto-mettent à jour si on ajoute règles/learnings
+// ── Compteurs dynamiques, s'auto-mettent à jour si on ajoute règles/learnings
 (function initCounts() {
   const nbRegles    = document.querySelectorAll('.rule').length;
   const nbLearnings = document.querySelectorAll('.learning-item').length;

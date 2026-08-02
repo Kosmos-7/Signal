@@ -753,6 +753,10 @@ Date du jour : {today}.
 - Tu peux utiliser des balises <b>…</b> inline pour mettre en relief un chiffre clé
   (comme les fiches existantes), mais avec parcimonie. Pas d'autre HTML.
 - Écris en FRANÇAIS.
+- INTERDIT : le tiret cadratin « — » comme ponctuation. C'est la signature la plus
+  reconnaissable d'un texte de machine, et elle décrédibilise la fiche entière.
+  Utilise une virgule pour une apposition, deux-points pour une explication, ou
+  coupe en deux phrases. Le tiret demi-cadratin « – » est proscrit de la même façon.
 
 ## FORMAT DE SORTIE — JSON STRICT, RIEN D'AUTRE
 Réponds UNIQUEMENT par un objet JSON valide (pas de texte avant/après, pas de backticks)

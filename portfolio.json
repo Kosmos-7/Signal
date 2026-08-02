@@ -86,7 +86,7 @@
       "valeur_actuelle": 1350.93,
       "performance": 23.36,
       "score_entree": 82,
-      "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
+      "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression, la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
       "poids": 5.7,
       "plus_value_latente_eur": 255.85
     },
@@ -105,7 +105,7 @@
       "valeur_actuelle": 929.89,
       "performance": 21.73,
       "score_entree": 80,
-      "raison_achat": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume — fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1% — momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel — l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
+      "raison_achat": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume, fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1%, momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel, l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
       "poids": 4.0,
       "plus_value_latente_eur": 166.0
     },
@@ -208,7 +208,7 @@
       "valeur_actuelle": 1117.5,
       "performance": 3.47,
       "score_entree": 80,
-      "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
+      "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée, profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
       "poids": 4.8,
       "plus_value_latente_eur": 37.43
     },
@@ -244,7 +244,7 @@
       "valeur_actuelle": 1072.08,
       "performance": -0.56,
       "score_entree": 77,
-      "raison_achat": "SPGI affiche un Golden Cross frais à J+1 avec confirmation volume — c'est la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant). Score 77/100, z=-1.4σ sous sa droite de régression (décote de 35% sur tendance) et val=4/5 avec DD-21.8% : le timing d'entrée est propre, on est dans une zone Fibo acceptable, pas au top 52w. Secteur Finance (hors cluster Tech&IA saturé à 62%) — pas de restriction sectorielle. Consensus +25% d'upside analystes. Le contexte macro de taux stables (Fed hold cette semaine) est favorable aux plateformes de données financières comme SPGI dont les revenus d'indices et de ratings sont structurellement résistants. Liquidités disponibles : 1430€ — position initiale modeste (1 titre ~env. 400-500€ range estimé) pour rester au-dessus du plancher de 5% cash. Conviction modérée : Golden Cross J+1 est le meilleur signal timing de la semaine hors cluster saturé.",
+      "raison_achat": "SPGI affiche un Golden Cross frais à J+1 avec confirmation volume : c'est la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant). Score 77/100, z=-1.4σ sous sa droite de régression (décote de 35% sur tendance) et val=4/5 avec DD-21.8% : le timing d'entrée est propre, on est dans une zone Fibo acceptable, pas au top 52w. Secteur Finance (hors cluster Tech&IA saturé à 62%), pas de restriction sectorielle. Consensus +25% d'upside analystes. Le contexte macro de taux stables (Fed hold cette semaine) est favorable aux plateformes de données financières comme SPGI dont les revenus d'indices et de ratings sont structurellement résistants. Liquidités disponibles : 1430€, position initiale modeste (1 titre ~env. 400-500€ range estimé) pour rester au-dessus du plancher de 5% cash. Conviction modérée : Golden Cross J+1 est le meilleur signal timing de la semaine hors cluster saturé.",
       "poids": 4.6,
       "plus_value_latente_eur": -6.0
     },
@@ -330,7 +330,7 @@
       "valeur_actuelle": 1374.95,
       "performance": -7.88,
       "score_entree": 83,
-      "raison_achat": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
+      "raison_achat": "Score 83/100 avec Golden Cross frais (9j), fenêtre signal optimale, et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
       "poids": 5.8,
       "plus_value_latente_eur": -117.69
     },
@@ -349,7 +349,7 @@
       "valeur_actuelle": 1006.02,
       "performance": -12.57,
       "score_entree": 81,
-      "raison_achat": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression — décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low) — le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique — opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
+      "raison_achat": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression, décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low), le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique, opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
       "poids": 4.3,
       "correction": "Devise corrigee EUR->DKK le 2026-06-10 (cotation Copenhague) ; quantite requantifiee pour honorer le montant EUR investi.",
       "plus_value_latente_eur": -144.59
@@ -369,7 +369,7 @@
       "montant": 1078.08,
       "montant_brut_eur": 1077.27,
       "frais_achat_eur": 0.808,
-      "raison": "SPGI affiche un Golden Cross frais à J+1 avec confirmation volume — c'est la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant). Score 77/100, z=-1.4σ sous sa droite de régression (décote de 35% sur tendance) et val=4/5 avec DD-21.8% : le timing d'entrée est propre, on est dans une zone Fibo acceptable, pas au top 52w. Secteur Finance (hors cluster Tech&IA saturé à 62%) — pas de restriction sectorielle. Consensus +25% d'upside analystes. Le contexte macro de taux stables (Fed hold cette semaine) est favorable aux plateformes de données financières comme SPGI dont les revenus d'indices et de ratings sont structurellement résistants. Liquidités disponibles : 1430€ — position initiale modeste (1 titre ~env. 400-500€ range estimé) pour rester au-dessus du plancher de 5% cash. Conviction modérée : Golden Cross J+1 est le meilleur signal timing de la semaine hors cluster saturé.",
+      "raison": "SPGI affiche un Golden Cross frais à J+1 avec confirmation volume : c'est la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant). Score 77/100, z=-1.4σ sous sa droite de régression (décote de 35% sur tendance) et val=4/5 avec DD-21.8% : le timing d'entrée est propre, on est dans une zone Fibo acceptable, pas au top 52w. Secteur Finance (hors cluster Tech&IA saturé à 62%), pas de restriction sectorielle. Consensus +25% d'upside analystes. Le contexte macro de taux stables (Fed hold cette semaine) est favorable aux plateformes de données financières comme SPGI dont les revenus d'indices et de ratings sont structurellement résistants. Liquidités disponibles : 1430€, position initiale modeste (1 titre ~env. 400-500€ range estimé) pour rester au-dessus du plancher de 5% cash. Conviction modérée : Golden Cross J+1 est le meilleur signal timing de la semaine hors cluster saturé.",
       "conviction": "modérée",
       "source": "Claude AI",
       "score_watchlist": 77,
@@ -445,7 +445,7 @@
       "perf": -15.2,
       "pnl_eur": -83.07,
       "jours": 81,
-      "raison": "Détenu depuis 81 jours, ENR.DE est à -15.2% depuis l'achat — exactement au seuil du stop-loss automatique R06 (-15% après 90 jours, ou -25% sans condition). La règle R06 est déclenchée en mode préventif : on approche du seuil des 90 jours avec une perte qui touche le plancher de la règle. Score screener toujours à 91/100, mais la performance réelle contredit le signal qualitatif. La thèse n'est pas documentée, ce qui rend impossible de vérifier si le delta_these est fondamental. Conviction forte justifiée par le déclenchement mécanique R06 : conserver jusqu'à -25% sans stop serait une violation de discipline. Position en perte : aucune friction fiscale (perte reportable sur 10 ans, crédit d'impôt théorique positif).",
+      "raison": "Détenu depuis 81 jours, ENR.DE est à -15.2% depuis l'achat, exactement au seuil du stop-loss automatique R06 (-15% après 90 jours, ou -25% sans condition). La règle R06 est déclenchée en mode préventif : on approche du seuil des 90 jours avec une perte qui touche le plancher de la règle. Score screener toujours à 91/100, mais la performance réelle contredit le signal qualitatif. La thèse n'est pas documentée, ce qui rend impossible de vérifier si le delta_these est fondamental. Conviction forte justifiée par le déclenchement mécanique R06 : conserver jusqu'à -25% sans stop serait une violation de discipline. Position en perte : aucune friction fiscale (perte reportable sur 10 ans, crédit d'impôt théorique positif).",
       "conviction": "forte",
       "source": "Claude AI"
     },
@@ -460,7 +460,7 @@
       "montant": 1150.61,
       "montant_brut_eur": 1149.75,
       "frais_achat_eur": 0.8623,
-      "raison": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression — décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low) — le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique — opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
+      "raison": "Score 81/100, #5 watchlist. Golden Cross frais de 17j (fenêtre signal optimale selon la méthodologie), z=-1.7σ sous sa droite de régression, décote significative qui offre une asymétrie favorable. Val=5/5 : pullback de -49.1% depuis le top historique, avec une tendance déstructurée (sous swing low), le titre sort d'une correction profonde. C'est un Setup B (mean-reversion) : le z<-1.5σ combiné à un Golden Cross frais valide l'entrée. Secteur Services publics / Énergies renouvelables : hors cluster Tech&IA sursaturé (62%), donc aucune restriction de concentration sectorielle. La pente MM21 à +0.9% confirme une reprise de dynamique. Liquidités disponibles : 2122€. Taille suggérée : ~400€ (position initiatrice prudente, compte tenu de la trend déstructurée signalée dans val). Note : val=5/5 avec DD-49.1% reflète une correction historique, opportunité réelle mais pas un simple pullback sain, d'où conviction modérée.",
       "conviction": "modérée",
       "source": "Claude AI",
       "score_watchlist": 81,
@@ -532,7 +532,7 @@
       "montant": 763.89,
       "montant_brut_eur": 763.32,
       "frais_achat_eur": 0.5725,
-      "raison": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume — fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1% — momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel — l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
+      "raison": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume, fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1%, momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel, l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
       "conviction": "forte",
       "source": "Claude AI",
       "score_watchlist": 80,
@@ -607,7 +607,7 @@
       "perf": -19.68,
       "pnl_eur": -189.41,
       "jours": 17,
-      "raison": "INTU détenu depuis 17 jours à -18.6% — on approche du seuil de stop-loss à -25% sans condition de durée (R6). La thèse d'achat reposait sur z=-3.6σ sous régression + Death Cross 129j mais RSI favorable : la décote s'est creusée au lieu de se résorber, ce qui invalide le scénario mean-reversion à court terme. Le score est toujours 82/100 et les fondamentaux restent corrects, mais la règle de stop-loss catastrophe (-25% sans condition) approche à grand pas — mieux vaut couper proprement à -18.6% que d'attendre -25%. La perte réalisée devient un crédit d'impôt (PFU 30% sur futurs gains, crédit intégré aux 3816€ reportables). Signal fondamental documenté : dérive de prix inexpliquée par les données disponibles, profil de sortie cohérent avec discipline de gestion du risque.",
+      "raison": "INTU détenu depuis 17 jours à -18.6%, on approche du seuil de stop-loss à -25% sans condition de durée (R6). La thèse d'achat reposait sur z=-3.6σ sous régression + Death Cross 129j mais RSI favorable : la décote s'est creusée au lieu de se résorber, ce qui invalide le scénario mean-reversion à court terme. Le score est toujours 82/100 et les fondamentaux restent corrects, mais la règle de stop-loss catastrophe (-25% sans condition) approche à grand pas, mieux vaut couper proprement à -18.6% que d'attendre -25%. La perte réalisée devient un crédit d'impôt (PFU 30% sur futurs gains, crédit intégré aux 3816€ reportables). Signal fondamental documenté : dérive de prix inexpliquée par les données disponibles, profil de sortie cohérent avec discipline de gestion du risque.",
       "conviction": "forte",
       "source": "Claude AI"
     },
@@ -620,7 +620,7 @@
       "prix": 92.16,
       "currency": "GBP",
       "montant": 1114.96,
-      "raison": "Score 83/100 avec Golden Cross frais (9j) — fenêtre signal optimale — et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
+      "raison": "Score 83/100 avec Golden Cross frais (9j), fenêtre signal optimale, et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
       "conviction": "modérée",
       "source": "Claude AI",
       "score_watchlist": 83,
@@ -670,7 +670,7 @@
       "perf": -4.7,
       "pnl_eur": -184.47,
       "jours": 2,
-      "raison": "Position en perte de -17.2% après seulement 2 jours de détention, ce qui déclenche le stop-loss catastrophe à -25% sans condition de durée. La position approche dangereusement ce seuil et aucune thèse d'achat documentée ne justifie un maintien. Le signal Golden Cross (9j) reste présent mais l'ampleur de la perte en 48h suggère un problème de prix d'entrée ou un choc spécifique non anticipé — sortie défensive pour protéger le capital.",
+      "raison": "Position en perte de -17.2% après seulement 2 jours de détention, ce qui déclenche le stop-loss catastrophe à -25% sans condition de durée. La position approche dangereusement ce seuil et aucune thèse d'achat documentée ne justifie un maintien. Le signal Golden Cross (9j) reste présent mais l'ampleur de la perte en 48h suggère un problème de prix d'entrée ou un choc spécifique non anticipé, sortie défensive pour protéger le capital.",
       "conviction": "forte",
       "source": "Claude AI",
       "montant_brut_eur": 877.28,
@@ -689,7 +689,7 @@
       "prix": 181.19,
       "currency": "USD",
       "montant": 1080.07,
-      "raison": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée — profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
+      "raison": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée, profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
       "conviction": "modérée",
       "source": "Claude AI",
       "score_watchlist": 80,
@@ -736,7 +736,7 @@
       "prix": 92.01,
       "currency": "USD",
       "montant": 1095.9,
-      "raison": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression — la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
+      "raison": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression, la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
       "conviction": "modérée",
       "source": "Claude AI",
       "score_watchlist": 82,
@@ -790,7 +790,7 @@
       "prix": 398.32,
       "currency": "USD",
       "montant": 1016.62,
-      "raison": "Score 82/100, z=-3.6σ sous régression — la décote est la plus marquée de la watchlist, similaire à NOW. Death Cross depuis 129j mais croissance CA solide et RSI favorable signalent une divergence bullish potentielle. L'achat d'1 titre mobilise ~400-500€ (estimation) et diversifie sur le secteur fintech/software hors positions déjà lourdes en semi-conducteurs.",
+      "raison": "Score 82/100, z=-3.6σ sous régression, la décote est la plus marquée de la watchlist, similaire à NOW. Death Cross depuis 129j mais croissance CA solide et RSI favorable signalent une divergence bullish potentielle. L'achat d'1 titre mobilise ~400-500€ (estimation) et diversifie sur le secteur fintech/software hors positions déjà lourdes en semi-conducteurs.",
       "conviction": "modérée",
       "source": "Claude AI",
       "score_watchlist": 82,
@@ -839,7 +839,7 @@
       "montant": 1093.05,
       "perf": 0.04,
       "jours": 1,
-      "raison": "Death Cross depuis 190j et z=-3.4σ (prix très en dessous de sa régression) — signal fondamental négatif persistant documenté justifiant une sortie anticipée malgré 1j de détention seulement. Score en watchlist tombé à 77/100 (plus bas du top 10). La divergence entre un RSI favorable et un z-score à -3.4σ suggère un piège technique. Signal fondamental majeur documenté : dégradation structurelle du trend.",
+      "raison": "Death Cross depuis 190j et z=-3.4σ (prix très en dessous de sa régression), signal fondamental négatif persistant documenté justifiant une sortie anticipée malgré 1j de détention seulement. Score en watchlist tombé à 77/100 (plus bas du top 10). La divergence entre un RSI favorable et un z-score à -3.4σ suggère un piège technique. Signal fondamental majeur documenté : dégradation structurelle du trend.",
       "conviction": "forte",
       "source": "Claude AI",
       "montant_brut_eur": 1093.87,
@@ -861,7 +861,7 @@
       "montant": 1013.98,
       "perf": -2.13,
       "jours": 1,
-      "raison": "Death Cross depuis 129j et z=-3.6σ — même logique que NOW : tendance baissière structurelle confirmée avec prix très largement sous la régression. Score 77/100 (co-plus bas du portefeuille en watchlist), performance -2.1% après 1j. Signal fondamental majeur documenté : Death Cross long + déviation négative extrême de la régression justifient la sortie.",
+      "raison": "Death Cross depuis 129j et z=-3.6σ, même logique que NOW : tendance baissière structurelle confirmée avec prix très largement sous la régression. Score 77/100 (co-plus bas du portefeuille en watchlist), performance -2.1% après 1j. Signal fondamental majeur documenté : Death Cross long + déviation négative extrême de la régression justifient la sortie.",
       "conviction": "forte",
       "source": "Claude AI",
       "montant_brut_eur": 1014.74,
@@ -881,7 +881,7 @@
       "prix": 91.97,
       "currency": "USD",
       "montant": 1100.81,
-      "raison": "NOW affiche un score de 77/100 avec un z-score à -3.4σ sous sa droite de régression — décote technique majeure sur un titre à forte croissance CA. Le Death Cross (189j) est un signal négatif, mais à ce niveau de décote, le rapport risque/rendement devient asymétrique en faveur du rebond. J'alloue ~500€ (environ 1 titre) pour initier une position contrariante avec horizon 90j minimum, en profitant des liquidités disponibles.",
+      "raison": "NOW affiche un score de 77/100 avec un z-score à -3.4σ sous sa droite de régression, décote technique majeure sur un titre à forte croissance CA. Le Death Cross (189j) est un signal négatif, mais à ce niveau de décote, le rapport risque/rendement devient asymétrique en faveur du rebond. J'alloue ~500€ (environ 1 titre) pour initier une position contrariante avec horizon 90j minimum, en profitant des liquidités disponibles.",
       "conviction": "modérée",
       "source": "Claude AI",
       "score_watchlist": 77,
@@ -1113,7 +1113,7 @@
       "prix": 341.54,
       "currency": "USD",
       "montant": 876.48,
-      "raison": "AMD score 85/100 avec un Golden Cross de 213 jours encore actif et un z-score de +0.4σ — prix aligné sur sa droite de régression, croissance CA solide. Non représentée en portefeuille, AMD offre une diversification sectorielle complémentaire à NVDA dans les semiconducteurs avec un signal technique sain et aucune surextension de prix. L'utilisation des liquidités disponibles est justifiée ici.",
+      "raison": "AMD score 85/100 avec un Golden Cross de 213 jours encore actif et un z-score de +0.4σ, prix aligné sur sa droite de régression, croissance CA solide. Non représentée en portefeuille, AMD offre une diversification sectorielle complémentaire à NVDA dans les semiconducteurs avec un signal technique sain et aucune surextension de prix. L'utilisation des liquidités disponibles est justifiée ici.",
       "conviction": "modérée",
       "source": "Claude AI",
       "score_watchlist": 85,
@@ -1155,7 +1155,7 @@
       "montant": 339.11,
       "perf": -0.99,
       "jours": 5,
-      "raison": "ADI présente un z-score alarmant de +3.3σ au-dessus de sa droite de régression — signal de surachat majeur — alors que la position est en légère perte (-1.0%) après 5 jours. Le score watchlist est retombé à 85/100 contre 93/100 lors de l'achat. Ce signal fondamental de surachat extrême constitue un signal fondamental majeur documenté justifiant une sortie anticipée avant les 90 jours, conformément à la règle 1.",
+      "raison": "ADI présente un z-score alarmant de +3.3σ au-dessus de sa droite de régression, signal de surachat majeur, alors que la position est en légère perte (-1.0%) après 5 jours. Le score watchlist est retombé à 85/100 contre 93/100 lors de l'achat. Ce signal fondamental de surachat extrême constitue un signal fondamental majeur documenté justifiant une sortie anticipée avant les 90 jours, conformément à la règle 1.",
       "conviction": "forte",
       "source": "Claude AI",
       "montant_brut_eur": 339.36,
@@ -1199,7 +1199,7 @@
       "qte": 5,
       "prix": 399.75,
       "montant": 1997.25,
-      "raison": "Sortie de watchlist après 118j — Règle 01 respectée",
+      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
       "montant_brut_eur": 1998.75,
       "frais_vente_eur": 1.4991,
       "plus_value_eur": -4.25,
@@ -1215,7 +1215,7 @@
       "qte": 10,
       "prix": 174.88,
       "montant": 1688.59,
-      "raison": "Sortie de watchlist après 118j — Règle 01 respectée",
+      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
       "montant_brut_eur": 1748.8,
       "frais_vente_eur": 1.3116,
       "plus_value_eur": 196.33,
@@ -1231,7 +1231,7 @@
       "qte": 2,
       "prix": 451.4,
       "montant": 902.12,
-      "raison": "Sortie de watchlist après 118j — Règle 01 respectée",
+      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
       "montant_brut_eur": 902.8,
       "frais_vente_eur": 0.6771,
       "plus_value_eur": -298.78,
@@ -1247,7 +1247,7 @@
       "qte": 1,
       "prix": 413.21,
       "montant": 413.52,
-      "raison": "Entrée watchlist — score 100/100 · Technologie",
+      "raison": "Entrée watchlist, score 100/100 · Technologie",
       "montant_brut_eur": 413.21,
       "frais_achat_eur": 0.3099
     },
@@ -1259,7 +1259,7 @@
       "qte": 2,
       "prix": 313.77,
       "montant": 628.01,
-      "raison": "Entrée watchlist — score 95/100 · Finance",
+      "raison": "Entrée watchlist, score 95/100 · Finance",
       "montant_brut_eur": 627.54,
       "frais_achat_eur": 0.4707
     },
@@ -1271,7 +1271,7 @@
       "qte": 1,
       "prix": 958.5,
       "montant": 959.22,
-      "raison": "Entrée watchlist — score 93/100 · Technologie",
+      "raison": "Entrée watchlist, score 93/100 · Technologie",
       "montant_brut_eur": 958.5,
       "frais_achat_eur": 0.7189
     },
@@ -1283,7 +1283,7 @@
       "qte": 2,
       "prix": 330.69,
       "montant": 661.88,
-      "raison": "Entrée watchlist — score 93/100 · Finance",
+      "raison": "Entrée watchlist, score 93/100 · Finance",
       "montant_brut_eur": 661.38,
       "frais_achat_eur": 0.496
     },
@@ -1295,7 +1295,7 @@
       "qte": 1,
       "prix": 1060.9,
       "montant": 1061.7,
-      "raison": "Entrée watchlist — score 93/100 · Finance",
+      "raison": "Entrée watchlist, score 93/100 · Finance",
       "montant_brut_eur": 1060.9,
       "frais_achat_eur": 0.7957
     },
@@ -1307,7 +1307,7 @@
       "qte": 1,
       "prix": 430.55,
       "montant": 430.87,
-      "raison": "Entrée watchlist — score 93/100 · Industrie",
+      "raison": "Entrée watchlist, score 93/100 · Industrie",
       "montant_brut_eur": 430.55,
       "frais_achat_eur": 0.3229
     },
@@ -1319,7 +1319,7 @@
       "qte": 1,
       "prix": 401.01,
       "montant": 401.31,
-      "raison": "Entrée watchlist — score 93/100 · Technologie",
+      "raison": "Entrée watchlist, score 93/100 · Technologie",
       "montant_brut_eur": 401.01,
       "frais_achat_eur": 0.3008
     },
@@ -1331,7 +1331,7 @@
       "qte": 3,
       "prix": 180.58,
       "montant": 542.15,
-      "raison": "Entrée watchlist — score 91/100 · Industrie",
+      "raison": "Entrée watchlist, score 91/100 · Industrie",
       "montant_brut_eur": 541.74,
       "frais_achat_eur": 0.4063
     },
@@ -1343,7 +1343,7 @@
       "qte": 2,
       "prix": 259.27,
       "montant": 518.93,
-      "raison": "Entrée watchlist — score 90/100 · Conso. cycl.",
+      "raison": "Entrée watchlist, score 90/100 · Conso. cycl.",
       "montant_brut_eur": 518.54,
       "frais_achat_eur": 0.3889
     },
@@ -1355,7 +1355,7 @@
       "qte": 10,
       "prix": 198.4,
       "montant": 1982.51,
-      "raison": "Sortie de watchlist — guidance révisée à la baisse (signal fondamental), Règle 01 exception justifiée",
+      "raison": "Sortie de watchlist, guidance révisée à la baisse (signal fondamental), Règle 01 exception justifiée",
       "montant_brut_eur": 1984.0,
       "frais_vente_eur": 1.488,
       "plus_value_eur": -1.49,
@@ -1371,7 +1371,7 @@
       "qte": 2,
       "prix": 600.0,
       "montant": 1200.9,
-      "raison": "Entrée watchlist — score 60/100 · Luxe diversifié",
+      "raison": "Entrée watchlist, score 60/100 · Luxe diversifié",
       "montant_brut_eur": 1200.0,
       "frais_achat_eur": 0.9
     },
@@ -1383,7 +1383,7 @@
       "qte": 10,
       "prix": 155.0,
       "montant": 1551.16,
-      "raison": "Entrée watchlist — score 75/100 · Aéronautique",
+      "raison": "Entrée watchlist, score 75/100 · Aéronautique",
       "montant_brut_eur": 1550.0,
       "frais_achat_eur": 1.1625
     },
@@ -1395,7 +1395,7 @@
       "qte": 3,
       "prix": 650.0,
       "montant": 1951.46,
-      "raison": "Entrée watchlist — score 88/100 · Équip. semi.",
+      "raison": "Entrée watchlist, score 88/100 · Équip. semi.",
       "montant_brut_eur": 1950.0,
       "frais_achat_eur": 1.4625
     },
@@ -1407,7 +1407,7 @@
       "qte": 5,
       "prix": 400.0,
       "montant": 2001.5,
-      "raison": "Entrée watchlist — score 83/100 · Cloud & IA",
+      "raison": "Entrée watchlist, score 83/100 · Cloud & IA",
       "montant_brut_eur": 2000.0,
       "frais_achat_eur": 1.5
     },
@@ -1419,14 +1419,14 @@
       "qte": 20,
       "prix": 115.0,
       "montant": 2301.72,
-      "raison": "Entrée watchlist — score 94/100 · Semi-conducteurs",
+      "raison": "Entrée watchlist, score 94/100 · Semi-conducteurs",
       "montant_brut_eur": 2300.0,
       "frais_achat_eur": 1.725
     }
   ],
   "biais_detectes": [
     "Action bias potentiel : tentation d'agir parce que des opportunités watchlist sont visibles, alors que les liquidités et le contexte (même journée de run) ne le justifient pas",
-    "FOMO latent sur la hausse asiatique IA (Kospi +17%) : le signal est réel mais le portefeuille est déjà exposé à 48% sur la thèse infrastructure IA — ajouter serait du momentum chasing concentré"
+    "FOMO latent sur la hausse asiatique IA (Kospi +17%) : le signal est réel mais le portefeuille est déjà exposé à 48% sur la thèse infrastructure IA, ajouter serait du momentum chasing concentré"
   ],
   "regles_actives": [
     {
@@ -1434,13 +1434,13 @@
       "secteur": "Tech & IA",
       "pct": 62.2,
       "regime": "info",
-      "message": "Cluster Tech & IA : 62% du capital — concentration à intégrer dans ton sizing (aucune réduction automatique, c'est toi qui arbitres)",
+      "message": "Cluster Tech & IA : 62% du capital, concentration à intégrer dans ton sizing (aucune réduction automatique, c'est toi qui arbitres)",
       "bloque": false
     },
     {
       "type": "liquidites_faibles",
       "regime": "info",
-      "message": "Liquidités 1.5% du capital (352€) — information : aucun blocage, mais tout nouvel achat devra être financé par le cash restant, une vente ou une rotation",
+      "message": "Liquidités 1.5% du capital (352€), information : aucun blocage, mais tout nouvel achat devra être financé par le cash restant, une vente ou une rotation",
       "bloque": false
     },
     {
@@ -1448,7 +1448,7 @@
       "theme": "infra-ia",
       "pct": 47.5,
       "regime": "info",
-      "message": "Thème « Infrastructure de l'IA » : 48% du capital (ASML.AS, NVDA, AMD, AMZN, ETN, AVGO, META) — ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
+      "message": "Thème « Infrastructure de l'IA » : 48% du capital (ASML.AS, NVDA, AMD, AMZN, ETN, AVGO, META), ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
       "bloque": false
     },
     {
@@ -1456,7 +1456,7 @@
       "theme": "financials",
       "pct": 28.0,
       "regime": "info",
-      "message": "Thème « Financials » : 28% du capital (JPM, V, BLK, DB1.DE, SPGI, LSEG.L, ADYEN.AS) — ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
+      "message": "Thème « Financials » : 28% du capital (JPM, V, BLK, DB1.DE, SPGI, LSEG.L, ADYEN.AS), ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
       "bloque": false
     }
   ],
@@ -1516,9 +1516,9 @@
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Cette semaine du 28 juillet au 1er août, la Fed a maintenu ses taux inchangés — sans surprise — mais les marchés obligataires n'ont pas été rassurés pour autant : les rendements longs des Treasuries ont continué de grimper, signe que les investisseurs doutent de la capacité de la Fed à assouplir sa politique dans un contexte où l'inflation liée aux tensions géopolitiques (conflit impliquant l'Iran, impact sur la BoE également en pause) reste une inconnue. Le VIX à 15,99 traduit un régime calme en surface — mais la divergence entre marchés actions asiatiques en forte hausse (Kospi +17% porté par Samsung et SK Hynix sur l'optimisme IA) et MSCI World en recul de 0,8% sur la semaine illustre une semaine à deux vitesses.\n\nPour Signal, la situation est confortable sans être spectaculaire. Le portefeuille affiche une performance nette de +17,55% depuis la création (brute : +17,85%), soit un écart de +5,75 points de pourcentage au-dessus du MSCI World YTD. Avec 23 510€ de capital net et seulement 352€ de liquidités, le portefeuille est quasiment intégralement investi — ce qui est un choix assumé, mais qui signifie que toute nouvelle entrée exigera une rotation.\n\nCette semaine, je ne prends aucune décision d'achat ni de vente. Les raisons sont simples : (1) les liquidités à 352€ ne permettent pas d'ouvrir une nouvelle ligne significative sans rotation, et aucune des positions actuelles ne présente de signal de vente suffisamment documenté pour justifier une sortie (les positions en pertes modestes — META à -7,6%, LSEG.L à -7,9%, ADYEN.AS à -7,7%, ORSTED.CO à -12,6% — restent loin du stop-loss à -15% après 90j, et aucun signal fondamental majeur n'est apparu) ; (2) le run actuel est daté du 2026-08-01, soit le même jour qu'un run précédent — run de contrôle de 22h16 UTC, peu de raison d'agir à nouveau ; (3) SPGI, acheté hier à J+1 de son Golden Cross, n'a aucun historique de performance à évaluer.\n\nLa watchlist présente des opportunités intéressantes — notamment ADBE (score 88, Death Cross 999j mais mean-reversion en cours) et INTU (score 88, z=-3,9σ, rebond stale cross) — mais les liquides ne permettent pas d'entrée sérieuse sans rotation, et aucune rotation ne satisfait les conditions strictes : les titres à vendre seraient en perte et détenus depuis moins de 90 jours pour la plupart, ou en gain modeste avec friction PFU à 30% qui effacerait l'avantage.\n\nSurveillance pour la semaine à venir : l'évolution de ORSTED.CO qui approche des -15% après 66 jours (stop-loss déclenché à -15% après 90j — il reste 24 jours), et META qui stagne à -7,6% avec 88 jours de détention — si la thèse ne se matérialise pas d'ici fin août, la question du stop-loss se posera.",
+    "analyse_macro": "Cette semaine du 28 juillet au 1er août, la Fed a maintenu ses taux inchangés, sans surprise, mais les marchés obligataires n'ont pas été rassurés pour autant : les rendements longs des Treasuries ont continué de grimper, signe que les investisseurs doutent de la capacité de la Fed à assouplir sa politique dans un contexte où l'inflation liée aux tensions géopolitiques (conflit impliquant l'Iran, impact sur la BoE également en pause) reste une inconnue. Le VIX à 15,99 traduit un régime calme en surface, mais la divergence entre marchés actions asiatiques en forte hausse (Kospi +17% porté par Samsung et SK Hynix sur l'optimisme IA) et MSCI World en recul de 0,8% sur la semaine illustre une semaine à deux vitesses. Pour Signal, la situation est confortable sans être spectaculaire. Le portefeuille affiche une performance nette de +17,55% depuis la création (brute : +17,85%), soit un écart de +5,75 points de pourcentage au-dessus du MSCI World YTD. Avec 23 510€ de capital net et seulement 352€ de liquidités, le portefeuille est quasiment intégralement investi, ce qui est un choix assumé, mais qui signifie que toute nouvelle entrée exigera une rotation. Cette semaine, je ne prends aucune décision d'achat ni de vente. Les raisons sont simples : (1) les liquidités à 352€ ne permettent pas d'ouvrir une nouvelle ligne significative sans rotation, et aucune des positions actuelles ne présente de signal de vente suffisamment documenté pour justifier une sortie (les positions en pertes modestes, META à -7,6%, LSEG.L à -7,9%, ADYEN.AS à -7,7%, ORSTED.CO à -12,6%, restent loin du stop-loss à -15% après 90j, et aucun signal fondamental majeur n'est apparu) ; (2) le run actuel est daté du 2026-08-01, soit le même jour qu'un run précédent, run de contrôle de 22h16 UTC, peu de raison d'agir à nouveau ; (3) SPGI, acheté hier à J+1 de son Golden Cross, n'a aucun historique de performance à évaluer. La watchlist présente des opportunités intéressantes, notamment ADBE (score 88, Death Cross 999j mais mean-reversion en cours) et INTU (score 88, z=-3,9σ, rebond stale cross), mais les liquides ne permettent pas d'entrée sérieuse sans rotation, et aucune rotation ne satisfait les conditions strictes : les titres à vendre seraient en perte et détenus depuis moins de 90 jours pour la plupart, ou en gain modeste avec friction PFU à 30% qui effacerait l'avantage. Surveillance pour la semaine à venir : l'évolution de ORSTED.CO qui approche des -15% après 66 jours (stop-loss déclenché à -15% après 90j, il reste 24 jours), et META qui stagne à -7,6% avec 88 jours de détention, si la thèse ne se matérialise pas d'ici fin août, la question du stop-loss se posera.",
     "conviction_globale": "neutre",
-    "message_utilisateurs": "Pas d'action cette semaine — et c'est un choix délibéré, pas une inertie.\n\nLes liquidités à 352€ (1,5% du capital) ne permettent pas d'ouvrir une nouvelle ligne significative. Les positions en légère perte (META, LSEG.L, ADYEN.AS, ORSTED.CO) sont surveillées mais restent dans les limites de tolérance : aucune n'a déclenché de stop-loss, aucun signal fondamental majeur n'est apparu cette semaine qui justifierait une sortie anticipée (Règle 01 — 90j minimum, ou signal fondamental documenté).\n\nLa watchlist propose des candidats séduisants (ADBE et INTU avec des scores à 88/100 et des décotes significatives), mais une rotation forcerait à vendre une position correcte en payant 30% de PFU sur les gains latents — friction que l'avantage attendu ne compense pas clairement aujourd'hui.\n\nLe portefeuille reste à +17,55% net depuis la création, +5,75pp au-dessus du MSCI World YTD. L'inaction est la décision la plus honnête quand le process ne valide pas d'entrée.",
+    "message_utilisateurs": "Pas d'action cette semaine, et c'est un choix délibéré, pas une inertie. Les liquidités à 352€ (1,5% du capital) ne permettent pas d'ouvrir une nouvelle ligne significative. Les positions en légère perte (META, LSEG.L, ADYEN.AS, ORSTED.CO) sont surveillées mais restent dans les limites de tolérance : aucune n'a déclenché de stop-loss, aucun signal fondamental majeur n'est apparu cette semaine qui justifierait une sortie anticipée (Règle 01, 90j minimum, ou signal fondamental documenté). La watchlist propose des candidats séduisants (ADBE et INTU avec des scores à 88/100 et des décotes significatives), mais une rotation forcerait à vendre une position correcte en payant 30% de PFU sur les gains latents, friction que l'avantage attendu ne compense pas clairement aujourd'hui. Le portefeuille reste à +17,55% net depuis la création, +5,75pp au-dessus du MSCI World YTD. L'inaction est la décision la plus honnête quand le process ne valide pas d'entrée.",
     "nb_decisions": 0
   },
   "performance_history": [

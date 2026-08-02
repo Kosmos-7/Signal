@@ -26,7 +26,7 @@ identifiable → ce n'est **pas** une franchise, c'est un « business » (souven
 
 ## 2. Règles (do / don't)
 
-**Ton** — précis, factuel, clair et **posé** ; plume vivante avec une pointe d'esprit pince-sans-rire *occasionnelle* (jamais lourde, jamais de hype, jamais de reco déguisée). Le fond prime toujours sur le trait d'esprit.
+**Ton**, précis, factuel, clair et **posé** ; plume vivante avec une pointe d'esprit pince-sans-rire *occasionnelle* (jamais lourde, jamais de hype, jamais de reco déguisée). Le fond prime toujours sur le trait d'esprit.
 
 **DO**
 - Raisonner en **propriétaire**, horizon long ("would I buy the whole company today?").
@@ -39,7 +39,7 @@ identifiable → ce n'est **pas** une franchise, c'est un « business » (souven
 
 **DON'T**
 - ❌ Objectif de cours / valeur intrinsèque inventée (Buffett raisonne en *fourchette*, pas en cible).
-- ❌ « Ça a monté, donc on achète » — le momentum n'est jamais la raison d'une thèse.
+- ❌ « Ça a monté, donc on achète », le momentum n'est jamais la raison d'une thèse.
 - ❌ Présenter une douve comme **éternelle** (surtout en secteur à changement rapide : tech, semi).
 - ❌ S'appuyer sur EBITDA / chiffres « ajustés » non corroborés par le cash.
 - ❌ Storytelling séduisant mais non vérifiable.
@@ -56,18 +56,18 @@ identifiable → ce n'est **pas** une franchise, c'est un « business » (souven
 
 ---
 
-## 4. Exemple appliqué — NVDA
+## 4. Exemple appliqué, NVDA
 
-- **`resume`** — « Concepteur dominant des GPU/plateformes de calcul IA. Le score de 90 reflète des
-  fondamentaux exceptionnels (CA +85 % a/a au dernier trim., marge nette 63 % TTM) — une note de *qualité*, pas un timing.
+- **`resume`**, « Concepteur dominant des GPU/plateformes de calcul IA. Le score de 90 reflète des
+fondamentaux exceptionnels (CA +85 % a/a au dernier trim., marge nette 63 % TTM), une note de *qualité*, pas un timing.
   Débat central : valorisation forward raisonnable (PER 16,7) vs durabilité du cycle IA. »
-- **`biz`** — *(comment)* vente de GPU haut de gamme + réseau + logiciel ; marge brute ~74 % =
+- **`biz`**, *(comment)* vente de GPU haut de gamme + réseau + logiciel ; marge brute ~74 % =
   fort pricing power. *(type de douve)* **coûts de transfert** (écosystème CUDA) + effet de réseau
   développeurs. *(durabilité + menace)* « sa durabilité reste l'hypothèse la plus fragile, menacée
   par les puces maison des clients (Google, Amazon, OpenAI via Broadcom). »
-- **`futur`** — drivers Blackwell/Rubin + clients souverains ; *prix vs valeur* : raisonnable en
-  forward (PER 16,7), tendu sur l'historique (32) — pas d'objectif de cours.
-- **`bear` (inversion)** — concentration de la demande + puces maison (la douve), restrictions Chine,
+- **`futur`**, drivers Blackwell/Rubin + clients souverains ; *prix vs valeur* : raisonnable en
+forward (PER 16,7), tendu sur l'historique (32), pas d'objectif de cours.
+- **`bear` (inversion)**, concentration de la demande + puces maison (la douve), restrictions Chine,
   valorisation totale laissant peu de place à la déception. → ce sont les **menaces de perte
   permanente**, pas la volatilité.
 
@@ -75,5 +75,5 @@ identifiable → ce n'est **pas** une franchise, c'est un « business » (souven
 
 ## 5. Application
 
-Progressive, fiche par fiche — aucune migration de masse nécessaire. Le seul changement de
+Progressive, fiche par fiche, aucune migration de masse nécessaire. Le seul changement de
 présentation déjà fait : « Signaux techniques » → « **Signaux de timing** » (fiche + lexique).
