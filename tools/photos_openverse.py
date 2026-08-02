@@ -63,15 +63,30 @@ def _norm(s):
     return re.sub(r"[̀-ͯ]", "", s)
 
 
+class QuotaEpuise(Exception):
+    """Openverse a coupé le robinet : inutile d'insister 700 fois."""
+
+
+# Openverse limite les clients anonymes. On ne connaît pas le plafond exact et
+# la documentation a changé : plutôt que le deviner, on compte les refus et on
+# s'arrête au troisième d'affilée, en gardant ce qui a été trouvé jusque-là.
+_REFUS = [0]
+
+
 def chercher(terme, page_size=20):
     params = {"q": terme, "license": "cc0,pdm,by,by-sa", "page_size": str(page_size)}
     url = API + "?" + urllib.parse.urlencode(params)
-    req = urllib.request.Request(url, headers={"User-Agent": UA,
+    req = urllib.request.Request(url, headers={"User-Agent": UA_COMPAT,
                                                "Accept": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
+            _REFUS[0] = 0
             return json.load(r).get("results") or []
     except urllib.error.HTTPError as e:
+        if e.code in (401, 403, 429):
+            _REFUS[0] += 1
+            if _REFUS[0] >= 3:
+                raise QuotaEpuise(f"HTTP {e.code} trois fois de suite")
         # Le code ET le corps : un 400 d'Openverse nomme le paramètre fautif,
         # un 401 dit qu'il faut s'authentifier, un 429 qu'il faut ralentir.
         # Sans ça on ne voit qu'« HTTPError » et l'on diagnostique à l'aveugle.
@@ -176,20 +191,25 @@ def main():
     os.makedirs(a.sortie, exist_ok=True)
     print(f"{len(deja)} déjà illustrées, {len(cibles)} à chercher sur Openverse\n", flush=True)
 
-    rapport = {}
+    rapport, arret = {}, ""
     for i, tk in enumerate(cibles, 1):
         nom = nom_usage(tk, noms[tk])
         trouves, vus = [], set()
-        for angle in ANGLES:
-            if len(trouves) >= a.par_societe * 3:
-                break
-            for res in chercher(f"{nom} {angle}".strip()):
-                c = retenir(res, nom)
-                if not c or c["url"] in vus:
-                    continue
-                vus.add(c["url"])
-                trouves.append(c)
-            time.sleep(0.35)
+        try:
+            for angle in ANGLES:
+                if len(trouves) >= a.par_societe * 3:
+                    break
+                for res in chercher(f"{nom} {angle}".strip()):
+                    c = retenir(res, nom)
+                    if not c or c["url"] in vus:
+                        continue
+                    vus.add(c["url"])
+                    trouves.append(c)
+                time.sleep(0.35)
+        except QuotaEpuise as e:
+            arret = f"{e} (arrêt à {tk}, {i}/{len(cibles)})"
+            print(f"\n⚠ {arret}\n", flush=True)
+            break
 
         trouves.sort(key=lambda c: -c["score"])
         gardes = []
@@ -197,7 +217,7 @@ def main():
             if len(gardes) >= a.par_societe:
                 break
             try:
-                req = urllib.request.Request(c["url"], headers={"User-Agent": UA})
+                req = urllib.request.Request(c["url"], headers={"User-Agent": UA_COMPAT})
                 with urllib.request.urlopen(req, timeout=45) as r:
                     brut = r.read()
                 c["poids"] = prepare(brut, os.path.join(a.sortie, f"{tk}_{len(gardes)}.jpg"))
@@ -215,10 +235,12 @@ def main():
             print(f"[{i:3d}/{len(cibles)}] {tk:10s} {nom[:20]:20s} rien", flush=True)
 
     with open("photos_openverse.json", "w", encoding="utf-8") as f:
-        json.dump({"societes": len(rapport), "detail": rapport}, f,
+        json.dump({"societes": len(rapport), "arret": arret, "detail": rapport}, f,
                   ensure_ascii=False, indent=1)
     print(f"\n{'=' * 70}")
     print(f"TROUVÉES SUR OPENVERSE : {len(rapport)}/{len(cibles)} sociétés")
+    if arret:
+        print(f"campagne interrompue : {arret}")
     srcs = {}
     for e in rapport.values():
         s = e["candidats"][0]["source"]
