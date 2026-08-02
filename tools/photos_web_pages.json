@@ -11,6 +11,18 @@
  ],
  "6146.T": [
   {
+   "page": "https://www.disco.co.jp/eg/company/index.html",
+   "domaine": "disco.co.jp",
+   "conditions": "non établies",
+   "credit": "DISCO Corporation"
+  },
+  {
+   "page": "https://www.disco.co.jp/eg/csr/index.html",
+   "domaine": "disco.co.jp",
+   "conditions": "non établies",
+   "credit": "DISCO Corporation"
+  },
+  {
    "page": "https://www.disco.co.jp/eg/products/dicer/index.html",
    "domaine": "disco.co.jp",
    "conditions": "non établies",
@@ -191,6 +203,18 @@
  ],
  "ASX": [
   {
+   "page": "https://www.aseglobal.com/en/about/",
+   "domaine": "aseglobal.com",
+   "conditions": "non établies",
+   "credit": "ASE Technology Holding"
+  },
+  {
+   "page": "https://www.aseglobal.com/en/sustainability/",
+   "domaine": "aseglobal.com",
+   "conditions": "non établies",
+   "credit": "ASE Technology Holding"
+  },
+  {
    "page": "https://www.aseglobal.com/",
    "domaine": "aseglobal.com",
    "conditions": "non établies",
@@ -221,22 +245,49 @@
  ],
  "CRWV": [
   {
+   "page": "https://www.coreweave.com/blog",
+   "domaine": "coreweave.com",
+   "conditions": "non établies",
+   "credit": "CoreWeave",
+   "cdn": [
+    "website-files.com"
+   ]
+  },
+  {
+   "page": "https://www.coreweave.com/newsroom",
+   "domaine": "coreweave.com",
+   "conditions": "non établies",
+   "credit": "CoreWeave",
+   "cdn": [
+    "website-files.com"
+   ]
+  },
+  {
    "page": "https://www.coreweave.com/data-centers",
    "domaine": "coreweave.com",
    "conditions": "non établies",
-   "credit": "CoreWeave"
+   "credit": "CoreWeave",
+   "cdn": [
+    "website-files.com"
+   ]
   },
   {
    "page": "https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational",
    "domaine": "coreweave.com",
    "conditions": "communiqué de presse",
-   "credit": "CoreWeave"
+   "credit": "CoreWeave",
+   "cdn": [
+    "website-files.com"
+   ]
   },
   {
    "page": "https://www.coreweave.com/",
    "domaine": "coreweave.com",
    "conditions": "non établies",
-   "credit": "CoreWeave"
+   "credit": "CoreWeave",
+   "cdn": [
+    "website-files.com"
+   ]
   }
  ],
  "NBIS": [
@@ -385,6 +436,18 @@
  ],
  "PDD": [
   {
+   "page": "https://www.pddholdings.com/news",
+   "domaine": "pddholdings.com",
+   "conditions": "non établies",
+   "credit": "PDD Holdings"
+  },
+  {
+   "page": "https://www.pddholdings.com/about",
+   "domaine": "pddholdings.com",
+   "conditions": "non établies",
+   "credit": "PDD Holdings"
+  },
+  {
    "page": "https://www.pddholdings.com/en/",
    "domaine": "pddholdings.com",
    "conditions": "non établies",
@@ -461,6 +524,18 @@
  ],
  "KKR": [
   {
+   "page": "https://www.kkr.com/invest/infrastructure",
+   "domaine": "kkr.com",
+   "conditions": "non établies",
+   "credit": "KKR"
+  },
+  {
+   "page": "https://www.kkr.com/insights",
+   "domaine": "kkr.com",
+   "conditions": "non établies",
+   "credit": "KKR"
+  },
+  {
    "page": "https://www.kkr.com/about",
    "domaine": "kkr.com",
    "conditions": "non établies",
@@ -490,6 +565,18 @@
   }
  ],
  "MSCI": [
+  {
+   "page": "https://www.msci.com/our-solutions",
+   "domaine": "msci.com",
+   "conditions": "non établies",
+   "credit": "MSCI"
+  },
+  {
+   "page": "https://www.msci.com/about-us",
+   "domaine": "msci.com",
+   "conditions": "non établies",
+   "credit": "MSCI"
+  },
   {
    "page": "https://www.msci.com/",
    "domaine": "msci.com",

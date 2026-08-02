@@ -112,7 +112,7 @@ def liens_internes(page_html, base, domaine):
     return out
 
 
-def images_de(page_html, base, domaine):
+def images_de(page_html, base, domaine, cdn=()):
     """URLs d'images de la page, celles du domaine de la société d'abord.
 
     On lit og:image en priorité : c'est le visuel que la société a elle-même
@@ -140,8 +140,14 @@ def images_de(page_html, base, domaine):
         trouve.append((score_nom(u), u))
 
     # Une image servie par un tiers n'a pas la légitimité qu'on cherche :
-    # publiée par la société, sur le site de la société.
-    trouve = [(s, u) for s, u in trouve if domaine in urllib.parse.urlparse(u).netloc]
+    # publiée par la société, sur le site de la société. Exception nommée : de
+    # nombreux sites servent leurs propres visuels depuis le CDN de leur
+    # constructeur (CoreWeave depuis website-files.com). Refuser ce cas revenait
+    # à écarter les photos que la société publie bel et bien elle-même ; on
+    # autorise donc les domaines explicitement déclarés pour elle, et eux seuls.
+    permis = (domaine,) + tuple(cdn)
+    trouve = [(s, u) for s, u in trouve
+              if any(d in urllib.parse.urlparse(u).netloc for d in permis)]
     trouve.sort(key=lambda x: -x[0])
     return [u for _, u in trouve]
 
@@ -173,6 +179,7 @@ def main():
     for i, tk in enumerate(cibles, 1):
         entrees = PAGES[tk]
         domaine = entrees[0]["domaine"]
+        cdn = entrees[0].get("cdn", [])
         # File d'exploration : les pages fournies d'abord, puis les liens
         # internes qu'elles offrent et dont l'adresse promet une page de metier.
         file = [e["page"] for e in entrees]
@@ -190,7 +197,7 @@ def main():
             except Exception as e:
                 print(f"      ✗ {page[:62]} {type(e).__name__}", flush=True)
                 continue
-            for u in images_de(corps, page, domaine):
+            for u in images_de(corps, page, domaine, cdn):
                 if u not in page_de:
                     page_de[u] = page
                     urls_images.append(u)
