@@ -524,25 +524,32 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 </header>
 
 <nav class="toc" aria-label="Sommaire">
-  <div class="toc-h">Sommaire</div>
+  <div class="toc-h">La bourse</div>
   <a href="#s1"><span class="tn">01</span>Principes</a>
-  <a href="#s2"><span class="tn">02</span>Fondamentaux</a>
-  <a href="#s3"><span class="tn">03</span>L'algorithme</a>
-  <a href="#s4"><span class="tn">04</span>La fiche action</a>
-  <a href="#s5"><span class="tn">05</span>Portefeuille IA</a>
-  <a href="#s6"><span class="tn">06</span>Friction réelle</a>
-  <a href="#s7"><span class="tn">07</span>Méthodologie</a>
-  <a href="#s8"><span class="tn">08</span>Pour aller plus loin</a>
+  <a href="#s2"><span class="tn">02</span>Le marché</a>
+  <a href="#s3"><span class="tn">03</span>Fondamentaux</a>
+  <a href="#s4"><span class="tn">04</span>L'entreprise</a>
+  <a href="#s5"><span class="tn">05</span>Valorisation</a>
+  <a href="#s6"><span class="tn">06</span>Le rythme</a>
+  <a href="#s7"><span class="tn">07</span>Frais et impôts</a>
+  <div class="toc-h">Signal en application</div>
+  <a href="#s8"><span class="tn">08</span>L'algorithme</a>
+  <a href="#s9"><span class="tn">09</span>La fiche action</a>
+  <a href="#s10"><span class="tn">10</span>Portefeuille IA</a>
+  <a href="#s11"><span class="tn">11</span>Méthodologie</a>
+  <a href="#s12"><span class="tn">12</span>Pour aller plus loin</a>
 </nav>
 
 <main>
 
   <!-- HERO -->
   <section class="hero">
-    <h1>Comprendre Signal</h1>
-<p>Tout ce qu'il faut savoir pour lire la watchlist et le portefeuille, expliqué simplement, sans jargon inutile.</p>
+    <h1>Comprendre la bourse</h1>
+<p>Comment fonctionne un marché, comment se lit une entreprise, et ce qui fait bouger un cours. Expliqué simplement, sans jargon inutile, et sans rien vendre.</p>
     <div class="scoring-note" style="margin-top:1.5rem">
-<strong>Par où commencer ?</strong>, Débutant : les <strong>Principes (01)</strong> puis les Fondamentaux (02). Pour décoder une fiche action : section 04. Curieux de la rigueur (frais, impôts, méthodologie) : sections 06 et 07. Le glossaire et les lectures pour aller plus loin sont en fin de page (08).
+<strong>Par où commencer ?</strong> Les sept premières sections ne parlent pas de Signal : elles expliquent la bourse et les entreprises qui la composent, dans l'ordre où les questions se posent. Si tu débutes, lis-les à la suite. Si tu cherches une notion précise, le sommaire est à gauche et il reste accessible à tout moment.
+      <br><br>
+<strong>Et Signal dans tout ça ?</strong> Les sections 08 à 12 montrent comment ces idées sont appliquées ici, sur des titres réels et un portefeuille fictif dont les erreurs sont publiées. C'est un cas d'application, pas le sujet : ce que tu apprends avant reste vrai ailleurs, avec ou sans ce site.
     </div>
     <div class="hero-sep"></div>
   </section>
@@ -551,7 +558,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
   <section class="section-block" id="s1">
     <div class="section-label">01 · Principes</div>
     <h2 class="section-title">Les idées, avant la technique</h2>
-<p class="section-sub">Avant tout algorithme, voici ce sur quoi presque tous les grands investisseurs s'accordent, Warren Buffett, Howard Marks, Michael Mauboussin, et des décennies de littérature financière. <strong>Signal n'invente rien : il applique ces principes avec discipline.</strong> Tout le reste de la page montre comment.</p>
+<p class="section-sub">Avant tout algorithme, voici ce sur quoi presque tous les grands investisseurs s'accordent, Warren Buffett, Howard Marks, Michael Mauboussin, et des décennies de littérature financière. Ils valent pour n'importe quel investisseur, avec ou sans ce site. <strong>Signal n'invente rien : il applique ces principes avec discipline</strong>, et les sections 08 et suivantes montrent comment.</p>
 
     <div class="advice-grid">
       <div class="advice-card ac-blue">
@@ -602,11 +609,66 @@ Avant de croire qu'une entreprise va croître de 30 % par an pendant dix ans, de
     </div>
   </section>
 
-<!-- SECTION 2, Les 3 briques de base -->
+<!-- SECTION, Le marché -->
   <section class="section-block" id="s2">
-    <div class="section-label">02 · Fondamentaux</div>
+    <div class="section-label">02 · Le marché</div>
+    <h2 class="section-title">À quoi sert la bourse, et qui fait le prix</h2>
+    <p class="section-sub">Avant de choisir des actions, il faut savoir ce qu'on achète, à qui, et d'où vient le chiffre affiché à l'écran. Ces quatre idées suffisent, et elles évitent la plupart des malentendus.</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="concept-label">01 · Deux marchés, pas un</span>
+        <span class="concept-example">Introduction en bourse ≠ achat quotidien</span>
+        <div class="concept-body">
+Une entreprise ne vient en bourse qu'une fois : elle vend des parts d'elle-même à des investisseurs et encaisse l'argent pour financer son développement. C'est le <strong>marché primaire</strong>, l'introduction en bourse. Tout ce qui suit se passe sur le <strong>marché secondaire</strong>, où les investisseurs se revendent ces parts entre eux.
+          <br><br>
+La conséquence surprend souvent : quand tu achètes une action NVIDIA, <strong>ton argent ne va pas à NVIDIA</strong>, il va au vendeur qui te cède sa part. L'entreprise n'encaisse rien. Ce que le cours lui apporte est indirect mais réel : un cours élevé lui permet de payer ses salariés en actions, de racheter d'autres sociétés sans sortir de trésorerie, et d'emprunter à meilleur compte.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">02 · Le carnet d'ordres</span>
+        <span class="concept-example">Le cours = le prix de la dernière transaction</span>
+        <div class="concept-body">
+Il n'existe aucune autorité qui « fixe » un cours. À chaque instant, un <strong>carnet d'ordres</strong> empile d'un côté ceux qui veulent acheter et le prix maximum qu'ils acceptent, de l'autre ceux qui veulent vendre et leur prix minimum. Quand les deux se croisent, l'échange se fait, et ce prix devient le cours affiché.
+          <br><br>
+L'écart entre la meilleure offre d'achat et la meilleure offre de vente s'appelle le <strong>spread</strong>. Sur une grande capitalisation il est infime, quelques centimes ; sur un titre peu échangé il peut atteindre plusieurs pourcents, et ce sont autant de pourcents que tu perds à l'aller comme au retour. C'est une raison très concrète pour laquelle Signal impose un filtre de liquidité à son univers.
+          <br><br>
+D'où l'importance du type d'ordre. Un <strong>ordre au marché</strong> s'exécute tout de suite au meilleur prix disponible, quel qu'il soit. Un <strong>ordre à cours limité</strong> fixe ton prix maximum et attend : tu contrôles le prix, mais rien ne garantit l'exécution.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">03 · Pourquoi ça bouge tous les jours</span>
+        <span class="concept-example">Le prix reflète des anticipations, pas le présent</span>
+        <div class="concept-body">
+Une entreprise ne change pas de valeur toutes les trente secondes, et pourtant son cours bouge. Parce qu'un cours ne mesure pas ce que l'entreprise vaut aujourd'hui, mais <strong>ce que l'ensemble des acheteurs et des vendeurs anticipent</strong> de son avenir, et cette anticipation se révise en permanence : un résultat publié, un concurrent qui trébuche, une décision de banque centrale, une rumeur.
+          <br><br>
+C'est ce qui explique le phénomène le plus déroutant pour un débutant : une entreprise peut publier d'excellents résultats et voir son cours <em>baisser</em>. Non pas parce que les résultats sont mauvais, mais parce qu'ils étaient <strong>déjà dans le prix</strong>, et que le marché attendait mieux encore.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">04 · La capitalisation</span>
+        <span class="concept-example">cours × nombre d'actions</span>
+        <div class="concept-body">
+La <strong>capitalisation boursière</strong> est le prix de toutes les actions réunies. C'est la taille de l'entreprise vue par le marché, et c'est le chiffre qui sert à classer les sociétés en grandes, moyennes et petites capitalisations.
+          <br><br>
+Attention au raccourci : la capitalisation n'est pas le prix qu'il faudrait payer pour racheter l'entreprise. Il faudrait y ajouter ses dettes et en retirer sa trésorerie, ce qui donne la <strong>valeur d'entreprise</strong>. Deux sociétés valant 100 milliards en bourse ne coûtent pas la même chose si l'une porte 40 milliards de dette et l'autre 40 milliards de cash.
+        </div>
+      </div>
+    </div>
+
+    <div class="scoring-note" style="margin-top:1.25rem">
+<strong>Ce qu'il faut retenir avant la suite.</strong> Le cours n'est pas la valeur, c'est le point de rencontre entre des anticipations. Comprendre une entreprise, c'est se donner une opinion sur cette valeur, et n'acheter que lorsque le prix demandé est confortablement en dessous. C'est exactement ce que fait la section suivante, en ouvrant les comptes.
+    </div>
+  </section>
+
+<!-- SECTION 2, Les 3 briques de base -->
+  <section class="section-block" id="s3">
+    <div class="section-label">03 · Fondamentaux</div>
     <h2 class="section-title">Les 3 briques de base</h2>
-    <p class="section-sub">Avant de lire une fiche Signal, il suffit de comprendre trois concepts. Tout le reste en découle.</p>
+    <p class="section-sub">Trois notions suffisent pour se repérer partout : ce qu'est une action, ce qu'est un indice, et comment on juge une performance. Tout le reste en découle.</p>
 
     <div class="brique-grid">
       <div class="brique-card">
@@ -641,9 +703,299 @@ Signal essaie de faire mieux que cette baseline en sélectionnant des actions in
     </div>
   </section>
 
+<!-- SECTION, Lire une entreprise -->
+  <section class="section-block" id="s4">
+    <div class="section-label">04 · L'entreprise</div>
+    <h2 class="section-title">Lire une entreprise en trois tableaux</h2>
+    <p class="section-sub">Derrière chaque ligne de la watchlist il y a une société réelle, qui vend quelque chose à quelqu'un. Toute son activité tient dans trois documents publiés chaque trimestre. Ils répondent à trois questions différentes, et il faut les trois.</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="concept-label">Tableau 1 · Le compte de résultat</span>
+        <span class="concept-example">Gagne-t-elle de l'argent ?</span>
+        <div class="concept-body">
+Il part du <strong>chiffre d'affaires</strong>, tout ce que l'entreprise a facturé, et lui retire ses coûts par étapes. Chaque étape porte un nom et raconte quelque chose de différent.
+          <br><br>
+On retire d'abord le <strong>coût de production</strong> de ce qui a été vendu, ce qui donne la <strong>marge brute</strong>. Elle mesure le pouvoir de fixer ses prix : un éditeur de logiciel dépasse souvent 75 %, un distributeur peine à 25 %, et ce n'est pas que l'un est mieux géré, c'est que l'un vend des copies et l'autre des cartons.
+          <br><br>
+On retire ensuite les frais de fonctionnement, recherche, commercial, administration, pour obtenir le <strong>résultat opérationnel</strong>, qui mesure l'efficacité du métier lui-même. Puis les intérêts de la dette et l'impôt, et il reste le <strong>résultat net</strong>, la part qui revient aux actionnaires. Rapporté au nombre d'actions, c'est le <strong>bénéfice par action</strong>, la brique de tous les calculs de valorisation.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">Tableau 2 · Le bilan</span>
+        <span class="concept-example">Que possède-t-elle, que doit-elle ?</span>
+        <div class="concept-body">
+Le compte de résultat est un film, le bilan est une photographie prise le dernier jour du trimestre. D'un côté ce que l'entreprise <strong>possède</strong>, usines, stocks, brevets, trésorerie. De l'autre ce qu'elle <strong>doit</strong>, dettes bancaires et obligataires, fournisseurs à payer. La différence appartient aux actionnaires.
+          <br><br>
+Le chiffre à regarder en premier est la <strong>dette nette</strong>, c'est-à-dire la dette moins la trésorerie. Une société qui a plus de cash que de dettes traverse une récession sans se poser de questions ; une société très endettée doit refinancer régulièrement, et le jour où les taux montent, ses intérêts explosent avant même que son activité ait bougé.
+          <br><br>
+La mesure usuelle rapporte cette dette nette au résultat opérationnel avant amortissements : au-delà de trois fois, on parle d'un bilan tendu, et le titre devient sensible aux taux autant qu'à son métier.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">Tableau 3 · Les flux de trésorerie</span>
+        <span class="concept-example">Le bénéfice est une opinion, le cash est un fait</span>
+        <div class="concept-body">
+Le résultat net dépend de conventions comptables : à quel rythme amortir une usine, quand reconnaître une vente à crédit. Le tableau de flux, lui, suit <strong>l'argent qui entre et sort réellement</strong>.
+          <br><br>
+On y lit le flux généré par l'activité, puis ce que l'entreprise a dépensé pour maintenir et développer son outil de production, ses <strong>investissements</strong>. La différence est le <strong>flux de trésorerie disponible</strong> : le cash réellement libre, celui qui peut servir à rembourser, à verser un dividende, à racheter des actions ou à faire une acquisition.
+          <br><br>
+C'est le chiffre le plus difficile à maquiller, et c'est pour cela qu'il est le plus surveillé. Une entreprise peut afficher un bénéfice net confortable tout en brûlant du cash, parce qu'elle finance une croissance qu'elle n'a pas encore encaissée. Cela peut être un excellent investissement comme le début d'un accident : seuls les trois tableaux ensemble permettent de trancher.
+        </div>
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-top:1rem">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--gold)"></div>
+        <div class="portfo-htitle">La mesure qui résume tout : la rentabilité du capital</div>
+      </div>
+      <div class="portfo-body">
+Une entreprise immobilise de l'argent, usines, stocks, logiciels, et en tire un profit. Le rapport entre les deux, la <strong>rentabilité du capital</strong>, répond à la seule question qui compte à long terme : chaque euro confié à cette société rapporte-t-il plus que son coût ?
+        <br><br>
+C'est la traduction chiffrée de la « douve » vue en section 01. Une rentabilité élevée attire mécaniquement des concurrents ; si elle reste élevée pendant dix ans malgré eux, c'est qu'il existe une barrière réelle, marque, brevet, coût de changement pour le client, effet de réseau. Une rentabilité qui s'érode année après année dit l'inverse, quelle que soit la croissance affichée par ailleurs.
+        <br><br>
+Deux pièges classiques. Une rentabilité peut être gonflée artificiellement par la dette, puisqu'on rapporte le profit à des capitaux propres réduits par les emprunts. Et une seule bonne année ne prouve rien : c'est la <em>persistance</em> qui distingue la qualité de la chance.
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-top:1rem">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--blue)"></div>
+        <div class="portfo-htitle">Où se situe l'entreprise dans sa chaîne</div>
+      </div>
+      <div class="portfo-body">
+Une société ne vit pas seule : elle achète à quelqu'un et vend à quelqu'un. Savoir <strong>où elle se tient dans cette chaîne</strong> explique souvent mieux ses marges et son risque que ses comptes eux-mêmes. C'est pour cela que la watchlist thématique de l'infrastructure de l'IA est organisée en maillons plutôt qu'en liste alphabétique.
+        <br><br>
+Suis l'argent sur cette chaîne précise. ASML vend des machines de lithographie à TSMC. TSMC grave les puces conçues par NVIDIA. NVIDIA vend ces puces à Microsoft, Amazon ou Meta, qui construisent les centres de données. Chacun a besoin d'énergie, de mémoire, de réseau, d'où les autres maillons.
+        <br><br>
+Cette position détermine tout. Un fournisseur d'équipement facture peu de clients, très cher, avec un carnet de commandes visible à deux ans. Un fondeur immobilise des sommes colossales dans des usines et vit du taux d'utilisation. Un vendeur de puces a des marges spectaculaires tant qu'il n'a pas de concurrent sérieux. Un hyperscaler, lui, <strong>dépense</strong> : ses investissements sont le chiffre d'affaires de tous les autres. Quand on entend que « la dépense en IA ralentit », c'est ce maillon-là qu'il faut regarder en premier, car c'est de lui que part l'onde.
+        <br><br>
+<a href="index.html#/w/infra-ia" style="color:var(--gold);text-decoration:none">Parcourir la chaîne, maillon par maillon →</a>
+      </div>
+    </div>
+
+    <div class="scoring-note" style="margin-top:1.25rem">
+<strong>Où trouver ces chiffres.</strong> Tout est public et gratuit. Les sociétés américaines déposent leurs comptes auprès du régulateur boursier, le rapport annuel s'appelle le 10-K et le trimestriel le 10-Q. Les européennes publient un rapport annuel et des résultats semestriels. Chaque société tient une page « relations investisseurs » où figurent ces documents ainsi que la présentation commentée des résultats, souvent le document le plus lisible pour commencer.
+    </div>
+  </section>
+
+<!-- SECTION, Valorisation -->
+  <section class="section-block" id="s5">
+    <div class="section-label">05 · Valorisation</div>
+    <h2 class="section-title">Cher ou pas cher : lire un multiple</h2>
+    <p class="section-sub">Savoir qu'une entreprise est excellente ne dit pas s'il faut l'acheter. Reste la question du prix, et elle se pose avec quelques rapports simples. Leur intérêt n'est pas de donner une réponse, mais de forcer une question : qu'est-ce que ce prix suppose déjà ?</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="concept-label">Le plus connu · Le PER</span>
+        <span class="concept-example">cours ÷ bénéfice par action</span>
+        <div class="concept-body">
+Un PER de 20 signifie que tu paies vingt fois le bénéfice annuel actuel. Lu autrement, et c'est plus parlant : à bénéfice constant, il faudrait vingt ans pour récupérer ta mise.
+          <br><br>
+L'erreur de débutant est d'en conclure que 12 est bon marché et 40 est cher. Un PER élevé est <strong>justifié</strong> si les bénéfices doivent croître vite et durablement : payer quarante fois un bénéfice qui double en trois ans revient à payer vingt fois celui de l'après-demain. Un PER faible, à l'inverse, signale souvent que le marché anticipe une <em>baisse</em> des bénéfices. Un multiple bas n'est une bonne affaire que si le marché se trompe.
+          <br><br>
+Deux garde-fous. Le PER n'a aucun sens pour une société en perte, la division n'aboutit pas. Et il ne se compare qu'entre entreprises comparables : un logiciel et une compagnie aérienne n'ont aucune raison de se payer au même multiple.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">Le plus honnête · La valeur d'entreprise</span>
+        <span class="concept-example">capitalisation + dette nette</span>
+        <div class="concept-body">
+Le PER ignore la dette, et c'est sa faiblesse. Deux sociétés qui gagnent la même chose et cotent au même multiple ne coûtent pas la même chose si l'une traîne une dette lourde : le repreneur devrait la reprendre aussi.
+          <br><br>
+On rapporte donc la <strong>valeur d'entreprise</strong>, capitalisation augmentée de la dette nette, au résultat opérationnel avant amortissements. Le rapport obtenu compare des sociétés indépendamment de leur structure financière, ce qui en fait le multiple de référence dans l'industrie et pour les rachats d'entreprises.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">Le plus concret · Le rendement du cash</span>
+        <span class="concept-example">flux disponible ÷ capitalisation</span>
+        <div class="concept-body">
+On peut renverser la question : plutôt que « combien d'années de bénéfices je paie », demander « combien de cash cette entreprise me rapporte, rapporté au prix ». Un flux disponible de 5 milliards pour une capitalisation de 100 milliards donne 5 %.
+          <br><br>
+L'intérêt est de rendre la comparaison directe avec une obligation d'État. Si le sans-risque rapporte 4 %, une entreprise qui offre 5 % sans croissance n'a rien de séduisant ; la même à 5 % avec des flux qui progressent de 10 % par an est une tout autre affaire. C'est aussi par ce canal que les <strong>taux d'intérêt</strong> pèsent sur les actions : quand le sans-risque monte, tout le reste doit offrir davantage, et les prix s'ajustent à la baisse.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">Le réflexe utile · Renverser le calcul</span>
+        <span class="concept-example">Que faut-il croire pour justifier ce prix ?</span>
+        <div class="concept-body">
+Le meilleur usage d'un multiple n'est pas de prévoir, c'est de <strong>rendre explicite ce que le marché suppose</strong>. Un titre qui se paie soixante fois ses bénéfices intègre déjà des années de forte croissance. La bonne question n'est alors pas « est-ce cher ? » mais « cette croissance est-elle plausible, et combien d'entreprises y sont réellement parvenues ? ».
+          <br><br>
+C'est le raisonnement en taux de base de la section 01, appliqué au prix. Il transforme une intuition en pari vérifiable : au lieu d'aimer ou de ne pas aimer une action, on écrit ce qu'il faudrait qu'il se passe, et on juge si c'est vraisemblable.
+        </div>
+      </div>
+    </div>
+
+    <div class="scoring-note" style="margin-top:1.25rem">
+<strong>Ce que Signal en fait, et ce qu'il n'en fait pas.</strong> Le bloc <em>Valorisation</em> du score utilise ces multiples classiques. En revanche la « décote vs tendance » affichée sur chaque fiche n'en est <strong>pas</strong> un : elle mesure la distance du cours à sa propre trajectoire historique, ce qui est une information de position, pas de cherté fondamentale. Une action peut afficher une décote de 20 % vs sa tendance tout en restant chère au regard de ses bénéfices, et l'inverse est vrai aussi. Les deux lectures sont complémentaires, jamais interchangeables.
+    </div>
+  </section>
+
+<!-- SECTION, Le rythme -->
+  <section class="section-block" id="s6">
+    <div class="section-label">06 · Le rythme</div>
+    <h2 class="section-title">Ce qui fait bouger un cours, et quand</h2>
+    <p class="section-sub">La vie d'une action suit un calendrier assez régulier. Le connaître évite de confondre un événement mécanique avec une nouvelle importante, et de paniquer devant un mouvement qui n'en est pas un.</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="concept-label">Quatre fois par an · Les résultats</span>
+        <span class="concept-example">Ce qui compte, c'est l'écart aux attentes</span>
+        <div class="concept-body">
+Chaque trimestre, l'entreprise publie ses comptes. Mais le cours ne réagit pas au chiffre publié, il réagit à <strong>l'écart entre ce chiffre et ce qui était attendu</strong>. Les analystes qui suivent le titre publient leurs prévisions, dont la moyenne forme le <em>consensus</em>, et c'est cette barre invisible que la publication franchit ou non.
+          <br><br>
+D'où la scène qui déroute tous les débutants : une société annonce une croissance de 40 %, et son cours chute de 8 %. Le marché attendait 45 %. Ou bien le trimestre était bon mais la <strong>guidance</strong>, la prévision donnée par la direction pour les mois à venir, était prudente. Sur ces séances, l'action ne se juge pas sur le passé publié mais sur l'avenir révisé.
+          <br><br>
+Ces publications déplacent aussi le consensus lui-même : les analystes révisent leurs prévisions dans les jours qui suivent, à la hausse ou à la baisse. Ce mouvement de révision est souvent plus informatif que la réaction du jour.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">Le dividende</span>
+        <span class="concept-example">Ce n'est pas de l'argent gratuit</span>
+        <div class="concept-body">
+Une entreprise mûre reverse une partie de ses bénéfices à ses actionnaires. Le jour du <strong>détachement</strong>, le cours baisse mécaniquement du montant versé : l'argent est sorti de l'entreprise pour aller sur ton compte. Tu n'es ni plus riche ni plus pauvre à cet instant précis, tu as seulement converti une part de ta position en liquidités, et cette conversion est imposable.
+          <br><br>
+Le <strong>rendement</strong> rapporte le dividende annuel au cours. Un rendement anormalement élevé mérite la méfiance plutôt que l'enthousiasme : il vient souvent d'un cours qui s'est effondré, et annonce une coupe du dividende plutôt qu'une aubaine.
+          <br><br>
+Verser un dividende n'est pas en soi une qualité. Une entreprise capable de réinvestir à forte rentabilité fait mieux de garder son argent : c'est le choix de la plupart des sociétés de croissance, et c'est rationnel.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">Le rachat d'actions</span>
+        <span class="concept-example">Moins de parts, donc des parts plus grosses</span>
+        <div class="concept-body">
+L'autre façon de rendre de l'argent : l'entreprise rachète ses propres actions sur le marché et les annule. Le gâteau ne grandit pas, mais il est partagé en moins de parts, donc le bénéfice par action monte sans qu'aucun bénéfice supplémentaire ait été gagné.
+          <br><br>
+C'est fiscalement plus efficace qu'un dividende, puisque rien n'est distribué et donc rien n'est imposé tant que tu ne vends pas. Mais la même règle que pour tout achat s'applique à l'entreprise elle-même : racheter ses actions <strong>trop cher</strong> détruit de la valeur pour ceux qui restent. Un rachat massif au sommet d'un cycle est un mauvais signal, pas un bon.
+          <br><br>
+Attention aussi à la nuance : beaucoup de sociétés technologiques rachètent surtout pour <em>compenser</em> les actions créées pour rémunérer leurs salariés. Le nombre d'actions ne baisse alors pas vraiment, il stagne.
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <span class="concept-label">Les faux mouvements</span>
+        <span class="concept-example">Un split ne change rien</span>
+        <div class="concept-body">
+Quand une action devient chère à l'unité, l'entreprise peut la <strong>diviser</strong> : chaque action de 900 € devient dix actions de 90 €. Tu en détiens dix fois plus, chacune vaut dix fois moins, ta position est identique au centime près. C'est une opération purement cosmétique, destinée à rendre le titre accessible aux petits portefeuilles.
+          <br><br>
+De la même famille : l'entrée ou la sortie d'un grand indice, qui force des fonds indiciels à acheter ou vendre mécaniquement, sans le moindre rapport avec la santé de l'entreprise.
+          <br><br>
+Savoir reconnaître ces mouvements évite deux erreurs symétriques : croire à une chute alors qu'il ne s'est rien passé, et croire à une nouvelle alors qu'il ne s'agissait que de plomberie de marché.
+        </div>
+      </div>
+    </div>
+
+    <div class="scoring-note" style="margin-top:1.25rem">
+<strong>Le lien avec les fiches.</strong> Le bloc <em>Consensus analystes</em> d'une fiche Signal reprend exactement cette mécanique : nombre d'analystes qui suivent le titre, objectif de cours moyen, et surtout le sens des révisions récentes. Et lorsqu'une fiche mentionne un résultat trimestriel, elle donne la date de publication : sans elle, un chiffre de croissance ne veut rien dire, on ne sait pas de quel trimestre il parle ni s'il est déjà digéré par le marché.
+    </div>
+  </section>
+
+<!-- SECTION 6, Friction réelle (frais + fiscalité) -->
+  <section class="section-block" id="s7">
+    <div class="section-label">07 · Friction réelle</div>
+    <h2 class="section-title">Frais, impôts, et ce qu'il reste vraiment</h2>
+<p class="section-sub">La plupart des simulations de portefeuille affichent leur performance brute, sans frais ni fiscalité. C'est trompeur, un investisseur retail français a deux types de friction structurelle qui réduisent significativement le rendement réel. Signal les modélise explicitement depuis le 23 mai 2026.</p>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--orange)"></div>
+<div class="portfo-htitle">Frais de transaction, 15 bps round-trip</div>
+      </div>
+      <div class="portfo-body">
+        Chaque achat ET chaque vente est facturé par le courtier + subit du slippage sur le carnet d'ordres. Signal applique <strong>7.5 bps one-way</strong> (1 bp = 0,01 % ; 15 bps = 0,15 %), soit <strong>15 bps round-trip</strong> (0.15% du montant pour un aller-retour complet). C'est l'ordre de grandeur réaliste retail sur courtiers européens : 2-5 bps de frais broker (Saxo, Bourse Direct, DEGIRO sur actions liquides) + 3-8 bps de slippage sur ordres market.
+        <br><br>
+Concrètement, un achat de 1 000 € coûte 0.75 € de frais one-way ; un round-trip coûte 1.50 €. Sur 35 transactions cumulées depuis le démarrage, le portefeuille a payé environ 28 € de frais, pas énorme, mais non négligeable sur le long terme.
+        <br><br>
+        Référence : Frazzini, Israel, Moskowitz (2018) <em>"Trading Costs"</em>, AQR Working Paper. Les coûts de transaction peuvent éroder 2-4pp/an d'alpha (la performance en plus ou en moins vs l'indice de référence) pour un investisseur retail moyennement actif <em>(ordre de grandeur extrapolé ; le papier original porte sur de gros gérants institutionnels et conclut justement à des coûts plus faibles qu'estimé à cette échelle)</em>.
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--red)"></div>
+<div class="portfo-htitle">PFU 30 %, la flat tax française</div>
+      </div>
+      <div class="portfo-body">
+        Sur un compte-titres ordinaire français, chaque plus-value <em>réalisée</em> (à la vente) est taxée à <strong>30 %</strong> : 12.8 % d'impôt sur le revenu + 17.2 % de prélèvements sociaux. C'est le Prélèvement Forfaitaire Unique, dit "flat tax", instauré en 2018 et codifié à l'article 200 A du CGI.
+        <br><br>
+<strong>Point capital</strong> : seules les plus-values <strong>réalisées</strong> (= positions effectivement vendues) sont taxées. Les plus-values <strong>latentes</strong> (= positions ouvertes qui montent) ne déclenchent aucun impôt tant qu'on ne vend pas. C'est cette asymétrie qui rend le <em>buy &amp; hold</em> long terme structurellement avantageux : NVDA détenue depuis 5 mois avec +95 % de plus-value latente ne paye aucun impôt, l'impôt n'arrive qu'au moment de la cession.
+        <br><br>
+<strong>Conséquence pour l'IA</strong> : couper une position en gain pour rotater vers une autre opportunité PERD 30% du gain réalisé. Une vente "neutre" (sortir d'un +20% pour acheter ailleurs) n'est rationnelle que si l'alternative a un alpha attendu suffisant pour couvrir cette friction, règle empirique : ne pas vendre un +20% pour un titre dont l'edge espéré est < 10%.
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--green)"></div>
+<div class="portfo-htitle">Pertes reportables, un crédit fiscal sur 10 ans</div>
+      </div>
+      <div class="portfo-body">
+        L'autre face de la fiscalité française est avantageuse : une <strong>vente en perte</strong> ne paie aucun impôt (logique, pas de gain) ET la perte devient un <strong>crédit fiscal utilisable contre les futurs gains pendant 10 ans</strong> (article 150-0 D du CGI).
+        <br><br>
+Exemple concret du portefeuille Signal : la position LSEG.L a été vendue en mai 2026 avec une perte de ~1 300 €. Cette perte n'a généré aucun impôt mais a créé un crédit fiscal théorique de 1 300 € × 30 % = 390 €, utilisable contre des plus-values futures pendant 10 ans.
+        <br><br>
+        À ce jour, le portefeuille a accumulé ~4 000 € de pertes reportables, soit ~1 200 € d'impôts évitables sur les futurs gains. C'est un actif fiscal réel qui contre-balance partiellement les PFU payés.
+      </div>
+    </div>
+
+    <div class="portfo-block" style="margin-bottom:12px">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--blue)"></div>
+        <div class="portfo-htitle">Latent vs cash post-liquidation</div>
+      </div>
+      <div class="portfo-body">
+        Le KPI "Plus-value latente" affiche la différence brute entre valeur actuelle et capital initial. C'est ce que ton broker affiche. Mais ce n'est <strong>PAS</strong> ce que tu aurais en cash si tu vendais tout.
+        <br><br>
+        Le tooltip ⓘ de la carte affiche en temps réel ce qu'on aurait <em>réellement</em> après cession totale : capital actuel <strong>moins</strong> les frais de vente sur chaque position <strong>moins</strong> le PFU 30 % sur chaque plus-value latente. C'est ce qu'on appelle <code>capital_post_liquidation</code> dans les données.
+        <br><br>
+        <strong>Exemple chiffré du portefeuille au 23 mai 2026</strong> : valeur totale 23 512 € (= +17.6 % brut), mais après liquidation virtuelle on aurait 22 115 € (= +10.6 % net). L'écart de 1 397 € représente l'impôt latent + frais de sortie. Le fisc gagne 1 397 € si on liquide. La pédagogie de cette distinction est essentielle : un portefeuille à +18 % brut peut "valoir" structurellement +11 % en cash réel.
+      </div>
+    </div>
+
+    <div class="portfo-block">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--gold)"></div>
+        <div class="portfo-htitle">Concentration sectorielle : l'IA peut être bull, mais elle l'assume</div>
+      </div>
+      <div class="portfo-body">
+La règle de concentration a connu trois vies. Binaire au départ (blocage strict dès qu'un cluster dépassait 30 % du capital), graduée en mai (sizing réduit automatiquement entre 30 et 65 %, blocage au-delà), elle est <strong>déclarative depuis juillet 2026</strong> : l'IA choisissant désormais elle-même ses montants, plus aucune réduction automatique ne s'applique, le pari sectoriel est autorisé, à condition d'être assumé :
+        <ul style="margin-top:0.6rem">
+          <li><strong>&lt; 30 %</strong> : aucune restriction.</li>
+<li><strong>30-65 %</strong> : information, la concentration du cluster est injectée dans le contexte de l'IA, qui adapte (ou pas) son sizing et doit mentionner le choix dans sa justification.</li>
+<li><strong>&gt; 65 %</strong> : achat possible <em>uniquement</em> avec <code>conviction="forte"</code> et un pari sectoriel explicitement assumé dans la justification, sinon rejeté. C'est le seul cran de friction restant : deux tiers du portefeuille sur un seul cluster est un choix qu'on ne fait pas par inertie.</li>
+        </ul>
+La philosophie du changement : les garde-fous mécaniques protègent contre les accidents (cash négatif, ligne à 40 %), pas contre les convictions. Si l'IA pense qu'un secteur mérite d'être surpondéré, elle peut le faire, publiquement, chiffres à l'appui, et le journal des ordres en garde la trace.
+      </div>
+    </div>
+
+    <div class="portfo-block">
+      <div class="portfo-header">
+        <div class="portfo-accent" style="background:var(--green)"></div>
+        <div class="portfo-htitle">PEA ou CTO : ça change tout côté impôts</div>
+      </div>
+      <div class="portfo-body">
+Le portefeuille Signal est modélisé dans un <strong>CTO</strong> (compte-titres ordinaire), le cas le plus taxé. C'est volontaire : ne pas surévaluer la performance nette affichée.
+        <ul style="margin-top:0.6rem">
+          <li><strong>CTO</strong> : accès au monde entier, aucun plafond. Gains taxés au <strong>PFU de 30 %</strong> (12,8 % d'impôt sur le revenu + 17,2 % de prélèvements sociaux, art. 200 A du CGI).</li>
+<li><strong>PEA</strong> : réservé aux actions de l'Union européenne, plafonné à 150 000 € de versements. Avantage décisif : après <strong>5 ans de détention</strong>, les gains sont exonérés d'impôt sur le revenu, il ne reste que les 17,2 % de prélèvements sociaux. Sur une même plus-value, un PEA de plus de 5 ans est donc presque <strong>deux fois moins taxé</strong> qu'un CTO.</li>
+          <li><strong>La limite concrète</strong> : la plupart des valeurs suivies par Signal sont américaines, donc non éligibles au PEA ; une réplication réelle en PEA se limiterait aux titres européens de la liste.</li>
+        </ul>
+<p style="margin-top:0.6rem"><em>Information générale, pas un conseil fiscal. Vérifie le barème en vigueur, les prélèvements sociaux ont évolué en 2026.</em></p>
+      </div>
+    </div>
+  </section>
+
 <!-- SECTION 3, Comment Signal choisit ses 30 actions -->
-  <section class="section-block" id="s3">
-    <div class="section-label">03 · L'algorithme</div>
+  <section class="section-block" id="s8">
+    <div class="section-label">08 · L'algorithme</div>
     <h2 class="section-title">Comment Signal choisit ses 30 actions</h2>
 <p class="section-sub">Chaque lundi, un algorithme analyse une sélection de <strong id="univ-n">229 grandes capitalisations</strong> mondiales (USA, Europe, et depuis août 2026 le Japon et la Corée en cotation directe, en plus des ADR, une action étrangère cotée aux US via un certificat). Les 30 meilleurs scores forment la <a href="index.html" style="color:var(--gold);text-decoration:none">watchlist principale</a> ; le reste de l'univers se lit par <a href="index.html#/" style="color:var(--gold);text-decoration:none">watchlists thématiques</a>. Voici comment le score de chaque action est calculé.</p>
 
@@ -722,13 +1074,13 @@ Ce découpage n'est justifié par <strong>aucun backtest</strong> et ne prétend
     <div class="scoring-note">
 Les 30 valeurs avec le score le plus élevé apparaissent sur la watchlist principale chaque lundi. Un titre peut <span class="badge-in">↑ Entrer</span> ou <span class="badge-out">↓ Sortir</span> selon l'évolution hebdomadaire de son score, qualité ou valorisation qui évoluent, timing qui se dégrade, publication de résultats, simple recalibrage des signaux.
       <br><br>
-<strong>VIX, indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est suivi chaque jour ouvré mais ne touche pas au scoring : une version expérimentale qui freinait le momentum en régime de stress a été testée puis désactivée (elle dégradait légèrement le Sharpe sur un backtest 2019-2024 trop bull). Le VIX reste donc <em>informationnel</em>, Claude peut le citer, aucun mécanisme automatique ne s'en sert. Détail de l'indicateur et de ses seuils : voir la pastille VIX, section <a href="#s5" style="color:var(--gold);text-decoration:none">05 · Le portefeuille IA</a>.
+<strong>VIX, indicateur de contexte non scoré.</strong> Le niveau du VIX (volatilité implicite S&amp;P 500) est suivi chaque jour ouvré mais ne touche pas au scoring : une version expérimentale qui freinait le momentum en régime de stress a été testée puis désactivée (elle dégradait légèrement le Sharpe sur un backtest 2019-2024 trop bull). Le VIX reste donc <em>informationnel</em>, Claude peut le citer, aucun mécanisme automatique ne s'en sert. Détail de l'indicateur et de ses seuils : voir la pastille VIX, section <a href="#s10" style="color:var(--gold);text-decoration:none">10 · Le portefeuille IA</a>.
     </div>
   </section>
 
 <!-- SECTION 4, Comment lire une fiche action -->
-  <section class="section-block" id="s4">
-    <div class="section-label">04 · La fiche action</div>
+  <section class="section-block" id="s9">
+    <div class="section-label">09 · La fiche action</div>
     <h2 class="section-title">Comment lire une fiche action</h2>
     <p class="section-sub">Cliquer sur une action de la watchlist affiche son analyse détaillée. Voici comment décoder chaque élément.</p>
 
@@ -1056,8 +1408,8 @@ Lecture : le cours est à −7% sous le plus haut 52 semaines (drawdown brut), e
   </section>
 
 <!-- SECTION 5, Comment lire le portefeuille IA -->
-  <section class="section-block" id="s5">
-    <div class="section-label">05 · Le portefeuille IA</div>
+  <section class="section-block" id="s10">
+    <div class="section-label">10 · Portefeuille IA</div>
     <h2 class="section-title">Comment lire le portefeuille IA</h2>
     <p class="section-sub">L'IA gère un capital fictif de 20 000 € avec des prix réels. Chaque semaine, elle documente ses décisions et les explique publiquement.</p>
 
@@ -1181,104 +1533,9 @@ Si rien n'a changé, si les mêmes données donnent juste une impression différ
     </div>
   </section>
 
-<!-- SECTION 6, Friction réelle (frais + fiscalité) -->
-  <section class="section-block" id="s6">
-    <div class="section-label">06 · Friction réelle</div>
-    <h2 class="section-title">Frais, impôts, et ce qu'il reste vraiment</h2>
-<p class="section-sub">La plupart des simulations de portefeuille affichent leur performance brute, sans frais ni fiscalité. C'est trompeur, un investisseur retail français a deux types de friction structurelle qui réduisent significativement le rendement réel. Signal les modélise explicitement depuis le 23 mai 2026.</p>
-
-    <div class="portfo-block" style="margin-bottom:12px">
-      <div class="portfo-header">
-        <div class="portfo-accent" style="background:var(--orange)"></div>
-<div class="portfo-htitle">Frais de transaction, 15 bps round-trip</div>
-      </div>
-      <div class="portfo-body">
-        Chaque achat ET chaque vente est facturé par le courtier + subit du slippage sur le carnet d'ordres. Signal applique <strong>7.5 bps one-way</strong> (1 bp = 0,01 % ; 15 bps = 0,15 %), soit <strong>15 bps round-trip</strong> (0.15% du montant pour un aller-retour complet). C'est l'ordre de grandeur réaliste retail sur courtiers européens : 2-5 bps de frais broker (Saxo, Bourse Direct, DEGIRO sur actions liquides) + 3-8 bps de slippage sur ordres market.
-        <br><br>
-Concrètement, un achat de 1 000 € coûte 0.75 € de frais one-way ; un round-trip coûte 1.50 €. Sur 35 transactions cumulées depuis le démarrage, le portefeuille a payé environ 28 € de frais, pas énorme, mais non négligeable sur le long terme.
-        <br><br>
-        Référence : Frazzini, Israel, Moskowitz (2018) <em>"Trading Costs"</em>, AQR Working Paper. Les coûts de transaction peuvent éroder 2-4pp/an d'alpha (la performance en plus ou en moins vs l'indice de référence) pour un investisseur retail moyennement actif <em>(ordre de grandeur extrapolé ; le papier original porte sur de gros gérants institutionnels et conclut justement à des coûts plus faibles qu'estimé à cette échelle)</em>.
-      </div>
-    </div>
-
-    <div class="portfo-block" style="margin-bottom:12px">
-      <div class="portfo-header">
-        <div class="portfo-accent" style="background:var(--red)"></div>
-<div class="portfo-htitle">PFU 30 %, la flat tax française</div>
-      </div>
-      <div class="portfo-body">
-        Sur un compte-titres ordinaire français, chaque plus-value <em>réalisée</em> (à la vente) est taxée à <strong>30 %</strong> : 12.8 % d'impôt sur le revenu + 17.2 % de prélèvements sociaux. C'est le Prélèvement Forfaitaire Unique, dit "flat tax", instauré en 2018 et codifié à l'article 200 A du CGI.
-        <br><br>
-<strong>Point capital</strong> : seules les plus-values <strong>réalisées</strong> (= positions effectivement vendues) sont taxées. Les plus-values <strong>latentes</strong> (= positions ouvertes qui montent) ne déclenchent aucun impôt tant qu'on ne vend pas. C'est cette asymétrie qui rend le <em>buy &amp; hold</em> long terme structurellement avantageux : NVDA détenue depuis 5 mois avec +95 % de plus-value latente ne paye aucun impôt, l'impôt n'arrive qu'au moment de la cession.
-        <br><br>
-<strong>Conséquence pour l'IA</strong> : couper une position en gain pour rotater vers une autre opportunité PERD 30% du gain réalisé. Une vente "neutre" (sortir d'un +20% pour acheter ailleurs) n'est rationnelle que si l'alternative a un alpha attendu suffisant pour couvrir cette friction, règle empirique : ne pas vendre un +20% pour un titre dont l'edge espéré est < 10%.
-      </div>
-    </div>
-
-    <div class="portfo-block" style="margin-bottom:12px">
-      <div class="portfo-header">
-        <div class="portfo-accent" style="background:var(--green)"></div>
-<div class="portfo-htitle">Pertes reportables, un crédit fiscal sur 10 ans</div>
-      </div>
-      <div class="portfo-body">
-        L'autre face de la fiscalité française est avantageuse : une <strong>vente en perte</strong> ne paie aucun impôt (logique, pas de gain) ET la perte devient un <strong>crédit fiscal utilisable contre les futurs gains pendant 10 ans</strong> (article 150-0 D du CGI).
-        <br><br>
-Exemple concret du portefeuille Signal : la position LSEG.L a été vendue en mai 2026 avec une perte de ~1 300 €. Cette perte n'a généré aucun impôt mais a créé un crédit fiscal théorique de 1 300 € × 30 % = 390 €, utilisable contre des plus-values futures pendant 10 ans.
-        <br><br>
-        À ce jour, le portefeuille a accumulé ~4 000 € de pertes reportables, soit ~1 200 € d'impôts évitables sur les futurs gains. C'est un actif fiscal réel qui contre-balance partiellement les PFU payés.
-      </div>
-    </div>
-
-    <div class="portfo-block" style="margin-bottom:12px">
-      <div class="portfo-header">
-        <div class="portfo-accent" style="background:var(--blue)"></div>
-        <div class="portfo-htitle">Latent vs cash post-liquidation</div>
-      </div>
-      <div class="portfo-body">
-        Le KPI "Plus-value latente" affiche la différence brute entre valeur actuelle et capital initial. C'est ce que ton broker affiche. Mais ce n'est <strong>PAS</strong> ce que tu aurais en cash si tu vendais tout.
-        <br><br>
-        Le tooltip ⓘ de la carte affiche en temps réel ce qu'on aurait <em>réellement</em> après cession totale : capital actuel <strong>moins</strong> les frais de vente sur chaque position <strong>moins</strong> le PFU 30 % sur chaque plus-value latente. C'est ce qu'on appelle <code>capital_post_liquidation</code> dans les données.
-        <br><br>
-        <strong>Exemple chiffré du portefeuille au 23 mai 2026</strong> : valeur totale 23 512 € (= +17.6 % brut), mais après liquidation virtuelle on aurait 22 115 € (= +10.6 % net). L'écart de 1 397 € représente l'impôt latent + frais de sortie. Le fisc gagne 1 397 € si on liquide. La pédagogie de cette distinction est essentielle : un portefeuille à +18 % brut peut "valoir" structurellement +11 % en cash réel.
-      </div>
-    </div>
-
-    <div class="portfo-block">
-      <div class="portfo-header">
-        <div class="portfo-accent" style="background:var(--gold)"></div>
-        <div class="portfo-htitle">Concentration sectorielle : l'IA peut être bull, mais elle l'assume</div>
-      </div>
-      <div class="portfo-body">
-La règle de concentration a connu trois vies. Binaire au départ (blocage strict dès qu'un cluster dépassait 30 % du capital), graduée en mai (sizing réduit automatiquement entre 30 et 65 %, blocage au-delà), elle est <strong>déclarative depuis juillet 2026</strong> : l'IA choisissant désormais elle-même ses montants, plus aucune réduction automatique ne s'applique, le pari sectoriel est autorisé, à condition d'être assumé :
-        <ul style="margin-top:0.6rem">
-          <li><strong>&lt; 30 %</strong> : aucune restriction.</li>
-<li><strong>30-65 %</strong> : information, la concentration du cluster est injectée dans le contexte de l'IA, qui adapte (ou pas) son sizing et doit mentionner le choix dans sa justification.</li>
-<li><strong>&gt; 65 %</strong> : achat possible <em>uniquement</em> avec <code>conviction="forte"</code> et un pari sectoriel explicitement assumé dans la justification, sinon rejeté. C'est le seul cran de friction restant : deux tiers du portefeuille sur un seul cluster est un choix qu'on ne fait pas par inertie.</li>
-        </ul>
-La philosophie du changement : les garde-fous mécaniques protègent contre les accidents (cash négatif, ligne à 40 %), pas contre les convictions. Si l'IA pense qu'un secteur mérite d'être surpondéré, elle peut le faire, publiquement, chiffres à l'appui, et le journal des ordres en garde la trace.
-      </div>
-    </div>
-
-    <div class="portfo-block">
-      <div class="portfo-header">
-        <div class="portfo-accent" style="background:var(--green)"></div>
-        <div class="portfo-htitle">PEA ou CTO : ça change tout côté impôts</div>
-      </div>
-      <div class="portfo-body">
-Le portefeuille Signal est modélisé dans un <strong>CTO</strong> (compte-titres ordinaire), le cas le plus taxé. C'est volontaire : ne pas surévaluer la performance nette affichée.
-        <ul style="margin-top:0.6rem">
-          <li><strong>CTO</strong> : accès au monde entier, aucun plafond. Gains taxés au <strong>PFU de 30 %</strong> (12,8 % d'impôt sur le revenu + 17,2 % de prélèvements sociaux, art. 200 A du CGI).</li>
-<li><strong>PEA</strong> : réservé aux actions de l'Union européenne, plafonné à 150 000 € de versements. Avantage décisif : après <strong>5 ans de détention</strong>, les gains sont exonérés d'impôt sur le revenu, il ne reste que les 17,2 % de prélèvements sociaux. Sur une même plus-value, un PEA de plus de 5 ans est donc presque <strong>deux fois moins taxé</strong> qu'un CTO.</li>
-          <li><strong>La limite concrète</strong> : la plupart des valeurs suivies par Signal sont américaines, donc non éligibles au PEA ; une réplication réelle en PEA se limiterait aux titres européens de la liste.</li>
-        </ul>
-<p style="margin-top:0.6rem"><em>Information générale, pas un conseil fiscal. Vérifie le barème en vigueur, les prélèvements sociaux ont évolué en 2026.</em></p>
-      </div>
-    </div>
-  </section>
-
 <!-- SECTION 7, Méthodologie : méthodes publiques + validation par observation réelle -->
-  <section class="section-block" id="s7">
-    <div class="section-label">07 · Méthodologie</div>
+  <section class="section-block" id="s11">
+    <div class="section-label">11 · Méthodologie</div>
     <h2 class="section-title">Sur quoi repose la méthode</h2>
     <p class="section-sub">Signal ne prétend pas avoir trouvé une recette secrète pour battre le marché. La démarche est plus modeste et plus honnête : appliquer de façon disciplinée des méthodes établies et publiques, puis les mettre à l'épreuve par l'observation du portefeuille IA en conditions réelles. C'est une expérimentation, pas une preuve. Code source ouvert sur GitHub.</p>
 
@@ -1350,8 +1607,8 @@ Chaque commit a un message explicite et la performance affichée sur le site est
   </section>
 
 <!-- SECTION 8, Pour aller plus loin -->
-  <section class="section-block" id="s8">
-    <div class="section-label">08 · Pour aller plus loin</div>
+  <section class="section-block" id="s12">
+    <div class="section-label">12 · Pour aller plus loin</div>
     <h2 class="section-title">Lire, creuser, vérifier</h2>
 <p class="section-sub">Signal n'est pas un conseiller financier : c'est un projet éditorial et pédagogique. Les décisions du portefeuille IA sont fictives et documentées pour qu'on apprenne de ses erreurs, pas pour être copiées : si une action figure dans la watchlist, ce n'est <strong>pas</strong> une recommandation d'achat, mais un signal parmi d'autres dans un contexte qui t'est propre. Pour avancer par toi-même :</p>
 
