@@ -113,13 +113,15 @@
   "v": "3db0b32a"
  },
  "AMD": {
-  "legende": "Microprocesseur AMD AM9080 en boîtier céramique",
-  "source": "KL Advanced Micro Devices AM9080",
-  "page": "https://commons.wikimedia.org/w/index.php?curid=7028092",
-  "licence": "CC BY-SA 3.0",
+  "legende": "Lisa Su présentant le processeur EPYC « Venice » d'AMD",
   "type": "produit",
-  "credit": "Konstantin Lanzet · CC BY-SA 3.0",
-  "v": "82f5ef04"
+  "source": "https://newsroom.amd.com/images/2026/07/8f55b7f3-308a-4af9-babe-4a5ce64f53e9.jpg",
+  "page": "https://newsroom.amd.com/",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "salle de presse officielle",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : AMD",
+  "v": "653c7817"
  },
  "AMZN": {
   "legende": "Cartes cadeaux Amazon en rayon",
@@ -425,13 +427,15 @@
   "v": "d0e67e9a"
  },
  "INTC": {
-  "legende": "Plaquette de processeurs Pentium d'Intel",
-  "source": "File:Wafer with Pentium chips.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Wafer_with_Pentium_chips.jpg",
-  "licence": "CC BY 2.0",
+  "legende": "Processeurs Intel Xeon 6",
   "type": "produit",
-  "credit": "Naotake Murayama from Los Altos, CA, USA · CC BY 2.0",
-  "v": "952c2e83"
+  "source": "https://newsroom.intel.com/wp-content/uploads/2026/07/Intel-Xeon-6-P-Cores-1.jpg",
+  "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "salle de presse officielle",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Intel",
+  "v": "845859bf"
  },
  "INTU": {
   "legende": "TurboTax d'Intuit, édition 2003",

@@ -1001,7 +1001,7 @@
     "intel.com"
    ],
    "conditions": "salle de presse",
-   "credit": "INTC"
+   "credit": "Intel"
   },
   {
    "page": "https://www.intel.com/content/www/us/en/newsroom/resources/press-kits-index.html",
@@ -1010,7 +1010,7 @@
     "intel.com"
    ],
    "conditions": "salle de presse",
-   "credit": "INTC"
+   "credit": "Intel"
   }
  ],
  "TSM": [
@@ -1021,7 +1021,7 @@
     "tsmc.com"
    ],
    "conditions": "salle de presse",
-   "credit": "TSM"
+   "credit": "TSMC"
   },
   {
    "page": "https://www.tsmc.com/english",
@@ -1030,7 +1030,7 @@
     "tsmc.com"
    ],
    "conditions": "salle de presse",
-   "credit": "TSM"
+   "credit": "TSMC"
   }
  ],
  "QCOM": [
@@ -1041,7 +1041,7 @@
     "qualcomm.com"
    ],
    "conditions": "salle de presse",
-   "credit": "QCOM"
+   "credit": "Qualcomm"
   },
   {
    "page": "https://www.qualcomm.com/news/releases",
@@ -1050,7 +1050,7 @@
     "qualcomm.com"
    ],
    "conditions": "salle de presse",
-   "credit": "QCOM"
+   "credit": "Qualcomm"
   }
  ],
  "AVGO": [
@@ -1061,7 +1061,7 @@
     "broadcom.com"
    ],
    "conditions": "salle de presse",
-   "credit": "AVGO"
+   "credit": "Broadcom"
   }
  ],
  "ARM": [
@@ -1072,7 +1072,7 @@
     "arm.com"
    ],
    "conditions": "salle de presse",
-   "credit": "ARM"
+   "credit": "Arm"
   },
   {
    "page": "https://newsroom.arm.com/news",
@@ -1081,7 +1081,7 @@
     "arm.com"
    ],
    "conditions": "salle de presse",
-   "credit": "ARM"
+   "credit": "Arm"
   }
  ],
  "MU": [
@@ -1092,7 +1092,7 @@
     "micron.com"
    ],
    "conditions": "salle de presse",
-   "credit": "MU"
+   "credit": "Micron"
   },
   {
    "page": "https://www.micron.com/about/newsroom/media-relations",
@@ -1101,7 +1101,7 @@
     "micron.com"
    ],
    "conditions": "salle de presse",
-   "credit": "MU"
+   "credit": "Micron"
   }
  ],
  "005930.KS": [
@@ -1112,7 +1112,7 @@
     "samsung.com"
    ],
    "conditions": "salle de presse",
-   "credit": "005930.KS"
+   "credit": "Samsung Electronics"
   },
   {
    "page": "https://news.samsung.com/global/category/products",
@@ -1121,7 +1121,7 @@
     "samsung.com"
    ],
    "conditions": "salle de presse",
-   "credit": "005930.KS"
+   "credit": "Samsung Electronics"
   }
  ],
  "000660.KS": [
@@ -1132,7 +1132,7 @@
     "skhynix.com"
    ],
    "conditions": "salle de presse",
-   "credit": "000660.KS"
+   "credit": "SK hynix"
   },
   {
    "page": "https://news.skhynix.com/category/news-media/",
@@ -1141,7 +1141,7 @@
     "skhynix.com"
    ],
    "conditions": "salle de presse",
-   "credit": "000660.KS"
+   "credit": "SK hynix"
   }
  ],
  "ASML.AS": [
@@ -1152,7 +1152,7 @@
     "asml.com"
    ],
    "conditions": "salle de presse",
-   "credit": "ASML.AS"
+   "credit": "ASML"
   },
   {
    "page": "https://www.asml.com/en/news",
@@ -1161,7 +1161,7 @@
     "asml.com"
    ],
    "conditions": "salle de presse",
-   "credit": "ASML.AS"
+   "credit": "ASML"
   }
  ],
  "AMAT": [
@@ -1172,7 +1172,7 @@
     "appliedmaterials.com"
    ],
    "conditions": "salle de presse",
-   "credit": "AMAT"
+   "credit": "Applied Materials"
   }
  ],
  "KLAC": [
@@ -1183,7 +1183,7 @@
     "kla.com"
    ],
    "conditions": "salle de presse",
-   "credit": "KLAC"
+   "credit": "KLA"
   },
   {
    "page": "https://www.kla.com/news-events",
@@ -1192,7 +1192,7 @@
     "kla.com"
    ],
    "conditions": "salle de presse",
-   "credit": "KLAC"
+   "credit": "KLA"
   }
  ]
 }

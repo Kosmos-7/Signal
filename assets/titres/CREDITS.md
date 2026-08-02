@@ -1,8 +1,8 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-92 fiches sur 104 portent une photo de leur société : 57 montrent un
-produit ou une activité, 35 un lieu identifiable. 76 sont sous licence
-libre et 16 sous licence non établie. Les 12 autres n'affichent aucune illustration. Priorité au PRODUIT (puce, carte, terminal,
+92 fiches sur 104 portent une photo de leur société : 58 montrent un
+produit ou une activité, 34 un lieu identifiable. 73 sont sous licence
+libre et 19 sous licence non établie. Les 12 autres n'affichent aucune illustration. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
@@ -257,13 +257,14 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Page : https://commons.wikimedia.org/wiki/File:Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg
 - Licence : CC BY 4.0 — crédit affiché : 4300streetcar · CC BY 4.0
 
-### AMD — Microprocesseur AMD AM9080 en boîtier céramique
+### AMD — Lisa Su présentant le processeur EPYC « Venice » d'AMD
 
 - Nature : produit
 - Fichier : `assets/titres/AMD.jpg`
-- Source : KL Advanced Micro Devices AM9080
-- Page : https://commons.wikimedia.org/w/index.php?curid=7028092
-- Licence : CC BY-SA 3.0 — crédit affiché : Konstantin Lanzet · CC BY-SA 3.0
+- Source : https://newsroom.amd.com/images/2026/07/8f55b7f3-308a-4af9-babe-4a5ce64f53e9.jpg
+- Page : https://newsroom.amd.com/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : AMD
+- Origine : salle de presse officielle, le 2026-08-02
 
 ### AMZN — Cartes cadeaux Amazon en rayon
 
@@ -544,13 +545,14 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Page : https://commons.wikimedia.org/w/index.php?curid=171699716
 - Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
 
-### INTC — Plaquette de processeurs Pentium d'Intel
+### INTC — Processeurs Intel Xeon 6
 
 - Nature : produit
 - Fichier : `assets/titres/INTC.jpg`
-- Source : File:Wafer with Pentium chips.jpg
-- Page : https://commons.wikimedia.org/wiki/File:Wafer_with_Pentium_chips.jpg
-- Licence : CC BY 2.0 — crédit affiché : Naotake Murayama from Los Altos, CA, USA · CC BY 2.0
+- Source : https://newsroom.intel.com/wp-content/uploads/2026/07/Intel-Xeon-6-P-Cores-1.jpg
+- Page : https://www.intel.com/content/www/us/en/newsroom/home.html
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : INTC
+- Origine : salle de presse officielle, le 2026-08-02
 
 ### INTU — TurboTax d'Intuit, édition 2003
 
