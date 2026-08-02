@@ -150,16 +150,68 @@ def preparer(donnees, chemin, largeur=960, hauteur=540):
     return os.path.getsize(chemin)
 
 
+def par_fichiers(chemin_sel, sortie, largeur=960, hauteur=540):
+    """Télécharge des fichiers Commons NOMMÉMENT choisis (ticker → titre exact).
+
+    Deuxième volet des illustrations : une photo de la SOCIÉTÉ, et non de son
+    activité, là où l'on est certain du sujet. La sélection est faite en amont
+    à partir du nom de fichier — « ASML headquarters Veldhoven.jpg » se
+    certifie lui-même, « World Bank headquarters » trouvé en cherchant Bank of
+    America se disqualifie tout seul — puis vérifiée à l'œil sur planche-contact
+    avant promotion. Rien n'est publié sur la seule foi d'un nom de fichier.
+    """
+    sel = json.load(open(chemin_sel, encoding="utf-8"))
+    os.makedirs(sortie, exist_ok=True)
+    manifeste = {}
+    for ticker, titre in sorted(sel.items()):
+        try:
+            d = _get({"action": "query", "format": "json", "titles": titre,
+                      "prop": "imageinfo", "iiprop": "url|extmetadata|size",
+                      "iiurlwidth": "1600"})
+            page = next(iter((d.get("query", {}).get("pages") or {}).values()))
+            info = (page.get("imageinfo") or [{}])[0]
+            meta = info.get("extmetadata") or {}
+            ok, detail = licence_libre(meta)
+            if not ok:
+                print(f"  ✗ {ticker:10s} licence non libre ({detail[:40]})")
+                continue
+            url = info.get("thumburl") or info.get("url")
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=45) as r:
+                brut = r.read()
+            nom = f"{ticker}.jpg"
+            poids = preparer(brut, os.path.join(sortie, nom), largeur, hauteur)
+            manifeste[ticker] = {
+                "fichier": nom, "titre": titre, "poids": poids,
+                "page": info.get("descriptionurl", ""),
+                "licence": (meta.get("LicenseShortName") or {}).get("value", "?"),
+                "auteur": (meta.get("Artist") or {}).get("value", "")[:120],
+            }
+            print(f"  ✓ {ticker:10s} {poids // 1024:3d} Ko  [{manifeste[ticker]['licence']}]  {titre[5:56]}")
+        except Exception as e:
+            print(f"  ✗ {ticker:10s} {type(e).__name__}: {e}")
+        time.sleep(0.4)
+    with open(os.path.join(sortie, "MANIFESTE.json"), "w", encoding="utf-8") as f:
+        json.dump(manifeste, f, ensure_ascii=False, indent=1)
+    print(f"\n{len(manifeste)}/{len(sel)} candidats récupérés")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--candidats", type=int, default=3,
                     help="nombre de candidats téléchargés par thème (pour arbitrage visuel)")
     ap.add_argument("--sortie", default="assets/themes/candidats")
+    ap.add_argument("--selection", default="",
+                    help="JSON ticker → titre de fichier Commons (photos de sociétés)")
     ap.add_argument("--activites", action="store_true",
                     help="récolter les illustrations d'ACTIVITÉ (maillons et secteurs) "
                          "au lieu des trois watchlists")
     a = ap.parse_args()
     os.makedirs(a.sortie, exist_ok=True)
+
+    if a.selection:
+        par_fichiers(a.selection, a.sortie)
+        return
 
     requetes = REQUETES
     if a.activites:

@@ -22,6 +22,10 @@ on:
         description: "Récolter les illustrations d'ACTIVITÉ (maillons et secteurs)"
         type: boolean
         default: false
+      selection:
+        description: "Récupérer les photos de SOCIÉTÉS listées dans tools/photos_titres_selection.json"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -49,8 +53,14 @@ jobs:
 
       - name: Chercher les photos (domaine public / CC0 uniquement)
         run: |
-          python tools/fetch_theme_photos.py --candidats ${{ inputs.candidats || '3' }} \
-            ${{ inputs.activites && '--activites --sortie assets/activites/candidats' || '' }}
+          if [ "${{ inputs.selection }}" = "true" ]; then
+            python tools/fetch_theme_photos.py \
+              --selection tools/photos_titres_selection.json \
+              --sortie assets/titres/candidats
+          else
+            python tools/fetch_theme_photos.py --candidats ${{ inputs.candidats || '3' }} \
+              ${{ inputs.activites && '--activites --sortie assets/activites/candidats' || '' }}
+          fi
 
       - name: Publier les candidats en artefact
         if: always()
@@ -60,6 +70,7 @@ jobs:
           path: |
             assets/themes/candidats/
             assets/activites/candidats/
+            assets/titres/candidats/
           retention-days: 7
 
       - name: Commiter les candidats pour arbitrage visuel
