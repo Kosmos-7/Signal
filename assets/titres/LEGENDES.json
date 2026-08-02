@@ -216,5 +216,68 @@
   "licence": "CC BY-SA 4.0",
   "type": "produit",
   "credit": "Raimond Spekking · CC BY-SA 4.0"
+ },
+ "AXP": {
+  "legende": "Chèques de voyage American Express",
+  "source": "File:Travelers Cheques of 50 USD each issued by American Express, bought ca. 2012, showing incremental serial numbering.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Travelers_Cheques_of_50_USD_each_issued_by_American_Express,_bought_ca._2012,_showing_incremental_serial_numbering.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "site",
+  "credit": "Pittigrilli · CC BY-SA 4.0"
+ },
+ "DLR": {
+  "legende": "Centre de données Digital Realty",
+  "source": "File:DigitalRealtyDatacenterMarkham1.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:DigitalRealtyDatacenterMarkham1.jpg",
+  "licence": "CC0",
+  "type": "produit"
+ },
+ "HPE": {
+  "legende": "Baies de stockage HPE Nimble",
+  "source": "File:HPE Nimble Arrays.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:HPE_Nimble_Arrays.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "site",
+  "credit": "Prholenstein · CC BY-SA 4.0"
+ },
+ "MU": {
+  "legende": "Clé USB Crucial, marque de Micron",
+  "source": "File:Crucial 512 MB Gizmo USB 2 pen drive (c 2005) (outside).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Crucial_512_MB_Gizmo_USB_2_pen_drive_(c_2005)_(outside).jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Multicherry · CC BY-SA 4.0"
+ },
+ "ENR.DE": {
+  "legende": "Centrale thermique équipée par Siemens Energy, Leipzig",
+  "source": "File:Heizkraftwerk Leipzig Süd mit Wärmespeicher.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Heizkraftwerk_Leipzig_S%C3%BCd_mit_W%C3%A4rmespeicher.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "site",
+  "credit": "Vinaceus · CC BY-SA 4.0"
+ },
+ "NDAQ": {
+  "legende": "Écrans du MarketSite Nasdaq, Times Square",
+  "source": "File:Xbox One Launch NASDAQ (1).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Xbox_One_Launch_NASDAQ_(1).jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "site",
+  "credit": "Microsoft · CC BY-SA 4.0"
+ },
+ "DB1.DE": {
+  "legende": "Ancienne Bourse, Deutsche Börse",
+  "source": "File:Alte Boerse (Aussenfassade).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Alte_Boerse_(Aussenfassade).jpg",
+  "licence": "CC BY-SA 3.0",
+  "type": "produit",
+  "credit": "Michael J. Zirbes (from the original description at the German Wikipedia) · CC BY-SA 3.0"
+ },
+ "AMAT": {
+  "legende": "Enseigne d'Applied Materials",
+  "source": "File:Applied Materials sign and Air Products plant in Southern Taiwan Science Park May 2025.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg",
+  "licence": "CC BY 4.0",
+  "type": "site",
+  "credit": "4300streetcar · CC BY 4.0"
  }
 }

@@ -1,41 +1,44 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-30 fiches portent une photo de leur société ; les autres gardent
-l'illustration de leur activité. Deux natures d'image, dans cet ordre de
-préférence :
+38 fiches sur 104 portent une photo de leur société ; les autres gardent
+l'illustration de leur activité. Priorité au PRODUIT (puce, carte, terminal,
+machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
+fondeur, un immeuble de verre ne dit rien.
 
-- **Un PRODUIT** (16 fiches) : une puce, une carte, un terminal, une
-  machine. C'est ce qui apprend le plus : le die d'un circuit gravé par TSMC dit
-  ce que fait un fondeur, un immeuble de verre ne dit rien.
-- **Un SITE** (14 fiches) : siège ou installation, retenu
-  seulement quand il porte une enseigne lisible ou une architecture
-  reconnaissable, et faute de produit disponible.
+## Quatre sources, par ordre de découverte
 
-## Les trois sources, par ordre de découverte
-
-1. **Recherche textuelle sur Commons.** Elle cherche des MOTS et se trompe dans
-   43 % des cas : le siège de la Banque mondiale sort pour Bank of America, un
+1. **Recherche textuelle sur Commons.** Cherche des MOTS, se trompe dans 43 %
+   des cas : le siège de la Banque mondiale pour Bank of America, un
    commissariat pour Western Digital, un photographe du XIXe siècle pour Eaton.
-2. **Wikidata P18.** Elle désigne une ENTITÉ, donc la bonne société. Mais
-   l'image retenue par la communauté est neuf fois sur dix le siège social :
-   précision réglée, pertinence non.
-3. **Catégorie Commons de la société (Wikidata P373).** Elle contient les
-   produits, les machines, les emballages. Les fichiers sont classés par ce que
-   leur nom promet — bonus aux puces, wafers, cartes et machines, malus aux
-   bâtiments, logos, portraits et diagrammes — puis regardés un par un.
+2. **Wikidata P18.** Désigne une ENTITÉ, donc la bonne société. Mais l'image
+   retenue par la communauté est neuf fois sur dix le siège social : précision
+   réglée, pertinence non.
+3. **Catégorie Commons de la société (P373).** Contient les produits et les
+   machines. C'est de là que viennent les puces et les terminaux.
+4. **Données structurées de Commons (P180, « dépeint »).** Retourne les images
+   que des contributeurs ont explicitement rattachées à l'entité. Plus large que
+   P18, plus sûr qu'une recherche de mots.
 
-Le classement automatique n'a jamais le dernier mot. Il a proposé un graphique
-de débit pour ASML, une carte de visite d'entraîneur de basket pour Samsung et
-un panneau routier orné de manchots pour Oracle : tous écartés à l'œil.
+## Ce que le tri automatique n'attrape pas
+
+Aucune de ces méthodes ne dispense de regarder. Ont été écartés à l'œil :
+
+- un stade de cricket pour KKR (les Kolkata Knight Riders portent le même sigle)
+- un clavier MIDI de la marque CME, homonyme du Chicago Mercantile Exchange
+- une église nommée Eaton, un bus d'équipe de volley pour Ibiden
+- le ruban de l'autisme pour PDD, dont le sigle désigne aussi un trouble médical
+- la carte de visite d'un entraîneur de basket pour Samsung
+- un panneau routier orné de manchots pour Oracle
+- des employés en manifestation pour Amazon, sujet éditorialement chargé
 
 ## Licences
 
 Domaine public et CC0 s'utilisent sans condition. CC-BY et CC-BY-SA exigent un
-crédit : il est AFFICHÉ SUR LA FICHE sous la légende, et non relégué ici où
-personne ne l'ouvrirait. Les images sont recadrées en 16:9 et assombries pour
-tenir sur fond sombre ; ces adaptations restent sous la licence de l'original.
+crédit : il est AFFICHÉ SUR LA FICHE sous la légende. Les images sont recadrées
+en 16:9 et assombries pour tenir sur fond sombre ; ces adaptations restent sous
+la licence de l'original.
 
-## Photos publiées
+## Photos publiées (19 produits, 19 sites)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -85,6 +88,14 @@ tenir sur fond sombre ; ces adaptations restent sous la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Adyen_card_payment_terminal_(9607998259).jpg
 - Licence : CC BY 2.0 — crédit affiché : Alper Çuğun from Berlin, Germany · CC BY 2.0
 
+### AMAT — Enseigne d'Applied Materials
+
+- Nature : site
+- Fichier : `assets/titres/AMAT.jpg`
+- Source : File:Applied Materials sign and Air Products plant in Southern Taiwan Science Park May 2025.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg
+- Licence : CC BY 4.0 — crédit affiché : 4300streetcar · CC BY 4.0
+
 ### ARM — Processeur Exynos à cœurs Arm
 
 - Nature : produit
@@ -100,6 +111,14 @@ tenir sur fond sombre ; ces adaptations restent sous la licence de l'original.
 - Source : File:ASML headquarters Veldhoven.jpg
 - Page : https://commons.wikimedia.org/wiki/File:ASML_headquarters_Veldhoven.jpg
 - Licence : Public domain (aucune obligation)
+
+### AXP — Chèques de voyage American Express
+
+- Nature : site
+- Fichier : `assets/titres/AXP.jpg`
+- Source : File:Travelers Cheques of 50 USD each issued by American Express, bought ca. 2012, showing incremental serial numbering.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Travelers_Cheques_of_50_USD_each_issued_by_American_Express,_bought_ca._2012,_showing_incremental_serial_numbering.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Pittigrilli · CC BY-SA 4.0
 
 ### BX — Siège de Blackstone, New York
 
@@ -117,6 +136,14 @@ tenir sur fond sombre ; ces adaptations restent sous la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg
 - Licence : Public domain (aucune obligation)
 
+### DB1.DE — Ancienne Bourse, Deutsche Börse
+
+- Nature : produit
+- Fichier : `assets/titres/DB1.DE.jpg`
+- Source : File:Alte Boerse (Aussenfassade).jpg
+- Page : https://commons.wikimedia.org/wiki/File:Alte_Boerse_(Aussenfassade).jpg
+- Licence : CC BY-SA 3.0 — crédit affiché : Michael J. Zirbes (from the original description at the German Wikipedia) · CC BY-SA 3.0
+
 ### DELL — Siège de Dell, Round Rock
 
 - Nature : site
@@ -124,6 +151,22 @@ tenir sur fond sombre ; ces adaptations restent sous la licence de l'original.
 - Source : File:RR1- Dell Campus.jpg
 - Page : https://commons.wikimedia.org/wiki/File:RR1-_Dell_Campus.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Jjpwiki · CC BY-SA 4.0
+
+### DLR — Centre de données Digital Realty
+
+- Nature : produit
+- Fichier : `assets/titres/DLR.jpg`
+- Source : File:DigitalRealtyDatacenterMarkham1.jpg
+- Page : https://commons.wikimedia.org/wiki/File:DigitalRealtyDatacenterMarkham1.jpg
+- Licence : CC0 (aucune obligation)
+
+### ENR.DE — Centrale thermique équipée par Siemens Energy, Leipzig
+
+- Nature : site
+- Fichier : `assets/titres/ENR.DE.jpg`
+- Source : File:Heizkraftwerk Leipzig Süd mit Wärmespeicher.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Heizkraftwerk_Leipzig_S%C3%BCd_mit_W%C3%A4rmespeicher.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Vinaceus · CC BY-SA 4.0
 
 ### EQIX — Intérieur d'un centre de données Equinix, Dallas
 
@@ -140,6 +183,14 @@ tenir sur fond sombre ; ces adaptations restent sous la licence de l'original.
 - Source : File:Goldman Sachs New World Headquarters.JPG
 - Page : https://commons.wikimedia.org/wiki/File:Goldman_Sachs_New_World_Headquarters.JPG
 - Licence : Public domain (aucune obligation)
+
+### HPE — Baies de stockage HPE Nimble
+
+- Nature : site
+- Fichier : `assets/titres/HPE.jpg`
+- Source : File:HPE Nimble Arrays.jpg
+- Page : https://commons.wikimedia.org/wiki/File:HPE_Nimble_Arrays.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Prholenstein · CC BY-SA 4.0
 
 ### HSBA.L — Tour HSBC, Canary Wharf, Londres
 
@@ -172,6 +223,22 @@ tenir sur fond sombre ; ces adaptations restent sous la licence de l'original.
 - Source : File:Aerial Microsoft West Campus August 2009.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Aerial_Microsoft_West_Campus_August_2009.jpg
 - Licence : Public domain (aucune obligation)
+
+### MU — Clé USB Crucial, marque de Micron
+
+- Nature : produit
+- Fichier : `assets/titres/MU.jpg`
+- Source : File:Crucial 512 MB Gizmo USB 2 pen drive (c 2005) (outside).jpg
+- Page : https://commons.wikimedia.org/wiki/File:Crucial_512_MB_Gizmo_USB_2_pen_drive_(c_2005)_(outside).jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Multicherry · CC BY-SA 4.0
+
+### NDAQ — Écrans du MarketSite Nasdaq, Times Square
+
+- Nature : site
+- Fichier : `assets/titres/NDAQ.jpg`
+- Source : File:Xbox One Launch NASDAQ (1).jpg
+- Page : https://commons.wikimedia.org/wiki/File:Xbox_One_Launch_NASDAQ_(1).jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Microsoft · CC BY-SA 4.0
 
 ### NFLX — Siège de Netflix, Los Gatos
 
