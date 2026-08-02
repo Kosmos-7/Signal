@@ -1,0 +1,50 @@
+# .github/workflows/sonde-photos.yml
+# Mesure la disponibilité de photos libres pour chaque société couverte.
+#
+# Ne télécharge aucune image et ne modifie pas le dépôt : la sonde compte, et
+# publie son rapport en artefact. Elle existe parce qu'illustrer 104 sociétés
+# est une décision qui doit se prendre sur un taux de couverture mesuré, pas
+# sur une intuition.
+name: Sonder les photos par titre
+
+on:
+  workflow_dispatch:
+    inputs:
+      limite:
+        description: "Ne sonder que les N premiers titres (0 = tous)"
+        type: string
+        default: "0"
+
+permissions:
+  contents: write
+
+jobs:
+  sonde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Sonder Commons
+        run: python tools/sonde_photos_titres.py --limite ${{ inputs.limite || '0' }}
+      - name: Publier le rapport
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonde-photos-titres
+          path: sonde_photos_titres.json
+          retention-days: 7
+      - name: Commiter le rapport pour analyse
+        run: |
+          git config user.email "bot@signal.fr"
+          git config user.name "Signal Bot"
+          git add sonde_photos_titres.json
+          if git diff --staged --quiet; then
+            echo "Rapport inchangé."
+          else
+            git commit -m "chore(sonde): disponibilité des photos par titre [skip ci]"
+            git pull --rebase --autostash || { git rebase --abort; exit 1; }
+            git push
+          fi
