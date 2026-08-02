@@ -1,143 +1,339 @@
 {
- "societes": 2,
+ "societes": 7,
  "detail": {
-  "ASML.AS": {
+  "APP1": {
    "candidats": [
     {
-     "fichier": "Spectrum of lithography lights.PNG",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Spectrum_of_lithography_lights.PNG",
-     "page": "https://commons.wikimedia.org/wiki/File:Spectrum_of_lithography_lights.PNG",
+     "fichier": "Unemployed men queued outside a depression soup kitchen opened in Chicago by Al Capone, 02-1931 - NARA - 541927.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Unemployed_men_queued_outside_a_depression_soup_kitchen_opened_in_Chicago_by_Al_Capone%2C_02-1931_-_NARA_-_541927.jpg/1920px-Unemployed_men_queued_outside_a_depression_soup_kitchen_opened_in_Chicago_by_Al_Capone%2C_02-1931_-_NARA_-_541927.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Unemployed_men_queued_outside_a_depression_soup_kitchen_opened_in_Chicago_by_Al_Capone,_02-1931_-_NARA_-_541927.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUnknown authorUnknown author or not provided",
+     "score": 0,
+     "terme": "Wall Street 1900",
+     "poids": 103981
+    },
+    {
+     "fichier": "Trinity Pl Rector Thames 17 - American Stock Exchange.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Trinity_Pl_Rector_Thames_17_-_American_Stock_Exchange.jpg/1920px-Trinity_Pl_Rector_Thames_17_-_American_Stock_Exchange.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Trinity_Pl_Rector_Thames_17_-_American_Stock_Exchange.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Shigeru23",
+     "auteur": "Tdorante10",
      "score": 0,
-     "terme": "extreme ultraviolet lithography",
-     "poids": 55264
+     "terme": "New York Stock Exchange building 1930",
+     "poids": 136990
     },
     {
-     "fichier": "How EUV lithography works.webm",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/How_EUV_lithography_works.webm/1920px--How_EUV_lithography_works.webm.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:How_EUV_lithography_works.webm",
-     "licence": "CC BY 3.0",
-     "famille": "by",
-     "auteur": "IBM Research",
-     "score": 0,
-     "terme": "EUV lithography machine",
-     "poids": 13969
-    },
-    {
-     "fichier": "EUV Defect Printability.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/EUV_Defect_Printability.png",
-     "page": "https://commons.wikimedia.org/wiki/File:EUV_Defect_Printability.png",
-     "licence": "CC BY-SA 3.0",
+     "fichier": "Trinity Pl Rector Thames 15 - American Stock Exchange.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Trinity_Pl_Rector_Thames_15_-_American_Stock_Exchange.jpg/1920px-Trinity_Pl_Rector_Thames_15_-_American_Stock_Exchange.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Trinity_Pl_Rector_Thames_15_-_American_Stock_Exchange.jpg",
+     "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Guiding light",
+     "auteur": "Tdorante10",
      "score": 0,
-     "terme": "extreme ultraviolet lithography",
-     "poids": 53550
+     "terme": "New York Stock Exchange building 1930",
+     "poids": 119575
     },
     {
-     "fichier": "Towards high accuracy reflectometry for extreme-ultraviolet lithography (IA jresv108n4p267).pdf",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Towards_high_accuracy_reflectometry_for_extreme-ultraviolet_lithography_%28IA_jresv108n4p267%29.pdf/page1-960px-Towards_high_accuracy_reflectometry_for_extreme-ultraviolet_lithography_%28IA_jresv108n4p267%29.pdf.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Towards_high_accuracy_reflectometry_for_extreme-ultraviolet_lithography_(IA_jresv108n4p267).pdf",
+     "fichier": "NewYorkNYAmericanStockExchangeEntrance060709.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/NewYorkNYAmericanStockExchangeEntrance060709.JPG/1920px-NewYorkNYAmericanStockExchangeEntrance060709.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:NewYorkNYAmericanStockExchangeEntrance060709.JPG",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "\nTarrio, C.\nGrantham, S.\nVest, R.E.\nSquires, M.B.\nLucatorto, T.B.",
-     "score": -12,
-     "terme": "extreme ultraviolet lithography",
-     "poids": 73667
-    },
-    {
-     "fichier": "Sales catalogue 414- Tregaskis (IA b31809133).pdf",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Sales_catalogue_414-_Tregaskis_%28IA_b31809133%29.pdf/page1-960px-Sales_catalogue_414-_Tregaskis_%28IA_b31809133%29.pdf.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Sales_catalogue_414-_Tregaskis_(IA_b31809133).pdf",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "",
-     "score": -12,
-     "terme": "EUV lithography machine",
-     "poids": 157175
-    },
-    {
-     "fichier": "Physics laboratory, technical activities 1998 (IA physicslaborator6268unse).pdf",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Physics_laboratory%2C_technical_activities_1998_%28IA_physicslaborator6268unse%29.pdf/page1-960px-Physics_laboratory%2C_technical_activities_1998_%28IA_physicslaborator6268unse%29.pdf.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Physics_laboratory,_technical_activities_1998_(IA_physicslaborator6268unse).pdf",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "",
-     "score": -12,
-     "terme": "EUV lithography machine",
-     "poids": 65665
+     "auteur": "Noroton",
+     "score": 0,
+     "terme": "New York Stock Exchange building 1930",
+     "poids": 76885
     }
    ]
   },
-  "TSM": {
+  "APP2": {
    "candidats": [
     {
-     "fichier": "Trucks entering and leaving TSMC Fab 18 May 2025.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Trucks_entering_and_leaving_TSMC_Fab_18_May_2025.jpg/1920px-Trucks_entering_and_leaving_TSMC_Fab_18_May_2025.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Trucks_entering_and_leaving_TSMC_Fab_18_May_2025.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "4300streetcar",
+     "fichier": "Trading floor, New York Stock Exchange, New York, New York LCCN2011630168.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Trading_floor%2C_New_York_Stock_Exchange%2C_New_York%2C_New_York_LCCN2011630168.tif/lossy-page1-1920px-Trading_floor%2C_New_York_Stock_Exchange%2C_New_York%2C_New_York_LCCN2011630168.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Trading_floor,_New_York_Stock_Exchange,_New_York,_New_York_LCCN2011630168.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Carol M. Highsmith",
      "score": 0,
-     "terme": "TSMC fab",
-     "poids": 94852
+     "terme": "New York Stock Exchange trading floor",
+     "poids": 129307
     },
     {
-     "fichier": "TSMC fabs in Hsinchu 02.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/TSMC_fabs_in_Hsinchu_02.jpg/1920px-TSMC_fabs_in_Hsinchu_02.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:TSMC_fabs_in_Hsinchu_02.jpg",
+     "fichier": "Trading floor of the New York Stock Exchange, New York City LCCN2011632435.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Trading_floor_of_the_New_York_Stock_Exchange%2C_New_York_City_LCCN2011632435.tif/lossy-page1-1920px-Trading_floor_of_the_New_York_Stock_Exchange%2C_New_York_City_LCCN2011632435.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Trading_floor_of_the_New_York_Stock_Exchange,_New_York_City_LCCN2011632435.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Carol M. Highsmith",
+     "score": 0,
+     "terme": "New York Stock Exchange trading floor",
+     "poids": 119241
+    },
+    {
+     "fichier": "Tickers (8085342806).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tickers_%288085342806%29.jpg/1920px-Tickers_%288085342806%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tickers_(8085342806).jpg",
      "licence": "CC BY 2.0",
      "famille": "by",
-     "auteur": "曾 成訓",
+     "auteur": "Francisco Gonzalez",
      "score": 0,
-     "terme": "TSMC Fab 18",
-     "poids": 59567
+     "terme": "ticker tape machine",
+     "poids": 50148
     },
     {
-     "fichier": "TSMC fabs in Hsinchu 01.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/TSMC_fabs_in_Hsinchu_01.jpg/1920px-TSMC_fabs_in_Hsinchu_01.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:TSMC_fabs_in_Hsinchu_01.jpg",
+     "fichier": "Thomas Edison stock ticker NMAH-JN2014-3625.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Thomas_Edison_stock_ticker_NMAH-JN2014-3625.jpg/1920px-Thomas_Edison_stock_ticker_NMAH-JN2014-3625.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Thomas_Edison_stock_ticker_NMAH-JN2014-3625.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Jaclyn Nash (photographer)",
+     "score": 0,
+     "terme": "ticker tape machine",
+     "poids": 54785
+    }
+   ]
+  },
+  "APP3": {
+   "candidats": [
+    {
+     "fichier": "US-$5000-GC-1928-Fr-2410.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/US-%245000-GC-1928-Fr-2410.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:US-$5000-GC-1928-Fr-2410.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "National Museum of American History\n",
+     "score": 0,
+     "terme": "share certificate engraving",
+     "poids": 133679
+    },
+    {
+     "fichier": "US-$1-SC-1899-Fr.235.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/US-%241-SC-1899-Fr.235.jpg/1920px-US-%241-SC-1899-Fr.235.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:US-$1-SC-1899-Fr.235.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "National Museum of American History\n",
+     "score": 0,
+     "terme": "share certificate engraving",
+     "poids": 143086
+    },
+    {
+     "fichier": "Tickers (8085342806).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tickers_%288085342806%29.jpg/1920px-Tickers_%288085342806%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tickers_(8085342806).jpg",
      "licence": "CC BY 2.0",
      "famille": "by",
-     "auteur": "曾 成訓",
+     "auteur": "Francisco Gonzalez",
      "score": 0,
-     "terme": "TSMC fab",
-     "poids": 72512
+     "terme": "stock ticker board",
+     "poids": 50148
     },
     {
-     "fichier": "TSMC fab 22 under construction Kaohsiung, Nanzih District, Taiwan Apr 13, 2024 05-44-42 PM.jpeg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/TSMC_fab_22_under_construction_Kaohsiung%2C_Nanzih_District%2C_Taiwan_Apr_13%2C_2024_05-44-42_PM.jpeg/1920px-TSMC_fab_22_under_construction_Kaohsiung%2C_Nanzih_District%2C_Taiwan_Apr_13%2C_2024_05-44-42_PM.jpeg",
-     "page": "https://commons.wikimedia.org/wiki/File:TSMC_fab_22_under_construction_Kaohsiung,_Nanzih_District,_Taiwan_Apr_13,_2024_05-44-42_PM.jpeg",
+     "fichier": "Stock Ticker.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Stock_Ticker.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Stock_Ticker.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "SimonP",
+     "score": 0,
+     "terme": "stock ticker board",
+     "poids": 84296
+    }
+   ]
+  },
+  "APP4": {
+   "candidats": [
+    {
+     "fichier": "Hyundai car assembly line.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Hyundai_car_assembly_line.jpg/1920px-Hyundai_car_assembly_line.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Hyundai_car_assembly_line.jpg",
+     "licence": "CC BY 2.5",
+     "famille": "by",
+     "auteur": "User: Anonyme ",
+     "score": 6,
+     "terme": "assembly line factory",
+     "poids": 112100
+    },
+    {
+     "fichier": "002 Production line - car assembly line in General Motors Manufacturing Poland - Gliwice, Poland.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice%2C_Poland.jpg/1920px-002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice%2C_Poland.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice,_Poland.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Marek Ślusarczyk (Tupungato) Photo portfolio",
+     "score": 6,
+     "terme": "assembly line factory",
+     "poids": 113352
+    },
+    {
+     "fichier": "001 Car factory assembly line - Opel factory in Gliwice, Poland.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/001_Car_factory_assembly_line_-_Opel_factory_in_Gliwice%2C_Poland.jpg/1920px-001_Car_factory_assembly_line_-_Opel_factory_in_Gliwice%2C_Poland.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:001_Car_factory_assembly_line_-_Opel_factory_in_Gliwice,_Poland.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Marek Ślusarczyk (Tupungato) Photo portfolio",
+     "score": 6,
+     "terme": "assembly line factory",
+     "poids": 111414
+    },
+    {
+     "fichier": "The Soviet Union 1957 CPA 1985 stamp (Assembly Line).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/The_Soviet_Union_1957_CPA_1985_stamp_%28Assembly_Line%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Soviet_Union_1957_CPA_1985_stamp_(Assembly_Line).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Post of USSR",
+     "score": 3,
+     "terme": "assembly line factory",
+     "poids": 129074
+    }
+   ]
+  },
+  "APP5": {
+   "candidats": [
+    {
+     "fichier": "Tiny Singer sewing machine box.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Tiny_Singer_sewing_machine_box.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tiny_Singer_sewing_machine_box.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Joe Mabel",
+     "score": 8,
+     "terme": "adding machine antique",
+     "poids": 60072
+    },
+    {
+     "fichier": "Tiny Singer sewing machine box - raw.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/43/Tiny_Singer_sewing_machine_box_-_raw.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tiny_Singer_sewing_machine_box_-_raw.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Joe Mabel",
+     "score": 8,
+     "terme": "adding machine antique",
+     "poids": 41396
+    },
+    {
+     "fichier": "Tiny Singer sewing machine.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Tiny_Singer_sewing_machine.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tiny_Singer_sewing_machine.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Joe Mabel",
+     "score": 5,
+     "terme": "adding machine antique",
+     "poids": 59398
+    },
+    {
+     "fichier": "Tiny Singer sewing machine - raw.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Tiny_Singer_sewing_machine_-_raw.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tiny_Singer_sewing_machine_-_raw.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Joe Mabel",
+     "score": 5,
+     "terme": "adding machine antique",
+     "poids": 54571
+    }
+   ]
+  },
+  "APP6": {
+   "candidats": [
+    {
+     "fichier": "U.S. Service members pose for a photo after ringing the closing bell at the New York Stock Exchange in New York May 24, 2013 130524-O-ZZ999-002.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/U.S._Service_members_pose_for_a_photo_after_ringing_the_closing_bell_at_the_New_York_Stock_Exchange_in_New_York_May_24%2C_2013_130524-O-ZZ999-002.jpg/1920px-U.S._Service_members_pose_for_a_photo_after_ringing_the_closing_bell_at_the_New_York_Stock_Exchange_in_New_York_May_24%2C_2013_130524-O-ZZ999-002.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:U.S._Service_members_pose_for_a_photo_after_ringing_the_closing_bell_at_the_New_York_Stock_Exchange_in_New_York_May_24,_2013_130524-O-ZZ999-002.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Dario Cantatore",
+     "score": 0,
+     "terme": "trading floor opening bell",
+     "poids": 135761
+    },
+    {
+     "fichier": "The Washington Newspaper volume 6.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_Washington_Newspaper_volume_6.djvu/page1-1920px-The_Washington_Newspaper_volume_6.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Washington_Newspaper_volume_6.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "various",
+     "score": 0,
+     "terme": "newspaper stock listings",
+     "poids": 32944
+    },
+    {
+     "fichier": "The Newspaper World.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/The_Newspaper_World.djvu/page1-1920px-The_Newspaper_World.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Newspaper_World.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nAlfred Baker",
+     "score": 0,
+     "terme": "newspaper stock listings",
+     "poids": 38210
+    },
+    {
+     "fichier": "Stock Price Listing Numbers on a Korean Newspaper.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Stock_Price_Listing_Numbers_on_a_Korean_Newspaper.jpg/1920px-Stock_Price_Listing_Numbers_on_a_Korean_Newspaper.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Stock_Price_Listing_Numbers_on_a_Korean_Newspaper.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Thingreenline4546",
+     "auteur": "Mk2010",
      "score": 0,
-     "terme": "TSMC fab",
-     "poids": 120121
+     "terme": "newspaper stock listings",
+     "poids": 46456
+    }
+   ]
+  },
+  "APP7": {
+   "candidats": [
+    {
+     "fichier": "Unnamed Blacksmith's Business Ledger or Account Book from the Ridenhour District, Stanly County, N.C. - DPLA - 17c6d0858f8eb29c3bc840fc1af3f62b (page 69).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Unnamed_Blacksmith%27s_Business_Ledger_or_Account_Book_from_the_Ridenhour_District%2C_Stanly_County%2C_N.C._-_DPLA_-_17c6d0858f8eb29c3bc840fc1af3f62b_%28page_69%29.jpg/1920px-Unnamed_Blacksmith%27s_Business_Ledger_or_Account_Book_from_the_Ridenhour_District%2C_Stanly_County%2C_N.C._-_DPLA_-_17c6d0858f8eb29c3bc840fc1af3f62b_%28page_69%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Unnamed_Blacksmith%27s_Business_Ledger_or_Account_Book_from_the_Ridenhour_District,_Stanly_County,_N.C._-_DPLA_-_17c6d0858f8eb29c3bc840fc1af3f62b_(page_69).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": 0,
+     "terme": "accounting ledger book",
+     "poids": 62780
     },
     {
-     "fichier": "TSMC Fab construction, Phoenix, AZ (4686c1e9-69a6-4ab5-a48c-4547b260183e).tiff",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/TSMC_Fab_construction%2C_Phoenix%2C_AZ_%284686c1e9-69a6-4ab5-a48c-4547b260183e%29.tiff/lossy-page1-1920px-TSMC_Fab_construction%2C_Phoenix%2C_AZ_%284686c1e9-69a6-4ab5-a48c-4547b260183e%29.tiff.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:TSMC_Fab_construction,_Phoenix,_AZ_(4686c1e9-69a6-4ab5-a48c-4547b260183e).tiff",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Umbra Lab, Inc.",
+     "fichier": "US tax Form 990-PF Return of Private Foundation 2020.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/US_tax_Form_990-PF_Return_of_Private_Foundation_2020.png",
+     "page": "https://commons.wikimedia.org/wiki/File:US_tax_Form_990-PF_Return_of_Private_Foundation_2020.png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "United States Government",
      "score": 0,
-     "terme": "TSMC fab",
-     "poids": 77868
+     "terme": "tax form",
+     "poids": 100850
     },
     {
-     "fichier": "TSMC Fab 6 front May 2025.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/TSMC_Fab_6_front_May_2025.jpg/1920px-TSMC_Fab_6_front_May_2025.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:TSMC_Fab_6_front_May_2025.jpg",
-     "licence": "CC BY 4.0",
+     "fichier": "Stacks of Canadian Coins (16269886909).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Stacks_of_Canadian_Coins_%2816269886909%29.jpg/1920px-Stacks_of_Canadian_Coins_%2816269886909%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Stacks_of_Canadian_Coins_(16269886909).jpg",
+     "licence": "CC BY 2.0",
      "famille": "by",
-     "auteur": "4300streetcar",
+     "auteur": "KMR Photography from Toronto, Canada",
      "score": 0,
-     "terme": "TSMC fab",
-     "poids": 106018
+     "terme": "coins stack",
+     "poids": 34413
+    },
+    {
+     "fichier": "Stack of pennies.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Stack_of_pennies.jpg/1920px-Stack_of_pennies.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Stack_of_pennies.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Doorknob747",
+     "score": 0,
+     "terme": "coins stack",
+     "poids": 41678
     }
    ]
   }
