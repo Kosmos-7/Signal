@@ -1,339 +1,114 @@
 {
- "societes": 7,
+ "societes": 3,
  "detail": {
   "APP1": {
    "candidats": [
     {
-     "fichier": "Unemployed men queued outside a depression soup kitchen opened in Chicago by Al Capone, 02-1931 - NARA - 541927.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Unemployed_men_queued_outside_a_depression_soup_kitchen_opened_in_Chicago_by_Al_Capone%2C_02-1931_-_NARA_-_541927.jpg/1920px-Unemployed_men_queued_outside_a_depression_soup_kitchen_opened_in_Chicago_by_Al_Capone%2C_02-1931_-_NARA_-_541927.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Unemployed_men_queued_outside_a_depression_soup_kitchen_opened_in_Chicago_by_Al_Capone,_02-1931_-_NARA_-_541927.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "\nUnknown authorUnknown author or not provided",
-     "score": 0,
-     "terme": "Wall Street 1900",
-     "poids": 103981
-    },
-    {
-     "fichier": "Trinity Pl Rector Thames 17 - American Stock Exchange.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Trinity_Pl_Rector_Thames_17_-_American_Stock_Exchange.jpg/1920px-Trinity_Pl_Rector_Thames_17_-_American_Stock_Exchange.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Trinity_Pl_Rector_Thames_17_-_American_Stock_Exchange.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Tdorante10",
-     "score": 0,
-     "terme": "New York Stock Exchange building 1930",
-     "poids": 136990
-    },
-    {
-     "fichier": "Trinity Pl Rector Thames 15 - American Stock Exchange.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Trinity_Pl_Rector_Thames_15_-_American_Stock_Exchange.jpg/1920px-Trinity_Pl_Rector_Thames_15_-_American_Stock_Exchange.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Trinity_Pl_Rector_Thames_15_-_American_Stock_Exchange.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Tdorante10",
-     "score": 0,
-     "terme": "New York Stock Exchange building 1930",
-     "poids": 119575
-    },
-    {
-     "fichier": "NewYorkNYAmericanStockExchangeEntrance060709.JPG",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/NewYorkNYAmericanStockExchangeEntrance060709.JPG/1920px-NewYorkNYAmericanStockExchangeEntrance060709.JPG",
-     "page": "https://commons.wikimedia.org/wiki/File:NewYorkNYAmericanStockExchangeEntrance060709.JPG",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Noroton",
-     "score": 0,
-     "terme": "New York Stock Exchange building 1930",
-     "poids": 76885
-    }
-   ]
-  },
-  "APP2": {
-   "candidats": [
-    {
-     "fichier": "Trading floor, New York Stock Exchange, New York, New York LCCN2011630168.tif",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Trading_floor%2C_New_York_Stock_Exchange%2C_New_York%2C_New_York_LCCN2011630168.tif/lossy-page1-1920px-Trading_floor%2C_New_York_Stock_Exchange%2C_New_York%2C_New_York_LCCN2011630168.tif.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Trading_floor,_New_York_Stock_Exchange,_New_York,_New_York_LCCN2011630168.tif",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Carol M. Highsmith",
-     "score": 0,
-     "terme": "New York Stock Exchange trading floor",
-     "poids": 129307
-    },
-    {
-     "fichier": "Trading floor of the New York Stock Exchange, New York City LCCN2011632435.tif",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Trading_floor_of_the_New_York_Stock_Exchange%2C_New_York_City_LCCN2011632435.tif/lossy-page1-1920px-Trading_floor_of_the_New_York_Stock_Exchange%2C_New_York_City_LCCN2011632435.tif.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Trading_floor_of_the_New_York_Stock_Exchange,_New_York_City_LCCN2011632435.tif",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Carol M. Highsmith",
-     "score": 0,
-     "terme": "New York Stock Exchange trading floor",
-     "poids": 119241
-    },
-    {
-     "fichier": "Tickers (8085342806).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tickers_%288085342806%29.jpg/1920px-Tickers_%288085342806%29.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Tickers_(8085342806).jpg",
-     "licence": "CC BY 2.0",
+     "fichier": "Wall Street, Manhattan, New York City, 20231002 172333.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Wall_Street%2C_Manhattan%2C_New_York_City%2C_20231002_172333.jpg/1920px-Wall_Street%2C_Manhattan%2C_New_York_City%2C_20231002_172333.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wall_Street,_Manhattan,_New_York_City,_20231002_172333.jpg",
+     "licence": "CC BY 4.0",
      "famille": "by",
-     "auteur": "Francisco Gonzalez",
+     "auteur": "Jakub Hałun",
      "score": 0,
-     "terme": "ticker tape machine",
-     "poids": 50148
+     "terme": "Wall Street Manhattan street view",
+     "poids": 83602
     },
     {
-     "fichier": "Thomas Edison stock ticker NMAH-JN2014-3625.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Thomas_Edison_stock_ticker_NMAH-JN2014-3625.jpg/1920px-Thomas_Edison_stock_ticker_NMAH-JN2014-3625.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Thomas_Edison_stock_ticker_NMAH-JN2014-3625.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Jaclyn Nash (photographer)",
+     "fichier": "Wall Street - New York Stock Exchange.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Wall_Street_-_New_York_Stock_Exchange.jpg/1920px-Wall_Street_-_New_York_Stock_Exchange.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wall_Street_-_New_York_Stock_Exchange.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Carlos Delgado",
      "score": 0,
-     "terme": "ticker tape machine",
-     "poids": 54785
+     "terme": "Wall Street Manhattan street view",
+     "poids": 96947
+    },
+    {
+     "fichier": "View of Manhattan from Brooklyn Bridge Park, New York City, 20231005 0914 2148.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/View_of_Manhattan_from_Brooklyn_Bridge_Park%2C_New_York_City%2C_20231005_0914_2148.jpg/1920px-View_of_Manhattan_from_Brooklyn_Bridge_Park%2C_New_York_City%2C_20231005_0914_2148.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:View_of_Manhattan_from_Brooklyn_Bridge_Park,_New_York_City,_20231005_0914_2148.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Jakub Hałun",
+     "score": 0,
+     "terme": "Wall Street Manhattan street view",
+     "poids": 120076
     }
    ]
   },
   "APP3": {
    "candidats": [
     {
-     "fichier": "US-$5000-GC-1928-Fr-2410.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/US-%245000-GC-1928-Fr-2410.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:US-$5000-GC-1928-Fr-2410.jpg",
+     "fichier": "Stock Certficate SKF 1913.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Stock_Certficate_SKF_1913.jpg/1920px-Stock_Certficate_SKF_1913.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Stock_Certficate_SKF_1913.jpg",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "National Museum of American History\n",
+     "auteur": "Aktiebolaget Svenska Kullagerfabriken",
      "score": 0,
-     "terme": "share certificate engraving",
-     "poids": 133679
+     "terme": "share certificate",
+     "poids": 171432
     },
     {
-     "fichier": "US-$1-SC-1899-Fr.235.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/US-%241-SC-1899-Fr.235.jpg/1920px-US-%241-SC-1899-Fr.235.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:US-$1-SC-1899-Fr.235.jpg",
+     "fichier": "New Jersey Midland Railway Co 1872.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/New_Jersey_Midland_Railway_Co_1872.JPG/1920px-New_Jersey_Midland_Railway_Co_1872.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:New_Jersey_Midland_Railway_Co_1872.JPG",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "National Museum of American History\n",
+     "auteur": "Stock: New Jersey Midland Railway Co; Stamps: Government commissioned printing b",
      "score": 0,
-     "terme": "share certificate engraving",
-     "poids": 143086
+     "terme": "share certificate",
+     "poids": 190719
     },
     {
-     "fichier": "Tickers (8085342806).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tickers_%288085342806%29.jpg/1920px-Tickers_%288085342806%29.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Tickers_(8085342806).jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Francisco Gonzalez",
-     "score": 0,
-     "terme": "stock ticker board",
-     "poids": 50148
-    },
-    {
-     "fichier": "Stock Ticker.JPG",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Stock_Ticker.JPG",
-     "page": "https://commons.wikimedia.org/wiki/File:Stock_Ticker.JPG",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "SimonP",
-     "score": 0,
-     "terme": "stock ticker board",
-     "poids": 84296
-    }
-   ]
-  },
-  "APP4": {
-   "candidats": [
-    {
-     "fichier": "Hyundai car assembly line.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Hyundai_car_assembly_line.jpg/1920px-Hyundai_car_assembly_line.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Hyundai_car_assembly_line.jpg",
-     "licence": "CC BY 2.5",
-     "famille": "by",
-     "auteur": "User: Anonyme ",
-     "score": 6,
-     "terme": "assembly line factory",
-     "poids": 112100
-    },
-    {
-     "fichier": "002 Production line - car assembly line in General Motors Manufacturing Poland - Gliwice, Poland.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice%2C_Poland.jpg/1920px-002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice%2C_Poland.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice,_Poland.jpg",
-     "licence": "CC BY 3.0",
-     "famille": "by",
-     "auteur": "Marek Ślusarczyk (Tupungato) Photo portfolio",
-     "score": 6,
-     "terme": "assembly line factory",
-     "poids": 113352
-    },
-    {
-     "fichier": "001 Car factory assembly line - Opel factory in Gliwice, Poland.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/001_Car_factory_assembly_line_-_Opel_factory_in_Gliwice%2C_Poland.jpg/1920px-001_Car_factory_assembly_line_-_Opel_factory_in_Gliwice%2C_Poland.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:001_Car_factory_assembly_line_-_Opel_factory_in_Gliwice,_Poland.jpg",
-     "licence": "CC BY 3.0",
-     "famille": "by",
-     "auteur": "Marek Ślusarczyk (Tupungato) Photo portfolio",
-     "score": 6,
-     "terme": "assembly line factory",
-     "poids": 111414
-    },
-    {
-     "fichier": "The Soviet Union 1957 CPA 1985 stamp (Assembly Line).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/The_Soviet_Union_1957_CPA_1985_stamp_%28Assembly_Line%29.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:The_Soviet_Union_1957_CPA_1985_stamp_(Assembly_Line).jpg",
-     "licence": "Public domain",
+     "fichier": "Home Decor Part de Fondateur 1898.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Home_Decor_Part_de_Fondateur_1898.jpg/1920px-Home_Decor_Part_de_Fondateur_1898.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Home_Decor_Part_de_Fondateur_1898.jpg",
+     "licence": "CC0",
      "famille": "libre",
-     "auteur": "Post of USSR",
-     "score": 3,
-     "terme": "assembly line factory",
-     "poids": 129074
+     "auteur": "Julie Ceccaldi",
+     "score": 0,
+     "terme": "share certificate",
+     "poids": 129445
     }
    ]
   },
   "APP5": {
    "candidats": [
     {
-     "fichier": "Tiny Singer sewing machine box.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Tiny_Singer_sewing_machine_box.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Tiny_Singer_sewing_machine_box.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Joe Mabel",
-     "score": 8,
-     "terme": "adding machine antique",
-     "poids": 60072
-    },
-    {
-     "fichier": "Tiny Singer sewing machine box - raw.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/4/43/Tiny_Singer_sewing_machine_box_-_raw.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Tiny_Singer_sewing_machine_box_-_raw.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Joe Mabel",
-     "score": 8,
-     "terme": "adding machine antique",
-     "poids": 41396
-    },
-    {
-     "fichier": "Tiny Singer sewing machine.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Tiny_Singer_sewing_machine.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Tiny_Singer_sewing_machine.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Joe Mabel",
-     "score": 5,
-     "terme": "adding machine antique",
-     "poids": 59398
-    },
-    {
-     "fichier": "Tiny Singer sewing machine - raw.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Tiny_Singer_sewing_machine_-_raw.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Tiny_Singer_sewing_machine_-_raw.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Joe Mabel",
-     "score": 5,
-     "terme": "adding machine antique",
-     "poids": 54571
-    }
-   ]
-  },
-  "APP6": {
-   "candidats": [
-    {
-     "fichier": "U.S. Service members pose for a photo after ringing the closing bell at the New York Stock Exchange in New York May 24, 2013 130524-O-ZZ999-002.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/U.S._Service_members_pose_for_a_photo_after_ringing_the_closing_bell_at_the_New_York_Stock_Exchange_in_New_York_May_24%2C_2013_130524-O-ZZ999-002.jpg/1920px-U.S._Service_members_pose_for_a_photo_after_ringing_the_closing_bell_at_the_New_York_Stock_Exchange_in_New_York_May_24%2C_2013_130524-O-ZZ999-002.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:U.S._Service_members_pose_for_a_photo_after_ringing_the_closing_bell_at_the_New_York_Stock_Exchange_in_New_York_May_24,_2013_130524-O-ZZ999-002.jpg",
+     "fichier": "The Brentford Race for the Middlesex Septennial Plate (BM 1868,0808.5261).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/The_Brentford_Race_for_the_Middlesex_Septennial_Plate_%28BM_1868%2C0808.5261%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Brentford_Race_for_the_Middlesex_Septennial_Plate_(BM_1868,0808.5261).jpg",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "Dario Cantatore",
+     "auteur": "\nPrint made by: William Dent\n\nPublished by: J Brown",
      "score": 0,
-     "terme": "trading floor opening bell",
-     "poids": 135761
+     "terme": "apothecary balance scale",
+     "poids": 153782
     },
     {
-     "fichier": "The Washington Newspaper volume 6.djvu",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_Washington_Newspaper_volume_6.djvu/page1-1920px-The_Washington_Newspaper_volume_6.djvu.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:The_Washington_Newspaper_volume_6.djvu",
+     "fichier": "The Brentford Race for the Middlesex Septennial Plate (BM 1868,0808.5261 1).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/The_Brentford_Race_for_the_Middlesex_Septennial_Plate_%28BM_1868%2C0808.5261_1%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Brentford_Race_for_the_Middlesex_Septennial_Plate_(BM_1868,0808.5261_1).jpg",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "various",
+     "auteur": "\nPrint made by: William Dent\n\nPublished by: J Brown",
      "score": 0,
-     "terme": "newspaper stock listings",
-     "poids": 32944
+     "terme": "apothecary balance scale",
+     "poids": 116422
     },
     {
-     "fichier": "The Newspaper World.djvu",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/The_Newspaper_World.djvu/page1-1920px-The_Newspaper_World.djvu.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:The_Newspaper_World.djvu",
+     "fichier": "Operating the Comptometer - 6 - Multiplication.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Operating_the_Comptometer_-_6_-_Multiplication.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Operating_the_Comptometer_-_6_-_Multiplication.png",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "\nAlfred Baker",
+     "auteur": "Operating the Comptometer",
      "score": 0,
-     "terme": "newspaper stock listings",
-     "poids": 38210
-    },
-    {
-     "fichier": "Stock Price Listing Numbers on a Korean Newspaper.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Stock_Price_Listing_Numbers_on_a_Korean_Newspaper.jpg/1920px-Stock_Price_Listing_Numbers_on_a_Korean_Newspaper.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Stock_Price_Listing_Numbers_on_a_Korean_Newspaper.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Mk2010",
-     "score": 0,
-     "terme": "newspaper stock listings",
-     "poids": 46456
-    }
-   ]
-  },
-  "APP7": {
-   "candidats": [
-    {
-     "fichier": "Unnamed Blacksmith's Business Ledger or Account Book from the Ridenhour District, Stanly County, N.C. - DPLA - 17c6d0858f8eb29c3bc840fc1af3f62b (page 69).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Unnamed_Blacksmith%27s_Business_Ledger_or_Account_Book_from_the_Ridenhour_District%2C_Stanly_County%2C_N.C._-_DPLA_-_17c6d0858f8eb29c3bc840fc1af3f62b_%28page_69%29.jpg/1920px-Unnamed_Blacksmith%27s_Business_Ledger_or_Account_Book_from_the_Ridenhour_District%2C_Stanly_County%2C_N.C._-_DPLA_-_17c6d0858f8eb29c3bc840fc1af3f62b_%28page_69%29.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Unnamed_Blacksmith%27s_Business_Ledger_or_Account_Book_from_the_Ridenhour_District,_Stanly_County,_N.C._-_DPLA_-_17c6d0858f8eb29c3bc840fc1af3f62b_(page_69).jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "",
-     "score": 0,
-     "terme": "accounting ledger book",
-     "poids": 62780
-    },
-    {
-     "fichier": "US tax Form 990-PF Return of Private Foundation 2020.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/US_tax_Form_990-PF_Return_of_Private_Foundation_2020.png",
-     "page": "https://commons.wikimedia.org/wiki/File:US_tax_Form_990-PF_Return_of_Private_Foundation_2020.png",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "United States Government",
-     "score": 0,
-     "terme": "tax form",
-     "poids": 100850
-    },
-    {
-     "fichier": "Stacks of Canadian Coins (16269886909).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Stacks_of_Canadian_Coins_%2816269886909%29.jpg/1920px-Stacks_of_Canadian_Coins_%2816269886909%29.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Stacks_of_Canadian_Coins_(16269886909).jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "KMR Photography from Toronto, Canada",
-     "score": 0,
-     "terme": "coins stack",
-     "poids": 34413
-    },
-    {
-     "fichier": "Stack of pennies.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Stack_of_pennies.jpg/1920px-Stack_of_pennies.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Stack_of_pennies.jpg",
-     "licence": "CC0",
-     "famille": "libre",
-     "auteur": "Doorknob747",
-     "score": 0,
-     "terme": "coins stack",
-     "poids": 41678
+     "terme": "comptometer mechanical calculator",
+     "poids": 111565
     }
    ]
   }
