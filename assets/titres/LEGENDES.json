@@ -509,11 +509,12 @@
   "credit": "ChrisDag · CC BY 2.0"
  },
  "NVDA": {
-  "legende": "Processeur graphique NVIDIA TU104, coeur des GeForce RTX 2080",
-  "source": "Nvidia@12nm@Turing@TU104@GeForce_RTX_2080@S_TAIWAN_1841A1_PKYN44.000_TU104-400-A1___DSCx2_",
-  "page": "https://www.flickr.com/photos/130561288@N04/48116463052",
-  "licence": "CC0 1.0",
-  "type": "produit"
+  "legende": "Carte HGX B200, huit accélérateurs Blackwell de NVIDIA",
+  "type": "produit",
+  "source": "File:Nvidia DGX-B200-HGX.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX-B200-HGX.jpg",
+  "licence": "CC BY-SA 4.0",
+  "credit": "Pokiiri · CC BY-SA 4.0"
  },
  "NXPI": {
   "legende": "Processeur NXP sur carte",

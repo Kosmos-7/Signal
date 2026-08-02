@@ -663,13 +663,13 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Page : https://www.flickr.com/photos/8558461@N08/866577666
 - Licence : CC BY 2.0 — crédit affiché : ChrisDag · CC BY 2.0
 
-### NVDA — Processeur graphique NVIDIA TU104, coeur des GeForce RTX 2080
+### NVDA — Carte HGX B200, huit accélérateurs Blackwell de NVIDIA
 
 - Nature : produit
 - Fichier : `assets/titres/NVDA.jpg`
-- Source : Nvidia@12nm@Turing@TU104@GeForce_RTX_2080@S_TAIWAN_1841A1_PKYN44.000_TU104-400-A1___DSCx2_
-- Page : https://www.flickr.com/photos/130561288@N04/48116463052
-- Licence : CC0 1.0
+- Source : File:Nvidia DGX-B200-HGX.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Nvidia_DGX-B200-HGX.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Pokiiri · CC BY-SA 4.0
 
 ### NXPI — Processeur NXP sur carte
 
