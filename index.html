@@ -81,6 +81,8 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
     background:linear-gradient(0deg,rgba(6,6,11,.92),rgba(6,6,11,0));
     font:600 .56rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3)}
   .d-illu figcaption b{color:var(--text2);font-weight:600}
+  .d-illu .d-cred{display:block;margin-top:2px;font-size:.5rem;letter-spacing:.6px;
+    color:var(--text3);opacity:.85;text-transform:none}
   @media(max-width:900px){.d-illu img{height:118px}}
   .d-tag{font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
   .d-reg{font:600 .6rem var(--mono);letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:4px;padding:4px 9px}
@@ -612,9 +614,12 @@ function illuActivite(tk){
   if(P){
     // Photo de la SOCIÉTÉ, vérifiée à l'œil : la légende nomme le lieu, elle
     // n'a donc pas à dire « illustration », elle montre bien ce qu'elle dit.
+    // Le crédit d'auteur n'est pas relégué dans un fichier que personne n'ouvre :
+    // les licences CC-BY et CC-BY-SA l'exigent, il s'affiche donc sur la fiche.
+    const cr=P.credit?'<span class="d-cred">'+sv(P.credit)+'</span>':'';
     return '<figure class="d-illu"><img src="assets/titres/'+encodeURIComponent(tk)+
       '.jpg" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
-      '<figcaption><b>'+sv(P.legende)+'</b></figcaption></figure>';
+      '<figcaption><b>'+sv(P.legende)+'</b>'+cr+'</figcaption></figure>';
   }
   const a=(U.activites&&U.activites.titres)||{}, L=(U.activites&&U.activites.libelles)||{};
   const cle=a[tk]; if(!cle)return '';
