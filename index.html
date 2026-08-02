@@ -24,6 +24,13 @@
   .rail-h #rc{color:var(--text2);line-height:1.45;overflow-wrap:break-word;min-width:0}
   .rail-h #rn{flex:0 0 auto}
   .rail-l{overflow-y:auto;flex:1;mask-image:linear-gradient(180deg,transparent,#000 12px,#000 calc(100% - 12px),transparent)}.rail-l::-webkit-scrollbar{width:0}
+  /* Indicateur de suite de liste. Le dégradé de 12 px du mask-image ne suffit
+     pas : sur mobile la liste est coupée à 38vh et rien ne dit qu'il reste des
+     titres dessous — on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
+     et on rend l'indicateur cliquable (défilement d'un écran). */
+  .rail-more{display:none;flex:0 0 auto;width:100%;margin-top:.3rem;padding:.5rem .4rem;border:0;border-top:1px solid var(--line);background:none;font:600 .58rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--ac);cursor:pointer;text-align:center;transition:color .15s}
+  .rail-more.on{display:block}
+  .rail-more:hover,.rail-more:focus-visible{color:#fff;outline:none}
   .rail-lex{display:block;margin-top:.4rem;padding:.65rem .4rem .1rem;border-top:1px solid var(--line);font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .15s;cursor:pointer;flex:0 0 auto}
   .rail-lex::before{content:'§ '}
   .rail-lex:hover,.rail-lex.active{color:var(--ac)}
@@ -273,7 +280,7 @@
   <nav><a href="index.html#/" class="active">Watchlists</a><a href="portfolio.html">Portefeuille IA</a><a href="apprendre.html">Apprendre</a></nav>
 </header>
 
-<div class="rail"><div class="rail-top"><a class="rail-back" href="#/">← Watchlists</a><span id="rw"></span></div><div class="rail-h"><span id="rc">—</span><span id="rn"></span></div><div class="rail-l" id="rl"></div><a class="rail-lex" id="lexlink" href="#lexique">Lexique des signaux</a></div>
+<div class="rail"><div class="rail-top"><a class="rail-back" href="#/">← Watchlists</a><span id="rw"></span></div><div class="rail-h"><span id="rc">—</span><span id="rn"></span></div><div class="rail-l" id="rl"></div><button class="rail-more" id="rmore" type="button"></button><a class="rail-lex" id="lexlink" href="#lexique">Lexique des signaux</a></div>
 <div class="stage"><div class="doc" id="doc"></div><footer><div class="footer-legal">Signal est un service éditorial d'information financière. Contenu fourni à titre informatif uniquement. Ne constitue pas un conseil en investissement au sens AMF.</div><div class="footer-right">Bêta</div></footer></div>
 
 <script src="signal-fx.js"></script>
@@ -347,6 +354,10 @@ Promise.all([
   }
   document.getElementById('rw').textContent=((U.week||wl.week||'')).replace('Sem. ','S');
   document.getElementById('lexlink').addEventListener('click',e=>{e.preventDefault();nav('#lexique');});
+  const _rl=document.getElementById('rl'),_rm=document.getElementById('rmore');
+  if(_rl)_rl.addEventListener('scroll',railMore,{passive:true});
+  if(_rm)_rm.addEventListener('click',()=>{_rl.scrollBy({top:_rl.clientHeight*.85,behavior:reduce?'auto':'smooth'});});
+  window.addEventListener('resize',railMore);
   window.addEventListener('hashchange',route);
   route();
 }).catch(err=>{
@@ -499,7 +510,22 @@ function listBuild(){const l=document.getElementById('rl');if(!l)return;l.innerH
     r.addEventListener('click',goto);r.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goto();}});l.appendChild(r);};
   if(curGroups){curGroups.forEach((g,i)=>{const h=document.createElement('div');h.className='rl-grp';
     h.innerHTML='<span class="gn">'+(i+1)+'</span>'+sv(g.label);l.appendChild(h);g.stocks.forEach(ligne);});}
-  else curList.forEach(ligne);}
+  else curList.forEach(ligne);
+  railMore();}
+
+/* Combien de titres restent SOUS la zone visible du rail. On compte des lignes
+   réelles, pas des pixels : « ▾ 51 autres valeurs » est une information, une
+   ombre dégradée n'en est pas une. Masqué dès qu'on atteint le bas. */
+function railMore(){
+  const l=document.getElementById('rl'),m=document.getElementById('rmore');
+  if(!l||!m)return;
+  if(l.scrollHeight-l.scrollTop-l.clientHeight<8){m.classList.remove('on');return;}
+  const bas=l.scrollTop+l.clientHeight;
+  const n=[...l.querySelectorAll('.row')].filter(r=>r.offsetTop+r.offsetHeight>bas+2).length;
+  if(!n){m.classList.remove('on');return;}
+  m.textContent='▾  '+n+(n>1?' autres valeurs':' autre valeur');
+  m.classList.add('on');
+}
 
 /* ══ HOMEPAGE DES WATCHLISTS ════════════════════════════════════════════════ */
 function themeImg(id,label){
