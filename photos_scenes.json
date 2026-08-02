@@ -1,0 +1,951 @@
+{
+ "societes": 22,
+ "detail": {
+  "000660.KS": {
+   "candidats": [
+    {
+     "fichier": "OJ C 380 of 2021 - SL Slovenian.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/OJ_C_380_of_2021_-_SL_Slovenian.pdf/page1-960px-OJ_C_380_of_2021_-_SL_Slovenian.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:OJ_C_380_of_2021_-_SL_Slovenian.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Publications Office of the European Union",
+     "score": -12,
+     "terme": "SK hynix CES",
+     "poids": 42660
+    },
+    {
+     "fichier": "OJ C 380 of 2021 - RO Romanian.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/OJ_C_380_of_2021_-_RO_Romanian.pdf/page1-960px-OJ_C_380_of_2021_-_RO_Romanian.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:OJ_C_380_of_2021_-_RO_Romanian.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Publications Office of the European Union",
+     "score": -12,
+     "terme": "SK hynix CES",
+     "poids": 45819
+    },
+    {
+     "fichier": "OJ C 380 of 2021 - PT Portuguese.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/OJ_C_380_of_2021_-_PT_Portuguese.pdf/page1-960px-OJ_C_380_of_2021_-_PT_Portuguese.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:OJ_C_380_of_2021_-_PT_Portuguese.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Publications Office of the European Union",
+     "score": -12,
+     "terme": "SK hynix CES",
+     "poids": 44689
+    },
+    {
+     "fichier": "OJ C 380 of 2021 - PL Polish.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/OJ_C_380_of_2021_-_PL_Polish.pdf/page1-960px-OJ_C_380_of_2021_-_PL_Polish.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:OJ_C_380_of_2021_-_PL_Polish.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Publications Office of the European Union",
+     "score": -12,
+     "terme": "SK hynix CES",
+     "poids": 45196
+    }
+   ]
+  },
+  "005930.KS": {
+   "candidats": [
+    {
+     "fichier": "Wikimedia UK Annual Report 4.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Wikimedia_UK_Annual_Report_4.jpg/1920px-Wikimedia_UK_Annual_Report_4.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wikimedia_UK_Annual_Report_4.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Richard Symonds",
+     "score": 0,
+     "terme": "Samsung Galaxy Unpacked",
+     "poids": 71452
+    },
+    {
+     "fichier": "Wikimedia UK Annual Report 3.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Wikimedia_UK_Annual_Report_3.jpg/1920px-Wikimedia_UK_Annual_Report_3.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wikimedia_UK_Annual_Report_3.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Richard Symonds",
+     "score": 0,
+     "terme": "Samsung Galaxy Unpacked",
+     "poids": 68664
+    },
+    {
+     "fichier": "Wikimedia UK Annual Report 2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Wikimedia_UK_Annual_Report_2.jpg/1920px-Wikimedia_UK_Annual_Report_2.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wikimedia_UK_Annual_Report_2.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Richard Symonds",
+     "score": 0,
+     "terme": "Samsung Galaxy Unpacked",
+     "poids": 74579
+    },
+    {
+     "fichier": "Samsung Unpacked 2017 Gear VR.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Samsung_Unpacked_2017_Gear_VR.jpg/1920px-Samsung_Unpacked_2017_Gear_VR.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Samsung_Unpacked_2017_Gear_VR.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Anthony Quintano from Honolulu, HI, United States",
+     "score": 0,
+     "terme": "Samsung Galaxy Unpacked",
+     "poids": 54009
+    }
+   ]
+  },
+  "AMAT": {
+   "candidats": [
+    {
+     "fichier": "University of North Carolina extension bulletin (serial) (IA universityofnort551976).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/University_of_North_Carolina_extension_bulletin_%28serial%29_%28IA_universityofnort551976%29.pdf/page1-960px-University_of_North_Carolina_extension_bulletin_%28serial%29_%28IA_universityofnort551976%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:University_of_North_Carolina_extension_bulletin_(serial)_(IA_universityofnort551976).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUniversity of North Carolina at Chapel Hill. Division of Extension and Continui",
+     "score": -12,
+     "terme": "Gary Dickerson Applied Materials",
+     "poids": 55809
+    },
+    {
+     "fichier": "The Glendale Evening News 1924-05-20 (IA cgl 005313).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/The_Glendale_Evening_News_1924-05-20_%28IA_cgl_005313%29.pdf/page1-1920px-The_Glendale_Evening_News_1924-05-20_%28IA_cgl_005313%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Glendale_Evening_News_1924-05-20_(IA_cgl_005313).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCowan, A.T.",
+     "score": -12,
+     "terme": "Gary Dickerson Applied Materials",
+     "poids": 161420
+    },
+    {
+     "fichier": "OVERSIGHT HEARING ON THE FUTURE WATER NEEDS OF CALIFORNIA UNDER CALFED, CALFED FINANCING, THE MONITORING AND PERFORMANCE STANDARDS OF CALFED, AND CALFED PUBLIC PARTICIPATION (IA gov.gpo.fdsys.CHRG-105hhrg48751).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/OVERSIGHT_HEARING_ON_THE_FUTURE_WATER_NEEDS_OF_CALIFORNIA_UNDER_CALFED%2C_CALFED_FINANCING%2C_THE_MONITORING_AND_PERFORMANCE_STANDARDS_OF_CALFED%2C_AND_CALFED_PUBLIC_PARTICIPATION_%28IA_gov.gpo.fdsys.CHRG-105hhrg48751%29.pdf/page1-960px-thumbnail.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:OVERSIGHT_HEARING_ON_THE_FUTURE_WATER_NEEDS_OF_CALIFORNIA_UNDER_CALFED,_CALFED_FINANCING,_THE_MONITORING_AND_PERFORMANCE_STANDARDS_OF_CALFED,_AND_CALFED_PUBLIC_PARTICIPATION_(IA_gov.gpo.fdsys.CHRG-105hhrg48751).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCommittee on Resources",
+     "score": -12,
+     "terme": "Gary Dickerson Applied Materials",
+     "poids": 31848
+    },
+    {
+     "fichier": "NAVY MEDICINE Volume 98, No. 1 January-February 2007 (IA NavyMedicineVolume98No.1January-february2007).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/NAVY_MEDICINE_Volume_98%2C_No._1_January-February_2007_%28IA_NavyMedicineVolume98No.1January-february2007%29.pdf/page1-960px-NAVY_MEDICINE_Volume_98%2C_No._1_January-February_2007_%28IA_NavyMedicineVolume98No.1January-february2007%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NAVY_MEDICINE_Volume_98,_No._1_January-February_2007_(IA_NavyMedicineVolume98No.1January-february2007).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nU.S. Navy. Bureau of Medicine and Surgery",
+     "score": -12,
+     "terme": "Gary Dickerson Applied Materials",
+     "poids": 103647
+    }
+   ]
+  },
+  "AMD": {
+   "candidats": [
+    {
+     "fichier": "Talk Philosophy history tree.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Talk_Philosophy_history_tree.png/1920px-Talk_Philosophy_history_tree.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Talk_Philosophy_history_tree.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "RTG",
+     "score": 0,
+     "terme": "Lisa Su CES",
+     "poids": 69112
+    },
+    {
+     "fichier": "Talk Philosophy history thumbsup.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Talk_Philosophy_history_thumbsup.png/1920px-Talk_Philosophy_history_thumbsup.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Talk_Philosophy_history_thumbsup.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "RTG",
+     "score": 0,
+     "terme": "Lisa Su CES",
+     "poids": 79298
+    },
+    {
+     "fichier": "Talk Philosophy history cloud heart.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Talk_Philosophy_history_cloud_heart.png/1920px-Talk_Philosophy_history_cloud_heart.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Talk_Philosophy_history_cloud_heart.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "RTG",
+     "score": 0,
+     "terme": "Lisa Su CES",
+     "poids": 83011
+    },
+    {
+     "fichier": "Classification of Indian Philosophy (Darśana) — A Historical Overview.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Classification_of_Indian_Philosophy_%28Dar%C5%9Bana%29_%E2%80%94_A_Historical_Overview.png/1920px-Classification_of_Indian_Philosophy_%28Dar%C5%9Bana%29_%E2%80%94_A_Historical_Overview.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Classification_of_Indian_Philosophy_(Dar%C5%9Bana)_%E2%80%94_A_Historical_Overview.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Shreedhar Kumbar (xaetherion)",
+     "score": 0,
+     "terme": "Lisa Su CES",
+     "poids": 60233
+    }
+   ]
+  },
+  "AMZN": {
+   "candidats": [
+    {
+     "fichier": "The Art Journal, vol. 67, 1905 (IA gri 33125006187823).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/The_Art_Journal%2C_vol._67%2C_1905_%28IA_gri_33125006187823%29.pdf/page1-960px-The_Art_Journal%2C_vol._67%2C_1905_%28IA_gri_33125006187823%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Art_Journal,_vol._67,_1905_(IA_gri_33125006187823).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "Amazon re:Invent keynote",
+     "poids": 147836
+    },
+    {
+     "fichier": "Journal and proceedings of the Royal Society of New South Wales (IA journalproceedi152royaa).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Journal_and_proceedings_of_the_Royal_Society_of_New_South_Wales_%28IA_journalproceedi152royaa%29.pdf/page1-1280px-Journal_and_proceedings_of_the_Royal_Society_of_New_South_Wales_%28IA_journalproceedi152royaa%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Journal_and_proceedings_of_the_Royal_Society_of_New_South_Wales_(IA_journalproceedi152royaa).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nRoyal Society of New South Wales",
+     "score": -12,
+     "terme": "Amazon re:Invent keynote",
+     "poids": 18243
+    }
+   ]
+  },
+  "ANET": {
+   "candidats": [
+    {
+     "fichier": "Jayshree V. Ullal.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Jayshree_V._Ullal.jpg/1920px-Jayshree_V._Ullal.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Jayshree_V._Ullal.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "multichill",
+     "score": 0,
+     "terme": "Jayshree Ullal",
+     "poids": 60361
+    },
+    {
+     "fichier": "Jayshree Ullal Arista CEO.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Jayshree_Ullal_Arista_CEO.jpg/1920px-Jayshree_Ullal_Arista_CEO.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Jayshree_Ullal_Arista_CEO.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Theolive123",
+     "score": -7,
+     "terme": "Jayshree Ullal",
+     "poids": 92861
+    }
+   ]
+  },
+  "ARM": {
+   "candidats": [
+    {
+     "fichier": "Tony Fadell and Rene Haas at Web Summit 2022.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Tony_Fadell_and_Rene_Haas_at_Web_Summit_2022.jpg/1920px-Tony_Fadell_and_Rene_Haas_at_Web_Summit_2022.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tony_Fadell_and_Rene_Haas_at_Web_Summit_2022.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Web Summit",
+     "score": 0,
+     "terme": "Rene Haas Arm",
+     "poids": 97995
+    },
+    {
+     "fichier": "Rene Haas at Web Summit 2022.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Rene_Haas_at_Web_Summit_2022.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Rene_Haas_at_Web_Summit_2022.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Web Summit",
+     "score": 0,
+     "terme": "Rene Haas Arm",
+     "poids": 97864
+    },
+    {
+     "fichier": "Rene Haas at SXSW 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Rene_Haas_at_SXSW_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Rene_Haas_at_SXSW_2025.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rosiestep",
+     "score": 0,
+     "terme": "Rene Haas Arm",
+     "poids": 59681
+    },
+    {
+     "fichier": "Liz Claman at SXSW 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Liz_Claman_at_SXSW_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Liz_Claman_at_SXSW_2025.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rosiestep",
+     "score": 0,
+     "terme": "Rene Haas Arm",
+     "poids": 64019
+    }
+   ]
+  },
+  "ASML.AS": {
+   "candidats": [
+    {
+     "fichier": "Ursula von der Leyen & Christophe Fouquet - 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Ursula_von_der_Leyen_%26_Christophe_Fouquet_-_2025.jpg/1920px-Ursula_von_der_Leyen_%26_Christophe_Fouquet_-_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ursula_von_der_Leyen_%26_Christophe_Fouquet_-_2025.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Dati Bendo / European Union, 2025 / EC - Audiovisual Service",
+     "score": 0,
+     "terme": "Christophe Fouquet ASML",
+     "poids": 58379
+    }
+   ]
+  },
+  "AVGO": {
+   "candidats": [
+    {
+     "fichier": "Hock Tan 2022.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Hock_Tan_2022.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Hock_Tan_2022.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Greg Bezat, d/b/a Bezat Video Group",
+     "score": 0,
+     "terme": "Hock Tan Broadcom",
+     "poids": 45146
+    }
+   ]
+  },
+  "CRM": {
+   "candidats": [
+    {
+     "fichier": "Marc Benioff's Opening Keynote at Dreamforce 2014 (15534899106).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Marc_Benioff%27s_Opening_Keynote_at_Dreamforce_2014_%2815534899106%29.jpg/1920px-Marc_Benioff%27s_Opening_Keynote_at_Dreamforce_2014_%2815534899106%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Marc_Benioff%27s_Opening_Keynote_at_Dreamforce_2014_(15534899106).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "jurvetson",
+     "score": 0,
+     "terme": "Marc Benioff Dreamforce",
+     "poids": 79308
+    },
+    {
+     "fichier": "DHS Secretary Alejandro Mayorkas participates in a Fireside Chat at Dreamforce 2024 - 7.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_7.jpg/1920px-DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_7.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_7.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "DHSgov",
+     "score": 0,
+     "terme": "Marc Benioff Dreamforce",
+     "poids": 106960
+    },
+    {
+     "fichier": "DHS Secretary Alejandro Mayorkas participates in a Fireside Chat at Dreamforce 2024 - 6.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_6.jpg/1920px-DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_6.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_6.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "DHSgov",
+     "score": 0,
+     "terme": "Marc Benioff Dreamforce",
+     "poids": 102061
+    },
+    {
+     "fichier": "DHS Secretary Alejandro Mayorkas participates in a Fireside Chat at Dreamforce 2024 - 5.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_5.jpg/1920px-DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_5.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:DHS_Secretary_Alejandro_Mayorkas_participates_in_a_Fireside_Chat_at_Dreamforce_2024_-_5.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "DHSgov",
+     "score": 0,
+     "terme": "Marc Benioff Dreamforce",
+     "poids": 107017
+    }
+   ]
+  },
+  "DELL": {
+   "candidats": [
+    {
+     "fichier": "Cost benefit analysis of integrated cots energy-related technologies for Army's force provider module (IA costbenefitnalys109454627).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Cost_benefit_analysis_of_integrated_cots_energy-related_technologies_for_Army%27s_force_provider_module_%28IA_costbenefitnalys109454627%29.pdf/page1-960px-Cost_benefit_analysis_of_integrated_cots_energy-related_technologies_for_Army%27s_force_provider_module_%28IA_costbenefitnalys109454627%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cost_benefit_analysis_of_integrated_cots_energy-related_technologies_for_Army%27s_force_provider_module_(IA_costbenefitnalys109454627).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nRivera, Allen",
+     "score": -7,
+     "terme": "Michael Dell Dell Technologies World",
+     "poids": 33107
+    },
+    {
+     "fichier": "Lower total cost of ownership of one-net by using thinclient desktop deployment and virtualization-based server technology (IA lowertotalcostof109455197).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Lower_total_cost_of_ownership_of_one-net_by_using_thinclient_desktop_deployment_and_virtualization-based_server_technology_%28IA_lowertotalcostof109455197%29.pdf/page1-960px-Lower_total_cost_of_ownership_of_one-net_by_using_thinclient_desktop_deployment_and_virtualization-based_server_technology_%28IA_lowertotalcostof109455197%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Lower_total_cost_of_ownership_of_one-net_by_using_thinclient_desktop_deployment_and_virtualization-based_server_technology_(IA_lowertotalcostof109455197).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nLam, Mytiec.",
+     "score": -8,
+     "terme": "Michael Dell Dell Technologies World",
+     "poids": 36394
+    },
+    {
+     "fichier": "Victoria Daily Times (1913-07-08) (IA victoriadailytimes19130708).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Victoria_Daily_Times_%281913-07-08%29_%28IA_victoriadailytimes19130708%29.pdf/page1-1920px-Victoria_Daily_Times_%281913-07-08%29_%28IA_victoriadailytimes19130708%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Victoria_Daily_Times_(1913-07-08)_(IA_victoriadailytimes19130708).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "Michael Dell keynote",
+     "poids": 165431
+    },
+    {
+     "fichier": "Vegetable technology; a contribution towards a bibliography of economic botany, with a comprehensive subject-index (IA vegetabletechnol00jackrich).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Vegetable_technology%3B_a_contribution_towards_a_bibliography_of_economic_botany%2C_with_a_comprehensive_subject-index_%28IA_vegetabletechnol00jackrich%29.pdf/page1-500px-Vegetable_technology%3B_a_contribution_towards_a_bibliography_of_economic_botany%2C_with_a_comprehensive_subject-index_%28IA_vegetabletechnol00jackrich%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Vegetable_technology;_a_contribution_towards_a_bibliography_of_economic_botany,_with_a_comprehensive_subject-index_(IA_vegetabletechnol00jackrich).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nJackson, Benjamin Daydon, 1846-1927\nSymons, G. J. (George James), 1838-1900",
+     "score": -12,
+     "terme": "Michael Dell Dell Technologies World",
+     "poids": 77320
+    }
+   ]
+  },
+  "GOOGL": {
+   "candidats": [
+    {
+     "fichier": "Sundar Pichai at Google IO 2017 Keynote.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Sundar_Pichai_at_Google_IO_2017_Keynote.jpg/1920px-Sundar_Pichai_at_Google_IO_2017_Keynote.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Sundar_Pichai_at_Google_IO_2017_Keynote.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Steven Zimmerman",
+     "score": 0,
+     "terme": "Sundar Pichai keynote",
+     "poids": 28967
+    },
+    {
+     "fichier": "Google IO 2016 Keynote (26533672104).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_IO_2016_Keynote_%2826533672104%29.jpg/1920px-Google_IO_2016_Keynote_%2826533672104%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Google_IO_2016_Keynote_(26533672104).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "btwashburn from Belmont",
+     "score": 0,
+     "terme": "Google I/O keynote",
+     "poids": 109291
+    },
+    {
+     "fichier": "Google IO 2012 Keynote Day 1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Google_IO_2012_Keynote_Day_1.jpg/1920px-Google_IO_2012_Keynote_Day_1.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Google_IO_2012_Keynote_Day_1.jpg",
+     "licence": "CC BY-SA 2.5",
+     "famille": "by-sa",
+     "auteur": "Maria Ly from San Francisco, USA",
+     "score": 0,
+     "terme": "Google I/O keynote",
+     "poids": 73804
+    },
+    {
+     "fichier": "2008 Google Input and Output in USA - the Keynote.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/2008_Google_Input_and_Output_in_USA_-_the_Keynote.jpg/1920px-2008_Google_Input_and_Output_in_USA_-_the_Keynote.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:2008_Google_Input_and_Output_in_USA_-_the_Keynote.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Andrew Mager from San Francisco, CA, USA",
+     "score": 0,
+     "terme": "Google I/O keynote",
+     "poids": 74039
+    }
+   ]
+  },
+  "INTC": {
+   "candidats": [
+    {
+     "fichier": "Howard Lutnick with Intel CEO Lip-Bu Tan (2025).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Howard_Lutnick_with_Intel_CEO_Lip-Bu_Tan_%282025%29.jpg/1920px-Howard_Lutnick_with_Intel_CEO_Lip-Bu_Tan_%282025%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Howard_Lutnick_with_Intel_CEO_Lip-Bu_Tan_(2025).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "United States Department of Commerce",
+     "score": -7,
+     "terme": "Lip-Bu Tan Intel",
+     "poids": 90929
+    },
+    {
+     "fichier": "Logbook of the Hesper (Ship) of Fairhaven, mastered by Dennis Stevens, kept by Ephraim Delano, on voyage from 27 July 1854-16 June 1857 (IA KWM-925-2).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Logbook_of_the_Hesper_%28Ship%29_of_Fairhaven%2C_mastered_by_Dennis_Stevens%2C_kept_by_Ephraim_Delano%2C_on_voyage_from_27_July_1854-16_June_1857_%28IA_KWM-925-2%29.pdf/page1-960px-Logbook_of_the_Hesper_%28Ship%29_of_Fairhaven%2C_mastered_by_Dennis_Stevens%2C_kept_by_Ephraim_Delano%2C_on_voyage_from_27_July_1854-16_June_1857_%28IA_KWM-925-2%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Logbook_of_the_Hesper_(Ship)_of_Fairhaven,_mastered_by_Dennis_Stevens,_kept_by_Ephraim_Delano,_on_voyage_from_27_July_1854-16_June_1857_(IA_KWM-925-2).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nHesper (Ship)\nStevens, Dennis\nDelano, Ephraim",
+     "score": -9,
+     "terme": "Lip-Bu Tan Intel",
+     "poids": 72448
+    },
+    {
+     "fichier": "Theatrvm orbis terrarvm (IA b20265517 0001).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Theatrvm_orbis_terrarvm_%28IA_b20265517_0001%29.pdf/page1-1280px-Theatrvm_orbis_terrarvm_%28IA_b20265517_0001%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Theatrvm_orbis_terrarvm_(IA_b20265517_0001).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nOrtelius, Abraham, 1527-1598",
+     "score": -12,
+     "terme": "Lip-Bu Tan Intel",
+     "poids": 44012
+    },
+    {
+     "fichier": "The National Era (IA e56774f6-55dd-4d7a-ad40-89cbf859d3fa).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/The_National_Era_%28IA_e56774f6-55dd-4d7a-ad40-89cbf859d3fa%29.pdf/page1-1280px-The_National_Era_%28IA_e56774f6-55dd-4d7a-ad40-89cbf859d3fa%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_National_Era_(IA_e56774f6-55dd-4d7a-ad40-89cbf859d3fa).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "Lip-Bu Tan Intel",
+     "poids": 169967
+    }
+   ]
+  },
+  "KLAC": {
+   "candidats": [
+    {
+     "fichier": "The Film Daily, Jan-Apr 1936.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/The_Film_Daily%2C_Jan-Apr_1936.djvu/page1-1920px-The_Film_Daily%2C_Jan-Apr_1936.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Film_Daily,_Jan-Apr_1936.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nNew York, Wid's Films and Film Folks, Inc.",
+     "score": 0,
+     "terme": "Rick Wallace KLA",
+     "poids": 5725
+    },
+    {
+     "fichier": "Victoria Daily Times (1912-04-15) (IA victoriadailytimes19120415).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Victoria_Daily_Times_%281912-04-15%29_%28IA_victoriadailytimes19120415%29.pdf/page1-1920px-Victoria_Daily_Times_%281912-04-15%29_%28IA_victoriadailytimes19120415%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Victoria_Daily_Times_(1912-04-15)_(IA_victoriadailytimes19120415).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "Rick Wallace KLA",
+     "poids": 149585
+    },
+    {
+     "fichier": "The neume (IA neume1913newe).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/The_neume_%28IA_neume1913newe%29.pdf/page1-1280px-The_neume_%28IA_neume1913newe%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_neume_(IA_neume1913newe).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nNew England Conservatory of Music",
+     "score": -12,
+     "terme": "Rick Wallace KLA",
+     "poids": 12604
+    },
+    {
+     "fichier": "Screenland 1923-11.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Screenland_1923-11.pdf/page1-960px-Screenland_1923-11.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Screenland_1923-11.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Various",
+     "score": -12,
+     "terme": "Rick Wallace KLA",
+     "poids": 74287
+    }
+   ]
+  },
+  "LRCX": {
+   "candidats": [
+    {
+     "fichier": "The Glendale Evening News 1925-06-01 (IA cgl 005636).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/The_Glendale_Evening_News_1925-06-01_%28IA_cgl_005636%29.pdf/page1-1920px-The_Glendale_Evening_News_1925-06-01_%28IA_cgl_005636%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Glendale_Evening_News_1925-06-01_(IA_cgl_005636).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCowan, A.T.",
+     "score": -12,
+     "terme": "Tim Archer Lam Research",
+     "poids": 160506
+    },
+    {
+     "fichier": "The Glendale Evening News 1924-06-25 (IA cgl 005344).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/The_Glendale_Evening_News_1924-06-25_%28IA_cgl_005344%29.pdf/page1-1920px-The_Glendale_Evening_News_1924-06-25_%28IA_cgl_005344%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Glendale_Evening_News_1924-06-25_(IA_cgl_005344).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCowan, A.T.",
+     "score": -12,
+     "terme": "Tim Archer Lam Research",
+     "poids": 166661
+    },
+    {
+     "fichier": "The Glendale Evening News 1921-11-01 (IA cgl 004523).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/The_Glendale_Evening_News_1921-11-01_%28IA_cgl_004523%29.pdf/page1-1920px-The_Glendale_Evening_News_1921-11-01_%28IA_cgl_004523%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Glendale_Evening_News_1921-11-01_(IA_cgl_004523).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCowan, A.T.",
+     "score": -12,
+     "terme": "Tim Archer Lam Research",
+     "poids": 174469
+    },
+    {
+     "fichier": "Summary review of monthly reports for Soil conservation service research (IA CAT11087234054).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Summary_review_of_monthly_reports_for_Soil_conservation_service_research_%28IA_CAT11087234054%29.pdf/page1-960px-Summary_review_of_monthly_reports_for_Soil_conservation_service_research_%28IA_CAT11087234054%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Summary_review_of_monthly_reports_for_Soil_conservation_service_research_(IA_CAT11087234054).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUnited States. Soil Conservation Service. Office of Research\nUnited States. Soi",
+     "score": -12,
+     "terme": "Tim Archer Lam Research",
+     "poids": 117789
+    }
+   ]
+  },
+  "META": {
+   "candidats": [
+    {
+     "fichier": "Mark Zuckerberg f8 Keynote - Mark Zuckerberg intros Facebook Connect (2697082074).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Mark_Zuckerberg_f8_Keynote_-_Mark_Zuckerberg_intros_Facebook_Connect_%282697082074%29.jpg/1920px-Mark_Zuckerberg_f8_Keynote_-_Mark_Zuckerberg_intros_Facebook_Connect_%282697082074%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Mark_Zuckerberg_f8_Keynote_-_Mark_Zuckerberg_intros_Facebook_Connect_(2697082074).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Brian Solis",
+     "score": 0,
+     "terme": "Mark Zuckerberg Connect",
+     "poids": 52271
+    },
+    {
+     "fichier": "Mark Zuckerberg f8 Keynote - Mark Zuckerberg intros Facebook Connect (2696271443).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Mark_Zuckerberg_f8_Keynote_-_Mark_Zuckerberg_intros_Facebook_Connect_%282696271443%29.jpg/1920px-Mark_Zuckerberg_f8_Keynote_-_Mark_Zuckerberg_intros_Facebook_Connect_%282696271443%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Mark_Zuckerberg_f8_Keynote_-_Mark_Zuckerberg_intros_Facebook_Connect_(2696271443).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Brian Solis",
+     "score": 0,
+     "terme": "Mark Zuckerberg Connect",
+     "poids": 44137
+    },
+    {
+     "fichier": "Mark Zuckerberg f8 Keynote (2697077416).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Mark_Zuckerberg_f8_Keynote_%282697077416%29.jpg/1920px-Mark_Zuckerberg_f8_Keynote_%282697077416%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Mark_Zuckerberg_f8_Keynote_(2697077416).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Brian Solis",
+     "score": 0,
+     "terme": "Mark Zuckerberg keynote",
+     "poids": 41764
+    },
+    {
+     "fichier": "Mark Zuckerberg f8 Keynote (2697009828).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Mark_Zuckerberg_f8_Keynote_%282697009828%29.jpg/1920px-Mark_Zuckerberg_f8_Keynote_%282697009828%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Mark_Zuckerberg_f8_Keynote_(2697009828).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Brian Solis",
+     "score": 0,
+     "terme": "Mark Zuckerberg keynote",
+     "poids": 44566
+    }
+   ]
+  },
+  "MRVL": {
+   "candidats": [
+    {
+     "fichier": "Cardinal, 1901, University of Arkansas yearbook.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Cardinal%2C_1901%2C_University_of_Arkansas_yearbook.djvu/page1-1280px-Cardinal%2C_1901%2C_University_of_Arkansas_yearbook.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cardinal,_1901,_University_of_Arkansas_yearbook.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": 0,
+     "terme": "Matt Murphy Marvell",
+     "poids": 81526
+    },
+    {
+     "fichier": "Victoria Daily Times (1908-10-20) (IA victoriadailytimes19081020).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Victoria_Daily_Times_%281908-10-20%29_%28IA_victoriadailytimes19081020%29.pdf/page1-1920px-Victoria_Daily_Times_%281908-10-20%29_%28IA_victoriadailytimes19081020%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Victoria_Daily_Times_(1908-10-20)_(IA_victoriadailytimes19081020).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "Matt Murphy Marvell",
+     "poids": 135226
+    },
+    {
+     "fichier": "The American magazine of art (IA americanmagazine13amer).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/The_American_magazine_of_art_%28IA_americanmagazine13amer%29.pdf/page1-960px-The_American_magazine_of_art_%28IA_americanmagazine13amer%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_American_magazine_of_art_(IA_americanmagazine13amer).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nAmerican Federation of Arts",
+     "score": -12,
+     "terme": "Matt Murphy Marvell",
+     "poids": 34232
+    },
+    {
+     "fichier": "Lucky Bag (IA luckybag1901unse).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Lucky_Bag_%28IA_luckybag1901unse%29.pdf/page1-960px-Lucky_Bag_%28IA_luckybag1901unse%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Lucky_Bag_(IA_luckybag1901unse).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "Matt Murphy Marvell",
+     "poids": 132491
+    }
+   ]
+  },
+  "MU": {
+   "candidats": [
+    {
+     "fichier": "Sanjay Mehrotra - Micron.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Sanjay_Mehrotra_-_Micron.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Sanjay_Mehrotra_-_Micron.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Micron Technology",
+     "score": 0,
+     "terme": "Sanjay Mehrotra Micron",
+     "poids": 41748
+    },
+    {
+     "fichier": "S. Mehrotra.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/S._Mehrotra.png/1920px-S._Mehrotra.png",
+     "page": "https://commons.wikimedia.org/wiki/File:S._Mehrotra.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Micron Technology",
+     "score": 0,
+     "terme": "Sanjay Mehrotra Micron",
+     "poids": 34075
+    },
+    {
+     "fichier": "01.29 總統接見「美光科技Sanjay Mehrotra總裁暨執行長一行」.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/01.29_%E7%B8%BD%E7%B5%B1%E6%8E%A5%E8%A6%8B%E3%80%8C%E7%BE%8E%E5%85%89%E7%A7%91%E6%8A%80Sanjay_Mehrotra%E7%B8%BD%E8%A3%81%E6%9A%A8%E5%9F%B7%E8%A1%8C%E9%95%B7%E4%B8%80%E8%A1%8C%E3%80%8D.jpg/1920px-01.29_%E7%B8%BD%E7%B5%B1%E6%8E%A5%E8%A6%8B%E3%80%8C%E7%BE%8E%E5%85%89%E7%A7%91%E6%8A%80Sanjay_Mehrotra%E7%B8%BD%E8%A3%81%E6%9A%A8%E5%9F%B7%E8%A1%8C%E9%95%B7%E4%B8%80%E8%A1%8C%E3%80%8D.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:01.29_%E7%B8%BD%E7%B5%B1%E6%8E%A5%E8%A6%8B%E3%80%8C%E7%BE%8E%E5%85%89%E7%A7%91%E6%8A%80Sanjay_Mehrotra%E7%B8%BD%E8%A3%81%E6%9A%A8%E5%9F%B7%E8%A1%8C%E9%95%B7%E4%B8%80%E8%A1%8C%E3%80%8D.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Taiwan Presidential Office",
+     "score": 0,
+     "terme": "Sanjay Mehrotra Micron",
+     "poids": 73887
+    },
+    {
+     "fichier": "01.29 總統接見「美光科技Sanjay Mehrotra總裁暨執行長一行」 - 55067170530.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/01.29_%E7%B8%BD%E7%B5%B1%E6%8E%A5%E8%A6%8B%E3%80%8C%E7%BE%8E%E5%85%89%E7%A7%91%E6%8A%80Sanjay_Mehrotra%E7%B8%BD%E8%A3%81%E6%9A%A8%E5%9F%B7%E8%A1%8C%E9%95%B7%E4%B8%80%E8%A1%8C%E3%80%8D_-_55067170530.jpg/1920px-01.29_%E7%B8%BD%E7%B5%B1%E6%8E%A5%E8%A6%8B%E3%80%8C%E7%BE%8E%E5%85%89%E7%A7%91%E6%8A%80Sanjay_Mehrotra%E7%B8%BD%E8%A3%81%E6%9A%A8%E5%9F%B7%E8%A1%8C%E9%95%B7%E4%B8%80%E8%A1%8C%E3%80%8D_-_55067170530.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:01.29_%E7%B8%BD%E7%B5%B1%E6%8E%A5%E8%A6%8B%E3%80%8C%E7%BE%8E%E5%85%89%E7%A7%91%E6%8A%80Sanjay_Mehrotra%E7%B8%BD%E8%A3%81%E6%9A%A8%E5%9F%B7%E8%A1%8C%E9%95%B7%E4%B8%80%E8%A1%8C%E3%80%8D_-_55067170530.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Taiwan Presidential Office",
+     "score": 0,
+     "terme": "Sanjay Mehrotra Micron",
+     "poids": 73425
+    }
+   ]
+  },
+  "ORCL": {
+   "candidats": [
+    {
+     "fichier": "Safra Catz.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Safra_Catz.JPG/1920px-Safra_Catz.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Safra_Catz.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Ilan Costica",
+     "score": 0,
+     "terme": "Safra Catz Oracle",
+     "poids": 50950
+    },
+    {
+     "fichier": "Safra Catz 2014.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Safra_Catz_2014.jpg/1920px-Safra_Catz_2014.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Safra_Catz_2014.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Oracle PR/Hartmann Studios",
+     "score": 0,
+     "terme": "Safra Catz Oracle",
+     "poids": 38733
+    },
+    {
+     "fichier": "Safra Catz 2014 (cropped).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Safra_Catz_2014_%28cropped%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Safra_Catz_2014_(cropped).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Oracle PR/Hartmann Studios",
+     "score": 0,
+     "terme": "Safra Catz Oracle",
+     "poids": 48625
+    },
+    {
+     "fichier": "Larry Ellison on stage (4).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Larry_Ellison_on_stage_%284%29.jpg/1920px-Larry_Ellison_on_stage_%284%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Larry_Ellison_on_stage_(4).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Oracle PR",
+     "score": 0,
+     "terme": "Larry Ellison keynote",
+     "poids": 36077
+    }
+   ]
+  },
+  "QCOM": {
+   "candidats": [
+    {
+     "fichier": "USENIX '04 Security Symposium Proceedings.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/USENIX_%2704_Security_Symposium_Proceedings.djvu/page1-960px-USENIX_%2704_Security_Symposium_Proceedings.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:USENIX_%2704_Security_Symposium_Proceedings.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUSENIX Association",
+     "score": 0,
+     "terme": "Qualcomm CES keynote",
+     "poids": 46620
+    },
+    {
+     "fichier": "P20251119DT-0030.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/P20251119DT-0030.jpg/1920px-P20251119DT-0030.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:P20251119DT-0030.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "The White House",
+     "score": 0,
+     "terme": "Cristiano Amon",
+     "poids": 88179
+    },
+    {
+     "fichier": "CristianoAmon.jpeg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/CristianoAmon.jpeg/1920px-CristianoAmon.jpeg",
+     "page": "https://commons.wikimedia.org/wiki/File:CristianoAmon.jpeg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "©2012 Eric Myer Photography, Inc.",
+     "score": 0,
+     "terme": "Cristiano Amon",
+     "poids": 54386
+    },
+    {
+     "fichier": "Cristiano Amon Web Summit 2024.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Cristiano_Amon_Web_Summit_2024.jpg/1920px-Cristiano_Amon_Web_Summit_2024.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cristiano_Amon_Web_Summit_2024.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Web Summit",
+     "score": 0,
+     "terme": "Cristiano Amon",
+     "poids": 64537
+    }
+   ]
+  },
+  "SIE.DE": {
+   "candidats": [
+    {
+     "fichier": "Roland Busch.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Roland_Busch.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Roland_Busch.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Siemens Portugal",
+     "score": 0,
+     "terme": "Roland Busch Siemens",
+     "poids": 53983
+    },
+    {
+     "fichier": "Roland Busch (2022).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Roland_Busch_%282022%29.jpg/1920px-Roland_Busch_%282022%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Roland_Busch_(2022).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Mozamaniac",
+     "score": 0,
+     "terme": "Roland Busch Siemens",
+     "poids": 37553
+    },
+    {
+     "fichier": "Freiherr-vom-Stein-Schule Haupteingang.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Freiherr-vom-Stein-Schule_Haupteingang.jpg/1920px-Freiherr-vom-Stein-Schule_Haupteingang.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Freiherr-vom-Stein-Schule_Haupteingang.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Daniel Roland Busch",
+     "score": 0,
+     "terme": "Roland Busch Siemens",
+     "poids": 62653
+    },
+    {
+     "fichier": "Proceedings (IA proceedings7188inte).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Proceedings_%28IA_proceedings7188inte%29.pdf/page1-960px-Proceedings_%28IA_proceedings7188inte%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Proceedings_(IA_proceedings7188inte).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nInternational Congress of Americanists",
+     "score": -12,
+     "terme": "Roland Busch Siemens",
+     "poids": 20286
+    }
+   ]
+  },
+  "TSM": {
+   "candidats": [
+    {
+     "fichier": "Ten Kiogen in English (1907).djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Ten_Kiogen_in_English_%281907%29.djvu/page1-1280px-Ten_Kiogen_in_English_%281907%29.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ten_Kiogen_in_English_(1907).djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUnknown authorUnknown author ",
+     "score": 0,
+     "terme": "C. C. Wei TSMC",
+     "poids": 126176
+    },
+    {
+     "fichier": "TSMC CC Wei and Trump 2025.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/TSMC_CC_Wei_and_Trump_2025.png/1920px-TSMC_CC_Wei_and_Trump_2025.png",
+     "page": "https://commons.wikimedia.org/wiki/File:TSMC_CC_Wei_and_Trump_2025.png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "White House",
+     "score": 0,
+     "terme": "C. C. Wei TSMC",
+     "poids": 61263
+    },
+    {
+     "fichier": "Joe Biden at the TSMC Semiconductor Plant in Phoenix (P20221206AS-0794).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Joe_Biden_at_the_TSMC_Semiconductor_Plant_in_Phoenix_%28P20221206AS-0794%29.jpg/1920px-Joe_Biden_at_the_TSMC_Semiconductor_Plant_in_Phoenix_%28P20221206AS-0794%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Joe_Biden_at_the_TSMC_Semiconductor_Plant_in_Phoenix_(P20221206AS-0794).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "The White House",
+     "score": 0,
+     "terme": "C. C. Wei TSMC",
+     "poids": 55242
+    },
+    {
+     "fichier": "20260205hyoukei10.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/20260205hyoukei10.jpg/1920px-20260205hyoukei10.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:20260205hyoukei10.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Cabinet Secretariat",
+     "score": 0,
+     "terme": "C. C. Wei TSMC",
+     "poids": 59246
+    }
+   ]
+  }
+ }
+}
