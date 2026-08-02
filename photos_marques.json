@@ -1,0 +1,1707 @@
+{
+ "societes": 46,
+ "detail": {
+  "6146.T": {
+   "candidats": [
+    {
+     "fichier": "Cleanroom suit.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Cleanroom_suit.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cleanroom_suit.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson",
+     "score": 3,
+     "terme": "wafer dicing saw",
+     "poids": 75069
+    },
+    {
+     "fichier": "Calculating the nutritive value of diets - a manual of instructions for the use of punch cards for machine tabulation (IA calculatingnutri6210inst).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Calculating_the_nutritive_value_of_diets_-_a_manual_of_instructions_for_the_use_of_punch_cards_for_machine_tabulation_%28IA_calculatingnutri6210inst%29.pdf/page1-960px-Calculating_the_nutritive_value_of_diets_-_a_manual_of_instructions_for_the_use_of_punch_cards_for_machine_tabulation_%28IA_calculatingnutri6210inst%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Calculating_the_nutritive_value_of_diets_-_a_manual_of_instructions_for_the_use_of_punch_cards_for_machine_tabulation_(IA_calculatingnutri6210inst).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nInstitute of Home Economics (U.S.). Household Economics Research Division",
+     "score": -7,
+     "terme": "wafer dicing machine",
+     "poids": 30959
+    },
+    {
+     "fichier": "The universal cook and city and country housekeeper containing all the various branches of cookery ... Together with directions for baking bread the management of poultry and the dairy (IA b21529711).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/The_universal_cook_and_city_and_country_housekeeper_containing_all_the_various_branches_of_cookery_..._Together_with_directions_for_baking_bread_the_management_of_poultry_and_the_dairy_%28IA_b21529711%29.pdf/page1-960px-thumbnail.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_universal_cook_and_city_and_country_housekeeper_containing_all_the_various_branches_of_cookery_..._Together_with_directions_for_baking_bread_the_management_of_poultry_and_the_dairy_(IA_b21529711).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCollingwood, Francis\nWoollams, John\nJohnson, Richard, d.1793\nUniversity of Leed",
+     "score": -12,
+     "terme": "dicing blade wafer",
+     "poids": 45426
+    }
+   ]
+  },
+  "6857.T": {
+   "candidats": [
+    {
+     "fichier": "Retracted testicles.webm",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Retracted_testicles.webm/1920px--Retracted_testicles.webm.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Retracted_testicles.webm",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Richiex",
+     "score": 0,
+     "terme": "IC test system",
+     "poids": 60628
+    },
+    {
+     "fichier": "Normal right testis as seen on ultrasound axial view.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Normal_right_testis_as_seen_on_ultrasound_axial_view.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Normal_right_testis_as_seen_on_ultrasound_axial_view.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Cerevisae",
+     "score": 0,
+     "terme": "IC test system",
+     "poids": 49481
+    },
+    {
+     "fichier": "Mitsubishi J2M J-WNRD model.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Mitsubishi_J2M_J-WNRD_model.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Mitsubishi_J2M_J-WNRD_model.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Bill Abbott",
+     "score": 0,
+     "terme": "Advantest",
+     "poids": 33914
+    }
+   ]
+  },
+  "8035.T": {
+   "candidats": [
+    {
+     "fichier": "Tokyo Electron Device Limited3.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Tokyo_Electron_Device_Limited3.jpg/1920px-Tokyo_Electron_Device_Limited3.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Electron_Device_Limited3.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "MEKO7",
+     "score": 4,
+     "terme": "Tokyo Electron",
+     "poids": 74562
+    },
+    {
+     "fichier": "Tokyo Electron Device Limited2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tokyo_Electron_Device_Limited2.jpg/1920px-Tokyo_Electron_Device_Limited2.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Electron_Device_Limited2.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "MEKO7",
+     "score": 4,
+     "terme": "Tokyo Electron",
+     "poids": 70052
+    },
+    {
+     "fichier": "Tokyo Electron Device Limited1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Tokyo_Electron_Device_Limited1.jpg/1920px-Tokyo_Electron_Device_Limited1.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Electron_Device_Limited1.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "MEKO7",
+     "score": 4,
+     "terme": "Tokyo Electron",
+     "poids": 65116
+    }
+   ]
+  },
+  "ACN": {
+   "candidats": [
+    {
+     "fichier": "CitigroupCenterChicago.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/CitigroupCenterChicago.jpg/1920px-CitigroupCenterChicago.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:CitigroupCenterChicago.jpg",
+     "licence": "CC BY-SA 2.5",
+     "famille": "by-sa",
+     "auteur": "Jarred Trost",
+     "score": 0,
+     "terme": "Accenture Tower",
+     "poids": 141213
+    },
+    {
+     "fichier": "Citigroup center from ground.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Citigroup_center_from_ground.jpg/1920px-Citigroup_center_from_ground.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Citigroup_center_from_ground.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Trxr4kds at English Wikipedia",
+     "score": 0,
+     "terme": "Accenture Tower",
+     "poids": 76011
+    },
+    {
+     "fichier": "Citigroup Center, Chicago (16996077180).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Citigroup_Center%2C_Chicago_%2816996077180%29.jpg/1920px-Citigroup_Center%2C_Chicago_%2816996077180%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Citigroup_Center,_Chicago_(16996077180).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Tony Webster from Portland, Oregon, United States",
+     "score": 0,
+     "terme": "Accenture Tower",
+     "poids": 83374
+    }
+   ]
+  },
+  "ANET": {
+   "candidats": [
+    {
+     "fichier": "Distro swtich used under The Gathering 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Distro_swtich_used_under_The_Gathering_2025.jpg/1920px-Distro_swtich_used_under_The_Gathering_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Distro_swtich_used_under_The_Gathering_2025.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Premeditated",
+     "score": 0,
+     "terme": "Arista Networks switch",
+     "poids": 103806
+    },
+    {
+     "fichier": "Distro swtich used under The Gathering 2025 (cropped- Arista switch).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Distro_swtich_used_under_The_Gathering_2025_%28cropped-_Arista_switch%29.jpg/1920px-Distro_swtich_used_under_The_Gathering_2025_%28cropped-_Arista_switch%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Distro_swtich_used_under_The_Gathering_2025_(cropped-_Arista_switch).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Premeditated",
+     "score": 0,
+     "terme": "Arista Networks switch",
+     "poids": 112771
+    },
+    {
+     "fichier": "Cost effectiveness analysis of converting a classroom course to a network based instruction module (IA costeffectivenes00gree).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Cost_effectiveness_analysis_of_converting_a_classroom_course_to_a_network_based_instruction_module_%28IA_costeffectivenes00gree%29.pdf/page1-960px-Cost_effectiveness_analysis_of_converting_a_classroom_course_to_a_network_based_instruction_module_%28IA_costeffectivenes00gree%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cost_effectiveness_analysis_of_converting_a_classroom_course_to_a_network_based_instruction_module_(IA_costeffectivenes00gree).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nGreen, Samantha J.",
+     "score": -7,
+     "terme": "Arista Networks switch",
+     "poids": 93589
+    }
+   ]
+  },
+  "ASM.AS": {
+   "candidats": [
+    {
+     "fichier": "Asmi-9mm machine pistol.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Asmi-9mm_machine_pistol.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Asmi-9mm_machine_pistol.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Jhontomjim",
+     "score": 5,
+     "terme": "ASM International semiconductor",
+     "poids": 48882
+    },
+    {
+     "fichier": "Reconstruction of the first atomic layer epitaxy experiment by Tuomo Suntola.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Reconstruction_of_the_first_atomic_layer_epitaxy_experiment_by_Tuomo_Suntola.jpg/1920px-Reconstruction_of_the_first_atomic_layer_epitaxy_experiment_by_Tuomo_Suntola.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Reconstruction_of_the_first_atomic_layer_epitaxy_experiment_by_Tuomo_Suntola.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Riikka Puurunen and Tuomo Suntola",
+     "score": 0,
+     "terme": "atomic layer deposition reactor",
+     "poids": 29306
+    },
+    {
+     "fichier": "Main applications of ALD.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Main_applications_of_ALD.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Main_applications_of_ALD.png",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "J. Ruud van Ommen, Fenne B.M. van Ommen, Riikka L. Puurunen",
+     "score": 0,
+     "terme": "atomic layer deposition reactor",
+     "poids": 46693
+    }
+   ]
+  },
+  "ASX": {
+   "candidats": [
+    {
+     "fichier": "汐止-伯爵山莊-日月光中心 - panoramio.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/%E6%B1%90%E6%AD%A2-%E4%BC%AF%E7%88%B5%E5%B1%B1%E8%8E%8A-%E6%97%A5%E6%9C%88%E5%85%89%E4%B8%AD%E5%BF%83_-_panoramio.jpg/1920px-%E6%B1%90%E6%AD%A2-%E4%BC%AF%E7%88%B5%E5%B1%B1%E8%8E%8A-%E6%97%A5%E6%9C%88%E5%85%89%E4%B8%AD%E5%BF%83_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E6%B1%90%E6%AD%A2-%E4%BC%AF%E7%88%B5%E5%B1%B1%E8%8E%8A-%E6%97%A5%E6%9C%88%E5%85%89%E4%B8%AD%E5%BF%83_-_panoramio.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "miling",
+     "score": 0,
+     "terme": "Advanced Semiconductor Engineering",
+     "poids": 77447
+    },
+    {
+     "fichier": "上海日月光雪景 - panoramio.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/%E4%B8%8A%E6%B5%B7%E6%97%A5%E6%9C%88%E5%85%89%E9%9B%AA%E6%99%AF_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E6%97%A5%E6%9C%88%E5%85%89%E9%9B%AA%E6%99%AF_-_panoramio.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "miling",
+     "score": 0,
+     "terme": "Advanced Semiconductor Engineering",
+     "poids": 90497
+    },
+    {
+     "fichier": "上海日月光生活區 - panoramio.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/%E4%B8%8A%E6%B5%B7%E6%97%A5%E6%9C%88%E5%85%89%E7%94%9F%E6%B4%BB%E5%8D%80_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E6%97%A5%E6%9C%88%E5%85%89%E7%94%9F%E6%B4%BB%E5%8D%80_-_panoramio.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "miling",
+     "score": 0,
+     "terme": "Advanced Semiconductor Engineering",
+     "poids": 87110
+    }
+   ]
+  },
+  "BLK": {
+   "candidats": [
+    {
+     "fichier": "Tillamook Rock Lighthouse, 1947 - NARA - 298212.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Tillamook_Rock_Lighthouse%2C_1947_-_NARA_-_298212.tif/lossy-page1-1920px-Tillamook_Rock_Lighthouse%2C_1947_-_NARA_-_298212.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tillamook_Rock_Lighthouse,_1947_-_NARA_-_298212.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUnknown authorUnknown author or not provided",
+     "score": 0,
+     "terme": "BlackRock headquarters",
+     "poids": 80966
+    },
+    {
+     "fichier": "Tillamook Rock Lighthouse - NARA - 298211.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Tillamook_Rock_Lighthouse_-_NARA_-_298211.tif/lossy-page1-1920px-Tillamook_Rock_Lighthouse_-_NARA_-_298211.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tillamook_Rock_Lighthouse_-_NARA_-_298211.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUnknown authorUnknown author or not provided",
+     "score": 0,
+     "terme": "BlackRock headquarters",
+     "poids": 90861
+    },
+    {
+     "fichier": "Spider-webs-belarus.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Spider-webs-belarus.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Spider-webs-belarus.JPG",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "VladimirZhV",
+     "score": 0,
+     "terme": "iShares",
+     "poids": 100820
+    }
+   ]
+  },
+  "BNP.PA": {
+   "candidats": [
+    {
+     "fichier": "Sonia Guajajara avec la délégation de l'APIB à Paris le 12 novembre 2019 pendant la tournée \"Sang Indigène, pas une goutte de plus\".png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Sonia_Guajajara_avec_la_d%C3%A9l%C3%A9gation_de_l%27APIB_%C3%A0_Paris_le_12_novembre_2019_pendant_la_tourn%C3%A9e_%22Sang_Indig%C3%A8ne%2C_pas_une_goutte_de_plus%22.png/1920px-Sonia_Guajajara_avec_la_d%C3%A9l%C3%A9gation_de_l%27APIB_%C3%A0_Paris_le_12_novembre_2019_pendant_la_tourn%C3%A9e_%22Sang_Indig%C3%A8ne%2C_pas_une_goutte_de_plus%22.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Sonia_Guajajara_avec_la_d%C3%A9l%C3%A9gation_de_l%27APIB_%C3%A0_Paris_le_12_novembre_2019_pendant_la_tourn%C3%A9e_%22Sang_Indig%C3%A8ne,_pas_une_goutte_de_plus%22.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Gert-Peter BRUCH",
+     "score": 0,
+     "terme": "BNP Paribas headquarters",
+     "poids": 98422
+    },
+    {
+     "fichier": "Siege BNPP rue Taitbout.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Siege_BNPP_rue_Taitbout.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Siege_BNPP_rue_Taitbout.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Tangopaso",
+     "score": 0,
+     "terme": "BNP Paribas headquarters",
+     "poids": 115471
+    },
+    {
+     "fichier": "Siege BNPP rue Laffitte.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Siege_BNPP_rue_Laffitte.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Siege_BNPP_rue_Laffitte.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Tangopaso",
+     "score": 0,
+     "terme": "BNP Paribas headquarters",
+     "poids": 121653
+    }
+   ]
+  },
+  "CB": {
+   "candidats": [
+    {
+     "fichier": "Insurance Company of North America Historical Marker 436 Walnut St Philadelphia PA (DSC 4239).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Insurance_Company_of_North_America_Historical_Marker_436_Walnut_St_Philadelphia_PA_%28DSC_4239%29.jpg/1920px-Insurance_Company_of_North_America_Historical_Marker_436_Walnut_St_Philadelphia_PA_%28DSC_4239%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Insurance_Company_of_North_America_Historical_Marker_436_Walnut_St_Philadelphia_PA_(DSC_4239).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "NMGiovannucci",
+     "score": 0,
+     "terme": "Chubb insurance building",
+     "poids": 120442
+    },
+    {
+     "fichier": "Evan Greenberg in 2024.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Evan_Greenberg_in_2024.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Evan_Greenberg_in_2024.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Chubb Limited",
+     "score": 0,
+     "terme": "Chubb Limited",
+     "poids": 48037
+    },
+    {
+     "fichier": "Coldwater, Michigan pictorial city directory and year book (1919) (14597670149).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Coldwater%2C_Michigan_pictorial_city_directory_and_year_book_%281919%29_%2814597670149%29.jpg/1920px-Coldwater%2C_Michigan_pictorial_city_directory_and_year_book_%281919%29_%2814597670149%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Coldwater,_Michigan_pictorial_city_directory_and_year_book_(1919)_(14597670149).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Internet Archive Book Images",
+     "score": 0,
+     "terme": "Chubb insurance building",
+     "poids": 203871
+    }
+   ]
+  },
+  "CEG": {
+   "candidats": [
+    {
+     "fichier": "Visitors from Japan’s Nuclear Regulator Visit the Nine Mile Point Nuclear Plant (53249483439).png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Visitors_from_Japan%E2%80%99s_Nuclear_Regulator_Visit_the_Nine_Mile_Point_Nuclear_Plant_%2853249483439%29.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Visitors_from_Japan%E2%80%99s_Nuclear_Regulator_Visit_the_Nine_Mile_Point_Nuclear_Plant_(53249483439).png",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Nuclear Regulatory Commission from US",
+     "score": 0,
+     "terme": "Nine Mile Point Nuclear",
+     "poids": 98947
+    },
+    {
+     "fichier": "Tour of Calvert Cliffs Nuclear Power Plant (34568087174).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Tour_of_Calvert_Cliffs_Nuclear_Power_Plant_%2834568087174%29.jpg/1920px-Tour_of_Calvert_Cliffs_Nuclear_Power_Plant_%2834568087174%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tour_of_Calvert_Cliffs_Nuclear_Power_Plant_(34568087174).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Nuclear Regulatory Commission from US",
+     "score": 0,
+     "terme": "Calvert Cliffs Nuclear Power Plant",
+     "poids": 97900
+    },
+    {
+     "fichier": "Routine inspection at the Calvert Cliffs Nuclear Power Plant - May 2012 (14492443057).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Routine_inspection_at_the_Calvert_Cliffs_Nuclear_Power_Plant_-_May_2012_%2814492443057%29.jpg/1920px-Routine_inspection_at_the_Calvert_Cliffs_Nuclear_Power_Plant_-_May_2012_%2814492443057%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Routine_inspection_at_the_Calvert_Cliffs_Nuclear_Power_Plant_-_May_2012_(14492443057).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Nuclear Regulatory Commission from US",
+     "score": 0,
+     "terme": "Calvert Cliffs Nuclear Power Plant",
+     "poids": 87711
+    }
+   ]
+  },
+  "CIEN": {
+   "candidats": [
+    {
+     "fichier": "OME 6500 with 100G.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/OME_6500_with_100G.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:OME_6500_with_100G.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "James38",
+     "score": 0,
+     "terme": "Ciena optical",
+     "poids": 83095
+    },
+    {
+     "fichier": "Jacobi, Dictionnaire mythologique, Bernard, 1854.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Jacobi%2C_Dictionnaire_mythologique%2C_Bernard%2C_1854.djvu/page1-1920px-Jacobi%2C_Dictionnaire_mythologique%2C_Bernard%2C_1854.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Jacobi,_Dictionnaire_mythologique,_Bernard,_1854.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nEduard Adolf Jacobi",
+     "score": 0,
+     "terme": "Ciena optical",
+     "poids": 104294
+    },
+    {
+     "fichier": "Ciena 6500.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Ciena_6500.jpg/1920px-Ciena_6500.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ciena_6500.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "C0pMer",
+     "score": 0,
+     "terme": "Ciena 6500",
+     "poids": 71464
+    }
+   ]
+  },
+  "CME": {
+   "candidats": [
+    {
+     "fichier": "Chicago Board of Trade and Continental and Commercial Bank.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Chicago_Board_of_Trade_and_Continental_and_Commercial_Bank.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Chicago_Board_of_Trade_and_Continental_and_Commercial_Bank.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Wynn Diancin",
+     "score": 5,
+     "terme": "Chicago Board of Trade Building",
+     "poids": 118137
+    },
+    {
+     "fichier": "Chicago Board of Trade 1885.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Chicago_Board_of_Trade_1885.jpg/1920px-Chicago_Board_of_Trade_1885.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Chicago_Board_of_Trade_1885.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "A.T. Andreas",
+     "score": 5,
+     "terme": "Chicago Board of Trade Building",
+     "poids": 90311
+    },
+    {
+     "fichier": "Board of Trade.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Board_of_Trade.JPG/1920px-Board_of_Trade.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Board_of_Trade.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Blhayes87",
+     "score": 5,
+     "terme": "Chicago Board of Trade Building",
+     "poids": 131257
+    }
+   ]
+  },
+  "COHR": {
+   "candidats": [
+    {
+     "fichier": "Crystal Skull Vodka Bottle & Industrial Laser Beam.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Crystal_Skull_Vodka_Bottle_%26_Industrial_Laser_Beam.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Crystal_Skull_Vodka_Bottle_%26_Industrial_Laser_Beam.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Dylan O'Donnell",
+     "score": 3,
+     "terme": "laser head industrial",
+     "poids": 27169
+    },
+    {
+     "fichier": "Transactions and proceedings of the Royal Society of South Australia (Incorporated) (1921) (14591746070).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Transactions_and_proceedings_of_the_Royal_Society_of_South_Australia_%28Incorporated%29_%281921%29_%2814591746070%29.jpg/1920px-Transactions_and_proceedings_of_the_Royal_Society_of_South_Australia_%28Incorporated%29_%281921%29_%2814591746070%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Transactions_and_proceedings_of_the_Royal_Society_of_South_Australia_(Incorporated)_(1921)_(14591746070).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Royal Society of South Australia",
+     "score": 0,
+     "terme": "II-VI Incorporated",
+     "poids": 122102
+    },
+    {
+     "fichier": "Transactions and proceedings of the Royal Society of South Australia (Incorporated) (1921) (14591744750).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Transactions_and_proceedings_of_the_Royal_Society_of_South_Australia_%28Incorporated%29_%281921%29_%2814591744750%29.jpg/1920px-Transactions_and_proceedings_of_the_Royal_Society_of_South_Australia_%28Incorporated%29_%281921%29_%2814591744750%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Transactions_and_proceedings_of_the_Royal_Society_of_South_Australia_(Incorporated)_(1921)_(14591744750).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Royal Society of South Australia",
+     "score": 0,
+     "terme": "II-VI Incorporated",
+     "poids": 130046
+    }
+   ]
+  },
+  "CRM": {
+   "candidats": [
+    {
+     "fichier": "Salesforce and Millennium towers, San Francisco 2023-07-18.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Salesforce_and_Millennium_towers%2C_San_Francisco_2023-07-18.jpg/1920px-Salesforce_and_Millennium_towers%2C_San_Francisco_2023-07-18.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Salesforce_and_Millennium_towers,_San_Francisco_2023-07-18.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "The wub",
+     "score": 0,
+     "terme": "Salesforce Tower San Francisco",
+     "poids": 144436
+    },
+    {
+     "fichier": "View of Salesforce Tower (San Francisco) July 2022.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/View_of_Salesforce_Tower_%28San_Francisco%29_July_2022.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:View_of_Salesforce_Tower_(San_Francisco)_July_2022.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Benoît Prieur",
+     "score": -8,
+     "terme": "Salesforce Tower San Francisco",
+     "poids": 100404
+    },
+    {
+     "fichier": "San Francisco, California April 2022 Salesforce Tower.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/San_Francisco%2C_California_April_2022_Salesforce_Tower.jpg/1920px-San_Francisco%2C_California_April_2022_Salesforce_Tower.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:San_Francisco,_California_April_2022_Salesforce_Tower.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Sharon Hahn Darlin",
+     "score": -8,
+     "terme": "Salesforce Tower San Francisco",
+     "poids": 71323
+    }
+   ]
+  },
+  "CRWV": {
+   "candidats": [
+    {
+     "fichier": "Spiral Galaxy M101 2019-05-15.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Spiral_Galaxy_M101_2019-05-15.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Spiral_Galaxy_M101_2019-05-15.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Astrobond",
+     "score": 0,
+     "terme": "CoreWeave data center",
+     "poids": 31295
+    },
+    {
+     "fichier": "Towards development of innovative bio-inspired materials by analyzing the hydrodynamic properties of Polyondon spathula (Paddlefish) rostrum - USACE-p266001coll1-4520.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Towards_development_of_innovative_bio-inspired_materials_by_analyzing_the_hydrodynamic_properties_of_Polyondon_spathula_%28Paddlefish%29_rostrum_-_USACE-p266001coll1-4520.pdf/page1-960px-thumbnail.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Towards_development_of_innovative_bio-inspired_materials_by_analyzing_the_hydrodynamic_properties_of_Polyondon_spathula_(Paddlefish)_rostrum_-_USACE-p266001coll1-4520.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "United States. Army. Corps of Engineers; Engineer Research and Development Cente",
+     "score": -12,
+     "terme": "CoreWeave data center",
+     "poids": 54905
+    },
+    {
+     "fichier": "NCRR - a catalyst for discovery - a plan for the National Center for Research Resources (IA ncrrcatalystford00nati).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/NCRR_-_a_catalyst_for_discovery_-_a_plan_for_the_National_Center_for_Research_Resources_%28IA_ncrrcatalystford00nati%29.pdf/page1-960px-NCRR_-_a_catalyst_for_discovery_-_a_plan_for_the_National_Center_for_Research_Resources_%28IA_ncrrcatalystford00nati%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NCRR_-_a_catalyst_for_discovery_-_a_plan_for_the_National_Center_for_Research_Resources_(IA_ncrrcatalystford00nati).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nNational Institutes of Health (U.S.)",
+     "score": -12,
+     "terme": "CoreWeave data center",
+     "poids": 13481
+    }
+   ]
+  },
+  "CS.PA": {
+   "candidats": [
+    {
+     "fichier": "Winterthurer Versicherung 1957.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Winterthurer_Versicherung_1957.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Winterthurer_Versicherung_1957.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Anidaat",
+     "score": 0,
+     "terme": "AXA insurance building",
+     "poids": 84397
+    },
+    {
+     "fichier": "Tours First et Saint-Gobain (42975144462).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Tours_First_et_Saint-Gobain_%2842975144462%29.jpg/1920px-Tours_First_et_Saint-Gobain_%2842975144462%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tours_First_et_Saint-Gobain_(42975144462).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Arthur Weidmann",
+     "score": 0,
+     "terme": "Tour AXA La Defense",
+     "poids": 102130
+    },
+    {
+     "fichier": "Tourfirst240309.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Tourfirst240309.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tourfirst240309.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Spartida",
+     "score": 0,
+     "terme": "Tour AXA La Defense",
+     "poids": 51735
+    }
+   ]
+  },
+  "CSCO": {
+   "candidats": [
+    {
+     "fichier": "Cisco-Gigabit-Switch-Router-Performance-Route-Processor-0a.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Cisco-Gigabit-Switch-Router-Performance-Route-Processor-0a.jpg/1920px-Cisco-Gigabit-Switch-Router-Performance-Route-Processor-0a.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cisco-Gigabit-Switch-Router-Performance-Route-Processor-0a.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Adamantios",
+     "score": 6,
+     "terme": "Cisco router",
+     "poids": 154994
+    },
+    {
+     "fichier": "PCB of Cisco Catalyst 3750 (3750G-24T) (15481833861).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/PCB_of_Cisco_Catalyst_3750_%283750G-24T%29_%2815481833861%29.jpg/1920px-PCB_of_Cisco_Catalyst_3750_%283750G-24T%29_%2815481833861%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:PCB_of_Cisco_Catalyst_3750_(3750G-24T)_(15481833861).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "htomari",
+     "score": 5,
+     "terme": "Cisco Catalyst switch",
+     "poids": 121676
+    },
+    {
+     "fichier": "Cisco WS-X6708-10G-3C switch module.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Cisco_WS-X6708-10G-3C_switch_module.jpg/1920px-Cisco_WS-X6708-10G-3C_switch_module.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cisco_WS-X6708-10G-3C_switch_module.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Martijn Boer",
+     "score": 5,
+     "terme": "Cisco Catalyst switch",
+     "poids": 132327
+    }
+   ]
+  },
+  "FICO": {
+   "candidats": [
+    {
+     "fichier": "Roberto Fico 2013.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Roberto_Fico_2013.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Roberto_Fico_2013.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Niccolò Caranti",
+     "score": 0,
+     "terme": "Fair Isaac Corporation",
+     "poids": 66294
+    },
+    {
+     "fichier": "Kyle Busch 8 Las Vegas Fall 2024.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Kyle_Busch_8_Las_Vegas_Fall_2024.jpg/1920px-Kyle_Busch_8_Las_Vegas_Fall_2024.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Kyle_Busch_8_Las_Vegas_Fall_2024.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "TaurusEmerald",
+     "score": 0,
+     "terme": "Fair Isaac Corporation",
+     "poids": 89189
+    },
+    {
+     "fichier": "Ficoheadquarters.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Ficoheadquarters.jpg/1920px-Ficoheadquarters.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ficoheadquarters.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Coolcaesar",
+     "score": 0,
+     "terme": "Fair Isaac Corporation",
+     "poids": 177606
+    }
+   ]
+  },
+  "GEV": {
+   "candidats": [
+    {
+     "fichier": "USS Ford (FFG-54) Gas Turbine.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/USS_Ford_%28FFG-54%29_Gas_Turbine.jpg/1920px-USS_Ford_%28FFG-54%29_Gas_Turbine.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:USS_Ford_(FFG-54)_Gas_Turbine.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Camera Operator: PH2 JEFFREY ELLIOTT",
+     "score": 4,
+     "terme": "GE gas turbine",
+     "poids": 75646
+    },
+    {
+     "fichier": "US Navy 110716-N-DU438-077 Gas Turbine System Technician (Mechanical) 2nd Class Terence Erroch performs maintenance on a gas turbine engine aboard.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/US_Navy_110716-N-DU438-077_Gas_Turbine_System_Technician_%28Mechanical%29_2nd_Class_Terence_Erroch_performs_maintenance_on_a_gas_turbine_engine_aboard.jpg/1920px-US_Navy_110716-N-DU438-077_Gas_Turbine_System_Technician_%28Mechanical%29_2nd_Class_Terence_Erroch_performs_maintenance_on_a_gas_turbine_engine_aboard.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:US_Navy_110716-N-DU438-077_Gas_Turbine_System_Technician_(Mechanical)_2nd_Class_Terence_Erroch_performs_maintenance_on_a_gas_turbine_engine_aboard.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Navy photo by Mass Communication Specialist 3rd Class Betsy Lynn Knapper",
+     "score": 4,
+     "terme": "GE gas turbine",
+     "poids": 56314
+    },
+    {
+     "fichier": "US Navy 110215-N-9793B-015 Sailors check a gas turbine engine aboard the guided-missile cruiser USS Anzio (CG 68).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/US_Navy_110215-N-9793B-015_Sailors_check_a_gas_turbine_engine_aboard_the_guided-missile_cruiser_USS_Anzio_%28CG_68%29.jpg/1920px-US_Navy_110215-N-9793B-015_Sailors_check_a_gas_turbine_engine_aboard_the_guided-missile_cruiser_USS_Anzio_%28CG_68%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:US_Navy_110215-N-9793B-015_Sailors_check_a_gas_turbine_engine_aboard_the_guided-missile_cruiser_USS_Anzio_(CG_68).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Navy photo by Mass Communication Specialist 3rd Class Brian M. Brooks",
+     "score": 4,
+     "terme": "GE gas turbine",
+     "poids": 75872
+    }
+   ]
+  },
+  "GILD": {
+   "candidats": [
+    {
+     "fichier": "333 Lakeside Drive.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/333_Lakeside_Drive.jpg/1920px-333_Lakeside_Drive.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:333_Lakeside_Drive.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Coolcaesar",
+     "score": 5,
+     "terme": "Gilead Sciences",
+     "poids": 125750
+    },
+    {
+     "fichier": "Truvada for PrEP HIV Prevention Prescription Pill Bottle (48610088067).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Truvada_for_PrEP_HIV_Prevention_Prescription_Pill_Bottle_%2848610088067%29.jpg/1920px-Truvada_for_PrEP_HIV_Prevention_Prescription_Pill_Bottle_%2848610088067%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Truvada_for_PrEP_HIV_Prevention_Prescription_Pill_Bottle_(48610088067).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Tony Webster from Minneapolis, Minnesota, United States",
+     "score": 3,
+     "terme": "Truvada",
+     "poids": 28895
+    },
+    {
+     "fichier": "Bottle of Descovy.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Bottle_of_Descovy.jpg/1920px-Bottle_of_Descovy.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Bottle_of_Descovy.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "EEJCC",
+     "score": 3,
+     "terme": "Gilead Sciences",
+     "poids": 45675
+    }
+   ]
+  },
+  "GOOGL": {
+   "candidats": [
+    {
+     "fichier": "Waymo self-driving car. (52194843144).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Waymo_self-driving_car._%2852194843144%29.jpg/1920px-Waymo_self-driving_car._%2852194843144%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Waymo_self-driving_car._(52194843144).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Daniel Ramirez from Honolulu, USA",
+     "score": 3,
+     "terme": "Waymo self-driving car",
+     "poids": 126444
+    },
+    {
+     "fichier": "Waymo self-driving car stopped at intersection.gk.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Waymo_self-driving_car_stopped_at_intersection.gk.jpg/1920px-Waymo_self-driving_car_stopped_at_intersection.gk.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Waymo_self-driving_car_stopped_at_intersection.gk.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Grendelkhan",
+     "score": 3,
+     "terme": "Waymo self-driving car",
+     "poids": 59485
+    },
+    {
+     "fichier": "Waymo self-driving car side view.gk.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Waymo_self-driving_car_side_view.gk.jpg/1920px-Waymo_self-driving_car_side_view.gk.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Waymo_self-driving_car_side_view.gk.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Grendelkhan",
+     "score": 3,
+     "terme": "Waymo self-driving car",
+     "poids": 64478
+    }
+   ]
+  },
+  "ICE": {
+   "candidats": [
+    {
+     "fichier": "Wall Street - New York Stock Exchange.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Wall_Street_-_New_York_Stock_Exchange.jpg/1920px-Wall_Street_-_New_York_Stock_Exchange.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wall_Street_-_New_York_Stock_Exchange.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Carlos Delgado",
+     "score": 0,
+     "terme": "New York Stock Exchange building",
+     "poids": 96947
+    },
+    {
+     "fichier": "Trading floor, New York Stock Exchange, New York, New York LCCN2011630168.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Trading_floor%2C_New_York_Stock_Exchange%2C_New_York%2C_New_York_LCCN2011630168.tif/lossy-page1-1920px-Trading_floor%2C_New_York_Stock_Exchange%2C_New_York%2C_New_York_LCCN2011630168.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Trading_floor,_New_York_Stock_Exchange,_New_York,_New_York_LCCN2011630168.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Carol M. Highsmith",
+     "score": 0,
+     "terme": "New York Stock Exchange trading floor",
+     "poids": 129307
+    },
+    {
+     "fichier": "Trading floor of the New York Stock Exchange, New York City LCCN2011632435.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Trading_floor_of_the_New_York_Stock_Exchange%2C_New_York_City_LCCN2011632435.tif/lossy-page1-1920px-Trading_floor_of_the_New_York_Stock_Exchange%2C_New_York_City_LCCN2011632435.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Trading_floor_of_the_New_York_Stock_Exchange,_New_York_City_LCCN2011632435.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Carol M. Highsmith",
+     "score": 0,
+     "terme": "New York Stock Exchange trading floor",
+     "poids": 119241
+    }
+   ]
+  },
+  "INTU": {
+   "candidats": [
+    {
+     "fichier": "Turbotax Van, Williamsburg.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Turbotax_Van%2C_Williamsburg.jpg/1920px-Turbotax_Van%2C_Williamsburg.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Turbotax_Van,_Williamsburg.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "\n\n\n  This magnificent photo was taken by His Imperial Majesty, an Emperor of Emp",
+     "score": 0,
+     "terme": "TurboTax",
+     "poids": 117864
+    },
+    {
+     "fichier": "TurboTax Custom Mobile Hard Drives (3447658389).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/TurboTax_Custom_Mobile_Hard_Drives_%283447658389%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:TurboTax_Custom_Mobile_Hard_Drives_(3447658389).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Custom USB",
+     "score": 0,
+     "terme": "TurboTax",
+     "poids": 40485
+    },
+    {
+     "fichier": "TurboTax Basic 2003 box disc and store receipt.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/TurboTax_Basic_2003_box_disc_and_store_receipt.jpg/1920px-TurboTax_Basic_2003_box_disc_and_store_receipt.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:TurboTax_Basic_2003_box_disc_and_store_receipt.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Jonathan Schilling",
+     "score": 0,
+     "terme": "TurboTax",
+     "poids": 105963
+    }
+   ]
+  },
+  "JPM": {
+   "candidats": [
+    {
+     "fichier": "FEMA - 37700 - Residents line up at an ATM machine in Louisiana.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/FEMA_-_37700_-_Residents_line_up_at_an_ATM_machine_in_Louisiana.jpg/1920px-FEMA_-_37700_-_Residents_line_up_at_an_ATM_machine_in_Louisiana.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:FEMA_-_37700_-_Residents_line_up_at_an_ATM_machine_in_Louisiana.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Jacinta Quesada",
+     "score": 8,
+     "terme": "Chase Bank ATM",
+     "poids": 88951
+    },
+    {
+     "fichier": "CHASE ATM card-2476522151 5690b161be o.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/CHASE_ATM_card-2476522151_5690b161be_o.jpg/1920px-CHASE_ATM_card-2476522151_5690b161be_o.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:CHASE_ATM_card-2476522151_5690b161be_o.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Logan Antill",
+     "score": 5,
+     "terme": "Chase Bank ATM",
+     "poids": 48813
+    },
+    {
+     "fichier": "JPMorganChaseTower.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/JPMorganChaseTower.png",
+     "page": "https://commons.wikimedia.org/wiki/File:JPMorganChaseTower.png",
+     "licence": "CC BY-SA 2.5",
+     "famille": "by-sa",
+     "auteur": "User:Nmajdan",
+     "score": 0,
+     "terme": "JPMorgan Chase Tower",
+     "poids": 95090
+    }
+   ]
+  },
+  "KKR": {
+   "candidats": [
+    {
+     "fichier": "Pier 66 and Hudson Yards (01473)p.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Pier_66_and_Hudson_Yards_%2801473%29p.jpg/1920px-Pier_66_and_Hudson_Yards_%2801473%29p.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Pier_66_and_Hudson_Yards_(01473)p.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rhododendrites",
+     "score": 0,
+     "terme": "30 Hudson Yards",
+     "poids": 90566
+    },
+    {
+     "fichier": "Hudson Yards from Hudson Commons (95131p).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Hudson_Yards_from_Hudson_Commons_%2895131p%29.jpg/1920px-Hudson_Yards_from_Hudson_Commons_%2895131p%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_from_Hudson_Commons_(95131p).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rhododendrites",
+     "score": 0,
+     "terme": "30 Hudson Yards",
+     "poids": 72215
+    },
+    {
+     "fichier": "Hudson Yards from Hudson Commons (95131p) (30 Hudson Yards).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Hudson_Yards_from_Hudson_Commons_%2895131p%29_%2830_Hudson_Yards%29.jpg/1920px-Hudson_Yards_from_Hudson_Commons_%2895131p%29_%2830_Hudson_Yards%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_from_Hudson_Commons_(95131p)_(30_Hudson_Yards).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rhododendrites",
+     "score": 0,
+     "terme": "30 Hudson Yards",
+     "poids": 70158
+    }
+   ]
+  },
+  "LITE": {
+   "candidats": [
+    {
+     "fichier": "NIRCam Optical Module arrives at NASA Goddard (9395956060).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/NIRCam_Optical_Module_arrives_at_NASA_Goddard_%289395956060%29.jpg/1920px-NIRCam_Optical_Module_arrives_at_NASA_Goddard_%289395956060%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NIRCam_Optical_Module_arrives_at_NASA_Goddard_(9395956060).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "NASA's James Webb Space Telescope from Greenbelt, MD, USA",
+     "score": 5,
+     "terme": "optical transceiver module",
+     "poids": 46795
+    },
+    {
+     "fichier": "NIRCam Optical Module arrives at NASA Goddard (9393188239).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/NIRCam_Optical_Module_arrives_at_NASA_Goddard_%289393188239%29.jpg/1920px-NIRCam_Optical_Module_arrives_at_NASA_Goddard_%289393188239%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NIRCam_Optical_Module_arrives_at_NASA_Goddard_(9393188239).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "NASA's James Webb Space Telescope from Greenbelt, MD, USA",
+     "score": 5,
+     "terme": "optical transceiver module",
+     "poids": 84354
+    },
+    {
+     "fichier": "NIRCam Optical Module Arrives at NASA Goddard (9396658850).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/NIRCam_Optical_Module_Arrives_at_NASA_Goddard_%289396658850%29.jpg/1920px-NIRCam_Optical_Module_Arrives_at_NASA_Goddard_%289396658850%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NIRCam_Optical_Module_Arrives_at_NASA_Goddard_(9396658850).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "NASA's James Webb Space Telescope from Greenbelt, MD, USA",
+     "score": 5,
+     "terme": "optical transceiver module",
+     "poids": 105905
+    }
+   ]
+  },
+  "LRCX": {
+   "candidats": [
+    {
+     "fichier": "U.S. Department of Energy - Science - 164 014 003 (9396398258).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/U.S._Department_of_Energy_-_Science_-_164_014_003_%289396398258%29.jpg/1920px-U.S._Department_of_Energy_-_Science_-_164_014_003_%289396398258%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:U.S._Department_of_Energy_-_Science_-_164_014_003_(9396398258).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Department of Energy from United States",
+     "score": 0,
+     "terme": "plasma etch chamber",
+     "poids": 85758
+    },
+    {
+     "fichier": "Pockey Lam on Open Education Research, WikiSym, Hong Kong.jpeg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Pockey_Lam_on_Open_Education_Research%2C_WikiSym%2C_Hong_Kong.jpeg/1920px-Pockey_Lam_on_Open_Education_Research%2C_WikiSym%2C_Hong_Kong.jpeg",
+     "page": "https://commons.wikimedia.org/wiki/File:Pockey_Lam_on_Open_Education_Research,_WikiSym,_Hong_Kong.jpeg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "User:psubhashish",
+     "score": 0,
+     "terme": "Lam Research",
+     "poids": 60579
+    },
+    {
+     "fichier": "Lamgods open.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Lamgods_open.jpg/1920px-Lamgods_open.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Lamgods_open.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Jan van Eyck / Presumably Hubert van Eyck",
+     "score": 0,
+     "terme": "Lam Research",
+     "poids": 131754
+    }
+   ]
+  },
+  "LSEG.L": {
+   "candidats": [
+    {
+     "fichier": "The Royal Exchange and Bank of England LL.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/The_Royal_Exchange_and_Bank_of_England_LL.jpg/1920px-The_Royal_Exchange_and_Bank_of_England_LL.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Royal_Exchange_and_Bank_of_England_LL.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Unknown authorUnknown author",
+     "score": 0,
+     "terme": "London Stock Exchange building",
+     "poids": 146614
+    },
+    {
+     "fichier": "Royal Exchange, 2013.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Royal_Exchange%2C_2013.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange,_2013.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Elisa.rolle",
+     "score": 0,
+     "terme": "London Stock Exchange building",
+     "poids": 72746
+    },
+    {
+     "fichier": "Royal Exchange London Bank Junction 2020 03.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Royal_Exchange_London_Bank_Junction_2020_03.jpg/1920px-Royal_Exchange_London_Bank_Junction_2020_03.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange_London_Bank_Junction_2020_03.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Julian Herzog (Website)",
+     "score": 0,
+     "terme": "London Stock Exchange building",
+     "poids": 114011
+    }
+   ]
+  },
+  "MA": {
+   "candidats": [
+    {
+     "fichier": "Nexo credit card - 2022-07-08.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Nexo_credit_card_-_2022-07-08.jpg/1920px-Nexo_credit_card_-_2022-07-08.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nexo_credit_card_-_2022-07-08.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Bretwa",
+     "score": 5,
+     "terme": "Mastercard credit card",
+     "poids": 44520
+    },
+    {
+     "fichier": "Nexo Crypto Credit Card.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Nexo_Crypto_Credit_Card.jpg/1920px-Nexo_Crypto_Credit_Card.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nexo_Crypto_Credit_Card.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "XoMEoX",
+     "score": 5,
+     "terme": "Mastercard credit card",
+     "poids": 37326
+    },
+    {
+     "fichier": "N26 Maestro Card.jpeg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/N26_Maestro_Card.jpeg/1920px-N26_Maestro_Card.jpeg",
+     "page": "https://commons.wikimedia.org/wiki/File:N26_Maestro_Card.jpeg",
+     "licence": "CC BY-SA 3.0 de",
+     "famille": "by-sa",
+     "auteur": "iToms",
+     "score": 5,
+     "terme": "Maestro card",
+     "poids": 40071
+    }
+   ]
+  },
+  "MCO": {
+   "candidats": [
+    {
+     "fichier": "ZK-MCO Air Chathams ATR 72-500 Auckland.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/ZK-MCO_Air_Chathams_ATR_72-500_Auckland.jpg/1920px-ZK-MCO_Air_Chathams_ATR_72-500_Auckland.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:ZK-MCO_Air_Chathams_ATR_72-500_Auckland.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Biponacci",
+     "score": 0,
+     "terme": "Moody's Corporation",
+     "poids": 56553
+    },
+    {
+     "fichier": "Wtc-photo.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Wtc-photo.jpg/1920px-Wtc-photo.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wtc-photo.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "National Oceanic and Atmospheric Administration (NOAA)",
+     "score": 0,
+     "terme": "7 World Trade Center",
+     "poids": 138744
+    },
+    {
+     "fichier": "World Trade Center, New York City - aerial view (March 2001).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/World_Trade_Center%2C_New_York_City_-_aerial_view_%28March_2001%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:World_Trade_Center,_New_York_City_-_aerial_view_(March_2001).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Jeffmock",
+     "score": 0,
+     "terme": "7 World Trade Center",
+     "poids": 114822
+    }
+   ]
+  },
+  "MRVL": {
+   "candidats": [
+    {
+     "fichier": "Chromecast Audio RUX-J42 - board-5876.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Chromecast_Audio_RUX-J42_-_board-5876.jpg/1920px-Chromecast_Audio_RUX-J42_-_board-5876.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Chromecast_Audio_RUX-J42_-_board-5876.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "terme": "Marvell chip board",
+     "poids": 111658
+    },
+    {
+     "fichier": "Chromecast Audio RUX-J42 - board - Marvell 88W8887-NAA2-5877.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Chromecast_Audio_RUX-J42_-_board_-_Marvell_88W8887-NAA2-5877.jpg/1920px-Chromecast_Audio_RUX-J42_-_board_-_Marvell_88W8887-NAA2-5877.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Chromecast_Audio_RUX-J42_-_board_-_Marvell_88W8887-NAA2-5877.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "terme": "Marvell chip board",
+     "poids": 150893
+    },
+    {
+     "fichier": "Marvell Semiconductor KT-SS1074B2-P182 made for Kingston 2000pcs box tag 20160118.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Marvell_Semiconductor_KT-SS1074B2-P182_made_for_Kingston_2000pcs_box_tag_20160118.jpg/1920px-Marvell_Semiconductor_KT-SS1074B2-P182_made_for_Kingston_2000pcs_box_tag_20160118.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Marvell_Semiconductor_KT-SS1074B2-P182_made_for_Kingston_2000pcs_box_tag_20160118.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Solomon203",
+     "score": 3,
+     "terme": "Marvell semiconductor",
+     "poids": 103947
+    }
+   ]
+  },
+  "MS": {
+   "candidats": [
+    {
+     "fichier": "Morgan Stanley on Times Square.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Morgan_Stanley_on_Times_Square.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Morgan_Stanley_on_Times_Square.JPG",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Jenix89",
+     "score": 0,
+     "terme": "Morgan Stanley Building",
+     "poids": 48234
+    },
+    {
+     "fichier": "Morgan Stanley Times Square.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Morgan_Stanley_Times_Square.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Morgan_Stanley_Times_Square.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "PLBechly",
+     "score": 0,
+     "terme": "Morgan Stanley Building",
+     "poids": 90500
+    },
+    {
+     "fichier": "Lionel Barber, FT editor & James Gorman, chairman and CEO, Morgan Stanley (8415175280).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Lionel_Barber%2C_FT_editor_%26_James_Gorman%2C_chairman_and_CEO%2C_Morgan_Stanley_%288415175280%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Lionel_Barber,_FT_editor_%26_James_Gorman,_chairman_and_CEO,_Morgan_Stanley_(8415175280).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Financial Times",
+     "score": -7,
+     "terme": "Morgan Stanley Building",
+     "poids": 57863
+    }
+   ]
+  },
+  "MSCI": {
+   "candidats": [
+    {
+     "fichier": "Windthrown timber survey in the Pacific Northwest (IA CAT11100027).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Windthrown_timber_survey_in_the_Pacific_Northwest_%28IA_CAT11100027%29.pdf/page1-960px-Windthrown_timber_survey_in_the_Pacific_Northwest_%28IA_CAT11100027%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Windthrown_timber_survey_in_the_Pacific_Northwest_(IA_CAT11100027).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUnited States. Forest Service. Pacific Northwest Region. Division of Timber Man",
+     "score": -12,
+     "terme": "MSCI headquarters",
+     "poids": 88071
+    },
+    {
+     "fichier": "Records of the General Lander Post 5 Grand Army of the Republic (IA recordsofgeneral1884gran).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Records_of_the_General_Lander_Post_5_Grand_Army_of_the_Republic_%28IA_recordsofgeneral1884gran%29.pdf/page1-960px-Records_of_the_General_Lander_Post_5_Grand_Army_of_the_Republic_%28IA_recordsofgeneral1884gran%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Records_of_the_General_Lander_Post_5_Grand_Army_of_the_Republic_(IA_recordsofgeneral1884gran).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nGrand Army of the Republic",
+     "score": -12,
+     "terme": "MSCI headquarters",
+     "poids": 82780
+    },
+    {
+     "fichier": "Panama- owning the canal (IA panamaowningcana1094541395).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Panama-_owning_the_canal_%28IA_panamaowningcana1094541395%29.pdf/page1-960px-Panama-_owning_the_canal_%28IA_panamaowningcana1094541395%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Panama-_owning_the_canal_(IA_panamaowningcana1094541395).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nJackoby, Joanna C.",
+     "score": -12,
+     "terme": "MSCI headquarters",
+     "poids": 21778
+    }
+   ]
+  },
+  "MUV2.DE": {
+   "candidats": [
+    {
+     "fichier": "Wzwz schwabing 13 munich re tree.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wzwz_schwabing_13_munich_re_tree.JPG/1920px-Wzwz_schwabing_13_munich_re_tree.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Wzwz_schwabing_13_munich_re_tree.JPG",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Wzwz",
+     "score": 0,
+     "terme": "Muenchener Rueckversicherung",
+     "poids": 97551
+    },
+    {
+     "fichier": "Wzwz schwabing 12 munich re tree.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Wzwz_schwabing_12_munich_re_tree.JPG/1920px-Wzwz_schwabing_12_munich_re_tree.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Wzwz_schwabing_12_munich_re_tree.JPG",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Wzwz",
+     "score": 0,
+     "terme": "Munich Re headquarters",
+     "poids": 86314
+    },
+    {
+     "fichier": "Münchner Rückversicherungs-Gesellschaft2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg/1920px-M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ricardalovesmonuments",
+     "score": 0,
+     "terme": "Munich Re headquarters",
+     "poids": 147188
+    }
+   ]
+  },
+  "PDD": {
+   "candidats": [
+    {
+     "fichier": "Updated apps for iOS and Android.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Updated_apps_for_iOS_and_Android.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Updated_apps_for_iOS_and_Android.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "tithaerf",
+     "score": 0,
+     "terme": "Temu app",
+     "poids": 53747
+    },
+    {
+     "fichier": "The FAKE $7 Nintendo Clone Consoles from TEMU (2160p 60fps AV1-128kbit AAC)-00.09.38.400.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/The_FAKE_%247_Nintendo_Clone_Consoles_from_TEMU_%282160p_60fps_AV1-128kbit_AAC%29-00.09.38.400.png/1920px-The_FAKE_%247_Nintendo_Clone_Consoles_from_TEMU_%282160p_60fps_AV1-128kbit_AAC%29-00.09.38.400.png",
+     "page": "https://commons.wikimedia.org/wiki/File:The_FAKE_$7_Nintendo_Clone_Consoles_from_TEMU_(2160p_60fps_AV1-128kbit_AAC)-00.09.38.400.png",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "BeatEmUps",
+     "score": 0,
+     "terme": "Temu package",
+     "poids": 41196
+    },
+    {
+     "fichier": "Temù - Chiesa di San Bartolomeo Apostolo.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo.jpg/1920px-Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "HeavenMI",
+     "score": 0,
+     "terme": "Temu app",
+     "poids": 102393
+    }
+   ]
+  },
+  "PGR": {
+   "candidats": [
+    {
+     "fichier": "Progressive, Valdosta.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Progressive%2C_Valdosta.JPG/1920px-Progressive%2C_Valdosta.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Progressive,_Valdosta.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Michael Rivera",
+     "score": 0,
+     "terme": "Progressive Insurance",
+     "poids": 89987
+    },
+    {
+     "fichier": "Progressive truck, Valdosta.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Progressive_truck%2C_Valdosta.JPG/1920px-Progressive_truck%2C_Valdosta.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Progressive_truck,_Valdosta.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Michael Rivera",
+     "score": 0,
+     "terme": "Progressive Insurance",
+     "poids": 114025
+    },
+    {
+     "fichier": "Progressive Sutton Insurance, Tifton.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Progressive_Sutton_Insurance%2C_Tifton.JPG/1920px-Progressive_Sutton_Insurance%2C_Tifton.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Progressive_Sutton_Insurance,_Tifton.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Michael Rivera",
+     "score": 0,
+     "terme": "Progressive Insurance",
+     "poids": 100685
+    }
+   ]
+  },
+  "PWR": {
+   "candidats": [
+    {
+     "fichier": "Transmission line construction, 1937 (53658640374).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Transmission_line_construction%2C_1937_%2853658640374%29.jpg/1920px-Transmission_line_construction%2C_1937_%2853658640374%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Transmission_line_construction,_1937_(53658640374).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Seattle Municipal Archives from Seattle, WA",
+     "score": 3,
+     "terme": "transmission line construction",
+     "poids": 99278
+    },
+    {
+     "fichier": "Transmission line construction along Deerfoot Trail CA 2013.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Transmission_line_construction_along_Deerfoot_Trail_CA_2013.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Transmission_line_construction_along_Deerfoot_Trail_CA_2013.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Tonyglen14",
+     "score": 3,
+     "terme": "transmission line construction",
+     "poids": 13251
+    },
+    {
+     "fichier": "New overhead transmission line construction - Flickr - brewbooks.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/New_overhead_transmission_line_construction_-_Flickr_-_brewbooks.jpg/1920px-New_overhead_transmission_line_construction_-_Flickr_-_brewbooks.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:New_overhead_transmission_line_construction_-_Flickr_-_brewbooks.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "brewbooks from near Seattle, USA",
+     "score": 3,
+     "terme": "transmission line construction",
+     "poids": 69928
+    }
+   ]
+  },
+  "SIE.DE": {
+   "candidats": [
+    {
+     "fichier": "Wagen Velaro Novo.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Wagen_Velaro_Novo.jpg/1920px-Wagen_Velaro_Novo.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wagen_Velaro_Novo.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Niklas Wolter",
+     "score": 0,
+     "terme": "Siemens Velaro",
+     "poids": 128276
+    },
+    {
+     "fichier": "Velaro Novo eingereiht in ICE-S.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Velaro_Novo_eingereiht_in_ICE-S.jpg/1920px-Velaro_Novo_eingereiht_in_ICE-S.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Velaro_Novo_eingereiht_in_ICE-S.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Niklas Wolter",
+     "score": 0,
+     "terme": "Siemens Velaro",
+     "poids": 129034
+    },
+    {
+     "fichier": "Turbinenschaufel von Siemens 2841.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Turbinenschaufel_von_Siemens_2841.JPG/1920px-Turbinenschaufel_von_Siemens_2841.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Turbinenschaufel_von_Siemens_2841.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Bin im Garten",
+     "score": 0,
+     "terme": "Siemens gas turbine",
+     "poids": 33239
+    }
+   ]
+  },
+  "SPGI": {
+   "candidats": [
+    {
+     "fichier": "Luisa Vilhena - S&P Global Ratings (31175690575).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Luisa_Vilhena_-_S%26P_Global_Ratings_%2831175690575%29.jpg/1920px-Luisa_Vilhena_-_S%26P_Global_Ratings_%2831175690575%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Luisa_Vilhena_-_S%26P_Global_Ratings_(31175690575).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "ABRAS Associação Brasileira de Supermercados",
+     "score": 0,
+     "terme": "Standard and Poor's",
+     "poids": 51483
+    },
+    {
+     "fichier": "Luciano Gremone - S&P Global Ratings (31175694355).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Luciano_Gremone_-_S%26P_Global_Ratings_%2831175694355%29.jpg/1920px-Luciano_Gremone_-_S%26P_Global_Ratings_%2831175694355%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Luciano_Gremone_-_S%26P_Global_Ratings_(31175694355).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "ABRAS Associação Brasileira de Supermercados",
+     "score": 0,
+     "terme": "Standard and Poor's",
+     "poids": 50466
+    },
+    {
+     "fichier": "Letter from Harry S. Truman to Mrs. George P. Wallace - NARA - 201123.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Letter_from_Harry_S._Truman_to_Mrs._George_P._Wallace_-_NARA_-_201123.tif/lossy-page1-1920px-Letter_from_Harry_S._Truman_to_Mrs._George_P._Wallace_-_NARA_-_201123.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Letter_from_Harry_S._Truman_to_Mrs._George_P._Wallace_-_NARA_-_201123.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Harry S. Truman",
+     "score": 0,
+     "terme": "S&P Global headquarters",
+     "poids": 73732
+    }
+   ]
+  },
+  "TCEHY": {
+   "candidats": [
+    {
+     "fichier": "Weixin Image 20250201163235.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Weixin_Image_20250201163235.jpg/1920px-Weixin_Image_20250201163235.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Weixin_Image_20250201163235.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Sheminghui.WU",
+     "score": 0,
+     "terme": "WeChat app",
+     "poids": 59516
+    },
+    {
+     "fichier": "Weixin Image 20090412.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Weixin_Image_20090412.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Weixin_Image_20090412.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Plan 091",
+     "score": 0,
+     "terme": "WeChat app",
+     "poids": 57364
+    },
+    {
+     "fichier": "Wechat 20220120010805.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Wechat_20220120010805.jpg/1920px-Wechat_20220120010805.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wechat_20220120010805.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Flyboyleo",
+     "score": 0,
+     "terme": "WeChat app",
+     "poids": 80373
+    }
+   ]
+  },
+  "TER": {
+   "candidats": [
+    {
+     "fichier": "HHLA CTA Presseinfo Automated Guided Vehicle, Terminal -2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/HHLA_CTA_Presseinfo_Automated_Guided_Vehicle%2C_Terminal_-2.jpg/1920px-HHLA_CTA_Presseinfo_Automated_Guided_Vehicle%2C_Terminal_-2.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:HHLA_CTA_Presseinfo_Automated_Guided_Vehicle,_Terminal_-2.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Wolfgang Klein",
+     "score": 7,
+     "terme": "Mobile Industrial Robots",
+     "poids": 84235
+    },
+    {
+     "fichier": "Vector3DHD autonomous mobile robot and EnZone wireless charging.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Vector3DHD_autonomous_mobile_robot_and_EnZone_wireless_charging.jpg/1920px-Vector3DHD_autonomous_mobile_robot_and_EnZone_wireless_charging.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Vector3DHD_autonomous_mobile_robot_and_EnZone_wireless_charging.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "PattyK33",
+     "score": 5,
+     "terme": "Mobile Industrial Robots",
+     "poids": 70509
+    },
+    {
+     "fichier": "UR16e robot arm.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/1920px-UR16e_robot_arm.png",
+     "page": "https://commons.wikimedia.org/wiki/File:UR16e_robot_arm.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Auledas",
+     "score": 5,
+     "terme": "Universal Robots collaborative robot",
+     "poids": 81314
+    }
+   ]
+  },
+  "UBSG.SW": {
+   "candidats": [
+    {
+     "fichier": "UBS Munzhof, Zurich Bahnhofstrasse (Ank Kumar, Infosys Limited) 45.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/UBS_Munzhof%2C_Zurich_Bahnhofstrasse_%28Ank_Kumar%2C_Infosys_Limited%29_45.jpg/1920px-UBS_Munzhof%2C_Zurich_Bahnhofstrasse_%28Ank_Kumar%2C_Infosys_Limited%29_45.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:UBS_Munzhof,_Zurich_Bahnhofstrasse_(Ank_Kumar,_Infosys_Limited)_45.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ank Kumar ",
+     "score": 0,
+     "terme": "UBS Bahnhofstrasse",
+     "poids": 57584
+    },
+    {
+     "fichier": "UBS Munzhof, Zurich Bahnhofstrasse (Ank Kumar, Infosys Limited) 44.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/UBS_Munzhof%2C_Zurich_Bahnhofstrasse_%28Ank_Kumar%2C_Infosys_Limited%29_44.jpg/1920px-UBS_Munzhof%2C_Zurich_Bahnhofstrasse_%28Ank_Kumar%2C_Infosys_Limited%29_44.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:UBS_Munzhof,_Zurich_Bahnhofstrasse_(Ank_Kumar,_Infosys_Limited)_44.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ank Kumar ",
+     "score": 0,
+     "terme": "UBS Bahnhofstrasse",
+     "poids": 85833
+    },
+    {
+     "fichier": "UBS Munzhof, Zurich Bahnhofstrasse (Ank Kumar, Infosys Limited) 40.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/UBS_Munzhof%2C_Zurich_Bahnhofstrasse_%28Ank_Kumar%2C_Infosys_Limited%29_40.jpg/1920px-UBS_Munzhof%2C_Zurich_Bahnhofstrasse_%28Ank_Kumar%2C_Infosys_Limited%29_40.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:UBS_Munzhof,_Zurich_Bahnhofstrasse_(Ank_Kumar,_Infosys_Limited)_40.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ank Kumar ",
+     "score": 0,
+     "terme": "UBS Bahnhofstrasse",
+     "poids": 89949
+    }
+   ]
+  },
+  "VRT": {
+   "candidats": [
+    {
+     "fichier": "Наружное оборудование климатической системы, МГУ 20260523 120447.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/%D0%9D%D0%B0%D1%80%D1%83%D0%B6%D0%BD%D0%BE%D0%B5_%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BA%D0%BB%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2C_%D0%9C%D0%93%D0%A3_20260523_120447.jpg/1920px-%D0%9D%D0%B0%D1%80%D1%83%D0%B6%D0%BD%D0%BE%D0%B5_%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BA%D0%BB%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2C_%D0%9C%D0%93%D0%A3_20260523_120447.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%B0%D1%80%D1%83%D0%B6%D0%BD%D0%BE%D0%B5_%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BA%D0%BB%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B,_%D0%9C%D0%93%D0%A3_20260523_120447.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Lesless",
+     "score": 0,
+     "terme": "Liebert precision cooling",
+     "poids": 103547
+    },
+    {
+     "fichier": "Наружное оборудование климатической системы 20260523 115806.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/%D0%9D%D0%B0%D1%80%D1%83%D0%B6%D0%BD%D0%BE%D0%B5_%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BA%D0%BB%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B_20260523_115806.jpg/1920px-%D0%9D%D0%B0%D1%80%D1%83%D0%B6%D0%BD%D0%BE%D0%B5_%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BA%D0%BB%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B_20260523_115806.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%B0%D1%80%D1%83%D0%B6%D0%BD%D0%BE%D0%B5_%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BA%D0%BB%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B_20260523_115806.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Lesless",
+     "score": 0,
+     "terme": "Liebert precision cooling",
+     "poids": 136136
+    },
+    {
+     "fichier": "Emerson Network Power Town Hall (9572874164).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Emerson_Network_Power_Town_Hall_%289572874164%29.jpg/1920px-Emerson_Network_Power_Town_Hall_%289572874164%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Emerson_Network_Power_Town_Hall_(9572874164).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "repmobrooks",
+     "score": 0,
+     "terme": "Emerson Network Power",
+     "poids": 112522
+    }
+   ]
+  },
+  "VST": {
+   "candidats": [
+    {
+     "fichier": "Power line bird diverters at Moss Landing, California.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Power_line_bird_diverters_at_Moss_Landing%2C_California.jpg/1920px-Power_line_bird_diverters_at_Moss_Landing%2C_California.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Power_line_bird_diverters_at_Moss_Landing,_California.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Hydrargyrum",
+     "score": 3,
+     "terme": "Moss Landing Power Plant",
+     "poids": 21481
+    },
+    {
+     "fichier": "USACE Martins Fork Dam and Lake.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/USACE_Martins_Fork_Dam_and_Lake.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:USACE_Martins_Fork_Dam_and_Lake.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "George Green, U.S. Army Corps of Engineers",
+     "score": 0,
+     "terme": "Martin Lake Power Plant",
+     "poids": 93720
+    },
+    {
+     "fichier": "River Bend Nuclear Station, Unit 1 (32540002895) (3).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/River_Bend_Nuclear_Station%2C_Unit_1_%2832540002895%29_%283%29.jpg/1920px-River_Bend_Nuclear_Station%2C_Unit_1_%2832540002895%29_%283%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:River_Bend_Nuclear_Station,_Unit_1_(32540002895)_(3).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Nuclear Regulatory Commission from US",
+     "score": 0,
+     "terme": "Comanche Peak Nuclear Power Plant",
+     "poids": 110734
+    }
+   ]
+  },
+  "ZTS": {
+   "candidats": [
+    {
+     "fichier": "ZoetisBuilding.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/ZoetisBuilding.jpg/1920px-ZoetisBuilding.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:ZoetisBuilding.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Briftrecur at  Wikipedia",
+     "score": 0,
+     "terme": "Zoetis",
+     "poids": 73050
+    },
+    {
+     "fichier": "Vac-lysvulpen.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Vac-lysvulpen.jpg/1920px-Vac-lysvulpen.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Vac-lysvulpen.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Izvora",
+     "score": 0,
+     "terme": "animal health vaccine",
+     "poids": 170268
+    },
+    {
+     "fichier": "US Navy 070810-N-4954I-120 Lt. Col. Raveesh Chhajed, a veterinarian from the Indian Army, gives a family cat a rabies vaccination while onlookers gather to see the procedure.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/US_Navy_070810-N-4954I-120_Lt._Col._Raveesh_Chhajed%2C_a_veterinarian_from_the_Indian_Army%2C_gives_a_family_cat_a_rabies_vaccination_while_onlookers_gather_to_see_the_procedure.jpg/1920px-thumbnail.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:US_Navy_070810-N-4954I-120_Lt._Col._Raveesh_Chhajed,_a_veterinarian_from_the_Indian_Army,_gives_a_family_cat_a_rabies_vaccination_while_onlookers_gather_to_see_the_procedure.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Navy photo by Mass Communication Specialist 3rd Class Bryan M. Ilyankoff",
+     "score": 0,
+     "terme": "animal health vaccine",
+     "poids": 93942
+    }
+   ]
+  }
+ }
+}
