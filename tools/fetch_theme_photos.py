@@ -40,20 +40,34 @@ LICENCES_KO = ("by-sa", "by-nc", "nd", "fair use", "non-free", "copyright")
 # Requêtes par thème. Plusieurs formulations : Commons est inégalement fourni,
 # et une seule requête donne souvent des résultats hors sujet.
 REQUETES = {
-    "principale":      ["stock market index board", "financial market data screen", "stock exchange display panel"],
-    "semis":           ["silicon wafer", "semiconductor fabrication cleanroom", "integrated circuit die"],
-    "memoire":         ["DRAM memory module", "computer memory chips", "hard disk drive platter"],
-    "ia":              ["data center servers", "server room network", "supercomputer racks"],
-    "robotique":       ["industrial robot arm factory", "robotic assembly line", "welding robot"],
-    "finance":         ["stock exchange trading floor", "financial district skyline", "bank building facade"],
-    "peages":          ["stock ticker display", "trading screens data", "exchange building columns"],
-    "compounders":     ["factory production line machinery", "freight train cargo", "industrial turbine"],
-    "conso":           ["supermarket shelves products", "grocery store aisle", "beverage bottles production"],
-    "sante":           ["laboratory research microscope", "pharmaceutical production line", "medical imaging scanner"],
-    "defense":         ["radar antenna installation", "military aircraft formation", "naval frigate at sea"],
-    "electrification": ["high voltage transmission towers", "electrical substation transformer", "power grid pylons"],
-    "decote":          ["stock market chart decline", "financial newspaper stock listings", "candlestick chart screen"],
-    "qualite":         ["precision machining workshop", "swiss watch movement", "quality control inspection"],
+    # Périmètre resserré à trois watchlists (août 2026). Les requêtes visent des
+    # objets PHOTOGRAPHIABLES et non des concepts : « salle de marché » donne des
+    # photos, « finance » donne des logos et des graphiques de synthèse. On tente
+    # plusieurs formulations parce que Commons est très inégalement fourni.
+    "principale": [
+        "stock exchange trading floor traders",
+        "stock market display board airport",
+        "financial data terminal screens",
+        "new york stock exchange interior",
+        "trading desk multiple monitors",
+    ],
+    "infra-ia": [
+        "data center server room aisle",
+        "supercomputer racks hall",
+        "silicon wafer semiconductor",
+        "server rack cabling datacenter",
+        "cleanroom semiconductor fabrication",
+        "fiber optic cables bundle",
+        "electrical substation transformer high voltage",
+    ],
+    "financials": [
+        "stock exchange building facade columns",
+        "bank headquarters building facade",
+        "financial district skyline towers",
+        "trading floor exchange hall",
+        "wall street street sign buildings",
+        "bank vault door",
+    ],
 }
 
 
