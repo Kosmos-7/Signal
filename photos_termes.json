@@ -1,95 +1,143 @@
 {
- "societes": 1,
+ "societes": 2,
  "detail": {
-  "NVDA": {
+  "ASML.AS": {
    "candidats": [
     {
-     "fichier": "Susan B. Anthony & Alice Stone Blackwell signed NAWSA check.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Susan_B._Anthony_%26_Alice_Stone_Blackwell_signed_NAWSA_check.jpg/1920px-Susan_B._Anthony_%26_Alice_Stone_Blackwell_signed_NAWSA_check.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Susan_B._Anthony_%26_Alice_Stone_Blackwell_signed_NAWSA_check.jpg",
+     "fichier": "Spectrum of lithography lights.PNG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Spectrum_of_lithography_lights.PNG",
+     "page": "https://commons.wikimedia.org/wiki/File:Spectrum_of_lithography_lights.PNG",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Shigeru23",
+     "score": 0,
+     "terme": "extreme ultraviolet lithography",
+     "poids": 55264
+    },
+    {
+     "fichier": "How EUV lithography works.webm",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/How_EUV_lithography_works.webm/1920px--How_EUV_lithography_works.webm.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:How_EUV_lithography_works.webm",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "IBM Research",
+     "score": 0,
+     "terme": "EUV lithography machine",
+     "poids": 13969
+    },
+    {
+     "fichier": "EUV Defect Printability.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/EUV_Defect_Printability.png",
+     "page": "https://commons.wikimedia.org/wiki/File:EUV_Defect_Printability.png",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Guiding light",
+     "score": 0,
+     "terme": "extreme ultraviolet lithography",
+     "poids": 53550
+    },
+    {
+     "fichier": "Towards high accuracy reflectometry for extreme-ultraviolet lithography (IA jresv108n4p267).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Towards_high_accuracy_reflectometry_for_extreme-ultraviolet_lithography_%28IA_jresv108n4p267%29.pdf/page1-960px-Towards_high_accuracy_reflectometry_for_extreme-ultraviolet_lithography_%28IA_jresv108n4p267%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Towards_high_accuracy_reflectometry_for_extreme-ultraviolet_lithography_(IA_jresv108n4p267).pdf",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "National Museum of American History\n",
-     "score": 0,
-     "terme": "Nvidia Blackwell",
-     "poids": 89951
+     "auteur": "\nTarrio, C.\nGrantham, S.\nVest, R.E.\nSquires, M.B.\nLucatorto, T.B.",
+     "score": -12,
+     "terme": "extreme ultraviolet lithography",
+     "poids": 73667
     },
     {
-     "fichier": "RTX 50系显卡来了！NV有哪些干货？ (2160p 60fps VP9-128kbit AAC)-00.18.57.052.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.18.57.052.png/1920px-RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.18.57.052.png",
-     "page": "https://commons.wikimedia.org/wiki/File:RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_(2160p_60fps_VP9-128kbit_AAC)-00.18.57.052.png",
-     "licence": "CC BY 3.0",
+     "fichier": "Sales catalogue 414- Tregaskis (IA b31809133).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Sales_catalogue_414-_Tregaskis_%28IA_b31809133%29.pdf/page1-960px-Sales_catalogue_414-_Tregaskis_%28IA_b31809133%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Sales_catalogue_414-_Tregaskis_(IA_b31809133).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "EUV lithography machine",
+     "poids": 157175
+    },
+    {
+     "fichier": "Physics laboratory, technical activities 1998 (IA physicslaborator6268unse).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Physics_laboratory%2C_technical_activities_1998_%28IA_physicslaborator6268unse%29.pdf/page1-960px-Physics_laboratory%2C_technical_activities_1998_%28IA_physicslaborator6268unse%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Physics_laboratory,_technical_activities_1998_(IA_physicslaborator6268unse).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "EUV lithography machine",
+     "poids": 65665
+    }
+   ]
+  },
+  "TSM": {
+   "candidats": [
+    {
+     "fichier": "Trucks entering and leaving TSMC Fab 18 May 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Trucks_entering_and_leaving_TSMC_Fab_18_May_2025.jpg/1920px-Trucks_entering_and_leaving_TSMC_Fab_18_May_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Trucks_entering_and_leaving_TSMC_Fab_18_May_2025.jpg",
+     "licence": "CC BY 4.0",
      "famille": "by",
-     "auteur": "极客湾Geekerwan",
+     "auteur": "4300streetcar",
      "score": 0,
-     "terme": "Nvidia DGX",
-     "poids": 36479
+     "terme": "TSMC fab",
+     "poids": 94852
     },
     {
-     "fichier": "RTX 50系显卡来了！NV有哪些干货？ (2160p 60fps VP9-128kbit AAC)-00.18.49.165.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.18.49.165.png/1920px-RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.18.49.165.png",
-     "page": "https://commons.wikimedia.org/wiki/File:RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_(2160p_60fps_VP9-128kbit_AAC)-00.18.49.165.png",
-     "licence": "CC BY 3.0",
+     "fichier": "TSMC fabs in Hsinchu 02.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/TSMC_fabs_in_Hsinchu_02.jpg/1920px-TSMC_fabs_in_Hsinchu_02.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:TSMC_fabs_in_Hsinchu_02.jpg",
+     "licence": "CC BY 2.0",
      "famille": "by",
-     "auteur": "极客湾Geekerwan",
+     "auteur": "曾 成訓",
      "score": 0,
-     "terme": "Nvidia DGX",
-     "poids": 36763
+     "terme": "TSMC Fab 18",
+     "poids": 59567
     },
     {
-     "fichier": "RTX 50系显卡来了！NV有哪些干货？ (2160p 60fps VP9-128kbit AAC)-00.00.21.904.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.00.21.904.png/1920px-RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_%282160p_60fps_VP9-128kbit_AAC%29-00.00.21.904.png",
-     "page": "https://commons.wikimedia.org/wiki/File:RTX_50%E7%B3%BB%E6%98%BE%E5%8D%A1%E6%9D%A5%E4%BA%86%EF%BC%81NV%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B2%E8%B4%A7%EF%BC%9F_(2160p_60fps_VP9-128kbit_AAC)-00.00.21.904.png",
-     "licence": "CC BY 3.0",
+     "fichier": "TSMC fabs in Hsinchu 01.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/TSMC_fabs_in_Hsinchu_01.jpg/1920px-TSMC_fabs_in_Hsinchu_01.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:TSMC_fabs_in_Hsinchu_01.jpg",
+     "licence": "CC BY 2.0",
      "famille": "by",
-     "auteur": "极客湾Geekerwan",
+     "auteur": "曾 成訓",
      "score": 0,
-     "terme": "Nvidia DGX",
-     "poids": 40585
+     "terme": "TSMC fab",
+     "poids": 72512
     },
     {
-     "fichier": "Nvidia DGX-B200-HGX.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Nvidia_DGX-B200-HGX.jpg/1920px-Nvidia_DGX-B200-HGX.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX-B200-HGX.jpg",
+     "fichier": "TSMC fab 22 under construction Kaohsiung, Nanzih District, Taiwan Apr 13, 2024 05-44-42 PM.jpeg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/TSMC_fab_22_under_construction_Kaohsiung%2C_Nanzih_District%2C_Taiwan_Apr_13%2C_2024_05-44-42_PM.jpeg/1920px-TSMC_fab_22_under_construction_Kaohsiung%2C_Nanzih_District%2C_Taiwan_Apr_13%2C_2024_05-44-42_PM.jpeg",
+     "page": "https://commons.wikimedia.org/wiki/File:TSMC_fab_22_under_construction_Kaohsiung,_Nanzih_District,_Taiwan_Apr_13,_2024_05-44-42_PM.jpeg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Pokiiri",
+     "auteur": "Thingreenline4546",
      "score": 0,
-     "terme": "Nvidia DGX",
-     "poids": 118815
+     "terme": "TSMC fab",
+     "poids": 120121
     },
     {
-     "fichier": "Nvidia DGX metal foam dllu.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Nvidia_DGX_metal_foam_dllu.jpg/1920px-Nvidia_DGX_metal_foam_dllu.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_metal_foam_dllu.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Daniel Lu (User:dllu)",
+     "fichier": "TSMC Fab construction, Phoenix, AZ (4686c1e9-69a6-4ab5-a48c-4547b260183e).tiff",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/TSMC_Fab_construction%2C_Phoenix%2C_AZ_%284686c1e9-69a6-4ab5-a48c-4547b260183e%29.tiff/lossy-page1-1920px-TSMC_Fab_construction%2C_Phoenix%2C_AZ_%284686c1e9-69a6-4ab5-a48c-4547b260183e%29.tiff.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:TSMC_Fab_construction,_Phoenix,_AZ_(4686c1e9-69a6-4ab5-a48c-4547b260183e).tiff",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Umbra Lab, Inc.",
      "score": 0,
-     "terme": "Nvidia DGX",
-     "poids": 203311
+     "terme": "TSMC fab",
+     "poids": 77868
     },
     {
-     "fichier": "Nvidia DGX front view dllu.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Nvidia_DGX_front_view_dllu.jpg/1920px-Nvidia_DGX_front_view_dllu.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_front_view_dllu.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Daniel Lu (User:dllu)",
+     "fichier": "TSMC Fab 6 front May 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/TSMC_Fab_6_front_May_2025.jpg/1920px-TSMC_Fab_6_front_May_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:TSMC_Fab_6_front_May_2025.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "4300streetcar",
      "score": 0,
-     "terme": "Nvidia DGX",
-     "poids": 63404
-    },
-    {
-     "fichier": "Nvidia DGX Spark rear ports dllu.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Nvidia_DGX_Spark_rear_ports_dllu.jpg/1920px-Nvidia_DGX_Spark_rear_ports_dllu.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_Spark_rear_ports_dllu.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Daniel Lu (User:dllu)",
-     "score": 0,
-     "terme": "Nvidia DGX",
-     "poids": 64427
+     "terme": "TSMC fab",
+     "poids": 106018
     }
    ]
   }
