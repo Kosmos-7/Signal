@@ -149,6 +149,36 @@
   "page": "https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg",
   "licence": "Public domain"
  },
+ "CIEN": {
+  "legende": "Châssis optique Ciena 6500",
+  "source": "File:Ciena 6500.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ciena_6500.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "C0pMer · CC BY-SA 4.0"
+ },
+ "CME": {
+  "legende": "Chicago Board of Trade, place de marché du groupe CME",
+  "source": "File:Chicago Board of Trade and Continental and Commercial Bank.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Chicago_Board_of_Trade_and_Continental_and_Commercial_Bank.jpg",
+  "licence": "CC BY-SA 3.0",
+  "credit": "Wynn Diancin · CC BY-SA 3.0"
+ },
+ "CRM": {
+  "legende": "Salesforce Tower dominant le centre de San Francisco",
+  "source": "File:San Francisco, California April 2022 Salesforce Tower.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:San_Francisco,_California_April_2022_Salesforce_Tower.jpg",
+  "licence": "CC BY 2.0",
+  "credit": "Sharon Hahn Darlin · CC BY 2.0"
+ },
+ "CSCO": {
+  "legende": "Carte d'un commutateur Cisco Catalyst 3750",
+  "source": "File:PCB of Cisco Catalyst 3750 (3750G-24T) (15481833861).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:PCB_of_Cisco_Catalyst_3750_(3750G-24T)_(15481833861).jpg",
+  "licence": "CC BY-SA 2.0",
+  "type": "produit",
+  "credit": "htomari · CC BY-SA 2.0"
+ },
  "DB1.DE": {
   "legende": "Ancienne Bourse, Deutsche Börse",
   "source": "File:Alte Boerse (Aussenfassade).jpg",
@@ -195,6 +225,29 @@
   "type": "produit",
   "credit": "Dmitry G · CC BY-SA 3.0"
  },
+ "FICO": {
+  "legende": "Siège de Fair Isaac Corporation",
+  "source": "File:Ficoheadquarters.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ficoheadquarters.jpg",
+  "licence": "CC BY-SA 4.0",
+  "credit": "Coolcaesar · CC BY-SA 4.0"
+ },
+ "GILD": {
+  "legende": "Truvada, antirétroviral de Gilead Sciences",
+  "source": "File:Truvada for PrEP HIV Prevention Prescription Pill Bottle (48610088067).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Truvada_for_PrEP_HIV_Prevention_Prescription_Pill_Bottle_(48610088067).jpg",
+  "licence": "CC BY-SA 2.0",
+  "type": "produit",
+  "credit": "Tony Webster from Minneapolis, Minnesota, United States · CC BY-SA 2.0"
+ },
+ "GOOGL": {
+  "legende": "Robotaxi Waymo, filiale d'Alphabet, à San Francisco",
+  "source": "File:Waymo self-driving car. (52194843144).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Waymo_self-driving_car._(52194843144).jpg",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "Daniel Ramirez from Honolulu, USA · CC BY 2.0"
+ },
  "GS": {
   "legende": "Siège de Goldman Sachs, New York",
   "source": "File:Goldman Sachs New World Headquarters.JPG",
@@ -216,6 +269,13 @@
   "licence": "CC BY-SA 4.0",
   "credit": "auteur non précisé · CC BY-SA 4.0"
  },
+ "ICE": {
+  "legende": "Salle des marchés du New York Stock Exchange, filiale d'Intercontinental Exchange",
+  "source": "File:Trading floor, New York Stock Exchange, New York, New York LCCN2011630168.tif",
+  "page": "https://commons.wikimedia.org/wiki/File:Trading_floor,_New_York_Stock_Exchange,_New_York,_New_York_LCCN2011630168.tif",
+  "licence": "Public domain",
+  "type": "produit"
+ },
  "IFX.DE": {
   "legende": "Puce Infineon PSB 50712 sur une carte de routeur",
   "source": "Sphairon Turbolink 7211 - board - Infineon PSB 50712 E-2372",
@@ -229,6 +289,22 @@
   "source": "File:Intel Japan Tsukuba Office.jpg",
   "page": "https://commons.wikimedia.org/wiki/File:Intel_Japan_Tsukuba_Office.jpg",
   "licence": "CC0"
+ },
+ "INTU": {
+  "legende": "TurboTax d'Intuit, édition 2003",
+  "source": "File:TurboTax Basic 2003 box disc and store receipt.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:TurboTax_Basic_2003_box_disc_and_store_receipt.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Jonathan Schilling · CC BY-SA 4.0"
+ },
+ "JPM": {
+  "legende": "Carte de retrait Chase, banque de détail de JPMorgan",
+  "source": "File:CHASE ATM card-2476522151 5690b161be o.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:CHASE_ATM_card-2476522151_5690b161be_o.jpg",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "Logan Antill · CC BY 2.0"
  },
  "KLAC": {
   "legende": "Site de KLA Corporation à Ann Arbor, Michigan",
@@ -250,6 +326,20 @@
   "licence": "CC BY-SA 4.0",
   "type": "produit",
   "credit": "Raimond Spekking · CC BY-SA 4.0"
+ },
+ "MRVL": {
+  "legende": "Puce Marvell 88W8887 sur une carte Chromecast",
+  "source": "File:Chromecast Audio RUX-J42 - board - Marvell 88W8887-NAA2-5877.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Chromecast_Audio_RUX-J42_-_board_-_Marvell_88W8887-NAA2-5877.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Raimond Spekking · CC BY-SA 4.0"
+ },
+ "MS": {
+  "legende": "Enseigne de Morgan Stanley à Times Square",
+  "source": "File:Morgan Stanley on Times Square.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Morgan_Stanley_on_Times_Square.JPG",
+  "licence": "Public domain"
  },
  "MSFT": {
   "legende": "Campus ouest de Microsoft, Redmond",
@@ -326,6 +416,14 @@
   "type": "produit",
   "credit": "Oracle PR · CC BY 2.0"
  },
+ "PGR": {
+  "legende": "Véhicule d'expertise sinistres de Progressive",
+  "source": "File:Progressive truck, Valdosta.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Progressive_truck,_Valdosta.JPG",
+  "licence": "CC BY-SA 3.0",
+  "type": "produit",
+  "credit": "Michael Rivera · CC BY-SA 3.0"
+ },
  "PLTR": {
   "legende": "Pavillon Palantir au Forum économique mondial de Davos",
   "source": "Palantir pavilion, World Economic Forum, Davos, Switzerland",
@@ -356,6 +454,14 @@
   "type": "produit",
   "credit": "Aranami · CC BY 2.0"
  },
+ "SIE.DE": {
+  "legende": "Rame Velaro Novo de Siemens Mobility",
+  "source": "File:Wagen Velaro Novo.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Wagen_Velaro_Novo.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Niklas Wolter · CC BY-SA 4.0"
+ },
  "SNDK": {
   "legende": "Mémoire SanDisk Extreme",
   "source": "File:Sandisk Extreme III 2GB flash chip.jpg",
@@ -385,6 +491,14 @@
   "licence": "CC BY-SA 3.0",
   "credit": "Chmee2 · CC BY-SA 3.0"
  },
+ "TER": {
+  "legende": "Bras collaboratif UR16e d'Universal Robots, filiale de Teradyne",
+  "source": "File:UR16e robot arm.png",
+  "page": "https://commons.wikimedia.org/wiki/File:UR16e_robot_arm.png",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Auledas · CC BY-SA 4.0"
+ },
  "TFC": {
   "legende": "Truist Financial Center à Hagerstown, Maryland",
   "source": "Truist Financial Center - Hagerstown, Maryland",
@@ -398,6 +512,13 @@
   "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
   "licence": "CC0",
   "type": "produit"
+ },
+ "UBSG.SW": {
+  "legende": "Agence UBS, Bahnhofstrasse à Zurich",
+  "source": "File:UBS Munzhof, Zurich Bahnhofstrasse (Ank Kumar, Infosys Limited) 44.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:UBS_Munzhof,_Zurich_Bahnhofstrasse_(Ank_Kumar,_Infosys_Limited)_44.jpg",
+  "licence": "CC BY-SA 4.0",
+  "credit": "Ank Kumar  · CC BY-SA 4.0"
  },
  "V": {
   "legende": "Terminal de paiement acceptant Visa",

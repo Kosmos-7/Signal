@@ -5,7 +5,7 @@ l'illustration de leur activité. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
-## Cinq sources, par ordre de découverte
+## Six sources, par ordre de découverte
 
 1. **Recherche textuelle sur Commons.** Cherche des MOTS, se trompe dans 43 %
    des cas : le siège de la Banque mondiale pour Bank of America, un
@@ -18,13 +18,24 @@ fondeur, un immeuble de verre ne dit rien.
 4. **Données structurées de Commons (P180, « dépeint »).** Retourne les images
    que des contributeurs ont explicitement rattachées à l'entité. Plus large que
    P18, plus sûr qu'une recherche de mots.
-5. **Openverse.** Les quatre premières sources puisent dans le MÊME fonds,
+6. **Openverse.** Les quatre premières sources puisent dans le MÊME fonds,
    Wikimedia Commons ; quand il ne contient rien, aucune ruse d'interrogation
    n'y change quoi que ce soit. Openverse agrège Flickr, des musées et des
    banques d'images ouvertes, soit un corpus distinct où l'on a trouvé le
    serveur SPARC d'Oracle, la baie NetApp, les cartes bancaires et la foreuse
    de Cameco. Contrepartie : personne n'y a validé qu'une photo montre bien la
    société annoncée, et le tri automatique y est aussi faible qu'au point 1.
+
+5. **La marque et le produit, pas la raison sociale.** Les cinq premières
+   passes interrogeaient toutes le NOM DE LA SOCIÉTÉ. C'est le bon identifiant
+   pour une base de données, le mauvais pour une photothèque : personne ne
+   titre son image « Vertiv », on écrit « Liebert UPS » ; personne n'écrit
+   « Teradyne » sous un bras robotisé, on écrit « Universal Robots UR16e » ;
+   personne ne photographie « Constellation Energy », on photographie la
+   centrale de Calvert Cliffs. En inversant la question, 16 sociétés de plus
+   ont trouvé leur image, toutes sous licence libre. La correspondance société
+   vers marques est écrite à la main et vérifiée : c'est exactement le savoir
+   qu'aucune API ne porte.
 
 ### Accéder à Openverse
 
@@ -70,7 +81,7 @@ crédit : il est AFFICHÉ SUR LA FICHE sous la légende. Les images sont recadr�
 en 16:9 et assombries pour tenir sur fond sombre ; ces adaptations restent sous
 la licence de l'original.
 
-## Photos publiées (31 produits, 26 sites)
+## Photos publiées (42 produits, 31 sites)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -232,6 +243,38 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg
 - Licence : Public domain
 
+### CIEN — Châssis optique Ciena 6500
+
+- Nature : produit
+- Fichier : `assets/titres/CIEN.jpg`
+- Source : File:Ciena 6500.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Ciena_6500.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : C0pMer · CC BY-SA 4.0
+
+### CME — Chicago Board of Trade, place de marché du groupe CME
+
+- Nature : site
+- Fichier : `assets/titres/CME.jpg`
+- Source : File:Chicago Board of Trade and Continental and Commercial Bank.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Chicago_Board_of_Trade_and_Continental_and_Commercial_Bank.jpg
+- Licence : CC BY-SA 3.0 — crédit affiché : Wynn Diancin · CC BY-SA 3.0
+
+### CRM — Salesforce Tower dominant le centre de San Francisco
+
+- Nature : site
+- Fichier : `assets/titres/CRM.jpg`
+- Source : File:San Francisco, California April 2022 Salesforce Tower.jpg
+- Page : https://commons.wikimedia.org/wiki/File:San_Francisco,_California_April_2022_Salesforce_Tower.jpg
+- Licence : CC BY 2.0 — crédit affiché : Sharon Hahn Darlin · CC BY 2.0
+
+### CSCO — Carte d'un commutateur Cisco Catalyst 3750
+
+- Nature : produit
+- Fichier : `assets/titres/CSCO.jpg`
+- Source : File:PCB of Cisco Catalyst 3750 (3750G-24T) (15481833861).jpg
+- Page : https://commons.wikimedia.org/wiki/File:PCB_of_Cisco_Catalyst_3750_(3750G-24T)_(15481833861).jpg
+- Licence : CC BY-SA 2.0 — crédit affiché : htomari · CC BY-SA 2.0
+
 ### DB1.DE — Ancienne Bourse, Deutsche Börse
 
 - Nature : produit
@@ -280,6 +323,30 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/w/index.php?curid=19047797
 - Licence : CC BY-SA 3.0 — crédit affiché : Dmitry G · CC BY-SA 3.0
 
+### FICO — Siège de Fair Isaac Corporation
+
+- Nature : site
+- Fichier : `assets/titres/FICO.jpg`
+- Source : File:Ficoheadquarters.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Ficoheadquarters.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Coolcaesar · CC BY-SA 4.0
+
+### GILD — Truvada, antirétroviral de Gilead Sciences
+
+- Nature : produit
+- Fichier : `assets/titres/GILD.jpg`
+- Source : File:Truvada for PrEP HIV Prevention Prescription Pill Bottle (48610088067).jpg
+- Page : https://commons.wikimedia.org/wiki/File:Truvada_for_PrEP_HIV_Prevention_Prescription_Pill_Bottle_(48610088067).jpg
+- Licence : CC BY-SA 2.0 — crédit affiché : Tony Webster from Minneapolis, Minnesota, United States · CC BY-SA 2.0
+
+### GOOGL — Robotaxi Waymo, filiale d'Alphabet, à San Francisco
+
+- Nature : produit
+- Fichier : `assets/titres/GOOGL.jpg`
+- Source : File:Waymo self-driving car. (52194843144).jpg
+- Page : https://commons.wikimedia.org/wiki/File:Waymo_self-driving_car._(52194843144).jpg
+- Licence : CC BY 2.0 — crédit affiché : Daniel Ramirez from Honolulu, USA · CC BY 2.0
+
 ### GS — Siège de Goldman Sachs, New York
 
 - Nature : site
@@ -304,6 +371,14 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:8-Canada-Square_(cropped).jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : auteur non précisé · CC BY-SA 4.0
 
+### ICE — Salle des marchés du New York Stock Exchange, filiale d'Intercontinental Exchange
+
+- Nature : produit
+- Fichier : `assets/titres/ICE.jpg`
+- Source : File:Trading floor, New York Stock Exchange, New York, New York LCCN2011630168.tif
+- Page : https://commons.wikimedia.org/wiki/File:Trading_floor,_New_York_Stock_Exchange,_New_York,_New_York_LCCN2011630168.tif
+- Licence : Public domain
+
 ### IFX.DE — Puce Infineon PSB 50712 sur une carte de routeur
 
 - Nature : produit
@@ -319,6 +394,22 @@ la licence de l'original.
 - Source : File:Intel Japan Tsukuba Office.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Intel_Japan_Tsukuba_Office.jpg
 - Licence : CC0
+
+### INTU — TurboTax d'Intuit, édition 2003
+
+- Nature : produit
+- Fichier : `assets/titres/INTU.jpg`
+- Source : File:TurboTax Basic 2003 box disc and store receipt.jpg
+- Page : https://commons.wikimedia.org/wiki/File:TurboTax_Basic_2003_box_disc_and_store_receipt.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Jonathan Schilling · CC BY-SA 4.0
+
+### JPM — Carte de retrait Chase, banque de détail de JPMorgan
+
+- Nature : produit
+- Fichier : `assets/titres/JPM.jpg`
+- Source : File:CHASE ATM card-2476522151 5690b161be o.jpg
+- Page : https://commons.wikimedia.org/wiki/File:CHASE_ATM_card-2476522151_5690b161be_o.jpg
+- Licence : CC BY 2.0 — crédit affiché : Logan Antill · CC BY 2.0
 
 ### KLAC — Site de KLA Corporation à Ann Arbor, Michigan
 
@@ -343,6 +434,22 @@ la licence de l'original.
 - Source : Thomson 22FB3113W - board - Monolithic Power Systems MPS1613-0933
 - Page : https://commons.wikimedia.org/w/index.php?curid=190602285
 - Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
+
+### MRVL — Puce Marvell 88W8887 sur une carte Chromecast
+
+- Nature : produit
+- Fichier : `assets/titres/MRVL.jpg`
+- Source : File:Chromecast Audio RUX-J42 - board - Marvell 88W8887-NAA2-5877.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Chromecast_Audio_RUX-J42_-_board_-_Marvell_88W8887-NAA2-5877.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
+
+### MS — Enseigne de Morgan Stanley à Times Square
+
+- Nature : site
+- Fichier : `assets/titres/MS.jpg`
+- Source : File:Morgan Stanley on Times Square.JPG
+- Page : https://commons.wikimedia.org/wiki/File:Morgan_Stanley_on_Times_Square.JPG
+- Licence : Public domain
 
 ### MSFT — Campus ouest de Microsoft, Redmond
 
@@ -424,6 +531,14 @@ la licence de l'original.
 - Page : https://www.flickr.com/photos/49034885@N05/5006317222
 - Licence : CC BY 2.0 — crédit affiché : Oracle PR · CC BY 2.0
 
+### PGR — Véhicule d'expertise sinistres de Progressive
+
+- Nature : produit
+- Fichier : `assets/titres/PGR.jpg`
+- Source : File:Progressive truck, Valdosta.JPG
+- Page : https://commons.wikimedia.org/wiki/File:Progressive_truck,_Valdosta.JPG
+- Licence : CC BY-SA 3.0 — crédit affiché : Michael Rivera · CC BY-SA 3.0
+
 ### PLTR — Pavillon Palantir au Forum économique mondial de Davos
 
 - Nature : site
@@ -455,6 +570,14 @@ la licence de l'original.
 - Source : Chip-enabled Charles Schwab Bank Visa Debit Card
 - Page : https://www.flickr.com/photos/51526368@N03/16292864811
 - Licence : CC BY 2.0 — crédit affiché : Aranami · CC BY 2.0
+
+### SIE.DE — Rame Velaro Novo de Siemens Mobility
+
+- Nature : produit
+- Fichier : `assets/titres/SIE.DE.jpg`
+- Source : File:Wagen Velaro Novo.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Wagen_Velaro_Novo.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Niklas Wolter · CC BY-SA 4.0
 
 ### SNDK — Mémoire SanDisk Extreme
 
@@ -488,6 +611,14 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/w/index.php?curid=2025468
 - Licence : CC BY-SA 3.0 — crédit affiché : Chmee2 · CC BY-SA 3.0
 
+### TER — Bras collaboratif UR16e d'Universal Robots, filiale de Teradyne
+
+- Nature : produit
+- Fichier : `assets/titres/TER.jpg`
+- Source : File:UR16e robot arm.png
+- Page : https://commons.wikimedia.org/wiki/File:UR16e_robot_arm.png
+- Licence : CC BY-SA 4.0 — crédit affiché : Auledas · CC BY-SA 4.0
+
 ### TFC — Truist Financial Center à Hagerstown, Maryland
 
 - Nature : site
@@ -503,6 +634,14 @@ la licence de l'original.
 - Source : File:S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07389-DSC07389.jpg
 - Page : https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg
 - Licence : CC0
+
+### UBSG.SW — Agence UBS, Bahnhofstrasse à Zurich
+
+- Nature : site
+- Fichier : `assets/titres/UBSG.SW.jpg`
+- Source : File:UBS Munzhof, Zurich Bahnhofstrasse (Ank Kumar, Infosys Limited) 44.jpg
+- Page : https://commons.wikimedia.org/wiki/File:UBS_Munzhof,_Zurich_Bahnhofstrasse_(Ank_Kumar,_Infosys_Limited)_44.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Ank Kumar  · CC BY-SA 4.0
 
 ### V — Terminal de paiement acceptant Visa
 

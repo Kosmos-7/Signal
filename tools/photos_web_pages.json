@@ -1,0 +1,174 @@
+{
+ "_lisez_moi": [
+  "Pages du site de chaque société où chercher un visuel officiel.",
+  "AUCUNE de ces images n'est libre de droit. Le propriétaire du dépôt a",
+  "autorisé leur usage en connaissance de cause ; la provenance de chacune est",
+  "consignée dans CREDITS.md pour qu'un retrait soit immédiat si demandé.",
+  "« domaine » est un garde-fou : une image n'est retenue que si elle est",
+  "servie depuis le site de la société, ce qui écarte les photos de tiers",
+  "reprises dans la page.",
+  "« conditions » dit ce qui a été VÉRIFIÉ sur la page, pas ce qu'on espère."
+ ],
+ "6146.T": [
+  {"page": "https://www.disco.co.jp/eg/products/index.html", "domaine": "disco.co.jp", "conditions": "non établies", "credit": "DISCO Corporation"},
+  {"page": "https://www.disco.co.jp/eg/index.html", "domaine": "disco.co.jp", "conditions": "non établies", "credit": "DISCO Corporation"}
+ ],
+ "6857.T": [
+  {"page": "https://www.advantest.com/en/products/semiconductor-test-system/soc/v93000/", "domaine": "advantest.com", "conditions": "non établies", "credit": "Advantest"},
+  {"page": "https://www.advantest.com/en/", "domaine": "advantest.com", "conditions": "non établies", "credit": "Advantest"}
+ ],
+ "8035.T": [
+  {"page": "https://www.tel.com/product/", "domaine": "tel.com", "conditions": "non établies", "credit": "Tokyo Electron"},
+  {"page": "https://www.tel.com/", "domaine": "tel.com", "conditions": "non établies", "credit": "Tokyo Electron"}
+ ],
+ "ASM.AS": [
+  {"page": "https://www.asm.com/products", "domaine": "asm.com", "conditions": "non établies", "credit": "ASM International"},
+  {"page": "https://www.asm.com/", "domaine": "asm.com", "conditions": "non établies", "credit": "ASM International"}
+ ],
+ "LRCX": [
+  {"page": "https://www.lamresearch.com/products/", "domaine": "lamresearch.com", "conditions": "non établies", "credit": "Lam Research"},
+  {"page": "https://www.lamresearch.com/", "domaine": "lamresearch.com", "conditions": "non établies", "credit": "Lam Research"}
+ ],
+ "TER": [
+  {"page": "https://www.teradyne.com/products/", "domaine": "teradyne.com", "conditions": "non établies", "credit": "Teradyne"},
+  {"page": "https://www.teradyne.com/", "domaine": "teradyne.com", "conditions": "non établies", "credit": "Teradyne"}
+ ],
+ "ANET": [
+  {"page": "https://www.arista.com/en/products/platforms", "domaine": "arista.com", "conditions": "non établies", "credit": "Arista Networks"},
+  {"page": "https://www.arista.com/en/", "domaine": "arista.com", "conditions": "non établies", "credit": "Arista Networks"}
+ ],
+ "CIEN": [
+  {"page": "https://www.ciena.com/products", "domaine": "ciena.com", "conditions": "non établies", "credit": "Ciena"},
+  {"page": "https://www.ciena.com/", "domaine": "ciena.com", "conditions": "non établies", "credit": "Ciena"}
+ ],
+ "LITE": [
+  {"page": "https://www.lumentum.com/en/products", "domaine": "lumentum.com", "conditions": "non établies", "credit": "Lumentum"},
+  {"page": "https://www.lumentum.com/en", "domaine": "lumentum.com", "conditions": "non établies", "credit": "Lumentum"}
+ ],
+ "COHR": [
+  {"page": "https://www.coherent.com/lasers", "domaine": "coherent.com", "conditions": "non établies", "credit": "Coherent"},
+  {"page": "https://www.coherent.com/", "domaine": "coherent.com", "conditions": "non établies", "credit": "Coherent"}
+ ],
+ "VRT": [
+  {"page": "https://www.vertiv.com/en-us/products-catalog/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1/", "domaine": "vertiv.com", "conditions": "non établies", "credit": "Vertiv"},
+  {"page": "https://www.vertiv.com/en-us/", "domaine": "vertiv.com", "conditions": "non établies", "credit": "Vertiv"}
+ ],
+ "MRVL": [
+  {"page": "https://www.marvell.com/products/", "domaine": "marvell.com", "conditions": "non établies", "credit": "Marvell Technology"},
+  {"page": "https://www.marvell.com/", "domaine": "marvell.com", "conditions": "non établies", "credit": "Marvell Technology"}
+ ],
+ "ASX": [
+  {"page": "https://www.aseglobal.com/en/", "domaine": "aseglobal.com", "conditions": "non établies", "credit": "ASE Technology Holding"}
+ ],
+ "CSCO": [
+  {"page": "https://www.cisco.com/c/en/us/products/switches/index.html", "domaine": "cisco.com", "conditions": "non établies", "credit": "Cisco Systems"}
+ ],
+ "SIE.DE": [
+  {"page": "https://www.siemens.com/global/en/products.html", "domaine": "siemens.com", "conditions": "non établies", "credit": "Siemens"}
+ ],
+ "CRWV": [
+  {"page": "https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational", "domaine": "coreweave.com", "conditions": "communiqué de presse", "credit": "CoreWeave"},
+  {"page": "https://www.coreweave.com/", "domaine": "coreweave.com", "conditions": "non établies", "credit": "CoreWeave"}
+ ],
+ "NBIS": [
+  {"page": "https://nebius.com/data-centers", "domaine": "nebius.com", "conditions": "non établies", "credit": "Nebius Group"},
+  {"page": "https://nebius.com/", "domaine": "nebius.com", "conditions": "non établies", "credit": "Nebius Group"}
+ ],
+ "GEV": [
+  {"page": "https://www.gevernova.com/wind-power", "domaine": "gevernova.com", "conditions": "non établies", "credit": "GE Vernova"},
+  {"page": "https://www.gevernova.com/", "domaine": "gevernova.com", "conditions": "non établies", "credit": "GE Vernova"}
+ ],
+ "CEG": [
+  {"page": "https://www.constellationenergy.com/about/locations/calvert-cliffs-clean-energy-center.html", "domaine": "constellationenergy.com", "conditions": "non établies", "credit": "Constellation Energy"},
+  {"page": "https://www.constellationenergy.com/about/locations/braidwood-clean-energy-center.html", "domaine": "constellationenergy.com", "conditions": "non établies", "credit": "Constellation Energy"}
+ ],
+ "VST": [
+  {"page": "https://vistracorp.com/what-we-do/", "domaine": "vistracorp.com", "conditions": "non établies", "credit": "Vistra"},
+  {"page": "https://vistracorp.com/", "domaine": "vistracorp.com", "conditions": "non établies", "credit": "Vistra"}
+ ],
+ "PWR": [
+  {"page": "https://www.quantaservices.com/what-we-do/", "domaine": "quantaservices.com", "conditions": "non établies", "credit": "Quanta Services"},
+  {"page": "https://www.quantaservices.com/", "domaine": "quantaservices.com", "conditions": "non établies", "credit": "Quanta Services"}
+ ],
+ "ZTS": [
+  {"page": "https://www.zoetis.com/products-and-services", "domaine": "zoetis.com", "conditions": "non établies", "credit": "Zoetis"},
+  {"page": "https://www.zoetis.com/", "domaine": "zoetis.com", "conditions": "non établies", "credit": "Zoetis"}
+ ],
+ "GILD": [
+  {"page": "https://www.gilead.com/science-and-medicine", "domaine": "gilead.com", "conditions": "non établies", "credit": "Gilead Sciences"},
+  {"page": "https://www.gilead.com/", "domaine": "gilead.com", "conditions": "non établies", "credit": "Gilead Sciences"}
+ ],
+ "GOOGL": [
+  {"page": "https://waymo.com/waymo-one/", "domaine": "waymo.com", "conditions": "non établies", "credit": "Waymo, filiale d'Alphabet"},
+  {"page": "https://waymo.com/", "domaine": "waymo.com", "conditions": "non établies", "credit": "Waymo, filiale d'Alphabet"}
+ ],
+ "CRM": [
+  {"page": "https://www.salesforce.com/company/", "domaine": "salesforce.com", "conditions": "non établies", "credit": "Salesforce"}
+ ],
+ "INTU": [
+  {"page": "https://www.intuit.com/company/", "domaine": "intuit.com", "conditions": "non établies", "credit": "Intuit"}
+ ],
+ "ACN": [
+  {"page": "https://www.accenture.com/us-en/about/company-index", "domaine": "accenture.com", "conditions": "non établies", "credit": "Accenture"}
+ ],
+ "TCEHY": [
+  {"page": "https://www.tencent.com/en-us/about.html", "domaine": "tencent.com", "conditions": "non établies", "credit": "Tencent"}
+ ],
+ "PDD": [
+  {"page": "https://www.pddholdings.com/", "domaine": "pddholdings.com", "conditions": "non établies", "credit": "PDD Holdings"}
+ ],
+ "ICE": [
+  {"page": "https://www.nyse.com/index", "domaine": "nyse.com", "conditions": "non établies", "credit": "NYSE, filiale d'Intercontinental Exchange"}
+ ],
+ "CME": [
+  {"page": "https://www.cmegroup.com/company/about-us.html", "domaine": "cmegroup.com", "conditions": "non établies", "credit": "CME Group"}
+ ],
+ "LSEG.L": [
+  {"page": "https://www.lseg.com/en/about-us", "domaine": "lseg.com", "conditions": "non établies", "credit": "London Stock Exchange Group"}
+ ],
+ "MA": [
+  {"page": "https://www.mastercard.com/global/en/personal/find-a-card.html", "domaine": "mastercard.com", "conditions": "non établies", "credit": "Mastercard"}
+ ],
+ "JPM": [
+  {"page": "https://www.jpmorganchase.com/about", "domaine": "jpmorganchase.com", "conditions": "non établies", "credit": "JPMorgan Chase"}
+ ],
+ "MS": [
+  {"page": "https://www.morganstanley.com/about-us", "domaine": "morganstanley.com", "conditions": "non établies", "credit": "Morgan Stanley"}
+ ],
+ "BLK": [
+  {"page": "https://www.blackrock.com/corporate/about-us", "domaine": "blackrock.com", "conditions": "non établies", "credit": "BlackRock"}
+ ],
+ "KKR": [
+  {"page": "https://www.kkr.com/about", "domaine": "kkr.com", "conditions": "non établies", "credit": "KKR"}
+ ],
+ "MCO": [
+  {"page": "https://www.moodys.com/web/en/us/about.html", "domaine": "moodys.com", "conditions": "non établies", "credit": "Moody's"}
+ ],
+ "SPGI": [
+  {"page": "https://www.spglobal.com/en/who-we-are", "domaine": "spglobal.com", "conditions": "non établies", "credit": "S&P Global"}
+ ],
+ "MSCI": [
+  {"page": "https://www.msci.com/who-we-are", "domaine": "msci.com", "conditions": "non établies", "credit": "MSCI"}
+ ],
+ "FICO": [
+  {"page": "https://www.fico.com/en/about-us", "domaine": "fico.com", "conditions": "non établies", "credit": "Fair Isaac Corporation"}
+ ],
+ "PGR": [
+  {"page": "https://www.progressive.com/about/", "domaine": "progressive.com", "conditions": "non établies", "credit": "Progressive"}
+ ],
+ "CB": [
+  {"page": "https://www.chubb.com/us-en/about-chubb/", "domaine": "chubb.com", "conditions": "non établies", "credit": "Chubb"}
+ ],
+ "CS.PA": [
+  {"page": "https://www.axa.com/en/about-us", "domaine": "axa.com", "conditions": "non établies", "credit": "AXA"}
+ ],
+ "BNP.PA": [
+  {"page": "https://group.bnpparibas/en/group", "domaine": "bnpparibas", "conditions": "non établies", "credit": "BNP Paribas"}
+ ],
+ "MUV2.DE": [
+  {"page": "https://www.munichre.com/en/company/about-munich-re.html", "domaine": "munichre.com", "conditions": "non établies", "credit": "Munich Re"}
+ ],
+ "UBSG.SW": [
+  {"page": "https://www.ubs.com/global/en/our-firm.html", "domaine": "ubs.com", "conditions": "non établies", "credit": "UBS"}
+ ]
+}
