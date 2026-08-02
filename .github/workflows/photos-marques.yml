@@ -1,0 +1,62 @@
+# .github/workflows/photos-marques.yml
+# Sixième passe : interroger Commons sur les MARQUES, les filiales, les modèles
+# et les sites exploités plutôt que sur la raison sociale. Personne ne titre une
+# photo « Vertiv » : on écrit « Liebert UPS ».
+name: Photos de sociétés par marque et produit
+
+on:
+  workflow_dispatch:
+    inputs:
+      limite:
+        description: "Ne traiter que les N premières sociétés (0 = toutes)"
+        type: string
+        default: "0"
+      par_societe:
+        description: "Candidats téléchargés par société"
+        type: string
+        default: "3"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-data-commit
+  cancel-in-progress: false
+
+jobs:
+  marques:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install --quiet Pillow
+      - name: Chercher par marque et par produit
+        run: |
+          python tools/photos_marques.py \
+            --limite ${{ inputs.limite || '0' }} \
+            --par-societe ${{ inputs.par_societe || '3' }}
+      - name: Publier le rapport
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: photos-marques
+          path: |
+            photos_marques.json
+            assets/titres/marques/
+          retention-days: 7
+      - name: Commiter pour arbitrage visuel
+        if: always()
+        run: |
+          git config user.email "bot@signal.fr"
+          git config user.name "Signal Bot"
+          git add -A photos_marques.json assets/ 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "Rien de nouveau."
+          else
+            git commit -m "chore(photos): candidats par marque [skip ci]"
+            git pull --rebase --autostash || { git rebase --abort; exit 1; }
+            git push
+          fi
