@@ -1503,13 +1503,30 @@ def main():
     entrees = [s for s in top if s["ticker"] not in previous]
     sorties = [t for t in previous if t not in current_tickers]
 
-    for s in top:
-        if s["ticker"] not in previous:
+    # Rangs de la semaine précédente, pour publier un MOUVEMENT DE CLASSEMENT.
+    # Le champ `change` mesurait auparavant un écart de SCORE (±3 points), ce qui
+    # ne dit rien de la place occupée : un titre pouvait gagner 4 points et
+    # reculer de six rangs le même jour. Dans une liste ordonnée, c'est le rang
+    # qui est l'information. Le score reste affiché à côté, personne ne le perd.
+    for i, s in enumerate(top):
+        s["rank"] = i + 1
+        prev = previous.get(s["ticker"])
+        rp = prev.get("rank") if prev else None
+        if not prev:
             s["change"] = "new"
-        elif s["score"] > previous[s["ticker"]].get("score", 0) + 3:
-            s["change"] = "up"
-        elif s["score"] < previous[s["ticker"]].get("score", 0) - 3:
-            s["change"] = "down"
+            s["rank_prev"] = None
+            s["rank_delta"] = None
+        elif isinstance(rp, int) and rp > 0:
+            # Positif = a MONTÉ (rang 12 → 5 vaut +7).
+            s["rank_prev"] = rp
+            s["rank_delta"] = rp - s["rank"]
+            s["change"] = "up" if s["rank_delta"] > 0 else "down" if s["rank_delta"] < 0 else "stable"
+        else:
+            # Titre déjà présent mais sans rang exploitable (archive d'avant ce
+            # champ) : on ne devine pas un mouvement, on le dit stable.
+            s["rank_prev"] = None
+            s["rank_delta"] = None
+            s["change"] = "stable"
 
     # Index des résultats actuels pour permettre au narratif de sortie
     # de comparer prev_score vs new_score (cf. raison_sortie)
@@ -1529,9 +1546,6 @@ def main():
             "new_score": current.get("score") if current else None,
             "reason": raison_sortie(prev, current),
         })
-
-    for i, s in enumerate(top):
-        s["rank"] = i + 1
 
     # ── Composition de la sélection : exhaustif, tous secteurs triés desc ────
     from collections import Counter

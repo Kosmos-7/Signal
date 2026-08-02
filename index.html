@@ -43,6 +43,15 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .rl-grp{display:flex;align-items:baseline;gap:7px;font:600 .58rem var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--ac);padding:1rem .4rem .4rem;border-bottom:1px solid var(--line)}
   .rl-grp .gn{color:var(--text3);letter-spacing:0}
   .rl-grp:first-child{padding-top:.35rem}
+  /* Mouvement au classement (watchlist principale). Le vert et le rouge sont
+     réservés au P&L factuel du portefeuille : ici le mouvement n'est ni une
+     bonne ni une mauvaise nouvelle, il est neutre. On l'exprime par la forme,
+     pas par la couleur. */
+  .mv{display:inline-flex;align-items:center;gap:2px;font:600 .56rem var(--mono);letter-spacing:.4px;
+      padding:1px 5px;border-radius:3px;border:1px solid var(--line);color:var(--text3);white-space:nowrap}
+  .mv-new{color:var(--ac);border-color:rgba(116,182,223,.45);letter-spacing:1px}
+  .mv-up,.mv-down{color:var(--text2)}
+  .rl-meta{flex-wrap:wrap}
   .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:.5rem .4rem;cursor:pointer;border-bottom:1px solid var(--line);transition:padding-left .18s,border-color .18s}
   .row:hover,.row.sel{padding-left:.7rem}.row.sel{border-left:2px solid var(--ac);margin-left:-2px;padding-left:calc(.7rem - 2px)}
   .row .nm{font:500 .82rem var(--serif);line-height:1.2;color:var(--text2)}.row:hover .nm,.row.sel .nm{color:#fff}
@@ -509,9 +518,20 @@ function courtNom(tk,nom){
 }
 function region(s){ if(s.badge)return s.badge; const p=(s.ticker||'').split('.'); return p.length>1?(REG[p[p.length-1].toUpperCase()]||'INT'):'US'; }
 
+/* Pastille de mouvement au classement, watchlist principale uniquement : les
+   vues thématiques n'ont pas d'historique de rang, y afficher « stable » serait
+   une affirmation sans donnée. `rank_delta` est positif quand le titre MONTE. */
+function movTag(s){
+  if(curWl&&curWl.id!==MAIN)return '';
+  if(s.change==='new')return '<span class="mv mv-new">NOUVEAU</span>';
+  const d=s.rank_delta;
+  if(d==null||d===0)return '';
+  return '<span class="mv mv-'+(d>0?'up':'down')+'" title="Rang '+s.rank_prev+' la semaine dernière">'
+    +(d>0?'▲':'▼')+' '+Math.abs(d)+'</span>';
+}
 function listBuild(){const l=document.getElementById('rl');if(!l)return;l.innerHTML='';
   const ligne=s=>{const r=document.createElement('div');r.className='row';s._r=r;
-    r.innerHTML='<div><div class="nm">'+sv(courtNom(s.ticker,s.name))+'</div><div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+sv(s.sector||'')+'</span></div></div>'+
+    r.innerHTML='<div><div class="nm">'+sv(courtNom(s.ticker,s.name))+'</div><div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+sv(s.sector||'')+'</span>'+movTag(s)+'</div></div>'+
       '<span class="rr"><div class="sc">'+(s.score==null?'—':s.score)+'</div></span>';
     r.tabIndex=0;r.setAttribute('role','button');
     const goto=()=>nav(hashOf(curWl?curWl.id:MAIN,s.ticker));
@@ -1050,7 +1070,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
       ((brief&&!hasActu)?briefNote():'');
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
-    '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
+    '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div id="chartsec"></div>'+
