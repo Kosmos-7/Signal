@@ -118,6 +118,40 @@ MARQUES = {
 }
 
 
+# Fiches DEJA illustrees dont la revue d'ensemble a juge l'image faible. Le
+# defaut est presque toujours le meme : un siege social anonyme la ou la societe
+# fabrique un objet identifiable. NVIDIA, premiere valeur de la watchlist, etait
+# illustree par une carte de developpement Jetson ; Intel par un parking a
+# Tsukuba ; ASML, l'entreprise de la lithographie EUV, par un immeuble delave.
+# On applique ici la methode qui a marche : chercher le PRODUIT.
+#
+# Rien n'est remplace automatiquement. Le job propose, la revue visuelle
+# compare l'ancienne et la nouvelle, et l'on ne substitue que si c'est mieux.
+AMELIORATIONS = {
+    "NVDA":      ["Nvidia GeForce graphics card", "Nvidia Tesla GPU",
+                  "Nvidia die shot", "GeForce RTX graphics card"],
+    "INTC":      ["Intel wafer", "Intel Core processor", "Intel Xeon die",
+                  "silicon wafer cleanroom"],
+    "ASML.AS":   ["ASML lithography", "wafer stepper", "photolithography machine",
+                  "EUV lithography"],
+    "META":      ["Meta Quest headset", "Oculus Quest", "Meta data center"],
+    "MSFT":      ["Xbox Series X", "Microsoft Surface", "Microsoft data center"],
+    "005930.KS": ["Samsung Galaxy smartphone", "Samsung DRAM module",
+                  "Samsung memory chip"],
+    "AMAT":      ["Applied Materials machine", "semiconductor deposition system",
+                  "wafer processing equipment"],
+    "HSBA.L":    ["HSBC branch", "HSBC bank sign", "HSBC ATM"],
+    "AXP":       ["American Express card", "American Express centurion card"],
+    "MU":        ["Micron DRAM module", "Crucial SSD", "Micron memory chip"],
+    "DELL":      ["Dell PowerEdge server", "Dell XPS laptop", "Dell rack server"],
+    "ADBE":      ["Adobe Photoshop box", "Adobe Creative Suite box"],
+    "NFLX":      ["Netflix Open Connect appliance", "Netflix DVD envelope"],
+    "PYPL":      ["PayPal card reader", "PayPal Zettle terminal"],
+    "STX":       ["Seagate hard disk drive", "Seagate Barracuda"],
+    "CSCO":      ["Cisco Catalyst switch", "Cisco IP Phone"],
+}
+
+
 def chercher_commons(terme, limite=14):
     """Recherche plein texte de Commons, restreinte aux fichiers."""
     try:
@@ -136,12 +170,18 @@ def main():
     ap.add_argument("--sortie", default="assets/titres/marques")
     ap.add_argument("--limite", type=int, default=0)
     ap.add_argument("--par-societe", type=int, default=3)
+    ap.add_argument("--ameliorer", action="store_true",
+                    help="repasser sur des fiches DEJA illustrees dont la revue "
+                         "d'ensemble a juge l'image faible")
     a = ap.parse_args()
 
     deja = set()
     if os.path.exists("assets/titres/LEGENDES.json"):
         deja = set(json.load(open("assets/titres/LEGENDES.json", encoding="utf-8")))
-    cibles = [t for t in sorted(MARQUES) if t not in deja]
+    carte = AMELIORATIONS if a.ameliorer else MARQUES
+    # En mode amelioration on vise justement celles qui ont deja une image.
+    cibles = ([t for t in sorted(carte)] if a.ameliorer
+              else [t for t in sorted(carte) if t not in deja])
     if a.limite:
         cibles = cibles[: a.limite]
     os.makedirs(a.sortie, exist_ok=True)
@@ -150,7 +190,7 @@ def main():
     rapport = {}
     for i, tk in enumerate(cibles, 1):
         propositions, vus = [], set()
-        for terme in MARQUES[tk]:
+        for terme in carte[tk]:
             for f in chercher_commons(terme):
                 if f in vus:
                     continue
@@ -190,7 +230,8 @@ def main():
             print(f"[{i:3d}/{len(cibles)}] {tk:9s} {len(propositions):3d} pistes, "
                   f"rien d'exploitable", flush=True)
 
-    with open("photos_marques.json", "w", encoding="utf-8") as f:
+    sortie_json = "photos_ameliorer.json" if a.ameliorer else "photos_marques.json"
+    with open(sortie_json, "w", encoding="utf-8") as f:
         json.dump({"societes": len(rapport), "detail": rapport}, f,
                   ensure_ascii=False, indent=1)
     print(f"\n{'=' * 70}")

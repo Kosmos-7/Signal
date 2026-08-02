@@ -128,7 +128,7 @@
   "source": "File:Travelers Cheques of 50 USD each issued by American Express, bought ca. 2012, showing incremental serial numbering.jpg",
   "page": "https://commons.wikimedia.org/wiki/File:Travelers_Cheques_of_50_USD_each_issued_by_American_Express,_bought_ca._2012,_showing_incremental_serial_numbering.jpg",
   "licence": "CC BY-SA 4.0",
-  "type": "site",
+  "type": "produit",
   "credit": "Pittigrilli · CC BY-SA 4.0"
  },
  "BAC": {
@@ -213,7 +213,6 @@
   "source": "File:Alte Boerse (Aussenfassade).jpg",
   "page": "https://commons.wikimedia.org/wiki/File:Alte_Boerse_(Aussenfassade).jpg",
   "licence": "CC BY-SA 3.0",
-  "type": "produit",
   "credit": "Michael J. Zirbes (from the original description at the German Wikipedia) · CC BY-SA 3.0"
  },
  "DELL": {
@@ -227,8 +226,7 @@
   "legende": "Centre de données Digital Realty",
   "source": "File:DigitalRealtyDatacenterMarkham1.jpg",
   "page": "https://commons.wikimedia.org/wiki/File:DigitalRealtyDatacenterMarkham1.jpg",
-  "licence": "CC0",
-  "type": "produit"
+  "licence": "CC0"
  },
  "ENR.DE": {
   "legende": "Centrale thermique équipée par Siemens Energy, Leipzig",
@@ -298,7 +296,7 @@
   "source": "File:HPE Nimble Arrays.jpg",
   "page": "https://commons.wikimedia.org/wiki/File:HPE_Nimble_Arrays.jpg",
   "licence": "CC BY-SA 4.0",
-  "type": "site",
+  "type": "produit",
   "credit": "Prholenstein · CC BY-SA 4.0"
  },
  "HSBA.L": {
@@ -536,7 +534,7 @@
   "licence": "CC0 1.0"
  },
  "STX": {
-  "legende": "Disque Seagate",
+  "legende": "Contrôleur d'un disque dur Seagate",
   "source": "File:Seagate ST9300AG - Seagate 100075-501 on controller board-8912.jpg",
   "page": "https://commons.wikimedia.org/wiki/File:Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg",
   "licence": "CC BY-SA 4.0",

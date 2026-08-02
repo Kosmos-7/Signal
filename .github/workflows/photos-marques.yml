@@ -15,6 +15,10 @@ on:
         description: "Candidats téléchargés par société"
         type: string
         default: "3"
+      ameliorer:
+        description: "Repasser sur les fiches déjà illustrées jugées faibles"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -37,7 +41,8 @@ jobs:
         run: |
           python tools/photos_marques.py \
             --limite ${{ inputs.limite || '0' }} \
-            --par-societe ${{ inputs.par_societe || '3' }}
+            --par-societe ${{ inputs.par_societe || '3' }} \
+            ${{ (inputs.ameliorer == true || inputs.ameliorer == 'true') && '--ameliorer' || '' }}
       - name: Publier le rapport
         if: always()
         uses: actions/upload-artifact@v4
@@ -45,6 +50,7 @@ jobs:
           name: photos-marques
           path: |
             photos_marques.json
+            photos_ameliorer.json
             assets/titres/marques/
           retention-days: 7
       - name: Commiter pour arbitrage visuel
@@ -57,6 +63,7 @@ jobs:
           # d'ecrire son rapport, les images telechargees sont perdues.
           git add -A assets/ || true
           git add -A photos_marques.json || true
+          git add -A photos_ameliorer.json || true
           if git diff --staged --quiet; then
             echo "Rien de nouveau."
           else
