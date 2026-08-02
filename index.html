@@ -376,6 +376,8 @@ function loadChart(tk){
 // Version de cache : la date du jour suffit, les données bougent au plus une
 // fois par jour ouvré. Évite un paramètre unique par requête, qui interdirait
 // toute mise en cache navigateur des ~190 fichiers.
+// CHV ne sert plus qu'aux fiches de graphique, mises a jour au run
+// hebdomadaire : la mettre en cache une journee est ici souhaitable.
 const CHV=new Date().toISOString().slice(0,10);
 
 /* ── universe.json : homepage des watchlists + vues thématiques ──────────────
@@ -412,10 +414,10 @@ Promise.all([
   fetch('universe.json?v='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
   // Photos de sociétés vérifiées une à une. Fichier facultatif : sans lui, les
   // fiches gardent leur illustration d'activité.
-  fetch('assets/titres/LEGENDES.json?v='+CHV).then(r=>r.ok?r.json():{}).catch(()=>({})),
+  fetch('assets/titres/LEGENDES.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
   // Légendes des illustrations de watchlist. Facultatif comme les autres :
   // sans le fichier, les cartes gardent leur image sans légende.
-  fetch('assets/themes/LEGENDES.json?v='+CHV).then(r=>r.ok?r.json():{}).catch(()=>({}))
+  fetch('assets/themes/LEGENDES.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({}))
 ]).then(([wl,an,un,ph,pt])=>{
   Object.assign(PHOTOS, ph||{});
   Object.assign(PHOTOS_TH, pt||{});
