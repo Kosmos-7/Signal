@@ -272,47 +272,59 @@
   }
 
 
-  /* ── ILLUSTRATION DE SECTION ──
-     Respire entre deux blocs de texte long. Purement decorative : la legende
-     dit ce qu'on voit et d'ou ca vient, jamais une information necessaire a la
-     comprehension, pour qu'une image manquante ne casse rien. */
-  .sec-illu {
+  /* ── AMORCE DE SECTION ──
+     Bande d'ouverture en tete de section, avant le numero et le titre : elle
+     annonce le sujet au lieu de le conclure. Volontairement basse, 16/5, parce
+     qu'elle se repete a chaque section : une bande haute ferait douze pauses
+     dans la lecture au lieu de douze reperes.
+     Le fondu du bas n'est pas decoratif. Sans lui chaque bande se termine par
+     une arete franche et le titre qui suit semble pose sur une vignette
+     rapportee. C'est l'IMAGE qui s'efface, via un masque, et non un degrade
+     peint par-dessus : la page porte un fond anime par le chrome partage
+     (#fx / .scan), et un degrade vers une couleur fixe s'en decrocherait des
+     que ce fond bouge. Un masque laisse simplement voir ce qu'il y a derriere,
+     quel qu'il soit.
+     La legende ne porte jamais d'information necessaire a la comprehension du
+     texte : une image absente ne doit rien casser, et une section sans amorce
+     reste une section complete. */
+  .sec-tete {
     position: relative;
-    margin: 2.2rem 0 0;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--surface2);
+    margin: 0 0 1.15rem;
   }
-  .sec-illu img {
+  .sec-tete img {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 7;
+    aspect-ratio: 16 / 5;
     object-fit: cover;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
   }
-  .sec-illu figcaption {
+  .sec-tete figcaption {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    padding: 1.6rem 0.9rem 0.55rem;
-    background: linear-gradient(180deg, transparent, rgba(6,10,18,0.88));
+    padding: 0 0.15rem 0.1rem;
     font-family: 'Courier New', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.6px;
+    font-size: 0.58rem;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: #e8ecf2;
+    color: rgba(232,236,242,0.88);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.5rem;
+    align-items: baseline;
   }
-  .sec-illu figcaption i {
-    display: block;
-    margin-top: 2px;
+  .sec-tete figcaption i {
     font-style: normal;
-    font-size: 0.55rem;
+    font-size: 0.52rem;
     letter-spacing: 0.3px;
     text-transform: none;
-    color: rgba(232,236,242,0.62);
+    color: rgba(232,236,242,0.5);
   }
   @media (max-width: 640px) {
-    .sec-illu img { aspect-ratio: 16 / 9; }
+    .sec-tete img { aspect-ratio: 16 / 7; }
+    .sec-tete figcaption { font-size: 0.54rem; }
   }
 
   /* ── PORTFOLIO EXPLAINER ── */
@@ -655,6 +667,10 @@ Avant de croire qu'une entreprise va croître de 30 % par an pendant dix ans, de
 
 <!-- SECTION, Le marché -->
   <section class="section-block" id="s2">
+    <figure class="sec-tete">
+      <img src="assets/apprendre/s2.jpg" alt="La corbeille du New York Stock Exchange, agents en mouvement autour des postes de cotation" loading="lazy" width="1700" height="531">
+      <figcaption>La corbeille du New York Stock Exchange<i>Carol M. Highsmith, Library of Congress · domaine public</i></figcaption>
+    </figure>
     <div class="section-label">02 · Le marché</div>
     <h2 class="section-title">À quoi sert la bourse, et qui fait le prix</h2>
     <p class="section-sub">Avant de choisir des actions, il faut savoir ce qu'on achète, à qui, et d'où vient le chiffre affiché à l'écran. Ces quatre idées suffisent, et elles évitent la plupart des malentendus.</p>
@@ -706,11 +722,6 @@ Attention au raccourci : la capitalisation n'est pas le prix qu'il faudrait paye
     <div class="scoring-note" style="margin-top:1.25rem">
 <strong>Ce qu'il faut retenir avant la suite.</strong> Le cours n'est pas la valeur, c'est le point de rencontre entre des anticipations. Comprendre une entreprise, c'est se donner une opinion sur cette valeur, et n'acheter que lorsque le prix demandé est confortablement en dessous. C'est exactement ce que fait la section suivante, en ouvrant les comptes.
     </div>
-
-    <figure class="sec-illu">
-      <img src="assets/apprendre/s2.jpg?v=0fdfd65e" alt="La corbeille du New York Stock Exchange, agents en mouvement autour des postes de cotation" loading="lazy" width="1700" height="744">
-      <figcaption>La corbeille du New York Stock Exchange<i>Carol M. Highsmith, Library of Congress · domaine public</i></figcaption>
-    </figure>
   </section>
 
 <!-- SECTION 2, Les 3 briques de base -->
@@ -754,6 +765,10 @@ Signal essaie de faire mieux que cette baseline en sélectionnant des actions in
 
 <!-- SECTION, Lire une entreprise -->
   <section class="section-block" id="s4">
+    <figure class="sec-tete">
+      <img src="assets/apprendre/s4.jpg" alt="Chaîne d'assemblage automobile, carrosseries alignées sur le convoyeur" loading="lazy" width="1700" height="531">
+      <figcaption>Chaîne d'assemblage automobile, Gliwice, Pologne<i>Marek Ślusarczyk · CC BY 3.0</i></figcaption>
+    </figure>
     <div class="section-label">04 · L'entreprise</div>
     <h2 class="section-title">Lire une entreprise en trois tableaux</h2>
     <p class="section-sub">Derrière chaque ligne de la watchlist il y a une société réelle, qui vend quelque chose à quelqu'un. Toute son activité tient dans trois documents publiés chaque trimestre. Ils répondent à trois questions différentes, et il faut les trois.</p>
@@ -829,11 +844,6 @@ Cette position détermine tout. Un fournisseur d'équipement facture peu de clie
     <div class="scoring-note" style="margin-top:1.25rem">
 <strong>Où trouver ces chiffres.</strong> Tout est public et gratuit. Les sociétés américaines déposent leurs comptes auprès du régulateur boursier, le rapport annuel s'appelle le 10-K et le trimestriel le 10-Q. Les européennes publient un rapport annuel et des résultats semestriels. Chaque société tient une page « relations investisseurs » où figurent ces documents ainsi que la présentation commentée des résultats, souvent le document le plus lisible pour commencer.
     </div>
-
-    <figure class="sec-illu">
-      <img src="assets/apprendre/s4.jpg?v=0a038eab" alt="Chaîne d'assemblage automobile, carrosseries alignées sur le convoyeur" loading="lazy" width="1700" height="744">
-      <figcaption>Chaîne d'assemblage automobile, Gliwice, Pologne<i>Marek Ślusarczyk · CC BY 3.0</i></figcaption>
-    </figure>
   </section>
 
 <!-- SECTION, Valorisation -->
@@ -893,6 +903,10 @@ C'est le raisonnement en taux de base de la section 01, appliqué au prix. Il tr
 
 <!-- SECTION, Le rythme -->
   <section class="section-block" id="s6">
+    <figure class="sec-tete">
+      <img src="assets/apprendre/s6.jpg" alt="Colonnes de cotes boursières imprimées dans un quotidien, flèches rouges et bleues de variation" loading="lazy" width="1700" height="531">
+      <figcaption>Cotes de clôture dans un quotidien coréen<i>Mk2010 · CC BY-SA 4.0</i></figcaption>
+    </figure>
     <div class="section-label">06 · Le rythme</div>
     <h2 class="section-title">Ce qui fait bouger un cours, et quand</h2>
     <p class="section-sub">La vie d'une action suit un calendrier assez régulier. Le connaître évite de confondre un événement mécanique avec une nouvelle importante, et de paniquer devant un mouvement qui n'en est pas un.</p>
@@ -950,11 +964,6 @@ Savoir reconnaître ces mouvements évite deux erreurs symétriques : croire à 
     <div class="scoring-note" style="margin-top:1.25rem">
 <strong>Le lien avec les fiches.</strong> Le bloc <em>Consensus analystes</em> d'une fiche Signal reprend exactement cette mécanique : nombre d'analystes qui suivent le titre, objectif de cours moyen, et surtout le sens des révisions récentes. Et lorsqu'une fiche mentionne un résultat trimestriel, elle donne la date de publication : sans elle, un chiffre de croissance ne veut rien dire, on ne sait pas de quel trimestre il parle ni s'il est déjà digéré par le marché.
     </div>
-
-    <figure class="sec-illu">
-      <img src="assets/apprendre/s6.jpg?v=5fa9eab6" alt="Colonnes de cotes boursières imprimées dans un quotidien, flèches rouges et bleues de variation" loading="lazy" width="1700" height="744">
-      <figcaption>Cotes de clôture dans un quotidien coréen<i>Mk2010 · CC BY-SA 4.0</i></figcaption>
-    </figure>
   </section>
 
 <!-- SECTION 6, Friction réelle (frais + fiscalité) -->

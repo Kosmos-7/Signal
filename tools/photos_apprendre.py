@@ -14,9 +14,11 @@ deux sections d'un cours, et leur légende dit exactement ce qu'on voit, sans
 jamais porter une information nécessaire à la compréhension du texte. Une image
 qui ne se charge pas ne doit rien casser.
 
-FORMAT. 1700 × 744, soit un 16/7 volontairement bas : une image haute coupe le
-fil de lecture au lieu de l'aérer. Même assombrissement que les fiches, pour que
-ces photos appartiennent visuellement au site et non à une banque d'images.
+FORMAT. 1700 × 531, soit un 16/5 volontairement bas. Ce n'est pas une image
+d'illustration posée au milieu du texte mais une bande d'ouverture, répétée à
+chaque section : une bande haute ferait douze pauses dans la lecture au lieu de
+douze repères. Même assombrissement que les photos de fiches, pour que ces
+images appartiennent visuellement au site et non à une banque d'images.
 
 Usage : python3 tools/photos_apprendre.py [--slots s2,s4]
 """
@@ -34,21 +36,46 @@ from photos_wikidata import _get, COMMONS_API, UA                     # noqa: E4
 
 SORTIE = "assets/apprendre"
 REGISTRE = os.path.join(SORTIE, "SOURCES.json")
-LARGEUR, HAUTEUR = 1700, 744
+LARGEUR, HAUTEUR = 1700, 531
 
-# Slot = l'ancre de la section que l'image vient clore. « cadrage » place le
-# recadrage vertical : 0.0 garde le haut, 1.0 le bas, 0.5 le centre.
+# Slot = l'ancre de la section que l'image ouvre. « cadrage » place le
+# recadrage vertical : 0.0 garde le haut, 1.0 le bas, 0.5 le centre. En 16/5 il
+# ne reste presque rien de la hauteur d'origine, donc ce réglage décide de ce
+# qu'on voit et n'a rien d'accessoire.
 # « luminosite » corrige l'exposition quand le sujet l'impose : une page de
-# journal est un aplat blanc, et sur un fond sombre un aplat blanc en 16/7
-# n'aère pas, il éblouit. Les valeurs ne sont pas décoratives, elles ont été
-# réglées en regardant le résultat.
+# journal est un aplat blanc, et sur un fond sombre un aplat blanc n'aère pas,
+# il éblouit. Les valeurs ne sont pas décoratives, elles ont été réglées en
+# regardant le résultat.
+# « alt » décrit l'image pour qui ne la voit pas ; « legende » dit ce qu'on
+# regarde. Les deux sont écrits ici et nulle part ailleurs : c'est ce script qui
+# pose les balises dans apprendre.html, pour qu'une légende et son image ne
+# puissent pas diverger.
 ILLUSTRATIONS = {
+    "s1": {
+        "fichier": "Wall Street - New York Stock Exchange.jpg",
+        "cadrage": 0.45,
+        "legende": "La façade du New York Stock Exchange, Wall Street",
+        "credit": "Carlos Delgado · CC BY-SA 3.0",
+        "alt": "Façade à colonnes du New York Stock Exchange, drapeaux "
+               "américains et plaque de rue Wall St",
+    },
     "s2": {
         "fichier": "Trading floor of the New York Stock Exchange, New York City "
                    "LCCN2011632435.tif",
         "cadrage": 0.55,
         "legende": "La corbeille du New York Stock Exchange",
         "credit": "Carol M. Highsmith, Library of Congress · domaine public",
+        "alt": "Corbeille du New York Stock Exchange, agents en mouvement "
+               "autour des postes de cotation",
+    },
+    "s3": {
+        "fichier": "Stock Certficate SKF 1913.jpg",
+        "cadrage": 0.35,
+        "luminosite": 0.62,
+        "legende": "Certificat de cinq actions SKF, 1913",
+        "credit": "Aktiebolaget Svenska Kullagerfabriken · domaine public",
+        "alt": "Certificat d'actions gravé de 1913, cinq actions de cent "
+               "couronnes, signé à la main",
     },
     "s4": {
         "fichier": "002 Production line - car assembly line in General Motors "
@@ -56,6 +83,16 @@ ILLUSTRATIONS = {
         "cadrage": 0.5,
         "legende": "Chaîne d'assemblage automobile, Gliwice, Pologne",
         "credit": "Marek Ślusarczyk · CC BY 3.0",
+        "alt": "Chaîne d'assemblage automobile, carrosseries alignées sur le "
+               "convoyeur",
+    },
+    "s5": {
+        "fichier": "Toledo Market Traditional Rice Stall.jpg",
+        "cadrage": 0.5,
+        "legende": "Étal de riz, marché de Toledo, Philippines",
+        "credit": "QueenCityCebu · CC BY-SA 4.0",
+        "alt": "Sacs de riz ouverts sur un étal de marché, chacun portant son "
+               "prix inscrit sur une étiquette",
     },
     "s6": {
         "fichier": "Stock Price Listing Numbers on a Korean Newspaper.jpg",
@@ -63,6 +100,61 @@ ILLUSTRATIONS = {
         "luminosite": 0.55,
         "legende": "Cotes de clôture dans un quotidien coréen",
         "credit": "Mk2010 · CC BY-SA 4.0",
+        "alt": "Colonnes de cotes boursières imprimées dans un quotidien, "
+               "flèches rouges et bleues de variation",
+    },
+    "s7": {
+        "fichier": "Stacks of Canadian Coins (16269886909).jpg",
+        "cadrage": 0.55,
+        "legende": "Piles de pièces",
+        "credit": "KMR Photography · CC BY 2.0",
+        "alt": "Trois piles de pièces de monnaie de hauteurs inégales sur une "
+               "table",
+    },
+    "s8": {
+        "fichier": "Miss Cowell with Hollerith Machine, 1964.jpg",
+        "cadrage": 0.45,
+        "legende": "Opératrice d'une machine Hollerith, 1964",
+        "credit": "LSE Library · sans restriction connue",
+        "alt": "Femme actionnant une machine mécanographique à cartes "
+               "perforées, photographie noir et blanc de 1964",
+    },
+    "s9": {
+        "fichier": "NOAA Central Library Card Catalog 2.jpg",
+        "cadrage": 0.5,
+        "legende": "Fichier cartonné de la bibliothèque centrale de la NOAA",
+        "credit": "Jennifer Fagan-Fry · CC BY-SA 4.0",
+        "alt": "Meuble à tiroirs d'un fichier de bibliothèque, étiquettes et "
+               "fiches cartonnées",
+    },
+    "s10": {
+        "fichier": "Wide angle view of Mission Control Center during Apollo 14 "
+                   "transmission (S71-17122).jpg",
+        "cadrage": 0.5,
+        "legende": "Salle de contrôle de mission, Apollo 14, 1971",
+        "credit": "NASA Johnson Space Center · domaine public",
+        "alt": "Salle de contrôle de mission de la NASA, rangées de consoles "
+               "devant un grand écran de suivi",
+    },
+    "s11": {
+        "fichier": "Logbook of the Almira (Ship) of Edgartown, mastered by "
+                   "Charles M. Marchant on voyage from 5 Aug. 1869-1870 (1869) "
+                   "(14774067644).jpg",
+        "cadrage": 0.4,
+        "luminosite": 0.6,
+        "legende": "Journal de bord de l'Almira, 1869, calculs de route",
+        "credit": "Nantucket Historical Association · sans restriction connue",
+        "alt": "Page manuscrite d'un journal de bord de baleinier, colonnes de "
+               "calculs à la plume",
+    },
+    "s12": {
+        "fichier": "Suzzallo Reading Room University of Washington restoration "
+                   "Seattle Washington 2026.jpg",
+        "cadrage": 0.45,
+        "legende": "Salle de lecture Suzzallo, université de Washington",
+        "credit": "Guywelch2000 · CC BY 4.0",
+        "alt": "Longue salle de lecture néogothique, tables alignées sous des "
+               "voûtes et de hautes verrières",
     },
 }
 
@@ -117,8 +209,52 @@ def prepare(brut, chemin, cadrage, luminosite):
     return os.path.getsize(chemin)
 
 
+def echapper(t):
+    return (t.replace("&", "&amp;").replace("<", "&lt;")
+             .replace(">", "&gt;").replace('"', "&quot;"))
+
+
+def injecter(page, registre):
+    """Pose ou remplace la bande d'amorce en tête de chaque section illustrée.
+
+    Idempotent : une amorce déjà présente est remplacée, jamais dupliquée. Les
+    sections sans image conservées telles quelles, et une image retirée du
+    dictionnaire voit sa balise disparaître — sans quoi le HTML garderait un
+    <img> vers un fichier qui n'existe plus.
+    """
+    html = open(page, encoding="utf-8").read()
+    avant = html
+    amorce = re.compile(
+        r'(<section class="section-block" id="(s\d+)">\n)'
+        r'(?:    <figure class="sec-tete">\n(?:.*?\n)*?    </figure>\n)?')
+
+    def poser(m):
+        ouverture, slot = m.group(1), m.group(2)
+        e = registre.get(slot)
+        if not e:
+            return ouverture
+        cfg = ILLUSTRATIONS.get(slot, {})
+        alt = echapper(cfg.get("alt") or e["legende"])
+        return (f'{ouverture}'
+                f'    <figure class="sec-tete">\n'
+                f'      <img src="{SORTIE}/{slot}.jpg?v={e["v"]}" '
+                f'alt="{alt}" loading="lazy" '
+                f'width="{LARGEUR}" height="{HAUTEUR}">\n'
+                f'      <figcaption>{echapper(e["legende"])}'
+                f'<i>{echapper(e["credit"])}</i></figcaption>\n'
+                f'    </figure>\n')
+
+    html = amorce.sub(poser, html)
+    if html != avant:
+        open(page, "w", encoding="utf-8").write(html)
+        print(f"{page} mis à jour")
+    else:
+        print(f"{page} inchangé")
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--page", default="apprendre.html")
     ap.add_argument("--slots", default="",
                     help="ne régénérer que ces ancres, séparées par des virgules")
     a = ap.parse_args()
@@ -149,10 +285,20 @@ def main():
         }
         print(f"   → {chemin}  {poids // 1024} ko  [{src['licence']}]", flush=True)
 
-    json.dump(dict(sorted(registre.items())), open(REGISTRE, "w", encoding="utf-8"),
-              ensure_ascii=False, indent=1)
+    # Une entrée du registre dont le fichier a disparu ferait poser un <img>
+    # cassé : on nettoie avant d'écrire quoi que ce soit dans le HTML.
+    registre = {s: e for s, e in registre.items()
+                if s in ILLUSTRATIONS and os.path.exists(
+                    os.path.join(SORTIE, f"{s}.jpg"))}
+
+    json.dump(dict(sorted(registre.items(), key=lambda kv: int(kv[0][1:]))),
+              open(REGISTRE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"\n{len(registre)} illustrations, registre écrit dans {REGISTRE}")
-    print("Pense à lancer : python3 tools/versionner_photos.py")
+    injecter(a.page, registre)
+
+    manquants = [s for s in ILLUSTRATIONS if s not in registre]
+    if manquants:
+        print(f"⚠ sans fichier : {', '.join(manquants)}")
 
 
 if __name__ == "__main__":
