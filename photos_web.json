@@ -1,235 +1,120 @@
 {
- "societes": 11,
+ "societes": 2,
  "detail": {
-  "6857.T": {
+  "CRWV": {
    "candidats": [
     {
-     "image": "https://www.advantest.com/img/news/2025/img-20251218.png",
-     "page": "https://www.advantest.com/en/",
-     "domaine": "advantest.com",
-     "dimensions": "1200x691",
+     "image": "https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/6a6ab38db4d2459dec3c70c1_THUMBNAIL_Name_1520%20x%201098.jpg",
+     "page": "https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational",
+     "domaine": "coreweave.com",
+     "dimensions": "1520x1098",
      "conditions": "non établies",
-     "credit": "Advantest",
-     "poids": 22416
+     "credit": "CoreWeave",
+     "poids": 14280
     },
     {
-     "image": "https://www.advantest.com/img/top/img-top-1.png",
-     "page": "https://www.advantest.com/en/",
-     "domaine": "advantest.com",
-     "dimensions": "746x600",
+     "image": "https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/6a67f23fbd7c5610e305aae6_Press%20Release-Thumbnail%201520x1098.jpg",
+     "page": "https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational",
+     "domaine": "coreweave.com",
+     "dimensions": "1520x1098",
      "conditions": "non établies",
-     "credit": "Advantest",
-     "poids": 39686
+     "credit": "CoreWeave",
+     "poids": 45469
     },
     {
-     "image": "https://www.advantest.com/img/top/img-top-3.png",
-     "page": "https://www.advantest.com/en/",
-     "domaine": "advantest.com",
-     "dimensions": "746x600",
+     "image": "https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/6a4fd1d2c1c1c6f6d8b15850_Gartner%20MQ%20AI%20Cloud%20Infrastructure%20Hero%201520%20x%201098.jpeg",
+     "page": "https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational",
+     "domaine": "coreweave.com",
+     "dimensions": "1520x1098",
      "conditions": "non établies",
-     "credit": "Advantest",
-     "poids": 45341
+     "credit": "CoreWeave",
+     "poids": 12983
     },
     {
-     "image": "https://www.advantest.com/img/top/img-top-6.png",
-     "page": "https://www.advantest.com/en/",
-     "domaine": "advantest.com",
-     "dimensions": "746x600",
+     "image": "https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/69d822dfa425198ef61b06b7_META_Anthropic_1520x1098.jpg",
+     "page": "https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational",
+     "domaine": "coreweave.com",
+     "dimensions": "1520x1098",
      "conditions": "non établies",
-     "credit": "Advantest",
-     "poids": 74176
+     "credit": "CoreWeave",
+     "poids": 30183
     },
     {
-     "image": "https://www.advantest.com/img/top/img-top-8.png",
-     "page": "https://www.advantest.com/en/",
-     "domaine": "advantest.com",
-     "dimensions": "746x600",
+     "image": "https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/6a1cf0a69165c2dad2912bd6_THUMBNAIL_Vera%20Rubin_1520%20x%201098.jpg",
+     "page": "https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational",
+     "domaine": "coreweave.com",
+     "dimensions": "1520x1098",
      "conditions": "non établies",
-     "credit": "Advantest",
-     "poids": 46761
+     "credit": "CoreWeave",
+     "poids": 56237
     },
     {
-     "image": "https://www.advantest.com/img/top/hdg-kv-5.png",
-     "page": "https://www.advantest.com/en/",
-     "domaine": "advantest.com",
-     "dimensions": "2000x1125",
+     "image": "https://cdn.prod.website-files.com/62ba1fb86485b6d5029975c4/6a4d4aa66b8392d7e81d62f8_69852045c3d3da1a9b0a0488_CoreWeave%20Cloud%20Platform%20Diagram%20Transparent%20Background-p-1080-cropped.jpg",
+     "page": "https://www.coreweave.com/",
+     "domaine": "coreweave.com",
+     "dimensions": "1072x808",
      "conditions": "non établies",
-     "credit": "Advantest",
-     "poids": 72263
-    }
-   ]
-  },
-  "ACN": {
-   "candidats": [
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/Homepage_hero_768x432%3Asocial-thumbnail-landscape?ts=1771619635033&dpr=off",
-     "page": "https://www.accenture.com/us-en/about/company-index",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 41197
+     "credit": "CoreWeave",
+     "poids": 51711
     },
     {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/Accenture-Digitize-what-you-make-Social-1200px-628px%3Asocial-thumbnail-landscape?ts=1776779273083&dpr=off",
-     "page": "https://www.accenture.com/us-en/services/digital-engineering-manufacturing",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
+     "image": "https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/69e0fc6cad0bb9d194cddaf7_world-labs-dark.png",
+     "page": "https://www.coreweave.com/",
+     "domaine": "coreweave.com",
+     "dimensions": "4575x1291",
      "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 64912
+     "credit": "CoreWeave",
+     "poids": 16427
     },
     {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/accenture-tech-innovation-1200x628%3Asocial-thumbnail-landscape?ts=1768554968629&dpr=off",
-     "page": "https://www.accenture.com/us-en/services/emerging-technology",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
+     "image": "https://cdn.prod.website-files.com/62ba1fb86485b6d5029975c4/69f4e84e3d607647fdd37e19_CW_AI-Data-Centers_HERO_BG_16_BLUE-800.jpg",
+     "page": "https://www.coreweave.com/ai-data-centers",
+     "domaine": "coreweave.com",
+     "dimensions": "2880x1148",
      "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 55581
-    },
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/accenture-sustainability-services-400x400%3Asocial-thumbnail-landscape?ts=1778985011525&dpr=off",
-     "page": "https://www.accenture.com/us-en/services/sustainability",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 43084
-    },
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/accenture-communications-and-media-400x400%3Asocial-thumbnail-landscape?ts=1784684373884&dpr=off",
-     "page": "https://www.accenture.com/us-en/industries/communications-media",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 50638
-    },
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/Reinvention-Services-Social-Share-Image%3Asocial-thumbnail-landscape?ts=1780651791008&qlt=50&dpr=off",
-     "page": "https://www.accenture.com/us-en/about/reinvention-services",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 72550
-    }
-   ]
-  },
-  "ASM.AS": {
-   "candidats": [
-    {
-     "image": "https://www.asm.com/media/0yhffzpf/sustainability_image_environment_3200x1600.jpg?width=1200&height=630&quality=90&v=1db83a8761a2190",
-     "page": "https://www.asm.com/sustainability",
-     "domaine": "asm.com",
-     "dimensions": "1200x630",
-     "conditions": "non établies",
-     "credit": "ASM International",
-     "poids": 93066
-    }
-   ]
-  },
-  "BLK": {
-   "candidats": [
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/global/en/images/teamsite/brand-images/corporate-about-about-us-hero.1780318443031.jpg.md.jpg",
-     "page": "https://www.blackrock.com/corporate/about-us",
-     "domaine": "blackrock.com",
-     "dimensions": "768x536",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 56212
-    },
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/global/en/images/teamsite/brand-images/ll2026-homepage-hero-860x600.1780318443245.jpg.md.jpg",
-     "page": "https://www.blackrock.com/corporate/about-us",
-     "domaine": "blackrock.com",
-     "dimensions": "768x536",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 46834
-    },
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/blackrock-retail/en-zz/images/teamsite/infographics-charts-tables/blk-maps-aug-25.1779893890983.png.lg.png",
-     "page": "https://www.blackrock.com/corporate/about-us",
-     "domaine": "blackrock.com",
-     "dimensions": "1024x384",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 23403
-    },
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/blackrock-retail/en-zz/images/teamsite/infographics-charts-tables/ishares-maps-aug-25.1779893896197.png.lg.png",
-     "page": "https://www.blackrock.com/corporate/about-us",
-     "domaine": "blackrock.com",
-     "dimensions": "1024x384",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 31202
-    }
-   ]
-  },
-  "CB": {
-   "candidats": [
-    {
-     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/next-persona/individuals-families-2-persona-1040x585.jpg",
-     "page": "https://www.chubb.com/us-en/",
-     "domaine": "chubb.com",
-     "dimensions": "1040x585",
-     "conditions": "non établies",
-     "credit": "Chubb",
-     "poids": 67494
-    },
-    {
-     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/next-persona/businsess-1-persona-1040x585.jpg",
-     "page": "https://www.chubb.com/us-en/",
-     "domaine": "chubb.com",
-     "dimensions": "1040x585",
-     "conditions": "non établies",
-     "credit": "Chubb",
-     "poids": 79951
-    },
-    {
-     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/next-persona/agents-brokers-persona-1040x585.jpg",
-     "page": "https://www.chubb.com/us-en/",
-     "domaine": "chubb.com",
-     "dimensions": "1040x585",
-     "conditions": "non établies",
-     "credit": "Chubb",
-     "poids": 49591
-    },
-    {
-     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/next-persona/couple-shopping-online-1040x585.jpg",
-     "page": "https://www.chubb.com/us-en/",
-     "domaine": "chubb.com",
-     "dimensions": "1040x585",
-     "conditions": "non établies",
-     "credit": "Chubb",
-     "poids": 62754
-    },
-    {
-     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb-com/us-en/campaign/images/america250/chubb-america-250-1200x400.jpg",
-     "page": "https://www.chubb.com/us-en/",
-     "domaine": "chubb.com",
-     "dimensions": "1200x400",
-     "conditions": "non établies",
-     "credit": "Chubb",
-     "poids": 44986
-    },
-    {
-     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/places/cargo-ship-istock-869250572-960x720.jpg",
-     "page": "https://www.chubb.com/us-en/about-chubb/",
-     "domaine": "chubb.com",
-     "dimensions": "960x720",
-     "conditions": "non établies",
-     "credit": "Chubb",
-     "poids": 108152
+     "credit": "CoreWeave",
+     "poids": 41349
     }
    ]
   },
   "KKR": {
    "candidats": [
+    {
+     "image": "https://www.kkr.com/invest/infrastructure/_jcr_content/root/main-par/hero_banner/asset.coreimg.jpeg/1692041430164/infrastructure-is-1097331490-1320x470.jpeg",
+     "page": "https://www.kkr.com/invest/infrastructure",
+     "domaine": "kkr.com",
+     "dimensions": "1280x456",
+     "conditions": "non établies",
+     "credit": "KKR",
+     "poids": 102958
+    },
+    {
+     "image": "https://www.kkr.com/invest/infrastructure/_jcr_content/root/main-par/video_external/image.coreimg.png/1722348057623/raj-video-thumbnail.png",
+     "page": "https://www.kkr.com/invest/infrastructure",
+     "domaine": "kkr.com",
+     "dimensions": "793x462",
+     "conditions": "non établies",
+     "credit": "KKR",
+     "poids": 41592
+    },
+    {
+     "image": "https://www.kkr.com/invest/infrastructure/_jcr_content/root/main-par/section_654416348_co_2016970276/section-par/grid_container/grid/section_58689296/section-par/video_external_copy/image.coreimg.png/1761758237947/metronet-video-thumb-2.png",
+     "page": "https://www.kkr.com/invest/infrastructure",
+     "domaine": "kkr.com",
+     "dimensions": "1280x720",
+     "conditions": "non établies",
+     "credit": "KKR",
+     "poids": 34998
+    },
+    {
+     "image": "https://www.kkr.com/insights/_jcr_content/_cq_featuredimage.coreimg.jpeg/1752166019804/5-things-to-know-midyear-outlook-1320x470.jpeg",
+     "page": "https://www.kkr.com/insights",
+     "domaine": "kkr.com",
+     "dimensions": "1280x456",
+     "conditions": "non établies",
+     "credit": "KKR",
+     "poids": 38717
+    },
     {
      "image": "https://www.kkr.com/about/_jcr_content/root/main-par/section/section-par/grid_container/grid/video_external/image.coreimg.jpeg/1777486995726/culture-video-793x462.jpeg",
      "page": "https://www.kkr.com/about",
@@ -265,269 +150,6 @@
      "conditions": "non établies",
      "credit": "KKR",
      "poids": 83102
-    },
-    {
-     "image": "https://www.kkr.com/about/global-wealth-solutions/_jcr_content/root/main-par/hero_banner/asset.coreimg.jpeg/1695910249152/global-wealth-solutions-is-1405053008-1320x470.jpeg",
-     "page": "https://www.kkr.com/about/global-wealth-solutions",
-     "domaine": "kkr.com",
-     "dimensions": "1280x456",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 87860
-    },
-    {
-     "image": "https://www.kkr.com/about/family-capital/_jcr_content/root/main-par/hero_banner_copy/asset.coreimg.png/1776264680412/family-capital-1320x470.png",
-     "page": "https://www.kkr.com/about/family-capital",
-     "domaine": "kkr.com",
-     "dimensions": "1280x455",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 98049
-    }
-   ]
-  },
-  "LSEG.L": {
-   "candidats": [
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/billboard/lseg-foundation-billboard-1440x475.jpg.transform/billboard-m/q90/image.jpg",
-     "page": "https://www.lseg.com/en/about-us",
-     "domaine": "lseg.com",
-     "dimensions": "1440x475",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 42716
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/thumbnail/lseg-purpose-and-values-social-sharing-image-1200x675.jpg.transform/rect-768/q90/image.jpg",
-     "page": "https://www.lseg.com/en/about-us/purpose-values",
-     "domaine": "lseg.com",
-     "dimensions": "768x432",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 35118
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/thumbnail/lsg2510684-what-we-do-social-image-1200x675.jpg.transform/rect-768/q90/image.jpg",
-     "page": "https://www.lseg.com/en/about-us/what-we-do",
-     "domaine": "lseg.com",
-     "dimensions": "768x432",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 86884
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/standard/history-of-london-stock-exchange-group-825x464-v1.jpg.transform/rect-1248/q82/image.jpg",
-     "page": "https://www.lseg.com/en/about-us/history",
-     "domaine": "lseg.com",
-     "dimensions": "1248x702",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 90048
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/people/bespoke/don-robert.jpg.transform/resize-768/q82/image.jpg",
-     "page": "https://www.lseg.com/en/about-us/board-of-directors",
-     "domaine": "lseg.com",
-     "dimensions": "768x768",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 32483
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/people/bespoke/david-schwimmer.jpg.transform/resize-768/q82/image.jpg",
-     "page": "https://www.lseg.com/en/about-us/board-of-directors",
-     "domaine": "lseg.com",
-     "dimensions": "768x768",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 25025
-    }
-   ]
-  },
-  "MCO": {
-   "candidats": [
-    {
-     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_42564852_c/container/container_884161388__1258557960/image.coreimg.png/1765915534285/noemie-aboutus.png",
-     "page": "https://www.moodys.com/web/en/us/about.html",
-     "domaine": "moodys.com",
-     "dimensions": "800x800",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 47192
-    },
-    {
-     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_42564852_c/container/container_1333732276_870863450/image.coreimg.jpeg/1750077110507/maral-kazanjian2.jpeg",
-     "page": "https://www.moodys.com/web/en/us/about.html",
-     "domaine": "moodys.com",
-     "dimensions": "800x800",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 36288
-    },
-    {
-     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_408640577_/column_control/col3/image.coreimg.png/1723454698678/about-us-trust-center.png",
-     "page": "https://www.moodys.com/web/en/us/about.html",
-     "domaine": "moodys.com",
-     "dimensions": "1280x709",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 65259
-    },
-    {
-     "image": "https://www.moodys.com/web/en/us/about-us/leadership/christina-kosmowski/_jcr_content/root/container/container/image.coreimg.jpeg/1782203092314/christina-kosmowski-profile-page-new.jpeg",
-     "page": "https://www.moodys.com/web/en/us/about-us/leadership/christina-kosmowski.html",
-     "domaine": "moodys.com",
-     "dimensions": "815x784",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 45742
-    }
-   ]
-  },
-  "MUV2.DE": {
-   "candidats": [
-    {
-     "image": "https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-477428748.jpg/_jcr_content/renditions/original.image_file.1200.800.file/GettyImages-477428748.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1200x800",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 137592
-    },
-    {
-     "image": "https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-477428748.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 143249
-    },
-    {
-     "image": "https://www.munichre.com/content/dam/munichre/mrm/royalty-free-shutterstock/shutterstock_143124628.jpg/_jcr_content/renditions/crop-2x1-768.jpg./crop-2x1-768.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "768x384",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 53306
-    },
-    {
-     "image": "https://www.munichre.com/content/dam/munichre/mrm/key-visuals-com-142/GettyImages-1796631627_gesp.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 145070
-    },
-    {
-     "image": "https://www.munichre.com/content/dam/munichre/global/shootings/architecture/s3/BUCK_MunichRe0269.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 58536
-    },
-    {
-     "image": "https://www.munichre.com/content/dam/munichre/global/shootings/architecture/s3/BUCK_2017-06_MunichRE-0318.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 90358
-    }
-   ]
-  },
-  "NBIS": {
-   "candidats": [
-    {
-     "image": "https://assets.nebius.com/assets/76eb33c3-841d-452d-aafd-2933c8bec9cb/nebius-share.png?cache-buster=2026-06-09T18:15:08.818Z",
-     "page": "https://nebius.com/",
-     "domaine": "nebius.com",
-     "dimensions": "1280x640",
-     "conditions": "non établies",
-     "credit": "Nebius Group",
-     "poids": 48650
-    },
-    {
-     "image": "https://assets.nebius.com/assets/1bf20216-f587-4473-95dd-36599cde7124/nebius-inflection-video-dark-mobile.jpg?cache-buster=2026-06-08T15:30:16.028Z",
-     "page": "https://nebius.com/",
-     "domaine": "nebius.com",
-     "dimensions": "1200x1518",
-     "conditions": "non établies",
-     "credit": "Nebius Group",
-     "poids": 31554
-    },
-    {
-     "image": "https://assets.nebius.com/assets/426ccedb-9d23-454b-892c-08bcb05c081e/cs-video-cover-revolut.jpg?cache-buster=2026-06-06T18:21:28.117Z",
-     "page": "https://nebius.com/",
-     "domaine": "nebius.com",
-     "dimensions": "800x480",
-     "conditions": "non établies",
-     "credit": "Nebius Group",
-     "poids": 34102
-    },
-    {
-     "image": "https://assets.nebius.com/assets/97698715-74be-4466-a279-9983df2cf7b8/cs-video-cover-roboforce.jpg?cache-buster=2026-06-06T18:21:35.036Z",
-     "page": "https://nebius.com/",
-     "domaine": "nebius.com",
-     "dimensions": "800x480",
-     "conditions": "non établies",
-     "credit": "Nebius Group",
-     "poids": 34955
-    },
-    {
-     "image": "https://assets.nebius.com/assets/efd66acc-4af3-4056-b747-3988edd70963/cs-video-cover-shopify.jpg?cache-buster=2026-06-06T18:21:41.958Z",
-     "page": "https://nebius.com/",
-     "domaine": "nebius.com",
-     "dimensions": "800x480",
-     "conditions": "non établies",
-     "credit": "Nebius Group",
-     "poids": 41365
-    },
-    {
-     "image": "https://assets.nebius.com/assets/41dcdf5d-fa58-4759-8a18-c7809b6dcedf/brand-video-cover.jpg?cache-buster=2026-06-08T17:32:08.901Z",
-     "page": "https://nebius.com/",
-     "domaine": "nebius.com",
-     "dimensions": "1232x693",
-     "conditions": "non établies",
-     "credit": "Nebius Group",
-     "poids": 70076
-    }
-   ]
-  },
-  "PWR": {
-   "candidats": [
-    {
-     "image": "https://cmswp.quantaservices.com/wp-content/uploads/2022/08/21262578142_1e3a1f5f83_o-scaled.jpg",
-     "page": "https://www.quantaservices.com/",
-     "domaine": "quantaservices.com",
-     "dimensions": "2560x1707",
-     "conditions": "non établies",
-     "credit": "Quanta Services",
-     "poids": 45088
-    },
-    {
-     "image": "https://cmswp.quantaservices.com/wp-content/uploads/2023/03/Capabilities-Utility-Performance-Solutions.jpg",
-     "page": "https://www.quantaservices.com/capabilities/utility-performance-solutions",
-     "domaine": "quantaservices.com",
-     "dimensions": "1920x1080",
-     "conditions": "non établies",
-     "credit": "Quanta Services",
-     "poids": 83970
-    },
-    {
-     "image": "https://cmswp.quantaservices.com/wp-content/uploads/2023/07/imageedit_50_5769976879.jpeg",
-     "page": "https://www.quantaservices.com/capabilities/concrete-solutions",
-     "domaine": "quantaservices.com",
-     "dimensions": "957x595",
-     "conditions": "non établies",
-     "credit": "Quanta Services",
-     "poids": 77460
     }
    ]
   }
