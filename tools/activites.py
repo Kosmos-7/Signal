@@ -75,8 +75,12 @@ REQUETES = {
                        "cash register machine", "cheque clearing house"],
     "gestion":        ["stock certificate engraving", "portfolio ledger book",
                        "financial documents desk", "safe deposit boxes"],
-    "peages":         ["stock ticker tape machine", "stock exchange display board",
-                       "financial newspaper stock listings", "exchange building interior"],
+    # « stock ticker tape machine » ramenait des unes de journaux et une
+    # caricature de 1901 sur la spéculation : mauvais message pour des sociétés
+    # qui vendent un péage d'infrastructure, pas de la spéculation.
+    "peages":         ["stock ticker tape machine closeup", "telegraph ticker instrument",
+                       "trading floor quote board", "stock exchange arbitration room",
+                       "share price board chalk"],
     # ── Secteurs, pour les titres hors thèmes ────────────────────────────
     "tech-logiciel":  ["computer keyboard closeup", "punched card computing",
                        "computer terminal screen code", "circuit board macro"],
@@ -86,10 +90,10 @@ REQUETES = {
                          "banking hall interior"],
     "industrie":      ["factory production line machinery", "industrial turbine",
                        "steel mill interior", "freight locomotive"],
-    "sante":          ["laboratory microscope research", "pharmaceutical production line",
-                       "medical imaging scanner", "laboratory glassware"],
-    "conso":          ["supermarket shelves products", "grocery store aisle",
-                       "bottling plant production line"],
+    "sante":          ["laboratory glassware flasks", "microscope laboratory bench",
+                       "pill production tablets", "MRI scanner room", "petri dish culture"],
+    "conso":          ["supermarket shelves", "grocery store interior",
+                       "bottling plant", "vending machine row", "shopping cart store aisle"],
     "energie-reseau": ["power grid pylons", "nuclear power plant cooling towers",
                        "electrical substation"],
     "materiaux":      ["chemical plant pipes", "industrial gas tanks", "refinery towers"],
