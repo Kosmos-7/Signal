@@ -23,8 +23,10 @@ ce qui manque : la fiche thématique est plus courte, et le prompt n'énonce que
 métriques réellement disponibles.
 
   niveau « complet »    : resume · biz · futur · actu · bull · bear   (6 champs)
-  niveau « thematique » : resume · biz · futur · bull · bear          (5 champs, pas d'`actu`
-                          faute de source d'actualité datée pour ces titres)
+  niveau « thematique » : resume · biz · futur · bull · bear          (5 champs au socle)
+                          + `actu` quand des titres de presse datés ont été trouvés
+                          pour ce titre. Sinon la fiche porte `_sans_actu` : on a
+                          cherché, il n'y avait rien, et on ne meuble pas.
 
 Schéma de sortie (consommé par render() dans index.html) :
   analyses.json = { "<TICKER>": {
@@ -114,9 +116,13 @@ NIVEAU_COMPLET    = "complet"
 NIVEAU_THEMATIQUE = "thematique"
 
 # Champs éditoriaux attendus par render(), PAR NIVEAU (ordre = ordre d'affichage).
-# `actu` est absent du niveau thématique : aucune source d'actualité datée n'est
-# collectée pour ces titres, et un paragraphe d'actu sans faits sourcés serait
-# exactement le genre de remplissage que ce projet refuse d'écrire.
+# `actu` n'est pas au socle du niveau thématique, mais il n'y est plus interdit :
+# depuis août 2026 on cherche des titres de presse pour TOUS les titres publiés,
+# pas seulement le top 30. La rubrique apparaît quand une source datée existe, et
+# seulement dans ce cas — un paragraphe d'actu sans faits sourcés reste exactement
+# le genre de remplissage que ce projet refuse d'écrire. Une fiche pour laquelle
+# aucune source n'a été trouvée porte `_sans_actu`, ce qui distingue « on a
+# cherché, il n'y avait rien » de « on n'a jamais cherché ».
 CHAMPS_PAR_NIVEAU = {
     NIVEAU_COMPLET:    ["resume", "biz", "futur", "actu", "bull", "bear"],
     NIVEAU_THEMATIQUE: ["resume", "biz", "futur", "bull", "bear"],
@@ -444,7 +450,14 @@ def entry_is_complete(entry, niveau):
     Sert à rattraper une entrée manuelle/legacy incomplète même si _sig coïncide."""
     if not isinstance(entry, dict):
         return False
-    return all(entry.get(f) for f in CHAMPS_PAR_NIVEAU.get(niveau, ALL_FIELDS))
+    if not all(entry.get(f) for f in CHAMPS_PAR_NIVEAU.get(niveau, ALL_FIELDS)):
+        return False
+    # Niveau thématique : la rubrique actu est désormais tentée pour tous les
+    # titres. Sans `actu` NI marque `_sans_actu`, la fiche date d'avant ce
+    # changement — on la régénère une fois pour lui donner sa chance.
+    if niveau == NIVEAU_THEMATIQUE:
+        return bool(entry.get("actu")) or bool(entry.get("_sans_actu"))
+    return True
 
 
 # ── INPUT PAR TICKER ─────────────────────────────────────────────────────────
@@ -456,9 +469,11 @@ def fetch_news(ticker, limit=5):
     donc sur yfinance .news. Robuste : toute erreur -> []. Retourne une liste de strings
     "AAAA-MM-JJ — Titre (éditeur)".
 
-    Appelé UNIQUEMENT pour les fiches de niveau complet : le niveau thématique n'a pas
-    de champ `actu`, et lancer 154 requêtes yfinance de plus ne servirait qu'à allonger
-    le run et à multiplier les occasions de se faire limiter.
+    Appelé pour TOUTES les fiches publiées depuis août 2026. La restriction au top 30
+    datait de l'époque où le niveau thématique n'avait pas de champ `actu` : un titre
+    couvert par le site mérite qu'on cherche s'il a une actualité datée. Coût réel :
+    une requête yfinance par fiche, en parallèle sur les workers, soit une poignée de
+    secondes sur un run qui en dure plusieurs centaines.
     """
     out = []
     try:
@@ -668,7 +683,12 @@ def build_prompt(stock, guide, news, niveau):
     """
     ticker = stock["ticker"]
     today = str(date.today())
-    champs = CHAMPS_PAR_NIVEAU[niveau]
+    # Une fiche thématique gagne sa rubrique actu dès qu'on a trouvé des titres de
+    # presse datés pour elle. Le champ n'est demandé QUE dans ce cas : sans source,
+    # on préfère une fiche courte à un paragraphe inventé.
+    avec_actu = bool(news)
+    champs = CHAMPS_PAR_NIVEAU[niveau] + (
+        ["actu"] if (avec_actu and "actu" not in CHAMPS_PAR_NIVEAU[niveau]) else [])
 
     if niveau == NIVEAU_COMPLET:
         news_block = (
@@ -693,7 +713,13 @@ def build_prompt(stock, guide, news, niveau):
         longueurs = ("Contraintes de longueur : resume 1-2 §, biz 2 §, futur 2 §, actu 1 § dense, "
                      "bull et bear EXACTEMENT 3 puces chacun. Chaque § = 2 à 4 phrases.")
     else:
-        bloc_actu = ""
+        bloc_actu = (
+            "\n## ACTUALITÉ\n"
+            "Titres de presse récents pour ce titre (à recouper, ne JAMAIS inventer "
+            "au-delà de ces faits, ne JAMAIS en déduire un chiffre financier absent "
+            "du cadre de données ci-dessus) :\n"
+            + "\n".join(f"  - {n}" for n in news) + "\n"
+        ) if avec_actu else ""
         themes = [t for t in (stock.get("themes") or []) if t]
         ligne_themes = (
             f"Ce titre est publié dans les watchlists thématiques suivantes : {', '.join(themes)}. "
@@ -704,10 +730,13 @@ def build_prompt(stock, guide, news, niveau):
         cadre_donnees = (
             f"\n## PÉRIMÈTRE DES DONNÉES (LIS CECI AVANT D'ÉCRIRE)\n{ligne_themes}"
             "Ce titre ne fait pas partie de la watchlist principale : le screener n'en publie "
-            "qu'un jeu de données RÉDUIT — celui listé ci-dessus, rien de plus. Tu ne disposes "
-            "NI du chiffre d'affaires, NI des marges, NI d'un PER, d'un PEG ou d'un FCF yield, "
-            "NI d'actualité datée pour ce titre.\n"
-            "En conséquence, RÈGLE ABSOLUE : ne cite, n'estime et n'évoque AUCUNE de ces "
+            "qu'un jeu de données RÉDUIT, celui listé ci-dessus, rien de plus. Tu ne disposes "
+            "NI du chiffre d'affaires, NI des marges, NI d'un PER, d'un PEG ou d'un FCF yield. "
+            + ("Tu n'as pas non plus d'actualité datée pour ce titre.\n" if not avec_actu else
+               "Tu disposes en revanche des titres de presse listés plus bas : ils sont ta "
+               "SEULE source d'actualité, et ne t'autorisent aucun chiffre financier qu'ils "
+               "ne contiennent pas explicitement.\n")
+            + "En conséquence, RÈGLE ABSOLUE : ne cite, n'estime et n'évoque AUCUNE de ces "
             "métriques — pas même de mémoire, pas même approximativement, pas même en la "
             "qualifiant (« marges élevées », « valorisation à 30x »). Tout jugement chiffré doit "
             "s'appuyer exclusivement sur les nombres fournis plus haut. Ce que tu ignores, tu ne "
@@ -721,21 +750,23 @@ def build_prompt(stock, guide, news, niveau):
             f'{stock.get("score","?")}/100 à la qualité, pas au timing."],\n'
             '  "biz":    ["§ comment la boîte gagne de l\'argent + type de douve nommé et sa durabilité."],\n'
             '  "futur":  ["§ drivers de croissance + cadrage prix vs valeur à partir des SEULS chiffres fournis (score, z-score, décote vs tendance, RSI, consensus), SANS cible chiffrée."],\n'
-            '  "bull":   ["puce 1", "puce 2", "puce 3"],\n'
+            + ('  "actu":   ["§ ce que disent les titres de presse ci-dessus, datés, sans y ajouter aucun chiffre financier."],\n' if avec_actu else "")
+            + '  "bull":   ["puce 1", "puce 2", "puce 3"],\n'
             '  "bear":   ["puce 1 (inversion)", "puce 2 (inversion)", "puce 3 (inversion)"]'
         )
         longueurs = ("Contraintes de longueur (fiche COURTE) : resume 1 §, biz 1 §, futur 1 §, "
-                     "bull et bear EXACTEMENT 3 puces chacun. Chaque § = 2 à 3 phrases, chaque puce 1 phrase.")
+                     + ("actu 1 § court, " if avec_actu else "")
+                     + "bull et bear EXACTEMENT 3 puces chacun. Chaque § = 2 à 3 phrases, chaque puce 1 phrase.")
 
     variable = f"""Tu rédiges la fiche éditoriale du titre {ticker} pour « Signal », un screener
 d'actions présenté comme un service éditorial d'information financière (statut Bêta/fictif).
 Date du jour : {today}.
 
-## DONNÉES QUANTITATIVES DU TITRE (issues du screener — source de vérité pour les chiffres techniques)
+## DONNÉES QUANTITATIVES DU TITRE (issues du screener, source de vérité pour les chiffres techniques)
 {breakdown_block(stock, niveau)}
 {cadre_donnees}{bloc_actu}
 ## TON & CONTRAINTES (NON NÉGOCIABLES)
-- Ton PRÉCIS, FACTUEL, CLAIR et posé — analyste rigoureux. Plume vivante mais sobre : une
+- Ton PRÉCIS, FACTUEL, CLAIR et posé, celui d'un analyste rigoureux. Plume vivante mais sobre : une
   pointe d'esprit pince-sans-rire est bienvenue de loin en loin, JAMAIS lourde, jamais un
   calembour gratuit, jamais de hype ni de ton promotionnel. Le fond prime sur le trait d'esprit.
 - AUCUNE prétention d'alpha, AUCUN conseil d'achat/vente, AUCUN objectif de cours chiffré.
@@ -790,7 +821,7 @@ def _sanitize_html(text):
     return s.replace("&lt;b&gt;", "<b>").replace("&lt;/b&gt;", "</b>")
 
 
-def parse_and_validate(raw, niveau):
+def parse_and_validate(raw, niveau, champs=None):
     """Parse la réponse Claude et valide le schéma DU NIVEAU. Lève ValueError si invalide.
 
     Même nettoyage que portfolio_agent.py (strip ```json / ```), plus un filet de
@@ -812,7 +843,7 @@ def parse_and_validate(raw, niveau):
         raise ValueError("la réponse n'est pas un objet JSON")
 
     out = {}
-    for field in CHAMPS_PAR_NIVEAU[niveau]:
+    for field in champs or CHAMPS_PAR_NIVEAU[niveau]:
         val = data.get(field)
         if val is None:
             raise ValueError(f"champ manquant : {field}")
@@ -841,8 +872,14 @@ def generate_one(stock, guide, niveau):
     d'usage renvoyé par l'API (tokens entrée/sortie/cache) — agrégé en fin de run
     pour publier le coût réel.
     """
-    news = fetch_news(stock["ticker"]) if niveau == NIVEAU_COMPLET else []
+    # On cherche des actualités pour TOUS les titres publiés, plus seulement le
+    # top 30 : un titre thématique est couvert par le site, donc il mérite qu'on
+    # regarde s'il a une actualité datée. L'absence de rubrique devient un constat
+    # (« rien trouvé cette semaine ») au lieu d'une règle de catégorie.
+    news = fetch_news(stock["ticker"])
     content = build_prompt(stock, guide, news, niveau)
+    champs = CHAMPS_PAR_NIVEAU[niveau] + (
+        ["actu"] if (news and "actu" not in CHAMPS_PAR_NIVEAU[niveau]) else [])
 
     response = client.messages.create(
         model=MODEL,
@@ -857,9 +894,14 @@ def generate_one(stock, guide, niveau):
     if not response.content:
         raise ValueError("réponse vide du modèle (content=[])")
     raw = response.content[0].text
-    analysis = parse_and_validate(raw, niveau)
+    analysis = parse_and_validate(raw, niveau, champs)
     analysis["_niveau"] = niveau
     analysis["_sig"] = signature(stock, niveau)
+    if niveau == NIVEAU_THEMATIQUE and not analysis.get("actu"):
+        # Trace explicite : on a cherché une source datée, il n'y en avait pas.
+        # Sans cette marque, la fiche serait re-générée à chaque run pour un
+        # champ que personne ne peut produire.
+        analysis["_sans_actu"] = True
     return analysis, getattr(response, "usage", None)
 
 
