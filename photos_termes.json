@@ -1,114 +1,423 @@
 {
- "societes": 3,
+ "societes": 6,
  "detail": {
-  "APP1": {
+  "APP10": {
    "candidats": [
     {
-     "fichier": "Wall Street, Manhattan, New York City, 20231002 172333.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Wall_Street%2C_Manhattan%2C_New_York_City%2C_20231002_172333.jpg/1920px-Wall_Street%2C_Manhattan%2C_New_York_City%2C_20231002_172333.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Wall_Street,_Manhattan,_New_York_City,_20231002_172333.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Jakub Hałun",
-     "score": 0,
-     "terme": "Wall Street Manhattan street view",
-     "poids": 83602
+     "fichier": "Mission Control console, Apollo era - Evergreen Aviation & Space Museum - McMinnville, Oregon - DSC00842.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Mission_Control_console%2C_Apollo_era_-_Evergreen_Aviation_%26_Space_Museum_-_McMinnville%2C_Oregon_-_DSC00842.jpg/1920px-Mission_Control_console%2C_Apollo_era_-_Evergreen_Aviation_%26_Space_Museum_-_McMinnville%2C_Oregon_-_DSC00842.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Mission_Control_console,_Apollo_era_-_Evergreen_Aviation_%26_Space_Museum_-_McMinnville,_Oregon_-_DSC00842.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Daderot",
+     "score": 4,
+     "terme": "mission control room consoles",
+     "poids": 50774
     },
     {
-     "fichier": "Wall Street - New York Stock Exchange.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Wall_Street_-_New_York_Stock_Exchange.jpg/1920px-Wall_Street_-_New_York_Stock_Exchange.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Wall_Street_-_New_York_Stock_Exchange.jpg",
+     "fichier": "Jsc2026e018923 (April 1, 2026) - Artemis II capcom Stan Love sits on console in Mission Control's White Flight Control Room in Houston, Texas during the Artemis II mission launch and ascent on April 1, 2026.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Jsc2026e018923_%28April_1%2C_2026%29_-_Artemis_II_capcom_Stan_Love_sits_on_console_in_Mission_Control%27s_White_Flight_Control_Room_in_Houston%2C_Texas_during_the_Artemis_II_mission_launch_and_ascent_on_April_1%2C_2026.jpg/1920px-thumbnail.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Jsc2026e018923_(April_1,_2026)_-_Artemis_II_capcom_Stan_Love_sits_on_console_in_Mission_Control%27s_White_Flight_Control_Room_in_Houston,_Texas_during_the_Artemis_II_mission_launch_and_ascent_on_April_1,_2026.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Johnson Space Center / ROBERT MARKOWITZ  NASA-JSC",
+     "score": 4,
+     "terme": "mission control room consoles",
+     "poids": 46782
+    },
+    {
+     "fichier": "Johnson Space Center - Apollo Mission Control Room - Console Detail - panoramio.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Johnson_Space_Center_-_Apollo_Mission_Control_Room_-_Console_Detail_-_panoramio.jpg/1920px-Johnson_Space_Center_-_Apollo_Mission_Control_Room_-_Console_Detail_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Johnson_Space_Center_-_Apollo_Mission_Control_Room_-_Console_Detail_-_panoramio.jpg",
      "licence": "CC BY-SA 3.0",
      "famille": "by-sa",
-     "auteur": "Carlos Delgado",
-     "score": 0,
-     "terme": "Wall Street Manhattan street view",
-     "poids": 96947
+     "auteur": "Stefan Bethke",
+     "score": 4,
+     "terme": "mission control room consoles",
+     "poids": 25921
     },
     {
-     "fichier": "View of Manhattan from Brooklyn Bridge Park, New York City, 20231005 0914 2148.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/View_of_Manhattan_from_Brooklyn_Bridge_Park%2C_New_York_City%2C_20231005_0914_2148.jpg/1920px-View_of_Manhattan_from_Brooklyn_Bridge_Park%2C_New_York_City%2C_20231005_0914_2148.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:View_of_Manhattan_from_Brooklyn_Bridge_Park,_New_York_City,_20231005_0914_2148.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Jakub Hałun",
+     "fichier": "Eugene F. Kranz at his console at the NASA Mission Control Center.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Eugene_F._Kranz_at_his_console_at_the_NASA_Mission_Control_Center.jpg/1920px-Eugene_F._Kranz_at_his_console_at_the_NASA_Mission_Control_Center.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Eugene_F._Kranz_at_his_console_at_the_NASA_Mission_Control_Center.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Adam Cuerden",
+     "score": 4,
+     "terme": "mission control room consoles",
+     "poids": 62263
+    },
+    {
+     "fichier": "Wide angle view of Mission Control Center during Apollo 14 transmission (S71-17122).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Wide_angle_view_of_Mission_Control_Center_during_Apollo_14_transmission_%28S71-17122%29.jpg/1920px-Wide_angle_view_of_Mission_Control_Center_during_Apollo_14_transmission_%28S71-17122%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wide_angle_view_of_Mission_Control_Center_during_Apollo_14_transmission_(S71-17122).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Johnson Space Center",
      "score": 0,
-     "terme": "Wall Street Manhattan street view",
-     "poids": 120076
+     "terme": "mission control room consoles",
+     "poids": 92698
+    },
+    {
+     "fichier": "View of Mission Control during lunar surface Apollo 11 EVA (S69-39593).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/View_of_Mission_Control_during_lunar_surface_Apollo_11_EVA_%28S69-39593%29.jpg/1920px-View_of_Mission_Control_during_lunar_surface_Apollo_11_EVA_%28S69-39593%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:View_of_Mission_Control_during_lunar_surface_Apollo_11_EVA_(S69-39593).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Johnson Space Center / NA",
+     "score": 0,
+     "terme": "mission control room consoles",
+     "poids": 87736
     }
    ]
   },
-  "APP3": {
+  "APP11": {
    "candidats": [
     {
-     "fichier": "Stock Certficate SKF 1913.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Stock_Certficate_SKF_1913.jpg/1920px-Stock_Certficate_SKF_1913.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Stock_Certficate_SKF_1913.jpg",
-     "licence": "Public domain",
+     "fichier": "Logbook of the Almira (Ship) of Edgartown, mastered by Charles M. Marchant on voyage from 5 Aug. 1869-1870 (1869) (14796218183).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814796218183%29.jpg/1920px-Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814796218183%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Logbook_of_the_Almira_(Ship)_of_Edgartown,_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_(1869)_(14796218183).jpg",
+     "licence": "No restrictions",
      "famille": "libre",
-     "auteur": "Aktiebolaget Svenska Kullagerfabriken",
-     "score": 0,
-     "terme": "share certificate",
-     "poids": 171432
+     "auteur": "Almira (Ship)",
+     "score": 3,
+     "terme": "ship logbook page",
+     "poids": 103784
     },
     {
-     "fichier": "New Jersey Midland Railway Co 1872.JPG",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/New_Jersey_Midland_Railway_Co_1872.JPG/1920px-New_Jersey_Midland_Railway_Co_1872.JPG",
-     "page": "https://commons.wikimedia.org/wiki/File:New_Jersey_Midland_Railway_Co_1872.JPG",
-     "licence": "Public domain",
+     "fichier": "Logbook of the Almira (Ship) of Edgartown, mastered by Charles M. Marchant on voyage from 5 Aug. 1869-1870 (1869) (14776042682).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814776042682%29.jpg/1920px-Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814776042682%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Logbook_of_the_Almira_(Ship)_of_Edgartown,_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_(1869)_(14776042682).jpg",
+     "licence": "No restrictions",
      "famille": "libre",
-     "auteur": "Stock: New Jersey Midland Railway Co; Stamps: Government commissioned printing b",
-     "score": 0,
-     "terme": "share certificate",
-     "poids": 190719
+     "auteur": "Almira (Ship)",
+     "score": 3,
+     "terme": "ship logbook page",
+     "poids": 33320
     },
     {
-     "fichier": "Home Decor Part de Fondateur 1898.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Home_Decor_Part_de_Fondateur_1898.jpg/1920px-Home_Decor_Part_de_Fondateur_1898.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:Home_Decor_Part_de_Fondateur_1898.jpg",
-     "licence": "CC0",
+     "fichier": "Logbook of the Almira (Ship) of Edgartown, mastered by Charles M. Marchant on voyage from 5 Aug. 1869-1870 (1869) (14776017182).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814776017182%29.jpg/1920px-Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814776017182%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Logbook_of_the_Almira_(Ship)_of_Edgartown,_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_(1869)_(14776017182).jpg",
+     "licence": "No restrictions",
      "famille": "libre",
-     "auteur": "Julie Ceccaldi",
+     "auteur": "Almira (Ship)",
+     "score": 3,
+     "terme": "ship logbook page",
+     "poids": 45713
+    },
+    {
+     "fichier": "Logbook of the Almira (Ship) of Edgartown, mastered by Charles M. Marchant on voyage from 5 Aug. 1869-1870 (1869) (14774067644).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814774067644%29.jpg/1920px-Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814774067644%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Logbook_of_the_Almira_(Ship)_of_Edgartown,_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_(1869)_(14774067644).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Almira (Ship)",
+     "score": 3,
+     "terme": "ship logbook page",
+     "poids": 47870
+    },
+    {
+     "fichier": "Logbook of the Almira (Ship) of Edgartown, mastered by Charles M. Marchant on voyage from 5 Aug. 1869-1870 (1869) (14774053004).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814774053004%29.jpg/1920px-Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814774053004%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Logbook_of_the_Almira_(Ship)_of_Edgartown,_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_(1869)_(14774053004).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Almira (Ship)",
+     "score": 3,
+     "terme": "ship logbook page",
+     "poids": 35549
+    },
+    {
+     "fichier": "Logbook of the Almira (Ship) of Edgartown, mastered by Charles M. Marchant on voyage from 5 Aug. 1869-1870 (1869) (14774021744).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814774021744%29.jpg/1920px-Logbook_of_the_Almira_%28Ship%29_of_Edgartown%2C_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_%281869%29_%2814774021744%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Logbook_of_the_Almira_(Ship)_of_Edgartown,_mastered_by_Charles_M._Marchant_on_voyage_from_5_Aug._1869-1870_(1869)_(14774021744).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Almira (Ship)",
+     "score": 3,
+     "terme": "ship logbook page",
+     "poids": 40738
+    }
+   ]
+  },
+  "APP12": {
+   "candidats": [
+    {
+     "fichier": "Yaizu Public Yaizu Library bookshelves ac (6).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Yaizu_Public_Yaizu_Library_bookshelves_ac_%286%29.jpg/1920px-Yaizu_Public_Yaizu_Library_bookshelves_ac_%286%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Yaizu_Public_Yaizu_Library_bookshelves_ac_(6).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Asturio Cantabrio",
      "score": 0,
-     "terme": "share certificate",
-     "poids": 129445
+     "terme": "public library bookshelves",
+     "poids": 112982
+    },
+    {
+     "fichier": "Yaizu Public Yaizu Library bookshelves ac (5).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Yaizu_Public_Yaizu_Library_bookshelves_ac_%285%29.jpg/1920px-Yaizu_Public_Yaizu_Library_bookshelves_ac_%285%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Yaizu_Public_Yaizu_Library_bookshelves_ac_(5).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Asturio Cantabrio",
+     "score": 0,
+     "terme": "public library bookshelves",
+     "poids": 94135
+    },
+    {
+     "fichier": "Yaizu Public Yaizu Library bookshelves ac (4).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Yaizu_Public_Yaizu_Library_bookshelves_ac_%284%29.jpg/1920px-Yaizu_Public_Yaizu_Library_bookshelves_ac_%284%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Yaizu_Public_Yaizu_Library_bookshelves_ac_(4).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Asturio Cantabrio",
+     "score": 0,
+     "terme": "public library bookshelves",
+     "poids": 103264
+    },
+    {
+     "fichier": "Yaizu Public Yaizu Library bookshelves ac (3).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Yaizu_Public_Yaizu_Library_bookshelves_ac_%283%29.jpg/1920px-Yaizu_Public_Yaizu_Library_bookshelves_ac_%283%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Yaizu_Public_Yaizu_Library_bookshelves_ac_(3).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Asturio Cantabrio",
+     "score": 0,
+     "terme": "public library bookshelves",
+     "poids": 98024
+    },
+    {
+     "fichier": "Suzzallo Reading Room University of Washington restoration Seattle Washington 2026.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Suzzallo_Reading_Room_University_of_Washington_restoration_Seattle_Washington_2026.jpg/1920px-Suzzallo_Reading_Room_University_of_Washington_restoration_Seattle_Washington_2026.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Suzzallo_Reading_Room_University_of_Washington_restoration_Seattle_Washington_2026.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Guywelch2000",
+     "score": 0,
+     "terme": "library reading room",
+     "poids": 112436
+    },
+    {
+     "fichier": "State Library of Victoria La Trobe Reading room 5th floor view.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/State_Library_of_Victoria_La_Trobe_Reading_room_5th_floor_view.jpg/1920px-State_Library_of_Victoria_La_Trobe_Reading_room_5th_floor_view.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:State_Library_of_Victoria_La_Trobe_Reading_room_5th_floor_view.jpg",
+     "licence": "CC BY 2.5",
+     "famille": "by",
+     "auteur": "Diliff",
+     "score": 0,
+     "terme": "library reading room",
+     "poids": 87596
     }
    ]
   },
   "APP5": {
    "candidats": [
     {
-     "fichier": "The Brentford Race for the Middlesex Septennial Plate (BM 1868,0808.5261).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/The_Brentford_Race_for_the_Middlesex_Septennial_Plate_%28BM_1868%2C0808.5261%29.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:The_Brentford_Race_for_the_Middlesex_Septennial_Plate_(BM_1868,0808.5261).jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "\nPrint made by: William Dent\n\nPublished by: J Brown",
+     "fichier": "Scales, balance (AM 1962.54-9).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Scales%2C_balance_%28AM_1962.54-9%29.jpg/1920px-Scales%2C_balance_%28AM_1962.54-9%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Scales,_balance_(AM_1962.54-9).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "\nUnknown authorUnknown author",
      "score": 0,
-     "terme": "apothecary balance scale",
-     "poids": 153782
+     "terme": "balance scale brass",
+     "poids": 69784
     },
     {
-     "fichier": "The Brentford Race for the Middlesex Septennial Plate (BM 1868,0808.5261 1).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/The_Brentford_Race_for_the_Middlesex_Septennial_Plate_%28BM_1868%2C0808.5261_1%29.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:The_Brentford_Race_for_the_Middlesex_Septennial_Plate_(BM_1868,0808.5261_1).jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "\nPrint made by: William Dent\n\nPublished by: J Brown",
+     "fichier": "Scales, balance (AM 1962.54-8).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Scales%2C_balance_%28AM_1962.54-8%29.jpg/1920px-Scales%2C_balance_%28AM_1962.54-8%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Scales,_balance_(AM_1962.54-8).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "\nUnknown authorUnknown author",
      "score": 0,
-     "terme": "apothecary balance scale",
-     "poids": 116422
+     "terme": "balance scale brass",
+     "poids": 62859
     },
     {
-     "fichier": "Operating the Comptometer - 6 - Multiplication.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Operating_the_Comptometer_-_6_-_Multiplication.png",
-     "page": "https://commons.wikimedia.org/wiki/File:Operating_the_Comptometer_-_6_-_Multiplication.png",
+     "fichier": "Scales, balance (AM 1962.54-7).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Scales%2C_balance_%28AM_1962.54-7%29.jpg/1920px-Scales%2C_balance_%28AM_1962.54-7%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Scales,_balance_(AM_1962.54-7).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "\nUnknown authorUnknown author",
+     "score": 0,
+     "terme": "balance scale brass",
+     "poids": 55811
+    },
+    {
+     "fichier": "Scales, balance (AM 1962.54-5).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Scales%2C_balance_%28AM_1962.54-5%29.jpg/1920px-Scales%2C_balance_%28AM_1962.54-5%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Scales,_balance_(AM_1962.54-5).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "\nUnknown authorUnknown author",
+     "score": 0,
+     "terme": "balance scale brass",
+     "poids": 62213
+    },
+    {
+     "fichier": "Scales, balance (AM 1962.54-3).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Scales%2C_balance_%28AM_1962.54-3%29.jpg/1920px-Scales%2C_balance_%28AM_1962.54-3%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Scales,_balance_(AM_1962.54-3).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "\nUnknown authorUnknown author",
+     "score": 0,
+     "terme": "balance scale brass",
+     "poids": 91677
+    },
+    {
+     "fichier": "Scales, balance (AM 1962.54-2).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Scales%2C_balance_%28AM_1962.54-2%29.jpg/1920px-Scales%2C_balance_%28AM_1962.54-2%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Scales,_balance_(AM_1962.54-2).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "\nUnknown authorUnknown author",
+     "score": 0,
+     "terme": "balance scale brass",
+     "poids": 64321
+    }
+   ]
+  },
+  "APP8": {
+   "candidats": [
+    {
+     "fichier": "Card-punching machine-CNAM 6855-IMG 5169-white.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Card-punching_machine-CNAM_6855-IMG_5169-white.jpg/1920px-Card-punching_machine-CNAM_6855-IMG_5169-white.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Card-punching_machine-CNAM_6855-IMG_5169-white.jpg",
+     "licence": "CC BY-SA 3.0 fr",
+     "famille": "by-sa",
+     "auteur": "Rama",
+     "score": 10,
+     "terme": "punched card machine",
+     "poids": 34206
+    },
+    {
+     "fichier": "Card-punching machine-CNAM 6855-IMG 5169-gradient.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Card-punching_machine-CNAM_6855-IMG_5169-gradient.jpg/1920px-Card-punching_machine-CNAM_6855-IMG_5169-gradient.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Card-punching_machine-CNAM_6855-IMG_5169-gradient.jpg",
+     "licence": "CC BY-SA 3.0 fr",
+     "famille": "by-sa",
+     "auteur": "Rama",
+     "score": 10,
+     "terme": "punched card machine",
+     "poids": 34692
+    },
+    {
+     "fichier": "Card-punching machine-CNAM 6855-IMG 5169-black.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card-punching_machine-CNAM_6855-IMG_5169-black.jpg/1920px-Card-punching_machine-CNAM_6855-IMG_5169-black.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Card-punching_machine-CNAM_6855-IMG_5169-black.jpg",
+     "licence": "CC BY-SA 3.0 fr",
+     "famille": "by-sa",
+     "auteur": "Rama",
+     "score": 10,
+     "terme": "punched card machine",
+     "poids": 32302
+    },
+    {
+     "fichier": "Visible Punching Machine.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Visible_Punching_Machine.png/1920px-Visible_Punching_Machine.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Visible_Punching_Machine.png",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "Operating the Comptometer",
-     "score": 0,
-     "terme": "comptometer mechanical calculator",
-     "poids": 111565
+     "auteur": "W. E. FREEMAN",
+     "score": 5,
+     "terme": "punched card machine",
+     "poids": 50957
+    },
+    {
+     "fichier": "Tambor para Punch Card - Photo 3165102.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Tambor_para_Punch_Card_-_Photo_3165102.JPG/1920px-Tambor_para_Punch_Card_-_Photo_3165102.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Tambor_para_Punch_Card_-_Photo_3165102.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Serafín Vázquez Calzada (Serafo68)",
+     "score": 5,
+     "terme": "punched card machine",
+     "poids": 75188
+    },
+    {
+     "fichier": "Punch card sorter.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Punch_card_sorter.JPG/1920px-Punch_card_sorter.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Punch_card_sorter.JPG",
+     "licence": "CC BY 2.5",
+     "famille": "by",
+     "auteur": "waelder",
+     "score": 5,
+     "terme": "IBM punched card sorter",
+     "poids": 70032
+    }
+   ]
+  },
+  "APP9": {
+   "candidats": [
+    {
+     "fichier": "Card catalog at the Indiana State Library - interior view of catalog cards.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Card_catalog_at_the_Indiana_State_Library_-_interior_view_of_catalog_cards.jpg/1920px-Card_catalog_at_the_Indiana_State_Library_-_interior_view_of_catalog_cards.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Card_catalog_at_the_Indiana_State_Library_-_interior_view_of_catalog_cards.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "TBurmeister (WMF)",
+     "score": 8,
+     "terme": "library card catalog",
+     "poids": 58332
+    },
+    {
+     "fichier": "WABI index card drawer.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/WABI_index_card_drawer.jpg/1920px-WABI_index_card_drawer.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:WABI_index_card_drawer.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Sam Wilson  (taken with Samsung Galaxy S21 FE 5G)",
+     "score": 5,
+     "terme": "card index drawer",
+     "poids": 60150
+    },
+    {
+     "fichier": "University of Texas at Arlington Library card catalog (10003730).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/University_of_Texas_at_Arlington_Library_card_catalog_%2810003730%29.jpg/1920px-University_of_Texas_at_Arlington_Library_card_catalog_%2810003730%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:University_of_Texas_at_Arlington_Library_card_catalog_(10003730).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "University of Texas at Arlington Photograph Collection",
+     "score": 5,
+     "terme": "library card catalog",
+     "poids": 78030
+    },
+    {
+     "fichier": "Queen Kapiolani, cabinet card photograph by Walery, PBA Galleries.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Queen_Kapiolani%2C_cabinet_card_photograph_by_Walery%2C_PBA_Galleries.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Queen_Kapiolani,_cabinet_card_photograph_by_Walery,_PBA_Galleries.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Walery",
+     "score": 5,
+     "terme": "card catalog cabinet",
+     "poids": 91984
+    },
+    {
+     "fichier": "NOAA Central Library Card Catalog 2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/NOAA_Central_Library_Card_Catalog_2.jpg/1920px-NOAA_Central_Library_Card_Catalog_2.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NOAA_Central_Library_Card_Catalog_2.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Jennifer Fagan-Fry",
+     "score": 5,
+     "terme": "library card catalog",
+     "poids": 114921
+    },
+    {
+     "fichier": "NOAA Central Library Card Catalog 1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/NOAA_Central_Library_Card_Catalog_1.jpg/1920px-NOAA_Central_Library_Card_Catalog_1.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NOAA_Central_Library_Card_Catalog_1.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Jennifer Fagan-Fry",
+     "score": 5,
+     "terme": "library card catalog",
+     "poids": 94260
     }
    ]
   }
