@@ -29,6 +29,24 @@
   "licence": "CC BY-SA 3.0",
   "credit": "Kaz Ish · CC BY-SA 3.0"
  },
+ "6857.T": {
+  "legende": "Testeur Advantest V93000 EXA Scale",
+  "source": "https://www.advantest.com/img/top/img-top-1.png",
+  "page": "https://www.advantest.com/en/",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Advantest",
+  "type": "produit"
+ },
+ "8035.T": {
+  "legende": "Logo de Tokyo Electron",
+  "type": "logo",
+  "source": "File:Tokyo Electron logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Electron_logo.svg",
+  "licence": "Public domain",
+  "marque": "Tokyo Electron, usage nominatif"
+ },
  "ABBN.SW": {
   "legende": "Entraînement sans engrenage ABB",
   "source": "File:ABB gearless mill drive.jpg",
@@ -36,6 +54,14 @@
   "licence": "CC BY-SA 4.0",
   "type": "produit",
   "credit": "Zen wave · CC BY-SA 4.0"
+ },
+ "ACN": {
+  "legende": "Logo de Accenture",
+  "type": "logo",
+  "source": "File:Accenture.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Accenture.svg",
+  "licence": "Public domain",
+  "marque": "Accenture, usage nominatif"
  },
  "ADBE": {
   "legende": "Siège mondial d'Adobe, San José",
@@ -110,6 +136,14 @@
   "type": "produit",
   "credit": "Köf3 · CC BY-SA 3.0"
  },
+ "ASM.AS": {
+  "legende": "Logo de ASM International",
+  "type": "logo",
+  "source": "File:ASM Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:ASM_Logo.svg",
+  "licence": "Public domain",
+  "marque": "ASM International, usage nominatif"
+ },
  "ASML.AS": {
   "legende": "Siège d'ASML à Veldhoven",
   "source": "File:ASML headquarters Veldhoven.jpg",
@@ -139,12 +173,38 @@
   "type": "produit",
   "credit": "Aranami · CC BY 2.0"
  },
+ "BLK": {
+  "legende": "Logo de BlackRock",
+  "type": "logo",
+  "source": "File:BlackRock wordmark.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:BlackRock_wordmark.svg",
+  "licence": "Public domain",
+  "marque": "BlackRock, usage nominatif"
+ },
+ "BNP.PA": {
+  "legende": "Logo de BNP Paribas",
+  "type": "logo",
+  "source": "File:BNP Paribas.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:BNP_Paribas.svg",
+  "licence": "Public domain",
+  "marque": "BNP Paribas, usage nominatif"
+ },
  "BX": {
   "legende": "Siège de Blackstone, New York",
   "source": "File:Blackstone HQ - 345 Park Avenu.jpg",
   "page": "https://commons.wikimedia.org/wiki/File:Blackstone_HQ_-_345_Park_Avenu.jpg",
   "licence": "CC BY-SA 3.0",
   "credit": "Americasroof (talk) · CC BY-SA 3.0"
+ },
+ "CB": {
+  "legende": "Fret conteneurisé, l'un des risques assurés par Chubb",
+  "source": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/places/cargo-ship-istock-869250572-960x720.jpg",
+  "page": "https://www.chubb.com/us-en/about-chubb/",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Chubb",
+  "type": "produit"
  },
  "CCJ": {
   "legende": "Foreuse de Crow Butte Mining, filiale de Cameco",
@@ -199,6 +259,14 @@
   "page": "https://commons.wikimedia.org/wiki/File:San_Francisco,_California_April_2022_Salesforce_Tower.jpg",
   "licence": "CC BY 2.0",
   "credit": "Sharon Hahn Darlin · CC BY 2.0"
+ },
+ "CS.PA": {
+  "legende": "Logo de AXA",
+  "type": "logo",
+  "source": "File:AXA Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:AXA_Logo.svg",
+  "licence": "Public domain",
+  "marque": "AXA, usage nominatif"
  },
  "CSCO": {
   "legende": "Carte d'un commutateur Cisco Catalyst 3750",
@@ -373,6 +441,30 @@
   "credit": "Photo : Lam Research",
   "type": "produit"
  },
+ "LSEG.L": {
+  "legende": "Logo de London Stock Exchange Group",
+  "type": "logo",
+  "source": "File:LSE Group logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:LSE_Group_logo.svg",
+  "licence": "Public domain",
+  "marque": "London Stock Exchange Group, usage nominatif"
+ },
+ "MA": {
+  "legende": "Logo de Mastercard",
+  "type": "logo",
+  "source": "File:Mastercard 2019 logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Mastercard_2019_logo.svg",
+  "licence": "Public domain",
+  "marque": "Mastercard, usage nominatif"
+ },
+ "MCO": {
+  "legende": "Logo de Moody's",
+  "type": "logo",
+  "source": "File:Moody's new logo.png",
+  "page": "https://commons.wikimedia.org/wiki/File:Moody%27s_new_logo.png",
+  "licence": "Public domain",
+  "marque": "Moody's, usage nominatif"
+ },
  "META": {
   "legende": "Casque Meta Quest 3",
   "source": "File:Visitor using a Meta Quest 3 VR headset at IPP Greifswald 2025.jpg",
@@ -416,6 +508,23 @@
   "licence": "CC BY-SA 4.0",
   "type": "produit",
   "credit": "Raimond Spekking · CC BY-SA 4.0"
+ },
+ "MUV2.DE": {
+  "legende": "Logo de Munich Re",
+  "type": "logo",
+  "source": "File:Münchener Rück logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchener_R%C3%BCck_logo.svg",
+  "licence": "Public domain",
+  "marque": "Munich Re, usage nominatif"
+ },
+ "NBIS": {
+  "legende": "Centre de données de Nebius",
+  "source": "https://assets.nebius.com/assets/41dcdf5d-fa58-4759-8a18-c7809b6dcedf/brand-video-cover.jpg?cache-buster=2026-06-08T17:32:08.901Z",
+  "page": "https://nebius.com/",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Nebius Group"
  },
  "NDAQ": {
   "legende": "Écrans du MarketSite Nasdaq, Times Square",
@@ -492,6 +601,16 @@
   "licence": "CC BY-SA 2.0",
   "credit": "gruntzooki · CC BY-SA 2.0"
  },
+ "PWR": {
+  "legende": "Poste électrique en construction, chantier Quanta Services",
+  "source": "https://cmswp.quantaservices.com/wp-content/uploads/2023/03/Capabilities-Utility-Performance-Solutions.jpg",
+  "page": "https://www.quantaservices.com/capabilities/utility-performance-solutions",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : Quanta Services",
+  "type": "produit"
+ },
  "PYPL": {
   "legende": "Siège de PayPal, San José",
   "source": "File:PayPal San Jose Headquarters.jpg",
@@ -536,6 +655,14 @@
   "source": "Synopsys Headquarters Mountain View",
   "page": "https://commons.wikimedia.org/w/index.php?curid=118340795",
   "licence": "CC0 1.0"
+ },
+ "SPGI": {
+  "legende": "Logo de S&P Global",
+  "type": "logo",
+  "source": "File:S&P Global logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:S%26P_Global_logo.svg",
+  "licence": "Public domain",
+  "marque": "S&P Global, usage nominatif"
  },
  "STX": {
   "legende": "Disque dur Seagate ouvert, plateau et bras de lecture",
