@@ -1,0 +1,557 @@
+{
+ "societes": 22,
+ "detail": {
+  "6857.T": {
+   "candidats": [
+    {
+     "image": "https://www.advantest.com/img/top/hdg-kv-8-sp.png",
+     "page": "https://www.advantest.com/en/",
+     "domaine": "advantest.com",
+     "conditions": "non établies",
+     "credit": "Advantest",
+     "poids": 70099
+    },
+    {
+     "image": "https://www.advantest.com/img/top/hdg-kv-5-sp.png",
+     "page": "https://www.advantest.com/en/",
+     "domaine": "advantest.com",
+     "conditions": "non établies",
+     "credit": "Advantest",
+     "poids": 87345
+    },
+    {
+     "image": "https://www.advantest.com/img/top/hdg-kv-2-sp.png",
+     "page": "https://www.advantest.com/en/",
+     "domaine": "advantest.com",
+     "conditions": "non établies",
+     "credit": "Advantest",
+     "poids": 40681
+    }
+   ]
+  },
+  "8035.T": {
+   "candidats": [
+    {
+     "image": "https://www.tel.com/assets/img/home/intro_image_sp.webp",
+     "page": "https://www.tel.com/",
+     "domaine": "tel.com",
+     "conditions": "non établies",
+     "credit": "Tokyo Electron",
+     "poids": 60630
+    },
+    {
+     "image": "https://www.tel.com/news/topics/2026/snt3v900000000es-img/snt3v900000000gv.png",
+     "page": "https://www.tel.com/",
+     "domaine": "tel.com",
+     "conditions": "non établies",
+     "credit": "Tokyo Electron",
+     "poids": 68785
+    },
+    {
+     "image": "https://www.tel.com/news/event/2026/ap6kp000000000fj-img/ap6kp000000000hr.png",
+     "page": "https://www.tel.com/",
+     "domaine": "tel.com",
+     "conditions": "non établies",
+     "credit": "Tokyo Electron",
+     "poids": 83495
+    }
+   ]
+  },
+  "ACN": {
+   "candidats": [
+    {
+     "image": "https://dynamicmedia.accenture.com/is/image/accenture/Homepage_hero_768x432%3Asocial-thumbnail-landscape?ts=1771619635033&dpr=off",
+     "page": "https://www.accenture.com/us-en/about/company-index",
+     "domaine": "accenture.com",
+     "conditions": "non établies",
+     "credit": "Accenture",
+     "poids": 41197
+    }
+   ]
+  },
+  "ANET": {
+   "candidats": [
+    {
+     "image": "https://www.arista.com/assets/images/product/Arista-Product-Platforms-Family-800x520.png",
+     "page": "https://www.arista.com/en/products/platforms",
+     "domaine": "arista.com",
+     "conditions": "non établies",
+     "credit": "Arista Networks",
+     "poids": 98064
+    },
+    {
+     "image": "https://www.arista.com/assets/images/product/7020R4-48Y-4QC-YB-menu.png",
+     "page": "https://www.arista.com/en/products/platforms",
+     "domaine": "arista.com",
+     "conditions": "non établies",
+     "credit": "Arista Networks",
+     "poids": 33551
+    },
+    {
+     "image": "https://www.arista.com/assets/images/product/Hyperscale-Data-Center.jpg",
+     "page": "https://www.arista.com/en/products/platforms",
+     "domaine": "arista.com",
+     "conditions": "non établies",
+     "credit": "Arista Networks",
+     "poids": 74823
+    }
+   ]
+  },
+  "BLK": {
+   "candidats": [
+    {
+     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/global/en/images/teamsite/brand-images/corporate-about-about-us-hero.1780318443031.jpg.md.jpg",
+     "page": "https://www.blackrock.com/corporate/about-us",
+     "domaine": "blackrock.com",
+     "conditions": "non établies",
+     "credit": "BlackRock",
+     "poids": 56212
+    },
+    {
+     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/global/en/images/teamsite/brand-images/ll2026-homepage-hero-860x600.1780318443245.jpg.md.jpg",
+     "page": "https://www.blackrock.com/corporate/about-us",
+     "domaine": "blackrock.com",
+     "conditions": "non établies",
+     "credit": "BlackRock",
+     "poids": 46834
+    },
+    {
+     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/blackrock-retail/en-zz/images/teamsite/infographics-charts-tables/blk-maps-aug-25.1779893890983.png.lg.png",
+     "page": "https://www.blackrock.com/corporate/about-us",
+     "domaine": "blackrock.com",
+     "conditions": "non établies",
+     "credit": "BlackRock",
+     "poids": 23403
+    }
+   ]
+  },
+  "CB": {
+   "candidats": [
+    {
+     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/next-navigation/girl_goldenretriever-390x260.jpg",
+     "page": "https://www.chubb.com/us-en/",
+     "domaine": "chubb.com",
+     "conditions": "non établies",
+     "credit": "Chubb",
+     "poids": 61323
+    },
+    {
+     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/next-navigation/family-on-holiday-390x260.jpg",
+     "page": "https://www.chubb.com/us-en/",
+     "domaine": "chubb.com",
+     "conditions": "non établies",
+     "credit": "Chubb",
+     "poids": 71052
+    },
+    {
+     "image": "https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/next-navigation/business-owner-at-cafe_1342439489_390x260.jpg",
+     "page": "https://www.chubb.com/us-en/",
+     "domaine": "chubb.com",
+     "conditions": "non établies",
+     "credit": "Chubb",
+     "poids": 71839
+    }
+   ]
+  },
+  "CEG": {
+   "candidats": [
+    {
+     "image": "https://www.constellationenergy.com/content/dam/constellationenergy/images/about/locations/locations-open-graph-images/calvert-og.jpg",
+     "page": "https://www.constellationenergy.com/about/locations/calvert-cliffs-clean-energy-center.html",
+     "domaine": "constellationenergy.com",
+     "conditions": "non établies",
+     "credit": "Constellation Energy",
+     "poids": 101612
+    },
+    {
+     "image": "https://www.constellationenergy.com/content/dam/constellationenergy/images/about/locations/nuclear/calvert/calvert-hero-banner.jpg",
+     "page": "https://www.constellationenergy.com/about/locations/calvert-cliffs-clean-energy-center.html",
+     "domaine": "constellationenergy.com",
+     "conditions": "non établies",
+     "credit": "Constellation Energy",
+     "poids": 103296
+    },
+    {
+     "image": "https://www.constellationenergy.com/content/dam/constellationenergy/images/about/locations/nuclear/calvert/calvert-beacon-photo-3.jpg/jcr:content/renditions/original",
+     "page": "https://www.constellationenergy.com/about/locations/calvert-cliffs-clean-energy-center.html",
+     "domaine": "constellationenergy.com",
+     "conditions": "non établies",
+     "credit": "Constellation Energy",
+     "poids": 77332
+    }
+   ]
+  },
+  "COHR": {
+   "candidats": [
+    {
+     "image": "https://www.coherent.com/content/dam/coherent/site/en/images/photography/lasers/products-lasers-950px.jpg",
+     "page": "https://www.coherent.com/lasers",
+     "domaine": "coherent.com",
+     "conditions": "non établies",
+     "credit": "Coherent",
+     "poids": 71055
+    },
+    {
+     "image": "https://www.coherent.com/content/dam/coherent/site/en/images/photography/forms/form-background.jpg",
+     "page": "https://www.coherent.com/lasers",
+     "domaine": "coherent.com",
+     "conditions": "non établies",
+     "credit": "Coherent",
+     "poids": 17947
+    },
+    {
+     "image": "https://www.coherent.com/content/dam/coherent/site/en/images/new-home/menu-images/header/datacenter-communications-500px.png",
+     "page": "https://www.coherent.com/lasers",
+     "domaine": "coherent.com",
+     "conditions": "non établies",
+     "credit": "Coherent",
+     "poids": 90325
+    }
+   ]
+  },
+  "GEV": {
+   "candidats": [
+    {
+     "image": "https://www.gevernova.com/content/dam/gepower-new/global/en_US/images/wind-site/homepage/hero-wind-video.JPG",
+     "page": "https://www.gevernova.com/wind-power",
+     "domaine": "gevernova.com",
+     "conditions": "non établies",
+     "credit": "GE Vernova",
+     "poids": 104570
+    },
+    {
+     "image": "https://www.gevernova.com/content/dam/gepower-new/global/en_US/images/gas-new-site/homepage/gas-turbine-upgrades-promo.jpg",
+     "page": "https://www.gevernova.com/wind-power",
+     "domaine": "gevernova.com",
+     "conditions": "non établies",
+     "credit": "GE Vernova",
+     "poids": 68084
+    },
+    {
+     "image": "https://www.gevernova.com/content/dam/gepower-new/global/en_US/images/gas-new-site/services/digital-and-controls/lifecycle-services/hero-lifecycle-controls-management.jpg",
+     "page": "https://www.gevernova.com/wind-power",
+     "domaine": "gevernova.com",
+     "conditions": "non établies",
+     "credit": "GE Vernova",
+     "poids": 52602
+    }
+   ]
+  },
+  "KKR": {
+   "candidats": [
+    {
+     "image": "https://www.kkr.com/about/_jcr_content/root/main-par/section/section-par/grid_container/grid/video_external/image.coreimg.jpeg/1777486995726/culture-video-793x462.jpeg",
+     "page": "https://www.kkr.com/about",
+     "domaine": "kkr.com",
+     "conditions": "non établies",
+     "credit": "KKR",
+     "poids": 53564
+    },
+    {
+     "image": "https://www.kkr.com/content/experience-fragments/kkr/sites/global/en/structural-fragments/header/master/_jcr_content/root/header/featuredImage.coreimg.jpeg/1785338921573/totalportfolioapproach2-nav-thumbnail.jpeg",
+     "page": "https://www.kkr.com/about",
+     "domaine": "kkr.com",
+     "conditions": "non établies",
+     "credit": "KKR",
+     "poids": 15937
+    },
+    {
+     "image": "https://www.kkr.com/content/dam/kkr/bio/headshots/scott-nutall.png",
+     "page": "https://www.kkr.com/about",
+     "domaine": "kkr.com",
+     "conditions": "non établies",
+     "credit": "KKR",
+     "poids": 38014
+    }
+   ]
+  },
+  "LITE": {
+   "candidats": [
+    {
+     "image": "https://www.lumentum.com/sites/default/files/2025-12/brand-img.jpg",
+     "page": "https://www.lumentum.com/en/products",
+     "domaine": "lumentum.com",
+     "conditions": "non établies",
+     "credit": "Lumentum",
+     "poids": 60120
+    },
+    {
+     "image": "https://www.lumentum.com/_next/image?url=https%3A%2F%2Fmedia.lumentum.com%2Fsites%2Fdefault%2Ffiles%2F2025-12%2F1.2.ProductIndex.Heroimage_1.jpg&w=2048&q=80",
+     "page": "https://www.lumentum.com/en/products",
+     "domaine": "lumentum.com",
+     "conditions": "non établies",
+     "credit": "Lumentum",
+     "poids": 47725
+    },
+    {
+     "image": "https://www.lumentum.com/_next/image?url=https%3A%2F%2Fmedia.lumentum.com%2Fsites%2Fdefault%2Ffiles%2F2025-11%2Fproducts-new-img.jpg&w=640&q=80",
+     "page": "https://www.lumentum.com/en/products",
+     "domaine": "lumentum.com",
+     "conditions": "non établies",
+     "credit": "Lumentum",
+     "poids": 71723
+    }
+   ]
+  },
+  "LRCX": {
+   "candidats": [
+    {
+     "image": "https://www.lamresearch.com/wp-content/uploads/2022/04/LAM-newmachine-130_fix@2x.png",
+     "page": "https://www.lamresearch.com/products/",
+     "domaine": "lamresearch.com",
+     "conditions": "non établies",
+     "credit": "Lam Research",
+     "poids": 34878
+    },
+    {
+     "image": "http://www.lamresearch.com/wp-content/uploads/2021/07/150_38856_full-1-scaled.jpg",
+     "page": "https://www.lamresearch.com/",
+     "domaine": "lamresearch.com",
+     "conditions": "non établies",
+     "credit": "Lam Research",
+     "poids": 57916
+    }
+   ]
+  },
+  "LSEG.L": {
+   "candidats": [
+    {
+     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/hero/about-lseg-hero.jpg.transform/hero-s/q82/image.jpg",
+     "page": "https://www.lseg.com/en/about-us",
+     "domaine": "lseg.com",
+     "conditions": "non établies",
+     "credit": "London Stock Exchange Group",
+     "poids": 40109
+    },
+    {
+     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/billboard/lseg-foundation-billboard-1440x475.jpg.transform/billboard-m/q90/image.jpg",
+     "page": "https://www.lseg.com/en/about-us",
+     "domaine": "lseg.com",
+     "conditions": "non établies",
+     "credit": "London Stock Exchange Group",
+     "poids": 42716
+    }
+   ]
+  },
+  "MCO": {
+   "candidats": [
+    {
+     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_42564852_c/container/container_884161388__1258557960/image.coreimg.png/1765915534285/noemie-aboutus.png",
+     "page": "https://www.moodys.com/web/en/us/about.html",
+     "domaine": "moodys.com",
+     "conditions": "non établies",
+     "credit": "Moody's",
+     "poids": 47192
+    },
+    {
+     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_42564852_c/container/container_1333732276_870863450/image.coreimg.jpeg/1750077110507/maral-kazanjian2.jpeg",
+     "page": "https://www.moodys.com/web/en/us/about.html",
+     "domaine": "moodys.com",
+     "conditions": "non établies",
+     "credit": "Moody's",
+     "poids": 36288
+    },
+    {
+     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_408640577_/column_control/col3/image.coreimg.png/1723454698678/about-us-trust-center.png",
+     "page": "https://www.moodys.com/web/en/us/about.html",
+     "domaine": "moodys.com",
+     "conditions": "non établies",
+     "credit": "Moody's",
+     "poids": 65259
+    }
+   ]
+  },
+  "MSCI": {
+   "candidats": [
+    {
+     "image": "https://www.msci.com/_next/static/media/apple-touch-icon.c2c8d0a3.png",
+     "page": "https://www.msci.com/",
+     "domaine": "msci.com",
+     "conditions": "non établies",
+     "credit": "MSCI",
+     "poids": 39432
+    },
+    {
+     "image": "https://www.msci.com/_next/image?url=%2Fassets%2Fdocuments%2Fpress-releases%2Fassets%2F3x4_900x1200px-MSCI-SGX.webp&w=256&q=80",
+     "page": "https://www.msci.com/",
+     "domaine": "msci.com",
+     "conditions": "non établies",
+     "credit": "MSCI",
+     "poids": 73265
+    },
+    {
+     "image": "https://www.msci.com/_next/image?url=%2Fassets%2Fweb%2Fmsci-com%2Fhomepage%2Fnews%2F3x4_900x1200px-Gauging-Private-Credit-Risks-and-Resilience.webp&w=256&q=80",
+     "page": "https://www.msci.com/",
+     "domaine": "msci.com",
+     "conditions": "non établies",
+     "credit": "MSCI",
+     "poids": 63631
+    }
+   ]
+  },
+  "MUV2.DE": {
+   "candidats": [
+    {
+     "image": "https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-477428748.jpg/_jcr_content/renditions/original.image_file.1200.800.file/GettyImages-477428748.jpg",
+     "page": "https://www.munichre.com/en/company/about-munich-re.html",
+     "domaine": "munichre.com",
+     "conditions": "non établies",
+     "credit": "Munich Re",
+     "poids": 137592
+    },
+    {
+     "image": "https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-477428748.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
+     "page": "https://www.munichre.com/en/company/about-munich-re.html",
+     "domaine": "munichre.com",
+     "conditions": "non établies",
+     "credit": "Munich Re",
+     "poids": 143249
+    },
+    {
+     "image": "https://www.munichre.com/content/dam/munichre/mrm/royalty-free-shutterstock/shutterstock_143124628.jpg/_jcr_content/renditions/crop-2x1-768.jpg./crop-2x1-768.jpg",
+     "page": "https://www.munichre.com/en/company/about-munich-re.html",
+     "domaine": "munichre.com",
+     "conditions": "non établies",
+     "credit": "Munich Re",
+     "poids": 53306
+    }
+   ]
+  },
+  "NBIS": {
+   "candidats": [
+    {
+     "image": "https://assets.nebius.com/assets/76eb33c3-841d-452d-aafd-2933c8bec9cb/nebius-share.png?cache-buster=2026-06-09T18:15:08.818Z",
+     "page": "https://nebius.com/",
+     "domaine": "nebius.com",
+     "conditions": "non établies",
+     "credit": "Nebius Group",
+     "poids": 48650
+    },
+    {
+     "image": "https://assets.nebius.com/assets/1bf20216-f587-4473-95dd-36599cde7124/nebius-inflection-video-dark-mobile.jpg?cache-buster=2026-06-08T15:30:16.028Z",
+     "page": "https://nebius.com/",
+     "domaine": "nebius.com",
+     "conditions": "non établies",
+     "credit": "Nebius Group",
+     "poids": 31554
+    },
+    {
+     "image": "https://assets.nebius.com/assets/ca53cfba-9c3d-4269-abec-59edf33717d1/mobile-image-faster.jpg?cache-buster=2026-06-08T17:20:12.500Z",
+     "page": "https://nebius.com/",
+     "domaine": "nebius.com",
+     "conditions": "non établies",
+     "credit": "Nebius Group",
+     "poids": 13187
+    }
+   ]
+  },
+  "PWR": {
+   "candidats": [
+    {
+     "image": "https://cmswp.quantaservices.com/wp-content/uploads/2022/08/21262578142_1e3a1f5f83_o-scaled.jpg",
+     "page": "https://www.quantaservices.com/",
+     "domaine": "quantaservices.com",
+     "conditions": "non établies",
+     "credit": "Quanta Services",
+     "poids": 45088
+    }
+   ]
+  },
+  "TCEHY": {
+   "candidats": [
+    {
+     "image": "https://www.tencent.com/wp-content/uploads/2022/12/ourstory1-640x360.jpg",
+     "page": "https://www.tencent.com/en-us/about.html",
+     "domaine": "tencent.com",
+     "conditions": "non établies",
+     "credit": "Tencent",
+     "poids": 62130
+    },
+    {
+     "image": "https://www.tencent.com/wp-content/uploads/2022/12/womanonphone2-640x360.jpg",
+     "page": "https://www.tencent.com/en-us/about.html",
+     "domaine": "tencent.com",
+     "conditions": "non établies",
+     "credit": "Tencent",
+     "poids": 37813
+    },
+    {
+     "image": "https://www.tencent.com/wp-content/uploads/2022/12/values-1280x960.jpeg",
+     "page": "https://www.tencent.com/en-us/about.html",
+     "domaine": "tencent.com",
+     "conditions": "non établies",
+     "credit": "Tencent",
+     "poids": 56821
+    }
+   ]
+  },
+  "VRT": {
+   "candidats": [
+    {
+     "image": "https://www.vertiv.com/49f19f/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-liebert-exl-s1-ups/cp-ups-na-508x635-42362-exl-s1-ups.jpg",
+     "page": "https://www.vertiv.com/en-us/products-catalog/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1/",
+     "domaine": "vertiv.com",
+     "conditions": "non établies",
+     "credit": "Vertiv",
+     "poids": 53984
+    },
+    {
+     "image": "https://www.vertiv.com/49f1a1/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-liebert-exl-s1-ups/liebert-exl-s14.png",
+     "page": "https://www.vertiv.com/en-us/products-catalog/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1/",
+     "domaine": "vertiv.com",
+     "conditions": "non établies",
+     "credit": "Vertiv",
+     "poids": 30708
+    },
+    {
+     "image": "https://www.vertiv.com/49f457/globalassets/products/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1-1000-1200-kvakw/liebert-exl-s1-1-11-800x600.png",
+     "page": "https://www.vertiv.com/en-us/products-catalog/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1/",
+     "domaine": "vertiv.com",
+     "conditions": "non établies",
+     "credit": "Vertiv",
+     "poids": 90247
+    }
+   ]
+  },
+  "VST": {
+   "candidats": [
+    {
+     "image": "https://vistracorp.com/wp-content/uploads/2026/01/Beaver-Valley-008.jpg",
+     "page": "https://vistracorp.com/",
+     "domaine": "vistracorp.com",
+     "conditions": "non établies",
+     "credit": "Vistra",
+     "poids": 43123
+    }
+   ]
+  },
+  "ZTS": {
+   "candidats": [
+    {
+     "image": "https://www.zoetis.com/_assets/img/173easset_upload_file99354_1139511_e.jpg",
+     "page": "https://www.zoetis.com/",
+     "domaine": "zoetis.com",
+     "conditions": "non établies",
+     "credit": "Zoetis",
+     "poids": 57718
+    },
+    {
+     "image": "https://www.zoetis.com/_config/easset_upload_file62396_2649428_e.jpg",
+     "page": "https://www.zoetis.com/",
+     "domaine": "zoetis.com",
+     "conditions": "non établies",
+     "credit": "Zoetis",
+     "poids": 92488
+    },
+    {
+     "image": "https://www.zoetis.com/_config/easset_upload_file81207_2649428_e.jpg",
+     "page": "https://www.zoetis.com/",
+     "domaine": "zoetis.com",
+     "conditions": "non établies",
+     "credit": "Zoetis",
+     "poids": 35966
+    }
+   ]
+  }
+ }
+}
