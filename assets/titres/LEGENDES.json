@@ -220,6 +220,16 @@
   "licence": "CC BY 2.0",
   "credit": "Sharon Hahn Darlin · CC BY 2.0"
  },
+ "CRWV": {
+  "legende": "Baie de serveurs d'un centre de données CoreWeave",
+  "type": "produit",
+  "source": "https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/6a67f23fbd7c5610e305aae6_Press%20Release-Thumbnail%201520x1098.jpg",
+  "page": "https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : CoreWeave"
+ },
  "CSCO": {
   "legende": "Carte d'un commutateur Cisco Catalyst 3750",
   "source": "File:PCB of Cisco Catalyst 3750 (3750G-24T) (15481833861).jpg",

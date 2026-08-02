@@ -18,10 +18,6 @@ on:
         description: "Nombre de candidats par thème"
         type: string
         default: "3"
-      activites:
-        description: "Récolter les illustrations d'ACTIVITÉ (maillons et secteurs)"
-        type: boolean
-        default: false
       selection:
         description: "Récupérer les photos de SOCIÉTÉS listées dans tools/photos_titres_selection.json"
         type: boolean
@@ -59,7 +55,6 @@ jobs:
               --sortie assets/titres/candidats
           else
             python tools/fetch_theme_photos.py --candidats ${{ inputs.candidats || '3' }} \
-              ${{ inputs.activites && '--activites --sortie assets/activites/candidats' || '' }}
           fi
 
       - name: Publier les candidats en artefact
@@ -69,7 +64,6 @@ jobs:
           name: photos-candidates
           path: |
             assets/themes/candidats/
-            assets/activites/candidats/
             assets/titres/candidats/
           retention-days: 7
 
@@ -77,7 +71,7 @@ jobs:
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
-          git add assets/themes/candidats/ assets/activites/candidats/ 2>/dev/null || true
+          git add assets/themes/candidats/ 2>/dev/null || true
           git add -A assets/
           if git diff --staged --quiet; then
             echo "Aucun candidat nouveau."

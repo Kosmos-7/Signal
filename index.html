@@ -389,7 +389,7 @@ const CHV=new Date().toISOString().slice(0,10);
    watchlist principale (watchlist.json) sans rien casser. */
 const PHOTOS={};     // ticker → {legende} des photos de sociétés vérifiées
 const PHOTOS_TH={};  // id de watchlist → {legende} de son illustration
-const U={themes:[],stocks:{},week:'',updated_at:'',universe_declared:null,universe_scored:null,activites:null};
+const U={themes:[],stocks:{},week:'',updated_at:'',universe_declared:null,universe_scored:null};
 const TBY={};              // id de thème → méta
 const WL={};               // ticker → fiche complète (top 30, watchlist.json)
 const MAIN='principale';   // id réservé de la watchlist principale
@@ -429,7 +429,6 @@ Promise.all([
     U.universe_declared=un.universe_declared;U.universe_scored=un.universe_scored;
     // Illustrations par activité : facultatif, un universe.json d'avant ce
     // champ laisse simplement les fiches sans image.
-    U.activites=(un.activites&&typeof un.activites==='object')?un.activites:null;
     U.themes.forEach(t=>{if(t&&t.id)TBY[t.id]=t;});
   }
   document.getElementById('rw').textContent=((U.week||wl.week||'')).replace('Sem. ','S');
@@ -622,28 +621,24 @@ function railMore(){
 /* Photographies libres de droits (domaine public), une par watchlist. Provenance
    et licences dans assets/themes/CREDITS.md. Le repli textuel reste en place :
    une image qui ne charge pas laisse le libellé, jamais un cadre vide. */
-/* Illustration de la fiche : l'ACTIVITÉ du titre, jamais la société. Le choix
-   est mesuré, pas esthétique — une recherche automatique de photos par société
-   se trompe dans 43 % des cas (sonde du 02/08), et publier le siège d'une
-   entreprise sur la fiche d'une autre est un fait faux. Absente si l'activité
-   n'est pas connue ou si l'image ne charge pas : jamais de cadre vide. */
-function illuActivite(tk){
+/* Illustration de la fiche : UNIQUEMENT une photo de la société elle-même.
+   Rien d'autre. Une photo de secteur ne dit pas de quelle entreprise on parle,
+   et un logo ne montre ni objet ni lieu : les deux ont été essayés puis
+   retirés. Absente si l'on n'a pas de photo, ou si l'image ne charge pas :
+   jamais de cadre vide. */
+function illuSociete(tk){
   const P=PHOTOS[tk];
-  if(P){
-    // Photo de la SOCIÉTÉ, vérifiée à l'œil : la légende nomme le lieu, elle
-    // n'a donc pas à dire « illustration », elle montre bien ce qu'elle dit.
-    // Le crédit d'auteur n'est pas relégué dans un fichier que personne n'ouvre :
-    // les licences CC-BY et CC-BY-SA l'exigent, il s'affiche donc sur la fiche.
-    const cr=P.credit?'<span class="d-cred">'+sv(P.credit)+'</span>':'';
-    return '<figure class="d-illu"><img src="assets/titres/'+encodeURIComponent(tk)+
-      '.jpg" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
-      '<figcaption><b>'+sv(P.legende)+'</b>'+cr+'</figcaption></figure>';
-  }
-  const a=(U.activites&&U.activites.titres)||{}, L=(U.activites&&U.activites.libelles)||{};
-  const cle=a[tk]; if(!cle)return '';
-  return '<figure class="d-illu"><img src="assets/activites/'+encodeURIComponent(cle)+
+  // Pas de photo de la société, pas d'illustration. Une image d'activité
+  // montrerait le secteur et pas l'entreprise : elle n'apprend rien de ce
+  // titre-ci, et une fiche sans illustration vaut mieux qu'une illustration
+  // qui ne parle pas d'elle. Jamais de cadre vide non plus : on ne rend rien.
+  if(!P) return '';
+  // Le crédit d'auteur n'est pas relégué dans un fichier que personne n'ouvre :
+  // les licences CC-BY et CC-BY-SA l'exigent, il s'affiche donc sur la fiche.
+  const cr=P.credit?'<span class="d-cred">'+sv(P.credit)+'</span>':'';
+  return '<figure class="d-illu"><img src="assets/titres/'+encodeURIComponent(tk)+
     '.jpg" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
-    '<figcaption>Illustration&nbsp;: <b>'+sv(L[cle]||cle)+'</b></figcaption></figure>';
+    '<figcaption><b>'+sv(P.legende)+'</b>'+cr+'</figcaption></figure>';
 }
 function themeImg(id,label){
   const P=PHOTOS_TH[id];
@@ -1165,7 +1160,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   chxReset();
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
-    illuActivite(s.ticker)+
+    illuSociete(s.ticker)+
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+

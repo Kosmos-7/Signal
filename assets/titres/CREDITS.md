@@ -1,9 +1,8 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-87 fiches sur 104 portent une photo de leur société : 55 montrent un
-produit ou une activité, 32 un site. 73 sont sous licence libre et 14
-sous licence non établie. Les 17 autres gardent
-l'illustration de leur activité. Priorité au PRODUIT (puce, carte, terminal,
+88 fiches sur 104 portent une photo de leur société : 56 montrent un
+produit ou une activité, 32 un site. 73 sont sous licence libre et 15
+sous licence non établie. Les 16 autres n'affichent aucune illustration. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
@@ -108,7 +107,7 @@ Services où le camion d'un tiers occupe le premier plan.
 
 Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 
-## Pas de logos : décision du propriétaire du dépôt
+## Ni logo, ni illustration d'activité : décisions du propriétaire du dépôt
 
 Une huitième passe a récupéré onze logos depuis Wikidata P154, pour les fiches
 qui n'avaient aucune photo de leur société. Ils ont été publiés puis RETIRÉS :
@@ -116,14 +115,22 @@ un logo est impersonnel. Il nomme une société sans rien montrer d'elle, ni
 objet, ni lieu, ni geste de métier, et une page pleine de rectangles de marque
 ne ressemble plus à rien.
 
-La règle qui s'applique désormais est simple : on illustre par une PHOTO
-CONCRETE DU MONDE REEL, ou bien on garde l'illustration de l'activité, dont la
-légende annonce honnêtement « Illustration : … » et ne prétend donc pas montrer
-l'entreprise. L'outil et son workflow ont été supprimés pour qu'une exécution
-distraite ne réintroduise pas de logos ; l'historique git les conserve si la
-décision devait un jour changer.
+L'illustration d'activité a été retirée dans la foulée, pour la même raison
+poussée d'un cran : une photo de salle blanche légendée « Illustration :
+fonderie et packaging » montre un SECTEUR, pas l'entreprise dont on lit la
+fiche. Elle n'apprenait donc rien sur ce titre-ci.
 
-## Photos publiées (55 produits, 32 sites)
+La règle qui s'applique désormais est sans repli : la fiche affiche une PHOTO
+CONCRETE DU MONDE REEL montrant CETTE société, ou bien elle n'affiche rien.
+Seize fiches sont dans ce dernier cas et le resteront tant qu'on n'aura pas
+trouvé mieux, ce qui est un état honnête et non un manque à combler.
+
+Ont été supprimés pour qu'une exécution distraite ne les réintroduise pas :
+l'outil des logos et son workflow, le module tools/activites.py, les dix-huit
+images d'activité, la clé « activites » de universe.json et sa production par
+le screener. L'historique git conserve le tout si une décision devait changer.
+
+## Photos publiées (56 produits, 32 sites)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -353,6 +360,15 @@ décision devait un jour changer.
 - Source : File:San Francisco, California April 2022 Salesforce Tower.jpg
 - Page : https://commons.wikimedia.org/wiki/File:San_Francisco,_California_April_2022_Salesforce_Tower.jpg
 - Licence : CC BY 2.0 — crédit affiché : Sharon Hahn Darlin · CC BY 2.0
+
+### CRWV — Baie de serveurs d'un centre de données CoreWeave
+
+- Nature : produit
+- Fichier : `assets/titres/CRWV.jpg`
+- Source : https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/6a67f23fbd7c5610e305aae6_Press%20Release-Thumbnail%201520x1098.jpg
+- Page : https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : CoreWeave
+- Récupérée le : 2026-08-02 sur le site officiel
 
 ### CSCO — Carte d'un commutateur Cisco Catalyst 3750
 

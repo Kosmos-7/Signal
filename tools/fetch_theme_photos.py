@@ -203,9 +203,6 @@ def main():
     ap.add_argument("--sortie", default="assets/themes/candidats")
     ap.add_argument("--selection", default="",
                     help="JSON ticker → titre de fichier Commons (photos de sociétés)")
-    ap.add_argument("--activites", action="store_true",
-                    help="récolter les illustrations d'ACTIVITÉ (maillons et secteurs) "
-                         "au lieu des trois watchlists")
     a = ap.parse_args()
     os.makedirs(a.sortie, exist_ok=True)
 
@@ -214,12 +211,6 @@ def main():
         return
 
     requetes = REQUETES
-    if a.activites:
-        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-        import activites
-        requetes = activites.REQUETES
-
-    manifeste = {}
     for theme, termes in requetes.items():
         print(f"\n▸ {theme}")
         retenus, vus = [], set()
