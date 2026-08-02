@@ -1,0 +1,597 @@
+{
+ "societes": 16,
+ "detail": {
+  "005930.KS": {
+   "candidats": [
+    {
+     "fichier": "Siemens NTBBA 40 183 340-100 - Printed circuit board-3211.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Siemens_NTBBA_40_183_340-100_-_Printed_circuit_board-3211.jpg/1920px-Siemens_NTBBA_40_183_340-100_-_Printed_circuit_board-3211.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Siemens_NTBBA_40_183_340-100_-_Printed_circuit_board-3211.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "terme": "Samsung DRAM module",
+     "poids": 147129
+    },
+    {
+     "fichier": "SD memory card internals 1 GB.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/SD_memory_card_internals_1_GB.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:SD_memory_card_internals_1_GB.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Nemo bis",
+     "score": 5,
+     "terme": "Samsung memory chip",
+     "poids": 85794
+    },
+    {
+     "fichier": "Microsoft Lumia 640, model RM-1077 - board-7492.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Microsoft_Lumia_640%2C_model_RM-1077_-_board-7492.jpg/1920px-Microsoft_Lumia_640%2C_model_RM-1077_-_board-7492.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Microsoft_Lumia_640,_model_RM-1077_-_board-7492.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "terme": "Samsung DRAM module",
+     "poids": 53898
+    }
+   ]
+  },
+  "ADBE": {
+   "candidats": [
+    {
+     "fichier": "Utility box, Ribnitz-Damgarten (P1070873).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Utility_box%2C_Ribnitz-Damgarten_%28P1070873%29.jpg/1920px-Utility_box%2C_Ribnitz-Damgarten_%28P1070873%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Utility_box,_Ribnitz-Damgarten_(P1070873).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Matti Blume",
+     "score": 3,
+     "terme": "Adobe Photoshop box",
+     "poids": 146130
+    },
+    {
+     "fichier": "Utility box (LRM 20200612 142934).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Utility_box_%28LRM_20200612_142934%29.jpg/1920px-Utility_box_%28LRM_20200612_142934%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Utility_box_(LRM_20200612_142934).jpg",
+     "licence": "CC BY-SA",
+     "famille": "by-sa",
+     "auteur": "Matti Blume",
+     "score": 3,
+     "terme": "Adobe Photoshop box",
+     "poids": 74053
+    },
+    {
+     "fichier": "Post box Nordbrief, Ribnitz-Damgarten (DSC04840).JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Post_box_Nordbrief%2C_Ribnitz-Damgarten_%28DSC04840%29.JPG/1920px-Post_box_Nordbrief%2C_Ribnitz-Damgarten_%28DSC04840%29.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Post_box_Nordbrief,_Ribnitz-Damgarten_(DSC04840).JPG",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Matti Blume",
+     "score": 3,
+     "terme": "Adobe Photoshop box",
+     "poids": 61778
+    }
+   ]
+  },
+  "AMAT": {
+   "candidats": [
+    {
+     "fichier": "Tom Tom Applied Machine Learning Conference 11 April 2019 Wikipedia (2).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Tom_Tom_Applied_Machine_Learning_Conference_11_April_2019_Wikipedia_%282%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Tom_Tom_Applied_Machine_Learning_Conference_11_April_2019_Wikipedia_(2).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Cr29uva",
+     "score": 5,
+     "terme": "Applied Materials machine",
+     "poids": 48181
+    },
+    {
+     "fichier": "PSM V57 D280 Applied mechanics laboratory stress testing machine.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/PSM_V57_D280_Applied_mechanics_laboratory_stress_testing_machine.png",
+     "page": "https://commons.wikimedia.org/wiki/File:PSM_V57_D280_Applied_mechanics_laboratory_stress_testing_machine.png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Unknown authorUnknown author",
+     "score": 5,
+     "terme": "Applied Materials machine",
+     "poids": 121136
+    },
+    {
+     "fichier": "Lomonosov-aerodromic-machine-(reconstruction).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Lomonosov-aerodromic-machine-%28reconstruction%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Lomonosov-aerodromic-machine-(reconstruction).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Albina-belenkaya",
+     "score": 5,
+     "terme": "Applied Materials machine",
+     "poids": 36308
+    }
+   ]
+  },
+  "ASML.AS": {
+   "candidats": [
+    {
+     "fichier": "Wafertraksystem.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Wafertraksystem.jpg/1920px-Wafertraksystem.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wafertraksystem.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "",
+     "score": 0,
+     "terme": "wafer stepper",
+     "poids": 65051
+    },
+    {
+     "fichier": "Temple and ASML containers in Tainan May 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Temple_and_ASML_containers_in_Tainan_May_2025.jpg/1920px-Temple_and_ASML_containers_in_Tainan_May_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Temple_and_ASML_containers_in_Tainan_May_2025.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "4300streetcar",
+     "score": 0,
+     "terme": "ASML lithography",
+     "poids": 85293
+    },
+    {
+     "fichier": "Spectrum of lithography lights.PNG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Spectrum_of_lithography_lights.PNG",
+     "page": "https://commons.wikimedia.org/wiki/File:Spectrum_of_lithography_lights.PNG",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Shigeru23",
+     "score": 0,
+     "terme": "EUV lithography",
+     "poids": 55264
+    }
+   ]
+  },
+  "AXP": {
+   "candidats": [
+    {
+     "fichier": "United States 1881 American Express Company postal card front.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/United_States_1881_American_Express_Company_postal_card_front.tif/lossy-page1-1920px-United_States_1881_American_Express_Company_postal_card_front.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:United_States_1881_American_Express_Company_postal_card_front.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Unknown authorUnknown author",
+     "score": 5,
+     "terme": "American Express card",
+     "poids": 69598
+    },
+    {
+     "fichier": "United States 1881 American Express Company postal card back.tif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/United_States_1881_American_Express_Company_postal_card_back.tif/lossy-page1-1920px-United_States_1881_American_Express_Company_postal_card_back.tif.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:United_States_1881_American_Express_Company_postal_card_back.tif",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Unknown authorUnknown author",
+     "score": 5,
+     "terme": "American Express card",
+     "poids": 81628
+    },
+    {
+     "fichier": "Doutor Value Card (Black).JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Doutor_Value_Card_%28Black%29.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Doutor_Value_Card_(Black).JPG",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Mc681",
+     "score": 5,
+     "terme": "American Express centurion card",
+     "poids": 32617
+    }
+   ]
+  },
+  "CSCO": {
+   "candidats": [
+    {
+     "fichier": "PCB of Cisco Catalyst 3750 (3750G-24T) (15481833861).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/PCB_of_Cisco_Catalyst_3750_%283750G-24T%29_%2815481833861%29.jpg/1920px-PCB_of_Cisco_Catalyst_3750_%283750G-24T%29_%2815481833861%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:PCB_of_Cisco_Catalyst_3750_(3750G-24T)_(15481833861).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "htomari",
+     "score": 5,
+     "terme": "Cisco Catalyst switch",
+     "poids": 121676
+    },
+    {
+     "fichier": "Cisco WS-X6708-10G-3C switch module.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Cisco_WS-X6708-10G-3C_switch_module.jpg/1920px-Cisco_WS-X6708-10G-3C_switch_module.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cisco_WS-X6708-10G-3C_switch_module.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Martijn Boer",
+     "score": 5,
+     "terme": "Cisco Catalyst switch",
+     "poids": 132327
+    },
+    {
+     "fichier": "IP-Phone Cisco CP79XX.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/IP-Phone_Cisco_CP79XX.jpg/1920px-IP-Phone_Cisco_CP79XX.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:IP-Phone_Cisco_CP79XX.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Антон Пищулин",
+     "score": 0,
+     "terme": "Cisco IP Phone",
+     "poids": 64608
+    }
+   ]
+  },
+  "DELL": {
+   "candidats": [
+    {
+     "fichier": "Dell PowerEdge 2650 expansion card.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Dell_PowerEdge_2650_expansion_card.jpg/1920px-Dell_PowerEdge_2650_expansion_card.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Dell_PowerEdge_2650_expansion_card.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "CrazyblocksT",
+     "score": 5,
+     "terme": "Dell PowerEdge server",
+     "poids": 120612
+    },
+    {
+     "fichier": "Experience our server racks (8531003630).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Experience_our_server_racks_%288531003630%29.jpg/1920px-Experience_our_server_racks_%288531003630%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Experience_our_server_racks_(8531003630).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Dell Inc.",
+     "score": 4,
+     "terme": "Dell rack server",
+     "poids": 85744
+    },
+    {
+     "fichier": "Dell Server Poor Wiring.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Dell_Server_Poor_Wiring.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Dell_Server_Poor_Wiring.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Robert.Harker",
+     "score": 4,
+     "terme": "Dell rack server",
+     "poids": 136915
+    }
+   ]
+  },
+  "HSBA.L": {
+   "candidats": [
+    {
+     "fichier": "HK Cheung Sha Wan 幸福商場 Fortune Estate HSBC ATM light box uniform.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/HK_Cheung_Sha_Wan_%E5%B9%B8%E7%A6%8F%E5%95%86%E5%A0%B4_Fortune_Estate_HSBC_ATM_light_box_uniform.JPG/1920px-HK_Cheung_Sha_Wan_%E5%B9%B8%E7%A6%8F%E5%95%86%E5%A0%B4_Fortune_Estate_HSBC_ATM_light_box_uniform.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:HK_Cheung_Sha_Wan_%E5%B9%B8%E7%A6%8F%E5%95%86%E5%A0%B4_Fortune_Estate_HSBC_ATM_light_box_uniform.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Scoictho",
+     "score": 3,
+     "terme": "HSBC ATM",
+     "poids": 58867
+    },
+    {
+     "fichier": "HK Causeway Bay Times Square basement interior 10 HSBC ATM.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/HK_Causeway_Bay_Times_Square_basement_interior_10_HSBC_ATM.JPG/1920px-HK_Causeway_Bay_Times_Square_basement_interior_10_HSBC_ATM.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:HK_Causeway_Bay_Times_Square_basement_interior_10_HSBC_ATM.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Wuaiubon",
+     "score": 3,
+     "terme": "HSBC ATM",
+     "poids": 80780
+    },
+    {
+     "fichier": "Wealth Court HSBC ATM.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Wealth_Court_HSBC_ATM.jpg/1920px-Wealth_Court_HSBC_ATM.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wealth_Court_HSBC_ATM.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Ricky36",
+     "score": 0,
+     "terme": "HSBC ATM",
+     "poids": 127007
+    }
+   ]
+  },
+  "INTC": {
+   "candidats": [
+    {
+     "fichier": "Wafer with Pentium chips.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Wafer_with_Pentium_chips.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wafer_with_Pentium_chips.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Naotake Murayama from Los Altos, CA, USA",
+     "score": 6,
+     "terme": "Intel wafer",
+     "poids": 86140
+    },
+    {
+     "fichier": "Wafer at Intel Museum.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Wafer_at_Intel_Museum.JPG/1920px-Wafer_at_Intel_Museum.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Wafer_at_Intel_Museum.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Oleg Alexandrov",
+     "score": 6,
+     "terme": "Intel wafer",
+     "poids": 68437
+    },
+    {
+     "fichier": "Processor INTEL CORE 2 DUO.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Processor_INTEL_CORE_2_DUO.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Processor_INTEL_CORE_2_DUO.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "45746845685468q",
+     "score": 6,
+     "terme": "Intel Core processor",
+     "poids": 58839
+    }
+   ]
+  },
+  "META": {
+   "candidats": [
+    {
+     "fichier": "Visitor using a Meta Quest 3 VR headset at IPP Greifswald 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Visitor_using_a_Meta_Quest_3_VR_headset_at_IPP_Greifswald_2025.jpg/1920px-Visitor_using_a_Meta_Quest_3_VR_headset_at_IPP_Greifswald_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Visitor_using_a_Meta_Quest_3_VR_headset_at_IPP_Greifswald_2025.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Siarhei Besarab",
+     "score": 0,
+     "terme": "Meta Quest headset",
+     "poids": 59974
+    },
+    {
+     "fichier": "The Meta River (MODIS).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/The_Meta_River_%28MODIS%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Meta_River_(MODIS).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "MODIS Land Rapid Response Team, NASA GSFC",
+     "score": 0,
+     "terme": "Meta data center",
+     "poids": 80321
+    },
+    {
+     "fichier": "The Hyperion Proto-Supercluster.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/The_Hyperion_Proto-Supercluster.jpg/1920px-The_Hyperion_Proto-Supercluster.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Hyperion_Proto-Supercluster.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "ESO/L. Calçada &amp; Olga Cucciati et al.",
+     "score": 0,
+     "terme": "Meta data center",
+     "poids": 65564
+    }
+   ]
+  },
+  "MSFT": {
+   "candidats": [
+    {
+     "fichier": "Xbox-console.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Xbox-console.jpg/1920px-Xbox-console.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Xbox-console.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Evan-Amos",
+     "score": 4,
+     "terme": "Xbox Series X",
+     "poids": 42771
+    },
+    {
+     "fichier": "Xbox series s controller.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Xbox_series_s_controller.jpg/1920px-Xbox_series_s_controller.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Xbox_series_s_controller.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Microsoft",
+     "score": 0,
+     "terme": "Xbox Series X",
+     "poids": 35824
+    },
+    {
+     "fichier": "Xbox Series XとSeries S.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Xbox_Series_X%E3%81%A8Series_S.jpg/1920px-Xbox_Series_X%E3%81%A8Series_S.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Xbox_Series_X%E3%81%A8Series_S.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Kyu3a",
+     "score": 0,
+     "terme": "Xbox Series X",
+     "poids": 75420
+    }
+   ]
+  },
+  "MU": {
+   "candidats": [
+    {
+     "fichier": "Crucial SSD MX300 525GB-8479.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Crucial_SSD_MX300_525GB-8479.jpg/1920px-Crucial_SSD_MX300_525GB-8479.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Crucial_SSD_MX300_525GB-8479.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "terme": "Crucial SSD",
+     "poids": 72459
+    },
+    {
+     "fichier": "Crucial SSD MX300 525GB-8478.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Crucial_SSD_MX300_525GB-8478.jpg/1920px-Crucial_SSD_MX300_525GB-8478.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Crucial_SSD_MX300_525GB-8478.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "terme": "Crucial SSD",
+     "poids": 65778
+    },
+    {
+     "fichier": "Crucial MX100 SSD 256GB 20140905.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Crucial_MX100_SSD_256GB_20140905.jpg/1920px-Crucial_MX100_SSD_256GB_20140905.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Crucial_MX100_SSD_256GB_20140905.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "MiNe",
+     "score": 5,
+     "terme": "Crucial SSD",
+     "poids": 94705
+    }
+   ]
+  },
+  "NFLX": {
+   "candidats": [
+    {
+     "fichier": "10 Rules for Radicals.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/10_Rules_for_Radicals.djvu/page1-1280px-10_Rules_for_Radicals.djvu.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:10_Rules_for_Radicals.djvu",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "\nCarl Malamud",
+     "score": 0,
+     "terme": "Netflix DVD envelope",
+     "poids": 54709
+    },
+    {
+     "fichier": "The Journal v. 28, no. 24, June 16, 2016 (IA Journal20160616).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/The_Journal_v._28%2C_no._24%2C_June_16%2C_2016_%28IA_Journal20160616%29.pdf/page1-1280px-The_Journal_v._28%2C_no._24%2C_June_16%2C_2016_%28IA_Journal20160616%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Journal_v._28,_no._24,_June_16,_2016_(IA_Journal20160616).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nU.S. Navy. Naval Support Activity (NSA) Bethesda",
+     "score": -12,
+     "terme": "Netflix Open Connect appliance",
+     "poids": 109521
+    },
+    {
+     "fichier": "The Journal v. 28, no. 22, June 2, 2016 (IA Journal20160602).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/The_Journal_v._28%2C_no._22%2C_June_2%2C_2016_%28IA_Journal20160602%29.pdf/page1-1280px-The_Journal_v._28%2C_no._22%2C_June_2%2C_2016_%28IA_Journal20160602%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Journal_v._28,_no._22,_June_2,_2016_(IA_Journal20160602).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nU.S. Navy. Naval Support Activity (NSA) Bethesda",
+     "score": -12,
+     "terme": "Netflix Open Connect appliance",
+     "poids": 123227
+    }
+   ]
+  },
+  "NVDA": {
+   "candidats": [
+    {
+     "fichier": "Video über die RTX 4080 Super und Vergleichskarten (极客湾Geekerwan) 23.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Video_%C3%BCber_die_RTX_4080_Super_und_Vergleichskarten_%28%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan%29_23.png/1920px-Video_%C3%BCber_die_RTX_4080_Super_und_Vergleichskarten_%28%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan%29_23.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Video_%C3%BCber_die_RTX_4080_Super_und_Vergleichskarten_(%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan)_23.png",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "极客湾Geekerwan",
+     "score": 6,
+     "terme": "GeForce RTX graphics card",
+     "poids": 71666
+    },
+    {
+     "fichier": "Video über die GeForce RTX 4060 (极客湾Geekerwan) 26.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Video_%C3%BCber_die_GeForce_RTX_4060_%28%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan%29_26.png/1920px-Video_%C3%BCber_die_GeForce_RTX_4060_%28%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan%29_26.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Video_%C3%BCber_die_GeForce_RTX_4060_(%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan)_26.png",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "极客湾Geekerwan",
+     "score": 6,
+     "terme": "Nvidia GeForce graphics card",
+     "poids": 34833
+    },
+    {
+     "fichier": "Video über die GeForce RTX 4060 (极客湾Geekerwan) 22.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Video_%C3%BCber_die_GeForce_RTX_4060_%28%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan%29_22.png/1920px-Video_%C3%BCber_die_GeForce_RTX_4060_%28%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan%29_22.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Video_%C3%BCber_die_GeForce_RTX_4060_(%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan)_22.png",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "极客湾Geekerwan",
+     "score": 6,
+     "terme": "Nvidia GeForce graphics card",
+     "poids": 38888
+    }
+   ]
+  },
+  "PYPL": {
+   "candidats": [
+    {
+     "fichier": "The effects of credit card purchasing at installation level (IA theeffectsofcred1094543023).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/The_effects_of_credit_card_purchasing_at_installation_level_%28IA_theeffectsofcred1094543023%29.pdf/page1-960px-The_effects_of_credit_card_purchasing_at_installation_level_%28IA_theeffectsofcred1094543023%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_effects_of_credit_card_purchasing_at_installation_level_(IA_theeffectsofcred1094543023).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nSchnepf, Henry L.",
+     "score": -7,
+     "terme": "PayPal card reader",
+     "poids": 26349
+    },
+    {
+     "fichier": "CREDIT CARD INTERCHANGE FEES- ANTITRUST CONCERNS? (IA gov.gpo.fdsys.CHRG-109shrg29737).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/CREDIT_CARD_INTERCHANGE_FEES-_ANTITRUST_CONCERNS%3F_%28IA_gov.gpo.fdsys.CHRG-109shrg29737%29.pdf/page1-960px-CREDIT_CARD_INTERCHANGE_FEES-_ANTITRUST_CONCERNS%3F_%28IA_gov.gpo.fdsys.CHRG-109shrg29737%29.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:CREDIT_CARD_INTERCHANGE_FEES-_ANTITRUST_CONCERNS%3F_(IA_gov.gpo.fdsys.CHRG-109shrg29737).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCommittee on Judiciary",
+     "score": -7,
+     "terme": "PayPal card reader",
+     "poids": 21559
+    },
+    {
+     "fichier": "The Popular Magazine 1929-09-20.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/The_Popular_Magazine_1929-09-20.pdf/page1-960px-The_Popular_Magazine_1929-09-20.pdf.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Popular_Magazine_1929-09-20.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nVarious",
+     "score": -12,
+     "terme": "PayPal card reader",
+     "poids": 132495
+    }
+   ]
+  },
+  "STX": {
+   "candidats": [
+    {
+     "fichier": "Seagate portable hard drive.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Seagate_portable_hard_drive.jpg/1920px-Seagate_portable_hard_drive.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Seagate_portable_hard_drive.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Anselm Schüler",
+     "score": 5,
+     "terme": "Seagate hard disk drive",
+     "poids": 110739
+    },
+    {
+     "fichier": "Seagate U4 ST34311A 4.3GB hard disk drive front view.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Seagate_U4_ST34311A_4.3GB_hard_disk_drive_front_view.jpg/1920px-Seagate_U4_ST34311A_4.3GB_hard_disk_drive_front_view.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Seagate_U4_ST34311A_4.3GB_hard_disk_drive_front_view.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Navaneethpp",
+     "score": 5,
+     "terme": "Seagate hard disk drive",
+     "poids": 74690
+    },
+    {
+     "fichier": "Seagate ST33232A hard disk inner view.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Seagate_ST33232A_hard_disk_inner_view.jpg/1920px-Seagate_ST33232A_hard_disk_inner_view.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Seagate_ST33232A_hard_disk_inner_view.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Eric Gaba (Sting - fr:Sting)\n\n This  image was created with CombineZP by 11  ( I",
+     "score": 5,
+     "terme": "Seagate hard disk drive",
+     "poids": 62874
+    }
+   ]
+  }
+ }
+}
