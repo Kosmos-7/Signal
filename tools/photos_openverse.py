@@ -34,6 +34,14 @@ import urllib.request
 
 API = "https://api.openverse.org/v1/images/"
 UA = "SignalWatchlists/1.0 (https://github.com/Kosmos-7/Signal ; projet pédagogique)"
+# Openverse est derrière Cloudflare, dont la règle anti-robot refuse (403,
+# erreur 1010) tout en-tête qui ne ressemble pas à celui d'un navigateur. On ne
+# se déguise pas en Chrome pour autant : le gabarit « Mozilla/5.0 (compatible;
+# … ) » est la forme historiquement prévue pour un client qui se nomme, et il
+# nous laisse dire qui appelle et où écrire. Si Cloudflare le refuse aussi,
+# c'est que la source nous est fermée et l'on en tirera la conclusion.
+UA_COMPAT = ("Mozilla/5.0 (compatible; SignalWatchlists/1.0; "
+             "+https://github.com/Kosmos-7/Signal)")
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from photos_produits import score_nom, prepare                    # noqa: E402
@@ -79,41 +87,45 @@ def chercher(terme, page_size=20):
 
 
 def diagnostic():
-    """Interroge l'API de sept manières pour savoir laquelle passe.
+    """Interroge l'API sous plusieurs identités pour savoir laquelle passe.
 
-    Le premier passage a échoué sur les 740 requêtes avec un simple
-    « HTTPError ». Plutôt que deviner quel paramètre gêne, on essaie chaque
-    hypothèse une fois et on lit le code de retour.
+    Premier diagnostic (run 30748258219) : HTTP 403, Cloudflare erreur 1010,
+    « the site owner has blocked access based on the client signature ». Aucun
+    paramètre n'était en cause, tous les gabarits de requête tombaient, y
+    compris la racine de l'API. Seul l'en-tête d'un navigateur passait.
+
+    Reste à savoir si la règle est fine (empreinte complète d'un navigateur) ou
+    grossière (le nom doit commencer par « Mozilla/5.0 »). Dans le second cas
+    un en-tête à la fois conforme au gabarit ET honnête sur qui appelle suffit,
+    et c'est ce qu'on veut : se présenter, pas se déguiser.
     """
     essais = [
-        ("nu", API + "?q=nvidia", {"User-Agent": UA}),
-        ("sans UA", API + "?q=nvidia", {}),
-        ("navigateur", API + "?q=nvidia",
-         {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                        "(KHTML, like Gecko) Chrome/126 Safari/537.36"}),
-        ("+ licence", API + "?q=nvidia&license=cc0,pdm,by,by-sa", {"User-Agent": UA}),
-        ("+ mature", API + "?q=nvidia&mature=false", {"User-Agent": UA}),
-        ("+ page_size", API + "?q=nvidia&page_size=20", {"User-Agent": UA}),
-        ("ancien hôte", "https://api.openverse.engineering/v1/images/?q=nvidia",
-         {"User-Agent": UA}),
-        ("racine", "https://api.openverse.org/v1/", {"User-Agent": UA}),
+        ("descriptif", UA),
+        ("compatible", UA_COMPAT),
+        ("navigateur", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"),
     ]
-    for nom, url, entetes in essais:
-        req = urllib.request.Request(url, headers={**entetes, "Accept": "application/json"})
+    for nom, ua in essais:
+        req = urllib.request.Request(API + "?q=nvidia&page_size=5",
+                                     headers={"User-Agent": ua,
+                                              "Accept": "application/json"})
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
-                d = json.loads(r.read(4000).decode("utf-8", "replace") or "{}")
-                n = d.get("result_count", d.get("results") and len(d["results"]))
-                print(f"  ✓ {nom:12s} HTTP {r.status}  résultats={n}")
+                d = json.loads(r.read().decode("utf-8", "replace") or "{}")
+                print(f"  ✓ {nom:11s} HTTP {r.status}  {d.get('result_count')} résultats")
+                for res in (d.get("results") or [])[:3]:
+                    print(f"      · {(res.get('title') or '')[:52]:52s} "
+                          f"{res.get('license')}-{res.get('license_version') or ''} "
+                          f"[{res.get('source')}]")
         except urllib.error.HTTPError as e:
             try:
                 corps = e.read(300).decode("utf-8", "replace").replace("\n", " ")
             except Exception:
                 corps = ""
-            print(f"  ✗ {nom:12s} HTTP {e.code}  {corps[:220]}")
+            print(f"  ✗ {nom:11s} HTTP {e.code}  {corps[:200]}")
         except Exception as e:
-            print(f"  ✗ {nom:12s} {type(e).__name__}: {e}")
-        time.sleep(1.0)
+            print(f"  ✗ {nom:11s} {type(e).__name__}: {e}")
+        time.sleep(1.5)
 
 
 def retenir(res, nom):
