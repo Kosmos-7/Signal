@@ -24,12 +24,21 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 
 REGISTRES = [
     ("assets/titres/LEGENDES.json", "assets/titres"),
     ("assets/themes/LEGENDES.json", "assets/themes"),
+    ("assets/apprendre/SOURCES.json", "assets/apprendre"),
 ]
+
+# Les respirations de la page « Apprendre » ne passent pas par un registre lu en
+# JavaScript : la balise est écrite en dur dans le HTML, pour qu'une page de
+# documentation reste lisible sans dépendre d'un fetch. L'empreinte doit donc
+# être reportée dans le HTML lui-même, sinon on retombe exactement sur le défaut
+# décrit plus haut : nouvelle légende, ancienne image.
+PAGES = [("apprendre.html", "assets/apprendre")]
 
 
 def empreinte(chemin):
@@ -70,6 +79,28 @@ def main():
             json.dump(dict(sorted(d.items())), open(registre, "w", encoding="utf-8"),
                       ensure_ascii=False, indent=1)
             print(f"{registre} mis à jour")
+
+    for page, dossier in PAGES:
+        if not os.path.exists(page):
+            continue
+        html = open(page, encoding="utf-8").read()
+        motif = re.compile(re.escape(dossier) + r"/([\w.-]+)\.jpg(\?v=[0-9a-f]+)?")
+
+        def remplacer(m):
+            f = os.path.join(dossier, m.group(1) + ".jpg")
+            if not os.path.exists(f):
+                orphelins.append(f"{page}:{m.group(1)}")
+                return m.group(0)
+            v = empreinte(f)
+            if m.group(2) != f"?v={v}":
+                perimes.append(f"{page} {m.group(1)} "
+                               f"{(m.group(2) or '(aucune)').lstrip('?v=')} -> {v}")
+            return f"{dossier}/{m.group(1)}.jpg?v={v}"
+
+        neuf = motif.sub(remplacer, html)
+        if neuf != html and not a.verifier:
+            open(page, "w", encoding="utf-8").write(neuf)
+            print(f"{page} mis à jour")
 
     print(f"{total} photos, {len(perimes)} empreintes à corriger")
     for p in perimes[:20]:

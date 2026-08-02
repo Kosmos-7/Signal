@@ -271,6 +271,50 @@
     line-height: 1.75;
   }
 
+
+  /* ── ILLUSTRATION DE SECTION ──
+     Respire entre deux blocs de texte long. Purement decorative : la legende
+     dit ce qu'on voit et d'ou ca vient, jamais une information necessaire a la
+     comprehension, pour qu'une image manquante ne casse rien. */
+  .sec-illu {
+    position: relative;
+    margin: 2.2rem 0 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface2);
+  }
+  .sec-illu img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+  }
+  .sec-illu figcaption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 1.6rem 0.9rem 0.55rem;
+    background: linear-gradient(180deg, transparent, rgba(6,10,18,0.88));
+    font-family: 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #e8ecf2;
+  }
+  .sec-illu figcaption i {
+    display: block;
+    margin-top: 2px;
+    font-style: normal;
+    font-size: 0.55rem;
+    letter-spacing: 0.3px;
+    text-transform: none;
+    color: rgba(232,236,242,0.62);
+  }
+  @media (max-width: 640px) {
+    .sec-illu img { aspect-ratio: 16 / 9; }
+  }
+
   /* ── PORTFOLIO EXPLAINER ── */
   .portfo-block {
     background: var(--surface);
@@ -662,6 +706,11 @@ Attention au raccourci : la capitalisation n'est pas le prix qu'il faudrait paye
     <div class="scoring-note" style="margin-top:1.25rem">
 <strong>Ce qu'il faut retenir avant la suite.</strong> Le cours n'est pas la valeur, c'est le point de rencontre entre des anticipations. Comprendre une entreprise, c'est se donner une opinion sur cette valeur, et n'acheter que lorsque le prix demandé est confortablement en dessous. C'est exactement ce que fait la section suivante, en ouvrant les comptes.
     </div>
+
+    <figure class="sec-illu">
+      <img src="assets/apprendre/s2.jpg" alt="La corbeille du New York Stock Exchange, agents en mouvement autour des postes de cotation" loading="lazy" width="1700" height="744">
+      <figcaption>La corbeille du New York Stock Exchange<i>Carol M. Highsmith, Library of Congress · domaine public</i></figcaption>
+    </figure>
   </section>
 
 <!-- SECTION 2, Les 3 briques de base -->
@@ -780,6 +829,11 @@ Cette position détermine tout. Un fournisseur d'équipement facture peu de clie
     <div class="scoring-note" style="margin-top:1.25rem">
 <strong>Où trouver ces chiffres.</strong> Tout est public et gratuit. Les sociétés américaines déposent leurs comptes auprès du régulateur boursier, le rapport annuel s'appelle le 10-K et le trimestriel le 10-Q. Les européennes publient un rapport annuel et des résultats semestriels. Chaque société tient une page « relations investisseurs » où figurent ces documents ainsi que la présentation commentée des résultats, souvent le document le plus lisible pour commencer.
     </div>
+
+    <figure class="sec-illu">
+      <img src="assets/apprendre/s4.jpg" alt="Chaîne d'assemblage automobile, carrosseries alignées sur le convoyeur" loading="lazy" width="1700" height="744">
+      <figcaption>Chaîne d'assemblage automobile, Gliwice, Pologne<i>Marek Ślusarczyk · CC BY 3.0</i></figcaption>
+    </figure>
   </section>
 
 <!-- SECTION, Valorisation -->
@@ -896,6 +950,11 @@ Savoir reconnaître ces mouvements évite deux erreurs symétriques : croire à 
     <div class="scoring-note" style="margin-top:1.25rem">
 <strong>Le lien avec les fiches.</strong> Le bloc <em>Consensus analystes</em> d'une fiche Signal reprend exactement cette mécanique : nombre d'analystes qui suivent le titre, objectif de cours moyen, et surtout le sens des révisions récentes. Et lorsqu'une fiche mentionne un résultat trimestriel, elle donne la date de publication : sans elle, un chiffre de croissance ne veut rien dire, on ne sait pas de quel trimestre il parle ni s'il est déjà digéré par le marché.
     </div>
+
+    <figure class="sec-illu">
+      <img src="assets/apprendre/s6.jpg" alt="Colonnes de cotes boursières imprimées dans un quotidien, flèches rouges et bleues de variation" loading="lazy" width="1700" height="744">
+      <figcaption>Cotes de clôture dans un quotidien coréen<i>Mk2010 · CC BY-SA 4.0</i></figcaption>
+    </figure>
   </section>
 
 <!-- SECTION 6, Friction réelle (frais + fiscalité) -->

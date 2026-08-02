@@ -1,0 +1,54 @@
+# .github/workflows/photos-apprendre.yml
+# Régénère les respirations de la page « Apprendre » à partir des fichiers
+# Commons choisis dans tools/photos_apprendre.py. Le choix est humain, la
+# fabrication est reproductible : c'est tout l'intérêt de passer par un script
+# plutôt que de déposer des JPEG à la main.
+name: Illustrations de la page Apprendre
+
+on:
+  workflow_dispatch:
+    inputs:
+      slots:
+        description: "N'régénérer que ces ancres (ex. s2,s4). Vide = toutes."
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-data-commit
+  cancel-in-progress: false
+
+jobs:
+  apprendre:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install --quiet Pillow
+      - name: Fabriquer les illustrations
+        # Comme pour photos-marques : l'entrée libre passe par l'environnement,
+        # jamais par interpolation directe dans le script du shell.
+        env:
+          SLOTS: ${{ inputs.slots }}
+        run: |
+          python tools/photos_apprendre.py ${SLOTS:+--slots "$SLOTS"}
+      - name: Reporter les empreintes dans apprendre.html
+        run: python tools/versionner_photos.py
+      - name: Commiter
+        run: |
+          git config user.email "bot@signal.fr"
+          git config user.name "Signal Bot"
+          git add -A assets/apprendre || true
+          git add -A apprendre.html || true
+          if git diff --staged --quiet; then
+            echo "Rien de nouveau."
+          else
+            git commit -m "chore(apprendre): illustrations de section [skip ci]"
+            git pull --rebase --autostash || { git rebase --abort; exit 1; }
+            git push
+          fi
