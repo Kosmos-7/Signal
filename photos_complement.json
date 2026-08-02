@@ -1,0 +1,1134 @@
+{
+ "societes": 47,
+ "detail": {
+  "4062.T": {
+   "nom": "Ibiden",
+   "qid": "Q585314",
+   "candidats": [
+    {
+     "fichier": "Ibiden Regulus Volleyball Club Team Bus.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Ibiden_Regulus_Volleyball_Club_Team_Bus.jpg/1920px-Ibiden_Regulus_Volleyball_Club_Team_Bus.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ibiden_Regulus_Volleyball_Club_Team_Bus.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Mr.ちゅらさん",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 102690
+    }
+   ]
+  },
+  "8035.T": {
+   "nom": "Tokyo Electron",
+   "qid": "Q1351484",
+   "candidats": [
+    {
+     "fichier": "Akasaka BizTower.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Akasaka_BizTower.jpg/1920px-Akasaka_BizTower.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Akasaka_BizTower.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Akonnchiroll",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 128446
+    }
+   ]
+  },
+  "ACN": {
+   "nom": "Accenture",
+   "qid": "Q338825",
+   "candidats": [
+    {
+     "fichier": "Grand Canal Square - panoramio.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Grand_Canal_Square_-_panoramio.jpg/1920px-Grand_Canal_Square_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Grand_Canal_Square_-_panoramio.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "William Murphy",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 113300
+    },
+    {
+     "fichier": "Candor Tech Space, Kolkata.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Candor_Tech_Space%2C_Kolkata.jpg/1920px-Candor_Tech_Space%2C_Kolkata.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Candor_Tech_Space,_Kolkata.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Sr sudiptaroy",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 99515
+    }
+   ]
+  },
+  "ALV.DE": {
+   "nom": "Allianz",
+   "qid": "Q487292",
+   "candidats": [
+    {
+     "fichier": "Trier BW 2014-04-12 15-03-22.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Trier_BW_2014-04-12_15-03-22.jpg/1920px-Trier_BW_2014-04-12_15-03-22.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Trier_BW_2014-04-12_15-03-22.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Berthold Werner",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 66134
+    },
+    {
+     "fichier": "Treptowers, Alt-Treptow, Berlin, 1705252213, ako.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Treptowers%2C_Alt-Treptow%2C_Berlin%2C_1705252213%2C_ako.jpg/1920px-Treptowers%2C_Alt-Treptow%2C_Berlin%2C_1705252213%2C_ako.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Treptowers,_Alt-Treptow,_Berlin,_1705252213,_ako.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ansgar Koreng",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 69975
+    }
+   ]
+  },
+  "AMAT": {
+   "nom": "Applied Materials",
+   "qid": "Q621610",
+   "candidats": [
+    {
+     "fichier": "Applied Materials sign and Air Products plant in Southern Taiwan Science Park May 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg/1920px-Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "4300streetcar",
+     "score": -9,
+     "gisement": "P180",
+     "poids": 121991
+    }
+   ]
+  },
+  "AMD": {
+   "nom": "Advanced Micro Devices",
+   "qid": "Q128896",
+   "candidats": [
+    {
+     "fichier": "Socket am2 retention module.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Socket_am2_retention_module.jpg/1920px-Socket_am2_retention_module.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Socket_am2_retention_module.jpg",
+     "licence": "CC BY-SA 2.0 de",
+     "famille": "by-sa",
+     "auteur": "The original uploader was Smial at German Wikipedia.",
+     "score": 5,
+     "gisement": "P180",
+     "poids": 113612
+    },
+    {
+     "fichier": "Sockel-939.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Sockel-939.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Sockel-939.jpg",
+     "licence": "CC BY 2.5",
+     "famille": "by",
+     "auteur": "Clemens PFEIFFER, A-1190 Vienna",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 120619
+    }
+   ]
+  },
+  "AMZN": {
+   "nom": "Amazon.com",
+   "qid": "Q3884",
+   "candidats": [
+    {
+     "fichier": "Amazon warehouse workers outside the National Labor Relations Board 01.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Amazon_warehouse_workers_outside_the_National_Labor_Relations_Board_01.jpg/1920px-Amazon_warehouse_workers_outside_the_National_Labor_Relations_Board_01.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Amazon_warehouse_workers_outside_the_National_Labor_Relations_Board_01.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Joe Piette",
+     "score": 5,
+     "gisement": "P180",
+     "poids": 121565
+    },
+    {
+     "fichier": "Philly Supports Alabama Amazon Workers - Picket Line, March 5, 2021-002.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Philly_Supports_Alabama_Amazon_Workers_-_Picket_Line%2C_March_5%2C_2021-002.jpg/1920px-Philly_Supports_Alabama_Amazon_Workers_-_Picket_Line%2C_March_5%2C_2021-002.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Philly_Supports_Alabama_Amazon_Workers_-_Picket_Line,_March_5,_2021-002.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Joe Piette",
+     "score": 3,
+     "gisement": "P180",
+     "poids": 123427
+    }
+   ]
+  },
+  "AVGO": {
+   "nom": "Broadcom",
+   "qid": "Q555925",
+   "candidats": [
+    {
+     "fichier": "ThinkPad X220 Bluetooth Daughter Card (BDC-3) and BDC slot.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ThinkPad_X220_Bluetooth_Daughter_Card_%28BDC-3%29_and_BDC_slot.jpg/1920px-ThinkPad_X220_Bluetooth_Daughter_Card_%28BDC-3%29_and_BDC_slot.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:ThinkPad_X220_Bluetooth_Daughter_Card_(BDC-3)_and_BDC_slot.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Siarhei V",
+     "score": 5,
+     "gisement": "P180",
+     "poids": 120175
+    },
+    {
+     "fichier": "Broadcomheadquarters.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Broadcomheadquarters.jpg/1920px-Broadcomheadquarters.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Broadcomheadquarters.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Coolcaesar",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 74996
+    }
+   ]
+  },
+  "AXP": {
+   "nom": "American Express",
+   "qid": "Q194360",
+   "candidats": [
+    {
+     "fichier": "Travelers Cheques of 50 USD each issued by American Express, bought ca. 2012, showing incremental serial numbering.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Travelers_Cheques_of_50_USD_each_issued_by_American_Express%2C_bought_ca._2012%2C_showing_incremental_serial_numbering.jpg/1920px-Travelers_Cheques_of_50_USD_each_issued_by_American_Express%2C_bought_ca._2012%2C_showing_incremental_serial_numbering.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Travelers_Cheques_of_50_USD_each_issued_by_American_Express,_bought_ca._2012,_showing_incremental_serial_numbering.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Pittigrilli",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 97850
+    },
+    {
+     "fichier": "N604GB (1) - KSWF - 12-12-24.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/N604GB_%281%29_-_KSWF_-_12-12-24.jpg/1920px-N604GB_%281%29_-_KSWF_-_12-12-24.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:N604GB_(1)_-_KSWF_-_12-12-24.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Coldstreamer20",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 68777
+    }
+   ]
+  },
+  "BAC": {
+   "nom": "Bank of America",
+   "qid": "Q487907",
+   "candidats": [
+    {
+     "fichier": "Bank of America Corporate Center Charlotte, North Carolina.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Bank_of_America_Corporate_Center_Charlotte%2C_North_Carolina.jpg/1920px-Bank_of_America_Corporate_Center_Charlotte%2C_North_Carolina.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Bank_of_America_Corporate_Center_Charlotte,_North_Carolina.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Kiran891",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 97672
+    },
+    {
+     "fichier": "东美信用卡.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/%E4%B8%9C%E7%BE%8E%E4%BF%A1%E7%94%A8%E5%8D%A1.jpg/1920px-%E4%B8%9C%E7%BE%8E%E4%BF%A1%E7%94%A8%E5%8D%A1.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%9C%E7%BE%8E%E4%BF%A1%E7%94%A8%E5%8D%A1.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Lhzss8",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 62069
+    }
+   ]
+  },
+  "BLK": {
+   "nom": "BlackRock",
+   "qid": "Q219635",
+   "candidats": [
+    {
+     "fichier": "50 Hudson Yards.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/50_Hudson_Yards.png/1920px-50_Hudson_Yards.png",
+     "page": "https://commons.wikimedia.org/wiki/File:50_Hudson_Yards.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Dazzling4",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 120398
+    }
+   ]
+  },
+  "BNP.PA": {
+   "nom": "BNP Paribas",
+   "qid": "Q499707",
+   "candidats": [
+    {
+     "fichier": "Italiens12.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Italiens12.jpg/1920px-Italiens12.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Italiens12.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Boubloub",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 119447
+    },
+    {
+     "fichier": "Nantes - Rue La Fayette - 01.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Nantes_-_Rue_La_Fayette_-_01.jpg/1920px-Nantes_-_Rue_La_Fayette_-_01.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Nantes_-_Rue_La_Fayette_-_01.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "François de Dijon",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 114668
+    }
+   ]
+  },
+  "CEG": {
+   "nom": "Constellation Energy",
+   "qid": "Q259195",
+   "candidats": [
+    {
+     "fichier": "Constellation Logo 2012.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Constellation_Logo_2012.png/1920px-Constellation_Logo_2012.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Constellation_Logo_2012.png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Constellation Inc.",
+     "score": -9,
+     "gisement": "P180",
+     "poids": 19049
+    }
+   ]
+  },
+  "CME": {
+   "nom": "CME",
+   "qid": "Q1023876",
+   "candidats": [
+    {
+     "fichier": "Midi controller keyboard cme uf5.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Midi_controller_keyboard_cme_uf5.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Midi_controller_keyboard_cme_uf5.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Tonstudio96",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 72295
+    }
+   ]
+  },
+  "CRM": {
+   "nom": "Salesforce",
+   "qid": "Q941127",
+   "candidats": [
+    {
+     "fichier": "Salesforce, North Wall, Dublin.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Salesforce%2C_North_Wall%2C_Dublin.jpg/1920px-Salesforce%2C_North_Wall%2C_Dublin.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Salesforce,_North_Wall,_Dublin.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "David Kernan",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 82958
+    },
+    {
+     "fichier": "Salesforce Tower SF 2017 (cropped).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Salesforce_Tower_SF_2017_%28cropped%29.jpg/1920px-Salesforce_Tower_SF_2017_%28cropped%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Salesforce_Tower_SF_2017_(cropped).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "homebucket",
+     "score": -6,
+     "gisement": "P18",
+     "poids": 79902
+    }
+   ]
+  },
+  "CS.PA": {
+   "nom": "AXA",
+   "qid": "Q160054",
+   "candidats": [
+    {
+     "fichier": "Hotel de la vaupaliere54.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Hotel_de_la_vaupaliere54.jpg/1920px-Hotel_de_la_vaupaliere54.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Hotel_de_la_vaupaliere54.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Ralf.treinen",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 107794
+    },
+    {
+     "fichier": "UK - Middlesbrough - AXA.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/UK_-_Middlesbrough_-_AXA.jpg/1920px-UK_-_Middlesbrough_-_AXA.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:UK_-_Middlesbrough_-_AXA.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Insure Our Future",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 118849
+    }
+   ]
+  },
+  "CSCO": {
+   "nom": "Cisco Systems",
+   "qid": "Q173395",
+   "candidats": [
+    {
+     "fichier": "Cisco switch management IC 2 die shot - 39633187772.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Cisco_switch_management_IC_2_die_shot_-_39633187772.jpg/1920px-Cisco_switch_management_IC_2_die_shot_-_39633187772.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Cisco_switch_management_IC_2_die_shot_-_39633187772.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Martijn Boer",
+     "score": 6,
+     "gisement": "P180",
+     "poids": 128501
+    },
+    {
+     "fichier": "Servers in a Rack.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Servers_in_a_Rack.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Servers_in_a_Rack.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Abigor",
+     "score": 4,
+     "gisement": "P180",
+     "poids": 109876
+    }
+   ]
+  },
+  "DB1.DE": {
+   "nom": "Deutsche Boerse",
+   "qid": "Q157852",
+   "candidats": [
+    {
+     "fichier": "Alte Boerse (Aussenfassade).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Alte_Boerse_%28Aussenfassade%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Alte_Boerse_(Aussenfassade).jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Michael J. Zirbes (from the original description at the German Wikipedia)",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 93720
+    },
+    {
+     "fichier": "ETFs in Central and Eastern Europe.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/ETFs_in_Central_and_Eastern_Europe.png/1920px-ETFs_in_Central_and_Eastern_Europe.png",
+     "page": "https://commons.wikimedia.org/wiki/File:ETFs_in_Central_and_Eastern_Europe.png",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Expat Capital",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 37369
+    }
+   ]
+  },
+  "DLR": {
+   "nom": "Digital Realty",
+   "qid": "Q5275969",
+   "candidats": [
+    {
+     "fichier": "DigitalRealtyDatacenterMarkham1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/DigitalRealtyDatacenterMarkham1.jpg/1920px-DigitalRealtyDatacenterMarkham1.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:DigitalRealtyDatacenterMarkham1.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Raysonho @ Open Grid Scheduler / Scalable Grid Engine",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 79793
+    }
+   ]
+  },
+  "ENR.DE": {
+   "nom": "Siemens Energy",
+   "qid": "Q89189545",
+   "candidats": [
+    {
+     "fichier": "Heizkraftwerk Leipzig Süd mit Wärmespeicher.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Heizkraftwerk_Leipzig_S%C3%BCd_mit_W%C3%A4rmespeicher.jpg/1920px-Heizkraftwerk_Leipzig_S%C3%BCd_mit_W%C3%A4rmespeicher.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Heizkraftwerk_Leipzig_S%C3%BCd_mit_W%C3%A4rmespeicher.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Vinaceus",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 51988
+    }
+   ]
+  },
+  "ETN": {
+   "nom": "Eaton",
+   "qid": "Q5331324",
+   "candidats": [
+    {
+     "fichier": "Church of St Denys, Eaton - geograph.org.uk - 5180259.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Church_of_St_Denys%2C_Eaton_-_geograph.org.uk_-_5180259.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Church_of_St_Denys,_Eaton_-_geograph.org.uk_-_5180259.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Alan Murray-Rust ",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 77959
+    },
+    {
+     "fichier": "White Lodge along Waltham Road - geograph.org.uk - 3840994.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/White_Lodge_along_Waltham_Road_-_geograph.org.uk_-_3840994.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:White_Lodge_along_Waltham_Road_-_geograph.org.uk_-_3840994.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Mat Fascione ",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 108485
+    }
+   ]
+  },
+  "FICO": {
+   "nom": "Fair Isaac",
+   "qid": "Q1392999",
+   "candidats": [
+    {
+     "fichier": "Ficoheadquarters.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Ficoheadquarters.jpg/1920px-Ficoheadquarters.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ficoheadquarters.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Coolcaesar",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 177606
+    },
+    {
+     "fichier": "FICO logo.svg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/FICO_logo.svg/1920px-FICO_logo.svg.png",
+     "page": "https://commons.wikimedia.org/wiki/File:FICO_logo.svg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "FICO",
+     "score": -21,
+     "gisement": "P180",
+     "poids": 15910
+    }
+   ]
+  },
+  "GILD": {
+   "nom": "Gilead Sciences",
+   "qid": "Q663596",
+   "candidats": [
+    {
+     "fichier": "333 Lakeside Drive.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/333_Lakeside_Drive.jpg/1920px-333_Lakeside_Drive.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:333_Lakeside_Drive.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Coolcaesar",
+     "score": 7,
+     "gisement": "P18",
+     "poids": 125750
+    },
+    {
+     "fichier": "Gilead Sciences headquarters (Foster City, CA) - 4.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Gilead_Sciences_headquarters_%28Foster_City%2C_CA%29_-_4.jpg/1920px-Gilead_Sciences_headquarters_%28Foster_City%2C_CA%29_-_4.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Gilead_Sciences_headquarters_(Foster_City,_CA)_-_4.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Suiren2022",
+     "score": -8,
+     "gisement": "P180",
+     "poids": 106581
+    }
+   ]
+  },
+  "GOOGL": {
+   "nom": "Alphabet",
+   "qid": "Q20800404",
+   "candidats": [
+    {
+     "fichier": "WorldWideWebAroundWikipedia.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/WorldWideWebAroundWikipedia.png",
+     "page": "https://commons.wikimedia.org/wiki/File:WorldWideWebAroundWikipedia.png",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Chris 73 (talk · contribs)",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 116356
+    },
+    {
+     "fichier": "Sergey on China.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Sergey_on_China.jpg/1920px-Sergey_on_China.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Sergey_on_China.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson from Menlo Park, USA",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 51393
+    }
+   ]
+  },
+  "HPE": {
+   "nom": "Hewlett Packard Enterprise",
+   "qid": "Q19923099",
+   "candidats": [
+    {
+     "fichier": "HPE Nimble Arrays.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/HPE_Nimble_Arrays.jpg/1920px-HPE_Nimble_Arrays.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:HPE_Nimble_Arrays.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Prholenstein",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 153231
+    },
+    {
+     "fichier": "HP Enterprise America Center.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/HP_Enterprise_America_Center.jpg/1920px-HP_Enterprise_America_Center.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:HP_Enterprise_America_Center.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Coolcaesar",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 113046
+    }
+   ]
+  },
+  "IFX.DE": {
+   "nom": "Infineon",
+   "qid": "Q311394",
+   "candidats": [
+    {
+     "fichier": "Campeon Neubiberg.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Campeon_Neubiberg.jpg/1920px-Campeon_Neubiberg.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Campeon_Neubiberg.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Mucber",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 96271
+    },
+    {
+     "fichier": "Campeon-Unterbiberg-47.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Campeon-Unterbiberg-47.jpg/1920px-Campeon-Unterbiberg-47.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Campeon-Unterbiberg-47.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Rufus46",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 90440
+    }
+   ]
+  },
+  "INTU": {
+   "nom": "Intuit",
+   "qid": "Q1318848",
+   "candidats": [
+    {
+     "fichier": "Intuitheadquarters.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Intuitheadquarters.jpg/1920px-Intuitheadquarters.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Intuitheadquarters.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "User Coolcaesar on en.wikipedia.",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 113124
+    },
+    {
+     "fichier": "Intuit Logo 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Intuit_Logo_2025.jpg/1920px-Intuit_Logo_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Intuit_Logo_2025.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Intuit",
+     "score": -9,
+     "gisement": "P180",
+     "poids": 30151
+    }
+   ]
+  },
+  "JPM": {
+   "nom": "JPMorgan Chase",
+   "qid": "Q192314",
+   "candidats": [
+    {
+     "fichier": "383 Madison Ave New York.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/383_Madison_Ave_New_York.jpg/1920px-383_Madison_Ave_New_York.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:383_Madison_Ave_New_York.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Percival Kestreltail",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 137977
+    },
+    {
+     "fichier": "N662CH - 26-5-24.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/N662CH_-_26-5-24.jpg/1920px-N662CH_-_26-5-24.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:N662CH_-_26-5-24.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Coldstreamer20",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 69928
+    }
+   ]
+  },
+  "KKR": {
+   "nom": "KKR",
+   "qid": "Q1156894",
+   "candidats": [
+    {
+     "fichier": "Eden Gardens Kolkata.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Eden_Gardens_Kolkata.jpg/1920px-Eden_Gardens_Kolkata.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Eden_Gardens_Kolkata.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Partha Bhaumik",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 111189
+    },
+    {
+     "fichier": "Spring Hill Cemetery (1675) in Marlborough, Massachusetts (7233597750).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Spring_Hill_Cemetery_%281675%29_in_Marlborough%2C_Massachusetts_%287233597750%29.jpg/1920px-Spring_Hill_Cemetery_%281675%29_in_Marlborough%2C_Massachusetts_%287233597750%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Spring_Hill_Cemetery_(1675)_in_Marlborough,_Massachusetts_(7233597750).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Lee Wright from Marlborough, Massachusetts, US",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 186976
+    }
+   ]
+  },
+  "KLAC": {
+   "nom": "KLA Corporation",
+   "qid": "Q624649",
+   "candidats": [
+    {
+     "fichier": "KLA Corporation Ann Arbor Township Office.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/KLA_Corporation_Ann_Arbor_Township_Office.jpg/1920px-KLA_Corporation_Ann_Arbor_Township_Office.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:KLA_Corporation_Ann_Arbor_Township_Office.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "DontCallMeLateForDinner",
+     "score": -8,
+     "gisement": "P180",
+     "poids": 99559
+    }
+   ]
+  },
+  "MA": {
+   "nom": "Mastercard Incorporate",
+   "qid": "Q489921",
+   "candidats": [
+    {
+     "fichier": "Mastercard 2019 logo.svg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/1920px-Mastercard_2019_logo.svg.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Mastercard_2019_logo.svg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Mastercard Incorporated",
+     "score": -21,
+     "gisement": "P180",
+     "poids": 13466
+    }
+   ]
+  },
+  "MCO": {
+   "nom": "Moody's",
+   "qid": "Q675585",
+   "candidats": [
+    {
+     "fichier": "7 World Trade Center.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/7_World_Trade_Center.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:7_World_Trade_Center.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Sweeneyr",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 77687
+    },
+    {
+     "fichier": "Moody's new logo.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Moody%27s_new_logo.png",
+     "page": "https://commons.wikimedia.org/wiki/File:Moody%27s_new_logo.png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Unknown authorUnknown author",
+     "score": -9,
+     "gisement": "P180",
+     "poids": 19895
+    }
+   ]
+  },
+  "MS": {
+   "nom": "Morgan Stanley",
+   "qid": "Q334204",
+   "candidats": [
+    {
+     "fichier": "Morgan Stanley Times Square.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Morgan_Stanley_Times_Square.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Morgan_Stanley_Times_Square.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "PLBechly",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 90500
+    },
+    {
+     "fichier": "ASSA 2026 - Seth Carpenter, Jed Kolko, William Beach 03.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ASSA_2026_-_Seth_Carpenter%2C_Jed_Kolko%2C_William_Beach_03.jpg/1920px-ASSA_2026_-_Seth_Carpenter%2C_Jed_Kolko%2C_William_Beach_03.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:ASSA_2026_-_Seth_Carpenter,_Jed_Kolko,_William_Beach_03.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Xuthoria",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 47830
+    }
+   ]
+  },
+  "MSCI": {
+   "nom": "MSCI",
+   "qid": "Q950900",
+   "candidats": [
+    {
+     "fichier": "ThS.NB Nguyen Than Luan - Year2019.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/ThS.NB_Nguyen_Than_Luan_-_Year2019.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:ThS.NB_Nguyen_Than_Luan_-_Year2019.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "ThSNbTL",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 44129
+    }
+   ]
+  },
+  "MU": {
+   "nom": "Micron Technology",
+   "qid": "Q1197548",
+   "candidats": [
+    {
+     "fichier": "Crucial 512 MB Gizmo USB 2 pen drive (c 2005) (outside).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Crucial_512_MB_Gizmo_USB_2_pen_drive_%28c_2005%29_%28outside%29.jpg/1920px-Crucial_512_MB_Gizmo_USB_2_pen_drive_%28c_2005%29_%28outside%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Crucial_512_MB_Gizmo_USB_2_pen_drive_(c_2005)_(outside).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Multicherry",
+     "score": 5,
+     "gisement": "P180",
+     "poids": 71511
+    },
+    {
+     "fichier": "Crucial 512 MB Gizmo USB 2 pen drive (c 2005) (inside).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Crucial_512_MB_Gizmo_USB_2_pen_drive_%28c_2005%29_%28inside%29.jpg/1920px-Crucial_512_MB_Gizmo_USB_2_pen_drive_%28c_2005%29_%28inside%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Crucial_512_MB_Gizmo_USB_2_pen_drive_(c_2005)_(inside).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Multicherry",
+     "score": 5,
+     "gisement": "P180",
+     "poids": 83529
+    }
+   ]
+  },
+  "MUV2.DE": {
+   "nom": "Munich Re",
+   "qid": "Q166637",
+   "candidats": [
+    {
+     "fichier": "Munich RE (1).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Munich_RE_%281%29.jpg/1920px-Munich_RE_%281%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Munich_RE_(1).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "INESE SPS",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 49831
+    },
+    {
+     "fichier": "Aerial image of the headquarters of Munich Re (view from the southeast).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Aerial_image_of_the_headquarters_of_Munich_Re_%28view_from_the_southeast%29.jpg/1920px-Aerial_image_of_the_headquarters_of_Munich_Re_%28view_from_the_southeast%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Aerial_image_of_the_headquarters_of_Munich_Re_(view_from_the_southeast).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Carsten Steger",
+     "score": -6,
+     "gisement": "P18",
+     "poids": 162524
+    }
+   ]
+  },
+  "NBIS": {
+   "nom": "Nebius",
+   "qid": "Q47120756",
+   "candidats": [
+    {
+     "fichier": "TechCrunch Disrupt 2024 D3 AI Clouds Race-6 (54105662158).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/TechCrunch_Disrupt_2024_D3_AI_Clouds_Race-6_%2854105662158%29.jpg/1920px-TechCrunch_Disrupt_2024_D3_AI_Clouds_Race-6_%2854105662158%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:TechCrunch_Disrupt_2024_D3_AI_Clouds_Race-6_(54105662158).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "TechCrunch",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 54512
+    }
+   ]
+  },
+  "NDAQ": {
+   "nom": "Nasdaq",
+   "qid": "Q82059",
+   "candidats": [
+    {
+     "fichier": "Xbox One Launch NASDAQ (1).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Xbox_One_Launch_NASDAQ_%281%29.jpg/1920px-Xbox_One_Launch_NASDAQ_%281%29.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Xbox_One_Launch_NASDAQ_(1).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Microsoft",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 101152
+    },
+    {
+     "fichier": "Times Square Nasdaq Closing Bell Ceremony 2013 Berenberg.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Times_Square_Nasdaq_Closing_Bell_Ceremony_2013_Berenberg.JPG/1920px-Times_Square_Nasdaq_Closing_Bell_Ceremony_2013_Berenberg.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Times_Square_Nasdaq_Closing_Bell_Ceremony_2013_Berenberg.JPG",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Zef Nikolla",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 69945
+    }
+   ]
+  },
+  "NTAP": {
+   "nom": "NetApp",
+   "qid": "Q727883",
+   "candidats": [
+    {
+     "fichier": "NetApp Headquarters Sunnyvale.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/NetApp_Headquarters_Sunnyvale.jpg/1920px-NetApp_Headquarters_Sunnyvale.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NetApp_Headquarters_Sunnyvale.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "LPS.1",
+     "score": -6,
+     "gisement": "P18",
+     "poids": 167371
+    },
+    {
+     "fichier": "NetApp Building 1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/NetApp_Building_1.jpg/1920px-NetApp_Building_1.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:NetApp_Building_1.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Coolcaesar",
+     "score": -8,
+     "gisement": "P180",
+     "poids": 108791
+    }
+   ]
+  },
+  "ORCL": {
+   "nom": "Oracle",
+   "qid": "Q19900",
+   "candidats": [
+    {
+     "fichier": "Dubai Internet City Amphitheater.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Dubai_Internet_City_Amphitheater.jpg/1920px-Dubai_Internet_City_Amphitheater.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Dubai_Internet_City_Amphitheater.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Nowitscorrect",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 108780
+    },
+    {
+     "fichier": "Oracle Campus in Austin 2018.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Oracle_Campus_in_Austin_2018.jpg/1920px-Oracle_Campus_in_Austin_2018.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Oracle_Campus_in_Austin_2018.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "DronePhotographer",
+     "score": -8,
+     "gisement": "P180",
+     "poids": 82141
+    }
+   ]
+  },
+  "PDD": {
+   "nom": "PDD",
+   "qid": "Q6691991",
+   "candidats": [
+    {
+     "fichier": "Autismo-fita3.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Autismo-fita3.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Autismo-fita3.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Francisco Paiva Junior",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 44578
+    }
+   ]
+  },
+  "PGR": {
+   "nom": "Progressive Corporation",
+   "qid": "Q7248721",
+   "candidats": [
+    {
+     "fichier": "Progressive House at EssenceFest 2025.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Progressive_House_at_EssenceFest_2025.jpg/1920px-Progressive_House_at_EssenceFest_2025.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Progressive_House_at_EssenceFest_2025.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Danielle G. Campbell",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 106312
+    }
+   ]
+  },
+  "SCHW": {
+   "nom": "Charles Schwab",
+   "qid": "Q1066028",
+   "candidats": [
+    {
+     "fichier": "53rd St 6th Av td 19 - CBS Building.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/53rd_St_6th_Av_td_19_-_CBS_Building.jpg/1920px-53rd_St_6th_Av_td_19_-_CBS_Building.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:53rd_St_6th_Av_td_19_-_CBS_Building.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Tdorante10",
+     "score": -6,
+     "gisement": "P18",
+     "poids": 78989
+    },
+    {
+     "fichier": "Chase Tower entrance, Indy 2009.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Chase_Tower_entrance%2C_Indy_2009.JPG/1920px-Chase_Tower_entrance%2C_Indy_2009.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Chase_Tower_entrance,_Indy_2009.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Xnatedawgx",
+     "score": -8,
+     "gisement": "P180",
+     "poids": 83669
+    }
+   ]
+  },
+  "SIE.DE": {
+   "nom": "Siemens",
+   "qid": "Q81230",
+   "candidats": [
+    {
+     "fichier": "Wien, Rampini Alé EL Nr. 8305.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Wien%2C_Rampini_Al%C3%A9_EL_Nr._8305.jpg/1920px-Wien%2C_Rampini_Al%C3%A9_EL_Nr._8305.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Wien,_Rampini_Al%C3%A9_EL_Nr._8305.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Penguin9",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 102069
+    },
+    {
+     "fichier": "Siemenspromenade Erlangen.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Siemenspromenade_Erlangen.jpg/1920px-Siemenspromenade_Erlangen.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Siemenspromenade_Erlangen.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Hans-Rudi der Letzte",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 141828
+    }
+   ]
+  },
+  "SNPS": {
+   "nom": "Synopsys",
+   "qid": "Q2303478",
+   "candidats": [
+    {
+     "fichier": "Synopsys Headquarters Mountain View.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Synopsys_Headquarters_Mountain_View.jpg/1920px-Synopsys_Headquarters_Mountain_View.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Synopsys_Headquarters_Mountain_View.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "LPS.1",
+     "score": -6,
+     "gisement": "P18",
+     "poids": 93760
+    }
+   ]
+  },
+  "SPGI": {
+   "nom": "S&P Global",
+   "qid": "Q868587",
+   "candidats": [
+    {
+     "fichier": "55 Water Street and north wing.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/43/55_Water_Street_and_north_wing.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:55_Water_Street_and_north_wing.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Beyond My Ken",
+     "score": 2,
+     "gisement": "P18",
+     "poids": 100146
+    }
+   ]
+  },
+  "TCEHY": {
+   "nom": "Tencent",
+   "qid": "Q860580",
+   "candidats": [
+    {
+     "fichier": "10 Largest Corporations by Market Capitalization.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/10_Largest_Corporations_by_Market_Capitalization.png",
+     "page": "https://commons.wikimedia.org/wiki/File:10_Largest_Corporations_by_Market_Capitalization.png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "YBSLE",
+     "score": 0,
+     "gisement": "P180",
+     "poids": 45127
+    }
+   ]
+  }
+ }
+}
