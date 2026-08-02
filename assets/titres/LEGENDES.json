@@ -267,12 +267,13 @@
   "v": "1d803976"
  },
  "CRM": {
-  "legende": "Salesforce Tower dominant le centre de San Francisco",
-  "source": "File:San Francisco, California April 2022 Salesforce Tower.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:San_Francisco,_California_April_2022_Salesforce_Tower.jpg",
+  "legende": "Marc Benioff présentant Salesforce en ouverture de Dreamforce",
+  "type": "produit",
+  "source": "File:Marc Benioff's Opening Keynote at Dreamforce 2014 (15534899106).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Marc_Benioff%27s_Opening_Keynote_at_Dreamforce_2014_(15534899106).jpg",
   "licence": "CC BY 2.0",
-  "credit": "Sharon Hahn Darlin · CC BY 2.0",
-  "v": "530a9525"
+  "credit": "jurvetson · CC BY 2.0",
+  "v": "9030eb6b"
  },
  "CRWV": {
   "legende": "Baie de serveurs d'un centre de données CoreWeave",

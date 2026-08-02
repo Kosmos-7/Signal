@@ -150,8 +150,7 @@ aucun assombrissement, contrairement à toutes les autres : la chaîne ramène
 normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 89 % des pixels sont ici déjà sombres et l'appliquer aurait écrasé le sujet.
 
-## Photos publiées
-(57 produits, 35 lieux)
+## Photos publiées (58 produits, 34 lieux)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -399,13 +398,13 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Coherent
 - Origine : site officiel, le 2026-08-02
 
-### CRM — Salesforce Tower dominant le centre de San Francisco
+### CRM — Marc Benioff présentant Salesforce en ouverture de Dreamforce
 
-- Nature : site
+- Nature : produit
 - Fichier : `assets/titres/CRM.jpg`
-- Source : File:San Francisco, California April 2022 Salesforce Tower.jpg
-- Page : https://commons.wikimedia.org/wiki/File:San_Francisco,_California_April_2022_Salesforce_Tower.jpg
-- Licence : CC BY 2.0 — crédit affiché : Sharon Hahn Darlin · CC BY 2.0
+- Source : File:Marc Benioff's Opening Keynote at Dreamforce 2014 (15534899106).jpg
+- Page : https://commons.wikimedia.org/wiki/File:Marc_Benioff%27s_Opening_Keynote_at_Dreamforce_2014_(15534899106).jpg
+- Licence : CC BY 2.0 — crédit affiché : jurvetson · CC BY 2.0
 
 ### CRWV — Baie de serveurs d'un centre de données CoreWeave
 
