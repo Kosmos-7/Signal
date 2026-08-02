@@ -1,462 +1,458 @@
 {
- "societes": 9,
+ "societes": 8,
  "detail": {
-  "6146.T": {
+  "AMD": {
    "candidats": [
     {
-     "image": "https://www.disco.co.jp/eg/products/dicer/img/dad3650_2.png",
-     "page": "https://www.disco.co.jp/eg/products/dicer/dad3650.html",
-     "domaine": "disco.co.jp",
-     "dimensions": "1001x1001",
-     "conditions": "non établies",
-     "credit": "DISCO Corporation",
-     "poids": 31951
-    }
-   ]
-  },
-  "8035.T": {
-   "candidats": [
-    {
-     "image": "https://www.tel.com/product/pv8va20000001boh-img/pv8va20000001d6w.png",
-     "page": "https://www.tel.com/product/lithius.html",
-     "domaine": "tel.com",
-     "dimensions": "1956x850",
-     "conditions": "non établies",
-     "credit": "Tokyo Electron",
-     "poids": 55940
+     "image": "https://newsroom.amd.com/images/2026/07/4015667a-92e4-43b1-84e5-f9e0bf35d23e.jpg",
+     "page": "https://newsroom.amd.com/news/aai-2026-keynote-livestream-replay/",
+     "domaine": "amd.com",
+     "dimensions": "1920x1079",
+     "conditions": "salle de presse",
+     "credit": "AMD",
+     "poids": 33094
     },
     {
-     "image": "https://www.tel.com/sustainability/img/mv-index-2025-sp.jpg",
-     "page": "https://www.tel.com/sustainability/",
-     "domaine": "tel.com",
-     "dimensions": "749x440",
-     "conditions": "non établies",
-     "credit": "Tokyo Electron",
-     "poids": 50715
-    },
-    {
-     "image": "https://www.tel.com/ir/library/ar/pjsoh100000000rc-img/pjsoh100000000ri.png",
-     "page": "https://www.tel.com/sustainability/",
-     "domaine": "tel.com",
-     "dimensions": "3087x2185",
-     "conditions": "non établies",
-     "credit": "Tokyo Electron",
-     "poids": 50729
-    }
-   ]
-  },
-  "ACN": {
-   "candidats": [
-    {
-     "image": "https://newsroom.accenture.com/media_1d5c040675724c2205323f3941cc2c976095b2d8e.png?width=1200&format=pjpg&optimize=medium",
-     "page": "https://newsroom.accenture.com/",
-     "domaine": "accenture.com",
-     "dimensions": "1200x600",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 31408
-    },
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/hero-work-at-the-heart-of-change%3Asocial-thumbnail-landscape?ts=1782410682797&fit=constrain&dpr=off",
-     "page": "https://www.accenture.com/us-en/careers",
-     "domaine": "accenture.com",
-     "dimensions": "1187x621",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 36937
-    },
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/Homepage_hero_768x432%3Asocial-thumbnail-landscape?ts=1771619635033&dpr=off",
-     "page": "https://www.accenture.com/us-en/about/company-index",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 41197
-    },
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/Accenture-Digitize-what-you-make-Social-1200px-628px%3Asocial-thumbnail-landscape?ts=1776779273083&dpr=off",
-     "page": "https://www.accenture.com/us-en/services/digital-engineering-manufacturing",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 64912
-    },
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/accenture-tech-innovation-1200x628%3Asocial-thumbnail-landscape?ts=1768554968629&dpr=off",
-     "page": "https://www.accenture.com/us-en/services/emerging-technology",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 55581
-    },
-    {
-     "image": "https://dynamicmedia.accenture.com/is/image/accenture/accenture-sustainability-services-400x400%3Asocial-thumbnail-landscape?ts=1778985011525&dpr=off",
-     "page": "https://www.accenture.com/us-en/services/sustainability",
-     "domaine": "accenture.com",
-     "dimensions": "1200x628",
-     "conditions": "non établies",
-     "credit": "Accenture",
-     "poids": 43084
-    }
-   ]
-  },
-  "ASM.AS": {
-   "candidats": [
-    {
-     "image": "https://www.asm.com/media/wqed20xm/pulsar-landscape.png?width=952&height=500&quality=90&v=1dbf7eea27deb80",
-     "page": "https://www.asm.com/solutions/products/atomic-layer-deposition-products/pulsar-xp-ald",
-     "domaine": "asm.com",
-     "dimensions": "952x500",
-     "conditions": "non établies",
-     "credit": "ASM International",
-     "poids": 22760
-    },
-    {
-     "image": "https://www.asm.com/media/0yhffzpf/sustainability_image_environment_3200x1600.jpg?width=1200&height=630&quality=90&v=1db83a8761a2190",
-     "page": "https://www.asm.com/sustainability",
-     "domaine": "asm.com",
-     "dimensions": "1200x630",
-     "conditions": "non établies",
-     "credit": "ASM International",
-     "poids": 93066
-    }
-   ]
-  },
-  "BLK": {
-   "candidats": [
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/global/en/images/brand-images/outlook-global-2026.1782479109028.jpg.md.jpg",
-     "page": "https://www.blackrock.com/corporate/newsroom",
-     "domaine": "blackrock.com",
-     "dimensions": "768x536",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 101173
-    },
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/global/en/images/teamsite/brand-images/ll2026-homepage-hero-860x600.1780318443245.jpg.md.jpg",
-     "page": "https://www.blackrock.com/corporate/newsroom",
-     "domaine": "blackrock.com",
-     "dimensions": "768x536",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 46834
-    },
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/global/en/images/teamsite/brand-images/corporate-about-about-us-hero.1780318443031.jpg.md.jpg",
-     "page": "https://www.blackrock.com/corporate/about-us",
-     "domaine": "blackrock.com",
-     "dimensions": "768x536",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 56212
-    },
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/blackrock-retail/en-zz/images/teamsite/infographics-charts-tables/blk-maps-aug-25.1779893890983.png.lg.png",
-     "page": "https://www.blackrock.com/corporate/about-us",
-     "domaine": "blackrock.com",
-     "dimensions": "1024x384",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 23403
-    },
-    {
-     "image": "https://www.blackrock.com/walrus-api/aem-assets/content/dam/blackrock-retail/en-zz/images/teamsite/infographics-charts-tables/ishares-maps-aug-25.1779893896197.png.lg.png",
-     "page": "https://www.blackrock.com/corporate/about-us",
-     "domaine": "blackrock.com",
-     "dimensions": "1024x384",
-     "conditions": "non établies",
-     "credit": "BlackRock",
-     "poids": 31202
-    }
-   ]
-  },
-  "KKR": {
-   "candidats": [
-    {
-     "image": "https://www.kkr.com/invest/infrastructure/_jcr_content/root/main-par/hero_banner/asset.coreimg.jpeg/1692041430164/infrastructure-is-1097331490-1320x470.jpeg",
-     "page": "https://www.kkr.com/invest/infrastructure",
-     "domaine": "kkr.com",
-     "dimensions": "1280x456",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 102958
-    },
-    {
-     "image": "https://www.kkr.com/invest/infrastructure/_jcr_content/root/main-par/video_external/image.coreimg.png/1722348057623/raj-video-thumbnail.png",
-     "page": "https://www.kkr.com/invest/infrastructure",
-     "domaine": "kkr.com",
-     "dimensions": "793x462",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 41592
-    },
-    {
-     "image": "https://www.kkr.com/invest/infrastructure/_jcr_content/root/main-par/section_654416348_co_2016970276/section-par/grid_container/grid/section_58689296/section-par/video_external_copy/image.coreimg.png/1761758237947/metronet-video-thumb-2.png",
-     "page": "https://www.kkr.com/invest/infrastructure",
-     "domaine": "kkr.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 34998
-    },
-    {
-     "image": "https://www.kkr.com/insights/_jcr_content/_cq_featuredimage.coreimg.jpeg/1752166019804/5-things-to-know-midyear-outlook-1320x470.jpeg",
-     "page": "https://www.kkr.com/insights",
-     "domaine": "kkr.com",
-     "dimensions": "1280x456",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 38717
-    },
-    {
-     "image": "https://www.kkr.com/about/_jcr_content/root/main-par/section/section-par/grid_container/grid/video_external/image.coreimg.jpeg/1777486995726/culture-video-793x462.jpeg",
-     "page": "https://www.kkr.com/about",
-     "domaine": "kkr.com",
-     "dimensions": "793x462",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 53564
-    },
-    {
-     "image": "https://www.kkr.com/content/dam/kkr/bio/headshots/scott-nutall.png",
-     "page": "https://www.kkr.com/about",
-     "domaine": "kkr.com",
-     "dimensions": "3280x3280",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 38014
-    },
-    {
-     "image": "https://www.kkr.com/about/our-people/_jcr_content/root/main-par/hero_banner/asset.coreimg.jpeg/1784146702051/our-people-hero-v4-1320x470.jpeg",
-     "page": "https://www.kkr.com/about/our-people",
-     "domaine": "kkr.com",
-     "dimensions": "1280x456",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 51289
-    },
-    {
-     "image": "https://www.kkr.com/about/institutional-investors/_jcr_content/root/main-par/hero_banner/asset.coreimg.jpeg/1691764665513/institutional-investors-is-1405053008-1320x470.jpeg",
-     "page": "https://www.kkr.com/about/institutional-investors",
-     "domaine": "kkr.com",
-     "dimensions": "1280x456",
-     "conditions": "non établies",
-     "credit": "KKR",
-     "poids": 83102
-    }
-   ]
-  },
-  "LSEG.L": {
-   "candidats": [
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/insights/front-cover/lsg2516030-media-centre-card-825x464-annual-report.jpg.transform/rect-768/q90/image.jpg",
-     "page": "https://www.lseg.com/en/media-centre",
-     "domaine": "lseg.com",
-     "dimensions": "768x432",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 35268
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/standard/lsg2516030-media-centre-card-825x464.jpg.transform/rect-768/q90/image.jpg",
-     "page": "https://www.lseg.com/en/media-centre",
-     "domaine": "lseg.com",
-     "dimensions": "768x432",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 56196
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/thumbnail/cop30-net-zero-atlas-thumbnail-for-lseg.png.transform/rect-768/q90/image.png",
-     "page": "https://www.lseg.com/en/media-centre",
-     "domaine": "lseg.com",
-     "dimensions": "768x432",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 28661
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/thumbnail/lseg-careers-social-thumbnail-1200x675.jpg.transform/rect-768/q90/image.jpg",
-     "page": "https://www.lseg.com/en/careers",
-     "domaine": "lseg.com",
-     "dimensions": "768x432",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 42907
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/standard/lseg-careers-students-opportunities-card-825x464.jpg.transform/rect-1248/q82/image.jpg",
-     "page": "https://www.lseg.com/en/careers",
-     "domaine": "lseg.com",
-     "dimensions": "1248x702",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 36470
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/standard/lseg-careers-where-we-work-card-825x464.jpg.transform/rect-1248/q82/image.jpg",
-     "page": "https://www.lseg.com/en/careers",
-     "domaine": "lseg.com",
-     "dimensions": "1248x702",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 50929
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/artworked/standard/lseg-careers-hybrid-working-card-825x464.jpg.transform/rect-1248/q82/image.jpg",
-     "page": "https://www.lseg.com/en/careers",
-     "domaine": "lseg.com",
-     "dimensions": "1248x702",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 37508
-    },
-    {
-     "image": "https://www.lseg.com/content/dam/lseg/en_us/images/photography/standard/lseg-careers-opportunities-engineering.jpg.transform/rect-1248/q82/image.jpg",
-     "page": "https://www.lseg.com/en/careers",
-     "domaine": "lseg.com",
-     "dimensions": "1248x702",
-     "conditions": "non établies",
-     "credit": "London Stock Exchange Group",
-     "poids": 49824
-    }
-   ]
-  },
-  "MCO": {
-   "candidats": [
-    {
-     "image": "https://www.moodys.com/web/en/us/images/topic-page-images/industry/industry-14.jpg",
-     "page": "https://www.moodys.com/web/en/us/insights.html",
-     "domaine": "moodys.com",
-     "dimensions": "2000x1333",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 95830
-    },
-    {
-     "image": "https://www.moodys.com/web/en/us/insights/_jcr_content/root/container/container_59436938_c/container_copy/image.coreimg.jpeg/1736442811738/hand.jpeg",
-     "page": "https://www.moodys.com/web/en/us/insights.html",
-     "domaine": "moodys.com",
-     "dimensions": "1280x797",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 34293
-    },
-    {
-     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_42564852_c/container/container_884161388__1258557960/image.coreimg.png/1765915534285/noemie-aboutus.png",
-     "page": "https://www.moodys.com/web/en/us/about.html",
-     "domaine": "moodys.com",
-     "dimensions": "800x800",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 47192
-    },
-    {
-     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_42564852_c/container/container_1333732276_870863450/image.coreimg.jpeg/1750077110507/maral-kazanjian2.jpeg",
-     "page": "https://www.moodys.com/web/en/us/about.html",
-     "domaine": "moodys.com",
-     "dimensions": "800x800",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 36288
-    },
-    {
-     "image": "https://www.moodys.com/web/en/us/about-us/_jcr_content/root/container/container_408640577_/column_control/col3/image.coreimg.png/1723454698678/about-us-trust-center.png",
-     "page": "https://www.moodys.com/web/en/us/about.html",
-     "domaine": "moodys.com",
-     "dimensions": "1280x709",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 65259
-    },
-    {
-     "image": "https://www.moodys.com/web/en/us/dm/images/podcast-video-thumbnails/ai-infrastructure-boom.png",
-     "page": "https://www.moodys.com/web/en/us/about/insights/podcasts.html",
-     "domaine": "moodys.com",
-     "dimensions": "1920x1080",
-     "conditions": "non établies",
-     "credit": "Moody's",
-     "poids": 121785
-    }
-   ]
-  },
-  "MUV2.DE": {
-   "candidats": [
-    {
-     "image": "https://www.munichre.com/content/dam/munichre/global/images/rights-managed/PA_636347699_MR_edited_still.jpg/_jcr_content/renditions/original.image_file.1200.675.file/PA_636347699_MR_edited_still.jpg",
-     "page": "https://www.munichre.com/en/company/media-relations.html",
-     "domaine": "munichre.com",
+     "image": "https://newsroom.amd.com/images/thumbnails/2026/07/c44a480e-099a-4bea-9638-9216420e2870.jpg",
+     "page": "https://newsroom.amd.com/news/aai-2026-keynote-livestream-replay/",
+     "domaine": "amd.com",
      "dimensions": "1200x675",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 107161
+     "conditions": "salle de presse",
+     "credit": "AMD",
+     "poids": 63051
     },
     {
-     "image": "https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-1139233700.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/media-relations.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 33853
+     "image": "https://newsroom.amd.com/images/2026/07/ead2bb00-433d-44c8-8470-4a100096a4e8.jpg",
+     "page": "https://newsroom.amd.com/news/aai-2026-keynote-livestream-replay/",
+     "domaine": "amd.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "AMD",
+     "poids": 99309
     },
     {
-     "image": "https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-477428748.jpg/_jcr_content/renditions/original.image_file.1200.800.file/GettyImages-477428748.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1200x800",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 137592
+     "image": "https://newsroom.amd.com/images/2026/07/f8e0e437-a68d-41d4-96a7-41921c707bb8.jpg",
+     "page": "https://newsroom.amd.com/news/aai-2026-keynote-livestream-replay/",
+     "domaine": "amd.com",
+     "dimensions": "1919x1080",
+     "conditions": "salle de presse",
+     "credit": "AMD",
+     "poids": 58766
     },
     {
-     "image": "https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-477428748.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 143249
+     "image": "https://newsroom.amd.com/images/migrated-aem/2026/07/74e3bf9a-0f3b-42ed-80bc-935ea761b14f.jpg",
+     "page": "https://newsroom.amd.com/news/aai-2026-keynote-livestream-replay/",
+     "domaine": "amd.com",
+     "dimensions": "1200x675",
+     "conditions": "salle de presse",
+     "credit": "AMD",
+     "poids": 72006
     },
     {
-     "image": "https://www.munichre.com/content/dam/munichre/mrm/royalty-free-shutterstock/shutterstock_143124628.jpg/_jcr_content/renditions/crop-2x1-768.jpg./crop-2x1-768.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "768x384",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 53306
+     "image": "https://newsroom.amd.com/images/2026/07/7a848064-180d-4293-a49a-1d4a36d6e3eb.jpg",
+     "page": "https://newsroom.amd.com/",
+     "domaine": "amd.com",
+     "dimensions": "1920x1081",
+     "conditions": "salle de presse",
+     "credit": "AMD",
+     "poids": 70091
     },
     {
-     "image": "https://www.munichre.com/content/dam/munichre/mrm/key-visuals-com-142/GettyImages-1796631627_gesp.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 145070
+     "image": "https://newsroom.amd.com/images/2026/07/8f55b7f3-308a-4af9-babe-4a5ce64f53e9.jpg",
+     "page": "https://newsroom.amd.com/",
+     "domaine": "amd.com",
+     "dimensions": "1920x1079",
+     "conditions": "salle de presse",
+     "credit": "AMD",
+     "poids": 49571
     },
     {
-     "image": "https://www.munichre.com/content/dam/munichre/global/shootings/architecture/s3/BUCK_MunichRe0269.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 58536
+     "image": "https://newsroom.amd.com/images/2026/07/ce3d726d-75ca-4a6b-bdcc-656becadd10c.jpg",
+     "page": "https://newsroom.amd.com/",
+     "domaine": "amd.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "AMD",
+     "poids": 24333
+    }
+   ]
+  },
+  "INTC": {
+   "candidats": [
+    {
+     "image": "https://newsroom.intel.com/wp-content/uploads/2024/11/intel-card-scaled.jpg",
+     "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+     "domaine": "intel.com",
+     "dimensions": "2560x1440",
+     "conditions": "salle de presse",
+     "credit": "INTC",
+     "poids": 39568
     },
     {
-     "image": "https://www.munichre.com/content/dam/munichre/global/shootings/architecture/s3/BUCK_2017-06_MunichRE-0318.jpg/_jcr_content/renditions/crop-16x9-1280.jpg./crop-16x9-1280.jpg",
-     "page": "https://www.munichre.com/en/company/about-munich-re.html",
-     "domaine": "munichre.com",
-     "dimensions": "1280x720",
-     "conditions": "non établies",
-     "credit": "Munich Re",
-     "poids": 90358
+     "image": "https://newsroom.intel.com/wp-content/uploads/2025/01/intel-18a-wafer-3.jpg",
+     "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+     "domaine": "intel.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "INTC",
+     "poids": 92883
+    },
+    {
+     "image": "https://newsroom.intel.com/wp-content/uploads/2025/04/tech101-Common-Chip-Terms-still.jpg",
+     "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+     "domaine": "intel.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "INTC",
+     "poids": 12770
+    },
+    {
+     "image": "https://newsroom.intel.com/wp-content/uploads/2026/07/AdobeStock_1556239867.jpeg",
+     "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+     "domaine": "intel.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "INTC",
+     "poids": 54475
+    },
+    {
+     "image": "https://newsroom.intel.com/wp-content/uploads/2026/07/newsroom-intel-glass-substrate-2.jpg",
+     "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+     "domaine": "intel.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "INTC",
+     "poids": 66049
+    },
+    {
+     "image": "https://newsroom.intel.com/wp-content/uploads/2026/07/Intel-Fortinet-final.png",
+     "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+     "domaine": "intel.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "INTC",
+     "poids": 38483
+    },
+    {
+     "image": "https://newsroom.intel.com/wp-content/uploads/2026/07/Intel-Xeon-6-P-Cores-1.jpg",
+     "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+     "domaine": "intel.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "INTC",
+     "poids": 34183
+    },
+    {
+     "image": "https://newsroom.intel.com/wp-content/uploads/2026/07/onyx-healthcare-intel-group-photo.jpg",
+     "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+     "domaine": "intel.com",
+     "dimensions": "1920x1080",
+     "conditions": "salle de presse",
+     "credit": "INTC",
+     "poids": 64024
+    }
+   ]
+  },
+  "AVGO": {
+   "candidats": [
+    {
+     "image": "https://www.broadcom.com/media/blt4ac44e0e6c6d8341/bltc5b68e1455ec0786/6954499867fae30d2f04a43e/brcm_preview_image@72ppi.jpg",
+     "page": "https://www.broadcom.com/company/news/product-releases",
+     "domaine": "broadcom.com",
+     "dimensions": "1200x627",
+     "conditions": "salle de presse",
+     "credit": "AVGO",
+     "poids": 17757
+    }
+   ]
+  },
+  "ARM": {
+   "candidats": [
+    {
+     "image": "https://newsroom.arm.com/wp-content/uploads/2026/07/EarningsBG_1600x900-1400x788.png",
+     "page": "https://newsroom.arm.com/",
+     "domaine": "arm.com",
+     "dimensions": "1400x788",
+     "conditions": "salle de presse",
+     "credit": "ARM",
+     "poids": 14544
+    },
+    {
+     "image": "https://newsroom.arm.com/wp-content/uploads/2026/03/Arm_AGI_CPU_FrontOnOffset_Chip-16x9-16bit-1-1400x788.png",
+     "page": "https://newsroom.arm.com/",
+     "domaine": "arm.com",
+     "dimensions": "1400x788",
+     "conditions": "salle de presse",
+     "credit": "ARM",
+     "poids": 22923
+    },
+    {
+     "image": "https://newsroom.arm.com/wp-content/uploads/2026/05/20260224_VISION25_BLADE_WIDE_02-16x9_v2-1200x675-1.jpeg",
+     "page": "https://newsroom.arm.com/",
+     "domaine": "arm.com",
+     "dimensions": "1200x675",
+     "conditions": "salle de presse",
+     "credit": "ARM",
+     "poids": 38915
+    },
+    {
+     "image": "https://newsroom.arm.com/wp-content/uploads/2026/03/IMG_0869_HIGH-RE-1400x933.png",
+     "page": "https://newsroom.arm.com/",
+     "domaine": "arm.com",
+     "dimensions": "1400x933",
+     "conditions": "salle de presse",
+     "credit": "ARM",
+     "poids": 36385
+    },
+    {
+     "image": "https://newsroom.arm.com/wp-content/uploads/2026/02/GettyImages-161930583-1400x1050.jpg",
+     "page": "https://newsroom.arm.com/",
+     "domaine": "arm.com",
+     "dimensions": "1400x1050",
+     "conditions": "salle de presse",
+     "credit": "ARM",
+     "poids": 118633
+    },
+    {
+     "image": "https://newsroom.arm.com/wp-content/uploads/2026/01/TU_P12_1600x900-100-1400x788.png",
+     "page": "https://newsroom.arm.com/",
+     "domaine": "arm.com",
+     "dimensions": "1400x788",
+     "conditions": "salle de presse",
+     "credit": "ARM",
+     "poids": 31103
+    },
+    {
+     "image": "https://newsroom.arm.com/wp-content/uploads/2024/11/GettyImages-519517325-1400x934.jpg",
+     "page": "https://newsroom.arm.com/",
+     "domaine": "arm.com",
+     "dimensions": "1400x934",
+     "conditions": "salle de presse",
+     "credit": "ARM",
+     "poids": 84243
+    },
+    {
+     "image": "https://newsroom.arm.com/wp-content/uploads/2025/12/GettyImages-1477552139-edit-1-1400x934.jpg",
+     "page": "https://newsroom.arm.com/",
+     "domaine": "arm.com",
+     "dimensions": "1400x934",
+     "conditions": "salle de presse",
+     "credit": "ARM",
+     "poids": 117720
+    }
+   ]
+  },
+  "MU": {
+   "candidats": [
+    {
+     "image": "https://www.micron.com/content/dam/micron/global/favicon/og-image.png",
+     "page": "https://www.micron.com/about/newsroom",
+     "domaine": "micron.com",
+     "dimensions": "1200x630",
+     "conditions": "salle de presse",
+     "credit": "MU",
+     "poids": 23787
+    },
+    {
+     "image": "https://assets.micron.com/adobe/assets/urn:aaid:aem:7bdf0ef3-6164-45ff-aa2e-210c1c2a39e1/as/ia-video-still-invisible-layer-powering-ai-flower.jpg?width=1500&preferwebp=true",
+     "page": "https://www.micron.com/about/newsroom",
+     "domaine": "micron.com",
+     "dimensions": "1500x900",
+     "conditions": "salle de presse",
+     "credit": "MU",
+     "poids": 53146
+    },
+    {
+     "image": "https://assets.micron.com/adobe/assets/urn:aaid:aem:6c08d592-40a9-4778-a2fd-17fb4fbcaced/as/20230522-april-giving-tour-tech-hallway-syracuse-tertiary.jpg?preferwebp=true",
+     "page": "https://www.micron.com/about/newsroom/media-relations",
+     "domaine": "micron.com",
+     "dimensions": "925x470",
+     "conditions": "salle de presse",
+     "credit": "MU",
+     "poids": 77528
+    },
+    {
+     "image": "https://assets.micron.com/adobe/assets/urn:aaid:aem:700050f8-d58d-4695-afc0-9287b847e168/as/20250818-mike-greeting-micron-lobby-san-jose.jpg?width=1500&preferwebp=true",
+     "page": "https://www.micron.com/about/newsroom/media-relations",
+     "domaine": "micron.com",
+     "dimensions": "1500x900",
+     "conditions": "salle de presse",
+     "credit": "MU",
+     "poids": 75252
+    },
+    {
+     "image": "https://assets.micron.com/adobe/assets/urn:aaid:aem:58f0bd8f-7c17-44e2-bc43-3f0b3f7cc7e4/as/20250616-three-fab-workers-cleanroom-suits-angle.jpg?preferwebp=true",
+     "page": "https://www.micron.com/about/careers",
+     "domaine": "micron.com",
+     "dimensions": "1500x900",
+     "conditions": "salle de presse",
+     "credit": "MU",
+     "poids": 90785
+    },
+    {
+     "image": "https://assets.micron.com/adobe/assets/urn:aaid:aem:1c20ebee-2c52-4e9b-8eec-33b945f7fbb8/as/20250405-coworkers-sitting-at-table-discussion.jpg?width=1500&preferwebp=true",
+     "page": "https://www.micron.com/about/careers",
+     "domaine": "micron.com",
+     "dimensions": "1500x900",
+     "conditions": "salle de presse",
+     "credit": "MU",
+     "poids": 60565
+    },
+    {
+     "image": "https://assets.micron.com/adobe/assets/urn:aaid:aem:8875f43a-3ad9-4add-a48d-bc4a646d2bfb/as/location-san-jose1.jpg?width=1500&preferwebp=true",
+     "page": "https://www.micron.com/about/careers",
+     "domaine": "micron.com",
+     "dimensions": "1500x900",
+     "conditions": "salle de presse",
+     "credit": "MU",
+     "poids": 90524
+    },
+    {
+     "image": "https://assets.micron.com/adobe/assets/urn:aaid:aem:aaef5bce-493b-4b09-adcb-38737cd342a7/as/video-thumbnail-micron-global-engineers.jpg?width=1500&preferwebp=true",
+     "page": "https://www.micron.com/about/careers",
+     "domaine": "micron.com",
+     "dimensions": "1500x900",
+     "conditions": "salle de presse",
+     "credit": "MU",
+     "poids": 50064
+    }
+   ]
+  },
+  "000660.KS": {
+   "candidats": [
+    {
+     "image": "https://news.skhynix.com/en/wp-content/themes/skhynix/assets/images/ogimage.jpg",
+     "page": "https://news.skhynix.com/",
+     "domaine": "skhynix.com",
+     "dimensions": "1290x726",
+     "conditions": "salle de presse",
+     "credit": "000660.KS",
+     "poids": 35407
+    }
+   ]
+  },
+  "LRCX": {
+   "candidats": [
+    {
+     "image": "https://www.lamresearch.com/wp-content/uploads/2022/04/LAM-newmachine-130_fix@2x.png",
+     "page": "https://www.lamresearch.com/newsroom/",
+     "domaine": "lamresearch.com",
+     "dimensions": "1174x724",
+     "conditions": "salle de presse",
+     "credit": "Lam Research",
+     "poids": 34878
+    },
+    {
+     "image": "http://www.lamresearch.com/wp-content/uploads/2021/07/150_38856_full-1-scaled.jpg",
+     "page": "https://www.lamresearch.com/",
+     "domaine": "lamresearch.com",
+     "dimensions": "2560x1707",
+     "conditions": "salle de presse",
+     "credit": "Lam Research",
+     "poids": 57916
+    },
+    {
+     "image": "https://www.lamresearch.com/wp-content/uploads/2018/01/company_overview_hero_lam_research.jpg",
+     "page": "https://www.lamresearch.com/company/company-overview/",
+     "domaine": "lamresearch.com",
+     "dimensions": "2040x600",
+     "conditions": "salle de presse",
+     "credit": "Lam Research",
+     "poids": 74913
+    },
+    {
+     "image": "https://www.lamresearch.com/wp-content/uploads/2018/10/Audrey_Charles_Website_full_body-1-scaled.jpg",
+     "page": "https://www.lamresearch.com/company/company-overview/",
+     "domaine": "lamresearch.com",
+     "dimensions": "1707x2560",
+     "conditions": "salle de presse",
+     "credit": "Lam Research",
+     "poids": 48453
+    },
+    {
+     "image": "https://www.lamresearch.com/wp-content/uploads/2024/03/Neil_halfpose-scaled.jpg",
+     "page": "https://www.lamresearch.com/company/company-overview/",
+     "domaine": "lamresearch.com",
+     "dimensions": "1707x2560",
+     "conditions": "salle de presse",
+     "credit": "Lam Research",
+     "poids": 40076
+    },
+    {
+     "image": "https://www.lamresearch.com/wp-content/uploads/2024/07/Ava-2-scaled.jpg",
+     "page": "https://www.lamresearch.com/company/company-overview/",
+     "domaine": "lamresearch.com",
+     "dimensions": "1707x2560",
+     "conditions": "salle de presse",
+     "credit": "Lam Research",
+     "poids": 27219
+    },
+    {
+     "image": "https://www.lamresearch.com/wp-content/uploads/2024/03/Mary_halfpose-scaled.jpg",
+     "page": "https://www.lamresearch.com/company/company-overview/",
+     "domaine": "lamresearch.com",
+     "dimensions": "1707x2560",
+     "conditions": "salle de presse",
+     "credit": "Lam Research",
+     "poids": 38048
+    },
+    {
+     "image": "https://www.lamresearch.com/wp-content/uploads/2026/03/Karthik_halfpose-scaled-1.jpg",
+     "page": "https://www.lamresearch.com/company/company-overview/",
+     "domaine": "lamresearch.com",
+     "dimensions": "1707x2560",
+     "conditions": "salle de presse",
+     "credit": "Lam Research",
+     "poids": 97235
+    }
+   ]
+  },
+  "KLAC": {
+   "candidats": [
+    {
+     "image": "https://www.kla.com/wp-content/uploads/news-advance-header.webp",
+     "page": "https://www.kla.com/newsroom",
+     "domaine": "kla.com",
+     "dimensions": "1728x750",
+     "conditions": "salle de presse",
+     "credit": "KLAC",
+     "poids": 46118
+    },
+    {
+     "image": "https://www.kla.com/wp-content/uploads/tom_randy_05.webp",
+     "page": "https://www.kla.com/products/instruments/instruments-overview",
+     "domaine": "kla.com",
+     "dimensions": "800x600",
+     "conditions": "salle de presse",
+     "credit": "KLAC",
+     "poids": 57540
+    },
+    {
+     "image": "https://www.kla.com/wp-content/uploads/KLA-people-collage.webp",
+     "page": "https://www.kla.com/products/instruments/instruments-overview",
+     "domaine": "kla.com",
+     "dimensions": "1920x1123",
+     "conditions": "salle de presse",
+     "credit": "KLAC",
+     "poids": 90043
+    },
+    {
+     "image": "https://www.kla.com/wp-content/uploads/tech-timeline.webp",
+     "page": "https://www.kla.com/company",
+     "domaine": "kla.com",
+     "dimensions": "1390x486",
+     "conditions": "salle de presse",
+     "credit": "KLAC",
+     "poids": 31894
+    },
+    {
+     "image": "https://www.kla.com/wp-content/uploads/Investing_in_our_Communities-1.webp",
+     "page": "https://www.kla.com/company/environmental-social-governance/kla-foundation",
+     "domaine": "kla.com",
+     "dimensions": "700x467",
+     "conditions": "salle de presse",
+     "credit": "KLAC",
+     "poids": 68506
     }
    ]
   }
