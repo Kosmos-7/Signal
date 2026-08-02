@@ -130,7 +130,28 @@ l'outil des logos et son workflow, le module tools/activites.py, les dix-huit
 images d'activité, la clé « activites » de universe.json et sa production par
 le screener. L'historique git conserve le tout si une décision devait changer.
 
-## Photos publiées (57 produits, 35 lieux)
+## Une image fournie directement, hors de toute source
+
+La fiche NVDA porte une photo de presse fournie par le propriétaire du dépôt :
+Jensen Huang présentant le superchip Grace Blackwell GB200. Elle ne vient
+d'aucune des sources ci-dessus et sa licence n'est pas établie ; il s'agit
+selon toute vraisemblance d'un cliché d'agence pris lors d'un événement NVIDIA.
+Le crédit affiché sur la fiche le dit tel quel, « photo de presse, auteur non
+identifié », plutôt que d'inventer une attribution à NVIDIA qui serait fausse.
+
+La décision de la publier appartient au propriétaire du dépôt, qui l'a prise en
+connaissance de la différence entre un visuel qu'une société met en ligne pour
+qu'on parle d'elle et un cliché qu'une agence vend. Un retrait est immédiat :
+supprimer assets/titres/NVDA.jpg et l'entrée NVDA de LEGENDES.json suffit, la
+fiche cesse alors d'afficher toute illustration.
+
+Traitement : l'image est déjà en 16:9 exact, donc aucun recadrage. Et surtout
+aucun assombrissement, contrairement à toutes les autres : la chaîne ramène
+normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
+89 % des pixels sont ici déjà sombres et l'appliquer aurait écrasé le sujet.
+
+## Photos publiées
+(57 produits, 35 lieux)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -171,7 +192,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.advantest.com/img/top/img-top-1.png
 - Page : https://www.advantest.com/en/
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Advantest
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### 8035.T — Usine Tokyo Electron de Nirasaki, au pied des Alpes japonaises
 
@@ -260,7 +281,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.arista.com/assets/images/product/Arista-Product-Platforms-Family-800x520.png
 - Page : https://www.arista.com/en/products/platforms
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Arista Networks
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### ARM — Processeur Exynos à cœurs Arm
 
@@ -277,7 +298,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.asm.com/media/wqed20xm/pulsar-landscape.png?width=952&height=500&quality=90&v=1dbf7eea27deb80
 - Page : https://www.asm.com/solutions/products/atomic-layer-deposition-products/pulsar-xp-ald
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : ASM International
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### ASML.AS — Siège d'ASML à Veldhoven
 
@@ -326,7 +347,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.chubb.com/content/dam/chubb-sites/chubb/global/images/places/cargo-ship-istock-869250572-960x720.jpg
 - Page : https://www.chubb.com/us-en/about-chubb/
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Chubb
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### CCJ — Foreuse de Crow Butte Mining, filiale de Cameco
 
@@ -351,7 +372,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.constellationenergy.com/content/dam/constellationenergy/images/about/locations/locations-open-graph-images/calvert-og.jpg
 - Page : https://www.constellationenergy.com/about/locations/calvert-cliffs-clean-energy-center.html
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Constellation Energy
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### CIEN — Châssis optique Ciena 6500
 
@@ -376,7 +397,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.coherent.com/content/dam/coherent/site/en/images/photography/lasers/products-lasers-950px.jpg
 - Page : https://www.coherent.com/lasers
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Coherent
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### CRM — Salesforce Tower dominant le centre de San Francisco
 
@@ -393,7 +414,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://cdn.prod.website-files.com/62bc66d283fd9c34ffec780a/6a67f23fbd7c5610e305aae6_Press%20Release-Thumbnail%201520x1098.jpg
 - Page : https://www.coreweave.com/news/coreweave-announces-two-initial-data-centers-in-the-uk-are-now-operational
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : CoreWeave
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### CSCO — Carte d'un commutateur Cisco Catalyst 3750
 
@@ -466,7 +487,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.gevernova.com/content/dam/gepower-new/global/en_US/images/wind-site/homepage/hero-wind-video.JPG
 - Page : https://www.gevernova.com/wind-power
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : GE Vernova
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### GILD — Truvada, antirétroviral de Gilead Sciences
 
@@ -563,7 +584,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.lumentum.com/_next/image?url=https%3A%2F%2Fmedia.lumentum.com%2Fsites%2Fdefault%2Ffiles%2F2025-11%2Fproducts-new-img.jpg&w=640&q=80
 - Page : https://www.lumentum.com/en/products
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Lumentum
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### LRCX — Salle blanche de Lam Research
 
@@ -572,7 +593,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.lamresearch.com/wp-content/uploads/2022/04/LAM-newmachine-130_fix@2x.png
 - Page : https://www.lamresearch.com/products/
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Lam Research
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### META — Casque Meta Quest 3
 
@@ -629,7 +650,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://assets.nebius.com/assets/41dcdf5d-fa58-4759-8a18-c7809b6dcedf/brand-video-cover.jpg?cache-buster=2026-06-08T17:32:08.901Z
 - Page : https://nebius.com/
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Nebius Group
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### NDAQ — Écrans du MarketSite Nasdaq, Times Square
 
@@ -663,13 +684,13 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Page : https://www.flickr.com/photos/8558461@N08/866577666
 - Licence : CC BY 2.0 — crédit affiché : ChrisDag · CC BY 2.0
 
-### NVDA — Carte HGX B200, huit accélérateurs Blackwell de NVIDIA
+### NVDA — Jensen Huang présentant le superchip Grace Blackwell GB200
 
 - Nature : produit
 - Fichier : `assets/titres/NVDA.jpg`
-- Source : File:Nvidia DGX-B200-HGX.jpg
-- Page : https://commons.wikimedia.org/wiki/File:Nvidia_DGX-B200-HGX.jpg
-- Licence : CC BY-SA 4.0 — crédit affiché : Pokiiri · CC BY-SA 4.0
+- Source : fichier fourni par le propriétaire du dépôt
+- Licence : Licence non établie, photo de presse — crédit affiché : Photo de presse, auteur non identifié
+- Origine : fournie par le propriétaire du dépôt, le 2026-08-02
 
 ### NXPI — Processeur NXP sur carte
 
@@ -718,7 +739,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://cmswp.quantaservices.com/wp-content/uploads/2023/03/Capabilities-Utility-Performance-Solutions.jpg
 - Page : https://www.quantaservices.com/capabilities/utility-performance-solutions
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Quanta Services
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### PYPL — Siège de PayPal, San José
 
@@ -801,7 +822,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.tencent.com/wp-content/uploads/2022/12/ourstory1-640x360.jpg
 - Page : https://www.tencent.com/en-us/about.html
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Tencent
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### TER — Bras collaboratif UR16e d'Universal Robots, filiale de Teradyne
 
@@ -850,7 +871,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.vertiv.com/49f19f/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-liebert-exl-s1-ups/cp-ups-na-508x635-42362-exl-s1-ups.jpg
 - Page : https://www.vertiv.com/en-us/products-catalog/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1/
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Vertiv
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### VST — Tours de refroidissement d'une centrale Vistra
 
@@ -859,7 +880,7 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://vistracorp.com/wp-content/uploads/2026/01/Beaver-Valley-008.jpg
 - Page : https://vistracorp.com/
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Vistra
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02
 
 ### WDC — SSD Western Digital SN850X
 
@@ -884,4 +905,4 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : https://www.zoetis.com/_config/easset_upload_file81207_2649428_e.jpg
 - Page : https://www.zoetis.com/
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Zoetis
-- Récupérée le : 2026-08-02 sur le site officiel
+- Origine : site officiel, le 2026-08-02

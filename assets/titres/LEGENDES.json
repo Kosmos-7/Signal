@@ -509,12 +509,14 @@
   "credit": "ChrisDag · CC BY 2.0"
  },
  "NVDA": {
-  "legende": "Carte HGX B200, huit accélérateurs Blackwell de NVIDIA",
+  "legende": "Jensen Huang présentant le superchip Grace Blackwell GB200",
   "type": "produit",
-  "source": "File:Nvidia DGX-B200-HGX.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX-B200-HGX.jpg",
-  "licence": "CC BY-SA 4.0",
-  "credit": "Pokiiri · CC BY-SA 4.0"
+  "source": "fichier fourni par le propriétaire du dépôt",
+  "page": "",
+  "licence": "Licence non établie, photo de presse",
+  "origine": "fournie par le propriétaire du dépôt",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo de presse, auteur non identifié"
  },
  "NXPI": {
   "legende": "Processeur NXP sur carte",
