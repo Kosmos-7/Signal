@@ -1,8 +1,8 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-88 fiches sur 104 portent une photo de leur société : 56 montrent un
-produit ou une activité, 32 un site. 73 sont sous licence libre et 15
-sous licence non établie. Les 16 autres n'affichent aucune illustration. Priorité au PRODUIT (puce, carte, terminal,
+89 fiches sur 104 portent une photo de leur société : 57 montrent un
+produit ou une activité, 32 un site. 73 sont sous licence libre et 16
+sous licence non établie. Les 15 autres n'affichent aucune illustration. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
@@ -130,7 +130,7 @@ l'outil des logos et son workflow, le module tools/activites.py, les dix-huit
 images d'activité, la clé « activites » de universe.json et sa production par
 le screener. L'historique git conserve le tout si une décision devait changer.
 
-## Photos publiées (56 produits, 32 sites)
+## Photos publiées (57 produits, 32 sites)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -253,6 +253,15 @@ le screener. L'historique git conserve le tout si une décision devait changer.
 - Source : File:Samsung-Exynos-4412-Quad SoC used in I9300.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Samsung-Exynos-4412-Quad_SoC_used_in_I9300.jpg
 - Licence : CC BY-SA 3.0 — crédit affiché : Köf3 · CC BY-SA 3.0
+
+### ASM.AS — Réacteur ALD Pulsar XP d'ASM International
+
+- Nature : produit
+- Fichier : `assets/titres/ASM.AS.jpg`
+- Source : https://www.asm.com/media/wqed20xm/pulsar-landscape.png?width=952&height=500&quality=90&v=1dbf7eea27deb80
+- Page : https://www.asm.com/solutions/products/atomic-layer-deposition-products/pulsar-xp-ald
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : ASM International
+- Récupérée le : 2026-08-02 sur le site officiel
 
 ### ASML.AS — Siège d'ASML à Veldhoven
 

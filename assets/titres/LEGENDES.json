@@ -120,6 +120,16 @@
   "type": "produit",
   "credit": "Köf3 · CC BY-SA 3.0"
  },
+ "ASM.AS": {
+  "legende": "Réacteur ALD Pulsar XP d'ASM International",
+  "type": "produit",
+  "source": "https://www.asm.com/media/wqed20xm/pulsar-landscape.png?width=952&height=500&quality=90&v=1dbf7eea27deb80",
+  "page": "https://www.asm.com/solutions/products/atomic-layer-deposition-products/pulsar-xp-ald",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "recupere_le": "2026-08-02",
+  "credit": "Photo : ASM International"
+ },
  "ASML.AS": {
   "legende": "Siège d'ASML à Veldhoven",
   "source": "File:ASML headquarters Veldhoven.jpg",
