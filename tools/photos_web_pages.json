@@ -199,6 +199,24 @@
  ],
  "LRCX": [
   {
+   "page": "https://newsroom.lamresearch.com/",
+   "domaine": "lamresearch.com",
+   "cdn": [
+    "lamresearch.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "Lam Research"
+  },
+  {
+   "page": "https://www.lamresearch.com/newsroom/",
+   "domaine": "lamresearch.com",
+   "cdn": [
+    "lamresearch.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "Lam Research"
+  },
+  {
    "page": "https://www.lamresearch.com/products/",
    "domaine": "lamresearch.com",
    "conditions": "non établies",
@@ -944,6 +962,237 @@
    "domaine": "ubs.com",
    "conditions": "non établies",
    "credit": "UBS"
+  }
+ ],
+ "AMD": [
+  {
+   "page": "https://newsroom.amd.com/news/aai-2026-keynote-livestream-replay/",
+   "domaine": "amd.com",
+   "cdn": [
+    "amd.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "AMD"
+  },
+  {
+   "page": "https://newsroom.amd.com/",
+   "domaine": "amd.com",
+   "cdn": [
+    "amd.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "AMD"
+  },
+  {
+   "page": "https://www.amd.com/en/newsroom/press-releases/2023-11-15-amd-announces-amd-instinct-mi300-accelerator-launc.html",
+   "domaine": "amd.com",
+   "cdn": [
+    "amd.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "AMD"
+  }
+ ],
+ "INTC": [
+  {
+   "page": "https://www.intel.com/content/www/us/en/newsroom/home.html",
+   "domaine": "intel.com",
+   "cdn": [
+    "intel.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "INTC"
+  },
+  {
+   "page": "https://www.intel.com/content/www/us/en/newsroom/resources/press-kits-index.html",
+   "domaine": "intel.com",
+   "cdn": [
+    "intel.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "INTC"
+  }
+ ],
+ "TSM": [
+  {
+   "page": "https://pr.tsmc.com/english/news",
+   "domaine": "tsmc.com",
+   "cdn": [
+    "tsmc.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "TSM"
+  },
+  {
+   "page": "https://www.tsmc.com/english",
+   "domaine": "tsmc.com",
+   "cdn": [
+    "tsmc.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "TSM"
+  }
+ ],
+ "QCOM": [
+  {
+   "page": "https://www.qualcomm.com/news/media-center",
+   "domaine": "qualcomm.com",
+   "cdn": [
+    "qualcomm.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "QCOM"
+  },
+  {
+   "page": "https://www.qualcomm.com/news/releases",
+   "domaine": "qualcomm.com",
+   "cdn": [
+    "qualcomm.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "QCOM"
+  }
+ ],
+ "AVGO": [
+  {
+   "page": "https://www.broadcom.com/company/news/product-releases",
+   "domaine": "broadcom.com",
+   "cdn": [
+    "broadcom.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "AVGO"
+  }
+ ],
+ "ARM": [
+  {
+   "page": "https://newsroom.arm.com/",
+   "domaine": "arm.com",
+   "cdn": [
+    "arm.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "ARM"
+  },
+  {
+   "page": "https://newsroom.arm.com/news",
+   "domaine": "arm.com",
+   "cdn": [
+    "arm.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "ARM"
+  }
+ ],
+ "MU": [
+  {
+   "page": "https://www.micron.com/about/newsroom",
+   "domaine": "micron.com",
+   "cdn": [
+    "micron.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "MU"
+  },
+  {
+   "page": "https://www.micron.com/about/newsroom/media-relations",
+   "domaine": "micron.com",
+   "cdn": [
+    "micron.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "MU"
+  }
+ ],
+ "005930.KS": [
+  {
+   "page": "https://news.samsung.com/global/",
+   "domaine": "samsung.com",
+   "cdn": [
+    "samsung.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "005930.KS"
+  },
+  {
+   "page": "https://news.samsung.com/global/category/products",
+   "domaine": "samsung.com",
+   "cdn": [
+    "samsung.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "005930.KS"
+  }
+ ],
+ "000660.KS": [
+  {
+   "page": "https://news.skhynix.com/",
+   "domaine": "skhynix.com",
+   "cdn": [
+    "skhynix.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "000660.KS"
+  },
+  {
+   "page": "https://news.skhynix.com/category/news-media/",
+   "domaine": "skhynix.com",
+   "cdn": [
+    "skhynix.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "000660.KS"
+  }
+ ],
+ "ASML.AS": [
+  {
+   "page": "https://www.asml.com/en/news/press-releases",
+   "domaine": "asml.com",
+   "cdn": [
+    "asml.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "ASML.AS"
+  },
+  {
+   "page": "https://www.asml.com/en/news",
+   "domaine": "asml.com",
+   "cdn": [
+    "asml.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "ASML.AS"
+  }
+ ],
+ "AMAT": [
+  {
+   "page": "https://www.appliedmaterials.com/us/en/newsroom.html",
+   "domaine": "appliedmaterials.com",
+   "cdn": [
+    "appliedmaterials.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "AMAT"
+  }
+ ],
+ "KLAC": [
+  {
+   "page": "https://www.kla.com/newsroom",
+   "domaine": "kla.com",
+   "cdn": [
+    "kla.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "KLAC"
+  },
+  {
+   "page": "https://www.kla.com/news-events",
+   "domaine": "kla.com",
+   "cdn": [
+    "kla.com"
+   ],
+   "conditions": "salle de presse",
+   "credit": "KLAC"
   }
  ]
 }

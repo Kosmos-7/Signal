@@ -12,6 +12,10 @@ on:
         description: "Ne traiter que les N premières sociétés (0 = toutes)"
         type: string
         default: "0"
+      tickers:
+        description: "Tickers à traiter, séparés par des virgules (vide = tous)"
+        type: string
+        default: ""
       par_societe:
         description: "Images téléchargées par société"
         type: string
@@ -35,10 +39,13 @@ jobs:
           python-version: '3.13'
       - run: pip install --quiet Pillow
       - name: Récupérer les visuels officiels
+        env:
+          TICKERS: ${{ inputs.tickers }}
         run: |
           python tools/photos_web.py \
             --limite ${{ inputs.limite || '0' }} \
-            --par-societe ${{ inputs.par_societe || '3' }}
+            --par-societe ${{ inputs.par_societe || '3' }} \
+            ${TICKERS:+--tickers "$TICKERS"}
       - name: Publier le rapport
         if: always()
         uses: actions/upload-artifact@v4

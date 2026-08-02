@@ -157,6 +157,9 @@ def main():
     ap.add_argument("--sortie", default="assets/titres/web")
     ap.add_argument("--limite", type=int, default=0)
     ap.add_argument("--par-societe", type=int, default=6)
+    ap.add_argument("--tickers", default="",
+                    help="tickers a traiter, separes par des virgules, meme "
+                         "s'ils sont deja illustres")
     a = ap.parse_args()
 
     if not PAGES:
@@ -170,6 +173,14 @@ def main():
     # itère dessus et l'on meurt d'un TypeError au dernier tour, après avoir
     # fait tout le travail et avant d'avoir écrit le rapport.
     cibles = [t for t in sorted(PAGES) if not t.startswith("_") and t not in deja]
+    if a.tickers:
+        # Repasse ciblee, y compris sur des fiches deja illustrees : c'est le
+        # seul moyen de chercher mieux que ce qu'on a deja.
+        vises = [t.strip() for t in a.tickers.split(",") if t.strip()]
+        inconnus = [t for t in vises if t not in PAGES]
+        if inconnus:
+            raise SystemExit(f"aucune page connue pour : {inconnus}")
+        cibles = vises
     if a.limite:
         cibles = cibles[: a.limite]
     os.makedirs(a.sortie, exist_ok=True)
