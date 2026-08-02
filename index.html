@@ -72,6 +72,16 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .d-tk{font-family:var(--serif);font-size:3.4rem;line-height:.95;letter-spacing:-1px}
   .d-nm{font-size:.98rem;color:var(--text2);margin-top:.25rem}
   .d-tagrow{display:flex;align-items:center;gap:10px;margin-top:.85rem}
+  /* Illustration d'ACTIVITÉ en tête de fiche. La légende n'est pas décorative :
+     elle dit ce que montre l'image (le maillon), pour qu'on ne la lise jamais
+     comme une photo de la société elle-même. */
+  .d-illu{position:relative;margin:0 0 1.1rem;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.02)}
+  .d-illu img{display:block;width:100%;height:150px;object-fit:cover}
+  .d-illu figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .7rem;
+    background:linear-gradient(0deg,rgba(6,6,11,.92),rgba(6,6,11,0));
+    font:600 .56rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3)}
+  .d-illu figcaption b{color:var(--text2);font-weight:600}
+  @media(max-width:900px){.d-illu img{height:118px}}
   .d-tag{font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
   .d-reg{font:600 .6rem var(--mono);letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:4px;padding:4px 9px}
 
@@ -362,7 +372,7 @@ const CHV=new Date().toISOString().slice(0,10);
                               qualite,valorisation,timing,themes:[id…],top30}}}
    Le fichier est OPTIONNEL : s'il manque, la page se replie sur la seule
    watchlist principale (watchlist.json) sans rien casser. */
-const U={themes:[],stocks:{},week:'',updated_at:'',universe_declared:null,universe_scored:null};
+const U={themes:[],stocks:{},week:'',updated_at:'',universe_declared:null,universe_scored:null,activites:null};
 const TBY={};              // id de thème → méta
 const WL={};               // ticker → fiche complète (top 30, watchlist.json)
 const MAIN='principale';   // id réservé de la watchlist principale
@@ -392,6 +402,9 @@ Promise.all([
     U.stocks=(un.stocks&&typeof un.stocks==='object')?un.stocks:{};
     U.week=un.week||'';U.updated_at=un.updated_at||'';
     U.universe_declared=un.universe_declared;U.universe_scored=un.universe_scored;
+    // Illustrations par activité : facultatif, un universe.json d'avant ce
+    // champ laisse simplement les fiches sans image.
+    U.activites=(un.activites&&typeof un.activites==='object')?un.activites:null;
     U.themes.forEach(t=>{if(t&&t.id)TBY[t.id]=t;});
   }
   document.getElementById('rw').textContent=((U.week||wl.week||'')).replace('Sem. ','S');
@@ -584,6 +597,18 @@ function railMore(){
 /* Photographies libres de droits (domaine public), une par watchlist. Provenance
    et licences dans assets/themes/CREDITS.md. Le repli textuel reste en place :
    une image qui ne charge pas laisse le libellé, jamais un cadre vide. */
+/* Illustration de la fiche : l'ACTIVITÉ du titre, jamais la société. Le choix
+   est mesuré, pas esthétique — une recherche automatique de photos par société
+   se trompe dans 43 % des cas (sonde du 02/08), et publier le siège d'une
+   entreprise sur la fiche d'une autre est un fait faux. Absente si l'activité
+   n'est pas connue ou si l'image ne charge pas : jamais de cadre vide. */
+function illuActivite(tk){
+  const a=(U.activites&&U.activites.titres)||{}, L=(U.activites&&U.activites.libelles)||{};
+  const cle=a[tk]; if(!cle)return '';
+  return '<figure class="d-illu"><img src="assets/activites/'+encodeURIComponent(cle)+
+    '.jpg" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
+    '<figcaption>Illustration&nbsp;: <b>'+sv(L[cle]||cle)+'</b></figcaption></figure>';
+}
 function themeImg(id,label){
   return '<div class="tc-img"><span class="tc-fb">'+sv(label||id)+'</span>'+
     '<img src="assets/themes/'+encodeURIComponent(id)+'.jpg" alt="" loading="lazy" onerror="this.remove()"></div>';
@@ -1100,6 +1125,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   chxReset();
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
+    illuActivite(s.ticker)+
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+

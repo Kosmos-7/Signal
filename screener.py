@@ -43,11 +43,23 @@ import numpy as np
 import json
 import os
 import re
+import sys
 import time
 import requests
 from datetime import date, timedelta, datetime as _dt, timezone as _tz
 
 import themes   # taxonomie des watchlists thématiques (source unique de vérité)
+
+# Correspondance titre → activité illustrée. Le module vit dans tools/ parce
+# qu'il sert d'abord à la récolte de photos ; le screener n'en lit que la
+# projection publiée. Import tolérant : une illustration manquante ne doit
+# jamais empêcher la publication des données de marché.
+try:
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "tools"))
+    import activites as _activites
+except Exception as _e:                                    # pragma: no cover
+    print(f"⚠️  activites indisponible ({type(_e).__name__}) — illustrations non publiées")
+    _activites = None
 from ta.momentum import RSIIndicator
 
 # Paramètres centralisés (VIX dampener, etc.) — Phase 2
@@ -1709,6 +1721,32 @@ def main():
         "themes":            themes_publies,
         "stocks":            par_ticker,
     }
+    # ── Illustrations par activité ──────────────────────────────────────────
+    # Chaque titre publié se voit attribuer l'activité qu'il exerce (son maillon
+    # dans la chaîne, sinon son secteur). C'est cette clé, et non le ticker, qui
+    # désigne l'image affichée sur la fiche : une photo de salle blanche illustre
+    # « fonderie et packaging », pas telle société. La sonde du 02/08 a montré
+    # qu'une recherche automatique par société se trompe dans 43 % des cas, et
+    # qu'un bâtiment mal attribué est un fait faux, pas un défaut d'esthétique.
+    if _activites is not None:
+        secteur_de = {t: o["secteur"] for t, o in par_ticker.items()}
+        secteur_de.update({s["ticker"]: s.get("sector", "") for s in top})
+        titres_act, sans_act = {}, []
+        for t in sorted(set(par_ticker) | top_tickers):
+            cle = _activites.activite(t, secteur_de.get(t, ""))
+            if cle:
+                titres_act[t] = cle
+            else:
+                sans_act.append(t)
+        universe["activites"] = {
+            "titres": titres_act,
+            "libelles": {c: _activites.LIBELLES[c]
+                         for c in sorted(set(titres_act.values()))},
+        }
+        print(f"🖼  activités — {len(titres_act)} titres rattachés, "
+              f"{len(universe['activites']['libelles'])} illustrations utilisées"
+              + (f", {len(sans_act)} sans activité : {', '.join(sans_act[:8])}" if sans_act else ""))
+
     tmp_u = "universe.json.tmp"
     with open(tmp_u, "w", encoding="utf-8") as f:
         json.dump(universe, f, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
