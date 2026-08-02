@@ -143,6 +143,16 @@ def diagnostic():
         time.sleep(1.5)
 
 
+def _libelle_licence(code, version):
+    """« cc0 » n'est pas « CC CC0 » : les deux licences libres ont leur nom."""
+    v = (version or "").strip()
+    if code == "cc0":
+        return f"CC0 {v}".strip()
+    if code == "pdm":
+        return f"Marque du domaine public {v}".strip()
+    return f"CC {code.upper()} {v}".strip()
+
+
 def retenir(res, nom):
     """Le titre doit nommer la société : Openverse n'a validé aucun rattachement."""
     titre = res.get("title") or ""
@@ -157,7 +167,7 @@ def retenir(res, nom):
         "fichier": titre[:90],
         "url": res.get("url"),
         "page": res.get("foreign_landing_url") or res.get("detail_url") or "",
-        "licence": f"CC {lic.upper()} {res.get('license_version') or ''}".strip(),
+        "licence": _libelle_licence(lic, res.get("license_version")),
         "famille": LICENCES[lic],
         "auteur": (res.get("creator") or "")[:80],
         "source": res.get("source") or "",

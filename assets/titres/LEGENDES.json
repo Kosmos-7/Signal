@@ -1,45 +1,11 @@
 {
- "CDNS": {
-  "legende": "Siège de Cadence Design Systems",
-  "source": "File:Cadence Building 2.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg",
-  "licence": "Public domain"
- },
- "META": {
-  "legende": "Siège de Meta Platforms, Menlo Park",
-  "source": "File:Meta Platforms Headquarters Menlo Park California.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg",
-  "licence": "CC0"
- },
- "NOW": {
-  "legende": "Siège mondial de ServiceNow",
-  "source": "File:ServiceNowGlobalHQ.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:ServiceNowGlobalHQ.jpg",
-  "licence": "CC0"
- },
- "INTC": {
-  "legende": "Bureaux d'Intel à Tsukuba, Japon",
-  "source": "File:Intel Japan Tsukuba Office.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Intel_Japan_Tsukuba_Office.jpg",
-  "licence": "CC0"
- },
- "GS": {
-  "legende": "Siège de Goldman Sachs, New York",
-  "source": "File:Goldman Sachs New World Headquarters.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:Goldman_Sachs_New_World_Headquarters.JPG",
-  "licence": "Public domain"
- },
- "MSFT": {
-  "legende": "Campus ouest de Microsoft, Redmond",
-  "source": "File:Aerial Microsoft West Campus August 2009.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Aerial_Microsoft_West_Campus_August_2009.jpg",
-  "licence": "Public domain"
- },
- "ASML.AS": {
-  "legende": "Siège d'ASML à Veldhoven",
-  "source": "File:ASML headquarters Veldhoven.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:ASML_headquarters_Veldhoven.jpg",
-  "licence": "Public domain"
+ "000660.KS": {
+  "legende": "Puce mémoire SK hynix",
+  "source": "File:Philips FM02FD00B - board - Hynix HY27UV08AG5M-TPCB-40190.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Philips_FM02FD00B_-_board_-_Hynix_HY27UV08AG5M-TPCB-40190.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Raimond Spekking · CC BY-SA 4.0"
  },
  "005930.KS": {
   "legende": "Siège de Samsung Electronics, Séoul",
@@ -47,6 +13,21 @@
   "page": "https://commons.wikimedia.org/wiki/File:Samsung_headquarters.jpg",
   "licence": "CC BY-SA 2.0",
   "credit": "Oskar Alexanderson · CC BY-SA 2.0"
+ },
+ "4062.T": {
+  "legende": "Filtre à particules Ibiden monté sur un moteur Peugeot",
+  "source": "Ibiden Peugeot DPF 0042",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=44799677",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Michael KR · CC BY-SA 4.0"
+ },
+ "4063.T": {
+  "legende": "Usine chimique Shin-Etsu à Isobe, préfecture de Gunma",
+  "source": "Shin-Etsu Chemical Isobe , Gunma - panoramio (1)",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=54658191",
+  "licence": "CC BY-SA 3.0",
+  "credit": "Kaz Ish · CC BY-SA 3.0"
  },
  "ABBN.SW": {
   "legende": "Entraînement sans engrenage ABB",
@@ -71,56 +52,6 @@
   "type": "produit",
   "credit": "Raimond Spekking · CC BY-SA 4.0"
  },
- "BX": {
-  "legende": "Siège de Blackstone, New York",
-  "source": "File:Blackstone HQ - 345 Park Avenu.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Blackstone_HQ_-_345_Park_Avenu.jpg",
-  "licence": "CC BY-SA 3.0",
-  "credit": "Americasroof (talk) · CC BY-SA 3.0"
- },
- "DELL": {
-  "legende": "Siège de Dell, Round Rock",
-  "source": "File:RR1- Dell Campus.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:RR1-_Dell_Campus.jpg",
-  "licence": "CC BY-SA 4.0",
-  "credit": "Jjpwiki · CC BY-SA 4.0"
- },
- "HSBA.L": {
-  "legende": "Tour HSBC, Canary Wharf, Londres",
-  "source": "File:8-Canada-Square (cropped).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:8-Canada-Square_(cropped).jpg",
-  "licence": "CC BY-SA 4.0",
-  "credit": "auteur non précisé · CC BY-SA 4.0"
- },
- "NFLX": {
-  "legende": "Siège de Netflix, Los Gatos",
-  "source": "File:101 Albright Way.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:101_Albright_Way.jpg",
-  "licence": "CC BY-SA 4.0",
-  "credit": "Coolcaesar · CC BY-SA 4.0"
- },
- "PYPL": {
-  "legende": "Siège de PayPal, San José",
-  "source": "File:PayPal San Jose Headquarters.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:PayPal_San_Jose_Headquarters.jpg",
-  "licence": "CC BY-SA 3.0",
-  "credit": "Sagar Savla · CC BY-SA 3.0"
- },
- "WFC": {
-  "legende": "Distributeur automatique Wells Fargo",
-  "source": "File:Wells Fargo ATM Machine, Colorado Springs (54556930636).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Wells_Fargo_ATM_Machine,_Colorado_Springs_(54556930636).jpg",
-  "licence": "CC BY 2.0",
-  "type": "produit",
-  "credit": "Lumen Wilde · CC BY 2.0"
- },
- "TSM": {
-  "legende": "Circuit gravé par TSMC, vu au microscope",
-  "source": "File:S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07389-DSC07389.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
-  "licence": "CC0",
-  "type": "produit"
- },
  "ADYEN.AS": {
   "legende": "Terminal de paiement Adyen",
   "source": "File:Adyen card payment terminal (9607998259).jpg",
@@ -129,6 +60,125 @@
   "type": "produit",
   "credit": "Alper Çuğun from Berlin, Germany · CC BY 2.0"
  },
+ "ALV.DE": {
+  "legende": "Cartes d'assurance santé Allianz",
+  "source": "Allianz Krankenversicherungen Lichtbild",
+  "page": "https://www.flickr.com/photos/71651999@N05/7035074879",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "FuFuWolf · CC BY 2.0"
+ },
+ "AMAT": {
+  "legende": "Enseigne d'Applied Materials",
+  "source": "File:Applied Materials sign and Air Products plant in Southern Taiwan Science Park May 2025.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg",
+  "licence": "CC BY 4.0",
+  "type": "site",
+  "credit": "4300streetcar · CC BY 4.0"
+ },
+ "AMD": {
+  "legende": "Microprocesseur AMD AM9080 en boîtier céramique",
+  "source": "KL Advanced Micro Devices AM9080",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=7028092",
+  "licence": "CC BY-SA 3.0",
+  "type": "produit",
+  "credit": "Konstantin Lanzet · CC BY-SA 3.0"
+ },
+ "AMZN": {
+  "legende": "Cartes cadeaux Amazon en rayon",
+  "source": "Amazon.com",
+  "page": "https://www.flickr.com/photos/39160147@N03/15977126920",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "JeepersMedia · CC BY 2.0"
+ },
+ "ARM": {
+  "legende": "Processeur Exynos à cœurs Arm",
+  "source": "File:Samsung-Exynos-4412-Quad SoC used in I9300.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Samsung-Exynos-4412-Quad_SoC_used_in_I9300.jpg",
+  "licence": "CC BY-SA 3.0",
+  "type": "produit",
+  "credit": "Köf3 · CC BY-SA 3.0"
+ },
+ "ASML.AS": {
+  "legende": "Siège d'ASML à Veldhoven",
+  "source": "File:ASML headquarters Veldhoven.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:ASML_headquarters_Veldhoven.jpg",
+  "licence": "Public domain"
+ },
+ "AVGO": {
+  "legende": "Puce Broadcom BCM7019 vue au microscope",
+  "source": "Broadcom BCM7019 STB SoC die shot",
+  "page": "https://www.flickr.com/photos/140974729@N05/38256091465",
+  "licence": "Marque du domaine public 1.0",
+  "type": "produit"
+ },
+ "AXP": {
+  "legende": "Chèques de voyage American Express",
+  "source": "File:Travelers Cheques of 50 USD each issued by American Express, bought ca. 2012, showing incremental serial numbering.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Travelers_Cheques_of_50_USD_each_issued_by_American_Express,_bought_ca._2012,_showing_incremental_serial_numbering.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "site",
+  "credit": "Pittigrilli · CC BY-SA 4.0"
+ },
+ "BAC": {
+  "legende": "Carte BankAmericard Visa de Bank of America",
+  "source": "Chip-enabled Bank of America BankAmericard Visa Signature Credit Card",
+  "page": "https://www.flickr.com/photos/51526368@N03/16293806432",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "Aranami · CC BY 2.0"
+ },
+ "BX": {
+  "legende": "Siège de Blackstone, New York",
+  "source": "File:Blackstone HQ - 345 Park Avenu.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Blackstone_HQ_-_345_Park_Avenu.jpg",
+  "licence": "CC BY-SA 3.0",
+  "credit": "Americasroof (talk) · CC BY-SA 3.0"
+ },
+ "CCJ": {
+  "legende": "Foreuse de Crow Butte Mining, filiale de Cameco",
+  "source": "Crow Butte Mining, a subsidiary of Cameco,",
+  "page": "https://www.flickr.com/photos/69383258@N08/15422784303",
+  "licence": "CC BY 2.0",
+  "credit": "NRCgov · CC BY 2.0"
+ },
+ "CDNS": {
+  "legende": "Siège de Cadence Design Systems",
+  "source": "File:Cadence Building 2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg",
+  "licence": "Public domain"
+ },
+ "DB1.DE": {
+  "legende": "Ancienne Bourse, Deutsche Börse",
+  "source": "File:Alte Boerse (Aussenfassade).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Alte_Boerse_(Aussenfassade).jpg",
+  "licence": "CC BY-SA 3.0",
+  "type": "produit",
+  "credit": "Michael J. Zirbes (from the original description at the German Wikipedia) · CC BY-SA 3.0"
+ },
+ "DELL": {
+  "legende": "Siège de Dell, Round Rock",
+  "source": "File:RR1- Dell Campus.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:RR1-_Dell_Campus.jpg",
+  "licence": "CC BY-SA 4.0",
+  "credit": "Jjpwiki · CC BY-SA 4.0"
+ },
+ "DLR": {
+  "legende": "Centre de données Digital Realty",
+  "source": "File:DigitalRealtyDatacenterMarkham1.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:DigitalRealtyDatacenterMarkham1.jpg",
+  "licence": "CC0",
+  "type": "produit"
+ },
+ "ENR.DE": {
+  "legende": "Centrale thermique équipée par Siemens Energy, Leipzig",
+  "source": "File:Heizkraftwerk Leipzig Süd mit Wärmespeicher.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Heizkraftwerk_Leipzig_S%C3%BCd_mit_W%C3%A4rmespeicher.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "site",
+  "credit": "Vinaceus · CC BY-SA 4.0"
+ },
  "EQIX": {
   "legende": "Intérieur d'un centre de données Equinix, Dallas",
   "source": "File:Infomart Dallas Interior Lobby.jpg",
@@ -136,6 +186,113 @@
   "licence": "CC BY-SA 4.0",
   "type": "produit",
   "credit": "Andrew nyr · CC BY-SA 4.0"
+ },
+ "ETN": {
+  "legende": "Disjoncteur différentiel Eaton sur rail DIN",
+  "source": "EATON PF6-25-2-003",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=19047797",
+  "licence": "CC BY-SA 3.0",
+  "type": "produit",
+  "credit": "Dmitry G · CC BY-SA 3.0"
+ },
+ "GS": {
+  "legende": "Siège de Goldman Sachs, New York",
+  "source": "File:Goldman Sachs New World Headquarters.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Goldman_Sachs_New_World_Headquarters.JPG",
+  "licence": "Public domain"
+ },
+ "HPE": {
+  "legende": "Baies de stockage HPE Nimble",
+  "source": "File:HPE Nimble Arrays.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:HPE_Nimble_Arrays.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "site",
+  "credit": "Prholenstein · CC BY-SA 4.0"
+ },
+ "HSBA.L": {
+  "legende": "Tour HSBC, Canary Wharf, Londres",
+  "source": "File:8-Canada-Square (cropped).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:8-Canada-Square_(cropped).jpg",
+  "licence": "CC BY-SA 4.0",
+  "credit": "auteur non précisé · CC BY-SA 4.0"
+ },
+ "IFX.DE": {
+  "legende": "Puce Infineon PSB 50712 sur une carte de routeur",
+  "source": "Sphairon Turbolink 7211 - board - Infineon PSB 50712 E-2372",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=171699716",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Raimond Spekking · CC BY-SA 4.0"
+ },
+ "INTC": {
+  "legende": "Bureaux d'Intel à Tsukuba, Japon",
+  "source": "File:Intel Japan Tsukuba Office.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Intel_Japan_Tsukuba_Office.jpg",
+  "licence": "CC0"
+ },
+ "KLAC": {
+  "legende": "Site de KLA Corporation à Ann Arbor, Michigan",
+  "source": "KLA Corporation Ann Arbor Township Office",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=165163353",
+  "licence": "CC BY-SA 4.0",
+  "credit": "DontCallMeLateForDinner · CC BY-SA 4.0"
+ },
+ "META": {
+  "legende": "Siège de Meta Platforms, Menlo Park",
+  "source": "File:Meta Platforms Headquarters Menlo Park California.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg",
+  "licence": "CC0"
+ },
+ "MPWR": {
+  "legende": "Puce Monolithic Power Systems MPS1613 sur une carte de téléviseur",
+  "source": "Thomson 22FB3113W - board - Monolithic Power Systems MPS1613-0933",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=190602285",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Raimond Spekking · CC BY-SA 4.0"
+ },
+ "MSFT": {
+  "legende": "Campus ouest de Microsoft, Redmond",
+  "source": "File:Aerial Microsoft West Campus August 2009.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Aerial_Microsoft_West_Campus_August_2009.jpg",
+  "licence": "Public domain"
+ },
+ "MU": {
+  "legende": "Clé USB Crucial, marque de Micron",
+  "source": "File:Crucial 512 MB Gizmo USB 2 pen drive (c 2005) (outside).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Crucial_512_MB_Gizmo_USB_2_pen_drive_(c_2005)_(outside).jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Multicherry · CC BY-SA 4.0"
+ },
+ "NDAQ": {
+  "legende": "Écrans du MarketSite Nasdaq, Times Square",
+  "source": "File:Xbox One Launch NASDAQ (1).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Xbox_One_Launch_NASDAQ_(1).jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "site",
+  "credit": "Microsoft · CC BY-SA 4.0"
+ },
+ "NFLX": {
+  "legende": "Siège de Netflix, Los Gatos",
+  "source": "File:101 Albright Way.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:101_Albright_Way.jpg",
+  "licence": "CC BY-SA 4.0",
+  "credit": "Coolcaesar · CC BY-SA 4.0"
+ },
+ "NOW": {
+  "legende": "Siège mondial de ServiceNow",
+  "source": "File:ServiceNowGlobalHQ.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:ServiceNowGlobalHQ.jpg",
+  "licence": "CC0"
+ },
+ "NTAP": {
+  "legende": "Baie de stockage NetApp 6030 et son câblage optique",
+  "source": "Trunked 10gig ethernet for NetApp 6030",
+  "page": "https://www.flickr.com/photos/8558461@N08/866577666",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "ChrisDag · CC BY 2.0"
  },
  "NVDA": {
   "legende": "Carte de développement NVIDIA Jetson",
@@ -161,6 +318,44 @@
   "type": "produit",
   "credit": "Raimond Spekking · CC BY-SA 4.0"
  },
+ "ORCL": {
+  "legende": "Serveur Oracle SPARC T3-4",
+  "source": "Oracle's SPARC T3-4 Server",
+  "page": "https://www.flickr.com/photos/49034885@N05/5006317222",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "Oracle PR · CC BY 2.0"
+ },
+ "PLTR": {
+  "legende": "Pavillon Palantir au Forum économique mondial de Davos",
+  "source": "Palantir pavilion, World Economic Forum, Davos, Switzerland",
+  "page": "https://www.flickr.com/photos/37996580417@N01/32215763362",
+  "licence": "CC BY-SA 2.0",
+  "credit": "gruntzooki · CC BY-SA 2.0"
+ },
+ "PYPL": {
+  "legende": "Siège de PayPal, San José",
+  "source": "File:PayPal San Jose Headquarters.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:PayPal_San_Jose_Headquarters.jpg",
+  "licence": "CC BY-SA 3.0",
+  "credit": "Sagar Savla · CC BY-SA 3.0"
+ },
+ "QCOM": {
+  "legende": "Puce Qualcomm Atheros sur carte",
+  "source": "File:FRITZ!Box 7490 - board - Qualcomm QCA9880-BR4A-5180.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:FRITZ!Box_7490_-_board_-_Qualcomm_QCA9880-BR4A-5180.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Raimond Spekking · CC BY-SA 4.0"
+ },
+ "SCHW": {
+  "legende": "Carte de débit Visa de Charles Schwab Bank",
+  "source": "Chip-enabled Charles Schwab Bank Visa Debit Card",
+  "page": "https://www.flickr.com/photos/51526368@N03/16292864811",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "credit": "Aranami · CC BY 2.0"
+ },
  "SNDK": {
   "legende": "Mémoire SanDisk Extreme",
   "source": "File:Sandisk Extreme III 2GB flash chip.jpg",
@@ -168,6 +363,41 @@
   "licence": "CC BY-SA 2.0",
   "type": "produit",
   "credit": "Uwe Hermann · CC BY-SA 2.0"
+ },
+ "SNPS": {
+  "legende": "Siège de Synopsys à Mountain View",
+  "source": "Synopsys Headquarters Mountain View",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=118340795",
+  "licence": "CC0 1.0"
+ },
+ "STX": {
+  "legende": "Disque Seagate",
+  "source": "File:Seagate ST9300AG - Seagate 100075-501 on controller board-8912.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "credit": "Raimond Spekking · CC BY-SA 4.0"
+ },
+ "SU.PA": {
+  "legende": "Usine Schneider Electric",
+  "source": "Schneider Electric factory",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=2025468",
+  "licence": "CC BY-SA 3.0",
+  "credit": "Chmee2 · CC BY-SA 3.0"
+ },
+ "TFC": {
+  "legende": "Truist Financial Center à Hagerstown, Maryland",
+  "source": "Truist Financial Center - Hagerstown, Maryland",
+  "page": "https://commons.wikimedia.org/w/index.php?curid=119740311",
+  "licence": "CC BY-SA 4.0",
+  "credit": "Farragutful · CC BY-SA 4.0"
+ },
+ "TSM": {
+  "legende": "Circuit gravé par TSMC, vu au microscope",
+  "source": "File:S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07389-DSC07389.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
+  "licence": "CC0",
+  "type": "produit"
  },
  "V": {
   "legende": "Terminal de paiement acceptant Visa",
@@ -185,99 +415,12 @@
   "type": "produit",
   "credit": "4300streetcar · CC BY 4.0"
  },
- "ARM": {
-  "legende": "Processeur Exynos à cœurs Arm",
-  "source": "File:Samsung-Exynos-4412-Quad SoC used in I9300.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Samsung-Exynos-4412-Quad_SoC_used_in_I9300.jpg",
-  "licence": "CC BY-SA 3.0",
+ "WFC": {
+  "legende": "Distributeur automatique Wells Fargo",
+  "source": "File:Wells Fargo ATM Machine, Colorado Springs (54556930636).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Wells_Fargo_ATM_Machine,_Colorado_Springs_(54556930636).jpg",
+  "licence": "CC BY 2.0",
   "type": "produit",
-  "credit": "Köf3 · CC BY-SA 3.0"
- },
- "QCOM": {
-  "legende": "Puce Qualcomm Atheros sur carte",
-  "source": "File:FRITZ!Box 7490 - board - Qualcomm QCA9880-BR4A-5180.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:FRITZ!Box_7490_-_board_-_Qualcomm_QCA9880-BR4A-5180.jpg",
-  "licence": "CC BY-SA 4.0",
-  "type": "produit",
-  "credit": "Raimond Spekking · CC BY-SA 4.0"
- },
- "000660.KS": {
-  "legende": "Puce mémoire SK hynix",
-  "source": "File:Philips FM02FD00B - board - Hynix HY27UV08AG5M-TPCB-40190.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Philips_FM02FD00B_-_board_-_Hynix_HY27UV08AG5M-TPCB-40190.jpg",
-  "licence": "CC BY-SA 4.0",
-  "type": "produit",
-  "credit": "Raimond Spekking · CC BY-SA 4.0"
- },
- "STX": {
-  "legende": "Disque Seagate",
-  "source": "File:Seagate ST9300AG - Seagate 100075-501 on controller board-8912.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg",
-  "licence": "CC BY-SA 4.0",
-  "type": "produit",
-  "credit": "Raimond Spekking · CC BY-SA 4.0"
- },
- "AXP": {
-  "legende": "Chèques de voyage American Express",
-  "source": "File:Travelers Cheques of 50 USD each issued by American Express, bought ca. 2012, showing incremental serial numbering.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Travelers_Cheques_of_50_USD_each_issued_by_American_Express,_bought_ca._2012,_showing_incremental_serial_numbering.jpg",
-  "licence": "CC BY-SA 4.0",
-  "type": "site",
-  "credit": "Pittigrilli · CC BY-SA 4.0"
- },
- "DLR": {
-  "legende": "Centre de données Digital Realty",
-  "source": "File:DigitalRealtyDatacenterMarkham1.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:DigitalRealtyDatacenterMarkham1.jpg",
-  "licence": "CC0",
-  "type": "produit"
- },
- "HPE": {
-  "legende": "Baies de stockage HPE Nimble",
-  "source": "File:HPE Nimble Arrays.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:HPE_Nimble_Arrays.jpg",
-  "licence": "CC BY-SA 4.0",
-  "type": "site",
-  "credit": "Prholenstein · CC BY-SA 4.0"
- },
- "MU": {
-  "legende": "Clé USB Crucial, marque de Micron",
-  "source": "File:Crucial 512 MB Gizmo USB 2 pen drive (c 2005) (outside).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Crucial_512_MB_Gizmo_USB_2_pen_drive_(c_2005)_(outside).jpg",
-  "licence": "CC BY-SA 4.0",
-  "type": "produit",
-  "credit": "Multicherry · CC BY-SA 4.0"
- },
- "ENR.DE": {
-  "legende": "Centrale thermique équipée par Siemens Energy, Leipzig",
-  "source": "File:Heizkraftwerk Leipzig Süd mit Wärmespeicher.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Heizkraftwerk_Leipzig_S%C3%BCd_mit_W%C3%A4rmespeicher.jpg",
-  "licence": "CC BY-SA 4.0",
-  "type": "site",
-  "credit": "Vinaceus · CC BY-SA 4.0"
- },
- "NDAQ": {
-  "legende": "Écrans du MarketSite Nasdaq, Times Square",
-  "source": "File:Xbox One Launch NASDAQ (1).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Xbox_One_Launch_NASDAQ_(1).jpg",
-  "licence": "CC BY-SA 4.0",
-  "type": "site",
-  "credit": "Microsoft · CC BY-SA 4.0"
- },
- "DB1.DE": {
-  "legende": "Ancienne Bourse, Deutsche Börse",
-  "source": "File:Alte Boerse (Aussenfassade).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Alte_Boerse_(Aussenfassade).jpg",
-  "licence": "CC BY-SA 3.0",
-  "type": "produit",
-  "credit": "Michael J. Zirbes (from the original description at the German Wikipedia) · CC BY-SA 3.0"
- },
- "AMAT": {
-  "legende": "Enseigne d'Applied Materials",
-  "source": "File:Applied Materials sign and Air Products plant in Southern Taiwan Science Park May 2025.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg",
-  "licence": "CC BY 4.0",
-  "type": "site",
-  "credit": "4300streetcar · CC BY 4.0"
+  "credit": "Lumen Wilde · CC BY 2.0"
  }
 }

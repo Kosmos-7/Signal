@@ -1,11 +1,11 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-38 fiches sur 104 portent une photo de leur société ; les autres gardent
+57 fiches sur 104 portent une photo de leur société ; les autres gardent
 l'illustration de leur activité. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
-## Quatre sources, par ordre de découverte
+## Cinq sources, par ordre de découverte
 
 1. **Recherche textuelle sur Commons.** Cherche des MOTS, se trompe dans 43 %
    des cas : le siège de la Banque mondiale pour Bank of America, un
@@ -18,10 +18,30 @@ fondeur, un immeuble de verre ne dit rien.
 4. **Données structurées de Commons (P180, « dépeint »).** Retourne les images
    que des contributeurs ont explicitement rattachées à l'entité. Plus large que
    P18, plus sûr qu'une recherche de mots.
+5. **Openverse.** Les quatre premières sources puisent dans le MÊME fonds,
+   Wikimedia Commons ; quand il ne contient rien, aucune ruse d'interrogation
+   n'y change quoi que ce soit. Openverse agrège Flickr, des musées et des
+   banques d'images ouvertes, soit un corpus distinct où l'on a trouvé le
+   serveur SPARC d'Oracle, la baie NetApp, les cartes bancaires et la foreuse
+   de Cameco. Contrepartie : personne n'y a validé qu'une photo montre bien la
+   société annoncée, et le tri automatique y est aussi faible qu'au point 1.
+
+### Accéder à Openverse
+
+L'API est derrière Cloudflare, dont la règle anti-robot répond 403 (erreur
+1010) à tout en-tête qui ne ressemble pas à celui d'un navigateur. Mesuré : un
+en-tête descriptif est refusé, le gabarit « Mozilla/5.0 (compatible; … ) » est
+accepté et renvoie exactement le même corps qu'un en-tête Chrome complet. C'est
+donc un filtre de préfixe, et l'on adopte la forme « compatible », qui le
+satisfait tout en disant qui appelle et où écrire. Se présenter, pas se
+déguiser.
 
 ## Ce que le tri automatique n'attrape pas
 
-Aucune de ces méthodes ne dispense de regarder. Ont été écartés à l'œil :
+Aucune de ces méthodes ne dispense de regarder. Sur les 59 sociétés pour
+lesquelles Openverse a rendu une piste, 19 ont passé l'examen visuel : deux
+sur trois étaient fausses malgré l'exigence que le nom figure dans le titre.
+Ont été écartés à l'œil :
 
 - un stade de cricket pour KKR (les Kolkata Knight Riders portent le même sigle)
 - un clavier MIDI de la marque CME, homonyme du Chicago Mercantile Exchange
@@ -30,6 +50,18 @@ Aucune de ces méthodes ne dispense de regarder. Ont été écartés à l'œil :
 - la carte de visite d'un entraîneur de basket pour Samsung
 - un panneau routier orné de manchots pour Oracle
 - des employés en manifestation pour Amazon, sujet éditorialement chargé
+- une éjection de masse coronale pour CME, un fusil pour UBS, l'Alcázar de
+  Ségovie pour Vistra (« vistra trasera »), une automobile Morgan pour Morgan
+  Stanley, une gravure de Dürer pour KLA (« leraar voor de klas »)
+- la tombe de Cecil Chubb pour Chubb, la liste des députés de 1848 pour Fair
+  Isaac, des antivols de vélo AXA pour l'assureur du même nom
+- l'ASM International métallurgiste pour ASM International, fabricant
+  d'équipement de semi-conducteurs
+- des puces SiTel et Intersil trouvées sur une carte Siemens : le circuit n'est
+  pas de Siemens, la carte l'est, l'image aurait menti
+- des immeubles de bureaux sans enseigne lisible (Lam Research, Lumentum,
+  Zoetis, Teradyne) : un bloc de verre anonyme n'illustre pas plus la société
+  que la photo d'activité qu'il aurait remplacée
 
 ## Licences
 
@@ -38,7 +70,7 @@ crédit : il est AFFICHÉ SUR LA FICHE sous la légende. Les images sont recadr�
 en 16:9 et assombries pour tenir sur fond sombre ; ces adaptations restent sous
 la licence de l'original.
 
-## Photos publiées (19 produits, 19 sites)
+## Photos publiées (31 produits, 26 sites)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -55,6 +87,22 @@ la licence de l'original.
 - Source : File:Samsung headquarters.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Samsung_headquarters.jpg
 - Licence : CC BY-SA 2.0 — crédit affiché : Oskar Alexanderson · CC BY-SA 2.0
+
+### 4062.T — Filtre à particules Ibiden monté sur un moteur Peugeot
+
+- Nature : produit
+- Fichier : `assets/titres/4062.T.jpg`
+- Source : Ibiden Peugeot DPF 0042
+- Page : https://commons.wikimedia.org/w/index.php?curid=44799677
+- Licence : CC BY-SA 4.0 — crédit affiché : Michael KR · CC BY-SA 4.0
+
+### 4063.T — Usine chimique Shin-Etsu à Isobe, préfecture de Gunma
+
+- Nature : site
+- Fichier : `assets/titres/4063.T.jpg`
+- Source : Shin-Etsu Chemical Isobe , Gunma - panoramio (1)
+- Page : https://commons.wikimedia.org/w/index.php?curid=54658191
+- Licence : CC BY-SA 3.0 — crédit affiché : Kaz Ish · CC BY-SA 3.0
 
 ### ABBN.SW — Entraînement sans engrenage ABB
 
@@ -88,6 +136,14 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Adyen_card_payment_terminal_(9607998259).jpg
 - Licence : CC BY 2.0 — crédit affiché : Alper Çuğun from Berlin, Germany · CC BY 2.0
 
+### ALV.DE — Cartes d'assurance santé Allianz
+
+- Nature : produit
+- Fichier : `assets/titres/ALV.DE.jpg`
+- Source : Allianz Krankenversicherungen Lichtbild
+- Page : https://www.flickr.com/photos/71651999@N05/7035074879
+- Licence : CC BY 2.0 — crédit affiché : FuFuWolf · CC BY 2.0
+
 ### AMAT — Enseigne d'Applied Materials
 
 - Nature : site
@@ -95,6 +151,22 @@ la licence de l'original.
 - Source : File:Applied Materials sign and Air Products plant in Southern Taiwan Science Park May 2025.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Applied_Materials_sign_and_Air_Products_plant_in_Southern_Taiwan_Science_Park_May_2025.jpg
 - Licence : CC BY 4.0 — crédit affiché : 4300streetcar · CC BY 4.0
+
+### AMD — Microprocesseur AMD AM9080 en boîtier céramique
+
+- Nature : produit
+- Fichier : `assets/titres/AMD.jpg`
+- Source : KL Advanced Micro Devices AM9080
+- Page : https://commons.wikimedia.org/w/index.php?curid=7028092
+- Licence : CC BY-SA 3.0 — crédit affiché : Konstantin Lanzet · CC BY-SA 3.0
+
+### AMZN — Cartes cadeaux Amazon en rayon
+
+- Nature : produit
+- Fichier : `assets/titres/AMZN.jpg`
+- Source : Amazon.com
+- Page : https://www.flickr.com/photos/39160147@N03/15977126920
+- Licence : CC BY 2.0 — crédit affiché : JeepersMedia · CC BY 2.0
 
 ### ARM — Processeur Exynos à cœurs Arm
 
@@ -110,7 +182,15 @@ la licence de l'original.
 - Fichier : `assets/titres/ASML.AS.jpg`
 - Source : File:ASML headquarters Veldhoven.jpg
 - Page : https://commons.wikimedia.org/wiki/File:ASML_headquarters_Veldhoven.jpg
-- Licence : Public domain (aucune obligation)
+- Licence : Public domain
+
+### AVGO — Puce Broadcom BCM7019 vue au microscope
+
+- Nature : produit
+- Fichier : `assets/titres/AVGO.jpg`
+- Source : Broadcom BCM7019 STB SoC die shot
+- Page : https://www.flickr.com/photos/140974729@N05/38256091465
+- Licence : Marque du domaine public 1.0
 
 ### AXP — Chèques de voyage American Express
 
@@ -120,6 +200,14 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Travelers_Cheques_of_50_USD_each_issued_by_American_Express,_bought_ca._2012,_showing_incremental_serial_numbering.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Pittigrilli · CC BY-SA 4.0
 
+### BAC — Carte BankAmericard Visa de Bank of America
+
+- Nature : produit
+- Fichier : `assets/titres/BAC.jpg`
+- Source : Chip-enabled Bank of America BankAmericard Visa Signature Credit Card
+- Page : https://www.flickr.com/photos/51526368@N03/16293806432
+- Licence : CC BY 2.0 — crédit affiché : Aranami · CC BY 2.0
+
 ### BX — Siège de Blackstone, New York
 
 - Nature : site
@@ -128,13 +216,21 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Blackstone_HQ_-_345_Park_Avenu.jpg
 - Licence : CC BY-SA 3.0 — crédit affiché : Americasroof (talk) · CC BY-SA 3.0
 
+### CCJ — Foreuse de Crow Butte Mining, filiale de Cameco
+
+- Nature : site
+- Fichier : `assets/titres/CCJ.jpg`
+- Source : Crow Butte Mining, a subsidiary of Cameco,
+- Page : https://www.flickr.com/photos/69383258@N08/15422784303
+- Licence : CC BY 2.0 — crédit affiché : NRCgov · CC BY 2.0
+
 ### CDNS — Siège de Cadence Design Systems
 
 - Nature : site
 - Fichier : `assets/titres/CDNS.jpg`
 - Source : File:Cadence Building 2.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Cadence_Building_2.jpg
-- Licence : Public domain (aucune obligation)
+- Licence : Public domain
 
 ### DB1.DE — Ancienne Bourse, Deutsche Börse
 
@@ -158,7 +254,7 @@ la licence de l'original.
 - Fichier : `assets/titres/DLR.jpg`
 - Source : File:DigitalRealtyDatacenterMarkham1.jpg
 - Page : https://commons.wikimedia.org/wiki/File:DigitalRealtyDatacenterMarkham1.jpg
-- Licence : CC0 (aucune obligation)
+- Licence : CC0
 
 ### ENR.DE — Centrale thermique équipée par Siemens Energy, Leipzig
 
@@ -176,13 +272,21 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Infomart_Dallas_Interior_Lobby.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Andrew nyr · CC BY-SA 4.0
 
+### ETN — Disjoncteur différentiel Eaton sur rail DIN
+
+- Nature : produit
+- Fichier : `assets/titres/ETN.jpg`
+- Source : EATON PF6-25-2-003
+- Page : https://commons.wikimedia.org/w/index.php?curid=19047797
+- Licence : CC BY-SA 3.0 — crédit affiché : Dmitry G · CC BY-SA 3.0
+
 ### GS — Siège de Goldman Sachs, New York
 
 - Nature : site
 - Fichier : `assets/titres/GS.jpg`
 - Source : File:Goldman Sachs New World Headquarters.JPG
 - Page : https://commons.wikimedia.org/wiki/File:Goldman_Sachs_New_World_Headquarters.JPG
-- Licence : Public domain (aucune obligation)
+- Licence : Public domain
 
 ### HPE — Baies de stockage HPE Nimble
 
@@ -200,13 +304,29 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:8-Canada-Square_(cropped).jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : auteur non précisé · CC BY-SA 4.0
 
+### IFX.DE — Puce Infineon PSB 50712 sur une carte de routeur
+
+- Nature : produit
+- Fichier : `assets/titres/IFX.DE.jpg`
+- Source : Sphairon Turbolink 7211 - board - Infineon PSB 50712 E-2372
+- Page : https://commons.wikimedia.org/w/index.php?curid=171699716
+- Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
+
 ### INTC — Bureaux d'Intel à Tsukuba, Japon
 
 - Nature : site
 - Fichier : `assets/titres/INTC.jpg`
 - Source : File:Intel Japan Tsukuba Office.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Intel_Japan_Tsukuba_Office.jpg
-- Licence : CC0 (aucune obligation)
+- Licence : CC0
+
+### KLAC — Site de KLA Corporation à Ann Arbor, Michigan
+
+- Nature : site
+- Fichier : `assets/titres/KLAC.jpg`
+- Source : KLA Corporation Ann Arbor Township Office
+- Page : https://commons.wikimedia.org/w/index.php?curid=165163353
+- Licence : CC BY-SA 4.0 — crédit affiché : DontCallMeLateForDinner · CC BY-SA 4.0
 
 ### META — Siège de Meta Platforms, Menlo Park
 
@@ -214,7 +334,15 @@ la licence de l'original.
 - Fichier : `assets/titres/META.jpg`
 - Source : File:Meta Platforms Headquarters Menlo Park California.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg
-- Licence : CC0 (aucune obligation)
+- Licence : CC0
+
+### MPWR — Puce Monolithic Power Systems MPS1613 sur une carte de téléviseur
+
+- Nature : produit
+- Fichier : `assets/titres/MPWR.jpg`
+- Source : Thomson 22FB3113W - board - Monolithic Power Systems MPS1613-0933
+- Page : https://commons.wikimedia.org/w/index.php?curid=190602285
+- Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
 
 ### MSFT — Campus ouest de Microsoft, Redmond
 
@@ -222,7 +350,7 @@ la licence de l'original.
 - Fichier : `assets/titres/MSFT.jpg`
 - Source : File:Aerial Microsoft West Campus August 2009.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Aerial_Microsoft_West_Campus_August_2009.jpg
-- Licence : Public domain (aucune obligation)
+- Licence : Public domain
 
 ### MU — Clé USB Crucial, marque de Micron
 
@@ -254,7 +382,15 @@ la licence de l'original.
 - Fichier : `assets/titres/NOW.jpg`
 - Source : File:ServiceNowGlobalHQ.jpg
 - Page : https://commons.wikimedia.org/wiki/File:ServiceNowGlobalHQ.jpg
-- Licence : CC0 (aucune obligation)
+- Licence : CC0
+
+### NTAP — Baie de stockage NetApp 6030 et son câblage optique
+
+- Nature : produit
+- Fichier : `assets/titres/NTAP.jpg`
+- Source : Trunked 10gig ethernet for NetApp 6030
+- Page : https://www.flickr.com/photos/8558461@N08/866577666
+- Licence : CC BY 2.0 — crédit affiché : ChrisDag · CC BY 2.0
 
 ### NVDA — Carte de développement NVIDIA Jetson
 
@@ -280,6 +416,22 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Xerox_WorkCentre_6605_-_scanner_part_-_board_2_-_On_Semiconductor_NCP3064B-8520.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
 
+### ORCL — Serveur Oracle SPARC T3-4
+
+- Nature : produit
+- Fichier : `assets/titres/ORCL.jpg`
+- Source : Oracle's SPARC T3-4 Server
+- Page : https://www.flickr.com/photos/49034885@N05/5006317222
+- Licence : CC BY 2.0 — crédit affiché : Oracle PR · CC BY 2.0
+
+### PLTR — Pavillon Palantir au Forum économique mondial de Davos
+
+- Nature : site
+- Fichier : `assets/titres/PLTR.jpg`
+- Source : Palantir pavilion, World Economic Forum, Davos, Switzerland
+- Page : https://www.flickr.com/photos/37996580417@N01/32215763362
+- Licence : CC BY-SA 2.0 — crédit affiché : gruntzooki · CC BY-SA 2.0
+
 ### PYPL — Siège de PayPal, San José
 
 - Nature : site
@@ -296,6 +448,14 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:FRITZ!Box_7490_-_board_-_Qualcomm_QCA9880-BR4A-5180.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
 
+### SCHW — Carte de débit Visa de Charles Schwab Bank
+
+- Nature : produit
+- Fichier : `assets/titres/SCHW.jpg`
+- Source : Chip-enabled Charles Schwab Bank Visa Debit Card
+- Page : https://www.flickr.com/photos/51526368@N03/16292864811
+- Licence : CC BY 2.0 — crédit affiché : Aranami · CC BY 2.0
+
 ### SNDK — Mémoire SanDisk Extreme
 
 - Nature : produit
@@ -303,6 +463,14 @@ la licence de l'original.
 - Source : File:Sandisk Extreme III 2GB flash chip.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Sandisk_Extreme_III_2GB_flash_chip.jpg
 - Licence : CC BY-SA 2.0 — crédit affiché : Uwe Hermann · CC BY-SA 2.0
+
+### SNPS — Siège de Synopsys à Mountain View
+
+- Nature : site
+- Fichier : `assets/titres/SNPS.jpg`
+- Source : Synopsys Headquarters Mountain View
+- Page : https://commons.wikimedia.org/w/index.php?curid=118340795
+- Licence : CC0 1.0
 
 ### STX — Disque Seagate
 
@@ -312,13 +480,29 @@ la licence de l'original.
 - Page : https://commons.wikimedia.org/wiki/File:Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
 
+### SU.PA — Usine Schneider Electric
+
+- Nature : site
+- Fichier : `assets/titres/SU.PA.jpg`
+- Source : Schneider Electric factory
+- Page : https://commons.wikimedia.org/w/index.php?curid=2025468
+- Licence : CC BY-SA 3.0 — crédit affiché : Chmee2 · CC BY-SA 3.0
+
+### TFC — Truist Financial Center à Hagerstown, Maryland
+
+- Nature : site
+- Fichier : `assets/titres/TFC.jpg`
+- Source : Truist Financial Center - Hagerstown, Maryland
+- Page : https://commons.wikimedia.org/w/index.php?curid=119740311
+- Licence : CC BY-SA 4.0 — crédit affiché : Farragutful · CC BY-SA 4.0
+
 ### TSM — Circuit gravé par TSMC, vu au microscope
 
 - Nature : produit
 - Fichier : `assets/titres/TSM.jpg`
 - Source : File:S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07389-DSC07389.jpg
 - Page : https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg
-- Licence : CC0 (aucune obligation)
+- Licence : CC0
 
 ### V — Terminal de paiement acceptant Visa
 
