@@ -188,6 +188,48 @@ LIEUX = {
 }
 
 
+# SCÈNES DE PRÉSENTATION : le dirigeant montrant le produit, sur scène.
+# C'est le registre de la photo retenue pour NVIDIA, Jensen Huang tenant le
+# superchip GB200 devant le logo. On cherche donc les noms des dirigeants
+# associés aux grands rendez-vous où les gammes se dévoilent : Computex, CES,
+# les keynotes maison.
+#
+# CRITÈRE DE SÉLECTION, plus exigeant que d'habitude. Le PRODUIT doit être
+# visible dans l'image. Un dirigeant seul devant un micro reste un portrait, et
+# les portraits ont été refusés tout au long de ce travail, de Larry Fink au
+# fondateur de Marvell : un visage n'illustre pas une entreprise. Ce qui change
+# ici, c'est la présence de l'objet dans la main.
+#
+# Les noms couvrent aussi les prédécesseurs récents, parce que les photothèques
+# sont pleines de clichés d'il y a trois ou cinq ans.
+SCENES = {
+    "AMD":       ["Lisa Su Computex", "Lisa Su CES", "Lisa Su AMD keynote"],
+    "INTC":      ["Pat Gelsinger keynote", "Lip-Bu Tan Intel", "Intel keynote wafer"],
+    "TSM":       ["C. C. Wei TSMC", "Mark Liu TSMC"],
+    "QCOM":      ["Cristiano Amon", "Qualcomm CES keynote"],
+    "AVGO":      ["Hock Tan Broadcom"],
+    "ARM":       ["Rene Haas Arm"],
+    "MU":        ["Sanjay Mehrotra Micron"],
+    "005930.KS": ["Samsung Galaxy Unpacked", "Samsung CES keynote"],
+    "000660.KS": ["SK hynix CES", "SK hynix exhibition"],
+    "ASML.AS":   ["Christophe Fouquet ASML", "Peter Wennink ASML"],
+    "AMAT":      ["Gary Dickerson Applied Materials"],
+    "LRCX":      ["Tim Archer Lam Research"],
+    "KLAC":      ["Rick Wallace KLA"],
+    "CSCO":      ["Chuck Robbins Cisco keynote"],
+    "DELL":      ["Michael Dell keynote", "Michael Dell Dell Technologies World"],
+    "ANET":      ["Jayshree Ullal"],
+    "MRVL":      ["Matt Murphy Marvell"],
+    "ORCL":      ["Larry Ellison keynote", "Safra Catz Oracle"],
+    "CRM":       ["Marc Benioff Dreamforce"],
+    "MSFT":      ["Satya Nadella keynote"],
+    "META":      ["Mark Zuckerberg Connect", "Mark Zuckerberg keynote"],
+    "GOOGL":     ["Sundar Pichai keynote", "Google I/O keynote"],
+    "AMZN":      ["Andy Jassy re:Invent", "Amazon re:Invent keynote"],
+    "SIE.DE":    ["Roland Busch Siemens"],
+}
+
+
 def chercher_commons(terme, limite=14):
     """Recherche plein texte de Commons, restreinte aux fichiers."""
     try:
@@ -206,6 +248,8 @@ def main():
     ap.add_argument("--sortie", default="assets/titres/marques")
     ap.add_argument("--limite", type=int, default=0)
     ap.add_argument("--par-societe", type=int, default=3)
+    ap.add_argument("--scenes", action="store_true",
+                    help="dirigeants presentant le produit sur scene")
     ap.add_argument("--termes", default="",
                     help="recherche ponctuelle, format TICKER=terme|terme ; "
                          "separer plusieurs societes par des virgules. Evite "
@@ -229,9 +273,10 @@ def main():
                 raise SystemExit(f"terme mal forme : « {bloc} », attendu TICKER=a|b")
             carte[tk.strip()] = termes
     else:
-        carte = LIEUX if a.lieux else (AMELIORATIONS if a.ameliorer else MARQUES)
+        carte = (SCENES if a.scenes else LIEUX if a.lieux
+                 else AMELIORATIONS if a.ameliorer else MARQUES)
     # En mode amelioration on vise justement celles qui ont deja une image.
-    cibles = ([t for t in sorted(carte)] if (a.ameliorer or a.lieux or a.termes)
+    cibles = ([t for t in sorted(carte)] if (a.ameliorer or a.lieux or a.termes or a.scenes)
               else [t for t in sorted(carte) if t not in deja])
     if a.limite:
         cibles = cibles[: a.limite]
@@ -281,7 +326,8 @@ def main():
             print(f"[{i:3d}/{len(cibles)}] {tk:9s} {len(propositions):3d} pistes, "
                   f"rien d'exploitable", flush=True)
 
-    sortie_json = ("photos_termes.json" if a.termes
+    sortie_json = ("photos_scenes.json" if a.scenes
+                   else "photos_termes.json" if a.termes
                    else "photos_lieux.json" if a.lieux
                    else "photos_ameliorer.json" if a.ameliorer else "photos_marques.json")
     with open(sortie_json, "w", encoding="utf-8") as f:

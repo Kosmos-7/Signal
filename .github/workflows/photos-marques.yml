@@ -19,6 +19,10 @@ on:
         description: "Repasser sur les fiches déjà illustrées jugées faibles"
         type: boolean
         default: false
+      scenes:
+        description: "Dirigeants présentant le produit sur scène"
+        type: boolean
+        default: false
       termes:
         description: "Recherche ponctuelle, format TICKER=terme|terme"
         type: string
@@ -59,6 +63,7 @@ jobs:
             --par-societe ${{ inputs.par_societe || '3' }} \
             ${{ (inputs.ameliorer == true || inputs.ameliorer == 'true') && '--ameliorer' || '' }} \
             ${{ (inputs.lieux == true || inputs.lieux == 'true') && '--lieux' || '' }} \
+            ${{ (inputs.scenes == true || inputs.scenes == 'true') && '--scenes' || '' }} \
             ${TERMES:+--termes "$TERMES"}
       - name: Publier le rapport
         if: always()
@@ -70,6 +75,7 @@ jobs:
             photos_ameliorer.json
             photos_lieux.json
             photos_termes.json
+            photos_scenes.json
             assets/titres/marques/
           retention-days: 7
       - name: Commiter pour arbitrage visuel
@@ -85,6 +91,7 @@ jobs:
           git add -A photos_ameliorer.json || true
           git add -A photos_lieux.json || true
           git add -A photos_termes.json || true
+          git add -A photos_scenes.json || true
           if git diff --staged --quiet; then
             echo "Rien de nouveau."
           else
