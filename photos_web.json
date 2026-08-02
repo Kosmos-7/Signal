@@ -1,8 +1,30 @@
 {
- "societes": 8,
+ "societes": 9,
  "detail": {
+  "6146.T": {
+   "candidats": [
+    {
+     "image": "https://www.disco.co.jp/eg/products/dicer/img/dad3650_2.png",
+     "page": "https://www.disco.co.jp/eg/products/dicer/dad3650.html",
+     "domaine": "disco.co.jp",
+     "dimensions": "1001x1001",
+     "conditions": "non établies",
+     "credit": "DISCO Corporation",
+     "poids": 31951
+    }
+   ]
+  },
   "8035.T": {
    "candidats": [
+    {
+     "image": "https://www.tel.com/product/pv8va20000001boh-img/pv8va20000001d6w.png",
+     "page": "https://www.tel.com/product/lithius.html",
+     "domaine": "tel.com",
+     "dimensions": "1956x850",
+     "conditions": "non établies",
+     "credit": "Tokyo Electron",
+     "poids": 55940
+    },
     {
      "image": "https://www.tel.com/sustainability/img/mv-index-2025-sp.jpg",
      "page": "https://www.tel.com/sustainability/",
@@ -20,24 +42,6 @@
      "conditions": "non établies",
      "credit": "Tokyo Electron",
      "poids": 50729
-    },
-    {
-     "image": "http://www.tel.com/museum/img/topimg_concept01.jpg",
-     "page": "https://www.tel.com/museum/",
-     "domaine": "tel.com",
-     "dimensions": "980x473",
-     "conditions": "non établies",
-     "credit": "Tokyo Electron",
-     "poids": 54622
-    },
-    {
-     "image": "https://www.tel.com/museum/img/museum_top.jpg",
-     "page": "https://www.tel.com/museum/",
-     "domaine": "tel.com",
-     "dimensions": "1642x924",
-     "conditions": "non établies",
-     "credit": "Tokyo Electron",
-     "poids": 58489
     }
    ]
   },
@@ -101,6 +105,15 @@
   },
   "ASM.AS": {
    "candidats": [
+    {
+     "image": "https://www.asm.com/media/wqed20xm/pulsar-landscape.png?width=952&height=500&quality=90&v=1dbf7eea27deb80",
+     "page": "https://www.asm.com/solutions/products/atomic-layer-deposition-products/pulsar-xp-ald",
+     "domaine": "asm.com",
+     "dimensions": "952x500",
+     "conditions": "non établies",
+     "credit": "ASM International",
+     "poids": 22760
+    },
     {
      "image": "https://www.asm.com/media/0yhffzpf/sustainability_image_environment_3200x1600.jpg?width=1200&height=630&quality=90&v=1db83a8761a2190",
      "page": "https://www.asm.com/sustainability",
