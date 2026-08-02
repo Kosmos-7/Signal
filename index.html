@@ -107,7 +107,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   /* Plein écran : calque CSS et non l'API Fullscreen, que Safari iOS refuse sur
      autre chose qu'une vidéo. Un calque marche partout, y compris en rotation. */
   .chx-fs{margin-left:auto}
-  #chartsec.chx-full{position:fixed;inset:0;z-index:60;background:var(--bg);
+  #chartsec.chx-full{position:fixed;inset:0;z-index:120;background:var(--bg);
     padding:.7rem .9rem 1rem;overflow:auto;display:flex;flex-direction:column}
   #chartsec.chx-full .chx-wrap{flex:1;min-height:0;display:flex;align-items:center}
   #chartsec.chx-full .chx-note{margin-bottom:.2rem}
@@ -314,6 +314,31 @@ Avant, charts.json monolithique était téléchargé au premier rendu, 561 Ko
    CH sert de cache mémoire ; une entrée `null` mémorise une absence (404 ou
    fichier illisible) pour ne pas re-tenter à chaque ouverture. */
 const CH={}, CHP={}, CHX_VUE={};   // payloads, requêtes en vol, fenêtre affichée par ticker
+
+/* Plein écran : le bloc graphique est déplacé dans <body>. Sans ce portail il
+   reste enfermé dans le contexte d'empilement de .stage (position:fixed,
+   z-index:5) et se retrouve peint SOUS le rail et l'en-tête — quel que soit son
+   propre z-index. CHX_HOME garde sa place d'origine pour l'y remettre. */
+let CHX_HOME=null;
+function chxPortalIn(host){
+  if(CHX_HOME||!host.parentNode)return;
+  CHX_HOME=document.createElement('div');
+  host.parentNode.insertBefore(CHX_HOME,host);
+  document.body.appendChild(host);
+}
+function chxPortalOut(host){
+  if(CHX_HOME&&CHX_HOME.parentNode){CHX_HOME.parentNode.insertBefore(host,CHX_HOME);CHX_HOME.remove();}
+  CHX_HOME=null;
+}
+/* Avant tout nouveau rendu de fiche : render() recrée un #chartsec dans le
+   document, un bloc resté en portail produirait deux éléments de même id. */
+function chxReset(){
+  const orphelin=document.querySelector('body > #chartsec');
+  if(orphelin)orphelin.remove();
+  if(CHX_HOME&&CHX_HOME.parentNode)CHX_HOME.remove();
+  CHX_HOME=null;
+  document.body.classList.remove('chx-locked');
+}
 function loadChart(tk){
   if(tk in CH)return Promise.resolve(CH[tk]);
   if(CHP[tk])return CHP[tk];
@@ -923,6 +948,7 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
   // fenêtre choisie par l'utilisateur : basculer ne doit pas lui reprendre son zoom.
   function toggleFull(){
     const on=!host.classList.contains('chx-full');
+    if(on)chxPortalIn(host); else chxPortalOut(host);
     host.classList.toggle('chx-full',on);
     document.body.classList.toggle('chx-locked',on);
     CHX_VUE[s.ticker]=[t0v,t1v];
@@ -1068,6 +1094,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
     :'<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
       ((brief&&!hasActu)?'':'<div>'+sec('Actu',(hasActu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div>')+'</div>'+
       ((brief&&!hasActu)?briefNote():'');
+  chxReset();
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
