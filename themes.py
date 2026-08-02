@@ -191,18 +191,22 @@ THEMES_CURES = [
             "À l'inverse les banques affichent des multiples optiquement bas qui reflètent un "
             "risque de bilan que le screener ne mesure pas."
         ),
-        "tickers": [
-            # 1 — Bilans : banques universelles et de financement
-            "JPM", "BAC", "WFC", "GS", "MS", "TFC", "SCHW",
-            "HSBA.L", "BNP.PA", "UBSG.SW",
-            # 2 — Bilans : assurance et courtage
-            "CB", "PGR", "ALV.DE", "CS.PA", "MUV2.DE", "MMC",
-            # 3 — Flux : réseaux de paiement et acquisition
-            "V", "MA", "AXP", "ADYEN.AS", "PYPL",
-            # 4 — Gestion d'actifs et capital-investissement
-            "BLK", "BX", "KKR",
-            # 5 — Péages : indices, notation, places de marché, scoring
-            "SPGI", "MCO", "MSCI", "ICE", "CME", "NDAQ", "LSEG.L", "DB1.DE", "FICO",
+        # Même structuration que le thème infra-IA : les familles étaient en
+        # commentaires, elles deviennent une donnée publiée. Elles servent aussi
+        # de clé d'illustration, chaque famille ayant sa photo.
+        "maillons": [
+            {"label": "Bilans · banques",
+             "tickers": ["JPM", "BAC", "WFC", "GS", "MS", "TFC", "SCHW",
+                         "HSBA.L", "BNP.PA", "UBSG.SW"]},
+            {"label": "Bilans · assurance & courtage",
+             "tickers": ["CB", "PGR", "ALV.DE", "CS.PA", "MUV2.DE", "MMC"]},
+            {"label": "Flux · réseaux de paiement",
+             "tickers": ["V", "MA", "AXP", "ADYEN.AS", "PYPL"]},
+            {"label": "Gestion d'actifs & capital-investissement",
+             "tickers": ["BLK", "BX", "KKR"]},
+            {"label": "Péages · indices, notation & places de marché",
+             "tickers": ["SPGI", "MCO", "MSCI", "ICE", "CME", "NDAQ",
+                         "LSEG.L", "DB1.DE", "FICO"]},
         ],
     },
 ]

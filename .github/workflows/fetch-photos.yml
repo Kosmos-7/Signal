@@ -18,6 +18,10 @@ on:
         description: "Nombre de candidats par thème"
         type: string
         default: "3"
+      activites:
+        description: "Récolter les illustrations d'ACTIVITÉ (maillons et secteurs)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,21 +48,26 @@ jobs:
         run: pip install --quiet Pillow
 
       - name: Chercher les photos (domaine public / CC0 uniquement)
-        run: python tools/fetch_theme_photos.py --candidats ${{ inputs.candidats || '3' }}
+        run: |
+          python tools/fetch_theme_photos.py --candidats ${{ inputs.candidats || '3' }} \
+            ${{ inputs.activites && '--activites --sortie assets/activites/candidats' || '' }}
 
       - name: Publier les candidats en artefact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: photos-candidates
-          path: assets/themes/candidats/
+          path: |
+            assets/themes/candidats/
+            assets/activites/candidats/
           retention-days: 7
 
       - name: Commiter les candidats pour arbitrage visuel
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
-          git add assets/themes/candidats/
+          git add assets/themes/candidats/ assets/activites/candidats/ 2>/dev/null || true
+          git add -A assets/
           if git diff --staged --quiet; then
             echo "Aucun candidat nouveau."
           else
