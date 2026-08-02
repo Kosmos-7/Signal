@@ -11,6 +11,30 @@
  ],
  "6146.T": [
   {
+   "page": "https://www.disco.co.jp/eg/products/dicer/dad3350.html",
+   "domaine": "disco.co.jp",
+   "conditions": "non établies",
+   "credit": "DISCO Corporation"
+  },
+  {
+   "page": "https://www.disco.co.jp/eg/products/dicer/dad3351.html",
+   "domaine": "disco.co.jp",
+   "conditions": "non établies",
+   "credit": "DISCO Corporation"
+  },
+  {
+   "page": "https://www.disco.co.jp/eg/products/dicer/dad3650.html",
+   "domaine": "disco.co.jp",
+   "conditions": "non établies",
+   "credit": "DISCO Corporation"
+  },
+  {
+   "page": "https://www.disco.co.jp/eg/news/press/20191112.html",
+   "domaine": "disco.co.jp",
+   "conditions": "non établies",
+   "credit": "DISCO Corporation"
+  },
+  {
    "page": "https://www.disco.co.jp/eg/solution/index.html",
    "domaine": "disco.co.jp",
    "conditions": "non établies",
@@ -69,6 +93,30 @@
  ],
  "8035.T": [
   {
+   "page": "https://www.tel.com/product/act.html",
+   "domaine": "tel.com",
+   "conditions": "non établies",
+   "credit": "Tokyo Electron"
+  },
+  {
+   "page": "https://www.tel.com/product/lithius.html",
+   "domaine": "tel.com",
+   "conditions": "non établies",
+   "credit": "Tokyo Electron"
+  },
+  {
+   "page": "https://www.tel.com/news/product/2025/20251215_002.html",
+   "domaine": "tel.com",
+   "conditions": "non établies",
+   "credit": "Tokyo Electron"
+  },
+  {
+   "page": "https://www.tel.com/product/all/index.html",
+   "domaine": "tel.com",
+   "conditions": "non établies",
+   "credit": "Tokyo Electron"
+  },
+  {
    "page": "https://www.tel.com/about/",
    "domaine": "tel.com",
    "conditions": "non établies",
@@ -100,6 +148,18 @@
   }
  ],
  "ASM.AS": [
+  {
+   "page": "https://www.asm.com/our-technology-products",
+   "domaine": "asm.com",
+   "conditions": "non établies",
+   "credit": "ASM International"
+  },
+  {
+   "page": "https://www.asm.com/solutions/products/atomic-layer-deposition-products/pulsar-xp-ald",
+   "domaine": "asm.com",
+   "conditions": "non établies",
+   "credit": "ASM International"
+  },
   {
    "page": "https://www.asm.com/about-asm",
    "domaine": "asm.com",
@@ -250,6 +310,24 @@
   }
  ],
  "ASX": [
+  {
+   "page": "https://www.aseglobal.com/press-room/asem-launch-p5/",
+   "domaine": "aseglobal.com",
+   "conditions": "non établies",
+   "credit": "ASE Technology Holding"
+  },
+  {
+   "page": "https://www.aseglobal.com/press-room/ise-new-site-in-mexico/",
+   "domaine": "aseglobal.com",
+   "conditions": "non établies",
+   "credit": "ASE Technology Holding"
+  },
+  {
+   "page": "https://www.aseglobal.com/press-room/",
+   "domaine": "aseglobal.com",
+   "conditions": "non établies",
+   "credit": "ASE Technology Holding"
+  },
   {
    "page": "https://www.aseglobal.com/en/services/",
    "domaine": "aseglobal.com",
