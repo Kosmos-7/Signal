@@ -432,7 +432,7 @@ function openWl(id,tk){
   if(!s){ nav('#/'); return; }             // watchlist vide (ne devrait pas arriver)
   if(tk&&s.ticker!==tk){ nav(hashOf(id,s.ticker)); return; }   // ticker inconnu → 1re valeur
   if(!tk){ history.replaceState(null,'',hashOf(id,s.ticker)); navActive(); }
-  pick(s);
+  pick(s,!tk);   // ouverture de la watchlist elle-même : liste visible d'abord (mobile)
 }
 
 /* Un titre hors top 30 n'existe que sous forme compacte dans universe.json :
@@ -455,11 +455,44 @@ function themesOf(tk){ const u=U.stocks[tk];return (u&&Array.isArray(u.themes))?
 
 const REG={PA:'EU',DE:'EU',AS:'EU',BR:'EU',MI:'EU',MC:'EU',AT:'EU',HE:'EU',VI:'EU',LI:'EU',IS:'EU',
   L:'UK',SW:'CH',CO:'DK',ST:'SE',OL:'NO',T:'JP',KS:'KR',KQ:'KR',HK:'HK',TO:'CA',AX:'AU'};
+
+/* Noms d'usage pour les LISTES : les données portent la raison sociale Yahoo
+   tronquée à 22 caractères (« Taiwan Semiconductor M ») — illisible dans un
+   rail. NICK couvre les cas où le nom d'usage diffère vraiment (ou arrive
+   tronqué/en capitales) ; courtNom() retire les suffixes juridiques du reste.
+   La FICHE garde le nom complet — le raccourci est un confort de liste. */
+const NICK={TSM:'TSMC','000660.KS':'SK hynix','005930.KS':'Samsung','4063.T':'Shin-Etsu',
+  '6146.T':'Disco','8035.T':'Tokyo Electron','6857.T':'Advantest','4062.T':'Ibiden',
+  ASX:'ASE',ARM:'Arm',AMD:'AMD',AMAT:'Applied Materials',LRCX:'Lam Research',CDNS:'Cadence',
+  MU:'Micron',WDC:'Western Digital',STX:'Seagate',SNDK:'SanDisk',
+  CRWV:'CoreWeave',NBIS:'Nebius',HPE:'HPE',DLR:'Digital Realty',
+  QCOM:'Qualcomm',MRVL:'Marvell',MPWR:'Monolithic Power',ON:'onsemi',
+  CEG:'Constellation',GEV:'GE Vernova',VRT:'Vertiv',ETN:'Eaton',
+  'SU.PA':'Schneider Electric','SIE.DE':'Siemens','ENR.DE':'Siemens Energy',
+  'ABBN.SW':'ABB','IFX.DE':'Infineon','ALV.DE':'Allianz','MUV2.DE':'Munich Re',
+  'CS.PA':'AXA','BNP.PA':'BNP Paribas','HSBA.L':'HSBC','UBSG.SW':'UBS',
+  'LSEG.L':'LSEG','DB1.DE':'Deutsche Börse','ADYEN.AS':'Adyen','ASML.AS':'ASML','ASM.AS':'ASM',
+  JPM:'JPMorgan',BAC:'Bank of America',GS:'Goldman Sachs',MS:'Morgan Stanley',
+  WFC:'Wells Fargo',TFC:'Truist',SCHW:'Charles Schwab',AXP:'American Express',
+  MA:'Mastercard',PGR:'Progressive',MCO:"Moody's",SPGI:'S&P Global',ICE:'ICE',
+  FICO:'FICO',BLK:'BlackRock',BX:'Blackstone',NDAQ:'Nasdaq',CME:'CME',
+  MSFT:'Microsoft',GOOGL:'Alphabet',AMZN:'Amazon',META:'Meta',ORCL:'Oracle',
+  NVDA:'NVIDIA',AVGO:'Broadcom',INTC:'Intel',CSCO:'Cisco',ANET:'Arista',
+  CIEN:'Ciena',LITE:'Lumentum',COHR:'Coherent',DELL:'Dell',EQIX:'Equinix',
+  PWR:'Quanta',VST:'Vistra',CCJ:'Cameco',KLAC:'KLA',SNPS:'Synopsys',TER:'Teradyne',
+  TCEHY:'Tencent',RHHBY:'Roche',PDD:'PDD'};
+const _SUFX=/[,\s]+(incorporated|inc\.?|corporation|corp\.?|company|co\.?|limited|ltd\.?|plc|n\.?v\.?|s\.?e\.?|a\.?g\.?|s\.?a\.?|llc|holdings?|group)\s*$/i;
+function courtNom(tk,nom){
+  if(NICK[tk])return NICK[tk];
+  let n=(nom||tk).trim(),p;
+  while((p=n.replace(_SUFX,''))!==n&&p.length>2)n=p.trim();
+  return n;
+}
 function region(s){ if(s.badge)return s.badge; const p=(s.ticker||'').split('.'); return p.length>1?(REG[p[p.length-1].toUpperCase()]||'INT'):'US'; }
 
 function listBuild(){const l=document.getElementById('rl');if(!l)return;l.innerHTML='';
   const ligne=s=>{const r=document.createElement('div');r.className='row';s._r=r;
-    r.innerHTML='<div><div class="nm">'+sv(s.name)+'</div><div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+sv(s.sector||'')+'</span></div></div>'+
+    r.innerHTML='<div><div class="nm">'+sv(courtNom(s.ticker,s.name))+'</div><div class="rl-meta"><span class="reg">'+region(s)+'</span><span class="sct">'+sv(s.sector||'')+'</span></div></div>'+
       '<span class="rr"><div class="sc">'+(s.score==null?'—':s.score)+'</div></span>';
     r.tabIndex=0;r.setAttribute('role','button');
     const goto=()=>nav(hashOf(curWl?curWl.id:MAIN,s.ticker));
@@ -582,10 +615,17 @@ function mk(k,v){return'<div><span class="k">'+k+'</span><span class="v">'+v+'</
 function bblist(arr){return arr&&arr.length?'<ul>'+arr.map(p=>'<li>'+sv(p)+'</li>').join('')+'</ul>':'<p class="stub">—</p>';}
 
 function typeHTML(el,html){const tmp=document.createElement('div');tmp.innerHTML=html;const ps=[...tmp.querySelectorAll('p')];const full=(ps.length?ps.map(p=>p.textContent):[tmp.textContent]).join('  ');el.innerHTML='<p class="resume type-cur" id="rtype"></p>';const t=document.getElementById('rtype');const _tt=performance.now(),dur=Math.min(1500,Math.max(500,full.length*6));(function tick(){const e=Math.min(1,(performance.now()-_tt)/dur);if(t)t.textContent=full.slice(0,Math.floor(e*full.length));if(e<1)requestAnimationFrame(tick);else el.innerHTML=html;})();}
-function pick(s){sel=s;document.body.classList.remove('v-index');curList.forEach(o=>o._r&&o._r.classList.toggle('sel',o===s));var ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');const st=document.querySelector('.stage');if(st)st.scrollTop=0;render(s);
+function pick(s,sansSaut){sel=s;document.body.classList.remove('v-index');curList.forEach(o=>o._r&&o._r.classList.toggle('sel',o===s));var ll=document.getElementById('lexlink');if(ll)ll.classList.remove('active');const st=document.querySelector('.stage');if(st)st.scrollTop=0;render(s);
   // mobile : le rail est AU-DESSUS de la scène en flux vertical — sans ce saut,
-  // choisir un titre ne montre rien tant qu'on n'a pas fait défiler la page.
-  if(matchMedia('(max-width:900px)').matches){const d=document.getElementById('doc');if(d)requestAnimationFrame(()=>d.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'}));}}
+  // CHOISIR un titre ne montre rien tant qu'on n'a pas fait défiler la page.
+  // Mais à l'OUVERTURE d'une watchlist (aucun titre demandé), sauter à la
+  // fiche cachait la liste : un nouvel utilisateur tombait sur NVIDIA sans
+  // voir qu'il y a 59 titres au-dessus. Dans ce cas on reste en haut de page,
+  // liste visible, la première fiche est déjà rendue juste en dessous.
+  if(matchMedia('(max-width:900px)').matches){
+    if(sansSaut){window.scrollTo({top:0,behavior:'auto'});}
+    else{const d=document.getElementById('doc');if(d)requestAnimationFrame(()=>d.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'}));}
+  }}
 function lexi(t,d){return '<div><div class="lext">'+t+'</div><div class="lexd">'+d+'</div></div>';}
 function lexsec(h,items){return '<div class="sec"><div class="sec-h">'+h+'</div><div class="lexg">'+items+'</div></div>';}
 function showLexique(){
@@ -651,6 +691,10 @@ function buildChart(s){
       const dz=document.getElementById('dzone');
       if(dz){ dz.innerHTML=dataZone(s,s.breakdown,false);
         dz.querySelectorAll('.f').forEach(el=>el.style.width=el.dataset.w+'%'); }
+      // le breakdown porte aussi la raison sociale complète — la fiche la
+      // préfère au nom tronqué à 22 caractères des listes
+      const nm=document.querySelector('.d-nm');
+      if(nm&&s.breakdown.nom_complet)nm.textContent=s.breakdown.nom_complet+' · '+(s.sector||'');
     }
     drawChart(s); });
 }
@@ -927,7 +971,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
       (brief?briefNote():'');
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
-    '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
+    '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span></div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div id="chartsec"></div>'+

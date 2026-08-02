@@ -1274,6 +1274,10 @@ def score_ticker(ticker, vix=None):
             # celle dans laquelle `prix` est réellement exprimé.
             "prix":                  round(prix, 2),
             "devise":                "GBP" if info_curr == "GBp" else (info_curr or ""),
+            # Raison sociale NON tronquée — le champ "name" du résultat est
+            # coupé à 22 caractères pour les listes ; la fiche, elle, affiche
+            # le nom complet (les listes du site utilisent un nom d'usage).
+            "nom_complet":           (info.get("longName") or info.get("shortName") or ticker),
             # Fondamentaux
             "rev_growth_pct":        round(rev_growth * 100, 1),   # trimestriel, glissement annuel (MRQ vs même trim. N-1)
             "net_margin_pct":        round(margins * 100, 1),      # TTM (12 mois glissants)
