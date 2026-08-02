@@ -107,7 +107,7 @@ Services où le camion d'un tiers occupe le premier plan.
 
 Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 
-## Photos publiées (49 produits, 34 sites)
+## Photos publiées (52 produits, 31 sites)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -240,7 +240,7 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 
 ### AXP — Chèques de voyage American Express
 
-- Nature : site
+- Nature : produit
 - Fichier : `assets/titres/AXP.jpg`
 - Source : File:Travelers Cheques of 50 USD each issued by American Express, bought ca. 2012, showing incremental serial numbering.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Travelers_Cheques_of_50_USD_each_issued_by_American_Express,_bought_ca._2012,_showing_incremental_serial_numbering.jpg
@@ -330,7 +330,7 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 
 ### DB1.DE — Ancienne Bourse, Deutsche Börse
 
-- Nature : produit
+- Nature : site
 - Fichier : `assets/titres/DB1.DE.jpg`
 - Source : File:Alte Boerse (Aussenfassade).jpg
 - Page : https://commons.wikimedia.org/wiki/File:Alte_Boerse_(Aussenfassade).jpg
@@ -346,7 +346,7 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 
 ### DLR — Centre de données Digital Realty
 
-- Nature : produit
+- Nature : site
 - Fichier : `assets/titres/DLR.jpg`
 - Source : File:DigitalRealtyDatacenterMarkham1.jpg
 - Page : https://commons.wikimedia.org/wiki/File:DigitalRealtyDatacenterMarkham1.jpg
@@ -419,19 +419,19 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 
 ### HPE — Baies de stockage HPE Nimble
 
-- Nature : site
+- Nature : produit
 - Fichier : `assets/titres/HPE.jpg`
 - Source : File:HPE Nimble Arrays.jpg
 - Page : https://commons.wikimedia.org/wiki/File:HPE_Nimble_Arrays.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Prholenstein · CC BY-SA 4.0
 
-### HSBA.L — Tour HSBC, Canary Wharf, Londres
+### HSBA.L — Distributeurs HSBC à Hong Kong
 
-- Nature : site
+- Nature : produit
 - Fichier : `assets/titres/HSBA.L.jpg`
-- Source : File:8-Canada-Square (cropped).jpg
-- Page : https://commons.wikimedia.org/wiki/File:8-Canada-Square_(cropped).jpg
-- Licence : CC BY-SA 4.0 — crédit affiché : auteur non précisé · CC BY-SA 4.0
+- Source : File:HK Causeway Bay Times Square basement interior 10 HSBC ATM.JPG
+- Page : https://commons.wikimedia.org/wiki/File:HK_Causeway_Bay_Times_Square_basement_interior_10_HSBC_ATM.JPG
+- Licence : CC BY-SA 3.0 — crédit affiché : Wuaiubon · CC BY-SA 3.0
 
 ### ICE — Salle des marchés du New York Stock Exchange, filiale d'Intercontinental Exchange
 
@@ -449,13 +449,13 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 - Page : https://commons.wikimedia.org/w/index.php?curid=171699716
 - Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
 
-### INTC — Bureaux d'Intel à Tsukuba, Japon
+### INTC — Plaquette de processeurs Pentium d'Intel
 
-- Nature : site
+- Nature : produit
 - Fichier : `assets/titres/INTC.jpg`
-- Source : File:Intel Japan Tsukuba Office.jpg
-- Page : https://commons.wikimedia.org/wiki/File:Intel_Japan_Tsukuba_Office.jpg
-- Licence : CC0
+- Source : File:Wafer with Pentium chips.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Wafer_with_Pentium_chips.jpg
+- Licence : CC BY 2.0 — crédit affiché : Naotake Murayama from Los Altos, CA, USA · CC BY 2.0
 
 ### INTU — TurboTax d'Intuit, édition 2003
 
@@ -499,13 +499,13 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Lam Research
 - Récupérée le : 2026-08-02 sur le site officiel
 
-### META — Siège de Meta Platforms, Menlo Park
+### META — Casque Meta Quest 3
 
-- Nature : site
+- Nature : produit
 - Fichier : `assets/titres/META.jpg`
-- Source : File:Meta Platforms Headquarters Menlo Park California.jpg
-- Page : https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg
-- Licence : CC0
+- Source : File:Visitor using a Meta Quest 3 VR headset at IPP Greifswald 2025.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Visitor_using_a_Meta_Quest_3_VR_headset_at_IPP_Greifswald_2025.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Siarhei Besarab · CC BY-SA 4.0
 
 ### MPWR — Puce Monolithic Power Systems MPS1613 sur une carte de téléviseur
 
@@ -539,13 +539,13 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 - Page : https://commons.wikimedia.org/wiki/File:Aerial_Microsoft_West_Campus_August_2009.jpg
 - Licence : Public domain
 
-### MU — Clé USB Crucial, marque de Micron
+### MU — SSD Crucial MX300, marque de Micron
 
 - Nature : produit
 - Fichier : `assets/titres/MU.jpg`
-- Source : File:Crucial 512 MB Gizmo USB 2 pen drive (c 2005) (outside).jpg
-- Page : https://commons.wikimedia.org/wiki/File:Crucial_512_MB_Gizmo_USB_2_pen_drive_(c_2005)_(outside).jpg
-- Licence : CC BY-SA 4.0 — crédit affiché : Multicherry · CC BY-SA 4.0
+- Source : File:Crucial SSD MX300 525GB-8478.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Crucial_SSD_MX300_525GB-8478.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
 
 ### NDAQ — Écrans du MarketSite Nasdaq, Times Square
 
@@ -579,13 +579,13 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 - Page : https://www.flickr.com/photos/8558461@N08/866577666
 - Licence : CC BY 2.0 — crédit affiché : ChrisDag · CC BY 2.0
 
-### NVDA — Carte de développement NVIDIA Jetson
+### NVDA — Processeur graphique NVIDIA TU104, coeur des GeForce RTX 2080
 
 - Nature : produit
 - Fichier : `assets/titres/NVDA.jpg`
-- Source : File:Nvidia Jetson TK1 - SD Card Slot (14488611070).png
-- Page : https://commons.wikimedia.org/wiki/File:Nvidia_Jetson_TK1_-_SD_Card_Slot_(14488611070).png
-- Licence : CC BY-SA 2.0 — crédit affiché : Gareth Halfacree from Bradford, UK · CC BY-SA 2.0
+- Source : Nvidia@12nm@Turing@TU104@GeForce_RTX_2080@S_TAIWAN_1841A1_PKYN44.000_TU104-400-A1___DSCx2_
+- Page : https://www.flickr.com/photos/130561288@N04/48116463052
+- Licence : CC0 1.0
 
 ### NXPI — Processeur NXP sur carte
 
@@ -675,13 +675,15 @@ Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 - Page : https://commons.wikimedia.org/w/index.php?curid=118340795
 - Licence : CC0 1.0
 
-### STX — Disque Seagate
+### STX — Disque dur Seagate ouvert, plateau et bras de lecture
 
 - Nature : produit
 - Fichier : `assets/titres/STX.jpg`
-- Source : File:Seagate ST9300AG - Seagate 100075-501 on controller board-8912.jpg
-- Page : https://commons.wikimedia.org/wiki/File:Seagate_ST9300AG_-_Seagate_100075-501_on_controller_board-8912.jpg
-- Licence : CC BY-SA 4.0 — crédit affiché : Raimond Spekking · CC BY-SA 4.0
+- Source : File:Seagate ST33232A hard disk inner view.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Seagate_ST33232A_hard_disk_inner_view.jpg
+- Licence : CC BY-SA 3.0 — crédit affiché : Eric Gaba (Sting - fr:Sting)
+
+ This  image was created with CombineZP by 11  ( I · CC BY-SA 3.0
 
 ### SU.PA — Usine Schneider Electric
 
