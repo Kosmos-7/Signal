@@ -1,0 +1,60 @@
+# .github/workflows/photos-wikidata.yml
+# Photos de sociétés par correspondance d'IDENTITÉ (Wikidata) plutôt que par
+# recherche de mots. Voir tools/photos_wikidata.py pour le raisonnement.
+name: Photos de sociétés via Wikidata
+
+on:
+  workflow_dispatch:
+    inputs:
+      telecharger:
+        description: "Télécharger les images en plus du rapport"
+        type: boolean
+        default: false
+      limite:
+        description: "Ne traiter que les N premières sociétés (0 = toutes)"
+        type: string
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-data-commit
+  cancel-in-progress: false
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install Pillow
+        run: pip install --quiet Pillow
+      - name: Interroger Wikidata
+        run: |
+          python tools/photos_wikidata.py --limite ${{ inputs.limite || '0' }} \
+            ${{ inputs.telecharger && '--telecharger' || '' }}
+      - name: Publier le rapport
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: photos-wikidata
+          path: |
+            photos_wikidata.json
+            assets/titres/candidats/
+          retention-days: 7
+      - name: Commiter pour arbitrage visuel
+        run: |
+          git config user.email "bot@signal.fr"
+          git config user.name "Signal Bot"
+          git add -A photos_wikidata.json assets/ 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "Rien de nouveau."
+          else
+            git commit -m "chore(photos): rapport Wikidata + candidats [skip ci]"
+            git pull --rebase --autostash || { git rebase --abort; exit 1; }
+            git push
+          fi
