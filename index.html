@@ -665,8 +665,8 @@ function topChips(meta){
 }
 function covWarn(meta){
   if(meta.status!=='degraded')return '';
-  return '<div class="cov-warn"><b>Couverture partielle</b>'+meta.scores+' titres scorés sur '+meta.declares+
-' déclarés ('+Math.round((meta.couverture||0)*100)+' %). Les titres manquants ne sont pas notés zéro, ils sont absents de la vue.</div>';
+  return '<div class="cov-warn"><b>Liste incomplète cette semaine</b>'+meta.scores+' titres affichés sur '+meta.declares+
+' attendus. Les manquants ne sont pas notés zéro : ils reviendront avec leurs données.</div>';
 }
 function card(meta,main){
   const n=(meta.members||[]).length;
@@ -741,11 +741,10 @@ function renderWl(meta){
       (meta.biais?'<div class="wl-note"><h4>Biais de ce thème</h4>'+blocs(meta.biais)+'</div>':'')+
     '</div>':'')+
     (meta.status==='degraded'?'<div class="wl-covw">'+covWarn(meta)+'</div>':
-(meta.eligibles!=null?'<div class="wl-cov">'+meta.scores+' titres retenus sur '+meta.eligibles+' éligibles, la liste est bornée pour rester lisible, pas tronquée en silence</div>':
-       meta.declares!=null&&!isMain?'<div class="wl-cov">'+meta.scores+' titres scorés sur '+meta.declares+' déclarés · couverture '+Math.round((meta.couverture||0)*100)+' %</div>':''))+
+(meta.eligibles!=null?'<div class="wl-cov">Les '+meta.scores+' meilleurs scores parmi '+meta.eligibles+' titres éligibles</div>':''))+
 '<div class="wl-listh"><span>'+curList.length+' titre'+(curList.length>1?'s':'')+(isCalc?', triés par la règle':isMain?', triés par score':', meilleur score d\'abord')+'</span><span>Score</span></div>'+
     (curList.length?'<div id="wlist">'+curList.map((s,i)=>wrow(s,i,meta.id)).join('')+'</div>'
-      :'<p class="wl-empty">Aucun titre scoré dans cette vue pour ce run.</p>');
+      :'<p class="wl-empty">Aucun titre dans cette vue cette semaine.</p>');
   const host=document.getElementById('wlist');
   if(host)host.addEventListener('click',e=>{
     if(e.target.closest('.ttag'))return;                 // les tags de thèmes gardent leur lien

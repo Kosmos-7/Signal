@@ -114,8 +114,8 @@ function liste(){
   chargerIndex().then(j=>{
     const posts=j.posts||[];
     app.innerHTML='<div class="hero"><h1>Actualités</h1>'+
-      '<p>Que s\'est-il passé sur les marchés ? Chaque matin de bourse, le point de la veille et de la nuit, écrit uniquement à partir de dépêches citées en bas de chaque post : jamais inventé, jamais interprété. Et chaque semaine, l\'analyse du portefeuille IA, qui est elle une interprétation, assumée et signée.</p>'+
-      (posts.length?'<div class="hero-meta">'+posts.length+' post'+(posts.length>1?'s':'')+' · dernier le '+dfr(posts[0].date)+'</div>':'')+
+      '<p>Que s\'est-il passé sur les marchés ? Chaque matin de bourse, le point de la veille et de la nuit, sources à l\'appui. Et chaque semaine, l\'analyse du portefeuille IA.</p>'+
+      (posts.length?'<div class="hero-meta">Dernier post le '+dfr(posts[0].date)+'</div>':'')+
       '</div>'+
       (posts.length?'<div class="pgrid">'+posts.map(carte).join('')+'</div>'
         :'<p class="empty">Aucun post publié pour le moment. Le premier arrive un matin de bourse.</p>');

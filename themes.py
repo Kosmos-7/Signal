@@ -78,12 +78,11 @@ THEMES_CURES = [
         ),
         "biais": (
             "C'est un thème de CONCENTRATION, pas de diversification : ses maillons montent "
-            "et descendent ensemble, et il amplifie le pari tech déjà assumé par la watchlist "
-            "principale. Il est aussi transverse aux secteurs (technologie, industrie, services "
-"publics, matériaux), la règle de concentration sectorielle de l'agent ne le verra "
-            "jamais comme un bloc, un calcul dédié s'en charge. Périmètre volontaire : la "
-            "production d'électricité renouvelable en est exclue, c'est un pari de politique "
-            "publique, pas d'infrastructure IA."
+            "et descendent ensemble, et il amplifie le pari tech de la watchlist principale. "
+            "Il traverse les secteurs classiques : on y trouve de la technologie, de "
+            "l'industrie, des services publics et des matériaux qui vivent du même cycle. "
+            "Périmètre volontaire : la production d'électricité renouvelable en est exclue, "
+            "c'est un pari de politique publique, pas d'infrastructure IA."
         ),
         # STRUCTURE PAR MAILLON (01/08/2026) : la chaîne était documentée en
         # commentaires — elle devient une DONNÉE, publiée dans universe.json,
@@ -214,11 +213,11 @@ THEMES_CURES = [
             "peuvent caler séparément."
         ),
         "biais": (
-            "Étiqueté SECTEUR et non thèse : c'est un regroupement par métier, pas une conviction "
-"sur la finance. Les péages se paient structurellement cher, le pilier valorisation "
-            "les pénalise mécaniquement, un score moyen n'y signale pas une entreprise moyenne. "
-            "À l'inverse les banques affichent des multiples optiquement bas qui reflètent un "
-            "risque de bilan que le screener ne mesure pas."
+            "Un regroupement par métier, pas une conviction sur la finance. Conseil de "
+            "lecture : les péages se paient structurellement cher, leur score de valorisation "
+            "est donc toujours médiocre sans que l'entreprise le soit. À l'inverse, les "
+            "banques affichent des multiples bas qui reflètent un risque de bilan que le "
+            "score ne mesure pas. Comparez chaque titre à ses semblables, pas à la liste."
         ),
         # Même structuration que le thème infra-IA : les familles étaient en
         # commentaires, elles deviennent une donnée publiée. Elles servent aussi
@@ -435,9 +434,8 @@ THEMES_CURES.append({
         "Cette liste ne se démode pas, elle se périme. Deux évènements la rendent "
         "fausse sans qu'aucun cours ne bouge : une société qui transfère son siège "
         "hors de l'UE perd son éligibilité du jour au lendemain, et une réforme du "
-        "PEA peut déplacer le critère lui-même. Le registre porte donc une date de "
-        "vérification, et une éligibilité ne se déduit jamais d'une donnée de "
-        "marché. Vérification la plus récente : " + PEA_VERIFIE_LE + "."
+        "PEA peut déplacer le critère lui-même. Dernière vérification des "
+        "éligibilités : " + PEA_VERIFIE_LE + "."
     ),
     # Même règle que pour la thèse : que des faits qui tiennent d'une semaine
     # sur l'autre. La version précédente décrivait la liste comme « presque vide
