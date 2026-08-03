@@ -69,6 +69,12 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python generate_analyses.py
 
+      - name: Matérialiser le post hebdo (Actualités)
+        # L'analyse vit dans portfolio.json, qui ne garde que la semaine
+        # courante : sans matérialisation, l'archive des posts hebdo n'existe
+        # pas. Idempotent, et sans appel réseau ni API.
+        run: python tools/actualites.py --hebdo-seulement
+
       - name: Commit JSON files + archive snapshot
         run: |
           git config user.email "bot@signal.fr"
@@ -76,7 +82,7 @@ jobs:
           # charts/ contient un fichier par titre affichable (~190 fichiers).
           # `git add <dossier>` met aussi en scène les SUPPRESSIONS : indispensable,
           # le screener purge le graphe d'un titre sorti de tous ses thèmes.
-          git add watchlist.json charts.json universe.json portfolio.json analyses.json notes/watchlist_archive/ charts/
+          git add watchlist.json charts.json universe.json portfolio.json analyses.json notes/watchlist_archive/ charts/ actualites/
 
           # Garde anti-oubli : cette liste explicite a DÉJÀ laissé deux fichiers
           # au sol (charts.json en v3.3.0, universe.json en v3.5.0). Dans les deux

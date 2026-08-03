@@ -1,0 +1,62 @@
+# .github/workflows/actualites.yml
+# Le point marchés du matin. Cron à 05:45 UTC les jours de semaine, soit 07:45
+# à Paris l'été et 06:45 l'hiver — le décalage hivernal est assumé, un cron
+# GitHub ne connaît pas l'heure locale.
+#
+# FAIL-LOUD : si Finnhub rend trop peu de dépêches ou si le post ne passe pas
+# la validation, le script sort en erreur et RIEN n'est publié. Un job rouge
+# un matin calme est un fonctionnement normal, pas une panne : la page sert
+# les posts existants, et il n'existe pas de demi-post.
+name: Actualités du matin
+
+on:
+  schedule:
+    - cron: '45 5 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Réécrire le post du jour s'il existe déjà (jour même uniquement)"
+        type: boolean
+        default: false
+      sans_photo:
+        description: "Publier sans illustration"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-data-commit
+  cancel-in-progress: false
+
+jobs:
+  poster:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install --quiet requests anthropic Pillow
+      - name: Écrire et valider le post
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python tools/actualites.py \
+            ${{ (inputs.force == true || inputs.force == 'true') && '--force' || '' }} \
+            ${{ (inputs.sans_photo == true || inputs.sans_photo == 'true') && '--sans-photo' || '' }}
+      - name: Publier
+        run: |
+          git config user.email "bot@signal.fr"
+          git config user.name "Signal Bot"
+          git add -A actualites/
+          if git diff --staged --quiet; then
+            echo "Rien de nouveau."
+          else
+            git commit -m "post(actualites): $(date -u +%F) [skip ci]"
+            git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase"; exit 1; }
+            git push
+          fi

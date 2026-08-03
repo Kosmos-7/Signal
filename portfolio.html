@@ -190,6 +190,16 @@
   .neu { color: var(--text2); }
   .liq { color: var(--blue); }
 
+/* ── ANALYSE DÉPLACÉE VERS ACTUALITÉS (03/08/2026) ──
+   La page garde un résumé de 3 lignes ; le raisonnement complet, le mouvement
+   de la semaine et les sources vivent dans le post hebdo de la page
+   Actualités. Les blocs sont masqués et non supprimés : le JS qui les remplit
+   reste intact, et portfolio.json reste la source du post matérialisé. */
+#weekly-pick, #macro-news-block, #message-users { display: none !important; }
+#analyse-macro { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.analyse-lien { display:inline-block; margin-top:.7rem; font-family:'Courier New',monospace; font-size:.66rem; letter-spacing:1.4px; text-transform:uppercase; color:var(--accent, #74b6df); text-decoration:none; }
+.analyse-lien:hover { text-decoration:underline; }
+
 /* ── MACRO NEWS, sources discrètes en pied du Raisonnement ── */
   .macro-news-inline { margin-top: 1.1rem; padding-top: 0.85rem; border-top: 1px solid var(--border); opacity: 0.85; }
   .mn-item { padding: 4px 0; }
@@ -586,6 +596,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
   <nav>
     <a href="index.html#/">Watchlists</a>
     <a href="portfolio.html" class="active">Portefeuille IA</a>
+    <a href="actualites.html">Actualités</a>
     <a href="apprendre.html">Apprendre</a>
   </nav>
 </header>
@@ -630,6 +641,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
         <div id="conviction-badge" class="conviction-badge"></div>
       </div>
       <div id="analyse-macro"  class="analyse-text"></div>
+      <a class="analyse-lien" href="actualites.html">Lire l'analyse complète et son archive — Actualités →</a>
       <div id="weekly-pick" class="weekly-pick-inline" style="display:none">
         <div class="wp-label">↳ Le mouvement de la semaine</div>
         <div class="wp-head">

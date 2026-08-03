@@ -5,6 +5,37 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.9.0] — 2026-08-03
+
+### Actualités — l'éditorial quitte le portefeuille et devient un journal
+
+- **Nouvelle page** : un post quotidien les matins de bourse (le point de la
+  veille et de la nuit), et chaque semaine l'analyse du portefeuille IA,
+  déplacée depuis la page Portefeuille. Cartes photo + résumé, clic pour lire.
+- **« On n'invente jamais rien » est structurel, pas déclaratif.** Le modèle
+  ne reçoit que des dépêches réelles (Finnhub, le flux déjà utilisé par
+  l'analyse hebdo) et chaque section doit citer les dépêches dont elle sort :
+  une section sans source est rejetée à la validation. Les dépêches citées
+  sont publiées en bas de chaque post, avec lien.
+- **Deux genres, deux règles.** Le quotidien est factuel : aucun conseil,
+  aucune prédiction, aucune mention de Signal — le vocabulaire de
+  recommandation fait échouer la validation. L'hebdo est une interprétation
+  par nature, étiquetée comme telle.
+- **Le jour creux ne se meuble pas.** Moins de cinq dépêches exploitables :
+  pas de post, CI rouge, la page sert l'existant. Il n'existe pas de
+  demi-post.
+- **Un post publié est immuable**, comme l'historique du portefeuille.
+  L'index se reconstruit depuis les fichiers : il ne peut pas diverger.
+- **Photo automatique par sujet** (décision propriétaire) : requêtes Commons
+  bornées par une table écrite à la main, licences libres uniquement,
+  provenance complète dans le post, et un post sans photo reste valide.
+- La page Portefeuille garde un résumé de trois lignes du raisonnement, avec
+  lien vers l'archive. Le run hebdomadaire matérialise le post hebdo — sans
+  ça, l'archive n'existerait pas, portfolio.json ne gardant que la semaine
+  courante.
+
+---
+
 ## [3.8.0] — 2026-08-03
 
 ### Une watchlist dont le critère est juridique, et une page Apprendre illustrée
