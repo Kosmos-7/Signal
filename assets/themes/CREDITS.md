@@ -1,6 +1,6 @@
 # Illustrations des watchlists — provenance et licences
 
-Trois photographies, une par watchlist publiée. Contrainte du projet : domaine
+Quatre photographies, une par watchlist publiée. Contrainte du projet : domaine
 public ou CC0 exclusivement, c'est-à-dire aucune attribution obligatoire et
 aucune condition de réutilisation. Le crédit ci-dessous est donné par honnêteté,
 pas par obligation légale.
@@ -40,3 +40,18 @@ watchlist qu'elle illustre : ce serait une mise en avant, pas une illustration.
 Recadrage 16:9 en 960x540, luminosité à 72 % et saturation à 80 % : le site est
 sur fond très sombre, une photo brute y fait une tache lumineuse qui écrase le
 reste de la carte. Le sujet reste parfaitement identifiable.
+
+## pea
+
+- Fichier : `assets/themes/pea.jpg`
+- Source : File:Euro-Skulptur Frankfurt.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Euro-Skulptur_Frankfurt.jpg
+- Licence : CC0
+- Requête : « Euro sculpture Frankfurt Willy Brandt Platz »
+
+Le thème n'a pas d'objet propre : c'est une enveloppe fiscale française qui
+n'accepte que les sociétés à siège européen. On l'illustre donc par ce que la
+contrainte a de concret — la monnaie commune — plutôt que par un objet
+financier, qui dirait « bourse » et non « Europe ». Les autres candidats du
+run le montrent bien : la requête « market stall price signs » a ramené des
+places de marché biélorusses des années 1940, hors sujet complet.
