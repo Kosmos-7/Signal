@@ -423,8 +423,9 @@ THEMES_CURES.append({
     # la semaine suivante, sans que personne ne touche à rien.
     "thesis": (
         "Que peut-on loger dans un PEA, l'enveloppe qui efface l'impôt sur le "
-        "revenu après cinq ans ? Pas ce qu'on croit, dans les deux sens — les "
-        "vingt meilleurs scores réellement éligibles, surprises comprises."
+        "revenu après cinq ans ? Bien plus que des actions françaises — jusqu'à "
+        "des valeurs cotées à New York. Les vingt meilleurs scores réellement "
+        "éligibles."
     ),
     # Une contrainte fiscale ne s'invalide pas comme une thèse : ce qui la
     # périme, c'est un changement de droit ou de domicile, pas un retournement
