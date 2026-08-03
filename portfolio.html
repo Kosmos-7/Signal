@@ -1243,6 +1243,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
         <div class="pacc-section-title">Portefeuille &amp; Performance</div>
         <div class="lex-grid">
 <div class="lex-item"><div class="lex-term">MSCI World</div><div class="lex-def">Indice mondial couvrant ~1 500 grandes et moyennes capitalisations dans 23 pays développés. <em>Benchmark de référence</em> de Signal, toute la performance du portefeuille est mesurée par rapport à cet indice (en euros, via l'ETF EUNL).</div></div>
+<div class="lex-item"><div class="lex-term">Performance pondérée par le temps</div><div class="lex-def">Méthode de calcul de la performance affichée, la même que celle des fonds. Les rendements sont <em>chaînés</em> entre les injections de capital : un versement ne compte ni comme gain ni comme perte, il s'ajoute seulement à la base de la période suivante. Sans cela, l'injection de +10 k€ du 3 août 2026 aurait fait « chuter » la performance de +17,6 % à +11,7 % sans qu'aucune position n'ait bougé. Conséquence assumée : le pourcentage affiché ne se retrouve pas en divisant le capital par les versements, les deux mesures répondent à des questions différentes.</div></div>
 <div class="lex-item"><div class="lex-term">Écart au benchmark</div><div class="lex-def">Différence de performance entre Signal et le MSCI World, exprimée en <em>points de pourcentage (pp)</em>. Un écart de +5.4 pp signifie que le portefeuille a fait 5.4 points de mieux que l'indice sur la même période ; un écart négatif, qu'il a fait moins bien. C'est une <em>observation</em> de performance relative, suivie en réel, pas une promesse de surperformance.</div></div>
           <div class="lex-item"><div class="lex-term">Drawdown max</div><div class="lex-def">Perte maximale enregistrée depuis un pic du portefeuille, en %. Mesure le <em>pire scénario traversé</em> : un drawdown de −15% signifie que la valeur a chuté de 15% depuis son plus haut avant de se redresser. Indicateur de risque clé, indépendant de la performance finale.</div></div>
 <div class="lex-item"><div class="lex-term">P&amp;L réalisé</div><div class="lex-def">Profit and Loss, gain ou perte <em>effectivement encaissé</em> sur les positions fermées. Distinct du P&amp;L latent (positions ouvertes), qui peut encore s'inverser. Seul le P&amp;L réalisé est définitif.</div></div>
@@ -1833,7 +1834,7 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
         <div class="th">
           <div class="th-label">Notre performance <span class="kpi-info" data-tip="Rendement total du portefeuille depuis le démarrage, en euros">ⓘ</span></div>
           <div class="th-value ${d.performance>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} %</div>
-          <div class="th-sub">depuis jan. ${new Date().getFullYear()} · base ${fmtEur(d.capital_initial)}</div>
+          <div class="th-sub">depuis jan. ${new Date().getFullYear()} · injections de capital neutralisées</div>
         </div>
         <div class="th">
           <div class="th-label">Marché mondial <span class="kpi-info" data-tip="Ce qu'aurait rapporté un simple ETF MSCI World sur la même période, sans gestion active">ⓘ</span></div>

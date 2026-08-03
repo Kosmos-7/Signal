@@ -208,3 +208,41 @@ WATCHLIST_SIZE = 30
 # Contraintes de diversification sur la watchlist
 WATCHLIST_MAX_PER_SECTOR     = 5
 WATCHLIST_MAX_PER_COUNTRY    = 12
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PERFORMANCE PONDÉRÉE PAR LE TEMPS (03/08/2026)
+# ─────────────────────────────────────────────────────────────────────────────
+# Décision propriétaire : « de la liquidité ne doit pas rentrer dans le calcul
+# de la performance ». L'ancienne formule (capital / capital_initial − 1)
+# faisait grossir le dénominateur à chaque injection : +10 k€ versés le
+# 03/08/2026 faisaient passer la performance affichée de +17,55 % à +11,70 %
+# sans qu'aucune position n'ait bougé — un virement se lisait comme une
+# contre-performance. Symétriquement, ne PAS grossir la base aurait transformé
+# le virement en gain. Les deux lectures étaient fausses.
+#
+# La méthode des fonds règle ça : on chaîne les rendements des sous-périodes
+# séparées par les injections. Chaque injection fige le rendement acquis
+# (facteur) et ouvre une nouvelle base ; l'argent frais ne compte ni comme
+# gain ni comme perte, il ne fait que s'ajouter à la base de la période
+# suivante.
+#
+# Chaque entrée de `injections` (portfolio.json) porte trois champs :
+#   date          — jour du versement
+#   montant       — somme versée
+#   capital_post  — capital TOTAL constaté juste après le versement, FIGÉ ici
+#                   à l'écriture. On ne le relit pas dans performance_history :
+#                   l'historique est plafonné à ~260 points, et le jour où la
+#                   date d'injection en serait sortie, la performance aurait
+#                   silencieusement changé de valeur.
+
+def perf_ponderee_temps(injections, capital_actuel, capital_depart):
+    """Performance (%) chaînée entre injections, insensible aux versements."""
+    base, facteur = float(capital_depart), 1.0
+    for inj in sorted(injections or [], key=lambda i: i["date"]):
+        if base <= 0:
+            return 0.0
+        facteur *= (float(inj["capital_post"]) - float(inj["montant"])) / base
+        base = float(inj["capital_post"])
+    if base <= 0:
+        return 0.0
+    return round((facteur * (float(capital_actuel) / base) - 1) * 100, 2)

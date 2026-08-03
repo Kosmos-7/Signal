@@ -81,7 +81,12 @@ def main():
     # ── Recalcule capital et performance globale
     val_positions   = sum(p.get("valeur_actuelle", 0) for p in positions)
     capital_actuel  = round(val_positions + liquidites, 2)
-    performance     = round((capital_actuel - capital_initial) / capital_initial * 100, 2)
+    # Performance ponderee par le temps : les injections de capital n'y entrent
+    # pas (decision proprietaire du 03/08/2026, methode dans config.py).
+    import config as _cfg
+    _inj = portfolio.get("injections", [])
+    performance     = _cfg.perf_ponderee_temps(
+        _inj, capital_actuel, capital_initial - sum(i["montant"] for i in _inj))
 
     # ── Met à jour les poids
     for pos in positions:
@@ -160,7 +165,8 @@ def main():
         pfu_latent_si_liquidation += r["impot_pfu_eur"]
         pertes_si_liquidation     += r["perte_reportable_eur"]
     capital_post_liquidation     = round(cash_post_liq, 2)
-    performance_post_liquidation = round((capital_post_liquidation - capital_initial) / capital_initial * 100, 2)
+    performance_post_liquidation = _cfg.perf_ponderee_temps(
+        _inj, capital_post_liquidation, capital_initial - sum(i["montant"] for i in _inj))
 
     # ── Met à jour le portfolio (sans toucher aux champs hebdo)
     portfolio["updated_at"]      = today

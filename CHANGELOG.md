@@ -5,6 +5,33 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.10.0] — 2026-08-03
+
+### La performance ne compte plus les virements
+
+- **Injection de +10 000 € de liquidités** (deuxième après celle du 5 mai).
+  Elle a révélé le défaut de la mesure : l'ancienne formule divisait par le
+  capital total versé, donc le virement faisait « chuter » la performance de
+  +17,6 % à +11,7 % sans qu'aucune position n'ait bougé. Symétriquement, ne
+  pas grossir la base l'aurait transformé en gain. Les deux lectures étaient
+  fausses.
+- **Passage à la performance pondérée par le temps**, la méthode des fonds :
+  les rendements sont chaînés entre injections, l'argent frais ne compte ni
+  comme gain ni comme perte. Résultat : **+28,8 % depuis janvier**, soit
+  +17,1 pp au-dessus du MSCI World — et le jour d'un versement, le
+  pourcentage affiché ne bouge pas d'un centième (c'est testé).
+- Un **registre `injections`** entre dans portfolio.json : date, montant, et
+  capital constaté juste après, figé à l'écriture — l'historique étant
+  plafonné à ~260 points, le relire aurait fait changer la performance en
+  silence le jour où une date d'injection en serait sortie.
+- La colonne `perf` de l'historique est migrée (la série de capitaux, le fait
+  brut, ne bouge pas) ; les producteurs (agent, update_prices) partagent la
+  même fonction dans config.py ; le prompt de l'agent décrit la nouvelle
+  mesure pour qu'il ne raconte pas des écarts en euros qui ne correspondent
+  plus au pourcentage ; le lexique explique la méthode. 12 tests dédiés.
+
+---
+
 ## [3.9.0] — 2026-08-03
 
 ### Actualités — l'éditorial quitte le portefeuille et devient un journal

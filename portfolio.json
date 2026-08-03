@@ -3,13 +3,13 @@
  "week": "Sem. 31 · 2026",
  "capital_initial": 30000.0,
  "capital_actuel": 33509.9,
- "performance": 11.7,
- "performance_brute": 12.0,
+ "performance": 28.75,
+ "performance_brute": 29.1,
  "total_frais_payes": 30.11,
  "total_impots_payes": 58.9,
  "total_pertes_reportables": 861.36,
  "capital_post_liquidation": 31978.89,
- "performance_post_liquidation": 6.6,
+ "performance_post_liquidation": 22.87,
  "frais_si_liquidation": 17.37,
  "pfu_latent_si_liquidation": 1513.66,
  "pertes_si_liquidation": 454.93,
@@ -17,7 +17,7 @@
  "last_known_vix_source": "live",
  "benchmark_cac40": 3.84,
  "benchmark_msci": 11.65,
- "vs_benchmark": 0.0,
+ "vs_benchmark": 17.1,
  "mode_panique": false,
  "perf_cac_semaine": 1.64,
  "positions": [
@@ -1538,7 +1538,7 @@
   },
   {
    "date": "2026-05-05",
-   "perf": 10.54,
+   "perf": 21.07,
    "capital": 22107.39,
    "benchmark_cac40": -2.05,
    "benchmark_msci": 4.85,
@@ -1546,488 +1546,500 @@
   },
   {
    "date": "2026-05-06",
-   "perf": 12.8,
+   "perf": 23.55,
    "capital": 22560.34,
    "benchmark_cac40": 1.27,
    "benchmark_msci": 7.57
   },
   {
    "date": "2026-05-07",
-   "perf": 14.52,
+   "perf": 25.44,
    "capital": 22903.83,
    "benchmark_cac40": 0.08,
    "benchmark_msci": 7.43
   },
   {
    "date": "2026-05-10",
-   "perf": 14.44,
+   "perf": 25.35,
    "capital": 22888.74,
    "benchmark_cac40": -1.01,
    "benchmark_msci": 7.39
   },
   {
    "date": "2026-05-11",
-   "perf": 14.73,
+   "perf": 25.67,
    "capital": 22946.53,
    "benchmark_cac40": -1.69,
    "benchmark_msci": 7.73
   },
   {
    "date": "2026-05-12",
-   "perf": 14.66,
+   "perf": 25.6,
    "capital": 22932.93,
    "benchmark_cac40": -2.17,
    "benchmark_msci": 7.47
   },
   {
    "date": "2026-05-13",
-   "perf": 14.6,
+   "perf": 25.53,
    "capital": 22920.73,
    "benchmark_cac40": -2.55,
    "benchmark_msci": 8.24
   },
   {
    "date": "2026-05-14",
-   "perf": 15.05,
+   "perf": 26.02,
    "capital": 23010.03,
    "benchmark_cac40": -1.7,
    "benchmark_msci": 8.79
   },
   {
    "date": "2026-05-15",
-   "perf": 16.23,
+   "perf": 27.31,
    "capital": 23246.0,
    "benchmark_cac40": -2.52,
    "benchmark_msci": 8.75
   },
   {
    "date": "2026-05-16",
-   "perf": 15.39,
+   "perf": 26.39,
    "capital": 23077.73,
    "benchmark_cac40": -2.96,
    "benchmark_msci": 8.75
   },
   {
    "date": "2026-05-18",
-   "perf": 15.41,
+   "perf": 26.41,
    "capital": 23082.64,
    "benchmark_cac40": -2.53,
    "benchmark_msci": 8.17
   },
   {
    "date": "2026-05-19",
-   "perf": 15.96,
+   "perf": 27.02,
    "capital": 23192.98,
    "benchmark_cac40": -1.65,
    "benchmark_msci": 8.33
   },
   {
    "date": "2026-05-20",
-   "perf": 16.0,
+   "perf": 27.06,
    "capital": 23200.88,
    "benchmark_cac40": -1.97,
    "benchmark_msci": 8.63
   },
   {
    "date": "2026-05-21",
-   "perf": 17.34,
+   "perf": 28.53,
    "capital": 23468.13,
    "benchmark_cac40": -1.16,
    "benchmark_msci": 9.06
   },
   {
    "date": "2026-05-22",
-   "perf": 16.81,
+   "perf": 27.95,
    "capital": 23362.32,
    "benchmark_cac40": -0.85,
    "benchmark_msci": 9.9
   },
   {
    "date": "2026-05-23",
-   "perf": 17.56,
+   "perf": 28.77,
    "capital": 23511.77,
    "benchmark_cac40": -0.97,
    "benchmark_msci": 10.36
   },
   {
    "date": "2026-05-24",
-   "perf": 17.48,
+   "perf": 28.67,
    "capital": 23495.09,
    "benchmark_cac40": -0.97,
    "benchmark_msci": 10.36
   },
   {
    "date": "2026-05-25",
-   "perf": 17.94,
+   "perf": 29.19,
    "capital": 23588.67,
    "benchmark_cac40": 0.77,
    "benchmark_msci": 10.94
   },
   {
    "date": "2026-05-27",
-   "perf": 17.09,
+   "perf": 28.26,
    "capital": 23418.7,
    "benchmark_cac40": 0.15,
    "benchmark_msci": 10.33
   },
   {
    "date": "2026-05-28",
-   "perf": 16.97,
+   "perf": 28.11,
    "capital": 23393.04,
    "benchmark_cac40": -0.33,
    "benchmark_msci": 10.27
   },
   {
    "date": "2026-05-29",
-   "perf": 17.81,
+   "perf": 29.04,
    "capital": 23562.74,
    "benchmark_cac40": 0.73,
    "benchmark_msci": 11.05
   },
   {
    "date": "2026-05-30",
-   "perf": 18.93,
+   "perf": 30.26,
    "capital": 23785.5,
    "benchmark_cac40": -0.14,
    "benchmark_msci": 10.87
   },
   {
    "date": "2026-05-31",
-   "perf": 18.93,
+   "perf": 30.26,
    "capital": 23785.5,
    "benchmark_cac40": -0.14,
    "benchmark_msci": 10.87
   },
   {
    "date": "2026-06-01",
-   "perf": 21.5,
+   "perf": 33.09,
    "capital": 24300.8,
    "benchmark_cac40": -0.59,
    "benchmark_msci": 11.18
   },
   {
    "date": "2026-06-02",
-   "perf": 21.13,
+   "perf": 32.68,
    "capital": 24225.86,
    "benchmark_cac40": 0.17,
    "benchmark_msci": 11.66
   },
   {
    "date": "2026-06-03",
-   "perf": 19.59,
+   "perf": 30.99,
    "capital": 23918.82,
    "benchmark_cac40": -0.55,
    "benchmark_msci": 11.29
   },
   {
    "date": "2026-06-04",
-   "perf": 20.68,
+   "perf": 32.18,
    "capital": 24135.59,
    "benchmark_cac40": 0.6,
    "benchmark_msci": 11.31
   },
   {
    "date": "2026-06-05",
-   "perf": 16.69,
+   "perf": 27.81,
    "capital": 23337.65,
    "benchmark_cac40": 0.28,
    "benchmark_msci": 10.79
   },
   {
    "date": "2026-06-08",
-   "perf": 18.58,
+   "perf": 29.88,
    "capital": 23715.24,
    "benchmark_cac40": 0.05,
    "benchmark_msci": 10.15
   },
   {
    "date": "2026-06-09",
-   "perf": 17.27,
+   "perf": 28.45,
    "capital": 23454.68,
    "benchmark_cac40": 0.1,
    "benchmark_msci": 8.63
   },
   {
    "date": "2026-06-10",
-   "perf": 15.59,
+   "perf": 26.61,
    "capital": 23118.22,
    "benchmark_cac40": 0.1,
    "benchmark_msci": 8.63
   },
   {
    "date": "2026-06-11",
-   "perf": 15.75,
+   "perf": 26.78,
    "capital": 23150.08,
    "benchmark_cac40": -0.41,
    "benchmark_msci": 8.42
   },
   {
    "date": "2026-06-12",
-   "perf": 16.97,
+   "perf": 28.13,
    "capital": 23394.93,
    "benchmark_cac40": 0.07,
    "benchmark_msci": 8.59
   },
   {
    "date": "2026-06-15",
-   "perf": 19.76,
+   "perf": 31.18,
    "capital": 23952.82,
    "benchmark_cac40": 1.9,
    "benchmark_msci": 10.4
   },
   {
    "date": "2026-06-16",
-   "perf": 18.65,
+   "perf": 29.96,
    "capital": 23729.14,
    "benchmark_cac40": 2.3,
    "benchmark_msci": 11.63
   },
   {
    "date": "2026-06-17",
-   "perf": 17.56,
+   "perf": 28.77,
    "capital": 23512.4,
    "benchmark_cac40": 3.08,
    "benchmark_msci": 11.5
   },
   {
    "date": "2026-06-18",
-   "perf": 19.51,
+   "perf": 30.9,
    "capital": 23901.46,
    "benchmark_cac40": 2.87,
    "benchmark_msci": 11.58
   },
   {
    "date": "2026-06-19",
-   "perf": 19.41,
+   "perf": 30.79,
    "capital": 23881.52,
    "benchmark_cac40": 2.87,
    "benchmark_msci": 11.97
   },
   {
    "date": "2026-06-22",
-   "perf": 18.96,
+   "perf": 30.3,
    "capital": 23792.44,
    "benchmark_cac40": 2.76,
    "benchmark_msci": 12.11
   },
   {
    "date": "2026-06-23",
-   "perf": 17.97,
+   "perf": 29.21,
    "capital": 23593.71,
    "benchmark_cac40": 2.5,
    "benchmark_msci": 12.34
   },
   {
    "date": "2026-06-24",
-   "perf": 16.15,
+   "perf": 27.22,
    "capital": 23229.89,
    "benchmark_cac40": 1.78,
    "benchmark_msci": 11.37
   },
   {
    "date": "2026-06-25",
-   "perf": 15.16,
+   "perf": 26.14,
    "capital": 23031.86,
    "benchmark_cac40": 2.32,
    "benchmark_msci": 12.1
   },
   {
    "date": "2026-06-26",
-   "perf": 16.43,
+   "perf": 27.53,
    "capital": 23286.9,
    "benchmark_cac40": 2.88,
    "benchmark_msci": 11.48
   },
   {
    "date": "2026-06-29",
-   "perf": 16.63,
+   "perf": 27.75,
    "capital": 23326.55,
    "benchmark_cac40": 2.31,
    "benchmark_msci": 11.17
   },
   {
    "date": "2026-06-30",
-   "perf": 18.39,
+   "perf": 29.68,
    "capital": 23678.39,
    "benchmark_cac40": 2.1,
    "benchmark_msci": 11.29
   },
   {
    "date": "2026-07-01",
-   "perf": 20.98,
+   "perf": 32.51,
    "capital": 24196.1,
    "benchmark_cac40": 2.55,
    "benchmark_msci": 12.32
   },
   {
    "date": "2026-07-02",
-   "perf": 19.28,
+   "perf": 30.65,
    "capital": 23855.77,
    "benchmark_cac40": 1.73,
    "benchmark_msci": 13.08
   },
   {
    "date": "2026-07-03",
-   "perf": 18.73,
+   "perf": 30.04,
    "capital": 23745.13,
    "benchmark_cac40": 3.41,
    "benchmark_msci": 12.56
   },
   {
    "date": "2026-07-06",
-   "perf": 20.79,
+   "perf": 32.3,
    "capital": 24157.25,
    "benchmark_cac40": 3.82,
    "benchmark_msci": 12.97
   },
   {
    "date": "2026-07-07",
-   "perf": 21.35,
+   "perf": 32.92,
    "capital": 24269.52,
    "benchmark_cac40": 3.47,
    "benchmark_msci": 13.5
   },
   {
    "date": "2026-07-08",
-   "perf": 19.32,
+   "perf": 30.69,
    "capital": 23863.85,
    "benchmark_cac40": 2.94,
    "benchmark_msci": 12.65
   },
   {
    "date": "2026-07-09",
-   "perf": 19.91,
+   "perf": 31.34,
    "capital": 23982.46,
    "benchmark_cac40": 0.7,
    "benchmark_msci": 11.84
   },
   {
    "date": "2026-07-10",
-   "perf": 22.12,
+   "perf": 33.77,
    "capital": 24424.75,
    "benchmark_cac40": 1.6,
    "benchmark_msci": 12.93
   },
   {
    "date": "2026-07-13",
-   "perf": 21.18,
+   "perf": 32.73,
    "capital": 24235.58,
    "benchmark_cac40": 1.75,
    "benchmark_msci": 13.32
   },
   {
    "date": "2026-07-14",
-   "perf": 21.26,
+   "perf": 32.81,
    "capital": 24251.08,
    "benchmark_cac40": 2.07,
    "benchmark_msci": 13.46
   },
   {
    "date": "2026-07-15",
-   "perf": 21.63,
+   "perf": 33.23,
    "capital": 24326.92,
    "benchmark_cac40": 2.09,
    "benchmark_msci": 13.24
   },
   {
    "date": "2026-07-16",
-   "perf": 20.91,
+   "perf": 32.44,
    "capital": 24182.41,
    "benchmark_cac40": 2.28,
    "benchmark_msci": 13.46
   },
   {
    "date": "2026-07-17",
-   "perf": 20.48,
+   "perf": 31.96,
    "capital": 24096.01,
    "benchmark_cac40": 2.23,
    "benchmark_msci": 13.42
   },
   {
    "date": "2026-07-20",
-   "perf": 19.8,
+   "perf": 31.22,
    "capital": 23960.85,
    "benchmark_cac40": 1.75,
    "benchmark_msci": 12.18
   },
   {
    "date": "2026-07-21",
-   "perf": 19.93,
+   "perf": 31.36,
    "capital": 23985.75,
    "benchmark_cac40": 1.77,
    "benchmark_msci": 12.5
   },
   {
    "date": "2026-07-22",
-   "perf": 20.58,
+   "perf": 32.07,
    "capital": 24115.87,
    "benchmark_cac40": 2.05,
    "benchmark_msci": 12.94
   },
   {
    "date": "2026-07-23",
-   "perf": 19.59,
+   "perf": 30.99,
    "capital": 23918.7,
    "benchmark_cac40": 2.96,
    "benchmark_msci": 13.19
   },
   {
    "date": "2026-07-24",
-   "perf": 19.69,
+   "perf": 31.1,
    "capital": 23937.86,
    "benchmark_cac40": 1.27,
    "benchmark_msci": 11.79
   },
   {
    "date": "2026-07-27",
-   "perf": 19.29,
+   "perf": 30.66,
    "capital": 23858.28,
    "benchmark_cac40": 1.27,
    "benchmark_msci": 12.57
   },
   {
    "date": "2026-07-28",
-   "perf": 17.84,
+   "perf": 29.07,
    "capital": 23567.25,
    "benchmark_cac40": 2.57,
    "benchmark_msci": 12.03
   },
   {
    "date": "2026-07-29",
-   "perf": 16.25,
+   "perf": 27.33,
    "capital": 23249.46,
    "benchmark_cac40": 3.22,
    "benchmark_msci": 12.47
   },
   {
    "date": "2026-07-30",
-   "perf": 15.94,
+   "perf": 26.99,
    "capital": 23187.08,
    "benchmark_cac40": 2.6,
    "benchmark_msci": 11.71
   },
   {
    "date": "2026-07-31",
-   "perf": 17.55,
+   "perf": 28.75,
    "capital": 23509.75,
    "benchmark_cac40": 3.54,
    "benchmark_msci": 11.08
   },
   {
    "date": "2026-08-01",
-   "perf": 17.55,
+   "perf": 28.75,
    "capital": 23509.9,
    "benchmark_cac40": 3.84,
    "benchmark_msci": 11.65
   },
   {
    "date": "2026-08-03",
-   "perf": 11.7,
+   "perf": 28.75,
    "capital": 33509.9,
    "benchmark_cac40": 3.84,
    "benchmark_msci": 11.65,
    "note": "Injection +10k€"
   }
  ],
- "max_drawdown": -5.22
+ "max_drawdown": -5.22,
+ "injections": [
+  {
+   "date": "2026-05-05",
+   "montant": 10000.0,
+   "capital_post": 22107.39
+  },
+  {
+   "date": "2026-08-03",
+   "montant": 10000.0,
+   "capital_post": 33509.9
+  }
+ ]
 }

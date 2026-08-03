@@ -516,6 +516,16 @@ def portfolio_vide():
         "analyse_claude": None, "performance_history": [], "max_drawdown": 0.0,
     }
 
+def _perf_twr(portfolio, capital):
+    """Performance pondérée par le temps (config.perf_ponderee_temps).
+    Les injections de capital ne comptent ni comme gain ni comme perte —
+    décision propriétaire du 03/08/2026, cf. config.py pour la méthode."""
+    inj = portfolio.get("injections", [])
+    cap_depart = portfolio.get("capital_initial", CAPITAL_INITIAL_DEF) - \
+        sum(i["montant"] for i in inj)
+    return config.perf_ponderee_temps(inj, capital, cap_depart)
+
+
 def calc_max_drawdown(history):
     """Drawdown sur valeur absolue du capital (en %).
     Utilise le champ 'capital' si disponible, sinon 'perf' en fallback.
@@ -1177,9 +1187,9 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 - Marchés au moment du run : EU {contexte.get('marches',{}).get('EU','?')} | LSE {contexte.get('marches',{}).get('LSE','?')} | US {contexte.get('marches',{}).get('US','?')}
 
 ## ÉTAT ACTUEL DU PORTEFEUILLE
-- Capital initial (création) : {CAPITAL_INITIAL:.0f}€
+- Capital versé (création + injections) : {CAPITAL_INITIAL:.0f}€
 - Capital actuel (net)       : {capital:.0f}€
-- **Performance NETTE (depuis création) = {perf:+.2f}%**  (= {capital - CAPITAL_INITIAL:+.0f}€ vs {CAPITAL_INITIAL:.0f}€ initial — après frais et impôts réalisés)
+- **Performance NETTE = {perf:+.2f}%** — pondérée par le temps : les injections de capital ne comptent ni comme gain ni comme perte. Ne la recalcule JAMAIS comme capital/versements − 1, les deux chiffres divergent par construction.
 - Performance brute (sans coûts) : {perf_brute:+.2f}%  (différence = {perf_brute - perf:+.2f}pp = friction réelle)
 - Benchmark MSCI World (YTD 2026) = {bench:+.2f}%
 - **Écart au benchmark vs MSCI = {vs:+.2f} points de pourcentage** (= perf portefeuille − MSCI YTD ; observation, pas une revendication d'alpha)
@@ -1847,7 +1857,7 @@ def main():
 
     val_pos = sum(p.get("valeur_actuelle", 0) for p in portfolio.get("positions", []))
     portfolio["capital_actuel"] = round(val_pos + portfolio.get("liquidites", CAPITAL_INITIAL), 2)
-    portfolio["performance"]    = round((portfolio["capital_actuel"] - CAPITAL_INITIAL) / CAPITAL_INITIAL * 100, 2)
+    portfolio["performance"]    = _perf_twr(portfolio, portfolio["capital_actuel"])
 
     # ── Niveau 2 : règles mécaniques calculées avant d'appeler Claude
     regles_auto = calculer_regles_auto(portfolio)
@@ -1939,7 +1949,7 @@ Ne jamais inclure de balises markdown ou de backticks.""",
 
     val_positions  = sum(p.get("valeur_actuelle", 0) for p in positions)
     capital_actuel = round(val_positions + liquidites, 2)
-    performance    = round((capital_actuel - CAPITAL_INITIAL) / CAPITAL_INITIAL * 100, 2)
+    performance    = _perf_twr(portfolio, capital_actuel)
 
     for pos in positions:
         pos["poids"] = round(pos["valeur_actuelle"] / capital_actuel * 100, 1) if capital_actuel > 0 else 0
@@ -1966,7 +1976,7 @@ Ne jamais inclure de balises markdown ou de backticks.""",
     total_pertes_reportables = round(total_pertes_reportables, 2)
 
     # Performance brute (pédagogique) : ce qu'on aurait sans aucune friction
-    performance_brute  = round((capital_actuel + total_frais_payes + total_impots_payes - CAPITAL_INITIAL) / CAPITAL_INITIAL * 100, 2)
+    performance_brute  = _perf_twr(portfolio, capital_actuel + total_frais_payes + total_impots_payes)
 
     # ── Capital post-liquidation virtuelle (réponse honnête à "combien j'aurais en cash si je vendais tout aujourd'hui ?") ──
     # capital_actuel = liquidités + valeur marché des positions (mark-to-market).
@@ -1996,7 +2006,7 @@ Ne jamais inclure de balises markdown ou de backticks.""",
     frais_si_liquidation       = round(frais_si_liquidation, 2)
     pfu_latent_si_liquidation  = round(pfu_latent_si_liquidation, 2)
     pertes_si_liquidation      = round(pertes_si_liquidation, 2)
-    performance_post_liquidation = round((capital_post_liquidation - CAPITAL_INITIAL) / CAPITAL_INITIAL * 100, 2)
+    performance_post_liquidation = _perf_twr(portfolio, capital_post_liquidation)
 
     # ── Historique de performance (upsert : toujours la valeur finale du jour) ──
     history = portfolio.get("performance_history", [])
