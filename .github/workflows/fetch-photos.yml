@@ -48,13 +48,23 @@ jobs:
         run: pip install --quiet Pillow
 
       - name: Chercher les photos (domaine public / CC0 uniquement)
+        # Les entrées passent par l'environnement plutôt que par interpolation
+        # dans le script : une valeur libre interpolée telle quelle est exécutée
+        # par le shell, ce qui est un bug ET une injection.
+        env:
+          CANDIDATS: ${{ inputs.candidats }}
+          SELECTION: ${{ inputs.selection }}
         run: |
-          if [ "${{ inputs.selection }}" = "true" ]; then
+          if [ "$SELECTION" = "true" ]; then
             python tools/fetch_theme_photos.py \
               --selection tools/photos_titres_selection.json \
               --sortie assets/titres/candidats
           else
-            python tools/fetch_theme_photos.py --candidats ${{ inputs.candidats || '3' }} \
+            # Pas de « \ » en fin de ligne ici : une continuation orpheline
+            # avalait le « fi », le bloc if restait ouvert et bash mourait sur
+            # une erreur de syntaxe avant même de lancer Python. Le job echouait
+            # donc en quinze secondes sans jamais rien chercher.
+            python tools/fetch_theme_photos.py --candidats "${CANDIDATS:-3}"
           fi
 
       - name: Publier les candidats en artefact
