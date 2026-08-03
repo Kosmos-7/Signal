@@ -62,13 +62,11 @@ THEMES_CURES = [
         "sous_titre": "Du silicium au mégawatt",
         "kind": "these",
         "thesis": (
-            "Chaque dollar investi dans l'IA finit en objets physiques : puces, machines de "
-            "gravure et d'assemblage, mémoire, fibre, serveurs, bâtiments, électricité, "
-            "refroidissement. Cette watchlist suit la chaîne complète, maillon par maillon, "
-            "des puces jusqu'aux plateformes qui commandent et exploitent les centres de "
-"données : c'est là que l'argent atterrit, quel que soit l'usage qui gagne. Et le "
-            "vrai goulot n'est pas la gravure : c'est l'assemblage et les substrats, là où le "
-            "pouvoir de prix est le plus fort."
+            "Personne ne sait quel usage de l'IA gagnera. Mais chaque dollar qu'on y "
+            "investit finit en objets physiques : puces, machines de gravure, mémoire, "
+            "serveurs, électricité, refroidissement. Les suivre, c'est parier sur la "
+            "dépense plutôt que sur le vainqueur. Et le goulot n'est pas là où on le "
+            "croit : moins la gravure que l'assemblage et les substrats."
         ),
         "inversion": (
             "Le retour sur investissement applicatif ne se matérialise pas et les hyperscalers "
@@ -203,12 +201,11 @@ THEMES_CURES = [
         "sous_titre": "Bilans, flux et péages de marché",
         "kind": "secteur",
         "thesis": (
-            "Trois métiers, trois moteurs. Les BILANS (banques, assureurs) gagnent quand les "
-            "taux sont hauts et les défauts rares. Les FLUX (réseaux de paiement) prennent une "
-            "commission sur chaque transaction, sans porter le risque de crédit. Les PÉAGES "
-            "(indices, notation, places de marché) facturent un accès que personne ne peut "
-"contourner. Les voir côte à côte montre lequel de ces moteurs est payé cher, "
-            "et pourquoi."
+            "On parle de « la finance » comme d'un seul métier. Il y en a trois, qui ne "
+            "gagnent pas leur argent de la même façon et ne craignent pas les mêmes chocs : "
+            "les BILANS vivent des taux, les FLUX d'une commission sur chaque transaction, "
+            "les PÉAGES d'un accès que personne ne peut contourner. Les voir côte à côte "
+            "montre lequel se paie cher, et pourquoi."
         ),
         "inversion": (
             "Pour les bilans : une récession de crédit, ou une baisse rapide des taux qui écrase "
@@ -428,10 +425,10 @@ THEMES_CURES.append({
     "thesis": (
         "Cinq ans de détention, et les gains échappent à l'impôt sur le revenu : "
         "restent les prélèvements sociaux. En échange, le PEA n'accepte que les "
-        "sociétés dont le siège social est européen. Le critère est le siège, "
-        "jamais la place de cotation — des sociétés néerlandaises et irlandaises "
-        "cotées en dollars à New York y entrent, des britanniques et des suisses "
-        "non."
+        "sociétés dont le siège social est européen — un critère qui ne se devine "
+        "pas, et où l'on se trompe dans les deux sens. Des néerlandaises et des "
+        "irlandaises cotées en dollars à New York y entrent ; des britanniques et "
+        "des suisses, non."
     ),
     # Une contrainte fiscale ne s'invalide pas comme une thèse : ce qui la
     # périme, c'est un changement de droit ou de domicile, pas un retournement
