@@ -1346,15 +1346,13 @@ function rerenderChart() {
     const fallback = _fullHistory.slice(-Math.max(2, filtered.length));
     renderChart(fallback, _capitalInit);
     if (note) {
-note.textContent = `${RANGE_LBL[_currentRange] || _currentRange}, données insuffisantes (granularité quotidienne, marchés fermés ?). Affichage des ${fallback.length} dernier(s) point(s).`;
+note.textContent = `Pas assez de points sur cette plage : affichage des ${fallback.length} derniers.`;
     }
     return;
   }
 
   renderChart(filtered, _capitalInit);
-  if (note) {
-note.textContent = `${filtered.length} point${filtered.length > 1 ? 's' : ''} · vue ${RANGE_LBL[_currentRange] || _currentRange}, un point s'ajoute chaque jour de marché ouvré · injections de capital neutralisées`;
-  }
+  if (note) note.textContent = '';
 }
 
 function renderChart(history, capitalInitial = 20000) {
