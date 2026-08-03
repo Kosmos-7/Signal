@@ -1645,6 +1645,30 @@ def main():
             # ne s'y applique pas. La rapporter à `eligibles` produisait un taux de
             # 25 % et un faux « thème dégradé » alors que le bornage est voulu.
             declares = len(membres)
+            couverts = len(membres)
+        elif th["kind"] == "filtre":
+            # Troisième forme, ni curée ni calculée. L'appartenance est une
+            # PROPRIÉTÉ DÉCLARÉE du titre — pour le PEA, le pays du siège social,
+            # que le breakdown ne porte pas et ne portera jamais : ce n'est pas
+            # une mesure de marché. Mais la liste publiée est bornée aux N
+            # meilleurs scores, comme un thème calculé, sinon « top 20 » n'aurait
+            # pas de sens.
+            membres = [t for t in th["tickers"] if t in par_ticker]
+            membres.sort(key=lambda t: (-scores_par_ticker.get(t, 0), t))
+            # `declares` reste le nombre d'éligibles DÉCLARÉS, pas la taille de
+            # la liste publiée : c'est lui qui fait de la couverture un vrai
+            # garde-fou. Un thème calculé n'a pas de liste déclarée et doit
+            # neutraliser ce calcul ; ici on en a une, donc si la moitié des
+            # éligibles cesse d'être scorée, la bannière doit le dire — même si
+            # les vingt lignes publiées, elles, restent pleines.
+            declares = len(th["tickers"])
+            eligibles = len(membres)
+            # La couverture se mesure sur les titres SCORÉS, avant bornage. La
+            # mesurer sur la liste publiée donnerait 20/48 à chaque run, donc un
+            # thème perpétuellement « dégradé » par sa propre définition — un
+            # garde-fou qui hurle en permanence ne garde plus rien.
+            couverts = eligibles
+            membres = membres[: th.get("top", themes.TOP_PAR_THEME)]
         else:
             eligibles = None
             declares = len(th["tickers"])
@@ -1652,8 +1676,9 @@ def main():
             # Tri par score décroissant, départage par ticker croissant :
             # l'ordre publié doit être reproductible d'un run à l'autre.
             membres.sort(key=lambda t: (-scores_par_ticker.get(t, 0), t))
+            couverts = len(membres)
 
-        couv = (len(membres) / declares) if declares else 1.0
+        couv = (couverts / declares) if declares else 1.0
         # Garde de couverture PAR THÈME. Le seuil global (60 % de l'univers) ne
         # protège plus rien à cette échelle : il faudrait perdre 84 titres sur
         # 210 avant d'échouer, donc un thème entièrement vidé par une panne de
@@ -1662,7 +1687,7 @@ def main():
         status = "ok" if couv >= 0.70 else "degraded"
         if status == "degraded":
             degrades.append(th["id"])
-            print(f"   ⚠️  Thème {th['id']} dégradé : {len(membres)}/{declares} titres ({couv:.0%})")
+            print(f"   ⚠️  Thème {th['id']} dégradé : {couverts}/{declares} titres ({couv:.0%})")
 
         meta = next(m for m in themes.meta_publique() if m["id"] == th["id"])
         themes_publies.append({**meta,

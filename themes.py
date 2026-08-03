@@ -235,6 +235,221 @@ for _th in THEMES_CURES:
     if "maillons" in _th:
         _th["tickers"] = [t for _m in _th["maillons"] for t in _m["tickers"]]
 
+# ── ÉLIGIBILITÉ AU PEA ───────────────────────────────────────────────────────
+# LA RÈGLE. Une action est éligible au PEA si la société qui l'émet a son SIÈGE
+# SOCIAL dans l'Union européenne ou dans un État de l'Espace économique
+# européen ayant une convention d'assistance administrative avec la France
+# (Islande, Norvège, Liechtenstein), et si elle est soumise à l'impôt sur les
+# sociétés ou à un impôt équivalent. Article L221-31 du code monétaire et
+# financier.
+#
+# CE QUE LA RÈGLE NE DIT PAS, et c'est tout l'intérêt de cette liste :
+# ni la place de cotation, ni la devise, ni la nationalité perçue de
+# l'entreprise n'entrent dans le critère. Nebius est une N.V. néerlandaise
+# cotée au Nasdaq en dollars, dont l'activité est ailleurs : elle est éligible.
+# Accenture est une plc irlandaise cotée à New York : éligible. Symétriquement,
+# une société britannique reste inéligible depuis le Brexit quelle que soit son
+# ancienneté à Londres, et une suisse ne l'a jamais été, la Suisse n'étant pas
+# dans l'EEE.
+#
+# POURQUOI C'EST UNE DONNÉE ÉCRITE À LA MAIN. Aucune source du projet ne porte
+# le siège social : Yahoo publie un pays qui est celui du siège opérationnel ou
+# de la place de cotation, pas celui du siège statutaire. Les deux diffèrent
+# précisément dans les cas qui nous intéressent. C'est le même constat que pour
+# la table des marques dans photos_marques.py : le savoir qui manque est
+# exactement celui qu'aucune API ne porte.
+#
+# DATE DE VÉRIFICATION : 2026-08-03. Un domicile se change — une redomiciliation
+# fait perdre l'éligibilité du jour au lendemain, sans que rien dans les données
+# de marché ne bouge. Cette liste se revérifie, elle ne se déduit pas.
+#
+# CE QUE CETTE LISTE N'EST PAS : une autorisation d'achat. L'éligibilité
+# juridique du titre et l'acceptation de la ligne par le courtier sont deux
+# choses différentes, en particulier pour les lignes cotées à New York que
+# plusieurs courtiers français refusent au PEA ou n'offrent que sur leur ligne
+# européenne. À vérifier avant de passer un ordre, jamais après.
+PEA_VERIFIE_LE = "2026-08-03"
+
+PEA_ELIGIBLES = {
+    # ── Siège dans l'UE, cotée en Europe : le cas sans surprise ──────────────
+    "AI.PA":     "France · Air Liquide SA",
+    "AM.PA":     "France · Dassault Aviation SA",
+    "BNP.PA":    "France · BNP Paribas SA",
+    "CAP.PA":    "France · Capgemini SE",
+    "CS.PA":     "France · AXA SA",
+    "DSY.PA":    "France · Dassault Systèmes SE",
+    "HO.PA":     "France · Thales SA",
+    "MC.PA":     "France · LVMH SE",
+    "OR.PA":     "France · L'Oréal SA",
+    "RMS.PA":    "France · Hermès International SCA",
+    "SAF.PA":    "France · Safran SA",
+    "SU.PA":     "France · Schneider Electric SE",
+    "TTE.PA":    "France · TotalEnergies SE",
+    "ADS.DE":    "Allemagne · adidas AG",
+    "ALV.DE":    "Allemagne · Allianz SE",
+    "DB1.DE":    "Allemagne · Deutsche Börse AG",
+    "ENR.DE":    "Allemagne · Siemens Energy AG",
+    "FRE.DE":    "Allemagne · Fresenius SE & Co. KGaA",
+    "IFX.DE":    "Allemagne · Infineon Technologies AG",
+    "MRK.DE":    "Allemagne · Merck KGaA",
+    "MUV2.DE":   "Allemagne · Münchener Rück AG",
+    "RHM.DE":    "Allemagne · Rheinmetall AG",
+    "RWE.DE":    "Allemagne · RWE AG",
+    "SAP.DE":    "Allemagne · SAP SE",
+    "SIE.DE":    "Allemagne · Siemens AG",
+    "AD.AS":     "Pays-Bas · Koninklijke Ahold Delhaize N.V.",
+    "ADYEN.AS":  "Pays-Bas · Adyen N.V.",
+    "ASM.AS":    "Pays-Bas · ASM International N.V.",
+    "ASML.AS":   "Pays-Bas · ASML Holding N.V.",
+    "HEIA.AS":   "Pays-Bas · Heineken N.V.",
+    "IMCD.AS":   "Pays-Bas · IMCD N.V.",
+    "PHIA.AS":   "Pays-Bas · Koninklijke Philips N.V.",
+    "RAND.AS":   "Pays-Bas · Randstad N.V.",
+    # Airbus est l'illustration inverse des cas ci-dessous : cotée à Paris,
+    # perçue comme franco-allemande, mais statutairement néerlandaise. Éligible
+    # dans les deux lectures, ce qui la rend inoffensive — on la note quand même,
+    # parce que « cotée à Paris » n'est jamais la raison de l'éligibilité.
+    "AIR.PA":    "Pays-Bas · Airbus SE (siège à Leyde, cotée à Paris)",
+    "IBE.MC":    "Espagne · Iberdrola SA",
+    "LDO.MI":    "Italie · Leonardo S.p.A.",
+    "NOVO-B.CO": "Danemark · Novo Nordisk A/S",
+    "ORSTED.CO": "Danemark · Ørsted A/S",
+    "VWS.CO":    "Danemark · Vestas Wind Systems A/S",
+    "SAAB-B.ST": "Suède · Saab AB",
+
+    # ── Siège dans l'UE, cotée aux États-Unis : la subtilité ─────────────────
+    # Ces huit titres cotent en dollars à New York et n'ont rien d'européen au
+    # premier regard. Ce sont pourtant des sociétés de droit néerlandais ou
+    # irlandais, donc éligibles. C'est la moitié intéressante de cette liste :
+    # celle qu'on ne trouve pas en filtrant sur la place de cotation.
+    "NBIS":      "Pays-Bas · Nebius Group N.V. (Nasdaq)",
+    "STM":       "Pays-Bas · STMicroelectronics N.V. (NYSE)",
+    "NXPI":      "Pays-Bas · NXP Semiconductors N.V. (Nasdaq)",
+    "RACE":      "Pays-Bas · Ferrari N.V. (NYSE)",
+    "ACN":       "Irlande · Accenture plc (NYSE)",
+    "ETN":       "Irlande · Eaton Corporation plc (NYSE)",
+    "MDT":       "Irlande · Medtronic plc (NYSE)",
+    "STX":       "Irlande · Seagate Technology Holdings plc (Nasdaq)",
+}
+
+# INÉLIGIBLES DE L'UNIVERS, avec le motif. Ils sont listés plutôt qu'omis :
+# l'absence d'un titre qu'on croyait européen doit avoir une raison lisible,
+# sans quoi on la reprend en boucle à chaque relecture.
+PEA_INELIGIBLES = {
+    # Le Brexit a fait sortir le Royaume-Uni de l'UE : aucune société de droit
+    # britannique n'est plus éligible, quelle que soit son ancienneté à Londres.
+    "AZN.L":   "Royaume-Uni, hors UE depuis le Brexit",
+    "BA.L":    "Royaume-Uni, hors UE depuis le Brexit",
+    "DGE.L":   "Royaume-Uni, hors UE depuis le Brexit",
+    "HSBA.L":  "Royaume-Uni, hors UE depuis le Brexit",
+    "LSEG.L":  "Royaume-Uni, hors UE depuis le Brexit",
+    "REL.L":   "Royaume-Uni, hors UE depuis le Brexit",
+    "RR.L":    "Royaume-Uni, hors UE depuis le Brexit",
+    "ULVR.L":  "Royaume-Uni, hors UE depuis le Brexit",
+    "ARM":     "Royaume-Uni (Arm Holdings plc) — et le titre coté est un ADR",
+    # La Suisse n'est pas dans l'EEE : elle n'a jamais été éligible, ce qui
+    # surprend plus d'un épargnant qui range Nestlé ou ABB parmi les valeurs
+    # européennes.
+    "ABBN.SW": "Suisse, hors EEE",
+    "NESN.SW": "Suisse, hors EEE",
+    "UBSG.SW": "Suisse, hors EEE",
+    "CB":      "Suisse (Chubb Limited), hors EEE",
+    "NVS":     "Suisse (Novartis AG), hors EEE",
+    "RHHBY":   "Suisse (Roche) — et le titre coté est un ADR",
+    "TRI":     "Canada (Thomson Reuters Corporation)",
+    # Cas limite, et le seul de la liste : siège statutaire à Dublin, mais
+    # résidence fiscale au Royaume-Uni revendiquée dans les documents déposés.
+    # La condition « soumise à l'impôt sur les sociétés » devient discutable, et
+    # les courtiers ne la tranchent pas tous pareil. Écarté par prudence plutôt
+    # que publié avec une réserve que personne ne lira. Accessoirement le
+    # symbole LIN.DE est mort depuis la sortie de cote de Francfort en 2023.
+    "LIN.DE":  "Linde plc : siège en Irlande mais résidence fiscale au "
+               "Royaume-Uni — éligibilité contestée, écarté par prudence",
+    # Les certificats de dépôt (ADR) ne sont pas des actions : quel que soit le
+    # siège de l'émetteur sous-jacent, ils ne sont pas logeables au PEA.
+    "BABA":    "Chine, et titre coté sous forme d'ADR",
+    "PDD":     "Chine, et titre coté sous forme d'ADR",
+    "TCEHY":   "Chine, et titre coté sous forme d'ADR",
+    "MUFG":    "Japon, et titre coté sous forme d'ADR",
+    "TM":      "Japon, et titre coté sous forme d'ADR",
+    "SONY":    "Japon, et titre coté sous forme d'ADR",
+    "SE":      "Singapour / Îles Caïmans (Sea Limited), et ADR",
+    "ASX":     "Taïwan, et titre coté sous forme d'ADR",
+    "TSM":     "Taïwan, et titre coté sous forme d'ADR",
+}
+
+# Nombre de titres publiés par la watchlist PEA. Vingt : c'est ce qui a été
+# demandé, et c'est aussi à peu près la moitié des éligibles, donc une sélection
+# qui sélectionne vraiment.
+TOP_PEA = 20
+
+# Le thème est déclaré ICI et non dans le littéral THEMES_CURES plus haut :
+# sa liste de titres EST le registre ci-dessus, et une liste recopiée serait une
+# seconde source de vérité, donc une divergence à venir.
+THEMES_CURES.append({
+    "id": "pea",
+    "label": "Éligibles PEA",
+    "sous_titre": "Les 20 meilleurs scores logeables dans un PEA",
+    # Ni thèse ni secteur : le critère d'entrée est JURIDIQUE. Un kind à part
+    # évite de faire passer une contrainte fiscale pour une conviction
+    # d'investissement — c'est la même exigence que le refus de « marge de
+    # sécurité » rappelé en tête de ce fichier.
+    "kind": "filtre",
+    "regle_texte": (
+        "Entrent dans la liste les sociétés dont le SIÈGE SOCIAL est situé dans "
+        "l'Union européenne ou dans l'Espace économique européen et qui sont "
+        "soumises à l'impôt sur les sociétés (article L221-31 du code monétaire "
+        "et financier). Parmi elles, les vingt meilleurs scores du run sont "
+        "publiés. Ni la place de cotation, ni la devise, ni la nationalité "
+        "perçue de l'entreprise n'entrent dans le critère."
+    ),
+    "thesis": (
+        "Le PEA exonère d'impôt sur le revenu les plus-values et les dividendes "
+        "après cinq ans de détention, seuls les prélèvements sociaux restant dus. "
+        "L'avantage est considérable et il a un prix : l'enveloppe n'accepte que "
+        "les sociétés dont le siège social est européen. Cette liste montre ce "
+        "que cette contrainte laisse réellement disponible, et surtout ce qu'un "
+        "filtre par place de cotation ferait manquer. Huit des titres retenus "
+        "cotent en dollars à New York — Nebius, STMicroelectronics, NXP, Ferrari "
+        "sont des sociétés néerlandaises, Accenture, Eaton, Medtronic et Seagate "
+        "des sociétés irlandaises. Aucune ne ressemble à une valeur européenne, "
+        "toutes le sont au sens du code monétaire et financier."
+    ),
+    # Une contrainte fiscale ne s'invalide pas comme une thèse : ce qui la
+    # périme, c'est un changement de droit ou de domicile, pas un retournement
+    # de marché. Le champ garde son libellé sur le site, son contenu dit la
+    # vérité du thème.
+    "inversion": (
+        "Cette liste ne se démode pas, elle se périme. Deux évènements la rendent "
+        "fausse sans qu'aucun cours ne bouge : une société qui transfère son siège "
+        "hors de l'UE perd son éligibilité du jour au lendemain, et une réforme du "
+        "PEA peut déplacer le critère lui-même. Le registre porte donc une date de "
+        "vérification, et une éligibilité ne se déduit jamais d'une donnée de "
+        "marché. Vérification la plus récente : " + PEA_VERIFIE_LE + "."
+    ),
+    "biais": (
+        "PIÈGE PRINCIPAL, à lire avant tout ordre : l'éligibilité juridique d'un "
+        "titre et l'acceptation de la ligne par ton courtier sont deux choses "
+        "différentes. Plusieurs courtiers français refusent au PEA les lignes "
+        "cotées à New York, ou n'acceptent que la ligne européenne quand elle "
+        "existe. À vérifier avant de passer l'ordre, jamais après. Les certificats "
+        "de dépôt (ADR) ne sont en aucun cas logeables, quel que soit le siège de "
+        "l'émetteur.\n\n"
+        "Ce filtre est FISCAL, pas économique : rien ne dit qu'un univers "
+        "restreint par le lieu du siège social se comporte mieux qu'un autre, et "
+        "il n'y a aucune raison qu'il le fasse. Il optimise l'imposition, pas la "
+        "sélection. Conséquence directe : la liste est presque vide de technologie "
+        "américaine, qui domine la watchlist principale, et concentrée sur "
+        "l'industrie, le luxe, la santé et la finance européennes. C'est le prix "
+        "de l'enveloppe, pas un jugement sur ces secteurs.\n\n"
+        "Enfin le PEA a ses propres exclusions, indépendantes du siège social : "
+        "les foncières cotées de type SIIC en sont écartées, et le plafond de "
+        "versements est de 150 000 €. Ce thème ne les modélise pas."
+    ),
+    "tickers": sorted(PEA_ELIGIBLES),
+    "top": TOP_PEA,
+})
+
 # ── THÈMES CALCULÉS ──────────────────────────────────────────────────────────
 # Aucun n'est publié dans cette version. Le mécanisme reste en place côté
 # screener (règle sur le breakdown + tri dédié) : réactiver « décote vs

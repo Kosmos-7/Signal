@@ -45,7 +45,7 @@ def check(nom, cond, detail=""):
 print("— Taxonomie —")
 ids = [t["id"] for t in themes.THEMES]
 check("identifiants uniques", len(ids) == len(set(ids)))
-check("2 thèmes curés publiés", len(themes.THEMES_CURES) == 2)
+check("3 thèmes curés publiés", len(themes.THEMES_CURES) == 3)
 check("chaque thème a thèse, inversion et biais",
       all(t.get("thesis") and t.get("inversion") and t.get("biais") for t in themes.THEMES))
 check("les thèmes calculés publient leur règle en clair",
@@ -155,6 +155,151 @@ check("les métadonnées publiques sont sérialisables (pas de callable)",
       json.dumps(meta, ensure_ascii=False, allow_nan=False) and
       all("regle" not in m and "tri" not in m for m in meta))
 check("un identifiant par thème dans les métadonnées", len(meta) == len(themes.THEMES))
+# ── Éligibilité PEA ─────────────────────────────────────────────────────────
+# Le critère est JURIDIQUE, pas mesuré : ces tests protègent une donnée écrite
+# à la main, là où le reste du fichier protège du code. C'est justement la
+# donnée qui se périme en silence — une redomiciliation ne fait bouger aucun
+# cours.
+print("\n— Éligibilité PEA —")
+
+pea = themes.THEMES_BY_ID["pea"]
+check("le thème PEA est de kind « filtre »", pea["kind"] == "filtre")
+check("il publie sa règle en clair", bool(pea.get("regle_texte")))
+check("il borne sa liste", pea.get("top") == themes.TOP_PEA == 20)
+
+check("aucun ticker n'est à la fois éligible et inéligible",
+      not (set(themes.PEA_ELIGIBLES) & set(themes.PEA_INELIGIBLES)),
+      str(sorted(set(themes.PEA_ELIGIBLES) & set(themes.PEA_INELIGIBLES))))
+check("chaque éligible porte son pays de siège",
+      all(isinstance(v, str) and "·" in v for v in themes.PEA_ELIGIBLES.values()))
+check("chaque inéligible porte son motif",
+      all(isinstance(v, str) and len(v) > 8 for v in themes.PEA_INELIGIBLES.values()))
+check("les tickers du thème sont exactement le registre",
+      set(pea["tickers"]) == set(themes.PEA_ELIGIBLES))
+check("assez d'éligibles pour que « top 20 » sélectionne vraiment",
+      len(themes.PEA_ELIGIBLES) >= 2 * themes.TOP_PEA,
+      f"{len(themes.PEA_ELIGIBLES)} éligibles")
+
+# Le piège que ce thème existe pour montrer : une place de cotation américaine
+# n'empêche pas l'éligibilité. Si ce test tombe, c'est que quelqu'un a « nettoyé »
+# le registre en filtrant sur le suffixe du ticker.
+hors_europe = [t for t in themes.PEA_ELIGIBLES if "." not in t]
+check("des titres cotés hors d'Europe figurent parmi les éligibles",
+      len(hors_europe) >= 5, str(sorted(hors_europe)))
+check("Nebius est éligible malgré sa cotation au Nasdaq", "NBIS" in themes.PEA_ELIGIBLES)
+
+# Les inéligibilités qui coûtent cher si on les oublie.
+for tk, motif in [("ARM", "Royaume-Uni"), ("HSBA.L", "Royaume-Uni"),
+                  ("ABBN.SW", "Suisse"), ("CB", "Suisse")]:
+    check(f"{tk} est explicitement écarté ({motif})", tk in themes.PEA_INELIGIBLES)
+
+# Un éligible absent de l'univers scoré ne serait jamais publié : le thème
+# afficherait un trou sans que rien ne le signale.
+_univers = set(screener.UNIVERS)
+absents = sorted(set(themes.PEA_ELIGIBLES) - _univers)
+check("tous les éligibles sont dans l'univers scoré", not absents, str(absents))
+
+# ── Bornage et couverture du kind « filtre » ────────────────────────────────
+# Reproduit la logique de publication du screener sur des scores simulés, pour
+# vérifier les deux propriétés qui se sont contredites à l'écriture : la liste
+# est bornée à 20, mais la COUVERTURE se mesure avant bornage — sinon le thème
+# serait « dégradé » à chaque run par sa propre définition.
+def _publier(scores, top):
+    membres = sorted([t for t in pea["tickers"] if t in scores],
+                     key=lambda t: (-scores[t], t))
+    declares, couverts = len(pea["tickers"]), len(membres)
+    return membres[:top], couverts / declares
+
+
+tous = {t: i for i, t in enumerate(sorted(pea["tickers"]))}
+liste, couv = _publier(tous, themes.TOP_PEA)
+check("la liste publiée est bornée à 20", len(liste) == 20, str(len(liste)))
+check("couverture pleine quand tout est scoré", couv == 1.0, f"{couv:.0%}")
+check("triée par score décroissant",
+      liste == sorted(liste, key=lambda t: (-tous[t], t)))
+
+moitie = {t: i for i, t in enumerate(sorted(pea["tickers"])[:len(pea["tickers"]) // 2])}
+liste2, couv2 = _publier(moitie, themes.TOP_PEA)
+check("une panne de source dégrade la couverture", couv2 < 0.70, f"{couv2:.0%}")
+check("mais les 20 lignes restent remplies", len(liste2) == 20,
+      "le bornage masquerait la panne sans la mesure avant troncature")
+
+
+total = ok + len(ko)
+print(f"\n{ok}/{total} tests passés")
+if ko:
+    print("Échecs : " + ", ".join(ko))
+sys.exit(1 if ko else 0)
+
+
+# ── Éligibilité PEA ─────────────────────────────────────────────────────────
+# Le critère est JURIDIQUE, pas mesuré : ces tests protègent une donnée écrite
+# à la main, là où le reste du fichier protège du code. C'est justement la
+# donnée qui se périme en silence — une redomiciliation ne fait bouger aucun
+# cours.
+print("\n— Éligibilité PEA —")
+
+pea = themes.THEMES_BY_ID["pea"]
+check("le thème PEA est de kind « filtre »", pea["kind"] == "filtre")
+check("il publie sa règle en clair", bool(pea.get("regle_texte")))
+check("il borne sa liste", pea.get("top") == themes.TOP_PEA == 20)
+
+check("aucun ticker n'est à la fois éligible et inéligible",
+      not (set(themes.PEA_ELIGIBLES) & set(themes.PEA_INELIGIBLES)),
+      str(sorted(set(themes.PEA_ELIGIBLES) & set(themes.PEA_INELIGIBLES))))
+check("chaque éligible porte son pays de siège",
+      all(isinstance(v, str) and "·" in v for v in themes.PEA_ELIGIBLES.values()))
+check("chaque inéligible porte son motif",
+      all(isinstance(v, str) and len(v) > 8 for v in themes.PEA_INELIGIBLES.values()))
+check("les tickers du thème sont exactement le registre",
+      set(pea["tickers"]) == set(themes.PEA_ELIGIBLES))
+check("assez d'éligibles pour que « top 20 » sélectionne vraiment",
+      len(themes.PEA_ELIGIBLES) >= 2 * themes.TOP_PEA,
+      f"{len(themes.PEA_ELIGIBLES)} éligibles")
+
+# Le piège que ce thème existe pour montrer : une place de cotation américaine
+# n'empêche pas l'éligibilité. Si ce test tombe, c'est que quelqu'un a « nettoyé »
+# le registre en filtrant sur le suffixe du ticker.
+hors_europe = [t for t in themes.PEA_ELIGIBLES if "." not in t]
+check("des titres cotés hors d'Europe figurent parmi les éligibles",
+      len(hors_europe) >= 5, str(sorted(hors_europe)))
+check("Nebius est éligible malgré sa cotation au Nasdaq", "NBIS" in themes.PEA_ELIGIBLES)
+
+# Les inéligibilités qui coûtent cher si on les oublie.
+for tk, motif in [("ARM", "Royaume-Uni"), ("HSBA.L", "Royaume-Uni"),
+                  ("ABBN.SW", "Suisse"), ("CB", "Suisse")]:
+    check(f"{tk} est explicitement écarté ({motif})", tk in themes.PEA_INELIGIBLES)
+
+# Un éligible absent de l'univers scoré ne serait jamais publié : le thème
+# afficherait un trou sans que rien ne le signale.
+_univers = set(screener.UNIVERS)
+absents = sorted(set(themes.PEA_ELIGIBLES) - _univers)
+check("tous les éligibles sont dans l'univers scoré", not absents, str(absents))
+
+# ── Bornage et couverture du kind « filtre » ────────────────────────────────
+# Reproduit la logique de publication du screener sur des scores simulés, pour
+# vérifier les deux propriétés qui se sont contredites à l'écriture : la liste
+# est bornée à 20, mais la COUVERTURE se mesure avant bornage — sinon le thème
+# serait « dégradé » à chaque run par sa propre définition.
+def _publier(scores, top):
+    membres = sorted([t for t in pea["tickers"] if t in scores],
+                     key=lambda t: (-scores[t], t))
+    declares, couverts = len(pea["tickers"]), len(membres)
+    return membres[:top], couverts / declares
+
+
+tous = {t: i for i, t in enumerate(sorted(pea["tickers"]))}
+liste, couv = _publier(tous, themes.TOP_PEA)
+check("la liste publiée est bornée à 20", len(liste) == 20, str(len(liste)))
+check("couverture pleine quand tout est scoré", couv == 1.0, f"{couv:.0%}")
+check("triée par score décroissant",
+      liste == sorted(liste, key=lambda t: (-tous[t], t)))
+
+moitie = {t: i for i, t in enumerate(sorted(pea["tickers"])[:len(pea["tickers"]) // 2])}
+liste2, couv2 = _publier(moitie, themes.TOP_PEA)
+check("une panne de source dégrade la couverture", couv2 < 0.70, f"{couv2:.0%}")
+check("mais les 20 lignes restent remplies", len(liste2) == 20,
+      "le bornage masquerait la panne sans la mesure avant troncature")
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")

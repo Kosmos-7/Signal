@@ -68,6 +68,18 @@ REQUETES = {
         "cleanroom semiconductor fabrication",
         "electrical substation transformer high voltage",
     ],
+    # Le thème PEA n'a pas d'objet : c'est une enveloppe fiscale française qui
+    # n'accepte que les sociétés à siège européen. On l'illustre donc par ce que
+    # la contrainte a de concret — la monnaie et les institutions communes —
+    # plutôt que par un objet financier, qui dirait « bourse » et non « Europe ».
+    "pea": [
+        "Euro sculpture Frankfurt Willy Brandt Platz",
+        "European Parliament hemicycle Strasbourg",
+        "European flags Berlaymont Brussels",
+        "euro coins banknotes",
+        "European Central Bank building Frankfurt",
+        "European Union flags row",
+    ],
     "financials": [
         "stock exchange building facade columns",
         "bank headquarters building facade",

@@ -406,7 +406,7 @@ thesis:"Les trente meilleurs scores de l'univers, toutes catégories confondues.
     inversion:'',biais:'',regle_texte:'',declares:stocks.length,scores:stocks.length,
     couverture:1,status:'ok',members:stocks.map(s=>s.ticker)};
 }
-const KIND={these:'Thèse',secteur:'Secteur',calcule:'Calculé',principale:'Principale'};
+const KIND={these:'Thèse',secteur:'Secteur',calcule:'Calculé',filtre:'Filtre',principale:'Principale'};
 
 Promise.all([
   fetch('watchlist.json?v='+Date.now()).then(r=>{if(!r.ok)throw new Error('watchlist.json HTTP '+r.status);return r.json();}),
@@ -729,10 +729,10 @@ function renderWl(meta){
     '<div class="wl-t">'+sv(meta.label)+'</div>'+
     (meta.sous_titre?'<div class="wl-s">'+sv(meta.sous_titre)+'</div>':'')+
     (meta.thesis?'<p class="wl-th">'+sv(meta.thesis)+'</p>':'')+
-    (isCalc&&meta.regle_texte?'<div class="wl-rule"><i>Règle de sélection, appliquée à chaque run</i>'+sv(meta.regle_texte)+'</div>':'')+
+    (meta.regle_texte?'<div class="wl-rule"><i>Règle de sélection, appliquée à chaque run</i>'+sv(meta.regle_texte)+'</div>':'')+
     ((meta.inversion||meta.biais)?'<div class="wl-notes">'+
-      (meta.inversion?'<div class="wl-note"><h4>Ce qui invaliderait cette thèse</h4><p>'+sv(meta.inversion)+'</p></div>':'')+
-      (meta.biais?'<div class="wl-note"><h4>Biais de ce thème</h4><p>'+sv(meta.biais)+'</p></div>':'')+
+      (meta.inversion?'<div class="wl-note"><h4>'+(meta.kind==='filtre'?'Ce qui périmerait cette liste':'Ce qui invaliderait cette thèse')+'</h4>'+blocs(meta.inversion)+'</div>':'')+
+      (meta.biais?'<div class="wl-note"><h4>Biais de ce thème</h4>'+blocs(meta.biais)+'</div>':'')+
     '</div>':'')+
     (meta.status==='degraded'?'<div class="wl-covw">'+covWarn(meta)+'</div>':
 (meta.eligibles!=null?'<div class="wl-cov">'+meta.scores+' titres retenus sur '+meta.eligibles+' éligibles, la liste est bornée pour rester lisible, pas tronquée en silence</div>':
@@ -760,6 +760,7 @@ function stateTag(b){const ct=b.cross_type==='golden'?'GOLDEN CROSS':b.cross_typ
 // régénérées tant que _sig ne change pas) sont couvertes ici aussi.
 function sv(s){s=String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');return s.replace(/&lt;b&gt;/g,'<b>').replace(/&lt;\/b&gt;/g,'</b>');}
 function paras(a){return a.map(p=>'<p>'+sv(p)+'</p>').join('');}
+function blocs(t){return paras(String(t==null?'':t).split(/\n\n+/));}
 function meter(l,v,m){return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(v/m*100)+'"></span></span><span class="mv">'+v+'/'+m+'</span></div>';}
 function sec(h,body,cls){return'<div class="sec '+(cls||'')+'"><div class="sec-h">'+h+'</div>'+body+'</div>';}
 function mk(k,v){return'<div><span class="k">'+k+'</span><span class="v">'+v+'</span></div>';}
@@ -1122,13 +1123,13 @@ function themeBar(meta){
   const deg=meta.status==='degraded'?'<span class="tb-deg">couverture partielle</span>':'';
   const cnt=meta.eligibles!=null?meta.scores+' retenus / '+meta.eligibles+' éligibles'
                                 :meta.scores+' titres';
-  return '<details class="tbar"><summary><span class="tb-k">'+sv(meta.kind==='calcule'?'calculé':meta.kind==='secteur'?'secteur':'thèse')+
+  return '<details class="tbar"><summary><span class="tb-k">'+sv(KIND[meta.kind]||meta.kind||'')+
     '</span><span class="tb-l">'+sv(meta.label)+'</span><span class="tb-c">'+cnt+'</span>'+deg+
     '<span class="tb-x">thèse ▾</span></summary><div class="tb-body">'+
     '<p>'+sv(meta.thesis)+'</p>'+
     (meta.regle_texte?'<div class="tb-n"><h5>Règle de sélection</h5><p>'+sv(meta.regle_texte)+'</p></div>':'')+
-    (meta.inversion?'<div class="tb-n"><h5>Ce qui invaliderait cette thèse</h5><p>'+sv(meta.inversion)+'</p></div>':'')+
-    (meta.biais?'<div class="tb-n"><h5>Biais de ce thème</h5><p>'+sv(meta.biais)+'</p></div>':'')+
+    (meta.inversion?'<div class="tb-n"><h5>'+(meta.kind==='filtre'?'Ce qui périmerait cette liste':'Ce qui invaliderait cette thèse')+'</h5>'+blocs(meta.inversion)+'</div>':'')+
+    (meta.biais?'<div class="tb-n"><h5>Biais de ce thème</h5>'+blocs(meta.biais)+'</div>':'')+
     '</div></details>';
 }
 
