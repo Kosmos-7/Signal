@@ -5,6 +5,22 @@ on:
   schedule:
     - cron: '0 8 * * 1'
   workflow_dispatch:
+    inputs:
+      screener_seul:
+        # Republier les projections (watchlist.json, universe.json) sans
+        # toucher au portefeuille. Utile quand une watchlist thematique change
+        # en cours de semaine : le front lit universe.json, pas themes.py, donc
+        # un nouveau theme reste invisible tant que le screener n'a pas tourne.
+        #
+        # Pourquoi une entree plutot qu'un run complet : l'agent de portefeuille
+        # prendrait une decision d'achat ou de vente HORS de son calendrier
+        # hebdomadaire, et cette decision s'inscrit definitivement dans
+        # l'historique du portefeuille. Republier une liste ne doit pas avoir ce
+        # pouvoir-la. Accessoirement les deux etapes sautees sont les seules qui
+        # appellent l'API Anthropic, donc les seules qui coutent.
+        description: "N'executer que le screener : ni decision de portefeuille, ni fiches editoriales"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -38,6 +54,7 @@ jobs:
 
       - name: Run portfolio agent (portfolio.json)
         id: agent
+        if: inputs.screener_seul != true
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -46,6 +63,7 @@ jobs:
 
       - name: Generate editorial analyses (analyses.json)
         id: analyses
+        if: inputs.screener_seul != true
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -89,7 +107,16 @@ jobs:
             echo "Aucun changement cette semaine."
           else
             WEEK=$(python -c "from datetime import date; d=date.today(); print(f'Sem. {d.isocalendar()[1]} · {d.year}')")
-            git commit -m "update: $WEEK — watchlist + portfolio + archive [skip ci]"
+            # Le message doit dire ce que le run a REELLEMENT fait : annoncer
+            # « portfolio » sur un run qui n'a pas execute l'agent rendrait
+            # l'historique du portefeuille illisible, or c'est precisement la
+            # trace qu'on ne veut pas salir.
+            if [ "${{ inputs.screener_seul }}" = "true" ]; then
+              PORTEE="watchlist seule (screener, sans agent ni fiches)"
+            else
+              PORTEE="watchlist + portfolio + archive"
+            fi
+            git commit -m "update: $WEEK — $PORTEE [skip ci]"
             git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase — échec explicite (pas de push silencieusement perdu)"; exit 1; }
             git push
           fi
