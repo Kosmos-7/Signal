@@ -265,7 +265,13 @@ def illustrer(post_id, sujet):
         except Exception as e:
             print(f"   photo ✗ {fichier[:50]} — {type(e).__name__}")
             continue
-        legende = os.path.splitext(fichier)[0][:80]
+        # Le nom de fichier Commons sert de legende faute de mieux, mais brut
+        # il se coupe en plein mot et garde ses numeros d'archive. On nettoie,
+        # et on coupe au dernier mot entier.
+        legende = re.sub(r"\s*\([^)]*\)\s*", " ", os.path.splitext(fichier)[0])
+        legende = re.sub(r"\s+", " ", legende.replace("_", " ")).strip()
+        if len(legende) > 70:
+            legende = legende[:70].rsplit(" ", 1)[0] + "…"
         return {"src": f"{PHOTOS}/{post_id}.jpg", "v": v, "legende": legende,
                 "credit": (meta.get("auteur") or "").strip(),
                 "licence": meta["licence"], "page": meta["page"],
