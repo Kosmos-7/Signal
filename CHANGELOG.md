@@ -5,6 +5,31 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.11.0] — 2026-08-03
+
+### Le plein écran revient, et se couche dans le bon sens
+
+- **Retour du mode plein écran des graphiques de fiches** (retiré plus tôt le
+  même jour), avec la nouveauté qui le justifie : **sur téléphone tenu en
+  portrait, le calque pivote de 90° et s'affiche directement en paysage** —
+  plus besoin de tourner l'appareil pour lire dix ans de cours. L'API Screen
+  Orientation exigerait le vrai plein écran navigateur, refusé par iOS : la
+  rotation CSS, elle, marche partout.
+- Dans ce repère tourné, tout reste utilisable : le réticule suit le doigt
+  (coordonnées écran retraduites dans le repère du calque), l'infobulle
+  flotte d'un seul côté du réticule, le double-curseur et les presets
+  répondent au doigt. Tourner physiquement le téléphone lève la rotation CSS
+  et repasse au paysage naturel.
+- **Dimensionnement en deux passes** : premier rendu sur une estimation, puis
+  redessin calé sur la boîte réellement laissée par la mise en page — un
+  budget fixe se trompait toujours quelque part et le graphe recouvrait la
+  barre de boutons. Garde-fou CSS en plus : le dessin ne peint jamais
+  par-dessus « Quitter ».
+- Ton du point du matin d'Actualités : léger et complice, sur les
+  formulations uniquement — jamais sur les faits ni aux dépens de qui perd de
+  l'argent. Le post du 3 août a été réécrit dans ce ton (réécriture permise
+  le jour même seulement).
+
 ## [3.10.0] — 2026-08-03
 
 ### La performance ne compte plus les virements
