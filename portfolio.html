@@ -1894,9 +1894,9 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
       </div>
       <div class="threshold-row">
         <div class="th">
-          <div class="th-label">Valeur du portefeuille <span class="kpi-info" data-tip="Actions au cours du jour + liquidités, en euros. Le gain net se décompose en ${fmtEur(pvLatenteTotale)} de plus-value latente sur les positions ouvertes (le détail est dans le tableau) et ${signE(gainRealise)} de résultat réalisé sur les ventes passées, frais (${fmtEur(fraisCum)}) et impôts (${fmtEur(impotsCum)}) déduits. Tout vendu aujourd'hui : ${fmtEur(gainPostLiq)} net après PFU et frais.">ⓘ</span></div>
+          <div class="th-label">Valeur du portefeuille <span class="kpi-info" data-tip="Actions au cours du jour + liquidités, en euros. L'écart avec le capital versé se décompose en ${signE(pvLatenteTotale)} de plus-value latente sur les positions ouvertes (le détail est dans le tableau) et ${signE(gainRealise)} de résultat réalisé sur les ventes passées, frais (${fmtEur(fraisCum)}) et impôts (${fmtEur(impotsCum)}) déduits. Attention : la plus-value latente n'a pas encore été imposée. Tout vendu aujourd'hui, le gain NET serait de ${signE(gainPostLiq)} après PFU et frais de vente.">ⓘ</span></div>
           <div class="th-value">${fmtEur(d.capital_actuel)}</div>
-          <div class="th-sub">versé ${fmtEur(d.capital_initial)} · <span class="${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))} de gain net</span></div>
+          <div class="th-sub">versé ${fmtEur(d.capital_initial)} · <span class="${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))}</span></div>
         </div>
         <div class="th">
           <div class="th-label">Notre performance <span class="kpi-info" data-tip="Performance pondérée par le temps depuis le lancement : les versements et retraits n'y comptent ni comme gain ni comme perte">ⓘ</span></div>
