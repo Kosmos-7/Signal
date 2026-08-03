@@ -1,0 +1,89 @@
+{
+ "id": "2026-08-03",
+ "type": "quotidien",
+ "date": "2026-08-03",
+ "titre": "Le dollar signe sa pire semaine depuis plus de 3 mois sur fond de doutes autour de la Fed",
+ "chapeau": "Le billet vert a enregistré sa plus mauvaise semaine en plus de trois mois, tandis que les négociations américano-iraniennes pèsent sur le pétrole ce lundi matin.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-03.jpg",
+  "v": "df94e69c",
+  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in",
+  "credit": "Kondo Atsushi",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
+  "fichier": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in March 2009.jpg",
+  "requete": "stock exchange display board"
+ },
+ "sections": [
+  {
+   "titre": "Dollar : la pire semaine depuis plus de trois mois",
+   "texte": "Le dollar a enregistré sa plus mauvaise performance hebdomadaire depuis plus de trois mois, dans un contexte de doutes croissants autour de la Réserve fédérale. Les traders avaient pourtant renforcé leurs paris haussiers sur le billet vert avant la réunion de la Fed, atteignant leur niveau le plus optimiste depuis 2014 en date de mardi, selon les données de la Commodity Futures Trading Commission publiées vendredi.",
+   "sources": [
+    8
+   ]
+  },
+  {
+   "titre": "Pétrole : les pourparlers américano-iraniens font pression sur les cours",
+   "texte": "Le pétrole recule ce lundi alors que des négociations de paix entre les États-Unis et l'Iran sont de nouveau en cours. Par ailleurs, Reuters souligne que la hausse de production décidée par l'OPEP+ apparaît pour l'instant sans impact significatif sur le marché, même si ses effets pourraient se faire sentir ultérieurement. L'Iran a par ailleurs exécuté deux personnes accusées d'espionnage au profit d'Israël, tandis que Téhéran est décrit comme cherchant à élargir sa campagne de pression pour obtenir des concessions américaines.",
+   "sources": [
+    0,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "titre": "Obligations indiennes : Bloomberg reporte leur intégration à son indice mondial",
+   "texte": "Bloomberg a annoncé le report de l'intégration des obligations indiennes à son indice mondial, une décision qui a déçu les opérateurs de marché. Cette annonce devrait selon Bloomberg entraîner des ventes sur le marché obligataire indien.",
+   "sources": [
+    6
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Jim Cramer's top 10 things to watch in the stock market Monday",
+   "resume": "Oil is falling as U.S.-Iran peace talks are back on. Plus, a potential massive merger in the pharmaceutical industry.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/03/jim-cramers-top-10-things-to-watch-in-the-stock-market-monday.html",
+   "date": "2026-08-03 13:08"
+  },
+  {
+   "titre": "OPEC+ oil output hike is irrelevant for now, not for later - Reuters",
+   "resume": "OPEC+ oil output hike is irrelevant for now, not for later  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOZ1F5SEtvVzlTU0VibXRmNGx4ZldyYllQcHBfSEkzRHVLVGdrNUxMLUZtQXZsT1pTWjJ4Z1F0ekFyN3NkWjRITjdCc2NtcmpFZ0k2OWN5Z25WOVVFVHpJNEVWQkU3emxZYkUtVFhFand1cWVHSWUyRUpQa1FOOUtPWlRKUzRVQUs3V3oxcWphVzVKUUhSSUNZaHNtdHVkM1U5VXE2Q0ZPNzE4UG5WQmdVS2cwZlU3UnNN?oc=5",
+   "date": "2026-08-03 10:49"
+  },
+  {
+   "titre": "How Iran is widening its pressure campaign to force US concessions - Reuters",
+   "resume": "How Iran is widening its pressure campaign to force US concessions  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQU2VYbG9DT1JoZWlaZkxlVTc4T01mcjJ0cU9rc2FCWWxuY1dONTVmN0ZTU1RUZzlLUTNGbzgzYURCTFFqZzRWVXZSWXZKZC1Ldm05dFVOdmNZdnlxRVBBUzE2VDVjSU1wMlFXMkFBeDlKeVBuRWQxa2tYV1hPb0hvOHdRd0JvUGREek5HZXhuVXpMR0RBZzdKSE1fNmIyQWVzRVdfUEEzdkt5Zm1XNUVOVnpnbEg3bnNu?oc=5",
+   "date": "2026-08-03 10:02"
+  },
+  {
+   "titre": "Iran executes two people accused of spying for Israel - Reuters",
+   "resume": "Iran executes two people accused of spying for Israel  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxObVpPMnE4MnRQckNZZXg0SU9TYTI4WG5qdmc2aUhydFU0LXlJS04taFVoOU5idUFqb3ZtSFZsVUlpYUhackVhN2lGQUlYQ3hqekNxYkkxd1E1aDU2TGVZTEJQc3V5U1EwVzJLRDdiQmdITzZFYlI4TWZzOTBtT2c5bTREN2tvVVZWUk1hb1EwSlVmRHpSaVJvTDdINzFCaTFHRFI0?oc=5",
+   "date": "2026-08-03 09:53"
+  },
+  {
+   "titre": "Bloomberg puts off adding Indian bonds to its global index",
+   "resume": "Bloomberg delays adding Indian bonds to its global index, disappointing traders and prompting expected selling in the bond market.",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-07-31/bloomberg-defers-inclusion-of-indian-bonds-in-global-index-ms8wqbxp",
+   "date": "2026-08-01 06:15"
+  },
+  {
+   "titre": "Dollar logs its worst week in over 3 months amid Fed doubts",
+   "resume": "Traders boosted their bullish dollar bets ahead of the Fed meeting, turning the most upbeat since 2014 as of Tuesday, according to Commodity Futures Trading Commission data released Friday",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-07-31/dollar-heads-for-worst-week-in-three-months-as-fed-doubts-grow",
+   "date": "2026-08-01 04:32"
+  }
+ ],
+ "genere_le": "2026-08-03 13:32 UTC"
+}
