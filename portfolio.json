@@ -4,12 +4,12 @@
  "capital_initial": 30000.0,
  "capital_actuel": 33509.9,
  "performance": 28.75,
- "performance_brute": 29.1,
+ "performance_brute": 29.24,
  "total_frais_payes": 30.11,
  "total_impots_payes": 58.9,
  "total_pertes_reportables": 861.36,
  "capital_post_liquidation": 31978.89,
- "performance_post_liquidation": 22.87,
+ "performance_post_liquidation": 20.37,
  "frais_si_liquidation": 17.37,
  "pfu_latent_si_liquidation": 1513.66,
  "pertes_si_liquidation": 454.93,
@@ -2034,12 +2034,14 @@
   {
    "date": "2026-05-05",
    "montant": 10000.0,
-   "capital_post": 22107.39
+   "capital_post": 22107.39,
+   "effective_le": "2026-05-05"
   },
   {
    "date": "2026-08-03",
    "montant": 10000.0,
-   "capital_post": 33509.9
+   "capital_post": null,
+   "effective_le": null
   }
  ]
 }

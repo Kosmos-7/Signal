@@ -1857,6 +1857,20 @@ def main():
 
     val_pos = sum(p.get("valeur_actuelle", 0) for p in portfolio.get("positions", []))
     portfolio["capital_actuel"] = round(val_pos + portfolio.get("liquidites", CAPITAL_INITIAL), 2)
+
+    # Les versements en attente entrent dans le périmètre de performance ICI,
+    # au moment où l'agent peut en disposer — qu'il les investisse ou non.
+    # Avant ce point ils étaient un dépôt administratif hors mesure ; à partir
+    # de ce point, garder du cash est un choix de stratégie et sa traînée
+    # compte. Seul l'agent estampille : update_prices, qui tourne tous les
+    # jours, n'est pas un point de décision.
+    for _inj in portfolio.get("injections", []):
+        if _inj.get("capital_post") is None:
+            _inj["capital_post"] = portfolio["capital_actuel"]
+            _inj["effective_le"] = today
+            print(f"   💶 Injection du {_inj['date']} ({_inj['montant']:.0f}€) "
+                  f"entre dans le périmètre de performance (capital {portfolio['capital_actuel']:.0f}€)")
+
     portfolio["performance"]    = _perf_twr(portfolio, portfolio["capital_actuel"])
 
     # ── Niveau 2 : règles mécaniques calculées avant d'appeler Claude

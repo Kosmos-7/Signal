@@ -226,23 +226,44 @@ WATCHLIST_MAX_PER_COUNTRY    = 12
 # gain ni comme perte, il ne fait que s'ajouter à la base de la période
 # suivante.
 #
-# Chaque entrée de `injections` (portfolio.json) porte trois champs :
+# RAFFINEMENT (03/08/2026, seconde décision du même jour) : un versement reste
+# HORS du périmètre de mesure tant que la stratégie n'a pas pu en disposer.
+# Entre le virement et le run hebdomadaire suivant de l'agent, le cash est un
+# dépôt administratif : le compter aurait dilué la performance des positions
+# (des positions à +10 % sur la semaine n'auraient affiché que +6,9 %). Il
+# entre dans le périmètre au premier run de l'agent qui suit — INVESTI OU NON.
+# « Ou non » est délibéré : à partir du moment où l'agent a vu le cash, le
+# garder liquide est un choix de stratégie, et sa traînée doit compter. Ne
+# compter le cash qu'une fois investi ouvrirait une échappatoire — un
+# portefeuille paraîtrait brillant en n'investissant jamais — et se heurterait
+# à la fongibilité : quand l'agent vend 2 k€ et achète 5 k€ la même semaine,
+# personne ne peut dire quels euros viennent du versement.
+#
+# Chaque entrée de `injections` (portfolio.json) porte donc :
 #   date          — jour du versement
 #   montant       — somme versée
-#   capital_post  — capital TOTAL constaté juste après le versement, FIGÉ ici
-#                   à l'écriture. On ne le relit pas dans performance_history :
-#                   l'historique est plafonné à ~260 points, et le jour où la
-#                   date d'injection en serait sortie, la performance aurait
-#                   silencieusement changé de valeur.
+#   capital_post  — None TANT QUE le versement attend ; au premier run de
+#                   l'agent, celui-ci l'estampille avec le capital TOTAL du
+#                   moment, FIGÉ là. On ne le relit pas dans
+#                   performance_history : l'historique est plafonné à ~260
+#                   points, et le jour où la date en serait sortie, la
+#                   performance aurait silencieusement changé de valeur.
+#   effective_le  — date de l'estampille (traçabilité).
 
 def perf_ponderee_temps(injections, capital_actuel, capital_depart):
-    """Performance (%) chaînée entre injections, insensible aux versements."""
-    base, facteur = float(capital_depart), 1.0
+    """Performance (%) chaînée entre injections, insensible aux versements.
+
+    Un versement en attente (capital_post is None) est soustrait du capital
+    mesuré : il n'est ni un gain, ni une perte, ni même encore une base."""
+    base, facteur, en_attente = float(capital_depart), 1.0, 0.0
     for inj in sorted(injections or [], key=lambda i: i["date"]):
+        if inj.get("capital_post") is None:
+            en_attente += float(inj["montant"])
+            continue
         if base <= 0:
             return 0.0
         facteur *= (float(inj["capital_post"]) - float(inj["montant"])) / base
         base = float(inj["capital_post"])
     if base <= 0:
         return 0.0
-    return round((facteur * (float(capital_actuel) / base) - 1) * 100, 2)
+    return round((facteur * ((float(capital_actuel) - en_attente) / base) - 1) * 100, 2)

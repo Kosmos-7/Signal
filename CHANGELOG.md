@@ -24,6 +24,13 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
   capital constaté juste après, figé à l'écriture — l'historique étant
   plafonné à ~260 points, le relire aurait fait changer la performance en
   silence le jour où une date d'injection en serait sortie.
+- **Raffinement le jour même** : un versement reste **hors périmètre tant
+  que l'IA n'a pas pu en disposer** — entre le virement et son run
+  hebdomadaire suivant, le cash est un dépôt administratif qui ne dilue pas
+  la performance des positions. Il entre dans le périmètre au premier run de
+  l'agent, investi ou non : « ou non » est délibéré, ne compter le cash
+  qu'une fois investi permettrait de paraître brillant en n'investissant
+  jamais, et la fongibilité rend « investi » indécidable de toute façon.
 - La colonne `perf` de l'historique est migrée (la série de capitaux, le fait
   brut, ne bouge pas) ; les producteurs (agent, update_prices) partagent la
   même fonction dans config.py ; le prompt de l'agent décrit la nouvelle

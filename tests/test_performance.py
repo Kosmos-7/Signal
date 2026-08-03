@@ -50,11 +50,30 @@ check("la perte reste une perte malgré une injection",
       twr([{"date": "2026-03-01", "montant": 10000, "capital_post": 18000}],
           17000, 10000) < 0)
 
+print("\n— Versement en attente : hors périmètre jusqu'à disposition —")
+attente = inj + [{"date": "2026-08-03", "montant": 10000, "capital_post": None}]
+check("un versement en attente ne change pas la performance",
+      twr(attente, 33509.90, 10000) == twr(inj, 23509.90, 10000) == 28.75)
+# La propriété qui a motivé le raffinement : pendant l'attente, les gains des
+# positions ne sont pas dilués par le cash parqué.
+gain = 33509.90 + 2315.78          # positions +10 %, cash inchangé
+check("les gains pendant l'attente ne sont pas dilués",
+      twr(attente, gain, 10000) > twr(
+          inj + [{"date": "2026-08-03", "montant": 10000, "capital_post": 33509.90}],
+          gain, 10000))
+# L'estampille (capital_post figé au capital du moment) ne fait pas sauter la
+# mesure d'un centième : la période se ferme exactement où elle en était.
+c = 34100.0
+check("l'estampille est sans discontinuité",
+      twr(attente, c, 10000) == twr(
+          inj + [{"date": "2026-08-03", "montant": 10000, "capital_post": c}], c, 10000))
+
 print("\n— Cohérence du portefeuille publié —")
 d = json.load(open(os.path.join(RACINE, "portfolio.json"), encoding="utf-8"))
 injections = d.get("injections", [])
-check("le registre des injections existe et fige capital_post",
-      injections and all({"date", "montant", "capital_post"} <= set(i) for i in injections))
+check("le registre des injections existe, capital_post présent (None = en attente)",
+      injections and all({"date", "montant", "capital_post", "effective_le"} <= set(i)
+                         for i in injections))
 cap_depart = d["capital_initial"] - sum(i["montant"] for i in injections)
 check("capital de départ reconstruit = 10 000 €", cap_depart == 10000.0)
 check("le champ performance est bien la mesure pondérée par le temps",
