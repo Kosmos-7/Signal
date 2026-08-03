@@ -402,7 +402,7 @@ let curWl=null,curList=[],curGroups=null;
 function mainMeta(){
   if(TBY[MAIN])return TBY[MAIN];
   return {id:MAIN,label:'Watchlist principale',sous_titre:'Les meilleurs scores, toutes catégories',kind:'principale',
-thesis:"Les trente meilleurs scores de l'univers, toutes catégories confondues. Une seule méthode : la qualité du business, le prix payé, le timing. C'est le classement de référence, les watchlists thématiques n'en sont que des projections, un titre n'est jamais noté deux fois.",
+thesis:"Les trente meilleurs scores de l'univers, toutes catégories confondues. Une seule méthode : la qualité du business, le prix payé, le timing. C'est le classement de référence, celui par lequel commencer.",
     inversion:'',biais:'',regle_texte:'',declares:stocks.length,scores:stocks.length,
     couverture:1,status:'ok',members:stocks.map(s=>s.ticker)};
 }
@@ -694,7 +694,7 @@ function showHome(){
   const meta=[U.updated_at?'Mise à jour '+sv(U.updated_at):'',U.week?sv(U.week):''
   ].filter(Boolean).join(' · ');
   doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
-    '<p class="home-lead">Un seul score, plusieurs lectures. La <b>principale</b> classe tout l\'univers, les <b>thématiques</b> le découpent par conviction, <b>Éligibles PEA</b> par le droit.</p>'+
+    '<p class="home-lead">Bonne entreprise, bon prix, bon moment : trois questions différentes, qu\'on confond presque toujours en une seule. Faute de méthode, on finit par acheter ce dont on a entendu parler. Signal note tout son univers sur ces trois axes, avec le même barème du premier au dernier titre.</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
