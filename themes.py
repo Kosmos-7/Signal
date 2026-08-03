@@ -67,10 +67,11 @@ THEMES_CURES = [
         "kind": "these",
         "thesis": (
             "Qui encaisse les milliards que l'IA dépense ? Personne ne sait quel usage "
-            "gagnera, mais chaque dollar investi finit en objets physiques : puces, "
+            "gagnera, mais l'essentiel de la dépense finit en objets physiques : puces, "
             "machines de gravure, mémoire, serveurs, électricité. Suivre cette chaîne, "
-            "c'est parier sur la dépense plutôt que sur le vainqueur. Le goulot n'est "
-            "d'ailleurs pas la gravure : l'assemblage et les substrats."
+            "c'est parier sur la dépense plutôt que sur le vainqueur. Avec une "
+            "conviction assumée : le goulot est moins la gravure que l'assemblage et "
+            "les substrats."
         ),
         "inversion": (
             "Le retour sur investissement applicatif ne se matérialise pas et les hyperscalers "
@@ -202,13 +203,14 @@ THEMES_CURES = [
     {
         "id": "financials",
         "label": "Financials",
-        "sous_titre": "Bilans, flux et péages de marché",
+        "sous_titre": "Bilans, flux, encours et péages",
         "kind": "secteur",
         "thesis": (
-            "Qu'achète-t-on vraiment avec « de la finance » ? Trois métiers qui ne "
-            "gagnent pas leur argent de la même façon : les BILANS vivent des taux, les "
-            "FLUX d'une commission sur chaque transaction, les PÉAGES d'un accès que "
-            "personne ne peut contourner. Côte à côte, on voit lequel se paie cher, et "
+            "Qu'achète-t-on vraiment avec « de la finance » ? Quatre métiers qui ne "
+            "gagnent pas leur argent de la même façon : les BILANS vivent des taux et "
+            "portent le risque, les FLUX d'une commission par transaction, la GESTION "
+            "D'ACTIFS d'un pourcentage des encours confiés, les PÉAGES d'un accès "
+            "difficile à contourner. Côte à côte, on voit lequel se paie cher, et "
             "pourquoi."
         ),
         "inversion": (
@@ -428,10 +430,11 @@ THEMES_CURES.append({
     # la semaine suivante, sans que personne ne touche à rien.
     "thesis": (
         "Que peut-on loger dans un PEA, l'enveloppe qui efface l'impôt sur le "
-        "revenu après cinq ans ? Pas ce qu'on croit, dans les deux sens : le seul "
-        "critère est le siège social européen de l'émetteur. Des néerlandaises et "
-        "des irlandaises cotées en dollars à New York y entrent ; des britanniques "
-        "et des suisses, non."
+        "revenu après cinq ans ? Pas ce qu'on croit, dans les deux sens. Le critère "
+        "porte sur le siège social de l'émetteur, dans l'Union européenne ou "
+        "l'Espace économique européen — ni sur la place de cotation, ni sur la "
+        "devise : des néerlandaises et des irlandaises cotées en dollars à New "
+        "York y entrent, des britanniques et des suisses, non."
     ),
     # Une contrainte fiscale ne s'invalide pas comme une thèse : ce qui la
     # périme, c'est un changement de droit ou de domicile, pas un retournement
@@ -459,8 +462,8 @@ THEMES_CURES.append({
         "Ce filtre est fiscal, pas économique. Rien ne dit qu'un univers "
         "restreint par le lieu d'un siège social se comporte mieux qu'un autre : "
         "il optimise l'imposition, pas la sélection. Il écarte par construction "
-        "les marchés américain, britannique et suisse, soit l'essentiel de la "
-        "watchlist principale.\n\n"
+        "les sociétés américaines, britanniques et suisses, soit l'essentiel de "
+        "la watchlist principale.\n\n"
         "Le PEA a enfin ses exclusions propres, indépendantes du siège social : "
         "les foncières cotées de type SIIC, et un plafond de versements de "
         "150 000 €. Ce thème ne les modélise pas."

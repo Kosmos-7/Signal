@@ -699,7 +699,7 @@ function showHome(){
   // est produit, jamais recopie : ecrit en dur il a deja menti une fois, 210
   // annonces pour 229 reels apres un elargissement.
   const nUniv=U.universe_declared||U.universe_scored||0;
-  const perimetre=nUniv?nUniv+' grandes capitalisations':'les grandes capitalisations';
+  const perimetre=nUniv?nUniv+' sociétés':'les sociétés';
   doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
     '<p class="home-lead">Bonne entreprise ? Bon prix ? Bon moment ? Trois questions distinctes, presque toujours confondues en une seule — et faute de les séparer, on achète ce dont on a entendu parler. Signal les note séparément, sur '+sv(perimetre)+' suivies en Europe, aux États-Unis et en Asie.</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
