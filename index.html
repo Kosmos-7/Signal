@@ -116,6 +116,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .chx-tip{position:absolute;pointer-events:none;background:#14141f;border:1px solid var(--line);border-radius:6px;padding:7px 11px;font-family:var(--mono);font-size:11px;color:var(--text3);display:none;white-space:nowrap;line-height:1.7;z-index:3}
   .chx-tip .d{color:var(--text2)}.chx-tip .c{color:var(--ac);font-weight:700}.chx-tip .t{color:var(--text2);font-weight:700}
   @media (max-width:640px){ .chx-tip{font-size:10px;padding:5px 8px;line-height:1.55} }
+  .chx-tip.dock{position:static;white-space:normal;margin:6px 0 2px;width:auto}
   .chx-ctrl{display:flex;align-items:center;gap:10px;margin:10px 0 4px;flex-wrap:wrap}
   .chx-pbtn{font-family:var(--mono);font-size:.72rem;letter-spacing:1px;color:var(--text3);background:none;border:1px solid var(--line);border-radius:5px;padding:3px 12px;cursor:pointer}
   .chx-pbtn.on{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
@@ -1013,12 +1014,14 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
     const cxPix=X(t)*rb.width/W+(rb.left-wr.left);
     const tw=tip.offsetWidth||210;
     if(wr.width<640){
-      // Écran étroit : la bulle flottante n'a nulle part où aller sans couvrir
-      // la courbe. Elle s'ancre en haut, du côté OPPOSÉ au réticule : jamais
-      // sur les points suivis, et jamais sous le doigt.
-      tip.style.top='4px';
-      tip.style.left=(cxPix>wr.width/2?4:Math.max(0,wr.width-tw-4))+'px';
+      // Écran étroit : la bulle est presque aussi large que le graphe, aucune
+      // position interne n'évite de couvrir la courbe au centre. Le relevé
+      // sort du dessin et se pose en dessous, dans le flux : il ne cache
+      // rien et ne saute plus d'un bord à l'autre.
+      tip.classList.add('dock');
+      tip.style.left='';tip.style.top='';
     }else{
+      tip.classList.remove('dock');
       let lx=cxPix+16;if(lx+tw>wr.width)lx=cxPix-tw-16;
       tip.style.left=Math.max(0,lx)+'px';
       tip.style.top=Math.max(Math.min(ev.clientY-wr.top-70,wr.height-110),0)+'px';
