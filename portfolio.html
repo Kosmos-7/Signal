@@ -605,7 +605,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 
 <main>
   <div class="hero">
-    <h1>Une IA, <span id="hero-h1-capital">20 000 €</span>, le MSCI World</h1>
+    <h1>Une IA contre l'indice</h1>
     <p>Capital fictif de <span id="hero-capital">20 000 €</span>. L'IA investit automatiquement selon sa watchlist, documente chaque décision d'achat et de vente, et analyse ses erreurs chaque semaine. Performance comparée au MSCI World.</p>
     <div class="update-line" id="update-line">Chargement…</div>
   </div>
@@ -1745,6 +1745,9 @@ async function loadPortfolio() {
     document.getElementById('footer-week').textContent = d.week;
     const heroCapEl = document.getElementById('hero-capital');
     if (heroCapEl) heroCapEl.textContent = fmtEur(d.capital_initial);
+    // Le titre ne porte plus le capital : il est juste en dessous, et le
+    // repeter deux fois en trois lignes n'apportait rien. Le garde reste, il
+    // ne coute rien et evite un plantage si le span revient un jour.
     const heroH1Cap = document.getElementById('hero-h1-capital');
     if (heroH1Cap) heroH1Cap.textContent = fmtEur(d.capital_initial);
 

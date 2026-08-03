@@ -694,9 +694,7 @@ function showHome(){
   const meta=[U.updated_at?'Mise à jour '+sv(U.updated_at):'',U.week?sv(U.week):''
   ].filter(Boolean).join(' · ');
   doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
-    '<p class="home-lead">La <b>watchlist principale</b> répond à une question : où sont les meilleurs dossiers cette semaine ? Trente titres, toutes catégories, sélectionnés par un score unique qui pèse la qualité du business, le prix payé et le timing.</p>'+
-'<p class="home-lead">Les <b>watchlists thématiques</b> répondent à une autre : si vous croyez à une thèse, l\'infrastructure de l\'IA, les métiers de la finance, quels titres l\'incarnent, et lesquels sont les mieux notés en ce moment ? Chaque thème expose sa thèse, ce qui l\'invaliderait et les biais qu\'il concentre, avec les mêmes scores que partout ailleurs. De quoi comparer des titres à l\'intérieur d\'une conviction, sans refaire la recherche titre par titre.</p>'+
-    '<p class="home-lead">Une dernière ne répond à aucune conviction : <b>Éligibles PEA</b> ne retient que ce qu\'une contrainte juridique laisse passer, le siège social de l\'émetteur devant être européen. Ni thèse ni secteur, un filtre — et il réserve des surprises, plusieurs des titres retenus cotant en dollars à New York.</p>'+
+    '<p class="home-lead">Un seul score, plusieurs lectures. La <b>principale</b> classe tout l\'univers, les <b>thématiques</b> le découpent par conviction, <b>Éligibles PEA</b> par le droit.</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
