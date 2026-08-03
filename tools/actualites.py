@@ -307,7 +307,7 @@ def materialiser_hebdo():
     chapeau = re.sub(r"\s+", " ", a["analyse_macro"]).strip()
     chapeau = chapeau[:277] + "…" if len(chapeau) > 280 else chapeau
     post = {"id": pid, "type": "hebdo", "date": d.get("updated_at", ""),
-            "titre": f"L'analyse du portefeuille — {d.get('week', '')}",
+            "titre": f"L'analyse du portefeuille · {d.get('week', '')}",
             "chapeau": chapeau, "sujet": None, "photo": None,
             "conviction": a.get("conviction_globale"),
             "sections": sections, "sources": sources,

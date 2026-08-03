@@ -2,7 +2,7 @@
  "id": "hebdo-2026-31",
  "type": "hebdo",
  "date": "2026-08-01",
- "titre": "L'analyse du portefeuille — Sem. 31 · 2026",
+ "titre": "L'analyse du portefeuille · Sem. 31 · 2026",
  "chapeau": "Cette semaine du 28 juillet au 1er août, la Fed a maintenu ses taux inchangés, sans surprise, mais les marchés obligataires n'ont pas été rassurés pour autant : les rendements longs des Treasuries ont continué de grimper, signe que les investisseurs doutent de la capacité de l…",
  "sujet": null,
  "photo": null,
@@ -63,5 +63,9 @@
    "resume": "Les marchés actions asiatiques enregistrent leur plus forte hausse en quatre mois, portés par l'optimisme autour de l'IA, avec le Kospi sud-coréen en hausse de 17% grâce à Samsung et SK Hynix."
   }
  ],
- "genere_le": "2026-08-01"
+ "genere_le": "2026-08-01",
+ "note_edition": {
+  "date": "2026-08-03",
+  "texte": "La mesure de performance du portefeuille a changé le 3 août 2026 : elle est désormais pondérée par le temps, les versements de capital ne comptant ni comme gain ni comme perte. Les +17,55 % et +5,75 points cités dans cette analyse relevaient de l'ancienne mesure ; la même réalité s'écrit +28,75 %, soit près de +17 points au-dessus du MSCI World. Les montants (23 510 € de capital, 352 € de liquidités) décrivent la semaine 31, avant le versement de 10 000 € du 3 août."
+ }
 }
