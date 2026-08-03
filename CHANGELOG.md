@@ -9,6 +9,17 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ### La performance ne compte plus les virements
 
+- **Le graphique « Performance depuis le lancement » trace désormais l'indice
+  de performance**, plus le capital : un virement de +10 k€ faisait sauter la
+  courbe d'un graphe intitulé « Performance » — un flux n'est pas un
+  rendement. Axe en %, courbe continue à travers les injections, marqueurs ⊕
+  conservés comme annotations de date.
+- **La bande de cinq cartes disparaît**, ses informations rejoignent leurs
+  sections : la valeur du portefeuille (et la plus-value latente) en tête, à
+  côté des deux performances, comme sur une plateforme classique ; le partage
+  investi/liquidités et le compte de positions en en-tête du tableau des
+  positions. Le « +11,7 % du capital versé » disparaît avec elle.
+
 - **Injection de +10 000 € de liquidités** (deuxième après celle du 5 mai).
   Elle a révélé le défaut de la mesure : l'ancienne formule divisait par le
   capital total versé, donc le virement faisait « chuter » la performance de

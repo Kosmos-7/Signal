@@ -108,7 +108,9 @@
   .sdot { width: 7px; height: 7px; border-radius: 50%; }
   .survival-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.25rem; }
 
-  .threshold-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .threshold-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .pos-stats { font-family: 'Courier New', monospace; font-size: 0.73rem; color: var(--text3); margin: -4px 0 10px; }
+  .pos-stats b { color: var(--text2); font-weight: 600; }
   .th { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; transition: border-color 0.15s; }
   .th:hover { border-color: rgba(116,182,223,0.22); box-shadow: 0 0 16px rgba(116,182,223,0.05); }
   .th-label { font-size: 0.78rem; font-weight: 500; color: var(--text2); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 5px; }
@@ -606,12 +608,11 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
   <a href="#survival-block"><span class="tn">01</span>Performance</a>
   <a href="#claude-analysis"><span class="tn">02</span>Analyse IA</a>
   <a href="#chart"><span class="tn">03</span>Graphique</a>
-  <a href="#kpi-grid"><span class="tn">04</span>Indicateurs</a>
-  <a href="#positions"><span class="tn">05</span>Positions</a>
-  <a href="#alloc-charts"><span class="tn">06</span>Allocation</a>
-  <a href="#orders"><span class="tn">07</span>Ordres</a>
-  <a href="#pacc"><span class="tn">08</span>Transparence</a>
-  <a href="#lexique"><span class="tn">09</span>Lexique</a>
+  <a href="#positions"><span class="tn">04</span>Positions</a>
+  <a href="#alloc-charts"><span class="tn">05</span>Allocation</a>
+  <a href="#orders"><span class="tn">06</span>Ordres</a>
+  <a href="#pacc"><span class="tn">07</span>Transparence</a>
+  <a href="#lexique"><span class="tn">08</span>Lexique</a>
 </nav>
 
 <main>
@@ -693,16 +694,9 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
     <div style="text-align:center;padding:0.5rem 0 0;font-family:'Courier New',monospace;font-size:0.75rem;color:var(--text3)" id="chart-note">Chargement…</div>
   </div>
 
-  <div class="kpi-grid" id="kpi-grid">
-    <div class="kpi"><div class="kpi-label">Valeur totale</div><div class="skel" style="height:28px;margin-top:4px"></div></div>
-    <div class="kpi"><div class="kpi-label">Plus-value latente</div><div class="skel" style="height:28px;margin-top:4px"></div></div>
-    <div class="kpi"><div class="kpi-label">Investi en bourse</div><div class="skel" style="height:28px;margin-top:4px"></div></div>
-    <div class="kpi"><div class="kpi-label">Liquidités</div><div class="skel" style="height:28px;margin-top:4px"></div></div>
-    <div class="kpi"><div class="kpi-label">Positions</div><div class="skel" style="height:28px;margin-top:4px"></div></div>
-  </div>
-
   <div id="positions" style="margin-bottom:1.75rem">
     <div class="sec-label">Positions ouvertes · Prix mis à jour chaque jour ouvré · composition revue le lundi</div>
+    <div class="pos-stats" id="pos-stats"></div>
     <div class="pos-header">
       <span>Action</span>
       <span style="text-align:right">Qté</span>
@@ -1359,7 +1353,7 @@ note.textContent = `${RANGE_LBL[_currentRange] || _currentRange}, données insuf
 
   renderChart(filtered, _capitalInit);
   if (note) {
-note.textContent = `${filtered.length} point${filtered.length > 1 ? 's' : ''} · vue ${RANGE_LBL[_currentRange] || _currentRange}, un point s'ajoute chaque jour de marché ouvré`;
+note.textContent = `${filtered.length} point${filtered.length > 1 ? 's' : ''} · vue ${RANGE_LBL[_currentRange] || _currentRange}, un point s'ajoute chaque jour de marché ouvré · injections de capital neutralisées`;
   }
 }
 
@@ -1373,19 +1367,18 @@ function renderChart(history, capitalInitial = 20000) {
   Array.from(svg.children).forEach(child => { if (child.tagName.toLowerCase() !== 'defs') svg.removeChild(child); });
 
   // ── Capital en € ──────────────────────────────────────────────────────────
-  // Repli si un point n'a pas de capital : on reporte le dernier connu. Le
-  // reconstituer depuis `perf` serait faux depuis le 03/08/2026 : perf est
-  // pondérée par le temps, elle ne se convertit plus en euros par une simple
-  // multiplication avec le capital initial.
-  let prevCap = null;
-  const caps = history.map(h => { if (h.capital != null) { prevCap = h.capital; return h.capital; } return prevCap ?? capitalInitial; });
+  // La courbe trace l'INDICE DE PERFORMANCE (série perf, pondérée par le
+  // temps), pas le capital : un virement de +10 k€ faisait sauter la courbe
+  // d'un graphe intitulé « Performance » — un flux n'est pas un rendement.
+  // Repli si un point n'a pas de perf : on reporte la dernière connue.
+  let prevPerf = null;
+  const caps = history.map(h => { if (h.perf != null) { prevPerf = h.perf; return h.perf; } return prevPerf ?? 0; });
 
-  // ── Plage Y adaptative (k€) ───────────────────────────────────────────────
+  // ── Plage Y adaptative (%) ────────────────────────────────────────────────
   const rawMin  = Math.min(...caps);
   const rawMax  = Math.max(...caps);
-  const spanK   = (rawMax - rawMin) / 1000;
-  const stepK   = spanK > 15 ? 5 : spanK > 8 ? 2 : 1;
-  const step    = stepK * 1000;
+  const span    = rawMax - rawMin;
+  const step    = span > 30 ? 10 : span > 15 ? 5 : span > 8 ? 2 : 1;
   const rangeMin = Math.floor(rawMin / step) * step - step;
   const rangeMax = Math.ceil(rawMax  / step) * step + step;
   const range   = rangeMax - rangeMin;
@@ -1399,10 +1392,10 @@ function renderChart(history, capitalInitial = 20000) {
   }));
   const last = pts[pts.length - 1];
 
-  // ── Grille Y (k€) ─────────────────────────────────────────────────────────
+  // ── Grille Y (%) ──────────────────────────────────────────────────────────
   for (let v = Math.ceil(rangeMin / step) * step; v <= rangeMax; v += step) {
     const y   = toY(v);
-    const lbl = (v / 1000).toFixed(stepK < 1 ? 1 : 0) + ' k€';
+    const lbl = (v > 0 ? '+' : '') + v + ' %';
     svg.appendChild(mk('line', { x1:40, y1:y, x2:560, y2:y, stroke:'#2a2a38', 'stroke-width':0.6, 'stroke-dasharray':'3,4' }));
     svg.appendChild(mk('text', { x:34, y:y+3, 'font-family':'Courier New', 'font-size':7, fill:'#50506c', 'text-anchor':'end' })).textContent = lbl;
   }
@@ -1467,12 +1460,12 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
   });
 
   // ── Anchor du dernier point + box valeur ──────────────────────────────────
-  // Un seul point visible : le dernier (sert d'ancre visuelle pour la box k€)
+  // Un seul point visible : le dernier (sert d'ancre visuelle pour la box %)
   svg.appendChild(mk('circle', {
     cx: last.x.toFixed(1), cy: last.y.toFixed(1), r: 3.5,
     fill: '#74b6df', stroke: '#1a1200', 'stroke-width': 1.2
   }));
-  const lastLbl = (last.cap / 1000).toFixed(1) + ' k€';
+  const lastLbl = (last.cap >= 0 ? '+' : '') + last.cap.toFixed(1) + ' %';
   svg.appendChild(mk('rect', { x:(last.x-28).toFixed(1), y:(last.y-19).toFixed(1), width:58, height:17, rx:4, fill:'#1a1200', stroke:'#74b6df', 'stroke-width':0.8, 'stroke-opacity':0.7 }));
   const lt = mk('text', { x: last.x.toFixed(1), y:(last.y-6).toFixed(1), 'font-family':'Courier New', 'font-size':9.5, fill:'#74b6df', 'text-anchor':'middle', 'font-weight':'bold' });
   lt.textContent = lastLbl;
@@ -1803,6 +1796,27 @@ async function loadPortfolio() {
     if (d.mode_panique) document.getElementById('panic-banner').style.display = 'block';
 
 // Bloc Performance vs MSCI, comparaison neutre, plus de dramatisation "survie"
+    const investi   = d.capital_actuel - d.liquidites;
+    const pctInvesti = (100 - d.pct_liquidites).toFixed(1);
+    const nbNeutres = d.nb_neutres ?? (d.nb_positions - d.nb_positives - d.nb_negatives);
+    const nSub = nbNeutres > 0
+      ? `<span class="up">${d.nb_positives} en gain</span> · <span style="color:var(--text3)">${nbNeutres} neutre${nbNeutres>1?'s':''}</span> · <span class="dn">${d.nb_negatives} en perte</span>`
+      : `<span class="up">${d.nb_positives} en gain</span> · <span class="dn">${d.nb_negatives} en perte</span>`;
+
+    // Gain net : on distingue PLUS-VALUE LATENTE (mark-to-market) de POST-LIQUIDATION (cash réel après cession totale)
+    // C'est la grosse subtilité fiscale : les +95% sur NVDA ne sont pas "encaissés" tant qu'on n'a pas vendu.
+    // Si on vendait tout aujourd'hui : capital_post_liquidation = liquidités + Σ(brut - frais_vente - PFU sur plus-value latente)
+    const capPostLiq         = d.capital_post_liquidation ?? d.capital_actuel;      // fallback rétrocompat
+    const perfPostLiq        = d.performance_post_liquidation ?? d.performance;
+    const gainLatent         = d.capital_actuel - d.capital_initial;                 // mark-to-market
+    const gainPostLiq        = capPostLiq - d.capital_initial;                       // après cession totale
+    const pfuLatent          = d.pfu_latent_si_liquidation ?? 0;
+    const fraisLatent        = d.frais_si_liquidation ?? 0;
+    const fraisCum           = d.total_frais_payes ?? 0;
+    const impotsCum          = d.total_impots_payes ?? 0;
+    const creditReportable   = (d.total_pertes_reportables ?? 0) * 0.30;
+    const fricTotalSiVendu   = fraisCum + impotsCum + fraisLatent + pfuLatent;
+
     const sb    = document.getElementById('survival-block');
     const panic = d.mode_panique;
     const ahead = (d.vs_benchmark ?? 0) >= 0;
@@ -1837,7 +1851,12 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
       </div>
       <div class="threshold-row">
         <div class="th">
-          <div class="th-label">Notre performance <span class="kpi-info" data-tip="Rendement total du portefeuille depuis le démarrage, en euros">ⓘ</span></div>
+          <div class="th-label">Valeur du portefeuille <span class="kpi-info" data-tip="Actions au cours du jour + liquidités, en euros — ce que ta plateforme afficherait. La plus-value latente n'est pas du cash : vendue aujourd'hui, elle laisserait ${fmtEur(gainPostLiq)} net après PFU et frais de vente.">ⓘ</span></div>
+          <div class="th-value">${fmtEur(d.capital_actuel)}</div>
+          <div class="th-sub">versé ${fmtEur(d.capital_initial)} · <span class="${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))} latents</span></div>
+        </div>
+        <div class="th">
+          <div class="th-label">Notre performance <span class="kpi-info" data-tip="Performance pondérée par le temps depuis le lancement : les versements et retraits n'y comptent ni comme gain ni comme perte">ⓘ</span></div>
           <div class="th-value ${d.performance>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} %</div>
           <div class="th-sub">depuis jan. ${new Date().getFullYear()} · injections de capital neutralisées</div>
         </div>
@@ -1848,59 +1867,13 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
         </div>
       </div>`;
 
-// KPI, 5 cartes "état du portefeuille" (perf/écart au benchmark déjà dans le survival block, pas de doublon)
-    const investi   = d.capital_actuel - d.liquidites;
-    const pctInvesti = (100 - d.pct_liquidites).toFixed(1);
-    const nbNeutres = d.nb_neutres ?? (d.nb_positions - d.nb_positives - d.nb_negatives);
-    const nSub = nbNeutres > 0
-      ? `<span class="up">${d.nb_positives} en gain</span> · <span style="color:var(--text3)">${nbNeutres} neutre${nbNeutres>1?'s':''}</span> · <span class="dn">${d.nb_negatives} en perte</span>`
-      : `<span class="up">${d.nb_positives} en gain</span> · <span class="dn">${d.nb_negatives} en perte</span>`;
+// L'etat du portefeuille vit dans les sections qu'il concerne : la valeur en
+// tete avec les performances, le partage investi/liquidites et le compte de
+// positions en en-tete du tableau des positions. La bande de cinq cartes qui
+// portait tout ca a ete retiree le 03/08/2026 : elle doublonnait chaque info.
 
-    // Gain net : on distingue PLUS-VALUE LATENTE (mark-to-market) de POST-LIQUIDATION (cash réel après cession totale)
-    // C'est la grosse subtilité fiscale : les +95% sur NVDA ne sont pas "encaissés" tant qu'on n'a pas vendu.
-    // Si on vendait tout aujourd'hui : capital_post_liquidation = liquidités + Σ(brut - frais_vente - PFU sur plus-value latente)
-    const capPostLiq         = d.capital_post_liquidation ?? d.capital_actuel;      // fallback rétrocompat
-    const perfPostLiq        = d.performance_post_liquidation ?? d.performance;
-    const gainLatent         = d.capital_actuel - d.capital_initial;                 // mark-to-market
-    const gainPostLiq        = capPostLiq - d.capital_initial;                       // après cession totale
-    const pfuLatent          = d.pfu_latent_si_liquidation ?? 0;
-    const fraisLatent        = d.frais_si_liquidation ?? 0;
-    const fraisCum           = d.total_frais_payes ?? 0;
-    const impotsCum          = d.total_impots_payes ?? 0;
-    const creditReportable   = (d.total_pertes_reportables ?? 0) * 0.30;
-    const fricTotalSiVendu   = fraisCum + impotsCum + fraisLatent + pfuLatent;
-
-    document.getElementById('kpi-grid').innerHTML = `
-      <div class="kpi">
-        <div class="kpi-accent" style="background:${gainLatent>=0?'var(--green)':'var(--red)'}"></div>
-        <div class="kpi-label">Valeur totale <span class="kpi-info" data-tip="Valeur mark-to-market du portefeuille : actions au cours du jour + liquidités, converti en euros. C'est ce que ta plateforme broker affiche.">ⓘ</span></div>
-        <div class="kpi-value">${fmtEur(d.capital_actuel)}</div>
-        <div class="kpi-sub">départ · ${fmtEur(d.capital_initial)}</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-accent" style="background:${gainLatent>=0?'var(--green)':'var(--red)'}"></div>
-        <div class="kpi-label">Plus-value latente <span class="kpi-info" data-tip="Différence brute entre valeur actuelle et capital initial. ATTENTION : ce n'est PAS du cash. Les plus-values sur positions ouvertes ne sont taxées qu'au moment de la vente (PFU 30%). Si on liquidait tout aujourd'hui, on aurait ${fmtEur(gainPostLiq)} net (= ${fmtEur(gainLatent)} − ${fmtEur(pfuLatent)} PFU latent − ${fmtEur(fraisLatent)} frais de vente). Le fisc gagne ${fmtEur(impotsCum + pfuLatent)} si on liquide.">ⓘ</span></div>
-        <div class="kpi-value ${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))}</div>
-        <div class="kpi-sub ${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmt(d.capital_initial>0?Math.abs(gainLatent)/d.capital_initial*100:0,1)} % du capital versé</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-accent" style="background:var(--text3)"></div>
-<div class="kpi-label">Investi en bourse <span class="kpi-info" data-tip="Part du portefeuille placée dans des actions, ce montant fluctue avec les marchés">ⓘ</span></div>
-        <div class="kpi-value">${fmtEur(investi)}</div>
-        <div class="kpi-sub">${pctInvesti} % du portefeuille</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-accent" style="background:var(--blue)"></div>
-        <div class="kpi-label">Liquidités <span class="kpi-info" data-tip="Argent non investi, disponible immédiatement pour de nouveaux achats. Ce chiffre est déjà NET des frais et impôts payés sur les ventes précédentes.">ⓘ</span></div>
-        <div class="kpi-value liq">${fmtEur(d.liquidites)}</div>
-        <div class="kpi-sub">${fmt(d.pct_liquidites,1)} % du portefeuille</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-accent" style="background:var(--text3)"></div>
-<div class="kpi-label">Positions <span class="kpi-info" data-tip="Nombre d'entreprises différentes détenues, diversifier réduit le risque lié à un seul titre">ⓘ</span></div>
-        <div class="kpi-value">${d.nb_positions}</div>
-        <div class="kpi-sub">${nSub}</div>
-      </div>`;
+    document.getElementById('pos-stats').innerHTML =
+      `<b>${d.nb_positions} positions</b> · ${d.nb_positives} en gain, ${d.nb_negatives} en perte${nbNeutres > 0 ? `, ${nbNeutres} neutre${nbNeutres>1?'s':''}` : ''} · <b>${fmtEur(investi)}</b> investis (${pctInvesti} %) · <b>${fmtEur(d.liquidites)}</b> de liquidités (${fmt(d.pct_liquidites,1)} %)`;
 
 // Positions, perf calculée en € + tri desc
     const pos = d.positions || [];

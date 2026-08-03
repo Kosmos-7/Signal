@@ -66,7 +66,7 @@ THEMES_CURES = [
         "sous_titre": "Du silicium au mégawatt",
         "kind": "these",
         "thesis": (
-            "Qui encaisse les milliards que l'IA dépense ? Toute la chaîne physique, "
+            "Qui encaisse les milliards investis dans l'IA ? Toute la chaîne physique, "
             "des puces à l'électricité — le pari de la dépense, pas celui du vainqueur."
         ),
         "inversion": (
