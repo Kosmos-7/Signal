@@ -2,8 +2,8 @@
  "id": "2026-08-03",
  "type": "quotidien",
  "date": "2026-08-03",
- "titre": "Wall Street ouvre août en fanfare sur l'espoir d'un accord avec l'Iran",
- "chapeau": "Les marchés américains ont bien démarré le mois d'août, portés par l'optimisme autour des négociations avec Téhéran. Boeing signe aussi une belle journée.",
+ "titre": "Wall Street démarre août en hausse, portée par l'espoir de négociations avec l'Iran",
+ "chapeau": "Les marchés américains ont bien entamé le mois d'août, soutenus par l'optimisme autour de discussions diplomatiques avec l'Iran. Boeing tire aussi son épingle du jeu.",
  "sujet": "marches",
  "photo": {
   "src": "actualites/photos/2026-08-03.jpg",
@@ -17,32 +17,40 @@
  },
  "sections": [
   {
-   "titre": "Un début d'août sous bonne étoile (iranienne)",
-   "texte": "Wall Street a rallié pour entamer le mois d'août, l'optimisme autour des pourparlers avec l'Iran ayant servi de carburant. En parallèle, Donald Trump a prévenu que l'Iran ferait face à une « décapitation » s'il ne concluait pas d'accord. Les marchés, eux, ont surtout retenu la partie « négociations » du message, et pas l'autre.",
+   "titre": "Un début de mois sous bonne étoile pour Wall Street",
+   "texte": "Wall Street a rallié pour ouvrir le mois d'août, portée selon Reuters par l'optimisme autour de pourparlers avec l'Iran. Les investisseurs semblent avoir décidé de commencer le mois du bon pied, sans trop regarder par-dessus leur épaule. Boeing a de son côté contribué à la bonne humeur, ses actions bondissant grâce à trois développements positifs simultanés, selon CNBC.",
    "sources": [
-    2,
-    3
+    1,
+    2
    ]
   },
   {
-   "titre": "Boeing décolle sur un trio de bonnes nouvelles",
-   "texte": "Boeing a vu son cours s'envoler grâce à trois développements positifs survenus dans la même journée, selon CNBC. La dépêche ne détaille pas lesquels, mais le résultat, lui, était visible en séance.",
+   "titre": "Iran : déclarations américaines sous haute tension",
+   "texte": "Dans un contexte géopolitique sérieux, le président Donald Trump a déclaré que l'Iran ferait face à une « décapitation » en l'absence d'accord, selon Reuters. Par ailleurs, des habitants de Gaza ont indiqué à Reuters que les annonces de Trump sur un plan pour la région contrastaient fortement avec la réalité vécue sur place, après une journée meurtrière. Ces éléments s'inscrivent dans un environnement international particulièrement grave.",
    "sources": [
-    1
+    3,
+    4
    ]
   },
   {
-   "titre": "Le dollar termine une semaine difficile",
-   "texte": "Le dollar a enregistré sa pire semaine depuis plus de trois mois, dans un contexte de doutes sur la Fed. Ironie du calendrier : selon les données de la CFTC publiées vendredi, les traders avaient pourtant atteint leur niveau de paris haussiers sur le dollar le plus élevé depuis 2014, juste avant la réunion de la Fed.",
+   "titre": "Dollar : la semaine de trop",
+   "texte": "Le dollar a enregistré sa pire semaine depuis plus de trois mois, dans un contexte de doutes sur la politique de la Réserve fédérale, selon Bloomberg. Paradoxalement, les traders avaient fortement renforcé leurs paris haussiers sur le billet vert avant la réunion de la Fed, atteignant leur niveau le plus optimiste depuis 2014, selon les données de la CFTC publiées vendredi. Le marché avait misé gros, le marché a déchanté.",
    "sources": [
     8
    ]
   },
   {
-   "titre": "L'Inde devra encore attendre pour Bloomberg",
-   "texte": "Bloomberg a repoussé l'ajout des obligations indiennes à son indice mondial, une décision qui a déçu les investisseurs et devrait provoquer des ventes sur le marché obligataire indien.",
+   "titre": "Obligations indiennes : Bloomberg reporte leur entrée dans l'indice mondial",
+   "texte": "Bloomberg a annoncé reporter l'inclusion des obligations indiennes dans son indice mondial, une décision qui a déçu les traders et qui devrait entraîner des ventes attendues sur le marché obligataire indien, selon l'agence.",
    "sources": [
     6
+   ]
+  },
+  {
+   "titre": "Data centers : la construction fait travailler du monde, l'exploitation un peu moins",
+   "texte": "Un rapport du Climate Centre de l'Université de Californie du Sud, cité par Bloomberg, souligne qu'un data center typique de 100 mégawatts mobilise des centaines de travailleurs pour sa construction, mais n'en requiert plus que quelques dizaines une fois en service. Le boom des centres de données génère aussi une demande accrue de logements pour les travailleurs à proximité des sites.",
+   "sources": [
+    7
    ]
   }
  ],
@@ -69,11 +77,25 @@
    "date": "2026-08-03 18:33"
   },
   {
+   "titre": "After deadly day, Gazans say Trump's touting of plan jars with grim reality - Reuters",
+   "resume": "After deadly day, Gazans say Trump's touting of plan jars with grim reality  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOUWg4ei1MaEJJbEJOYl80UkRfZGU4UXhwTUVDSERoUldCTGxERWZXVkxta1h1b1lKbFhpUTBFUWVQRjlibkliajJDMEhEbDZkNWc3cWhWMm1YSEVrdHJ0S1NNNXE1alJhS0M0Z05Hd01hREVmQ25jd015WWZiOTQtSE4yb1JoZ3hlQmNuQTBqbjlFVmFDLTEybkZ4a2FRMUo3X05YOW8zamVOcVdTTjdDR1BnR003X2JMOVEyVFJPUWNTZw?oc=5",
+   "date": "2026-08-03 17:57"
+  },
+  {
    "titre": "Bloomberg puts off adding Indian bonds to its global index",
    "resume": "Bloomberg delays adding Indian bonds to its global index, disappointing traders and prompting expected selling in the bond market.",
    "source": "Bloomberg",
    "url": "https://www.bloomberg.com/news/articles/2026-07-31/bloomberg-defers-inclusion-of-indian-bonds-in-global-index-ms8wqbxp",
    "date": "2026-08-01 06:15"
+  },
+  {
+   "titre": "Data centre boom fuels demand for workforce housing",
+   "resume": "A typical 100-megawatt data centre employs hundreds of workers to build it, although it needs only dozens to eventually operate it, according to a University of Southern California Climate Centre report",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-07-31/data-center-boom-fueling-demand-for-workforce-housing",
+   "date": "2026-08-01 04:37"
   },
   {
    "titre": "Dollar logs its worst week in over 3 months amid Fed doubts",
@@ -83,5 +105,5 @@
    "date": "2026-08-01 04:32"
   }
  ],
- "genere_le": "2026-08-03 20:36 UTC"
+ "genere_le": "2026-08-03 20:52 UTC"
 }
