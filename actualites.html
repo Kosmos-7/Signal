@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Actualités — Signal</title>
-<meta name="description" content="Le point marchés du matin, écrit à partir de dépêches citées — jamais inventé, jamais interprété. Et chaque semaine, l'analyse du portefeuille IA.">
+<meta name="description" content="Le point marchés du matin, écrit à partir de dépêches citées, jamais inventé, jamais interprété. Et chaque semaine, l'analyse du portefeuille IA.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14' stroke='%2322d98a' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="signal.css">
 <style>
@@ -114,7 +114,7 @@ function liste(){
   chargerIndex().then(j=>{
     const posts=j.posts||[];
     app.innerHTML='<div class="hero"><h1>Actualités</h1>'+
-      '<p>Que s\'est-il passé sur les marchés ? Chaque matin de bourse, le point de la veille et de la nuit, écrit uniquement à partir de dépêches citées en bas de chaque post — jamais inventé, jamais interprété. Et chaque semaine, l\'analyse du portefeuille IA, qui est elle une interprétation, assumée et signée.</p>'+
+      '<p>Que s\'est-il passé sur les marchés ? Chaque matin de bourse, le point de la veille et de la nuit, écrit uniquement à partir de dépêches citées en bas de chaque post : jamais inventé, jamais interprété. Et chaque semaine, l\'analyse du portefeuille IA, qui est elle une interprétation, assumée et signée.</p>'+
       (posts.length?'<div class="hero-meta">'+posts.length+' post'+(posts.length>1?'s':'')+' · dernier le '+dfr(posts[0].date)+'</div>':'')+
       '</div>'+
       (posts.length?'<div class="pgrid">'+posts.map(carte).join('')+'</div>'

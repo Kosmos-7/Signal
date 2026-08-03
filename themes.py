@@ -67,7 +67,7 @@ THEMES_CURES = [
         "kind": "these",
         "thesis": (
             "Qui encaisse les milliards investis dans l'IA ? Toute la chaîne physique, "
-            "des puces à l'électricité — le pari de la dépense, pas celui du vainqueur."
+            "des puces à l'électricité. Le pari de la dépense, pas celui du vainqueur."
         ),
         "inversion": (
             "Le retour sur investissement applicatif ne se matérialise pas et les hyperscalers "
@@ -204,7 +204,7 @@ THEMES_CURES = [
         "thesis": (
             "Qu'achète-t-on vraiment avec « de la finance » ? Quatre métiers qui ne "
             "gagnent pas leur argent de la même façon, mis côte à côte pour voir "
-            "lequel se paie cher — et pourquoi."
+            "lequel se paie cher, et pourquoi."
         ),
         "inversion": (
             "Pour les bilans : une récession de crédit, ou une baisse rapide des taux qui écrase "
@@ -423,7 +423,7 @@ THEMES_CURES.append({
     # la semaine suivante, sans que personne ne touche à rien.
     "thesis": (
         "Que peut-on loger dans un PEA, l'enveloppe qui efface l'impôt sur le "
-        "revenu après cinq ans ? Bien plus que des actions françaises — jusqu'à "
+        "revenu après cinq ans ? Bien plus que des actions françaises : jusqu'à "
         "des valeurs cotées à New York. Les vingt meilleurs scores réellement "
         "éligibles."
     ),

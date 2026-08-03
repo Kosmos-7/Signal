@@ -642,7 +642,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
         <div id="conviction-badge" class="conviction-badge"></div>
       </div>
       <div id="analyse-macro"  class="analyse-text"></div>
-      <a class="analyse-lien" href="actualites.html">Lire l'analyse complète et son archive — Actualités →</a>
+      <a class="analyse-lien" href="actualites.html">Lire l'analyse complète et son archive dans Actualités →</a>
       <div id="weekly-pick" class="weekly-pick-inline" style="display:none">
         <div class="wp-label">↳ Le mouvement de la semaine</div>
         <div class="wp-head">
@@ -1797,6 +1797,9 @@ async function loadPortfolio() {
 
 // Bloc Performance vs MSCI, comparaison neutre, plus de dramatisation "survie"
     const investi   = d.capital_actuel - d.liquidites;
+    const pvLatenteTotale = (d.positions || []).reduce((t, p) =>
+      t + (p.plus_value_latente_eur ?? ((p.valeur_actuelle ?? 0) - (p.montant_investi ?? 0))), 0);
+    const signE = v => (v >= 0 ? '+' : '−') + fmtEur(Math.abs(v));
     const pctInvesti = (100 - d.pct_liquidites).toFixed(1);
     const nbNeutres = d.nb_neutres ?? (d.nb_positions - d.nb_positives - d.nb_negatives);
     const nSub = nbNeutres > 0
@@ -1816,6 +1819,7 @@ async function loadPortfolio() {
     const impotsCum          = d.total_impots_payes ?? 0;
     const creditReportable   = (d.total_pertes_reportables ?? 0) * 0.30;
     const fricTotalSiVendu   = fraisCum + impotsCum + fraisLatent + pfuLatent;
+    const gainRealise        = gainLatent - pvLatenteTotale;   // gain net − latent = réalisé net
 
     const sb    = document.getElementById('survival-block');
     const panic = d.mode_panique;
@@ -1851,9 +1855,9 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
       </div>
       <div class="threshold-row">
         <div class="th">
-          <div class="th-label">Valeur du portefeuille <span class="kpi-info" data-tip="Actions au cours du jour + liquidités, en euros — ce que ta plateforme afficherait. La plus-value latente n'est pas du cash : vendue aujourd'hui, elle laisserait ${fmtEur(gainPostLiq)} net après PFU et frais de vente.">ⓘ</span></div>
+          <div class="th-label">Valeur du portefeuille <span class="kpi-info" data-tip="Actions au cours du jour + liquidités, en euros. Le gain net se décompose en ${fmtEur(pvLatenteTotale)} de plus-value latente sur les positions ouvertes (le détail est dans le tableau) et ${signE(gainRealise)} de résultat réalisé sur les ventes passées, frais (${fmtEur(fraisCum)}) et impôts (${fmtEur(impotsCum)}) déduits. Tout vendu aujourd'hui : ${fmtEur(gainPostLiq)} net après PFU et frais.">ⓘ</span></div>
           <div class="th-value">${fmtEur(d.capital_actuel)}</div>
-          <div class="th-sub">versé ${fmtEur(d.capital_initial)} · <span class="${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))} latents</span></div>
+          <div class="th-sub">versé ${fmtEur(d.capital_initial)} · <span class="${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))} de gain net</span></div>
         </div>
         <div class="th">
           <div class="th-label">Notre performance <span class="kpi-info" data-tip="Performance pondérée par le temps depuis le lancement : les versements et retraits n'y comptent ni comme gain ni comme perte">ⓘ</span></div>
@@ -1873,7 +1877,7 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
 // portait tout ca a ete retiree le 03/08/2026 : elle doublonnait chaque info.
 
     document.getElementById('pos-stats').innerHTML =
-      `<b>${d.nb_positions} positions</b> · ${d.nb_positives} en gain, ${d.nb_negatives} en perte${nbNeutres > 0 ? `, ${nbNeutres} neutre${nbNeutres>1?'s':''}` : ''} · <b>${fmtEur(investi)}</b> investis (${pctInvesti} %) · <b>${fmtEur(d.liquidites)}</b> de liquidités (${fmt(d.pct_liquidites,1)} %)`;
+      `<b>${d.nb_positions} positions</b> · <span class="${pvLatenteTotale>=0?'up':'dn'}">${signE(pvLatenteTotale)} de plus-value latente</span> · ${d.nb_positives} en gain, ${d.nb_negatives} en perte${nbNeutres > 0 ? `, ${nbNeutres} neutre${nbNeutres>1?'s':''}` : ''} · <b>${fmtEur(investi)}</b> investis (${pctInvesti} %) · <b>${fmtEur(d.liquidites)}</b> de liquidités (${fmt(d.pct_liquidites,1)} %)`;
 
 // Positions, perf calculée en € + tri desc
     const pos = d.positions || [];

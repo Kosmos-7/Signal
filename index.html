@@ -701,7 +701,7 @@ function showHome(){
   const nUniv=U.universe_declared||U.universe_scored||0;
   const perimetre=nUniv?nUniv+' sociétés':'les sociétés';
   doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
-    '<p class="home-lead">En recherche d\'opportunités d\'investissement, ou simplement d\'inspiration ? Signal note chaque semaine '+sv(perimetre)+' en Europe, aux États-Unis et en Asie — la qualité du business, le prix, le moment — et en tire quatre listes à explorer.</p>'+
+    '<p class="home-lead">En recherche d\'opportunités d\'investissement, ou simplement d\'inspiration ? Signal note chaque semaine '+sv(perimetre)+' en Europe, aux États-Unis et en Asie : la qualité du business, le prix, le moment. Chaque liste en propose une lecture.</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
