@@ -141,9 +141,9 @@
     bottom: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
-    width: 210px;
+    width: 240px;
     max-width: calc(100vw - 2rem);
-    background: var(--surface3);
+    background: #141a28;   /* opaque : l'infobulle passe au-dessus de texte */
     border: 1px solid var(--border2);
     border-radius: 8px;
     padding: 9px 12px;
@@ -1901,7 +1901,7 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
         <div class="th">
           <div class="th-label">Notre performance <span class="kpi-info" data-tip="Performance pondérée par le temps depuis le lancement : les versements et retraits n'y comptent ni comme gain ni comme perte">ⓘ</span></div>
           <div class="th-value ${d.performance>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} %</div>
-          <div class="th-sub">depuis jan. ${new Date().getFullYear()} · injections de capital neutralisées</div>
+          <div class="th-sub">depuis le lancement, jan. 2026</div>
         </div>
         <div class="th">
           <div class="th-label">Marché mondial <span class="kpi-info" data-tip="Ce qu'aurait rapporté un simple ETF MSCI World sur la même période, sans gestion active">ⓘ</span></div>
