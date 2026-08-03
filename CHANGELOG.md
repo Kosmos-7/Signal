@@ -5,6 +5,78 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.8.0] — 2026-08-03
+
+### Une watchlist dont le critère est juridique, et une page Apprendre illustrée
+
+#### Éligibles PEA — le siège social, pas la place de cotation
+
+- Troisième watchlist thématique : les **vingt meilleurs scores parmi les
+  titres logeables dans un PEA**. Le critère d'entrée n'est pas une mesure de
+  marché mais une propriété juridique de l'émetteur — son siège social doit
+  être dans l'UE ou l'EEE (art. L221-31 du code monétaire et financier).
+- C'est tout l'intérêt de la liste : **huit des quarante-huit éligibles cotent
+  en dollars à New York**. Nebius, STMicroelectronics, NXP et Ferrari sont des
+  sociétés néerlandaises ; Accenture, Eaton, Medtronic et Seagate des sociétés
+  irlandaises. Un filtre par place de cotation les manquerait toutes.
+  Symétriquement, le Royaume-Uni est sorti au Brexit et la Suisse n'a jamais
+  été dans l'EEE : HSBC, ABB, Nestlé et Chubb sont écartés.
+- Les **inéligibilités sont listées avec leur motif** plutôt que passées sous
+  silence. Sans ça, l'absence d'un titre qu'on croyait européen se reprend à
+  chaque relecture. Linde est le seul cas limite : siège à Dublin mais
+  résidence fiscale britannique revendiquée dans ses dépôts, éligibilité
+  discutée — écarté par prudence, motif écrit.
+- **Coût API nul.** Les quarante-huit éligibles étaient déjà tous scorés,
+  l'univers reste à 229 titres. La watchlist n'est qu'une projection de plus
+  sur un scoring inchangé.
+
+#### Une troisième forme de thème
+
+- `kind: "filtre"`, à côté de « curé » et « calculé ». Un thème curé publie
+  toute sa liste ; un thème calculé applique une règle au breakdown — qui ne
+  porte pas le siège social et ne le portera jamais, ce n'est pas une mesure de
+  marché. Le filtre déclare l'appartenance et borne la publication aux N
+  meilleurs scores.
+- Piège corrigé à l'écriture : **la couverture se mesure avant le bornage**.
+  Rapportée aux vingt lignes publiées, elle vaudrait 20/48 à chaque run et le
+  thème serait perpétuellement « dégradé » par sa propre définition. Un
+  garde-fou qui hurle en permanence ne garde plus rien.
+- Front : le libellé « ce qui invaliderait cette thèse » devient « ce qui
+  périmerait cette liste » pour ce kind — une liste d'éligibilité ne
+  s'invalide pas, elle se périme, par une redomiciliation ou une réforme.
+  Les textes de thèse acceptent désormais plusieurs paragraphes.
+
+#### L'avertissement qui compte
+
+- Le champ « biais » du thème et la section 07 d'Apprendre portent la même
+  mise en garde : **l'éligibilité juridique du titre et l'acceptation de la
+  ligne par le courtier sont deux choses différentes**, en particulier pour
+  les lignes new-yorkaises. Et un certificat de dépôt (ADR) n'est jamais
+  logeable, quel que soit le siège de l'émetteur.
+- Apprendre disait « la plupart des valeurs suivies sont américaines, donc non
+  éligibles ». Le raccourci était faux et c'est exactement celui que cette
+  watchlist corrige : il est réécrit.
+
+#### Apprendre — une amorce visuelle par section
+
+- Les douze sections s'ouvrent sur une bande d'image, avant leur numéro et leur
+  titre. Format 16/5 : répétée douze fois, une bande haute ferait douze pauses
+  dans la lecture au lieu de douze repères.
+- `tools/photos_apprendre.py` fabrique les images depuis Commons **et pose
+  lui-même les balises** dans `apprendre.html` : légende, texte alternatif,
+  crédit et empreinte de contenu n'ont qu'une seule source. À douze images,
+  les maintenir à la main garantissait de voir tôt ou tard une légende sous la
+  mauvaise photo.
+- Le bas de chaque bande se dissout par un masque et non par un dégradé peint :
+  la page porte un fond animé dont un dégradé vers une couleur fixe se
+  décrocherait.
+- Trois bandes ont raté leur sujet au premier tirage, les candidats étant jugés
+  en planche contact au format 16/9, bien plus large. D'où trois réglages par
+  image — cadrage vertical, luminosité, contraste — et la règle qui va avec :
+  on regarde le résultat au format final.
+
+---
+
 ## [3.7.0] — 2026-08-02
 
 ### L'infrastructure de l'IA prend sa forme, et le site se met à parler humain

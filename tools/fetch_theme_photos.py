@@ -222,6 +222,12 @@ def main():
         par_fichiers(a.selection, a.sortie)
         return
 
+    # Le manifeste doit exister AVANT la boucle : il est renseigné thème par
+    # thème. Son absence faisait mourir le script sur un NameError à la fin du
+    # premier thème, donc systématiquement — le défaut ne s'était pas vu parce
+    # que ce chemin n'avait plus été emprunté depuis la mise en place des
+    # illustrations, toutes récupérées lors d'un même run antérieur.
+    manifeste = {}
     requetes = REQUETES
     for theme, termes in requetes.items():
         print(f"\n▸ {theme}")
