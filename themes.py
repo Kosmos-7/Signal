@@ -25,6 +25,22 @@
 # pas : le screener mesure des marges, un ROE, un endettement — ni la
 # durabilité d'un avantage, ni la valeur intrinsèque.
 #
+# DOCTRINE DE DESCRIPTION — un texte ne doit pas dépendre du run
+# Les champs thesis, sous_titre et biais sont écrits une fois et lus pendant des
+# mois, alors que la liste publiée est recalculée chaque semaine. Un texte qui
+# cite des titres retenus ou qui les compte devient donc faux tout seul, sans
+# que personne n'ait rien touché, et le mensonge est d'autant plus crédible
+# qu'il était vrai le jour où il a été écrit.
+# Constaté deux fois sur le thème PEA : « huit des titres retenus cotent à New
+# York » — huit était le compte des ÉLIGIBLES, trois seulement figuraient dans
+# les vingt publiés ; et « la liste est presque vide de technologie américaine »
+# — démentie au run suivant, où cinq valeurs technologiques occupaient le haut
+# du tableau.
+# Règle : une description énonce la RÈGLE d'entrée et ce qu'elle implique
+# structurellement, jamais l'état d'un classement. « Des sociétés irlandaises
+# cotées à New York y entrent » est vrai tant que le droit ne change pas ;
+# « huit des titres retenus » est vrai un mardi.
+#
 # CE QUE LES THÈMES NE SONT PAS
 # Ils ne sont justifiés par aucun backtest et ne prétendent améliorer aucune
 # performance. Ils structurent la lecture d'un univers trop large pour une
@@ -403,17 +419,19 @@ THEMES_CURES.append({
         "publiés. Ni la place de cotation, ni la devise, ni la nationalité "
         "perçue de l'entreprise n'entrent dans le critère."
     ),
+    # RÈGLE D'ÉCRITURE, apprise ici. Une description de watchlist ne doit
+    # contenir AUCUN fait qui dépende du run : la version précédente annonçait
+    # « huit des titres retenus cotent à New York » alors que huit était le
+    # compte des ÉLIGIBLES et que trois seulement figuraient dans les vingt
+    # publiés. Un texte qui cite des noms et des nombres devient faux tout seul,
+    # la semaine suivante, sans que personne ne touche à rien.
     "thesis": (
-        "Le PEA exonère d'impôt sur le revenu les plus-values et les dividendes "
-        "après cinq ans de détention, seuls les prélèvements sociaux restant dus. "
-        "L'avantage est considérable et il a un prix : l'enveloppe n'accepte que "
-        "les sociétés dont le siège social est européen. Cette liste montre ce "
-        "que cette contrainte laisse réellement disponible, et surtout ce qu'un "
-        "filtre par place de cotation ferait manquer. Huit des titres retenus "
-        "cotent en dollars à New York — Nebius, STMicroelectronics, NXP, Ferrari "
-        "sont des sociétés néerlandaises, Accenture, Eaton, Medtronic et Seagate "
-        "des sociétés irlandaises. Aucune ne ressemble à une valeur européenne, "
-        "toutes le sont au sens du code monétaire et financier."
+        "Cinq ans de détention, et les gains échappent à l'impôt sur le revenu : "
+        "restent les prélèvements sociaux. En échange, le PEA n'accepte que les "
+        "sociétés dont le siège social est européen. Le critère est le siège, "
+        "jamais la place de cotation — des sociétés néerlandaises et irlandaises "
+        "cotées en dollars à New York y entrent, des britanniques et des suisses "
+        "non."
     ),
     # Une contrainte fiscale ne s'invalide pas comme une thèse : ce qui la
     # périme, c'est un changement de droit ou de domicile, pas un retournement
@@ -427,24 +445,25 @@ THEMES_CURES.append({
         "vérification, et une éligibilité ne se déduit jamais d'une donnée de "
         "marché. Vérification la plus récente : " + PEA_VERIFIE_LE + "."
     ),
+    # Même règle que pour la thèse : que des faits qui tiennent d'une semaine
+    # sur l'autre. La version précédente décrivait la liste comme « presque vide
+    # de technologie américaine, concentrée sur l'industrie, le luxe et la
+    # santé » — une caractérisation d'un run, démentie par le suivant, où NXP,
+    # Accenture, Adyen, SAP et ASML occupaient la moitié du haut de tableau.
     "biais": (
-        "PIÈGE PRINCIPAL, à lire avant tout ordre : l'éligibilité juridique d'un "
-        "titre et l'acceptation de la ligne par ton courtier sont deux choses "
-        "différentes. Plusieurs courtiers français refusent au PEA les lignes "
-        "cotées à New York, ou n'acceptent que la ligne européenne quand elle "
-        "existe. À vérifier avant de passer l'ordre, jamais après. Les certificats "
-        "de dépôt (ADR) ne sont en aucun cas logeables, quel que soit le siège de "
-        "l'émetteur.\n\n"
-        "Ce filtre est FISCAL, pas économique : rien ne dit qu'un univers "
-        "restreint par le lieu du siège social se comporte mieux qu'un autre, et "
-        "il n'y a aucune raison qu'il le fasse. Il optimise l'imposition, pas la "
-        "sélection. Conséquence directe : la liste est presque vide de technologie "
-        "américaine, qui domine la watchlist principale, et concentrée sur "
-        "l'industrie, le luxe, la santé et la finance européennes. C'est le prix "
-        "de l'enveloppe, pas un jugement sur ces secteurs.\n\n"
-        "Enfin le PEA a ses propres exclusions, indépendantes du siège social : "
-        "les foncières cotées de type SIIC en sont écartées, et le plafond de "
-        "versements est de 150 000 €. Ce thème ne les modélise pas."
+        "À vérifier avant tout ordre : l'éligibilité d'un titre et l'acceptation "
+        "de la ligne par ton courtier sont deux choses différentes. Plusieurs "
+        "courtiers français refusent au PEA les lignes cotées à New York, ou "
+        "n'acceptent que la ligne européenne. Et un certificat de dépôt (ADR) "
+        "n'est jamais logeable, quel que soit le siège de l'émetteur.\n\n"
+        "Ce filtre est fiscal, pas économique. Rien ne dit qu'un univers "
+        "restreint par le lieu d'un siège social se comporte mieux qu'un autre : "
+        "il optimise l'imposition, pas la sélection. Il écarte par construction "
+        "les marchés américain, britannique et suisse, soit l'essentiel de la "
+        "watchlist principale.\n\n"
+        "Le PEA a enfin ses exclusions propres, indépendantes du siège social : "
+        "les foncières cotées de type SIIC, et un plafond de versements de "
+        "150 000 €. Ce thème ne les modélise pas."
     ),
     "tickers": sorted(PEA_ELIGIBLES),
     "top": TOP_PEA,

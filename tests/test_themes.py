@@ -8,6 +8,7 @@ et les données sont simulées. On teste le contrat, pas les données de marché
 """
 import json
 import os
+import re
 import sys
 import types
 
@@ -63,6 +64,20 @@ interdits = ["moat", "douve", "marge de sécurité", "valeur intrinsèque"]
 textes = " ".join(f"{t['label']} {t['sous_titre']} {t['thesis']}" for t in themes.THEMES).lower()
 fautes = [m for m in interdits if m in textes]
 check("aucun vocabulaire emprunté dans les libellés et thèses", not fautes, f"trouvé : {fautes}")
+
+# Un texte qui cite les titres retenus devient faux tout seul la semaine
+# suivante, la liste etant recalculee a chaque run. Le cas reel etait un nom de
+# societe et un compte, que ce test ne peut pas voir ; il attrape au moins la
+# forme la plus tentante, le ticker cite en exemple dans sa propre these.
+fautifs = []
+for t in themes.THEMES:
+    texte = " ".join(str(t.get(c) or "") for c in ("thesis", "sous_titre", "biais",
+                                                   "inversion", "regle_texte"))
+    for tk in t.get("tickers", []):
+        # Frontieres de mot : « V » ou « ON » matcheraient n'importe quoi.
+        if re.search(r"(?<![\w.])" + re.escape(tk) + r"(?![\w.])", texte):
+            fautifs.append(f"{t['id']}→{tk}")
+check("aucune description ne cite un ticker de sa propre liste", not fautifs, str(fautifs))
 
 print("\n— Univers dérivé —")
 u = set(themes.univers_thematique())
