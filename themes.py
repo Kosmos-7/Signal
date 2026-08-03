@@ -66,12 +66,8 @@ THEMES_CURES = [
         "sous_titre": "Du silicium au mégawatt",
         "kind": "these",
         "thesis": (
-            "Qui encaisse les milliards que l'IA dépense ? Personne ne sait quel usage "
-            "gagnera, mais l'essentiel de la dépense finit en objets physiques : puces, "
-            "machines de gravure, mémoire, serveurs, électricité. Suivre cette chaîne, "
-            "c'est parier sur la dépense plutôt que sur le vainqueur. Avec une "
-            "conviction assumée : le goulot est moins la gravure que l'assemblage et "
-            "les substrats."
+            "Qui encaisse les milliards que l'IA dépense ? Toute la chaîne physique, "
+            "des puces à l'électricité — le pari de la dépense, pas celui du vainqueur."
         ),
         "inversion": (
             "Le retour sur investissement applicatif ne se matérialise pas et les hyperscalers "
@@ -207,11 +203,8 @@ THEMES_CURES = [
         "kind": "secteur",
         "thesis": (
             "Qu'achète-t-on vraiment avec « de la finance » ? Quatre métiers qui ne "
-            "gagnent pas leur argent de la même façon : les BILANS vivent des taux et "
-            "portent le risque, les FLUX d'une commission par transaction, la GESTION "
-            "D'ACTIFS d'un pourcentage des encours confiés, les PÉAGES d'un accès "
-            "difficile à contourner. Côte à côte, on voit lequel se paie cher, et "
-            "pourquoi."
+            "gagnent pas leur argent de la même façon, mis côte à côte pour voir "
+            "lequel se paie cher — et pourquoi."
         ),
         "inversion": (
             "Pour les bilans : une récession de crédit, ou une baisse rapide des taux qui écrase "
@@ -430,11 +423,8 @@ THEMES_CURES.append({
     # la semaine suivante, sans que personne ne touche à rien.
     "thesis": (
         "Que peut-on loger dans un PEA, l'enveloppe qui efface l'impôt sur le "
-        "revenu après cinq ans ? Pas ce qu'on croit, dans les deux sens. Le critère "
-        "porte sur le siège social de l'émetteur, dans l'Union européenne ou "
-        "l'Espace économique européen — ni sur la place de cotation, ni sur la "
-        "devise : des néerlandaises et des irlandaises cotées en dollars à New "
-        "York y entrent, des britanniques et des suisses, non."
+        "revenu après cinq ans ? Pas ce qu'on croit, dans les deux sens — les "
+        "vingt meilleurs scores réellement éligibles, surprises comprises."
     ),
     # Une contrainte fiscale ne s'invalide pas comme une thèse : ce qui la
     # périme, c'est un changement de droit ou de domicile, pas un retournement
