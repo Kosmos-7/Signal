@@ -2,13 +2,13 @@
  "id": "2026-08-03",
  "type": "quotidien",
  "date": "2026-08-03",
- "titre": "Le dollar signe sa pire semaine depuis plus de 3 mois sur fond de doutes autour de la Fed",
- "chapeau": "Le billet vert a enregistré sa plus mauvaise semaine en plus de trois mois, tandis que les négociations américano-iraniennes pèsent sur le pétrole ce lundi matin.",
+ "titre": "Wall Street ouvre août en fanfare sur l'espoir d'un accord avec l'Iran",
+ "chapeau": "Les marchés américains ont bien démarré le mois d'août, portés par l'optimisme autour des négociations avec Téhéran. Boeing signe aussi une belle journée.",
  "sujet": "marches",
  "photo": {
   "src": "actualites/photos/2026-08-03.jpg",
   "v": "df94e69c",
-  "legende": "Tableau de cotations électronique, gare de Tokyo",
+  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo…",
   "credit": "Kondo Atsushi",
   "licence": "CC BY-SA 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
@@ -17,25 +17,30 @@
  },
  "sections": [
   {
-   "titre": "Dollar : la pire semaine depuis plus de trois mois",
-   "texte": "Le dollar a enregistré sa plus mauvaise performance hebdomadaire depuis plus de trois mois, dans un contexte de doutes croissants autour de la Réserve fédérale. Les traders avaient pourtant renforcé leurs paris haussiers sur le billet vert avant la réunion de la Fed, atteignant leur niveau le plus optimiste depuis 2014 en date de mardi, selon les données de la Commodity Futures Trading Commission publiées vendredi.",
+   "titre": "Un début d'août sous bonne étoile (iranienne)",
+   "texte": "Wall Street a rallié pour entamer le mois d'août, l'optimisme autour des pourparlers avec l'Iran ayant servi de carburant. En parallèle, Donald Trump a prévenu que l'Iran ferait face à une « décapitation » s'il ne concluait pas d'accord. Les marchés, eux, ont surtout retenu la partie « négociations » du message, et pas l'autre.",
+   "sources": [
+    2,
+    3
+   ]
+  },
+  {
+   "titre": "Boeing décolle sur un trio de bonnes nouvelles",
+   "texte": "Boeing a vu son cours s'envoler grâce à trois développements positifs survenus dans la même journée, selon CNBC. La dépêche ne détaille pas lesquels, mais le résultat, lui, était visible en séance.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Le dollar termine une semaine difficile",
+   "texte": "Le dollar a enregistré sa pire semaine depuis plus de trois mois, dans un contexte de doutes sur la Fed. Ironie du calendrier : selon les données de la CFTC publiées vendredi, les traders avaient pourtant atteint leur niveau de paris haussiers sur le dollar le plus élevé depuis 2014, juste avant la réunion de la Fed.",
    "sources": [
     8
    ]
   },
   {
-   "titre": "Pétrole : les pourparlers américano-iraniens font pression sur les cours",
-   "texte": "Le pétrole recule ce lundi alors que des négociations de paix entre les États-Unis et l'Iran sont de nouveau en cours. Par ailleurs, Reuters souligne que la hausse de production décidée par l'OPEP+ apparaît pour l'instant sans impact significatif sur le marché, même si ses effets pourraient se faire sentir ultérieurement. L'Iran a par ailleurs exécuté deux personnes accusées d'espionnage au profit d'Israël, tandis que Téhéran est décrit comme cherchant à élargir sa campagne de pression pour obtenir des concessions américaines.",
-   "sources": [
-    0,
-    2,
-    3,
-    4
-   ]
-  },
-  {
-   "titre": "Obligations indiennes : Bloomberg reporte leur intégration à son indice mondial",
-   "texte": "Bloomberg a annoncé le report de l'intégration des obligations indiennes à son indice mondial, une décision qui a déçu les opérateurs de marché. Cette annonce devrait selon Bloomberg entraîner des ventes sur le marché obligataire indien.",
+   "titre": "L'Inde devra encore attendre pour Bloomberg",
+   "texte": "Bloomberg a repoussé l'ajout des obligations indiennes à son indice mondial, une décision qui a déçu les investisseurs et devrait provoquer des ventes sur le marché obligataire indien.",
    "sources": [
     6
    ]
@@ -43,32 +48,25 @@
  ],
  "sources": [
   {
-   "titre": "Jim Cramer's top 10 things to watch in the stock market Monday",
-   "resume": "Oil is falling as U.S.-Iran peace talks are back on. Plus, a potential massive merger in the pharmaceutical industry.",
+   "titre": "A trio of positive developments has Boeing shares soaring",
+   "resume": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
    "source": "CNBC",
-   "url": "https://www.cnbc.com/2026/08/03/jim-cramers-top-10-things-to-watch-in-the-stock-market-monday.html",
-   "date": "2026-08-03 13:08"
+   "url": "https://www.cnbc.com/2026/08/03/a-trio-of-positive-developments-has-boeing-shares-soaring.html",
+   "date": "2026-08-03 19:23"
   },
   {
-   "titre": "OPEC+ oil output hike is irrelevant for now, not for later - Reuters",
-   "resume": "OPEC+ oil output hike is irrelevant for now, not for later  Reuters",
+   "titre": "Wall Street rallies to kick off August on Iran talks optimism - Reuters",
+   "resume": "Wall Street rallies to kick off August on Iran talks optimism  Reuters",
    "source": "Reuters",
-   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOZ1F5SEtvVzlTU0VibXRmNGx4ZldyYllQcHBfSEkzRHVLVGdrNUxMLUZtQXZsT1pTWjJ4Z1F0ekFyN3NkWjRITjdCc2NtcmpFZ0k2OWN5Z25WOVVFVHpJNEVWQkU3emxZYkUtVFhFand1cWVHSWUyRUpQa1FOOUtPWlRKUzRVQUs3V3oxcWphVzVKUUhSSUNZaHNtdHVkM1U5VXE2Q0ZPNzE4UG5WQmdVS2cwZlU3UnNN?oc=5",
-   "date": "2026-08-03 10:49"
+   "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQTC1HdWxXY3dmcFlCNm9FZ3N5VnVhSWg0ZHV4a1RRdUdlUVM5QUhNYUlueDN2akloUFFEUWRIWXNHeFk1VEFHMDhBRTV1XzY5TnBxUXlVQk96NkFMSnNuTURuTzhCOVRBUkVVT2p1VjBOZFBZdk4zM01WQlFDY1ZZTGhqR2NaeXNrVWN0Ym5aQ1VENmZ5aGRKRWRoMHlNRTVxMWxVSFVrOA?oc=5",
+   "date": "2026-08-03 18:37"
   },
   {
-   "titre": "How Iran is widening its pressure campaign to force US concessions - Reuters",
-   "resume": "How Iran is widening its pressure campaign to force US concessions  Reuters",
+   "titre": "Trump says Iran faces 'decapitation' if it doesn't strike deal - Reuters",
+   "resume": "Trump says Iran faces 'decapitation' if it doesn't strike deal  Reuters",
    "source": "Reuters",
-   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQU2VYbG9DT1JoZWlaZkxlVTc4T01mcjJ0cU9rc2FCWWxuY1dONTVmN0ZTU1RUZzlLUTNGbzgzYURCTFFqZzRWVXZSWXZKZC1Ldm05dFVOdmNZdnlxRVBBUzE2VDVjSU1wMlFXMkFBeDlKeVBuRWQxa2tYV1hPb0hvOHdRd0JvUGREek5HZXhuVXpMR0RBZzdKSE1fNmIyQWVzRVdfUEEzdkt5Zm1XNUVOVnpnbEg3bnNu?oc=5",
-   "date": "2026-08-03 10:02"
-  },
-  {
-   "titre": "Iran executes two people accused of spying for Israel - Reuters",
-   "resume": "Iran executes two people accused of spying for Israel  Reuters",
-   "source": "Reuters",
-   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxObVpPMnE4MnRQckNZZXg0SU9TYTI4WG5qdmc2aUhydFU0LXlJS04taFVoOU5idUFqb3ZtSFZsVUlpYUhackVhN2lGQUlYQ3hqekNxYkkxd1E1aDU2TGVZTEJQc3V5U1EwVzJLRDdiQmdITzZFYlI4TWZzOTBtT2c5bTREN2tvVVZWUk1hb1EwSlVmRHpSaVJvTDdINzFCaTFHRFI0?oc=5",
-   "date": "2026-08-03 09:53"
+   "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbWpzQ3dqaWdURjZva2hpRmpXbFNWNWFsQnlRTDF5YlpCTlBBVGxEYWZYVEhLMl84aHdvdzBhUUhxeVBqWWVHWTR5dEpleS1XY0wwR0V4N1JaMkNOaUdvWGgwWHZ0d2hubUVNU2MxMUY5dnVaS05fTlhja0JEWGp3SEdMRmswbEVIUmY1clZWdEExNDNQTFpVelhla3o0alFQS2c?oc=5",
+   "date": "2026-08-03 18:33"
   },
   {
    "titre": "Bloomberg puts off adding Indian bonds to its global index",
@@ -85,5 +83,5 @@
    "date": "2026-08-01 04:32"
   }
  ],
- "genere_le": "2026-08-03 13:32 UTC"
+ "genere_le": "2026-08-03 20:36 UTC"
 }
