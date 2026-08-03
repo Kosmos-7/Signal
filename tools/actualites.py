@@ -15,6 +15,9 @@ LES DEUX GENRES, ET POURQUOI ILS N'ONT PAS LES MÊMES RÈGLES.
     la nuit (clôture US, Asie). Le TON, lui, est léger (décision propriétaire
     du 03/08/2026) : l'humour fluidifie la lecture, il ne porte que sur les
     formulations, jamais sur l'exactitude, et jamais aux dépens d'une personne.
+    Limite ajoutée le jour même, sur retour propriétaire : aucun humour sur
+    les sujets graves (guerre, menace militaire, catastrophe, victimes), ces
+    sections gardent le ton sobre, titre compris.
   · Le post HEBDO est l'analyse de l'IA sur son portefeuille, déplacée depuis
     la page Portefeuille. C'est de l'interprétation PAR NATURE, assumée et
     étiquetée comme telle. Il n'est pas généré ici : il est MATÉRIALISÉ depuis
@@ -216,11 +219,16 @@ mieux qu'un post gonflé.
 
 Le ton : léger, complice, un sourire en coin. Le lecteur prend son café. Les \
 titres et le chapeau peuvent jouer, les images amusantes sont bienvenues, tant \
-que trois limites tiennent :
+que quatre limites tiennent :
 - L'humour porte sur les FORMULATIONS et les situations, jamais sur les faits \
 ni les chiffres, qui restent exacts et sourcés.
 - Jamais de moquerie envers une personne, une entreprise ou ceux qui perdent \
 de l'argent. On sourit du théâtre des marchés, pas des acteurs.
+- AUCUN humour sur les sujets graves : guerre, menace militaire, conflit \
+géopolitique, catastrophe, victimes. Une section qui touche à l'un de ces \
+sujets s'écrit au ton sobre et factuel, titre compris. On peut sourire de la \
+RÉACTION des marchés dans une section dédiée aux marchés, jamais du contexte \
+grave lui-même ni en l'utilisant comme ressort comique.
 - La clarté gagne toujours : si un trait d'esprit obscurcit l'information, \
 il saute. Pas de tiret cadratin (—) dans les textes.
 
