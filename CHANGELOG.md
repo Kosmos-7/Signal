@@ -31,6 +31,18 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
   l'agent, investi ou non : « ou non » est délibéré, ne compter le cash
   qu'une fois investi permettrait de paraître brillant en n'investissant
   jamais, et la fongibilité rend « investi » indécidable de toute façon.
+- **Audit tous scénarios** (à la demande du propriétaire, « comme une
+  plateforme d'investissement ») : trois trous fermés. Les **retraits** sont
+  désormais spécifiés — montant négatif, effectif immédiatement, la
+  performance ne bouge pas d'un centième au moment du retrait. Le
+  **changement d'année** aurait cassé l'écart au benchmark au 1er janvier
+  2027 : les indices étaient ancrés au 1er janvier de l'année courante, ils
+  le sont maintenant au lancement du portefeuille (config.PORTFOLIO_DEBUT).
+  Le **drawdown maximal** se mesure sur l'indice de performance et non plus
+  sur le capital : la mesure capital comptait un retrait comme un plongeon
+  et laissait une injection masquer un vrai repli — le drawdown publié
+  passe honnêtement de −5,2 % à **−8,5 %**, l'injection de mai avait
+  rehaussé la courbe en plein repli.
 - La colonne `perf` de l'historique est migrée (la série de capitaux, le fait
   brut, ne bouge pas) ; les producteurs (agent, update_prices) partagent la
   même fonction dans config.py ; le prompt de l'agent décrit la nouvelle

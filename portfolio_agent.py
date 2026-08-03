@@ -326,8 +326,10 @@ def get_contexte_marche(last_known_vix=None, prev_mode_panique=False):
     doit tenir.
     """
     ctx = {}
-    annee = date.today().year
-    debut = f"{annee}-01-01"
+    # Ancré au LANCEMENT du portefeuille, pas au 1er janvier de l'année en
+    # cours : sinon, au changement d'année, le benchmark repart de zéro
+    # pendant que la performance du portefeuille continue depuis la création.
+    debut = config.PORTFOLIO_DEBUT
 
     for label, ticker in [("cac40", TICKER_CAC40), ("msci", TICKER_MSCI)]:
         try:
@@ -527,26 +529,13 @@ def _perf_twr(portfolio, capital):
 
 
 def calc_max_drawdown(history):
-    """Drawdown sur valeur absolue du capital (en %).
-    Utilise le champ 'capital' si disponible, sinon 'perf' en fallback.
-    Évite de compter les injections de capital comme des gains."""
-    if not history:
-        return 0.0
-    peak = float('-inf')
-    max_dd = 0.0
-    for h in history:
-        if h.get("capital") is not None:
-            v = h["capital"]
-        else:
-            # Fallback : 'perf' est en %, on reconstitue la valeur sur CAPITAL_INITIAL
-            v = CAPITAL_INITIAL * (1 + h.get("perf", 0) / 100)
-        if v > peak:
-            peak = v
-        if peak > 0:
-            dd = (v - peak) / peak * 100
-            if dd < max_dd:
-                max_dd = dd
-    return round(max_dd, 2)
+    """Drawdown sur l'indice de performance pondérée par le temps.
+
+    Mesuré sur le CAPITAL jusqu'au 03/08/2026, ce qui comptait un retrait
+    comme un plongeon et une injection comme une remontée. La série `perf`
+    est insensible aux flux depuis le passage au chaînage : c'est elle qui
+    porte la mesure, config.max_drawdown_indice fait foi (et se teste)."""
+    return config.max_drawdown_indice(history)
 
 # ── FEEDBACK LOOP : BIAIS → RÈGLES AUTO ──────────────────────────────────────
 
@@ -1191,8 +1180,8 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 - Capital actuel (net)       : {capital:.0f}€
 - **Performance NETTE = {perf:+.2f}%** — pondérée par le temps : les injections de capital ne comptent ni comme gain ni comme perte. Ne la recalcule JAMAIS comme capital/versements − 1, les deux chiffres divergent par construction.
 - Performance brute (sans coûts) : {perf_brute:+.2f}%  (différence = {perf_brute - perf:+.2f}pp = friction réelle)
-- Benchmark MSCI World (YTD 2026) = {bench:+.2f}%
-- **Écart au benchmark vs MSCI = {vs:+.2f} points de pourcentage** (= perf portefeuille − MSCI YTD ; observation, pas une revendication d'alpha)
+- Benchmark MSCI World (depuis le lancement, 02/01/2026) = {bench:+.2f}%
+- **Écart au benchmark vs MSCI = {vs:+.2f} points de pourcentage** (= perf portefeuille − MSCI depuis le lancement ; observation, pas une revendication d'alpha)
 - Liquidités disponibles      : {liquidites:.0f}€
 
 ## FRICTION RÉELLE (frais transaction + fiscalité française)
@@ -1217,8 +1206,8 @@ Positions ouvertes ({len(positions)}) :
 {chr(10).join(pos_lines) if pos_lines else "  Aucune position"}
 
 ## CONTEXTE DE MARCHÉ CETTE SEMAINE
-- CAC40 : {contexte.get('cac40', {}).get('perf_semaine', 0):+.1f}% sur la semaine, {contexte.get('cac40', {}).get('perf_ytd', 0):+.1f}% YTD
-- MSCI World : {contexte.get('msci', {}).get('perf_semaine', 0):+.1f}% sur la semaine, {contexte.get('msci', {}).get('perf_ytd', 0):+.1f}% YTD
+- CAC40 : {contexte.get('cac40', {}).get('perf_semaine', 0):+.1f}% sur la semaine, {contexte.get('cac40', {}).get('perf_ytd', 0):+.1f}% depuis le lancement
+- MSCI World : {contexte.get('msci', {}).get('perf_semaine', 0):+.1f}% sur la semaine, {contexte.get('msci', {}).get('perf_ytd', 0):+.1f}% depuis le lancement
 - VIX : {contexte.get('vix','?')} — {"régime calme (<20)" if contexte.get('vix', 18) < 20 else "vigilance (20-25)" if contexte.get('vix', 18) < 25 else "stress modéré (25-35)" if contexte.get('vix', 18) < 35 else "panique (>35)"}. Indicateur contextuel uniquement, n'influence PAS les scores du screener (dampener mécanique désactivé — choix de neutralité). Tu peux le citer dans ton analyse si pertinent (ex: justifier une prudence accrue en VIX>25), mais sans le traiter comme une règle d'enforcement.
 - Mode panique : {"OUI — Règle 03 active, aucun ordre possible" if contexte.get('mode_panique') else "NON — ordres possibles"}
 {regles_section}
@@ -1865,7 +1854,7 @@ def main():
     # compte. Seul l'agent estampille : update_prices, qui tourne tous les
     # jours, n'est pas un point de décision.
     for _inj in portfolio.get("injections", []):
-        if _inj.get("capital_post") is None:
+        if _inj.get("capital_post") is None and _inj.get("montant", 0) > 0:
             _inj["capital_post"] = portfolio["capital_actuel"]
             _inj["effective_le"] = today
             print(f"   💶 Injection du {_inj['date']} ({_inj['montant']:.0f}€) "

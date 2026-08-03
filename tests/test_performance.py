@@ -68,6 +68,29 @@ check("l'estampille est sans discontinuité",
       twr(attente, c, 10000) == twr(
           inj + [{"date": "2026-08-03", "montant": 10000, "capital_post": c}], c, 10000))
 
+print("\n— Retraits (montant négatif, effectif immédiatement) —")
+# Convention : capital_initial est le total NET versé. 10 000 versés, 5 000
+# retirés après +20 % : cap_depart = net(5 000) − (−5 000) = 10 000.
+retrait = [{"date": "2026-06-01", "montant": -5000, "capital_post": 7000}]
+check("un retrait ne change pas la performance du jour",
+      twr(retrait, 7000, 10000) == 20.0)
+check("les gains d'après-retrait portent sur la base réduite",
+      twr(retrait, 7700, 10000) == 32.0)
+check("dépôt puis retrait le même jour se chaînent dans l'ordre",
+      twr([{"date": "2026-06-01", "montant": 5000, "capital_post": 15000},
+           {"date": "2026-06-01", "montant": -3000, "capital_post": 12000}],
+          12000, 10000) == 0.0)
+
+print("\n— Drawdown sur l'indice, plus sur le capital —")
+mdd = config.max_drawdown_indice
+serie = [{"perf": 0.0}, {"perf": 10.0}, {"perf": -1.0}]
+check("le drawdown se mesure du pic de l'indice", mdd(serie) == -10.0)
+check("une injection ne masque plus un repli",
+      # capital 10k -> 11k -> injection (+10k, capital 20.9k) -> les positions
+      # continuent de baisser : l'indice TWR voit la baisse, le capital non.
+      mdd([{"perf": 0.0}, {"perf": 10.0}, {"perf": 4.5}, {"perf": -1.0}]) == -10.0)
+check("série vide ou sans perf : zéro", mdd([]) == 0.0 == mdd([{"capital": 5}]))
+
 print("\n— Cohérence du portefeuille publié —")
 d = json.load(open(os.path.join(RACINE, "portfolio.json"), encoding="utf-8"))
 injections = d.get("injections", [])
@@ -76,6 +99,8 @@ check("le registre des injections existe, capital_post présent (None = en atten
                          for i in injections))
 cap_depart = d["capital_initial"] - sum(i["montant"] for i in injections)
 check("capital de départ reconstruit = 10 000 €", cap_depart == 10000.0)
+check("le drawdown publié est celui de l'indice",
+      d["max_drawdown"] == config.max_drawdown_indice(d["performance_history"]))
 check("le champ performance est bien la mesure pondérée par le temps",
       d["performance"] == twr(injections, d["capital_actuel"], cap_depart),
       f"{d['performance']} vs {twr(injections, d['capital_actuel'], cap_depart)}")

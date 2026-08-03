@@ -27,6 +27,7 @@ import yfinance as yf
 from datetime import date, datetime
 
 # Réutilise les fonctions du portfolio_agent pour cohérence stricte
+import config
 from portfolio_agent import (
     get_eur_usd_rate, get_eur_gbp_rate, maj_position,
     calc_max_drawdown, save_json_atomic,
@@ -93,8 +94,10 @@ def main():
         pos["poids"] = round(pos["valeur_actuelle"] / capital_actuel * 100, 1) if capital_actuel > 0 else 0
 
     # ── Benchmarks YTD (rerécupère pour fraîcheur)
-    annee = date.today().year
-    debut = f"{annee}-01-01"
+    # Ancré au lancement (cf. config.PORTFOLIO_DEBUT) et non au 1er janvier de
+    # l'année courante : au changement d'année le benchmark serait reparti de
+    # zéro pendant que la performance continue depuis la création.
+    debut = config.PORTFOLIO_DEBUT
     bench_cac, bench_msci = portfolio.get("benchmark_cac40", 0), portfolio.get("benchmark_msci", 0)
     for label, ticker in [("cac40", TICKER_CAC40), ("msci", TICKER_MSCI)]:
         try:
@@ -151,7 +154,6 @@ def main():
 
     # ── Capital post-liquidation (cash réel si tout vendu aujourd'hui — recalculé chaque jour)
     # Voir portfolio_agent.main() pour la logique détaillée.
-    import config
     cash_post_liq             = float(liquidites)
     frais_si_liquidation      = 0.0
     pfu_latent_si_liquidation = 0.0

@@ -209,6 +209,14 @@ WATCHLIST_SIZE = 30
 WATCHLIST_MAX_PER_SECTOR     = 5
 WATCHLIST_MAX_PER_COUNTRY    = 12
 
+# Date du premier point du portefeuille. Les benchmarks s'ancrent ICI et non au
+# 1er janvier de l'année courante : ancrés à l'année, ils seraient repartis de
+# zéro au 1er janvier 2027 pendant que la performance du portefeuille continue
+# depuis la création — l'écart au benchmark serait devenu un non-sens sans
+# qu'aucun test ne le voie venir. Constante et non premier point de
+# performance_history : l'historique est plafonné à ~260 entrées.
+PORTFOLIO_DEBUT = "2026-01-02"
+
 # ─────────────────────────────────────────────────────────────────────────────
 # PERFORMANCE PONDÉRÉE PAR LE TEMPS (03/08/2026)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -249,6 +257,14 @@ WATCHLIST_MAX_PER_COUNTRY    = 12
 #                   points, et le jour où la date en serait sortie, la
 #                   performance aurait silencieusement changé de valeur.
 #   effective_le  — date de l'estampille (traçabilité).
+#
+# RETRAITS. Une entrée à montant NÉGATIF est un retrait. Deux différences avec
+# un dépôt : il est effectif immédiatement (le cash part, il n'y a rien à
+# « mettre à disposition »), donc capital_post se fige à l'écriture, jamais
+# None ; et capital_initial — qui est par convention le TOTAL NET VERSÉ —
+# se décrémente du montant retiré. Le chaînage est le même : la période se
+# ferme sur le capital d'avant le retrait, la suivante ouvre sur la base
+# réduite, et la performance ne bouge pas d'un centième au moment du retrait.
 
 def perf_ponderee_temps(injections, capital_actuel, capital_depart):
     """Performance (%) chaînée entre injections, insensible aux versements.
@@ -267,3 +283,23 @@ def perf_ponderee_temps(injections, capital_actuel, capital_depart):
     if base <= 0:
         return 0.0
     return round((facteur * ((float(capital_actuel) - en_attente) / base) - 1) * 100, 2)
+
+
+def max_drawdown_indice(history):
+    """Drawdown maximal (%) mesuré sur l'INDICE de performance (série `perf`).
+
+    Sur le capital, un retrait creuserait un faux plongeon et une injection
+    rehausserait le pic sans qu'aucune position n'ait bougé. La série `perf`
+    étant pondérée par le temps donc insensible aux flux, c'est elle qui
+    mesure ce que la stratégie a réellement fait subir au capital investi."""
+    pic, dd = float("-inf"), 0.0
+    for h in history or []:
+        p = h.get("perf")
+        if p is None:
+            continue
+        v = 1 + float(p) / 100
+        if v > pic:
+            pic = v
+        if pic > 0:
+            dd = min(dd, (v - pic) / pic * 100)
+    return round(dd, 2)
