@@ -41,6 +41,10 @@
 # cotées à New York y entrent » est vrai tant que le droit ne change pas ;
 # « huit des titres retenus » est vrai un mardi.
 #
+# FORME (08/2026) : chaque thèse OUVRE SUR LA QUESTION à laquelle la liste
+# répond, puis y répond court. Le lecteur sait en une ligne si cette liste le
+# concerne — c'est le « pourquoi cette page », pas le « comment c'est fait ».
+#
 # CE QUE LES THÈMES NE SONT PAS
 # Ils ne sont justifiés par aucun backtest et ne prétendent améliorer aucune
 # performance. Ils structurent la lecture d'un univers trop large pour une
@@ -62,11 +66,11 @@ THEMES_CURES = [
         "sous_titre": "Du silicium au mégawatt",
         "kind": "these",
         "thesis": (
-            "Personne ne sait quel usage de l'IA gagnera. Mais chaque dollar qu'on y "
-            "investit finit en objets physiques : puces, machines de gravure, mémoire, "
-            "serveurs, électricité, refroidissement. Les suivre, c'est parier sur la "
-            "dépense plutôt que sur le vainqueur. Et le goulot n'est pas là où on le "
-            "croit : moins la gravure que l'assemblage et les substrats."
+            "Qui encaisse les milliards que l'IA dépense ? Personne ne sait quel usage "
+            "gagnera, mais chaque dollar investi finit en objets physiques : puces, "
+            "machines de gravure, mémoire, serveurs, électricité. Suivre cette chaîne, "
+            "c'est parier sur la dépense plutôt que sur le vainqueur. Le goulot n'est "
+            "d'ailleurs pas la gravure : l'assemblage et les substrats."
         ),
         "inversion": (
             "Le retour sur investissement applicatif ne se matérialise pas et les hyperscalers "
@@ -201,11 +205,11 @@ THEMES_CURES = [
         "sous_titre": "Bilans, flux et péages de marché",
         "kind": "secteur",
         "thesis": (
-            "On parle de « la finance » comme d'un seul métier. Il y en a trois, qui ne "
-            "gagnent pas leur argent de la même façon et ne craignent pas les mêmes chocs : "
-            "les BILANS vivent des taux, les FLUX d'une commission sur chaque transaction, "
-            "les PÉAGES d'un accès que personne ne peut contourner. Les voir côte à côte "
-            "montre lequel se paie cher, et pourquoi."
+            "Qu'achète-t-on vraiment avec « de la finance » ? Trois métiers qui ne "
+            "gagnent pas leur argent de la même façon : les BILANS vivent des taux, les "
+            "FLUX d'une commission sur chaque transaction, les PÉAGES d'un accès que "
+            "personne ne peut contourner. Côte à côte, on voit lequel se paie cher, et "
+            "pourquoi."
         ),
         "inversion": (
             "Pour les bilans : une récession de crédit, ou une baisse rapide des taux qui écrase "
@@ -423,12 +427,11 @@ THEMES_CURES.append({
     # publiés. Un texte qui cite des noms et des nombres devient faux tout seul,
     # la semaine suivante, sans que personne ne touche à rien.
     "thesis": (
-        "Cinq ans de détention, et les gains échappent à l'impôt sur le revenu : "
-        "restent les prélèvements sociaux. En échange, le PEA n'accepte que les "
-        "sociétés dont le siège social est européen — un critère qui ne se devine "
-        "pas, et où l'on se trompe dans les deux sens. Des néerlandaises et des "
-        "irlandaises cotées en dollars à New York y entrent ; des britanniques et "
-        "des suisses, non."
+        "Que peut-on loger dans un PEA, l'enveloppe qui efface l'impôt sur le "
+        "revenu après cinq ans ? Pas ce qu'on croit, dans les deux sens : le seul "
+        "critère est le siège social européen de l'émetteur. Des néerlandaises et "
+        "des irlandaises cotées en dollars à New York y entrent ; des britanniques "
+        "et des suisses, non."
     ),
     # Une contrainte fiscale ne s'invalide pas comme une thèse : ce qui la
     # périme, c'est un changement de droit ou de domicile, pas un retournement

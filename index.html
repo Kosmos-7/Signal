@@ -402,7 +402,7 @@ let curWl=null,curList=[],curGroups=null;
 function mainMeta(){
   if(TBY[MAIN])return TBY[MAIN];
   return {id:MAIN,label:'Watchlist principale',sous_titre:'Les meilleurs scores, toutes catégories',kind:'principale',
-thesis:"Où sont les meilleurs dossiers en ce moment, sans présupposé de secteur ni de thème. Les autres listes répondent à une question qu'on s'est déjà posée ; celle-ci ne suppose rien, et c'est par elle qu'on commence.",
+thesis:"Où sont les meilleurs dossiers cette semaine ? Toutes catégories, sans présupposé de secteur ni de thème : la seule liste qui ne suppose rien, celle par laquelle commencer.",
     inversion:'',biais:'',regle_texte:'',declares:stocks.length,scores:stocks.length,
     couverture:1,status:'ok',members:stocks.map(s=>s.ticker)};
 }
@@ -701,7 +701,7 @@ function showHome(){
   const nUniv=U.universe_declared||U.universe_scored||0;
   const perimetre=nUniv?nUniv+' grandes capitalisations':'les grandes capitalisations';
   doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
-    '<p class="home-lead">Bonne entreprise, bon prix, bon moment : trois questions différentes, qu\'on confond presque toujours en une seule. Faute de méthode, on finit par acheter ce dont on a entendu parler. Signal applique le même barème aux '+sv(perimetre)+' qu\'il suit, en Europe, aux États-Unis et en Asie.</p>'+
+    '<p class="home-lead">Bonne entreprise ? Bon prix ? Bon moment ? Trois questions distinctes, presque toujours confondues en une seule — et faute de les séparer, on achète ce dont on a entendu parler. Signal les note séparément, sur '+sv(perimetre)+' suivies en Europe, aux États-Unis et en Asie.</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
