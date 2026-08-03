@@ -693,8 +693,15 @@ function showHome(){
   // données, le décompte de titres scorés relevait du tableau de bord interne.
   const meta=[U.updated_at?'Mise à jour '+sv(U.updated_at):'',U.week?sv(U.week):''
   ].filter(Boolean).join(' · ');
+  // « L'univers » est du vocabulaire interne : le lecteur ne sait pas ce que le
+  // mot recouvre, et le texte n'a aucune raison de le lui faire deviner. On dit
+  // la chose — combien de societes, lesquelles, ou. Le nombre est LU la ou il
+  // est produit, jamais recopie : ecrit en dur il a deja menti une fois, 210
+  // annonces pour 229 reels apres un elargissement.
+  const nUniv=U.universe_declared||U.universe_scored||0;
+  const perimetre=nUniv?nUniv+' grandes capitalisations':'les grandes capitalisations';
   doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
-    '<p class="home-lead">Bonne entreprise, bon prix, bon moment : trois questions différentes, qu\'on confond presque toujours en une seule. Faute de méthode, on finit par acheter ce dont on a entendu parler. Signal note tout son univers sur ces trois axes, avec le même barème du premier au dernier titre.</p>'+
+    '<p class="home-lead">Bonne entreprise, bon prix, bon moment : trois questions différentes, qu\'on confond presque toujours en une seule. Faute de méthode, on finit par acheter ce dont on a entendu parler. Signal applique le même barème aux '+sv(perimetre)+' qu\'il suit, en Europe, aux États-Unis et en Asie.</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
