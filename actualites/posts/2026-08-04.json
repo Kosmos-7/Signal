@@ -1,0 +1,79 @@
+{
+ "id": "2026-08-04",
+ "type": "quotidien",
+ "date": "2026-08-04",
+ "titre": "Aramco bondit de 44 %, Toyota revoit ses prévisions à la hausse",
+ "chapeau": "Pétrole, automobile et manœuvres sur le yen : le point sur ce qui fait bouger les marchés ce matin.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-04.jpg",
+  "v": "df94e69c",
+  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo…",
+  "credit": "Kondo Atsushi",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
+  "fichier": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in March 2009.jpg",
+  "requete": "stock exchange display board"
+ },
+ "sections": [
+  {
+   "titre": "Aramco : la guerre en Iran propulse les bénéfices",
+   "texte": "Aramco affiche une hausse de 44 % de son bénéfice net, portée par la flambée des prix du pétrole liée à la guerre en Iran. C'est le genre de résultat qui donne envie de relire son relevé de compte... ou pas. Les chiffres sont là, nets et tranchants, sans grand mystère sur leur origine.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "OPEC+ : une hausse de production qui attend son heure",
+   "texte": "Selon Reuters, la décision d'OPEC+ d'augmenter sa production est pour l'instant sans effet réel sur le marché. Elle pourrait en revanche peser plus tard. En résumé : c'est une bombe à retardement que tout le monde regarde en attendant qu'elle tic-taque vraiment.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Toyota relève ses prévisions annuelles malgré un premier trimestre en baisse",
+   "texte": "Toyota a enregistré une baisse de ses profits au premier trimestre, plombée par la faiblesse de ses ventes en Chine. Le constructeur japonais n'en relève pas moins ses prévisions annuelles. Un exercice d'équilibriste que les marchés apprécient généralement.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Le yen, la Fed et un Trésor américain qui cherche ses alliés",
+   "texte": "Le secrétaire au Trésor Scott Bessent chercherait à soutenir le yen sans vendre des bons du Trésor américain dans un marché obligataire jugé sensible, selon une analyse de CNBC. La Réserve fédérale pourrait être mise à contribution dans cette démarche. Une équation délicate qui mêle politique de change et équilibres du marché obligataire.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Aramco posts 44% rise in net profit as Iran war drives up oil prices - Reuters",
+   "resume": "Aramco posts 44% rise in net profit as Iran war drives up oil prices  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOcXFsci0ySk53THJaUktvbFlJd0ZjTzhFNmJSU0gtY1B5RElscWFhWHJLWTcxdlJ1SDhhV1dJcmQteVdaT0NLekZaMU05V2tockhvaGFtYlgzbk5OdWpDVEM4TmFoX2FpZFMyQWdxTzJ2SkdzYVExYVdRWHBKVlNPcTBzX1hub05WWk45TE1HVDM?oc=5",
+   "date": "2026-08-04 06:05"
+  },
+  {
+   "titre": "OPEC+ oil output hike is irrelevant for now, not for later - Reuters",
+   "resume": "OPEC+ oil output hike is irrelevant for now, not for later  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOZ1F5SEtvVzlTU0VibXRmNGx4ZldyYllQcHBfSEkzRHVLVGdrNUxMLUZtQXZsT1pTWjJ4Z1F0ekFyN3NkWjRITjdCc2NtcmpFZ0k2OWN5Z25WOVVFVHpJNEVWQkU3emxZYkUtVFhFand1cWVHSWUyRUpQa1FOOUtPWlRKUzRVQUs3V3oxcWphVzVKUUhSSUNZaHNtdHVkM1U5VXE2Q0ZPNzE4UG5WQmdVS2cwZlU3UnNN?oc=5",
+   "date": "2026-08-04 06:00"
+  },
+  {
+   "titre": "Toyota lifts annual forecast despite Q1 profit drop on weak China sales - Reuters",
+   "resume": "Toyota lifts annual forecast despite Q1 profit drop on weak China sales  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQSy1kNU1lRXkxX25PQUFPbTQtT2FCaXp3VHNJb0N6czVieVFvZmY1U1lta3NzVEdwRUEzQmd6b2h0dmtOTTVyZmNTTDhiVU1od3dCWFN6U2JRMFRZeTE2cnBwTHpGekxMNzhGRk1CMnZSRllsdG5UZmpmXzRoNTVKeDlQUlBwMWFlUG9KbzJGOGkzZGtUajh4V1R2WmhMdXdiVVNiZlFiLTZHbHhlUExSS05QdnU2RFRUUTRuQ3ZsM2M1M0RSdkxFajVMWU4ycDVGanc?oc=5",
+   "date": "2026-08-04 05:08"
+  },
+  {
+   "titre": "Analysis: Federal Reserve may be pulled into Bessent’s effort to support Japan’s yen",
+   "resume": "Treasury Secretary Scott Bessent wants to defend the yen without selling Treasuries into a sensitive U.S. bond market. The Federal Reserve could help.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/03/bessent-fed-japan-yen-fima-repo-facility.html",
+   "date": "2026-08-03 22:40"
+  }
+ ],
+ "genere_le": "2026-08-04 08:08 UTC"
+}
