@@ -82,7 +82,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 88/100 — légèrement au-dessus de sa régression (+1.6σ), RSI en zone favorable, correction modérée -13.3% sous le top (zone Fibo 23.6%), croissance CA solide (36%/an), marges excellentes (50%), consensus analystes très favorable.",
+      "justification": "Score 88/100 — légèrement au-dessus de sa régression (+1.6σ), RSI en zone favorable, correction modérée -13.3% sous le top (zone Fibo 23.6%), croissance CA solide (36% a/a), marges excellentes (50%), consensus analystes très favorable.",
       "rank": 1,
       "rank_prev": 1,
       "rank_delta": 0
@@ -152,7 +152,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 87/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-2.1σ), RSI en zone favorable, croissance CA modérée (13%/an), marges excellentes (29%).",
+      "justification": "Score 87/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-2.1σ), RSI en zone favorable, croissance CA modérée (13% a/a), marges excellentes (29%).",
       "rank": 2,
       "rank_prev": 2,
       "rank_delta": 0
@@ -222,7 +222,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 87/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-3.7σ), RSI en zone favorable, ⚠ -57.5% sous le top 52w — trend probablement cassée, croissance CA modérée (10%/an), marges excellentes (22%).",
+      "justification": "Score 87/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-3.7σ), RSI en zone favorable, ⚠ -57.5% sous le top 52w — trend probablement cassée, croissance CA modérée (10% a/a), marges excellentes (22%).",
       "rank": 3,
       "rank_prev": 3,
       "rank_delta": 0
@@ -305,7 +305,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 85/100 — prix sous sa droite de régression (-1.3σ), RSI en zone favorable, ⚠ -34.2% sous le top 52w — trend probablement cassée, croissance CA modérée (11%/an), marges excellentes (22%), consensus analystes très favorable.",
+      "justification": "Score 85/100 — prix sous sa droite de régression (-1.3σ), RSI en zone favorable, ⚠ -34.2% sous le top 52w — trend probablement cassée, croissance CA modérée (11% a/a), marges excellentes (22%), consensus analystes très favorable.",
       "rank": 4,
       "rank_prev": 4,
       "rank_delta": 0
@@ -388,7 +388,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 80/100 — Golden Cross frais (5j) — fenêtre signal optimale, cours proche de sa droite de régression, RSI en zone favorable, croissance CA modérée (15%/an), marges excellentes (35%), consensus analystes très favorable.",
+      "justification": "Score 80/100 — Golden Cross frais (5j) — fenêtre signal optimale, cours proche de sa droite de régression, RSI en zone favorable, croissance CA modérée (15% a/a), marges excellentes (35%), consensus analystes très favorable.",
       "rank": 5,
       "rank_prev": 5,
       "rank_delta": 0
@@ -471,7 +471,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 80/100 — prix sous sa droite de régression (-0.8σ), ⚠ -30.3% sous le top 52w — trend probablement cassée, croissance CA solide (20%/an), marges excellentes (23%), consensus analystes très favorable.",
+      "justification": "Score 80/100 — prix sous sa droite de régression (-0.8σ), ⚠ -30.3% sous le top 52w — trend probablement cassée, croissance CA solide (20% a/a), marges excellentes (23%), consensus analystes très favorable.",
       "rank": 6,
       "rank_prev": 6,
       "rank_delta": 0
@@ -554,7 +554,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 80/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA modérée (9%/an), marges excellentes (31%), consensus analystes très favorable.",
+      "justification": "Score 80/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA modérée (9% a/a), marges excellentes (31%), consensus analystes très favorable.",
       "rank": 7,
       "rank_prev": 7,
       "rank_delta": 0
@@ -637,7 +637,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 77/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-3.3σ), ⚠ -39.6% sous le top 52w — trend probablement cassée, croissance CA modérée (6%/an), marges positives, consensus analystes positif.",
+      "justification": "Score 77/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-3.3σ), ⚠ -39.6% sous le top 52w — trend probablement cassée, croissance CA modérée (6% a/a), marges positives, consensus analystes positif.",
       "rank": 8,
       "rank_prev": 8,
       "rank_delta": 0
@@ -707,7 +707,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 77/100 — prix sous sa droite de régression (-0.8σ), RSI en zone favorable, ⚠ -41.3% sous le top 52w — trend probablement cassée, croissance CA modérée (13%/an), marges excellentes (28%), consensus analystes très favorable.",
+      "justification": "Score 77/100 — prix sous sa droite de régression (-0.8σ), RSI en zone favorable, ⚠ -41.3% sous le top 52w — trend probablement cassée, croissance CA modérée (13% a/a), marges excellentes (28%), consensus analystes très favorable.",
       "rank": 9,
       "rank_prev": 9,
       "rank_delta": 0
@@ -790,7 +790,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 77/100 — cours proche de sa droite de régression, RSI en zone favorable, pullback sain -6.9% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (85%/an), marges excellentes (63%), consensus analystes très favorable.",
+      "justification": "Score 77/100 — cours proche de sa droite de régression, RSI en zone favorable, pullback sain -6.9% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (85% a/a), marges excellentes (63%), consensus analystes très favorable.",
       "rank": 10,
       "rank_prev": 10,
       "rank_delta": 0
@@ -873,7 +873,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 76/100 — Golden Cross récent (24j) (volume confirmé), prix sous sa droite de régression (-1.5σ), RSI en zone favorable, ⚠ collé au top 52w (-0.3%) malgré le Golden Cross frais — extension à surveiller, croissance CA modérée (14%/an), marges excellentes (51%).",
+      "justification": "Score 76/100 — Golden Cross récent (24j) (volume confirmé), prix sous sa droite de régression (-1.5σ), RSI en zone favorable, ⚠ collé au top 52w (-0.3%) malgré le Golden Cross frais — extension à surveiller, croissance CA modérée (14% a/a), marges excellentes (51%).",
       "rank": 11,
       "rank_prev": 11,
       "rank_delta": 0
@@ -956,7 +956,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 75/100 — prix sous sa droite de régression (-1.7σ), RSI en zone favorable, correction modérée -13.4% sous le top (zone Fibo 23.6%), croissance CA solide (22%/an), marges excellentes (23%), consensus analystes très favorable.",
+      "justification": "Score 75/100 — prix sous sa droite de régression (-1.7σ), RSI en zone favorable, correction modérée -13.4% sous le top (zone Fibo 23.6%), croissance CA solide (22% a/a), marges excellentes (23%), consensus analystes très favorable.",
       "rank": 12,
       "rank_prev": 12,
       "rank_delta": 0
@@ -1039,7 +1039,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 71/100 — légèrement au-dessus de sa régression (+1.6σ), RSI en zone favorable, correction modérée -13.0% sous le top (zone Fibo 23.6%), croissance CA solide (48%/an), marges excellentes (39%), consensus analystes très favorable.",
+      "justification": "Score 71/100 — légèrement au-dessus de sa régression (+1.6σ), RSI en zone favorable, correction modérée -13.0% sous le top (zone Fibo 23.6%), croissance CA solide (48% a/a), marges excellentes (39%), consensus analystes très favorable.",
       "rank": 13,
       "rank_prev": 13,
       "rank_delta": 0
@@ -1109,7 +1109,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 71/100 — prix sous sa droite de régression (-2.3σ), RSI en zone favorable, ⚠ -39.0% sous le top 52w — trend probablement cassée, croissance CA solide (24%/an), marges positives, consensus analystes très favorable.",
+      "justification": "Score 71/100 — prix sous sa droite de régression (-2.3σ), RSI en zone favorable, ⚠ -39.0% sous le top 52w — trend probablement cassée, croissance CA solide (24% a/a), marges positives, consensus analystes très favorable.",
       "rank": 14,
       "rank_prev": 14,
       "rank_delta": 0
@@ -1274,7 +1274,7 @@
           "Yahoo Finance"
         ]
       },
-      "justification": "Score 71/100 — prix en surachat régression (+2.1σ) — prudence, RSI en zone favorable, pullback sain -7.1% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (28%/an), marges positives, consensus analystes positif.",
+      "justification": "Score 71/100 — prix en surachat régression (+2.1σ) — prudence, RSI en zone favorable, pullback sain -7.1% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (28% a/a), marges positives, consensus analystes positif.",
       "rank": 16,
       "rank_prev": 16,
       "rank_delta": 0
@@ -1317,7 +1317,7 @@
           "closest_fibo": "zone Fibo 38.2%",
           "fibo_levels": {
             "23.6": 292004.55,
-            "38.2": 248640.01,
+            "38.2": 248640.02,
             "50.0": 213591.96,
             "61.8": 178543.91,
             "78.6": 128644.99
@@ -1356,7 +1356,7 @@
           "Yahoo Finance"
         ]
       },
-      "justification": "Score 70/100 — ⚠ affaiblissement post-rally sur cross stale, prix en surachat régression (+3.1σ) — prudence, RSI en zone favorable, ⚠ -32.1% sous le top 52w — trend probablement cassée, croissance CA solide (130%/an), marges excellentes (31%).",
+      "justification": "Score 70/100 — ⚠ affaiblissement post-rally sur cross stale, prix en surachat régression (+3.1σ) — prudence, RSI en zone favorable, ⚠ -32.1% sous le top 52w — trend probablement cassée, croissance CA solide (130% a/a), marges excellentes (31%).",
       "rank": 17,
       "rank_prev": 17,
       "rank_delta": 0
@@ -1426,7 +1426,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 70/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA solide (28%/an), marges excellentes (30%), consensus analystes très favorable.",
+      "justification": "Score 70/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA solide (28% a/a), marges excellentes (30%), consensus analystes très favorable.",
       "rank": 18,
       "rank_prev": 18,
       "rank_delta": 0
@@ -1493,7 +1493,7 @@
         "net_margin_pct": 17.4,
         "fcf_margin_pct": 0.4,
         "mrq": "2026-06-30",
-        "forward_pe": 26.3,
+        "forward_pe": 26.4,
         "trailing_pe": 21.9,
         "fcf_yield_pct": 0.11,
         "peg": 1.46,
@@ -1509,7 +1509,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 69/100 — cours proche de sa droite de régression, RSI en zone favorable, pullback sain -4.0% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (20%/an), marges excellentes (17%), consensus analystes très favorable.",
+      "justification": "Score 69/100 — cours proche de sa droite de régression, RSI en zone favorable, pullback sain -4.0% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (20% a/a), marges excellentes (17%), consensus analystes très favorable.",
       "rank": 19,
       "rank_prev": 19,
       "rank_delta": 0
@@ -1675,7 +1675,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 69/100 — prix en surachat régression (+2.2σ) — prudence, RSI en zone favorable, correction modérée -19.5% sous le top (zone Fibo 23.6%), croissance CA solide (104%/an), marges excellentes (26%), consensus analystes très favorable.",
+      "justification": "Score 69/100 — prix en surachat régression (+2.2σ) — prudence, RSI en zone favorable, correction modérée -19.5% sous le top (zone Fibo 23.6%), croissance CA solide (104% a/a), marges excellentes (26%), consensus analystes très favorable.",
       "rank": 21,
       "rank_prev": 21,
       "rank_delta": 0
@@ -1745,7 +1745,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 68/100 — Golden Cross frais (0j) — fenêtre signal optimale, cours proche de sa droite de régression, croissance CA solide (16%/an), marges excellentes (22%), consensus analystes très favorable.",
+      "justification": "Score 68/100 — Golden Cross frais (0j) — fenêtre signal optimale, cours proche de sa droite de régression, croissance CA solide (16% a/a), marges excellentes (22%), consensus analystes très favorable.",
       "rank": 22,
       "rank_prev": 22,
       "rank_delta": 0
@@ -1815,7 +1815,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 68/100 — prix sous sa droite de régression (-1.3σ), RSI en zone favorable, ⚠ -55.9% sous le top 52w — trend probablement cassée, croissance CA modérée (8%/an), marges excellentes (17%), consensus analystes très favorable.",
+      "justification": "Score 68/100 — prix sous sa droite de régression (-1.3σ), RSI en zone favorable, ⚠ -55.9% sous le top 52w — trend probablement cassée, croissance CA modérée (8% a/a), marges excellentes (17%), consensus analystes très favorable.",
       "rank": 23,
       "rank_prev": 23,
       "rank_delta": 0
@@ -1885,7 +1885,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 68/100 — Golden Cross frais (8j) — fenêtre signal optimale, prix sous sa droite de régression (-1.9σ), croissance CA modérée (14%/an), marges excellentes (46%), consensus analystes très favorable.",
+      "justification": "Score 68/100 — Golden Cross frais (8j) — fenêtre signal optimale, prix sous sa droite de régression (-1.9σ), croissance CA modérée (14% a/a), marges excellentes (46%), consensus analystes très favorable.",
       "rank": 24,
       "rank_prev": 24,
       "rank_delta": 0
@@ -1968,7 +1968,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 68/100 — ⚠ affaiblissement post-rally sur cross stale, prix sous sa droite de régression (-0.8σ), RSI en zone favorable, ⚠ -42.6% sous le top 52w — trend probablement cassée, croissance CA modérée (9%/an), marges positives.",
+      "justification": "Score 68/100 — ⚠ affaiblissement post-rally sur cross stale, prix sous sa droite de régression (-0.8σ), RSI en zone favorable, ⚠ -42.6% sous le top 52w — trend probablement cassée, croissance CA modérée (9% a/a), marges positives.",
       "rank": 25,
       "rank_prev": 25,
       "rank_delta": 0
@@ -2051,7 +2051,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 68/100 — légèrement au-dessus de sa régression (+1.0σ), RSI en zone favorable, correction modérée -16.0% sous le top (zone Fibo 23.6%), croissance CA solide (23%/an), marges excellentes (31%), consensus analystes positif.",
+      "justification": "Score 68/100 — légèrement au-dessus de sa régression (+1.0σ), RSI en zone favorable, correction modérée -16.0% sous le top (zone Fibo 23.6%), croissance CA solide (23% a/a), marges excellentes (31%), consensus analystes positif.",
       "rank": 26,
       "rank_prev": 26,
       "rank_delta": 0
@@ -2133,7 +2133,7 @@
           "Yahoo Finance"
         ]
       },
-      "justification": "Score 67/100 — prix sous sa droite de régression (-1.4σ), ⚠ -38.3% sous le top 52w — trend probablement cassée, croissance CA solide (17%/an), marges excellentes (45%), consensus analystes très favorable.",
+      "justification": "Score 67/100 — prix sous sa droite de régression (-1.4σ), ⚠ -38.3% sous le top 52w — trend probablement cassée, croissance CA solide (17% a/a), marges excellentes (45%), consensus analystes très favorable.",
       "rank": 27,
       "rank_prev": 27,
       "rank_delta": 0
@@ -2216,7 +2216,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 67/100 — Golden Cross confirmé (60j), prix sous sa droite de régression (-1.5σ), RSI en zone favorable, correction modérée -11.5% sous le top, croissance CA modérée (7%/an), marges positives.",
+      "justification": "Score 67/100 — Golden Cross confirmé (60j), prix sous sa droite de régression (-1.5σ), RSI en zone favorable, correction modérée -11.5% sous le top, croissance CA modérée (7% a/a), marges positives.",
       "rank": 28,
       "rank_prev": 28,
       "rank_delta": 0
@@ -2299,7 +2299,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 67/100 — cours proche de sa droite de régression, RSI en zone favorable, ⚠ près du top 52w (-2.5%) — risque de chase, croissance CA solide (26%/an), marges excellentes (28%).",
+      "justification": "Score 67/100 — cours proche de sa droite de régression, RSI en zone favorable, ⚠ près du top 52w (-2.5%) — risque de chase, croissance CA solide (26% a/a), marges excellentes (28%).",
       "rank": 29,
       "rank_prev": 29,
       "rank_delta": 0
@@ -2382,7 +2382,7 @@
           "Finnhub"
         ]
       },
-      "justification": "Score 67/100 — cours proche de sa droite de régression, croissance CA solide (93%/an), marges excellentes (49%), consensus analystes très favorable.",
+      "justification": "Score 67/100 — cours proche de sa droite de régression, croissance CA solide (93% a/a), marges excellentes (49%), consensus analystes très favorable.",
       "rank": 30,
       "rank_prev": 30,
       "rank_delta": 0
