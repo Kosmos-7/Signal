@@ -1502,9 +1502,13 @@ def score_ticker(ticker, vix=None):
                 # d'écrasement Yahoo), provenance src:"edgar" par entrée.
                 if "." not in ticker and (info.get("financialCurrency") or "") == "USD":
                     try:
+                        avant = (len(fonda["an"]), len(fonda["tr"]))
                         ed = edgar.chiffres(ticker)
                         if ed:
                             edgar.completer_fonda(fonda, ed)
+                        gagne = (len(fonda["an"]) - avant[0], len(fonda["tr"]) - avant[1])
+                        if any(gagne):
+                            print(f"   EDGAR {ticker}: +{gagne[0]} exercices, +{gagne[1]} trimestres")
                     except Exception as e:
                         print(f"  ⚠️  {ticker}: EDGAR en échec ({type(e).__name__}) — fenêtre Yahoo seule")
                 # PER par exercice + deux exercices à venir. Fail-soft aussi.

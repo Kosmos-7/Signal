@@ -38,8 +38,12 @@ import re
 import time
 import urllib.request
 
-# La SEC demande un User-Agent identifiant ; les requêtes anonymes sont bloquées.
-UA = {"User-Agent": "Signal stock screener (https://github.com/Kosmos-7/Signal)"}
+# La SEC exige un User-Agent au format « Nom contact@domaine » et bloque les
+# requêtes anonymes (403). Le contact est celui du bot du projet, déjà public
+# dans l'historique git. Sans email, le premier run a rendu 0/117 en silence.
+UA = {"User-Agent": "Signal stock screener bot@signal.fr"}
+
+_PANNE_VUE = False     # premier échec réseau du run : loggé UNE fois, en clair
 
 # Balises us-gaap, par ordre de préférence. Le CA se dépose sous plusieurs
 # concepts selon l'entreprise et l'époque — liste d'alias à entretenir.
@@ -57,9 +61,18 @@ _FRAME_TR = re.compile(r"CY\d{4}Q[1-4]\Z")
 
 
 def _get(url):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=25) as r:
-        return json.load(r)
+    global _PANNE_VUE
+    try:
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=25) as r:
+            return json.load(r)
+    except Exception as e:
+        # Le premier échec du run est loggé en clair : le run précédent a
+        # rendu 0/117 sans un mot, un échec silencieux ne doit plus arriver.
+        if not _PANNE_VUE:
+            _PANNE_VUE = True
+            print(f"  ⚠️  EDGAR premier échec du run : {type(e).__name__} ({e}) — {url[:90]}")
+        raise
 
 
 def cik_de(ticker):
