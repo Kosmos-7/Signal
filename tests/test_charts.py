@@ -398,6 +398,73 @@ f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": [],
 check("estimations PER : le run muet n'efface pas les précédentes",
       f["pe_prev"] == [{"exercice": 2026, "per": 30.0}])
 
+print("\n— EDGAR : parsing des dépôts SEC (pur, hors ligne) —")
+import edgar                                                     # noqa: E402
+
+DOC_CA = {"units": {"USD": [
+    {"frame": "CY2023", "end": "2023-12-31", "val": 22_000_000_000},
+    {"frame": "CY2024", "end": "2024-12-31", "val": 24_000_000_000},
+    {"frame": "CY2024Q1", "end": "2024-03-31", "val": 5_000_000_000},
+    {"frame": "CY2024Q2", "end": "2024-06-30", "val": 6_000_000_000},
+    {"frame": "CY2024Q3", "end": "2024-09-30", "val": 6_500_000_000},
+    {"end": "2024-12-31", "val": 99},                # sans frame : redondant, ignoré
+    {"frame": "CY2022", "end": "2022-12-31", "val": None},        # val nulle : ignorée
+]}}
+DOC_RN = {"units": {"USD": [
+    {"frame": "CY2024", "end": "2024-12-31", "val": 3_000_000_000},
+    {"frame": "CY2024Q1", "end": "2024-03-31", "val": 700_000_000},
+    {"frame": "CY2024Q2", "end": "2024-06-30", "val": 750_000_000},
+    {"frame": "CY2024Q3", "end": "2024-09-30", "val": 800_000_000},
+]}}
+DOC_EPS = {"units": {"USD/shares": [
+    {"frame": "CY2024", "end": "2024-12-31", "val": 3.25},
+], "USD": [{"frame": "CY2024", "end": "2024-12-31", "val": 999}]}}
+
+sca = edgar.series_frames(DOC_CA, "USD")
+check("seuls les faits porteurs de frame et de valeur sont lus",
+      set(sca) == {"CY2023", "CY2024", "CY2024Q1", "CY2024Q2", "CY2024Q3"})
+check("le filtre d'unité tient (USD/shares ≠ USD)",
+      edgar.series_frames(DOC_EPS, "USD/shares") == {"CY2024": ("2024-12-31", 3.25)})
+
+ed = edgar.construire_fonda(sca, edgar.series_frames(DOC_RN, "USD"),
+                            edgar.series_frames(DOC_EPS, "USD/shares"))
+check("annuels en millions, BPA conservé, provenance tracée",
+      ed["an"][-1] == {"fin": "2024-12-31", "src": "edgar",
+                       "ca": 24000, "rn": 3000, "eps": 3.25})
+q4 = [e for e in ed["tr"] if e["fin"] == "2024-12-31"]
+check("Q4 dérivé = exercice − (Q1+Q2+Q3), CA et RN, jamais l'EPS",
+      q4 and q4[0].get("ca") == 24000 - 17500 and q4[0].get("rn") == 3000 - 2250
+      and "eps" not in q4[0])
+check("2023 sans trimestres : pas de Q4 inventé",
+      not any(e["fin"] == "2023-12-31" for e in ed["tr"]))
+
+FY = {"an": [{"fin": "2024-12-31", "ca": 24100, "rn": 3010},
+             {"fin": "2025-12-31", "ca": 26000, "rn": 3300}], "tr": []}
+edgar.completer_fonda(FY, ed)
+check("extend-only : la date déjà connue de Yahoo n'est pas écrasée",
+      [e for e in FY["an"] if e["fin"] == "2024-12-31"][0]["ca"] == 24100)
+check("les dates absentes arrivent, triées, avec leur provenance",
+      FY["an"][0] == {"fin": "2023-12-31", "src": "edgar", "ca": 22000}
+      and [e["fin"][:4] for e in FY["an"]] == ["2023", "2024", "2025"])
+check("les trimestres EDGAR remplissent la fenêtre",
+      len(FY["tr"]) == 4 and FY["tr"][-1]["fin"] == "2024-12-31")
+
+ECHELLE = {"an": [{"fin": "2023-12-31", "src": "edgar", "ca": 22_000_000}], "tr": []}
+FY2 = {"an": [{"fin": "2024-12-31", "ca": 24000}], "tr": []}
+edgar.completer_fonda(FY2, ECHELLE)
+check("erreur d'échelle sur exercices adjacents : tout l'apport est refusé",
+      len(FY2["an"]) == 1)
+LOIN = {"an": [{"fin": "2014-12-31", "src": "edgar", "ca": 2000}], "tr": []}
+FY3 = {"an": [{"fin": "2024-12-31", "ca": 24000}], "tr": []}
+edgar.completer_fonda(FY3, LOIN)
+check("hypercroissance : un exercice lointain ×12 n'est PAS confondu avec une erreur",
+      len(FY3["an"]) == 2)
+check("dates voisines (30 vs 31 déc.) : doublon évité",
+      len(edgar.completer_fonda(
+          {"an": [{"fin": "2024-12-30", "ca": 24100}], "tr": []},
+          {"an": [{"fin": "2024-12-31", "src": "edgar", "ca": 24000}], "tr": []}
+      )["an"]) == 1)
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:

@@ -1166,6 +1166,7 @@ function fondaRender(s){
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th>'+(hasPer?'<th>PER</th>':'')+'</tr>'+cells+'</table>'+
     '<div class="chx-note">Chiffres publiés par la société ('+(FD_MODE==='an'?'exercices fiscaux':'trimestres')+'), montants dans la devise comptable. Variation : '+(FD_MODE==='an'?'vs exercice précédent':'vs même trimestre un an plus tôt — affichée dès que ce trimestre de comparaison est connu, l\'historique s\'approfondit à chaque mise à jour hebdomadaire')+'.'
     +(hasPer?' PER : cours de clôture de l\'exercice / BPA dilué publié. Lignes « e » : cours actuel / BPA moyen estimé par les analystes — des estimations, pas des publications.':'')
+    +(full.some(r=>r.src==='edgar')?' Historique étendu par les dépôts officiels SEC (10-K/10-Q, EDGAR).':'')
     +'</div></div>';
   host.querySelectorAll('[data-fd]').forEach(b=>b.addEventListener('click',()=>{
     if(b.disabled)return;FD_MODE=b.dataset.fd;fondaRender(s);}));

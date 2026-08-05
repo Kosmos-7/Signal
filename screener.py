@@ -49,6 +49,7 @@ import requests
 from datetime import date, timedelta, datetime as _dt, timezone as _tz
 
 import themes   # taxonomie des watchlists thématiques (source unique de vérité)
+import edgar    # dépôts SEC : historique officiel des chiffres publiés (US)
 from ta.momentum import RSIIndicator
 
 # Paramètres centralisés (VIX dampener, etc.) — Phase 2
@@ -1494,6 +1495,18 @@ def score_ticker(ticker, vix=None):
                 print(f"  ⚠️  {ticker}: chiffres publiés en échec ({type(e).__name__}) — omis")
                 fonda = None
             if fonda:
+                # Historique officiel SEC pour les sociétés US publiant en
+                # USD : étend la fenêtre Yahoo (~4 exercices, ~5 trimestres)
+                # à dix ans et plus, AVANT le calcul des PER pour que les
+                # exercices ajoutés reçoivent le leur. Extend-only (jamais
+                # d'écrasement Yahoo), provenance src:"edgar" par entrée.
+                if "." not in ticker and (info.get("financialCurrency") or "") == "USD":
+                    try:
+                        ed = edgar.chiffres(ticker)
+                        if ed:
+                            edgar.completer_fonda(fonda, ed)
+                    except Exception as e:
+                        print(f"  ⚠️  {ticker}: EDGAR en échec ({type(e).__name__}) — fenêtre Yahoo seule")
                 # PER par exercice + deux exercices à venir. Fail-soft aussi.
                 try:
                     def prix_fin(iso):

@@ -5,6 +5,36 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.13.0] — 2026-08-06
+
+### L'historique officiel : les dépôts SEC entrent dans les fiches
+
+- **Nouveau module `edgar.py`** : pour les sociétés américaines publiant en
+  dollars, la section « Chiffres publiés » est étendue par les dépôts
+  officiels 10-K/10-Q (EDGAR, la SEC) — dix ans et plus de CA, résultat net
+  et BPA, donc un PER par exercice profond et des variations trimestrielles
+  complètes immédiatement, sans attendre que l'accumulateur hebdomadaire se
+  remplisse. Ce n'est pas un troisième vendeur : c'est le document déposé
+  par la société sous responsabilité légale, la matière première que les
+  vendeurs retraitent.
+- **Extend-only et provenance** : EDGAR n'écrase jamais une valeur Yahoo
+  (les retraitements peuvent différer, on ne mélange pas à date égale) ;
+  chaque entrée ajoutée porte `src:"edgar"` et la fiche l'affiche («
+  Historique étendu par les dépôts officiels SEC »). Q4 dérivé (exercice
+  moins trois trimestres) pour CA et résultat net, jamais pour le BPA, qui
+  n'est pas additif. Garde de vraisemblance contre les erreurs d'échelle de
+  tagage (rapport > 5 entre exercices adjacents → tout l'apport refusé).
+- Hors périmètre, à dessein : les émetteurs étrangers cotés US (20-F, IFRS)
+  gardent leur fenêtre Yahoo ; aucun champ du score ne vient d'EDGAR.
+- **Verdict de la relecture sources** (même journée) : le remplissage des
+  trous Yahoo par Finnhub est abandonné — champs sans trous observés,
+  unités incompatibles, auto-concordance qui aurait tué la validation,
+  asymétrie US/Europe. Finnhub reste un validateur. Corrigés au passage :
+  le bug latent `totalRevenue or 1` (une donnée absente offrait 8 pts), les
+  21 fausses « Marge FCF 0,0 % » des financières (trou → « — » désormais),
+  l'alerte « discordante YF:0.0% » sur un champ jamais mesuré, et deux
+  textes qui contredisaient la période réelle de la croissance CA.
+
 ## [3.12.0] — 2026-08-05
 
 ### Les fiches montrent la trajectoire, plus seulement l'instant
