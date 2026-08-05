@@ -2,54 +2,54 @@
  "id": "2026-08-05",
  "type": "quotidien",
  "date": "2026-08-05",
- "titre": "Dow à un record, tensions au Moyen-Orient et Spider-Man milliardaire",
- "chapeau": "Le Dow Jones signe un record sur fond d'optimisme moyen-oriental, pendant que le Nasdaq trébuche, qu'Alphabet perd des cerveaux et que Flutter déçoit aux résultats.",
+ "titre": "Le Dow au sommet, la Nasdaq à la traîne : la séance en deux vitesses",
+ "chapeau": "Record pour le Dow Jones porté par l'optimisme au Moyen-Orient, pendant qu'AMD et SpaceX plombent le Nasdaq. Tour d'horizon d'une séance contrastée.",
  "sujet": "marches",
  "photo": {
   "src": "actualites/photos/2026-08-05.jpg",
-  "v": "d615fed6",
-  "legende": "Electronic stock board in Yaesu, Tokyo 2007",
-  "credit": "nappa",
+  "v": "8fdc7a18",
+  "legende": "Big Board of Trade",
+  "credit": "Amaury Laporte",
   "licence": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Electronic_stock_board_in_Yaesu,_Tokyo_2007.jpg",
-  "fichier": "Electronic stock board in Yaesu, Tokyo 2007.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Big_Board_of_Trade_(16914319605).jpg",
+  "fichier": "Big Board of Trade (16914319605).jpg",
   "requete": "stock exchange display board"
  },
  "sections": [
   {
-   "titre": "Le Dow fait le grand écart avec le Nasdaq",
-   "texte": "Le Dow Jones a clôturé à un niveau record, porté par l'optimisme autour de la situation au Moyen-Orient. Le Nasdaq, lui, a pris le chemin inverse, plombé notamment par SpaceX et AMD. Deux indices, deux ambiances : le marché américain s'est offert un grand écart le temps d'une séance.",
+   "titre": "Le Dow pavoise, le Nasdaq fait la tête",
+   "texte": "Le Dow Jones a clôturé à un niveau record, porté selon Reuters par un optimisme autour de la situation au Moyen-Orient. Le Nasdaq, lui, a terminé dans le rouge, lesté notamment par SpaceX et AMD. Une séance à deux vitesses, donc : pendant que les valeurs traditionnelles sabraient le champagne, la tech regardait ses chaussures.",
    "sources": [
     1
    ]
   },
   {
-   "titre": "Moyen-Orient : la situation reste grave",
-   "texte": "L'Iran a menacé de frapper des États du Golfe si les États-Unis lancent de nouvelles frappes, selon Reuters. Par ailleurs, l'armée israélienne a conduit des frappes dans le sud du Liban après avoir adressé un avertissement d'évacuation à un village. La situation dans la région demeure sérieuse et étroitement surveillée.",
-   "sources": [
-    2,
-    3
-   ]
-  },
-  {
-   "titre": "Alphabet perd des talents, les marchés s'inquiètent",
-   "texte": "Alphabet a reculé en séance sur des nouvelles de départs supplémentaires dans ses équipes d'intelligence artificielle, un phénomène que certains observateurs qualifient de « brain drain ». Le titre a souffert, bien que des analystes cités par CNBC indiquent ne pas être outre mesure préoccupés par le mouvement.",
+   "titre": "Alphabet et la fuite des cerveaux vers l'IA",
+   "texte": "Le titre Alphabet a reculé en séance après de nouveaux départs signalés vers des acteurs de l'intelligence artificielle. CNBC note toutefois que ses analystes ne s'en inquiètent pas outre mesure. L'exode des talents IA continue de faire jaser, même si tout le monde n'y voit pas encore le début de la fin.",
    "sources": [
     4
    ]
   },
   {
-   "titre": "Flutter chute : résultats manqués et patron qui change",
-   "texte": "Flutter a vu son action plonger après des résultats inférieurs aux attentes et l'annonce d'un nouveau changement à la tête de l'entreprise. FanDuel, sa filiale américaine et principal moteur de croissance, est décrite par CNBC comme perdant du terrain sur sa position dominante aux États-Unis. La double mauvaise nouvelle n'a pas laissé les investisseurs indifférents.",
+   "titre": "Flutter chute après des résultats décevants",
+   "texte": "Flutter a vu son cours s'effondrer après une publication de résultats en dessous des attentes, doublée d'un nouveau changement de direction. Selon CNBC, FanDuel, l'activité la plus importante du groupe, perd du terrain sur le marché américain des paris sportifs en ligne. Un trimestre difficile à avaler pour l'entreprise.",
    "sources": [
     5
    ]
   },
   {
    "titre": "Hollywood retrouve le goût du milliard",
-   "texte": "Spider-Man vient de rejoindre le club très select des films ayant dépassé le milliard de dollars au box-office mondial. Des analystes cités par CNBC estiment que ce retour des sorties milliardaires est de bon augure pour une industrie qui cherche encore à retrouver ses niveaux d'avant-Covid, malgré la hausse des prix des billets.",
+   "texte": "Spider-Man vient de rejoindre le club des films ayant dépassé le milliard de dollars de recettes mondiales. Selon CNBC, des analystes spécialisés estiment que ce retour des blockbusters à dix chiffres est de bon augure pour un secteur cinématographique qui cherche toujours à retrouver ses niveaux d'avant la pandémie, malgré la hausse des prix des billets.",
    "sources": [
     0
+   ]
+  },
+  {
+   "titre": "Tensions au Moyen-Orient : menaces iraniennes et frappes au Liban",
+   "texte": "L'Iran a menacé de frapper des États du Golfe si les États-Unis lancent de nouvelles frappes, selon une information exclusive de Reuters. Par ailleurs, l'armée israélienne a conduit des frappes dans le sud du Liban après avoir lancé des avertissements d'évacuation à un village de la zone, toujours selon Reuters.",
+   "sources": [
+    2,
+    3
    ]
   }
  ],
@@ -97,5 +97,5 @@
    "date": "2026-08-05 18:20"
   }
  ],
- "genere_le": "2026-08-05 21:37 UTC"
+ "genere_le": "2026-08-05 21:39 UTC"
 }
