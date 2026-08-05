@@ -153,6 +153,31 @@ try:
           A.choisir_candidats([(7, "Frankfurt Boerse display board.jpg", "q")],
                               {"New York Stock Exchange trading floor.jpg"})[0][1]
           == "Frankfurt Boerse display board.jpg")
+
+    print("\n— Réillustration des posts publiés (photo seule, texte intact) —")
+    A.ecrire_post({"id": "2026-08-06", "type": "quotidien", "date": "2026-08-06",
+                   "titre": "T6", "chapeau": "C6", "sujet": "marches",
+                   "photo": {"src": "t.jpg", "v": "3", "fichier": "Tokyo board.jpg"},
+                   "sections": [{"titre": "S", "texte": "X.", "sources": [0]}],
+                   "sources": [{"titre": "dep"}]})
+    recus = []
+    def fake(pid, sujet, deja):
+        recus.append((pid, sujet, set(deja)))
+        return {"src": f"actualites/photos/{pid}.jpg", "v": "n", "legende": "l",
+                "fichier": "NYSE floor.jpg", "credit": "", "licence": "CC0",
+                "page": "", "requete": "q"}
+    faits = A.reillustrer(["2026-08-06", "hebdo-2026-31", "inexistant"],
+                          illustrateur=fake)
+    apres = json.load(open(os.path.join(A.POSTS, "2026-08-06.json"),
+                           encoding="utf-8"))
+    check("la photo est remplacée", faits == ["2026-08-06"]
+          and apres["photo"]["fichier"] == "NYSE floor.jpg")
+    check("le texte n'est pas touché",
+          apres["titre"] == "T6" and apres["sections"][0]["texte"] == "X.")
+    check("l'ancienne photo du post traité est dans la mémoire transmise",
+          recus and "Tokyo board.jpg" in recus[0][2])
+    check("hebdo et post inexistant sont refusés sans casser le lot",
+          len(recus) == 1)
 finally:
     os.chdir(cwd)
     shutil.rmtree(tmp, ignore_errors=True)

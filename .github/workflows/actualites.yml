@@ -22,6 +22,10 @@ on:
         description: "Publier sans illustration"
         type: boolean
         default: false
+      reillustrer:
+        description: "IDs de posts dont remplacer la photo, texte intact (ex : 2026-08-03 2026-08-04)"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -44,11 +48,21 @@ jobs:
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Passé en variable d'environnement et non interpolé dans le shell :
+          # une entrée de dispatch ne doit jamais pouvoir injecter de commande.
+          REILLUSTRER: ${{ inputs.reillustrer }}
         run: |
-          python tools/actualites.py \
-            ${{ (inputs.force == true || inputs.force == 'true') && '--force' || '' }} \
-            ${{ (inputs.sans_photo == true || inputs.sans_photo == 'true') && '--sans-photo' || '' }}
+          if [ -n "$REILLUSTRER" ]; then
+            # Maintenance : photo seule, aucun texte touché, pas de dépêches.
+            python tools/actualites.py --reillustrer $REILLUSTRER
+          else
+            python tools/actualites.py \
+              ${{ (inputs.force == true || inputs.force == 'true') && '--force' || '' }} \
+              ${{ (inputs.sans_photo == true || inputs.sans_photo == 'true') && '--sans-photo' || '' }}
+          fi
       - name: Publier
+        env:
+          REILLUSTRER: ${{ inputs.reillustrer }}
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
@@ -56,7 +70,12 @@ jobs:
           if git diff --staged --quiet; then
             echo "Rien de nouveau."
           else
-            git commit -m "post(actualites): $(date -u +%F) [skip ci]"
+            if [ -n "$REILLUSTRER" ]; then
+              MSG="photos(actualites): reillustration $REILLUSTRER [skip ci]"
+            else
+              MSG="post(actualites): $(date -u +%F) [skip ci]"
+            fi
+            git commit -m "$MSG"
             git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase"; exit 1; }
             git push
           fi

@@ -347,6 +347,35 @@ def illustrer(post_id, sujet, deja=frozenset()):
     return None
 
 
+def reillustrer(ids, illustrateur=None):
+    """Remplace la photo de posts quotidiens déjà publiés, texte intact.
+
+    L'immuabilité protège le CONTENU éditorial (titre, sections, sources) :
+    remplacer l'habillage photo ne réécrit pas l'histoire. La mémoire des
+    photos parues est relue avant chaque post traité, donc un lot reste
+    varié : l'image donnée au premier compte pour le second."""
+    illustrateur = illustrateur or illustrer
+    faits = []
+    for pid in ids:
+        chemin = os.path.join(POSTS, f"{pid}.json")
+        if not os.path.exists(chemin):
+            print(f"   ✗ {pid} : introuvable")
+            continue
+        d = json.load(open(chemin, encoding="utf-8"))
+        if d.get("type") != "quotidien" or not d.get("sujet"):
+            print(f"   ✗ {pid} : pas un post quotidien illustrable")
+            continue
+        photo = illustrateur(pid, d["sujet"], photos_deja_utilisees())
+        if not photo:
+            print(f"   ✗ {pid} : aucun candidat probant")
+            continue
+        d["photo"] = photo
+        json.dump(d, open(chemin, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        faits.append(pid)
+        print(f"   ✓ {pid} → {photo['fichier'][:60]}")
+    return faits
+
+
 # ── Hebdo ────────────────────────────────────────────────────────────────────
 
 def materialiser_hebdo():
@@ -393,7 +422,14 @@ def main():
     ap.add_argument("--sans-photo", action="store_true")
     ap.add_argument("--force", action="store_true",
                     help="réécrire le post du jour (jamais un autre)")
+    ap.add_argument("--reillustrer", nargs="+", metavar="ID",
+                    help="remplacer la photo de posts publiés, texte intact")
     a = ap.parse_args()
+
+    if a.reillustrer:
+        faits = reillustrer(a.reillustrer)
+        print(f"index : {reconstruire_index()} posts, {len(faits)} réillustré(s)")
+        return
 
     materialiser_hebdo()
     if a.hebdo_seulement:
