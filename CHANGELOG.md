@@ -29,6 +29,11 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
   photos parues + filtre de quasi-doublons + filtre de pertinence des
   requêtes Commons), mode maintenance `--reillustrer` (photo remplacée,
   texte intact), et interdiction de l'humour sur les sujets graves.
+- **Le mode plein écran des graphiques est retiré une seconde fois** : la
+  version réintroduite la veille (calque + paysage forcé sur mobile) ne
+  fonctionnait pas sur appareil réel. Retrait complet — bouton, calque,
+  portail DOM, rotation, remappage tactile ; le graphe, ses presets, le
+  double-curseur et le relevé sous le dessin sont inchangés.
 
 ## [3.11.0] — 2026-08-03
 

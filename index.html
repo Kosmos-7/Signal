@@ -121,28 +121,6 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .chx-pbtn{font-family:var(--mono);font-size:.72rem;letter-spacing:1px;color:var(--text3);background:none;border:1px solid var(--line);border-radius:5px;padding:3px 12px;cursor:pointer}
   .chx-pbtn.on{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
   .chx-pbtn:hover{border-color:rgba(116,182,223,.35)}
-  /* Plein écran : calque CSS et non l'API Fullscreen, que Safari iOS refuse sur
-     autre chose qu'une vidéo. Un calque marche partout, y compris en rotation. */
-  .chx-fs{margin-left:auto}
-  #chartsec.chx-full{position:fixed;inset:0;z-index:120;background:var(--bg);
-    padding:.7rem .9rem 1rem;overflow:auto;display:flex;flex-direction:column}
-  #chartsec.chx-full .chx-wrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
-  /* Garde-fou : le svg garde son ratio (viewBox) mais ne déborde JAMAIS de la
-     zone flexée — sinon il peint PAR-DESSUS la barre de boutons, et « Quitter »
-     devient intouchable. Le dimensionnement exact est refait par drawChart
-     (second rendu calé sur la boîte mesurée), ceci ne couvre que l'intervalle
-     et les changements de hauteur tardifs (encart d'avertissement). */
-  #chartsec.chx-full .chx-svg{max-height:100%}
-  #chartsec.chx-full .chx-note{margin-bottom:.2rem}
-  body.chx-locked{overflow:hidden}
-  /* Paysage forcé : téléphone tenu en portrait, le calque pivote de 90° pour
-     occuper l'écran dans le sens large. L'API Screen Orientation exigerait le
-     vrai plein écran (refusé par iOS) : la rotation CSS marche partout. Boîte
-     de 100dvh × 100dvw, pivotée autour du coin haut-gauche puis ramenée dans
-     l'écran ; dvh/dvw suivent la barre d'adresse (retombée en vh/vw avant). */
-  #chartsec.chx-full.chx-land{inset:auto;top:0;left:0;
-    width:100vh;height:100vw;width:100dvh;height:100dvw;
-    transform:rotate(90deg) translateY(-100%);transform-origin:top left}
   .chx-rlbl{font-family:var(--mono);font-size:.74rem;color:var(--text2);margin-left:auto}
   .chx-legend{font-family:var(--mono);font-size:.72rem;color:var(--text3);margin:2px 0 6px;letter-spacing:.3px}
   .chx-load{font:.72rem var(--mono);color:var(--text3);letter-spacing:.6px;padding:2.2rem 0;text-align:center;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.012)}
@@ -368,30 +346,6 @@ Avant, charts.json monolithique était téléchargé au premier rendu, 561 Ko
    fichier illisible) pour ne pas re-tenter à chaque ouverture. */
 const CH={}, CHP={}, CHX_VUE={};   // payloads, requêtes en vol, fenêtre affichée par ticker
 
-/* Plein écran : le bloc graphique est déplacé dans <body>. Sans ce portail il
-   reste enfermé dans le contexte d'empilement de .stage (position:fixed,
-   z-index:5) et se retrouve peint SOUS le rail et l'en-tête — quel que soit son
-   propre z-index. CHX_HOME garde sa place d'origine pour l'y remettre. */
-let CHX_HOME=null;
-function chxPortalIn(host){
-  if(CHX_HOME||!host.parentNode)return;
-  CHX_HOME=document.createElement('div');
-  host.parentNode.insertBefore(CHX_HOME,host);
-  document.body.appendChild(host);
-}
-function chxPortalOut(host){
-  if(CHX_HOME&&CHX_HOME.parentNode){CHX_HOME.parentNode.insertBefore(host,CHX_HOME);CHX_HOME.remove();}
-  CHX_HOME=null;
-}
-/* Avant tout nouveau rendu de fiche : render() recrée un #chartsec dans le
-   document, un bloc resté en portail produirait deux éléments de même id. */
-function chxReset(){
-  const orphelin=document.querySelector('body > #chartsec');
-  if(orphelin)orphelin.remove();
-  if(CHX_HOME&&CHX_HOME.parentNode)CHX_HOME.remove();
-  CHX_HOME=null;
-  document.body.classList.remove('chx-locked');
-}
 function loadChart(tk){
   if(tk in CH)return Promise.resolve(CH[tk]);
   if(CHP[tk])return CHP[tk];
@@ -866,9 +820,6 @@ function curSym(t){t=(t||'').toUpperCase();
    de fiche entre-temps (sinon le graphe d'un titre s'afficherait sur un autre). */
 function buildChart(s){
   const host=document.getElementById('chartsec'); if(!host)return;
-  // Changer de titre sort du plein écran : le calque appartient au graphe qu'on
-  // regardait, pas à la page.
-  host.classList.remove('chx-full','chx-land');document.body.classList.remove('chx-locked');host._chxFit=null;
   const tk=s.ticker;
   if(!(tk in CH))host.innerHTML='<div class="chx-load">Chargement du graphique…</div>';
   loadChart(tk).then(d=>{ if(sel&&sel.ticker!==tk)return;
@@ -898,21 +849,11 @@ function drawChart(s){
   // elle privait de graphique toutes les fiches thématiques, dont le breakdown
   // compact ne porte pas ce champ.
   if(!D||!D.points||D.points.length<24){host.innerHTML='';return;}
-  // Hors plein écran : format fixe 800x360, mis à l'échelle par la largeur de
-  // la fiche. En plein écran : viewBox = boîte réelle en pixels, ce qui remplit
-  // l'écran sans déformer. Sur téléphone tenu en portrait, le calque est pivoté
-  // en paysage (chx-land) : les dimensions se lisent alors sur l'écran TOURNÉ,
-  // largeur = hauteur d'écran et réciproquement.
-  const FS=host.classList.contains('chx-full');
-  const LAND=FS&&window.innerHeight>window.innerWidth&&Math.min(window.innerWidth,window.innerHeight)<700;
-  host.classList.toggle('chx-land',LAND);
-  // Premier rendu plein écran : estimation (écran moins le chrome autour du
-  // dessin). Puis la boîte RÉELLE laissée par le flex est mesurée et un second
-  // rendu s'y cale (host._chxFit) : un budget fixe se trompe toujours quelque
-  // part — hauteur des contrôles selon la fonte, warnslot, barre d'adresse.
-  const vw=LAND?window.innerHeight:window.innerWidth, vh=LAND?window.innerWidth:window.innerHeight;
-  const W=FS?(host._chxFit?host._chxFit[0]:Math.max(320,Math.min(2400,Math.round(vw-30)))):800;
-  const H=FS?(host._chxFit?host._chxFit[1]:Math.max(160,Math.min(1600,Math.round(vh-215)))):360;
+  // Format fixe 800x360, mis à l'échelle par la largeur de la fiche.
+  // Le mode plein écran a été retiré une seconde fois (05/08/2026) : la
+  // version calque + paysage forcé ne fonctionnait pas sur l'appareil du
+  // propriétaire. Ne pas le réintroduire sans test sur mobile RÉEL.
+  const W=800,H=360;
   const ML=46,MR=44,MT=14,MB=26;
   const T_MIN=D.points[0][0], T_MAX=Math.max(D.t_last,D.points[D.points.length-1][0]), MIN_SPAN=12;
   const WIN=(b.regression_window_years||10)*12;
@@ -935,8 +876,7 @@ function drawChart(s){
   const cons=(b.target_upside_pct!=null)?('<span class="chx-k">Objectif consensus : </span><span class="chx-v2">'+fs(b.target_upside_pct,0)+' %</span>'+(b.target_analysts?' <span class="chx-k">('+b.target_analysts+' analystes)</span>':'')):'';
   host.innerHTML='<div class="qh">Cours &amp; tendance long terme</div>'+
     '<div class="chx-wrap"><svg class="chx-svg" id="chx-svg" viewBox="0 0 '+W+' '+H+'"></svg><div class="chx-tip" id="chx-tip"></div></div>'+
-    '<div class="chx-ctrl"><span id="chx-periods">'+presets.map(([m,l],i)=>'<button class="chx-pbtn'+(m===WIN?' on':'')+'" data-m="'+m+'">'+l+'</button>').join(' ')+'</span><span class="chx-rlbl" id="chx-rlbl"></span>'+
-      '<button class="chx-pbtn chx-fs" id="chx-fs" type="button" aria-pressed="'+(FS?'true':'false')+'">'+(FS?'✕  Quitter':'⛶  Plein écran')+'</button></div>'+
+    '<div class="chx-ctrl"><span id="chx-periods">'+presets.map(([m,l],i)=>'<button class="chx-pbtn'+(m===WIN?' on':'')+'" data-m="'+m+'">'+l+'</button>').join(' ')+'</span><span class="chx-rlbl" id="chx-rlbl"></span></div>'+
     '<div class="chx-slider" id="chx-slider"><div class="chx-track"></div><div class="chx-sel" id="chx-sel"></div><input type="range" id="chx-r0"><input type="range" id="chx-r1"></div>'+
     '<div class="chx-legend"><span style="color:var(--ac);font-weight:700">━</span> Cours&nbsp;&nbsp;<span style="color:var(--text2);font-weight:700">┅</span> <span id="chx-lgt">Tendance</span>&nbsp;&nbsp;<span style="color:#e0995e;font-weight:700">━</span> MM21&nbsp;&nbsp;<span style="color:#b59bd6;font-weight:700">━</span> MM200&nbsp;&nbsp;<span class="chx-band"></span> Canal ±1σ / ±2σ</div>'+
     (dec!=null?'<div class="chx-mrow">'+[
@@ -1062,52 +1002,13 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
   r0.addEventListener('input',()=>{t0v=Math.min(+r0.value,t1v-MIN_SPAN);setBtn(null);chRender();});
   r1.addEventListener('input',()=>{t1v=Math.max(+r1.value,t0v+MIN_SPAN);setBtn(null);chRender();});
   function setBtn(m){document.querySelectorAll('.chx-pbtn[data-m]').forEach(x=>x.classList.toggle('on',+x.dataset.m===m));}
-  // Bascule plein écran. On redessine (les dimensions changent) en CONSERVANT la
-  // fenêtre choisie par l'utilisateur : basculer ne doit pas lui reprendre son zoom.
-  // drawChart décide seul du paysage forcé (chx-land) d'après l'orientation.
-  function toggleFull(){
-    const on=!host.classList.contains('chx-full');
-    if(on)chxPortalIn(host); else chxPortalOut(host);
-    host.classList.toggle('chx-full',on);
-    document.body.classList.toggle('chx-locked',on);
-    host._chxFit=null;          // la boîte change : la mesure précédente est morte
-    CHX_VUE[s.ticker]=[t0v,t1v];
-    drawChart(s);
-  }
-  const fsb=document.getElementById('chx-fs');
-  if(fsb)fsb.addEventListener('click',toggleFull);
-  if(FS){
-    // Échap ferme, comme dans une vraie modale. Le handler se retire avec le
-    // graphe : un écouteur orphelin fermerait un plein écran déjà quitté.
-    const esc=ev=>{if(ev.key==='Escape'){ev.preventDefault();toggleFull();}};
-    document.addEventListener('keydown',esc);
-    host._chxEsc&&document.removeEventListener('keydown',host._chxEsc);
-    host._chxEsc=esc;
-    // Rotation du téléphone : la boîte change, le dessin doit suivre. C'est
-    // aussi ce qui LÈVE le paysage forcé quand l'utilisateur tourne vraiment
-    // son téléphone (l'orientation réelle redevient paysage, chx-land tombe).
-    clearTimeout(host._chxRot);
-    const rot=()=>{clearTimeout(host._chxRot);host._chxRot=setTimeout(()=>{
-      if(host.classList.contains('chx-full')&&sel&&sel.ticker===s.ticker){host._chxFit=null;CHX_VUE[s.ticker]=[t0v,t1v];drawChart(s);}
-    },180);};
-    window.addEventListener('resize',rot);
-    host._chxRotH&&window.removeEventListener('resize',host._chxRotH);
-    host._chxRotH=rot;
-  }else if(host._chxEsc){document.removeEventListener('keydown',host._chxEsc);host._chxEsc=null;}
   document.getElementById('chx-periods').addEventListener('click',e=>{
     const btn=e.target.closest('.chx-pbtn');if(!btn)return;const m=+btn.dataset.m;
     t0v=(m===WIN)?T_OFF:Math.max(T_MIN,T_MAX-m);t1v=T_MAX;setBtn(m);chRender();});
   // survol + tactile : pointer events, réticule + 4 points + infobulle anti-recouvrement
   const chxTrack=ev=>{
     if(!vis||!vis.length)return;
-    // Paysage forcé (chx-land) : le calque est pivoté de 90°, mais clientX/Y et
-    // getBoundingClientRect restent en coordonnées ÉCRAN. Dans ce repère tourné,
-    // l'axe du temps du graphe descend le long de l'écran : on lit clientY, et
-    // la boîte englobante a ses dimensions échangées (rb.height = largeur
-    // dessinée du svg). Sans ce remappage, le doigt et le réticule divergent.
-    const rot=host.classList.contains('chx-land');
-    const rb=svg.getBoundingClientRect();
-    const mx=rot?(ev.clientY-rb.top)*W/rb.height:(ev.clientX-rb.left)*W/rb.width;
+    const rb=svg.getBoundingClientRect();const mx=(ev.clientX-rb.left)*W/rb.width;
     let best=vis[0];for(const pt of vis)if(Math.abs(X(pt[0])-mx)<Math.abs(X(best[0])-mx))best=pt;
     const [t,p]=best,tv=F?trF(t):null;
     hoverG.cross.setAttribute('x1',X(t));hoverG.cross.setAttribute('x2',X(t));hoverG.cross.setAttribute('visibility','visible');
@@ -1126,44 +1027,27 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
       +(tv?'◌ Tendance&nbsp;: <span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span><br>&nbsp;&nbsp;&nbsp;si retour à la tendance&nbsp;: <span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>':'◌ période trop courte pour une tendance')
       +(m21&&m200?'<br><span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span> · <span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'');
     // positionnement APRÈS écriture du contenu (largeur réelle) : toujours d'un seul côté du réticule
-    // En paysage forcé, tout se calcule dans le repère LOGIQUE (celui du calque
-    // pivoté) : left/top de la bulle vivent dans ce repère, seuls les relevés
-    // écran (clientX/Y, boîtes englobantes) doivent être retraduits.
     const wr=svg.parentNode.getBoundingClientRect();
-    const wW=rot?wr.height:wr.width, wH=rot?wr.width:wr.height;
     tip.style.display='block';
-    const cxPix=rot?X(t)*rb.height/W+(rb.top-wr.top):X(t)*rb.width/W+(rb.left-wr.left);
-    const cyPix=rot?(wr.right-ev.clientX):(ev.clientY-wr.top);
+    const cxPix=X(t)*rb.width/W+(rb.left-wr.left);
     const tw=tip.offsetWidth||210;
-    if(wW<640&&!host.classList.contains('chx-full')){
+    if(wr.width<640){
       // Écran étroit : la bulle est presque aussi large que le graphe, aucune
       // position interne n'évite de couvrir la courbe au centre. Le relevé
       // sort du dessin et se pose en dessous, dans le flux : il ne cache
-      // rien et ne saute plus d'un bord à l'autre. En plein écran, le graphe
-      // est large (l'écran entier, tourné au besoin) : la bulle flotte.
+      // rien et ne saute plus d'un bord à l'autre.
       tip.classList.add('dock');
       tip.style.left='';tip.style.top='';
     }else{
       tip.classList.remove('dock');
-      let lx=cxPix+16;if(lx+tw>wW)lx=cxPix-tw-16;
+      let lx=cxPix+16;if(lx+tw>wr.width)lx=cxPix-tw-16;
       tip.style.left=Math.max(0,lx)+'px';
-      tip.style.top=Math.max(Math.min(cyPix-70,wH-110),0)+'px';
+      tip.style.top=Math.max(Math.min(ev.clientY-wr.top-70,wr.height-110),0)+'px';
     }};
   svg.addEventListener('pointermove',chxTrack);
   svg.addEventListener('pointerdown',chxTrack);
   svg.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='mouse'||!hoverG)return;for(const k in hoverG)hoverG[k].setAttribute('visibility','hidden');tip.style.display='none';});
   chRender();
-  // Plein écran, passe d'ajustement : une frame après le premier rendu, la
-  // boîte réellement disponible est connue ; si l'estimation s'en écarte, on
-  // redessine une fois aux dimensions mesurées. _chxFit borne à UNE passe.
-  if(FS&&!host._chxFit)requestAnimationFrame(()=>{
-    if(!host.classList.contains('chx-full')||!sel||sel.ticker!==s.ticker)return;
-    const sv2=document.getElementById('chx-svg'),wrap=sv2&&sv2.parentNode;if(!wrap)return;
-    const bw=Math.round(wrap.clientWidth),bh=Math.round(wrap.clientHeight);
-    if(bw>=320&&bh>=140&&(Math.abs(bw-W)>10||Math.abs(bh-H)>10)){
-      host._chxFit=[bw,bh];CHX_VUE[s.ticker]=[t0v,t1v];drawChart(s);
-    }
-  });
 }
 /* ── Chiffres publiés : historique CA / EBITDA / résultat net ──────────────
    Données du bloc "fonda" de charts/<TICKER>.json (montants en MILLIONS, dans
@@ -1337,7 +1221,6 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
     :'<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
       ((brief&&!hasActu)?'':'<div>'+sec('Actu',(hasActu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div>')+'</div>'+
       ((brief&&!hasActu)?briefNote():'');
-  chxReset();
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
     illuSociete(s.ticker)+
