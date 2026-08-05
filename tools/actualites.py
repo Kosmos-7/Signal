@@ -285,12 +285,26 @@ def photos_deja_utilisees(n=10):
     return frozenset(fichiers)
 
 
+def _mots(nom):
+    """Mots significatifs (≥3 lettres) du nom d'un fichier Commons."""
+    return frozenset(re.findall(r"[a-zà-ÿ]{3,}", os.path.splitext(nom)[0].lower()))
+
+
 def choisir_candidats(candidats, deja):
     """Candidats (score, fichier, requête) triés, les images déjà parues
-    écartées. Si tout le vivier a déjà servi, on rend le tri complet :
-    mieux vaut une redite qu'un post sans photo. Pure, testée hors ligne."""
+    écartées, AINSI QUE leurs quasi-doublons : Commons regorge de reprises
+    de la même scène sous des noms voisins (le même tableau de cotations de
+    Yaesu photographié en 2007, en 2009…), l'exclusion par nom exact ne
+    change donc pas l'image vue par le lecteur. Deux noms qui partagent
+    l'essentiel de leurs mots (coefficient de recouvrement ≥ 0,6 sur le
+    plus petit) sont la même scène. Si tout le vivier a déjà servi, on rend
+    le tri complet : mieux vaut une redite qu'un post sans photo. Pure."""
+    vus = [m for m in (_mots(f) for f in deja) if m]
+    def meme_scene(fichier):
+        t = _mots(fichier)
+        return bool(t) and any(len(t & v) / min(len(t), len(v)) >= 0.6 for v in vus)
     tri = sorted(candidats, reverse=True)
-    frais = [c for c in tri if c[1] not in deja]
+    frais = [c for c in tri if c[1] not in deja and not meme_scene(c[1])]
     return frais or tri
 
 

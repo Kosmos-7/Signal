@@ -131,15 +131,28 @@ try:
     check("le post hebdo (sans photo) n'entre pas dans la mémoire",
           not any("hebdo" in f for f in deja))
 
-    cands = [(9, "Bourse B.jpg", "q1"), (7, "Bourse C.jpg", "q1"),
+    cands = [(9, "Bourse B.jpg", "q1"), (7, "NYSE trading floor.jpg", "q1"),
              (5, "Bourse A.jpg", "q2")]
     check("le meilleur candidat FRAIS gagne, pas le meilleur absolu",
-          A.choisir_candidats(cands, deja)[0][1] == "Bourse C.jpg")
+          A.choisir_candidats(cands, deja)[0][1] == "NYSE trading floor.jpg")
     check("sans mémoire, le tri par score reste inchangé",
           A.choisir_candidats(cands, frozenset())[0][1] == "Bourse B.jpg")
     check("vivier épuisé : la redite vaut mieux que le post nu",
           A.choisir_candidats(cands, {"Bourse A.jpg", "Bourse B.jpg",
-                                      "Bourse C.jpg"})[0][1] == "Bourse B.jpg")
+                                      "NYSE trading floor.jpg"})[0][1] == "Bourse B.jpg")
+
+    # Le cas réel du 5 août : même tableau de Yaesu, autre année, autre nom.
+    yaesu09 = ("Shinko Securities's electronic stock board nearby Yaesu side "
+               "of Tokyo Station in March 2009.jpg")
+    cands2 = [(9, "Electronic stock board in Yaesu, Tokyo 2007.jpg", "q"),
+              (7, "New York Stock Exchange trading floor 2008.jpg", "q")]
+    check("un quasi-doublon de scène déjà parue est écarté",
+          A.choisir_candidats(cands2, {yaesu09})[0][1]
+          == "New York Stock Exchange trading floor 2008.jpg")
+    check("une scène réellement différente n'est pas confondue",
+          A.choisir_candidats([(7, "Frankfurt Boerse display board.jpg", "q")],
+                              {"New York Stock Exchange trading floor.jpg"})[0][1]
+          == "Frankfurt Boerse display board.jpg")
 finally:
     os.chdir(cwd)
     shutil.rmtree(tmp, ignore_errors=True)
