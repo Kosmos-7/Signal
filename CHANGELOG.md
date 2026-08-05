@@ -26,6 +26,33 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
   tagage (rapport > 5 entre exercices adjacents → tout l'apport refusé).
 - Hors périmètre, à dessein : les émetteurs étrangers cotés US (20-F, IFRS)
   gardent leur fenêtre Yahoo ; aucun champ du score ne vient d'EDGAR.
+- **Leçons du premier jour d'EDGAR**, corrigées dans la journée : la SEC
+  exige un User-Agent avec contact (0/117 en silence sinon — tout échec
+  réseau est désormais loggé en clair) ; les BPA déposés sont « tels que
+  déposés », jamais réajustés des splits postérieurs (NVIDIA ÷40 → PER à
+  0,4×, chaque BPA est ramené dans la base d'actions actuelle via les dates
+  de splits) ; les émetteurs changent de balise XBRL au fil des normes (les
+  alias sont fusionnés entre époques, sinon 2015-2016 perdaient leur CA).
+- **PER par exercice et deux exercices à venir** sur les fiches : multiple
+  d'époque (cours de clôture de l'exercice / BPA dilué publié — jamais pour
+  un ADR, devise comptable ≠ cotation) et lignes « e » au cours actuel /
+  BPA estimé par les analystes. Convention assumée face aux tableaux de
+  consensus type Hiboo, qui rapportent TOUT au cours du jour : notre
+  colonne dit ce que le marché payait réellement à l'époque.
+- **Phrases de synthèse** sous les chiffres publiés : TCAm du CA avec ses
+  exercices de baisse, marge nette moyenne et son évolution, multiple payé
+  en MÉDIANE (une année de bulle écrase une moyenne). Purement factuel,
+  minimum 4 exercices, une période en pertes dit ses pertes.
+- Confort de lecture : le relevé du graphe de cours s'affiche dès
+  l'ouverture (dernier point) et se recale à chaque changement de fenêtre ;
+  l'historique des chiffres publiés s'affiche en entier ; la note
+  pédagogique sous la table est retirée (sur-explication).
+- Robustesse des données : la vue MAX ne disparaît plus sur un cours nul ou
+  négatif (artefacts Yahoo de l'historique lointain, purgés à la source et
+  écartés au front) ; arrondi adaptatif des petits cours ; dédoublonnage
+  inter-runs des trimestres datés à quelques jours d'écart ; fiches
+  versionnées par l'horodatage du run (plus de cache périmé le jour d'une
+  sortie) ; le won affiché pour les places coréennes.
 - **Verdict de la relecture sources** (même journée) : le remplissage des
   trous Yahoo par Finnhub est abandonné — champs sans trous observés,
   unités incompatibles, auto-concordance qui aurait tué la validation,
