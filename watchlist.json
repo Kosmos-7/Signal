@@ -456,7 +456,7 @@
         "fcf_margin_pct": 27.0,
         "mrq": "2026-06-28",
         "forward_pe": 12.8,
-        "trailing_pe": 46.0,
+        "trailing_pe": 46.1,
         "fcf_yield_pct": 6.1,
         "peg": 0.55,
         "target_mean_price": 311.1,
@@ -643,13 +643,96 @@
       "rank_delta": 0
     },
     {
+      "ticker": "CRM",
+      "name": "Salesforce, Inc.",
+      "market": "NYQ",
+      "sector": "Technologie",
+      "score": 77,
+      "badge": null,
+      "change": "new",
+      "breakdown": {
+        "qualite": 35,
+        "valorisation": 30,
+        "timing": 9,
+        "analystes": 3,
+        "vix_value": 15.81,
+        "cross_regime": "death",
+        "cross_type": "death",
+        "cross_days_ago": 135,
+        "cross_spread_pct": -14.63,
+        "cross_slope_mm21_pct": 3.21,
+        "cross_volume_confirmed": true,
+        "signal_dynamics_warning": "Rebond mean-reversion en cours sur cross stale — pente MM21 fortement positive, cours encore largement sous MM200 (setup B opportunities.md)",
+        "cross_pts": 2,
+        "rsi_pts": 0,
+        "vol_pts": 3,
+        "reg_pts": 0,
+        "val_pts": 1,
+        "slope_pts": 4,
+        "val_pts_mode": "normal",
+        "drawdown_52w_pct": -27.1,
+        "high_52w": 264.88,
+        "fibo": {
+          "swing_low": 223.87,
+          "swing_high": 264.88,
+          "rally_pct": 18.3,
+          "retrace_pct": 175.3,
+          "closest_fibo": "trend déstructurée (sous swing low)",
+          "fibo_levels": {
+            "23.6": 255.2,
+            "38.2": 249.21,
+            "50.0": 244.37,
+            "61.8": 239.54,
+            "78.6": 232.64
+          }
+        },
+        "rsi": 65.0,
+        "mm21": 173.68,
+        "mm200": 203.43,
+        "regression_z": -1.96,
+        "regression_signal": "survente",
+        "regression_pente_pct": 11.2,
+        "regression_sigma": 0.2353,
+        "prix_tendance": 305.76,
+        "decote_pct": 36.9,
+        "regression_window_years": 10,
+        "regression_window_reason": "tech_10y",
+        "prix": 192.98,
+        "devise": "USD",
+        "nom_complet": "Salesforce, Inc.",
+        "rev_growth_pct": 13.3,
+        "net_margin_pct": 18.7,
+        "fcf_margin_pct": 38.6,
+        "mrq": "2026-04-30",
+        "forward_pe": 12.4,
+        "trailing_pe": 22.4,
+        "fcf_yield_pct": 10.47,
+        "peg": 0.76,
+        "target_mean_price": 241.72,
+        "target_upside_pct": 25.3,
+        "target_analysts": 53,
+        "death_pen": 0,
+        "chase_pen": 0,
+        "value_bonus": 0,
+        "confiance": 1.0,
+        "sources": [
+          "Yahoo Finance",
+          "Finnhub"
+        ]
+      },
+      "justification": "Score 77/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-2.0σ), croissance CA modérée (13% a/a), marges excellentes (19%), consensus analystes très favorable.",
+      "rank": 9,
+      "rank_prev": null,
+      "rank_delta": null
+    },
+    {
       "ticker": "NFLX",
       "name": "Netflix, Inc.",
       "market": "NMS",
       "sector": "Médias & IA",
       "score": 77,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 42,
         "valorisation": 25,
@@ -708,9 +791,9 @@
         ]
       },
       "justification": "Score 77/100 — prix sous sa droite de régression (-0.8σ), RSI en zone favorable, ⚠ -41.3% sous le top 52w — trend probablement cassée, croissance CA modérée (13% a/a), marges excellentes (28%), consensus analystes très favorable.",
-      "rank": 9,
+      "rank": 10,
       "rank_prev": 9,
-      "rank_delta": 0
+      "rank_delta": -1
     },
     {
       "ticker": "NVDA",
@@ -719,7 +802,7 @@
       "sector": "Technologie",
       "score": 77,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 45,
         "valorisation": 15,
@@ -791,9 +874,9 @@
         ]
       },
       "justification": "Score 77/100 — cours proche de sa droite de régression, RSI en zone favorable, pullback sain -6.9% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (85% a/a), marges excellentes (63%), consensus analystes très favorable.",
-      "rank": 10,
+      "rank": 11,
       "rank_prev": 10,
-      "rank_delta": 0
+      "rank_delta": -1
     },
     {
       "ticker": "V",
@@ -802,7 +885,7 @@
       "sector": "Finance",
       "score": 76,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 42,
         "valorisation": 13,
@@ -874,9 +957,9 @@
         ]
       },
       "justification": "Score 76/100 — Golden Cross récent (24j) (volume confirmé), prix sous sa droite de régression (-1.5σ), RSI en zone favorable, ⚠ collé au top 52w (-0.3%) malgré le Golden Cross frais — extension à surveiller, croissance CA modérée (14% a/a), marges excellentes (51%).",
-      "rank": 11,
+      "rank": 12,
       "rank_prev": 11,
-      "rank_delta": 0
+      "rank_delta": -1
     },
     {
       "ticker": "GEV",
@@ -885,7 +968,7 @@
       "sector": "Industrie",
       "score": 75,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 45,
         "valorisation": 21,
@@ -957,9 +1040,9 @@
         ]
       },
       "justification": "Score 75/100 — prix sous sa droite de régression (-1.7σ), RSI en zone favorable, correction modérée -13.4% sous le top (zone Fibo 23.6%), croissance CA solide (22% a/a), marges excellentes (23%), consensus analystes très favorable.",
-      "rank": 12,
+      "rank": 13,
       "rank_prev": 12,
-      "rank_delta": 0
+      "rank_delta": -1
     },
     {
       "ticker": "AVGO",
@@ -968,7 +1051,7 @@
       "sector": "Technologie",
       "score": 71,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 42,
         "valorisation": 15,
@@ -1040,9 +1123,9 @@
         ]
       },
       "justification": "Score 71/100 — légèrement au-dessus de sa régression (+1.6σ), RSI en zone favorable, correction modérée -13.0% sous le top (zone Fibo 23.6%), croissance CA solide (48% a/a), marges excellentes (39%), consensus analystes très favorable.",
-      "rank": 13,
+      "rank": 14,
       "rank_prev": 13,
-      "rank_delta": 0
+      "rank_delta": -1
     },
     {
       "ticker": "NOW",
@@ -1051,7 +1134,7 @@
       "sector": "Technologie",
       "score": 71,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 32,
         "valorisation": 22,
@@ -1110,9 +1193,9 @@
         ]
       },
       "justification": "Score 71/100 — prix sous sa droite de régression (-2.3σ), RSI en zone favorable, ⚠ -39.0% sous le top 52w — trend probablement cassée, croissance CA solide (24% a/a), marges positives, consensus analystes très favorable.",
-      "rank": 14,
+      "rank": 15,
       "rank_prev": 14,
-      "rank_delta": 0
+      "rank_delta": -1
     },
     {
       "ticker": "QCOM",
@@ -1121,7 +1204,7 @@
       "sector": "Technologie",
       "score": 71,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 32,
         "valorisation": 26,
@@ -1193,9 +1276,9 @@
         ]
       },
       "justification": "Score 71/100 — Golden Cross confirmé (59j), ⚠ cross en affaiblissement — signal en transition (pas exploitable seul), prix sous sa droite de régression (-1.3σ), RSI en zone favorable, ⚠ -37.0% sous le top 52w — trend probablement cassée, marges excellentes (21%).",
-      "rank": 15,
+      "rank": 16,
       "rank_prev": 15,
-      "rank_delta": 0
+      "rank_delta": -1
     },
     {
       "ticker": "TTE.PA",
@@ -1204,7 +1287,7 @@
       "sector": "Énergie",
       "score": 71,
       "badge": "EU",
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 29,
         "valorisation": 30,
@@ -1213,9 +1296,9 @@
         "vix_value": 15.81,
         "cross_regime": "golden",
         "cross_type": "golden",
-        "cross_days_ago": 189,
-        "cross_spread_pct": 10.57,
-        "cross_slope_mm21_pct": 2.94,
+        "cross_days_ago": 188,
+        "cross_spread_pct": 10.11,
+        "cross_slope_mm21_pct": 2.71,
         "cross_volume_confirmed": false,
         "signal_dynamics_warning": "",
         "cross_pts": 4,
@@ -1241,14 +1324,14 @@
             "78.6": 54.81
           }
         },
-        "rsi": 54.6,
-        "mm21": 72.56,
-        "mm200": 65.62,
+        "rsi": 55.3,
+        "mm21": 72.11,
+        "mm200": 65.49,
         "regression_z": 2.13,
         "regression_signal": "surachat",
         "regression_pente_pct": 6.7,
         "regression_sigma": 0.1733,
-        "prix_tendance": 51.33,
+        "prix_tendance": 51.31,
         "decote_pct": -44.7,
         "regression_window_years": 25,
         "regression_window_reason": "cyclical_25y",
@@ -1260,10 +1343,10 @@
         "fcf_margin_pct": 6.9,
         "mrq": "2026-06-30",
         "forward_pe": 8.9,
-        "trailing_pe": 10.6,
+        "trailing_pe": 10.7,
         "fcf_yield_pct": 8.26,
         "peg": 0.72,
-        "target_mean_price": 82.48,
+        "target_mean_price": 82.47,
         "target_upside_pct": 11.1,
         "target_analysts": 22,
         "death_pen": 0,
@@ -1275,9 +1358,79 @@
         ]
       },
       "justification": "Score 71/100 — prix en surachat régression (+2.1σ) — prudence, RSI en zone favorable, pullback sain -7.1% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (28% a/a), marges positives, consensus analystes positif.",
-      "rank": 16,
+      "rank": 17,
       "rank_prev": 16,
-      "rank_delta": 0
+      "rank_delta": -1
+    },
+    {
+      "ticker": "ZTS",
+      "name": "Zoetis Inc.",
+      "market": "NYQ",
+      "sector": "Santé",
+      "score": 71,
+      "badge": null,
+      "change": "new",
+      "breakdown": {
+        "qualite": 31,
+        "valorisation": 21,
+        "timing": 11,
+        "analystes": 2,
+        "vix_value": 15.81,
+        "cross_regime": "death",
+        "cross_type": "death",
+        "cross_days_ago": 999,
+        "cross_spread_pct": -30.12,
+        "cross_slope_mm21_pct": 0.8,
+        "cross_volume_confirmed": false,
+        "signal_dynamics_warning": "",
+        "cross_pts": 2,
+        "rsi_pts": 2,
+        "vol_pts": 3,
+        "reg_pts": 0,
+        "val_pts": 0,
+        "slope_pts": 4,
+        "val_pts_mode": "normal",
+        "drawdown_52w_pct": -51.6,
+        "high_52w": 153.81,
+        "fibo": null,
+        "rsi": 42.7,
+        "mm21": 75.61,
+        "mm200": 108.21,
+        "regression_z": -4.12,
+        "regression_signal": "survente",
+        "regression_pente_pct": 15.4,
+        "regression_sigma": 0.2891,
+        "prix_tendance": 244.66,
+        "decote_pct": 69.6,
+        "regression_window_years": 13,
+        "regression_window_reason": "standard_20y",
+        "prix": 74.39,
+        "devise": "USD",
+        "nom_complet": "Zoetis Inc.",
+        "rev_growth_pct": 2.9,
+        "net_margin_pct": 28.0,
+        "fcf_margin_pct": 18.7,
+        "mrq": "2026-03-31",
+        "forward_pe": 10.1,
+        "trailing_pe": 12.2,
+        "fcf_yield_pct": 5.71,
+        "peg": 1.85,
+        "target_mean_price": 110.81,
+        "target_upside_pct": 49.0,
+        "target_analysts": 16,
+        "death_pen": 0,
+        "chase_pen": 0,
+        "value_bonus": 6,
+        "confiance": 1.0,
+        "sources": [
+          "Yahoo Finance",
+          "Finnhub"
+        ]
+      },
+      "justification": "Score 71/100 — prix sous sa droite de régression (-4.1σ), RSI en zone favorable, ⚠ -51.6% sous le top 52w — trend probablement cassée, marges excellentes (28%), consensus analystes positif.",
+      "rank": 18,
+      "rank_prev": null,
+      "rank_delta": null
     },
     {
       "ticker": "005930.KS",
@@ -1286,7 +1439,7 @@
       "sector": "Technologie",
       "score": 70,
       "badge": "KR",
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 42,
         "valorisation": 22,
@@ -1330,7 +1483,7 @@
         "regression_signal": "surachat",
         "regression_pente_pct": 13.5,
         "regression_sigma": 0.2677,
-        "prix_tendance": 106255.02,
+        "prix_tendance": 106255.03,
         "decote_pct": -131.5,
         "regression_window_years": 10,
         "regression_window_reason": "tech_10y",
@@ -1357,9 +1510,9 @@
         ]
       },
       "justification": "Score 70/100 — ⚠ affaiblissement post-rally sur cross stale, prix en surachat régression (+3.1σ) — prudence, RSI en zone favorable, ⚠ -32.1% sous le top 52w — trend probablement cassée, croissance CA solide (130% a/a), marges excellentes (31%).",
-      "rank": 17,
+      "rank": 19,
       "rank_prev": 17,
-      "rank_delta": 0
+      "rank_delta": -2
     },
     {
       "ticker": "META",
@@ -1368,7 +1521,7 @@
       "sector": "Médias & IA",
       "score": 70,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 42,
         "valorisation": 15,
@@ -1427,9 +1580,9 @@
         ]
       },
       "justification": "Score 70/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA solide (28% a/a), marges excellentes (30%), consensus analystes très favorable.",
-      "rank": 18,
+      "rank": 20,
       "rank_prev": 18,
-      "rank_delta": 0
+      "rank_delta": -2
     },
     {
       "ticker": "AMZN",
@@ -1438,7 +1591,7 @@
       "sector": "Conso. cycl.",
       "score": 69,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 39,
         "valorisation": 10,
@@ -1493,7 +1646,7 @@
         "net_margin_pct": 17.4,
         "fcf_margin_pct": 0.4,
         "mrq": "2026-06-30",
-        "forward_pe": 26.4,
+        "forward_pe": 26.3,
         "trailing_pe": 21.9,
         "fcf_yield_pct": 0.11,
         "peg": 1.46,
@@ -1510,9 +1663,9 @@
         ]
       },
       "justification": "Score 69/100 — cours proche de sa droite de régression, RSI en zone favorable, pullback sain -4.0% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (20% a/a), marges excellentes (17%), consensus analystes très favorable.",
-      "rank": 19,
+      "rank": 21,
       "rank_prev": 19,
-      "rank_delta": 0
+      "rank_delta": -2
     },
     {
       "ticker": "PYPL",
@@ -1521,7 +1674,7 @@
       "sector": "Finance",
       "score": 69,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 26,
         "valorisation": 25,
@@ -1578,7 +1731,7 @@
         "mrq": "2026-06-30",
         "forward_pe": 10.0,
         "trailing_pe": 11.0,
-        "fcf_yield_pct": 8.93,
+        "fcf_yield_pct": 8.86,
         "peg": 1.05,
         "target_mean_price": 58.77,
         "target_upside_pct": 1.4,
@@ -1593,9 +1746,9 @@
         ]
       },
       "justification": "Score 69/100 — Golden Cross frais (4j) — fenêtre signal optimale, prix sous sa droite de régression (-0.9σ), marges positives.",
-      "rank": 20,
+      "rank": 22,
       "rank_prev": 20,
-      "rank_delta": 0
+      "rank_delta": -2
     },
     {
       "ticker": "TER",
@@ -1604,7 +1757,7 @@
       "sector": "Technologie",
       "score": 69,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 42,
         "valorisation": 15,
@@ -1676,9 +1829,92 @@
         ]
       },
       "justification": "Score 69/100 — prix en surachat régression (+2.2σ) — prudence, RSI en zone favorable, correction modérée -19.5% sous le top (zone Fibo 23.6%), croissance CA solide (104% a/a), marges excellentes (26%), consensus analystes très favorable.",
-      "rank": 21,
+      "rank": 23,
       "rank_prev": 21,
-      "rank_delta": 0
+      "rank_delta": -2
+    },
+    {
+      "ticker": "ADI",
+      "name": "Analog Devices, Inc.",
+      "market": "NMS",
+      "sector": "Technologie",
+      "score": 68,
+      "badge": null,
+      "change": "new",
+      "breakdown": {
+        "qualite": 38,
+        "valorisation": 18,
+        "timing": 9,
+        "analystes": 3,
+        "vix_value": 15.81,
+        "cross_regime": "golden",
+        "cross_type": "golden",
+        "cross_days_ago": 295,
+        "cross_spread_pct": 13.86,
+        "cross_slope_mm21_pct": -0.96,
+        "cross_volume_confirmed": false,
+        "signal_dynamics_warning": "",
+        "cross_pts": 4,
+        "rsi_pts": 2,
+        "vol_pts": 3,
+        "reg_pts": 0,
+        "val_pts": 3,
+        "slope_pts": 0,
+        "val_pts_mode": "normal",
+        "drawdown_52w_pct": -15.2,
+        "high_52w": 445.48,
+        "fibo": {
+          "swing_low": 217.76,
+          "swing_high": 445.48,
+          "rally_pct": 104.6,
+          "retrace_pct": 29.8,
+          "closest_fibo": "zone Fibo 23.6%",
+          "fibo_levels": {
+            "23.6": 391.74,
+            "38.2": 358.49,
+            "50.0": 331.62,
+            "61.8": 304.75,
+            "78.6": 266.49
+          }
+        },
+        "rsi": 48.6,
+        "mm21": 378.07,
+        "mm200": 332.04,
+        "regression_z": 2.13,
+        "regression_signal": "surachat",
+        "regression_pente_pct": 16.4,
+        "regression_sigma": 0.1099,
+        "prix_tendance": 298.85,
+        "decote_pct": -26.4,
+        "regression_window_years": 10,
+        "regression_window_reason": "tech_10y",
+        "prix": 377.69,
+        "devise": "USD",
+        "nom_complet": "Analog Devices, Inc.",
+        "rev_growth_pct": 37.2,
+        "net_margin_pct": 26.0,
+        "fcf_margin_pct": 30.4,
+        "mrq": "2026-05-02",
+        "forward_pe": 25.1,
+        "trailing_pe": 56.1,
+        "fcf_yield_pct": 2.1,
+        "peg": 0.67,
+        "target_mean_price": 457.73,
+        "target_upside_pct": 21.2,
+        "target_analysts": 30,
+        "death_pen": 0,
+        "chase_pen": 0,
+        "value_bonus": 0,
+        "confiance": 1.0,
+        "sources": [
+          "Yahoo Finance",
+          "Finnhub"
+        ]
+      },
+      "justification": "Score 68/100 — prix en surachat régression (+2.1σ) — prudence, RSI en zone favorable, correction modérée -15.2% sous le top (zone Fibo 23.6%), croissance CA solide (37% a/a), marges excellentes (26%), consensus analystes très favorable.",
+      "rank": 24,
+      "rank_prev": null,
+      "rank_delta": null
     },
     {
       "ticker": "BKNG",
@@ -1687,7 +1923,7 @@
       "sector": "Conso. cycl.",
       "score": 68,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 26,
         "valorisation": 22,
@@ -1729,7 +1965,7 @@
         "net_margin_pct": 22.2,
         "fcf_margin_pct": 25.6,
         "mrq": "2026-03-31",
-        "forward_pe": 16.7,
+        "forward_pe": 16.8,
         "trailing_pe": 23.0,
         "fcf_yield_pct": 4.41,
         "peg": 0.83,
@@ -1746,9 +1982,9 @@
         ]
       },
       "justification": "Score 68/100 — Golden Cross frais (0j) — fenêtre signal optimale, cours proche de sa droite de régression, croissance CA solide (16% a/a), marges excellentes (22%), consensus analystes très favorable.",
-      "rank": 22,
+      "rank": 25,
       "rank_prev": 22,
-      "rank_delta": 0
+      "rank_delta": -3
     },
     {
       "ticker": "BSX",
@@ -1757,7 +1993,7 @@
       "sector": "Santé",
       "score": 68,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 32,
         "valorisation": 22,
@@ -1816,9 +2052,9 @@
         ]
       },
       "justification": "Score 68/100 — prix sous sa droite de régression (-1.3σ), RSI en zone favorable, ⚠ -55.9% sous le top 52w — trend probablement cassée, croissance CA modérée (8% a/a), marges excellentes (17%), consensus analystes très favorable.",
-      "rank": 23,
+      "rank": 26,
       "rank_prev": 23,
-      "rank_delta": 0
+      "rank_delta": -3
     },
     {
       "ticker": "MA",
@@ -1827,7 +2063,7 @@
       "sector": "Finance",
       "score": 68,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 38,
         "valorisation": 17,
@@ -1886,9 +2122,9 @@
         ]
       },
       "justification": "Score 68/100 — Golden Cross frais (8j) — fenêtre signal optimale, prix sous sa droite de régression (-1.9σ), croissance CA modérée (14% a/a), marges excellentes (46%), consensus analystes très favorable.",
-      "rank": 24,
+      "rank": 27,
       "rank_prev": 24,
-      "rank_delta": 0
+      "rank_delta": -3
     },
     {
       "ticker": "ON",
@@ -1897,7 +2133,7 @@
       "sector": "Technologie",
       "score": 68,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 28,
         "valorisation": 30,
@@ -1969,9 +2205,9 @@
         ]
       },
       "justification": "Score 68/100 — ⚠ affaiblissement post-rally sur cross stale, prix sous sa droite de régression (-0.8σ), RSI en zone favorable, ⚠ -42.6% sous le top 52w — trend probablement cassée, croissance CA modérée (9% a/a), marges positives.",
-      "rank": 25,
+      "rank": 28,
       "rank_prev": 25,
-      "rank_delta": 0
+      "rank_delta": -3
     },
     {
       "ticker": "TXN",
@@ -1980,7 +2216,7 @@
       "sector": "Technologie",
       "score": 68,
       "badge": null,
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 42,
         "valorisation": 10,
@@ -2052,9 +2288,9 @@
         ]
       },
       "justification": "Score 68/100 — légèrement au-dessus de sa régression (+1.0σ), RSI en zone favorable, correction modérée -16.0% sous le top (zone Fibo 23.6%), croissance CA solide (23% a/a), marges excellentes (31%), consensus analystes positif.",
-      "rank": 26,
+      "rank": 29,
       "rank_prev": 26,
-      "rank_delta": 0
+      "rank_delta": -3
     },
     {
       "ticker": "ADYEN.AS",
@@ -2063,7 +2299,7 @@
       "sector": "Technologie",
       "score": 67,
       "badge": "EU",
-      "change": "stable",
+      "change": "down",
       "breakdown": {
         "qualite": 42,
         "valorisation": 13,
@@ -2072,9 +2308,9 @@
         "vix_value": 15.81,
         "cross_regime": "death",
         "cross_type": "death",
-        "cross_days_ago": 249,
-        "cross_spread_pct": -21.41,
-        "cross_slope_mm21_pct": 1.33,
+        "cross_days_ago": 248,
+        "cross_spread_pct": -21.66,
+        "cross_slope_mm21_pct": 1.65,
         "cross_volume_confirmed": false,
         "signal_dynamics_warning": "",
         "cross_pts": 2,
@@ -2100,15 +2336,15 @@
             "78.6": 1363.93
           }
         },
-        "rsi": 65.6,
-        "mm21": 851.3,
-        "mm200": 1083.26,
+        "rsi": 65.9,
+        "mm21": 850.91,
+        "mm200": 1086.2,
         "regression_z": -1.43,
         "regression_signal": "sous tendance",
         "regression_pente_pct": 7.5,
-        "regression_sigma": 0.39,
-        "prix_tendance": 1638.87,
-        "decote_pct": 42.7,
+        "regression_sigma": 0.3898,
+        "prix_tendance": 1640.44,
+        "decote_pct": 42.8,
         "regression_window_years": 8,
         "regression_window_reason": "tech_10y",
         "prix": 938.4,
@@ -2134,261 +2370,58 @@
         ]
       },
       "justification": "Score 67/100 — prix sous sa droite de régression (-1.4σ), ⚠ -38.3% sous le top 52w — trend probablement cassée, croissance CA solide (17% a/a), marges excellentes (45%), consensus analystes très favorable.",
-      "rank": 27,
-      "rank_prev": 27,
-      "rank_delta": 0
-    },
-    {
-      "ticker": "CI",
-      "name": "The Cigna Group",
-      "market": "NYQ",
-      "sector": "Santé",
-      "score": 67,
-      "badge": null,
-      "change": "stable",
-      "breakdown": {
-        "qualite": 23,
-        "valorisation": 30,
-        "timing": 11,
-        "analystes": 3,
-        "vix_value": 15.81,
-        "cross_regime": "golden",
-        "cross_type": "golden",
-        "cross_days_ago": 60,
-        "cross_spread_pct": 4.08,
-        "cross_slope_mm21_pct": -0.26,
-        "cross_volume_confirmed": false,
-        "signal_dynamics_warning": "",
-        "cross_pts": 7,
-        "rsi_pts": 1,
-        "vol_pts": 3,
-        "reg_pts": 0,
-        "val_pts": 3,
-        "slope_pts": 0,
-        "val_pts_mode": "normal",
-        "drawdown_52w_pct": -11.5,
-        "high_52w": 305.8,
-        "fibo": {
-          "swing_low": 264.11,
-          "swing_high": 305.8,
-          "rally_pct": 15.8,
-          "retrace_pct": 84.7,
-          "closest_fibo": "rally annulé (> 78.6%)",
-          "fibo_levels": {
-            "23.6": 295.96,
-            "38.2": 289.87,
-            "50.0": 284.95,
-            "61.8": 280.03,
-            "78.6": 273.03
-          }
-        },
-        "rsi": 38.5,
-        "mm21": 288.71,
-        "mm200": 277.41,
-        "regression_z": -1.52,
-        "regression_signal": "survente",
-        "regression_pente_pct": 14.2,
-        "regression_sigma": 0.2843,
-        "prix_tendance": 416.58,
-        "decote_pct": 35.1,
-        "regression_window_years": 20,
-        "regression_window_reason": "standard_20y",
-        "prix": 270.5,
-        "devise": "USD",
-        "nom_complet": "The Cigna Group",
-        "rev_growth_pct": 6.7,
-        "net_margin_pct": 2.3,
-        "fcf_margin_pct": 2.8,
-        "mrq": "2026-06-30",
-        "forward_pe": 8.1,
-        "trailing_pe": 11.2,
-        "fcf_yield_pct": 11.16,
-        "peg": 0.83,
-        "target_mean_price": 342.62,
-        "target_upside_pct": 26.7,
-        "target_analysts": 24,
-        "death_pen": 0,
-        "chase_pen": 0,
-        "value_bonus": 0,
-        "confiance": 1.0,
-        "sources": [
-          "Yahoo Finance",
-          "Finnhub"
-        ]
-      },
-      "justification": "Score 67/100 — Golden Cross confirmé (60j), prix sous sa droite de régression (-1.5σ), RSI en zone favorable, correction modérée -11.5% sous le top, croissance CA modérée (7% a/a), marges positives.",
-      "rank": 28,
-      "rank_prev": 28,
-      "rank_delta": 0
-    },
-    {
-      "ticker": "FTNT",
-      "name": "Fortinet, Inc.",
-      "market": "NMS",
-      "sector": "Technologie",
-      "score": 67,
-      "badge": null,
-      "change": "stable",
-      "breakdown": {
-        "qualite": 45,
-        "valorisation": 8,
-        "timing": 13,
-        "analystes": 1,
-        "vix_value": 15.81,
-        "cross_regime": "golden",
-        "cross_type": "golden",
-        "cross_days_ago": 64,
-        "cross_spread_pct": 56.14,
-        "cross_slope_mm21_pct": 0.66,
-        "cross_volume_confirmed": false,
-        "signal_dynamics_warning": "",
-        "cross_pts": 6,
-        "rsi_pts": 2,
-        "vol_pts": 0,
-        "reg_pts": 3,
-        "val_pts": 0,
-        "slope_pts": 2,
-        "val_pts_mode": "normal",
-        "drawdown_52w_pct": -2.5,
-        "high_52w": 168.29,
-        "fibo": {
-          "swing_low": 74.39,
-          "swing_high": 168.29,
-          "rally_pct": 126.2,
-          "retrace_pct": 4.4,
-          "closest_fibo": "< Fibo 23.6%",
-          "fibo_levels": {
-            "23.6": 146.13,
-            "38.2": 132.42,
-            "50.0": 121.34,
-            "61.8": 110.26,
-            "78.6": 94.48
-          }
-        },
-        "rsi": 59.7,
-        "mm21": 158.91,
-        "mm200": 101.77,
-        "regression_z": 0.43,
-        "regression_signal": "neutre",
-        "regression_pente_pct": 30.2,
-        "regression_sigma": 0.248,
-        "prix_tendance": 147.38,
-        "decote_pct": -11.4,
-        "regression_window_years": 10,
-        "regression_window_reason": "tech_10y",
-        "prix": 164.13,
-        "devise": "USD",
-        "nom_complet": "Fortinet, Inc.",
-        "rev_growth_pct": 25.6,
-        "net_margin_pct": 28.2,
-        "fcf_margin_pct": 30.1,
-        "mrq": "2026-06-30",
-        "forward_pe": 43.7,
-        "trailing_pe": 58.0,
-        "fcf_yield_pct": 1.88,
-        "peg": 2.24,
-        "target_mean_price": 159.51,
-        "target_upside_pct": -2.8,
-        "target_analysts": 37,
-        "death_pen": 0,
-        "chase_pen": 0,
-        "value_bonus": 0,
-        "confiance": 1.0,
-        "sources": [
-          "Yahoo Finance",
-          "Finnhub"
-        ]
-      },
-      "justification": "Score 67/100 — cours proche de sa droite de régression, RSI en zone favorable, ⚠ près du top 52w (-2.5%) — risque de chase, croissance CA solide (26% a/a), marges excellentes (28%).",
-      "rank": 29,
-      "rank_prev": 29,
-      "rank_delta": 0
-    },
-    {
-      "ticker": "PLTR",
-      "name": "Palantir Technologies ",
-      "market": "NMS",
-      "sector": "Technologie",
-      "score": 67,
-      "badge": null,
-      "change": "stable",
-      "breakdown": {
-        "qualite": 45,
-        "valorisation": 10,
-        "timing": 9,
-        "analystes": 3,
-        "vix_value": 15.81,
-        "cross_regime": "death",
-        "cross_type": "death",
-        "cross_days_ago": 121,
-        "cross_spread_pct": -13.75,
-        "cross_slope_mm21_pct": 1.97,
-        "cross_volume_confirmed": false,
-        "signal_dynamics_warning": "",
-        "cross_pts": 2,
-        "rsi_pts": 0,
-        "vol_pts": 0,
-        "reg_pts": 3,
-        "val_pts": 1,
-        "slope_pts": 4,
-        "val_pts_mode": "normal",
-        "drawdown_52w_pct": -23.5,
-        "high_52w": 207.18,
-        "fibo": {
-          "swing_low": 153.11,
-          "swing_high": 207.18,
-          "rally_pct": 35.3,
-          "retrace_pct": 90.2,
-          "closest_fibo": "rally annulé (> 78.6%)",
-          "fibo_levels": {
-            "23.6": 194.42,
-            "38.2": 186.53,
-            "50.0": 180.14,
-            "61.8": 173.76,
-            "78.6": 164.68
-          }
-        },
-        "rsi": 68.7,
-        "mm21": 131.47,
-        "mm200": 152.44,
-        "regression_z": 0.46,
-        "regression_signal": "neutre",
-        "regression_pente_pct": 46.3,
-        "regression_sigma": 0.6955,
-        "prix_tendance": 115.23,
-        "decote_pct": -37.5,
-        "regression_window_years": 6,
-        "regression_window_reason": "tech_10y",
-        "prix": 158.43,
-        "devise": "USD",
-        "nom_complet": "Palantir Technologies Inc.",
-        "rev_growth_pct": 92.8,
-        "net_margin_pct": 49.0,
-        "fcf_margin_pct": 35.1,
-        "mrq": "2026-06-30",
-        "forward_pe": 68.9,
-        "trailing_pe": 135.4,
-        "fcf_yield_pct": 0.57,
-        "peg": 1.76,
-        "target_mean_price": 185.68,
-        "target_upside_pct": 17.2,
-        "target_analysts": 27,
-        "death_pen": 0,
-        "chase_pen": 0,
-        "value_bonus": 0,
-        "confiance": 1.0,
-        "sources": [
-          "Yahoo Finance",
-          "Finnhub"
-        ]
-      },
-      "justification": "Score 67/100 — cours proche de sa droite de régression, croissance CA solide (93% a/a), marges excellentes (49%), consensus analystes très favorable.",
       "rank": 30,
-      "rank_prev": 30,
-      "rank_delta": 0
+      "rank_prev": 27,
+      "rank_delta": -3
     }
   ],
-  "changelog": [],
+  "changelog": [
+    {
+      "action": "in",
+      "ticker": "CRM",
+      "name": "Salesforce, Inc.",
+      "score": 77,
+      "reason": "Score 77/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-2.0σ), croissance CA modérée (13% a/a), marges excellentes (19%), consensus analystes très favorable."
+    },
+    {
+      "action": "in",
+      "ticker": "ZTS",
+      "name": "Zoetis Inc.",
+      "score": 71,
+      "reason": "Score 71/100 — prix sous sa droite de régression (-4.1σ), RSI en zone favorable, ⚠ -51.6% sous le top 52w — trend probablement cassée, marges excellentes (28%), consensus analystes positif."
+    },
+    {
+      "action": "in",
+      "ticker": "ADI",
+      "name": "Analog Devices, Inc.",
+      "score": 68,
+      "reason": "Score 68/100 — prix en surachat régression (+2.1σ) — prudence, RSI en zone favorable, correction modérée -15.2% sous le top (zone Fibo 23.6%), croissance CA solide (37% a/a), marges excellentes (26%), consensus analystes très favorable."
+    },
+    {
+      "action": "out",
+      "ticker": "CI",
+      "name": "The Cigna Group",
+      "score": 67,
+      "new_score": 67,
+      "reason": "Score stable (67 → 67) — d'autres titres ont simplement mieux scoré cette semaine."
+    },
+    {
+      "action": "out",
+      "ticker": "FTNT",
+      "name": "Fortinet, Inc.",
+      "score": 67,
+      "new_score": 67,
+      "reason": "Score stable (67 → 67) — d'autres titres ont simplement mieux scoré cette semaine."
+    },
+    {
+      "action": "out",
+      "ticker": "PLTR",
+      "name": "Palantir Technologies ",
+      "score": 67,
+      "new_score": 67,
+      "reason": "Score stable (67 → 67) — d'autres titres ont simplement mieux scoré cette semaine · Death Cross confirmé (121j) — régime baissier persistant."
+    }
+  ],
   "concentration_alerts": [
     "Technologie : 16 titres sur 30",
     "Finance : 4 titres sur 30",
