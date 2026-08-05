@@ -997,6 +997,11 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
     r0.value=t0v;r1.value=t1v;
     const pct=t=>(t-T_MIN)/(T_MAX-T_MIN)*100;
     selBar.style.left=pct(t0v)+'%';selBar.style.width=(pct(t1v)-pct(t0v))+'%';
+    // Relevé amorcé sur le dernier point de la fenêtre (demande propriétaire
+    // du 05/08) : visible dès l'ouverture pour montrer qu'on peut jouer avec
+    // le graphe, et recalé à chaque changement de fenêtre. Le survol ou le
+    // doigt reprennent la main au premier geste.
+    if(vis.length)chxShow(vis[vis.length-1],null);
   }
   r0.min=r1.min=Math.floor(T_MIN);r0.max=r1.max=Math.ceil(T_MAX);
   r0.addEventListener('input',()=>{t0v=Math.min(+r0.value,t1v-MIN_SPAN);setBtn(null);chRender();});
@@ -1005,11 +1010,10 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
   document.getElementById('chx-periods').addEventListener('click',e=>{
     const btn=e.target.closest('.chx-pbtn');if(!btn)return;const m=+btn.dataset.m;
     t0v=(m===WIN)?T_OFF:Math.max(T_MIN,T_MAX-m);t1v=T_MAX;setBtn(m);chRender();});
-  // survol + tactile : pointer events, réticule + 4 points + infobulle anti-recouvrement
-  const chxTrack=ev=>{
-    if(!vis||!vis.length)return;
-    const rb=svg.getBoundingClientRect();const mx=(ev.clientX-rb.left)*W/rb.width;
-    let best=vis[0];for(const pt of vis)if(Math.abs(X(pt[0])-mx)<Math.abs(X(best[0])-mx))best=pt;
+  // survol + tactile : pointer events, réticule + 4 points + infobulle anti-recouvrement.
+  // chxShow(point, ev) fait l'affichage ; ev est null quand l'appel ne vient pas
+  // d'un pointeur (amorce au dernier point), le placement flottant l'exige.
+  const chxShow=(best,ev)=>{
     const [t,p]=best,tv=F?trF(t):null;
     hoverG.cross.setAttribute('x1',X(t));hoverG.cross.setAttribute('x2',X(t));hoverG.cross.setAttribute('visibility','visible');
     hoverG.dotP.setAttribute('cx',X(t));hoverG.dotP.setAttribute('cy',Y(p));hoverG.dotP.setAttribute('visibility','visible');
@@ -1027,6 +1031,7 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
       +(tv?'◌ Tendance&nbsp;: <span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span><br>&nbsp;&nbsp;&nbsp;si retour à la tendance&nbsp;: <span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>':'◌ période trop courte pour une tendance')
       +(m21&&m200?'<br><span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span> · <span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'');
     // positionnement APRÈS écriture du contenu (largeur réelle) : toujours d'un seul côté du réticule
+    const rb=svg.getBoundingClientRect();
     const wr=svg.parentNode.getBoundingClientRect();
     tip.style.display='block';
     const cxPix=X(t)*rb.width/W+(rb.left-wr.left);
@@ -1038,15 +1043,30 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
       // rien et ne saute plus d'un bord à l'autre.
       tip.classList.add('dock');
       tip.style.left='';tip.style.top='';
-    }else{
+    }else if(ev){
       tip.classList.remove('dock');
       let lx=cxPix+16;if(lx+tw>wr.width)lx=cxPix-tw-16;
       tip.style.left=Math.max(0,lx)+'px';
       tip.style.top=Math.max(Math.min(ev.clientY-wr.top-70,wr.height-110),0)+'px';
+    }else{
+      // Amorce sans pointeur sur écran large : en haut à droite du dessin,
+      // loin du dernier point (bord droit), jusqu'au premier survol.
+      tip.classList.remove('dock');
+      tip.style.left=Math.max(0,wr.width-tw-8)+'px';tip.style.top='6px';
     }};
+  const chxTrack=ev=>{
+    if(!vis||!vis.length)return;
+    const rb=svg.getBoundingClientRect();const mx=(ev.clientX-rb.left)*W/rb.width;
+    let best=vis[0];for(const pt of vis)if(Math.abs(X(pt[0])-mx)<Math.abs(X(best[0])-mx))best=pt;
+    chxShow(best,ev);
+  };
   svg.addEventListener('pointermove',chxTrack);
   svg.addEventListener('pointerdown',chxTrack);
-  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='mouse'||!hoverG)return;for(const k in hoverG)hoverG[k].setAttribute('visibility','hidden');tip.style.display='none';});
+  // La souris sort : retour à l'état de repos (relevé sur le dernier point),
+  // pas au vide — l'état de repos EST le relevé depuis le 05/08.
+  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='mouse'||!hoverG)return;
+    if(vis&&vis.length)chxShow(vis[vis.length-1],null);
+    else{for(const k in hoverG)hoverG[k].setAttribute('visibility','hidden');tip.style.display='none';}});
   chRender();
 }
 /* ── Chiffres publiés : historique CA / EBITDA / résultat net ──────────────
