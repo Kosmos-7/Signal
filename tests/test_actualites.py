@@ -112,6 +112,34 @@ try:
           hebdo["sources"] and hebdo["sources"][0]["source"] == "Reuters")
     check("la seconde matérialisation ne réécrit rien",
           A.materialiser_hebdo() is None)
+
+    print("\n— Rotation des illustrations —")
+    # p2 (ci-dessus) n'a pas de champ fichier ; on publie deux posts illustrés.
+    A.ecrire_post({"id": "2026-08-04", "type": "quotidien", "date": "2026-08-04",
+                   "titre": "T4", "chapeau": "C4",
+                   "photo": {"src": "a.jpg", "v": "1", "fichier": "Bourse A.jpg"},
+                   "sections": [], "sources": []})
+    A.ecrire_post({"id": "2026-08-05", "type": "quotidien", "date": "2026-08-05",
+                   "titre": "T5", "chapeau": "C5",
+                   "photo": {"src": "b.jpg", "v": "2", "fichier": "Bourse B.jpg"},
+                   "sections": [], "sources": []})
+    deja = A.photos_deja_utilisees()
+    check("les photos des posts récents sont mémorisées",
+          deja == {"Bourse A.jpg", "Bourse B.jpg"}, f"→ {sorted(deja)}")
+    check("la mémoire est bornée aux n plus récents",
+          A.photos_deja_utilisees(n=1) == {"Bourse B.jpg"})
+    check("le post hebdo (sans photo) n'entre pas dans la mémoire",
+          not any("hebdo" in f for f in deja))
+
+    cands = [(9, "Bourse B.jpg", "q1"), (7, "Bourse C.jpg", "q1"),
+             (5, "Bourse A.jpg", "q2")]
+    check("le meilleur candidat FRAIS gagne, pas le meilleur absolu",
+          A.choisir_candidats(cands, deja)[0][1] == "Bourse C.jpg")
+    check("sans mémoire, le tri par score reste inchangé",
+          A.choisir_candidats(cands, frozenset())[0][1] == "Bourse B.jpg")
+    check("vivier épuisé : la redite vaut mieux que le post nu",
+          A.choisir_candidats(cands, {"Bourse A.jpg", "Bourse B.jpg",
+                                      "Bourse C.jpg"})[0][1] == "Bourse B.jpg")
 finally:
     os.chdir(cwd)
     shutil.rmtree(tmp, ignore_errors=True)

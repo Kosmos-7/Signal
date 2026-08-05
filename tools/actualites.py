@@ -45,6 +45,7 @@ Usage :
     python3 tools/actualites.py --sans-photo --force
 """
 import argparse
+import glob
 import hashlib
 import json
 import os
@@ -261,8 +262,41 @@ def rediger(deps):
 
 # ── Photo ────────────────────────────────────────────────────────────────────
 
-def illustrer(post_id, sujet):
-    """Meilleure image libre de Commons pour le sujet. None si rien de probant."""
+def photos_deja_utilisees(n=10):
+    """Fichiers Commons illustrant les n posts quotidiens les plus récents.
+
+    C'est la mémoire qui fait TOURNER les illustrations : sans elle, le tri
+    par score est déterministe, la même image re-gagne chaque matin pour un
+    même sujet, et la page d'accueil affiche une colonne de photos identiques.
+    """
+    fichiers = []
+    for chemin in sorted(glob.glob(os.path.join(POSTS, "*.json")), reverse=True):
+        try:
+            d = json.load(open(chemin, encoding="utf-8"))
+        except Exception:
+            continue
+        if d.get("type") != "quotidien":
+            continue
+        f = (d.get("photo") or {}).get("fichier")
+        if f:
+            fichiers.append(f)
+        if len(fichiers) >= n:
+            break
+    return frozenset(fichiers)
+
+
+def choisir_candidats(candidats, deja):
+    """Candidats (score, fichier, requête) triés, les images déjà parues
+    écartées. Si tout le vivier a déjà servi, on rend le tri complet :
+    mieux vaut une redite qu'un post sans photo. Pure, testée hors ligne."""
+    tri = sorted(candidats, reverse=True)
+    frais = [c for c in tri if c[1] not in deja]
+    return frais or tri
+
+
+def illustrer(post_id, sujet, deja=frozenset()):
+    """Meilleure image libre de Commons pour le sujet, hors images déjà
+    parues dans les posts récents (deja). None si rien de probant."""
     from photos_wikidata import UA                                  # noqa
     from photos_produits import infos, prepare, score_nom           # noqa
     from photos_marques import chercher_commons                     # noqa
@@ -271,7 +305,7 @@ def illustrer(post_id, sujet):
         for f in chercher_commons(req, limite=8):
             candidats.append((score_nom(f), f, req))
         time.sleep(0.25)
-    for score, fichier, req in sorted(candidats, reverse=True)[:6]:
+    for score, fichier, req in choisir_candidats(candidats, deja)[:6]:
         meta = infos(fichier)
         if not meta:
             continue
@@ -382,7 +416,8 @@ def main():
     complet = {
         "id": pid, "type": "quotidien", "date": pid,
         "titre": post["titre"], "chapeau": post["chapeau"], "sujet": post["sujet"],
-        "photo": None if a.sans_photo else illustrer(pid, post["sujet"]),
+        "photo": None if a.sans_photo else
+                 illustrer(pid, post["sujet"], photos_deja_utilisees()),
         "sections": post["sections"],
         # Seules les dépêches réellement citées sont publiées comme sources :
         # lister les autres habillerait le post d'une provenance qu'il n'a pas.
