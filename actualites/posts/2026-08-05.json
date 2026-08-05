@@ -1,0 +1,87 @@
+{
+ "id": "2026-08-05",
+ "type": "quotidien",
+ "date": "2026-08-05",
+ "titre": "Iran, pétrole et tech : le plateau du matin",
+ "chapeau": "Trump se dit optimiste sur l'Iran, la Chine assouplit ses exports de carburant, et un hedge fund IA s'effondre juste avant le rallye tech. Café chaud, marchés animés.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-05.jpg",
+  "v": "df94e69c",
+  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo…",
+  "credit": "Kondo Atsushi",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
+  "fichier": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in March 2009.jpg",
+  "requete": "stock exchange display board"
+ },
+ "sections": [
+  {
+   "titre": "Nucléaire iranien : Trump parle de « très bonnes discussions »",
+   "texte": "Donald Trump a déclaré que les États-Unis et l'Iran avaient des « very good discussions » en cours. Le trafic maritime dans le Golfe reste pour sa part stable malgré l'incertitude liée aux négociations de paix, selon Reuters. Les deux informations coexistent sans se contredire : les échanges commerciaux continuent, les diplomates aussi.",
+   "sources": [
+    0,
+    2
+   ]
+  },
+  {
+   "titre": "La Chine ouvre un peu plus le robinet du carburant",
+   "texte": "Pékin assouplit pour le deuxième mois consécutif ses contrôles sur les exportations de carburant, selon des sources citées par Reuters. Ce mouvement répété suggère une orientation volontaire de la politique énergétique chinoise, sans que les volumes précis n'aient été communiqués.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Un hedge fund IA tombe, la tech s'envole : coïncidence ?",
+   "texte": "Selon Jim Cramer sur CNBC, l'effondrement du hedge fund Situational Awareness, spécialisé dans l'IA, aurait libéré le marché tech d'une source importante de ventes forcées. Pour Cramer, c'est cette liquidation contrainte qui pesait sur le secteur, et sa disparition aurait ainsi dégagé la voie au rallye. À noter : c'est l'analyse d'un commentateur, non un constat de marché officiellement établi.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Chipotle et la salade de problèmes",
+   "texte": "L'action Chipotle a reculé après qu'un lien potentiel a été établi entre la chaîne de restauration et une épidémie à salmonelle dans le Minnesota. L'entreprise a indiqué avoir retiré les fournitures concernées de ses restaurants et les avoir remplacées par des poivrons provenant d'autres producteurs.",
+   "sources": [
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "US and Iran having 'very good discussions', Trump says - Reuters",
+   "resume": "US and Iran having 'very good discussions', Trump says  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQUFpfZEh3NVhNLURNVl9ETWp2ak5nZEx4d0JYQ19WZ3Z6bTl3V2wyUzVLQmFnTkJrZTZtVXd1cnp2dkdXUmh0d1FXUmhfbGQ1a3dKY1ZzQ0pXQTdUcS02X1llNkdFbzFLN0k2YXk2X2JEUTVCV1RBeGdUaFA2VGFzSW9LYlRDQm5senFDSzFVRkxHaXdSazRBWUlTT1pjY00yU1Qw?oc=5",
+   "date": "2026-08-05 05:11"
+  },
+  {
+   "titre": "China eases controls on fuel exports for a second month, sources say - Reuters",
+   "resume": "China eases controls on fuel exports for a second month, sources say  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNbHRMR3J2NzJaT2hKV1ZTem4wMWhSQVF4NnNNQ19WNXFLaUNVamQ5Slg4NjB6Y0ZpWkN0SWYxeFZrVnF5QXhGSXl6UnNyMXRFVXRQVUtsaURERFRDM25FaW9DQW9QRDZPdmpuMTNGdHVpSFNPcG1Da0VtMXNpVk1OVXVMVlVFS3RHekhiT19FelYwMFFGMVI5QnNzNkJUY0tQMWxMUk5RR0hIWDVyN293?oc=5",
+   "date": "2026-08-05 04:37"
+  },
+  {
+   "titre": "Gulf shipping traffic steady amid uncertainty of peace talks - Reuters",
+   "resume": "Gulf shipping traffic steady amid uncertainty of peace talks  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQaWpxYUZIYkdaMkhoNVRrM2ZkZ3NYdWh4aUJEb2pOa29zOFBROGFHdmxwNDZZOHhicHpOOGVlS0FGTC1QdHR4UmRVbmtacWZrc3J4empuUEt5dDNSZTJRb25obllvdEFaQTVQV1B1Q05wRlpwdVpVaEJHZW80MTBxWmViU2d3V0psZHMxMENsV0x3RzBJWXpZV0hlc3MyeWxSQ3dmZllIZzRkaGNvb2ppaQ?oc=5",
+   "date": "2026-08-05 03:04"
+  },
+  {
+   "titre": "Jim Cramer says one hedge fund's collapse cleared the way for tech's rally",
+   "resume": "CNBC's Jim Cramer said the collapse of AI-focused hedge fund Situational Awareness removed a major source of forced selling.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/04/cramer-one-hedge-fund-collapse-cleared-way-for-tech-rally.html",
+   "date": "2026-08-04 22:22"
+  },
+  {
+   "titre": "Chipotle stock falls on potential link to salmonella outbreak in Minnesota",
+   "resume": "Chipotle has pulled the affected supply from restaurants and replaced them with peppers from different growers, according to the company.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/04/chipotle-stock-falls-salmonella-outbreak-minnesota.html",
+   "date": "2026-08-04 17:54"
+  }
+ ],
+ "genere_le": "2026-08-05 08:07 UTC"
+}
