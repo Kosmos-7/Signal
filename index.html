@@ -151,6 +151,8 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .fd-table td:first-child{text-align:left;color:var(--text)}
   .fd-d{font-size:.7rem;display:block;margin-top:2px}
   .fd-d.up{color:var(--green)}.fd-d.dn{color:var(--red)}
+  .fd-est td{color:var(--text3)}
+  .fd-est td:first-child{color:var(--text3);font-style:italic}
   @media (max-width:640px){ .fd-table{font-size:.7rem} .fd-d{font-size:.62rem} }
   @media(max-width:900px){
     /* tactile : poignées du double curseur ≥ 20px */
@@ -1116,6 +1118,14 @@ function fondaRender(s){
   const full=FD_MODE==='an'?an:tr, dev=F.devise||'?';
   const rows=full;
   const hasEb=rows.some(r=>r.eb!=null);
+  // PER : mode annuel seulement. Historique = cours de clôture de l'exercice /
+  // BPA dilué publié (absent pour les ADR : devise comptable ≠ cotation, le
+  // quotient serait un non-sens). Prévisionnel (lignes « e ») = cours actuel /
+  // BPA moyen estimé par les analystes — valide même pour un ADR, les
+  // estimations sont dans la devise de cotation.
+  const pePrev=(FD_MODE==='an'&&F.pe_prev)||[];
+  const hasPer=FD_MODE==='an'&&(rows.some(r=>r.per!=null)||pePrev.length>0);
+  const fmtPer=v=>v!=null?String(v).replace('.',',')+'×':'—';
   // barres : CA et RN par période, dernière période en pleine intensité
   const W=800,H=170,PB=22,n=rows.length;
   const maxV=Math.max(...rows.map(r=>Math.max(r.ca||0,r.rn||0,1)));
@@ -1135,12 +1145,16 @@ function fondaRender(s){
     if((n-1-i)%step===0)
       bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':'')+'>'+fdLabel(r.fin,FD_MODE)+'</text>';
   });
-  const cells=rows.map(r=>{
+  const cells=pePrev.slice().reverse().map(e=>
+    '<tr class="fd-est"><td>'+e.exercice+'e</td><td>—</td>'+(hasEb?'<td>—</td>':'')+'<td>—</td>'+
+    '<td>'+fmtPer(e.per)+'</td></tr>').join('')+
+    rows.map(r=>{
     const p=fdPrev(full,full.indexOf(r),FD_MODE);
     return '<tr><td>'+fdLabel(r.fin,FD_MODE)+'</td>'+
       '<td>'+fdMoney(r.ca,dev)+fdDelta(r,p,'ca')+'</td>'+
       (hasEb?'<td>'+fdMoney(r.eb,dev)+fdDelta(r,p,'eb')+'</td>':'')+
-      '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td></tr>';
+      '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td>'+
+      (hasPer?'<td>'+fmtPer(r.per)+'</td>':'')+'</tr>';
   }).reverse().join('');
   host.innerHTML='<div class="fd-wrap"><div class="qh">Chiffres publiés</div>'+
     '<div class="fd-ctrl">'+
@@ -1149,8 +1163,10 @@ function fondaRender(s){
       '<span class="chx-rlbl">publié en '+sv(dev)+'</span></div>'+
     '<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net</div>'+
-    '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table>'+
-    '<div class="chx-note">Chiffres publiés par la société ('+(FD_MODE==='an'?'exercices fiscaux':'trimestres')+'), montants dans la devise comptable. Variation : '+(FD_MODE==='an'?'vs exercice précédent':'vs même trimestre un an plus tôt — affichée dès que ce trimestre de comparaison est connu, l\'historique s\'approfondit à chaque mise à jour hebdomadaire')+'.</div></div>';
+    '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th>'+(hasPer?'<th>PER</th>':'')+'</tr>'+cells+'</table>'+
+    '<div class="chx-note">Chiffres publiés par la société ('+(FD_MODE==='an'?'exercices fiscaux':'trimestres')+'), montants dans la devise comptable. Variation : '+(FD_MODE==='an'?'vs exercice précédent':'vs même trimestre un an plus tôt — affichée dès que ce trimestre de comparaison est connu, l\'historique s\'approfondit à chaque mise à jour hebdomadaire')+'.'
+    +(hasPer?' PER : cours de clôture de l\'exercice / BPA dilué publié. Lignes « e » : cours actuel / BPA moyen estimé par les analystes — des estimations, pas des publications.':'')
+    +'</div></div>';
   host.querySelectorAll('[data-fd]').forEach(b=>b.addEventListener('click',()=>{
     if(b.disabled)return;FD_MODE=b.dataset.fd;fondaRender(s);}));
 }

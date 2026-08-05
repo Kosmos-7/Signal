@@ -322,6 +322,36 @@ f = screener.extraire_fondamentaux(VIEUX, None, "USD")
 check("borné aux 5 exercices les plus récents",
       len(f["an"]) == 5 and f["an"][0]["fin"] == "2021-12-31")
 
+print("\n— PER par exercice et exercices à venir —")
+EPSDF = FDF({
+    "Total Revenue": {"2024-12-31": 2_000_000_000, "2025-12-31": 2_200_000_000},
+    "Net Income":    {"2024-12-31": 300_000_000, "2025-12-31": 360_000_000},
+    "Diluted EPS":   {"2024-12-31": 3.0, "2025-12-31": 3.6},
+})
+f = screener.extraire_fondamentaux(EPSDF, None, "EUR")
+check("le BPA dilué annuel est extrait (jamais en trimestre)",
+      f["an"][0]["eps"] == 3.0 and f["an"][1]["eps"] == 3.6)
+
+prix = {"2024-12-31": 90.0, "2025-12-31": 108.0}
+an = [dict(e) for e in f["an"]]
+screener.per_historique(an, lambda d: prix.get(d), meme_devise=True)
+check("PER par exercice = cours de clôture / BPA publié",
+      an[0]["per"] == 30.0 and an[1]["per"] == 30.0)
+an2 = [dict(e) for e in f["an"]]
+screener.per_historique(an2, lambda d: prix.get(d), meme_devise=False)
+check("ADR (devise comptable ≠ cotation) : aucun PER historique",
+      all("per" not in e for e in an2))
+an3 = [{"fin": "2025-12-31", "eps": -2.0}, {"fin": "2024-12-31"}]
+screener.per_historique(an3, lambda d: 100.0, meme_devise=True)
+check("perte ou BPA absent : pas de multiple", all("per" not in e for e in an3))
+
+prev = screener.per_previsionnel(120.0, {"0y": 4.0, "+1y": 5.0}, "2025-12-31")
+check("deux exercices à venir, étiquetés après le dernier clos",
+      prev == [{"exercice": 2026, "per": 30.0}, {"exercice": 2027, "per": 24.0}])
+check("estimation manquante ou négative sautée",
+      screener.per_previsionnel(120.0, {"0y": None, "+1y": -1}, "2025-12-31") == []
+      and screener.per_previsionnel(120.0, None, "2025-12-31") == [])
+
 print("\n— Fusion de l'historique entre runs (fusionner_fonda) —")
 ANCIEN = {"devise": "USD",
           "an": [{"fin": "2022-12-31", "ca": 100, "rn": 10}],
@@ -346,6 +376,11 @@ GROS = {"devise": "USD", "an": [],
 f = screener.fusionner_fonda(GROS, {"devise": "USD", "an": [], "tr": []})
 check("garde-fou de croissance : 20 trimestres conservés au plus, les plus récents",
       len(f["tr"]) == 20 and f["tr"][-1]["ca"] == 27)
+f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": [],
+                              "pe_prev": [{"exercice": 2026, "per": 30.0}]},
+                             {"devise": "USD", "an": [], "tr": []})
+check("estimations PER : le run muet n'efface pas les précédentes",
+      f["pe_prev"] == [{"exercice": 2026, "per": 30.0}])
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")

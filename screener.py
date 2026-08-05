@@ -403,10 +403,14 @@ def extraire_fondamentaux(df_annuel, df_trim, devise, max_an=5, max_tr=6):
                 return {c: float(v) for c, v in s.dropna().items() if v == v}
         return {}
 
-    def bloc(df, n):
+    def bloc(df, n, avec_eps=False):
         ca = serie(df, ["Total Revenue", "Operating Revenue"])
         eb = serie(df, ["EBITDA", "Normalized EBITDA"])
         rn = serie(df, ["Net Income", "Net Income Common Stockholders"])
+        # BPA dilué publié (annuel seulement) : le PER par exercice s'en déduit.
+        # Par action, pas en millions — arrondi 4 décimales (actions à BPA
+        # centimes : Sony pré-split, valeurs coréennes).
+        eps = serie(df, ["Diluted EPS", "Basic EPS"]) if avec_eps else {}
         lignes = []
         # L'axe du temps est celui du CA ou du RN (l'EBITDA seul ne fait pas
         # une publication) ; ordre chronologique, bornés aux n plus récents.
@@ -415,14 +419,54 @@ def extraire_fondamentaux(df_annuel, df_trim, devise, max_an=5, max_tr=6):
             if d in ca: e["ca"] = int(round(ca[d] / 1e6))
             if d in eb: e["eb"] = int(round(eb[d] / 1e6))
             if d in rn: e["rn"] = int(round(rn[d] / 1e6))
+            if d in eps and eps[d]: e["eps"] = round(eps[d], 4)
             if len(e) > 1:
                 lignes.append(e)
         return lignes
 
-    an, tr = bloc(df_annuel, max_an), bloc(df_trim, max_tr)
+    an, tr = bloc(df_annuel, max_an, avec_eps=True), bloc(df_trim, max_tr)
     if not an and not tr:
         return None
     return {"devise": devise or "?", "an": an, "tr": tr}
+
+
+def per_historique(an, prix_a_la_date, meme_devise):
+    """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
+    dilué publié. UNIQUEMENT quand la devise comptable est celle de cotation :
+    un ADR comme TSM cote en USD mais publie son BPA en TWD (et représente
+    plusieurs actions ordinaires) — le quotient serait un non-sens, on omet.
+    Mutation en place des entrées ; BPA négatif ou nul → pas de PER (une perte
+    n'a pas de multiple). prix_a_la_date : date iso → cours, None si inconnu."""
+    if not meme_devise:
+        return an
+    for e in an:
+        eps = e.get("eps")
+        if not eps or eps <= 0:
+            continue
+        prix = prix_a_la_date(e["fin"])
+        if prix and prix > 0:
+            e["per"] = round(prix / eps, 1)
+    return an
+
+
+def per_previsionnel(prix, estimations, dernier_exercice):
+    """PER des deux exercices À VENIR : cours ACTUEL / BPA moyen estimé par les
+    analystes (Yahoo, lignes 0y et +1y). Les estimations sont publiées dans la
+    devise de COTATION de la place interrogée — le quotient est donc valide
+    même pour un ADR. Étiquettes = exercice fiscal suivant le dernier clos.
+    estimations : {"0y": eps, "+1y": eps} (None/absent tolérés)."""
+    if not prix or prix <= 0 or not dernier_exercice:
+        return []
+    try:
+        annee = int(str(dernier_exercice)[:4])
+    except (TypeError, ValueError):
+        return []
+    out = []
+    for i, cle in enumerate(("0y", "+1y")):
+        eps = (estimations or {}).get(cle)
+        if eps and eps > 0:
+            out.append({"exercice": annee + 1 + i, "per": round(prix / eps, 1)})
+    return out
 
 
 def fusionner_fonda(ancien, nouveau, max_an=12, max_tr=20):
@@ -444,6 +488,12 @@ def fusionner_fonda(ancien, nouveau, max_an=12, max_tr=20):
         par_fin = {e["fin"]: e for e in (ancien.get(cle) or [])}
         par_fin.update({e["fin"]: e for e in (nouveau.get(cle) or [])})
         out[cle] = [par_fin[k] for k in sorted(par_fin)][-borne:]
+    # PER prévisionnels : ce sont des estimations COURANTES, le run le plus
+    # récent fait foi ; à défaut (Yahoo muet un jour), on garde les anciennes,
+    # leurs étiquettes d'exercice rendent tout vieillissement visible.
+    pe = nouveau.get("pe_prev") or ancien.get("pe_prev")
+    if pe:
+        out["pe_prev"] = pe
     return out
 
 
@@ -1412,6 +1462,32 @@ def score_ticker(ticker, vix=None):
                 print(f"  ⚠️  {ticker}: chiffres publiés en échec ({type(e).__name__}) — omis")
                 fonda = None
             if fonda:
+                # PER par exercice + deux exercices à venir. Fail-soft aussi.
+                try:
+                    def prix_fin(iso):
+                        try:
+                            avant = close[close.index <= pd.Timestamp(iso, tz=close.index.tz)]
+                            return float(avant.iloc[-1]) if len(avant) else None
+                        except Exception:
+                            return None
+                    meme_devise = ((info.get("financialCurrency") or "") ==
+                                   (info.get("currency") or ""))
+                    per_historique(fonda["an"], prix_fin, meme_devise)
+                    est = None
+                    try:
+                        ee = data.earnings_estimate
+                        if ee is not None and "avg" in getattr(ee, "columns", []):
+                            est = {k: (float(ee.loc[k, "avg"]) if k in ee.index
+                                       and ee.loc[k, "avg"] == ee.loc[k, "avg"] else None)
+                                   for k in ("0y", "+1y")}
+                    except Exception:
+                        est = None
+                    dernier = fonda["an"][-1]["fin"] if fonda["an"] else None
+                    prev = per_previsionnel(float(close.iloc[-1]), est, dernier)
+                    if prev:
+                        fonda["pe_prev"] = prev
+                except Exception as e:
+                    print(f"  ⚠️  {ticker}: PER historique/prévisionnel en échec ({type(e).__name__})")
                 chart["fonda"] = fonda
 
         return {
