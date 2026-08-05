@@ -322,6 +322,22 @@ f = screener.extraire_fondamentaux(VIEUX, None, "USD")
 check("borné aux 5 exercices les plus récents",
       len(f["an"]) == 5 and f["an"][0]["fin"] == "2021-12-31")
 
+print("\n— Contre-vérification des fondamentaux (valider_fondamentaux) —")
+c, a = screener.valider_fondamentaux({"profitMargins": 0.25}, {"net_margin": 25.3})
+check("sources concordantes : confiance pleine, aucune alerte", c == 1.0 and a == [])
+c, a = screener.valider_fondamentaux({"profitMargins": 0.05}, {"net_margin": 40.0})
+check("discordance réelle : décote + alerte « discordante »",
+      c == 0.9 and "discordante" in a[0])
+c, a = screener.valider_fondamentaux({}, {"net_margin": 20.0})
+check("trou Yahoo : décote mais alerte « absente », jamais « YF:0.0% »",
+      c == 0.9 and "absente" in a[0] and "YF:" not in a[0])
+c, a = screener.valider_fondamentaux({"profitMargins": 0.25}, {})
+check("Finnhub muet : confiance pleine (validateur absent ≠ défaut)",
+      c == 1.0 and a == [])
+c, a = screener.valider_fondamentaux({"profitMargins": 0.2, "revenueGrowth": 4.2},
+                                     {"net_margin": 20.0})
+check("croissance > 300 % : suspecte, décote 0.15", abs(c - 0.85) < 1e-9 and a)
+
 print("\n— PER par exercice et exercices à venir —")
 EPSDF = FDF({
     "Total Revenue": {"2024-12-31": 2_000_000_000, "2025-12-31": 2_200_000_000},

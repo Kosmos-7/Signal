@@ -105,13 +105,32 @@ def finnhub_fundamentals(ticker):
     return {}
 
 def valider_fondamentaux(yf_data, fh_data):
+    """Contre-vérification Yahoo vs Finnhub → (confiance 0.7-1.0, alertes).
+
+    DÉCISION (relecture du 06/08/2026) : Finnhub reste un VALIDATEUR, jamais
+    une source de remplissage des trous Yahoo. Trois raisons, mesurées :
+    ses champs (marge, ROE, dette) n'ont aucun trou observé sur 117 fiches
+    alors que les vrais trous (FCF, marketCap, PEG) ne sont pas dans sa
+    réponse ; ses unités diffèrent (ROE en %, dette en ratio — un remplissage
+    naïf offrirait +12 et +7 pts) ; et remplir AVANT cette fonction ferait
+    comparer Finnhub à Finnhub — plus aucune discordance détectable, le seul
+    détecteur de mauvaise donnée du système s'éteindrait. Enfin Finnhub est
+    réservé aux tickers US : remplir bonifierait les US pendant que l'Europe
+    garde ses zéros — l'incident 3.5.0 inversé."""
     if not fh_data:
         return (1.0, [])
     confiance, alertes = 1.0, []
     try:
-        yf_m = yf_data.get("profitMargins") or 0
+        yf_m_raw = yf_data.get("profitMargins")
+        yf_m = yf_m_raw or 0
         fh_m = (fh_data.get("net_margin") or 0) / 100 if fh_data.get("net_margin") else 0
-        if fh_m and abs(yf_m - fh_m) > 0.15:
+        if fh_m and yf_m_raw is None:
+            # Un trou n'est pas une discordance : l'incertitude est réelle
+            # (même décote), mais l'alerte publiée doit dire « absente »,
+            # pas « discordante YF:0.0% » — ce zéro n'a jamais été mesuré.
+            confiance -= 0.1
+            alertes.append(f"Marge nette absente chez Yahoo (Finnhub : {fh_m:.1%})")
+        elif fh_m and abs(yf_m - fh_m) > 0.15:
             confiance -= 0.1
             alertes.append(f"Marge nette discordante YF:{yf_m:.1%} vs FH:{fh_m:.1%}")
         yf_d = yf_data.get("debtToEquity") or 0
@@ -873,9 +892,9 @@ def generer_justification(nom, score, details, alertes):
     # Fondamentaux
     rev = details.get("rev_growth", 0)
     if rev > 0.15:
-        points.append(f"croissance CA solide ({rev:.0%}/an)")
+        points.append(f"croissance CA solide ({rev:.0%} a/a)")
     elif rev > 0.05:
-        points.append(f"croissance CA modérée ({rev:.0%}/an)")
+        points.append(f"croissance CA modérée ({rev:.0%} a/a)")
 
     margin = details.get("net_margin", 0)
     if margin > 0.15:
@@ -1044,8 +1063,10 @@ def score_ticker(ticker, vix=None):
         reg_signal              = reg_signal_label(regression_z)
         reg_zone_saine          = -0.5 <= regression_z <= 1.5
 
-        rev_growth   = info.get("revenueGrowth")     or 0
-        margins      = info.get("profitMargins")      or 0
+        rev_growth_raw = info.get("revenueGrowth")   # None conservé pour la publication
+        margins_raw    = info.get("profitMargins")   # (breakdown : trou → null → « — »)
+        rev_growth   = rev_growth_raw or 0
+        margins      = margins_raw or 0
         peg          = info.get("pegRatio")           or 0
         forward_pe   = info.get("forwardPE")             # PER forward (bénéfices attendus)
         trailing_pe  = info.get("trailingPE")            # PER courant (PER courant ≫ forward = bénéfices au creux de cycle)
@@ -1179,10 +1200,19 @@ def score_ticker(ticker, vix=None):
             _warn_d = "Affaiblissement post-rally sur cross stale — pente MM21 fortement négative malgré cours largement au-dessus de MM200"
         details["signal_dynamics_warning"] = _warn_d
 
-        fcf        = info.get("freeCashflow")  or 0
-        total_rev  = info.get("totalRevenue")  or 1
-        fcf_margin = fcf / total_rev if total_rev > 0 else 0
-        fcf_yield  = (fcf / market_cap * 100) if market_cap else None   # rendement du FCF au prix actuel
+        # Bruts AVANT tout `or` : « absent » et « zéro » sont deux informations
+        # différentes. Le score reste prudent (0 pt sur un trou), mais la
+        # PUBLICATION ne transforme plus un trou en mesure « 0,0 % » — la
+        # relecture du 06/08 a compté 21 financières affichant une fausse
+        # marge FCF nulle (Yahoo ne publie pas de FCF pour les banques).
+        fcf_raw       = info.get("freeCashflow")
+        total_rev_raw = info.get("totalRevenue")
+        fcf        = fcf_raw or 0
+        # Bug corrigé (latent) : `totalRevenue or 1` faisait de fcf/1 une
+        # « marge » astronomique quand le CA manquait — la donnée absente
+        # OFFRAIT les 8 points au lieu d'en priver.
+        fcf_margin = (fcf / total_rev_raw) if (fcf_raw is not None and total_rev_raw) else 0
+        fcf_yield  = (fcf / market_cap * 100) if (fcf_raw is not None and market_cap) else None   # rendement du FCF au prix actuel
 
         # ════ QUALITÉ (45 pts) — durabilité du business : ce que tu possèdes (v3) ════
         # marge nette (8) + marge FCF (8) + ROE (12) + croissance CA (10, plafonnée) + dette (7)
@@ -1415,9 +1445,11 @@ def score_ticker(ticker, vix=None):
             # le nom complet (les listes du site utilisent un nom d'usage).
             "nom_complet":           (info.get("longName") or info.get("shortName") or ticker),
             # Fondamentaux
-            "rev_growth_pct":        round(rev_growth * 100, 1),   # trimestriel, glissement annuel (MRQ vs même trim. N-1)
-            "net_margin_pct":        round(margins * 100, 1),      # TTM (12 mois glissants)
-            "fcf_margin_pct":        round(fcf_margin * 100, 1),   # TTM (12 mois glissants)
+            # Trou de donnée → null → « — » au front. Un 0.0 publié est une
+            # MESURE (croissance nulle, marge nulle), plus jamais un défaut.
+            "rev_growth_pct":        round(rev_growth * 100, 1) if rev_growth_raw is not None else None,   # trimestriel, glissement annuel (MRQ vs même trim. N-1)
+            "net_margin_pct":        round(margins * 100, 1) if margins_raw is not None else None,         # TTM (12 mois glissants)
+            "fcf_margin_pct":        round(fcf_margin * 100, 1) if (fcf_raw is not None and total_rev_raw) else None,  # TTM (12 mois glissants)
             "mrq":                   mrq_iso,                      # date du dernier trimestre publié — réf. période fondamentaux
             # Valorisation (alimente la prose éditoriale — cf. generate_analyses.py)
             "forward_pe":            round(forward_pe, 1) if forward_pe else None,
