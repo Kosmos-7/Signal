@@ -2,86 +2,100 @@
  "id": "2026-08-05",
  "type": "quotidien",
  "date": "2026-08-05",
- "titre": "Iran, pétrole et tech : le plateau du matin",
- "chapeau": "Trump se dit optimiste sur l'Iran, la Chine assouplit ses exports de carburant, et un hedge fund IA s'effondre juste avant le rallye tech. Café chaud, marchés animés.",
+ "titre": "Dow à un record, tensions au Moyen-Orient et Spider-Man milliardaire",
+ "chapeau": "Le Dow Jones signe un record sur fond d'optimisme moyen-oriental, pendant que le Nasdaq trébuche, qu'Alphabet perd des cerveaux et que Flutter déçoit aux résultats.",
  "sujet": "marches",
  "photo": {
   "src": "actualites/photos/2026-08-05.jpg",
-  "v": "df94e69c",
-  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo…",
-  "credit": "Kondo Atsushi",
-  "licence": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
-  "fichier": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in March 2009.jpg",
+  "v": "d615fed6",
+  "legende": "Electronic stock board in Yaesu, Tokyo 2007",
+  "credit": "nappa",
+  "licence": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Electronic_stock_board_in_Yaesu,_Tokyo_2007.jpg",
+  "fichier": "Electronic stock board in Yaesu, Tokyo 2007.jpg",
   "requete": "stock exchange display board"
  },
  "sections": [
   {
-   "titre": "Nucléaire iranien : Trump parle de « très bonnes discussions »",
-   "texte": "Donald Trump a déclaré que les États-Unis et l'Iran avaient des « very good discussions » en cours. Le trafic maritime dans le Golfe reste pour sa part stable malgré l'incertitude liée aux négociations de paix, selon Reuters. Les deux informations coexistent sans se contredire : les échanges commerciaux continuent, les diplomates aussi.",
-   "sources": [
-    0,
-    2
-   ]
-  },
-  {
-   "titre": "La Chine ouvre un peu plus le robinet du carburant",
-   "texte": "Pékin assouplit pour le deuxième mois consécutif ses contrôles sur les exportations de carburant, selon des sources citées par Reuters. Ce mouvement répété suggère une orientation volontaire de la politique énergétique chinoise, sans que les volumes précis n'aient été communiqués.",
+   "titre": "Le Dow fait le grand écart avec le Nasdaq",
+   "texte": "Le Dow Jones a clôturé à un niveau record, porté par l'optimisme autour de la situation au Moyen-Orient. Le Nasdaq, lui, a pris le chemin inverse, plombé notamment par SpaceX et AMD. Deux indices, deux ambiances : le marché américain s'est offert un grand écart le temps d'une séance.",
    "sources": [
     1
    ]
   },
   {
-   "titre": "Un hedge fund IA tombe, la tech s'envole : coïncidence ?",
-   "texte": "Selon Jim Cramer sur CNBC, l'effondrement du hedge fund Situational Awareness, spécialisé dans l'IA, aurait libéré le marché tech d'une source importante de ventes forcées. Pour Cramer, c'est cette liquidation contrainte qui pesait sur le secteur, et sa disparition aurait ainsi dégagé la voie au rallye. À noter : c'est l'analyse d'un commentateur, non un constat de marché officiellement établi.",
+   "titre": "Moyen-Orient : la situation reste grave",
+   "texte": "L'Iran a menacé de frapper des États du Golfe si les États-Unis lancent de nouvelles frappes, selon Reuters. Par ailleurs, l'armée israélienne a conduit des frappes dans le sud du Liban après avoir adressé un avertissement d'évacuation à un village. La situation dans la région demeure sérieuse et étroitement surveillée.",
    "sources": [
+    2,
     3
    ]
   },
   {
-   "titre": "Chipotle et la salade de problèmes",
-   "texte": "L'action Chipotle a reculé après qu'un lien potentiel a été établi entre la chaîne de restauration et une épidémie à salmonelle dans le Minnesota. L'entreprise a indiqué avoir retiré les fournitures concernées de ses restaurants et les avoir remplacées par des poivrons provenant d'autres producteurs.",
+   "titre": "Alphabet perd des talents, les marchés s'inquiètent",
+   "texte": "Alphabet a reculé en séance sur des nouvelles de départs supplémentaires dans ses équipes d'intelligence artificielle, un phénomène que certains observateurs qualifient de « brain drain ». Le titre a souffert, bien que des analystes cités par CNBC indiquent ne pas être outre mesure préoccupés par le mouvement.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Flutter chute : résultats manqués et patron qui change",
+   "texte": "Flutter a vu son action plonger après des résultats inférieurs aux attentes et l'annonce d'un nouveau changement à la tête de l'entreprise. FanDuel, sa filiale américaine et principal moteur de croissance, est décrite par CNBC comme perdant du terrain sur sa position dominante aux États-Unis. La double mauvaise nouvelle n'a pas laissé les investisseurs indifférents.",
    "sources": [
     5
+   ]
+  },
+  {
+   "titre": "Hollywood retrouve le goût du milliard",
+   "texte": "Spider-Man vient de rejoindre le club très select des films ayant dépassé le milliard de dollars au box-office mondial. Des analystes cités par CNBC estiment que ce retour des sorties milliardaires est de bon augure pour une industrie qui cherche encore à retrouver ses niveaux d'avant-Covid, malgré la hausse des prix des billets.",
+   "sources": [
+    0
    ]
   }
  ],
  "sources": [
   {
-   "titre": "US and Iran having 'very good discussions', Trump says - Reuters",
-   "resume": "US and Iran having 'very good discussions', Trump says  Reuters",
-   "source": "Reuters",
-   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQUFpfZEh3NVhNLURNVl9ETWp2ak5nZEx4d0JYQ19WZ3Z6bTl3V2wyUzVLQmFnTkJrZTZtVXd1cnp2dkdXUmh0d1FXUmhfbGQ1a3dKY1ZzQ0pXQTdUcS02X1llNkdFbzFLN0k2YXk2X2JEUTVCV1RBeGdUaFA2VGFzSW9LYlRDQm5senFDSzFVRkxHaXdSazRBWUlTT1pjY00yU1Qw?oc=5",
-   "date": "2026-08-05 05:11"
-  },
-  {
-   "titre": "China eases controls on fuel exports for a second month, sources say - Reuters",
-   "resume": "China eases controls on fuel exports for a second month, sources say  Reuters",
-   "source": "Reuters",
-   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNbHRMR3J2NzJaT2hKV1ZTem4wMWhSQVF4NnNNQ19WNXFLaUNVamQ5Slg4NjB6Y0ZpWkN0SWYxeFZrVnF5QXhGSXl6UnNyMXRFVXRQVUtsaURERFRDM25FaW9DQW9QRDZPdmpuMTNGdHVpSFNPcG1Da0VtMXNpVk1OVXVMVlVFS3RHekhiT19FelYwMFFGMVI5QnNzNkJUY0tQMWxMUk5RR0hIWDVyN293?oc=5",
-   "date": "2026-08-05 04:37"
-  },
-  {
-   "titre": "Gulf shipping traffic steady amid uncertainty of peace talks - Reuters",
-   "resume": "Gulf shipping traffic steady amid uncertainty of peace talks  Reuters",
-   "source": "Reuters",
-   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQaWpxYUZIYkdaMkhoNVRrM2ZkZ3NYdWh4aUJEb2pOa29zOFBROGFHdmxwNDZZOHhicHpOOGVlS0FGTC1QdHR4UmRVbmtacWZrc3J4empuUEt5dDNSZTJRb25obllvdEFaQTVQV1B1Q05wRlpwdVpVaEJHZW80MTBxWmViU2d3V0psZHMxMENsV0x3RzBJWXpZV0hlc3MyeWxSQ3dmZllIZzRkaGNvb2ppaQ?oc=5",
-   "date": "2026-08-05 03:04"
-  },
-  {
-   "titre": "Jim Cramer says one hedge fund's collapse cleared the way for tech's rally",
-   "resume": "CNBC's Jim Cramer said the collapse of AI-focused hedge fund Situational Awareness removed a major source of forced selling.",
+   "titre": "Hollywood is cranking out billion-dollar movies again. Spider-Man just joined the ranks",
+   "resume": "Box office analysts say the resurgence of billion-dollar releases bodes well for a film industry that's still chasing pre-Covid levels, even with higher prices.",
    "source": "CNBC",
-   "url": "https://www.cnbc.com/2026/08/04/cramer-one-hedge-fund-collapse-cleared-way-for-tech-rally.html",
-   "date": "2026-08-04 22:22"
+   "url": "https://www.cnbc.com/2026/08/05/hollywood-2026-billion-dollar-movies.html",
+   "date": "2026-08-05 21:15"
   },
   {
-   "titre": "Chipotle stock falls on potential link to salmonella outbreak in Minnesota",
-   "resume": "Chipotle has pulled the affected supply from restaurants and replaced them with peppers from different growers, according to the company.",
+   "titre": "Dow closes at record on Mideast optimism; SpaceX, AMD drag Nasdaq - Reuters",
+   "resume": "Dow closes at record on Mideast optimism; SpaceX, AMD drag Nasdaq  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPdklHVUNCN0JQTDlLR0piZnVyYXRkNkU1akFlU3dWWFRoQTUyVUFxTXVtbnU2V3pTY2QwZ3pXRUw3eTFZeG1IbDAzM0Q5eEJPd0VSRldTckFHb1dBYXUtQ2tocm44b2p1SE5EbGhCNUJyMG9SX0RhZTlRZjFFbURfWmhPbnN2YmNSTlF3NFFZbG5yNmFzWTNiZFBOTlFfOWp1cmZIMkxicE50d2tJWkVXOVZQRmFxc21qN01jaDR6RQ?oc=5",
+   "date": "2026-08-05 20:02"
+  },
+  {
+   "titre": "EXCLUSIVE: Iran threatens to hit Gulf states if US launches new strikes - Reuters",
+   "resume": "EXCLUSIVE: Iran threatens to hit Gulf states if US launches new strikes  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPajFnaXk0anVrT2IwaV9XMDBma0pMQU53ZF9LRUJiT01nWjJsdG5FZXhwUjNtZFp2Yy1NV3Q4dFRIeUxzV1pCWk9RMVVZNk1UbWxxMFdiNEdNTG5KSVBVWTRCaWFJSFNlT3RiMFF6RWtqN2pnRThTUU9GaHNfelhwV3RZTXdfMzJwUk1aVlFXZ0FBNk1qWFFmd2xIRWNVWVpmQl9DSkE2NnhMaXlJZ2FFeQ?oc=5",
+   "date": "2026-08-05 19:44"
+  },
+  {
+   "titre": "Israeli military strikes southern Lebanon after evacuation warning to village - Reuters",
+   "resume": "Israeli military strikes southern Lebanon after evacuation warning to village  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPSUNJWWdZUW9teWxlNDE2eWVZWTFmd0JQdmwwYUNvSEpES1BhMjBJNF9LczlwUTZkaTZjMm5MNFhEUFN1RnpZclZHamljVnlGcW5GdkFMclYyUjQ4dEpHRWwtNjJLdjNoNWx5YlU3Q1FIUmhoV1hxMktXNnZXanZLLW9YS1JjRGp6ZkNMbTNGOVlETVRSUGREMnZ5dDVhUjYyWlB1RzBwenhtUDg3dDdIYVpoTXBlN2dFWTkyVnJn?oc=5",
+   "date": "2026-08-05 19:17"
+  },
+  {
+   "titre": "Alphabet slumps on more AI brain drain. We're not too worried",
+   "resume": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
    "source": "CNBC",
-   "url": "https://www.cnbc.com/2026/08/04/chipotle-stock-falls-salmonella-outbreak-minnesota.html",
-   "date": "2026-08-04 17:54"
+   "url": "https://www.cnbc.com/2026/08/05/alphabet-is-slumping-on-the-departure-of-another-ai-exec.html",
+   "date": "2026-08-05 19:11"
+  },
+  {
+   "titre": "Flutter shares plummet on earnings miss and another key leadership change",
+   "resume": "FanDuel, Flutter's most important business, has been losing its dominance in market share in the United States.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/05/flutter-earnings-ceo-leadership-change-stock.html",
+   "date": "2026-08-05 18:20"
   }
  ],
- "genere_le": "2026-08-05 08:07 UTC"
+ "genere_le": "2026-08-05 21:37 UTC"
 }
