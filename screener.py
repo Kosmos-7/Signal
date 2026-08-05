@@ -1511,6 +1511,14 @@ def score_ticker(ticker, vix=None):
                         avant = (len(fonda["an"]), len(fonda["tr"]))
                         ed = edgar.chiffres(ticker)
                         if ed:
+                            # BPA déposés à l'époque → base d'actions actuelle
+                            # (sinon les PER pré-splits sortent absurdes).
+                            try:
+                                spl = [(str(ts.date()), float(v))
+                                       for ts, v in data.splits.items() if v and v > 0]
+                            except Exception:
+                                spl = []
+                            edgar.ajuster_eps_splits(ed, spl)
                             edgar.completer_fonda(fonda, ed)
                         gagne = (len(fonda["an"]) - avant[0], len(fonda["tr"]) - avant[1])
                         if any(gagne):

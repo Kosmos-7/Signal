@@ -178,6 +178,29 @@ def construire_fonda(ca_fr, rn_fr, eps_fr, max_an=12, max_tr=20):
     return {"an": an, "tr": tr}
 
 
+def ajuster_eps_splits(bloc, splits):
+    """Ramène les BPA « tels que déposés » dans la base d'actions ACTUELLE.
+
+    Un dépôt 10-K de 2015 publie le BPA de l'époque ; si l'action a été
+    divisée depuis (NVIDIA : 4:1 en 2021 puis 10:1 en 2024, ÷40 au total),
+    le cours ajusté d'aujourd'hui ne peut pas lui être rapporté — les PER
+    historiques sortaient à 0,4×. Chaque BPA est divisé par le produit des
+    ratios de splits survenus APRÈS sa date de clôture. splits : liste
+    [(date_iso, ratio)] (ratio 4.0 pour un 4:1). Pure, mutation en place."""
+    if not bloc or not splits:
+        return bloc
+    for e in bloc.get("an") or []:
+        if not e.get("eps"):
+            continue
+        facteur = 1.0
+        for d, ratio in splits:
+            if ratio and ratio > 0 and d > e["fin"]:
+                facteur *= ratio
+        if facteur != 1.0:
+            e["eps"] = round(e["eps"] / facteur, 4)
+    return bloc
+
+
 def _proches(a, b, jours=7):
     """Deux dates ISO à moins de `jours` d'écart (2023-12-30 vs 12-31…)."""
     from datetime import date

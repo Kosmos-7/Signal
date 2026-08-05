@@ -459,6 +459,21 @@ FY3 = {"an": [{"fin": "2024-12-31", "ca": 24000}], "tr": []}
 edgar.completer_fonda(FY3, LOIN)
 check("hypercroissance : un exercice lointain ×12 n'est PAS confondu avec une erreur",
       len(FY3["an"]) == 2)
+NVDAISH = {"an": [{"fin": "2015-01-25", "src": "edgar", "rn": 631, "eps": 1.14},
+                  {"fin": "2022-01-30", "src": "edgar", "rn": 9752, "eps": 3.91},
+                  {"fin": "2025-01-26", "src": "edgar", "rn": 72880, "eps": 2.94}],
+           "tr": []}
+edgar.ajuster_eps_splits(NVDAISH, [("2021-07-20", 4.0), ("2024-06-10", 10.0)])
+check("BPA 2015 ramené dans la base actuelle (÷40 : deux splits postérieurs)",
+      NVDAISH["an"][0]["eps"] == round(1.14 / 40, 4))
+check("BPA 2022 : seul le split de 2024 s'applique (÷10)",
+      NVDAISH["an"][1]["eps"] == round(3.91 / 10, 4))
+check("BPA postérieur au dernier split : intact",
+      NVDAISH["an"][2]["eps"] == 2.94)
+check("sans splits : aucun changement",
+      edgar.ajuster_eps_splits({"an": [{"fin": "2020-12-31", "eps": 5.0}]}, [])
+      ["an"][0]["eps"] == 5.0)
+
 check("dates voisines (30 vs 31 déc.) : doublon évité",
       len(edgar.completer_fonda(
           {"an": [{"fin": "2024-12-30", "ca": 24100}], "tr": []},
