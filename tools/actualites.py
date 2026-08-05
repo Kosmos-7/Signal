@@ -290,6 +290,34 @@ def _mots(nom):
     return frozenset(re.findall(r"[a-zà-ÿ]{3,}", os.path.splitext(nom)[0].lower()))
 
 
+# Vocabulaire générique des requêtes : ces mots matchent n'importe quoi dans la
+# recherche plein-texte de Commons (« Wall Street street sign » a rapporté une
+# plaque de rue de ministères londoniens, via « street sign » seul). Un
+# candidat n'est pertinent que s'il partage un mot DISTINCTIF de sa requête.
+GENERIQUES = frozenset(
+    "street sign board display stock exchange market trading floor building "
+    "headquarters tower towers district financial corporate office".split())
+
+
+def _pertinent(fichier, requete):
+    anc = _mots(requete) - GENERIQUES
+    return not anc or bool(_mots(fichier) & anc)
+
+
+def nettoyer_legende(fichier):
+    """Le nom de fichier Commons sert de légende faute de mieux, mais brut il
+    garde ses parenthèses d'archive, ses codes d'appareil (IMG 7517), ses
+    dates de tri en tête (« 06 2023 ... ») et se coupe en plein mot."""
+    l = re.sub(r"\s*\([^)]*\)\s*", " ", os.path.splitext(fichier)[0])
+    l = l.replace("_", " ")
+    l = re.sub(r"\b(?:IMG|DSCN?|DSCF|PXL|DJI|GOPR|LCCN)[ _-]?\d+\b", " ", l, flags=re.I)
+    l = re.sub(r"^\W*\d[\d\s./-]*", "", l)          # « 06 2023 ... » en tête
+    l = re.sub(r"\s+", " ", l).strip(" ,·-")
+    if len(l) > 70:
+        l = l[:70].rsplit(" ", 1)[0] + "…"
+    return l
+
+
 def choisir_candidats(candidats, deja):
     """Candidats (score, fichier, requête) triés, les images déjà parues
     écartées, AINSI QUE leurs quasi-doublons : Commons regorge de reprises
@@ -304,8 +332,11 @@ def choisir_candidats(candidats, deja):
         t = _mots(fichier)
         return bool(t) and any(len(t & v) / min(len(t), len(v)) >= 0.6 for v in vus)
     tri = sorted(candidats, reverse=True)
-    frais = [c for c in tri if c[1] not in deja and not meme_scene(c[1])]
-    return frais or tri
+    inedits = [c for c in tri if c[1] not in deja and not meme_scene(c[1])]
+    # Pertinence d'abord ; si elle vide le vivier (requête aux résultats tous
+    # hors sujet), on retombe sur les inédits plutôt que sur rien.
+    frais = [c for c in inedits if _pertinent(c[1], c[2])]
+    return frais or inedits or tri
 
 
 def illustrer(post_id, sujet, deja=frozenset()):
@@ -333,14 +364,8 @@ def illustrer(post_id, sujet, deja=frozenset()):
         except Exception as e:
             print(f"   photo ✗ {fichier[:50]} — {type(e).__name__}")
             continue
-        # Le nom de fichier Commons sert de legende faute de mieux, mais brut
-        # il se coupe en plein mot et garde ses numeros d'archive. On nettoie,
-        # et on coupe au dernier mot entier.
-        legende = re.sub(r"\s*\([^)]*\)\s*", " ", os.path.splitext(fichier)[0])
-        legende = re.sub(r"\s+", " ", legende.replace("_", " ")).strip()
-        if len(legende) > 70:
-            legende = legende[:70].rsplit(" ", 1)[0] + "…"
-        return {"src": f"{PHOTOS}/{post_id}.jpg", "v": v, "legende": legende,
+        return {"src": f"{PHOTOS}/{post_id}.jpg", "v": v,
+                "legende": nettoyer_legende(fichier),
                 "credit": (meta.get("auteur") or "").strip(),
                 "licence": meta["licence"], "page": meta["page"],
                 "fichier": fichier, "requete": req}

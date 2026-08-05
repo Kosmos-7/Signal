@@ -154,6 +154,29 @@ try:
                               {"New York Stock Exchange trading floor.jpg"})[0][1]
           == "Frankfurt Boerse display board.jpg")
 
+    # Le raté du 4 août : « Wall Street street sign » a rapporté une plaque de
+    # rue de ministères londoniens, appariée sur les seuls mots génériques.
+    check("un candidat sans mot distinctif de sa requête est écarté",
+          A.choisir_candidats(
+              [(9, "06 2023 King Charles Street, London IMG 7517.jpg",
+                "Wall Street street sign"),
+               (7, "Wall Street sign New York.jpg", "Wall Street street sign")],
+              frozenset())[0][1] == "Wall Street sign New York.jpg")
+    check("une requête toute générique n'applique pas le filtre",
+          A.choisir_candidats([(9, "Big Board of Trade.jpg",
+                                "stock exchange display board")],
+                              frozenset())[0][1] == "Big Board of Trade.jpg")
+    check("pertinence sans candidat : retomber sur les inédits, pas sur rien",
+          A.choisir_candidats([(9, "Random alley.jpg", "Wall Street street sign")],
+                              frozenset())[0][1] == "Random alley.jpg")
+    check("la légende perd dates de tri et codes d'appareil",
+          A.nettoyer_legende("06 2023 King Charles Street, London IMG 7517.jpg")
+          == "King Charles Street, London")
+    check("la légende garde les noms propres et coupe au mot entier",
+          A.nettoyer_legende("Trading floor, New York Stock Exchange, New York, "
+                             "New York LCCN2011630168.tif")
+          == "Trading floor, New York Stock Exchange, New York, New York")
+
     print("\n— Réillustration des posts publiés (photo seule, texte intact) —")
     A.ecrire_post({"id": "2026-08-06", "type": "quotidien", "date": "2026-08-06",
                    "titre": "T6", "chapeau": "C6", "sujet": "marches",
