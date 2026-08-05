@@ -1206,11 +1206,11 @@ function fondaRender(s){
   if(an.length<2&&tr.length<2){host.innerHTML='';return;}
   if(FD_MODE==='an'&&an.length<2)FD_MODE='tr';
   if(FD_MODE==='tr'&&tr.length<2)FD_MODE='an';
-  // `full` garde tout l'historique accumulé par les runs : les COMPARAISONS s'y
-  // font (un trimestre affiché se compare à son homologue N-1 même si celui-ci
-  // n'est plus affiché) ; `rows` ne borne que l'AFFICHAGE.
+  // On affiche TOUT l'historique accumulé (décision propriétaire du 05/08) :
+  // aujourd'hui ~4 exercices et ~5 trimestres (fenêtre Yahoo), et chaque run
+  // hebdomadaire en ajoute — la profondeur grandit toute seule avec le temps.
   const full=FD_MODE==='an'?an:tr, dev=F.devise||'?';
-  const rows=full.slice(FD_MODE==='an'?-5:-6);
+  const rows=full;
   const hasEb=rows.some(r=>r.eb!=null);
   // barres : CA et RN par période, dernière période en pleine intensité
   const W=800,H=170,PB=22,n=rows.length;
@@ -1219,13 +1219,17 @@ function fondaRender(s){
   const y0=8+(H-PB-16)*(maxV/(maxV-minV)), sc=(H-PB-16)/(maxV-minV);
   const slot=W/n, bw=Math.min(34,slot*0.22);
   let bars='<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="rgba(255,255,255,.10)"/>';
+  // Au-delà de 8 périodes les étiquettes se chevauchent : une sur deux, la
+  // dernière (période la plus récente) restant TOUJOURS étiquetée.
+  const step=n>8?2:1;
   rows.forEach((r,i)=>{
     const cx=slot*i+slot/2, last=(i===n-1), op=last?1:0.45;
     if(r.ca!=null){const h=r.ca*sc;
       bars+='<rect x="'+(cx-bw-2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="#74b6df" opacity="'+op+'"/>';}
     if(r.rn!=null){const h=r.rn*sc, neg=r.rn<0;
       bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':'#c6c6e0')+'" opacity="'+(neg?0.8:op*0.75)+'"/>';}
-    bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':'')+'>'+fdLabel(r.fin,FD_MODE)+'</text>';
+    if((n-1-i)%step===0)
+      bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':'')+'>'+fdLabel(r.fin,FD_MODE)+'</text>';
   });
   const cells=rows.map(r=>{
     const p=fdPrev(full,full.indexOf(r),FD_MODE);

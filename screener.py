@@ -425,15 +425,16 @@ def extraire_fondamentaux(df_annuel, df_trim, devise, max_an=5, max_tr=6):
     return {"devise": devise or "?", "an": an, "tr": tr}
 
 
-def fusionner_fonda(ancien, nouveau, max_an=8, max_tr=13):
+def fusionner_fonda(ancien, nouveau, max_an=12, max_tr=20):
     """Accumule l'historique des chiffres publiés entre les runs.
 
     Yahoo ne conserve que ~5 trimestres : sans mémoire, un trimestre sorti de
     sa fenêtre disparaîtrait du site, et la variation « vs même trimestre un
     an plus tôt » resterait éternellement cantonnée à la dernière ligne. On
     fusionne donc par date de clôture — le run le plus récent fait foi à date
-    égale (chiffres révisés par l'émetteur), bornes larges (8 exercices,
-    13 trimestres : de quoi comparer chaque trimestre affiché). Pure."""
+    égale (chiffres révisés par l'émetteur). Bornes larges (12 exercices,
+    20 trimestres, ~50 octets l'entrée) : le front affiche TOUT ce qui est
+    accumulé, la borne n'est qu'un garde-fou de croissance. Pure."""
     if not nouveau:
         return ancien or None
     if not ancien:

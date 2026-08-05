@@ -342,10 +342,10 @@ check("premier run (pas d'ancien) : le nouveau passe tel quel",
 check("extraction en échec : l'ancien historique n'est PAS perdu",
       screener.fusionner_fonda(ANCIEN, None) is ANCIEN)
 GROS = {"devise": "USD", "an": [],
-        "tr": [{"fin": f"20{20+i//4}-{(3*(i%4)+3):02d}-30", "ca": i} for i in range(20)]}
+        "tr": [{"fin": f"20{15+i//4}-{(3*(i%4)+3):02d}-30", "ca": i} for i in range(28)]}
 f = screener.fusionner_fonda(GROS, {"devise": "USD", "an": [], "tr": []})
-check("borne à 13 trimestres (de quoi comparer chaque ligne affichée)",
-      len(f["tr"]) == 13)
+check("garde-fou de croissance : 20 trimestres conservés au plus, les plus récents",
+      len(f["tr"]) == 20 and f["tr"][-1]["ca"] == 27)
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
