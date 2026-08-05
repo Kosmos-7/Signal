@@ -5,6 +5,31 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [3.12.0] — 2026-08-05
+
+### Les fiches montrent la trajectoire, plus seulement l'instant
+
+- **Nouvelle section « Chiffres publiés » sur chaque fiche** : CA, EBITDA et
+  résultat net des ~5 derniers exercices et ~6 derniers trimestres, barres +
+  table avec variations, bascule Annuel/Trimestres — le format des plateformes
+  de courtage. Le score photographie un instant (marges TTM, un trimestre de
+  croissance) ; la fiche montre désormais d'où vient la société.
+- Les montants sont affichés dans la **devise comptable** (`financialCurrency`),
+  pas celle de cotation : TSM cote en dollars et publie en dollars taïwanais,
+  on montre ce qui est publié, sans conversion silencieuse.
+- Variations honnêtes : exercice vs exercice précédent ; trimestre vs **même
+  trimestre un an plus tôt** (comparer T4 à T3 raconterait la saisonnalité).
+  Pas de pourcentage quand la base est négative ou absente. Un trimestre en
+  perte se voit : barre rouge sous la ligne de zéro.
+- Source : les états financiers yfinance (`income_stmt`), même robinet que le
+  reste du screener, toutes places de cotation — deux requêtes de plus par
+  titre, fail-soft, jamais bloquantes pour le score. Banques sans EBITDA :
+  la colonne disparaît, l'entrée reste.
+- Côté Actualités le même jour : rotation des illustrations (mémoire des
+  photos parues + filtre de quasi-doublons + filtre de pertinence des
+  requêtes Commons), mode maintenance `--reillustrer` (photo remplacée,
+  texte intact), et interdiction de l'humour sur les sujets graves.
+
 ## [3.11.0] — 2026-08-03
 
 ### Le plein écran revient, et se couche dans le bon sens

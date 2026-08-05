@@ -375,6 +375,56 @@ def _sample_series(s):
         pts[-1] = [_mois(last_ts), round(float(s.iloc[-1]), 2)]
     return pts
 
+# ── CHIFFRES PUBLIÉS (historique des états financiers) ──────────────────────
+# Le score photographie un instant (marges TTM, un trimestre de croissance) ;
+# la fiche doit montrer la TRAJECTOIRE publiée : CA, EBITDA et résultat net
+# des derniers exercices et trimestres, comme sur une plateforme de courtage.
+# Source : les états financiers yfinance (income_stmt), même robinet que le
+# reste — ~4-5 exercices et ~5-6 trimestres, toutes places de cotation.
+# ATTENTION devise : les états sont publiés dans la devise COMPTABLE
+# (financialCurrency), pas celle de cotation — TSM cote en USD et publie en
+# TWD. On stocke la devise comptable et le front l'affiche.
+
+def extraire_fondamentaux(df_annuel, df_trim, devise, max_an=5, max_tr=6):
+    """Bloc « chiffres publiés » pour charts/<TICKER>.json, en MILLIONS.
+
+    Pure (DataFrames yfinance en entrée, dict JSON-sûr en sortie), fail-soft :
+    lignes absentes tolérées (les banques n'ont pas d'EBITDA), None si rien.
+    Clés courtes ("ca", "eb", "rn") : le payload part sur le réseau.
+    """
+    def serie(df, noms):
+        if df is None or getattr(df, "empty", True):
+            return {}
+        for nom in noms:
+            if nom in df.index:
+                s = df.loc[nom]
+                if getattr(s, "ndim", 1) > 1:      # libellé dupliqué → 1re ligne
+                    s = s.iloc[0]
+                return {c: float(v) for c, v in s.dropna().items() if v == v}
+        return {}
+
+    def bloc(df, n):
+        ca = serie(df, ["Total Revenue", "Operating Revenue"])
+        eb = serie(df, ["EBITDA", "Normalized EBITDA"])
+        rn = serie(df, ["Net Income", "Net Income Common Stockholders"])
+        lignes = []
+        # L'axe du temps est celui du CA ou du RN (l'EBITDA seul ne fait pas
+        # une publication) ; ordre chronologique, bornés aux n plus récents.
+        for d in sorted(set(ca) | set(rn))[-n:]:
+            e = {"fin": str(d)[:10]}
+            if d in ca: e["ca"] = int(round(ca[d] / 1e6))
+            if d in eb: e["eb"] = int(round(eb[d] / 1e6))
+            if d in rn: e["rn"] = int(round(rn[d] / 1e6))
+            if len(e) > 1:
+                lignes.append(e)
+        return lignes
+
+    an, tr = bloc(df_annuel, max_an), bloc(df_trim, max_tr)
+    if not an and not tr:
+        return None
+    return {"devise": devise or "?", "an": an, "tr": tr}
+
+
 # ── ÉCLATEMENT DU PAYLOAD GRAPHIQUE (charts/<TICKER>.json) ───────────────────
 # POURQUOI un fichier par titre plutôt qu'un monolithe : le graphe pèse ~19 Ko
 # par titre. Tant qu'on n'en publiait que 30, un charts.json de 561 Ko passait.
@@ -1314,6 +1364,19 @@ def score_ticker(ticker, vix=None):
         except Exception as e:
             print(f"  ⚠️  {ticker}: payload graphique en échec ({type(e).__name__}) — graphe omis")
             chart = None
+
+        # ── Chiffres publiés (historique CA/EBITDA/RN) — même contrat fail-soft :
+        # deux requêtes Yahoo de plus par titre, jamais bloquantes pour le score.
+        if chart is not None:
+            try:
+                fonda = extraire_fondamentaux(
+                    data.income_stmt, data.quarterly_income_stmt,
+                    info.get("financialCurrency") or info.get("currency"))
+            except Exception as e:
+                print(f"  ⚠️  {ticker}: chiffres publiés en échec ({type(e).__name__}) — omis")
+                fonda = None
+            if fonda:
+                chart["fonda"] = fonda
 
         return {
             "ticker":        ticker,

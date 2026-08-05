@@ -264,6 +264,64 @@ if GARDE and GIT_ADD:
 
 shutil.rmtree(tmpdir, ignore_errors=True)
 
+# ── Chiffres publiés : extraire_fondamentaux (pur, duck-typing, sans pandas) ─
+print("\n— Chiffres publiés (extraire_fondamentaux) —")
+
+
+class FDF:
+    """Faux DataFrame yfinance : lignes {libellé: {date_iso: valeur}}."""
+    class _S:
+        ndim = 1
+        def __init__(self, d): self.d = d
+        def dropna(self): return self
+        def items(self):
+            return [(k, v) for k, v in self.d.items() if v is not None and v == v]
+
+    def __init__(self, rows):
+        self.rows, self.empty, self.index = rows, not rows, list(rows)
+        parent = self
+        self.loc = type("L", (), {"__getitem__":
+                                  lambda _s, k: FDF._S(parent.rows[k])})()
+
+
+AN = FDF({
+    "Total Revenue": {"2023-12-31": 22_000_000_000, "2024-12-31": 21_500_000_000,
+                      "2025-12-31": 20_900_000_000},
+    "EBITDA":        {"2023-12-31": 2_650_000_000, "2024-12-31": 2_860_000_000,
+                      "2025-12-31": 3_080_000_000},
+    "Net Income":    {"2023-12-31": 221_000_000, "2024-12-31": 162_000_000,
+                      "2025-12-31": 200_000_000},
+})
+f = screener.extraire_fondamentaux(AN, None, "EUR")
+check("bloc annuel : devise + lignes chronologiques",
+      f and f["devise"] == "EUR" and [e["fin"] for e in f["an"]]
+      == ["2023-12-31", "2024-12-31", "2025-12-31"])
+check("montants convertis en millions entiers",
+      f["an"][-1] == {"fin": "2025-12-31", "ca": 20900, "eb": 3080, "rn": 200})
+check("pas de trimestres → liste vide, pas d'erreur", f["tr"] == [])
+
+BANQUE = FDF({"Total Revenue": {"2025-12-31": 44_400_000_000},
+              "Net Income":    {"2025-12-31": 1_640_000_000}})
+f = screener.extraire_fondamentaux(BANQUE, None, "EUR")
+check("banque sans EBITDA : la ligne manque, l'entrée reste",
+      f["an"] == [{"fin": "2025-12-31", "ca": 44400, "rn": 1640}])
+
+f = screener.extraire_fondamentaux(FDF({}), FDF({}), "USD")
+check("aucune donnée → None (le front n'affiche rien)", f is None)
+
+TROUS = FDF({"Total Revenue": {"2024-12-31": 1_000_000_000, "2025-12-31": None},
+             "Net Income":    {"2025-12-31": -50_000_000}})
+f = screener.extraire_fondamentaux(TROUS, None, "USD")
+check("trous et pertes : CA absent toléré, RN négatif conservé",
+      f["an"] == [{"fin": "2024-12-31", "ca": 1000},
+                  {"fin": "2025-12-31", "rn": -50}])
+
+VIEUX = FDF({"Total Revenue": {f"20{i:02d}-12-31": i * 1e9 for i in range(10, 26)},
+             "Net Income":    {f"20{i:02d}-12-31": i * 1e8 for i in range(10, 26)}})
+f = screener.extraire_fondamentaux(VIEUX, None, "USD")
+check("borné aux 5 exercices les plus récents",
+      len(f["an"]) == 5 and f["an"][0]["fin"] == "2021-12-31")
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:

@@ -162,6 +162,18 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .chx-warn .chx-ic{flex:none;color:var(--gold);font-size:.95rem;margin-top:1px}
   .chx-warn b{color:var(--text)}
   .chx-note{font-size:.72rem;color:var(--text3);margin-top:.6rem;line-height:1.55}
+  /* ── Chiffres publiés (historique CA / EBITDA / résultat net) ── */
+  .fd-wrap{margin-top:1.7rem}
+  .fd-ctrl{display:flex;gap:8px;align-items:center;margin:8px 0 10px;flex-wrap:wrap}
+  .fd-svg{display:block;width:100%;height:auto;margin:2px 0 8px}
+  .fd-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8rem}
+  .fd-table th{font:600 .58rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);text-align:right;padding:4px 0 6px;border-bottom:1px solid var(--line);font-weight:600}
+  .fd-table th:first-child{text-align:left}
+  .fd-table td{padding:8px 0;border-bottom:1px solid var(--line);text-align:right;color:var(--text2);white-space:nowrap}
+  .fd-table td:first-child{text-align:left;color:var(--text)}
+  .fd-d{font-size:.7rem;display:block;margin-top:2px}
+  .fd-d.up{color:var(--green)}.fd-d.dn{color:var(--red)}
+  @media (max-width:640px){ .fd-table{font-size:.7rem} .fd-d{font-size:.62rem} }
   @media(max-width:900px){
     /* tactile : poignées du double curseur ≥ 20px */
     .chx-slider{height:44px}
@@ -872,7 +884,7 @@ function buildChart(s){
       const nm=document.querySelector('.d-nm');
       if(nm&&s.breakdown.nom_complet)nm.textContent=s.breakdown.nom_complet+' · '+(s.sector||'');
     }
-    drawChart(s); });
+    drawChart(s); fondaRender(s); });
 }
 function drawChart(s){
   const host=document.getElementById('chartsec'); if(!host)return;
@@ -1150,6 +1162,83 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
     }
   });
 }
+/* ── Chiffres publiés : historique CA / EBITDA / résultat net ──────────────
+   Données du bloc "fonda" de charts/<TICKER>.json (montants en MILLIONS, dans
+   la devise COMPTABLE — TSM cote en dollars et publie en dollars taïwanais,
+   on affiche ce qui est publié, pas une conversion silencieuse). Variations :
+   exercice vs exercice précédent ; trimestre vs MÊME trimestre un an plus tôt
+   (comparer T4 à T3 raconterait la saisonnalité, pas la trajectoire). */
+let FD_MODE='an';
+const FD_SYM={USD:'$',EUR:'€',GBP:'£',JPY:'¥',KRW:'₩',TWD:'NT$',CHF:'CHF',SEK:'kr',DKK:'kr',NOK:'kr'};
+function fdMoney(v,dev){
+  if(v==null)return '—';
+  const sym=FD_SYM[dev]||(dev+' '), a=Math.abs(v);
+  const n=(x,d)=>x.toLocaleString('fr-FR',{minimumFractionDigits:d,maximumFractionDigits:d});
+  if(a>=1e5)return n(v/1e3,0)+' Md'+sym;         // 45 000 Md¥ (Japon, Corée)
+  if(a>=1e3)return n(v/1e3,1)+' Md'+sym;         // 32,7 Md€ — la décimale compte
+  return n(v,0)+' M'+sym;
+}
+function fdDelta(cur,prev,champ){
+  if(!prev||cur[champ]==null||prev[champ]==null||prev[champ]===0)return '';
+  // Base négative : « +12 % » entre deux pertes serait un contresens, on se tait.
+  if(prev[champ]<0)return '';
+  const p=(cur[champ]/prev[champ]-1)*100;
+  if(!isFinite(p))return '';
+  return '<span class="fd-d '+(p>=0?'up':'dn')+'">'+(p>=0?'▲':'▼')+' '+Math.abs(p).toFixed(p>=99.5?0:1).replace('.',',')+' %</span>';
+}
+function fdLabel(iso,mode){
+  const [y,m]=iso.split('-').map(Number);
+  return mode==='an'?String(y):'T'+(Math.floor((m-1)/3)+1)+' '+String(y).slice(2);
+}
+function fdPrev(arr,i,mode){
+  if(mode==='an')return arr[i-1]||null;
+  // même trimestre un an plus tôt, retrouvé par la date (les trous existent)
+  const d0=new Date(arr[i].fin);
+  return arr.find(p=>{const j=(d0-new Date(p.fin))/864e5;return j>330&&j<400;})||null;
+}
+function fondaRender(s){
+  const host=document.getElementById('fondasec'); if(!host)return;
+  const D=CH[s.ticker], F=D&&D.fonda;
+  const an=(F&&F.an)||[], tr=(F&&F.tr)||[];
+  if(an.length<2&&tr.length<2){host.innerHTML='';return;}
+  if(FD_MODE==='an'&&an.length<2)FD_MODE='tr';
+  if(FD_MODE==='tr'&&tr.length<2)FD_MODE='an';
+  const rows=FD_MODE==='an'?an:tr, dev=F.devise||'?';
+  const hasEb=rows.some(r=>r.eb!=null);
+  // barres : CA et RN par période, dernière période en pleine intensité
+  const W=800,H=170,PB=22,n=rows.length;
+  const maxV=Math.max(...rows.map(r=>Math.max(r.ca||0,r.rn||0,1)));
+  const minV=Math.min(0,...rows.map(r=>Math.min(r.rn==null?0:r.rn,0)));
+  const y0=8+(H-PB-16)*(maxV/(maxV-minV)), sc=(H-PB-16)/(maxV-minV);
+  const slot=W/n, bw=Math.min(34,slot*0.22);
+  let bars='<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="rgba(255,255,255,.10)"/>';
+  rows.forEach((r,i)=>{
+    const cx=slot*i+slot/2, last=(i===n-1), op=last?1:0.45;
+    if(r.ca!=null){const h=r.ca*sc;
+      bars+='<rect x="'+(cx-bw-2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="#74b6df" opacity="'+op+'"/>';}
+    if(r.rn!=null){const h=r.rn*sc, neg=r.rn<0;
+      bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':'#c6c6e0')+'" opacity="'+(neg?0.8:op*0.75)+'"/>';}
+    bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':'')+'>'+fdLabel(r.fin,FD_MODE)+'</text>';
+  });
+  const cells=rows.map((r,i)=>{
+    const p=fdPrev(rows,i,FD_MODE);
+    return '<tr><td>'+fdLabel(r.fin,FD_MODE)+'</td>'+
+      '<td>'+fdMoney(r.ca,dev)+fdDelta(r,p,'ca')+'</td>'+
+      (hasEb?'<td>'+fdMoney(r.eb,dev)+fdDelta(r,p,'eb')+'</td>':'')+
+      '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td></tr>';
+  }).reverse().join('');
+  host.innerHTML='<div class="fd-wrap"><div class="qh">Chiffres publiés</div>'+
+    '<div class="fd-ctrl">'+
+      '<button class="chx-pbtn'+(FD_MODE==='an'?' on':'')+'" data-fd="an"'+(an.length<2?' disabled':'')+'>Annuel</button>'+
+      '<button class="chx-pbtn'+(FD_MODE==='tr'?' on':'')+'" data-fd="tr"'+(tr.length<2?' disabled':'')+'>Trimestres</button>'+
+      '<span class="chx-rlbl">publié en '+sv(dev)+'</span></div>'+
+    '<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
+    '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net</div>'+
+    '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table>'+
+    '<div class="chx-note">Chiffres publiés par la société ('+(FD_MODE==='an'?'exercices fiscaux':'trimestres')+'), montants dans la devise comptable. Variation : '+(FD_MODE==='an'?'vs exercice précédent':'vs même trimestre un an plus tôt')+'.</div></div>';
+  host.querySelectorAll('[data-fd]').forEach(b=>b.addEventListener('click',()=>{
+    if(b.disabled)return;FD_MODE=b.dataset.fd;fondaRender(s);}));
+}
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
 function periodNote(b){ const p=qLabel(b&&b.mrq); const ca=p?'dernier trimestre publié ('+p.q+')':'dernier trimestre publié'; const ttm=p?' au '+p.d:''; return 'Fondamentaux, CA : '+ca+' en glissement annuel (a/a) · marges nette &amp; FCF : 12 mois glissants (TTM)'+ttm+'.'; }
 /* Fiche d'un titre thématique hors watchlist principale : universe.json ne
@@ -1245,6 +1334,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div id="chartsec"></div>'+
+    '<div id="fondasec"></div>'+
     '<div id="dzone">'+dataZone(s,b,compact)+'</div>'+
     prose+
     (bb?sec('Bull vs Bear',bb,'bbsec'):'');
