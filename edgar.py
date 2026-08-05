@@ -109,13 +109,19 @@ def series_frames(doc, unite):
     return out
 
 
-def premiere_serie(docs, unite):
-    """Première série non vide parmi les alias de balises (ordre de préférence)."""
-    for doc in docs:
-        s = series_frames(doc, unite)
-        if s:
-            return s
-    return {}
+def fusion_series(series_liste):
+    """Union de séries {frame: (fin, val)} issues des ALIAS d'une même balise.
+
+    Les émetteurs changent de concept au fil des normes : NVIDIA dépose son CA
+    sous SalesRevenueNet jusqu'en 2017 puis RevenueFromContractWithCustomer…
+    ensuite. S'arrêter au premier alias non vide tronquait l'historique (2015
+    et 2016 sans CA). Priorité au premier alias de la liste sur un frame en
+    conflit — l'ordre des alias est l'ordre de préférence."""
+    out = {}
+    for s in series_liste:
+        for fr, v in s.items():
+            out.setdefault(fr, v)
+    return out
 
 
 def construire_fonda(ca_fr, rn_fr, eps_fr, max_an=12, max_tr=20):
@@ -254,12 +260,12 @@ def chiffres(ticker, pause=0.12):
     docs = {}
     for nom, tags in (("ca", TAGS_CA), ("rn", TAGS_RN), ("eps", TAGS_EPS)):
         unite = "USD/shares" if nom == "eps" else "USD"
-        serie = {}
+        # TOUS les alias sont lus puis fusionnés : les émetteurs changent de
+        # balise au fil des normes, chaque époque vit sous la sienne.
+        series = []
         for tag in tags:
             doc = concept(cik, tag)
             time.sleep(pause)
-            serie = series_frames(doc, unite)
-            if serie:
-                break
-        docs[nom] = serie
+            series.append(series_frames(doc, unite))
+        docs[nom] = fusion_series(series)
     return construire_fonda(docs["ca"], docs["rn"], docs["eps"])

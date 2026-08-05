@@ -471,6 +471,11 @@ FY3 = {"an": [{"fin": "2024-12-31", "ca": 24000}], "tr": []}
 edgar.completer_fonda(FY3, LOIN)
 check("hypercroissance : un exercice lointain ×12 n'est PAS confondu avec une erreur",
       len(FY3["an"]) == 2)
+check("les alias d'une balise fusionnent, priorité au premier sur conflit",
+      edgar.fusion_series([{"CY2020": ("2020-12-31", 100)},
+                           {"CY2015": ("2015-12-31", 40), "CY2020": ("2020-12-31", 999)}])
+      == {"CY2020": ("2020-12-31", 100), "CY2015": ("2015-12-31", 40)})
+
 NVDAISH = {"an": [{"fin": "2015-01-25", "src": "edgar", "rn": 631, "eps": 1.14},
                   {"fin": "2022-01-30", "src": "edgar", "rn": 9752, "eps": 3.91},
                   {"fin": "2025-01-26", "src": "edgar", "rn": 72880, "eps": 2.94}],

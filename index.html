@@ -1149,8 +1149,11 @@ function fdSynthese(an){
   }
   const pers=an.filter(r=>r.per!=null).map(r=>r.per);
   if(pers.length>=4){
-    const moy=pers.reduce((a,v)=>a+v,0)/pers.length;
-    ph.push('Le marché a payé ces bénéfices <b>'+Math.round(moy)+'× en moyenne</b> sur la période (de '
+    // Médiane et non moyenne : une seule année de bulle (NVIDIA 2021 : 300×)
+    // écrase une moyenne, la médiane dit le multiple TYPIQUE de la période.
+    const srt=pers.slice().sort((a,b)=>a-b), n=srt.length;
+    const med=n%2?srt[(n-1)/2]:(srt[n/2-1]+srt[n/2])/2;
+    ph.push('Le marché a payé ces bénéfices <b>'+Math.round(med)+'× en médiane</b> sur la période (de '
       +Math.round(Math.min(...pers))+'× à '+Math.round(Math.max(...pers))+'×).');
   }
   return ph;
