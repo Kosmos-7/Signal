@@ -979,6 +979,12 @@ def score_ticker(ticker, vix=None):
         # dropna, MM21/MM200/RSI deviennent NaN et le titre est écarté à tort
         # (incident du 27/07/2026 : les 94 titres US évincés, watchlist 100% EU).
         close  = hist["Close"].squeeze().dropna()
+        # Un cours nul ou NÉGATIF est toujours un artefact (ajustements Yahoo
+        # aberrants sur l'historique lointain : 35 barres négatives sur
+        # 000660.KS en 2000, deux zéros sur CS.PA). L'échelle log du front ne
+        # peut pas les montrer et un seul point rendait le graphe MAX
+        # invisible — écartés à la source, en plus de la défense côté front.
+        close  = close[close > 0]
         volume = hist["Volume"].squeeze().reindex(close.index).fillna(0)
         if len(close) < 50:
             return None
