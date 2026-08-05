@@ -153,6 +153,9 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .fd-d.up{color:var(--green)}.fd-d.dn{color:var(--red)}
   .fd-est td{color:var(--text3)}
   .fd-est td:first-child{color:var(--text3);font-style:italic}
+  .fd-syn{font-size:.85rem;color:var(--text2);line-height:1.65;margin:6px 0 14px;border-left:2px solid rgba(116,182,223,.35);padding-left:12px}
+  .fd-syn p{margin:0 0 5px}
+  .fd-syn b{color:var(--text)}
   @media (max-width:640px){ .fd-table{font-size:.7rem} .fd-d{font-size:.62rem} }
   @media(max-width:900px){
     /* tactile : poignées du double curseur ≥ 20px */
@@ -1112,6 +1115,46 @@ function fdPrev(arr,i,mode){
   const d0=new Date(arr[i].fin);
   return arr.find(p=>{const j=(d0-new Date(p.fin))/864e5;return j>330&&j<400;})||null;
 }
+/* Phrases de synthèse (décision propriétaire du 06/08) : la table donne les
+   points, ces phrases donnent la TRAJECTOIRE — TCAm du CA avec ses années de
+   baisse, marge nette moyenne et son évolution, multiple moyen réellement payé.
+   Règles : purement factuel (aucun « solide » ou « excellent », le lecteur
+   juge) ; chaque phrase exige assez d'exercices pour ne pas sur-affirmer
+   (≥ 4) ; une période avec pertes dit ses pertes, pas une marge moyenne qui
+   les maquillerait. Pur : ne lit que les exercices publiés. */
+function fdSynthese(an){
+  const fr=v=>v.toFixed(1).replace('.',',');
+  const ph=[];
+  const cas=an.filter(r=>r.ca>0);
+  if(cas.length>=4){
+    const n=cas.length,y0=+cas[0].fin.slice(0,4),y1=+cas[n-1].fin.slice(0,4);
+    let baisse=0;for(let i=1;i<n;i++)if(cas[i].ca<cas[i-1].ca)baisse++;
+    if(y1>y0){
+      const tcam=(Math.pow(cas[n-1].ca/cas[0].ca,1/(y1-y0))-1)*100;
+      ph.push('Sur les '+n+' derniers exercices publiés ('+y0+'-'+y1+'), le chiffre d\'affaires a '
+        +(tcam>=0?'progressé':'reculé')+' de <b>'+fr(Math.abs(tcam))+' % par an</b> en moyenne, '
+        +(baisse===0?'sans exercice de baisse.':'avec '+baisse+' exercice'+(baisse>1?'s':'')+' de baisse.'));
+    }
+  }
+  const marges=an.filter(r=>r.ca>0&&r.rn!=null);
+  if(marges.length>=4){
+    const pertes=marges.filter(r=>r.rn<0).length;
+    if(pertes){
+      ph.push('La période compte <b>'+pertes+' exercice'+(pertes>1?'s':'')+' en perte</b>.');
+    }else{
+      const m=marges.map(r=>r.rn/r.ca*100);
+      ph.push('Marge nette moyenne de <b>'+fr(m.reduce((a,v)=>a+v,0)/m.length)+' %</b>, passée de '
+        +fr(m[0])+' % à '+fr(m[m.length-1])+' % entre le premier et le dernier exercice.');
+    }
+  }
+  const pers=an.filter(r=>r.per!=null).map(r=>r.per);
+  if(pers.length>=4){
+    const moy=pers.reduce((a,v)=>a+v,0)/pers.length;
+    ph.push('Le marché a payé ces bénéfices <b>'+Math.round(moy)+'× en moyenne</b> sur la période (de '
+      +Math.round(Math.min(...pers))+'× à '+Math.round(Math.max(...pers))+'×).');
+  }
+  return ph;
+}
 function fondaRender(s){
   const host=document.getElementById('fondasec'); if(!host)return;
   const D=CH[s.ticker], F=D&&D.fonda;
@@ -1170,6 +1213,7 @@ function fondaRender(s){
       '<span class="chx-rlbl">publié en '+sv(dev)+'</span></div>'+
     '<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net</div>'+
+    (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th>'+(hasPer?'<th>PER</th>':'')+'</tr>'+cells+'</table>'+
     '<div class="chx-note">Chiffres publiés par la société ('+(FD_MODE==='an'?'exercices fiscaux':'trimestres')+'), montants dans la devise comptable. Variation : '+(FD_MODE==='an'?'vs exercice précédent':'vs même trimestre un an plus tôt — affichée dès que ce trimestre de comparaison est connu, l\'historique s\'approfondit à chaque mise à jour hebdomadaire')+'.'
     +(hasPer?' PER : cours de clôture de l\'exercice / BPA dilué publié. Lignes « e » : cours actuel / BPA moyen estimé par les analystes — des estimations, pas des publications.':'')
