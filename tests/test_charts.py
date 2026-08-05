@@ -397,6 +397,18 @@ f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": [],
                              {"devise": "USD", "an": [], "tr": []})
 check("estimations PER : le run muet n'efface pas les précédentes",
       f["pe_prev"] == [{"exercice": 2026, "per": 30.0}])
+# Le cas ON : l'ancien run datait le trimestre au 31/03 (EDGAR), le nouveau au
+# 04/04 (Yahoo, calendrier fiscal 52/53 semaines) — même trimestre, deux dates.
+f = screener.fusionner_fonda(
+    {"devise": "USD", "an": [], "tr": [{"fin": "2025-03-31", "ca": 1400, "src": "edgar"}]},
+    {"devise": "USD", "an": [], "tr": [{"fin": "2025-04-04", "ca": 1402}]})
+check("dates voisines entre runs : une seule entrée, le run courant fait foi",
+      f["tr"] == [{"fin": "2025-04-04", "ca": 1402}])
+f = screener.fusionner_fonda(
+    {"devise": "USD", "an": [], "tr": [{"fin": "2025-03-28", "ca": 1}, {"fin": "2025-04-02", "ca": 2}]},
+    {"devise": "USD", "an": [], "tr": []})
+check("deux anciennes voisines : la plus récente survit",
+      f["tr"] == [{"fin": "2025-04-02", "ca": 2}])
 
 print("\n— EDGAR : parsing des dépôts SEC (pur, hors ligne) —")
 import edgar                                                     # noqa: E402

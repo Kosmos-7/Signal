@@ -389,10 +389,16 @@ def _sample_series(s):
     if len(mensuel) and len(hebdo):
         mensuel = mensuel[mensuel.index < hebdo.index[0]]
     combined = pd.concat([mensuel, hebdo])
-    pts = [[_mois(ts), round(float(v), 2)] for ts, v in combined.items()]
+    # Arrondi ADAPTATIF : round(v, 2) écrasait en 0.0 les cours ajustés
+    # minuscules de l'historique lointain (AXA 1990 : 0,004 € après 35 ans
+    # d'ajustements de dividendes) — et un zéro est invisible sur une échelle
+    # log. Sous 1, on garde 4 décimales ; le filtre close>0 en amont a déjà
+    # écarté les vrais artefacts.
+    _r = lambda v: round(float(v), 2 if v >= 1 else 4)
+    pts = [[_mois(ts), _r(v)] for ts, v in combined.items()]
     if pts:
         # Ré-étiquetage du dernier point à la date réelle de la dernière barre quotidienne
-        pts[-1] = [_mois(last_ts), round(float(s.iloc[-1]), 2)]
+        pts[-1] = [_mois(last_ts), _r(s.iloc[-1])]
     return pts
 
 # ── CHIFFRES PUBLIÉS (historique des états financiers) ──────────────────────
@@ -503,11 +509,29 @@ def fusionner_fonda(ancien, nouveau, max_an=12, max_tr=20):
         return ancien or None
     if not ancien:
         return nouveau
+    from datetime import date as _date
+
+    def _j(iso):
+        return _date(*map(int, iso.split("-"))).toordinal()
+
     out = {"devise": nouveau.get("devise") or ancien.get("devise")}
     for cle, borne in (("an", max_an), ("tr", max_tr)):
+        frais = {e["fin"] for e in (nouveau.get(cle) or [])}
         par_fin = {e["fin"]: e for e in (ancien.get(cle) or [])}
         par_fin.update({e["fin"]: e for e in (nouveau.get(cle) or [])})
-        out[cle] = [par_fin[k] for k in sorted(par_fin)][-borne:]
+        tri = [par_fin[k] for k in sorted(par_fin)]
+        # Dédoublonnage à ±7 jours ENTRE runs : Yahoo et EDGAR peuvent dater le
+        # même trimestre à quelques jours près selon le run (ON : 2025-03-31 vs
+        # 2025-04-04, calendrier fiscal en semaines de 52/53). À date proche,
+        # l'entrée du run COURANT fait foi ; à défaut, la plus récente.
+        dedup = []
+        for e in tri:
+            if dedup and _j(e["fin"]) - _j(dedup[-1]["fin"]) <= 7:
+                if e["fin"] in frais or dedup[-1]["fin"] not in frais:
+                    dedup[-1] = e
+                continue
+            dedup.append(e)
+        out[cle] = dedup[-borne:]
     # PER prévisionnels : ce sont des estimations COURANTES, le run le plus
     # récent fait foi ; à défaut (Yahoo muet un jour), on garde les anciennes,
     # leurs étiquettes d'exercice rendent tout vieillissement visible.
