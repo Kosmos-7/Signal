@@ -401,12 +401,14 @@ function loadChart(tk){
     .then(r=>r.ok?r.json():null).catch(()=>null)
     .then(d=>{CH[tk]=d;delete CHP[tk];return d;});
 }
-// Version de cache : la date du jour suffit, les données bougent au plus une
-// fois par jour ouvré. Évite un paramètre unique par requête, qui interdirait
-// toute mise en cache navigateur des ~190 fichiers.
-// CHV ne sert plus qu'aux fiches de graphique, mises a jour au run
-// hebdomadaire : la mettre en cache une journee est ici souhaitable.
-const CHV=new Date().toISOString().slice(0,10);
+// Version de cache : l'horodatage du DERNIER RUN (universe.updated_at), posé
+// au boot avant tout loadChart. La date du jour ne suffisait pas : un run
+// screener_seul en cours de journée republiait les fiches sous une URL déjà
+// en cache (?v=même date) et le navigateur servait l'ancienne version — la
+// section « Chiffres publiés » restait invisible le jour de sa sortie. Keyer
+// sur updated_at rend l'URL stable entre les runs (cache plein) et neuve dès
+// qu'un run publie (universe.json est lui-même toujours revalidé, Date.now()).
+let CHV=new Date().toISOString().slice(0,10);   // repli si universe.json muet
 
 /* ── universe.json : homepage des watchlists + vues thématiques ──────────────
    Contrat : {updated_at, week, universe_declared, universe_scored,
@@ -456,6 +458,7 @@ Promise.all([
     U.themes=Array.isArray(un.themes)?un.themes:[];
     U.stocks=(un.stocks&&typeof un.stocks==='object')?un.stocks:{};
     U.week=un.week||'';U.updated_at=un.updated_at||'';
+    if(un.updated_at)CHV=encodeURIComponent(un.updated_at);   // fiches versionnées par run, plus par jour
     U.universe_declared=un.universe_declared;U.universe_scored=un.universe_scored;
     // Illustrations par activité : facultatif, un universe.json d'avant ce
     // champ laisse simplement les fiches sans image.
@@ -1203,7 +1206,11 @@ function fondaRender(s){
   if(an.length<2&&tr.length<2){host.innerHTML='';return;}
   if(FD_MODE==='an'&&an.length<2)FD_MODE='tr';
   if(FD_MODE==='tr'&&tr.length<2)FD_MODE='an';
-  const rows=FD_MODE==='an'?an:tr, dev=F.devise||'?';
+  // `full` garde tout l'historique accumulé par les runs : les COMPARAISONS s'y
+  // font (un trimestre affiché se compare à son homologue N-1 même si celui-ci
+  // n'est plus affiché) ; `rows` ne borne que l'AFFICHAGE.
+  const full=FD_MODE==='an'?an:tr, dev=F.devise||'?';
+  const rows=full.slice(FD_MODE==='an'?-5:-6);
   const hasEb=rows.some(r=>r.eb!=null);
   // barres : CA et RN par période, dernière période en pleine intensité
   const W=800,H=170,PB=22,n=rows.length;
@@ -1220,8 +1227,8 @@ function fondaRender(s){
       bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':'#c6c6e0')+'" opacity="'+(neg?0.8:op*0.75)+'"/>';}
     bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':'')+'>'+fdLabel(r.fin,FD_MODE)+'</text>';
   });
-  const cells=rows.map((r,i)=>{
-    const p=fdPrev(rows,i,FD_MODE);
+  const cells=rows.map(r=>{
+    const p=fdPrev(full,full.indexOf(r),FD_MODE);
     return '<tr><td>'+fdLabel(r.fin,FD_MODE)+'</td>'+
       '<td>'+fdMoney(r.ca,dev)+fdDelta(r,p,'ca')+'</td>'+
       (hasEb?'<td>'+fdMoney(r.eb,dev)+fdDelta(r,p,'eb')+'</td>':'')+
@@ -1235,7 +1242,7 @@ function fondaRender(s){
     '<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net</div>'+
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table>'+
-    '<div class="chx-note">Chiffres publiés par la société ('+(FD_MODE==='an'?'exercices fiscaux':'trimestres')+'), montants dans la devise comptable. Variation : '+(FD_MODE==='an'?'vs exercice précédent':'vs même trimestre un an plus tôt')+'.</div></div>';
+    '<div class="chx-note">Chiffres publiés par la société ('+(FD_MODE==='an'?'exercices fiscaux':'trimestres')+'), montants dans la devise comptable. Variation : '+(FD_MODE==='an'?'vs exercice précédent':'vs même trimestre un an plus tôt — affichée dès que ce trimestre de comparaison est connu, l\'historique s\'approfondit à chaque mise à jour hebdomadaire')+'.</div></div>';
   host.querySelectorAll('[data-fd]').forEach(b=>b.addEventListener('click',()=>{
     if(b.disabled)return;FD_MODE=b.dataset.fd;fondaRender(s);}));
 }

@@ -425,6 +425,27 @@ def extraire_fondamentaux(df_annuel, df_trim, devise, max_an=5, max_tr=6):
     return {"devise": devise or "?", "an": an, "tr": tr}
 
 
+def fusionner_fonda(ancien, nouveau, max_an=8, max_tr=13):
+    """Accumule l'historique des chiffres publiés entre les runs.
+
+    Yahoo ne conserve que ~5 trimestres : sans mémoire, un trimestre sorti de
+    sa fenêtre disparaîtrait du site, et la variation « vs même trimestre un
+    an plus tôt » resterait éternellement cantonnée à la dernière ligne. On
+    fusionne donc par date de clôture — le run le plus récent fait foi à date
+    égale (chiffres révisés par l'émetteur), bornes larges (8 exercices,
+    13 trimestres : de quoi comparer chaque trimestre affiché). Pure."""
+    if not nouveau:
+        return ancien or None
+    if not ancien:
+        return nouveau
+    out = {"devise": nouveau.get("devise") or ancien.get("devise")}
+    for cle, borne in (("an", max_an), ("tr", max_tr)):
+        par_fin = {e["fin"]: e for e in (ancien.get(cle) or [])}
+        par_fin.update({e["fin"]: e for e in (nouveau.get(cle) or [])})
+        out[cle] = [par_fin[k] for k in sorted(par_fin)][-borne:]
+    return out
+
+
 # ── ÉCLATEMENT DU PAYLOAD GRAPHIQUE (charts/<TICKER>.json) ───────────────────
 # POURQUOI un fichier par titre plutôt qu'un monolithe : le graphe pèse ~19 Ko
 # par titre. Tant qu'on n'en publiait que 30, un charts.json de 561 Ko passait.
@@ -491,6 +512,20 @@ def publier_charts(charts, a_publier, dossier=CHARTS_DIR, breakdowns=None):
         payload = charts[ticker]
         if breakdowns and ticker in breakdowns:
             payload = {**payload, "breakdown": breakdowns[ticker]}
+        # Chiffres publiés : fusion avec l'historique déjà sur disque — c'est
+        # ici que la mémoire s'accumule d'un run à l'autre (cf. fusionner_fonda).
+        # Fail-soft : un ancien fichier illisible ne bloque pas la publication.
+        if payload.get("fonda"):
+            try:
+                with open(chemin, encoding="utf-8") as anc:
+                    fusion = fusionner_fonda(json.load(anc).get("fonda"),
+                                             payload["fonda"])
+                if fusion:
+                    payload = {**payload, "fonda": fusion}
+            except FileNotFoundError:
+                pass
+            except Exception:
+                pass
         try:
             with open(tmp, "w", encoding="utf-8") as f:
                 json.dump(payload, f, ensure_ascii=False,

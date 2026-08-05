@@ -322,6 +322,31 @@ f = screener.extraire_fondamentaux(VIEUX, None, "USD")
 check("borné aux 5 exercices les plus récents",
       len(f["an"]) == 5 and f["an"][0]["fin"] == "2021-12-31")
 
+print("\n— Fusion de l'historique entre runs (fusionner_fonda) —")
+ANCIEN = {"devise": "USD",
+          "an": [{"fin": "2022-12-31", "ca": 100, "rn": 10}],
+          "tr": [{"fin": "2024-06-30", "ca": 25, "rn": 2},
+                 {"fin": "2024-09-30", "ca": 26, "rn": 3}]}
+NOUVEAU = {"devise": "USD",
+           "an": [{"fin": "2022-12-31", "ca": 101, "rn": 11},   # révisé
+                  {"fin": "2023-12-31", "ca": 110, "rn": 12}],
+           "tr": [{"fin": "2024-09-30", "ca": 26, "rn": 3},
+                  {"fin": "2025-09-30", "ca": 30, "rn": 4}]}
+f = screener.fusionner_fonda(ANCIEN, NOUVEAU)
+check("union par date : le trimestre sorti de la fenêtre Yahoo survit",
+      [e["fin"] for e in f["tr"]] == ["2024-06-30", "2024-09-30", "2025-09-30"])
+check("à date égale le run récent fait foi (chiffres révisés)",
+      f["an"][0] == {"fin": "2022-12-31", "ca": 101, "rn": 11})
+check("premier run (pas d'ancien) : le nouveau passe tel quel",
+      screener.fusionner_fonda(None, NOUVEAU) is NOUVEAU)
+check("extraction en échec : l'ancien historique n'est PAS perdu",
+      screener.fusionner_fonda(ANCIEN, None) is ANCIEN)
+GROS = {"devise": "USD", "an": [],
+        "tr": [{"fin": f"20{20+i//4}-{(3*(i%4)+3):02d}-30", "ca": i} for i in range(20)]}
+f = screener.fusionner_fonda(GROS, {"devise": "USD", "an": [], "tr": []})
+check("borne à 13 trimestres (de quoi comparer chaque ligne affichée)",
+      len(f["tr"]) == 13)
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:
