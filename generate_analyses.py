@@ -253,9 +253,12 @@ def stock_depuis_universe(ticker, u, labels):
         "themes": [labels.get(t, t) for t in (u.get("themes") or [])],
         "justification": "",
         "breakdown": {
-            "qualite":                 u.get("qualite"),
-            "valorisation":            u.get("valorisation"),
-            "timing":                  u.get("timing"),
+            # Blocs compacts de la note v4 (projetés par universe.json)
+            "q":                       u.get("q"),
+            "c":                       u.get("c"),
+            "v":                       u.get("v"),
+            "m":                       u.get("m"),
+            "couverture":              u.get("couverture"),
             "rsi":                     u.get("rsi"),
             "regression_z":            u.get("z"),
             "regression_window_years": u.get("fenetre"),
@@ -519,17 +522,23 @@ def fetch_news(ticker, limit=5):
 
 
 def _ligne_decomposition(b):
-    """Décomposition du score, en n'annonçant que les composantes réellement présentes.
+    """Décomposition de la note v4, en n'annonçant que les blocs réellement notés.
 
-    Le breakdown compact ne publie pas `analystes` : l'écrire « analystes ?/3 » ferait
-    croire à une donnée manquante alors qu'elle n'existe simplement pas à ce niveau.
+    Deux formes de breakdown coexistent : le riche (watchlist/charts) porte
+    breakdown["note"]["blocs"], le compact (universe.json) porte q/c/v/m à plat.
+    Un bloc à None est NON NOTABLE (retiré + renormalisé), pas nul — on ne
+    l'écrit pas, sans quoi le modèle commenterait un trou.
     """
+    blocs = (b.get("note") or {}).get("blocs") or {}
     morceaux = []
-    for cle, libelle, total in (("qualite", "qualité", 45), ("valorisation", "valorisation", 30),
-                                ("timing", "timing", 22), ("analystes", "analystes", 3)):
-        v = b.get(cle)
+    for cle, libelle, total in (("q", "qualité", 35), ("c", "croissance", 25),
+                                ("v", "valorisation", 25), ("m", "momentum", 15)):
+        v = (blocs.get(cle) or {}).get("pts") if blocs else b.get(cle)
         if v is not None:
-            morceaux.append(f"{libelle} {v}/{total}")
+            morceaux.append(f"{libelle} {v:g}/{total}")
+    couv = (b.get("note") or {}).get("couverture", b.get("couverture"))
+    if morceaux and couv is not None and couv < 100:
+        morceaux.append(f"couverture {couv}% (critères incalculables retirés, note renormalisée)")
     return "- Décomposition : " + " · ".join(morceaux) if morceaux else ""
 
 
@@ -588,11 +597,14 @@ def breakdown_block(stock, niveau):
             f"= TTM, 12 mois glissants · marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM"
         )
 
-    if any(b.get(k) is not None for k in ("forward_pe", "trailing_pe", "fcf_yield_pct", "peg")):
+    if any(b.get(k) is not None for k in ("forward_pe", "trailing_pe", "fcf_yield_pct")):
+        _peg_v4 = next((c.get("valeur") for c in ((b.get("note") or {}).get("criteres") or [])
+                        if c.get("id") == "peg" and c.get("pts") is not None), None)
         lines.append(
             f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward "
             f"{fmt(b.get('forward_pe'),'x',1)} · PER courant {fmt(b.get('trailing_pe'),'x',1)} · FCF yield "
-            f"{fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(b.get('peg'),'',2)} · z-score "
+            f"{fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(_peg_v4,'',2)} (maison : PER forward ÷ "
+            f"min(croissance attendue, démontrée)) · z-score "
             f"{fmt(b.get('regression_z'),'σ',1)}. NB : un PER courant nettement supérieur au PER forward "
             f"= bénéfices au creux de cycle (à expliquer, pas à confondre avec « cher »)."
         )

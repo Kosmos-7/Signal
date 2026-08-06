@@ -601,9 +601,12 @@ def fusionner_univers_achetable(watchlist, universe):
             "themes":   u.get("themes", []),
             "origine":  "theme",
             "breakdown": {
-                "qualite":      u.get("qualite"),
-                "valorisation": u.get("valorisation"),
-                "timing":       u.get("timing"),
+                # Blocs compacts de la note v4 (q/35, c/25, v/25, m/15 ; None = non notable)
+                "q":            u.get("q"),
+                "c":            u.get("c"),
+                "v":            u.get("v"),
+                "m":            u.get("m"),
+                "couverture":   u.get("couverture"),
                 "regression_z": u.get("z"),
                 "regression_window_years": u.get("fenetre"),
                 "decote_pct":   u.get("decote_pct"),
@@ -1168,7 +1171,7 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 13. **Réallocation (renforcement / allègement)** : tu peux ajuster la TAILLE d'une ligne existante, pas seulement ouvrir/fermer.
    - RENFORCER : une décision ACHAT sur un titre déjà détenu renforce la ligne — prix de revient moyen pondéré, la date de détention d'origine est conservée (le compteur des 90 jours ne repart pas). Plafond mécanique : la ligne ne peut jamais dépasser 20% du capital (Règle 02, appliquée en code). Renforce UNIQUEMENT sur des éléments NOUVEAUX (résultats publiés, thèse confirmée par des faits, décote accrue avec fonda intacts) — jamais pour « moyenner à la baisse » une position en perte sans catalyseur documenté (biais d'engagement classique).
    - ALLÉGER : une décision VENTE avec le champ optionnel `"allegement_pct"` (nombre entre 1 et 99) ne vend que ce pourcentage de la position, arrondi au titre entier. Le PFU ne s'applique qu'à la plus-value de la fraction vendue ; le PRU et la date d'origine de la ligne sont conservés. Si le reliquat vaudrait moins de 100€, la vente devient totale (anti-poussière). Un allègement reste une VENTE : Règle 01 (90j / conviction forte) et friction fiscale (Règle 10) s'appliquent pleinement. Usage typique : dégonfler une position qui approche les 20% après un fort rally, sans sortir de la thèse.
-14. **Décote/surcote vs tendance = information, JAMAIS un signal seul** : c'est l'écart du cours à sa droite de régression long terme (trajectoire historique — PAS une valeur intrinsèque), affiché dans la watchlist. Décote extrême (z < -2σ) : le marché price peut-être un changement STRUCTUREL du business — risque de value trap ; n'achète jamais sur la décote seule, exige des fondamentaux intacts (score qualité /45) et une thèse documentée. Surcote extrême (z > +2σ) : acheter ou renforcer revient à payer très au-dessus de la trajectoire historique — risque de rally chase, justification exceptionnelle requise. L'objectif consensus affiché porte un biais optimiste structurel documenté — ne le traite jamais comme un prix cible fiable.
+14. **Décote/surcote vs tendance = information, JAMAIS un signal seul** : c'est l'écart du cours à sa droite de régression long terme (trajectoire historique — PAS une valeur intrinsèque), affiché dans la watchlist. Décote extrême (z < -2σ) : le marché price peut-être un changement STRUCTUREL du business — risque de value trap ; n'achète jamais sur la décote seule, exige des fondamentaux intacts (bloc qualité /35 de la note) et une thèse documentée. Surcote extrême (z > +2σ) : acheter ou renforcer revient à payer très au-dessus de la trajectoire historique — risque de rally chase, justification exceptionnelle requise. L'objectif consensus affiché porte un biais optimiste structurel documenté — ne le traite jamais comme un prix cible fiable.
 
 ## DATE & MOMENT DU RUN
 - Run actuel       : {contexte.get('jour_semaine','?')} {today} {contexte.get('heure_utc','?')} UTC ({contexte.get('semaine','?')})
