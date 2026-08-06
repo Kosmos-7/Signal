@@ -153,6 +153,13 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .fd-d.up{color:var(--green)}.fd-d.dn{color:var(--red)}
   .fd-est td{color:var(--text3)}
   .fd-est td:first-child{color:var(--text3);font-style:italic}
+  /* Tables dépliables : le graphique d'abord, les chiffres si on veut. */
+  .fd-det{margin:8px 0 2px}
+  .fd-det summary{cursor:pointer;list-style:none;display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:5px;padding:3px 12px;user-select:none}
+  .fd-det summary::-webkit-details-marker{display:none}
+  .fd-det summary:hover{border-color:rgba(116,182,223,.35)}
+  .fd-det[open] summary{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
+  .fd-det .fd-table{margin-top:10px}
   .fd-syn{font-size:.85rem;color:var(--text2);line-height:1.65;margin:6px 0 14px;border-left:2px solid rgba(116,182,223,.35);padding-left:12px}
   .fd-syn p{margin:0 0 5px}
   .fd-syn b{color:var(--text)}
@@ -1143,12 +1150,6 @@ function fondaRender(s){
   const full=FD_MODE==='an'?an:tr, dev=F.devise||'?';
   const rows=full;
   const hasEb=rows.some(r=>r.eb!=null);
-  // PER : mode annuel seulement. Historique = cours de clôture de l'exercice /
-  // BPA dilué publié (absent pour les ADR : devise comptable ≠ cotation, le
-  // quotient serait un non-sens). Prévisionnel (lignes « e ») = cours actuel /
-  // BPA moyen estimé par les analystes — valide même pour un ADR, les
-  // estimations sont dans la devise de cotation.
-  const pePrev=(FD_MODE==='an'&&F.pe_prev)||[];
   // Étiquettes annuelles : un changement de calendrier fiscal (CDNS, début
   // janvier → fin décembre en 2011) fait coexister deux exercices clos la
   // même année civile — on les distingue par le mois plutôt que d'afficher
@@ -1156,7 +1157,6 @@ function fondaRender(s){
   const anDup={};if(FD_MODE==='an')rows.forEach(r=>{const y=r.fin.slice(0,4);anDup[y]=(anDup[y]||0)+1;});
   const MABR=['janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
   const lab=r=>{const b=fdLabel(r.fin,FD_MODE);return (FD_MODE==='an'&&anDup[r.fin.slice(0,4)]>1)?b+' ('+MABR[+r.fin.slice(5,7)-1]+')':b;};
-  const hasPer=FD_MODE==='an'&&(rows.some(r=>r.per!=null)||pePrev.length>0);
   const fmtPer=v=>v!=null?String(v).replace('.',',')+'×':'—';
   // barres : CA et RN par période, dernière période en pleine intensité
   const W=800,H=170,PB=22,n=rows.length;
@@ -1177,17 +1177,17 @@ function fondaRender(s){
     if((n-1-i)%step===0)
       bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':'')+'>'+lab(r)+'</text>';
   });
-  const cells=pePrev.slice().reverse().map(e=>
-    '<tr class="fd-est"><td>'+e.exercice+'e</td><td>—</td>'+(hasEb?'<td>—</td>':'')+'<td>—</td>'+
-    '<td>'+fmtPer(e.per)+'</td></tr>').join('')+
-    rows.map(r=>{
+  // La table des chiffres est DÉPLIABLE (décision propriétaire du 06/08 : le
+  // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
+  const openC=!!host.querySelector('#fd-det-c[open]'), openP=!!host.querySelector('#fd-det-p[open]');
+  const cells=rows.map(r=>{
     const p=fdPrev(full,full.indexOf(r),FD_MODE);
     return '<tr><td>'+lab(r)+'</td>'+
       '<td>'+fdMoney(r.ca,dev)+fdDelta(r,p,'ca')+'</td>'+
       (hasEb?'<td>'+fdMoney(r.eb,dev)+fdDelta(r,p,'eb')+'</td>':'')+
-      '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td>'+
-      (hasPer?'<td>'+fmtPer(r.per)+'</td>':'')+'</tr>';
+      '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td></tr>';
   }).reverse().join('');
+  const perB=fdPerChart(F,fmtPer);
   host.innerHTML='<div class="fd-wrap"><div class="qh">Chiffres publiés</div>'+
     '<div class="fd-ctrl">'+
       '<button class="chx-pbtn'+(FD_MODE==='an'?' on':'')+'" data-fd="an"'+(an.length<2?' disabled':'')+'>Annuel</button>'+
@@ -1196,14 +1196,59 @@ function fondaRender(s){
     '<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net</div>'+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
-    '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th>'+(hasPer?'<th>PER</th>':'')+'</tr>'+cells+'</table>'+
-    // Note pédagogique retirée (06/08, demande propriétaire : « pas de
-    // valeur ») — ne reste que la provenance SEC quand elle s'applique,
-    // c'est une information de source, pas une explication.
+    '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
+    '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table></details>'+
     (full.some(r=>r.src==='edgar')?'<div class="chx-note">Historique étendu par les dépôts officiels SEC (10-K/10-Q, EDGAR).</div>':'')
-    +'</div>';
+    +'</div>'+
+    (perB?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
+      '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane</div>'+
+      '<details class="fd-det" id="fd-det-p"'+(openP?' open':'')+'><summary>Dérouler les PER ▾</summary>'+
+      '<table class="fd-table" style="max-width:340px"><tr><th>Exercice</th><th>PER</th></tr>'+perB.lignes+'</table></details></div>':'');
   host.querySelectorAll('[data-fd]').forEach(b=>b.addEventListener('click',()=>{
     if(b.disabled)return;FD_MODE=b.dataset.fd;fondaRender(s);}));
+}
+/* Graphique dédié à l'évolution du PER (annuel par nature, indépendant de la
+   bascule Annuel/Trimestres) : multiples d'époque publiés en points pleins
+   reliés, les deux exercices estimés en points creux sur connecteur
+   pointillé, la médiane des publiés en ligne de référence. Échelle log quand
+   les extrêmes s'écartent de plus de 10× (une année à bénéfice quasi nul —
+   CSCO 2018 à 1691× — écraserait tout le reste en linéaire). Étiquettes
+   sélectives : premier, dernier, min, max et estimations ; le reste au survol. */
+function fdPerChart(F,fmtPer){
+  const pub=((F&&F.an)||[]).filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per,est:false}));
+  const est=((F&&F.pe_prev)||[]).map(p=>({an:p.exercice,per:p.per,est:true}));
+  const pts=pub.concat(est);
+  if(pub.length<2&&!(pub.length&&est.length))return null;
+  const W=800,H=190,ML=14,MR=64,MT=24,MB=22;
+  const vals=pts.map(p=>p.per);
+  const lo=Math.min(...vals),hi=Math.max(...vals);
+  const LOG=hi/Math.max(lo,0.1)>10;
+  const Y=v=>{if(LOG){const a=Math.log(lo),b=Math.log(hi);return MT+(1-(Math.log(v)-a)/((b-a)||1))*(H-MT-MB);}
+    return MT+(1-(v-lo)/((hi-lo)||1))*(H-MT-MB);};
+  const X=i=>ML+20+(pts.length>1?i*(W-ML-MR-40)/(pts.length-1):0);
+  let g='';
+  const s2=pub.map(p=>p.per).sort((a,b)=>a-b), nm=s2.length;
+  const med=nm?(nm%2?s2[(nm-1)/2]:(s2[nm/2-1]+s2[nm/2])/2):null;
+  if(med!=null){g+='<line x1="'+ML+'" x2="'+(W-MR+10)+'" y1="'+Y(med)+'" y2="'+Y(med)+'" stroke="rgba(198,198,224,.35)" stroke-dasharray="5 5"/>'
+    +'<text x="'+(W-MR+14)+'" y="'+(Y(med)+3)+'" class="chx-axis">méd. '+Math.round(med)+'×</text>';}
+  if(pub.length>1)g+='<polyline points="'+pub.map((p,i)=>X(i)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-linejoin="round"/>';
+  if(pub.length&&est.length)
+    g+='<polyline points="'+[pub.length-1].concat(est.map((_,j)=>pub.length+j)).map((idx,k)=>X(idx)+','+Y(k===0?pub[pub.length-1].per:est[k-1].per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
+  let iMin=0,iMax=0;pub.forEach((p,i)=>{if(p.per<pub[iMin].per)iMin=i;if(p.per>pub[iMax].per)iMax=i;});
+  const idxLab=new Set([0,pub.length-1,iMin,iMax]);
+  const stepX=pts.length>8?2:1;
+  pts.forEach((p,i)=>{
+    const cx=X(i),cy=Y(p.per);
+    g+=p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"><title>'+p.an+'e : '+p.per+'×</title></circle>'
+            :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"><title>'+p.an+' : '+p.per+'×</title></circle>';
+    if(p.est||idxLab.has(i))
+      g+='<text x="'+cx+'" y="'+Math.max(11,cy-10)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.est?'#8a8aa6':'#c6c6e0')+'">'+Math.round(p.per)+'×</text>';
+    if((pts.length-1-i)%stepX===0)
+      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+'>'+String(p.an).slice(2)+(p.est?'e':'')+'</text>';
+  });
+  const lignes=est.slice().reverse().map(p=>'<tr class="fd-est"><td>'+p.an+'e</td><td>'+fmtPer(p.per)+'</td></tr>').join('')
+    +pub.slice().reverse().map(p=>'<tr><td>'+p.an+'</td><td>'+fmtPer(p.per)+'</td></tr>').join('');
+  return {svg:'<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',lignes:lignes};
 }
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
 // Élagage du 06/08 : les étiquettes des métriques portent déjà « a/a » et
