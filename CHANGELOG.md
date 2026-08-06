@@ -5,6 +5,46 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [4.1.0] — 2026-08-06
+
+### Les métiers de bilan cessent d'être notés sur moins de critères
+
+Le premier run v4 a fait remonter onze financières dans le top 30, contre
+cinq auparavant — la renormalisation faisait exactement son travail, en
+supprimant la pénalité artificielle que l'ancien barème infligeait aux
+banques dépourvues de flux de trésorerie disponible. Mais leur couverture
+moyenne restait à 89 % contre 93 % pour les autres titres : elles étaient
+jugées sur moins de critères, ce que la renormalisation compense sans le
+corriger.
+
+- **Nouveau critère « cours / actifs nets »** (5 pts, bloc Valorisation) :
+  pour les métiers de bilan uniquement, il REMPLACE le rendement du cash
+  (retiré à juste titre, sans objet) au lieu de laisser un trou. C'est le
+  multiple de référence des banques et assureurs, dont les fonds propres
+  ont une valeur économique réelle. Rampe continue : 5 pts à 0,8× les
+  actifs nets, 0 pt à 3×.
+- **Pourquoi une rampe simple et non une cloche** : un multiple bas peut
+  trahir un bilan douteux, mais ce jugement appartient déjà au bloc
+  Qualité (ROE sur rampe bancaire, constance). Le bloc Valorisation ne
+  répond qu'à « qu'est-ce que je paie » — y remettre de la qualité
+  compterait deux fois la même information et casserait la partition MECE.
+- **Source universelle**, sans l'asymétrie géographique d'EDGAR : Yahoo
+  publie le ratio pour toutes les places et toutes les devises. Publié
+  aussi tel quel dans le breakdown (`price_to_book`).
+- Effet : la valorisation des financières redevient pleinement mesurée,
+  quatre critères sur quatre. 10 tests ajoutés (52 au total sur le moteur).
+
+### Correctif d'exploitation
+
+- **Déploiement GitHub Pages** : les publications de 12h00 et 12h14 ont
+  échoué en `deployment_queued` puis expiré, deux déploiements concurrents
+  s'étant mutuellement bloqués — le site est resté trois commits en
+  arrière, servant les scores v3 alors que la v4 était publiée sur `main`.
+  Relancé manuellement. Leçon, symétrique de celle des runs de screener :
+  ne pas pousser deux commits à quelques minutes d'intervalle, et vérifier
+  la conclusion du déploiement plutôt que la présence du commit sur la
+  branche — ce dernier contrôle ne prouve rien.
+
 ## [4.0.0] — 2026-08-06
 
 ### Note v4 : la refonte du scoring — informer, pas prédire

@@ -1126,7 +1126,13 @@ def score_ticker(ticker, vix=None):
         market_cap   = info.get("marketCap") or 0
         debt_eq_raw  = info.get("debtToEquity")          # garde None pour distinguer net-cash (=0) vs missing
         reco         = info.get("recommendationMean") or 3.5
-        roe          = info.get("returnOnEquity")        # ROE — proxy qualité du capital (v3) ; None si absent
+        roe          = info.get("returnOnEquity")        # ROE — proxy qualité du capital ; None si absent
+        # Cours / actifs nets comptables — le multiple de référence des métiers
+        # de BILAN, où les fonds propres ont un sens économique réel. Il
+        # remplace le rendement du cash dans la note des banques et assureurs
+        # (cf. note_v4). Publié par Yahoo pour toutes les places, donc sans
+        # l'asymétrie géographique qu'aurait introduite une source US.
+        price_to_book = info.get("priceToBook")
 
         # Période de réf. des fondamentaux (dernier trimestre publié ; mostRecentQuarter = epoch s).
         # Temporalités Yahoo : rev_growth = trimestriel a/a (MRQ vs même trim. N-1) ;
@@ -1395,6 +1401,7 @@ def score_ticker(ticker, vix=None):
             # calcul sans jamais être montrés — les phrases de la note les citent).
             "roe_pct":               round(roe * 100, 1) if isinstance(roe, (int, float)) and roe == roe else None,
             "debt_eq_pct":           round(debt_eq_raw) if isinstance(debt_eq_raw, (int, float)) and debt_eq_raw == debt_eq_raw else None,
+            "price_to_book":         round(price_to_book, 2) if isinstance(price_to_book, (int, float)) and price_to_book == price_to_book else None,
             # Objectif de cours analystes (informationnel)
             "target_mean_price":     target_mean_price,
             "target_upside_pct":     target_upside_pct,
@@ -1504,6 +1511,7 @@ def score_ticker(ticker, vix=None):
             "fcf_yield_pct":  _n(fcf_yield),   # déjà gardé par la devise plus haut
             "roe":            _n(roe),
             "debt_eq":        _n(debt_eq_raw),
+            "price_to_book":  _n(price_to_book),
             # Banque/assurance au sens de la note : bilan financier SANS FCF
             # publié (JPM oui, Progressive non — l'assureur qui publie son FCF
             # est noté normalement). Le secteur seul ne suffit pas : il

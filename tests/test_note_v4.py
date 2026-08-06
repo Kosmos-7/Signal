@@ -89,13 +89,16 @@ check("la note ne publie pas de lettre (décision : /100 conservé)",
 
 print("\n— Banque (type JPM) : retraits + renormalisation du bloc —")
 ctx_b = dict(CTX_TEMOIN, banque=True, fcf_margin_pct=None, fcf_yield_pct=None,
-             roe=0.16, debt_eq=None, trailing_pe=12.0, forward_pe=11.0)
+             roe=0.16, debt_eq=None, trailing_pe=12.0, forward_pe=11.0,
+             price_to_book=1.4)
 nb = calcule_note(ctx_b)
 retires = {c["id"]: c["motif"] for c in nb["criteres"] if c["pts"] is None}
-check("conversion, bilan et rdt_cash retirés avec motif",
-      {"conversion", "bilan", "rdt_cash"} <= set(retires)
-      and all(retires[k] for k in ("conversion", "bilan", "rdt_cash")),
+check("conversion et bilan retirés avec motif",
+      {"conversion", "bilan"} <= set(retires)
+      and all(retires[k] for k in ("conversion", "bilan")),
       str(retires))
+check("le rendement du cash ne s'applique pas à un bilan bancaire",
+      not any(c["id"] == "rdt_cash" for c in nb["criteres"]))
 check("le ROE bancaire utilise la rampe 6-15 %",
       next(c for c in nb["criteres"] if c["id"] == "roe")["pts"] == 9.0)
 check("qualité renormalisée sur 35 malgré les retraits",
@@ -103,6 +106,42 @@ check("qualité renormalisée sur 35 malgré les retraits",
       and nb["blocs"]["q"]["dispo"] == 23)
 check("une banque rentable et bon marché reste bien notée (≥60)",
       nb["total"] >= 60, str(nb["total"]))
+
+print("\n— Cours / actifs nets : la mesure qui manquait aux métiers de bilan —")
+c_an = next(c for c in nb["criteres"] if c["id"] == "actifs_nets")
+check("le critère remplace le rendement du cash pour une banque",
+      c_an["pts"] is not None and c_an["max"] == 5 and c_an["bloc"] == "v")
+check("1,4× les actifs nets se note sur la rampe 3 → 0,8",
+      c_an["pts"] == rampe(1.4, 3, 0.8, 5), str(c_an["pts"]))
+check("la phrase énonce le multiple payé",
+      "actifs nets comptables" in c_an["phrase"], c_an["phrase"])
+check("valorisation pleinement mesurée : 4 critères sur 4",
+      nb["blocs"]["v"]["dispo"] == nb["blocs"]["v"]["max"],
+      f"{nb['blocs']['v']['dispo']}/{nb['blocs']['v']['max']}")
+# Le grief d'origine : une banque était jugée sur moins de critères que le reste
+c_ref = calcule_note(CTX_TEMOIN)["couverture"]
+check("la couverture d'une banque rejoint celle d'un industriel (écart ≤ 15 pts)",
+      c_ref - nb["couverture"] <= 15, f"{nb['couverture']}% vs {c_ref}%")
+# Moins cher = plus de points, la qualité du bilan étant notée ailleurs (MECE)
+cher = calcule_note(dict(ctx_b, price_to_book=3.5))
+bon  = calcule_note(dict(ctx_b, price_to_book=0.7))
+p_cher = next(c["pts"] for c in cher["criteres"] if c["id"] == "actifs_nets")
+p_bon  = next(c["pts"] for c in bon["criteres"] if c["id"] == "actifs_nets")
+check("3,5× les actifs nets → 0 point", p_cher == 0.0, str(p_cher))
+check("0,7× les actifs nets → 5 points", p_bon == 5.0, str(p_bon))
+# Sans la donnée, retrait motivé plutôt que zéro muet
+sans = calcule_note(dict(ctx_b, price_to_book=None))
+c_sans = next(c for c in sans["criteres"] if c["id"] == "actifs_nets")
+check("actifs nets absents : critère retiré avec motif",
+      c_sans["pts"] is None and c_sans["motif"], str(c_sans))
+# Le critère est réservé aux bilans financiers
+c_ind = calcule_note(CTX_TEMOIN)
+check("un industriel garde le rendement du cash, pas les actifs nets",
+      any(c["id"] == "rdt_cash" for c in c_ind["criteres"])
+      and not any(c["id"] == "actifs_nets" for c in c_ind["criteres"]))
+check("un cours/actifs nets négatif ou nul est refusé",
+      next(c["pts"] for c in calcule_note(dict(ctx_b, price_to_book=-0.5))["criteres"]
+           if c["id"] == "actifs_nets") is None)
 
 print("\n— Gardes de plausibilité et cas dégradés —")
 # NBIS : marges de holding aberrantes → le critère marge ne note pas

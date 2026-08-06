@@ -254,10 +254,30 @@ def calcule_note(ctx):
         ajoute("v", "rdt_benefices", 5, None, None, None,
                "bénéfices attendus négatifs ou inconnus")
 
+    # Quatrième critère de valorisation. Pour une activité de BILAN (banque,
+    # assureur), le FCF n'a pas de sens — mais renoncer à mesurer reviendrait à
+    # juger ces titres sur moins de critères que les autres, ce que la
+    # renormalisation compense sans le corriger. On leur substitue donc le
+    # multiple qui fait référence dans leur métier : le cours rapporté aux
+    # ACTIFS NETS comptables, dont la valeur est réelle pour un bilan là où
+    # elle est vide de sens pour un éditeur de logiciels.
+    #
+    # POURQUOI UNE RAMPE SIMPLE (« moins cher = mieux ») ET PAS UNE CLOCHE.
+    # Un multiple bas peut trahir un bilan que le marché juge douteux — mais
+    # la QUALITÉ de ce bilan est déjà notée ailleurs, dans le bloc Qualité
+    # (ROE sur rampe bancaire, constance des bénéfices). Le bloc Valorisation
+    # ne répond qu'à une seule question, « qu'est-ce que je paie » ; y
+    # réintroduire un jugement de qualité compterait la même information deux
+    # fois et violerait la partition MECE. C'est exactement le traitement déjà
+    # réservé au rendement des bénéfices.
     fy = ctx.get("fcf_yield_pct")
-    if banque:
-        ajoute("v", "rdt_cash", 5, None, None, None,
-               "le FCF n'a pas de sens pour un bilan bancaire")
+    pb = ctx.get("price_to_book")
+    if banque and pb is not None and pb > 0:
+        ajoute("v", "actifs_nets", 5, rampe(pb, 3, 0.8, 5), round(pb, 2),
+               f"Payée {_fr(pb, 2)} fois ses actifs nets comptables")
+    elif banque:
+        ajoute("v", "actifs_nets", 5, None, None, None,
+               "actifs nets comptables non publiés")
     elif fy is not None:
         ajoute("v", "rdt_cash", 5, rampe(fy, 1.5, 7, 5), round(fy, 2),
                f"L'entreprise génère {_fr(fy)} % de sa capitalisation en cash "
