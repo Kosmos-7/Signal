@@ -540,6 +540,35 @@ check("dates voisines (30 vs 31 déc.) : doublon évité",
           {"an": [{"fin": "2024-12-31", "src": "edgar", "ca": 24000}], "tr": []}
       )["an"]) == 1)
 
+# ── Intégration note v4 dans le screener ────────────────────────────────────
+print("\n— Note v4 : raison_sortie et projections lisent les nouveaux blocs —")
+BD_V4 = {"note": {"total": 41, "couverture": 88,
+                  "blocs": {"q": {"pts": 12.0, "max": 35, "dispo": 35},
+                            "c": {"pts": 8.0,  "max": 25, "dispo": 25},
+                            "v": {"pts": 15.0, "max": 25, "dispo": 25},
+                            "m": {"pts": 2.5,  "max": 15, "dispo": 15}},
+                  "criteres": []},
+         "cross_regime": "neutral", "regression_signal": "neutre", "rsi": 50}
+txt = screener.raison_sortie({"ticker": "XX", "score": 55},
+                             {"ticker": "XX", "score": 41, "breakdown": BD_V4})
+check("raison_sortie commente le momentum v4 (2,5/15)", "Momentum quasi-nul" in txt, txt)
+check("raison_sortie somme Q+C+V sur 85", "35/85" in txt, txt)
+BD_BANQUE = {"note": {"total": 70, "couverture": 81,
+                      "blocs": {"q": {"pts": 30.0, "max": 35, "dispo": 23},
+                                "c": {"pts": 14.0, "max": 25, "dispo": 25},
+                                "v": {"pts": 12.0, "max": 25, "dispo": 20},
+                                "m": {"pts": None, "max": 15, "dispo": 0}},
+                      "criteres": []},
+             "cross_regime": "neutral", "regression_signal": "neutre", "rsi": 50}
+txt2 = screener.raison_sortie({"ticker": "YY", "score": 72},
+                              {"ticker": "YY", "score": 70, "breakdown": BD_BANQUE})
+check("un bloc momentum non notable (None) n'est pas commenté",
+      "Momentum" not in txt2, txt2)
+check("l'ancien breakdown sans note ne fait pas planter raison_sortie",
+      isinstance(screener.raison_sortie({"ticker": "ZZ", "score": 50},
+                                        {"ticker": "ZZ", "score": 44,
+                                         "breakdown": {"qualite": 20}}), str))
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:

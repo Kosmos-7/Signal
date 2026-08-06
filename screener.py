@@ -8,18 +8,20 @@ Sources de données :
 
 Dépendances : pip install yfinance pandas ta numpy requests finnhub-python
 
-─── MODÈLE DE SCORING (100 pts, version v3 — commit 4868300) ────────────────
-Qualité      (45 pts) = Marge nette (8) + Marge FCF (8) + ROE (12)
-                       + Croissance CA plafonnée (10) + Dette/bilan (7)
-Valorisation (30 pts) = PEG (15) + FCF yield (15) — PER absolu exclu
-Timing       (22 pts) = Cross MM21/MM200 (10, = cross_score/2) + Pente MM21 (4)
-                       + Volume (3) + RSI (2) + Régression zone saine (3)
-                       → garde-fou : peu de points en positif, pénalités fortes
-Analystes    (3 pts)  = Reco consensus (signal lagging, cross-check mineur)
-Ajustements  Death Cross frais : −5 (≤30j) / −3 (≤60j)
-             CHASE (z>2.5σ : −6 | z>2σ + froth : −4)
-             Décote-qualité (z≤−2.5σ : +6 | z≤−2σ : +4, gate qualité ≥ 30/45)
-Hors score   val_pts (drawdown vs 52w high) et VIX : informationnels uniquement
+─── NOTE v4 (100 pts, 08/2026) — le moteur vit dans note_v4.py ──────────────
+Partition MECE par domaine de donnée, rampes CONTINUES partout, critère
+incalculable RETIRÉ avec motif + renormalisation (jamais de zéro muet) :
+Qualité      (35) = niveaux des comptes : marge médiane (9) + ROE (9)
+                    + conversion cash (7) + bilan (5) + constance (5)
+Croissance   (25) = dérivées des comptes : TCAM CA (7) + TCAM BPA (7)
+                    + régularité (4) + attendu analystes (7, borné ≤ démontré)
+Valorisation (25) = cours ÷ comptes : PER vs sa médiane d'époque (8)
+                    + PEG maison (7) + rdt bénéfices (5) + rdt cash (5)
+Momentum     (15) = cours ÷ cours : écart MM21/MM200 (6) + cloche z (6)
+                    + cloche RSI (3)
+Hors note    cross MM, val_pts (drawdown 52w), Fibonacci, VIX, consensus,
+             confiance Finnhub : informationnels (l'IC du timing v3 était
+             NÉGATIF, −0,33 — mesuré sur 24 archives hebdomadaires)
 
 Annotation chartiste (informationnelle, hors scoring) :
   Retracement Fibonacci sur le dernier rally identifié — niveaux 23.6/38.2/50/61.8/78.6
@@ -50,6 +52,7 @@ from datetime import date, timedelta, datetime as _dt, timezone as _tz
 
 import themes   # taxonomie des watchlists thématiques (source unique de vérité)
 import edgar    # dépôts SEC : historique officiel des chiffres publiés (US)
+import note_v4  # moteur de notation v4 : grille MECE, rampes continues, retraits motivés
 from ta.momentum import RSIIndicator
 
 # Paramètres centralisés (VIX dampener, etc.) — Phase 2
@@ -926,7 +929,7 @@ def generer_justification(nom, score, details, alertes):
         zone_str = f", {fibo_zone}" if fibo_zone and "Fibo" in fibo_zone else ""
         points.append(f"pullback sain {dd52w:+.1f}% sous le top 52w (zone d'entrée favorable{zone_str})")
     elif val_pts == 0 and dd52w is not None and dd52w >= -3:
-        # Près du top — risque de chase (la pénalité réelle est z-based, cf. chase_pen)
+        # Près du top — risque de chase (la note v4 le paie en continu via la cloche z du bloc momentum)
         points.append(f"⚠ près du top 52w ({dd52w:+.1f}%) — risque de chase")
     elif val_pts == 0 and dd52w is not None and dd52w <= -30:
         # Chute libre
@@ -1060,9 +1063,8 @@ def score_ticker(ticker, vix=None):
             print(f"  ✗ {ticker}: historique insuffisant pour MM200/RSI ({len(close_2y)} barres) — écarté")
             return None
 
-        # ── Croisement MM21/MM200 (2 ans suffisent)
+        # ── Croisement MM21/MM200 (2 ans suffisent) — informationnel depuis v4
         cross_info = detect_cross(close_2y, volume_2y)
-        cross_pts  = cross_score(cross_info, rsi)
 
         info = data.info
 
@@ -1119,7 +1121,6 @@ def score_ticker(ticker, vix=None):
         margins_raw    = info.get("profitMargins")   # (breakdown : trou → null → « — »)
         rev_growth   = rev_growth_raw or 0
         margins      = margins_raw or 0
-        peg          = info.get("pegRatio")           or 0
         forward_pe   = info.get("forwardPE")             # PER forward (bénéfices attendus)
         trailing_pe  = info.get("trailingPE")            # PER courant (PER courant ≫ forward = bénéfices au creux de cycle)
         market_cap   = info.get("marketCap") or 0
@@ -1139,30 +1140,16 @@ def score_ticker(ticker, vix=None):
         fh_data    = finnhub_fundamentals(ticker)
         confiance, alertes = valider_fondamentaux(info, fh_data)
 
-        # ── Calcul du score ──────────────────────────────────────────────────
-        score   = 0
+        # ── Signaux informationnels ─────────────────────────────────────────
+        # Depuis la note v4, le momentum est un BLOC DE LA NOTE (rampes
+        # continues dans note_v4.py : écart MM21/MM200, cloche z, cloche RSI).
+        # Les sous-points de timing v3 (cross 10, pente 4, volume 3, RSI 2,
+        # zone saine 3) et leurs pénalités/bonus (chase, death, décote) ont
+        # disparu du calcul — l'audit des 24 archives avait mesuré un IC de
+        # timing NÉGATIF (-0,33). Les signaux restent publiés et nourrissent
+        # justification, fiches et agent.
         details = {}
-
-        # ════ TIMING (22 pts) — GARDE-FOU, pas moteur (v3) ════════════════════════
-        # = cross (10) + pente MM21 (4) + volume (3) + RSI (2) + régression zone saine (3).
-        # Apporte PEU en positif ; ce sont ses PÉNALITÉS (CHASE, couteau — plus bas) qui mordent.
-        vol_ok = vol_recent > vol_annual
-
-        # RSI (0-2) : zone stricte 40-60 = 2, élargie 35-65 = 1, hors = 0
-        if   40 <= rsi <= 60: rsi_pts = 2
-        elif 35 <= rsi <= 65: rsi_pts = 1
-        else:                 rsi_pts = 0
-        rsi_ok = rsi_pts > 0
-
-        vol_pts = 3  if vol_ok else 0           # confirmation par le volume
-        reg_pts = 3  if reg_zone_saine else 0   # cours dans sa zone de régression saine
-
-        # Pente MM21 (0-4) — force de tendance (variation MM21 sur 5 séances)
-        _slope_mm21 = cross_info.get("slope_mm21_pct") or 0
-        if   _slope_mm21 >= 0.8:  slope_pts = 4   # accélération franche
-        elif _slope_mm21 >= 0.3:  slope_pts = 2   # hausse nette
-        elif _slope_mm21 >= 0.0:  slope_pts = 1   # légèrement positive
-        else:                     slope_pts = 0   # MM21 baissière
+        rsi_ok = 35 <= rsi <= 65
 
         # Valorisation actuelle (5 pts) — drawdown vs plus haut 52 semaines,
         # CONDITIONNÉ AU RÉGIME CROSS depuis test empirique du 23/05/2026 sur
@@ -1205,18 +1192,8 @@ def score_ticker(ticker, vix=None):
             else:                                              val_pts = 0   # chute libre
             val_pts_mode = "normal"
 
-        # Cross MM21/MM200 (0-10) — cross_score rend 0-20, ramené à l'échelle timing v3.
-        cross_pts_t = round(cross_pts / 2)
-
-        # NB v3 : val_pts (drawdown vs 52w) reste calculé pour la justification/affichage,
-        # mais N'ENTRE PLUS dans le score (l'extension est déjà couverte par la régression ;
-        # la décote profonde de qualité est gérée par le bonus décote, plus bas).
-        timing_pts = cross_pts_t + slope_pts + vol_pts + reg_pts + rsi_pts   # max 22
-
         # ── Retracement Fibonacci (annotation informationnelle, hors scoring)
         fibo = fibonacci_retracement(close, lookback=252)
-
-        score += timing_pts
 
         details["cross_regime"]        = cross_info["regime"]
         details["cross_days_ago"]      = cross_info["days_since_cross"]
@@ -1263,107 +1240,19 @@ def score_ticker(ticker, vix=None):
         # « marge » astronomique quand le CA manquait — la donnée absente
         # OFFRAIT les 8 points au lieu d'en priver.
         fcf_margin = (fcf / total_rev_raw) if (fcf_raw is not None and total_rev_raw) else 0
-        fcf_yield  = (fcf / market_cap * 100) if (fcf_raw is not None and market_cap) else None   # rendement du FCF au prix actuel
-
-        # ════ QUALITÉ (45 pts) — durabilité du business : ce que tu possèdes (v3) ════
-        # marge nette (8) + marge FCF (8) + ROE (12) + croissance CA (10, plafonnée) + dette (7)
-        qualite_pts = 0
-        if   margins > 0.15:    qualite_pts += 8      # marge nette
-        elif margins > 0.08:    qualite_pts += 5
-        elif margins > 0:       qualite_pts += 2
-        if   fcf_margin > 0.15:  qualite_pts += 8     # marge FCF (le cash, dur à maquiller — Bezos)
-        elif fcf_margin > 0.08:  qualite_pts += 5
-        elif fcf_margin > 0:     qualite_pts += 2
-        if roe is not None:                            # ROE — proxy de douve (Mauboussin)
-            if   roe >= 0.25:   qualite_pts += 12
-            elif roe >= 0.15:   qualite_pts += 9
-            elif roe >= 0.08:   qualite_pts += 5
-            elif roe > 0:       qualite_pts += 2
-        if   rev_growth > 0.10: qualite_pts += 10     # croissance CA PLAFONNÉE (ne persiste pas — Mauboussin)
-        elif rev_growth > 0.05: qualite_pts += 6
-        elif rev_growth > 0.02: qualite_pts += 3
-        if debt_eq_raw is not None:                    # bilan / dette (fortress — Dimon ; net-cash valorisé)
-            if   debt_eq_raw < 50:  qualite_pts += 7
-            elif debt_eq_raw < 100: qualite_pts += 4
-        qualite_pts = min(45, qualite_pts)
-        score += qualite_pts
-
-        # ════ VALORISATION (30 pts) — ta marge de sécurité (Buffett) (v3) ════
-        # PEG (15) + FCF yield (15). PER absolu EXCLU : pénaliserait la qualité par construction.
-        valo_pts = 0
-        if   0 < peg < 1:  valo_pts += 15             # PEG : valo relative à la croissance
-        elif 0 < peg < 2:  valo_pts += 10
-        elif 0 < peg < 3:  valo_pts += 5
-        if fcf_yield is not None:                      # FCF yield : cher/pas cher, robuste
-            if   fcf_yield >= 8:   valo_pts += 15
-            elif fcf_yield >= 5:   valo_pts += 11
-            elif fcf_yield >= 3:   valo_pts += 7
-            elif fcf_yield >= 1.5: valo_pts += 3
-        valo_pts = min(30, valo_pts)
-        score += valo_pts
+        # Rendement du FCF : le FCF est publié en devise COMPTABLE, la
+        # capitalisation en devise de COTATION. Quand elles diffèrent (ADR :
+        # TSM cotait un « FCF yield » de 34 % — TWD divisés par des USD), le
+        # ratio est un non-sens : on publie null plutôt qu'un chiffre faux.
+        _meme_devise = (((info.get("financialCurrency") or "") ==
+                         (info.get("currency") or ""))
+                        if info.get("financialCurrency") else True)
+        fcf_yield  = (fcf / market_cap * 100) \
+            if (fcf_raw is not None and market_cap and _meme_devise) else None
 
         details["rev_growth"] = rev_growth
         details["net_margin"] = margins
-        details["peg"]        = peg
         details["reco"]       = reco
-
-        # Consensus analystes (3 pts, v3 — signal lagging à fort biais haussier : cross-check mineur)
-        ana_pts = 0
-        if   reco < 2.0: ana_pts = 3
-        elif reco < 2.5: ana_pts = 2
-        elif reco < 3.0: ana_pts = 1
-        score += ana_pts
-
-        score = round(score * confiance)
-
-        # Pénalité Death Cross récent — signal baissier actif non compensable
-        death_pen = 0
-        if cross_info["regime"] == "death":
-            dc_days = cross_info["days_since_cross"]
-            if   dc_days <= 30: death_pen = -5
-            elif dc_days <= 60: death_pen = -3
-
-        # ── Pénalité CHASE de rally (v2.0.1) ────────────────────────────────
-        # Protège contre les surextensions extrêmes même quand fondamentaux
-        # sont solides (cas Micron z=+5σ avec marges 41%, ou GOOGL z=+2,9σ
-        # post-rally +124%). Le z-score binaire actuel donne 0 pts hors zone saine
-        # mais ne pénalise pas activement — bug majeur.
-        #
-        # Mécanique (v2.2.1 — magnitudes renforcées ; palier léger ±2 RETIRÉ pour ne pas
-        # pénaliser un compounder pour son extension normale : le danger est aux EXTRÊMES
-        # (Nifty-Fifty, Cisco 2000), pas à +1,5σ qui est le quotidien d'un secular winner) :
-        #   z > 2,5σ                                → -6 (chase extrême)
-        #   z > 2,0σ ET (RSI > 70 OU dd_52w > -3%)   → -4 (chase confirmé)
-        # Sinon : 0
-        chase_pen = 0
-        z_valid = (regression_z is not None
-                   and not (isinstance(regression_z, float) and np.isnan(regression_z)))
-        if z_valid:
-            if   regression_z > 2.5:
-                chase_pen = -6
-            elif regression_z > 2.0 and (rsi > 70 or drawdown_52w_pct > -3):
-                chase_pen = -4
-
-        # ── Bonus « décote-qualité » (v2.1) — MIROIR de la pénalité CHASE ──────
-        # Symétrie manquante : CHASE pénalise la surextension (z>2σ), mais une
-        # décote (z<-2σ) ne touchait AUCUN point — un compounder de qualité 2σ sous
-        # sa tendance était noté comme une bulle 2σ au-dessus. On récompense donc la
-        # décote, mais SEULEMENT si c'est un Setup B mean-reversion (opportunities.md),
-        # pas un couteau qui tombe. Garde-fous (selling.md / pré-flight) :
-        #   - qualité solide (qualite_pts ≥ 30/45 — échelle v3),
-        #   - pas de death cross frais (≤60j),
-        #   - MM21 qui ne dévisse pas (pente 5j > -2%).
-        #   z ≤ -2,5σ → +6 (forte) | z ≤ -2,0σ → +4 (modérée)  [palier léger ±2 retiré, v2.2.1]
-        value_bonus = 0
-        if z_valid and qualite_pts >= 30:
-            _dc = cross_info.get("days_since_cross")
-            _fresh_death = (cross_info["regime"] == "death" and _dc is not None and _dc <= 60)
-            _slope = cross_info.get("slope_mm21_pct") or 0
-            if (not _fresh_death) and _slope > -2.0:
-                if   regression_z <= -2.5: value_bonus = 6
-                elif regression_z <= -2.0: value_bonus = 4
-
-        score = max(0, min(100, score + death_pen + chase_pen + value_bonus))
 
         # ── Décote vs tendance + objectif analystes (informationnels, hors scoring) ──
         # decote_pct : POSITIF = prix sous la droite de régression (décote), NÉGATIF = surcote.
@@ -1446,12 +1335,13 @@ def score_ticker(ticker, vix=None):
             _signal_warning = "Affaiblissement post-rally sur cross stale — pente MM21 fortement négative malgré cours largement au-dessus de MM200"
 
         breakdown = {
-            "qualite":               qualite_pts,            # v3 : 45 max — durabilité du business
-            "valorisation":          valo_pts,               # v3 : 30 max — marge de sécurité
-            "timing":                timing_pts,             # v3 : 22 max — garde-fou
-            "analystes":             min(3, ana_pts),
+            # La note v4 (breakdown["note"]) est ajoutée après le bloc fonda,
+            # plus bas : total /100, blocs Q/C/V/M, 16 critères phrasés,
+            # motifs de retrait, couverture. Les anciens agrégats v3
+            # (qualite/valorisation/timing/analystes, sous-points, pénalités)
+            # ont disparu avec le scoring v3.
             "vix_value":             vix,
-            # Croisement MM21/MM200
+            # Croisement MM21/MM200 — informationnel (hors note depuis v4)
             "cross_regime":          cross_info["regime"],
             "cross_type":            cross_info["cross_type"],
             "cross_days_ago":        cross_info["days_since_cross"],
@@ -1459,12 +1349,7 @@ def score_ticker(ticker, vix=None):
             "cross_slope_mm21_pct":  cross_info["slope_mm21_pct"],
             "cross_volume_confirmed":cross_info["volume_confirmed"],
             "signal_dynamics_warning": _signal_warning,
-            "cross_pts":             cross_pts_t,
-            "rsi_pts":               rsi_pts,
-            "vol_pts":               vol_pts,
-            "reg_pts":               reg_pts,
-            "val_pts":               val_pts,
-            "slope_pts":             slope_pts,
+            "val_pts":               val_pts,       # lu par l'agent (timing d'entrée) et la justification
             "val_pts_mode":          val_pts_mode,  # "gc_fresh_inverted" si GC frais (barème inversé), "normal" sinon
             "drawdown_52w_pct":      round(drawdown_52w_pct, 1),
             "high_52w":              round(high_52w, 2),
@@ -1502,19 +1387,19 @@ def score_ticker(ticker, vix=None):
             "net_margin_pct":        round(margins * 100, 1) if margins_raw is not None else None,         # TTM (12 mois glissants)
             "fcf_margin_pct":        round(fcf_margin * 100, 1) if (fcf_raw is not None and total_rev_raw) else None,  # TTM (12 mois glissants)
             "mrq":                   mrq_iso,                      # date du dernier trimestre publié — réf. période fondamentaux
-            # Valorisation (alimente la prose éditoriale — cf. generate_analyses.py)
+            # Valorisation (alimente la note v4 et la prose éditoriale)
             "forward_pe":            round(forward_pe, 1) if forward_pe else None,
             "trailing_pe":           round(trailing_pe, 1) if trailing_pe else None,
             "fcf_yield_pct":         round(fcf_yield, 2) if fcf_yield is not None else None,
-            "peg":                   round(peg, 2) if peg else None,
-            # Objectif de cours analystes (informationnel — cf. reco pour la note consensus)
+            # ROE et dette/CP : publiés depuis la v4 (ils vivaient dans le
+            # calcul sans jamais être montrés — les phrases de la note les citent).
+            "roe_pct":               round(roe * 100, 1) if isinstance(roe, (int, float)) and roe == roe else None,
+            "debt_eq_pct":           round(debt_eq_raw) if isinstance(debt_eq_raw, (int, float)) and debt_eq_raw == debt_eq_raw else None,
+            # Objectif de cours analystes (informationnel)
             "target_mean_price":     target_mean_price,
             "target_upside_pct":     target_upside_pct,
             "target_analysts":       target_analysts,
-            "death_pen":             death_pen,
-            "chase_pen":             chase_pen,
-            "value_bonus":           value_bonus,
-            "confiance":             round(confiance, 2),
+            "confiance":             round(confiance, 2),   # validation croisée Yahoo/Finnhub — informationnel depuis v4 (ne multiplie plus la note)
             "sources":               ["Yahoo Finance"] + (["Finnhub"] if fh_data else []),
         }
 
@@ -1536,6 +1421,7 @@ def score_ticker(ticker, vix=None):
 
         # ── Chiffres publiés (historique CA/EBITDA/RN) — même contrat fail-soft :
         # deux requêtes Yahoo de plus par titre, jamais bloquantes pour le score.
+        fonda = None
         if chart is not None:
             try:
                 fonda = extraire_fondamentaux(
@@ -1597,6 +1483,39 @@ def score_ticker(ticker, vix=None):
                 except Exception as e:
                     print(f"  ⚠️  {ticker}: PER historique/prévisionnel en échec ({type(e).__name__})")
                 chart["fonda"] = fonda
+
+        # ── NOTE v4 — le score EST la note (grille MECE, note_v4.py) ────────
+        # Calculée en dernier : elle consomme l'historique fonda (marges
+        # médianes, TCAM, PER d'époque, prévisionnels) en plus des champs TTM
+        # et du momentum. Chaque intrant manquant retire son critère avec
+        # motif et renormalise — un trou de donnée n'est jamais un zéro muet.
+        def _n(v):
+            """Nombre fini ou None — les NaN Yahoo ne doivent pas entrer dans la note."""
+            return v if isinstance(v, (int, float)) and v == v and np.isfinite(v) else None
+        _f = fonda if isinstance(fonda, dict) else {}
+        note = note_v4.calcule_note({
+            "an":             _f.get("an") or [],
+            "pe_prev":        _f.get("pe_prev"),
+            "prix":           prix,
+            "trailing_pe":    _n(trailing_pe),
+            "forward_pe":     _n(forward_pe),
+            "net_margin_pct": round(margins * 100, 1) if margins_raw is not None else None,
+            "fcf_margin_pct": round(fcf_margin * 100, 1) if (fcf_raw is not None and total_rev_raw) else None,
+            "fcf_yield_pct":  _n(fcf_yield),   # déjà gardé par la devise plus haut
+            "roe":            _n(roe),
+            "debt_eq":        _n(debt_eq_raw),
+            # Banque/assurance au sens de la note : bilan financier SANS FCF
+            # publié (JPM oui, Progressive non — l'assureur qui publie son FCF
+            # est noté normalement). Le secteur seul ne suffit pas : il
+            # étiquette aussi bourses et gérants d'actifs, qui ont un vrai FCF.
+            "banque":         (yf_sector == "Financial Services" and fcf_raw is None),
+            "meme_devise":    _meme_devise,
+            "z":              _n(regression_z),
+            "rsi":            _n(rsi),
+            "ecart_mm_pct":   (mm21 / mm200 - 1) * 100 if mm200 > 0 else None,
+        })
+        score = note["total"]
+        breakdown["note"] = note
 
         return {
             "ticker":        ticker,
@@ -1677,15 +1596,21 @@ def raison_sortie(prev_stock, current_stock=None):
         elif days <= 180:
             parts.append(f"Death Cross confirmé ({days}j) — régime baissier persistant")
 
-    mo = bd.get("timing", 0)
-    if mo < 6:
-        parts.append(f"Timing quasi-nul ({mo}/22) — tendance qui s'essouffle")
-    elif mo < 9 and new_score is not None and new_score < prev_score:
-        parts.append(f"Timing dégradé ({mo}/22)")
+    # Blocs de la note v4 (breakdown["note"]["blocs"]) — un bloc absent (None)
+    # signifie « non notable », pas « nul » : on ne le commente pas.
+    _blocs = (bd.get("note") or {}).get("blocs") or {}
+    def _bloc(b):
+        return (_blocs.get(b) or {}).get("pts")
+    mo = _bloc("m")
+    if mo is not None:
+        if mo < 4:
+            parts.append(f"Momentum quasi-nul ({mo:.0f}/15) — tendance qui s'essouffle")
+        elif mo < 7 and new_score is not None and new_score < prev_score:
+            parts.append(f"Momentum dégradé ({mo:.0f}/15)")
 
-    fund = bd.get("qualite", 0) + bd.get("valorisation", 0)
-    if fund < 35:
-        parts.append(f"Qualité + valorisation insuffisantes ({fund}/75)")
+    _fond = [p for p in (_bloc("q"), _bloc("c"), _bloc("v")) if p is not None]
+    if _fond and sum(_fond) < 40:
+        parts.append(f"Qualité + croissance + valorisation insuffisantes ({sum(_fond):.0f}/85)")
 
     reg = bd.get("regression_signal", "")
     if reg == "surachat":
@@ -1871,6 +1796,11 @@ def main():
     par_ticker  = {}          # ticker → objet compact publié
     themes_de   = {}          # ticker → tous ses thèmes (curés + calculés)
 
+    def _bloc_pts(bd, b):
+        """Points arrondis (1 déc.) d'un bloc de la note v4, None si non notable."""
+        pts = ((bd.get("note") or {}).get("blocs", {}).get(b) or {}).get("pts")
+        return round(pts, 1) if pts is not None else None
+
     for r in resultats:
         t  = r["ticker"]
         bd = r.get("breakdown", {}) or {}
@@ -1902,9 +1832,13 @@ def main():
             "cross_j":      bd.get("cross_days_ago"),
             "upside_pct":   bd.get("target_upside_pct"),
             "analystes":    bd.get("target_analysts"),
-            "qualite":      bd.get("qualite"),
-            "valorisation": bd.get("valorisation"),
-            "timing":       bd.get("timing"),
+            # Blocs de la note v4, compacts (points arrondis ; None = bloc non
+            # notable). Le détail des critères vit dans charts/<T>.json.
+            "q":            _bloc_pts(bd, "q"),
+            "c":            _bloc_pts(bd, "c"),
+            "v":            _bloc_pts(bd, "v"),
+            "m":            _bloc_pts(bd, "m"),
+            "couverture":   (bd.get("note") or {}).get("couverture"),
             "themes":       ths,
             "top30":        t in top_tickers,
         }
