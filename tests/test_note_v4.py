@@ -90,20 +90,50 @@ check("la note ne publie pas de lettre (décision : /100 conservé)",
 print("\n— Banque (type JPM) : retraits + renormalisation du bloc —")
 ctx_b = dict(CTX_TEMOIN, banque=True, fcf_margin_pct=None, fcf_yield_pct=None,
              roe=0.16, debt_eq=None, trailing_pe=12.0, forward_pe=11.0,
-             price_to_book=1.4)
+             price_to_book=1.4, roa_pct=0.95, levier_actifs=12.0)
 nb = calcule_note(ctx_b)
-retires = {c["id"]: c["motif"] for c in nb["criteres"] if c["pts"] is None}
-check("conversion et bilan retirés avec motif",
-      {"conversion", "bilan"} <= set(retires)
-      and all(retires[k] for k in ("conversion", "bilan")),
-      str(retires))
+check("plus AUCUN critère de qualité retiré : tout est substitué",
+      all(c["pts"] is not None for c in nb["criteres"] if c["bloc"] == "q"),
+      str([(c["id"], c["motif"]) for c in nb["criteres"]
+           if c["bloc"] == "q" and c["pts"] is None]))
+check("le rendement des actifs remplace la conversion en cash",
+      any(c["id"] == "rendement_actifs" for c in nb["criteres"])
+      and not any(c["id"] == "conversion" for c in nb["criteres"]))
+check("le levier actifs/fonds propres remplace dette/CP",
+      any(c["id"] == "levier_actifs" for c in nb["criteres"])
+      and not any(c["id"] == "bilan" for c in nb["criteres"]))
 check("le rendement du cash ne s'applique pas à un bilan bancaire",
       not any(c["id"] == "rdt_cash" for c in nb["criteres"]))
+c_roa = next(c for c in nb["criteres"] if c["id"] == "rendement_actifs")
+check("ROA 0,95 % noté sur la rampe 0,3-1,3", c_roa["pts"] == rampe(0.95, 0.3, 1.3, 7))
+check("la phrase du ROA explique la substitution",
+      "pendant bancaire" in c_roa["phrase"], c_roa["phrase"])
+c_lev = next(c for c in nb["criteres"] if c["id"] == "levier_actifs")
+check("levier 12× noté sur la rampe inversée 25→8",
+      c_lev["pts"] == rampe(12.0, 25, 8, 5), str(c_lev["pts"]))
+check("qualité bancaire mesurée en ENTIER : dispo 35/35, plus de renormalisation",
+      nb["blocs"]["q"]["dispo"] == 35, str(nb["blocs"]["q"]))
+# Sans les données de bilan : retrait motivé, pas de zéro muet
+nb2 = calcule_note(dict(ctx_b, roa_pct=None, levier_actifs=None))
+check("actifs non publiés : retraits motivés (« actifs au bilan non publiés »)",
+      all("actifs au bilan" in (c["motif"] or "") for c in nb2["criteres"]
+          if c["id"] in ("rendement_actifs", "levier_actifs")))
+check("un levier négatif ou nul est refusé",
+      next(c["pts"] for c in calcule_note(dict(ctx_b, levier_actifs=-3))["criteres"]
+           if c["id"] == "levier_actifs") is None)
+check("un assureur très capitalisé (levier 6×) prend le maximum",
+      next(c["pts"] for c in calcule_note(dict(ctx_b, levier_actifs=6.0))["criteres"]
+           if c["id"] == "levier_actifs") == 5.0)
+check("une banque au levier Credit Suisse (26×) prend zéro",
+      next(c["pts"] for c in calcule_note(dict(ctx_b, levier_actifs=26.0))["criteres"]
+           if c["id"] == "levier_actifs") == 0.0)
 check("le ROE bancaire utilise la rampe 6-15 %",
       next(c for c in nb["criteres"] if c["id"] == "roe")["pts"] == 9.0)
-check("qualité renormalisée sur 35 malgré les retraits",
-      nb["blocs"]["q"]["max"] == 35 and nb["blocs"]["q"]["pts"] is not None
-      and nb["blocs"]["q"]["dispo"] == 23)
+# (l'ancien test « renormalisée sur 23 » est obsolète : la substitution
+# rend la qualité bancaire mesurable en entier, c'est tout son intérêt)
+check("la qualité bancaire n'a plus besoin de renormalisation",
+      nb["blocs"]["q"]["max"] == 35 and nb["blocs"]["q"]["dispo"] == 35
+      and nb["blocs"]["q"]["pts"] is not None)
 check("une banque rentable et bon marché reste bien notée (≥60)",
       nb["total"] >= 60, str(nb["total"]))
 

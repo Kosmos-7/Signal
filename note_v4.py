@@ -163,10 +163,26 @@ def calcule_note(ctx):
     else:
         ajoute("q", "roe", 9, None, None, None, "rendement du capital non disponible")
 
+    # Conversion en cash — SUBSTITUÉE pour les métiers de bilan (06/08 soir).
+    # Retirer une métrique sans objet était un pis-aller : la banque se
+    # retrouvait jugée sur trois critères de qualité au lieu de cinq, et la
+    # renormalisation — même prudente — devait présumer quelque chose à la
+    # place. On ne présume plus : on MESURE l'équivalent-métier. Pour un
+    # bilan bancaire, le pendant de « combien de bénéfice devient du cash »
+    # est « combien les ACTIFS produisent de bénéfice » — le rendement des
+    # actifs (ROA), l'étalon classique : ≥1,2 % excellent, ≤0,3 % faible.
     nm, fm = ctx.get("net_margin_pct"), ctx.get("fcf_margin_pct")
     if banque:
-        ajoute("q", "conversion", 7, None, None, None,
-               "le FCF n'a pas de sens pour un bilan bancaire")
+        roa = ctx.get("roa_pct")
+        if roa is not None:
+            ajoute("q", "rendement_actifs", 7, rampe(roa, 0.3, 1.3, 7),
+                   round(roa, 2),
+                   f"Chaque 100 € d'actifs au bilan produisent "
+                   f"{_fr(roa, 2)} € de bénéfice par an (le pendant bancaire "
+                   f"de la conversion en cash)")
+        else:
+            ajoute("q", "rendement_actifs", 7, None, None, None,
+                   "actifs au bilan non publiés")
     elif fm is not None and nm and nm > 0:
         c = fm / nm * 100
         ajoute("q", "conversion", 7, rampe(min(c, 120), 40, 100, 7), round(c),
@@ -176,10 +192,22 @@ def calcule_note(ctx):
         ajoute("q", "conversion", 7, None, None, None,
                "conversion en cash non calculable")
 
+    # Bilan — même substitution. Dette/capitaux propres n'a pas de sens quand
+    # la dette est la matière première ; le pendant-métier est le LEVIER
+    # total : combien d'euros d'actifs reposent sur un euro de fonds propres.
+    # 8× = très capitalisé (la plupart des assureurs), ~12× = banque saine,
+    # 25× = territoire Credit Suisse. Rampe inversée, continue.
     de = ctx.get("debt_eq")
     if banque:
-        ajoute("q", "bilan", 5, None, None, None,
-               "le levier est la matière première du métier bancaire")
+        lev = ctx.get("levier_actifs")
+        if lev is not None and lev > 0:
+            ajoute("q", "levier_actifs", 5, rampe(lev, 25, 8, 5),
+                   round(lev, 1),
+                   f"Le bilan porte {_fr(lev, 1)} € d'actifs pour 1 € de "
+                   f"fonds propres")
+        else:
+            ajoute("q", "levier_actifs", 5, None, None, None,
+                   "actifs au bilan non publiés")
     elif de is not None:
         ajoute("q", "bilan", 5, rampe(de, 150, 0, 5), round(de),
                f"Dette à {_fr(de,0)} % des capitaux propres")

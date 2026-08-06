@@ -69,6 +69,33 @@ réellement retenue est rendue avec le taux, et la phrase de la fiche
 signale la sortie de pertes (« depuis le premier exercice bénéficiaire,
 sur 8 ans »). Arriver en perte reste sans multiple ni croissance. 9 tests.
 
+### Les métiers de bilan n'ont plus AUCUN critère de qualité retiré
+
+Question du propriétaire, qui a mis le doigt sur la faiblesse restante :
+« une banque ne devrait pas être tirée vers la moyenne sur une métrique qui
+n'existe pas pour elle — comment faire alors ? ». La réponse n'est ni la
+renormalisation pure (le sans-faute en trois épreuves de Schwab, 35/35 sur
+23 points mesurés), ni la pondération prudente (présumer 55 % sur une
+métrique qui n'existe pas est incohérent) : c'est la SUBSTITUTION, comme
+pour le cours/actifs nets en valorisation.
+
+- **La conversion en cash → le rendement des actifs (ROA)** : combien les
+  actifs au bilan produisent de bénéfice — l'étalon bancaire classique.
+  Rampe continue 0,3 % → 1,3 % (7 pts).
+- **Dette/capitaux propres → le levier actifs/fonds propres** : combien
+  d'euros d'actifs reposent sur un euro de fonds propres. Rampe inversée
+  25× → 8× (5 pts) : un assureur très capitalisé sature, un levier de
+  territoire Credit Suisse prend zéro. Le levier cesse d'être « la matière
+  première du métier » qu'on refuse de juger : il est jugé à l'aune du
+  métier.
+- Les deux se lisent au bilan déjà téléchargé (Total Assets), aucun appel
+  de plus. Sans donnée : retrait motivé « actifs au bilan non publiés ».
+- Conséquence de doctrine : la pondération prudente de la renormalisation
+  ne s'applique plus, pour les métiers de bilan, qu'aux VRAIES données
+  manquantes — plus jamais aux métriques sans objet, qui ont désormais
+  toutes leur équivalent-métier (ROA, levier, cours/actifs nets).
+  15 tests.
+
 ### Historique profond : le greffe de la SEC parle aussi IFRS
 
 Le déséquilibre de mesure le plus profond de la note v4 : onze exercices

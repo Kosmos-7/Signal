@@ -522,6 +522,12 @@ def etats_complements(df_cf, df_bs):
     if cp is not None and cp > 0:
         out["capitaux_propres"] = cp
 
+    # Actifs totaux — nécessaires aux critères de substitution des métiers de
+    # bilan (rendement des actifs, levier actifs/fonds propres).
+    actifs = dernier(df_bs, ["Total Assets"])
+    if actifs is not None and actifs > 0:
+        out["actifs"] = actifs
+
     dette = dernier(df_bs, ["Total Debt"])
     if dette is None:
         lt = dernier(df_bs, ["Long Term Debt", "Long Term Debt And Capital Lease Obligation"])
@@ -1476,6 +1482,22 @@ def score_ticker(ticker, vix=None):
         # lisent normalement.
         _metier_bilan = yf_industry in _INDUSTRIES_BILAN
         fonda_source = []
+        # Critères de substitution des métiers de bilan : le rendement des
+        # actifs remplace la conversion en cash, le levier actifs/fonds
+        # propres remplace dette/CP (cf. note_v4). Les deux se lisent au
+        # bilan — toujours téléchargé pour ces titres.
+        roa_pct = levier_actifs = None
+        if _metier_bilan:
+            try:
+                _ecb = etats_complements(None, data.balance_sheet)
+                _cp_b, _actifs = _ecb.get("capitaux_propres"), _ecb.get("actifs")
+                _ni = info.get("netIncomeToCommon")
+                if _actifs and _ni is not None and _ni == _ni:
+                    roa_pct = _ni / _actifs * 100
+                if _actifs and _cp_b:
+                    levier_actifs = _actifs / _cp_b
+            except Exception as e:
+                print(f"  ⚠️  {ticker}: bilan illisible pour ROA/levier ({type(e).__name__})")
         if (fcf_raw is None and not _metier_bilan) or debt_eq_raw is None or roe is None:
             try:
                 _ec = etats_complements(data.cashflow, data.balance_sheet)
@@ -1808,6 +1830,8 @@ def score_ticker(ticker, vix=None):
             "roe":            _n(roe),
             "debt_eq":        _n(debt_eq_raw),
             "price_to_book":  _n(price_to_book),
+            "roa_pct":        _n(roa_pct),
+            "levier_actifs":  _n(levier_actifs),
             # Métier de bilan, déduit de l'INDUSTRIE et non de l'absence de
             # donnée (cf. _INDUSTRIES_BILAN et la leçon du 06/08 : le raccourci
             # « FCF absent » s'est éteint dès qu'on est allé chercher le FCF).
