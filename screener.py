@@ -1077,6 +1077,38 @@ _CYCLICAL_INDUSTRIES = {
     "Lumber & Wood Production", "Paper & Paper Products",
 }
 
+# ── MÉTIERS DE BILAN ─────────────────────────────────────────────────────────
+# Les activités dont le BILAN EST L'OUTIL DE PRODUCTION : la dette y est la
+# matière première, pas un financement, et le « flux de trésorerie disponible »
+# calculé à la manière industrielle n'y mesure rien — il suit les mouvements de
+# dépôts et de portefeuille de négociation, pas la capacité bénéficiaire.
+#
+# POURQUOI UNE LISTE EXPLICITE ET NON « le FCF est absent ». C'est la leçon du
+# 06/08 : le drapeau était déduit de l'absence de FCF chez Yahoo, un raccourci
+# qui confondait « la métrique n'a pas de sens » et « la donnée manque ». Le
+# jour où l'on est allé chercher la donnée dans les états financiers, le
+# drapeau s'est éteint pour TOUS les titres, la rampe bancaire du ROE et le
+# critère cours/actifs nets sont devenus du code mort, et HSBC s'est retrouvée
+# notée 0,7/5 sur un levier qui EST son métier. Un critère de métier se déduit
+# du métier, jamais de l'état d'une source de données.
+#
+# Hors périmètre, à dessein : les réseaux de paiement (Visa, Mastercard), les
+# places de marché et agences de notation (SPGI, MSCI, ICE), les gérants
+# d'actifs (BLK) et les courtiers d'assurance — tous dégagent un vrai flux de
+# trésorerie disponible et se notent comme n'importe quelle entreprise.
+_INDUSTRIES_BILAN = {
+    "Banks - Diversified", "Banks—Diversified",
+    "Banks - Regional", "Banks—Regional",
+    "Capital Markets",
+    "Mortgage Finance",
+    "Insurance - Life", "Insurance—Life",
+    "Insurance - Property & Casualty", "Insurance—Property & Casualty",
+    "Insurance - Reinsurance", "Insurance—Reinsurance",
+    "Insurance - Specialty", "Insurance—Specialty",
+    "Insurance - Diversified", "Insurance—Diversified",
+    "Financial Conglomerates",
+}
+
 # ── SCORING ──────────────────────────────────────────────────────────────────
 def score_ticker(ticker, vix=None):
     """Score 0-100 d'un ticker.
@@ -1324,8 +1356,15 @@ def score_ticker(ticker, vix=None):
         # et le bilan, déjà téléchargés pour la section « Chiffres publiés ».
         # Universel (toutes places, toutes devises), aucun appel de plus.
         # PROVENANCE : `fonda_source` dit lesquels ont été reconstruits.
+        # Un métier de bilan ne reçoit JAMAIS de flux disponible reconstitué :
+        # son flux d'exploitation suit les dépôts et le portefeuille de
+        # négociation, pas la capacité bénéficiaire. Le calculer produirait un
+        # « 113 % de conversion du bénéfice en cash » chez HSBC — un chiffre
+        # flatteur et vide de sens. Les capitaux propres et la dette, eux, se
+        # lisent normalement.
+        _metier_bilan = yf_industry in _INDUSTRIES_BILAN
         fonda_source = []
-        if fcf_raw is None or debt_eq_raw is None or roe is None:
+        if (fcf_raw is None and not _metier_bilan) or debt_eq_raw is None or roe is None:
             try:
                 _ec = etats_complements(data.cashflow, data.balance_sheet)
             except Exception as e:
@@ -1617,11 +1656,10 @@ def score_ticker(ticker, vix=None):
             "roe":            _n(roe),
             "debt_eq":        _n(debt_eq_raw),
             "price_to_book":  _n(price_to_book),
-            # Banque/assurance au sens de la note : bilan financier SANS FCF
-            # publié (JPM oui, Progressive non — l'assureur qui publie son FCF
-            # est noté normalement). Le secteur seul ne suffit pas : il
-            # étiquette aussi bourses et gérants d'actifs, qui ont un vrai FCF.
-            "banque":         (yf_sector == "Financial Services" and fcf_raw is None),
+            # Métier de bilan, déduit de l'INDUSTRIE et non de l'absence de
+            # donnée (cf. _INDUSTRIES_BILAN et la leçon du 06/08 : le raccourci
+            # « FCF absent » s'est éteint dès qu'on est allé chercher le FCF).
+            "banque":         (yf_industry in _INDUSTRIES_BILAN),
             "meme_devise":    _meme_devise,
             "z":              _n(regression_z),
             "rsi":            _n(rsi),

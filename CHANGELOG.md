@@ -34,6 +34,36 @@ corriger.
 - Effet : la valorisation des financières redevient pleinement mesurée,
   quatre critères sur quatre. 10 tests ajoutés (52 au total sur le moteur).
 
+### Régression corrigée : le métier de bilan se déduit du métier
+
+Défaut introduit puis rattrapé le même jour, et la leçon vaut d'être écrite.
+Le drapeau « métier de bilan » — qui déclenche la rampe bancaire du ROE, le
+retrait motivé de la conversion de cash et du ratio d'endettement, et le
+critère cours/actifs nets — valait `secteur financier ET FCF absent`. Ce
+raccourci confondait deux choses très différentes : « la métrique n'a pas de
+sens pour ce métier » et « la donnée manque chez notre fournisseur ».
+
+Le correctif de couverture publié une heure plus tôt est allé chercher le
+flux disponible dans les états financiers. Le drapeau s'est donc éteint pour
+**tous** les titres : le critère cours/actifs nets est devenu du code mort
+(zéro titre concerné), la rampe bancaire n'a plus jamais été appliquée, et
+HSBC s'est retrouvée notée **0,7/5 sur un levier qui EST son métier** et
+**7/7 de conversion du cash** sur un flux qui ne suit que les mouvements de
+dépôts. La couverture montait — ce qui ressemblait à un succès — pendant que
+la justesse baissait.
+
+- **Table `_INDUSTRIES_BILAN`** : banques, marchés de capitaux, crédit
+  hypothécaire et assurance, par industrie Yahoo (les deux graphies du tiret).
+  Restent hors périmètre, à dessein, les réseaux de paiement, les places de
+  marché et agences de notation, les gérants d'actifs et les courtiers
+  d'assurance — tous dégagent un vrai flux disponible.
+- **Aucun flux disponible n'est reconstitué pour un métier de bilan** : mieux
+  vaut un champ vide qu'un « 113 % de conversion » flatteur et vide de sens.
+- Effet mesuré sur HSBC : le ROE repasse de 2,7/9 à 5,6/9, et ses deux
+  critères sans objet redeviennent des retraits motivés.
+- **Règle générale, désormais testée** : un critère de métier se déduit du
+  métier, jamais de l'état d'une source de données. 4 tests de non-régression.
+
 ### Couverture : on cesse de noter sur des données qu'on n'est pas allé chercher
 
 Doctrine posée par le propriétaire : un critère retiré faute de donnée est un

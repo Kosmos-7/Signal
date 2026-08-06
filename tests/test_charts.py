@@ -592,6 +592,26 @@ check("capex déposé en positif : la valeur absolue est prise",
                "Capital Expenditure": {"2025-12-31": 1_000_000_000}}), BS)["fcf"]
       == 4_000_000_000)
 
+# ── Métier de bilan : le drapeau se déduit du MÉTIER, jamais d'une donnée ───
+# Régression du 06/08 : le drapeau valait « secteur financier ET FCF absent ».
+# Dès qu'on a su reconstituer le FCF depuis les états financiers, il s'est
+# éteint pour TOUS les titres — rampe bancaire du ROE et critère cours/actifs
+# nets devenus code mort, HSBC notée 0,7/5 sur un levier qui EST son métier.
+print("\n— Métiers de bilan : drapeau déduit de l'industrie —")
+check("les banques et l'assurance sont dans la table",
+      {"Banks - Diversified", "Banks—Regional", "Capital Markets",
+       "Insurance - Property & Casualty"} <= screener._INDUSTRIES_BILAN)
+check("les deux graphies Yahoo du tiret sont couvertes",
+      all(("Banks - " + s in screener._INDUSTRIES_BILAN)
+          and ("Banks—" + s in screener._INDUSTRIES_BILAN)
+          for s in ("Diversified", "Regional")))
+check("réseaux de paiement, places de marché et gérants d'actifs EXCLUS "
+      "(ils dégagent un vrai flux disponible)",
+      not ({"Credit Services", "Financial Data & Stock Exchanges",
+            "Asset Management", "Insurance Brokers"} & screener._INDUSTRIES_BILAN))
+check("le drapeau ne dépend d'aucun champ de données",
+      "fcf" not in " ".join(screener._INDUSTRIES_BILAN).lower())
+
 # ── Intégration note v4 dans le screener ────────────────────────────────────
 print("\n— Note v4 : raison_sortie et projections lisent les nouveaux blocs —")
 BD_V4 = {"note": {"total": 41, "couverture": 88,
