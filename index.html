@@ -170,6 +170,15 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .fd-det summary:hover{border-color:rgba(116,182,223,.35)}
   .fd-det[open] summary{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
   .fd-det .fd-table{margin-top:10px}
+  /* Détail de la note v4 : lignes critère par critère, retraits grisés */
+  .nd{margin-top:14px}
+  .nd-b{font-family:var(--mono);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin:14px 0 4px}
+  .nd-r{display:flex;gap:12px;align-items:baseline;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+  .nd-p{font-family:var(--mono);font-size:.78rem;color:var(--ac);white-space:nowrap;min-width:52px;text-align:right}
+  .nd-t{font-size:.85rem;color:var(--text2);line-height:1.5}
+  .nd-off .nd-p{color:var(--text3)}
+  .nd-off .nd-t{color:var(--text3);font-style:italic}
+  .nd-c{font-size:.8rem;color:var(--text3);margin-top:10px;line-height:1.55}
   .fd-syn{font-size:.85rem;color:var(--text2);line-height:1.65;margin:6px 0 14px;border-left:2px solid rgba(116,182,223,.35);padding-left:12px}
   .fd-syn p{margin:0 0 5px}
   .fd-syn b{color:var(--text)}
@@ -395,7 +404,8 @@ let CHV=new Date().toISOString().slice(0,10);   // repli si universe.json muet
                        declares,scores,couverture,status,members:[TICKER…]}],
               stocks:{TICKER:{nom,score,secteur,market,devise,prix,z,fenetre,
                               decote_pct,rsi,cross,cross_j,upside_pct,analystes,
-                              qualite,valorisation,timing,themes:[id…],top30}}}
+                              q,c,v,m,couverture,themes:[id…],top30}}}
+   q/c/v/m = blocs compacts de la note v4 (sur 35/25/25/15, null = non notable)
    Le fichier est OPTIONNEL : s'il manque, la page se replie sur la seule
    watchlist principale (watchlist.json) sans rien casser. */
 const PHOTOS={};     // ticker → {legende} des photos de sociétés vérifiées
@@ -545,8 +555,14 @@ function stockOf(tk){
   if(WL[tk])return WL[tk];
   if(_lite[tk])return _lite[tk];
   const u=U.stocks[tk];if(!u)return null;
+  // Les blocs compacts q/c/v/m de universe.json sont remontés sous la même
+  // forme que breakdown.note du niveau riche : un seul chemin de rendu.
+  const note=(u.q!=null||u.c!=null||u.v!=null||u.m!=null)
+    ?{total:u.score,couverture:u.couverture,
+      blocs:{q:{pts:u.q,max:35},c:{pts:u.c,max:25},v:{pts:u.v,max:25},m:{pts:u.m,max:15}}}
+    :null;
   const s={ticker:tk,name:u.nom||tk,sector:u.secteur||'',market:u.market||'',score:u.score,badge:null,_c:true,_u:u,
-    breakdown:{qualite:u.qualite,valorisation:u.valorisation,timing:u.timing,
+    breakdown:{note:note,
       rsi:u.rsi,regression_z:u.z,regression_window_years:u.fenetre,decote_pct:u.decote_pct,
       cross_type:u.cross||'',cross_days_ago:u.cross_j,
       target_upside_pct:u.upside_pct,target_analysts:u.analystes}};
@@ -743,6 +759,31 @@ function sv(s){s=String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
 function paras(a){return a.map(p=>'<p>'+sv(p)+'</p>').join('');}
 function blocs(t){return paras(String(t==null?'':t).split(/\n\n+/));}
 function meter(l,v,m){return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(v/m*100)+'"></span></span><span class="mv">'+v+'/'+m+'</span></div>';}
+/* Jauge d'un bloc de la note v4. Un bloc à null n'est PAS nul : ses critères
+   sont incalculables (banque sans FCF, historique trop court…), il est retiré
+   et la note se renormalise — la jauge l'affiche « — » au lieu de mentir à 0. */
+function meterN(l,p,m){
+  if(p==null)return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="0"></span></span><span class="mv" title="Bloc non notable : critères retirés, note renormalisée sur le reste">—</span></div>';
+  return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(p/m*100)+'"></span></span><span class="mv">'+String(p).replace('.',',')+'/'+m+'</span></div>';
+}
+/* Dépliant « détail de la note » : les 16 critères phrasés du moteur v4,
+   groupés par bloc, retraits affichés avec leur motif. Niveau riche
+   uniquement (le compact de universe.json ne porte pas les critères). */
+function noteDetail(n){
+  if(!n||!Array.isArray(n.criteres)||!n.criteres.length)return'';
+  const BL={q:'Qualité',c:'Croissance',v:'Valorisation',m:'Momentum'};
+  let cur='',rows='';
+  n.criteres.forEach(c=>{
+    if(c.bloc!==cur){cur=c.bloc;rows+='<div class="nd-b">'+(BL[cur]||cur)+'</div>';}
+    rows+=c.pts==null
+      ?'<div class="nd-r nd-off"><span class="nd-p">retiré</span><span class="nd-t">'+sv(c.motif||'donnée indisponible')+'</span></div>'
+      :'<div class="nd-r"><span class="nd-p">'+String(c.pts).replace('.',',')+'/'+c.max+'</span><span class="nd-t">'+sv(c.phrase||'')+'</span></div>';
+  });
+  const couv=(n.couverture!=null&&n.couverture<100)
+    ?'<p class="nd-c">Couverture '+n.couverture+' % : un critère incalculable est retiré avec son motif et la note se renormalise sur le reste — un trou de donnée n\'est jamais compté zéro.</p>':'';
+  const nb=n.criteres.filter(c=>c.pts!=null).length;
+  return'<details class="fd-det nd"><summary>Détail de la note · '+nb+' critères notés'+(nb<n.criteres.length?' ('+(n.criteres.length-nb)+' retiré'+(n.criteres.length-nb>1?'s':'')+')':'')+'</summary>'+rows+couv+'</details>';
+}
 function sec(h,body,cls){return'<div class="sec '+(cls||'')+'"><div class="sec-h">'+h+'</div>'+body+'</div>';}
 function mk(k,v){return'<div><span class="k">'+k+'</span><span class="v">'+v+'</span></div>';}
 function bblist(arr){return arr&&arr.length?'<ul>'+arr.map(p=>'<li>'+sv(p)+'</li>').join('')+'</ul>':'<p class="stub">—</p>';}
@@ -772,13 +813,13 @@ function showLexique(){
   doc.innerHTML='<div class="wl-crumb"><a href="#/">← Watchlists</a>'+(curWl?'<span class="sepc">/</span><a href="'+hashOf(curWl.id)+'">'+sv(curWl.label)+'</a>':'')+'</div>'+
     '<div class="d-head"><div><div class="d-tk">Lexique</div><div class="d-nm">Comment lire une fiche · définitions des signaux</div></div></div>'+
     '<div class="sep"></div>'+
-    lexsec('Le score',
-      lexi('Score /100','Note de synthèse = <em>Qualité 45</em> + <em>Valorisation 30</em> + <em>Timing 22</em> + <em>Analystes 3</em>, ± pénalités (chase) / bonus (décote). La qualité et le prix pilotent ; le timing est un garde-fou. Un score élevé ne garantit pas une hausse imminente.')+
-lexi('Qualité · 45 pts','Durabilité du business, ce que tu possèdes : marge nette (8), marge FCF (8), ROE / qualité du capital (12), croissance du CA plafonnée (10), bilan / dette (7).')+
-lexi('Valorisation · 30 pts','La marge de sécurité, le prix payé : PEG (valorisation rapportée à la croissance, 15) + FCF yield (rendement du cash au prix actuel, 15).')+
-lexi('Timing · 22 pts','Garde-fou, pas moteur : croisement de moyennes (10), pente MM21 (4), volume (3), RSI (2), position vs régression (3). Surtout, il pénalise les 2 pièges, chaser un sommet, rattraper un couteau.')+
-      lexi('Analystes · 3 pts','Consensus sell-side (Acheter / Conserver / Vendre). Volontairement peu pondéré : biais acheteur structurel et révisions retardées.')+
-      lexi('Score Signal','Note sur 100 : qualité (45) + valorisation (30) + timing (22) + consensus analystes (3), ajustée de pénalités et de bonus.'))+
+    lexsec('La note',
+      lexi('Note /100','Partition en quatre blocs qui ne comptent chaque information qu\'une fois : <em>Qualité 35</em> (les niveaux des comptes) + <em>Croissance 25</em> (leurs dérivées) + <em>Valorisation 25</em> (le cours rapporté aux comptes) + <em>Momentum 15</em> (le cours rapporté à lui-même). Rampes continues partout : aucun seuil-falaise. Une note élevée ne garantit pas une hausse imminente.')+
+lexi('Qualité · 35 pts','Les niveaux des comptes publiés : marge nette médiane pluriannuelle (9), rendement des capitaux propres (9), conversion du bénéfice en cash réel (7), dette rapportée aux capitaux propres (5), constance des bénéfices (5).')+
+lexi('Croissance · 25 pts','Les dérivées des comptes : croissance annuelle du CA (7) et du bénéfice par action, dilution comprise (7), régularité de la progression (4), croissance attendue par les analystes (7) — l\'estimé ne pèse jamais plus que le démontré.')+
+lexi('Valorisation · 25 pts','Le prix payé : PER face à sa propre médiane historique (8), PEG maison — PER prévisionnel ÷ la plus prudente des deux croissances (7), rendement des bénéfices attendus (5), rendement du cash (5).')+
+lexi('Momentum · 15 pts','Le cours face à lui-même, trois horizons : écart MM21/MM200 en continu (6), position dans le canal de régression décennal en cloche symétrique — l\'étirement pénalise dans les deux sens (6), RSI en cloche (3).')+
+      lexi('Critère retiré','Quand une donnée est incalculable (FCF d\'une banque, historique trop court, devise comptable différente de la cotation), le critère est <em>retiré avec son motif</em> — affiché dans le détail de la note — et la note se renormalise sur le reste. Un trou de donnée n\'est jamais compté zéro.'))+
     lexsec('Signaux de timing',
 lexi('Golden Cross / Death Cross','<em>Golden Cross</em> : la MM21 passe au-dessus de la MM200, signal haussier. <em>Death Cross</em> : MM21 sous MM200, baissier. Plus le croisement est récent, plus le signal pèse.')+
       lexi('MM21 / MM200','Moyennes mobiles sur 21 et 200 jours : elles lissent les soubresauts quotidiens. La <em>MM21</em> réagit vite (court terme), la <em>MM200</em> donne la tendance de fond.')+
@@ -1340,10 +1381,13 @@ breakdown complet, on remplace alors cette zone sans toucher au résumé
    (l'animation de frappe repartirait de zéro) ni au graphique. */
 function dataZone(s,b,compact){
   const rsi=b.rsi==null?50:Math.max(0,Math.min(100,b.rsi)),zp=Math.max(0,Math.min(100,((b.regression_z==null?0:b.regression_z)+3)/6*100));
-  return '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,1).replace('.',',')+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
-      '<div><div class="qh">Décomposition du score</div>'+meter('Qualité',b.qualite||0,45)+meter('Valorisation',b.valorisation||0,30)+meter('Timing',b.timing||0,22)+(compact?'':meter('Analystes',b.analystes||0,3))+'</div></div>'+
+  const bl=(b.note&&b.note.blocs)||{};
+  const _p=k=>bl[k]?bl[k].pts:null;
+  return '<div class="quant"><div><div class="qh">Signaux de marché</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,1).replace('.',',')+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
+      '<div><div class="qh">Décomposition de la note</div>'+meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div></div>'+
     (compact?compactMetrics(s)
-      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',pc(fs,b.cross_slope_mm21_pct,1))+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))+'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>');
+      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',pc(fs,b.cross_slope_mm21_pct,1))+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))+'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>')+
+    noteDetail(b.note);
 }
 
 function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
@@ -1351,7 +1395,13 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   const score=s.score==null?0:s.score;
   const C=2*Math.PI*52,off=C*(1-score/100);
   const resumeBody=a&&a.resume?a.resume.map(p=>'<p class="resume">'+sv(p)+'</p>').join('')
-:compact?'<p class="resume">'+sv(s.name)+', score '+score+'/100 : qualité '+(b.qualite==null?'—':b.qualite+'/45')+', valorisation '+(b.valorisation==null?'—':b.valorisation+'/30')+', timing '+(b.timing==null?'—':b.timing+'/22')+'. '+stateTag(b)+', RSI '+f(b.rsi,0)+', z-score '+fs(b.regression_z,1).replace('.',',')+'σ sur '+(b.regression_window_years||'?')+' ans.</p>'
+:compact?'<p class="resume">'+sv(s.name)+', note '+score+'/100'+(function(){
+      const bl=(b.note&&b.note.blocs)||{};
+      const parts=[['q','qualité',35],['c','croissance',25],['v','valorisation',25],['m','momentum',15]]
+        .filter(x=>bl[x[0]]&&bl[x[0]].pts!=null)
+        .map(x=>x[1]+' '+String(bl[x[0]].pts).replace('.',',')+'/'+x[2]);
+      return parts.length?' : '+parts.join(', '):'';
+    })()+'. '+stateTag(b)+', RSI '+f(b.rsi,0)+', z-score '+fs(b.regression_z,1).replace('.',',')+'σ sur '+(b.regression_window_years||'?')+' ans.</p>'
 :'<p class="resume">'+sv(s.name)+', score '+score+'/100. '+stateTag(b)+'. Croissance CA '+fs(b.rev_growth_pct,0)+' % (dern. trim., a/a), marge nette '+f(b.net_margin_pct,0)+' % (TTM), z-score '+fs(b.regression_z,1).replace('.',',')+'σ.</p><p class="resume stub">Synthèse qualitative à générer.</p>';
   const bb=(a&&(a.bull||a.bear))?'<div class="bullbear"><div class="bb bb-bull"><div class="bb-h">▲ Thèse haussière</div>'+bblist(a.bull)+'</div><div class="bb bb-bear"><div class="bb-h">▼ Thèse baissière</div>'+bblist(a.bear)+'</div></div>':'';
   // recouvrement des thèmes, visible depuis la fiche elle-même
