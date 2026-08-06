@@ -236,11 +236,10 @@ def ajuster_eps_splits(bloc, splits, actions_actuelles=None):
         if not eps or eps <= 0:
             continue
         posterieurs = [r for d, r in spl if d > e["fin"]]
-        if not posterieurs:
-            continue                    # aucune ambiguïté possible
         rn = e.get("rn")
         if not rn or rn <= 0 or not actions_actuelles:
-            e.pop("eps", None)          # base indéterminable
+            if posterieurs:
+                e.pop("eps", None)      # base indéterminable
             continue
         candidats, f = [1.0], 1.0
         for r in reversed(posterieurs):
@@ -253,7 +252,11 @@ def ajuster_eps_splits(bloc, splits, actions_actuelles=None):
             if ecart_min is None or ecart < ecart_min:
                 mieux, ecart_min = c, ecart
         if ecart_min > math.log(3):
-            e.pop("eps", None)          # incohérent même au mieux : on retire
+            # rn/eps incompatibles avec le nombre d'actions quel que soit le
+            # candidat : l'un des deux ment (SCHW 2021, rn déposé à 6 M$) et
+            # on ne devine pas lequel — les deux champs sont retirés.
+            e.pop("eps", None)
+            e.pop("rn", None)
         elif mieux != 1.0:
             e["eps"] = round(eps / mieux, 4)
     return bloc

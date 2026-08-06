@@ -409,6 +409,14 @@ f = screener.fusionner_fonda(
     {"devise": "USD", "an": [], "tr": []})
 check("deux anciennes voisines : la plus récente survit",
       f["tr"] == [{"fin": "2025-04-02", "ca": 2}])
+# Un exercice fantôme déjà publié ne survit pas à la fusion : le filtre de
+# clôture majoritaire est rejoué sur l'union (cas AMZN, CY2026 fin juin).
+f = screener.fusionner_fonda(
+    {"devise": "USD", "an": [{"fin": f"{y}-12-31", "ca": 100 + y} for y in (2023, 2024, 2025)]
+     + [{"fin": "2026-06-30", "rn": 135281, "src": "edgar"}], "tr": []},
+    {"devise": "USD", "an": [{"fin": "2025-12-31", "ca": 2125}], "tr": []})
+check("exercice fantôme publié : purgé par la fusion, plus de zombie",
+      all(e["fin"] != "2026-06-30" for e in f["an"]) and len(f["an"]) == 3)
 
 print("\n— EDGAR : parsing des dépôts SEC (pur, hors ligne) —")
 import edgar                                                     # noqa: E402
@@ -497,11 +505,14 @@ GOOGLISH = {"an": [{"fin": "2020-12-31", "src": "edgar", "rn": 40269, "eps": 2.9
 edgar.ajuster_eps_splits(GOOGLISH, [("2022-07-18", 20.0)], actions_actuelles=12.3e9)
 check("BPA comparatif DÉJÀ retraité : détecté, laissé intact (bug GOOGL 592×)",
       GOOGLISH["an"][0]["eps"] == 2.93)
-# Donnée incohérente quelle que soit la base : le BPA est retiré.
-FAUX = {"an": [{"fin": "2021-12-31", "src": "edgar", "rn": 6, "eps": 3.2}], "tr": []}
-edgar.ajuster_eps_splits(FAUX, [("2023-01-01", 2.0)], actions_actuelles=1.8e9)
-check("aucune base plausible : pas de BPA plutôt qu'un multiple faux",
-      "eps" not in FAUX["an"][0])
+# Donnée incohérente quelle que soit la base : rn ET eps retirés (on ne
+# devine pas lequel ment) — même SANS split (SCHW 2021, rn déposé à 6 M$).
+FAUX = {"an": [{"fin": "2021-12-31", "src": "edgar", "ca": 18520, "rn": 6, "eps": 2.83}],
+        "tr": []}
+edgar.ajuster_eps_splits(FAUX, [], actions_actuelles=1.8e9)
+check("paire rn/eps incompatible avec le nombre d'actions : les deux retirés",
+      "eps" not in FAUX["an"][0] and "rn" not in FAUX["an"][0]
+      and FAUX["an"][0]["ca"] == 18520)
 # Sans rn ni nombre d'actions, base indéterminable + split postérieur → retiré.
 INDET = {"an": [{"fin": "2020-12-31", "src": "edgar", "eps": 5.0}], "tr": []}
 edgar.ajuster_eps_splits(INDET, [("2022-01-01", 2.0)], actions_actuelles=None)

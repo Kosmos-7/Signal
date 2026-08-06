@@ -533,6 +533,15 @@ def fusionner_fonda(ancien, nouveau, max_an=12, max_tr=20):
                     dedup[-1] = e
                 continue
             dedup.append(e)
+        # Un exercice fantôme déjà PUBLIÉ (AMZN, frame CY2026 arrêté fin juin)
+        # survivrait indéfiniment à la fusion : le run courant ne le produit
+        # plus, donc ne l'écrase jamais. Le filtre de clôture majoritaire de
+        # construire_fonda est rejoué sur l'union.
+        if cle == "an" and len(dedup) >= 3:
+            mois = [int(e["fin"][5:7]) for e in dedup]
+            maj = max(set(mois), key=mois.count)
+            emois = lambda m: min(abs(m - maj), 12 - abs(m - maj))
+            dedup = [e for e in dedup if emois(int(e["fin"][5:7])) <= 1]
         out[cle] = dedup[-borne:]
     # PER prévisionnels : ce sont des estimations COURANTES, le run le plus
     # récent fait foi ; à défaut (Yahoo muet un jour), on garde les anciennes,
