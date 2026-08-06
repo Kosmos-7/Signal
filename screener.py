@@ -837,6 +837,16 @@ UNIVERS = [
     # scoré ici comme n'importe quel candidat, sinon il aurait disparu de la
     # watchlist principale par simple effet de bord d'une décision de périmètre.
     "PLTR",
+
+    # ─── EX-WATCHLIST « FINANCIALS » (retirée le 06/08/2026) ───────────────
+    # Même décision que pour les watchlists d'août : le thème n'est plus
+    # publié mais ses titres restent scorés (candidats au top 30, et le
+    # portefeuille détient JPM, V, BLK, DB1.DE, SPGI, LSEG.L, ADYEN.AS —
+    # déjà dans l'univers historique). Ne figurent ici que les 16 tickers
+    # qui n'existaient qu'à travers le thème.
+    "BAC","WFC","HSBA.L","BNP.PA","UBSG.SW",
+    "CB","PGR","PYPL","BX","KKR",
+    "MCO","MSCI","ICE","CME","NDAQ","FICO",
 ]
 
 # ── Élargissement thématique (août 2026) ─────────────────────────────────────

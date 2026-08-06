@@ -195,48 +195,12 @@ THEMES_CURES = [
             },
         ],
     },
-    {
-        "id": "financials",
-        "label": "Financials",
-        "sous_titre": "Bilans, flux, encours et péages",
-        "kind": "secteur",
-        "thesis": (
-            "Qu'achète-t-on vraiment avec « de la finance » ? Quatre métiers qui ne "
-            "gagnent pas leur argent de la même façon, mis côte à côte pour voir "
-            "lequel se paie cher, et pourquoi."
-        ),
-        "inversion": (
-            "Pour les bilans : une récession de crédit, ou une baisse rapide des taux qui écrase "
-            "la marge d'intérêt. Pour les flux et les péages : la régulation des tarifs, qui "
-            "revient périodiquement sur les commissions d'interchange comme sur les indices et la "
-            "notation. Un secteur ne s'invalide pas comme une thèse, mais ces trois moteurs "
-            "peuvent caler séparément."
-        ),
-        "biais": (
-            "Un regroupement par métier, pas une conviction sur la finance. Conseil de "
-            "lecture : les péages se paient structurellement cher, leur score de valorisation "
-            "est donc toujours médiocre sans que l'entreprise le soit. À l'inverse, les "
-            "banques affichent des multiples bas qui reflètent un risque de bilan que le "
-            "score ne mesure pas. Comparez chaque titre à ses semblables, pas à la liste."
-        ),
-        # Même structuration que le thème infra-IA : les familles étaient en
-        # commentaires, elles deviennent une donnée publiée. Elles servent aussi
-        # de clé d'illustration, chaque famille ayant sa photo.
-        "maillons": [
-            {"label": "Bilans · banques",
-             "tickers": ["JPM", "BAC", "WFC", "GS", "MS", "TFC", "SCHW",
-                         "HSBA.L", "BNP.PA", "UBSG.SW"]},
-            {"label": "Bilans · assurance & courtage",
-             "tickers": ["CB", "PGR", "ALV.DE", "CS.PA", "MUV2.DE", "MMC"]},
-            {"label": "Flux · réseaux de paiement",
-             "tickers": ["V", "MA", "AXP", "ADYEN.AS", "PYPL"]},
-            {"label": "Gestion d'actifs & capital-investissement",
-             "tickers": ["BLK", "BX", "KKR"]},
-            {"label": "Péages · indices, notation & places de marché",
-             "tickers": ["SPGI", "MCO", "MSCI", "ICE", "CME", "NDAQ",
-                         "LSEG.L", "DB1.DE", "FICO"]},
-        ],
-    },
+    # « Financials » retirée le 06/08/2026 (décision propriétaire, « pour le
+    # moment ») : la watchlist secteur n'est plus publiée. Ses 33 tickers
+    # restent dans l'UNIVERS du screener (screener.py) — ils demeurent scorés
+    # et candidats au top 30, et le portefeuille en détient plusieurs (JPM, V,
+    # BLK, DB1.DE, SPGI, LSEG.L, ADYEN.AS). Les illustrations et légendes
+    # (assets/themes/financials*) sont conservées pour une réintroduction.
 ]
 
 # Dérivation du champ "tickers" pour les thèmes structurés par maillon : tout

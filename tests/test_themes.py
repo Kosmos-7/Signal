@@ -46,7 +46,8 @@ def check(nom, cond, detail=""):
 print("— Taxonomie —")
 ids = [t["id"] for t in themes.THEMES]
 check("identifiants uniques", len(ids) == len(set(ids)))
-check("3 thèmes curés publiés", len(themes.THEMES_CURES) == 3)
+check("2 thèmes curés publiés (financials retirée le 06/08)",
+      len(themes.THEMES_CURES) == 2)
 check("chaque thème a thèse, inversion et biais",
       all(t.get("thesis") and t.get("inversion") and t.get("biais") for t in themes.THEMES))
 check("les thèmes calculés publient leur règle en clair",
