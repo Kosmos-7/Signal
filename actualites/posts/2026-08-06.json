@@ -1,0 +1,87 @@
+{
+ "id": "2026-08-06",
+ "type": "quotidien",
+ "date": "2026-08-06",
+ "titre": "IA, pétrole russe et Spider-Man : le grand écart du mercredi matin",
+ "chapeau": "Les valeurs IA vacillent, Sinopec fait ses courses en Russie, et Spider-Man rejoint le club des milliards au box-office. Café chaud, tour d'horizon rapide.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-06.jpg",
+  "v": "4d3a1cff",
+  "legende": "Wall-Street-Sign-New-York",
+  "credit": "Acediscovery",
+  "licence": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wall-Street-Sign-New-York.jpg",
+  "fichier": "Wall-Street-Sign-New-York.jpg",
+  "requete": "Wall Street street sign"
+ },
+ "sections": [
+  {
+   "titre": "Les valeurs IA apprennent à voler... sans ailes",
+   "texte": "Reuters résume la situation avec une image qui fait mal : les actions IA « apprennent à voler, mais n'ont pas d'ailes ». Dans ce contexte, Alphabet a reculé, pénalisée selon CNBC par de nouvelles sorties de talents vers la concurrence. CNBC's Investing Club indique toutefois ne pas être « trop inquiet » de cette vague de départs. Le théâtre des valeurs technologiques continue de jouer à guichets serrés.",
+   "sources": [
+    0,
+    5
+   ]
+  },
+  {
+   "titre": "Sinopec fait ses emplettes côté russe",
+   "texte": "Selon une information exclusive de Reuters, Sinopec a augmenté ses importations de pétrole russe pour compenser des réductions d'approvisionnement en provenance du Moyen-Orient. C'est ce qu'indiquent des traders et un outil de suivi des flux cités par l'agence. Les routes commerciales du brut continuent de se réorganiser en silence.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Iran : Trump se dit positif",
+   "texte": "Donald Trump a réitéré sa présentation positive des discussions en cours avec l'Iran, selon Reuters. L'agence ne donne pas davantage de détails sur l'avancement concret des négociations.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Spider-Man entre dans le club des milliards",
+   "texte": "Le dernier Spider-Man vient de franchir le milliard de dollars de recettes mondiales, selon CNBC. Les analystes du box-office voient dans ce regain de films à un milliard un signe encourageant pour une industrie cinématographique qui cherche encore à retrouver ses niveaux d'avant la pandémie, dans un contexte de prix des billets en hausse.",
+   "sources": [
+    4
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Morning Bid: AI stocks learn to fly — but ain't got wings - Reuters",
+   "resume": "Morning Bid: AI stocks learn to fly — but ain't got wings  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNLVdyc053UEtXR1QxVFh6Q0xDYjlVYUxyaXdYZG05c0lkaHhoQnhZSnJGaXhPTFhoMkEwMUIzdE0tV2F0WGI1NGtxdTJGWklQV3JfYjRmU2dYXzQzNXBpeDRhT09ITGN3aGM4ekdDb2xzejNjUldiSVY5U1ZlWFJFaDYycG8ybzZKYlY1NG5R?oc=5",
+   "date": "2026-08-06 04:52"
+  },
+  {
+   "titre": "EXCLUSIVE: Sinopec steps up Russian oil imports to offset Mideast supply cuts, traders and tracker say - Reuters",
+   "resume": "EXCLUSIVE: Sinopec steps up Russian oil imports to offset Mideast supply cuts, traders and tracker say  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPNldJczB0MXMxMnZEaExVV3M1T0ZTM3JxUG1Fci1GVGNMaFd4c1ZsQnh0enBKVUdoSXJScU9aVDgzaFpqTkl5NEZ1LUlTQzhXWWRodjZDU25JeExHLXJDNXNnZ2IyOGxKXzZHaHBRVXczS05wY1JsdU5UcllxVjR4TnNkVXU2RzdIaDhrN21zaWhhYlJOeXJ3cGh5T0hSeGItVlVzbWhGY19MU2JMcEFjdUJrdUQyd2NFVVF3S0Q5R2NsMVAwMnQ1ZXc0SQ?oc=5",
+   "date": "2026-08-06 04:26"
+  },
+  {
+   "titre": "Trump reiterates his positive portrayal of Iran talks - Reuters",
+   "resume": "Trump reiterates his positive portrayal of Iran talks  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQYkljYWk5RVFGOXRJR0hycTRVWW1CTGZ6aFFlcU1MLTlJTUVMWFVvMDVmRm1qTzZyZ1RWaE92S1AzeE1QZHdTZFd0aFkwQ05oVDllUmlScmNtM2xPcUlJalE3Nk1Sbm10cGNjcEZOblcwbTdWTVNYVEFObVNIZzhJV20yUkVVTkFQQ2hlNGxobi1KVzZvQzk5Tm9IVQ?oc=5",
+   "date": "2026-08-06 02:55"
+  },
+  {
+   "titre": "Hollywood is cranking out billion-dollar movies again. Spider-Man just joined the ranks",
+   "resume": "Box office analysts say the resurgence of billion-dollar releases bodes well for a film industry that's still chasing pre-Covid levels, even with higher prices.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/05/hollywood-2026-billion-dollar-movies.html",
+   "date": "2026-08-05 21:15"
+  },
+  {
+   "titre": "Alphabet slumps on more AI brain drain. We're not too worried",
+   "resume": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/05/alphabet-is-slumping-on-the-departure-of-another-ai-exec.html",
+   "date": "2026-08-05 19:11"
+  }
+ ],
+ "genere_le": "2026-08-06 08:06 UTC"
+}
