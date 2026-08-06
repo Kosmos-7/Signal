@@ -34,6 +34,41 @@ corriger.
 - Effet : la valorisation des financières redevient pleinement mesurée,
   quatre critères sur quatre. 10 tests ajoutés (52 au total sur le moteur).
 
+### La renormalisation devient prudente — l'ignorance n'est plus une prime
+
+Le propriétaire sentait le nouveau classement « moins bien » sans pouvoir
+dire pourquoi. Mesure faite, l'intuition était juste : la renormalisation
+préservait la moyenne (aucun biais — +0,3 pt d'écart entre titres partiels
+et complets) mais gonflait la DISPERSION de 49 %. Les titres à couverture
+partielle — 33 % de la population — occupaient 67 % du décile supérieur et
+78 % du décile inférieur : un bloc jugé sur trois critères au lieu de cinq
+sature plus facilement (14,5 % des blocs partiels au maximum, contre 6,6 %
+des blocs complets). PDD dominait la watchlist à 91 en n'étant mesuré que
+sur 81 % de la grille.
+
+- La part NON MESURÉE d'un bloc est désormais présumée MOYENNE (55 % des
+  points), au lieu d'hériter de la performance observée sur le reste. Un
+  titre excellent sur ce qu'on sait mesurer reste bien noté, mais ne dépasse
+  plus un titre également excellent et intégralement vérifié. Symétriquement,
+  un titre médiocre partiellement mesuré ne coule plus au fond — pas de
+  retour des zéros muets.
+- Un bloc mesuré en entier n'est PAS touché (invariant testé).
+- Effet simulé sur les données du 06/08 : l'écart-type des titres partiels
+  rejoint celui des complets (19,7 → 13,9 contre 12,3), le décile supérieur
+  retombe à leur poids démographique. PDD 91 → 82, HSBC 80 → 72, et les
+  invisibles injustement coulés remontent (INTC 28 → 44, couverture 69 %).
+
+### Croissance : la mesure démarre au premier exercice exploitable
+
+Seize retraits « mathématiquement indéfinis » venaient d'un calcul qui
+renonçait trop tôt : Broadcom ouvre son historique à −4,86 de BPA puis
+atteint 4,77, et un taux de croissance n'existe pas depuis une base
+négative — la formule abandonnait dix exercices lisibles. Le TCAM démarre
+désormais au premier exercice positif (trois points minimum), la fenêtre
+réellement retenue est rendue avec le taux, et la phrase de la fiche
+signale la sortie de pertes (« depuis le premier exercice bénéficiaire,
+sur 8 ans »). Arriver en perte reste sans multiple ni croissance. 9 tests.
+
 ### Les sources se chaînent enfin
 
 Jusqu'ici chaque donnée avait UNE source et un trou restait un trou. Elles

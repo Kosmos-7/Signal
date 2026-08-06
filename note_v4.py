@@ -70,13 +70,37 @@ def _marges_annuelles(an):
 
 
 def _tcam(serie):
-    """TCAM (%) entre premier et dernier point [(annee, valeur>0), ...]."""
+    """TCAM (%) sur [(annee, valeur), ...], mesuré sur la plus longue fenêtre
+    exploitable qui se termine au dernier exercice.
+
+    POURQUOI ON NE PART PAS TOUJOURS DU PREMIER POINT. Un taux de croissance
+    annuel n'existe pas depuis une base négative : Broadcom ouvre son
+    historique à −4,86 € de bénéfice par action puis atteint 4,77 €, et la
+    formule renvoyait simplement « incalculable » — abandonnant dix exercices
+    de trajectoire parfaitement lisible. C'était 16 retraits sur le run du
+    06/08, classés à tort « mathématiquement indéfinis » : ce n'était pas la
+    donnée qui manquait, c'était le calcul qui renonçait trop tôt.
+
+    On démarre donc au PREMIER EXERCICE POSITIF, en exigeant qu'il reste au
+    moins trois points — sinon la mesure porterait sur un rebond de sortie de
+    pertes, pas sur une trajectoire. La fenêtre réellement retenue est rendue
+    avec le taux, pour que la phrase affichée dise la vérité (« sur 8 ans »
+    et non « sur 11 ans »).
+
+    Retourne (taux, nombre d'années) ou (None, None).
+    """
     if len(serie) < 3:
-        return None
-    (y0, v0), (y1, v1) = serie[0], serie[-1]
-    if v0 <= 0 or v1 <= 0 or y1 <= y0:
-        return None
-    return ((v1 / v0) ** (1 / (y1 - y0)) - 1) * 100
+        return None, None
+    (_, v_fin) = serie[-1]
+    if v_fin <= 0:
+        return None, None                     # arriver en perte n'est pas une croissance
+    depart = next((i for i, (_, v) in enumerate(serie) if v > 0), None)
+    if depart is None or len(serie) - depart < 3:
+        return None, None
+    (y0, v0), (y1, v1) = serie[depart], serie[-1]
+    if y1 <= y0:
+        return None, None
+    return ((v1 / v0) ** (1 / (y1 - y0)) - 1) * 100, y1 - y0
 
 
 # ── La grille ────────────────────────────────────────────────────────────────
@@ -174,20 +198,25 @@ def calcule_note(ctx):
 
     # ═ CROISSANCE /25 — dérivées des comptes ═
     cas = [(int(e["fin"][:4]), e["ca"]) for e in an if e.get("ca")]
-    g_ca = _tcam(cas)
+    g_ca, n_ca = _tcam(cas)
     if g_ca is not None:
         ajoute("c", "ca", 7, rampe(g_ca, 0, 15, 7), round(g_ca, 1),
                f"Chiffre d'affaires en croissance de {_fr(g_ca)} % par an "
-               f"sur {cas[-1][0]-cas[0][0]} ans")
+               f"sur {n_ca} ans")
     else:
         ajoute("c", "ca", 7, None, None, None, "croissance du CA non calculable")
 
     epss = [(int(e["fin"][:4]), e["eps"]) for e in an if e.get("eps")]
-    g_bpa = _tcam(epss)
+    g_bpa, n_bpa = _tcam(epss)
     if g_bpa is not None:
+        # La fenêtre est dite quand elle diffère de l'historique complet :
+        # « depuis le premier exercice bénéficiaire » est une information, pas
+        # un détail — elle signale une sortie de pertes.
+        _dep = (f" (depuis le premier exercice bénéficiaire, sur {n_bpa} ans)"
+                if epss and n_bpa < epss[-1][0] - epss[0][0] else f" sur {n_bpa} ans")
         ajoute("c", "bpa", 7, rampe(g_bpa, 0, 15, 7), round(g_bpa, 1),
                f"Bénéfice par action en croissance de {_fr(g_bpa)} % par an, "
-               f"dilution comprise")
+               f"dilution comprise{_dep}")
     else:
         ajoute("c", "bpa", 7, None, None, None,
                "trajectoire du bénéfice par action non calculable")
@@ -312,15 +341,36 @@ def calcule_note(ctx):
         ajoute("m", "rsi", 3, None, None, None, "RSI indisponible")
 
     # ═ Agrégation : renormalisation par bloc, puis sur les blocs notés ═
+    #
+    # LA PRUDENCE DE LA RENORMALISATION. Projeter tels quels les points d'une
+    # base partielle sur le maximum du bloc préserve la MOYENNE mais gonfle la
+    # DISPERSION : mesuré sur le run du 06/08, l'écart-type des titres à
+    # couverture partielle dépassait de 49 % celui des titres complets, et ces
+    # titres occupaient 67 % du décile supérieur pour 33 % de la population.
+    # La raison est arithmétique : avec trois critères au lieu de cinq, on a
+    # trois occasions de perdre des points au lieu de cinq, donc saturer est
+    # plus facile — un bloc partiel atteignait son maximum 14,5 % du temps
+    # contre 6,6 % pour un bloc mesuré en entier.
+    #
+    # On rapproche donc la part NON MESURÉE de la moyenne du bloc plutôt que
+    # de lui prêter la performance observée. Un titre excellent sur ce qu'on
+    # sait mesurer reste bien noté, mais ne dépasse plus un titre également
+    # excellent et intégralement vérifié : l'ignorance ne se transforme plus
+    # en avantage. Symétriquement, elle ne se transforme pas non plus en
+    # punition — c'était la pathologie de la v3, celle des zéros muets.
+    NEUTRE = 0.55           # performance présumée de la part non mesurée
     BLOCS = {"q": 35, "c": 25, "v": 25, "m": 15}
     blocs = {}
     for b, maxi in BLOCS.items():
         notes = [c for c in crit if c["bloc"] == b and c["pts"] is not None]
         dispo = sum(c["max"] for c in notes)
         if dispo:
-            blocs[b] = {"pts": round(sum(c["pts"] for c in notes) / dispo * maxi, 1),
-                        "max": maxi, "dispo": dispo,
-                        "sur": sum(c["max"] for c in crit if c["bloc"] == b)}
+            sur = sum(c["max"] for c in crit if c["bloc"] == b)
+            part = dispo / sur                       # fraction réellement mesurée
+            taux = sum(c["pts"] for c in notes) / dispo
+            pts = (taux * part + NEUTRE * (1 - part)) * maxi
+            blocs[b] = {"pts": round(pts, 1), "max": maxi, "dispo": dispo,
+                        "sur": sur}
         else:
             blocs[b] = {"pts": None, "max": maxi, "dispo": 0,
                         "sur": sum(c["max"] for c in crit if c["bloc"] == b)}

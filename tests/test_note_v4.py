@@ -143,6 +143,67 @@ check("un cours/actifs nets négatif ou nul est refusé",
       next(c["pts"] for c in calcule_note(dict(ctx_b, price_to_book=-0.5))["criteres"]
            if c["id"] == "actifs_nets") is None)
 
+print("\n— Prudence de la renormalisation : l'ignorance n'est ni prime ni punition —")
+# Un bloc mesuré en ENTIER et parfait doit atteindre son maximum
+plein = calcule_note(CTX_TEMOIN)
+# Une banque parfaite sur ses 3 critères de qualité ne doit PLUS saturer à 35/35
+_bq = dict(CTX_TEMOIN, banque=True, fcf_margin_pct=None, fcf_yield_pct=None,
+           roe=0.30, debt_eq=None, price_to_book=1.0)
+part = calcule_note(_bq)
+check("un bloc partiel et parfait ne sature plus comme un bloc complet",
+      part["blocs"]["q"]["pts"] < part["blocs"]["q"]["max"],
+      f"{part['blocs']['q']['pts']}/{part['blocs']['q']['max']}")
+check("mais il reste bien noté (au-dessus des deux tiers)",
+      part["blocs"]["q"]["pts"] > 0.66 * part["blocs"]["q"]["max"],
+      str(part["blocs"]["q"]["pts"]))
+# Symétrie : un bloc partiel et NUL ne doit pas tomber à zéro non plus
+_nul = dict(_bq, roe=0.0, net_margin_pct=0.0,
+            an=[{"fin": f"{y}-12-31", "ca": 100, "rn": 0, "eps": 0.01}
+                for y in range(2019, 2026)])
+bas = calcule_note(_nul)
+check("un bloc partiel et médiocre ne tombe pas à zéro (pas de zéro muet)",
+      bas["blocs"]["q"]["pts"] > 0, str(bas["blocs"]["q"]["pts"]))
+check("les deux extrêmes se resserrent vers le milieu",
+      part["blocs"]["q"]["pts"] - bas["blocs"]["q"]["pts"]
+      < plein["blocs"]["q"]["max"],
+      f"{part['blocs']['q']['pts']} vs {bas['blocs']['q']['pts']}")
+# Invariant : bloc mesuré en entier → points = somme brute des critères,
+# la prudence ne s'applique qu'à la part NON mesurée (ici nulle).
+_somme_c = sum(c["pts"] for c in plein["criteres"]
+               if c["bloc"] == "c" and c["pts"] is not None)
+check("un bloc intégralement mesuré n'est pas touché par la prudence",
+      plein["blocs"]["c"]["dispo"] == plein["blocs"]["c"]["max"]
+      and abs(plein["blocs"]["c"]["pts"] - round(_somme_c, 1)) < 0.05,
+      f"{plein['blocs']['c']['pts']} vs somme {_somme_c}")
+
+print("\n— Croissance : on démarre au premier exercice exploitable —")
+from note_v4 import _tcam
+# Cas Broadcom : base négative puis dix ans de trajectoire lisible
+BRCM = [(2016, -4.86), (2017, 0.402), (2018, 2.844), (2019, 0.643), (2020, 0.633),
+        (2021, 1.5), (2022, 2.653), (2023, 3.298), (2024, 1.23), (2025, 4.77)]
+g, n = _tcam(BRCM)
+check("base négative : la mesure démarre au premier exercice positif",
+      g is not None and n == 8, f"g={g} n={n}")
+check("le taux est celui de la fenêtre retenue, pas de l'historique entier",
+      abs(g - ((4.77 / 0.402) ** (1 / 8) - 1) * 100) < 1e-9, str(g))
+check("la fenêtre rendue sert à écrire la phrase",
+      _tcam([(2020, 1.0), (2021, 2.0), (2022, 3.0), (2023, 4.0)])[1] == 3)
+check("arriver en perte n'est pas une croissance",
+      _tcam([(2021, 1.0), (2022, 2.0), (2023, 3.0), (2024, -1.0)]) == (None, None))
+check("moins de trois points exploitables après la base négative : on renonce",
+      _tcam([(2021, -5.0), (2022, -2.0), (2023, 1.0), (2024, 2.0)]) == (None, None))
+check("série trop courte : inchangé", _tcam([(2023, 1.0), (2024, 2.0)]) == (None, None))
+check("série entièrement négative : rien à mesurer",
+      _tcam([(2021, -1.0), (2022, -2.0), (2023, -3.0)]) == (None, None))
+# La note doit désormais compter le critère au lieu de le retirer
+n_brcm = calcule_note({"an": [{"fin": f"{y}-12-31", "ca": 1000 + 100 * i, "rn": 500,
+                               "eps": v} for i, (y, v) in enumerate(BRCM)]})
+c_bpa = next(c for c in n_brcm["criteres"] if c["id"] == "bpa")
+check("le critère BPA est noté au lieu d'être retiré",
+      c_bpa["pts"] is not None, str(c_bpa.get("motif")))
+check("la phrase signale la sortie de pertes",
+      "premier exercice bénéficiaire" in (c_bpa["phrase"] or ""), c_bpa["phrase"])
+
 print("\n— Gardes de plausibilité et cas dégradés —")
 # NBIS : marges de holding aberrantes → le critère marge ne note pas
 an_nbis = [{"fin": f"{y}-12-31", "ca": 100, "rn": 1764, "eps": 1.0} for y in (2021, 2022, 2023, 2024)]
