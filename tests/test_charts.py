@@ -592,6 +592,43 @@ check("capex déposé en positif : la valeur absolue est prise",
                "Capital Expenditure": {"2025-12-31": 1_000_000_000}}), BS)["fcf"]
       == 4_000_000_000)
 
+# ── Chaîne des sources : Yahoo → états financiers → comptes publiés → Finnhub
+print("\n— Chaîne des sources : chaque maillon ne comble que ce qui reste —")
+AN_CH = [{"fin": "2023-12-31", "ca": 10_000, "rn": 1_500, "eps": 3.0},
+         {"fin": "2024-12-31", "ca": 12_000, "rn": 2_400, "eps": 4.0}]
+nm, tpe, src = screener.chainer_comptes(AN_CH, True, 80.0, None, None)
+check("marge nette déduite du dernier exercice (2 400/12 000 = 20 %)",
+      abs(nm - 0.20) < 1e-9, str(nm))
+check("PER courant déduit du cours et du dernier BPA (80/4 = 20×)",
+      abs(tpe - 20.0) < 1e-9, str(tpe))
+check("provenance des deux valeurs enregistrée", src == ["marge", "per"], str(src))
+nm2, tpe2, src2 = screener.chainer_comptes(AN_CH, True, 80.0, 0.31, 44.0)
+check("une valeur déjà connue n'est jamais écrasée",
+      nm2 == 0.31 and tpe2 == 44.0 and src2 == [], str(src2))
+# Piège des ADR : cours en USD, BPA en TWD → aucun PER déductible
+_, tpe3, src3 = screener.chainer_comptes(AN_CH, False, 80.0, None, None)
+check("devise comptable ≠ cotation : pas de PER déduit (piège ADR)",
+      tpe3 is None and "per" not in src3, str(src3))
+check("BPA négatif ou nul : pas de PER (une perte n'a pas de multiple)",
+      screener.chainer_comptes([{"fin": "2024-12-31", "ca": 9, "rn": -2, "eps": -1.5}],
+                               True, 80.0, None, None)[1] is None)
+check("historique vide : rien n'est inventé",
+      screener.chainer_comptes([], True, 80.0, None, None) == (None, None, []))
+
+# Finnhub, dernier maillon — la conversion d'unités est le vrai piège
+fnm, fde, fsrc = screener.chainer_finnhub(
+    {"net_margin": 18.5, "debt_equity": 0.74}, None, None)
+check("marge Finnhub convertie de % en fraction (18,5 → 0,185)",
+      abs(fnm - 0.185) < 1e-9, str(fnm))
+check("dette/CP Finnhub convertie de ratio en % (0,74 → 74)",
+      abs(fde - 74.0) < 1e-9, str(fde))
+check("provenance Finnhub enregistrée", fsrc == ["marge", "dette"], str(fsrc))
+check("Finnhub n'écrase jamais une valeur déjà obtenue",
+      screener.chainer_finnhub({"net_margin": 18.5, "debt_equity": 0.74},
+                               0.22, 61.0) == (0.22, 61.0, []))
+check("Finnhub muet (titre non US) : la chaîne s'arrête sans rien changer",
+      screener.chainer_finnhub({}, None, None) == (None, None, []))
+
 # ── Métier de bilan : le drapeau se déduit du MÉTIER, jamais d'une donnée ───
 # Régression du 06/08 : le drapeau valait « secteur financier ET FCF absent ».
 # Dès qu'on a su reconstituer le FCF depuis les états financiers, il s'est

@@ -535,6 +535,76 @@ def etats_complements(df_cf, df_bs):
     return out
 
 
+def chainer_comptes(an, meme_devise, prix, net_margin_raw, trailing_pe_raw):
+    """Troisième maillon de la chaîne : les COMPTES PUBLIÉS.
+
+    Quand le résumé Yahoo et les états financiers sont tous deux muets, il
+    reste l'historique déjà constitué pour la section « Chiffres publiés » —
+    étendu par EDGAR pour les sociétés américaines. Deux grandeurs s'en
+    déduisent sans aucune hypothèse :
+
+      · la marge nette = résultat net ÷ chiffre d'affaires du dernier
+        exercice publié (les deux sont dans la même devise comptable) ;
+      · le PER courant = cours ÷ bénéfice par action du dernier exercice,
+        à condition que la devise comptable soit celle de la cotation —
+        sinon on diviserait des TWD par des USD (le piège des ADR).
+
+    C'est un repli ANNUEL là où Yahoo publie du douze-mois-glissant : moins
+    frais, mais exact et vérifiable. Rendu en fractions/multiples bruts, à
+    l'image de ce que le résumé Yahoo aurait donné.
+
+    Retourne (net_margin, trailing_pe, provenance[]) — les valeurs déjà
+    connues sont rendues inchangées et n'apparaissent pas dans la provenance.
+    """
+    src = []
+    nm, tpe = net_margin_raw, trailing_pe_raw
+    dernier = next((e for e in reversed(an or []) if e.get("ca")), None)
+    if nm is None and dernier and dernier.get("rn") is not None and dernier.get("ca"):
+        nm = dernier["rn"] / dernier["ca"]
+        src.append("marge")
+    if tpe is None and meme_devise and prix:
+        d_eps = next((e for e in reversed(an or [])
+                      if e.get("eps") and e["eps"] > 0), None)
+        if d_eps:
+            tpe = prix / d_eps["eps"]
+            src.append("per")
+    return nm, tpe, src
+
+
+def chainer_finnhub(fh_data, net_margin_raw, debt_eq_raw):
+    """Quatrième et DERNIER maillon : Finnhub, titres américains seulement.
+
+    Placé en bout de chaîne à dessein, pour deux raisons qui étaient les
+    objections historiques à son usage comme source de remplissage.
+
+    L'ASYMÉTRIE : Finnhub ne connaît pas les symboles non américains (et
+    renvoie une société homonyme si l'on retire le suffixe — MC.PA donnerait
+    Moelis). Le placer en dernier limite l'écart qu'il creuse : il ne sert
+    que lorsque Yahoo ET les états financiers ET les comptes publiés ont tous
+    échoué, ce qui est rare.
+
+    LES UNITÉS : Finnhub rend la marge et le ROE en POURCENTS là où Yahoo
+    rend des fractions, et le rapport dette/capitaux propres en RATIO là où
+    Yahoo rend un pourcentage. Un remplissage naïf offrirait une vingtaine de
+    points indus — la conversion est donc explicite et testée.
+
+    L'ordre d'appel importe : la validation croisée Yahoo/Finnhub doit tourner
+    AVANT ce remplissage, sinon elle comparerait Finnhub à lui-même et le seul
+    détecteur de donnée douteuse du système s'éteindrait.
+    """
+    src = []
+    nm, de = net_margin_raw, debt_eq_raw
+    if not fh_data:
+        return nm, de, src
+    if nm is None and fh_data.get("net_margin") is not None:
+        nm = fh_data["net_margin"] / 100          # % → fraction
+        src.append("marge")
+    if de is None and fh_data.get("debt_equity") is not None:
+        de = fh_data["debt_equity"] * 100         # ratio → %
+        src.append("dette")
+    return nm, de, src
+
+
 def per_historique(an, prix_a_la_date, meme_devise):
     """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
     dilué publié. UNIQUEMENT quand la devise comptable est celle de cotation :
@@ -1644,13 +1714,34 @@ def score_ticker(ticker, vix=None):
             """Nombre fini ou None — les NaN Yahoo ne doivent pas entrer dans la note."""
             return v if isinstance(v, (int, float)) and v == v and np.isfinite(v) else None
         _f = fonda if isinstance(fonda, dict) else {}
+
+        # ── Fin de la CHAÎNE DES SOURCES ────────────────────────────────────
+        # 1. résumé Yahoo → 2. états financiers (plus haut) → 3. comptes
+        # publiés (Yahoo + EDGAR) → 4. Finnhub, US seulement, en dernier.
+        # Chaque maillon ne remplit que ce que les précédents ont laissé vide,
+        # et inscrit sa provenance : une donnée reconstituée ne se fait jamais
+        # passer pour une donnée de première main.
+        _nm_raw = margins_raw
+        _nm_raw, trailing_pe, _src3 = chainer_comptes(
+            _f.get("an"), _meme_devise, prix, _nm_raw, trailing_pe)
+        fonda_source += [s + ":comptes" for s in _src3]
+        _nm_raw, debt_eq_raw, _src4 = chainer_finnhub(fh_data, _nm_raw, debt_eq_raw)
+        fonda_source += [s + ":finnhub" for s in _src4]
+        if _nm_raw is not None and margins_raw is None:
+            margins = _nm_raw          # le score consomme la valeur chaînée
+        breakdown["net_margin_pct"] = (round(_nm_raw * 100, 1)
+                                       if _nm_raw is not None else None)
+        breakdown["trailing_pe"] = round(trailing_pe, 1) if trailing_pe else None
+        breakdown["debt_eq_pct"] = (round(debt_eq_raw)
+                                    if _n(debt_eq_raw) is not None else None)
+        breakdown["fonda_source"] = fonda_source or None
         note = note_v4.calcule_note({
             "an":             _f.get("an") or [],
             "pe_prev":        _f.get("pe_prev"),
             "prix":           prix,
             "trailing_pe":    _n(trailing_pe),
             "forward_pe":     _n(forward_pe),
-            "net_margin_pct": round(margins * 100, 1) if margins_raw is not None else None,
+            "net_margin_pct": round(_nm_raw * 100, 1) if _nm_raw is not None else None,
             "fcf_margin_pct": round(fcf_margin * 100, 1) if (fcf_raw is not None and total_rev_raw) else None,
             "fcf_yield_pct":  _n(fcf_yield),   # déjà gardé par la devise plus haut
             "roe":            _n(roe),

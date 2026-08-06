@@ -34,6 +34,35 @@ corriger.
 - Effet : la valorisation des financières redevient pleinement mesurée,
   quatre critères sur quatre. 10 tests ajoutés (52 au total sur le moteur).
 
+### Les sources se chaînent enfin
+
+Jusqu'ici chaque donnée avait UNE source et un trou restait un trou. Elles
+s'enchaînent désormais, chaque maillon ne comblant que ce que les précédents
+ont laissé vide, et inscrivant sa provenance dans `fonda_source` :
+
+1. **résumé Yahoo** (`info`) — inchangé, source de première main ;
+2. **états financiers** (bilan, tableau de flux) — flux disponible, capitaux
+   propres, dette, ROE ;
+3. **comptes publiés** (Yahoo + EDGAR pour les US) — marge nette du dernier
+   exercice, PER courant déduit du cours et du BPA publié ;
+4. **Finnhub**, titres américains uniquement, en dernier recours.
+
+- **`chainer_comptes()`** : deux grandeurs se déduisent des comptes sans
+  aucune hypothèse — la marge nette (résultat ÷ chiffre d'affaires du dernier
+  exercice) et le PER courant (cours ÷ BPA publié). Repli annuel là où Yahoo
+  donne du douze-mois-glissant : moins frais, mais exact et vérifiable. Garde
+  ADR : pas de PER quand la devise comptable diffère de la cotation, sinon on
+  diviserait des dollars par des dollars taïwanais.
+- **`chainer_finnhub()`** : placé en BOUT de chaîne, pour limiter l'asymétrie
+  américaine qu'il crée — il ne sert que lorsque les trois maillons universels
+  ont tous échoué. Les unités sont converties explicitement (marge en pourcents
+  chez Finnhub contre fraction chez Yahoo, dette en ratio contre pourcentage) :
+  c'était le piège qui aurait offert une vingtaine de points indus. L'ordre est
+  préservé — la validation croisée tourne AVANT le remplissage, sans quoi elle
+  comparerait Finnhub à lui-même et le seul détecteur de donnée douteuse du
+  système s'éteindrait.
+- 12 tests, dont la conversion d'unités et le piège ADR.
+
 ### Régression corrigée : le métier de bilan se déduit du métier
 
 Défaut introduit puis rattrapé le même jour, et la leçon vaut d'être écrite.
