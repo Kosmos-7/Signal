@@ -540,6 +540,58 @@ check("dates voisines (30 vs 31 déc.) : doublon évité",
           {"an": [{"fin": "2024-12-31", "src": "edgar", "ca": 24000}], "tr": []}
       )["an"]) == 1)
 
+# ── Compléments lus dans les états financiers (couverture 100 %) ────────────
+print("\n— États financiers : combler ce que le résumé Yahoo ne dit pas —")
+CF = FDF({
+    "Operating Cash Flow": {"2024-12-31": 8_000_000_000, "2025-12-31": 9_500_000_000},
+    "Capital Expenditure": {"2024-12-31": -2_000_000_000, "2025-12-31": -2_500_000_000},
+})
+BS = FDF({
+    "Stockholders Equity": {"2024-12-31": 40_000_000_000, "2025-12-31": 44_000_000_000},
+    "Total Debt":          {"2024-12-31": 12_000_000_000, "2025-12-31": 11_000_000_000},
+})
+ec = screener.etats_complements(CF, BS)
+check("flux disponible = exploitation − investissements, exercice le plus récent",
+      ec.get("fcf") == 7_000_000_000, str(ec.get("fcf")))
+check("capitaux propres et dette lus au dernier bilan",
+      ec.get("capitaux_propres") == 44_000_000_000 and ec.get("dette") == 11_000_000_000,
+      str(ec))
+check("dette / capitaux propres exploitable (25 %)",
+      round(ec["dette"] / ec["capitaux_propres"] * 100) == 25)
+# La ligne toute faite prime sur le calcul quand l'émetteur la publie
+ec2 = screener.etats_complements(
+    FDF({"Free Cash Flow": {"2025-12-31": 6_600_000_000},
+         "Operating Cash Flow": {"2025-12-31": 9_500_000_000},
+         "Capital Expenditure": {"2025-12-31": -2_500_000_000}}), BS)
+check("« Free Cash Flow » publié prime sur la reconstitution",
+      ec2["fcf"] == 6_600_000_000, str(ec2["fcf"]))
+# Libellés alternatifs (les émetteurs ne nomment pas leurs lignes pareil)
+ec3 = screener.etats_complements(
+    FDF({"Total Cash From Operating Activities": {"2025-12-31": 5_000_000_000},
+         "Capital Expenditures": {"2025-12-31": -1_000_000_000}}),
+    FDF({"Common Stock Equity": {"2025-12-31": 20_000_000_000},
+         "Long Term Debt": {"2025-12-31": 6_000_000_000},
+         "Current Debt": {"2025-12-31": 1_000_000_000}}))
+check("libellés alternatifs reconnus (flux, capitaux propres)",
+      ec3["fcf"] == 4_000_000_000 and ec3["capitaux_propres"] == 20_000_000_000)
+check("dette recomposée long terme + court terme",
+      ec3["dette"] == 7_000_000_000, str(ec3.get("dette")))
+# Fail-soft : rien ne doit être deviné
+check("états vides → dict vide, aucune valeur inventée",
+      screener.etats_complements(None, None) == {}
+      and screener.etats_complements(FDF({}), FDF({})) == {})
+check("capitaux propres négatifs : pas de ratio trompeur",
+      "capitaux_propres" not in screener.etats_complements(
+          CF, FDF({"Stockholders Equity": {"2025-12-31": -3_000_000_000}})))
+check("bilan sans ligne de dette : la dette est omise, pas mise à zéro",
+      "dette" not in screener.etats_complements(
+          CF, FDF({"Stockholders Equity": {"2025-12-31": 1_000_000_000}})))
+check("capex déposé en positif : la valeur absolue est prise",
+      screener.etats_complements(
+          FDF({"Operating Cash Flow": {"2025-12-31": 5_000_000_000},
+               "Capital Expenditure": {"2025-12-31": 1_000_000_000}}), BS)["fcf"]
+      == 4_000_000_000)
+
 # ── Intégration note v4 dans le screener ────────────────────────────────────
 print("\n— Note v4 : raison_sortie et projections lisent les nouveaux blocs —")
 BD_V4 = {"note": {"total": 41, "couverture": 88,

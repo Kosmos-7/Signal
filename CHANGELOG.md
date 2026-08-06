@@ -34,6 +34,42 @@ corriger.
 - Effet : la valorisation des financières redevient pleinement mesurée,
   quatre critères sur quatre. 10 tests ajoutés (52 au total sur le moteur).
 
+### Couverture : on cesse de noter sur des données qu'on n'est pas allé chercher
+
+Doctrine posée par le propriétaire : un critère retiré faute de donnée est un
+défaut, pas une fatalité — sauf quand la métrique n'a réellement pas de sens
+pour le métier. L'audit des 125 retraits du run v4 a classé les causes :
+38 % mathématiquement indéfinis (croissance depuis une base négative),
+**21 % récupérables dans des données déjà téléchargées**, 18 % fenêtre
+historique trop courte, 17 % métier de bilan (légitimes), 7 % devise
+comptable différente de la cotation.
+
+- **Nouvelle fonction `etats_complements()`** : le résumé Yahoo (`info`) ne
+  renseigne ni `freeCashflow`, ni `debtToEquity`, ni `returnOnEquity` pour
+  une large part des titres non américains — Disco Corporation à Tokyo et
+  SK Hynix à Séoul n'ont aucun des trois. Or le tableau de flux et le bilan
+  sont DÉJÀ téléchargés pour la section « Chiffres publiés ». On y lit
+  désormais le flux disponible (ligne publiée, sinon exploitation moins
+  investissements), les capitaux propres et la dette totale, avec repli sur
+  les libellés alternatifs. Universel — toutes places, toutes devises, donc
+  sans l'asymétrie américaine d'EDGAR — et sans un seul appel réseau de plus.
+- **Provenance publiée** (`fonda_source`) : la fiche dira lesquels des trois
+  champs ont été reconstruits, comme `src:"edgar"` le fait pour l'historique.
+- Gardes : capitaux propres négatifs refusés (un levier inversé serait
+  trompeur), dette omise plutôt que mise à zéro quand le bilan n'en porte
+  pas, capex pris en valeur absolue quel que soit son signe de dépôt.
+  13 tests ajoutés — dont un qui a attrapé un vrai défaut, les capitaux
+  propres négatifs passant le test de vérité de Python.
+
+### Correctif d'affichage
+
+- **Les valeurs des jauges débordaient de leur colonne.** La note v4 publie
+  des points décimaux (« 23,5/25 », sept caractères) là où la v3 tenait en
+  cinq, et la classe `.mv` des jauges entrait en collision avec le badge de
+  mouvement au classement, dont elle héritait bordure et marges intérieures.
+  Classe renommée en `.mval`, colonne élargie, chiffres tabulaires. Vérifié
+  au navigateur en 1440 px et en 390 px.
+
 ### Correctif d'exploitation
 
 - **Déploiement GitHub Pages** : les publications de 12h00 et 12h14 ont

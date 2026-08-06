@@ -79,10 +79,14 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 .gmark{position:absolute;top:-3px;width:2px;height:11px;background:var(--ac);box-shadow:0 0 6px var(--ac);border-radius:2px;transition:left .5s}
 
 /* ── Barre de progression (meter) ── */
-.meter{display:grid;grid-template-columns:54px 1fr 40px;gap:9px;align-items:center;font:.64rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-bottom:8px}
+/* Colonne de valeur dimensionnée pour « 23,5/25 » : depuis la note v4 les
+   points sont décimaux, sept caractères au lieu de cinq. La classe est
+   .mval et NON .mv — cette dernière est le badge de mouvement au
+   classement, dont la bordure et le padding débordaient ici. */
+.meter{display:grid;grid-template-columns:54px 1fr 58px;gap:9px;align-items:center;font:.64rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-bottom:8px}
 .meter .t{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
 .meter .f{display:block;height:4px;border-radius:2px;width:0;background:var(--ac);transition:width .8s cubic-bezier(.2,.8,.2,1)}
-.meter .mv{color:var(--text2);text-align:right}
+.meter .mval{color:var(--text2);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 /* barre horizontale générique (alloc, poids…) */
 .bar-track{height:4px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
 .bar-fill{height:100%;border-radius:3px;background:var(--ac)}

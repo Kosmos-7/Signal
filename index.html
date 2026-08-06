@@ -94,7 +94,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
 
   .quant{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:1.8rem 0}
   .qh{font:600 .6rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem;display:flex;align-items:center;gap:10px}.qh::after{content:'';flex:1;height:1px;background:var(--line)}
-  .meter{grid-template-columns:104px 1fr 44px}   /* labels en toutes lettres */
+  .meter{grid-template-columns:104px 1fr 62px}   /* labels en toutes lettres, valeurs décimales */
 
   .prose{margin-top:1.8rem;max-width:1040px}
   .metrics-note{font:.62rem var(--mono);color:var(--text3);letter-spacing:.2px;line-height:1.55;margin:-.7rem 0 0;text-align:right}
@@ -758,13 +758,13 @@ function stateTag(b){const ct=b.cross_type==='golden'?'GOLDEN CROSS':b.cross_typ
 function sv(s){s=String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');return s.replace(/&lt;b&gt;/g,'<b>').replace(/&lt;\/b&gt;/g,'</b>');}
 function paras(a){return a.map(p=>'<p>'+sv(p)+'</p>').join('');}
 function blocs(t){return paras(String(t==null?'':t).split(/\n\n+/));}
-function meter(l,v,m){return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(v/m*100)+'"></span></span><span class="mv">'+v+'/'+m+'</span></div>';}
+function meter(l,v,m){return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(v/m*100)+'"></span></span><span class="mval">'+v+'/'+m+'</span></div>';}
 /* Jauge d'un bloc de la note v4. Un bloc à null n'est PAS nul : ses critères
    sont incalculables (banque sans FCF, historique trop court…), il est retiré
    et la note se renormalise — la jauge l'affiche « — » au lieu de mentir à 0. */
 function meterN(l,p,m){
-  if(p==null)return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="0"></span></span><span class="mv" title="Bloc non notable : critères retirés, note renormalisée sur le reste">—</span></div>';
-  return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(p/m*100)+'"></span></span><span class="mv">'+String(p).replace('.',',')+'/'+m+'</span></div>';
+  if(p==null)return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="0"></span></span><span class="mval" title="Bloc non notable : critères retirés, note renormalisée sur le reste">—</span></div>';
+  return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(p/m*100)+'"></span></span><span class="mval">'+String(p).replace('.',',')+'/'+m+'</span></div>';
 }
 /* Dépliant « détail de la note » : les 16 critères phrasés du moteur v4,
    groupés par bloc, retraits affichés avec leur motif. Niveau riche

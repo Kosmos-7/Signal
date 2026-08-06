@@ -461,6 +461,80 @@ def extraire_fondamentaux(df_annuel, df_trim, devise, max_an=5, max_tr=6):
     return {"devise": devise or "?", "an": an, "tr": tr}
 
 
+def etats_complements(df_cf, df_bs):
+    """Flux de trésorerie disponible, dette totale et capitaux propres, lus
+    DIRECTEMENT dans les états financiers.
+
+    POURQUOI CETTE FONCTION EXISTE. Le dictionnaire de résumé de Yahoo
+    (`info`) ne renseigne ni `freeCashflow`, ni `debtToEquity`, ni
+    `returnOnEquity` pour une bonne part des titres non américains — Disco
+    Corporation à Tokyo et SK Hynix à Séoul n'ont aucun des trois. Sur le run
+    du 06/08, 26 retraits de critères (21 % du total) venaient de là, alors
+    que la matière première était DÉJÀ en mémoire : on télécharge le tableau
+    de flux et le bilan pour la section « Chiffres publiés ». On se contentait
+    du résumé pré-mâché en ayant les états complets sous la main.
+
+    Le procédé vaut pour TOUTES les places et toutes les devises — il ne
+    réintroduit donc pas l'asymétrie américaine d'EDGAR — et ne coûte aucun
+    appel réseau supplémentaire.
+
+    Pure (DataFrames en entrée, dict en sortie), fail-soft : une ligne absente
+    est omise, jamais devinée. Valeurs en unités BRUTES de la devise
+    comptable ; les ratios sont l'affaire de l'appelant.
+    """
+    def dernier(df, noms):
+        """Valeur la plus récente parmi les libellés donnés, par ordre de
+        préférence. Les libellés varient d'un émetteur à l'autre."""
+        if df is None or getattr(df, "empty", True):
+            return None
+        for nom in noms:
+            if nom in getattr(df, "index", ()):
+                s = df.loc[nom]
+                if getattr(s, "ndim", 1) > 1:
+                    s = s.iloc[0]
+                vals = {c: float(v) for c, v in s.dropna().items() if v == v}
+                if vals:
+                    return vals[max(vals)]
+        return None
+
+    out = {}
+
+    # Flux disponible : la ligne toute faite si l'émetteur la publie, sinon la
+    # définition (exploitation − investissements industriels). Le capex est
+    # déposé en négatif par convention comptable, d'où la valeur absolue.
+    fcf = dernier(df_cf, ["Free Cash Flow"])
+    if fcf is None:
+        op = dernier(df_cf, ["Operating Cash Flow",
+                             "Cash Flow From Continuing Operating Activities",
+                             "Total Cash From Operating Activities"])
+        capex = dernier(df_cf, ["Capital Expenditure", "Capital Expenditures",
+                                "Purchase Of PPE"])
+        if op is not None and capex is not None:
+            fcf = op - abs(capex)
+    if fcf is not None:
+        out["fcf"] = fcf
+
+    cp = dernier(df_bs, ["Stockholders Equity", "Total Stockholder Equity",
+                         "Common Stock Equity"])
+    # `cp > 0` explicitement : en Python un négatif est « vrai », et des
+    # capitaux propres négatifs (report à nouveau déficitaire, rachats massifs)
+    # donneraient un ROE et un levier inversés — donc trompeurs.
+    if cp is not None and cp > 0:
+        out["capitaux_propres"] = cp
+
+    dette = dernier(df_bs, ["Total Debt"])
+    if dette is None:
+        lt = dernier(df_bs, ["Long Term Debt", "Long Term Debt And Capital Lease Obligation"])
+        ct = dernier(df_bs, ["Current Debt", "Current Debt And Capital Lease Obligation",
+                             "Short Long Term Debt"])
+        if lt is not None or ct is not None:
+            dette = (lt or 0) + (ct or 0)
+    if dette is not None:
+        out["dette"] = dette
+
+    return out
+
+
 def per_historique(an, prix_a_la_date, meme_devise):
     """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
     dilué publié. UNIQUEMENT quand la devise comptable est celle de cotation :
@@ -1241,6 +1315,34 @@ def score_ticker(ticker, vix=None):
         # marge FCF nulle (Yahoo ne publie pas de FCF pour les banques).
         fcf_raw       = info.get("freeCashflow")
         total_rev_raw = info.get("totalRevenue")
+
+        # ── Repli sur les ÉTATS FINANCIERS quand le résumé Yahoo est muet ──
+        # Le résumé ne renseigne ni FCF, ni dette/capitaux propres, ni ROE pour
+        # une large part des titres non américains. Plutôt que de retirer les
+        # critères correspondants — ce qui revient à noter sur une donnée qu'on
+        # n'est pas allé chercher — on les recalcule depuis le tableau de flux
+        # et le bilan, déjà téléchargés pour la section « Chiffres publiés ».
+        # Universel (toutes places, toutes devises), aucun appel de plus.
+        # PROVENANCE : `fonda_source` dit lesquels ont été reconstruits.
+        fonda_source = []
+        if fcf_raw is None or debt_eq_raw is None or roe is None:
+            try:
+                _ec = etats_complements(data.cashflow, data.balance_sheet)
+            except Exception as e:
+                print(f"  ⚠️  {ticker}: états financiers illisibles ({type(e).__name__})")
+                _ec = {}
+            _cp = _ec.get("capitaux_propres")
+            if fcf_raw is None and _ec.get("fcf") is not None:
+                fcf_raw = _ec["fcf"]; fonda_source.append("fcf")
+            if debt_eq_raw is None and _cp and _ec.get("dette") is not None:
+                debt_eq_raw = _ec["dette"] / _cp * 100; fonda_source.append("dette")
+            # ROE = résultat net du dernier exercice publié ÷ capitaux propres.
+            # Les deux sont en devise COMPTABLE : le ratio est homogène.
+            if roe is None and _cp:
+                _ni = info.get("netIncomeToCommon")
+                if _ni is not None and _ni == _ni:
+                    roe = _ni / _cp; fonda_source.append("roe")
+
         fcf        = fcf_raw or 0
         # Bug corrigé (latent) : `totalRevenue or 1` faisait de fcf/1 une
         # « marge » astronomique quand le CA manquait — la donnée absente
@@ -1402,6 +1504,9 @@ def score_ticker(ticker, vix=None):
             "roe_pct":               round(roe * 100, 1) if isinstance(roe, (int, float)) and roe == roe else None,
             "debt_eq_pct":           round(debt_eq_raw) if isinstance(debt_eq_raw, (int, float)) and debt_eq_raw == debt_eq_raw else None,
             "price_to_book":         round(price_to_book, 2) if isinstance(price_to_book, (int, float)) and price_to_book == price_to_book else None,
+            # Champs reconstruits depuis les états financiers faute de résumé
+            # Yahoo — la provenance voyage avec la donnée, comme pour EDGAR.
+            "fonda_source":          fonda_source or None,
             # Objectif de cours analystes (informationnel)
             "target_mean_price":     target_mean_price,
             "target_upside_pct":     target_upside_pct,
