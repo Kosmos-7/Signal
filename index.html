@@ -832,7 +832,7 @@ lexi('Golden Cross / Death Cross','<em>Golden Cross</em> : la MM21 passe au-dess
       lexi('Marge nette','Bénéfice net rapporté au chiffre d\'affaires, sur les <em>12 derniers mois glissants</em> (TTM).')+
 lexi('Marge FCF','Free cash-flow (trésorerie réellement générée) rapporté au CA, sur les <em>12 derniers mois</em> (TTM), plus difficile à maquiller comptablement que la marge nette.')+
       lexi('Consensus analystes','Recommandation moyenne sell-side, échelle Acheter / Conserver / Vendre.')+
-lexi('Décote vs tendance','Écart du cours à sa droite de régression long terme, en % de la valeur de tendance, à rapprocher de la <em>marge de sécurité</em> de Graham, à la différence essentielle que la référence est une trajectoire historique, <em>pas</em> une valeur intrinsèque : une décote extrême peut signaler un changement structurel du business (cf. Apprendre).')+
+lexi('Écart à la trajectoire long terme','Écart du cours à sa droite de régression, en % de la valeur de tendance. Renommé en août 2026 : l\'ancien libellé « décote » empruntait le vocabulaire de la valorisation alors que cette mesure compare le cours à sa propre trajectoire passée, pas à la valeur de l\'entreprise — un titre très en-dessous de sa trajectoire peut rester cher au regard de ses bénéfices (cas Hermès). Un écart extrême peut signaler un changement structurel du business (cf. Apprendre).')+
 lexi('Objectif consensus','Moyenne des objectifs de cours des analystes, affichée en potentiel (%). Biais optimiste structurel documenté, indicatif uniquement, hors score.'));
   requestAnimationFrame(()=>doc.classList.add('on'));
 }
@@ -908,7 +908,7 @@ function drawChart(s){
   if(T_MAX-T_MIN>=240)pset.set(240,'20A');
   const presets=[...pset.entries()].sort((a,c)=>a[0]-c[0]);presets.push([1e9,'MAX']);
   const dec=b.decote_pct, zOff=b.regression_z;
-  const mlabel=dec==null?'':(dec>=0?'Décote':'Surcote')+' vs tendance '+(b.regression_window_years||'?')+' ans';
+  const mlabel=dec==null?'':(dec>=0?'Sous':'Au-dessus de')+' sa trajectoire '+(b.regression_window_years||'?')+' ans';
   const cons=(b.target_upside_pct!=null)?('<span class="chx-k">Objectif consensus : </span><span class="chx-v2">'+fs(b.target_upside_pct,0)+' %</span>'+(b.target_analysts?' <span class="chx-k">('+b.target_analysts+' analystes)</span>':'')):'';
   host.innerHTML='<div class="qh">Cours &amp; tendance long terme</div>'+
     '<div class="chx-wrap"><svg class="chx-svg" id="chx-svg" viewBox="0 0 '+W+' '+H+'"></svg><div class="chx-tip" id="chx-tip"></div></div>'+
@@ -1333,7 +1333,7 @@ fiche éditoriale). On publie ce qu'on a, et on le DIT, l'absence est un
    choix éditorial explicite, pas une panne. */
 function compactMetrics(s){const b=s.breakdown||{},u=s._u||{};
   const dev=u.devise?' '+u.devise:'';
-  const dl=b.decote_pct==null?'Décote vs tendance':(b.decote_pct>=0?'Décote vs tendance':'Surcote vs tendance');
+  const dl=b.decote_pct==null?'Écart trajectoire':(b.decote_pct>=0?'Sous sa trajectoire':'Au-dessus trajectoire');
   return '<div class="metrics">'+
     mk('Cours',(u.prix!=null?f(u.prix,2)+dev:'—'))+
     mk('Cross',(b.cross_type||'neutre')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+

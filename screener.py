@@ -535,6 +535,48 @@ def etats_complements(df_cf, df_bs):
     return out
 
 
+# ── APPORT VÉRIFIÉ (étage 2 de l'historique profond) ─────────────────────────
+# Les non-déposants SEC (Samsung, les domestiques japonaises, Hermès, Adyen…)
+# n'ont aucune source officielle interrogeable par API : leurs exercices
+# anciens entrent par ce fichier, constitué à la main depuis les rapports
+# annuels publiés par les sociétés elles-mêmes, avec la source par bloc.
+# Une fois absorbées par l'accumulateur inter-run, ces données vivent seules —
+# le fichier n'est relu que pour les exercices encore absents (extend-only,
+# mêmes gardes d'échelle et de dédoublonnage que l'apport EDGAR).
+APPORT_PATH = "data/apport_historique.json"
+_APPORT = None
+
+
+def charger_apport(ticker, devise_comptable):
+    """Bloc {an, tr} de l'apport pour un ticker, None si rien d'applicable.
+
+    Refuse silencieusement un bloc dont la devise ne correspond pas à la
+    devise comptable Yahoo du moment : si l'émetteur a changé de monnaie de
+    présentation (ou si l'apport a été saisi dans la mauvaise), mélanger
+    fabriquerait des variations absurdes. Chaque entrée est estampillée
+    src:"apport" — la provenance voyage avec la donnée, comme pour EDGAR.
+    """
+    global _APPORT
+    if _APPORT is None:
+        try:
+            with open(APPORT_PATH, encoding="utf-8") as f:
+                _APPORT = {k: v for k, v in json.load(f).items()
+                           if not k.startswith("_")}
+        except FileNotFoundError:
+            _APPORT = {}
+        except Exception as e:
+            print(f"  ⚠️  apport illisible ({type(e).__name__}) — ignoré pour ce run")
+            _APPORT = {}
+    bloc = _APPORT.get(ticker)
+    if not bloc or not bloc.get("an"):
+        return None
+    if (bloc.get("devise") or "").upper() != (devise_comptable or "").upper():
+        print(f"  ⚠️  apport {ticker} écarté : devise {bloc.get('devise')} ≠ comptable {devise_comptable}")
+        return None
+    return {"an": [dict(e, src="apport") for e in bloc["an"] if e.get("fin")],
+            "tr": []}
+
+
 def chainer_comptes(an, meme_devise, prix, net_margin_raw, trailing_pe_raw):
     """Troisième maillon de la chaîne : les COMPTES PUBLIÉS.
 
@@ -1652,15 +1694,22 @@ def score_ticker(ticker, vix=None):
                 print(f"  ⚠️  {ticker}: chiffres publiés en échec ({type(e).__name__}) — omis")
                 fonda = None
             if fonda:
-                # Historique officiel SEC pour les sociétés US publiant en
-                # USD : étend la fenêtre Yahoo (~4 exercices, ~5 trimestres)
-                # à dix ans et plus, AVANT le calcul des PER pour que les
-                # exercices ajoutés reçoivent le leur. Extend-only (jamais
-                # d'écrasement Yahoo), provenance src:"edgar" par entrée.
-                if "." not in ticker and (info.get("financialCurrency") or "") == "USD":
+                # Historique officiel SEC : étend la fenêtre Yahoo
+                # (~4 exercices, ~5 trimestres) à dix ans et plus, AVANT le
+                # calcul des PER pour que les exercices ajoutés reçoivent le
+                # leur. Extend-only (jamais d'écrasement Yahoo), provenance
+                # src:"edgar" par entrée. Depuis le chantier « historique
+                # profond » (06/08), les DÉPOSANTS ÉTRANGERS (20-F, IFRS)
+                # sont couverts aussi, dans leur devise comptable — ASML,
+                # SAP, TotalEnergies, Sony, Pinduoduo… La gate n'est plus
+                # « US en USD » mais « connu du greffe » (edgar.eligible).
+                if edgar.eligible(ticker):
                     try:
                         avant = (len(fonda["an"]), len(fonda["tr"]))
-                        ed = edgar.chiffres(ticker)
+                        ed = edgar.chiffres(
+                            ticker,
+                            devise=(info.get("financialCurrency")
+                                    or info.get("currency") or "USD"))
                         if ed:
                             # BPA déposés à l'époque → base d'actions actuelle
                             # (sinon les PER pré-splits sortent absurdes).
@@ -1677,6 +1726,18 @@ def score_ticker(ticker, vix=None):
                             print(f"   EDGAR {ticker}: +{gagne[0]} exercices, +{gagne[1]} trimestres")
                     except Exception as e:
                         print(f"  ⚠️  {ticker}: EDGAR en échec ({type(e).__name__}) — fenêtre Yahoo seule")
+                # Apport vérifié (non-déposants SEC) — mêmes gardes que
+                # l'apport EDGAR, via completer_fonda : extend-only,
+                # dédoublonnage ±7 j, garde d'échelle vs la fenêtre Yahoo.
+                try:
+                    ap = charger_apport(ticker, fonda.get("devise"))
+                    if ap:
+                        avant_a = len(fonda["an"])
+                        edgar.completer_fonda(fonda, ap)
+                        if len(fonda["an"]) > avant_a:
+                            print(f"   Apport {ticker}: +{len(fonda['an']) - avant_a} exercices (source au fichier)")
+                except Exception as e:
+                    print(f"  ⚠️  {ticker}: apport en échec ({type(e).__name__})")
                 # PER par exercice + deux exercices à venir. Fail-soft aussi.
                 try:
                     def prix_fin(iso):

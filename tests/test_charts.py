@@ -592,6 +592,65 @@ check("capex déposé en positif : la valeur absolue est prise",
                "Capital Expenditure": {"2025-12-31": 1_000_000_000}}), BS)["fcf"]
       == 4_000_000_000)
 
+# ── Historique profond, étage 1 : EDGAR parle aussi IFRS ────────────────────
+print("\n— EDGAR IFRS : les déposants étrangers entrent au greffe —")
+check("un ticker US natif est éligible", edgar.eligible("NVDA"))
+check("une cotation d'origine mappée est éligible (ASML.AS → ASML)",
+      edgar.eligible("ASML.AS") and edgar.US_EQUIV["ASML.AS"] == "ASML")
+check("un non-déposant reste hors périmètre (Disco, Tokyo)",
+      not edgar.eligible("6146.T"))
+check("les six mappings 20-F sont présents et pointent vers des symboles US",
+      all(edgar.US_EQUIV.get(k) == v for k, v in
+          [("SAP.DE", "SAP"), ("TTE.PA", "TTE"), ("AZN.L", "AZN"),
+           ("HSBA.L", "HSBC"), ("UBSG.SW", "UBS")]))
+DOC_EUR = {"units": {"EUR": [
+    {"frame": "CY2023", "end": "2023-12-31", "val": 31_207_000_000},
+    {"frame": "CY2024", "end": "2024-12-31", "val": 34_176_000_000},
+    {"end": "2022-12-31", "val": 999},                  # sans frame : ignoré
+]}}
+s_eur = edgar.series_frames(DOC_EUR, "EUR")
+check("les faits IFRS se lisent dans la devise comptable demandée",
+      s_eur.get("CY2024") == ("2024-12-31", 34_176_000_000) and len(s_eur) == 2)
+check("demander une autre unité ne rend rien (pas de mélange de monnaies)",
+      edgar.series_frames(DOC_EUR, "USD") == {})
+check("le BPA IFRS vit sous l'unité <devise>/shares",
+      edgar.series_frames({"units": {"EUR/shares": [
+          {"frame": "CY2024", "end": "2024-12-31", "val": 5.44}]}},
+          "EUR/shares").get("CY2024") == ("2024-12-31", 5.44))
+check("le résultat IFRS préfère la part des actionnaires de la mère",
+      edgar.TAGS_RN_IFRS[0] == "ProfitLossAttributableToOwnersOfParent")
+
+# ── Historique profond, étage 2 : l'apport vérifié des non-déposants ────────
+print("\n— Apport vérifié : le fichier des non-déposants —")
+import tempfile
+_ap_avant, _path_avant = screener._APPORT, screener.APPORT_PATH
+with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as tf:
+    json.dump({"_mode_d_emploi": "doc",
+               "005930.KS": {"devise": "KRW", "source": "rapport annuel 2020, p.12",
+                             "an": [{"fin": "2016-12-31", "ca": 201_866_745,
+                                     "rn": 22_726_092, "eps": 2_735.0}]},
+               "RMS.PA": {"devise": "USD",   # devise fausse exprès
+                          "an": [{"fin": "2016-12-31", "ca": 5_202}]}}, tf)
+    tf.flush(); screener.APPORT_PATH = tf.name
+screener._APPORT = None
+ap = screener.charger_apport("005930.KS", "KRW")
+check("un bloc à devise conforme est rendu, estampillé src:'apport'",
+      ap and ap["an"][0]["src"] == "apport" and ap["an"][0]["ca"] == 201_866_745)
+check("la clé de documentation n'est pas un ticker",
+      screener.charger_apport("_mode_d_emploi", "KRW") is None)
+check("devise non conforme : bloc écarté (pas de mélange de monnaies)",
+      screener.charger_apport("RMS.PA", "EUR") is None)
+check("ticker absent du fichier : rien", screener.charger_apport("NVDA", "USD") is None)
+FONDA_AP = {"devise": "KRW",
+            "an": [{"fin": "2024-12-31", "ca": 300_870_903, "rn": 34_451_351}], "tr": []}
+edgar.completer_fonda(FONDA_AP, ap)
+check("l'apport étend l'historique par les mêmes gardes que l'EDGAR",
+      len(FONDA_AP["an"]) == 2 and FONDA_AP["an"][0]["src"] == "apport")
+screener._APPORT, screener.APPORT_PATH = _ap_avant, _path_avant
+import os as _os; _os.unlink(tf.name)
+check("le fichier d'apport du dépôt est un JSON valide",
+      isinstance(json.load(open("data/apport_historique.json")), dict))
+
 # ── Chaîne des sources : Yahoo → états financiers → comptes publiés → Finnhub
 print("\n— Chaîne des sources : chaque maillon ne comble que ce qui reste —")
 AN_CH = [{"fin": "2023-12-31", "ca": 10_000, "rn": 1_500, "eps": 3.0},

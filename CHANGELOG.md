@@ -69,6 +69,50 @@ réellement retenue est rendue avec le taux, et la phrase de la fiche
 signale la sortie de pertes (« depuis le premier exercice bénéficiaire,
 sur 8 ans »). Arriver en perte reste sans multiple ni croissance. 9 tests.
 
+### Historique profond : le greffe de la SEC parle aussi IFRS
+
+Le déséquilibre de mesure le plus profond de la note v4 : onze exercices
+pour juger NVIDIA, trois pour TotalEnergies — non parce que la donnée
+n'existe pas, mais parce que Yahoo ne garde que quatre ans et qu'EDGAR
+était limité aux sociétés US en US GAAP. Or la moitié de nos titres
+« courts » DÉPOSENT à la SEC : les émetteurs étrangers cotés aux
+États-Unis y déposent leur 20-F sous la taxonomie ifrs-full, dans leur
+devise comptable d'origine.
+
+- **edgar.py v2** : quand les concepts us-gaap sont vides, les mêmes
+  séries sont relues sous ifrs-full (CA, résultat — part des actionnaires
+  de la mère de préférence, pour ne pas gonfler la marge des groupes à
+  minoritaires — et BPA), exclusivement dans l'unité de la devise
+  comptable annoncée par Yahoo : un 20-F allemand se lit en EUR, un
+  taïwanais en TWD, jamais autre chose.
+- **Table US_EQUIV** pour les cotations d'origine dont le programme 20-F
+  est actif et vérifié : ASML.AS→ASML, SAP.DE→SAP, TTE.PA→TTE, AZN.L→AZN,
+  HSBA.L→HSBC, UBSG.SW→UBS. Les tickers déjà américains (Pinduoduo,
+  TSMC, Sony, Toyota, Alibaba, ARM…) passent sans mapping. La gate du
+  screener n'est plus « US en USD » mais « connu du greffe ».
+- **Étage 2 — l'apport vérifié** (`data/apport_historique.json`) pour les
+  non-déposants (Samsung, les domestiques japonaises, Hermès, Adyen…) :
+  un bloc par ticker avec source citée, montants en devise comptable,
+  refus au chargement si la devise ne correspond pas, mêmes gardes
+  d'extension que l'EDGAR, provenance src:"apport" par entrée. Créé vide :
+  le conteneur de développement n'atteint pas les sites IR et la doctrine
+  interdit de saisir des chiffres de mémoire — il se remplit depuis les
+  rapports annuels, titre par titre, et l'accumulateur conserve ensuite.
+- 15 tests. Reste hors de portée à ce stade : les non-déposants sans
+  apport saisi — leur fenêtre s'allonge d'un exercice par an via
+  l'accumulateur, comme avant.
+
+### L'écart à la trajectoire cesse de s'appeler « décote »
+
+Le libellé « Décote vs tendance » empruntait le vocabulaire de la
+valorisation pour une mesure de momentum — le cours comparé à sa propre
+trajectoire décennale, pas à la valeur de l'entreprise. La confusion
+était inévitable (cas vécu : Hermès à −45 % de sa trajectoire ET 8,3/25
+en valorisation, deux affirmations parfaitement compatibles mais
+illisibles sous le même mot). Les fiches disent désormais « sous sa
+trajectoire / au-dessus de sa trajectoire », et l'entrée du lexique
+explique le renommage.
+
 ### Les sources se chaînent enfin
 
 Jusqu'ici chaque donnée avait UNE source et un trou restait un trou. Elles

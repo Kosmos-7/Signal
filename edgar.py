@@ -13,12 +13,19 @@ après relecture critique du flux des fondamentaux) :
 CE QUE CE MODULE NE FAIT PAS, à dessein :
   · il n'ÉCRASE jamais une valeur Yahoo : il n'ajoute que les dates absentes
     (les deux bases peuvent différer sur les retraitements, on ne mélange pas
-    silencieusement) — chaque entrée ajoutée porte src:"edgar" ;
-  · il ne remplit aucun champ du SCORE : périmètre = section « Chiffres
-    publiés » des fiches, uniquement ;
-  · pas d'IFRS : les émetteurs étrangers cotés US (20-F, taxonomie ifrs-full)
-    sont hors périmètre v1 — leurs concepts us-gaap sont vides, le module
-    rend simplement None et la fiche garde sa fenêtre Yahoo.
+    silencieusement) — chaque entrée ajoutée porte src:"edgar".
+
+IFRS (v2, 06/08/2026 — chantier « historique profond ») : les émetteurs
+ÉTRANGERS déposent aussi à la SEC, en 20-F/40-F sous la taxonomie ifrs-full
+et dans leur devise comptable d'origine (SAP en euros, Sony en yens, TSMC en
+dollars taïwanais). L'exclusion v1 (« leurs concepts us-gaap sont vides »)
+est levée : quand us-gaap ne rend rien, on relit les mêmes séries sous
+ifrs-full, dans l'unité de la devise comptable annoncée par Yahoo — jamais
+une autre, pour ne pas mélanger deux monnaies dans un même historique.
+C'est la moitié du chantier « historique profond » : la source reste le
+greffe officiel, aucune asymétrie de fiabilité n'est introduite — seuls les
+non-déposants (Samsung, les domestiques japonaises, Hermès…) relèvent de
+l'autre moitié (apport vérifié, cf. screener).
 
 MÉCANIQUE : companyconcept (un petit JSON par balise) plutôt que companyfacts
 (jusqu'à 15 Mo par société). Seuls les faits porteurs d'un « frame » sont lus :
@@ -55,6 +62,34 @@ TAGS_RN = ("NetIncomeLoss",
            "NetIncomeLossAvailableToCommonStockholdersBasic")
 TAGS_EPS = ("EarningsPerShareDiluted", "EarningsPerShareBasic")
 
+# Balises ifrs-full équivalentes, pour les 20-F/40-F. Le résultat net IFRS
+# préfère la part des ACTIONNAIRES DE LA MÈRE quand elle existe : ProfitLoss
+# inclut les minoritaires, ce qui gonflerait la marge nette d'un groupe à
+# filiales partagées.
+TAGS_CA_IFRS = ("Revenue", "RevenueFromContractsWithCustomers",
+                "RevenueFromSaleOfGoods")
+TAGS_RN_IFRS = ("ProfitLossAttributableToOwnersOfParent", "ProfitLoss")
+TAGS_EPS_IFRS = ("DilutedEarningsLossPerShare", "BasicEarningsLossPerShare")
+
+# Tickers de cotation d'origine → symbole US déposant à la SEC. Seuls figurent
+# ici des émetteurs dont le programme 20-F est ACTIF et vérifié — un mauvais
+# mapping ferait entrer les comptes d'une autre société (leçon MC.PA → Moelis
+# côté Finnhub). Les tickers déjà américains (PDD, TSM, SONY, ARM…) n'ont pas
+# besoin d'entrée : le registre de la SEC les connaît directement.
+US_EQUIV = {
+    "ASML.AS": "ASML",   # ASML Holding — 20-F, comptes en EUR
+    "SAP.DE":  "SAP",    # SAP SE — 20-F, EUR
+    "TTE.PA":  "TTE",    # TotalEnergies — 20-F, comptes en USD
+    "AZN.L":   "AZN",    # AstraZeneca — 20-F, USD
+    "HSBA.L":  "HSBC",   # HSBC Holdings — 20-F, USD
+    "UBSG.SW": "UBS",    # UBS Group — 20-F, USD
+}
+
+
+def eligible(ticker):
+    """Ce ticker peut-il avoir un dossier à la SEC ? (US natif ou 20-F mappé)"""
+    return "." not in (ticker or "") or ticker in US_EQUIV
+
 _CIK = None            # cache du mapping ticker → CIK, un fetch par run
 _FRAME_AN = re.compile(r"CY\d{4}\Z")
 _FRAME_TR = re.compile(r"CY\d{4}Q[1-4]\Z")
@@ -76,17 +111,22 @@ def _get(url):
 
 
 def cik_de(ticker):
-    """CIK d'un ticker US, via le registre officiel. None si inconnu."""
+    """CIK d'un ticker, via le registre officiel. None si inconnu.
+
+    Les cotations d'origine mappées (US_EQUIV) sont résolues via leur
+    symbole US : le registre de la SEC ne connaît qu'eux."""
     global _CIK
     if _CIK is None:
         brut = _get("https://www.sec.gov/files/company_tickers.json")
         _CIK = {v["ticker"].upper(): int(v["cik_str"]) for v in brut.values()}
-    return _CIK.get((ticker or "").upper())
+    t = US_EQUIV.get(ticker, ticker)
+    return _CIK.get((t or "").upper())
 
 
-def concept(cik, tag):
-    """companyconcept us-gaap d'une société. None si la balise n'existe pas."""
-    url = f"https://data.sec.gov/api/xbrl/companyconcept/CIK{cik:010d}/us-gaap/{tag}.json"
+def concept(cik, tag, taxo="us-gaap"):
+    """companyconcept d'une société sous la taxonomie donnée (us-gaap ou
+    ifrs-full). None si la balise n'existe pas chez cet émetteur."""
+    url = f"https://data.sec.gov/api/xbrl/companyconcept/CIK{cik:010d}/{taxo}/{tag}.json"
     try:
         return _get(url)
     except Exception:
@@ -307,20 +347,43 @@ def completer_fonda(fonda, ed):
 
 # ── Fetch complet pour un ticker (réseau, fail-soft) ─────────────────────────
 
-def chiffres(ticker, pause=0.12):
-    """Bloc {an, tr} EDGAR pour un ticker US, None si indisponible."""
-    cik = cik_de(ticker)
-    if not cik:
-        return None
+def _collecte(cik, plan, devise, pause):
+    """Séries {ca, rn, eps} pour un plan [(nom, tags, taxo), ...], dans la
+    devise comptable. TOUS les alias sont lus puis fusionnés : les émetteurs
+    changent de balise au fil des normes, chaque époque vit sous la sienne."""
     docs = {}
-    for nom, tags in (("ca", TAGS_CA), ("rn", TAGS_RN), ("eps", TAGS_EPS)):
-        unite = "USD/shares" if nom == "eps" else "USD"
-        # TOUS les alias sont lus puis fusionnés : les émetteurs changent de
-        # balise au fil des normes, chaque époque vit sous la sienne.
+    for nom, tags, taxo in plan:
+        unite = f"{devise}/shares" if nom == "eps" else devise
         series = []
         for tag in tags:
-            doc = concept(cik, tag)
+            doc = concept(cik, tag, taxo)
             time.sleep(pause)
             series.append(series_frames(doc, unite))
         docs[nom] = fusion_series(series)
+    return docs
+
+
+def chiffres(ticker, devise="USD", pause=0.12):
+    """Bloc {an, tr} EDGAR pour un déposant SEC, None si indisponible.
+
+    `devise` est la devise COMPTABLE annoncée par Yahoo : les faits sont lus
+    exclusivement dans cette unité. Un 20-F allemand tague en EUR, un
+    taïwanais en TWD — lire une autre unité mélangerait deux monnaies dans
+    le même historique, le poison silencieux des ADR.
+
+    Ordre des taxonomies : us-gaap d'abord (tous les domestiques, plus les
+    étrangers qui déposent en US GAAP comme MUFG), puis ifrs-full si le CA
+    est resté vide — c'est le cas général des 20-F européens et asiatiques.
+    """
+    cik = cik_de(ticker)
+    if not cik:
+        return None
+    devise = (devise or "USD").upper()
+    docs = _collecte(cik, (("ca", TAGS_CA, "us-gaap"),
+                           ("rn", TAGS_RN, "us-gaap"),
+                           ("eps", TAGS_EPS, "us-gaap")), devise, pause)
+    if not docs["ca"]:
+        docs = _collecte(cik, (("ca", TAGS_CA_IFRS, "ifrs-full"),
+                               ("rn", TAGS_RN_IFRS, "ifrs-full"),
+                               ("eps", TAGS_EPS_IFRS, "ifrs-full")), devise, pause)
     return construire_fonda(docs["ca"], docs["rn"], docs["eps"])

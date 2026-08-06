@@ -1,0 +1,4 @@
+{
+  "_mode_d_emploi": "Historique profond des NON-déposants SEC (étage 2). Un bloc par ticker : {devise, source, an:[{fin,ca,rn,eps}...]} — montants en MILLIONS de la devise comptable, eps par action. La devise DOIT être la devise comptable Yahoo du titre, sinon le bloc est écarté au chargement. La source cite le document d'origine (rapport annuel, page IR) : chaque nombre doit y être retrouvable. Le screener n'ajoute que les exercices absents (extend-only, gardes d'échelle) et estampille src:'apport'. Une fois absorbé par l'accumulateur inter-run, le bloc peut rester ici comme trace de la provenance.",
+  "_etat": "Vide à la création (06/08/2026) : le conteneur de développement n'atteint ni les sites IR ni les agrégateurs (proxy), et la doctrine interdit de saisir des chiffres de mémoire. À remplir depuis les rapports annuels — téléversés dans la session ou collectés par un poste avec accès web — au fil de l'eau, titre par titre."
+}
