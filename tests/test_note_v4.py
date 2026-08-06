@@ -2,17 +2,17 @@
 
     python3 tests/test_note_v4.py
 
-Couvre : rampes et cloches (bornes, inversion), lettres et hystérésis dans les
-deux sens, retraits avec motif + renormalisation (par bloc et entre blocs),
-gardes de plausibilité (marge NBIS), devise comptable différente (TSM),
-PEG prudent (min des deux croissances), et un contexte complet type témoin.
+Couvre : rampes et cloches (bornes, inversion), retraits avec motif +
+renormalisation (par bloc et entre blocs), gardes de plausibilité (marge NBIS),
+devise comptable différente (TSM), PEG prudent (min des deux croissances),
+et un contexte complet type témoin.
 """
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from note_v4 import rampe, cloche, lettre, lettre_hysterese, calcule_note, LETTRES
+from note_v4 import rampe, cloche, calcule_note
 
 ok, ko = [], []
 
@@ -67,27 +67,6 @@ check("cloche : rampe montante à mi-chemin", cloche(-2.25, -3, -1.5, 1, 3, 6) =
 check("cloche : rampe descendante à mi-chemin", cloche(2, -3, -1.5, 1, 3, 6) == 3.0)
 check("cloche : None traverse", cloche(None, 20, 35, 65, 80, 3) is None)
 
-print("\n— Lettres —")
-check("85 → A+", lettre(85) == "A+")
-check("84 → A", lettre(84) == "A")
-check("0 → D", lettre(0) == "D")
-check("frontières exactes",
-      all(lettre(s) == l for l, s in LETTRES))
-check("hystérésis : promotion retenue sous seuil+marge",
-      lettre_hysterese(78.5, "A-") == "A-")
-check("hystérésis : promotion franche accordée",
-      lettre_hysterese(80.0, "A-") == "A")
-check("hystérésis : rétrogradation retenue juste sous le seuil",
-      lettre_hysterese(77.0, "A") == "A")
-check("hystérésis : rétrogradation franche actée",
-      lettre_hysterese(76.0, "A") == "A-")
-check("hystérésis : sans précédente, lettre naturelle",
-      lettre_hysterese(77.0, None) == "A-")
-check("hystérésis : précédente inconnue ignorée",
-      lettre_hysterese(77.0, "Z") == "A-")
-check("hystérésis : saut de deux lettres suit le score",
-      lettre_hysterese(90.0, "B+") == "A+")
-
 print("\n— Contexte témoin complet (compounder) —")
 n = calcule_note(CTX_TEMOIN)
 check("total dans [0,100]", 0 <= n["total"] <= 100, str(n["total"]))
@@ -105,7 +84,8 @@ check("pts ≤ max partout",
 check("total = somme des blocs (couverture pleine)",
       n["total"] == round(sum(v["pts"] for v in n["blocs"].values())),
       str(n["total"]))
-check("la lettre correspond au total", n["lettre"] == lettre(n["total"]))
+check("la note ne publie pas de lettre (décision : /100 conservé)",
+      "lettre" not in n)
 
 print("\n— Banque (type JPM) : retraits + renormalisation du bloc —")
 ctx_b = dict(CTX_TEMOIN, banque=True, fcf_margin_pct=None, fcf_yield_pct=None,

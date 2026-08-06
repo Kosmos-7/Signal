@@ -13,8 +13,8 @@ DOCTRINE (décisions propriétaires des 06-07/08/2026) :
     des murs (l'anti-NOW 81→66→72) ;
   · un critère incalculable est RETIRÉ avec motif affiché et la note se
     renormalise — jamais de zéro silencieux ;
-  · l'affichage public est une LETTRE (A+ … D) avec hystérésis ; le /100
-    survit en interne (tri, règles de l'agent, archives).
+  · la note reste un /100 (décision du 06/08/2026 : le système de lettres
+    A+…D a été conçu, testé, puis écarté — le chiffre continu dit plus).
 
 Pondérations : dérivées de cinq principes (un point = de la confiance dans la
 mesure ; l'estimé ne dépasse jamais le démontré ; la redondance se paie ;
@@ -55,37 +55,6 @@ def _fr(v, d=1):
     return s[:-2] if s.endswith(",0") else s
 
 
-# ── Lettres ──────────────────────────────────────────────────────────────────
-
-LETTRES = [("A+", 85), ("A", 78), ("A-", 72), ("B+", 65), ("B", 58),
-           ("B-", 50), ("C+", 42), ("C", 34), ("D", 0)]
-
-
-def lettre(total):
-    for l, seuil in LETTRES:
-        if total >= seuil:
-            return l
-    return "D"
-
-
-def lettre_hysterese(total, lettre_precedente, marge=1.5):
-    """La lettre affichée ne change que si le score franchit la frontière de
-    plus de `marge` points : un titre à cheval garde sa lettre au lieu de
-    clignoter. (Les frontières de lettres sont des falaises d'affichage — on
-    ne réintroduit pas à l'écran ce qu'on a tué dans le calcul.)"""
-    naturelle = lettre(total)
-    if not lettre_precedente or lettre_precedente == naturelle:
-        return naturelle
-    seuils = dict(LETTRES)
-    if lettre_precedente not in seuils:
-        return naturelle
-    ordre = [l for l, _ in LETTRES]
-    if ordre.index(naturelle) < ordre.index(lettre_precedente):   # promotion
-        return naturelle if total >= seuils[naturelle] + marge else lettre_precedente
-    # rétrogradation : on ne la retient que nettement sous le seuil de l'ancienne
-    return naturelle if total < seuils[lettre_precedente] - marge else lettre_precedente
-
-
 # ── Extraction des grandeurs pluriannuelles ──────────────────────────────────
 
 def _marges_annuelles(an):
@@ -112,7 +81,7 @@ def _tcam(serie):
 
 # ── La grille ────────────────────────────────────────────────────────────────
 
-def calcule_note(ctx, lettre_precedente=None):
+def calcule_note(ctx):
     """ctx : dictionnaire des intrants — tout est optionnel, l'absence retire.
 
       an              liste fonda annuelle [{fin, ca, rn, eps, per}, ...]
@@ -128,7 +97,7 @@ def calcule_note(ctx, lettre_precedente=None):
       z / rsi         position vs tendance 10 ans (σ) / RSI
       ecart_mm_pct    (MM21/MM200 − 1) × 100 — le régime de tendance en continu
 
-    Retourne {total, lettre, blocs:{q,c,v,m:{pts,max,dispo}}, criteres:[...],
+    Retourne {total, blocs:{q,c,v,m:{pts,max,dispo}}, criteres:[...],
     couverture} — criteres porte (id, bloc, pts, max, valeur, phrase) et les
     retraits ont pts=None + motif.
     """
@@ -339,7 +308,5 @@ def calcule_note(ctx, lettre_precedente=None):
     total = (round(sum(v["pts"] for v in blocs.values() if v["pts"] is not None)
                    / max_notable * 100) if max_notable else 0)
     non_notes = sum(1 for c in crit if c["pts"] is None)
-    return {"total": total,
-            "lettre": lettre_hysterese(total, lettre_precedente),
-            "blocs": blocs, "criteres": crit,
+    return {"total": total, "blocs": blocs, "criteres": crit,
             "couverture": round((len(crit) - non_notes) / len(crit) * 100)}
