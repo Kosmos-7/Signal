@@ -1310,14 +1310,10 @@ function liteNote(){
 '<p>Ce titre est scoré par exactement la même méthode que les autres ; son analyse rédigée arrivera à une prochaine mise à jour hebdomadaire.</p>'+
   '<p><a href="apprendre.html">Comment lire ces chiffres →</a></p></div>';
 }
-/* Note de bas de fiche courte. Depuis août 2026 on cherche une actualité datée
-   pour TOUS les titres publiés : l'absence de rubrique Actu ne dit plus « ce
-   titre n'y a pas droit » mais « on a cherché, rien n'est sorti cette semaine ».
-   La note n'apparaît donc que sur une fiche courte SANS actu. */
-function briefNote(){
-  return '<div class="lite-note"><h4>Fiche courte</h4>'+
-'<p>Ce titre appartient à une watchlist thématique sans figurer dans le <a href="'+hashOf(MAIN)+'">top 30</a> : son analyse couvre le business, les perspectives et les deux thèses, à partir d\'un jeu de données plus réduit. Aucune actualité datée n\'a été trouvée pour lui lors de la dernière mise à jour, et on préfère ne rien écrire plutôt que de meubler.</p></div>';
-}
+/* Fiche courte sans actu : AUCUN message (décision du 06/08/2026 — l'ancien
+   encart « Fiche courte » expliquait l'absence d'actualité ; soit on a de
+   l'actu fiable et on l'affiche, soit on ne dit rien). La rubrique Actu est
+   simplement omise, cf. le rendu de la prose plus bas. */
 /* Bandeau de thème au-dessus de la fiche. La vue liste intermédiaire a été
    supprimée (elle dupliquait le rail), mais la thèse, son inversion et ses
    biais ne doivent pas disparaître pour autant : c'est la couche d'honnêteté
@@ -1369,8 +1365,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   const brief=(a&&a._niveau==='thematique'), hasActu=!!(a&&a.actu&&a.actu.length);
   const prose=!hasEd?'<div class="prose">'+liteNote()+'</div>'
     :'<div class="prose"><div>'+sec('Business &amp; Moat',a&&a.biz?paras(a.biz):'<p class="stub">À générer.</p>')+'</div><div>'+sec('Perspectives',a&&a.futur?paras(a.futur):'<p class="stub">À générer.</p>')+'</div>'+
-      ((brief&&!hasActu)?'':'<div>'+sec('Actu',(hasActu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div>')+'</div>'+
-      ((brief&&!hasActu)?briefNote():'');
+      ((brief&&!hasActu)?'':'<div>'+sec('Actu',(hasActu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div>')+'</div>';
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
     illuSociete(s.ticker)+
