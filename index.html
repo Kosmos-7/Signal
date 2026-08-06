@@ -1198,8 +1198,7 @@ function fondaRender(s){
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table></details>'+
-    (full.some(r=>r.src==='edgar')?'<div class="chx-note">Historique étendu par les dépôts officiels SEC (10-K/10-Q, EDGAR).</div>':'')
-    +'</div>'+
+    '</div>'+
     (perB?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
       '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane</div>'+
       '<details class="fd-det" id="fd-det-p"'+(openP?' open':'')+'><summary>Dérouler les PER ▾</summary>'+
