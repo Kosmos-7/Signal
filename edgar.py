@@ -149,7 +149,30 @@ def construire_fonda(ca_fr, rn_fr, eps_fr, max_an=12, max_tr=20):
             e["eps"] = round(annuels_eps[fr][1], 4)
         if len(e) > 2:
             an.append(e)
-    an = an[-max_an:]
+    # Cohérence de clôture fiscale : un frame annuel dont la fin s'écarte de
+    # plus d'un mois du mois de clôture majoritaire est un artefact (AMZN :
+    # frame CY2026 arrêté au 30 juin, un « exercice » fantôme qui décalait
+    # les étiquettes prévisionnelles). Un vrai changement de calendrier
+    # fiscal (CDNS : début janvier → fin décembre) reste à ±1 mois, il passe.
+    if len(an) >= 3:
+        mois = [int(e["fin"][5:7]) for e in an]
+        maj = max(set(mois), key=mois.count)
+        ecart = lambda m: min(abs(m - maj), 12 - abs(m - maj))
+        an = [e for e in an if ecart(int(e["fin"][5:7])) <= 1]
+    # Résultat net aberrant : un RN positif 100 fois plus petit que ses DEUX
+    # voisins est une erreur de tagage (SCHW 2021 déposé à 6 M$ au lieu de
+    # ~5 855), pas une mauvaise année — une vraie chute de cette ampleur
+    # passe par les pertes. Le champ est retiré, l'entrée garde son CA.
+    for i, e in enumerate(an):
+        rn = e.get("rn")
+        if not rn or rn <= 0:
+            continue
+        voisins = [abs(an[j]["rn"]) for j in (i - 1, i + 1)
+                   if 0 <= j < len(an) and an[j].get("rn")]
+        if len(voisins) == 2 and all(v / rn > 100 for v in voisins):
+            e.pop("rn", None)
+            e.pop("eps", None)
+    an = [e for e in an if len(e) > 2][-max_an:]
 
     tr = []
     trims_ca = {fr: v for fr, v in ca_fr.items() if _FRAME_TR.match(fr)}
@@ -184,26 +207,55 @@ def construire_fonda(ca_fr, rn_fr, eps_fr, max_an=12, max_tr=20):
     return {"an": an, "tr": tr}
 
 
-def ajuster_eps_splits(bloc, splits):
-    """Ramène les BPA « tels que déposés » dans la base d'actions ACTUELLE.
+def ajuster_eps_splits(bloc, splits, actions_actuelles=None):
+    """Ramène les BPA EDGAR dans la base d'actions ACTUELLE — en DÉTECTANT
+    la base de chaque valeur, jamais en la devinant.
 
-    Un dépôt 10-K de 2015 publie le BPA de l'époque ; si l'action a été
-    divisée depuis (NVIDIA : 4:1 en 2021 puis 10:1 en 2024, ÷40 au total),
-    le cours ajusté d'aujourd'hui ne peut pas lui être rapporté — les PER
-    historiques sortaient à 0,4×. Chaque BPA est divisé par le produit des
-    ratios de splits survenus APRÈS sa date de clôture. splits : liste
-    [(date_iso, ratio)] (ratio 4.0 pour un 4:1). Pure, mutation en place."""
-    if not bloc or not splits:
+    Le piège est en deux temps. Un 10-K de 2015 publie le BPA de l'époque :
+    après les splits NVIDIA (×4 en 2021, ×10 en 2024), il faut le diviser
+    par 40. MAIS le 10-K qui suit un split republie ses deux exercices
+    COMPARATIFS déjà retraités, et le frame SEC garde cette valeur-là :
+    diviser aveuglément double alors l'ajustement (GOOGL 2020 sortait à
+    592× de PER au lieu de ~35×). La base d'un frame est donc inconnue.
+
+    Détection : rn ÷ BPA donne le nombre d'actions impliqué. On essaie
+    chaque base possible (valeur d'origine, chaque base intermédiaire,
+    base actuelle) et on garde celle qui rapproche le plus ce nombre du
+    nombre d'actions ACTUEL — les rachats font ±2×, les splits ×4 à ×40,
+    les ordres de grandeur ne se confondent pas (comparaison en log,
+    rejet si même le meilleur candidat reste à plus de 3×). Sans rn ou
+    sans nombre d'actions actuel, prudence : le BPA est RETIRÉ dès qu'un
+    split postérieur existe — pas de multiple plutôt qu'un multiple faux.
+    Pure, mutation en place. splits : [(date_iso, ratio)]."""
+    import math
+    if not bloc:
         return bloc
+    spl = sorted((d, float(r)) for d, r in (splits or []) if r and r > 0)
     for e in bloc.get("an") or []:
-        if not e.get("eps"):
+        eps = e.get("eps")
+        if not eps or eps <= 0:
             continue
-        facteur = 1.0
-        for d, ratio in splits:
-            if ratio and ratio > 0 and d > e["fin"]:
-                facteur *= ratio
-        if facteur != 1.0:
-            e["eps"] = round(e["eps"] / facteur, 4)
+        posterieurs = [r for d, r in spl if d > e["fin"]]
+        if not posterieurs:
+            continue                    # aucune ambiguïté possible
+        rn = e.get("rn")
+        if not rn or rn <= 0 or not actions_actuelles:
+            e.pop("eps", None)          # base indéterminable
+            continue
+        candidats, f = [1.0], 1.0
+        for r in reversed(posterieurs):
+            f *= r
+            candidats.append(f)         # bases intermédiaires puis d'origine
+        mieux, ecart_min = None, None
+        for c in candidats:
+            actions = rn * 1e6 * c / eps
+            ecart = abs(math.log(actions / actions_actuelles))
+            if ecart_min is None or ecart < ecart_min:
+                mieux, ecart_min = c, ecart
+        if ecart_min > math.log(3):
+            e.pop("eps", None)          # incohérent même au mieux : on retire
+        elif mieux != 1.0:
+            e["eps"] = round(eps / mieux, 4)
     return bloc
 
 

@@ -1270,7 +1270,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
 <script src="signal-fx.js"></script>
 <script src="signal-toc.js"></script>
 <script>
-function fmt(n, d=2)  { return Number(n).toFixed(d); }
+function fmt(n, d=2)  { return Number(n).toFixed(d).replace('.', ','); }  // virgule française, comme les autres pages
 function fmtEur(n)    { return Number(n).toLocaleString('fr-FR', {maximumFractionDigits:0}) + ' €'; }
 function sign(n)      { return n >= 0 ? '+' : ''; }
 
@@ -1888,7 +1888,7 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
         </div>
       </div>
       <div class="survival-desc">
-        Le portefeuille est comparé au <strong>MSCI World</strong> (indice mondial coté en euros via EUNL). C'est la référence pour juger si la sélection active de Signal apporte de la valeur par rapport à un simple ETF passif.
+        Le portefeuille est comparé au <strong>MSCI World</strong> (indice mondial coté en euros via EUNL).
       </div>
       <div class="threshold-row">
         <div class="th">

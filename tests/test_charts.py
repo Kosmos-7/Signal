@@ -476,20 +476,52 @@ check("les alias d'une balise fusionnent, priorité au premier sur conflit",
                            {"CY2015": ("2015-12-31", 40), "CY2020": ("2020-12-31", 999)}])
       == {"CY2020": ("2020-12-31", 100), "CY2015": ("2015-12-31", 40)})
 
+# NVDA : BPA « tels que déposés » (base d'origine) — splits 4:1 (2021) et
+# 10:1 (2024), ~24,4 Md d'actions aujourd'hui.
 NVDAISH = {"an": [{"fin": "2015-01-25", "src": "edgar", "rn": 631, "eps": 1.14},
                   {"fin": "2022-01-30", "src": "edgar", "rn": 9752, "eps": 3.91},
                   {"fin": "2025-01-26", "src": "edgar", "rn": 72880, "eps": 2.94}],
            "tr": []}
-edgar.ajuster_eps_splits(NVDAISH, [("2021-07-20", 4.0), ("2024-06-10", 10.0)])
-check("BPA 2015 ramené dans la base actuelle (÷40 : deux splits postérieurs)",
+SPL = [("2021-07-20", 4.0), ("2024-06-10", 10.0)]
+edgar.ajuster_eps_splits(NVDAISH, SPL, actions_actuelles=24.4e9)
+check("BPA déposé en base d'origine : détecté, ramené en base actuelle (÷40)",
       NVDAISH["an"][0]["eps"] == round(1.14 / 40, 4))
-check("BPA 2022 : seul le split de 2024 s'applique (÷10)",
+check("BPA en base intermédiaire (post-4:1, pré-10:1) : détecté (÷10)",
       NVDAISH["an"][1]["eps"] == round(3.91 / 10, 4))
 check("BPA postérieur au dernier split : intact",
       NVDAISH["an"][2]["eps"] == 2.94)
+# GOOGL : le 10-K post-split republie ses comparatifs DÉJÀ retraités — le
+# frame 2020 porte 2.93 (base actuelle), diviser encore donnerait 592× de PER.
+GOOGLISH = {"an": [{"fin": "2020-12-31", "src": "edgar", "rn": 40269, "eps": 2.93}],
+            "tr": []}
+edgar.ajuster_eps_splits(GOOGLISH, [("2022-07-18", 20.0)], actions_actuelles=12.3e9)
+check("BPA comparatif DÉJÀ retraité : détecté, laissé intact (bug GOOGL 592×)",
+      GOOGLISH["an"][0]["eps"] == 2.93)
+# Donnée incohérente quelle que soit la base : le BPA est retiré.
+FAUX = {"an": [{"fin": "2021-12-31", "src": "edgar", "rn": 6, "eps": 3.2}], "tr": []}
+edgar.ajuster_eps_splits(FAUX, [("2023-01-01", 2.0)], actions_actuelles=1.8e9)
+check("aucune base plausible : pas de BPA plutôt qu'un multiple faux",
+      "eps" not in FAUX["an"][0])
+# Sans rn ni nombre d'actions, base indéterminable + split postérieur → retiré.
+INDET = {"an": [{"fin": "2020-12-31", "src": "edgar", "eps": 5.0}], "tr": []}
+edgar.ajuster_eps_splits(INDET, [("2022-01-01", 2.0)], actions_actuelles=None)
+check("base indéterminable avec split postérieur : BPA retiré par prudence",
+      "eps" not in INDET["an"][0])
 check("sans splits : aucun changement",
-      edgar.ajuster_eps_splits({"an": [{"fin": "2020-12-31", "eps": 5.0}]}, [])
-      ["an"][0]["eps"] == 5.0)
+      edgar.ajuster_eps_splits({"an": [{"fin": "2020-12-31", "eps": 5.0}]}, [],
+                               actions_actuelles=1e9)["an"][0]["eps"] == 5.0)
+
+# B2/B3 : garde-fous de construire_fonda (RN aberrant, exercice fantôme).
+CA9 = {f"CY{y}": (f"{y}-12-31", (1000 + 10 * (y - 2018)) * 1e6) for y in range(2018, 2026)}
+RN9 = {f"CY{y}": (f"{y}-12-31", 5000e6) for y in range(2018, 2026)}
+RN9["CY2021"] = ("2021-12-31", 6e6)                    # SCHW : mauvaise balise
+CA9["CY2026"] = ("2026-06-30", 999e6)                  # AMZN : frame fantôme mi-année
+f = edgar.construire_fonda(CA9, RN9, {})
+check("exercice fantôme hors du mois de clôture majoritaire : écarté",
+      all(e["fin"] != "2026-06-30" for e in f["an"]))
+sch = [e for e in f["an"] if e["fin"] == "2021-12-31"][0]
+check("RN 100× sous ses deux voisins : retiré (le CA de l'entrée survit)",
+      "rn" not in sch and sch.get("ca") == 1030)
 
 check("dates voisines (30 vs 31 déc.) : doublon évité",
       len(edgar.completer_fonda(

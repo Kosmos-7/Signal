@@ -340,6 +340,9 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
 <script>
 const A={};
 const f=(v,d=1)=>v==null?'—':(+v).toFixed(d),fs=(v,d=1)=>v==null?'—':(v>0?'+':'')+(+v).toFixed(d);
+// pc : pourcentage GARDÉ — une donnée absente rend « — » seul, jamais « —% »
+// (21 financières publient un FCF null depuis que trou ≠ zéro).
+const pc=(fmt,v,d)=>v==null?'—':fmt(v,d)+'%';
 let stocks=[],sel=null;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -532,7 +535,6 @@ function stockOf(tk){
       target_upside_pct:u.upside_pct,target_analysts:u.analystes}};
   _lite[tk]=s;return s;
 }
-function uOf(s){ return (s&&U.stocks[s.ticker])||null; }
 function themesOf(tk){ const u=U.stocks[tk];return (u&&Array.isArray(u.themes))?u.themes:[]; }
 
 const REG={PA:'EU',DE:'EU',AS:'EU',BR:'EU',MI:'EU',MC:'EU',AT:'EU',HE:'EU',VI:'EU',LI:'EU',IS:'EU',
@@ -715,39 +717,6 @@ function wrow(s,i,wlid){
       '<div class="xx">'+(z==null?'—':'z '+fs(z,1).replace('.',',')+'σ')+'</div></div>'+
   '</div>';
 }
-function renderWl(meta){
-  // v-index : la vue liste large se suffit à elle-même ; en mobile le rail
-  // ferait doublon (deux fois la même liste, l'une au-dessus de l'autre).
-  document.body.classList.add('v-index');
-  const doc=document.getElementById('doc');doc.classList.remove('on');
-  const isCalc=meta.kind==='calcule',isMain=meta.id===MAIN;
-  doc.innerHTML='<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="tag">'+sv(KIND[meta.kind]||meta.kind||'')+'</span></div>'+
-    '<div class="wl-t">'+sv(meta.label)+'</div>'+
-    (meta.sous_titre?'<div class="wl-s">'+sv(meta.sous_titre)+'</div>':'')+
-    (meta.thesis?'<p class="wl-th">'+sv(meta.thesis)+'</p>':'')+
-    (meta.regle_texte?'<div class="wl-rule"><i>Règle de sélection, appliquée à chaque run</i>'+sv(meta.regle_texte)+'</div>':'')+
-    ((meta.inversion||meta.biais)?'<div class="wl-notes">'+
-      (meta.inversion?'<div class="wl-note"><h4>'+(meta.kind==='filtre'?'Ce qui périmerait cette liste':'Ce qui invaliderait cette thèse')+'</h4>'+blocs(meta.inversion)+'</div>':'')+
-      (meta.biais?'<div class="wl-note"><h4>Biais de ce thème</h4>'+blocs(meta.biais)+'</div>':'')+
-    '</div>':'')+
-    (meta.status==='degraded'?'<div class="wl-covw">'+covWarn(meta)+'</div>':
-(meta.eligibles!=null?'<div class="wl-cov">Les '+meta.scores+' meilleurs scores parmi '+meta.eligibles+' titres éligibles</div>':''))+
-'<div class="wl-listh"><span>'+curList.length+' titre'+(curList.length>1?'s':'')+(isCalc?', triés par la règle':isMain?', triés par score':', meilleur score d\'abord')+'</span><span>Score</span></div>'+
-    (curList.length?'<div id="wlist">'+curList.map((s,i)=>wrow(s,i,meta.id)).join('')+'</div>'
-      :'<p class="wl-empty">Aucun titre dans cette vue cette semaine.</p>');
-  const host=document.getElementById('wlist');
-  if(host)host.addEventListener('click',e=>{
-    if(e.target.closest('.ttag'))return;                 // les tags de thèmes gardent leur lien
-    const r=e.target.closest('.wrow');if(r)nav(hashOf(meta.id,r.dataset.tk));
-  });
-  if(host)host.addEventListener('keydown',e=>{
-    if(e.key!=='Enter'&&e.key!==' ')return;
-    const r=e.target.closest('.wrow');if(!r||e.target.closest('.ttag'))return;
-    e.preventDefault();nav(hashOf(meta.id,r.dataset.tk));
-  });
-  const st=document.querySelector('.stage');if(st)st.scrollTop=0;
-  requestAnimationFrame(()=>doc.classList.add('on'));
-}
 
 function stateTag(b){const ct=b.cross_type==='golden'?'GOLDEN CROSS':b.cross_type==='death'?'DEATH CROSS':'CROSS NEUTRE';return ct+(b.cross_days_ago!=null?' · '+b.cross_days_ago+' J':'');}
 // Échappe tout HTML sauf <b>…</b> (contrat éditorial). Double protection avec le
@@ -819,7 +788,10 @@ function curSym(t){t=(t||'').toUpperCase();
   if(/\.SW$/.test(t))return' CHF';
   if(/\.(CO|ST|OL)$/.test(t))return' kr';
   if(/\.T$/.test(t))return' ¥';
-  if(/\.KS$/.test(t))return' ₩';
+  if(/\.(KS|KQ)$/.test(t))return' ₩';
+  if(/\.HK$/.test(t))return' HK$';
+  if(/\.TO$/.test(t))return' C$';
+  if(/\.AX$/.test(t))return' A$';
   return' $';}
 /* Charge le payload du titre puis dessine. Le rendu est asynchrone : on garde
    le ticker demandé pour ignorer une réponse tardive si l'utilisateur a changé
@@ -890,7 +862,7 @@ function drawChart(s){
       '<span class="chx-k">z = </span><span class="chx-v2">'+fs(zOff,1).replace('.',',')+'σ</span>'
     ].concat(cons?[cons]:[]).join(' <span class="chx-k">·</span> ')+'</div>':'')+
     '<div id="chx-warnslot"></div>'+
-'<div class="chx-note">Canal recalculé sur la période affichée, décote et z-score restent calculés sur la fenêtre officielle ('+(b.regression_window_years||'?')+' ans). Trajectoire historique, pas une valeur intrinsèque. <a href="apprendre.html#decote" style="color:var(--text3)">Méthode →</a></div>';
+'<div class="chx-note">Trajectoire historique, pas une valeur intrinsèque. <a href="apprendre.html#decote" style="color:var(--text3)">Méthode →</a></div>';
   const svg=document.getElementById('chx-svg'),tip=document.getElementById('chx-tip');
   const r0=document.getElementById('chx-r0'),r1=document.getElementById('chx-r1'),selBar=document.getElementById('chx-sel');
   let X,Y,vis,hoverG,F=null;
@@ -1177,6 +1149,13 @@ function fondaRender(s){
   // BPA moyen estimé par les analystes — valide même pour un ADR, les
   // estimations sont dans la devise de cotation.
   const pePrev=(FD_MODE==='an'&&F.pe_prev)||[];
+  // Étiquettes annuelles : un changement de calendrier fiscal (CDNS, début
+  // janvier → fin décembre en 2011) fait coexister deux exercices clos la
+  // même année civile — on les distingue par le mois plutôt que d'afficher
+  // deux fois « 2011 ».
+  const anDup={};if(FD_MODE==='an')rows.forEach(r=>{const y=r.fin.slice(0,4);anDup[y]=(anDup[y]||0)+1;});
+  const MABR=['janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
+  const lab=r=>{const b=fdLabel(r.fin,FD_MODE);return (FD_MODE==='an'&&anDup[r.fin.slice(0,4)]>1)?b+' ('+MABR[+r.fin.slice(5,7)-1]+')':b;};
   const hasPer=FD_MODE==='an'&&(rows.some(r=>r.per!=null)||pePrev.length>0);
   const fmtPer=v=>v!=null?String(v).replace('.',',')+'×':'—';
   // barres : CA et RN par période, dernière période en pleine intensité
@@ -1196,14 +1175,14 @@ function fondaRender(s){
     if(r.rn!=null){const h=r.rn*sc, neg=r.rn<0;
       bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':'#c6c6e0')+'" opacity="'+(neg?0.8:op*0.75)+'"/>';}
     if((n-1-i)%step===0)
-      bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':'')+'>'+fdLabel(r.fin,FD_MODE)+'</text>';
+      bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':'')+'>'+lab(r)+'</text>';
   });
   const cells=pePrev.slice().reverse().map(e=>
     '<tr class="fd-est"><td>'+e.exercice+'e</td><td>—</td>'+(hasEb?'<td>—</td>':'')+'<td>—</td>'+
     '<td>'+fmtPer(e.per)+'</td></tr>').join('')+
     rows.map(r=>{
     const p=fdPrev(full,full.indexOf(r),FD_MODE);
-    return '<tr><td>'+fdLabel(r.fin,FD_MODE)+'</td>'+
+    return '<tr><td>'+lab(r)+'</td>'+
       '<td>'+fdMoney(r.ca,dev)+fdDelta(r,p,'ca')+'</td>'+
       (hasEb?'<td>'+fdMoney(r.eb,dev)+fdDelta(r,p,'eb')+'</td>':'')+
       '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td>'+
@@ -1227,7 +1206,9 @@ function fondaRender(s){
     if(b.disabled)return;FD_MODE=b.dataset.fd;fondaRender(s);}));
 }
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
-function periodNote(b){ const p=qLabel(b&&b.mrq); const ca=p?'dernier trimestre publié ('+p.q+')':'dernier trimestre publié'; const ttm=p?' au '+p.d:''; return 'Fondamentaux, CA : '+ca+' en glissement annuel (a/a) · marges nette &amp; FCF : 12 mois glissants (TTM)'+ttm+'.'; }
+// Élagage du 06/08 : les étiquettes des métriques portent déjà « a/a » et
+// « TTM », seule la DATE de référence ajoute de l'information.
+function periodNote(b){ const p=qLabel(b&&b.mrq); return p?('Fondamentaux au '+p.d+' ('+p.q+', dernier trimestre publié).'):'Fondamentaux : dernier trimestre publié.'; }
 /* Fiche d'un titre thématique hors watchlist principale : universe.json ne
    porte qu'un breakdown compact (ni fondamentaux détaillés, ni graphique, ni
 fiche éditoriale). On publie ce qu'on a, et on le DIT, l'absence est un
@@ -1242,14 +1223,14 @@ function compactMetrics(s){const b=s.breakdown||{},u=s._u||{};
     mk('Z-score'+(b.regression_window_years?' · '+b.regression_window_years+' ans':''),fs(b.regression_z,1).replace('.',',')+'σ')+
     mk('RSI',f(b.rsi,0))+
     mk('Objectif consensus',(b.target_upside_pct==null?'—':fs(b.target_upside_pct,0)+'%')+(b.target_analysts?' ('+b.target_analysts+')':''))+
-  '</div><div class="metrics-note">Chiffres issus du même run du screener que la watchlist principale'+(U.updated_at?' ('+sv(U.updated_at)+')':'')+'. Croissance, marges et bilan détaillés ne sont pas publiés dans les vues thématiques.</div>';}
+  '</div><div class="metrics-note">Chiffres issus du même run du screener que la watchlist principale'+(U.updated_at?' ('+sv(U.updated_at)+')':'')+'.</div>';}
 /* Titre sans AUCUNE fiche : ne devrait plus arriver depuis que l'éditorial
    couvre tout l'univers tagué, mais un run partiel (budget de temps épuisé)
    peut encore laisser un titre sans texte. On le dit plutôt que d'afficher
    une page à trous. */
 function liteNote(){
   return '<div class="lite-note"><h4>Analyse pas encore rédigée</h4>'+
-'<p>Ce titre est scoré par exactement la même méthode que les autres, les chiffres ci-dessus sortent du même run. Son analyse rédigée n\'a simplement pas encore été produite : elles sont générées par ordre de priorité à chaque mise à jour hebdomadaire, et celle-ci attend son tour.</p>'+
+'<p>Ce titre est scoré par exactement la même méthode que les autres ; son analyse rédigée arrivera à une prochaine mise à jour hebdomadaire.</p>'+
   '<p><a href="apprendre.html">Comment lire ces chiffres →</a></p></div>';
 }
 /* Note de bas de fiche courte. Depuis août 2026 on cherche une actualité datée
@@ -1289,7 +1270,7 @@ function dataZone(s,b,compact){
   return '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,1).replace('.',',')+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
       '<div><div class="qh">Décomposition du score</div>'+meter('Qualité',b.qualite||0,45)+meter('Valorisation',b.valorisation||0,30)+meter('Timing',b.timing||0,22)+(compact?'':meter('Analystes',b.analystes||0,3))+'</div></div>'+
     (compact?compactMetrics(s)
-      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',fs(b.cross_slope_mm21_pct,1)+'%')+mk('Draw 52s',fs(b.drawdown_52w_pct,1)+'%')+mk('Croiss CA · a/a',fs(b.rev_growth_pct,1)+'%')+mk('Marge nette · TTM',f(b.net_margin_pct,1)+'%')+mk('Marge FCF · TTM',f(b.fcf_margin_pct,1)+'%')+'</div><div class="metrics-note">'+periodNote(b)+'</div>');
+      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',pc(fs,b.cross_slope_mm21_pct,1))+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))+'</div><div class="metrics-note">'+periodNote(b)+'</div>');
 }
 
 function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');

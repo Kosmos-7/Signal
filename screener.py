@@ -90,12 +90,12 @@ def finnhub_fundamentals(ticker):
         )
         if r.status_code == 200:
             d = r.json().get("metric", {})
+            # Seuls les champs réellement consommés par valider_fondamentaux :
+            # pe_ttm, rev_growth_3y et roe étaient extraits depuis des mois
+            # sans qu'aucune ligne du dépôt ne les lise (relecture 06/08).
             return {
-                "pe_ttm":        d.get("peBasicExclExtraTTM"),
-                "rev_growth_3y": d.get("revenueGrowth3Y"),
-                "net_margin":    d.get("netProfitMarginTTM"),
-                "roe":           d.get("roeTTM"),
-                "debt_equity":   d.get("totalDebt/totalEquityAnnual"),
+                "net_margin":  d.get("netProfitMarginTTM"),
+                "debt_equity": d.get("totalDebt/totalEquityAnnual"),
             }
         else:
             print(f"  ⚠️  Finnhub {ticker} — HTTP {r.status_code} ({'rate limit' if r.status_code==429 else 'token expiré?' if r.status_code==401 else 'erreur'})")
@@ -394,7 +394,9 @@ def _sample_series(s):
     # d'ajustements de dividendes) — et un zéro est invisible sur une échelle
     # log. Sous 1, on garde 4 décimales ; le filtre close>0 en amont a déjà
     # écarté les vrais artefacts.
-    _r = lambda v: round(float(v), 2 if v >= 1 else 4)
+    # 3 chiffres significatifs sous 1 : round(v, 4) écrasait encore en 0.0
+    # les cours ajustés de 1990 tombés sous 0,00005 (AXA).
+    _r = lambda v: round(float(v), 2) if v >= 1 else float(f"{float(v):.3g}")
     pts = [[_mois(ts), _r(v)] for ts, v in combined.items()]
     if pts:
         # Ré-étiquetage du dernier point à la date réelle de la dernière barre quotidienne
@@ -1103,7 +1105,6 @@ def score_ticker(ticker, vix=None):
         trailing_pe  = info.get("trailingPE")            # PER courant (PER courant ≫ forward = bénéfices au creux de cycle)
         market_cap   = info.get("marketCap") or 0
         debt_eq_raw  = info.get("debtToEquity")          # garde None pour distinguer net-cash (=0) vs missing
-        debt_eq      = debt_eq_raw if debt_eq_raw is not None else 0
         reco         = info.get("recommendationMean") or 3.5
         roe          = info.get("returnOnEquity")        # ROE — proxy qualité du capital (v3) ; None si absent
 
@@ -1542,7 +1543,8 @@ def score_ticker(ticker, vix=None):
                                        for ts, v in data.splits.items() if v and v > 0]
                             except Exception:
                                 spl = []
-                            edgar.ajuster_eps_splits(ed, spl)
+                            edgar.ajuster_eps_splits(ed, spl,
+                                                     info.get("sharesOutstanding"))
                             edgar.completer_fonda(fonda, ed)
                         gagne = (len(fonda["an"]) - avant[0], len(fonda["tr"]) - avant[1])
                         if any(gagne):
