@@ -9,19 +9,25 @@ Mauboussin) et met sa méthodologie à l'épreuve par l'observation d'un portefe
 — pas par des backtests. Voir [apprendre.html](https://kosmos-7.github.io/Signal/apprendre.html)
 pour la pédagogie complète et [CHANGELOG.md](CHANGELOG.md) pour l'historique.
 
-## Scoring v3 (gelé pour le trimestre — depuis 2026-06-01)
+## Note v4 (2026-08-06) — moteur : note_v4.py
 
 ```
-Qualité du business →  45 pts  (marge nette 8 + marge FCF 8 + ROE 12 + croissance CA 10 + dette 7)
-Valorisation        →  30 pts  (PEG 15 + FCF yield 15)
-Timing (garde-fou)  →  22 pts  (cross 10 + pente MM21 4 + volume 3 + RSI 2 + régression 3)
-Analystes           →   3 pts
-                       ─────
-                       100 pts  ± ajustements (chase −6/−4 · death −5/−3 · décote +6/+4)
+Qualité      →  35 pts  niveaux des comptes   (marge médiane 9 + ROE 9 + conversion cash 7
+                                               + bilan 5 + constance 5)
+Croissance   →  25 pts  dérivées des comptes  (TCAM CA 7 + TCAM BPA 7 + régularité 4
+                                               + attendu 7, borné ≤ démontré)
+Valorisation →  25 pts  cours ÷ comptes       (PER vs sa médiane d'époque 8 + PEG maison 7
+                                               + rdt bénéfices 5 + rdt cash 5)
+Momentum     →  15 pts  cours ÷ cours         (écart MM21/MM200 6 + cloche z 6 + cloche RSI 3)
+                ─────
+                100 pts  rampes continues partout ; critère incalculable = retiré avec motif
+                         + renormalisation (jamais de zéro muet) ; ni pénalité ni bonus
 ```
 
-La qualité et le prix pilotent (75 pts) ; le timing borne le risque. `val_pts` (drawdown 52w),
-le retracement Fibonacci et le VIX sont publiés à titre **informationnel** (hors score).
+Partition MECE par domaine de donnée : chaque information n'est comptée qu'une fois.
+~58 % de la note repose sur l'historique comptable vérifié ; le marché (V+M) est plafonné à
+40 pts. Le cross MM, `val_pts` (drawdown 52w), Fibonacci, le consensus analystes et le VIX
+sont publiés à titre **informationnel** (hors note — l'IC du timing v3 était négatif, −0,33).
 
 ## Architecture
 

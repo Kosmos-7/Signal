@@ -5,6 +5,62 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+## [4.0.0] — 2026-08-06
+
+### Note v4 : la refonte du scoring — informer, pas prédire
+
+Refonte complète de la notation, décidée après un audit chiffré de
+24 semaines d'archives : les piliers v3 étaient orthogonaux (bien), mais le
+timing notait à contretemps (IC **négatif**, −0,33), les barèmes en
+escalier fabriquaient des faux mouvements (NOW : 81 → 66 → 72 en trois
+semaines pour des variations minuscules), et 8 banques sur 9 plafonnaient
+au même 10/30 de valorisation faute de FCF. Aucun backtest d'optimisation :
+la doctrine est de noter factuellement une entreprise, son prix et sa
+dynamique, avec une logique financière empirique.
+
+- **Nouveau moteur `note_v4.py`**, pur et testé (41 tests) — partition
+  MECE par domaine de donnée, chaque information comptée UNE fois :
+  **Qualité 35** (niveaux des comptes : marge nette médiane 9, ROE 9 avec
+  garde anti-levier et rampe bancaire dédiée, conversion cash 7, bilan 5,
+  constance 5) · **Croissance 25** (dérivées : TCAM CA 7, TCAM BPA 7
+  dilution comprise, régularité 4, attendu analystes 7 — l'estimé ne
+  dépasse jamais le démontré) · **Valorisation 25** (cours÷comptes : PER
+  face à sa médiane d'époque 8, PEG maison 7 = PER prévisionnel ÷ min des
+  deux croissances, rendement des bénéfices 5, rendement du cash 5) ·
+  **Momentum 15** (cours÷cours : écart MM21/MM200 en continu 6, position z
+  en cloche symétrique 6, RSI en cloche 3).
+- **Rampes continues partout** : plus un seul seuil-falaise. Les pénalités
+  chase/death, le bonus décote, les points de cross et le multiplicateur
+  de confiance disparaissent — leurs effets utiles sont absorbés par les
+  cloches (l'étirement pénalise désormais dans les DEUX sens).
+- **Retrait motivé + renormalisation** : un critère incalculable est
+  retiré avec son motif affiché (« le FCF n'a pas de sens pour un bilan
+  bancaire », « devise comptable différente de la cotation »…) et la note
+  se renormalise. Chaque fiche publie sa **couverture**. Fin de la
+  pathologie bancaire.
+- **Pondérations dérivées de cinq principes** (documentés dans Apprendre) :
+  un point = de la confiance dans la mesure ; l'estimé ≤ le démontré ; la
+  redondance se paie ; l'asymétrie se respecte ; le discriminant réel
+  compte. Propriétés systémiques : ~58 % de la note sur l'historique
+  comptable vérifié, marché (V+M) plafonné à 40 pts.
+- **Consensus analystes sorti de la note** (biais acheteur structurel,
+  signal retardataire) — reste affiché en objectif de cours. Un système de
+  lettres A+…D a été conçu, testé, puis écarté : le /100 continu dit plus.
+- **Gardes de données** : marge médiane bornée à ±100 % (l'artefact de
+  holding NBIS à 1764 % ne note pas), FCF yield refusé quand la devise
+  comptable diffère de la cotation (le « 34 % » de TSM divisait des TWD
+  par des USD), NaN Yahoo filtrés à l'entrée du moteur.
+- **Publication** : `breakdown["note"]` complet (blocs, 16 critères avec
+  une phrase en français chacun, motifs, couverture) dans watchlist.json
+  et charts/<T>.json ; blocs compacts q/c/v/m + couverture dans
+  universe.json ; ROE et dette/CP enfin publiés (`roe_pct`,
+  `debt_eq_pct`). Fiches : 4 jauges proportionnelles, dépliant « Détail de
+  la note », « — » pour un bloc non notable. Agent et fiches éditoriales
+  alignés. Avant/après sur 10 témoins : JPM 46 → 75 (la correction
+  bancaire), NVDA 77 → 84, TTE 71 → 56 (CA en recul depuis le pic 2022,
+  payé de sa décroissance), NBIS 45 → 36 malgré un momentum parfait — le
+  plafond marché fonctionne.
+
 ## [3.13.0] — 2026-08-06
 
 ### L'historique officiel : les dépôts SEC entrent dans les fiches

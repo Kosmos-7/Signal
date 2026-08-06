@@ -1096,60 +1096,82 @@ Le portefeuille Signal est modélisé dans un <strong>CTO</strong> (compte-titre
 <strong>Les filtres mordent, et on le publie.</strong> Lors de l'élargissement d'août 2026, plusieurs titres pertinents ont d'abord été écartés par la règle des 5 ans alors en vigueur : Constellation Energy (4,5 ans), GE Vernova (2,3 ans), ARM (2,9 ans), une régression calculée sur deux ou trois ans se cale sur le boom lui-même et publierait une « décote » mesurée sur la période dont on cherche précisément à savoir si elle est une bulle. Cette règle a depuis été assouplie (l'avertissement remplace l'exclusion) et ces trois-là ont été réintégrés : leurs fiches portent l'avertissement tant que l'historique reste court, et c'est exactement le compromis assumé, montrer le titre, dire ce que les chiffres ne peuvent pas encore dire. BE Semiconductor et Equifax passent sous les 25 Md$. Roche est introuvable sous son symbole suisse chez notre fournisseur de données et n'entre que via son certificat américain. Ces décisions sont listées dans le code avec leur motif, plutôt que silencieuses.
     </div>
 
+    <div class="scoring-note">
+<strong>La note v4 (août 2026) : une partition, pas un empilement.</strong> La refonte est partie d'un audit chiffré de 24 semaines d'archives : les piliers de l'ancien score étaient orthogonaux entre eux (bien), mais le timing notait <em>à contretemps</em> (corrélation négative avec les rendements suivants), les seuils en escalier fabriquaient des faux mouvements (un titre passait de 81 à 66 pour un centime de marge), et huit banques sur neuf plafonnaient au même score de valorisation faute de FCF. La v4 répond par construction : quatre blocs qui découpent l'information <em>par domaine de donnée</em>, chaque fait compté une seule fois — les <strong>niveaux</strong> des comptes (Qualité), leurs <strong>dérivées</strong> (Croissance), le <strong>cours rapporté aux comptes</strong> (Valorisation), le <strong>cours rapporté à lui-même</strong> (Momentum). Partout des <strong>rampes continues</strong> : les seuils sont des points de passage, jamais des murs. Et quand une donnée est incalculable, le critère est <strong>retiré avec son motif</strong> (affiché sur la fiche) et la note se renormalise sur le reste — un trou de donnée n'est jamais compté zéro.
+    </div>
+
     <div class="scoring-block">
       <div class="scoring-row">
         <div class="scoring-header">
-          <span class="scoring-name">Qualité du business</span>
-          <span class="scoring-pts">45 pts</span>
+          <span class="scoring-name">Qualité — les niveaux des comptes</span>
+          <span class="scoring-pts">35 pts</span>
         </div>
         <div class="bar-track">
-          <div class="bar-fill" style="width: 45%"></div>
+          <div class="bar-fill" style="width: 35%"></div>
         </div>
         <div class="scoring-desc">
-La durabilité de l'entreprise, <em>ce que tu possèdes</em>, et le signal le plus fiable (la qualité persiste dans le temps). Cinq dimensions : marge nette, marge de Free Cash Flow (le cash réellement généré, bien plus dur à maquiller que le bénéfice comptable), ROE / qualité du capital employé (un proxy de la « douve »), croissance du chiffre d'affaires (<em>plafonnée</em> : statistiquement la croissance ne persiste pas, on ne sur-récompense pas l'hyper-croissance), et le bilan / endettement (un bilan solide = de l'optionalité).
+Ce que l'entreprise <em>est</em>, mesuré sur plusieurs exercices publiés, pas sur le dernier trimestre. Cinq critères : la <strong>marge nette médiane</strong> pluriannuelle (9 pts — la médiane ignore l'année exceptionnelle, dans les deux sens), le <strong>rendement des capitaux propres</strong> (9 pts — tempéré quand le levier dépasse 200 % des fonds propres : un ROE dopé à la dette ne vaut pas un ROE organique), la <strong>conversion du bénéfice en cash réel</strong> (7 pts — sur 100 € de bénéfice comptable, combien finissent en trésorerie ; le cash est plus dur à maquiller), la <strong>dette rapportée aux capitaux propres</strong> (5 pts), et la <strong>constance</strong> (5 pts — la part des exercices bénéficiaires sur tout l'historique connu).
         </div>
       </div>
 
       <div class="scoring-row">
         <div class="scoring-header">
-          <span class="scoring-name">Valorisation</span>
-          <span class="scoring-pts">30 pts</span>
+          <span class="scoring-name">Croissance — les dérivées des comptes</span>
+          <span class="scoring-pts">25 pts</span>
         </div>
         <div class="bar-track">
-          <div class="bar-fill" style="width: 30%"></div>
+          <div class="bar-fill" style="width: 25%"></div>
         </div>
         <div class="scoring-desc">
-Le prix payé, <em>ta marge de sécurité</em>. Deux mesures : le <strong>PEG</strong> (valorisation rapportée à la croissance, il ne pénalise pas un multiple élevé s'il est justifié par la croissance) et le <strong>FCF yield</strong> (le rendement du cash au prix actuel, cher vs pas cher, robuste et comparable entre secteurs). Le PER absolu est volontairement <em>exclu du score</em> : il pénaliserait mécaniquement la qualité, qui se paie toujours plus cher. La fiche l'affiche en revanche exercice par exercice, à titre d'information : ce que le marché a réellement payé chaque année, jamais un critère de notation. « Ce qui est intelligent à un certain prix devient stupide à un autre » (Buffett).
+Ce que l'entreprise <em>devient</em>. Le taux de croissance annuel moyen du <strong>chiffre d'affaires</strong> (7 pts) et du <strong>bénéfice par action</strong> (7 pts — dilution comprise : les rachats d'actions comptent, les émissions aussi), la <strong>régularité</strong> de la progression (4 pts — croître 10 années sur 11 ne raconte pas la même histoire qu'une année sur deux), et la <strong>croissance attendue</strong> par les analystes (7 pts). Règle d'asymétrie : l'estimé ne pèse jamais plus que le démontré — 7 points de promesse contre 18 points de faits.
         </div>
       </div>
 
       <div class="scoring-row">
         <div class="scoring-header">
-          <span class="scoring-name">Timing</span>
-          <span class="scoring-pts">22 pts</span>
+          <span class="scoring-name">Valorisation — le cours rapporté aux comptes</span>
+          <span class="scoring-pts">25 pts</span>
         </div>
         <div class="bar-track">
-          <div class="bar-fill" style="width: 22%"></div>
+          <div class="bar-fill" style="width: 25%"></div>
         </div>
         <div class="scoring-desc">
-          Un <strong>garde-fou, pas un moteur</strong>. Croisement de moyennes MM21/MM200 (direction + fraîcheur), pente de la MM21 (force de la tendance), volume (confirmation), RSI sain, et position du cours vs sa régression long terme. Son vrai rôle n'est pas de « faire monter » le score, mais d'éviter <strong>deux pièges d'entrée</strong> : chaser un sommet (pénalité CHASE, jusqu'à −6) et rattraper un couteau qui tombe (death cross frais, jusqu'à −5). À l'inverse, une <strong>décote de qualité qui se stabilise</strong> reçoit un bonus (Setup B, jusqu'à +6).
-          <br><br>
-          <strong>Lecture dynamique :</strong> un cross n'est pas un état figé. Le screener flag automatiquement les signaux en transition (death cross qui se résorbe, golden qui s'affaiblit) via un champ <code>signal_dynamics_warning</code>, pour éviter les lectures binaires.
+Le prix payé, jugé sous trois angles distincts. Face à <strong>sa propre histoire</strong> : le PER actuel comparé à la médiane des PER que le marché a réellement payés pour ce titre, exercice par exercice (8 pts — c'est l'anti-« la qualité se paie toujours cher » : Microsoft à 32× n'est pas cher <em>pour du Microsoft</em> si sa médiane décennale est 31×). Face à <strong>sa croissance</strong> : le PEG maison (7 pts), PER prévisionnel divisé par la plus <em>prudente</em> des deux croissances (attendue ou démontrée) — une prévision enthousiaste ne fabrique pas un beau PEG. Et <strong>dans l'absolu</strong> : le rendement des bénéfices attendus (5 pts) et le rendement du cash (5 pts). « Ce qui est intelligent à un certain prix devient stupide à un autre » (Buffett).
         </div>
       </div>
 
       <div class="scoring-row">
         <div class="scoring-header">
-          <span class="scoring-name">Consensus analystes</span>
-          <span class="scoring-pts">3 pts</span>
+          <span class="scoring-name">Momentum — le cours rapporté à lui-même</span>
+          <span class="scoring-pts">15 pts</span>
         </div>
         <div class="bar-track">
-          <div class="bar-fill" style="width: 3%"></div>
+          <div class="bar-fill" style="width: 15%"></div>
         </div>
         <div class="scoring-desc">
-Recommandation moyenne des analystes sell-side, sur une échelle Acheter / Conserver / Vendre. Volontairement <em>très</em> peu pondéré : la littérature financière documente un biais structurel des analystes vers les recommandations d'achat (conflits d'intérêt, couverture sélective des titres déjà appréciés, relations clients). C'est aussi un signal lagging, les révisions interviennent souvent après les événements. Le poids a été ramené à 3 pts en v3 : un simple contre-indicateur quand le consensus diverge fortement de l'analyse fondamentale, pas un pilier du score.
+La dynamique de marché, sur trois horizons, en continu. L'<strong>écart MM21/MM200</strong> (6 pts) remplace le croisement binaire : un écart de +4 % et un écart de +15 % ne sont plus le même « golden cross ». La <strong>position dans le canal de régression décennal</strong> (6 pts) est une cloche <em>symétrique</em> : l'étirement pénalise dans les deux sens — chaser un sommet à +2,5σ coûte autant que rattraper un couteau à −2,5σ, l'asymétrie pro-momentum mesurée dans l'ancien score a disparu. Le <strong>RSI</strong> (3 pts) couvre la sur-tension à deux semaines. Plafond structurel : Valorisation + Momentum ≤ 40 pts — le marché peut faire glisser la note, jamais transformer un dossier médiocre en excellent. ~58 % de la note repose sur de l'histoire comptable vérifiée.
         </div>
       </div>
+    </div>
+
+    <div class="scoring-note">
+<strong>D'où viennent les poids.</strong> Aucun point n'a été ajusté pour « faire joli » sur un backtest — cinq principes, appliqués mécaniquement : <em>un point = de la confiance dans la mesure</em> (la marge médiane sur 12 exercices pèse plus que le RSI sur 14 jours) ; <em>l'estimé ne dépasse jamais le démontré</em> ; <em>la redondance se paie</em> (le PER prévisionnel entre deux fois en Valorisation, dans le PEG et dans le rendement des bénéfices — c'est pourquoi ce dernier ne pèse que 5) ; <em>l'asymétrie se respecte</em> (les cloches du momentum sont symétriques par choix) ; <em>le discriminant réel compte</em> (un critère que tout l'univers réussit ne classe personne). Le consensus analystes est <strong>sorti de la note</strong> : biais acheteur structurel documenté, signal retardataire — il reste affiché sur la fiche (objectif de cours, nombre d'analystes), jamais compté.
+    </div>
+
+    <div class="scoring-note">
+<strong>Banques, assureurs, et le droit de ne pas noter.</strong> Le FCF n'a pas de sens pour un bilan bancaire (la dette y est la matière première du métier, pas un financement) : plutôt que d'infliger des zéros, la note <em>retire</em> les critères sans objet — conversion cash, bilan, rendement du cash — avec le motif affiché, applique au ROE une rampe bancaire dédiée, et se renormalise sur ce qui reste. C'est la fin d'une pathologie mesurée : huit banques sur neuf plafonnaient au même score de valorisation. Chaque fiche affiche sa <strong>couverture</strong> (la part des critères réellement notés) : une note calculée sur 69 % des critères le dit, au lieu de le cacher.
+    </div>
+
+    <div class="scoring-note">
+<strong>Ce que la note n'utilise pas, et pourquoi.</strong> Des méthodes respectables existent, que Signal affiche parfois mais ne compte jamais :
+      <br><br>
+      · Le <strong>DCF</strong> (« valeur intrinsèque » par actualisation des cash-flows futurs) est le grand classique de l'analyse fondamentale — et un empilement d'hypothèses : projeter les flux à 5-10 ans, choisir un taux d'actualisation, poser une croissance perpétuelle. Sa valeur terminale représente typiquement 60 à 80 % du résultat, et un demi-point sur le taux de croissance terminal déplace la valorisation de 15 à 25 %. C'est un excellent <em>cadre de réflexion</em> — et un chiffre trop réglable pour une notation automatique : le multiple final « estimé » se choisit dossier par dossier, c'est le bouton caché qui fabrique la conclusion. Notre équivalent factuel : le PER comparé à sa propre médiane d'époque, qui sort des données publiées, pas d'un choix.
+      <br><br>
+      · Le <strong>golden cross</strong> (MM courte qui passe au-dessus de la MM longue) est réputé « signal d'achat puissant ». Mesuré sur nos propres archives : le timing v3 construit dessus notait <em>à contretemps</em> (corrélation négative avec les rendements suivants). Le cross reste affiché — c'est un fait de marché — mais le momentum se note en continu, pas en franchissements binaires.
+      <br><br>
+      · Les <strong>retracements de Fibonacci</strong> fonctionnent essentiellement par prophétie auto-réalisatrice : assez d'intervenants surveillent les mêmes niveaux (38,2 %, 61,8 %) pour que des ordres s'y concentrent. C'est réel, c'est documenté, et c'est exactement pourquoi Signal les <em>affiche</em> sur les fiches (zone utile pour situer un repli) sans jamais les noter : une convention sociale n'est pas un fondamental.
+      <br><br>
+      · Le <strong>VIX</strong>, enfin, reste un indicateur d'ambiance publié chaque jour, hors note (détail section 10).
     </div>
 
     <div class="scoring-note">
@@ -1188,7 +1210,7 @@ Les 30 valeurs avec le score le plus élevé apparaissent sur la watchlist princ
         <span class="concept-label">Score global</span>
         <span class="concept-example">84 / 100</span>
         <div class="concept-body">
-Le score sur 100 est la somme de quatre composantes, qualité (45 pts), valorisation (30 pts), timing (22 pts), consensus analystes (3 pts), ajustée de pénalités (chase) et de bonus (décote). Un résumé en étoiles a existé puis a été retiré : il regroupait des écarts réels (74 et 89 partageaient trois étoiles) et laissait croire à une notation absolue, alors que le score n'est qu'un classement relatif à un instant T.
+La note sur 100 est la somme de quatre blocs, qualité (35 pts), croissance (25 pts), valorisation (25 pts), momentum (15 pts) — cf. section 08 pour le détail des critères. Ni pénalité ni bonus : tout est dans les rampes continues des critères. Un résumé en étoiles a existé puis a été retiré (il regroupait des écarts réels), et un système de lettres A+…D a été conçu puis écarté en août 2026 : le chiffre continu dit plus.
           <br><br>
 Un score élevé ne garantit pas une hausse imminente, il signale que plusieurs signaux convergent favorablement à un instant T. Le score d'un titre peut rester haut pendant qu'il corrige à court terme : les fondamentaux et la tendance long terme évoluent lentement, le cours peut bouger vite. C'est un indicateur de qualité, pas de timing.
         </div>
@@ -1241,11 +1263,11 @@ La MM21 (moyenne mobile sur 21 jours) a dépassé la MM200 (moyenne sur 200 jour
               <text x="640" y="278" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">aujourd'hui</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
-Données réelles JPM sur 200 jours. La MM21 (<span style="color:#e0995e;font-weight:600">ambre</span>, court terme) a oscillé plusieurs fois autour de la MM200 (<span style="color:#b59bd6;font-weight:600">violette</span>, long terme) : c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : la MM21 (310,6 $) est repassée au-dessus de la MM200 (302,8 $). C'est exactement ce que le score récompense le plus dans le bucket timing : un croisement haussier frais et confirmé (<strong>9/10</strong>).
+Données réelles JPM sur 200 jours. La MM21 (<span style="color:#e0995e;font-weight:600">ambre</span>, court terme) a oscillé plusieurs fois autour de la MM200 (<span style="color:#b59bd6;font-weight:600">violette</span>, long terme) : c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : la MM21 (310,6 $) est repassée au-dessus de la MM200 (302,8 $). Depuis la note v4, ce croisement n'est plus noté en tant qu'événement : c'est l'<em>écart</em> MM21/MM200 qui compte, en continu (ici +2,6 %, soit environ 4,6/6 sur la rampe du bloc momentum) — deux jours avant ou après le croisement, la note bouge à peine.
             </div>
           </div>
 
-Le Death Cross (MM21 repasse sous MM200) est le signal inverse, baissier. Il est plus fragile en marché sans tendance claire (~38 % de fiabilité dans ces phases) : d'où la pondération plus faible dans le score Signal et une pénalité de −5 points (croisement ≤ 30 j) ou −3 points (≤ 60 j) s'il est récent.
+Le Death Cross (MM21 repasse sous MM200) est le signal inverse, baissier. Il est plus fragile en marché sans tendance claire (~38 % de fiabilité dans ces phases). La note v4 le traite par la même rampe continue : un écart MM21/MM200 négatif coûte des points proportionnellement à sa profondeur, sans pénalité-événement — l'audit des archives avait montré que noter les croisements en tant que tels revenait à noter à contretemps.
         </div>
       </div>
 
@@ -1255,9 +1277,7 @@ Le Death Cross (MM21 repasse sous MM200) est le signal inverse, baissier. Il est
         <div class="concept-body">
 Le Z-score mesure l'écart entre le cours actuel et sa trajectoire long terme, exprimé en écarts-types (σ). La trajectoire est une régression log-linéaire calculée sur <strong>10, 20 ou 25 ans selon l'industrie</strong> : 10 ans pour la tech (le boom IA fausse les fenêtres longues), 20 ans par défaut, 25 ans pour les cycliques matures (auto, banques, équipement semi, matériaux, énergie) afin de couvrir plusieurs cycles complets, sans quoi une cyclique comme Valeo paraît « en surchauffe » sur 10 ans alors qu'elle est décotée sur 25. Ici, +0,4σ = cours légèrement au-dessus de sa tendance, encore dans la zone saine.
           <br><br>
-          <strong>Au-delà de +2σ</strong>, le screener applique une pénalité <strong>CHASE</strong> graduée : −4 pts dès +2σ confirmé, −6 dès +2,5σ. Elle signale une surextension même quand les fondamentaux sont excellents (Micron à +5σ, GOOGL après +124 % de rally).
-          <br><br>
-<strong>Sous −2σ</strong>, le bonus symétrique « décote-qualité » (jusqu'à +6 pts) récompense un titre de <em>qualité</em> nettement sous sa tendance, à condition qu'il ne soit pas un couteau qui tombe : pas de death cross frais, MM21 qui se stabilise. Il parie sur le retour vers la moyenne de la qualité, jamais sur un titre qui chute encore.
+          Dans la note v4, la position z est une <strong>cloche symétrique</strong> du bloc momentum (6 pts) : plein tarif entre −1,5σ et +1σ, zéro aux extrêmes ±3σ, rampes continues entre les deux. Chaser un sommet à +2,5σ coûte autant que rattraper un couteau à −2,5σ — les anciennes pénalité CHASE et bonus décote, qui traitaient ces deux situations par des marches d'escalier, ont été absorbées par cette cloche. La surextension de Micron à +5σ vaut simplement 0/6, quels que soient ses fondamentaux (qui gardent, eux, leurs propres points).
 
           <div style="margin:1rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
             <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Microsoft (MSFT) · 20 ans · pente +21,7 %/an · échelle log</div>
@@ -1324,7 +1344,7 @@ Chaque fiche de la watchlist affiche désormais une mesure apparentée : la <str
           <br><br>
 <strong>Pourquoi nous refusons l'étiquette « marge de sécurité »</strong> : chez Graham, la référence est une <em>valeur intrinsèque estimée</em>, issue d'une analyse des profits, du bilan, du business. Notre référence est une <em>trajectoire de prix passée</em>, un rétroviseur statistique, sans aucun contenu fondamental. Coller l'étiquette de Graham sur cette mesure emprunterait l'autorité d'un concept qu'on ne calcule pas, et le mot « sécurité » promettrait une protection qui n'est pas établie. La décote chiffre un <strong>désaccord entre le passé et le prix</strong>, elle ne dit pas qui a raison.
           <br><br>
-<strong>Le piège de valeur (value trap)</strong> : une décote extrême peut signifier que le marché price un changement <em>structurel</em> réel, disruption technologique, nouvelle concurrence, régulation. Si le business est durablement altéré, la trajectoire passée ne reviendra jamais. C'est pourquoi la fiche affiche automatiquement un avertissement au-delà de 2σ d'écart, dans les deux sens : décote extrême = risque de value trap ; surcote extrême = risque de <em>rally chase</em> (payer très au-dessus de la trajectoire, avec le retour vers la tendance comme scénario statistiquement fréquent). Dans les deux cas, la règle est la même : croiser avec la qualité des fondamentaux (les 45 points du score) et la thèse.
+<strong>Le piège de valeur (value trap)</strong> : une décote extrême peut signifier que le marché price un changement <em>structurel</em> réel, disruption technologique, nouvelle concurrence, régulation. Si le business est durablement altéré, la trajectoire passée ne reviendra jamais. C'est pourquoi la fiche affiche automatiquement un avertissement au-delà de 2σ d'écart, dans les deux sens : décote extrême = risque de value trap ; surcote extrême = risque de <em>rally chase</em> (payer très au-dessus de la trajectoire, avec le retour vers la tendance comme scénario statistiquement fréquent). Dans les deux cas, la règle est la même : croiser avec la qualité des fondamentaux (le bloc Qualité de la note, 35 pts) et la thèse.
           <br><br>
 En contrepoint, la fiche affiche aussi l'<strong>objectif consensus des analystes</strong>, une référence de nature différente (prospective, fondamentale… et porteuse d'un biais optimiste structurel massivement documenté, raison pour laquelle le consensus ne pèse que 3 points sur 100 dans le score). Quand la tendance historique et le consensus racontent des histoires opposées, ce désaccord est en soi une information.
 
@@ -1334,6 +1354,8 @@ Sous le graphique de cours, chaque fiche montre l'<strong>historique des comptes
 La colonne <strong>PER</strong> donne le multiple <em>d'époque</em> : le cours de clôture de l'exercice divisé par le bénéfice par action publié, autrement dit ce que le marché payait réellement ces bénéfices-là, cette année-là. Elle permet de situer le multiple d'aujourd'hui dans sa propre histoire. Les lignes « e » sont d'une autre nature : le cours <em>actuel</em> divisé par le bénéfice moyen <em>estimé</em> par les analystes pour les deux exercices à venir, des estimations, pas des publications. Pour un ADR (devise comptable différente de la cotation), le PER historique est volontairement omis plutôt qu'affiché faux.
 
 Sources : les états financiers Yahoo pour toutes les places, étendus pour les sociétés américaines par les <strong>dépôts officiels 10-K/10-Q</strong> (EDGAR, le greffe de la SEC), dix ans et plus d'historique, avec la provenance affichée sous la table. Les phrases de synthèse (croissance annualisée, marge moyenne, multiple médian payé) sont calculées depuis ces exercices, exigent au moins quatre exercices, et une période en pertes dit ses pertes plutôt qu'une moyenne qui les maquillerait.
+
+Au passage, pourquoi l'<strong>EBITDA</strong> manque sur les exercices anciens des sociétés US : c'est une mesure <em>non-GAAP</em> — elle n'existe pas dans les dépôts officiels XBRL de la SEC, chaque société la définit à sa façon. EDGAR ne fournit donc que CA, résultat net et BPA ; l'EBITDA ne vient que de Yahoo (~4 exercices). Même prudence pour l'<strong>EV/EBITDA</strong>, le multiple favori des professionnels (il inclut la dette dans le prix : deux sociétés à capitalisation égale ne coûtent pas pareil si l'une porte 8 Md€ de dette) : il exige la dette nette, que Signal ne collecte pas encore — il entrera dans les fiches avec le chantier bilan EDGAR, en informationnel, avec ses pièges connus (trompeur au sommet d'un cycle quand l'EBITDA est temporairement gonflé, sans objet pour les banques, sensible aux retraitements « ajustés » trop flatteurs).
         </div>
       </div>
 
@@ -1341,7 +1363,7 @@ Sources : les états financiers Yahoo pour toutes les places, étendus pour les 
         <span class="concept-label">RSI (force relative)</span>
         <span class="concept-example">RSI 52</span>
         <div class="concept-body">
-Le RSI (Relative Strength Index) est un oscillateur entre 0 et 100 qui mesure la vitesse et l'ampleur des variations récentes du cours. Il compare l'amplitude des hausses à celle des baisses sur les 14 derniers jours. Entre 40 et 60 : le titre est équilibré, ni suracheté ni survendu : c'est la zone idéale (2 pts dans le bucket timing v3).
+Le RSI (Relative Strength Index) est un oscillateur entre 0 et 100 qui mesure la vitesse et l'ampleur des variations récentes du cours. Il compare l'amplitude des hausses à celle des baisses sur les 14 derniers jours. Entre 35 et 65 : le titre est équilibré, ni suracheté ni survendu — le plateau de la cloche RSI du bloc momentum (3 pts, rampes vers 0 à 20 et 80).
           <br><br>
 Au-dessus de 70 : le titre monte trop vite par rapport à sa moyenne, risque de correction à court terme. Sous 30 : survendu, potentiel de rebond mais pas automatique, un titre peut rester en survente longtemps si la tendance fondamentale est durablement négative. Un RSI à 52 comme ici est confortable : le titre a de la marge dans les deux sens.
         </div>
@@ -1351,7 +1373,7 @@ Au-dessus de 70 : le titre monte trop vite par rapport à sa moyenne, risque de 
         <span class="concept-label">Valorisation actuelle (timing d'entrée)</span>
         <span class="concept-example">Drawdown −7% · zone idéale</span>
         <div class="concept-body">
-Annotation de timing d'entrée, <strong>calculée et affichée, mais hors score depuis la v3</strong> (comme le retracement Fibonacci ci-dessous : l'extension est déjà couverte par la régression, la décote profonde par le bonus décote). Mesure simple : à quel pourcentage suis-je sous le plus haut des 52 dernières semaines ? Logique : un Golden Cross frais avec RSI sain n'a pas la même valeur s'il est <em>collé au top 52w</em> (chase de rally, mean-reversion à court terme défavorable) ou s'il est en <em>repli sain de −7%</em> (zone d'entrée propre).
+Annotation de timing d'entrée, <strong>calculée et affichée, mais hors note</strong> (comme le retracement Fibonacci ci-dessous : l'extension est déjà couverte par la cloche z du bloc momentum). Mesure simple : à quel pourcentage suis-je sous le plus haut des 52 dernières semaines ? Logique : un Golden Cross frais avec RSI sain n'a pas la même valeur s'il est <em>collé au top 52w</em> (chase de rally, mean-reversion à court terme défavorable) ou s'il est en <em>repli sain de −7%</em> (zone d'entrée propre).
           <br><br>
           Échelle de l'annotation (val=X/5 sur les fiches) : <em>0 à −3%</em> du top → 0 (chase de rally). <em>−3% à −10%</em> → 5 (zone idéale). <em>−10% à −20%</em> → 3 (correction modérée). <em>−20% à −30%</em> → 1 (momentum cassé). <em>Au-delà de −30%</em> → 0 (chute libre).
           <br><br>
