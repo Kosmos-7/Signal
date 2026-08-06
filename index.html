@@ -97,7 +97,15 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .meter{grid-template-columns:104px 1fr 44px}   /* labels en toutes lettres */
 
   .prose{margin-top:1.8rem;max-width:1040px}
-  .metrics-note{font:.62rem var(--mono);color:var(--text3);letter-spacing:.2px;line-height:1.55;margin:-.7rem 0 0}
+  .metrics-note{font:.62rem var(--mono);color:var(--text3);letter-spacing:.2px;line-height:1.55;margin:-.7rem 0 0;text-align:right}
+  /* Bulle ⓘ : la date de référence des données reste disponible sans occuper
+     une ligne de texte (demande propriétaire du 06/08). Fond OPAQUE — leçon
+     du portefeuille : une bulle translucide est illisible sur du texte.
+     tabindex la rend focalisable, donc tapable au doigt sur mobile. */
+  .inf{position:relative;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid var(--line);border-radius:50%;font:600 9px var(--mono);color:var(--text3);cursor:help;user-select:none;vertical-align:middle}
+  .inf:hover,.inf:focus{color:var(--ac);border-color:rgba(116,182,223,.5);outline:none}
+  .inf .inf-tip{display:none;position:absolute;bottom:20px;right:-6px;z-index:30;background:#141a28;border:1px solid var(--line);border-radius:7px;padding:8px 12px;font:11px var(--mono);color:var(--text2);width:240px;line-height:1.6;white-space:normal;text-align:left;letter-spacing:0}
+  .inf:hover .inf-tip,.inf:focus .inf-tip{display:block}
 
   .bbsec{margin-top:1.9rem}
   .bbsec .sec-h{color:var(--text2)}
@@ -1267,7 +1275,7 @@ function compactMetrics(s){const b=s.breakdown||{},u=s._u||{};
     mk('Z-score'+(b.regression_window_years?' · '+b.regression_window_years+' ans':''),fs(b.regression_z,1).replace('.',',')+'σ')+
     mk('RSI',f(b.rsi,0))+
     mk('Objectif consensus',(b.target_upside_pct==null?'—':fs(b.target_upside_pct,0)+'%')+(b.target_analysts?' ('+b.target_analysts+')':''))+
-  '</div><div class="metrics-note">Chiffres issus du même run du screener que la watchlist principale'+(U.updated_at?' ('+sv(U.updated_at)+')':'')+'.</div>';}
+  '</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">Chiffres issus du même run du screener que la watchlist principale'+(U.updated_at?' ('+sv(U.updated_at)+')':'')+'.</span></span></div>';}
 /* Titre sans AUCUNE fiche : ne devrait plus arriver depuis que l'éditorial
    couvre tout l'univers tagué, mais un run partiel (budget de temps épuisé)
    peut encore laisser un titre sans texte. On le dit plutôt que d'afficher
@@ -1314,7 +1322,7 @@ function dataZone(s,b,compact){
   return '<div class="quant"><div><div class="qh">Signaux de timing</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,1).replace('.',',')+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
       '<div><div class="qh">Décomposition du score</div>'+meter('Qualité',b.qualite||0,45)+meter('Valorisation',b.valorisation||0,30)+meter('Timing',b.timing||0,22)+(compact?'':meter('Analystes',b.analystes||0,3))+'</div></div>'+
     (compact?compactMetrics(s)
-      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',pc(fs,b.cross_slope_mm21_pct,1))+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))+'</div><div class="metrics-note">'+periodNote(b)+'</div>');
+      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',pc(fs,b.cross_slope_mm21_pct,1))+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))+'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>');
 }
 
 function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
