@@ -137,6 +137,23 @@ check("les liens de nav gardent un rembourrage à chaque palier",
       len(re.findall(r"nav a\{[^}]*padding:", CSS)) >= 3,
       str(len(re.findall(r"nav a\{[^}]*padding:", CSS))))
 
+# ── 6. LES RÈGLES RECOPIÉES ENTRE PYTHON ET JAVASCRIPT ─────────────────────
+# La fiche tronque une série de chiffre d'affaires à sa dernière marche
+# descendante, exactement comme `note_v4.apres_rupture` le fait pour la note.
+# Deux implémentations de la même règle, dans deux langages : c'est le genre de
+# doublon qui dérive en silence, et le jour où il dérive la fiche note une
+# trajectoire et en dessine une autre — c'était précisément le bug d'Adyen.
+print("\n— Le seuil de rupture est-il le même des deux côtés ? —")
+NOTE = open("note_v4.py", encoding="utf-8").read()
+py = re.search(r"RUPTURE_PERIMETRE\s*=\s*(\S+(?:\s*/\s*\S+)?)", NOTE)
+js = re.search(r"FD_RUPTURE\s*=\s*(\S+?);", SRC["index.html"])
+check("les deux constantes existent", bool(py and js),
+      f"python={bool(py)} js={bool(js)}")
+if py and js:
+    check("même seuil de rupture de périmètre (note_v4 ↔ fiche)",
+          abs(eval(py.group(1)) - eval(js.group(1))) < 1e-9,
+          f"python={py.group(1)} js={js.group(1)}")
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:

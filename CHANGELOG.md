@@ -5,6 +5,78 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La fiche d'Adyen se contredisait elle-même
+
+Elle notait la croissance à **+19,2 % par an** et écrivait, deux centimètres
+plus haut, « le chiffre d'affaires a **reculé de 33,3 % par an** ». Le même
+fichier disait deux choses contraires, et la fausse était celle qu'on lisait.
+
+Le fichier se dénonce tout seul :
+
+| exercice | CA | résultat net | BPA | actions impliquées |
+|---|---|---|---|---|
+| 2022 | **8 936** | 564 | 18,17 | 31,0 M |
+| 2023 | **1 863** | 698 | 22,41 | 31,1 M |
+| 2024 | 2 226 | 925 | 29,59 | 31,3 M |
+| 2025 | 2 647 | 1 063 | 33,61 | 31,6 M |
+
+Bénéfice, BPA et nombre d'actions sont parfaitement continus : il n'y a **ni
+scission ni changement d'entité**, sinon eux aussi sauteraient. Seule la ligne
+du haut change de sens. Adyen publie son volume encaissé en 2022 — qui inclut
+l'interchange et les frais de réseau reversés aux banques et aux schémas — puis
+son revenu net à partir de 2023. Preuve décisive, dans le même fichier : le
+consensus attend **2 858** en 2026. La source place donc elle-même « le »
+chiffre d'affaires d'Adyen sur l'échelle basse ; sa ligne 2022 contredit ses
+propres estimations.
+
+Le garde existait déjà — `note_v4.apres_rupture`, seuil d'un tiers — mais il ne
+protégeait que **le calcul de la note**. Le dessin et les phrases, eux, ne
+s'en servaient pas. Ils s'en servent maintenant, avec le même seuil, la même
+asymétrie (une marche montante est conservée, c'est la signature de
+l'hypercroissance) et la même restriction au seul chiffre d'affaires. Une
+série tronquée le **dit** désormais, avec ses deux chiffres.
+
+Deux séries concernées sur 93 : Adyen et Western Digital (retraitement de la
+cession de SanDisk). Aucun vrai recul touché — Micron 2023, Booking 2020,
+ASML 2009 passent intacts.
+
+### Un accident comptable ne décide plus de l'échelle du PER
+
+Cisco 2018 sort à **2 129×** au milieu d'un historique compris entre 14 et 28×.
+Le chiffre est exact : la réforme fiscale américaine a fait tomber son bénéfice
+de 9,6 Md$ à 110 M$ pendant que son chiffre d'affaires montait. Ce n'est pas une
+donnée fausse, c'est un dénominateur disparu un an.
+
+L'échelle logarithmique était déjà là et ne suffisait pas : mesuré, la courbe
+qu'on vient lire se tassait sur **13 % de la hauteur** (Booking, 1 547× en 2020,
+sur 36 %).
+
+**Seuil par l'écart, jamais par la valeur.** Un plafond du genre « au-dessus de
+100× » serait faux : ARM vit à 175–431× avec 20 % de marge nette, Nebius à 208×,
+Equinix à 56–200× — ce sont de vraies valorisations. Ce qui trahit l'accident,
+c'est l'**isolement** : le sommet vaut cinq fois le point suivant, quand une
+valorisation chère est entourée de valorisations chères. Deux points au plus
+peuvent sortir du cadre.
+
+**Rien n'est caché** : le point sort par le haut, dans une bande qui n'appartient
+qu'à lui, avec un chevron et **sa valeur écrite**. Premier essai, corrigé : sans
+cette bande réservée, le chevron se posait à la hauteur exacte du plus haut
+point mesuré — 2 129× et 28× au même niveau, pire que le problème d'origine.
+
+Quatre graphiques concernés sur 84, un seul point chacun : Cisco, Booking,
+Micron, NetApp. Aucune société durablement chère touchée.
+
+### Six fiches disaient un trou sans dire pourquoi
+
+TSMC affiche onze exercices de comptes et **aucun multiple historique** : sa
+courbe de PER se réduisait à deux points estimés, sans un mot. Idem pour ASE,
+Ferrari, Cameco, ABB et Vestas.
+
+Le refus est le bon — ces sociétés publient leurs comptes dans une devise et
+cotent dans une autre, et diviser un cours en dollars par un bénéfice en dollars
+taïwanais donne un taux de change déguisé en multiple. Mais un trou muet se lit
+comme une négligence. Il est maintenant énoncé, avec les deux devises nommées.
+
 ### Les légendes de photo redeviennent lisibles
 
 Le même objet — la légende sous une illustration — sortait en **sept tailles

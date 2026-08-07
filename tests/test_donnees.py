@@ -281,6 +281,48 @@ for _t, _d in FICHES.items():
 # y est réel mais partiellement réversible, et on préfère ne pas l'accuser.
 sentinelle("séries de CA sans rupture de définition", ruptures, 1, N)
 
+# POINTS HORS ÉCHELLE DU GRAPHIQUE PER. La fiche écarte de sa règle graduée un
+# multiple ISOLÉ — un sommet qui vaut cinq fois le point suivant — parce qu'un
+# exercice à bénéfice quasi nul (Cisco 2018, charge fiscale ; Booking 2020,
+# covid) écrase toute la courbe même en échelle logarithmique. Le point reste
+# dessiné, avec sa valeur écrite ; seule la graduation l'ignore.
+#
+# Ce que ce test protège n'est PAS le seuil, c'est ce que le seuil ne doit
+# jamais toucher : une société durablement chère. ARM vit à 175–431×, Equinix à
+# 56–200×, Netflix à 19–288× — leurs multiples élevés ont des voisins, ce sont
+# de vraies valorisations. Si l'une d'elles se met à sortir du cadre, la règle
+# a cessé de distinguer l'accident de la trajectoire.
+print("\n— Le graphique PER n'écarte-t-il que des accidents isolés ? —")
+
+
+def _hors_echelle(vals, seuil=5, maxi=2):
+    """Réplique de la règle du front : épluche par le haut tant que le sommet
+    vaut `seuil` fois le point suivant, `maxi` points au plus."""
+    s = sorted(vals)
+    ecartes = []
+    while len(s) >= 3 and len(ecartes) < maxi and s[-2] > 0 and s[-1] / s[-2] >= seuil:
+        ecartes.append(s.pop())
+    return ecartes
+
+
+FD_ANS = 10                       # même fenêtre dessinée que la fiche
+ecarte_par = {}
+for _t, _d in FICHES.items():
+    _f = _d.get("fonda") or {}
+    _pub = [r["per"] for r in (_f.get("an") or [])[-FD_ANS:] if r.get("per") is not None]
+    if len(_pub) < 2:
+        continue
+    _est = [x["per"] for x in (_f.get("pe_prev") or []) if x.get("per") is not None]
+    _e = _hors_echelle(_pub + _est)
+    if _e:
+        ecarte_par[_t] = [round(v) for v in _e]
+check("aucune fiche ne voit deux points sortir du cadre",
+      all(len(v) == 1 for v in ecarte_par.values()), str(ecarte_par))
+DURABLEMENT_CHERES = ["ARM", "EQIX", "NFLX", "NBIS", "CDNS", "ADBE"]
+touchees = [t for t in DURABLEMENT_CHERES if t in ecarte_par]
+check("aucune société durablement chère n'est écartée", not touchees, str(touchees))
+sentinelle("fiches avec un multiple hors échelle", sorted(ecarte_par), 8, N)
+
 # Un critère mesuré pour presque personne ne mesure rien : la couverture d'un
 # critère est elle-même une donnée à surveiller.
 print("\n— Couverture des critères : un critère rarement mesuré est un critère mort —")

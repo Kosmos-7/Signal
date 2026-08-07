@@ -1312,6 +1312,42 @@ function fdPrev(arr,i,mode){
   const d0=new Date(arr[i].fin);
   return arr.find(p=>{const j=(d0-new Date(p.fin))/864e5;return j>330&&j<400;})||null;
 }
+/* RUPTURE DE PÉRIMÈTRE — le même garde que `note_v4.apres_rupture`, du même
+   côté du mur cette fois.
+
+   Le calcul de la note se protège depuis longtemps d'un effondrement du CA
+   d'un facteur trois ou plus entre deux exercices : ce n'est presque jamais
+   une trajectoire d'entreprise, c'est une cession, une scission, ou un
+   changement de définition qui n'a retraité que les exercices récents. LE
+   DESSIN ET LES PHRASES, EUX, NE SE PROTÉGEAIENT PAS. D'où une fiche qui
+   notait correctement Adyen à +19,2 % par an tout en écrivant, deux
+   centimètres plus haut, « le chiffre d'affaires a reculé de 33,3 % par an ».
+   Le même fichier disait deux choses contraires.
+
+   Adyen publie son volume traité en 2022 (8 936 M€) puis son revenu net à
+   partir de 2023 (1 863) ; Western Digital publie un CA retraité de la
+   cession de SanDisk. Dans les deux cas le résultat net, le BPA et le nombre
+   d'actions restent parfaitement continus — c'est la signature : seule la
+   ligne du haut a changé de sens.
+
+   Le seuil (un tiers) et l'asymétrie sont recopiés de note_v4.py, à dessein :
+   une marche MONTANTE est conservée, c'est la signature de l'hypercroissance
+   (Nebius ×9, CoreWeave ×14) et la tronquer effacerait ce qu'on veut voir. Et
+   la règle ne vaut QUE pour le chiffre d'affaires, qui mesure le périmètre —
+   le bénéfice est bien trop volatile pour qu'une marche l'accuse.
+
+   Mesuré sur les 93 fiches : deux séries tronquées (Adyen, Western Digital),
+   et aucun des vrais reculs touché — Micron 2023, Booking 2020, ASML 2009
+   passent intacts. */
+const FD_RUPTURE=1/3;
+function fdApresRupture(an){
+  for(let i=an.length-1;i>0;i--){
+    const pre=an[i-1].ca, post=an[i].ca;
+    if(pre>0&&post>0&&post/pre<FD_RUPTURE&&an.length-i>=2)
+      return {an:an.slice(i),coupe:{avant:an[i-1],apres:an[i]}};
+  }
+  return {an:an,coupe:null};
+}
 /* Phrases de synthèse (décision propriétaire du 06/08) : la table donne les
    points, ces phrases donnent la TRAJECTOIRE — TCAm du CA avec ses années de
    baisse, marge nette moyenne et son évolution, multiple moyen réellement payé.
@@ -1319,9 +1355,20 @@ function fdPrev(arr,i,mode){
    juge) ; chaque phrase exige assez d'exercices pour ne pas sur-affirmer
    (≥ 4) ; une période avec pertes dit ses pertes, pas une marge moyenne qui
    les maquillerait. Pur : ne lit que les exercices publiés. */
-function fdSynthese(an){
+function fdSynthese(an,coupe,dev){
   const fr=v=>v.toFixed(1).replace('.',',');
   const ph=[];
+  /* Une série tronquée le DIT. Sans cette phrase, une fiche qui démarre en
+     2023 quand les voisines remontent à dix ans passe pour une jeune société,
+     et le lecteur n'a aucun moyen de savoir qu'on a écarté quelque chose. */
+  if(coupe){
+    ph.push('Les exercices antérieurs à <b>'+coupe.apres.fin.slice(0,4)+'</b> ne sont pas repris : '
+      +'le chiffre d\'affaires y était publié sur un autre périmètre ('
+      +fdMoney(coupe.avant.ca,dev)+' en '+coupe.avant.fin.slice(0,4)+' contre '
+      +fdMoney(coupe.apres.ca,dev)+' l\'exercice suivant, sans que le bénéfice '
+      +'ni le nombre d\'actions ne bougent). Une trajectoire mesurée à travers '
+      +'cette marche serait fausse.');
+  }
   const cas=an.filter(r=>r.ca>0);
   if(cas.length>=4){
     const n=cas.length,y0=+cas[0].fin.slice(0,4),y1=+cas[n-1].fin.slice(0,4);
@@ -1360,7 +1407,11 @@ const FD_ANS=10, FD_TRIM=12;
 function fondaRender(s){
   const host=document.getElementById('fondasec'); if(!host)return;
   const D=CH[s.ticker], F=D&&D.fonda;
-  const an=(F&&F.an)||[], tr=(F&&F.tr)||[];
+  // Le périmètre AVANT toute autre chose : barres, phrases et médianes lisent
+  // tous `an`, et une seule troncature en tête garantit qu'ils racontent la
+  // même histoire (voir fdApresRupture).
+  const _rupt=fdApresRupture((F&&F.an)||[]);
+  const an=_rupt.an, tr=(F&&F.tr)||[];
   if(an.length<2&&tr.length<2){host.innerHTML='';return;}
   if(FD_MODE==='an'&&an.length<2)FD_MODE='tr';
   if(FD_MODE==='tr'&&tr.length<2)FD_MODE='an';
@@ -1542,7 +1593,7 @@ function fondaRender(s){
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
   /* Le tableau montre TOUT l'accumulé, lui : c'est le graphique qu'on allège,
      pas la donnée. Un lecteur qui déplie veut les chiffres, pas un extrait. */
-  const perB=fdPerChart(F,fmtPer,NARROW?440:800);
+  const perB=fdPerChart(F,fmtPer,NARROW?440:800,D&&D.breakdown);
   /* LE SEUL CAS QUE LA COURBE NE SAIT PAS MONTRER. Un PER prévisionnel négatif
      n'a pas de sens économique : on ne trace pas de point, donc la courbe
      s'arrête simplement — silencieusement. La tuile « PER prévisionnel » le
@@ -1579,7 +1630,7 @@ function fondaRender(s){
        nous arrêtons (Nebius, CoreWeave), les barres cessent simplement, sans
        que rien ne dise pourquoi. Le motif reste dans la donnée publiée
        (`ca_arret`), prêt à être réaffiché si l'absence gêne. */
-    (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
+    (function(){const syn=fdSynthese(an,_rupt.coupe,dev);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     /* LES TROIS FONDAMENTAUX FRAIS, à côté des exercices qu'ils prolongent
        (déplacés le 07/08 : ils flottaient dans une rangée de tuiles isolée).
        Ils disent où en est la société AUJOURD'HUI là où le graphique et les
@@ -1614,11 +1665,12 @@ function fondaRender(s){
        le « i », plus étalée sous le graphique. */
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
-        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+
+        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+(perB.horsEch?'&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">▲</span> hors de l\'échelle (valeur écrite)':'')+
         '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Les points estimés, eux, sont au cours DU JOUR — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.</span></span></div>'+
         pertesAttendues+'</div>'
       :'<div class="fd-wrap"><div class="qh">'+(perB.queEst?'PER estimé (analystes)':'PER')+'</div>'+
-        '<div class="fd-inline">'+perB.inline+'</div>'+pertesAttendues+'</div>')
+        '<div class="fd-inline">'+perB.inline+'</div>'+
+        (perB.motif?'<div class="fd-syn"><p>'+perB.motif+'</p></div>':'')+pertesAttendues+'</div>')
     /* Aucun exercice, aucune estimation — mais les analystes peuvent quand
        même attendre des pertes, et c'est alors la SEULE chose qu'on sache
        dire du multiple. Elle vaut d'être dite. */
@@ -1641,7 +1693,7 @@ function fondaRender(s){
    valeur — le graphique est le seul artefact, il n'y a plus ni tableau
    dépliable ni relevé au survol (décisions du 07/08) ;
    0 ou 1 exercice publié → pas de courbe artificielle, valeurs en ligne. */
-function fdPerChart(F,fmtPer,W){
+function fdPerChart(F,fmtPer,W,b){
   /* Même fenêtre de DIX exercices que le graphique des chiffres publiés
      (décision du propriétaire, 07/08) : au-delà, les points se tassent et
      l'axe devient illisible. La MÉDIANE affichée reste celle de la fenêtre
@@ -1668,7 +1720,24 @@ function fdPerChart(F,fmtPer,W){
   const pubTout=((F&&F.an)||[]).filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per}));
   if(pub.length<2){
     const inline=pub.concat(est).map(p=>p.an+(p.est?'<i>e</i>':'')+'\u00a0: '+fmtPer(p.per)).join(' \u00b7 ');
-    return {inline:inline,queEst:!pub.length,svg:null};
+    /* POURQUOI L'HISTORIQUE MANQUE, quand il manque en ENTIER.
+       Six fiches (TSMC, ASE, Ferrari, Cameco, ABB, Vestas) publient leurs
+       comptes dans une devise et cotent dans une autre. Le screener refuse
+       alors le quotient — un cours en dollars divisé par un bénéfice en
+       dollars taïwanais serait un taux de change déguisé en multiple, et
+       c'est le bon refus. Mais la fiche n'affichait plus qu'une courbe à deux
+       points estimés, SANS RIEN DIRE : un trou muet se lit comme une donnée
+       manquante par négligence. TSMC : onze exercices, aucun multiple.
+       Le multiple prévisionnel, lui, reste valide — les estimations des
+       analystes sont publiées dans la devise de cotation. */
+    const anEps=((F&&F.an)||[]).filter(r=>r.eps>0);
+    const motif=(!pub.length&&anEps.length>=2&&b&&b.devise&&F.devise&&b.devise!==F.devise)
+      ? 'Aucun multiple historique : les comptes sont publiés en '+F.devise+' et le titre cote en '
+        +b.devise+'. Diviser un cours par un bénéfice libellé dans une autre monnaie donnerait un '
+        +'taux de change, pas une valorisation — nous préférons le trou. Les '+anEps.length
+        +' exercices concernés restent lisibles dans les chiffres publiés ci-dessus.'
+      : null;
+    return {inline:inline,queEst:!pub.length,svg:null,motif:motif};
   }
   W=W||800;
   const H=190,ML=14,MR=64,MT=24,MB=22;
@@ -1679,11 +1748,55 @@ function fdPerChart(F,fmtPer,W){
   const med=nMed>=3?(nMed%2?sTout[(nMed-1)/2]:(sTout[nMed/2-1]+sTout[nMed/2])/2):null;
   // La médiane entre dans l'échelle : sans cela son trait pourrait tomber hors
   // du cadre quand la fenêtre dessinée est plus chère que l'historique entier.
-  const vals=pts.map(p=>p.per).concat(med!=null?[med]:[]);
-  const lo=Math.min(...vals),hi=Math.max(...vals);
+  /* UN ACCIDENT COMPTABLE NE DOIT PAS DÉCIDER DE L'ÉCHELLE.
+
+     L'échelle log était déjà là et ne suffit pas : Cisco sort à 2 129× en
+     2018 au milieu d'un historique compris entre 14 et 28×, et même en log
+     toute la courbe qu'on vient lire se tasse sur 13 % de la hauteur — mesuré.
+     Booking, 1 547× en 2020, tombe à 36 %.
+
+     Le chiffre est pourtant EXACT, et c'est pour ça qu'on ne le supprime pas :
+     la réforme fiscale américaine a fait tomber le bénéfice de Cisco de
+     9,6 Md$ à 110 M$ pendant que son chiffre d'affaires montait, le covid a
+     fait la même chose à Booking. Ce n'est pas une donnée fausse, c'est un
+     dénominateur qui a disparu un an.
+
+     SEUIL PAR L'ÉCART, PAS PAR LA VALEUR. Un plafond du genre « au-dessus de
+     100× » serait faux : ARM vit à 175–431× avec 20 % de marge nette, Nebius
+     à 208× — ce sont de vraies valorisations. Ce qui trahit l'accident, c'est
+     l'ISOLEMENT : le sommet vaut cinq fois le point suivant, alors qu'une
+     valorisation chère est entourée de valorisations chères. Deux points au
+     plus peuvent sortir du cadre, jamais davantage.
+
+     RIEN N'EST CACHÉ. Le point sort du cadre par le haut, avec un chevron et
+     SA VALEUR ÉCRITE — 2 129× reste lisible sur le dessin. On ne retire pas
+     le fait, on l'empêche seulement de décider de la règle graduée.
+
+     Mesuré sur les 93 fiches : quatre graphiques concernés (Cisco, Booking,
+     Micron, NetApp), un seul point chacun, et aucune fiche à multiples
+     durablement élevés touchée. */
+  const vTri=pts.map(p=>p.per).sort((a,b)=>a-b);
+  const horsEch=[];
+  while(vTri.length>=3&&horsEch.length<2&&vTri[vTri.length-2]>0
+        &&vTri[vTri.length-1]/vTri[vTri.length-2]>=5)horsEch.push(vTri.pop());
+  // La médiane rentre TOUJOURS dans l'échelle : son trait hors cadre serait
+  // un repère invisible, et c'est elle que la note compare au multiple du jour.
+  const corps=vTri.concat(med!=null?[med]:[]);
+  const lo=Math.min(...corps),hi=Math.max(...corps);
   const LOG=hi/Math.max(lo,0.1)>10;
-  const Y=v=>{if(LOG){const a=Math.log(lo),b=Math.log(hi);return MT+(1-(Math.log(v)-a)/((b-a)||1))*(H-MT-MB);}
-    return MT+(1-(v-lo)/((hi-lo)||1))*(H-MT-MB);};
+  /* UNE BANDE RÉSERVÉE AU-DESSUS DU CADRE. Sans elle, le point hors échelle
+     se posait à la hauteur exacte du plus haut point mesuré — Cisco montrait
+     son 2 129× et son 28× au même niveau, ce qui est pire que le problème
+     d'origine. La règle graduée s'arrête donc quinze unités plus bas et cette
+     bande n'appartient qu'aux chevrons : ce qui est dedans est hors d'échelle,
+     ce qui est dessous est à l'échelle, et l'œil ne peut plus les confondre. */
+  const HORS=MT+1, HAUT=MT+(horsEch.length?15:0);
+  const Y=v=>{const w=Math.min(Math.max(v,lo),hi);
+    if(LOG){const a=Math.log(lo),b=Math.log(hi);return HAUT+(1-(Math.log(w)-a)/((b-a)||1))*(H-HAUT-MB);}
+    return HAUT+(1-(w-lo)/((hi-lo)||1))*(H-HAUT-MB);};
+  // Position DESSINÉE : les traits et les marqueurs montent jusqu'au chevron,
+  // sinon la ligne s'arrêterait sous lui et le point semblerait détaché.
+  const Yp=v=>v>hi?HORS:Y(v);
   const X=an=>ML+20+(a1>a0?(an-a0)*(W-ML-MR-40)/(a1-a0):0);
   let g='';
   /* La médiane tracée est celle de TOUT l'historique accumulé, pas des dix
@@ -1698,7 +1811,7 @@ function fdPerChart(F,fmtPer,W){
   for(let i=1;i<pub.length;i++){if(pub[i].an-pub[i-1].an===1)cur.push(pub[i]);else{segs.push(cur);cur=[pub[i]];}}
   segs.push(cur);
   segs.filter(sg=>sg.length>1).forEach(sg=>{
-    g+='<polyline points="'+sg.map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-linejoin="round"/>';});
+    g+='<polyline points="'+sg.map(p=>X(p.an)+','+Yp(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-linejoin="round"/>';});
   /* Le connecteur pointillé ne part du dernier point publié QUE s'il touche
      le dernier exercice CONNU : sur une société qui a traversé des pertes,
      relier 2022 aux estimations par-dessus trois croix dessinerait une
@@ -1707,7 +1820,7 @@ function fdPerChart(F,fmtPer,W){
   const derAn=anAll.length?+anAll[anAll.length-1].fin.slice(0,4):(pub.length?pub[pub.length-1].an:0);
   const ancre=(pub.length&&pub[pub.length-1].an===derAn)?[pub[pub.length-1]]:[];
   if(est.length&&ancre.length+est.length>=2)
-    g+='<polyline points="'+ancre.concat(est).map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
+    g+='<polyline points="'+ancre.concat(est).map(p=>X(p.an)+','+Yp(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
   trous.filter(an=>an>=a0&&an<=a1).forEach(an=>{
     g+='<text x="'+X(an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+an+' : exercice sans multiple (perte ou BPA indisponible)</title></text>';});
   /* TOUTES LES VALEURS SONT ÉCRITES (décision du propriétaire, 07/08 :
@@ -1724,9 +1837,17 @@ function fdPerChart(F,fmtPer,W){
   let dernierHaut=-1e9, dernierBas=-1e9, dernierAxe=-1e9;
   const stepX=pts.length>8?2:1;
   pts.forEach((p,i)=>{
-    const cx=X(p.an),cy=Y(p.per);
-    g+=p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
-            :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"/>';
+    const cx=X(p.an),cy=Yp(p.per);
+    // Hors cadre : un chevron vers le haut au lieu du point, et un survol qui
+    // dit pourquoi. La valeur, elle, s'écrit comme celle de tous les autres.
+    g+=p.per>hi
+      ?'<path d="M'+(cx-5.5)+' '+(cy+5)+'L'+cx+' '+(cy-4)+'L'+(cx+5.5)+' '+(cy+5)+'Z" fill="#74b6df" '
+        +'stroke="#0d0d16" stroke-width="1.2"><title>'+p.an+' : '+Math.round(p.per)+'×, hors de '
+        +'l\'échelle. Le bénéfice de cet exercice est tombé près de zéro '
+        +'(charge exceptionnelle, année de crise) : le multiple est exact mais ne dit rien de la '
+        +'valorisation.</title></path>'
+      :(p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
+             :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"/>');
     const enHaut=cx-dernierHaut>=ECART_VAL;
     if(enHaut||cx-dernierBas>=ECART_VAL){
       const ly=enHaut?Math.max(11,cy-10):Math.min(H-MB-4,cy+18);
@@ -1737,7 +1858,7 @@ function fdPerChart(F,fmtPer,W){
       g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+'>'+String(p.an).slice(2)+(p.est?'e':'')+'</text>';}
   });
   return {svg:'<svg class="fd-svg" id="fd-per" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',
-    med:med,trous:trous.some(an=>an>=a0&&an<=a1)};
+    med:med,trous:trous.some(an=>an>=a0&&an<=a1),horsEch:horsEch.length};
 }
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
 // Élagage du 06/08 : les étiquettes des métriques portent déjà « a/a » et
