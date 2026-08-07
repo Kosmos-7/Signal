@@ -985,7 +985,7 @@ function drawChart(s){
   const presets=[...pset.entries()].sort((a,c)=>a[0]-c[0]);presets.push([1e9,'MAX']);
   const dec=b.decote_pct, zOff=b.regression_z;
   const mlabel=dec==null?'':(dec>=0?'Sous':'Au-dessus de')+' sa trajectoire '+(b.regression_window_years||'?')+' ans';
-  const cons=(b.target_upside_pct!=null)?('<span class="chx-k">Objectif consensus : </span><span class="chx-v2">'+fs(b.target_upside_pct,0)+' %</span>'+(b.target_analysts?' <span class="chx-k">('+b.target_analysts+' analystes)</span>':'')):'';
+  const cons=(b.target_upside_pct!=null)?('<span class="chx-k">Objectif consensus : </span><span class="chx-v2">'+fs(b.target_upside_pct,0)+' %</span>'+(b.target_analysts?' <span class="chx-k">('+b.target_analysts+' analyste'+(b.target_analysts>1?'s':'')+')</span>':'')):'';
   host.innerHTML='<div class="qh">Cours &amp; tendance long terme</div>'+
     '<div class="chx-wrap"><svg class="chx-svg" id="chx-svg" viewBox="0 0 '+W+' '+H+'"></svg><div class="chx-tip" id="chx-tip"></div></div>'+
     '<div class="chx-ctrl"><span id="chx-periods">'+presets.map(([m,l],i)=>'<button class="chx-pbtn'+(m===WIN?' on':'')+'" data-m="'+m+'">'+l+'</button>').join(' ')+'</span><span class="chx-rlbl" id="chx-rlbl"></span></div>'+
