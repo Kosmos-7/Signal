@@ -592,6 +592,54 @@ check("capex déposé en positif : la valeur absolue est prise",
                "Capital Expenditure": {"2025-12-31": 1_000_000_000}}), BS)["fcf"]
       == 4_000_000_000)
 
+# ── Projections jusqu'à 2030 : consensus puis prolongation ──────────────────
+print("\n— Projections : deux natures de lignes, jamais confondues —")
+AN_P = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
+        [(2021, 100, 1.0), (2022, 112, 1.2), (2023, 125, 1.4),
+         (2024, 140, 1.6), (2025, 157, 1.85)]]
+pr = screener.projections(AN_P, {"0y": 2.1, "+1y": 2.4},
+                          {"0y": 176, "+1y": 197}, "2025-12-31")
+check("la trajectoire va bien jusqu'à 2030",
+      [e["exercice"] for e in pr] == [2026, 2027, 2028, 2029, 2030], str(pr))
+check("les deux exercices couverts par les analystes sont dits « consensus »",
+      [e["nature"] for e in pr[:2]] == ["consensus"] * 2)
+check("au-delà, tout est dit « extrapolé » — aucun analyste ne va à 5 ans",
+      [e["nature"] for e in pr[2:]] == ["extrapolé"] * 3)
+check("le consensus est repris tel quel, jamais recalculé",
+      pr[0]["ca"] == 176 and pr[1]["eps"] == 2.4)
+check("la trajectoire est croissante et sans rupture",
+      all(pr[i]["ca"] < pr[i + 1]["ca"] for i in range(len(pr) - 1)))
+# La croissance doit DÉCROÎTRE : c'est la règle d'or de tout exercice de projection
+g = [(pr[i + 1]["ca"] / pr[i]["ca"] - 1) * 100 for i in range(1, len(pr) - 1)]
+check("la croissance décélère d'année en année vers le taux terminal",
+      all(g[i] > g[i + 1] for i in range(len(g) - 1)), str([round(x, 1) for x in g]))
+check("le dernier pas approche les 3 % terminaux", g[-1] < 10, str(round(g[-1], 1)))
+# Plafond : une hypercroissance ne se prolonge pas telle quelle
+AN_HYPER = [{"fin": f"{y}-12-31", "ca": c} for y, c in
+            [(2022, 14), (2023, 10), (2024, 92), (2025, 530)]]
+ph = screener.projections(AN_HYPER, None, {"0y": 1400, "+1y": 2600}, "2025-12-31")
+g1 = (ph[2]["ca"] / ph[1]["ca"] - 1) * 100
+check("hypercroissance : le 1er pas extrapolé est bridé sous le plafond",
+      g1 <= screener.PLAFOND_EXTRAPOLATION + 0.1, f"{g1:.1f} %")
+check("le consensus, lui, n'est PAS bridé (2 600 conservé)", ph[1]["ca"] == 2600)
+# Un BPA en perte ne se prolonge pas — courbe qui ne veut rien dire (cas Nebius)
+AN_PERTE = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
+            [(2023, 100, -1.0), (2024, 150, -2.0), (2025, 220, -0.5)]]
+pp = screener.projections(AN_PERTE, {"0y": -0.2, "+1y": 0.1}, {"0y": 300, "+1y": 400},
+                          "2025-12-31")
+check("BPA négatif : le chiffre d'affaires se projette, pas le bénéfice",
+      all("eps" not in e for e in pp) and all("ca" in e for e in pp), str(pp[:2]))
+check("sans dernier exercice, rien n'est projeté",
+      screener.projections(AN_P, None, None, None) == [])
+check("un horizon déjà atteint ne projette rien",
+      screener.projections(AN_P, None, None, "2031-12-31") == [])
+check("ni consensus ni historique exploitable : aucune ligne inventée",
+      screener.projections([{"fin": "2025-12-31", "ca": 100}], None, None,
+                           "2025-12-31") == [])
+check("une année mixte est prudemment dite extrapolée",
+      all(e["nature"] == "extrapolé" for e in
+          screener.projections(AN_P, None, {"0y": 176, "+1y": 197}, "2025-12-31")[2:]))
+
 # ── Historique profond, étage 1 : EDGAR parle aussi IFRS ────────────────────
 print("\n— EDGAR IFRS : les déposants étrangers entrent au greffe —")
 check("un ticker US natif est éligible", edgar.eligible("NVDA"))

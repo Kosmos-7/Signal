@@ -69,6 +69,33 @@ réellement retenue est rendue avec le taux, et la phrase de la fiche
 signale la sortie de pertes (« depuis le premier exercice bénéficiaire,
 sur 8 ans »). Arriver en perte reste sans multiple ni croissance. 9 tests.
 
+### Trajectoire attendue jusqu'à 2030, et les multiples enfin affichés
+
+Deux manques signalés par le propriétaire sur la fiche Nebius : le PER
+n'apparaissait nulle part alors qu'il pilote un quart de la note, et aucune
+projection n'était visible.
+
+- **PER courant et PER prévisionnel** rejoignent le bloc métriques de toutes
+  les fiches. Un prévisionnel NÉGATIF n'est pas affiché comme un multiple —
+  il dit « pertes attendues », ce qui est son sens réel (Nebius : PER 77,6×,
+  prévisionnel négatif car les analystes attendent une perte).
+- **`projections()`** — trajectoire du CA et du BPA jusqu'en 2030, avec une
+  frontière que rien ne doit brouiller : les DEUX exercices que les analystes
+  couvrent réellement portent `nature:"consensus"` et sont repris tels quels ;
+  tout ce qui va au-delà porte `nature:"extrapolé"` et n'est QUE de
+  l'arithmétique — aucun analyste ne publie par société à cinq ans.
+- **Trois gardes contre le mensonge classique de l'exercice** : la croissance
+  DÉCROÎT linéairement vers 3 % (le taux nominal de long terme d'une économie
+  développée) au lieu d'être prolongée à taux constant ; le taux de départ est
+  borné par la croissance démontrée (même prudence que le PEG) puis plafonné
+  à 25 % — sans ce plafond, Nebius projetait un chiffre d'affaires multiplié
+  par vingt en cinq ans ; et un BPA en perte n'est jamais prolongé, seul le
+  chiffre d'affaires l'est (cas Nebius, encore).
+- **Affichage** : barres hachurées, trait vertical séparant le publié de
+  l'attendu, et une phrase sous le graphique qui dit où s'arrête l'opinion
+  des analystes et où commence notre prolongation. Hors note, toujours.
+  14 tests + vérification navigateur en 1440 px et 390 px.
+
 ### Les métiers de bilan n'ont plus AUCUN critère de qualité retiré
 
 Question du propriétaire, qui a mis le doigt sur la faiblesse restante :

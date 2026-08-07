@@ -692,6 +692,111 @@ def per_previsionnel(prix, estimations, dernier_exercice):
     return out
 
 
+HORIZON_PROJECTION = 2030
+CROISSANCE_TERMINALE = 3.0     # % — croissance nominale de long terme d'une économie développée
+# Plafond du taux de DÉPART de la prolongation. Au-delà de ~25 % par an, la
+# littérature de valorisation classe l'hypothèse en « très spéculative » :
+# prolonger le rythme d'une hypercroissance sur plusieurs années surestime
+# presque toujours. Nebius sans ce plafond projetait un chiffre d'affaires
+# multiplié par vingt entre 2025 et 2030 — un chiffre que personne ne
+# défendrait à voix haute. Le plafond ne touche PAS le consensus des
+# analystes, qui reste publié tel quel : il ne borne que notre prolongation.
+PLAFOND_EXTRAPOLATION = 25.0
+
+
+def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
+                horizon=HORIZON_PROJECTION, g_terminale=CROISSANCE_TERMINALE,
+                plafond=PLAFOND_EXTRAPOLATION):
+    """Trajectoire attendue du CA et du BPA jusqu'à `horizon`.
+
+    DEUX NATURES DE LIGNES, JAMAIS CONFONDUES — c'est tout l'objet de cette
+    fonction, et la raison pour laquelle chaque entrée porte sa `nature` :
+
+      · « consensus » : les DEUX seuls exercices que les analystes couvrent
+        réellement (exercice en cours et suivant, publiés par Yahoo). Ce sont
+        des estimations d'humains qui suivent la société.
+      · « extrapolé » : tout ce qui va au-delà. AUCUN analyste ne publie de
+        prévision à cinq ans par société ; ces lignes sont une PROLONGATION
+        ARITHMÉTIQUE de notre fait, pas une opinion de marché. Le front doit
+        les distinguer visuellement, et elles n'entrent JAMAIS dans la note.
+
+    LA RÈGLE DE PROLONGATION, en une phrase : la croissance part du dernier
+    rythme attendu et décroît linéairement vers 3 % à l'horizon — parce
+    qu'aucune entreprise ne croît à 30 % éternellement, et qu'une projection
+    à taux constant est le mensonge le plus courant de l'exercice. Le taux de
+    départ est borné par la croissance DÉMONTRÉE quand elle est plus basse
+    (même prudence que le PEG : l'estimé ne dépasse pas le prouvé).
+
+    Le BPA n'est projeté que s'il est POSITIF au départ : prolonger une perte
+    produirait une courbe qui ne veut rien dire (cas Nebius). Le CA, lui, se
+    projette dès qu'il croît — c'est souvent la seule trajectoire lisible
+    d'une société en phase d'investissement.
+
+    Pure et testable hors ligne. Rend [] si rien n'est projetable.
+    """
+    if not dernier_exercice:
+        return []
+    try:
+        an0 = int(str(dernier_exercice)[:4])
+    except (TypeError, ValueError):
+        return []
+    if an0 >= horizon:
+        return []
+
+    def _dernier(cle):
+        for e in reversed(an or []):
+            if e.get(cle) is not None:
+                return e[cle]
+        return None
+
+    def _tcam_demontre(cle):
+        pts = [(int(e["fin"][:4]), e[cle]) for e in (an or [])
+               if e.get(cle) and e[cle] > 0]
+        if len(pts) < 3 or pts[-1][0] <= pts[0][0]:
+            return None
+        return ((pts[-1][1] / pts[0][1]) ** (1 / (pts[-1][0] - pts[0][0])) - 1) * 100
+
+    lignes = {}
+    for cle, est in (("ca", estimations_ca), ("eps", estimations_bpa)):
+        base = _dernier(cle)
+        if base is None or base <= 0:
+            continue                      # perte ou absence : rien à prolonger
+        # 1) les deux exercices de consensus, tels que publiés
+        vals, dernier_val, dernier_an = {}, base, an0
+        for i, k in enumerate(("0y", "+1y")):
+            v = (est or {}).get(k)
+            if v and v > 0:
+                vals[an0 + 1 + i] = (v, "consensus")
+                dernier_val, dernier_an = v, an0 + 1 + i
+        # 2) le rythme de départ de la prolongation
+        if dernier_an > an0:
+            g = (dernier_val / base) ** (1 / (dernier_an - an0)) - 1
+            g *= 100
+        else:
+            g = _tcam_demontre(cle)
+            if g is None:
+                continue                  # ni consensus ni historique : on ne prolonge pas
+        g_dem = _tcam_demontre(cle)
+        if g_dem is not None:
+            g = min(g, g_dem)             # l'estimé ne dépasse pas le démontré
+        g = min(g, plafond)               # une hypercroissance ne se prolonge pas telle quelle
+        if g <= g_terminale:
+            g = max(g, g_terminale)       # une décroissance ne se prolonge pas
+        # 3) prolongation à croissance décroissante vers le taux terminal
+        n = horizon - dernier_an
+        for i in range(1, n + 1):
+            g_i = g_terminale + (g - g_terminale) * (1 - i / (n + 1))
+            dernier_val *= 1 + g_i / 100
+            vals[dernier_an + i] = (dernier_val, "extrapolé")
+        for annee, (v, nat) in vals.items():
+            lignes.setdefault(annee, {"exercice": annee})
+            lignes[annee][cle] = round(v, 4 if cle == "eps" else 0)
+            # une année mixte (CA extrapolé, BPA consensus) est dite extrapolée
+            if lignes[annee].get("nature") != "extrapolé":
+                lignes[annee]["nature"] = nat
+    return [lignes[a] for a in sorted(lignes)]
+
+
 def fusionner_fonda(ancien, nouveau, max_an=12, max_tr=20):
     """Accumule l'historique des chiffres publiés entre les runs.
 
@@ -1784,6 +1889,22 @@ def score_ticker(ticker, vix=None):
                     prev = per_previsionnel(float(close.iloc[-1]), est, dernier)
                     if prev:
                         fonda["pe_prev"] = prev
+                    # Trajectoire attendue jusqu'à 2030 : consensus analystes
+                    # sur deux exercices, prolongation à croissance
+                    # décroissante au-delà. Hors note, purement informationnel.
+                    est_ca = None
+                    try:
+                        re_ = data.revenue_estimate
+                        if re_ is not None and "avg" in getattr(re_, "columns", []):
+                            est_ca = {k: (float(re_.loc[k, "avg"]) / 1e6
+                                          if k in re_.index
+                                          and re_.loc[k, "avg"] == re_.loc[k, "avg"] else None)
+                                      for k in ("0y", "+1y")}
+                    except Exception:
+                        est_ca = None
+                    proj = projections(fonda["an"], est, est_ca, dernier)
+                    if proj:
+                        fonda["proj"] = proj
                 except Exception as e:
                     print(f"  ⚠️  {ticker}: PER historique/prévisionnel en échec ({type(e).__name__})")
                 chart["fonda"] = fonda
