@@ -790,10 +790,23 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
       · « consensus » : les DEUX seuls exercices que les analystes couvrent
         réellement (exercice en cours et suivant, publiés par Yahoo). Ce sont
         des estimations d'humains qui suivent la société.
-      · « extrapolé » : tout ce qui va au-delà. AUCUN analyste ne publie de
-        prévision à cinq ans par société ; ces lignes sont une PROLONGATION
-        ARITHMÉTIQUE de notre fait, pas une opinion de marché. Le front doit
-        les distinguer visuellement, et elles n'entrent JAMAIS dans la note.
+      · « extrapolé » : tout ce qui va au-delà. Ces lignes sont une
+        PROLONGATION ARITHMÉTIQUE de notre fait, pas une opinion de marché.
+        Le front doit les distinguer visuellement, et elles n'entrent JAMAIS
+        dans la note.
+
+        CE COMMENTAIRE A LONGTEMPS DIT « aucun analyste ne publie à cinq ans
+        par société ». C'EST FAUX, et la vérification l'a montré : sur
+        Alphabet, un concurrent affiche +19,1 %, +13,0 %, +14,8 % pour
+        2028-2030 — un profil IRRÉGULIER, donc des estimations réelles, là où
+        le nôtre décroît lissé parce que c'est une formule. Ce que nous
+        pouvons dire est plus étroit : NOTRE source (Yahoo, `earnings_estimate`
+        / `revenue_estimate`) ne couvre que deux exercices. Le reste est notre
+        arithmétique faute de données, pas faute de données existantes. Yahoo
+        expose par ailleurs `growth_estimates` (dont un taux annuel à cinq
+        ans) que nous ne lisons pas encore — piste ouverte, à publier brut
+        avant d'y brancher quoi que ce soit : deux erreurs d'unité supposée
+        (dividendes, devise du consensus) ont déjà coûté cher ici.
 
     LA RÈGLE DE PROLONGATION, en une phrase : la croissance part du dernier
     rythme attendu et décroît linéairement vers 3 % à l'horizon — parce

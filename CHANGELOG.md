@@ -5,6 +5,67 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le montant sous le doigt : un relevé sur les deux graphiques de chiffres
+
+« Quand je passe la souris ou le doigt sur un pilier des graphs je veux pouvoir
+voir le montant ». Les barres ne portaient aucune valeur (sauf les projections,
+et seulement quand la place le permettait) ; les points de la courbe des PER
+portaient un `<title>` SVG, qui n'apparaît qu'après une seconde de survol et
+**jamais au doigt** — sur l'écran principal du propriétaire, l'information
+n'existait pas.
+
+Les deux graphiques partagent désormais le même mécanisme que le graphique de
+cours : un relevé posé **sous** le dessin, la colonne la plus proche du
+pointeur étant sélectionnée (viser une barre de 34 unités dans un slot qui peut
+en faire 18 est impossible au doigt). Le relevé ne dit que ce que le dessin
+dessine — chiffre d'affaires et résultat net, pas l'EBITDA, qui n'a pas de
+barre. Et il reprend **la même variation que le tableau** : en trimestriel, le
+même trimestre un an plus tôt, pas le trimestre précédent — deux « ▲ 15 % »
+différents pour la même barre selon qu'on la survole ou qu'on la lit auraient
+été une incohérence pure. Vérifié à 1440 et 390 px sur quatre sociétés, dans
+les deux modes.
+
+### Le relevé du graphique de cours est docké partout
+
+« Je veux que le petit rectangle avec les metrics s'affiche en bas du graph
+comme sur mobile ». Il flottait sur écran large, collé au réticule : il
+recouvrait la courbe qu'on venait justement lire et sautait d'un bord à l'autre
+au passage du milieu. Sous le dessin, dans le flux, il ne cache rien et ne
+bouge jamais. Trois branches de positionnement disparaissent avec lui, et les
+deux tailles d'écran se lisent enfin de la même façon.
+
+### PER : plus de tuile, plus de décimale
+
+Deux décisions du propriétaire. « Ne pas afficher la carte PER prévisionnel
+puisqu'il y a le graph des PER » : la rangée de métriques n'en porte plus
+aucun, ni courant ni prévisionnel. Un chiffre nu dans une tuile n'apprend rien ;
+le même chiffre au milieu de dix ans de multiples dit s'il est cher.
+
+Un seul cas ne se lit pas sur la courbe : des **bénéfices attendus négatifs**
+ne produisent aucun point, donc la courbe s'arrête sans rien dire. La tuile le
+disait (« pertes attendues ») ; la phrase est maintenant écrite sous le
+graphique, y compris quand il n'y a pas de graphique du tout. Deux sociétés
+concernées aujourd'hui : Nebius et CoreWeave.
+
+« Arrondir les PER, pas de virgule » : entre 20,8× et 21× il n'y a aucune
+information. Le graphique arrondissait déjà, le tableau s'aligne.
+
+### Correction : « aucun analyste ne publie à cinq ans » était faux
+
+Cette affirmation vivait dans trois fichiers (`screener.py`, `index.html`,
+ce journal). La comparaison avec Baggr sur Alphabet la contredit : leur profil
+2028-2030 est **+19,1 %, +13,0 %, +14,8 %** — irrégulier, donc issu
+d'estimations réelles, là où le nôtre décroît lissé parce que c'est une
+formule. Ce que nous pouvons dire est plus étroit et suffit au lecteur :
+**notre source de consensus s'arrête à deux exercices**. Le reste est notre
+arithmétique faute de données, pas faute de données existantes.
+
+Piste ouverte, pas encore branchée : Yahoo expose `growth_estimates` (dont un
+taux annuel à cinq ans) que nous ne lisons jamais. Elle sera publiée **brute**
+sur un run avant d'être utilisée — deux erreurs d'unité supposée (les
+dividendes dans les cours, la devise du consensus) ont déjà coûté cher ici, et
+la règle qui en sort est de mesurer avant de croire.
+
 ### Nos chiffres contre ceux de Baggr, ligne à ligne
 
 Question du propriétaire : « je veux surtout revenus et bénéfices, nous on met
@@ -51,7 +112,7 @@ sont ABSOLUS — des jugements sur l'entreprise, pas des centiles de notre liste
 sinon la note changerait de sens à chaque rotation d'univers. Sur les 94 fiches
 publiées ils répartissent 18 / 45 / 36 %, ce qui trie sans écraser.
 
-### Pérennité : deux dates### Pérennité : deux dates confondues en une sur le portefeuille
+### Pérennité : deux dates confondues en une sur le portefeuille
 
 Angle mort que la question ne nommait pas, et qui touche la page où l'argent
 est réel. `updated_at` est rafraîchi CHAQUE JOUR par la mise à jour des cours ;
@@ -585,7 +646,9 @@ projection n'était visible.
   frontière que rien ne doit brouiller : les DEUX exercices que les analystes
   couvrent réellement portent `nature:"consensus"` et sont repris tels quels ;
   tout ce qui va au-delà porte `nature:"extrapolé"` et n'est QUE de
-  l'arithmétique — aucun analyste ne publie par société à cinq ans.
+  l'arithmétique. *(Cette entrée disait « aucun analyste ne publie par société
+  à cinq ans ». C'est faux — voir la correction en tête de journal. Ce qui est
+  vrai : notre source s'arrête à deux exercices.)*
 - **Trois gardes contre le mensonge classique de l'exercice** : la croissance
   DÉCROÎT linéairement vers 3 % (le taux nominal de long terme d'une économie
   développée) au lieu d'être prolongée à taux constant ; le taux de départ est

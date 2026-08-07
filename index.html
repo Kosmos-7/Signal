@@ -158,7 +158,11 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   /* ── Chiffres publiés (historique CA / EBITDA / résultat net) ── */
   .fd-wrap{margin-top:1.7rem}
   .fd-ctrl{display:flex;gap:8px;align-items:center;margin:8px 0 10px;flex-wrap:wrap}
-  .fd-svg{display:block;width:100%;height:auto;margin:2px 0 8px}
+  .fd-svg{display:block;width:100%;height:auto;margin:2px 0 8px;cursor:crosshair}
+  /* Bande de la colonne survolée. Volontairement PAS de touch-action:none :
+     au doigt, on veut pouvoir taper une colonne pour lire son montant sans
+     perdre le défilement vertical de la page au-dessus du graphique. */
+  .fd-hi{fill:rgba(255,255,255,.055)}
   .fd-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8rem}
   .fd-table th{font:600 .58rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);text-align:right;padding:4px 0 6px;border-bottom:1px solid var(--line);font-weight:600}
   .fd-table th:first-child{text-align:left}
@@ -1055,7 +1059,7 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
     // du 05/08) : visible dès l'ouverture pour montrer qu'on peut jouer avec
     // le graphe, et recalé à chaque changement de fenêtre. Le survol ou le
     // doigt reprennent la main au premier geste.
-    if(vis.length)chxShow(vis[vis.length-1],null);
+    if(vis.length)chxShow(vis[vis.length-1]);
   }
   r0.min=r1.min=Math.floor(T_MIN);r0.max=r1.max=Math.ceil(T_MAX);
   r0.addEventListener('input',()=>{t0v=Math.min(+r0.value,t1v-MIN_SPAN);setBtn(null);chRender();});
@@ -1064,10 +1068,10 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
   document.getElementById('chx-periods').addEventListener('click',e=>{
     const btn=e.target.closest('.chx-pbtn');if(!btn)return;const m=+btn.dataset.m;
     t0v=(m===WIN)?T_OFF:Math.max(T_MIN,T_MAX-m);t1v=T_MAX;setBtn(m);chRender();});
-  // survol + tactile : pointer events, réticule + 4 points + infobulle anti-recouvrement.
-  // chxShow(point, ev) fait l'affichage ; ev est null quand l'appel ne vient pas
-  // d'un pointeur (amorce au dernier point), le placement flottant l'exige.
-  const chxShow=(best,ev)=>{
+  // survol + tactile : pointer events, réticule + 4 points + relevé docké.
+  // chxShow(point) fait l'affichage. Il ne prend plus l'événement : le relevé
+  // ne suit plus le pointeur, il est toujours au même endroit sous le dessin.
+  const chxShow=best=>{
     const [t,p]=best,tv=F?trF(t):null;
     hoverG.cross.setAttribute('x1',X(t));hoverG.cross.setAttribute('x2',X(t));hoverG.cross.setAttribute('visibility','visible');
     hoverG.dotP.setAttribute('cx',X(t));hoverG.dotP.setAttribute('cy',Y(p));hoverG.dotP.setAttribute('visibility','visible');
@@ -1084,42 +1088,29 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
       // tendance est une trajectoire passée, pas un objectif (règle 14).
       +(tv?'◌ Tendance&nbsp;: <span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span><br>&nbsp;&nbsp;&nbsp;si retour à la tendance&nbsp;: <span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>':'◌ période trop courte pour une tendance')
       +(m21&&m200?'<br><span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span> · <span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'');
-    // positionnement APRÈS écriture du contenu (largeur réelle) : toujours d'un seul côté du réticule
-    const rb=svg.getBoundingClientRect();
-    const wr=svg.parentNode.getBoundingClientRect();
-    tip.style.display='block';
-    const cxPix=X(t)*rb.width/W+(rb.left-wr.left);
-    const tw=tip.offsetWidth||210;
-    if(wr.width<640){
-      // Écran étroit : la bulle est presque aussi large que le graphe, aucune
-      // position interne n'évite de couvrir la courbe au centre. Le relevé
-      // sort du dessin et se pose en dessous, dans le flux : il ne cache
-      // rien et ne saute plus d'un bord à l'autre.
-      tip.classList.add('dock');
-      tip.style.left='';tip.style.top='';
-    }else if(ev){
-      tip.classList.remove('dock');
-      let lx=cxPix+16;if(lx+tw>wr.width)lx=cxPix-tw-16;
-      tip.style.left=Math.max(0,lx)+'px';
-      tip.style.top=Math.max(Math.min(ev.clientY-wr.top-70,wr.height-110),0)+'px';
-    }else{
-      // Amorce sans pointeur sur écran large : en haut à droite du dessin,
-      // loin du dernier point (bord droit), jusqu'au premier survol.
-      tip.classList.remove('dock');
-      tip.style.left=Math.max(0,wr.width-tw-8)+'px';tip.style.top='6px';
-    }};
+    /* LE RELEVÉ EST DOCKÉ, PARTOUT (décision du propriétaire, 07/08 : « je
+       veux que le petit rectangle avec les metrics s'affiche en bas du graph
+       comme sur mobile »). Il flottait sur écran large, collé au réticule :
+       il couvrait la courbe qu'on venait justement lire, et sautait d'un bord
+       à l'autre au passage du milieu. Sous le dessin, dans le flux, il ne
+       cache rien, ne bouge jamais, et les deux tailles d'écran se lisent de
+       la même façon — un comportement de moins à retenir, et trois branches
+       de positionnement de moins à maintenir. */
+    tip.classList.add('dock');
+    tip.style.left='';tip.style.top='';
+    tip.style.display='block';};
   const chxTrack=ev=>{
     if(!vis||!vis.length)return;
     const rb=svg.getBoundingClientRect();const mx=(ev.clientX-rb.left)*W/rb.width;
     let best=vis[0];for(const pt of vis)if(Math.abs(X(pt[0])-mx)<Math.abs(X(best[0])-mx))best=pt;
-    chxShow(best,ev);
+    chxShow(best);
   };
   svg.addEventListener('pointermove',chxTrack);
   svg.addEventListener('pointerdown',chxTrack);
   // La souris sort : retour à l'état de repos (relevé sur le dernier point),
   // pas au vide — l'état de repos EST le relevé depuis le 05/08.
   svg.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='mouse'||!hoverG)return;
-    if(vis&&vis.length)chxShow(vis[vis.length-1],null);
+    if(vis&&vis.length)chxShow(vis[vis.length-1]);
     else{for(const k in hoverG)hoverG[k].setAttribute('visibility','hidden');tip.style.display='none';}});
   chRender();
 }
@@ -1175,6 +1166,44 @@ function fdDelta(cur,prev,champ){
 function fdLabel(iso,mode){
   const [y,m]=iso.split('-').map(Number);
   return mode==='an'?String(y):'T'+(Math.floor((m-1)/3)+1)+' '+String(y).slice(2);
+}
+/* RELEVÉ AU SURVOL ET AU DOIGT — commun aux deux graphiques de la section
+   « Chiffres publiés » (demande du propriétaire, 07/08 : « quand je passe la
+   souris ou le doigt sur un pilier des graphs je veux pouvoir voir le
+   montant »).
+
+   POURQUOI PAS UN <title> SVG. Les barres portaient déjà un titre natif sur
+   la courbe des PER : il n'apparaît qu'au bout d'une seconde de survol, jamais
+   au doigt, et le mobile est l'écran principal ici. On refait donc le même
+   mécanisme que le graphique de cours : un relevé DOCKÉ sous le dessin, qui
+   ne recouvre rien et se lit à la même place sur les deux tailles d'écran.
+
+   COLONNE LA PLUS PROCHE, pas colonne survolée : une barre fait 34 unités de
+   large dans un slot qui peut en faire 18 — viser la barre elle-même est
+   impossible au doigt. On prend l'abscisse la plus proche, donc tout le slot
+   est cliquable.
+
+   `repos` est l'index montré au repos et au retour de la souris. Ce n'est PAS
+   le dernier point : à droite vivent nos extrapolations (2030) et le dernier
+   exercice PUBLIÉ est ce qu'on vient lire par défaut. */
+function releveSvg(svg,tip,xs,htmls,W,repos){
+  if(!svg||!tip||!xs.length)return;
+  const hi=svg.querySelector('.fd-hi');
+  const demi=(xs.length>1?Math.abs(xs[1]-xs[0]):40)/2;
+  const montre=i=>{
+    tip.innerHTML=htmls[i];tip.style.display='block';
+    if(hi){hi.setAttribute('x',xs[i]-demi);hi.setAttribute('width',demi*2);
+      hi.setAttribute('visibility','visible');}};
+  const suit=ev=>{
+    const rb=svg.getBoundingClientRect();if(!rb.width)return;
+    const mx=(ev.clientX-rb.left)*W/rb.width;
+    let b=0;for(let i=1;i<xs.length;i++)if(Math.abs(xs[i]-mx)<Math.abs(xs[b]-mx))b=i;
+    montre(b);};
+  svg.addEventListener('pointermove',suit);
+  svg.addEventListener('pointerdown',suit);
+  // Au doigt on NE remet PAS au repos : le lecteur lève le doigt pour lire.
+  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType==='mouse')montre(repos);});
+  montre(repos);
 }
 function fdPrev(arr,i,mode){
   if(mode==='an')return arr[i-1]||null;
@@ -1256,7 +1285,11 @@ function fondaRender(s){
   const anDup={};if(FD_MODE==='an')full.forEach(r=>{const y=r.fin.slice(0,4);anDup[y]=(anDup[y]||0)+1;});
   const MABR=['janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
   const lab=r=>{const b=fdLabel(r.fin,FD_MODE);return (FD_MODE==='an'&&anDup[r.fin.slice(0,4)]>1)?b+' ('+MABR[+r.fin.slice(5,7)-1]+')':b;};
-  const fmtPer=v=>v!=null?String(v).replace('.',',')+'×':'—';
+  /* PER ARRONDIS (décision du propriétaire, 07/08). La décimale d'un multiple
+     est du faux précis : entre 20,8× et 21× il n'y a aucune information, et
+     la virgule alourdit une colonne qu'on parcourt du regard. Le graphique
+     arrondissait déjà ; le tableau s'aligne. */
+  const fmtPer=v=>v!=null?Math.round(v)+'×':'—';
   // barres : CA et RN par période, dernière période en pleine intensité.
   // Largeur du viewBox ADAPTÉE au conteneur : à 800 unités sur un écran de
   // 390 px, les étiquettes rendaient ~5 px — illisibles (vérification adverse).
@@ -1278,6 +1311,9 @@ function fondaRender(s){
   const slot=W/n, bw=Math.min(34,slot*0.22);
   let bars='<defs><pattern id="fdhach" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">'+
     '<line x1="0" y1="0" x2="0" y2="5" stroke="#74b6df" stroke-width="2.4"/></pattern></defs>'+
+    // La bande de survol est posée EN PREMIER : elle doit passer derrière les
+    // barres, pas par-dessus.
+    '<rect class="fd-hi" x="0" y="0" width="0" height="'+(H-PB+4)+'" visibility="hidden"/>'+
     '<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="rgba(255,255,255,.10)"/>';
   if(projC.length){const xSep=slot*rows.length;
     bars+='<line x1="'+xSep+'" x2="'+xSep+'" y1="4" y2="'+(H-PB+2)+'" stroke="rgba(255,255,255,.22)" stroke-dasharray="3 3"/>';}
@@ -1292,6 +1328,32 @@ function fondaRender(s){
   // Largeur du plus long libellé de valeur projetée, mesurée sur les données
   // réelles plutôt que supposée.
   const placeValeur=projC.length&&slot>=(Math.max(...projC.map(p=>fdMoney(p.ca,dev).length))*LARG_CAR+8);
+  /* Contenu du relevé, une entrée par colonne. Il ne dit QUE ce que le dessin
+     dessine — CA et résultat net. L'EBITDA vit dans le tableau dépliable :
+     annoncer dans une bulle un chiffre qui n'a pas de barre ferait chercher au
+     lecteur une barre qui n'existe pas. */
+  const relX=[], relH=[];
+  cols.forEach((o,i)=>{
+    const r=o.v;
+    /* MÊME VARIATION QUE LE TABLEAU, pas une deuxième. Pour le publié on
+       reprend `fdPrev` — donc, en trimestriel, le MÊME trimestre un an plus
+       tôt et non le trimestre précédent : deux « ▲ 15 % » différents pour la
+       même barre selon qu'on la survole ou qu'on la lit dans le tableau
+       seraient une incohérence pure. Pour l'attendu (annuel seulement, et
+       absent du tableau des publiés) la référence est la colonne d'avant,
+       qui est le dernier exercice publié pour la première projection. */
+    const prec=o.pr?(i>0?cols[i-1].v:null):fdPrev(full,full.indexOf(r),FD_MODE);
+    const dlt=(champ)=>fdDelta(r,prec,champ);
+    relH.push('<span class="d">'+(o.pr?r.exercice+'&nbsp;· attendu':lab(r))+'</span><br>'
+      +'<span style="color:#74b6df">■</span> CA&nbsp;: <span class="c">'+fdMoney(r.ca,dev)+'</span> '+dlt('ca')
+      + (o.pr&&r.ca_haut!=null&&r.ca_haut>r.ca
+          ?'<br>&nbsp;&nbsp;&nbsp;haut de fourchette&nbsp;: <span class="t">'+fdMoney(r.ca_haut,dev)+'</span>':'')
+      + (!o.pr&&r.rn!=null
+          ?'<br><span style="color:#c6c6e0">■</span> Résultat net&nbsp;: <span class="t">'+fdMoney(r.rn,dev)+'</span> '+dlt('rn'):'')
+      + (o.pr?'<br><i style="color:var(--text3);font-style:normal">'
+          +((r.ca_nature||r.nature)==='consensus'?'consensus des analystes':'notre prolongation arithmétique')+'</i>':''));
+    relX.push(slot*i+slot/2);
+  });
   cols.forEach((o,i)=>{
     const r=o.v, cx=slot*i+slot/2, last=(i===rows.length-1), op=o.pr?0.9:(last?1:0.45);
     const fCa=o.pr?'url(#fdhach)':'#74b6df';
@@ -1338,12 +1400,22 @@ function fondaRender(s){
       '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td></tr>';
   }).reverse().join('');
   const perB=fdPerChart(F,fmtPer,NARROW?440:800,(s.breakdown||{}).trailing_pe);
+  /* LE SEUL CAS QUE LA COURBE NE SAIT PAS MONTRER. Un PER prévisionnel négatif
+     n'a pas de sens économique : on ne trace pas de point, donc la courbe
+     s'arrête simplement — silencieusement. La tuile « PER prévisionnel » le
+     disait ; elle a été retirée le 07/08 (le multiple vit sur la courbe). Il
+     faut donc l'écrire ici, sinon l'information disparaît avec la tuile.
+     Deux sociétés concernées aujourd'hui : NBIS et CRWV. */
+  const _fwd=(s.breakdown||{}).forward_pe;
+  const pertesAttendues=(_fwd!=null&&_fwd<0)
+    ?'<p class="fd-inline"><i>Les analystes attendent des <b>pertes</b> sur le prochain exercice : il n\'y a pas de multiple prévisionnel à tracer — un PER négatif ne veut rien dire. La courbe s\'arrête donc au dernier bénéfice connu.</i></p>':'';
   host.innerHTML='<div class="fd-wrap"><div class="qh">Chiffres publiés</div>'+
     '<div class="fd-ctrl">'+
       '<button class="chx-pbtn'+(FD_MODE==='an'?' on':'')+'" data-fd="an"'+(an.length<2?' disabled':'')+'>Annuel</button>'+
       '<button class="chx-pbtn'+(FD_MODE==='tr'?' on':'')+'" data-fd="tr"'+(tr.length<2?' disabled':'')+'>Trimestres</button>'+
       '<span class="chx-rlbl">publié en '+sv(dev)+'</span></div>'+
-    '<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
+    '<svg class="fd-svg" id="fd-bars" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
+    '<div class="chx-tip dock" id="fd-bars-tip"></div>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net'+
       (projC.length?'&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">▨</span> CA attendu':'')+'</div>'+
     /* Le lecteur doit savoir, sans cliquer, où s'arrête l'opinion des
@@ -1365,7 +1437,13 @@ function fondaRender(s){
       return '<p class="fd-inline">Trajectoire attendue : <i>'+
         (cons.length?cons.join(' et ')+' d\'après le consensus des analystes':'')+
         (cons.length&&ext.length?', puis ':'')+
-        (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous, à croissance décroissante vers 3 % — aucun analyste ne publie à cet horizon':'')+
+        /* La phrase disait « aucun analyste ne publie à cet horizon ». C'est
+           faux : d'autres services affichent des estimations à cinq ans, et
+           leur profil irrégulier prouve qu'elles ne sortent pas d'une
+           formule. Ce qui est vrai, et suffit, c'est que NOTRE source s'arrête
+           à deux exercices — le lecteur a besoin de savoir d'où vient le
+           chiffre, pas d'une affirmation sur le marché entier. */
+        (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous, à croissance décroissante vers 3 % — notre source de consensus s\'arrête à deux exercices':'')+
         '.'+(proj.some(p=>p.ca_haut!=null)?' Le contour en pointillé donne la borne haute : elle s\'écarte quand la trajectoire dépend d\'un carnet de commandes plutôt que d\'une croissance organique, et cet écart mesure notre ignorance.':'')+
         (fin?' Au-delà de '+fin.exercice+', nous n\'avançons rien : '+fin.ca_arret+'.':'')+
         '</i></p>';})()+
@@ -1420,7 +1498,9 @@ function fondaRender(s){
     '</div>'+
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
+        '<div class="chx-tip dock" id="fd-per-tip"></div>'+
         '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#f0c674;font-weight:700">◆</span> aujourd\'hui&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+'</div>'+
+        pertesAttendues+
         /* La question que le propriétaire a posée le 07/08 — « je ne comprends
            pas le PER courant vs la valeur du tableau » — venait d'un changement
            de base de cours jamais énoncé. On l'énonce. */
@@ -1428,10 +1508,24 @@ function fondaRender(s){
         '<details class="fd-det" id="fd-det-p"'+(openP?' open':'')+'><summary>Dérouler les PER ▾</summary>'+
         '<table class="fd-table" style="max-width:340px"><tr><th>Exercice</th><th>PER</th></tr>'+perB.lignes+'</table></details></div>'
       :'<div class="fd-wrap"><div class="qh">'+(perB.queEst?'PER estimé (analystes)':'PER')+'</div>'+
-        '<div class="fd-inline">'+perB.inline+'</div></div>')
-    :'');
+        '<div class="fd-inline">'+perB.inline+'</div>'+pertesAttendues+'</div>')
+    /* Aucun exercice, aucune estimation — mais les analystes peuvent quand
+       même attendre des pertes, et c'est alors la SEULE chose qu'on sache
+       dire du multiple. Elle vaut d'être dite. */
+    :(pertesAttendues?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+pertesAttendues+'</div>':''));
   host.querySelectorAll('[data-fd]').forEach(b=>b.addEventListener('click',()=>{
     if(b.disabled)return;FD_MODE=b.dataset.fd;fondaRender(s);}));
+  /* Les écouteurs sont posés APRÈS innerHTML, à chaque rendu : la bascule
+     Annuel/Trimestres réécrit tout le bloc, les anciens nœuds partent avec
+     leurs écouteurs. Rien à détacher, donc, mais rien à oublier non plus.
+     Repos du graphique des barres : le dernier exercice PUBLIÉ
+     (`rows.length-1`), pas la dernière colonne — à droite vivent nos
+     projections. */
+  releveSvg(host.querySelector('#fd-bars'),host.querySelector('#fd-bars-tip'),
+            relX,relH,W,Math.max(0,rows.length-1));
+  if(perB&&perB.releve)
+    releveSvg(host.querySelector('#fd-per'),host.querySelector('#fd-per-tip'),
+              perB.releve.xs,perB.releve.htmls,perB.releve.W,perB.releve.repos);
 }
 /* Graphique dédié à l'évolution du PER (annuel par nature, indépendant de la
    bascule Annuel/Trimestres). Axe en ANNÉES, pas en indices : un exercice sans
@@ -1489,7 +1583,8 @@ function fdPerChart(F,fmtPer,W,perNow){
   const Y=v=>{if(LOG){const a=Math.log(lo),b=Math.log(hi);return MT+(1-(Math.log(v)-a)/((b-a)||1))*(H-MT-MB);}
     return MT+(1-(v-lo)/((hi-lo)||1))*(H-MT-MB);};
   const X=an=>ML+20+(a1>a0?(an-a0)*(W-ML-MR-40)/(a1-a0):0);
-  let g='';
+  // Bande de survol posée en premier : elle passe DERRIÈRE la courbe.
+  let g='<rect class="fd-hi" x="0" y="0" width="0" height="'+(H-MB+4)+'" visibility="hidden"/>';
   /* La médiane tracée est celle de TOUT l'historique accumulé, pas des dix
      exercices dessinés : c'est CELLE-LÀ que le critère « histoire » de la note
      compare au multiple du jour, et deux médianes différentes sur la même page
@@ -1527,11 +1622,26 @@ function fdPerChart(F,fmtPer,W,perNow){
   const ECART_VAL=22, ECART_AXE=30;
   let dernierLab=-1e9, dernierAxe=-1e9;
   const stepX=pts.length>8?2:1;
+  /* Le relev\u00e9 remplace les <title> SVG qui \u00e9taient pos\u00e9s ici : un titre natif
+     n'appara\u00eet qu'apr\u00e8s une seconde de survol et JAMAIS au doigt. Deux
+     info-bulles pour la m\u00eame donn\u00e9e, dont une invisible sur l'\u00e9cran
+     principal, n'en font pas une bonne. */
+  const relX=[], relH=[];
   pts.forEach((p,i)=>{
     const cx=X(p.an),cy=Y(p.per);
-    g+=p.now?'<rect x="'+(cx-4.2)+'" y="'+(cy-4.2)+'" width="8.4" height="8.4" transform="rotate(45 '+cx+' '+cy+')" fill="#f0c674" stroke="#0d0d16" stroke-width="1.5"><title>aujourd\'hui : '+fmtPer(p.per)+' (cours du jour / b\u00e9n\u00e9fice des 12 derniers mois)</title></rect>'
-        :p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"><title>'+p.an+'e : '+fmtPer(p.per)+'</title></circle>'
-            :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"><title>'+p.an+' : '+fmtPer(p.per)+'</title></circle>';
+    relX.push(cx);
+    relH.push(p.now
+      ?'<span class="d">aujourd\'hui</span><br><span style="color:#f0c674">\u25c6</span> PER&nbsp;: <span class="c">'+fmtPer(p.per)+'</span>'
+        +'<br><i style="color:var(--text3);font-style:normal">cours du jour \u00f7 b\u00e9n\u00e9fice des 12 derniers mois</i>'
+      :p.est
+      ?'<span class="d">'+p.an+'&nbsp;\u00b7 attendu</span><br><span style="color:#74b6df">\u25cb</span> PER estim\u00e9&nbsp;: <span class="c">'+fmtPer(p.per)+'</span>'
+        +'<br><i style="color:var(--text3);font-style:normal">cours du jour \u00f7 b\u00e9n\u00e9fice attendu par les analystes</i>'
+      :'<span class="d">'+p.an+'</span><br><span style="color:#74b6df">\u25cf</span> PER&nbsp;: <span class="c">'+fmtPer(p.per)+'</span>'
+        +'<br><i style="color:var(--text3);font-style:normal">cours \u00e0 la cl\u00f4ture de l\'exercice \u00f7 b\u00e9n\u00e9fice publi\u00e9</i>'
+      +(med!=null?'<br><i style="color:var(--text3);font-style:normal">m\u00e9diane sur '+nMed+' exercices&nbsp;: '+Math.round(med)+'\u00d7</i>':''));
+    g+=p.now?'<rect x="'+(cx-4.2)+'" y="'+(cy-4.2)+'" width="8.4" height="8.4" transform="rotate(45 '+cx+' '+cy+')" fill="#f0c674" stroke="#0d0d16" stroke-width="1.5"/>'
+        :p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
+            :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"/>';
     // Le point du jour garde toujours son étiquette : c'est celui qu'on vient
     // lire. Les autres cèdent la place quand ils sont trop près du précédent.
     if((p.est||p.now||idxLab.has(i))&&(p.now||cx-dernierLab>=ECART_VAL)){
@@ -1541,7 +1651,12 @@ function fdPerChart(F,fmtPer,W,perNow){
       dernierAxe=cx;
       g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+(p.now?' fill="#f0c674"':'')+'>'+(p.lab||(String(p.an).slice(2)+(p.est?'e':'')))+'</text>';}
   });
-  return {svg:'<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',lignes:lignes,med:med,trous:trous.some(an=>an>=a0&&an<=a1)};
+  /* Point de repos du relevé : le losange « aujourd'hui » s'il existe, sinon
+     le dernier exercice publié. Jamais la dernière estimation — c'est le
+     multiple du jour qu'on vient lire, pas celui de 2027. */
+  return {svg:'<svg class="fd-svg" id="fd-per" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',
+    lignes:lignes,med:med,trous:trous.some(an=>an>=a0&&an<=a1),
+    releve:{xs:relX,htmls:relH,repos:now?pub.length:pub.length-1,W:W}};
 }
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
 // Élagage du 06/08 : les étiquettes des métriques portent déjà « a/a » et
@@ -1617,18 +1732,14 @@ function dataZone(s,b,compact){
       '<div><div class="qh">Décomposition de la note</div>'+meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div></div>'+
     (compact?compactMetrics(s)
       :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',pc(fs,b.cross_slope_mm21_pct,1))+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))
-        /* PAS de tuile « PER courant ». Question du propriétaire le 07/08 :
-           « est-ce vraiment utile ? ». Le multiple du jour est essentiel — il
-           pilote à lui seul les 8 points du critère « histoire » — mais il
-           apparaissait TROIS fois sur la même page : ici en chiffre nu, sur la
-           courbe des PER en losange ambre au milieu de son historique, et dans
-           le détail de la note avec sa médiane en regard. Les deux derniers le
-           donnent avec sa référence ; celui-ci était le seul à ne rien dire.
-           Il reste affiché en toutes lettres quand la courbe n'existe pas.
-           Le PER PRÉVISIONNEL, lui, ne figure nulle part ailleurs et dit autre
-           chose : ce que les analystes attendent. Un prévisionnel NÉGATIF
-           n'est pas un multiple, il annonce une perte, et c'est ça qu'on écrit. */
-        +mk('PER prévisionnel',b.forward_pe==null?'—':(b.forward_pe<0?'pertes attendues':f(b.forward_pe,1)+'×'))
+        /* AUCUNE tuile de PER — ni courant, ni prévisionnel (décisions du
+           propriétaire, 07/08). Les deux vivent sur la courbe des PER juste en
+           dessous : le multiple du jour en losange ambre au milieu de son
+           historique, les prévisionnels en points creux. Un chiffre nu dans une
+           tuile n'apprend rien ; le même chiffre au milieu de dix ans de
+           multiples dit s'il est cher. Le seul cas que la courbe ne savait pas
+           montrer — des bénéfices attendus NÉGATIFS, qui ne produisent aucun
+           point — est désormais écrit sous elle. */
         +'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>')+
     noteDetail(b.note);
 }
