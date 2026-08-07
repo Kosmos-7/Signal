@@ -135,6 +135,68 @@ champs, et le run ne pouvait pas échouer sur une donnée absente.
   liste explicite : le prochain champ ajouté à `fonda` sans être traité dans la
   fusion fera échouer les tests au lieu de disparaître en silence.
 
+### Le PER d'époque était faussé par les dividendes — et la note avec lui
+
+Question du propriétaire : « je ne comprends pas le PER courant vs la valeur du
+tableau PER pour cette année ». Elle a mis au jour trois défauts distincts,
+dont un qui touchait directement le score.
+
+**1. Le cours historique était le mauvais.** Le screener tirait tout d'une
+seule série de prix, `auto_adjust=True` — ajustée des splits ET des dividendes.
+C'est la bonne base pour une tendance, un z-score, un RSI : c'est du rendement
+total. C'est la MAUVAISE pour un PER, parce que l'ajustement rétroactif des
+dividendes déflate tout le passé, d'autant plus qu'on remonte loin et que le
+rendement est élevé. Les multiples d'époque sortaient donc systématiquement
+trop bas, et leur **médiane** avec eux — or cette médiane pilote le critère
+« histoire », 8 points sur les 25 de la valorisation. Chaque société
+distributrice était comparée à un passé artificiellement bon marché, donc
+jugée chère aujourd'hui. Un titre à 3 % de rendement sur quinze ans encaissait
+~35 % de sous-estimation sur ses exercices les plus anciens.
+Le même appel rend désormais les deux séries (`Adj Close` pour la tendance,
+`Close` pour les PER) — aucun coût réseau supplémentaire.
+
+**2. Un BPA Yahoo antérieur à un split donnait un multiple faux.** Un cours
+ajusté des splits vit dans la base d'actions d'aujourd'hui ; les BPA d'EDGAR y
+sont ramenés explicitement, ceux de la fenêtre Yahoo sont « tels que publiés »,
+donc dans la base de leur époque. Leur quotient était faux du facteur du split.
+Ces exercices sont maintenant RETIRÉS du calcul, pas approximés.
+
+**3. Le graphique changeait de base de cours en silence** — c'est la confusion
+que le propriétaire a vue. Les exercices publiés valent au cours de leur
+clôture, les estimations au cours du jour ; le saut entre les deux se lisait
+comme un saut de bénéfices. Un point **« aujourd'hui »** (losange ambre) est
+posé entre les deux, à sa place, et une phrase dit ce qui change.
+
+### Les projections de bénéfice mélangeaient deux monnaies
+
+Trouvé en inspectant les données publiées après le run. Les deux jeux
+d'estimations de Yahoo ne vivent pas dans la même devise : le chiffre
+d'affaires estimé est en devise COMPTABLE, le bénéfice par action estimé en
+devise de COTATION (c'est ce qui rend `per_previsionnel` valide pour un ADR).
+
+**TSM publiait 331,25 TWD de bénéfice par action et nous en projetions 16,82.**
+Le taux de croissance qui en sortait n'était pas une opinion de marché, c'était
+un taux de change. Six fiches étaient touchées (TSM, ASX, CCJ, RACE, ABBN.SW,
+VWS.CO) — et RACE est le cas le plus dangereux, parce que 9,01 → 9,80 avait
+l'air parfaitement plausible.
+
+Les estimations de BPA sont désormais ignorées quand les deux devises diffèrent
+(le bénéfice reste prolongeable depuis le seul historique, cohérent avec
+lui-même) ; le chiffre d'affaires n'était pas concerné.
+
+### La trajectoire attendue devient lisible, et le bénéfice s'affiche
+
+Deux manques signalés le même jour : « on ne voit pas combien exactement » et
+« est-ce qu'on sait aussi projeter le bénéfice ? ». Le bénéfice par action ÉTAIT
+projeté par le screener depuis le premier jour — il n'était affiché nulle part.
+
+- **Le chiffre est écrit au-dessus de chaque barre projetée** (fourchette
+  comprise), au lieu d'être réservé au tableau replié.
+- **Un tableau « trajectoire attendue »** dépliable donne CA et bénéfice par
+  action, avec la nature **par cellule** : une année peut porter un consensus
+  de chiffre d'affaires et déjà notre arithmétique sur le bénéfice. Une case
+  vide ou le signe ⌁ dit qu'on a refusé de prolonger, et le motif est au survol.
+
 ### La troncature oubliée : il y en avait trois, pas deux
 
 Symptôme relevé sur le même run : **44 fiches plafonnaient toujours à

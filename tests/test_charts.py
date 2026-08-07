@@ -360,6 +360,21 @@ check("ADR (devise comptable ≠ cotation) : aucun PER historique",
 an3 = [{"fin": "2025-12-31", "eps": -2.0}, {"fin": "2024-12-31"}]
 screener.per_historique(an3, lambda d: 100.0, meme_devise=True)
 check("perte ou BPA absent : pas de multiple", all("per" not in e for e in an3))
+# Base d'actions : un cours ajusté des splits vit dans la base d'AUJOURD'HUI.
+# Un BPA « tel que publié » (fenêtre Yahoo) antérieur à un split vit dans celle
+# de son époque — leur quotient est faux du facteur du split.
+SPL = [("2024-06-10", 10.0)]
+an4 = [{"fin": "2023-12-31", "eps": 20.0}, {"fin": "2025-12-31", "eps": 3.0}]
+screener.per_historique(an4, lambda d: 120.0, True, SPL)
+check("BPA Yahoo antérieur à un split : retiré, pas approximé",
+      "per" not in an4[0] and an4[1]["per"] == 40.0, str(an4))
+an5 = [{"fin": "2023-12-31", "eps": 2.0, "src": "edgar"}]
+screener.per_historique(an5, lambda d: 120.0, True, SPL)
+check("BPA EDGAR déjà ramené à la base actuelle : le PER est calculé",
+      an5[0]["per"] == 60.0, str(an5))
+an6 = [{"fin": "2023-12-31", "eps": 20.0}]
+screener.per_historique(an6, lambda d: 120.0, True, None)
+check("sans split connu, rien n'est retiré", an6[0]["per"] == 6.0)
 
 prev = screener.per_previsionnel(120.0, {"0y": 4.0, "+1y": 5.0}, "2025-12-31")
 check("deux exercices à venir, étiquetés après le dernier clos",
@@ -736,6 +751,22 @@ check("le motif d'arrêt du CA ne prétend rien sur le BPA",
       "ca_arret" in mx[1] and "eps_arret" not in mx[1], str(mx[1]))
 check("une société sans consensus et en hypercroissance démontrée ne dit rien",
       screener.projections(CONTRACTE, None, None, "2025-12-31") == [])
+# Le piège des ADR : le CA estimé est publié en devise COMPTABLE, le BPA estimé
+# en devise de COTATION. TSM publiait 331,25 TWD de BPA et nous en projetions
+# 16,82 — le « taux de croissance » n'était qu'un taux de change.
+ADR = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
+       [(2023, 2161736, 176.0), (2024, 2894308, 226.25), (2025, 3809054, 331.25)]]
+adr = screener.projections(ADR, {"0y": 16.8, "+1y": 21.6},
+                           {"0y": 5420352, "+1y": 7187439}, "2025-12-31",
+                           meme_devise=False)
+check("ADR : aucune estimation de BPA en devise étrangère n'entre dans la série",
+      all(e.get("eps") is None or e["eps"] > 100 for e in adr), str(adr[:2]))
+check("ADR : le chiffre d'affaires, lui, se projette normalement",
+      adr[0]["ca"] == 5420352 and adr[0]["ca_nature"] == "consensus")
+mm = screener.projections(ADR, {"0y": 16.8, "+1y": 21.6},
+                          {"0y": 5420352, "+1y": 7187439}, "2025-12-31")
+check("même devise : les estimations de BPA sont bien prises",
+      mm[0]["eps"] == 16.8, str(mm[0]))
 # La nature est publiée PAR SÉRIE : sans elle, un BPA extrapolé ferait passer
 # pour « extrapolé » un chiffre d'affaires qui est du consensus (bug vu sur NBIS)
 mixte = screener.projections(AN_P, None, {"0y": 176, "+1y": 197}, "2025-12-31")[0]

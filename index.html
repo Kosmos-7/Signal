@@ -161,6 +161,11 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .fd-d.up{color:var(--green)}.fd-d.dn{color:var(--red)}
   .fd-est td{color:var(--text3)}
   .fd-est td:first-child{color:var(--text3);font-style:italic}
+  /* Trajectoire attendue : la nature se lit PAR CELLULE, parce qu'une année
+     peut porter un consensus de chiffre d'affaires et déjà notre arithmétique
+     sur le bénéfice. Le grisé dit « c'est nous qui prolongeons ». */
+  .fd-ext{color:var(--text3);font-style:italic}
+  .fd-stop{color:#f0c674;cursor:help;font-style:normal}
   /* Tables dépliables : le graphique d'abord, les chiffres si on veut. */
   .fd-det{margin:8px 0 2px}
   .fd-det summary{cursor:pointer;list-style:none;display:inline-block;font-family:var(--mono);font-size:.74rem;letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:5px;padding:7px 14px;user-select:none}
@@ -1245,7 +1250,12 @@ function fondaRender(s){
          de la barre prudente. L'écart EST l'information. */
       if(o.pr&&r.ca_haut!=null){const hh=r.ca_haut*sc;
         bars+='<rect x="'+(cx-bw-2)+'" y="'+(y0-hh)+'" width="'+bw+'" height="'+Math.max(2,hh-h)+'" fill="none" stroke="#74b6df" stroke-width="1" stroke-dasharray="2 2" opacity=".55"/>';}
-      bars+='<rect x="'+(cx-bw-2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+fCa+'" opacity="'+op+'"/>';}
+      bars+='<rect x="'+(cx-bw-2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+fCa+'" opacity="'+op+'"/>';
+      /* Les projections sont peu nombreuses (2 à 5 barres) et c'est LEUR
+         chiffre qu'on vient lire : on l'écrit au-dessus de la barre plutôt
+         que de le réserver au tableau replié. */
+      if(o.pr){const ht=(r.ca_haut!=null?r.ca_haut:r.ca)*sc;
+        bars+='<text x="'+(cx-bw/2-2)+'" y="'+Math.max(9,y0-ht-6)+'" text-anchor="middle" class="chx-axis" fill="#74b6df">'+fdMoney(r.ca,dev).replace(/&nbsp;/g,' ')+(r.ca_haut!=null?' \u2013 '+fdMoney(r.ca_haut,dev):'')+'</text>';}}
     if(!o.pr&&r.rn!=null){const h=r.rn*sc, neg=r.rn<0;
       bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':'#c6c6e0')+'" opacity="'+(neg?0.8:op*0.75)+'"/>';}
     if((n-1-i)%step===0||last)
@@ -1254,6 +1264,7 @@ function fondaRender(s){
   // La table des chiffres est DÉPLIABLE (décision propriétaire du 06/08 : le
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
   const openC=!!host.querySelector('#fd-det-c[open]'), openP=!!host.querySelector('#fd-det-p[open]');
+  const openA=!!host.querySelector('#fd-det-a[open]');
   const cells=rows.map(r=>{
     const p=fdPrev(full,full.indexOf(r),FD_MODE);
     return '<tr><td>'+lab(r)+'</td>'+
@@ -1261,7 +1272,7 @@ function fondaRender(s){
       (hasEb?'<td>'+fdMoney(r.eb,dev)+fdDelta(r,p,'eb')+'</td>':'')+
       '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td></tr>';
   }).reverse().join('');
-  const perB=fdPerChart(F,fmtPer,NARROW?440:800);
+  const perB=fdPerChart(F,fmtPer,NARROW?440:800,(s.breakdown||{}).trailing_pe);
   host.innerHTML='<div class="fd-wrap"><div class="qh">Chiffres publiés</div>'+
     '<div class="fd-ctrl">'+
       '<button class="chx-pbtn'+(FD_MODE==='an'?' on':'')+'" data-fd="an"'+(an.length<2?' disabled':'')+'>Annuel</button>'+
@@ -1296,10 +1307,33 @@ function fondaRender(s){
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table></details>'+
+    /* Le tableau des ATTENDUS. Le graphique porte le chiffre d'affaires ; le
+       BÉNÉFICE PAR ACTION était projeté par le screener depuis le début et
+       n'était affiché NULLE PART. Il l'est ici, avec sa nature ligne à ligne :
+       une série peut être du consensus quand l'autre est déjà notre
+       arithmétique, et une case vide veut dire qu'on a refusé de prolonger. */
+    (function(){if(!proj.length)return '';
+      const unBpa=proj.some(p=>p.eps!=null);
+      const nat=(p,k)=>p[k+'_nature']||p.nature;
+      const bal=v=>v==null?'—':v.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});
+      const li=proj.slice().reverse().map(p=>{
+        const marq=k=>p[k+'_arret']?'<span class="fd-stop" title="'+p[k+'_arret']+'"> ⌁</span>':'';
+        const cell=(k,txt)=>'<td'+(nat(p,k)==='extrapolé'?' class="fd-ext"':'')+'>'+txt+marq(k)+'</td>';
+        return '<tr'+(p.nature==='extrapolé'?' class="fd-est"':'')+'><td>'+p.exercice+
+          (p.nature==='consensus'?'':'e')+'</td>'+
+          cell('ca', p.ca==null?'—':fdMoney(p.ca,dev)+(p.ca_haut!=null?' à '+fdMoney(p.ca_haut,dev):''))+
+          (unBpa?cell('eps', p.eps==null?'—':bal(p.eps)+' '+sv(dev)):'')+'</tr>';}).join('');
+      return '<details class="fd-det" id="fd-det-a"'+(openA?' open':'')+'><summary>Dérouler la trajectoire attendue ▾</summary>'+
+        '<table class="fd-table"><tr><th>Exercice</th><th>CA attendu</th>'+(unBpa?'<th>Bénéfice par action</th>':'')+'</tr>'+li+'</table>'+
+        '<p class="fd-inline"><i>En clair : consensus des analystes. En grisé : notre prolongation arithmétique. Un tiret, ou le signe ⌁, veut dire que nous avons refusé de prolonger — survolez-le pour le motif.</i></p></details>';})()+
     '</div>'+
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
-        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+'</div>'+
+        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#f0c674;font-weight:700">◆</span> aujourd\'hui&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+'</div>'+
+        /* La question que le propriétaire a posée le 07/08 — « je ne comprends
+           pas le PER courant vs la valeur du tableau » — venait d'un changement
+           de base de cours jamais énoncé. On l'énonce. */
+        '<p class="fd-inline"><i>Chaque exercice est au cours que le marché cotait À SA CLÔTURE, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Le losange « aujourd\'hui » et les estimations sont au cours DU JOUR — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.</i></p>'+
         '<details class="fd-det" id="fd-det-p"'+(openP?' open':'')+'><summary>Dérouler les PER ▾</summary>'+
         '<table class="fd-table" style="max-width:340px"><tr><th>Exercice</th><th>PER</th></tr>'+perB.lignes+'</table></details></div>'
       :'<div class="fd-wrap"><div class="qh">'+(perB.queEst?'PER estimé (analystes)':'PER')+'</div>'+
@@ -1317,12 +1351,22 @@ function fondaRender(s){
    de 3 exercices (même seuil d'honnêteté que les phrases de synthèse). Échelle
    log quand les extrêmes s'écartent de plus de 10×. Étiquettes sélectives ;
    0 ou 1 exercice publié → pas de courbe artificielle, valeurs en ligne. */
-function fdPerChart(F,fmtPer,W){
+function fdPerChart(F,fmtPer,W,perNow){
   const anAll=((F&&F.an)||[]);
   const pub=anAll.filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per,est:false}));
   const est=((F&&F.pe_prev)||[]).map(p=>({an:p.exercice,per:p.per,est:true}));
   if(!pub.length&&!est.length)return null;
+  /* LE POINT « AUJOURD'HUI ». Sans lui, cette courbe changeait de base de
+     cours en silence : les exercices publiés valent au COURS DE L'ÉPOQUE,
+     les estimations au COURS DU JOUR. Le lecteur voyait un saut entre le
+     dernier exercice et la premiere estimation et l'attribuait aux
+     bénéfices, alors qu'une bonne part venait du prix. Le PER courant est
+     donc posé entre les deux, à sa place : il partage le cours des
+     estimations et le bénéfice (glissant) du passé récent. */
+  const now=(perNow!=null&&perNow>0&&pub.length)
+    ?{an:pub[pub.length-1].an+0.5,per:perNow,est:false,now:true,lab:'auj.'}:null;
   const lignes=est.slice().reverse().map(p=>'<tr class="fd-est"><td>'+p.an+'e</td><td>'+fmtPer(p.per)+'</td></tr>').join('')
+    +(now?'<tr class="fd-est"><td>aujourd\'hui</td><td>'+fmtPer(now.per)+'</td></tr>':'')
     +pub.slice().reverse().map(p=>'<tr><td>'+p.an+'</td><td>'+fmtPer(p.per)+'</td></tr>').join('');
   if(pub.length<2){
     const inline=pub.concat(est).map(p=>p.an+(p.est?'<i>e</i>':'')+'\u00a0: '+fmtPer(p.per)).join(' \u00b7 ');
@@ -1331,7 +1375,7 @@ function fdPerChart(F,fmtPer,W){
   W=W||800;
   const H=190,ML=14,MR=64,MT=24,MB=22;
   const trous=anAll.filter(r=>r.per==null).map(r=>+r.fin.slice(0,4));
-  const pts=pub.concat(est);
+  const pts=pub.concat(now?[now]:[]).concat(est);
   const a0=Math.min(...pts.map(p=>p.an)),a1=Math.max(...pts.map(p=>p.an));
   const vals=pts.map(p=>p.per);
   const lo=Math.min(...vals),hi=Math.max(...vals);
@@ -1349,8 +1393,9 @@ function fdPerChart(F,fmtPer,W){
   segs.push(cur);
   segs.filter(sg=>sg.length>1).forEach(sg=>{
     g+='<polyline points="'+sg.map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-linejoin="round"/>';});
-  if(est.length)
-    g+='<polyline points="'+[pub[pub.length-1]].concat(est).map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
+  const suite=(now?[now]:[]).concat(est);
+  if(suite.length)
+    g+='<polyline points="'+[pub[pub.length-1]].concat(suite).map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
   trous.filter(an=>an>=a0&&an<=a1).forEach(an=>{
     g+='<text x="'+X(an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+an+' : exercice sans multiple (perte ou BPA indisponible)</title></text>';});
   let iMin=0,iMax=0;pub.forEach((p,i)=>{if(p.per<pub[iMin].per)iMin=i;if(p.per>pub[iMax].per)iMax=i;});
@@ -1358,12 +1403,13 @@ function fdPerChart(F,fmtPer,W){
   const stepX=pts.length>8?2:1;
   pts.forEach((p,i)=>{
     const cx=X(p.an),cy=Y(p.per);
-    g+=p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"><title>'+p.an+'e : '+fmtPer(p.per)+'</title></circle>'
+    g+=p.now?'<rect x="'+(cx-4.2)+'" y="'+(cy-4.2)+'" width="8.4" height="8.4" transform="rotate(45 '+cx+' '+cy+')" fill="#f0c674" stroke="#0d0d16" stroke-width="1.5"><title>aujourd\'hui : '+fmtPer(p.per)+' (cours du jour / b\u00e9n\u00e9fice des 12 derniers mois)</title></rect>'
+        :p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"><title>'+p.an+'e : '+fmtPer(p.per)+'</title></circle>'
             :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"><title>'+p.an+' : '+fmtPer(p.per)+'</title></circle>';
-    if(p.est||idxLab.has(i))
-      g+='<text x="'+cx+'" y="'+Math.max(11,cy-10)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.est?'#8a8aa6':'#c6c6e0')+'">'+Math.round(p.per)+'\u00d7</text>';
-    if((pts.length-1-i)%stepX===0)
-      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+'>'+String(p.an).slice(2)+(p.est?'e':'')+'</text>';
+    if(p.est||p.now||idxLab.has(i))
+      g+='<text x="'+cx+'" y="'+Math.max(11,cy-10)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.now?'#f0c674':(p.est?'#8a8aa6':'#c6c6e0'))+'">'+Math.round(p.per)+'\u00d7</text>';
+    if(p.now||(pts.length-1-i)%stepX===0)
+      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+(p.now?' fill="#f0c674"':'')+'>'+(p.lab||(String(p.an).slice(2)+(p.est?'e':'')))+'</text>';
   });
   return {svg:'<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',lignes:lignes,med:med,trous:trous.some(an=>an>=a0&&an<=a1)};
 }

@@ -653,19 +653,35 @@ def chainer_finnhub(fh_data, net_margin_raw, debt_eq_raw):
     return nm, de, src
 
 
-def per_historique(an, prix_a_la_date, meme_devise):
+def per_historique(an, prix_a_la_date, meme_devise, splits=None):
     """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
     dilué publié. UNIQUEMENT quand la devise comptable est celle de cotation :
     un ADR comme TSM cote en USD mais publie son BPA en TWD (et représente
     plusieurs actions ordinaires) — le quotient serait un non-sens, on omet.
     Mutation en place des entrées ; BPA négatif ou nul → pas de PER (une perte
-    n'a pas de multiple). prix_a_la_date : date iso → cours, None si inconnu."""
+    n'a pas de multiple).
+
+    `prix_a_la_date` doit rendre le cours AJUSTÉ DES SPLITS SEULEMENT — celui
+    que le marché cotait vraiment. Un cours ajusté des dividendes déflate le
+    passé et sous-estime tous les multiples anciens.
+
+    `splits` : [(date_iso, ratio)], pour la garde de BASE D'ACTIONS. Un cours
+    ajusté des splits vit dans la base d'actions D'AUJOURD'HUI. Le BPA doit y
+    vivre aussi. Ceux qui viennent d'EDGAR y sont ramenés explicitement
+    (edgar.ajuster_eps_splits) et portent src:"edgar" ; ceux de la fenêtre
+    Yahoo sont « tels que publiés », donc dans la base de LEUR époque. Diviser
+    un cours ÷10 par un BPA pré-split donne un multiple faux d'un facteur 10.
+    Ces exercices-là sont RETIRÉS du calcul, pas approximés."""
     if not meme_devise:
         return an
+    dates_splits = sorted(d for d, r in (splits or []) if r and r > 0)
     for e in an:
         eps = e.get("eps")
         if not eps or eps <= 0:
             continue
+        if (e.get("src") != "edgar"
+                and any(d > e["fin"] for d in dates_splits)):
+            continue                  # base d'actions incompatible : pas de PER
         prix = prix_a_la_date(e["fin"])
         if prix and prix > 0:
             e["per"] = round(prix / eps, 1)
@@ -732,6 +748,7 @@ SEUIL_REFUS = 50.0
 
 
 def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
+                meme_devise=True,
                 horizon=HORIZON_PROJECTION, g_terminale=CROISSANCE_TERMINALE,
                 plafond=PLAFOND_EXTRAPOLATION, seuil_refus=SEUIL_REFUS):
     """Trajectoire attendue du CA et du BPA jusqu'à `horizon`.
@@ -766,10 +783,28 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
     afficher. Une projection qu'on sait fausse ne vaut pas mieux qu'un blanc :
     elle vaut moins, parce qu'elle se donne l'air d'un fait.
 
+    LE PIÈGE DES DEVISES, et pourquoi `meme_devise` existe. Les deux jeux
+    d'estimations de Yahoo ne vivent PAS dans la même monnaie :
+
+      · le chiffre d'affaires estimé est publié dans la devise COMPTABLE,
+        celle de l'historique — les deux se comparent directement ;
+      · le bénéfice par action estimé est publié dans la devise de COTATION,
+        parce qu'il sert à calculer un PER contre le cours (c'est ce qui rend
+        `per_previsionnel` valide même pour un ADR).
+
+    Pour un ADR, ces deux devises diffèrent. TSM publiait 331,25 TWD de BPA et
+    nous en projetions 16,82 — le taux de croissance n'était pas une opinion
+    de marché, c'était un taux de change. Quand `meme_devise` est faux, les
+    estimations de BPA sont donc IGNORÉES ; le bénéfice reste prolongeable à
+    partir du seul historique, qui est cohérent avec lui-même, et le chiffre
+    d'affaires n'est pas concerné.
+
     Pure et testable hors ligne. Rend [] si rien n'est projetable.
     """
     if not dernier_exercice:
         return []
+    if not meme_devise:
+        estimations_bpa = None
     try:
         an0 = int(str(dernier_exercice)[:4])
     except (TypeError, ValueError):
@@ -1446,7 +1481,26 @@ def score_ticker(ticker, vix=None):
     try:
         data = yf.Ticker(ticker)
         # Fetch max pour avoir suffisamment d'historique pour la régression long terme
-        hist = data.history(period="max", auto_adjust=True)
+        # auto_adjust=False pour disposer des DEUX bases de cours dans le même
+        # appel (aucun coût réseau supplémentaire) :
+        #   · « Adj Close » — ajusté des splits ET des dividendes. C'est la
+        #     série de RENDEMENT TOTAL : la seule honnête pour une tendance,
+        #     un z-score, une moyenne mobile, un RSI. Elle reste `close`.
+        #   · « Close » — ajusté des splits SEULEMENT. C'est le cours que le
+        #     marché COTAIT réellement à cette date, et c'est celui-là qu'il
+        #     faut pour un PER d'époque.
+        #
+        # POURQUOI CETTE SÉPARATION : le PER historique divisait un cours
+        # dividendes-déduits par un BPA publié. L'ajustement rétroactif des
+        # dividendes déflate tout le passé — d'autant plus qu'on remonte loin
+        # et que le rendement est élevé — donc les multiples d'époque
+        # sortaient SYSTÉMATIQUEMENT trop bas, et leur MÉDIANE avec eux. Or
+        # cette médiane pilote le critère « histoire » (8 points sur les 25 de
+        # la valorisation) : chaque société distributrice se voyait comparée à
+        # un passé artificiellement bon marché, donc jugée chère aujourd'hui.
+        # Un titre à 3 % de rendement sur quinze ans encaissait ~35 % de
+        # sous-estimation sur ses exercices les plus anciens.
+        hist = data.history(period="max", auto_adjust=False)
         if len(hist) < 50:
             return None
 
@@ -1456,13 +1510,20 @@ def score_ticker(ticker, vix=None):
         # du jour avec Close=NaN pour les places pas encore ouvertes — sans ce
         # dropna, MM21/MM200/RSI deviennent NaN et le titre est écarté à tort
         # (incident du 27/07/2026 : les 94 titres US évincés, watchlist 100% EU).
-        close  = hist["Close"].squeeze().dropna()
+        # Repli fail-soft : une version de yfinance qui ne rendrait pas
+        # « Adj Close » ramène au comportement d'avant (une seule base).
+        _col = "Adj Close" if "Adj Close" in getattr(hist, "columns", []) else "Close"
+        close  = hist[_col].squeeze().dropna()
         # Un cours nul ou NÉGATIF est toujours un artefact (ajustements Yahoo
         # aberrants sur l'historique lointain : 35 barres négatives sur
         # 000660.KS en 2000, deux zéros sur CS.PA). L'échelle log du front ne
         # peut pas les montrer et un seul point rendait le graphe MAX
         # invisible — écartés à la source, en plus de la défense côté front.
         close  = close[close > 0]
+        # Cours COTÉ (splits seuls), aligné sur les mêmes dates et soumis aux
+        # mêmes gardes : il ne sert qu'aux PER d'époque.
+        brut   = hist["Close"].squeeze().reindex(close.index)
+        brut   = brut[brut > 0]
         volume = hist["Volume"].squeeze().reindex(close.index).fillna(0)
         if len(close) < 50:
             return None
@@ -1473,6 +1534,7 @@ def score_ticker(ticker, vix=None):
             info_curr = ''
         if info_curr == 'GBp':
             close = close / 100
+            brut = brut / 100
 
         # Indicateurs techniques sur les 2 dernières années (MM21/MM200/RSI/volume)
         close_2y  = close.iloc[-504:]  if len(close)  > 504 else close
@@ -1922,6 +1984,15 @@ def score_ticker(ticker, vix=None):
                 print(f"  ⚠️  {ticker}: chiffres publiés en échec ({type(e).__name__}) — omis")
                 fonda = None
             if fonda:
+                # Les splits servent DEUX fois et sont donc lus une seule fois,
+                # ici : ramener les BPA d'EDGAR dans la base d'actions actuelle,
+                # et écarter du calcul des PER les BPA de la fenêtre Yahoo qui
+                # vivent encore dans la base de leur époque.
+                try:
+                    spl = [(str(ts.date()), float(v))
+                           for ts, v in data.splits.items() if v and v > 0]
+                except Exception:
+                    spl = []
                 # Historique officiel SEC : étend la fenêtre Yahoo
                 # (~4 exercices, ~5 trimestres) à dix ans et plus, AVANT le
                 # calcul des PER pour que les exercices ajoutés reçoivent le
@@ -1941,11 +2012,6 @@ def score_ticker(ticker, vix=None):
                         if ed:
                             # BPA déposés à l'époque → base d'actions actuelle
                             # (sinon les PER pré-splits sortent absurdes).
-                            try:
-                                spl = [(str(ts.date()), float(v))
-                                       for ts, v in data.splits.items() if v and v > 0]
-                            except Exception:
-                                spl = []
                             edgar.ajuster_eps_splits(ed, spl,
                                                      info.get("sharesOutstanding"))
                             edgar.completer_fonda(fonda, ed)
@@ -1968,15 +2034,17 @@ def score_ticker(ticker, vix=None):
                     print(f"  ⚠️  {ticker}: apport en échec ({type(e).__name__})")
                 # PER par exercice + deux exercices à venir. Fail-soft aussi.
                 try:
+                    # Cours COTÉ à l'époque (`brut`, splits seuls), jamais la
+                    # série de rendement total : voir per_historique().
                     def prix_fin(iso):
                         try:
-                            avant = close[close.index <= pd.Timestamp(iso, tz=close.index.tz)]
+                            avant = brut[brut.index <= pd.Timestamp(iso, tz=brut.index.tz)]
                             return float(avant.iloc[-1]) if len(avant) else None
                         except Exception:
                             return None
                     meme_devise = ((info.get("financialCurrency") or "") ==
                                    (info.get("currency") or ""))
-                    per_historique(fonda["an"], prix_fin, meme_devise)
+                    per_historique(fonda["an"], prix_fin, meme_devise, spl)
                     est = None
                     try:
                         ee = data.earnings_estimate
@@ -2003,7 +2071,8 @@ def score_ticker(ticker, vix=None):
                                       for k in ("0y", "+1y")}
                     except Exception:
                         est_ca = None
-                    proj = projections(fonda["an"], est, est_ca, dernier)
+                    proj = projections(fonda["an"], est, est_ca, dernier,
+                                       meme_devise)
                     if proj:
                         fonda["proj"] = proj
                 except Exception as e:
