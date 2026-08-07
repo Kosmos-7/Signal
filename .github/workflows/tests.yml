@@ -1,0 +1,62 @@
+# .github/workflows/tests.yml
+name: Tests
+
+# POURQUOI CE FICHIER EXISTE. Le dépôt portait 396 tests et RIEN ne les
+# exécutait : le filet ne tenait que si l'auteur pensait à le tendre à la main
+# avant de pousser. Un run du screener coûte quarante minutes et écrit dans les
+# données publiées ; découvrir une régression à ce moment-là, c'est la
+# découvrir trop tard. Constaté pendant l'audit du 07/08/2026.
+#
+# Les suites sont HORS LIGNE par construction (les modules lourds sont bouchés,
+# les résultats du screener sont simulés) : elles tournent en quelques secondes,
+# sans dépendance, sans clé d'API et sans toucher au réseau.
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+# Aucune écriture : ce workflow ne fait que lire et exécuter.
+permissions:
+  contents: read
+
+# Une exécution par branche suffit : une poussée qui en suit une autre rend la
+# précédente sans objet.
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  suites:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      # test_charts.py éprouve la garde anti-oubli du workflow en créant un
+      # dépôt git jetable HORS du projet : il lui faut une identité de commit.
+      - name: Identité git pour les dépôts jetables des tests
+        run: |
+          git config --global user.email "tests@signal.local"
+          git config --global user.name  "Signal Tests"
+
+      # Aucune installation : les suites bouchent ta, yfinance, pandas et
+      # requests elles-mêmes. Installer les vraies dépendances masquerait au
+      # contraire une importation oubliée.
+      - name: Suites
+        run: |
+          echec=0
+          for f in tests/test_*.py; do
+            echo "::group::$f"
+            python "$f" || echec=1
+            echo "::endgroup::"
+          done
+          exit $echec
