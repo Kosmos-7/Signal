@@ -668,7 +668,7 @@ def chainer_finnhub(fh_data, net_margin_raw, debt_eq_raw):
     return nm, de, src
 
 
-def per_historique(an, prix_a_la_date, meme_devise, splits=None):
+def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None):
     """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
     dilué publié. UNIQUEMENT quand la devise comptable est celle de cotation :
     un ADR comme TSM cote en USD mais publie son BPA en TWD (et représente
@@ -680,23 +680,38 @@ def per_historique(an, prix_a_la_date, meme_devise, splits=None):
     que le marché cotait vraiment. Un cours ajusté des dividendes déflate le
     passé et sous-estime tous les multiples anciens.
 
-    `splits` : [(date_iso, ratio)], pour la garde de BASE D'ACTIONS. Un cours
-    ajusté des splits vit dans la base d'actions D'AUJOURD'HUI. Le BPA doit y
-    vivre aussi. Ceux qui viennent d'EDGAR y sont ramenés explicitement
-    (edgar.ajuster_eps_splits) et portent src:"edgar" ; ceux de la fenêtre
-    Yahoo sont « tels que publiés », donc dans la base de LEUR époque. Diviser
-    un cours ÷10 par un BPA pré-split donne un multiple faux d'un facteur 10.
-    Ces exercices-là sont RETIRÉS du calcul, pas approximés."""
+    LA BASE D'ACTIONS, et comment on la VÉRIFIE au lieu de la supposer.
+
+    Un cours ajusté des splits vit dans la base d'actions d'aujourd'hui ; le
+    BPA doit y vivre aussi, sinon le multiple est faux du facteur du split.
+
+    Le premier jet de cette garde SUPPOSAIT que les BPA de la fenêtre Yahoo
+    étaient « tels que publiés », donc dans la base de leur époque, et retirait
+    tout exercice antérieur à un split. C'était faux, et c'est le propriétaire
+    qui l'a vu : « le PER de Booking est beugué ». Les faits, relevés sur les
+    fiches publiées — le nombre d'actions impliqué (résultat net ÷ BPA) est
+    CONTINU au passage d'EDGAR à Yahoo : Booking 1 034 M puis 1 001 M, NVIDIA
+    25 330 M puis 25 103 M, Broadcom 4 291 M puis 4 333 M. Yahoo retraite donc
+    ses BPA comme EDGAR. La garde supprimait des multiples parfaitement bons.
+
+    Elle est remplacée par une MESURE, la même qu'edgar._normalise_eps : le
+    nombre d'actions impliqué doit être du même ordre que le nombre d'actions
+    actuel (facteur 3 en log). Au-delà, la base est incompatible quelle qu'en
+    soit la raison, et le multiple est retiré. Sans résultat net ou sans
+    nombre d'actions actuel, rien n'est vérifiable et le multiple est calculé —
+    on ne retire pas sur un soupçon."""
     if not meme_devise:
         return an
-    dates_splits = sorted(d for d, r in (splits or []) if r and r > 0)
+    import math
     for e in an:
         eps = e.get("eps")
         if not eps or eps <= 0:
             continue
-        if (e.get("src") != "edgar"
-                and any(d > e["fin"] for d in dates_splits)):
-            continue                  # base d'actions incompatible : pas de PER
+        rn = e.get("rn")
+        if actions_actuelles and rn and rn > 0:
+            implique = rn * 1e6 / eps
+            if abs(math.log(implique / actions_actuelles)) > math.log(3):
+                continue              # base d'actions incompatible : pas de PER
         prix = prix_a_la_date(e["fin"])
         if prix and prix > 0:
             e["per"] = round(prix / eps, 1)
@@ -2108,7 +2123,8 @@ def score_ticker(ticker, vix=None):
                             return None
                     meme_devise = ((info.get("financialCurrency") or "") ==
                                    (info.get("currency") or ""))
-                    per_historique(fonda["an"], prix_fin, meme_devise, spl)
+                    per_historique(fonda["an"], prix_fin, meme_devise,
+                                   info.get("sharesOutstanding"))
                     est = None
                     try:
                         ee = data.earnings_estimate

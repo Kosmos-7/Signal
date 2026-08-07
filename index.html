@@ -1211,6 +1211,8 @@ function fdSynthese(an){
   }
   return ph;
 }
+// Profondeur DESSINÉE (le tableau dépliable, lui, montre tout l'accumulé).
+const FD_ANS=10, FD_TRIM=12;
 function fondaRender(s){
   const host=document.getElementById('fondasec'); if(!host)return;
   const D=CH[s.ticker], F=D&&D.fonda;
@@ -1222,13 +1224,22 @@ function fondaRender(s){
   // aujourd'hui ~4 exercices et ~5 trimestres (fenêtre Yahoo), et chaque run
   // hebdomadaire en ajoute — la profondeur grandit toute seule avec le temps.
   const full=FD_MODE==='an'?an:tr, dev=F.devise||'?';
-  const rows=full;
-  const hasEb=rows.some(r=>r.eb!=null);
+  /* FENÊTRE D'AFFICHAGE : DIX EXERCICES (décision du propriétaire, 07/08).
+     L'accumulateur est monté à dix-neuf exercices et le graphique les montrait
+     tous : vingt-quatre colonnes avec les projections, des barres de trois
+     pixels, et un axe où les années se marchaient dessus. Dix ans est la
+     profondeur qu'on LIT — un cycle complet, deux récessions au mieux.
+     L'historique entier n'est pas perdu pour autant : le tableau dépliable
+     l'affiche en entier, et la note continue de mesurer marges, croissance et
+     médiane des multiples sur TOUT ce qui est accumulé. On réduit ce qu'on
+     dessine, jamais ce qu'on calcule. */
+  const rows=full.slice(-(FD_MODE==='an'?FD_ANS:FD_TRIM));
+  const hasEb=full.some(r=>r.eb!=null);
   // Étiquettes annuelles : un changement de calendrier fiscal (CDNS, début
   // janvier → fin décembre en 2011) fait coexister deux exercices clos la
   // même année civile — on les distingue par le mois plutôt que d'afficher
   // deux fois « 2011 ».
-  const anDup={};if(FD_MODE==='an')rows.forEach(r=>{const y=r.fin.slice(0,4);anDup[y]=(anDup[y]||0)+1;});
+  const anDup={};if(FD_MODE==='an')full.forEach(r=>{const y=r.fin.slice(0,4);anDup[y]=(anDup[y]||0)+1;});
   const MABR=['janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
   const lab=r=>{const b=fdLabel(r.fin,FD_MODE);return (FD_MODE==='an'&&anDup[r.fin.slice(0,4)]>1)?b+' ('+MABR[+r.fin.slice(5,7)-1]+')':b;};
   const fmtPer=v=>v!=null?String(v).replace('.',',')+'×':'—';
@@ -1303,7 +1314,9 @@ function fondaRender(s){
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
   const openC=!!host.querySelector('#fd-det-c[open]'), openP=!!host.querySelector('#fd-det-p[open]');
   const openA=!!host.querySelector('#fd-det-a[open]');
-  const cells=rows.map(r=>{
+  /* Le tableau montre TOUT l'accumulé, lui : c'est le graphique qu'on allège,
+     pas la donnée. Un lecteur qui déplie veut les chiffres, pas un extrait. */
+  const cells=full.map(r=>{
     const p=fdPrev(full,full.indexOf(r),FD_MODE);
     return '<tr><td>'+lab(r)+'</td>'+
       '<td>'+fdMoney(r.ca,dev)+fdDelta(r,p,'ca')+'</td>'+
@@ -1397,7 +1410,12 @@ function fondaRender(s){
    log quand les extrêmes s'écartent de plus de 10×. Étiquettes sélectives ;
    0 ou 1 exercice publié → pas de courbe artificielle, valeurs en ligne. */
 function fdPerChart(F,fmtPer,W,perNow){
-  const anAll=((F&&F.an)||[]);
+  /* Même fenêtre de DIX exercices que le graphique des chiffres publiés
+     (décision du propriétaire, 07/08) : au-delà, les points se tassent et
+     l'axe devient illisible. La MÉDIANE affichée reste celle de la fenêtre
+     dessinée — sinon le trait tracé sur le graphique ne correspondrait pas
+     aux points qu'on voit ; celle de tout l'historique reste dans la note. */
+  const anAll=((F&&F.an)||[]).slice(-FD_ANS);
   const pub=anAll.filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per,est:false}));
   const est=((F&&F.pe_prev)||[]).map(p=>({an:p.exercice,per:p.per,est:true}));
   if(!pub.length&&!est.length)return null;
@@ -1410,9 +1428,12 @@ function fdPerChart(F,fmtPer,W,perNow){
      estimations et le bénéfice (glissant) du passé récent. */
   const now=(perNow!=null&&perNow>0&&pub.length)
     ?{an:pub[pub.length-1].an+0.5,per:perNow,est:false,now:true,lab:'auj.'}:null;
+  // Le tableau déplié montre TOUS les exercices, pas seulement les dix
+  // dessinés : on allège le graphique, jamais la donnée.
+  const pubTout=((F&&F.an)||[]).filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per}));
   const lignes=est.slice().reverse().map(p=>'<tr class="fd-est"><td>'+p.an+'e</td><td>'+fmtPer(p.per)+'</td></tr>').join('')
     +(now?'<tr class="fd-est"><td>aujourd\'hui</td><td>'+fmtPer(now.per)+'</td></tr>':'')
-    +pub.slice().reverse().map(p=>'<tr><td>'+p.an+'</td><td>'+fmtPer(p.per)+'</td></tr>').join('');
+    +pubTout.slice().reverse().map(p=>'<tr><td>'+p.an+'</td><td>'+fmtPer(p.per)+'</td></tr>').join('');
   if(pub.length<2){
     /* Sans courbe, ce repli est le SEUL endroit où le multiple apparaît :
        le PER du jour y entre donc explicitement. */
@@ -1425,17 +1446,25 @@ function fdPerChart(F,fmtPer,W,perNow){
   const trous=anAll.filter(r=>r.per==null).map(r=>+r.fin.slice(0,4));
   const pts=pub.concat(now?[now]:[]).concat(est);
   const a0=Math.min(...pts.map(p=>p.an)),a1=Math.max(...pts.map(p=>p.an));
-  const vals=pts.map(p=>p.per);
+  const sTout=pubTout.map(p=>p.per).sort((a,b)=>a-b), nMed=sTout.length;
+  const med=nMed>=3?(nMed%2?sTout[(nMed-1)/2]:(sTout[nMed/2-1]+sTout[nMed/2])/2):null;
+  // La médiane entre dans l'échelle : sans cela son trait pourrait tomber hors
+  // du cadre quand la fenêtre dessinée est plus chère que l'historique entier.
+  const vals=pts.map(p=>p.per).concat(med!=null?[med]:[]);
   const lo=Math.min(...vals),hi=Math.max(...vals);
   const LOG=hi/Math.max(lo,0.1)>10;
   const Y=v=>{if(LOG){const a=Math.log(lo),b=Math.log(hi);return MT+(1-(Math.log(v)-a)/((b-a)||1))*(H-MT-MB);}
     return MT+(1-(v-lo)/((hi-lo)||1))*(H-MT-MB);};
   const X=an=>ML+20+(a1>a0?(an-a0)*(W-ML-MR-40)/(a1-a0):0);
   let g='';
-  const s2=pub.map(p=>p.per).sort((a,b)=>a-b),nm=s2.length;
-  const med=nm>=3?(nm%2?s2[(nm-1)/2]:(s2[nm/2-1]+s2[nm/2])/2):null;
+  /* La médiane tracée est celle de TOUT l'historique accumulé, pas des dix
+     exercices dessinés : c'est CELLE-LÀ que le critère « histoire » de la note
+     compare au multiple du jour, et deux médianes différentes sur la même page
+     seraient un contresens. Le nombre d'exercices est écrit à côté pour que le
+     trait ne semble pas sortir de nulle part. */
   if(med!=null){g+='<line x1="'+ML+'" x2="'+(W-MR+10)+'" y1="'+Y(med)+'" y2="'+Y(med)+'" stroke="rgba(198,198,224,.35)" stroke-dasharray="5 5"/>'
-    +'<text x="'+(W-MR+14)+'" y="'+(Y(med)+3)+'" class="chx-axis">m\u00e9d. '+Math.round(med)+'\u00d7</text>';}
+    +'<text x="'+(W-MR+14)+'" y="'+(Y(med)+3)+'" class="chx-axis">m\u00e9d. '+Math.round(med)+'\u00d7</text>'
+    +'<text x="'+(W-MR+14)+'" y="'+(Y(med)+14)+'" class="chx-axis" opacity=".65">sur\u00a0'+nMed+'</text>';}
   const segs=[];let cur=[pub[0]];
   for(let i=1;i<pub.length;i++){if(pub[i].an-pub[i-1].an===1)cur.push(pub[i]);else{segs.push(cur);cur=[pub[i]];}}
   segs.push(cur);

@@ -135,6 +135,44 @@ champs, et le run ne pouvait pas échouer sur une donnée absente.
   liste explicite : le prochain champ ajouté à `fonda` sans être traité dans la
   fusion fera échouer les tests au lieu de disparaître en silence.
 
+### Le PER de Booking : ma garde supprimait des multiples justes
+
+Signalé par le propriétaire — « j'ai l'impression que le PER de Booking est
+beugué ». Il l'était, et c'est moi qui l'avais cassé le matin même.
+
+La garde de base d'actions ajoutée avec le correctif des dividendes SUPPOSAIT
+que les BPA de la fenêtre Yahoo étaient « tels que publiés », donc exprimés
+dans la base d'actions de leur époque, et retirait le multiple de tout exercice
+antérieur à un split. Les données publiées disent le contraire : le nombre
+d'actions impliqué (résultat net ÷ BPA) est **continu** au passage d'EDGAR à
+Yahoo — Booking 1 034 M puis 1 001 M, NVIDIA 25 330 M puis 25 103 M, Broadcom
+4 291 M puis 4 333 M. Yahoo retraite ses BPA comme EDGAR. Booking perdait ses
+quatre derniers multiples, NVIDIA et Broadcom deux chacun.
+
+La supposition est remplacée par une **mesure**, la même qu'`edgar._normalise_eps` :
+le nombre d'actions impliqué doit être du même ordre que le nombre d'actions
+actuel (facteur 3 en log). Au-delà, la base est incompatible quelle qu'en soit
+la cause. Sans résultat net ou sans nombre d'actions actuel, rien n'est
+vérifiable et le multiple est calculé — on ne retire pas sur un soupçon.
+
+Booking retrouve ses dix-huit multiples.
+
+### Les graphiques passent à dix ans
+
+Décision du propriétaire. L'accumulateur est monté à dix-neuf exercices et le
+graphique les montrait tous : vingt-quatre colonnes avec les projections, des
+barres de trois pixels, un axe où les années se marchaient dessus.
+
+- **Dix exercices dessinés** sur les chiffres publiés comme sur la courbe des
+  PER (douze trimestres en vue trimestrielle).
+- **Rien n'est perdu** : les tableaux dépliables montrent tout l'accumulé, et
+  la note continue de mesurer marges, croissance et médiane des multiples sur
+  la totalité. On réduit ce qu'on dessine, jamais ce qu'on calcule.
+- **La médiane tracée reste celle de tout l'historique** — c'est elle que le
+  critère « histoire » compare au multiple du jour, et deux médianes
+  différentes sur la même page seraient un contresens. Le nombre d'exercices
+  est écrit sous le trait pour qu'il ne semble pas sortir de nulle part.
+
 ### Les chiffres se marchaient dessus, et le PER courant était dit trois fois
 
 Deux captures d'écran du propriétaire, prises sur son téléphone : « les

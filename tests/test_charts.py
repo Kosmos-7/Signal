@@ -365,21 +365,30 @@ check("ADR (devise comptable ≠ cotation) : aucun PER historique",
 an3 = [{"fin": "2025-12-31", "eps": -2.0}, {"fin": "2024-12-31"}]
 screener.per_historique(an3, lambda d: 100.0, meme_devise=True)
 check("perte ou BPA absent : pas de multiple", all("per" not in e for e in an3))
-# Base d'actions : un cours ajusté des splits vit dans la base d'AUJOURD'HUI.
-# Un BPA « tel que publié » (fenêtre Yahoo) antérieur à un split vit dans celle
-# de son époque — leur quotient est faux du facteur du split.
-SPL = [("2024-06-10", 10.0)]
-an4 = [{"fin": "2023-12-31", "eps": 20.0}, {"fin": "2025-12-31", "eps": 3.0}]
-screener.per_historique(an4, lambda d: 120.0, True, SPL)
-check("BPA Yahoo antérieur à un split : retiré, pas approximé",
-      "per" not in an4[0] and an4[1]["per"] == 40.0, str(an4))
-an5 = [{"fin": "2023-12-31", "eps": 2.0, "src": "edgar"}]
-screener.per_historique(an5, lambda d: 120.0, True, SPL)
-check("BPA EDGAR déjà ramené à la base actuelle : le PER est calculé",
+# BASE D'ACTIONS : on la VÉRIFIE, on ne la suppose pas.
+# Le premier jet supposait que les BPA Yahoo étaient « tels que publiés » et
+# retirait tout exercice antérieur à un split. Faux : le nombre d'actions
+# impliqué (résultat net ÷ BPA) est CONTINU au passage d'EDGAR à Yahoo — Booking
+# 1 034 M puis 1 001 M, NVIDIA 25 330 M puis 25 103 M. La garde supprimait des
+# multiples bons, et c'est ce que le propriétaire a vu sur Booking.
+ACT = 1_000_000_000          # nombre d'actions actuel
+an4 = [{"fin": "2023-12-31", "eps": 2.0, "rn": 2000},      # 1 000 M implicites
+       {"fin": "2024-12-31", "eps": 60.0, "rn": 2000}]     # 33 M : autre base
+screener.per_historique(an4, lambda d: 120.0, True, ACT)
+check("base d'actions cohérente : le multiple est calculé", an4[0]["per"] == 60.0)
+check("base d'actions incompatible (facteur 30) : le multiple est retiré",
+      "per" not in an4[1], str(an4[1]))
+an5 = [{"fin": "2023-12-31", "eps": 2.0, "rn": 2400}]      # 1 200 M : ×1,2, toléré
+screener.per_historique(an5, lambda d: 120.0, True, ACT)
+check("un simple rachat d'actions ne fait pas retirer le multiple",
       an5[0]["per"] == 60.0, str(an5))
-an6 = [{"fin": "2023-12-31", "eps": 20.0}]
-screener.per_historique(an6, lambda d: 120.0, True, None)
-check("sans split connu, rien n'est retiré", an6[0]["per"] == 6.0)
+an6 = [{"fin": "2023-12-31", "eps": 20.0}]                 # pas de résultat net
+screener.per_historique(an6, lambda d: 120.0, True, ACT)
+check("sans résultat net, rien n'est vérifiable : on ne retire pas sur un soupçon",
+      an6[0]["per"] == 6.0)
+an7 = [{"fin": "2023-12-31", "eps": 20.0, "rn": 2000}]
+screener.per_historique(an7, lambda d: 120.0, True, None)
+check("sans nombre d'actions actuel non plus", an7[0]["per"] == 6.0)
 
 prev = screener.per_previsionnel(120.0, {"0y": 4.0, "+1y": 5.0}, "2025-12-31")
 check("deux exercices à venir, étiquetés après le dernier clos",
