@@ -5,6 +5,61 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Apprendre : la lecture des comptes passe de l'abstrait au concret
+
+« J'aimerais qu'on puisse y enseigner les bases pour la lecture des comptes.
+On le fait déjà ? » Oui — la section 04 décrivait déjà les trois états
+financiers, la rentabilité du capital et où trouver les documents. Mais tout
+y était **abstrait** : aucun chiffre réel, et aucun des pièges qui font mal
+lire des comptes pourtant justes.
+
+Deux blocs s'ajoutent. **Une lecture complète d'Alphabet sur l'exercice 2025**,
+en cinq temps : le compte de résultat de haut en bas (402,8 Md$ de ventes →
+132,2 Md$ de bénéfice, marge nette de 32,8 %, situé face aux 2 % d'un
+distributeur), le bilan en une question (dette à 19 % des capitaux propres),
+les flux comme épreuve de vérité (55 % du bénéfice comptable finit en cash),
+le recoupement du nombre d'actions (132 200 ÷ 10,81 ≈ 12,2 Md de titres, le
+calcul même que fait Signal pour convertir un consensus par action en
+montant), et la durée (bénéficiaire 13 années sur 13). **Tous ces chiffres
+sortent de nos propres données publiées** et ont été recoupés un à un ; ils
+portent sur un exercice clos, donc ils ne périment pas.
+
+Et **six pièges qui font mal lire des comptes justes** : le bénéfice
+« ajusté » non normalisé, la rémunération en actions qui dilue sans sortir de
+cash, les éléments exceptionnels (d'où nos médianes sur dix ou quinze
+exercices), le besoin en fonds de roulement d'une croissance rapide, les
+amortissements (le cas Broadcom 2019, BPA de 2,84 à 0,64 $ sans que
+l'activité bouge), et les périodes qu'on compare.
+
+### Un sommaire navigable sur mobile, au lieu d'un rouleau de texte
+
+« J'aimerais que les sections soient facilement navigables sur mobile, pas un
+bloc de texte qu'on scrolle. » Sous 1300 px, le sommaire en colonne était
+purement et simplement **caché** : douze sections et près de deux mille lignes
+d'Apprendre devenaient un seul rouleau.
+
+Une barre collante apparaît maintenant sous le header : elle dit toujours dans
+quelle section on est, et s'ouvre d'une tape sur la liste complète. Elle est
+**construite depuis le même balisage** que la colonne de gauche — ajouter une
+section au `<nav class="toc">` suffit, les deux rendus suivent, et il n'y a
+pas deux listes à maintenir. Le décalage sous le header est **mesuré** au
+chargement plutôt que codé en dur (58 px sous 700 px de large, 72 au-dessus),
+de sorte que les sauts d'ancre dégagent toujours les deux barres. Vaut pour
+Apprendre comme pour le Portefeuille.
+
+### Portefeuille IA à droite, détail de la note retiré
+
+Deux décisions d'ergonomie. Le lien **Portefeuille IA passe en dernière
+position** du header, tout à droite, sur les quatre pages : c'est le seul qui
+mène à de l'argent engagé, il mérite la position d'ancrage plutôt que le
+milieu du peloton.
+
+Et le dépliant **« Détail de la note » disparaît des fiches**. Il déroulait
+les quinze critères phrasés un à un, sous les quatre jauges qui disent déjà où
+la note se gagne et se perd. Le raisonnement complet reste public — la grille
+est décrite au lexique, et le code qui la calcule est ouvert — mais la fiche
+n'a pas à le dérouler pour être lue.
+
 ### Une seule courbe, assumée — le cône est mort
 
 « Je préfère qu'on assume une position, on ne parle pas de haut de

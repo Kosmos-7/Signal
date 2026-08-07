@@ -193,15 +193,6 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .fd-det summary:hover{border-color:rgba(116,182,223,.35)}
   .fd-det[open] summary{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
   .fd-det .fd-table{margin-top:10px}
-  /* Détail de la note v4 : lignes critère par critère, retraits grisés */
-  .nd{margin-top:14px}
-  .nd-b{font-family:var(--mono);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin:14px 0 4px}
-  .nd-r{display:flex;gap:12px;align-items:baseline;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
-  .nd-p{font-family:var(--mono);font-size:.78rem;color:var(--ac);white-space:nowrap;min-width:52px;text-align:right}
-  .nd-t{font-size:.85rem;color:var(--text2);line-height:1.5}
-  .nd-off .nd-p{color:var(--text3)}
-  .nd-off .nd-t{color:var(--text3);font-style:italic}
-  .nd-c{font-size:.8rem;color:var(--text3);margin-top:10px;line-height:1.55}
   .fd-syn{font-size:.85rem;color:var(--text2);line-height:1.65;margin:6px 0 14px;border-left:2px solid rgba(116,182,223,.35);padding-left:12px}
   .fd-syn p{margin:0 0 5px}
   .fd-syn b{color:var(--text)}
@@ -383,7 +374,7 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
 
 <header>
   <a class="brand" href="index.html"><span class="brand-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#22d98a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-name">Signal</span></a>
-  <nav><a href="index.html#/" class="active">Watchlists</a><a href="portfolio.html">Portefeuille IA</a><a href="actualites.html">Actualités</a><a href="apprendre.html">Apprendre</a></nav>
+  <nav><a href="index.html#/" class="active">Watchlists</a><a href="actualites.html">Actualités</a><a href="apprendre.html">Apprendre</a><a href="portfolio.html">Portefeuille IA</a></nav>
 </header>
 
 <div class="rail"><div class="rail-top"><a class="rail-back" href="#/">← Watchlists</a><span id="rw"></span></div><div class="rail-h"><span id="rc">—</span><span id="rn"></span></div><div class="rail-l" id="rl"></div><button class="rail-more" id="rmore" type="button"></button><a class="rail-lex" id="lexlink" href="#lexique">Lexique des signaux</a></div>
@@ -793,24 +784,6 @@ function meterN(l,p,m){
   if(p==null)return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="0"></span></span><span class="mval" title="Bloc non notable : critères retirés, note renormalisée sur le reste">—</span></div>';
   return'<div class="meter"><span>'+l+'</span><span class="t"><span class="f" data-w="'+(p/m*100)+'"></span></span><span class="mval">'+String(p).replace('.',',')+'/'+m+'</span></div>';
 }
-/* Dépliant « détail de la note » : les 16 critères phrasés du moteur v4,
-   groupés par bloc, retraits affichés avec leur motif. Niveau riche
-   uniquement (le compact de universe.json ne porte pas les critères). */
-function noteDetail(n){
-  if(!n||!Array.isArray(n.criteres)||!n.criteres.length)return'';
-  const BL={q:'Qualité',c:'Croissance',v:'Valorisation',m:'Momentum'};
-  let cur='',rows='';
-  n.criteres.forEach(c=>{
-    if(c.bloc!==cur){cur=c.bloc;rows+='<div class="nd-b">'+(BL[cur]||cur)+'</div>';}
-    rows+=c.pts==null
-      ?'<div class="nd-r nd-off"><span class="nd-p">retiré</span><span class="nd-t">'+sv(c.motif||'donnée indisponible')+'</span></div>'
-      :'<div class="nd-r"><span class="nd-p">'+String(c.pts).replace('.',',')+'/'+c.max+'</span><span class="nd-t">'+sv(c.phrase||'')+'</span></div>';
-  });
-  const couv=(n.couverture!=null&&n.couverture<100)
-    ?'<p class="nd-c">Couverture '+n.couverture+' % : un critère incalculable est retiré avec son motif et la note se renormalise sur le reste — un trou de donnée n\'est jamais compté zéro.</p>':'';
-  const nb=n.criteres.filter(c=>c.pts!=null).length;
-  return'<details class="fd-det nd"><summary>Détail de la note · '+nb+' critères notés'+(nb<n.criteres.length?' ('+(n.criteres.length-nb)+' retiré'+(n.criteres.length-nb>1?'s':'')+')':'')+'</summary>'+rows+couv+'</details>';
-}
 function sec(h,body,cls){return'<div class="sec '+(cls||'')+'"><div class="sec-h">'+h+'</div>'+body+'</div>';}
 function mk(k,v){return'<div><span class="k">'+k+'</span><span class="v">'+v+'</span></div>';}
 function bblist(arr){return arr&&arr.length?'<ul>'+arr.map(p=>'<li>'+sv(p)+'</li>').join('')+'</ul>':'<p class="stub">—</p>';}
@@ -846,7 +819,7 @@ lexi('Qualité · 35 pts','Les niveaux des comptes publiés : marge nette média
 lexi('Croissance · 25 pts','Les dérivées des comptes : croissance annuelle du CA (7) et du bénéfice par action, dilution comprise (7), régularité de la progression (4), croissance attendue par les analystes (7) — l\'estimé ne pèse jamais plus que le démontré.')+
 lexi('Valorisation · 25 pts','Le prix payé : PER face à sa propre médiane historique (8), PEG maison — PER prévisionnel ÷ la plus prudente des deux croissances (7), rendement des bénéfices attendus (5), rendement du cash (5) — remplacé pour les banques et assureurs par le cours rapporté aux actifs nets comptables, le multiple de référence des métiers de bilan.')+
 lexi('Momentum · 15 pts','Le cours face à lui-même, trois horizons : écart MM21/MM200 en continu (6), position dans le canal de régression décennal en cloche symétrique — l\'étirement pénalise dans les deux sens (6), RSI en cloche (3).')+
-      lexi('Critère retiré','Quand une donnée est incalculable (FCF d\'une banque, historique trop court, devise comptable différente de la cotation), le critère est <em>retiré avec son motif</em> — affiché dans le détail de la note — et la note se renormalise sur le reste. Un trou de donnée n\'est jamais compté zéro.'))+
+      lexi('Critère retiré','Quand une donnée est incalculable (FCF d\'une banque, historique trop court, devise comptable différente de la cotation), le critère est <em>retiré avec son motif</em> et la note se renormalise sur le reste. Un trou de donnée n\'est jamais compté zéro.'))+
     lexsec('Signaux de timing',
 lexi('Golden Cross / Death Cross','<em>Golden Cross</em> : la MM21 passe au-dessus de la MM200, signal haussier. <em>Death Cross</em> : MM21 sous MM200, baissier. Plus le croisement est récent, plus le signal pèse.')+
       lexi('MM21 / MM200','Moyennes mobiles sur 21 et 200 jours : elles lissent les soubresauts quotidiens. La <em>MM21</em> réagit vite (court terme), la <em>MM200</em> donne la tendance de fond.')+
@@ -1785,8 +1758,12 @@ function dataZone(s,b,compact){
       meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div></div>'+
     (compact?compactMetrics(s)
       :'<div class="metrics">'+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))
-        +'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>')+
-    noteDetail(b.note);
+        +'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>');
+  /* PLUS DE DÉPLIANT « DÉTAIL DE LA NOTE » (décision du propriétaire, 07/08).
+     Il listait les quinze critères phrasés un à un, sous les quatre jauges qui
+     disent déjà où la note se gagne et se perd. Le raisonnement complet reste
+     public — la grille est décrite au lexique, et le code qui la calcule est
+     ouvert — mais la fiche n'a pas à le dérouler pour être lue. */
 }
 
 function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElementById('doc');
