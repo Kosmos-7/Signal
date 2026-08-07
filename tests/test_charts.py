@@ -625,14 +625,14 @@ g = [(pr[i + 1]["ca"] / pr[i]["ca"] - 1) * 100 for i in range(1, len(pr) - 1)]
 check("la croissance décélère d'année en année vers le taux terminal",
       all(g[i] > g[i + 1] for i in range(len(g) - 1)), str([round(x, 1) for x in g]))
 check("le dernier pas approche les 3 % terminaux", g[-1] < 10, str(round(g[-1], 1)))
-# Plafond : une hypercroissance ne se prolonge pas telle quelle
+# Plafond : une croissance forte mais prolongeable (35 %/an) est bridée, pas refusée
 AN_HYPER = [{"fin": f"{y}-12-31", "ca": c} for y, c in
-            [(2022, 14), (2023, 10), (2024, 92), (2025, 530)]]
-ph = screener.projections(AN_HYPER, None, {"0y": 1400, "+1y": 2600}, "2025-12-31")
+            [(2022, 120), (2023, 160), (2024, 215), (2025, 290)]]
+ph = screener.projections(AN_HYPER, None, {"0y": 390, "+1y": 525}, "2025-12-31")
 g1 = (ph[2]["ca"] / ph[1]["ca"] - 1) * 100
-check("hypercroissance : le 1er pas extrapolé est bridé sous le plafond",
+check("croissance forte : le 1er pas extrapolé est bridé sous le plafond",
       g1 <= screener.PLAFOND_EXTRAPOLATION + 0.1, f"{g1:.1f} %")
-check("le consensus, lui, n'est PAS bridé (2 600 conservé)", ph[1]["ca"] == 2600)
+check("le consensus, lui, n'est PAS bridé (525 conservé)", ph[1]["ca"] == 525)
 # Un BPA en perte ne se prolonge pas — courbe qui ne veut rien dire (cas Nebius)
 AN_PERTE = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
             [(2023, 100, -1.0), (2024, 150, -2.0), (2025, 220, -0.5)]]
@@ -651,32 +651,79 @@ check("une année mixte est prudemment dite extrapolée",
       all(e["nature"] == "extrapolé" for e in
           screener.projections(AN_P, None, {"0y": 176, "+1y": 197}, "2025-12-31")[2:]))
 
-# ── Le cône : deux branches quand l'avenir est vraiment incertain ───────────
+# ── Le cône : deux branches quand l'avenir est incertain mais prolongeable ──
 # Leçon du 06/08 (signalée par le propriétaire) : une branche unique plafonnée
-# à 25 % écrasait un carnet de commandes contracté sous un a priori de
-# croissance ORGANIQUE — Nebius projeté à 3,8 Md$ quand le marché en discute
-# 33 à 46. On ne tranche plus : on publie les deux branches, l'écart mesurant
-# notre ignorance.
-CONTRACTE = [{"fin": f"{y}-12-31", "ca": c} for y, c in
-             [(2022, 14), (2023, 10), (2024, 92), (2025, 530)]]
-cn = screener.projections(CONTRACTE, None, {"0y": 3500, "+1y": 9000}, "2025-12-31")
+# à 25 % écrasait une croissance forte sous un a priori de croissance ORGANIQUE.
+# On ne tranche plus dans ce domaine : on publie les deux branches, l'écart
+# mesurant notre ignorance.
+cn = screener.projections(AN_HYPER, None, {"0y": 390, "+1y": 525}, "2025-12-31")
 check("le consensus ne porte JAMAIS de borne haute (ce n'est pas une opinion à nous)",
       all("ca_haut" not in e for e in cn if e["nature"] == "consensus"))
 check("les années extrapolées portent une fourchette",
       all("ca_haut" in e for e in cn if e["nature"] == "extrapolé"))
 check("la borne haute est au-dessus de la prudente",
       all(e["ca_haut"] > e["ca"] for e in cn if e["nature"] == "extrapolé"))
-check("la branche haute est bornée elle aussi (pas de 140 Md$ en 2030)",
-      cn[-1]["ca_haut"] < 25000, f'{cn[-1]["ca_haut"]:.0f}')
 g_h = (cn[-1]["ca_haut"] / cn[-2]["ca_haut"] - 1) * 100
 check("la branche haute décélère aussi vers le taux terminal",
-      g_h < screener.PLAFOND_HAUT, f"{g_h:.1f} %")
+      g_h < screener.SEUIL_REFUS, f"{g_h:.1f} %")
 # Sur un compounder régulier, les deux branches coïncident : pas de bruit
 REGULIER = [{"fin": f"{y}-12-31", "ca": c} for y, c in
             [(2021, 168), (2022, 198), (2023, 212), (2024, 245), (2025, 282)]]
 cr = screener.projections(REGULIER, None, {"0y": 315, "+1y": 352}, "2025-12-31")
 check("compounder régulier : aucune fourchette publiée, les branches coïncident",
       all("ca_haut" not in e for e in cr), str(cr[-1]))
+
+# ── Le refus de prolonger : une projection qu'on sait fausse ne s'affiche pas ─
+# Leçon du 07/08 (signalée par le propriétaire, sur Nebius) : au-delà d'un
+# certain rythme, les DEUX bornes du cône sont fausses — plafonner donnait
+# 18 Md$ en 2030 quand le marché en discute 33 à 46, ne pas plafonner donnait
+# 140 Md$. Élargir le cône n'est pas une réponse : on s'arrête, avec le motif.
+CONTRACTE = [{"fin": f"{y}-12-31", "ca": c} for y, c in
+             [(2022, 14), (2023, 10), (2024, 92), (2025, 530)]]
+nb = screener.projections(CONTRACTE, None, {"0y": 3500, "+1y": 9000}, "2025-12-31")
+check("hypercroissance : SEULS les deux exercices de consensus sortent",
+      [e["exercice"] for e in nb] == [2026, 2027], str(nb))
+check("et ils sont bien étiquetés consensus, repris tels quels",
+      [e["nature"] for e in nb] == ["consensus"] * 2
+      and [e["ca"] for e in nb] == [3500, 9000], str(nb))
+check("aucune borne haute inventée quand on refuse de prolonger",
+      all("ca_haut" not in e for e in nb))
+check("le motif d'arrêt est porté par la dernière ligne de la série",
+      "ca_arret" in nb[-1] and "ca_arret" not in nb[0], str(nb))
+check("le motif dit pourquoi, en français, sans jargon",
+      "engagements contractuels" in nb[-1]["ca_arret"], nb[-1].get("ca_arret", ""))
+# L'arrêt est PAR SÉRIE : un CA incalculable ne condamne pas un BPA prolongeable
+MIXTE = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
+         [(2023, 100, 1.0), (2024, 200, 1.2), (2025, 530, 1.4)]]
+mx = screener.projections(MIXTE, {"0y": 1.6, "+1y": 1.8}, {"0y": 3500, "+1y": 9000},
+                          "2025-12-31")
+check("série par série : le CA s'arrête, le BPA va quand même à 2030",
+      [e["exercice"] for e in mx] == [2026, 2027, 2028, 2029, 2030], str(mx))
+check("au-delà de l'arrêt, plus aucune valeur de CA n'est publiée",
+      all("ca" not in e for e in mx if e["exercice"] > 2027)
+      and all("eps" in e for e in mx), str(mx))
+check("le motif d'arrêt du CA ne prétend rien sur le BPA",
+      "ca_arret" in mx[1] and "eps_arret" not in mx[1], str(mx[1]))
+check("une société sans consensus et en hypercroissance démontrée ne dit rien",
+      screener.projections(CONTRACTE, None, None, "2025-12-31") == [])
+# La nature est publiée PAR SÉRIE : sans elle, un BPA extrapolé ferait passer
+# pour « extrapolé » un chiffre d'affaires qui est du consensus (bug vu sur NBIS)
+mixte = screener.projections(AN_P, None, {"0y": 176, "+1y": 197}, "2025-12-31")[0]
+check("chaque série porte sa propre nature, exacte",
+      mixte["ca_nature"] == "consensus" and mixte["eps_nature"] == "extrapolé", str(mixte))
+check("la nature de l'année reste la plus prudente des deux séries",
+      mixte["nature"] == "extrapolé", str(mixte))
+# Refus PAR LE BAS : le modèle décroît vers 3 %, il suppose un départ au-dessus.
+# Cas réel : le BPA de Nebius, −36 %/an constatés, était publié en HAUSSE à 2030.
+DECLIN = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
+          [(2022, 14, 1.59), (2023, 10, 0.60), (2024, 92, -2.28), (2025, 530, 0.40)]]
+dc = screener.projections(DECLIN, None, {"0y": 700, "+1y": 900}, "2025-12-31")
+check("un BPA au rythme démontré négatif n'est JAMAIS relevé à +3 %",
+      all("eps" not in e for e in dc), str(dc))
+check("le CA, lui, se projette normalement (les séries sont indépendantes)",
+      [e["exercice"] for e in dc] == [2026, 2027, 2028, 2029, 2030], str(dc))
+check("aucun motif d'arrêt inventé pour une série jamais commencée",
+      all("eps_arret" not in e for e in dc))
 
 # ── Historique profond, étage 1 : EDGAR parle aussi IFRS ────────────────────
 print("\n— EDGAR IFRS : les déposants étrangers entrent au greffe —")

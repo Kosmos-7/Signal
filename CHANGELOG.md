@@ -69,28 +69,50 @@ réellement retenue est rendue avec le taux, et la phrase de la fiche
 signale la sortie de pertes (« depuis le premier exercice bénéficiaire,
 sur 8 ans »). Arriver en perte reste sans multiple ni croissance. 9 tests.
 
-### La projection devient un cône : l'écart mesure notre ignorance
+### La projection s'arrête là où nous ne savons plus : le refus de prolonger
 
-Corrigé le soir même, sur signalement du propriétaire. La première version
-plafonnait la prolongation à 25 % par an et projetait Nebius à 3,8 Md$ de
-chiffre d'affaires en 2030, quand le marché en discute 33 à 46. Le plafond
-encodait un a priori de croissance **organique** — statistiquement fondé —
-appliqué à une société dont le chiffre d'affaires est largement **contracté**
-d'avance. Aucune donnée dont nous disposons ne distingue les deux régimes.
+Deux corrections successives, toutes deux sur signalement du propriétaire, et
+c'est la seconde qui tranche.
 
-- **Deux branches au lieu d'une.** La prudente reste bornée par la croissance
-  démontrée puis plafonnée à 25 % ; la haute prolonge le rythme que les
-  analystes projettent eux-mêmes, plafonnée à 50 % — sans cette seconde borne
-  le même Nebius atteignait 140 Md$, absurdité symétrique de la première.
-- **La borne haute n'est publiée que si elle diffère** : sur un compounder
-  régulier les deux branches coïncident et afficher une fourchette large de
-  zéro serait du bruit. Le consensus, lui, n'en porte jamais — ce n'est pas
-  une opinion à nous.
-- **À l'écran** : contour pointillé au-dessus de la barre prudente, et une
-  phrase qui dit ce que l'écart signifie. 6 tests de plus.
-- **Limite assumée, écrite dans le code** : notre arithmétique sous-estimera
-  toujours les carnets de commandes signés, dont le détail ne figure ni dans
-  les comptes publiés ni dans le consensus à deux ans.
+**Premier temps — le cône.** La version initiale plafonnait la prolongation à
+25 % par an et projetait Nebius à 3,8 Md$ de chiffre d'affaires en 2030, quand
+le marché en discute 33 à 46. Le plafond encodait un a priori de croissance
+**organique** — statistiquement fondé — appliqué à une société dont le chiffre
+d'affaires est largement **contracté** d'avance. La réponse fut de publier deux
+branches, l'écart mesurant notre ignorance.
+
+**Second temps — l'aveu.** « Oui mais du coup c'est faux sur Nebius. » Le cône
+ne réparait rien : élargi, il donnait 18 Md$ d'un côté et 140 Md$ de l'autre.
+Les DEUX bornes étaient fausses, et une fourchette de fausses valeurs reste une
+fausse valeur — en pire, parce qu'elle a l'air d'un travail d'analyse. La règle
+appliquée à la note depuis toujours vaut donc aussi pour les projections : **ce
+qu'on ne sait pas calculer n'est pas approximé, il est retiré avec son motif.**
+
+- **Deux refus explicites, par série.** *Par le haut* (rythme attendu > 50 %/an,
+  `SEUIL_REFUS`) : la trajectoire dépend d'engagements contractuels que ni les
+  comptes déposés ni le consensus à deux ans ne décrivent. *Par le bas* (rythme
+  de départ sous les 3 % terminaux) : le modèle DÉCROÎT vers 3 %, il suppose
+  donc un départ au-dessus — partir d'un rythme démontré négatif et le « faire
+  décroître » vers +3 % inventait une inflexion que rien n'annonce. C'est
+  exactement ce que nous publiions pour le BPA de Nebius : −36 % par an
+  constatés, affichés en hausse jusqu'en 2030.
+- **Le consensus, lui, reste affiché** — c'est un fait déposé. Nebius publie
+  donc 2026 et 2027, puis la courbe s'arrête, et la fiche dit pourquoi. Les
+  compounders réguliers vont toujours jusqu'en 2030.
+- **Le refus est par SÉRIE, pas par fiche** : un chiffre d'affaires
+  incalculable ne condamne pas un bénéfice prolongeable, et réciproquement.
+- **`nature` existe désormais en deux exemplaires** — par série (exacte) et par
+  année (la plus prudente des deux). Sans la version par série, un BPA extrapolé
+  faisait passer pour « extrapolé » un chiffre d'affaires qui était du
+  consensus publié : le bug était visible sur la fiche NBIS.
+- **Le cône survit là où il garde un sens**, entre 25 % et 50 % : la fourchette
+  est large mais ses deux bornes restent défendables.
+- 20 tests sur la fonction, plus une vérification navigateur sur NBIS (arrêt à
+  2027, motif affiché) et MSFT (trajectoire complète, cône intact).
+
+**Ce que cela coûte, assumé** : nous n'affichons plus de trajectoire à cinq ans
+pour les sociétés les plus spectaculaires du portefeuille. C'est le prix d'un
+chiffre en lequel on peut avoir confiance.
 
 ### On se tronquait soi-même : le plafond d'historique passe de 12 à 20 exercices
 
@@ -129,7 +151,8 @@ projection n'était visible.
   borné par la croissance démontrée (même prudence que le PEG) puis plafonné
   à 25 % — sans ce plafond, Nebius projetait un chiffre d'affaires multiplié
   par vingt en cinq ans ; et un BPA en perte n'est jamais prolongé, seul le
-  chiffre d'affaires l'est (cas Nebius, encore).
+  chiffre d'affaires l'est (cas Nebius, encore). *Ces gardes se sont révélées
+  insuffisantes le lendemain : voir « le refus de prolonger » ci-dessus.*
 - **Affichage** : barres hachurées, trait vertical séparant le publié de
   l'attendu, et une phrase sous le graphique qui dit où s'arrête l'opinion
   des analystes et où commence notre prolongation. Hors note, toujours.

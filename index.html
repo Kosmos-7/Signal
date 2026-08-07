@@ -1218,7 +1218,10 @@ function fondaRender(s){
   // séparées du publié par un trait vertical — on ne mélange jamais un chiffre
   // déposé et un chiffre attendu.
   const proj=(FD_MODE==='an'&&Array.isArray(F.proj))?F.proj:[];
-  const cols=rows.map(r=>({v:r,pr:false})).concat(proj.map(p=>({v:p,pr:true})));
+  // Ce graphique porte le CA et le résultat net : une année projetée sans CA
+  // (le CA s'arrête, le BPA continue) ne doit pas ouvrir une colonne vide.
+  const projC=proj.filter(p=>p.ca!=null);
+  const cols=rows.map(r=>({v:r,pr:false})).concat(projC.map(p=>({v:p,pr:true})));
   const W=NARROW?440:800,H=170,PB=22,n=cols.length;
   const val=(o,k)=>o.v[k]==null?null:o.v[k];
   const maxV=Math.max(...cols.map(o=>Math.max(val(o,'ca')||0,val(o,'ca_haut')||0,val(o,'rn')||0,1)));
@@ -1228,7 +1231,7 @@ function fondaRender(s){
   let bars='<defs><pattern id="fdhach" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">'+
     '<line x1="0" y1="0" x2="0" y2="5" stroke="#74b6df" stroke-width="2.4"/></pattern></defs>'+
     '<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="rgba(255,255,255,.10)"/>';
-  if(proj.length){const xSep=slot*rows.length;
+  if(projC.length){const xSep=slot*rows.length;
     bars+='<line x1="'+xSep+'" x2="'+xSep+'" y1="4" y2="'+(H-PB+2)+'" stroke="rgba(255,255,255,.22)" stroke-dasharray="3 3"/>';}
   // Au-delà de 8 périodes les étiquettes se chevauchent : une sur deux, la
   // dernière (période la plus récente) restant TOUJOURS étiquetée.
@@ -1266,17 +1269,29 @@ function fondaRender(s){
       '<span class="chx-rlbl">publié en '+sv(dev)+'</span></div>'+
     '<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net'+
-      (proj.length?'&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">▨</span> CA attendu':'')+'</div>'+
+      (projC.length?'&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">▨</span> CA attendu':'')+'</div>'+
     /* Le lecteur doit savoir, sans cliquer, où s'arrête l'opinion des
        analystes et où commence notre arithmétique. */
     (function(){if(!proj.length)return '';
-      const cons=proj.filter(p=>p.nature==='consensus').map(p=>p.exercice);
-      const ext=proj.filter(p=>p.nature==='extrapolé').map(p=>p.exercice);
+      /* On raconte la trajectoire du CHIFFRE D'AFFAIRES, la seule que ce
+         graphique dessine — donc sa nature à elle (`ca_nature`), pas la nature
+         prudente de l'année, qui bascule en « extrapolé » dès que le BPA
+         l'est et ferait passer un consensus publié pour notre arithmétique. */
+      const nat=p=>p.ca_nature||p.nature;
+      const cons=projC.filter(p=>nat(p)==='consensus').map(p=>p.exercice);
+      const ext=projC.filter(p=>nat(p)==='extrapolé').map(p=>p.exercice);
+      /* L'ARRÊT : quand le rythme attendu dépasse ce que nos sources savent
+         prolonger, le screener ne publie PAS de prolongation — il publie le
+         motif. Une projection qu'on sait fausse ne vaut pas mieux qu'un blanc :
+         elle vaut moins, parce qu'elle a l'air d'un fait. Le front dit donc
+         exactement où la trajectoire s'arrête, et pourquoi. */
+      const fin=projC.filter(p=>p.ca_arret)[0];
       return '<p class="fd-inline">Trajectoire attendue : <i>'+
         (cons.length?cons.join(' et ')+' d\'après le consensus des analystes':'')+
         (cons.length&&ext.length?', puis ':'')+
         (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous, à croissance décroissante vers 3 % — aucun analyste ne publie à cet horizon':'')+
         '.'+(proj.some(p=>p.ca_haut!=null)?' Le contour en pointillé donne la borne haute : elle s\'écarte quand la trajectoire dépend d\'un carnet de commandes plutôt que d\'une croissance organique, et cet écart mesure notre ignorance.':'')+
+        (fin?' Au-delà de '+fin.exercice+', nous n\'avançons rien : '+fin.ca_arret+'.':'')+
         '</i></p>';})()+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+

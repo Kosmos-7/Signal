@@ -709,20 +709,31 @@ CROISSANCE_TERMINALE = 3.0     # % — croissance nominale de long terme d'une �
 # (plafonnée, ci-dessous) et la haute, qui prolonge le rythme que les analystes
 # eux-mêmes projettent. L'écart entre les deux N'EST PAS un défaut d'affichage :
 # c'est la mesure de notre ignorance, et le lecteur a le droit de la voir.
+# Ce cône ne vaut toutefois que dans un domaine où PROLONGER a encore un sens ;
+# au-delà, on ne l'élargit pas indéfiniment, on s'arrête (voir SEUIL_REFUS).
 PLAFOND_EXTRAPOLATION = 25.0
-# Plafond de la branche HAUTE. Il en faut un aussi : le consensus d'une société
-# partie de presque rien implique des taux de plusieurs centaines de pourcent
-# (Nebius : +312 % par an entre 2025 et 2027), et les prolonger même en
-# décélérant produisait 140 Md$ en 2030 — une absurdité symétrique de celle que
-# le plafond bas avait créée. 50 % par an reste un rythme que très peu
-# d'entreprises ont tenu quatre ans d'affilée : c'est une borne haute, pas une
-# prévision.
-PLAFOND_HAUT = 50.0
+# SEUIL DE REFUS — au-delà, on ne prolonge plus DU TOUT.
+#
+# Ce seuil n'est pas un plafond : c'est une frontière de compétence. Quand le
+# consensus implique plus de 50 % par an (Nebius : +312 % entre 2025 et 2027),
+# les deux réponses arithmétiques sont fausses et nous l'avons vérifié sur ce
+# titre : plafonner donnait 18 Md$ en 2030 quand le marché en discute 33 à 46 ;
+# ne pas plafonner donnait 140 Md$. Un tel rythme signale une trajectoire portée
+# par des ENGAGEMENTS CONTRACTUELS — un carnet pluriannuel signé — que ni les
+# comptes publiés ni le consensus à deux ans ne décrivent. Aucune donnée dont
+# nous disposons ne permet de la prolonger honnêtement.
+#
+# On applique donc aux projections la règle déjà en vigueur pour la note : ce
+# qu'on ne sait pas calculer n'est pas approximé, il est RETIRÉ AVEC SON MOTIF.
+# Le consensus reste affiché — c'est un fait publié — et la courbe s'arrête là,
+# en disant pourquoi. Entre 25 % et 50 %, en revanche, le cône garde tout son
+# sens : la fourchette est large mais les deux bornes restent défendables.
+SEUIL_REFUS = 50.0
 
 
 def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
                 horizon=HORIZON_PROJECTION, g_terminale=CROISSANCE_TERMINALE,
-                plafond=PLAFOND_EXTRAPOLATION, plafond_haut=PLAFOND_HAUT):
+                plafond=PLAFOND_EXTRAPOLATION, seuil_refus=SEUIL_REFUS):
     """Trajectoire attendue du CA et du BPA jusqu'à `horizon`.
 
     DEUX NATURES DE LIGNES, JAMAIS CONFONDUES — c'est tout l'objet de cette
@@ -747,6 +758,12 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
     produirait une courbe qui ne veut rien dire (cas Nebius). Le CA, lui, se
     projette dès qu'il croît — c'est souvent la seule trajectoire lisible
     d'une société en phase d'investissement.
+
+    ET QUAND ON NE SAIT PAS, ON S'ARRÊTE. Si le rythme attendu dépasse
+    `seuil_refus`, la série n'est PAS prolongée du tout : seuls les exercices
+    de consensus sortent, et le dernier porte `<cle>_arret`, le motif à
+    afficher. Une projection qu'on sait fausse ne vaut pas mieux qu'un blanc :
+    elle vaut moins, parce qu'elle se donne l'air d'un fait.
 
     Pure et testable hors ligne. Rend [] si rien n'est projetable.
     """
@@ -773,6 +790,30 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
         return ((pts[-1][1] / pts[0][1]) ** (1 / (pts[-1][0] - pts[0][0])) - 1) * 100
 
     lignes = {}
+
+    def _poser(cle, vals, arret=None):
+        """Écrit une série dans `lignes`. `arret` = motif d'arrêt, porté par la
+        DERNIÈRE année de CETTE série (le CA peut s'arrêter là où le BPA
+        continue). `nature` existe en deux exemplaires : par série
+        (`<cle>_nature`, exacte) et par année (prudente, la plus incertaine des
+        deux séries) — sans la version par série, un BPA extrapolé ferait
+        passer pour « extrapolé » un chiffre d'affaires qui est du consensus."""
+        arr = 4 if cle == "eps" else 0
+        for annee in sorted(vals):
+            t = vals[annee]
+            ligne = lignes.setdefault(annee, {"exercice": annee})
+            ligne[cle] = round(t[0], arr)
+            ligne[cle + "_nature"] = t[1]
+            # La borne haute n'est publiée que si elle DIFFÈRE : sur un
+            # compounder régulier les deux branches coïncident, et afficher
+            # une fourchette large de zéro serait du bruit.
+            if len(t) > 2 and round(t[2], arr) != round(t[0], arr):
+                ligne[cle + "_haut"] = round(t[2], arr)
+            if ligne.get("nature") != "extrapolé":
+                ligne["nature"] = t[1]
+        if arret and vals:
+            lignes[max(vals)][cle + "_arret"] = arret
+
     for cle, est in (("ca", estimations_ca), ("eps", estimations_bpa)):
         base = _dernier(cle)
         if base is None or base <= 0:
@@ -792,11 +833,41 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
             if g_att is None:
                 continue                  # ni consensus ni historique : on ne prolonge pas
         g_dem = _tcam_demontre(cle)
-        # Branche PRUDENTE : bornée par le démontré puis plafonnée. Branche
-        # HAUTE : le rythme que les analystes projettent eux-mêmes, tel quel.
-        g_bas = min(g_att, g_dem) if g_dem is not None else g_att
-        g_bas = max(min(g_bas, plafond), g_terminale)
-        g_haut = max(min(g_att, plafond_haut), g_bas)
+        # Rythme de départ de la branche PRUDENTE, AVANT bornage : c'est lui
+        # qui dit si prolonger a un sens (l'estimé ne dépasse pas le prouvé,
+        # même prudence que le PEG).
+        g_dep = min(g_att, g_dem) if g_dem is not None else g_att
+        # ── LES DEUX REFUS DE PROLONGER ──────────────────────────────────
+        # Ce qu'on ne sait pas calculer n'est pas approximé : il est RETIRÉ
+        # AVEC SON MOTIF, exactement comme un critère de la note. Le consensus,
+        # lui, reste publié — c'est un fait déposé, pas une opinion à nous.
+        #
+        #  · PAR LE HAUT (au-delà de SEUIL_REFUS) : les deux bornes du cône
+        #    sont fausses, plafonner sous-estime et ne pas plafonner délire.
+        #  · PAR LE BAS (sous le taux terminal) : le modèle DÉCROÎT vers 3 %,
+        #    il suppose donc un départ au-dessus. Partir d'un rythme démontré
+        #    négatif et le « faire décroître » vers +3 % inventerait une
+        #    inflexion que rien n'annonce — c'est le cas du BPA de Nebius,
+        #    −36 % par an constatés, qu'on publiait en hausse jusqu'en 2030.
+        # Motifs rédigés comme des PROPOSITIONS, sans sujet ni ponctuation
+        # finale : le front les enchâsse dans sa phrase (« Au-delà de 2027,
+        # nous n'avançons rien : … »).
+        if g_att > seuil_refus:
+            _poser(cle, vals,
+                   "la suite dépend d'engagements contractuels que nos sources "
+                   "ne décrivent pas, et une projection qu'on sait fausse ne "
+                   "vaut pas mieux qu'un blanc")
+            continue
+        if g_dep < g_terminale:
+            _poser(cle, vals,
+                   "le rythme constaté ne soutient aucune prolongation "
+                   "crédible, et nous n'inventons pas d'inflexion")
+            continue
+        # Branche PRUDENTE : le rythme de départ, plafonné. Branche HAUTE : le
+        # rythme que les analystes projettent eux-mêmes, tel quel (il est sous
+        # le seuil de refus, sinon on ne serait pas ici).
+        g_bas = max(min(g_dep, plafond), g_terminale)
+        g_haut = max(g_att, g_bas)
         # 3) prolongation à croissance décroissante vers le taux terminal
         n = horizon - dernier_an
         v_bas = v_haut = dernier_val
@@ -805,19 +876,7 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
             v_bas *= 1 + (g_terminale + (g_bas - g_terminale) * fade) / 100
             v_haut *= 1 + (g_terminale + (g_haut - g_terminale) * fade) / 100
             vals[dernier_an + i] = (v_bas, "extrapolé", v_haut)
-        for annee, t in vals.items():
-            v, nat = t[0], t[1]
-            lignes.setdefault(annee, {"exercice": annee})
-            arr = 4 if cle == "eps" else 0
-            lignes[annee][cle] = round(v, arr)
-            # La borne haute n'est publiée que si elle DIFFÈRE : sur un
-            # compounder régulier les deux branches coïncident, et afficher
-            # une fourchette large de zéro serait du bruit.
-            if len(t) > 2 and round(t[2], arr) != round(v, arr):
-                lignes[annee][cle + "_haut"] = round(t[2], arr)
-            # une année mixte (CA extrapolé, BPA consensus) est dite extrapolée
-            if lignes[annee].get("nature") != "extrapolé":
-                lignes[annee]["nature"] = nat
+        _poser(cle, vals)
     return [lignes[a] for a in sorted(lignes)]
 
 
