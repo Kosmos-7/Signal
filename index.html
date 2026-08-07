@@ -1512,8 +1512,19 @@ function fondaRender(s){
          Le pourquoi (décroissance vers 3 %, borne haute, source à deux
          exercices — PAS « aucun analyste ne publie », c'était faux) part
          dans la bulle. */
+      /* SUR QUOI REPOSE CETTE COURBE. Depuis qu'elle est unique et assumée,
+         elle a l'autorité d'une affirmation — mais ses fondations sont très
+         inégales : cinquante analystes sur Alphabet, DEUX sur Constellation
+         Energy ; un désaccord de ±1 % sur Booking, ±16 % sur Nebius. Le dire
+         coûte six mots et change la confiance qu'on accorde à la ligne. */
+      const _cs=F.consensus||{};
+      const _socle=[
+        _cs.analystes?_cs.analystes+' analyste'+(_cs.analystes>1?'s':''):'',
+        _cs.ecart_pct!=null?'ils divergent de ±'+String(_cs.ecart_pct).replace('.',',')+' %':''
+      ].filter(Boolean).join(', ');
       return '<p class="fd-inline">Trajectoire attendue : <i>'+
-        (cons.length?cons.join(' et ')+' d\'après le consensus des analystes':'')+
+        (cons.length?cons.join(' et ')+' d\'après le consensus des analystes'
+          +(_socle?' ('+_socle+')':''):'')+
         (cons.length&&ext.length?', puis ':'')+
         (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous':'')+'.'+
         (fin?' Au-delà de '+fin.exercice+', nous n\'avançons rien : '+fin.ca_arret+'.':'')+

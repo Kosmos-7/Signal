@@ -459,11 +459,22 @@ check("la trajectoire attendue SURVIT à la fusion (bug du 07/08)", f.get("proj"
 f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": [], "proj": PJ},
                              {"devise": "USD", "an": [], "tr": []})
 check("une trajectoire retirée ne revient pas par la fusion", "proj" not in f)
+# Même règle pour la solidité du consensus : elle décrit le run courant.
+fc = screener.fusionner_fonda(
+    {"devise": "USD", "an": [], "tr": [], "consensus": {"analystes": 9}},
+    {"devise": "USD", "an": [], "tr": [], "consensus": {"analystes": 38}})
+check("la solidité du consensus est celle du run courant, jamais d'hier",
+      fc["consensus"] == {"analystes": 38}, str(fc.get("consensus")))
+check("un consensus disparu ne ressuscite pas",
+      "consensus" not in screener.fusionner_fonda(
+          {"devise": "USD", "an": [], "tr": [], "consensus": {"analystes": 9}},
+          {"devise": "USD", "an": [], "tr": []}))
 # Garde-fou générique : tout champ de `fonda` que la fusion ignore disparaît.
 # Ce test échouera dès qu'un nouveau champ sera ajouté sans être traité ici.
-CHAMPS = {"devise", "an", "tr", "pe_prev", "proj"}
+CHAMPS = {"devise", "an", "tr", "pe_prev", "proj", "consensus"}
 plein = {"devise": "USD", "an": [{"fin": "2025-12-31", "ca": 1}], "tr": [],
-         "pe_prev": [{"exercice": 2026, "per": 30.0}], "proj": PJ}
+         "pe_prev": [{"exercice": 2026, "per": 30.0}], "proj": PJ,
+         "consensus": {"analystes": 38, "ecart_pct": 3.7}}
 check("aucun champ de fonda n'est perdu en silence par la fusion",
       set(screener.fusionner_fonda(plein, plein)) == CHAMPS,
       str(CHAMPS ^ set(screener.fusionner_fonda(plein, plein))))
@@ -774,6 +785,50 @@ dc = screener.projections(DECLIN, None, {"0y": 340, "+1y": 380}, "2025-12-31")
 check("un passé en déclin fait toujours REFUSER la prolongation",
       all(e["nature"] == "consensus" for e in dc)
       and any("ca_arret" in e for e in dc), str(dc[-1]))
+
+# ── Sur quoi repose le consensus (relevé par la sonde du 07/08) ──────────────
+# Les tables d'estimations portent le nombre d'analystes et la fourchette
+# basse/haute, jamais lus jusqu'ici. L'écart est considérable — 50 analystes
+# sur Alphabet, DEUX sur Constellation Energy — et depuis que la trajectoire
+# est une courbe unique et assumée, elle a l'autorité d'une affirmation.
+class _TableEst:
+    """Imite juste ce que le code lit d'une table yfinance."""
+    def __init__(self, index, columns, data):
+        self.index, self.columns, self._d = index, columns, data
+    @property
+    def loc(self):
+        d = self._d
+        class _L:
+            def __getitem__(self, k): return d[k[0]][k[1]]
+        return _L()
+
+# Valeurs telles que Yahoo les renvoie RÉELLEMENT pour TSMC : le chiffre
+# d'affaires arrive en CHAÎNES là où le bénéfice arrive en flottants, et la
+# devise du consensus de CA est la devise COMPTABLE (TWD), pas la cotation.
+TSM_RE = _TableEst(["0q", "+1q", "0y", "+1y"],
+                   ["avg", "low", "high", "numberOfAnalysts", "currency"],
+                   {"0y": {"avg": "5420351505550", "low": "5157000000000",
+                           "high": "5557455540670", "numberOfAnalysts": "38",
+                           "currency": "TWD"}})
+s = screener._solidite_consensus(TSM_RE)
+check("le nombre d'analystes est lu même sérialisé en texte", s["analystes"] == 38, str(s))
+check("le désaccord est une DEMI-fourchette rapportée à la moyenne",
+      s["ecart_pct"] == 3.7, str(s))
+check("la devise du consensus est lue TELLE QU'ÉTIQUETÉE (TWD, pas la cotation)",
+      s["devise"] == "TWD", str(s))
+check("une table sans colonnes ne lève pas, elle se tait",
+      screener._solidite_consensus(_TableEst(["0y"], [], {"0y": {}})) is None)
+check("une table absente se tait aussi", screener._solidite_consensus(None) is None)
+# Une fourchette incohérente ne doit pas produire un écart négatif : on garde
+# ce qui est lisible et on jette ce qui ne l'est pas.
+INCO = _TableEst(["0y"], ["avg", "low", "high", "numberOfAnalysts"],
+                 {"0y": {"avg": 100, "low": 120, "high": 80, "numberOfAnalysts": 2}})
+check("fourchette inversée : l'écart est écarté, le compte d'analystes reste",
+      screener._solidite_consensus(INCO) == {"analystes": 2},
+      str(screener._solidite_consensus(INCO)))
+check("NaN et texte non numérique donnent None, pas une exception",
+      screener._nombre(float("nan")) is None and screener._nombre("n/a") is None
+      and screener._nombre("38") == 38.0)
 
 # ── Croissance trimestrielle : calculée sur NOTRE série, pas lue chez Yahoo ──
 # Question du propriétaire, 07/08 : « Croiss CA · a/a +12,7 %, ça correspond à

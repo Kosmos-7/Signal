@@ -995,6 +995,54 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
     return [lignes[a] for a in sorted(lignes)]
 
 
+def _nombre(v):
+    """Convertit en float ce que Yahoo sérialise parfois en texte.
+
+    Relevé par la sonde du 07/08 : dans `revenue_estimate`, `avg`, `low`, `high`
+    et `numberOfAnalysts` arrivent en CHAÎNES ("5420351505550"), alors que les
+    mêmes colonnes de `earnings_estimate` arrivent en flottants. Supposer l'un
+    ou l'autre casse une fois sur deux."""
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return None
+    return f if f == f else None            # NaN → None
+
+
+def _solidite_consensus(table, cle="0y"):
+    """Sur quoi repose le consensus : combien d'analystes, et quel désaccord.
+
+    POURQUOI C'EST PUBLIÉ. Depuis que la trajectoire est une courbe unique et
+    assumée, elle a l'autorité d'une affirmation. Or la sonde a mesuré des
+    fondations très inégales : 50 analystes sur Alphabet contre DEUX sur
+    Constellation Energy, une fourchette de ±1 % sur Booking contre ±16 % sur
+    Nebius. Le lecteur a besoin de savoir laquelle il regarde.
+
+    `ecart_pct` est la DEMI-fourchette rapportée à la moyenne : « ±4 % » se lit
+    directement comme le désaccord entre analystes, alors qu'un rapport
+    haut/bas demande un calcul mental.
+    """
+    try:
+        if table is None or cle not in table.index:
+            return None
+        cols = getattr(table, "columns", [])
+        n = _nombre(table.loc[cle, "numberOfAnalysts"]) if "numberOfAnalysts" in cols else None
+        lo = _nombre(table.loc[cle, "low"]) if "low" in cols else None
+        hi = _nombre(table.loc[cle, "high"]) if "high" in cols else None
+        av = _nombre(table.loc[cle, "avg"]) if "avg" in cols else None
+        dev = table.loc[cle, "currency"] if "currency" in cols else None
+    except Exception:
+        return None
+    out = {}
+    if n is not None and n > 0:
+        out["analystes"] = int(n)
+    if lo is not None and hi is not None and av and av > 0 and hi >= lo:
+        out["ecart_pct"] = round((hi - lo) / 2 / av * 100, 1)
+    if isinstance(dev, str) and dev:
+        out["devise"] = dev
+    return out or None
+
+
 def croissance_ca_trimestrielle(tr):
     """Croissance du CA du dernier trimestre publié, en glissement annuel (%).
 
@@ -1114,6 +1162,13 @@ def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
     # doit être ajouté ICI.
     if nouveau.get("proj"):
         out["proj"] = nouveau["proj"]
+    # Même règle que `proj`, et pour la même raison : la solidité du consensus
+    # décrit le run COURANT (combien d'analystes suivent la société
+    # aujourd'hui, de combien ils divergent). Reprendre celle d'hier
+    # attribuerait à la trajectoire d'aujourd'hui des fondations qui ne sont
+    # plus les siennes.
+    if nouveau.get("consensus"):
+        out["consensus"] = nouveau["consensus"]
     return out
 
 
@@ -2252,6 +2307,7 @@ def score_ticker(ticker, vix=None):
                     # sur deux exercices, prolongation à croissance
                     # décroissante au-delà. Hors note, purement informationnel.
                     est_ca = None
+                    solidite = None
                     try:
                         re_ = data.revenue_estimate
                         if re_ is not None and "avg" in getattr(re_, "columns", []):
@@ -2259,12 +2315,29 @@ def score_ticker(ticker, vix=None):
                                           if k in re_.index
                                           and re_.loc[k, "avg"] == re_.loc[k, "avg"] else None)
                                       for k in ("0y", "+1y")}
+                            # SUR QUOI REPOSE LE CONSENSUS. Relevé par la sonde
+                            # du 07/08 : ces tables portent aussi le NOMBRE
+                            # D'ANALYSTES et la fourchette basse/haute, que nous
+                            # n'avions jamais lus. L'écart est considérable —
+                            # 50 analystes sur Alphabet, DEUX sur Constellation
+                            # Energy ; une fourchette de ±1 % sur Booking, ±16 %
+                            # sur Nebius. Publier une trajectoire sans dire sur
+                            # quoi elle repose donne la même autorité apparente
+                            # aux deux. Les valeurs arrivent parfois en CHAÎNES
+                            # (le CA est sérialisé en texte, pas le BPA), d'où
+                            # la conversion défensive.
+                            solidite = _solidite_consensus(re_)
                     except Exception:
                         est_ca = None
+                        solidite = None
                     proj = projections(fonda["an"], est, est_ca, dernier,
                                        meme_devise)
                     if proj:
                         fonda["proj"] = proj
+                        # Porté à côté de la trajectoire, jamais dedans : c'est
+                        # une qualité de la SOURCE, pas une valeur projetée.
+                        if solidite:
+                            fonda["consensus"] = solidite
                 except Exception as e:
                     print(f"  ⚠️  {ticker}: PER historique/prévisionnel en échec ({type(e).__name__})")
                 chart["fonda"] = fonda
