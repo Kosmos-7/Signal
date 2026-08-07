@@ -797,7 +797,8 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
     return [lignes[a] for a in sorted(lignes)]
 
 
-def fusionner_fonda(ancien, nouveau, max_an=12, max_tr=20):
+def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
+                    max_tr=edgar.MAX_TRIMESTRES):
     """Accumule l'historique des chiffres publiés entre les runs.
 
     Yahoo ne conserve que ~5 trimestres : sans mémoire, un trimestre sorti de

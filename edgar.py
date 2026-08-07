@@ -90,6 +90,14 @@ def eligible(ticker):
     """Ce ticker peut-il avoir un dossier à la SEC ? (US natif ou 20-F mappé)"""
     return "." not in (ticker or "") or ticker in US_EQUIV
 
+# Profondeur conservée par titre. Relevé de 12 à 20 exercices le 06/08/2026 :
+# le relevé du soir a montré que 52 fiches sur 97 butaient EXACTEMENT sur
+# l'ancien plafond — elles n'étaient pas limitées par la source mais tronquées
+# par nous, alors que le greffe remonte jusqu'à 2008 pour certains émetteurs.
+# Coût : ~50 octets par exercice et par fiche, négligeable.
+MAX_EXERCICES = 20
+MAX_TRIMESTRES = 24
+
 _CIK = None            # cache du mapping ticker → CIK, un fetch par run
 _FRAME_AN = re.compile(r"CY\d{4}\Z")
 _FRAME_TR = re.compile(r"CY\d{4}Q[1-4]\Z")
@@ -326,7 +334,7 @@ def completer_fonda(fonda, ed):
     if not fonda or not ed:
         return fonda
     ref = [(int(e["fin"][:4]), e["ca"]) for e in fonda.get("an", []) if e.get("ca")]
-    for cle, borne in (("an", 12), ("tr", 20)):
+    for cle, borne in (("an", MAX_EXERCICES), ("tr", MAX_TRIMESTRES)):
         ajouts = []
         for e in ed.get(cle) or []:
             if any(_proches(e["fin"], x["fin"]) for x in fonda.get(cle, [])):

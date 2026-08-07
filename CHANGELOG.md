@@ -69,6 +69,22 @@ réellement retenue est rendue avec le taux, et la phrase de la fiche
 signale la sortie de pertes (« depuis le premier exercice bénéficiaire,
 sur 8 ans »). Arriver en perte reste sans multiple ni croissance. 9 tests.
 
+### On se tronquait soi-même : le plafond d'historique passe de 12 à 20 exercices
+
+Trouvé en cherchant comment un concurrent affiche quarante ans d'historique.
+Relevé sur les fiches publiées : **52 sur 97 comptaient EXACTEMENT 12
+exercices**, le plafond de l'accumulateur. Elles n'étaient pas limitées par la
+source — le greffe de la SEC nous rendait déjà des exercices jusqu'à 2008 —
+mais coupées par notre propre garde-fou de taille, hérité de l'époque où
+seule la fenêtre Yahoo de 4 exercices existait.
+
+- `MAX_EXERCICES` (20) et `MAX_TRIMESTRES` (24) nommés dans `edgar.py`,
+  partagés par les DEUX points de troncature (l'apport EDGAR et
+  l'accumulateur inter-run) qui les codaient en dur chacun de son côté.
+- Coût : ~50 octets par exercice et par fiche. Gain : jusqu'à huit exercices
+  de plus pour les 52 titres concernés, donc des médianes de PER et des
+  taux de croissance calculés sur une vraie durée.
+
 ### Trajectoire attendue jusqu'à 2030, et les multiples enfin affichés
 
 Deux manques signalés par le propriétaire sur la fiche Nebius : le PER

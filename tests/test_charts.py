@@ -388,10 +388,21 @@ check("premier run (pas d'ancien) : le nouveau passe tel quel",
 check("extraction en échec : l'ancien historique n'est PAS perdu",
       screener.fusionner_fonda(ANCIEN, None) is ANCIEN)
 GROS = {"devise": "USD", "an": [],
-        "tr": [{"fin": f"20{15+i//4}-{(3*(i%4)+3):02d}-30", "ca": i} for i in range(28)]}
+        "tr": [{"fin": f"20{10+i//4}-{(3*(i%4)+3):02d}-30", "ca": i} for i in range(30)]}
 f = screener.fusionner_fonda(GROS, {"devise": "USD", "an": [], "tr": []})
-check("garde-fou de croissance : 20 trimestres conservés au plus, les plus récents",
-      len(f["tr"]) == 20 and f["tr"][-1]["ca"] == 27)
+check("garde-fou de croissance : le plafond de trimestres borne, les plus récents survivent",
+      len(f["tr"]) == screener.edgar.MAX_TRIMESTRES and f["tr"][-1]["ca"] == 29,
+      f'{len(f["tr"])} trimestres')
+# Le plafond est un garde-fou de TAILLE, pas une limite de profondeur : il a
+# été relevé le 06/08 après avoir constaté que 52 fiches sur 97 butaient
+# exactement dessus — elles étaient tronquées par nous, pas par la source.
+check("les deux points de troncature partagent le même plafond nommé",
+      screener.fusionner_fonda.__defaults__[0] == screener.edgar.MAX_EXERCICES)
+GROS_AN = {"devise": "USD", "tr": [],
+           "an": [{"fin": f"{2000+i}-12-31", "ca": i} for i in range(26)]}
+fa = screener.fusionner_fonda(GROS_AN, {"devise": "USD", "an": [], "tr": []})
+check("l'historique annuel est borné au plafond, les exercices récents gardés",
+      len(fa["an"]) == screener.edgar.MAX_EXERCICES and fa["an"][-1]["ca"] == 25)
 f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": [],
                               "pe_prev": [{"exercice": 2026, "per": 30.0}]},
                              {"devise": "USD", "an": [], "tr": []})
