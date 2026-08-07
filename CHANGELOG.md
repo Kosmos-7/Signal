@@ -69,6 +69,29 @@ réellement retenue est rendue avec le taux, et la phrase de la fiche
 signale la sortie de pertes (« depuis le premier exercice bénéficiaire,
 sur 8 ans »). Arriver en perte reste sans multiple ni croissance. 9 tests.
 
+### La projection devient un cône : l'écart mesure notre ignorance
+
+Corrigé le soir même, sur signalement du propriétaire. La première version
+plafonnait la prolongation à 25 % par an et projetait Nebius à 3,8 Md$ de
+chiffre d'affaires en 2030, quand le marché en discute 33 à 46. Le plafond
+encodait un a priori de croissance **organique** — statistiquement fondé —
+appliqué à une société dont le chiffre d'affaires est largement **contracté**
+d'avance. Aucune donnée dont nous disposons ne distingue les deux régimes.
+
+- **Deux branches au lieu d'une.** La prudente reste bornée par la croissance
+  démontrée puis plafonnée à 25 % ; la haute prolonge le rythme que les
+  analystes projettent eux-mêmes, plafonnée à 50 % — sans cette seconde borne
+  le même Nebius atteignait 140 Md$, absurdité symétrique de la première.
+- **La borne haute n'est publiée que si elle diffère** : sur un compounder
+  régulier les deux branches coïncident et afficher une fourchette large de
+  zéro serait du bruit. Le consensus, lui, n'en porte jamais — ce n'est pas
+  une opinion à nous.
+- **À l'écran** : contour pointillé au-dessus de la barre prudente, et une
+  phrase qui dit ce que l'écart signifie. 6 tests de plus.
+- **Limite assumée, écrite dans le code** : notre arithmétique sous-estimera
+  toujours les carnets de commandes signés, dont le détail ne figure ni dans
+  les comptes publiés ni dans le consensus à deux ans.
+
 ### On se tronquait soi-même : le plafond d'historique passe de 12 à 20 exercices
 
 Trouvé en cherchant comment un concurrent affiche quarante ans d'historique.

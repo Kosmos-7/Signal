@@ -1221,7 +1221,7 @@ function fondaRender(s){
   const cols=rows.map(r=>({v:r,pr:false})).concat(proj.map(p=>({v:p,pr:true})));
   const W=NARROW?440:800,H=170,PB=22,n=cols.length;
   const val=(o,k)=>o.v[k]==null?null:o.v[k];
-  const maxV=Math.max(...cols.map(o=>Math.max(val(o,'ca')||0,val(o,'rn')||0,1)));
+  const maxV=Math.max(...cols.map(o=>Math.max(val(o,'ca')||0,val(o,'ca_haut')||0,val(o,'rn')||0,1)));
   const minV=Math.min(0,...cols.map(o=>Math.min(val(o,'rn')==null?0:val(o,'rn'),0)));
   const y0=8+(H-PB-16)*(maxV/(maxV-minV)), sc=(H-PB-16)/(maxV-minV);
   const slot=W/n, bw=Math.min(34,slot*0.22);
@@ -1237,6 +1237,11 @@ function fondaRender(s){
     const r=o.v, cx=slot*i+slot/2, last=(i===rows.length-1), op=o.pr?0.9:(last?1:0.45);
     const fCa=o.pr?'url(#fdhach)':'#74b6df';
     if(r.ca!=null){const h=r.ca*sc;
+      /* Le CÔNE : quand les deux branches divergent (carnet contracté vs
+         croissance organique), la fourchette se dessine en contour au-dessus
+         de la barre prudente. L'écart EST l'information. */
+      if(o.pr&&r.ca_haut!=null){const hh=r.ca_haut*sc;
+        bars+='<rect x="'+(cx-bw-2)+'" y="'+(y0-hh)+'" width="'+bw+'" height="'+Math.max(2,hh-h)+'" fill="none" stroke="#74b6df" stroke-width="1" stroke-dasharray="2 2" opacity=".55"/>';}
       bars+='<rect x="'+(cx-bw-2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+fCa+'" opacity="'+op+'"/>';}
     if(!o.pr&&r.rn!=null){const h=r.rn*sc, neg=r.rn<0;
       bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':'#c6c6e0')+'" opacity="'+(neg?0.8:op*0.75)+'"/>';}
@@ -1271,7 +1276,8 @@ function fondaRender(s){
         (cons.length?cons.join(' et ')+' d\'après le consensus des analystes':'')+
         (cons.length&&ext.length?', puis ':'')+
         (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous, à croissance décroissante vers 3 % — aucun analyste ne publie à cet horizon':'')+
-        '.</i></p>';})()+
+        '.'+(proj.some(p=>p.ca_haut!=null)?' Le contour en pointillé donne la borne haute : elle s\'écarte quand la trajectoire dépend d\'un carnet de commandes plutôt que d\'une croissance organique, et cet écart mesure notre ignorance.':'')+
+        '</i></p>';})()+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table></details>'+

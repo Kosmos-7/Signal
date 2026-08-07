@@ -694,19 +694,35 @@ def per_previsionnel(prix, estimations, dernier_exercice):
 
 HORIZON_PROJECTION = 2030
 CROISSANCE_TERMINALE = 3.0     # % — croissance nominale de long terme d'une économie développée
-# Plafond du taux de DÉPART de la prolongation. Au-delà de ~25 % par an, la
-# littérature de valorisation classe l'hypothèse en « très spéculative » :
-# prolonger le rythme d'une hypercroissance sur plusieurs années surestime
-# presque toujours. Nebius sans ce plafond projetait un chiffre d'affaires
-# multiplié par vingt entre 2025 et 2030 — un chiffre que personne ne
-# défendrait à voix haute. Le plafond ne touche PAS le consensus des
-# analystes, qui reste publié tel quel : il ne borne que notre prolongation.
+# Plafond du taux de départ de la BRANCHE PRUDENTE de la prolongation.
+#
+# CE QUE CE PLAFOND SUPPOSE, ET QUAND IL A TORT. Au-delà de ~25 % par an, la
+# littérature classe l'hypothèse en « très spéculative » — pour une croissance
+# ORGANIQUE. Mais une société dont le chiffre d'affaires est déjà contracté
+# (carnet de commandes pluriannuel signé) n'obéit pas à cette base statistique :
+# le premier jet de cette fonction projetait Nebius à 3,8 Md$ en 2030 quand le
+# marché en discute 33 à 46, parce que le plafond écrasait un carnet signé sous
+# un a priori de croissance organique. Aucune donnée dont nous disposons ne
+# permet de distinguer les deux régimes automatiquement.
+#
+# D'où la réponse : ne PAS trancher, et publier les DEUX branches. La prudente
+# (plafonnée, ci-dessous) et la haute, qui prolonge le rythme que les analystes
+# eux-mêmes projettent. L'écart entre les deux N'EST PAS un défaut d'affichage :
+# c'est la mesure de notre ignorance, et le lecteur a le droit de la voir.
 PLAFOND_EXTRAPOLATION = 25.0
+# Plafond de la branche HAUTE. Il en faut un aussi : le consensus d'une société
+# partie de presque rien implique des taux de plusieurs centaines de pourcent
+# (Nebius : +312 % par an entre 2025 et 2027), et les prolonger même en
+# décélérant produisait 140 Md$ en 2030 — une absurdité symétrique de celle que
+# le plafond bas avait créée. 50 % par an reste un rythme que très peu
+# d'entreprises ont tenu quatre ans d'affilée : c'est une borne haute, pas une
+# prévision.
+PLAFOND_HAUT = 50.0
 
 
 def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
                 horizon=HORIZON_PROJECTION, g_terminale=CROISSANCE_TERMINALE,
-                plafond=PLAFOND_EXTRAPOLATION):
+                plafond=PLAFOND_EXTRAPOLATION, plafond_haut=PLAFOND_HAUT):
     """Trajectoire attendue du CA et du BPA jusqu'à `horizon`.
 
     DEUX NATURES DE LIGNES, JAMAIS CONFONDUES — c'est tout l'objet de cette
@@ -768,29 +784,37 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
             if v and v > 0:
                 vals[an0 + 1 + i] = (v, "consensus")
                 dernier_val, dernier_an = v, an0 + 1 + i
-        # 2) le rythme de départ de la prolongation
+        # 2) le rythme de départ, en DEUX branches
         if dernier_an > an0:
-            g = (dernier_val / base) ** (1 / (dernier_an - an0)) - 1
-            g *= 100
+            g_att = ((dernier_val / base) ** (1 / (dernier_an - an0)) - 1) * 100
         else:
-            g = _tcam_demontre(cle)
-            if g is None:
+            g_att = _tcam_demontre(cle)
+            if g_att is None:
                 continue                  # ni consensus ni historique : on ne prolonge pas
         g_dem = _tcam_demontre(cle)
-        if g_dem is not None:
-            g = min(g, g_dem)             # l'estimé ne dépasse pas le démontré
-        g = min(g, plafond)               # une hypercroissance ne se prolonge pas telle quelle
-        if g <= g_terminale:
-            g = max(g, g_terminale)       # une décroissance ne se prolonge pas
+        # Branche PRUDENTE : bornée par le démontré puis plafonnée. Branche
+        # HAUTE : le rythme que les analystes projettent eux-mêmes, tel quel.
+        g_bas = min(g_att, g_dem) if g_dem is not None else g_att
+        g_bas = max(min(g_bas, plafond), g_terminale)
+        g_haut = max(min(g_att, plafond_haut), g_bas)
         # 3) prolongation à croissance décroissante vers le taux terminal
         n = horizon - dernier_an
+        v_bas = v_haut = dernier_val
         for i in range(1, n + 1):
-            g_i = g_terminale + (g - g_terminale) * (1 - i / (n + 1))
-            dernier_val *= 1 + g_i / 100
-            vals[dernier_an + i] = (dernier_val, "extrapolé")
-        for annee, (v, nat) in vals.items():
+            fade = 1 - i / (n + 1)
+            v_bas *= 1 + (g_terminale + (g_bas - g_terminale) * fade) / 100
+            v_haut *= 1 + (g_terminale + (g_haut - g_terminale) * fade) / 100
+            vals[dernier_an + i] = (v_bas, "extrapolé", v_haut)
+        for annee, t in vals.items():
+            v, nat = t[0], t[1]
             lignes.setdefault(annee, {"exercice": annee})
-            lignes[annee][cle] = round(v, 4 if cle == "eps" else 0)
+            arr = 4 if cle == "eps" else 0
+            lignes[annee][cle] = round(v, arr)
+            # La borne haute n'est publiée que si elle DIFFÈRE : sur un
+            # compounder régulier les deux branches coïncident, et afficher
+            # une fourchette large de zéro serait du bruit.
+            if len(t) > 2 and round(t[2], arr) != round(v, arr):
+                lignes[annee][cle + "_haut"] = round(t[2], arr)
             # une année mixte (CA extrapolé, BPA consensus) est dite extrapolée
             if lignes[annee].get("nature") != "extrapolé":
                 lignes[annee]["nature"] = nat

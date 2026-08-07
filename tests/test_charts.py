@@ -651,6 +651,33 @@ check("une année mixte est prudemment dite extrapolée",
       all(e["nature"] == "extrapolé" for e in
           screener.projections(AN_P, None, {"0y": 176, "+1y": 197}, "2025-12-31")[2:]))
 
+# ── Le cône : deux branches quand l'avenir est vraiment incertain ───────────
+# Leçon du 06/08 (signalée par le propriétaire) : une branche unique plafonnée
+# à 25 % écrasait un carnet de commandes contracté sous un a priori de
+# croissance ORGANIQUE — Nebius projeté à 3,8 Md$ quand le marché en discute
+# 33 à 46. On ne tranche plus : on publie les deux branches, l'écart mesurant
+# notre ignorance.
+CONTRACTE = [{"fin": f"{y}-12-31", "ca": c} for y, c in
+             [(2022, 14), (2023, 10), (2024, 92), (2025, 530)]]
+cn = screener.projections(CONTRACTE, None, {"0y": 3500, "+1y": 9000}, "2025-12-31")
+check("le consensus ne porte JAMAIS de borne haute (ce n'est pas une opinion à nous)",
+      all("ca_haut" not in e for e in cn if e["nature"] == "consensus"))
+check("les années extrapolées portent une fourchette",
+      all("ca_haut" in e for e in cn if e["nature"] == "extrapolé"))
+check("la borne haute est au-dessus de la prudente",
+      all(e["ca_haut"] > e["ca"] for e in cn if e["nature"] == "extrapolé"))
+check("la branche haute est bornée elle aussi (pas de 140 Md$ en 2030)",
+      cn[-1]["ca_haut"] < 25000, f'{cn[-1]["ca_haut"]:.0f}')
+g_h = (cn[-1]["ca_haut"] / cn[-2]["ca_haut"] - 1) * 100
+check("la branche haute décélère aussi vers le taux terminal",
+      g_h < screener.PLAFOND_HAUT, f"{g_h:.1f} %")
+# Sur un compounder régulier, les deux branches coïncident : pas de bruit
+REGULIER = [{"fin": f"{y}-12-31", "ca": c} for y, c in
+            [(2021, 168), (2022, 198), (2023, 212), (2024, 245), (2025, 282)]]
+cr = screener.projections(REGULIER, None, {"0y": 315, "+1y": 352}, "2025-12-31")
+check("compounder régulier : aucune fourchette publiée, les branches coïncident",
+      all("ca_haut" not in e for e in cr), str(cr[-1]))
+
 # ── Historique profond, étage 1 : EDGAR parle aussi IFRS ────────────────────
 print("\n— EDGAR IFRS : les déposants étrangers entrent au greffe —")
 check("un ticker US natif est éligible", edgar.eligible("NVDA"))
