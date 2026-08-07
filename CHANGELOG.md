@@ -5,6 +5,33 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La décomposition remonte en tête, les tuiles orphelines rentrent chez elles
+
+Trois retours du propriétaire sur la fiche épurée le matin même.
+
+**« Je préférais la manière juste avant. »** Les quatre jauges avaient été
+mises sur deux colonnes en récupérant la place des jauges supprimées. Retour
+à la **colonne unique**, largeur bornée à 520 px : étalées sur toute la
+laisse de texte, quatre barres de longueurs voisines deviennent
+indistinguables — c'est leur comparaison qui porte l'information.
+
+**« Autant la mettre tout au début. »** Elle est désormais **juste sous le
+résumé**, avant les graphiques. Elle justifie le chiffre affiché dans
+l'anneau quelques centimètres plus haut : la lire après trois graphiques
+obligeait à remonter pour faire le lien. (La variante « au survol de
+l'anneau » a été écartée : elle cache la justification derrière un geste, et
+sur mobile ce geste ne s'annonce pas.)
+
+**« Les quatre infos se baladent un peu toutes seules. »** Exact — c'était le
+reliquat d'un bandeau qui en comptait six, sans plus aucun voisin pour les
+expliquer. Chacune est partie là où elle a un contexte : le **repli sur 52
+semaines** rejoint la ligne sous le graphique de cours, à côté de l'écart à
+la tendance, du z-score et du RSI ; la **croissance du CA**, la **marge
+nette** et la **marge FCF** passent sous le graphique des chiffres publiés,
+avec la date de référence qui les accompagnait. Elles y disent où en est la
+société *aujourd'hui*, là où le graphique raconte plusieurs années. Plus
+aucune rangée orpheline sur la fiche.
+
 ### Apprendre : la lecture des comptes passe de l'abstrait au concret
 
 « J'aimerais qu'on puisse y enseigner les bases pour la lecture des comptes.

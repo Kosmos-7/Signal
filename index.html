@@ -103,8 +103,11 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      la décomposition de la note, ses quatre jauges réparties sur deux
      colonnes. Les jauges RSI / z-score qui occupaient l'autre moitié sont
      parties (leurs valeurs vivent sous le graphique de cours). */
-  .quant2{margin:1.8rem 0}
-  .q2g{display:grid;grid-template-columns:1fr 1fr;gap:4px 2.6rem}
+  /* Jauges EMPILÉES en une colonne, comme avant l'élagage du 07/08 : le
+     propriétaire préférait cette forme. La largeur est bornée pour que les
+     barres restent comparables entre elles — étalées sur 1040 px, quatre
+     barres de longueurs voisines deviennent indistinguables. */
+  .quant2{margin:1.6rem 0;max-width:520px}
   .qh{font:600 .6rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem;display:flex;align-items:center;gap:10px}.qh::after{content:'';flex:1;height:1px;background:var(--line)}
   .meter{grid-template-columns:104px 1fr 62px}   /* labels en toutes lettres, valeurs décimales */
 
@@ -193,6 +196,10 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .fd-det summary:hover{border-color:rgba(116,182,223,.35)}
   .fd-det[open] summary{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
   .fd-det .fd-table{margin-top:10px}
+  /* Trois tuiles seulement dans la section des chiffres : le bandeau partagé
+     est calé sur six colonnes, il faut le redire ici sinon elles occupent la
+     moitié gauche et laissent un vide à droite. */
+  .fd-metrics{grid-template-columns:repeat(3,1fr);margin:1.1rem 0 0}
   .fd-syn{font-size:.85rem;color:var(--text2);line-height:1.65;margin:6px 0 14px;border-left:2px solid rgba(116,182,223,.35);padding-left:12px}
   .fd-syn p{margin:0 0 5px}
   .fd-syn b{color:var(--text)}
@@ -358,7 +365,6 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
     .doc{scroll-margin-top:4.2rem}   /* le header fixe ne recouvre pas le haut de la fiche */
     body.v-home .stage{margin-top:4.6rem}
     .d-tk{font-size:2.6rem}
-    .q2g{grid-template-columns:1fr}
     /* La bulle « i » ancrée à son icône déborde de l'écran dès que l'icône
        est près d'un bord : sur mobile elle devient une feuille posée en bas
        du viewport, pleine largeur — lisible où que soit l'icône. */
@@ -918,10 +924,12 @@ function drawChart(s){
     (dec!=null?'<div class="chx-mrow">'+[
       '<span class="chx-k">'+mlabel+' : </span><span class="chx-v" title="Prix de tendance : '+(b.prix_tendance!=null?Math.round(b.prix_tendance)+sym:'—')+'">'+Math.abs(dec).toFixed(0)+' %</span>',
       '<span class="chx-k">z = </span><span class="chx-v2">'+fs(zOff,1).replace('.',',')+'σ</span>'
-    // Le RSI vit ici depuis l'élagage du 07/08 : c'est un signal de marché,
-    // sa place est sous le graphique de marché — plus dans une jauge dédiée
-    // alors qu'il ne compte plus dans la note depuis la v4.
-    ].concat(b.rsi!=null?['<span class="chx-k">RSI </span><span class="chx-v2">'+f(b.rsi,0)+'</span>']:[])
+    // Le RSI et le repli 52 semaines vivent ici depuis l'élagage du 07/08 :
+    // ce sont des faits de COURS, leur place est sous le graphique de cours.
+    // Le RSI ne compte plus dans la note depuis la v4 ; le repli était une
+    // tuile isolée dans une rangée sans voisin qui l'explique.
+    ].concat(b.drawdown_52w_pct!=null?['<span class="chx-k">Repli / plus haut 52 s : </span><span class="chx-v2">'+fs(b.drawdown_52w_pct,0)+' %</span>']:[])
+     .concat(b.rsi!=null?['<span class="chx-k">RSI </span><span class="chx-v2">'+f(b.rsi,0)+'</span>']:[])
      .concat(cons?[cons]:[]).join(' <span class="chx-k">·</span> ')+'</div>':'')+
     '<div id="chx-warnslot"></div>'+
 '<div class="chx-note">Trajectoire historique, pas une valeur intrinsèque. <a href="apprendre.html#decote" style="color:var(--text3)">Méthode →</a></div>';
@@ -1483,6 +1491,17 @@ function fondaRender(s){
            Elle dit maintenant la règle réelle, en une phrase vérifiable. */
         '</i> <span class="inf" tabindex="0" aria-label="Comment est construite la trajectoire">i<span class="inf-tip">Notre source de consensus s\'arrête à deux exercices. Au-delà, nous partons du rythme que les analystes projettent et le faisons décroître vers 3 %/an — une projection à taux constant est le mensonge classique de l\'exercice. Au-delà de 50 %/an, nous ne prolongeons plus du tout : nous le disons plutôt que de publier un chiffre amorti qu\'on sait faux.</span></span></p>';})()+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
+    /* LES TROIS FONDAMENTAUX FRAIS, à côté des exercices qu'ils prolongent
+       (déplacés le 07/08 : ils flottaient dans une rangée de tuiles isolée).
+       Ils disent où en est la société AUJOURD'HUI là où le graphique et les
+       phrases de synthèse racontent plusieurs années — d'où la date de
+       référence, qui les suit dans son « i ». */
+    (function(){const _b=s.breakdown||{};
+      const t=[['Croiss CA · a/a',pc(fs,_b.rev_growth_pct,1)],
+               ['Marge nette · TTM',pc(f,_b.net_margin_pct,1)],
+               ['Marge FCF · TTM',pc(f,_b.fcf_margin_pct,1)]].filter(x=>x[1]!=='—');
+      return t.length?'<div class="metrics fd-metrics">'+t.map(x=>mk(x[0],x[1])).join('')+'</div>'+
+        '<div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(_b)+'</span></span></div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th><th>Rés. net</th></tr>'+cells+'</table></details>'+
     /* Le tableau des ATTENDUS. Le graphique porte le chiffre d'affaires ; le
@@ -1754,11 +1773,16 @@ function dataZone(s,b,compact){
        attendues, seul cas sans point, sont écrites sous la courbe.
      Restent quatre tuiles : où en est le cours (Draw 52s), et les trois
      fondamentaux frais que la note lisse sur plusieurs exercices. */
-  return '<div class="quant2"><div class="qh">Décomposition de la note</div><div class="q2g">'+
-      meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div></div>'+
-    (compact?compactMetrics(s)
-      :'<div class="metrics">'+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))
-        +'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>');
+  /* LA RANGÉE DE QUATRE TUILES A ÉTÉ DISPERSÉE (07/08, « elles se baladent un
+     peu toutes seules »). Elles étaient le reliquat d'un bandeau qui en
+     comptait six et n'avaient plus de voisin qui les explique. Chacune est
+     partie là où elle a un contexte : le repli 52 semaines sous le graphique
+     de cours, les trois fondamentaux frais sous le graphique des chiffres
+     publiés, avec la date de référence qui les accompagnait. Un nombre se lit
+     à côté de ce qui le produit. */
+  return '<div class="quant2"><div class="qh">Décomposition de la note</div>'+
+      meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div>'+
+    (compact?compactMetrics(s):'');
   /* PLUS DE DÉPLIANT « DÉTAIL DE LA NOTE » (décision du propriétaire, 07/08).
      Il listait les quinze critères phrasés un à un, sous les quatre jauges qui
      disent déjà où la note se gagne et se perd. Le raisonnement complet reste
@@ -1798,9 +1822,13 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div>'+(function(){const p=paliers(score);return p?'<div class="rp rp-'+p.ton+'">'+p.mot+'</div>':'';})()+'</div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
+    /* LA DÉCOMPOSITION EST EN TÊTE (décision du propriétaire, 07/08 : « autant
+       mettre décomposition de la note tout au début »). Elle justifie le
+       chiffre affiché dans l'anneau juste au-dessus : la lire après trois
+       graphiques obligeait à remonter pour faire le lien. */
+    '<div id="dzone">'+dataZone(s,b,compact)+'</div>'+
     '<div id="chartsec"></div>'+
     '<div id="fondasec"></div>'+
-    '<div id="dzone">'+dataZone(s,b,compact)+'</div>'+
     prose+
     (bb?sec('Bull vs Bear',bb,'bbsec'):'');
   requestAnimationFrame(()=>{doc.classList.add('on');const rz=document.getElementById('rzone');if(rz){reduce?(rz.innerHTML=resumeBody):typeHTML(rz,resumeBody);}buildChart(s);const arc=document.getElementById('arc');if(arc)arc.style.strokeDashoffset=off;doc.querySelectorAll('.f').forEach(el=>el.style.width=el.dataset.w+'%');const cu=document.getElementById('cu');const _ct=performance.now();(function up(){const e=Math.min(1,(performance.now()-_ct)/600);if(cu)cu.textContent=Math.round(e*score);if(e<1)requestAnimationFrame(up);})();});
