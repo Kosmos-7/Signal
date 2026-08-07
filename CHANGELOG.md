@@ -5,6 +5,19 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La colonne EBITDA quitte le tableau des chiffres
+
+« On supprime la colonne EBITDA car pas assez d'historique. » La mesure donne
+raison à l'intuition : sur les 93 fiches publiées, l'EBITDA ne couvre que
+**31 % des exercices annuels** — c'est une mesure non-GAAP, absente des dépôts
+XBRL de la SEC, donc Yahoo n'en donne que quatre ans là où EDGAR pousse CA et
+résultat net à dix-huit ou dix-neuf. Sur toute fiche à historique profond, la
+colonne était une colonne de tirets.
+
+La donnée reste **collectée** chaque semaine : l'accumulateur la profondit
+tout seul, et le jour où elle couvrira une vraie décennie, la colonne pourra
+revenir. La page Apprendre est mise à jour dans le même sens.
+
 ### La fiche à l'épure : cinq décisions du propriétaire, appliquées d'un bloc
 
 L'après-midi du 07/08, en regardant la fiche déployée le matin même, cinq

@@ -160,7 +160,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .chx-warn .chx-ic{flex:none;color:var(--gold);font-size:.95rem;margin-top:1px}
   .chx-warn b{color:var(--text)}
   .chx-note{font-size:.72rem;color:var(--text3);margin-top:.6rem;line-height:1.55}
-  /* ── Chiffres publiés (historique CA / EBITDA / résultat net) ── */
+  /* ── Chiffres publiés (historique CA / résultat net) ── */
   .fd-wrap{margin-top:1.7rem}
   .fd-ctrl{display:flex;gap:8px;align-items:center;margin:8px 0 10px;flex-wrap:wrap}
   .fd-svg{display:block;width:100%;height:auto;margin:2px 0 8px;cursor:crosshair}
@@ -1129,7 +1129,7 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
     else{for(const k in hoverG)hoverG[k].setAttribute('visibility','hidden');tip.style.display='none';}});
   chRender();
 }
-/* ── Chiffres publiés : historique CA / EBITDA / résultat net ──────────────
+/* ── Chiffres publiés : historique CA / résultat net ───────────────────────
    Données du bloc "fonda" de charts/<TICKER>.json (montants en MILLIONS, dans
    la devise COMPTABLE — TSM cote en dollars et publie en dollars taïwanais,
    on affiche ce qui est publié, pas une conversion silencieuse). Variations :
@@ -1292,7 +1292,14 @@ function fondaRender(s){
      médiane des multiples sur TOUT ce qui est accumulé. On réduit ce qu'on
      dessine, jamais ce qu'on calcule. */
   const rows=full.slice(-(FD_MODE==='an'?FD_ANS:FD_TRIM));
-  const hasEb=full.some(r=>r.eb!=null);
+  /* PAS DE COLONNE EBITDA (décision du propriétaire, 07/08 : « pas assez
+     d'historique »). Mesuré sur les 93 fiches : l'EBITDA ne couvre que 31 %
+     des exercices annuels publiés — Yahoo n'en donne que quatre ans, là où
+     EDGAR pousse CA et résultat net à dix-huit ou dix-neuf. Sur toute fiche
+     à historique profond, la colonne était une colonne de tirets. La donnée
+     reste COLLECTÉE par le screener : l'accumulateur hebdomadaire la
+     profondit tout seul, et le jour où elle couvrira une vraie décennie, la
+     colonne pourra revenir. */
   // Étiquettes annuelles : un changement de calendrier fiscal (CDNS, début
   // janvier → fin décembre en 2011) fait coexister deux exercices clos la
   // même année civile — on les distingue par le mois plutôt que d'afficher
@@ -1356,9 +1363,8 @@ function fondaRender(s){
   // réelles plutôt que supposée.
   const placeValeur=projC.length&&slot>=(Math.max(...projC.map(p=>fdMoney(p.ca,dev).length))*LARG_CAR+8);
   /* Contenu du relevé, une entrée par colonne. Il ne dit QUE ce que le dessin
-     dessine — CA et résultat net. L'EBITDA vit dans le tableau dépliable :
-     annoncer dans une bulle un chiffre qui n'a pas de barre ferait chercher au
-     lecteur une barre qui n'existe pas. */
+     dessine — CA et résultat net : annoncer dans une bulle un chiffre qui n'a
+     pas de barre ferait chercher au lecteur une barre qui n'existe pas. */
   const relX=[], relH=[];
   cols.forEach((o,i)=>{
     const r=o.v;
@@ -1435,7 +1441,6 @@ function fondaRender(s){
     const p=fdPrev(full,full.indexOf(r),FD_MODE);
     return '<tr><td>'+lab(r)+'</td>'+
       '<td>'+fdMoney(r.ca,dev)+fdDelta(r,p,'ca')+'</td>'+
-      (hasEb?'<td>'+fdMoney(r.eb,dev)+fdDelta(r,p,'eb')+'</td>':'')+
       '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td></tr>';
   }).reverse().join('');
   const perB=fdPerChart(F,fmtPer,NARROW?440:800,(s.breakdown||{}).trailing_pe);
@@ -1490,7 +1495,7 @@ function fondaRender(s){
         '</span></span></p>';})()+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
-    '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table></details>'+
+    '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th><th>Rés. net</th></tr>'+cells+'</table></details>'+
     /* Le tableau des ATTENDUS. Le graphique porte le chiffre d'affaires ; le
        BÉNÉFICE PAR ACTION était projeté par le screener depuis le début et
        n'était affiché NULLE PART. Il l'est ici, avec sa nature ligne à ligne :
