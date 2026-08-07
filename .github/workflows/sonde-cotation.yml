@@ -1,0 +1,49 @@
+# .github/workflows/sonde-cotation.yml
+# Compare chaque ADR décalé à sa ligne d'origine, et recopie ce que Yahoo donne
+# des deux côtés. Elle ne branche rien : elle répond à la question « que
+# perd-on en changeant de ligne ? » avant qu'on change quoi que ce soit.
+#
+# Elle existe comme workflow parce que le proxy de développement bloque Yahoo.
+name: Sonder les lignes de cotation
+
+on:
+  workflow_dispatch:
+    inputs:
+      paires:
+        description: "ADR=LOCAL,ADR=LOCAL (vide = les six fiches décalées)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  sonde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+      - name: Sonder
+        run: python tools/sonde_cotation.py --paires "${{ inputs.paires }}"
+      - name: Publier le rapport en artefact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonde-cotation
+          path: sonde_cotation.json
+          retention-days: 7
+      # Le rapport est aussi committé sur la branche sondée : c'est lui qu'on
+      # relit pour décider, et un artefact expire au bout de sept jours.
+      - name: Commiter le rapport pour analyse
+        run: |
+          git config user.name "Signal Bot"
+          git config user.email "bot@signal.fr"
+          git add sonde_cotation.json || true
+          git diff --cached --quiet || \
+            git commit -m "sonde: ADR vs ligne d'origine (brut) [skip ci]"
+          git push origin HEAD:${{ github.ref_name }} || true
