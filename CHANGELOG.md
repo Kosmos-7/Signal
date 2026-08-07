@@ -5,6 +5,30 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Trois textes de moins sur les chiffres publiés
+
+**« publié en USD »** : la devise est déjà portée par chaque montant — « 403
+Md$ » au survol des barres, dans les phrases de synthèse, dans les tuiles. La
+répéter en tête de section était un doublon.
+
+**« échelle log »** : elle se lit dans les graduations ; la nommer n'aidait que
+celui qui savait déjà. Le choix de l'échelle, lui, reste documenté dans le
+code, là où il se règle.
+
+**La phrase « Trajectoire attendue »** disait quels exercices venaient du
+consensus, lesquels de notre prolongation, et le motif de notre refus d'aller
+plus loin. L'essentiel subsiste sans elle : le trait vertical sépare le publié
+de l'attendu, les hachures distinguent les deux natures, et le relevé au survol
+nomme chaque colonne — « consensus des analystes » ou « notre prolongation
+arithmétique ».
+
+**Ce qui est perdu, et il faut le dire** : le MOTIF du refus. Quand nous nous
+arrêtons — Nebius, CoreWeave —, les barres cessent simplement, sans que rien
+n'explique pourquoi. Le motif reste dans la donnée publiée (`ca_arret`), prêt à
+revenir si l'absence gêne. Deuxième conséquence : la solidité du consensus
+(nombre d'analystes, désaccord), ajoutée le matin même, n'a plus d'endroit où
+s'afficher — elle continue d'être collectée, mais elle n'est plus lue.
+
 ### La note permanente sous le graphique de cours disparaît
 
 « Trajectoire historique, pas une valeur intrinsèque. Méthode → » s'affichait

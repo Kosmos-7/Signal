@@ -1551,61 +1551,29 @@ function fondaRender(s){
     '<div class="fd-ctrl">'+
       '<button class="chx-pbtn'+(FD_MODE==='an'?' on':'')+'" data-fd="an"'+(an.length<2?' disabled':'')+'>Annuel</button>'+
       '<button class="chx-pbtn'+(FD_MODE==='tr'?' on':'')+'" data-fd="tr"'+(tr.length<2?' disabled':'')+'>Trimestres</button>'+
-      '<span class="chx-rlbl">publié en '+sv(dev)+(LOGB?' · échelle log <span class="inf" tabindex="0" aria-label="Échelle logarithmique">i<span class="inf-tip">Échelle logarithmique : chaque cran de hauteur multiplie par le même facteur. Les hauteurs se comparent en RAPPORT, pas en différence — une croissance régulière en % donne des marches régulières. Sans elle, un chiffre d\'affaires multiplié par 80 sur la fenêtre écraserait les premières années en barres plates.</span></span>':'')+'</span></div>'+
+      /* NI « publié en USD » NI « échelle log » (décisions du propriétaire,
+         07/08). La devise est déjà portée par chaque montant — « 403 Md$ » sur
+         les barres au survol, dans les phrases de synthèse et dans les
+         tuiles ; la répéter en tête de section était un doublon. Quant à
+         l'échelle, elle se lit dans les graduations : la nommer n'aidait que
+         celui qui savait déjà. Le CHOIX de l'échelle reste documenté dans le
+         code, là où il se règle. */
+      '</div>'+
     '<div class="fd-cwrap"><svg class="fd-svg" id="fd-bars" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
     '<div class="chx-tip" id="fd-bars-tip"></div></div>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net'+
       (projC.length?'&nbsp;&nbsp;<span style="font-weight:700">▨</span> attendu'+(projC.some(p=>rnAtt(p)!=null)?'':' (CA seul)'):'')+'</div>'+
-    /* Le lecteur doit savoir, sans cliquer, où s'arrête l'opinion des
-       analystes et où commence notre arithmétique. */
-    (function(){if(!proj.length)return '';
-      /* On raconte la trajectoire du CHIFFRE D'AFFAIRES, la seule que ce
-         graphique dessine — donc sa nature à elle (`ca_nature`), pas la nature
-         prudente de l'année, qui bascule en « extrapolé » dès que le BPA
-         l'est et ferait passer un consensus publié pour notre arithmétique. */
-      const nat=p=>p.ca_nature||p.nature;
-      const cons=projC.filter(p=>nat(p)==='consensus').map(p=>p.exercice);
-      const ext=projC.filter(p=>nat(p)==='extrapolé').map(p=>p.exercice);
-      /* L'ARRÊT : quand le rythme attendu dépasse ce que nos sources savent
-         prolonger, le screener ne publie PAS de prolongation — il publie le
-         motif. Une projection qu'on sait fausse ne vaut pas mieux qu'un blanc :
-         elle vaut moins, parce qu'elle a l'air d'un fait. Le front dit donc
-         exactement où la trajectoire s'arrête, et pourquoi. */
-      const fin=projC.filter(p=>p.ca_arret)[0];
-      /* CONDENSÉ LE 07/08 (« met en mode i si c'est secondaire et quand même
-         utile ») : la ligne visible ne garde que la provenance — consensus
-         jusqu'où, notre arithmétique ensuite — et le REFUS de prolonger,
-         parce que c'est une position que nous prenons, pas une pédagogie.
-         Le pourquoi (décroissance vers 3 %, borne haute, source à deux
-         exercices — PAS « aucun analyste ne publie », c'était faux) part
-         dans la bulle. */
-      /* SUR QUOI REPOSE CETTE COURBE. Depuis qu'elle est unique et assumée,
-         elle a l'autorité d'une affirmation — mais ses fondations sont très
-         inégales : cinquante analystes sur Alphabet, DEUX sur Constellation
-         Energy ; un désaccord de ±1 % sur Booking, ±16 % sur Nebius. Le dire
-         coûte six mots et change la confiance qu'on accorde à la ligne. */
-      const _cs=F.consensus||{};
-      const _socle=[
-        _cs.analystes?_cs.analystes+' analyste'+(_cs.analystes>1?'s':''):'',
-        _cs.ecart_pct!=null?'ils divergent de ±'+String(_cs.ecart_pct).replace('.',',')+' %':''
-      ].filter(Boolean).join(', ');
-      return '<p class="fd-inline">Trajectoire attendue : <i>'+
-        (cons.length?cons.join(' et ')+' d\'après le consensus des analystes'
-          +(_socle?' ('+_socle+')':''):'')+
-        (cons.length&&ext.length?', puis ':'')+
-        (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous':'')+'.'+
-        (fin?' Au-delà de '+fin.exercice+', nous n\'avançons rien : '+fin.ca_arret+'.':'')+
-        /* UNE POSITION, PAS UNE FOURCHETTE (décision du propriétaire, 07/08).
-           La bulle disait « carnet de commandes », ce qui laissait croire
-           qu'une donnée de carnet existait quelque part — elle n'existe pas.
-           Elle dit maintenant la règle réelle, en une phrase vérifiable. */
-        /* L'HYPOTHÈSE DU NOMBRE D'ACTIONS vivait sous le tableau de
-           trajectoire, retiré le 07/08. Elle ne pouvait pas partir avec lui :
-           les barres de bénéfice attendu en dépendent entièrement. */
-        '</i> <span class="inf" tabindex="0" aria-label="Comment est construite la trajectoire">i<span class="inf-tip">Notre source de consensus s\'arrête à deux exercices. Au-delà, nous partons du rythme que les analystes projettent et le faisons décroître vers 3 %/an — une projection à taux constant est le mensonge classique de l\'exercice. Au-delà de 50 %/an, nous ne prolongeons plus du tout : nous le disons plutôt que de publier un chiffre amorti qu\'on sait faux.'+
-        (actions!=null&&proj.some(p=>p.eps!=null)
-          ?' Le bénéfice attendu est le consensus PAR ACTION multiplié par les '+(actions/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+' milliards de titres déduits du dernier exercice publié (résultat net ÷ bénéfice par action) : il suppose un nombre d\'actions CONSTANT, ce qui est faux pour une société qui rachète les siens.':'')+
-        '</span></span></p>';})()+
+    /* PLUS DE PHRASE « TRAJECTOIRE ATTENDUE » (décision du propriétaire,
+       07/08). Elle disait quels exercices venaient du consensus, lesquels de
+       notre prolongation, et le motif quand nous refusons d'aller plus loin.
+       CE QUI SUBSISTE, et c'est l'essentiel : le trait vertical sépare le
+       publié de l'attendu, les hachures distinguent les deux natures, et le
+       relevé au survol nomme chaque colonne — « consensus des analystes » ou
+       « notre prolongation arithmétique ».
+       CE QUI EST PERDU, et il faut le savoir : le MOTIF du refus. Quand nous
+       nous arrêtons (Nebius, CoreWeave), les barres cessent simplement, sans
+       que rien ne dise pourquoi. Le motif reste dans la donnée publiée
+       (`ca_arret`), prêt à être réaffiché si l'absence gêne. */
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     /* LES TROIS FONDAMENTAUX FRAIS, à côté des exercices qu'ils prolongent
        (déplacés le 07/08 : ils flottaient dans une rangée de tuiles isolée).
