@@ -1,5 +1,5 @@
 {
- "sondes": 12,
+ "sondes": 8,
  "avec_5y": [],
  "index_growth_estimates_observes": [
   [
@@ -11,318 +11,6 @@
   ]
  ],
  "detail": {
-  "NBIS": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": -0.5719,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": -1.1068,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": null,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 0.2618,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "574647330",
-      "low": "427000000",
-      "high": "632600000",
-      "numberOfAnalysts": "14",
-      "yearAgoRevenue": "105100000",
-      "growth": 4.4676,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": "899362650",
-      "low": "799300000",
-      "high": "1058600000",
-      "numberOfAnalysts": "14",
-      "yearAgoRevenue": "146100000",
-      "growth": 5.1558003,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": "3381588990",
-      "low": "3000000000",
-      "high": "3938000000",
-      "numberOfAnalysts": "19",
-      "yearAgoRevenue": "529800000",
-      "growth": 5.3828,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": "11456538240",
-      "low": "8029900000",
-      "high": "18014700000",
-      "numberOfAnalysts": "19",
-      "yearAgoRevenue": "3381588990",
-      "growth": 2.3878999,
-      "currency": "USD"
-     }
-    }
-   },
-   "earnings_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "yearAgoEps",
-     "numberOfAnalysts",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": -0.7475,
-      "low": -1.16,
-      "high": -0.4,
-      "yearAgoEps": 2.4482,
-      "numberOfAnalysts": "4",
-      "growth": -1.3053,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": -1.12333,
-      "low": -1.97,
-      "high": -0.31,
-      "yearAgoEps": -0.475,
-      "numberOfAnalysts": "3",
-      "growth": -1.3649001,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": -2.13667,
-      "low": -4.32,
-      "high": 1.18,
-      "yearAgoEps": null,
-      "numberOfAnalysts": "6",
-      "growth": null,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": -4.86714,
-      "low": -16.79,
-      "high": 1.79,
-      "yearAgoEps": -2.13667,
-      "numberOfAnalysts": "7",
-      "growth": -1.2779,
-      "currency": "USD"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "USD",
-    "devise_cotation": "USD",
-    "croissance_ca_yahoo": 6.839,
-    "croissance_bpa_yahoo": null
-   }
-  },
-  "CRWV": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": -3.5179,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": -12.0397,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": -1.8508999,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 0.595,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "2555302330",
-      "low": "2500000000",
-      "high": "2687200000",
-      "numberOfAnalysts": "32",
-      "yearAgoRevenue": "1212788000",
-      "growth": 1.107,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": "3421817950",
-      "low": "2865800000",
-      "high": "3863000000",
-      "numberOfAnalysts": "32",
-      "yearAgoRevenue": "1364676000",
-      "growth": 1.5074,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": "12627718540",
-      "low": "12300001200",
-      "high": "13079000000",
-      "numberOfAnalysts": "36",
-      "yearAgoRevenue": "5131000000",
-      "growth": 1.4611,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": "25144546660",
-      "low": "18192327990",
-      "high": "29200000000",
-      "numberOfAnalysts": "36",
-      "yearAgoRevenue": "12627718540",
-      "growth": 0.99120003,
-      "currency": "USD"
-     }
-    }
-   },
-   "earnings_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "yearAgoEps",
-     "numberOfAnalysts",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": -1.44699,
-      "low": -1.77,
-      "high": -0.89,
-      "yearAgoEps": -0.6,
-      "numberOfAnalysts": "16",
-      "growth": -1.4117,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": -1.36441,
-      "low": -1.93,
-      "high": -0.52,
-      "yearAgoEps": -0.22,
-      "numberOfAnalysts": "16",
-      "growth": -5.2019,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": -5.02364,
-      "low": -6.09,
-      "high": -3.17,
-      "yearAgoEps": -2.75,
-      "numberOfAnalysts": "18",
-      "growth": -0.8268,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": -3.6838,
-      "low": -6.91,
-      "high": -1.38,
-      "yearAgoEps": -5.02364,
-      "numberOfAnalysts": "17",
-      "growth": 0.2667,
-      "currency": "USD"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "USD",
-    "devise_cotation": "USD",
-    "croissance_ca_yahoo": 1.116,
-    "croissance_bpa_yahoo": null
-   }
-  },
   "TSM": {
    "growth_estimates": {
     "present": true,
@@ -479,7 +167,7 @@
     "croissance_bpa_yahoo": 0.774
    }
   },
-  "GOOGL": {
+  "2330.TW": {
    "growth_estimates": {
     "present": true,
     "index": [
@@ -495,19 +183,19 @@
     ],
     "valeurs": {
      "0q": {
-      "stockTrend": 0.0433,
+      "stockTrend": 0.6079,
       "indexTrend": 0.45330003
      },
      "+1q": {
-      "stockTrend": 0.1808,
+      "stockTrend": 0.5785,
       "indexTrend": 0.22780001
      },
      "0y": {
-      "stockTrend": 0.90339994,
+      "stockTrend": 0.6161,
       "indexTrend": 0.2981
      },
      "+1y": {
-      "stockTrend": -0.2839,
+      "stockTrend": 0.2877,
       "indexTrend": 0.1396
      },
      "LTG": {
@@ -535,352 +223,40 @@
     ],
     "valeurs": {
      "0q": {
-      "avg": "126982452080",
-      "low": "123409000000",
-      "high": "134908000000",
-      "numberOfAnalysts": "40",
-      "yearAgoRevenue": "102346000000",
-      "growth": 0.24069999,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": "140966862120",
-      "low": "135389700000",
-      "high": "158818481540",
-      "numberOfAnalysts": "37",
-      "yearAgoRevenue": "113828000000",
-      "growth": 0.2384,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": "497687581160",
-      "low": "489824800000",
-      "high": "519817939360",
-      "numberOfAnalysts": "50",
-      "yearAgoRevenue": "402836000000",
-      "growth": 0.2355,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": "606647397800",
-      "low": "480338000000",
-      "high": "674435000000",
-      "numberOfAnalysts": "54",
-      "yearAgoRevenue": "497687581160",
-      "growth": 0.2189,
-      "currency": "USD"
-     }
-    }
-   },
-   "earnings_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "yearAgoEps",
-     "numberOfAnalysts",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": 2.99845,
-      "low": 2.64,
-      "high": 3.68,
-      "yearAgoEps": 2.87,
-      "numberOfAnalysts": "41",
-      "growth": 0.0448,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": 3.33216,
-      "low": 2.99,
-      "high": 4.09232,
-      "yearAgoEps": 2.82,
-      "numberOfAnalysts": "39",
-      "growth": 0.1816,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": 20.5849,
-      "low": 19.7,
-      "high": 21.92,
-      "yearAgoEps": 10.81,
-      "numberOfAnalysts": "50",
-      "growth": 0.90419996,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": 14.76976,
-      "low": 13.39,
-      "high": 17.21393,
-      "yearAgoEps": 20.5849,
-      "numberOfAnalysts": "55",
-      "growth": -0.2825,
-      "currency": "USD"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "USD",
-    "devise_cotation": "USD",
-    "croissance_ca_yahoo": 0.242,
-    "croissance_bpa_yahoo": 2.94
-   }
-  },
-  "ADBE": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": 0.1447,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": 0.1487,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": 0.1657,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 0.126,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "6695163470",
-      "low": "6597398030",
-      "high": "6764000000",
-      "numberOfAnalysts": "27",
-      "yearAgoRevenue": "5988000000",
-      "growth": 0.1181,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": "6831865660",
-      "low": "6510105240",
-      "high": "6957000000",
+      "avg": "1449479392570",
+      "low": "1381000000000",
+      "high": "1476431000000",
       "numberOfAnalysts": "26",
-      "yearAgoRevenue": "6194000000",
-      "growth": 0.103,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": "26523026160",
-      "low": "25810000000",
-      "high": "26737000000",
-      "numberOfAnalysts": "32",
-      "yearAgoRevenue": "23769000000",
-      "growth": 0.1159,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": "28918650640",
-      "low": "28350000000",
-      "high": "29812000000",
-      "numberOfAnalysts": "32",
-      "yearAgoRevenue": "26523026160",
-      "growth": 0.090299994,
-      "currency": "USD"
-     }
-    }
-   },
-   "earnings_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "yearAgoEps",
-     "numberOfAnalysts",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": 6.07854,
-      "low": 5.82354,
-      "high": 6.35,
-      "yearAgoEps": 5.31,
-      "numberOfAnalysts": "29",
-      "growth": 0.1447,
-      "currency": "USD"
+      "yearAgoRevenue": "989918000000",
+      "growth": 0.4642,
+      "currency": "TWD"
      },
      "+1q": {
-      "avg": 6.31791,
-      "low": 5.87988,
-      "high": 6.62,
-      "yearAgoEps": 5.5,
-      "numberOfAnalysts": "29",
-      "growth": 0.1487,
-      "currency": "USD"
+      "avg": "1593510273150",
+      "low": "1468845000000",
+      "high": "1693903537100",
+      "numberOfAnalysts": "25",
+      "yearAgoRevenue": "1046090000000",
+      "growth": 0.5233,
+      "currency": "TWD"
      },
      "0y": {
-      "avg": 24.41073,
-      "low": 24.1,
-      "high": 24.99,
-      "yearAgoEps": 20.94,
-      "numberOfAnalysts": "33",
-      "growth": 0.1657,
-      "currency": "USD"
+      "avg": "5420351505550",
+      "low": "5157000000000",
+      "high": "5557455540670",
+      "numberOfAnalysts": "38",
+      "yearAgoRevenue": "3809054000000",
+      "growth": 0.42299998,
+      "currency": "TWD"
      },
      "+1y": {
-      "avg": 27.48687,
-      "low": 25.66,
-      "high": 29.15,
-      "yearAgoEps": 24.41073,
-      "numberOfAnalysts": "34",
-      "growth": 0.126,
-      "currency": "USD"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "USD",
-    "devise_cotation": "USD",
-    "croissance_ca_yahoo": 0.127,
-    "croissance_bpa_yahoo": 0.079
-   }
-  },
-  "NVDA": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": 0.9838,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": 0.8095,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": 0.88589996,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 0.4329,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "91846098240",
-      "low": "90302000000",
-      "high": "96655000000",
-      "numberOfAnalysts": "42",
-      "yearAgoRevenue": "46743000000",
-      "growth": 0.96489996,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": "103131206160",
-      "low": "91996000000",
-      "high": "110657391000",
+      "avg": "7187439013020",
+      "low": "5783000000000",
+      "high": "8211676000000",
       "numberOfAnalysts": "40",
-      "yearAgoRevenue": "57006000000",
-      "growth": 0.80910003,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": "393852732100",
-      "low": "358367000000",
-      "high": "415524773220",
-      "numberOfAnalysts": "53",
-      "yearAgoRevenue": "215938000000",
-      "growth": 0.8239,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": "561509439870",
-      "low": "416398000000",
-      "high": "710010000000",
-      "numberOfAnalysts": "55",
-      "yearAgoRevenue": "393852732100",
-      "growth": 0.4257,
-      "currency": "USD"
+      "yearAgoRevenue": "5420351505550",
+      "growth": 0.32599998,
+      "currency": "TWD"
      }
     }
    },
@@ -903,451 +279,607 @@
     ],
     "valeurs": {
      "0q": {
-      "avg": 2.083,
-      "low": 2.03128,
-      "high": 2.2,
-      "yearAgoEps": 1.05,
-      "numberOfAnalysts": "40",
-      "growth": 0.9838,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": 2.35239,
-      "low": 2.13,
-      "high": 2.63,
-      "yearAgoEps": 1.3,
-      "numberOfAnalysts": "40",
-      "growth": 0.8095,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": 8.99574,
-      "low": 8.2,
-      "high": 9.85,
-      "yearAgoEps": 4.77,
-      "numberOfAnalysts": "50",
-      "growth": 0.88589996,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": 12.89043,
-      "low": 9.65,
-      "high": 16.0,
-      "yearAgoEps": 8.99574,
-      "numberOfAnalysts": "50",
-      "growth": 0.4329,
-      "currency": "USD"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "USD",
-    "devise_cotation": "USD",
-    "croissance_ca_yahoo": 0.852,
-    "croissance_bpa_yahoo": 2.145
-   }
-  },
-  "MU": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": 9.339601,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": 6.2942,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": 7.8581,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 1.1184,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "50838974970",
-      "low": "46911000000",
-      "high": "59805000000",
-      "numberOfAnalysts": "31",
-      "yearAgoRevenue": "11315000000",
-      "growth": 3.4931,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": "56711909380",
-      "low": "45500000000",
-      "high": "75369000000",
-      "numberOfAnalysts": "30",
-      "yearAgoRevenue": "13643000000",
-      "growth": 3.1569,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": "129758113130",
-      "low": "122598000000",
-      "high": "138764000000",
-      "numberOfAnalysts": "39",
-      "yearAgoRevenue": "37378000000",
-      "growth": 2.4715,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": "240106235120",
-      "low": "101608000000",
-      "high": "294160382020",
-      "numberOfAnalysts": "42",
-      "yearAgoRevenue": "129758113130",
-      "growth": 0.85040003,
-      "currency": "USD"
-     }
-    }
-   },
-   "earnings_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "yearAgoEps",
-     "numberOfAnalysts",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": 31.32898,
-      "low": 28.04,
-      "high": 37.44,
-      "yearAgoEps": 3.03,
-      "numberOfAnalysts": "31",
-      "growth": 9.339601,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": 34.86624,
-      "low": 25.64,
-      "high": 47.81,
-      "yearAgoEps": 4.78,
-      "numberOfAnalysts": "31",
-      "growth": 6.2942,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": 73.43364,
-      "low": 67.39,
-      "high": 80.16,
-      "yearAgoEps": 8.29,
-      "numberOfAnalysts": "36",
-      "growth": 7.8581,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": 155.56306,
-      "low": 106.89,
-      "high": 221.27,
-      "yearAgoEps": 73.43364,
-      "numberOfAnalysts": "37",
-      "growth": 1.1184,
-      "currency": "USD"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "USD",
-    "devise_cotation": "USD",
-    "croissance_ca_yahoo": 3.457,
-    "croissance_bpa_yahoo": 13.685
-   }
-  },
-  "ASML.AS": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": 0.9276,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": 0.79050004,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": 0.53900003,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 0.3522,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "11660138250",
-      "low": "10520000000",
-      "high": "12104478220",
-      "numberOfAnalysts": "17",
-      "yearAgoRevenue": "7516000000",
-      "growth": 0.5514,
-      "currency": "EUR"
-     },
-     "+1q": {
-      "avg": "13996949630",
-      "low": "11867000000",
-      "high": "15093622000",
-      "numberOfAnalysts": "17",
-      "yearAgoRevenue": "9718100000",
-      "growth": 0.4403,
-      "currency": "EUR"
-     },
-     "0y": {
-      "avg": "43214036100",
-      "low": "39262000000",
-      "high": "45241092000",
-      "numberOfAnalysts": "37",
-      "yearAgoRevenue": "32667300000",
-      "growth": 0.3229,
-      "currency": "EUR"
-     },
-     "+1y": {
-      "avg": "54331121810",
-      "low": "43586400000",
-      "high": "60662000000",
-      "numberOfAnalysts": "39",
-      "yearAgoRevenue": "43214036100",
-      "growth": 0.2573,
-      "currency": "EUR"
-     }
-    }
-   },
-   "earnings_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "yearAgoEps",
-     "numberOfAnalysts",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": 10.58262,
-      "low": 8.65,
-      "high": 11.5,
-      "yearAgoEps": 5.49,
-      "numberOfAnalysts": "14",
-      "growth": 0.9276,
-      "currency": "EUR"
-     },
-     "+1q": {
-      "avg": 13.14231,
-      "low": 9.64,
-      "high": 14.7324,
-      "yearAgoEps": 7.34,
-      "numberOfAnalysts": "14",
-      "growth": 0.79050004,
-      "currency": "EUR"
-     },
-     "0y": {
-      "avg": 38.02898,
-      "low": 31.81,
-      "high": 40.41908,
-      "yearAgoEps": 24.71,
-      "numberOfAnalysts": "33",
-      "growth": 0.53900003,
-      "currency": "EUR"
-     },
-     "+1y": {
-      "avg": 51.42462,
-      "low": 37.43,
-      "high": 59.10128,
-      "yearAgoEps": 38.02898,
-      "numberOfAnalysts": "34",
-      "growth": 0.3522,
-      "currency": "EUR"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "EUR",
-    "devise_cotation": "EUR",
-    "croissance_ca_yahoo": 0.213,
-    "croissance_bpa_yahoo": 0.285
-   }
-  },
-  "SAP.DE": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": 0.1506,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": 0.255,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": 0.1617,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 0.1758,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "10082936910",
-      "low": "9966000000",
-      "high": "10290000000",
-      "numberOfAnalysts": "13",
-      "yearAgoRevenue": "9076000000",
-      "growth": 0.1109,
-      "currency": "EUR"
-     },
-     "+1q": {
-      "avg": "10708632990",
-      "low": "10522507000",
-      "high": "10895000000",
-      "numberOfAnalysts": "12",
-      "yearAgoRevenue": "9684000000",
-      "growth": 0.1058,
-      "currency": "EUR"
-     },
-     "0y": {
-      "avg": "40257732840",
-      "low": "39970870000",
-      "high": "40522000000",
+      "avg": 28.04147,
+      "low": 26.3,
+      "high": 29.85,
+      "yearAgoEps": 17.44,
       "numberOfAnalysts": "23",
-      "yearAgoRevenue": "36800000000",
+      "growth": 0.6079,
+      "currency": "TWD"
+     },
+     "+1q": {
+      "avg": 30.77995,
+      "low": 27.89,
+      "high": 33.17031,
+      "yearAgoEps": 19.5,
+      "numberOfAnalysts": "23",
+      "growth": 0.5785,
+      "currency": "TWD"
+     },
+     "0y": {
+      "avg": 107.06744,
+      "low": 98.4,
+      "high": 111.91,
+      "yearAgoEps": 66.25,
+      "numberOfAnalysts": "33",
+      "growth": 0.6161,
+      "currency": "TWD"
+     },
+     "+1y": {
+      "avg": 137.86748,
+      "low": 93.3,
+      "high": 159.66747,
+      "yearAgoEps": 107.06744,
+      "numberOfAnalysts": "36",
+      "growth": 0.2877,
+      "currency": "TWD"
+     }
+    }
+   },
+   "reperes": {
+    "devise_comptable": "TWD",
+    "devise_cotation": "TWD",
+    "croissance_ca_yahoo": 0.36,
+    "croissance_bpa_yahoo": 0.774
+   }
+  },
+  "ASX": {
+   "growth_estimates": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y",
+     "LTG"
+    ],
+    "colonnes": [
+     "stockTrend",
+     "indexTrend"
+    ],
+    "valeurs": {
+     "0q": {
+      "stockTrend": 0.8253,
+      "indexTrend": 0.45330003
+     },
+     "+1q": {
+      "stockTrend": 0.58419997,
+      "indexTrend": 0.22780001
+     },
+     "0y": {
+      "stockTrend": 0.9612,
+      "indexTrend": 0.2981
+     },
+     "+1y": {
+      "stockTrend": 0.6437,
+      "indexTrend": 0.1396
+     },
+     "LTG": {
+      "stockTrend": null,
+      "indexTrend": 0.122
+     }
+    }
+   },
+   "revenue_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "numberOfAnalysts",
+     "yearAgoRevenue",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": "233121967550",
+      "low": "230350000000",
+      "high": "234543000000",
+      "numberOfAnalysts": "13",
+      "yearAgoRevenue": "168569000000",
+      "growth": 0.3829,
+      "currency": "TWD"
+     },
+     "+1q": {
+      "avg": "244612203180",
+      "low": "235849000000",
+      "high": "269115336950",
+      "numberOfAnalysts": "13",
+      "yearAgoRevenue": "177915000000",
+      "growth": 0.3749,
+      "currency": "TWD"
+     },
+     "0y": {
+      "avg": "838206855190",
+      "low": "787404153000",
+      "high": "866810127850",
+      "numberOfAnalysts": "16",
+      "yearAgoRevenue": "645388000000",
+      "growth": 0.2988,
+      "currency": "TWD"
+     },
+     "+1y": {
+      "avg": "1039061045460",
+      "low": "922802225000",
+      "high": "1116816142680",
+      "numberOfAnalysts": "18",
+      "yearAgoRevenue": "838206855190",
+      "growth": 0.23959999,
+      "currency": "TWD"
+     }
+    }
+   },
+   "earnings_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "yearAgoEps",
+     "numberOfAnalysts",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": 0.2957,
+      "low": 0.2957,
+      "high": 0.2957,
+      "yearAgoEps": 0.162,
+      "numberOfAnalysts": "1",
+      "growth": 0.8253,
+      "currency": "USD"
+     },
+     "+1q": {
+      "avg": 0.33268,
+      "low": 0.33268,
+      "high": 0.33268,
+      "yearAgoEps": 0.21,
+      "numberOfAnalysts": "1",
+      "growth": 0.58419997,
+      "currency": "USD"
+     },
+     "0y": {
+      "avg": 1.11983,
+      "low": 1.11983,
+      "high": 1.11983,
+      "yearAgoEps": 0.571,
+      "numberOfAnalysts": "1",
+      "growth": 0.9612,
+      "currency": "USD"
+     },
+     "+1y": {
+      "avg": 1.8407,
+      "low": 1.8407,
+      "high": 1.8407,
+      "yearAgoEps": 1.11983,
+      "numberOfAnalysts": "1",
+      "growth": 0.6437,
+      "currency": "USD"
+     }
+    }
+   },
+   "reperes": {
+    "devise_comptable": "TWD",
+    "devise_cotation": "USD",
+    "croissance_ca_yahoo": 0.267,
+    "croissance_bpa_yahoo": 1.71
+   }
+  },
+  "3711.TW": {
+   "growth_estimates": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y",
+     "LTG"
+    ],
+    "colonnes": [
+     "stockTrend",
+     "indexTrend"
+    ],
+    "valeurs": {
+     "0q": {
+      "stockTrend": 1.0998,
+      "indexTrend": 0.45330003
+     },
+     "+1q": {
+      "stockTrend": 0.7853,
+      "indexTrend": 0.22780001
+     },
+     "0y": {
+      "stockTrend": 1.0918,
+      "indexTrend": 0.2981
+     },
+     "+1y": {
+      "stockTrend": 0.5136,
+      "indexTrend": 0.1396
+     },
+     "LTG": {
+      "stockTrend": null,
+      "indexTrend": 0.122
+     }
+    }
+   },
+   "revenue_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "numberOfAnalysts",
+     "yearAgoRevenue",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": "233121967550",
+      "low": "230350000000",
+      "high": "234543000000",
+      "numberOfAnalysts": "13",
+      "yearAgoRevenue": "168569000000",
+      "growth": 0.3829,
+      "currency": "TWD"
+     },
+     "+1q": {
+      "avg": "244612203180",
+      "low": "235849000000",
+      "high": "269115336950",
+      "numberOfAnalysts": "13",
+      "yearAgoRevenue": "177915000000",
+      "growth": 0.3749,
+      "currency": "TWD"
+     },
+     "0y": {
+      "avg": "838206855190",
+      "low": "787404153000",
+      "high": "866810127850",
+      "numberOfAnalysts": "16",
+      "yearAgoRevenue": "645388000000",
+      "growth": 0.2988,
+      "currency": "TWD"
+     },
+     "+1y": {
+      "avg": "1039061045460",
+      "low": "922802225000",
+      "high": "1116816142680",
+      "numberOfAnalysts": "18",
+      "yearAgoRevenue": "838206855190",
+      "growth": 0.23959999,
+      "currency": "TWD"
+     }
+    }
+   },
+   "earnings_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "yearAgoEps",
+     "numberOfAnalysts",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": 5.06045,
+      "low": 4.52,
+      "high": 5.51898,
+      "yearAgoEps": 2.41,
+      "numberOfAnalysts": "15",
+      "growth": 1.0998,
+      "currency": "TWD"
+     },
+     "+1q": {
+      "avg": 5.78445,
+      "low": 5.03,
+      "high": 6.88585,
+      "yearAgoEps": 3.24,
+      "numberOfAnalysts": "15",
+      "growth": 0.7853,
+      "currency": "TWD"
+     },
+     "0y": {
+      "avg": 18.59632,
+      "low": 16.56386,
+      "high": 20.42544,
+      "yearAgoEps": 8.89,
+      "numberOfAnalysts": "17",
+      "growth": 1.0918,
+      "currency": "TWD"
+     },
+     "+1y": {
+      "avg": 28.14666,
+      "low": 20.71,
+      "high": 31.83166,
+      "yearAgoEps": 18.59632,
+      "numberOfAnalysts": "18",
+      "growth": 0.5136,
+      "currency": "TWD"
+     }
+    }
+   },
+   "reperes": {
+    "devise_comptable": "TWD",
+    "devise_cotation": "TWD",
+    "croissance_ca_yahoo": 0.267,
+    "croissance_bpa_yahoo": 1.71
+   }
+  },
+  "RACE": {
+   "growth_estimates": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y",
+     "LTG"
+    ],
+    "colonnes": [
+     "stockTrend",
+     "indexTrend"
+    ],
+    "valeurs": {
+     "0q": {
+      "stockTrend": 0.1196,
+      "indexTrend": 0.45330003
+     },
+     "+1q": {
+      "stockTrend": 0.177,
+      "indexTrend": 0.22780001
+     },
+     "0y": {
+      "stockTrend": 0.094,
+      "indexTrend": 0.2981
+     },
+     "+1y": {
+      "stockTrend": 0.1205,
+      "indexTrend": 0.1396
+     },
+     "LTG": {
+      "stockTrend": null,
+      "indexTrend": 0.122
+     }
+    }
+   },
+   "revenue_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "numberOfAnalysts",
+     "yearAgoRevenue",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": "1936073830",
+      "low": "1856000000",
+      "high": "2056010000",
+      "numberOfAnalysts": "5",
+      "yearAgoRevenue": "1766000000",
+      "growth": 0.0963,
+      "currency": "EUR"
+     },
+     "+1q": {
+      "avg": "1974460230",
+      "low": "1937359140",
+      "high": "2029942000",
+      "numberOfAnalysts": "5",
+      "yearAgoRevenue": "1802000000",
+      "growth": 0.095699996,
+      "currency": "EUR"
+     },
+     "0y": {
+      "avg": "7641063760",
+      "low": "7530000000",
+      "high": "7838700000",
+      "numberOfAnalysts": "24",
+      "yearAgoRevenue": "7146000000",
+      "growth": 0.069299996,
+      "currency": "EUR"
+     },
+     "+1y": {
+      "avg": "8273435620",
+      "low": "7841000000",
+      "high": "8697104000",
+      "numberOfAnalysts": "24",
+      "yearAgoRevenue": "7641063760",
+      "growth": 0.0828,
+      "currency": "EUR"
+     }
+    }
+   },
+   "earnings_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "yearAgoEps",
+     "numberOfAnalysts",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": 2.39589,
+      "low": 2.31,
+      "high": 2.48178,
+      "yearAgoEps": 2.14,
+      "numberOfAnalysts": "2",
+      "growth": 0.1196,
+      "currency": "EUR"
+     },
+     "+1q": {
+      "avg": 2.51874,
+      "low": 2.48747,
+      "high": 2.55,
+      "yearAgoEps": 2.14,
+      "numberOfAnalysts": "2",
+      "growth": 0.177,
+      "currency": "EUR"
+     },
+     "0y": {
+      "avg": 9.80226,
+      "low": 9.63,
+      "high": 10.05,
+      "yearAgoEps": 8.96,
+      "numberOfAnalysts": "11",
       "growth": 0.094,
       "currency": "EUR"
      },
      "+1y": {
-      "avg": "45021719370",
-      "low": "43790000000",
-      "high": "46263000000",
-      "numberOfAnalysts": "23",
-      "yearAgoRevenue": "40257732840",
-      "growth": 0.1183,
+      "avg": 10.9833,
+      "low": 10.27,
+      "high": 11.43,
+      "yearAgoEps": 9.80226,
+      "numberOfAnalysts": "13",
+      "growth": 0.1205,
+      "currency": "EUR"
+     }
+    }
+   },
+   "reperes": {
+    "devise_comptable": "EUR",
+    "devise_cotation": "USD",
+    "croissance_ca_yahoo": 0.084,
+    "croissance_bpa_yahoo": 0.101
+   }
+  },
+  "RACE.MI": {
+   "growth_estimates": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y",
+     "LTG"
+    ],
+    "colonnes": [
+     "stockTrend",
+     "indexTrend"
+    ],
+    "valeurs": {
+     "0q": {
+      "stockTrend": 0.1417,
+      "indexTrend": 0.45330003
+     },
+     "+1q": {
+      "stockTrend": 0.19940001,
+      "indexTrend": 0.22780001
+     },
+     "0y": {
+      "stockTrend": 0.096599996,
+      "indexTrend": 0.2981
+     },
+     "+1y": {
+      "stockTrend": 0.117,
+      "indexTrend": 0.1396
+     },
+     "LTG": {
+      "stockTrend": null,
+      "indexTrend": 0.122
+     }
+    }
+   },
+   "revenue_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "numberOfAnalysts",
+     "yearAgoRevenue",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": "1936073830",
+      "low": "1856000000",
+      "high": "2056010000",
+      "numberOfAnalysts": "5",
+      "yearAgoRevenue": "1766000000",
+      "growth": 0.0963,
+      "currency": "EUR"
+     },
+     "+1q": {
+      "avg": "1974460230",
+      "low": "1937359140",
+      "high": "2029942000",
+      "numberOfAnalysts": "5",
+      "yearAgoRevenue": "1802000000",
+      "growth": 0.095699996,
+      "currency": "EUR"
+     },
+     "0y": {
+      "avg": "7641063760",
+      "low": "7530000000",
+      "high": "7838700000",
+      "numberOfAnalysts": "24",
+      "yearAgoRevenue": "7146000000",
+      "growth": 0.069299996,
+      "currency": "EUR"
+     },
+     "+1y": {
+      "avg": "8273435620",
+      "low": "7841000000",
+      "high": "8697104000",
+      "numberOfAnalysts": "24",
+      "yearAgoRevenue": "7641063760",
+      "growth": 0.0828,
       "currency": "EUR"
      }
     }
@@ -1371,39 +903,39 @@
     ],
     "valeurs": {
      "0q": {
-      "avg": 1.82947,
-      "low": 1.68795,
-      "high": 2.12,
-      "yearAgoEps": 1.59,
-      "numberOfAnalysts": "10",
-      "growth": 0.1506,
+      "avg": 2.44333,
+      "low": 2.34,
+      "high": 2.5,
+      "yearAgoEps": 2.14,
+      "numberOfAnalysts": "3",
+      "growth": 0.1417,
       "currency": "EUR"
      },
      "+1q": {
-      "avg": 2.03312,
-      "low": 1.91,
-      "high": 2.31,
-      "yearAgoEps": 1.62,
-      "numberOfAnalysts": "10",
-      "growth": 0.255,
+      "avg": 2.56667,
+      "low": 2.56,
+      "high": 2.58,
+      "yearAgoEps": 2.14,
+      "numberOfAnalysts": "3",
+      "growth": 0.19940001,
       "currency": "EUR"
      },
      "0y": {
-      "avg": 7.14445,
-      "low": 6.62,
-      "high": 8.01041,
-      "yearAgoEps": 6.15,
-      "numberOfAnalysts": "22",
-      "growth": 0.1617,
+      "avg": 9.82579,
+      "low": 9.58716,
+      "high": 10.05,
+      "yearAgoEps": 8.96,
+      "numberOfAnalysts": "18",
+      "growth": 0.096599996,
       "currency": "EUR"
      },
      "+1y": {
-      "avg": 8.40051,
-      "low": 7.4,
-      "high": 9.61991,
-      "yearAgoEps": 7.14445,
-      "numberOfAnalysts": "22",
-      "growth": 0.1758,
+      "avg": 11.00162,
+      "low": 10.18559,
+      "high": 11.59,
+      "yearAgoEps": 9.82317,
+      "numberOfAnalysts": "16",
+      "growth": 0.12,
       "currency": "EUR"
      }
     }
@@ -1411,11 +943,11 @@
    "reperes": {
     "devise_comptable": "EUR",
     "devise_cotation": "EUR",
-    "croissance_ca_yahoo": 0.094,
-    "croissance_bpa_yahoo": 0.306
+    "croissance_ca_yahoo": 0.084,
+    "croissance_bpa_yahoo": 0.101
    }
   },
-  "8035.T": {
+  "CCJ": {
    "growth_estimates": {
     "present": true,
     "index": [
@@ -1431,19 +963,19 @@
     ],
     "valeurs": {
      "0q": {
-      "stockTrend": null,
+      "stockTrend": 3.8479998,
       "indexTrend": 0.45330003
      },
      "+1q": {
-      "stockTrend": null,
+      "stockTrend": -0.0428,
       "indexTrend": 0.22780001
      },
      "0y": {
-      "stockTrend": null,
+      "stockTrend": 0.051799998,
       "indexTrend": 0.2981
      },
      "+1y": {
-      "stockTrend": null,
+      "stockTrend": 0.7426,
       "indexTrend": 0.1396
      },
      "LTG": {
@@ -1471,352 +1003,40 @@
     ],
     "valeurs": {
      "0q": {
-      "avg": "901730375000",
-      "low": "890304250000",
-      "high": "915200000000",
-      "numberOfAnalysts": "6",
-      "yearAgoRevenue": "630082000000",
-      "growth": 0.4311,
-      "currency": "JPY"
-     },
-     "+1q": {
-      "avg": "826200858000",
-      "low": "711503000000",
-      "high": "898400000000",
+      "avg": "735691860",
+      "low": "620115000",
+      "high": "835136990",
       "numberOfAnalysts": "5",
-      "yearAgoRevenue": "552047000000",
-      "growth": 0.4966,
-      "currency": "JPY"
-     },
-     "0y": {
-      "avg": "3361569692000",
-      "low": "3151345000000",
-      "high": "3516200000000",
-      "numberOfAnalysts": "10",
-      "yearAgoRevenue": "2211510000000",
-      "growth": 0.52,
-      "currency": "JPY"
-     },
-     "+1y": {
-      "avg": "4072109539090",
-      "low": "3492000000000",
-      "high": "4640000000000",
-      "numberOfAnalysts": "22",
-      "yearAgoRevenue": "3361569692000",
-      "growth": 0.21139999,
-      "currency": "JPY"
-     }
-    }
-   },
-   "earnings_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "yearAgoEps",
-     "numberOfAnalysts",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": 419.8806,
-      "low": 380.0,
-      "high": 456.3437,
-      "yearAgoEps": 270.18,
-      "numberOfAnalysts": "6",
-      "growth": 0.5541,
-      "currency": "JPY"
+      "yearAgoRevenue": "614555000",
+      "growth": 0.19709998,
+      "currency": "CAD"
      },
      "+1q": {
-      "avg": 402.92996,
-      "low": 345.0,
-      "high": 441.4,
-      "yearAgoEps": 258.59,
-      "numberOfAnalysts": "4",
-      "growth": 0.5582,
-      "currency": "JPY"
+      "avg": "1082856080",
+      "low": "918171230",
+      "high": "1273829000",
+      "numberOfAnalysts": "5",
+      "yearAgoRevenue": "1201000000",
+      "growth": -0.098400004,
+      "currency": "CAD"
      },
      "0y": {
-      "avg": 1665.7766,
-      "low": 1461.33,
-      "high": 1828.2963,
-      "yearAgoEps": 1254.57,
-      "numberOfAnalysts": "12",
-      "growth": 0.32779998,
-      "currency": "JPY"
-     },
-     "+1y": {
-      "avg": 2240.3284,
-      "low": 1846.8,
-      "high": 2653.6,
-      "yearAgoEps": 1665.7766,
-      "numberOfAnalysts": "20",
-      "growth": 0.3449,
-      "currency": "JPY"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "JPY",
-    "devise_cotation": "JPY",
-    "croissance_ca_yahoo": 0.333,
-    "croissance_bpa_yahoo": 0.404
-   }
-  },
-  "BKNG": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": 0.1292,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": 0.1848,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": 0.1457,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 0.1846,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "9552567240",
-      "low": "9434610000",
-      "high": "9800000000",
-      "numberOfAnalysts": "30",
-      "yearAgoRevenue": "9008000000",
-      "growth": 0.060500003,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": "6814652630",
-      "low": "6622080000",
-      "high": "7061400000",
-      "numberOfAnalysts": "30",
-      "yearAgoRevenue": "6349000000",
-      "growth": 0.0733,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": "29268901180",
-      "low": "28940690000",
-      "high": "29759340770",
-      "numberOfAnalysts": "35",
-      "yearAgoRevenue": "26917000000",
-      "growth": 0.0874,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": "32027613030",
-      "low": "31155000000",
-      "high": "33285445160",
-      "numberOfAnalysts": "36",
-      "yearAgoRevenue": "29268901180",
-      "growth": 0.0943,
-      "currency": "USD"
-     }
-    }
-   },
-   "earnings_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "yearAgoEps",
-     "numberOfAnalysts",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": 4.49423,
-      "low": 4.27,
-      "high": 4.69,
-      "yearAgoEps": 3.98,
-      "numberOfAnalysts": "25",
-      "growth": 0.1292,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": 2.31276,
-      "low": 2.108,
-      "high": 2.51475,
-      "yearAgoEps": 1.952,
-      "numberOfAnalysts": "25",
-      "growth": 0.1848,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": 10.45142,
-      "low": 10.147,
-      "high": 10.8,
-      "yearAgoEps": 9.1224,
-      "numberOfAnalysts": "32",
-      "growth": 0.1457,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": 12.38045,
-      "low": 11.423,
-      "high": 13.24859,
-      "yearAgoEps": 10.45142,
-      "numberOfAnalysts": "32",
-      "growth": 0.1846,
-      "currency": "USD"
-     }
-    }
-   },
-   "reperes": {
-    "devise_comptable": "USD",
-    "devise_cotation": "USD",
-    "croissance_ca_yahoo": 0.081,
-    "croissance_bpa_yahoo": 1.3
-   }
-  },
-  "CEG": {
-   "growth_estimates": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y",
-     "LTG"
-    ],
-    "colonnes": [
-     "stockTrend",
-     "indexTrend"
-    ],
-    "valeurs": {
-     "0q": {
-      "stockTrend": 0.1884,
-      "indexTrend": 0.45330003
-     },
-     "+1q": {
-      "stockTrend": 0.2824,
-      "indexTrend": 0.22780001
-     },
-     "0y": {
-      "stockTrend": 0.2485,
-      "indexTrend": 0.2981
-     },
-     "+1y": {
-      "stockTrend": 0.135,
-      "indexTrend": 0.1396
-     },
-     "LTG": {
-      "stockTrend": null,
-      "indexTrend": 0.122
-     }
-    }
-   },
-   "revenue_estimate": {
-    "present": true,
-    "index": [
-     "0q",
-     "+1q",
-     "0y",
-     "+1y"
-    ],
-    "colonnes": [
-     "avg",
-     "low",
-     "high",
-     "numberOfAnalysts",
-     "yearAgoRevenue",
-     "growth",
-     "currency"
-    ],
-    "valeurs": {
-     "0q": {
-      "avg": "8557490159",
-      "low": "7812760640",
-      "high": "9507000000",
-      "numberOfAnalysts": "4",
-      "yearAgoRevenue": "6570000000",
-      "growth": 0.3025,
-      "currency": "USD"
-     },
-     "+1q": {
-      "avg": "8024005270",
-      "low": "6994000000",
-      "high": "9201000000",
-      "numberOfAnalysts": "4",
-      "yearAgoRevenue": "6074000000",
-      "growth": 0.32099998,
-      "currency": "USD"
-     },
-     "0y": {
-      "avg": "34841290860",
-      "low": "34555581730",
-      "high": "35127000000",
-      "numberOfAnalysts": "2",
-      "yearAgoRevenue": "25533000000",
-      "growth": 0.3646,
-      "currency": "USD"
-     },
-     "+1y": {
-      "avg": "35170160970",
-      "low": "21756011690",
-      "high": "43145000000",
+      "avg": "3490500440",
+      "low": "3400000000",
+      "high": "3616000000",
       "numberOfAnalysts": "13",
-      "yearAgoRevenue": "34841290860",
-      "growth": 0.0094,
-      "currency": "USD"
+      "yearAgoRevenue": "3482000000",
+      "growth": 0.0023999999,
+      "currency": "CAD"
+     },
+     "+1y": {
+      "avg": "3959456780",
+      "low": "3568000000",
+      "high": "4521000000",
+      "numberOfAnalysts": "16",
+      "yearAgoRevenue": "3490500440",
+      "growth": 0.1344,
+      "currency": "CAD"
      }
     }
    },
@@ -1839,48 +1059,204 @@
     ],
     "valeurs": {
      "0q": {
-      "avg": 3.61287,
-      "low": 2.66,
-      "high": 4.06212,
-      "yearAgoEps": 3.04,
-      "numberOfAnalysts": "12",
-      "growth": 0.1884,
-      "currency": "USD"
+      "avg": 0.33936,
+      "low": 0.24,
+      "high": 0.43327,
+      "yearAgoEps": 0.07,
+      "numberOfAnalysts": "9",
+      "growth": 3.8479998,
+      "currency": "CAD"
      },
      "+1q": {
-      "avg": 2.94963,
-      "low": 2.67,
-      "high": 3.19,
-      "yearAgoEps": 2.3,
-      "numberOfAnalysts": "12",
-      "growth": 0.2824,
-      "currency": "USD"
+      "avg": 0.47862,
+      "low": 0.28,
+      "high": 0.74,
+      "yearAgoEps": 0.5,
+      "numberOfAnalysts": "9",
+      "growth": -0.0428,
+      "currency": "CAD"
      },
      "0y": {
-      "avg": 11.72365,
-      "low": 10.38,
-      "high": 12.68,
-      "yearAgoEps": 9.39,
+      "avg": 1.51457,
+      "low": 1.15,
+      "high": 1.95,
+      "yearAgoEps": 1.44,
       "numberOfAnalysts": "20",
-      "growth": 0.2485,
-      "currency": "USD"
+      "growth": 0.051799998,
+      "currency": "CAD"
      },
      "+1y": {
-      "avg": 13.30685,
-      "low": 12.25,
-      "high": 14.79144,
-      "yearAgoEps": 11.72365,
+      "avg": 2.63925,
+      "low": 1.85,
+      "high": 4.1,
+      "yearAgoEps": 1.51457,
       "numberOfAnalysts": "21",
-      "growth": 0.135,
-      "currency": "USD"
+      "growth": 0.7426,
+      "currency": "CAD"
      }
     }
    },
    "reperes": {
-    "devise_comptable": "USD",
+    "devise_comptable": "CAD",
     "devise_cotation": "USD",
-    "croissance_ca_yahoo": 0.23,
-    "croissance_bpa_yahoo": -0.47
+    "croissance_ca_yahoo": -0.072,
+    "croissance_bpa_yahoo": -0.921
+   }
+  },
+  "CCO.TO": {
+   "growth_estimates": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y",
+     "LTG"
+    ],
+    "colonnes": [
+     "stockTrend",
+     "indexTrend"
+    ],
+    "valeurs": {
+     "0q": {
+      "stockTrend": 3.8479998,
+      "indexTrend": 0.45330003
+     },
+     "+1q": {
+      "stockTrend": -0.0428,
+      "indexTrend": 0.22780001
+     },
+     "0y": {
+      "stockTrend": 0.051799998,
+      "indexTrend": 0.2981
+     },
+     "+1y": {
+      "stockTrend": 0.7426,
+      "indexTrend": 0.1396
+     },
+     "LTG": {
+      "stockTrend": null,
+      "indexTrend": 0.122
+     }
+    }
+   },
+   "revenue_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "numberOfAnalysts",
+     "yearAgoRevenue",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": "735691860",
+      "low": "620115000",
+      "high": "835136990",
+      "numberOfAnalysts": "5",
+      "yearAgoRevenue": "614555000",
+      "growth": 0.19709998,
+      "currency": "CAD"
+     },
+     "+1q": {
+      "avg": "1082856080",
+      "low": "918171230",
+      "high": "1273829000",
+      "numberOfAnalysts": "5",
+      "yearAgoRevenue": "1201000000",
+      "growth": -0.098400004,
+      "currency": "CAD"
+     },
+     "0y": {
+      "avg": "3490500440",
+      "low": "3400000000",
+      "high": "3616000000",
+      "numberOfAnalysts": "13",
+      "yearAgoRevenue": "3482000000",
+      "growth": 0.0023999999,
+      "currency": "CAD"
+     },
+     "+1y": {
+      "avg": "3959456780",
+      "low": "3568000000",
+      "high": "4521000000",
+      "numberOfAnalysts": "16",
+      "yearAgoRevenue": "3490500440",
+      "growth": 0.1344,
+      "currency": "CAD"
+     }
+    }
+   },
+   "earnings_estimate": {
+    "present": true,
+    "index": [
+     "0q",
+     "+1q",
+     "0y",
+     "+1y"
+    ],
+    "colonnes": [
+     "avg",
+     "low",
+     "high",
+     "yearAgoEps",
+     "numberOfAnalysts",
+     "growth",
+     "currency"
+    ],
+    "valeurs": {
+     "0q": {
+      "avg": 0.33936,
+      "low": 0.24,
+      "high": 0.43327,
+      "yearAgoEps": 0.07,
+      "numberOfAnalysts": "9",
+      "growth": 3.8479998,
+      "currency": "CAD"
+     },
+     "+1q": {
+      "avg": 0.47862,
+      "low": 0.28,
+      "high": 0.74,
+      "yearAgoEps": 0.5,
+      "numberOfAnalysts": "9",
+      "growth": -0.0428,
+      "currency": "CAD"
+     },
+     "0y": {
+      "avg": 1.51457,
+      "low": 1.15,
+      "high": 1.95,
+      "yearAgoEps": 1.44,
+      "numberOfAnalysts": "20",
+      "growth": 0.051799998,
+      "currency": "CAD"
+     },
+     "+1y": {
+      "avg": 2.63925,
+      "low": 1.85,
+      "high": 4.1,
+      "yearAgoEps": 1.51457,
+      "numberOfAnalysts": "21",
+      "growth": 0.7426,
+      "currency": "CAD"
+     }
+    }
+   },
+   "reperes": {
+    "devise_comptable": "CAD",
+    "devise_cotation": "CAD",
+    "croissance_ca_yahoo": -0.072,
+    "croissance_bpa_yahoo": -0.921
    }
   }
  }
