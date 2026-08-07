@@ -5,7 +5,53 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
-### Pérennité : deux dates confondues en une sur le portefeuille
+### Nos chiffres contre ceux de Baggr, ligne à ligne
+
+Question du propriétaire : « je veux surtout revenus et bénéfices, nous on met
+résultat net, c'est pas pareil ? ». C'est exactement pareil, et c'est vérifié
+sur Alphabet, exercice par exercice :
+
+| exercice | CA nous | CA Baggr | résultat net nous | « Bénéfices » Baggr |
+|---|---|---|---|---|
+| 2021 | 257,6 | 257,6 | 76,0 | 76,0 |
+| 2023 | 307,4 | 307,4 | 73,8 | 73,8 |
+| 2025 | 402,8 | 402,8 | 132,2 | 132,2 |
+
+Écart maximal : **0,05 %**. Leur libellé « Bénéfices » désigne le résultat net.
+Le nombre d'actions que nous DÉDUISONS (résultat net ÷ bénéfice par action)
+tombe à 12,2 milliards là où ils publient 12,1 — la déduction est bonne à 1 %.
+
+Sur l'attendu, le consensus concorde aussi (chiffre d'affaires 2026 à 0,5 %,
+2027 à 0,1 %). La divergence n'apparaît QUE là où nos méthodes diffèrent : à
+partir de 2028 nous extrapolons en décélérant vers 3 %, eux prolongent plus
+généreusement, et l'écart atteint 12,7 % en 2030 (817 contre 936 Md$). Ce n'est
+pas une donnée qui diverge, c'est une hypothèse.
+
+### Le bénéfice attendu passe en montant, à côté du par-action
+
+« Dans notre "dérouler la trajectoire attendue" on a Bénéfice par action,
+pourquoi ? ». Parce que c'est ce que notre source donne : le consensus de Yahoo
+est par action, il n'existe pas de consensus en montant. Mais le graphique
+juste au-dessus parle en millions, et passer au par-action dans le tableau
+obligeait à changer d'unité en cours de route.
+
+Les deux colonnes coexistent désormais. Le montant est le produit du bénéfice
+par action et du nombre d'actions déduit du dernier exercice publié — une
+déduction vérifiée à 1 % contre le chiffre publié d'Alphabet. L'hypothèse d'un
+nombre d'actions CONSTANT est écrite sous le tableau, parce qu'elle est fausse
+pour toute société qui rachète ses titres.
+
+### Une échelle de lecture sous le score
+
+Validée par le propriétaire, inspirée de la leur (« sous 8 dégradé, 8-12 moyen,
+12+ solide » sur 20). Un /100 sans repère ne dit rien : 62 est-il bon ?
+
+Sous 50 **dégradé**, de 50 à 70 **moyen**, 70 et plus **solide**. Les seuils
+sont ABSOLUS — des jugements sur l'entreprise, pas des centiles de notre liste,
+sinon la note changerait de sens à chaque rotation d'univers. Sur les 94 fiches
+publiées ils répartissent 18 / 45 / 36 %, ce qui trie sans écraser.
+
+### Pérennité : deux dates### Pérennité : deux dates confondues en une sur le portefeuille
 
 Angle mort que la question ne nommait pas, et qui touche la page où l'argent
 est réel. `updated_at` est rafraîchi CHAQUE JOUR par la mise à jour des cours ;

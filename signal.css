@@ -68,6 +68,14 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 .ring .rv{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .ring .rn{font-family:var(--serif);font-size:2.8rem;line-height:1;color:var(--text)}
 .ring .rs{font:.6rem var(--mono);color:var(--text3);letter-spacing:1px;margin-top:3px}
+/* Palier de lecture sous le chiffre : il dit ce que le nombre VAUT. Un /100
+   sans repère ne dit rien — « 62 » est-il bon ? Seuils ABSOLUS (50 / 70), pas
+   des centiles de la liste : sinon la note changerait de sens à chaque
+   rotation d'univers. */
+.ring .rp{font:.58rem var(--mono);letter-spacing:.6px;margin-top:5px;text-align:center;white-space:nowrap}
+.ring .rp-bas{color:var(--red)}
+.ring .rp-moyen{color:#e0995e}
+.ring .rp-haut{color:var(--green)}
 .ring .rl{font:.56rem var(--mono);color:var(--text3);letter-spacing:2px;display:flex;align-items:center;gap:4px}
 .ring .rl::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ac);box-shadow:0 0 6px var(--ac);animation:blink 1.5s infinite}
 

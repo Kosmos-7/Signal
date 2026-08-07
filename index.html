@@ -1131,6 +1131,20 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
    (comparer T4 à T3 raconterait la saisonnalité, pas la trajectoire). */
 let FD_MODE='an';
 const FD_SYM={USD:'$',EUR:'€',GBP:'£',JPY:'¥',KRW:'₩',TWD:'NT$',CHF:'CHF',SEK:'kr',DKK:'kr',NOK:'kr'};
+/* ÉCHELLE DE LECTURE DU SCORE (décision du propriétaire, 07/08/2026).
+   Un /100 sans repère ne dit rien : 62 est-il bon ? La grille répond en
+   ABSOLU — les seuils sont des jugements sur l'entreprise, pas des centiles
+   de notre liste, sinon la note changerait de sens à chaque rotation
+   d'univers. Sur les 94 fiches publiées ils répartissent 18 / 45 / 36 %,
+   ce qui trie sans écraser. */
+function paliers(n){
+  if(n==null)return null;
+  // Un seul mot : l'anneau fait 138 px et « profil dégradé » y touchait le
+  // tracé. Le libellé « SCORE » juste au-dessus donne déjà le sujet.
+  if(n<50)return {mot:'dégradé',ton:'bas'};
+  if(n<70)return {mot:'moyen',ton:'moyen'};
+  return {mot:'solide',ton:'haut'};
+}
 /* ÉCART À LA TRAJECTOIRE, en unité lisible. La formule (1 − prix/tendance)
    n'est bornée que d'un côté : un titre SOUS sa tendance ne peut pas l'être de
    plus de 100 %, un titre AU-DESSUS n'a aucune limite — Advantest sortait à
@@ -1365,6 +1379,22 @@ function fondaRender(s){
        arithmétique, et une case vide veut dire qu'on a refusé de prolonger. */
     (function(){if(!proj.length)return '';
       const unBpa=proj.some(p=>p.eps!=null);
+      /* LE BÉNÉFICE EN ABSOLU, dans la même unité que le graphique.
+         Question du propriétaire : « pourquoi bénéfice par ACTION ? ». Parce
+         que c'est ce que notre source donne — le consensus de Yahoo est par
+         action, et il n'existe pas de consensus en montant. Mais le graphique
+         juste au-dessus parle en millions : passer au par-action dans le
+         tableau obligeait le lecteur à changer d'unité en cours de route.
+         On publie donc les DEUX, le montant étant le produit du bénéfice par
+         action et du NOMBRE D'ACTIONS DÉDUIT du dernier exercice publié
+         (résultat net ÷ bénéfice par action). Cette déduction se vérifie :
+         sur Alphabet elle donne 12,2 milliards de titres là où le chiffre
+         publié est 12,1. L'hypothèse — un nombre d'actions constant — est
+         écrite sous le tableau, parce qu'elle est fausse pour toute société
+         qui rachète ses titres. */
+      const _der=(F.an||[]).filter(e=>e.rn!=null&&e.eps).slice(-1)[0];
+      const actions=(_der&&_der.eps>0&&_der.rn>0)?_der.rn/_der.eps:null;
+      const unNet=unBpa&&actions!=null;
       const nat=(p,k)=>p[k+'_nature']||p.nature;
       const bal=v=>v==null?'—':v.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});
       const li=proj.slice().reverse().map(p=>{
@@ -1380,10 +1410,13 @@ function fondaRender(s){
         const toutExt=series.length&&series.every(k=>nat(p,k)==='extrapolé');
         return '<tr'+(toutExt?' class="fd-est"':'')+'><td>'+p.exercice+'</td>'+
           cell('ca', p.ca==null?'—':fdMoney(p.ca,dev)+(p.ca_haut!=null?' à '+fdMoney(p.ca_haut,dev):''))+
+          (unNet?cell('eps', p.eps==null?'—':fdMoney(p.eps*actions,dev)):'')+
           (unBpa?cell('eps', p.eps==null?'—':bal(p.eps)+' '+sv(dev)):'')+'</tr>';}).join('');
       return '<details class="fd-det" id="fd-det-a"'+(openA?' open':'')+'><summary>Dérouler la trajectoire attendue ▾</summary>'+
-        '<table class="fd-table"><tr><th>Exercice</th><th>CA attendu</th>'+(unBpa?'<th>Bénéfice par action</th>':'')+'</tr>'+li+'</table>'+
-        '<p class="fd-inline"><i>En clair : consensus des analystes. En grisé : notre prolongation arithmétique. Un tiret, ou le signe ⌁, veut dire que nous avons refusé de prolonger — survolez-le pour le motif.</i></p></details>';})()+
+        '<table class="fd-table"><tr><th>Exercice</th><th>CA attendu</th>'+(unNet?'<th>Bénéfice net</th>':'')+(unBpa?'<th>Par action</th>':'')+'</tr>'+li+'</table>'+
+        '<p class="fd-inline"><i>En clair : consensus des analystes. En grisé : notre prolongation arithmétique. Un tiret, ou le signe ⌁, veut dire que nous avons refusé de prolonger, survolez-le pour le motif.'+
+        (unNet?' Le bénéfice net est le bénéfice par action multiplié par les '+(actions/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+' milliards de titres déduits du dernier exercice (résultat net ÷ bénéfice par action) : il suppose donc un nombre d\'actions CONSTANT, ce qui est faux pour une société qui rachète les siens.':'')+
+        '</i></p></details>';})()+
     '</div>'+
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
@@ -1630,7 +1663,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
     illuSociete(s.ticker)+
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
-    '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div></div></div></div>'+
+    '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div>'+(function(){const p=paliers(score);return p?'<div class="rp rp-'+p.ton+'">'+p.mot+'</div>':'';})()+'</div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     '<div id="chartsec"></div>'+
     '<div id="fondasec"></div>'+
