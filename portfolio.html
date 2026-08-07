@@ -1789,7 +1789,22 @@ async function loadPortfolio() {
     const res = await fetch('portfolio.json?v=' + Date.now());
     const d   = await res.json();
 
-    document.getElementById('update-line').textContent = `Mis à jour · ${d.updated_at} · ${d.week}`;
+    /* DEUX DATES, PAS UNE. `updated_at` est rafraîchi CHAQUE JOUR par la mise à
+       jour des cours ; `week` ne bouge que quand l'agent tourne, le lundi. Les
+       concaténer sur une ligne (« Mis à jour · 2026-08-07 · Sem. 31 ») faisait
+       lire la date du jour comme celle de l'analyse, alors que les décisions
+       pouvaient dater d'une semaine ou plus. On sépare, et on DIT le décalage
+       quand il existe : un lecteur doit savoir de quand datent les arbitrages
+       qu'il regarde, pas seulement de quand datent les cours. */
+    const _sem = (iso) => { const t = new Date(iso + 'T00:00:00Z');
+      const j = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()));
+      j.setUTCDate(j.getUTCDate() + 4 - (j.getUTCDay() || 7));
+      const a = new Date(Date.UTC(j.getUTCFullYear(), 0, 1));
+      return `Sem. ${Math.ceil(((j - a) / 86400000 + 1) / 7)} · ${j.getUTCFullYear()}`; };
+    const _retard = d.updated_at && d.week && _sem(d.updated_at) !== d.week;
+    document.getElementById('update-line').textContent =
+      `Cours au ${d.updated_at} · analyse ${d.week}`
+      + (_retard ? ' — les arbitrages datent de cette semaine-là, pas d\'aujourd\'hui' : '');
     document.getElementById('footer-week').textContent = d.week;
     const heroCapEl = document.getElementById('hero-capital');
     if (heroCapEl) heroCapEl.textContent = fmtEur(d.capital_initial);

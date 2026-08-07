@@ -5,7 +5,29 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
-### Audit de la grille : seize points sur cent ne notaient rien
+### Pérennité : deux dates confondues en une sur le portefeuille
+
+Angle mort que la question ne nommait pas, et qui touche la page où l'argent
+est réel. `updated_at` est rafraîchi CHAQUE JOUR par la mise à jour des cours ;
+`week` ne bouge que quand l'agent tourne, le lundi. La page les concaténait :
+« Mis à jour · 2026-08-07 · Sem. 31 · 2026 » — une date du jour collée à une
+analyse d'il y a une semaine, sur une seule ligne, sans rien pour les
+distinguer. Un lecteur y lit que les arbitrages sont d'aujourd'hui.
+
+La ligne dit désormais « Cours au 2026-08-07 · analyse Sem. 31 · 2026 », et
+ajoute explicitement le décalage quand il existe. Le cas n'est pas théorique :
+c'est l'état actuel du site, l'étape agent du workflow étant en
+`continue-on-error` — elle peut échouer sans que rien ne s'arrête.
+
+**Ce qui tient déjà, vérifié** : le screener a une garde de couverture
+fail-loud (sous 85 % de titres scorés il refuse de publier et laisse la
+version précédente en ligne, leçon du 27/07 où 94 titres US évincés avaient
+produit une watchlist 100 % européenne, job vert) ; l'étape screener n'est PAS
+en `continue-on-error`, donc l'agent ne peut pas tourner sur une watchlist qui
+vient d'échouer ; l'agent refuse d'écrire `portfolio.json` quand sa passe 2 est
+inexploitable ou l'API indisponible, plutôt que d'écrire un état dégradé.
+
+### Audit de la grille### Audit de la grille : seize points sur cent ne notaient rien
 
 Demandé par le propriétaire — « ce que l'on calcule, comment, et pourquoi on
 l'affiche ; fiable, pérenne, simple et utile ». La mesure d'abord, sur les
