@@ -1256,9 +1256,17 @@ function fondaRender(s){
     '<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="rgba(255,255,255,.10)"/>';
   if(projC.length){const xSep=slot*rows.length;
     bars+='<line x1="'+xSep+'" x2="'+xSep+'" y1="4" y2="'+(H-PB+2)+'" stroke="rgba(255,255,255,.22)" stroke-dasharray="3 3"/>';}
-  // Au-delà de 8 périodes les étiquettes se chevauchent : une sur deux, la
-  // dernière (période la plus récente) restant TOUJOURS étiquetée.
-  const step=n>8?2:1;
+  // ÉTIQUETTES : le pas se déduit de la PLACE, il n'est plus deviné. « une sur
+  // deux » suffisait à douze colonnes ; à vingt-quatre (dix-neuf exercices
+  // publiés plus cinq projetés) sur 440 unités de large, « 2024 2025 2026 » se
+  // chevauchait — signalé par le propriétaire sur son téléphone. On mesure
+  // donc : un libellé fait ~6,2 unités par caractère à cette taille, il lui
+  // faut son slot plus une marge.
+  const LARG_CAR=6.2, LARG_LAB=4*LARG_CAR+6;
+  const step=Math.max(1,Math.ceil(LARG_LAB/slot));
+  // Largeur du plus long libellé de valeur projetée, mesurée sur les données
+  // réelles plutôt que supposée.
+  const placeValeur=projC.length&&slot>=(Math.max(...projC.map(p=>fdMoney(p.ca,dev).length))*LARG_CAR+8);
   cols.forEach((o,i)=>{
     const r=o.v, cx=slot*i+slot/2, last=(i===rows.length-1), op=o.pr?0.9:(last?1:0.45);
     const fCa=o.pr?'url(#fdhach)':'#74b6df';
@@ -1272,12 +1280,24 @@ function fondaRender(s){
       /* Les projections sont peu nombreuses (2 à 5 barres) et c'est LEUR
          chiffre qu'on vient lire : on l'écrit au-dessus de la barre plutôt
          que de le réserver au tableau replié. */
-      if(o.pr){const ht=(r.ca_haut!=null?r.ca_haut:r.ca)*sc;
-        bars+='<text x="'+(cx-bw/2-2)+'" y="'+Math.max(9,y0-ht-6)+'" text-anchor="middle" class="chx-axis" fill="#74b6df">'+fdMoney(r.ca,dev).replace(/&nbsp;/g,' ')+(r.ca_haut!=null?' \u2013 '+fdMoney(r.ca_haut,dev):'')+'</text>';}}
+      /* La valeur n'est écrite que si elle TIENT dans son slot. À cinq
+         projections sur un écran de 390 px, « 409 Md$ » et « 442 Md$ » se
+         recouvraient : le chiffre exact est de toute façon dans le tableau
+         dépliable juste en dessous, une étiquette illisible ne vaut pas
+         mieux que pas d'étiquette. */
+      if(o.pr&&placeValeur){const ht=(r.ca_haut!=null?r.ca_haut:r.ca)*sc;
+        bars+='<text x="'+(cx-bw/2-2)+'" y="'+Math.max(9,y0-ht-6)+'" text-anchor="middle" class="chx-axis" fill="#74b6df">'+fdMoney(r.ca,dev).replace(/&nbsp;/g,' ')+'</text>';}}
     if(!o.pr&&r.rn!=null){const h=r.rn*sc, neg=r.rn<0;
       bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':'#c6c6e0')+'" opacity="'+(neg?0.8:op*0.75)+'"/>';}
-    if((n-1-i)%step===0||last)
-      bars+='<text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" class="chx-axis"'+(last?' fill="#c6c6e0"':(o.pr?' opacity=".65"':''))+'>'+(o.pr?r.exercice:lab(r))+'</text>';
+    if((n-1-i)%step===0||last){
+      /* Le libellé de la DERNIÈRE colonne débordait du viewBox et sortait
+         rogné (« 2030 » coupé au bord droit sur mobile) : centré, il déborde
+         de sa demi-largeur. Aux deux extrémités on ancre donc le texte au
+         bord plutôt qu'à son centre. */
+      const txt=o.pr?String(r.exercice):lab(r), demi=txt.length*LARG_CAR/2;
+      const anc=(cx+demi>W-1)?'end':(cx-demi<1?'start':'middle');
+      const tx=anc==='end'?W-1:(anc==='start'?1:cx);
+      bars+='<text x="'+tx+'" y="'+(H-6)+'" text-anchor="'+anc+'" class="chx-axis"'+(last?' fill="#c6c6e0"':(o.pr?' opacity=".65"':''))+'>'+txt+'</text>';}
   });
   // La table des chiffres est DÉPLIABLE (décision propriétaire du 06/08 : le
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
@@ -1394,7 +1414,10 @@ function fdPerChart(F,fmtPer,W,perNow){
     +(now?'<tr class="fd-est"><td>aujourd\'hui</td><td>'+fmtPer(now.per)+'</td></tr>':'')
     +pub.slice().reverse().map(p=>'<tr><td>'+p.an+'</td><td>'+fmtPer(p.per)+'</td></tr>').join('');
   if(pub.length<2){
-    const inline=pub.concat(est).map(p=>p.an+(p.est?'<i>e</i>':'')+'\u00a0: '+fmtPer(p.per)).join(' \u00b7 ');
+    /* Sans courbe, ce repli est le SEUL endroit où le multiple apparaît :
+       le PER du jour y entre donc explicitement. */
+    const inline=(now?['aujourd\'hui\u00a0: '+fmtPer(now.per)]:[])
+      .concat(pub.concat(est).map(p=>p.an+(p.est?'<i>e</i>':'')+'\u00a0: '+fmtPer(p.per))).join(' \u00b7 ');
     return {inline:inline,queEst:!pub.length,lignes:lignes,svg:null};
   }
   W=W||800;
@@ -1424,17 +1447,37 @@ function fdPerChart(F,fmtPer,W,perNow){
   trous.filter(an=>an>=a0&&an<=a1).forEach(an=>{
     g+='<text x="'+X(an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+an+' : exercice sans multiple (perte ou BPA indisponible)</title></text>';});
   let iMin=0,iMax=0;pub.forEach((p,i)=>{if(p.per<pub[iMin].per)iMin=i;if(p.per>pub[iMax].per)iMax=i;});
-  const idxLab=new Set([0,pub.length-1,iMin,iMax]);
+  // Le dernier exercice publié cède son étiquette au point du jour quand
+  // celui-ci existe : ils sont à une demi-année l'un de l'autre et c'est
+  // « aujourd'hui » qu'on vient lire. Sa valeur reste dans le tableau.
+  const idxLab=new Set([0,iMin,iMax]);
+  if(!now)idxLab.add(pub.length-1);
+  /* ANTI-CHEVAUCHEMENT. On étiquetait la valeur de CHAQUE estimation, plus le
+     point du jour, plus quatre points remarquables — et « 28× 22× 19× 17× »
+     se recouvrait autour du losange, où trois points tiennent dans une
+     demi-année d'abscisse (signalé par le propriétaire sur son téléphone).
+     Une étiquette n'est écrite que si la précédente est assez loin ; sinon
+     elle est simplement omise, la valeur restant lisible au survol. */
+  // 10 px en unités du viewBox, police à chasse fixe : ~6 unités par
+  // caractère. Les VALEURS font trois caractères (« 28× ») ; les libellés
+  // d'AXE en font quatre (« auj. »), il leur faut donc plus d'air — sans
+  // cette distinction, « auj. » et « 28e » se touchaient encore.
+  const ECART_VAL=22, ECART_AXE=30;
+  let dernierLab=-1e9, dernierAxe=-1e9;
   const stepX=pts.length>8?2:1;
   pts.forEach((p,i)=>{
     const cx=X(p.an),cy=Y(p.per);
     g+=p.now?'<rect x="'+(cx-4.2)+'" y="'+(cy-4.2)+'" width="8.4" height="8.4" transform="rotate(45 '+cx+' '+cy+')" fill="#f0c674" stroke="#0d0d16" stroke-width="1.5"><title>aujourd\'hui : '+fmtPer(p.per)+' (cours du jour / b\u00e9n\u00e9fice des 12 derniers mois)</title></rect>'
         :p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"><title>'+p.an+'e : '+fmtPer(p.per)+'</title></circle>'
             :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"><title>'+p.an+' : '+fmtPer(p.per)+'</title></circle>';
-    if(p.est||p.now||idxLab.has(i))
-      g+='<text x="'+cx+'" y="'+Math.max(11,cy-10)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.now?'#f0c674':(p.est?'#8a8aa6':'#c6c6e0'))+'">'+Math.round(p.per)+'\u00d7</text>';
-    if(p.now||(pts.length-1-i)%stepX===0)
-      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+(p.now?' fill="#f0c674"':'')+'>'+(p.lab||(String(p.an).slice(2)+(p.est?'e':'')))+'</text>';
+    // Le point du jour garde toujours son étiquette : c'est celui qu'on vient
+    // lire. Les autres cèdent la place quand ils sont trop près du précédent.
+    if((p.est||p.now||idxLab.has(i))&&(p.now||cx-dernierLab>=ECART_VAL)){
+      dernierLab=cx;
+      g+='<text x="'+cx+'" y="'+Math.max(11,cy-10)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.now?'#f0c674':(p.est?'#8a8aa6':'#c6c6e0'))+'">'+Math.round(p.per)+'\u00d7</text>';}
+    if((p.now||(pts.length-1-i)%stepX===0)&&(p.now||cx-dernierAxe>=ECART_AXE)){
+      dernierAxe=cx;
+      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+(p.now?' fill="#f0c674"':'')+'>'+(p.lab||(String(p.an).slice(2)+(p.est?'e':'')))+'</text>';}
   });
   return {svg:'<svg class="fd-svg" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',lignes:lignes,med:med,trous:trous.some(an=>an>=a0&&an<=a1)};
 }
@@ -1512,10 +1555,17 @@ function dataZone(s,b,compact){
       '<div><div class="qh">Décomposition de la note</div>'+meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div></div>'+
     (compact?compactMetrics(s)
       :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',pc(fs,b.cross_slope_mm21_pct,1))+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))
-        /* Les multiples manquaient à l'écran alors qu'ils pilotent un quart de
-           la note. Un PER prévisionnel NÉGATIF n'est pas un multiple : il dit
-           que les analystes attendent une perte, et c'est ça qu'on écrit. */
-        +mk('PER courant',b.trailing_pe!=null?f(b.trailing_pe,1)+'×':'—')
+        /* PAS de tuile « PER courant ». Question du propriétaire le 07/08 :
+           « est-ce vraiment utile ? ». Le multiple du jour est essentiel — il
+           pilote à lui seul les 8 points du critère « histoire » — mais il
+           apparaissait TROIS fois sur la même page : ici en chiffre nu, sur la
+           courbe des PER en losange ambre au milieu de son historique, et dans
+           le détail de la note avec sa médiane en regard. Les deux derniers le
+           donnent avec sa référence ; celui-ci était le seul à ne rien dire.
+           Il reste affiché en toutes lettres quand la courbe n'existe pas.
+           Le PER PRÉVISIONNEL, lui, ne figure nulle part ailleurs et dit autre
+           chose : ce que les analystes attendent. Un prévisionnel NÉGATIF
+           n'est pas un multiple, il annonce une perte, et c'est ça qu'on écrit. */
         +mk('PER prévisionnel',b.forward_pe==null?'—':(b.forward_pe<0?'pertes attendues':f(b.forward_pe,1)+'×'))
         +'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>')+
     noteDetail(b.note);

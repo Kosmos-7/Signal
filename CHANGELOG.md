@@ -135,6 +135,41 @@ champs, et le run ne pouvait pas échouer sur une donnée absente.
   liste explicite : le prochain champ ajouté à `fonda` sans être traité dans la
   fusion fera échouer les tests au lieu de disparaître en silence.
 
+### Les chiffres se marchaient dessus, et le PER courant était dit trois fois
+
+Deux captures d'écran du propriétaire, prises sur son téléphone : « les
+chiffres se superposent ça fait trop » et « est-ce vraiment utile le PER
+courant ? ».
+
+**Les étiquettes ne mesuraient pas la place dont elles disposaient.** Le pas de
+l'axe des exercices était deviné (« une sur deux au-delà de huit ») — bon à
+douze colonnes, faux à vingt-quatre, et « 2024 2025 2026 » se recouvrait. Les
+valeurs écrites au-dessus des barres projetées faisaient de même : « 409 Md$ »
+mordait sur « 442 Md$ ». Sur la courbe des PER, trois points tiennent dans une
+demi-année d'abscisse autour du losange, et « 28× 22× 19× 17× » se chevauchait.
+
+- Le pas de l'axe se **déduit** désormais de la largeur d'un libellé (six
+  unités par caractère, police à chasse fixe) rapportée au slot disponible.
+- Une valeur au-dessus d'une barre n'est écrite **que si elle tient**. Sinon
+  rien : le chiffre exact est de toute façon dans le tableau dépliable, et une
+  étiquette illisible ne vaut pas mieux qu'une absence.
+- Sur la courbe des PER, une étiquette cède la place quand la précédente est
+  trop proche — sauf celle du jour, qui est celle qu'on vient lire. Les
+  libellés d'axe ont leur propre écart, plus large : ils font quatre caractères
+  (« auj. ») là où les valeurs en font trois.
+- Le libellé de la **dernière colonne** sortait rogné du viewBox (« 2030 »
+  coupé au bord droit) : aux deux extrémités le texte s'ancre au bord plutôt
+  qu'à son centre.
+
+**Le PER courant, lui, disparaît des tuiles.** La question était juste : le
+multiple du jour apparaissait TROIS fois sur la même page — en chiffre nu dans
+les métriques, en losange ambre au milieu de son propre historique, et dans le
+détail de la note avec sa médiane en regard. Les deux derniers le donnent avec
+sa référence ; la tuile était la seule à ne rien dire. Elle est retirée. Le
+multiple reste affiché en toutes lettres sur les fiches sans courbe, où il n'a
+pas d'autre porteur. Le PER **prévisionnel** reste : il ne figure nulle part
+ailleurs et dit autre chose — ce que les analystes attendent.
+
 ### Deux contradictions vues à l'écran, sur la page elle-même
 
 Trouvées en relisant les fiches produites plutôt qu'en relisant le code.
