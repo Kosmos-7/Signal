@@ -99,7 +99,12 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
 
   .resume{font-size:1.04rem;line-height:1.75;color:var(--text);font-weight:400;max-width:1040px}.resume + .resume{margin-top:.75rem}
 
-  .quant{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:1.8rem 0}
+  /* Depuis l'élagage du 07/08, le bloc quantitatif n'a plus qu'une section :
+     la décomposition de la note, ses quatre jauges réparties sur deux
+     colonnes. Les jauges RSI / z-score qui occupaient l'autre moitié sont
+     parties (leurs valeurs vivent sous le graphique de cours). */
+  .quant2{margin:1.8rem 0}
+  .q2g{display:grid;grid-template-columns:1fr 1fr;gap:4px 2.6rem}
   .qh{font:600 .6rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem;display:flex;align-items:center;gap:10px}.qh::after{content:'';flex:1;height:1px;background:var(--line)}
   .meter{grid-template-columns:104px 1fr 62px}   /* labels en toutes lettres, valeurs décimales */
 
@@ -118,9 +123,9 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .bbsec .sec-h{color:var(--text2)}
 
   /* apparition échelonnée des sections (futuriste) */
-  .doc.on .resume,.doc.on .quant,.doc.on .metrics,.doc.on .prose,.doc.on .bbsec,.doc.on #chartsec{animation:rise .5s ease both}
+  .doc.on .resume,.doc.on .quant2,.doc.on .metrics,.doc.on .prose,.doc.on .bbsec,.doc.on #chartsec{animation:rise .5s ease both}
   .doc.on #chartsec{animation-delay:.03s}
-  .doc.on .quant{animation-delay:.05s}.doc.on .metrics{animation-delay:.1s}.doc.on .prose{animation-delay:.15s}.doc.on .bbsec{animation-delay:.2s}
+  .doc.on .quant2{animation-delay:.05s}.doc.on .metrics{animation-delay:.1s}.doc.on .prose{animation-delay:.15s}.doc.on .bbsec{animation-delay:.2s}
 
   /* ── graphique de fiche : canal de régression (composant chx, porté de la maquette) ── */
   #chartsec:not(:empty){margin:1.7rem 0 .3rem}
@@ -163,6 +168,8 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      au doigt, on veut pouvoir taper une colonne pour lire son montant sans
      perdre le défilement vertical de la page au-dessus du graphique. */
   .fd-hi{fill:rgba(255,255,255,.055)}
+  /* Parent positionné de la carte flottante du relevé (façon Baggr). */
+  .fd-cwrap{position:relative}
   .fd-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8rem}
   .fd-table th{font:600 .58rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);text-align:right;padding:4px 0 6px;border-bottom:1px solid var(--line);font-weight:600}
   .fd-table th:first-child{text-align:left}
@@ -360,7 +367,11 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
     .doc{scroll-margin-top:4.2rem}   /* le header fixe ne recouvre pas le haut de la fiche */
     body.v-home .stage{margin-top:4.6rem}
     .d-tk{font-size:2.6rem}
-    .quant{grid-template-columns:1fr;gap:1rem}
+    .q2g{grid-template-columns:1fr}
+    /* La bulle « i » ancrée à son icône déborde de l'écran dès que l'icône
+       est près d'un bord : sur mobile elle devient une feuille posée en bas
+       du viewport, pleine largeur — lisible où que soit l'icône. */
+    .inf .inf-tip{position:fixed;left:12px;right:12px;bottom:12px;top:auto;width:auto;z-index:60}
   }
 </style>
 </head>
@@ -934,7 +945,11 @@ function drawChart(s){
     (dec!=null?'<div class="chx-mrow">'+[
       '<span class="chx-k">'+mlabel+' : </span><span class="chx-v" title="Prix de tendance : '+(b.prix_tendance!=null?Math.round(b.prix_tendance)+sym:'—')+'">'+Math.abs(dec).toFixed(0)+' %</span>',
       '<span class="chx-k">z = </span><span class="chx-v2">'+fs(zOff,1).replace('.',',')+'σ</span>'
-    ].concat(cons?[cons]:[]).join(' <span class="chx-k">·</span> ')+'</div>':'')+
+    // Le RSI vit ici depuis l'élagage du 07/08 : c'est un signal de marché,
+    // sa place est sous le graphique de marché — plus dans une jauge dédiée
+    // alors qu'il ne compte plus dans la note depuis la v4.
+    ].concat(b.rsi!=null?['<span class="chx-k">RSI </span><span class="chx-v2">'+f(b.rsi,0)+'</span>']:[])
+     .concat(cons?[cons]:[]).join(' <span class="chx-k">·</span> ')+'</div>':'')+
     '<div id="chx-warnslot"></div>'+
 '<div class="chx-note">Trajectoire historique, pas une valeur intrinsèque. <a href="apprendre.html#decote" style="color:var(--text3)">Méthode →</a></div>';
   const svg=document.getElementById('chx-svg'),tip=document.getElementById('chx-tip');
@@ -1167,33 +1182,35 @@ function fdLabel(iso,mode){
   const [y,m]=iso.split('-').map(Number);
   return mode==='an'?String(y):'T'+(Math.floor((m-1)/3)+1)+' '+String(y).slice(2);
 }
-/* RELEVÉ AU SURVOL ET AU DOIGT — commun aux deux graphiques de la section
-   « Chiffres publiés » (demande du propriétaire, 07/08 : « quand je passe la
-   souris ou le doigt sur un pilier des graphs je veux pouvoir voir le
-   montant »).
+/* RELEVÉ AU SURVOL ET AU DOIGT sur le graphique des barres (demandes du
+   propriétaire, 07/08 : « quand je passe la souris ou le doigt sur un pilier
+   des graphs je veux pouvoir voir le montant », puis « regarde comment Baggr
+   affiche le résultat au survol, je veux pareil »).
 
-   POURQUOI PAS UN <title> SVG. Les barres portaient déjà un titre natif sur
-   la courbe des PER : il n'apparaît qu'au bout d'une seconde de survol, jamais
-   au doigt, et le mobile est l'écran principal ici. On refait donc le même
-   mécanisme que le graphique de cours : un relevé DOCKÉ sous le dessin, qui
-   ne recouvre rien et se lit à la même place sur les deux tailles d'écran.
+   FAÇON BAGGR, donc : une carte FLOTTANTE posée à côté de la colonne visée,
+   du côté où il y a de la place, cachée au repos — pas le bandeau docké du
+   graphique de cours. La hauteur est fixe : la carte suit la colonne en X,
+   jamais le pointeur en Y, sinon elle tremble sous le doigt.
 
    COLONNE LA PLUS PROCHE, pas colonne survolée : une barre fait 34 unités de
    large dans un slot qui peut en faire 18 — viser la barre elle-même est
    impossible au doigt. On prend l'abscisse la plus proche, donc tout le slot
-   est cliquable.
-
-   `repos` est l'index montré au repos et au retour de la souris. Ce n'est PAS
-   le dernier point : à droite vivent nos extrapolations (2030) et le dernier
-   exercice PUBLIÉ est ce qu'on vient lire par défaut. */
-function releveSvg(svg,tip,xs,htmls,W,repos){
+   est cliquable. Au doigt, la carte RESTE après qu'on a levé le doigt : on
+   lève le doigt précisément pour lire ce qu'il cachait. */
+function releveSvg(svg,tip,xs,htmls,W){
   if(!svg||!tip||!xs.length)return;
   const hi=svg.querySelector('.fd-hi');
   const demi=(xs.length>1?Math.abs(xs[1]-xs[0]):40)/2;
+  const cache=()=>{tip.style.display='none';if(hi)hi.setAttribute('visibility','hidden');};
   const montre=i=>{
     tip.innerHTML=htmls[i];tip.style.display='block';
     if(hi){hi.setAttribute('x',xs[i]-demi);hi.setAttribute('width',demi*2);
-      hi.setAttribute('visibility','visible');}};
+      hi.setAttribute('visibility','visible');}
+    const rb=svg.getBoundingClientRect();if(!rb.width)return;
+    const cx=xs[i]*rb.width/W, tw=tip.offsetWidth||180;
+    let lx=cx+14; if(lx+tw>rb.width-2)lx=cx-tw-14;
+    tip.style.left=Math.max(2,lx)+'px';
+    tip.style.top=Math.round(rb.height*0.12)+'px';};
   const suit=ev=>{
     const rb=svg.getBoundingClientRect();if(!rb.width)return;
     const mx=(ev.clientX-rb.left)*W/rb.width;
@@ -1201,9 +1218,7 @@ function releveSvg(svg,tip,xs,htmls,W,repos){
     montre(b);};
   svg.addEventListener('pointermove',suit);
   svg.addEventListener('pointerdown',suit);
-  // Au doigt on NE remet PAS au repos : le lecteur lève le doigt pour lire.
-  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType==='mouse')montre(repos);});
-  montre(repos);
+  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType==='mouse')cache();});
 }
 function fdPrev(arr,i,mode){
   if(mode==='an')return arr[i-1]||null;
@@ -1302,15 +1317,27 @@ function fondaRender(s){
   // Ce graphique porte le CA et le résultat net : une année projetée sans CA
   // (le CA s'arrête, le BPA continue) ne doit pas ouvrir une colonne vide.
   const projC=proj.filter(p=>p.ca!=null);
+  /* LE BÉNÉFICE ATTENDU EN BARRES (demande du propriétaire, 07/08 : « il
+     manque le bénéfice net prévisionnel dans les graphs »). Le consensus est
+     par action ; le montant est BPA × nombre d'actions déduit du dernier
+     exercice publié (résultat net ÷ BPA) — même déduction, même hypothèse
+     d'actions constantes que le tableau de trajectoire, écrite là-bas. Le
+     nombre d'actions est calculé ICI, une seule fois, et le tableau plus bas
+     réutilise le même : deux calculs finiraient par diverger. */
+  const _derEx=an.filter(e=>e.rn!=null&&e.eps).slice(-1)[0];
+  const actions=(_derEx&&_derEx.eps>0&&_derEx.rn>0)?_derEx.rn/_derEx.eps:null;
+  const rnAtt=p=>(p.eps!=null&&actions)?p.eps*actions:null;
   const cols=rows.map(r=>({v:r,pr:false})).concat(projC.map(p=>({v:p,pr:true})));
   const W=NARROW?440:800,H=170,PB=22,n=cols.length;
   const val=(o,k)=>o.v[k]==null?null:o.v[k];
-  const maxV=Math.max(...cols.map(o=>Math.max(val(o,'ca')||0,val(o,'ca_haut')||0,val(o,'rn')||0,1)));
+  const maxV=Math.max(...cols.map(o=>Math.max(val(o,'ca')||0,val(o,'ca_haut')||0,val(o,'rn')||0,o.pr?(rnAtt(o.v)||0):0,1)));
   const minV=Math.min(0,...cols.map(o=>Math.min(val(o,'rn')==null?0:val(o,'rn'),0)));
   const y0=8+(H-PB-16)*(maxV/(maxV-minV)), sc=(H-PB-16)/(maxV-minV);
   const slot=W/n, bw=Math.min(34,slot*0.22);
   let bars='<defs><pattern id="fdhach" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">'+
-    '<line x1="0" y1="0" x2="0" y2="5" stroke="#74b6df" stroke-width="2.4"/></pattern></defs>'+
+    '<line x1="0" y1="0" x2="0" y2="5" stroke="#74b6df" stroke-width="2.4"/></pattern>'+
+    '<pattern id="fdhach2" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">'+
+    '<line x1="0" y1="0" x2="0" y2="5" stroke="#c6c6e0" stroke-width="2.4"/></pattern></defs>'+
     // La bande de survol est posée EN PREMIER : elle doit passer derrière les
     // barres, pas par-dessus.
     '<rect class="fd-hi" x="0" y="0" width="0" height="'+(H-PB+4)+'" visibility="hidden"/>'+
@@ -1344,14 +1371,23 @@ function fondaRender(s){
        qui est le dernier exercice publié pour la première projection. */
     const prec=o.pr?(i>0?cols[i-1].v:null):fdPrev(full,full.indexOf(r),FD_MODE);
     const dlt=(champ)=>fdDelta(r,prec,champ);
+    const rnA=o.pr?rnAtt(r):null;
+    const rnPrec=i>0?(cols[i-1].pr?rnAtt(cols[i-1].v):cols[i-1].v.rn):null;
+    // Nature par série : TSM porte un CA au consensus et un bénéfice déjà
+    // prolongé la même année — une seule mention les confondrait.
+    const natCa=(r.ca_nature||r.nature),natEps=(r.eps_nature||r.nature);
+    const natTxt=o.pr?(rnA!=null&&natEps!==natCa
+      ?'CA '+(natCa==='consensus'?'au consensus':'prolongé par nous')+' · bénéfice '+(natEps==='consensus'?'au consensus':'prolongé par nous')
+      :(natCa==='consensus'?'consensus des analystes':'notre prolongation arithmétique')):'';
     relH.push('<span class="d">'+(o.pr?r.exercice+'&nbsp;· attendu':lab(r))+'</span><br>'
-      +'<span style="color:#74b6df">■</span> CA&nbsp;: <span class="c">'+fdMoney(r.ca,dev)+'</span> '+dlt('ca')
+      +'<span style="color:#74b6df">'+(o.pr?'▨':'■')+'</span> CA&nbsp;: <span class="c">'+fdMoney(r.ca,dev)+'</span> '+dlt('ca')
       + (o.pr&&r.ca_haut!=null&&r.ca_haut>r.ca
           ?'<br>&nbsp;&nbsp;&nbsp;haut de fourchette&nbsp;: <span class="t">'+fdMoney(r.ca_haut,dev)+'</span>':'')
       + (!o.pr&&r.rn!=null
           ?'<br><span style="color:#c6c6e0">■</span> Résultat net&nbsp;: <span class="t">'+fdMoney(r.rn,dev)+'</span> '+dlt('rn'):'')
-      + (o.pr?'<br><i style="color:var(--text3);font-style:normal">'
-          +((r.ca_nature||r.nature)==='consensus'?'consensus des analystes':'notre prolongation arithmétique')+'</i>':''));
+      + (rnA!=null
+          ?'<br><span style="color:#c6c6e0">▨</span> Résultat net&nbsp;: <span class="t">'+fdMoney(rnA,dev)+'</span> '+fdDelta({v:rnA},{v:rnPrec},'v'):'')
+      + (natTxt?'<br><i style="color:var(--text3);font-style:normal">'+natTxt+'</i>':''));
     relX.push(slot*i+slot/2);
   });
   cols.forEach((o,i)=>{
@@ -1374,8 +1410,11 @@ function fondaRender(s){
          mieux que pas d'étiquette. */
       if(o.pr&&placeValeur){const ht=(r.ca_haut!=null?r.ca_haut:r.ca)*sc;
         bars+='<text x="'+(cx-bw/2-2)+'" y="'+Math.max(9,y0-ht-6)+'" text-anchor="middle" class="chx-axis" fill="#74b6df">'+fdMoney(r.ca,dev).replace(/&nbsp;/g,' ')+'</text>';}}
-    if(!o.pr&&r.rn!=null){const h=r.rn*sc, neg=r.rn<0;
-      bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':'#c6c6e0')+'" opacity="'+(neg?0.8:op*0.75)+'"/>';}
+    // Résultat net : publié en plein, attendu en hachuré gris — même code
+    // visuel que le CA (plein = déposé, hachures = attendu).
+    const rnV=o.pr?rnAtt(r):r.rn;
+    if(rnV!=null){const h=rnV*sc, neg=rnV<0;
+      bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':(o.pr?'url(#fdhach2)':'#c6c6e0'))+'" opacity="'+(neg?0.8:(o.pr?0.85:op*0.75))+'"/>';}
     if((n-1-i)%step===0||last){
       /* Le libellé de la DERNIÈRE colonne débordait du viewBox et sortait
          rogné (« 2030 » coupé au bord droit sur mobile) : centré, il déborde
@@ -1388,7 +1427,7 @@ function fondaRender(s){
   });
   // La table des chiffres est DÉPLIABLE (décision propriétaire du 06/08 : le
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
-  const openC=!!host.querySelector('#fd-det-c[open]'), openP=!!host.querySelector('#fd-det-p[open]');
+  const openC=!!host.querySelector('#fd-det-c[open]');
   const openA=!!host.querySelector('#fd-det-a[open]');
   /* Le tableau montre TOUT l'accumulé, lui : c'est le graphique qu'on allège,
      pas la donnée. Un lecteur qui déplie veut les chiffres, pas un extrait. */
@@ -1414,10 +1453,10 @@ function fondaRender(s){
       '<button class="chx-pbtn'+(FD_MODE==='an'?' on':'')+'" data-fd="an"'+(an.length<2?' disabled':'')+'>Annuel</button>'+
       '<button class="chx-pbtn'+(FD_MODE==='tr'?' on':'')+'" data-fd="tr"'+(tr.length<2?' disabled':'')+'>Trimestres</button>'+
       '<span class="chx-rlbl">publié en '+sv(dev)+'</span></div>'+
-    '<svg class="fd-svg" id="fd-bars" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
-    '<div class="chx-tip dock" id="fd-bars-tip"></div>'+
+    '<div class="fd-cwrap"><svg class="fd-svg" id="fd-bars" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
+    '<div class="chx-tip" id="fd-bars-tip"></div></div>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net'+
-      (projC.length?'&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">▨</span> CA attendu':'')+'</div>'+
+      (projC.length?'&nbsp;&nbsp;<span style="font-weight:700">▨</span> attendu'+(projC.some(p=>rnAtt(p)!=null)?'':' (CA seul)'):'')+'</div>'+
     /* Le lecteur doit savoir, sans cliquer, où s'arrête l'opinion des
        analystes et où commence notre arithmétique. */
     (function(){if(!proj.length)return '';
@@ -1434,19 +1473,21 @@ function fondaRender(s){
          elle vaut moins, parce qu'elle a l'air d'un fait. Le front dit donc
          exactement où la trajectoire s'arrête, et pourquoi. */
       const fin=projC.filter(p=>p.ca_arret)[0];
+      /* CONDENSÉ LE 07/08 (« met en mode i si c'est secondaire et quand même
+         utile ») : la ligne visible ne garde que la provenance — consensus
+         jusqu'où, notre arithmétique ensuite — et le REFUS de prolonger,
+         parce que c'est une position que nous prenons, pas une pédagogie.
+         Le pourquoi (décroissance vers 3 %, borne haute, source à deux
+         exercices — PAS « aucun analyste ne publie », c'était faux) part
+         dans la bulle. */
       return '<p class="fd-inline">Trajectoire attendue : <i>'+
         (cons.length?cons.join(' et ')+' d\'après le consensus des analystes':'')+
         (cons.length&&ext.length?', puis ':'')+
-        /* La phrase disait « aucun analyste ne publie à cet horizon ». C'est
-           faux : d'autres services affichent des estimations à cinq ans, et
-           leur profil irrégulier prouve qu'elles ne sortent pas d'une
-           formule. Ce qui est vrai, et suffit, c'est que NOTRE source s'arrête
-           à deux exercices — le lecteur a besoin de savoir d'où vient le
-           chiffre, pas d'une affirmation sur le marché entier. */
-        (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous, à croissance décroissante vers 3 % — notre source de consensus s\'arrête à deux exercices':'')+
-        '.'+(proj.some(p=>p.ca_haut!=null)?' Le contour en pointillé donne la borne haute : elle s\'écarte quand la trajectoire dépend d\'un carnet de commandes plutôt que d\'une croissance organique, et cet écart mesure notre ignorance.':'')+
+        (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous':'')+'.'+
         (fin?' Au-delà de '+fin.exercice+', nous n\'avançons rien : '+fin.ca_arret+'.':'')+
-        '</i></p>';})()+
+        '</i> <span class="inf" tabindex="0" aria-label="Comment est construite la trajectoire">i<span class="inf-tip">Notre source de consensus s\'arrête à deux exercices. Au-delà, notre prolongation fait décroître la croissance vers 3 %/an — une projection à taux constant est le mensonge classique de l\'exercice.'+
+        (proj.some(p=>p.ca_haut!=null)?' Le contour en pointillé donne la borne haute : elle s\'écarte quand la trajectoire dépend d\'un carnet de commandes plutôt que d\'une croissance organique, et cet écart mesure notre ignorance.':'')+
+        '</span></span></p>';})()+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th>'+(hasEb?'<th>EBITDA</th>':'')+'<th>Rés. net</th></tr>'+cells+'</table></details>'+
@@ -1470,8 +1511,8 @@ function fondaRender(s){
          publié est 12,1. L'hypothèse — un nombre d'actions constant — est
          écrite sous le tableau, parce qu'elle est fausse pour toute société
          qui rachète ses titres. */
-      const _der=(F.an||[]).filter(e=>e.rn!=null&&e.eps).slice(-1)[0];
-      const actions=(_der&&_der.eps>0&&_der.rn>0)?_der.rn/_der.eps:null;
+      // `actions` est calculé une seule fois, en tête de fondaRender : le
+      // graphique et ce tableau doivent multiplier par le MÊME nombre.
       const unNet=unBpa&&actions!=null;
       const nat=(p,k)=>p[k+'_nature']||p.nature;
       const bal=v=>v==null?'—':v.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -1496,17 +1537,16 @@ function fondaRender(s){
         (unNet?' Le bénéfice net est le bénéfice par action multiplié par les '+(actions/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+' milliards de titres déduits du dernier exercice (résultat net ÷ bénéfice par action) : il suppose donc un nombre d\'actions CONSTANT, ce qui est faux pour une société qui rachète les siens.':'')+
         '</i></p></details>';})()+
     '</div>'+
+    /* Plus de tableau « Dérouler les PER » ni de relevé au survol (décisions
+       du propriétaire, 07/08) : chaque point porte sa valeur directement sur
+       le dessin. L'explication du changement de base de cours — écrite le
+       07/08 pour répondre à sa propre question — reste accessible derrière
+       le « i », plus étalée sous le graphique. */
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
-        '<div class="chx-tip dock" id="fd-per-tip"></div>'+
-        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#f0c674;font-weight:700">◆</span> aujourd\'hui&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+'</div>'+
-        pertesAttendues+
-        /* La question que le propriétaire a posée le 07/08 — « je ne comprends
-           pas le PER courant vs la valeur du tableau » — venait d'un changement
-           de base de cours jamais énoncé. On l'énonce. */
-        '<p class="fd-inline"><i>Chaque exercice est au cours que le marché cotait À SA CLÔTURE, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Le losange « aujourd\'hui » et les estimations sont au cours DU JOUR — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.</i></p>'+
-        '<details class="fd-det" id="fd-det-p"'+(openP?' open':'')+'><summary>Dérouler les PER ▾</summary>'+
-        '<table class="fd-table" style="max-width:340px"><tr><th>Exercice</th><th>PER</th></tr>'+perB.lignes+'</table></details></div>'
+        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#f0c674;font-weight:700">◆</span> aujourd\'hui&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+
+        '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque. Le losange « aujourd\'hui » et les estimations sont au cours du jour — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.</span></span></div>'+
+        pertesAttendues+'</div>'
       :'<div class="fd-wrap"><div class="qh">'+(perB.queEst?'PER estimé (analystes)':'PER')+'</div>'+
         '<div class="fd-inline">'+perB.inline+'</div>'+pertesAttendues+'</div>')
     /* Aucun exercice, aucune estimation — mais les analystes peuvent quand
@@ -1517,15 +1557,8 @@ function fondaRender(s){
     if(b.disabled)return;FD_MODE=b.dataset.fd;fondaRender(s);}));
   /* Les écouteurs sont posés APRÈS innerHTML, à chaque rendu : la bascule
      Annuel/Trimestres réécrit tout le bloc, les anciens nœuds partent avec
-     leurs écouteurs. Rien à détacher, donc, mais rien à oublier non plus.
-     Repos du graphique des barres : le dernier exercice PUBLIÉ
-     (`rows.length-1`), pas la dernière colonne — à droite vivent nos
-     projections. */
-  releveSvg(host.querySelector('#fd-bars'),host.querySelector('#fd-bars-tip'),
-            relX,relH,W,Math.max(0,rows.length-1));
-  if(perB&&perB.releve)
-    releveSvg(host.querySelector('#fd-per'),host.querySelector('#fd-per-tip'),
-              perB.releve.xs,perB.releve.htmls,perB.releve.W,perB.releve.repos);
+     leurs écouteurs. Rien à détacher, donc, mais rien à oublier non plus. */
+  releveSvg(host.querySelector('#fd-bars'),host.querySelector('#fd-bars-tip'),relX,relH,W);
 }
 /* Graphique dédié à l'évolution du PER (annuel par nature, indépendant de la
    bascule Annuel/Trimestres). Axe en ANNÉES, pas en indices : un exercice sans
@@ -1534,7 +1567,9 @@ function fondaRender(s){
    2024 en effaçant la perte de 2023. Points pleins publiés, points creux pour
    les exercices estimés (connecteur pointillé), médiane des publiés à partir
    de 3 exercices (même seuil d'honnêteté que les phrases de synthèse). Échelle
-   log quand les extrêmes s'écartent de plus de 10×. Étiquettes sélectives ;
+   log quand les extrêmes s'écartent de plus de 10×. CHAQUE point porte sa
+   valeur — le graphique est le seul artefact, il n'y a plus ni tableau
+   dépliable ni relevé au survol (décisions du 07/08) ;
    0 ou 1 exercice publié → pas de courbe artificielle, valeurs en ligne. */
 function fdPerChart(F,fmtPer,W,perNow){
   /* Même fenêtre de DIX exercices que le graphique des chiffres publiés
@@ -1555,18 +1590,15 @@ function fdPerChart(F,fmtPer,W,perNow){
      estimations et le bénéfice (glissant) du passé récent. */
   const now=(perNow!=null&&perNow>0&&pub.length)
     ?{an:pub[pub.length-1].an+0.5,per:perNow,est:false,now:true,lab:'auj.'}:null;
-  // Le tableau déplié montre TOUS les exercices, pas seulement les dix
-  // dessinés : on allège le graphique, jamais la donnée.
+  // La médiane reste calculée sur TOUT l'historique accumulé, même si le
+  // dessin n'en montre que dix : c'est elle que la note compare au multiple.
   const pubTout=((F&&F.an)||[]).filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per}));
-  const lignes=est.slice().reverse().map(p=>'<tr class="fd-est"><td>'+p.an+'e</td><td>'+fmtPer(p.per)+'</td></tr>').join('')
-    +(now?'<tr class="fd-est"><td>aujourd\'hui</td><td>'+fmtPer(now.per)+'</td></tr>':'')
-    +pubTout.slice().reverse().map(p=>'<tr><td>'+p.an+'</td><td>'+fmtPer(p.per)+'</td></tr>').join('');
   if(pub.length<2){
     /* Sans courbe, ce repli est le SEUL endroit où le multiple apparaît :
        le PER du jour y entre donc explicitement. */
     const inline=(now?['aujourd\'hui\u00a0: '+fmtPer(now.per)]:[])
       .concat(pub.concat(est).map(p=>p.an+(p.est?'<i>e</i>':'')+'\u00a0: '+fmtPer(p.per))).join(' \u00b7 ');
-    return {inline:inline,queEst:!pub.length,lignes:lignes,svg:null};
+    return {inline:inline,queEst:!pub.length,svg:null};
   }
   W=W||800;
   const H=190,ML=14,MR=64,MT=24,MB=22;
@@ -1583,8 +1615,7 @@ function fdPerChart(F,fmtPer,W,perNow){
   const Y=v=>{if(LOG){const a=Math.log(lo),b=Math.log(hi);return MT+(1-(Math.log(v)-a)/((b-a)||1))*(H-MT-MB);}
     return MT+(1-(v-lo)/((hi-lo)||1))*(H-MT-MB);};
   const X=an=>ML+20+(a1>a0?(an-a0)*(W-ML-MR-40)/(a1-a0):0);
-  // Bande de survol posée en premier : elle passe DERRIÈRE la courbe.
-  let g='<rect class="fd-hi" x="0" y="0" width="0" height="'+(H-MB+4)+'" visibility="hidden"/>';
+  let g='';
   /* La médiane tracée est celle de TOUT l'historique accumulé, pas des dix
      exercices dessinés : c'est CELLE-LÀ que le critère « histoire » de la note
      compare au multiple du jour, et deux médianes différentes sur la même page
@@ -1603,60 +1634,38 @@ function fdPerChart(F,fmtPer,W,perNow){
     g+='<polyline points="'+[pub[pub.length-1]].concat(suite).map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
   trous.filter(an=>an>=a0&&an<=a1).forEach(an=>{
     g+='<text x="'+X(an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+an+' : exercice sans multiple (perte ou BPA indisponible)</title></text>';});
-  let iMin=0,iMax=0;pub.forEach((p,i)=>{if(p.per<pub[iMin].per)iMin=i;if(p.per>pub[iMax].per)iMax=i;});
-  // Le dernier exercice publié cède son étiquette au point du jour quand
-  // celui-ci existe : ils sont à une demi-année l'un de l'autre et c'est
-  // « aujourd'hui » qu'on vient lire. Sa valeur reste dans le tableau.
-  const idxLab=new Set([0,iMin,iMax]);
-  if(!now)idxLab.add(pub.length-1);
-  /* ANTI-CHEVAUCHEMENT. On étiquetait la valeur de CHAQUE estimation, plus le
-     point du jour, plus quatre points remarquables — et « 28× 22× 19× 17× »
-     se recouvrait autour du losange, où trois points tiennent dans une
-     demi-année d'abscisse (signalé par le propriétaire sur son téléphone).
-     Une étiquette n'est écrite que si la précédente est assez loin ; sinon
-     elle est simplement omise, la valeur restant lisible au survol. */
+  /* TOUTES LES VALEURS SONT ÉCRITES (décision du propriétaire, 07/08 :
+     « dérouler les PER n'a pas d'utilité, tout doit apparaître sur le
+     graph »). L'ancien tri — quatre points remarquables, le reste omis —
+     supposait un tableau dépliable en secours ; il n'existe plus. Le
+     chevauchement, lui, n'a pas disparu : autour du losange, trois points
+     tiennent dans une demi-année d'abscisse. Quand une étiquette serait trop
+     proche de la précédente, elle passe SOUS le point au lieu d'être omise —
+     deux étiquettes du même côté sont alors toujours à un slot entier l'une
+     de l'autre. */
   // 10 px en unités du viewBox, police à chasse fixe : ~6 unités par
   // caractère. Les VALEURS font trois caractères (« 28× ») ; les libellés
-  // d'AXE en font quatre (« auj. »), il leur faut donc plus d'air — sans
-  // cette distinction, « auj. » et « 28e » se touchaient encore.
+  // d'AXE en font quatre (« auj. »), il leur faut donc plus d'air.
   const ECART_VAL=22, ECART_AXE=30;
-  let dernierLab=-1e9, dernierAxe=-1e9;
+  let dernierHaut=-1e9, dernierBas=-1e9, dernierAxe=-1e9;
   const stepX=pts.length>8?2:1;
-  /* Le relev\u00e9 remplace les <title> SVG qui \u00e9taient pos\u00e9s ici : un titre natif
-     n'appara\u00eet qu'apr\u00e8s une seconde de survol et JAMAIS au doigt. Deux
-     info-bulles pour la m\u00eame donn\u00e9e, dont une invisible sur l'\u00e9cran
-     principal, n'en font pas une bonne. */
-  const relX=[], relH=[];
   pts.forEach((p,i)=>{
     const cx=X(p.an),cy=Y(p.per);
-    relX.push(cx);
-    relH.push(p.now
-      ?'<span class="d">aujourd\'hui</span><br><span style="color:#f0c674">\u25c6</span> PER&nbsp;: <span class="c">'+fmtPer(p.per)+'</span>'
-        +'<br><i style="color:var(--text3);font-style:normal">cours du jour \u00f7 b\u00e9n\u00e9fice des 12 derniers mois</i>'
-      :p.est
-      ?'<span class="d">'+p.an+'&nbsp;\u00b7 attendu</span><br><span style="color:#74b6df">\u25cb</span> PER estim\u00e9&nbsp;: <span class="c">'+fmtPer(p.per)+'</span>'
-        +'<br><i style="color:var(--text3);font-style:normal">cours du jour \u00f7 b\u00e9n\u00e9fice attendu par les analystes</i>'
-      :'<span class="d">'+p.an+'</span><br><span style="color:#74b6df">\u25cf</span> PER&nbsp;: <span class="c">'+fmtPer(p.per)+'</span>'
-        +'<br><i style="color:var(--text3);font-style:normal">cours \u00e0 la cl\u00f4ture de l\'exercice \u00f7 b\u00e9n\u00e9fice publi\u00e9</i>'
-      +(med!=null?'<br><i style="color:var(--text3);font-style:normal">m\u00e9diane sur '+nMed+' exercices&nbsp;: '+Math.round(med)+'\u00d7</i>':''));
     g+=p.now?'<rect x="'+(cx-4.2)+'" y="'+(cy-4.2)+'" width="8.4" height="8.4" transform="rotate(45 '+cx+' '+cy+')" fill="#f0c674" stroke="#0d0d16" stroke-width="1.5"/>'
         :p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
             :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"/>';
-    // Le point du jour garde toujours son étiquette : c'est celui qu'on vient
-    // lire. Les autres cèdent la place quand ils sont trop près du précédent.
-    if((p.est||p.now||idxLab.has(i))&&(p.now||cx-dernierLab>=ECART_VAL)){
-      dernierLab=cx;
-      g+='<text x="'+cx+'" y="'+Math.max(11,cy-10)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.now?'#f0c674':(p.est?'#8a8aa6':'#c6c6e0'))+'">'+Math.round(p.per)+'\u00d7</text>';}
+    // Le point du jour est prioritaire : il choisit son côté en premier.
+    const enHaut=p.now?true:(cx-dernierHaut>=ECART_VAL);
+    if(enHaut||cx-dernierBas>=ECART_VAL){
+      const ly=enHaut?Math.max(11,cy-10):Math.min(H-MB-4,cy+18);
+      if(enHaut)dernierHaut=cx;else dernierBas=cx;
+      g+='<text x="'+cx+'" y="'+ly+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.now?'#f0c674':(p.est?'#8a8aa6':'#c6c6e0'))+'">'+Math.round(p.per)+'\u00d7</text>';}
     if((p.now||(pts.length-1-i)%stepX===0)&&(p.now||cx-dernierAxe>=ECART_AXE)){
       dernierAxe=cx;
       g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+(p.now?' fill="#f0c674"':'')+'>'+(p.lab||(String(p.an).slice(2)+(p.est?'e':'')))+'</text>';}
   });
-  /* Point de repos du relevé : le losange « aujourd'hui » s'il existe, sinon
-     le dernier exercice publié. Jamais la dernière estimation — c'est le
-     multiple du jour qu'on vient lire, pas celui de 2027. */
   return {svg:'<svg class="fd-svg" id="fd-per" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',
-    lignes:lignes,med:med,trous:trous.some(an=>an>=a0&&an<=a1),
-    releve:{xs:relX,htmls:relH,repos:now?pub.length:pub.length-1,W:W}};
+    med:med,trous:trous.some(an=>an>=a0&&an<=a1)};
 }
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
 // Élagage du 06/08 : les étiquettes des métriques portent déjà « a/a » et
@@ -1725,21 +1734,25 @@ function themeBar(meta){
 breakdown complet, on remplace alors cette zone sans toucher au résumé
    (l'animation de frappe repartirait de zéro) ni au graphique. */
 function dataZone(s,b,compact){
-  const rsi=b.rsi==null?50:Math.max(0,Math.min(100,b.rsi)),zp=Math.max(0,Math.min(100,((b.regression_z==null?0:b.regression_z)+3)/6*100));
   const bl=(b.note&&b.note.blocs)||{};
   const _p=k=>bl[k]?bl[k].pts:null;
-  return '<div class="quant"><div><div class="qh">Signaux de marché</div><div class="gauge"><div class="gl"><span>RSI · réf. 30 / 70</span><b>'+f(b.rsi,0)+'</b></div><div class="gtrack"><span class="gtick" style="left:30%"></span><span class="gtick" style="left:70%"></span><span class="gmark" style="left:'+rsi+'%"></span></div></div><div class="gauge"><div class="gl"><span>Z-SCORE'+(b.regression_window_years?' · '+b.regression_window_years+' ans':'')+'</span><b>'+fs(b.regression_z,1).replace('.',',')+'σ</b></div><div class="gtrack"><span class="gtick" style="left:50%"></span><span class="gmark" style="left:'+zp+'%"></span></div></div></div>'+
-      '<div><div class="qh">Décomposition de la note</div>'+meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div></div>'+
+  /* ÉLAGAGE DU 07/08 (« supprime tout ce qui n'est pas vital »). Sont partis :
+     · les jauges « Signaux de marché » — le RSI ne note plus rien depuis la
+       v4, et le z-score est déjà écrit en toutes lettres sous le graphique de
+       cours, à côté de la décote dont il est le jumeau ; le RSI l'y rejoint.
+     · la tuile Cross — copie du badge d'état affiché en tête de fiche.
+     · la tuile Pente MM21 — micro-technique qui n'alimente ni la note ni
+       aucune phrase de la page.
+     · AUCUNE tuile de PER — ni courant, ni prévisionnel : les deux vivent sur
+       la courbe des PER (le losange ambre au milieu de son historique dit
+       s'il est cher, un chiffre nu dans une tuile ne dit rien) ; les pertes
+       attendues, seul cas sans point, sont écrites sous la courbe.
+     Restent quatre tuiles : où en est le cours (Draw 52s), et les trois
+     fondamentaux frais que la note lisse sur plusieurs exercices. */
+  return '<div class="quant2"><div class="qh">Décomposition de la note</div><div class="q2g">'+
+      meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div></div>'+
     (compact?compactMetrics(s)
-      :'<div class="metrics">'+mk('Cross',(b.cross_type||'—')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+mk('Pente MM21',pc(fs,b.cross_slope_mm21_pct,1))+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))
-        /* AUCUNE tuile de PER — ni courant, ni prévisionnel (décisions du
-           propriétaire, 07/08). Les deux vivent sur la courbe des PER juste en
-           dessous : le multiple du jour en losange ambre au milieu de son
-           historique, les prévisionnels en points creux. Un chiffre nu dans une
-           tuile n'apprend rien ; le même chiffre au milieu de dix ans de
-           multiples dit s'il est cher. Le seul cas que la courbe ne savait pas
-           montrer — des bénéfices attendus NÉGATIFS, qui ne produisent aucun
-           point — est désormais écrit sous elle. */
+      :'<div class="metrics">'+mk('Draw 52s',pc(fs,b.drawdown_52w_pct,1))+mk('Croiss CA · a/a',pc(fs,b.rev_growth_pct,1))+mk('Marge nette · TTM',pc(f,b.net_margin_pct,1))+mk('Marge FCF · TTM',pc(f,b.fcf_margin_pct,1))
         +'</div><div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(b)+'</span></span></div>')+
     noteDetail(b.note);
 }

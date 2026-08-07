@@ -5,7 +5,58 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La fiche à l'épure : cinq décisions du propriétaire, appliquées d'un bloc
+
+L'après-midi du 07/08, en regardant la fiche déployée le matin même, cinq
+consignes — toutes dans le sens « simple, épuré mais complet » :
+
+**« Il manque le bénéfice net prévisionnel dans les graphs. »** Il y est : en
+barres hachurées grises à côté du CA attendu, mêmes hachures que lui (plein =
+déposé, hachuré = attendu). Le montant est BPA consensus × nombre d'actions
+déduit du dernier exercice publié — le nombre d'actions est calculé UNE fois
+et partagé avec le tableau de trajectoire, deux calculs auraient fini par
+diverger.
+
+**« Regarde comment Baggr affiche le résultat au survol, je veux pareil. »**
+Le bandeau docké de la matinée est remplacé sur le graphique des barres par
+une carte flottante posée à côté de la colonne visée, du côté où il y a de la
+place, cachée au repos. Elle suit la colonne en X, jamais le pointeur en Y —
+sinon elle tremble sous le doigt. Au doigt elle reste après qu'on a levé le
+doigt : on le lève précisément pour lire ce qu'il cachait. La variation
+affichée est celle du tableau (même trimestre un an plus tôt en trimestriel).
+
+**« Ça sert à rien l'info au survol sur le graph PER »** et **« Dérouler les
+PER n'a pas d'utilité, tout doit apparaître sur le graph. »** Le relevé et le
+tableau dépliable des PER sont partis ; en échange, CHAQUE point porte sa
+valeur sur le dessin. L'ancien tri (quatre points remarquables) supposait un
+tableau en secours qui n'existe plus. Le chevauchement autour du losange est
+résolu autrement : une étiquette trop proche de la précédente passe SOUS son
+point au lieu d'être omise.
+
+**« Supprime tout ce qui n'est pas vital, mets en "déplier" ou "i" le
+secondaire. »** Sont partis : les jauges « Signaux de marché » (le RSI ne note
+plus rien depuis la v4 ; sa valeur et le z-score vivent en toutes lettres sous
+le graphique de cours, où on lit le marché), la tuile Cross (copie du badge de
+tête de fiche), la tuile Pente MM21 (micro-technique qui n'alimente rien).
+Sont passées derrière un « i » : l'explication de la base de cours des PER et
+la pédagogie de la prolongation (décroissance vers 3 %, borne haute). Restent
+visibles : la provenance (consensus jusqu'où, nous ensuite) et les refus de
+prolonger — des positions que nous prenons, pas de la pédagogie. Sur mobile,
+les bulles « i » deviennent des feuilles pleine largeur posées en bas de
+l'écran : ancrées à leur icône, elles débordaient dès que l'icône touchait un
+bord.
+
+**Vérification de fraîcheur demandée en tête de consigne** : les 93 fiches
+publiées ont été régénérées à 11 h 34, APRÈS le dernier changement de barème
+(11 h 18) ; les nouveaux maxima (ROE /9, conversion /7) sont dans les données
+publiées, et les scores watchlist = scores fiches, zéro écart.
+
 ### Le montant sous le doigt : un relevé sur les deux graphiques de chiffres
+
+*(Entrée du matin, en partie remplacée l'après-midi même par « La fiche à
+l'épure » ci-dessus : le relevé docké est devenu une carte flottante façon
+Baggr sur les barres, et a été retiré du graphique des PER au profit
+d'étiquettes sur chaque point.)*
 
 « Quand je passe la souris ou le doigt sur un pilier des graphs je veux pouvoir
 voir le montant ». Les barres ne portaient aucune valeur (sauf les projections,
@@ -14,16 +65,13 @@ portaient un `<title>` SVG, qui n'apparaît qu'après une seconde de survol et
 **jamais au doigt** — sur l'écran principal du propriétaire, l'information
 n'existait pas.
 
-Les deux graphiques partagent désormais le même mécanisme que le graphique de
-cours : un relevé posé **sous** le dessin, la colonne la plus proche du
-pointeur étant sélectionnée (viser une barre de 34 unités dans un slot qui peut
-en faire 18 est impossible au doigt). Le relevé ne dit que ce que le dessin
-dessine — chiffre d'affaires et résultat net, pas l'EBITDA, qui n'a pas de
-barre. Et il reprend **la même variation que le tableau** : en trimestriel, le
-même trimestre un an plus tôt, pas le trimestre précédent — deux « ▲ 15 % »
-différents pour la même barre selon qu'on la survole ou qu'on la lit auraient
-été une incohérence pure. Vérifié à 1440 et 390 px sur quatre sociétés, dans
-les deux modes.
+Le principe posé ce matin-là et toujours en vigueur : la colonne la plus
+proche du pointeur est sélectionnée (viser une barre de 34 unités dans un slot
+qui peut en faire 18 est impossible au doigt) ; le relevé ne dit que ce que le
+dessin dessine ; et il reprend **la même variation que le tableau** — en
+trimestriel, le même trimestre un an plus tôt, pas le trimestre précédent :
+deux « ▲ 15 % » différents pour la même barre selon qu'on la survole ou qu'on
+la lit auraient été une incohérence pure.
 
 ### Le relevé du graphique de cours est docké partout
 
