@@ -1380,9 +1380,6 @@ function fondaRender(s){
   // faut son slot plus une marge.
   const LARG_CAR=6.2, LARG_LAB=4*LARG_CAR+6;
   const step=Math.max(1,Math.ceil(LARG_LAB/slot));
-  // Largeur du plus long libellé de valeur projetée, mesurée sur les données
-  // réelles plutôt que supposée.
-  const placeValeur=projC.length&&slot>=(Math.max(...projC.map(p=>fdMoney(p.ca,dev).length))*LARG_CAR+8);
   /* Contenu du relevé, une entrée par colonne. Il ne dit QUE ce que le dessin
      dessine — CA et résultat net : annoncer dans une bulle un chiffre qui n'a
      pas de barre ferait chercher au lecteur une barre qui n'existe pas. */
@@ -1427,16 +1424,13 @@ function fondaRender(s){
       if(o.pr&&r.ca_haut!=null){const hh=hVal(r.ca_haut);
         bars+='<rect x="'+(cx-bw-2)+'" y="'+(y0-hh)+'" width="'+bw+'" height="'+Math.max(2,hh-h)+'" fill="none" stroke="#74b6df" stroke-width="1" stroke-dasharray="2 2" opacity=".55"/>';}
       bars+='<rect x="'+(cx-bw-2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+fCa+'" opacity="'+op+'"/>';
-      /* Les projections sont peu nombreuses (2 à 5 barres) et c'est LEUR
-         chiffre qu'on vient lire : on l'écrit au-dessus de la barre plutôt
-         que de le réserver au tableau replié. */
-      /* La valeur n'est écrite que si elle TIENT dans son slot. À cinq
-         projections sur un écran de 390 px, « 409 Md$ » et « 442 Md$ » se
-         recouvraient : le chiffre exact est de toute façon dans le tableau
-         dépliable juste en dessous, une étiquette illisible ne vaut pas
-         mieux que pas d'étiquette. */
-      if(o.pr&&placeValeur){const ht=hVal(r.ca_haut!=null?r.ca_haut:r.ca);
-        bars+='<text x="'+(cx-bw/2-2)+'" y="'+Math.max(9,y0-ht-6)+'" text-anchor="middle" class="chx-axis" fill="#74b6df">'+fdMoney(r.ca,dev).replace(/&nbsp;/g,' ')+'</text>';}}
+      /* PLUS D'ÉTIQUETTE AU-DESSUS DES BARRES PROJETÉES (question du
+         propriétaire, 07/08 : « pourquoi il y a encore la valeur affichée
+         au-dessus de la barre ? »). Elle datait d'avant la carte au survol,
+         qui donne le même montant avec sa variation et sa nature — la garder
+         aurait affiché le chiffre deux fois sur les grandes fiches et zéro
+         fois sur les étroites, où elle ne tenait pas. */
+      }
     // Résultat net : publié en plein, attendu en hachuré gris — même code
     // visuel que le CA (plein = déposé, hachures = attendu).
     const rnV=o.pr?rnAtt(r):r.rn;
@@ -1511,8 +1505,14 @@ function fondaRender(s){
         (cons.length&&ext.length?', puis ':'')+
         (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous':'')+'.'+
         (fin?' Au-delà de '+fin.exercice+', nous n\'avançons rien : '+fin.ca_arret+'.':'')+
+        /* « Carnet de commandes ?? mais comment on le calcule ?? » (question
+           du propriétaire, 07/08). On ne le calcule PAS — c'était le
+           problème de l'ancienne phrase, qui laissait croire qu'une donnée
+           de carnet existait quelque part. La bulle dit maintenant le
+           mécanisme exact : deux prolongations, plafonnée et au rythme du
+           consensus, rien d'autre. */
         '</i> <span class="inf" tabindex="0" aria-label="Comment est construite la trajectoire">i<span class="inf-tip">Notre source de consensus s\'arrête à deux exercices. Au-delà, notre prolongation fait décroître la croissance vers 3 %/an — une projection à taux constant est le mensonge classique de l\'exercice.'+
-        (proj.some(p=>p.ca_haut!=null)?' Le contour en pointillé donne la borne haute : elle s\'écarte quand la trajectoire dépend d\'un carnet de commandes plutôt que d\'une croissance organique, et cet écart mesure notre ignorance.':'')+
+        (proj.some(p=>p.ca_haut!=null)?' Quand le rythme du consensus dépasse 25 %/an, on publie DEUX prolongations : la barre hachurée repart de 25 % (le plafond qu'+"'"+'une croissance organique tient rarement), le contour en pointillé repart du rythme des analystes tel quel. Rien dans nos données ne dit si un rythme au-delà de 25 % s\'appuie sur des contrats signés ou sur un emballement — alors on montre les deux, et l\'écart entre elles mesure notre ignorance.':'')+
         '</span></span></p>';})()+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
@@ -1614,8 +1614,14 @@ function fdPerChart(F,fmtPer,W,perNow){
      bénéfices, alors qu'une bonne part venait du prix. Le PER courant est
      donc posé entre les deux, à sa place : il partage le cours des
      estimations et le bénéfice (glissant) du passé récent. */
+  /* SA PLACE EST CHRONOLOGIQUE : une demi-année après le DERNIER EXERCICE
+     PUBLIÉ — pas après le dernier exercice qui a un multiple. La différence
+     a mordu sur Coherent (signalé par le propriétaire, 07/08) : trois
+     exercices de pertes après 2022, et le losange « aujourd'hui » se posait
+     après 2022, AVANT les croix de 2023-2025 — un aujourd'hui dans le passé. */
+  const derAn=anAll.length?+anAll[anAll.length-1].fin.slice(0,4):(pub.length?pub[pub.length-1].an:0);
   const now=(perNow!=null&&perNow>0&&pub.length)
-    ?{an:pub[pub.length-1].an+0.5,per:perNow,est:false,now:true,lab:'auj.'}:null;
+    ?{an:derAn+0.5,per:perNow,est:false,now:true,lab:'auj.'}:null;
   // La médiane reste calculée sur TOUT l'historique accumulé, même si le
   // dessin n'en montre que dix : c'est elle que la note compare au multiple.
   const pubTout=((F&&F.an)||[]).filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per}));
@@ -1655,9 +1661,14 @@ function fdPerChart(F,fmtPer,W,perNow){
   segs.push(cur);
   segs.filter(sg=>sg.length>1).forEach(sg=>{
     g+='<polyline points="'+sg.map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-linejoin="round"/>';});
+  /* Le connecteur pointillé ne part du dernier point publié QUE s'il n'y a
+     pas de trou entre lui et aujourd'hui : relier 2022 au losange par-dessus
+     trois exercices de pertes dessinerait une continuité qui n'existe pas —
+     même règle que les segments pleins, qui se coupent à chaque trou. */
   const suite=(now?[now]:[]).concat(est);
-  if(suite.length)
-    g+='<polyline points="'+[pub[pub.length-1]].concat(suite).map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
+  const ancre=(pub.length&&pub[pub.length-1].an===derAn)?[pub[pub.length-1]]:[];
+  if(ancre.length+suite.length>=2&&suite.length)
+    g+='<polyline points="'+ancre.concat(suite).map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
   trous.filter(an=>an>=a0&&an<=a1).forEach(an=>{
     g+='<text x="'+X(an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+an+' : exercice sans multiple (perte ou BPA indisponible)</title></text>';});
   /* TOUTES LES VALEURS SONT ÉCRITES (décision du propriétaire, 07/08 :

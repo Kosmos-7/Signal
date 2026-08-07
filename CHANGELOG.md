@@ -5,6 +5,39 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Trois corrections d'un même après-midi de relecture
+
+Le propriétaire a relu les fiches déployées et posé trois questions ; chacune
+révélait un vrai défaut.
+
+**« Sur Coherent j'ai un PER aujourd'hui avant 2023. »** Le losange
+« aujourd'hui » se posait une demi-année après le dernier exercice *coté* —
+pas après le dernier exercice *publié*. Coherent aligne trois exercices de
+pertes après 2022 : le losange se plaçait après 2022, avant les croix de
+2023-2025 — un aujourd'hui dans le passé. Il se place désormais
+chronologiquement, et le connecteur pointillé ne part du dernier point coté
+que s'il n'y a pas de trou entre lui et aujourd'hui : relier 2022 au losange
+par-dessus trois ans de pertes dessinerait une continuité qui n'existe pas.
+Les croix de Coherent, elles, sont justes : pertes réelles en 2020, 2023 et
+2024, BPA ordinaire négatif en 2025 (résultat positif mais préférentielles
+servies d'abord).
+
+**« Pourquoi il y a encore la valeur affichée au-dessus des barres ? »**
+L'étiquette datait d'avant la carte au survol, qui donne le même montant avec
+sa variation et sa nature. Retirée — elle affichait le chiffre deux fois sur
+les grands écrans et zéro fois sur les étroits, où elle ne tenait pas.
+
+**« Un ajout au-dessus de certaines barres du prévisionnel — carnet de
+commandes ?? comment on le calcule ?? »** On ne le calcule pas, et c'est
+l'ancienne phrase qui était fautive : elle laissait croire qu'une donnée de
+carnet existait. Le contour en pointillé est la **seconde branche de la
+prolongation** : quand le rythme du consensus dépasse 25 %/an, la barre
+hachurée repart du plafond de 25 % (ce qu'une croissance organique tient
+rarement) et le contour repart du rythme des analystes tel quel — les deux
+décroissant vers 3 %. Rien dans nos données ne distingue un carnet signé d'un
+emballement, alors on montre les deux ; l'écart mesure notre ignorance. La
+bulle « i » dit maintenant ce mécanisme, chiffres à l'appui.
+
 ### Échelle log sur les barres quand le linéaire écrase tout
 
 Signalé par le propriétaire sur NVIDIA : « de 2017 à 2023 tout est presque
