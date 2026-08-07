@@ -5,6 +5,20 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le relevé du graphique de cours tenait sur une ligne, pas sur quatre
+
+« Le rectangle avec les metrics est beaucoup trop grand pour la quantité
+d'infos. » Mesuré : **1 010 px de large et 100 de haut pour une quarantaine de
+caractères**. Deux causes cumulées — le contenu était découpé en quatre lignes
+par des `<br>`, et un bloc statique prend toute la largeur disponible par
+défaut, si bien que `width:auto` ne bornait rien du tout.
+
+Les retours à la ligne deviennent des séparateurs `·` et la boîte épouse son
+contenu (`width:fit-content`). Résultat mesuré : **577 × 30 px** sur écran
+large, et sur mobile elle se replie d'elle-même sur deux lignes en occupant la
+largeur disponible. Rien n'est perdu : la date, le cours, la tendance avec son
+potentiel de retour, les deux moyennes mobiles sont toutes là.
+
 ### La piste des cinq ans est morte, la sonde a trouvé mieux
 
 Je proposais d'ancrer notre prolongation sur le taux de croissance à cinq ans

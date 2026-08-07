@@ -176,7 +176,11 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .chx-tip{position:absolute;pointer-events:none;background:#14141f;border:1px solid var(--line);border-radius:6px;padding:7px 11px;font-family:var(--mono);font-size:11px;color:var(--text3);display:none;white-space:nowrap;line-height:1.7;z-index:3}
   .chx-tip .d{color:var(--text2)}.chx-tip .c{color:var(--ac);font-weight:700}.chx-tip .t{color:var(--text2);font-weight:700}
   @media (max-width:640px){ .chx-tip{font-size:10px;padding:5px 8px;line-height:1.55} }
-  .chx-tip.dock{position:static;white-space:normal;margin:6px 0 2px;width:auto}
+  /* `width:fit-content` : un bloc statique prend TOUTE la largeur par
+     défaut, d'où un bandeau de mille pixels pour quarante caractères. La
+     boîte épouse désormais son contenu et se replie sur écran étroit. */
+  .chx-tip.dock{position:static;white-space:normal;margin:6px 0 2px;
+    width:fit-content;max-width:100%;padding:5px 10px;line-height:1.6}
   .chx-ctrl{display:flex;align-items:center;gap:10px;margin:10px 0 4px;flex-wrap:wrap}
   .chx-pbtn{font-family:var(--mono);font-size:.72rem;letter-spacing:1px;color:var(--text3);background:none;border:1px solid var(--line);border-radius:5px;padding:3px 12px;cursor:pointer}
   .chx-pbtn.on{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
@@ -1128,13 +1132,23 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
     const m21=near(D.mm21),m200=near(D.mm200);
     const setDot=(dot,q)=>{if(q&&q[0]>=t0v){dot.setAttribute('cx',X(q[0]));dot.setAttribute('cy',Y(q[1]));dot.setAttribute('visibility','visible');}else dot.setAttribute('visibility','hidden');};
     setDot(hoverG.dot21,m21);setDot(hoverG.dot200,m200);
-    tip.innerHTML='<span class="d">'+fmt(t)+'</span><br>● Cours&nbsp;: <span class="c">'+p.toFixed(p<10?2:0)+sym+'</span><br>'
-      // « si retour à la tendance : +33 % » plutôt que « écart −25 % » : même
-// information, lue dans le sens utile, le potentiel si le cours rejoint
-      // sa droite. Le conditionnel est la partie honnête de la phrase : la
-      // tendance est une trajectoire passée, pas un objectif (règle 14).
-      +(tv?'◌ Tendance&nbsp;: <span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span><br>&nbsp;&nbsp;&nbsp;si retour à la tendance&nbsp;: <span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>':'◌ période trop courte pour une tendance')
-      +(m21&&m200?'<br><span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span> · <span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'');
+    /* UNE LIGNE, PAS QUATRE (signalé le 07/08 : « le rectangle est beaucoup
+       trop grand pour la quantité d'informations »). Le relevé tient en cinq
+       valeurs courtes ; il occupait quatre lignes et toute la largeur de la
+       fiche, soit un bandeau de mille pixels pour une quarantaine de
+       caractères. Les <br> deviennent des séparateurs, et la boîte épouse son
+       contenu — sur écran étroit, elle se replie toute seule.
+       « si retour à la tendance : +33 % » plutôt que « écart −25 % » : même
+       information, lue dans le sens utile. Le conditionnel est la partie
+       honnête de la phrase — la tendance est une trajectoire passée, pas un
+       objectif (règle 14). */
+    tip.innerHTML=['<span class="d">'+fmt(t)+'</span>',
+      '● Cours&nbsp;<span class="c">'+p.toFixed(p<10?2:0)+sym+'</span>',
+      (tv?'◌ Tendance&nbsp;<span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span> <span class="chx-k">retour&nbsp;</span><span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>'
+          :'◌ <span class="chx-k">période trop courte pour une tendance</span>'),
+      (m21&&m200?'<span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span>':''),
+      (m21&&m200?'<span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'')
+    ].filter(Boolean).join('<span class="chx-k">&nbsp;·&nbsp;</span>');
     /* LE RELEVÉ EST DOCKÉ, PARTOUT (décision du propriétaire, 07/08 : « je
        veux que le petit rectangle avec les metrics s'affiche en bas du graph
        comme sur mobile »). Il flottait sur écran large, collé au réticule :
