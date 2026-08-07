@@ -5,6 +5,29 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le PER « aujourd'hui » est retiré — il faussait vraiment
+
+« Je trouve que ça fausse tout. » C'est exact, et au sens le plus concret.
+
+Le losange ambre valait le cours du jour divisé par le bénéfice des **douze
+derniers mois**. Sur une société qui sort à peine des pertes, ce dénominateur
+glissant est minuscule et le multiple explose : Coherent affichait **158×** au
+milieu d'un historique compris entre 22 et 35×. Un seul point pareil étire
+l'échelle et écrase toute la courbe qu'on venait lire — les trois points
+historiques se retrouvaient collés au bas du cadre. Le repère déformait ce
+qu'il était censé éclairer.
+
+Sans lui, la même fiche se lit de 22× à 61× et les points se distinguent. Le
+losange avait été ajouté pour signaler le changement de base de cours entre les
+exercices publiés (au cours de l'époque) et les estimations (au cours du
+jour) : ce changement reste **énoncé dans la bulle de la légende**, là où il
+n'a aucun effet sur l'échelle.
+
+Le connecteur pointillé conserve sa règle : il ne part du dernier exercice
+publié que si celui-ci est le dernier exercice **connu**. Sur Coherent, il
+relie donc les deux estimations entre elles sans enjamber les trois années de
+pertes — pas de continuité inventée.
+
 ### Trois textes de moins sur les chiffres publiés
 
 **« publié en USD »** : la devise est déjà portée par chaque montant — « 403

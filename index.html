@@ -1537,7 +1537,7 @@ function fondaRender(s){
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
   /* Le tableau montre TOUT l'accumulé, lui : c'est le graphique qu'on allège,
      pas la donnée. Un lecteur qui déplie veut les chiffres, pas un extrait. */
-  const perB=fdPerChart(F,fmtPer,NARROW?440:800,(s.breakdown||{}).trailing_pe);
+  const perB=fdPerChart(F,fmtPer,NARROW?440:800);
   /* LE SEUL CAS QUE LA COURBE NE SAIT PAS MONTRER. Un PER prévisionnel négatif
      n'a pas de sens économique : on ne trace pas de point, donc la courbe
      s'arrête simplement — silencieusement. La tuile « PER prévisionnel » le
@@ -1609,8 +1609,8 @@ function fondaRender(s){
        le « i », plus étalée sous le graphique. */
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
-        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#f0c674;font-weight:700">◆</span> aujourd\'hui&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+
-        '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque. Le losange « aujourd\'hui » et les estimations sont au cours du jour — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.</span></span></div>'+
+        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+
+        '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Les points estimés, eux, sont au cours DU JOUR — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.</span></span></div>'+
         pertesAttendues+'</div>'
       :'<div class="fd-wrap"><div class="qh">'+(perB.queEst?'PER estimé (analystes)':'PER')+'</div>'+
         '<div class="fd-inline">'+perB.inline+'</div>'+pertesAttendues+'</div>')
@@ -1636,7 +1636,7 @@ function fondaRender(s){
    valeur — le graphique est le seul artefact, il n'y a plus ni tableau
    dépliable ni relevé au survol (décisions du 07/08) ;
    0 ou 1 exercice publié → pas de courbe artificielle, valeurs en ligne. */
-function fdPerChart(F,fmtPer,W,perNow){
+function fdPerChart(F,fmtPer,W){
   /* Même fenêtre de DIX exercices que le graphique des chiffres publiés
      (décision du propriétaire, 07/08) : au-delà, les points se tassent et
      l'axe devient illisible. La MÉDIANE affichée reste celle de la fenêtre
@@ -1646,35 +1646,29 @@ function fdPerChart(F,fmtPer,W,perNow){
   const pub=anAll.filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per,est:false}));
   const est=((F&&F.pe_prev)||[]).map(p=>({an:p.exercice,per:p.per,est:true}));
   if(!pub.length&&!est.length)return null;
-  /* LE POINT « AUJOURD'HUI ». Sans lui, cette courbe changeait de base de
-     cours en silence : les exercices publiés valent au COURS DE L'ÉPOQUE,
-     les estimations au COURS DU JOUR. Le lecteur voyait un saut entre le
-     dernier exercice et la premiere estimation et l'attribuait aux
-     bénéfices, alors qu'une bonne part venait du prix. Le PER courant est
-     donc posé entre les deux, à sa place : il partage le cours des
-     estimations et le bénéfice (glissant) du passé récent. */
-  /* SA PLACE EST CHRONOLOGIQUE : une demi-année après le DERNIER EXERCICE
-     PUBLIÉ — pas après le dernier exercice qui a un multiple. La différence
-     a mordu sur Coherent (signalé par le propriétaire, 07/08) : trois
-     exercices de pertes après 2022, et le losange « aujourd'hui » se posait
-     après 2022, AVANT les croix de 2023-2025 — un aujourd'hui dans le passé. */
-  const derAn=anAll.length?+anAll[anAll.length-1].fin.slice(0,4):(pub.length?pub[pub.length-1].an:0);
-  const now=(perNow!=null&&perNow>0&&pub.length)
-    ?{an:derAn+0.5,per:perNow,est:false,now:true,lab:'auj.'}:null;
+  /* PLUS DE POINT « AUJOURD'HUI » (décision du propriétaire, 07/08 : « ça
+     fausse tout »). Il valait le cours du jour divisé par le bénéfice des
+     douze derniers mois, et il a été ajouté pour signaler le changement de
+     base de cours entre le publié et l'estimé.
+     IL FAUSSAIT VRAIMENT, et au sens le plus concret : sur une société qui
+     sort à peine des pertes, ce dénominateur glissant est minuscule et le
+     multiple explose — Coherent affichait 158× au milieu d'un historique
+     compris entre 22 et 35×. Un seul point pareil étire l'échelle et écrase
+     toute la courbe qu'on venait lire. Un repère qui déforme ce qu'il
+     accompagne coûte plus qu'il n'apporte.
+     Le changement de base de cours reste ÉNONCÉ dans la bulle de la légende,
+     là où il ne déforme rien. */
   // La médiane reste calculée sur TOUT l'historique accumulé, même si le
   // dessin n'en montre que dix : c'est elle que la note compare au multiple.
   const pubTout=((F&&F.an)||[]).filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per}));
   if(pub.length<2){
-    /* Sans courbe, ce repli est le SEUL endroit où le multiple apparaît :
-       le PER du jour y entre donc explicitement. */
-    const inline=(now?['aujourd\'hui\u00a0: '+fmtPer(now.per)]:[])
-      .concat(pub.concat(est).map(p=>p.an+(p.est?'<i>e</i>':'')+'\u00a0: '+fmtPer(p.per))).join(' \u00b7 ');
+    const inline=pub.concat(est).map(p=>p.an+(p.est?'<i>e</i>':'')+'\u00a0: '+fmtPer(p.per)).join(' \u00b7 ');
     return {inline:inline,queEst:!pub.length,svg:null};
   }
   W=W||800;
   const H=190,ML=14,MR=64,MT=24,MB=22;
   const trous=anAll.filter(r=>r.per==null).map(r=>+r.fin.slice(0,4));
-  const pts=pub.concat(now?[now]:[]).concat(est);
+  const pts=pub.concat(est);
   const a0=Math.min(...pts.map(p=>p.an)),a1=Math.max(...pts.map(p=>p.an));
   const sTout=pubTout.map(p=>p.per).sort((a,b)=>a-b), nMed=sTout.length;
   const med=nMed>=3?(nMed%2?sTout[(nMed-1)/2]:(sTout[nMed/2-1]+sTout[nMed/2])/2):null;
@@ -1700,45 +1694,42 @@ function fdPerChart(F,fmtPer,W,perNow){
   segs.push(cur);
   segs.filter(sg=>sg.length>1).forEach(sg=>{
     g+='<polyline points="'+sg.map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-linejoin="round"/>';});
-  /* Le connecteur pointillé ne part du dernier point publié QUE s'il n'y a
-     pas de trou entre lui et aujourd'hui : relier 2022 au losange par-dessus
-     trois exercices de pertes dessinerait une continuité qui n'existe pas —
-     même règle que les segments pleins, qui se coupent à chaque trou. */
-  const suite=(now?[now]:[]).concat(est);
+  /* Le connecteur pointillé ne part du dernier point publié QUE s'il touche
+     le dernier exercice CONNU : sur une société qui a traversé des pertes,
+     relier 2022 aux estimations par-dessus trois croix dessinerait une
+     continuité qui n'existe pas — même règle que les segments pleins, qui se
+     coupent à chaque trou. */
+  const derAn=anAll.length?+anAll[anAll.length-1].fin.slice(0,4):(pub.length?pub[pub.length-1].an:0);
   const ancre=(pub.length&&pub[pub.length-1].an===derAn)?[pub[pub.length-1]]:[];
-  if(ancre.length+suite.length>=2&&suite.length)
-    g+='<polyline points="'+ancre.concat(suite).map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
+  if(est.length&&ancre.length+est.length>=2)
+    g+='<polyline points="'+ancre.concat(est).map(p=>X(p.an)+','+Y(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
   trous.filter(an=>an>=a0&&an<=a1).forEach(an=>{
     g+='<text x="'+X(an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+an+' : exercice sans multiple (perte ou BPA indisponible)</title></text>';});
   /* TOUTES LES VALEURS SONT ÉCRITES (décision du propriétaire, 07/08 :
      « dérouler les PER n'a pas d'utilité, tout doit apparaître sur le
      graph »). L'ancien tri — quatre points remarquables, le reste omis —
-     supposait un tableau dépliable en secours ; il n'existe plus. Le
-     chevauchement, lui, n'a pas disparu : autour du losange, trois points
-     tiennent dans une demi-année d'abscisse. Quand une étiquette serait trop
-     proche de la précédente, elle passe SOUS le point au lieu d'être omise —
-     deux étiquettes du même côté sont alors toujours à un slot entier l'une
-     de l'autre. */
+     supposait un tableau dépliable en secours ; il n'existe plus. Quand une
+     étiquette serait trop proche de la précédente, elle passe SOUS le point
+     au lieu d'être omise — deux étiquettes du même côté sont alors toujours à
+     un slot entier l'une de l'autre. */
   // 10 px en unités du viewBox, police à chasse fixe : ~6 unités par
   // caractère. Les VALEURS font trois caractères (« 28× ») ; les libellés
-  // d'AXE en font quatre (« auj. »), il leur faut donc plus d'air.
+  // d'AXE en font quatre (« 27e »), il leur faut donc plus d'air.
   const ECART_VAL=22, ECART_AXE=30;
   let dernierHaut=-1e9, dernierBas=-1e9, dernierAxe=-1e9;
   const stepX=pts.length>8?2:1;
   pts.forEach((p,i)=>{
     const cx=X(p.an),cy=Y(p.per);
-    g+=p.now?'<rect x="'+(cx-4.2)+'" y="'+(cy-4.2)+'" width="8.4" height="8.4" transform="rotate(45 '+cx+' '+cy+')" fill="#f0c674" stroke="#0d0d16" stroke-width="1.5"/>'
-        :p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
+    g+=p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
             :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"/>';
-    // Le point du jour est prioritaire : il choisit son côté en premier.
-    const enHaut=p.now?true:(cx-dernierHaut>=ECART_VAL);
+    const enHaut=cx-dernierHaut>=ECART_VAL;
     if(enHaut||cx-dernierBas>=ECART_VAL){
       const ly=enHaut?Math.max(11,cy-10):Math.min(H-MB-4,cy+18);
       if(enHaut)dernierHaut=cx;else dernierBas=cx;
-      g+='<text x="'+cx+'" y="'+ly+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.now?'#f0c674':(p.est?'#8a8aa6':'#c6c6e0'))+'">'+Math.round(p.per)+'\u00d7</text>';}
-    if((p.now||(pts.length-1-i)%stepX===0)&&(p.now||cx-dernierAxe>=ECART_AXE)){
+      g+='<text x="'+cx+'" y="'+ly+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.est?'#8a8aa6':'#c6c6e0')+'">'+Math.round(p.per)+'\u00d7</text>';}
+    if((pts.length-1-i)%stepX===0&&cx-dernierAxe>=ECART_AXE){
       dernierAxe=cx;
-      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+(p.now?' fill="#f0c674"':'')+'>'+(p.lab||(String(p.an).slice(2)+(p.est?'e':'')))+'</text>';}
+      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+'>'+String(p.an).slice(2)+(p.est?'e':'')+'</text>';}
   });
   return {svg:'<svg class="fd-svg" id="fd-per" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',
     med:med,trous:trous.some(an=>an>=a0&&an<=a1)};
@@ -1831,10 +1822,10 @@ function dataZone(s,b){
      · la tuile Cross — copie du badge d'état affiché en tête de fiche.
      · la tuile Pente MM21 — micro-technique qui n'alimente ni la note ni
        aucune phrase de la page.
-     · AUCUNE tuile de PER — ni courant, ni prévisionnel : les deux vivent sur
-       la courbe des PER (le losange ambre au milieu de son historique dit
-       s'il est cher, un chiffre nu dans une tuile ne dit rien) ; les pertes
-       attendues, seul cas sans point, sont écrites sous la courbe.
+     · AUCUNE tuile de PER — ni courant, ni prévisionnel : le multiple se lit
+       sur la courbe, au milieu de son propre historique et de sa médiane, ce
+       qu'un chiffre nu dans une tuile ne dit pas ; les pertes attendues, seul
+       cas sans point, sont écrites sous la courbe.
      Restent quatre tuiles : où en est le cours (Draw 52s), et les trois
      fondamentaux frais que la note lisse sur plusieurs exercices. */
   /* LA RANGÉE DE QUATRE TUILES A ÉTÉ DISPERSÉE (07/08, « elles se baladent un
