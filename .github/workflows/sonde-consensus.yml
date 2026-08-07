@@ -1,0 +1,56 @@
+# .github/workflows/sonde-consensus.yml
+# Relève BRUT ce que Yahoo publie comme estimations d'analystes.
+#
+# Nos projections s'arrêtent à deux exercices puis deviennent notre propre
+# arithmétique, parce que c'est tout ce que `revenue_estimate` et
+# `earnings_estimate` portent. Yahoo expose par ailleurs `growth_estimates`,
+# dont l'index contiendrait un taux à cinq ans que nous n'avons jamais lu.
+#
+# Cette sonde ne branche RIEN et ne touche à aucun chiffre publié : elle lit et
+# recopie. C'est la règle tirée de deux erreurs d'unité supposée (dividendes
+# dans les cours, devise du consensus) : publier brut, lire, puis décider.
+#
+# Elle existe comme workflow parce que le proxy de développement bloque Yahoo.
+name: Sonder le consensus Yahoo
+
+on:
+  workflow_dispatch:
+    inputs:
+      tickers:
+        description: "Liste séparée par des virgules (vide = échantillon par défaut)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  sonde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+      - name: Sonder
+        run: python tools/sonde_consensus.py --tickers "${{ inputs.tickers }}"
+      - name: Publier le rapport en artefact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonde-consensus
+          path: sonde_consensus.json
+          retention-days: 7
+      # Le rapport est aussi committé : c'est lui qu'on relit pour décider, et
+      # un artefact expire au bout de sept jours.
+      - name: Commiter le rapport pour analyse
+        run: |
+          git config user.name "Signal Bot"
+          git config user.email "bot@signal.fr"
+          git add sonde_consensus.json || true
+          git diff --cached --quiet || \
+            git commit -m "sonde: consensus Yahoo brut (growth_estimates) [skip ci]"
+          git push || true
