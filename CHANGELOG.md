@@ -5,6 +5,58 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La piste des cinq ans est morte, la sonde a trouvé mieux
+
+Je proposais d'ancrer notre prolongation sur le taux de croissance à cinq ans
+de Yahoo. La sonde a lu la table brute, et le résultat est **négatif** :
+l'index n'est pas `+5y` comme je l'annonçais, mais
+`['0q','+1q','0y','+1y','LTG']` — et `LTG` (*Long Term Growth*) est **vide sur
+les douze sociétés**. `revenue_estimate` et `earnings_estimate` s'arrêtent bien
+à `+1y`. **Il n'existe aucun horizon multi-annuel dans notre source.** C'est
+exactement pourquoi la règle était « publier brut, lire, puis décider » : la
+supposition était fausse jusque dans le nom du champ.
+
+Mais la sonde a trouvé deux choses que je ne cherchais pas.
+
+**Le piège des devises est étiqueté dans l'API.** TSMC : consensus de chiffre
+d'affaires en **TWD**, consensus de bénéfice en **USD**, dans la même réponse.
+Notre inférence (`financialCurrency == currency`) tombe juste sur les douze,
+mais lire l'étiquette vaut mieux que la déduire.
+
+**Sur quoi repose le consensus.** Les tables portent le **nombre d'analystes**
+et la **fourchette basse/haute**, jamais lus jusqu'ici. L'écart est
+considérable : 50 analystes sur Alphabet contre **deux** sur Constellation
+Energy ; un désaccord de ±1 % sur Booking contre **±16 %** sur Nebius. Depuis
+que la trajectoire est une courbe unique et assumée, elle a l'autorité d'une
+affirmation — la fiche dit désormais sur quelles fondations elle repose, en six
+mots : *« 50 analystes, ils divergent de ±2,8 % »*.
+
+Détail qui aurait mordu : dans `revenue_estimate`, `avg`, `low`, `high` et
+`numberOfAnalysts` arrivent en **chaînes** là où les mêmes colonnes
+d'`earnings_estimate` arrivent en flottants. Et `fusionner_fonda` reconstruit
+`fonda` de zéro : le nouveau champ aurait été perdu en silence — exactement ce
+qui avait coûté 96 fiches avec `proj`. La garde générique de jeu de champs le
+couvre.
+
+### Une tête coupée et deux centres décalés
+
+**« Sur NVIDIA, tête de Jensen coupée. »** Mesuré : une source 960×540 mise à
+la largeur d'une fiche fait 568 px de haut, ramenés à 300 par le plafond — on
+jetait 268 px, moitié en haut, moitié en bas, parce que `object-fit:cover`
+centre par défaut. Or le sujet d'une photo de presse est presque toujours dans
+le tiers **supérieur** : c'est la moitié qu'on jetait. Le plafond monte à
+360 px et l'ancrage passe à 30 % de haut ; la fenêtre visible remonte de 72 px
+dans la source. La règle vaut pour les cent et quelques illustrations, pas pour
+une image particulière — vérifié sur cinq autres sujets (circuit, terminal de
+paiement) sans dégradation.
+
+**« La décomposition pas bien alignée avec le score. »** Elle et l'anneau
+étaient tous deux calés en haut ; comme ils n'ont pas la même hauteur (92 px
+contre 138), leurs centres tombaient à **17 px** l'un de l'autre — assez pour
+que l'œil le voie. Centrés sur la même ligne, ils partagent maintenant le même
+axe au pixel près. Le titre, lui, reste en haut : c'est le point d'entrée de la
+fiche.
+
 ### Les pertes attendues étaient censurées, sans qu'on l'ait décidé
 
 En comparant nos fiches Nebius et CoreWeave à celles d'un concurrent, le

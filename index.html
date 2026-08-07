@@ -89,8 +89,21 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .d-illu{position:relative;margin:0 0 1.1rem;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.02)}
   /* Même proportion que les cartes de watchlist (16:9), qui est la bonne :
      une bande de 150 px écrasait le sujet. Plafonnée sur grand écran pour
-     que l'image ne prenne pas le pas sur les chiffres de la fiche. */
-  .d-illu img{display:block;width:100%;height:auto;aspect-ratio:16/9;max-height:300px;object-fit:cover}
+     que l'image ne prenne pas le pas sur les chiffres de la fiche.
+
+     LE PLAFOND DÉCAPITAIT (signalé sur NVIDIA, 07/08 : « tête de Jensen
+     coupée »). Mesuré : une source 960×540 mise à la largeur d'une fiche fait
+     568 px de haut, ramenés à 300 — on jetait 268 px, moitié en haut, moitié
+     en bas, parce que `object-fit:cover` centre par défaut. Or un sujet de
+     photo de presse est presque toujours dans le tiers SUPÉRIEUR du cadre :
+     c'est exactement la moitié qu'on jetait.
+     Deux corrections qui se complètent : le plafond monte à 360 px (le rognage
+     passe de 268 à 208), et l'ancrage passe à 30 % de haut — la fenêtre visible
+     remonte de 72 px dans la source. On ne recadre pas photo par photo : la
+     règle vaut pour les cent et quelques illustrations, et elle vaut parce que
+     les sujets sont hauts, pas parce qu'une image particulière l'exigeait. */
+  .d-illu img{display:block;width:100%;height:auto;aspect-ratio:16/9;max-height:360px;
+    object-fit:cover;object-position:50% 30%}
   .d-illu figcaption{position:absolute;left:0;right:0;bottom:0;padding:.38rem .6rem;
     background:linear-gradient(0deg,rgba(6,6,11,.92),rgba(6,6,11,0));
     font:600 .48rem var(--mono);letter-spacing:.9px;text-transform:uppercase;color:var(--text3)}
@@ -124,7 +137,12 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      conteneur reste dans le DOM pour le re-rendu à la promotion, mais il
      disparaît de la mise en page. */
   #dzone{display:contents}
-  .hd-note{flex:0 1 320px;min-width:212px;margin:.35rem 0 0 auto;padding-right:1.4rem}
+  /* `align-self:center` : le bloc et l'anneau étaient tous deux calés en
+     HAUT, et comme ils n'ont pas la même hauteur (92 px contre 138), leurs
+     centres tombaient à 17 px l'un de l'autre — assez pour que l'œil le
+     voie. Centrés sur la même ligne flex, ils partagent exactement le même
+     axe. Le titre, lui, reste en haut : c'est le point d'entrée de la fiche. */
+  .hd-note{flex:0 1 320px;min-width:212px;align-self:center;margin:0 0 0 auto;padding-right:1.4rem}
   .hd-nh{font:600 .58rem var(--mono);letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.55rem}
   .hd-note .meter{grid-template-columns:74px 1fr 52px;gap:7px;margin-bottom:7px;font-size:.6rem}
   .qh{font:600 .6rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem;display:flex;align-items:center;gap:10px}.qh::after{content:'';flex:1;height:1px;background:var(--line)}
