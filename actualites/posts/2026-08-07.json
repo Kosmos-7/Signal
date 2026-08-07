@@ -1,0 +1,85 @@
+{
+ "id": "2026-08-07",
+ "type": "quotidien",
+ "date": "2026-08-07",
+ "titre": "Hormuz, dollar, exportations chinoises : un jeudi sous tension feutrée",
+ "chapeau": "Trafic maritime au ralenti dans le détroit d'Ormuz, dollar qui se redresse et exportations chinoises portées par l'IA : le point sur une matinée attentiste.",
+ "sujet": "marches",
+ "photo": null,
+ "sections": [
+  {
+   "titre": "Détroit d'Ormuz : le trafic se fait discret",
+   "texte": "Le trafic de navires dans le détroit d'Ormuz a diminué cette semaine, selon Reuters, alors que les marchés suivent de près les discussions entre l'Iran et Oman. La situation reste surveillée de près, sans qu'un dénouement soit annoncé à ce stade.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Le dollar reprend des couleurs, les yeux rivés sur l'Iran et les emplois américains",
+   "texte": "Le dollar progresse légèrement ce matin, selon Reuters. Les opérateurs de marché attendent deux catalyseurs simultanés : l'évolution des négociations entre l'Iran et Oman, et la publication prochaine des données sur l'emploi américain. Une combinaison qui incite à la prudence plutôt qu'aux grands paris.",
+   "sources": [
+    2,
+    1
+   ]
+  },
+  {
+   "titre": "La demande en IA fait tourner la machine à exporter chinoise",
+   "texte": "Les exportations chinoises restent bien orientées, portées notamment par la demande liée à l'intelligence artificielle, rapporte Reuters. Un moteur qui, pour l'instant, compense d'autres vents contraires sur l'économie chinoise.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Sweetgreen taille dans ses prévisions, sans y être pour grand-chose",
+   "texte": "La chaîne de salades américaine Sweetgreen a abaissé ses perspectives annuelles, pénalisée par les craintes liées à une épidémie de cyclospora qui pèse sur la fréquentation, selon CNBC. L'enseigne précise qu'elle n'est pas impliquée dans l'épidémie en cours, mais le mot « salade » dans les titres suffit apparemment à refroidir l'appétit des clients.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "NextEra et Dominion : le gouverneur de Virginie entre dans la danse",
+   "texte": "Le gouverneur de Virginie a annoncé son intention d'intervenir dans le processus de révision de la fusion entre NextEra et Dominion, invoquant des inquiétudes sur les prix de l'électricité, selon CNBC. La State Corporation Commission de Virginie est chargée d'examiner l'opération et pourra l'approuver, la rejeter ou y imposer des conditions.",
+   "sources": [
+    4
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "AI demand keeps China's export engine humming - Reuters",
+   "resume": "AI demand keeps China's export engine humming  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQcmhJQUR2QVh5SHpuWDZ2ZFk3RWdCbDlINEY1MEZuc0tRbkJQT3FuRmQ1WDdtd2owTmhJeDdIU09EYkFiNEJpTnA3cWhQQ1dnWUpkWDJPVENiZDIzTXlNUlRNenF2VlRXM29EbFFJelBiTUhuU1cycU5EV3RvaVhIbU4yc0pNWDM2aGlCaGtSTG5ySGx3aXhFcTNRTkZ4cFlva3k0cA?oc=5",
+   "date": "2026-08-07 04:53"
+  },
+  {
+   "titre": "Vessel traffic through Hormuz dwindles this week as markets watch Iran-Oman talks - Reuters",
+   "resume": "Vessel traffic through Hormuz dwindles this week as markets watch Iran-Oman talks  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPYjdYbS1fZXZGWktSZkVpMk4temZNOUY1cEFsQUxTRXRNQnJUai1lY2xTMDE5dmFMZjUyUzZQclRyQUJuVTFVXzB6RGtpeXlFeU8xZjNiVWp4dVVNTkVWcVhCVEpsVVdTa1lsZEVfVUlSWHBlMjh0UDNYdkpjS3BHVjA2MUUtSXU0OTNEZ1lCUW9iYkliLUxSN2JSTTlFbEktaGRTb2UzcUxNMjlaZGtQSmt1S1FWYzlvdlkwdDM3WjY0dHZTRU9VWFFB?oc=5",
+   "date": "2026-08-07 04:33"
+  },
+  {
+   "titre": "Dollar drifts higher as traders eye Iran talks ahead of US jobs data - Reuters",
+   "resume": "Dollar drifts higher as traders eye Iran talks ahead of US jobs data  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPOUNvR1pacXVtTWI3eUROeE54TXVYY3JEU1FNSFA4YlBaVFp6MDFXY0tFaFpqSFBfM2R2WTJQVDVtNG5RN3ozQkZLTTZpTGN5aDMzUE9uUVAyanZWN0VWcnVzWlF1aDh6Y0k2dlY4WWpsMFRMdFNoRW81Y1M2WW9qNTlPSWZVZGFnRVh1eEVTTXhWSlhOQkgyRFJfUm5nMGtGaHRUbnlITTRidldKOFg3ZEg5NnRLR3dj?oc=5",
+   "date": "2026-08-07 02:05"
+  },
+  {
+   "titre": "Virginia governor to intervene in NextEra, Dominion merger over electricity price concerns",
+   "resume": "Virginia's State Corporation Commission is tasked with reviewing the deal and will either accept, reject or impose conditions on it.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/06/virginia-governor-nextera-nee-dominion-data-center.html",
+   "date": "2026-08-06 20:50"
+  },
+  {
+   "titre": "Sweetgreen cuts full-year outlook as cyclospora fears weigh on sales",
+   "resume": "The salad chain has not been implicated in the ongoing cyclospora outbreak.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/06/sweetgreen-cuts-full-year-outlook-as-cyclospora-fears-weigh-on-sales.html",
+   "date": "2026-08-06 20:40"
+  }
+ ],
+ "genere_le": "2026-08-07 06:52 UTC"
+}
