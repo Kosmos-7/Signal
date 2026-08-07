@@ -5,6 +5,14 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### L'illustration passe sous l'en-tête
+
+Elle ouvrait la fiche, et repoussait sous la ligne de flottaison exactement ce
+qu'on vient y chercher : le nom, la note et sa décomposition. Elle les suit
+désormais — identité et chiffres d'abord, la photo ensuite. Elle illustre la
+société, elle ne l'annonce pas. Sa marge passe du bas vers le haut, pour
+qu'elle respire sous les pastilles plutôt que sous le fil d'Ariane.
+
 ### Le graphique s'élargit — et découvre deux fiches sans axe des prix
 
 « Le graph peut prendre plus de largeur pour s'aligner au reste. » Le SVG

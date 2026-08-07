@@ -86,7 +86,9 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   /* Illustration d'ACTIVITÉ en tête de fiche. La légende n'est pas décorative :
      elle dit ce que montre l'image (le maillon), pour qu'on ne la lise jamais
      comme une photo de la société elle-même. */
-  .d-illu{position:relative;margin:0 0 1.1rem;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.02)}
+  /* Marge EN HAUT depuis que l'image suit l'en-tête au lieu de l'ouvrir :
+     elle doit respirer sous les pastilles, pas sous le fil d'Ariane. */
+  .d-illu{position:relative;margin:1.3rem 0 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.02)}
   /* Même proportion que les cartes de watchlist (16:9), qui est la bonne :
      une bande de 150 px écrasait le sujet. Plafonnée sur grand écran pour
      que l'image ne prenne pas le pas sur les chiffres de la fiche.
@@ -1908,7 +1910,6 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
       ((brief&&!hasActu)?'':'<div>'+sec('Actu',(hasActu?paras(a.actu):'<p class="stub">À générer.</p>'))+'</div>')+'</div>';
   doc.classList.remove('on');
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
-    illuSociete(s.ticker)+
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     /* LA DÉCOMPOSITION EST DANS L'EN-TÊTE, entre l'identité et l'anneau
        (décision du propriétaire, 07/08, croquis à l'appui). C'est sa place
@@ -1917,6 +1918,12 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
        résumé. */
     '<div id="dzone">'+dataZone(s,b)+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div>'+(function(){const p=paliers(score);return p?'<div class="rp rp-'+p.ton+'">'+p.mot+'</div>':'';})()+'</div></div></div>'+
+    /* L'ILLUSTRATION EST SOUS L'EN-TÊTE (décision du propriétaire, 07/08).
+       Elle l'ouvrait, et repoussait sous la ligne de flottaison ce qu'on
+       vient chercher : le nom, la note et sa décomposition. Identité et
+       chiffres d'abord, la photo ensuite — elle illustre la société, elle
+       ne l'annonce pas. */
+    illuSociete(s.ticker)+
     '<div class="sep"></div><div id="rzone"></div>'+
     /* Les métriques des fiches COMPACTES restent dans le corps : leur
        bandeau de six tuiles n'a pas sa place dans l'en-tête, et la
