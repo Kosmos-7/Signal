@@ -1338,8 +1338,29 @@ function fondaRender(s){
   const W=NARROW?440:800,H=170,PB=22,n=cols.length;
   const val=(o,k)=>o.v[k]==null?null:o.v[k];
   const maxV=Math.max(...cols.map(o=>Math.max(val(o,'ca')||0,val(o,'ca_haut')||0,val(o,'rn')||0,o.pr?(rnAtt(o.v)||0):0,1)));
-  const minV=Math.min(0,...cols.map(o=>Math.min(val(o,'rn')==null?0:val(o,'rn'),0)));
+  /* ÉCHELLE LOG QUAND LE LINÉAIRE ÉCRASE TOUT (signalé par le propriétaire
+     sur NVIDIA, 07/08 : « de 2017 à 2023 tout est presque plat alors qu'on
+     parle en milliards »). Un CA multiplié par 80 sur la fenêtre rend les
+     premières années illisibles en linéaire — c'est mathématique, pas un
+     choix de dessin. Même doctrine que la courbe des PER, avec deux
+     garde-fous : le log exige que TOUT soit positif (une perte n'a pas de
+     logarithme — NBIS reste donc en linéaire), et ne se déclenche qu'à
+     partir d'un rapport de 15 entre le plus grand et le plus petit CA
+     dessinés — Alphabet (×9) garde son échelle linéaire, où les hauteurs se
+     comparent en différence, la lecture la plus naturelle. */
+  const _rnDe=o=>o.pr?rnAtt(o.v):o.v.rn;
+  const tousPos=cols.every(o=>{const r=o.v,rv=_rnDe(o);return (r.ca==null||r.ca>0)&&(rv==null||rv>0);});
+  const _cas=cols.map(o=>o.v.ca).filter(v=>v!=null&&v>0);
+  const LOGB=tousPos&&_cas.length>1&&Math.max(..._cas)/Math.min(..._cas)>15;
+  const _minPos=LOGB?Math.min(...cols.flatMap(o=>[o.v.ca,_rnDe(o)]).filter(v=>v!=null&&v>0)):1;
+  // Plancher un peu sous la plus petite valeur : la plus petite barre garde
+  // une hauteur visible au lieu de partir de zéro pixel.
+  const _la=Math.log(_minPos/1.6), _lb=Math.log(maxV);
+  const minV=LOGB?0:Math.min(0,...cols.map(o=>Math.min(val(o,'rn')==null?0:val(o,'rn'),0)));
   const y0=8+(H-PB-16)*(maxV/(maxV-minV)), sc=(H-PB-16)/(maxV-minV);
+  // Hauteur d'une barre — l'UNIQUE conversion valeur→pixels, partagée par le
+  // CA, sa borne haute et le résultat net : deux conversions divergeraient.
+  const hVal=v=>LOGB?(Math.log(v)-_la)/(_lb-_la)*(H-PB-16):v*sc;
   const slot=W/n, bw=Math.min(34,slot*0.22);
   let bars='<defs><pattern id="fdhach" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">'+
     '<line x1="0" y1="0" x2="0" y2="5" stroke="#74b6df" stroke-width="2.4"/></pattern>'+
@@ -1399,11 +1420,11 @@ function fondaRender(s){
   cols.forEach((o,i)=>{
     const r=o.v, cx=slot*i+slot/2, last=(i===rows.length-1), op=o.pr?0.9:(last?1:0.45);
     const fCa=o.pr?'url(#fdhach)':'#74b6df';
-    if(r.ca!=null){const h=r.ca*sc;
+    if(r.ca!=null){const h=hVal(r.ca);
       /* Le CÔNE : quand les deux branches divergent (carnet contracté vs
          croissance organique), la fourchette se dessine en contour au-dessus
          de la barre prudente. L'écart EST l'information. */
-      if(o.pr&&r.ca_haut!=null){const hh=r.ca_haut*sc;
+      if(o.pr&&r.ca_haut!=null){const hh=hVal(r.ca_haut);
         bars+='<rect x="'+(cx-bw-2)+'" y="'+(y0-hh)+'" width="'+bw+'" height="'+Math.max(2,hh-h)+'" fill="none" stroke="#74b6df" stroke-width="1" stroke-dasharray="2 2" opacity=".55"/>';}
       bars+='<rect x="'+(cx-bw-2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+fCa+'" opacity="'+op+'"/>';
       /* Les projections sont peu nombreuses (2 à 5 barres) et c'est LEUR
@@ -1414,12 +1435,12 @@ function fondaRender(s){
          recouvraient : le chiffre exact est de toute façon dans le tableau
          dépliable juste en dessous, une étiquette illisible ne vaut pas
          mieux que pas d'étiquette. */
-      if(o.pr&&placeValeur){const ht=(r.ca_haut!=null?r.ca_haut:r.ca)*sc;
+      if(o.pr&&placeValeur){const ht=hVal(r.ca_haut!=null?r.ca_haut:r.ca);
         bars+='<text x="'+(cx-bw/2-2)+'" y="'+Math.max(9,y0-ht-6)+'" text-anchor="middle" class="chx-axis" fill="#74b6df">'+fdMoney(r.ca,dev).replace(/&nbsp;/g,' ')+'</text>';}}
     // Résultat net : publié en plein, attendu en hachuré gris — même code
     // visuel que le CA (plein = déposé, hachures = attendu).
     const rnV=o.pr?rnAtt(r):r.rn;
-    if(rnV!=null){const h=rnV*sc, neg=rnV<0;
+    if(rnV!=null){const h=hVal(rnV), neg=rnV<0;
       bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':(o.pr?'url(#fdhach2)':'#c6c6e0'))+'" opacity="'+(neg?0.8:(o.pr?0.85:op*0.75))+'"/>';}
     if((n-1-i)%step===0||last){
       /* Le libellé de la DERNIÈRE colonne débordait du viewBox et sortait
@@ -1457,7 +1478,7 @@ function fondaRender(s){
     '<div class="fd-ctrl">'+
       '<button class="chx-pbtn'+(FD_MODE==='an'?' on':'')+'" data-fd="an"'+(an.length<2?' disabled':'')+'>Annuel</button>'+
       '<button class="chx-pbtn'+(FD_MODE==='tr'?' on':'')+'" data-fd="tr"'+(tr.length<2?' disabled':'')+'>Trimestres</button>'+
-      '<span class="chx-rlbl">publié en '+sv(dev)+'</span></div>'+
+      '<span class="chx-rlbl">publié en '+sv(dev)+(LOGB?' · échelle log <span class="inf" tabindex="0" aria-label="Échelle logarithmique">i<span class="inf-tip">Échelle logarithmique : chaque cran de hauteur multiplie par le même facteur. Les hauteurs se comparent en RAPPORT, pas en différence — une croissance régulière en % donne des marches régulières. Sans elle, un chiffre d\'affaires multiplié par 80 sur la fenêtre écraserait les premières années en barres plates.</span></span>':'')+'</span></div>'+
     '<div class="fd-cwrap"><svg class="fd-svg" id="fd-bars" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
     '<div class="chx-tip" id="fd-bars-tip"></div></div>'+
     '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net'+

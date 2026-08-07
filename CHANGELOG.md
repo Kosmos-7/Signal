@@ -5,6 +5,24 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Échelle log sur les barres quand le linéaire écrase tout
+
+Signalé par le propriétaire sur NVIDIA : « de 2017 à 2023 tout est presque
+plat alors qu'on parle en milliards ». C'est mathématique — un CA multiplié
+par 80 sur la fenêtre (7 → 562 Md$ attendus) ne laisse aux premières années
+que quelques pixels en linéaire.
+
+Même doctrine que la courbe des PER, avec deux garde-fous : le log exige que
+**tout soit positif** (une perte n'a pas de logarithme — Nebius reste en
+linéaire), et ne se déclenche qu'à partir d'un **rapport de 15** entre le plus
+grand et le plus petit CA dessinés — Alphabet (×9) garde l'échelle linéaire,
+où les hauteurs se comparent en différence, la lecture la plus naturelle.
+L'échelle en vigueur est écrite à côté de la devise (« échelle log », avec un
+« i » qui explique : les hauteurs se comparent en rapport, une croissance
+régulière en % donne des marches régulières). La conversion valeur→pixels est
+UNE fonction partagée par le CA, sa borne haute et le résultat net — deux
+conversions auraient fini par diverger.
+
 ### La colonne EBITDA quitte le tableau des chiffres
 
 « On supprime la colonne EBITDA car pas assez d'historique. » La mesure donne
