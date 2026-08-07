@@ -911,16 +911,37 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
 
     for cle, est in (("ca", estimations_ca), ("eps", estimations_bpa)):
         base = _dernier(cle)
-        if base is None or base <= 0:
-            continue                      # perte ou absence : rien à prolonger
-        # 1) les deux exercices de consensus, tels que publiés
+        # 1) LES DEUX EXERCICES DE CONSENSUS, TELS QUE PUBLIÉS — quel que soit
+        #    leur SIGNE.
+        #
+        #    Ces deux gardes filtraient les valeurs négatives (`base <= 0` en
+        #    sortie de boucle, `v > 0` ici) : une société dont les analystes
+        #    attendent des PERTES n'affichait donc aucun bénéfice attendu, pas
+        #    même le consensus. C'était contraire à notre propre règle — « le
+        #    consensus reste affiché, c'est un fait déposé, pas une opinion à
+        #    nous » — et ça se voyait : sur Nebius et CoreWeave, un concurrent
+        #    affiche les barres de pertes attendues là où nos fiches ne
+        #    montraient rien du tout (constaté par le propriétaire, 07/08).
+        #
+        #    Une perte attendue EST une information, et souvent la principale.
+        #    Ce qu'on continue de refuser, c'est de la PROLONGER : faire
+        #    décroître une perte vers +3 % de croissance n'a aucun sens, et le
+        #    refus est posé juste en dessous avec son motif.
         vals, dernier_val, dernier_an = {}, base, an0
         for i, k in enumerate(("0y", "+1y")):
             v = (est or {}).get(k)
-            if v and v > 0:
+            if v is not None:
                 vals[an0 + 1 + i] = (v, "consensus")
                 dernier_val, dernier_an = v, an0 + 1 + i
-        # 2) le rythme de départ, en DEUX branches
+        # 2) PROLONGER EXIGE UNE BASE ET UNE ARRIVÉE POSITIVES. Le taux de
+        #    croissance composé n'est pas défini autrement : élever un rapport
+        #    négatif à une puissance fractionnaire donne un nombre complexe.
+        if base is None or base <= 0 or dernier_val is None or dernier_val <= 0:
+            _poser(cle, vals,
+                   "la série est en perte : une perte ne se prolonge pas vers "
+                   "un taux de croissance, et nous n'inventons pas de retour "
+                   "à l'équilibre")
+            continue
         if dernier_an > an0:
             g_att = ((dernier_val / base) ** (1 / (dernier_an - an0)) - 1) * 100
         else:

@@ -1345,8 +1345,15 @@ function fondaRender(s){
      d'actions constantes que le tableau de trajectoire, écrite là-bas. Le
      nombre d'actions est calculé ICI, une seule fois, et le tableau plus bas
      réutilise le même : deux calculs finiraient par diverger. */
-  const _derEx=an.filter(e=>e.rn!=null&&e.eps).slice(-1)[0];
-  const actions=(_derEx&&_derEx.eps>0&&_derEx.rn>0)?_derEx.rn/_derEx.eps:null;
+  /* Le nombre d'actions se déduit du rapport résultat net ÷ bénéfice par
+     action. Il exigeait les DEUX positifs — ce qui privait de barres toute
+     société en perte, alors que le rapport de deux nombres NÉGATIFS donne
+     exactement le même nombre d'actions (CoreWeave 2025 : −1 167 ÷ −2,81 =
+     415 millions de titres). Ce qu'il faut, c'est un rapport positif, pas des
+     termes positifs. On remonte l'historique jusqu'au premier exercice
+     exploitable plutôt que d'abandonner sur le dernier. */
+  const _derEx=an.filter(e=>e.rn!=null&&e.eps&&e.rn/e.eps>0).slice(-1)[0];
+  const actions=_derEx?_derEx.rn/_derEx.eps:null;
   const rnAtt=p=>(p.eps!=null&&actions)?p.eps*actions:null;
   const cols=rows.map(r=>({v:r,pr:false})).concat(projC.map(p=>({v:p,pr:true})));
   const W=NARROW?440:800,H=170,PB=22,n=cols.length;

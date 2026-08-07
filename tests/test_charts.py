@@ -715,13 +715,30 @@ g1 = (ph[2]["ca"] / ph[1]["ca"] - 1) * 100
 check("croissance forte : le 1er pas extrapolé part du rythme du consensus",
       g_att * 0.7 < g1 < g_att, f"{g1:.1f} % pour un consensus à {g_att:.1f} %")
 check("le consensus, lui, est repris tel quel (525 conservé)", ph[1]["ca"] == 525)
-# Un BPA en perte ne se prolonge pas — courbe qui ne veut rien dire (cas Nebius)
+# UNE PERTE ATTENDUE EST UNE INFORMATION. Le consensus est publié quel que soit
+# son signe (correction du 07/08 : nos fiches Nebius et CoreWeave n'affichaient
+# AUCUN bénéfice attendu là où un concurrent montre les barres de pertes) ; ce
+# qu'on refuse, c'est de PROLONGER une perte vers un taux de croissance.
 AN_PERTE = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
             [(2023, 100, -1.0), (2024, 150, -2.0), (2025, 220, -0.5)]]
-pp = screener.projections(AN_PERTE, {"0y": -0.2, "+1y": 0.1}, {"0y": 300, "+1y": 400},
+pp = screener.projections(AN_PERTE, {"0y": -0.2, "+1y": -0.1}, {"0y": 300, "+1y": 400},
                           "2025-12-31")
-check("BPA négatif : le chiffre d'affaires se projette, pas le bénéfice",
-      all("eps" not in e for e in pp) and all("ca" in e for e in pp), str(pp[:2]))
+cons = [e for e in pp if e.get("eps_nature") == "consensus"]
+check("BPA en perte : le consensus des analystes est PUBLIÉ, signe compris",
+      [e["eps"] for e in cons] == [-0.2, -0.1], str(cons))
+check("mais il n'est jamais prolongé au-delà du consensus",
+      all(e.get("eps_nature") != "extrapolé" for e in pp), str(pp))
+check("le motif du refus dit la perte, sans jargon",
+      "en perte" in (cons[-1].get("eps_arret") or ""), cons[-1].get("eps_arret", ""))
+check("le chiffre d'affaires, lui, continue de se projeter",
+      any(e.get("ca_nature") == "extrapolé" for e in pp), str(pp[-1]))
+# Une base positive qui bascule en perte attendue : même traitement.
+BASCULE = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
+           [(2023, 100, 1.0), (2024, 150, 0.8), (2025, 220, 0.4)]]
+bp = screener.projections(BASCULE, {"0y": -0.3, "+1y": -0.9}, {"0y": 300, "+1y": 400},
+                          "2025-12-31")
+check("bénéfice qui bascule en perte : publié, non prolongé",
+      [e.get("eps") for e in bp if e.get("eps") is not None] == [-0.3, -0.9], str(bp))
 check("sans dernier exercice, rien n'est projeté",
       screener.projections(AN_P, None, None, None) == [])
 check("un horizon déjà atteint ne projette rien",

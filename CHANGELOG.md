@@ -5,6 +5,55 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Les pertes attendues étaient censurées, sans qu'on l'ait décidé
+
+En comparant nos fiches Nebius et CoreWeave à celles d'un concurrent, le
+propriétaire a relevé que celui-ci affiche des **barres de bénéfice négatives**
+sur les exercices à venir, là où nos fiches ne montrent **rien du tout**.
+
+C'était un défaut, pas un choix. Deux gardes de `projections()` filtraient les
+valeurs négatives — `base <= 0` sortait de la boucle, `v > 0` rejetait chaque
+estimation. Résultat : une société dont les analystes attendent des pertes
+n'affichait **aucun** bénéfice attendu, pas même le consensus. Cela contredisait
+notre propre règle, écrite quelques lignes plus bas : *« le consensus reste
+affiché — c'est un fait déposé, pas une opinion à nous »*.
+
+Le consensus est désormais publié **quel que soit son signe**. Ce qu'on continue
+de refuser, c'est de le **prolonger** : faire décroître une perte vers +3 % de
+croissance n'a aucun sens, et le refus est posé avec son motif. Le front
+apprend au passage à déduire un nombre d'actions d'un exercice en perte — le
+rapport de deux nombres négatifs donne le même compte de titres (CoreWeave
+2025 : −1 167 ÷ −2,81 = 415 millions), et l'exiger positif privait de barres
+toutes les sociétés déficitaires.
+
+*Effet visible au prochain run du screener : les estimations négatives n'ont
+jamais été stockées, elles ne peuvent pas être reconstituées hors ligne.*
+
+### Où nous en sommes face à un concurrent, sur deux dossiers difficiles
+
+Mesuré exercice par exercice sur Nebius et CoreWeave :
+
+| | nous | eux |
+|---|---|---|
+| historique du CA | identique (≤ 1,3 %) | — |
+| consensus à 2 ans | identique (≤ 1,2 %) | — |
+| exercices 3 à 5 | **absents** | +60 %, +38 %, +45 % (CoreWeave) |
+
+Leur profil à trois-cinq ans est **irrégulier** — aucune formule de
+décroissance ne produit cela : ce sont de vraies estimations d'analystes,
+issues d'un flux de consensus multi-annuel que nous n'avons pas. Notre refus
+au-delà de 50 %/an reste **juste au regard de notre source** : abaisser le
+seuil ne nous donnerait pas leurs chiffres, mais notre formule appliquée à un
+rythme délirant — précisément le désastre documenté (18 Md$ contre 140 Md$
+selon le réglage, quand le marché en discutait 33 à 46).
+
+La seule piste réelle dans notre source actuelle reste `growth_estimates` de
+Yahoo, qui porte un taux de croissance annualisé à cinq ans que nous ne lisons
+toujours pas. Il donnerait une courbe lisse, pas leur irrégularité — mais
+ancrée sur un chiffre d'analyste au lieu de notre décroissance. Il sera publié
+**brut** sur un run avant tout branchement (le proxy de développement bloque
+Yahoo, la lecture doit passer par un run GitHub).
+
 ### « Croiss CA · a/a, ça correspond à quoi ? » — pas à ce qu'on croyait
 
 La question a valu un recoupement, et il a trouvé une vraie faute. Le chiffre
