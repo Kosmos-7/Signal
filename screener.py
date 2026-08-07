@@ -736,8 +736,9 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
                 plafond=PLAFOND_EXTRAPOLATION, seuil_refus=SEUIL_REFUS):
     """Trajectoire attendue du CA et du BPA jusqu'à `horizon`.
 
-    DEUX NATURES DE LIGNES, JAMAIS CONFONDUES — c'est tout l'objet de cette
-    fonction, et la raison pour laquelle chaque entrée porte sa `nature` :
+    DEUX NATURES DE VALEURS, JAMAIS CONFONDUES — c'est tout l'objet de cette
+    fonction, et la raison pour laquelle chaque SÉRIE porte la sienne
+    (`ca_nature`, `eps_nature`), l'année ne portant qu'un résumé prudent :
 
       · « consensus » : les DEUX seuls exercices que les analystes couvrent
         réellement (exercice en cours et suivant, publiés par Yahoo). Ce sont
