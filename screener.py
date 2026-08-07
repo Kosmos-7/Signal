@@ -974,6 +974,56 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
     return [lignes[a] for a in sorted(lignes)]
 
 
+def croissance_ca_trimestrielle(tr):
+    """Croissance du CA du dernier trimestre publié, en glissement annuel (%).
+
+    POURQUOI NOUS LA CALCULONS AU LIEU DE LIRE `revenueGrowth` DE YAHOO.
+    Question du propriétaire, 07/08 : « Croiss CA · a/a +12,7 %, ça correspond
+    à quoi ? ». Le recoupement contre notre PROPRE historique trimestriel — les
+    barres qu'on dessine juste au-dessus de la tuile — a montré que la réponse
+    n'était pas celle qu'on croyait, sur 18 fiches publiées sur 83 :
+
+      · DÉSYNCHRONISATION (30 fiches). `revenueGrowth` porte sur le trimestre
+        que le bloc `info` de Yahoo estimait le plus récent. Notre série, elle,
+        s'ACCUMULE d'un run à l'autre (fusionner_fonda) et va souvent plus loin.
+        La tuile parlait donc d'un trimestre que le graphique ne montrait plus
+        comme le dernier — SNDK annonçait +371,6 % là où le dernier trimestre
+        dessiné en donne +251,0.
+      · DÉFINITION DU REVENU (6 fiches). Même en recalculant sur le trimestre
+        que Yahoo désigne, l'écart persiste sur des assureurs et des services
+        aux collectivités : Constellation Energy annonçait +23,0 % quand ses
+        propres comptes trimestriels donnent −4,2 %. Le « revenue » de Yahoo
+        n'y recouvre pas la ligne que nous portons au graphique.
+
+    Un chiffre qui contredit la barre juste au-dessus de lui n'est pas une
+    approximation, c'est une contradiction. On le calcule donc sur la série
+    qu'on publie, avec la RÈGLE DU TABLEAU : le même trimestre un an plus tôt,
+    jamais le précédent, qui ne raconterait que la saisonnalité.
+
+    Retourne None si la comparaison n'est pas possible (moins de deux
+    trimestres, pas d'homologue à un an, base nulle ou négative) — auquel cas
+    l'appelant garde la valeur de Yahoo, faute de mieux, plutôt qu'un blanc.
+    """
+    pts = [r for r in (tr or []) if r.get("ca") is not None]
+    if len(pts) < 2:
+        return None
+    dernier = pts[-1]
+    try:
+        d0 = _dt.strptime(dernier["fin"], "%Y-%m-%d")
+    except (ValueError, KeyError, TypeError):
+        return None
+    # Fenêtre 330–400 jours : un exercice décalé ou un trimestre publié avec
+    # quelques jours d'écart reste apparié, un semestre ne l'est pas.
+    for p in pts:
+        try:
+            j = (d0 - _dt.strptime(p["fin"], "%Y-%m-%d")).days
+        except (ValueError, KeyError, TypeError):
+            continue
+        if 330 < j < 400 and p["ca"] > 0:
+            return round((dernier["ca"] / p["ca"] - 1) * 100, 1)
+    return None
+
+
 def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
                     max_tr=edgar.MAX_TRIMESTRES):
     """Accumule l'historique des chiffres publiés entre les runs.
@@ -1126,6 +1176,26 @@ def publier_charts(charts, a_publier, dossier=CHARTS_DIR, breakdowns=None):
                 pass
             except Exception:
                 pass
+            # LA CROISSANCE TRIMESTRIELLE SE RECALCULE ICI, et pas plus tôt :
+            # c'est APRÈS la fusion que la série définitive est connue, et
+            # c'est elle que le graphique dessine. Calculer avant reviendrait à
+            # commenter une série qui n'est pas celle qu'on publie.
+            #
+            # `mrq` N'EST PAS TOUCHÉ, et c'est délibéré. La désynchronisation
+            # va dans le sens inverse de l'intuition : le bloc `info` de Yahoo
+            # est PLUS FRAIS que son propre endpoint d'états financiers (SNDK :
+            # `mrq` au 03/07, notre dernier trimestre accumulé au 31/03). Or
+            # `mrq` date aussi les marges TTM, qui viennent bien de ce bloc
+            # frais. Le réécrire aurait reculé la date des marges pour arranger
+            # celle de la croissance — on aurait déplacé l'incohérence au lieu
+            # de la corriger. Chaque chiffre porte donc SA date.
+            _tr = (payload.get("fonda") or {}).get("tr") or []
+            _g = croissance_ca_trimestrielle(_tr)
+            if _g is not None and payload.get("breakdown"):
+                payload = {**payload,
+                           "breakdown": {**payload["breakdown"],
+                                         "rev_growth_pct": _g,
+                                         "rev_growth_fin": _tr[-1]["fin"]}}
         try:
             with open(tmp, "w", encoding="utf-8") as f:
                 json.dump(payload, f, ensure_ascii=False,

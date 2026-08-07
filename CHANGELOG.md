@@ -5,6 +5,65 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### « Croiss CA · a/a, ça correspond à quoi ? » — pas à ce qu'on croyait
+
+La question a valu un recoupement, et il a trouvé une vraie faute. Le chiffre
+était `revenueGrowth` de Yahoo, repris tel quel. Comparé à **notre propre
+historique trimestriel** — les barres dessinées juste au-dessus de la tuile —
+il divergeait sur **18 fiches sur 83**, pour deux raisons distinctes :
+
+- **Désynchronisation (30 fiches).** Le résumé de Yahoo porte sur le trimestre
+  que son bloc `info` estime le plus récent ; notre série s'accumule d'un run à
+  l'autre et n'a pas toujours le même dernier point. SanDisk annonçait
+  **+371,6 %** quand le dernier trimestre dessiné en donne **+251,0**.
+- **Définition du revenu (6 fiches).** Même recalculé sur le trimestre que
+  Yahoo désigne, l'écart persiste chez des assureurs et des services aux
+  collectivités : Constellation Energy annonçait **+23,0 %** là où ses propres
+  comptes trimestriels donnent **−4,2 %**.
+
+La croissance est désormais **calculée sur la série que nous publions**, avec
+la règle du tableau : le même trimestre un an plus tôt, jamais le précédent.
+25 valeurs corrigées.
+
+**Un piège évité en cours de route.** Le premier correctif alignait aussi la
+date de référence `mrq` sur notre dernier trimestre. C'était une erreur : la
+désynchronisation va dans le sens *inverse* de l'intuition — le résumé de Yahoo
+est **plus frais** que son propre endpoint d'états financiers — et `mrq` date
+aussi les marges TTM, qui viennent bien de ce résumé frais. L'aligner aurait
+reculé la date des marges pour arranger celle de la croissance : on aurait
+déplacé l'incohérence au lieu de la corriger. Chaque chiffre porte donc sa
+propre date, et la bulle « i » les énonce toutes les deux quand elles diffèrent.
+
+### Les deux dépliants disparaissent des fiches
+
+« Ça fait doublon avec le graph. » Depuis que chaque colonne livre ses montants
+au survol et au doigt — chiffre d'affaires, résultat net, variation et nature
+de la valeur — « Dérouler les chiffres » et « Dérouler la trajectoire
+attendue » répétaient le dessin.
+
+**Ce que ça coûte, et c'est assumé** : le tableau des publiés montrait tout
+l'historique accumulé là où le graphique s'arrête à dix exercices. Au-delà de
+dix ans, les chiffres ne sont plus lisibles sur la fiche — ils restent
+collectés et continuent d'alimenter la note (marge médiane, TCAM, médiane des
+multiples se calculent sur tout l'accumulé). L'hypothèse du **nombre d'actions
+constant**, qui vivait sous le tableau de trajectoire, a été déplacée dans la
+bulle « i » : les barres de bénéfice attendu en dépendent entièrement, elle ne
+pouvait pas partir avec lui.
+
+### La décomposition passe dans l'en-tête, entre l'identité et le score
+
+Croquis du propriétaire à l'appui. C'est sa place logique : elle est la
+ventilation du nombre affiché juste à sa droite, et les deux se lisent
+maintenant d'un seul regard, avant même le résumé.
+
+Deux réglages trouvés **en mesurant, pas en regardant** : le bloc de titre
+devait céder la place (`flex:1 1 0`), faute de quoi le nom de la société
+poussait la décomposition à 180 px et la colonne de barre tombait à **zéro** —
+quatre valeurs alignées sans aucune barre ; et le conteneur `#dzone` devait
+passer en `display:contents`, sinon c'était lui, div nu, qui devenait l'enfant
+flex et coinçait le bloc à sa largeur minimale. Sur mobile, identité et anneau
+restent côte à côte, la décomposition passe dessous en pleine largeur.
+
 ### La décomposition remonte en tête, les tuiles orphelines rentrent chez elles
 
 Trois retours du propriétaire sur la fiche épurée le matin même.

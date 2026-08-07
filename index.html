@@ -75,10 +75,14 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      mobile. Le débordement dépendait du CONTENU, donc il ne se voyait que sur
      certaines fiches. */
   .d-head{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem}
-  .d-head>div:first-child{min-width:0;overflow-wrap:anywhere}
+  .d-head>div:first-child{flex:1 1 0;min-width:0;overflow-wrap:anywhere}
   .d-tk{font-family:var(--serif);font-size:3.4rem;line-height:.95;letter-spacing:-1px}
   .d-nm{font-size:.98rem;color:var(--text2);margin-top:.25rem}
-  .d-tagrow{display:flex;align-items:center;gap:10px;margin-top:.85rem}
+  /* `flex-wrap` + `nowrap` sur les badges : le bloc de titre ayant cédé de la
+     place à la décomposition, `overflow-wrap:anywhere` cassait « US » en
+     deux lignes d'une lettre. Une pastille se déplace, elle ne se coupe pas. */
+  .d-tagrow{display:flex;align-items:center;gap:10px;margin-top:.85rem;flex-wrap:wrap}
+  .d-tag,.d-reg{white-space:nowrap;overflow-wrap:normal}
   /* Illustration d'ACTIVITÉ en tête de fiche. La légende n'est pas décorative :
      elle dit ce que montre l'image (le maillon), pour qu'on ne la lise jamais
      comme une photo de la société elle-même. */
@@ -103,11 +107,26 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      la décomposition de la note, ses quatre jauges réparties sur deux
      colonnes. Les jauges RSI / z-score qui occupaient l'autre moitié sont
      parties (leurs valeurs vivent sous le graphique de cours). */
-  /* Jauges EMPILÉES en une colonne, comme avant l'élagage du 07/08 : le
-     propriétaire préférait cette forme. La largeur est bornée pour que les
-     barres restent comparables entre elles — étalées sur 1040 px, quatre
-     barres de longueurs voisines deviennent indistinguables. */
-  .quant2{margin:1.6rem 0;max-width:520px}
+  /* Décomposition logée DANS l'en-tête, entre l'identité et l'anneau. Jauges
+     empilées (forme préférée du propriétaire) sur une largeur bornée : étalées,
+     quatre barres de longueurs voisines deviennent indistinguables, et c'est
+     leur comparaison qui porte l'information. `flex:0 1 auto` + `margin-left:
+     auto` la colle à l'anneau plutôt qu'au titre, pour que le regard aille du
+     détail au total sans traverser le vide. */
+  /* C'est le TITRE qui cède la place, pas la décomposition : sans `flex:1 1 0`
+     sur le premier bloc, le nom de la société poussait celui-ci à 180 px et la
+     colonne de barre tombait à ZÉRO — quatre valeurs alignées sans aucune
+     barre, mesuré au navigateur. Le `min-width` garantit une piste visible
+     jusqu'au repli mobile. */
+  /* `display:contents` : sans lui, c'est #dzone — un div nu, donc `flex:0 1
+     auto` — qui devient l'enfant flex, et .hd-note se retrouvait coincée à
+     sa largeur minimale (212 px mesurés, colonne de barre à 50 px). Le
+     conteneur reste dans le DOM pour le re-rendu à la promotion, mais il
+     disparaît de la mise en page. */
+  #dzone{display:contents}
+  .hd-note{flex:0 1 320px;min-width:212px;margin:.35rem 0 0 auto;padding-right:1.4rem}
+  .hd-nh{font:600 .58rem var(--mono);letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.55rem}
+  .hd-note .meter{grid-template-columns:74px 1fr 52px;gap:7px;margin-bottom:7px;font-size:.6rem}
   .qh{font:600 .6rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem;display:flex;align-items:center;gap:10px}.qh::after{content:'';flex:1;height:1px;background:var(--line)}
   .meter{grid-template-columns:104px 1fr 62px}   /* labels en toutes lettres, valeurs décimales */
 
@@ -365,6 +384,18 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
     .doc{scroll-margin-top:4.2rem}   /* le header fixe ne recouvre pas le haut de la fiche */
     body.v-home .stage{margin-top:4.6rem}
     .d-tk{font-size:2.6rem}
+    /* Écran étroit : l'en-tête à trois colonnes n'entre pas. Il se replie —
+       identité et anneau restent côte à côte sur la première ligne, la
+       décomposition passe dessous en pleine largeur (l'anneau garde sa place
+       à droite du titre, comme avant). */
+    .d-head{flex-wrap:wrap;gap:.85rem}
+    /* `flex:1 1 0` et non un pourcentage : à 390 px, « 60 % + anneau + gouttière »
+       dépassait la ligne et l'anneau tombait seul en dessous. Base zéro, le titre
+       prend simplement ce qui reste après l'anneau. */
+    .d-head>div:first-child{flex:1 1 0}
+    .d-head>.ring{order:2}
+    .hd-note{order:3;flex:1 1 100%;margin:.2rem 0 0;padding-right:0}
+    .hd-note .meter{grid-template-columns:96px 1fr 62px}
     /* La bulle « i » ancrée à son icône déborde de l'écran dès que l'icône
        est près d'un bord : sur mobile elle devient une feuille posée en bas
        du viewport, pleine largeur — lisible où que soit l'icône. */
@@ -873,8 +904,10 @@ function buildChart(s){
     if(d&&d.breakdown&&s._c&&!s._up){
       s._up=true; s.breakdown=Object.assign({},s.breakdown,d.breakdown);
       const dz=document.getElementById('dzone');
-      if(dz){ dz.innerHTML=dataZone(s,s.breakdown,false);
+      if(dz){ dz.innerHTML=dataZone(s,s.breakdown);
         dz.querySelectorAll('.f').forEach(el=>el.style.width=el.dataset.w+'%'); }
+      const cz=document.getElementById('czone');
+      if(cz)cz.innerHTML='';
 // le breakdown porte aussi la raison sociale complète, la fiche la
       // préfère au nom tronqué à 22 caractères des listes
       const nm=document.querySelector('.d-nm');
@@ -1428,16 +1461,8 @@ function fondaRender(s){
   });
   // La table des chiffres est DÉPLIABLE (décision propriétaire du 06/08 : le
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
-  const openC=!!host.querySelector('#fd-det-c[open]');
-  const openA=!!host.querySelector('#fd-det-a[open]');
   /* Le tableau montre TOUT l'accumulé, lui : c'est le graphique qu'on allège,
      pas la donnée. Un lecteur qui déplie veut les chiffres, pas un extrait. */
-  const cells=full.map(r=>{
-    const p=fdPrev(full,full.indexOf(r),FD_MODE);
-    return '<tr><td>'+lab(r)+'</td>'+
-      '<td>'+fdMoney(r.ca,dev)+fdDelta(r,p,'ca')+'</td>'+
-      '<td>'+fdMoney(r.rn,dev)+fdDelta(r,p,'rn')+'</td></tr>';
-  }).reverse().join('');
   const perB=fdPerChart(F,fmtPer,NARROW?440:800,(s.breakdown||{}).trailing_pe);
   /* LE SEUL CAS QUE LA COURBE NE SAIT PAS MONTRER. Un PER prévisionnel négatif
      n'a pas de sens économique : on ne trace pas de point, donc la courbe
@@ -1489,7 +1514,13 @@ function fondaRender(s){
            La bulle disait « carnet de commandes », ce qui laissait croire
            qu'une donnée de carnet existait quelque part — elle n'existe pas.
            Elle dit maintenant la règle réelle, en une phrase vérifiable. */
-        '</i> <span class="inf" tabindex="0" aria-label="Comment est construite la trajectoire">i<span class="inf-tip">Notre source de consensus s\'arrête à deux exercices. Au-delà, nous partons du rythme que les analystes projettent et le faisons décroître vers 3 %/an — une projection à taux constant est le mensonge classique de l\'exercice. Au-delà de 50 %/an, nous ne prolongeons plus du tout : nous le disons plutôt que de publier un chiffre amorti qu\'on sait faux.</span></span></p>';})()+
+        /* L'HYPOTHÈSE DU NOMBRE D'ACTIONS vivait sous le tableau de
+           trajectoire, retiré le 07/08. Elle ne pouvait pas partir avec lui :
+           les barres de bénéfice attendu en dépendent entièrement. */
+        '</i> <span class="inf" tabindex="0" aria-label="Comment est construite la trajectoire">i<span class="inf-tip">Notre source de consensus s\'arrête à deux exercices. Au-delà, nous partons du rythme que les analystes projettent et le faisons décroître vers 3 %/an — une projection à taux constant est le mensonge classique de l\'exercice. Au-delà de 50 %/an, nous ne prolongeons plus du tout : nous le disons plutôt que de publier un chiffre amorti qu\'on sait faux.'+
+        (actions!=null&&proj.some(p=>p.eps!=null)
+          ?' Le bénéfice attendu est le consensus PAR ACTION multiplié par les '+(actions/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+' milliards de titres déduits du dernier exercice publié (résultat net ÷ bénéfice par action) : il suppose un nombre d\'actions CONSTANT, ce qui est faux pour une société qui rachète les siens.':'')+
+        '</span></span></p>';})()+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     /* LES TROIS FONDAMENTAUX FRAIS, à côté des exercices qu'ils prolongent
        (déplacés le 07/08 : ils flottaient dans une rangée de tuiles isolée).
@@ -1502,53 +1533,21 @@ function fondaRender(s){
                ['Marge FCF · TTM',pc(f,_b.fcf_margin_pct,1)]].filter(x=>x[1]!=='—');
       return t.length?'<div class="metrics fd-metrics">'+t.map(x=>mk(x[0],x[1])).join('')+'</div>'+
         '<div class="metrics-note"><span class="inf" tabindex="0" aria-label="Référence des données">i<span class="inf-tip">'+periodNote(_b)+'</span></span></div>':'';})()+
-    '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
-    '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th><th>Rés. net</th></tr>'+cells+'</table></details>'+
+    /* PLUS DE DÉPLIANTS (décision du propriétaire, 07/08 : « ça fait doublon
+       avec le graph »). Il y avait ici « Dérouler les chiffres » puis
+       « Dérouler la trajectoire attendue ». Depuis que chaque colonne livre
+       ses montants au survol et au doigt — CA, résultat net, variation et
+       nature de la valeur — les deux tableaux répétaient le dessin.
+       CE QUE ÇA COÛTE, et c'est assumé : le tableau des publiés montrait TOUT
+       l'historique accumulé là où le graphique s'arrête à dix exercices. Au-delà
+       de dix ans, les chiffres ne sont donc plus lisibles sur la fiche. Ils
+       restent COLLECTÉS et continuent d'alimenter la note (marge médiane,
+       TCAM, médiane des multiples se calculent sur tout l'accumulé). */
     /* Le tableau des ATTENDUS. Le graphique porte le chiffre d'affaires ; le
        BÉNÉFICE PAR ACTION était projeté par le screener depuis le début et
        n'était affiché NULLE PART. Il l'est ici, avec sa nature ligne à ligne :
        une série peut être du consensus quand l'autre est déjà notre
        arithmétique, et une case vide veut dire qu'on a refusé de prolonger. */
-    (function(){if(!proj.length)return '';
-      const unBpa=proj.some(p=>p.eps!=null);
-      /* LE BÉNÉFICE EN ABSOLU, dans la même unité que le graphique.
-         Question du propriétaire : « pourquoi bénéfice par ACTION ? ». Parce
-         que c'est ce que notre source donne — le consensus de Yahoo est par
-         action, et il n'existe pas de consensus en montant. Mais le graphique
-         juste au-dessus parle en millions : passer au par-action dans le
-         tableau obligeait le lecteur à changer d'unité en cours de route.
-         On publie donc les DEUX, le montant étant le produit du bénéfice par
-         action et du NOMBRE D'ACTIONS DÉDUIT du dernier exercice publié
-         (résultat net ÷ bénéfice par action). Cette déduction se vérifie :
-         sur Alphabet elle donne 12,2 milliards de titres là où le chiffre
-         publié est 12,1. L'hypothèse — un nombre d'actions constant — est
-         écrite sous le tableau, parce qu'elle est fausse pour toute société
-         qui rachète ses titres. */
-      // `actions` est calculé une seule fois, en tête de fondaRender : le
-      // graphique et ce tableau doivent multiplier par le MÊME nombre.
-      const unNet=unBpa&&actions!=null;
-      const nat=(p,k)=>p[k+'_nature']||p.nature;
-      const bal=v=>v==null?'—':v.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});
-      const li=proj.slice().reverse().map(p=>{
-        const marq=k=>p[k+'_arret']?'<span class="fd-stop" title="'+p[k+'_arret']+'"> ⌁</span>':'';
-        const cell=(k,txt)=>'<td'+(nat(p,k)==='extrapolé'?' class="fd-ext"':'')+'>'+txt+marq(k)+'</td>';
-        /* PAS de « e » sur l'année. Une même année peut porter un consensus de
-           chiffre d'affaires et déjà notre arithmétique sur le bénéfice — TSM
-           affichait « 2026e » sous une phrase qui annonçait « 2026 d'après le
-           consensus ». La nature se lit DANS la cellule (grisé + italique),
-           là où elle est vraie ; la ligne n'est marquée que si TOUTES les
-           séries qu'elle porte sont extrapolées. */
-        const series=['ca','eps'].filter(k=>p[k]!=null);
-        const toutExt=series.length&&series.every(k=>nat(p,k)==='extrapolé');
-        return '<tr'+(toutExt?' class="fd-est"':'')+'><td>'+p.exercice+'</td>'+
-          cell('ca', p.ca==null?'—':fdMoney(p.ca,dev))+
-          (unNet?cell('eps', p.eps==null?'—':fdMoney(p.eps*actions,dev)):'')+
-          (unBpa?cell('eps', p.eps==null?'—':bal(p.eps)+' '+sv(dev)):'')+'</tr>';}).join('');
-      return '<details class="fd-det" id="fd-det-a"'+(openA?' open':'')+'><summary>Dérouler la trajectoire attendue ▾</summary>'+
-        '<table class="fd-table"><tr><th>Exercice</th><th>CA attendu</th>'+(unNet?'<th>Bénéfice net</th>':'')+(unBpa?'<th>Par action</th>':'')+'</tr>'+li+'</table>'+
-        '<p class="fd-inline"><i>En clair : consensus des analystes. En grisé : notre prolongation arithmétique. Un tiret, ou le signe ⌁, veut dire que nous avons refusé de prolonger, survolez-le pour le motif.'+
-        (unNet?' Le bénéfice net est le bénéfice par action multiplié par les '+(actions/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+' milliards de titres déduits du dernier exercice (résultat net ÷ bénéfice par action) : il suppose donc un nombre d\'actions CONSTANT, ce qui est faux pour une société qui rachète les siens.':'')+
-        '</i></p></details>';})()+
     '</div>'+
     /* Plus de tableau « Dérouler les PER » ni de relevé au survol (décisions
        du propriétaire, 07/08) : chaque point porte sa valeur directement sur
@@ -1695,7 +1694,19 @@ function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; con
 // Élagage du 06/08 : les étiquettes des métriques portent déjà « a/a » et
 // « TTM », seule la DATE de référence ajoute de l'information.
 function periodNote(b){ const p=qLabel(b&&b.mrq);
-  let t=p?('Fondamentaux au '+p.d+' ('+p.q+', dernier trimestre publié).'):'Fondamentaux : dernier trimestre publié.';
+  let t=p?('Marges sur les 12 mois glissants arrêtés au '+p.d+' ('+p.q+').')
+         :'Marges sur les 12 mois glissants.';
+  /* DEUX DATES, PAS UNE. La croissance du CA est calculée sur NOTRE série
+     trimestrielle (celle du graphique) ; les marges TTM viennent du résumé de
+     Yahoo, qui est souvent EN AVANCE d'un trimestre sur son propre endpoint
+     d'états financiers. Prétendre une date unique obligerait à reculer celle
+     des marges ou à avancer celle de la croissance : dans les deux cas on
+     daterait faux un chiffre juste. On dit donc les deux quand elles
+     diffèrent. */
+  const g=qLabel(b&&b.rev_growth_fin);
+  if(g) t+=(p&&b.rev_growth_fin!==b.mrq)
+    ? ' La croissance du CA porte sur '+g.q+' (clos le '+g.d+'), dernier trimestre de notre historique — Yahoo publie ses marges avec un trimestre d\'avance sur ses états financiers.'
+    : ' La croissance du CA compare '+g.q+' au même trimestre un an plus tôt.';
   /* Un douze-mois-glissant et un exercice clos peuvent diverger fortement sans
      que rien ne soit faux : un retournement de cycle met douze mois à
      traverser un exercice. On le dit plutôt que de laisser le lecteur croire
@@ -1757,7 +1768,7 @@ function themeBar(meta){
    compacte est promue au niveau top 30 quand charts/<TICKER>.json livre le
 breakdown complet, on remplace alors cette zone sans toucher au résumé
    (l'animation de frappe repartirait de zéro) ni au graphique. */
-function dataZone(s,b,compact){
+function dataZone(s,b){
   const bl=(b.note&&b.note.blocs)||{};
   const _p=k=>bl[k]?bl[k].pts:null;
   /* ÉLAGAGE DU 07/08 (« supprime tout ce qui n'est pas vital »). Sont partis :
@@ -1780,9 +1791,8 @@ function dataZone(s,b,compact){
      de cours, les trois fondamentaux frais sous le graphique des chiffres
      publiés, avec la date de référence qui les accompagnait. Un nombre se lit
      à côté de ce qui le produit. */
-  return '<div class="quant2"><div class="qh">Décomposition de la note</div>'+
-      meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div>'+
-    (compact?compactMetrics(s):'');
+  return '<div class="hd-note"><div class="hd-nh">Décomposition</div>'+
+      meterN('Qualité',_p('q'),35)+meterN('Croissance',_p('c'),25)+meterN('Valorisation',_p('v'),25)+meterN('Momentum',_p('m'),15)+'</div>';
   /* PLUS DE DÉPLIANT « DÉTAIL DE LA NOTE » (décision du propriétaire, 07/08).
      Il listait les quinze critères phrasés un à un, sous les quatre jauges qui
      disent déjà où la note se gagne et se perd. Le raisonnement complet reste
@@ -1820,13 +1830,19 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
   doc.innerHTML=(curWl?'<div class="wl-crumb"><a href="#/">← Watchlists</a><span class="sepc">/</span><span class="crumb-cur">'+sv(curWl.label)+'</span></div>'+themeBar(curWl):'')+
     illuSociete(s.ticker)+
     '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
+    /* LA DÉCOMPOSITION EST DANS L'EN-TÊTE, entre l'identité et l'anneau
+       (décision du propriétaire, 07/08, croquis à l'appui). C'est sa place
+       logique : elle est la ventilation du nombre affiché juste à sa droite,
+       et les deux se lisent maintenant d'un seul regard, avant même le
+       résumé. */
+    '<div id="dzone">'+dataZone(s,b)+'</div>'+
     '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div>'+(function(){const p=paliers(score);return p?'<div class="rp rp-'+p.ton+'">'+p.mot+'</div>':'';})()+'</div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
-    /* LA DÉCOMPOSITION EST EN TÊTE (décision du propriétaire, 07/08 : « autant
-       mettre décomposition de la note tout au début »). Elle justifie le
-       chiffre affiché dans l'anneau juste au-dessus : la lire après trois
-       graphiques obligeait à remonter pour faire le lien. */
-    '<div id="dzone">'+dataZone(s,b,compact)+'</div>'+
+    /* Les métriques des fiches COMPACTES restent dans le corps : leur
+       bandeau de six tuiles n'a pas sa place dans l'en-tête, et la
+       promotion au niveau top 30 le vide (le corps de la fiche prend
+       alors le relais avec ses propres blocs). */
+    '<div id="czone">'+(compact?compactMetrics(s):'')+'</div>'+
     '<div id="chartsec"></div>'+
     '<div id="fondasec"></div>'+
     prose+

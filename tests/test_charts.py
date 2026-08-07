@@ -758,6 +758,40 @@ check("un passé en déclin fait toujours REFUSER la prolongation",
       all(e["nature"] == "consensus" for e in dc)
       and any("ca_arret" in e for e in dc), str(dc[-1]))
 
+# ── Croissance trimestrielle : calculée sur NOTRE série, pas lue chez Yahoo ──
+# Question du propriétaire, 07/08 : « Croiss CA · a/a +12,7 %, ça correspond à
+# quoi ? ». Le recoupement a montré que `revenueGrowth` de Yahoo ne portait pas
+# toujours sur le trimestre que le graphique dessine (30 fiches désynchronisées)
+# ni toujours sur la même définition du revenu (6 fiches d'assureurs et de
+# services aux collectivités). On la calcule donc sur la série qu'on publie.
+TRIMS = [{"fin": f, "ca": c} for f, c in
+         [("2025-03-31", 100), ("2025-06-30", 110), ("2025-09-30", 120),
+          ("2025-12-31", 130), ("2026-03-31", 125)]]
+check("croissance trimestrielle : dernier trimestre vs MÊME trimestre un an plus tôt",
+      screener.croissance_ca_trimestrielle(TRIMS) == 25.0,
+      str(screener.croissance_ca_trimestrielle(TRIMS)))
+check("ce n'est PAS le trimestre précédent (qui donnerait -3,8 %)",
+      screener.croissance_ca_trimestrielle(TRIMS) != -3.8)
+check("moins de deux trimestres : rien n'est inventé",
+      screener.croissance_ca_trimestrielle([TRIMS[0]]) is None)
+check("aucun homologue à un an : on se tait plutôt que de comparer n'importe quoi",
+      screener.croissance_ca_trimestrielle(TRIMS[:3]) is None)
+check("base nulle ou négative : pas de division absurde",
+      screener.croissance_ca_trimestrielle(
+          [{"fin": "2025-03-31", "ca": 0}, {"fin": "2026-03-31", "ca": 50}]) is None)
+check("un trimestre sans CA ne casse pas l'appariement",
+      screener.croissance_ca_trimestrielle(
+          [{"fin": "2025-03-31", "ca": 100}, {"fin": "2025-06-30", "ca": None},
+           {"fin": "2026-03-31", "ca": 150}]) == 50.0)
+# Le décalage de quelques jours d'un calendrier fiscal reste apparié ; un
+# semestre, non — sinon on comparerait des durées différentes.
+check("un exercice décalé de quelques jours reste apparié",
+      screener.croissance_ca_trimestrielle(
+          [{"fin": "2025-03-28", "ca": 100}, {"fin": "2026-04-03", "ca": 120}]) == 20.0)
+check("un semestre n'est jamais apparié comme un an",
+      screener.croissance_ca_trimestrielle(
+          [{"fin": "2025-09-30", "ca": 100}, {"fin": "2026-03-31", "ca": 120}]) is None)
+
 # ── Le refus de prolonger : une projection qu'on sait fausse ne s'affiche pas ─
 # Leçon du 07/08 (signalée par le propriétaire, sur Nebius) : au-delà d'un
 # certain rythme, toute prolongation est fausse — amortir donnait 18 Md$ en
