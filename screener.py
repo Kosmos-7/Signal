@@ -1640,6 +1640,14 @@ def score_ticker(ticker, vix=None):
         # (cf. note_v4). Publié par Yahoo pour toutes les places, donc sans
         # l'asymétrie géographique qu'aurait introduite une source US.
         price_to_book = info.get("priceToBook")
+        # Un multiple NÉGATIF n'est pas un multiple. Des capitaux propres
+        # négatifs (rachats massifs financés par dette : Dell −202, Booking
+        # −14,6, MSCI −15,3) donnent un « prix sur actif net » qui n'a aucun
+        # sens économique et qui, sur la rampe du critère bancaire, passerait
+        # pour la meilleure note possible. Même règle que le PER prévisionnel
+        # négatif et que les capitaux propres d'etats_complements : on retire.
+        if isinstance(price_to_book, (int, float)) and price_to_book <= 0:
+            price_to_book = None
 
         # Période de réf. des fondamentaux (dernier trimestre publié ; mostRecentQuarter = epoch s).
         # Temporalités Yahoo : rev_growth = trimestriel a/a (MRQ vs même trim. N-1) ;

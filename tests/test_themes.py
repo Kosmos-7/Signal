@@ -241,6 +241,25 @@ check("mais les 20 lignes restent remplies", len(liste2) == 20,
       "le bornage masquerait la panne sans la mesure avant troncature")
 
 
+# ── Écart à la trajectoire : la formule n'est bornée que d'un côté ──────────
+print("\n— Écart à la trajectoire, dans l'unité où il se lit —")
+# Un titre SOUS sa tendance ne peut pas l'être de plus de 100 % ; AU-DESSUS,
+# aucune limite : Advantest sortait à « surcote tendance 1244 % » (13,4 fois sa
+# trajectoire) et 27 fiches sur 95 dépassaient 100 %. Ce nombre entrait tel quel
+# dans le prompt de l'agent.
+check("une décote normale reste en pourcentage",
+      pa._ecart_tendance(28.9).strip() == "décote tendance 29%",
+      pa._ecart_tendance(28.9))
+check("une surcote normale aussi",
+      pa._ecart_tendance(-45.0).strip() == "surcote tendance 45%",
+      pa._ecart_tendance(-45.0))
+check("au-delà de 100 %, on énonce le MULTIPLE, pas le pourcentage",
+      pa._ecart_tendance(-1244.5).strip() == "13.4\u00d7 sa tendance",
+      pa._ecart_tendance(-1244.5))
+check("la bascule se fait exactement à −100 %",
+      "%" in pa._ecart_tendance(-99.9) and "\u00d7" in pa._ecart_tendance(-100.1))
+check("aucun écart : aucune mention", pa._ecart_tendance(None) == "")
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:

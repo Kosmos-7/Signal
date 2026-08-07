@@ -68,7 +68,14 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   @media(max-width:900px){footer{flex-direction:column;align-items:flex-start;gap:.5rem;padding:1.25rem 1rem}}
   .stage::-webkit-scrollbar{width:5px}.stage::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
   .doc{width:100%;max-width:1060px;padding:.5rem 1.5rem 2.5rem;opacity:0;transition:opacity .35s}.doc.on{opacity:1}
+  /* `min-width:0` : sans lui, un élément flex refuse de descendre sous la
+     largeur de son contenu. Un nom de société long (Adyen, avec sa rangée de
+     thèmes) poussait alors l'anneau de score — largeur fixe, 138 px — cinq
+     pixels au-delà du viewport, et la page défilait horizontalement sur
+     mobile. Le débordement dépendait du CONTENU, donc il ne se voyait que sur
+     certaines fiches. */
   .d-head{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem}
+  .d-head>div:first-child{min-width:0;overflow-wrap:anywhere}
   .d-tk{font-family:var(--serif);font-size:3.4rem;line-height:.95;letter-spacing:-1px}
   .d-nm{font-size:.98rem;color:var(--text2);margin-top:.25rem}
   .d-tagrow{display:flex;align-items:center;gap:10px;margin-top:.85rem}
@@ -1124,6 +1131,17 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
    (comparer T4 à T3 raconterait la saisonnalité, pas la trajectoire). */
 let FD_MODE='an';
 const FD_SYM={USD:'$',EUR:'€',GBP:'£',JPY:'¥',KRW:'₩',TWD:'NT$',CHF:'CHF',SEK:'kr',DKK:'kr',NOK:'kr'};
+/* ÉCART À LA TRAJECTOIRE, en unité lisible. La formule (1 − prix/tendance)
+   n'est bornée que d'un côté : un titre SOUS sa tendance ne peut pas l'être de
+   plus de 100 %, un titre AU-DESSUS n'a aucune limite — Advantest sortait à
+   « −1 244,5 % », soit 13,4 fois sa trajectoire. 27 % des fiches dépassaient
+   100 %. Au-delà, on cesse de parler en pourcentage et on dit le multiple :
+   c'est la même mesure, énoncée dans l'unité où elle se lit. */
+function ecartTendance(dec){
+  if(dec==null)return '—';
+  if(dec>-100)return Math.abs(dec).toFixed(0)+' %';
+  return (1-dec/100).toFixed(1).replace('.',',')+'\u00d7';
+}
 function fdMoney(v,dev){
   if(v==null)return '—';
   const sym=FD_SYM[dev]||(dev+' '), a=Math.abs(v);
@@ -1437,7 +1455,7 @@ function compactMetrics(s){const b=s.breakdown||{},u=s._u||{};
   return '<div class="metrics">'+
     mk('Cours',(u.prix!=null?f(u.prix,2)+dev:'—'))+
     mk('Cross',(b.cross_type||'neutre')+(b.cross_days_ago!=null?' '+b.cross_days_ago+'j':''))+
-    mk(dl,(b.decote_pct==null?'—':Math.abs(b.decote_pct).toFixed(0)+'%'))+
+    mk(dl,ecartTendance(b.decote_pct))+
     mk('Z-score'+(b.regression_window_years?' · '+b.regression_window_years+' ans':''),fs(b.regression_z,1).replace('.',',')+'σ')+
     mk('RSI',f(b.rsi,0))+
     mk('Objectif consensus',(b.target_upside_pct==null?'—':fs(b.target_upside_pct,0)+'%')+(b.target_analysts?' ('+b.target_analysts+')':''))+

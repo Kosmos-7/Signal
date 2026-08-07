@@ -44,6 +44,24 @@ TICKER_MSCI          = "EUNL.DE"
 client = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
 
 # ── UTILITAIRES ──────────────────────────────────────────────────────────────
+def _ecart_tendance(dc):
+    """Écart au prix de tendance, dans l'unité où il se lit.
+
+    La formule (1 − prix/tendance) n'est bornée que d'un côté : un titre SOUS
+    sa tendance ne peut pas l'être de plus de 100 %, un titre AU-DESSUS n'a
+    aucune limite — Advantest sortait à « surcote tendance 1244 % », et 27 %
+    des fiches dépassaient 100 %. Un tel nombre entrait tel quel dans le prompt
+    et n'y apportait que du bruit. Au-delà, on dit le MULTIPLE : même mesure,
+    unité lisible. Pure."""
+    if dc is None:
+        return ""
+    if dc >= 0:
+        return f" décote tendance {dc:.0f}%"
+    if dc > -100:
+        return f" surcote tendance {abs(dc):.0f}%"
+    return f" {1 - dc / 100:.1f}\u00d7 sa tendance"
+
+
 def load_json(path, default):
     try:
         with open(path, encoding="utf-8") as f:
@@ -811,7 +829,7 @@ def construire_prompt_analyse(portfolio, watchlist, contexte, macro_news=None):
         z_str = f" z={z:+.1f}σ" if z is not None else ""
         # Décote/surcote vs tendance + consensus (informationnels — Règle 14)
         dc = bd.get("decote_pct")
-        dc_str = (f" {'décote' if dc >= 0 else 'surcote'} tendance {abs(dc):.0f}%") if dc is not None else ""
+        dc_str = _ecart_tendance(dc)
         tu = bd.get("target_upside_pct")
         tu_str = f" consensus {tu:+.0f}% ({bd.get('target_analysts') or '?'} analystes)" if tu is not None else ""
         # Timing d'entrée : drawdown 52w + zone Fibo (annotation chartiste)
@@ -981,7 +999,7 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
         opp_str  = f" | signal {opp_a['signal_qualite']}, timing {opp_a['timing']}" if opp_a else ""
         # Décote/surcote vs tendance + consensus (informationnels — Règle 14)
         dc = bd.get("decote_pct")
-        dc_str = (f" | {'décote' if dc >= 0 else 'surcote'} tendance {abs(dc):.0f}%") if dc is not None else ""
+        dc_str = (" |" + _ecart_tendance(dc)) if dc is not None else ""
         tu = bd.get("target_upside_pct")
         tu_str = f" consensus {tu:+.0f}%" if tu is not None else ""
 
