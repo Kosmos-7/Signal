@@ -714,8 +714,11 @@ def build_prompt(stock, guide, news, niveau):
         bloc_actu = f"\n## ACTUALITÉ\n{news_block}\n"
         cadre_donnees = ""
         schema = (
-            '  "resume": ["§1 : ce que fait la boîte en une phrase + le débat central. Relie le score '
-            f'{stock.get("score","?")}/100 à la qualité, pas au timing.", "§2 (optionnel) : cadrage valorisation en relatif."],\n'
+            '  "resume": ["§1 : ce que fait la boîte en une phrase + le débat central. '
+            'NE RECOPIE JAMAIS le score ni les points d\'un bloc : ils sont affichés '
+            'juste au-dessus et ils changent chaque semaine — dis ce que la note '
+            'SIGNIFIE (qualité, pas timing), jamais combien elle vaut.", '
+            '"§2 (optionnel) : cadrage valorisation en relatif."],\n'
             '  "biz":    ["§ comment la boîte gagne de l\'argent + marges.", "§ type de douve nommé + durabilité/menace."],\n'
             '  "futur":  ["§ drivers de croissance.", "§ cadrage prix vs valeur (cher/correct/décoté en relatif, SANS cible chiffrée) + risques."],\n'
             '  "actu":   ["§ faits récents datés et chiffrés (1 paragraphe dense)."],\n'
@@ -758,8 +761,10 @@ def build_prompt(stock, guide, news, niveau):
             "connaissance générale, pas une donnée financière inventée.\n"
         )
         schema = (
-            '  "resume": ["§ unique : ce que fait la boîte en une phrase + le débat central. Relie le score '
-            f'{stock.get("score","?")}/100 à la qualité, pas au timing."],\n'
+            '  "resume": ["§ unique : ce que fait la boîte en une phrase + le débat central. '
+            'NE RECOPIE JAMAIS le score ni les points d\'un bloc : ils sont affichés '
+            'juste au-dessus et ils changent chaque semaine — dis ce que la note '
+            'SIGNIFIE (qualité, pas timing), jamais combien elle vaut."],\n'
             '  "biz":    ["§ comment la boîte gagne de l\'argent + type de douve nommé et sa durabilité."],\n'
             '  "futur":  ["§ drivers de croissance + cadrage prix vs valeur à partir des SEULS chiffres fournis (score, z-score, décote vs tendance, RSI, consensus), SANS cible chiffrée."],\n'
             + ('  "actu":   ["§ ce que disent les titres de presse ci-dessus, datés, sans y ajouter aucun chiffre financier."],\n' if avec_actu else "")
@@ -796,6 +801,14 @@ Date du jour : {today}.
 - Tu peux utiliser des balises <b>…</b> inline pour mettre en relief un chiffre clé
   (comme les fiches existantes), mais avec parcimonie. Pas d'autre HTML.
 - Écris en FRANÇAIS.
+- INTERDIT : recopier le SCORE ou les points d'un bloc (« 62/100 », « qualité 30/35 »).
+  Ils sont affichés dans l'anneau et dans les jauges, trois centimètres au-dessus de
+  ton texte, et ils sont recalculés CHAQUE SEMAINE : une fiche qui les répète devient
+  fausse au premier run qui les bouge. Relevé du 07/08/2026 : 73 fiches sur 104
+  affichaient un score périmé, NVIDIA annonçant « 74/100 » sous un anneau à 86.
+  Dis ce que la note SIGNIFIE, jamais combien elle vaut. Les grandeurs stables
+  (marge, croissance, multiple) restent les bienvenues : elles bougent lentement et
+  elles portent du sens dans une phrase.
 - INTERDIT : le tiret cadratin « — » comme ponctuation. C'est la signature la plus
   reconnaissable d'un texte de machine, et elle décrédibilise la fiche entière.
   Utilise une virgule pour une apposition, deux-points pour une explication, ou

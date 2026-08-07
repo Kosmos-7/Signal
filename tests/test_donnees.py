@@ -280,6 +280,42 @@ orph = sorted(set(FICHES) - set(U))
 sentinelle("fiches publiées sans entrée dans l'univers (données figées)",
            orph, 25, N)
 
+# ── 7. L'ÉDITORIAL NE RECOPIE PAS LE TABLEAU DE BORD ───────────────────────
+print("\n— L'éditorial recopie-t-il des chiffres qui bougent chaque semaine ? —")
+# Le 07/08/2026 : 104 résumés sur 104 citaient le score en toutes lettres, 73
+# citaient un score PÉRIMÉ (NVIDIA « 74/100 » sous un anneau affichant 86) et 78
+# un barème v3 (« qualité 39/45, timing 9/22 ») disparu depuis la v4. Un texte
+# qui recopie un tableau de bord ment dès que le tableau de bord bouge.
+import re                                              # noqa: E402
+try:
+    ANALYSES = json.load(open("analyses.json", encoding="utf-8"))
+except Exception:                                      # noqa: BLE001
+    ANALYSES = {}
+cite_score, cite_bareme = [], []
+for t, a in ANALYSES.items():
+    for k, v in a.items():
+        if k.startswith("_") or not v:
+            continue
+        txt = v if isinstance(v, str) else " ".join(str(x) for x in v)
+        if re.search(r"\d{1,3}\s*/\s*100", txt):
+            cite_score.append(f"{t}.{k}")
+        if re.search(r"\d{1,3}\s*/\s*(?:45|30|22|35|25|15)\b", txt):
+            cite_bareme.append(f"{t}.{k}")
+check(f"aucune analyse ne recopie le score ({len(ANALYSES)} lues)",
+      not cite_score, str(cite_score[:6]))
+# DETTE DATÉE, mesurée et assumée. 46 citations d'un sous-score v3 (« qualité
+# 42/45 », « valorisation 10/30 ») subsistent dans les rubriques bull, bear et
+# futur. Contrairement aux résumés, elles ne sont PAS réécrivables à la machine :
+# le chiffre y porte le jugement de l'auteur, et le remplacer par un
+# qualificatif déduit de la fraction produit des contresens — « le score de
+# qualité SOLIDE indique que les fondamentaux ne valident pas la valorisation »
+# était le résultat de l'essai. Elles disparaîtront au prochain run éditorial
+# complet, sous le prompt qui interdit désormais de recopier la note. La
+# tolérance ne doit donc que DESCENDRE : si elle remonte, c'est que le garde du
+# générateur a lâché.
+sentinelle("citations d'un sous-score v3 restant dans bull/bear/futur",
+           cite_bareme, 48, len(ANALYSES) or 1)
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:
