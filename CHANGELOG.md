@@ -114,6 +114,35 @@ qu'on ne sait pas calculer n'est pas approximé, il est retiré avec son motif.*
 pour les sociétés les plus spectaculaires du portefeuille. C'est le prix d'un
 chiffre en lequel on peut avoir confiance.
 
+### Les projections n'arrivaient jamais sur le site : un champ perdu à la fusion
+
+Trouvé en vérifiant le run de population plutôt qu'en le supposant réussi.
+Le run s'était terminé « success », et **96 fiches sur 97 étaient publiées sans
+aucune trajectoire**. La seule qui en portait une était la fiche créée ce
+jour-là (RMS.PA) — donc la seule sans historique à fusionner.
+
+`fusionner_fonda()` **reconstruit** le bloc `fonda` de zéro au lieu de partir du
+nouveau : elle recopie `devise`, `an`, `tr` et `pe_prev`, et tout champ qu'elle
+ignore est silencieusement perdu à la publication. `proj` avait été ajouté au
+bloc sans être ajouté à la fusion. Aucun test ne couvrait la conservation des
+champs, et le run ne pouvait pas échouer sur une donnée absente.
+
+- `proj` est désormais recopié — mais **sans repli sur l'ancienne valeur**,
+  contrairement au PER prévisionnel : depuis le refus de prolonger, l'absence
+  de projection est une DÉCISION, pas un silence de Yahoo. Reprendre celle du
+  run précédent ressusciterait la courbe qu'on vient de retirer.
+- **Un garde-fou générique** compare l'ensemble des champs conservés à une
+  liste explicite : le prochain champ ajouté à `fonda` sans être traité dans la
+  fusion fera échouer les tests au lieu de disparaître en silence.
+
+**Reste ouvert** : 44 fiches plafonnent toujours à exactement 12 exercices, et
+toutes sont éligibles EDGAR. Le plafond est pourtant passé à 20 et certaines
+fiches atteignent 13 à 16 — donc la borne n'est plus le facteur limitant, et
+l'affirmation de l'entrée précédente (« le greffe nous rendait déjà des
+exercices jusqu'à 2008 ») n'est pas confirmée par les données publiées. À
+instruire séparément : le conteneur de développement n'atteint pas
+`data.sec.gov`, seul le runner peut le vérifier.
+
 ### On se tronquait soi-même : le plafond d'historique passe de 12 à 20 exercices
 
 Trouvé en cherchant comment un concurrent affiche quarante ans d'historique.

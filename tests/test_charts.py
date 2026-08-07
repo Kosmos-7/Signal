@@ -408,6 +408,27 @@ f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": [],
                              {"devise": "USD", "an": [], "tr": []})
 check("estimations PER : le run muet n'efface pas les précédentes",
       f["pe_prev"] == [{"exercice": 2026, "per": 30.0}])
+# 07/08 : `proj` avait été ajouté à `fonda` sans être ajouté ICI. La fusion
+# reconstruit le bloc de zéro, donc le champ était SILENCIEUSEMENT PERDU à la
+# publication — 96 fiches sur 97 sont sorties sans trajectoire, seule celle
+# créée ce jour-là (sans ancien à fusionner) en portait une.
+PJ = [{"exercice": 2027, "ca": 500, "ca_nature": "extrapolé", "nature": "extrapolé"}]
+f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": []},
+                             {"devise": "USD", "an": [], "tr": [], "proj": PJ})
+check("la trajectoire attendue SURVIT à la fusion (bug du 07/08)", f.get("proj") == PJ)
+# ... mais sans repli sur l'ancienne : depuis le refus de prolonger, l'absence
+# de projection est une DÉCISION, et reprendre celle d'hier la ressusciterait.
+f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": [], "proj": PJ},
+                             {"devise": "USD", "an": [], "tr": []})
+check("une trajectoire retirée ne revient pas par la fusion", "proj" not in f)
+# Garde-fou générique : tout champ de `fonda` que la fusion ignore disparaît.
+# Ce test échouera dès qu'un nouveau champ sera ajouté sans être traité ici.
+CHAMPS = {"devise", "an", "tr", "pe_prev", "proj"}
+plein = {"devise": "USD", "an": [{"fin": "2025-12-31", "ca": 1}], "tr": [],
+         "pe_prev": [{"exercice": 2026, "per": 30.0}], "proj": PJ}
+check("aucun champ de fonda n'est perdu en silence par la fusion",
+      set(screener.fusionner_fonda(plein, plein)) == CHAMPS,
+      str(CHAMPS ^ set(screener.fusionner_fonda(plein, plein))))
 # Le cas ON : l'ancien run datait le trimestre au 31/03 (EDGAR), le nouveau au
 # 04/04 (Yahoo, calendrier fiscal 52/53 semaines) — même trimestre, deux dates.
 f = screener.fusionner_fonda(

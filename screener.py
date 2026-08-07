@@ -934,6 +934,22 @@ def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
     pe = nouveau.get("pe_prev") or ancien.get("pe_prev")
     if pe:
         out["pe_prev"] = pe
+    # Trajectoire attendue : le run COURANT fait foi, SANS repli sur l'ancienne.
+    #
+    # Contrairement au PER prévisionnel, une projection périmée n'est pas
+    # seulement vieille, elle peut être RÉTRACTÉE : depuis que le screener
+    # refuse de prolonger ce qu'il ne sait pas calculer, l'absence de
+    # projection est une DÉCISION, pas un silence de Yahoo. Reprendre celle du
+    # run précédent ressusciterait exactement la courbe qu'on vient de retirer.
+    #
+    # Cette fonction reconstruit le bloc `fonda` de zéro (elle ne part pas de
+    # `nouveau`) : tout champ qu'elle ignore est SILENCIEUSEMENT PERDU à la
+    # publication. C'est ce qui est arrivé à `proj` le 07/08 — 96 fiches sur 97
+    # publiées sans trajectoire, seule la fiche créée ce jour-là (RMS.PA, donc
+    # sans ancien à fusionner) en portait une. Tout nouveau champ de `fonda`
+    # doit être ajouté ICI.
+    if nouveau.get("proj"):
+        out["proj"] = nouveau["proj"]
     return out
 
 
