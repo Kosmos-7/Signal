@@ -5,13 +5,11 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
-### L'illustration passe sous l'en-tête
+### L'illustration reste en tête de fiche
 
-Elle ouvrait la fiche, et repoussait sous la ligne de flottaison exactement ce
-qu'on vient y chercher : le nom, la note et sa décomposition. Elle les suit
-désormais — identité et chiffres d'abord, la photo ensuite. Elle illustre la
-société, elle ne l'annonce pas. Sa marge passe du bas vers le haut, pour
-qu'elle respire sous les pastilles plutôt que sous le fil d'Ariane.
+Essayée sous l'en-tête, remise au-dessus dans la foulée : le propriétaire
+préfère entrer dans la fiche par l'image. Aller-retour assumé — c'est le genre
+de choix qui se juge à l'écran, pas sur un raisonnement.
 
 ### Le graphique s'élargit — et découvre deux fiches sans axe des prix
 
