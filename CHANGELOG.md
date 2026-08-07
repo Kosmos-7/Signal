@@ -5,6 +5,45 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Une seule courbe, assumée — le cône est mort
+
+« Je préfère qu'on assume une position, on ne parle pas de haut de
+fourchette. » La mesure a montré que le cône n'était pas une fourchette
+encadrant la vérité, mais **une bonne réponse et une mauvaise publiées
+ensemble**.
+
+Sur TSMC, contre un concurrent qui publie du consensus multi-annuel — nos
+exercices publiés sont identiques aux siens à la décimale :
+
+| exercice | notre branche prudente | notre branche haute | eux |
+|---|---|---|---|
+| 2026 | 5 420 | — | 5 426 |
+| 2027 | 7 187 | — | 7 280 |
+| 2028 | 8 118 (**−11 %**) | 9 256 (**+1 %**) | 9 161 |
+| 2029 | 8 901 (**−24 %**) | 11 124 (−5 %) | 11 730 |
+
+Leur profil (+25,8 % puis +28,0 %) remonte en fin de période : aucune formule
+de décroissance ne fait ça, ce sont de vraies estimations d'analystes. Notre
+branche haute tombe à 1 % près sur 2028 ; la prudente sous-tire de 24 %.
+
+**Le diagnostic n'était pas celui qu'on croyait.** Le plafond de 25 % n'était
+presque jamais ce qui mordait — le retirer seul ne change que 2 fiches sur 93.
+Le vrai frein était `min(consensus, TCAM historique)` : brider les analystes
+par le passé de la société. C'est de la prudence empilée sur de la prudence,
+puisque la décroissance vers 3 % assure déjà qu'on ne prolonge pas un rythme
+record éternellement.
+
+La règle est donc : **on part du rythme du consensus et on décroît vers 3 %**.
+Le TCAM démontré garde son rôle de **critère de refus** — sous le taux
+terminal, on ne prolonge pas du tout, ce qui préserve le garde-fou du BPA de
+Nebius — mais il ne rabote plus le point de départ. Refuser est une position ;
+raboter était une pudeur.
+
+Les 27 motifs d'arrêt sont intacts, Nebius reste refusé au-delà du consensus,
+et 47 fiches voient leur horizon relevé (jusqu'à ×1,55 sur Teradyne). Les
+tests interdisent désormais le champ `_haut` **partout** — sur toutes les
+natures, pas seulement le consensus : une fiche non régénérée se trahirait.
+
 ### Trois corrections d'un même après-midi de relecture
 
 Le propriétaire a relu les fiches déployées et posé trois questions ; chacune

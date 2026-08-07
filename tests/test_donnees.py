@@ -218,11 +218,14 @@ for t, d in FICHES.items():
             nat = l.get(k + "_nature")
             if l.get(k) is not None and nat not in ("consensus", "extrapolé"):
                 mauvais.append(f"{t}/{l['exercice']}/{k} nature={nat}")
-            if nat == "consensus" and l.get(k + "_haut") is not None:
-                mauvais.append(f"{t}/{l['exercice']}/{k} consensus avec borne haute")
+            # Le cône est mort le 07/08 : une seule courbe, assumée. Ce champ
+            # ne doit plus exister NULLE PART — ni sur le consensus, ni sur
+            # l'extrapolé. Une fiche non régénérée le trahirait ici.
+            if l.get(k + "_haut") is not None:
+                mauvais.append(f"{t}/{l['exercice']}/{k} borne haute résiduelle")
             if l.get(k + "_arret") and not l.get(k):
                 mauvais.append(f"{t}/{l['exercice']}/{k} motif d'arrêt sans valeur")
-check("chaque valeur projetée porte sa nature, le consensus n'a pas de fourchette",
+check("chaque valeur projetée porte sa nature, aucune borne haute résiduelle",
       not mauvais, str(mauvais[:4]))
 
 # ── 5. SENTINELLES DE VRAISEMBLANCE ────────────────────────────────────────

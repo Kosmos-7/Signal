@@ -740,47 +740,59 @@ def per_previsionnel(prix, estimations, dernier_exercice):
 
 HORIZON_PROJECTION = 2030
 CROISSANCE_TERMINALE = 3.0     # % — croissance nominale de long terme d'une économie développée
-# Plafond du taux de départ de la BRANCHE PRUDENTE de la prolongation.
 #
-# CE QUE CE PLAFOND SUPPOSE, ET QUAND IL A TORT. Au-delà de ~25 % par an, la
-# littérature classe l'hypothèse en « très spéculative » — pour une croissance
-# ORGANIQUE. Mais une société dont le chiffre d'affaires est déjà contracté
-# (carnet de commandes pluriannuel signé) n'obéit pas à cette base statistique :
-# le premier jet de cette fonction projetait Nebius à 3,8 Md$ en 2030 quand le
-# marché en discute 33 à 46, parce que le plafond écrasait un carnet signé sous
-# un a priori de croissance organique. Aucune donnée dont nous disposons ne
-# permet de distinguer les deux régimes automatiquement.
+# UNE SEULE COURBE, ASSUMÉE (décision du propriétaire, 07/08 : « je préfère
+# qu'on assume une position, on ne parle pas de haut de fourchette »).
 #
-# D'où la réponse : ne PAS trancher, et publier les DEUX branches. La prudente
-# (plafonnée, ci-dessous) et la haute, qui prolonge le rythme que les analystes
-# eux-mêmes projettent. L'écart entre les deux N'EST PAS un défaut d'affichage :
-# c'est la mesure de notre ignorance, et le lecteur a le droit de la voir.
-# Ce cône ne vaut toutefois que dans un domaine où PROLONGER a encore un sens ;
-# au-delà, on ne l'élargit pas indéfiniment, on s'arrête (voir SEUIL_REFUS).
-PLAFOND_EXTRAPOLATION = 25.0
+# Il y avait ici un PLAFOND_EXTRAPOLATION à 25 % qui donnait une branche
+# « prudente », doublée d'une branche « haute » au rythme du consensus — et le
+# front dessinait le cône entre les deux. Deux choses ont fait tomber ce
+# dispositif.
+#
+# 1. LA MESURE. Sur TSMC, un concurrent qui publie du consensus multi-annuel
+#    annonce +25,8 % puis +28,0 % pour 2028-2029. Notre branche prudente
+#    disait +13,0 % et +9,6 % — 24 % sous leur chiffre en fin d'horizon. Notre
+#    branche haute, elle, tombait à 1 % près sur 2028. Ce n'était donc pas une
+#    fourchette encadrant la vérité : c'était une bonne réponse et une
+#    mauvaise, publiées ensemble.
+#
+# 2. LE DIAGNOSTIC. Le plafond n'était presque jamais ce qui mordait (2 fiches
+#    sur 93 changent si on le retire seul). Le vrai frein était `min(g_att,
+#    g_dem)` : brider le consensus par le TCAM historique. C'est de la prudence
+#    empilée sur de la prudence — la décroissance vers 3 % assure déjà qu'on ne
+#    prolonge pas un rythme record éternellement ; y ajouter un a priori tiré
+#    d'un passé d'avant-cycle fait systématiquement sous-tirer.
+#
+# La règle est donc : ON PART DU RYTHME DU CONSENSUS et on décroît vers 3 %.
+# Le TCAM démontré reste un CRITÈRE DE REFUS (voir plus bas) — s'il est sous le
+# taux terminal, on ne prolonge pas du tout —, mais il ne rabote plus le point
+# de départ. Les deux séparations comptent : refuser est une position, raboter
+# était une pudeur.
+#
 # SEUIL DE REFUS — au-delà, on ne prolonge plus DU TOUT.
 #
 # Ce seuil n'est pas un plafond : c'est une frontière de compétence. Quand le
 # consensus implique plus de 50 % par an (Nebius : +312 % entre 2025 et 2027),
-# les deux réponses arithmétiques sont fausses et nous l'avons vérifié sur ce
-# titre : plafonner donnait 18 Md$ en 2030 quand le marché en discute 33 à 46 ;
-# ne pas plafonner donnait 140 Md$. Un tel rythme signale une trajectoire portée
-# par des ENGAGEMENTS CONTRACTUELS — un carnet pluriannuel signé — que ni les
+# toute réponse arithmétique est fausse et nous l'avons vérifié sur ce titre :
+# plafonner donnait 18 Md$ en 2030 quand le marché en discute 33 à 46 ; ne pas
+# plafonner donnait 140 Md$. Un tel rythme signale une trajectoire portée par
+# des ENGAGEMENTS CONTRACTUELS — un carnet pluriannuel signé — que ni les
 # comptes publiés ni le consensus à deux ans ne décrivent. Aucune donnée dont
 # nous disposons ne permet de la prolonger honnêtement.
 #
 # On applique donc aux projections la règle déjà en vigueur pour la note : ce
 # qu'on ne sait pas calculer n'est pas approximé, il est RETIRÉ AVEC SON MOTIF.
 # Le consensus reste affiché — c'est un fait publié — et la courbe s'arrête là,
-# en disant pourquoi. Entre 25 % et 50 %, en revanche, le cône garde tout son
-# sens : la fourchette est large mais les deux bornes restent défendables.
+# en disant pourquoi. C'est CE seuil qui protège des cas extrêmes, pas le
+# plafond qu'il a remplacé : refuser franchement vaut mieux que publier une
+# valeur amortie qu'on sait fausse.
 SEUIL_REFUS = 50.0
 
 
 def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
                 meme_devise=True,
                 horizon=HORIZON_PROJECTION, g_terminale=CROISSANCE_TERMINALE,
-                plafond=PLAFOND_EXTRAPOLATION, seuil_refus=SEUIL_REFUS):
+                seuil_refus=SEUIL_REFUS):
     """Trajectoire attendue du CA et du BPA jusqu'à `horizon`.
 
     DEUX NATURES DE VALEURS, JAMAIS CONFONDUES — c'est tout l'objet de cette
@@ -892,11 +904,6 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
             ligne = lignes.setdefault(annee, {"exercice": annee})
             ligne[cle] = round(t[0], arr)
             ligne[cle + "_nature"] = t[1]
-            # La borne haute n'est publiée que si elle DIFFÈRE : sur un
-            # compounder régulier les deux branches coïncident, et afficher
-            # une fourchette large de zéro serait du bruit.
-            if len(t) > 2 and round(t[2], arr) != round(t[0], arr):
-                ligne[cle + "_haut"] = round(t[2], arr)
             if ligne.get("nature") != "extrapolé":
                 ligne["nature"] = t[1]
         if arret and vals:
@@ -921,17 +928,18 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
             if g_att is None:
                 continue                  # ni consensus ni historique : on ne prolonge pas
         g_dem = _tcam_demontre(cle)
-        # Rythme de départ de la branche PRUDENTE, AVANT bornage : c'est lui
-        # qui dit si prolonger a un sens (l'estimé ne dépasse pas le prouvé,
-        # même prudence que le PEG).
-        g_dep = min(g_att, g_dem) if g_dem is not None else g_att
+        # `g_plancher` ne sert QU'AUX REFUS : c'est le plus bas des deux
+        # rythmes, et s'il passe sous le taux terminal, prolonger n'a pas de
+        # sens. Il ne sert plus à rabaisser le point de départ — voir le
+        # commentaire de CROISSANCE_TERMINALE.
+        g_plancher = min(g_att, g_dem) if g_dem is not None else g_att
         # ── LES DEUX REFUS DE PROLONGER ──────────────────────────────────
         # Ce qu'on ne sait pas calculer n'est pas approximé : il est RETIRÉ
         # AVEC SON MOTIF, exactement comme un critère de la note. Le consensus,
         # lui, reste publié — c'est un fait déposé, pas une opinion à nous.
         #
-        #  · PAR LE HAUT (au-delà de SEUIL_REFUS) : les deux bornes du cône
-        #    sont fausses, plafonner sous-estime et ne pas plafonner délire.
+        #  · PAR LE HAUT (au-delà de SEUIL_REFUS) : toute prolongation est
+        #    fausse, amortir sous-estime et ne pas amortir délire.
         #  · PAR LE BAS (sous le taux terminal) : le modèle DÉCROÎT vers 3 %,
         #    il suppose donc un départ au-dessus. Partir d'un rythme démontré
         #    négatif et le « faire décroître » vers +3 % inventerait une
@@ -946,24 +954,22 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
                    "ne décrivent pas, et une projection qu'on sait fausse ne "
                    "vaut pas mieux qu'un blanc")
             continue
-        if g_dep < g_terminale:
+        if g_plancher < g_terminale:
             _poser(cle, vals,
                    "le rythme constaté ne soutient aucune prolongation "
                    "crédible, et nous n'inventons pas d'inflexion")
             continue
-        # Branche PRUDENTE : le rythme de départ, plafonné. Branche HAUTE : le
-        # rythme que les analystes projettent eux-mêmes, tel quel (il est sous
-        # le seuil de refus, sinon on ne serait pas ici).
-        g_bas = max(min(g_dep, plafond), g_terminale)
-        g_haut = max(g_att, g_bas)
+        # LE TAUX DE DÉPART, ASSUMÉ : celui du consensus, tel que les analystes
+        # le projettent. Il est sous le seuil de refus et au-dessus du taux
+        # terminal, sinon on ne serait pas arrivé ici.
+        g = g_att
         # 3) prolongation à croissance décroissante vers le taux terminal
         n = horizon - dernier_an
-        v_bas = v_haut = dernier_val
+        v = dernier_val
         for i in range(1, n + 1):
             fade = 1 - i / (n + 1)
-            v_bas *= 1 + (g_terminale + (g_bas - g_terminale) * fade) / 100
-            v_haut *= 1 + (g_terminale + (g_haut - g_terminale) * fade) / 100
-            vals[dernier_an + i] = (v_bas, "extrapolé", v_haut)
+            v *= 1 + (g_terminale + (g - g_terminale) * fade) / 100
+            vals[dernier_an + i] = (v, "extrapolé")
         _poser(cle, vals)
     return [lignes[a] for a in sorted(lignes)]
 

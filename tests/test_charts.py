@@ -703,14 +703,18 @@ g = [(pr[i + 1]["ca"] / pr[i]["ca"] - 1) * 100 for i in range(1, len(pr) - 1)]
 check("la croissance décélère d'année en année vers le taux terminal",
       all(g[i] > g[i + 1] for i in range(len(g) - 1)), str([round(x, 1) for x in g]))
 check("le dernier pas approche les 3 % terminaux", g[-1] < 10, str(round(g[-1], 1)))
-# Plafond : une croissance forte mais prolongeable (35 %/an) est bridée, pas refusée
+# Croissance forte mais prolongeable (~35 %/an) : on PART de ce rythme et on
+# décroît, on ne le rabote pas. Le plafond de 25 % qui vivait ici est mort le
+# 07/08 : mesuré sur TSMC contre un concurrent qui publie du consensus
+# multi-annuel, la branche plafonnée sous-tirait de 24 % en fin d'horizon.
 AN_HYPER = [{"fin": f"{y}-12-31", "ca": c} for y, c in
             [(2022, 120), (2023, 160), (2024, 215), (2025, 290)]]
 ph = screener.projections(AN_HYPER, None, {"0y": 390, "+1y": 525}, "2025-12-31")
+g_att = ((525 / 290) ** 0.5 - 1) * 100
 g1 = (ph[2]["ca"] / ph[1]["ca"] - 1) * 100
-check("croissance forte : le 1er pas extrapolé est bridé sous le plafond",
-      g1 <= screener.PLAFOND_EXTRAPOLATION + 0.1, f"{g1:.1f} %")
-check("le consensus, lui, n'est PAS bridé (525 conservé)", ph[1]["ca"] == 525)
+check("croissance forte : le 1er pas extrapolé part du rythme du consensus",
+      g_att * 0.7 < g1 < g_att, f"{g1:.1f} % pour un consensus à {g_att:.1f} %")
+check("le consensus, lui, est repris tel quel (525 conservé)", ph[1]["ca"] == 525)
 # Un BPA en perte ne se prolonge pas — courbe qui ne veut rien dire (cas Nebius)
 AN_PERTE = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
             [(2023, 100, -1.0), (2024, 150, -2.0), (2025, 220, -0.5)]]
@@ -729,33 +733,36 @@ check("une année mixte est prudemment dite extrapolée",
       all(e["nature"] == "extrapolé" for e in
           screener.projections(AN_P, None, {"0y": 176, "+1y": 197}, "2025-12-31")[2:]))
 
-# ── Le cône : deux branches quand l'avenir est incertain mais prolongeable ──
-# Leçon du 06/08 (signalée par le propriétaire) : une branche unique plafonnée
-# à 25 % écrasait une croissance forte sous un a priori de croissance ORGANIQUE.
-# On ne tranche plus dans ce domaine : on publie les deux branches, l'écart
-# mesurant notre ignorance.
+# ── UNE SEULE COURBE, ASSUMÉE ────────────────────────────────────────────────
+# Le cône à deux branches est mort le 07/08 (« je préfère qu'on assume une
+# position, on ne parle pas de haut de fourchette »). Ces vérifications sont
+# des ANTI-RÉGRESSIONS : plus aucune borne haute nulle part, et le TCAM
+# historique ne rabote plus le départ — il ne sert qu'aux refus.
 cn = screener.projections(AN_HYPER, None, {"0y": 390, "+1y": 525}, "2025-12-31")
-check("le consensus ne porte JAMAIS de borne haute (ce n'est pas une opinion à nous)",
-      all("ca_haut" not in e for e in cn if e["nature"] == "consensus"))
-check("les années extrapolées portent une fourchette",
-      all("ca_haut" in e for e in cn if e["nature"] == "extrapolé"))
-check("la borne haute est au-dessus de la prudente",
-      all(e["ca_haut"] > e["ca"] for e in cn if e["nature"] == "extrapolé"))
-g_h = (cn[-1]["ca_haut"] / cn[-2]["ca_haut"] - 1) * 100
-check("la branche haute décélère aussi vers le taux terminal",
-      g_h < screener.SEUIL_REFUS, f"{g_h:.1f} %")
-# Sur un compounder régulier, les deux branches coïncident : pas de bruit
-REGULIER = [{"fin": f"{y}-12-31", "ca": c} for y, c in
-            [(2021, 168), (2022, 198), (2023, 212), (2024, 245), (2025, 282)]]
-cr = screener.projections(REGULIER, None, {"0y": 315, "+1y": 352}, "2025-12-31")
-check("compounder régulier : aucune fourchette publiée, les branches coïncident",
-      all("ca_haut" not in e for e in cr), str(cr[-1]))
+check("aucune borne haute publiée, nulle part",
+      all(not any(k.endswith("_haut") for k in e) for e in cn), str(cn[-1]))
+# Un passé LENT (7 %/an) sous un consensus RAPIDE : autrefois `min(g_att,g_dem)`
+# ramenait le départ à 7 % — c'est exactement le biais mesuré sur TSMC.
+LENT_PUIS_VITE = [{"fin": f"{y}-12-31", "ca": c} for y, c in
+                  [(2021, 220), (2022, 235), (2023, 251), (2024, 269), (2025, 288)]]
+lv = screener.projections(LENT_PUIS_VITE, None, {"0y": 400, "+1y": 555}, "2025-12-31")
+g_dem = ((288 / 220) ** 0.25 - 1) * 100          # ~7 %/an démontrés
+g_lv = (lv[2]["ca"] / lv[1]["ca"] - 1) * 100     # 1er pas extrapolé
+check("un passé lent ne rabote plus un consensus rapide",
+      g_lv > g_dem * 2, f"1er pas {g_lv:.1f} % pour un passé à {g_dem:.1f} %")
+# Le TCAM démontré garde son rôle de REFUS : sous le taux terminal, on s'arrête.
+DECLIN = [{"fin": f"{y}-12-31", "ca": c} for y, c in
+          [(2021, 400), (2022, 380), (2023, 350), (2024, 330), (2025, 310)]]
+dc = screener.projections(DECLIN, None, {"0y": 340, "+1y": 380}, "2025-12-31")
+check("un passé en déclin fait toujours REFUSER la prolongation",
+      all(e["nature"] == "consensus" for e in dc)
+      and any("ca_arret" in e for e in dc), str(dc[-1]))
 
 # ── Le refus de prolonger : une projection qu'on sait fausse ne s'affiche pas ─
 # Leçon du 07/08 (signalée par le propriétaire, sur Nebius) : au-delà d'un
-# certain rythme, les DEUX bornes du cône sont fausses — plafonner donnait
-# 18 Md$ en 2030 quand le marché en discute 33 à 46, ne pas plafonner donnait
-# 140 Md$. Élargir le cône n'est pas une réponse : on s'arrête, avec le motif.
+# certain rythme, toute prolongation est fausse — amortir donnait 18 Md$ en
+# 2030 quand le marché en discute 33 à 46, ne pas amortir donnait 140 Md$.
+# Aucun réglage n'est une réponse : on s'arrête, avec le motif.
 CONTRACTE = [{"fin": f"{y}-12-31", "ca": c} for y, c in
              [(2022, 14), (2023, 10), (2024, 92), (2025, 530)]]
 nb = screener.projections(CONTRACTE, None, {"0y": 3500, "+1y": 9000}, "2025-12-31")
@@ -765,7 +772,7 @@ check("et ils sont bien étiquetés consensus, repris tels quels",
       [e["nature"] for e in nb] == ["consensus"] * 2
       and [e["ca"] for e in nb] == [3500, 9000], str(nb))
 check("aucune borne haute inventée quand on refuse de prolonger",
-      all("ca_haut" not in e for e in nb))
+      all(not any(k.endswith("_haut") for k in e) for e in nb))
 check("le motif d'arrêt est porté par la dernière ligne de la série",
       "ca_arret" in nb[-1] and "ca_arret" not in nb[0], str(nb))
 check("le motif dit pourquoi, en français, sans jargon",

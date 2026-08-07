@@ -1337,7 +1337,7 @@ function fondaRender(s){
   const cols=rows.map(r=>({v:r,pr:false})).concat(projC.map(p=>({v:p,pr:true})));
   const W=NARROW?440:800,H=170,PB=22,n=cols.length;
   const val=(o,k)=>o.v[k]==null?null:o.v[k];
-  const maxV=Math.max(...cols.map(o=>Math.max(val(o,'ca')||0,val(o,'ca_haut')||0,val(o,'rn')||0,o.pr?(rnAtt(o.v)||0):0,1)));
+  const maxV=Math.max(...cols.map(o=>Math.max(val(o,'ca')||0,val(o,'rn')||0,o.pr?(rnAtt(o.v)||0):0,1)));
   /* ÉCHELLE LOG QUAND LE LINÉAIRE ÉCRASE TOUT (signalé par le propriétaire
      sur NVIDIA, 07/08 : « de 2017 à 2023 tout est presque plat alors qu'on
      parle en milliards »). Un CA multiplié par 80 sur la fenêtre rend les
@@ -1405,8 +1405,6 @@ function fondaRender(s){
       :(natCa==='consensus'?'consensus des analystes':'notre prolongation arithmétique')):'';
     relH.push('<span class="d">'+(o.pr?r.exercice+'&nbsp;· attendu':lab(r))+'</span><br>'
       +'<span style="color:#74b6df">'+(o.pr?'▨':'■')+'</span> CA&nbsp;: <span class="c">'+fdMoney(r.ca,dev)+'</span> '+dlt('ca')
-      + (o.pr&&r.ca_haut!=null&&r.ca_haut>r.ca
-          ?'<br>&nbsp;&nbsp;&nbsp;haut de fourchette&nbsp;: <span class="t">'+fdMoney(r.ca_haut,dev)+'</span>':'')
       + (!o.pr&&r.rn!=null
           ?'<br><span style="color:#c6c6e0">■</span> Résultat net&nbsp;: <span class="t">'+fdMoney(r.rn,dev)+'</span> '+dlt('rn'):'')
       + (rnA!=null
@@ -1417,12 +1415,13 @@ function fondaRender(s){
   cols.forEach((o,i)=>{
     const r=o.v, cx=slot*i+slot/2, last=(i===rows.length-1), op=o.pr?0.9:(last?1:0.45);
     const fCa=o.pr?'url(#fdhach)':'#74b6df';
+    /* PLUS DE CÔNE (décision du propriétaire, 07/08 : « je préfère qu'on
+       assume une position, on ne parle pas de haut de fourchette »). Il y
+       avait ici un contour en pointillé au-dessus de la barre, seconde
+       branche de la prolongation. Le screener n'en publie plus qu'une, celle
+       qui part du rythme du consensus — mesurée juste sur TSMC contre un
+       concurrent qui publie du consensus multi-annuel. */
     if(r.ca!=null){const h=hVal(r.ca);
-      /* Le CÔNE : quand les deux branches divergent (carnet contracté vs
-         croissance organique), la fourchette se dessine en contour au-dessus
-         de la barre prudente. L'écart EST l'information. */
-      if(o.pr&&r.ca_haut!=null){const hh=hVal(r.ca_haut);
-        bars+='<rect x="'+(cx-bw-2)+'" y="'+(y0-hh)+'" width="'+bw+'" height="'+Math.max(2,hh-h)+'" fill="none" stroke="#74b6df" stroke-width="1" stroke-dasharray="2 2" opacity=".55"/>';}
       bars+='<rect x="'+(cx-bw-2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+fCa+'" opacity="'+op+'"/>';
       /* PLUS D'ÉTIQUETTE AU-DESSUS DES BARRES PROJETÉES (question du
          propriétaire, 07/08 : « pourquoi il y a encore la valeur affichée
@@ -1505,15 +1504,11 @@ function fondaRender(s){
         (cons.length&&ext.length?', puis ':'')+
         (ext.length?ext[0]+'-'+ext[ext.length-1]+' prolongés par nous':'')+'.'+
         (fin?' Au-delà de '+fin.exercice+', nous n\'avançons rien : '+fin.ca_arret+'.':'')+
-        /* « Carnet de commandes ?? mais comment on le calcule ?? » (question
-           du propriétaire, 07/08). On ne le calcule PAS — c'était le
-           problème de l'ancienne phrase, qui laissait croire qu'une donnée
-           de carnet existait quelque part. La bulle dit maintenant le
-           mécanisme exact : deux prolongations, plafonnée et au rythme du
-           consensus, rien d'autre. */
-        '</i> <span class="inf" tabindex="0" aria-label="Comment est construite la trajectoire">i<span class="inf-tip">Notre source de consensus s\'arrête à deux exercices. Au-delà, notre prolongation fait décroître la croissance vers 3 %/an — une projection à taux constant est le mensonge classique de l\'exercice.'+
-        (proj.some(p=>p.ca_haut!=null)?' Quand le rythme du consensus dépasse 25 %/an, on publie DEUX prolongations : la barre hachurée repart de 25 % (le plafond qu'+"'"+'une croissance organique tient rarement), le contour en pointillé repart du rythme des analystes tel quel. Rien dans nos données ne dit si un rythme au-delà de 25 % s\'appuie sur des contrats signés ou sur un emballement — alors on montre les deux, et l\'écart entre elles mesure notre ignorance.':'')+
-        '</span></span></p>';})()+
+        /* UNE POSITION, PAS UNE FOURCHETTE (décision du propriétaire, 07/08).
+           La bulle disait « carnet de commandes », ce qui laissait croire
+           qu'une donnée de carnet existait quelque part — elle n'existe pas.
+           Elle dit maintenant la règle réelle, en une phrase vérifiable. */
+        '</i> <span class="inf" tabindex="0" aria-label="Comment est construite la trajectoire">i<span class="inf-tip">Notre source de consensus s\'arrête à deux exercices. Au-delà, nous partons du rythme que les analystes projettent et le faisons décroître vers 3 %/an — une projection à taux constant est le mensonge classique de l\'exercice. Au-delà de 50 %/an, nous ne prolongeons plus du tout : nous le disons plutôt que de publier un chiffre amorti qu\'on sait faux.</span></span></p>';})()+
     (function(){const syn=fdSynthese(an);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
     '<details class="fd-det" id="fd-det-c"'+(openC?' open':'')+'><summary>Dérouler les chiffres ▾</summary>'+
     '<table class="fd-table"><tr><th>'+(FD_MODE==='an'?'Exercice':'Trim.')+'</th><th>CA</th><th>Rés. net</th></tr>'+cells+'</table></details>'+
@@ -1554,7 +1549,7 @@ function fondaRender(s){
         const series=['ca','eps'].filter(k=>p[k]!=null);
         const toutExt=series.length&&series.every(k=>nat(p,k)==='extrapolé');
         return '<tr'+(toutExt?' class="fd-est"':'')+'><td>'+p.exercice+'</td>'+
-          cell('ca', p.ca==null?'—':fdMoney(p.ca,dev)+(p.ca_haut!=null?' à '+fdMoney(p.ca_haut,dev):''))+
+          cell('ca', p.ca==null?'—':fdMoney(p.ca,dev))+
           (unNet?cell('eps', p.eps==null?'—':fdMoney(p.eps*actions,dev)):'')+
           (unBpa?cell('eps', p.eps==null?'—':bal(p.eps)+' '+sv(dev)):'')+'</tr>';}).join('');
       return '<details class="fd-det" id="fd-det-a"'+(openA?' open':'')+'><summary>Dérouler la trajectoire attendue ▾</summary>'+
