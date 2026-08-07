@@ -1337,8 +1337,15 @@ function fondaRender(s){
       const li=proj.slice().reverse().map(p=>{
         const marq=k=>p[k+'_arret']?'<span class="fd-stop" title="'+p[k+'_arret']+'"> ⌁</span>':'';
         const cell=(k,txt)=>'<td'+(nat(p,k)==='extrapolé'?' class="fd-ext"':'')+'>'+txt+marq(k)+'</td>';
-        return '<tr'+(p.nature==='extrapolé'?' class="fd-est"':'')+'><td>'+p.exercice+
-          (p.nature==='consensus'?'':'e')+'</td>'+
+        /* PAS de « e » sur l'année. Une même année peut porter un consensus de
+           chiffre d'affaires et déjà notre arithmétique sur le bénéfice — TSM
+           affichait « 2026e » sous une phrase qui annonçait « 2026 d'après le
+           consensus ». La nature se lit DANS la cellule (grisé + italique),
+           là où elle est vraie ; la ligne n'est marquée que si TOUTES les
+           séries qu'elle porte sont extrapolées. */
+        const series=['ca','eps'].filter(k=>p[k]!=null);
+        const toutExt=series.length&&series.every(k=>nat(p,k)==='extrapolé');
+        return '<tr'+(toutExt?' class="fd-est"':'')+'><td>'+p.exercice+'</td>'+
           cell('ca', p.ca==null?'—':fdMoney(p.ca,dev)+(p.ca_haut!=null?' à '+fdMoney(p.ca_haut,dev):''))+
           (unBpa?cell('eps', p.eps==null?'—':bal(p.eps)+' '+sv(dev)):'')+'</tr>';}).join('');
       return '<details class="fd-det" id="fd-det-a"'+(openA?' open':'')+'><summary>Dérouler la trajectoire attendue ▾</summary>'+

@@ -74,23 +74,23 @@ print("\n— Rupture de périmètre : on ne mesure pas à travers une marche —
 # publiés comme des FAITS sur leur fiche, tous deux à 0 sur 7. Les deux
 # croissent de ~20 % sur leur périmètre actuel.
 ADYEN = [(2022, 8936), (2023, 1863), (2024, 2226), (2025, 2647)]
-g, n = _tcam(note_v4._apres_rupture(ADYEN))
+g, n = _tcam(note_v4.apres_rupture(ADYEN))
 check("un effondrement ÷4,8 tronque la série au périmètre actuel",
       round(g, 1) == 19.2 and n == 2, f"{g} % sur {n} ans")
 check("la troncature retient bien les exercices postérieurs à la marche",
-      note_v4._apres_rupture(ADYEN)[0][0] == 2023)
+      note_v4.apres_rupture(ADYEN)[0][0] == 2023)
 # Une marche MONTANTE est l'hypercroissance elle-même : la tronquer effacerait
 # ce qu'on cherche à voir.
 NBIS = [(2022, 14), (2023, 10), (2024, 92), (2025, 530)]
 check("une marche montante ×9 est CONSERVÉE (hypercroissance, pas rupture)",
-      note_v4._apres_rupture(NBIS) == NBIS)
+      note_v4.apres_rupture(NBIS) == NBIS)
 check("un compounder régulier n'est jamais tronqué",
-      note_v4._apres_rupture([(2021, 100), (2022, 112), (2023, 125), (2024, 140)])
+      note_v4.apres_rupture([(2021, 100), (2022, 112), (2023, 125), (2024, 140)])
       == [(2021, 100), (2022, 112), (2023, 125), (2024, 140)])
 check("une baisse de moitié (cyclique violente) ne déclenche PAS la troncature",
-      note_v4._apres_rupture([(2022, 100), (2023, 50), (2024, 60), (2025, 80)])[0][0] == 2022)
+      note_v4.apres_rupture([(2022, 100), (2023, 50), (2024, 60), (2025, 80)])[0][0] == 2022)
 check("tronquée sous trois points, la croissance est retirée, pas devinée",
-      _tcam(note_v4._apres_rupture([(2023, 900), (2024, 100), (2025, 130)]))
+      _tcam(note_v4.apres_rupture([(2023, 900), (2024, 100), (2025, 130)]))
       == (None, None))
 # Le BPA n'est JAMAIS tronqué : Broadcom passe de 2,84 à 0,64 en 2019 par pur
 # amortissement d'acquisitions, sans rien céder — la règle du périmètre ne vaut

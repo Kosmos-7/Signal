@@ -135,6 +135,66 @@ champs, et le run ne pouvait pas échouer sur une donnée absente.
   liste explicite : le prochain champ ajouté à `fonda` sans être traité dans la
   fusion fera échouer les tests au lieu de disparaître en silence.
 
+### Deux contradictions vues à l'écran, sur la page elle-même
+
+Trouvées en relisant les fiches produites plutôt qu'en relisant le code.
+
+**La fiche Adyen se contredisait.** Le bloc croissance annonçait « chiffre
+d'affaires en croissance de +19,2 % par an » — série tronquée à la rupture de
+périmètre — pendant que la trajectoire attendue, trois centimètres plus bas,
+refusait de prolonger « faute de rythme constaté », en mesurant, elle, à
+travers la marche. La troncature avait été posée dans `note_v4` et pas dans
+`projections()`. Elle est désormais partagée : un même chiffre d'affaires ne
+peut pas avoir deux trajectoires sur la même page.
+
+**La fiche TSM affichait « 2026e » sous une phrase disant « 2026 d'après le
+consensus ».** L'étiquette « e » de l'année venait de la nature de LA LIGNE,
+alors que la ligne porte deux séries : chiffre d'affaires de consensus,
+bénéfice déjà extrapolé (les estimations de BPA étant ignorées pour un ADR).
+L'année ne porte plus de marque ; la nature se lit dans la cellule, là où elle
+est vraie, et la ligne entière n'est grisée que si toutes ses séries sont
+extrapolées.
+
+### Ce que l'audit a mesuré une fois les correctifs en production
+
+Vérifié sur les données réellement publiées, après trois runs successifs.
+
+| | avant | après |
+|---|---|---|
+| marge de flux disponible, Microsoft | 4,9 % | **20,2 %** |
+| — Alphabet | 5,1 % | **18,2 %** |
+| — NVIDIA | 18,3 % | **44,8 %** |
+| croissance du CA, Adyen | −33,3 % (0/7) | **+19,2 % (7/7)** |
+| — Western Digital | −10,5 % (0/7) | **+23,4 % (7/7)** |
+| bénéfice par action projeté, TSM | 16,8 (USD) | **385,7 (TWD)** |
+| fiches avec projections | 1 / 97 | **94 / 94** |
+| fiches bloquées à 12 exercices | 44 | **0** (médiane 13, max 19) |
+| prix sur actif net négatif publié | 3 | **0** |
+
+Une confirmation en passant : la conversion publiée pour HPE vaut 1 100 %, alors
+que le quotient de ses deux marges ARRONDIES donnerait 900 %. C'est exactement
+la raison pour laquelle elle est calculée sur les valeurs brutes et non déduite
+à l'affichage — sur une marge nette de 0,2 %, l'arrondi du dénominateur pilote
+le résultat.
+
+### Aucun CI n'exécutait les 396 tests
+
+Le dépôt portait 396 tests et rien ne les lançait : le filet ne tenait que si
+l'auteur pensait à le tendre avant de pousser. Un run du screener coûte
+quarante minutes et écrit dans les données publiées ; y découvrir une
+régression, c'est la découvrir trop tard.
+
+Le workflow ajouté a fait **deux prises sur ses deux premières exécutions** :
+`numpy` puis `anthropic` n'étaient pas bouchés, et les suites ne passaient en
+local que parce que la machine de développement les avait installés. Trois
+semaines de « 396 tests passés » reposaient en partie sur cet accident.
+
+- La cause n'était pas un oubli mais une DUPLICATION : la liste des bouchons
+  vivait recopiée dans deux suites, et aucune n'était l'originale.
+- Elle est désormais unique, et une garde la compare à `requirements.txt` :
+  la source de vérité est le fichier de dépendances, plus la mémoire de celui
+  qui écrit le test.
+
 ### Audit complet : le flux disponible ne mesurait pas ce qu'on annonçait
 
 Demandé par le propriétaire (« on a fait ajout sur ajout »). L'audit a suivi le

@@ -773,6 +773,20 @@ check("au-delà de l'arrêt, plus aucune valeur de CA n'est publiée",
       and all("eps" in e for e in mx), str(mx))
 check("le motif d'arrêt du CA ne prétend rien sur le BPA",
       "ca_arret" in mx[1] and "eps_arret" not in mx[1], str(mx[1]))
+# La MÊME série que la note. Sans cette cohérence, la fiche Adyen se
+# contredisait : le bloc croissance annonçait « +19,2 % par an » (série
+# tronquée à la rupture de périmètre de 2023) pendant que les projections
+# refusaient de prolonger « faute de rythme constaté », en mesurant, elles, à
+# travers la marche. Un même chiffre d'affaires ne peut pas avoir deux
+# trajectoires sur la même page.
+RUPTURE = [{"fin": f"{y}-12-31", "ca": c} for y, c in
+           [(2022, 8936), (2023, 1863), (2024, 2226), (2025, 2647)]]
+rp = screener.projections(RUPTURE, None, None, "2025-12-31")
+check("les projections tronquent la même rupture de périmètre que la note",
+      len(rp) == 5 and rp[0]["ca"] > 2647, str(rp[:1]))
+g_rp = (rp[0]["ca"] / 2647 - 1) * 100
+check("et prolongent donc le périmètre actuel, pas la marche",
+      0 < g_rp < 25, f"{g_rp:.1f} %")
 check("une société sans consensus et en hypercroissance démontrée ne dit rien",
       screener.projections(CONTRACTE, None, None, "2025-12-31") == [])
 # Le piège des ADR : le CA estimé est publié en devise COMPTABLE, le BPA estimé

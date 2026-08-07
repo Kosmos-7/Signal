@@ -836,6 +836,15 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
     def _tcam_demontre(cle):
         pts = [(int(e["fin"][:4]), e[cle]) for e in (an or [])
                if e.get(cle) and e[cle] > 0]
+        # MÊME série que la note. Sans cette ligne, la fiche se contredisait
+        # elle-même : le bloc croissance annonçait « +19,2 % par an » (série
+        # tronquée à la rupture de périmètre) pendant que les projections
+        # refusaient de prolonger « faute de rythme constaté » — en mesurant,
+        # elles, à travers la marche. Un même chiffre d'affaires ne peut pas
+        # avoir deux trajectoires sur la même page. (Le bénéfice n'est jamais
+        # tronqué : cf. note_v4.apres_rupture.)
+        if cle == "ca":
+            pts = note_v4.apres_rupture(pts)
         if len(pts) < 3 or pts[-1][0] <= pts[0][0]:
             return None
         return ((pts[-1][1] / pts[0][1]) ** (1 / (pts[-1][0] - pts[0][0])) - 1) * 100

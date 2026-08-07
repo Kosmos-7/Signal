@@ -76,7 +76,7 @@ def _marges_annuelles(an):
 RUPTURE_PERIMETRE = 1 / 3
 
 
-def _apres_rupture(serie):
+def apres_rupture(serie):
     """Tronque une série de CHIFFRE D'AFFAIRES à sa dernière marche descendante.
 
     Un effondrement d'un facteur 3 ou plus entre deux exercices consécutifs
@@ -271,7 +271,7 @@ def calcule_note(ctx):
                f"historique trop court ({len(rns)} exercice(s))")
 
     # ═ CROISSANCE /25 — dérivées des comptes ═
-    cas = _apres_rupture([(int(e["fin"][:4]), e["ca"]) for e in an if e.get("ca")])
+    cas = apres_rupture([(int(e["fin"][:4]), e["ca"]) for e in an if e.get("ca")])
     g_ca, n_ca = _tcam(cas)
     if g_ca is not None:
         ajoute("c", "ca", 7, rampe(g_ca, 0, 15, 7), round(g_ca, 1),
