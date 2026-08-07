@@ -13,7 +13,7 @@
       "badge": null,
       "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 999,
@@ -254,7 +254,7 @@
       "badge": null,
       "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 61,
@@ -506,9 +506,9 @@
       "sector": "Médias & IA",
       "score": 85,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 180,
@@ -737,8 +737,8 @@
       },
       "justification": "Score 85/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA solide (28% a/a), marges excellentes (30%), consensus analystes très favorable.",
       "rank": 3,
-      "rank_prev": 9,
-      "rank_delta": 6
+      "rank_prev": 3,
+      "rank_delta": 0
     },
     {
       "ticker": "NVDA",
@@ -747,9 +747,9 @@
       "sector": "Technologie",
       "score": 85,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 75,
@@ -991,8 +991,8 @@
       },
       "justification": "Score 85/100 — cours proche de sa droite de régression, RSI en zone favorable, pullback sain -7.0% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (85% a/a), marges excellentes (63%), consensus analystes très favorable.",
       "rank": 4,
-      "rank_prev": 7,
-      "rank_delta": 3
+      "rank_prev": 4,
+      "rank_delta": 0
     },
     {
       "ticker": "INTU",
@@ -1001,9 +1001,9 @@
       "sector": "Technologie",
       "score": 84,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 193,
@@ -1232,8 +1232,8 @@
       },
       "justification": "Score 84/100 — rebond mean-reversion sur cross stale (setup B opportunities), prix sous sa droite de régression (-3.8σ), RSI en zone favorable, ⚠ -58.2% sous le top 52w — trend probablement cassée, croissance CA modérée (10% a/a), marges excellentes (22%).",
       "rank": 5,
-      "rank_prev": 3,
-      "rank_delta": -2
+      "rank_prev": 5,
+      "rank_delta": 0
     },
     {
       "ticker": "ADYEN.AS",
@@ -1242,9 +1242,9 @@
       "sector": "Technologie",
       "score": 82,
       "badge": "EU",
-      "change": "new",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 252,
@@ -1260,7 +1260,7 @@
           "swing_low": 1321.0,
           "swing_high": 1521.6,
           "rally_pct": 15.2,
-          "retrace_pct": 290.9,
+          "retrace_pct": 290.7,
           "closest_fibo": "trend déstructurée (sous swing low)",
           "fibo_levels": {
             "23.6": 1474.26,
@@ -1271,8 +1271,8 @@
           }
         },
         "rsi": 64.2,
-        "mm21": 865.23,
-        "mm200": 1075.0,
+        "mm21": 865.24,
+        "mm200": 1075.01,
         "regression_z": -1.42,
         "regression_signal": "sous tendance",
         "regression_pente_pct": 7.4,
@@ -1281,14 +1281,14 @@
         "decote_pct": 42.6,
         "regression_window_years": 8,
         "regression_window_reason": "tech_10y",
-        "prix": 938.1,
+        "prix": 938.4,
         "devise": "EUR",
         "nom_complet": "Adyen N.V.",
         "rev_growth_pct": 16.9,
         "net_margin_pct": 44.7,
         "fcf_margin_pct": 34.2,
         "mrq": "2025-12-31",
-        "forward_pe": 20.1,
+        "forward_pe": 20.2,
         "trailing_pe": 27.9,
         "fcf_yield_pct": 3.06,
         "roe_pct": 22.3,
@@ -1316,7 +1316,7 @@
               "sur": 35
             },
             "c": {
-              "pts": 22.4,
+              "pts": 22.3,
               "max": 25,
               "dispo": 21,
               "sur": 25
@@ -1411,9 +1411,9 @@
               "bloc": "c",
               "id": "attendu",
               "max": 7,
-              "pts": 6.2,
-              "valeur": 17.8,
-              "phrase": "Les analystes attendent 17,8 % de croissance annuelle du bénéfice (estimation, pas une publication)",
+              "pts": 6.1,
+              "valeur": 17.6,
+              "phrase": "Les analystes attendent 17,6 % de croissance annuelle du bénéfice (estimation, pas une publication)",
               "motif": null
             },
             {
@@ -1430,8 +1430,8 @@
               "id": "peg",
               "max": 7,
               "pts": 6.5,
-              "valeur": 1.13,
-              "phrase": "PER prévisionnel 20,1× pour 17,8 % de croissance retenue (la plus prudente des deux) : PEG 1,13",
+              "valeur": 1.15,
+              "phrase": "PER prévisionnel 20,2× pour 17,6 % de croissance retenue (la plus prudente des deux) : PEG 1,15",
               "motif": null
             },
             {
@@ -1485,8 +1485,8 @@
       },
       "justification": "Score 82/100 — prix sous sa droite de régression (-1.4σ), RSI en zone favorable, ⚠ -38.3% sous le top 52w — trend probablement cassée, croissance CA solide (17% a/a), marges excellentes (45%), consensus analystes très favorable.",
       "rank": 6,
-      "rank_prev": null,
-      "rank_delta": null
+      "rank_prev": 6,
+      "rank_delta": 0
     },
     {
       "ticker": "CB",
@@ -1495,9 +1495,9 @@
       "sector": "Finance",
       "score": 82,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 180,
@@ -1737,8 +1737,8 @@
       },
       "justification": "Score 82/100 — légèrement au-dessus de sa régression (+1.1σ), RSI en zone favorable, ⚠ près du top 52w (-2.6%) — risque de chase, croissance CA modérée (6% a/a), marges excellentes (18%), consensus analystes positif.",
       "rank": 7,
-      "rank_prev": 5,
-      "rank_delta": -2
+      "rank_prev": 7,
+      "rank_delta": 0
     },
     {
       "ticker": "BKNG",
@@ -1747,9 +1747,9 @@
       "sector": "Conso. cycl.",
       "score": 81,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 1,
@@ -1785,7 +1785,7 @@
         "fcf_yield_pct": 5.83,
         "roe_pct": null,
         "debt_eq_pct": 451,
-        "price_to_book": -14.58,
+        "price_to_book": null,
         "fonda_source": [
           "fcf:comptes",
           "dette:finnhub"
@@ -1979,8 +1979,8 @@
       },
       "justification": "Score 81/100 — Golden Cross frais (1j) (volume confirmé) — fenêtre signal optimale, cours proche de sa droite de régression, croissance CA modérée (8% a/a), marges excellentes (26%), consensus analystes très favorable.",
       "rank": 8,
-      "rank_prev": 6,
-      "rank_delta": -2
+      "rank_prev": 8,
+      "rank_delta": 0
     },
     {
       "ticker": "FTNT",
@@ -1989,9 +1989,9 @@
       "sector": "Technologie",
       "score": 80,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 65,
@@ -2233,8 +2233,8 @@
       },
       "justification": "Score 80/100 — cours proche de sa droite de régression, RSI en zone favorable, pullback sain -4.9% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (26% a/a), marges excellentes (28%).",
       "rank": 9,
-      "rank_prev": 8,
-      "rank_delta": -1
+      "rank_prev": 9,
+      "rank_delta": 0
     },
     {
       "ticker": "GOOGL",
@@ -2243,9 +2243,9 @@
       "sector": "Médias & IA",
       "score": 80,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 285,
@@ -2487,8 +2487,8 @@
       },
       "justification": "Score 80/100 — légèrement au-dessus de sa régression (+1.9σ), RSI en zone favorable, correction modérée -11.1% sous le top (< Fibo 23.6%), croissance CA solide (24% a/a), marges excellentes (55%), consensus analystes très favorable.",
       "rank": 10,
-      "rank_prev": 11,
-      "rank_delta": 1
+      "rank_prev": 10,
+      "rank_delta": 0
     },
     {
       "ticker": "PYPL",
@@ -2497,9 +2497,9 @@
       "sector": "Finance",
       "score": 80,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 5,
@@ -2741,8 +2741,8 @@
       },
       "justification": "Score 80/100 — Golden Cross frais (5j) — fenêtre signal optimale, prix sous sa droite de régression (-0.9σ), marges positives.",
       "rank": 11,
-      "rank_prev": 12,
-      "rank_delta": 1
+      "rank_prev": 11,
+      "rank_delta": 0
     },
     {
       "ticker": "TSM",
@@ -2751,9 +2751,9 @@
       "sector": "Technologie",
       "score": 80,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 299,
@@ -2995,8 +2995,8 @@
       },
       "justification": "Score 80/100 — légèrement au-dessus de sa régression (+1.6σ), RSI en zone favorable, correction modérée -12.4% sous le top (< Fibo 23.6%), croissance CA solide (36% a/a), marges excellentes (50%), consensus analystes très favorable.",
       "rank": 12,
-      "rank_prev": 13,
-      "rank_delta": 1
+      "rank_prev": 12,
+      "rank_delta": 0
     },
     {
       "ticker": "V",
@@ -3005,9 +3005,9 @@
       "sector": "Finance",
       "score": 80,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 25,
@@ -3249,8 +3249,8 @@
       },
       "justification": "Score 80/100 — Golden Cross récent (25j) (volume confirmé), prix sous sa droite de régression (-1.5σ), ⚠ collé au top 52w (+0.0%) malgré le Golden Cross frais — extension à surveiller, croissance CA modérée (14% a/a), marges excellentes (51%), consensus analystes très favorable.",
       "rank": 13,
-      "rank_prev": 14,
-      "rank_delta": 1
+      "rank_prev": 13,
+      "rank_delta": 0
     },
     {
       "ticker": "ANET",
@@ -3259,9 +3259,9 @@
       "sector": "Technologie",
       "score": 79,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 79,
@@ -3504,8 +3504,262 @@
       },
       "justification": "Score 79/100 — légèrement au-dessus de sa régression (+1.4σ), RSI en zone favorable, ⚠ près du top 52w (-2.5%) — risque de chase, croissance CA solide (38% a/a), marges excellentes (38%), consensus analystes très favorable.",
       "rank": 14,
-      "rank_prev": 10,
-      "rank_delta": -4
+      "rank_prev": 14,
+      "rank_delta": 0
+    },
+    {
+      "ticker": "VRTX",
+      "name": "Vertex Pharmaceuticals",
+      "market": "NMS",
+      "sector": "Santé",
+      "score": 79,
+      "badge": null,
+      "change": "up",
+      "breakdown": {
+        "vix_value": 15.28,
+        "cross_regime": "golden",
+        "cross_type": "golden",
+        "cross_days_ago": 43,
+        "cross_spread_pct": 5.89,
+        "cross_slope_mm21_pct": -1.76,
+        "cross_volume_confirmed": false,
+        "signal_dynamics_warning": "",
+        "val_pts": 5,
+        "val_pts_mode": "normal",
+        "drawdown_52w_pct": -8.6,
+        "high_52w": 529.59,
+        "fibo": {
+          "swing_low": 366.54,
+          "swing_high": 529.59,
+          "rally_pct": 44.5,
+          "retrace_pct": 27.9,
+          "closest_fibo": "zone Fibo 23.6%",
+          "fibo_levels": {
+            "23.6": 491.11,
+            "38.2": 467.3,
+            "50.0": 448.07,
+            "61.8": 428.83,
+            "78.6": 401.43
+          }
+        },
+        "rsi": 52.9,
+        "mm21": 481.07,
+        "mm200": 454.3,
+        "regression_z": -0.6,
+        "regression_signal": "sous tendance",
+        "regression_pente_pct": 16.0,
+        "regression_sigma": 0.2035,
+        "prix_tendance": 547.35,
+        "decote_pct": 11.6,
+        "regression_window_years": 20,
+        "regression_window_reason": "standard_20y",
+        "prix": 484.03,
+        "devise": "USD",
+        "nom_complet": "Vertex Pharmaceuticals Incorporated",
+        "rev_growth_pct": 12.5,
+        "net_margin_pct": 35.0,
+        "fcf_margin_pct": 26.6,
+        "mrq": "2026-06-30",
+        "forward_pe": 22.4,
+        "trailing_pe": 28.3,
+        "fcf_yield_pct": 2.6,
+        "roe_pct": 23.5,
+        "debt_eq_pct": 10,
+        "price_to_book": 6.06,
+        "fonda_source": [
+          "fcf:comptes"
+        ],
+        "target_mean_price": 559.28,
+        "target_upside_pct": 15.5,
+        "target_analysts": 25,
+        "confiance": 1.0,
+        "sources": [
+          "Yahoo Finance",
+          "Finnhub"
+        ],
+        "conversion_pct": 81,
+        "net_margin_exercice_pct": 32.9,
+        "note": {
+          "total": 79,
+          "blocs": {
+            "q": {
+              "pts": 27.2,
+              "max": 35,
+              "dispo": 35,
+              "sur": 35
+            },
+            "c": {
+              "pts": 23.2,
+              "max": 25,
+              "dispo": 25,
+              "sur": 25
+            },
+            "v": {
+              "pts": 13.3,
+              "max": 25,
+              "dispo": 25,
+              "sur": 25
+            },
+            "m": {
+              "pts": 15.0,
+              "max": 15,
+              "dispo": 15,
+              "sur": 15
+            }
+          },
+          "criteres": [
+            {
+              "bloc": "q",
+              "id": "marge",
+              "max": 9,
+              "pts": 8.7,
+              "valeur": 19.4,
+              "phrase": "Sur 100 € de ventes, il reste 19,4 € de bénéfice net (médiane de 14 exercices)",
+              "motif": null
+            },
+            {
+              "bloc": "q",
+              "id": "roe",
+              "max": 9,
+              "pts": 9.0,
+              "valeur": 23.5,
+              "phrase": "Chaque 100 € de capitaux propres rapportent 23,5 € par an",
+              "motif": null
+            },
+            {
+              "bloc": "q",
+              "id": "conversion",
+              "max": 7,
+              "pts": 4.8,
+              "valeur": 81,
+              "phrase": "Sur 100 € de bénéfice comptable, 81 € finissent en cash réel",
+              "motif": null
+            },
+            {
+              "bloc": "q",
+              "id": "bilan",
+              "max": 5,
+              "pts": 4.7,
+              "valeur": 10,
+              "phrase": "Dette à 10 % des capitaux propres",
+              "motif": null
+            },
+            {
+              "bloc": "q",
+              "id": "constance",
+              "max": 5,
+              "pts": 0.0,
+              "valeur": 53,
+              "phrase": "Bénéficiaire 9 années sur les 17 connues",
+              "motif": null
+            },
+            {
+              "bloc": "c",
+              "id": "ca",
+              "max": 7,
+              "pts": 7.0,
+              "valeur": 28.2,
+              "phrase": "Chiffre d'affaires en croissance de 28,2 % par an sur 17 ans",
+              "motif": null
+            },
+            {
+              "bloc": "c",
+              "id": "bpa",
+              "max": 7,
+              "pts": 7.0,
+              "valeur": 39.8,
+              "phrase": "Bénéfice par action en croissance de 39,8 % par an, dilution comprise (depuis le premier exercice bénéficiaire, sur 14 ans)",
+              "motif": null
+            },
+            {
+              "bloc": "c",
+              "id": "regularite",
+              "max": 4,
+              "pts": 2.6,
+              "valeur": 82,
+              "phrase": "Le CA progresse 14 années sur 17",
+              "motif": null
+            },
+            {
+              "bloc": "c",
+              "id": "attendu",
+              "max": 7,
+              "pts": 6.6,
+              "valeur": 18.8,
+              "phrase": "Les analystes attendent 18,8 % de croissance annuelle du bénéfice (estimation, pas une publication)",
+              "motif": null
+            },
+            {
+              "bloc": "v",
+              "id": "histoire",
+              "max": 8,
+              "pts": 4.5,
+              "valeur": 0.96,
+              "phrase": "Payée 28,3× ses bénéfices, contre 29,3× en médiane sur 9 exercices",
+              "motif": null
+            },
+            {
+              "bloc": "v",
+              "id": "peg",
+              "max": 7,
+              "pts": 6.3,
+              "valeur": 1.19,
+              "phrase": "PER prévisionnel 22,4× pour 18,8 % de croissance retenue (la plus prudente des deux) : PEG 1,19",
+              "motif": null
+            },
+            {
+              "bloc": "v",
+              "id": "rdt_benefices",
+              "max": 5,
+              "pts": 1.5,
+              "valeur": 4.5,
+              "phrase": "100 € investis achètent 4,5 € de bénéfices attendus",
+              "motif": null
+            },
+            {
+              "bloc": "v",
+              "id": "rdt_cash",
+              "max": 5,
+              "pts": 1.0,
+              "valeur": 2.6,
+              "phrase": "L'entreprise génère 2,6 % de sa capitalisation en cash chaque année",
+              "motif": null
+            },
+            {
+              "bloc": "m",
+              "id": "tendance",
+              "max": 6,
+              "pts": 6.0,
+              "valeur": 5.9,
+              "phrase": "Moyenne 21 jours à 5,9 % de la moyenne 200 jours",
+              "motif": null
+            },
+            {
+              "bloc": "m",
+              "id": "position",
+              "max": 6,
+              "pts": 6.0,
+              "valeur": -0.6,
+              "phrase": "À -0,6σ de sa tendance décennale",
+              "motif": null
+            },
+            {
+              "bloc": "m",
+              "id": "rsi",
+              "max": 3,
+              "pts": 3.0,
+              "valeur": 53,
+              "phrase": "RSI 53, zone neutre",
+              "motif": null
+            }
+          ],
+          "couverture": 100
+        }
+      },
+      "justification": "Score 79/100 — Golden Cross confirmé (43j), prix sous sa droite de régression (-0.6σ), RSI en zone favorable, pullback sain -8.6% sous le top 52w (zone d'entrée favorable, zone Fibo 23.6%), croissance CA modérée (12% a/a), marges excellentes (35%).",
+      "rank": 15,
+      "rank_prev": 19,
+      "rank_delta": 4
     },
     {
       "ticker": "ASM.AS",
@@ -3514,25 +3768,25 @@
       "sector": "Technologie",
       "score": 78,
       "badge": "EU",
-      "change": "up",
+      "change": "down",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 212,
-        "cross_spread_pct": 16.45,
-        "cross_slope_mm21_pct": -2.98,
+        "cross_spread_pct": 16.46,
+        "cross_slope_mm21_pct": -2.97,
         "cross_volume_confirmed": false,
         "signal_dynamics_warning": "",
         "val_pts": 1,
         "val_pts_mode": "normal",
-        "drawdown_52w_pct": -21.4,
+        "drawdown_52w_pct": -21.2,
         "high_52w": 1079.0,
         "fibo": {
           "swing_low": 400.14,
           "swing_high": 1079.0,
           "rally_pct": 169.7,
-          "retrace_pct": 34.0,
+          "retrace_pct": 33.8,
           "closest_fibo": "zone Fibo 23.6%",
           "fibo_levels": {
             "23.6": 918.79,
@@ -3542,18 +3796,18 @@
             "78.6": 545.42
           }
         },
-        "rsi": 48.7,
-        "mm21": 846.94,
-        "mm200": 727.27,
+        "rsi": 48.9,
+        "mm21": 847.02,
+        "mm200": 727.28,
         "regression_z": 1.32,
         "regression_signal": "au-dessus",
         "regression_pente_pct": 19.3,
         "regression_sigma": 0.5676,
         "prix_tendance": 400.73,
-        "decote_pct": -111.7,
+        "decote_pct": -112.1,
         "regression_window_years": 25,
         "regression_window_reason": "cyclical_25y",
-        "prix": 848.2,
+        "prix": 849.8,
         "devise": "EUR",
         "nom_complet": "ASM International NV",
         "rev_growth_pct": 20.0,
@@ -3562,15 +3816,15 @@
         "mrq": "2026-06-30",
         "forward_pe": 28.2,
         "trailing_pe": 38.9,
-        "fcf_yield_pct": 1.43,
+        "fcf_yield_pct": 1.42,
         "roe_pct": 26.8,
         "debt_eq_pct": 2,
-        "price_to_book": 9.34,
+        "price_to_book": 9.36,
         "fonda_source": [
           "fcf:comptes"
         ],
         "target_mean_price": 1089.28,
-        "target_upside_pct": 28.4,
+        "target_upside_pct": 28.2,
         "target_analysts": 18,
         "confiance": 1.0,
         "sources": [
@@ -3594,7 +3848,7 @@
               "sur": 25
             },
             "v": {
-              "pts": 8.4,
+              "pts": 8.3,
               "max": 25,
               "dispo": 25,
               "sur": 25
@@ -3684,16 +3938,16 @@
               "id": "attendu",
               "max": 7,
               "pts": 7.0,
-              "valeur": 43.0,
-              "phrase": "Les analystes attendent 43 % de croissance annuelle du bénéfice (estimation, pas une publication)",
+              "valeur": 43.2,
+              "phrase": "Les analystes attendent 43,2 % de croissance annuelle du bénéfice (estimation, pas une publication)",
               "motif": null
             },
             {
               "bloc": "v",
               "id": "histoire",
               "max": 8,
-              "pts": 1.7,
-              "valeur": 1.17,
+              "pts": 1.6,
+              "valeur": 1.18,
               "phrase": "Payée 38,9× ses bénéfices, contre 33,1× en médiane sur 4 exercices",
               "motif": null
             },
@@ -3702,8 +3956,8 @@
               "id": "peg",
               "max": 7,
               "pts": 6.2,
-              "valeur": 1.23,
-              "phrase": "PER prévisionnel 28,2× pour 22,8 % de croissance retenue (la plus prudente des deux) : PEG 1,23",
+              "valeur": 1.24,
+              "phrase": "PER prévisionnel 28,2× pour 22,8 % de croissance retenue (la plus prudente des deux) : PEG 1,24",
               "motif": null
             },
             {
@@ -3720,7 +3974,7 @@
               "id": "rdt_cash",
               "max": 5,
               "pts": 0.0,
-              "valeur": 1.43,
+              "valeur": 1.42,
               "phrase": "L'entreprise génère 1,4 % de sa capitalisation en cash chaque année",
               "motif": null
             },
@@ -3756,9 +4010,9 @@
         }
       },
       "justification": "Score 78/100 — légèrement au-dessus de sa régression (+1.3σ), RSI en zone favorable, croissance CA solide (20% a/a), marges excellentes (32%), consensus analystes très favorable.",
-      "rank": 15,
-      "rank_prev": 26,
-      "rank_delta": 11
+      "rank": 16,
+      "rank_prev": 15,
+      "rank_delta": -1
     },
     {
       "ticker": "AVGO",
@@ -3769,7 +4023,7 @@
       "badge": null,
       "change": "down",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 78,
@@ -4010,8 +4264,8 @@
         }
       },
       "justification": "Score 78/100 — légèrement au-dessus de sa régression (+1.6σ), RSI en zone favorable, correction modérée -12.5% sous le top (zone Fibo 23.6%), croissance CA solide (48% a/a), marges excellentes (39%), consensus analystes très favorable.",
-      "rank": 16,
-      "rank_prev": 15,
+      "rank": 17,
+      "rank_prev": 16,
       "rank_delta": -1
     },
     {
@@ -4021,9 +4275,9 @@
       "sector": "Finance",
       "score": 78,
       "badge": null,
-      "change": "up",
+      "change": "down",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 69,
@@ -4072,7 +4326,7 @@
         "fcf_yield_pct": 3.54,
         "roe_pct": null,
         "debt_eq_pct": 518,
-        "price_to_book": -15.33,
+        "price_to_book": null,
         "fonda_source": [
           "fcf:comptes",
           "dette:finnhub"
@@ -4265,9 +4519,9 @@
         }
       },
       "justification": "Score 78/100 — prix sous sa droite de régression (-1.4σ), RSI en zone favorable, correction modérée -11.9% sous le top (zone Fibo 50%), croissance CA modérée (12% a/a), marges excellentes (41%), consensus analystes très favorable.",
-      "rank": 17,
-      "rank_prev": 21,
-      "rank_delta": 4
+      "rank": 18,
+      "rank_prev": 17,
+      "rank_delta": -1
     },
     {
       "ticker": "NFLX",
@@ -4278,7 +4532,7 @@
       "badge": null,
       "change": "down",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 180,
@@ -4318,8 +4572,8 @@
         "fonda_source": [
           "fcf:comptes"
         ],
-        "target_mean_price": 94.33,
-        "target_upside_pct": 28.0,
+        "target_mean_price": 94.04,
+        "target_upside_pct": 27.6,
         "target_analysts": 45,
         "confiance": 1.0,
         "sources": [
@@ -4506,105 +4760,104 @@
         }
       },
       "justification": "Score 78/100 — prix sous sa droite de régression (-0.8σ), RSI en zone favorable, ⚠ -41.7% sous le top 52w — trend probablement cassée, croissance CA modérée (13% a/a), marges excellentes (28%), consensus analystes très favorable.",
-      "rank": 18,
-      "rank_prev": 4,
-      "rank_delta": -14
+      "rank": 19,
+      "rank_prev": 18,
+      "rank_delta": -1
     },
     {
-      "ticker": "VRTX",
-      "name": "Vertex Pharmaceuticals",
-      "market": "NMS",
-      "sector": "Santé",
-      "score": 78,
-      "badge": null,
+      "ticker": "DB1.DE",
+      "name": "DEUTSCHE BOERSE AG    ",
+      "market": "GER",
+      "sector": "Finance",
+      "score": 77,
+      "badge": "EU",
       "change": "up",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
-        "cross_days_ago": 43,
-        "cross_spread_pct": 5.89,
-        "cross_slope_mm21_pct": -1.76,
+        "cross_days_ago": 98,
+        "cross_spread_pct": 11.75,
+        "cross_slope_mm21_pct": 1.33,
         "cross_volume_confirmed": false,
         "signal_dynamics_warning": "",
-        "val_pts": 5,
+        "val_pts": 0,
         "val_pts_mode": "normal",
-        "drawdown_52w_pct": -8.6,
-        "high_52w": 529.59,
+        "drawdown_52w_pct": 0.0,
+        "high_52w": 273.0,
         "fibo": {
-          "swing_low": 366.54,
-          "swing_high": 529.59,
-          "rally_pct": 44.5,
-          "retrace_pct": 27.9,
-          "closest_fibo": "zone Fibo 23.6%",
+          "swing_low": 199.82,
+          "swing_high": 273.0,
+          "rally_pct": 36.6,
+          "retrace_pct": 0.0,
+          "closest_fibo": "< Fibo 23.6%",
           "fibo_levels": {
-            "23.6": 491.11,
-            "38.2": 467.3,
-            "50.0": 448.07,
-            "61.8": 428.83,
-            "78.6": 401.43
+            "23.6": 255.73,
+            "38.2": 245.04,
+            "50.0": 236.41,
+            "61.8": 227.77,
+            "78.6": 215.48
           }
         },
-        "rsi": 52.9,
-        "mm21": 481.07,
-        "mm200": 454.3,
-        "regression_z": -0.6,
-        "regression_signal": "sous tendance",
-        "regression_pente_pct": 16.0,
-        "regression_sigma": 0.2035,
-        "prix_tendance": 547.35,
-        "decote_pct": 11.6,
+        "rsi": 65.7,
+        "mm21": 260.88,
+        "mm200": 233.45,
+        "regression_z": 0.76,
+        "regression_signal": "neutre",
+        "regression_pente_pct": 10.3,
+        "regression_sigma": 0.3389,
+        "prix_tendance": 211.19,
+        "decote_pct": -29.3,
         "regression_window_years": 20,
         "regression_window_reason": "standard_20y",
-        "prix": 484.03,
-        "devise": "USD",
-        "nom_complet": "Vertex Pharmaceuticals Incorporated",
-        "rev_growth_pct": 12.5,
-        "net_margin_pct": 35.0,
-        "fcf_margin_pct": 26.6,
+        "prix": 273.0,
+        "devise": "EUR",
+        "nom_complet": "DEUTSCHE BOERSE AG            N",
+        "rev_growth_pct": 11.7,
+        "net_margin_pct": 27.3,
+        "fcf_margin_pct": 32.9,
         "mrq": "2026-06-30",
-        "forward_pe": 22.4,
-        "trailing_pe": 28.3,
-        "fcf_yield_pct": 2.6,
-        "roe_pct": 23.5,
-        "debt_eq_pct": 10,
-        "price_to_book": 6.06,
+        "forward_pe": 20.3,
+        "trailing_pe": 23.6,
+        "fcf_yield_pct": 4.94,
+        "roe_pct": 20.4,
+        "debt_eq_pct": 58,
+        "price_to_book": 4.75,
         "fonda_source": [
           "fcf:comptes"
         ],
-        "target_mean_price": 558.68,
-        "target_upside_pct": 15.4,
-        "target_analysts": 25,
+        "target_mean_price": 288.83,
+        "target_upside_pct": 5.8,
+        "target_analysts": 12,
         "confiance": 1.0,
         "sources": [
-          "Yahoo Finance",
-          "Finnhub"
+          "Yahoo Finance"
         ],
-        "conversion_pct": 81,
-        "net_margin_exercice_pct": 32.9,
+        "conversion_pct": 122,
+        "net_margin_exercice_pct": 27.0,
         "note": {
-          "total": 78,
+          "total": 77,
           "blocs": {
             "q": {
-              "pts": 27.2,
+              "pts": 33.1,
               "max": 35,
               "dispo": 35,
               "sur": 35
             },
             "c": {
-              "pts": 22.9,
+              "pts": 18.4,
               "max": 25,
               "dispo": 25,
               "sur": 25
             },
             "v": {
-              "pts": 13.1,
+              "pts": 10.4,
               "max": 25,
               "dispo": 25,
               "sur": 25
             },
             "m": {
-              "pts": 15.0,
+              "pts": 14.9,
               "max": 15,
               "dispo": 15,
               "sur": 15
@@ -4615,9 +4868,9 @@
               "bloc": "q",
               "id": "marge",
               "max": 9,
-              "pts": 8.7,
-              "valeur": 19.4,
-              "phrase": "Sur 100 € de ventes, il reste 19,4 € de bénéfice net (médiane de 14 exercices)",
+              "pts": 9.0,
+              "valeur": 28.0,
+              "phrase": "Sur 100 € de ventes, il reste 28 € de bénéfice net (médiane de 4 exercices)",
               "motif": null
             },
             {
@@ -4625,107 +4878,107 @@
               "id": "roe",
               "max": 9,
               "pts": 9.0,
-              "valeur": 23.5,
-              "phrase": "Chaque 100 € de capitaux propres rapportent 23,5 € par an",
+              "valeur": 20.4,
+              "phrase": "Chaque 100 € de capitaux propres rapportent 20,4 € par an",
               "motif": null
             },
             {
               "bloc": "q",
               "id": "conversion",
               "max": 7,
-              "pts": 4.8,
-              "valeur": 81,
-              "phrase": "Sur 100 € de bénéfice comptable, 81 € finissent en cash réel",
+              "pts": 7.0,
+              "valeur": 122,
+              "phrase": "Sur 100 € de bénéfice comptable, 120 € finissent en cash réel",
               "motif": null
             },
             {
               "bloc": "q",
               "id": "bilan",
               "max": 5,
-              "pts": 4.7,
-              "valeur": 10,
-              "phrase": "Dette à 10 % des capitaux propres",
+              "pts": 3.1,
+              "valeur": 58,
+              "phrase": "Dette à 58 % des capitaux propres",
               "motif": null
             },
             {
               "bloc": "q",
               "id": "constance",
               "max": 5,
-              "pts": 0.0,
-              "valeur": 53,
-              "phrase": "Bénéficiaire 9 années sur les 17 connues",
+              "pts": 5.0,
+              "valeur": 100,
+              "phrase": "Bénéficiaire 4 années sur les 4 connues",
               "motif": null
             },
             {
               "bloc": "c",
               "id": "ca",
               "max": 7,
-              "pts": 7.0,
-              "valeur": 28.2,
-              "phrase": "Chiffre d'affaires en croissance de 28,2 % par an sur 17 ans",
+              "pts": 5.7,
+              "valeur": 12.2,
+              "phrase": "Chiffre d'affaires en croissance de 12,2 % par an sur 3 ans",
               "motif": null
             },
             {
               "bloc": "c",
               "id": "bpa",
               "max": 7,
-              "pts": 7.0,
-              "valeur": 39.8,
-              "phrase": "Bénéfice par action en croissance de 39,8 % par an, dilution comprise (depuis le premier exercice bénéficiaire, sur 14 ans)",
+              "pts": 4.8,
+              "valeur": 10.3,
+              "phrase": "Bénéfice par action en croissance de 10,3 % par an, dilution comprise sur 3 ans",
               "motif": null
             },
             {
               "bloc": "c",
               "id": "regularite",
               "max": 4,
-              "pts": 2.6,
-              "valeur": 82,
-              "phrase": "Le CA progresse 14 années sur 17",
+              "pts": 4.0,
+              "valeur": 100,
+              "phrase": "Le CA progresse 3 années sur 3",
               "motif": null
             },
             {
               "bloc": "c",
               "id": "attendu",
               "max": 7,
-              "pts": 6.3,
-              "valeur": 18.0,
-              "phrase": "Les analystes attendent 18 % de croissance annuelle du bénéfice (estimation, pas une publication)",
+              "pts": 3.9,
+              "valeur": 11.1,
+              "phrase": "Les analystes attendent 11,1 % de croissance annuelle du bénéfice (estimation, pas une publication)",
               "motif": null
             },
             {
               "bloc": "v",
               "id": "histoire",
               "max": 8,
-              "pts": 4.5,
-              "valeur": 0.96,
-              "phrase": "Payée 28,3× ses bénéfices, contre 29,3× en médiane sur 9 exercices",
+              "pts": 1.8,
+              "valeur": 1.16,
+              "phrase": "Payée 23,6× ses bénéfices, contre 20,2× en médiane sur 4 exercices",
               "motif": null
             },
             {
               "bloc": "v",
               "id": "peg",
               "max": 7,
-              "pts": 6.1,
-              "valeur": 1.25,
-              "phrase": "PER prévisionnel 22,4× pour 18 % de croissance retenue (la plus prudente des deux) : PEG 1,25",
+              "pts": 3.6,
+              "valeur": 1.97,
+              "phrase": "PER prévisionnel 20,3× pour 10,3 % de croissance retenue (la plus prudente des deux) : PEG 1,97",
               "motif": null
             },
             {
               "bloc": "v",
               "id": "rdt_benefices",
               "max": 5,
-              "pts": 1.5,
-              "valeur": 4.5,
-              "phrase": "100 € investis achètent 4,5 € de bénéfices attendus",
+              "pts": 1.9,
+              "valeur": 4.9,
+              "phrase": "100 € investis achètent 4,9 € de bénéfices attendus",
               "motif": null
             },
             {
               "bloc": "v",
               "id": "rdt_cash",
               "max": 5,
-              "pts": 1.0,
-              "valeur": 2.6,
-              "phrase": "L'entreprise génère 2,6 % de sa capitalisation en cash chaque année",
+              "pts": 3.1,
+              "valeur": 4.94,
+              "phrase": "L'entreprise génère 4,9 % de sa capitalisation en cash chaque année",
               "motif": null
             },
             {
@@ -4733,8 +4986,8 @@
               "id": "tendance",
               "max": 6,
               "pts": 6.0,
-              "valeur": 5.9,
-              "phrase": "Moyenne 21 jours à 5,9 % de la moyenne 200 jours",
+              "valeur": 11.7,
+              "phrase": "Moyenne 21 jours à 11,7 % de la moyenne 200 jours",
               "motif": null
             },
             {
@@ -4742,27 +4995,27 @@
               "id": "position",
               "max": 6,
               "pts": 6.0,
-              "valeur": -0.6,
-              "phrase": "À -0,6σ de sa tendance décennale",
+              "valeur": 0.76,
+              "phrase": "À 0,8σ de sa tendance décennale",
               "motif": null
             },
             {
               "bloc": "m",
               "id": "rsi",
               "max": 3,
-              "pts": 3.0,
-              "valeur": 53,
-              "phrase": "RSI 53, zone neutre",
+              "pts": 2.9,
+              "valeur": 66,
+              "phrase": "RSI 66, zone tendue",
               "motif": null
             }
           ],
           "couverture": 100
         }
       },
-      "justification": "Score 78/100 — Golden Cross confirmé (43j), prix sous sa droite de régression (-0.6σ), RSI en zone favorable, pullback sain -8.6% sous le top 52w (zone d'entrée favorable, zone Fibo 23.6%), croissance CA modérée (12% a/a), marges excellentes (35%).",
-      "rank": 19,
+      "justification": "Score 77/100 — cours proche de sa droite de régression, ⚠ près du top 52w (+0.0%) — risque de chase, croissance CA modérée (12% a/a), marges excellentes (27%), consensus analystes très favorable.",
+      "rank": 20,
       "rank_prev": 23,
-      "rank_delta": 4
+      "rank_delta": 3
     },
     {
       "ticker": "MA",
@@ -4773,7 +5026,7 @@
       "badge": null,
       "change": "down",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 9,
@@ -4813,8 +5066,8 @@
         "fonda_source": [
           "fcf:comptes"
         ],
-        "target_mean_price": 662.42,
-        "target_upside_pct": 15.0,
+        "target_mean_price": 664.39,
+        "target_upside_pct": 15.4,
         "target_analysts": 38,
         "confiance": 0.9,
         "sources": [
@@ -5001,9 +5254,9 @@
         }
       },
       "justification": "Score 77/100 — Golden Cross frais (9j) — fenêtre signal optimale, prix sous sa droite de régression (-1.8σ), croissance CA modérée (14% a/a), marges excellentes (46%), consensus analystes très favorable.",
-      "rank": 20,
-      "rank_prev": 17,
-      "rank_delta": -3
+      "rank": 21,
+      "rank_prev": 20,
+      "rank_delta": -1
     },
     {
       "ticker": "SCHW",
@@ -5014,7 +5267,7 @@
       "badge": null,
       "change": "down",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 18,
@@ -5253,9 +5506,9 @@
         }
       },
       "justification": "Score 77/100 — Golden Cross récent (18j), cours proche de sa droite de régression, ⚠ collé au top 52w (-0.3%) malgré le Golden Cross frais — extension à surveiller, croissance CA solide (21% a/a), marges excellentes (39%), consensus analystes très favorable.",
-      "rank": 21,
-      "rank_prev": 18,
-      "rank_delta": -3
+      "rank": 22,
+      "rank_prev": 21,
+      "rank_delta": -1
     },
     {
       "ticker": "BX",
@@ -5266,7 +5519,7 @@
       "badge": null,
       "change": "down",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 127,
@@ -5507,262 +5760,9 @@
         }
       },
       "justification": "Score 76/100 — prix sous sa droite de régression (-0.7σ), RSI en zone favorable, croissance CA solide (29% a/a), marges excellentes (23%), consensus analystes positif.",
-      "rank": 22,
-      "rank_prev": 19,
-      "rank_delta": -3
-    },
-    {
-      "ticker": "DB1.DE",
-      "name": "DEUTSCHE BOERSE AG    ",
-      "market": "GER",
-      "sector": "Finance",
-      "score": 76,
-      "badge": "EU",
-      "change": "down",
-      "breakdown": {
-        "vix_value": 15.26,
-        "cross_regime": "golden",
-        "cross_type": "golden",
-        "cross_days_ago": 97,
-        "cross_spread_pct": 11.64,
-        "cross_slope_mm21_pct": 1.43,
-        "cross_volume_confirmed": false,
-        "signal_dynamics_warning": "",
-        "val_pts": 0,
-        "val_pts_mode": "normal",
-        "drawdown_52w_pct": 0.0,
-        "high_52w": 273.3,
-        "fibo": {
-          "swing_low": 199.82,
-          "swing_high": 273.3,
-          "rally_pct": 36.8,
-          "retrace_pct": 0.0,
-          "closest_fibo": "< Fibo 23.6%",
-          "fibo_levels": {
-            "23.6": 255.96,
-            "38.2": 245.23,
-            "50.0": 236.56,
-            "61.8": 227.89,
-            "78.6": 215.54
-          }
-        },
-        "rsi": 66.3,
-        "mm21": 260.39,
-        "mm200": 233.24,
-        "regression_z": 0.76,
-        "regression_signal": "neutre",
-        "regression_pente_pct": 10.3,
-        "regression_sigma": 0.3391,
-        "prix_tendance": 211.0,
-        "decote_pct": -29.5,
-        "regression_window_years": 20,
-        "regression_window_reason": "standard_20y",
-        "prix": 273.3,
-        "devise": "EUR",
-        "nom_complet": "DEUTSCHE BOERSE AG            N",
-        "rev_growth_pct": 11.7,
-        "net_margin_pct": 27.3,
-        "fcf_margin_pct": 32.9,
-        "mrq": "2026-06-30",
-        "forward_pe": 20.4,
-        "trailing_pe": 23.6,
-        "fcf_yield_pct": 4.93,
-        "roe_pct": 20.4,
-        "debt_eq_pct": 58,
-        "price_to_book": 4.76,
-        "fonda_source": [
-          "fcf:comptes"
-        ],
-        "target_mean_price": 288.83,
-        "target_upside_pct": 5.7,
-        "target_analysts": 12,
-        "confiance": 1.0,
-        "sources": [
-          "Yahoo Finance"
-        ],
-        "conversion_pct": 122,
-        "net_margin_exercice_pct": 27.0,
-        "note": {
-          "total": 76,
-          "blocs": {
-            "q": {
-              "pts": 33.1,
-              "max": 35,
-              "dispo": 35,
-              "sur": 35
-            },
-            "c": {
-              "pts": 18.3,
-              "max": 25,
-              "dispo": 25,
-              "sur": 25
-            },
-            "v": {
-              "pts": 10.4,
-              "max": 25,
-              "dispo": 25,
-              "sur": 25
-            },
-            "m": {
-              "pts": 14.7,
-              "max": 15,
-              "dispo": 15,
-              "sur": 15
-            }
-          },
-          "criteres": [
-            {
-              "bloc": "q",
-              "id": "marge",
-              "max": 9,
-              "pts": 9.0,
-              "valeur": 28.0,
-              "phrase": "Sur 100 € de ventes, il reste 28 € de bénéfice net (médiane de 4 exercices)",
-              "motif": null
-            },
-            {
-              "bloc": "q",
-              "id": "roe",
-              "max": 9,
-              "pts": 9.0,
-              "valeur": 20.4,
-              "phrase": "Chaque 100 € de capitaux propres rapportent 20,4 € par an",
-              "motif": null
-            },
-            {
-              "bloc": "q",
-              "id": "conversion",
-              "max": 7,
-              "pts": 7.0,
-              "valeur": 122,
-              "phrase": "Sur 100 € de bénéfice comptable, 120 € finissent en cash réel",
-              "motif": null
-            },
-            {
-              "bloc": "q",
-              "id": "bilan",
-              "max": 5,
-              "pts": 3.1,
-              "valeur": 58,
-              "phrase": "Dette à 58 % des capitaux propres",
-              "motif": null
-            },
-            {
-              "bloc": "q",
-              "id": "constance",
-              "max": 5,
-              "pts": 5.0,
-              "valeur": 100,
-              "phrase": "Bénéficiaire 4 années sur les 4 connues",
-              "motif": null
-            },
-            {
-              "bloc": "c",
-              "id": "ca",
-              "max": 7,
-              "pts": 5.7,
-              "valeur": 12.2,
-              "phrase": "Chiffre d'affaires en croissance de 12,2 % par an sur 3 ans",
-              "motif": null
-            },
-            {
-              "bloc": "c",
-              "id": "bpa",
-              "max": 7,
-              "pts": 4.8,
-              "valeur": 10.3,
-              "phrase": "Bénéfice par action en croissance de 10,3 % par an, dilution comprise sur 3 ans",
-              "motif": null
-            },
-            {
-              "bloc": "c",
-              "id": "regularite",
-              "max": 4,
-              "pts": 4.0,
-              "valeur": 100,
-              "phrase": "Le CA progresse 3 années sur 3",
-              "motif": null
-            },
-            {
-              "bloc": "c",
-              "id": "attendu",
-              "max": 7,
-              "pts": 3.8,
-              "valeur": 10.9,
-              "phrase": "Les analystes attendent 10,9 % de croissance annuelle du bénéfice (estimation, pas une publication)",
-              "motif": null
-            },
-            {
-              "bloc": "v",
-              "id": "histoire",
-              "max": 8,
-              "pts": 1.8,
-              "valeur": 1.16,
-              "phrase": "Payée 23,6× ses bénéfices, contre 20,2× en médiane sur 4 exercices",
-              "motif": null
-            },
-            {
-              "bloc": "v",
-              "id": "peg",
-              "max": 7,
-              "pts": 3.6,
-              "valeur": 1.98,
-              "phrase": "PER prévisionnel 20,4× pour 10,3 % de croissance retenue (la plus prudente des deux) : PEG 1,98",
-              "motif": null
-            },
-            {
-              "bloc": "v",
-              "id": "rdt_benefices",
-              "max": 5,
-              "pts": 1.9,
-              "valeur": 4.9,
-              "phrase": "100 € investis achètent 4,9 € de bénéfices attendus",
-              "motif": null
-            },
-            {
-              "bloc": "v",
-              "id": "rdt_cash",
-              "max": 5,
-              "pts": 3.1,
-              "valeur": 4.93,
-              "phrase": "L'entreprise génère 4,9 % de sa capitalisation en cash chaque année",
-              "motif": null
-            },
-            {
-              "bloc": "m",
-              "id": "tendance",
-              "max": 6,
-              "pts": 6.0,
-              "valeur": 11.6,
-              "phrase": "Moyenne 21 jours à 11,6 % de la moyenne 200 jours",
-              "motif": null
-            },
-            {
-              "bloc": "m",
-              "id": "position",
-              "max": 6,
-              "pts": 6.0,
-              "valeur": 0.76,
-              "phrase": "À 0,8σ de sa tendance décennale",
-              "motif": null
-            },
-            {
-              "bloc": "m",
-              "id": "rsi",
-              "max": 3,
-              "pts": 2.7,
-              "valeur": 66,
-              "phrase": "RSI 66, zone tendue",
-              "motif": null
-            }
-          ],
-          "couverture": 100
-        }
-      },
-      "justification": "Score 76/100 — cours proche de sa droite de régression, ⚠ près du top 52w (+0.0%) — risque de chase, croissance CA modérée (12% a/a), marges excellentes (27%), consensus analystes très favorable.",
       "rank": 23,
-      "rank_prev": 16,
-      "rank_delta": -7
+      "rank_prev": 22,
+      "rank_delta": -1
     },
     {
       "ticker": "GS",
@@ -5771,9 +5771,9 @@
       "sector": "Finance",
       "score": 76,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 999,
@@ -6013,8 +6013,8 @@
       },
       "justification": "Score 76/100 — prix en surachat régression (+2.5σ) — prudence, RSI en zone favorable, correction modérée -10.4% sous le top (zone Fibo 23.6%), croissance CA solide (42% a/a), marges excellentes (31%). ⚠ Marge nette discordante YF:31.0% vs FH:15.5%",
       "rank": 24,
-      "rank_prev": 20,
-      "rank_delta": -4
+      "rank_prev": 24,
+      "rank_delta": 0
     },
     {
       "ticker": "ICE",
@@ -6023,9 +6023,9 @@
       "sector": "Finance",
       "score": 76,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 119,
@@ -6254,8 +6254,8 @@
       },
       "justification": "Score 76/100 — prix sous sa droite de régression (-0.9σ), RSI en zone favorable, correction modérée -19.3% sous le top, marges excellentes (38%), consensus analystes très favorable.",
       "rank": 25,
-      "rank_prev": 27,
-      "rank_delta": 2
+      "rank_prev": 25,
+      "rank_delta": 0
     },
     {
       "ticker": "MPWR",
@@ -6264,9 +6264,9 @@
       "sector": "Technologie",
       "score": 76,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 290,
@@ -6509,8 +6509,8 @@
       },
       "justification": "Score 76/100 — cours proche de sa droite de régression, RSI en zone favorable, correction modérée -19.5% sous le top (zone Fibo 23.6%), croissance CA solide (48% a/a), marges excellentes (25%), consensus analystes très favorable.",
       "rank": 26,
-      "rank_prev": 25,
-      "rank_delta": -1
+      "rank_prev": 26,
+      "rank_delta": 0
     },
     {
       "ticker": "ASML.AS",
@@ -6519,25 +6519,25 @@
       "sector": "Technologie",
       "score": 75,
       "badge": "EU",
-      "change": "up",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 227,
-        "cross_spread_pct": 23.38,
-        "cross_slope_mm21_pct": -1.68,
+        "cross_spread_pct": 23.39,
+        "cross_slope_mm21_pct": -1.67,
         "cross_volume_confirmed": true,
         "signal_dynamics_warning": "",
         "val_pts": 3,
         "val_pts_mode": "normal",
-        "drawdown_52w_pct": -12.5,
+        "drawdown_52w_pct": -12.4,
         "high_52w": 1719.33,
         "fibo": {
           "swing_low": 613.19,
           "swing_high": 1719.33,
           "rally_pct": 180.4,
-          "retrace_pct": 19.5,
+          "retrace_pct": 19.3,
           "closest_fibo": "< Fibo 23.6%",
           "fibo_levels": {
             "23.6": 1458.28,
@@ -6547,35 +6547,35 @@
             "78.6": 849.9
           }
         },
-        "rsi": 50.2,
-        "mm21": 1504.1,
-        "mm200": 1219.05,
+        "rsi": 50.4,
+        "mm21": 1504.19,
+        "mm200": 1219.06,
         "regression_z": 1.49,
         "regression_signal": "au-dessus",
         "regression_pente_pct": 19.6,
         "regression_sigma": 0.3528,
         "prix_tendance": 889.99,
-        "decote_pct": -69.0,
+        "decote_pct": -69.2,
         "regression_window_years": 25,
         "regression_window_reason": "cyclical_25y",
-        "prix": 1503.8,
+        "prix": 1505.6,
         "devise": "EUR",
         "nom_complet": "ASML Holding N.V.",
         "rev_growth_pct": 21.3,
         "net_margin_pct": 30.1,
         "fcf_margin_pct": 33.8,
         "mrq": "2026-06-28",
-        "forward_pe": 29.2,
-        "trailing_pe": 59.3,
+        "forward_pe": 29.3,
+        "trailing_pe": 59.4,
         "fcf_yield_pct": 1.91,
         "roe_pct": 53.9,
         "debt_eq_pct": 9,
-        "price_to_book": 26.47,
+        "price_to_book": 26.5,
         "fonda_source": [
           "fcf:comptes"
         ],
-        "target_mean_price": 1995.11,
-        "target_upside_pct": 32.7,
+        "target_mean_price": 2001.14,
+        "target_upside_pct": 32.9,
         "target_analysts": 34,
         "confiance": 1.0,
         "sources": [
@@ -6689,8 +6689,8 @@
               "id": "attendu",
               "max": 7,
               "pts": 7.0,
-              "valeur": 43.9,
-              "phrase": "Les analystes attendent 43,9 % de croissance annuelle du bénéfice (estimation, pas une publication)",
+              "valeur": 44.2,
+              "phrase": "Les analystes attendent 44,2 % de croissance annuelle du bénéfice (estimation, pas une publication)",
               "motif": null
             },
             {
@@ -6699,7 +6699,7 @@
               "max": 8,
               "pts": 0.0,
               "valeur": 1.99,
-              "phrase": "Payée 59,3× ses bénéfices, contre 29,8× en médiane sur 18 exercices",
+              "phrase": "Payée 59,4× ses bénéfices, contre 29,8× en médiane sur 18 exercices",
               "motif": null
             },
             {
@@ -6708,7 +6708,7 @@
               "max": 7,
               "pts": 3.9,
               "valeur": 1.88,
-              "phrase": "PER prévisionnel 29,2× pour 15,6 % de croissance retenue (la plus prudente des deux) : PEG 1,88",
+              "phrase": "PER prévisionnel 29,3× pour 15,6 % de croissance retenue (la plus prudente des deux) : PEG 1,88",
               "motif": null
             },
             {
@@ -6760,10 +6760,10 @@
           "couverture": 100
         }
       },
-      "justification": "Score 75/100 — légèrement au-dessus de sa régression (+1.5σ), RSI en zone favorable, correction modérée -12.5% sous le top (< Fibo 23.6%), croissance CA solide (21% a/a), marges excellentes (30%), consensus analystes très favorable.",
+      "justification": "Score 75/100 — légèrement au-dessus de sa régression (+1.5σ), RSI en zone favorable, correction modérée -12.4% sous le top (< Fibo 23.6%), croissance CA solide (21% a/a), marges excellentes (30%), consensus analystes très favorable.",
       "rank": 27,
-      "rank_prev": 28,
-      "rank_delta": 1
+      "rank_prev": 27,
+      "rank_delta": 0
     },
     {
       "ticker": "ISRG",
@@ -6772,9 +6772,9 @@
       "sector": "Santé",
       "score": 75,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 121,
@@ -7017,8 +7017,8 @@
       },
       "justification": "Score 75/100 — prix sous sa droite de régression (-1.8σ), RSI en zone favorable, ⚠ -37.0% sous le top 52w — trend probablement cassée, croissance CA solide (18% a/a), marges excellentes (28%), consensus analystes très favorable.",
       "rank": 28,
-      "rank_prev": 24,
-      "rank_delta": -4
+      "rank_prev": 28,
+      "rank_delta": 0
     },
     {
       "ticker": "RACE",
@@ -7027,9 +7027,9 @@
       "sector": "Conso. cycl.",
       "score": 75,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "golden",
         "cross_type": "golden",
         "cross_days_ago": 18,
@@ -7069,7 +7069,7 @@
         "fonda_source": [
           "fcf:comptes"
         ],
-        "target_mean_price": 452.52,
+        "target_mean_price": 452.67,
         "target_upside_pct": 11.1,
         "target_analysts": 14,
         "confiance": 1.0,
@@ -7258,8 +7258,8 @@
       },
       "justification": "Score 75/100 — Golden Cross récent (18j), prix sous sa droite de régression (-1.6σ), croissance CA modérée (8% a/a), marges excellentes (22%), consensus analystes très favorable.",
       "rank": 29,
-      "rank_prev": null,
-      "rank_delta": null
+      "rank_prev": 29,
+      "rank_delta": 0
     },
     {
       "ticker": "TCEHY",
@@ -7268,9 +7268,9 @@
       "sector": "Médias & IA",
       "score": 75,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
-        "vix_value": 15.26,
+        "vix_value": 15.28,
         "cross_regime": "death",
         "cross_type": "death",
         "cross_days_ago": 119,
@@ -7323,8 +7323,8 @@
         "fonda_source": [
           "fcf:comptes"
         ],
-        "target_mean_price": 97.76,
-        "target_upside_pct": 61.0,
+        "target_mean_price": 97.9,
+        "target_upside_pct": 61.2,
         "target_analysts": 3,
         "confiance": 1.0,
         "sources": [
@@ -7512,57 +7512,11 @@
       },
       "justification": "Score 75/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA modérée (9% a/a), marges excellentes (31%), consensus analystes très favorable.",
       "rank": 30,
-      "rank_prev": null,
-      "rank_delta": null
+      "rank_prev": 30,
+      "rank_delta": 0
     }
   ],
-  "changelog": [
-    {
-      "action": "in",
-      "ticker": "ADYEN.AS",
-      "name": "ADYEN",
-      "score": 82,
-      "reason": "Score 82/100 — prix sous sa droite de régression (-1.4σ), RSI en zone favorable, ⚠ -38.3% sous le top 52w — trend probablement cassée, croissance CA solide (17% a/a), marges excellentes (45%), consensus analystes très favorable."
-    },
-    {
-      "action": "in",
-      "ticker": "RACE",
-      "name": "Ferrari N.V.",
-      "score": 75,
-      "reason": "Score 75/100 — Golden Cross récent (18j), prix sous sa droite de régression (-1.6σ), croissance CA modérée (8% a/a), marges excellentes (22%), consensus analystes très favorable."
-    },
-    {
-      "action": "in",
-      "ticker": "TCEHY",
-      "name": "Tencent Holding Ltd.",
-      "score": 75,
-      "reason": "Score 75/100 — cours proche de sa droite de régression, RSI en zone favorable, croissance CA modérée (9% a/a), marges excellentes (31%), consensus analystes très favorable."
-    },
-    {
-      "action": "out",
-      "ticker": "SPGI",
-      "name": "S&P Global Inc.",
-      "score": 75,
-      "new_score": 72,
-      "reason": "Score en baisse : 75 → 72 (-3 pts) · Death Cross très récent (2j) — bascule en tendance baissière, signal négatif fort."
-    },
-    {
-      "action": "out",
-      "ticker": "CRM",
-      "name": "Salesforce, Inc.",
-      "score": 72,
-      "new_score": 72,
-      "reason": "Score stable (72 → 72) — d'autres titres ont simplement mieux scoré cette semaine · nuance : rebond mean-reversion en cours, mais score global insuffisant pour rester dans le top 30 · Death Cross confirmé (136j) — régime baissier persistant."
-    },
-    {
-      "action": "out",
-      "ticker": "NXPI",
-      "name": "NXP Semiconductors N.V",
-      "score": 72,
-      "new_score": 70,
-      "reason": "Score stable (72 → 70) — d'autres titres ont simplement mieux scoré cette semaine."
-    }
-  ],
+  "changelog": [],
   "concentration_alerts": [
     "Technologie : 11 titres sur 30",
     "Finance : 10 titres sur 30",
