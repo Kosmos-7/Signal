@@ -203,7 +203,6 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .chx-warn{display:flex;gap:10px;align-items:flex-start;background:rgba(232,168,32,.06);border:1px solid rgba(232,168,32,.28);border-radius:8px;padding:10px 14px;margin:12px 0 0;font-size:.8rem;color:var(--text2);line-height:1.55}
   .chx-warn .chx-ic{flex:none;color:var(--gold);font-size:.95rem;margin-top:1px}
   .chx-warn b{color:var(--text)}
-  .chx-note{font-size:.72rem;color:var(--text3);margin-top:.6rem;line-height:1.55}
   /* ── Chiffres publiés (historique CA / résultat net) ── */
   .fd-wrap{margin-top:1.7rem}
   .fd-ctrl{display:flex;gap:8px;align-items:center;margin:8px 0 10px;flex-wrap:wrap}
@@ -997,8 +996,14 @@ function drawChart(s){
     ].concat(b.drawdown_52w_pct!=null?['<span class="chx-k">Repli / plus haut 52 s : </span><span class="chx-v2">'+fs(b.drawdown_52w_pct,0)+' %</span>']:[])
      .concat(b.rsi!=null?['<span class="chx-k">RSI </span><span class="chx-v2">'+f(b.rsi,0)+'</span>']:[])
      .concat(cons?[cons]:[]).join(' <span class="chx-k">·</span> ')+'</div>':'')+
-    '<div id="chx-warnslot"></div>'+
-'<div class="chx-note">Trajectoire historique, pas une valeur intrinsèque. <a href="apprendre.html#decote" style="color:var(--text3)">Méthode →</a></div>';
+    /* PLUS DE NOTE SOUS LE GRAPHIQUE (décision du propriétaire, 07/08). Elle
+       disait « trajectoire historique, pas une valeur intrinsèque » et
+       renvoyait à la méthode. La mise en garde reste portée là où elle mord :
+       la ligne de métriques dit « si retour à la tendance », au conditionnel,
+       et l'avertissement de surcote s'affiche dans #chx-warnslot quand le
+       cours s'écarte vraiment. Un rappel permanent sous chaque graphique
+       n'était plus lu. */
+    '<div id="chx-warnslot"></div>';
   const svg=document.getElementById('chx-svg'),tip=document.getElementById('chx-tip');
   const r0=document.getElementById('chx-r0'),r1=document.getElementById('chx-r1'),selBar=document.getElementById('chx-sel');
   let X,Y,vis,hoverG,F=null;

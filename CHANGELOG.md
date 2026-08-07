@@ -5,6 +5,18 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La note permanente sous le graphique de cours disparaît
+
+« Trajectoire historique, pas une valeur intrinsèque. Méthode → » s'affichait
+sous **chaque** graphique, sur chaque fiche. Un rappel qui ne varie jamais
+finit par ne plus être lu.
+
+La mise en garde n'est pas perdue pour autant, elle est portée là où elle
+mord : la ligne de métriques dit « **si retour à la tendance** », au
+conditionnel, et l'avertissement de surcote s'affiche vraiment — 260 caractères
+sur Samsung, 346 sur Adobe — quand le cours s'écarte assez pour que ça compte.
+La classe CSS qui n'habillait plus que cette phrase part avec elle.
+
 ### L'illustration reste en tête de fiche
 
 Essayée sous l'en-tête, remise au-dessus dans la foulée : le propriétaire
