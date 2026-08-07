@@ -1416,7 +1416,17 @@ function fdPerChart(F,fmtPer,W,perNow){
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
 // Élagage du 06/08 : les étiquettes des métriques portent déjà « a/a » et
 // « TTM », seule la DATE de référence ajoute de l'information.
-function periodNote(b){ const p=qLabel(b&&b.mrq); return p?('Fondamentaux au '+p.d+' ('+p.q+', dernier trimestre publié).'):'Fondamentaux : dernier trimestre publié.'; }
+function periodNote(b){ const p=qLabel(b&&b.mrq);
+  let t=p?('Fondamentaux au '+p.d+' ('+p.q+', dernier trimestre publié).'):'Fondamentaux : dernier trimestre publié.';
+  /* Un douze-mois-glissant et un exercice clos peuvent diverger fortement sans
+     que rien ne soit faux : un retournement de cycle met douze mois à
+     traverser un exercice. On le dit plutôt que de laisser le lecteur croire
+     que l'un des deux chiffres est une erreur. */
+  const ex=b&&b.net_margin_exercice_pct, tt=b&&b.net_margin_pct;
+  if(ex!=null&&tt!=null&&Math.abs(ex-tt)>20)
+    t+=' Attention : sur le dernier exercice CLOS, la marge nette était de '+f(ex,1)+
+       ' % — l\'écart avec les 12 mois glissants vient d\'un retournement en cours, pas d\'une erreur.';
+  return t; }
 /* Fiche d'un titre thématique hors watchlist principale : universe.json ne
    porte qu'un breakdown compact (ni fondamentaux détaillés, ni graphique, ni
 fiche éditoriale). On publie ce qu'on a, et on le DIT, l'absence est un

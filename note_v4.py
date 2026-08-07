@@ -69,6 +69,42 @@ def _marges_annuelles(an):
     return out
 
 
+# Facteur d'effondrement au-delà duquel on cesse de croire à une trajectoire
+# d'entreprise et où l'on soupçonne un changement de périmètre ou de définition
+# (cf. _tcam). Un tiers en un an : les cycliques les plus violentes reculent de
+# moitié, pas de deux tiers.
+RUPTURE_PERIMETRE = 1 / 3
+
+
+def _apres_rupture(serie):
+    """Tronque une série de CHIFFRE D'AFFAIRES à sa dernière marche descendante.
+
+    Un effondrement d'un facteur 3 ou plus entre deux exercices consécutifs
+    n'est presque jamais une trajectoire d'entreprise : c'est une cession, une
+    scission, ou un changement de définition qui n'a retraité que les exercices
+    récents. Mesurer « à travers » cette marche produit une contre-vérité
+    publiée comme un fait — Adyen sortait à « −33,3 % par an » (passage du
+    volume traité au revenu net en 2023) et Western Digital à « −10,5 % »
+    (séparation de SanDisk), alors que les deux croissent de ~20 % sur leur
+    périmètre actuel, et les deux prenaient 0 sur 7 pour cela.
+
+    RÉSERVÉ AU CHIFFRE D'AFFAIRES, et c'est essentiel. Le bénéfice est une
+    grandeur bien plus volatile : Broadcom passe de 2,84 à 0,64 € de BPA en
+    2019 par pur amortissement d'acquisitions, sans rien céder. Appliquer la
+    même règle au BPA effacerait des trajectoires vraies. Le chiffre
+    d'affaires, lui, mesure le PÉRIMÈTRE : c'est la seule série où une marche
+    descendante d'un facteur 3 accuse la définition plutôt que l'entreprise.
+
+    Une marche MONTANTE est conservée — c'est la signature de
+    l'hypercroissance (Nebius ×9 puis ×6, CoreWeave ×14 puis ×8), et la
+    tronquer effacerait justement ce qu'on veut voir. Pure."""
+    for i in range(len(serie) - 1, 0, -1):
+        pre, post = serie[i - 1][1], serie[i][1]
+        if pre and pre > 0 and post and post > 0 and post / pre < RUPTURE_PERIMETRE:
+            return serie[i:]
+    return serie
+
+
 def _tcam(serie):
     """TCAM (%) sur [(annee, valeur), ...], mesuré sur la plus longue fenêtre
     exploitable qui se termine au dernier exercice.
@@ -183,14 +219,24 @@ def calcule_note(ctx):
         else:
             ajoute("q", "rendement_actifs", 7, None, None, None,
                    "actifs au bilan non publiés")
-    elif fm is not None and nm and nm > 0:
-        c = fm / nm * 100
-        ajoute("q", "conversion", 7, rampe(min(c, 120), 40, 100, 7), round(c),
-               f"Sur 100 € de bénéfice comptable, {_fr(min(c,120),0)} € "
-               f"finissent en cash réel")
     else:
-        ajoute("q", "conversion", 7, None, None, None,
-               "conversion en cash non calculable")
+        # `conversion_pct` est calculée par le screener à partir du flux
+        # disponible et du résultat net DU MÊME EXERCICE, lus dans le même
+        # document. Le repli `fm / nm` ne vaut que faute de mieux : il divise
+        # deux marges glissantes qui peuvent venir de sources différentes, et
+        # c'est ce qui donnait 12 % de conversion à Microsoft. On le garde
+        # pour ne pas retirer le critère quand les comptes sont illisibles,
+        # mais il n'est plus le chemin normal.
+        c = ctx.get("conversion_pct")
+        if c is None and fm is not None and nm and nm > 0:
+            c = fm / nm * 100
+        if c is not None:
+            ajoute("q", "conversion", 7, rampe(min(c, 120), 40, 100, 7), round(c),
+                   f"Sur 100 € de bénéfice comptable, {_fr(min(c,120),0)} € "
+                   f"finissent en cash réel")
+        else:
+            ajoute("q", "conversion", 7, None, None, None,
+                   "conversion en cash non calculable")
 
     # Bilan — même substitution. Dette/capitaux propres n'a pas de sens quand
     # la dette est la matière première ; le pendant-métier est le LEVIER
@@ -225,7 +271,7 @@ def calcule_note(ctx):
                f"historique trop court ({len(rns)} exercice(s))")
 
     # ═ CROISSANCE /25 — dérivées des comptes ═
-    cas = [(int(e["fin"][:4]), e["ca"]) for e in an if e.get("ca")]
+    cas = _apres_rupture([(int(e["fin"][:4]), e["ca"]) for e in an if e.get("ca")])
     g_ca, n_ca = _tcam(cas)
     if g_ca is not None:
         ajoute("c", "ca", 7, rampe(g_ca, 0, 15, 7), round(g_ca, 1),
@@ -249,11 +295,15 @@ def calcule_note(ctx):
         ajoute("c", "bpa", 7, None, None, None,
                "trajectoire du bénéfice par action non calculable")
 
-    if len(cas) >= 4:
-        prog = sum(1 for i in range(1, len(cas)) if cas[i][1] > cas[i-1][1])
-        part = prog / (len(cas) - 1) * 100
+    # `cas` est DÉJÀ tronquée au périmètre actuel : compter une « année de
+    # recul » qui n'est qu'un changement de définition punirait deux fois la
+    # même illusion.
+    cas_r = cas
+    if len(cas_r) >= 4:
+        prog = sum(1 for i in range(1, len(cas_r)) if cas_r[i][1] > cas_r[i-1][1])
+        part = prog / (len(cas_r) - 1) * 100
         ajoute("c", "regularite", 4, rampe(part, 50, 100, 4), round(part),
-               f"Le CA progresse {prog} années sur {len(cas)-1}")
+               f"Le CA progresse {prog} années sur {len(cas_r)-1}")
     else:
         ajoute("c", "regularite", 4, None, None, None, "historique trop court")
 

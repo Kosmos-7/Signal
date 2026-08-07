@@ -461,7 +461,7 @@ def extraire_fondamentaux(df_annuel, df_trim, devise, max_an=5, max_tr=6):
     return {"devise": devise or "?", "an": an, "tr": tr}
 
 
-def etats_complements(df_cf, df_bs):
+def etats_complements(df_cf, df_bs, df_is=None):
     """Flux de trésorerie disponible, dette totale et capitaux propres, lus
     DIRECTEMENT dans les états financiers.
 
@@ -537,6 +537,21 @@ def etats_complements(df_cf, df_bs):
             dette = (lt or 0) + (ct or 0)
     if dette is not None:
         out["dette"] = dette
+
+    # Chiffre d'affaires et résultat net du MÊME exercice que le flux
+    # disponible ci-dessus. Ils ne servent qu'à des RATIOS : la conversion du
+    # bénéfice en cash et la marge de flux disponible. C'est toute la raison
+    # de les lire ici plutôt que de reprendre les champs glissants du résumé
+    # Yahoo — un quotient n'a de sens qu'entre deux grandeurs de la même
+    # période, dans la même devise, issues du même document.
+    ca = dernier(df_is, ["Total Revenue", "Operating Revenue", "Revenues"])
+    if ca is not None and ca > 0:
+        out["ca"] = ca
+    rn = dernier(df_is, ["Net Income", "Net Income Common Stockholders",
+                         "Net Income Continuous Operations",
+                         "Net Income From Continuing Operation Net Minority Interest"])
+    if rn is not None:
+        out["rn"] = rn
 
     return out
 
@@ -1766,29 +1781,61 @@ def score_ticker(ticker, vix=None):
                     levier_actifs = _actifs / _cp_b
             except Exception as e:
                 print(f"  ⚠️  {ticker}: bilan illisible pour ROA/levier ({type(e).__name__})")
-        if (fcf_raw is None and not _metier_bilan) or debt_eq_raw is None or roe is None:
-            try:
-                _ec = etats_complements(data.cashflow, data.balance_sheet)
-            except Exception as e:
-                print(f"  ⚠️  {ticker}: états financiers illisibles ({type(e).__name__})")
-                _ec = {}
-            _cp = _ec.get("capitaux_propres")
-            if fcf_raw is None and _ec.get("fcf") is not None:
-                fcf_raw = _ec["fcf"]; fonda_source.append("fcf")
-            if debt_eq_raw is None and _cp and _ec.get("dette") is not None:
-                debt_eq_raw = _ec["dette"] / _cp * 100; fonda_source.append("dette")
-            # ROE = résultat net du dernier exercice publié ÷ capitaux propres.
-            # Les deux sont en devise COMPTABLE : le ratio est homogène.
-            if roe is None and _cp:
-                _ni = info.get("netIncomeToCommon")
-                if _ni is not None and _ni == _ni:
-                    roe = _ni / _cp; fonda_source.append("roe")
+        # Les états financiers sont lus SYSTÉMATIQUEMENT (et non plus en
+        # dernier recours) : ils sont déjà téléchargés pour la section
+        # « Chiffres publiés », et ils portent la seule version VÉRIFIABLE du
+        # flux disponible. Voir juste en dessous pourquoi celle de Yahoo ne
+        # convient pas.
+        try:
+            _ec = etats_complements(data.cashflow, data.balance_sheet,
+                                    data.income_stmt)
+        except Exception as e:
+            print(f"  ⚠️  {ticker}: états financiers illisibles ({type(e).__name__})")
+            _ec = {}
+        _cp = _ec.get("capitaux_propres")
+        # LE FLUX DISPONIBLE VIENT DES COMPTES, PAS DU RÉSUMÉ.
+        #
+        # `info["freeCashflow"]` de Yahoo ne mesure pas ce que notre phrase
+        # annonce (« sur 100 € de bénéfice, X € finissent en cash réel »). Le
+        # relevé du 07/08 sur les fiches publiées est sans appel : Microsoft
+        # 4,9 % de marge de flux disponible, Alphabet 5,1 %, Meta 9,4 %,
+        # Amazon 0,4 % — aucun de ces chiffres n'est une marge de flux
+        # disponible au sens usuel (exploitation − investissements
+        # industriels), et le critère « conversion » mettait 0 sur 7 aux
+        # meilleurs générateurs de trésorerie de l'univers. La définition est
+        # donc reprise en main : elle est CALCULÉE, pas récupérée.
+        _fcf_comptes = (_ec.get("fcf") is not None and not _metier_bilan)
+        if _fcf_comptes:
+            fonda_source.append("fcf:comptes" if fcf_raw is not None else "fcf")
+            fcf_raw = _ec["fcf"]
+        if debt_eq_raw is None and _cp and _ec.get("dette") is not None:
+            debt_eq_raw = _ec["dette"] / _cp * 100; fonda_source.append("dette")
+        # ROE = résultat net du dernier exercice publié ÷ capitaux propres.
+        # Les deux sont en devise COMPTABLE : le ratio est homogène.
+        if roe is None and _cp:
+            _ni = info.get("netIncomeToCommon")
+            if _ni is not None and _ni == _ni:
+                roe = _ni / _cp; fonda_source.append("roe")
 
         fcf        = fcf_raw or 0
+        # Le DÉNOMINATEUR suit le numérateur. Un flux disponible lu dans les
+        # comptes se divise par le chiffre d'affaires DU MÊME EXERCICE, pas par
+        # le douze-mois-glissant du résumé : sinon le ratio compare deux
+        # périodes et deux documents. Repli sur `totalRevenue` seulement quand
+        # le flux vient lui aussi du résumé.
         # Bug corrigé (latent) : `totalRevenue or 1` faisait de fcf/1 une
         # « marge » astronomique quand le CA manquait — la donnée absente
         # OFFRAIT les 8 points au lieu d'en priver.
-        fcf_margin = (fcf / total_rev_raw) if (fcf_raw is not None and total_rev_raw) else 0
+        _rev_fcf = _ec.get("ca") if _fcf_comptes else total_rev_raw
+        fcf_margin = (fcf / _rev_fcf) if (fcf_raw is not None and _rev_fcf) else 0
+        # CONVERSION DU BÉNÉFICE EN CASH — calculée ici, et non plus déduite
+        # dans note_v4 du quotient de deux marges glissantes de provenances
+        # différentes. Numérateur et dénominateur sortent du même exercice, du
+        # même document et de la même devise : c'est la seule façon d'écrire
+        # « sur 100 € de bénéfice, X € finissent en cash » sans mentir.
+        conversion_pct = None
+        if _fcf_comptes and _ec.get("rn") and _ec["rn"] > 0:
+            conversion_pct = fcf_raw / _ec["rn"] * 100
         # Rendement du FCF : le FCF est publié en devise COMPTABLE, la
         # capitalisation en devise de COTATION. Quand elles diffèrent (ADR :
         # TSM cotait un « FCF yield » de 34 % — TWD divisés par des USD), le
@@ -1934,7 +1981,7 @@ def score_ticker(ticker, vix=None):
             # MESURE (croissance nulle, marge nulle), plus jamais un défaut.
             "rev_growth_pct":        round(rev_growth * 100, 1) if rev_growth_raw is not None else None,   # trimestriel, glissement annuel (MRQ vs même trim. N-1)
             "net_margin_pct":        round(margins * 100, 1) if margins_raw is not None else None,         # TTM (12 mois glissants)
-            "fcf_margin_pct":        round(fcf_margin * 100, 1) if (fcf_raw is not None and total_rev_raw) else None,  # TTM (12 mois glissants)
+            "fcf_margin_pct":        round(fcf_margin * 100, 1) if (fcf_raw is not None and _rev_fcf) else None,  # exercice publié (ou TTM en repli)
             "mrq":                   mrq_iso,                      # date du dernier trimestre publié — réf. période fondamentaux
             # Valorisation (alimente la note v4 et la prose éditoriale)
             "forward_pe":            round(forward_pe, 1) if forward_pe else None,
@@ -2109,6 +2156,19 @@ def score_ticker(ticker, vix=None):
         breakdown["debt_eq_pct"] = (round(debt_eq_raw)
                                     if _n(debt_eq_raw) is not None else None)
         breakdown["fonda_source"] = fonda_source or None
+        # Publiée pour que la fiche puisse montrer d'où sort la conversion, et
+        # pour qu'un audit puisse la recalculer sans relancer le screener.
+        breakdown["conversion_pct"] = (round(conversion_pct)
+                                       if conversion_pct is not None else None)
+        # Marge nette du DERNIER EXERCICE PUBLIÉ, à côté de la glissante.
+        # Les deux divergent parfois beaucoup — Micron 55,9 % en glissant contre
+        # 22,8 % sur l'exercice, SanDisk +34,2 % contre −22,3 % — et c'est
+        # légitime : un retournement de cycle met douze mois à traverser un
+        # exercice clos. Ce n'est un défaut que tant qu'on n'a qu'un des deux
+        # chiffres à l'écran sans dire lequel on regarde.
+        breakdown["net_margin_exercice_pct"] = (
+            round(_ec["rn"] / _ec["ca"] * 100, 1)
+            if _ec.get("ca") and _ec.get("rn") is not None else None)
         note = note_v4.calcule_note({
             "an":             _f.get("an") or [],
             "pe_prev":        _f.get("pe_prev"),
@@ -2116,7 +2176,8 @@ def score_ticker(ticker, vix=None):
             "trailing_pe":    _n(trailing_pe),
             "forward_pe":     _n(forward_pe),
             "net_margin_pct": round(_nm_raw * 100, 1) if _nm_raw is not None else None,
-            "fcf_margin_pct": round(fcf_margin * 100, 1) if (fcf_raw is not None and total_rev_raw) else None,
+            "fcf_margin_pct": round(fcf_margin * 100, 1) if (fcf_raw is not None and _rev_fcf) else None,
+            "conversion_pct": _n(conversion_pct),
             "fcf_yield_pct":  _n(fcf_yield),   # déjà gardé par la devise plus haut
             "roe":            _n(roe),
             "debt_eq":        _n(debt_eq_raw),

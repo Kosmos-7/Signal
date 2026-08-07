@@ -632,10 +632,29 @@ check("libellés alternatifs reconnus (flux, capitaux propres)",
       ec3["fcf"] == 4_000_000_000 and ec3["capitaux_propres"] == 20_000_000_000)
 check("dette recomposée long terme + court terme",
       ec3["dette"] == 7_000_000_000, str(ec3.get("dette")))
+# Compte de résultat du MÊME exercice : sans lui, la conversion du bénéfice en
+# cash divisait un flux annuel par une marge glissante d'une autre provenance —
+# c'est ce qui donnait 12 % de conversion à Microsoft et 0 sur 7 aux meilleurs
+# générateurs de trésorerie de l'univers (relevé du 07/08).
+IS = FDF({"Total Revenue": {"2024-12-31": 30_000_000_000, "2025-12-31": 34_000_000_000},
+          "Net Income":    {"2024-12-31":  7_000_000_000, "2025-12-31":  8_000_000_000}})
+eci = screener.etats_complements(CF, BS, IS)
+check("chiffre d'affaires et résultat net lus au MÊME exercice que le flux",
+      eci["ca"] == 34_000_000_000 and eci["rn"] == 8_000_000_000, str(eci))
+check("la conversion se calcule alors sur des grandeurs homogènes (88 %)",
+      round(eci["fcf"] / eci["rn"] * 100) == 88)
+check("la marge de flux disponible aussi (21 %)",
+      round(eci["fcf"] / eci["ca"] * 100) == 21)
+check("libellé alternatif du résultat net reconnu",
+      screener.etats_complements(CF, BS, FDF({
+          "Net Income Common Stockholders": {"2025-12-31": 5_000_000_000}}))["rn"]
+      == 5_000_000_000)
+check("un chiffre d'affaires nul ou absent n'est jamais inventé",
+      "ca" not in screener.etats_complements(CF, BS, FDF({"Total Revenue": {"2025-12-31": 0}})))
 # Fail-soft : rien ne doit être deviné
 check("états vides → dict vide, aucune valeur inventée",
       screener.etats_complements(None, None) == {}
-      and screener.etats_complements(FDF({}), FDF({})) == {})
+      and screener.etats_complements(FDF({}), FDF({}), FDF({})) == {})
 check("capitaux propres négatifs : pas de ratio trompeur",
       "capitaux_propres" not in screener.etats_complements(
           CF, FDF({"Stockholders Equity": {"2025-12-31": -3_000_000_000}})))

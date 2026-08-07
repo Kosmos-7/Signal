@@ -135,6 +135,63 @@ champs, et le run ne pouvait pas échouer sur une donnée absente.
   liste explicite : le prochain champ ajouté à `fonda` sans être traité dans la
   fusion fera échouer les tests au lieu de disparaître en silence.
 
+### Audit complet : le flux disponible ne mesurait pas ce qu'on annonçait
+
+Demandé par le propriétaire (« on a fait ajout sur ajout »). L'audit a suivi le
+fil des trois bugs de la veille — tous des **bases implicites jamais
+vérifiées** — et en a trouvé deux autres du même sang, dont un qui faussait le
+score de tout l'univers.
+
+**Le critère « conversion en cash » mettait 0 sur 7 aux meilleurs générateurs
+de trésorerie.** Relevé sur les fiches publiées : Microsoft 4,9 % de marge de
+flux disponible, Alphabet 5,1 %, Meta 9,4 %, Amazon 0,4 %. Aucun de ces
+chiffres n'est une marge de flux disponible au sens usuel. La fiche de
+Microsoft affirmait « sur 100 € de bénéfice comptable, 12 € finissent en cash
+réel ». `info["freeCashflow"]` de Yahoo ne mesure pas ce que notre phrase
+annonce — et nous téléchargions déjà le tableau de flux qui, lui, le dit.
+
+- Le flux disponible est désormais **calculé** (exploitation − investissements
+  industriels), plus récupéré. Yahoo ne sert qu'en repli.
+- Le **dénominateur suit le numérateur** : la marge se calcule sur le chiffre
+  d'affaires du MÊME exercice, pas sur un douze-mois-glissant d'une autre
+  provenance.
+- La **conversion est calculée dans le screener**, flux disponible ÷ résultat
+  net du même exercice, du même document, dans la même devise. `note_v4` ne la
+  déduit plus du quotient de deux marges hétérogènes — c'est ce quotient qui
+  donnait 12 % à Microsoft.
+
+**Deux fiches publiaient un fait faux sur leur croissance.** Adyen : « chiffre
+d'affaires en croissance de −33,3 % par an ». Western Digital : « −10,5 % par
+an ». Toutes deux à 0 sur 7. Toutes deux fausses : Adyen est passée du volume
+traité au revenu net en 2023 (÷4,8 en une année), Western Digital a séparé
+SanDisk (÷3,0). On mesurait à travers une marche de périmètre.
+
+- Une série de chiffre d'affaires est **tronquée à sa dernière marche
+  descendante d'un facteur 3** : on mesure sur le périmètre qui est encore
+  celui de la société. Adyen passe à +19,2 %, Western Digital à +23,4 %,
+  Blackstone à +20,3 %.
+- Une marche **montante** est conservée : c'est la signature de
+  l'hypercroissance (Nebius ×9 puis ×6, CoreWeave ×14 puis ×8), et la tronquer
+  effacerait ce qu'on veut voir.
+- **Réservé au chiffre d'affaires**, et c'est essentiel : Broadcom passe de
+  2,84 à 0,64 € de bénéfice par action en 2019 par pur amortissement
+  d'acquisitions, sans rien céder. Le chiffre d'affaires mesure le périmètre,
+  le bénéfice ne mesure que lui-même.
+- La régularité lit la même série tronquée, et se retire quand il ne reste plus
+  assez d'années — plutôt que de compter une fausse année de recul.
+
+**Marge nette glissante contre marge d'exercice.** 27 fiches sur 95 écartent de
+plus de 5 points, 6 de plus de 20 (Micron 55,9 % contre 22,8 %, SanDisk +34,2 %
+contre −22,3 %). Ce ne sont PAS des erreurs : un retournement de cycle met
+douze mois à traverser un exercice clos. La marge d'exercice est désormais
+publiée à côté, et l'infobulle le dit quand l'écart dépasse 20 points.
+
+**Constaté, non corrigé** — ce sont des décisions de produit, pas des bugs :
+19 fiches restent publiées sans entrée dans `universe.json` (dont CRM, cité par
+le propriétaire dans la tâche des positions détenues) ; elles sont
+inatteignables depuis le front, donc inoffensives, mais leur nombre grandit à
+chaque rotation de thème.
+
 ### Le PER d'époque était faussé par les dividendes — et la note avec lui
 
 Question du propriétaire : « je ne comprends pas le PER courant vs la valeur du

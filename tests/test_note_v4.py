@@ -12,7 +12,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from note_v4 import rampe, cloche, calcule_note
+import note_v4
+from note_v4 import rampe, cloche, calcule_note, _tcam
 
 ok, ko = [], []
 
@@ -67,6 +68,49 @@ check("cloche : rampe montante à mi-chemin", cloche(-2.25, -3, -1.5, 1, 3, 6) =
 check("cloche : rampe descendante à mi-chemin", cloche(2, -3, -1.5, 1, 3, 6) == 3.0)
 check("cloche : None traverse", cloche(None, 20, 35, 65, 80, 3) is None)
 
+print("\n— Rupture de périmètre : on ne mesure pas à travers une marche —")
+# Adyen sortait à « −33,3 % par an » (passage du volume traité au revenu net en
+# 2023) et Western Digital à « −10,5 % » (séparation de SanDisk), tous deux
+# publiés comme des FAITS sur leur fiche, tous deux à 0 sur 7. Les deux
+# croissent de ~20 % sur leur périmètre actuel.
+ADYEN = [(2022, 8936), (2023, 1863), (2024, 2226), (2025, 2647)]
+g, n = _tcam(note_v4._apres_rupture(ADYEN))
+check("un effondrement ÷4,8 tronque la série au périmètre actuel",
+      round(g, 1) == 19.2 and n == 2, f"{g} % sur {n} ans")
+check("la troncature retient bien les exercices postérieurs à la marche",
+      note_v4._apres_rupture(ADYEN)[0][0] == 2023)
+# Une marche MONTANTE est l'hypercroissance elle-même : la tronquer effacerait
+# ce qu'on cherche à voir.
+NBIS = [(2022, 14), (2023, 10), (2024, 92), (2025, 530)]
+check("une marche montante ×9 est CONSERVÉE (hypercroissance, pas rupture)",
+      note_v4._apres_rupture(NBIS) == NBIS)
+check("un compounder régulier n'est jamais tronqué",
+      note_v4._apres_rupture([(2021, 100), (2022, 112), (2023, 125), (2024, 140)])
+      == [(2021, 100), (2022, 112), (2023, 125), (2024, 140)])
+check("une baisse de moitié (cyclique violente) ne déclenche PAS la troncature",
+      note_v4._apres_rupture([(2022, 100), (2023, 50), (2024, 60), (2025, 80)])[0][0] == 2022)
+check("tronquée sous trois points, la croissance est retirée, pas devinée",
+      _tcam(note_v4._apres_rupture([(2023, 900), (2024, 100), (2025, 130)]))
+      == (None, None))
+# Le BPA n'est JAMAIS tronqué : Broadcom passe de 2,84 à 0,64 en 2019 par pur
+# amortissement d'acquisitions, sans rien céder — la règle du périmètre ne vaut
+# que pour le chiffre d'affaires.
+check("la règle du périmètre ne s'applique pas au bénéfice par action",
+      _tcam([(2016, -4.86), (2017, 0.402), (2018, 2.844), (2019, 0.643),
+             (2020, 0.633), (2021, 1.5), (2022, 2.653), (2023, 3.298),
+             (2024, 1.23), (2025, 4.77)])[1] == 8)
+# La régularité lit la MÊME série tronquée : compter une « année de recul » qui
+# n'est qu'un changement de définition punirait deux fois la même illusion.
+# Ici il ne reste que trois points : le critère est retiré avec son motif,
+# jamais rempli par une valeur commode.
+_c_adyen = calcule_note({"an": [{"fin": f"{y}-12-31", "ca": c, "rn": 10, "eps": 1.0}
+                                for y, c in ADYEN],
+                         "prix": 100.0, "banque": False, "meme_devise": True})["criteres"]
+check("le taux de croissance publié devient vrai (+19,2 % au lieu de −33,3 %)",
+      next(c for c in _c_adyen if c["id"] == "ca")["valeur"] == 19.2)
+check("la régularité lit la même série, et se retire si elle devient trop courte",
+      next(c["motif"] for c in _c_adyen if c["id"] == "regularite") == "historique trop court")
+
 print("\n— Contexte témoin complet (compounder) —")
 n = calcule_note(CTX_TEMOIN)
 check("total dans [0,100]", 0 <= n["total"] <= 100, str(n["total"]))
@@ -96,6 +140,20 @@ check("plus AUCUN critère de qualité retiré : tout est substitué",
       all(c["pts"] is not None for c in nb["criteres"] if c["bloc"] == "q"),
       str([(c["id"], c["motif"]) for c in nb["criteres"]
            if c["bloc"] == "q" and c["pts"] is None]))
+# La conversion vient d'un champ CALCULÉ par le screener (flux disponible et
+# résultat net du même exercice), pas du quotient de deux marges glissantes de
+# provenances différentes — c'est ce quotient qui donnait 12 % à Microsoft.
+c_conv = next(c for c in calcule_note(dict(CTX_TEMOIN, conversion_pct=78.0))["criteres"]
+              if c["id"] == "conversion")
+check("la conversion calculée prime sur le quotient des marges",
+      c_conv["valeur"] == 78 and "78 €" in c_conv["phrase"], str(c_conv))
+c_repli = next(c for c in calcule_note(CTX_TEMOIN)["criteres"] if c["id"] == "conversion")
+check("sans conversion calculée, le repli marge FCF / marge nette tient encore",
+      c_repli["valeur"] == round(22.0 / 24.0 * 100), str(c_repli["valeur"]))
+c_abs = next(c for c in calcule_note(dict(CTX_TEMOIN, fcf_margin_pct=None))["criteres"]
+             if c["id"] == "conversion")
+check("ni l'un ni l'autre : le critère est retiré avec son motif",
+      c_abs["pts"] is None and c_abs["motif"], str(c_abs))
 check("le rendement des actifs remplace la conversion en cash",
       any(c["id"] == "rendement_actifs" for c in nb["criteres"])
       and not any(c["id"] == "conversion" for c in nb["criteres"]))
