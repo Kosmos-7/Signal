@@ -398,6 +398,15 @@ check("garde-fou de croissance : le plafond de trimestres borne, les plus récen
 # exactement dessus — elles étaient tronquées par nous, pas par la source.
 check("les deux points de troncature partagent le même plafond nommé",
       screener.fusionner_fonda.__defaults__[0] == screener.edgar.MAX_EXERCICES)
+# 07/08 : la chaîne a TROIS troncatures (construire_fonda, completer_fonda,
+# fusionner_fonda) et la plus étroite gagne. `construire_fonda` gardait 12 et 20
+# en dur après le relèvement des constantes — 44 fiches sont restées bloquées à
+# EXACTEMENT 12 exercices, toutes éligibles EDGAR, alors que les deux
+# troncatures suivantes étaient déjà larges. Aucune ne doit écrire sa borne.
+check("aucune troncature ne code sa borne en dur : toutes lisent les constantes",
+      screener.edgar.construire_fonda.__defaults__ ==
+      (screener.edgar.MAX_EXERCICES, screener.edgar.MAX_TRIMESTRES),
+      str(screener.edgar.construire_fonda.__defaults__))
 GROS_AN = {"devise": "USD", "tr": [],
            "an": [{"fin": f"{2000+i}-12-31", "ca": i} for i in range(26)]}
 fa = screener.fusionner_fonda(GROS_AN, {"devise": "USD", "an": [], "tr": []})

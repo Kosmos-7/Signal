@@ -172,12 +172,21 @@ def fusion_series(series_liste):
     return out
 
 
-def construire_fonda(ca_fr, rn_fr, eps_fr, max_an=12, max_tr=20):
+def construire_fonda(ca_fr, rn_fr, eps_fr, max_an=MAX_EXERCICES,
+                     max_tr=MAX_TRIMESTRES):
     """Bloc {an, tr} au format fonda (millions entiers, src:"edgar").
 
     Entrées : dicts {frame: (fin, val)}. Annuels = frames CYxxxx ; trimestres =
     frames CYxxxxQn, complétés du Q4 dérivé quand l'exercice et ses trois
     premiers trimestres sont connus. Le BPA n'apparaît qu'en annuel.
+
+    LES BORNES VIENNENT DES CONSTANTES, jamais de valeurs écrites ici. Cette
+    fonction est la PREMIÈRE des trois troncatures de la chaîne (celle-ci,
+    `completer_fonda`, `fusionner_fonda`) : elle coupe avant que quiconque ait
+    vu les données. Elle gardait 12 et 20 en dur après le relèvement des
+    constantes à 20 et 24 — 44 fiches sont restées bloquées à EXACTEMENT
+    12 exercices, toutes éligibles EDGAR, alors que les deux troncatures
+    suivantes étaient déjà larges. La plus étroite gagne toujours.
     """
     def cast(v):
         return int(round(v / 1e6))

@@ -135,13 +135,26 @@ champs, et le run ne pouvait pas échouer sur une donnée absente.
   liste explicite : le prochain champ ajouté à `fonda` sans être traité dans la
   fusion fera échouer les tests au lieu de disparaître en silence.
 
-**Reste ouvert** : 44 fiches plafonnent toujours à exactement 12 exercices, et
-toutes sont éligibles EDGAR. Le plafond est pourtant passé à 20 et certaines
-fiches atteignent 13 à 16 — donc la borne n'est plus le facteur limitant, et
-l'affirmation de l'entrée précédente (« le greffe nous rendait déjà des
-exercices jusqu'à 2008 ») n'est pas confirmée par les données publiées. À
-instruire séparément : le conteneur de développement n'atteint pas
-`data.sec.gov`, seul le runner peut le vérifier.
+### La troncature oubliée : il y en avait trois, pas deux
+
+Symptôme relevé sur le même run : **44 fiches plafonnaient toujours à
+EXACTEMENT 12 exercices, toutes éligibles EDGAR**, alors que le plafond était
+passé à 20 et que d'autres fiches atteignaient 13 à 16.
+
+L'entrée « on se tronquait soi-même » avait nommé DEUX points de troncature et
+les avait branchés sur les constantes. Il y en avait un troisième, en amont des
+deux autres : `construire_fonda()`, qui transforme les faits du greffe en bloc
+`fonda`, gardait `max_an=12, max_tr=20` écrits en dur dans sa signature. Elle
+coupe **avant** que quiconque ait vu les données — et dans une chaîne de
+troncatures, la plus étroite gagne toujours. Relever les deux suivantes ne
+pouvait rien changer.
+
+- Les trois bornes lisent désormais `MAX_EXERCICES` / `MAX_TRIMESTRES`.
+- Un test compare la signature aux constantes, pour que la prochaine borne
+  écrite en dur échoue au lieu de brider silencieusement l'historique.
+- Trouvé sans réseau, en relisant la chaîne d'appel : le conteneur de
+  développement n'atteint pas `data.sec.gov` (proxy), et attendre un run pour
+  diagnostiquer aurait coûté une demi-heure de plus.
 
 ### On se tronquait soi-même : le plafond d'historique passe de 12 à 20 exercices
 
