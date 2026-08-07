@@ -2189,6 +2189,12 @@ def score_ticker(ticker, vix=None):
         breakdown["debt_eq_pct"] = (round(debt_eq_raw)
                                     if _n(debt_eq_raw) is not None else None)
         breakdown["fonda_source"] = fonda_source or None
+        # DEVISE DE COTATION, publiée à côté de la devise comptable qui vit
+        # dans `fonda.devise`. Sans elle, impossible de vérifier après coup
+        # qu'un bénéfice par action projeté n'a pas glissé d'une monnaie à
+        # l'autre — le défaut TSM (331 TWD publiés, 16,8 « projetés » en
+        # dollars) ne se détecte QUE si l'on sait que les deux diffèrent.
+        breakdown["devise_cotation"] = info.get("currency") or None
         # Publiée pour que la fiche puisse montrer d'où sort la conversion, et
         # pour qu'un audit puisse la recalculer sans relancer le screener.
         breakdown["conversion_pct"] = (round(conversion_pct)

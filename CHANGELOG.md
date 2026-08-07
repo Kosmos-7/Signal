@@ -5,6 +5,85 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Audit de la grille : seize points sur cent ne notaient rien
+
+Demandé par le propriétaire — « ce que l'on calcule, comment, et pourquoi on
+l'affiche ; fiable, pérenne, simple et utile ». La mesure d'abord, sur les
+94 fiches publiées : pour chaque critère, quelle part de l'univers touche le
+plancher ou le plafond, et quelle part du CLASSEMENT il explique réellement
+(covariance avec le total rapportée à la variance du total).
+
+Le verdict est net. **Trois critères pesaient NÉGATIVEMENT dans le classement**,
+c'est-à-dire qu'ils poussaient vers le bas les titres que le reste de la grille
+poussait vers le haut, tout en étant quasi constants :
+
+| critère | part du barème | notait réellement | part du classement |
+|---|---|---|---|
+| tendance | 6 % | 18 % des titres | **−3,1 %** |
+| attendu | 7 % | 11 % des titres | **−1,2 %** |
+| rsi | 3 % | 19 % des titres | **−0,5 %** |
+
+**Le RSI quitte la note.** Sa cloche 35-65 couvre jusqu'au huitième décile d'un
+univers qui va de 35 à 78 : 82 % des titres touchaient le maximum. Sa dispersion
+rapportée à son maximum était la plus faible de la grille (0,17). Et un
+oscillateur à quatorze jours n'a pas de pouvoir prédictif établi sur l'horizon
+de ce portefeuille, qui se juge en mois. Il reste AFFICHÉ avec ses repères
+30/70 — c'est une information de marché légitime, elle n'entre simplement pas
+dans un score qu'on prétend défendable. Le momentum reste sur 15 : tendance 7,
+position 8 (le meilleur critère du bloc hérite du point libéré).
+
+**Cinq rampes finissaient sous la médiane de l'univers.** Une rampe dont la
+borne haute est dépassée par le titre médian ne classe plus la moitié du
+peloton — elle distribue. Les seuils gardent leur sens économique, ils couvrent
+désormais la population qu'ils sont censés trier :
+
+| critère | avant | après | notait → note |
+|---|---|---|---|
+| tendance (écart MM21/MM200) | ±5 % | **±15 %** | 18 % → 53 % |
+| attendu (croissance estimée) | 0-20 % | **0-40 %** | 11 % → 57 % |
+| roe | 8-20 % | **8-30 %** | 31 % → 53 % |
+| conversion en cash | 40-100 % | **40-120 %** | 33 % → 51 % |
+| histoire (PER vs son passé) | 1,3→0,7 | **2,0→0,7** | 39 % → 56 % |
+
+Sur `histoire`, le défaut était l'inverse des autres : 46 % de l'univers était
+à ZÉRO, la rampe ne distinguant plus « un peu cher » (1,35 fois son propre
+multiple historique) de « absurdement cher » (18,4 fois).
+
+Effet mesuré sur le classement publié : déplacement médian de 4 places, neuvième
+décile à 12, maximum 21 sur 94 titres. La dispersion des scores est inchangée
+(σ = 13) — ce n'est pas elle qu'on cherchait à gonfler, c'est la part du score
+qui mesure quelque chose.
+
+**Constaté, non corrigé** — ce sont des choix de conception, pas des défauts :
+la croissance du bénéfice est comptée deux fois (critère `bpa` et, à l'intérieur
+du PEG, la même croissance : leurs points corrèlent à +0,70) ; `tendance` et
+`position` regardent le même axe à deux horizons (+0,63 sur les valeurs) ;
+`constance` est binaire par nature et c'est voulu. Les corrélations ENTRE BLOCS
+restent basses (+0,06 à +0,27), ce qui est le signe qu'une partition MECE tient.
+
+### Une suite qui teste les DONNÉES, pas seulement le code
+
+Les quatre suites existantes passaient à 100 % pendant que le site affichait
+« sur 100 € de bénéfice, 12 € finissent en cash » pour Microsoft et un bénéfice
+taïwanais projeté en dollars pour TSM. Elles testaient le code sur des données
+inventées ; aucun de ces défauts n'était un bug de logique, c'étaient des BASES
+fausses, et une base fausse produit un code qui marche parfaitement sur un
+chiffre qui ne veut rien dire.
+
+`tests/test_donnees.py` lit ce qui est RÉELLEMENT publié et vérifie que les
+grandeurs se recollent entre elles. Deux sévérités à dessein : les invariants
+STRUCTURELS sont des impossibilités logiques (un seul cas fait échouer), les
+SENTINELLES sont des bandes de vraisemblance qu'une entreprise réelle a le droit
+de franchir (on n'échoue qu'au-delà d'un nombre de cas — un titre est une
+exception, quinze sont une régression).
+
+Elle a trouvé un défaut à son premier passage : la garde sur les devises ne
+pouvait rien vérifier, faute de publier la devise de COTATION à côté de la
+devise comptable. Le champ est ajouté, et la garde porte désormais une
+**garde anti-sommeil** : un test qui passe sans rien regarder est pire qu'un
+test absent, parce qu'il rassure.
+
+
 ## [4.1.0] — 2026-08-06
 
 ### Les métiers de bilan cessent d'être notés sur moins de critères

@@ -184,7 +184,11 @@ def calcule_note(ctx):
     if roe is not None and (ctx.get("debt_eq") is None or ctx["debt_eq"] <= 200) \
             and not banque:
         r = roe * 100
-        ajoute("q", "roe", 9, rampe(r, 8, 20, 9), round(r, 1),
+        # Rampe portée de 8-20 à 8-30 : mesurée sur l'univers publié, la borne
+        # haute tombait sous le 40e centile (médiane 23,2 %) et 60 % des titres
+        # touchaient le maximum. 30 % de rendement des capitaux propres reste
+        # une franchise exceptionnelle ; 8 % couvre à peine le coût du capital.
+        ajoute("q", "roe", 9, rampe(r, 8, 30, 9), round(r, 1),
                f"Chaque 100 € de capitaux propres rapportent {_fr(r)} € par an")
     elif banque and roe is not None:
         r = roe * 100
@@ -193,7 +197,7 @@ def calcule_note(ctx):
     elif roe is not None:
         # levier > 200 % : le ROE est dopé, on le tempère au lieu de le croire
         r = roe * 100 / 2
-        ajoute("q", "roe", 9, rampe(r, 8, 20, 9), round(roe * 100, 1),
+        ajoute("q", "roe", 9, rampe(r, 8, 30, 9), round(roe * 100, 1),
                f"Rendement des capitaux propres {_fr(roe*100)} %, tempéré : "
                f"le levier dépasse 200 % des fonds propres")
     else:
@@ -231,7 +235,13 @@ def calcule_note(ctx):
         if c is None and fm is not None and nm and nm > 0:
             c = fm / nm * 100
         if c is not None:
-            ajoute("q", "conversion", 7, rampe(min(c, 120), 40, 100, 7), round(c),
+            # Borne haute portée de 100 à 120 % : la médiane de l'univers est à
+            # 107 %, donc l'ancienne rampe s'arrêtait AVANT le titre médian et
+            # 55 % des sociétés touchaient le plafond. Au-delà de 120 % la
+            # valeur reste bridée : convertir plus que son bénéfice comptable
+            # traduit un amortissement supérieur aux investissements ou une
+            # reprise de besoin en fonds de roulement, pas une qualité de plus.
+            ajoute("q", "conversion", 7, rampe(min(c, 120), 40, 120, 7), round(c),
                    f"Sur 100 € de bénéfice comptable, {_fr(min(c,120),0)} € "
                    f"finissent en cash réel")
         else:
@@ -316,7 +326,12 @@ def calcule_note(ctx):
             if y1 > epss[-1][0]:
                 g_att = ((e1 / epss[-1][1]) ** (1 / (y1 - epss[-1][0])) - 1) * 100
     if g_att is not None:
-        ajoute("c", "attendu", 7, rampe(g_att, 0, 20, 7), round(g_att, 1),
+        # Rampe portée de 0-20 à 0-40 : mesurée sur l'univers publié, l'ancienne
+        # ne NOTAIT que 11 % des titres — 86 % butaient au plafond, la médiane
+        # des attentes étant à 33,8 % et le neuvième décile à 122 %. Un critère
+        # qui donne le maximum à six titres sur sept ne classe plus rien.
+        # 40 % par an reste une attente exceptionnelle ; 0 % est la stagnation.
+        ajoute("c", "attendu", 7, rampe(g_att, 0, 40, 7), round(g_att, 1),
                f"Les analystes attendent {_fr(g_att)} % de croissance annuelle "
                f"du bénéfice (estimation, pas une publication)")
     else:
@@ -331,7 +346,12 @@ def calcule_note(ctx):
     if len(pers) >= 3 and tpe and tpe > 0:
         med = statistics.median(pers)
         ratio = tpe / med
-        ajoute("v", "histoire", 8, rampe(ratio, 1.3, 0.7, 8), round(ratio, 2),
+        # Borne basse portée de 1,3 à 2,0 : le titre MÉDIAN de l'univers se paie
+        # 1,3 fois son propre multiple historique — l'ancienne rampe mettait
+        # donc zéro à toute la moitié supérieure et ne distinguait plus « un peu
+        # cher » de « absurdement cher » (le maximum relevé est 18,4 fois).
+        # 2 fois son propre passé reste une cherté franche.
+        ajoute("v", "histoire", 8, rampe(ratio, 2.0, 0.7, 8), round(ratio, 2),
                f"Payée {_fr(tpe)}× ses bénéfices, contre {_fr(med)}× en médiane "
                f"sur {len(pers)} exercices")
     else:
@@ -393,30 +413,44 @@ def calcule_note(ctx):
         ajoute("v", "rdt_cash", 5, None, None, None, "FCF non publié")
 
     # ═ MOMENTUM /15 — cours ÷ cours ═
+    #
+    # DEUX CRITÈRES, PLUS TROIS. Le RSI en a été retiré le 07/08/2026 après
+    # mesure sur l'univers publié, et pour quatre raisons qui vont dans le même
+    # sens : il donnait le maximum à 82 % des titres (sa cloche 35-65 couvre
+    # jusqu'au huitième décile d'un univers qui va de 35 à 78) ; sa dispersion
+    # rapportée à son maximum était la plus faible de toute la grille (0,17) ;
+    # sa contribution au CLASSEMENT était NÉGATIVE (−0,5 %) ; et un oscillateur
+    # à quatorze jours n'a pas de pouvoir prédictif établi sur l'horizon de ce
+    # portefeuille, qui se juge en mois. Trois points distribués à presque tout
+    # le monde ne notaient rien et diluaient le reste.
+    #
+    # Il reste AFFICHÉ sur la fiche, avec ses repères 30/70 : c'est une
+    # information de marché légitime. Elle n'entre simplement pas dans un score
+    # qu'on prétend défendable.
     em = ctx.get("ecart_mm_pct")
     if em is not None:
-        ajoute("m", "tendance", 6, rampe(em, -5, 5, 6), round(em, 1),
+        # Rampe portée de ±5 à ±15 : ±5 % d'écart entre deux moyennes mobiles
+        # est du bruit, pas une tendance. L'ancienne bornait 82 % de l'univers
+        # à l'une de ses deux extrémités et n'en notait que 18 %. À ±15 %, plus
+        # de la moitié des titres est réellement classée, et le seuil garde un
+        # sens : un cours 15 % au-dessus de sa moyenne longue est en tendance
+        # franche, 15 % en dessous aussi, dans l'autre sens.
+        ajoute("m", "tendance", 7, rampe(em, -15, 15, 7), round(em, 1),
                f"Moyenne 21 jours à {_fr(em)} % de la moyenne 200 jours")
     else:
-        ajoute("m", "tendance", 6, None, None, None, "tendance non calculable")
+        ajoute("m", "tendance", 7, None, None, None, "tendance non calculable")
 
     z = ctx.get("z")
     if z is not None:
         # cloche SYMÉTRIQUE : plein entre −1,5σ et +1σ, nul à ±3σ — l'excès
         # d'étirement pénalise dans les deux sens, l'asymétrie pro-momentum
-        # mesurée en v3 disparaît.
-        ajoute("m", "position", 6, cloche(z, -3, -1.5, 1, 3, 6), round(z, 2),
+        # mesurée en v3 disparaît. C'est le meilleur critère du bloc (il classe
+        # réellement la moitié de l'univers et pèse 8,6 % du classement) : il
+        # hérite du point libéré par le RSI.
+        ajoute("m", "position", 8, cloche(z, -3, -1.5, 1, 3, 8), round(z, 2),
                f"À {_fr(z)}σ de sa tendance décennale")
     else:
-        ajoute("m", "position", 6, None, None, None, "régression indisponible")
-
-    rsi = ctx.get("rsi")
-    if rsi is not None:
-        ajoute("m", "rsi", 3, cloche(rsi, 20, 35, 65, 80, 3), round(rsi),
-               f"RSI {_fr(rsi,0)}, "
-               + ("zone neutre" if 35 <= rsi <= 65 else "zone tendue"))
-    else:
-        ajoute("m", "rsi", 3, None, None, None, "RSI indisponible")
+        ajoute("m", "position", 8, None, None, None, "régression indisponible")
 
     # ═ Agrégation : renormalisation par bloc, puis sur les blocs notés ═
     #

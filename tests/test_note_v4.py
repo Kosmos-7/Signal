@@ -116,7 +116,10 @@ n = calcule_note(CTX_TEMOIN)
 check("total dans [0,100]", 0 <= n["total"] <= 100, str(n["total"]))
 check("compounder bien noté (≥70)", n["total"] >= 70, str(n["total"]))
 check("couverture pleine", n["couverture"] == 100, str(n["couverture"]))
-check("16 critères émis", len(n["criteres"]) == 16, str(len(n["criteres"])))
+check("15 critères émis (le RSI a quitté la note le 07/08)",
+      len(n["criteres"]) == 15, str(len(n["criteres"])))
+check("le RSI n'est plus un critère noté",
+      not any(c["id"] == "rsi" for c in n["criteres"]))
 check("4 blocs, tous notés",
       set(n["blocs"]) == {"q", "c", "v", "m"} and
       all(v["pts"] is not None for v in n["blocs"].values()))
@@ -305,8 +308,8 @@ check("mais la constance note (4 exercices rn connus)",
 # ROE dopé au levier : tempéré, pas cru
 ctx_lev = dict(CTX_TEMOIN, roe=0.35, debt_eq=320.0)
 c_roe = next(c for c in calcule_note(ctx_lev)["criteres"] if c["id"] == "roe")
-check("levier >200 % : ROE tempéré (17,5 % effectif sur rampe 8-20)",
-      c_roe["pts"] == rampe(17.5, 8, 20, 9), str(c_roe))
+check("levier >200 % : ROE tempéré (17,5 % effectif sur rampe 8-30)",
+      c_roe["pts"] == rampe(17.5, 8, 30, 9), str(c_roe))
 check("mais la valeur affichée reste le ROE réel", c_roe["valeur"] == 35.0)
 
 # Devise comptable différente (TSM) : pas d'estimé, motif explicite
@@ -336,7 +339,8 @@ check("sans estimation, le PEG utilise la croissance démontrée",
 print("\n— Renormalisation entre blocs (données minimales) —")
 # Seulement du momentum PLEIN (écart ≥+5 % = haut de rampe) : Q, C, V vides
 # → total = momentum renormalisé sur 100
-nm = calcule_note({"z": 0.0, "rsi": 50.0, "ecart_mm_pct": 6.0})
+# ±15 depuis le 07/08 : il faut un vrai écart de tendance pour le plein.
+nm = calcule_note({"z": 0.0, "rsi": 50.0, "ecart_mm_pct": 20.0})
 check("blocs sans donnée → pts None",
       all(nm["blocs"][b]["pts"] is None for b in ("q", "c", "v")))
 check("total renormalisé sur les blocs restants (momentum plein → 100)",
@@ -352,8 +356,49 @@ haut = calcule_note(dict(CTX_TEMOIN, z=2.0))
 bas = calcule_note(dict(CTX_TEMOIN, z=-2.25))
 pz_haut = next(c for c in haut["criteres"] if c["id"] == "position")["pts"]
 pz_bas = next(c for c in bas["criteres"] if c["id"] == "position")["pts"]
-check("étirement haussier pénalisé (z=+2 → 3/6)", pz_haut == 3.0, str(pz_haut))
-check("étirement baissier pénalisé (z=−2,25 → 3/6)", pz_bas == 3.0, str(pz_bas))
+check("étirement haussier pénalisé (z=+2 → 4/8)", pz_haut == 4.0, str(pz_haut))
+check("étirement baissier pénalisé (z=−2,25 → 4/8)", pz_bas == 4.0, str(pz_bas))
+
+# ── Calibration mesurée sur l'univers publié (audit du 07/08) ──────────────
+print("\n— Les rampes notent-elles vraiment, ou distribuent-elles ? —")
+# Un critère dont la rampe est plus étroite que la dispersion de l'univers
+# cesse de classer et devient un interrupteur. Ces trois-là ne notaient que
+# 11 à 19 % des titres ; les seuils sont désormais ceux de la population.
+_p = lambda ctx, cid: next(c["pts"] for c in calcule_note(ctx)["criteres"]
+                           if c["id"] == cid)
+check("tendance : la médiane de l'univers (+10 %) est NOTÉE, pas plafonnée",
+      0 < _p(dict(CTX_TEMOIN, ecart_mm_pct=10.0), "tendance") < 7,
+      str(_p(dict(CTX_TEMOIN, ecart_mm_pct=10.0), "tendance")))
+check("tendance : ±15 % reste le plein et le zéro",
+      _p(dict(CTX_TEMOIN, ecart_mm_pct=15.0), "tendance") == 7.0
+      and _p(dict(CTX_TEMOIN, ecart_mm_pct=-15.0), "tendance") == 0.0)
+# BPA publié 7,79 ; PER 28,7 sur un cours de 300 ⇒ BPA estimé 10,45, soit
+# +34 % — exactement la médiane des attentes relevée sur l'univers publié.
+_att = _p(dict(CTX_TEMOIN, pe_prev=[{"exercice": 2026, "per": 28.7}], prix=300.0),
+          "attendu")
+check("attendu : la médiane des attentes (+34 %) est NOTÉE, pas plafonnée",
+      0 < _att < 7, str(_att))
+check("le momentum reste sur 15 après le retrait du RSI",
+      calcule_note(CTX_TEMOIN)["blocs"]["m"]["max"] == 15)
+# Les trois autres rampes dont la borne haute finissait SOUS la médiane de
+# l'univers publié : un critère qui donne son maximum au titre médian ne classe
+# plus la moitié du peloton.
+check("roe : la médiane de l'univers (23 %) est NOTÉE, pas plafonnée",
+      0 < _p(dict(CTX_TEMOIN, roe=0.232), "roe") < 9,
+      str(_p(dict(CTX_TEMOIN, roe=0.232), "roe")))
+check("conversion : la médiane (107 %) est NOTÉE, pas plafonnée",
+      0 < _p(dict(CTX_TEMOIN, conversion_pct=107.0), "conversion") < 7,
+      str(_p(dict(CTX_TEMOIN, conversion_pct=107.0), "conversion")))
+check("conversion : au-delà de 120 % la valeur reste bridée",
+      _p(dict(CTX_TEMOIN, conversion_pct=200.0), "conversion")
+      == _p(dict(CTX_TEMOIN, conversion_pct=120.0), "conversion"))
+_an_h = [{"fin": f"{y}-12-31", "ca": 100, "rn": 20, "eps": 2.0, "per": 20.0}
+         for y in range(2016, 2026)]
+check("histoire : payer 1,3 fois son propre passé n'est plus un zéro",
+      _p(dict(CTX_TEMOIN, an=_an_h, trailing_pe=26.0), "histoire") > 0,
+      str(_p(dict(CTX_TEMOIN, an=_an_h, trailing_pe=26.0), "histoire")))
+check("histoire : 2 fois son propre passé reste un zéro",
+      _p(dict(CTX_TEMOIN, an=_an_h, trailing_pe=40.0), "histoire") == 0.0)
 
 print(f"\n{len(ok)}/{len(ok) + len(ko)} tests passés")
 if ko:
