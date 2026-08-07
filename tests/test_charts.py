@@ -22,15 +22,11 @@ RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, RACINE)
 
 # ── Bouchons : screener importe des modules absents de l'env de test ────────
-for nom, attrs in [("ta", {}), ("ta.momentum", {"RSIIndicator": object}),
-                   ("yfinance", {"Ticker": object}),
-                   ("requests", {"get": lambda *a, **k: None}),
-                   ("pandas", {"Series": object, "DataFrame": object})]:
-    m = types.ModuleType(nom)
-    for k, v in attrs.items():
-        setattr(m, k, v)
-    sys.modules.setdefault(nom, m)
-sys.modules["ta"].momentum = sys.modules["ta.momentum"]
+# La liste est UNIQUE (tests/_bouchons.py) : recopiée, elle divergeait — c'est
+# ainsi que `numpy` a manqué aux deux suites sans que rien ne le signale.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _bouchons              # noqa: E402
+_bouchons.poser()
 
 import screener                  # noqa: E402
 
