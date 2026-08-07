@@ -244,6 +244,43 @@ for lib, cle, lo, hi, tol in BANDES:
             and not (lo <= (d.get("breakdown") or {})[cle] <= hi)]
     sentinelle(f"{lib} dans [{lo}, {hi}]", hors, tol, N)
 
+# RUPTURES DE DÉFINITION DANS LA SÉRIE DE CA. Le préambule de ce fichier cite
+# « chiffre d'affaires en croissance de −33,3 % par an » pour Adyen ; rien ici
+# ne le vérifiait, et la phrase est restée publiée. Le défaut n'est PAS que le
+# chiffre baisse — une entreprise réelle recule (Booking en 2020, ASML en 2009,
+# Micron en 2023, et ces trois-là sont vraies). Le défaut est le CHANGEMENT DE
+# DÉFINITION au milieu de la série : Adyen publie son volume traité en 2022
+# (8 936) puis son revenu net à partir de 2023 (1 863), Western Digital publie
+# un CA retraité des activités cédées à partir de 2023 (6 255) mais un résultat
+# net qui, lui, ne l'est pas. Dans les deux cas nous racontons comme une
+# trajectoire d'entreprise ce qui n'est qu'un changement de ligne comptable.
+#
+# La signature mesurable d'une rupture, et non d'un mauvais exercice : la chute
+# n'est PAS suivie d'un retour. Un creux cyclique remonte vers son niveau
+# d'avant (Micron 30,8 → 15,5 → 25,1 → 37,4) ; une redéfinition ne remonte
+# jamais (Adyen 8 936 → 1 863 → 2 226 → 2 647, la suite entière vit sous la
+# moitié du point de départ). C'est ce test-là, et il n'accuse aucun des cas
+# légitimes.
+print("\n— Le CA garde-t-il la même définition d'un bout à l'autre ? —")
+ruptures = []
+for _t, _d in FICHES.items():
+    _an = [r for r in ((_d.get("fonda") or {}).get("an") or []) if r.get("ca")]
+    for _i in range(len(_an) - 1):
+        _av, _ap = _an[_i]["ca"], _an[_i + 1]["ca"]
+        if _av <= 0 or _ap / _av > 0.5:
+            continue
+        # tous les exercices suivants restent sous la moitié : pas un creux.
+        if all(r["ca"] < _av * 0.5 for r in _an[_i + 1:]):
+            ruptures.append(f"{_t}:{_an[_i]['fin'][:4]}→{_an[_i+1]['fin'][:4]}"
+                            f" {_av}→{_ap}")
+            break
+# Tolérance 1 : Adyen est le cas connu, non corrigé (il faudrait une source qui
+# distingue volume traité et revenu net, Yahoo ne le fait pas). Western Digital
+# est un cas LIMITE que la règle ne réclame pas — son CA remonte à 9 520 en 2025
+# contre 18 793 en 2022, soit 124 M au-dessus du seuil de moitié. Le retraitement
+# y est réel mais partiellement réversible, et on préfère ne pas l'accuser.
+sentinelle("séries de CA sans rupture de définition", ruptures, 1, N)
+
 # Un critère mesuré pour presque personne ne mesure rien : la couverture d'un
 # critère est elle-même une donnée à surveiller.
 print("\n— Couverture des critères : un critère rarement mesuré est un critère mort —")

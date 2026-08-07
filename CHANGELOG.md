@@ -5,6 +5,76 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Les légendes de photo redeviennent lisibles
+
+Le même objet — la légende sous une illustration — sortait en **sept tailles
+différentes** selon la page : de 0,40 rem à 0,58 rem, soit **6,9 px** au plus
+petit. La ligne de crédit, celle qui porte l'obligation CC-BY, était la plus
+petite de toutes.
+
+Toutes ramenées à deux valeurs : 0,62 rem pour la légende, 0,55 rem pour le
+crédit — mesuré après coup à 9,9 px et 8,8 px, sur bureau comme sur mobile.
+Balayage de contrôle : 93 fiches × 3 largeurs, aucun débordement, aucun texte
+rogné.
+
+### Le bandeau est enfin le même objet sur les quatre onglets
+
+signal.css s'ouvre sur « une seule source de vérité ». Ce n'était pas vrai.
+Mesuré au navigateur sur les quatre onglets :
+
+| | Watchlists | Actualités | Apprendre | Portefeuille |
+|---|---|---|---|---|
+| hauteur du bandeau | 64 px | 69 px | 72 px | 72 px |
+| logo | 28 px | 30 px | 30 px | 30 px |
+| nom de la marque | 1,3 rem | 1,3 rem | 1,4 rem | 1,4 rem |
+| nav sur mobile | 10,6 px | 10,6 px | 11,5 px | 11,5 px |
+| hauteur d'un lien de nav, mobile | **12 px** | 17 px | 28 px | 28 px |
+
+Le logo changeait donc de taille et le bandeau sautait de 8 px à chaque
+changement d'onglet. Et sur mobile, les liens de navigation de deux onglets
+faisaient **12 et 17 px de haut** : la police descendait avec la largeur, mais
+rien ne tenait la cible tactile. C'est le rembourrage qui fait la cible, pas la
+police — il est désormais posé à tous les paliers, et le plancher de taille
+remonte de 0,66 à 0,72 rem.
+
+Deux pages recopiaient localement `.brand`, `.brand-name`, `nav` et `nav a` ;
+ces copies sont supprimées, les valeurs remontées dans signal.css. Le bandeau
+mesure maintenant **72 px partout** sur bureau, **57 px partout** sur mobile,
+avec des liens de **28 px** sur les quatre onglets.
+
+Trois autres écarts trouvés en comparant, invisibles page par page :
+
+- **Actualités déclarait `font-family:'Inter'` sans jamais charger la police.**
+  Seul onglet rendu dans la police système depuis sa création.
+- **Watchlists chargeait Inter sans la graisse 700 ni l'italique**, qu'elle
+  utilise pourtant seize fois : le navigateur fabriquait un faux gras.
+- **Trois onglets sur quatre n'avaient pas de favicon**, et la page d'accueil
+  — l'URL la plus partagée — n'avait pas de `meta description`. Le pied de page
+  d'Actualités n'avait ni la classe commune (donc 16 px au lieu de 11,8) ni le
+  badge « Bêta ».
+
+`tests/test_chrome.py` (27 vérifications) verrouille l'ensemble : aucune page ne
+peut redéfinir le chrome partagé, les quatre doivent porter le même attirail, la
+même requête de police, le même ordre de nav, la même mention légale.
+
+### Une rupture de définition n'est pas une trajectoire
+
+Le préambule de `tests/test_donnees.py` cite depuis sa création
+« chiffre d'affaires en croissance de −33,3 % par an » pour Adyen. Rien ne le
+vérifiait, et la phrase est **toujours publiée sur la fiche**.
+
+Le défaut n'est pas que le chiffre baisse — Booking en 2020, ASML en 2009,
+Micron en 2023 reculent pour de vrai. C'est un **changement de ligne comptable**
+au milieu de la série : Adyen publie son volume traité en 2022 (8 936) puis son
+revenu net à partir de 2023 (1 863). Nous racontons ce saut comme une
+trajectoire d'entreprise.
+
+La signature mesurable, qui n'accuse aucun des cas légitimes : la chute n'est
+pas suivie d'un retour. Un creux cyclique remonte vers son niveau d'avant
+(Micron 30,8 → 15,5 → 25,1 → 37,4) ; une redéfinition ne remonte jamais (Adyen
+8 936 → 1 863 → 2 226 → 2 647). Le test est en place, tolérance 1 — le cas
+connu passe, un deuxième fait échouer.
+
 ### Le PER « aujourd'hui » est retiré — il faussait vraiment
 
 « Je trouve que ça fausse tout. » C'est exact, et au sens le plus concret.

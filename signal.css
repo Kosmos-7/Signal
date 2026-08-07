@@ -29,19 +29,32 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,Bl
 .frame i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}.frame i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
 
 /* ── Header / nav ── (transparent au repos, se givre au scroll — comportement partagé, piloté par signal-fx.js) */
-header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem;background:transparent;border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s}
+/* line-height posé ici et pas hérité du body : trois pages fixent 1.6 sur
+   body, la quatrième laisse `normal`, et le bandeau sortait 6 px plus court
+   sur celle-là. Le chrome ne doit pas dépendre du réglage de texte de la page
+   qu'il coiffe. */
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem;line-height:1.6;background:transparent;border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s}
 header.scrolled{background:rgba(8,11,20,.62);border-bottom-color:var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+/* Marque et nav : une seule définition pour les quatre onglets. Avant, deux
+   pages surchargeaient localement ces règles et le bandeau changeait de
+   taille en passant d'un onglet à l'autre — logo 28 px ici, 30 px là,
+   en-tête 64 px sur Watchlists contre 72 px sur Apprendre. La taille du SVG
+   est imposée en CSS, sinon l'attribut width= du balisage décide et il
+   diffère d'un fichier à l'autre. */
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
 .brand-icon{flex-shrink:0;display:flex}
-.brand-name{font-family:var(--serif);font-size:1.3rem;letter-spacing:-.5px;color:var(--text)}
-nav{display:flex;gap:1.4rem}
-nav a{font-size:.82rem;color:var(--text3);text-decoration:none;transition:color .15s}
+.brand-icon svg{width:30px;height:30px}
+.brand-name{font-family:var(--serif);font-size:1.4rem;letter-spacing:-.5px;color:var(--text)}
+nav{display:flex;gap:.25rem}
+/* Le rembourrage EST la cible tactile : sans lui le lien ne fait que la
+   hauteur de sa ligne — 12 px de haut sur mobile, intouchable au doigt. */
+nav a{font-size:.82rem;color:var(--text3);text-decoration:none;padding:5px 10px;border-radius:6px;transition:color .15s}
 nav a:hover{color:var(--text2)}nav a.active{color:var(--text)}
 
 /* ── Footer ── */
-footer{position:relative;z-index:5;border-top:1px solid var(--line);padding:1.4rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:3rem}
+footer{position:relative;z-index:5;border-top:1px solid var(--line);padding:1.4rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:3rem;line-height:1.5}
 .footer-legal{font-size:.74rem;color:var(--text3);max-width:540px;line-height:1.5}
-.footer-right{font:.74rem var(--mono);color:var(--text3)}
+.footer-right{font:.74rem/1.5 var(--mono);color:var(--text3);white-space:nowrap}
 
 /* ── Typo utilitaire ── */
 h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
@@ -180,20 +193,20 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
   .bb-bull{border-right:0;border-bottom:1px solid var(--line)}
   .metrics{grid-template-columns:repeat(3,1fr)}
 }
-/* Header : la nav a gagné une entrée (homepage des watchlists) — sur petit
-   écran elle se resserre au lieu de déborder. Nav dupliquée à l'identique
-   dans les 3 pages, ce réglage est donc partagé. */
+/* Header : la nav porte quatre entrées — sur petit écran elle se resserre au
+   lieu de déborder. Le rembourrage des liens ne descend pas avec la police :
+   c'est lui qui garde la cible tactile atteignable. Et .72rem est le plancher,
+   pas .66rem : en dessous la navigation principale devient illisible. */
 @media(max-width:700px){
   header{padding:.85rem 1rem;gap:.7rem}
   .brand-name{font-size:1.12rem}
   .brand-icon svg{width:24px;height:24px}
-  nav{gap:.72rem}
-  nav a{font-size:.7rem;white-space:nowrap}
+  nav{gap:0}
+  nav a{font-size:.72rem;padding:5px 7px;white-space:nowrap}
 }
 @media(max-width:400px){
   header{gap:.5rem}
-  nav{gap:.55rem}
-  nav a{font-size:.66rem}
+  nav a{padding:5px 5px}
 }
 
 /* ── Scrollbars discrètes ── */

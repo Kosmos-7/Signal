@@ -4,16 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Signal, Terminal d'analyse</title>
+<meta name="description" content="Des watchlists notées sur 100 : qualité, croissance, valorisation, momentum. Chaque chiffre vient des comptes publiés, avec sa date et sa devise.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14' stroke='%2322d98a' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Mêmes graisses que les autres onglets : le 700 et l'italique manquaient
+     ici, et le navigateur les fabriquait (faux gras) — d'où un rendu qui
+     changeait en passant d'un onglet à l'autre. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="signal.css">
 <style>
   /* ── index (terminal watchlist) : mise en page propre à la page ── */
   body{overflow:hidden}
 
   /* RAIL : nom complet + région + secteur */
-  .rail{position:fixed;left:1.4rem;top:4.5rem;bottom:1.4rem;z-index:6;width:232px;display:flex;flex-direction:column}
+  .rail{position:fixed;left:1.4rem;top:5rem;bottom:1.4rem;z-index:6;width:232px;display:flex;flex-direction:column}
   .rail-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:0 .4rem .5rem}
   .rail-back{font:600 .58rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .15s;white-space:nowrap}
   .rail-back:hover{color:var(--ac)}
@@ -61,10 +66,12 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .row .rr{text-align:right}.row .sc{font:500 .95rem var(--serif);color:var(--text)}.row .xx{font:.55rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-top:1px}
 
   /* STAGE : analyse élargie */
-  .stage{position:fixed;left:262px;right:1.4rem;top:4.6rem;bottom:1.4rem;z-index:5;overflow-y:auto;display:flex;flex-direction:column;align-items:center}
+  .stage{position:fixed;left:262px;right:1.4rem;top:5.1rem;bottom:1.4rem;z-index:5;overflow-y:auto;display:flex;flex-direction:column;align-items:center}
+  /* Le pied de page est dans .stage (colonne scrollable) et non en bout de
+     document : seule sa GÉOMÉTRIE est reprise ici. Sa typographie vient de
+     signal.css comme sur les trois autres onglets — elle sortait à .75rem
+     ici contre .74rem ailleurs, un écart invisible mais gratuit. */
   footer{width:100%;max-width:1060px;margin-top:.5rem;padding:1.4rem 1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:1.2rem;flex-wrap:wrap}
-  footer .footer-legal{font-size:.75rem;color:var(--text3);line-height:1.5;max-width:560px}
-  footer .footer-right{font:.75rem var(--mono);color:var(--text3);white-space:nowrap}
   @media(max-width:900px){footer{flex-direction:column;align-items:flex-start;gap:.5rem;padding:1.25rem 1rem}}
   .stage::-webkit-scrollbar{width:5px}.stage::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
   .doc{width:100%;max-width:1060px;padding:.5rem 1.5rem 2.5rem;opacity:0;transition:opacity .35s}.doc.on{opacity:1}
@@ -106,9 +113,9 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
     object-fit:cover;object-position:50% 30%}
   .d-illu figcaption{position:absolute;left:0;right:0;bottom:0;padding:.38rem .6rem;
     background:linear-gradient(0deg,rgba(6,6,11,.92),rgba(6,6,11,0));
-    font:600 .48rem var(--mono);letter-spacing:.9px;text-transform:uppercase;color:var(--text3)}
+    font:600 .62rem var(--mono);letter-spacing:.6px;text-transform:uppercase;color:var(--text3)}
   .d-illu figcaption b{color:var(--text2);font-weight:600}
-  .d-illu .d-cred{display:block;margin-top:1px;font-size:.43rem;letter-spacing:.4px;
+  .d-illu .d-cred{display:block;margin-top:2px;font-size:.55rem;letter-spacing:.3px;
     color:var(--text3);opacity:.8;text-transform:none}
   @media(max-width:900px){.d-illu img{max-height:none}}
   .d-tag{font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
@@ -282,10 +289,10 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
      diagonal, et ne gêne pas la lecture de la thèse à côté. */
   .tc-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:.34rem .55rem;
     background:linear-gradient(0deg,rgba(6,6,11,.9),rgba(6,6,11,0));
-    font:600 .44rem var(--mono);letter-spacing:.8px;text-transform:uppercase;
+    font:600 .62rem var(--mono);letter-spacing:.6px;text-transform:uppercase;
     color:var(--text3);line-height:1.35}
   .tc-cap b{color:var(--text2);font-weight:600}
-  .tc-cap i{display:block;font-style:normal;font-size:.4rem;letter-spacing:.3px;
+  .tc-cap i{display:block;font-style:normal;font-size:.55rem;letter-spacing:.3px;
     text-transform:none;opacity:.75;margin-top:1px}
   .tc-fb{position:relative;font:600 .6rem var(--mono);letter-spacing:2.4px;text-transform:uppercase;color:var(--text3);text-align:center;line-height:1.9;padding:0 14px;max-width:100%;overflow-wrap:anywhere}
   .tc-b{display:flex;flex-direction:column;flex:1;padding:.9rem 1rem 1rem;gap:.5rem}
@@ -431,7 +438,7 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
 <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <header>
-  <a class="brand" href="index.html"><span class="brand-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#22d98a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-name">Signal</span></a>
+  <a class="brand" href="index.html"><span class="brand-icon"><svg width="30" height="30" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#22d98a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-name">Signal</span></a>
   <nav><a href="index.html#/" class="active">Watchlists</a><a href="actualites.html">Actualités</a><a href="apprendre.html">Apprendre</a><a href="portfolio.html">Portefeuille IA</a></nav>
 </header>
 
@@ -876,20 +883,18 @@ function showLexique(){
 lexi('Qualité · 35 pts','Les niveaux des comptes publiés : marge nette médiane pluriannuelle (9), rendement des capitaux propres (9), conversion du bénéfice en cash réel (7), dette rapportée aux capitaux propres (5), constance des bénéfices (5).')+
 lexi('Croissance · 25 pts','Les dérivées des comptes : croissance annuelle du CA (7) et du bénéfice par action, dilution comprise (7), régularité de la progression (4), croissance attendue par les analystes (7) — l\'estimé ne pèse jamais plus que le démontré.')+
 lexi('Valorisation · 25 pts','Le prix payé : PER face à sa propre médiane historique (8), PEG maison — PER prévisionnel ÷ la plus prudente des deux croissances (7), rendement des bénéfices attendus (5), rendement du cash (5) — remplacé pour les banques et assureurs par le cours rapporté aux actifs nets comptables, le multiple de référence des métiers de bilan.')+
-lexi('Momentum · 15 pts','Le cours face à lui-même, trois horizons : écart MM21/MM200 en continu (6), position dans le canal de régression décennal en cloche symétrique — l\'étirement pénalise dans les deux sens (6), RSI en cloche (3).')+
-      lexi('Critère retiré','Quand une donnée est incalculable (FCF d\'une banque, historique trop court, devise comptable différente de la cotation), le critère est <em>retiré avec son motif</em> et la note se renormalise sur le reste. Un trou de donnée n\'est jamais compté zéro.'))+
+lexi('Momentum · 15 pts','Le cours face à lui-même, deux mesures : écart MM21/MM200 en continu (7), position dans le canal de régression en cloche symétrique — l\'étirement pénalise dans les deux sens (8). Le RSI n\'entre PAS dans la note : sur quatorze jours il mesure le bruit, pas la trajectoire — il reste affiché sous le graphique de cours, comme information.')+
+      lexi('Critère retiré','Quand une donnée est incalculable (FCF d\'une banque, historique trop court, devise comptable différente de la cotation), le critère est <em>retiré</em> et la note se renormalise sur le reste. Un trou de donnée n\'est jamais compté zéro.'))+
     lexsec('Signaux de timing',
 lexi('Golden Cross / Death Cross','<em>Golden Cross</em> : la MM21 passe au-dessus de la MM200, signal haussier. <em>Death Cross</em> : MM21 sous MM200, baissier. Plus le croisement est récent, plus le signal pèse.')+
       lexi('MM21 / MM200','Moyennes mobiles sur 21 et 200 jours : elles lissent les soubresauts quotidiens. La <em>MM21</em> réagit vite (court terme), la <em>MM200</em> donne la tendance de fond.')+
       lexi('RSI','Oscillateur 0–100 de la vitesse des variations récentes. <em>Zone saine : 40–60.</em> Au-delà de 70 : surachat. Sous 30 : survente.')+
       lexi('Z-score (σ)','Écart du cours à sa droite de régression long terme, en écarts-types. <em>−2σ</em> = décote marquée (rebond possible) ; <em>+2σ</em> = cours tendu au-dessus de sa tendance.')+
-      lexi('Pente MM21','Inclinaison de la MM21 : positive = momentum qui se renforce, négative = qui s\'essouffle.')+
       lexi('Drawdown 52 s','Baisse depuis le plus haut des 52 dernières semaines, en %. Le repli déjà encaissé.'))+
     lexsec('Fondamentaux',
       lexi('Croissance CA','Croissance du chiffre d\'affaires du <em>dernier trimestre publié</em>, comparé au même trimestre un an plus tôt (glissement annuel, « a/a »). Ce n\'est pas la croissance annuelle.')+
       lexi('Marge nette','Bénéfice net rapporté au chiffre d\'affaires, sur les <em>12 derniers mois glissants</em> (TTM).')+
 lexi('Marge FCF','Free cash-flow (trésorerie réellement générée) rapporté au CA, sur les <em>12 derniers mois</em> (TTM), plus difficile à maquiller comptablement que la marge nette.')+
-      lexi('Consensus analystes','Recommandation moyenne sell-side, échelle Acheter / Conserver / Vendre.')+
 lexi('Écart à la trajectoire long terme','Écart du cours à sa droite de régression, en % de la valeur de tendance. Renommé en août 2026 : l\'ancien libellé « décote » empruntait le vocabulaire de la valorisation alors que cette mesure compare le cours à sa propre trajectoire passée, pas à la valeur de l\'entreprise — un titre très en-dessous de sa trajectoire peut rester cher au regard de ses bénéfices (cas Hermès). Un écart extrême peut signaler un changement structurel du business (cf. Apprendre).')+
 lexi('Objectif consensus','Moyenne des objectifs de cours des analystes, affichée en potentiel (%). Biais optimiste structurel documenté, indicatif uniquement, hors score.'));
   requestAnimationFrame(()=>doc.classList.add('on'));
