@@ -5,6 +5,32 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le graphique s'élargit — et découvre deux fiches sans axe des prix
+
+« Le graph peut prendre plus de largeur pour s'aligner au reste. » Le SVG
+occupait déjà toute la laisse de la fiche, mais son **dessin** s'arrêtait à
+22 unités du bord gauche et 23 du bord droit — deux bandes vides d'une
+trentaine de pixels chacune, exactement celles entourées sur la capture.
+
+Les marges ne sont plus arrondies au jugé, elles sont **calculées sur ce
+qu'elles contiennent** : à gauche, le plus long prix d'axe fait 24 unités et se
+termine 6 avant le cadre, d'où 34 ; à droite, « +2σ » fait 16 unités et
+commence 5 après, d'où 24. **Trente-deux unités récupérées, 4,5 % de tracé en
+plus**, et le graphique s'aligne enfin sur les barres et le texte.
+
+**Et en vérifiant qu'aucune étiquette ne dépassait, un trou est apparu.**
+L'échelle des prix s'arrêtait à 10 000. Samsung cote entre 19 000 et
+354 000 wons, SK Hynix jusqu'à 2,8 millions : leur fourchette passait
+**entièrement au-dessus du dernier échelon**, le filtre ne renvoyait aucun
+repère, et l'axe des prix disparaissait en silence — un graphique sans
+ordonnée, sur deux fiches, depuis l'ouverture aux places asiatiques. L'échelle
+poursuit désormais le même motif jusqu'aux millions, et les grands nombres sont
+abrégés (« 150k », « 2,5M ») : sans cela « 2500000 » ferait sept caractères et
+rendrait au bord gauche tout ce que le resserrement venait d'y gagner. Quatre
+caractères au maximum, quelle que soit la place de cotation — vérifié sur
+seize sociétés à deux largeurs, aucune étiquette hors cadre, aucune fiche sans
+axe.
+
 ### Le relevé du graphique de cours tenait sur une ligne, pas sur quatre
 
 « Le rectangle avec les metrics est beaucoup trop grand pour la quantité
