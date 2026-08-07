@@ -43,6 +43,15 @@ def check(nom, cond, detail=""):
         print(f"  ❌ {nom} {detail}")
 
 
+# ── Garde : la liste des bouchons couvre-t-elle requirements.txt ? ──────────
+# Deux exécutions de CI ont été nécessaires pour découvrir `numpy` puis
+# `anthropic` : la liste était devinée de mémoire, et la machine de
+# développement comblait les trous. La source de vérité est le fichier de
+# dépendances, plus le souvenir de qui écrit le test.
+_oublies = _bouchons.manquants(os.path.join(RACINE, "requirements.txt"))
+check("chaque dépendance déclarée a son bouchon", not _oublies, str(_oublies))
+
+
 # ── Simulation de résultats de screener ─────────────────────────────────────
 # Forme et échelle réelles : ~560 points par série, abscisse en mois flottant à
 # 2 décimales, valeurs à 2 décimales (cf. _mois / _sample_series).
