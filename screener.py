@@ -927,10 +927,23 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
         #    Ce qu'on continue de refuser, c'est de la PROLONGER : faire
         #    décroître une perte vers +3 % de croissance n'a aucun sens, et le
         #    refus est posé juste en dessous avec son motif.
+        #    UN ZÉRO EXACT N'EST PAS UNE ESTIMATION, C'EST UNE ABSENCE. Le
+        #    fournisseur rend `0` là où il n'a pas de consensus, et rien ne
+        #    distingue les deux dans la réponse. Constaté le 08/08/2026 sur
+        #    Rainbow Robotics à l'entrée de la watchlist robotique : chiffre
+        #    d'affaires 2026 ET 2027 publiés à 0,0 en « consensus », contre
+        #    34 milliards de wons réalisés en 2025 — la fiche aurait montré des
+        #    barres de revenus s'effondrant à zéro, en affirmant que c'est ce
+        #    que les analystes attendent.
+        #    Ce filtre ne revient PAS sur la règle du dessus : les valeurs
+        #    NÉGATIVES restent publiées, une perte attendue est une information.
+        #    Il ne retire que le zéro exact, qu'aucune société cotée n'atteint
+        #    réellement et qui ne peut donc être qu'un trou de données. Retiré
+        #    plutôt qu'approximé, comme un critère de la note.
         vals, dernier_val, dernier_an = {}, base, an0
         for i, k in enumerate(("0y", "+1y")):
             v = (est or {}).get(k)
-            if v is not None:
+            if v is not None and v != 0:
                 vals[an0 + 1 + i] = (v, "consensus")
                 dernier_val, dernier_an = v, an0 + 1 + i
         # 2) PROLONGER EXIGE UNE BASE ET UNE ARRIVÉE POSITIVES. Le taux de

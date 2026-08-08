@@ -244,11 +244,22 @@ check("chaque valeur projetée porte sa nature, aucune borne haute résiduelle",
 
 # ── 5. SENTINELLES DE VRAISEMBLANCE ────────────────────────────────────────
 print("\n— Bandes de vraisemblance : une exception est permise, une dérive non —")
+# LES DEUX TOLÉRANCES RELEVÉES LE 08/08/2026 le sont pour une raison écrite,
+# et non parce qu'elles gênaient. La watchlist robotique fait entrer deux
+# fabricants de robots humanoïdes et de cobots, plus un logisticien, dont le
+# modèle est le même que celui des sociétés quantiques déjà tolérées ici :
+# revenus réels mais bénéfice quasi nul, trésorerie consommée pour financer la
+# croissance. Vérifié pièce par pièce contre les comptes publiés avant de
+# toucher au seuil — le PER de 6 370 de Rainbow Robotics se retrouve à
+# l'identique dans sa série annuelle (BPA 73 wons pour un cours de 465 000), et
+# celui de Harmonic Drive tient à un bénéfice de bas de cycle, pas à une erreur
+# d'unité. Ce sont des nombres justes portant sur des sociétés que la grille
+# mesure mal, ce que le champ `biais` du thème annonce au lecteur.
 BANDES = [
     ("marge nette d'exercice", "net_margin_exercice_pct", -60, 70, 6),
-    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 6),
+    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 8),
     ("conversion du bénéfice en cash", "conversion_pct", -200, 400, 8),
-    ("PER courant", "trailing_pe", 1, 200, 4),
+    ("PER courant", "trailing_pe", 1, 200, 7),
     ("rendement des capitaux propres", "roe_pct", -100, 150, 6),
     ("RSI", "rsi", 5, 95, 0),
 ]
