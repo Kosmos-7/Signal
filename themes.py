@@ -1,7 +1,7 @@
 # themes.py — Taxonomie des watchlists thématiques (source unique de vérité)
 #
-# Signal publie TROIS listes : la watchlist principale (top 30 de l'univers,
-# toutes catégories) et deux vues thématiques.
+# Signal publie QUATRE listes : la watchlist principale (top 30 de l'univers,
+# toutes catégories) et trois vues thématiques.
 #
 # ARCHITECTURE — « un seul scoring, N projections »
 # Chaque titre est scoré EXACTEMENT UNE FOIS par screener.py. Une watchlist
@@ -9,12 +9,15 @@
 # marginal nul. L'univers du screener est l'union de sa liste historique et des
 # titres déclarés ici — ajouter un ticker à un thème l'ajoute à l'univers.
 #
-# POURQUOI SEULEMENT DEUX THÈMES (août 2026)
+# POURQUOI SI PEU DE THÈMES (août 2026)
 # Une première version en publiait treize. Trop : les thèses se recouvraient,
 # plusieurs n'étaient que des regroupements sectoriels déguisés, et l'ensemble
-# demandait une maintenance sans rapport avec ce qu'il apportait. On garde les
-# deux chaînes sur lesquelles le projet a réellement quelque chose à dire, et
+# demandait une maintenance sans rapport avec ce qu'il apportait. On ne garde
+# que les listes sur lesquelles le projet a réellement quelque chose à dire, et
 # on assume de ne pas couvrir le reste plutôt que de le couvrir mal.
+# Le thème « quantique » (08/08/2026, demande du propriétaire) est le premier
+# ajout depuis ce resserrement, et le premier à publier MOINS qu'il ne déclare :
+# vingt-quatre titres portent le périmètre, dix seulement sont lus.
 # Les thèmes retirés (santé, conso, défense, robotique, compounders, mémoire
 # et électrification en tant que thèses autonomes, décote et qualité calculées)
 # restent dans l'historique git — leur restauration est un revert, pas un
