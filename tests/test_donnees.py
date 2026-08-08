@@ -467,6 +467,18 @@ for _t in _themes_publies:
             _ecarts.append(f"{_t['id']}.{_k}")
 check("universe.json publie exactement les textes de themes.py",
       not _ecarts, str(_ecarts[:4]))
+# LA BOUCLE CI-DESSUS NE REGARDE QUE DANS UN SENS : elle compare les thèmes
+# PUBLIÉS à leur source. Un thème déclaré dans themes.py et absent de
+# l'artefact — parce qu'aucun run n'a eu lieu depuis son ajout — passait donc
+# inaperçu, alors que c'est le mode de panne le plus coûteux des deux : la
+# watchlist existe dans le code, ses tests sont au vert, et le site ne la montre
+# pas. Constaté en ajoutant le thème robotique le 08/08/2026, quelques minutes
+# après avoir fermé l'écart symétrique.
+# Ce contrôle échoue légitimement entre l'ajout d'un thème et le run qui le
+# publie : c'est ce qu'il doit dire, et le remède est de lancer le screener.
+_absents = sorted(set(_pub) - {t["id"] for t in _themes_publies})
+check("chaque thème déclaré est réellement publié dans universe.json",
+      not _absents, f"jamais publiés (lancer le screener) : {_absents}")
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
