@@ -39,18 +39,36 @@ MIN_TRADE_EUR = 50.0
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Prélèvement Forfaitaire Unique (flat tax) sur les plus-values mobilières.
-# Décomposition légale (2026) :
-#   - 12.8% impôt sur le revenu
-#   - 17.2% prélèvements sociaux (CSG + CRDS + autres)
-#   - TOTAL : 30%
-# Source : article 200 A du Code général des impôts.
+# Décomposition légale, VÉRIFIÉE LE 08/08/2026 :
+#   - 12,8 % impôt sur le revenu
+#   - 18,6 % prélèvements sociaux
+#   - TOTAL : 31,4 %
+# Source : article 200 A du CGI pour l'assiette ; loi de financement de la
+# Sécurité sociale pour 2026 (promulguée le 30/12/2025, validée pour
+# l'essentiel par le Conseil constitutionnel) pour le taux social.
+#
+# LE TAUX A CHANGÉ, et ce fichier a porté l'ancien pendant sept mois. La LFSS
+# 2026 crée une contribution financière pour l'autonomie de 1,4 point : la CSG
+# sur les revenus du capital passe de 9,2 à 10,6 %, donc les prélèvements
+# sociaux de 17,2 à 18,6 % et le PFU de 30 à 31,4 %, au 1er janvier 2026.
+# Le piège est que la hausse ne touche PAS tout : assurance-vie, PEL, CEL, PEP,
+# revenus fonciers et plus-values immobilières restent à 17,2 %. Elle touche
+# bien les plus-values de cession de valeurs mobilières — notre cas.
+#
+# CE QUE CE CHANGEMENT NE FAIT PAS : rejouer le passé. Les impôts déjà
+# comptabilisés sur les ventes de 2026 l'ont été à 30 % ; les recalculer
+# changerait un historique publié, ce qui est une décision éditoriale et non
+# une correction de taux. Le sujet est ouvert, à trancher explicitement.
+#
 # S'applique uniquement à la PLUS-VALUE RÉALISÉE (à la vente), pas aux plus-values latentes.
-PFU_RATE = 0.30
+PFU_RATE = 0.314
 
-# Variante PEA après 5 ans de détention : 17.2% (prélèvements sociaux uniquement).
+# Variante PEA après 5 ans de détention : prélèvements sociaux seuls. Eux aussi
+# passent à 18,6 % au 01/01/2026, et le nouveau taux s'applique au retrait sur
+# tout le gain, y compris la part constituée avant 2026.
 # Non utilisé actuellement (Signal détient des US stocks → compte-titres obligatoire),
 # mais déclaré pour permettre un éventuel toggle PEA dans le futur.
-PEA_TAX_RATE_AFTER_5Y = 0.172
+PEA_TAX_RATE_AFTER_5Y = 0.186
 
 # Régime fiscal actif (un seul à la fois pour le moment).
 # Valeurs possibles : "PFU" (compte-titres, défaut) | "PEA_5Y" (PEA après 5 ans)
