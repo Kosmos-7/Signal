@@ -1,0 +1,153 @@
+{
+ "paires": {
+  "TSM": {
+   "cote": {
+    "ticker": "TSM",
+    "devise_cotation": "USD",
+    "devise_comptable": "TWD",
+    "memes_devises": false,
+    "objectif": {
+     "cours_cible": 540.20483,
+     "analystes": 18
+    },
+    "actions": 5186474013.0,
+    "capitalisation": 2178526609408.0,
+    "bpa_ttm": 11.38,
+    "per_courant": 36.91037,
+    "per_prevu": 19.439016,
+    "estimations": {
+     "earnings_estimate": {
+      "present": true,
+      "index": [
+       "0q",
+       "+1q",
+       "0y",
+       "+1y"
+      ],
+      "colonnes": [
+       "avg",
+       "low",
+       "high",
+       "yearAgoEps",
+       "numberOfAnalysts",
+       "growth",
+       "currency"
+      ],
+      "avg": {
+       "0q": 4.44959,
+       "+1q": 4.949,
+       "0y": 16.81977,
+       "+1y": 21.60809
+      }
+     },
+     "revenue_estimate": {
+      "present": true,
+      "index": [
+       "0q",
+       "+1q",
+       "0y",
+       "+1y"
+      ],
+      "colonnes": [
+       "avg",
+       "low",
+       "high",
+       "numberOfAnalysts",
+       "yearAgoRevenue",
+       "growth",
+       "currency"
+      ],
+      "avg": {
+       "0q": 1449479392570.0,
+       "+1q": 1593510273150.0,
+       "0y": 5420351505550.0,
+       "+1y": 7187439013020.0
+      }
+     }
+    },
+    "historique": {
+     "points": 7251,
+     "debut": "1997-10-09",
+     "fin": "2026-08-07"
+    }
+   },
+   "origine": {
+    "ticker": "2330.TW",
+    "devise_cotation": "TWD",
+    "devise_comptable": "TWD",
+    "memes_devises": true,
+    "objectif": {
+     "cours_cible": 3126.7485,
+     "analystes": 35
+    },
+    "actions": 25932370067.0,
+    "capitalisation": 61459715325952.0,
+    "bpa_ttm": 73.71,
+    "per_courant": 32.153034,
+    "per_prevu": 17.190422,
+    "estimations": {
+     "earnings_estimate": {
+      "present": true,
+      "index": [
+       "0q",
+       "+1q",
+       "0y",
+       "+1y"
+      ],
+      "colonnes": [
+       "avg",
+       "low",
+       "high",
+       "yearAgoEps",
+       "numberOfAnalysts",
+       "growth",
+       "currency"
+      ],
+      "avg": {
+       "0q": 28.04147,
+       "+1q": 30.77995,
+       "0y": 107.06744,
+       "+1y": 137.86748
+      }
+     },
+     "revenue_estimate": {
+      "present": true,
+      "index": [
+       "0q",
+       "+1q",
+       "0y",
+       "+1y"
+      ],
+      "colonnes": [
+       "avg",
+       "low",
+       "high",
+       "numberOfAnalysts",
+       "yearAgoRevenue",
+       "growth",
+       "currency"
+      ],
+      "avg": {
+       "0q": 1449479392570.0,
+       "+1q": 1593510273150.0,
+       "0y": 5420351505550.0,
+       "+1y": 7187439013020.0
+      }
+     }
+    },
+    "historique": {
+     "points": 6613,
+     "debut": "2000-01-04",
+     "fin": "2026-08-07"
+    }
+   },
+   "verdict": {
+    "resout_le_decalage": true,
+    "garde_le_benefice_attendu": true,
+    "garde_le_ca_attendu": true,
+    "garde_l_objectif": true,
+    "rapport_adr": 5.0
+   }
+  }
+ }
+}
