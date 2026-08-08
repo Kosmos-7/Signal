@@ -64,10 +64,19 @@ check("infra-ia couvre assez de titres pour six maillons",
 print("\n— Le thème quantique —")
 _q = themes.THEMES_BY_ID.get("quantique")
 check("le thème quantique existe et publie un top borné",
-      _q and _q.get("top") == 10, str(_q and _q.get("top")))
-check("il déclare plus large qu'il ne publie",
-      _q and len(_q["tickers"]) > _q["top"] * 2,
+      _q and _q.get("top") == 20, str(_q and _q.get("top")))
+# LE BORNAGE DOIT SÉLECTIONNER, PAS AMPUTER. À dix publiés sur vingt-quatre, la
+# liste coupait sous 51 points et perdait les trois quarts des sociétés dont le
+# quantique est le métier — le propriétaire l'a vu tout de suite (« il manque
+# pas mal d'acteurs clés »). On garde une marge, sans la laisser devenir
+# décorative : entre le déclaré et le publié il doit rester du choix.
+check("il déclare plus large qu'il ne publie, sans amputer",
+      _q and _q["top"] + 5 <= len(_q["tickers"]) <= _q["top"] * 3,
       f"{len(_q['tickers']) if _q else 0} déclarés pour {_q['top'] if _q else 0} publiés")
+# Chaque maillon doit survivre au bornage : un thème de chaîne dont une couche
+# entière disparaît du classement ne raconte plus la chaîne.
+check("le thème garde une chaîne complète, pas deux ou trois couches",
+      _q and len(_q["maillons"]) >= 5, str(len(_q["maillons"]) if _q else 0))
 check("les pure-players forment un maillon à part, pas un mélange",
       _q and _q["maillons"][0]["tickers"] == ["IONQ", "RGTI", "QBTS", "QUBT"])
 # IonQ a racheté SkyWater (fonderie, 1,8 Md$, 31/07/2026) : son métier n'est

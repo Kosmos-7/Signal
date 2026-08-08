@@ -201,7 +201,7 @@ THEMES_CURES = [
     {
         "id": "quantique",
         "label": "Informatique quantique",
-        "sous_titre": "Les 10 meilleurs scores d'un secteur qui ne gagne pas encore d'argent",
+        "sous_titre": "Les 20 meilleurs scores d'un secteur qui ne gagne pas encore d'argent",
         "kind": "these",
         "thesis": (
             "Qui vend quelque chose aujourd'hui dans le quantique ? Presque personne. "
@@ -281,7 +281,17 @@ THEMES_CURES = [
                 # poursuit la voie des qubits de silicium.
                 "label": "Constructeurs · machines et laboratoires",
                 "tickers": ["IBM", "GOOGL", "MSFT", "AMZN", "HON", "INTC",
-                            "6702.T", "6501.T"],
+                            "6702.T", "6501.T", "6701.T"],
+            },
+            {
+                # AVANT LA MACHINE, LE SUBSTRAT. Un qubit de spin se grave dans
+                # du silicium 28 isotopiquement purifié — le silicium naturel
+                # contient un isotope à spin nucléaire qui détruit la cohérence.
+                # Un qubit photonique se grave, lui, dans une fonderie 300 mm
+                # classique. Ce maillon est le plus concret du thème : ces
+                # sociétés livrent aujourd'hui, sur des références nommées.
+                "label": "Matériaux & fonderie · le substrat des qubits",
+                "tickers": ["STMPA.PA", "GFS", "SOI.PA"],
             },
             {
                 # LE MAILLON QUI VEND DES PELLES. Un ordinateur quantique est
@@ -306,10 +316,14 @@ THEMES_CURES = [
                             "OXIG.L", "6965.T", "6302.T", "AI.PA"],
             },
             {
-                # La simulation classique de circuits quantiques et les ponts
-                # entre calculateur classique et calculateur quantique.
-                "label": "Simulation & couche logicielle",
-                "tickers": ["NVDA"],
+                # La simulation classique de circuits quantiques, les ponts
+                # entre calculateur classique et calculateur quantique, et le
+                # réseau qui reliera un jour les machines entre elles —
+                # l'intrication à distance est le prérequis d'un calculateur
+                # distribué, et c'est un problème de télécoms autant que de
+                # physique.
+                "label": "Simulation, réseau & logiciel",
+                "tickers": ["NVDA", "CSCO"],
             },
             {
                 # L'AUTRE MOITIÉ DU SUJET, celle qui a déjà des clients : se
@@ -320,10 +334,19 @@ THEMES_CURES = [
                 "tickers": ["HO.PA", "IFX.DE"],
             },
         ],
-        # DIX PUBLIÉS SUR VINGT-QUATRE DÉCLARÉS. Le périmètre déclaré doit être
+        # VINGT PUBLIÉS SUR VINGT-NEUF DÉCLARÉS. Le périmètre déclaré doit être
         # honnête — c'est lui qui mesure la couverture et qui alerte si une
         # place de cotation tombe. La liste lue, elle, doit tenir sur un écran.
-        "top": 10,
+        #
+        # DIX AU DÉPART, VINGT DEPUIS LE 08/08 (retour du propriétaire : « il
+        # manque pas mal d'acteurs clés »). Le diagnostic était juste et la
+        # cause instructive : les acteurs ne manquaient pas au PÉRIMÈTRE, ils
+        # étaient déclarés et masqués par le bornage. À dix, la liste coupait
+        # sous 51 points et perdait d'un coup les trois quarts des sociétés dont
+        # le quantique est le métier, IBM, les deux japonais et le seul
+        # fabricant coté de réfrigérateurs à dilution. Un bornage trop serré ne
+        # sélectionne plus, il ampute.
+        "top": 20,
     },
     # « Financials » retirée le 06/08/2026 (décision propriétaire, « pour le
     # moment ») : la watchlist secteur n'est plus publiée. Ses 33 tickers
@@ -566,7 +589,16 @@ THEMES_CALCULES = []
 # d'inclusion du projet. Ils sont listés ici plutôt que supprimés en silence :
 # quelqu'un les cherchera, et l'absence doit avoir une raison lisible.
 #
-# HISTORIQUE DU REGISTRE — CEG, GEV et ARM y ont figuré quelques heures : tous
+# HISTORIQUE DU REGISTRE — GlobalFoundries en est sorti le 08/08/2026. Il y
+# attendait une décision depuis le 01/08 (« recevable depuis l'assouplissement
+# de la règle des 5 ans, en attente de décision ») ; la watchlist quantique la
+# tranche, parce qu'elle lui donne une raison d'être précise que le thème
+# infra-ia ne lui donnait pas : c'est la fonderie qui grave les puces
+# photoniques 300 mm de PsiQuantum. 29,6 Md$, 4,8 ans d'historique — sa fiche
+# portera l'avertissement de régression jusqu'en 2027, comme les néoclouds.
+# ALAB et CRDO restent en attente, aucune thèse ne les réclame aujourd'hui.
+#
+# CEG, GEV et ARM y ont figuré quelques heures : tous
 # trois écartés le matin du 01/08 par la règle « historique < 5 ans », tous
 # trois RÉINTÉGRÉS le soir même, après que cette règle est devenue un simple
 # avertissement (cf. note plus bas). ARM (256 Md$) rejoint le maillon calcul,
@@ -620,7 +652,7 @@ ECARTES_VALIDATION = {
     # explicite (contrairement à ARM/CEG/GEV, réintégrés sur demande).
 "ALAB": "historique 2,4 ans (IPO 2024), recevable depuis le 01/08, en attente de décision",
 "CRDO": "historique 4,5 ans, recevable depuis le 01/08, en attente de décision",
-"GFS": "historique 4,8 ans, recevable depuis le 01/08, en attente de décision",
+
     "AMKR":    "capitalisation ~12 Md$ < seuil 25 Md$ (assemblage)",
     "6920.T":  "capitalisation ~23 Md$ < seuil 25 Md$ (inspection de masques EUV)",
     "FN":      "capitalisation ~16 Md$ < seuil 25 Md$ (sous-traitance optique)",
