@@ -72,19 +72,31 @@ REQUETES = {
         # UN ORDINATEUR QUANTIQUE SE PHOTOGRAPHIE, et c'est même l'objet le plus
         # photogénique de l'informatique contemporaine : le lustre de cuivre
         # doré d'un cryostat à dilution, qui n'est pas la machine mais son
-        # système de refroidissement. On le cherche par les laboratoires
-        # publics, seuls producteurs d'images du domaine public par statut, et
-        # par les constructeurs qui versent leurs photos sous licence libre.
-        "IBM Quantum System One",
-        "dilution refrigerator quantum computer",
-        "quantum computer chandelier cryostat",
-        "superconducting qubit chip",
-        "trapped ion quantum computer",
-        "Google Sycamore quantum processor",
-        "quantum computing laboratory optical table",
+        # système de refroidissement.
+        #
+        # ON CHERCHE PAR LE LABORATOIRE, PAS PAR LE CONSTRUCTEUR. Première
+        # version de cette liste, elle commençait par « IBM Quantum System One »
+        # et les quatre candidats rapportés étaient : deux cryostats siglés
+        # IBM Q, une conférence de presse et une salle de réunion. Deux raisons
+        # de changer d'angle. Le nom d'un constructeur ramène ses journées
+        # presse, pas ses machines. Et une watchlist SECTORIELLE ne peut pas
+        # s'illustrer du logo d'un de ses membres : ce serait le mettre en avant
+        # sur le dos des dix-neuf autres.
+        #
+        # Les agences fédérales américaines produisent des œuvres du domaine
+        # public PAR STATUT, et le NIST est justement l'un des meilleurs
+        # laboratoires d'ions piégés au monde, avec une photographie de
+        # laboratoire exceptionnelle. C'est par là qu'on commence.
+        "NIST ion trap quantum",
+        "NIST quantum computing laboratory",
+        "Sandia National Laboratories ion trap",
+        "NASA Ames quantum computer",
+        "Argonne quantum information laboratory",
+        "dilution refrigerator quantum",
+        "quantum computer cryostat gold",
+        "superconducting qubit chip micrograph",
         "ion trap vacuum chamber laser",
-        "cryostat laboratory helium",
-        "quantum processor wafer",
+        "optical table laser laboratory physics",
     ],
     # Le thème PEA n'a pas d'objet : c'est une enveloppe fiscale française qui
     # n'accepte que les sociétés à siège européen. On l'illustre donc par ce que

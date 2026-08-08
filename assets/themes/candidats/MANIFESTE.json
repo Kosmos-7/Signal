@@ -47,6 +47,18 @@
    "fichier": "principale_3.jpg",
    "poids": 123479,
    "terme": "new york stock exchange interior"
+  },
+  {
+   "titre": "File:Board room, New York City Stock Exchange LCCN92519209.tif",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Board_room%2C_New_York_City_Stock_Exchange_LCCN92519209.tif/lossy-page1-1280px-Board_room%2C_New_York_City_Stock_Exchange_LCCN92519209.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Board_room,_New_York_City_Stock_Exchange_LCCN92519209.tif",
+   "licence": "Public domain",
+   "auteur": "Miscellaneous Items in High Demand, PPOC, Library of Congress",
+   "largeur": 1536,
+   "hauteur": 1165,
+   "fichier": "principale_4.jpg",
+   "poids": 58592,
+   "terme": "new york stock exchange interior"
   }
  ],
  "infra-ia": [
@@ -97,56 +109,80 @@
    "fichier": "infra-ia_3.jpg",
    "poids": 67357,
    "terme": "Argonne National Laboratory supercomputer"
+  },
+  {
+   "titre": "File:Airplane vortex edit2.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Airplane_vortex_edit2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Airplane_vortex_edit2.jpg",
+   "licence": "Public domain",
+   "auteur": "NASA / <a href=\"//commons.wikimedia.org/wiki/User:Fir0002\" title=\"User:Fir0002\">Fir0002</a> / <a href=\"//commons.wikimed",
+   "largeur": 1800,
+   "hauteur": 1400,
+   "fichier": "infra-ia_4.jpg",
+   "poids": 47472,
+   "terme": "NASA supercomputer facility"
   }
  ],
  "quantique": [
   {
-   "titre": "File:IBM Q system (27274387309).jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/IBM_Q_system_%2827274387309%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "page": "https://commons.wikimedia.org/wiki/File:IBM_Q_system_(27274387309).jpg",
+   "titre": "File:Gold Ion Trap (6029437325).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Gold_Ion_Trap_%286029437325%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Gold_Ion_Trap_(6029437325).jpg",
    "licence": "Public domain",
-   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/115281417@N03\">IBM España</a>",
-   "largeur": 1667,
-   "hauteur": 2500,
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/63059536@N06\">National Institute of Standard",
+   "largeur": 1800,
+   "hauteur": 1249,
    "fichier": "quantique_0.jpg",
-   "poids": 40036,
-   "terme": "IBM Quantum System One"
+   "poids": 71116,
+   "terme": "NIST ion trap quantum"
   },
   {
-   "titre": "File:IBM and The Future of Computing Reporting Tour - 54297947437.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/IBM_and_The_Future_of_Computing_Reporting_Tour_-_54297947437.jpg/1920px-IBM_and_The_Future_of_Computing_Reporting_Tour_-_54297947437.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "page": "https://commons.wikimedia.org/wiki/File:IBM_and_The_Future_of_Computing_Reporting_Tour_-_54297947437.jpg",
+   "titre": "File:Ion Trap (5941039382).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Ion_Trap_%285941039382%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Ion_Trap_(5941039382).jpg",
    "licence": "Public domain",
-   "auteur": "foreignpressctr",
-   "largeur": 4032,
-   "hauteur": 3024,
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/63059536@N06\">National Institute of Standard",
+   "largeur": 1253,
+   "hauteur": 605,
    "fichier": "quantique_1.jpg",
-   "poids": 96772,
-   "terme": "IBM Quantum System One"
+   "poids": 80742,
+   "terme": "NIST ion trap quantum"
   },
   {
-   "titre": "File:IBM and The Future of Computing Reporting Tour - 54298820306.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/IBM_and_The_Future_of_Computing_Reporting_Tour_-_54298820306.jpg/1920px-IBM_and_The_Future_of_Computing_Reporting_Tour_-_54298820306.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "page": "https://commons.wikimedia.org/wiki/File:IBM_and_The_Future_of_Computing_Reporting_Tour_-_54298820306.jpg",
+   "titre": "File:NIST Physicists Coax Six Atoms into Quantum 'Cat' State (5884514942).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/NIST_Physicists_Coax_Six_Atoms_into_Quantum_%27Cat%27_State_%285884514942%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:NIST_Physicists_Coax_Six_Atoms_into_Quantum_%27Cat%27_State_(5884514942).jpg",
    "licence": "Public domain",
-   "auteur": "foreignpressctr",
-   "largeur": 4032,
-   "hauteur": 3024,
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/63059536@N06\">National Institute of Standard",
+   "largeur": 1200,
+   "hauteur": 900,
    "fichier": "quantique_2.jpg",
-   "poids": 128798,
-   "terme": "IBM Quantum System One"
+   "poids": 15695,
+   "terme": "NIST ion trap quantum"
   },
   {
-   "titre": "File:IBM and The Future of Computing Reporting Tour - 54299052949.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/IBM_and_The_Future_of_Computing_Reporting_Tour_-_54299052949.jpg/1920px-IBM_and_The_Future_of_Computing_Reporting_Tour_-_54299052949.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "page": "https://commons.wikimedia.org/wiki/File:IBM_and_The_Future_of_Computing_Reporting_Tour_-_54299052949.jpg",
+   "titre": "File:NIST Second Quantum Logic Clock Based on Aluminum Ion is Now Worlds Most Precise Clock (5941058252).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/NIST_Second_Quantum_Logic_Clock_Based_on_Aluminum_Ion_is_Now_Worlds_Most_Precise_Clock_%285941058252%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:NIST_Second_Quantum_Logic_Clock_Based_on_Aluminum_Ion_is_Now_Worlds_Most_Precise_Clock_(5941058252).jpg",
    "licence": "Public domain",
-   "auteur": "foreignpressctr",
-   "largeur": 4032,
-   "hauteur": 3024,
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/63059536@N06\">National Institute of Standard",
+   "largeur": 1424,
+   "hauteur": 1200,
    "fichier": "quantique_3.jpg",
-   "poids": 123222,
-   "terme": "IBM Quantum System One"
+   "poids": 61429,
+   "terme": "NIST ion trap quantum"
+  },
+  {
+   "titre": "File:Planar Ion Trap (5941086002).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Planar_Ion_Trap_%285941086002%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Planar_Ion_Trap_(5941086002).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/63059536@N06\">National Institute of Standard",
+   "largeur": 1280,
+   "hauteur": 837,
+   "fichier": "quantique_4.jpg",
+   "poids": 59406,
+   "terme": "NIST ion trap quantum"
   }
  ],
  "pea": [
@@ -199,54 +235,5 @@
    "terme": "European Union flags row"
   }
  ],
- "financials": [
-  {
-   "titre": "File:HK CH 中環 Central 德輔道中 Des Voeux Road Central HSBC HQ facade tram view Bank Street August 2025 N13P 04.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_Bank_Street_August_2025_N13P_04.jpg/1920px-HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_Bank_Street_August_2025_N13P_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "page": "https://commons.wikimedia.org/wiki/File:HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_Bank_Street_August_2025_N13P_04.jpg",
-   "licence": "CC0",
-   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:HDISMMSY_POON_YAU\" title=\"User:HDISMMSY POON YAU\">HDISMMSY POON YAU</a>",
-   "largeur": 3280,
-   "hauteur": 2464,
-   "fichier": "financials_0.jpg",
-   "poids": 113202,
-   "terme": "bank headquarters building facade"
-  },
-  {
-   "titre": "File:HK CH 中環 Central 德輔道中 Des Voeux Road Central HSBC HQ facade tram view SC Bank August 2025 N13P 01.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_SC_Bank_August_2025_N13P_01.jpg/1920px-HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_SC_Bank_August_2025_N13P_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "page": "https://commons.wikimedia.org/wiki/File:HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_SC_Bank_August_2025_N13P_01.jpg",
-   "licence": "CC0",
-   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:HDISMMSY_POON_YAU\" title=\"User:HDISMMSY POON YAU\">HDISMMSY POON YAU</a>",
-   "largeur": 2464,
-   "hauteur": 3280,
-   "fichier": "financials_1.jpg",
-   "poids": 105564,
-   "terme": "bank headquarters building facade"
-  },
-  {
-   "titre": "File:HK CH 中環 Central 德輔道中 Des Voeux Road Central HSBC HQ facade tram view SC Bank August 2025 N13P 02.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_SC_Bank_August_2025_N13P_02.jpg/1920px-HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_SC_Bank_August_2025_N13P_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "page": "https://commons.wikimedia.org/wiki/File:HK_CH_%E4%B8%AD%E7%92%B0_Central_%E5%BE%B7%E8%BC%94%E9%81%93%E4%B8%AD_Des_Voeux_Road_Central_HSBC_HQ_facade_tram_view_SC_Bank_August_2025_N13P_02.jpg",
-   "licence": "CC0",
-   "auteur": "<a href=\"//commons.wikimedia.org/wiki/User:HDISMMSY_POON_YAU\" title=\"User:HDISMMSY POON YAU\">HDISMMSY POON YAU</a>",
-   "largeur": 3280,
-   "hauteur": 2464,
-   "fichier": "financials_2.jpg",
-   "poids": 120996,
-   "terme": "bank headquarters building facade"
-  },
-  {
-   "titre": "File:Boston Financial District skyline.jpg",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Boston_Financial_District_skyline.jpg/1920px-Boston_Financial_District_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "page": "https://commons.wikimedia.org/wiki/File:Boston_Financial_District_skyline.jpg",
-   "licence": "Public domain",
-   "auteur": "<a href=\"https://en.wikipedia.org/wiki/User:Nelson48\" class=\"extiw\" title=\"wikipedia:User:Nelson48\">Nelson48</a> at <a h",
-   "largeur": 2196,
-   "hauteur": 1680,
-   "fichier": "financials_3.jpg",
-   "poids": 95002,
-   "terme": "financial district skyline towers"
-  }
- ]
+ "financials": []
 }
