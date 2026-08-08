@@ -801,15 +801,16 @@ function showHome(){
   // données, le décompte de titres scorés relevait du tableau de bord interne.
   const meta=[U.updated_at?'Mise à jour '+sv(U.updated_at):'',U.week?sv(U.week):''
   ].filter(Boolean).join(' · ');
-  // « L'univers » est du vocabulaire interne : le lecteur ne sait pas ce que le
-  // mot recouvre, et le texte n'a aucune raison de le lui faire deviner. On dit
-  // la chose — combien de societes, lesquelles, ou. Le nombre est LU la ou il
-  // est produit, jamais recopie : ecrit en dur il a deja menti une fois, 210
-  // annonces pour 229 reels apres un elargissement.
-  const nUniv=U.universe_declared||U.universe_scored||0;
-  const perimetre=nUniv?nUniv+' sociétés':'les sociétés';
+  /* PLUS DE DESCRIPTION DE LA MÉTHODE ICI (décision du propriétaire, 08/08 :
+     « ce texte n'est pas utile ici »). Combien de sociétés sont notées, sur
+     quels continents, et selon quels critères : c'est le sujet d'Apprendre,
+     pas d'une page dont le rôle est de faire choisir une liste. Chaque carte
+     porte déjà sa propre description. Ne reste que l'invitation, qui, elle,
+     s'adresse au lecteur au lieu de parler du produit.
+     Le décompte de l'univers disparaît avec la phrase : il n'était lu que là,
+     et un nombre sans phrase pour le porter n'a nulle part où aller. */
   doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
-    '<p class="home-lead">En recherche d\'opportunités d\'investissement, ou simplement d\'inspiration ? Signal note chaque semaine '+sv(perimetre)+' en Europe, aux États-Unis et en Asie : la qualité du business, le prix, le moment. Chaque liste en propose une lecture.</p>'+
+    '<p class="home-lead">En recherche d\'opportunités d\'investissement, ou simplement d\'inspiration ?</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
