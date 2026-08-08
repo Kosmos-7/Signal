@@ -426,6 +426,34 @@ sentinelle("citations chiffrées du RSI (recalculé chaque jour)",
 sentinelle("citations chiffrées du drawdown 52s (recalculé chaque jour)",
            cite_dd, 15, len(ANALYSES) or 1)
 
+# ── 8. LE TEXTE PUBLIÉ EST-IL CELUI DE LA SOURCE ? ─────────────────────────
+# universe.json est un ARTEFACT : le screener le régénère depuis themes.py à
+# chaque run. Entre deux runs, une correction de texte dans themes.py ne se voit
+# donc PAS sur le site — et rien ne le disait. Constaté le 08/08/2026 : le
+# libellé « Pure-players · leur seul métier » a été corrigé dans la source
+# (IonQ a racheté une fonderie, ce n'est plus son seul métier) et le site a
+# continué de l'afficher, tests au vert. Ce contrôle-là ne coûte rien et ferme
+# l'écart : il échoue tant que l'artefact n'a pas rattrapé sa source.
+print("\n— Le texte affiché est-il celui de themes.py ? —")
+sys.path.insert(0, RACINE)
+import themes                                              # noqa: E402
+_pub = {t["id"]: t for t in themes.meta_publique()}
+_ecarts = []
+try:
+    _themes_publies = json.load(open("universe.json", encoding="utf-8")).get("themes", [])
+except Exception:                                          # noqa: BLE001
+    _themes_publies = []
+for _t in _themes_publies:
+    _m = _pub.get(_t["id"])
+    if not _m:
+        _ecarts.append(f"{_t['id']} : publié mais absent de themes.py")
+        continue
+    for _k, _v in _m.items():
+        if _k in _t and _t[_k] != _v:
+            _ecarts.append(f"{_t['id']}.{_k}")
+check("universe.json publie exactement les textes de themes.py",
+      not _ecarts, str(_ecarts[:4]))
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:
