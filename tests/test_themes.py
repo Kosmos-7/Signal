@@ -70,6 +70,13 @@ check("il déclare plus large qu'il ne publie",
       f"{len(_q['tickers']) if _q else 0} déclarés pour {_q['top'] if _q else 0} publiés")
 check("les pure-players forment un maillon à part, pas un mélange",
       _q and _q["maillons"][0]["tickers"] == ["IONQ", "RGTI", "QBTS", "QUBT"])
+# IonQ a racheté SkyWater (fonderie, 1,8 Md$, 31/07/2026) : son métier n'est
+# plus SEULEMENT le quantique. Le libellé du maillon ne doit donc pas le
+# prétendre — c'est la doctrine « aucun fait qui dépende du run », appliquée
+# à un fait qui a changé quinze jours avant la publication.
+check("le maillon ne prétend pas que ces sociétés n'ont qu'un seul métier",
+      _q and "seul métier" not in _q["maillons"][0]["label"],
+      _q and _q["maillons"][0]["label"])
 # La dérogation au seuil de taille et celle à l'historique doivent être ÉCRITES
 # dans le texte que le lecteur voit, pas seulement dans un commentaire de code.
 check("les deux dérogations sont annoncées au lecteur",

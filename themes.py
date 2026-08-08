@@ -255,10 +255,22 @@ THEMES_CURES = [
         # au maillon des constructeurs et porte donc encore l'exposition.
         "maillons": [
             {
-                # Le secteur au sens strict : leur seul métier est le quantique.
-                # Aucune n'est rentable, aucune n'atteint le seuil de taille
-                # habituel du projet. C'est pour elles que la dérogation existe.
-                "label": "Pure-players · leur seul métier",
+                # Le secteur au sens strict : le quantique est leur métier, pas
+                # une ligne de recherche. Aucune n'est rentable, aucune
+                # n'atteint le seuil de taille habituel du projet — c'est pour
+                # elles que la dérogation existe.
+                #
+                # « MÉTIER PRINCIPAL » ET NON « SEUL MÉTIER » : le libellé a été
+                # corrigé le 08/08/2026, le jour même où il a été écrit. IonQ a
+                # bouclé le 31/07/2026 le rachat de SkyWater (1,8 Md$, feu vert
+                # après partage des voix à la FTC), une fonderie de semi-
+                # conducteurs dont l'essentiel du carnet — ASIC pour la défense
+                # et l'aérospatial — n'a rien de quantique. S'y ajoutent ID
+                # Quantique, Capella et Vector Atomic, qui relèvent du réseau,
+                # du spatial et des horloges atomiques. Le premier titre de ce
+                # maillon n'est donc DÉJÀ plus un pur pari quantique, et écrire
+                # « leur seul métier » aurait été faux dès la publication.
+                "label": "Le quantique comme métier principal",
                 "tickers": ["IONQ", "RGTI", "QBTS", "QUBT"],
             },
             {
@@ -277,6 +289,18 @@ THEMES_CURES = [
                 # dilution, des lasers, de l'optique, des instruments de mesure
                 # et un vide poussé. Ces sociétés-là facturent aujourd'hui, à
                 # tous les acteurs du secteur, gagnants comme perdants.
+                #
+                # DEUX PIÈGES DE CE MAILLON, vérifiés le 08/08/2026, à ne pas
+                # « corriger » plus tard de bonne foi :
+                # · Oxford Instruments n'est PLUS le cryogéniste qu'on croit.
+                #   NanoScience, qui fabriquait ses réfrigérateurs à dilution
+                #   (59 M£ de CA), a été cédée à Quantum Design le 05/01/2026.
+                #   Ce qui reste est plus pertinent, pas moins : Plasma
+                #   Technology vend les graveurs qui FABRIQUENT les puces
+                #   supraconductrices — Rigetti lui en a acheté un en mai 2026.
+                # · FormFactor est, depuis cette cession, le SEUL fabricant coté
+                #   de réfrigérateurs à dilution : Bluefors, Janis, Lake Shore
+                #   et Maybell sont tous en mains privées.
                 "label": "Cryogénie, lasers & instruments",
                 "tickers": ["KEYS", "COHR", "LITE", "MKSI", "FORM",
                             "OXIG.L", "6965.T", "6302.T", "AI.PA"],
