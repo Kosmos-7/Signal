@@ -442,6 +442,23 @@ THEMES_CALCULES = []
 # avertissement (cf. note plus bas). ARM (256 Md$) rejoint le maillon calcul,
 # CEG et GEV le maillon énergie — leurs fiches porteront l'avertissement
 # régression tant que leurs historiques resteront courts.
+# NOM D'AFFICHAGE, quand celui du fournisseur ne va pas. Yahoo rend deux
+# formes et aucune n'est utilisable telle quelle pour TSMC : `shortName` sort
+# « TAIWAN SEMICONDUCTOR M », tronqué en plein mot, et `longName` sort
+# « Taiwan Semiconductor Manufacturing Company Limited », cinquante caractères
+# qui poussent le secteur et la mention de cotation hors de l'en-tête.
+#
+# On ne corrige donc pas une erreur du fournisseur, on choisit un nom d'usage :
+# celui sous lequel la société est connue et cherchée. Le nom légal complet
+# n'est pas perdu pour autant — il ouvre la fiche éditoriale, où il a la place.
+#
+# Registre volontairement court : n'y entre un titre que si les deux formes de
+# Yahoo échouent, jamais par préférence de style.
+NOMS_AFFICHES = {
+    "2330.TW": "TSMC",
+}
+
+
 ECARTES_VALIDATION = {
 "ROG.SW": "symbole introuvable chez Yahoo, remplacé par l'ADR RHHBY",
     "BESI.AS": "capitalisation ~17 Md$ < seuil 25 Md$ (collage hybride)",

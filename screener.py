@@ -2175,7 +2175,9 @@ def score_ticker(ticker, vix=None):
             # Raison sociale NON tronquée — le champ "name" du résultat est
             # coupé à 22 caractères pour les listes ; la fiche, elle, affiche
             # le nom complet (les listes du site utilisent un nom d'usage).
-            "nom_complet":           (info.get("longName") or info.get("shortName") or ticker),
+            # Nom d'usage quand les deux formes de Yahoo échouent (themes.NOMS_AFFICHES).
+            "nom_complet":           themes.NOMS_AFFICHES.get(
+                ticker, info.get("longName") or info.get("shortName") or ticker),
             # Fondamentaux
             # Trou de donnée → null → « — » au front. Un 0.0 publié est une
             # MESURE (croissance nulle, marge nulle), plus jamais un défaut.
@@ -2203,7 +2205,8 @@ def score_ticker(ticker, vix=None):
             "sources":               ["Yahoo Finance"] + (["Finnhub"] if fh_data else []),
         }
 
-        nom = info.get("shortName") or info.get("longName") or ticker
+        nom = themes.NOMS_AFFICHES.get(
+            ticker, info.get("shortName") or info.get("longName") or ticker)
 
         # ── Payload graphique (charts.json) — fail-soft : un graphe raté ne doit
         # JAMAIS faire échouer le scoring du ticker (le try englobant retournerait None).
