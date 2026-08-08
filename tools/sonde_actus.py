@@ -37,6 +37,7 @@ import os
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
@@ -327,18 +328,26 @@ def lire_flux(octets, maintenant=None):
 
     ns = {"atom": "http://www.w3.org/2005/Atom",
           "media": "http://search.yahoo.com/mrss/",
-          "content": "http://purl.org/rss/1.0/modules/content/"}
-    items = racine.findall(".//item") or racine.findall(".//atom:entry", ns)
+          "content": "http://purl.org/rss/1.0/modules/content/",
+          "dc": "http://purl.org/dc/elements/1.1/",
+          "rss1": "http://purl.org/rss/1.0/"}
+    # RSS 1.0 (RDF) met ses <item> dans un espace de noms : `.//item` ne les
+    # voyait pas et toute cette famille de flux — encore utilisée par des sites
+    # institutionnels — était comptée MORTE dans le rapport qui sert à décider.
+    items = (racine.findall(".//item") or racine.findall(".//rss1:item", ns)
+             or racine.findall(".//atom:entry", ns))
     if not items:
         return {"lisible": False, "motif": "aucun <item> ni <entry>"}
 
     recents = resumes = images = dates_lues = 0
     titres = []
     for it in items:
-        titre = _texte(it.find("title")) or _texte(it.find("atom:title", ns))
+        titre = (_texte(it.find("title")) or _texte(it.find("rss1:title", ns))
+                 or _texte(it.find("atom:title", ns)))
         if titre and len(titres) < 3:
             titres.append(titre[:90])
         desc = (_texte(it.find("description"))
+                or _texte(it.find("rss1:description", ns))
                 or _texte(it.find("atom:summary", ns))
                 or _texte(it.find("content:encoded", ns)))
         # Un titre sans corps ne permet que de broder : c'est déjà la règle du
@@ -350,7 +359,11 @@ def lire_flux(octets, maintenant=None):
                 or it.find("media:thumbnail", ns) is not None
                 or "<img" in desc):
             images += 1
-        brut = (_texte(it.find("pubDate")) or _texte(it.find("atom:updated", ns))
+        # <dc:date> est la façon dont datent RSS 1.0 et une partie des flux
+        # institutionnels : sans elle, ils sortaient à recents_24h=0, donc
+        # exclus du classement alors qu'ils publient tous les jours.
+        brut = (_texte(it.find("pubDate")) or _texte(it.find("dc:date", ns))
+                or _texte(it.find("atom:updated", ns))
                 or _texte(it.find("atom:published", ns)))
         quand = _date(brut)
         if quand:
@@ -412,7 +425,14 @@ def lire_json(octets, maintenant=None):
         brut = next((a[k] for k in CLES_D if a.get(k)), None)
         quand = None
         if isinstance(brut, (int, float)) and brut > 1e8:
-            quand = datetime.fromtimestamp(brut, tz=timezone.utc)
+            # Certaines API datent en MILLISECONDES : passé tel quel,
+            # fromtimestamp lève ValueError (année hors bornes) et emportait
+            # tout le run. Au-delà de l'an 5000 en secondes, c'est des ms.
+            try:
+                quand = datetime.fromtimestamp(
+                    brut / 1000.0 if brut > 1e11 else brut, tz=timezone.utc)
+            except (ValueError, OverflowError, OSError):
+                quand = None
         elif isinstance(brut, str):
             quand = _date(brut)
         if quand:
@@ -425,6 +445,23 @@ def lire_json(octets, maintenant=None):
 
 
 # ── Sondage (impur : réseau) ────────────────────────────────────────────────
+
+class _SansSecretHorsSite(urllib.request.HTTPRedirectHandler):
+    """Redirection suivie, mais sans emporter l'en-tête d'authentification si
+    l'hôte change. C'est la seule façon d'avoir les deux : mesurer les sources
+    qui redirigent (elles sont nombreuses) sans offrir la clé au premier
+    domaine venu."""
+
+    def redirect_request(self, req, fp, code, msg, entetes, url):
+        neuf = super().redirect_request(req, fp, code, msg, entetes, url)
+        if neuf is not None and urllib.parse.urlsplit(url).netloc != req.host:
+            for h in ("X-Finnhub-Token", "Authorization"):
+                neuf.remove_header(h)
+        return neuf
+
+
+_OUVREUR = urllib.request.build_opener(_SansSecretHorsSite)
+
 
 def sonder(cand, maintenant=None):
     nom, url, genre, langue = cand[:4]
@@ -441,7 +478,11 @@ def sonder(cand, maintenant=None):
         entetes["X-Finnhub-Token"] = os.environ[secret]
     try:
         r = urllib.request.Request(url, headers=entetes)
-        with urllib.request.urlopen(r, timeout=DELAI) as rep:
+        # UN SECRET NE FRANCHIT PAS UN CHANGEMENT D'HÔTE. urllib recopie les
+        # en-têtes de la requête d'origine dans les redirections : une source
+        # qui renvoyait vers un autre domaine recevait notre clé Finnhub en
+        # clair. Elle est retirée dès que l'hôte change.
+        with _OUVREUR.open(r, timeout=DELAI) as rep:
             code, octets = rep.status, rep.read()
     except urllib.error.HTTPError as e:
         fiche.update(statut="http", code=e.code, motif=e.reason)
@@ -452,8 +493,15 @@ def sonder(cand, maintenant=None):
 
     fiche["code"] = code
     fiche["octets"] = len(octets)
-    lecture = lire_json(octets, maintenant) if genre in ("api", "json") \
-        else lire_flux(octets, maintenant)
+    # ON LIT CE QUI ARRIVE, PAS CE QU'ON AVAIT ÉTIQUETÉ. Quatre sources vivantes
+    # étaient notées « illisibles » parce qu'elles rendent du XML ou du CSV sous
+    # un genre déclaré « api ». Le rapport sert à DÉCIDER : une source rejetée
+    # sur une erreur d'étiquette est une source qu'on n'aura pas.
+    tete = octets.lstrip()[:1]
+    json_probable = tete in (b"{", b"[")
+    lecture = (lire_json(octets, maintenant)
+               if (json_probable or (genre in ("api", "json") and tete != b"<"))
+               else lire_flux(octets, maintenant))
     fiche.update(lecture)
     fiche["statut"] = "ok" if lecture.get("lisible") else "illisible"
     return fiche
@@ -486,8 +534,19 @@ def main():
     # Les résultats sont RÉORDONNÉS comme la liste : un rapport dont les lignes
     # arrivent dans l'ordre des latences réseau n'est pas relisible d'un run à
     # l'autre, et c'est un rapport fait pour être relu et comparé.
+    def _sonder_sans_casse(c):
+        """UNE SONDE QUI LÈVE NE DOIT PAS EMPORTER LES DEUX CENTS AUTRES.
+        `ex.map` propage la première exception au moment de l'itération : un seul
+        candidat exotique et le rapport n'était jamais écrit, après avoir pourtant
+        mesuré tout le reste. Ici l'accident devient une fiche comme une autre."""
+        try:
+            return sonder(c, maintenant)
+        except Exception as e:                             # noqa: BLE001
+            return {"nom": c[0], "url": c[1], "genre": c[2], "langue": c[3],
+                    "statut": "erreur", "motif": f"sonde : {type(e).__name__}: {str(e)[:80]}"}
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=PARALLELE) as ex:
-        fiches = list(ex.map(lambda c: sonder(c, maintenant), cands))
+        fiches = list(ex.map(_sonder_sans_casse, cands))
     for f in fiches:
         etat = f.get("statut")
         detail = (f"{f.get('recents_24h', 0)}/{f.get('articles', 0)} en 24 h, "
@@ -497,10 +556,20 @@ def main():
               f"{f['nom']:<34} {detail}")
 
     r = resume(fiches)
+    # UN RUN PARTIEL LE DIT DANS SON NOM. Sans ça, `--genre rss` écrivait
+    # sonde_actus.json avec les seuls flux, le workflow le commitait, et le
+    # rapport complet du run précédent disparaissait sans que personne ne le
+    # voie — un rapport de mesure qui s'écrase lui-même vaut moins que rien.
+    sortie = a.sortie
+    if a.genre and sortie == SORTIE:
+        sortie = SORTIE.replace(".json", f"_{a.genre}.json")
+        print(f"   run filtré : rapport écrit dans {sortie}, "
+              f"le rapport complet n'est pas touché")
     rapport = {"genere_le": maintenant.strftime("%Y-%m-%d %H:%M UTC"),
+               "genre_filtre": a.genre or None,
                "resume": r, "sources": fiches,
                "a_cle_manquante": [{"nom": n, "url": u} for n, u in A_CLE_MANQUANTE]}
-    json.dump(rapport, open(a.sortie, "w", encoding="utf-8"),
+    json.dump(rapport, open(sortie, "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)
     print(f"\n{r['ok']}/{r['teste']} sources lisibles, {r['frais_24h']} avec du frais, "
           f"{r['articles_24h_cumules']} articles de moins de 24 h cumulés "
@@ -508,7 +577,7 @@ def main():
     print("  meilleures : " + ", ".join(r["meilleures"]))
     print(f"  non testées faute de clé : {len(A_CLE_MANQUANTE)} services "
           "(voir A_CLE_MANQUANTE dans ce fichier)")
-    print(f"→ {a.sortie}")
+    print(f"→ {sortie}")
     # Aucune sortie en erreur : une source morte est une INFORMATION, pas une
     # panne de la sonde. Le rapport la note, le job reste vert, on décide après.
     return 0

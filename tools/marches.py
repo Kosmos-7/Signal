@@ -26,6 +26,7 @@ l'autre oblige à le relire en entier chaque matin.
 import json
 import os
 import sys
+from datetime import date
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -48,6 +49,10 @@ PANIER = [
     {"cle": "eurusd",  "libelle": "Euro / dollar",   "ticker": "EURUSD=X", "type": "pct", "dec": 4, "unite": "$"},
     {"cle": "bitcoin", "libelle": "Bitcoin",         "ticker": "BTC-USD",  "type": "pct", "dec": 0, "unite": "$"},
 ]
+
+# Les instruments qui DÉFINISSENT la séance : eux seuls ont une clôture au sens
+# strict. Le reste (or, pétrole, change, bitcoin) cote presque en continu.
+ACTIONS = ("sp500", "cac40", "nasdaq", "stoxx")
 
 # En dessous, pas de tableau. Quatre lignes, c'est le minimum pour qu'on lise un
 # marché et pas une anecdote.
@@ -72,6 +77,36 @@ def variation(avant, apres, type_):
     return (apres - avant) / avant * 100.0
 
 
+# Écart maximal, en jours de calendrier, entre les deux clôtures d'une ligne.
+# Un week-end fait trois jours, un long week-end quatre, Pâques cinq. Au-delà,
+# ce n'est plus une séance à l'autre : c'est un TROU dans la série, et la
+# variation calculée à travers couvre plusieurs séances tout en s'affichant
+# comme celle du jour. Mieux vaut une ligne en moins qu'une ligne fausse.
+ECART_MAX_JOURS = 6
+
+
+def _jours(a, b):
+    """Jours de calendrier entre deux dates ISO. None si l'une est illisible."""
+    try:
+        return abs((date.fromisoformat(b) - date.fromisoformat(a)).days)
+    except (TypeError, ValueError):
+        return None
+
+
+def jusqua(closes, dates, borne):
+    """Les clôtures dont la date ne dépasse pas `borne`.
+
+    LA PIÈCE QUI ALIGNE TOUT LE TABLEAU SUR UNE SEULE SÉANCE. Le job tourne à
+    05h45 UTC : Taipei a déjà clôturé (05h30), le bitcoin cote sans interruption
+    et sa barre du jour existe depuis minuit, tandis que New York et Paris en
+    sont encore à la veille. Prendre partout « les deux dernières clôtures »
+    mélangeait donc deux séances sous un seul en-tête de date — et le post,
+    gelé, l'aurait dit faux pour toujours.
+    """
+    gardees = [(c, d) for c, d in zip(closes, dates) if d <= borne]
+    return [c for c, _ in gardees], [d for _, d in gardees]
+
+
 def ligne(spec, closes, dates):
     """Une ligne du tableau à partir de deux clôtures. None si inexploitable.
 
@@ -81,7 +116,10 @@ def ligne(spec, closes, dates):
     valides = [(c, d) for c, d in zip(closes, dates) if c is not None]
     if len(valides) < 2:
         return None
-    (avant, _), (apres, ref) = valides[-2], valides[-1]
+    (avant, veille), (apres, ref) = valides[-2], valides[-1]
+    ecart = _jours(veille, ref)
+    if ecart is None or ecart > ECART_MAX_JOURS:
+        return None
     var = variation(avant, apres, spec["type"])
     if var is None:
         return None
@@ -118,17 +156,29 @@ def fmt_nombre(v, dec):
     return f"{v:,.{dec}f}".replace(",", FINE).replace(".", ",")
 
 
+# Sous ce seuil, la ligne est « plate » : ni flèche, ni couleur, ni SIGNE. Il
+# vaut un demi-centième affiché, c'est-à-dire la moitié du dernier chiffre écrit
+# — au-dessous, « +0,00 % » annoncerait une hausse sans la montrer. La page
+# refait le même calcul (SEUIL_PLAT dans actualites.html) et les deux sont
+# comparés valeur par valeur dans les tests.
+SEUIL_PLAT = {"pct": 0.005, "pts": 0.0005}
+
+
+def plat(l):
+    return abs(l["variation"]) < SEUIL_PLAT["pts" if l["type"] == "pts" else "pct"]
+
+
 def fmt_variation(l):
     """« +1,79 % », « -0,022 pts » — et « 0,00 % » sans signe.
 
-    Le signe est écrit dès qu'il y a un sens, JAMAIS sur un zéro : « +0,00 % »
-    annonce une hausse et n'en montre pas, c'est le seul cas où le signe ment.
-    (Écart trouvé par le test qui compare ce formatage à celui de la page :
-    le JS ne signait pas le zéro, Python si.)
+    Le signe est écrit dès qu'il porte un sens, jamais sur une ligne plate.
+    (Le premier écart trouvé par le test qui compare ce formatage à celui de la
+    page : le JS ne signait pas le zéro, Python si. Le second, trouvé par la
+    relecture adverse : les deux signaient +0,004 % sous une pastille grise.)
     """
     v = l["variation"]
     dec = 3 if l["type"] == "pts" else 2
-    signe = "+" if v > 0 else ("-" if v < 0 else "")
+    signe = "" if plat(l) else ("+" if v > 0 else "-")
     corps = f"{abs(v):.{dec}f}".replace(".", ",")
     return signe + corps + INSEC + ("pts" if l["type"] == "pts" else "%")
 
@@ -160,10 +210,15 @@ def _closes(tickers):
     dictionnaire, il n'est pas à None : l'appelant ne peut pas confondre
     « pas de réponse » et « réponse vide ».
     """
-    import yfinance as yf
     out = {}
     try:
-        d = yf.download(tickers, period="7d", interval="1d",
+        # L'IMPORT EST DANS LE TRY, ET C'EST TOUT L'INTÉRÊT. Placé au-dessus, un
+        # ImportError (résolution pip malheureuse un matin, roue absente pour la
+        # version de Python du runner) remontait jusqu'à main() et tuait le post
+        # ENTIER — alors que la doctrine dit qu'un relevé absent n'est pas une
+        # panne : le post s'écrit sans tableau.
+        import yfinance as yf
+        d = yf.download(tickers, period="9d", interval="1d",
                         auto_adjust=False, progress=False, group_by="ticker",
                         threads=True)
     except Exception as e:                                     # noqa: BLE001
@@ -171,7 +226,11 @@ def _closes(tickers):
         return out
     for t in tickers:
         try:
-            col = d[t]["Close"] if len(tickers) > 1 else d["Close"]
+            # yfinance 1.x rend TOUJOURS des colonnes à deux niveaux avec
+            # group_by="ticker" (multi_level_index vaut True par défaut), même
+            # pour un seul ticker : la branche « d["Close"] » qui traînait ici
+            # pour ce cas ne se serait jamais exécutée correctement.
+            col = d[t]["Close"]
             col = col.dropna()
             if col.empty:
                 print(f"   marchés ✗ {t} : aucune clôture sur 7 jours")
@@ -183,7 +242,7 @@ def _closes(tickers):
     return out
 
 
-def plus_fort_mouvement(closes_par_ticker, noms):
+def plus_fort_mouvement(closes_par_ticker, noms, seance):
     """La plus grosse variation de séance parmi les titres fournis.
 
     C'EST L'AVANTAGE QU'UNE NEWSLETTER GÉNÉRALISTE N'A PAS. Sa sixième ligne est
@@ -195,8 +254,14 @@ def plus_fort_mouvement(closes_par_ticker, noms):
     meilleur = None
     for t, (closes, dates) in closes_par_ticker.items():
         l = ligne({"cle": t, "libelle": noms.get(t, t), "ticker": t,
-                   "type": "pct", "dec": 2}, closes, dates)
-        if not l:
+                   "type": "pct", "dec": 2}, *jusqua(closes, dates, seance))
+        # MÊME SÉANCE OU RIEN. Taipei clôture à 05h30 UTC, quinze minutes avant
+        # le job : sans ce filtre, un -6 % de TSMC du matin même remportait le
+        # concours contre les +1 % de la veille à New York, et le post gelait
+        # pour toujours un mouvement de lundi sous un en-tête de vendredi. Le
+        # même mécanisme faisait gagner un titre suspendu tous les matins,
+        # avec sa dernière variation d'avant suspension.
+        if not l or l["ref"] != seance:
             continue
         if meilleur is None or abs(l["variation"]) > abs(meilleur["variation"]):
             meilleur = l
@@ -206,14 +271,45 @@ def plus_fort_mouvement(closes_par_ticker, noms):
     return meilleur
 
 
+def seance_de_reference(par_ticker):
+    """La séance que le tableau raconte : la dernière clôture des indices actions.
+
+    Ce sont eux qui donnent son sens à « à la clôture de la veille ». L'or, le
+    pétrole, le change et le bitcoin cotent presque sans interruption : leur
+    dernière barre est celle du jour même, en cours, et la prendre pour
+    référence daterait tout le tableau d'un jour en avance.
+    """
+    dates = []
+    for s in PANIER:
+        if s["cle"] not in ACTIONS:
+            continue
+        l = ligne(s, *par_ticker.get(s["ticker"], ([], [])))
+        if l:
+            dates.append(l["ref"])
+    return max(dates) if dates else None
+
+
 def releve():
     """Le snapshot du matin, ou None si le panier n'a pas assez répondu."""
     par_ticker = _closes([s["ticker"] for s in PANIER])
-    lignes = choisir([ligne(s, *par_ticker.get(s["ticker"], ([], [])))
-                      for s in PANIER])
+    seance = seance_de_reference(par_ticker)
+    if not seance:
+        print("   marchés ✗ aucun indice actions lu : pas de séance de référence")
+        return None
+
+    # UNE SEULE SÉANCE, PARTOUT. Chaque instrument est ramené à la clôture de la
+    # séance de référence (`jusqua`), puis toute ligne qui n'a pas de clôture CE
+    # jour-là est écartée : une place fermée pour un jour férié national n'a pas
+    # de niveau à donner ce matin, et en afficher un de l'avant-veille sous un
+    # en-tête d'hier serait le genre de faux qu'on ne rattrape pas, le post
+    # étant gelé.
+    lignes = choisir([l for l in (ligne(s, *jusqua(*par_ticker.get(s["ticker"], ([], [])),
+                                                  seance))
+                                  for s in PANIER)
+                      if l and l["ref"] == seance])
     if not lignes:
         print(f"   marchés ✗ {len(par_ticker)} instruments lus, "
-              f"{MIN_LIGNES} lignes minimum : pas de tableau")
+              f"{MIN_LIGNES} lignes minimum sur la séance du {seance} : pas de tableau")
         return None
 
     mouvement = None
@@ -221,17 +317,13 @@ def releve():
         w = json.load(open("watchlist.json", encoding="utf-8"))
         titres = {s["ticker"]: s.get("name") or s["ticker"] for s in w.get("stocks", [])}
         if titres:
-            mouvement = plus_fort_mouvement(_closes(sorted(titres)), titres)
+            mouvement = plus_fort_mouvement(_closes(sorted(titres)), titres, seance)
     except Exception as e:                                     # noqa: BLE001
         print(f"   marchés ✗ mouvement de la liste : {type(e).__name__}")
 
-    # La référence affichée est celle des ACTIONS : le bitcoin cote le week-end
-    # et le dimanche sa date serait en avance d'un jour sur tout le reste.
-    actions = [l for l in lignes if l["cle"] in ("sp500", "cac40", "nasdaq", "stoxx")]
-    ref = max((l["ref"] for l in actions), default=lignes[0]["ref"])
-    print(f"   marchés : {len(lignes)} lignes, clôture du {ref}"
+    print(f"   marchés : {len(lignes)} lignes, clôture du {seance}"
           + (f", mouvement {mouvement['nom']} {fmt_variation(mouvement)}" if mouvement else ""))
-    return {"ref": ref, "lignes": lignes, "mouvement": mouvement}
+    return {"ref": seance, "lignes": lignes, "mouvement": mouvement}
 
 
 if __name__ == "__main__":

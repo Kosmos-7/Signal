@@ -5,6 +5,65 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Vingt-six défauts trouvés avant le premier vrai run
+
+Le code du tableau des marchés et de la sonde n'avait jamais tourné : il devait
+s'exécuter pour la première fois à 05h45 UTC, dans une Action, sans personne
+pour le regarder. Cinq relectures adverses en parallèle, chaque défaut ensuite
+attaqué par un sceptique chargé de le réfuter : **26 confirmés sur 33**.
+
+**Ce qui aurait tué le post du matin**
+
+- `import yfinance` était placé **au-dessus** du `try` : une résolution pip
+  malheureuse et l'ImportError remontait jusqu'à `main()`, tuant le post entier
+  alors que la doctrine dit qu'un relevé absent n'est pas une panne. Le
+  workflow n'aidait pas, il installait ses dépendances sans version au lieu de
+  lire `requirements.txt` comme tous les autres. Les deux sont corrigés.
+- L'étape *Publier* n'avait pas `if: always()` : le post est écrit sur le
+  disque **avant** elle, et un échec de la réparation photo (réseau, sans borne
+  de temps) jetait un post déjà écrit et validé.
+- Un champ `marches` rendu en liste plutôt qu'en texte faisait *planter* la
+  validation, donc perdre la seconde tentative.
+
+**Ce qui aurait publié un chiffre faux, et pour toujours**
+
+Le job tourne à **05h45 UTC**. Taipei a clôturé quinze minutes plus tôt, le
+bitcoin cote sans interruption depuis minuit, New York et Paris en sont encore
+à la veille. Prendre partout « les deux dernières clôtures » mélangeait donc
+**deux séances sous un seul en-tête de date** : un −6 % de TSMC du matin même
+aurait remporté le concours du plus fort mouvement contre les +1 % de la veille
+à Wall Street, et le post, gelé, l'aurait attribué à vendredi pour toujours. Le
+même mécanisme faisait gagner un titre suspendu tous les matins, avec sa
+dernière variation d'avant suspension.
+
+Le relevé aligne maintenant **tout sur une seule séance** : la dernière clôture
+des indices actions fixe la référence, chaque instrument est ramené à cette
+date, et toute ligne qui n'a pas de clôture ce jour-là est écartée. Une place
+fermée pour un jour férié n'a pas de niveau à donner ce matin. En prime, une
+variation calculée à travers un trou de plus de six jours n'est plus une
+variation du jour : c'est une ligne en moins.
+
+**Ce qui se contredisait à l'écran**
+
+La pastille annonçait « plate » en dessous de 0,005 % — flèche « — », gris — et
+le texte à côté affichait `+0,00 %`, exactement le signe que le code refusait
+par ailleurs de mettre sur un zéro. Le seuil est maintenant nommé et partagé
+par les deux implémentations, et le test qui les compare le couvre.
+
+**La sonde**
+
+Une seule sonde qui levait détruisait les 202 autres et le rapport n'était
+jamais écrit. Un horodatage en millisecondes tuait le run entier. Un run filtré
+par `--genre` écrivait le rapport **complet**, que le workflow commitait
+par-dessus les 203 fiches du run précédent. Les flux RSS 1.0 et ceux qui datent
+en Dublin Core étaient comptés morts. Le genre déclaré primait sur le contenu
+réel, donc quatre sources vivantes ressortaient « illisibles ». La clé Finnhub
+suivait les redirections vers d'autres domaines. Et l'entrée `genre` du
+dispatch était interpolée directement dans un `run:` doté de `contents: write`.
+Tout est corrigé.
+
+---
+
 ### Le garde qui aurait supprimé un matin
 
 Une relecture adverse du code de la veille, avant son premier vrai run, a

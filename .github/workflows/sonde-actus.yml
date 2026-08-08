@@ -35,7 +35,12 @@ jobs:
       - name: Sonder
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-        run: python tools/sonde_actus.py --genre "${{ inputs.genre }}"
+          # PASSÉ PAR L'ENVIRONNEMENT, PAS INTERPOLÉ DANS LE SHELL. Une entrée
+          # de dispatch collée dans `run:` est exécutée par bash : sur un job
+          # qui porte `contents: write` et le secret Finnhub, c'est une porte
+          # ouverte. Même précaution que l'entrée `reillustrer` d'actualites.yml.
+          GENRE: ${{ inputs.genre }}
+        run: python tools/sonde_actus.py --genre "$GENRE"
       - name: Publier le rapport en artefact
         if: always()
         uses: actions/upload-artifact@v4

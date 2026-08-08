@@ -189,6 +189,13 @@ function carte(p){
    réécrire l'histoire. La contrepartie est cette petite duplication, bornée à
    deux fonctions et couverte par les tests des deux côtés. */
 const FINE='\u202f', INSEC='\u00a0';   // fine insécable / insécable, cf. tools/marches.py
+/* SEUIL DE PLATITUDE, PARTAGÉ AVEC LE PYTHON (marches.SEUIL_PLAT). En dessous,
+   la ligne est « plate » : flèche « — », pastille grise, et surtout AUCUN signe.
+   La première version signait dès que la variation n'était pas nulle au bit
+   près, et affichait donc « +0,00 % » dans une pastille grise — exactement le
+   signe qui annonce une hausse sans la montrer. */
+const SEUIL_PLAT={pct:0.005, pts:0.0005};
+function plat(l){ return Math.abs(l.variation) < SEUIL_PLAT[l.type==='pts'?'pts':'pct']; }
 function nbFr(v,dec){
   const s=Math.abs(v).toFixed(dec).split('.');
   s[0]=s[0].replace(/\B(?=(\d{3})+(?!\d))/g,FINE);
@@ -196,15 +203,14 @@ function nbFr(v,dec){
 }
 function varFr(l){
   const v=l.variation;
-  const n=(v>0?'+':v<0?'-':'')+Math.abs(v).toFixed(l.type==='pts'?3:2).replace('.',',');
+  const n=(plat(l)?'':v>0?'+':'-')+Math.abs(v).toFixed(l.type==='pts'?3:2).replace('.',',');
   return n+INSEC+(l.type==='pts'?'pts':'%');
 }
 function ligneMarche(l,lien){
   /* Le seuil de « plat » n'est pas zéro : à 0,00 % affiché, une flèche verte
      pour +0,004 % ment à l'œil. On qualifie ce qu'on MONTRE, pas ce qu'on a. */
-  const seuil=l.type==='pts'?0.0005:0.005;
-  const cls=l.variation>seuil?'mk-up':(l.variation<-seuil?'mk-down':'mk-flat');
-  const fle=l.variation>seuil?'▲':(l.variation<-seuil?'▼':'—');
+  const cls=plat(l)?'mk-flat':(l.variation>0?'mk-up':'mk-down');
+  const fle=plat(l)?'—':(l.variation>0?'▲':'▼');
   const nom=lien?'<a href="'+sv(lien)+'">'+sv(l.nom||l.libelle)+'</a>':sv(l.libelle);
   return '<div class="mk-l"><span class="mk-f '+cls+'">'+fle+'</span>'+
     '<span class="mk-n">'+nom+'</span>'+
@@ -214,8 +220,12 @@ function ligneMarche(l,lien){
 function blocMarches(p){
   const m=p.marches;
   if(!m||!m.lignes||!m.lignes.length)return '';
-  const mv=m.mouvement;
-  const lignes=m.lignes.map(l=>ligneMarche(l,null)).join('')+
+  /* La note annonce UNE date pour tout le tableau : on n'affiche donc que les
+     lignes qui portent bien cette date. Le relevé les aligne déjà (marches.py,
+     `jusqua`), mais un post écrit avant cette règle, ou un JSON abîmé, ne doit
+     pas pouvoir faire mentir la légende. */
+  const mv=(m.mouvement&&(!m.mouvement.ref||m.mouvement.ref===m.ref))?m.mouvement:null;
+  const lignes=m.lignes.filter(l=>!l.ref||l.ref===m.ref).map(l=>ligneMarche(l,null)).join('')+
     (mv?ligneMarche(mv,'index.html#/w/principale/'+encodeURIComponent(mv.ticker)):'');
   /* Le commentaire sort de la carte : c'est de la prose, elle se lit sur la
      même largeur et la même graisse que le reste du post, pas dans un encadré

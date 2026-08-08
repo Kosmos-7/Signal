@@ -217,8 +217,9 @@ check("une veille à zéro ne rend pas un infini",
       M.variation(0.0, 1.0, "pct") is None)
 check("une seule clôture ne fait pas une ligne : un niveau sans variation ne dit rien",
       M.ligne(M.PANIER[0], [100.0], D2[:1]) is None)
-check("un trou dans la série est sauté, pas comblé",
-      (M.ligne(M.PANIER[0], [100.0, None, 101.79], ["a"] + D2) or {}).get("ref") == "2026-08-07")
+check("une clôture manquante au milieu est sautée, pas comblée",
+      (M.ligne(M.PANIER[0], [99.0, None, 100.0, 101.79],
+               ["2026-08-04", "2026-08-05"] + D2) or {}).get("ref") == "2026-08-07")
 
 _l = M.ligne(M.PANIER[0], [100.0, 101.79], D2)
 check("le format est français : fine insécable, virgule décimale",
@@ -245,9 +246,36 @@ check("pas de tableau, pas de bloc de prompt", M.bloc_prompt(None) == "")
 
 _mv = M.plus_fort_mouvement(
     {"NVDA": ([100.0, 102.0], D2), "SAP.DE": ([100.0, 94.0], D2)},
-    {"NVDA": "NVIDIA", "SAP.DE": "SAP"})
+    {"NVDA": "NVIDIA", "SAP.DE": "SAP"}, D2[1])
 check("le plus fort mouvement se juge en VALEUR ABSOLUE (une chute compte)",
       _mv["ticker"] == "SAP.DE" and _mv["nom"] == "SAP")
+
+# LE PIÈGE DE TAIPEI. Le job tourne à 05h45 UTC, quinze minutes après la clôture
+# de Taipei et bien avant celle de New York ou Paris. Sans alignement, un -6 %
+# de TSMC du MATIN MÊME battait les +1 % de la veille à Wall Street, et le post,
+# gelé, attribuait pour toujours un mouvement de lundi à la séance de vendredi.
+_LUNDI, _VEND = "2026-08-10", "2026-08-07"
+check("un mouvement d'une AUTRE séance ne gagne pas le concours",
+      (M.plus_fort_mouvement({"2330.TW": ([1000.0, 940.0], [_VEND, _LUNDI]),
+                              "NVDA": ([100.0, 101.0], D2)},
+                             {"2330.TW": "TSMC", "NVDA": "NVIDIA"}, _VEND) or {}
+       ).get("nom") == "NVIDIA")
+check("la séance de référence est celle des indices actions, pas du bitcoin",
+      M.seance_de_reference({"^GSPC": ([1.0, 2.0], D2), "^FCHI": ([1.0, 2.0], D2),
+                             "BTC-USD": ([1.0, 2.0, 3.0], D2 + [_LUNDI])}) == D2[1])
+check("chaque instrument est ramené à la séance de référence",
+      (M.ligne(M.PANIER[8], *M.jusqua([63000.0, 63800.0, 64500.0],
+                                      D2 + [_LUNDI], D2[1])) or {}).get("ref") == D2[1])
+check("un trou dans la série ne devient pas la variation du jour",
+      M.ligne(M.PANIER[0], [100.0, 120.0], ["2026-07-20", D2[1]]) is None)
+check("un week-end de trois jours reste une séance à l'autre",
+      M.ligne(M.PANIER[0], [100.0, 101.0], [_VEND, _LUNDI]) is not None)
+
+# Le second écart Python/JS trouvé par la relecture adverse : les deux signaient
+# « +0,004 % » sous une pastille grise annoncée « plate ».
+check("une variation sous le seuil de platitude ne porte pas de signe",
+      M.fmt_variation({"variation": 0.004, "type": "pct"}) == "0,00" + M.INSEC + "%"
+      and M.plat({"variation": 0.004, "type": "pct"}))
 
 # LE MÊME FORMATAGE EXISTE DEUX FOIS, EN PYTHON ET EN JS, et c'est assumé : le
 # post stocke des NOMBRES, pas des chaînes déjà mises en forme, sinon un post
@@ -258,7 +286,9 @@ _CAS = [(8666.63, 2), (101.79, 2), (63940.0, 0), (3.872, 3), (1.0847, 4),
         (-0.5, 2), (0.0, 2), (1234567.891, 2), (999.995, 2)]
 _VARS = [{"variation": 1.79, "type": "pct"}, {"variation": -0.022, "type": "pts"},
          {"variation": 0.0, "type": "pct"}, {"variation": -3.456, "type": "pct"},
-         {"variation": 29.45, "type": "pct"}, {"variation": 0.05, "type": "pts"}]
+         {"variation": 29.45, "type": "pct"}, {"variation": 0.05, "type": "pts"},
+         {"variation": 0.004, "type": "pct"}, {"variation": -0.0003, "type": "pts"},
+         {"variation": 0.006, "type": "pct"}]
 try:
     import subprocess                                                # noqa: E402
     _js = open(os.path.join(RACINE, "actualites.html"), encoding="utf-8").read()

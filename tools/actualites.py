@@ -205,7 +205,12 @@ def _defauts_marches(p, marches):
     lequel des deux a raison, il cesse de croire les deux.
     """
     attendu = bool(marches and marches.get("lignes"))
-    txt = (p.get("marches") or "").strip()
+    brut = p.get("marches")
+    # Même leçon qu'une section rendue en texte nu : une exception ici n'est pas
+    # un défaut de plus, c'est la perte de la seconde tentative et du post.
+    if brut is not None and not isinstance(brut, str):
+        return [f"champ `marches` rendu en {type(brut).__name__}, pas en texte"]
+    txt = (brut or "").strip()
     if not attendu:
         return ["champ `marches` rendu alors qu'aucun tableau n'a été fourni"] if txt else []
     if not (60 <= len(txt) <= 700):
@@ -434,15 +439,20 @@ def photos_deja_utilisees(n=10):
 def posts_sans_photo(depuis=10):
     """IDs des posts quotidiens récents publiés sans illustration, du plus
     ancien au plus récent (on répare dans l'ordre de parution)."""
-    trous = []
-    for chemin in sorted(glob.glob(os.path.join(POSTS, "*.json")), reverse=True)[:depuis]:
+    # ON TRONQUE APRÈS AVOIR FILTRÉ, PAS AVANT. Trié à l'envers, « hebdo-2026-31 »
+    # passe devant « 2026-08-07 » : couper les dix premiers FICHIERS laissait
+    # passer dix posts hebdomadaires et éteignait la réparation sans rien dire.
+    quotidiens = []
+    for chemin in sorted(glob.glob(os.path.join(POSTS, "*.json")), reverse=True):
         try:
             d = json.load(open(chemin, encoding="utf-8"))
         except Exception:                                  # noqa: BLE001
             continue
-        if d.get("type") == "quotidien" and d.get("sujet") and not d.get("photo"):
-            trous.append(d["id"])
-    return sorted(trous)
+        if d.get("type") == "quotidien" and d.get("sujet"):
+            quotidiens.append(d)
+        if len(quotidiens) >= depuis:
+            break
+    return sorted(d["id"] for d in quotidiens if not d.get("photo"))
 
 
 def _mots(nom):
@@ -694,7 +704,12 @@ def main():
     # tourné, la même recherche relancée demain trouve souvent. `--reillustrer`
     # existait déjà mais demandait qu'un humain remarque le trou — et le 07/08
     # montre que personne ne le remarque avant plusieurs jours.
-    trous = posts_sans_photo(depuis=10)
+    # DEUX EXCLUSIONS. `--sans-photo` est une volonté, pas un raté : la réparer
+    # rendrait l'option inopérante. Et le post du jour vient d'échouer il y a
+    # trente secondes, avec le même vivier et la même mémoire : le relancer
+    # garantit un second échec et double le coût réseau pour rien. Il sera
+    # repris demain, quand la mémoire aura tourné.
+    trous = [t for t in posts_sans_photo(depuis=10) if t != pid] if not a.sans_photo else []
     if trous:
         print(f"réparation : {len(trous)} post(s) quotidien(s) sans photo — {' '.join(trous)}")
         reillustrer(trous)

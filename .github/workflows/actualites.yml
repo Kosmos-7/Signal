@@ -47,10 +47,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      # yfinance/pandas pour le tableau « Sur les marchés » : le point du matin
-      # mesure lui-même les clôtures qu'il commente, aucune dépêche ne les donne
-      # de façon fiable (elles datent d'heures différentes et se contredisent).
-      - run: pip install --quiet requests anthropic Pillow yfinance pandas
+      # LES VERSIONS SONT ÉPINGLÉES, COMME PARTOUT AILLEURS. Ce job installait
+      # ses dépendances à la main, sans version, alors que requirements.txt les
+      # épingle et que tous les autres workflows le lisent : une résolution pip
+      # malheureuse un matin (roue absente, incompatibilité amont) cassait le
+      # post sans que rien n'ait changé dans le dépôt. Pillow n'y figure pas,
+      # elle reste explicite : c'est l'illustration qui en a besoin.
+      - run: pip install --quiet -r requirements.txt Pillow
       - name: Écrire et valider le post
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
@@ -68,7 +71,12 @@ jobs:
               ${{ (inputs.sans_photo == true || inputs.sans_photo == 'true') && '--sans-photo' || '' }} \
               ${{ (inputs.sans_marches == true || inputs.sans_marches == 'true') && '--sans-marches' || '' }}
           fi
+      # `if: always()` : le post est ÉCRIT sur le disque avant cette étape. Si le
+      # script échoue après coup (la réparation des photos ouvre des connexions
+      # réseau, sans borne de temps), jeter un post déjà écrit et validé serait
+      # perdre le travail du matin pour un habillage.
       - name: Publier
+        if: always()
         env:
           REILLUSTRER: ${{ inputs.reillustrer }}
         run: |
