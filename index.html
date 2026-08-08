@@ -1598,7 +1598,17 @@ function fondaRender(s){
          La forme longue reste PARTOUT où elle porte une information — dans le
          relevé sous le graphique, dans le tableau dépliable, dans les phrases
          de synthèse. Un axe est un repère, pas une source. */
-      const txt=(o.pr?String(r.exercice):lab(r)).replace(/^(\d{2})(\d{2})/,'$2'),
+      /* … PRÉFIXÉES « FY » (demande du propriétaire, 08/08 : « on peut peut-être
+         mettre FY devant pour qu'on comprenne mieux »). « 25 » seul est ambigu :
+         rien ne dit que c'est un exercice comptable, et un lecteur peut le lire
+         comme un rang ou un montant. « FY25 » est la notation standard des
+         rapports financiers, et elle ne coûte RIEN ici : le pas d'affichage
+         budgète quatre caractères (LARG_LAB) depuis « 2025 », il n'a jamais été
+         réduit quand on est passé à deux chiffres. FY25 fait exactement quatre
+         caractères — on retrouve la largeur validée, pas une de plus.
+         En TRIMESTRIEL, rien à ajouter : « T1 25 » se désigne déjà lui-même. */
+      const txt=(o.pr?'FY'+String(r.exercice).slice(2)
+                     :lab(r).replace(/^(\d{2})(\d{2})/,'FY$2')),
             demi=txt.length*LARG_CAR/2;
       const anc=(cx+demi>W-1)?'end':(cx-demi<1?'start':'middle');
       const tx=anc==='end'?W-1:(anc==='start'?1:cx);
@@ -1854,8 +1864,9 @@ function fdPerChart(F,fmtPer,W,b){
      un slot entier l'une de l'autre. */
   // 10 px en unités du viewBox, police à chasse fixe : ~6 unités par
   // caractère. Les VALEURS font trois caractères (« 28× ») ; les libellés
-  // d'AXE en font quatre (« 27e »), il leur faut donc plus d'air.
-  const ECART_VAL=22, ECART_AXE=30;
+  // d'AXE en font cinq depuis le préfixe « FY » (« FY27e » ≈ 31 unités), il
+  // leur faut donc plus d'air — 30 les faisait se toucher.
+  const ECART_VAL=22, ECART_AXE=37;
   let dernierHaut=-1e9, dernierBas=-1e9, dernierAxe=-1e9;
   const stepX=pts.length>8?2:1;
   pts.forEach((p,i)=>{
@@ -1869,7 +1880,7 @@ function fdPerChart(F,fmtPer,W,b){
       g+='<text x="'+cx+'" y="'+ly+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.est?'#8a8aa6':'#c6c6e0')+'">'+Math.round(p.per)+'\u00d7</text>';}
     if((pts.length-1-i)%stepX===0&&cx-dernierAxe>=ECART_AXE){
       dernierAxe=cx;
-      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+'>'+String(p.an).slice(2)+(p.est?'e':'')+'</text>';}
+      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+'>FY'+String(p.an).slice(2)+(p.est?'e':'')+'</text>';}
   });
   return {svg:'<svg class="fd-svg" id="fd-per" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',
     med:med,trous:trous.some(t=>t.an>=a0&&t.an<=a1)};

@@ -5,6 +5,46 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### « FY25 » plutôt que « 25 » sur les axes
+
+Les années à deux chiffres gagnaient de la place mais perdaient leur nature :
+rien ne disait que « 25 » était un exercice comptable. Le préfixe **FY**, la
+notation standard des rapports financiers, ne coûte rien ici : le pas
+d'affichage budgétait déjà quatre caractères depuis « 2025 » et n'avait jamais
+été réduit. « FY25 » en fait exactement quatre. Mesure sur les 93 fiches à
+390 px, 269 vues (annuel, trimestriel, PER) : **aucun chevauchement, aucun
+débordement, aucune étiquette perdue**. En trimestriel, rien à ajouter :
+« T1 25 » se désigne déjà lui-même.
+
+---
+
+### Le point du matin publié sans photo, dans le silence
+
+Le post du 7 août est sorti sans image, le job vert, et rien dans les journaux.
+Cause démontrée : **cinq matins d'affilée sur le sujet « marches »** (3, 4, 5,
+6 et 7 août). Les trois requêtes Commons du sujet avaient donné leurs bonnes
+images les quatre premiers jours ; le cinquième, la mémoire des photos parues
+les écartait toutes, elles et leurs quasi-doublons, et il ne restait que du
+fond de panier. Un sujet qui domine quatre séances n'est pas un cas rare :
+c'est un marché qui vit la même histoire une semaine durant.
+
+Le pire n'était pas le trou, c'était le silence. `infos()` refuse une image
+pour trois raisons (échec réseau, moins de 900 px, licence non libre) et
+n'en disait **aucune** ; `illustrer()` abandonnait après six essais sans
+imprimer une ligne. Quatre corrections :
+
+- **six requêtes par sujet** au lieu de trois, pour tenir la semaine ;
+- **douze candidats essayés** au lieu de six, avec le compte des candidats
+  trouvés et retenus ;
+- `infos(..., bavard=True)` **dit lequel des trois refus** s'applique, image
+  par image (le silence reste le défaut : les balayages de fiches l'appellent
+  des centaines de fois) ;
+- un `::warning::` dans le job **et une réparation automatique** : chaque run
+  reprend les posts quotidiens des dix derniers jours restés sans photo. Un
+  matin sans image n'a aucune raison de le rester à vie, le vivier a bougé.
+
+---
+
 ### L'analyse IA et la fiche ne parlaient pas au même rythme
 
 Question posée : ce que dit l'IA doit coller aux données de la fiche, sinon

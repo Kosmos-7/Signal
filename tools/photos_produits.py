@@ -121,22 +121,37 @@ def fichiers_categorie(cat, profondeur=1, vus=None, budget=None):
     return out
 
 
-def infos(fichier):
+def infos(fichier, bavard=False):
+    """Métadonnées Commons exploitables d'un fichier, None si inexploitable.
+
+    `bavard` DIT POURQUOI. Les trois refus (réseau, image trop petite, licence
+    non libre) étaient muets, ce qui allait tant qu'un humain arbitrait chaque
+    image de fiche. Dans le cron quotidien des actualités, où personne ne
+    regarde, un None muet a publié un post sans photo le 07/08/2026 sans laisser
+    la moindre trace dans un job vert. Le silence reste le défaut (les balayages
+    de fiches appellent `infos()` des centaines de fois d'affilée), il se lève
+    à la demande."""
+    def refus(motif):
+        if bavard:
+            print(f"   photo ✗ {fichier[:46]} — {motif}")
+        return None
     try:
         d = _get(COMMONS_API, {"action": "query", "format": "json",
                                "titles": "File:" + fichier, "prop": "imageinfo",
                                "iiprop": "url|extmetadata|size", "iiurlwidth": "1600"})
-    except Exception:
-        return None
+    except Exception as e:
+        return refus(type(e).__name__)
     page = next(iter((d.get("query", {}).get("pages") or {}).values()), {})
     info = (page.get("imageinfo") or [{}])[0]
-    if not info or (info.get("width") or 0) < 900:
-        return None
+    if not info:
+        return refus("pas d'imageinfo")
+    if (info.get("width") or 0) < 900:
+        return refus(f"{info.get('width')} px de large, minimum 900")
     meta = info.get("extmetadata") or {}
     lic = (meta.get("LicenseShortName") or {}).get("value", "?")
     fam = famille_licence(lic + " " + (meta.get("UsageTerms") or {}).get("value", ""))
     if fam == "autre":
-        return None
+        return refus(f"licence « {lic} » hors des familles libres")
     return {"fichier": fichier, "url": info.get("thumburl") or info.get("url"),
             "page": info.get("descriptionurl", ""), "licence": lic, "famille": fam,
             "auteur": re.sub(r"<[^>]+>", "", (meta.get("Artist") or {}).get("value", ""))[:80]}

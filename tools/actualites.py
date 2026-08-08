@@ -70,28 +70,58 @@ MODELE = "claude-sonnet-4-6"
 # Sujet du post → requêtes Commons pour l'illustration. Le modèle choisit le
 # sujet, la table choisit les requêtes : l'automatisation est bornée par une
 # liste écrite à la main, pas par une recherche libre.
+# VIVIER : SIX REQUÊTES PAR SUJET, PAS TROIS. Cause démontrée du post du 07/08
+# publié sans photo : cinq matins d'affilée sur le sujet « marches » (3, 4, 5,
+# 6 et 7 août). Les trois requêtes avaient donné leurs bonnes images les quatre
+# premiers jours ; le cinquième, la mémoire des photos parues les écartait
+# toutes, elles ET leurs quasi-doublons, et il ne restait que du fond de panier
+# que `infos()` a refusé (trop petit ou licence non libre). Un sujet qui domine
+# quatre séances de suite n'est pas un cas rare : c'est la situation NORMALE
+# d'un marché qui vit une même histoire une semaine durant. Trois requêtes ne
+# tiennent pas la semaine, six oui.
 SUJETS = {
     "banques-centrales": ["Federal Reserve Eccles Building",
                           "European Central Bank Frankfurt tower",
-                          "Bank of Japan headquarters"],
+                          "Bank of Japan headquarters",
+                          "Bank of England Threadneedle Street",
+                          "central bank press conference podium",
+                          "Federal Open Market Committee room"],
     "marches":           ["New York Stock Exchange trading floor",
                           "stock exchange display board",
-                          "Wall Street street sign"],
+                          "Wall Street street sign",
+                          "London Stock Exchange Paternoster Square",
+                          "Tokyo Stock Exchange Arrows",
+                          "Frankfurt Boerse trading hall"],
     "resultats":         ["corporate skyline La Defense",
                           "office towers financial district",
-                          "annual general meeting hall"],
+                          "annual general meeting hall",
+                          "Canary Wharf towers London",
+                          "Manhattan Midtown office towers",
+                          "shareholders meeting auditorium"],
     "tech":              ["data center server racks",
                           "semiconductor wafer cleanroom",
-                          "electronics assembly line"],
+                          "electronics assembly line",
+                          "silicon wafer inspection microscope",
+                          "network cabling data centre aisle",
+                          "robotic arm factory automation"],
     "energie":           ["oil refinery at dusk",
                           "LNG tanker ship",
-                          "high voltage transmission lines"],
+                          "high voltage transmission lines",
+                          "offshore wind farm turbines sea",
+                          "solar power plant panels desert",
+                          "oil drilling rig platform"],
     "geopolitique":      ["container port cranes",
                           "cargo ship containers sea",
-                          "customs border trucks"],
+                          "customs border trucks",
+                          "Strait of Hormuz tanker",
+                          "Suez Canal ship transit",
+                          "freight railway container yard"],
     "macro":             ["supermarket shelf prices",
                           "construction site tower cranes",
-                          "shipping containers stacked port"],
+                          "shipping containers stacked port",
+                          "employment office queue",
+                          "housing construction suburb aerial",
+                          "warehouse logistics forklift pallets"],
 }
 
 # Un post quotidien ne recommande rien. Ces deux racines n'ont aucune raison
@@ -285,6 +315,20 @@ def photos_deja_utilisees(n=10):
     return frozenset(fichiers)
 
 
+def posts_sans_photo(depuis=10):
+    """IDs des posts quotidiens récents publiés sans illustration, du plus
+    ancien au plus récent (on répare dans l'ordre de parution)."""
+    trous = []
+    for chemin in sorted(glob.glob(os.path.join(POSTS, "*.json")), reverse=True)[:depuis]:
+        try:
+            d = json.load(open(chemin, encoding="utf-8"))
+        except Exception:                                  # noqa: BLE001
+            continue
+        if d.get("type") == "quotidien" and d.get("sujet") and not d.get("photo"):
+            trous.append(d["id"])
+    return sorted(trous)
+
+
 def _mots(nom):
     """Mots significatifs (≥3 lettres) du nom d'un fichier Commons."""
     return frozenset(re.findall(r"[a-zà-ÿ]{3,}", os.path.splitext(nom)[0].lower()))
@@ -350,8 +394,15 @@ def illustrer(post_id, sujet, deja=frozenset()):
         for f in chercher_commons(req, limite=8):
             candidats.append((score_nom(f), f, req))
         time.sleep(0.25)
-    for score, fichier, req in choisir_candidats(candidats, deja)[:6]:
-        meta = infos(fichier)
+    # DOUZE ESSAIS, PAS SIX, ET UN JOURNAL. Le 07/08, `illustrer` a rendu None
+    # en n'imprimant RIEN : les trois refus de `infos()` (échec réseau, image de
+    # moins de 900 px, licence non libre) étaient muets, et le job est resté
+    # vert en publiant un post sans image. Un échec silencieux dans un cron
+    # quotidien ne se voit que des semaines plus tard, sur la page.
+    retenus = choisir_candidats(candidats, deja)
+    print(f"   photo : {len(candidats)} candidats, {len(retenus)} retenus après mémoire")
+    for score, fichier, req in retenus[:12]:
+        meta = infos(fichier, bavard=True)
         if not meta:
             continue
         try:
@@ -502,6 +553,20 @@ def main():
     chemin = ecrire_post(complet, force=a.force)
     print(f"post écrit : {chemin} ({len(post['sections'])} sections, "
           f"{len(utilises)} sources, photo {'oui' if complet['photo'] else 'non'})")
+    if not (complet["photo"] or a.sans_photo):
+        # ::warning:: est rendu en jaune dans l'onglet Actions et remonte dans le
+        # résumé du run. Sans lui, un post sans photo se lit « success » comme un
+        # autre : c'est exactement ce qui a laissé passer le 07/08.
+        print(f"::warning::post {pid} publié SANS PHOTO (sujet {post['sujet']})")
+    # RÉPARATION DU LENDEMAIN. Un matin sans photo n'a aucune raison de rester
+    # sans photo à vie : le vivier a bougé, la mémoire des photos parues a
+    # tourné, la même recherche relancée demain trouve souvent. `--reillustrer`
+    # existait déjà mais demandait qu'un humain remarque le trou — et le 07/08
+    # montre que personne ne le remarque avant plusieurs jours.
+    trous = posts_sans_photo(depuis=10)
+    if trous:
+        print(f"réparation : {len(trous)} post(s) quotidien(s) sans photo — {' '.join(trous)}")
+        reillustrer(trous)
     print(f"index : {reconstruire_index()} posts")
 
 
