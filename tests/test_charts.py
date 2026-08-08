@@ -471,11 +471,11 @@ check("un consensus disparu ne ressuscite pas",
           {"devise": "USD", "an": [], "tr": []}))
 # Garde-fou générique : tout champ de `fonda` que la fusion ignore disparaît.
 # Ce test échouera dès qu'un nouveau champ sera ajouté sans être traité ici.
-CHAMPS = {"devise", "an", "tr", "pe_prev", "proj", "consensus", "per_converti"}
+CHAMPS = {"devise", "an", "tr", "pe_prev", "proj", "consensus", "per_converti", "pe_prev_indecis"}
 plein = {"devise": "USD", "an": [{"fin": "2025-12-31", "ca": 1}], "tr": [],
          "pe_prev": [{"exercice": 2026, "per": 30.0}], "proj": PJ,
          "consensus": {"analystes": 38, "ecart_pct": 3.7},
-         "per_converti": {"de": "CHF", "vers": "USD"}}
+         "per_converti": {"de": "CHF", "vers": "USD"}, "pe_prev_indecis": True}
 check("aucun champ de fonda n'est perdu en silence par la fusion",
       set(screener.fusionner_fonda(plein, plein)) == CHAMPS,
       str(CHAMPS ^ set(screener.fusionner_fonda(plein, plein))))
@@ -1304,33 +1304,58 @@ for _mauvais, _nom in [(lambda i: 0.0, "nul"), (lambda i: -1.2, "négatif")]:
 
 # ── LE MULTIPLE PRÉVISIONNEL QUAND LES DEVISES DIFFÈRENT ───────────────────
 # `per_previsionnel` AFFIRMAIT que les estimations d'analystes sont libellées
-# dans la devise de cotation, sans jamais le vérifier. C'est faux au moins une
-# fois : Vestas publiait 154× là où le multiple en vaut une vingtaine, un cours
-# en couronnes danoises étant divisé par un bénéfice estimé en euros.
+# dans la devise de cotation, sans jamais le vérifier. C'est faux au moins deux
+# fois : Vestas affichait 154× (cours en couronnes, bénéfice estimé en euros) et
+# Tencent 2,0× (cours en dollars, bénéfice estimé en yuans) — ce dernier repéré
+# par le propriétaire sur la fiche publiée.
 #
-# Trois départages ont été essayés et ont échoué — la croissance implicite ne
-# tranche que si le change est loin de 1 ; le PER courant du fournisseur a le
-# défaut qu'il devait arbitrer (sur ABB il vaut 37,3 contre notre 28,9, soit le
-# change CHF→USD) ; et la place de cotation ne prédit rien. On ne publie donc
-# aucun multiple attendu quand la devise des comptes n'est pas celle du cours.
-# C'est le même arbitrage que partout ailleurs : le trou plutôt que le faux.
+# ON TRANCHE PAR LA CROISSANCE IMPLICITE, quand elle tranche : le BPA estimé
+# succède au dernier BPA publié, dont la devise est connue. Lu dans la bonne
+# monnaie leur rapport est une croissance ; lu dans l'autre il vaut le taux de
+# change. Et on s'abstient quand les deux lectures sont plausibles, c'est-à-dire
+# dès que le change est proche de 1.
 print("\n— Le multiple attendu quand les devises diffèrent —")
 _EST = {"0y": 2.0, "+1y": 2.4}
-_ok = screener.per_previsionnel(60.0, _EST, "2025-12-31", False)
 check("devises identiques : les deux exercices attendus sont publiés",
-      [(e["exercice"], e["per"]) for e in _ok] == [(2026, 30.0), (2027, 25.0)], str(_ok))
-_ko = screener.per_previsionnel(60.0, _EST, "2025-12-31", True)
-check("devises différentes : aucun multiple attendu",
-      _ko == [], str(_ko))
-# Le défaut par défaut doit rester le comportement SÛR pour les 90 % de fiches
-# mono-devise : un appel sans le drapeau publie, comme avant.
-check("l'argument est optionnel et ne change rien au cas courant",
-      screener.per_previsionnel(60.0, _EST, "2025-12-31") == _ok)
-# Et la fiche doit DIRE pourquoi ces points manquent, sinon le trou se lit
-# comme une négligence — c'est la leçon du 08/08 sur les multiples historiques.
+      [(e["exercice"], e["per"]) for e in
+       screener.per_previsionnel(60.0, _EST, "2025-12-31")] == [(2026, 30.0), (2027, 25.0)])
+# Les six fiches réelles, avec leurs chiffres du 09/08/2026. Ce sont ELLES le
+# test : une règle qui marche sur des cas inventés ne prouve rien ici, puisque
+# c'est le comportement d'une source qu'on modélise.
+#            prix     BPA est.  taux    BPA publié  attendu
+_REELS = [("TCEHY",  61.92,  30.96,  7.10,  24.153, "converti"),
+          ("VWS.CO", 178.05,  1.153, 0.134,  0.77,  "converti"),
+          ("ASX",     37.39,  1.119, 31.0,  18.74,  "direct"),
+          ("ABBN.SW", 81.76,  3.194, 1.25,   2.59,  "trou"),
+          ("RACE",   412.26,  9.792, 0.926,  9.01,  "trou"),
+          ("CCJ",     97.39,  1.514, 1.37,   1.35,  "trou")]
+for _t, _p, _e, _tx, _ep, _att in _REELS:
+    _r = screener.per_previsionnel(_p, {"0y": _e, "+1y": _e * 1.08}, "2025-12-31",
+                                   (lambda i, _x=_tx: _x), _ep)
+    _per = _r[0]["per"] if _r else None
+    _got = ("trou" if _per is None
+            else "converti" if abs(_per - _p * _tx / _e) < 0.05 else "direct")
+    check(f"{_t} : {_att}", _got == _att, f"obtenu {_got} ({_per})")
+# Sans BPA publié positif, rien à quoi comparer — on ne devine pas.
+check("sans bénéfice publié, aucun multiple attendu",
+      screener.per_previsionnel(60.0, _EST, "2025-12-31", 7.0, None) == [])
+check("un bénéfice publié négatif ne sert pas de référence",
+      screener.per_previsionnel(60.0, _EST, "2025-12-31", 7.0, -1.2) == [])
+# Le cas mono-devise ne doit RIEN changer pour les 95 % de fiches concernées.
+check("l'argument taux est optionnel et neutre",
+      screener.per_previsionnel(60.0, _EST, "2025-12-31")
+      == screener.per_previsionnel(60.0, _EST, "2025-12-31", None, 1.9))
+# La bande de croissance est le seul réglage de la règle : elle doit rester
+# large, sinon on écarterait des reprises réelles en les prenant pour des
+# erreurs de devise.
+check("la bande de croissance reste large",
+      screener.BANDE_CROISSANCE_BPA[0] <= 1 / 3
+      and screener.BANDE_CROISSANCE_BPA[1] >= 3,
+      str(screener.BANDE_CROISSANCE_BPA))
+# Et la fiche doit DIRE pourquoi les points manquent quand ils manquent.
 _ixp = open(os.path.join(RACINE, "index.html"), encoding="utf-8").read()
-check("la fiche explique l'absence de multiple attendu",
-      "Aucun multiple ATTENDU" in _ixp)
+check("la fiche explique l'absence, et seulement quand elle a lieu",
+      "pe_prev_indecis" in _ixp and "également plausibles" in _ixp)
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")

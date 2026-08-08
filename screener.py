@@ -795,52 +795,79 @@ def taux_historique(de, vers):
     return taux
 
 
-def per_previsionnel(prix, estimations, dernier_exercice, devises_differentes=False):
+# Bande de croissance annuelle du bénéfice par action jugée POSSIBLE. Elle est
+# volontairement large : un bénéfice qui triple ou qui tombe aux deux tiers en
+# un exercice existe (reprise post-crise, année de charges). Elle ne sert pas à
+# juger une société, seulement à écarter l'absurde — un facteur sept ou trente
+# n'est pas une croissance, c'est un changement d'unité.
+BANDE_CROISSANCE_BPA = (1 / 3, 3)
+
+
+def per_previsionnel(prix, estimations, dernier_exercice, taux=None,
+                     eps_publie=None):
     """PER des deux exercices À VENIR : cours ACTUEL / BPA moyen estimé par les
     analystes (Yahoo, lignes 0y et +1y). Étiquettes = exercice fiscal suivant le
     dernier clos. estimations : {"0y": eps, "+1y": eps} (None/absent tolérés).
 
-    LA DEVISE DES ESTIMATIONS N'EST PAS DÉCLARÉE, ET ELLE NE SE DÉDUIT PAS.
-    Cette fonction AFFIRMAIT, dans cette docstring, que « les estimations sont
-    publiées dans la devise de cotation ». Elle ne l'a jamais vérifié, et c'est
-    faux au moins une fois : Vestas publiait un PER prévisionnel de 154× là où
-    il en vaut une vingtaine, un cours en couronnes danoises y étant divisé par
-    un bénéfice estimé en euros. Découvert le 08/08/2026 en donnant enfin leurs
-    multiples historiques à ces mêmes fiches.
+    LA DEVISE DES ESTIMATIONS N'EST PAS DÉCLARÉE, ET ELLE SE MESURE MAL.
+    Cette fonction AFFIRMAIT que « les estimations sont publiées dans la devise
+    de cotation », sans jamais le vérifier. C'est faux au moins deux fois :
+    Vestas affichait un PER prévisionnel de 154× (cours en couronnes danoises,
+    bénéfice estimé en euros) et Tencent de 2,0× (cours en dollars, bénéfice
+    estimé en yuans). Sept fiches du site cotent dans une autre monnaie que
+    celle de leurs comptes.
 
-    TROIS DÉPARTAGES ESSAYÉS, TROIS ÉCHECS, et ils valent d'être écrits pour
-    qu'on ne les retente pas :
-      · la croissance implicite du bénéfice (comparer l'estimation au dernier
-        BPA publié) ne tranche que si le change est loin de 1 — elle départage
-        Vestas (×7,46) et pas Ferrari (×1,08) ;
-      · le PER courant du fournisseur, pris comme ancrage, a le défaut même
-        qu'il devait arbitrer : sur ABB il vaut 37,3 quand notre multiple 2025
-        en vaut 28,9, soit un rapport de 1,29 — le change CHF→USD à 1,25. Le
-        fournisseur commet donc parfois le mélange qu'on cherchait à détecter ;
-      · la place de cotation ne prédit rien : deux lignes new-yorkaises de
-        sociétés étrangères, Ferrari et Cameco, ne se comportent pas pareil.
+    ON TRANCHE PAR LA CROISSANCE IMPLICITE, quand elle tranche. Le BPA estimé
+    de l'exercice à venir succède au dernier BPA publié, dont nous connaissons
+    la devise : leur rapport est une croissance annuelle. Lue dans la bonne
+    monnaie elle est plausible ; lue dans l'autre elle vaut le taux de change,
+    c'est-à-dire n'importe quoi. Tencent 1,3 contre 9,1 ; Vestas 1,5 contre
+    0,2 ; ASE 1,9 contre 0,06 : le départage est net.
 
-    ON NE PUBLIE DONC PAS DE MULTIPLE PRÉVISIONNEL quand la devise des comptes
-    n'est pas celle de la cotation. L'enjeu n'est pas un arrondi : il va de 8 %
-    à un facteur sept selon la paire, et une courbe qui mêlerait deux bases
-    serait pire qu'une courbe plus courte. C'est la même règle que pour
-    l'historique — sauf que là, nous CONNAISSONS les deux devises et pouvons
-    convertir ; ici, l'une des deux nous est cachée.
+    ET ON S'ABSTIENT QUAND ELLE NE TRANCHE PAS. Si les deux lectures donnent
+    une croissance plausible — c'est le cas dès que le change est proche de 1,
+    ABB à 1,25, Cameco à 1,37, Ferrari à 1,08 — alors rien ne les distingue et
+    aucun multiple n'est publié. L'erreur y serait de 8 à 37 %, moins
+    spectaculaire qu'un facteur sept mais tout aussi indémontrable.
 
-    Ce que le lecteur perd : deux points estimés sur cinq fiches. Ce qu'il
-    gagne : ne pas lire 154× pour une société qui se paie une vingtaine de fois
-    ses bénéfices."""
-    if not prix or prix <= 0 or not dernier_exercice or devises_differentes:
+    DEUX AUTRES DÉPARTAGES ONT ÉTÉ ESSAYÉS ET ÉCARTÉS, notés ici pour qu'on ne
+    les retente pas. Le PER courant du fournisseur, pris comme ancrage, a le
+    défaut même qu'il devait arbitrer : sur ABB il vaut 37,3 quand notre
+    multiple 2025 en vaut 28,9, soit le change CHF→USD à 1,25 — la source
+    commet parfois le mélange qu'on cherchait à détecter. Et la place de
+    cotation ne prédit rien : Ferrari et Cameco, deux lignes new-yorkaises de
+    sociétés étrangères, ne se comportent pas pareil.
+
+    Retourne aussi, par le champ `base`, la lecture retenue — le site l'affiche
+    plutôt que de laisser croire à un quotient sans couture."""
+    if not prix or prix <= 0 or not dernier_exercice:
         return []
     try:
         annee = int(str(dernier_exercice)[:4])
     except (TypeError, ValueError):
         return []
+    convertir = False
+    if taux is not None:
+        t = taux(dernier_exercice) if callable(taux) else taux
+        eps0 = (estimations or {}).get("0y")
+        if not t or t <= 0 or not eps0 or eps0 <= 0 \
+                or not eps_publie or eps_publie <= 0:
+            return []          # rien à quoi comparer : on ne devine pas
+        bas, haut = BANDE_CROISSANCE_BPA
+        # Croissance implicite selon chacune des deux lectures possibles.
+        g_comptes = eps0 / eps_publie                # estimation déjà en devise des comptes
+        g_cotation = eps0 * t / eps_publie           # estimation en devise de cotation
+        ok_c, ok_q = bas <= g_comptes <= haut, bas <= g_cotation <= haut
+        if ok_c == ok_q:
+            return []          # les deux plausibles, ou aucune : indécidable
+        convertir = ok_c
     out = []
     for i, cle in enumerate(("0y", "+1y")):
         eps = (estimations or {}).get(cle)
         if eps and eps > 0:
-            out.append({"exercice": annee + 1 + i, "per": round(prix / eps, 1)})
+            p = prix * (taux(dernier_exercice) if callable(taux) else taux) \
+                if convertir else prix
+            out.append({"exercice": annee + 1 + i, "per": round(p / eps, 1)})
     return out
 
 
@@ -1294,6 +1321,11 @@ def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
     # indisponible — auquel cas les multiples disparaissent avec elle.
     if nouveau.get("per_converti"):
         out["per_converti"] = nouveau["per_converti"]
+    # Même règle : l'indécision sur la devise des estimations décrit le run
+    # courant. Si la source publiait demain des chiffres départageables, la
+    # mention doit disparaître avec eux.
+    if nouveau.get("pe_prev_indecis"):
+        out["pe_prev_indecis"] = nouveau["pe_prev_indecis"]
     return out
 
 
@@ -2482,12 +2514,18 @@ def score_ticker(ticker, vix=None):
                     # celui du jour, et l'écart de quelques mois entre les deux
                     # est sans effet sur un DÉPARTAGE dont l'enjeu est un facteur
                     # 1,08 à 31 selon la paire.
-                    # Devises différentes : aucun multiple prévisionnel. Nous
-                    # savons convertir le cours (nous connaissons sa devise et
-                    # celle des comptes) mais PAS dans quelle monnaie le
-                    # fournisseur exprime les estimations — cf. per_previsionnel.
+                    # Devise des estimations : non déclarée par la source, on
+                    # la tranche par la croissance implicite du bénéfice quand
+                    # elle tranche, et on s'abstient sinon (cf. per_previsionnel).
+                    _eps_pub = next((e["eps"] for e in reversed(fonda["an"])
+                                     if (e.get("eps") or 0) > 0), None)
                     prev = per_previsionnel(float(close.iloc[-1]), est, dernier,
-                                            not meme_devise)
+                                            _fx, _eps_pub)
+                    # L'ABSENCE SE DIT. Un lecteur qui voit deux points estimés
+                    # sur une fiche et aucun sur la voisine doit savoir que ce
+                    # n'est pas une négligence.
+                    if _fx and not prev:
+                        fonda["pe_prev_indecis"] = True
                     if prev:
                         fonda["pe_prev"] = prev
                     # Trajectoire attendue jusqu'à 2030 : consensus analystes
