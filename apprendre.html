@@ -297,6 +297,14 @@
     -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
   }
+  /* TERME TECHNIQUE ANGLAIS, donné une fois, à la première explication d'un
+     concept. Les sources primaires — rapports annuels, dépêches, écrans de
+     courtier, filtres de screener — sont en anglais : un lecteur qui n'a
+     appris que « rentabilité des capitaux propres » ne reconnaît pas « ROE »
+     quand il le croise, et il le croisera avant le mot français. En italique
+     et en retrait de couleur pour rester un aparté, jamais le sujet. */
+  .en { font-style: italic; color: var(--text3); }
+
   .sec-tete figcaption {
     position: absolute;
     left: 0; right: 0; bottom: 0;
@@ -628,7 +636,7 @@ Une action qui monte et descend n'est pas « risquée » en soi. Le vrai risque,
       </div>
 
       <div class="advice-card ac-orange">
-        <div class="advice-title">La qualité, c'est une « douve »</div>
+        <div class="advice-title">La qualité, c'est une « douve » (<span class="en">moat</span>)</div>
         <div class="advice-body">
 Une bonne entreprise est un château protégé par une douve : un avantage durable qui tient les concurrents à distance, et surtout le <strong>pouvoir d'augmenter ses prix</strong> sans perdre ses clients. Mauboussin ajoute la mesure utile : une rentabilité du capital et des marges qui <em>tiennent dans le temps</em> en disent bien plus long sur la qualité que la croissance récente des bénéfices, laquelle, elle, ne se prolonge presque jamais.
         </div>
@@ -642,7 +650,7 @@ Imagine le marché comme un associé lunatique qui te propose chaque jour un pri
       </div>
 
       <div class="advice-card ac-blue">
-        <div class="advice-title">Raisonne en « taux de base », pas en coup de cœur</div>
+        <div class="advice-title">Raisonne en « taux de base » (<span class="en">base rates</span>), pas en coup de cœur</div>
         <div class="advice-body">
 Avant de croire qu'une entreprise va croître de 30 % par an pendant dix ans, demande-toi combien y parviennent réellement : pour les grandes capitalisations, la réponse est <em>quasiment aucune</em> (Mauboussin). Pars de ce qui arrive <em>d'habitude</em> à ce type de situation, puis ne t'en écarte qu'avec des arguments solides, jamais l'inverse.
         </div>
@@ -683,7 +691,7 @@ La conséquence surprend souvent : quand tu achètes une action NVIDIA, <strong>
       </div>
 
       <div class="concept-card">
-        <span class="concept-label">02 · Le carnet d'ordres</span>
+        <span class="concept-label">02 · Le carnet d'ordres (<span class="en">order book</span>)</span>
         <span class="concept-example">Le cours = le prix de la dernière transaction</span>
         <div class="concept-body">
 Il n'existe aucune autorité qui « fixe » un cours. À chaque instant, un <strong>carnet d'ordres</strong> empile d'un côté ceux qui veulent acheter et le prix maximum qu'ils acceptent, de l'autre ceux qui veulent vendre et leur prix minimum. Quand les deux se croisent, l'échange se fait, et ce prix devient le cours affiché.
@@ -708,9 +716,9 @@ C'est ce qui explique le phénomène le plus déroutant pour un débutant : une 
         <span class="concept-label">04 · La capitalisation</span>
         <span class="concept-example">cours × nombre d'actions</span>
         <div class="concept-body">
-La <strong>capitalisation boursière</strong> est le prix de toutes les actions réunies. C'est la taille de l'entreprise vue par le marché, et c'est le chiffre qui sert à classer les sociétés en grandes, moyennes et petites capitalisations.
+La <strong>capitalisation boursière</strong> (<span class="en">market capitalisation</span>, « market cap ») est le prix de toutes les actions réunies. C'est la taille de l'entreprise vue par le marché, et c'est le chiffre qui sert à classer les sociétés en grandes, moyennes et petites capitalisations.
           <br><br>
-Attention au raccourci : la capitalisation n'est pas le prix qu'il faudrait payer pour racheter l'entreprise. Il faudrait y ajouter ses dettes et en retirer sa trésorerie, ce qui donne la <strong>valeur d'entreprise</strong>. Deux sociétés valant 100 milliards en bourse ne coûtent pas la même chose si l'une porte 40 milliards de dette et l'autre 40 milliards de cash.
+Attention au raccourci : la capitalisation n'est pas le prix qu'il faudrait payer pour racheter l'entreprise. Il faudrait y ajouter ses dettes et en retirer sa trésorerie, ce qui donne la <strong>valeur d'entreprise</strong> (<span class="en">enterprise value</span>, EV). Deux sociétés valant 100 milliards en bourse ne coûtent pas la même chose si l'une porte 40 milliards de dette et l'autre 40 milliards de cash.
         </div>
       </div>
     </div>
@@ -775,24 +783,24 @@ Signal essaie de faire mieux que cette baseline en sélectionnant des actions in
 
     <div class="concept-grid">
       <div class="concept-card">
-        <span class="concept-label">Tableau 1 · Le compte de résultat</span>
+        <span class="concept-label">Tableau 1 · Le compte de résultat (<span class="en">income statement</span>, « P&amp;L »)</span>
         <span class="concept-example">Gagne-t-elle de l'argent ?</span>
         <div class="concept-body">
-Il part du <strong>chiffre d'affaires</strong>, tout ce que l'entreprise a facturé, et lui retire ses coûts par étapes. Chaque étape porte un nom et raconte quelque chose de différent.
+Il part du <strong>chiffre d'affaires</strong> (<span class="en">revenue</span>, « top line »), tout ce que l'entreprise a facturé, et lui retire ses coûts par étapes. Chaque étape porte un nom et raconte quelque chose de différent.
           <br><br>
-On retire d'abord le <strong>coût de production</strong> de ce qui a été vendu, ce qui donne la <strong>marge brute</strong>. Elle mesure le pouvoir de fixer ses prix : un éditeur de logiciel dépasse souvent 75 %, un distributeur peine à 25 %, et ce n'est pas que l'un est mieux géré, c'est que l'un vend des copies et l'autre des cartons.
+On retire d'abord le <strong>coût de production</strong> de ce qui a été vendu, ce qui donne la <strong>marge brute</strong> (<span class="en">gross margin</span>). Elle mesure le pouvoir de fixer ses prix : un éditeur de logiciel dépasse souvent 75 %, un distributeur peine à 25 %, et ce n'est pas que l'un est mieux géré, c'est que l'un vend des copies et l'autre des cartons.
           <br><br>
-On retire ensuite les frais de fonctionnement, recherche, commercial, administration, pour obtenir le <strong>résultat opérationnel</strong>, qui mesure l'efficacité du métier lui-même. Puis les intérêts de la dette et l'impôt, et il reste le <strong>résultat net</strong>, la part qui revient aux actionnaires. Rapporté au nombre d'actions, c'est le <strong>bénéfice par action</strong>, la brique de tous les calculs de valorisation.
+On retire ensuite les frais de fonctionnement, recherche, commercial, administration, pour obtenir le <strong>résultat opérationnel</strong>, qui mesure l'efficacité du métier lui-même. Puis les intérêts de la dette et l'impôt, et il reste le <strong>résultat net</strong> (<span class="en">net income</span>, « bottom line »), la part qui revient aux actionnaires. Rapporté au nombre d'actions, c'est le <strong>bénéfice par action</strong> (<span class="en">earnings per share</span>, EPS), la brique de tous les calculs de valorisation.
         </div>
       </div>
 
       <div class="concept-card">
-        <span class="concept-label">Tableau 2 · Le bilan</span>
+        <span class="concept-label">Tableau 2 · Le bilan (<span class="en">balance sheet</span>)</span>
         <span class="concept-example">Que possède-t-elle, que doit-elle ?</span>
         <div class="concept-body">
 Le compte de résultat est un film, le bilan est une photographie prise le dernier jour du trimestre. D'un côté ce que l'entreprise <strong>possède</strong>, usines, stocks, brevets, trésorerie. De l'autre ce qu'elle <strong>doit</strong>, dettes bancaires et obligataires, fournisseurs à payer. La différence appartient aux actionnaires.
           <br><br>
-Le chiffre à regarder en premier est la <strong>dette nette</strong>, c'est-à-dire la dette moins la trésorerie. Une société qui a plus de cash que de dettes traverse une récession sans se poser de questions ; une société très endettée doit refinancer régulièrement, et le jour où les taux montent, ses intérêts explosent avant même que son activité ait bougé.
+Le chiffre à regarder en premier est la <strong>dette nette</strong> (<span class="en">net debt</span>), c'est-à-dire la dette moins la trésorerie. Une société qui a plus de cash que de dettes traverse une récession sans se poser de questions ; une société très endettée doit refinancer régulièrement, et le jour où les taux montent, ses intérêts explosent avant même que son activité ait bougé.
           <br><br>
 La mesure usuelle rapporte cette dette nette au résultat opérationnel avant amortissements : au-delà de trois fois, on parle d'un bilan tendu, et le titre devient sensible aux taux autant qu'à son métier.
         </div>
@@ -804,7 +812,7 @@ La mesure usuelle rapporte cette dette nette au résultat opérationnel avant am
         <div class="concept-body">
 Le résultat net dépend de conventions comptables : à quel rythme amortir une usine, quand reconnaître une vente à crédit. Le tableau de flux, lui, suit <strong>l'argent qui entre et sort réellement</strong>.
           <br><br>
-On y lit le flux généré par l'activité, puis ce que l'entreprise a dépensé pour maintenir et développer son outil de production, ses <strong>investissements</strong>. La différence est le <strong>flux de trésorerie disponible</strong> : le cash réellement libre, celui qui peut servir à rembourser, à verser un dividende, à racheter des actions ou à faire une acquisition.
+On y lit le flux généré par l'activité, puis ce que l'entreprise a dépensé pour maintenir et développer son outil de production, ses <strong>investissements</strong>. La différence est le <strong>flux de trésorerie disponible</strong> (<span class="en">free cash flow</span>, FCF) : le cash réellement libre, celui qui peut servir à rembourser, à verser un dividende, à racheter des actions ou à faire une acquisition.
           <br><br>
 C'est le chiffre le plus difficile à maquiller, et c'est pour cela qu'il est le plus surveillé. Une entreprise peut afficher un bénéfice net confortable tout en brûlant du cash, parce qu'elle finance une croissance qu'elle n'a pas encore encaissée. Cela peut être un excellent investissement comme le début d'un accident : seuls les trois tableaux ensemble permettent de trancher.
         </div>
@@ -830,9 +838,9 @@ Les trois tableaux ne servent à rien tant qu'on ne les a pas fait parler ensemb
           <div class="kpi-mini"><span class="kpi-mini-label">Par action</span><span class="kpi-mini-value">10,81 $</span></div>
         </div>
 
-<strong>1. Le compte de résultat, de haut en bas.</strong> Sur 402,8 milliards facturés, il reste 132,2 milliards une fois tout payé — fournisseurs, salaires, recherche, intérêts, impôt. C'est une <strong>marge nette de 32,8 %</strong> : sur 100 $ de ventes, 33 $ finissent en bénéfice. Pour situer, un distributeur alimentaire tourne autour de 2 %, un constructeur automobile autour de 5 %. Trente-trois pour cent n'est pas une performance de gestion, c'est la signature d'une position dominante.
+<strong>1. Le compte de résultat, de haut en bas.</strong> Sur 402,8 milliards facturés, il reste 132,2 milliards une fois tout payé — fournisseurs, salaires, recherche, intérêts, impôt. C'est une <strong>marge nette (<span class="en">net profit margin</span>) de 32,8 %</strong> : sur 100 $ de ventes, 33 $ finissent en bénéfice. Pour situer, un distributeur alimentaire tourne autour de 2 %, un constructeur automobile autour de 5 %. Trente-trois pour cent n'est pas une performance de gestion, c'est la signature d'une position dominante.
         <br><br>
-<strong>2. Le bilan, en une question.</strong> La dette représente <strong>19 % des capitaux propres</strong>. Autrement dit, pour 100 $ appartenant aux actionnaires, la société doit 19 $. Une remontée des taux d'intérêt ne la met pas en difficulté ; elle n'a pas besoin de refinancer pour survivre. À l'autre extrême, un ratio de 200 % rendrait le titre sensible aux taux autant qu'à son métier.
+<strong>2. Le bilan, en une question.</strong> La dette représente <strong>19 % des capitaux propres (<span class="en">shareholders' equity</span>)</strong>. Autrement dit, pour 100 $ appartenant aux actionnaires, la société doit 19 $. Une remontée des taux d'intérêt ne la met pas en difficulté ; elle n'a pas besoin de refinancer pour survivre. À l'autre extrême, un ratio de 200 % rendrait le titre sensible aux taux autant qu'à son métier.
         <br><br>
 <strong>3. Les flux, l'épreuve de vérité.</strong> Des 132,2 milliards de bénéfice comptable, <strong>environ 73 milliards</strong> se retrouvent réellement en cash disponible, soit une <strong>conversion de 55 %</strong>. L'écart n'est pas un signal d'alarme : il part surtout dans les centres de données, un investissement massif et volontaire. Mais c'est bien ce rapport-là qu'il faut regarder, pas le seul bénéfice. Une société qui affiche un bénéfice en hausse et une conversion qui s'effondre année après année finance sa croissance avec de l'argent qu'elle n'a pas encore encaissé.
         <br><br>
@@ -911,7 +919,7 @@ Cette position détermine tout. Un fournisseur d'équipement facture peu de clie
 
     <div class="concept-grid">
       <div class="concept-card">
-        <span class="concept-label">Le plus connu · Le PER</span>
+        <span class="concept-label">Le plus connu · Le PER (<span class="en">price-to-earnings ratio</span>, P/E)</span>
         <span class="concept-example">cours ÷ bénéfice par action</span>
         <div class="concept-body">
 Un PER de 20 signifie que tu paies vingt fois le bénéfice annuel actuel. Lu autrement, et c'est plus parlant : à bénéfice constant, il faudrait vingt ans pour récupérer ta mise.
@@ -1019,7 +1027,7 @@ Savoir reconnaître ces mouvements évite deux erreurs symétriques : croire à 
     </div>
 
     <div class="scoring-note" style="margin-top:1.25rem">
-<strong>Le lien avec les fiches.</strong> Le bloc <em>Consensus analystes</em> d'une fiche Signal reprend exactement cette mécanique : nombre d'analystes qui suivent le titre, objectif de cours moyen, et surtout le sens des révisions récentes. Et lorsqu'une fiche mentionne un résultat trimestriel, elle donne la date de publication : sans elle, un chiffre de croissance ne veut rien dire, on ne sait pas de quel trimestre il parle ni s'il est déjà digéré par le marché.
+<strong>Le lien avec les fiches.</strong> Le bloc <em>Consensus analystes</em> d'une fiche Signal reprend exactement cette mécanique : nombre d'analystes qui suivent le titre, objectif de cours (<span class="en">price target</span>) moyen, et surtout le sens des révisions récentes. Et lorsqu'une fiche mentionne un résultat trimestriel, elle donne la date de publication : sans elle, un chiffre de croissance ne veut rien dire, on ne sait pas de quel trimestre il parle ni s'il est déjà digéré par le marché.
     </div>
   </section>
 
@@ -1057,7 +1065,7 @@ Concrètement, un achat de 1 000 € coûte 0,75 € à l'aller ; un aller-retou
         <br><br>
 <strong>Le taux a changé le 1<sup>er</sup> janvier 2026</strong>, et la plupart des contenus en ligne portent encore l'ancien. La loi de financement de la Sécurité sociale pour 2026, promulguée le 30 décembre 2025, crée une contribution financière pour l'autonomie de 1,4 point : la CSG sur les revenus du capital passe de 9,2 à 10,6 %, les prélèvements sociaux de 17,2 à 18,6 %, et le PFU de 30 à 31,4 %. Le piège est que la hausse ne touche <em>pas</em> tout : assurance-vie, PEL, CEL, PEP, revenus fonciers et plus-values immobilières restent à 17,2 %. Elle touche bien les plus-values de cession de valeurs mobilières, les dividendes et les intérêts.
         <br><br>
-<strong>Point capital</strong> : seules les plus-values <strong>réalisées</strong> (= positions effectivement vendues) sont taxées. Les plus-values <strong>latentes</strong> (= positions ouvertes qui montent) ne déclenchent aucun impôt tant qu'on ne vend pas. C'est cette asymétrie qui rend le <em>buy &amp; hold</em> long terme structurellement avantageux : NVDA détenue depuis 5 mois avec +95 % de plus-value latente ne paye aucun impôt, l'impôt n'arrive qu'au moment de la cession.
+<strong>Point capital</strong> : seules les plus-values <strong>réalisées</strong> (= positions effectivement vendues) sont taxées. Les plus-values <strong>latentes</strong> (= positions ouvertes qui montent) ne déclenchent aucun impôt tant qu'on ne vend pas. C'est cette asymétrie qui rend le <em>buy &amp; hold</em> long terme structurellement avantageux : NVDA détenue depuis 5 mois avec +95 % de plus-value latente (<span class="en">unrealised gain</span>) ne paye aucun impôt, l'impôt n'arrive qu'au moment de la cession.
         <br><br>
 <strong>Conséquence pour l'IA</strong> : couper une position en gain pour rotater vers une autre opportunité PERD 31,4 % du gain réalisé. Une vente "neutre" (sortir d'un +20% pour acheter ailleurs) n'est rationnelle que si l'alternative a un alpha attendu suffisant pour couvrir cette friction, règle empirique : ne pas vendre un +20 % pour un titre dont l'avantage espéré est inférieur à 10 %.
       </div>
@@ -1156,7 +1164,7 @@ Le portefeuille Signal est modélisé dans un <strong>CTO</strong> (compte-titre
           <div class="bar-fill" style="width: 35%"></div>
         </div>
         <div class="scoring-desc">
-Ce que l'entreprise <em>est</em>, mesuré sur plusieurs exercices publiés, pas sur le dernier trimestre. Cinq critères : la <strong>marge nette médiane</strong> pluriannuelle (9 pts — la médiane ignore l'année exceptionnelle, dans les deux sens), le <strong>rendement des capitaux propres</strong> (9 pts — tempéré quand le levier dépasse 200 % des fonds propres : un ROE dopé à la dette ne vaut pas un ROE organique), la <strong>conversion du bénéfice en cash réel</strong> (7 pts — sur 100 € de bénéfice comptable, combien finissent en trésorerie ; le cash est plus dur à maquiller), la <strong>dette rapportée aux capitaux propres</strong> (5 pts), et la <strong>constance</strong> (5 pts — la part des exercices bénéficiaires sur tout l'historique connu).
+Ce que l'entreprise <em>est</em>, mesuré sur plusieurs exercices publiés, pas sur le dernier trimestre. Cinq critères : la <strong>marge nette médiane</strong> pluriannuelle (9 pts — la médiane ignore l'année exceptionnelle, dans les deux sens), le <strong>rendement des capitaux propres</strong>, <span class="en">return on equity</span> ou ROE (9 pts — tempéré quand le levier dépasse 200 % des fonds propres : un ROE dopé à la dette ne vaut pas un ROE organique), la <strong>conversion du bénéfice en cash réel</strong>, <span class="en">cash conversion</span> (7 pts — sur 100 € de bénéfice comptable, combien finissent en trésorerie ; le cash est plus dur à maquiller), la <strong>dette rapportée aux capitaux propres</strong> (5 pts), et la <strong>constance</strong> (5 pts — la part des exercices bénéficiaires sur tout l'historique connu).
         </div>
       </div>
 
@@ -1169,7 +1177,7 @@ Ce que l'entreprise <em>est</em>, mesuré sur plusieurs exercices publiés, pas 
           <div class="bar-fill" style="width: 25%"></div>
         </div>
         <div class="scoring-desc">
-Ce que l'entreprise <em>devient</em>. Le taux de croissance annuel moyen du <strong>chiffre d'affaires</strong> (7 pts) et du <strong>bénéfice par action</strong> (7 pts — dilution comprise : les rachats d'actions comptent, les émissions aussi), la <strong>régularité</strong> de la progression (4 pts — croître 10 années sur 11 ne raconte pas la même histoire qu'une année sur deux), et la <strong>croissance attendue</strong> par les analystes (7 pts). Règle d'asymétrie : l'estimé ne pèse jamais plus que le démontré — 7 points de promesse contre 18 points de faits.
+Ce que l'entreprise <em>devient</em>. Le taux de croissance annuel moyen du <strong>chiffre d'affaires</strong> (7 pts) et du <strong>bénéfice par action</strong> (7 pts — dilution comprise : les rachats d'actions (<span class="en">share buybacks</span>) comptent, les émissions aussi), la <strong>régularité</strong> de la progression (4 pts — croître 10 années sur 11 ne raconte pas la même histoire qu'une année sur deux), et la <strong>croissance attendue</strong> par les analystes (7 pts). Règle d'asymétrie : l'estimé ne pèse jamais plus que le démontré — 7 points de promesse contre 18 points de faits.
         </div>
       </div>
 
@@ -1182,7 +1190,7 @@ Ce que l'entreprise <em>devient</em>. Le taux de croissance annuel moyen du <str
           <div class="bar-fill" style="width: 25%"></div>
         </div>
         <div class="scoring-desc">
-Le prix payé, jugé sous trois angles distincts. Face à <strong>sa propre histoire</strong> : le PER actuel comparé à la médiane des PER que le marché a réellement payés pour ce titre, exercice par exercice (8 pts — c'est l'anti-« la qualité se paie toujours cher » : Microsoft à 32× n'est pas cher <em>pour du Microsoft</em> si sa médiane décennale est 31×). Face à <strong>sa croissance</strong> : le PEG maison (7 pts), PER prévisionnel divisé par la plus <em>prudente</em> des deux croissances (attendue ou démontrée) — une prévision enthousiaste ne fabrique pas un beau PEG. Et <strong>dans l'absolu</strong> : le rendement des bénéfices attendus (5 pts), puis le rendement du cash (5 pts) — remplacé pour les métiers de bilan par le <strong>cours rapporté aux actifs nets comptables</strong>, le multiple de référence des banques et des assureurs, dont les fonds propres ont une valeur économique réelle là où ceux d'un éditeur de logiciels n'en ont guère. « Ce qui est intelligent à un certain prix devient stupide à un autre » (Buffett).
+Le prix payé, jugé sous trois angles distincts. Face à <strong>sa propre histoire</strong> : le PER actuel comparé à la médiane des PER que le marché a réellement payés pour ce titre, exercice par exercice (8 pts — c'est l'anti-« la qualité se paie toujours cher » : Microsoft à 32× n'est pas cher <em>pour du Microsoft</em> si sa médiane décennale est 31×). Face à <strong>sa croissance</strong> : le PEG maison, <span class="en">price/earnings-to-growth</span> (7 pts), PER prévisionnel divisé par la plus <em>prudente</em> des deux croissances (attendue ou démontrée) — une prévision enthousiaste ne fabrique pas un beau PEG. Et <strong>dans l'absolu</strong> : le rendement des bénéfices attendus, <span class="en">earnings yield</span> (5 pts), puis le rendement du cash (5 pts) — remplacé pour les métiers de bilan par le <strong>cours rapporté aux actifs nets comptables</strong> (<span class="en">price-to-book</span>, P/B), le multiple de référence des banques et des assureurs, dont les fonds propres ont une valeur économique réelle là où ceux d'un éditeur de logiciels n'en ont guère. « Ce qui est intelligent à un certain prix devient stupide à un autre » (Buffett).
         </div>
       </div>
 
@@ -1201,7 +1209,7 @@ La dynamique de marché, sur deux horizons, en continu. L'<strong>écart MM21/MM
     </div>
 
     <div class="scoring-note">
-<strong>D'où viennent les poids.</strong> Aucun point n'a été ajusté pour « faire joli » sur un backtest — cinq principes, appliqués mécaniquement : <em>un point = de la confiance dans la mesure</em> (la marge médiane sur 12 exercices pèse plus que le RSI sur 14 jours) ; <em>l'estimé ne dépasse jamais le démontré</em> ; <em>la redondance se paie</em> (le PER prévisionnel entre deux fois en Valorisation, dans le PEG et dans le rendement des bénéfices — c'est pourquoi ce dernier ne pèse que 5) ; <em>l'asymétrie se respecte</em> (les cloches du momentum sont symétriques par choix) ; <em>le discriminant réel compte</em> (un critère que tout l'univers réussit ne classe personne). Le consensus analystes est <strong>sorti de la note</strong> : biais acheteur structurel documenté, signal retardataire — il reste affiché sur la fiche (objectif de cours, nombre d'analystes), jamais compté.
+<strong>D'où viennent les poids.</strong> Aucun point n'a été ajusté pour « faire joli » sur un backtest — cinq principes, appliqués mécaniquement : <em>un point = de la confiance dans la mesure</em> (la marge médiane sur 12 exercices pèse plus que le RSI (<span class="en">relative strength index</span>) sur 14 jours) ; <em>l'estimé ne dépasse jamais le démontré</em> ; <em>la redondance se paie</em> (le PER prévisionnel entre deux fois en Valorisation, dans le PEG et dans le rendement des bénéfices — c'est pourquoi ce dernier ne pèse que 5) ; <em>l'asymétrie se respecte</em> (les cloches du momentum sont symétriques par choix) ; <em>le discriminant réel compte</em> (un critère que tout l'univers réussit ne classe personne). Le consensus analystes est <strong>sorti de la note</strong> : biais acheteur structurel documenté, signal retardataire — il reste affiché sur la fiche (objectif de cours, nombre d'analystes), jamais compté.
     </div>
 
     <div class="scoring-note">
@@ -1270,7 +1278,7 @@ Un score élevé ne garantit pas une hausse imminente, il signale que plusieurs 
         <span class="concept-label">Croisement des moyennes mobiles</span>
         <span class="concept-example">↑ Golden Cross · 12j depuis le croisement</span>
         <div class="concept-body">
-La MM21 (moyenne mobile sur 21 jours) a dépassé la MM200 (moyenne sur 200 jours) il y a 12 jours. Concrètement : la dynamique court terme est désormais au-dessus de la dynamique long terme, un signal classique de retournement haussier. Historiquement, après un Golden Cross sur le S&P 500, le titre est en hausse dans ~66-72 % des cas sur les 60 jours suivants (la fenêtre la plus forte est les 10 premiers jours).
+La MM21 (moyenne mobile (<span class="en">moving average</span>, MA) sur 21 jours) a dépassé la MM200 (moyenne sur 200 jours) il y a 12 jours. Concrètement : la dynamique court terme est désormais au-dessus de la dynamique long terme, un signal classique de retournement haussier. Historiquement, après un Golden Cross sur le S&P 500, le titre est en hausse dans ~66-72 % des cas sur les 60 jours suivants (la fenêtre la plus forte est les 10 premiers jours).
 
           <div style="margin:1rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
             <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">JPMorgan Chase (JPM) · 200 derniers jours · données réelles</div>
@@ -1740,7 +1748,7 @@ Chaque composante du scoring vient d'un corpus connu et documenté, rien n'est p
         </ul>
         L'apport de Signal n'est pas une formule magique : c'est la <strong>discipline</strong> d'appliquer ces règles systématiquement, sans biais émotionnel, et de tout documenter en public. Le scoring complet (100 pts) et les règles sont lisibles ligne à ligne dans <code>screener.py</code>.
         <br><br>
-Au-delà du score mécanique, l'analyse éditoriale mobilise aussi une <strong>grille qualitative</strong> tirée du même corpus public, la lecture de la « douve » et du pouvoir de fixer les prix (Buffett, Mauboussin <em>Measuring the Moat</em>), le raisonnement en <strong>taux de base</strong> (Mauboussin <em>The Base Rate Book</em>) et l'examen de l'<strong>allocation du capital</strong> du management. Cette grille sert au <em>jugement</em> ; elle n'est jamais injectée mécaniquement dans le score chiffré.
+Au-delà du score mécanique, l'analyse éditoriale mobilise aussi une <strong>grille qualitative</strong> tirée du même corpus public, la lecture de la « douve » et du <strong>pouvoir de fixer les prix</strong>, <span class="en">pricing power</span> (Buffett, Mauboussin <em>Measuring the Moat</em>), le raisonnement en <strong>taux de base</strong> (Mauboussin <em>The Base Rate Book</em>) et l'examen de l'<strong>allocation du capital</strong> (<span class="en">capital allocation</span>) du management. Cette grille sert au <em>jugement</em> ; elle n'est jamais injectée mécaniquement dans le score chiffré.
       </div>
     </div>
 
@@ -1764,7 +1772,7 @@ Chaque semaine, l'agent prend ses décisions, elles sont horodatées et tracées
         <div class="portfo-htitle">Comparer honnêtement : frais et impôts inclus</div>
       </div>
       <div class="portfo-body">
-        Pour que l'observation ait du sens, la comparaison portefeuille IA vs ETF doit être équitable. Une stratégie active comme Signal paie des frais à chaque ordre et 31,4 % de PFU sur chaque plus-value réalisée ; un ETF en <em>buy &amp; hold</em> ne déclenche aucun impôt tant qu'on ne vend pas (plus-values latentes). <strong>Comparer une performance active nette à une performance passive brute serait asymétrique, en faveur du passif sur le papier mais trompeur.</strong>
+        Pour que l'observation ait du sens, la comparaison portefeuille IA vs ETF doit être équitable. Une stratégie active comme Signal paie des frais à chaque ordre et 31,4 % de PFU sur chaque plus-value réalisée (<span class="en">realised gain</span>) ; un ETF en <em>buy &amp; hold</em> ne déclenche aucun impôt tant qu'on ne vend pas (plus-values latentes). <strong>Comparer une performance active nette à une performance passive brute serait asymétrique, en faveur du passif sur le papier mais trompeur.</strong>
         <br><br>
 C'est pourquoi le portefeuille suivi sur le site affiche sa performance <em>après</em> frais et avec l'impôt latent rendu visible (voir section 07, la friction réelle et le <code>capital_post_liquidation</code>). L'enjeu n'est pas de produire un chiffre flatteur, mais de regarder en face ce qu'une gestion active doit surmonter avant même de pouvoir prétendre apporter quoi que ce soit.
       </div>
