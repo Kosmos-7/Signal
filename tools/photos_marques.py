@@ -115,6 +115,101 @@ MARQUES = {
     "MUV2.DE": ["Munich Re headquarters", "Muenchener Rueckversicherung"],
     "CB":      ["Chubb Limited", "Chubb insurance building"],
     "PGR":     ["Progressive Insurance", "Progressive Corporation campus"],
+
+    # ── ROBOTIQUE (watchlist du 08/08/2026) ─────────────────────────────────
+    # C'est le domaine où l'écart entre la raison sociale et le nom de l'objet
+    # est le plus grand de tout le fichier, et où cette table sert donc le
+    # plus. Personne ne légende une photo « Yaskawa » : on écrit « Motoman »,
+    # du nom de la gamme. Personne n'écrit « Rockwell Automation » sous un
+    # automate : on écrit « Allen-Bradley ». Et surtout, les trois sociétés du
+    # goulot ne vendent pas un produit qui porte leur nom mais une PIÈCE dont
+    # le nom est technique — réducteur à onde de déformation, réducteur
+    # cycloïdal, guidage linéaire. C'est ce nom-là qu'il faut chercher.
+    "6954.T":    ["FANUC robot", "FANUC industrial robot arm", "FANUC CNC controller",
+                  "FANUC M-710", "FANUC LR Mate"],
+    "6506.T":    ["Motoman robot", "Yaskawa Motoman", "Motoman welding robot",
+                  "Yaskawa servo drive"],
+    "454910.KS": ["Doosan Robotics cobot", "Doosan Robotics collaborative robot",
+                  "Doosan M0609"],
+    # Le seul pure player humanoïde de Hong Kong ; sa gamme s'appelle Walker.
+    "9880.HK":   ["UBTECH Walker robot", "UBTECH humanoid robot", "Walker X robot",
+                  "UBTECH Alpha robot"],
+    # HUBO, l'humanoïde du KAIST, est l'objet que cette société commercialise —
+    # et il est bien plus photographié que la société elle-même.
+    "277810.KQ": ["Rainbow Robotics HUBO", "HUBO humanoid robot",
+                  "Rainbow Robotics cobot"],
+    # Hyundai contrôle Boston Dynamics : Spot et Atlas sont, de très loin, les
+    # robots les plus photographiés au monde. On les cherche avant les voitures.
+    "005380.KS": ["Boston Dynamics Spot", "Boston Dynamics Atlas",
+                  "Boston Dynamics Stretch", "Hyundai Motor assembly robot"],
+    "TSLA":      ["Tesla Optimus robot", "Tesla factory robotic arm",
+                  "Tesla Gigafactory assembly line", "Tesla Model Y production"],
+    # LE GOULOT. Ces noms sont ceux de la PIÈCE, pas de la société : c'est la
+    # seule façon d'en trouver une image, et c'est aussi ce que la thèse du
+    # thème demande de montrer.
+    "6324.T":    ["strain wave gearing", "harmonic drive gear", "Harmonic Drive reducer",
+                  "robot joint gearbox cutaway"],
+    "6268.T":    ["cycloidal drive", "cycloidal gear reducer", "Nabtesco RV reducer",
+                  "robot speed reducer"],
+    "6481.T":    ["THK LM guide", "linear motion guide rail", "linear guideway",
+                  "THK ball screw"],
+    "2049.TW":   ["HIWIN linear guideway", "HIWIN ball screw", "ball screw actuator",
+                  "linear motion module"],
+    "6471.T":    ["NSK bearing", "NSK ball screw", "rolling bearing", "deep groove ball bearing"],
+    "SKF-B.ST":  ["SKF bearing", "SKF spherical roller bearing", "roller bearing SKF",
+                  "SKF Gothenburg"],
+    "6594.T":    ["Nidec motor", "brushless DC motor", "electric motor stator",
+                  "hard disk drive spindle motor"],
+    "6273.T":    ["SMC pneumatic cylinder", "pneumatic actuator", "solenoid valve manifold",
+                  "pneumatic cylinder industrial"],
+    # Voir et piloter : le capteur et l'automate portent des noms de gamme.
+    "6861.T":    ["Keyence sensor", "Keyence laser sensor", "Keyence vision system",
+                  "photoelectric sensor industrial"],
+    "6645.T":    ["Omron PLC", "Omron industrial automation", "Omron proximity sensor",
+                  "Omron safety light curtain"],
+    "CGNX":      ["Cognex In-Sight", "Cognex DataMan", "machine vision camera industrial",
+                  "industrial barcode reader"],
+    "ROK":       ["Allen-Bradley PLC", "Allen-Bradley ControlLogix",
+                  "Allen-Bradley control panel", "industrial control cabinet PLC"],
+    # Service : le da Vinci est le robot le plus photographié après ceux de
+    # Boston Dynamics, et le seul de cette liste qu'un lecteur ait pu voir.
+    "ISRG":      ["da Vinci Surgical System", "da Vinci surgical robot",
+                  "robotic surgery console", "Intuitive Surgical da Vinci"],
+    "SYM":       ["Symbotic warehouse robot", "automated storage and retrieval system",
+                  "warehouse automation robot", "goods to person robot"],
+    # KION ne vend rien sous son nom : trois marques, dont Dematic pour
+    # l'entrepôt automatisé et Linde pour le chariot élévateur.
+    "KGX.DE":    ["Linde forklift", "STILL forklift", "Dematic warehouse automation",
+                  "Dematic conveyor system"],
+
+    # ── QUANTIQUE (watchlist du 08/08/2026) ─────────────────────────────────
+    # Le cryostat à dilution est l'objet le plus photogénique du secteur, mais
+    # il appartient au laboratoire plus qu'au constructeur : on cherche d'abord
+    # la machine nommée, ensuite la technologie de qubit.
+    "IONQ":      ["IonQ quantum computer", "trapped ion quantum computer",
+                  "ion trap chip", "linear Paul trap"],
+    "RGTI":      ["Rigetti quantum computer", "superconducting quantum processor",
+                  "Rigetti Aspen chip", "superconducting qubit chip"],
+    "QBTS":      ["D-Wave quantum computer", "D-Wave Advantage",
+                  "D-Wave Systems cabinet", "quantum annealer"],
+    "QUBT":      ["photonic quantum computer", "thin film lithium niobate photonic chip",
+                  "integrated photonic circuit"],
+
+    # ── FICHES ANCIENNES RESTÉES SANS IMAGE ─────────────────────────────────
+    # Elles ne datent pas d'aujourd'hui, mais la campagne passe une fois : les
+    # laisser dehors serait rouvrir le sujet pour rien. Toutes sont des
+    # sociétés dont le PRODUIT est célèbre alors que la raison sociale ne l'est
+    # pas — exactement le cas que cette table traite.
+    "AM.PA":     ["Dassault Rafale", "Dassault Falcon 8X", "Rafale fighter jet"],
+    "HO.PA":     ["Thales Ground Master radar", "Thales radar antenna",
+                  "Thales metro signalling"],
+    "SAF.PA":    ["CFM LEAP engine", "CFM56 engine", "Safran landing gear"],
+    "RHM.DE":    ["Rheinmetall Boxer", "Rheinmetall Skyranger", "Rheinmetall Leopard 2"],
+    "NOVO-B.CO": ["Ozempic pen", "Novo Nordisk insulin pen", "FlexPen insulin"],
+    "RACE":      ["Ferrari 296 GTB", "Ferrari SF90 Stradale", "Ferrari Maranello factory"],
+    "VWS.CO":    ["Vestas wind turbine", "Vestas V164", "wind turbine nacelle"],
+    "DSY.PA":    ["Dassault Systemes campus Velizy", "CATIA", "SolidWorks"],
+    "SAP.DE":    ["SAP headquarters Walldorf", "SAP building"],
 }
 
 
