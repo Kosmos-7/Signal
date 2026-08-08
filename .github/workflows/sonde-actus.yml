@@ -1,0 +1,55 @@
+# .github/workflows/sonde-actus.yml
+# Quelles sources d'actualité répondent, et avec quoi dedans ?
+#
+# Le point du matin ne lit qu'un endpoint (finnhub /news general) qui a rendu
+# SIX dépêches exploitables le 7 août 2026. Avant d'en brancher d'autres, on
+# mesure : cette sonde tape une soixantaine de candidats et écrit un rapport
+# chiffré — code HTTP, articles, fraîcheur à 24 h, résumés, images, échantillon
+# de titres. Elle ne branche RIEN sur le site : choisir une source est une
+# décision éditoriale, pas le sous-produit d'un test technique.
+#
+# Elle existe comme workflow parce que le proxy de développement bloque tous les
+# flux de presse (huit testés, huit à zéro).
+name: Sonder les sources d'actualité
+
+on:
+  workflow_dispatch:
+    inputs:
+      genre:
+        description: "Ne tester qu'un genre : rss, atom, api (vide = tout)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  sonde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Sonder
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: python tools/sonde_actus.py --genre "${{ inputs.genre }}"
+      - name: Publier le rapport en artefact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonde-actus
+          path: sonde_actus.json
+          retention-days: 7
+      # Le rapport est aussi committé : c'est lui qu'on relit pour décider, et
+      # un artefact expire au bout de sept jours.
+      - name: Commiter le rapport pour analyse
+        run: |
+          git config user.name "Signal Bot"
+          git config user.email "bot@signal.fr"
+          git add sonde_actus.json || true
+          git diff --cached --quiet || \
+            git commit -m "sonde: sources d'actualité candidates (brut) [skip ci]"
+          git push origin HEAD:${{ github.ref_name }} || true

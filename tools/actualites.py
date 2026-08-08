@@ -131,7 +131,7 @@ INTERDITS = ("recommand", "conseill")
 
 # ── Validation (pure, testable hors ligne) ───────────────────────────────────
 
-def valider_post(p, nb_depeches):
+def valider_post(p, nb_depeches, marches=None):
     """Liste des défauts d'un post quotidien produit par le modèle. Vide = bon."""
     d = []
     if not isinstance(p, dict):
@@ -156,12 +156,57 @@ def valider_post(p, nb_depeches):
         if not (isinstance(src, list) and src
                 and all(isinstance(x, int) and 0 <= x < nb_depeches for x in src)):
             d.append(f"section {i} sans source valide")
+    d += _defauts_marches(p, marches)
     texte_total = " ".join((s.get("texte") or "") + (s.get("titre") or "")
-                           for s in sections) + titre + chapeau
+                           for s in sections) + titre + chapeau + (p.get("marches") or "")
     bas = texte_total.lower()
     for m in INTERDITS:
         if m in bas:
             d.append(f"vocabulaire de conseil détecté : « {m}… »")
+    return d
+
+
+# Un pourcentage écrit dans le commentaire de marché : « +1,79 % », « -0,022 pts »,
+# « 2,3% ». Le signe est optionnel, la virgule française et le point sont acceptés.
+_POURCENT = re.compile(r"([+-]?\d+(?:[.,]\d+)?)\s*(?:%|pts\b|points de base\b)")
+# Tolérance d'arrondi : le modèle a le droit d'écrire « 1,8 % » pour 1,79 %.
+# 0,05 couvre l'arrondi à la décimale sans laisser passer un chiffre inventé,
+# qui se trompe de bien plus que cinq centièmes.
+_ARRONDI = 0.05
+
+
+def _defauts_marches(p, marches):
+    """Le commentaire de marché ne cite que des chiffres qu'on a mesurés.
+
+    C'EST LA MÊME RÈGLE QUE POUR LES SECTIONS, APPLIQUÉE À UN BLOC QUI N'A PAS
+    DE DÉPÊCHE POUR LE TENIR. Une section sans source est rejetée parce que sa
+    provenance est vérifiable ; le paragraphe `marches`, lui, commente NOTRE
+    relevé, alors on vérifie la seule chose qui compte : que chaque pourcentage
+    qu'il écrit existe dans le tableau affiché juste au-dessus. Un lecteur qui
+    lit « le CAC a pris 2,3 % » sous une pastille à +0,61 % ne se demande pas
+    lequel des deux a raison, il cesse de croire les deux.
+    """
+    attendu = bool(marches and marches.get("lignes"))
+    txt = (p.get("marches") or "").strip()
+    if not attendu:
+        return ["champ `marches` rendu alors qu'aucun tableau n'a été fourni"] if txt else []
+    if not (60 <= len(txt) <= 700):
+        return [f"commentaire de marché hors bornes ({len(txt)} car.)"]
+    connus = [l["variation"] for l in marches["lignes"]]
+    mv = marches.get("mouvement")
+    if mv:
+        connus.append(mv["variation"])
+    # Les NIVEAUX sont cités tels quels (« 8 666,63 ») : on les compare en
+    # valeur absolue, sans tolérance d'arrondi puisqu'ils ne portent pas de %.
+    d = []
+    for brut in _POURCENT.findall(txt):
+        try:
+            v = float(brut.replace(",", "."))
+        except ValueError:                                     # noqa: PERF203
+            continue
+        if not any(abs(v - c) <= _ARRONDI or abs(abs(v) - abs(c)) <= _ARRONDI
+                   for c in connus):
+            d.append(f"variation « {brut} % » absente du tableau mesuré")
     return d
 
 
@@ -267,24 +312,45 @@ Réponds UNIQUEMENT avec un objet JSON :
 {{
   "titre": "…(8-90 caractères, le fait dominant du jour)",
   "chapeau": "…(40-300 caractères, résumé pour la carte de la page d'accueil)",
-  "sujet": "un parmi : {sujets}",
+  "sujet": "un parmi : {sujets}",{champ_marches}
   "sections": [
     {{"titre": "…", "texte": "…(3-6 phrases)", "sources": [indices des dépêches utilisées]}}
   ]
 }}
-
+{consigne_marches}
 DÉPÊCHES ({n}) :
-{corps}"""
+{corps}{bloc_marches}"""
+
+# Le paragraphe qui accompagne le tableau. Il n'existe QUE si le tableau existe :
+# demander un commentaire de marché sans chiffres reviendrait à demander du vent,
+# et c'est précisément ce qu'on reprochait à l'ancienne version.
+CHAMP_MARCHES = '\n  "marches": "…(2-4 phrases sur le tableau des clôtures ci-dessous)",'
+CONSIGNE_MARCHES = """
+Le champ `marches` commente le TABLEAU DES CLÔTURES donné plus bas. Règles :
+- Tu peux et tu dois citer ces niveaux et ces variations : ce sont NOS mesures, \
+affichées juste au-dessus de ton texte sur la page.
+- Tu n'en inventes aucun autre. Aucun indice absent du tableau, aucun niveau de \
+séance, aucun plus haut historique qui n'y figure pas.
+- Tu peux relier ces chiffres aux dépêches quand elles l'expliquent, sans jamais \
+faire dire à une dépêche ce qu'elle ne dit pas.
+- Ne recopie pas le tableau ligne à ligne : il est déjà affiché. Dis ce qu'il \
+raconte, et cite les deux ou trois chiffres qui portent l'histoire du jour.
+"""
 
 
-def rediger(deps):
+def rediger(deps, marches=None):
     from anthropic import Anthropic
+    from marches import bloc_prompt
     corps = "\n".join(f"[{i}] {d['titre']} — {d['resume']} ({d['source']}, {d['date']})"
                       for i, d in enumerate(deps))
+    bloc = bloc_prompt(marches)
     msg = Anthropic().messages.create(
         model=MODELE, max_tokens=2200,
         messages=[{"role": "user", "content": PROMPT.format(
-            sujets=", ".join(SUJETS), n=len(deps), corps=corps)}])
+            sujets=", ".join(SUJETS), n=len(deps), corps=corps,
+            champ_marches=CHAMP_MARCHES if bloc else "",
+            consigne_marches=CONSIGNE_MARCHES if bloc else "",
+            bloc_marches=bloc)}])
     brut = msg.content[0].text.strip()
     brut = re.sub(r"^```(?:json)?\s*|\s*```$", "", brut)
     return json.loads(brut)
@@ -496,6 +562,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--hebdo-seulement", action="store_true")
     ap.add_argument("--sans-photo", action="store_true")
+    ap.add_argument("--sans-marches", action="store_true",
+                    help="publier sans le tableau des clôtures (yfinance muet, "
+                         "ou essai qui n'a pas besoin du réseau de marché)")
     ap.add_argument("--force", action="store_true",
                     help="réécrire le post du jour (jamais un autre)")
     ap.add_argument("--reillustrer", nargs="+", metavar="ID",
@@ -527,13 +596,20 @@ def main():
         raise SystemExit(f"Moins de {MIN_DEPECHES} dépêches : pas de post aujourd'hui. "
                          "Un post honnête ne se remplit pas, il s'annule.")
 
-    post = rediger(deps)
-    defauts = valider_post(post, len(deps))
+    # LE TABLEAU AVANT LE TEXTE. Le modèle doit commenter des clôtures qu'il a
+    # sous les yeux ; les mesurer après coup produirait un commentaire écrit à
+    # l'aveugle, exactement ce qu'on cherche à supprimer. Un relevé absent n'est
+    # pas une panne : le post s'écrit sans tableau ni commentaire de marché.
+    from marches import releve
+    marches = None if a.sans_marches else releve()
+
+    post = rediger(deps, marches)
+    defauts = valider_post(post, len(deps), marches)
     if defauts:
         # Une seule seconde chance : le modèle reçoit ses défauts, pas nous.
         print("⚠ post rejeté :", "; ".join(defauts), "— nouvelle tentative")
-        post = rediger(deps)
-        defauts = valider_post(post, len(deps))
+        post = rediger(deps, marches)
+        defauts = valider_post(post, len(deps), marches)
         if defauts:
             raise SystemExit("Post invalide après 2 tentatives : " + "; ".join(defauts))
 
@@ -544,6 +620,11 @@ def main():
         "titre": post["titre"], "chapeau": post["chapeau"], "sujet": post["sujet"],
         "photo": None if a.sans_photo else
                  illustrer(pid, post["sujet"], photos_deja_utilisees()),
+        # Le relevé est GELÉ dans le post, comme la photo : un tableau servi
+        # depuis un fichier partagé se réécrirait chaque matin et rendrait faux
+        # tous les posts archivés, qui annoncent « à la clôture de la veille ».
+        "marches": marches,
+        "marches_texte": post.get("marches"),
         "sections": post["sections"],
         # Seules les dépêches réellement citées sont publiées comme sources :
         # lister les autres habillerait le post d'une provenance qu'il n'a pas.

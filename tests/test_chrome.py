@@ -61,6 +61,7 @@ INTERDITS = [
     (r"\.brand-icon\s*\{", ".brand-icon"),
     (r"(?<![\w.\-])nav\s*\{", "nav"),
     (r"(?<![\w.\-])nav\s+a\s*\{", "nav a"),
+    (r"(?<![\w.\-])nav\s+a\s+svg\s*\{", "nav a svg"),
     (r"\.footer-legal\s*\{", ".footer-legal"),
     (r"\.footer-right\s*\{", ".footer-right"),
 ]
@@ -103,7 +104,11 @@ print("\n— La navigation dit-elle la même chose partout ? —")
 navs = {}
 for p in PAGES:
     bloc = re.search(r"<nav>(.*?)</nav>", SRC[p], re.S)
-    liens = re.findall(r'href="([^"]+)"[^>]*>([^<]+)<', bloc.group(1)) if bloc else []
+    # Le libellé vit dans un <span> depuis que chaque onglet porte un
+    # pictogramme : l'ancien motif « le texte suit immédiatement le > » ne
+    # trouvait plus rien, et un test qui ne trouve rien ne dit plus rien.
+    liens = re.findall(r'href="([^"]+)"[^>]*>.*?<span>([^<]+)</span>',
+                       bloc.group(1), re.S) if bloc else []
     navs[p] = liens
 check("les 4 onglets ont une nav", all(navs[p] for p in PAGES),
       str([p for p in PAGES if not navs[p]]))
@@ -117,6 +122,36 @@ check("« Portefeuille IA » est la dernière entrée",
 for p in PAGES:
     bloc = re.search(r"<nav>(.*?)</nav>", SRC[p], re.S).group(1)
     check(f"{p} : exactement un lien actif", bloc.count('class="active"') == 1)
+
+# ── 3 bis. LES PICTOGRAMMES ────────────────────────────────────────────────
+# Ils ont été ajoutés le 08/08 au-dessus de chaque libellé. Trois choses
+# peuvent se casser en silence : un onglet oublié lors d'une reprise de la
+# barre, une icône qui cesse de suivre la couleur de son onglet (un `fill`
+# codé en dur au lieu de `currentColor`), et un SVG annoncé aux lecteurs
+# d'écran, qui liraient « image » à la place du nom de la section.
+print("\n— Les pictogrammes de la nav —")
+navsvg = {p: re.search(r"<nav>(.*?)</nav>", SRC[p], re.S).group(1) for p in PAGES}
+check("les quatre onglets ont chacun leur pictogramme",
+      all(v.count("<svg") == 4 for v in navsvg.values()),
+      str({p: v.count("<svg") for p, v in navsvg.items()}))
+check("chaque pictogramme est masqué aux lecteurs d'écran",
+      all(v.count('aria-hidden="true"') == 4 for v in navsvg.values()),
+      str({p: v.count('aria-hidden="true"') for p, v in navsvg.items()}))
+check("les mêmes quatre pictogrammes sur les quatre onglets",
+      len({tuple(re.findall(r'<svg[^>]*>(.*?)</svg>', v, re.S))
+           for v in navsvg.values()}) == 1)
+check("aucun pictogramme ne fige sa couleur dans le balisage",
+      not any(re.search(r"<svg[^>]*>.*?(?:fill=\"#|stroke=\"#)", v, re.S)
+              for v in navsvg.values()))
+check("la couleur vient de currentColor, dans signal.css",
+      "nav a svg{" in CSS and "stroke:currentColor" in CSS)
+# L'EN-TÊTE EST FIXE ET DES RÉGLAGES EN DÉPENDENT. `.rail` et `.stage` se
+# posent juste dessous dans index.html, les ancres se calent sur lui dans
+# signal.css. Les pictogrammes l'ont fait passer de 72 à 78 px : ces quatre
+# valeurs ont suivi, et elles doivent rester au-dessus de la hauteur mesurée.
+check("les décalages sous l'en-tête suivent sa hauteur (78 px mesurés)",
+      all(v in SRC["index.html"] for v in ("top:5.4rem", "top:5.5rem"))
+      and "scroll-margin-top:5.9rem" in CSS)
 
 # ── 4. LE PIED DE PAGE DIT LA MÊME CHOSE ───────────────────────────────────
 print("\n— Le pied de page est-il le même texte partout ? —")

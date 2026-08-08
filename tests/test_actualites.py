@@ -205,6 +205,104 @@ finally:
     os.chdir(cwd)
     shutil.rmtree(tmp, ignore_errors=True)
 
+print("\n— Sur les marchés : le tableau ne se remplit pas tout seul —")
+import marches as M                                                 # noqa: E402
+
+D2 = ["2026-08-06", "2026-08-07"]
+check("une variation en % se calcule sur les deux dernières clôtures",
+      abs(M.variation(100.0, 101.79, "pct") - 1.79) < 1e-9)
+check("un taux se compare en POINTS, pas en pourcentage de lui-même",
+      abs(M.variation(3.894, 3.872, "pts") + 0.022) < 1e-9)
+check("une veille à zéro ne rend pas un infini",
+      M.variation(0.0, 1.0, "pct") is None)
+check("une seule clôture ne fait pas une ligne : un niveau sans variation ne dit rien",
+      M.ligne(M.PANIER[0], [100.0], D2[:1]) is None)
+check("un trou dans la série est sauté, pas comblé",
+      (M.ligne(M.PANIER[0], [100.0, None, 101.79], ["a"] + D2) or {}).get("ref") == "2026-08-07")
+
+_l = M.ligne(M.PANIER[0], [100.0, 101.79], D2)
+check("le format est français : fine insécable, virgule décimale",
+      M.fmt_nombre(8666.63, 2) == "8" + M.FINE + "666,63"
+      and M.fmt_variation(_l) == "+1,79" + M.INSEC + "%")
+check("le signe est toujours écrit, même à la hausse",
+      M.fmt_variation(M.ligne(M.PANIER[0], [101.79, 100.0], D2)).startswith("-"))
+
+# LA RÈGLE DU DEMI-TABLEAU. Une ligne manquante dans un tableau de marchés ne se
+# voit pas : le lecteur croit que le Nasdaq n'a pas bougé, pas qu'on n'a pas su
+# le lire. En dessous de MIN_LIGNES il n'y a donc pas de tableau du tout.
+_faux = [dict(_l, cle=c) for c in ("nasdaq", "sp500", "cac40", "stoxx", "or", "petrole", "bitcoin")]
+check("moins de quatre instruments : pas de tableau du tout",
+      M.choisir(_faux[:3]) == [])
+check("l'ordre affiché est celui du panier, jamais celui des réponses",
+      [l["cle"] for l in M.choisir(_faux)][:3] == ["sp500", "cac40", "nasdaq"])
+check("le tableau est plafonné pour ne pas devenir un écran de terminal",
+      len(M.choisir(_faux)) == M.MAX_LIGNES)
+
+_snap = {"ref": "2026-08-07", "lignes": M.choisir(_faux), "mouvement": None}
+check("le bloc de prompt porte les niveaux ET les variations",
+      ("+1,79" + M.INSEC + "%") in M.bloc_prompt(_snap) and "101,79" in M.bloc_prompt(_snap))
+check("pas de tableau, pas de bloc de prompt", M.bloc_prompt(None) == "")
+
+_mv = M.plus_fort_mouvement(
+    {"NVDA": ([100.0, 102.0], D2), "SAP.DE": ([100.0, 94.0], D2)},
+    {"NVDA": "NVIDIA", "SAP.DE": "SAP"})
+check("le plus fort mouvement se juge en VALEUR ABSOLUE (une chute compte)",
+      _mv["ticker"] == "SAP.DE" and _mv["nom"] == "SAP")
+
+# LE MÊME FORMATAGE EXISTE DEUX FOIS, EN PYTHON ET EN JS, et c'est assumé : le
+# post stocke des NOMBRES, pas des chaînes déjà mises en forme, sinon un post
+# archivé garderait à jamais la convention typographique du jour de sa parution.
+# La contrepartie d'une duplication est qu'elle dérive en silence. On la compare
+# donc valeur par valeur, en exécutant réellement le JS de la page.
+_CAS = [(8666.63, 2), (101.79, 2), (63940.0, 0), (3.872, 3), (1.0847, 4),
+        (-0.5, 2), (0.0, 2), (1234567.891, 2), (999.995, 2)]
+_VARS = [{"variation": 1.79, "type": "pct"}, {"variation": -0.022, "type": "pts"},
+         {"variation": 0.0, "type": "pct"}, {"variation": -3.456, "type": "pct"},
+         {"variation": 29.45, "type": "pct"}, {"variation": 0.05, "type": "pts"}]
+try:
+    import subprocess                                                # noqa: E402
+    _js = open(os.path.join(RACINE, "actualites.html"), encoding="utf-8").read()
+    _deb = _js.index("const FINE=")
+    _fin = _js.index("function ligneMarche")
+    _prog = _js[_deb:_fin] + (
+        "const cas=" + json.dumps(_CAS) + ", vars=" + json.dumps(_VARS) + ";"
+        "console.log(JSON.stringify({n:cas.map(c=>nbFr(c[0],c[1])),"
+        "v:vars.map(varFr)}));")
+    _out = json.loads(subprocess.run(["node", "-e", _prog], capture_output=True,
+                                     text=True, timeout=30, check=True).stdout)
+    check("Python et JS formatent les niveaux à l'identique",
+          _out["n"] == [M.fmt_nombre(v, d) for v, d in _CAS],
+          f"\n     js={_out['n']}\n     py={[M.fmt_nombre(v, d) for v, d in _CAS]}")
+    check("Python et JS formatent les variations à l'identique",
+          _out["v"] == [M.fmt_variation(l) for l in _VARS],
+          f"\n     js={_out['v']}\n     py={[M.fmt_variation(l) for l in _VARS]}")
+except (OSError, subprocess.SubprocessError, ValueError) as _e:
+    # Sans node, on ne fait pas semblant d'avoir vérifié : on le dit.
+    print(f"  ⚠️  formatage JS non comparé (node indisponible : {type(_e).__name__})")
+
+print("\n— Le commentaire de marché ne cite que des chiffres mesurés —")
+_BONM = {**BON, "marches": "Le S&P 500 a pris 1,79 % et entraîne le reste de la cote "
+                           "dans son sillage, sans qu'aucune statistique ne l'explique."}
+check("un commentaire adossé au tableau passe",
+      A.valider_post(_BONM, 3, _snap) == [])
+check("l'arrondi à la décimale est admis (1,8 % pour 1,79 %)",
+      A.valider_post({**BON, "marches": "Le S&P 500 a pris 1,8 % sur la séance, "
+                                        "et le mouvement s'est fait sans à-coups."}, 3, _snap) == [])
+check("une variation absente du tableau est rejetée",
+      any("absente du tableau" in d for d in A.valider_post(
+          {**BON, "marches": "Le CAC 40 a bondi de 4,20 % hier soir, un record "
+                             "absolu pour la place parisienne cette année."}, 3, _snap)))
+check("un tableau sans commentaire est un défaut",
+      any("commentaire de marché" in d for d in A.valider_post(BON, 3, _snap)))
+check("un commentaire sans tableau est un défaut",
+      any("aucun tableau" in d for d in A.valider_post(_BONM, 3, None)))
+check("sans tableau ni commentaire, rien à redire",
+      A.valider_post(BON, 3, None) == [])
+check("le vocabulaire de conseil est traqué aussi dans le commentaire de marché",
+      any("conseil" in d for d in A.valider_post(
+          {**BON, "marches": "Le S&P 500 a pris 1,79 %, nous recommandons donc "
+                             "la prudence sur les valeurs technologiques."}, 3, _snap)))
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:

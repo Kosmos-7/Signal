@@ -5,6 +5,104 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le point du matin chiffre enfin les marchés
+
+Il les racontait sans jamais les mesurer : on lisait « les indices ont bien
+terminé » sans savoir de combien. Les dépêches ne le disent pas de façon
+fiable non plus, elles datent d'heures différentes et se contredisent d'une
+agence à l'autre. Le seul moyen honnête d'écrire un niveau est de le relever
+soi-même, alors le post relève désormais neuf instruments (S&P 500, CAC 40,
+Nasdaq, Euro Stoxx 50, Treasury 10 ans, or, Brent, euro/dollar, bitcoin) et en
+affiche les six premiers qui ont répondu.
+
+**La septième ligne est celle qu'une newsletter généraliste ne peut pas
+écrire** : le plus fort mouvement de la watchlist principale ce jour-là,
+cliquable vers sa fiche.
+
+Quatre décisions structurent le bloc :
+
+- **Le tableau est gelé dans le post.** Servi depuis un fichier partagé, il se
+  réécrirait chaque matin et rendrait faux tous les posts archivés, qui
+  annoncent « à la clôture de la veille » sous des chiffres d'un autre jour.
+- **Jamais de demi-tableau.** Sous quatre instruments, pas de tableau du tout :
+  une ligne manquante ne se voit pas, le lecteur croit que le Nasdaq n'a pas
+  bougé, pas qu'on n'a pas su le lire.
+- **Le commentaire ne cite que des chiffres mesurés.** Le modèle reçoit le
+  tableau et l'ordre de le commenter ; un pourcentage qui ne correspond à
+  aucune ligne, à cinq centièmes près, fait rejeter le post. C'est la règle des
+  sections sans source, appliquée au seul bloc qui n'a pas de dépêche pour le
+  tenir.
+- **Le 10 ans est américain et le libellé le dit.** L'OAT parlerait davantage à
+  un lecteur français, mais aucune source gratuite ne la donne de façon fiable,
+  et écrire « OAT » au-dessus d'un Treasury serait un mensonge d'étiquette pour
+  gagner en couleur locale.
+
+Le formatage français (fine insécable, virgule décimale) existe des deux côtés,
+en Python pour le prompt et en JavaScript pour la page, parce que le post
+stocke des **nombres** et non des chaînes déjà mises en forme — sinon un post
+archivé garderait à jamais la typographie du jour de sa parution. Un test
+exécute réellement le JS de la page et compare les deux, valeur par valeur. Il
+a trouvé sa première divergence en naissant : Python écrivait « +0,00 % », un
+signe qui annonce une hausse et n'en montre pas.
+
+---
+
+### Deux cent trois sources d'actualité, et une sonde pour trancher
+
+Le point du matin lit **une** source. Le 7 août, elle a rendu **six** dépêches
+exploitables : de quoi écrire trois paragraphes, pas une lettre matinale. Il en
+faut d'autres, et la tentation est d'en choisir une liste qui a l'air bien.
+C'est exactement ce qu'il ne faut pas faire : la moitié des flux RSS de la
+presse économique ont été fermés, mis derrière un mur payant ou déplacés depuis
+dix ans, et une URL de 2019 rend un 404 aujourd'hui sans que personne ne s'en
+aperçoive.
+
+On mesure donc avant de choisir. `tools/sonde_actus.py` tape **203 candidats**
+sur 144 domaines (presse française et francophone, agences anglophones, sources
+primaires de banques centrales et d'instituts statistiques, fils de communiqués,
+et du hors-marchés pour l'accroche du matin), et écrit un rapport chiffré par
+source : code HTTP, articles, combien datent de moins de 24 h, combien portent
+un vrai résumé, combien portent une image, trois titres en échantillon.
+
+Elle **ne branche rien**. Choisir une source est une décision éditoriale, pas
+le sous-produit d'un test technique. Et elle **ne sort jamais en erreur** :
+une source morte est une information, pas une panne. Quinze services à clé
+d'API (Alpha Vantage, marketaux, Polygon, Tiingo, FRED…) sont listés à part,
+non testés et dits comme tels — les sonder sans clé rendrait un 401 qui ne
+dirait rien de leur qualité.
+
+Elle existe comme workflow parce que le proxy de l'atelier bloque tout :
+203 candidats testés en local, **203 à zéro**.
+
+---
+
+### Un pictogramme au-dessus de chaque onglet
+
+Quatre glyphes au trait, dessinés à la main dans un `viewBox` de 24 : une liste
+pour Watchlists, un journal pour Actualités, un livre ouvert pour Apprendre,
+une mallette pour Portefeuille IA. Trois décisions les gouvernent.
+
+Le **trait, pas l'aplat** : ils sont en `stroke:currentColor`, donc ils prennent
+automatiquement la couleur de leur onglet, gris au repos et blanc sur l'actif.
+Une icône en `fill` aurait demandé quatre règles de couleur de plus et aurait
+divergé du reste au premier changement de palette. Un test refuse désormais
+toute couleur figée dans le balisage.
+
+La **hauteur est un budget** : l'en-tête est fixe, et quatre réglages se calent
+dessous (`.rail`, `.stage`, et les marges d'ancre des deux pages longues). Le
+libellé est donc passé en `line-height:1` et l'icône à 16 px : l'en-tête gagne
+**six pixels**, pas vingt, et les quatre décalages ont suivi.
+
+L'**icône est décorative, le nom porte le sens** : `aria-hidden` sur le SVG, le
+libellé reste du texte. Un lecteur d'écran annonce « Watchlists », pas
+« image ».
+
+Le journal a perdu une de ses trois lignes de texte en cours de route : à 16 px
+elles étaient à 2,3 px l'une de l'autre et fusionnaient en pâté gris sur un
+écran non rétina.
+
+---
+
 ### « FY25 » plutôt que « 25 » sur les axes
 
 Les années à deux chiffres gagnaient de la place mais perdaient leur nature :
