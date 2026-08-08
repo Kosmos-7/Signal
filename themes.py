@@ -576,6 +576,12 @@ ECARTES_VALIDATION = {
 "INFQ": "Infleqtion, IPO du 17/02/2026 — 120 séances < 200 (MM200/RSI), éligible vers décembre 2026",
 "XNDU": "Xanadu, IPO du 23/03/2026 — 96 séances < 200 (MM200/RSI), éligible vers janvier 2027",
 "HQ":   "Horizon Quantum, IPO du 20/03/2026 — 97 séances < 200 (MM200/RSI), éligible vers janvier 2027",
+    # IQM est le premier constructeur quantique EUROPÉEN coté (Espoo, Finlande,
+    # supraconducteur). Deux lignes existent depuis le 02-03/07/2026 : les ADS
+    # au Nasdaq et l'action à Helsinki. C'est la ligne d'ORIGINE qu'on prendra
+    # le moment venu, précédent TSMC du 08/08 — un certificat de dépôt ne donne
+    # ni le bon historique de prix ni le bon PER. Environ 26 séances au 08/08.
+"IQMX.HE": "IQM, cotée le 03/07/2026 à Helsinki — ~26 séances < 200 (MM200/RSI), éligible vers avril 2027",
     # Sécurité post-quantique : écartées sur la TAILLE, pas sur le sujet. À
     # 0,4 et 0,6 Md$ elles ne sont pas dans la même classe de risque que le
     # reste du site, et Arqit n'a même pas d'objectif de cours consensus — la

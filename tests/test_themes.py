@@ -80,7 +80,11 @@ check("le biais prévient que la note ne s'applique pas à ces sociétés",
 # 08/08 : toutes sous les 200 séances exigées par la MM200 et le RSI. Les
 # déclarer produirait un thème amputé publié en silence — le mode de panne que
 # validate_tickers.py existe précisément pour éviter.
-_jeunes = {"QNT", "INFQ", "XNDU", "HQ"}
+_jeunes = {"QNT", "INFQ", "XNDU", "HQ", "IQMX.HE"}
+check("les cinq introductions de 2026 sont au registre, avec leur motif",
+      all(t in themes.ECARTES_VALIDATION and "200" in themes.ECARTES_VALIDATION[t]
+          for t in _jeunes),
+      str(sorted(t for t in _jeunes if t not in themes.ECARTES_VALIDATION)))
 check("aucune introduction de 2026 n'est déclarée avant d'avoir 200 séances",
       not (_jeunes & set(themes.univers_thematique())),
       str(sorted(_jeunes & set(themes.univers_thematique()))))
