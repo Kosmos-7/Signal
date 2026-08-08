@@ -288,8 +288,33 @@ check("un commentaire adossé au tableau passe",
 check("l'arrondi à la décimale est admis (1,8 % pour 1,79 %)",
       A.valider_post({**BON, "marches": "Le S&P 500 a pris 1,8 % sur la séance, "
                                         "et le mouvement s'est fait sans à-coups."}, 3, _snap) == [])
+# LE CAS QUI A FAILLI COÛTER UN MATIN. Le niveau d'un taux s'écrit avec un
+# « % » et le prompt demande de citer les niveaux : « le Treasury 10 ans termine
+# à 3,872 % » est juste, et la première version du garde la rejetait — deux
+# rejets, sortie en erreur, pas de post. Trouvé par une relecture adverse avant
+# le premier run réel.
+_T10 = M.ligne({"cle": "t10", "libelle": "Treasury 10 ans", "ticker": "^TNX",
+                "type": "pts", "dec": 3, "unite": "%"}, [3.894, 3.872], D2)
+_SNAPT = {"ref": D2[1], "mouvement": None,
+          "lignes": M.choisir([_l, dict(_l, cle="cac40"), dict(_l, cle="nasdaq"),
+                               _T10, dict(_l, cle="or")])}
+check("le NIVEAU d'un taux, écrit en %, est une citation légitime",
+      A.valider_post({**BON, "marches": "Le rendement du Treasury 10 ans termine à "
+                                        "3,872 %, pendant que le S&P 500 prend 1,79 %."},
+                     3, _SNAPT) == [])
+check("mais un niveau inventé au même endroit reste rejeté",
+      any("absent du tableau" in d for d in A.valider_post(
+          {**BON, "marches": "Le rendement du Treasury 10 ans termine à 4,510 %, "
+                             "un plus haut de l'année pour la dette américaine."}, 3, _SNAPT)))
+check("la variation du plus fort mouvement compte parmi les chiffres connus",
+      A.valider_post({**BON, "marches": "Palantir signe la plus forte hausse du jour "
+                                        "avec 29,45 %, loin devant les indices."},
+                     3, {**_snap, "mouvement": {"ticker": "PLTR", "nom": "Palantir",
+                                                "libelle": "Palantir", "valeur": 162.66,
+                                                "dec": 2, "unite": "$", "type": "pct",
+                                                "variation": 29.45, "ref": D2[1]}}) == [])
 check("une variation absente du tableau est rejetée",
-      any("absente du tableau" in d for d in A.valider_post(
+      any("absent du tableau" in d for d in A.valider_post(
           {**BON, "marches": "Le CAC 40 a bondi de 4,20 % hier soir, un record "
                              "absolu pour la place parisienne cette année."}, 3, _snap)))
 check("un tableau sans commentaire est un défaut",
@@ -298,6 +323,30 @@ check("un commentaire sans tableau est un défaut",
       any("aucun tableau" in d for d in A.valider_post(_BONM, 3, None)))
 check("sans tableau ni commentaire, rien à redire",
       A.valider_post(BON, 3, None) == [])
+check("« recule de 3,46 % » est juste pour -3,46 : c'est le verbe qui porte le signe",
+      A.valider_post({**BON, "marches": "Le Nasdaq recule de 3,46 % et entraîne les "
+                                        "autres indices dans son repli du jour."},
+                     3, {**_snap, "lignes": [dict(l, variation=-3.46)
+                                             for l in _snap["lignes"]]}) == [])
+check("mais un signe ÉCRIT à l'envers est une inversion, pas une tournure",
+      any("absent du tableau" in d for d in A.valider_post(
+          {**BON, "marches": "Le Nasdaq gagne +3,46 % et entraîne les autres "
+                             "indices dans son sillage sur la séance du jour."},
+          3, {**_snap, "lignes": [dict(l, variation=-3.46) for l in _snap["lignes"]]})))
+check("les points de base sont convertis avant comparaison (22 pb = 0,22 pt)",
+      A.valider_post({**BON, "marches": "Le rendement du Treasury 10 ans cède "
+                                        "2,2 points de base sur la séance, sans bruit."},
+                     3, _SNAPT) == [])
+check("un gros mouvement s'arrondit plus grossièrement (29,5 % pour 29,45 %)",
+      A.valider_post({**BON, "marches": "Palantir signe la plus forte hausse du jour "
+                                        "avec 29,5 %, loin devant les indices."},
+                     3, {**_snap, "mouvement": {"ticker": "PLTR", "nom": "Palantir",
+                                                "libelle": "Palantir", "valeur": 162.66,
+                                                "dec": 2, "unite": "$", "type": "pct",
+                                                "variation": 29.45, "ref": D2[1]}}) == [])
+check("une section qui n'est pas un objet est un défaut, pas un plantage",
+      any("n'est pas un objet" in d
+          for d in A.valider_post({**BON, "sections": ["texte nu", "autre"]}, 3)))
 check("le vocabulaire de conseil est traqué aussi dans le commentaire de marché",
       any("conseil" in d for d in A.valider_post(
           {**BON, "marches": "Le S&P 500 a pris 1,79 %, nous recommandons donc "

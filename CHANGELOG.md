@@ -5,6 +5,38 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le garde qui aurait supprimé un matin
+
+Une relecture adverse du code de la veille, avant son premier vrai run, a
+trouvé un défaut **bloquant** dans le garde que je venais d'écrire.
+
+Le prompt demande de citer les niveaux du tableau. Or le niveau d'un taux
+s'écrit avec un pourcent : « le Treasury 10 ans termine à **3,872 %** ». Le
+garde ne connaissait que les *variations*, il aurait rejeté cette phrase
+parfaitement juste. Deux rejets d'affilée, sortie en erreur, **pas de post du
+matin**. Un garde qui refuse le juste coûte plus cher que pas de garde du tout.
+
+Quatre autres défauts de la même famille, corrigés dans la foulée et chacun
+couvert par un test qui vire au rouge si on retire la correction :
+
+- **« Le Nasdaq recule de 3,46 % » est juste pour −3,46** : c'est le verbe qui
+  porte le signe, l'exiger en chiffres rejetterait du bon français. Mais
+  « +3,46 % » sur la même ligne est une inversion, pas une tournure. Le signe
+  **écrit** engage, le signe sous-entendu non.
+- Les **points de base** étaient reconnus mais jamais convertis : « 22 points de
+  base » était comparé à 0,22 et rejeté.
+- La tolérance d'arrondi est devenue **relative** : un gros mouvement s'arrondit
+  plus grossièrement, « 29,5 % » pour 29,45 % est du français correct.
+- Une **section rendue en texte nu** au lieu d'un objet faisait *planter* la
+  validation — donc perdre la seconde tentative et le post.
+
+Et une promesse tenue avec deux mois de retard : le commentaire de `main()`
+annonçait depuis toujours que la seconde tentative « transmet ses défauts au
+modèle ». C'était faux, elle relançait le même prompt à l'identique et jouait
+au tirage au sort. Elle fait maintenant ce qu'elle disait.
+
+---
+
 ### Le point du matin chiffre enfin les marchés
 
 Il les racontait sans jamais les mesurer : on lisait « les indices ont bien

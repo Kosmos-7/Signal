@@ -148,6 +148,12 @@ def valider_post(p, nb_depeches, marches=None):
         d.append("2 à 5 sections attendues")
         sections = []
     for i, s in enumerate(sections):
+        # Un modèle qui rend une liste de CHAÎNES au lieu d'objets faisait planter
+        # la validation sur .get() — or une exception ici n'est pas un défaut de
+        # plus, c'est la perte de la seconde tentative et du post du jour.
+        if not isinstance(s, dict):
+            d.append(f"section {i} n'est pas un objet")
+            continue
         if not (s.get("titre") and s.get("texte")):
             d.append(f"section {i} incomplète")
         src = s.get("sources")
@@ -158,7 +164,8 @@ def valider_post(p, nb_depeches, marches=None):
             d.append(f"section {i} sans source valide")
     d += _defauts_marches(p, marches)
     texte_total = " ".join((s.get("texte") or "") + (s.get("titre") or "")
-                           for s in sections) + titre + chapeau + (p.get("marches") or "")
+                           for s in sections if isinstance(s, dict)) \
+        + titre + chapeau + (p.get("marches") or "")
     bas = texte_total.lower()
     for m in INTERDITS:
         if m in bas:
@@ -167,12 +174,23 @@ def valider_post(p, nb_depeches, marches=None):
 
 
 # Un pourcentage écrit dans le commentaire de marché : « +1,79 % », « -0,022 pts »,
-# « 2,3% ». Le signe est optionnel, la virgule française et le point sont acceptés.
-_POURCENT = re.compile(r"([+-]?\d+(?:[.,]\d+)?)\s*(?:%|pts\b|points de base\b)")
-# Tolérance d'arrondi : le modèle a le droit d'écrire « 1,8 % » pour 1,79 %.
-# 0,05 couvre l'arrondi à la décimale sans laisser passer un chiffre inventé,
-# qui se trompe de bien plus que cinq centièmes.
-_ARRONDI = 0.05
+# « 2,3% », « 22 points de base ». Le signe est optionnel, la virgule française et
+# le point sont acceptés. On capture l'unité : « 22 points de base » vaut 0,22 %,
+# et comparer 22 à 0,22 rejetait une phrase juste.
+_POURCENT = re.compile(
+    r"([+-]?\d+(?:[.,]\d+)?)\s*(%|pts\b|points? de base\b|pb\b)")
+_EN_POINTS = 0.01          # un point de base vaut un centième de point
+
+
+def _tolerance(c):
+    """Ce qu'on accepte comme arrondi autour d'une valeur connue.
+
+    Cinq centièmes en plancher : le modèle a le droit d'écrire « 1,8 % » pour
+    1,79 %. Plus un pour cent de la valeur, parce qu'un gros mouvement s'arrondit
+    plus grossièrement — « 29,5 % » pour 29,45 % est du français correct, et
+    un plancher fixe l'aurait refusé.
+    """
+    return max(0.05, abs(c) * 0.011)
 
 
 def _defauts_marches(p, marches):
@@ -192,21 +210,36 @@ def _defauts_marches(p, marches):
         return ["champ `marches` rendu alors qu'aucun tableau n'a été fourni"] if txt else []
     if not (60 <= len(txt) <= 700):
         return [f"commentaire de marché hors bornes ({len(txt)} car.)"]
-    connus = [l["variation"] for l in marches["lignes"]]
-    mv = marches.get("mouvement")
-    if mv:
-        connus.append(mv["variation"])
-    # Les NIVEAUX sont cités tels quels (« 8 666,63 ») : on les compare en
-    # valeur absolue, sans tolérance d'arrondi puisqu'ils ne portent pas de %.
+    lignes = list(marches["lignes"]) + ([marches["mouvement"]] if marches.get("mouvement") else [])
+    connus = [l["variation"] for l in lignes]
+    # LE NIVEAU D'UN TAUX S'ÉCRIT AUSSI AVEC UN « % », et le prompt demande
+    # explicitement de citer les niveaux. « Le Treasury 10 ans termine à
+    # 3,872 % » est donc une phrase PARFAITEMENT correcte que la première
+    # version de ce garde rejetait, faute d'avoir mis les niveaux en pourcentage
+    # dans les valeurs connues : deux rejets d'affilée, sortie en erreur, pas de
+    # post du matin. Un garde qui refuse le juste coûte plus cher que pas de
+    # garde du tout. Seuls les niveaux dont l'UNITÉ est « % » sont concernés :
+    # un indice à 8 666,63 ne se lit jamais suivi d'un signe pourcent.
+    connus += [l["valeur"] for l in lignes if l.get("unite") == "%"]
     d = []
-    for brut in _POURCENT.findall(txt):
+    for brut, unite in _POURCENT.findall(txt):
         try:
             v = float(brut.replace(",", "."))
         except ValueError:                                     # noqa: PERF203
             continue
-        if not any(abs(v - c) <= _ARRONDI or abs(abs(v) - abs(c)) <= _ARRONDI
+        if unite.startswith(("point", "pb")):
+            v *= _EN_POINTS
+        # LE SIGNE ÉCRIT ENGAGE, LE SIGNE SOUS-ENTENDU NON. « le Nasdaq recule
+        # de 3,46 % » est juste pour une variation de -3,46 : c'est le VERBE qui
+        # porte le signe, et exiger le « - » rejetterait du bon français. Mais
+        # « +3,46 % » sur cette même ligne est une inversion, pas une tournure :
+        # dès que le modèle écrit un signe, il doit être le bon. La première
+        # version comparait tout en valeur absolue et laissait passer les deux.
+        signe_ecrit = brut[0] in "+-"
+        if not any(abs(v - c) <= _tolerance(c) or
+                   (not signe_ecrit and abs(abs(v) - abs(c)) <= _tolerance(c))
                    for c in connus):
-            d.append(f"variation « {brut} % » absente du tableau mesuré")
+            d.append(f"chiffre « {brut} {unite} » absent du tableau mesuré")
     return d
 
 
@@ -332,13 +365,29 @@ affichées juste au-dessus de ton texte sur la page.
 - Tu n'en inventes aucun autre. Aucun indice absent du tableau, aucun niveau de \
 séance, aucun plus haut historique qui n'y figure pas.
 - Tu peux relier ces chiffres aux dépêches quand elles l'expliquent, sans jamais \
-faire dire à une dépêche ce qu'elle ne dit pas.
+faire dire à une dépêche ce qu'elle ne dit pas. Mais dans CE champ, tout \
+POURCENTAGE que tu écris doit venir du tableau ci-dessous. Un pourcentage tiré \
+d'une dépêche (« ses ventes ont progressé de 26 % ») a sa place dans une \
+section, pas ici : le lecteur lit ce paragraphe juste sous le tableau, et un \
+chiffre qui n'y figure pas se lit comme une ligne qu'on aurait oubliée.
 - Ne recopie pas le tableau ligne à ligne : il est déjà affiché. Dis ce qu'il \
 raconte, et cite les deux ou trois chiffres qui portent l'histoire du jour.
 """
 
 
-def rediger(deps, marches=None):
+_RETOUR = """
+
+## TA TENTATIVE PRÉCÉDENTE A ÉTÉ REJETÉE
+Corrige EXACTEMENT ces points, sans rien changer d'autre à ta démarche :
+{defauts}
+"""
+
+
+def rediger(deps, marches=None, defauts=None):
+    """`defauts` : ce que la tentative précédente a raté. Le commentaire de
+    main() promettait depuis toujours que « le modèle reçoit ses défauts, pas
+    nous » — c'était faux, la seconde tentative était un simple tirage au sort
+    avec le même prompt. Elle est maintenant ce qu'elle prétendait être."""
     from anthropic import Anthropic
     from marches import bloc_prompt
     corps = "\n".join(f"[{i}] {d['titre']} — {d['resume']} ({d['source']}, {d['date']})"
@@ -350,7 +399,8 @@ def rediger(deps, marches=None):
             sujets=", ".join(SUJETS), n=len(deps), corps=corps,
             champ_marches=CHAMP_MARCHES if bloc else "",
             consigne_marches=CONSIGNE_MARCHES if bloc else "",
-            bloc_marches=bloc)}])
+            bloc_marches=bloc) + (_RETOUR.format(defauts="\n".join(
+                "- " + x for x in defauts)) if defauts else "")}])
     brut = msg.content[0].text.strip()
     brut = re.sub(r"^```(?:json)?\s*|\s*```$", "", brut)
     return json.loads(brut)
@@ -608,7 +658,7 @@ def main():
     if defauts:
         # Une seule seconde chance : le modèle reçoit ses défauts, pas nous.
         print("⚠ post rejeté :", "; ".join(defauts), "— nouvelle tentative")
-        post = rediger(deps, marches)
+        post = rediger(deps, marches, defauts)
         defauts = valider_post(post, len(deps), marches)
         if defauts:
             raise SystemExit("Post invalide après 2 tentatives : " + "; ".join(defauts))
