@@ -1206,8 +1206,23 @@ except (OSError, subprocess.SubprocessError, ValueError) as _e:
 #      suffisaient à faire se toucher deux étiquettes voisines.
 print("\n— L'axe des années montre-t-il chaque exercice ? —")
 _ix = open(os.path.join(RACINE, "index.html"), encoding="utf-8").read()
-check("la fenêtre publiée est de douze exercices",
+check("le budget de colonnes est de douze",
       re.search(r"const FD_ANS=12\b", _ix) is not None)
+# LE BUDGET PORTE SUR CE QU'ON DESSINE, projections comprises — précision du
+# propriétaire (« 12 ans au total prévisionnel compris ») après une première
+# lecture qui budgétait douze exercices PUBLIÉS plus cinq projetés, soit
+# dix-sept colonnes. Les deux graphiques retranchent donc leurs colonnes vers
+# l'avant avant de découper le passé, chacun le sien : cinq projections pour
+# les barres, deux estimations pour le PER.
+check("les barres retranchent les projections du budget",
+      re.search(r"Math\.max\(4,FD_ANS-projC\.length\)", _ix) is not None,
+      "le découpage doit tenir compte des colonnes projetées")
+check("le PER retranche ses estimations du budget",
+      re.search(r"slice\(-Math\.max\(4,FD_ANS-est\.length\)\)", _ix) is not None,
+      "le découpage doit tenir compte des points estimés")
+# Le plancher existe pour qu'un horizon lointain ne vide jamais le passé.
+check("un plancher garde quatre exercices publiés quoi qu'il arrive",
+      _ix.count("Math.max(4,FD_ANS-") == 2)
 # La taille calculée doit atterrir dans un `style` : en attribut, le CSS gagne.
 check("les deux axes posent leur taille, et la posent en style",
       _ix.count('style="font-size:\'+_ax.px+\'px"') == 1

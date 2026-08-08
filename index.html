@@ -1405,10 +1405,18 @@ function fdSynthese(an,coupe,dev){
     +'cette marche serait fausse.'];
 }
 // Profondeur DESSINÉE (le tableau dépliable, lui, montre tout l'accumulé).
-/* DOUZE EXERCICES (demande du propriétaire, 08/08/2026 — dix auparavant). La
-   fenêtre est COMMUNE au graphique des chiffres publiés et à celui du PER :
-   les deux racontent la même histoire sur la même période, et les désaccorder
-   ferait lire deux passés différents sur une même fiche. */
+/* DOUZE COLONNES AU TOTAL, PROJECTIONS COMPRISES (demande du propriétaire,
+   08/08/2026 : « 12 ans au total prévisionnel compris » — dix exercices
+   publiés auparavant, sans compter les projetés).
+   C'est un budget de DESSIN, pas une profondeur d'historique : ce qui est
+   accumulé reste entier dans le tableau dépliable, et la note continue de
+   mesurer marges, croissance et médiane des multiples sur TOUT ce qu'on a.
+   Le budget est le même pour les deux graphiques, mais il ne se répartit pas
+   pareil, et il ne faut pas croire l'inverse : les barres portent jusqu'à cinq
+   colonnes projetées (horizon 2030) contre deux estimations sur le PER (les
+   analystes ne vont pas plus loin). À douze colonnes chacun, le graphique du
+   PER remonte donc plus loin dans le passé que celui des barres. Les deux
+   fenêtres sont de même TAILLE, pas de même période. */
 const FD_ANS=12, FD_TRIM=12;
 /* TAILLE DE POLICE DE L'AXE DES ANNÉES, calculée au lieu d'être fixée.
    Le propriétaire veut voir CHAQUE exercice étiqueté (« pas de trou une année
@@ -1465,7 +1473,26 @@ function fondaRender(s){
      l'affiche en entier, et la note continue de mesurer marges, croissance et
      médiane des multiples sur TOUT ce qui est accumulé. On réduit ce qu'on
      dessine, jamais ce qu'on calcule. */
-  const rows=full.slice(-(FD_MODE==='an'?FD_ANS:FD_TRIM));
+  // Projections (mode annuel seulement) : le consensus des analystes sur deux
+  // exercices puis notre prolongation jusqu'en 2030. Elles sont HACHURÉES et
+  // séparées du publié par un trait vertical — on ne mélange jamais un chiffre
+  // déposé et un chiffre attendu.
+  const proj=(FD_MODE==='an'&&Array.isArray(F.proj))?F.proj:[];
+  // Ce graphique porte le CA et le résultat net : une année projetée sans CA
+  // (le CA s'arrête, le BPA continue) ne doit pas ouvrir une colonne vide.
+  const projC=proj.filter(p=>p.ca!=null);
+  /* DOUZE COLONNES AU TOTAL, PROJECTIONS COMPRISES (précision du propriétaire,
+     08/08/2026 : « 12 ans au total prévisionnel compris »). La première lecture
+     de la demande avait budgété douze exercices PUBLIÉS auxquels s'ajoutaient
+     les cinq projetés — dix-sept colonnes, soit bien plus que ce qui était
+     demandé. Le budget porte sur ce qu'on DESSINE, pas sur ce qu'on a publié.
+     Les projections passent donc devant : elles sont dictées par l'horizon
+     (2030), pas par nous, et c'est le passé affiché qui recule d'autant. Un
+     plancher garde quatre exercices publiés même si l'horizon s'éloignait —
+     une fiche sans passé lisible n'aurait plus d'objet. */
+  const rows=full.slice(-(FD_MODE==='an'
+    ?Math.max(4,FD_ANS-projC.length)
+    :FD_TRIM));
   /* PAS DE COLONNE EBITDA (décision du propriétaire, 07/08 : « pas assez
      d'historique »). Mesuré sur les 93 fiches : l'EBITDA ne couvre que 31 %
      des exercices annuels publiés — Yahoo n'en donne que quatre ans, là où
@@ -1490,14 +1517,6 @@ function fondaRender(s){
   // Largeur du viewBox ADAPTÉE au conteneur : à 800 unités sur un écran de
   // 390 px, les étiquettes rendaient ~5 px — illisibles (vérification adverse).
   const NARROW=host.clientWidth>0&&host.clientWidth<640;
-  // Projections (mode annuel seulement) : le consensus des analystes sur deux
-  // exercices puis notre prolongation jusqu'en 2030. Elles sont HACHURÉES et
-  // séparées du publié par un trait vertical — on ne mélange jamais un chiffre
-  // déposé et un chiffre attendu.
-  const proj=(FD_MODE==='an'&&Array.isArray(F.proj))?F.proj:[];
-  // Ce graphique porte le CA et le résultat net : une année projetée sans CA
-  // (le CA s'arrête, le BPA continue) ne doit pas ouvrir une colonne vide.
-  const projC=proj.filter(p=>p.ca!=null);
   /* LE BÉNÉFICE ATTENDU EN BARRES (demande du propriétaire, 07/08 : « il
      manque le bénéfice net prévisionnel dans les graphs »). Le consensus est
      par action ; le montant est BPA × nombre d'actions déduit du dernier
@@ -1787,9 +1806,15 @@ function fdPerChart(F,fmtPer,W,b){
      l'axe devient illisible. La MÉDIANE affichée reste celle de la fenêtre
      dessinée — sinon le trait tracé sur le graphique ne correspondrait pas
      aux points qu'on voit ; celle de tout l'historique reste dans la note. */
-  const anAll=((F&&F.an)||[]).slice(-FD_ANS);
-  let pub=anAll.filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per,est:false}));
+  /* MÊME BUDGET DE DOUZE COLONNES que le graphique des barres, estimations
+     comprises. Les points estimés sont comptés d'abord — ils viennent des
+     analystes, pas de nous — et c'est l'historique affiché qui recule d'autant.
+     Ce graphique n'ayant que DEUX colonnes vers l'avant là où les barres en ont
+     cinq, il remonte mécaniquement plus loin dans le passé : même taille de
+     fenêtre, pas même période. */
   const est=((F&&F.pe_prev)||[]).map(p=>({an:p.exercice,per:p.per,est:true}));
+  const anAll=((F&&F.an)||[]).slice(-Math.max(4,FD_ANS-est.length));
+  let pub=anAll.filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per,est:false}));
   if(!pub.length&&!est.length)return null;
   /* PLUS DE POINT « AUJOURD'HUI » (décision du propriétaire, 07/08 : « ça
      fausse tout »). Il valait le cours du jour divisé par le bénéfice des
