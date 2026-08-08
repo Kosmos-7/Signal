@@ -68,6 +68,24 @@ REQUETES = {
         "cleanroom semiconductor fabrication",
         "electrical substation transformer high voltage",
     ],
+    "quantique": [
+        # UN ORDINATEUR QUANTIQUE SE PHOTOGRAPHIE, et c'est même l'objet le plus
+        # photogénique de l'informatique contemporaine : le lustre de cuivre
+        # doré d'un cryostat à dilution, qui n'est pas la machine mais son
+        # système de refroidissement. On le cherche par les laboratoires
+        # publics, seuls producteurs d'images du domaine public par statut, et
+        # par les constructeurs qui versent leurs photos sous licence libre.
+        "IBM Quantum System One",
+        "dilution refrigerator quantum computer",
+        "quantum computer chandelier cryostat",
+        "superconducting qubit chip",
+        "trapped ion quantum computer",
+        "Google Sycamore quantum processor",
+        "quantum computing laboratory optical table",
+        "ion trap vacuum chamber laser",
+        "cryostat laboratory helium",
+        "quantum processor wafer",
+    ],
     # Le thème PEA n'a pas d'objet : c'est une enveloppe fiscale française qui
     # n'accepte que les sociétés à siège européen. On l'illustre donc par ce que
     # la contrainte a de concret — la monnaie et les institutions communes —

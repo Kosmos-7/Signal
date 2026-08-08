@@ -42,8 +42,8 @@ def check(nom, cond, detail=""):
 print("— Taxonomie —")
 ids = [t["id"] for t in themes.THEMES]
 check("identifiants uniques", len(ids) == len(set(ids)))
-check("2 thèmes curés publiés (financials retirée le 06/08)",
-      len(themes.THEMES_CURES) == 2)
+check("3 thèmes curés publiés (financials retirée le 06/08, quantique ajoutée le 08/08)",
+      len(themes.THEMES_CURES) == 3)
 check("chaque thème a thèse, inversion et biais",
       all(t.get("thesis") and t.get("inversion") and t.get("biais") for t in themes.THEMES))
 check("les thèmes calculés publient leur règle en clair",
@@ -55,6 +55,35 @@ check("aucun thème curé étriqué", all(len(t["tickers"]) >= 20 for t in theme
 _infra = themes.THEMES_BY_ID.get("infra-ia")
 check("infra-ia couvre assez de titres pour six maillons",
       _infra and len(_infra["tickers"]) >= 40, f"{len(_infra['tickers']) if _infra else 0}")
+
+# ── LE THÈME QUANTIQUE ─────────────────────────────────────────────────────
+# Il déroge à deux conventions du projet, et une dérogation qui n'est pas dite
+# est une erreur qui attend. Ces vérifications tiennent la promesse écrite dans
+# son champ `biais` : les dérogations existent, elles sont bornées aux
+# pure-players, et le texte les annonce.
+print("\n— Le thème quantique —")
+_q = themes.THEMES_BY_ID.get("quantique")
+check("le thème quantique existe et publie un top borné",
+      _q and _q.get("top") == 10, str(_q and _q.get("top")))
+check("il déclare plus large qu'il ne publie",
+      _q and len(_q["tickers"]) > _q["top"] * 2,
+      f"{len(_q['tickers']) if _q else 0} déclarés pour {_q['top'] if _q else 0} publiés")
+check("les pure-players forment un maillon à part, pas un mélange",
+      _q and _q["maillons"][0]["tickers"] == ["IONQ", "RGTI", "QBTS", "QUBT"])
+# La dérogation au seuil de taille et celle à l'historique doivent être ÉCRITES
+# dans le texte que le lecteur voit, pas seulement dans un commentaire de code.
+check("les deux dérogations sont annoncées au lecteur",
+      _q and "25 milliards" in _q["biais"] and "cinq ans de cotation" in _q["biais"])
+check("le biais prévient que la note ne s'applique pas à ces sociétés",
+      _q and "la grille ne s'applique pas" in _q["biais"])
+# LES QUATRE INTRODUCTIONS DE 2026 (QNT, INFQ, XNDU, HQ) ont été mesurées le
+# 08/08 : toutes sous les 200 séances exigées par la MM200 et le RSI. Les
+# déclarer produirait un thème amputé publié en silence — le mode de panne que
+# validate_tickers.py existe précisément pour éviter.
+_jeunes = {"QNT", "INFQ", "XNDU", "HQ"}
+check("aucune introduction de 2026 n'est déclarée avant d'avoir 200 séances",
+      not (_jeunes & set(themes.univers_thematique())),
+      str(sorted(_jeunes & set(themes.univers_thematique()))))
 
 # Doctrine de nommage : ne jamais emprunter le vocabulaire d'un concept non calculé
 interdits = ["moat", "douve", "marge de sécurité", "valeur intrinsèque"]

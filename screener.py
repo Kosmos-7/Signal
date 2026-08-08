@@ -2800,7 +2800,19 @@ def main():
             # Tri par score décroissant, départage par ticker croissant :
             # l'ordre publié doit être reproductible d'un run à l'autre.
             membres.sort(key=lambda t: (-scores_par_ticker.get(t, 0), t))
+            # La couverture se mesure AVANT bornage, comme pour un filtre : sinon
+            # un thème qui publie dix titres sur vingt-deux déclarés afficherait
+            # 45 % de couverture à chaque run, donc « dégradé » en permanence par
+            # sa propre définition.
             couverts = len(membres)
+            # BORNAGE `top`, DÉSORMAIS GÉNÉRAL. Il n'existait que pour le kind
+            # « filtre », où il portait le « top 20 » du PEA. Un thème de thèse
+            # peut vouloir la même chose : déclarer un périmètre honnête et n'en
+            # publier que les meilleurs. Le secteur du quantique en est le cas
+            # d'école — une vingtaine de sociétés cotées y sont défendables, dix
+            # font une liste qu'on lit.
+            if th.get("top"):
+                membres = membres[: th["top"]]
 
         couv = (couverts / declares) if declares else 1.0
         # Garde de couverture PAR THÈME. Le seuil global (60 % de l'univers) ne
