@@ -1185,13 +1185,20 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
        fiche, soit un bandeau de mille pixels pour une quarantaine de
        caractères. Les <br> deviennent des séparateurs, et la boîte épouse son
        contenu — sur écran étroit, elle se replie toute seule.
-       « si retour à la tendance : +33 % » plutôt que « écart −25 % » : même
+       « si le cours y revenait : +33 % » plutôt que « écart −25 % » : même
        information, lue dans le sens utile. Le conditionnel est la partie
        honnête de la phrase — la tendance est une trajectoire passée, pas un
-       objectif (règle 14). */
+       objectif (règle 14).
+
+       LE MOT « SI » AVAIT DISPARU (signalé par le propriétaire, 08/08 :
+       « retour seul, on ne comprend pas forcément »). Le libellé s'était
+       abrégé en « retour −32 % », et l'abréviation coûtait les deux choses
+       que la phrase portait : ce vers quoi on reviendrait, et le fait que
+       c'est une hypothèse et non une prévision. « Tendance » n'est pas répété
+       — il est déjà le libellé de la valeur juste avant, et « y » y renvoie. */
     tip.innerHTML=['<span class="d">'+fmt(t)+'</span>',
       '● Cours&nbsp;<span class="c">'+p.toFixed(p<10?2:0)+sym+'</span>',
-      (tv?'◌ Tendance&nbsp;<span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span> <span class="chx-k">retour&nbsp;</span><span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>'
+      (tv?'◌ Tendance&nbsp;<span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span> <span class="chx-k">si le cours y revenait&nbsp;</span><span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>'
           :'◌ <span class="chx-k">période trop courte pour une tendance</span>'),
       (m21&&m200?'<span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span>':''),
       (m21&&m200?'<span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'')
