@@ -89,9 +89,22 @@ for t, d in FICHES.items():
     if not n:
         continue
     bl = n.get("blocs") or {}
-    somme = sum((bl.get(k) or {}).get("pts") or 0 for k in MAXB)
-    if abs(somme - n["total"]) > 0.51:
-        bad_somme.append(f"{t}:{somme:.1f}≠{n['total']}")
+    # LA SOMME SE COMPARE SUR LA BASE RÉELLEMENT NOTÉE, pas sur cent points.
+    # Quand un critère est incalculable il est RETIRÉ et la note se renormalise
+    # sur le reste — c'est la doctrine du projet, écrite dans le lexique du site
+    # (« un trou de donnée n'est jamais compté zéro »). Tant qu'aucune fiche
+    # n'avait perdu un bloc ENTIER, sommer les quatre blocs et comparer au total
+    # revenait au même et ce contrôle passait. Quantum Computing Inc. est la
+    # première : sans historique exploitable ni estimation, ses quatre critères
+    # de croissance tombent, le bloc vaut None, et 13,8 + 11 + 8 = 32,8 pour un
+    # total de 44. Les deux nombres sont justes — 32,8 sur les 75 points
+    # réellement notés font bien 43,7. C'est l'invariant qui était trop étroit.
+    dispo = [k for k in MAXB if (bl.get(k) or {}).get("pts") is not None]
+    somme = sum((bl[k] or {}).get("pts") or 0 for k in dispo)
+    base = sum(MAXB[k] for k in dispo)
+    attendu = somme / base * 100 if base else 0
+    if abs(attendu - n["total"]) > 0.6:
+        bad_somme.append(f"{t}:{attendu:.1f}≠{n['total']}")
     for k, mx in MAXB.items():
         p = (bl.get(k) or {}).get("pts")
         if p is not None and not (-0.01 <= p <= mx + 0.01):
@@ -103,7 +116,8 @@ for t, d in FICHES.items():
             bad_crit.append(f"{t}.{c['id']}={c['pts']}/{c['max']}")
         if c.get("pts") is None and not c.get("motif"):
             bad_crit.append(f"{t}.{c['id']} retiré SANS motif")
-check("le total est la somme des blocs, à l'arrondi près", not bad_somme, str(bad_somme[:4]))
+check("le total est la somme des blocs renormalisée sur la base notée",
+      not bad_somme, str(bad_somme[:4]))
 check("aucun bloc hors de son barème", not bad_bloc, str(bad_bloc[:4]))
 check("les barèmes de blocs sont ceux de la doctrine (35/25/25/15)",
       not bad_max, str(bad_max[:4]))
