@@ -226,6 +226,12 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .fd-table td{padding:8px 0;border-bottom:1px solid var(--line);text-align:right;color:var(--text2);white-space:nowrap}
   .fd-table td:first-child{text-align:left;color:var(--text)}
   .fd-d{font-size:.7rem;display:block;margin-top:2px}
+  /* Dans le RELEVÉ, la variation reste sur la ligne : `.fd-d` est en bloc pour
+     le tableau dépliable, où elle se range sous son montant. Reprise telle
+     quelle dans une carte d'une seule ligne, elle forçait un retour après
+     chaque pourcentage — six lignes pour ce qui en fait une, et une boîte de
+     213 px de large mesurée au lieu des 900 attendus. */
+  .chx-tip .fd-d{display:inline;margin-top:0;font-size:inherit}
   .fd-d.up{color:var(--green)}.fd-d.dn{color:var(--red)}
   .fd-est td{color:var(--text3)}
   .fd-est td:first-child{color:var(--text3);font-style:italic}
@@ -1274,10 +1280,22 @@ function fdLabel(iso,mode){
    des graphs je veux pouvoir voir le montant », puis « regarde comment Baggr
    affiche le résultat au survol, je veux pareil »).
 
-   FAÇON BAGGR, donc : une carte FLOTTANTE posée à côté de la colonne visée,
-   du côté où il y a de la place, cachée au repos — pas le bandeau docké du
-   graphique de cours. La hauteur est fixe : la carte suit la colonne en X,
-   jamais le pointeur en Y, sinon elle tremble sous le doigt.
+   LA CARTE FLOTTANTE EST ABANDONNÉE (décision du propriétaire, 08/08 : « ça
+   cache les autres barres »). Elle était calquée sur Baggr, posée à côté de
+   la colonne visée — et le reproche est exactement celui qui avait déjà fait
+   descendre le relevé du graphique de cours : elle couvrait ce qu'on venait
+   lire. Une carte assez large pour porter deux montants et deux variations
+   masque trois ou quatre colonnes, donc précisément la comparaison qu'on
+   cherchait en survolant.
+
+   Même solution que sur le cours, donc, et un comportement de moins à
+   retenir : le relevé est DOCKÉ sous le dessin, dans le flux. Il ne cache
+   rien, ne bouge jamais, et se lit pareil à la souris et au doigt. La colonne
+   lue reste désignée par le bandeau clair `.fd-hi`, qui, lui, est derrière
+   les barres et ne masque rien.
+
+   AU REPOS IL AFFICHE LA DERNIÈRE COLONNE, jamais le vide : sans cela le bloc
+   apparaîtrait au premier survol et pousserait la légende vers le bas.
 
    COLONNE LA PLUS PROCHE, pas colonne survolée : une barre fait 34 unités de
    large dans un slot qui peut en faire 18 — viser la barre elle-même est
@@ -1288,16 +1306,12 @@ function releveSvg(svg,tip,xs,htmls,W){
   if(!svg||!tip||!xs.length)return;
   const hi=svg.querySelector('.fd-hi');
   const demi=(xs.length>1?Math.abs(xs[1]-xs[0]):40)/2;
-  const cache=()=>{tip.style.display='none';if(hi)hi.setAttribute('visibility','hidden');};
   const montre=i=>{
-    tip.innerHTML=htmls[i];tip.style.display='block';
+    tip.innerHTML=htmls[i];
+    tip.classList.add('dock');
+    tip.style.left='';tip.style.top='';tip.style.display='block';
     if(hi){hi.setAttribute('x',xs[i]-demi);hi.setAttribute('width',demi*2);
-      hi.setAttribute('visibility','visible');}
-    const rb=svg.getBoundingClientRect();if(!rb.width)return;
-    const cx=xs[i]*rb.width/W, tw=tip.offsetWidth||180;
-    let lx=cx+14; if(lx+tw>rb.width-2)lx=cx-tw-14;
-    tip.style.left=Math.max(2,lx)+'px';
-    tip.style.top=Math.round(rb.height*0.12)+'px';};
+      hi.setAttribute('visibility','visible');}};
   const suit=ev=>{
     const rb=svg.getBoundingClientRect();if(!rb.width)return;
     const mx=(ev.clientX-rb.left)*W/rb.width;
@@ -1305,7 +1319,10 @@ function releveSvg(svg,tip,xs,htmls,W){
     montre(b);};
   svg.addEventListener('pointermove',suit);
   svg.addEventListener('pointerdown',suit);
-  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType==='mouse')cache();});
+  // La souris sort : retour au repos, c'est-à-dire à la DERNIÈRE colonne, pas
+  // au vide — même règle que le graphique de cours.
+  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType==='mouse')montre(xs.length-1);});
+  montre(xs.length-1);
 }
 function fdPrev(arr,i,mode){
   if(mode==='an')return arr[i-1]||null;
@@ -1548,13 +1565,23 @@ function fondaRender(s){
     const natTxt=o.pr?(rnA!=null&&natEps!==natCa
       ?'CA '+(natCa==='consensus'?'au consensus':'prolongé par nous')+' · bénéfice '+(natEps==='consensus'?'au consensus':'prolongé par nous')
       :(natCa==='consensus'?'consensus des analystes':'notre prolongation arithmétique')):'';
-    relH.push('<span class="d">'+(o.pr?r.exercice+'&nbsp;· attendu':lab(r))+'</span><br>'
-      +'<span style="color:#74b6df">'+(o.pr?'▨':'■')+'</span> CA&nbsp;: <span class="c">'+fdMoney(r.ca,dev)+'</span> '+dlt('ca')
-      + (!o.pr&&r.rn!=null
-          ?'<br><span style="color:#c6c6e0">■</span> Résultat net&nbsp;: <span class="t">'+fdMoney(r.rn,dev)+'</span> '+dlt('rn'):'')
-      + (rnA!=null
-          ?'<br><span style="color:#c6c6e0">▨</span> Résultat net&nbsp;: <span class="t">'+fdMoney(rnA,dev)+'</span> '+fdDelta({v:rnA},{v:rnPrec},'v'):'')
-      + (natTxt?'<br><i style="color:var(--text3);font-style:normal">'+natTxt+'</i>':''));
+    /* UNE LIGNE, pas un bloc (suite du passage en relevé docké, 08/08). La
+       carte flottante pouvait s'étirer en hauteur : elle flottait. Dans le
+       flux, cinq lignes repoussent la légende et les phrases de synthèse d'un
+       demi-écran à chaque survol. Les séparateurs « · » remplacent les sauts
+       de ligne, exactement comme sur le relevé du graphique de cours, et le
+       tout se replie tout seul sur écran étroit (`white-space:normal` en
+       mode docké). */
+    const sep='<span class="chx-k">&nbsp;·&nbsp;</span>';
+    relH.push([
+      '<span class="d">'+(o.pr?r.exercice+'&nbsp;· attendu':lab(r))+'</span>',
+      '<span style="color:#74b6df">'+(o.pr?'▨':'■')+'</span> CA&nbsp;<span class="c">'+fdMoney(r.ca,dev)+'</span> '+dlt('ca'),
+      (!o.pr&&r.rn!=null
+        ?'<span style="color:#c6c6e0">■</span> Résultat net&nbsp;<span class="t">'+fdMoney(r.rn,dev)+'</span> '+dlt('rn'):''),
+      (rnA!=null
+        ?'<span style="color:#c6c6e0">▨</span> Résultat net&nbsp;<span class="t">'+fdMoney(rnA,dev)+'</span> '+fdDelta({v:rnA},{v:rnPrec},'v'):''),
+      (natTxt?'<i style="color:var(--text3);font-style:normal">'+natTxt+'</i>':'')
+    ].filter(Boolean).join(sep));
     relX.push(slot*i+slot/2);
   });
   cols.forEach((o,i)=>{
@@ -1585,7 +1612,15 @@ function fondaRender(s){
          rogné (« 2030 » coupé au bord droit sur mobile) : centré, il déborde
          de sa demi-largeur. Aux deux extrémités on ancre donc le texte au
          bord plutôt qu'à son centre. */
-      const txt=o.pr?String(r.exercice):lab(r), demi=txt.length*LARG_CAR/2;
+      /* ANNÉES À DEUX CHIFFRES (demande du propriétaire, 08/08 : « comme sur
+         PER, afin de gagner de la place »). « 25 » au lieu de « 2025 » libère
+         la moitié de la largeur de chaque étiquette : sur douze colonnes, le
+         pas d'affichage peut redescendre et l'axe cesse de sauter des années.
+         La forme longue reste PARTOUT où elle porte une information — dans le
+         relevé sous le graphique, dans le tableau dépliable, dans les phrases
+         de synthèse. Un axe est un repère, pas une source. */
+      const txt=(o.pr?String(r.exercice):lab(r)).replace(/^(\d{2})(\d{2})/,'$2'),
+            demi=txt.length*LARG_CAR/2;
       const anc=(cx+demi>W-1)?'end':(cx-demi<1?'start':'middle');
       const tx=anc==='end'?W-1:(anc==='start'?1:cx);
       bars+='<text x="'+tx+'" y="'+(H-6)+'" text-anchor="'+anc+'" class="chx-axis"'+(last?' fill="#c6c6e0"':(o.pr?' opacity=".65"':''))+'>'+txt+'</text>';}
