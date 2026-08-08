@@ -169,6 +169,26 @@ _convertibles = _devises - {"EUR", "USD", "GBP"}
 check("chaque devise détectée hors EUR/USD/GBP a sa paire ET son repli",
       _convertibles <= set(pa._FX_PAIRS) and _convertibles <= set(pa._FX_FALLBACK),
       str(sorted(_convertibles - set(pa._FX_PAIRS))))
+# LE VALIDATEUR AUSSI convertit des devises, et il l'a payé le 08/08/2026 :
+# TWD et HKD avaient été ajoutés à BORNES_PRIX et oubliés dans la table des
+# capitalisations, où le défaut silencieux à 1.0 les traitait à la parité du
+# dollar. HIWIN ressortait à 136,9 Md$ au lieu de ~4,4 et UBTech à 45,3 au lieu
+# de ~5,8 : l'erreur SUPPRIMAIT l'avertissement « sous le seuil des 25 Md$ »,
+# c'est-à-dire précisément le contrôle qu'on croyait exercer. Une devise
+# détectée par detect_currency doit donc être connue des DEUX tables du
+# validateur, sans quoi son garde-fou ment sans le dire.
+import validate_tickers as vt   # noqa: E402
+check("le validateur borne le prix de chaque devise détectée",
+      _devises <= set(vt.BORNES_PRIX),
+      str(sorted(_devises - set(vt.BORNES_PRIX))))
+check("le validateur sait convertir la capitalisation de chaque devise détectée",
+      _devises <= set(vt.CONV_CAP_USD),
+      str(sorted(_devises - set(vt.CONV_CAP_USD))))
+# Les deux tables du validateur doivent couvrir le même jeu de devises : c'est
+# leur divergence, pas leur contenu, qui a produit le bug.
+check("les deux tables de devises du validateur couvrent le même jeu",
+      set(vt.BORNES_PRIX) <= set(vt.CONV_CAP_USD),
+      str(sorted(set(vt.BORNES_PRIX) - set(vt.CONV_CAP_USD))))
 # Le code TSE est ambigu (Tokyo vs Toronto) : il ne doit pas décider seul
 check("le code marché TSE ne bascule pas en JPY", pa.detect_currency("XYZ", "TSE") != "JPY")
 
