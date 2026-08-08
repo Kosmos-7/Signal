@@ -5,6 +5,44 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Une watchlist quantique, et ce qu'elle a d'inconfortable
+
+Quatrième liste du site, et la première qui publie **moins qu'elle ne
+déclare** : vingt-quatre titres portent le périmètre, dix seulement sont lus.
+
+Le secteur pose un problème que les autres n'ont pas : **il n'y a presque rien
+à noter.** Les sociétés dont c'est le métier perdent de l'argent et ne pèsent
+pas les 25 milliards de dollars que le projet exige d'ordinaire ; celles qui
+construisent vraiment des machines sont des conglomérats où le quantique ne
+fait pas un centième de l'activité. La liste dit les deux, sans les mélanger,
+en cinq maillons : les pure-players, les constructeurs, ceux qui vendent les
+pelles (cryogénie, lasers, instruments), la couche logicielle, et la sécurité
+post-quantique — la seule partie du sujet qui ait déjà des clients.
+
+Le champ `biais` prévient avant lecture que **la grille ne s'applique pas** aux
+sociétés sans bénéfice : un score bas n'y dit pas « mauvaise société », il dit
+« rien à mesurer ». Et les deux dérogations sont écrites plutôt que cachées —
+le seuil de taille levé pour les seuls pure-players, l'historique de moins de
+cinq ans de plusieurs titres. Deux tests vérifient que ces phrases restent
+dans le texte.
+
+**Quatre absences mesurées, pas oubliées.** Le secteur a connu quatre
+introductions en bourse en 2026 : Quantinuum le 4 juin, Xanadu le 23 mars,
+Horizon Quantum le 20 mars, Infleqtion le 17 février. Confrontées à Yahoo le
+8 août, toutes les quatre sont sous les **200 séances** qu'exigent la moyenne
+mobile 200 jours et le RSI — Quantinuum n'en a que 45. Le screener les
+écarterait au run et la liste serait publiée amputée, en silence. Elles sont
+inscrites au registre des écartés avec la date où leur historique suffira, la
+première en décembre 2026. Quantinuum est l'absence la plus coûteuse : c'est le
+plus gros pure-play coté, et son actionnaire Honeywell reste dans la liste.
+
+Côté mécanique, le bornage `top` devient général. Il n'existait que pour le
+filtre PEA ; un thème de thèse peut vouloir la même chose. La couverture
+continue de se mesurer **avant** bornage, sinon le thème se déclarerait
+« dégradé » par sa propre définition.
+
+---
+
 ### Vingt-six défauts trouvés avant le premier vrai run
 
 Le code du tableau des marchés et de la sonde n'avait jamais tourné : il devait
