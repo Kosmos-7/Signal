@@ -51,6 +51,10 @@ BORNES_PRIX = {
     "USD": (1, 5000), "EUR": (1, 5000), "GBP": (0.5, 500),
     "CHF": (1, 5000), "DKK": (5, 5000), "SEK": (5, 5000), "NOK": (5, 5000),
     "JPY": (100, 100000), "KRW": (1000, 2000000),
+    # Ajoutées le 08/08/2026 avec le support des devises de Taipei et Hong Kong.
+    # Le TWD est le piège du lot : TSMC cote plus de 2 000 sur sa ligne locale,
+    # une valeur qu'un contrôle calibré sur le dollar aurait signalée à tort.
+    "TWD": (5, 20000), "HKD": (1, 5000),
 }
 
 

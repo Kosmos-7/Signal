@@ -149,10 +149,26 @@ print("\n— Devises —")
 for t, attendu in [("6954.T", "JPY"), ("8035.T", "JPY"), ("000660.KS", "KRW"),
                    ("005930.KS", "KRW"), ("LDO.MI", "EUR"), ("SAAB-B.ST", "SEK"),
                    ("ABBN.SW", "CHF"), ("BA.L", "GBP"), ("RHHBY", "USD"),
-                   ("ORSTED.CO", "DKK"), ("NVDA", "USD")]:
+                   ("ORSTED.CO", "DKK"), ("NVDA", "USD"),
+                   # TAIPEI ET HONG KONG, ajoutés le 08/08/2026. TSMC est passé
+                   # de son ADR à sa ligne de Taipei le matin même : sans cette
+                   # branche il cotait 2 370 « dollars », soit trente-deux fois
+                   # sa valeur. C'est la panne d'ORSTED.CO à un ordre de
+                   # grandeur près, et elle n'a été vue qu'en préparant une
+                   # AUTRE watchlist. Le HKD est plus sournois : arrimé au
+                   # dollar, il ne se trompe que d'un facteur 7,8.
+                   ("2330.TW", "TWD"), ("2049.TW", "TWD"), ("9880.HK", "HKD")]:
     check(f"{t} → {attendu}", pa.detect_currency(t) == attendu, f"obtenu {pa.detect_currency(t)}")
-check("JPY et KRW ont une paire de change et un repli",
-      {"JPY", "KRW"} <= set(pa._FX_PAIRS) and {"JPY", "KRW"} <= set(pa._FX_FALLBACK))
+# TOUTE devise non-euro rendue par detect_currency doit être convertible, sinon
+# la conversion en euros échoue en silence sur un titre déjà acheté. On teste
+# l'invariant plutôt que la liste, pour qu'il tienne au prochain ajout.
+_devises = {pa.detect_currency(t) for t in
+            ("6954.T", "000660.KS", "SAAB-B.ST", "ORSTED.CO", "ABBN.SW",
+             "2330.TW", "9880.HK", "XYZ.OL")}
+_convertibles = _devises - {"EUR", "USD", "GBP"}
+check("chaque devise détectée hors EUR/USD/GBP a sa paire ET son repli",
+      _convertibles <= set(pa._FX_PAIRS) and _convertibles <= set(pa._FX_FALLBACK),
+      str(sorted(_convertibles - set(pa._FX_PAIRS))))
 # Le code TSE est ambigu (Tokyo vs Toronto) : il ne doit pas décider seul
 check("le code marché TSE ne bascule pas en JPY", pa.detect_currency("XYZ", "TSE") != "JPY")
 

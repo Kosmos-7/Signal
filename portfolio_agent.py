@@ -182,6 +182,19 @@ def detect_currency(ticker, market=""):
         return "JPY"
     if t.endswith(".KS") or t.endswith(".KQ") or "KSC" in m or "KRX" in m:
         return "KRW"
+    # TAIPEI ET HONG KONG (08/08/2026). Trou découvert en préparant la
+    # watchlist robotique : ni .TW ni .HK n'étaient reconnus, donc traités en
+    # USD par le repli final. TSMC est passé de l'ADR à sa ligne de Taipei le
+    # matin même — il cote 2 370 TWD, soit environ 73 $. Sans cette branche, un
+    # achat de l'agent l'aurait valorisé TRENTE-DEUX FOIS trop haut, exactement
+    # la panne d'ORSTED.CO décrite plus haut, à un ordre de grandeur près. Rien
+    # n'a été acheté entre-temps : le portefeuille ne détenait aucune de ces
+    # lignes. Le dollar de Hong Kong est arrimé au dollar américain, ce qui rend
+    # l'erreur plus discrète — un facteur 7,8 au lieu de 32 — donc plus durable.
+    if t.endswith(".TW") or t.endswith(".TWO") or "TAI" in m or "TWSE" in m:
+        return "TWD"
+    if t.endswith(".HK") or "HKG" in m or "HKSE" in m:
+        return "HKD"
     # Couronnes nordiques (hors zone euro)
     if t.endswith(".CO") or "CPH" in m:
         return "DKK"
@@ -214,9 +227,13 @@ def detect_currency(ticker, market=""):
 # FX à la volée pour les devises hors USD/GBP (passées en paramètres historiques).
 # Cache par run — un seul fetch par devise.
 _FX_PAIRS    = {"DKK": "EURDKK=X", "SEK": "EURSEK=X", "NOK": "EURNOK=X", "CHF": "EURCHF=X",
-                "JPY": "EURJPY=X", "KRW": "EURKRW=X"}
+                "JPY": "EURJPY=X", "KRW": "EURKRW=X",
+                "TWD": "EURTWD=X", "HKD": "EURHKD=X"}
 _FX_FALLBACK = {"DKK": 7.46, "SEK": 11.3, "NOK": 11.6, "CHF": 0.93,
-                "JPY": 170.0, "KRW": 1550.0}
+                "JPY": 170.0, "KRW": 1550.0,
+                # Repli seulement : le taux réel est cherché à chaque run. Le
+                # HKD est arrimé au USD dans une bande étroite, le TWD flotte.
+                "TWD": 35.5, "HKD": 9.05}
 _fx_cache    = {}
 
 def get_eur_rate(currency):
