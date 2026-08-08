@@ -51,6 +51,22 @@ BORNES_PRIX = {
     "USD": (1, 5000), "EUR": (1, 5000), "GBP": (0.5, 500),
     "CHF": (1, 5000), "DKK": (5, 5000), "SEK": (5, 5000), "NOK": (5, 5000),
     "JPY": (100, 100000), "KRW": (1000, 2000000),
+    # Ajoutées le 08/08/2026 avec le support des devises de Taipei et Hong Kong.
+    # Le TWD est le piège du lot : TSMC cote plus de 2 000 sur sa ligne locale,
+    # une valeur qu'un contrôle calibré sur le dollar aurait signalée à tort.
+    "TWD": (5, 20000), "HKD": (1, 5000),
+}
+
+# Taux approximatifs devise → dollar, pour le SEUL contrôle du seuil de
+# capitalisation. Volontairement grossiers : on vérifie un ordre de grandeur,
+# pas un cours. Table au niveau du module pour qu'un test puisse la lire — sa
+# jumelle BORNES_PRIX ci-dessus a reçu TWD et HKD le 08/08/2026 alors que
+# celle-ci les a manqués, et rien ne l'a signalé (cf. le commentaire au point
+# d'usage). Deux tables de devises côte à côte doivent se vérifier ensemble.
+CONV_CAP_USD = {
+    "JPY": 150, "KRW": 1350, "GBp": 0.79, "GBP": 0.79,
+    "EUR": 0.92, "CHF": 0.88, "DKK": 6.9, "SEK": 10.5, "NOK": 10.8,
+    "TWD": 31.0, "HKD": 7.8, "USD": 1.0,
 }
 
 
@@ -130,13 +146,32 @@ def valide(ticker):
             # pence : pour une valeur londonienne cotée en GBp, la capitalisation
             # est en livres. Diviser par 79 la sous-estimait d'un facteur 100 —
             # BAE Systems ressortait à 0,8 Md$ lors de la validation du 01/08.
-            approx = {"JPY": 150, "KRW": 1350, "GBp": 0.79, "GBP": 0.79,
-                      "EUR": 0.92, "CHF": 0.88, "DKK": 6.9, "SEK": 10.5, "NOK": 10.8}
-            cap_usd = cap / approx.get(devise_yahoo, 1.0)
-            r["cap_usd_approx_md"] = round(cap_usd / 1e9, 1)
-            if cap_usd < SEUIL_CAP_USD:
-                r["avertissements"].append(
-                    f"capitalisation ~{r['cap_usd_approx_md']} Md$ < seuil 25 Md$ du projet")
+            # TWD et HKD ajoutés le 08/08/2026, en même temps que BORNES_PRIX
+            # ci-dessus — mais ils y avaient été OUBLIÉS, et le défaut à 1.0
+            # rendait l'oubli invisible : HIWIN ressortait à 136,9 Md$ (TWD lus
+            # comme des dollars, ×31) et UBTech à 45,3 Md$ (×7,8). Les deux sont
+            # en réalité sous le seuil des 25 Md$, et l'erreur allait DANS LE
+            # SENS QUI SUPPRIME L'AVERTISSEMENT : un titre trop petit passait
+            # pour assez gros, ce qui est exactement le contrôle qu'on croyait
+            # exercer. Même famille que le bug ORSTED.CO et que celui corrigé
+            # le même jour dans detect_currency.
+            approx = CONV_CAP_USD
+            if devise_yahoo and devise_yahoo not in approx:
+                # Le défaut silencieux est la cause du bug ci-dessus : une devise
+                # inconnue était traitée à la parité du dollar, sans un mot. On
+                # préfère désormais une erreur bruyante à une capitalisation
+                # fausse — c'est le seul état où le contrôle ment sur son objet.
+                r["erreurs"].append(
+                    f"devise {devise_yahoo} absente de la table de conversion — "
+                    f"la capitalisation ne peut pas être contrôlée (ajouter le "
+                    f"taux dans validate_tickers.py ET dans portfolio_agent.py)")
+                r["cap_usd_approx_md"] = None
+            else:
+                cap_usd = cap / approx.get(devise_yahoo, 1.0)
+                r["cap_usd_approx_md"] = round(cap_usd / 1e9, 1)
+                if cap_usd < SEUIL_CAP_USD:
+                    r["avertissements"].append(
+                        f"capitalisation ~{r['cap_usd_approx_md']} Md$ < seuil 25 Md$ du projet")
         else:
             r["avertissements"].append("capitalisation absente")
 

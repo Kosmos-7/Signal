@@ -82,3 +82,35 @@ laboratoire remarquable : les cinq candidats du second run en viennent tous.
 Le finaliste écarté, une micrographie de piège planaire d'une symétrie
 saisissante, portait « NIST » gravé en son centre et virait au jaune acide —
 superbe en soi, discordant sur des cartes bleu nuit.
+
+## Robots
+
+- Fichier : `robotique.jpg`
+- Titre : File:ISS 34 - Robonaut moving.jpg
+- Auteur : NASA
+- Page : https://commons.wikimedia.org/wiki/File:ISS_34_-_Robonaut_moving.jpg
+- Licence : Domaine public (NASA)
+- Requête : « NASA Robonaut humanoid robot »
+
+Robonaut 2 manœuvre un panneau à bord de la Station spatiale internationale.
+Le sujet est plus juste qu'il n'y paraît pour une liste dont la thèse est
+mécanique : ce qu'on voit à l'image, c'est une MAIN qui travaille, et la main
+d'un humanoïde est exactement l'endroit où se logent les articulations, les
+réducteurs et les guidages dont vivent la moitié des sociétés de cette
+watchlist.
+
+Dix requêtes lancées, trois candidats rapportés, tous du même terme. Les neuf
+autres — réducteur harmonique, train cycloïdal, vis à billes, bras de soudure,
+vision industrielle — n'ont RIEN rendu sous filtre domaine public / CC0. La
+pièce mécanique est mal photographiée par les institutions publiques, et bien
+photographiée par ceux qui la vendent : c'est-à-dire sous copyright. Le
+constat vaut d'être noté pour la prochaine liste industrielle.
+
+Le finaliste écarté est le meilleur cliché des trois : Robonaut 2 en studio,
+casque doré sur fond bleu nuit, bras déployés. Il porte le logo GM en pleine
+poitrine, et deux constructeurs automobiles figurent déjà dans cette liste —
+afficher le logo d'un TROISIÈME, absent de la watchlist, aurait laissé croire
+qu'il en fait partie. Même règle qu'au quantique, appliquée cette fois à une
+société qui n'est pas membre : on ne met aucun logo d'entreprise sur la
+vignette d'une liste sectorielle. Recadrer pour l'effacer était possible, et
+écarté aussi : on préfère une image non retouchée à une image amputée.

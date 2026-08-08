@@ -244,11 +244,22 @@ check("chaque valeur projetée porte sa nature, aucune borne haute résiduelle",
 
 # ── 5. SENTINELLES DE VRAISEMBLANCE ────────────────────────────────────────
 print("\n— Bandes de vraisemblance : une exception est permise, une dérive non —")
+# LES DEUX TOLÉRANCES RELEVÉES LE 08/08/2026 le sont pour une raison écrite,
+# et non parce qu'elles gênaient. La watchlist robotique fait entrer deux
+# fabricants de robots humanoïdes et de cobots, plus un logisticien, dont le
+# modèle est le même que celui des sociétés quantiques déjà tolérées ici :
+# revenus réels mais bénéfice quasi nul, trésorerie consommée pour financer la
+# croissance. Vérifié pièce par pièce contre les comptes publiés avant de
+# toucher au seuil — le PER de 6 370 de Rainbow Robotics se retrouve à
+# l'identique dans sa série annuelle (BPA 73 wons pour un cours de 465 000), et
+# celui de Harmonic Drive tient à un bénéfice de bas de cycle, pas à une erreur
+# d'unité. Ce sont des nombres justes portant sur des sociétés que la grille
+# mesure mal, ce que le champ `biais` du thème annonce au lecteur.
 BANDES = [
     ("marge nette d'exercice", "net_margin_exercice_pct", -60, 70, 6),
-    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 6),
+    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 8),
     ("conversion du bénéfice en cash", "conversion_pct", -200, 400, 8),
-    ("PER courant", "trailing_pe", 1, 200, 4),
+    ("PER courant", "trailing_pe", 1, 200, 7),
     ("rendement des capitaux propres", "roe_pct", -100, 150, 6),
     ("RSI", "rsi", 5, 95, 0),
 ]
@@ -467,6 +478,18 @@ for _t in _themes_publies:
             _ecarts.append(f"{_t['id']}.{_k}")
 check("universe.json publie exactement les textes de themes.py",
       not _ecarts, str(_ecarts[:4]))
+# LA BOUCLE CI-DESSUS NE REGARDE QUE DANS UN SENS : elle compare les thèmes
+# PUBLIÉS à leur source. Un thème déclaré dans themes.py et absent de
+# l'artefact — parce qu'aucun run n'a eu lieu depuis son ajout — passait donc
+# inaperçu, alors que c'est le mode de panne le plus coûteux des deux : la
+# watchlist existe dans le code, ses tests sont au vert, et le site ne la montre
+# pas. Constaté en ajoutant le thème robotique le 08/08/2026, quelques minutes
+# après avoir fermé l'écart symétrique.
+# Ce contrôle échoue légitimement entre l'ajout d'un thème et le run qui le
+# publie : c'est ce qu'il doit dire, et le remède est de lancer le screener.
+_absents = sorted(set(_pub) - {t["id"] for t in _themes_publies})
+check("chaque thème déclaré est réellement publié dans universe.json",
+      not _absents, f"jamais publiés (lancer le screener) : {_absents}")
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")

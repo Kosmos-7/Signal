@@ -750,6 +750,38 @@ bp = screener.projections(BASCULE, {"0y": -0.3, "+1y": -0.9}, {"0y": 300, "+1y":
                           "2025-12-31")
 check("bénéfice qui bascule en perte : publié, non prolongé",
       [e.get("eps") for e in bp if e.get("eps") is not None] == [-0.3, -0.9], str(bp))
+
+# UN ZÉRO EXACT N'EST PAS UNE ESTIMATION, C'EST UNE ABSENCE. Le fournisseur rend
+# `0` là où il n'a pas de consensus, et rien ne distingue les deux dans sa
+# réponse. Trouvé le 08/08/2026 en publiant la watchlist robotique : Rainbow
+# Robotics sortait avec un chiffre d'affaires 2026 ET 2027 à 0,0 étiqueté
+# « consensus », contre 34 milliards de wons réalisés en 2025 — la fiche aurait
+# montré des barres de revenus s'effondrant à zéro en affirmant que c'est ce que
+# les analystes attendent. C'est le seul cas de tout l'univers, et il n'existait
+# aucun test pour le voir : c'est la sentinelle des projections qui a parlé.
+ZERO = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
+        [(2022, 150, 0.8), (2023, 180, 1.0), (2024, 216, 1.1), (2025, 260, 1.3)]]
+pz = screener.projections(ZERO, {"0y": 0, "+1y": 0}, {"0y": 0, "+1y": 0}, "2025-12-31")
+check("un consensus à zéro exact n'est jamais publié comme consensus",
+      all(l.get("ca") != 0 and l.get("eps") != 0 for l in pz), str(pz[:2]))
+check("aucune ligne ne se dit « consensus » sur la foi d'un zéro",
+      all(l.get("ca_nature") != "consensus" and l.get("eps_nature") != "consensus"
+          for l in pz), str(pz[:2]))
+# ... et le zéro écarté, l'historique reprend la main : la série de CA est bien
+# réelle, elle se prolonge donc normalement, en « extrapolé ».
+check("le zéro écarté, l'historique prolonge le chiffre d'affaires",
+      any(l.get("ca_nature") == "extrapolé" and l.get("ca", 0) > 300 for l in pz),
+      str(pz[:2]))
+# Le zéro est écarté, PAS le négatif : la règle du 07/08 tient toujours.
+pn = screener.projections(ZERO, {"0y": -0.4, "+1y": 0}, {"0y": 0, "+1y": 410},
+                          "2025-12-31")
+check("le filtre du zéro ne mange pas les pertes attendues",
+      any(l.get("eps") == -0.4 and l.get("eps_nature") == "consensus" for l in pn),
+      str(pn[:2]))
+check("ni le consensus valide qui suit un zéro",
+      any(l.get("ca") == 410 and l.get("ca_nature") == "consensus" for l in pn),
+      str(pn[:2]))
+
 check("sans dernier exercice, rien n'est projeté",
       screener.projections(AN_P, None, None, None) == [])
 check("un horizon déjà atteint ne projette rien",

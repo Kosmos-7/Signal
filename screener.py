@@ -927,10 +927,23 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
         #    Ce qu'on continue de refuser, c'est de la PROLONGER : faire
         #    décroître une perte vers +3 % de croissance n'a aucun sens, et le
         #    refus est posé juste en dessous avec son motif.
+        #    UN ZÉRO EXACT N'EST PAS UNE ESTIMATION, C'EST UNE ABSENCE. Le
+        #    fournisseur rend `0` là où il n'a pas de consensus, et rien ne
+        #    distingue les deux dans la réponse. Constaté le 08/08/2026 sur
+        #    Rainbow Robotics à l'entrée de la watchlist robotique : chiffre
+        #    d'affaires 2026 ET 2027 publiés à 0,0 en « consensus », contre
+        #    34 milliards de wons réalisés en 2025 — la fiche aurait montré des
+        #    barres de revenus s'effondrant à zéro, en affirmant que c'est ce
+        #    que les analystes attendent.
+        #    Ce filtre ne revient PAS sur la règle du dessus : les valeurs
+        #    NÉGATIVES restent publiées, une perte attendue est une information.
+        #    Il ne retire que le zéro exact, qu'aucune société cotée n'atteint
+        #    réellement et qui ne peut donc être qu'un trou de données. Retiré
+        #    plutôt qu'approximé, comme un critère de la note.
         vals, dernier_val, dernier_an = {}, base, an0
         for i, k in enumerate(("0y", "+1y")):
             v = (est or {}).get(k)
-            if v is not None:
+            if v is not None and v != 0:
                 vals[an0 + 1 + i] = (v, "consensus")
                 dernier_val, dernier_an = v, an0 + 1 + i
         # 2) PROLONGER EXIGE UNE BASE ET UNE ARRIVÉE POSITIVES. Le taux de
@@ -1498,6 +1511,39 @@ UNIVERS = [
 # automatiquement scoré — c'est ce qui garantit qu'aucun thème ne référence un
 # titre absent de l'univers. Les symboles recalés par la validation Yahoo sont
 # documentés dans themes.ECARTES_VALIDATION.
+# ── HÉRITAGE DE LA CHAÎNE QUANTIQUE (08/08/2026) ──────────────────────────────
+# Ces douze titres sont entrés dans l'univers avec la watchlist quantique, qui
+# couvrait alors toute la chaîne — des fondeurs aux cryogénistes. Le même jour,
+# la watchlist a été resserrée sur les seuls PURE PLAYERS (décision
+# propriétaire), et sans cette liste ils sortiraient de l'univers : douze
+# sociétés validées contre Yahoo perdraient leur note, et sept fiches déjà
+# publiées deviendraient orphelines.
+#
+# C'est le même choix qu'au retrait du thème « financials » le 06/08 : on retire
+# une LISTE, pas des sociétés. Elles restent scorées et candidates au top 30.
+UNIVERS += [
+    "IBM",            # opérateur du cloud quantique, feuille de route publiée
+    "KEYS", "MKSI", "FORM",     # instruments, vide, cryogénie
+    "OXIG.L",                   # graveurs des puces supraconductrices
+    "GFS", "STMPA.PA", "SOI.PA",  # fonderie et substrats
+    "6701.T", "6702.T",         # NEC, Fujitsu
+    "6965.T", "6302.T",         # Hamamatsu, Sumitomo Heavy
+]
+
+# Même geste pour la watchlist ROBOTIQUE du 08/08/2026, et pour la même raison.
+# Ces deux industriels japonais fabriquent réellement des robots et des
+# servomoteurs, mais au milieu de climatiseurs et d'équipements automobiles :
+# la règle d'entrée du thème (les comptes doivent bouger avec le nombre de
+# robots vendus) les écarte de la LISTE. Elle ne dit rien de leur qualité, et
+# tous deux dépassent largement le seuil de 25 Md$ du projet après une
+# validation sans erreur — les laisser dehors reviendrait à les avoir examinés
+# puis perdus. Ils sont donc scorés et candidats au top 30, comme les douze
+# titres de la chaîne quantique juste au-dessus.
+UNIVERS += [
+    "6503.T",                   # Mitsubishi Electric — robots, servos, et le reste
+    "6902.T",                   # Denso — équipementier automobile, actionneurs
+]
+
 UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 
 # ── JUSTIFICATION ─────────────────────────────────────────────────────────────
