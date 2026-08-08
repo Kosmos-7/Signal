@@ -295,12 +295,16 @@ sentinelle("séries de CA sans rupture de définition", ruptures, 1, N)
 print("\n— Le graphique PER n'écarte-t-il que des accidents isolés ? —")
 
 
-def _hors_echelle(vals, seuil=5, maxi=2):
+def _hors_echelle(pub, seuil=5, maxi=2):
     """Réplique de la règle du front : épluche par le haut tant que le sommet
-    vaut `seuil` fois le point suivant, `maxi` points au plus."""
-    s = sorted(vals)
+    vaut `seuil` fois le point suivant, `maxi` exercices au plus.
+
+    Sur les seuls exercices PUBLIÉS : une estimation n'est jamais un accident
+    comptable passé, et le multiple prévisionnel est ce que le lecteur vient
+    chercher — il ne sort jamais du cadre."""
+    s = sorted(pub)
     ecartes = []
-    while len(s) >= 3 and len(ecartes) < maxi and s[-2] > 0 and s[-1] / s[-2] >= seuil:
+    while len(s) >= 4 and len(ecartes) < maxi and s[-2] > 0 and s[-1] / s[-2] >= seuil:
         ecartes.append(s.pop())
     return ecartes
 
@@ -312,16 +316,15 @@ for _t, _d in FICHES.items():
     _pub = [r["per"] for r in (_f.get("an") or [])[-FD_ANS:] if r.get("per") is not None]
     if len(_pub) < 2:
         continue
-    _est = [x["per"] for x in (_f.get("pe_prev") or []) if x.get("per") is not None]
-    _e = _hors_echelle(_pub + _est)
+    _e = _hors_echelle(_pub)
     if _e:
         ecarte_par[_t] = [round(v) for v in _e]
-check("aucune fiche ne voit deux points sortir du cadre",
+check("aucune fiche ne voit deux exercices sortir du cadre",
       all(len(v) == 1 for v in ecarte_par.values()), str(ecarte_par))
 DURABLEMENT_CHERES = ["ARM", "EQIX", "NFLX", "NBIS", "CDNS", "ADBE"]
 touchees = [t for t in DURABLEMENT_CHERES if t in ecarte_par]
 check("aucune société durablement chère n'est écartée", not touchees, str(touchees))
-sentinelle("fiches avec un multiple hors échelle", sorted(ecarte_par), 8, N)
+sentinelle("fiches avec un multiple hors échelle", sorted(ecarte_par), 9, N)
 
 # Un critère mesuré pour presque personne ne mesure rien : la couverture d'un
 # critère est elle-même une donnée à surveiller.

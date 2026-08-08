@@ -58,13 +58,24 @@ c'est l'**isolement** : le sommet vaut cinq fois le point suivant, quand une
 valorisation chère est entourée de valorisations chères. Deux points au plus
 peuvent sortir du cadre.
 
-**Rien n'est caché** : le point sort par le haut, dans une bande qui n'appartient
-qu'à lui, avec un chevron et **sa valeur écrite**. Premier essai, corrigé : sans
-cette bande réservée, le chevron se posait à la hauteur exacte du plus haut
-point mesuré — 2 129× et 28× au même niveau, pire que le problème d'origine.
+**Pas de symbole de plus.** Deux essais écartés avant le bon. Le premier
+dessinait le point hors cadre à la hauteur du plus haut point mesuré — 2 129× et
+28× au même niveau, pire que le problème d'origine. Le second lui donnait un
+chevron, une bande réservée et une entrée de légende à lui : *« c'est du bruit,
+on normalise avec le reste »*, et c'est juste — un exercice dont le multiple est
+inexploitable a **déjà** sa convention ici, la croix rouge de l'axe, posée pour
+les pertes et les BPA manquants.
 
-Quatre graphiques concernés sur 84, un seul point chacun : Cisco, Booking,
-Micron, NetApp. Aucune société durablement chère touchée.
+Cisco 2018 rejoint donc Micron 2023 : même croix, même entrée de légende, même
+coupure du trait. Seul le motif change, et il est dans la bulle avec la valeur
+exacte — « 2018 : multiple de 2 129× — le bénéfice de cet exercice est tombé
+près de zéro ». Le graphique de Cisco se lit maintenant de 15 à 28× sur toute
+la hauteur, et la légende porte une entrée de moins qu'avant.
+
+Six graphiques concernés sur 84, un seul exercice chacun : Cisco, Booking,
+Intel, Lumentum, Micron, NetApp — tous à moins de 3,2 % de marge nette cette
+année-là. Aucune société durablement chère touchée : ARM, Equinix, Netflix,
+Nebius, Adobe et Cadence gardent tous leurs points.
 
 ### Six fiches disaient un trou sans dire pourquoi
 

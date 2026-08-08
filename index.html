@@ -1665,7 +1665,7 @@ function fondaRender(s){
        le « i », plus étalée sous le graphique. */
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
-        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+(perB.horsEch?'&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">▲</span> hors de l\'échelle (valeur écrite)':'')+
+        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+
         '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Les points estimés, eux, sont au cours DU JOUR — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.</span></span></div>'+
         pertesAttendues+'</div>'
       :'<div class="fd-wrap"><div class="qh">'+(perB.queEst?'PER estimé (analystes)':'PER')+'</div>'+
@@ -1700,7 +1700,7 @@ function fdPerChart(F,fmtPer,W,b){
      dessinée — sinon le trait tracé sur le graphique ne correspondrait pas
      aux points qu'on voit ; celle de tout l'historique reste dans la note. */
   const anAll=((F&&F.an)||[]).slice(-FD_ANS);
-  const pub=anAll.filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per,est:false}));
+  let pub=anAll.filter(r=>r.per!=null).map(r=>({an:+r.fin.slice(0,4),per:r.per,est:false}));
   const est=((F&&F.pe_prev)||[]).map(p=>({an:p.exercice,per:p.per,est:true}));
   if(!pub.length&&!est.length)return null;
   /* PLUS DE POINT « AUJOURD'HUI » (décision du propriétaire, 07/08 : « ça
@@ -1741,62 +1741,69 @@ function fdPerChart(F,fmtPer,W,b){
   }
   W=W||800;
   const H=190,ML=14,MR=64,MT=24,MB=22;
-  const trous=anAll.filter(r=>r.per==null).map(r=>+r.fin.slice(0,4));
-  const pts=pub.concat(est);
+  const trous=anAll.filter(r=>r.per==null).map(r=>({an:+r.fin.slice(0,4),
+    txt:'exercice sans multiple (perte ou BPA indisponible)'}));
+  let pts=pub.concat(est);
+  // Bornes de l'axe prises AVANT tout retrait : un exercice écarté garde sa
+  // colonne et sa croix, il ne disparaît pas de la frise.
   const a0=Math.min(...pts.map(p=>p.an)),a1=Math.max(...pts.map(p=>p.an));
   const sTout=pubTout.map(p=>p.per).sort((a,b)=>a-b), nMed=sTout.length;
   const med=nMed>=3?(nMed%2?sTout[(nMed-1)/2]:(sTout[nMed/2-1]+sTout[nMed/2])/2):null;
   // La médiane entre dans l'échelle : sans cela son trait pourrait tomber hors
   // du cadre quand la fenêtre dessinée est plus chère que l'historique entier.
-  /* UN ACCIDENT COMPTABLE NE DOIT PAS DÉCIDER DE L'ÉCHELLE.
+  /* UN ACCIDENT COMPTABLE NE DOIT PAS DÉCIDER DE L'ÉCHELLE, et il n'a pas
+     droit à un symbole pour lui tout seul.
 
      L'échelle log était déjà là et ne suffit pas : Cisco sort à 2 129× en
      2018 au milieu d'un historique compris entre 14 et 28×, et même en log
      toute la courbe qu'on vient lire se tasse sur 13 % de la hauteur — mesuré.
      Booking, 1 547× en 2020, tombe à 36 %.
 
-     Le chiffre est pourtant EXACT, et c'est pour ça qu'on ne le supprime pas :
-     la réforme fiscale américaine a fait tomber le bénéfice de Cisco de
-     9,6 Md$ à 110 M$ pendant que son chiffre d'affaires montait, le covid a
-     fait la même chose à Booking. Ce n'est pas une donnée fausse, c'est un
-     dénominateur qui a disparu un an.
+     Le chiffre est pourtant EXACT : la réforme fiscale américaine a fait
+     tomber le bénéfice de Cisco de 9,6 Md$ à 110 M$ pendant que son chiffre
+     d'affaires montait, le covid a fait la même chose à Booking. Ce n'est pas
+     une donnée fausse, c'est un dénominateur qui a disparu un an — et un
+     multiple sans dénominateur ne dit rien d'une valorisation.
 
      SEUIL PAR L'ÉCART, PAS PAR LA VALEUR. Un plafond du genre « au-dessus de
      100× » serait faux : ARM vit à 175–431× avec 20 % de marge nette, Nebius
      à 208× — ce sont de vraies valorisations. Ce qui trahit l'accident, c'est
      l'ISOLEMENT : le sommet vaut cinq fois le point suivant, alors qu'une
-     valorisation chère est entourée de valorisations chères. Deux points au
-     plus peuvent sortir du cadre, jamais davantage.
+     valorisation chère est entourée de valorisations chères. Deux exercices
+     au plus, et jamais une estimation — le multiple prévisionnel est ce que
+     le lecteur vient chercher.
 
-     RIEN N'EST CACHÉ. Le point sort du cadre par le haut, avec un chevron et
-     SA VALEUR ÉCRITE — 2 129× reste lisible sur le dessin. On ne retire pas
-     le fait, on l'empêche seulement de décider de la règle graduée.
+     PAS DE SYMBOLE DE PLUS (décision du propriétaire, 08/08 : « c'est du
+     bruit, on normalise avec le reste »). Un exercice dont le multiple est
+     inexploitable a DÉJÀ sa convention ici — la croix rouge de l'axe, posée
+     pour les pertes et les BPA manquants — et rien ne justifiait d'en
+     inventer une seconde pour un motif voisin. Cisco 2018 rejoint donc
+     Micron 2023 : même croix, même entrée de légende, même coupure du trait.
+     Seul le motif change, et il est dans la bulle, avec la valeur exacte.
 
      Mesuré sur les 93 fiches : quatre graphiques concernés (Cisco, Booking,
-     Micron, NetApp), un seul point chacun, et aucune fiche à multiples
+     Micron, NetApp), un seul exercice chacun, et aucune fiche à multiples
      durablement élevés touchée. */
-  const vTri=pts.map(p=>p.per).sort((a,b)=>a-b);
-  const horsEch=[];
-  while(vTri.length>=3&&horsEch.length<2&&vTri[vTri.length-2]>0
-        &&vTri[vTri.length-1]/vTri[vTri.length-2]>=5)horsEch.push(vTri.pop());
+  const tri=pub.slice().sort((a,b)=>a.per-b.per), ecartes=[];
+  while(tri.length>=4&&ecartes.length<2&&tri[tri.length-2].per>0
+        &&tri[tri.length-1].per/tri[tri.length-2].per>=5)ecartes.push(tri.pop());
+  if(ecartes.length){
+    ecartes.forEach(p=>trous.push({an:p.an,txt:'multiple de '+Math.round(p.per)
+      +'\u00d7 \u2014 le bénéfice de cet exercice est tombé près de zéro (charge '
+      +'exceptionnelle, année de crise). Le multiple est exact, mais il ne dit rien '
+      +'de la valorisation.'}));
+    pub=pub.filter(p=>ecartes.indexOf(p)<0);
+    pts=pub.concat(est);
+  }
   // La médiane rentre TOUJOURS dans l'échelle : son trait hors cadre serait
   // un repère invisible, et c'est elle que la note compare au multiple du jour.
-  const corps=vTri.concat(med!=null?[med]:[]);
+  const corps=pts.map(p=>p.per).concat(med!=null?[med]:[]);
   const lo=Math.min(...corps),hi=Math.max(...corps);
   const LOG=hi/Math.max(lo,0.1)>10;
-  /* UNE BANDE RÉSERVÉE AU-DESSUS DU CADRE. Sans elle, le point hors échelle
-     se posait à la hauteur exacte du plus haut point mesuré — Cisco montrait
-     son 2 129× et son 28× au même niveau, ce qui est pire que le problème
-     d'origine. La règle graduée s'arrête donc quinze unités plus bas et cette
-     bande n'appartient qu'aux chevrons : ce qui est dedans est hors d'échelle,
-     ce qui est dessous est à l'échelle, et l'œil ne peut plus les confondre. */
-  const HORS=MT+1, HAUT=MT+(horsEch.length?15:0);
   const Y=v=>{const w=Math.min(Math.max(v,lo),hi);
-    if(LOG){const a=Math.log(lo),b=Math.log(hi);return HAUT+(1-(Math.log(w)-a)/((b-a)||1))*(H-HAUT-MB);}
-    return HAUT+(1-(w-lo)/((hi-lo)||1))*(H-HAUT-MB);};
-  // Position DESSINÉE : les traits et les marqueurs montent jusqu'au chevron,
-  // sinon la ligne s'arrêterait sous lui et le point semblerait détaché.
-  const Yp=v=>v>hi?HORS:Y(v);
+    if(LOG){const a=Math.log(lo),b=Math.log(hi);return MT+(1-(Math.log(w)-a)/((b-a)||1))*(H-MT-MB);}
+    return MT+(1-(w-lo)/((hi-lo)||1))*(H-MT-MB);};
+  const Yp=Y;
   const X=an=>ML+20+(a1>a0?(an-a0)*(W-ML-MR-40)/(a1-a0):0);
   let g='';
   /* La médiane tracée est celle de TOUT l'historique accumulé, pas des dix
@@ -1821,8 +1828,8 @@ function fdPerChart(F,fmtPer,W,b){
   const ancre=(pub.length&&pub[pub.length-1].an===derAn)?[pub[pub.length-1]]:[];
   if(est.length&&ancre.length+est.length>=2)
     g+='<polyline points="'+ancre.concat(est).map(p=>X(p.an)+','+Yp(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
-  trous.filter(an=>an>=a0&&an<=a1).forEach(an=>{
-    g+='<text x="'+X(an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+an+' : exercice sans multiple (perte ou BPA indisponible)</title></text>';});
+  trous.filter(t=>t.an>=a0&&t.an<=a1).forEach(t=>{
+    g+='<text x="'+X(t.an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+t.an+' : '+t.txt+'</title></text>';});
   /* TOUTES LES VALEURS SONT ÉCRITES (décision du propriétaire, 07/08 :
      « dérouler les PER n'a pas d'utilité, tout doit apparaître sur le
      graph »). L'ancien tri — quatre points remarquables, le reste omis —
@@ -1838,16 +1845,8 @@ function fdPerChart(F,fmtPer,W,b){
   const stepX=pts.length>8?2:1;
   pts.forEach((p,i)=>{
     const cx=X(p.an),cy=Yp(p.per);
-    // Hors cadre : un chevron vers le haut au lieu du point, et un survol qui
-    // dit pourquoi. La valeur, elle, s'écrit comme celle de tous les autres.
-    g+=p.per>hi
-      ?'<path d="M'+(cx-5.5)+' '+(cy+5)+'L'+cx+' '+(cy-4)+'L'+(cx+5.5)+' '+(cy+5)+'Z" fill="#74b6df" '
-        +'stroke="#0d0d16" stroke-width="1.2"><title>'+p.an+' : '+Math.round(p.per)+'×, hors de '
-        +'l\'échelle. Le bénéfice de cet exercice est tombé près de zéro '
-        +'(charge exceptionnelle, année de crise) : le multiple est exact mais ne dit rien de la '
-        +'valorisation.</title></path>'
-      :(p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
-             :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"/>');
+    g+=p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
+            :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"/>';
     const enHaut=cx-dernierHaut>=ECART_VAL;
     if(enHaut||cx-dernierBas>=ECART_VAL){
       const ly=enHaut?Math.max(11,cy-10):Math.min(H-MB-4,cy+18);
@@ -1858,7 +1857,7 @@ function fdPerChart(F,fmtPer,W,b){
       g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+'>'+String(p.an).slice(2)+(p.est?'e':'')+'</text>';}
   });
   return {svg:'<svg class="fd-svg" id="fd-per" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',
-    med:med,trous:trous.some(an=>an>=a0&&an<=a1),horsEch:horsEch.length};
+    med:med,trous:trous.some(t=>t.an>=a0&&t.an<=a1)};
 }
 function qLabel(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso))return null; const [y,m,d]=iso.split('-').map(Number); return {q:'T'+(Math.floor((m-1)/3)+1)+' '+y, d:String(d).padStart(2,'0')+'/'+String(m).padStart(2,'0')+'/'+y}; }
 // Élagage du 06/08 : les étiquettes des métriques portent déjà « a/a » et
