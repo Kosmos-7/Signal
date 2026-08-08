@@ -1,28 +1,29 @@
 {
- "genere_le": "2026-08-08 12:30 UTC",
+ "genere_le": "2026-08-08 13:51 UTC",
+ "genre_filtre": null,
  "resume": {
   "teste": 203,
-  "ok": 134,
+  "ok": 138,
   "sautees": 0,
   "morts": 50,
   "frais_24h": 109,
-  "articles_24h_cumules": 1767,
+  "articles_24h_cumules": 1865,
   "meilleures": [
    "eurostat-mises-a-jour-de-donnees",
+   "us-treasury-courbe-des-taux-quotid",
    "finnhub-company",
    "infobae-flux-general-argentine-ame",
-   "google-news-rss-substitut-ap",
    "google-news-rss-substitut-reuters",
+   "google-news-rss-substitut-ap",
+   "google-news-topic-business-filet-d",
    "the-economic-times-markets-inde",
    "google-news-conomie-edition-france",
-   "google-news-topic-business-filet-d",
-   "google-news-recherche-bourse-cac-4",
    "phys-org",
-   "cnbc-top",
-   "abc-bourse-actualit-s",
    "lesnumeriques",
+   "cnbc-top",
    "bfm-business-bfmtv-conomie",
-   "finnhub-crypto"
+   "cnbc-top-news",
+   "google-news-recherche-bourse-cac-4"
   ]
  },
  "sources": [
@@ -50,17 +51,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 22520,
+   "octets": 22456,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 9,
+   "recents_24h": 8,
    "dates_lues": 20,
    "avec_resume": 19,
    "avec_image": 20,
    "titres": [
+    "Attaques de gazoduc, centrales hors service... l'Ukraine menacée de pénurie d'énergie aprè",
     "Le Pentagone va investir 400 millions de dollars dans une mine australienne de terres rare",
-    "La FNSEA réclame des milliards d'euros pour les agriculteurs touchés par la sécheresse",
-    "Pour alimenter ses data centers, Amazon construit une gigantesque centrale à gaz"
+    "La FNSEA réclame des milliards d'euros pour les agriculteurs touchés par la sécheresse"
    ],
    "statut": "ok"
   },
@@ -97,7 +98,7 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 26386,
+   "octets": 26367,
    "lisible": true,
    "articles": 20,
    "recents_24h": 11,
@@ -105,9 +106,9 @@
    "avec_resume": 20,
    "avec_image": 20,
    "titres": [
+    "Trottinettes électriques : casque et gilet réfléchissant sont désormais obligatoires à Par",
     "Les déboires du leader européen du vélo Accell entraînent Cycles Lapierre dans sa chute",
-    "SpaceX, le rêve à l’épreuve des chiffres",
-    "Sécheresse et canicules : les agriculteurs, qui font face à une « catastrophe climatique »"
+    "SpaceX, le rêve à l’épreuve des chiffres"
    ],
    "statut": "ok"
   },
@@ -120,7 +121,7 @@
    "octets": 31878,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 17,
+   "recents_24h": 15,
    "dates_lues": 20,
    "avec_resume": 20,
    "avec_image": 20,
@@ -137,7 +138,7 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 32172,
+   "octets": 31805,
    "lisible": true,
    "articles": 20,
    "recents_24h": 20,
@@ -145,9 +146,9 @@
    "avec_resume": 18,
    "avec_image": 20,
    "titres": [
-    "Pourquoi l’ultra fast-fashion et la seconde main asphyxient la filière de recyclage des vê",
-    "Terres rares : le Pentagone va investir 400 millions de dollars dans une mine de scandium ",
-    "Bourgogne : les vendanges débutent, battant un nouveau record de précocité en raison des c"
+    "Un navire frappé par «un projectile» dans le détroit d’Ormuz",
+    "Casque et gilet jaune désormais obligatoires pour les trottinettes à Paris et en petite co",
+    "Pourquoi l’ultra fast-fashion et la seconde main asphyxient la filière de recyclage des vê"
    ],
    "statut": "ok"
   },
@@ -160,7 +161,7 @@
    "octets": 45947,
    "lisible": true,
    "articles": 50,
-   "recents_24h": 8,
+   "recents_24h": 6,
    "dates_lues": 50,
    "avec_resume": 49,
    "avec_image": 0,
@@ -206,7 +207,7 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 43430,
+   "octets": 42718,
    "lisible": true,
    "articles": 22,
    "recents_24h": 9,
@@ -214,9 +215,9 @@
    "avec_resume": 22,
    "avec_image": 22,
    "titres": [
+    "«Ce projet est une opportunité de développement du territoire» : Hexana va implanter son t",
     "Une alternative souveraine au système américain Patriot ? Le fabricant ukrainien Fire Poin",
-    "Un matériau clé des semi-conducteurs et panneaux solaires : le polysilicium chinois taxé à",
-    "Près de 130000 satellites seront stationnés autour de la Terre d’ici à 10 ans : les scient"
+    "Un matériau clé des semi-conducteurs et panneaux solaires : le polysilicium chinois taxé à"
    ],
    "statut": "ok"
   },
@@ -244,17 +245,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 22408,
+   "octets": 22800,
    "lisible": true,
    "articles": 20,
    "recents_24h": 20,
    "dates_lues": 20,
-   "avec_resume": 19,
+   "avec_resume": 20,
    "avec_image": 20,
    "titres": [
-    "\"Je n'ai jamais vu ça en 40 ans de métier\" : l'angoisse des agriculteurs et producteurs de",
-    "La date limite de demande de l'indemnité carburant pour les \"grands rouleurs\" officielleme",
-    "Les vendanges débutent en Bourgogne avec un nouveau record de précocité"
+    "Casque et gilet réfléchissant deviennent obligatoires dans l'agglomération parisienne pour",
+    "\"On passe de l'expérimentation à l'industrialisation\" : le gouvernement français donne le ",
+    "\"Je n'ai jamais vu ça en 40 ans de métier\" : l'angoisse des agriculteurs et producteurs de"
    ],
    "statut": "ok"
   },
@@ -264,7 +265,7 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 38784,
+   "octets": 38786,
    "lisible": true,
    "articles": 30,
    "recents_24h": 1,
@@ -272,7 +273,7 @@
    "avec_resume": 30,
    "avec_image": 30,
    "titres": [
-    "Michael Boumendil, l'homme qui donne une voix aux marques",
+    "Michaël Boumendil, l'homme qui donne une voix aux marques",
     "Le business de la nostalgie: comment le passé est devenu un marché extrêmement rentable",
     "Le démarchage téléphonique est en train de changer de modèle économique"
    ],
@@ -302,17 +303,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 16343,
+   "octets": 17076,
    "lisible": true,
-   "articles": 21,
-   "recents_24h": 21,
-   "dates_lues": 21,
-   "avec_resume": 18,
-   "avec_image": 21,
+   "articles": 22,
+   "recents_24h": 22,
+   "dates_lues": 22,
+   "avec_resume": 19,
+   "avec_image": 22,
    "titres": [
-    "En cartes | Vers un élargissement de la guerre au Moyen-Orient?",
-    "Un feu de forêt déclenche de nouveaux ordres d’évacuation dans l’Okanagan",
-    "Le Sénat américain approuve la nomination de Todd Blanche comme secrétaire à la Justice"
+    "Pas de répit sur le front des feux de forêt en Colombie-Britannique",
+    "Le Sénat américain approuve la nomination de Todd Blanche comme secrétaire à la Justice",
+    "Ces seaux à popcorn à 71 $ qui font courir les foules"
    ],
    "statut": "ok"
   },
@@ -322,17 +323,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 26647,
+   "octets": 26122,
    "lisible": true,
    "articles": 42,
-   "recents_24h": 13,
+   "recents_24h": 22,
    "dates_lues": 42,
    "avec_resume": 0,
    "avec_image": 42,
    "titres": [
     "Palantir CEO drops 11-word bombshell for stock market investors",
-    "Nearly 75% of new homeowners spend $10,000 on surprise repairs within 2 years — and some n",
-    "Cloudflare shares jump after forecast raise on higher AI-driven spending"
+    "Nike (NKE) Is Betting Big on Basketball’s Next Generation. Will It Pay Off?",
+    "Wall Street Is Losing Confidence in GoDaddy’s (GDDY) AI Strategy. Should Investors?"
    ],
    "statut": "ok"
   },
@@ -342,17 +343,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 14390,
+   "octets": 14663,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 20,
+   "recents_24h": 19,
    "dates_lues": 20,
    "avec_resume": 17,
    "avec_image": 0,
    "titres": [
+    "Apple says Mac users in China can connect to Alibaba's Qwen AI service",
     "Dan Ives Says We're in the \"3rd Inning\" of the AI Revolution. Is Nvidia Stock Still a Buy ",
-    "Apple (AAPL) Q3 2026 Earnings Call Transcript",
-    "Apple (AAPL) Tops $10 Billion in India Sales, But Wall Street’s Focus Is on Supply Constra"
+    "Apple (AAPL) Q3 2026 Earnings Call Transcript"
    ],
    "statut": "ok"
   },
@@ -362,7 +363,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 8440,
+   "octets": 8357,
    "lisible": true,
    "articles": 10,
    "recents_24h": 10,
@@ -370,9 +371,9 @@
    "avec_resume": 9,
    "avec_image": 10,
    "titres": [
+    "Berkshire Hathaway profit doubles, fueled by a near $13 billion investment gain",
     "‘This has been an emotionally difficult time’: My brother has cancer and my father is 94. ",
-    "How can we minimize taxes in retirement with a $2.3 million nest egg — while buying homes ",
-    "Here’s why Wendy’s is losing the burger wars"
+    "How can we minimize taxes in retirement with a $2.3 million nest egg — while buying homes "
    ],
    "statut": "ok"
   },
@@ -402,17 +403,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 20463,
+   "octets": 20504,
    "lisible": true,
    "articles": 30,
-   "recents_24h": 2,
+   "recents_24h": 1,
    "dates_lues": 30,
-   "avec_resume": 20,
+   "avec_resume": 21,
    "avec_image": 0,
    "titres": [
+    "Berkshire earnings rose last quarter and CEO Greg Abel is starting to deploy Buffett's mas",
     "Odds the Fed will hike in September tumble following big July jobs miss",
-    "Stocks making the biggest moves premarket: Atlassian Corporation, Doximity, First Solar, A",
-    "Stocks making the biggest moves after hours: Twilio, Airbnb, DraftKings, Trade Desk and mo"
+    "Stocks making the biggest moves premarket: Atlassian Corporation, Doximity, First Solar, A"
    ],
    "statut": "ok"
   },
@@ -422,15 +423,15 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 20477,
+   "octets": 20316,
    "lisible": true,
    "articles": 30,
    "recents_24h": 29,
    "dates_lues": 30,
-   "avec_resume": 29,
+   "avec_resume": 28,
    "avec_image": 0,
    "titres": [
-    "Trump teased an Iran deal that didn't come, but markets soared. Here’s why it keeps happen",
+    "Berkshire earnings rose last quarter and CEO Greg Abel is starting to deploy Buffett's mas",
     "Hugging Face hack marks start of dangerous AI cyber era and many firms 'don't even know it",
     "Senate Republicans narrowly confirm Todd Blanche as attorney general"
    ],
@@ -442,10 +443,10 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 140442,
+   "octets": 139126,
    "lisible": true,
    "articles": 41,
-   "recents_24h": 19,
+   "recents_24h": 18,
    "dates_lues": 41,
    "avec_resume": 41,
    "avec_image": 41,
@@ -462,17 +463,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 38908,
+   "octets": 38929,
    "lisible": true,
    "articles": 53,
-   "recents_24h": 7,
+   "recents_24h": 6,
    "dates_lues": 53,
    "avec_resume": 51,
    "avec_image": 53,
    "titres": [
+    "Is football AI-proof? Why tech investors wanted a slice of the World Cup",
     "How a 90-second power outage sparked chaos for rail commuters",
-    "Goodwin considers selling part of defence business",
-    "Surprise fall in US jobs last month as slow summer continues"
+    "Goodwin considers selling part of defence business"
    ],
    "statut": "ok"
   },
@@ -485,7 +486,7 @@
    "octets": 14378,
    "lisible": true,
    "articles": 10,
-   "recents_24h": 3,
+   "recents_24h": 2,
    "dates_lues": 10,
    "avec_resume": 10,
    "avec_image": 0,
@@ -502,7 +503,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 4786,
+   "octets": 4806,
    "lisible": true,
    "articles": 10,
    "recents_24h": 10,
@@ -510,9 +511,9 @@
    "avec_resume": 0,
    "avec_image": 10,
    "titres": [
-    "Berkshire’s profit doubles as equity holdings surge; Cash nears $360 billion",
-    "Gevo CEO Paul Bloom sells $48,068 in company shares",
-    "UAE says Iran attacked ADNOC vessel with missile in Strait of Hormuz"
+    "What happens to stocks when the Fed starts hiking? Barclays weighs in",
+    "Berkshire’s profit doubles as equity holdings surge; buys back $4.5 bln shares",
+    "Berkshire lowers cash stake as buybacks accelerate, reports higher profit"
    ],
    "statut": "ok"
   },
@@ -522,7 +523,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 4859,
+   "octets": 4845,
    "lisible": true,
    "articles": 10,
    "recents_24h": 10,
@@ -530,9 +531,9 @@
    "avec_resume": 0,
    "avec_image": 10,
    "titres": [
-    "Berkshire’s profit doubles as equity holdings surge; Cash nears $360 billion",
-    "UAE says Iran attacked ADNOC vessel with missile in Strait of Hormuz",
-    "Typhoon Dolphin hits Japan’s Okinawa, China shuts ports ahead of landfall"
+    "What happens to stocks when the Fed starts hiking? Barclays weighs in",
+    "Berkshire’s profit doubles as equity holdings surge; buys back $4.5 bln shares",
+    "Berkshire lowers cash stake as buybacks accelerate, reports higher profit"
    ],
    "statut": "ok"
   },
@@ -542,7 +543,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 6050,
+   "octets": 8101,
    "lisible": true,
    "articles": 7,
    "recents_24h": 7,
@@ -550,9 +551,9 @@
    "avec_resume": 0,
    "avec_image": 0,
    "titres": [
-    "Berkshire Hathaway Q2 operating earnings +16% Y/Y, cash at $365.5B",
-    "Cloud capex forecast calls for 29% jump in 2027 as compute demand exceeds capacity: MS",
-    "One Whopper of a win: Burger King takes market share from McDonald's"
+    "Earnings Scoreboard: 86% of S&P 500 reporting firms top EPS estimates as 79% post Y/Y prof",
+    "Michael Burry says it’s 'Trump's market' where price doesn't matter",
+    "Berkshire Hathaway cash pile drops in Q2 amid stock buybacks"
    ],
    "statut": "ok"
   },
@@ -573,7 +574,7 @@
    "octets": 83703,
    "lisible": true,
    "articles": 50,
-   "recents_24h": 5,
+   "recents_24h": 4,
    "dates_lues": 50,
    "avec_resume": 50,
    "avec_image": 50,
@@ -590,17 +591,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 17024,
+   "octets": 17074,
    "lisible": true,
    "articles": 25,
    "recents_24h": 25,
    "dates_lues": 25,
-   "avec_resume": 21,
+   "avec_resume": 22,
    "avec_image": 0,
    "titres": [
-    "Police bodycam and CCTV catches Idaho mall shooting as it unfolds",
-    "Atletico Madrid will not sell Alvarez amid Barcelona interest, says Simeone",
-    "Arsenal complete signing of Newcastle midfielder Bruno Guimaraes"
+    "Netanyahu mulls Saudi, Turkiye, Pakistan pact as Israeli elections loom",
+    "Ivory Coast’s ‘talking drum’ returns to home village after 110 years",
+    "Drones spotted in Bulgaria and Germany raise concerns of Russian escalation"
    ],
    "statut": "ok"
   },
@@ -705,20 +706,8 @@
    "url": "https://www.globenewswire.com/RssFeed/subjectcode/22-Earnings%20Releases%20And%20Operating%20Results/feedTitle/GlobeNewswire%20-%20Earnings",
    "genre": "rss",
    "langue": "en",
-   "code": 200,
-   "octets": 32914,
-   "lisible": true,
-   "articles": 20,
-   "recents_24h": 1,
-   "dates_lues": 20,
-   "avec_resume": 10,
-   "avec_image": 0,
-   "titres": [
-    "Ledende medarbejder transaktion",
-    "Ledende medarbejders køb af aktier",
-    "Tiziana Life Sciences Announces Purchase of Shares by Chief Executive Officer"
-   ],
-   "statut": "ok"
+   "statut": "erreur",
+   "motif": "TimeoutError: The read operation timed out"
   },
   {
    "nom": "businesswire",
@@ -745,8 +734,9 @@
    "url": "https://live.euronext.com/en/rss/news",
    "genre": "rss",
    "langue": "en",
-   "statut": "erreur",
-   "motif": "TimeoutError: The read operation timed out"
+   "statut": "http",
+   "code": 500,
+   "motif": "Internal Server Error"
   },
   {
    "nom": "boxofficemojo",
@@ -783,7 +773,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 11481,
+   "octets": 11425,
    "lisible": true,
    "articles": 10,
    "recents_24h": 10,
@@ -803,7 +793,7 @@
    "genre": "atom",
    "langue": "en",
    "code": 200,
-   "octets": 48732,
+   "octets": 49340,
    "lisible": true,
    "articles": 10,
    "recents_24h": 10,
@@ -811,9 +801,9 @@
    "avec_resume": 10,
    "avec_image": 0,
    "titres": [
-    "Nitecore’s latest power bank is the lightest and most compact yet",
-    "The gaming site sponsored by Walmart lays off its editorial staff",
-    "Fenix Flexin isn’t even denying using AI to make ‘Rubberz’ anymore"
+    "Is this $450 laptop from an unknown brand too good to be true?",
+    "My favorite feel-good show is back",
+    "Nitecore’s latest power bank is the lightest and most compact yet"
    ],
    "statut": "ok"
   },
@@ -826,7 +816,7 @@
    "octets": 73993,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 16,
+   "recents_24h": 12,
    "dates_lues": 20,
    "avec_resume": 6,
    "avec_image": 20,
@@ -846,7 +836,7 @@
    "octets": 43807,
    "lisible": true,
    "articles": 60,
-   "recents_24h": 3,
+   "recents_24h": 2,
    "dates_lues": 60,
    "avec_resume": 60,
    "avec_image": 0,
@@ -863,17 +853,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 67166,
+   "octets": 67716,
    "lisible": true,
    "articles": 40,
-   "recents_24h": 27,
+   "recents_24h": 29,
    "dates_lues": 40,
    "avec_resume": 40,
    "avec_image": 39,
    "titres": [
-    "Actualité : Pourquoi le moteur de votre VTT Décathlon est plus puissant qu'annoncé",
-    "Actualité : Piscine : Bayrol confie l'analyse de l'eau à une application dopée à l'IA",
-    "Actualité : Ne jetez plus : cette loi oblige Decathlon à réparer votre vélo"
+    "Actualité : Netflix : notre top 10 des meilleurs films à voir en streaming en août 2026",
+    "Actualité : Voici la meilleure crêpière électrique à prix abordable de notre comparatif",
+    "Actualité : Bon plan – Le boîtier multimédia Apple TV 4K (2022) 64 Go \"5 étoiles\" à 161,00"
    ],
    "statut": "ok"
   },
@@ -883,17 +873,17 @@
    "genre": "api",
    "langue": "en",
    "code": 200,
-   "octets": 63190,
+   "octets": 63243,
    "lisible": true,
    "articles": 100,
-   "recents_24h": 21,
+   "recents_24h": 20,
    "dates_lues": 100,
-   "avec_resume": 66,
+   "avec_resume": 65,
    "avec_image": 100,
    "titres": [
+    "Iran says deal on Strait of Hormuz is close but will not open the waterway by itself - Reu",
     "Elevator giant Otis wants to be a defensive play in an volatile market. It has to prove it",
-    "A record-breaking week for options powers S&P 500 surge; volatility gauge is near 2026 low",
-    "UAE says Iran attacked ADNOC vessel with missile in Strait of Hormuz - Reuters"
+    "A record-breaking week for options powers S&P 500 surge; volatility gauge is near 2026 low"
    ],
    "statut": "ok"
   },
@@ -921,17 +911,17 @@
    "genre": "api",
    "langue": "en",
    "code": 200,
-   "octets": 73317,
+   "octets": 73292,
    "lisible": true,
    "articles": 99,
-   "recents_24h": 25,
+   "recents_24h": 23,
    "dates_lues": 99,
    "avec_resume": 53,
    "avec_image": 99,
    "titres": [
+    "Bitcoin will never fall below $60K again: Nansen founder",
     "U.S. Senate opens first stage of crypto Clarity Act voting to give bill a chance next mont",
-    "Another Bitcoin infrastructure exploit hits, this time draining Lightning payment servers",
-    "Domestic stablecoins could boost demand for dollar-backed tokens: IMF"
+    "Another Bitcoin infrastructure exploit hits, this time draining Lightning payment servers"
    ],
    "statut": "ok"
   },
@@ -944,7 +934,7 @@
    "octets": 40990,
    "lisible": true,
    "articles": 67,
-   "recents_24h": 14,
+   "recents_24h": 8,
    "dates_lues": 67,
    "avec_resume": 21,
    "avec_image": 67,
@@ -964,7 +954,7 @@
    "octets": 129594,
    "lisible": true,
    "articles": 249,
-   "recents_24h": 128,
+   "recents_24h": 111,
    "dates_lues": 249,
    "avec_resume": 144,
    "avec_image": 248,
@@ -1072,7 +1062,7 @@
    "octets": 36495,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 2,
+   "recents_24h": 1,
    "dates_lues": 20,
    "avec_resume": 20,
    "avec_image": 20,
@@ -1089,17 +1079,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 43569,
+   "octets": 43758,
    "lisible": true,
    "articles": 30,
-   "recents_24h": 27,
+   "recents_24h": 28,
    "dates_lues": 30,
    "avec_resume": 30,
    "avec_image": 30,
    "titres": [
-    "Presque 10% des émissions de CO2 annuelles de la France en un bâtiment: Amazon confirme la",
-    "Le conflit s'enflamme à nouveau dans le détroit d'Ormuz: un pétrolier émirati ciblé par un",
-    "De fin septembre en 1988 à mi-août en 2026: comment le dérèglement climatique a décalé les"
+    "Ils sont plafonnés à 1% du total des sommes détenues: les banques obtiennent gain de cause",
+    "Le casque et le gilet fluo rendus obligatoires: la préfecture de police de Paris hausse le",
+    "Rationnement de vivres, journées sur TikTok et slalom entre les mines... Le capitaine d'un"
    ],
    "statut": "ok"
   },
@@ -1109,17 +1099,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 43891,
+   "octets": 44333,
    "lisible": true,
    "articles": 30,
-   "recents_24h": 9,
+   "recents_24h": 12,
    "dates_lues": 30,
    "avec_resume": 30,
    "avec_image": 30,
    "titres": [
-    "De fin septembre en 1988 à mi-août en 2026: comment le dérèglement climatique a décalé les",
-    "\"On parle de milliards d'euros\": la FNSEA, premier syndicat agricole, réclame des aides ma",
-    "L'Etna entre en éruption: les fumées du volcan forcent l'aéroport de Catane à suspendre se"
+    "Ils sont plafonnés à 1% du total des sommes détenues: les banques obtiennent gain de cause",
+    "Le casque et le gilet fluo rendus obligatoires: la préfecture de police de Paris hausse le",
+    "Rationnement de vivres, journées sur TikTok et slalom entre les mines... Le capitaine d'un"
    ],
    "statut": "ok"
   },
@@ -1129,7 +1119,7 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 46426,
+   "octets": 46957,
    "lisible": true,
    "articles": 30,
    "recents_24h": 2,
@@ -1178,7 +1168,7 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 43430,
+   "octets": 42718,
    "lisible": true,
    "articles": 22,
    "recents_24h": 9,
@@ -1186,9 +1176,9 @@
    "avec_resume": 22,
    "avec_image": 22,
    "titres": [
+    "«Ce projet est une opportunité de développement du territoire» : Hexana va implanter son t",
     "Une alternative souveraine au système américain Patriot ? Le fabricant ukrainien Fire Poin",
-    "Un matériau clé des semi-conducteurs et panneaux solaires : le polysilicium chinois taxé à",
-    "Près de 130000 satellites seront stationnés autour de la Terre d’ici à 10 ans : les scient"
+    "Un matériau clé des semi-conducteurs et panneaux solaires : le polysilicium chinois taxé à"
    ],
    "statut": "ok"
   },
@@ -1210,7 +1200,7 @@
    "octets": 11994,
    "lisible": true,
    "articles": 30,
-   "recents_24h": 28,
+   "recents_24h": 24,
    "dates_lues": 30,
    "avec_resume": 0,
    "avec_image": 0,
@@ -1294,16 +1284,16 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 255772,
+   "octets": 251476,
    "lisible": true,
    "articles": 70,
-   "recents_24h": 46,
+   "recents_24h": 41,
    "dates_lues": 70,
    "avec_resume": 70,
    "avec_image": 0,
    "titres": [
-    "Carburant : la date limite de dépôt d’un dossier pour demander l’indemnité « grands rouleu",
-    "Le Pentagone va investir une somme démentielle dans une mine australienne de terres rares ",
+    "Vous avez jusqu’au 31 août pour demander l’indemnité carburant - 20 Minutes",
+    "Terres rares : le Pentagone va investir 400 millions de dollars dans une mine de scandium ",
     "Les prix du carburant poursuivent leur léger recul et perdent 2 centimes en moyenne en 24h"
    ],
    "statut": "ok"
@@ -1314,17 +1304,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 161542,
+   "octets": 157435,
    "lisible": true,
    "articles": 100,
-   "recents_24h": 33,
+   "recents_24h": 25,
    "dates_lues": 100,
-   "avec_resume": 78,
+   "avec_resume": 75,
    "avec_image": 0,
    "titres": [
-    "Sur les bancs de la Bourse — Remember Me - pinaultcollection.com",
-    "Semaine de records à la Bourse de Paris ! - Les Echos",
-    "CAC 40, Renault, Safran, Thales, Pernod-Ricard… les actions en Bourse au programme de Mome"
+    "Bourse en direct, Cours actions et dérivés - Boursorama",
+    "Sur les bancs de la Bourse — Remember Me - Pinault Collection",
+    "Toujours plus haut, le Cac 40 gravit les 8.700 points pour la première fois - Les Echos"
    ],
    "statut": "ok"
   },
@@ -1337,7 +1327,7 @@
    "octets": 13200,
    "lisible": true,
    "articles": 10,
-   "recents_24h": 10,
+   "recents_24h": 9,
    "dates_lues": 10,
    "avec_resume": 10,
    "avec_image": 10,
@@ -1385,7 +1375,7 @@
    "octets": 27812,
    "lisible": true,
    "articles": 25,
-   "recents_24h": 1,
+   "recents_24h": 0,
    "dates_lues": 25,
    "avec_resume": 24,
    "avec_image": 25,
@@ -1422,17 +1412,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 22977,
+   "octets": 22766,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 4,
+   "recents_24h": 3,
    "dates_lues": 20,
    "avec_resume": 19,
    "avec_image": 20,
    "titres": [
+    "Attaques de gazoduc, centrales hors service... l'Ukraine menacée de pénurie d'énergie aprè",
     "Le Pentagone va investir 400 millions de dollars dans une mine australienne de terres rare",
-    "Les États-Unis envoient un milliard de dollars à la Colombie après l'élection d'un candida",
-    "Chiffres de l'emploi aux États-Unis : vers un maintien des taux de la Fed en septembre ?"
+    "Les États-Unis envoient un milliard de dollars à la Colombie après l'élection d'un candida"
    ],
    "statut": "ok"
   },
@@ -1471,17 +1461,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 20841,
+   "octets": 20803,
    "lisible": true,
    "articles": 30,
-   "recents_24h": 25,
+   "recents_24h": 28,
    "dates_lues": 30,
    "avec_resume": 30,
    "avec_image": 0,
    "titres": [
-    "Trump teased an Iran deal that didn't come, but markets soared. Here’s why it keeps happen",
+    "Berkshire earnings rose last quarter and CEO Greg Abel is starting to deploy Buffett's mas",
     "Hugging Face hack marks start of dangerous AI cyber era and many firms 'don't even know it",
-    "Cyclospora fears lead consumers to lose their appetite for salads"
+    "UAE says one of its ships was targeted by missile as U.S.-Iran tensions over Strait of Hor"
    ],
    "statut": "ok"
   },
@@ -1531,17 +1521,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 20146,
+   "octets": 20108,
    "lisible": true,
    "articles": 30,
-   "recents_24h": 0,
+   "recents_24h": 1,
    "dates_lues": 30,
    "avec_resume": 26,
    "avec_image": 0,
    "titres": [
+    "Berkshire earnings rose last quarter and CEO Greg Abel is starting to deploy Buffett's mas",
     "Sweetgreen cuts full-year outlook as cyclospora fears weigh on sales",
-    "Grindr's AI spend is paying off and its pricey new tier has had some surprises, CEO says",
-    "Airbnb stock soars 9% on earnings and revenue beat, strong guidance for third quarter"
+    "Grindr's AI spend is paying off and its pricey new tier has had some surprises, CEO says"
    ],
    "statut": "ok"
   },
@@ -1554,7 +1544,7 @@
    "octets": 72165,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 2,
+   "recents_24h": 1,
    "dates_lues": 20,
    "avec_resume": 20,
    "avec_image": 20,
@@ -1571,17 +1561,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 12413,
+   "octets": 13300,
    "lisible": true,
    "articles": 20,
    "recents_24h": 20,
    "dates_lues": 20,
-   "avec_resume": 16,
+   "avec_resume": 12,
    "avec_image": 0,
    "titres": [
-    "Rocket Lab Just Unveiled a Game-Changing Technology Worth Watching",
-    "Is XRP About to Have Its Biggest Year Yet in 2027?",
-    "Should You Buy Advanced Micro Devices (AMD) Stock After Its 12-Month Return of 200%?"
+    "Berkshire Hathaway's new CEO Greg Abel spends a chunk of the company's massive cashpile",
+    "President Donald Trump Expected the Iran War to Drive the Stock Market \"Down 20% to 25%\" -",
+    "Wall Street Sees a Multitrillion-Dollar Humanoid Robot Market. These 2 Industrial Stocks S"
    ],
    "statut": "ok"
   },
@@ -1592,9 +1582,18 @@
    "langue": "en",
    "code": 200,
    "octets": 26253,
-   "lisible": false,
-   "motif": "aucun <item> ni <entry>",
-   "statut": "illisible"
+   "lisible": true,
+   "articles": 50,
+   "recents_24h": 0,
+   "dates_lues": 0,
+   "avec_resume": 0,
+   "avec_image": 0,
+   "titres": [
+    "Hong Kong-based rice ball chain prepares supplies for US push",
+    "Cambodia deep-water port cashes in on Thai border closure",
+    "China's kids turn to AI-powered tutors over summer break"
+   ],
+   "statut": "ok"
   },
   {
    "nom": "business-insider-markets",
@@ -1630,17 +1629,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 131719,
+   "octets": 133158,
    "lisible": true,
    "articles": 100,
-   "recents_24h": 99,
+   "recents_24h": 100,
    "dates_lues": 100,
-   "avec_resume": 88,
+   "avec_resume": 92,
    "avec_image": 0,
    "titres": [
-    "US suffers unexpected job losses in July, markets dial back rate hike expectations - Reute",
-    "Europe's STOXX 600 ends week at all-time high on earnings support, soft US jobs data - Reu",
-    "UK stock indexes set for fourth week of gains, miners rally - Reuters"
+    "US suffers unexpected job losses in July, markets dial back rate hike expectations - reute",
+    "US stocks, bonds rally after soft jobs report; yen bounces back - reuters.com",
+    "Europe's STOXX 600 ends week at all-time high on earnings support, soft US jobs data - reu"
    ],
    "statut": "ok"
   },
@@ -1650,17 +1649,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 120010,
+   "octets": 121120,
    "lisible": true,
    "articles": 100,
    "recents_24h": 100,
    "dates_lues": 100,
-   "avec_resume": 80,
+   "avec_resume": 81,
    "avec_image": 0,
    "titres": [
     "US job market stalled in July as employers cut 23,000 jobs, delivering political setback t",
     "JACQUELINE GANUN - AP News",
-    "MaineHealth will close Lincoln Hospital’s labor and delivery unit in December - AP News"
+    "Washington-area native Stefon Diggs returns home to the Commanders in a full-circle moment"
    ],
    "statut": "ok"
   },
@@ -1670,17 +1669,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 234355,
+   "octets": 229691,
    "lisible": true,
    "articles": 70,
-   "recents_24h": 43,
+   "recents_24h": 48,
    "dates_lues": 70,
    "avec_resume": 70,
    "avec_image": 0,
    "titres": [
     "The Memo: Weak jobs report clouds economy as Trump barrels toward midterms - The Hill",
-    "Meta ordered to pay $567M by New Mexico court over child mental health harm - abcnews.com",
-    "Burger King overtakes Wendy's as the nation's second-largest burger chain - cnbc.com"
+    "Berkshire Hathaway Beats Earnings Views, Ups Buybacks, Cuts Cash Hoard - Investor's Busine",
+    "Prince Harry Reacts to Meta Settlement: “Change Cannot Wait” - Town & Country Magazine"
    ],
    "statut": "ok"
   },
@@ -1690,7 +1689,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 7816,
+   "octets": 7812,
    "lisible": true,
    "articles": 10,
    "recents_24h": 10,
@@ -1732,7 +1731,7 @@
    "code": 200,
    "octets": 1547,
    "lisible": false,
-   "motif": "JSON illisible : Expecting value: line 1 column 1 (char 0)",
+   "motif": "aucun <item> ni <entry>",
    "statut": "illisible"
   },
   {
@@ -1834,7 +1833,7 @@
    "lisible": true,
    "articles": 19,
    "recents_24h": 0,
-   "dates_lues": 0,
+   "dates_lues": 18,
    "avec_resume": 1,
    "avec_image": 0,
    "titres": [
@@ -2063,7 +2062,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 42725,
+   "octets": 41880,
    "lisible": true,
    "articles": 20,
    "recents_24h": 20,
@@ -2071,9 +2070,9 @@
    "avec_resume": 20,
    "avec_image": 17,
    "titres": [
+    "PLAB Investors Have Opportunity to Lead Photronics, Inc. Securities Fraud Lawsuit",
     "Employment &amp; Labor Lawyers, at Blumenthal Nordrehaug Bhowmik De Blouw LLP, File Suit A",
-    "University of Utah and U.S. Army Reserve complete historic land transfer and relocation",
-    "THE UNHEARD MELODY: Exhibition of Music in Chinese Paintings"
+    "University of Utah and U.S. Army Reserve complete historic land transfer and relocation"
    ],
    "statut": "ok"
   },
@@ -2129,17 +2128,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 32558,
+   "octets": 32678,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 16,
+   "recents_24h": 14,
    "dates_lues": 20,
    "avec_resume": 20,
    "avec_image": 20,
    "titres": [
-    "Sorti il y a 28 ans, ce film de science-fiction a failli mettre fin à la carrière de Kevin",
     "\"Vous avez faim tout le temps\" : Hugh Jackman et Henry Cavill ont souffert pour obtenir de",
-    "Cette chanson des Beatles est à l'origine de la création d'un personnage Marvel bien connu"
+    "Cette chanson des Beatles est à l'origine de la création d'un personnage Marvel bien connu",
+    "Jamais sorti au cinéma : c'est le seul film réalisé par Arnold Schwarzenegger et ce fut un"
    ],
    "statut": "ok"
   },
@@ -2152,7 +2151,7 @@
    "octets": 127927,
    "lisible": true,
    "articles": 100,
-   "recents_24h": 5,
+   "recents_24h": 3,
    "dates_lues": 100,
    "avec_resume": 98,
    "avec_image": 100,
@@ -2172,7 +2171,7 @@
    "octets": 165029,
    "lisible": true,
    "articles": 100,
-   "recents_24h": 11,
+   "recents_24h": 9,
    "dates_lues": 100,
    "avec_resume": 99,
    "avec_image": 100,
@@ -2189,7 +2188,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 19217,
+   "octets": 19036,
    "lisible": true,
    "articles": 10,
    "recents_24h": 10,
@@ -2197,9 +2196,9 @@
    "avec_resume": 10,
    "avec_image": 10,
    "titres": [
-    "Disney's Genius 11-Part Crime Thriller Saga So Good, You'll Finish It in One Weekend",
-    "Nintendo Switch 2's 2026 Looks Very Different After Fire Emblem: Fortune's Weave Direct",
-    "X-Men Actor Says Marvel Never Told Him Why He Was Replaced In 'X-Men '97'"
+    "Deborah Ann Woll Says Tales from Woodcreek Season 2 Is 'Clue at the Overlook Hotel'",
+    "What time does Mastery Monday start in Fortnite?",
+    "The 10 Most Ambitious Video Games Ever Made"
    ],
    "statut": "ok"
   },
@@ -2209,17 +2208,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 26360,
+   "octets": 25913,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 14,
+   "recents_24h": 16,
    "dates_lues": 20,
    "avec_resume": 20,
    "avec_image": 20,
    "titres": [
-    "Pokémon Pocket Apireine EX : la liste du meilleur deck du moment et comment le jouer dans ",
-    "6 ans à développer ce concurrent à GTA 6 et des centaines de millions de dollars d'investi",
-    "Avec une fortune de plus d'un milliard de dollars, c'est l'acteur le plus riche du monde :"
+    "Jiguey Assassin's Creed Black Flag Resynced : Où trouver le coffre au trésor enfoui ?",
+    "Ce jeu sur Nintendo Switch 2 est la dernière chance pour ces mascottes iconiques de la Wii",
+    "Pokémon Pocket Apireine EX : la liste du meilleur deck du moment et comment le jouer dans "
    ],
    "statut": "ok"
   },
@@ -2240,17 +2239,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 61382,
+   "octets": 61859,
    "lisible": true,
    "articles": 50,
-   "recents_24h": 17,
+   "recents_24h": 16,
    "dates_lues": 50,
-   "avec_resume": 37,
+   "avec_resume": 38,
    "avec_image": 50,
    "titres": [
+    "Mercato : Ferran Torres s'est mis d'accord avec le PSG pour un contrat de 5 ans, négociati",
     "Un zeste de tranquillité aux Pays-Bas",
-    "Première défaite en match de préparation pour Toulouse, largement battu par Elche",
-    "PSG : Marquinhos, Vitinha, Nuno Mendes et Joao Neves de retour dans le groupe pour affront"
+    "Première défaite en match de préparation pour Toulouse, largement battu par Elche"
    ],
    "statut": "ok"
   },
@@ -2294,7 +2293,7 @@
    "octets": 63386,
    "lisible": true,
    "articles": 36,
-   "recents_24h": 5,
+   "recents_24h": 4,
    "dates_lues": 36,
    "avec_resume": 31,
    "avec_image": 22,
@@ -2311,17 +2310,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 21823,
+   "octets": 21998,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 19,
+   "recents_24h": 20,
    "dates_lues": 20,
-   "avec_resume": 19,
+   "avec_resume": 20,
    "avec_image": 20,
    "titres": [
-    "Nouveau pavillon d'accueil à l'Assemblée : l'association Sites et Monuments dénonce la déc",
-    "\"Soudain\" : Virginie Efira se bat pour plus d'humanité en fin de vie dans un film manifest",
-    "Le \"tambour parleur\", volé par la France en 1916, présenté dans son village d'origine avan"
+    "En Allemagne, l’île de Rügen offre un petit coin de paradis sur la Baltique",
+    "Catherine Dasté, pionnière du théâtre pour jeunes, est morte à l'âge de 96 ans",
+    "ENTRETIEN. \"J’ai envie de montrer que je ne suis pas qu'une tendance TikTok\" : le rappeur "
    ],
    "statut": "ok"
   },
@@ -2331,17 +2330,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 30561,
+   "octets": 30416,
    "lisible": true,
    "articles": 15,
-   "recents_24h": 15,
+   "recents_24h": 13,
    "dates_lues": 15,
    "avec_resume": 15,
    "avec_image": 0,
    "titres": [
-    "Prime Video : les meilleurs films de la plateforme pour ne pas avoir à chercher",
-    "Metroid a 40 ans, et vous pouvez être sûr que Nintendo ne les fêtera pas",
-    "Éclipse solaire du 12 août : y a-t-il des spots parfaits à Paris pour voir le phénomène ?"
+    "GTA 6 sur disque ? Cela n’a « plus aucun sens » juge le patron de Take-Two",
+    "J’ai fini Beast of Reincarnation et c’est une grosse déception",
+    "Prime Video : les meilleurs films de la plateforme pour ne pas avoir à chercher"
    ],
    "statut": "ok"
   },
@@ -2351,7 +2350,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 30863,
+   "octets": 30876,
    "lisible": true,
    "articles": 30,
    "recents_24h": 30,
@@ -2359,9 +2358,9 @@
    "avec_resume": 30,
    "avec_image": 30,
    "titres": [
-    "Gut cells may measure hunger by how watery their insides become",
-    "Mega-study analyzes the impact of gratitude interventions",
-    "Canada tries to adapt to a future of wildfires"
+    "Reduced gravity pushes people toward simpler movement patterns, experiments suggest",
+    "Swarms of tiny robots remove microplastics from soil and water",
+    "Gut cells may measure hunger by how watery their insides become"
    ],
    "statut": "ok"
   },
@@ -2374,7 +2373,7 @@
    "octets": 55180,
    "lisible": true,
    "articles": 50,
-   "recents_24h": 5,
+   "recents_24h": 3,
    "dates_lues": 50,
    "avec_resume": 50,
    "avec_image": 50,
@@ -2391,7 +2390,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 249477,
+   "octets": 249509,
    "lisible": true,
    "articles": 10,
    "recents_24h": 3,
@@ -2468,9 +2467,18 @@
    "langue": "en",
    "code": 200,
    "octets": 36479,
-   "lisible": false,
-   "motif": "aucun <item> ni <entry>",
-   "statut": "illisible"
+   "lisible": true,
+   "articles": 25,
+   "recents_24h": 0,
+   "dates_lues": 25,
+   "avec_resume": 25,
+   "avec_image": 0,
+   "titres": [
+    "Michelle W Bowman: Responsible innovation and financial inclusion",
+    "Philip N Jefferson: Navigating economic shocks - a monetary policymaker's perspective",
+    "John C Williams: Stability of Thy Times"
+   ],
+   "statut": "ok"
   },
   {
    "nom": "fmi-communiques-et-discours",
@@ -2557,7 +2565,7 @@
    "octets": 14903,
    "lisible": true,
    "articles": 20,
-   "recents_24h": 5,
+   "recents_24h": 4,
    "dates_lues": 20,
    "avec_resume": 19,
    "avec_image": 0,
@@ -2577,7 +2585,7 @@
    "octets": 51400,
    "lisible": true,
    "articles": 50,
-   "recents_24h": 48,
+   "recents_24h": 45,
    "dates_lues": 50,
    "avec_resume": 47,
    "avec_image": 50,
@@ -2614,17 +2622,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 35660,
+   "octets": 35454,
    "lisible": true,
    "articles": 35,
-   "recents_24h": 18,
+   "recents_24h": 19,
    "dates_lues": 35,
    "avec_resume": 34,
    "avec_image": 35,
    "titres": [
-    "Gold price jumps as reopening of Strait of Hormuz buzz dents US Fed rate-hike hopes. Is it",
-    "IPO GMPs: Dhoot Transmission, Molbio Diagnostics, Shiprocket, Behari Lal Engg to Milky Mis",
-    "Stocks to buy under  ₹200: Mehul Kothari of Anand Rathi recommends three shares to buy or "
+    "A volatile week for tech revealed new stock narratives—and 1 bargain",
+    "A Tough Week for Crypto Has Fans Downing Drinks at a Bitcoin Bar",
+    "Gold price jumps as reopening of Strait of Hormuz buzz dents US Fed rate-hike hopes. Is it"
    ],
    "statut": "ok"
   },
@@ -2663,7 +2671,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 303662,
+   "octets": 303661,
    "lisible": false,
    "motif": "XML illisible : not well-formed (invalid token): line 2, column 17",
    "statut": "illisible"
@@ -2675,9 +2683,16 @@
    "langue": "en",
    "code": 200,
    "octets": 2286,
-   "lisible": false,
-   "motif": "aucun <item> ni <entry>",
-   "statut": "illisible"
+   "lisible": true,
+   "articles": 1,
+   "recents_24h": 0,
+   "dates_lues": 1,
+   "avec_resume": 1,
+   "avec_image": 0,
+   "titres": [
+    "A2A Payments Roundtable Releases Vision for Account-to-Account Payments in Australia"
+   ],
+   "statut": "ok"
   },
   {
    "nom": "abc-news-australia-business",
@@ -2705,17 +2720,17 @@
    "genre": "rss",
    "langue": "autre",
    "code": 200,
-   "octets": 571666,
+   "octets": 577722,
    "lisible": true,
    "articles": 100,
-   "recents_24h": 23,
+   "recents_24h": 22,
    "dates_lues": 100,
    "avec_resume": 100,
    "avec_image": 98,
    "titres": [
-    "Irã e Omã estão próximos de acordo para nova rota no Estreito de Ormuz, diz ministro irani",
-    "Selic a 14%: o que muda na sua prestação, no seu cartão e no seu dinheiro guardado? Entend",
-    "Produção pioneira no Brasil de ostra em lata tenta driblar instabilidades na maricultura e"
+    "Crise na Apex Partners: entenda afastamento de presidente e blindagem na Justiça",
+    "Irã e Omã estão próximos de acordo sobre controle do Estreito de Ormuz, diz ministro irani",
+    "Selic a 14%: o que muda na sua prestação, no seu cartão e no seu dinheiro guardado? Entend"
    ],
    "statut": "ok"
   },
@@ -2725,7 +2740,7 @@
    "genre": "rss",
    "langue": "autre",
    "code": 200,
-   "octets": 138307,
+   "octets": 133688,
    "lisible": true,
    "articles": 10,
    "recents_24h": 10,
@@ -2733,9 +2748,9 @@
    "avec_resume": 10,
    "avec_image": 10,
    "titres": [
-    "Eduardo Bolsonaro critica obrigatoriedade de vacinas no Brasil: ‘Liberdade’",
-    "Por que acidentes com entregadores do iFood podem custar R$ 189 milhões ao INSS",
-    "El Niño deve custar caro ao PIB do Brasil com choques em agro e energia"
+    "Gabriel Medina sofre corte na cabeça durante treino em Teahupoo antes da WSL",
+    "Estrangeiro volta à Bolsa em julho, mas eleições podem frear fluxo no 2º semestre",
+    "Berkshire Hathaway: lucro por ação classe B mais que dobrou no 2º trimestre de 2026"
    ],
    "statut": "ok"
   },
@@ -2765,17 +2780,17 @@
    "genre": "rss",
    "langue": "autre",
    "code": 200,
-   "octets": 717003,
+   "octets": 606067,
    "lisible": true,
    "articles": 100,
    "recents_24h": 100,
    "dates_lues": 100,
-   "avec_resume": 99,
-   "avec_image": 79,
+   "avec_resume": 93,
+   "avec_image": 70,
    "titres": [
-    "Claudia Salazar expone audios que revelan que la directiva de La Bella Luz conocía el acos",
-    "El Dane presentó la nueva guía para producir estadísticas oficiales con enfoque diferencia",
-    "Un incendio en un restaurante de la Gran Vía (Madrid) moviliza a los servicios de emergenc"
+    "Italia responde a “la medida de represalia del Gobierno de Sánchez” con una Unidad de Cris",
+    "El ministerio de comunicaciones en Guatemala reporta 143 proyectos viales en cartera y 2.7",
+    "Juegos Centroamericanos 2026 EN VIVO: clausura, horario, transmisión y últimas noticias"
    ],
    "statut": "ok"
   },
@@ -2854,7 +2869,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 13285,
+   "octets": 12941,
    "lisible": true,
    "articles": 5,
    "recents_24h": 5,
@@ -2862,9 +2877,9 @@
    "avec_resume": 5,
    "avec_image": 5,
    "titres": [
+    "2027 timetable sparks call for issue-based politics over ethnic Cleavages",
     "Nigeria firms risk losing relevance without digital overhaul, Jacob says",
-    "Top 10 African countries with the most global influence in 2026",
-    "Top 10 most peaceful countries in the world in 2026"
+    "Top 10 African countries with the most global influence in 2026"
    ],
    "statut": "ok"
   },
@@ -2874,7 +2889,7 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 38784,
+   "octets": 38786,
    "lisible": true,
    "articles": 30,
    "recents_24h": 1,
@@ -2882,7 +2897,7 @@
    "avec_resume": 30,
    "avec_image": 30,
    "titres": [
-    "Michael Boumendil, l'homme qui donne une voix aux marques",
+    "Michaël Boumendil, l'homme qui donne une voix aux marques",
     "Le business de la nostalgie: comment le passé est devenu un marché extrêmement rentable",
     "Le démarchage téléphonique est en train de changer de modèle économique"
    ],
@@ -2897,7 +2912,7 @@
    "octets": 16005,
    "lisible": true,
    "articles": 15,
-   "recents_24h": 15,
+   "recents_24h": 14,
    "dates_lues": 15,
    "avec_resume": 15,
    "avec_image": 0,
@@ -2943,7 +2958,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 543151,
+   "octets": 548814,
    "lisible": false,
    "motif": "XML illisible : not well-formed (invalid token): line 128, column 165",
    "statut": "illisible"
@@ -2954,17 +2969,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 11813,
+   "octets": 11993,
    "lisible": true,
    "articles": 12,
-   "recents_24h": 7,
+   "recents_24h": 9,
    "dates_lues": 12,
    "avec_resume": 12,
    "avec_image": 0,
    "titres": [
-    "MSC Baltic III Wreck Being Pulled Ashore in Newfoundland",
-    "ADNOC Says Three Vessels Attacked This Week as Hormuz Shipping Remains Severely Disrupted",
-    "Rosatom Says Seven Chinese Vessels Will Sail to Europe via Russia’s Arctic Route"
+    "Australia Unions Push On With Strike At BHP’s Port Hedland",
+    "Typhoon Dolphin Hits Japan’s Okinawa, China Shuts ports Ahead Of Landfall",
+    "MSC Baltic III Wreck Being Pulled Ashore in Newfoundland"
    ],
    "statut": "ok"
   },
@@ -3017,7 +3032,7 @@
    "octets": 8860,
    "lisible": true,
    "articles": 10,
-   "recents_24h": 3,
+   "recents_24h": 2,
    "dates_lues": 10,
    "avec_resume": 10,
    "avec_image": 8,
@@ -3034,17 +3049,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 9343,
+   "octets": 9803,
    "lisible": true,
    "articles": 10,
-   "recents_24h": 2,
+   "recents_24h": 1,
    "dates_lues": 10,
    "avec_resume": 10,
-   "avec_image": 7,
+   "avec_image": 9,
    "titres": [
     "The utility billing system is preventing rate and program innovation",
-    "Existing power plants are ‘bedrock’ in supplying data centers: Constellation CEO",
-    "Oncor weighs impact of Texas data center freeze on nearly 300-GW load pipeline"
+    "Video gamers give 110-MW Texas solar project a financing boost",
+    "NRG nears 1.2-GW hyperscaler deal amid Texas data center pause"
    ],
    "statut": "ok"
   },
@@ -3055,9 +3070,14 @@
    "langue": "en",
    "code": 200,
    "octets": 233968,
-   "lisible": false,
-   "motif": "JSON illisible : Expecting value: line 1 column 1 (char 0)",
-   "statut": "illisible"
+   "lisible": true,
+   "articles": 151,
+   "recents_24h": 151,
+   "dates_lues": 151,
+   "avec_resume": 0,
+   "avec_image": 0,
+   "titres": [],
+   "statut": "ok"
   },
   {
    "nom": "treasurydirect-adjudications-annon",
@@ -3103,7 +3123,7 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 30989,
+   "octets": 31032,
    "lisible": true,
    "articles": 25,
    "recents_24h": 14,
@@ -3111,9 +3131,9 @@
    "avec_resume": 23,
    "avec_image": 25,
    "titres": [
+    "Why trillion-dollar asset manager T. Rowe Price put memecoins in its crypto ETF",
     "U.S. Senate opens first stage of crypto Clarity Act voting to give bill a chance next mont",
-    "Another Bitcoin infrastructure exploit hits, this time draining Lightning payment servers",
-    "New XRP Ledger amendments target $530 million in tokenized Wall Street assets"
+    "Another Bitcoin infrastructure exploit hits, this time draining Lightning payment servers"
    ],
    "statut": "ok"
   },
@@ -3123,17 +3143,17 @@
    "genre": "rss",
    "langue": "en",
    "code": 200,
-   "octets": 44340,
+   "octets": 44207,
    "lisible": true,
    "articles": 30,
-   "recents_24h": 11,
+   "recents_24h": 10,
    "dates_lues": 30,
    "avec_resume": 29,
    "avec_image": 30,
    "titres": [
+    "Bitcoin will never fall below $60K again: Nansen founder",
     "Domestic stablecoins could boost demand for dollar-backed tokens: IMF",
-    "US court backs Bybit’s bid to trace funds from $1.5B North Korea hack",
-    "Donald Trump’s media company to terminate Crypto.com deal"
+    "US court backs Bybit’s bid to trace funds from $1.5B North Korea hack"
    ],
    "statut": "ok"
   },
@@ -3143,7 +3163,7 @@
    "genre": "api",
    "langue": "en",
    "code": 200,
-   "octets": 334,
+   "octets": 335,
    "lisible": false,
    "motif": "aucun élément",
    "statut": "illisible"
@@ -3234,17 +3254,17 @@
    "genre": "rss",
    "langue": "fr",
    "code": 200,
-   "octets": 23297,
+   "octets": 23440,
    "lisible": true,
    "articles": 10,
-   "recents_24h": 4,
+   "recents_24h": 5,
    "dates_lues": 10,
    "avec_resume": 10,
    "avec_image": 0,
    "titres": [
+    "Le ministère des Armées a émis un appel d’offres pour l’entretien des bateaux de… l’armée ",
     "L’Arabie saoudite, le Pakistan et la Turquie ont scellé un accord de défense mutuelle inéd",
-    "L’Australie confirme l’achat de 450 missiles air-air à longue portée AIM-260 auprès des Ét",
-    "Otan : Déployés en Lituanie, les Rafale français ont effectué 40 interceptions d’avions su"
+    "L’Australie confirme l’achat de 450 missiles air-air à longue portée AIM-260 auprès des Ét"
    ],
    "statut": "ok"
   },
@@ -3323,8 +3343,20 @@
    "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=(bourse%20OR%20inflation%20OR%20%22banque%20centrale%22)%20sourcelang:french&mode=ArtList&maxrecords=75&format=json&timespan=24h",
    "genre": "json",
    "langue": "fr",
-   "statut": "erreur",
-   "motif": "URLError: <urlopen error _ssl.c:1015: The handshake operation timed out>"
+   "code": 200,
+   "octets": 24971,
+   "lisible": true,
+   "articles": 50,
+   "recents_24h": 0,
+   "dates_lues": 0,
+   "avec_resume": 0,
+   "avec_image": 0,
+   "titres": [
+    "La croissance tombe à 3 % face à une inflation qui menace datteindre 10 , 1 % ",
+    "CAC 40 , Renault , Safran , Thales , Pernod - Ricard … les actions en Bourse au programme ",
+    "Etats - Unis  : Le prix du burrito sinvite au sein du parti du Trump et sème la zizanie à "
+   ],
+   "statut": "ok"
   },
   {
    "nom": "boursier-com-fil-de-depeches-march",
