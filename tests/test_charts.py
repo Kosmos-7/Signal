@@ -1123,6 +1123,72 @@ check("l'ancien breakdown sans note ne fait pas planter raison_sortie",
                                         {"ticker": "ZZ", "score": 44,
                                          "breakdown": {"qualite": 20}}), str))
 
+# ── L'ÉCHELLE DU GRAPHIQUE DES CHIFFRES PUBLIÉS ────────────────────────────
+# On exécute LE VRAI CODE de la page sous node, comme test_actualites.py le
+# fait déjà pour le formatage : réécrire la formule dans le test la ferait
+# diverger du dessin, et c'est précisément une divergence qu'on traque ici.
+#
+# LE DÉFAUT. Le haut de l'échelle comptait le bénéfice ATTENDU (déduit du BPA
+# consensus, `rnAtt`) ; le bas ne lisait que le résultat PUBLIÉ (`rn`). Une
+# société dont la perte attendue creuse sous toutes ses pertes passées voyait
+# donc ses barres projetées sortir du cadre, par-dessus les étiquettes FY.
+# Trois fiches touchées au 08/08/2026 — IonQ (débordement de 79 % de la
+# hauteur du dessin), CoreWeave (44 %), Nebius (35 %) — signalé par le
+# propriétaire sur téléphone.
+print("\n— Le graphique des chiffres publiés tient-il dans son cadre ? —")
+def _echelle(cols):
+    """Rejoue le calcul d'échelle d'index.html et rend le bas de chaque barre."""
+    src = open(os.path.join(RACINE, "index.html"), encoding="utf-8").read()
+    deb = src.index("const maxV=Math.max(")
+    fin = src.index("const slot=W/n,")
+    prog = ("const H=170,PB=22;"
+            "const cols=" + json.dumps(cols) + ";"
+            "const val=(o,k)=>o.v[k]==null?null:o.v[k];"
+            "const rnAtt=p=>p.rnAtt==null?null:p.rnAtt;"
+            + src[deb:fin] +
+            "const bas=cols.map(o=>{const v=o.pr?rnAtt(o.v):o.v.rn;"
+            "  if(v==null)return null;const h=hVal(v);"
+            "  return (h>=0?y0-h:y0)+Math.max(2,Math.abs(h));});"
+            "const haut=cols.map(o=>{const v=o.v.ca;if(v==null)return null;"
+            "  const h=hVal(v);return h>=0?y0-h:y0;});"
+            "console.log(JSON.stringify({bas:bas,haut:haut,y0:y0,fond:H-PB}));")
+    return json.loads(subprocess.run(["node", "-e", prog], capture_output=True,
+                                     text=True, timeout=30, check=True).stdout)
+
+try:
+    # Données réelles d'IonQ au 08/08/2026 : quatre exercices publiés en perte,
+    # puis deux exercices de consensus dont la perte est cinq fois plus creuse.
+    _IONQ = [{"v": {"ca": 22, "rn": -158}, "pr": False},
+             {"v": {"ca": 43, "rn": -158}, "pr": False},
+             {"v": {"ca": 96, "rn": -332}, "pr": False},
+             {"v": {"ca": 121, "rn": -510}, "pr": False},
+             {"v": {"ca": 180, "rnAtt": -2486}, "pr": True},
+             {"v": {"ca": 290, "rnAtt": -2100}, "pr": True}]
+    _r = _echelle(_IONQ)
+    _deborde = [i for i, b in enumerate(_r["bas"]) if b is not None and b > _r["fond"]]
+    check("aucune barre de perte ne sort du cadre, projetée comprise",
+          not _deborde, f"colonnes hors cadre : {_deborde} (fond={_r['fond']}, bas={_r['bas']})")
+    check("aucune barre de chiffre d'affaires ne sort par le haut",
+          all(h is None or h >= 0 for h in _r["haut"]), str(_r["haut"]))
+    # La perte attendue doit VRAIMENT tirer le plancher : sans quoi le test
+    # ci-dessus passerait aussi avec une échelle qui ignore les projections mais
+    # dont les pertes publiées se trouvent être les plus profondes.
+    check("le zéro descend pour faire de la place à la perte attendue",
+          _r["y0"] < _r["fond"] * 0.5,
+          f"y0={_r['y0']:.1f} pour un fond à {_r['fond']}")
+    # Contrôle symétrique : une société sans perte attendue ne doit pas voir son
+    # échelle bouger — le correctif ne devait rien changer au cas courant.
+    _SAIN = [{"v": {"ca": 100, "rn": 10}, "pr": False},
+             {"v": {"ca": 120, "rn": 14}, "pr": False},
+             {"v": {"ca": 140, "rnAtt": 18}, "pr": True}]
+    _s = _echelle(_SAIN)
+    check("sans perte, le zéro reste posé au bas du dessin",
+          _s["y0"] > _s["fond"] * 0.8, f"y0={_s['y0']:.1f}")
+    check("et aucune barre ne sort du cadre non plus",
+          all(b is None or b <= _s["fond"] + 0.01 for b in _s["bas"]), str(_s["bas"]))
+except (OSError, subprocess.SubprocessError, ValueError) as _e:
+    print(f"  \u26a0\ufe0f  échelle du graphique non vérifiée (node indisponible : {type(_e).__name__})")
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:

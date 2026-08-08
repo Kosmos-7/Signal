@@ -1502,7 +1502,19 @@ function fondaRender(s){
   // Plancher un peu sous la plus petite valeur : la plus petite barre garde
   // une hauteur visible au lieu de partir de zéro pixel.
   const _la=Math.log(_minPos/1.6), _lb=Math.log(maxV);
-  const minV=LOGB?0:Math.min(0,...cols.map(o=>Math.min(val(o,'rn')==null?0:val(o,'rn'),0)));
+  /* LE BAS DE L'ÉCHELLE DOIT VOIR LES PERTES ATTENDUES, comme le haut voit les
+     bénéfices attendus. Cette ligne ne lisait que `rn`, le résultat PUBLIÉ :
+     sur une colonne projetée, le résultat n'est pas dans `rn` mais déduit du
+     BPA consensus (`rnAtt`), et il était donc invisible au plancher alors que
+     `maxV`, juste au-dessus, le comptait bien au plafond. L'asymétrie ne se
+     voyait que sur une société dont la perte ATTENDUE creuse sous toutes ses
+     pertes passées : le plancher restait calé sur le pire exercice publié et
+     les barres projetées sortaient du cadre, par-dessus les étiquettes FY —
+     signalé par le propriétaire sur téléphone le 08/08/2026.
+     On réutilise `_rnDe`, qui résout déjà publié/projeté, plutôt que de
+     réécrire la règle : c'est la deuxième fois que ce choix se pose ici, et
+     la première fois qu'il diverge. */
+  const minV=LOGB?0:Math.min(0,...cols.map(o=>{const v=_rnDe(o);return v==null?0:Math.min(v,0);}));
   const y0=8+(H-PB-16)*(maxV/(maxV-minV)), sc=(H-PB-16)/(maxV-minV);
   // Hauteur d'une barre — l'UNIQUE conversion valeur→pixels, partagée par le
   // CA, sa borne haute et le résultat net : deux conversions divergeraient.
