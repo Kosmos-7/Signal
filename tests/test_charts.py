@@ -471,10 +471,11 @@ check("un consensus disparu ne ressuscite pas",
           {"devise": "USD", "an": [], "tr": []}))
 # Garde-fou générique : tout champ de `fonda` que la fusion ignore disparaît.
 # Ce test échouera dès qu'un nouveau champ sera ajouté sans être traité ici.
-CHAMPS = {"devise", "an", "tr", "pe_prev", "proj", "consensus"}
+CHAMPS = {"devise", "an", "tr", "pe_prev", "proj", "consensus", "per_converti"}
 plein = {"devise": "USD", "an": [{"fin": "2025-12-31", "ca": 1}], "tr": [],
          "pe_prev": [{"exercice": 2026, "per": 30.0}], "proj": PJ,
-         "consensus": {"analystes": 38, "ecart_pct": 3.7}}
+         "consensus": {"analystes": 38, "ecart_pct": 3.7},
+         "per_converti": {"de": "CHF", "vers": "USD"}}
 check("aucun champ de fonda n'est perdu en silence par la fusion",
       set(screener.fusionner_fonda(plein, plein)) == CHAMPS,
       str(CHAMPS ^ set(screener.fusionner_fonda(plein, plein))))
@@ -1188,6 +1189,103 @@ try:
           all(b is None or b <= _s["fond"] + 0.01 for b in _s["bas"]), str(_s["bas"]))
 except (OSError, subprocess.SubprocessError, ValueError) as _e:
     print(f"  \u26a0\ufe0f  échelle du graphique non vérifiée (node indisponible : {type(_e).__name__})")
+
+# ── L'AXE DES ANNÉES : chaque exercice étiqueté, aucun chevauchement ────────
+# Demande du propriétaire (08/08/2026) : « je veux voir apparaître chaque année
+# FY21 FY22 etc. Pas de trou une année sur deux ». L'ancien code gardait une
+# police FIXE et sautait des colonnes dès que ça serrait ; c'est désormais la
+# TAILLE qui cède, et le saut n'est qu'un repli sous le plancher de lisibilité.
+#
+# DEUX PIÈGES, tous deux trouvés au navigateur et tous deux invisibles au
+# relecteur :
+#   1. une règle CSS l'emporte sur un attribut de présentation SVG, donc
+#      `.chx-axis{font-size:10px}` annulait silencieusement tout calcul — les
+#      étiquettes restaient à 10 px pendant que le code croyait les réduire.
+#      La taille DOIT donc se poser en `style`, et ce test l'exige ;
+#   2. la chasse de la fonte vaut 0,61 cadratin et non 0,6 : 2 % d'erreur
+#      suffisaient à faire se toucher deux étiquettes voisines.
+print("\n— L'axe des années montre-t-il chaque exercice ? —")
+_ix = open(os.path.join(RACINE, "index.html"), encoding="utf-8").read()
+check("la fenêtre publiée est de douze exercices",
+      re.search(r"const FD_ANS=12\b", _ix) is not None)
+# La taille calculée doit atterrir dans un `style` : en attribut, le CSS gagne.
+check("les deux axes posent leur taille, et la posent en style",
+      _ix.count('style="font-size:\'+_ax.px+\'px"') == 1
+      and _ix.count('style="font-size:\'+_axP.px+\'px"') == 1,
+      "une taille posée en attribut font-size serait écrasée par .chx-axis")
+check("aucune taille d'axe ne subsiste en attribut de présentation",
+      'class="chx-axis" font-size=' not in _ix)
+try:
+    _prog = _ix[_ix.index("const AX_MIN="):_ix.index("function fondaRender(")]
+    _cas = [[25.88, 4], [24.77, 4], [60, 4], [12, 4], [40, 6], [8, 4]]
+    _out = json.loads(subprocess.run(
+        ["node", "-e", _prog + "console.log(JSON.stringify("
+         + json.dumps(_cas) + ".map(c=>axeAnnees(c[0],c[1]))));"],
+        capture_output=True, text=True, timeout=30, check=True).stdout)
+    # Le contrat : tant que la police reste au-dessus du plancher, le pas vaut 1
+    # — c'est-à-dire que TOUTES les années sont étiquetées.
+    check("aux largeurs réelles des fiches, chaque année est étiquetée",
+          all(r["pas"] == 1 for r in _out[:3]), str(_out[:3]))
+    check("l'étiquette tient dans son slot, gouttière comprise",
+          all(c[1] * r["px"] * 0.61 <= c[0] - 2 + 1e-9
+              for c, r in zip(_cas, _out) if r["pas"] == 1),
+          str([(c, r) for c, r in zip(_cas, _out)]))
+    check("la police ne descend jamais sous le plancher de lisibilité",
+          all(r["px"] >= 7.4 - 1e-9 for r in _out), str(_out))
+    check("elle ne dépasse pas non plus la taille de référence",
+          all(r["px"] <= 10 + 1e-9 for r in _out), str(_out))
+    # Sous le plancher, on saute des années PLUTÔT que de rendre l'axe illisible
+    # ou chevauchant : le repli doit exister, sinon la garde ne sert à rien.
+    check("trop serré : on saute des années au lieu de chevaucher",
+          _out[-1]["pas"] > 1 and _out[-1]["px"] == 7.4, str(_out[-1]))
+except (OSError, subprocess.SubprocessError, ValueError) as _e:
+    print(f"  \u26a0\ufe0f  axe non vérifié (node indisponible : {type(_e).__name__})")
+
+# ── PER HISTORIQUE QUAND COMPTES ET COTATION DIFFÈRENT DE DEVISE ───────────
+# Cinq fiches publiaient leurs comptes dans une monnaie et cotaient dans une
+# autre : ABB (USD/CHF), ASE (TWD/USD), Cameco (CAD/USD), Ferrari (EUR/USD),
+# Vestas (EUR/DKK). Le quotient était refusé — à raison — et TRENTE ET UN
+# exercices n'avaient aucun multiple. Le refus était bon, la conclusion trop
+# courte : ce qui manquait n'était pas une raison de s'abstenir, c'était le
+# taux. Depuis le 08/08/2026 on ramène le COURS dans la devise des comptes au
+# change du jour de clôture — le terme qui se convertit sans convention, un
+# prix étant un montant à un instant.
+print("\n— Le multiple quand la devise des comptes n'est pas celle du cours —")
+_AN_FX = [{"fin": "2023-12-31", "eps": 2.0, "rn": 2000},
+          {"fin": "2024-12-31", "eps": 2.5, "rn": 2500},
+          {"fin": "2025-12-31", "eps": 3.0, "rn": 3000}]
+def _neuf():
+    return [dict(e) for e in _AN_FX]
+_prix = lambda iso: 100.0          # cours constant, en devise de COTATION
+_tx = lambda iso: 1.25             # 1 unité cotée = 1,25 unité comptable
+
+_a = screener.per_historique(_neuf(), _prix, False, None, _tx)
+check("devises différentes AVEC taux : le multiple est calculé",
+      [e.get("per") for e in _a] == [62.5, 50.0, 41.7], str([e.get("per") for e in _a]))
+# 100 × 1,25 = 125 en devise comptable ; 125 / 2,0 = 62,5. Le multiple est bien
+# celui du cours CONVERTI, pas celui du cours brut (qui aurait donné 50,0).
+check("c'est bien le cours converti, pas le cours brut",
+      _a[0]["per"] != round(100 / 2.0, 1))
+# LE REPLI EST LA MOITIÉ IMPORTANTE : sans taux, on retombe sur le trou assumé.
+# Un multiple calculé avec un taux inventé serait pire que pas de multiple.
+_b = screener.per_historique(_neuf(), _prix, False, None, None)
+check("devises différentes SANS taux : aucun multiple, comme avant",
+      all(e.get("per") is None for e in _b), str([e.get("per") for e in _b]))
+# Un taux manquant sur UN exercice ne doit pas contaminer les autres : le point
+# est sauté, la courbe garde les siens.
+_troue = lambda iso: (None if iso.startswith("2024") else 1.25)
+_c = screener.per_historique(_neuf(), _prix, False, None, _troue)
+check("un exercice sans taux est sauté, les autres restent",
+      [e.get("per") for e in _c] == [62.5, None, 41.7], str([e.get("per") for e in _c]))
+# Même devise : le taux ne doit JAMAIS s'appliquer, même s'il est fourni.
+_d = screener.per_historique(_neuf(), _prix, True, None, _tx)
+check("même devise : le cours n'est pas converti",
+      [e.get("per") for e in _d] == [50.0, 40.0, 33.3], str([e.get("per") for e in _d]))
+# Un taux nul ou négatif est une donnée cassée, pas un change : on saute.
+for _mauvais, _nom in [(lambda i: 0.0, "nul"), (lambda i: -1.2, "négatif")]:
+    _e = screener.per_historique(_neuf(), _prix, False, None, _mauvais)
+    check(f"un taux {_nom} ne produit aucun multiple",
+          all(x.get("per") is None for x in _e), str([x.get("per") for x in _e]))
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")

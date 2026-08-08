@@ -668,7 +668,7 @@ def chainer_finnhub(fh_data, net_margin_raw, debt_eq_raw):
     return nm, de, src
 
 
-def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None):
+def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None, taux=None):
     """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
     dilué publié. UNIQUEMENT quand la devise comptable est celle de cotation :
     un ADR comme TSM cote en USD mais publie son BPA en TWD (et représente
@@ -699,8 +699,17 @@ def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None):
     actuel (facteur 3 en log). Au-delà, la base est incompatible quelle qu'en
     soit la raison, et le multiple est retiré. Sans résultat net ou sans
     nombre d'actions actuel, rien n'est vérifiable et le multiple est calculé —
-    on ne retire pas sur un soupçon."""
-    if not meme_devise:
+    on ne retire pas sur un soupçon.
+
+    DEVISES DIFFÉRENTES : ON CONVERTIT LE COURS, ON NE RENONCE PLUS.
+    Jusqu'au 08/08/2026 cette fonction rendait la main dès que les comptes et
+    la cotation n'étaient pas dans la même monnaie, et cinq fiches n'avaient
+    aucun multiple historique. `taux` — une fonction date → change, fournie par
+    l'appelant — permet de ramener le cours dans la devise des comptes au jour
+    de la clôture. Sans elle (paire introuvable, réseau en panne), on retombe
+    exactement sur l'ancien comportement : le trou assumé, jamais un multiple
+    calculé avec un taux inventé."""
+    if not meme_devise and taux is None:
         return an
     import math
     for e in an:
@@ -713,9 +722,77 @@ def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None):
             if abs(math.log(implique / actions_actuelles)) > math.log(3):
                 continue              # base d'actions incompatible : pas de PER
         prix = prix_a_la_date(e["fin"])
+        if prix and prix > 0 and not meme_devise:
+            # Cours ramené dans la devise des COMPTES, au change du jour de
+            # clôture. Un exercice dont le taux manque est sauté : mieux vaut
+            # un point absent qu'un point faux au milieu d'une courbe juste.
+            fx = taux(e["fin"])
+            prix = prix * fx if fx and fx > 0 else None
         if prix and prix > 0:
             e["per"] = round(prix / eps, 1)
     return an
+
+
+_FX_HIST = {}
+
+
+def taux_historique(de, vers):
+    """Série de change quotidienne `de` → `vers`, rendue comme une fonction
+    date ISO → taux (dernier cours connu à cette date), ou None si la paire est
+    introuvable.
+
+    POURQUOI CETTE FONCTION EXISTE. Cinq sociétés du site publient leurs comptes
+    dans une devise et cotent dans une autre : ABB (comptes en dollars, cotée en
+    francs suisses), ASE, Cameco, Ferrari, Vestas. Le quotient cours ÷ bénéfice
+    y était refusé — à raison, un cours en francs divisé par un bénéfice en
+    dollars donne un taux de change déguisé en multiple — et la fiche affichait
+    un trou assumé sur trente et un exercices au total.
+
+    Le refus était bon, la conclusion trop courte : ce qui manquait n'était pas
+    une raison de s'abstenir, c'était le TAUX. On ramène donc le cours dans la
+    devise des comptes, au change du jour de clôture de l'exercice, et le
+    quotient redevient ce qu'il doit être — deux montants dans la même monnaie à
+    la même date.
+
+    POURQUOI CONVERTIR LE COURS ET NON LE BÉNÉFICE. Le cours est un prix à un
+    INSTANT : il se convertit au taux de cet instant, sans convention. Un
+    bénéfice est un flux sur douze mois ; le traduire demanderait un taux moyen
+    d'exercice, c'est-à-dire une convention comptable de plus, discutable et
+    invisible au lecteur. On convertit donc le terme qui n'en réclame aucune.
+
+    Le résultat reste un ORDRE DE GRANDEUR juste, pas une comptabilité : la
+    société elle-même publie ses comparatifs à des taux qui ne sont pas les
+    nôtres. C'est très au-dessus de la valeur d'un trou, et très en dessous de
+    la précision d'un rapport annuel."""
+    de, vers = (de or "").upper(), (vers or "").upper()
+    if not de or not vers or de == vers:
+        return None
+    cle = de + vers
+    if cle in _FX_HIST:
+        return _FX_HIST[cle]
+    serie = None
+    try:
+        h = yf.Ticker(f"{de}{vers}=X").history(period="max", auto_adjust=False)
+        if h is not None and len(h) and "Close" in h:
+            serie = h["Close"].dropna()
+            if not len(serie):
+                serie = None
+    except Exception as e:                                       # noqa: BLE001
+        print(f"  ⚠️  change {de}→{vers} indisponible ({type(e).__name__})")
+        serie = None
+    if serie is None:
+        _FX_HIST[cle] = None
+        return None
+
+    def taux(iso):
+        try:
+            avant = serie[serie.index <= pd.Timestamp(iso, tz=serie.index.tz)]
+            return float(avant.iloc[-1]) if len(avant) else None
+        except Exception:                                        # noqa: BLE001
+            return None
+
+    _FX_HIST[cle] = taux
+    return taux
 
 
 def per_previsionnel(prix, estimations, dernier_exercice):
@@ -1182,6 +1259,12 @@ def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
     # plus les siennes.
     if nouveau.get("consensus"):
         out["consensus"] = nouveau["consensus"]
+    # Même règle encore : la mention « multiples obtenus en convertissant le
+    # cours » décrit la façon dont les PER de CE run ont été calculés. Elle
+    # suit donc le run courant et disparaît si la paire de change redevient
+    # indisponible — auquel cas les multiples disparaissent avec elle.
+    if nouveau.get("per_converti"):
+        out["per_converti"] = nouveau["per_converti"]
     return out
 
 
@@ -2338,10 +2421,21 @@ def score_ticker(ticker, vix=None):
                             return float(avant.iloc[-1]) if len(avant) else None
                         except Exception:
                             return None
-                    meme_devise = ((info.get("financialCurrency") or "") ==
-                                   (info.get("currency") or ""))
+                    _d_compta = info.get("financialCurrency") or ""
+                    _d_cote = info.get("currency") or ""
+                    meme_devise = (_d_compta == _d_cote)
+                    # Cotation → comptes : c'est le COURS qu'on ramène dans la
+                    # devise du bénéfice, jamais l'inverse (cf. taux_historique).
+                    _fx = None if meme_devise else taux_historique(_d_cote, _d_compta)
                     per_historique(fonda["an"], prix_fin, meme_devise,
-                                   info.get("sharesOutstanding"))
+                                   info.get("sharesOutstanding"), _fx)
+                    # LA CONVERSION SE DIT. Un multiple obtenu en passant par un
+                    # taux de change n'est pas du même grain qu'un quotient
+                    # direct : la société publie ses propres comparatifs à des
+                    # taux qui ne sont pas les nôtres. La fiche l'affiche donc,
+                    # plutôt que de laisser croire à une mesure sans couture.
+                    if _fx and any(e.get("per") is not None for e in fonda["an"]):
+                        fonda["per_converti"] = {"de": _d_cote, "vers": _d_compta}
                     est = None
                     try:
                         ee = data.earnings_estimate

@@ -1405,7 +1405,42 @@ function fdSynthese(an,coupe,dev){
     +'cette marche serait fausse.'];
 }
 // Profondeur DESSINÉE (le tableau dépliable, lui, montre tout l'accumulé).
-const FD_ANS=10, FD_TRIM=12;
+/* DOUZE EXERCICES (demande du propriétaire, 08/08/2026 — dix auparavant). La
+   fenêtre est COMMUNE au graphique des chiffres publiés et à celui du PER :
+   les deux racontent la même histoire sur la même période, et les désaccorder
+   ferait lire deux passés différents sur une même fiche. */
+const FD_ANS=12, FD_TRIM=12;
+/* TAILLE DE POLICE DE L'AXE DES ANNÉES, calculée au lieu d'être fixée.
+   Le propriétaire veut voir CHAQUE exercice étiqueté (« pas de trou une année
+   sur deux », 08/08/2026). L'ancien code gardait une police fixe et sautait des
+   colonnes quand les libellés se touchaient — c'était le bon réflexe, appliqué
+   à la mauvaise variable : ce qui doit céder, c'est la taille du texte, pas le
+   nombre d'années.
+   On dimensionne donc la police pour que « FY25 » tienne dans son slot, avec un
+   PLANCHER de lisibilité. Si même au plancher ça ne rentre pas — écran très
+   étroit, vingt-cinq colonnes — on retombe sur le saut d'années : mieux vaut un
+   axe qui saute qu'un axe illisible ou qui se chevauche. C'est un repli, plus
+   un comportement par défaut.
+   AX_CHASSE est la largeur d'un caractère de la fonte à chasse fixe, en
+   cadratins. Elle est MESURÉE au navigateur (0,610 pour « FY25 », 0,608 pour
+   « FY27e »), pas supposée : le premier jet avait pris 0,6 rond, et l'erreur
+   de 2 % suffisait à faire se toucher deux étiquettes voisines.
+   ATTENTION AU VECTEUR : la taille se pose en `style`, jamais en attribut
+   `font-size`. Une règle CSS l'emporte sur un attribut de présentation SVG, et
+   `.chx-axis{font-size:10px}` annulait donc silencieusement tout calcul — les
+   étiquettes restaient à 10 px pendant que le code croyait les avoir réduites.
+   Le graphique des barres ne tenait alors que par chance, à 0,4 unité près. */
+const AX_MIN=7.4, AX_MAX=10, AX_CHASSE=0.61;
+function axeAnnees(slot, nCar){
+  // Largeur dispo par étiquette, moins une gouttière pour que deux libellés
+  // voisins ne se collent pas.
+  const dispo=slot-2.5;
+  const taille=Math.min(AX_MAX, dispo/(nCar*AX_CHASSE));
+  if(taille>=AX_MIN)return {px:Math.round(taille*10)/10, pas:1};
+  // Plancher atteint : on garde la police lisible et on saute des colonnes.
+  const largeur=nCar*AX_CHASSE*AX_MIN+2.5;
+  return {px:AX_MIN, pas:Math.max(1,Math.ceil(largeur/slot))};
+}
 function fondaRender(s){
   const host=document.getElementById('fondasec'); if(!host)return;
   const D=CH[s.ticker], F=D&&D.fonda;
@@ -1530,14 +1565,18 @@ function fondaRender(s){
     '<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="rgba(255,255,255,.10)"/>';
   if(projC.length){const xSep=slot*rows.length;
     bars+='<line x1="'+xSep+'" x2="'+xSep+'" y1="4" y2="'+(H-PB+2)+'" stroke="rgba(255,255,255,.22)" stroke-dasharray="3 3"/>';}
-  // ÉTIQUETTES : le pas se déduit de la PLACE, il n'est plus deviné. « une sur
-  // deux » suffisait à douze colonnes ; à vingt-quatre (dix-neuf exercices
-  // publiés plus cinq projetés) sur 440 unités de large, « 2024 2025 2026 » se
-  // chevauchait — signalé par le propriétaire sur son téléphone. On mesure
-  // donc : un libellé fait ~6,2 unités par caractère à cette taille, il lui
-  // faut son slot plus une marge.
-  const LARG_CAR=6.2, LARG_LAB=4*LARG_CAR+6;
-  const step=Math.max(1,Math.ceil(LARG_LAB/slot));
+  /* ÉTIQUETTES : c'est la POLICE qui s'adapte, plus le nombre d'années.
+     Le pas se déduisait de la place et sautait une colonne sur deux dès que
+     ça serrait — le propriétaire veut voir chaque exercice (08/08/2026). On
+     calcule donc la taille qui fait tenir « FY25 » dans son slot ; le saut
+     d'années ne subsiste qu'en repli, si le plancher de lisibilité est atteint.
+     En trimestriel le libellé fait six caractères (« T1 25 »), et c'est cette
+     largeur-là qu'il faut budgéter : la mesurer plutôt que la supposer évite
+     de reproduire l'erreur inverse, un axe calibré sur le mode annuel qui
+     déborde en trimestriel. */
+  const AX_CAR=(FD_MODE==='an'?4:6);
+  const _ax=axeAnnees(slot,AX_CAR), step=_ax.pas;
+  const LARG_CAR=_ax.px*AX_CHASSE;
   /* Contenu du relevé, une entrée par colonne. Il ne dit QUE ce que le dessin
      dessine — CA et résultat net : annoncer dans une bulle un chiffre qui n'a
      pas de barre ferait chercher au lecteur une barre qui n'existe pas. */
@@ -1629,7 +1668,7 @@ function fondaRender(s){
             demi=txt.length*LARG_CAR/2;
       const anc=(cx+demi>W-1)?'end':(cx-demi<1?'start':'middle');
       const tx=anc==='end'?W-1:(anc==='start'?1:cx);
-      bars+='<text x="'+tx+'" y="'+(H-6)+'" text-anchor="'+anc+'" class="chx-axis"'+(last?' fill="#c6c6e0"':(o.pr?' opacity=".65"':''))+'>'+txt+'</text>';}
+      bars+='<text x="'+tx+'" y="'+(H-6)+'" text-anchor="'+anc+'" class="chx-axis" style="font-size:'+_ax.px+'px"'+(last?' fill="#c6c6e0"':(o.pr?' opacity=".65"':''))+'>'+txt+'</text>';}
   });
   // La table des chiffres est DÉPLIABLE (décision propriétaire du 06/08 : le
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
@@ -1708,7 +1747,14 @@ function fondaRender(s){
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
         '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+
-        '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Les points estimés, eux, sont au cours DU JOUR — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.</span></span></div>'+
+        /* LA CONVERSION SE DIT, elle ne se devine pas. Cinq sociétés publient
+           leurs comptes dans une devise et cotent dans une autre ; leurs
+           multiples existent depuis le 08/08/2026 parce qu'on ramène le cours
+           dans la devise des comptes au change du jour de clôture. Un lecteur
+           qui compare ce multiple à celui de son courtier doit savoir d'où
+           vient l'écart — sinon le nombre est juste et incompréhensible. */
+        ((F&&F.per_converti)?'&nbsp;&nbsp;<span style="color:var(--text3)">cours converti en '+F.per_converti.vers+'</span>':'')+
+        '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Les points estimés, eux, sont au cours DU JOUR — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.'+((F&&F.per_converti)?' Cette société publie ses comptes en '+F.per_converti.vers+' mais cote en '+F.per_converti.de+' : le cours de chaque clôture est ramené en '+F.per_converti.vers+' au change de ce jour-là, sans quoi le quotient serait un taux de change déguisé en multiple. Les taux sont les nôtres, pas ceux que la société retient dans ses propres comparatifs.':'')+'</span></span></div>'+
         pertesAttendues+'</div>'
       :'<div class="fd-wrap"><div class="qh">'+(perB.queEst?'PER estimé (analystes)':'PER')+'</div>'+
         '<div class="fd-inline">'+perB.inline+'</div>'+
@@ -1773,10 +1819,17 @@ function fdPerChart(F,fmtPer,W,b){
        Le multiple prévisionnel, lui, reste valide — les estimations des
        analystes sont publiées dans la devise de cotation. */
     const anEps=((F&&F.an)||[]).filter(r=>r.eps>0);
+    /* Ce message ne subsiste que pour le cas RÉSIDUEL. Depuis le 08/08/2026 le
+       screener ramène le cours dans la devise des comptes au change du jour de
+       clôture, et ces fiches ont donc leurs multiples ; il ne reste ici que la
+       situation où la paire de change elle-même est introuvable. Le texte le
+       dit maintenant ainsi, au lieu d'annoncer un refus de principe qui n'en
+       est plus un. */
     const motif=(!pub.length&&anEps.length>=2&&b&&b.devise&&F.devise&&b.devise!==F.devise)
       ? 'Aucun multiple historique : les comptes sont publiés en '+F.devise+' et le titre cote en '
-        +b.devise+'. Diviser un cours par un bénéfice libellé dans une autre monnaie donnerait un '
-        +'taux de change, pas une valorisation — nous préférons le trou. Les '+anEps.length
+        +b.devise+'. Nous ramenons d’ordinaire le cours dans la devise des comptes pour que le '
+        +'quotient garde un sens, mais ce taux de change nous manque ici — et un multiple calculé '
+        +'avec un taux inventé vaudrait moins que le trou. Les '+anEps.length
         +' exercices concernés restent lisibles dans les chiffres publiés ci-dessus.'
       : null;
     return {inline:inline,queEst:!pub.length,svg:null,motif:motif};
@@ -1879,13 +1932,41 @@ function fdPerChart(F,fmtPer,W,b){
      étiquette serait trop proche de la précédente, elle passe SOUS le point
      au lieu d'être omise — deux étiquettes du même côté sont alors toujours à
      un slot entier l'une de l'autre. */
-  // 10 px en unités du viewBox, police à chasse fixe : ~6 unités par
-  // caractère. Les VALEURS font trois caractères (« 28× ») ; les libellés
-  // d'AXE en font cinq depuis le préfixe « FY » (« FY27e » ≈ 31 unités), il
-  // leur faut donc plus d'air — 30 les faisait se toucher.
-  const ECART_VAL=22, ECART_AXE=37;
+  /* Les VALEURS (« 28× », trois caractères) gardent leur police de 10 px et
+     leur écart fixe : elles flottent au-dessus de la courbe, rien ne les
+     contraint à un slot.
+     L'AXE, lui, suit la même règle que le graphique des barres depuis le
+     08/08/2026 : la police rétrécit pour que CHAQUE exercice soit étiqueté,
+     au lieu de sauter une année sur deux. Cinq caractères à budgéter, pas
+     quatre — « FY27e » porte un « e » que le graphique des barres n'a pas. */
+  const ECART_VAL=22;
+  /* L'ÉCART ENTRE DEUX ANNÉES SE DEMANDE À `X`, il ne se recalcule pas. Le
+     premier jet refaisait le calcul de marges à la main — et se trompait de
+     40 unités, que `X` réserve en plus de ML et MR. L'axe continuait donc de
+     sauter une année sur deux avec un pas calculé à 1, ce qui est le pire des
+     cas : le code croyait tout afficher. Une seule source de vérité pour la
+     géométrie, et c'est la projection elle-même. */
+  /* QUATRE CARACTÈRES, PAS CINQ. Les exercices estimés portaient un « e »
+     final — « FY27e » — qui coûtait un cinquième caractère à TOUTES les
+     étiquettes, puisque c'est la plus large qui fixe la taille de police. Sur
+     un téléphone, ce seul caractère faisait passer la police sous le plancher
+     de lisibilité et rétablissait le saut d'une année sur deux que l'on
+     cherchait justement à supprimer.
+     Il est retiré parce qu'il était le QUATRIÈME marqueur du même fait : un
+     exercice estimé se reconnaît déjà à son point creux, à son italique et à
+     sa couleur plus pâle, et la légende énonce le changement de base. On perd
+     une redondance, on gagne un axe complet et lisible. */
+  const _axP=axeAnnees(a1>a0?X(a0+1)-X(a0):W,4);
+  /* La gouttière est ici plus petite que celle d'`axeAnnees` (1 contre 2,5), et
+     ce n'est pas un oubli : reprendre la même rendait `ECART_AXE` exactement
+     égal à la largeur d'un slot, si bien que le test `>=` se perdait à
+     l'arrondi flottant et sautait une année sur deux alors que le pas calculé
+     valait bien 1. La taille de police a déjà réservé l'air nécessaire ; ce
+     garde-fou-ci ne sert plus qu'à empêcher un CHEVAUCHEMENT quand les points
+     ne sont pas régulièrement espacés — un exercice manquant dans la série. */
+  const ECART_AXE=4*_axP.px*AX_CHASSE+1;
   let dernierHaut=-1e9, dernierBas=-1e9, dernierAxe=-1e9;
-  const stepX=pts.length>8?2:1;
+  const stepX=_axP.pas;
   pts.forEach((p,i)=>{
     const cx=X(p.an),cy=Yp(p.per);
     g+=p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
@@ -1897,7 +1978,7 @@ function fdPerChart(F,fmtPer,W,b){
       g+='<text x="'+cx+'" y="'+ly+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.est?'#8a8aa6':'#c6c6e0')+'">'+Math.round(p.per)+'\u00d7</text>';}
     if((pts.length-1-i)%stepX===0&&cx-dernierAxe>=ECART_AXE){
       dernierAxe=cx;
-      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+'>FY'+String(p.an).slice(2)+(p.est?'e':'')+'</text>';}
+      g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis" style="font-size:'+_axP.px+'px"'+(p.est?' font-style="italic"':'')+'>FY'+String(p.an).slice(2)+'</text>';}
   });
   return {svg:'<svg class="fd-svg" id="fd-per" viewBox="0 0 '+W+' '+H+'">'+g+'</svg>',
     med:med,trous:trous.some(t=>t.an>=a0&&t.an<=a1)};
