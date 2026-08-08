@@ -813,19 +813,6 @@
    "label": "Tencent",
    "nom": "Tencent"
   },
-  "TSM": {
-   "fichier": "TSMC Fab5.JPG",
-   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/TSMC_Fab5.JPG/1920px-TSMC_Fab5.JPG",
-   "page": "https://commons.wikimedia.org/wiki/File:TSMC_Fab5.JPG",
-   "licence": "CC BY-SA 3.0",
-   "famille": "by-sa",
-   "auteur": "Peellden",
-   "largeur": 2000,
-   "hauteur": 1339,
-   "qid": "Q713418",
-   "label": "TSMC",
-   "nom": "TSMC"
-  },
   "UBSG.SW": {
    "fichier": "UBS Switzerland Headquarters Zürich (Ank Kumar) 03.jpg",
    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/UBS_Switzerland_Headquarters_Z%C3%BCrich_%28Ank_Kumar%29_03.jpg",
@@ -877,6 +864,19 @@
    "qid": "Q744149",
    "label": "Wells Fargo",
    "nom": "Wells Fargo"
+  },
+  "2330.TW": {
+   "fichier": "TSMC Fab5.JPG",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/TSMC_Fab5.JPG/1920px-TSMC_Fab5.JPG",
+   "page": "https://commons.wikimedia.org/wiki/File:TSMC_Fab5.JPG",
+   "licence": "CC BY-SA 3.0",
+   "famille": "by-sa",
+   "auteur": "Peellden",
+   "largeur": 2000,
+   "hauteur": 1339,
+   "qid": "Q713418",
+   "label": "TSMC",
+   "nom": "TSMC"
   }
  }
 }

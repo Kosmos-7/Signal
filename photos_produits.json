@@ -680,33 +680,6 @@
     }
    ]
   },
-  "TSM": {
-   "nom": "TSMC",
-   "label": "TSMC",
-   "categorie": "TSMC",
-   "candidats": [
-    {
-     "fichier": "S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07389-DSC07389.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg/1920px-S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
-     "licence": "CC0",
-     "famille": "libre",
-     "auteur": "FritzchensFritz",
-     "score": 6,
-     "poids": 115014
-    },
-    {
-     "fichier": "S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07387-DSC07387.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg/1920px-S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg",
-     "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg",
-     "licence": "CC0",
-     "famille": "libre",
-     "auteur": "FritzchensFritz",
-     "score": 6,
-     "poids": 99591
-    }
-   ]
-  },
   "UBSG.SW": {
    "nom": "UBS",
    "label": "UBS",
@@ -792,6 +765,33 @@
      "auteur": "Lumen Wilde",
      "score": 5,
      "poids": 75851
+    }
+   ]
+  },
+  "2330.TW": {
+   "nom": "TSMC",
+   "label": "TSMC",
+   "categorie": "TSMC",
+   "candidats": [
+    {
+     "fichier": "S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07389-DSC07389.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg/1920px-S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07389-DSC07389.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "FritzchensFritz",
+     "score": 6,
+     "poids": 115014
+    },
+    {
+     "fichier": "S3 Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome 460(ES)@86C922-4K09100-01-01 Taiwan 0738 39CCB1 DSC07387-DSC07387.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg/1920px-S3_Graphics%4090nm%28TSMC%29%40Destination2%28D2-GPU%29%40Chrome-400-Series%40Chrome_460%28ES%29%4086C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:S3_Graphics@90nm(TSMC)@Destination2(D2-GPU)@Chrome-400-Series@Chrome_460(ES)@86C922-4K09100-01-01_Taiwan_0738_39CCB1_DSC07387-DSC07387.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "FritzchensFritz",
+     "score": 6,
+     "poids": 99591
     }
    ]
   }

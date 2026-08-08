@@ -74,8 +74,8 @@ TAGS_EPS_IFRS = ("DilutedEarningsLossPerShare", "BasicEarningsLossPerShare")
 # Tickers de cotation d'origine → symbole US déposant à la SEC. Seuls figurent
 # ici des émetteurs dont le programme 20-F est ACTIF et vérifié — un mauvais
 # mapping ferait entrer les comptes d'une autre société (leçon MC.PA → Moelis
-# côté Finnhub). Les tickers déjà américains (PDD, TSM, SONY, ARM…) n'ont pas
-# besoin d'entrée : le registre de la SEC les connaît directement.
+# côté Finnhub). Les tickers déjà américains (PDD, SONY, ARM…) n'ont pas besoin
+# d'entrée : le registre de la SEC les connaît directement.
 US_EQUIV = {
     "ASML.AS": "ASML",   # ASML Holding — 20-F, comptes en EUR
     "SAP.DE":  "SAP",    # SAP SE — 20-F, EUR
@@ -83,6 +83,11 @@ US_EQUIV = {
     "AZN.L":   "AZN",    # AstraZeneca — 20-F, USD
     "HSBA.L":  "HSBC",   # HSBC Holdings — 20-F, USD
     "UBSG.SW": "UBS",    # UBS Group — 20-F, USD
+    # TSMC suit sa cotation de Taipei depuis le 08/08/2026 : sept exercices de
+    # son historique (2015-2021) viennent du 20-F déposé sous le symbole TSM,
+    # et le registre de la SEC ne connaît que celui-là. Sans cette ligne, le
+    # changement de ticker aurait coûté ces sept années en silence.
+    "2330.TW": "TSM",    # TSMC — 20-F, comptes en TWD
 }
 
 

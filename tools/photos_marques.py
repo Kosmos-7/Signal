@@ -205,7 +205,7 @@ LIEUX = {
 SCENES = {
     "AMD":       ["Lisa Su Computex", "Lisa Su CES", "Lisa Su AMD keynote"],
     "INTC":      ["Pat Gelsinger keynote", "Lip-Bu Tan Intel", "Intel keynote wafer"],
-    "TSM":       ["C. C. Wei TSMC", "Mark Liu TSMC"],
+    "2330.TW":   ["C. C. Wei TSMC", "Mark Liu TSMC"],
     "QCOM":      ["Cristiano Amon", "Qualcomm CES keynote"],
     "AVGO":      ["Hock Tan Broadcom"],
     "ARM":       ["Rene Haas Arm"],

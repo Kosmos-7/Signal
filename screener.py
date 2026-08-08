@@ -1452,8 +1452,11 @@ UNIVERS = [
     "CVX","COP","CAT","GE","DE","SHW","KO",
 
     # ─── ASIE ──────────────────────────────────────────────────────────────────
-    # ADR US existants (TSM Taiwan semis, SE Asie SEA, SONY Japon)
-    "TSM","SE","SONY",
+    # TSMC suit sa cotation de Taipei (2330.TW) depuis le 08/08/2026 : sur
+    # l'ADR, comptes en TWD et cours en USD interdisaient tout PER historique
+    # — onze exercices, aucun multiple. SE (Asie du Sud-Est) et SONY restent
+    # des ADR, faute d'équivalent local exploitable chez notre fournisseur.
+    "2330.TW","SE","SONY",
     # Asie directe via ADR — Chine (Phase 4 light, +3, prudent vs risque géopol)
     "BABA","TCEHY","PDD",
     # Japon via ADR (Phase 4 light, +2) — Toyota + Mitsubishi UFJ

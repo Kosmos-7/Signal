@@ -107,7 +107,7 @@ THEMES_CURES = [
                 # d'accélérateurs, c'est la capacité d'assemblage et les
                 # substrats. Ce maillon était absent de la première version.
                 "label": "Fonderie, équipement & packaging",
-                "tickers": ["TSM", "ASML.AS", "AMAT", "LRCX", "KLAC", "TER", "ASM.AS",
+                "tickers": ["2330.TW", "ASML.AS", "AMAT", "LRCX", "KLAC", "TER", "ASM.AS",
                             "8035.T", "6857.T", "SNPS", "CDNS",
                             "ASX", "6146.T", "4062.T"],
             },
@@ -350,7 +350,7 @@ PEA_INELIGIBLES = {
     "SONY":    "Japon, et titre coté sous forme d'ADR",
     "SE":      "Singapour / Îles Caïmans (Sea Limited), et ADR",
     "ASX":     "Taïwan, et titre coté sous forme d'ADR",
-    "TSM":     "Taïwan, et titre coté sous forme d'ADR",
+    "2330.TW": "Taïwan, hors EEE",
 }
 
 # Nombre de titres publiés par la watchlist PEA. Vingt : c'est ce qui a été

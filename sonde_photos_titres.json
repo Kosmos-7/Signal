@@ -892,15 +892,6 @@
     "TruistPlace.jpg"
    ]
   },
-  "TSM": {
-   "nom": "TSMC",
-   "secteur": "Technologie",
-   "candidats": 2,
-   "exemples": [
-    "TSMC booth in NTU.jpg",
-    "Tsmc factory hsinchu.JPG"
-   ]
-  },
   "UBSG.SW": {
    "nom": "UBS",
    "secteur": "Finance",
@@ -962,6 +953,15 @@
    "secteur": "Santé",
    "candidats": 0,
    "exemples": []
+  },
+  "2330.TW": {
+   "nom": "TSMC",
+   "secteur": "Technologie",
+   "candidats": 2,
+   "exemples": [
+    "TSMC booth in NTU.jpg",
+    "Tsmc factory hsinchu.JPG"
+   ]
   }
  }
 }

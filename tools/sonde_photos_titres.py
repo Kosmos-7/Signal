@@ -37,7 +37,7 @@ _SUFX = re.compile(
 
 # Noms d'usage là où la raison sociale publiée est tronquée ou trompeuse.
 NOMS = {
-    "TSM": "TSMC", "000660.KS": "SK Hynix", "005930.KS": "Samsung Electronics",
+    "2330.TW": "TSMC", "000660.KS": "SK Hynix", "005930.KS": "Samsung Electronics",
     "4063.T": "Shin-Etsu Chemical", "6146.T": "Disco Corporation",
     "8035.T": "Tokyo Electron", "6857.T": "Advantest", "4062.T": "Ibiden",
     "ASX": "ASE Group", "MUV2.DE": "Munich Re", "CS.PA": "AXA",
