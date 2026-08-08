@@ -401,6 +401,31 @@ check(f"aucune analyse ne recopie le score ({len(ANALYSES)} lues)",
 sentinelle("citations d'un sous-score v3 restant dans bull/bear/futur",
            cite_bareme, 48, len(ANALYSES) or 1)
 
+# MÊME MALADIE, AUTRE HORLOGE. Le score ne bouge qu'au run hebdomadaire ; le RSI et
+# le drawdown 52 semaines, eux, sont recalculés à CHAQUE rafraîchissement des cours,
+# tous les jours. Un « RSI à 30 » écrit dans un texte qui n'est réécrit que si le
+# score, le croisement ou le z-score changent est donc périmé en quelques séances :
+# mesuré le 08/08/2026, 37 citations de RSI et 15 de drawdown, dont aucune inventée
+# et la quasi-totalité désynchronisée de la fiche. Le générateur fournit désormais
+# les deux grandeurs marquées « NE PAS CHIFFRER » et l'interdit explicitement.
+# Ces deux tolérances ne doivent que DESCENDRE : si elles remontent, le garde a lâché.
+cite_rsi, cite_dd = [], []
+for t, a in ANALYSES.items():
+    for k, v in a.items():
+        if k.startswith("_") or not v:
+            continue
+        txt = v if isinstance(v, str) else " ".join(str(x) for x in v)
+        if re.search(r"RSI[^.;)]{0,25}?\d", txt):
+            cite_rsi.append(f"{t}.{k}")
+        if re.search(r"drawdown[^.;]{0,25}?[-–]?\s?<?b?>?\s?\d", txt, re.I):
+            cite_dd.append(f"{t}.{k}")
+check("le générateur interdit de chiffrer RSI et drawdown",
+      "NE PAS CHIFFRER" in open("generate_analyses.py", encoding="utf-8").read(), "")
+sentinelle("citations chiffrées du RSI (recalculé chaque jour)",
+           cite_rsi, 37, len(ANALYSES) or 1)
+sentinelle("citations chiffrées du drawdown 52s (recalculé chaque jour)",
+           cite_dd, 15, len(ANALYSES) or 1)
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:

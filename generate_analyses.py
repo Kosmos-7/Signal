@@ -384,7 +384,11 @@ def bucket_score(score):
 
 # Version du style/prompt éditorial — bumper FORCE la régénération de toutes les fiches
 # (la signature change), p.ex. après un changement de ton ou d'exigence de chiffrage.
-PROMPT_VERSION = "2026-08-univers-2niveaux"   # union watchlist+univers, prompt à 2 niveaux
+PROMPT_VERSION = "2026-08-sans-rsi-chiffre"   # RSI/drawdown fournis mais interdits de chiffre
+# Historique : "2026-08-univers-2niveaux" (union watchlist+univers, prompt à 2 niveaux).
+# Bump du 08/08/2026 — sans lui, la règle « ne chiffre pas le RSI » ne s'appliquerait
+# qu'aux fiches dont la signature bouge par ailleurs : les autres garderaient
+# indéfiniment un nombre écrit il y a des semaines face à une donnée quotidienne.
 
 
 def signature(stock, niveau):
@@ -570,9 +574,22 @@ def breakdown_block(stock, niveau):
         pente_txt = f", pente MM21 {fmt(pente,'%')}" if pente is not None else ""
         lines.append(f"- Croisement : {b['cross_type']}{depuis}{pente_txt}")
 
+    # CE QUI EST TROP VOLATIL POUR DÉCLENCHER UNE RÉÉCRITURE EST TROP VOLATIL
+    # POUR ÊTRE CHIFFRÉ. La signature de churn exclut délibérément le RSI et le
+    # drawdown au point de base près : « testé, un RSI 49→72 ne change PAS la
+    # signature » — c'est une bonne décision de coût, un appel API par point de
+    # RSI n'aurait aucun sens. Mais elle a une conséquence qui n'avait jamais
+    # été tirée : la prose, elle, CHIFFRAIT ces deux grandeurs, et le lecteur
+    # trouvait alors « RSI à 30 » dans le texte face à un RSI de 39 sur la
+    # fiche, mise à jour tous les jours par le rafraîchissement des cours.
+    # Mesuré le 08/08 sur les 104 fiches : 100 nombres divergeaient de la fiche,
+    # tous périmés et aucun inventé — l'IA recopie fidèlement ce qu'on lui
+    # donne, c'est la donnée qui a bougé sous le texte.
+    # Les deux grandeurs restent FOURNIES (elles cadrent le ton), mais elles
+    # sont désormais interdites de chiffre dans la prose.
     techniques = []
     if b.get("rsi") is not None:
-        techniques.append(f"RSI : {fmt(b.get('rsi'),'',0)}")
+        techniques.append(f"RSI : {fmt(b.get('rsi'),'',0)} (NE PAS CHIFFRER dans la prose)")
     if b.get("regression_z") is not None:
         fenetre = f" (fenêtre {b['regression_window_years']} ans)" if b.get("regression_window_years") else ""
         techniques.append(f"Z-score régression : {fmt(b.get('regression_z'),'σ',1)}{fenetre}")
@@ -583,7 +600,7 @@ def breakdown_block(stock, niveau):
     if b.get("drawdown_52w_pct") is not None or fibo:
         bouts = []
         if b.get("drawdown_52w_pct") is not None:
-            bouts.append(f"Drawdown 52s : {fmt(b.get('drawdown_52w_pct'),'%')}")
+            bouts.append(f"Drawdown 52s : {fmt(b.get('drawdown_52w_pct'),'%')} (NE PAS CHIFFRER dans la prose)")
         if fibo:
             bouts.append(f"Zone Fibo : {fibo}")
         lines.append("- " + "   |   ".join(bouts))
@@ -809,6 +826,13 @@ Date du jour : {today}.
   Dis ce que la note SIGNIFIE, jamais combien elle vaut. Les grandeurs stables
   (marge, croissance, multiple) restent les bienvenues : elles bougent lentement et
   elles portent du sens dans une phrase.
+- INTERDIT : chiffrer le RSI ou le drawdown 52 semaines. Ces deux-là sont recalculés
+  À CHAQUE RAFRAÎCHISSEMENT DES COURS, quotidiennement, alors que ton texte n'est
+  réécrit que lorsque le score, le croisement ou le z-score bougent. Un « RSI à 30 »
+  écrit aujourd'hui affronte un RSI à 39 sur la fiche dans trois jours. Ils te sont
+  donnés pour CADRER LE TON (survente ou surchauffe, proche ou loin des plus hauts),
+  jamais pour être recopiés : dis « en zone de survente », « à bonne distance de son
+  plus haut de l'année », pas le nombre.
 - INTERDIT : le tiret cadratin « — » comme ponctuation. C'est la signature la plus
   reconnaissable d'un texte de machine, et elle décrédibilise la fiche entière.
   Utilise une virgule pour une apposition, deux-points pour une explication, ou

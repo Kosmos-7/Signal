@@ -5,6 +5,47 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### L'analyse IA et la fiche ne parlaient pas au même rythme
+
+Question posée : ce que dit l'IA doit coller aux données de la fiche, sinon
+« on se trompe quelque part ou la manière de calculer n'est pas la même ».
+Vérification faite sur les 104 fiches, **216 nombres confrontés** un à un à ce
+que la fiche affiche, avec les archives hebdomadaires comme arbitre :
+
+| verdict | nombre |
+|---|---|
+| identiques | 116 |
+| **périmés** (justes le jour où ils ont été écrits) | 95 |
+| invérifiables (grandeur absente des archives) | 20 |
+| **inventés** | **0** |
+
+Aucune des deux causes soupçonnées n'est la bonne. Le générateur envoie à l'IA
+**exactement les champs que la fiche affiche**, avec la période collée à chaque
+grandeur (« croissance CA = dernier trimestre publié en glissement annuel »,
+« marge nette = TTM ») et la consigne de n'inventer aucun multiple absent : il
+n'y a pas de divergence de définition. Et l'IA recopie fidèlement : zéro nombre
+inventé sur 216.
+
+La vraie cause est une troisième, plus banale et plus tenace : **le texte et la
+donnée se rafraîchissent sur deux horloges différentes.** Le texte n'est réécrit
+que si le score, le croisement ou le z-score bougent — décision de coût
+délibérée, un appel API par point de RSI n'aurait aucun sens. Mais le RSI et le
+drawdown, eux, sont recalculés **tous les jours** avec les cours. Un « RSI à
+30 » juste le jour où il est écrit affronte un RSI à 39 trois séances plus tard.
+Quant aux 78 fiches sur 104 dont le palier de score a bougé depuis leur
+rédaction (écart médian 9 points, maximum 43 : Goldman Sachs 30 → 73, Allianz
+30 → 71), elles datent toutes d'avant la note v4 et le prochain run éditorial
+complet les reprendra.
+
+Correction de fond : **ce qui est trop volatil pour déclencher une réécriture
+est trop volatil pour être chiffré.** Le RSI et le drawdown restent fournis à
+l'IA — ils cadrent le ton, survente ou surchauffe, proche ou loin des plus hauts
+— mais ils sont désormais marqués « NE PAS CHIFFRER » et explicitement interdits
+de nombre dans la prose. Deux sentinelles de test comptent les citations
+restantes (37 RSI, 15 drawdowns) et n'autorisent que la descente.
+
+---
+
 ### La fiche d'Adyen se contredisait elle-même
 
 Elle notait la croissance à **+19,2 % par an** et écrivait, deux centimètres
