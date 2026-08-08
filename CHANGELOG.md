@@ -8,7 +8,19 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 ### Une watchlist quantique, et ce qu'elle a d'inconfortable
 
 Quatrième liste du site, et la première qui publie **moins qu'elle ne
-déclare** : vingt-quatre titres portent le périmètre, dix seulement sont lus.
+déclare** : vingt-neuf titres portent le périmètre, vingt sont lus.
+
+**Dix au départ, vingt après un premier coup d'œil du propriétaire** (« il
+manque pas mal d'acteurs clés »). Le diagnostic était juste, la cause
+instructive : les acteurs ne manquaient pas au périmètre, ils étaient déclarés
+et **masqués par le bornage**. À dix, la coupe tombait à 51 points et emportait
+d'un seul geste trois des quatre sociétés dont le quantique est le métier, IBM,
+les deux japonais et le seul fabricant coté de réfrigérateurs à dilution. Un
+bornage trop serré ne sélectionne plus, il ampute — un test encadre désormais
+le rapport entre déclaré et publié. Cinq titres sont venus s'ajouter, dont un
+maillon neuf, *matériaux et fonderie* : le silicium 28 purifié isotopiquement
+de Soitec, sans lequel un qubit de spin perd sa cohérence, et la fonderie qui
+grave les puces photoniques 300 mm de PsiQuantum.
 
 Le secteur pose un problème que les autres n'ont pas : **il n'y a presque rien
 à noter.** Les sociétés dont c'est le métier perdent de l'argent et ne pèsent

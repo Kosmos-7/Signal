@@ -55,3 +55,30 @@ contrainte a de concret — la monnaie commune — plutôt que par un objet
 financier, qui dirait « bourse » et non « Europe ». Les autres candidats du
 run le montrent bien : la requête « market stall price signs » a ramené des
 places de marché biélorusses des années 1940, hors sujet complet.
+
+## Informatique quantique
+
+- Fichier : `assets/themes/quantique.jpg`
+- Source : File:Gold Ion Trap (6029437325).jpg
+- Page : https://commons.wikimedia.org/wiki/File:Gold_Ion_Trap_(6029437325).jpg
+- Licence : Domaine public (National Institute of Standards and Technology)
+- Requête : « NIST ion trap quantum »
+
+Un piège à ions doré, monté sur son support et câblé : l'objet physique au
+cœur de la voie des ions piégés, celle d'IonQ et de Quantinuum. Deux détours
+avant d'y arriver, l'un et l'autre instructifs.
+
+Le premier jeu de requêtes commençait par « IBM Quantum System One » et a
+rapporté quatre candidats : deux cryostats siglés IBM Q, une conférence de
+presse et une salle de réunion. Le nom d'un constructeur ramène ses journées
+presse, pas ses machines. Et une watchlist SECTORIELLE ne peut de toute façon
+pas s'illustrer du logo d'un de ses membres : ce serait le mettre en avant sur
+le dos des dix-neuf autres.
+
+On cherche donc par le LABORATOIRE. Les agences fédérales américaines
+produisent des œuvres du domaine public par statut, et le NIST est l'un des
+meilleurs laboratoires d'ions piégés au monde, avec une photographie de
+laboratoire remarquable : les cinq candidats du second run en viennent tous.
+Le finaliste écarté, une micrographie de piège planaire d'une symétrie
+saisissante, portait « NIST » gravé en son centre et virait au jaune acide —
+superbe en soi, discordant sur des cartes bleu nuit.
