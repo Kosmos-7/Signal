@@ -84,10 +84,13 @@ différentes** selon la page : de 0,40 rem à 0,58 rem, soit **6,9 px** au plus
 petit. La ligne de crédit, celle qui porte l'obligation CC-BY, était la plus
 petite de toutes.
 
-Toutes ramenées à deux valeurs : 0,62 rem pour la légende, 0,55 rem pour le
-crédit — mesuré après coup à 9,9 px et 8,8 px, sur bureau comme sur mobile.
-Balayage de contrôle : 93 fiches × 3 largeurs, aucun débordement, aucun texte
-rogné.
+Toutes ramenées à deux valeurs. Premier réglage à 0,62 / 0,55 rem, jugé trop
+gros par le propriétaire — c'est la LÉGENDE d'une image, elle n'a pas à
+concurrencer le texte. Réglage retenu : **0,54 rem pour la légende, 0,50 rem
+pour le crédit**, mesuré à 8,64 px et 8 px, identiques sur bureau et sur
+mobile, identiques sur les trois pages. Toujours nettement au-dessus des
+6,9 px d'origine, sans peser dans la page. Balayage de contrôle : 93 fiches
+× 3 largeurs, aucun débordement, aucun texte rogné.
 
 ### Le bandeau est enfin le même objet sur les quatre onglets
 
