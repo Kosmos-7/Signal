@@ -16,8 +16,12 @@
 # que les listes sur lesquelles le projet a réellement quelque chose à dire, et
 # on assume de ne pas couvrir le reste plutôt que de le couvrir mal.
 # Le thème « quantique » (08/08/2026, demande du propriétaire) est le premier
-# ajout depuis ce resserrement, et le premier à publier MOINS qu'il ne déclare :
-# vingt-quatre titres portent le périmètre, dix seulement sont lus.
+# ajout depuis ce resserrement. Il a changé trois fois de forme dans la journée
+# — dix publiés sur vingt-quatre déclarés, puis vingt sur vingt-neuf, puis les
+# seuls pure players — et c'est la dernière version qui dit le mieux le secteur :
+# il n'existe que dix sociétés cotées dont le quantique soit le métier, et six
+# ne sont pas encore notables. Une watchlist a le droit d'être courte quand son
+# sujet l'est.
 # Les thèmes retirés (santé, conso, défense, robotique, compounders, mémoire
 # et électrification en tant que thèses autonomes, décote et qualité calculées)
 # restent dans l'historique git — leur restauration est un revert, pas un
@@ -201,16 +205,13 @@ THEMES_CURES = [
     {
         "id": "quantique",
         "label": "Informatique quantique",
-        "sous_titre": "Les 20 meilleurs scores d'un secteur qui ne gagne pas encore d'argent",
+        "sous_titre": "Les sociétés dont c'est le seul métier",
         "kind": "these",
         "thesis": (
-            "Qui vend quelque chose aujourd'hui dans le quantique ? Presque personne. "
-            "Cette liste montre les deux réponses qui existent : quelques sociétés qui "
-            "ne font QUE ça et perdent de l'argent, et de grands groupes qui construisent "
-            "des machines sans que cela pèse sur leurs comptes."
+            "À quoi ressemble un secteur qui n'a pas encore de client ? À cette "
+            "liste : les sociétés cotées dont l'informatique quantique est le "
+            "métier, et rien d'autre. Aucune n'est rentable, et c'est le sujet."
         ),
-        # L'INVERSION D'UN THÈME DE RECHERCHE N'EST PAS UN RETOURNEMENT DE
-        # MARCHÉ, c'est un verdict scientifique. Écrit comme tel.
         "inversion": (
             "La correction d'erreurs ne descend pas assez vite en coût : il faut toujours "
             "des milliers de qubits physiques pour un seul qubit logique, l'horizon d'un "
@@ -220,133 +221,49 @@ THEMES_CURES = [
             "produit plusieurs fois, et une technologie de qubit qui écrase les autres, ce "
             "qui rendrait sans objet la moitié des paris de cette liste."
         ),
-        # LE BIAIS EST ICI PLUS IMPORTANT QUE LA THÈSE, parce que la note ne
-        # sait pas mesurer ce qu'on lui donne. On le dit avant qu'on le lise.
         "biais": (
             "LA NOTE NE SAIT PAS NOTER CES SOCIÉTÉS, et il faut le savoir avant de lire "
             "le classement. La grille mesure la qualité d'un business et le prix payé pour "
             "elle : marge, rentabilité du capital, multiple de bénéfices. Une société sans "
             "bénéfice n'a pas de multiple, une société sans chiffre d'affaires n'a pas de "
-            "marge. Les scores les plus bas de cette liste ne disent donc pas « mauvaise "
-            "société », ils disent « la grille ne s'applique pas ». À l'inverse, les scores "
-            "les plus hauts récompensent des groupes dont le quantique ne représente pas "
-            "un centième de l'activité : ils sont bien notés pour tout le reste.\n\n"
-            "C'est aussi le thème le plus CONCENTRÉ et le plus volatil du site. Les "
-            "sociétés qui ne font que du quantique montent et descendent ensemble, sur des "
-            "annonces plus que sur des résultats, et avec des amplitudes que rien dans la "
-            "watchlist principale n'approche.\n\n"
+            "marge. Les scores de cette liste ne disent donc pas « bonne » ou « mauvaise "
+            "société », ils disent surtout à quel point la grille ne s'applique pas. Un "
+            "écart de cinq points n'y signifie rien.\n\n"
+            "C'est le thème le plus CONCENTRÉ et le plus volatil du site, de très loin. "
+            "Ces sociétés montent et descendent ensemble, sur des annonces plus que sur "
+            "des résultats, avec des amplitudes que rien dans la watchlist principale "
+            "n'approche. Plusieurs vivent de commande publique.\n\n"
             "Deux dérogations assumées, écrites plutôt que cachées. Le projet n'inclut "
             "d'ordinaire que des sociétés de plus de 25 milliards de dollars : elle est "
-            "levée ici pour les seules sociétés dont le quantique est le métier, sans quoi "
-            "la liste n'aurait contenu aucune d'entre elles. Et plusieurs de ces titres ont "
-            "moins de cinq ans de cotation : leur droite de tendance longue n'est pas "
-            "exploitable, et leur fiche le dit."
+            "levée ici, sans quoi la liste serait vide. Et ces titres ont moins de cinq ans "
+            "de cotation : leur droite de tendance longue n'est pas exploitable, et leur "
+            "fiche le dit.\n\n"
+            "Enfin, la liste ne dit rien de ceux qui VENDENT au secteur — cryogénie, "
+            "lasers, instruments, substrats — et qui sont pourtant les seuls à facturer "
+            "aujourd'hui. Plusieurs figurent dans la watchlist principale."
         ),
-        # LES QUATRE INTRODUCTIONS EN BOURSE DE 2026 SONT ABSENTES, ET CE N'EST
-        # PAS UN OUBLI. Mesuré le 08/08/2026 contre Yahoo : Quantinuum (QNT,
-        # 45 séances), Infleqtion (INFQ, 120), Xanadu (XNDU, 96) et Horizon
-        # Quantum (HQ, 97) n'ont pas les 200 séances que réclament la moyenne
-        # mobile 200 jours et le RSI. Le screener les écarterait au run, et une
-        # fiche sans momentum serait une fiche à trois quarts vide. Elles
-        # entreront d'elles-mêmes, sans rien changer ici, dès que leur
-        # historique suffira — la première vers avril 2027 pour Infleqtion.
-        # Quantinuum est de loin l'absence la plus coûteuse : c'est le plus gros
-        # pure-player coté (~15 Md$), issu de Honeywell, qui reste dans la liste
-        # au maillon des constructeurs et porte donc encore l'exposition.
-        "maillons": [
-            {
-                # Le secteur au sens strict : le quantique est leur métier, pas
-                # une ligne de recherche. Aucune n'est rentable, aucune
-                # n'atteint le seuil de taille habituel du projet — c'est pour
-                # elles que la dérogation existe.
-                #
-                # « MÉTIER PRINCIPAL » ET NON « SEUL MÉTIER » : le libellé a été
-                # corrigé le 08/08/2026, le jour même où il a été écrit. IonQ a
-                # bouclé le 31/07/2026 le rachat de SkyWater (1,8 Md$, feu vert
-                # après partage des voix à la FTC), une fonderie de semi-
-                # conducteurs dont l'essentiel du carnet — ASIC pour la défense
-                # et l'aérospatial — n'a rien de quantique. S'y ajoutent ID
-                # Quantique, Capella et Vector Atomic, qui relèvent du réseau,
-                # du spatial et des horloges atomiques. Le premier titre de ce
-                # maillon n'est donc DÉJÀ plus un pur pari quantique, et écrire
-                # « leur seul métier » aurait été faux dès la publication.
-                "label": "Le quantique comme métier principal",
-                "tickers": ["IONQ", "RGTI", "QBTS", "QUBT"],
-            },
-            {
-                # Ceux qui construisent vraiment des machines et les opèrent.
-                # Pour tous, le quantique est une ligne de recherche : Honeywell
-                # a fait coter Quantinuum en juin 2026 et en reste actionnaire,
-                # Fujitsu et Hitachi opèrent des machines avec RIKEN, Intel
-                # poursuit la voie des qubits de silicium.
-                "label": "Constructeurs · machines et laboratoires",
-                "tickers": ["IBM", "GOOGL", "MSFT", "AMZN", "HON", "INTC",
-                            "6702.T", "6501.T", "6701.T"],
-            },
-            {
-                # AVANT LA MACHINE, LE SUBSTRAT. Un qubit de spin se grave dans
-                # du silicium 28 isotopiquement purifié — le silicium naturel
-                # contient un isotope à spin nucléaire qui détruit la cohérence.
-                # Un qubit photonique se grave, lui, dans une fonderie 300 mm
-                # classique. Ce maillon est le plus concret du thème : ces
-                # sociétés livrent aujourd'hui, sur des références nommées.
-                "label": "Matériaux & fonderie · le substrat des qubits",
-                "tickers": ["STMPA.PA", "GFS", "SOI.PA"],
-            },
-            {
-                # LE MAILLON QUI VEND DES PELLES. Un ordinateur quantique est
-                # d'abord un objet de physique expérimentale : un cryostat à
-                # dilution, des lasers, de l'optique, des instruments de mesure
-                # et un vide poussé. Ces sociétés-là facturent aujourd'hui, à
-                # tous les acteurs du secteur, gagnants comme perdants.
-                #
-                # DEUX PIÈGES DE CE MAILLON, vérifiés le 08/08/2026, à ne pas
-                # « corriger » plus tard de bonne foi :
-                # · Oxford Instruments n'est PLUS le cryogéniste qu'on croit.
-                #   NanoScience, qui fabriquait ses réfrigérateurs à dilution
-                #   (59 M£ de CA), a été cédée à Quantum Design le 05/01/2026.
-                #   Ce qui reste est plus pertinent, pas moins : Plasma
-                #   Technology vend les graveurs qui FABRIQUENT les puces
-                #   supraconductrices — Rigetti lui en a acheté un en mai 2026.
-                # · FormFactor est, depuis cette cession, le SEUL fabricant coté
-                #   de réfrigérateurs à dilution : Bluefors, Janis, Lake Shore
-                #   et Maybell sont tous en mains privées.
-                "label": "Cryogénie, lasers & instruments",
-                "tickers": ["KEYS", "COHR", "LITE", "MKSI", "FORM",
-                            "OXIG.L", "6965.T", "6302.T", "AI.PA"],
-            },
-            {
-                # La simulation classique de circuits quantiques, les ponts
-                # entre calculateur classique et calculateur quantique, et le
-                # réseau qui reliera un jour les machines entre elles —
-                # l'intrication à distance est le prérequis d'un calculateur
-                # distribué, et c'est un problème de télécoms autant que de
-                # physique.
-                "label": "Simulation, réseau & logiciel",
-                "tickers": ["NVDA", "CSCO"],
-            },
-            {
-                # L'AUTRE MOITIÉ DU SUJET, celle qui a déjà des clients : se
-                # protéger d'une machine qui n'existe pas encore. Les normes
-                # NIST de cryptographie post-quantique sont publiées, les
-                # migrations sont budgétées, et ces deux-là les vendent.
-                "label": "Sécurité post-quantique",
-                "tickers": ["HO.PA", "IFX.DE"],
-            },
-        ],
-        # VINGT PUBLIÉS SUR VINGT-NEUF DÉCLARÉS. Le périmètre déclaré doit être
-        # honnête — c'est lui qui mesure la couverture et qui alerte si une
-        # place de cotation tombe. La liste lue, elle, doit tenir sur un écran.
+        # POURQUOI CETTE LISTE EST COURTE, ET POURQUOI ELLE VA S'ALLONGER.
+        # Il n'existe au monde que DIX pure players quantiques cotés, et six
+        # d'entre eux sont innotables en août 2026 : cinq se sont introduits en
+        # bourse cette année et n'ont pas les 200 séances qu'exigent la moyenne
+        # mobile 200 jours et le RSI, le sixième (Arqit) pèse 0,4 Md$ sans
+        # objectif de cours consensus. Tous sont au registre des écartés avec
+        # la date à laquelle leur historique suffira. La liste passera donc
+        # d'elle-même de quatre à neuf titres entre décembre 2026 et avril 2027,
+        # sans que personne ne touche à ce fichier — d'où un plafond fixé à dix
+        # dès maintenant, qui n'est pas une fiction mais un rendez-vous.
         #
-        # DIX AU DÉPART, VINGT DEPUIS LE 08/08 (retour du propriétaire : « il
-        # manque pas mal d'acteurs clés »). Le diagnostic était juste et la
-        # cause instructive : les acteurs ne manquaient pas au PÉRIMÈTRE, ils
-        # étaient déclarés et masqués par le bornage. À dix, la liste coupait
-        # sous 51 points et perdait d'un coup les trois quarts des sociétés dont
-        # le quantique est le métier, IBM, les deux japonais et le seul
-        # fabricant coté de réfrigérateurs à dilution. Un bornage trop serré ne
-        # sélectionne plus, il ampute.
-        "top": 20,
+        # ELLE DÉROGE À LA RÈGLE DES VINGT TITRES DÉCLARÉS, et c'est le seul
+        # thème qui la mérite : un secteur qui compte dix sociétés cotées ne
+        # peut pas en déclarer vingt sans mentir. La règle protégeait contre le
+        # thème alibi, bricolé avec trois titres ; ici c'est l'inverse, le
+        # périmètre est petit parce que le SECTEUR est petit, et le dire est
+        # l'information principale de la page.
+        #
+        # Pas de maillons : à quatre titres, une structure en couches serait un
+        # décor. Elle reviendra si la liste se remplit.
+        "tickers": ["IONQ", "RGTI", "QBTS", "QUBT"],
+        "top": 10,
     },
     # « Financials » retirée le 06/08/2026 (décision propriétaire, « pour le
     # moment ») : la watchlist secteur n'est plus publiée. Ses 33 tickers

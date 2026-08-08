@@ -1498,6 +1498,25 @@ UNIVERS = [
 # automatiquement scoré — c'est ce qui garantit qu'aucun thème ne référence un
 # titre absent de l'univers. Les symboles recalés par la validation Yahoo sont
 # documentés dans themes.ECARTES_VALIDATION.
+# ── HÉRITAGE DE LA CHAÎNE QUANTIQUE (08/08/2026) ──────────────────────────────
+# Ces douze titres sont entrés dans l'univers avec la watchlist quantique, qui
+# couvrait alors toute la chaîne — des fondeurs aux cryogénistes. Le même jour,
+# la watchlist a été resserrée sur les seuls PURE PLAYERS (décision
+# propriétaire), et sans cette liste ils sortiraient de l'univers : douze
+# sociétés validées contre Yahoo perdraient leur note, et sept fiches déjà
+# publiées deviendraient orphelines.
+#
+# C'est le même choix qu'au retrait du thème « financials » le 06/08 : on retire
+# une LISTE, pas des sociétés. Elles restent scorées et candidates au top 30.
+UNIVERS += [
+    "IBM",            # opérateur du cloud quantique, feuille de route publiée
+    "KEYS", "MKSI", "FORM",     # instruments, vide, cryogénie
+    "OXIG.L",                   # graveurs des puces supraconductrices
+    "GFS", "STMPA.PA", "SOI.PA",  # fonderie et substrats
+    "6701.T", "6702.T",         # NEC, Fujitsu
+    "6965.T", "6302.T",         # Hamamatsu, Sumitomo Heavy
+]
+
 UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 
 # ── JUSTIFICATION ─────────────────────────────────────────────────────────────

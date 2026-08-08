@@ -48,7 +48,19 @@ check("chaque thème a thèse, inversion et biais",
       all(t.get("thesis") and t.get("inversion") and t.get("biais") for t in themes.THEMES))
 check("les thèmes calculés publient leur règle en clair",
       all(t.get("regle_texte") for t in themes.THEMES_CALCULES))
-check("aucun thème curé étriqué", all(len(t["tickers"]) >= 20 for t in themes.THEMES_CURES))
+# UNE SEULE EXCEPTION À LA RÈGLE DES VINGT, et elle est nommée. La règle
+# protège contre le thème alibi, bricolé avec trois titres pour faire nombre.
+# « quantique » est le cas inverse : son périmètre est petit parce que le
+# SECTEUR l'est — dix pure players cotés au monde, dont six pas encore
+# notables — et le dire est l'information principale de la page. Nommer
+# l'exception plutôt que baisser le seuil garde la règle mordante pour tous
+# les autres, et oblige la prochaine à être justifiée elle aussi.
+ETRIQUE_ADMIS = {"quantique"}
+check("aucun thème curé étriqué, hors exception nommée",
+      all(len(t["tickers"]) >= 20 for t in themes.THEMES_CURES
+          if t["id"] not in ETRIQUE_ADMIS),
+      str([t["id"] for t in themes.THEMES_CURES
+           if t["id"] not in ETRIQUE_ADMIS and len(t["tickers"]) < 20]))
 # Un thème de chaîne de valeur ne vaut que si chaque maillon a un représentant.
 # On ne peut pas tester la sémantique, mais on peut tester la taille minimale
 # qui rend une chaîne à six maillons crédible.
@@ -64,28 +76,26 @@ check("infra-ia couvre assez de titres pour six maillons",
 print("\n— Le thème quantique —")
 _q = themes.THEMES_BY_ID.get("quantique")
 check("le thème quantique existe et publie un top borné",
-      _q and _q.get("top") == 20, str(_q and _q.get("top")))
-# LE BORNAGE DOIT SÉLECTIONNER, PAS AMPUTER. À dix publiés sur vingt-quatre, la
-# liste coupait sous 51 points et perdait les trois quarts des sociétés dont le
-# quantique est le métier — le propriétaire l'a vu tout de suite (« il manque
-# pas mal d'acteurs clés »). On garde une marge, sans la laisser devenir
-# décorative : entre le déclaré et le publié il doit rester du choix.
-check("il déclare plus large qu'il ne publie, sans amputer",
-      _q and _q["top"] + 5 <= len(_q["tickers"]) <= _q["top"] * 3,
-      f"{len(_q['tickers']) if _q else 0} déclarés pour {_q['top'] if _q else 0} publiés")
-# Chaque maillon doit survivre au bornage : un thème de chaîne dont une couche
-# entière disparaît du classement ne raconte plus la chaîne.
-check("le thème garde une chaîne complète, pas deux ou trois couches",
-      _q and len(_q["maillons"]) >= 5, str(len(_q["maillons"]) if _q else 0))
-check("les pure-players forment un maillon à part, pas un mélange",
-      _q and _q["maillons"][0]["tickers"] == ["IONQ", "RGTI", "QBTS", "QUBT"])
-# IonQ a racheté SkyWater (fonderie, 1,8 Md$, 31/07/2026) : son métier n'est
-# plus SEULEMENT le quantique. Le libellé du maillon ne doit donc pas le
-# prétendre — c'est la doctrine « aucun fait qui dépende du run », appliquée
-# à un fait qui a changé quinze jours avant la publication.
-check("le maillon ne prétend pas que ces sociétés n'ont qu'un seul métier",
-      _q and "seul métier" not in _q["maillons"][0]["label"],
-      _q and _q["maillons"][0]["label"])
+      _q and _q.get("top") == 10, str(_q and _q.get("top")))
+# LE PLAFOND EST UN RENDEZ-VOUS, PAS UNE FICTION. La liste publie quatre titres
+# et son plafond en vaut dix : c'est voulu. Les cinq introductions de 2026
+# franchiront les 200 séances entre décembre et avril, et entreront sans que
+# personne ne touche à ce fichier. Le plafond doit donc rester au-dessus du
+# déclaré — s'il descendait à sa taille, la liste cesserait de pouvoir grandir.
+check("le plafond laisse la place aux entrées à venir",
+      _q and _q["top"] >= len(_q["tickers"]),
+      f"{len(_q['tickers']) if _q else 0} déclarés, plafond {_q['top'] if _q else 0}")
+check("la liste ne contient QUE des pure players",
+      _q and set(_q["tickers"]) == {"IONQ", "RGTI", "QBTS", "QUBT"},
+      str(sorted(_q["tickers"]) if _q else []))
+# Les douze titres de la chaîne (fondeurs, cryogénistes, instrumentistes) sont
+# sortis du THÈME le 08/08 mais restent dans l'UNIVERS du screener — même choix
+# qu'au retrait de « financials ». Sans cela, douze sociétés validées perdraient
+# leur note et sept fiches publiées deviendraient orphelines.
+_chaine = {"IBM", "KEYS", "MKSI", "FORM", "OXIG.L", "GFS", "STMPA.PA",
+           "SOI.PA", "6701.T", "6702.T", "6965.T", "6302.T"}
+check("la chaîne quittée reste dans l'univers du screener",
+      _chaine <= set(screener.UNIVERS), str(sorted(_chaine - set(screener.UNIVERS))))
 # La dérogation au seuil de taille et celle à l'historique doivent être ÉCRITES
 # dans le texte que le lecteur voit, pas seulement dans un commentaire de code.
 check("les deux dérogations sont annoncées au lecteur",
