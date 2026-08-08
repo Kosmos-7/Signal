@@ -1373,59 +1373,31 @@ function fdApresRupture(an){
   }
   return {an:an,coupe:null};
 }
-/* Phrases de synthèse (décision propriétaire du 06/08) : la table donne les
-   points, ces phrases donnent la TRAJECTOIRE — TCAm du CA avec ses années de
-   baisse, marge nette moyenne et son évolution, multiple moyen réellement payé.
-   Règles : purement factuel (aucun « solide » ou « excellent », le lecteur
-   juge) ; chaque phrase exige assez d'exercices pour ne pas sur-affirmer
-   (≥ 4) ; une période avec pertes dit ses pertes, pas une marge moyenne qui
-   les maquillerait. Pur : ne lit que les exercices publiés. */
+/* CE QUI RESTE SOUS LE GRAPHIQUE : UNE NOTICE, PLUS UNE ANALYSE.
+
+   Trois phrases de synthèse vivaient ici depuis le 06/08 — la croissance
+   annuelle moyenne du chiffre d'affaires et ses années de baisse, la marge
+   nette moyenne et son évolution, le multiple médian réellement payé. Elles
+   sont retirées le 08/08 : « on a déjà des textes d'analyse sur le reste de
+   la fiche. » C'est exact, et le doublon jouait contre les deux — le résumé
+   éditorial, lui, relie ces faits à une thèse, là où ces phrases les
+   récitaient. Le graphique porte déjà la trajectoire, le relevé porte déjà
+   chaque montant et chaque variation.
+
+   NE SURVIT QUE L'AVERTISSEMENT DE PÉRIMÈTRE, parce qu'il n'est pas une
+   analyse : il dit pourquoi des exercices MANQUENT. Une fiche qui démarre en
+   2023 quand les voisines remontent à dix ans passe pour une jeune société,
+   et rien d'autre sur la page ne détrompe le lecteur. Le retirer rendrait sa
+   troncature silencieuse — exactement le défaut corrigé ce matin sur Adyen et
+   Western Digital. */
 function fdSynthese(an,coupe,dev){
-  const fr=v=>v.toFixed(1).replace('.',',');
-  const ph=[];
-  /* Une série tronquée le DIT. Sans cette phrase, une fiche qui démarre en
-     2023 quand les voisines remontent à dix ans passe pour une jeune société,
-     et le lecteur n'a aucun moyen de savoir qu'on a écarté quelque chose. */
-  if(coupe){
-    ph.push('Les exercices antérieurs à <b>'+coupe.apres.fin.slice(0,4)+'</b> ne sont pas repris : '
-      +'le chiffre d\'affaires y était publié sur un autre périmètre ('
-      +fdMoney(coupe.avant.ca,dev)+' en '+coupe.avant.fin.slice(0,4)+' contre '
-      +fdMoney(coupe.apres.ca,dev)+' l\'exercice suivant, sans que le bénéfice '
-      +'ni le nombre d\'actions ne bougent). Une trajectoire mesurée à travers '
-      +'cette marche serait fausse.');
-  }
-  const cas=an.filter(r=>r.ca>0);
-  if(cas.length>=4){
-    const n=cas.length,y0=+cas[0].fin.slice(0,4),y1=+cas[n-1].fin.slice(0,4);
-    let baisse=0;for(let i=1;i<n;i++)if(cas[i].ca<cas[i-1].ca)baisse++;
-    if(y1>y0){
-      const tcam=(Math.pow(cas[n-1].ca/cas[0].ca,1/(y1-y0))-1)*100;
-      ph.push('Sur les '+n+' derniers exercices publiés ('+y0+'-'+y1+'), le chiffre d\'affaires a '
-        +(tcam>=0?'progressé':'reculé')+' de <b>'+fr(Math.abs(tcam))+' % par an</b> en moyenne, '
-        +(baisse===0?'sans exercice de baisse.':'avec '+baisse+' exercice'+(baisse>1?'s':'')+' de baisse.'));
-    }
-  }
-  const marges=an.filter(r=>r.ca>0&&r.rn!=null);
-  if(marges.length>=4){
-    const pertes=marges.filter(r=>r.rn<0).length;
-    if(pertes){
-      ph.push('La période compte <b>'+pertes+' exercice'+(pertes>1?'s':'')+' en perte</b>.');
-    }else{
-      const m=marges.map(r=>r.rn/r.ca*100);
-      ph.push('Marge nette moyenne de <b>'+fr(m.reduce((a,v)=>a+v,0)/m.length)+' %</b>, passée de '
-        +fr(m[0])+' % à '+fr(m[m.length-1])+' % entre le premier et le dernier exercice.');
-    }
-  }
-  const pers=an.filter(r=>r.per!=null).map(r=>r.per);
-  if(pers.length>=4){
-    // Médiane et non moyenne : une seule année de bulle (NVIDIA 2021 : 300×)
-    // écrase une moyenne, la médiane dit le multiple TYPIQUE de la période.
-    const srt=pers.slice().sort((a,b)=>a-b), n=srt.length;
-    const med=n%2?srt[(n-1)/2]:(srt[n/2-1]+srt[n/2])/2;
-    ph.push('Le marché a payé ces bénéfices <b>'+Math.round(med)+'× en médiane</b> sur la période (de '
-      +Math.round(Math.min(...pers))+'× à '+Math.round(Math.max(...pers))+'×).');
-  }
-  return ph;
+  if(!coupe)return [];
+  return ['Les exercices antérieurs à <b>'+coupe.apres.fin.slice(0,4)+'</b> ne sont pas repris : '
+    +'le chiffre d\'affaires y était publié sur un autre périmètre ('
+    +fdMoney(coupe.avant.ca,dev)+' en '+coupe.avant.fin.slice(0,4)+' contre '
+    +fdMoney(coupe.apres.ca,dev)+' l\'exercice suivant, sans que le bénéfice '
+    +'ni le nombre d\'actions ne bougent). Une trajectoire mesurée à travers '
+    +'cette marche serait fausse.'];
 }
 // Profondeur DESSINÉE (le tableau dépliable, lui, montre tout l'accumulé).
 const FD_ANS=10, FD_TRIM=12;
