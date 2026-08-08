@@ -1,7 +1,7 @@
 # themes.py — Taxonomie des watchlists thématiques (source unique de vérité)
 #
-# Signal publie QUATRE listes : la watchlist principale (top 30 de l'univers,
-# toutes catégories) et trois vues thématiques.
+# Signal publie CINQ listes : la watchlist principale (top 30 de l'univers,
+# toutes catégories) et quatre vues thématiques.
 #
 # ARCHITECTURE — « un seul scoring, N projections »
 # Chaque titre est scoré EXACTEMENT UNE FOIS par screener.py. Une watchlist
@@ -22,7 +22,14 @@
 # il n'existe que dix sociétés cotées dont le quantique soit le métier, et six
 # ne sont pas encore notables. Une watchlist a le droit d'être courte quand son
 # sujet l'est.
-# Les thèmes retirés (santé, conso, défense, robotique, compounders, mémoire
+# Le thème « robotique » (08/08/2026, demande du propriétaire) revient le même
+# jour, mais ce n'est PAS le thème du même nom retiré au resserrement : celui-là
+# regroupait des industriels autour d'un pari de capex, celui-ci répond à une
+# question précise — qui est le mieux placé pour bénéficier de l'essor des
+# robots — et il y répond par une règle d'exposition, pas par un secteur. La
+# différence se voit dans ce qu'il EXCLUT (cf. sa règle d'entrée) autant que
+# dans ce qu'il retient.
+# Les thèmes retirés (santé, conso, défense, compounders, mémoire
 # et électrification en tant que thèses autonomes, décote et qualité calculées)
 # restent dans l'historique git — leur restauration est un revert, pas un
 # chantier.
@@ -264,6 +271,164 @@ THEMES_CURES = [
         # décor. Elle reviendra si la liste se remplit.
         "tickers": ["IONQ", "RGTI", "QBTS", "QUBT"],
         "top": 10,
+    },
+    {
+        "id": "robotique",
+        "label": "Robots",
+        # Le sous-titre énonce la RÈGLE d'entrée, pas un état du classement :
+        # c'est la doctrine de description rappelée en tête de fichier.
+        "sous_titre": "Ceux dont les comptes bougent quand le nombre de robots bouge",
+        "kind": "these",
+        "thesis": (
+            "Qui encaisse si les robots se multiplient ? Pas d'abord ceux qui les "
+            "assemblent. Un bras d'usine et un humanoïde partagent les mêmes "
+            "articulations, et ces pièces-là sortent d'une poignée d'ateliers. "
+            "La liste va du réducteur au robot fini."
+        ),
+        "inversion": (
+            "Deux façons d'avoir tort, et elles sont opposées. Que l'humanoïde reste une "
+            "démonstration : les volumes annoncés restent des diapositives, et il ne se "
+            "vend jamais que des robots d'usine. Ou l'inverse, plus perfide pour cette "
+            "liste : que le goulot s'ouvre. Les constructeurs conçoivent déjà leurs "
+            "propres actionneurs pour cesser de dépendre de leurs fournisseurs, et des "
+            "concurrents chinois attaquent le réducteur de précision sur son propre "
+            "terrain — le jour où la pièce rare devient banale, la rente change de mains "
+            "sans qu'un seul robot de moins ne soit vendu. S'y ajoute un rappel qu'aucun "
+            "récit n'annule : le robot industriel est un marché d'équipement, adossé à "
+            "l'automobile et à l'électronique, et il sait reculer de trente pour cent en "
+            "un exercice."
+        ),
+        "biais": (
+            "CE THÈME EST AUSSI UN PARI SUR LE JAPON, et mieux vaut le voir avant d'y "
+            "entrer : l'essentiel des pièces critiques du robot cote à Tokyo, en yens, "
+            "et relève d'un savoir-faire national tenu par quelques sociétés. Une "
+            "variation du yen se lit directement dans les performances, sans qu'aucune "
+            "de ces entreprises n'ait rien fait ni rien vendu de plus.\n\n"
+            "Dérogation assumée sur la taille. Le projet ne retient d'ordinaire que des "
+            "sociétés de plus de 25 milliards de dollars ; plusieurs des spécialistes "
+            "de cette liste en sont très loin. Ce n'est pas un relâchement, c'est le "
+            "sujet : celui qui détient la pièce que tout le monde doit lui acheter est "
+            "une petite société, et un plancher de capitalisation aurait masqué "
+            "exactement l'information qu'on cherchait.\n\n"
+            "Sur les humanoïdes, la liste dit surtout ce qu'on NE PEUT PAS acheter. Les "
+            "constructeurs les plus avancés ne sont pas cotés, et celui qui s'est "
+            "introduit en bourse en août 2026 l'a fait à Shanghai, hors de portée d'un "
+            "courtier européen. Restent quelques pure players asiatiques de taille "
+            "modeste et des constructeurs automobiles chez qui le robot ne pèse encore "
+            "rien au compte de résultat. C'est une exposition de conviction, pas une "
+            "exposition mesurable.\n\n"
+            "Enfin ce thème recoupe l'infrastructure de l'IA sur ses couches basses : "
+            "quelques titres figurent dans les deux listes, et les détenir deux fois "
+            "n'est pas se diversifier."
+        ),
+        # RÈGLE D'ENTRÉE, écrite ici parce qu'elle est le seul rempart contre la
+        # pente naturelle de ce sujet — remplir la liste de conglomérats.
+        # Entre un titre si une hausse du NOMBRE DE ROBOTS VENDUS se lit dans ses
+        # comptes. C'est un critère de concentration, pas de taille, et il coupe
+        # dans les deux sens :
+        #   - il fait entrer des sociétés de 4 Md$ que le seuil du projet
+        #     écarterait, parce qu'elles ne font que ça ;
+        #   - il fait SORTIR des industriels considérables dont l'exposition est
+        #     réelle mais diluée — Emerson, Parker Hannifin, AMETEK, Zebra,
+        #     Analog Devices, Infineon, et jusqu'à Nvidia dont la gamme robotique
+        #     est un rayon de magasin à côté du centre de données.
+        # Ces sorties ne sont PAS des rejets : aucun de ces titres n'entre au
+        # registre des écartés plus bas, tous restent scorés et candidats à la
+        # watchlist principale, et plusieurs y figurent. Ils ne sont simplement
+        # pas « les mieux placés », qui est la question posée à cette liste.
+        #
+        # QUATRE CAS TRANCHÉS DANS CE SENS le 08/08/2026, tous validés sans
+        # erreur le même jour et écartés sur le seul critère de dilution — ils
+        # sont notés ici pour que la décision se relise :
+        #   - Teradyne (~59 Md$) possède Universal Robots, premier fabricant
+        #     mondial de cobots, et MiR. Mais le test de semi-conducteurs fait
+        #     l'essentiel de ses ventes : un doublement des robots ne se verrait
+        #     pas dans ses comptes. Il reste dans le thème infrastructure de l'IA,
+        #     à sa vraie place.
+        #   - Mitsubishi Electric (~80 Md$) et Denso (~32 Md$) fabriquent
+        #     réellement robots et servomoteurs, au milieu de climatiseurs et
+        #     d'équipements automobiles.
+        #   - Sumitomo Heavy (~4,7 Md$) a inventé le réducteur Cyclo et compte
+        #     parmi les trois grands du réducteur de précision — mais vend aussi
+        #     des navires et des engins de chantier. Cas le plus disputé du lot :
+        #     retenu sur le sujet, écarté sur la règle.
+        #   - Novanta (~6,3 Md$), mouvement de précision et photonique, partagé
+        #     entre médical et industrie sans que la robotique s'y isole.
+        # Sans cette règle, le thème redevient une liste de méga-capitalisations
+        # industrielles, c'est-à-dire une liste qui ne répond à rien.
+        "maillons": [
+            {
+                # LE MAILLON LE PLUS PAUVRE DU SITE, et c'est le résultat, pas un
+                # oubli. En août 2026 les constructeurs d'humanoïdes les plus
+                # avancés sont privés (Figure, 1X, Apptronik), Unitree s'est
+                # introduit au STAR Market de Shanghai le 06/08/2026 — deux
+                # séances, et une place qu'un courtier européen n'atteint pas.
+                # Restent deux pure players asiatiques modestes — l'un à Hong
+                # Kong, l'autre au KOSDAQ, contrôlé par Samsung — et deux
+                # constructeurs automobiles qui portent un programme humanoïde :
+                # Tesla fabrique Optimus pour ses propres usines, sans vente
+                # externe avant 2027 sur son propre calendrier, et Hyundai
+                # contrôle Boston Dynamics. Dans les deux cas le robot est
+                # invisible au compte de résultat — ils sont ici pour ce qu'ils
+                # construisent, et le lecteur doit savoir qu'il n'achète pas ça.
+                "label": "Humanoïdes · le pari, et le peu qui s'achète",
+                "tickers": ["9880.HK", "277810.KQ", "TSLA", "005380.KS"],
+            },
+            {
+                # Les quatre grands du robot industriel étaient Fanuc, Yaskawa,
+                # ABB et KUKA. Trois se tiennent ici ; le quatrième a été racheté
+                # par le chinois Midea puis sorti de la cote de Francfort — son
+                # symbole ADR ne rend plus rien (cf. registre des écartés). Un
+                # secteur qui perd un de ses quatre leaders pour la bourse est
+                # une information en soi sur ce qui reste accessible.
+                # S'y ajoute un pure player coréen du robot collaboratif, entré
+                # en bourse en 2023 : 2,8 ans d'historique, donc une fiche qui
+                # portera l'avertissement de régression, mais c'est l'un des
+                # rares titres dont le cobot EST le métier.
+                "label": "Robots industriels · les constructeurs",
+                "tickers": ["6954.T", "6506.T", "ABBN.SW", "454910.KS"],
+            },
+            {
+                # LE CŒUR DE LA THÈSE. Une articulation de robot, c'est un moteur,
+                # un réducteur qui transforme sa vitesse en couple, un guidage et
+                # des roulements. Le réducteur est le point le plus étroit de
+                # toute la chaîne : Harmonic Drive tient l'essentiel du marché
+                # mondial du réducteur harmonique — celui des articulations fines,
+                # donc de tout humanoïde — et Nabtesco celui du réducteur
+                # cycloïdal des bras lourds. Ces positions ne se contournent pas
+                # en un exercice : elles tiennent à la métallurgie et à la
+                # rectification, pas à un brevet qui expire.
+                # C'est aussi le maillon qui justifie la dérogation de taille :
+                # ces sociétés pèsent quelques milliards de dollars et fournissent
+                # le monde entier.
+                "label": "Le goulot · réducteurs, guidage & moteurs",
+                "tickers": ["6324.T", "6268.T", "6481.T", "2049.TW", "6471.T",
+                            "6594.T", "6273.T", "SKF-B.ST"],
+            },
+            {
+                # Un robot qui ne voit pas ne fait que répéter un geste. La vision
+                # industrielle et les capteurs sont ce qui sépare le bras
+                # programmé de la machine qui s'adapte, et ce maillon vend à
+                # TOUS les constructeurs sans dépendre d'aucun. Rockwell y est
+                # pour le pilotage : automatisation d'usine à cent pour cent de
+                # son activité, donc conforme à la règle d'entrée là où d'autres
+                # conglomérats ne le sont pas.
+                "label": "Voir, mesurer & piloter",
+                "tickers": ["6861.T", "6645.T", "CGNX", "ROK"],
+            },
+            {
+                # LE CONTRE-EXEMPLE UTILE : les seuls robots qui, hors de l'usine,
+                # se vendent déjà en volume et dégagent des marges. Le robot
+                # chirurgical rappelle à quoi ressemble un marché qui a fini de
+                # se chercher — base installée, consommables, formation des
+                # opérateurs — c'est-à-dire tout ce que l'humanoïde n'a pas
+                # encore. L'entrepôt est l'autre débouché prouvé : y livrer des
+                # robots ne suppose aucune percée technique, seulement des
+                # commandes.
+                "label": "Robots de service · médical & logistique",
+                "tickers": ["ISRG", "SYM", "KGX.DE"],
+            },
+        ],
     },
     # « Financials » retirée le 06/08/2026 (décision propriétaire, « pour le
     # moment ») : la watchlist secteur n'est plus publiée. Ses 33 tickers
@@ -561,6 +726,20 @@ ECARTES_VALIDATION = {
     # colonne serait vide sur sa fiche. Thales et Infineon portent le maillon.
 "ARQQ": "Arqit, capitalisation ~0,4 Md$ et aucun objectif consensus (colonne vide sur la fiche)",
 "LAES": "SEALSQ, capitalisation ~0,6 Md$ et 3,2 ans d'historique",
+    # ── Robotique ─────────────────────────────────────────────────────────────
+    # Validés sans erreur le 08/08/2026 mais SOUS LE SEUIL de 25 Md$, et aucune
+    # thèse ne les réclame assez fort pour justifier la dérogation accordée aux
+    # spécialistes du goulot : ceux-là détiennent une pièce que le monde entier
+    # doit leur acheter, ce qui n'est le cas ni de l'un ni de l'autre.
+"NOVT": "Novanta, capitalisation ~6,3 Md$ < seuil 25 Md$ — mouvement de précision partagé entre médical et industrie, la robotique ne s'y isole pas",
+"ZBRA": "Zebra, capitalisation ~17,8 Md$ < seuil 25 Md$ — les robots d'entrepôt (Fetch) sont un appoint dans une activité de codes-barres",
+    # KUKA était l'un des quatre grands du robot industriel avec Fanuc, Yaskawa
+    # et ABB. Racheté par le chinois Midea en 2016, puis sorti de la cote de
+    # Francfort en 2022 : il n'existe plus de ligne cotée, et l'ADR ne rend plus
+    # d'historique. Ce n'est donc pas un titre qu'on écarte, c'est un titre qui
+    # n'est plus achetable — et le maillon « constructeurs » de la watchlist
+    # robotique en compte trois au lieu de quatre pour cette seule raison.
+"KUKAY": "KUKA, sorti de la cote après le rachat par Midea — history(max) vide, plus de ligne cotée",
 "ROG.SW": "symbole introuvable chez Yahoo, remplacé par l'ADR RHHBY",
     "BESI.AS": "capitalisation ~17 Md$ < seuil 25 Md$ (collage hybride)",
     "EFX":     "capitalisation ~20 Md$ < seuil 25 Md$",

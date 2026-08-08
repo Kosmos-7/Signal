@@ -5,13 +5,99 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Une watchlist robotique : la question n'était pas « qui fabrique des robots »
+
+Cinquième liste du site. La demande était double — humanoïdes et robotique
+industrielle avancée — puis précisée d'une phrase qui change tout : **« qui sont
+les acteurs les mieux placés pour bénéficier de l'essor des robots ».** Ce n'est
+pas la même question que « qui fabrique des robots », et la liste ne s'écrit pas
+pareil.
+
+**La règle d'entrée est le thème.** Entre une société si une hausse du nombre de
+robots vendus se lit dans ses comptes. C'est un critère de concentration, pas de
+taille, et il coupe dans les deux sens. Il fait entrer des spécialistes de
+quelques milliards de dollars que le seuil habituel du projet écarterait ; il
+fait sortir Emerson, Parker Hannifin, AMETEK, Analog Devices, Infineon, et
+jusqu'à Nvidia dont la gamme robotique est un rayon de magasin à côté du centre
+de données. Quatre cas ont été tranchés dans ce sens après une validation sans
+erreur le jour même : Teradyne — qui possède pourtant Universal Robots, premier
+fabricant mondial de cobots — Mitsubishi Electric, Denso et Sumitomo Heavy,
+inventeur du réducteur Cyclo. Sans ce garde-fou, le thème redevient un panier de
+conglomérats industriels, c'est-à-dire une liste qui ne répond à rien. Un test
+le vérifie, et un autre vérifie qu'aucun de ces exclus n'est pour autant
+« écarté » du projet : tous restent scorés et candidats à la watchlist
+principale, distinction que l'incident GlobalFoundries avait rendue explicite.
+
+**Le cœur de la thèse est mécanique.** Une articulation de robot, c'est un
+moteur, un réducteur qui transforme sa vitesse en couple, un guidage et des
+roulements — et le réducteur est le point le plus étroit de toute la chaîne.
+Ces positions-là ne se contournent pas en un exercice : elles tiennent à la
+métallurgie et à la rectification, pas à un brevet qui expire. C'est ce maillon
+qui justifie la dérogation de taille, écrite dans le texte que le lecteur voit :
+celui qui détient la pièce que tout le monde doit lui acheter est une petite
+société, et un plancher de capitalisation aurait masqué exactement
+l'information qu'on cherchait.
+
+**Sur les humanoïdes, la liste dit surtout ce qu'on ne peut pas acheter.** Les
+constructeurs les plus avancés ne sont pas cotés ; celui qui s'est introduit en
+bourse le 6 août 2026 l'a fait à Shanghai, hors de portée d'un courtier
+européen. Restent deux pure players asiatiques de taille modeste et deux
+constructeurs automobiles chez qui le robot ne pèse rien au compte de résultat.
+C'est une exposition de conviction, et le champ `biais` le dit avant lecture.
+
+Deux autres avertissements y figurent, pour la même raison : le thème est
+**aussi un pari sur le yen**, puisque l'essentiel des pièces critiques cote à
+Tokyo, et il **recoupe l'infrastructure de l'IA** sur ses couches basses — les
+détenir deux fois n'est pas se diversifier.
+
+Un titre manque et son absence est une information : **KUKA**, l'un des quatre
+grands du robot industriel, racheté par Midea puis sorti de la cote de Francfort
+en 2022. Son symbole ne rend plus d'historique. Le maillon des constructeurs en
+compte trois au lieu de quatre pour cette seule raison.
+
+### Deux tables de devises côte à côte, une seule tenue à jour
+
+Le support de Taipei et Hong Kong avait été ajouté le matin même au contrôle de
+l'ordre de grandeur des prix — et **oublié dans la table de conversion des
+capitalisations, six lignes plus bas.** Le défaut silencieux à la parité du
+dollar rendait l'oubli invisible : HIWIN ressortait à 136,9 Md$ au lieu de ~4,4
+et UBTech à 45,3 au lieu de ~5,8.
+
+L'erreur allait **dans le sens qui supprime l'avertissement** : deux titres sous
+le seuil des 25 Md$ passaient pour assez gros, c'est-à-dire exactement le
+contrôle qu'on croyait exercer. Même famille que le bug ORSTED.CO. Trois
+correctifs : la table monte au niveau du module pour être lisible par un test,
+une devise inconnue devient une **erreur** au lieu d'une parité implicite, et
+trois invariants exigent que toute devise détectée soit bornée *et* convertible,
+les deux tables couvrant le même jeu.
+
+Le test qui les porte a lui aussi changé de nature : son échantillon de tickers
+n'est plus écrit à la main mais **dérivé de l'univers réel des thèmes**. Une
+liste choisie par le rédacteur du test ne contient jamais le cas qu'il n'a pas
+vu venir — c'est ainsi que `.TW` et `.HK` ont manqué jusqu'au 8 août, alors
+qu'un thème allait les introduire.
+
 ### Une watchlist quantique, et ce qu'elle a d'inconfortable
 
-Quatrième liste du site, et la première qui publie **moins qu'elle ne
-déclare** : vingt-neuf titres portent le périmètre, vingt sont lus.
+Quatrième liste du site. Elle a changé trois fois de forme dans la journée —
+dix titres publiés sur vingt-quatre déclarés, puis vingt sur vingt-neuf, puis
+les seuls **pure players**, sur demande du propriétaire — et c'est la dernière
+version qui dit le mieux le secteur.
 
-**Dix au départ, vingt après un premier coup d'œil du propriétaire** (« il
-manque pas mal d'acteurs clés »). Le diagnostic était juste, la cause
+**Il n'existe au monde que dix pure players quantiques cotés, et six ne sont pas
+encore notables.** Cinq se sont introduits en bourse en 2026 et n'ont pas les
+200 séances qu'exigent la moyenne mobile 200 jours et le RSI ; le sixième pèse
+0,4 Md$ sans objectif de cours consensus. La liste en publie donc **quatre**, et
+son plafond reste à dix : ce n'est pas une fiction, c'est un rendez-vous. Les
+cinq introductions franchiront le seuil entre décembre 2026 et avril 2027 et
+entreront sans que personne ne touche au fichier. Une watchlist a le droit
+d'être courte quand son sujet l'est — c'est le seul thème qui déroge à la règle
+des vingt titres déclarés, et il la mérite : un secteur qui compte dix sociétés
+cotées ne peut pas en déclarer vingt sans mentir.
+
+**Le passage par vingt titres n'aura pas été inutile**, et il vaut d'être noté
+pour la mécanique qu'il a révélée. Le propriétaire avait signalé qu'« il manque
+pas mal d'acteurs clés ». Le diagnostic était juste, la cause
 instructive : les acteurs ne manquaient pas au périmètre, ils étaient déclarés
 et **masqués par le bornage**. À dix, la coupe tombait à 51 points et emportait
 d'un seul geste trois des quatre sociétés dont le quantique est le métier, IBM,
@@ -26,10 +112,14 @@ Le secteur pose un problème que les autres n'ont pas : **il n'y a presque rien
 à noter.** Les sociétés dont c'est le métier perdent de l'argent et ne pèsent
 pas les 25 milliards de dollars que le projet exige d'ordinaire ; celles qui
 construisent vraiment des machines sont des conglomérats où le quantique ne
-fait pas un centième de l'activité. La liste dit les deux, sans les mélanger,
-en cinq maillons : les pure-players, les constructeurs, ceux qui vendent les
-pelles (cryogénie, lasers, instruments), la couche logicielle, et la sécurité
-post-quantique — la seule partie du sujet qui ait déjà des clients.
+fait pas un centième de l'activité. La version finale tranche en faveur des
+premières et **assume de ne montrer qu'elles** : à quatre titres, une structure
+en maillons serait un décor, et elle reviendra si la liste se remplit. Ceux qui
+vendent au secteur — cryogénie, lasers, instruments, fonderie — sont sortis du
+thème mais **restent dans l'univers du screener**, sans quoi douze sociétés
+validées perdraient leur note et sept fiches publiées deviendraient orphelines.
+Le champ `biais` dit au lecteur qu'ils existent et qu'ils sont, aujourd'hui, les
+seuls du sujet à facturer quelque chose.
 
 Le champ `biais` prévient avant lecture que **la grille ne s'applique pas** aux
 sociétés sans bénéfice : un score bas n'y dit pas « mauvaise société », il dit

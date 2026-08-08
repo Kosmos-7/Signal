@@ -1517,6 +1517,20 @@ UNIVERS += [
     "6965.T", "6302.T",         # Hamamatsu, Sumitomo Heavy
 ]
 
+# Même geste pour la watchlist ROBOTIQUE du 08/08/2026, et pour la même raison.
+# Ces deux industriels japonais fabriquent réellement des robots et des
+# servomoteurs, mais au milieu de climatiseurs et d'équipements automobiles :
+# la règle d'entrée du thème (les comptes doivent bouger avec le nombre de
+# robots vendus) les écarte de la LISTE. Elle ne dit rien de leur qualité, et
+# tous deux dépassent largement le seuil de 25 Md$ du projet après une
+# validation sans erreur — les laisser dehors reviendrait à les avoir examinés
+# puis perdus. Ils sont donc scorés et candidats au top 30, comme les douze
+# titres de la chaîne quantique juste au-dessus.
+UNIVERS += [
+    "6503.T",                   # Mitsubishi Electric — robots, servos, et le reste
+    "6902.T",                   # Denso — équipementier automobile, actionneurs
+]
+
 UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 
 # ── JUSTIFICATION ─────────────────────────────────────────────────────────────

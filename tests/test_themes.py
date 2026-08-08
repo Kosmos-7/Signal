@@ -42,8 +42,8 @@ def check(nom, cond, detail=""):
 print("— Taxonomie —")
 ids = [t["id"] for t in themes.THEMES]
 check("identifiants uniques", len(ids) == len(set(ids)))
-check("3 thèmes curés publiés (financials retirée le 06/08, quantique ajoutée le 08/08)",
-      len(themes.THEMES_CURES) == 3)
+check("4 thèmes curés publiés (financials retirée le 06/08, quantique et robotique ajoutées le 08/08)",
+      len(themes.THEMES_CURES) == 4)
 check("chaque thème a thèse, inversion et biais",
       all(t.get("thesis") and t.get("inversion") and t.get("biais") for t in themes.THEMES))
 check("les thèmes calculés publient leur règle en clair",
@@ -115,6 +115,81 @@ check("aucune introduction de 2026 n'est déclarée avant d'avoir 200 séances",
       not (_jeunes & set(themes.univers_thematique())),
       str(sorted(_jeunes & set(themes.univers_thematique()))))
 
+print("\n— Le thème robotique —")
+_r = themes.THEMES_BY_ID.get("robotique")
+_rt = set(_r["tickers"]) if _r else set()
+check("le thème robotique existe et publie toute sa liste",
+      _r is not None and "top" not in _r, str(_r and _r.get("top")))
+check("il déclare assez de titres pour ne pas invoquer la dérogation d'étroitesse",
+      _r and len(_r["tickers"]) >= 20 and "robotique" not in ETRIQUE_ADMIS,
+      f"{len(_rt)} déclarés")
+# LA RÈGLE D'ENTRÉE EST LE THÈME. Elle retient les sociétés dont les comptes
+# bougent avec le nombre de robots vendus, et elle écarte les industriels dont
+# l'exposition est réelle mais noyée. Les douze titres ci-dessous ont tous été
+# examinés le 08/08/2026 et écartés sur ce seul motif — quatre après une
+# validation sans erreur le jour même (Teradyne, Mitsubishi Electric, Denso,
+# Sumitomo Heavy, Novanta). Ils sont la pente naturelle de ce sujet : sans ce
+# garde-fou, la liste redevient un panier de conglomérats industriels.
+_DILUES = {"EMR", "PH", "AME", "ADI", "IFX.DE", "NVDA",
+           "TER", "6503.T", "6902.T", "6302.T"}
+check("aucun industriel à exposition diluée n'est entré dans la liste",
+      not (_rt & _DILUES), str(sorted(_rt & _DILUES)))
+# ... mais l'exclusion du THÈME n'est pas un rejet du PROJET : ces titres
+# restent scorés et candidats à la watchlist principale. C'est la distinction
+# que l'incident GlobalFoundries du 08/08 a rendue explicite — un titre ne peut
+# pas être à la fois publié et « écarté ».
+check("les dilués restent scorés par le screener",
+      _DILUES <= set(screener.UNIVERS), str(sorted(_DILUES - set(screener.UNIVERS))))
+check("aucun dilué n'est au registre des écartés",
+      not (_DILUES & set(themes.ECARTES_VALIDATION)),
+      str(sorted(_DILUES & set(themes.ECARTES_VALIDATION))))
+# DEUX MOTIFS DIFFÉRENTS, deux sorts différents — les confondre est ce que la
+# première version de ce test a fait. Novanta et Zebra ne sont pas écartés pour
+# dilution mais pour TAILLE : sous le seuil de 25 Md$, comme AMKR ou SMCI avant
+# eux. Ceux-là vont au registre, précisément pour ne pas disparaître après avoir
+# été validés — c'est le mode de panne « examiné puis perdu ».
+_SOUS_SEUIL = {"NOVT", "ZBRA"}
+check("les validés sous le seuil sont au registre, avec leur capitalisation",
+      all(t in themes.ECARTES_VALIDATION and "seuil 25 Md$" in themes.ECARTES_VALIDATION[t]
+          for t in _SOUS_SEUIL),
+      str(sorted(t for t in _SOUS_SEUIL if t not in themes.ECARTES_VALIDATION)))
+check("aucun titre sous le seuil n'est entré dans la liste",
+      not (_rt & _SOUS_SEUIL), str(sorted(_rt & _SOUS_SEUIL)))
+# KUKA n'est pas écarté, il n'est plus cotable : racheté par Midea, sorti de
+# Francfort en 2022, son ADR ne rend plus d'historique. Le maillon des
+# constructeurs en compte trois au lieu de quatre pour cette seule raison, et
+# c'est une information, pas un trou.
+check("KUKA est au registre avec le motif de sa disparition",
+      "KUKAY" in themes.ECARTES_VALIDATION
+      and "Midea" in themes.ECARTES_VALIDATION["KUKAY"])
+# LA THÈSE REPOSE SUR LE GOULOT : « ces pièces-là sortent d'une poignée
+# d'ateliers ». Si les deux réducteurs de précision quittaient la liste, ce
+# texte deviendrait un slogan sans objet — le thème doit tomber avec eux.
+_maillons = {m["label"]: set(m["tickers"]) for m in (_r["maillons"] if _r else [])}
+_goulot = next((v for k, v in _maillons.items() if "goulot" in k.lower()), set())
+check("le maillon du goulot porte les deux réducteurs de précision",
+      {"6324.T", "6268.T"} <= _goulot, str(sorted(_goulot)))
+# Le biais annonce qu'il reste « deux pure players asiatiques » sur les
+# humanoïdes : si les deux sortaient, le maillon ne contiendrait plus que des
+# constructeurs automobiles et le texte mentirait au lecteur.
+_humain = next((v for k, v in _maillons.items() if "humano" in k.lower()), set())
+check("le maillon humanoïde garde au moins un pure player coté",
+      bool(_humain & {"9880.HK", "277810.KQ"}), str(sorted(_humain)))
+# La dérogation de taille doit être ÉCRITE pour le lecteur, comme sur le
+# quantique : plusieurs titres du goulot pèsent moins de dix milliards.
+check("la dérogation de taille est annoncée au lecteur",
+      _r and "25 milliards" in _r["biais"])
+check("le pari de change est annoncé au lecteur",
+      _r and "yen" in _r["biais"].lower())
+
+# UN THÈME SANS ILLUSTRATION SE PUBLIE QUAND MÊME — le front a un repli
+# textuel — donc rien ne signale l'oubli. C'est le mode de panne silencieuse
+# habituel du projet : on l'attrape ici plutôt qu'en regardant la page.
+sys.path.insert(0, os.path.join(RACINE, "tools"))
+import fetch_theme_photos as ftp   # noqa: E402
+_sans_image = [t["id"] for t in themes.THEMES_CURES if not ftp.REQUETES.get(t["id"])]
+check("chaque thème publié a ses requêtes d'illustration", not _sans_image, str(_sans_image))
+
 # Doctrine de nommage : ne jamais emprunter le vocabulaire d'un concept non calculé
 interdits = ["moat", "douve", "marge de sécurité", "valeur intrinsèque"]
 textes = " ".join(f"{t['label']} {t['sous_titre']} {t['thesis']}" for t in themes.THEMES).lower()
@@ -162,9 +237,15 @@ for t, attendu in [("6954.T", "JPY"), ("8035.T", "JPY"), ("000660.KS", "KRW"),
 # TOUTE devise non-euro rendue par detect_currency doit être convertible, sinon
 # la conversion en euros échoue en silence sur un titre déjà acheté. On teste
 # l'invariant plutôt que la liste, pour qu'il tienne au prochain ajout.
+# L'ÉCHANTILLON EST DÉRIVÉ DE L'UNIVERS RÉEL, pas écrit à la main. Une liste
+# de tickers choisie par le rédacteur du test ne contient jamais le cas qu'il
+# n'a pas vu venir : c'est ainsi que .TW et .HK ont manqué jusqu'au 08/08/2026,
+# alors qu'un thème allait les introduire. En balayant tous les titres déclarés
+# par les thèmes, l'invariant couvre par construction le prochain ajout.
+# Les trois symboles ajoutés à la main sont des places que les thèmes ne citent
+# pas encore : ils vérifient la détection, pas la couverture.
 _devises = {pa.detect_currency(t) for t in
-            ("6954.T", "000660.KS", "SAAB-B.ST", "ORSTED.CO", "ABBN.SW",
-             "2330.TW", "9880.HK", "XYZ.OL")}
+            themes.univers_thematique() + ["ORSTED.CO", "SAAB-B.ST", "XYZ.OL"]}
 _convertibles = _devises - {"EUR", "USD", "GBP"}
 check("chaque devise détectée hors EUR/USD/GBP a sa paire ET son repli",
       _convertibles <= set(pa._FX_PAIRS) and _convertibles <= set(pa._FX_FALLBACK),

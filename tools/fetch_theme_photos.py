@@ -98,6 +98,34 @@ REQUETES = {
         "ion trap vacuum chamber laser",
         "optical table laser laboratory physics",
     ],
+    "robotique": [
+        # MÊME ANGLE QUE LE QUANTIQUE, pour la même raison : on illustre le
+        # SUJET, pas un de ses membres. Un bras siglé Fanuc ou un Optimus en
+        # photo de presse mettrait un titre de la liste en avant sur le dos des
+        # vingt-deux autres — et ramènerait des salons professionnels plutôt que
+        # des machines au travail.
+        #
+        # La thèse porte sur le GOULOT MÉCANIQUE : les articulations, les
+        # réducteurs, les guidages. On cherche donc d'abord la pièce et le
+        # mécanisme, ensuite seulement le robot entier. Un train d'engrenages
+        # cycloïdal photographié de près dit mieux la thèse qu'un humanoïde sur
+        # une scène.
+        #
+        # Les laboratoires publics restent la meilleure source d'images libres :
+        # la NASA et les agences fédérales américaines produisent des œuvres du
+        # domaine public par statut, et la robotique y est abondamment
+        # photographiée.
+        "harmonic drive strain wave gear",
+        "cycloidal gear reducer mechanism",
+        "linear motion ball screw guide rail",
+        "robot joint actuator servo motor cutaway",
+        "NASA Robonaut humanoid robot",
+        "robotic arm assembly line factory",
+        "industrial robot welding automotive plant",
+        "humanoid robot laboratory walking",
+        "machine vision camera inspection conveyor",
+        "warehouse automation mobile robots",
+    ],
     # Le thème PEA n'a pas d'objet : c'est une enveloppe fiscale française qui
     # n'accepte que les sociétés à siège européen. On l'illustre donc par ce que
     # la contrainte a de concret — la monnaie et les institutions communes —
