@@ -795,13 +795,42 @@ def taux_historique(de, vers):
     return taux
 
 
-def per_previsionnel(prix, estimations, dernier_exercice):
+def per_previsionnel(prix, estimations, dernier_exercice, devises_differentes=False):
     """PER des deux exercices À VENIR : cours ACTUEL / BPA moyen estimé par les
-    analystes (Yahoo, lignes 0y et +1y). Les estimations sont publiées dans la
-    devise de COTATION de la place interrogée — le quotient est donc valide
-    même pour un ADR. Étiquettes = exercice fiscal suivant le dernier clos.
-    estimations : {"0y": eps, "+1y": eps} (None/absent tolérés)."""
-    if not prix or prix <= 0 or not dernier_exercice:
+    analystes (Yahoo, lignes 0y et +1y). Étiquettes = exercice fiscal suivant le
+    dernier clos. estimations : {"0y": eps, "+1y": eps} (None/absent tolérés).
+
+    LA DEVISE DES ESTIMATIONS N'EST PAS DÉCLARÉE, ET ELLE NE SE DÉDUIT PAS.
+    Cette fonction AFFIRMAIT, dans cette docstring, que « les estimations sont
+    publiées dans la devise de cotation ». Elle ne l'a jamais vérifié, et c'est
+    faux au moins une fois : Vestas publiait un PER prévisionnel de 154× là où
+    il en vaut une vingtaine, un cours en couronnes danoises y étant divisé par
+    un bénéfice estimé en euros. Découvert le 08/08/2026 en donnant enfin leurs
+    multiples historiques à ces mêmes fiches.
+
+    TROIS DÉPARTAGES ESSAYÉS, TROIS ÉCHECS, et ils valent d'être écrits pour
+    qu'on ne les retente pas :
+      · la croissance implicite du bénéfice (comparer l'estimation au dernier
+        BPA publié) ne tranche que si le change est loin de 1 — elle départage
+        Vestas (×7,46) et pas Ferrari (×1,08) ;
+      · le PER courant du fournisseur, pris comme ancrage, a le défaut même
+        qu'il devait arbitrer : sur ABB il vaut 37,3 quand notre multiple 2025
+        en vaut 28,9, soit un rapport de 1,29 — le change CHF→USD à 1,25. Le
+        fournisseur commet donc parfois le mélange qu'on cherchait à détecter ;
+      · la place de cotation ne prédit rien : deux lignes new-yorkaises de
+        sociétés étrangères, Ferrari et Cameco, ne se comportent pas pareil.
+
+    ON NE PUBLIE DONC PAS DE MULTIPLE PRÉVISIONNEL quand la devise des comptes
+    n'est pas celle de la cotation. L'enjeu n'est pas un arrondi : il va de 8 %
+    à un facteur sept selon la paire, et une courbe qui mêlerait deux bases
+    serait pire qu'une courbe plus courte. C'est la même règle que pour
+    l'historique — sauf que là, nous CONNAISSONS les deux devises et pouvons
+    convertir ; ici, l'une des deux nous est cachée.
+
+    Ce que le lecteur perd : deux points estimés sur cinq fiches. Ce qu'il
+    gagne : ne pas lire 154× pour une société qui se paie une vingtaine de fois
+    ses bénéfices."""
+    if not prix or prix <= 0 or not dernier_exercice or devises_differentes:
         return []
     try:
         annee = int(str(dernier_exercice)[:4])
@@ -2446,7 +2475,19 @@ def score_ticker(ticker, vix=None):
                     except Exception:
                         est = None
                     dernier = fonda["an"][-1]["fin"] if fonda["an"] else None
-                    prev = per_previsionnel(float(close.iloc[-1]), est, dernier)
+                    # `_fx` et le PER courant du fournisseur servent à TRANCHER
+                    # la devise des estimations, que rien ne déclare (cf.
+                    # per_previsionnel). Le taux est pris à la date du dernier
+                    # exercice clos, comme pour l'historique — le cours, lui, est
+                    # celui du jour, et l'écart de quelques mois entre les deux
+                    # est sans effet sur un DÉPARTAGE dont l'enjeu est un facteur
+                    # 1,08 à 31 selon la paire.
+                    # Devises différentes : aucun multiple prévisionnel. Nous
+                    # savons convertir le cours (nous connaissons sa devise et
+                    # celle des comptes) mais PAS dans quelle monnaie le
+                    # fournisseur exprime les estimations — cf. per_previsionnel.
+                    prev = per_previsionnel(float(close.iloc[-1]), est, dernier,
+                                            not meme_devise)
                     if prev:
                         fonda["pe_prev"] = prev
                     # Trajectoire attendue jusqu'à 2030 : consensus analystes

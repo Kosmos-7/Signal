@@ -1302,6 +1302,36 @@ for _mauvais, _nom in [(lambda i: 0.0, "nul"), (lambda i: -1.2, "négatif")]:
     check(f"un taux {_nom} ne produit aucun multiple",
           all(x.get("per") is None for x in _e), str([x.get("per") for x in _e]))
 
+# ── LE MULTIPLE PRÉVISIONNEL QUAND LES DEVISES DIFFÈRENT ───────────────────
+# `per_previsionnel` AFFIRMAIT que les estimations d'analystes sont libellées
+# dans la devise de cotation, sans jamais le vérifier. C'est faux au moins une
+# fois : Vestas publiait 154× là où le multiple en vaut une vingtaine, un cours
+# en couronnes danoises étant divisé par un bénéfice estimé en euros.
+#
+# Trois départages ont été essayés et ont échoué — la croissance implicite ne
+# tranche que si le change est loin de 1 ; le PER courant du fournisseur a le
+# défaut qu'il devait arbitrer (sur ABB il vaut 37,3 contre notre 28,9, soit le
+# change CHF→USD) ; et la place de cotation ne prédit rien. On ne publie donc
+# aucun multiple attendu quand la devise des comptes n'est pas celle du cours.
+# C'est le même arbitrage que partout ailleurs : le trou plutôt que le faux.
+print("\n— Le multiple attendu quand les devises diffèrent —")
+_EST = {"0y": 2.0, "+1y": 2.4}
+_ok = screener.per_previsionnel(60.0, _EST, "2025-12-31", False)
+check("devises identiques : les deux exercices attendus sont publiés",
+      [(e["exercice"], e["per"]) for e in _ok] == [(2026, 30.0), (2027, 25.0)], str(_ok))
+_ko = screener.per_previsionnel(60.0, _EST, "2025-12-31", True)
+check("devises différentes : aucun multiple attendu",
+      _ko == [], str(_ko))
+# Le défaut par défaut doit rester le comportement SÛR pour les 90 % de fiches
+# mono-devise : un appel sans le drapeau publie, comme avant.
+check("l'argument est optionnel et ne change rien au cas courant",
+      screener.per_previsionnel(60.0, _EST, "2025-12-31") == _ok)
+# Et la fiche doit DIRE pourquoi ces points manquent, sinon le trou se lit
+# comme une négligence — c'est la leçon du 08/08 sur les multiples historiques.
+_ixp = open(os.path.join(RACINE, "index.html"), encoding="utf-8").read()
+check("la fiche explique l'absence de multiple attendu",
+      "Aucun multiple ATTENDU" in _ixp)
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:
