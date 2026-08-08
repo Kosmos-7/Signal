@@ -90,8 +90,9 @@ toute couleur figée dans le balisage.
 
 La **hauteur est un budget** : l'en-tête est fixe, et quatre réglages se calent
 dessous (`.rail`, `.stage`, et les marges d'ancre des deux pages longues). Le
-libellé est donc passé en `line-height:1` et l'icône à 16 px : l'en-tête gagne
-**six pixels**, pas vingt, et les quatre décalages ont suivi.
+libellé est donc passé en `line-height:1`, et l'icône à 19 px après un premier
+jet à 16 px jugé trop discret : l'en-tête gagne **neuf pixels**, pas
+vingt-cinq, et les quatre décalages ont suivi.
 
 L'**icône est décorative, le nom porte le sens** : `aria-hidden` sur le SVG, le
 libellé reste du texte. Un lecteur d'écran annonce « Watchlists », pas

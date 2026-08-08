@@ -147,11 +147,12 @@ check("la couleur vient de currentColor, dans signal.css",
       "nav a svg{" in CSS and "stroke:currentColor" in CSS)
 # L'EN-TÊTE EST FIXE ET DES RÉGLAGES EN DÉPENDENT. `.rail` et `.stage` se
 # posent juste dessous dans index.html, les ancres se calent sur lui dans
-# signal.css. Les pictogrammes l'ont fait passer de 72 à 78 px : ces quatre
-# valeurs ont suivi, et elles doivent rester au-dessus de la hauteur mesurée.
-check("les décalages sous l'en-tête suivent sa hauteur (78 px mesurés)",
-      all(v in SRC["index.html"] for v in ("top:5.4rem", "top:5.5rem"))
-      and "scroll-margin-top:5.9rem" in CSS)
+# signal.css. Les pictogrammes l'ont fait passer de 72 à 81 px (16 px au
+# premier jet, 19 px après retour du propriétaire) : ces quatre valeurs ont
+# suivi, et elles doivent rester au-dessus de la hauteur mesurée.
+check("les décalages sous l'en-tête suivent sa hauteur (81 px mesurés)",
+      all(v in SRC["index.html"] for v in ("top:5.6rem", "top:5.7rem"))
+      and "scroll-margin-top:6.1rem" in CSS)
 
 # ── 4. LE PIED DE PAGE DIT LA MÊME CHOSE ───────────────────────────────────
 print("\n— Le pied de page est-il le même texte partout ? —")
