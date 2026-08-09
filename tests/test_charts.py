@@ -1461,6 +1461,17 @@ check("un exercice sans résultat net n'est pas davantage inventé",
       screener.completer_eps([{"fin": "2023-12-31", "rn": 10, "eps": 1.0},
                               {"fin": "2024-12-31"},
                               {"fin": "2025-12-31", "rn": 11, "eps": 1.1}]) == 0)
+# UN RÉSULTAT NET À ZÉRO EST UNE ABSENCE, PAS UNE MESURE — et cette règle-là
+# manquait au premier jet. Le run du 09/08 a publié un bénéfice par action de
+# 0,0 pour Arista 2021 et Viasat 2020, dont la source rend `rn: 0` : c'était
+# affirmer qu'Arista n'avait rien gagné en 2021, quand elle a gagné 840 M$.
+# Le multiple restait absent, donc le faux ne se voyait que dans le chiffre.
+_ZERO = [{"fin": "2019-12-31", "rn": 860, "eps": 0.665},
+         {"fin": "2020-12-31", "rn": 635, "eps": 0.5},
+         {"fin": "2021-12-31", "rn": 0},
+         {"fin": "2022-12-31", "rn": 1352, "eps": 1.0675}]
+check("un résultat net à zéro ne donne pas un bénéfice par action à zéro",
+      screener.completer_eps(_ZERO) == 0 and "eps" not in _ZERO[2], str(_ZERO[2]))
 check("le seuil de stabilité reste serré : une base ne bouge pas de 10 % sans raison",
       screener.ECART_BASE_ACTIONS <= 0.10, str(screener.ECART_BASE_ACTIONS))
 

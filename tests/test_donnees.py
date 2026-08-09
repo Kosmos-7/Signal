@@ -286,13 +286,22 @@ print("\n— Bandes de vraisemblance : une exception est permise, une dérive no
 # multiples très élevés parce que le dénominateur est petit, pas parce qu'une
 # base a glissé. Vérifiées une à une contre la série publiée avant de toucher
 # au seuil.
+# RELEVÉES UNE TROISIÈME FOIS LE 09/08/2026 AU SOIR, à la publication de la
+# watchlist spatiale. Dix-neuf sociétés entrent d'un coup, dont une majorité
+# construit une constellation ou un lanceur AVANT d'avoir un client : AST
+# SpaceMobile affiche −1 682 % de marge de flux et −482 % de marge nette parce
+# qu'elle finance des satellites sans chiffre d'affaires, pas parce qu'une base
+# a glissé d'un facteur mille. C'est le même motif qu'aux deux relèvements
+# précédents, et il est structurel : la population suivie n'est plus celle sur
+# laquelle ces bandes ont été calées. Vérifiées une à une contre la série
+# publiée — les marges tiennent au dénominateur, jamais à l'unité.
 # La sentinelle garde tout son mordant : elle est calée sur le compte EXACT du
 # jour, donc le prochain titre qui sortira de la bande la fera tomber.
 BANDES = [
-    ("marge nette d'exercice", "net_margin_exercice_pct", -60, 70, 8),
-    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 13),
+    ("marge nette d'exercice", "net_margin_exercice_pct", -60, 70, 13),
+    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 14),
     ("conversion du bénéfice en cash", "conversion_pct", -200, 400, 8),
-    ("PER courant", "trailing_pe", 1, 200, 9),
+    ("PER courant", "trailing_pe", 1, 200, 10),
     ("rendement des capitaux propres", "roe_pct", -100, 150, 6),
     ("RSI", "rsi", 5, 95, 0),
 ]
@@ -433,6 +442,13 @@ for t, d in FICHES.items():
             _derives_au_bord.append(f"{t}:{e['fin'][:4]}")
 check("aucun bénéfice reconstitué au bord de la série",
       not _derives_au_bord, str(_derives_au_bord))
+# Et aucun reconstitué à zéro : un résultat net absent est rendu `0` par la
+# source, et le diviser publiait « cette société n'a rien gagné » — Arista 2021,
+# 840 M$ de bénéfice réel, affichait 0,0.
+_derives_nuls = [f"{t}:{e['fin'][:4]}" for t, d in FICHES.items()
+                 for e in ((d.get("fonda") or {}).get("an") or [])
+                 if e.get("eps_derive") and not e.get("eps")]
+check("aucun bénéfice reconstitué à zéro", not _derives_nuls, str(_derives_nuls))
 
 # ── 6. COHÉRENCE ENTRE LES FICHIERS PUBLIÉS ────────────────────────────────
 print("\n— Les fichiers publiés racontent-ils la même histoire ? —")
