@@ -262,6 +262,35 @@ MARQUES = {
     "VWS.CO":    ["Vestas wind turbine", "Vestas V164", "wind turbine nacelle"],
     "DSY.PA":    ["Dassault Systemes campus Velizy", "CATIA", "SolidWorks"],
     "SAP.DE":    ["SAP headquarters Walldorf", "SAP building"],
+    # AJOUTS DU 09/08/2026, après le tri des 204 candidats de la campagne.
+    # Quatre sociétés n'avaient AUCUNE entrée : aucune campagne ne pouvait donc
+    # les trouver, et leur fiche serait restée sans image indéfiniment.
+    "BKNG":      ["hotel reception desk", "airport departure board",
+                  "hotel booking website"],
+    "CI":        ["health insurance card", "pharmacy prescription counter",
+                  "medical claim form"],
+    "FTNT":      ["network firewall appliance", "rack mounted network appliance",
+                  "data center network security"],
+    "REGN":      ["monoclonal antibody vial", "antibody ribbon diagram",
+                  "biotechnology laboratory pipetting"],
+    # Et huit termes revus, parce que Commons ne porte AUCUNE photo de ces
+    # marques : la recherche retombait alors sur des livres numérisés dont le
+    # texte contient les mots cherchés. On vise désormais l'OBJET du métier
+    # plutôt que la marque — un lecteur de codes-barres illustre Cognex, même
+    # sans logo, mieux qu'un frontispice du XIXe siècle.
+    "CGNX":      ["machine vision camera", "industrial inspection camera",
+                  "barcode scanner conveyor belt"],
+    "CIFR":      ["bitcoin mining container", "ASIC miner rack",
+                  "cryptocurrency mining farm"],
+    "CORZ":      ["bitcoin mining facility", "cryptocurrency mining rig rack"],
+    "APLD":      ["data center server hall", "hyperscale data center building",
+                  "immersion cooling server"],
+    "QUBT":      ["photonic integrated circuit", "optical waveguide chip",
+                  "silicon photonics die"],
+    "CRDO":      ["SerDes transceiver chip", "QSFP-DD cable",
+                  "active electrical cable data center"],
+    "MSCI":      ["stock index display board", "financial market data screen"],
+    "ALAB":      ["PCIe retimer chip", "CXL memory module"],
 }
 
 
@@ -377,8 +406,23 @@ SCENES = {
 }
 
 
+# LIVRES NUMÉRISÉS : la recherche plein texte de Commons fouille le CONTENU des
+# ouvrages scannés, pas seulement les titres d'images. « industrial barcode
+# reader » a ainsi rendu, pour Cognex, « With the Russians in Mongolia.djvu »,
+# « Origin and spread of the Tamils.djvu » et « Mexico And Its Heritage.djvu » —
+# trois livres où ces mots apparaissent quelque part. Applied Digital, Cipher
+# Mining, MSCI et Quantum Computing ont reçu le même traitement : des pages
+# blanches et des frontispices du XIXe siècle occupant tous les emplacements de
+# candidats, sans qu'aucune vraie image n'ait sa chance.
+#
+# Un .djvu ou un .pdf n'est JAMAIS une illustration utilisable ici. On les écarte
+# à la source plutôt qu'au tri : un emplacement de candidat pris par un livre est
+# un emplacement perdu pour une photo.
+EXT_REFUSEES = (".djvu", ".pdf", ".tif", ".tiff", ".ogv", ".webm", ".svg")
+
+
 def chercher_commons(terme, limite=14):
-    """Recherche plein texte de Commons, restreinte aux fichiers."""
+    """Recherche plein texte de Commons, restreinte aux fichiers illustrables."""
     try:
         d = _get(COMMONS_API, {"action": "query", "format": "json",
                                "list": "search", "srnamespace": "6",
@@ -387,7 +431,8 @@ def chercher_commons(terme, limite=14):
         print(f"      ✗ « {terme} » : {type(e).__name__}")
         return []
     return [m["title"][5:] for m in (d.get("query", {}).get("search") or [])
-            if m.get("title", "").startswith("File:")]
+            if m.get("title", "").startswith("File:")
+            and not m["title"].lower().endswith(EXT_REFUSEES)]
 
 
 def main():
