@@ -1,6 +1,6 @@
 # Illustrations des watchlists — provenance et licences
 
-Quatre photographies, une par watchlist publiée. Contrainte du projet : domaine
+Sept photographies, une par watchlist publiée et deux pour les vues générales. Contrainte du projet : domaine
 public ou CC0 exclusivement, c'est-à-dire aucune attribution obligatoire et
 aucune condition de réutilisation. Le crédit ci-dessous est donné par honnêteté,
 pas par obligation légale.
@@ -114,3 +114,18 @@ qu'il en fait partie. Même règle qu'au quantique, appliquée cette fois à une
 société qui n'est pas membre : on ne met aucun logo d'entreprise sur la
 vignette d'une liste sectorielle. Recadrer pour l'effacer était possible, et
 écarté aussi : on préfère une image non retouchée à une image amputée.
+
+## espace
+
+- Fichier : `assets/themes/espace.jpg`
+- Source : File:SpaceX Crew-8 Launch (KSC-20240303-PH-JBS01 0002).jpg
+- Page : https://commons.wikimedia.org/wiki/File:SpaceX_Crew-8_Launch_(KSC-20240303-PH-JBS01_0002).jpg
+- Licence : Public domain
+- Auteur déclaré : NASA Kennedy Space Center / NASA/Ben Smegel
+- Requête : « rocket launch night long exposure »
+
+La règle ci-dessus est respectée : l'image montre un tir de SpaceX depuis le
+centre spatial Kennedy, et SpaceX n'est PAS dans la watchlist — sa cotation de
+juin 2026 ne totalise pas les deux cents séances qu'exige notre note. C'est
+même ce que le texte de la liste dit en premier. Illustrer par l'absente plutôt
+que par une détenue évite la mise en avant que ces crédits proscrivent.
