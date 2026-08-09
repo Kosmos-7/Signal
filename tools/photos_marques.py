@@ -291,6 +291,51 @@ MARQUES = {
                   "active electrical cable data center"],
     "MSCI":      ["stock index display board", "financial market data screen"],
     "ALAB":      ["PCIe retimer chip", "CXL memory module"],
+    # LA WATCHLIST SPATIALE, publiée le 09/08 : seize sociétés qui n'avaient
+    # aucune entrée de recherche, donc aucune chance d'être illustrées un jour.
+    # On vise l'ENGIN quand il porte un nom — un lanceur, un satellite, un
+    # atterrisseur se photographient et se nomment —, et le métier sinon.
+    "RKLB":      ["Electron rocket launch", "Rocket Lab Electron",
+                  "Photon spacecraft bus"],
+    "ASTS":      ["BlueWalker 3 satellite", "phased array satellite antenna",
+                  "direct to cell satellite"],
+    "BKSY":      ["Earth observation smallsat", "satellite imagery ground station",
+                  "cubesat imaging satellite"],
+    "PL":        ["SkySat satellite", "Dove cubesat", "Planet Labs satellite"],
+    "LUNR":      ["Nova-C lunar lander", "lunar lander spacecraft",
+                  "Moon lander module"],
+    "RDW":       ["roll out solar array spacecraft", "in space manufacturing",
+                  "spacecraft solar array deployment"],
+    "KTOS":      ["target drone unmanned aerial", "satellite ground station antenna",
+                  "jet powered target drone"],
+    "VSAT":      ["satellite internet terminal", "geostationary communications satellite",
+                  "VSAT ground terminal"],
+    "SESG.PA":   ["O3b mPOWER satellite", "geostationary communications satellite",
+                  "satellite teleport antenna"],
+    "ETL.PA":    ["OneWeb satellite", "low earth orbit communications satellite"],
+    "LMT":       ["F-35 Lightning II", "Lockheed Martin spacecraft",
+                  "Orion crew module"],
+    "NOC":       ["James Webb Space Telescope", "Northrop Grumman Antares",
+                  "Cygnus cargo spacecraft"],
+    "RTX":       ["Patriot missile launcher", "Pratt and Whitney jet engine",
+                  "geared turbofan engine"],
+    "LHX":       ["military tactical radio", "satellite communications terminal",
+                  "airborne electronic warfare pod"],
+    "AIR.PA":    ["Airbus A350", "Ariane 6 launcher", "Airbus final assembly line"],
+    "LDO.MI":    ["AW139 helicopter", "Leonardo helicopter", "Eurofighter Typhoon"],
+    # Et cinq termes revus, dont les campagnes ont rendu le produit d'un TIERS :
+    # « network firewall appliance » a proposé à Fortinet un boîtier Netgear,
+    # exactement la faute de l'actionneur « SMC » portant la marque Automax.
+    "FTNT":      ["Fortinet FortiGate", "data center security rack",
+                  "network operations center"],
+    "IREN":      ["Childress Texas data center", "bitcoin mining data centre",
+                  "immersion cooled mining rig"],
+    "WULF":      ["Lake Mariner data center", "bitcoin mining hall",
+                  "hydroelectric powered data center"],
+    "454910.KS": ["Doosan Robotics collaborative robot", "cobot robotic arm",
+                  "collaborative robot arm factory"],
+    "MSCI":      ["stock index display board", "financial market data terminal"],
+    "BA.L":      ["Eurofighter Typhoon", "Type 26 frigate", "BAE Systems Astute submarine"],
 }
 
 
