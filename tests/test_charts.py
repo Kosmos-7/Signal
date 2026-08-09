@@ -427,6 +427,27 @@ check("garde-fou de croissance : le plafond de trimestres borne, les plus récen
 # exactement dessus — elles étaient tronquées par nous, pas par la source.
 check("les deux points de troncature partagent le même plafond nommé",
       screener.fusionner_fonda.__defaults__[0] == screener.edgar.MAX_EXERCICES)
+# LE PER TRAVERSAIT LA FUSION AVEC LA BASE DE CALCUL DE LA VEILLE. Les exercices
+# anciens ne sont plus produits par le run courant : leur multiple est repris tel
+# quel. Tant que le change et le rapport d'ADR sont les mêmes, c'est juste ; dès
+# qu'ils changent, sept vieux multiples faux se rangent sous quatre neufs justes.
+_VIEUX = {"devise": "TWD", "per_converti": {"de": "USD", "vers": "TWD"},
+          "an": [{"fin": "2015-12-31", "ca": 10, "eps": 1.0, "per": 26.8},
+                 {"fin": "2016-12-31", "ca": 11, "eps": 1.1, "per": 25.0}]}
+_NEUF = {"devise": "TWD", "per_converti": {"de": "USD", "vers": "TWD", "rapport": 2},
+         "an": [{"fin": "2016-12-31", "ca": 11, "eps": 1.1, "per": 12.5}]}
+_fb = screener.fusionner_fonda(_VIEUX, _NEUF)
+check("base de calcul changée : le multiple ancien est retiré, pas conservé",
+      "per" not in _fb["an"][0] and _fb["an"][1]["per"] == 12.5, str(_fb["an"]))
+check("et les chiffres publiés de cet exercice, eux, survivent",
+      _fb["an"][0]["ca"] == 10 and _fb["an"][0]["eps"] == 1.0, str(_fb["an"][0]))
+_fm = screener.fusionner_fonda(_VIEUX, {**_NEUF, "per_converti": _VIEUX["per_converti"]})
+check("base inchangée : le multiple ancien traverse la fusion",
+      _fm["an"][0]["per"] == 26.8, str(_fm["an"][0]))
+_sans = screener.fusionner_fonda({"devise": "USD", "an": [{"fin": "2015-12-31", "per": 20.0}]},
+                                 {"devise": "USD", "an": [{"fin": "2016-12-31", "per": 21.0}]})
+check("aucune conversion des deux côtés : rien n'est retiré",
+      _sans["an"][0]["per"] == 20.0, str(_sans["an"]))
 # 07/08 : la chaîne a TROIS troncatures (construire_fonda, completer_fonda,
 # fusionner_fonda) et la plus étroite gagne. `construire_fonda` gardait 12 et 20
 # en dur après le relèvement des constantes — 44 fiches sont restées bloquées à
@@ -1339,9 +1360,47 @@ _EST = {"0y": 2.0, "+1y": 2.4}
 check("devises identiques : les deux exercices attendus sont publiés",
       [(e["exercice"], e["per"]) for e in
        screener.per_previsionnel(60.0, _EST, "2025-12-31")] == [(2026, 30.0), (2027, 25.0)])
-# Les six fiches réelles, avec leurs chiffres du 09/08/2026. Ce sont ELLES le
-# test : une règle qui marche sur des cas inventés ne prouve rien ici, puisque
-# c'est le comportement d'une source qu'on modélise.
+# LA SOURCE DÉCLARE LA DEVISE, ET NOUS NE LA LISIONS PAS. La sonde du 08/08 a
+# relevé une colonne `currency` dans `earnings_estimate` — et surtout que la
+# convention N'EST PAS UNIFORME d'un titre à l'autre. Ces quatre lignes sont des
+# RELEVÉS, pas des cas inventés : c'est ce qui rend le test capable de contredire
+# une règle plausible.
+#
+#   ticker   comptes  cotation  currency déclarée   lecture juste
+#   TSM      TWD      USD       USD (par ADR)       cours tel quel
+#   ASX      TWD      USD       USD (par ADR)       cours tel quel
+#   RACE     EUR      USD       EUR                 cours converti
+#   CCJ      CAD      USD       CAD                 cours converti
+#
+# Aucune règle déductible de la place de cotation, du sens du change ou de la
+# croissance implicite ne produit ces quatre réponses : RACE et TSM cotent toutes
+# deux à New York et ne suivent pas la même convention.
+#           prix     BPA est.  taux   BPA publié comptes cotation déclarée attendu
+_DECLARE = [("TSM",   295.0,  16.82,  31.0,  73.71, "TWD", "USD", "USD", "direct"),
+            ("ASX",    37.39,  1.119, 31.0,  18.74, "TWD", "USD", "USD", "direct"),
+            ("RACE",  412.26,  9.792,  0.926, 9.01, "EUR", "USD", "EUR", "converti"),
+            ("CCJ",    97.39,  1.514,  1.37,  1.35, "CAD", "USD", "CAD", "converti")]
+for _t, _p, _e, _tx, _ep, _dcompta, _dc, _de, _att in _DECLARE:
+    _r = screener.per_previsionnel(_p, {"0y": _e, "+1y": _e * 1.08}, "2025-12-31",
+                                   (lambda i, _x=_tx: _x), _ep, _de, _dc, _dcompta)
+    _per = _r[0]["per"] if _r else None
+    _got = ("trou" if _per is None
+            else "converti" if abs(_per - _p * _tx / _e) < 0.05 else "direct")
+    check(f"{_t} : devise déclarée {_de} → {_att}", _got == _att,
+          f"obtenu {_got} ({_per})")
+# Une devise déclarée qui n'est NI celle des comptes NI celle de la cotation est
+# hors de ce que nous savons lire : aucun multiple plutôt qu'un multiple au
+# hasard. Le cas n'a jamais été observé — raison de plus pour ne pas l'improviser.
+check("devise déclarée tierce : aucun multiple",
+      screener.per_previsionnel(100.0, _EST, "2025-12-31", (lambda i: 1.2),
+                                2.0, "JPY", "USD", "EUR") == [])
+# Devise déclarée = devise des comptes, mais change indisponible : on se tait.
+check("devise connue, change absent : aucun multiple",
+      screener.per_previsionnel(100.0, _EST, "2025-12-31", (lambda i: None),
+                                2.0, "EUR", "USD", "EUR") == [])
+# LE DÉPARTAGE DE SECOURS, quand la source ne déclare rien. Il ne tranche que si
+# le change est loin de 1, et s'abstient sinon. Ces six lignes sont les chiffres
+# réels du 09/08/2026 — elles restent le test du repli.
 #            prix     BPA est.  taux    BPA publié  attendu
 _REELS = [("TCEHY",  61.92,  30.96,  7.10,  24.153, "converti"),
           ("VWS.CO", 178.05,  1.153, 0.134,  0.77,  "converti"),
@@ -1355,7 +1414,59 @@ for _t, _p, _e, _tx, _ep, _att in _REELS:
     _per = _r[0]["per"] if _r else None
     _got = ("trou" if _per is None
             else "converti" if abs(_per - _p * _tx / _e) < 0.05 else "direct")
-    check(f"{_t} : {_att}", _got == _att, f"obtenu {_got} ({_per})")
+    check(f"sans déclaration, {_t} : {_att}", _got == _att, f"obtenu {_got} ({_per})")
+# ET LE DÉPARTAGE DE SECOURS SE TROMPE SUR RACE ET CCJ — il s'abstient là où la
+# déclaration donne une réponse. C'est la mesure de ce que la colonne apporte, et
+# la raison pour laquelle elle passe AVANT : deux trous publiés en moins.
+check("la déclaration comble ce que la croissance n'arbitrait pas",
+      screener.per_previsionnel(412.26, {"0y": 9.792}, "2025-12-31",
+                                (lambda i: 0.926), 9.01) == []
+      and screener.per_previsionnel(412.26, {"0y": 9.792}, "2025-12-31",
+                                    (lambda i: 0.926), 9.01,
+                                    "EUR", "USD", "EUR") != [])
+
+print("\n— Le certificat n'est pas toujours l'action —")
+# UN ADR REPRÉSENTE PLUSIEURS ACTIONS, et si le cours est celui du certificat
+# tandis que le bénéfice est celui de l'action, le multiple est faux d'autant.
+# LA MESURE DIT QUE CE N'EST PAS LE CAS ICI : le fournisseur exprime le bénéfice
+# par titre coté, comme le cours — ASE publie 18,74 sur sa ligne américaine et
+# 8,89 sur celle de Taipei, soit exactement le rapport de son ADR. Ces deux
+# lignes-là sont donc le test de la GARDE, pas d'une correction.
+# (Chiffres relevés le 09/08/2026 : ASX yearAgoEps 0,571 USD par certificat,
+#  3711.TW yearAgoEps 8,89 TWD par action, TSM 10,65 USD, 2330.TW 66,25 TWD.)
+check("ASE : le bénéfice publié suit le titre coté, rien à diviser",
+      screener.rapport_adr(0.571, 18.74, 31.0, "USD", "USD") == 1)
+check("et les deux lignes d'ASE portent bien, elles, un écart de deux",
+      abs(0.571 * 31.0 / 8.89 - 2) < 0.12)
+check("TSM : cinq actions par certificat entre les deux lignes",
+      screener.rapport_adr(10.65, 66.25, 31.8, "USD", "USD") == 5)
+check("une valeur sans certificat donne un rapport de 1",
+      screener.rapport_adr(2.55, 2.59, 1.0, "USD", "USD") == 1)
+# Estimations libellées en devise des comptes : les deux bénéfices parlent déjà
+# de la même action, il n'y a pas de rapport à mesurer.
+check("devise déclarée = comptes : rapport de 1 sans mesure",
+      screener.rapport_adr(None, None, None, "EUR", "USD") == 1.0)
+# ET ON S'ABSTIENT SI ÇA NE TOMBE PAS JUSTE. Un rapport à 12 % d'aucune valeur
+# usuelle signale qu'une des deux grandeurs n'est pas ce qu'on croit.
+check("un rapport de 1,6 ne ressemble à aucun rapport d'ADR",
+      screener.rapport_adr(1.6, 1.0, 1.0, "USD", "USD") is None)
+check("sans bénéfice de référence, aucun rapport",
+      screener.rapport_adr(None, 18.74, 31.0, "USD", "USD") is None
+      and screener.rapport_adr(1.21, 0, 31.0, "USD", "USD") is None)
+check("sans change, aucun rapport",
+      screener.rapport_adr(1.21, 18.74, None, "USD", "USD") is None)
+# Le rapport mordu par le PER historique : le multiple d'ASE doit être divisé par
+# deux, pas laissé tel quel.
+_AN_ADR = [{"fin": "2025-12-31", "eps": 18.74}]
+screener.per_historique(_AN_ADR, lambda d: 16.2, False, None,
+                        (lambda d: 31.0), 2.0)
+check("le PER historique d'un ADR est ramené à l'action ordinaire",
+      _AN_ADR[0]["per"] == 13.4, str(_AN_ADR))
+_AN_ORD = [{"fin": "2025-12-31", "eps": 18.74}]
+screener.per_historique(_AN_ORD, lambda d: 16.2, False, None,
+                        (lambda d: 31.0), None)
+check("sans rapport mesuré, on ne divise pas — le trou vaut mieux qu'un facteur inventé",
+      _AN_ORD[0]["per"] == 26.8, str(_AN_ORD))
 # Sans BPA publié positif, rien à quoi comparer — on ne devine pas.
 check("sans bénéfice publié, aucun multiple attendu",
       screener.per_previsionnel(60.0, _EST, "2025-12-31", 7.0, None) == [])

@@ -711,15 +711,15 @@ def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None,
     exactement sur l'ancien comportement : le trou assumé, jamais un multiple
     calculé avec un taux inventé.
 
-    ET LE CERTIFICAT N'EST PAS L'ACTION. Convertir le cours réglait le change et
-    laissait entier le second décalage : un ADR représente PLUSIEURS actions
-    ordinaires, et son cours est donc un multiple du cours de l'action dont les
-    comptes donnent le bénéfice. ASE en a fait la démonstration — un PER
-    prévisionnel publié à 33,4 pour une valeur voisine de 14,5, soit exactement
-    le rapport de deux actions par certificat. `rapport`, mesuré par
-    `rapport_adr` et jamais supposé, ramène le cours à l'action ordinaire. Sans
-    lui on ne divise pas : un rapport inventé ferait un multiple faux, tandis
-    qu'un rapport absent sur un titre ordinaire vaut simplement 1."""
+    ET LE CERTIFICAT N'EST PAS TOUJOURS L'ACTION. Convertir le cours règle le
+    change et laisse entier un second décalage possible : un ADR représente
+    plusieurs actions ordinaires, et son cours est donc un multiple du cours de
+    l'action. `rapport`, mesuré par `rapport_adr` et jamais supposé, ramène le
+    cours à l'unité du bénéfice publié. Sur toutes les fiches observées il vaut
+    un — le fournisseur exprime le bénéfice par titre coté, comme le cours — et
+    cette division n'a donc encore rien changé à un multiple : elle est là pour
+    le jour où les deux unités divergeront. Sans mesure on ne divise pas : un
+    rapport inventé ferait un multiple faux."""
     if not meme_devise and taux is None:
         return an
     if rapport is not None and rapport <= 0:
@@ -922,29 +922,34 @@ TOLERANCE_ADR = 0.12      # 12 % — un rapport d'ADR est un entier simple, pas 
 
 def rapport_adr(bpa_estime_an_dernier, eps_publie, taux,
                 devise_estimations=None, devise_cotation=None):
-    """Combien d'actions ordinaires un titre coté représente-t-il ?
+    """Le bénéfice publié et le cours lu parlent-ils du même titre ?
 
-    POURQUOI CE NOMBRE MANQUAIT. Le PER historique divise le cours du titre COTÉ
-    par le bénéfice par action des COMPTES. Pour une action ordinaire c'est le
-    même dénominateur ; pour un ADR, non — un certificat TSMC vaut cinq actions
-    de Taipei, un certificat ASE en vaut deux. Convertir le cours en devise des
-    comptes, ce que nous faisons depuis le 08/08, corrige le change et laisse le
-    rapport intact : le PER prévisionnel d'ASE sortait à 33,4 pour une valeur
-    réelle voisine de 14,5, soit exactement un facteur deux.
+    LE RISQUE. Le PER historique divise le cours du titre COTÉ par le bénéfice
+    par action des COMPTES. Un certificat TSMC vaut cinq actions de Taipei, un
+    certificat ASE en vaut deux : si le cours est celui du certificat et le
+    bénéfice celui de l'action, le multiple est faux d'autant — et convertir la
+    devise, ce que nous faisons depuis le 08/08, n'y change rien.
+
+    CE QUE LA MESURE A RÉPONDU, et pourquoi cette fonction n'est PAS une
+    correction. Nous avons d'abord cru tenir un multiple faux d'un facteur deux
+    sur ASE. La mesure dit le contraire : le fournisseur exprime le bénéfice par
+    TITRE COTÉ, comme le cours. ASE publie 18,74 sur sa ligne américaine et 8,89
+    sur celle de Taipei — le rapport de son ADR exactement —, si bien que le
+    quotient est cohérent des deux côtés. Sur les sept fiches concernées le
+    rapport vaut UN, et rien n'est divisé. Ce qui reste est une GARDE : le jour
+    où une ligne mélangera les deux unités, elle sera vue au lieu d'être publiée.
 
     COMMENT ON LE MESURE, sans le supposer. La table des estimations porte
-    `yearAgoEps` : le bénéfice du dernier exercice clos, PAR TITRE COTÉ et dans
-    la devise que la source déclare. Les comptes portent le même exercice, par
-    action ordinaire et en devise comptable. Leur rapport, une fois le change
-    appliqué, EST le rapport d'ADR. Rien n'est supposé ; le seul a priori est
-    qu'un rapport d'ADR est un entier simple ou son inverse — ce qui est vrai
-    par construction, un dépositaire ne crée pas de certificat à 1,37 action.
+    `yearAgoEps` : le bénéfice du dernier exercice clos, dans l'unité et la
+    devise du titre coté, telles que la source les déclare. Les comptes portent
+    le même exercice. Leur rapport, une fois le change appliqué, EST le facteur
+    cherché. Le seul a priori est qu'il vaut un entier simple ou son inverse —
+    vrai par construction : un dépositaire ne crée pas de certificat à 1,37 action.
 
     ET ON S'ABSTIENT SI ÇA NE TOMBE PAS JUSTE. Un rapport à 12 % d'aucune valeur
     usuelle signale que l'une des deux grandeurs n'est pas ce qu'on croit — un
     exercice décalé, un retraitement, une devise mal déclarée. Retourner None
-    laisse alors le PER historique se retirer avec son motif, plutôt que de
-    corriger d'un facteur inventé."""
+    laisse alors le cours intact plutôt que le corriger d'un facteur inventé."""
     if devise_estimations and devise_cotation \
             and devise_estimations != devise_cotation:
         # Estimations déjà libellées en devise des comptes : le bénéfice estimé
@@ -1356,9 +1361,24 @@ def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
         return _date(*map(int, iso.split("-"))).toordinal()
 
     out = {"devise": nouveau.get("devise") or ancien.get("devise")}
+    # LE PER EST CALCULÉ, PAS PUBLIÉ — il ne se conserve donc que si la façon
+    # de le calculer n'a pas bougé. Les exercices anciens ne sont plus produits
+    # par le run courant (Yahoo n'en garde que quatre) : leur multiple traverse
+    # la fusion tel quel, avec le change et le rapport d'ADR du jour où il a été
+    # écrit. Quand cette base change — une paire de change qui apparaît, un
+    # rapport d'ADR mesuré pour la première fois — les vieux multiples deviennent
+    # faux en silence à côté des nouveaux, corrects. ASE en portait sept, tous
+    # doubles de leur vraie valeur, sous quatre exercices justes.
+    # C'est la même leçon que la marge nette lue hors de la série dessinée : une
+    # valeur dérivée ne se garde pas, elle se refait — ou elle se retire.
+    _b_av, _b_ap = (ancien.get("per_converti") or {}), (nouveau.get("per_converti") or {})
+    _meme_base = ((_b_av.get("de"), _b_av.get("vers"), _b_av.get("rapport"))
+                  == (_b_ap.get("de"), _b_ap.get("vers"), _b_ap.get("rapport")))
     for cle, borne in (("an", max_an), ("tr", max_tr)):
         frais = {e["fin"] for e in (nouveau.get(cle) or [])}
-        par_fin = {e["fin"]: e for e in (ancien.get(cle) or [])}
+        par_fin = {e["fin"]: (e if (_meme_base or "per" not in e)
+                              else {k: v for k, v in e.items() if k != "per"})
+                   for e in (ancien.get(cle) or [])}
         par_fin.update({e["fin"]: e for e in (nouveau.get(cle) or [])})
         tri = [par_fin[k] for k in sorted(par_fin)]
         # Dédoublonnage à ±7 jours ENTRE runs : Yahoo et EDGAR peuvent dater le
