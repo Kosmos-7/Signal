@@ -839,6 +839,18 @@ def taux_historique(de, vers):
     société elle-même publie ses comparatifs à des taux qui ne sont pas les
     nôtres. C'est très au-dessus de la valeur d'un trou, et très en dessous de
     la précision d'un rapport annuel."""
+    # LE PENNY N'EST PAS UNE DEVISE, C'EST UNE UNITÉ. Londres cote en GBp — des
+    # pence — quand les comptes sont en GBP. Aucune paire de change n'existe
+    # pour ce couple, et il n'en faut pas : le rapport vaut exactement cent, il
+    # est fixe et il n'a pas de cours. La ligne qui suit mettait `de` et `vers`
+    # en majuscules AVANT de les comparer, ce qui transformait GBp en GBP et
+    # faisait conclure « même devise » — BAE Systems perdait ainsi son rendement
+    # du flux disponible, un cours en pence divisant une capitalisation en
+    # livres. Le cas se traite donc ici, avant toute normalisation.
+    if (de or "") == "GBp" and (vers or "").upper() == "GBP":
+        return lambda _iso: 0.01
+    if (de or "").upper() == "GBP" and (vers or "") == "GBp":
+        return lambda _iso: 100.0
     de, vers = (de or "").upper(), (vers or "").upper()
     if not de or not vers or de == vers:
         return None
@@ -2776,7 +2788,18 @@ def score_ticker(ticker, vix=None):
                     # une raison qui n'a rien à voir : UBTech portait ainsi une
                     # mention d'abstention sur devise alors que son bénéfice
                     # estimé est négatif. Un motif faux vaut moins qu'un silence.
-                    if _fx and not prev and any(
+                    # … ET SEULEMENT QUAND LA SOURCE S'EST TUE. Le run du 09/08
+                    # au soir a montré la seconde moitié du problème : Tencent a
+                    # perdu son multiple parce que la PAIRE DE CHANGE n'a rien
+                    # rendu ce jour-là, et la fiche a expliqué au lecteur que
+                    # « notre source n'a pas déclaré la monnaie » — ce qui est
+                    # faux, elle l'a déclarée (CNY). Une panne de taux est un
+                    # accident de run, pas une position éditoriale : on ne dit
+                    # rien, et le repli de fusionner_fonda conserve alors le
+                    # multiple de la veille, dont l'étiquette d'exercice rend
+                    # tout vieillissement visible. C'est exactement ce pour quoi
+                    # ce repli avait été écrit.
+                    if _fx and not prev and not _d_est and any(
                             (est or {}).get(k) and (est or {}).get(k) > 0
                             for k in ("0y", "+1y")):
                         fonda["pe_prev_indecis"] = True

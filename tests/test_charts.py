@@ -1538,6 +1538,22 @@ _ixp = open(os.path.join(RACINE, "index.html"), encoding="utf-8").read()
 check("la fiche explique l'absence, et seulement quand elle a lieu",
       "pe_prev_indecis" in _ixp and "également plausibles" in _ixp)
 
+print("\n— Le penny n'est pas une devise —")
+# Londres cote en GBp — des pence — quand les comptes sont en GBP. Aucune paire
+# de change n'existe pour ce couple et il n'en faut pas : le rapport vaut cent,
+# fixe. `taux_historique` mettait ses arguments en majuscules AVANT de les
+# comparer, donc GBp devenait GBP et la fonction concluait « même devise » :
+# BAE Systems perdait son rendement du flux disponible, un cours en pence
+# divisant une capitalisation en livres.
+_p = screener.taux_historique("GBp", "GBP")
+check("les pence se convertissent en livres par cent",
+      _p is not None and abs(_p("2025-12-31") - 0.01) < 1e-9, str(_p))
+_l = screener.taux_historique("GBP", "GBp")
+check("et réciproquement", _l is not None and abs(_l("2025-12-31") - 100.0) < 1e-9)
+check("deux vraies mêmes devises ne donnent toujours rien",
+      screener.taux_historique("USD", "USD") is None
+      and screener.taux_historique("GBP", "GBP") is None)
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:
