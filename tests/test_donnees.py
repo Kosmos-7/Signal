@@ -402,6 +402,38 @@ faibles = [f"{c}:{v[0]}/{v[1]}" for c, v in compte.items()
 check("chaque critère généraliste est mesuré pour au moins 60 % des titres",
       not faibles, str(faibles))
 
+# CHAQUE TROU DOIT AVOIR UNE RAISON, et les raisons se vérifient sur les données.
+# Ces gardes-ci ne demandent pas qu'un champ soit toujours là : elles demandent
+# que son absence soit COHÉRENTE avec ce que la fiche publie par ailleurs. Une
+# absence qui contredit le reste de la fiche est un défaut de collecte déguisé
+# en donnée manquante — c'est ainsi que douze fiches ont perdu leur rendement du
+# flux disponible pendant des semaines, sept par différence de devise et cinq
+# parce que le fournisseur ne renvoyait pas de capitalisation.
+_sans_rdt = [t for t, d in FICHES.items()
+             if (d.get("breakdown") or {}).get("fcf_margin_pct") is not None
+             and (d.get("breakdown") or {}).get("fcf_yield_pct") is None]
+check("une fiche qui publie une marge de flux publie aussi son rendement",
+      not _sans_rdt, str(_sans_rdt))
+# Un multiple prévisionnel retiré pour cause de devise ne doit l'être QUE là où
+# la devise pose vraiment question : une société déficitaire n'a pas de PER
+# prévisionnel pour une raison qui n'a rien à voir, et le motif serait faux.
+_faux_motif = [t for t, d in FICHES.items()
+               if (d.get("fonda") or {}).get("pe_prev_indecis")
+               and ((d.get("fonda") or {}).get("devise")
+                    == ((d.get("breakdown") or {}).get("devise_cotation")))]
+check("l'abstention sur devise ne vise que des fiches en devises différentes",
+      not _faux_motif, str(_faux_motif))
+# Un bénéfice par action reconstitué doit rester encadré : la règle ne comble
+# que les trous intérieurs, jamais le premier ni le dernier exercice.
+_derives_au_bord = []
+for t, d in FICHES.items():
+    _an = (d.get("fonda") or {}).get("an") or []
+    for i, e in enumerate(_an):
+        if e.get("eps_derive") and (i == 0 or i == len(_an) - 1):
+            _derives_au_bord.append(f"{t}:{e['fin'][:4]}")
+check("aucun bénéfice reconstitué au bord de la série",
+      not _derives_au_bord, str(_derives_au_bord))
+
 # ── 6. COHÉRENCE ENTRE LES FICHIERS PUBLIÉS ────────────────────────────────
 print("\n— Les fichiers publiés racontent-ils la même histoire ? —")
 try:

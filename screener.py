@@ -2192,6 +2192,17 @@ def score_ticker(ticker, vix=None):
         forward_pe   = info.get("forwardPE")             # PER forward (bénéfices attendus)
         trailing_pe  = info.get("trailingPE")            # PER courant (PER courant ≫ forward = bénéfices au creux de cycle)
         market_cap   = info.get("marketCap") or 0
+        # LA CAPITALISATION MANQUE PARFOIS, et elle se recalcule. Le résumé du
+        # fournisseur ne la porte pas sur cinq fiches (Allianz, Micron, Safran,
+        # Siemens, Western Digital) — sans raison apparente, et sans que rien
+        # ne le signale : le rendement du flux disponible y était simplement
+        # absent. Or une capitalisation est un cours multiplié par un nombre
+        # d'actions, tous deux présents, tous deux dans la devise de cotation.
+        # Ce n'est pas une estimation, c'est la définition.
+        if not market_cap:
+            _act = info.get("sharesOutstanding")
+            if _act and prix:
+                market_cap = prix * _act
         debt_eq_raw  = info.get("debtToEquity")          # garde None pour distinguer net-cash (=0) vs missing
         reco         = info.get("recommendationMean") or 3.5
         roe          = info.get("returnOnEquity")        # ROE — proxy qualité du capital ; None si absent
@@ -2408,12 +2419,33 @@ def score_ticker(ticker, vix=None):
         # Rendement du FCF : le FCF est publié en devise COMPTABLE, la
         # capitalisation en devise de COTATION. Quand elles diffèrent (ADR :
         # TSM cotait un « FCF yield » de 34 % — TWD divisés par des USD), le
-        # ratio est un non-sens : on publie null plutôt qu'un chiffre faux.
+        # ratio était un non-sens et on publiait null.
+        #
+        # LE REFUS ÉTAIT BON, LA CONCLUSION TROP COURTE — exactement comme pour
+        # le PER historique le 08/08. Ce qui manquait n'était pas une raison de
+        # s'abstenir, c'était le TAUX. Une capitalisation est un montant à un
+        # instant : la convertir ne demande aucune convention, contrairement à
+        # un flux annuel qu'il faudrait convertir à un taux moyen. Sept fiches
+        # (ABB, ASE, Cameco, Ferrari, Tencent, UBTech, Vestas) retrouvent ainsi
+        # leur rendement du flux disponible. Sans taux — paire introuvable,
+        # réseau en panne — on retombe sur le trou assumé, jamais sur un chiffre
+        # calculé avec un taux inventé.
         _meme_devise = (((info.get("financialCurrency") or "") ==
                          (info.get("currency") or ""))
                         if info.get("financialCurrency") else True)
-        fcf_yield  = (fcf / market_cap * 100) \
-            if (fcf_raw is not None and market_cap and _meme_devise) else None
+        fcf_yield = None
+        if fcf_raw is not None and market_cap:
+            if _meme_devise:
+                fcf_yield = fcf / market_cap * 100
+            else:
+                try:
+                    _tx = taux_historique(info.get("currency") or "",
+                                          info.get("financialCurrency") or "")
+                    _r = _tx(date.today().isoformat()) if _tx else None
+                    if _r and _r > 0:
+                        fcf_yield = fcf / (market_cap * _r) * 100
+                except Exception:
+                    fcf_yield = None
 
         details["rev_growth"] = rev_growth
         details["net_margin"] = margins
