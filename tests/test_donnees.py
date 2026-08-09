@@ -579,6 +579,94 @@ _absents = sorted(set(_pub) - {t["id"] for t in _themes_publies})
 check("chaque thème déclaré est réellement publié dans universe.json",
       not _absents, f"jamais publiés (lancer le screener) : {_absents}")
 
+# ── 9. LE TEXTE DIT-IL LES MÊMES CHIFFRES QUE LA FICHE ? ─────────────────────
+print("\n— La prose et les chiffres racontent-ils la même chose ? —")
+# LE DÉFAUT QUE CE TEST EXISTE POUR ATTRAPER. Le guide de rédaction impose de
+# chiffrer toute affirmation de valorisation ; la signature éditoriale, qui
+# décide des réécritures, ignorait ces mêmes multiples. Un texte pouvait donc
+# citer un PER qui bougeait sous lui sans jamais être réécrit. Samsung annonçait
+# « PER forward 4,0× (PER courant indisponible) » quand la fiche affichait 3,4×
+# et un PER courant de 35,0× — le texte affirmait au lecteur qu'un chiffre
+# n'existait pas alors qu'il était affiché juste au-dessus.
+#
+# La correction est dans generate_analyses.py (les multiples entrent dans la
+# signature, par paliers). Ce test-ci est la GARDE : il relit les nombres de la
+# prose PUBLIÉE et les confronte à la fiche. Il est volontairement grossier —
+# quelques tournures, pas toutes — parce qu'un test qui attrape la moitié des
+# cas vaut infiniment mieux que la relecture humaine qui n'en attrapait aucun.
+import re as _re
+_MOTIFS = [
+    (_re.compile(r"PER forward\s*:?\s*(\d+[,.]?\d*)"),        "forward_pe",   0.15),
+    (_re.compile(r"PER pr[ée]visionnel\s*:?\s*(\d+[,.]?\d*)"), "forward_pe",   0.15),
+    (_re.compile(r"PER courant\s*:?\s*(\d+[,.]?\d*)"),         "trailing_pe",  0.15),
+    (_re.compile(r"marge nette (?:de |à )?(\d+[,.]?\d*)\s*%"),  "net_margin_pct", 0.20),
+]
+_perimes, _lus = [], 0
+for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
+    if not isinstance(_e, dict):
+        continue
+    _txt = json.dumps(_e, ensure_ascii=False)
+    _b = (FICHES.get(_t) or {}).get("breakdown") or {}
+    for _rx, _cle, _tol in _MOTIFS:
+        for _m in _rx.finditer(_txt):
+            _lus += 1
+            _v = float(_m.group(1).replace(",", "."))
+            _ref = _b.get(_cle)
+            if _ref is None or _ref == 0:
+                continue
+            if abs(_v - _ref) / abs(_ref) > _tol:
+                _perimes.append(f"{_t} {_cle}: texte {_v} vs fiche {round(_ref, 1)}")
+check(f"aucun multiple cité ne diverge de la fiche ({_lus} lus)",
+      not _perimes, str(_perimes[:6]))
+# Et l'inverse, plus insidieux : le texte déclare un chiffre INDISPONIBLE alors
+# que la fiche l'affiche. C'est le cas exact de Samsung, et aucun contrôle de
+# valeur ne l'aurait vu puisqu'il n'y a pas de nombre à comparer.
+_absents = []
+for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
+    if not isinstance(_e, dict):
+        continue
+    _txt = json.dumps(_e, ensure_ascii=False)
+    _b = (FICHES.get(_t) or {}).get("breakdown") or {}
+    for _lib, _cle in (("PER courant indisponible", "trailing_pe"),
+                       ("PER forward indisponible", "forward_pe")):
+        if _lib in _txt and _b.get(_cle) is not None:
+            _absents.append(f"{_t} : « {_lib} » mais la fiche affiche {_b[_cle]}")
+check("aucun texte ne dit indisponible un chiffre que la fiche affiche",
+      not _absents, str(_absents[:6]))
+
+# LES PALIERS DE VALORISATION, éprouvés sur la fonction elle-même. Le pas est
+# calé sur la TOLÉRANCE DU TEST ci-dessus, et ce couplage est le cœur du
+# dispositif : tout écart que ce test signalerait a, par construction, déjà
+# changé le palier — donc déclenché une réécriture. Si les deux se désaccordent,
+# on retrouve la situation d'avant, un texte périmé qu'aucune règle ne réveille.
+try:
+    import importlib.util as _u
+    _sp = _u.spec_from_file_location("_ga", "generate_analyses.py")
+    _ga = _u.module_from_spec(_sp)
+    _sys_mod = __import__("sys").modules
+    _sys_mod["_ga"] = _ga
+    _sp.loader.exec_module(_ga)
+except Exception as _e:                                       # noqa: BLE001
+    check("generate_analyses.py est importable", False, f"{type(_e).__name__}: {_e}")
+else:
+    check("le pas des multiples est celui de la tolérance du test",
+          dict((c, p) for c, _m, p in _ga.CHAMPS_VALO)["forward_pe"] == 0.15)
+    _base = {"forward_pe": 20.0, "trailing_pe": 30.0,
+             "fcf_yield_pct": 4.0, "net_margin_pct": 22.0}
+    _s0 = _ga.bucket_valorisation(_base)
+    check("un multiple stable garde son palier",
+          _ga.bucket_valorisation({**_base, "forward_pe": 20.4}) == _s0)
+    check("un multiple qui double change de palier",
+          _ga.bucket_valorisation({**_base, "forward_pe": 40.0}) != _s0)
+    check("une marge qui bouge de dix points change de palier",
+          _ga.bucket_valorisation({**_base, "net_margin_pct": 32.0}) != _s0)
+    check("un multiple absent ou négatif ne fait pas exploser la fonction",
+          _ga.bucket_valorisation({"forward_pe": None, "trailing_pe": -3.0})[:2]
+          == ["na", "neg"])
+    check("les deux niveaux de fiche ont désormais le même socle de rubriques",
+          _ga.CHAMPS_PAR_NIVEAU[_ga.NIVEAU_COMPLET]
+          == _ga.CHAMPS_PAR_NIVEAU[_ga.NIVEAU_THEMATIQUE])
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:
