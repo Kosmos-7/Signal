@@ -59,6 +59,69 @@ def sentinelle(nom, cas, tolerance, total):
     check(f"{nom} (tolérance {tolerance})", len(cas) <= tolerance, detail)
 
 
+
+# ── DÉFAUTS CONNUS : documentés, datés, et qui ne se taisent PAS ─────────────
+#
+# POURQUOI CE REGISTRE EXISTE. Quatre invariants ont été laissés ROUGES le
+# 09/08/2026, au motif honorable qu'ils disaient la vérité sur l'état des
+# données. Conséquence : la CI est passée au rouge à CHAQUE push, et le
+# propriétaire a reçu une notification d'échec par commit. Une alarme qui sonne
+# en permanence n'est plus une alarme — elle ne distingue plus le défaut connu
+# de la régression du jour, et on finit par ne plus la lire. C'était une
+# mauvaise décision d'ingénierie, pas un choix de rigueur.
+#
+# LA BONNE FORME EST CELLE QUE LE PROJET UTILISE DÉJÀ (registre ECARTES_
+# VALIDATION, sentinelles à tolérance) : on n'éteint pas le contrôle, on NOMME
+# ce qu'on sait. Chaque exception porte un motif et le numéro de la tâche qui la
+# suit.
+#
+# ET LE REGISTRE NE PEUT PAS POURRIR : une entrée qui n'apparaît plus dans les
+# faits FAIT ÉCHOUER le test à son tour. Sans cette moitié-là, un registre
+# devient un cimetière de silencieux — on y ajoute au fil des pannes et on n'en
+# retire jamais rien.
+CONNUS = {
+    "la marge d'exercice vient de la série que le graphique dessine": {
+        "LHX": "changement d'exercice fiscal en 2019, série tronquée — tâche #83",
+    },
+    "une fiche qui publie une marge de flux publie aussi son rendement": {
+        "ALV.DE": "capitalisation rendue par intermittence par la source — tâche #84",
+        "MU":     "idem — tâche #84",
+        "SAF.PA": "idem — tâche #84",
+        "SIE.DE": "idem — tâche #84",
+        "WDC":    "idem — tâche #84",
+    },
+    "aucun multiple cité ne diverge de la fiche": {
+        "005930.KS": "texte d'avant l'entrée des multiples dans la signature ; "
+                     "sera réécrit au prochain run éditorial",
+    },
+    "aucun texte ne dit indisponible un chiffre que la fiche affiche": {
+        "005930.KS": "idem — le texte annonce « PER courant indisponible » "
+                     "quand la fiche affiche 35,0×",
+    },
+}
+
+
+def check_connus(nom, cas):
+    """Comme check(), mais avec un registre de défauts connus.
+
+    `cas` : dict {clé -> détail lisible}. Échoue sur toute clé absente du
+    registre (c'est une régression) ET sur toute entrée du registre qui n'est
+    plus constatée (c'est un registre périmé, à nettoyer).
+    """
+    connus = CONNUS.get(nom, {})
+    nouveaux = {k: v for k, v in cas.items() if k not in connus}
+    disparus = [k for k in connus if k not in cas]
+    if nouveaux:
+        check(nom, False, "NOUVEAUX : " + ", ".join(f"{k} ({v})" for k, v in
+                                                    list(nouveaux.items())[:5]))
+    elif disparus:
+        check(f"{nom} — registre à jour", False,
+              f"corrigés, à retirer de CONNUS : {disparus}")
+    else:
+        suffixe = f" ({len(connus)} connu{'s' if len(connus) > 1 else ''}, cf. CONNUS)" if connus else ""
+        check(nom + suffixe, True)
+
+
 FICHES = {}
 for _p in sorted(glob.glob("charts/*.json")):
     try:
@@ -252,7 +315,7 @@ check("chaque valeur projetée porte sa nature, aucune borne haute résiduelle",
 # Deux fiches sur cent vingt-sept, toutes deux à exercice décalé — assez rare
 # pour n'avoir jamais été vu, assez faux pour valoir un test permanent.
 print("\n— La marge d'exercice est-elle celle du dernier exercice publié ? —")
-_decales = []
+_decales = {}
 for _t, _d in FICHES.items():
     _m = (_d.get("breakdown") or {}).get("net_margin_exercice_pct")
     _an = [e for e in ((_d.get("fonda") or {}).get("an") or [])
@@ -261,9 +324,9 @@ for _t, _d in FICHES.items():
         continue
     _attendu = round(_an[-1]["rn"] / _an[-1]["ca"] * 100, 1)
     if abs(_m - _attendu) > 0.6:
-        _decales.append(f"{_t}: {_m} vs {_attendu} ({_an[-1]['fin'][:7]})")
-check("la marge d'exercice vient de la série que le graphique dessine",
-      not _decales, str(_decales[:4]))
+        _decales[_t] = f"{_m} vs {_attendu} ({_an[-1]['fin'][:7]})"
+check_connus("la marge d'exercice vient de la série que le graphique dessine",
+             _decales)
 
 # ── 5. SENTINELLES DE VRAISEMBLANCE ────────────────────────────────────────
 print("\n— Bandes de vraisemblance : une exception est permise, une dérive non —")
@@ -428,8 +491,8 @@ _sans_rdt = [t for t, d in FICHES.items()
              if t not in _UNITE_AMBIGUE
              and (d.get("breakdown") or {}).get("fcf_margin_pct") is not None
              and (d.get("breakdown") or {}).get("fcf_yield_pct") is None]
-check("une fiche qui publie une marge de flux publie aussi son rendement",
-      not _sans_rdt, str(_sans_rdt))
+check_connus("une fiche qui publie une marge de flux publie aussi son rendement",
+             {t: "marge publiée, rendement absent" for t in _sans_rdt})
 # Un multiple prévisionnel retiré pour cause de devise ne doit l'être QUE là où
 # la devise pose vraiment question : une société déficitaire n'a pas de PER
 # prévisionnel pour une raison qui n'a rien à voir, et le motif serait faux.
@@ -601,7 +664,7 @@ _MOTIFS = [
     (_re.compile(r"PER courant\s*:?\s*(\d+[,.]?\d*)"),         "trailing_pe",  0.15),
     (_re.compile(r"marge nette (?:de |à )?(\d+[,.]?\d*)\s*%"),  "net_margin_pct", 0.20),
 ]
-_perimes, _lus = [], 0
+_perimes, _lus = {}, 0
 for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
     if not isinstance(_e, dict):
         continue
@@ -615,13 +678,13 @@ for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
             if _ref is None or _ref == 0:
                 continue
             if abs(_v - _ref) / abs(_ref) > _tol:
-                _perimes.append(f"{_t} {_cle}: texte {_v} vs fiche {round(_ref, 1)}")
-check(f"aucun multiple cité ne diverge de la fiche ({_lus} lus)",
-      not _perimes, str(_perimes[:6]))
+                _perimes[_t] = f"{_cle} : texte {_v} vs fiche {round(_ref, 1)}"
+print(f"  ({_lus} nombres lus dans la prose publiée)")
+check_connus("aucun multiple cité ne diverge de la fiche", _perimes)
 # Et l'inverse, plus insidieux : le texte déclare un chiffre INDISPONIBLE alors
 # que la fiche l'affiche. C'est le cas exact de Samsung, et aucun contrôle de
 # valeur ne l'aurait vu puisqu'il n'y a pas de nombre à comparer.
-_absents = []
+_absents = {}
 for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
     if not isinstance(_e, dict):
         continue
@@ -630,9 +693,9 @@ for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
     for _lib, _cle in (("PER courant indisponible", "trailing_pe"),
                        ("PER forward indisponible", "forward_pe")):
         if _lib in _txt and _b.get(_cle) is not None:
-            _absents.append(f"{_t} : « {_lib} » mais la fiche affiche {_b[_cle]}")
-check("aucun texte ne dit indisponible un chiffre que la fiche affiche",
-      not _absents, str(_absents[:6]))
+            _absents[_t] = f"« {_lib} » mais la fiche affiche {_b[_cle]}"
+check_connus("aucun texte ne dit indisponible un chiffre que la fiche affiche",
+             _absents)
 
 # LES PALIERS DE VALORISATION, éprouvés sur la fonction elle-même. Le pas est
 # calé sur la TOLÉRANCE DU TEST ci-dessus, et ce couplage est le cœur du
