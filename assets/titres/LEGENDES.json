@@ -635,6 +635,14 @@
   "type": "produit",
   "v": "7c6a665f"
  },
+ "IRDM": {
+  "credit": "Flickr user ideonexus",
+  "legende": "Satellite Iridium",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Iridium_satellite.jpg",
+  "source": "File:Iridium satellite.jpg",
+  "v": "51a0d0f3"
+ },
  "ISRG": {
   "legende": "Système chirurgical da Vinci Xi au bloc opératoire",
   "licence": "Public domain",
@@ -679,6 +687,14 @@
   "source": "https://www.lumentum.com/_next/image?url=https%3A%2F%2Fmedia.lumentum.com%2Fsites%2Fdefault%2Ffiles%2F2025-11%2Fproducts-new-img.jpg&w=640&q=80",
   "type": "produit",
   "v": "d0f639b7"
+ },
+ "LR.PA": {
+  "credit": "Discott",
+  "legende": "Prises et interrupteurs muraux — la catégorie de produits de Legrand",
+  "licence": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:SA_power_sockets_Wikimania_2018_.jpg",
+  "source": "File:SA power sockets Wikimania 2018 .jpg",
+  "v": "557ff6ce"
  },
  "LRCX": {
   "credit": "Photo : Lam Research",
@@ -847,6 +863,14 @@
   "type": "produit",
   "v": "846b94bc"
  },
+ "PL": {
+  "credit": "Planet Labs, Inc.",
+  "legende": "Le circuit de Yas Marina vu par un satellite SkySat, constellation de Planet Labs",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Yas_Marina_Circuit,_October_12,_2018_SkySat_(cropped).jpg",
+  "source": "File:Yas Marina Circuit, October 12, 2018 SkySat (cropped).jpg",
+  "v": "84ef946e"
+ },
  "PLTR": {
   "credit": "gruntzooki · CC BY-SA 2.0",
   "legende": "Pavillon Palantir au Forum économique mondial de Davos",
@@ -898,6 +922,14 @@
   "page": "https://commons.wikimedia.org/wiki/File:Ferrari_SF90_Stradale_Washington_DC_Metro_Area,_USA_(2.6).jpg",
   "source": "File:Ferrari SF90 Stradale Washington DC Metro Area, USA (2.6).jpg",
   "v": "0e009c73"
+ },
+ "REGN": {
+  "credit": "Inbal Sela-Culang, Vered Kunik, Yanay Ofran",
+  "legende": "Structure d'une molécule d'anticorps — le métier de Regeneron",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Structure_of_antibody_molecule.jpg",
+  "source": "File:Structure of antibody molecule.jpg",
+  "v": "946272d0"
  },
  "RGTI": {
   "credit": "OJB Quantum",
@@ -1062,6 +1094,14 @@
   "recupere_le": "2026-08-02",
   "source": "https://vistracorp.com/wp-content/uploads/2026/01/Beaver-Valley-008.jpg",
   "v": "c64f11c9"
+ },
+ "VWS.CO": {
+  "credit": "Jens Rost",
+  "legende": "Éolienne Vestas sur la plage de Hvide Sande, Danemark",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Vestas_wind_turbine_on_the_beach_at_Hvide_Sande.png",
+  "source": "File:Vestas wind turbine on the beach at Hvide Sande.png",
+  "v": "71e878ca"
  },
  "WDC": {
   "credit": "4300streetcar · CC BY 4.0",
