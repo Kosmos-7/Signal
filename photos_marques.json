@@ -1,54 +1,6 @@
 {
- "societes": 32,
+ "societes": 40,
  "detail": {
-  "005380.KS": {
-   "candidats": [
-    {
-     "fichier": "SpotMini, Boston Dynamics, Robot.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/SpotMini%2C_Boston_Dynamics%2C_Robot.jpg/1920px-SpotMini%2C_Boston_Dynamics%2C_Robot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:SpotMini,_Boston_Dynamics,_Robot.jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Web Summit",
-     "score": 5,
-     "terme": "Boston Dynamics Spot",
-     "poids": 30688
-    },
-    {
-     "fichier": "Spot robot Royal Air Force.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Spot_robot_Royal_Air_Force.jpg/1920px-Spot_robot_Royal_Air_Force.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Spot_robot_Royal_Air_Force.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Senior Airman John Ennis",
-     "score": 5,
-     "terme": "Boston Dynamics Spot",
-     "poids": 77215
-    },
-    {
-     "fichier": "Atlas climbing into a vehicle.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Atlas_climbing_into_a_vehicle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Atlas_climbing_into_a_vehicle.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "DOD Illustration",
-     "score": 3,
-     "terme": "Boston Dynamics Atlas",
-     "poids": 61833
-    },
-    {
-     "fichier": "YanDavos on SPOT.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/YanDavos_on_SPOT.jpg/1920px-YanDavos_on_SPOT.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:YanDavos_on_SPOT.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "ArticCynda",
-     "score": 0,
-     "terme": "Boston Dynamics Spot",
-     "poids": 142041
-    }
-   ]
-  },
   "2049.TW": {
    "candidats": [
     {
@@ -85,31 +37,42 @@
      "poids": 32248
     },
     {
-     "fichier": "Japan-Mobility-Show-2025-RuinDig 0030.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Japan-Mobility-Show-2025-RuinDig_0030.jpg/1920px-Japan-Mobility-Show-2025-RuinDig_0030.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Japan-Mobility-Show-2025-RuinDig_0030.jpg",
+     "fichier": "Japan-Mobility-Show-2025-RuinDig 0033.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Japan-Mobility-Show-2025-RuinDig_0033.jpg/1920px-Japan-Mobility-Show-2025-RuinDig_0033.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Japan-Mobility-Show-2025-RuinDig_0033.jpg",
      "licence": "CC BY 4.0",
      "famille": "by",
      "auteur": "RuinDig/Yuki Uchida",
      "score": 0,
      "terme": "ball screw actuator",
-     "poids": 36459
+     "poids": 42510
+    },
+    {
+     "fichier": "BallScrews-with-detail-insets.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/BallScrews-with-detail-insets.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:BallScrews-with-detail-insets.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "No machine-readable author provided. Graibeard assumed (based on copyright claim",
+     "score": 0,
+     "terme": "ball screw actuator",
+     "poids": 83347
+    },
+    {
+     "fichier": "BallScrewNut-showing-balls-recirculating-tubes.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/46/BallScrewNut-showing-balls-recirculating-tubes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:BallScrewNut-showing-balls-recirculating-tubes.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "No machine-readable author provided. Graibeard assumed (based on copyright claim",
+     "score": 0,
+     "terme": "ball screw actuator",
+     "poids": 67280
     }
    ]
   },
   "277810.KQ": {
    "candidats": [
-    {
-     "fichier": "Museo del Prado - Goya - Caprichos - No. 24 - No hubo remedio.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Museo_del_Prado_-_Goya_-_Caprichos_-_No._24_-_No_hubo_remedio.jpg/1920px-Museo_del_Prado_-_Goya_-_Caprichos_-_No._24_-_No_hubo_remedio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Museo_del_Prado_-_Goya_-_Caprichos_-_No._24_-_No_hubo_remedio.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Francisco Goya",
-     "score": 0,
-     "terme": "HUBO humanoid robot",
-     "poids": 132032
-    },
     {
      "fichier": "Hubo, Haren (2020) 01.jpg",
      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Hubo%2C_Haren_%282020%29_01.jpg/1920px-Hubo%2C_Haren_%282020%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -142,6 +105,39 @@
      "score": 0,
      "terme": "HUBO humanoid robot",
      "poids": 69760
+    },
+    {
+     "fichier": "Einstein-Hubo.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Einstein-Hubo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Einstein-Hubo.jpg",
+     "licence": "CC BY 2.5",
+     "famille": "by",
+     "auteur": "Dayofid at English Wikipedia",
+     "score": 0,
+     "terme": "HUBO humanoid robot",
+     "poids": 42357
+    },
+    {
+     "fichier": "DATS 24 en Hubo Lier.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/DATS_24_en_Hubo_Lier.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:DATS_24_en_Hubo_Lier.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Bert76",
+     "score": 0,
+     "terme": "HUBO humanoid robot",
+     "poids": 72741
+    },
+    {
+     "fichier": "Hubo store in Aalst, Netherlands.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Hubo_store_in_Aalst%2C_Netherlands.jpg/1920px-Hubo_store_in_Aalst%2C_Netherlands.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Hubo_store_in_Aalst,_Netherlands.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Taketa",
+     "score": -3,
+     "terme": "HUBO humanoid robot",
+     "poids": 91365
     }
    ]
   },
@@ -188,8 +184,30 @@
      "famille": "libre",
      "auteur": "\nWare, Clara Priscilla Buckland, Mrs., 1865- [from old catalog]",
      "score": -12,
-     "terme": "dicing blade wafer",
+     "terme": "wafer dicing saw",
      "poids": 49949
+    },
+    {
+     "fichier": "The art of cookery made plain and easy which far exceeds any thing of the kind yet published ... to which are added one hundred and fifty new and useful receipts and also fifty receipts for (IA b30502330).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/The_art_of_cookery_made_plain_and_easy_which_far_exceeds_any_thing_of_the_kind_yet_published_..._to_which_are_added_one_hundred_and_fifty_new_and_useful_receipts_and_also_fifty_receipts_for_%28IA_b30502330%29.pdf/page1-960px-thumbnail.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_art_of_cookery_made_plain_and_easy_which_far_exceeds_any_thing_of_the_kind_yet_published_..._to_which_are_added_one_hundred_and_fifty_new_and_useful_receipts_and_also_fifty_receipts_for_(IA_b30502330).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nGlasse, Hannah, 1708-1770",
+     "score": -12,
+     "terme": "dicing blade wafer",
+     "poids": 110120
+    },
+    {
+     "fichier": "The Water-cure journal, and herald of reforms, devoted to physiology, hydropathy and the laws of life (IA watercurejournal17newy).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/The_Water-cure_journal%2C_and_herald_of_reforms%2C_devoted_to_physiology%2C_hydropathy_and_the_laws_of_life_%28IA_watercurejournal17newy%29.pdf/page1-1280px-The_Water-cure_journal%2C_and_herald_of_reforms%2C_devoted_to_physiology%2C_hydropathy_and_the_laws_of_life_%28IA_watercurejournal17newy%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Water-cure_journal,_and_herald_of_reforms,_devoted_to_physiology,_hydropathy_and_the_laws_of_life_(IA_watercurejournal17newy).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "wafer dicing saw",
+     "poids": 105241
     }
    ]
   },
@@ -238,6 +256,28 @@
      "score": 0,
      "terme": "cycloidal drive",
      "poids": 49479
+    },
+    {
+     "fichier": "Pulau Pinang Voith Schneider Propeller 04.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Pulau_Pinang_Voith_Schneider_Propeller_04.jpg/1920px-Pulau_Pinang_Voith_Schneider_Propeller_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Pulau_Pinang_Voith_Schneider_Propeller_04.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "LEE 003",
+     "score": 0,
+     "terme": "cycloidal drive",
+     "poids": 84928
+    },
+    {
+     "fichier": "Pulau Pinang Voith Schneider Propeller 03.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Pulau_Pinang_Voith_Schneider_Propeller_03.jpg/1920px-Pulau_Pinang_Voith_Schneider_Propeller_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Pulau_Pinang_Voith_Schneider_Propeller_03.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "LEE 003",
+     "score": 0,
+     "terme": "cycloidal drive",
+     "poids": 62607
     }
    ]
   },
@@ -286,54 +326,28 @@
      "score": 0,
      "terme": "pneumatic actuator",
      "poids": 59241
-    }
-   ]
-  },
-  "6324.T": {
-   "candidats": [
-    {
-     "fichier": "Harmonic Drive.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Harmonic_Drive.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Harmonic_Drive.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "wdwd",
-     "score": 5,
-     "terme": "strain wave gearing",
-     "poids": 79469
     },
     {
-     "fichier": "Harmonic Drive AG strain wave gear set.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Harmonic_Drive_AG_strain_wave_gear_set.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Harmonic_Drive_AG_strain_wave_gear_set.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Pieceofmetalwork",
-     "score": 5,
-     "terme": "strain wave gearing",
-     "poids": 50857
-    },
-    {
-     "fichier": "Детали волновых передач.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/%D0%94%D0%B5%D1%82%D0%B0%D0%BB%D0%B8_%D0%B2%D0%BE%D0%BB%D0%BD%D0%BE%D0%B2%D1%8B%D1%85_%D0%BF%D0%B5%D1%80%D0%B5%D0%B4%D0%B0%D1%87.jpg/1920px-%D0%94%D0%B5%D1%82%D0%B0%D0%BB%D0%B8_%D0%B2%D0%BE%D0%BB%D0%BD%D0%BE%D0%B2%D1%8B%D1%85_%D0%BF%D0%B5%D1%80%D0%B5%D0%B4%D0%B0%D1%87.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:%D0%94%D0%B5%D1%82%D0%B0%D0%BB%D0%B8_%D0%B2%D0%BE%D0%BB%D0%BD%D0%BE%D0%B2%D1%8B%D1%85_%D0%BF%D0%B5%D1%80%D0%B5%D0%B4%D0%B0%D1%87.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Twdragon",
+     "fichier": "Pneumatic Gripper Arm.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Pneumatic_Gripper_Arm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Pneumatic_Gripper_Arm.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Miles Aldrigde",
      "score": 0,
-     "terme": "strain wave gearing",
-     "poids": 56694
+     "terme": "pneumatic actuator",
+     "poids": 21988
     },
     {
-     "fichier": "Castable-Bulk-Metallic-Glass-Strain-Wave-Gears-Towards-Decreasing-the-Cost-of-High-Performance-srep37773-s2.ogv",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Castable-Bulk-Metallic-Glass-Strain-Wave-Gears-Towards-Decreasing-the-Cost-of-High-Performance-srep37773-s2.ogv/1920px--Castable-Bulk-Metallic-Glass-Strain-Wave-Gears-Towards-Decreasing-the-Cost-of-High-Performance-srep37773-s2.ogv.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo",
-     "page": "https://commons.wikimedia.org/wiki/File:Castable-Bulk-Metallic-Glass-Strain-Wave-Gears-Towards-Decreasing-the-Cost-of-High-Performance-srep37773-s2.ogv",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Hofmann D, Polit-Casillas R, Roberts S, Borgonia J, Dillon R, Hilgemann E, Kolod",
+     "fichier": "NIST 1530 (7597137750).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/NIST_1530_%287597137750%29.jpg/1920px-NIST_1530_%287597137750%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:NIST_1530_(7597137750).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "National Institute of Standards and Technology",
      "score": 0,
-     "terme": "strain wave gearing",
-     "poids": 46985
+     "terme": "solenoid valve manifold",
+     "poids": 63081
     }
    ]
   },
@@ -382,6 +396,28 @@
      "score": 0,
      "terme": "rolling bearing",
      "poids": 43459
+    },
+    {
+     "fichier": "Radial-deep-groove-ball-bearing din625-t1 2rs.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Radial-deep-groove-ball-bearing_din625-t1_2rs.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Radial-deep-groove-ball-bearing_din625-t1_2rs.png",
+     "licence": "CC BY 2.5",
+     "famille": "by",
+     "auteur": "Silberwolf",
+     "score": 0,
+     "terme": "deep groove ball bearing",
+     "poids": 49267
+    },
+    {
+     "fichier": "Radial-deep-groove-ball-bearing din625-t1 2rs 180.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/Radial-deep-groove-ball-bearing_din625-t1_2rs_180.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Radial-deep-groove-ball-bearing_din625-t1_2rs_180.png",
+     "licence": "CC BY 2.5",
+     "famille": "by",
+     "auteur": "Silberwolf",
+     "score": 0,
+     "terme": "deep groove ball bearing",
+     "poids": 25095
     }
    ]
   },
@@ -421,6 +457,17 @@
      "poids": 77590
     },
     {
+     "fichier": "Ozone Station, Nagoya Guideway Bus (8555337022).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ozone_Station%2C_Nagoya_Guideway_Bus_%288555337022%29.jpg/1920px-Ozone_Station%2C_Nagoya_Guideway_Bus_%288555337022%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ozone_Station,_Nagoya_Guideway_Bus_(8555337022).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Kzaral",
+     "score": 0,
+     "terme": "linear guideway",
+     "poids": 43534
+    },
+    {
      "fichier": "Nagoya Guideway Bus G-53.jpg",
      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Nagoya_Guideway_Bus_G-53.jpg/1920px-Nagoya_Guideway_Bus_G-53.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
      "page": "https://commons.wikimedia.org/wiki/File:Nagoya_Guideway_Bus_G-53.jpg",
@@ -430,54 +477,17 @@
      "score": 0,
      "terme": "linear guideway",
      "poids": 92396
-    }
-   ]
-  },
-  "6506.T": {
-   "candidats": [
-    {
-     "fichier": "安川電機 MOTOMAN 2009 (9049001111).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/%E5%AE%89%E5%B7%9D%E9%9B%BB%E6%A9%9F_MOTOMAN_2009_%289049001111%29.jpg/1920px-%E5%AE%89%E5%B7%9D%E9%9B%BB%E6%A9%9F_MOTOMAN_2009_%289049001111%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:%E5%AE%89%E5%B7%9D%E9%9B%BB%E6%A9%9F_MOTOMAN_2009_(9049001111).jpg",
-     "licence": "CC BY-SA 2.0",
-     "famille": "by-sa",
-     "auteur": "Hetarllen Mumriken",
-     "score": 0,
-     "terme": "Motoman robot",
-     "poids": 59949
     },
     {
-     "fichier": "UR Lab SDA10.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/UR_Lab_SDA10.jpg/1920px-UR_Lab_SDA10.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:UR_Lab_SDA10.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "URINC",
-     "score": 0,
-     "terme": "Motoman robot",
-     "poids": 59093
-    },
-    {
-     "fichier": "New Jaguar XJ - Flickr - Supermac1961.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/New_Jaguar_XJ_-_Flickr_-_Supermac1961.jpg/1920px-New_Jaguar_XJ_-_Flickr_-_Supermac1961.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:New_Jaguar_XJ_-_Flickr_-_Supermac1961.jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Supermac1961 from CHAFFORD HUNDRED, England",
-     "score": 0,
-     "terme": "Yaskawa Motoman",
-     "poids": 83609
-    },
-    {
-     "fichier": "Motoman à l'entré du FanZone de Bonaberi.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Motoman_%C3%A0_l%27entr%C3%A9_du_FanZone_de_Bonaberi.jpg/1920px-Motoman_%C3%A0_l%27entr%C3%A9_du_FanZone_de_Bonaberi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Motoman_%C3%A0_l%27entr%C3%A9_du_FanZone_de_Bonaberi.jpg",
+     "fichier": "Nagoya Guideway Bus G-13.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Nagoya_Guideway_Bus_G-13.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Nagoya_Guideway_Bus_G-13.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Dieudonne273",
+     "auteur": "TRJN",
      "score": 0,
-     "terme": "Yaskawa Motoman",
-     "poids": 84071
+     "terme": "linear guideway",
+     "poids": 64239
     }
    ]
   },
@@ -525,7 +535,29 @@
      "auteur": "Raimond Spekking",
      "score": 5,
      "terme": "Nidec motor",
-     "poids": 91615
+     "poids": 91364
+    },
+    {
+     "fichier": "MK56FB Driver PCB.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/MK56FB_Driver_PCB.jpg/1920px-MK56FB_Driver_PCB.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:MK56FB_Driver_PCB.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "tony_duell",
+     "score": 5,
+     "terme": "hard disk drive spindle motor",
+     "poids": 96561
+    },
+    {
+     "fichier": "Iomega Jaz V2000Si JAZ 2 - board - Nidec 2806407020 02936200-0560.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Iomega_Jaz_V2000Si_JAZ_2_-_board_-_Nidec_2806407020_02936200-0560.jpg/1920px-Iomega_Jaz_V2000Si_JAZ_2_-_board_-_Nidec_2806407020_02936200-0560.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Iomega_Jaz_V2000Si_JAZ_2_-_board_-_Nidec_2806407020_02936200-0560.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Raimond Spekking",
+     "score": 5,
+     "terme": "Nidec motor",
+     "poids": 149683
     }
    ]
   },
@@ -574,6 +606,28 @@
      "score": -8,
      "terme": "Omron industrial automation",
      "poids": 49966
+    },
+    {
+     "fichier": "AUTONOMOUS GROUND VEHICLE LOW-PROFILE OBSTACLE AVOIDANCE USING 2D LIDAR (IA autonomousground1094563486).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/AUTONOMOUS_GROUND_VEHICLE_LOW-PROFILE_OBSTACLE_AVOIDANCE_USING_2D_LIDAR_%28IA_autonomousground1094563486%29.pdf/page1-960px-AUTONOMOUS_GROUND_VEHICLE_LOW-PROFILE_OBSTACLE_AVOIDANCE_USING_2D_LIDAR_%28IA_autonomousground1094563486%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:AUTONOMOUS_GROUND_VEHICLE_LOW-PROFILE_OBSTACLE_AVOIDANCE_USING_2D_LIDAR_(IA_autonomousground1094563486).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nMiyakawa, Alexander S.",
+     "score": -9,
+     "terme": "Omron proximity sensor",
+     "poids": 33091
+    },
+    {
+     "fichier": "INDUSTRIAL AUTOMATION OF SOLAR-POWERED HYDROGEN GENERATION PLANT (IA industrialautoma1094559700).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/INDUSTRIAL_AUTOMATION_OF_SOLAR-POWERED_HYDROGEN_GENERATION_PLANT_%28IA_industrialautoma1094559700%29.pdf/page1-960px-INDUSTRIAL_AUTOMATION_OF_SOLAR-POWERED_HYDROGEN_GENERATION_PLANT_%28IA_industrialautoma1094559700%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:INDUSTRIAL_AUTOMATION_OF_SOLAR-POWERED_HYDROGEN_GENERATION_PLANT_(IA_industrialautoma1094559700).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nBirkemeier, Scott M.",
+     "score": -12,
+     "terme": "Omron PLC",
+     "poids": 30991
     }
    ]
   },
@@ -622,102 +676,98 @@
      "score": 0,
      "terme": "Keyence sensor",
      "poids": 69222
+    },
+    {
+     "fichier": "Florida Keys (from Lower Matecumbe Key to Key Largo) by Sentinel-2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Florida_Keys_%28from_Lower_Matecumbe_Key_to_Key_Largo%29_by_Sentinel-2.jpg/1920px-Florida_Keys_%28from_Lower_Matecumbe_Key_to_Key_Largo%29_by_Sentinel-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Florida_Keys_(from_Lower_Matecumbe_Key_to_Key_Largo)_by_Sentinel-2.jpg",
+     "licence": "CC BY-SA 3.0 igo",
+     "famille": "by-sa",
+     "auteur": "Copernicus Sentinel-2, ESA",
+     "score": 0,
+     "terme": "Keyence sensor",
+     "poids": 71138
+    },
+    {
+     "fichier": "Florida Keys (from Key West to Big Pine Key) by Sentinel-2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Florida_Keys_%28from_Key_West_to_Big_Pine_Key%29_by_Sentinel-2.jpg/1920px-Florida_Keys_%28from_Key_West_to_Big_Pine_Key%29_by_Sentinel-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Florida_Keys_(from_Key_West_to_Big_Pine_Key)_by_Sentinel-2.jpg",
+     "licence": "CC BY-SA 3.0 igo",
+     "famille": "by-sa",
+     "auteur": "Copernicus Sentinel-2, ESA",
+     "score": 0,
+     "terme": "Keyence sensor",
+     "poids": 80303
     }
    ]
   },
-  "6954.T": {
+  "ALAB": {
    "candidats": [
     {
-     "fichier": "FANUC Robot Assembly Demo.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/FANUC_Robot_Assembly_Demo.jpg/1920px-FANUC_Robot_Assembly_Demo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:FANUC_Robot_Assembly_Demo.jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Steve Jurvetson",
-     "score": 8,
-     "terme": "FANUC robot",
-     "poids": 53860
-    },
-    {
-     "fichier": "FANUC welding robot reaching.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/FANUC_welding_robot_reaching.jpg/1920px-FANUC_welding_robot_reaching.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:FANUC_welding_robot_reaching.jpg",
-     "licence": "CC BY 3.0",
-     "famille": "by",
-     "auteur": "Phasmatisnox",
-     "score": 5,
-     "terme": "FANUC robot",
-     "poids": 74987
-    },
-    {
-     "fichier": "FANUC robot programozása és használata a PTE MIK-en.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/FANUC_robot_programoz%C3%A1sa_%C3%A9s_haszn%C3%A1lata_a_PTE_MIK-en.jpg/1920px-FANUC_robot_programoz%C3%A1sa_%C3%A9s_haszn%C3%A1lata_a_PTE_MIK-en.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:FANUC_robot_programoz%C3%A1sa_%C3%A9s_haszn%C3%A1lata_a_PTE_MIK-en.jpg",
+     "fichier": "AOC-SLG3-2E4R.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/AOC-SLG3-2E4R.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:AOC-SLG3-2E4R.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "PTEMIK",
-     "score": 5,
-     "terme": "FANUC robot",
-     "poids": 58410
+     "auteur": "Dmitry Nosachev",
+     "score": 0,
+     "terme": "PCIe retimer",
+     "poids": 83738
     },
     {
-     "fichier": "FANUC R-2000iB series robot 027.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/FANUC_R-2000iB_series_robot_027.jpg/1920px-FANUC_R-2000iB_series_robot_027.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:FANUC_R-2000iB_series_robot_027.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Mixabest",
-     "score": 5,
-     "terme": "FANUC robot",
-     "poids": 106109
-    }
-   ]
-  },
-  "9880.HK": {
-   "candidats": [
-    {
-     "fichier": "UBTECH Alpha 1PRO Humanoid Robot - hack4no 2016.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/UBTECH_Alpha_1PRO_Humanoid_Robot_-_hack4no_2016.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:UBTECH_Alpha_1PRO_Humanoid_Robot_-_hack4no_2016.jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Kartverket",
-     "score": 5,
-     "terme": "UBTECH humanoid robot",
-     "poids": 68923
-    },
-    {
-     "fichier": "The SpaceX Crew Dragon maneuvers to another port - iss064e053184 (April 5, 2021).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/The_SpaceX_Crew_Dragon_maneuvers_to_another_port_-_iss064e053184_%28April_5%2C_2021%29.jpg/1920px-The_SpaceX_Crew_Dragon_maneuvers_to_another_port_-_iss064e053184_%28April_5%2C_2021%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:The_SpaceX_Crew_Dragon_maneuvers_to_another_port_-_iss064e053184_(April_5,_2021).jpg",
+     "fichier": "Unsteady flow field measurements using LDV. (IA unsteadyflowfiel00hedr).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Unsteady_flow_field_measurements_using_LDV._%28IA_unsteadyflowfiel00hedr%29.pdf/page1-960px-Unsteady_flow_field_measurements_using_LDV._%28IA_unsteadyflowfiel00hedr%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Unsteady_flow_field_measurements_using_LDV._(IA_unsteadyflowfiel00hedr).pdf",
      "licence": "Public domain",
      "famille": "libre",
-     "auteur": "NASA Johnson",
-     "score": 0,
-     "terme": "Walker X robot",
-     "poids": 66224
+     "auteur": "\nHedrick, Steven Dale.;Bodapati, Satyanarayna.",
+     "score": -12,
+     "terme": "CXL memory controller",
+     "poids": 126088
     },
     {
-     "fichier": "A-hexapod-walker-using-a-heterarchical-architecture-for-action-selection-Movie6.ogv",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/A-hexapod-walker-using-a-heterarchical-architecture-for-action-selection-Movie6.ogv/1280px--A-hexapod-walker-using-a-heterarchical-architecture-for-action-selection-Movie6.ogv.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo",
-     "page": "https://commons.wikimedia.org/wiki/File:A-hexapod-walker-using-a-heterarchical-architecture-for-action-selection-Movie6.ogv",
-     "licence": "CC BY 3.0",
-     "famille": "by",
-     "auteur": "Schilling M, Paskarbeit J, Hoinville T, Huffmeier A, Schneider A, Schmitz J, Cru",
-     "score": 0,
-     "terme": "Walker X robot",
-     "poids": 49792
+     "fichier": "The application of bit slice design to digital image processing (IA applicationofbit00stew).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/The_application_of_bit_slice_design_to_digital_image_processing_%28IA_applicationofbit00stew%29.pdf/page1-960px-The_application_of_bit_slice_design_to_digital_image_processing_%28IA_applicationofbit00stew%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_application_of_bit_slice_design_to_digital_image_processing_(IA_applicationofbit00stew).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nStewart, Morris Bennett.",
+     "score": -12,
+     "terme": "CXL memory controller",
+     "poids": 178554
     },
     {
-     "fichier": "A-hexapod-walker-using-a-heterarchical-architecture-for-action-selection-Movie4.ogv",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/A-hexapod-walker-using-a-heterarchical-architecture-for-action-selection-Movie4.ogv/1280px--A-hexapod-walker-using-a-heterarchical-architecture-for-action-selection-Movie4.ogv.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo",
-     "page": "https://commons.wikimedia.org/wiki/File:A-hexapod-walker-using-a-heterarchical-architecture-for-action-selection-Movie4.ogv",
-     "licence": "CC BY 3.0",
-     "famille": "by",
-     "auteur": "Schilling M, Paskarbeit J, Hoinville T, Huffmeier A, Schneider A, Schmitz J, Cru",
-     "score": 0,
-     "terme": "Walker X robot",
-     "poids": 54216
+     "fichier": "RIT NandE Vol15 Num32 1984 Apr19 Complete.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/RIT_NandE_Vol15_Num32_1984_Apr19_Complete.pdf/page1-1280px-RIT_NandE_Vol15_Num32_1984_Apr19_Complete.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:RIT_NandE_Vol15_Num32_1984_Apr19_Complete.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Rochester Institute of Technology",
+     "score": -12,
+     "terme": "CXL memory controller",
+     "poids": 109678
+    },
+    {
+     "fichier": "Design of a data acquisition and reduction system for fatigue testing. (IA designofdataacqu00dalt).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Design_of_a_data_acquisition_and_reduction_system_for_fatigue_testing._%28IA_designofdataacqu00dalt%29.pdf/page1-960px-Design_of_a_data_acquisition_and_reduction_system_for_fatigue_testing._%28IA_designofdataacqu00dalt%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Design_of_a_data_acquisition_and_reduction_system_for_fatigue_testing._(IA_designofdataacqu00dalt).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nDalton, Jerry Wayne",
+     "score": -12,
+     "terme": "CXL memory controller",
+     "poids": 7632
+    },
+    {
+     "fichier": "Design and implementation of a fiber optic link for a token ring local area network. (IA designimplementa00dora).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Design_and_implementation_of_a_fiber_optic_link_for_a_token_ring_local_area_network._%28IA_designimplementa00dora%29.pdf/page1-960px-Design_and_implementation_of_a_fiber_optic_link_for_a_token_ring_local_area_network._%28IA_designimplementa00dora%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Design_and_implementation_of_a_fiber_optic_link_for_a_token_ring_local_area_network._(IA_designimplementa00dora).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nDoran, Thomas J.;Powers, J. P.(John Patrick)",
+     "score": -12,
+     "terme": "CXL memory controller",
+     "poids": 165663
     }
    ]
   },
@@ -766,6 +816,98 @@
      "score": 0,
      "terme": "Rafale fighter jet",
      "poids": 11424
+    },
+    {
+     "fichier": "Rafale - RIAT 2009 (3751416421).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Rafale_-_RIAT_2009_%283751416421%29.jpg/1920px-Rafale_-_RIAT_2009_%283751416421%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Rafale_-_RIAT_2009_(3751416421).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Tim Felce (Airwolfhound)",
+     "score": 0,
+     "terme": "Dassault Rafale",
+     "poids": 30103
+    },
+    {
+     "fichier": "Paris Air Show 2019, Le Bourget (SIAE8789).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Paris_Air_Show_2019%2C_Le_Bourget_%28SIAE8789%29.jpg/1920px-Paris_Air_Show_2019%2C_Le_Bourget_%28SIAE8789%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Paris_Air_Show_2019,_Le_Bourget_(SIAE8789).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Matti Blume",
+     "score": 0,
+     "terme": "Dassault Rafale",
+     "poids": 19421
+    }
+   ]
+  },
+  "APLD": {
+   "candidats": [
+    {
+     "fichier": "North Dakota Colleges.webp",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/North_Dakota_Colleges.webp/1920px-North_Dakota_Colleges.webp.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:North_Dakota_Colleges.webp",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Wikideas1",
+     "score": 0,
+     "terme": "Ellendale North Dakota data center",
+     "poids": 10781
+    },
+    {
+     "fichier": "Book of record of the time capsule of cupaloy (New York World's fair, 1939).djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Book_of_record_of_the_time_capsule_of_cupaloy_%28New_York_World%27s_fair%2C_1939%29.djvu/page1-1920px-Book_of_record_of_the_time_capsule_of_cupaloy_%28New_York_World%27s_fair%2C_1939%29.djvu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Book_of_record_of_the_time_capsule_of_cupaloy_(New_York_World%27s_fair,_1939).djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "[Westinghouse electric corporation]; Frederic W. Goudy Collection (Library of Co",
+     "score": 0,
+     "terme": "Polaris Forge data center",
+     "poids": 47342
+    },
+    {
+     "fichier": "Standardization issues for optical digital data disk (OD3) technology (IA standardizationi5001free).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Standardization_issues_for_optical_digital_data_disk_%28OD3%29_technology_%28IA_standardizationi5001free%29.pdf/page1-960px-Standardization_issues_for_optical_digital_data_disk_%28OD3%29_technology_%28IA_standardizationi5001free%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Standardization_issues_for_optical_digital_data_disk_(OD3)_technology_(IA_standardizationi5001free).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nFreedman, Jean B.",
+     "score": -7,
+     "terme": "Applied Digital data center",
+     "poids": 27281
+    },
+    {
+     "fichier": "Analog-digital conversion equipment for electrocardiographic data (IA analogdigitalcon42taba).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Analog-digital_conversion_equipment_for_electrocardiographic_data_%28IA_analogdigitalcon42taba%29.pdf/page1-960px-Analog-digital_conversion_equipment_for_electrocardiographic_data_%28IA_analogdigitalcon42taba%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Analog-digital_conversion_equipment_for_electrocardiographic_data_(IA_analogdigitalcon42taba).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nTaback, Leonard",
+     "score": -7,
+     "terme": "Applied Digital data center",
+     "poids": 25033
+    },
+    {
+     "fichier": "NIST indices of NTEP device evaluations (IA nistindicesofnt6304sebr 0).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/NIST_indices_of_NTEP_device_evaluations_%28IA_nistindicesofnt6304sebr_0%29.pdf/page1-960px-NIST_indices_of_NTEP_device_evaluations_%28IA_nistindicesofnt6304sebr_0%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:NIST_indices_of_NTEP_device_evaluations_(IA_nistindicesofnt6304sebr_0).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nSebring, Lynn\nButcher, Tina G.\nOppermann, Henry R.",
+     "score": -8,
+     "terme": "Polaris Forge data center",
+     "poids": 127568
+    },
+    {
+     "fichier": "Sampled data adaptive digital computer control of surface ship maneuvers. (IA sampleddataadapt00uhri).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Sampled_data_adaptive_digital_computer_control_of_surface_ship_maneuvers._%28IA_sampleddataadapt00uhri%29.pdf/page1-960px-Sampled_data_adaptive_digital_computer_control_of_surface_ship_maneuvers._%28IA_sampleddataadapt00uhri%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Sampled_data_adaptive_digital_computer_control_of_surface_ship_maneuvers._(IA_sampleddataadapt00uhri).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nUhrin, John Joseph",
+     "score": -9,
+     "terme": "Applied Digital data center",
+     "poids": 9303
     }
    ]
   },
@@ -814,22 +956,103 @@
      "score": 0,
      "terme": "Advanced Semiconductor Engineering",
      "poids": 23815
+    },
+    {
+     "fichier": "Nanzih EPZ.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Nanzih_EPZ.JPG/1920px-Nanzih_EPZ.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Nanzih_EPZ.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Luuva",
+     "score": 0,
+     "terme": "ASE Group Kaohsiung",
+     "poids": 43820
+    },
+    {
+     "fichier": "Halbleiterwerk Frankfurt (Oder) Integrated Circuits.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Halbleiterwerk_Frankfurt_%28Oder%29_Integrated_Circuits.jpg/1920px-Halbleiterwerk_Frankfurt_%28Oder%29_Integrated_Circuits.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Halbleiterwerk_Frankfurt_(Oder)_Integrated_Circuits.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Klaus Folberth",
+     "score": 0,
+     "terme": "semiconductor packaging plant",
+     "poids": 115950
+    }
+   ]
+  },
+  "BE": {
+   "candidats": [
+    {
+     "fichier": "Ventilators at Bloom Energy 02.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ventilators_at_Bloom_Energy_02.jpg/1920px-Ventilators_at_Bloom_Energy_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ventilators_at_Bloom_Energy_02.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Government of California",
+     "score": 0,
+     "terme": "Bloom Energy Server",
+     "poids": 108221
+    },
+    {
+     "fichier": "Ventilators at Bloom Energy 01.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Ventilators_at_Bloom_Energy_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Ventilators_at_Bloom_Energy_01.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Government of California",
+     "score": 0,
+     "terme": "Bloom Energy Server",
+     "poids": 95871
+    },
+    {
+     "fichier": "Touring the Bloom Energy Servers.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Touring_the_Bloom_Energy_Servers.jpg/1920px-Touring_the_Bloom_Energy_Servers.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Touring_the_Bloom_Energy_Servers.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Bloom Energy",
+     "score": 0,
+     "terme": "Bloom Energy Server",
+     "poids": 86080
+    },
+    {
+     "fichier": "LSM-YSZ Solid Oxide Fuel Cell FIB-SEM Reconstruction.webm",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/LSM-YSZ_Solid_Oxide_Fuel_Cell_FIB-SEM_Reconstruction.webm/1280px--LSM-YSZ_Solid_Oxide_Fuel_Cell_FIB-SEM_Reconstruction.webm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo",
+     "page": "https://commons.wikimedia.org/wiki/File:LSM-YSZ_Solid_Oxide_Fuel_Cell_FIB-SEM_Reconstruction.webm",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Joshua Taillon",
+     "score": 0,
+     "terme": "solid oxide fuel cell",
+     "poids": 62370
+    },
+    {
+     "fichier": "Bloom Energy servers are not hot.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Bloom_Energy_servers_are_not_hot.jpg/1920px-Bloom_Energy_servers_are_not_hot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Bloom_Energy_servers_are_not_hot.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Bloom Energy",
+     "score": 0,
+     "terme": "Bloom Energy Server",
+     "poids": 44081
+    },
+    {
+     "fichier": "Bloom Energy Servers.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Bloom_Energy_Servers.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Bloom_Energy_Servers.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Bloom Energy",
+     "score": 0,
+     "terme": "Bloom Energy Server",
+     "poids": 57434
     }
    ]
   },
   "BLK": {
    "candidats": [
-    {
-     "fichier": "Webs and Dew (33911799610).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Webs_and_Dew_%2833911799610%29.jpg/1920px-Webs_and_Dew_%2833911799610%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Webs_and_Dew_(33911799610).jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Ed Dunens",
-     "score": 0,
-     "terme": "iShares",
-     "poids": 105564
-    },
     {
      "fichier": "Tillamook Rock Lighthouse, 1947 - NARA - 298212.tif",
      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Tillamook_Rock_Lighthouse%2C_1947_-_NARA_-_298212.tif/lossy-page1-1920px-Tillamook_Rock_Lighthouse%2C_1947_-_NARA_-_298212.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -862,6 +1085,39 @@
      "score": 0,
      "terme": "iShares",
      "poids": 100820
+    },
+    {
+     "fichier": "Spider web Luc Viatour.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Spider_web_Luc_Viatour.jpg/1920px-Spider_web_Luc_Viatour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Spider_web_Luc_Viatour.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Luc Viatour",
+     "score": 0,
+     "terme": "iShares",
+     "poids": 44165
+    },
+    {
+     "fichier": "Pear-shaped leucauge spider (Opadometa fastigata) webs.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Pear-shaped_leucauge_spider_%28Opadometa_fastigata%29_webs.jpg/1920px-Pear-shaped_leucauge_spider_%28Opadometa_fastigata%29_webs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Pear-shaped_leucauge_spider_(Opadometa_fastigata)_webs.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Charles J. Sharp",
+     "score": 0,
+     "terme": "iShares",
+     "poids": 127810
+    },
+    {
+     "fichier": "Old peasant with dagger and long smoking pipe, Mestia, Svanetia, Georgia (Republic).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Old_peasant_with_dagger_and_long_smoking_pipe%2C_Mestia%2C_Svanetia%2C_Georgia_%28Republic%29.jpg/1920px-Old_peasant_with_dagger_and_long_smoking_pipe%2C_Mestia%2C_Svanetia%2C_Georgia_%28Republic%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Old_peasant_with_dagger_and_long_smoking_pipe,_Mestia,_Svanetia,_Georgia_(Republic).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Unknown photographer, restored by Adam Cuerden",
+     "score": 0,
+     "terme": "BlackRock headquarters",
+     "poids": 70599
     }
    ]
   },
@@ -910,6 +1166,28 @@
      "score": 0,
      "terme": "BNP Paribas headquarters",
      "poids": 110965
+    },
+    {
+     "fichier": "Paris BNP Paribas 885.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Paris_BNP_Paribas_885.jpg/1920px-Paris_BNP_Paribas_885.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Paris_BNP_Paribas_885.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "GFreihalter",
+     "score": 0,
+     "terme": "BNP Paribas headquarters",
+     "poids": 84396
+    },
+    {
+     "fichier": "Nantes - Rue La Fayette - 01.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Nantes_-_Rue_La_Fayette_-_01.jpg/1920px-Nantes_-_Rue_La_Fayette_-_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Nantes_-_Rue_La_Fayette_-_01.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "François de Dijon",
+     "score": 0,
+     "terme": "BNP Paribas agence",
+     "poids": 114668
     }
    ]
   },
@@ -958,6 +1236,227 @@
      "score": 0,
      "terme": "industrial barcode reader",
      "poids": 25561
+    },
+    {
+     "fichier": "Imperialism, A Study.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Imperialism%2C_A_Study.djvu/page1-960px-Imperialism%2C_A_Study.djvu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Imperialism,_A_Study.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nJohn Atkinson Hobson",
+     "score": 0,
+     "terme": "industrial barcode reader",
+     "poids": 3585
+    }
+   ]
+  },
+  "CIFR": {
+   "candidats": [
+    {
+     "fichier": "Mary Harrison McKee sitting back in chair with pearl earrings, pearl necklace and choker - DPLA - a82a595a7c15a16317c35e0589e543c5 (page 6).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_6%29.jpg/1920px-Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_6%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings,_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_(page_6).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Harris &amp; Ewing",
+     "score": 0,
+     "terme": "Black Pearl data center",
+     "poids": 27357
+    },
+    {
+     "fichier": "Mary Harrison McKee sitting back in chair with pearl earrings, pearl necklace and choker - DPLA - a82a595a7c15a16317c35e0589e543c5 (page 5).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_5%29.jpg/1920px-Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_5%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings,_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_(page_5).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Harris &amp; Ewing",
+     "score": 0,
+     "terme": "Black Pearl data center",
+     "poids": 27810
+    },
+    {
+     "fichier": "Mary Harrison McKee sitting back in chair with pearl earrings, pearl necklace and choker - DPLA - a82a595a7c15a16317c35e0589e543c5 (page 4).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_4%29.jpg/1920px-Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_4%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings,_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_(page_4).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Harris &amp; Ewing",
+     "score": 0,
+     "terme": "Black Pearl data center",
+     "poids": 31699
+    },
+    {
+     "fichier": "Mary Harrison McKee sitting back in chair with pearl earrings, pearl necklace and choker - DPLA - a82a595a7c15a16317c35e0589e543c5 (page 3).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_3%29.jpg/1920px-Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings,_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_(page_3).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Harris &amp; Ewing",
+     "score": 0,
+     "terme": "Black Pearl data center",
+     "poids": 73929
+    },
+    {
+     "fichier": "Mary Harrison McKee sitting back in chair with pearl earrings, pearl necklace and choker - DPLA - a82a595a7c15a16317c35e0589e543c5 (page 2).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_2%29.jpg/1920px-Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_2%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings,_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_(page_2).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Harris &amp; Ewing",
+     "score": 0,
+     "terme": "Black Pearl data center",
+     "poids": 67426
+    },
+    {
+     "fichier": "Mary Harrison McKee sitting back in chair with pearl earrings, pearl necklace and choker - DPLA - a82a595a7c15a16317c35e0589e543c5 (page 1).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_1%29.jpg/1920px-Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings%2C_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_%28page_1%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Mary_Harrison_McKee_sitting_back_in_chair_with_pearl_earrings,_pearl_necklace_and_choker_-_DPLA_-_a82a595a7c15a16317c35e0589e543c5_(page_1).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Harris &amp; Ewing",
+     "score": 0,
+     "terme": "Black Pearl data center",
+     "poids": 76961
+    }
+   ]
+  },
+  "CORZ": {
+   "candidats": [
+    {
+     "fichier": "Texas colleges 2.webp",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Texas_colleges_2.webp/1920px-Texas_colleges_2.webp.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Texas_colleges_2.webp",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Wikideas1",
+     "score": 0,
+     "terme": "Denton Texas data center",
+     "poids": 32691
+    },
+    {
+     "fichier": "Artemis III Weather Shield Core Stage Timelapse (KSC-20260622-RV-FMX02-Artemis III-Weather Shield Core Stage Timelapse-WON M21727).webm",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Artemis_III_Weather_Shield_Core_Stage_Timelapse_%28KSC-20260622-RV-FMX02-Artemis_III-Weather_Shield_Core_Stage_Timelapse-WON_M21727%29.webm/1920px--Artemis_III_Weather_Shield_Core_Stage_Timelapse_%28KSC-20260622-RV-FMX02-Artemis_III-Weather_Shield_Core_Stage_Timelapse-WON_M21727%29.webm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo",
+     "page": "https://commons.wikimedia.org/wiki/File:Artemis_III_Weather_Shield_Core_Stage_Timelapse_(KSC-20260622-RV-FMX02-Artemis_III-Weather_Shield_Core_Stage_Timelapse-WON_M21727).webm",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Kennedy Space Center",
+     "score": 0,
+     "terme": "Core Scientific data center",
+     "poids": 85320
+    },
+    {
+     "fichier": "Artemis III SLS Core Stage Weather Cover Arrival at KSC (KSC-20260621-PH-AJN02 0061).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_at_KSC_%28KSC-20260621-PH-AJN02_0061%29.jpg/1920px-Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_at_KSC_%28KSC-20260621-PH-AJN02_0061%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_at_KSC_(KSC-20260621-PH-AJN02_0061).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Kennedy Space Center / NASA/Amber Jean Notvest",
+     "score": 0,
+     "terme": "Core Scientific data center",
+     "poids": 100289
+    },
+    {
+     "fichier": "Artemis III SLS Core Stage Weather Cover Arrival (KSC-20260622-PH-AJN01 0117).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_%28KSC-20260622-PH-AJN01_0117%29.jpg/1920px-Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_%28KSC-20260622-PH-AJN01_0117%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_(KSC-20260622-PH-AJN01_0117).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Kennedy Space Center / NASA/Amber Jean Notvest",
+     "score": 0,
+     "terme": "Core Scientific data center",
+     "poids": 62456
+    },
+    {
+     "fichier": "Artemis III SLS Core Stage Weather Cover Arrival (KSC-20260622-PH-AJN01 0092).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_%28KSC-20260622-PH-AJN01_0092%29.jpg/1920px-Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_%28KSC-20260622-PH-AJN01_0092%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_(KSC-20260622-PH-AJN01_0092).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Kennedy Space Center / NASA/Amber Jean Notvest",
+     "score": 0,
+     "terme": "Core Scientific data center",
+     "poids": 115340
+    },
+    {
+     "fichier": "Artemis III SLS Core Stage Weather Cover Arrival (KSC-20260622-PH-AJN01 0065).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_%28KSC-20260622-PH-AJN01_0065%29.jpg/1920px-Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_%28KSC-20260622-PH-AJN01_0065%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Artemis_III_SLS_Core_Stage_Weather_Cover_Arrival_(KSC-20260622-PH-AJN01_0065).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Kennedy Space Center / NASA/Amber Jean Notvest",
+     "score": 0,
+     "terme": "Core Scientific data center",
+     "poids": 35534
+    }
+   ]
+  },
+  "CRDO": {
+   "candidats": [
+    {
+     "fichier": "Innenleben der Nintendo Switch 20230405 HOF09139 RAW-Export.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Innenleben_der_Nintendo_Switch_20230405_HOF09139_RAW-Export.png/1920px-Innenleben_der_Nintendo_Switch_20230405_HOF09139_RAW-Export.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Innenleben_der_Nintendo_Switch_20230405_HOF09139_RAW-Export.png",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "PantheraLeo1359531",
+     "score": 0,
+     "terme": "SerDes chip",
+     "poids": 113966
+    },
+    {
+     "fichier": "Collection complète des lois, décrets, ordonnances, règlemens et avis du Conseil d’État, tome 70, 1870.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Collection_compl%C3%A8te_des_lois%2C_d%C3%A9crets%2C_ordonnances%2C_r%C3%A8glemens_et_avis_du_Conseil_d%E2%80%99%C3%89tat%2C_tome_70%2C_1870.djvu/page1-1920px-Collection_compl%C3%A8te_des_lois%2C_d%C3%A9crets%2C_ordonnances%2C_r%C3%A8glemens_et_avis_du_Conseil_d%E2%80%99%C3%89tat%2C_tome_70%2C_1870.djvu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Collection_compl%C3%A8te_des_lois,_d%C3%A9crets,_ordonnances,_r%C3%A8glemens_et_avis_du_Conseil_d%E2%80%99%C3%89tat,_tome_70,_1870.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Jean-Baptiste Duvergier",
+     "score": 0,
+     "terme": "SerDes chip",
+     "poids": 3585
+    },
+    {
+     "fichier": "After Death or Disembodied Man.djvu",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/After_Death_or_Disembodied_Man.djvu/page1-1920px-After_Death_or_Disembodied_Man.djvu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:After_Death_or_Disembodied_Man.djvu",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Paschal Beverly Randolph",
+     "score": 0,
+     "terme": "Credo active electrical cable",
+     "poids": 14494
+    },
+    {
+     "fichier": "The Engineering and Mining Journal 1899-07-22- Vol 68 Iss 4 (IA sim engineering-and-mining-journal 1899-07-22 68 4).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/The_Engineering_and_Mining_Journal_1899-07-22-_Vol_68_Iss_4_%28IA_sim_engineering-and-mining-journal_1899-07-22_68_4%29.pdf/page1-1280px-The_Engineering_and_Mining_Journal_1899-07-22-_Vol_68_Iss_4_%28IA_sim_engineering-and-mining-journal_1899-07-22_68_4%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Engineering_and_Mining_Journal_1899-07-22-_Vol_68_Iss_4_(IA_sim_engineering-and-mining-journal_1899-07-22_68_4).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "Credo active electrical cable",
+     "poids": 143437
+    },
+    {
+     "fichier": "The Engineering and Mining Journal 1897-04-24- Vol 63 Iss 17 (IA sim engineering-and-mining-journal 1897-04-24 63 17).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/The_Engineering_and_Mining_Journal_1897-04-24-_Vol_63_Iss_17_%28IA_sim_engineering-and-mining-journal_1897-04-24_63_17%29.pdf/page1-1280px-The_Engineering_and_Mining_Journal_1897-04-24-_Vol_63_Iss_17_%28IA_sim_engineering-and-mining-journal_1897-04-24_63_17%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Engineering_and_Mining_Journal_1897-04-24-_Vol_63_Iss_17_(IA_sim_engineering-and-mining-journal_1897-04-24_63_17).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "",
+     "score": -12,
+     "terme": "Credo active electrical cable",
+     "poids": 134803
+    },
+    {
+     "fichier": "SP-4012v4.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/SP-4012v4.pdf/page1-960px-SP-4012v4.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:SP-4012v4.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "National Aeronautics and Space Administration",
+     "score": -12,
+     "terme": "AEC cable data center",
+     "poids": 140108
     }
    ]
   },
@@ -1005,7 +1504,29 @@
      "auteur": "Tibidibtibo",
      "score": 0,
      "terme": "Tour AXA La Defense",
-     "poids": 42325
+     "poids": 42763
+    },
+    {
+     "fichier": "Tour UAP déconstructon.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Tour_UAP_d%C3%A9constructon.jpg/1920px-Tour_UAP_d%C3%A9constructon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Tour_UAP_d%C3%A9constructon.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Tibidibtibo",
+     "score": 0,
+     "terme": "Tour AXA La Defense",
+     "poids": 46921
+    },
+    {
+     "fichier": "Tour AXA Montreal.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tour_AXA_Montreal.JPG/1920px-Tour_AXA_Montreal.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Tour_AXA_Montreal.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Jean Gagnon",
+     "score": 0,
+     "terme": "Tour AXA La Defense",
+     "poids": 78317
     }
    ]
   },
@@ -1054,6 +1575,135 @@
      "score": 0,
      "terme": "SolidWorks",
      "poids": 42347
+    },
+    {
+     "fichier": "SolidWorks Controlled pattern.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/SolidWorks_Controlled_pattern.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:SolidWorks_Controlled_pattern.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Brejchab",
+     "score": 0,
+     "terme": "SolidWorks",
+     "poids": 44909
+    },
+    {
+     "fichier": "NEMO---Screenshot-3.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/NEMO---Screenshot-3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:NEMO---Screenshot-3.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "SolidWorks",
+     "score": 0,
+     "terme": "SolidWorks",
+     "poids": 75993
+    }
+   ]
+  },
+  "EME": {
+   "candidats": [
+    {
+     "fichier": "Rigid Non-Metallic Conduit 1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Rigid_Non-Metallic_Conduit_1.jpg/1920px-Rigid_Non-Metallic_Conduit_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Rigid_Non-Metallic_Conduit_1.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Anibal Maysonet",
+     "score": 0,
+     "terme": "electrical conduit installation",
+     "poids": 127987
+    },
+    {
+     "fichier": "Moscow, Bolshoy Ustynsky Bridge, conduit pipes, Aug 2025 02.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Moscow%2C_Bolshoy_Ustynsky_Bridge%2C_conduit_pipes%2C_Aug_2025_02.jpg/1920px-Moscow%2C_Bolshoy_Ustynsky_Bridge%2C_conduit_pipes%2C_Aug_2025_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Moscow,_Bolshoy_Ustynsky_Bridge,_conduit_pipes,_Aug_2025_02.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Retired electrician",
+     "score": 0,
+     "terme": "electrical conduit installation",
+     "poids": 57078
+    },
+    {
+     "fichier": "Moscow, Bolshoy Ustynsky Bridge, conduit pipes, Aug 2025 01.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Moscow%2C_Bolshoy_Ustynsky_Bridge%2C_conduit_pipes%2C_Aug_2025_01.jpg/1920px-Moscow%2C_Bolshoy_Ustynsky_Bridge%2C_conduit_pipes%2C_Aug_2025_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Moscow,_Bolshoy_Ustynsky_Bridge,_conduit_pipes,_Aug_2025_01.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Retired electrician",
+     "score": 0,
+     "terme": "electrical conduit installation",
+     "poids": 71003
+    },
+    {
+     "fichier": "Layout and installation of power feed and control conduits in a power substation located in Queens. (CS179, 11-07-2019) (49034422512).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Layout_and_installation_of_power_feed_and_control_conduits_in_a_power_substation_located_in_Queens._%28CS179%2C_11-07-2019%29_%2849034422512%29.jpg/1920px-Layout_and_installation_of_power_feed_and_control_conduits_in_a_power_substation_located_in_Queens._%28CS179%2C_11-07-2019%29_%2849034422512%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Layout_and_installation_of_power_feed_and_control_conduits_in_a_power_substation_located_in_Queens._(CS179,_11-07-2019)_(49034422512).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "MTA Capital Construction Mega Projects",
+     "score": 0,
+     "terme": "electrical conduit installation",
+     "poids": 86032
+    },
+    {
+     "fichier": "Layout and installation of conduit to run power feed cables to a control room in a substation in Queens. 06-20-19 (48105050291).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Layout_and_installation_of_conduit_to_run_power_feed_cables_to_a_control_room_in_a_substation_in_Queens._06-20-19_%2848105050291%29.jpg/1920px-Layout_and_installation_of_conduit_to_run_power_feed_cables_to_a_control_room_in_a_substation_in_Queens._06-20-19_%2848105050291%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Layout_and_installation_of_conduit_to_run_power_feed_cables_to_a_control_room_in_a_substation_in_Queens._06-20-19_(48105050291).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "MTA Capital Construction Mega Projects",
+     "score": 0,
+     "terme": "electrical conduit installation",
+     "poids": 91503
+    },
+    {
+     "fichier": "Layout & installation of power feed conduits to electrical power panels in a power substation in Queens. 10-23-2019 (48959548102).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Layout_%26_installation_of_power_feed_conduits_to_electrical_power_panels_in_a_power_substation_in_Queens._10-23-2019_%2848959548102%29.jpg/1920px-Layout_%26_installation_of_power_feed_conduits_to_electrical_power_panels_in_a_power_substation_in_Queens._10-23-2019_%2848959548102%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Layout_%26_installation_of_power_feed_conduits_to_electrical_power_panels_in_a_power_substation_in_Queens._10-23-2019_(48959548102).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "MTA Capital Construction Mega Projects",
+     "score": 0,
+     "terme": "electrical conduit installation",
+     "poids": 67507
+    }
+   ]
+  },
+  "FIX": {
+   "candidats": [
+    {
+     "fichier": "Rooftop Packaged Units.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Rooftop_Packaged_Units.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Rooftop_Packaged_Units.JPG",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "P199",
+     "score": 0,
+     "terme": "HVAC rooftop unit",
+     "poids": 86353
+    },
+    {
+     "fichier": "LawrenceScarpa Cherokee 8268.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/LawrenceScarpa_Cherokee_8268.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:LawrenceScarpa_Cherokee_8268.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Calderoliver",
+     "score": 0,
+     "terme": "HVAC rooftop unit",
+     "poids": 61966
+    },
+    {
+     "fichier": "Helicopter delivering a rooftop HVAC unit -03- (9718240309).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Helicopter_delivering_a_rooftop_HVAC_unit_-03-_%289718240309%29.jpg/1920px-Helicopter_delivering_a_rooftop_HVAC_unit_-03-_%289718240309%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Helicopter_delivering_a_rooftop_HVAC_unit_-03-_(9718240309).jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Ben Schumin from Montgomery Village, Maryland, USA",
+     "score": 0,
+     "terme": "HVAC rooftop unit",
+     "poids": 21215
     }
    ]
   },
@@ -1080,220 +1730,6 @@
      "score": 0,
      "terme": "Thales radar antenna",
      "poids": 48424
-    },
-    {
-     "fichier": "Thales Ground Master GM200 ILA-2018.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Thales_Ground_Master_GM200_ILA-2018.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Thales_Ground_Master_GM200_ILA-2018.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Boevaya mashina",
-     "score": 0,
-     "terme": "Thales Ground Master radar",
-     "poids": 57224
-    },
-    {
-     "fichier": "Thales Ground Master 400 alpha - Dutch armed forces.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Thales_Ground_Master_400_alpha_-_Dutch_armed_forces.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Thales_Ground_Master_400_alpha_-_Dutch_armed_forces.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Defensie",
-     "score": 0,
-     "terme": "Thales Ground Master radar",
-     "poids": 95758
-    }
-   ]
-  },
-  "IONQ": {
-   "candidats": [
-    {
-     "fichier": "Zeeman Structure of Ca-40.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Zeeman_Structure_of_Ca-40.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Zeeman_Structure_of_Ca-40.png",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Lere01",
-     "score": 0,
-     "terme": "trapped ion quantum computer",
-     "poids": 35419
-    },
-    {
-     "fichier": "Zeeman Structure of Ca-40 2.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Zeeman_Structure_of_Ca-40_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Zeeman_Structure_of_Ca-40_2.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Lere01",
-     "score": 0,
-     "terme": "trapped ion quantum computer",
-     "poids": 35419
-    },
-    {
-     "fichier": "Simplified scale model of the quantum computing demonstrator housed in two 19-inch racks with major components labeled.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Simplified_scale_model_of_the_quantum_computing_demonstrator_housed_in_two_19-inch_racks_with_major_components_labeled.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Simplified_scale_model_of_the_quantum_computing_demonstrator_housed_in_two_19-inch_racks_with_major_components_labeled.png",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Authors of the study: I. Pogorelov, T. Feldker, Ch. D. Marciniak, L. Postler, G.",
-     "score": 0,
-     "terme": "trapped ion quantum computer",
-     "poids": 64785
-    },
-    {
-     "fichier": "Quantum Computing; Ion Trapping (5941055642).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Quantum_Computing%3B_Ion_Trapping_%285941055642%29.jpg/1920px-Quantum_Computing%3B_Ion_Trapping_%285941055642%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Quantum_Computing;_Ion_Trapping_(5941055642).jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "National Institute of Standards and Technology",
-     "score": 0,
-     "terme": "trapped ion quantum computer",
-     "poids": 99935
-    }
-   ]
-  },
-  "ISRG": {
-   "candidats": [
-    {
-     "fichier": "WBAMC first in DoD to use robot for surgery 160502-A-EK666-477.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-477.jpg/1920px-WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-477.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-477.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Marcy Sanchez",
-     "score": 5,
-     "terme": "da Vinci Surgical System",
-     "poids": 80670
-    },
-    {
-     "fichier": "WBAMC first in DoD to use robot for surgery 160502-A-EK666-474.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-474.jpg/1920px-WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-474.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-474.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Marcy Sanchez",
-     "score": 5,
-     "terme": "da Vinci Surgical System",
-     "poids": 76722
-    },
-    {
-     "fichier": "WBAMC first in DoD to use robot for surgery 160502-A-EK666-469.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-469.jpg/1920px-WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-469.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-469.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Marcy Sanchez",
-     "score": 5,
-     "terme": "da Vinci Surgical System",
-     "poids": 73011
-    },
-    {
-     "fichier": "WBAMC first in DoD to use robot for surgery 160502-A-EK666-460.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-460.jpg/1920px-WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-460.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-460.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Marcy Sanchez",
-     "score": 5,
-     "terme": "da Vinci Surgical System",
-     "poids": 97619
-    }
-   ]
-  },
-  "KGX.DE": {
-   "candidats": [
-    {
-     "fichier": "Still forklifts.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Still_forklifts.jpg/1920px-Still_forklifts.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Still_forklifts.jpg",
-     "licence": "CC BY-SA 2.0",
-     "famille": "by-sa",
-     "auteur": "SignalPAD",
-     "score": 0,
-     "terme": "STILL forklift",
-     "poids": 57834
-    },
-    {
-     "fichier": "Still RX20-15 forklift.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Still_RX20-15_forklift.jpg/1920px-Still_RX20-15_forklift.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Still_RX20-15_forklift.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Cjp24",
-     "score": 0,
-     "terme": "STILL forklift",
-     "poids": 98373
-    },
-    {
-     "fichier": "Still 013.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Still_013.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Still_013.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "GeorgHH",
-     "score": 0,
-     "terme": "STILL forklift",
-     "poids": 112572
-    },
-    {
-     "fichier": "STILL R70-30 in 2005 Pretoria.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/STILL_R70-30_in_2005_Pretoria.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:STILL_R70-30_in_2005_Pretoria.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Ossewa",
-     "score": 0,
-     "terme": "STILL forklift",
-     "poids": 117241
-    }
-   ]
-  },
-  "KKR": {
-   "candidats": [
-    {
-     "fichier": "Pier 66 and Hudson Yards (01473)p.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Pier_66_and_Hudson_Yards_%2801473%29p.jpg/1920px-Pier_66_and_Hudson_Yards_%2801473%29p.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Pier_66_and_Hudson_Yards_(01473)p.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Rhododendrites",
-     "score": 0,
-     "terme": "30 Hudson Yards",
-     "poids": 90566
-    },
-    {
-     "fichier": "Hudson Yards from Hudson Commons (95131p).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Hudson_Yards_from_Hudson_Commons_%2895131p%29.jpg/1920px-Hudson_Yards_from_Hudson_Commons_%2895131p%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_from_Hudson_Commons_(95131p).jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Rhododendrites",
-     "score": 0,
-     "terme": "30 Hudson Yards",
-     "poids": 72215
-    },
-    {
-     "fichier": "Hudson Yards from Hudson Commons (95131p) (30 Hudson Yards).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Hudson_Yards_from_Hudson_Commons_%2895131p%29_%2830_Hudson_Yards%29.jpg/1920px-Hudson_Yards_from_Hudson_Commons_%2895131p%29_%2830_Hudson_Yards%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_from_Hudson_Commons_(95131p)_(30_Hudson_Yards).jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Rhododendrites",
-     "score": 0,
-     "terme": "30 Hudson Yards",
-     "poids": 70158
-    },
-    {
-     "fichier": "Hudson Yards Construction 2019-09-30 21-16.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Hudson_Yards_Construction_2019-09-30_21-16.jpg/1920px-Hudson_Yards_Construction_2019-09-30_21-16.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_Construction_2019-09-30_21-16.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Axel Tschentscher",
-     "score": 0,
-     "terme": "30 Hudson Yards",
-     "poids": 143034
     }
    ]
   },
@@ -1320,76 +1756,6 @@
      "score": 0,
      "terme": "London Stock Exchange building",
      "poids": 72746
-    },
-    {
-     "fichier": "Royal Exchange London Bank Junction 2020 03.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Royal_Exchange_London_Bank_Junction_2020_03.jpg/1920px-Royal_Exchange_London_Bank_Junction_2020_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange_London_Bank_Junction_2020_03.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Julian Herzog (Website)",
-     "score": 0,
-     "terme": "London Stock Exchange building",
-     "poids": 114011
-    },
-    {
-     "fichier": "Royal Exchange (3624902569).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Royal_Exchange_%283624902569%29.jpg/1920px-Royal_Exchange_%283624902569%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange_(3624902569).jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Rev Stan from London, UK",
-     "score": 0,
-     "terme": "London Stock Exchange building",
-     "poids": 108737
-    }
-   ]
-  },
-  "MA": {
-   "candidats": [
-    {
-     "fichier": "Nexo credit card - 2022-07-08.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Nexo_credit_card_-_2022-07-08.jpg/1920px-Nexo_credit_card_-_2022-07-08.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Nexo_credit_card_-_2022-07-08.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Bretwa",
-     "score": 5,
-     "terme": "Mastercard credit card",
-     "poids": 44520
-    },
-    {
-     "fichier": "Nexo Crypto Credit Card.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Nexo_Crypto_Credit_Card.jpg/1920px-Nexo_Crypto_Credit_Card.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Nexo_Crypto_Credit_Card.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "XoMEoX",
-     "score": 5,
-     "terme": "Mastercard credit card",
-     "poids": 37326
-    },
-    {
-     "fichier": "N26 Maestro Card.jpeg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/N26_Maestro_Card.jpeg/1920px-N26_Maestro_Card.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:N26_Maestro_Card.jpeg",
-     "licence": "CC BY-SA 3.0 de",
-     "famille": "by-sa",
-     "auteur": "iToms",
-     "score": 5,
-     "terme": "Maestro card",
-     "poids": 40071
-    },
-    {
-     "fichier": "MasterCard credit card (5532390715).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/MasterCard_credit_card_%285532390715%29.jpg/1920px-MasterCard_credit_card_%285532390715%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:MasterCard_credit_card_(5532390715).jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Håkan Dahlström from Malmö, Sweden",
-     "score": 5,
-     "terme": "Mastercard credit card",
-     "poids": 89694
     }
    ]
   },
@@ -1438,6 +1804,28 @@
      "score": 0,
      "terme": "Moody's Corporation",
      "poids": 57071
+    },
+    {
+     "fichier": "One World Trade Center in Winter with Trees.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/One_World_Trade_Center_in_Winter_with_Trees.jpg/1920px-One_World_Trade_Center_in_Winter_with_Trees.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:One_World_Trade_Center_in_Winter_with_Trees.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "aismallard",
+     "score": 0,
+     "terme": "7 World Trade Center",
+     "poids": 166250
+    },
+    {
+     "fichier": "One World Trade Center and Lower Manhattan skyline from the harbor, New York.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/One_World_Trade_Center_and_Lower_Manhattan_skyline_from_the_harbor%2C_New_York.jpg/1920px-One_World_Trade_Center_and_Lower_Manhattan_skyline_from_the_harbor%2C_New_York.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:One_World_Trade_Center_and_Lower_Manhattan_skyline_from_the_harbor,_New_York.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Christian David",
+     "score": 0,
+     "terme": "7 World Trade Center",
+     "poids": 65798
     }
    ]
   },
@@ -1475,6 +1863,109 @@
      "score": -12,
      "terme": "MSCI headquarters",
      "poids": 21778
+    },
+    {
+     "fichier": "Leveraging gamification techniques and strategies as a means of improving maritime border security data collection (IA leveraginggamifi1094556116).pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Leveraging_gamification_techniques_and_strategies_as_a_means_of_improving_maritime_border_security_data_collection_%28IA_leveraginggamifi1094556116%29.pdf/page1-960px-Leveraging_gamification_techniques_and_strategies_as_a_means_of_improving_maritime_border_security_data_collection_%28IA_leveraginggamifi1094556116%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Leveraging_gamification_techniques_and_strategies_as_a_means_of_improving_maritime_border_security_data_collection_(IA_leveraginggamifi1094556116).pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "\nCoulter, Joseph Paul",
+     "score": -12,
+     "terme": "MSCI headquarters",
+     "poids": 36490
+    },
+    {
+     "fichier": "Final independent external peer review report, Jordan Creek-Springfield, Greene County, Missouri feasibility study report and environmental assessment - USACE-p16021coll7-4508.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Final_independent_external_peer_review_report%2C_Jordan_Creek-Springfield%2C_Greene_County%2C_Missouri_feasibility_study_report_and_environmental_assessment_-_USACE-p16021coll7-4508.pdf/page1-960px-thumbnail.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Final_independent_external_peer_review_report,_Jordan_Creek-Springfield,_Greene_County,_Missouri_feasibility_study_report_and_environmental_assessment_-_USACE-p16021coll7-4508.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Battelle Memorial Institute; United States. Army. Corps of Engineers. Baltimore ",
+     "score": -12,
+     "terme": "MSCI headquarters",
+     "poids": 88066
+    },
+    {
+     "fichier": "Documents about Martin Luther King, Jr., Executive Order 14176, 44-me-1987 hs1-852611265 76-02-part 3 of 5.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Documents_about_Martin_Luther_King%2C_Jr.%2C_Executive_Order_14176%2C_44-me-1987_hs1-852611265_76-02-part_3_of_5.pdf/page1-1280px-Documents_about_Martin_Luther_King%2C_Jr.%2C_Executive_Order_14176%2C_44-me-1987_hs1-852611265_76-02-part_3_of_5.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Documents_about_Martin_Luther_King,_Jr.,_Executive_Order_14176,_44-me-1987_hs1-852611265_76-02-part_3_of_5.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Federal Government of the United States (Q48525)",
+     "score": -12,
+     "terme": "MSCI headquarters",
+     "poids": 119610
+    }
+   ]
+  },
+  "MUV2.DE": {
+   "candidats": [
+    {
+     "fichier": "Wzwz schwabing 14 munich re tree.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Wzwz_schwabing_14_munich_re_tree.JPG/1920px-Wzwz_schwabing_14_munich_re_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Wzwz_schwabing_14_munich_re_tree.JPG",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Wzwz",
+     "score": 0,
+     "terme": "Muenchener Rueckversicherung",
+     "poids": 150362
+    },
+    {
+     "fichier": "Wzwz schwabing 12 munich re tree.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Wzwz_schwabing_12_munich_re_tree.JPG/1920px-Wzwz_schwabing_12_munich_re_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Wzwz_schwabing_12_munich_re_tree.JPG",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Wzwz",
+     "score": 0,
+     "terme": "Munich Re headquarters",
+     "poids": 86314
+    },
+    {
+     "fichier": "Münchner Rückversicherungs-Gesellschaft2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg/1920px-M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ricardalovesmonuments",
+     "score": 0,
+     "terme": "Munich Re headquarters",
+     "poids": 147188
+    },
+    {
+     "fichier": "Münchner Rückversicherungs-Gesellschaft 4.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_4.jpg/1920px-M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_4.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ricardalovesmonuments",
+     "score": 0,
+     "terme": "Munich Re headquarters",
+     "poids": 147638
+    },
+    {
+     "fichier": "Münchner Rückversicherungs-Gesellschaft 3.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_3.jpg/1920px-M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_3.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ricardalovesmonuments",
+     "score": 0,
+     "terme": "Munich Re headquarters",
+     "poids": 111556
+    },
+    {
+     "fichier": "Münchner Rückversicherungs-Gesellschaft 1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_1.jpg/1920px-M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft_1.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Ricardalovesmonuments",
+     "score": 0,
+     "terme": "Munich Re headquarters",
+     "poids": 129710
     }
    ]
   },
@@ -1501,6 +1992,570 @@
      "score": 0,
      "terme": "Novo Nordisk insulin pen",
      "poids": 71734
+    },
+    {
+     "fichier": "Inzulin-aspartát.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Inzulin-aspart%C3%A1t.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Inzulin-aspart%C3%A1t.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Milda 444",
+     "score": 0,
+     "terme": "FlexPen insulin",
+     "poids": 28044
+    },
+    {
+     "fichier": "Insulin pen.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Insulin_pen.JPG/1920px-Insulin_pen.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Insulin_pen.JPG",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "No machine-readable author provided. PerPlex assumed (based on copyright claims)",
+     "score": 0,
+     "terme": "Novo Nordisk insulin pen",
+     "poids": 102445
+    },
+    {
+     "fichier": "OJ C 415 of 2019 - LV Latvian.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/OJ_C_415_of_2019_-_LV_Latvian.pdf/page1-960px-OJ_C_415_of_2019_-_LV_Latvian.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:OJ_C_415_of_2019_-_LV_Latvian.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Publications Office of the European Union",
+     "score": -12,
+     "terme": "Novo Nordisk insulin pen",
+     "poids": 36923
+    },
+    {
+     "fichier": "OJ C 415 of 2019 - LT Lithuanian.pdf",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/OJ_C_415_of_2019_-_LT_Lithuanian.pdf/page1-960px-OJ_C_415_of_2019_-_LT_Lithuanian.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:OJ_C_415_of_2019_-_LT_Lithuanian.pdf",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Publications Office of the European Union",
+     "score": -12,
+     "terme": "Novo Nordisk insulin pen",
+     "poids": 38129
+    }
+   ]
+  },
+  "PDD": {
+   "candidats": [
+    {
+     "fichier": "Updated apps for iOS and Android.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Updated_apps_for_iOS_and_Android.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Updated_apps_for_iOS_and_Android.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "tithaerf",
+     "score": 0,
+     "terme": "Temu app",
+     "poids": 53747
+    },
+    {
+     "fichier": "The FAKE $7 Nintendo Clone Consoles from TEMU (2160p 60fps AV1-128kbit AAC)-00.09.38.400.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/The_FAKE_%247_Nintendo_Clone_Consoles_from_TEMU_%282160p_60fps_AV1-128kbit_AAC%29-00.09.38.400.png/1920px-The_FAKE_%247_Nintendo_Clone_Consoles_from_TEMU_%282160p_60fps_AV1-128kbit_AAC%29-00.09.38.400.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_FAKE_$7_Nintendo_Clone_Consoles_from_TEMU_(2160p_60fps_AV1-128kbit_AAC)-00.09.38.400.png",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "BeatEmUps",
+     "score": 0,
+     "terme": "Temu package",
+     "poids": 41196
+    },
+    {
+     "fichier": "Temù - Chiesa di San Bartolomeo Apostolo.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo.jpg/1920px-Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "HeavenMI",
+     "score": 0,
+     "terme": "Temu app",
+     "poids": 102393
+    },
+    {
+     "fichier": "Temù - Chiesa di San Bartolomeo Apostolo - campanile.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo_-_campanile.jpg/1920px-Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo_-_campanile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Tem%C3%B9_-_Chiesa_di_San_Bartolomeo_Apostolo_-_campanile.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "HeavenMI",
+     "score": 0,
+     "terme": "Temu app",
+     "poids": 53271
+    },
+    {
+     "fichier": "Temu centrale idroelettrica .jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Temu_centrale_idroelettrica_.jpg/1920px-Temu_centrale_idroelettrica_.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Temu_centrale_idroelettrica_.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Bramfab",
+     "score": 0,
+     "terme": "Temu app",
+     "poids": 95309
+    },
+    {
+     "fichier": "Resort Kala Temu,.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/Resort_Kala_Temu%2C.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Resort_Kala_Temu,.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Sandi rambe",
+     "score": 0,
+     "terme": "Temu app",
+     "poids": 156214
+    }
+   ]
+  },
+  "QBTS": {
+   "candidats": [
+    {
+     "fichier": "Latest D-Wave 2000 Qubit Processor (25215169297).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Latest_D-Wave_2000_Qubit_Processor_%2825215169297%29.jpg/1920px-Latest_D-Wave_2000_Qubit_Processor_%2825215169297%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Latest_D-Wave_2000_Qubit_Processor_(25215169297).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson from Menlo Park, USA",
+     "score": 6,
+     "terme": "D-Wave quantum computer",
+     "poids": 64722
+    },
+    {
+     "fichier": "Hot off the press — the latest D-Wave wafer of quantum processors and TIME cover story.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Hot_off_the_press_%E2%80%94_the_latest_D-Wave_wafer_of_quantum_processors_and_TIME_cover_story.jpg/1920px-Hot_off_the_press_%E2%80%94_the_latest_D-Wave_wafer_of_quantum_processors_and_TIME_cover_story.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Hot_off_the_press_%E2%80%94_the_latest_D-Wave_wafer_of_quantum_processors_and_TIME_cover_story.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson",
+     "score": 6,
+     "terme": "D-Wave quantum computer",
+     "poids": 104328
+    },
+    {
+     "fichier": "D-Wave Two 512 qubit Vesuvius chip.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/D-Wave_Two_512_qubit_Vesuvius_chip.jpg/1920px-D-Wave_Two_512_qubit_Vesuvius_chip.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:D-Wave_Two_512_qubit_Vesuvius_chip.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson",
+     "score": 6,
+     "terme": "D-Wave quantum computer",
+     "poids": 98543
+    },
+    {
+     "fichier": "A Wafer of the Latest D-Wave Quantum Computers (39188583425).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/A_Wafer_of_the_Latest_D-Wave_Quantum_Computers_%2839188583425%29.jpg/1920px-A_Wafer_of_the_Latest_D-Wave_Quantum_Computers_%2839188583425%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:A_Wafer_of_the_Latest_D-Wave_Quantum_Computers_(39188583425).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson from Menlo Park, USA",
+     "score": 6,
+     "terme": "D-Wave quantum computer",
+     "poids": 92829
+    },
+    {
+     "fichier": "Ghost in the Quantum Machine (25215168597).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Ghost_in_the_Quantum_Machine_%2825215168597%29.jpg/1920px-Ghost_in_the_Quantum_Machine_%2825215168597%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ghost_in_the_Quantum_Machine_(25215168597).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson from Menlo Park, USA",
+     "score": 5,
+     "terme": "D-Wave quantum computer",
+     "poids": 117574
+    },
+    {
+     "fichier": "The Day the Earth Smiled - PIA17172.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/The_Day_the_Earth_Smiled_-_PIA17172.jpg/1920px-The_Day_the_Earth_Smiled_-_PIA17172.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Day_the_Earth_Smiled_-_PIA17172.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA/JPL-Caltech/SSI",
+     "score": 0,
+     "terme": "D-Wave Advantage",
+     "poids": 37100
+    }
+   ]
+  },
+  "QUBT": {
+   "candidats": [
+    {
+     "fichier": "Vignes près du Pic de Vissou - October 2020.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Vignes_pr%C3%A8s_du_Pic_de_Vissou_-_October_2020.jpg/1920px-Vignes_pr%C3%A8s_du_Pic_de_Vissou_-_October_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Vignes_pr%C3%A8s_du_Pic_de_Vissou_-_October_2020.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Christian Ferrer",
+     "score": 0,
+     "terme": "integrated photonic circuit",
+     "poids": 166319
+    },
+    {
+     "fichier": "Samuel Beckett, Pic, 1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Samuel_Beckett%2C_Pic%2C_1.jpg/1920px-Samuel_Beckett%2C_Pic%2C_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Samuel_Beckett,_Pic,_1.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Roger Pic",
+     "score": 0,
+     "terme": "integrated photonic circuit",
+     "poids": 62572
+    },
+    {
+     "fichier": "Pic du Midi de Bigorre cloudy Wikimedia Commons.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Pic_du_Midi_de_Bigorre_cloudy_Wikimedia_Commons.jpg/1920px-Pic_du_Midi_de_Bigorre_cloudy_Wikimedia_Commons.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Pic_du_Midi_de_Bigorre_cloudy_Wikimedia_Commons.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Benh LIEU SONG",
+     "score": 0,
+     "terme": "integrated photonic circuit",
+     "poids": 108874
+    },
+    {
+     "fichier": "Pic Casterau (4).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Pic_Casterau_%284%29.jpg/1920px-Pic_Casterau_%284%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Pic_Casterau_(4).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Tournasol7",
+     "score": 0,
+     "terme": "integrated photonic circuit",
+     "poids": 93640
+    },
+    {
+     "fichier": "Increasing-the-density-of-passive-photonic-integrated-circuits-via-nanophotonic-cloaking-ncomms13126-s8.ogv",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Increasing-the-density-of-passive-photonic-integrated-circuits-via-nanophotonic-cloaking-ncomms13126-s8.ogv/1280px--Increasing-the-density-of-passive-photonic-integrated-circuits-via-nanophotonic-cloaking-ncomms13126-s8.ogv.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo",
+     "page": "https://commons.wikimedia.org/wiki/File:Increasing-the-density-of-passive-photonic-integrated-circuits-via-nanophotonic-cloaking-ncomms13126-s8.ogv",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Shen B, Polson R, Menon R",
+     "score": 0,
+     "terme": "integrated photonic circuit",
+     "poids": 42075
+    },
+    {
+     "fichier": "Increasing-the-density-of-passive-photonic-integrated-circuits-via-nanophotonic-cloaking-ncomms13126-s6.ogv",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Increasing-the-density-of-passive-photonic-integrated-circuits-via-nanophotonic-cloaking-ncomms13126-s6.ogv/1280px--Increasing-the-density-of-passive-photonic-integrated-circuits-via-nanophotonic-cloaking-ncomms13126-s6.ogv.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo",
+     "page": "https://commons.wikimedia.org/wiki/File:Increasing-the-density-of-passive-photonic-integrated-circuits-via-nanophotonic-cloaking-ncomms13126-s6.ogv",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Shen B, Polson R, Menon R",
+     "score": 0,
+     "terme": "integrated photonic circuit",
+     "poids": 57067
+    }
+   ]
+  },
+  "RACE": {
+   "candidats": [
+    {
+     "fichier": "Ferrari factory (Maranello, Modena) in 2018.02.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ferrari_factory_%28Maranello%2C_Modena%29_in_2018.02.jpg/1920px-Ferrari_factory_%28Maranello%2C_Modena%29_in_2018.02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ferrari_factory_(Maranello,_Modena)_in_2018.02.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "CAPTAIN RAJU",
+     "score": 0,
+     "terme": "Ferrari Maranello factory",
+     "poids": 91680
+    },
+    {
+     "fichier": "Ferrari SF90, BAS 24, Brussels (P1170502-RR).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Ferrari_SF90%2C_BAS_24%2C_Brussels_%28P1170502-RR%29.jpg/1920px-Ferrari_SF90%2C_BAS_24%2C_Brussels_%28P1170502-RR%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ferrari_SF90,_BAS_24,_Brussels_(P1170502-RR).jpg",
+     "licence": "CC BY-SA",
+     "famille": "by-sa",
+     "auteur": "Matti Blume",
+     "score": 0,
+     "terme": "Ferrari SF90 Stradale",
+     "poids": 90909
+    },
+    {
+     "fichier": "Ferrari SF90, BAS 24, Brussels (P1170486-RR).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Ferrari_SF90%2C_BAS_24%2C_Brussels_%28P1170486-RR%29.jpg/1920px-Ferrari_SF90%2C_BAS_24%2C_Brussels_%28P1170486-RR%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ferrari_SF90,_BAS_24,_Brussels_(P1170486-RR).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Matti Blume",
+     "score": 0,
+     "terme": "Ferrari SF90 Stradale",
+     "poids": 81524
+    },
+    {
+     "fichier": "Ferrari SF90 XX Stradale 2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Ferrari_SF90_XX_Stradale_2.jpg/1920px-Ferrari_SF90_XX_Stradale_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ferrari_SF90_XX_Stradale_2.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Calreyn88",
+     "score": 0,
+     "terme": "Ferrari SF90 Stradale",
+     "poids": 106107
+    },
+    {
+     "fichier": "Ferrari SF90 Stradale Washington DC Metro Area, USA (2.6).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Ferrari_SF90_Stradale_Washington_DC_Metro_Area%2C_USA_%282.6%29.jpg/1920px-Ferrari_SF90_Stradale_Washington_DC_Metro_Area%2C_USA_%282.6%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ferrari_SF90_Stradale_Washington_DC_Metro_Area,_USA_(2.6).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "OWS Photography",
+     "score": 0,
+     "terme": "Ferrari SF90 Stradale",
+     "poids": 131399
+    }
+   ]
+  },
+  "RGTI": {
+   "candidats": [
+    {
+     "fichier": "Wire Bonded Superconducting Quantum Chip with 6 Transmons 003.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_003.png/1920px-Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_003.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_003.png",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "OJB Quantum",
+     "score": 6,
+     "terme": "superconducting quantum processor",
+     "poids": 30624
+    },
+    {
+     "fichier": "Wire Bonded Superconducting Quantum Chip with 6 Transmons 002.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_002.png/1920px-Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_002.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_002.png",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "OJB Quantum",
+     "score": 6,
+     "terme": "superconducting quantum processor",
+     "poids": 52886
+    },
+    {
+     "fichier": "Wire Bonded Superconducting Quantum Chip with 6 Transmons 001.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_001.png/1920px-Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_001.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_001.png",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "OJB Quantum",
+     "score": 6,
+     "terme": "superconducting quantum processor",
+     "poids": 53313
+    }
+   ]
+  },
+  "RHM.DE": {
+   "candidats": [
+    {
+     "fichier": "MJ-8458-main-image.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/17/MJ-8458-main-image.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:MJ-8458-main-image.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Rheinmetall Defence",
+     "score": 0,
+     "terme": "Rheinmetall Boxer",
+     "poids": 85374
+    }
+   ]
+  },
+  "SKF-B.ST": {
+   "candidats": [
+    {
+     "fichier": "Wingquist bearing00.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Wingquist_bearing00.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Wingquist_bearing00.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Androstachys",
+     "score": 0,
+     "terme": "SKF spherical roller bearing",
+     "poids": 58860
+    },
+    {
+     "fichier": "Swedish-American worker at the SKF roller bearing factory8d27963v.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Swedish-American_worker_at_the_SKF_roller_bearing_factory8d27963v.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Swedish-American_worker_at_the_SKF_roller_bearing_factory8d27963v.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Marjory Collins",
+     "score": 0,
+     "terme": "SKF bearing",
+     "poids": 55620
+    },
+    {
+     "fichier": "Swedish-American worker at the SKF roller bearing factory 8d27964v.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Swedish-American_worker_at_the_SKF_roller_bearing_factory_8d27964v.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Swedish-American_worker_at_the_SKF_roller_bearing_factory_8d27964v.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Marjory Collins",
+     "score": 0,
+     "terme": "SKF bearing",
+     "poids": 71546
+    },
+    {
+     "fichier": "Swedish-American foreman with the SKF roller bearing factory 8d27990v.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Swedish-American_foreman_with_the_SKF_roller_bearing_factory_8d27990v.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Swedish-American_foreman_with_the_SKF_roller_bearing_factory_8d27990v.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Marjory Collins",
+     "score": 0,
+     "terme": "roller bearing SKF",
+     "poids": 86191
+    },
+    {
+     "fichier": "Swedish-American foreman at the SKF roller bearing plant 8d27972v.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Swedish-American_foreman_at_the_SKF_roller_bearing_plant_8d27972v.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Swedish-American_foreman_at_the_SKF_roller_bearing_plant_8d27972v.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Marjory Collins",
+     "score": 0,
+     "terme": "SKF bearing",
+     "poids": 69284
+    },
+    {
+     "fichier": "Swedish-American foreman at the SKF roller bearing factory at home 8d27989v.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Swedish-American_foreman_at_the_SKF_roller_bearing_factory_at_home_8d27989v.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Swedish-American_foreman_at_the_SKF_roller_bearing_factory_at_home_8d27989v.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Marjory Collins",
+     "score": 0,
+     "terme": "SKF bearing",
+     "poids": 63544
+    }
+   ]
+  },
+  "SYM": {
+   "candidats": [
+    {
+     "fichier": "NCSU Hunt Library Book Robot 20130109.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/NCSU_Hunt_Library_Book_Robot_20130109.png/1920px-NCSU_Hunt_Library_Book_Robot_20130109.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:NCSU_Hunt_Library_Book_Robot_20130109.png",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Rhododendrites",
+     "score": 5,
+     "terme": "automated storage and retrieval system",
+     "poids": 97915
+    },
+    {
+     "fichier": "Atlas climbing into a vehicle.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Atlas_climbing_into_a_vehicle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Atlas_climbing_into_a_vehicle.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "DOD Illustration",
+     "score": 3,
+     "terme": "warehouse automation robot",
+     "poids": 61833
+    },
+    {
+     "fichier": "US patent 4621410 - Williamson System 24 CNC machine shop.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/US_patent_4621410_-_Williamson_System_24_CNC_machine_shop.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:US_patent_4621410_-_Williamson_System_24_CNC_machine_shop.png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "en:David Theodore Nelson Williamson",
+     "score": 2,
+     "terme": "automated storage and retrieval system",
+     "poids": 131454
+    },
+    {
+     "fichier": "Société Exotec à Wasquehal(7).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal%287%29.jpg/1920px-Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal%287%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal(7).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Julien Massa",
+     "score": 0,
+     "terme": "goods to person robot",
+     "poids": 115409
+    },
+    {
+     "fichier": "Société Exotec à Wasquehal(6).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal%286%29.jpg/1920px-Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal%286%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal(6).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Julien Massa",
+     "score": 0,
+     "terme": "goods to person robot",
+     "poids": 82892
+    },
+    {
+     "fichier": "Société Exotec à Wasquehal(5).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal%285%29.jpg/1920px-Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal%285%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Soci%C3%A9t%C3%A9_Exotec_%C3%A0_Wasquehal(5).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Julien Massa",
+     "score": 0,
+     "terme": "goods to person robot",
+     "poids": 82687
+    }
+   ]
+  },
+  "TSLA": {
+   "candidats": [
+    {
+     "fichier": "Latest Tesla Optimus Humanoid Robot.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Latest_Tesla_Optimus_Humanoid_Robot.jpg/1920px-Latest_Tesla_Optimus_Humanoid_Robot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Latest_Tesla_Optimus_Humanoid_Robot.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson",
+     "score": 5,
+     "terme": "Tesla Optimus robot",
+     "poids": 80388
+    },
+    {
+     "fichier": "Tesla Gigafactory Shanghai assembly line 02.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Tesla_Gigafactory_Shanghai_assembly_line_02.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Tesla_Gigafactory_Shanghai_assembly_line_02.png",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "China News Service",
+     "score": 3,
+     "terme": "Tesla Gigafactory assembly line",
+     "poids": 67115
+    },
+    {
+     "fichier": "Tesla Gigafactory Shanghai assembly line 01.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Tesla_Gigafactory_Shanghai_assembly_line_01.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Tesla_Gigafactory_Shanghai_assembly_line_01.png",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "China News Service",
+     "score": 3,
+     "terme": "Tesla Gigafactory assembly line",
+     "poids": 76928
+    },
+    {
+     "fichier": "Tesla Model 3 trimmed retouched.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Tesla_Model_3_trimmed_retouched.png/1920px-Tesla_Model_3_trimmed_retouched.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Tesla_Model_3_trimmed_retouched.png",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Steve Jurvetson",
+     "score": 0,
+     "terme": "Tesla Model Y production",
+     "poids": 45624
+    },
+    {
+     "fichier": "Tesla Bot 2023.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Tesla_Bot_2023.jpg/1920px-Tesla_Bot_2023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Tesla_Bot_2023.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Premeditated",
+     "score": 0,
+     "terme": "Tesla Optimus robot",
+     "poids": 133468
     }
    ]
   }
