@@ -1,7 +1,7 @@
 # themes.py — Taxonomie des watchlists thématiques (source unique de vérité)
 #
-# Signal publie CINQ listes : la watchlist principale (top 30 de l'univers,
-# toutes catégories) et quatre vues thématiques.
+# Signal publie SIX listes : la watchlist principale (top 30 de l'univers,
+# toutes catégories) et cinq vues thématiques.
 #
 # ARCHITECTURE — « un seul scoring, N projections »
 # Chaque titre est scoré EXACTEMENT UNE FOIS par screener.py. Une watchlist
@@ -29,6 +29,12 @@
 # robots — et il y répond par une règle d'exposition, pas par un secteur. La
 # différence se voit dans ce qu'il EXCLUT (cf. sa règle d'entrée) autant que
 # dans ce qu'il retient.
+# Le thème « espace » (09/08/2026, demande du propriétaire) arrive au moment où
+# son sujet devient achetable : SpaceX s'est introduite en bourse en juin, et
+# c'est la première fois qu'un lanceur dominant est cotable. Le paradoxe est
+# qu'elle n'y figure pas — trente-neuf séances de cotation, quand la moyenne
+# mobile 200 jours en exige deux cents. Une watchlist qui s'ouvre en disant ce
+# qu'elle ne sait pas encore noter.
 # Les thèmes retirés (santé, conso, défense, compounders, mémoire
 # et électrification en tant que thèses autonomes, décote et qualité calculées)
 # restent dans l'historique git — leur restauration est un revert, pas un
@@ -523,6 +529,109 @@ THEMES_CURES = [
             },
         ],
     },
+    {
+        "id": "espace",
+        "label": "Espace",
+        "sous_titre": "Ce que l'orbite basse rend enfin achetable",
+        "kind": "these",
+        "thesis": (
+            "L'espace est-il devenu une industrie ? Le coût du kilo en orbite a été "
+            "divisé par vingt en vingt ans, et des constellations facturent aujourd'hui "
+            "des abonnements. La liste suit qui vend l'accès, la liaison et l'image."
+        ),
+        "inversion": (
+            "Un seul acteur lance aujourd'hui la majorité de la masse mise en orbite, et il "
+            "est aussi le premier opérateur de constellation : ses concurrents lui achètent "
+            "leurs lancements en même temps qu'ils lui disputent ses clients. Si son avantage "
+            "de coût se creuse encore, la moitié de cette liste devient un ensemble de "
+            "sous-traitants. L'inversion symétrique existe : un échec de vol prolongé ou une "
+            "collision majeure en orbite basse renchérirait l'assurance et retarderait tout le "
+            "monde. Et la demande publique — défense, agences — décide encore de la plupart "
+            "des carnets : c'est une industrie dont le premier client vote son budget."
+        ),
+        "biais": (
+            "LA PLUS GRANDE SOCIÉTÉ SPATIALE DU MONDE N'EST PAS DANS CETTE LISTE, et son "
+            "absence est la première chose à savoir. SpaceX s'est introduite en bourse en "
+            "juin 2026 ; elle n'a pas encore les deux cents séances de cotation qu'exigent "
+            "la moyenne mobile 200 jours et le RSI, sans lesquelles nous ne savons pas noter "
+            "un titre. Elle entrera d'elle-même vers avril 2027. Rien d'éditorial là-dedans : "
+            "c'est une impossibilité de mesure, et nous préférons le dire que publier une "
+            "note que nous ne savons pas calculer.\n\n"
+            "LA LISTE EST COUPÉE EN DEUX, et ses deux moitiés ne se comportent pas du tout "
+            "pareil. D'un côté des pure players : petits, souvent sans bénéfice, portés par "
+            "des carnets de commandes plutôt que par des résultats. De l'autre des groupes de "
+            "défense où l'espace est un département parmi d'autres — profitables, suivis, "
+            "mais dont le cours réagit surtout à des budgets militaires. Comparer les scores "
+            "d'une moitié à l'autre n'a pas de sens : ils ne mesurent pas le même objet.\n\n"
+            "Dérogation de taille assumée. Le projet ne retient d'ordinaire que des sociétés "
+            "de plus de 25 milliards de dollars ; l'essentiel des pure players spatiaux pèse "
+            "entre un et douze. Appliquer le seuil ici ne filtrerait pas la liste, il la "
+            "réduirait aux seuls avionneurs — c'est-à-dire qu'il supprimerait le sujet.\n\n"
+            "Enfin le calcul EN ORBITE, dont on parle beaucoup depuis 2026, n'est presque pas "
+            "achetable : les sociétés qui y travaillent sont privées, et les cotées n'y "
+            "participent que comme transporteurs ou fournisseurs de plateforme."
+        ),
+        "maillons": [
+            {
+                # ACCÈS À L'ORBITE. Le maillon qui commande tous les autres : sans
+                # lanceur, rien ne vole. Il est aussi le plus concentré du site —
+                # SpaceX met en orbite l'essentiel de la masse mondiale, et ses
+                # concurrents lui achètent des lancements. Un seul titre notable
+                # ici, ce qui est en soi la description du marché.
+                "label": "Accès à l'orbite",
+                "tickers": ["RKLB"],
+            },
+            {
+                # CONSTELLATIONS ET CONNECTIVITÉ. Le seul endroit du spatial qui
+                # facture des abonnements plutôt que des contrats. Trois vagues
+                # s'y superposent : les historiques géostationnaires (SES,
+                # Eutelsat, Viasat) que l'orbite basse a pris de vitesse, les
+                # opérateurs de niche (Iridium, l'IoT et la voix de secours), et
+                # le pari du téléphone connecté directement au satellite, sans
+                # antenne, qu'AST SpaceMobile porte avec une soixantaine
+                # d'opérateurs partenaires.
+                # L'européen IRIS² court en arrière-plan de tout ce maillon :
+                # 10,6 Md€, dont SES et Eutelsat portent une part.
+                "label": "Constellations & connectivité",
+                "tickers": ["ASTS", "IRDM", "VSAT", "SESG.PA", "ETL.PA"],
+            },
+            {
+                # OBSERVER LA TERRE. L'imagerie est la première application
+                # spatiale à avoir trouvé des clients récurrents — défense,
+                # renseignement, assurance, agriculture. Planet Labs est aussi le
+                # seul titre coté associé à un projet de CALCUL EN ORBITE :
+                # Google a annoncé Suncatcher, des grappes de satellites porteurs
+                # de TPU, avec lui comme partenaire de plateforme. C'est la seule
+                # façon d'approcher ce sujet en bourse ; Starcloud et Axiom, qui
+                # ont fait voler les premiers nœuds, ne sont pas cotés.
+                "label": "Observer la Terre & calculer en orbite",
+                "tickers": ["PL", "RDW", "BKSY"],
+            },
+            {
+                # ALLER SUR LA LUNE. Un maillon d'un seul titre, et assumé comme
+                # tel : c'est le seul acteur coté dont l'alunissage est le métier.
+                # On le distingue de l'observation parce que son client est une
+                # agence, son horizon une mission, et son risque binaire.
+                "label": "Exploration lunaire",
+                "tickers": ["LUNR"],
+            },
+            {
+                # LES PRIMES. Ils ne sont pas là pour faire nombre : ce sont eux
+                # qui construisent les satellites lourds, les lanceurs
+                # institutionnels et les charges utiles militaires, et leurs
+                # carnets spatiaux sont plus gros que le chiffre d'affaires
+                # cumulé de tous les pure players ci-dessus. Mais l'espace y est
+                # un département : leur cours suit d'abord les budgets de
+                # défense, et le champ `biais` prévient qu'on ne compare pas
+                # leurs scores à ceux de la première moitié.
+                # Kratos est le plus spatial des dix et le plus petit — drones,
+                # systèmes sol, propulsion tactique.
+                "label": "Maîtres d'œuvre & défense spatiale",
+                "tickers": ["LMT", "NOC", "LHX", "RTX", "BA.L",
+                            "AIR.PA", "HO.PA", "SAF.PA", "LDO.MI", "KTOS"],
+            },
+        ],
+    },
     # « Financials » retirée le 06/08/2026 (décision propriétaire, « pour le
     # moment ») : la watchlist secteur n'est plus publiée. Ses 33 tickers
     # restent dans l'UNIVERS du screener (screener.py) — ils demeurent scorés
@@ -819,6 +928,16 @@ ECARTES_VALIDATION = {
     # colonne serait vide sur sa fiche. Thales et Infineon portent le maillon.
 "ARQQ": "Arqit, capitalisation ~0,4 Md$ et aucun objectif consensus (colonne vide sur la fiche)",
 "LAES": "SEALSQ, capitalisation ~0,6 Md$ et 3,2 ans d'historique",
+    # ── Espace ────────────────────────────────────────────────────────────────
+    # LA PLUS GROSSE INTRODUCTION EN BOURSE DE LA DÉCENNIE, et nous ne savons pas
+    # la noter. SpaceX cote au Nasdaq depuis juin 2026 pour environ 1 755 Md$ —
+    # soit, à elle seule, plus que tout le reste de la watchlist spatiale
+    # réunie. Mesuré le 09/08/2026 : 39 séances. La moyenne mobile 200 jours et
+    # le RSI en exigent 200, et le screener écarterait le titre au run. Ce n'est
+    # pas un jugement sur la société, c'est une impossibilité de mesure — et
+    # elle se lève toute seule vers avril 2027.
+"SPCX": "SpaceX, IPO du 16/06/2026 — 39 séances < 200 (MM200/RSI), éligible vers avril 2027",
+"FLY":  "Firefly Aerospace, introduite en 2025 — 1 an d'historique et capitalisation absente chez le fournisseur",
     # ── Robotique ─────────────────────────────────────────────────────────────
     # Validés sans erreur le 08/08/2026 mais SOUS LE SEUIL de 25 Md$, et aucune
     # thèse ne les réclame assez fort pour justifier la dérogation accordée aux

@@ -147,6 +147,27 @@ MARQUES = {
     "CRDO":   ["Credo active electrical cable", "AEC cable data center",
                "SerDes chip"],
 
+    # ── ESPACE (watchlist du 09/08/2026) ────────────────────────────────────
+    # Le domaine où la table sert le MOINS : ici les engins portent le nom de la
+    # société, et les agences publiques photographient tout. On nomme donc
+    # directement le lanceur, le satellite ou la mission.
+    "RKLB":    ["Rocket Lab Electron", "Rocket Lab Neutron", "Electron rocket launch",
+                "Rocket Lab Photon"],
+    "ASTS":    ["AST SpaceMobile BlueBird", "BlueWalker 3 satellite",
+                "AST SpaceMobile satellite"],
+    "IRDM":    ["Iridium satellite", "Iridium NEXT", "Iridium satellite phone"],
+    "VSAT":    ["Viasat satellite", "ViaSat-3", "Inmarsat satellite",
+                "satellite ground terminal"],
+    "SESG.PA": ["SES satellite", "O3b mPOWER", "SES Astra satellite"],
+    "ETL.PA":  ["Eutelsat satellite", "OneWeb satellite", "Eutelsat Konnect"],
+    "PL":      ["Planet Labs Dove satellite", "SkySat satellite", "Planet Dove cubesat"],
+    "RDW":     ["Redwire Space", "roll out solar array space station"],
+    "BKSY":    ["BlackSky satellite", "Gen-3 satellite imaging"],
+    "LUNR":    ["Intuitive Machines Nova-C", "Odysseus lunar lander",
+                "IM-1 lunar lander"],
+    "LHX":     ["L3Harris satellite", "L3Harris radio", "Aerojet Rocketdyne engine"],
+    "KTOS":    ["Kratos Valkyrie drone", "XQ-58 Valkyrie", "Kratos target drone"],
+
     # ── ROBOTIQUE (watchlist du 08/08/2026) ─────────────────────────────────
     # C'est le domaine où l'écart entre la raison sociale et le nom de l'objet
     # est le plus grand de tout le fichier, et où cette table sert donc le

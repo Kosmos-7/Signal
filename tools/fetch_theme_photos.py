@@ -126,6 +126,28 @@ REQUETES = {
         "machine vision camera inspection conveyor",
         "warehouse automation mobile robots",
     ],
+    "espace": [
+        # LE SUJET LE MIEUX PHOTOGRAPHIÉ DU SITE, et pour une raison de droit :
+        # les agences spatiales publiques versent leurs images au domaine
+        # public. La NASA, l'ESA et la NOAA en produisent des milliers, prises
+        # par des professionnels avec du matériel qu'aucune entreprise privée
+        # n'égale.
+        # On cherche le LANCEMENT et l'ORBITE plutôt qu'un engin identifiable :
+        # une watchlist sectorielle ne s'illustre pas d'un vaisseau de l'un de
+        # ses membres — même règle qu'au quantique et à la robotique. Une
+        # colonne de feu au décollage ou un satellite sur fond de Terre disent
+        # le sujet sans désigner personne.
+        "rocket launch night long exposure",
+        "rocket liftoff launch pad flames",
+        "satellite in orbit above Earth",
+        "Earth from orbit terminator line",
+        "satellite constellation deployment",
+        "NASA satellite solar panels space",
+        "launch vehicle assembly building",
+        "ground station antenna dish sky",
+        "Earth observation satellite imagery",
+        "spacecraft separation stage orbit",
+    ],
     # Le thème PEA n'a pas d'objet : c'est une enveloppe fiscale française qui
     # n'accepte que les sociétés à siège européen. On l'illustre donc par ce que
     # la contrainte a de concret — la monnaie et les institutions communes —

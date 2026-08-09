@@ -42,8 +42,8 @@ def check(nom, cond, detail=""):
 print("— Taxonomie —")
 ids = [t["id"] for t in themes.THEMES]
 check("identifiants uniques", len(ids) == len(set(ids)))
-check("4 thèmes curés publiés (financials retirée le 06/08, quantique et robotique ajoutées le 08/08)",
-      len(themes.THEMES_CURES) == 4)
+check("5 thèmes curés publiés (quantique et robotique le 08/08, espace le 09/08)",
+      len(themes.THEMES_CURES) == 5)
 check("chaque thème a thèse, inversion et biais",
       all(t.get("thesis") and t.get("inversion") and t.get("biais") for t in themes.THEMES))
 check("les thèmes calculés publient leur règle en clair",
@@ -114,6 +114,47 @@ check("les cinq introductions de 2026 sont au registre, avec leur motif",
 check("aucune introduction de 2026 n'est déclarée avant d'avoir 200 séances",
       not (_jeunes & set(themes.univers_thematique())),
       str(sorted(_jeunes & set(themes.univers_thematique()))))
+
+print("\n— Le thème espace —")
+_e = themes.THEMES_BY_ID.get("espace")
+_et = set(_e["tickers"]) if _e else set()
+check("le thème espace existe et publie toute sa liste",
+      _e is not None and "top" not in _e)
+# LE PARADOXE DE CETTE LISTE, et son information principale : la plus grande
+# société spatiale du monde n'y figure pas. SpaceX cote depuis juin 2026 pour
+# ~1 755 Md$ — plus, à elle seule, que tout le reste de la watchlist réunie —
+# mais 39 séances contre 200 exigées par la MM200 et le RSI. La déclarer
+# produirait un thème amputé publié en silence ; on l'inscrit au registre avec
+# la date où son historique suffira, comme les cinq introductions quantiques.
+check("SpaceX est au registre, avec ses séances et sa date",
+      "SPCX" in themes.ECARTES_VALIDATION
+      and "200" in themes.ECARTES_VALIDATION["SPCX"]
+      and "2027" in themes.ECARTES_VALIDATION["SPCX"])
+check("SpaceX n'est pas déclarée avant d'avoir ses 200 séances",
+      "SPCX" not in _et)
+# ... et son absence doit être DITE au lecteur, en tête des biais. Un trou muet
+# sur le titre le plus attendu du thème serait le pire des silences.
+check("l'absence de SpaceX est expliquée dans les biais",
+      _e and "SpaceX" in _e["biais"] and "avril 2027" in _e["biais"])
+# LES DEUX MOITIÉS. Le spatial cotable oppose des pure players trop petits pour
+# le seuil du projet à des groupes de défense où l'espace est un département.
+# Comparer leurs scores n'a pas de sens, et le texte doit le dire.
+_me = {m["label"]: set(m["tickers"]) for m in (_e["maillons"] if _e else [])}
+_primes = next((v for k, v in _me.items() if "défense" in k.lower()), set())
+check("le maillon des maîtres d'œuvre porte les primes",
+      {"LMT", "NOC", "LHX"} <= _primes, str(sorted(_primes)))
+# Comparaison insensible à la casse : le texte met ses avertissements en
+# capitales, et un test calé sur la casse se casse au premier reformatage.
+_biais_e = (_e["biais"] if _e else "").lower()
+check("le biais prévient qu'on ne compare pas les deux moitiés",
+      "coupée en deux" in _biais_e)
+check("la dérogation de taille est annoncée",
+      _e and "25 milliards" in _e["biais"])
+# Le calcul en orbite est le sujet du moment ; il n'est presque pas achetable,
+# et la liste ne doit pas laisser croire l'inverse.
+check("le biais dit que le calcul en orbite n'est pas achetable",
+      "en orbite" in _biais_e and "privées" in _biais_e
+      and "presque pas achetable" in _biais_e)
 
 print("\n— Infrastructure de l'IA : le maillon des bailleurs —")
 _i = themes.THEMES_BY_ID.get("infra-ia")
