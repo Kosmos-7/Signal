@@ -1,5 +1,5 @@
 {
- "societes": 4,
+ "societes": 16,
  "detail": {
   "6146.T": {
    "candidats": [
@@ -190,28 +190,373 @@
      "score": 0,
      "terme": "immersion cooling server",
      "poids": 135316
+    }
+   ]
+  },
+  "BLK": {
+   "candidats": [
+    {
+     "fichier": "Webs and Dew (34138228582).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Webs_and_Dew_%2834138228582%29.jpg/1920px-Webs_and_Dew_%2834138228582%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Webs_and_Dew_(34138228582).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Ed Dunens",
+     "score": 0,
+     "terme": "iShares",
+     "poids": 50776
     },
     {
-     "fichier": "Hyperion data center responsable.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Hyperion_data_center_responsable.jpg/1920px-Hyperion_data_center_responsable.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Hyperion_data_center_responsable.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "P.U.N.R.H",
+     "fichier": "Spider-webs-belarus.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Spider-webs-belarus.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Spider-webs-belarus.JPG",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "VladimirZhV",
      "score": 0,
-     "terme": "immersion cooling server",
-     "poids": 98185
+     "terme": "iShares",
+     "poids": 100820
     },
     {
-     "fichier": "Asperitas AIC24 Immersion system.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Asperitas_AIC24_Immersion_system.jpg/1920px-Asperitas_AIC24_Immersion_system.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Asperitas_AIC24_Immersion_system.jpg",
+     "fichier": "Spider web Luc Viatour.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Spider_web_Luc_Viatour.jpg/1920px-Spider_web_Luc_Viatour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Spider_web_Luc_Viatour.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Luc Viatour",
+     "score": 0,
+     "terme": "iShares",
+     "poids": 44165
+    },
+    {
+     "fichier": "Old peasant with dagger and long smoking pipe, Mestia, Svanetia, Georgia (Republic).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Old_peasant_with_dagger_and_long_smoking_pipe%2C_Mestia%2C_Svanetia%2C_Georgia_%28Republic%29.jpg/1920px-Old_peasant_with_dagger_and_long_smoking_pipe%2C_Mestia%2C_Svanetia%2C_Georgia_%28Republic%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Old_peasant_with_dagger_and_long_smoking_pipe,_Mestia,_Svanetia,_Georgia_(Republic).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Unknown photographer, restored by Adam Cuerden",
+     "score": 0,
+     "terme": "BlackRock headquarters",
+     "poids": 70599
+    }
+   ]
+  },
+  "CIFR": {
+   "candidats": [
+    {
+     "fichier": "Rack for FPGA BiXBiT.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Rack_for_FPGA_BiXBiT.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Rack_for_FPGA_BiXBiT.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Stealth2021",
+     "score": 10,
+     "terme": "cryptocurrency mining farm",
+     "poids": 76349
+    },
+    {
+     "fichier": "Mining Farm of Genesis Mining.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Mining_Farm_of_Genesis_Mining.jpg/1920px-Mining_Farm_of_Genesis_Mining.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Mining_Farm_of_Genesis_Mining.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Rolf Brink",
+     "auteur": "Marco Krohn",
      "score": 0,
-     "terme": "immersion cooling server",
-     "poids": 101490
+     "terme": "cryptocurrency mining farm",
+     "poids": 109435
+    }
+   ]
+  },
+  "FTNT": {
+   "candidats": [
+    {
+     "fichier": "Netgear ProSafe Dual WAN VPN Gigabit Firewall FVS336G inside.jpeg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Netgear_ProSafe_Dual_WAN_VPN_Gigabit_Firewall_FVS336G_inside.jpeg/1920px-Netgear_ProSafe_Dual_WAN_VPN_Gigabit_Firewall_FVS336G_inside.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Netgear_ProSafe_Dual_WAN_VPN_Gigabit_Firewall_FVS336G_inside.jpeg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Zuzu",
+     "score": 0,
+     "terme": "network firewall appliance",
+     "poids": 102027
+    }
+   ]
+  },
+  "IRDM": {
+   "candidats": [
+    {
+     "fichier": "Iridium satellite.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Iridium_satellite.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Iridium_satellite.jpg",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Flickr user ideonexus",
+     "score": 0,
+     "terme": "Iridium satellite",
+     "poids": 48691
+    }
+   ]
+  },
+  "IREN": {
+   "candidats": [
+    {
+     "fichier": "Iren Stehli (2025) III.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Iren_Stehli_%282025%29_III.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Iren_Stehli_(2025)_III.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Jindřich Nosek (NoJin)",
+     "score": 0,
+     "terme": "Iris Energy data center",
+     "poids": 56389
+    },
+    {
+     "fichier": "Iren Stehli (2025) II.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Iren_Stehli_%282025%29_II.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Iren_Stehli_(2025)_II.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Jindřich Nosek (NoJin)",
+     "score": 0,
+     "terme": "Iris Energy data center",
+     "poids": 57512
+    },
+    {
+     "fichier": "Iren Stehli (2018).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Iren_Stehli_%282018%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Iren_Stehli_(2018).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Jindřich Nosek (NoJin)",
+     "score": 0,
+     "terme": "Iris Energy data center",
+     "poids": 56861
+    }
+   ]
+  },
+  "LR.PA": {
+   "candidats": [
+    {
+     "fichier": "Schuko socket fitting.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Schuko_socket_fitting.JPG/1920px-Schuko_socket_fitting.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Schuko_socket_fitting.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Dmitry G",
+     "score": 0,
+     "terme": "Legrand socket",
+     "poids": 49978
+    },
+    {
+     "fichier": "SA power sockets Wikimania 2018 .jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/SA_power_sockets_Wikimania_2018_.jpg/1920px-SA_power_sockets_Wikimania_2018_.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:SA_power_sockets_Wikimania_2018_.jpg",
+     "licence": "CC BY 3.0",
+     "famille": "by",
+     "auteur": "Discott",
+     "score": 0,
+     "terme": "Legrand socket",
+     "poids": 31245
+    },
+    {
+     "fichier": "Prise triphasé Legrand.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Prise_triphas%C3%A9_Legrand.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Prise_triphas%C3%A9_Legrand.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "France64160",
+     "score": 0,
+     "terme": "Legrand socket",
+     "poids": 43040
+    },
+    {
+     "fichier": "French-power-socket.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/French-power-socket.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:French-power-socket.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Etienne Rastoul (User:FF7Sephiroth)",
+     "score": 0,
+     "terme": "Legrand socket",
+     "poids": 34237
+    }
+   ]
+  },
+  "LSEG.L": {
+   "candidats": [
+    {
+     "fichier": "The Royal Exchange and Bank of England LL.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/The_Royal_Exchange_and_Bank_of_England_LL.jpg/1920px-The_Royal_Exchange_and_Bank_of_England_LL.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Royal_Exchange_and_Bank_of_England_LL.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "Unknown authorUnknown author",
+     "score": 0,
+     "terme": "London Stock Exchange building",
+     "poids": 146614
+    },
+    {
+     "fichier": "Royal Exchange, 2013.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Royal_Exchange%2C_2013.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange,_2013.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Elisa.rolle",
+     "score": 0,
+     "terme": "London Stock Exchange building",
+     "poids": 72746
+    },
+    {
+     "fichier": "Royal Exchange London Bank Junction 2020 03.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Royal_Exchange_London_Bank_Junction_2020_03.jpg/1920px-Royal_Exchange_London_Bank_Junction_2020_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange_London_Bank_Junction_2020_03.jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Julian Herzog (Website)",
+     "score": 0,
+     "terme": "London Stock Exchange building",
+     "poids": 114011
+    },
+    {
+     "fichier": "Royal Exchange (3624902569).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Royal_Exchange_%283624902569%29.jpg/1920px-Royal_Exchange_%283624902569%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange_(3624902569).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Rev Stan from London, UK",
+     "score": 0,
+     "terme": "London Stock Exchange building",
+     "poids": 108737
+    },
+    {
+     "fichier": "Paternoster Square.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Paternoster_Square.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Paternoster_Square.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "gren",
+     "score": 0,
+     "terme": "London Stock Exchange Paternoster",
+     "poids": 132814
+    }
+   ]
+  },
+  "MA": {
+   "candidats": [
+    {
+     "fichier": "Credit-cards.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Credit-cards.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Credit-cards.jpg",
+     "licence": "CC BY-SA 2.5",
+     "famille": "by-sa",
+     "auteur": "Lotus Head from Johannesburg, Gauteng, South Africa",
+     "score": 0,
+     "terme": "Mastercard credit card",
+     "poids": 53308
+    }
+   ]
+  },
+  "MCO": {
+   "candidats": [
+    {
+     "fichier": "7 World Trade Center.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/7_World_Trade_Center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:7_World_Trade_Center.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Sweeneyr",
+     "score": 0,
+     "terme": "Moody's Corporation",
+     "poids": 77687
+    }
+   ]
+  },
+  "PL": {
+   "candidats": [
+    {
+     "fichier": "Yas Marina Circuit, October 12, 2018 SkySat (cropped).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Yas_Marina_Circuit%2C_October_12%2C_2018_SkySat_%28cropped%29.jpg/1920px-Yas_Marina_Circuit%2C_October_12%2C_2018_SkySat_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Yas_Marina_Circuit,_October_12,_2018_SkySat_(cropped).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Planet Labs, Inc.",
+     "score": 0,
+     "terme": "SkySat satellite",
+     "poids": 146375
+    }
+   ]
+  },
+  "REGN": {
+   "candidats": [
+    {
+     "fichier": "Systèmes de quantification d'ADNs & ARNs du laboratoire GENALG (Ifremer 00944-105546 - 54479).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_%28Ifremer_00944-105546_-_54479%29.jpg/1920px-Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_%28Ifremer_00944-105546_-_54479%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_(Ifremer_00944-105546_-_54479).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Stephane Lesbats (IFREMER, Pôle Images, Centre Bretagne - ZI de la Pointe du Dia",
+     "score": 0,
+     "terme": "biotechnology laboratory pipetting",
+     "poids": 54670
+    },
+    {
+     "fichier": "Systèmes de quantification d'ADNs & ARNs du laboratoire GENALG (Ifremer 00944-105546 - 54478).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_%28Ifremer_00944-105546_-_54478%29.jpg/1920px-Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_%28Ifremer_00944-105546_-_54478%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_(Ifremer_00944-105546_-_54478).jpg",
+     "licence": "CC BY 4.0",
+     "famille": "by",
+     "auteur": "Stephane Lesbats (IFREMER, Pôle Images, Centre Bretagne - ZI de la Pointe du Dia",
+     "score": 0,
+     "terme": "biotechnology laboratory pipetting",
+     "poids": 53688
+    },
+    {
+     "fichier": "Structure of antibody molecule.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Structure_of_antibody_molecule.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Structure_of_antibody_molecule.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Inbal Sela-Culang, Vered Kunik, Yanay Ofran",
+     "score": 0,
+     "terme": "antibody ribbon diagram",
+     "poids": 82011
+    }
+   ]
+  },
+  "VWS.CO": {
+   "candidats": [
+    {
+     "fichier": "Wind turbine construction, Pougny, E6-10, nacelle.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Wind_turbine_construction%2C_Pougny%2C_E6-10%2C_nacelle.jpg/1920px-Wind_turbine_construction%2C_Pougny%2C_E6-10%2C_nacelle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Wind_turbine_construction,_Pougny,_E6-10,_nacelle.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Cjp24",
+     "score": 4,
+     "terme": "wind turbine nacelle",
+     "poids": 32565
+    },
+    {
+     "fichier": "Wind turbine construction, Pougny, E6-09, nacelle and crane.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Wind_turbine_construction%2C_Pougny%2C_E6-09%2C_nacelle_and_crane.jpg/1920px-Wind_turbine_construction%2C_Pougny%2C_E6-09%2C_nacelle_and_crane.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Wind_turbine_construction,_Pougny,_E6-09,_nacelle_and_crane.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Cjp24",
+     "score": 4,
+     "terme": "wind turbine nacelle",
+     "poids": 38011
+    },
+    {
+     "fichier": "Vestas wind turbine on the beach at Hvide Sande.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Vestas_wind_turbine_on_the_beach_at_Hvide_Sande.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Vestas_wind_turbine_on_the_beach_at_Hvide_Sande.png",
+     "licence": "CC BY-SA 2.0",
+     "famille": "by-sa",
+     "auteur": "Jens Rost",
+     "score": 4,
+     "terme": "Vestas wind turbine",
+     "poids": 48243
     }
    ]
   }
