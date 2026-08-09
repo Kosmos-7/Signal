@@ -123,9 +123,19 @@ NIVEAU_THEMATIQUE = "thematique"
 # le genre de remplissage que ce projet refuse d'écrire. Une fiche pour laquelle
 # aucune source n'a été trouvée porte `_sans_actu`, ce qui distingue « on a
 # cherché, il n'y avait rien » de « on n'a jamais cherché ».
+# DEPUIS LE 09/08/2026, LES DEUX NIVEAUX ONT LE MÊME SOCLE. La fiche dite
+# « thématique » était plus courte d'une rubrique — l'actualité — au motif
+# qu'elle décrivait un titre hors du top 30. Décision du propriétaire : « les
+# fiches thématiques doivent être complètes aussi ». Le lecteur qui ouvre une
+# valeur d'une watchlist n'a pas à recevoir moins qu'un autre parce que notre
+# note l'a classée trentième et unième.
+#
+# Le niveau ne commande donc plus le CONTENU, seulement la longueur attendue de
+# chaque rubrique (cf. build_prompt) — et il reste dans la signature, parce
+# qu'un titre qui change de niveau change de format et doit être réécrit.
 CHAMPS_PAR_NIVEAU = {
     NIVEAU_COMPLET:    ["resume", "biz", "futur", "actu", "bull", "bear"],
-    NIVEAU_THEMATIQUE: ["resume", "biz", "futur", "bull", "bear"],
+    NIVEAU_THEMATIQUE: ["resume", "biz", "futur", "actu", "bull", "bear"],
 }
 BULLET_FIELDS = ["bull", "bear"]                       # tableaux de puces -> <li>
 ALL_FIELDS    = CHAMPS_PAR_NIVEAU[NIVEAU_COMPLET]      # surensemble, pour la purge/lecture
@@ -384,20 +394,85 @@ def bucket_score(score):
 
 # Version du style/prompt éditorial — bumper FORCE la régénération de toutes les fiches
 # (la signature change), p.ex. après un changement de ton ou d'exigence de chiffrage.
-PROMPT_VERSION = "2026-08-sans-rsi-chiffre"   # RSI/drawdown fournis mais interdits de chiffre
+PROMPT_VERSION = "2026-08-valo-dans-signature"  # multiples surveillés + socle unique
+# Historique : "2026-08-sans-rsi-chiffre" (RSI/drawdown interdits de chiffre).
 # Historique : "2026-08-univers-2niveaux" (union watchlist+univers, prompt à 2 niveaux).
 # Bump du 08/08/2026 — sans lui, la règle « ne chiffre pas le RSI » ne s'appliquerait
 # qu'aux fiches dont la signature bouge par ailleurs : les autres garderaient
 # indéfiniment un nombre écrit il y a des semaines face à une donnée quotidienne.
 
 
+# Grandeurs de valorisation retenues dans la signature, et leur pas de palier.
+# Le pas est RELATIF pour les multiples (un PER passe de 30 à 33 sans changer de
+# nature, de 30 à 45 si) et ABSOLU en points pour les marges.
+CHAMPS_VALO = (
+    ("forward_pe",   "rel", 0.15),
+    ("trailing_pe",  "rel", 0.15),
+    ("fcf_yield_pct", "abs", 1.0),
+    ("net_margin_pct", "abs", 5.0),
+)
+
+
+def bucket_valorisation(b):
+    """Paliers des grandeurs de valorisation, pour la signature éditoriale.
+
+    POURQUOI CE BLOC EXISTE. Le guide de rédaction impose de chiffrer TOUTE
+    affirmation de valorisation — « les qualificatifs vagues seuls sont interdits
+    sans nombre à l'appui ». La signature, elle, ignorait tous ces multiples : un
+    texte pouvait donc citer un PER qui bougeait sous lui, indéfiniment, sans
+    jamais être réécrit. Les deux règles se contredisaient par construction.
+
+    Le défaut a été mesuré sur les fiches publiées : Samsung annonçait « PER
+    forward 4,0× (PER courant indisponible) » quand la fiche affichait 3,4× et un
+    PER courant de 35,0×. Le texte affirmait au lecteur qu'un chiffre n'existait
+    pas alors qu'il était affiché juste au-dessus.
+
+    LE PRINCIPE EST DÉJÀ CELUI DU PROJET, tiré le 08/08 sur le RSI : ce qui est
+    trop volatil pour déclencher une réécriture est trop volatil pour être
+    chiffré. Il avait été appliqué au RSI et au drawdown, qui sont devenus
+    interdits de chiffre — mais PAS aux multiples, que le guide continue
+    d'exiger. On tranche donc dans l'autre sens pour eux : ils restent
+    chiffrables, et ils entrent dans la signature.
+
+    PAR PALIERS, ET NON À LA VALEUR. Réécrire à chaque point de base coûterait un
+    appel par frémissement de cours. Un multiple change de PALIER à 15 % près,
+    une marge à 5 points près : en dessous, le nombre cité reste vrai à la
+    lecture ; au-dessus, la phrase qui l'entoure ne l'est plus. Pure et testable
+    hors ligne.
+    """
+    out = []
+    for cle, mode, pas in CHAMPS_VALO:
+        v = b.get(cle)
+        try:
+            v = float(v)
+        except (TypeError, ValueError):
+            out.append("na")
+            continue
+        if mode == "abs":
+            out.append(str(int(round(v / pas))))
+        elif v <= 0:
+            # Un multiple négatif ou nul n'a pas de palier relatif : il dit
+            # « pas de bénéfice », ce qui est un état, pas une valeur.
+            out.append("neg")
+        else:
+            import math
+            out.append(str(int(math.floor(math.log(v) / math.log(1 + pas)))))
+    return out
+
+
 def signature(stock, niveau):
     """Signature éditoriale stable d'un ticker. On régénère SEULEMENT si elle change.
 
     Composantes = ce qui modifie le *fond* de l'analyse, pas le bruit :
-      - niveau           : complet / thematique. Un titre qui entre dans le top 30 doit
-                           voir sa fiche courte remplacée par une fiche complète (et
-                           inversement) — c'est un changement de fond, pas cosmétique.
+      - niveau           : complet / thematique. Depuis le 09/08/2026 les deux ont
+                           le MÊME socle de rubriques ; le niveau ne commande plus que
+                           la longueur attendue. Il reste dans la signature parce qu'un
+                           titre qui change de niveau change de format.
+      - valorisation     : PER courant, PER prévisionnel, rendement du flux et marge
+                           nette, PAR PALIERS (cf. bucket_valorisation). Ajoutés le
+                           09/08/2026 : le guide impose de chiffrer la valorisation,
+                           la signature l'ignorait, et un texte pouvait citer un
+                           multiple qui bougeait sous lui indéfiniment.
       - score bucket     : note de synthèse par paliers de 5 (pilote resume + bull/bear)
       - cross_type       : golden / death / neutre  (régime narratif)
       - cross_days bucket: frais/recent/etabli/ancien (poids du signal, pas le J exact)
@@ -405,6 +480,9 @@ def signature(stock, niveau):
       - rev_growth arrondi à 5% près : la dynamique de croissance change le discours
       - signal_dynamics_warning présent/absent : nuance "signal en transition"
     Volontairement EXCLUS : rsi, fibo, drawdown au point de base près, val_pts —
+    et ceux-là sont, en contrepartie, INTERDITS DE CHIFFRE dans la prose. La règle
+    du projet est symétrique depuis le 09/08 : une grandeur est soit citable et
+    surveillée par la signature, soit hors signature et interdite de chiffre.
     trop volatils d'un run à l'autre pour justifier un appel API coûteux (testé : un
     RSI 49->72 + cross +1j + z +0.1σ + drawdown -99% ne change PAS la signature).
     Également exclus : l'appartenance thématique. Un titre qui gagne ou perd un thème
@@ -448,6 +526,7 @@ def signature(stock, niveau):
         z_bucket,
         str(rev_bucket),
         warn,
+        *bucket_valorisation(b),
     ]
     return "|".join(parts)
 
@@ -457,14 +536,20 @@ def entry_is_complete(entry, niveau):
     Sert à rattraper une entrée manuelle/legacy incomplète même si _sig coïncide."""
     if not isinstance(entry, dict):
         return False
-    if not all(entry.get(f) for f in CHAMPS_PAR_NIVEAU.get(niveau, ALL_FIELDS)):
+    # `actu` est le seul champ dont l'absence peut être LÉGITIME : aucune source
+    # datée n'a été trouvée. La fiche porte alors `_sans_actu`, et l'exiger
+    # quand même la ferait régénérer à chaque run — un appel par run pour
+    # réécrire la même absence. On l'exempte donc, et seulement lui.
+    requis = [f for f in CHAMPS_PAR_NIVEAU.get(niveau, ALL_FIELDS)
+              if not (f == "actu" and entry.get("_sans_actu"))]
+    if not all(entry.get(f) for f in requis):
         return False
-    # Niveau thématique : la rubrique actu est désormais tentée pour tous les
-    # titres. Sans `actu` NI marque `_sans_actu`, la fiche date d'avant ce
-    # changement — on la régénère une fois pour lui donner sa chance.
-    if niveau == NIVEAU_THEMATIQUE:
-        return bool(entry.get("actu")) or bool(entry.get("_sans_actu"))
-    return True
+    # `actu` est au socle des DEUX niveaux depuis le 09/08/2026, donc déjà exigé
+    # par la boucle ci-dessus. Reste le cas légitime où la rubrique est vide :
+    # aucune source datée n'a été trouvée, et la fiche porte alors `_sans_actu`,
+    # qui distingue « on a cherché, il n'y avait rien » de « on n'a jamais
+    # cherché ».
+    return bool(entry.get("actu")) or bool(entry.get("_sans_actu"))
 
 
 # ── INPUT PAR TICKER ─────────────────────────────────────────────────────────
@@ -719,7 +804,9 @@ def build_prompt(stock, guide, news, niveau):
     champs = CHAMPS_PAR_NIVEAU[niveau] + (
         ["actu"] if (avec_actu and "actu" not in CHAMPS_PAR_NIVEAU[niveau]) else [])
 
-    if niveau == NIVEAU_COMPLET:
+    # L'ACTUALITÉ EST DEMANDÉE POUR TOUS LES NIVEAUX depuis le 09/08/2026 : les
+    # deux socles sont identiques, seule la longueur attendue diffère.
+    if True:
         news_block = (
             "Titres de presse récents (à recouper, ne JAMAIS inventer au-delà de ces faits) :\n"
             + "\n".join(f"  - {n}" for n in news)
