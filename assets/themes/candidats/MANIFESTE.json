@@ -35,6 +35,30 @@
    "fichier": "principale_2.jpg",
    "poids": 62864,
    "terme": "stock exchange trading floor traders"
+  },
+  {
+   "titre": "File:(King1893NYC) pg797 NEW-YORK STOCK EXCHANGE.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/%28King1893NYC%29_pg797_NEW-YORK_STOCK_EXCHANGE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:(King1893NYC)_pg797_NEW-YORK_STOCK_EXCHANGE.jpg",
+   "licence": "Public domain",
+   "auteur": "",
+   "largeur": 1871,
+   "hauteur": 1355,
+   "fichier": "principale_3.jpg",
+   "poids": 123479,
+   "terme": "new york stock exchange interior"
+  },
+  {
+   "titre": "File:Board room, New York City Stock Exchange LCCN92519209.tif",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Board_room%2C_New_York_City_Stock_Exchange_LCCN92519209.tif/lossy-page1-1280px-Board_room%2C_New_York_City_Stock_Exchange_LCCN92519209.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Board_room,_New_York_City_Stock_Exchange_LCCN92519209.tif",
+   "licence": "Public domain",
+   "auteur": "Miscellaneous Items in High Demand, PPOC, Library of Congress",
+   "largeur": 1536,
+   "hauteur": 1165,
+   "fichier": "principale_4.jpg",
+   "poids": 58592,
+   "terme": "new york stock exchange interior"
   }
  ],
  "infra-ia": [
@@ -73,6 +97,30 @@
    "fichier": "infra-ia_2.jpg",
    "poids": 82193,
    "terme": "Argonne National Laboratory supercomputer"
+  },
+  {
+   "titre": "File:Theta supercomputer - 389 071 002 (36954713450).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Theta_supercomputer_-_389_071_002_%2836954713450%29.jpg/1920px-Theta_supercomputer_-_389_071_002_%2836954713450%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Theta_supercomputer_-_389_071_002_(36954713450).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/37916456@N02\">U.S. Department of Energy</a> ",
+   "largeur": 2193,
+   "hauteur": 1490,
+   "fichier": "infra-ia_3.jpg",
+   "poids": 67357,
+   "terme": "Argonne National Laboratory supercomputer"
+  },
+  {
+   "titre": "File:Airplane vortex edit2.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Airplane_vortex_edit2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Airplane_vortex_edit2.jpg",
+   "licence": "Public domain",
+   "auteur": "NASA / <a href=\"//commons.wikimedia.org/wiki/User:Fir0002\" title=\"User:Fir0002\">Fir0002</a> / <a href=\"//commons.wikimed",
+   "largeur": 1800,
+   "hauteur": 1400,
+   "fichier": "infra-ia_4.jpg",
+   "poids": 47472,
+   "terme": "NASA supercomputer facility"
   }
  ],
  "quantique": [
@@ -110,6 +158,30 @@
    "hauteur": 900,
    "fichier": "quantique_2.jpg",
    "poids": 15695,
+   "terme": "NIST ion trap quantum"
+  },
+  {
+   "titre": "File:NIST Second Quantum Logic Clock Based on Aluminum Ion is Now Worlds Most Precise Clock (5941058252).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/NIST_Second_Quantum_Logic_Clock_Based_on_Aluminum_Ion_is_Now_Worlds_Most_Precise_Clock_%285941058252%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:NIST_Second_Quantum_Logic_Clock_Based_on_Aluminum_Ion_is_Now_Worlds_Most_Precise_Clock_(5941058252).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/63059536@N06\">National Institute of Standard",
+   "largeur": 1424,
+   "hauteur": 1200,
+   "fichier": "quantique_3.jpg",
+   "poids": 61429,
+   "terme": "NIST ion trap quantum"
+  },
+  {
+   "titre": "File:Planar Ion Trap (5941086002).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Planar_Ion_Trap_%285941086002%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Planar_Ion_Trap_(5941086002).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/63059536@N06\">National Institute of Standard",
+   "largeur": 1280,
+   "hauteur": 837,
+   "fichier": "quantique_4.jpg",
+   "poids": 59406,
    "terme": "NIST ion trap quantum"
   }
  ],
@@ -149,6 +221,92 @@
    "fichier": "robotique_2.jpg",
    "poids": 35607,
    "terme": "NASA Robonaut humanoid robot"
+  },
+  {
+   "titre": "File:Robonaut 2 on display at NASM (NHQ202410240001).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Robonaut_2_on_display_at_NASM_%28NHQ202410240001%29.jpg/1920px-Robonaut_2_on_display_at_NASM_%28NHQ202410240001%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Robonaut_2_on_display_at_NASM_(NHQ202410240001).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.nasa.gov/hq/\">NASA Headquarters / NASA/Keegan Barber</a>",
+   "largeur": 8256,
+   "hauteur": 5504,
+   "fichier": "robotique_3.jpg",
+   "poids": 82321,
+   "terme": "NASA Robonaut humanoid robot"
+  },
+  {
+   "titre": "File:Robonaut 2 on display at NASM (NHQ202410240002).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Robonaut_2_on_display_at_NASM_%28NHQ202410240002%29.jpg/1920px-Robonaut_2_on_display_at_NASM_%28NHQ202410240002%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Robonaut_2_on_display_at_NASM_(NHQ202410240002).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.nasa.gov/hq/\">NASA Headquarters / NASA/Keegan Barber</a>",
+   "largeur": 7594,
+   "hauteur": 5290,
+   "fichier": "robotique_4.jpg",
+   "poids": 103278,
+   "terme": "NASA Robonaut humanoid robot"
+  }
+ ],
+ "espace": [
+  {
+   "titre": "File:NASA Wallops Supports First Rocket Lab HASTE Launch of 2026 (long-exposure-feb-2026-credit-nasa-danielle-johnson).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/21/NASA_Wallops_Supports_First_Rocket_Lab_HASTE_Launch_of_2026_%28long-exposure-feb-2026-credit-nasa-danielle-johnson%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:NASA_Wallops_Supports_First_Rocket_Lab_HASTE_Launch_of_2026_(long-exposure-feb-2026-credit-nasa-danielle-johnson).jpg",
+   "licence": "Public domain",
+   "auteur": "NASA/Danielle Johnson",
+   "largeur": 1365,
+   "hauteur": 2048,
+   "fichier": "espace_0.jpg",
+   "poids": 9775,
+   "terme": "rocket launch night long exposure"
+  },
+  {
+   "titre": "File:NASA rocket to display artificial clouds in space (32653767132).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/NASA_rocket_to_display_artificial_clouds_in_space_%2832653767132%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:NASA_rocket_to_display_artificial_clouds_in_space_(32653767132).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/24662369@N07\">NASA Goddard Space Flight Cent",
+   "largeur": 1800,
+   "hauteur": 1200,
+   "fichier": "espace_1.jpg",
+   "poids": 39236,
+   "terme": "rocket launch night long exposure"
+  },
+  {
+   "titre": "File:Northrop Grumman Antares CRS-10 Launch (NHQ201811170100).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Northrop_Grumman_Antares_CRS-10_Launch_%28NHQ201811170100%29.jpg/1920px-Northrop_Grumman_Antares_CRS-10_Launch_%28NHQ201811170100%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Northrop_Grumman_Antares_CRS-10_Launch_(NHQ201811170100).jpg",
+   "licence": "Public domain",
+   "auteur": "<bdi><a href=\"https://www.wikidata.org/wiki/Q70751664\" class=\"extiw\" title=\"d:Q70751664\"><span title=\"American photograp",
+   "largeur": 4205,
+   "hauteur": 2699,
+   "fichier": "espace_2.jpg",
+   "poids": 51023,
+   "terme": "rocket launch night long exposure"
+  },
+  {
+   "titre": "File:SpaceX Crew-8 Launch (KSC-20240303-PH-JBS01 0002).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/SpaceX_Crew-8_Launch_%28KSC-20240303-PH-JBS01_0002%29.jpg/1920px-SpaceX_Crew-8_Launch_%28KSC-20240303-PH-JBS01_0002%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:SpaceX_Crew-8_Launch_(KSC-20240303-PH-JBS01_0002).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.nasa.gov/kennedy/\">NASA Kennedy Space Center / NASA/Ben Smegel",
+   "largeur": 6240,
+   "hauteur": 4160,
+   "fichier": "espace_3.jpg",
+   "poids": 68801,
+   "terme": "rocket launch night long exposure"
+  },
+  {
+   "titre": "File:VAB at Night (KSC-20240207-PH-GEB01 0003).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/VAB_at_Night_%28KSC-20240207-PH-GEB01_0003%29.jpg/1920px-VAB_at_Night_%28KSC-20240207-PH-GEB01_0003%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:VAB_at_Night_(KSC-20240207-PH-GEB01_0003).jpg",
+   "licence": "Public domain",
+   "auteur": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.nasa.gov/kennedy/\">NASA Kennedy Space Center / NASA/Glenn Bens",
+   "largeur": 8192,
+   "hauteur": 4130,
+   "fichier": "espace_4.jpg",
+   "poids": 59347,
+   "terme": "rocket launch night long exposure"
   }
  ],
  "pea": [
@@ -187,6 +345,30 @@
    "fichier": "pea_2.jpg",
    "poids": 112206,
    "terme": "euro coins banknotes"
+  },
+  {
+   "titre": "File:Barysaŭ, Rynak. Барысаў, Рынак (1941).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Barysa%C5%AD%2C_Rynak._%D0%91%D0%B0%D1%80%D1%8B%D1%81%D0%B0%D1%9E%2C_%D0%A0%D1%8B%D0%BD%D0%B0%D0%BA_%281941%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Barysa%C5%AD,_Rynak._%D0%91%D0%B0%D1%80%D1%8B%D1%81%D0%B0%D1%9E,_%D0%A0%D1%8B%D0%BD%D0%B0%D0%BA_(1941).jpg",
+   "licence": "Public domain",
+   "auteur": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+   "largeur": 1265,
+   "hauteur": 829,
+   "fichier": "pea_3.jpg",
+   "poids": 90533,
+   "terme": "European Union flags row"
+  },
+  {
+   "titre": "File:Barysaŭ, Rynak. Барысаў, Рынак (1943) (2).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Barysa%C5%AD%2C_Rynak._%D0%91%D0%B0%D1%80%D1%8B%D1%81%D0%B0%D1%9E%2C_%D0%A0%D1%8B%D0%BD%D0%B0%D0%BA_%281943%29_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Barysa%C5%AD,_Rynak._%D0%91%D0%B0%D1%80%D1%8B%D1%81%D0%B0%D1%9E,_%D0%A0%D1%8B%D0%BD%D0%B0%D0%BA_(1943)_(2).jpg",
+   "licence": "Public domain",
+   "auteur": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+   "largeur": 1509,
+   "hauteur": 940,
+   "fichier": "pea_4.jpg",
+   "poids": 72334,
+   "terme": "European Union flags row"
   }
  ],
  "financials": [
@@ -225,6 +407,30 @@
    "fichier": "financials_2.jpg",
    "poids": 120996,
    "terme": "bank headquarters building facade"
+  },
+  {
+   "titre": "File:Boston Financial District skyline.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Boston_Financial_District_skyline.jpg/1920px-Boston_Financial_District_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Boston_Financial_District_skyline.jpg",
+   "licence": "Public domain",
+   "auteur": "<a href=\"https://en.wikipedia.org/wiki/User:Nelson48\" class=\"extiw\" title=\"wikipedia:User:Nelson48\">Nelson48</a> at <a h",
+   "largeur": 2196,
+   "hauteur": 1680,
+   "fichier": "financials_3.jpg",
+   "poids": 95002,
+   "terme": "financial district skyline towers"
+  },
+  {
+   "titre": "File:Sign Brodway crossing Wall Street.JPG",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Sign_Brodway_crossing_Wall_Street.JPG/1920px-Sign_Brodway_crossing_Wall_Street.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Sign_Brodway_crossing_Wall_Street.JPG",
+   "licence": "CC0",
+   "auteur": "<bdi><a href=\"https://www.wikidata.org/wiki/Q42790984\" class=\"extiw\" title=\"d:Q42790984\"><span title=\"French computing e",
+   "largeur": 2120,
+   "hauteur": 1599,
+   "fichier": "financials_4.jpg",
+   "poids": 76502,
+   "terme": "wall street street sign buildings"
   }
  ]
 }
