@@ -15,7 +15,7 @@
   "page": "https://commons.wikimedia.org/wiki/File:SpotMini,_Boston_Dynamics,_Robot.jpg",
   "source": "File:SpotMini, Boston Dynamics, Robot.jpg",
   "type": "produit",
-  "v": "2b45a37e"
+  "v": "b4177199"
  },
  "005930.KS": {
   "credit": "Oskar Alexanderson · CC BY-SA 2.0",
@@ -30,7 +30,8 @@
   "legende": "Vis à billes et guidage linéaire, le cœur de métier de Hiwin",
   "licence": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:BallScrews-with-detail-insets.jpg",
-  "source": "File:BallScrews-with-detail-insets.jpg"
+  "source": "File:BallScrews-with-detail-insets.jpg",
+  "v": "02e50055"
  },
  "2330.TW": {
   "legende": "Circuit gravé par TSMC, vu au microscope",
@@ -45,7 +46,8 @@
   "legende": "Le humanoïde Hubo du KAIST, dont l'équipe a fondé Rainbow Robotics",
   "licence": "CC BY 2.5",
   "page": "https://commons.wikimedia.org/wiki/File:Einstein-Hubo.jpg",
-  "source": "File:Einstein-Hubo.jpg"
+  "source": "File:Einstein-Hubo.jpg",
+  "v": "0a51ec3a"
  },
  "4062.T": {
   "credit": "Michael KR · CC BY-SA 4.0",
@@ -69,14 +71,16 @@
   "legende": "Réducteur cycloïdal, la spécialité de Nabtesco",
   "licence": "Public domain",
   "page": "https://commons.wikimedia.org/wiki/File:Cycloidal_drive.gif",
-  "source": "File:Cycloidal drive.gif"
+  "source": "File:Cycloidal drive.gif",
+  "v": "337edc6a"
  },
  "6273.T": {
   "credit": "Grummelbacke",
   "legende": "Vérin pneumatique — la catégorie de produits de SMC",
   "licence": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Pneumatic_cylinder.jpg",
-  "source": "File:Pneumatic cylinder.jpg"
+  "source": "File:Pneumatic cylinder.jpg",
+  "v": "af3e40a5"
  },
  "6324.T": {
   "credit": "Pieceofmetalwork · CC BY-SA 4.0",
@@ -85,14 +89,15 @@
   "page": "https://commons.wikimedia.org/wiki/File:Harmonic_Drive_AG_strain_wave_gear_set.jpg",
   "source": "File:Harmonic Drive AG strain wave gear set.jpg",
   "type": "produit",
-  "v": "3ffdf204"
+  "v": "e698ad2d"
  },
  "6471.T": {
   "credit": "Niabot",
   "legende": "Roulement à éléments roulants, en écorché",
   "licence": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Rolling-element_bearing_(plain).png",
-  "source": "File:Rolling-element bearing (plain).png"
+  "source": "File:Rolling-element bearing (plain).png",
+  "v": "2e9539ac"
  },
  "6506.T": {
   "credit": "Hetarllen Mumriken · CC BY-SA 2.0",
@@ -101,21 +106,23 @@
   "page": "https://commons.wikimedia.org/wiki/File:%E5%AE%89%E5%B7%9D%E9%9B%BB%E6%A9%9F_MOTOMAN_2009_(9049001111).jpg",
   "source": "File:安川電機 MOTOMAN 2009 (9049001111).jpg",
   "type": "produit",
-  "v": "67801e5b"
+  "v": "d7335bbe"
  },
  "6594.T": {
   "credit": "Raimond Spekking",
   "legende": "Moteur Nidec de lecteur de disque",
   "licence": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Iomega_Jaz_V2000Si_JAZ_2_-_board_-_Nidec_2806407020_02936200-0560.jpg",
-  "source": "File:Iomega Jaz V2000Si JAZ 2 - board - Nidec 2806407020 02936200-0560.jpg"
+  "source": "File:Iomega Jaz V2000Si JAZ 2 - board - Nidec 2806407020 02936200-0560.jpg",
+  "v": "f809125f"
  },
  "6645.T": {
   "credit": "John Douglas from Halifax, Canada",
   "legende": "Pupitre de commande industriel — l'univers d'Omron",
   "licence": "CC BY-SA 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Operating_Panel_(2271668919).jpg",
-  "source": "File:Operating Panel (2271668919).jpg"
+  "source": "File:Operating Panel (2271668919).jpg",
+  "v": "0dbb00a1"
  },
  "6857.T": {
   "credit": "Photo : Advantest",
@@ -135,7 +142,7 @@
   "page": "https://commons.wikimedia.org/wiki/File:FANUC_Robot_Assembly_Demo.jpg",
   "source": "File:FANUC Robot Assembly Demo.jpg",
   "type": "produit",
-  "v": "730c916f"
+  "v": "1c232de6"
  },
  "8035.T": {
   "legende": "Usine Tokyo Electron de Nirasaki, au pied des Alpes japonaises",
@@ -151,7 +158,7 @@
   "page": "https://commons.wikimedia.org/wiki/File:UBTECH_Alpha_1PRO_Humanoid_Robot_-_hack4no_2016.jpg",
   "source": "File:UBTECH Alpha 1PRO Humanoid Robot - hack4no 2016.jpg",
   "type": "produit",
-  "v": "f5b1fcdc"
+  "v": "c9bb55ec"
  },
  "ABBN.SW": {
   "credit": "Zen wave · CC BY-SA 4.0",
@@ -210,7 +217,8 @@
   "legende": "Rafale de Dassault Aviation, RIAT 2009",
   "licence": "CC BY-SA 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Rafale_-_RIAT_2009_(3751416421).jpg",
-  "source": "File:Rafale - RIAT 2009 (3751416421).jpg"
+  "source": "File:Rafale - RIAT 2009 (3751416421).jpg",
+  "v": "1e0bfa77"
  },
  "AMAT": {
   "credit": "4300streetcar · CC BY 4.0",
@@ -284,7 +292,8 @@
   "legende": "Circuits intégrés encapsulés — le métier d'ASE",
   "licence": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Halbleiterwerk_Frankfurt_(Oder)_Integrated_Circuits.jpg",
-  "source": "File:Halbleiterwerk Frankfurt (Oder) Integrated Circuits.jpg"
+  "source": "File:Halbleiterwerk Frankfurt (Oder) Integrated Circuits.jpg",
+  "v": "f4cc4ae1"
  },
  "AVGO": {
   "legende": "Puce Broadcom BCM7019 vue au microscope",
@@ -317,14 +326,16 @@
   "legende": "Serveurs à pile à combustible Bloom Energy",
   "licence": "CC BY 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Bloom_Energy_Servers.jpg",
-  "source": "File:Bloom Energy Servers.jpg"
+  "source": "File:Bloom Energy Servers.jpg",
+  "v": "dae2df45"
  },
  "BNP.PA": {
   "credit": "GFreihalter",
   "legende": "Immeuble BNP Paribas, Paris",
   "licence": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Paris_BNP_Paribas_885.jpg",
-  "source": "File:Paris BNP Paribas 885.jpg"
+  "source": "File:Paris BNP Paribas 885.jpg",
+  "v": "90b50bcf"
  },
  "BX": {
   "credit": "Americasroof (talk) · CC BY-SA 3.0",
@@ -423,7 +434,8 @@
   "legende": "Tour AXA, Montréal",
   "licence": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Tour_AXA_Montreal.JPG",
-  "source": "File:Tour AXA Montreal.JPG"
+  "source": "File:Tour AXA Montreal.JPG",
+  "v": "2ae80cda"
  },
  "CSCO": {
   "credit": "htomari · CC BY-SA 2.0",
@@ -462,14 +474,16 @@
   "legende": "Rendu SolidWorks, logiciel de Dassault Systèmes",
   "licence": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:SolidWorks-fly-mouche.jpg",
-  "source": "File:SolidWorks-fly-mouche.jpg"
+  "source": "File:SolidWorks-fly-mouche.jpg",
+  "v": "8c97dbfc"
  },
  "EME": {
   "credit": "MTA Capital Construction Mega Projects",
   "legende": "Pose de chemins de câbles — le métier d'EMCOR",
   "licence": "CC BY 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Layout_and_installation_of_conduit_to_run_power_feed_cables_to_a_control_room_in_a_substation_in_Queens._06-20-19_(48105050291).jpg",
-  "source": "File:Layout and installation of conduit to run power feed cables to a control room in a substation in Queens. 06-20-19 (48105050291).jpg"
+  "source": "File:Layout and installation of conduit to run power feed cables to a control room in a substation in Queens. 06-20-19 (48105050291).jpg",
+  "v": "649a812f"
  },
  "ENR.DE": {
   "credit": "Vinaceus · CC BY-SA 4.0",
@@ -511,7 +525,8 @@
   "legende": "Groupes de climatisation en toiture, l'activité de Comfort Systems",
   "licence": "Public domain",
   "page": "https://commons.wikimedia.org/wiki/File:Rooftop_Packaged_Units.JPG",
-  "source": "File:Rooftop Packaged Units.JPG"
+  "source": "File:Rooftop Packaged Units.JPG",
+  "v": "750023bd"
  },
  "GEV": {
   "credit": "Photo : GE Vernova",
@@ -554,7 +569,8 @@
   "legende": "Radar Thales SMART-S sur la frégate FGS Bayern",
   "licence": "CC BY-SA 3.0 de",
   "page": "https://commons.wikimedia.org/wiki/File:Thales_SMART-S_radar_on_FGS_Bayern_at_BALTOPS_2025.JPG",
-  "source": "File:Thales SMART-S radar on FGS Bayern at BALTOPS 2025.JPG"
+  "source": "File:Thales SMART-S radar on FGS Bayern at BALTOPS 2025.JPG",
+  "v": "a2a7986c"
  },
  "HPE": {
   "credit": "Prholenstein · CC BY-SA 4.0",
@@ -617,7 +633,7 @@
   "page": "https://commons.wikimedia.org/wiki/File:Quantum_Computing;_Ion_Trapping_(5941055642).jpg",
   "source": "File:Quantum Computing; Ion Trapping (5941055642).jpg",
   "type": "produit",
-  "v": "9e6f2bee"
+  "v": "7c6a665f"
  },
  "ISRG": {
   "legende": "Système chirurgical da Vinci Xi au bloc opératoire",
@@ -625,7 +641,7 @@
   "page": "https://commons.wikimedia.org/wiki/File:WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-477.jpg",
   "source": "File:WBAMC first in DoD to use robot for surgery 160502-A-EK666-477.jpg",
   "type": "produit",
-  "v": "fb35c7eb"
+  "v": "d661a1ef"
  },
  "JPM": {
   "credit": "Logan Antill · CC BY 2.0",
@@ -643,7 +659,7 @@
   "page": "https://commons.wikimedia.org/wiki/File:Still_RX20-15_forklift.jpg",
   "source": "File:Still RX20-15 forklift.jpg",
   "type": "produit",
-  "v": "a3b127e8"
+  "v": "8bd596e5"
  },
  "KLAC": {
   "credit": "DontCallMeLateForDinner · CC BY-SA 4.0",
@@ -730,7 +746,8 @@
   "legende": "Siège de la Munich Re, Munich",
   "licence": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchner_R%C3%BCckversicherungs-Gesellschaft2.jpg",
-  "source": "File:Münchner Rückversicherungs-Gesellschaft2.jpg"
+  "source": "File:Münchner Rückversicherungs-Gesellschaft2.jpg",
+  "v": "f5ef527f"
  },
  "NBIS": {
   "credit": "Photo : Nebius Group",
@@ -764,7 +781,8 @@
   "legende": "Insuline asparte NovoRapid, produit de Novo Nordisk",
   "licence": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Inzulin-aspart%C3%A1t.jpg",
-  "source": "File:Inzulin-aspartát.jpg"
+  "source": "File:Inzulin-aspartát.jpg",
+  "v": "7693af35"
  },
  "NOW": {
   "legende": "Siège mondial de ServiceNow",
@@ -861,7 +879,8 @@
   "legende": "Puce Vesuvius 512 qubits de D-Wave",
   "licence": "CC BY 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:D-Wave_Two_512_qubit_Vesuvius_chip.jpg",
-  "source": "File:D-Wave Two 512 qubit Vesuvius chip.jpg"
+  "source": "File:D-Wave Two 512 qubit Vesuvius chip.jpg",
+  "v": "16dd6722"
  },
  "QCOM": {
   "credit": "Raimond Spekking · CC BY-SA 4.0",
@@ -877,21 +896,24 @@
   "legende": "Ferrari SF90 Stradale",
   "licence": "CC BY 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Ferrari_SF90_Stradale_Washington_DC_Metro_Area,_USA_(2.6).jpg",
-  "source": "File:Ferrari SF90 Stradale Washington DC Metro Area, USA (2.6).jpg"
+  "source": "File:Ferrari SF90 Stradale Washington DC Metro Area, USA (2.6).jpg",
+  "v": "0e009c73"
  },
  "RGTI": {
   "credit": "OJB Quantum",
   "legende": "Puce quantique supraconductrice à six transmons, microcâblée",
   "licence": "CC BY 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Wire_Bonded_Superconducting_Quantum_Chip_with_6_Transmons_002.png",
-  "source": "File:Wire Bonded Superconducting Quantum Chip with 6 Transmons 002.png"
+  "source": "File:Wire Bonded Superconducting Quantum Chip with 6 Transmons 002.png",
+  "v": "32ad5565"
  },
  "RHM.DE": {
   "credit": "Rheinmetall Defence",
   "legende": "Véhicule blindé Boxer, produit par Rheinmetall",
   "licence": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:MJ-8458-main-image.jpg",
-  "source": "File:MJ-8458-main-image.jpg"
+  "source": "File:MJ-8458-main-image.jpg",
+  "v": "c7784b7a"
  },
  "SCHW": {
   "credit": "Aranami · CC BY 2.0",
@@ -916,7 +938,8 @@
   "legende": "Roulement à rotule sur billes de Sven Wingquist, fondateur de SKF",
   "licence": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Wingquist_bearing00.jpg",
-  "source": "File:Wingquist bearing00.jpg"
+  "source": "File:Wingquist bearing00.jpg",
+  "v": "b582880a"
  },
  "SNDK": {
   "credit": "Uwe Hermann · CC BY-SA 2.0",
@@ -964,7 +987,8 @@
   "legende": "Robot de stockage automatisé — la catégorie de Symbotic",
   "licence": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:NCSU_Hunt_Library_Book_Robot_20130109.png",
-  "source": "File:NCSU Hunt Library Book Robot 20130109.png"
+  "source": "File:NCSU Hunt Library Book Robot 20130109.png",
+  "v": "c408a1f3"
  },
  "TCEHY": {
   "credit": "Photo : Tencent",
@@ -998,7 +1022,8 @@
   "legende": "Tesla Model 3",
   "licence": "CC BY 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Tesla_Model_3_trimmed_retouched.png",
-  "source": "File:Tesla Model 3 trimmed retouched.png"
+  "source": "File:Tesla Model 3 trimmed retouched.png",
+  "v": "26ea1afa"
  },
  "UBSG.SW": {
   "credit": "Ank Kumar  · CC BY-SA 4.0",
