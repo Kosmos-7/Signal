@@ -190,6 +190,46 @@ if py and js:
           abs(eval(py.group(1)) - eval(js.group(1))) < 1e-9,
           f"python={py.group(1)} js={js.group(1)}")
 
+
+# ── LE SCRIPT DE CHAQUE PAGE SE PARSE-T-IL ? ────────────────────────────────
+# LE 09/08/2026, UNE ERREUR DE SYNTAXE EST PARTIE EN PRODUCTION. Une phrase
+# insérée dans un ternaire imbriqué y a laissé un « :'') » en double ; le script
+# entier ne se parsait plus et AUCUNE page ne rendait — bandeau et pied de page
+# seuls. Les 36 vérifications de ce fichier étaient au vert, parce qu'elles
+# comparent des TEXTES de fichiers et n'exécutent jamais rien.
+#
+# C'est le mode de panne le plus grave possible sur un site statique : total,
+# instantané, et invisible à tout contrôle qui ne fait que lire. Une seule
+# ligne de test le rend impossible — on donne le script à un analyseur.
+print("\n— Les scripts inline se parsent-ils ? —")
+try:
+    import subprocess, tempfile                                    # noqa: E402
+    for page in ("index.html", "actualites.html", "portfolio.html", "apprendre.html"):
+        chemin = os.path.join(RACINE, page)
+        if not os.path.exists(chemin):
+            continue
+        html = open(chemin, encoding="utf-8").read()
+        # Les scripts de type non-JS (JSON-LD par exemple) ne se parsent pas
+        # comme du JavaScript : on ne prend que les blocs sans `type` ou
+        # explicitement JavaScript.
+        blocs = re.findall(r"<script(?![^>]*\btype\s*=\s*[\"\']application/ld\+json)"
+                           r"(?![^>]*\bsrc\s*=)[^>]*>(.*?)</script>", html, re.S | re.I)
+        mauvais = []
+        for i, code in enumerate(blocs):
+            with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False,
+                                             encoding="utf-8") as f:
+                f.write(code)
+                tmp = f.name
+            r = subprocess.run(["node", "--check", tmp], capture_output=True, text=True)
+            os.unlink(tmp)
+            if r.returncode != 0:
+                premiere = [l for l in r.stderr.splitlines() if l.strip()][:3]
+                mauvais.append(f"bloc {i} : " + " / ".join(premiere))
+        check(f"{page} — {len(blocs)} bloc(s) de script se parsent",
+              not mauvais, " ;; ".join(mauvais)[:400])
+except (OSError, subprocess.SubprocessError) as _e:
+    print(f"  \u26a0\ufe0f  syntaxe JS non vérifiée (node indisponible : {type(_e).__name__})")
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:
