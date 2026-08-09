@@ -203,6 +203,14 @@
   "type": "produit",
   "v": "6740e961"
  },
+ "AIR.PA": {
+  "credit": "IGB Ingenieurgesellschaft",
+  "legende": "Chaîne d'assemblage final de l'Airbus A320",
+  "licence": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Airbus_A320_Final_Assembly_Line-China.JPG",
+  "source": "File:Airbus A320 Final Assembly Line-China.JPG",
+  "v": "e9b3a0ca"
+ },
  "ALV.DE": {
   "credit": "FuFuWolf · CC BY 2.0",
   "legende": "Cartes d'assurance santé Allianz",
@@ -792,6 +800,14 @@
   "source": "File:101 Albright Way.jpg",
   "v": "e591b5de"
  },
+ "NOC": {
+  "credit": "NASA/Wallops Flight Facility/Allison Stancil",
+  "legende": "Décollage d'une fusée Antares de Northrop Grumman avec le cargo Cygnus",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Northrop_Grumman%E2%80%99s_Antares_rocket_with_the_Cygnus_spacecraft_liftoff_from_NASA%E2%80%99s_Wallops_Flight_Facility_in_Virginia,_on_19_February_2022.jpg",
+  "source": "File:Northrop Grumman’s Antares rocket with the Cygnus spacecraft liftoff from NASA’s Wallops Flight Facility in Virginia, on 19 February 2022.jpg",
+  "v": "81d70221"
+ },
  "NOVO-B.CO": {
   "credit": "Milda 444",
   "legende": "Insuline asparte NovoRapid, produit de Novo Nordisk",
@@ -923,6 +939,14 @@
   "source": "File:Ferrari SF90 Stradale Washington DC Metro Area, USA (2.6).jpg",
   "v": "0e009c73"
  },
+ "RDW": {
+  "credit": "NASA/Johns Hopkins APL",
+  "legende": "Panneau solaire déroulable ROSA, la spécialité de Redwire",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Transformational_Solar_Array_experiment_on_DART%27s_Roll_Out_Solar_Array_(ROSA).png",
+  "source": "File:Transformational Solar Array experiment on DART's Roll Out Solar Array (ROSA).png",
+  "v": "bdb16204"
+ },
  "REGN": {
   "credit": "Inbal Sela-Culang, Vered Kunik, Yanay Ofran",
   "legende": "Structure d'une molécule d'anticorps — le métier de Regeneron",
@@ -947,6 +971,38 @@
   "source": "File:MJ-8458-main-image.jpg",
   "v": "c7784b7a"
  },
+ "RKLB": {
+  "credit": "NASA Kennedy Space Center / Rocket Lab",
+  "legende": "Lancement d'une fusée Electron de Rocket Lab",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Rocket_Lab_PREFIRE_and_Ice_Launch_(KSC-20240605-PH-RKL01_0005).jpg",
+  "source": "File:Rocket Lab PREFIRE and Ice Launch (KSC-20240605-PH-RKL01 0005).jpg",
+  "v": "afea6e1c"
+ },
+ "RTX": {
+  "credit": "Michael Barera",
+  "legende": "Réacteur Pratt & Whitney Canada JT15D, filiale de RTX",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Pratt_%26_Whitney_Canada_JT15D_jet_engine_(Frontiers_of_Flight_Museum).jpg",
+  "source": "File:Pratt & Whitney Canada JT15D jet engine (Frontiers of Flight Museum).jpg",
+  "v": "ecce4726"
+ },
+ "SAF.PA": {
+  "credit": "aamanatullah",
+  "legende": "Maquette du moteur LEAP, coproduit par Safran au sein de CFM",
+  "licence": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:LEAP_Engine_Mockup_(40202884051).jpg",
+  "source": "File:LEAP Engine Mockup (40202884051).jpg",
+  "v": "afc376c2"
+ },
+ "SAP.DE": {
+  "credit": "amadeusm",
+  "legende": "Siège de SAP à Walldorf",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:SAP_AG_Headquarter_1200.jpg",
+  "source": "File:SAP AG Headquarter 1200.jpg",
+  "v": "8c8b5674"
+ },
  "SCHW": {
   "credit": "Aranami · CC BY 2.0",
   "legende": "Carte de débit Visa de Charles Schwab Bank",
@@ -955,6 +1011,14 @@
   "source": "Chip-enabled Charles Schwab Bank Visa Debit Card",
   "type": "produit",
   "v": "c72142a5"
+ },
+ "SESG.PA": {
+  "credit": "U.S. Space Force photo by Robert Mason",
+  "legende": "Lancement des satellites O3b mPOWER 9 et 10 de SES, Cap Canaveral",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:O3b_mPOWER_9_%26_10_Launch_from_Cape_Canaveral_Space_Force_Station_(9198632).jpg",
+  "source": "File:O3b mPOWER 9 & 10 Launch from Cape Canaveral Space Force Station (9198632).jpg",
+  "v": "edd70af7"
  },
  "SIE.DE": {
   "credit": "Niklas Wolter · CC BY-SA 4.0",
@@ -1084,6 +1148,14 @@
   "source": "https://www.vertiv.com/49f19f/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-liebert-exl-s1-ups/cp-ups-na-508x635-42362-exl-s1-ups.jpg",
   "type": "produit",
   "v": "1a8f8878"
+ },
+ "VSAT": {
+  "credit": "U.S. Army National Guard photo by Spc. Miguel Ruiz",
+  "legende": "Terminal satellite au sol — le métier de Viasat",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Signal_support_systems_specialists_prepare_ground_satellite_terminal_(6116646).jpg",
+  "source": "File:Signal support systems specialists prepare ground satellite terminal (6116646).jpg",
+  "v": "74886f5e"
  },
  "VST": {
   "credit": "Photo : Vistra",
