@@ -418,8 +418,15 @@ check("chaque critère généraliste est mesuré pour au moins 60 % des titres",
 # en donnée manquante — c'est ainsi que douze fiches ont perdu leur rendement du
 # flux disponible pendant des semaines, sept par différence de devise et cinq
 # parce que le fournisseur ne renvoyait pas de capitalisation.
+# BAE Systems est la seule exception, et elle est ÉCRITE. Elle cote en pence
+# quand ses comptes sont en livres, et le fournisseur mélange les deux unités —
+# cours en pence, capitalisation en livres. Convertir a été essayé le 09/08 et
+# retiré le jour même : le rendement sortait à 358 %. Tant que chaque grandeur
+# n'aura pas été mesurée une à une, le trou est la bonne réponse.
+_UNITE_AMBIGUE = {"BA.L"}
 _sans_rdt = [t for t, d in FICHES.items()
-             if (d.get("breakdown") or {}).get("fcf_margin_pct") is not None
+             if t not in _UNITE_AMBIGUE
+             and (d.get("breakdown") or {}).get("fcf_margin_pct") is not None
              and (d.get("breakdown") or {}).get("fcf_yield_pct") is None]
 check("une fiche qui publie une marge de flux publie aussi son rendement",
       not _sans_rdt, str(_sans_rdt))

@@ -839,18 +839,21 @@ def taux_historique(de, vers):
     société elle-même publie ses comparatifs à des taux qui ne sont pas les
     nôtres. C'est très au-dessus de la valeur d'un trou, et très en dessous de
     la précision d'un rapport annuel."""
-    # LE PENNY N'EST PAS UNE DEVISE, C'EST UNE UNITÉ. Londres cote en GBp — des
-    # pence — quand les comptes sont en GBP. Aucune paire de change n'existe
-    # pour ce couple, et il n'en faut pas : le rapport vaut exactement cent, il
-    # est fixe et il n'a pas de cours. La ligne qui suit mettait `de` et `vers`
-    # en majuscules AVANT de les comparer, ce qui transformait GBp en GBP et
-    # faisait conclure « même devise » — BAE Systems perdait ainsi son rendement
-    # du flux disponible, un cours en pence divisant une capitalisation en
-    # livres. Le cas se traite donc ici, avant toute normalisation.
-    if (de or "") == "GBp" and (vers or "").upper() == "GBP":
-        return lambda _iso: 0.01
-    if (de or "").upper() == "GBP" and (vers or "") == "GBp":
-        return lambda _iso: 100.0
+    # LE PENNY, ET POURQUOI ON N'Y TOUCHE PAS. Londres cote en GBp — des pence —
+    # quand les comptes sont en GBP, et il serait tentant d'en faire une
+    # conversion : le rapport vaut cent, il est fixe, il n'a pas de cours.
+    # ESSAYÉ LE 09/08/2026, ET RETIRÉ LE JOUR MÊME. Le facteur cent ne s'applique
+    # pas aux mêmes grandeurs partout : le fournisseur cote BAE Systems en pence
+    # mais publie sa CAPITALISATION en livres — c'est écrit noir sur blanc dans
+    # validate_tickers.py depuis qu'elle est sortie à 0,8 Md$ le 01/08. Diviser
+    # cette capitalisation par cent a publié un rendement du flux disponible de
+    # 358 % et un PER prévisionnel de 0,3. Deux nombres faux là où il n'y avait
+    # qu'un trou.
+    # La leçon est celle du projet, retournée contre moi : le trou plutôt que le
+    # faux. Tant que chaque grandeur du fournisseur n'aura pas été mesurée une à
+    # une — cours en pence, capitalisation en livres, bénéfice estimé à
+    # déterminer —, GBp reste traité comme GBP et les ratios concernés restent
+    # absents. La mesure d'abord, la conversion ensuite.
     de, vers = (de or "").upper(), (vers or "").upper()
     if not de or not vers or de == vers:
         return None
