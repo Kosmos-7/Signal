@@ -2025,6 +2025,12 @@ function periodNote(b){ const p=qLabel(b&&b.mrq);
   if(g) t+=(p&&b.rev_growth_fin!==b.mrq)
     ? ' La croissance du CA porte sur '+g.q+' (clos le '+g.d+'), dernier trimestre de notre historique — Yahoo publie ses marges avec un trimestre d\'avance sur ses états financiers.'
     : ' La croissance du CA compare '+g.q+' au même trimestre un an plus tôt.';
+  /* SANS DATE, ON LE DIT. Vingt-quatre fiches — des sociétés dont notre source
+     ne publie aucune série trimestrielle — portent une croissance venue du
+     RÉSUMÉ du fournisseur, que nous ne pouvons pas dater faute de pouvoir la
+     recalculer. Le libellé « dern. trim., a/a » était alors une affirmation que
+     rien n'appuyait : c'est probablement vrai, et nous n'en savons rien. */
+  else if(b&&b.rev_growth_pct!=null) t+=' La croissance du CA vient du résumé de notre source, qui ne dit pas sur quel trimestre elle porte : son historique trimestriel ne remonte pas assez loin pour que nous la recalculions nous-mêmes.';
   /* Un douze-mois-glissant et un exercice clos peuvent diverger fortement sans
      que rien ne soit faux : un retournement de cycle met douze mois à
      traverser un exercice. On le dit plutôt que de laisser le lecteur croire
@@ -2130,7 +2136,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
         .map(x=>x[1]+' '+String(bl[x[0]].pts).replace('.',',')+'/'+x[2]);
       return parts.length?' : '+parts.join(', '):'';
     })()+'. '+stateTag(b)+', RSI '+f(b.rsi,0)+', z-score '+fs(b.regression_z,1).replace('.',',')+'σ sur '+(b.regression_window_years||'?')+' ans.</p>'
-:'<p class="resume">'+sv(s.name)+', score '+score+'/100. '+stateTag(b)+'. Croissance CA '+fs(b.rev_growth_pct,0)+' % (dern. trim., a/a), marge nette '+f(b.net_margin_pct,0)+' % (TTM), z-score '+fs(b.regression_z,1).replace('.',',')+'σ.</p><p class="resume stub">Synthèse qualitative à générer.</p>';
+:'<p class="resume">'+sv(s.name)+', score '+score+'/100. '+stateTag(b)+'. Croissance CA '+fs(b.rev_growth_pct,0)+' % ('+(b.rev_growth_fin?'dern. trim., a/a':'source, non datée')+'), marge nette '+f(b.net_margin_pct,0)+' % (TTM), z-score '+fs(b.regression_z,1).replace('.',',')+'σ.</p><p class="resume stub">Synthèse qualitative à générer.</p>';
   const bb=(a&&(a.bull||a.bear))?'<div class="bullbear"><div class="bb bb-bull"><div class="bb-h">▲ Thèse haussière</div>'+bblist(a.bull)+'</div><div class="bb bb-bear"><div class="bb-h">▼ Thèse baissière</div>'+bblist(a.bear)+'</div></div>':'';
   // recouvrement des thèmes, visible depuis la fiche elle-même
   const tt=themesOf(s.ticker).map(id=>{const t=TBY[id];return t?'<a class="ttag" href="'+hashOf(id)+'">'+sv(t.label)+'</a>':'';}).join('');
