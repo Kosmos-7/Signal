@@ -5,6 +5,85 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La devise des estimations était écrite dans la source, et nous la devinions
+
+Le PER prévisionnel de Tencent est sorti à 2,0× — un cours en dollars divisé par
+un bénéfice en yuans. La réponse d'hier tranchait la devise par la croissance
+implicite du bénéfice : quand le change est loin de 1, une lecture est plausible
+et l'autre absurde, on corrige ; quand il est proche de 1, on s'abstient. Deux
+cas tranchés, quatre trous assumés.
+
+**La sonde a montré que la question n'avait pas à être devinée.** Les tables
+`earnings_estimate` et `revenue_estimate` portent une colonne `currency` que nous
+jetions depuis le début. Elle est fiable, et surtout elle dit ce qu'aucune règle
+n'aurait trouvé — la convention n'est pas uniforme d'un titre à l'autre :
+
+| ticker | comptes | cotation | devise déclarée du BPA |
+|---|---|---|---|
+| TSM | TWD | USD | USD, par certificat |
+| ASX | TWD | USD | USD, par certificat |
+| Ferrari | EUR | USD | EUR |
+| Cameco | CAD | USD | CAD |
+| ABB | USD | CHF | USD |
+
+Ferrari et TSM cotent toutes deux à New York et ne suivent pas la même
+convention. Le départage par la croissance n'était donc pas seulement
+imprécis : il était faux dans son principe, et il l'aurait été en silence. Il
+reste en secours pour les valeurs sans déclaration. **Trois fiches retrouvent
+leur multiple attendu** — ABB, Ferrari, Cameco — et UBTech cesse d'afficher une
+abstention sur devise alors que son bénéfice estimé est simplement négatif : un
+motif faux vaut moins qu'un silence.
+
+**Une piste mesurée puis refermée.** Nous avons cru tenir un multiple faux d'un
+facteur deux sur ASE, du fait de son rapport d'ADR. La mesure dit le contraire :
+le fournisseur exprime le bénéfice par titre coté, comme le cours — ASE publie
+18,74 sur sa ligne américaine et 8,89 sur celle de Taipei. Le rapport vaut un
+partout, rien n'est divisé, et le mécanisme reste comme garde.
+
+### Trois trous qui n'étaient pas des données manquantes
+
+**Le dollar canadien manquait aux quatre tables de devises.** Troisième
+occurrence de la même panne après les couronnes nordiques et le TWD/HKD : le
+trou n'est pas une devise oubliée, c'est que la détection se termine par un
+`return "USD"` qui est un défaut. L'invariant censé couvrir ça balayait les
+tickers des thèmes, donc ne pouvait pas voir une place qu'aucun thème ne cite.
+Il part désormais de la table des places elle-même.
+
+**Douze rendements du flux disponible.** Sept par différence de devise — le
+refus était bon, mais ce qui manquait n'était pas une raison de s'abstenir,
+c'était le taux ; une capitalisation est un montant à un instant, la convertir
+ne demande aucune convention. Cinq parce que le fournisseur ne renvoyait pas de
+capitalisation, alors qu'un cours multiplié par un nombre d'actions n'est pas
+une estimation mais la définition.
+
+**Quarante-trois exercices sans bénéfice par action.** Cinq sont comblés — ceux
+dont les voisins s'accordent à 10 % près sur le nombre d'actions —, trente-huit
+restent vides. La règle refuse donc 88 % des cas, ce qui est le résultat
+attendu : trente-sept sont au bord de la série, l'endroit précis où
+l'extrapolation ne repose sur rien.
+
+**Et une croissance sans date** cessait d'être annoncée comme celle du dernier
+trimestre sur vingt-quatre fiches dont la source ne publie aucune série
+trimestrielle. C'est probablement vrai, et nous n'en savions rien.
+
+### Vingt-cinq illustrations, et pourquoi la campagne en rendait si peu
+
+La couverture passe de 81 à 106 fiches sur 130. Trois candidats plausibles ont
+été écartés : une salle blanche quelconque pour Disco, qui illustre l'industrie
+entière et pas cette société ; le logo Mastercard, dont aucun rapport ne porte
+les métadonnées — sans source vérifiable, pas de publication ; et une carte PCIe
+de marque Supermicro pour Astera Labs, la faute déjà commise avec un actionneur
+« SMC » portant la marque Automax.
+
+**La cause du faible rendement était technique.** La recherche plein texte de
+Commons fouille le contenu des ouvrages numérisés : « industrial barcode
+reader » a rendu pour Cognex trois livres du XIXe siècle où ces mots figurent
+quelque part. Les .djvu et .pdf sont maintenant écartés à la source — un
+emplacement pris par un livre est un emplacement perdu pour une photo — et
+quatre sociétés qui n'avaient aucune entrée de recherche en ont enfin une.
+
+---
+
 ### Une watchlist robotique : la question n'était pas « qui fabrique des robots »
 
 Cinquième liste du site. La demande était double — humanoïdes et robotique
