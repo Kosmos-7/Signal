@@ -1,6 +1,32 @@
 {
- "societes": 16,
+ "societes": 22,
  "detail": {
+  "454910.KS": {
+   "candidats": [
+    {
+     "fichier": "UR16e robot arm.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/1920px-UR16e_robot_arm.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:UR16e_robot_arm.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Auledas",
+     "score": 5,
+     "terme": "cobot robotic arm",
+     "poids": 81314
+    },
+    {
+     "fichier": "Collaborative-Palletizer-AAA20-RAAS-Universal Robot-2.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Collaborative-Palletizer-AAA20-RAAS-Universal_Robot-2.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Collaborative-Palletizer-AAA20-RAAS-Universal_Robot-2.png",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "CollaborativePalletizer",
+     "score": 5,
+     "terme": "cobot robotic arm",
+     "poids": 65704
+    }
+   ]
+  },
   "6146.T": {
    "candidats": [
     {
@@ -52,6 +78,17 @@
      "poids": 77590
     },
     {
+     "fichier": "Ozone Station, Nagoya Guideway Bus (8555337022).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ozone_Station%2C_Nagoya_Guideway_Bus_%288555337022%29.jpg/1920px-Ozone_Station%2C_Nagoya_Guideway_Bus_%288555337022%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ozone_Station,_Nagoya_Guideway_Bus_(8555337022).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Kzaral",
+     "score": 0,
+     "terme": "linear guideway",
+     "poids": 43534
+    },
+    {
      "fichier": "Nagoya Guideway Bus G-53.jpg",
      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Nagoya_Guideway_Bus_G-53.jpg/1920px-Nagoya_Guideway_Bus_G-53.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
      "page": "https://commons.wikimedia.org/wiki/File:Nagoya_Guideway_Bus_G-53.jpg",
@@ -72,17 +109,6 @@
      "score": 0,
      "terme": "linear guideway",
      "poids": 64239
-    },
-    {
-     "fichier": "Nagoya Guideway Bus Map.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Nagoya_Guideway_Bus_Map.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Nagoya_Guideway_Bus_Map.png",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Kiyok",
-     "score": -6,
-     "terme": "linear guideway",
-     "poids": 67608
     }
    ]
   },
@@ -156,40 +182,70 @@
     }
    ]
   },
-  "APLD": {
+  "AIR.PA": {
    "candidats": [
     {
-     "fichier": "Single-server-immersion-cooling.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Single-server-immersion-cooling.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Single-server-immersion-cooling.jpg",
+     "fichier": "Airbus Tianjin Final Assembly Line in 2008.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Airbus_Tianjin_Final_Assembly_Line_in_2008.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Airbus_Tianjin_Final_Assembly_Line_in_2008.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Jagooah",
+     "score": 3,
+     "terme": "Airbus final assembly line",
+     "poids": 118341
+    },
+    {
+     "fichier": "Airbus A320 Final Assembly Line-China.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Airbus_A320_Final_Assembly_Line-China.JPG/1920px-Airbus_A320_Final_Assembly_Line-China.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Airbus_A320_Final_Assembly_Line-China.JPG",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "IGB Ingenieurgesellschaft",
+     "score": 3,
+     "terme": "Airbus final assembly line",
+     "poids": 146088
+    }
+   ]
+  },
+  "ASTS": {
+   "candidats": [
+    {
+     "fichier": "Old antenna mast with modern antennas.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Old_antenna_mast_with_modern_antennas.jpg/1920px-Old_antenna_mast_with_modern_antennas.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Old_antenna_mast_with_modern_antennas.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Submer",
+     "auteur": "Maury Markowitz",
      "score": 4,
-     "terme": "immersion cooling server",
-     "poids": 85666
+     "terme": "phased array satellite antenna",
+     "poids": 28134
     },
     {
-     "fichier": "SvdV20220819-440 low res.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/SvdV20220819-440_low_res.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:SvdV20220819-440_low_res.png",
+     "fichier": "ER-7000 Antenna.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/ER-7000_Antenna.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:ER-7000_Antenna.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "AsperitasIC",
-     "score": 0,
-     "terme": "immersion cooling server",
-     "poids": 79342
-    },
+     "auteur": "Vsatinet",
+     "score": 4,
+     "terme": "phased array satellite antenna",
+     "poids": 67981
+    }
+   ]
+  },
+  "BA.L": {
+   "candidats": [
     {
-     "fichier": "Immersion Cooling.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Immersion_Cooling.jpg/1920px-Immersion_Cooling.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Immersion_Cooling.jpg",
-     "licence": "CC BY-SA 4.0",
+     "fichier": "HMS Belfast with rainbow.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/HMS_Belfast_with_rainbow.jpg/1920px-HMS_Belfast_with_rainbow.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:HMS_Belfast_with_rainbow.jpg",
+     "licence": "CC BY-SA 3.0",
      "famille": "by-sa",
-     "auteur": "Rolf Brink",
+     "auteur": "Dmitry A. Mottl",
      "score": 0,
-     "terme": "immersion cooling server",
-     "poids": 135316
+     "terme": "Type 26 frigate",
+     "poids": 77120
     }
    ]
   },
@@ -238,6 +294,54 @@
      "score": 0,
      "terme": "BlackRock headquarters",
      "poids": 70599
+    },
+    {
+     "fichier": "John Webber - Poedooa, the Daughter of Oree.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/John_Webber_-_Poedooa%2C_the_Daughter_of_Oree.jpg/1920px-John_Webber_-_Poedooa%2C_the_Daughter_of_Oree.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:John_Webber_-_Poedooa,_the_Daughter_of_Oree.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "John Webber",
+     "score": 0,
+     "terme": "iShares",
+     "poids": 76400
+    },
+    {
+     "fichier": "Hippasa holmerae (Lawn wolf spider) in its funnel web (2).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Hippasa_holmerae_%28Lawn_wolf_spider%29_in_its_funnel_web_%282%29.jpg/1920px-Hippasa_holmerae_%28Lawn_wolf_spider%29_in_its_funnel_web_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Hippasa_holmerae_(Lawn_wolf_spider)_in_its_funnel_web_(2).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Basile Morin",
+     "score": 0,
+     "terme": "iShares",
+     "poids": 95783
+    }
+   ]
+  },
+  "CGNX": {
+   "candidats": [
+    {
+     "fichier": "Ids-machine-vision-cameras-usb2-2004.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Ids-machine-vision-cameras-usb2-2004.jpg/1920px-Ids-machine-vision-cameras-usb2-2004.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ids-machine-vision-cameras-usb2-2004.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Lg123456",
+     "score": 5,
+     "terme": "machine vision camera",
+     "poids": 29387
+    },
+    {
+     "fichier": "US Navy 100622-N-6362C-017 Cpl. Nicolas Davis uses a borescope to look for foreign object debris in the engine of an F-A-18C Hornet.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/US_Navy_100622-N-6362C-017_Cpl._Nicolas_Davis_uses_a_borescope_to_look_for_foreign_object_debris_in_the_engine_of_an_F-A-18C_Hornet.jpg/1920px-US_Navy_100622-N-6362C-017_Cpl._Nicolas_Davis_uses_a_borescope_to_look_for_foreign_object_debris_in_the_engine_of_an_F-A-18C_Hornet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:US_Navy_100622-N-6362C-017_Cpl._Nicolas_Davis_uses_a_borescope_to_look_for_foreign_object_debris_in_the_engine_of_an_F-A-18C_Hornet.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Navy photo by Mass Communication Specialist 3rd Class Nina Hughes",
+     "score": 4,
+     "terme": "industrial inspection camera",
+     "poids": 99466
     }
    ]
   },
@@ -267,177 +371,33 @@
     }
    ]
   },
-  "FTNT": {
+  "KTOS": {
    "candidats": [
     {
-     "fichier": "Netgear ProSafe Dual WAN VPN Gigabit Firewall FVS336G inside.jpeg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Netgear_ProSafe_Dual_WAN_VPN_Gigabit_Firewall_FVS336G_inside.jpeg/1920px-Netgear_ProSafe_Dual_WAN_VPN_Gigabit_Firewall_FVS336G_inside.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Netgear_ProSafe_Dual_WAN_VPN_Gigabit_Firewall_FVS336G_inside.jpeg",
+     "fichier": "NCSIST Spark Target Drone Display at MND Hall 20150815.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NCSIST_Spark_Target_Drone_Display_at_MND_Hall_20150815.jpg/1920px-NCSIST_Spark_Target_Drone_Display_at_MND_Hall_20150815.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:NCSIST_Spark_Target_Drone_Display_at_MND_Hall_20150815.jpg",
      "licence": "CC BY-SA 3.0",
      "famille": "by-sa",
-     "auteur": "Zuzu",
+     "auteur": "玄史生",
      "score": 0,
-     "terme": "network firewall appliance",
-     "poids": 102027
-    }
-   ]
-  },
-  "IRDM": {
-   "candidats": [
-    {
-     "fichier": "Iridium satellite.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Iridium_satellite.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Iridium_satellite.jpg",
-     "licence": "CC BY-SA 2.0",
-     "famille": "by-sa",
-     "auteur": "Flickr user ideonexus",
-     "score": 0,
-     "terme": "Iridium satellite",
-     "poids": 48691
-    }
-   ]
-  },
-  "IREN": {
-   "candidats": [
-    {
-     "fichier": "Iren Stehli (2025) III.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Iren_Stehli_%282025%29_III.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Iren_Stehli_(2025)_III.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Jindřich Nosek (NoJin)",
-     "score": 0,
-     "terme": "Iris Energy data center",
-     "poids": 56389
-    },
-    {
-     "fichier": "Iren Stehli (2025) II.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Iren_Stehli_%282025%29_II.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Iren_Stehli_(2025)_II.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Jindřich Nosek (NoJin)",
-     "score": 0,
-     "terme": "Iris Energy data center",
-     "poids": 57512
-    },
-    {
-     "fichier": "Iren Stehli (2018).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Iren_Stehli_%282018%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Iren_Stehli_(2018).jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Jindřich Nosek (NoJin)",
-     "score": 0,
-     "terme": "Iris Energy data center",
-     "poids": 56861
-    }
-   ]
-  },
-  "LR.PA": {
-   "candidats": [
-    {
-     "fichier": "Schuko socket fitting.JPG",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Schuko_socket_fitting.JPG/1920px-Schuko_socket_fitting.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Schuko_socket_fitting.JPG",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "Dmitry G",
-     "score": 0,
-     "terme": "Legrand socket",
-     "poids": 49978
-    },
-    {
-     "fichier": "SA power sockets Wikimania 2018 .jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/SA_power_sockets_Wikimania_2018_.jpg/1920px-SA_power_sockets_Wikimania_2018_.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:SA_power_sockets_Wikimania_2018_.jpg",
-     "licence": "CC BY 3.0",
-     "famille": "by",
-     "auteur": "Discott",
-     "score": 0,
-     "terme": "Legrand socket",
-     "poids": 31245
-    },
-    {
-     "fichier": "Prise triphasé Legrand.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Prise_triphas%C3%A9_Legrand.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Prise_triphas%C3%A9_Legrand.jpg",
-     "licence": "CC BY-SA 3.0",
-     "famille": "by-sa",
-     "auteur": "France64160",
-     "score": 0,
-     "terme": "Legrand socket",
-     "poids": 43040
-    },
-    {
-     "fichier": "French-power-socket.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/French-power-socket.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:French-power-socket.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Etienne Rastoul (User:FF7Sephiroth)",
-     "score": 0,
-     "terme": "Legrand socket",
-     "poids": 34237
+     "terme": "target drone unmanned aerial",
+     "poids": 59519
     }
    ]
   },
   "LSEG.L": {
    "candidats": [
     {
-     "fichier": "The Royal Exchange and Bank of England LL.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/The_Royal_Exchange_and_Bank_of_England_LL.jpg/1920px-The_Royal_Exchange_and_Bank_of_England_LL.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:The_Royal_Exchange_and_Bank_of_England_LL.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "Unknown authorUnknown author",
-     "score": 0,
-     "terme": "London Stock Exchange building",
-     "poids": 146614
-    },
-    {
-     "fichier": "Royal Exchange, 2013.JPG",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Royal_Exchange%2C_2013.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange,_2013.JPG",
-     "licence": "CC BY-SA 3.0",
+     "fichier": "Fearless Girl at Paternoster Square in 3D 2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Fearless_Girl_at_Paternoster_Square_in_3D_2.jpg/1920px-Fearless_Girl_at_Paternoster_Square_in_3D_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Fearless_Girl_at_Paternoster_Square_in_3D_2.jpg",
+     "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Elisa.rolle",
-     "score": 0,
-     "terme": "London Stock Exchange building",
-     "poids": 72746
-    },
-    {
-     "fichier": "Royal Exchange London Bank Junction 2020 03.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Royal_Exchange_London_Bank_Junction_2020_03.jpg/1920px-Royal_Exchange_London_Bank_Junction_2020_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange_London_Bank_Junction_2020_03.jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Julian Herzog (Website)",
-     "score": 0,
-     "terme": "London Stock Exchange building",
-     "poids": 114011
-    },
-    {
-     "fichier": "Royal Exchange (3624902569).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Royal_Exchange_%283624902569%29.jpg/1920px-Royal_Exchange_%283624902569%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Royal_Exchange_(3624902569).jpg",
-     "licence": "CC BY 2.0",
-     "famille": "by",
-     "auteur": "Rev Stan from London, UK",
-     "score": 0,
-     "terme": "London Stock Exchange building",
-     "poids": 108737
-    },
-    {
-     "fichier": "Paternoster Square.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Paternoster_Square.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Paternoster_Square.jpg",
-     "licence": "Public domain",
-     "famille": "libre",
-     "auteur": "gren",
+     "auteur": "\n\n\n\n\n\n This image is a work by Wikipedia and Wikimedia Commons user C.Suthorn. W",
      "score": 0,
      "terme": "London Stock Exchange Paternoster",
-     "poids": 132814
+     "poids": 65583
     }
    ]
   },
@@ -456,107 +416,479 @@
     }
    ]
   },
-  "MCO": {
+  "NOC": {
    "candidats": [
     {
-     "fichier": "7 World Trade Center.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/7_World_Trade_Center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:7_World_Trade_Center.jpg",
+     "fichier": "The Cygnus cargo spacecraft and the Soyuz MS-26 crew ship (iss072e188878).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/The_Cygnus_cargo_spacecraft_and_the_Soyuz_MS-26_crew_ship_%28iss072e188878%29.jpg/1920px-The_Cygnus_cargo_spacecraft_and_the_Soyuz_MS-26_crew_ship_%28iss072e188878%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Cygnus_cargo_spacecraft_and_the_Soyuz_MS-26_crew_ship_(iss072e188878).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Johnson Space Center",
+     "score": 3,
+     "terme": "Cygnus cargo spacecraft",
+     "poids": 106207
+    },
+    {
+     "fichier": "The Cygnus XL cargo spacecraft is in the grasp of the Canadarm2 robotic arm (iss074e0378294).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/The_Cygnus_XL_cargo_spacecraft_is_in_the_grasp_of_the_Canadarm2_robotic_arm_%28iss074e0378294%29.jpg/1920px-The_Cygnus_XL_cargo_spacecraft_is_in_the_grasp_of_the_Canadarm2_robotic_arm_%28iss074e0378294%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Cygnus_XL_cargo_spacecraft_is_in_the_grasp_of_the_Canadarm2_robotic_arm_(iss074e0378294).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Johnson Space Center",
+     "score": 0,
+     "terme": "Cygnus cargo spacecraft",
+     "poids": 162204
+    },
+    {
+     "fichier": "The Cygnus XL cargo spacecraft approaches the International Space Station (iss074e0458292).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/The_Cygnus_XL_cargo_spacecraft_approaches_the_International_Space_Station_%28iss074e0458292%29.jpg/1920px-The_Cygnus_XL_cargo_spacecraft_approaches_the_International_Space_Station_%28iss074e0458292%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Cygnus_XL_cargo_spacecraft_approaches_the_International_Space_Station_(iss074e0458292).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Johnson Space Center",
+     "score": 0,
+     "terme": "Cygnus cargo spacecraft",
+     "poids": 48215
+    },
+    {
+     "fichier": "Standard Cygnus vs Enhanced Cygnus.png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Standard_Cygnus_vs_Enhanced_Cygnus.png/1920px-Standard_Cygnus_vs_Enhanced_Cygnus.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Standard_Cygnus_vs_Enhanced_Cygnus.png",
      "licence": "CC BY-SA 3.0",
      "famille": "by-sa",
-     "auteur": "Sweeneyr",
+     "auteur": "Craigboy",
      "score": 0,
-     "terme": "Moody's Corporation",
-     "poids": 77687
+     "terme": "Cygnus cargo spacecraft",
+     "poids": 3587
+    },
+    {
+     "fichier": "Northrop Grumman’s Antares rocket with the Cygnus spacecraft liftoff from NASA’s Wallops Flight Facility in Virginia, on 19 February 2022.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Northrop_Grumman%E2%80%99s_Antares_rocket_with_the_Cygnus_spacecraft_liftoff_from_NASA%E2%80%99s_Wallops_Flight_Facility_in_Virginia%2C_on_19_February_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Northrop_Grumman%E2%80%99s_Antares_rocket_with_the_Cygnus_spacecraft_liftoff_from_NASA%E2%80%99s_Wallops_Flight_Facility_in_Virginia,_on_19_February_2022.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA/Wallops Flight Facility/Allison Stancil",
+     "score": 0,
+     "terme": "Northrop Grumman Antares",
+     "poids": 58648
     }
    ]
   },
-  "PL": {
+  "RDW": {
    "candidats": [
     {
-     "fichier": "Yas Marina Circuit, October 12, 2018 SkySat (cropped).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Yas_Marina_Circuit%2C_October_12%2C_2018_SkySat_%28cropped%29.jpg/1920px-Yas_Marina_Circuit%2C_October_12%2C_2018_SkySat_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Yas_Marina_Circuit,_October_12,_2018_SkySat_(cropped).jpg",
+     "fichier": "Vysoká škola medzinárodného podnikania ISM Slovakia, interiér.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Vysok%C3%A1_%C5%A1kola_medzin%C3%A1rodn%C3%A9ho_podnikania_ISM_Slovakia%2C_interi%C3%A9r.jpg/1920px-Vysok%C3%A1_%C5%A1kola_medzin%C3%A1rodn%C3%A9ho_podnikania_ISM_Slovakia%2C_interi%C3%A9r.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Vysok%C3%A1_%C5%A1kola_medzin%C3%A1rodn%C3%A9ho_podnikania_ISM_Slovakia,_interi%C3%A9r.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Hemrock",
+     "score": 0,
+     "terme": "in space manufacturing",
+     "poids": 46144
+    },
+    {
+     "fichier": "Transformational Solar Array experiment on DART's Roll Out Solar Array (ROSA).png",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Transformational_Solar_Array_experiment_on_DART%27s_Roll_Out_Solar_Array_%28ROSA%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Transformational_Solar_Array_experiment_on_DART%27s_Roll_Out_Solar_Array_(ROSA).png",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA/Johns Hopkins APL",
+     "score": 0,
+     "terme": "roll out solar array spacecraft",
+     "poids": 80313
+    },
+    {
+     "fichier": "The Shuttle Enterprise - GPN-2000-001363.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/The_Shuttle_Enterprise_-_GPN-2000-001363.jpg/1920px-The_Shuttle_Enterprise_-_GPN-2000-001363.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:The_Shuttle_Enterprise_-_GPN-2000-001363.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA",
+     "score": 0,
+     "terme": "in space manufacturing",
+     "poids": 96438
+    }
+   ]
+  },
+  "RKLB": {
+   "candidats": [
+    {
+     "fichier": "Rocket Lab PREFIRE and Ice Launch (KSC-20240605-PH-RKL01 0005).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Rocket_Lab_PREFIRE_and_Ice_Launch_%28KSC-20240605-PH-RKL01_0005%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Rocket_Lab_PREFIRE_and_Ice_Launch_(KSC-20240605-PH-RKL01_0005).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "NASA Kennedy Space Center / Rocket Lab",
+     "score": 0,
+     "terme": "Electron rocket launch",
+     "poids": 27179
+    }
+   ]
+  },
+  "RTX": {
+   "candidats": [
+    {
+     "fichier": "Two MC-21 with engines PW1000G (high-bypass geared turbofan engine family) and Aviadvigatel PD-14 (Russian developer and builder of aircraft engines).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Two_MC-21_with_engines_PW1000G_%28high-bypass_geared_turbofan_engine_family%29_and_Aviadvigatel_PD-14_%28Russian_developer_and_builder_of_aircraft_engines%29.jpg/1920px-Two_MC-21_with_engines_PW1000G_%28high-bypass_geared_turbofan_engine_family%29_and_Aviadvigatel_PD-14_%28Russian_developer_and_builder_of_aircraft_engines%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Two_MC-21_with_engines_PW1000G_(high-bypass_geared_turbofan_engine_family)_and_Aviadvigatel_PD-14_(Russian_developer_and_builder_of_aircraft_engines).jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Rulexip",
+     "score": 7,
+     "terme": "geared turbofan engine",
+     "poids": 30620
+    },
+    {
+     "fichier": "Ishikawajima-Harima F100-IHI-220E turbofan engine(cutaway model) gear box at JASDF Hamamatsu Air Base September 28, 2014.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Ishikawajima-Harima_F100-IHI-220E_turbofan_engine%28cutaway_model%29_gear_box_at_JASDF_Hamamatsu_Air_Base_September_28%2C_2014.jpg/1920px-Ishikawajima-Harima_F100-IHI-220E_turbofan_engine%28cutaway_model%29_gear_box_at_JASDF_Hamamatsu_Air_Base_September_28%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Ishikawajima-Harima_F100-IHI-220E_turbofan_engine(cutaway_model)_gear_box_at_JASDF_Hamamatsu_Air_Base_September_28,_2014.jpg",
      "licence": "CC BY-SA 4.0",
      "famille": "by-sa",
-     "auteur": "Planet Labs, Inc.",
-     "score": 0,
-     "terme": "SkySat satellite",
-     "poids": 146375
+     "auteur": "Hunini",
+     "score": 7,
+     "terme": "geared turbofan engine",
+     "poids": 56737
+    },
+    {
+     "fichier": "Pratt & Whitney J-48 jet engine, 1948 - Evergreen Aviation & Space Museum - McMinnville, Oregon - DSC00879.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Pratt_%26_Whitney_J-48_jet_engine%2C_1948_-_Evergreen_Aviation_%26_Space_Museum_-_McMinnville%2C_Oregon_-_DSC00879.jpg/1920px-Pratt_%26_Whitney_J-48_jet_engine%2C_1948_-_Evergreen_Aviation_%26_Space_Museum_-_McMinnville%2C_Oregon_-_DSC00879.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Pratt_%26_Whitney_J-48_jet_engine,_1948_-_Evergreen_Aviation_%26_Space_Museum_-_McMinnville,_Oregon_-_DSC00879.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Daderot",
+     "score": 4,
+     "terme": "Pratt and Whitney jet engine",
+     "poids": 100219
+    },
+    {
+     "fichier": "Pratt & Whitney Canada JT15D jet engine (Frontiers of Flight Museum).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Pratt_%26_Whitney_Canada_JT15D_jet_engine_%28Frontiers_of_Flight_Museum%29.jpg/1920px-Pratt_%26_Whitney_Canada_JT15D_jet_engine_%28Frontiers_of_Flight_Museum%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Pratt_%26_Whitney_Canada_JT15D_jet_engine_(Frontiers_of_Flight_Museum).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Michael Barera",
+     "score": 4,
+     "terme": "Pratt and Whitney jet engine",
+     "poids": 63340
+    },
+    {
+     "fichier": "Frontiers of Flight Museum December 2015 039 (Pratt & Whitney Canada JT15D jet engine).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Frontiers_of_Flight_Museum_December_2015_039_%28Pratt_%26_Whitney_Canada_JT15D_jet_engine%29.jpg/1920px-Frontiers_of_Flight_Museum_December_2015_039_%28Pratt_%26_Whitney_Canada_JT15D_jet_engine%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Frontiers_of_Flight_Museum_December_2015_039_(Pratt_%26_Whitney_Canada_JT15D_jet_engine).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Michael Barera",
+     "score": 4,
+     "terme": "Pratt and Whitney jet engine",
+     "poids": 71076
+    },
+    {
+     "fichier": "Frontiers of Flight Museum December 2015 038 (Pratt & Whitney Canada JT15D jet engine).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Frontiers_of_Flight_Museum_December_2015_038_%28Pratt_%26_Whitney_Canada_JT15D_jet_engine%29.jpg/1920px-Frontiers_of_Flight_Museum_December_2015_038_%28Pratt_%26_Whitney_Canada_JT15D_jet_engine%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Frontiers_of_Flight_Museum_December_2015_038_(Pratt_%26_Whitney_Canada_JT15D_jet_engine).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Michael Barera",
+     "score": 4,
+     "terme": "Pratt and Whitney jet engine",
+     "poids": 69952
     }
    ]
   },
-  "REGN": {
+  "SAF.PA": {
    "candidats": [
     {
-     "fichier": "Systèmes de quantification d'ADNs & ARNs du laboratoire GENALG (Ifremer 00944-105546 - 54479).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_%28Ifremer_00944-105546_-_54479%29.jpg/1920px-Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_%28Ifremer_00944-105546_-_54479%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_(Ifremer_00944-105546_-_54479).jpg",
+     "fichier": "LEAP Engine Mockup (40202884051).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/LEAP_Engine_Mockup_%2840202884051%29.jpg/1920px-LEAP_Engine_Mockup_%2840202884051%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:LEAP_Engine_Mockup_(40202884051).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "aamanatullah",
+     "score": 4,
+     "terme": "CFM LEAP engine",
+     "poids": 108015
+    },
+    {
+     "fichier": "LEAP Engine Mockup (40202772691).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/LEAP_Engine_Mockup_%2840202772691%29.jpg/1920px-LEAP_Engine_Mockup_%2840202772691%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:LEAP_Engine_Mockup_(40202772691).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "aamanatullah",
+     "score": 4,
+     "terme": "CFM LEAP engine",
+     "poids": 99476
+    },
+    {
+     "fichier": "LEAP Engine Mockup (28422972559).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/LEAP_Engine_Mockup_%2828422972559%29.jpg/1920px-LEAP_Engine_Mockup_%2828422972559%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:LEAP_Engine_Mockup_(28422972559).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "aamanatullah",
+     "score": 4,
+     "terme": "CFM LEAP engine",
+     "poids": 89623
+    },
+    {
+     "fichier": "LEAP Engine Mockup (25331150627).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/LEAP_Engine_Mockup_%2825331150627%29.jpg/1920px-LEAP_Engine_Mockup_%2825331150627%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:LEAP_Engine_Mockup_(25331150627).jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "aamanatullah",
+     "score": 4,
+     "terme": "CFM LEAP engine",
+     "poids": 45607
+    },
+    {
+     "fichier": "Icing on the inlet of a CFM56 turbofan engine (3).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Icing_on_the_inlet_of_a_CFM56_turbofan_engine_%283%29.jpg/1920px-Icing_on_the_inlet_of_a_CFM56_turbofan_engine_%283%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Icing_on_the_inlet_of_a_CFM56_turbofan_engine_(3).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Olivier Cleynen",
+     "score": 4,
+     "terme": "CFM56 engine",
+     "poids": 26466
+    },
+    {
+     "fichier": "Icing on the inlet of a CFM56 turbofan engine (2).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Icing_on_the_inlet_of_a_CFM56_turbofan_engine_%282%29.jpg/1920px-Icing_on_the_inlet_of_a_CFM56_turbofan_engine_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Icing_on_the_inlet_of_a_CFM56_turbofan_engine_(2).jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "Olivier Cleynen",
+     "score": 4,
+     "terme": "CFM56 engine",
+     "poids": 21820
+    }
+   ]
+  },
+  "SAP.DE": {
+   "candidats": [
+    {
+     "fichier": "Sap-wdf.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Sap-wdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Sap-wdf.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "MichaelBr90",
+     "score": 0,
+     "terme": "SAP building",
+     "poids": 88992
+    },
+    {
+     "fichier": "SAP AG Headquarter 1200.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/SAP_AG_Headquarter_1200.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:SAP_AG_Headquarter_1200.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "amadeusm",
+     "score": 0,
+     "terme": "SAP headquarters Walldorf",
+     "poids": 122789
+    },
+    {
+     "fichier": "SAP building in Raanana.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/SAP_building_in_Raanana.jpg/1920px-SAP_building_in_Raanana.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:SAP_building_in_Raanana.jpg",
+     "licence": "CC BY-SA 3.0",
+     "famille": "by-sa",
+     "auteur": "Юкатан",
+     "score": -8,
+     "terme": "SAP building",
+     "poids": 54449
+    },
+    {
+     "fichier": "SAP building Raanana 2.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/SAP_building_Raanana_2.jpg/1920px-SAP_building_Raanana_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:SAP_building_Raanana_2.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "דוד שי",
+     "score": -8,
+     "terme": "SAP building",
+     "poids": 97694
+    },
+    {
+     "fichier": "SAP building Raanana 1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/SAP_building_Raanana_1.jpg/1920px-SAP_building_Raanana_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:SAP_building_Raanana_1.jpg",
+     "licence": "CC BY-SA 4.0",
+     "famille": "by-sa",
+     "auteur": "דוד שי",
+     "score": -8,
+     "terme": "SAP building",
+     "poids": 76884
+    },
+    {
+     "fichier": "SAP AG headquarter Walldorf building 1.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/SAP_AG_headquarter_Walldorf_building_1.jpg/1920px-SAP_AG_headquarter_Walldorf_building_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:SAP_AG_headquarter_Walldorf_building_1.jpg",
+     "licence": "CC BY 2.0",
+     "famille": "by",
+     "auteur": "Vladislav Bezrukov from Walldorf, Germany",
+     "score": -8,
+     "terme": "SAP headquarters Walldorf",
+     "poids": 139007
+    }
+   ]
+  },
+  "SESG.PA": {
+   "candidats": [
+    {
+     "fichier": "SKY Perfect JSAT YSCC.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SKY_Perfect_JSAT_YSCC.jpg/1920px-SKY_Perfect_JSAT_YSCC.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:SKY_Perfect_JSAT_YSCC.jpg",
      "licence": "CC BY 4.0",
      "famille": "by",
-     "auteur": "Stephane Lesbats (IFREMER, Pôle Images, Centre Bretagne - ZI de la Pointe du Dia",
+     "auteur": "Yoh-Plus",
      "score": 0,
-     "terme": "biotechnology laboratory pipetting",
-     "poids": 54670
+     "terme": "satellite teleport antenna",
+     "poids": 154576
     },
     {
-     "fichier": "Systèmes de quantification d'ADNs & ARNs du laboratoire GENALG (Ifremer 00944-105546 - 54478).jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_%28Ifremer_00944-105546_-_54478%29.jpg/1920px-Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_%28Ifremer_00944-105546_-_54478%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Syst%C3%A8mes_de_quantification_d%27ADNs_%26_ARNs_du_laboratoire_GENALG_(Ifremer_00944-105546_-_54478).jpg",
-     "licence": "CC BY 4.0",
-     "famille": "by",
-     "auteur": "Stephane Lesbats (IFREMER, Pôle Images, Centre Bretagne - ZI de la Pointe du Dia",
+     "fichier": "SES-10 Launch - world's first reflight of an orbital class rocket (33361035200).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/SES-10_Launch_-_world%27s_first_reflight_of_an_orbital_class_rocket_%2833361035200%29.jpg/1920px-SES-10_Launch_-_world%27s_first_reflight_of_an_orbital_class_rocket_%2833361035200%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:SES-10_Launch_-_world%27s_first_reflight_of_an_orbital_class_rocket_(33361035200).jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "SpaceX",
      "score": 0,
-     "terme": "biotechnology laboratory pipetting",
-     "poids": 53688
+     "terme": "geostationary communications satellite",
+     "poids": 51669
     },
     {
-     "fichier": "Structure of antibody molecule.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Structure_of_antibody_molecule.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Structure_of_antibody_molecule.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Inbal Sela-Culang, Vered Kunik, Yanay Ofran",
+     "fichier": "Rosette Geostationary Satellites Animated.gif",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Rosette_Geostationary_Satellites_Animated.gif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:Rosette_Geostationary_Satellites_Animated.gif",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Dylan O'Donnell, deography.com",
      "score": 0,
-     "terme": "antibody ribbon diagram",
-     "poids": 82011
+     "terme": "geostationary communications satellite",
+     "poids": 122196
+    },
+    {
+     "fichier": "O3b mPower Satellite Model.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/O3b_mPower_Satellite_Model.jpg/1920px-O3b_mPower_Satellite_Model.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:O3b_mPower_Satellite_Model.jpg",
+     "licence": "CC0",
+     "famille": "libre",
+     "auteur": "Blervis",
+     "score": 0,
+     "terme": "O3b mPOWER satellite",
+     "poids": 67129
+    },
+    {
+     "fichier": "O3b mPOWER 9 & 10 Launch from Cape Canaveral Space Force Station (9198632).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/O3b_mPOWER_9_%26_10_Launch_from_Cape_Canaveral_Space_Force_Station_%289198632%29.jpg/1920px-O3b_mPOWER_9_%26_10_Launch_from_Cape_Canaveral_Space_Force_Station_%289198632%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:O3b_mPOWER_9_%26_10_Launch_from_Cape_Canaveral_Space_Force_Station_(9198632).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Space Force photo by Robert Mason",
+     "score": 0,
+     "terme": "O3b mPOWER satellite",
+     "poids": 34659
+    },
+    {
+     "fichier": "O3b mPOWER 9 & 10 Launch from Cape Canaveral Space Force Station (9198630).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/O3b_mPOWER_9_%26_10_Launch_from_Cape_Canaveral_Space_Force_Station_%289198630%29.jpg/1920px-O3b_mPOWER_9_%26_10_Launch_from_Cape_Canaveral_Space_Force_Station_%289198630%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:O3b_mPOWER_9_%26_10_Launch_from_Cape_Canaveral_Space_Force_Station_(9198630).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Space Force photo by Robert Mason",
+     "score": 0,
+     "terme": "O3b mPOWER satellite",
+     "poids": 29010
     }
    ]
   },
-  "VWS.CO": {
+  "VSAT": {
    "candidats": [
     {
-     "fichier": "Wind turbine construction, Pougny, E6-10, nacelle.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Wind_turbine_construction%2C_Pougny%2C_E6-10%2C_nacelle.jpg/1920px-Wind_turbine_construction%2C_Pougny%2C_E6-10%2C_nacelle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Wind_turbine_construction,_Pougny,_E6-10,_nacelle.jpg",
-     "licence": "CC BY-SA 4.0",
+     "fichier": "Hong Kong Airport Satellite Terminal Interior 2.JPG",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Hong_Kong_Airport_Satellite_Terminal_Interior_2.JPG/1920px-Hong_Kong_Airport_Satellite_Terminal_Interior_2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Hong_Kong_Airport_Satellite_Terminal_Interior_2.JPG",
+     "licence": "CC BY-SA 3.0",
      "famille": "by-sa",
-     "auteur": "Cjp24",
-     "score": 4,
-     "terme": "wind turbine nacelle",
-     "poids": 32565
+     "auteur": "Livewireshock",
+     "score": 7,
+     "terme": "satellite internet terminal",
+     "poids": 103701
     },
     {
-     "fichier": "Wind turbine construction, Pougny, E6-09, nacelle and crane.jpg",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Wind_turbine_construction%2C_Pougny%2C_E6-09%2C_nacelle_and_crane.jpg/1920px-Wind_turbine_construction%2C_Pougny%2C_E6-09%2C_nacelle_and_crane.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-     "page": "https://commons.wikimedia.org/wiki/File:Wind_turbine_construction,_Pougny,_E6-09,_nacelle_and_crane.jpg",
-     "licence": "CC BY-SA 4.0",
-     "famille": "by-sa",
-     "auteur": "Cjp24",
+     "fichier": "US Navy 030909-N-5060D-003 Electronics Technician 2nd Class Kristian Dillemuth, assigned to Joint Mobile Ashore Support Terminal (JMAST) Europe, calibrates the stabilizers of a Super High Frequency satellite dish.jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/US_Navy_030909-N-5060D-003_Electronics_Technician_2nd_Class_Kristian_Dillemuth%2C_assigned_to_Joint_Mobile_Ashore_Support_Terminal_%28JMAST%29_Europe%2C_calibrates_the_stabilizers_of_a_Super_High_Frequency_satellite_dish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+     "page": "https://commons.wikimedia.org/wiki/File:US_Navy_030909-N-5060D-003_Electronics_Technician_2nd_Class_Kristian_Dillemuth,_assigned_to_Joint_Mobile_Ashore_Support_Terminal_(JMAST)_Europe,_calibrates_the_stabilizers_of_a_Super_High_Frequency_satellite_dish.jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Navy photo by Journalist 2nd Class Lily Daniels.",
      "score": 4,
-     "terme": "wind turbine nacelle",
-     "poids": 38011
+     "terme": "satellite internet terminal",
+     "poids": 89567
     },
     {
-     "fichier": "Vestas wind turbine on the beach at Hvide Sande.png",
-     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Vestas_wind_turbine_on_the_beach_at_Hvide_Sande.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-     "page": "https://commons.wikimedia.org/wiki/File:Vestas_wind_turbine_on_the_beach_at_Hvide_Sande.png",
-     "licence": "CC BY-SA 2.0",
-     "famille": "by-sa",
-     "auteur": "Jens Rost",
+     "fichier": "Signal support systems specialists prepare ground satellite terminal (6116646).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Signal_support_systems_specialists_prepare_ground_satellite_terminal_%286116646%29.jpg/1920px-Signal_support_systems_specialists_prepare_ground_satellite_terminal_%286116646%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Signal_support_systems_specialists_prepare_ground_satellite_terminal_(6116646).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Army National Guard photo by Spc. Miguel Ruiz",
      "score": 4,
-     "terme": "Vestas wind turbine",
-     "poids": 48243
+     "terme": "satellite internet terminal",
+     "poids": 37503
+    },
+    {
+     "fichier": "Signal support systems specialists prepare ground satellite terminal (6116644).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Signal_support_systems_specialists_prepare_ground_satellite_terminal_%286116644%29.jpg/1920px-Signal_support_systems_specialists_prepare_ground_satellite_terminal_%286116644%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Signal_support_systems_specialists_prepare_ground_satellite_terminal_(6116644).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Army National Guard photo by Spc. Miguel Ruiz",
+     "score": 4,
+     "terme": "satellite internet terminal",
+     "poids": 66935
+    },
+    {
+     "fichier": "Signal support systems specialists prepare ground satellite terminal (6116643).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Signal_support_systems_specialists_prepare_ground_satellite_terminal_%286116643%29.jpg/1920px-Signal_support_systems_specialists_prepare_ground_satellite_terminal_%286116643%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Signal_support_systems_specialists_prepare_ground_satellite_terminal_(6116643).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Army National Guard photo by Spc. Miguel Ruiz",
+     "score": 4,
+     "terme": "satellite internet terminal",
+     "poids": 53732
+    },
+    {
+     "fichier": "Signal support systems specialists prepare ground satellite terminal (6116642).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Signal_support_systems_specialists_prepare_ground_satellite_terminal_%286116642%29.jpg/1920px-Signal_support_systems_specialists_prepare_ground_satellite_terminal_%286116642%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:Signal_support_systems_specialists_prepare_ground_satellite_terminal_(6116642).jpg",
+     "licence": "Public domain",
+     "famille": "libre",
+     "auteur": "U.S. Army National Guard photo by Spc. Miguel Ruiz",
+     "score": 4,
+     "terme": "satellite internet terminal",
+     "poids": 79608
+    }
+   ]
+  },
+  "WULF": {
+   "candidats": [
+    {
+     "fichier": "American hydroelectric practice; a compilation of useful data and information on the design, construction and operation of hydroelectric systems, from the penstocks to distribution lines (1917) (14740184006).jpg",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/American_hydroelectric_practice%3B_a_compilation_of_useful_data_and_information_on_the_design%2C_construction_and_operation_of_hydroelectric_systems%2C_from_the_penstocks_to_distribution_lines_%281917%29_%2814740184006%29.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+     "page": "https://commons.wikimedia.org/wiki/File:American_hydroelectric_practice;_a_compilation_of_useful_data_and_information_on_the_design,_construction_and_operation_of_hydroelectric_systems,_from_the_penstocks_to_distribution_lines_(1917)_(14740184006).jpg",
+     "licence": "No restrictions",
+     "famille": "libre",
+     "auteur": "Taylor, William T. (William Thomas), b. 1877;\n\nBraymer, Daniel Harvey, 1883-1932",
+     "score": 0,
+     "terme": "hydroelectric powered data center",
+     "poids": 135457
     }
    ]
   }
