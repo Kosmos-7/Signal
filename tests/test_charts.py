@@ -962,14 +962,16 @@ check("et prolongent donc le périmètre actuel, pas la marche",
       0 < g_rp < 25, f"{g_rp:.1f} %")
 check("une société sans consensus et en hypercroissance démontrée ne dit rien",
       screener.projections(CONTRACTE, None, None, "2025-12-31") == [])
-# Le piège des ADR : le CA estimé est publié en devise COMPTABLE, le BPA estimé
-# en devise de COTATION. TSM publiait 331,25 TWD de BPA et nous en projetions
-# 16,82 — le « taux de croissance » n'était qu'un taux de change.
+# Le piège des ADR : le CA estimé est toujours publié en devise COMPTABLE (TSM
+# et 2330.TW rendent le même nombre à l'unité près), tandis que le BPA estimé
+# suit une convention qui VARIE — par ADR et en dollars sur TSM, en devise
+# comptable sur Ferrari. TSM publiait 331,25 TWD de BPA et nous en projetions
+# 16,82 : le « taux de croissance » n'était qu'un taux de change.
 ADR = [{"fin": f"{y}-12-31", "ca": c, "eps": e} for y, c, e in
        [(2023, 2161736, 176.0), (2024, 2894308, 226.25), (2025, 3809054, 331.25)]]
 adr = screener.projections(ADR, {"0y": 16.8, "+1y": 21.6},
                            {"0y": 5420352, "+1y": 7187439}, "2025-12-31",
-                           meme_devise=False)
+                           bpa_comparable=False)
 check("ADR : aucune estimation de BPA en devise étrangère n'entre dans la série",
       all(e.get("eps") is None or e["eps"] > 100 for e in adr), str(adr[:2]))
 check("ADR : le chiffre d'affaires, lui, se projette normalement",

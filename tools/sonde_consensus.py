@@ -155,7 +155,13 @@ def sonder(tickers):
         rp = fiche.get("reperes") or {}
         est_ca = ((fiche.get("revenue_estimate") or {}).get("valeurs") or {}).get("0y", {}).get("avg")
         ca_pub = rp.get("ca_publie")
-        ratio = f"{est_ca / ca_pub:.3f}" if (est_ca and ca_pub) else "?"
+        # Le CA estimé arrive parfois en CHAÎNE (le BPA, jamais) — c'est écrit
+        # dans la docstring de ce fichier depuis le 07/08, et la première
+        # version de cette ligne l'a quand même divisé tel quel.
+        try:
+            ratio = f"{float(est_ca) / float(ca_pub):.3f}" if (est_ca and ca_pub) else "?"
+        except (TypeError, ValueError):
+            ratio = "?"
         print(f"  {t:<10} comptes={str(rp.get('devise_comptable')):<5} "
               f"cotation={str(rp.get('devise_cotation')):<5} "
               f"CA_est/CA_publié={ratio:<7} "

@@ -668,7 +668,8 @@ def chainer_finnhub(fh_data, net_margin_raw, debt_eq_raw):
     return nm, de, src
 
 
-def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None, taux=None):
+def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None,
+                   taux=None, rapport=None):
     """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
     dilué publié. UNIQUEMENT quand la devise comptable est celle de cotation :
     un ADR comme TSM cote en USD mais publie son BPA en TWD (et représente
@@ -708,8 +709,20 @@ def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None, taux
     l'appelant — permet de ramener le cours dans la devise des comptes au jour
     de la clôture. Sans elle (paire introuvable, réseau en panne), on retombe
     exactement sur l'ancien comportement : le trou assumé, jamais un multiple
-    calculé avec un taux inventé."""
+    calculé avec un taux inventé.
+
+    ET LE CERTIFICAT N'EST PAS L'ACTION. Convertir le cours réglait le change et
+    laissait entier le second décalage : un ADR représente PLUSIEURS actions
+    ordinaires, et son cours est donc un multiple du cours de l'action dont les
+    comptes donnent le bénéfice. ASE en a fait la démonstration — un PER
+    prévisionnel publié à 33,4 pour une valeur voisine de 14,5, soit exactement
+    le rapport de deux actions par certificat. `rapport`, mesuré par
+    `rapport_adr` et jamais supposé, ramène le cours à l'action ordinaire. Sans
+    lui on ne divise pas : un rapport inventé ferait un multiple faux, tandis
+    qu'un rapport absent sur un titre ordinaire vaut simplement 1."""
     if not meme_devise and taux is None:
+        return an
+    if rapport is not None and rapport <= 0:
         return an
     import math
     for e in an:
@@ -728,6 +741,8 @@ def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None, taux
             # un point absent qu'un point faux au milieu d'une courbe juste.
             fx = taux(e["fin"])
             prix = prix * fx if fx and fx > 0 else None
+        if prix and prix > 0 and rapport:
+            prix = prix / rapport      # cours du certificat → cours de l'action
         if prix and prix > 0:
             e["per"] = round(prix / eps, 1)
     return an
@@ -804,42 +819,59 @@ BANDE_CROISSANCE_BPA = (1 / 3, 3)
 
 
 def per_previsionnel(prix, estimations, dernier_exercice, taux=None,
-                     eps_publie=None):
+                     eps_publie=None, devise_estimations=None,
+                     devise_cotation=None, devise_comptes=None):
     """PER des deux exercices À VENIR : cours ACTUEL / BPA moyen estimé par les
     analystes (Yahoo, lignes 0y et +1y). Étiquettes = exercice fiscal suivant le
     dernier clos. estimations : {"0y": eps, "+1y": eps} (None/absent tolérés).
 
-    LA DEVISE DES ESTIMATIONS N'EST PAS DÉCLARÉE, ET ELLE SE MESURE MAL.
-    Cette fonction AFFIRMAIT que « les estimations sont publiées dans la devise
-    de cotation », sans jamais le vérifier. C'est faux au moins deux fois :
-    Vestas affichait un PER prévisionnel de 154× (cours en couronnes danoises,
-    bénéfice estimé en euros) et Tencent de 2,0× (cours en dollars, bénéfice
-    estimé en yuans). Sept fiches du site cotent dans une autre monnaie que
-    celle de leurs comptes.
+    LA DEVISE DES ESTIMATIONS EST DÉCLARÉE — NOUS NE LA LISIONS PAS.
+    Cette fonction a d'abord AFFIRMÉ que « les estimations sont publiées dans la
+    devise de cotation », ce qui donnait un PER prévisionnel de 2,0× sur Tencent
+    (cours en dollars, bénéfice estimé en yuans) et de 154× sur Vestas. Elle a
+    ensuite tenté de DEVINER la devise par la croissance implicite du bénéfice,
+    ce qui tranchait deux cas sur six et laissait quatre trous.
 
-    ON TRANCHE PAR LA CROISSANCE IMPLICITE, quand elle tranche. Le BPA estimé
-    de l'exercice à venir succède au dernier BPA publié, dont nous connaissons
-    la devise : leur rapport est une croissance annuelle. Lue dans la bonne
-    monnaie elle est plausible ; lue dans l'autre elle vaut le taux de change,
-    c'est-à-dire n'importe quoi. Tencent 1,3 contre 9,1 ; Vestas 1,5 contre
-    0,2 ; ASE 1,9 contre 0,06 : le départage est net.
+    La sonde du 08/08 a montré que la question n'avait pas à être devinée : les
+    tables `earnings_estimate` et `revenue_estimate` portent une COLONNE
+    `currency` que nous jetions. Elle est fiable, et surtout elle dit ce
+    qu'aucune règle n'aurait trouvé — la convention N'EST PAS UNIFORME :
 
-    ET ON S'ABSTIENT QUAND ELLE NE TRANCHE PAS. Si les deux lectures donnent
-    une croissance plausible — c'est le cas dès que le change est proche de 1,
-    ABB à 1,25, Cameco à 1,37, Ferrari à 1,08 — alors rien ne les distingue et
-    aucun multiple n'est publié. L'erreur y serait de 8 à 37 %, moins
-    spectaculaire qu'un facteur sept mais tout aussi indémontrable.
+        ticker    comptes  cotation  currency(BPA)  currency(CA)
+        TSM       TWD      USD       USD            TWD
+        ASX       TWD      USD       USD            TWD
+        RACE      EUR      USD       EUR            EUR
+        CCJ       CAD      USD       CAD            CAD
 
-    DEUX AUTRES DÉPARTAGES ONT ÉTÉ ESSAYÉS ET ÉCARTÉS, notés ici pour qu'on ne
-    les retente pas. Le PER courant du fournisseur, pris comme ancrage, a le
-    défaut même qu'il devait arbitrer : sur ABB il vaut 37,3 quand notre
-    multiple 2025 en vaut 28,9, soit le change CHF→USD à 1,25 — la source
-    commet parfois le mélange qu'on cherchait à détecter. Et la place de
-    cotation ne prédit rien : Ferrari et Cameco, deux lignes new-yorkaises de
-    sociétés étrangères, ne se comportent pas pareil.
+    Sur TSM et ASE le bénéfice estimé est libellé PAR ADR et en dollars ; sur
+    Ferrari et Cameco il est libellé dans la devise des comptes alors que le
+    titre cote en dollars. Une même situation apparente, deux conventions. Le
+    départage par la croissance ne pouvait donc pas être « affiné » : il était
+    faux dans son principe, et il l'aurait été en silence.
 
-    Retourne aussi, par le champ `base`, la lecture retenue — le site l'affiche
-    plutôt que de laisser croire à un quotient sans couture."""
+    LA RÈGLE EST MAINTENANT CELLE DE LA SOURCE :
+      · devise déclarée == devise de cotation → aucun change. C'est le cas ADR,
+        et il se règle tout seul : un bénéfice par ADR divise un cours d'ADR.
+      · devise déclarée == devise des comptes → on ramène le COURS dans cette
+        devise, exactement comme pour le PER historique.
+      · devise déclarée absente → on retombe sur le départage par la croissance
+        implicite, décrit plus bas, qui vaut mieux que rien.
+      · devise déclarée tierce, ou change indisponible → aucun multiple.
+
+    LE DÉPARTAGE DE SECOURS, quand la source ne déclare rien. Le BPA estimé de
+    l'exercice à venir succède au dernier BPA publié, dont nous connaissons la
+    devise : leur rapport est une croissance annuelle. Lue dans la bonne monnaie
+    elle est plausible ; lue dans l'autre elle vaut le taux de change. Il ne
+    tranche que si le change est loin de 1 (Tencent 1,3 contre 9,1) et s'abstient
+    sinon (Ferrari 1,08) — d'où son rang de secours.
+
+    UN DÉPARTAGE A ÉTÉ ESSAYÉ ET ÉCARTÉ, noté ici pour qu'on ne le retente pas.
+    Le PER courant du fournisseur, pris comme ancrage, a le défaut même qu'il
+    devait arbitrer : sur ABB il vaut 37,3 quand notre multiple 2025 en vaut
+    28,9, soit le change CHF→USD — la source commet parfois le mélange qu'on
+    cherchait à détecter. La place de cotation ne prédit rien non plus, et le
+    tableau ci-dessus dit pourquoi : Ferrari et TSM cotent toutes deux à New
+    York et ne suivent pas la même convention."""
     if not prix or prix <= 0 or not dernier_exercice:
         return []
     try:
@@ -850,17 +882,28 @@ def per_previsionnel(prix, estimations, dernier_exercice, taux=None,
     if taux is not None:
         t = taux(dernier_exercice) if callable(taux) else taux
         eps0 = (estimations or {}).get("0y")
-        if not t or t <= 0 or not eps0 or eps0 <= 0 \
-                or not eps_publie or eps_publie <= 0:
-            return []          # rien à quoi comparer : on ne devine pas
-        bas, haut = BANDE_CROISSANCE_BPA
-        # Croissance implicite selon chacune des deux lectures possibles.
-        g_comptes = eps0 / eps_publie                # estimation déjà en devise des comptes
-        g_cotation = eps0 * t / eps_publie           # estimation en devise de cotation
-        ok_c, ok_q = bas <= g_comptes <= haut, bas <= g_cotation <= haut
-        if ok_c == ok_q:
-            return []          # les deux plausibles, ou aucune : indécidable
-        convertir = ok_c
+        if devise_estimations:
+            # LA SOURCE DÉCLARE : on obéit, on ne mesure plus.
+            if devise_estimations == devise_cotation:
+                convertir = False
+            elif devise_estimations == devise_comptes:
+                if not t or t <= 0:
+                    return []      # la devise est connue, le change ne l'est pas
+                convertir = True
+            else:
+                return []          # devise tierce : hors de ce que nous savons lire
+        else:
+            if not t or t <= 0 or not eps0 or eps0 <= 0 \
+                    or not eps_publie or eps_publie <= 0:
+                return []          # rien à quoi comparer : on ne devine pas
+            bas, haut = BANDE_CROISSANCE_BPA
+            # Croissance implicite selon chacune des deux lectures possibles.
+            g_comptes = eps0 / eps_publie            # estimation déjà en devise des comptes
+            g_cotation = eps0 * t / eps_publie       # estimation en devise de cotation
+            ok_c, ok_q = bas <= g_comptes <= haut, bas <= g_cotation <= haut
+            if ok_c == ok_q:
+                return []          # les deux plausibles, ou aucune : indécidable
+            convertir = ok_c
     out = []
     for i, cle in enumerate(("0y", "+1y")):
         eps = (estimations or {}).get(cle)
@@ -869,6 +912,53 @@ def per_previsionnel(prix, estimations, dernier_exercice, taux=None,
                 if convertir else prix
             out.append({"exercice": annee + 1 + i, "per": round(p / eps, 1)})
     return out
+
+
+# Rapports d'ADR usuels : un certificat représente 1, 2, 3, 4, 5 ou 10 actions
+# ordinaires, ou une fraction d'action pour les titres à cours élevé.
+RAPPORTS_ADR = (10, 5, 4, 3, 2, 1, 1 / 2, 1 / 4, 1 / 5, 1 / 10)
+TOLERANCE_ADR = 0.12      # 12 % — un rapport d'ADR est un entier simple, pas un ajustement
+
+
+def rapport_adr(bpa_estime_an_dernier, eps_publie, taux,
+                devise_estimations=None, devise_cotation=None):
+    """Combien d'actions ordinaires un titre coté représente-t-il ?
+
+    POURQUOI CE NOMBRE MANQUAIT. Le PER historique divise le cours du titre COTÉ
+    par le bénéfice par action des COMPTES. Pour une action ordinaire c'est le
+    même dénominateur ; pour un ADR, non — un certificat TSMC vaut cinq actions
+    de Taipei, un certificat ASE en vaut deux. Convertir le cours en devise des
+    comptes, ce que nous faisons depuis le 08/08, corrige le change et laisse le
+    rapport intact : le PER prévisionnel d'ASE sortait à 33,4 pour une valeur
+    réelle voisine de 14,5, soit exactement un facteur deux.
+
+    COMMENT ON LE MESURE, sans le supposer. La table des estimations porte
+    `yearAgoEps` : le bénéfice du dernier exercice clos, PAR TITRE COTÉ et dans
+    la devise que la source déclare. Les comptes portent le même exercice, par
+    action ordinaire et en devise comptable. Leur rapport, une fois le change
+    appliqué, EST le rapport d'ADR. Rien n'est supposé ; le seul a priori est
+    qu'un rapport d'ADR est un entier simple ou son inverse — ce qui est vrai
+    par construction, un dépositaire ne crée pas de certificat à 1,37 action.
+
+    ET ON S'ABSTIENT SI ÇA NE TOMBE PAS JUSTE. Un rapport à 12 % d'aucune valeur
+    usuelle signale que l'une des deux grandeurs n'est pas ce qu'on croit — un
+    exercice décalé, un retraitement, une devise mal déclarée. Retourner None
+    laisse alors le PER historique se retirer avec son motif, plutôt que de
+    corriger d'un facteur inventé."""
+    if devise_estimations and devise_cotation \
+            and devise_estimations != devise_cotation:
+        # Estimations déjà libellées en devise des comptes : le bénéfice estimé
+        # et le bénéfice publié parlent de la même action, le rapport vaut 1.
+        return 1.0
+    if not bpa_estime_an_dernier or not eps_publie or eps_publie <= 0:
+        return None
+    if not taux or taux <= 0:
+        return None
+    mesure = bpa_estime_an_dernier * taux / eps_publie
+    if mesure <= 0:
+        return None
+    proche = min(RAPPORTS_ADR, key=lambda r: abs(mesure / r - 1))
+    return proche if abs(mesure / proche - 1) <= TOLERANCE_ADR else None
 
 
 HORIZON_PROJECTION = 2030
@@ -923,7 +1013,7 @@ SEUIL_REFUS = 50.0
 
 
 def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
-                meme_devise=True,
+                bpa_comparable=True,
                 horizon=HORIZON_PROJECTION, g_terminale=CROISSANCE_TERMINALE,
                 seuil_refus=SEUIL_REFUS):
     """Trajectoire attendue du CA et du BPA jusqu'à `horizon`.
@@ -971,27 +1061,33 @@ def projections(an, estimations_bpa, estimations_ca, dernier_exercice,
     afficher. Une projection qu'on sait fausse ne vaut pas mieux qu'un blanc :
     elle vaut moins, parce qu'elle se donne l'air d'un fait.
 
-    LE PIÈGE DES DEVISES, et pourquoi `meme_devise` existe. Les deux jeux
-    d'estimations de Yahoo ne vivent PAS dans la même monnaie :
+    LE PIÈGE DES DEVISES, et pourquoi `bpa_comparable` existe. Le chiffre
+    d'affaires estimé est toujours publié dans la devise COMPTABLE — vérifié
+    ligne à ligne le 08/08 : TSM et 2330.TW rendent le MÊME nombre, à l'unité
+    près. Le bénéfice par action estimé, lui, suit une convention qui VARIE
+    d'un titre à l'autre : par ADR et en dollars sur TSM et ASE, en devise
+    comptable sur Ferrari et Cameco. C'est la colonne `currency` de la table
+    qui le dit, et c'est à l'appelant de la lire.
 
-      · le chiffre d'affaires estimé est publié dans la devise COMPTABLE,
-        celle de l'historique — les deux se comparent directement ;
-      · le bénéfice par action estimé est publié dans la devise de COTATION,
-        parce qu'il sert à calculer un PER contre le cours (c'est ce qui rend
-        `per_previsionnel` valide même pour un ADR).
+    Ce paramètre s'appelait `meme_devise` et cette docstring AFFIRMAIT que le
+    BPA estimé était « publié dans la devise de cotation ». La moitié des cas
+    observés dit le contraire. Le nom disait une comparaison de devises ; ce
+    qui compte est plus simple et plus juste : le BPA estimé est-il libellé
+    comme la série publiée ? Si oui on le projette, si non on l'ignore et le
+    bénéfice reste prolongeable depuis le seul historique, cohérent avec
+    lui-même. Sur TSM le mélange donnait 331,25 TWD publiés prolongés en 16,82 :
+    le taux de croissance n'était pas une opinion de marché, c'était un taux de
+    change.
 
-    Pour un ADR, ces deux devises diffèrent. TSM publiait 331,25 TWD de BPA et
-    nous en projetions 16,82 — le taux de croissance n'était pas une opinion
-    de marché, c'était un taux de change. Quand `meme_devise` est faux, les
-    estimations de BPA sont donc IGNORÉES ; le bénéfice reste prolongeable à
-    partir du seul historique, qui est cohérent avec lui-même, et le chiffre
-    d'affaires n'est pas concerné.
+    On n'essaie PAS de rapatrier un BPA estimé libellé en devise de cotation :
+    il faudrait un taux de change FUTUR, que personne n'a. Le trou est ici la
+    seule réponse honnête, et il ne concerne que le bénéfice.
 
     Pure et testable hors ligne. Rend [] si rien n'est projetable.
     """
     if not dernier_exercice:
         return []
-    if not meme_devise:
+    if not bpa_comparable:
         estimations_bpa = None
     try:
         an0 = int(str(dernier_exercice)[:4])
@@ -2500,8 +2596,43 @@ def score_ticker(ticker, vix=None):
                     # Cotation → comptes : c'est le COURS qu'on ramène dans la
                     # devise du bénéfice, jamais l'inverse (cf. taux_historique).
                     _fx = None if meme_devise else taux_historique(_d_cote, _d_compta)
+                    # LES ESTIMATIONS SE LISENT AVANT LES MULTIPLES, parce que
+                    # c'est leur colonne `currency` — la seule déclaration de
+                    # devise de toute la source — qui dit comment lire les deux.
+                    est = None
+                    _d_est = None
+                    _bpa_an_dernier = None
+                    try:
+                        ee = data.earnings_estimate
+                        if ee is not None and "avg" in getattr(ee, "columns", []):
+                            est = {k: (float(ee.loc[k, "avg"]) if k in ee.index
+                                       and ee.loc[k, "avg"] == ee.loc[k, "avg"] else None)
+                                   for k in ("0y", "+1y")}
+                            # LA COLONNE QU'ON JETAIT. Elle existe depuis
+                            # toujours et nous avons passé deux jours à
+                            # DEVINER ce qu'elle déclare (cf. per_previsionnel).
+                            if "currency" in getattr(ee, "columns", []) and "0y" in ee.index:
+                                _v = ee.loc["0y", "currency"]
+                                _d_est = str(_v) if _v == _v and _v else None
+                            # Bénéfice du dernier exercice clos, PAR TITRE COTÉ :
+                            # l'autre moitié de la mesure du rapport d'ADR.
+                            if "yearAgoEps" in getattr(ee, "columns", []) and "0y" in ee.index:
+                                _v = ee.loc["0y", "yearAgoEps"]
+                                _bpa_an_dernier = float(_v) if _v == _v else None
+                    except Exception:
+                        est = None
+                    _eps_pub = next((e["eps"] for e in reversed(fonda["an"])
+                                     if (e.get("eps") or 0) > 0), None)
+                    # LE CERTIFICAT N'EST PAS L'ACTION. Mesuré, jamais supposé ;
+                    # vaut 1 pour une action ordinaire, None quand la mesure ne
+                    # tombe sur aucun rapport usuel — auquel cas on ne divise pas.
+                    _rapport = None
+                    if not meme_devise:
+                        _t_dernier = _fx(fonda["an"][-1]["fin"]) if (_fx and fonda["an"]) else None
+                        _rapport = rapport_adr(_bpa_an_dernier, _eps_pub, _t_dernier,
+                                               _d_est, _d_cote)
                     per_historique(fonda["an"], prix_fin, meme_devise,
-                                   info.get("sharesOutstanding"), _fx)
+                                   info.get("sharesOutstanding"), _fx, _rapport)
                     # LA CONVERSION SE DIT. Un multiple obtenu en passant par un
                     # taux de change n'est pas du même grain qu'un quotient
                     # direct : la société publie ses propres comparatifs à des
@@ -2509,34 +2640,25 @@ def score_ticker(ticker, vix=None):
                     # plutôt que de laisser croire à une mesure sans couture.
                     if _fx and any(e.get("per") is not None for e in fonda["an"]):
                         fonda["per_converti"] = {"de": _d_cote, "vers": _d_compta}
-                    est = None
-                    try:
-                        ee = data.earnings_estimate
-                        if ee is not None and "avg" in getattr(ee, "columns", []):
-                            est = {k: (float(ee.loc[k, "avg"]) if k in ee.index
-                                       and ee.loc[k, "avg"] == ee.loc[k, "avg"] else None)
-                                   for k in ("0y", "+1y")}
-                    except Exception:
-                        est = None
+                        if _rapport and _rapport != 1:
+                            fonda["per_converti"]["rapport"] = _rapport
                     dernier = fonda["an"][-1]["fin"] if fonda["an"] else None
-                    # `_fx` et le PER courant du fournisseur servent à TRANCHER
-                    # la devise des estimations, que rien ne déclare (cf.
-                    # per_previsionnel). Le taux est pris à la date du dernier
-                    # exercice clos, comme pour l'historique — le cours, lui, est
-                    # celui du jour, et l'écart de quelques mois entre les deux
-                    # est sans effet sur un DÉPARTAGE dont l'enjeu est un facteur
-                    # 1,08 à 31 selon la paire.
-                    # Devise des estimations : non déclarée par la source, on
-                    # la tranche par la croissance implicite du bénéfice quand
-                    # elle tranche, et on s'abstient sinon (cf. per_previsionnel).
-                    _eps_pub = next((e["eps"] for e in reversed(fonda["an"])
-                                     if (e.get("eps") or 0) > 0), None)
+                    # Le taux est pris à la date du dernier exercice clos, comme
+                    # pour l'historique — le cours, lui, est celui du jour, et
+                    # l'écart de quelques mois entre les deux est sans effet sur
+                    # un multiple dont l'enjeu est un facteur 1,08 à 31.
                     prev = per_previsionnel(float(close.iloc[-1]), est, dernier,
-                                            _fx, _eps_pub)
-                    # L'ABSENCE SE DIT. Un lecteur qui voit deux points estimés
-                    # sur une fiche et aucun sur la voisine doit savoir que ce
-                    # n'est pas une négligence.
-                    if _fx and not prev:
+                                            _fx, _eps_pub, _d_est, _d_cote, _d_compta)
+                    # L'ABSENCE SE DIT — MAIS SEULEMENT QUAND C'EST LA DEVISE
+                    # QUI L'A CAUSÉE. Le drapeau était posé dès que le change
+                    # entrait en jeu et que rien ne sortait, y compris sur une
+                    # société DÉFICITAIRE, qui n'a pas de PER prévisionnel pour
+                    # une raison qui n'a rien à voir : UBTech portait ainsi une
+                    # mention d'abstention sur devise alors que son bénéfice
+                    # estimé est négatif. Un motif faux vaut moins qu'un silence.
+                    if _fx and not prev and any(
+                            (est or {}).get(k) and (est or {}).get(k) > 0
+                            for k in ("0y", "+1y")):
                         fonda["pe_prev_indecis"] = True
                     if prev:
                         fonda["pe_prev"] = prev
@@ -2567,8 +2689,13 @@ def score_ticker(ticker, vix=None):
                     except Exception:
                         est_ca = None
                         solidite = None
+                    # LE BPA ESTIMÉ SE COMPARE-T-IL À LA SÉRIE PUBLIÉE ? La
+                    # source le déclare ; à défaut de déclaration on retombe
+                    # sur la seule chose qu'on sache alors — comptes et
+                    # cotation dans la même monnaie.
+                    _bpa_comparable = (_d_est == _d_compta) if _d_est else meme_devise
                     proj = projections(fonda["an"], est, est_ca, dernier,
-                                       meme_devise)
+                                       _bpa_comparable)
                     if proj:
                         fonda["proj"] = proj
                         # Porté à côté de la trajectoire, jamais dedans : c'est
