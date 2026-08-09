@@ -1289,7 +1289,19 @@ def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
     # PER prévisionnels : ce sont des estimations COURANTES, le run le plus
     # récent fait foi ; à défaut (Yahoo muet un jour), on garde les anciennes,
     # leurs étiquettes d'exercice rendent tout vieillissement visible.
-    pe = nouveau.get("pe_prev") or ancien.get("pe_prev")
+    #
+    # SAUF QUAND L'ABSENCE EST UNE DÉCISION. Ce repli a été écrit pour une
+    # PANNE — la source muette un jour — et il ne sait pas la distinguer d'un
+    # REFUS. Depuis le 09/08/2026 nous refusons de publier un multiple
+    # prévisionnel quand la devise des estimations reste indécidable ; le run
+    # rendait donc une liste vide, et la fusion ressuscitait aussitôt les
+    # valeurs de la veille, celles-là mêmes qu'on venait d'écarter. Quatre
+    # fiches ont continué d'afficher leur ancien multiple après le correctif,
+    # `pe_prev_indecis` posé juste à côté.
+    # C'est mot pour mot la leçon déjà tirée sur `proj` deux lignes plus bas :
+    # un retrait est une décision, et reprendre celle d'hier l'annule.
+    pe = nouveau.get("pe_prev") or (
+        None if nouveau.get("pe_prev_indecis") else ancien.get("pe_prev"))
     if pe:
         out["pe_prev"] = pe
     # Trajectoire attendue : le run COURANT fait foi, SANS repli sur l'ancienne.

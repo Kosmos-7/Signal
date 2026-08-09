@@ -459,6 +459,24 @@ check("la trajectoire attendue SURVIT à la fusion (bug du 07/08)", f.get("proj"
 f = screener.fusionner_fonda({"devise": "USD", "an": [], "tr": [], "proj": PJ},
                              {"devise": "USD", "an": [], "tr": []})
 check("une trajectoire retirée ne revient pas par la fusion", "proj" not in f)
+# MÊME LEÇON POUR LE PER PRÉVISIONNEL, apprise le 09/08/2026 en la revivant.
+# Son repli sur l'ancien run avait été écrit pour une PANNE — la source muette
+# un jour — et ne savait pas la distinguer d'un REFUS. Depuis qu'on refuse de
+# publier un multiple dont la devise est indécidable, le run rendait une liste
+# vide et la fusion ressuscitait aussitôt les valeurs de la veille, celles-là
+# mêmes qu'on venait d'écarter : quatre fiches ont continué d'afficher leur
+# ancien multiple APRÈS le correctif, avec le drapeau d'indécision à côté.
+_PE = [{"exercice": 2026, "per": 30.0}]
+_base = {"devise": "USD", "an": [], "tr": [], "pe_prev": _PE}
+_f = screener.fusionner_fonda(_base, {"devise": "USD", "an": [], "tr": []})
+check("source muette : l'ancien multiple prévisionnel est conservé",
+      _f.get("pe_prev") == _PE, str(_f.get("pe_prev")))
+_f = screener.fusionner_fonda(_base, {"devise": "USD", "an": [], "tr": [],
+                                      "pe_prev_indecis": True})
+check("refus délibéré : l'ancien multiple ne revient PAS",
+      "pe_prev" not in _f, str(_f.get("pe_prev")))
+check("et le motif du refus, lui, est publié",
+      _f.get("pe_prev_indecis") is True)
 # Même règle pour la solidité du consensus : elle décrit le run courant.
 fc = screener.fusionner_fonda(
     {"devise": "USD", "an": [], "tr": [], "consensus": {"analystes": 9}},
