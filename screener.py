@@ -668,6 +668,57 @@ def chainer_finnhub(fh_data, net_margin_raw, debt_eq_raw):
     return nm, de, src
 
 
+ECART_BASE_ACTIONS = 0.10   # 10 % — au-delà, la base d'actions a bougé, on n'interpole pas
+
+
+def completer_eps(an, ecart_max=ECART_BASE_ACTIONS):
+    """Reconstitue le bénéfice PAR ACTION des exercices qui n'ont que le
+    bénéfice total, quand — et seulement quand — la base d'actions est stable
+    autour du trou. Mutation en place, rend le nombre d'exercices complétés.
+
+    LE TROU, ET SA TAILLE. Quarante-trois exercices sur seize fiches portent un
+    résultat net publié sans BPA : la source donne l'un et pas l'autre. Chacun
+    est un point manquant dans la courbe des multiples, au milieu d'une série
+    par ailleurs continue — Alphabet 2015, Arista 2021, Dell 2022.
+
+    CE QU'ON PEUT COMBLER, ET CE QU'ON NE PEUT PAS. Le nombre d'actions se
+    déduit des exercices voisins qui portent les DEUX grandeurs : résultat net
+    divisé par BPA. Si les voisins d'avant et d'après s'accordent à 10 % près,
+    la base n'a pas bougé sur l'intervalle et le BPA manquant est une division,
+    pas une hypothèse. S'ils divergent, la société a émis, racheté ou divisé ses
+    actions entre-temps, et toute valeur interpolée serait inventée.
+
+    LA MESURE, faite avant d'écrire cette fonction : cinq exercices sur
+    quarante-trois passent ce test. Trente-sept sont au BORD de la série — le
+    plus ancien exercice connu, sans voisin antérieur — et un seul est encadré
+    par une base instable. Autrement dit la règle refuse 88 % des cas, et c'est
+    le résultat attendu : le bord d'une série est précisément l'endroit où
+    l'extrapolation ne repose sur rien. Symbotic affichait selon les exercices
+    608, 65 puis 162 millions d'actions impliquées (le BPA ne porte qu'une
+    classe, le résultat net la société entière) : y interpoler quoi que ce soit
+    aurait produit un multiple faux d'un facteur dix.
+
+    CE QUI EST COMBLÉ SE DIT : l'exercice porte `eps_derive`, et la fiche
+    l'affiche — un multiple reconstitué n'a pas le même grain qu'un multiple lu.
+    Pure et testable hors ligne."""
+    faits = 0
+    for i, e in enumerate(an):
+        if e.get("eps") or e.get("rn") is None:
+            continue
+        av = next((x for x in reversed(an[:i]) if x.get("rn") and x.get("eps")), None)
+        ap = next((x for x in an[i + 1:] if x.get("rn") and x.get("eps")), None)
+        if not av or not ap:
+            continue                      # bord de série : rien pour encadrer
+        a, b = av["rn"] / av["eps"], ap["rn"] / ap["eps"]
+        if a <= 0 or b <= 0 or abs(a / b - 1) > ecart_max:
+            continue                      # la base d'actions a bougé
+        actions = (a + b) / 2
+        e["eps"] = round(e["rn"] / actions, 4)
+        e["eps_derive"] = True
+        faits += 1
+    return faits
+
+
 def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None,
                    taux=None, rapport=None):
     """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
@@ -2651,6 +2702,14 @@ def score_ticker(ticker, vix=None):
                         _t_dernier = _fx(fonda["an"][-1]["fin"]) if (_fx and fonda["an"]) else None
                         _rapport = rapport_adr(_bpa_an_dernier, _eps_pub, _t_dernier,
                                                _d_est, _d_cote)
+                    # Le BPA manquant se reconstitue AVANT les multiples, et
+                    # seulement là où la base d'actions est stable — sinon le
+                    # trou reste (cf. completer_eps). La marque est portée par
+                    # l'EXERCICE, pas par le bloc : un champ de plus au niveau
+                    # de `fonda` serait un champ de plus à ne pas oublier dans
+                    # fusionner_fonda, et c'est exactement ainsi que `proj` a
+                    # disparu de 96 fiches le 07/08.
+                    completer_eps(fonda["an"])
                     per_historique(fonda["an"], prix_fin, meme_devise,
                                    info.get("sharesOutstanding"), _fx, _rapport)
                     # LA CONVERSION SE DIT. Un multiple obtenu en passant par un

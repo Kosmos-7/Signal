@@ -1425,6 +1425,45 @@ check("la déclaration comble ce que la croissance n'arbitrait pas",
                                     (lambda i: 0.926), 9.01,
                                     "EUR", "USD", "EUR") != [])
 
+print("\n— Le bénéfice par action reconstitué, et seulement quand il se mesure —")
+# QUARANTE-TROIS EXERCICES portent un résultat net publié sans BPA. Le nombre
+# d'actions se déduit des voisins qui portent les deux ; s'ils s'accordent, le
+# BPA manquant est une division. S'ils divergent, ce serait une invention.
+# Chiffres relevés le 09/08/2026 sur les fiches publiées.
+_GOOGL = [{"fin": "2013-12-31", "rn": 12920, "eps": 0.95},
+          {"fin": "2014-12-31", "rn": 14136, "eps": 1.03},
+          {"fin": "2015-12-31", "rn": 16348},
+          {"fin": "2016-12-31", "rn": 19478, "eps": 1.40}]
+check("un trou encadré par une base stable est comblé",
+      screener.completer_eps(_GOOGL) == 1 and _GOOGL[2].get("eps"), str(_GOOGL[2]))
+check("et il porte la marque de sa reconstitution",
+      _GOOGL[2].get("eps_derive") is True, str(_GOOGL[2]))
+check("la valeur reconstituée tient entre celles de ses voisins",
+      1.03 < _GOOGL[2]["eps"] < 1.40, str(_GOOGL[2]["eps"]))
+# Symbotic : 608, 65 puis 162 millions d'actions impliquées d'un exercice à
+# l'autre — le BPA ne porte qu'une classe, le résultat net la société entière.
+# Interpoler y aurait produit un multiple faux d'un facteur dix.
+_SYM = [{"fin": "2022-09-30", "rn": -140, "eps": -0.23},
+        {"fin": "2023-09-30", "rn": -206},
+        {"fin": "2024-09-30", "rn": -84, "eps": -0.52}]
+check("une base d'actions instable n'est PAS interpolée",
+      screener.completer_eps(_SYM) == 0 and "eps" not in _SYM[1], str(_SYM[1]))
+# Le bord de série est l'endroit où l'extrapolation ne repose sur rien : c'est
+# le cas de 37 des 43 trous, et la règle doit les refuser tous.
+_BORD = [{"fin": "2008-12-31", "rn": 100},
+         {"fin": "2009-12-31", "rn": 110, "eps": 1.1}]
+check("le plus ancien exercice, sans voisin antérieur, reste vide",
+      screener.completer_eps(_BORD) == 0 and "eps" not in _BORD[0], str(_BORD[0]))
+_FIN = [{"fin": "2024-12-31", "rn": 100, "eps": 1.0}, {"fin": "2025-12-31", "rn": 110}]
+check("le dernier exercice non plus, sans voisin postérieur",
+      screener.completer_eps(_FIN) == 0 and "eps" not in _FIN[1], str(_FIN[1]))
+check("un exercice sans résultat net n'est pas davantage inventé",
+      screener.completer_eps([{"fin": "2023-12-31", "rn": 10, "eps": 1.0},
+                              {"fin": "2024-12-31"},
+                              {"fin": "2025-12-31", "rn": 11, "eps": 1.1}]) == 0)
+check("le seuil de stabilité reste serré : une base ne bouge pas de 10 % sans raison",
+      screener.ECART_BASE_ACTIONS <= 0.10, str(screener.ECART_BASE_ACTIONS))
+
 print("\n— Le certificat n'est pas toujours l'action —")
 # UN ADR REPRÉSENTE PLUSIEURS ACTIONS, et si le cours est celui du certificat
 # tandis que le bénéfice est celui de l'action, le multiple est faux d'autant.
