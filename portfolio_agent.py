@@ -161,6 +161,26 @@ def get_eur_gbp_rate():
     except:
         return 0.86
 
+# LES SUFFIXES QUE detect_currency SAIT LIRE. Cette liste ne sert pas à la
+# déduction (les branches ci-dessous s'en chargent) : elle sert à la GARDE.
+# `detect_currency` se termine par `return "USD"`, qui est le comportement juste
+# pour un titre américain sans suffixe — et une erreur silencieuse pour un titre
+# étranger dont la place nous est inconnue. Trois pannes de ce genre sont déjà
+# arrivées (couronnes nordiques, TWD/HKD, CAD), toutes découvertes après coup.
+# Un test refuse maintenant tout titre manipulé par le projet dont le suffixe
+# n'est pas listé ici : ajouter une place devient un acte conscient, qui oblige
+# à remplir du même geste les tables de change et de contrôle.
+SUFFIXES_CONNUS = {
+    ".T": "JPY", ".KS": "KRW", ".KQ": "KRW",
+    ".TW": "TWD", ".TWO": "TWD", ".HK": "HKD",
+    ".CO": "DKK", ".ST": "SEK", ".OL": "NOK", ".SW": "CHF",
+    ".TO": "CAD", ".V": "CAD", ".NE": "CAD", ".CN": "CAD",
+    ".AS": "EUR", ".PA": "EUR", ".DE": "EUR", ".BR": "EUR", ".MI": "EUR",
+    ".MC": "EUR", ".AT": "EUR", ".HE": "EUR", ".VI": "EUR", ".LI": "EUR",
+    ".L": "GBP",
+}
+
+
 def detect_currency(ticker, market=""):
     """Détermine la devise native d'un ticker (EUR / USD / GBP / DKK / SEK / NOK / CHF).
 
@@ -207,6 +227,20 @@ def detect_currency(ticker, market=""):
     # sur toutes les valeurs (le code CHF de to_eur était inatteignable).
     if t.endswith(".SW") or "EBS" in m or "SWX" in m:
         return "CHF"
+    # DOLLAR CANADIEN (09/08/2026). Trou signalé par le validateur en éprouvant
+    # CCO.TO, la ligne de Toronto de Cameco, comme origine possible de CCJ : la
+    # devise n'était reconnue nulle part — ni ici, ni dans les deux tables de
+    # validate_tickers.py, ni dans les taux de change. C'est la TROISIÈME fois
+    # que cette panne se produit (les couronnes nordiques, puis TWD et HKD), et
+    # à chaque fois pour la même raison : un suffixe inconnu tombe dans le
+    # `return "USD"` final, qui est un DÉFAUT et non une déduction. Le repli est
+    # muet par construction, donc la garde ne peut pas être ici — elle est dans
+    # les tests, qui refusent désormais tout suffixe de place inconnu de
+    # SUFFIXES_CONNUS parmi les titres que le projet manipule.
+    # NB : « TSE » reste banni comme indice de marché (Tokyo chez les uns,
+    # Toronto chez les autres) ; on ne reconnaît Toronto que par le suffixe.
+    if t.endswith(".TO") or t.endswith(".V") or t.endswith(".NE") or t.endswith(".CN"):
+        return "CAD"
     # Suffixes Yahoo Finance → EUR (zone euro uniquement)
     if any(t.endswith(s) for s in [".AS", ".PA", ".DE", ".BR", ".MI", ".MC", ".AT",
                                     ".HE", ".VI", ".LI"]):
@@ -228,12 +262,12 @@ def detect_currency(ticker, market=""):
 # Cache par run — un seul fetch par devise.
 _FX_PAIRS    = {"DKK": "EURDKK=X", "SEK": "EURSEK=X", "NOK": "EURNOK=X", "CHF": "EURCHF=X",
                 "JPY": "EURJPY=X", "KRW": "EURKRW=X",
-                "TWD": "EURTWD=X", "HKD": "EURHKD=X"}
+                "TWD": "EURTWD=X", "HKD": "EURHKD=X", "CAD": "EURCAD=X"}
 _FX_FALLBACK = {"DKK": 7.46, "SEK": 11.3, "NOK": 11.6, "CHF": 0.93,
                 "JPY": 170.0, "KRW": 1550.0,
                 # Repli seulement : le taux réel est cherché à chaque run. Le
                 # HKD est arrimé au USD dans une bande étroite, le TWD flotte.
-                "TWD": 35.5, "HKD": 9.05}
+                "TWD": 35.5, "HKD": 9.05, "CAD": 1.60}
 _fx_cache    = {}
 
 def get_eur_rate(currency):

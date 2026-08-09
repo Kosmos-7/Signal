@@ -320,8 +320,33 @@ for t, attendu in [("6954.T", "JPY"), ("8035.T", "JPY"), ("000660.KS", "KRW"),
 # par les thèmes, l'invariant couvre par construction le prochain ajout.
 # Les trois symboles ajoutés à la main sont des places que les thèmes ne citent
 # pas encore : ils vérifient la détection, pas la couverture.
-_devises = {pa.detect_currency(t) for t in
-            themes.univers_thematique() + ["ORSTED.CO", "SAAB-B.ST", "XYZ.OL"]}
+#
+# CORRECTION DU 09/08/2026 — L'ÉCHANTILLON ÉTAIT ENCORE TROP ÉTROIT. Dériver
+# des thèmes couvre le prochain ajout THÉMATIQUE, pas le prochain ajout tout
+# court : le validateur a signalé CCO.TO (Toronto, CAD) inconnu des quatre
+# tables, et cet invariant ne l'a pas vu parce qu'aucun titre de thème ne cote
+# au Canada. La source de vérité est donc maintenant la table des places
+# elle-même — toute devise que detect_currency PEUT rendre est couverte, qu'un
+# titre l'atteigne aujourd'hui ou demain.
+_devises = set(pa.SUFFIXES_CONNUS.values()) | {"USD"}
+# Et la table des places doit dire vrai : chaque suffixe rend bien la devise
+# annoncée. Sinon la garde ci-dessus vérifierait une liste que le code
+# n'applique pas.
+for _suf, _dev in sorted(pa.SUFFIXES_CONNUS.items()):
+    check(f"le suffixe {_suf} est bien lu comme {_dev}",
+          pa.detect_currency("XYZ" + _suf) == _dev,
+          f"obtenu {pa.detect_currency('XYZ' + _suf)}")
+# LE REPLI FINAL EST UN DÉFAUT, PAS UNE DÉDUCTION. `detect_currency` rend "USD"
+# pour tout ce qu'elle ne reconnaît pas : juste pour une valeur américaine, faux
+# et silencieux pour une place inconnue. Aucun titre manipulé par le projet ne
+# doit donc porter un suffixe absent de la table. C'est le test qui aurait
+# arrêté CCO.TO à l'écriture plutôt qu'au run de validation.
+_manipules = set(themes.univers_thematique()) | set(themes.ECARTES_VALIDATION)
+_manipules |= screener.UNIVERS_BASE if hasattr(screener, "UNIVERS_BASE") else set(screener.UNIVERS)
+_inconnus = sorted(t for t in _manipules
+                   if "." in t and "." + t.rsplit(".", 1)[1] not in pa.SUFFIXES_CONNUS)
+check("aucun titre manipulé ne cote sur une place inconnue de la table",
+      not _inconnus, str(_inconnus))
 _convertibles = _devises - {"EUR", "USD", "GBP"}
 check("chaque devise détectée hors EUR/USD/GBP a sa paire ET son repli",
       _convertibles <= set(pa._FX_PAIRS) and _convertibles <= set(pa._FX_FALLBACK),

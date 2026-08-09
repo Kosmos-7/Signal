@@ -107,12 +107,60 @@ def sonder(tickers):
                 "devise_cotation": info.get("currency"),
                 "croissance_ca_yahoo": info.get("revenueGrowth"),
                 "croissance_bpa_yahoo": info.get("earningsGrowth"),
+                # AJOUTÉS LE 09/08/2026 POUR TRANCHER UNE QUESTION PRÉCISE :
+                # dans QUELLE devise `revenue_estimate` et `earnings_estimate`
+                # sont-ils libellés quand les comptes et la cotation divergent ?
+                # Rien ne le déclare, et la question n'est pas théorique — le
+                # PER prévisionnel de Tencent est sorti à 2× parce qu'un cours
+                # en dollars a été divisé par un bénéfice en yuans. Trois
+                # départages ont été essayés et documentés comme insuffisants
+                # (croissance implicite du bénéfice, PER courant du
+                # fournisseur, place de cotation). Ces quatre repères-ci
+                # permettent le seul test qui ne suppose rien : comparer le
+                # consensus au DERNIER EXERCICE PUBLIÉ, dont la devise, elle,
+                # est connue. Le chiffre d'affaires sert d'ancre plutôt que le
+                # bénéfice parce qu'il est d'un ordre de grandeur plus stable.
+                "cours": info.get("currentPrice"),
+                "bpa_prev_yahoo": info.get("forwardEps"),
+                "bpa_ttm_yahoo": info.get("trailingEps"),
+                "per_prev_yahoo": info.get("forwardPE"),
             }
         except Exception as e:
             fiche["reperes"] = {"erreur": f"{type(e).__name__}: {e}"[:200]}
+        # L'ANCRE : dernier exercice publié, lu dans les états financiers, donc
+        # dans la devise comptable par construction.
+        try:
+            st = d.income_stmt
+            col = st.columns[0]
+            def _lire(*noms):
+                for n in noms:
+                    if n in st.index:
+                        v = st.loc[n, col]
+                        if v == v and v is not None:
+                            return float(v)
+                return None
+            fiche.setdefault("reperes", {}).update({
+                "exercice_publie": str(col)[:10],
+                "ca_publie": _lire("Total Revenue", "Operating Revenue"),
+                "bpa_publie": _lire("Diluted EPS", "Basic EPS"),
+            })
+        except Exception as e:
+            fiche.setdefault("reperes", {})["ancre"] = f"{type(e).__name__}: {e}"[:200]
         out[t] = fiche
-        print(f"  {t:<10} " + " · ".join(
-            f"{n}={'oui' if fiche.get(n, {}).get('present') else 'non'}" for n in TABLES))
+        # LA LIGNE QUI SE LIT DANS LE JOURNAL. Le rapport JSON est complet mais
+        # illisible en défilement ; ce rapport-ci tient sur une ligne et donne
+        # directement le quotient qui tranche : consensus de CA rapporté au CA
+        # publié. Proche de 1, le consensus est dans la devise des comptes ;
+        # proche du taux de change, il est dans celle de la cotation.
+        rp = fiche.get("reperes") or {}
+        est_ca = ((fiche.get("revenue_estimate") or {}).get("valeurs") or {}).get("0y", {}).get("avg")
+        ca_pub = rp.get("ca_publie")
+        ratio = f"{est_ca / ca_pub:.3f}" if (est_ca and ca_pub) else "?"
+        print(f"  {t:<10} comptes={str(rp.get('devise_comptable')):<5} "
+              f"cotation={str(rp.get('devise_cotation')):<5} "
+              f"CA_est/CA_publié={ratio:<7} "
+              + " · ".join(f"{n}={'oui' if fiche.get(n, {}).get('present') else 'non'}"
+                           for n in TABLES))
     return out
 
 

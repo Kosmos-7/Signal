@@ -55,6 +55,8 @@ BORNES_PRIX = {
     # Le TWD est le piège du lot : TSMC cote plus de 2 000 sur sa ligne locale,
     # une valeur qu'un contrôle calibré sur le dollar aurait signalée à tort.
     "TWD": (5, 20000), "HKD": (1, 5000),
+    # Ajouté le 09/08/2026 : Toronto, éprouvée comme ligne d'origine de Cameco.
+    "CAD": (1, 5000),
 }
 
 # Taux approximatifs devise → dollar, pour le SEUL contrôle du seuil de
@@ -66,7 +68,7 @@ BORNES_PRIX = {
 CONV_CAP_USD = {
     "JPY": 150, "KRW": 1350, "GBp": 0.79, "GBP": 0.79,
     "EUR": 0.92, "CHF": 0.88, "DKK": 6.9, "SEK": 10.5, "NOK": 10.8,
-    "TWD": 31.0, "HKD": 7.8, "USD": 1.0,
+    "TWD": 31.0, "HKD": 7.8, "USD": 1.0, "CAD": 1.38,
 }
 
 

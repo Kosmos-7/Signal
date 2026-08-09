@@ -36,7 +36,13 @@ jobs:
       - name: Installer les dépendances
         run: pip install -r requirements.txt
       - name: Sonder
-        run: python tools/sonde_consensus.py --tickers "${{ inputs.tickers }}"
+        # PASSÉ PAR L'ENVIRONNEMENT, PAS INTERPOLÉ DANS LE SHELL. Une entrée de
+        # dispatch collée dans `run:` est exécutée par bash, sur un job qui
+        # porte `contents: write` : c'est une porte d'exécution arbitraire dans
+        # le dépôt. Même précaution que sonde-actus.yml et validate-tickers.yml.
+        env:
+          TICKERS: ${{ inputs.tickers }}
+        run: python tools/sonde_consensus.py --tickers "$TICKERS"
       - name: Publier le rapport en artefact
         if: always()
         uses: actions/upload-artifact@v4
