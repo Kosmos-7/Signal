@@ -821,5 +821,75 @@
   "licence": "CC0",
   "type": "produit",
   "v": "526eb491"
+ },
+ "6954.T": {
+  "legende": "Bras FANUC LR Mate 200iC en démonstration d'assemblage",
+  "source": "File:FANUC Robot Assembly Demo.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:FANUC_Robot_Assembly_Demo.jpg",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "v": "730c916f",
+  "credit": "Steve Jurvetson · CC BY 2.0"
+ },
+ "6324.T": {
+  "legende": "Jeu d'engrenages à onde de déformation : flexspline, circular spline et générateur",
+  "source": "File:Harmonic Drive AG strain wave gear set.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Harmonic_Drive_AG_strain_wave_gear_set.jpg",
+  "licence": "CC BY-SA 4.0",
+  "type": "produit",
+  "v": "3ffdf204",
+  "credit": "Pieceofmetalwork · CC BY-SA 4.0"
+ },
+ "005380.KS": {
+  "legende": "Boston Dynamics SpotMini, filiale de Hyundai Motor",
+  "source": "File:SpotMini, Boston Dynamics, Robot.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:SpotMini,_Boston_Dynamics,_Robot.jpg",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "v": "2b45a37e",
+  "credit": "Web Summit · CC BY 2.0"
+ },
+ "ISRG": {
+  "legende": "Système chirurgical da Vinci Xi au bloc opératoire",
+  "source": "File:WBAMC first in DoD to use robot for surgery 160502-A-EK666-477.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:WBAMC_first_in_DoD_to_use_robot_for_surgery_160502-A-EK666-477.jpg",
+  "licence": "Public domain",
+  "type": "produit",
+  "v": "fb35c7eb"
+ },
+ "6506.T": {
+  "legende": "Robot bicéphale Yaskawa Motoman SDA5D",
+  "source": "File:安川電機 MOTOMAN 2009 (9049001111).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%AE%89%E5%B7%9D%E9%9B%BB%E6%A9%9F_MOTOMAN_2009_(9049001111).jpg",
+  "licence": "CC BY-SA 2.0",
+  "type": "produit",
+  "v": "67801e5b",
+  "credit": "Hetarllen Mumriken · CC BY-SA 2.0"
+ },
+ "9880.HK": {
+  "legende": "Humanoïde UBTECH Alpha 1PRO",
+  "source": "File:UBTECH Alpha 1PRO Humanoid Robot - hack4no 2016.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:UBTECH_Alpha_1PRO_Humanoid_Robot_-_hack4no_2016.jpg",
+  "licence": "CC BY 2.0",
+  "type": "produit",
+  "v": "f5b1fcdc",
+  "credit": "Kartverket · CC BY 2.0"
+ },
+ "KGX.DE": {
+  "legende": "Chariot élévateur STILL RX20-15, marque du groupe KION",
+  "source": "File:Still RX20-15 forklift.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Still_RX20-15_forklift.jpg",
+  "licence": "CC BY-SA 3.0",
+  "type": "produit",
+  "v": "a3b127e8",
+  "credit": "Cjp24 · CC BY-SA 3.0"
+ },
+ "IONQ": {
+  "legende": "Puce à piège à ions dans son enceinte à vide",
+  "source": "File:Quantum Computing; Ion Trapping (5941055642).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Quantum_Computing;_Ion_Trapping_(5941055642).jpg",
+  "licence": "Public domain",
+  "type": "produit",
+  "v": "9e6f2bee"
  }
 }
