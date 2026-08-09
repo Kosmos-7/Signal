@@ -703,7 +703,16 @@ def completer_eps(an, ecart_max=ECART_BASE_ACTIONS):
     Pure et testable hors ligne."""
     faits = 0
     for i, e in enumerate(an):
-        if e.get("eps") or e.get("rn") is None:
+        # UN RÉSULTAT NET À ZÉRO EST UNE ABSENCE, PAS UNE MESURE. Le premier jet
+        # ne testait que `rn is None`, et le run du 09/08 l'a puni tout de
+        # suite : Arista 2021 et Viasat 2020 portent `rn: 0` — la source n'a
+        # rien rendu pour cet exercice — et la division a publié un bénéfice par
+        # action de 0,0, c'est-à-dire l'affirmation qu'Arista n'a rien gagné en
+        # 2021, quand elle a gagné 840 M$. Le multiple, lui, restait absent : le
+        # faux ne se voyait que dans le chiffre. C'est la même leçon que le
+        # consensus à zéro de Yahoo, tirée deux jours plus tôt sur les
+        # projections — un zéro rendu par une source muette n'est pas un zéro.
+        if e.get("eps") or not e.get("rn"):
             continue
         av = next((x for x in reversed(an[:i]) if x.get("rn") and x.get("eps")), None)
         ap = next((x for x in an[i + 1:] if x.get("rn") and x.get("eps")), None)
