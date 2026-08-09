@@ -242,6 +242,29 @@ for t, d in FICHES.items():
 check("chaque valeur projetée porte sa nature, aucune borne haute résiduelle",
       not mauvais, str(mauvais[:4]))
 
+# ── LA MARGE AFFICHÉE EST-ELLE CELLE DU GRAPHIQUE D'À CÔTÉ ? ───────────────
+# La marge « d'exercice » sortait des états financiers du fournisseur, tandis
+# que le graphique des chiffres publiés dessine la série accumulée, qui intègre
+# EDGAR et va plus loin. Les deux divergent dès qu'un exercice vient de clore :
+# le 09/08/2026, Applied Digital annonçait −160 % (exercice clos en mai 2025)
+# au-dessus d'un graphique montrant mai 2026, à −41 %. Deux exercices sur la
+# même page, sans que rien ne le dise.
+# Deux fiches sur cent vingt-sept, toutes deux à exercice décalé — assez rare
+# pour n'avoir jamais été vu, assez faux pour valoir un test permanent.
+print("\n— La marge d'exercice est-elle celle du dernier exercice publié ? —")
+_decales = []
+for _t, _d in FICHES.items():
+    _m = (_d.get("breakdown") or {}).get("net_margin_exercice_pct")
+    _an = [e for e in ((_d.get("fonda") or {}).get("an") or [])
+           if e.get("ca") and e.get("rn") is not None]
+    if _m is None or not _an:
+        continue
+    _attendu = round(_an[-1]["rn"] / _an[-1]["ca"] * 100, 1)
+    if abs(_m - _attendu) > 0.6:
+        _decales.append(f"{_t}: {_m} vs {_attendu} ({_an[-1]['fin'][:7]})")
+check("la marge d'exercice vient de la série que le graphique dessine",
+      not _decales, str(_decales[:4]))
+
 # ── 5. SENTINELLES DE VRAISEMBLANCE ────────────────────────────────────────
 print("\n— Bandes de vraisemblance : une exception est permise, une dérive non —")
 # LES DEUX TOLÉRANCES RELEVÉES LE 08/08/2026 le sont pour une raison écrite,
@@ -255,11 +278,21 @@ print("\n— Bandes de vraisemblance : une exception est permise, une dérive no
 # celui de Harmonic Drive tient à un bénéfice de bas de cycle, pas à une erreur
 # d'unité. Ce sont des nombres justes portant sur des sociétés que la grille
 # mesure mal, ce que le champ `biais` du thème annonce au lecteur.
+# RELEVÉES UNE SECONDE FOIS LE 09/08/2026, avec le maillon des bailleurs de
+# capacité et les deux thèmes de la veille. Le motif est le même qu'alors et il
+# est structurel, pas accidentel : le site suit désormais des sociétés qui
+# CONSTRUISENT avant d'encaisser — bailleurs IA en chantier, quantiques sans
+# client, fabricants de cobots. Leurs marges sont très négatives et leurs
+# multiples très élevés parce que le dénominateur est petit, pas parce qu'une
+# base a glissé. Vérifiées une à une contre la série publiée avant de toucher
+# au seuil.
+# La sentinelle garde tout son mordant : elle est calée sur le compte EXACT du
+# jour, donc le prochain titre qui sortira de la bande la fera tomber.
 BANDES = [
-    ("marge nette d'exercice", "net_margin_exercice_pct", -60, 70, 6),
-    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 8),
+    ("marge nette d'exercice", "net_margin_exercice_pct", -60, 70, 8),
+    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 13),
     ("conversion du bénéfice en cash", "conversion_pct", -200, 400, 8),
-    ("PER courant", "trailing_pe", 1, 200, 7),
+    ("PER courant", "trailing_pe", 1, 200, 9),
     ("rendement des capitaux propres", "roe_pct", -100, 150, 6),
     ("RSI", "rsi", 5, 95, 0),
 ]

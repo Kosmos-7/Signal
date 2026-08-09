@@ -2625,9 +2625,23 @@ def score_ticker(ticker, vix=None):
         # légitime : un retournement de cycle met douze mois à traverser un
         # exercice clos. Ce n'est un défaut que tant qu'on n'a qu'un des deux
         # chiffres à l'écran sans dire lequel on regarde.
+        #
+        # ELLE SE LIT DANS LA SÉRIE PUBLIÉE, PAS DANS LES ÉTATS DU JOUR. Cette
+        # marge sortait de `_ec`, c'est-à-dire des états financiers du
+        # fournisseur ; le graphique juste en dessous, lui, dessine `fonda.an`,
+        # qui accumule EDGAR et va plus loin. Les deux divergent dès qu'un
+        # exercice vient de clore : le 09/08/2026, Applied Digital affichait une
+        # marge de −160 % (exercice clos en mai 2025) au-dessus d'un graphique
+        # montrant l'exercice clos en mai 2026, à −41 %. Deux exercices
+        # différents sur la même fiche, sans que rien ne le dise.
+        # Deux fiches sur cent vingt-sept, toutes deux à exercice décalé — c'est
+        # peu, et c'est exactement pour ça que personne ne l'avait vu.
+        # On lit donc la MÊME série que le dessin : un seul « dernier exercice
+        # publié » sur la page.
+        _der_ex = next((e for e in reversed(_f.get("an") or [])
+                        if e.get("ca") and e.get("rn") is not None), None)
         breakdown["net_margin_exercice_pct"] = (
-            round(_ec["rn"] / _ec["ca"] * 100, 1)
-            if _ec.get("ca") and _ec.get("rn") is not None else None)
+            round(_der_ex["rn"] / _der_ex["ca"] * 100, 1) if _der_ex else None)
         note = note_v4.calcule_note({
             "an":             _f.get("an") or [],
             "pe_prev":        _f.get("pe_prev"),
