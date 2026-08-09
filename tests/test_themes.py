@@ -115,6 +115,41 @@ check("aucune introduction de 2026 n'est déclarée avant d'avoir 200 séances",
       not (_jeunes & set(themes.univers_thematique())),
       str(sorted(_jeunes & set(themes.univers_thematique()))))
 
+print("\n— Infrastructure de l'IA : le maillon des bailleurs —")
+_i = themes.THEMES_BY_ID.get("infra-ia")
+_mi = {m["label"]: set(m["tickers"]) for m in (_i["maillons"] if _i else [])}
+_bail = next((v for k, v in _mi.items() if "bailleur" in k.lower()), set())
+# LE MAILLON EST NÉ D'UNE QUESTION DU PROPRIÉTAIRE : « Applied Digital n'est pas
+# dans la liste, pourquoi ? ». La réponse était : aucune raison — le titre
+# n'était ni dans l'univers ni au registre des écartés, alors que ce registre
+# existe pour que toute absence ait un motif lisible. L'angle mort en cachait
+# quatre autres, tous d'anciens mineurs de bitcoin devenus bailleurs de
+# capacité pour hyperscalers.
+check("le maillon des bailleurs existe et porte Applied Digital",
+      "APLD" in _bail, str(sorted(_bail)))
+check("les cinq bailleurs y sont",
+      {"APLD", "WULF", "CIFR", "IREN", "CORZ"} <= _bail,
+      str(sorted({"APLD", "WULF", "CIFR", "IREN", "CORZ"} - _bail)))
+# La dérogation de taille doit être ÉCRITE pour le lecteur, comme sur les deux
+# autres thèmes qui en usent — sans quoi elle serait un passe-droit silencieux.
+check("la dérogation de taille des bailleurs est annoncée",
+      _i and "25 milliards" in _i["biais"])
+# ... et l'avertissement que la note lit mal ces sociétés-là : elles ont vendu
+# ce qu'elles n'ont pas construit, leurs comptes ne montrent que la dépense.
+check("le biais prévient qu'un score bas n'y dit pas la même chose",
+      _i and "carnet de commandes" in _i["biais"])
+# ALAB et CRDO ont dormi huit jours au registre en « attente de décision ».
+# Tranchés le 09/08, ils doivent en SORTIR : un titre ne peut pas être à la
+# fois publié et écarté — c'est la leçon GlobalFoundries.
+check("aucun titre du thème ne reste au registre des écartés",
+      not (set(_i["tickers"]) & set(themes.ECARTES_VALIDATION)) if _i else False,
+      str(sorted(set(_i["tickers"]) & set(themes.ECARTES_VALIDATION))))
+check("plus aucune décision ne dort au registre",
+      not [t for t, m in themes.ECARTES_VALIDATION.items()
+           if "attente de décision" in m],
+      str([t for t, m in themes.ECARTES_VALIDATION.items()
+           if "attente de décision" in m]))
+
 print("\n— Le thème robotique —")
 _r = themes.THEMES_BY_ID.get("robotique")
 _rt = set(_r["tickers"]) if _r else set()

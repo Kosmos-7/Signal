@@ -96,7 +96,22 @@ THEMES_CURES = [
             "Il traverse les secteurs classiques : on y trouve de la technologie, de "
             "l'industrie, des services publics et des matériaux qui vivent du même cycle. "
             "Périmètre volontaire : la production d'électricité renouvelable en est exclue, "
-            "c'est un pari de politique publique, pas d'infrastructure IA."
+            "c'est un pari de politique publique, pas d'infrastructure IA.\n\n"
+            "UN MAILLON SE LIT AUTREMENT QUE LES AUTRES, celui des bailleurs de capacité. "
+            "Ces sociétés ne possèdent ni puces ni serveurs : elles détiennent de "
+            "l'électricité sous contrat et des bâtiments, qu'elles louent dix à vingt-cinq "
+            "ans à un seul locataire, sur des baux non résiliables. Elles ont donc déjà "
+            "VENDU ce qu'elles n'ont pas fini de construire, et leurs comptes d'aujourd'hui "
+            "ne montrent que la dépense — la note lit une société en perte là où le carnet "
+            "de commandes dit autre chose. C'est le seul endroit de cette liste où un score "
+            "bas ne veut pas dire ce qu'il dit ailleurs.\n\n"
+            "Deux dérogations les accompagnent, écrites plutôt que cachées. Le projet ne "
+            "retient d'ordinaire que des sociétés de plus de 25 milliards de dollars : "
+            "aucun bailleur n'atteint ce seuil, et l'appliquer reviendrait à supprimer le "
+            "maillon plutôt qu'à le filtrer. Et la plupart sont d'anciens mineurs de "
+            "bitcoin reconvertis depuis peu : leur historique de cotation raconte un métier "
+            "qu'ils ont quitté, et leur fiche prévient que la droite de tendance longue n'y "
+            "est pas exploitable."
         ),
         # STRUCTURE PAR MAILLON (01/08/2026) : la chaîne était documentée en
         # commentaires — elle devient une DONNÉE, publiée dans universe.json,
@@ -138,8 +153,21 @@ THEMES_CURES = [
             {
                 # Ce qui relie les accélérateurs entre eux, et limite la taille
                 # des clusters d'entraînement autant que le nombre de puces.
+                # ALAB et CRDO tranchés le 09/08/2026 (décision du
+                # propriétaire) après huit jours au registre en « attente de
+                # décision ». Ils sortent donc du registre : un titre ne peut
+                # pas être à la fois publié et écarté — leçon GlobalFoundries.
+                # Ce sont les puces de CONNEXION des baies : Astera Labs pour
+                # les liens PCIe/CXL entre accélérateurs et mémoire, Credo pour
+                # les câbles actifs qui remplacent l'optique sur les courtes
+                # distances. Le maillon disait déjà que ce qui relie les
+                # accélérateurs limite la taille des clusters autant que le
+                # nombre de puces ; il lui manquait précisément ces deux-là.
+                # 58,0 et 46,6 Md$, tous deux très au-dessus du seuil ; seul
+                # l'avertissement de régression s'applique (2,4 et 4,5 ans).
                 "label": "Réseau & optique",
-                "tickers": ["ANET", "COHR", "LITE", "CIEN", "CSCO"],
+                "tickers": ["ANET", "COHR", "LITE", "CIEN", "CSCO",
+                            "ALAB", "CRDO"],
             },
             {
                 # Ce qu'on assemble et le bâtiment qui l'héberge — la dépense
@@ -170,6 +198,51 @@ THEMES_CURES = [
                 "label": "Serveurs, data centers & néoclouds",
                 "tickers": ["DELL", "HPE", "EQIX", "DLR",
                             "CRWV", "NBIS", "SHAZ"],
+            },
+            {
+                # UN MODÈLE ENTIER MANQUAIT À LA CHAÎNE, et c'est le
+                # propriétaire qui l'a vu, en demandant simplement pourquoi
+                # Applied Digital n'y était pas. La réponse honnête était :
+                # aucune raison. Il n'était ni dans l'univers, ni au registre
+                # des écartés — or ce registre existe précisément pour qu'une
+                # absence ait un motif lisible. Ce n'était pas un arbitrage,
+                # c'était un angle mort, et il en cachait quatre autres.
+                #
+                # CE QUE CE MAILLON N'EST PAS. Ni une foncière ni un néocloud,
+                # bien qu'il ressemble aux deux :
+                #   · Equinix et Digital Realty louent le mètre carré à des
+                #     locataires diversifiés, sur des baux courts ;
+                #   · CoreWeave et Nebius vendent l'HEURE DE GPU et possèdent
+                #     les GPU, donc portent le risque technologique ;
+                #   · ceux-ci ne possèdent ni les puces ni les serveurs. Ils
+                #     détiennent de l'ÉLECTRICITÉ SOUS CONTRAT et une coque,
+                #     et les louent dix à vingt-cinq ans, en take-or-pay, à un
+                #     seul locataire de qualité bancaire. Leur métier est
+                #     foncier ; leur risque est celui d'un promoteur.
+                #
+                # L'ÉCART ENTRE LE CARNET ET LE REVENU EST TOUTE LA THÈSE.
+                # Applied Digital porte 1 410 MW sous contrat et 36,2 Md$ de
+                # revenus non annulables sur quinze ans, pour 611 M$ de chiffre
+                # d'affaires réalisé en 2026 et une perte nette. TeraWulf a
+                # ~13 Md$ de carnet, dont 3,2 Md$ garantis par Google, qui en
+                # détient environ 14 %. Ce sont des sociétés qui ont déjà VENDU
+                # ce qu'elles n'ont pas encore construit — la note ne sait pas
+                # lire cela, et le champ `biais` le dit au lecteur.
+                #
+                # DÉROGATION DE TAILLE (décision du propriétaire, 09/08/2026).
+                # Les cinq pèsent de 6,8 à 14,7 Md$, sous le plancher habituel
+                # de 25 Md$. Le lever ici est le même choix que sur le
+                # quantique et la robotique : le seuil protège d'ordinaire
+                # contre l'illiquidité, il masquerait ici les seuls titres
+                # qui portent ce modèle. Aucun acteur de plus de 25 Md$ ne le
+                # porte, la dérogation n'a donc pas d'alternative.
+                #
+                # Quatre des cinq ont moins de cinq ans d'historique exploitable
+                # — ce sont d'anciens mineurs de bitcoin reconvertis, et leur
+                # passé de mineur ne dit rien de leur avenir de bailleur. Leur
+                # fiche porte l'avertissement de régression.
+                "label": "Bailleurs de capacité IA",
+                "tickers": ["APLD", "WULF", "CIFR", "IREN", "CORZ"],
             },
             {
                 # Les hyperscalers qui commandent et exploitent les centres de
@@ -203,9 +276,25 @@ THEMES_CURES = [
                 # électrons nucléaires aux data centers, comme VST : c'est la
                 # thèse, pas le pari renouvelable que les biais excluent.
                 "label": "Énergie & refroidissement",
+                # QUATRE OMISSIONS COMBLÉES LE 09/08/2026, aucune ne demandant
+                # de dérogation — elles n'avaient tout simplement jamais été
+                # examinées. La plus gênante est Legrand : une valeur de la cote
+                # parisienne, éligible au PEA, sur la couche même qu'occupe
+                # Vertiv — barres d'alimentation haute intensité, chemins de
+                # câbles, confinement thermique — et qui a relevé ses prévisions
+                # deux fois sur la demande des centres de données.
+                # Comfort Systems et EMCOR ne fabriquent rien : ils CONSTRUISENT
+                # le bâtiment électromécanique, et c'est une façon de tenir le
+                # cycle sans porter le risque technologique d'aucune puce. Le
+                # carnet de Comfort Systems a presque doublé, à ~12 Md$, dont
+                # 45 % de technologie.
+                # Bloom Energy vend la pile à combustible posée SUR LE SITE,
+                # pour les campus que le réseau ne sait pas raccorder à temps —
+                # le goulot dont ce maillon porte le nom.
                 "tickers": ["VRT", "ETN", "SU.PA", "SIE.DE", "ABBN.SW", "ENR.DE",
                             "PWR", "VST", "CEG", "GEV", "CCJ",
-                            "MPWR", "ON", "IFX.DE"],
+                            "MPWR", "ON", "IFX.DE",
+                            "LR.PA", "FIX", "EME", "BE"],
             },
         ],
     },
@@ -750,8 +839,6 @@ ECARTES_VALIDATION = {
     # Complément du 01/08 — recevables depuis l'assouplissement de la règle
     # des 5 ans, mais PAS réintégrés d'office : chacun attend une décision
     # explicite (contrairement à ARM/CEG/GEV, réintégrés sur demande).
-"ALAB": "historique 2,4 ans (IPO 2024), recevable depuis le 01/08, en attente de décision",
-"CRDO": "historique 4,5 ans, recevable depuis le 01/08, en attente de décision",
 
     "AMKR":    "capitalisation ~12 Md$ < seuil 25 Md$ (assemblage)",
     "6920.T":  "capitalisation ~23 Md$ < seuil 25 Md$ (inspection de masques EUV)",

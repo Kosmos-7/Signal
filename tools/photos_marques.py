@@ -116,6 +116,37 @@ MARQUES = {
     "CB":      ["Chubb Limited", "Chubb insurance building"],
     "PGR":     ["Progressive Insurance", "Progressive Corporation campus"],
 
+    # ── INFRASTRUCTURE DE L'IA, complément du 09/08/2026 ────────────────────
+    # Onze titres entrés le même jour : le maillon des bailleurs de capacité et
+    # six omissions. La leçon de la veille est appliquée tout de suite — une
+    # fiche sans entrée ici est une fiche qu'aucune campagne ne pourra jamais
+    # illustrer.
+    #
+    # LES BAILLEURS N'ONT RIEN À PHOTOGRAPHIER, ou presque : leur métier est un
+    # bail. Ce qui existe en image, c'est le CAMPUS — la halle, les
+    # transformateurs, la ligne haute tension — et c'est d'ailleurs le sujet
+    # juste, puisque leur actif est du béton et des mégawatts.
+    "APLD":   ["Applied Digital data center", "Ellendale North Dakota data center",
+               "Polaris Forge data center", "hyperscale data center construction"],
+    "WULF":   ["TeraWulf Lake Mariner", "Nautilus Cryptomine",
+               "Lake Mariner data center", "Somerset New York power plant"],
+    "CIFR":   ["Cipher Mining data center", "Odessa Texas data center",
+               "Black Pearl data center"],
+    "IREN":   ["IREN Childress Texas", "Iris Energy data center",
+               "Prince George British Columbia data center"],
+    "CORZ":   ["Core Scientific data center", "Denton Texas data center"],
+    # Les six autres vendent des OBJETS, eux, et des objets nommés.
+    "LR.PA":  ["Legrand socket", "Legrand busbar", "Legrand Mosaic", "Legrand PDU",
+               "Legrand cable tray"],
+    "FIX":    ["HVAC rooftop unit", "chiller plant mechanical room",
+               "modular mechanical skid data center"],
+    "EME":    ["electrical switchgear installation", "mechanical contractor pipefitting",
+               "electrical conduit installation"],
+    "BE":     ["Bloom Energy Server", "Bloom Box fuel cell", "solid oxide fuel cell"],
+    "ALAB":   ["Astera Labs Aries retimer", "PCIe retimer", "CXL memory controller"],
+    "CRDO":   ["Credo active electrical cable", "AEC cable data center",
+               "SerDes chip"],
+
     # ── ROBOTIQUE (watchlist du 08/08/2026) ─────────────────────────────────
     # C'est le domaine où l'écart entre la raison sociale et le nom de l'objet
     # est le plus grand de tout le fichier, et où cette table sert donc le
