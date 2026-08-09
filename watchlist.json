@@ -5611,7 +5611,7 @@
       "sector": "Finance",
       "score": 73,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
         "vix_value": 14.9,
         "cross_regime": "golden",
@@ -5636,7 +5636,7 @@
             "38.2": 980.08,
             "50.0": 926.95,
             "61.8": 873.82,
-            "78.6": 798.18
+            "78.6": 798.17
           }
         },
         "rsi": 48.6,
@@ -5845,8 +5845,8 @@
       },
       "justification": "Score 73/100 — prix en surachat régression (+2.5σ) — prudence, RSI en zone favorable, pullback sain -9.8% sous le top 52w (zone d'entrée favorable, zone Fibo 23.6%), croissance CA solide (42% a/a), marges excellentes (31%). ⚠ Marge nette discordante YF:31.0% vs FH:15.5%",
       "rank": 24,
-      "rank_prev": 25,
-      "rank_delta": 1
+      "rank_prev": 24,
+      "rank_delta": 0
     },
     {
       "ticker": "ICE",
@@ -5855,7 +5855,7 @@
       "sector": "Finance",
       "score": 73,
       "badge": null,
-      "change": "up",
+      "change": "stable",
       "breakdown": {
         "vix_value": 14.9,
         "cross_regime": "death",
@@ -6078,8 +6078,8 @@
       },
       "justification": "Score 73/100 — prix sous sa droite de régression (-0.9σ), RSI en zone favorable, correction modérée -19.0% sous le top, marges excellentes (38%), consensus analystes très favorable.",
       "rank": 25,
-      "rank_prev": 26,
-      "rank_delta": 1
+      "rank_prev": 25,
+      "rank_delta": 0
     },
     {
       "ticker": "PDD",
@@ -6088,7 +6088,7 @@
       "sector": "Conso. cycl.",
       "score": 73,
       "badge": null,
-      "change": "new",
+      "change": "stable",
       "breakdown": {
         "vix_value": 14.9,
         "cross_regime": "death",
@@ -6136,15 +6136,15 @@
         "mrq": "2026-03-31",
         "forward_pe": 7.5,
         "trailing_pe": 9.6,
-        "fcf_yield_pct": 12.0,
+        "fcf_yield_pct": 12.01,
         "roe_pct": 25.4,
         "debt_eq_pct": 1,
         "price_to_book": 2.06,
         "fonda_source": [
           "fcf:comptes"
         ],
-        "target_mean_price": 116.39,
-        "target_upside_pct": 26.8,
+        "target_mean_price": 116.42,
+        "target_upside_pct": 26.9,
         "target_analysts": 34,
         "confiance": 1.0,
         "sources": [
@@ -6296,7 +6296,7 @@
               "id": "rdt_cash",
               "max": 5,
               "pts": 5.0,
-              "valeur": 12.0,
+              "valeur": 12.01,
               "phrase": "L'entreprise génère 12 % de sa capitalisation en cash chaque année",
               "motif": null
             },
@@ -6324,8 +6324,8 @@
       },
       "justification": "Score 73/100 — prix sous sa droite de régression (-1.2σ), ⚠ -33.6% sous le top 52w — trend probablement cassée, croissance CA modérée (11% a/a), marges excellentes (22%), consensus analystes très favorable.",
       "rank": 26,
-      "rank_prev": null,
-      "rank_delta": null
+      "rank_prev": 26,
+      "rank_delta": 0
     },
     {
       "ticker": "MA",
@@ -6800,7 +6800,7 @@
       "sector": "Conso. cycl.",
       "score": 72,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
         "vix_value": 14.9,
         "cross_regime": "golden",
@@ -7023,8 +7023,8 @@
       },
       "justification": "Score 72/100 — Golden Cross récent (19j), prix sous sa droite de régression (-1.5σ), croissance CA modérée (8% a/a), marges excellentes (22%), consensus analystes très favorable.",
       "rank": 29,
-      "rank_prev": 24,
-      "rank_delta": -5
+      "rank_prev": 29,
+      "rank_delta": 0
     },
     {
       "ticker": "REGN",
@@ -7033,7 +7033,7 @@
       "sector": "Santé",
       "score": 72,
       "badge": null,
-      "change": "down",
+      "change": "stable",
       "breakdown": {
         "vix_value": 14.9,
         "cross_regime": "death",
@@ -7269,27 +7269,11 @@
       },
       "justification": "Score 72/100 — ⚠ cross en résorption — signal en transition (pas exploitable seul), prix sous sa droite de régression (-1.4σ), pullback sain -3.2% sous le top 52w (zone d'entrée favorable, < Fibo 23.6%), croissance CA solide (17% a/a), marges excellentes (28%), consensus analystes très favorable.",
       "rank": 30,
-      "rank_prev": 29,
-      "rank_delta": -1
+      "rank_prev": 30,
+      "rank_delta": 0
     }
   ],
-  "changelog": [
-    {
-      "action": "in",
-      "ticker": "PDD",
-      "name": "PDD Holdings Inc.",
-      "score": 73,
-      "reason": "Score 73/100 — prix sous sa droite de régression (-1.2σ), ⚠ -33.6% sous le top 52w — trend probablement cassée, croissance CA modérée (11% a/a), marges excellentes (22%), consensus analystes très favorable."
-    },
-    {
-      "action": "out",
-      "ticker": "TCEHY",
-      "name": "Tencent Holding Ltd.",
-      "score": 72,
-      "new_score": 72,
-      "reason": "Score stable (72 → 72) — d'autres titres ont simplement mieux scoré cette semaine · Death Cross confirmé (120j) — régime baissier persistant."
-    }
-  ],
+  "changelog": [],
   "concentration_alerts": [
     "Technologie : 12 titres sur 30",
     "Finance : 10 titres sur 30",
