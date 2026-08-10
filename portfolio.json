@@ -5,18 +5,20 @@
     {
       "date": "2026-05-05",
       "montant": 10000.0,
-      "capital_post": 22107.39
+      "capital_post": 22107.39,
+      "effective_le": "2026-05-05"
     },
     {
       "date": "2026-08-03",
       "montant": 10000.0,
-      "capital_post": 33509.9
+      "capital_post": 34599.69,
+      "effective_le": "2026-08-10"
     }
   ],
   "capital_initial": 30000.0,
   "capital_actuel": 34599.69,
-  "performance": 34.73,
-  "performance_brute": 35.08,
+  "performance": 34.72,
+  "performance_brute": 35.07,
   "total_frais_payes": 30.94,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 861.36,
@@ -29,7 +31,7 @@
   "last_known_vix_source": "live",
   "benchmark_cac40": 6.21,
   "benchmark_msci": 15.69,
-  "vs_benchmark": 19.04,
+  "vs_benchmark": 19.03,
   "mode_panique": false,
   "perf_cac_semaine": 1.05,
   "positions": [
@@ -2319,7 +2321,7 @@
     },
     {
       "date": "2026-08-10",
-      "perf": 34.73,
+      "perf": 34.72,
       "capital": 34599.69,
       "benchmark_cac40": 6.21,
       "benchmark_msci": 15.69

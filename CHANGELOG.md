@@ -5,6 +5,57 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le registre des versements avait été restauré depuis le mauvais commit
+
+La performance publiée affichait 34,73 % quand le calcul du projet lui-même
+donnait 32,94 %. L'écart avait été attribué au registre des versements manquant
+au moment du calcul, et le chiffre laissé en l'état — prudence justifiée : c'est
+le nombre le plus important du site. La reconstitution commit par commit montre
+que la conclusion était inversée. **C'est 32,94 % qui était faux, et 34,73 % qui
+avait raison.**
+
+**Deux commits du 03/08, dans cet ordre, expliquent tout.** `acb77ed` introduit
+la pondération par le temps ; le versement du 3 août y porte `capital_post:
+33509.9`, sous la sémantique d'alors — un versement compte immédiatement. Puis,
+le même jour, `457c23d` introduit « un versement reste hors périmètre jusqu'à
+disposition » et **rétracte explicitement cette valeur** : `capital_post` repasse
+à `null`, et `effective_le` apparaît. Les deux relevés suivants (30,64 % le 3
+août, 33,93 % le 8) se recalculent au centime avec le versement en attente : le
+registre était sain.
+
+Le run hebdomadaire du 10/08 est le premier run d'agent après le versement.
+Il a donc fait ce que la doctrine prescrit — estampiller le versement, qui entre
+dans le périmètre à partir du moment où l'agent peut en disposer — et publié
+34,73 %. C'est au moment d'écrire qu'il a perdu le registre.
+
+**La restauration est allée chercher `acb77ed`, c'est-à-dire l'état d'avant la
+rétractation.** Elle a réintroduit une valeur que le projet avait retirée le jour
+même. Le message de commit dit « ce sont les originales » : elles le sont, mais
+d'une sémantique périmée. 32,94 % n'était pas la révélation d'une erreur, c'était
+la conséquence d'une restauration à la mauvaise source.
+
+**`effective_le` n'était pas introuvable non plus.** La valeur d'`inj1`,
+`2026-05-05`, est écrite dans le dépôt de `457c23d` jusqu'au relevé du 8 août.
+Celle d'`inj2` est la date du run qui l'estampille — `2026-08-10`, exactement ce
+que `_inj["effective_le"] = today` aurait inscrit. Rien n'a été inventé : les
+deux valeurs sont relevées, pas reconstituées.
+
+**Il reste un centime, et il est assumé.** L'agent estampille sur le capital
+*pré-transactions* mais publie la performance sur le capital *post-transactions*,
+et un relevé de prix sépare les deux. Le capital de l'estampille n'a jamais été
+persisté ; les données publiées le bornent à `[34600,77 ; 34607,08]`. La seule
+valeur mesurée et publiée disponible pour cette date est le capital de clôture,
+`34599.69`, qui donne 34,72 %. Choisir dans la borne une valeur qui retombe sur
+34,73 % aurait été fabriquer un nombre pour qu'il colle — le trou plutôt que le
+faux, y compris quand le trou vaut un centime. Les grandeurs dérivées suivent
+dans le même mouvement : performance brute 35,08 → 35,07, écart au MSCI 19,04 →
+19,03. Le drawdown et la performance post-liquidation ne bougent pas. La tuile du
+site affiche une décimale : le lecteur ne verra pas la différence.
+
+**Ce que ça a évité.** `update_prices.py` recalcule la performance depuis le
+registre à chaque soirée ouvrée. Le registre erroné étant déjà sur `main`, le run
+de 22:00 aurait publié 32,9 % sur le site.
+
 ### Une watchlist robotique : la question n'était pas « qui fabrique des robots »
 
 Cinquième liste du site. La demande était double — humanoïdes et robotique
