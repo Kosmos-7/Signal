@@ -5,6 +5,31 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Actualités passait sous l'en-tête : un motif recopié à moitié
+
+Le texte de la page Actualités démarrait trop haut par rapport aux trois autres.
+`signal.css` pose `header{position:fixed}`, et un en-tête fixe **ne prend aucune
+place dans le flux** : le `padding:3rem` de `main` partait donc du haut de la
+fenêtre — 48 px — sous un en-tête qui en fait 81. La page commençait 33 px trop
+haut, et son premier texte passait dessous.
+
+Les trois autres pages s'en sortaient chacune à leur façon. `index.html` garde un
+en-tête fixe parce que c'est une vue en SPA, mais il compense explicitement, et
+ces valeurs sont surveillées depuis longtemps (`top:5.6rem`, `top:5.7rem`).
+`portfolio.html` et `apprendre.html` repassent l'en-tête en `sticky` : il occupe
+alors sa place, et le décalage vient tout seul.
+
+**Actualités avait déjà la moitié du motif.** Elle porte le `html,body{height:
+auto}` dont le commentaire, dans `portfolio.html`, dit explicitement « rétablit le
+scroll naturel (header sticky) » — mais la ligne `header{position:sticky}` qui va
+avec n'avait jamais suivi. Une page copiée d'une autre, moins une ligne.
+
+**Le contrôle qui existait ne regardait qu'une page.** Il vérifiait les
+compensations d'`index.html` contre la hauteur mesurée de l'en-tête, et rien
+d'autre. L'invariant est maintenant général : une page qui pose son contenu dans
+un `<main>` doit donner sa place à l'en-tête. Éprouvé en retirant la ligne — le
+contrôle nomme la page fautive.
+
 ### Les illustrations : « 89 candidats » n'en font pas 89 d'utilisables
 
 Vingt-neuf fiches sur cent quarante-huit n'ont pas d'illustration. Le dossier est

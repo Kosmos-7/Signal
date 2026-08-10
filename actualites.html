@@ -22,6 +22,19 @@
   }
   body { background:var(--bg); color:var(--text); font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; position:relative; }
 
+  /* ── HEADER ── (marque, nav, frost et padding entièrement hérités de
+     signal.css ; seule la position change ici : sticky car le document défile,
+     alors que les vues en SPA gardent un header fixe.)
+     CETTE LIGNE MANQUAIT, et le texte passait sous l'en-tête. Un header `fixed`
+     ne prend aucune place dans le flux : le `padding:3rem` de main partait donc
+     du haut de la fenêtre, 48 px, sous un en-tête qui en fait 81 — la page
+     commençait 33 px TROP HAUT, seule des quatre. index.html vit aussi avec un
+     en-tête fixe, mais il compense explicitement (`top:5.6rem` / `5.7rem` sur
+     .rail et .stage) ; portfolio et apprendre passent en sticky, et l'en-tête
+     occupe alors sa place. Cette page avait déjà le `html,body{height:auto}`
+     qui accompagne le sticky — le motif avait été recopié à moitié. */
+  header { position: sticky; top: 0; }
+
   main { max-width:1060px; margin:0 auto; padding:3rem 1.5rem 6rem; position:relative; z-index:1; }
   .hero h1 { font-family:Georgia,serif; font-size:2.2rem; font-weight:normal; letter-spacing:-0.5px; }
   .hero p { color:var(--text2); font-size:0.96rem; max-width:640px; line-height:1.75; margin-top:.6rem; }

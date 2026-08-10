@@ -153,6 +153,22 @@ check("la couleur vient de currentColor, dans signal.css",
 check("les décalages sous l'en-tête suivent sa hauteur (81 px mesurés)",
       all(v in SRC["index.html"] for v in ("top:5.6rem", "top:5.7rem"))
       and "scroll-margin-top:6.1rem" in CSS)
+# ET CE CONTRÔLE NE REGARDAIT QU'UNE PAGE. signal.css pose `header{position:
+# fixed}` : un en-tête fixe ne prend AUCUNE place dans le flux, donc une page
+# qui empile son contenu dans un <main> démarre au ras de la fenêtre et passe
+# SOUS l'en-tête. index.html vit très bien avec, mais parce qu'il compense
+# explicitement (les `top:5.6rem`/`5.7rem` ci-dessus) ; les pages qui défilent,
+# elles, repassent l'en-tête en `sticky` pour qu'il occupe sa place.
+#
+# actualites.html avait le `html,body{height:auto}` qui accompagne le sticky
+# mais PAS le sticky : le motif avait été recopié à moitié, et son texte
+# commençait 33 px trop haut — 48 px de `padding` sous un en-tête de 81. Seule
+# des quatre, et rien ne le disait.
+_sans_place = [p for p in PAGES if "<main" in SRC[p]
+               and not re.search(r"header\s*\{[^}]*position:\s*sticky", SRC[p])]
+check("une page qui pose son contenu dans <main> donne sa place à l'en-tête",
+      not _sans_place,
+      f"{_sans_place} : en-tête fixe sans compensation, le texte passe dessous")
 
 # ── 4. LE PIED DE PAGE DIT LA MÊME CHOSE ───────────────────────────────────
 print("\n— Le pied de page est-il le même texte partout ? —")
