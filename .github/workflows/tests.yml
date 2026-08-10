@@ -51,7 +51,15 @@ jobs:
       # Aucune installation : les suites bouchent ta, yfinance, pandas et
       # requests elles-mêmes. Installer les vraies dépendances masquerait au
       # contraire une importation oubliée.
+      # LE RUNNER EST LA RÉFÉRENCE, PAS LA MACHINE DE DÉVELOPPEMENT. On charge en
+      # plus `tests/_sans_bibliotheques.py`, qui rend introuvables les
+      # bibliothèques tierces : ainsi le local et la CI échouent pour les mêmes
+      # raisons, au lieu que l'un mente à l'autre. Sans ça, test_themes.py est
+      # mort ici pendant des jours sur un `import PIL` en affichant 137/137
+      # ailleurs.
       - name: Suites
+        env:
+          PYTHONPATH: tests
         run: |
           echec=0
           for f in tests/test_*.py; do

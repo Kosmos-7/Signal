@@ -727,6 +727,15 @@ check_connus("aucun texte ne dit indisponible un chiffre que la fiche affiche",
 # changé le palier — donc déclenché une réécriture. Si les deux se désaccordent,
 # on retrouve la situation d'avant, un texte périmé qu'aucune règle ne réveille.
 try:
+    # LES BOUCHONS D'ABORD. generate_analyses.py importe `anthropic`, que le
+    # runner n'installe pas — cette suite se contentait jusqu'ici de lire du
+    # JSON et n'en avait jamais eu besoin. Sans cette ligne, le contrôle des
+    # paliers échouait en intégration continue tout en passant en local : la
+    # panne même qu'on vient de corriger sur PIL, reproduite le jour même par
+    # celui qui la corrigeait.
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import _bouchons
+    _bouchons.poser()
     import importlib.util as _u
     _sp = _u.spec_from_file_location("_ga", "generate_analyses.py")
     _ga = _u.module_from_spec(_sp)
