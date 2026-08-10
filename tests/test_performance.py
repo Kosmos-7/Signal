@@ -4,14 +4,24 @@
     python tests/test_performance.py
 """
 import ast
+import glob
 import json
 import os
+import re
 import sys
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, RACINE)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+# Les bouchons sont posés AVANT d'importer les deux écrivains de portfolio.json :
+# tous deux tirent yfinance et anthropic, absents du runner.
+import _bouchons                                                    # noqa: E402
+_bouchons.poser()
 
 import config                                                       # noqa: E402
+import portfolio_agent                                              # noqa: E402
+import update_prices                                                # noqa: E402
 
 ok, ko = 0, []
 
@@ -114,6 +124,34 @@ premiers = [x for x in h if x["date"] < "2026-05-05" and x.get("capital")]
 check("les points d'avant la première injection sont inchangés",
       all(abs(x["perf"] - round((x["capital"] / 10000 - 1) * 100, 2)) < 0.011
           for x in premiers))
+
+print("\n— Les deux écrivains de portfolio.json tiennent-ils la même formule ? —")
+# POURQUOI CETTE SECTION EXISTE. portfolio.json a DEUX auteurs : l'agent le lundi,
+# `update_prices.py` chaque soir ouvré. Tous deux publient le champ `performance`,
+# et `update_prices.py` n'était couvert par AUCUNE des sept suites — alors que
+# c'est LUI qui réécrit chaque nuit le nombre le plus important du site. C'est ce
+# chemin-là qui aurait republié 32,94 % le soir où le registre des versements
+# avait été restauré depuis un commit périmé.
+#
+# La reconstitution du capital de départ — `capital_initial` moins la somme des
+# versements — était écrite TROIS fois : une dans `_perf_twr`, deux dans
+# `update_prices`. Trois copies d'une règle sont trois règles qui divergent.
+check("update_prices s'importe dans les conditions du runner",
+      hasattr(update_prices, "main"))
+# L'IDENTITÉ D'OBJET, PAS UNE ÉGALITÉ DE RÉSULTAT : deux fonctions qui rendent
+# aujourd'hui le même nombre peuvent diverger demain. Ici il n'y en a qu'une.
+check("les deux modules tiennent la MÊME fonction de performance",
+      update_prices._perf_twr is portfolio_agent._perf_twr)
+# Et personne ne refait le calcul à la main ailleurs. La source de vérité est le
+# dépôt, pas une liste de fichiers écrite ici : on balaie tous les modules de la
+# racine, et la reconstitution ne doit apparaître qu'à UN endroit.
+_MOTIF = re.compile(r"-\s*\\?\s*\n?\s*sum\(\s*i\[[\"']montant[\"']\]", re.M)
+_refont = {os.path.basename(p): len(_MOTIF.findall(open(p, encoding="utf-8").read()))
+           for p in glob.glob(os.path.join(RACINE, "*.py"))}
+_refont = {k: v for k, v in _refont.items() if v}
+check("le capital de départ ne se reconstitue qu'à un seul endroit",
+      sum(_refont.values()) == 1 and _refont.get("portfolio_agent.py") == 1,
+      f"{_refont}")
 
 print("\n— Aucun champ publié ne se perd à la réécriture —")
 # POURQUOI CETTE GARDE EXISTE. Deux fois, un dictionnaire reconstruit de zéro a

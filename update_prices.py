@@ -31,6 +31,11 @@ import config
 from portfolio_agent import (
     get_eur_usd_rate, get_eur_gbp_rate, maj_position,
     calc_max_drawdown, save_json_atomic,
+    # `_perf_twr` est importée malgré son souligné : c'est la SEULE formule de
+    # performance du projet, et la partager vaut mieux que respecter une marque
+    # de privauté en la recopiant. Un test vérifie que les deux modules tiennent
+    # bien le même objet.
+    _perf_twr,
     TICKER_CAC40, TICKER_MSCI, CAPITAL_INITIAL_DEF,
 )
 
@@ -84,10 +89,17 @@ def main():
     capital_actuel  = round(val_positions + liquidites, 2)
     # Performance ponderee par le temps : les injections de capital n'y entrent
     # pas (decision proprietaire du 03/08/2026, methode dans config.py).
-    import config as _cfg
-    _inj = portfolio.get("injections", [])
-    performance     = _cfg.perf_ponderee_temps(
-        _inj, capital_actuel, capital_initial - sum(i["montant"] for i in _inj))
+    #
+    # UNE SEULE FORMULE POUR LES DEUX ÉCRIVAINS. portfolio.json a deux auteurs —
+    # l'agent le lundi, ce script chaque soir ouvré — et tous deux publient le
+    # champ `performance`. La reconstitution du capital de départ
+    # (`capital_initial` moins la somme des versements) était écrite TROIS fois :
+    # une dans _perf_twr, deux ici. Trois copies d'une règle sont trois règles
+    # qui divergent, et celle-ci porte le nombre le plus important du site — le
+    # même qui a affiché 34,73 % contre 32,94 % pendant que le registre des
+    # versements manquait. On appelle donc la fonction de l'agent au lieu de
+    # refaire son calcul.
+    performance     = _perf_twr(portfolio, capital_actuel)
 
     # ── Met à jour les poids
     for pos in positions:
@@ -167,8 +179,7 @@ def main():
         pfu_latent_si_liquidation += r["impot_pfu_eur"]
         pertes_si_liquidation     += r["perte_reportable_eur"]
     capital_post_liquidation     = round(cash_post_liq, 2)
-    performance_post_liquidation = _cfg.perf_ponderee_temps(
-        _inj, capital_post_liquidation, capital_initial - sum(i["montant"] for i in _inj))
+    performance_post_liquidation = _perf_twr(portfolio, capital_post_liquidation)
 
     # ── Met à jour le portfolio (sans toucher aux champs hebdo)
     portfolio["updated_at"]      = today

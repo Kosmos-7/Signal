@@ -5,6 +5,33 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le script qui réécrit la performance chaque nuit n'était testé par rien
+
+`portfolio.json` a deux auteurs : l'agent le lundi, `update_prices.py` chaque
+soir ouvré. Tous deux publient le champ `performance`. Le second n'était importé
+par **aucune** des sept suites — alors que c'est lui qui réécrit chaque nuit le
+nombre le plus important du site, et que c'est ce chemin-là qui aurait republié
+32,94 % le soir où le registre des versements avait été restauré depuis un commit
+périmé.
+
+**La formule était écrite trois fois.** La reconstitution du capital de départ —
+`capital_initial` moins la somme des versements — vivait dans `_perf_twr` et
+deux fois dans `update_prices`. Trois copies d'une règle sont trois règles qui
+divergent, et celle-ci porte le chiffre de couverture du site. `update_prices`
+appelle désormais la fonction de l'agent au lieu de refaire son calcul.
+
+L'équivalence a été prouvée avant d'être annoncée, sur les données réelles et
+sur le cas limite qui compte : performance 34,72, post-liquidation 27,36, et un
+versement en attente — identiques des deux côtés.
+
+**Trois gardes.** Que le module s'importe dans les conditions du runner ; que les
+deux modules tiennent la **même fonction**, vérifiée par identité d'objet et non
+par égalité de résultat — deux fonctions qui rendent le même nombre aujourd'hui
+peuvent diverger demain ; et que la reconstitution du capital de départ
+n'apparaisse qu'à un seul endroit dans tous les modules de la racine. La
+troisième a été éprouvée en réintroduisant la copie : elle nomme les deux
+fichiers.
+
 ### Treize entrées de dispatch tombaient dans un shell
 
 `photos-marques.yml` porte la leçon, écrite après coup : « les `|` de
