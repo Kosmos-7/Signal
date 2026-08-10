@@ -1,6 +1,18 @@
 {
   "updated_at": "2026-08-10",
   "week": "Sem. 33 · 2026",
+  "injections": [
+    {
+      "date": "2026-05-05",
+      "montant": 10000.0,
+      "capital_post": 22107.39
+    },
+    {
+      "date": "2026-08-03",
+      "montant": 10000.0,
+      "capital_post": 33509.9
+    }
+  ],
   "capital_initial": 30000.0,
   "capital_actuel": 34599.69,
   "performance": 34.73,

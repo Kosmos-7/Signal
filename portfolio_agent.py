@@ -2110,6 +2110,18 @@ Ne jamais inclure de balises markdown ou de backticks.""",
     output = {
         "updated_at":          today,
         "week":                semaine(),
+        # LE REGISTRE DES VERSEMENTS SE REPORTE, il ne se recalcule pas.
+        # Ce dictionnaire est construit de zéro à chaque run : tout champ qui
+        # n'y figure pas est SILENCIEUSEMENT PERDU à l'écriture. `injections`
+        # y manquait. Il a donc disparu de portfolio.json au run du 10/08/2026,
+        # emportant les deux versements de 10 000 € du 05/05 et du 03/08 — les
+        # seules données qui distinguent un virement d'un rendement. Le code les
+        # LIT pourtant à trois endroits ; il ne les réécrivait nulle part.
+        # C'est mot pour mot la panne de fusionner_fonda, qui a fait disparaître
+        # les trajectoires de 96 fiches le 07/08 et dont le commentaire prévient :
+        # « tout nouveau champ doit être ajouté ICI ». La leçon n'avait pas
+        # traversé d'un fichier à l'autre.
+        "injections":          portfolio.get("injections", []),
         "capital_initial":     CAPITAL_INITIAL,
         "capital_actuel":      capital_actuel,           # net de frais + impôts (cash + valeurs)
         "performance":         performance,              # nette de frais + impôts (= performance "réelle")
