@@ -275,7 +275,15 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
   body.v-home .stage{left:1.4rem}
   body.v-home .doc{max-width:1180px}
 
-  .home-h{padding:.4rem 0 0}
+  /* L'ÉCART AU HEADER EST COMMUN AUX QUATRE PAGES : 48 px sous un en-tête de
+     81 px. Ici il ne vient pas d'un `main` mais d'une chaîne de trois boîtes —
+     .stage à 5.7rem (10,2 px sous l'en-tête), .doc et ses 8 px, puis ce
+     rembourrage. À .4rem le titre « Watchlists » se posait 25 px sous l'en-tête
+     quand « Actualités » en avait 48 : la page d'accueil était la plus serrée
+     des quatre. 1.875rem = 30 px, le complément exact mesuré au navigateur.
+     Toucher au `top` de .stage aurait déplacé AUSSI les vues thématiques et les
+     fiches, qui partagent ce conteneur ; .home-h ne sert qu'à l'accueil. */
+  .home-h{padding:1.875rem 0 0}
   .home-t{font-family:var(--serif);font-size:2.7rem;line-height:1;letter-spacing:-1.2px}
   .home-lead{font-size:1rem;color:var(--text2);line-height:1.7;margin-top:.7rem;max-width:660px}
   .home-meta{font:.66rem var(--mono);color:var(--text3);letter-spacing:.6px;margin-top:.9rem;text-transform:uppercase}
@@ -416,7 +424,13 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
     .rail-l{max-height:38vh}
     .stage{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:1rem 0 0;overflow:visible}
     .doc{scroll-margin-top:4.9rem}     /* le header fixe ne recouvre pas le haut de la fiche */
-    body.v-home .stage{margin-top:5.3rem}
+    /* DÉGAGEMENT DE L'EN-TÊTE FIXE, en pixels parce qu'il compense une hauteur
+       mesurée en pixels. .stage repasse ici en `relative` : sa position ne vient
+       plus de `top` mais de cette marge, et elle doit valoir hauteur de l'en-tête
+       (81 px) + 48 px d'écart au titre − les 38 px déjà donnés par .doc (8) et
+       .home-h (30). À 5.3rem l'écart tombait à 42 px au lieu de 48, et à 54 px
+       sous 700 px où l'en-tête se resserre — voir le bloc dédié plus bas. */
+    body.v-home .stage{margin-top:91px}
     .d-tk{font-size:2.6rem}
     /* Écran étroit : l'en-tête à trois colonnes n'entre pas. Il se replie —
        identité et anneau restent côte à côte sur la première ligne, la
@@ -434,6 +448,19 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
        est près d'un bord : sur mobile elle devient une feuille posée en bas
        du viewport, pleine largeur — lisible où que soit l'icône. */
     .inf .inf-tip{position:fixed;left:12px;right:12px;bottom:12px;top:auto;width:auto;z-index:60}
+  }
+
+  /* ── L'ÉCART AU TITRE SUIT L'EN-TÊTE, MÊME QUAND L'EN-TÊTE RÉTRÉCIT ──────────
+     signal.css resserre l'en-tête à 700 px (`header{padding:.85rem 1rem}`) : il
+     passe de 81 à 69 px. Le dégagement de .stage, lui, était figé — l'écart entre
+     l'en-tête et « Watchlists » valait donc 48 px sur grand écran, 42 px à 900 px
+     et 54 px sous 700. Trois valeurs sur la même page, pour un réglage censé être
+     constant. Ce bloc DOIT rester le dernier : à 700 px il matche en même temps
+     que celui de 900 px, et c'est l'ordre du fichier qui départage.
+     69 + 48 − 38 = 79. Les trois autres pages n'ont pas besoin de ce calcul :
+     leur en-tête est `sticky`, il occupe sa place et le décalage vient tout seul. */
+  @media(max-width:700px){
+    body.v-home .stage{margin-top:79px}
   }
 </style>
 </head>

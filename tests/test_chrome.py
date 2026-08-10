@@ -170,6 +170,68 @@ check("une page qui pose son contenu dans <main> donne sa place à l'en-tête",
       not _sans_place,
       f"{_sans_place} : en-tête fixe sans compensation, le texte passe dessous")
 
+# ── LE MÊME ÉCART ENTRE L'EN-TÊTE ET LE PREMIER TITRE, SUR LES QUATRE PAGES ───
+# Mesuré au navigateur le 10/08/2026 : « Watchlists » se posait 25 px sous
+# l'en-tête, « Une IA contre l'indice » 40, « Actualités » 48, « Comprendre la
+# bourse » 56. Quatre valeurs pour un réglage qui n'a qu'une raison d'être.
+# L'origine n'était pas un désaccord de conception mais deux passes « plus d'air »
+# ayant choisi chacune leur nombre (2,5rem ici, 3,5rem là) par-dessus le 3rem que
+# les trois pages déclarent pourtant en base.
+#
+# LE TEST EST STATIQUE ET IL LE DIT : le runner n'a pas de navigateur, donc on
+# vérifie la VALEUR DÉCLARÉE, pas la distance rendue. C'est un filet contre la
+# régression d'écriture (« remettons 2,5rem ici »), pas une preuve de rendu —
+# celle-là se refait au navigateur, et elle l'a été.
+ECART = "3rem"      # 48 px sous un en-tête de 81 px
+
+
+def _padding_haut_effectif(source):
+    """Dernier `padding-top` de `main` déclaré HORS media query. Rend None si aucun.
+
+    LA PREMIÈRE VERSION DE CE TEST NE POUVAIT PAS ROUGIR, et l'a prouvé : elle
+    ramassait toutes les valeurs de tous les blocs `main{}` et se contentait d'y
+    trouver « 3rem ». Or la règle de base en déclare toujours un — le test restait
+    vert avec une surcharge à 2,5rem juste en dessous. Il faut la valeur EFFECTIVE,
+    donc la dernière au niveau racine : celle que la cascade retient sur grand
+    écran. Les surcharges mobiles, elles, vivent dans un @media et sont un réglage
+    distinct, assumé."""
+    style = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", source, re.S))
+    profondeur, i, dernier, n = 0, 0, None, len(style)
+    while i < n:
+        c = style[i]
+        if c == "{":
+            # sélecteur = ce qui précède, depuis le dernier délimiteur de règle
+            debut = max(style.rfind("}", 0, i), style.rfind("{", 0, i)) + 1
+            sel = style[debut:i].strip().split("\n")[-1].strip()
+            fin = style.find("}", i)
+            if profondeur == 0 and re.fullmatch(r"main", sel) and fin != -1:
+                corps = style[i + 1:fin]
+                m = re.search(r"padding-top:\s*([0-9.]+rem)", corps) or \
+                    re.search(r"padding:\s*([0-9.]+rem)", corps)
+                if m:
+                    dernier = m.group(1)
+            profondeur += 1
+        elif c == "}":
+            profondeur -= 1
+        i += 1
+    return dernier
+
+
+for _p in ("actualites.html", "portfolio.html", "apprendre.html"):
+    _eff = _padding_haut_effectif(SRC[_p])
+    check(f"{_p} : l'écart au titre reste {ECART}", _eff == ECART, f"effectif : {_eff}")
+# index.html n'a pas de <main> : son écart vient d'une chaîne de trois boîtes, et
+# son en-tête étant `fixed` à toutes les largeurs, le dégagement doit être REPOSÉ
+# à chaque hauteur d'en-tête — 81 px au-dessus de 700, 69 px en dessous, où
+# signal.css resserre le rembourrage. Sans le second, l'écart passait de 48 à 54.
+check("index.html : le rembourrage du titre d'accueil vaut le complément mesuré",
+      ".home-h{padding:1.875rem 0 0}" in SRC["index.html"])
+check("index.html : le dégagement mobile suit les DEUX hauteurs d'en-tête",
+      "margin-top:91px" in SRC["index.html"] and "margin-top:79px" in SRC["index.html"],
+      "91px = 81+48−38 ; 79px = 69+48−38")
+check("et le resserrage de l'en-tête est bien à 700 px dans la feuille partagée",
+      re.search(r"@media\(max-width:700px\)\{\s*header\{padding:", CSS) is not None)
+
 # ── 4. LE PIED DE PAGE DIT LA MÊME CHOSE ───────────────────────────────────
 print("\n— Le pied de page est-il le même texte partout ? —")
 legals = {re.search(r'class="footer-legal">(.*?)</div>', SRC[p], re.S).group(1).strip()

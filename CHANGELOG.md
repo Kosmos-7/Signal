@@ -5,6 +5,38 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Quatre pages, quatre écarts sous l'en-tête
+
+Mesuré au navigateur, la distance entre l'en-tête et le premier titre valait
+**25 px** pour « Watchlists », **40** pour « Une IA contre l'indice », **48** pour
+« Actualités » et **56** pour « Comprendre la bourse ». Quatre valeurs pour un
+réglage qui n'a qu'une raison d'être.
+
+**Ce n'était pas un désaccord de conception.** Les trois pages à `<main>`
+déclarent toutes `padding: 3rem` en base ; deux passes « plus d'air » sont
+ensuite venues poser chacune leur nombre par-dessus — 2,5 rem sur le portefeuille,
+3,5 rem sur apprendre. Même intention, deux chiffres, et personne pour les
+comparer. Les quatre sont désormais à 48 px.
+
+**La page d'accueil, elle, dérivait avec la largeur** : 48 px sur grand écran,
+42 à 900, 54 sous 700. Son en-tête est `fixed` — il ne prend pas de place — donc
+le dégagement est un nombre écrit à la main, et ce nombre ne suivait pas
+l'en-tête quand `signal.css` le resserre à 700 px (81 → 69). Il est maintenant
+reposé à chaque hauteur. Les trois autres pages n'ont pas ce calcul : leur
+en-tête est `sticky`, il occupe sa place et le décalage vient tout seul.
+
+**Le portefeuille et apprendre restent à 83 px sous 1300 px, et c'est juste** :
+une barre de sommaire collante s'intercale alors entre l'en-tête et le contenu.
+Le titre y est à 46-47 px **sous cette barre** — soit le même écart, mesuré depuis
+l'élément qui le précède réellement.
+
+**Le premier test écrit pour figer tout ça ne pouvait pas rougir**, et il l'a
+prouvé : il ramassait toutes les valeurs déclarées dans les blocs `main{}` et se
+contentait d'y trouver « 3rem » — or la règle de base en déclare toujours un, si
+bien qu'une surcharge à 2,5 rem juste en dessous le laissait vert. Il lit
+désormais la valeur EFFECTIVE, la dernière au niveau racine, celle que la cascade
+retient. Vérifié en réintroduisant 2,5 rem : il échoue et nomme la valeur.
+
 ### « Trois décisions d'achat » quand le journal n'en montrait qu'une
 
 Le texte hebdomadaire du 10 août annonçait trois achats — BKNG, ADBE, FTNT —

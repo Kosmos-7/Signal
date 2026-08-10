@@ -521,8 +521,13 @@
   /* Le brique-grid garde des cellules légères, mais à plat */
   .brique-card { background: rgba(255,255,255,0.015); border: 1px solid var(--line); }
 
-  /* Plus d'air */
-  main { padding-top: 3.5rem; }
+  /* Plus d'air.
+     LE PADDING HAUT EN EST EXCLU : il gouverne l'écart entre l'en-tête et la
+     première ligne de texte, commun aux quatre pages (3rem = 48 px sous un
+     en-tête de 81 px). Cette passe l'avait mis à 3,5rem quand celle de
+     portfolio.html choisissait 2,5rem — même intention, deux nombres, et quatre
+     écarts différents à l'écran. Mesuré au navigateur le 10/08/2026. */
+  main { padding-top: 3rem; }
   .section-block { margin-bottom: 4.2rem; }
 
   /* En-têtes plus marqués : eyebrow mono cyan + filet, titre plus grand */

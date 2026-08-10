@@ -498,8 +498,14 @@
     box-shadow: none;
   }
 
-  /* Plus d'air entre les grands blocs */
-  main { padding-top: 2.5rem; }
+  /* Plus d'air entre les grands blocs.
+     LE PADDING HAUT NE FAIT PAS PARTIE DE CE RÉGLAGE : il gouverne l'écart entre
+     l'en-tête et la première ligne de texte, et cette distance est commune aux
+     quatre pages (3rem = 48 px sous un en-tête de 81 px). Cette passe l'avait
+     mis à 2,5rem quand celle d'apprendre.html choisissait 3,5rem : deux nombres
+     différents pour la même intention, et quatre écarts différents à l'écran
+     (25, 40, 48 et 56 px). Mesuré au navigateur le 10/08/2026. */
+  main { padding-top: 3rem; }
   .hero { margin-bottom: 2.8rem; }
   #survival-block, #claude-analysis, .chart-block, .kpi-grid,
   #positions, #alloc-charts, #orders, .pacc, .pnl-strip { margin-bottom: 2.8rem; }
