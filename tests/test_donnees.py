@@ -90,14 +90,16 @@ CONNUS = {
         "SIE.DE": "idem — tâche #84",
         "WDC":    "idem — tâche #84",
     },
-    "aucun multiple cité ne diverge de la fiche": {
-        "005930.KS": "texte d'avant l'entrée des multiples dans la signature ; "
-                     "sera réécrit au prochain run éditorial",
-    },
-    "aucun texte ne dit indisponible un chiffre que la fiche affiche": {
-        "005930.KS": "idem — le texte annonce « PER courant indisponible » "
-                     "quand la fiche affiche 35,0×",
-    },
+    # Ces textes datent d'AVANT l'entrée des multiples dans la signature : rien ne
+    # les réveillait quand le multiple bougeait. Ils seront tous réécrits au
+    # prochain run éditorial, et ces entrées devront alors disparaître — le
+    # contrôle « registre à jour » s'en assurera.
+    # VIDÉS LE 09/08 AU SOIR : le run hebdomadaire a réécrit les textes avec les
+    # multiples désormais dans la signature, et les cinq écarts ont disparu.
+    # C'est le contrôle « registre à jour » qui l'a exigé — un registre qui ne se
+    # vide jamais est un cimetière de silencieux.
+    "aucun multiple cité ne diverge de la fiche": {},
+    "aucun texte ne dit indisponible un chiffre que la fiche affiche": {},
 }
 
 
@@ -658,10 +660,19 @@ print("\n— La prose et les chiffres racontent-ils la même chose ? —")
 # quelques tournures, pas toutes — parce qu'un test qui attrape la moitié des
 # cas vaut infiniment mieux que la relecture humaine qui n'en attrapait aucun.
 import re as _re
+_INTER = r"\s*(?:de |à |:)?\s*(?:<[^>]+>\s*)?"
 _MOTIFS = [
-    (_re.compile(r"PER forward\s*:?\s*(\d+[,.]?\d*)"),        "forward_pe",   0.15),
-    (_re.compile(r"PER pr[ée]visionnel\s*:?\s*(\d+[,.]?\d*)"), "forward_pe",   0.15),
-    (_re.compile(r"PER courant\s*:?\s*(\d+[,.]?\d*)"),         "trailing_pe",  0.15),
+    # LES TOURNURES COMPTENT AUTANT QUE LES SEUILS, et il a fallu DEUX essais.
+    # Le premier jet n'acceptait que « PER forward 15,6x » ; NVIDIA écrit « le PER
+    # forward de 15,6x » et passait à travers — c'est le propriétaire qui a vu le
+    # chiffre, pas le test. Le deuxième acceptait « de » mais pas la balise <b>
+    # dont la prose entoure chaque nombre, et ratait donc encore NVIDIA. C'est le
+    # contrôle « registre à jour » qui l'a dit : une entrée inscrite mais jamais
+    # constatée signalait que le test ne voyait rien. Un registre qui refuse les
+    # fantômes vérifie aussi le test lui-même.
+    (_re.compile(r"PER forward" + _INTER + r"(\d+[,.]?\d*)"),        "forward_pe",   0.10),
+    (_re.compile(r"PER pr[ée]visionnel" + _INTER + r"(\d+[,.]?\d*)"), "forward_pe",   0.10),
+    (_re.compile(r"PER courant" + _INTER + r"(\d+[,.]?\d*)"),         "trailing_pe",  0.10),
     (_re.compile(r"marge nette (?:de |à )?(\d+[,.]?\d*)\s*%"),  "net_margin_pct", 0.20),
 ]
 _perimes, _lus = {}, 0
@@ -713,7 +724,7 @@ except Exception as _e:                                       # noqa: BLE001
     check("generate_analyses.py est importable", False, f"{type(_e).__name__}: {_e}")
 else:
     check("le pas des multiples est celui de la tolérance du test",
-          dict((c, p) for c, _m, p in _ga.CHAMPS_VALO)["forward_pe"] == 0.15)
+          dict((c, p) for c, _m, p in _ga.CHAMPS_VALO)["forward_pe"] == 0.10)
     _base = {"forward_pe": 20.0, "trailing_pe": 30.0,
              "fcf_yield_pct": 4.0, "net_margin_pct": 22.0}
     _s0 = _ga.bucket_valorisation(_base)

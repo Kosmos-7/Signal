@@ -406,8 +406,8 @@ PROMPT_VERSION = "2026-08-valo-dans-signature"  # multiples surveillés + socle 
 # Le pas est RELATIF pour les multiples (un PER passe de 30 à 33 sans changer de
 # nature, de 30 à 45 si) et ABSOLU en points pour les marges.
 CHAMPS_VALO = (
-    ("forward_pe",   "rel", 0.15),
-    ("trailing_pe",  "rel", 0.15),
+    ("forward_pe",   "rel", 0.10),
+    ("trailing_pe",  "rel", 0.10),
     ("fcf_yield_pct", "abs", 1.0),
     ("net_margin_pct", "abs", 5.0),
 )
@@ -631,6 +631,59 @@ def _ligne_decomposition(b):
     return "- Décomposition : " + " · ".join(morceaux) if morceaux else ""
 
 
+_FONDA_CACHE = {}
+
+
+def _fonda_de(ticker):
+    """Bloc `fonda` d'un ticker, lu dans charts/ — il n'est PAS sur l'objet stock.
+
+    watchlist.json et universe.json portent le breakdown, pas la série des
+    exercices : celle-ci vit dans charts/<ticker>.json, écrite par le screener.
+    Premier jet de _exercice_forward() : `stock.get("fonda")`, qui rendait
+    toujours vide et n'aurait donc jamais étiqueté un seul exercice — un
+    correctif silencieusement inopérant, ce qui est pire qu'un correctif absent.
+    """
+    if not ticker:
+        return {}
+    if ticker not in _FONDA_CACHE:
+        _FONDA_CACHE[ticker] = (load_json(os.path.join("charts", f"{ticker}.json"), {})
+                                or {}).get("fonda") or {}
+    return _FONDA_CACHE[ticker]
+
+
+def _exercice_forward(stock):
+    """Sur quel exercice porte le « PER forward » du fournisseur ?
+
+    LA QUESTION EST DU PROPRIÉTAIRE, devant la fiche NVIDIA : « on dit l'écart
+    entre PER courant (34,2x) et PER forward (17,4x), mais c'est quelle année le
+    PER forward ? » Le résumé du fournisseur ne le dit pas — il rend un nombre
+    sans étiquette —, et la prose le recopiait donc sans étiquette non plus. Un
+    lecteur qui compare 34,2× à 17,4× croit lire une division par deux l'an
+    prochain.
+
+    LA RÉPONSE SE MESURE, et elle a été mesurée sur les 130 fiches publiées : ce
+    « PER forward » vaut notre DEUXIÈME exercice estimé dans 105 cas, le premier
+    dans 5 seulement, et ni l'un ni l'autre dans 20. Sur NVIDIA, 17,4× est
+    l'exercice 2028 — clos fin janvier 2028 —, pas 2027 qui vaut 24,9×. La
+    division par deux se joue sur deux exercices, pas sur un.
+
+    On ne suppose donc pas la règle : on RAPPROCHE, fiche par fiche, le nombre du
+    fournisseur de notre propre série datée (`pe_prev`, dont chaque point porte
+    son exercice). Quand il tombe sur l'un d'eux à 3 % près, on nomme l'année.
+    Quand il ne tombe sur aucun — 20 fiches —, on le dit aussi : mieux vaut
+    prévenir le rédacteur que l'étiquette est inconnue que lui laisser croire
+    qu'elle va de soi."""
+    pe = (_fonda_de(stock.get("ticker")) or {}).get("pe_prev") or []
+    f = (stock.get("breakdown") or {}).get("forward_pe")
+    if not f or f <= 0 or not pe:
+        return ""
+    for e in pe:
+        v = e.get("per")
+        if v and abs(v - f) / f <= 0.03:
+            return f" (exercice {e['exercice']})"
+    return " (exercice non identifié — NE PAS lui attribuer d'année dans la prose)"
+
+
 def breakdown_block(stock, niveau):
     """Rend le breakdown chiffré d'un ticker en bloc lisible pour le prompt.
 
@@ -704,7 +757,8 @@ def breakdown_block(stock, niveau):
                         if c.get("id") == "peg" and c.get("pts") is not None), None)
         lines.append(
             f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward "
-            f"{fmt(b.get('forward_pe'),'x',1)} · PER courant {fmt(b.get('trailing_pe'),'x',1)} · FCF yield "
+            f"{fmt(b.get('forward_pe'),'x',1)}{_exercice_forward(stock)} · PER courant "
+            f"{fmt(b.get('trailing_pe'),'x',1)} · FCF yield "
             f"{fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(_peg_v4,'',2)} (maison : PER forward ÷ "
             f"min(croissance attendue, démontrée)) · z-score "
             f"{fmt(b.get('regression_z'),'σ',1)}. NB : un PER courant nettement supérieur au PER forward "

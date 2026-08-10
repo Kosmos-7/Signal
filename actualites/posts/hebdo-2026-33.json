@@ -1,0 +1,60 @@
+{
+ "id": "hebdo-2026-33",
+ "type": "hebdo",
+ "date": "2026-08-10",
+ "titre": "L'analyse du portefeuille · Sem. 33 · 2026",
+ "chapeau": "Cette semaine du 4 au 10 août, deux lectures macro ont dominé l'agenda : un rapport emploi américain plus faible qu'attendu vendredi dernier, qui a propulsé obligations et actions à la hausse, et un CPI chinois de juillet en ralentissement, signalant une déflation à la product…",
+ "sujet": null,
+ "photo": null,
+ "conviction": "haussier",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Cette semaine du 4 au 10 août, deux lectures macro ont dominé l'agenda : un rapport emploi américain plus faible qu'attendu vendredi dernier, qui a propulsé obligations et actions à la hausse, et un CPI chinois de juillet en ralentissement, signalant une déflation à la production qui s'installe à Pékin. La semaine à venir sera donc centrée sur une donnée clé : l'inflation américaine de juillet, attendue comme prochain test de la politique de la Fed.\n\nPour le portefeuille Signal, le contexte reste favorable : le VIX à 15.42 indique un régime calme, le S&P 500 a touché de nouveaux records portés en partie par l'activité optionnelle, et Signal affiche une performance nette cumulée de +34.74% depuis le lancement (versus +15.12% pour le MSCI World), soit un écart de +18.81 points de pourcentage. Ces chiffres sont solides, mais ils créent leur propre piège : la tentation d'agir davantage quand tout monte.\n\nTrois décisions d'achat cette semaine, toutes motivées par des setups distincts et non redondants. BKNG : Golden Cross J+2 volume-confirmé, fenêtre signal optimale, secteur voyage non exposé à la concentration IA déjà lourde du portefeuille. ADBE : setup B mean-reversion sur Death Cross vieux de 999 jours (R7 appliquée, signal ambigu par définition), z=-2.1σ sur titre de qualité sans dégradation fondamentale, pente MM21 positive confirmant l'amorce de rebond. FTNT : val=5/5 avec pullback -5.1% en zone Fibo 23.6%, le setup d'entrée le plus propre de la semaine sur un secteur cybersécurité absent du portefeuille.\n\nLa nouvelle Trump sur les tarifs de 15% visant le polysilicium et les panneaux solaires (entrée en vigueur décembre 2026) mérite une mention pour Orsted, détenu depuis 75 jours à -14.2%. La mesure ne cible pas l'éolien offshore directement, mais le sentiment renouvelable peut se contaminer. Je ne renforce pas et surveille le seuil de stop-loss à -15% qui s'appliquera mécaniquement après le 90e jour.\n\nÀ surveiller cette semaine : le CPI américain de juillet (mercredi), qui déterminera si le rally obligataire post-emplois tient ou se corrige. Et côté portefeuille, ORSTED : c'est le baromètre de discipline, pas d'engagement irrationnel sur une ligne en souffrance.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Trois entrées cette semaine, toutes sur des setups techniques distincts et dans des secteurs absents ou sous-représentés du portefeuille. BKNG (voyage en ligne) apporte une diversification bienvenue face à notre concentration IA/Tech. ADBE est un pari mean-reversion assumé : Death Cross vieux de 999 jours, donc stale selon la méthodologie R7, et z=-2.1σ sous régression sur un titre fondamentalement solide. FTNT (cybersécurité) entre sur le setup d'entrée le plus propre de la semaine avec un pullback en zone Fibo 23.6%. La position ORSTED reste sous surveillance étroite à -14.2% après 75 jours : le stop-loss automatique à -15% s'appliquera si la position continue de se dégrader après le 90e jour de détention. Pas de panique, pas d'action précipitée : la règle est la règle.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "China July factory-gate inflation eases to 3-month low, CPI slows - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOaVNBcVdFSHViUm10d0NJVTdNYVJOdDgwZ3FvTy1JbFVwTVVlWmN1a1B3UjRaTWdYOG5VRm0yZWZXUWVKMEtLVzk4azgwcHVuX1Y3LWFrMGhnam0zRFU1dnRFQlBaSmpEOUVzM0sxUVYybml4QkIwNlVIck1LNE5wQTBEcWUtaFhZMGdCTFpnS0R5QTNDLWJheUNGT3VINWtSRzBFek13?oc=5",
+   "date": "2026-08-09",
+   "resume": "L'inflation à la production en Chine ralentit à un plus bas de 3 mois en juillet, tandis que l'inflation à la consommation marque également le pas."
+  },
+  {
+   "titre": "US stocks, bonds rally after soft jobs report; yen bounces back - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOc0YzMU1OZXgxZVVsOS1zOHl4RnZ3SVU4WWtmNFVBd24xM1JNbVlvY0dXMm5DQUZQcDh4WHh1YTZpemRib1NEX1JDOTVqR20wZ2ZObnFJN3dtVkdHS3otcEF3OVBaTUVlTEtNNGw5eUx2QkozTGhvRTQxOHd0Vk5xX194QQ?oc=5",
+   "date": "2026-08-07",
+   "resume": "Actions et obligations américaines progressent après un rapport emploi plus faible qu'attendu, le yen rebondit."
+  },
+  {
+   "titre": "Here are the 2 big things we're watching in the stock market in the week ahead",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/09/here-are-the-2-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+   "date": "2026-08-09",
+   "resume": "La semaine boursière à venir sera dominée par la publication des données d'inflation américaine de juillet."
+  },
+  {
+   "titre": "A record-breaking week for options powers S&P 500 surge; volatility gauge is near 2026 low",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/08/record-breaking-week-for-options-powers-sp-500-surge.html",
+   "date": "2026-08-08",
+   "resume": "Le S&P 500 atteint de nouveaux records avec un VIX proche de son plus bas 2026, porté par l'activité sur les options."
+  },
+  {
+   "titre": "Trump announces 15% tariffs on imported polysilicon, solar panels",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-06/trump-signed-order-on-tariffs-trade-actions-on-polysilicon",
+   "date": "2026-08-07",
+   "resume": "Trump annonce des tarifs douaniers de 15% sur les importations de polysilicium et panneaux solaires, applicables à partir du 4 décembre 2026."
+  }
+ ],
+ "genere_le": "2026-08-10"
+}
