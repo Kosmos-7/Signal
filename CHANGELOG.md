@@ -5,6 +5,36 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### « Chiffres publiés » s'ouvrait sur 2030
+
+La section ouvrait sur sa **dernière** colonne. En vue annuelle, la dernière
+colonne est la projection la plus lointaine — 2030 : le chiffre le moins sûr de
+tout le graphique était celui qu'on lisait en arrivant. Elle s'ouvre désormais
+sur l'année en cours, celle qui intéresse au premier coup d'œil et dont le
+consensus est le plus dense.
+
+**La colonne se cherche dans les données, jamais par un décalage compté à la
+main.** Selon la fiche, l'année courante est déjà publiée ou encore attendue, et
+les deux ne rangent pas leur millésime au même endroit — `fin` pour un exercice
+déposé, `exercice` pour une projection. Vérifié au navigateur : NVIDIA ouvre sur
+un FY26 **publié**, TSMC et ASML sur un FY26 **attendu**, avec la mention
+« consensus des analystes ». Quand deux exercices se closent la même année civile
+— un changement de calendrier fiscal —, c'est le plus récent qui décrit l'état
+courant.
+
+**Le trimestriel ne change pas** : douze colonnes y partagent trois ou quatre
+millésimes, « l'année en cours » n'y désigne aucune colonne en particulier, et le
+dernier trimestre reste le repère naturel.
+
+**Le test exécute le code livré, il ne le relit pas.** Le bloc est extrait
+d'`index.html` et rejoué dans node sur des colonnes fabriquées — la règle est une
+fonction pure de (colonnes, mode, année). Un test qui aurait cherché
+`new Date().getFullYear()` dans le fichier serait resté vert avec un décalage
+d'un cran dans la boucle. Les cas sont construits **à partir** de l'année
+courante et non d'un millésime écrit en dur, sans quoi ils tomberaient seuls au
+1<sup>er</sup> janvier. Neutraliser la règle fait échouer les trois cas concernés
+et laisse verts les deux qui attendaient la dernière colonne de toute façon.
+
 ### Quatre pages, quatre écarts sous l'en-tête
 
 Mesuré au navigateur, la distance entre l'en-tête et le premier titre valait

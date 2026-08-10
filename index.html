@@ -1341,8 +1341,16 @@ function fdLabel(iso,mode){
    impossible au doigt. On prend l'abscisse la plus proche, donc tout le slot
    est cliquable. Au doigt, la carte RESTE après qu'on a levé le doigt : on
    lève le doigt précisément pour lire ce qu'il cachait. */
-function releveSvg(svg,tip,xs,htmls,W){
+function releveSvg(svg,tip,xs,htmls,W,repos){
   if(!svg||!tip||!xs.length)return;
+  /* LA COLONNE DE REPOS EST UN ARGUMENT, PLUS UNE CONSTANTE. Elle valait
+     toujours la DERNIÈRE — ce qui, en vue annuelle, ouvre la fiche sur 2030,
+     la projection la plus lointaine et la moins sûre. Le propriétaire veut
+     l'année en cours (10/08/2026). L'appelant la calcule, parce que lui seul
+     sait ce que ses colonnes représentent : des exercices ou des trimestres.
+     Repli sur la dernière si l'index est absent ou hors bornes — une fiche
+     sans colonne pour l'année courante existe (série qui s'arrête avant). */
+  const r0=(repos==null||repos<0||repos>=xs.length)?xs.length-1:repos;
   const hi=svg.querySelector('.fd-hi');
   const demi=(xs.length>1?Math.abs(xs[1]-xs[0]):40)/2;
   const montre=i=>{
@@ -1358,10 +1366,10 @@ function releveSvg(svg,tip,xs,htmls,W){
     montre(b);};
   svg.addEventListener('pointermove',suit);
   svg.addEventListener('pointerdown',suit);
-  // La souris sort : retour au repos, c'est-à-dire à la DERNIÈRE colonne, pas
-  // au vide — même règle que le graphique de cours.
-  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType==='mouse')montre(xs.length-1);});
-  montre(xs.length-1);
+  // La souris sort : retour au repos, pas au vide — même règle que le
+  // graphique de cours. Le repos est désormais choisi par l'appelant.
+  svg.addEventListener('pointerleave',ev=>{if(ev.pointerType==='mouse')montre(r0);});
+  montre(r0);
 }
 function fdPrev(arr,i,mode){
   if(mode==='an')return arr[i-1]||null;
@@ -1814,7 +1822,30 @@ function fondaRender(s){
   /* Les écouteurs sont posés APRÈS innerHTML, à chaque rendu : la bascule
      Annuel/Trimestres réécrit tout le bloc, les anciens nœuds partent avec
      leurs écouteurs. Rien à détacher, donc, mais rien à oublier non plus. */
-  releveSvg(host.querySelector('#fd-bars'),host.querySelector('#fd-bars-tip'),relX,relH,W);
+  /* AU REPOS, LA FICHE S'OUVRE SUR L'ANNÉE EN COURS (demande du propriétaire,
+     10/08/2026). Elle s'ouvrait sur la dernière colonne, c'est-à-dire sur 2030
+     en vue annuelle — la prolongation la plus lointaine, celle qu'on assume le
+     moins. L'année en cours est le seul repère qui intéresse au premier coup
+     d'œil, et c'est aussi celle dont le consensus est le plus dense.
+     ELLE SE CHERCHE DANS LES COLONNES, jamais par un décalage compté à la main :
+     selon la fiche, l'année courante est déjà PUBLIÉE (exercice clos en 2026) ou
+     encore ATTENDUE (projection), et les deux ne rangent pas leur millésime au
+     même endroit — `fin` pour un exercice déposé, `exercice` pour une
+     projection. On prend la DERNIÈRE correspondance : quand un changement de
+     calendrier fiscal fait coexister deux exercices clos la même année civile,
+     c'est le plus récent qui décrit l'état courant.
+     EN TRIMESTRIEL, RIEN NE CHANGE : douze colonnes partagent trois ou quatre
+     millésimes, « l'année en cours » n'y désigne aucune colonne en particulier,
+     et le dernier trimestre reste le repère naturel. */
+  let fdRepos=cols.length-1;
+  if(FD_MODE==='an'){
+    const AN=String(new Date().getFullYear());
+    cols.forEach((o,i)=>{
+      const m=o.pr?String(o.v.exercice||''):String(o.v.fin||'').slice(0,4);
+      if(m===AN)fdRepos=i;
+    });
+  }
+  releveSvg(host.querySelector('#fd-bars'),host.querySelector('#fd-bars-tip'),relX,relH,W,fdRepos);
 }
 /* Graphique dédié à l'évolution du PER (annuel par nature, indépendant de la
    bascule Annuel/Trimestres). Axe en ANNÉES, pas en indices : un exercice sans

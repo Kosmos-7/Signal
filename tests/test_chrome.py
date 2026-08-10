@@ -308,6 +308,58 @@ try:
 except (OSError, subprocess.SubprocessError) as _e:
     print(f"  \u26a0\ufe0f  syntaxe JS non vérifiée (node indisponible : {type(_e).__name__})")
 
+# ── « CHIFFRES PUBLIÉS » S'OUVRE SUR L'ANNÉE EN COURS ───────────────────────
+# La colonne de repos valait toujours la dernière : en vue annuelle, la fiche
+# s'ouvrait donc sur 2030, la prolongation la plus lointaine et la moins sûre.
+#
+# LE TEST EXÉCUTE LE CODE LIVRÉ, il ne le relit pas. Le bloc est extrait
+# d'index.html et rejoué dans node sur des colonnes fabriquées — la règle est
+# une fonction pure de (colonnes, mode, année), donc elle se teste vraiment.
+# Un test qui aurait cherché « new Date().getFullYear() » dans le fichier aurait
+# été vert avec un décalage d'un cran dans la boucle.
+#
+# LES CAS SONT CONSTRUITS À PARTIR DE L'ANNÉE COURANTE, jamais d'un millésime
+# écrit en dur : sinon ce test tomberait tout seul au 1er janvier prochain.
+print("\n— La section « Chiffres publiés » s'ouvre-t-elle sur l'année en cours ? —")
+_m = re.search(r"let fdRepos=cols\.length-1;.*?(?=\n\s*releveSvg\()",
+               SRC["index.html"], re.S)
+check("le calcul de la colonne de repos est extractible", _m is not None)
+if _m:
+    _CAS = [
+        ("l'année en cours est une PROJECTION", "an",
+         "[{v:{fin:(A-2)+'-12-31'}},{v:{fin:(A-1)+'-12-31'}},"
+         "{v:{exercice:''+A},pr:1},{v:{exercice:''+(A+1)},pr:1}]", 2),
+        ("l'année en cours est DÉJÀ PUBLIÉE", "an",
+         "[{v:{fin:(A-1)+'-12-31'}},{v:{fin:A+'-06-30'}},{v:{exercice:''+(A+1)},pr:1}]", 1),
+        ("deux exercices clos la même année : le plus récent", "an",
+         "[{v:{fin:A+'-01-03'}},{v:{fin:A+'-12-31'}},{v:{exercice:''+(A+1)},pr:1}]", 1),
+        ("aucune colonne pour l'année en cours : repli sur la dernière", "an",
+         "[{v:{fin:(A-3)+'-12-31'}},{v:{fin:(A-2)+'-12-31'}}]", 1),
+        ("en trimestriel, le dernier trimestre reste le repère", "tr",
+         "[{v:{fin:A+'-03-31'}},{v:{fin:A+'-06-30'}},{v:{fin:A+'-09-30'}}]", 2),
+    ]
+    try:
+        import subprocess, tempfile                                # noqa: E402
+        for _nom, _mode, _cols, _attendu in _CAS:
+            _js = (f"const A=new Date().getFullYear();const FD_MODE={_mode!r};"
+                   f"const cols={_cols};\n{_m.group(0)}\nconsole.log(fdRepos);")
+            with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False,
+                                             encoding="utf-8") as _f:
+                _f.write(_js)
+                _tmp = _f.name
+            _r = subprocess.run(["node", _tmp], capture_output=True, text=True)
+            os.unlink(_tmp)
+            _got = _r.stdout.strip()
+            check(_nom, _got == str(_attendu),
+                  f"obtenu {_got or _r.stderr.strip()[:80]!r}, attendu {_attendu}")
+    except (OSError, subprocess.SubprocessError) as _e:
+        print(f"  ⚠️  colonne de repos non vérifiée (node indisponible : {type(_e).__name__})")
+# Et le relevé doit accepter cette colonne : sans le paramètre, le calcul
+# ci-dessus serait mort-né.
+check("le relevé reçoit bien la colonne de repos",
+      re.search(r"function releveSvg\([^)]*,\s*repos\s*\)", SRC["index.html"]) is not None
+      and "releveSvg(" in SRC["index.html"] and "fdRepos)" in SRC["index.html"])
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:
