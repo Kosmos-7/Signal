@@ -29,7 +29,13 @@ jobs:
       - name: Installer les dépendances
         run: pip install -r requirements.txt
       - name: Sonder
-        run: python tools/sonde_cotation.py --paires "${{ inputs.paires }}"
+        # Par l'environnement, jamais par interpolation dans le script. Les
+        # guillemets ne suffisaient pas : une entrée contenant elle-même un
+        # guillemet referme la chaîne et la suite s'exécute. C'est la règle écrite
+        # dans photos-marques.yml, née d'un « | » pris pour un tube.
+        env:
+          PAIRES: ${{ inputs.paires }}
+        run: python tools/sonde_cotation.py --paires "$PAIRES"
       - name: Publier le rapport en artefact
         if: always()
         uses: actions/upload-artifact@v4

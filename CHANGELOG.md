@@ -5,6 +5,49 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Treize entrées de dispatch tombaient dans un shell
+
+`photos-marques.yml` porte la leçon, écrite après coup : « les `|` de
+`TICKER=a|b` avaient été pris pour des tubes et bash avait tenté d'exécuter les
+termes comme des commandes. Au-delà du bug, c'est une injection : n'importe
+quelle valeur d'entrée s'exécutait. » La parade — passer l'entrée par
+l'environnement et la citer — y est appliquée à `termes`, **et oubliée deux
+lignes plus bas** pour `limite` et `par_societe`, qui sont `type: string`
+exactement comme elle.
+
+Treize sites dans huit workflows étaient dans ce cas, dont `sonde-cotation.yml`
+où les guillemets donnaient une fausse impression de sûreté : une entrée
+contenant elle-même un guillemet referme la chaîne et la suite s'exécute. Tous
+passent désormais par l'environnement.
+
+**Quatre autres sites restent interpolés, et c'est écrit.** Une expression
+`${{ inputs.x && '--drapeau' || '' }}` ne rend jamais l'entrée : elle rend l'un
+de deux littéraux écrits dans le fichier. Une entrée `type: boolean` est rendue
+`true` ou `false` par GitHub, jamais du texte libre. Les interdire aurait été
+tracer une règle au hasard plutôt qu'à la mesure.
+
+**Un test remplace le commentaire.** Il lit les dix-huit workflows par
+expressions régulières — surtout pas par un parseur YAML, que le runner
+n'installe pas et dont l'import tuerait la suite comme `PIL` l'a fait — et
+échoue sur toute entrée libre interpolée dans un `run:`. Éprouvé en
+réintroduisant une interpolation nue : il nomme le fichier et la ligne.
+
+### Une fonction morte, une fausse morte
+
+`cross_label` a été retirée : aucun appelant, et son format exact
+(`Golden Cross · 12j`) n'apparaît dans aucune donnée publiée ni archivée. La
+seule occurrence dans le dépôt est un exemple pédagogique en dur dans
+`apprendre.html`.
+
+`cross_score`, sa voisine immédiate, a failli partir avec elle. Elle n'a elle non
+plus **aucun appelant dans le dépôt** — parce que c'est une surface publique :
+`.claude/skills/portfolio-analyst/methodology.md` prescrit
+`from screener import score_ticker, detect_cross, cross_score, calcul_regression`
+pour qu'une analyse manuelle note un titre exactement comme le screener. Le
+premier passage l'avait classée morte, sur un `grep` filtré par extension qui ne
+regardait pas les `.md`. Un commentaire le dit maintenant à l'endroit où le
+prochain détecteur de code mort la désignera.
+
 ### Actualités passait sous l'en-tête : un motif recopié à moitié
 
 Le texte de la page Actualités démarrait trop haut par rapport aux trois autres.

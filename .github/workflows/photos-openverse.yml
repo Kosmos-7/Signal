@@ -45,12 +45,17 @@ jobs:
         run: python tools/photos_openverse.py --diag
       - name: Chercher sur Openverse
         if: ${{ inputs.diag != true && inputs.diag != 'true' }}
+        # `limite` et `par_societe` rejoignent `tickers` dans l'environnement :
+        # toutes trois sont `type: string`, toutes trois portent du texte libre.
+        # Seule la première s'en protégeait.
         env:
           TICKERS: ${{ inputs.tickers }}
+          LIMITE: ${{ inputs.limite }}
+          PAR_SOCIETE: ${{ inputs.par_societe }}
         run: |
           python tools/photos_openverse.py \
-            --limite ${{ inputs.limite || '0' }} \
-            --par-societe ${{ inputs.par_societe || '2' }} \
+            --limite "${LIMITE:-0}" \
+            --par-societe "${PAR_SOCIETE:-2}" \
             ${TICKERS:+--tickers "$TICKERS"}
       - name: Publier le rapport
         if: ${{ always() && inputs.diag != true && inputs.diag != 'true' }}

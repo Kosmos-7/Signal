@@ -55,12 +55,19 @@ jobs:
         # shell. Les « | » de « TICKER=a|b » avaient ete pris pour des tubes et
         # bash avait tente d'executer les termes comme des commandes. Au dela du
         # bug, c'est une injection : n'importe quelle valeur d'entree s'executait.
+        # LA MÊME RÈGLE VAUT POUR LES NOMBRES, et elle manquait juste en dessous :
+        # « limite » et « par_societe » sont déclarées `type: string`, donc elles
+        # portent du texte libre exactement comme « termes ». Elles étaient
+        # interpolées telles quelles dans le shell pendant que la ligne du dessus
+        # s'en protégeait. Un motif appliqué à moitié ne protège pas à moitié.
         env:
           TERMES: ${{ inputs.termes }}
+          LIMITE: ${{ inputs.limite }}
+          PAR_SOCIETE: ${{ inputs.par_societe }}
         run: |
           python tools/photos_marques.py \
-            --limite ${{ inputs.limite || '0' }} \
-            --par-societe ${{ inputs.par_societe || '3' }} \
+            --limite "${LIMITE:-0}" \
+            --par-societe "${PAR_SOCIETE:-3}" \
             ${{ (inputs.ameliorer == true || inputs.ameliorer == 'true') && '--ameliorer' || '' }} \
             ${{ (inputs.lieux == true || inputs.lieux == 'true') && '--lieux' || '' }} \
             ${{ (inputs.scenes == true || inputs.scenes == 'true') && '--scenes' || '' }} \

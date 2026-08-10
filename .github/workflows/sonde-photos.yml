@@ -28,7 +28,12 @@ jobs:
         with:
           python-version: '3.13'
       - name: Sonder Commons
-        run: python tools/sonde_photos_titres.py --limite ${{ inputs.limite || '0' }}
+        # Par l'environnement, jamais par interpolation dans le script : `limite`
+        # est `type: string` et porte du texte libre qu'un shell exécuterait
+        # (règle écrite dans photos-marques.yml, née d'un « | » pris pour un tube).
+        env:
+          LIMITE: ${{ inputs.limite }}
+        run: python tools/sonde_photos_titres.py --limite "${LIMITE:-0}"
       - name: Publier le rapport
         if: always()
         uses: actions/upload-artifact@v4

@@ -239,6 +239,16 @@ def _cross_default():
         "slope_mm21_pct": 0.0, "volume_confirmed": False,
     }
 
+# AUCUN APPELANT DANS LE DÉPÔT, ET C'EST NORMAL : NE PAS SUPPRIMER.
+# `cross_score` est une SURFACE PUBLIQUE, documentée dans
+# .claude/skills/portfolio-analyst/methodology.md, qui prescrit
+# `from screener import score_ticker, detect_cross, cross_score,
+# calcul_regression` pour que l'analyse manuelle note un titre exactement comme
+# le screener. Tout détecteur de code mort la désignera donc, puisqu'elle n'est
+# appelée nulle part ICI — un audit s'y est laissé prendre le 10/08/2026, sur un
+# grep filtré par extension qui ne regardait pas les .md.
+# `cross_label`, sa voisine, a été retirée le même jour : elle, personne ne
+# l'appelait ni ne la documentait.
 def cross_score(cross_info, rsi_val):
     """
     Score du croisement MM21/MM200 (0–20 pts).
@@ -278,19 +288,6 @@ def cross_score(cross_info, rsi_val):
         pts = 4  # inconnu → neutre prudent
 
     return pts
-
-def cross_label(regime, days, cross_type):
-    """Label lisible pour l'affichage frontend."""
-    if regime == "golden":
-        if days <= 10:  return f"Golden Cross · {days}j — Signal fort"
-        if days <= 30:  return f"Golden Cross · {days}j"
-        if days <= 60:  return f"Golden Cross confirmé · {days}j"
-        return f"Régime haussier · {days}j"
-    elif regime == "death":
-        if days <= 30:  return f"Death Cross · {days}j — Baissier"
-        if days <= 90:  return f"Death Cross confirmé · {days}j"
-        return f"Régime baissier · {days}j"
-    return "Données insuffisantes"
 
 # ── RÉGRESSION LOG-LINÉAIRE ───────────────────────────────────────────────────
 def calcul_regression(close_series, holdout_days=20):

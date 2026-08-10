@@ -192,6 +192,50 @@ check("un refus est retourné, donc journalisé (jamais silencieux)", len(refuse
 # ── Garde anti-oubli du workflow CI ─────────────────────────────────────────
 # La commande n'est PAS recopiée ici : on l'extrait du YAML, sinon le test
 # validerait une garde qui aurait pu diverger de celle réellement exécutée.
+print("\n— Aucune entrée de dispatch ne tombe dans un shell —")
+# POURQUOI CETTE GARDE EXISTE. photos-marques.yml porte la leçon, écrite après
+# coup : « les "|" de "TICKER=a|b" avaient été pris pour des tubes et bash avait
+# tenté d'exécuter les termes comme des commandes. Au-delà du bug, c'est une
+# injection : n'importe quelle valeur d'entrée s'exécutait. » La parade — passer
+# l'entrée par l'environnement et la citer — y était appliquée à `termes`… et
+# oubliée DEUX LIGNES PLUS BAS pour `limite` et `par_societe`, qui sont
+# `type: string` exactement comme elle. Treize sites dans huit workflows étaient
+# dans ce cas le 10/08/2026. Un motif appliqué à moitié ne protège pas à moitié,
+# et un commentaire ne s'exécute pas.
+#
+# CE QUI EST TOLÉRÉ, ET POURQUOI. Une expression du type
+# `${{ inputs.x && '--drapeau' || '' }}` ne rend jamais l'entrée : elle rend l'un
+# de deux littéraux écrits dans le fichier. Une entrée `type: boolean` est rendue
+# `true` ou `false` par GitHub, jamais du texte libre. Ces deux formes restent
+# donc interpolées, et le test le dit plutôt que de les interdire au hasard.
+#
+# LECTURE PAR EXPRESSIONS RÉGULIÈRES, PAS PAR PARSEUR YAML : le workflow de tests
+# n'installe RIEN, et `pyyaml` n'est pas garanti sur le runner. Importer un
+# parseur ferait mourir la suite à l'import, exactement comme `PIL` l'a fait.
+_WF = os.path.join(RACINE, ".github", "workflows")
+_fichiers = sorted(glob.glob(os.path.join(_WF, "*.yml")))
+check("des workflows à inspecter", len(_fichiers) >= 10, f"{len(_fichiers)} trouvés")
+_nus = []
+for _p in _fichiers:
+    _src = open(_p, encoding="utf-8").read()
+    _types = dict(re.findall(r"^\s{6}(\w+):\s*\n(?:.*\n)*?\s{8}type:\s*(\w+)", _src, re.M))
+    _dans, _ind = False, 0
+    for _i, _l in enumerate(_src.splitlines(), 1):
+        if re.match(r"\s*run:", _l):
+            _dans, _ind = True, len(_l) - len(_l.lstrip())
+        elif _dans and _l.strip() and (len(_l) - len(_l.lstrip())) <= _ind:
+            _dans = False
+        if not _dans:
+            continue
+        for _nom in re.findall(r"\$\{\{\s*(?:inputs|github\.event)\.([\w.]+)", _l):
+            if re.search(r"\.%s\s*[=!]=|\.%s\s*&&\s*'" % (re.escape(_nom), re.escape(_nom)), _l):
+                continue                      # rend un littéral écrit dans le fichier
+            if _types.get(_nom) == "boolean":
+                continue                      # GitHub rend true/false, jamais du texte
+            _nus.append(f"{os.path.basename(_p)}:L{_i} {_nom}")
+check("aucune entrée libre n'est interpolée dans un run:",
+      not _nus, f"{len(_nus)} site(s) — " + ", ".join(_nus[:6]))
+
 print("\n— Garde anti-oubli du CI (dépôt git jetable) —")
 YML = open(os.path.join(RACINE, ".github/workflows/watchlist.yml"), encoding="utf-8").read()
 bloc = re.search(r"^( +)OUBLIES=\$\(.*?^\1fi$", YML, re.S | re.M)

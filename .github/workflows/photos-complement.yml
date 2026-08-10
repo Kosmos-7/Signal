@@ -34,10 +34,18 @@ jobs:
           python-version: '3.13'
       - run: pip install --quiet Pillow
       - name: Chercher les photos manquantes
+        # Les entrées passent par l'environnement, jamais par interpolation dans
+        # le script : `limite` et `par_societe` sont déclarées `type: string`,
+        # donc elles portent du texte libre qu'un shell exécuterait. C'est la
+        # règle déjà écrite dans photos-marques.yml, où un « | » dans une entrée
+        # avait été pris pour un tube et exécuté.
+        env:
+          LIMITE: ${{ inputs.limite }}
+          PAR_SOCIETE: ${{ inputs.par_societe }}
         run: |
           python tools/photos_complement.py \
-            --limite ${{ inputs.limite || '0' }} \
-            --par-societe ${{ inputs.par_societe || '2' }}
+            --limite "${LIMITE:-0}" \
+            --par-societe "${PAR_SOCIETE:-2}"
       - name: Publier le rapport
         if: always()
         uses: actions/upload-artifact@v4

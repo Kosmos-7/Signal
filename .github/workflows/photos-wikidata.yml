@@ -38,8 +38,15 @@ jobs:
       - name: Install Pillow
         run: pip install --quiet Pillow
       - name: Interroger Wikidata
+        # `limite` est `type: string` : elle porte du texte libre qu'un shell
+        # exécuterait, elle passe donc par l'environnement (règle de
+        # photos-marques.yml). Les deux drapeaux ci-dessous sont des booléens qui
+        # rendent un littéral figé — '--telecharger' ou rien — et ne peuvent
+        # porter aucune entrée : ils restent interpolés sans risque.
+        env:
+          LIMITE: ${{ inputs.limite }}
         run: |
-          python tools/photos_wikidata.py --limite ${{ inputs.limite || '0' }} \
+          python tools/photos_wikidata.py --limite "${LIMITE:-0}" \
             ${{ inputs.telecharger && '--telecharger' || '' }} \
             ${{ inputs.depuis_rapport && '--depuis-rapport' || '' }}
       - name: Publier le rapport
