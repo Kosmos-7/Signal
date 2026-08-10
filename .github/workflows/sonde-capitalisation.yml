@@ -1,0 +1,60 @@
+# .github/workflows/sonde-capitalisation.yml
+# Demande à Yahoo ce qu'il rend vraiment d'une capitalisation, pour les fiches
+# qui publient une marge de flux disponible sans son rendement. Elle ne branche
+# rien : elle répond à « que sert la source, et par quel chemin ? » avant qu'on
+# choisisse un repli. Un premier repli posé au jugé le 09/08 ne se déclenche
+# pas ; un deuxième deviné serait une troisième supposition.
+#
+# Elle existe comme workflow parce que le proxy de développement bloque Yahoo.
+name: Sonder les capitalisations manquantes
+
+on:
+  workflow_dispatch:
+    inputs:
+      cibles:
+        description: "TICKER,TICKER (vide = dérivées des fiches publiées)"
+        type: string
+        default: ""
+      temoins:
+        description: "Nombre de témoins par place de cotation"
+        type: string
+        default: "2"
+
+permissions:
+  contents: write
+
+jobs:
+  sonde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+      # Passés en variables d'environnement et non interpolés dans le shell :
+      # une entrée de dispatch ne doit jamais pouvoir injecter de commande.
+      - name: Sonder
+        env:
+          CIBLES: ${{ inputs.cibles }}
+          TEMOINS: ${{ inputs.temoins }}
+        run: python tools/sonde_capitalisation.py --cibles "$CIBLES" --temoins "${TEMOINS:-2}"
+      - name: Publier le rapport en artefact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonde-capitalisation
+          path: sonde_capitalisation.json
+          retention-days: 7
+      # Le rapport est aussi committé sur la branche sondée : c'est lui qu'on
+      # relit pour décider, et un artefact expire au bout de sept jours.
+      - name: Commiter le rapport pour analyse
+        run: |
+          git config user.name "Signal Bot"
+          git config user.email "bot@signal.fr"
+          git add sonde_capitalisation.json || true
+          git diff --cached --quiet || \
+            git commit -m "sonde: ce que la source rend d'une capitalisation (brut) [skip ci]"
+          git push origin HEAD:${{ github.ref_name }} || true
