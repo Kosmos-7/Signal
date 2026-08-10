@@ -5,6 +5,59 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### L3Harris : ce n'est pas le changement d'exercice qui tronque, c'est le filtre
+
+La série de L3Harris s'arrête en 2019 pendant que ses trimestres vont jusqu'en
+2026, et le registre attribuait la troncature au changement d'exercice fiscal.
+Le changement est réel — juin devient décembre à la fusion de 2019 — mais il
+n'explique rien à lui seul. **La cause est le filtre de clôture majoritaire**,
+qui écarte tout exercice dont la clôture s'éloigne de plus d'un mois du mois
+majoritaire. Les dix exercices juin/juillet de 2008 à 2019 font la majorité :
+c'est donc le régime POSTÉRIEUR, décembre, à six mois d'écart, qui est jeté. Le
+filtre garde l'ancien monde et supprime le nouveau.
+
+Son propre commentaire énonçait l'hypothèse qu'il viole : « un vrai changement
+de calendrier fiscal reste à ±1 mois, il passe ». Vrai pour un décalage de
+quelques jours, faux pour une fusion. Et l'écart de marge déjà enregistré au
+registre — 7,3 % affiché, dernière barre à 13,9 % — n'est pas un défaut distinct
+mais la **conséquence** de cette troncature : la marge vient de l'exercice réel,
+la barre de 2019.
+
+**La règle vivait en double** et n'a plus qu'une source. Recopiée dans
+`edgar.construire_fonda` et dans `screener.fusionner_fonda`, c'est la panne des
+listes recopiées de `_bouchons.py` appliquée à un filtre. L'extraction a été
+vérifiée sans effet : les 148 blocs publiés ressortent identiques au caractère
+près. Ses limites sont désormais écrites là où elle est écrite, et un test fige
+le comportement d'aujourd'hui pour qu'un correctif ait à le regarder en face —
+trancher demande de savoir ce que le greffe rend après 2019, et cette source est
+bloquée ici.
+
+### Trois barres fausses que rien ne regardait
+
+Les trois autres défauts de L3Harris — 102, 189 et 420 M$ de chiffre d'affaires
+entre des exercices à 5 005 et 5 012 — sont une erreur d'échelle au dépôt XBRL,
+que la SEC ne corrige pas. **Aucun contrôle ne les voyait.** Le garde existant
+écarte un résultat net « cent fois plus petit que ses DEUX voisins » et n'a pas
+de symétrique sur le chiffre d'affaires ; il serait de toute façon aveugle ici,
+deux des trois valeurs fausses étant voisines l'une de l'autre.
+
+**Trouver la bonne forme a demandé trois essais, et les deux premiers sont
+instructifs.** Comparer chaque chiffre d'affaires à la médiane de sa propre série
+dénonce neuf titres — Meta 2010, Tesla 2009-2012, PDD, Regeneron : des jeunesses
+parfaitement réelles. Une règle de voisinage immédiat, elle, ne voit pas un creux
+de trois ans. Ce qui distingue l'erreur de la croissance n'est pas d'être bas,
+c'est d'être **bas entre deux hauts** : une société qui grandit ne redescend pas.
+Le contrôle cherche donc un creux INTÉRIEUR, encadré des deux côtés par des
+exercices dix fois plus gros. Sur les 148 fiches, cette forme ne désigne que
+L3Harris.
+
+Les zéros en sont exclus, et c'est écrit plutôt que tu : zéro n'est pas un ordre
+de grandeur en dessous, il n'a pas d'échelle. AST SpaceMobile publie 0 en 2023
+entre 14 et 4, et c'est une société pré-revenu dont le chiffre d'affaires est
+réellement nul cette année-là. Le détecteur se teste lui-même sur ces six
+formes : une sentinelle dont on ne connaît pas les fausses alarmes n'en est pas
+une.
+
 ### Les quinze fiches « inatteignables » étaient la page d'accueil
 
 Le registre des défauts connus portait quinze fiches complètes — note, série

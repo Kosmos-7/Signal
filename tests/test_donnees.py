@@ -81,7 +81,24 @@ def sentinelle(nom, cas, tolerance, total):
 # retire jamais rien.
 CONNUS = {
     "la marge d'exercice vient de la série que le graphique dessine": {
-        "LHX": "changement d'exercice fiscal en 2019, série tronquée — tâche #83",
+        # CAUSE IDENTIFIÉE le 10/08 : ce n'est pas le changement d'exercice qui
+        # tronque la série, c'est le filtre de clôture majoritaire
+        # (edgar.filtrer_cloture_majoritaire) qui le prend pour un artefact.
+        # L3Harris est passée de juin à décembre à la fusion de 2019 ; les dix
+        # exercices juin/juillet font la majorité, donc c'est le NOUVEAU régime
+        # qui est écarté. La marge affichée est celle de l'exercice réel, la
+        # dernière barre celle de 2019 : l'écart en découle. Tâche #83.
+        "LHX": "filtre de clôture majoritaire : le régime post-2019 est écarté "
+               "comme un fantôme — tâche #83",
+    },
+    # Les trois barres fausses de L3Harris, distinctes de la troncature
+    # ci-dessus : erreur d'échelle au dépôt XBRL, que la SEC ne corrige pas. La
+    # cause exacte (quel concept a produit 102) demande de lire le greffe, que
+    # le proxy de développement bloque. Tâche #83.
+    "aucun chiffre d'affaires ne plonge d'un ordre de grandeur entre deux "
+    "exercices normaux": {
+        "LHX": "2010:102, 2011:189, 2013:420 entre 5 005 et 5 012 — erreur "
+               "d'échelle au dépôt XBRL, tâche #83",
     },
     "une fiche qui publie une marge de flux publie aussi son rendement": {
         "ALV.DE": "capitalisation rendue par intermittence par la source — tâche #84",
@@ -348,6 +365,70 @@ for _t, _d in FICHES.items():
         _decales[_t] = f"{_m} vs {_attendu} ({_an[-1]['fin'][:7]})"
 check_connus("la marge d'exercice vient de la série que le graphique dessine",
              _decales)
+
+# ── UN CREUX D'ORDRE DE GRANDEUR QUI SE REFERME EST UNE ERREUR DE TAGAGE ─────
+# Trois barres de L3Harris valent 102, 189 et 420 M$ de chiffre d'affaires entre
+# des exercices à 5 005 et 5 012 : une erreur d'échelle au dépôt XBRL, que la
+# SEC ne corrige pas. Aucun contrôle ne la voyait.
+#
+# LE GARDE EXISTANT NE POUVAIT PAS LA VOIR : edgar.py écarte un résultat net
+# « 100 fois plus petit que ses DEUX voisins », et il n'a pas de symétrique sur
+# le chiffre d'affaires. Il serait de toute façon aveugle ici, deux des trois
+# valeurs fausses étant voisines l'une de l'autre — une règle de voisinage
+# immédiat ne voit pas un creux de trois ans.
+#
+# CE QUI DISTINGUE L'ERREUR DE LA CROISSANCE, et qui a demandé trois essais :
+# comparer chaque CA à la médiane de sa propre série dénonce Meta 2010, Tesla
+# 2009-2012, PDD, Regeneron — neuf titres dont la jeunesse est RÉELLE. Une
+# société qui grandit ne redescend pas. Le signal n'est donc pas « bas », c'est
+# « bas ENTRE DEUX HAUTS » : un creux INTÉRIEUR, encadré des deux côtés par des
+# exercices dix fois plus gros. Sur les 148 fiches publiées, cette forme ne
+# désigne que L3Harris.
+#
+# LES ZÉROS SONT HORS SUJET, et c'est écrit plutôt que passé sous silence :
+# zéro n'est pas « un ordre de grandeur en dessous », il n'a pas d'échelle. AST
+# SpaceMobile publie 0 en 2023 entre 14 et 4 — une société pré-revenu dont le
+# chiffre d'affaires est réellement nul cette année-là. La question du zéro est
+# celle du trou compté zéro, et elle se traite ailleurs.
+def _creux_interieurs(an, facteur=10):
+    """Runs de CA strictement positifs, `facteur` fois sous leurs DEUX bornes."""
+    ca = [e.get("ca") for e in an]
+    res, k, n = [], 1, len(ca)
+    while k < n:
+        avant = ca[k - 1]
+        if not avant or not ca[k] or ca[k] <= 0 or ca[k] * facteur >= avant:
+            k += 1
+            continue
+        deb = k
+        while k < n and ca[k] and ca[k] > 0 and ca[k] * facteur < avant:
+            k += 1
+        apres = ca[k] if k < n else None
+        if apres and all(ca[x] * facteur < apres for x in range(deb, k)):
+            res.append((deb, k - 1))
+    return res
+
+
+_echelle = {}
+for _t, _d in FICHES.items():
+    _an = [e for e in ((_d.get("fonda") or {}).get("an") or []) if e.get("ca") is not None]
+    for _deb, _fin in _creux_interieurs(_an):
+        _echelle[_t] = ", ".join(f"{_an[x]['fin'][:4]}:{_an[x]['ca']}"
+                                 for x in range(_deb, _fin + 1))
+check_connus("aucun chiffre d'affaires ne plonge d'un ordre de grandeur "
+             "entre deux exercices normaux", _echelle)
+# Le détecteur se teste lui-même : une sentinelle dont on ne connaît pas les
+# fausses alarmes n'est pas une sentinelle. Les formes viennent des titres réels
+# sur lesquels les deux premières versions de la règle se sont trompées.
+_A = lambda *v: [{"fin": f"20{10 + i:02d}-12-31", "ca": x} for i, x in enumerate(v)]
+for _nom, _serie, _attendu in (
+    ("un creux intérieur est vu (forme LHX)",          _A(5000, 100, 180, 400, 5100), True),
+    ("une croissance réelle ne l'est pas (forme TSLA)", _A(112, 117, 204, 413, 2000), False),
+    ("un début de série bas ne l'est pas (forme META)", _A(50, 5000, 5100, 5200), False),
+    ("une fin de série basse ne l'est pas",             _A(5000, 5100, 5200, 50), False),
+    ("un zéro n'est pas un creux d'échelle (ASTS)",     _A(14, 0, 4), False),
+    ("une baisse de moitié n'en est pas un",            _A(5000, 2500, 5100), False),
+):
+    check(_nom, bool(_creux_interieurs(_serie)) == _attendu)
 
 # ── 5. SENTINELLES DE VRAISEMBLANCE ────────────────────────────────────────
 print("\n— Bandes de vraisemblance : une exception est permise, une dérive non —")

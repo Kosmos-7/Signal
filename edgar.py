@@ -177,6 +177,47 @@ def fusion_series(series_liste):
     return out
 
 
+def filtrer_cloture_majoritaire(an):
+    """Écarte les exercices dont la clôture s'éloigne du mois majoritaire. Pure.
+
+    POURQUOI. Un frame annuel dont la fin s'écarte de plus d'un mois du mois de
+    clôture majoritaire est un artefact : AMZN a déposé un CY2026 arrêté au
+    30 juin, un « exercice » fantôme qui décalait les étiquettes prévisionnelles.
+    Un changement de calendrier de faible amplitude (CDNS : début janvier → fin
+    décembre) reste à ±1 mois et passe.
+
+    UNE SEULE COPIE, ET C'EST DÉLIBÉRÉ. Cette règle vivait en double — ici et
+    dans `fusionner_fonda`, qui la rejoue sur l'union des runs. Deux copies
+    d'une règle sont deux règles qui divergent : c'est la leçon que
+    `tests/_bouchons.py` a payée sur une liste de dépendances, et elle vaut
+    aussi pour un filtre.
+
+    CE QU'ELLE NE SAIT PAS FAIRE, ET QUI EST CONNU (tâche #83). Un VRAI
+    changement d'exercice fiscal de grande amplitude lui échappe, et elle
+    tranche alors du mauvais côté : L3Harris est passée d'une clôture en juin à
+    une clôture en décembre lors de la fusion de 2019. Les dix exercices
+    juin/juillet de 2008 à 2019 forment la majorité, donc TOUS les exercices
+    postérieurs — décembre, écart de 6 mois — sont écartés, et la série
+    publiée s'arrête en 2019 alors que les trimestres vont jusqu'en 2026. La
+    marge d'exercice affichée sur la fiche (celle du dernier exercice réel)
+    ne correspond alors plus à la dernière barre du graphique : c'est l'entrée
+    LHX du registre des défauts connus, et elle est une CONSÉQUENCE de ce
+    filtre, pas une cause distincte.
+
+    Distinguer un fantôme isolé d'un vrai changement de régime demande de savoir
+    ce que le greffe rend réellement après 2019 — source bloquée par le proxy de
+    développement. La règle n'est donc pas modifiée au jugé."""
+    if len(an) < 3:
+        return an
+    mois = [int(e["fin"][5:7]) for e in an]
+    maj = max(set(mois), key=mois.count)
+
+    def ecart(m):
+        return min(abs(m - maj), 12 - abs(m - maj))
+
+    return [e for e in an if ecart(int(e["fin"][5:7])) <= 1]
+
+
 def construire_fonda(ca_fr, rn_fr, eps_fr, max_an=MAX_EXERCICES,
                      max_tr=MAX_TRIMESTRES):
     """Bloc {an, tr} au format fonda (millions entiers, src:"edgar").
@@ -214,13 +255,8 @@ def construire_fonda(ca_fr, rn_fr, eps_fr, max_an=MAX_EXERCICES,
     # Cohérence de clôture fiscale : un frame annuel dont la fin s'écarte de
     # plus d'un mois du mois de clôture majoritaire est un artefact (AMZN :
     # frame CY2026 arrêté au 30 juin, un « exercice » fantôme qui décalait
-    # les étiquettes prévisionnelles). Un vrai changement de calendrier
-    # fiscal (CDNS : début janvier → fin décembre) reste à ±1 mois, il passe.
-    if len(an) >= 3:
-        mois = [int(e["fin"][5:7]) for e in an]
-        maj = max(set(mois), key=mois.count)
-        ecart = lambda m: min(abs(m - maj), 12 - abs(m - maj))
-        an = [e for e in an if ecart(int(e["fin"][5:7])) <= 1]
+    # les étiquettes prévisionnelles).
+    an = filtrer_cloture_majoritaire(an)
     # Résultat net aberrant : un RN positif 100 fois plus petit que ses DEUX
     # voisins est une erreur de tagage (SCHW 2021 déposé à 6 M$ au lieu de
     # ~5 855), pas une mauvaise année — une vraie chute de cette ampleur

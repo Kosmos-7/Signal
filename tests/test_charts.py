@@ -1555,6 +1555,37 @@ check("GBp reste traité comme GBP tant que chaque grandeur n'est pas mesurée",
 check("deux vraies mêmes devises ne donnent toujours rien",
       screener.taux_historique("USD", "USD") is None)
 
+print("\n— Clôture fiscale : le fantôme, le décalage, et le vrai changement —")
+# La règle vivait en DOUBLE, recopiée dans edgar.construire_fonda et dans
+# screener.fusionner_fonda. Elle n'a plus qu'une source ; ces tests la visent
+# directement, là où elle est écrite.
+_filtre = screener.edgar.filtrer_cloture_majoritaire
+_dec = [{"fin": f"{a}-12-31", "ca": 100, "rn": 10} for a in range(2016, 2026)]
+check("un exercice fantôme isolé est écarté (AMZN, frame CY2026 arrêté en juin)",
+      [e["fin"] for e in _filtre(_dec + [{"fin": "2026-06-30", "ca": 50, "rn": 5}])]
+      == [e["fin"] for e in _dec])
+check("un décalage de calendrier de ±1 mois passe (CDNS : janvier → décembre)",
+      len(_filtre(_dec + [{"fin": "2026-01-02", "ca": 100, "rn": 10}])) == len(_dec) + 1)
+check("sous trois exercices, la règle ne tranche pas",
+      len(_filtre([{"fin": "2024-12-31"}, {"fin": "2025-06-30"}])) == 2)
+# LIMITE CONNUE, ET FIGÉE ICI EXPRÈS — tâche #83. Un VRAI changement d'exercice
+# fiscal de grande amplitude fait basculer la règle du mauvais côté : L3Harris
+# est passée d'une clôture en juin à une clôture en décembre à la fusion de
+# 2019. Les dix exercices juin/juillet forment la majorité, donc c'est le
+# NOUVEAU régime qui est écarté et la série s'arrête en 2019 — pendant que les
+# trimestres vont jusqu'en 2026 et que la marge affichée est celle de
+# l'exercice réel. Ce test ne dit pas que c'est bien : il dit que c'est le
+# comportement d'aujourd'hui, pour qu'un correctif ait à le regarder en face.
+# Le trancher demande de savoir ce que le greffe rend après 2019, et cette
+# source est bloquée par le proxy de développement.
+_lhx = ([{"fin": f"{a}-06-30", "ca": 5000, "rn": 500} for a in range(2010, 2020)]
+        + [{"fin": f"{a}-12-31", "ca": 20000, "rn": 1500} for a in range(2020, 2026)])
+_apres = _filtre(_lhx)
+check("limite connue (#83) : un changement d'exercice de six mois écarte le "
+      "NOUVEAU régime, pas l'ancien",
+      len(_apres) == 10 and all(e["fin"][5:7] == "06" for e in _apres),
+      f"{len(_apres)} exercices retenus, mois {sorted({e['fin'][5:7] for e in _apres})}")
+
 print("\n— La fusion ne perd rien de ce qui est déjà publié —")
 # LA PANNE DU 07/08, ÉPROUVÉE SUR LES DONNÉES RÉELLES. `fusionner_fonda`
 # reconstruit le bloc de zéro : tout champ qu'elle ne recopie pas explicitement
