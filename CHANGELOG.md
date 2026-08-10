@@ -5,6 +5,32 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### « Trois décisions d'achat » quand le journal n'en montrait qu'une
+
+Le texte hebdomadaire du 10 août annonçait trois achats — BKNG, ADBE, FTNT —
+chacun avec sa justification. Le journal des ordres n'en portait qu'un. Personne
+n'avait menti : **le portefeuille comptait 19 lignes sur un plafond de 20.** BKNG
+a pris la dernière place, ADBE et FTNT ont été refusés par la règle
+`max_positions`, et les deux refus sont bien enregistrés et affichés sur la page.
+
+La cause n'est pas le modèle, c'est le prompt. `MAX_POSITIONS` était vérifié dans
+`executer_decisions`, **après** la réponse de l'agent, et n'était dit nulle part
+avant. Le prompt prévenait pourtant déjà pour R01, R03 et la concentration
+sectorielle — avec ces mots exacts : « évite de proposer des décisions vouées à
+l'échec » et « ne soumets pas l'action dans `decisions` si tu sais qu'elle sera
+bloquée ». L'agent ne pouvait pas savoir : la seule règle qui allait le bloquer
+était la seule qu'on ne lui annonçait pas.
+
+Et comme `analyse_macro` est écrite **avant** l'exécution, la newsletter décrivait
+des intentions au passé composé. L'état du portefeuille est désormais annoncé
+dans le prompt — lignes ouvertes, plafond, places restantes — avec la consigne de
+ne pas proposer plus d'achats que de places, ni d'en raconter davantage.
+
+Trois gardes : que le prompt annonce les places restantes quel que soit l'état du
+portefeuille, que la donnée publiée respecte le plafond qu'elle annonce, et
+qu'aucune décision bloquée n'ait malgré tout produit un ordre — ce qui distingue
+« refusée » de « passée quand même ».
+
 ### 645 Ko régénérés à chaque run, pour personne
 
 `charts.json` était annoncé dans le code comme « TRANSITOIRE : `index.html` le

@@ -1021,6 +1021,17 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
     """
 
     positions = portfolio.get("positions", [])
+    # LE PLAFOND DE LIGNES ÉTAIT APPLIQUÉ SANS AVOIR ÉTÉ ANNONCÉ. `MAX_POSITIONS`
+    # est vérifié dans executer_decisions, APRÈS la réponse du modèle ; rien ne le
+    # disait dans le prompt. Le 10/08/2026, avec 19 lignes ouvertes sur 20, l'agent
+    # a proposé trois achats de nouveaux titres : le premier a pris la dernière
+    # place, les deux autres ont été rejetés — et `analyse_macro`, écrite AVANT
+    # l'exécution, annonçait « Trois décisions d'achat cette semaine » au lecteur
+    # qui n'en voyait qu'une au journal. Le prompt prévenait déjà pour R01, R03 et
+    # la concentration (« évite de proposer des décisions vouées à l'échec ») ;
+    # cette règle-là manquait à l'appel.
+    nb_lignes = len(positions)
+    places_libres = max(0, MAX_POSITIONS - nb_lignes)
     liquidites = portfolio.get("liquidites", CAPITAL_INITIAL)
     capital = portfolio.get("capital_actuel", CAPITAL_INITIAL)
     perf = portfolio.get("performance", 0)            # nette de frais + impôts
@@ -1315,6 +1326,12 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 - Benchmark MSCI World (depuis le lancement, 02/01/2026) = {bench:+.2f}%
 - **Écart au benchmark vs MSCI = {vs:+.2f} points de pourcentage** (= perf portefeuille − MSCI depuis le lancement ; observation, pas une revendication d'alpha)
 - Liquidités disponibles      : {liquidites:.0f}€
+- **Lignes ouvertes : {nb_lignes}/{MAX_POSITIONS} — il reste {places_libres} place(s) pour un NOUVEAU titre.**
+  Ce plafond est appliqué MÉCANIQUEMENT après ton output : au-delà, tout achat d'un
+  titre non détenu est rejeté, dans l'ordre où tu les listes. Ne propose donc pas
+  plus de {places_libres} achat(s) de nouveaux titres, et n'écris pas dans
+  `analyse_macro` que tu en as fait davantage — le lecteur compare au journal des
+  ordres. Renforcer une ligne DÉJÀ détenue ne consomme aucune place.
 
 ## FRICTION RÉELLE (frais transaction + fiscalité française)
 - Frais transaction cumulés depuis création : {frais_cum:.2f}€ ({config.TRANSACTION_COST_BPS} bps one-way × turnover)

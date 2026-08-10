@@ -125,6 +125,42 @@ check("les points d'avant la première injection sont inchangés",
       all(abs(x["perf"] - round((x["capital"] / 10000 - 1) * 100, 2)) < 0.011
           for x in premiers))
 
+print("\n— Une règle qui peut rejeter une décision doit être ANNONCÉE à l'agent —")
+# LE 10/08/2026, LE TEXTE PUBLIÉ A MENTI SANS QUE PERSONNE MENTE. Le portefeuille
+# portait 19 lignes sur 20 ; l'agent a proposé trois achats de nouveaux titres.
+# Le premier (BKNG) a pris la dernière place, les deux autres ont été rejetés par
+# le plafond — et `analyse_macro`, écrite AVANT l'exécution, annonçait au lecteur
+# « Trois décisions d'achat cette semaine » quand le journal n'en montrait qu'une.
+#
+# La cause n'est pas le modèle : c'est que `MAX_POSITIONS` était vérifié dans
+# executer_decisions et JAMAIS dit dans le prompt. Le prompt prévenait déjà pour
+# R01, R03 et la concentration — sa propre consigne dit « évite de proposer des
+# décisions vouées à l'échec » et « ne soumets pas l'action si tu sais qu'elle
+# sera bloquée ». L'agent ne pouvait pas savoir.
+_p = json.load(open(os.path.join(RACINE, "portfolio.json"), encoding="utf-8"))
+_w = json.load(open(os.path.join(RACINE, "watchlist.json"), encoding="utf-8"))
+_ctx = {"cac40": {}, "msci": {}}
+_cas = []
+for _n in (portfolio_agent.MAX_POSITIONS - 1, portfolio_agent.MAX_POSITIONS, 0):
+    _q = dict(_p)
+    _q["positions"] = _p["positions"][:_n]
+    _txt = portfolio_agent.construire_prompt(_q, _w, _ctx, analyse={}, macro_news=[])
+    _attendu = max(0, portfolio_agent.MAX_POSITIONS - _n)
+    _cas.append((_n, f"{_n}/{portfolio_agent.MAX_POSITIONS}" in _txt
+                 and f"reste {_attendu} place" in _txt))
+check("le prompt annonce les places restantes, quel que soit l'état",
+      all(v for _, v in _cas), str([n for n, v in _cas if not v]))
+# Et la donnée publiée respecte le plafond qu'elle annonce.
+check("le portefeuille publié ne dépasse pas son propre plafond",
+      len(_p["positions"]) <= portfolio_agent.MAX_POSITIONS,
+      f"{len(_p['positions'])} lignes pour un plafond de {portfolio_agent.MAX_POSITIONS}")
+# Une décision bloquée ne doit jamais avoir produit d'ordre le même jour : c'est
+# ce qui distingue « refusée » de « passée quand même ».
+_ordres = {(o.get("date"), o.get("ticker")) for o in _p.get("ordres") or []}
+_fantomes = [f"{b.get('ticker')}@{b.get('date')}" for b in _p.get("decisions_bloquees") or []
+             if (b.get("date"), b.get("ticker")) in _ordres]
+check("aucune décision bloquée n'a malgré tout produit un ordre", not _fantomes, str(_fantomes))
+
 print("\n— Les deux écrivains de portfolio.json tiennent-ils la même formule ? —")
 # POURQUOI CETTE SECTION EXISTE. portfolio.json a DEUX auteurs : l'agent le lundi,
 # `update_prices.py` chaque soir ouvré. Tous deux publient le champ `performance`,
