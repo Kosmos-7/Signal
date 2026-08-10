@@ -5,6 +5,42 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Un commentaire ne s'exécute pas : la perte silencieuse de champs devient un test
+
+Deux fois, un dictionnaire reconstruit de zéro a fait disparaître des données
+déjà publiées. `proj` le 07/08 : 96 fiches sur 97 privées de leur trajectoire.
+`injections` le 10/08 : les deux versements de 10 000 €, seules données qui
+distinguent un virement d'un rendement. Les deux fois, un commentaire prévenait
+juste au-dessus du code fautif — « tout nouveau champ doit être ajouté ICI ».
+Les deux fois, l'avertissement n'a pas suffi. Un commentaire ne s'exécute pas.
+
+**Deux gardes, et les deux côtés sont dérivés.** Pour `portfolio.json`, les clés
+publiées se lisent dans le fichier et les clés réécrites s'extraient de l'arbre
+syntaxique de `portfolio_agent.py` : aucune liste de noms de champs n'est tenue à
+la main. Pour les blocs `fonda`, la garde est comportementale — on rejoue
+`fusionner_fonda` sur chacun des 148 blocs réellement publiés, passé comme ancien
+*et* comme nouveau, et ce que le run courant produit doit ressortir intact.
+
+**Pourquoi la seconde n'est pas un doublon.** Un garde-fou générique existait
+déjà pour `fonda`, mais il éprouve un bloc écrit à la main contre une liste
+`CHAMPS` elle aussi écrite à la main : il prouve que la fusion conserve les
+champs dont quelqu'un s'est souvenu. Le jour où un champ apparaît dans les
+données sans que cette liste soit mise à jour, il reste vert pendant que le champ
+se perd. C'est exactement la leçon de `tests/_bouchons.py` — « une liste recopiée
+n'est pas une liste : c'est deux listes qui divergent ».
+
+**Les deux gardes ont été éprouvées en retirant la ligne fautive.** Sans la
+recopie de `injections`, la première rougit sur `perdus : ['injections']` ; sans
+celle de `proj`, la seconde rougit sur les 148 fiches. Un test vert qui ne peut
+pas rougir ne prouve rien.
+
+**Une fuite trouvée au passage.** `last_known_vix_updated_at` était écrit chaque
+soirée ouvrée par `update_prices.py` et jeté chaque lundi par le run
+hebdomadaire : le champ clignotait, présent six jours sur sept, sans que personne
+le lise. Le run hebdomadaire le reporte désormais, avec la convention exacte de
+son autre écrivain — on date le run qui a constaté une valeur, et à défaut on
+reporte l'estampille précédente plutôt que d'en inventer une.
+
 ### Le registre des versements avait été restauré depuis le mauvais commit
 
 La performance publiée affichait 34,73 % quand le calcul du projet lui-même

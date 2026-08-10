@@ -9,6 +9,8 @@ hors du projet (jamais dans le dépôt Signal).
 
     python tests/test_charts.py
 """
+import copy
+import glob
 import json
 import os
 import re
@@ -1552,6 +1554,47 @@ check("GBp reste traité comme GBP tant que chaque grandeur n'est pas mesurée",
       and screener.taux_historique("GBP", "GBp") is None)
 check("deux vraies mêmes devises ne donnent toujours rien",
       screener.taux_historique("USD", "USD") is None)
+
+print("\n— La fusion ne perd rien de ce qui est déjà publié —")
+# LA PANNE DU 07/08, ÉPROUVÉE SUR LES DONNÉES RÉELLES. `fusionner_fonda`
+# reconstruit le bloc de zéro : tout champ qu'elle ne recopie pas explicitement
+# disparaît à la publication. `proj` en a fait les frais — 96 fiches sur 97
+# publiées sans trajectoire, seule celle créée ce jour-là (donc sans ancien à
+# fusionner) en portait une. Le commentaire de la fonction prévient depuis ;
+# un commentaire ne s'exécute pas.
+#
+# LA GARDE EST COMPORTEMENTALE, PAS SYNTAXIQUE. On rejoue la fusion sur chaque
+# bloc RÉELLEMENT publié, en le passant comme ancien ET comme nouveau : ce que
+# le run courant produit doit ressortir intact. Lire la fonction à l'analyse
+# syntaxique aurait demandé de résoudre `out[cle]` dans une boucle — une garde
+# qui devine le code rend un vert qui ne prouve rien.
+#
+# ET CE N'EST PAS UN DOUBLON du garde-fou générique plus haut. Celui-là éprouve
+# un bloc ÉCRIT À LA MAIN contre une liste `CHAMPS` elle aussi écrite à la main :
+# il prouve que la fusion conserve les champs dont quelqu'un s'est souvenu. Le
+# jour où un champ apparaît dans les données publiées sans que cette liste soit
+# mise à jour, il reste vert pendant que le champ se perd. Ici les deux côtés
+# viennent du dépôt : c'est la moitié que la liste recopiée ne peut pas couvrir.
+_blocs = {}
+for _p in sorted(glob.glob(os.path.join(RACINE, "charts", "*.json"))):
+    try:
+        _f = json.load(open(_p, encoding="utf-8")).get("fonda")
+    except Exception:                                        # noqa: BLE001
+        continue
+    if isinstance(_f, dict) and _f:
+        _blocs[os.path.basename(_p)[:-5]] = _f
+
+check("des blocs fonda publiés à éprouver", len(_blocs) > 0, f"{len(_blocs)} bloc(s)")
+_perdants = {}
+for _t, _bloc in _blocs.items():
+    _out = screener.fusionner_fonda(copy.deepcopy(_bloc), copy.deepcopy(_bloc)) or {}
+    _manque = sorted(set(_bloc) - set(_out))
+    if _manque:
+        _perdants[_t] = _manque
+check("aucun champ d'un bloc publié ne disparaît à la fusion",
+      not _perdants,
+      f"{len(_perdants)} fiche(s) — " + ", ".join(f"{t}:{k}" for t, k in
+                                                  list(_perdants.items())[:5]))
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")

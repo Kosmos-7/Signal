@@ -3,6 +3,7 @@
 
     python tests/test_performance.py
 """
+import ast
 import json
 import os
 import sys
@@ -113,6 +114,75 @@ premiers = [x for x in h if x["date"] < "2026-05-05" and x.get("capital")]
 check("les points d'avant la première injection sont inchangés",
       all(abs(x["perf"] - round((x["capital"] / 10000 - 1) * 100, 2)) < 0.011
           for x in premiers))
+
+print("\n— Aucun champ publié ne se perd à la réécriture —")
+# POURQUOI CETTE GARDE EXISTE. Deux fois, un dictionnaire reconstruit de zéro a
+# fait disparaître en silence des données déjà publiées : `proj` le 07/08 (96
+# fiches sur 97 privées de leur trajectoire), puis `injections` le 10/08 (les
+# deux versements de 10 000 €, seules données qui distinguent un virement d'un
+# rendement). Les deux fois un commentaire prévenait — « tout nouveau champ doit
+# être ajouté ICI » — et les deux fois l'avertissement n'a pas suffi, parce
+# qu'un commentaire ne s'exécute pas.
+#
+# LES DEUX CÔTÉS SONT DÉRIVÉS, JAMAIS RECOPIÉS. Les clés publiées se lisent dans
+# portfolio.json ; les clés réécrites s'extraient de l'arbre syntaxique du code.
+# Une liste de noms de champs tenue à la main diverge — c'est exactement ce que
+# _bouchons.py a appris à ses dépens, et trois diagnostics faux ont été produits
+# dans une seule session en écrivant un nom de champ de mémoire.
+
+
+def _cles_du_dict(chemin, nom_var):
+    """Clés du dict littéral `nom_var = {...}`. Rend (clés, motif d'échec).
+
+    FAIL-LOUD PLUTÔT QUE SILENCE : si le littéral est introuvable, en double, ou
+    porte une clé calculée, la garde ne sait pas conclure et le DIT. Une garde
+    qui sous-lit le code rendrait un vert qui ne prouve rien."""
+    arbre = ast.parse(open(chemin, encoding="utf-8").read())
+    trouves = [n.value for n in ast.walk(arbre)
+               if isinstance(n, ast.Assign) and isinstance(n.value, ast.Dict)
+               for t in n.targets if isinstance(t, ast.Name) and t.id == nom_var]
+    if len(trouves) != 1:
+        return None, f"{len(trouves)} littéral(aux) `{nom_var} = {{...}}` dans {chemin}"
+    if any(k is None or not isinstance(k, ast.Constant) or not isinstance(k.value, str)
+           for k in trouves[0].keys):
+        return None, f"clé calculée dans `{nom_var}` de {chemin} — garde aveugle"
+    return {k.value for k in trouves[0].keys}, None
+
+
+def _cles_indicees(chemin, nom_var):
+    """Clés écrites par `nom_var["X"] = ...`. Rend (clés, nb d'indices calculés)."""
+    arbre = ast.parse(open(chemin, encoding="utf-8").read())
+    cles, flous = set(), 0
+    for n in ast.walk(arbre):
+        for t in (n.targets if isinstance(n, ast.Assign) else []):
+            if (isinstance(t, ast.Subscript) and isinstance(t.value, ast.Name)
+                    and t.value.id == nom_var):
+                if isinstance(t.slice, ast.Constant) and isinstance(t.slice.value, str):
+                    cles.add(t.slice.value)
+                else:
+                    flous += 1
+    return cles, flous
+
+
+_hebdo, _err = _cles_du_dict(os.path.join(RACINE, "portfolio_agent.py"), "output")
+check("les clés réécrites par le run hebdomadaire sont lisibles", _err is None, _err or "")
+if _hebdo:
+    _publiees = set(d)
+    _perdues = sorted(_publiees - _hebdo)
+    check("aucun champ publié n'est perdu au prochain run hebdomadaire",
+          not _perdues, f"perdus : {_perdues}")
+
+    # L'AUTRE SENS COMPTE AUSSI : le run quotidien écrit dans le même fichier.
+    # Un champ qu'il pose et que l'hebdomadaire ne reprend pas clignote — présent
+    # six jours, absent le septième. C'est ainsi que `last_known_vix_updated_at`
+    # a vécu, écrit chaque soir et jeté chaque lundi, sans que personne le lise.
+    _quotidien, _flous = _cles_indicees(os.path.join(RACINE, "update_prices.py"),
+                                        "portfolio")
+    check("les clés écrites par le run quotidien sont toutes littérales",
+          _flous == 0, f"{_flous} indice(s) calculé(s) — garde partielle")
+    _clignotants = sorted(_quotidien - _hebdo)
+    check("aucun champ du run quotidien n'est jeté par le run hebdomadaire",
+          not _clignotants, f"clignotants : {_clignotants}")
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")

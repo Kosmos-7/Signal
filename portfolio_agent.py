@@ -2138,6 +2138,16 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         # Phase 2 — Cache VIX pour fallback si fetch échoue au run suivant
         "last_known_vix":      contexte.get("vix"),
         "last_known_vix_source": contexte.get("vix_source"),
+        # L'ESTAMPILLE SUIT LA VALEUR QU'ELLE DATE. update_prices l'écrit chaque
+        # soirée ouvrée ; ce dict, qui reconstruit le fichier de zéro, ne la
+        # réécrivait pas — elle disparaissait donc à chaque run hebdomadaire pour
+        # réapparaître le lendemain soir. Le champ clignotait, sans que personne
+        # le lise. Même convention que update_prices : on date le run qui a
+        # constaté une valeur, et à défaut on reporte l'estampille précédente
+        # plutôt que d'en inventer une.
+        "last_known_vix_updated_at": (
+            today if contexte.get("vix") is not None
+            else portfolio.get("last_known_vix_updated_at")),
         "benchmark_cac40":     bench_cac,
         "benchmark_msci":      bench_msci,
         "vs_benchmark":        vs_bench,
