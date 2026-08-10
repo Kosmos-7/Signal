@@ -5,6 +5,37 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Les quinze fiches « inatteignables » étaient la page d'accueil
+
+Le registre des défauts connus portait quinze fiches complètes — note, série
+d'exercices, texte éditorial payé à l'API — qu'aucun chemin du site n'était censé
+atteindre. La consigne était de comprendre pourquoi le nettoyage les avait
+épargnées avant d'en supprimer une seule. Il ne les avait pas épargnées : **la
+purge de `publier_charts` est totale**, tout `.json` que le run ne réécrit pas
+est supprimé. Ces quinze-là étaient présentes parce qu'elles avaient leur place.
+
+**Ce sont les membres du top 30 qui n'appartiennent à aucun thème.** Le périmètre
+de publication du screener vaut `thèmes ∪ top 30` ; le dossier `charts/` contient
+exactement 148 fichiers, soit cette union au titre près, sans orphelin ni
+manquant. Le contrôle, lui, ne lisait que `universe.json` — les thèmes — et
+ignorait `watchlist.json`, c'est-à-dire la watchlist principale, c'est-à-dire la
+page d'accueil. Il dénonçait comme inatteignable ce qui s'ouvre d'un clic depuis
+l'écran d'entrée du site. Les supprimer aurait privé le top 30 de ses graphes et
+de quinze textes à repayer.
+
+**Une fiche n'existe que dans une watchlist.** Le front route sur
+`#/w/<watchlist>/<TICKER>` : l'adresse d'une fiche porte la liste qui la
+contient. C'est la clé des deux moitiés du défaut, et le contrôle le dit
+désormais dans ces termes.
+
+**Le second trou, lui, est réel — et le motif était faux.** Neuf lignes détenues
+n'ont pas de fiche : non pas parce qu'un fichier manque, mais parce qu'elles
+n'appartiennent à aucune watchlist et qu'aucune URL ne peut donc les désigner.
+Les ajouter au périmètre de publication produirait des fichiers que rien
+n'ouvrirait. Il manque une route, ou une watchlist « portefeuille » — c'est une
+décision de conception, pas un correctif, et le registre la garde en attendant
+avec le bon diagnostic.
+
 ### Un commentaire ne s'exécute pas : la perte silencieuse de champs devient un test
 
 Deux fois, un dictionnaire reconstruit de zéro a fait disparaître des données

@@ -100,16 +100,22 @@ CONNUS = {
     # vide jamais est un cimetière de silencieux.
     "aucun multiple cité ne diverge de la fiche": {},
     "aucun texte ne dit indisponible un chiffre que la fiche affiche": {},
-    # Tâche #85 — diagnostiquer POURQUOI le nettoyage a épargné ces quinze-là
-    # avant de supprimer quoi que ce soit : une fiche effacée à tort est un
-    # texte à repayer.
-    "aucune fiche publiée n'est inatteignable depuis le site": {
-        t: "sortie de l'univers publié, fiche jamais retirée — tâche #85"
-        for t in ("ADBE", "BX", "CB", "CI", "FTNT", "GS", "ICE", "INTU", "MA",
-                  "MSCI", "NFLX", "PDD", "PYPL", "REGN", "SCHW")
-    },
+    # VIDÉ LE 10/08 : les quinze n'étaient pas inatteignables, c'est le contrôle
+    # qui ne regardait pas la watchlist principale. Elles sont le top 30 non
+    # tagué par un thème, ouvertes depuis la page d'accueil. Le registre n'avait
+    # pas tort de les nommer — il datait d'avant le diagnostic — mais les garder
+    # ici aurait fini par légitimer leur suppression. Tâche #85.
+    "aucune fiche publiée n'est inatteignable depuis le site": {},
+    # CELUI-CI RESTE, et le motif est désormais le bon. Ce ne sont pas des
+    # fiches manquantes mais des CHEMINS manquants : une fiche s'adresse
+    # `#/w/<watchlist>/<TICKER>` et ces neuf lignes n'appartiennent à aucune
+    # watchlist. Le screener ne lit pas portfolio.json, `a_publier` valant
+    # `thèmes ∪ top 30` ; mais les ajouter à ce périmètre publierait des
+    # fichiers que rien ne pourrait ouvrir. Il manque une route, ou une
+    # watchlist « portefeuille » — décision de conception, pas correctif.
     "chaque ligne détenue au portefeuille a sa fiche": {
-        t: "position ouverte sans fiche — tâches #48 et #85"
+        t: "détenue hors de toute watchlist : aucune URL de fiche ne la désigne "
+           "— tâches #48 et #85"
         for t in ("BLK", "CRM", "DDOG", "JPM", "LLY", "LSEG.L", "NOW",
                   "ORSTED.CO", "SPGI")
     },
@@ -765,12 +771,27 @@ else:
 
 # ── 10. AUCUNE FICHE ORPHELINE, AUCUNE POSITION ORPHELINE ───────────────────
 print("\n— Chaque fiche publiée est-elle atteignable, chaque ligne détenue a-t-elle sa fiche ? —")
-# DEUX TROUS SYMÉTRIQUES relevés le 09/08/2026. Quinze fiches complètes — avec
-# leur note, leur série d'exercices et un texte éditorial payé à l'API — ne
-# figuraient dans aucun univers publié, aucun thème, aucune position : aucun
-# chemin du site n'y menait. Pendant ce temps, neuf lignes du portefeuille
-# n'avaient pas de fiche à ouvrir. On publiait l'inatteignable et on omettait
-# le demandé.
+# DEUX TROUS SYMÉTRIQUES relevés le 09/08/2026 — dont UN SEUL était réel.
+#
+# UNE FICHE N'EXISTE QUE DANS UNE WATCHLIST. Le front route sur
+# `#/w/<watchlist>/<TICKER>` : l'adresse d'une fiche porte la liste qui la
+# contient. Les chemins du site sont donc les watchlists — la principale
+# (watchlist.json, top 30) ET les thématiques (universe.json) — et le périmètre
+# de publication du screener dit exactement la même chose, `a_publier` valant
+# `thèmes ∪ top 30`.
+#
+# CE CONTRÔLE OUBLIAIT LA WATCHLIST PRINCIPALE, donc la page d'accueil. Les
+# quinze fiches qu'il dénonçait comme inatteignables étaient les membres du top
+# 30 non tagués par un thème : republiées à chaque run, ouvertes d'un clic
+# depuis la page principale. La purge de `publier_charts` ne les avait pas
+# « épargnées » — elle est totale, tout .json non réécrit disparaît ; elles
+# étaient là parce qu'elles avaient leur place. Les supprimer aurait vidé le top
+# 30 de ses graphes et de quinze textes éditoriaux payés à l'API.
+#
+# LE SECOND TROU, LUI, EST RÉEL et le registre le garde : neuf lignes détenues
+# n'appartiennent à AUCUNE watchlist, donc aucune URL de fiche ne peut les
+# désigner. Leur donner un fichier dans charts/ ne les rendrait pas atteignables
+# pour autant — il manque un chemin, pas un fichier. Cf. CONNUS.
 try:
     _U = json.load(open("universe.json", encoding="utf-8"))
     _st = _U["stocks"]
@@ -780,12 +801,17 @@ try:
 except Exception:                                            # noqa: BLE001
     _publies = set(FICHES)
 try:
+    _W = json.load(open("watchlist.json", encoding="utf-8"))
+    _publies |= {x["ticker"] for x in (_W.get("stocks") or []) if isinstance(x, dict)}
+except Exception:                                            # noqa: BLE001
+    _publies = set(FICHES)
+try:
     _P = json.load(open("portfolio.json", encoding="utf-8"))
     _detenues = {x["ticker"] for x in (_P.get("positions") or []) if isinstance(x, dict)}
 except Exception:                                            # noqa: BLE001
     _detenues = set()
 check_connus("aucune fiche publiée n'est inatteignable depuis le site",
-             {t: "ni univers, ni thème, ni portefeuille"
+             {t: "ni watchlist principale, ni thème, ni portefeuille"
               for t in sorted(set(FICHES) - _publies - _detenues)})
 check_connus("chaque ligne détenue au portefeuille a sa fiche",
              {t: "position ouverte sans fiche" for t in sorted(_detenues - set(FICHES))})
