@@ -100,6 +100,19 @@ CONNUS = {
     # vide jamais est un cimetière de silencieux.
     "aucun multiple cité ne diverge de la fiche": {},
     "aucun texte ne dit indisponible un chiffre que la fiche affiche": {},
+    # Tâche #85 — diagnostiquer POURQUOI le nettoyage a épargné ces quinze-là
+    # avant de supprimer quoi que ce soit : une fiche effacée à tort est un
+    # texte à repayer.
+    "aucune fiche publiée n'est inatteignable depuis le site": {
+        t: "sortie de l'univers publié, fiche jamais retirée — tâche #85"
+        for t in ("ADBE", "BX", "CB", "CI", "FTNT", "GS", "ICE", "INTU", "MA",
+                  "MSCI", "NFLX", "PDD", "PYPL", "REGN", "SCHW")
+    },
+    "chaque ligne détenue au portefeuille a sa fiche": {
+        t: "position ouverte sans fiche — tâches #48 et #85"
+        for t in ("BLK", "CRM", "DDOG", "JPM", "LLY", "LSEG.L", "NOW",
+                  "ORSTED.CO", "SPGI")
+    },
 }
 
 
@@ -740,6 +753,33 @@ else:
     check("les deux niveaux de fiche ont désormais le même socle de rubriques",
           _ga.CHAMPS_PAR_NIVEAU[_ga.NIVEAU_COMPLET]
           == _ga.CHAMPS_PAR_NIVEAU[_ga.NIVEAU_THEMATIQUE])
+
+# ── 10. AUCUNE FICHE ORPHELINE, AUCUNE POSITION ORPHELINE ───────────────────
+print("\n— Chaque fiche publiée est-elle atteignable, chaque ligne détenue a-t-elle sa fiche ? —")
+# DEUX TROUS SYMÉTRIQUES relevés le 09/08/2026. Quinze fiches complètes — avec
+# leur note, leur série d'exercices et un texte éditorial payé à l'API — ne
+# figuraient dans aucun univers publié, aucun thème, aucune position : aucun
+# chemin du site n'y menait. Pendant ce temps, neuf lignes du portefeuille
+# n'avaient pas de fiche à ouvrir. On publiait l'inatteignable et on omettait
+# le demandé.
+try:
+    _U = json.load(open("universe.json", encoding="utf-8"))
+    _st = _U["stocks"]
+    _publies = set(_st) if isinstance(_st, dict) else {x["c"] for x in _st if isinstance(x, dict)}
+    for _th in _U.get("themes") or []:
+        _publies |= set(_th.get("members") or [])
+except Exception:                                            # noqa: BLE001
+    _publies = set(FICHES)
+try:
+    _P = json.load(open("portfolio.json", encoding="utf-8"))
+    _detenues = {x["ticker"] for x in (_P.get("positions") or []) if isinstance(x, dict)}
+except Exception:                                            # noqa: BLE001
+    _detenues = set()
+check_connus("aucune fiche publiée n'est inatteignable depuis le site",
+             {t: "ni univers, ni thème, ni portefeuille"
+              for t in sorted(set(FICHES) - _publies - _detenues)})
+check_connus("chaque ligne détenue au portefeuille a sa fiche",
+             {t: "position ouverte sans fiche" for t in sorted(_detenues - set(FICHES))})
 
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
