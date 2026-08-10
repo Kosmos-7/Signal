@@ -94,18 +94,12 @@ CONNUS = {
     # les réveillait quand le multiple bougeait. Ils seront tous réécrits au
     # prochain run éditorial, et ces entrées devront alors disparaître — le
     # contrôle « registre à jour » s'en assurera.
-    "aucun multiple cité ne diverge de la fiche": {
-        "005930.KS": "forward_pe : texte 4,0× vs fiche 3,4×",
-        "2330.TW":   "trailing_pe : texte 35,6× vs fiche 32,2×",
-        "MRVL":      "trailing_pe : texte 64,5× vs fiche 75,2×",
-        "NVDA":      "forward_pe : texte 15,6× vs fiche 17,4× — le cas signalé "
-                     "par le propriétaire",
-        "QCOM":      "trailing_pe : texte 16,9× vs fiche 19,2×",
-    },
-    "aucun texte ne dit indisponible un chiffre que la fiche affiche": {
-        "005930.KS": "idem — le texte annonce « PER courant indisponible » "
-                     "quand la fiche affiche 35,0×",
-    },
+    # VIDÉS LE 09/08 AU SOIR : le run hebdomadaire a réécrit les textes avec les
+    # multiples désormais dans la signature, et les cinq écarts ont disparu.
+    # C'est le contrôle « registre à jour » qui l'a exigé — un registre qui ne se
+    # vide jamais est un cimetière de silencieux.
+    "aucun multiple cité ne diverge de la fiche": {},
+    "aucun texte ne dit indisponible un chiffre que la fiche affiche": {},
 }
 
 
