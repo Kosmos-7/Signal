@@ -1,6 +1,6 @@
 # .github/workflows/daily-prices.yml
 # Refresh quotidien des prix portfolio (pas de scoring, pas d'appel Claude)
-name: Daily prices refresh
+name: Daily refresh — cours ET chiffres des fiches
 
 on:
   schedule:
@@ -21,7 +21,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 60
 
     steps:
       - name: Checkout repo
@@ -35,6 +35,21 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # LES CHIFFRES DES FICHES SUIVENT LE COURS, décision du propriétaire du
+      # 09/08/2026 : « on génère les fiches en hebdo ok, mais les chiffres — et
+      # les chiffres repris dans les textes — je veux un update quotidien comme
+      # pour le cours ». Jusqu'ici seul portfolio.json bougeait chaque soir ;
+      # les multiples, marges et rendements des 148 fiches dataient du lundi.
+      #
+      # C'est le SCREENER SEUL qui les rafraîchit — le même programme que le run
+      # hebdomadaire, sans l'agent de portefeuille ni la génération éditoriale,
+      # donc SANS AUCUN appel à l'API Anthropic. Les textes, eux, restent
+      # hebdomadaires : c'est ce que le propriétaire a demandé.
+      - name: Rafraîchir les chiffres des fiches (screener seul, sans IA)
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: python screener.py
+
       - name: Refresh portfolio prices
         run: python update_prices.py
 
@@ -42,11 +57,15 @@ jobs:
         run: |
           git config user.email "bot@signal.fr"
           git config user.name "Signal Bot"
-          git add portfolio.json
+          # L'ARCHIVE N'EST PAS COMMITÉE ICI, et c'est délibéré : le screener en
+          # dépose une à chaque passage, mais notes/watchlist_archive/ est un
+          # journal HEBDOMADAIRE. Y ajouter une entrée par jour ouvré en
+          # changerait la nature sans que personne l'ait décidé.
+          git add portfolio.json watchlist.json universe.json charts.json charts/
           if git diff --staged --quiet; then
-            echo "Aucun changement de prix (marché fermé ou jour férié)."
+            echo "Aucun changement (marché fermé ou jour férié)."
           else
-            git commit -m "prices: refresh $(date -u +'%Y-%m-%d') [skip ci]"
-            git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase sur portfolio.json — échec explicite (pas de push silencieusement perdu)"; exit 1; }
+            git commit -m "daily: cours et chiffres des fiches $(date -u +'%Y-%m-%d') [skip ci]"
+            git pull --rebase --autostash || { git rebase --abort; echo "::error::Conflit de rebase sur les données quotidiennes — échec explicite (pas de push silencieusement perdu)"; exit 1; }
             git push
           fi
