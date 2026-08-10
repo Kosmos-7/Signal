@@ -35,6 +35,23 @@ BOUCHONS = [
     ("requests", {"get": lambda *a, **k: None}),
     ("pandas", {"Series": object, "DataFrame": object}),
     ("anthropic", {"Anthropic": object}),
+    # PIL / Pillow — AJOUTÉ LE 10/08/2026, ET IL N'EST PAS DANS requirements.txt.
+    # C'est précisément ce qui l'a rendu invisible. La garde `manquants()` vérifie
+    # que la liste couvre requirements.txt ; or les suites n'importent pas que le
+    # cœur du projet, elles importent aussi des modules de tools/, qui ont leurs
+    # propres dépendances installées à la volée par leurs workflows. test_themes.py
+    # importe fetch_theme_photos pour y lire UNE constante, et ce module ouvre sur
+    # `from PIL import Image`. Sur la machine de développement Pillow est là ; sur
+    # le runner, non. La suite mourait donc à l'import, en huit secondes, et tout
+    # ce qui suit la ligne 265 n'a jamais tourné en intégration continue — pendant
+    # que la même suite affichait 137/137 en local.
+    #
+    # C'est le mode de panne que ce fichier décrit en tête, à la lettre, sur une
+    # dépendance que sa propre garde ne pouvait pas voir.
+    ("PIL", {}),
+    ("PIL.Image", {"open": lambda *a, **k: None, "new": lambda *a, **k: None}),
+    ("PIL.ImageEnhance", {"Contrast": object, "Color": object, "Brightness": object}),
+    ("PIL.ImageDraw", {"Draw": lambda *a, **k: None}),
 ]
 
 
@@ -48,6 +65,11 @@ def poser():
     # `import ta.momentum` ne suffit pas : le code fait `from ta.momentum
     # import ...`, ce qui exige que le sous-module soit accroché au parent.
     sys.modules["ta"].momentum = sys.modules["ta.momentum"]
+    # Même raison pour PIL : `from PIL import Image, ImageEnhance` exige que les
+    # sous-modules soient accrochés au parent.
+    for _sm in ("Image", "ImageEnhance", "ImageDraw"):
+        if f"PIL.{_sm}" in sys.modules:
+            setattr(sys.modules["PIL"], _sm, sys.modules[f"PIL.{_sm}"])
 
 
 def manquants(chemin_requirements):
