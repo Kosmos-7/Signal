@@ -1,0 +1,143 @@
+{
+ "id": "2026-08-10",
+ "type": "quotidien",
+ "date": "2026-08-10",
+ "titre": "L'or flambe, l'Iran conditionne Ormuz : matinée chargée",
+ "chapeau": "Les indices américains ont terminé en hausse jeudi, portés par le Nasdaq. L'or s'envole, le détroit d'Ormuz reste au cœur des tensions.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-10.jpg",
+  "v": "df94e69c",
+  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo…",
+  "credit": "Kondo Atsushi",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
+  "fichier": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in March 2009.jpg",
+  "requete": "stock exchange display board"
+ },
+ "marches": {
+  "ref": "2026-08-07",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7757.64013671875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.6184231308959001,
+    "ref": "2026-08-07"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8714.9296875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.17494521806862498,
+    "ref": "2026-08-07"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26690.619140625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.2990169643423022,
+    "ref": "2026-08-07"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6523.85986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.3275602915708604,
+    "ref": "2026-08-07"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.659999847412109,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.010000228881835938,
+    "ref": "2026-08-07"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4340.7001953125,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.3267372775223953,
+    "ref": "2026-08-07"
+   }
+  ],
+  "mouvement": {
+   "libelle": "QUALCOMM Incorporated",
+   "valeur": 167.86000061035156,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 4.657398372173844,
+   "ref": "2026-08-07",
+   "ticker": "QCOM",
+   "nom": "QUALCOMM Incorporated"
+  }
+ },
+ "marches_texte": "La séance du 7 août s'est terminée dans le vert des deux côtés de l'Atlantique : le Nasdaq a grimpé de 1,30 %, le S&P 500 de 0,62 %, tandis que le CAC 40 et l'Euro Stoxx 50 ont progressé plus modestement, à +0,17 % et +0,33 %. Le grand saut du jour appartient à l'or, qui a bondi de 2,33 % à 4 340,70 $, signe que la prudence n'avait pas totalement déserté les salles de marché. Le taux du Treasury à 10 ans, lui, a légèrement reflué à 4,660 %.",
+ "sections": [
+  {
+   "titre": "Ormuz : l'Iran pose ses conditions",
+   "texte": "Selon Reuters, l'Iran conditionne la réouverture du détroit d'Ormuz à des concessions américaines sur plusieurs de ses revendications. Le détroit d'Ormuz est un point de passage stratégique majeur pour les exportations mondiales de pétrole brut. Cette déclaration intervient dans un contexte de tensions géopolitiques persistantes entre Téhéran et Washington.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Pétrole : la Chine, colonne vertébrale de la demande asiatique",
+   "texte": "Reuters souligne que la Chine joue seule le rôle de stabilisateur de la demande asiatique en pétrole brut. Cette concentration de la demande sur un unique acteur majeur attire l'attention des opérateurs sur les fluctuations de l'appétit énergétique chinois. Le contexte autour du détroit d'Ormuz, toujours fermé selon les dépêches disponibles, ajoute une variable supplémentaire sur les marchés de l'énergie.",
+   "sources": [
+    0,
+    2
+   ]
+  },
+  {
+   "titre": "Verizon en panne : des milliers d'abonnés américains sans réseau",
+   "texte": "Des milliers de clients de Verizon ont signalé une interruption de service mobile aux États-Unis, selon les données de Downdetector rapportées par CNBC. L'opérateur a invité les abonnés encore affectés à redémarrer leurs appareils, sans fournir d'explication sur l'origine de la panne. Aucune durée ni cause officielle n'avait été communiquée au moment de la publication.",
+   "sources": [
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "China is balancing Asia's crude oil demand by itself - Reuters",
+   "resume": "China is balancing Asia's crude oil demand by itself  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNN0lBeUJuUi1Nek03cm1rOF9xMFhxS2RNa1NUNkxqQk9UT1dYOENkMHduLUx3ei12d3VQZmxLSlV6cFd3cDZXc05JcnJ3YnRXRjl2b3VMb2M0T1R3OUpVUnhfVWNxY1d0akVsQ1U0V1hkOEE1eUZWN2FySzNXcHRmLXJpNlR2SWlRekRYbkVld1VqNDI5S0RFdWFVUHBJQXF2bl9FMDZJUmotVzlfZlBidUhVTWpRTVMzYWZlTQ?oc=5",
+   "date": "2026-08-10 05:35"
+  },
+  {
+   "titre": "Iran ties Hormuz reopening to US concessions on several demands - Reuters",
+   "resume": "Iran ties Hormuz reopening to US concessions on several demands  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQSmFvNGYwRDFRdHZrdWhBOWR0ZmVCdkZTSzRROXVNMG1UX1Azb04xa3ZCbEtYNkl4eFhSZG16b0xYeHNyd2tTdHhGWXFUTXJ6WFNVRjg3bmZYOEhEeHNaNHh4NU9qN0RQYXY3ZG13Qzh6Mk1LNG9jaGZraUZwRHVKY0hMZlFWUTdMOEpoaTRuemlPWEFJZUhsYk5TaUpNdWFqR1dId3NCM0xvYS1SNlNBMg?oc=5",
+   "date": "2026-08-09 23:03"
+  },
+  {
+   "titre": "Verizon mobile service down for thousands of customers in the U.S., Downdetector shows",
+   "resume": "Verizon recommended that customers who are still impacted by the outage restart their devices. The company did not provide ⁠a reason for ⁠the outage.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/08/verizon-mobile-outage-downdetector.html",
+   "date": "2026-08-08 23:14"
+  }
+ ],
+ "genere_le": "2026-08-10 06:56 UTC"
+}
