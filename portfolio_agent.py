@@ -63,10 +63,13 @@ def _ecart_tendance(dc):
 
 
 def load_json(path, default):
+    # `except Exception` et non `except:` : un `except:` nu attrape aussi
+    # KeyboardInterrupt et SystemExit, donc une interruption au clavier pendant
+    # la lecture rendait le défaut au lieu de s'arrêter.
     try:
         with open(path, encoding="utf-8") as f:
             return json.load(f)
-    except:
+    except Exception:                                            # noqa: BLE001
         return default
 
 def load_portfolio_strict(path="portfolio.json"):
@@ -145,21 +148,53 @@ def get_prix(ticker):
         print(f"  ⚠️  get_prix({ticker}) — erreur fetch : {e}")
         return None
 
-def get_eur_usd_rate():
-    """Taux EUR/USD du jour via Yahoo Finance (EURUSD=X). Fallback 1.10."""
+# CE REPLI EST UN CHIFFRE INVENTÉ, ET IL NE DOIT PLUS ÊTRE MUET.
+# 64 % du portefeuille est libellé en USD : ce taux multiplie la valeur de
+# quinze positions sur vingt, donc `capital_actuel`, donc la performance
+# publiée. Servi en silence, un repli à 1,10 pendant que le marché est à 1,05
+# déplace le capital de ~3 % et le chiffre de couverture du site d'autant —
+# sans que rien ne distingue « le taux vaut vraiment 1,10 » de « la source n'a
+# pas répondu ».
+#
+# C'est exactement ce que screener.py REFUSE de faire pour le rendement du flux
+# disponible, à deux fichiers d'ici : « Sans taux — paire introuvable, réseau en
+# panne — on retombe sur le trou assumé, jamais sur un chiffre calculé avec un
+# taux inventé. » La doctrine du projet était énoncée là et violée ici.
+#
+# Le repli est CONSERVÉ pour l'instant — le supprimer ferait échouer le run du
+# soir sur une panne de change, ce qui est une décision d'exploitation, pas de
+# nettoyage — mais il crie désormais, et l'appelant peut savoir qu'il a servi.
+# `except Exception` et non `except:` : un `except:` nu avalait aussi
+# l'interruption au clavier et l'arrêt du processus.
+TAUX_REPLI = {"EURUSD=X": 1.10, "EURGBP=X": 0.86}
+taux_replis_servis = []          # rempli quand un repli a réellement été utilisé
+
+
+def _taux_ou_repli(paire):
+    """Taux de change du jour, ou repli ANNONCÉ. Jamais un repli silencieux."""
+    repli = TAUX_REPLI[paire]
     try:
-        v = last_valid_close(yf.Ticker("EURUSD=X").history(period="2d")["Close"])
-        return round(v, 4) if v else 1.10
-    except:
-        return 1.10
+        v = last_valid_close(yf.Ticker(paire).history(period="2d")["Close"])
+        if v:
+            return round(v, 4)
+        motif = "série vide"
+    except Exception as e:                                       # noqa: BLE001
+        motif = f"{type(e).__name__}: {e}"[:80]
+    taux_replis_servis.append(paire)
+    print(f"   ⚠️  TAUX DE CHANGE INVENTÉ — {paire} indisponible ({motif}) : "
+          f"repli à {repli}. Les valorisations en devise, et donc la performance "
+          f"publiée, reposent sur un chiffre non mesuré.")
+    return repli
+
+
+def get_eur_usd_rate():
+    """Taux EUR/USD du jour via Yahoo Finance (EURUSD=X). Repli 1.10, annoncé."""
+    return _taux_ou_repli("EURUSD=X")
+
 
 def get_eur_gbp_rate():
-    """Taux EUR/GBP du jour via Yahoo Finance (EURGBP=X). Fallback 0.86."""
-    try:
-        v = last_valid_close(yf.Ticker("EURGBP=X").history(period="2d")["Close"])
-        return round(v, 4) if v else 0.86
-    except:
-        return 0.86
+    """Taux EUR/GBP du jour via Yahoo Finance (EURGBP=X). Repli 0.86, annoncé."""
+    return _taux_ou_repli("EURGBP=X")
 
 # LES SUFFIXES QUE detect_currency SAIT LIRE. Cette liste ne sert pas à la
 # déduction (les branches ci-dessous s'en chargent) : elle sert à la GARDE.

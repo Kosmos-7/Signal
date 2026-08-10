@@ -153,6 +153,35 @@ check("le capital de départ ne se reconstitue qu'à un seul endroit",
       sum(_refont.values()) == 1 and _refont.get("portfolio_agent.py") == 1,
       f"{_refont}")
 
+print("\n— Un taux de change inventé ne peut plus être muet —")
+# 64 % du portefeuille est libellé en USD : le taux EUR/USD multiplie la valeur
+# de quinze positions sur vingt, donc capital_actuel, donc la performance
+# publiée. Le repli à 1,10 était servi EN SILENCE — rien ne distinguait « le
+# taux vaut vraiment 1,10 » de « la source n'a pas répondu ». C'est ce que
+# screener.py refuse explicitement pour le rendement du flux disponible : « on
+# retombe sur le trou assumé, jamais sur un chiffre calculé avec un taux
+# inventé ». Ici les bouchons rendent yfinance inutilisable : le repli DOIT
+# donc se déclencher, et il doit se voir.
+portfolio_agent.taux_replis_servis.clear()
+_usd = portfolio_agent.get_eur_usd_rate()
+_gbp = portfolio_agent.get_eur_gbp_rate()
+check("le repli rend la valeur documentée",
+      (_usd, _gbp) == (portfolio_agent.TAUX_REPLI["EURUSD=X"],
+                       portfolio_agent.TAUX_REPLI["EURGBP=X"]), f"{_usd} / {_gbp}")
+check("et il laisse une trace : un repli servi est un repli connu",
+      portfolio_agent.taux_replis_servis == ["EURUSD=X", "EURGBP=X"],
+      str(portfolio_agent.taux_replis_servis))
+portfolio_agent.taux_replis_servis.clear()
+# `except:` nu : il attrape aussi KeyboardInterrupt et SystemExit. Trois
+# subsistaient dans le module qui publie les nombres du portefeuille.
+_nus = {os.path.basename(p): len(re.findall(r"^\s*except\s*:",
+                                            open(p, encoding="utf-8").read(), re.M))
+        for p in (os.path.join(RACINE, "portfolio_agent.py"),
+                  os.path.join(RACINE, "update_prices.py"),
+                  os.path.join(RACINE, "config.py"))}
+check("aucun except nu dans les modules qui publient des nombres",
+      not any(_nus.values()), str({k: v for k, v in _nus.items() if v}))
+
 print("\n— Aucun champ publié ne se perd à la réécriture —")
 # POURQUOI CETTE GARDE EXISTE. Deux fois, un dictionnaire reconstruit de zéro a
 # fait disparaître en silence des données déjà publiées : `proj` le 07/08 (96

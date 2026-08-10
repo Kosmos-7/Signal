@@ -5,6 +5,30 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Un taux de change inventé, servi en silence, sous 64 % du portefeuille
+
+`get_eur_usd_rate()` repliait sur **1,10** dès que Yahoo ne répondait pas — sans
+un mot. Quinze positions sur vingt sont libellées en dollars, soit 64 % du
+capital : ce taux multiplie leur valorisation, donc `capital_actuel`, donc la
+performance publiée. Un repli à 1,10 pendant que le marché est à 1,05 déplace le
+capital d'environ 3 % et le chiffre de couverture du site d'autant, et **rien ne
+distinguait « le taux vaut vraiment 1,10 » de « la source n'a pas répondu »**.
+
+C'est précisément ce que `screener.py` refuse de faire, à deux fichiers de là,
+pour le rendement du flux disponible : « Sans taux — paire introuvable, réseau en
+panne — on retombe sur le trou assumé, jamais sur un chiffre calculé avec un taux
+inventé. » La doctrine du projet était écrite là et violée ici.
+
+Le repli est **conservé** : le supprimer ferait échouer le run du soir sur une
+panne de change, ce qui est une décision d'exploitation et pas de nettoyage. Mais
+il crie désormais, et il laisse une trace que l'appelant peut lire. Deux tests le
+figent : que le repli rende bien la valeur documentée, et qu'il ne puisse plus
+servir sans se déclarer.
+
+**Trois `except:` nus** subsistaient dans le module qui publie les nombres du
+portefeuille — ils attrapaient aussi l'interruption au clavier et l'arrêt du
+processus. Ils sont tous typés, et un test vérifie qu'il n'en revient pas.
+
 ### Le script qui réécrit la performance chaque nuit n'était testé par rien
 
 `portfolio.json` a deux auteurs : l'agent le lundi, `update_prices.py` chaque
