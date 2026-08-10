@@ -161,18 +161,28 @@ def get_prix(ticker):
 # panne — on retombe sur le trou assumé, jamais sur un chiffre calculé avec un
 # taux inventé. » La doctrine du projet était énoncée là et violée ici.
 #
-# Le repli est CONSERVÉ pour l'instant — le supprimer ferait échouer le run du
-# soir sur une panne de change, ce qui est une décision d'exploitation, pas de
-# nettoyage — mais il crie désormais, et l'appelant peut savoir qu'il a servi.
+# IL N'Y A PLUS DE REPLI : le run ÉCHOUE. Décision du propriétaire du
+# 10/08/2026, prise en connaissance du coût — un soir sans taux est un soir sans
+# mise à jour, et le site garde les chiffres de la veille plutôt que d'en publier
+# de faux. C'est exactement ce que fait déjà update_prices quand aucun prix n'est
+# récupéré : « un run qui bumperait updated_at sans AUCUNE donnée fraîche
+# maquillerait une panne de feed en mise à jour réussie ».
+#
 # `except Exception` et non `except:` : un `except:` nu avalait aussi
 # l'interruption au clavier et l'arrêt du processus.
-TAUX_REPLI = {"EURUSD=X": 1.10, "EURGBP=X": 0.86}
-taux_replis_servis = []          # rempli quand un repli a réellement été utilisé
+#
+# NUANCE ASSUMÉE : EUR/USD et EUR/GBP sont demandés au début du run, avant qu'on
+# sache quelles devises sont réellement détenues. Une panne sur la livre fera
+# donc échouer un run même sans position britannique. Les deux paires viennent
+# de la même source : si l'une tombe, l'autre tombe presque toujours avec, et le
+# dollar pèse 64 % du portefeuille. Rendre l'appel paresseux pour épargner ce cas
+# rare ajouterait une logique conditionnelle qui, elle, pourrait se tromper.
+def _taux_mesure(paire):
+    """Taux de change du jour. ÉCHEC BRUYANT s'il n'est pas mesurable.
 
-
-def _taux_ou_repli(paire):
-    """Taux de change du jour, ou repli ANNONCÉ. Jamais un repli silencieux."""
-    repli = TAUX_REPLI[paire]
+    Un taux inventé ne se voit pas : il multiplie la valorisation de chaque
+    position en devise, donc le capital, donc la performance publiée. Le trou
+    plutôt que le faux — et ici le trou, c'est ne pas publier du tout."""
     try:
         v = last_valid_close(yf.Ticker(paire).history(period="2d")["Close"])
         if v:
@@ -180,21 +190,20 @@ def _taux_ou_repli(paire):
         motif = "série vide"
     except Exception as e:                                       # noqa: BLE001
         motif = f"{type(e).__name__}: {e}"[:80]
-    taux_replis_servis.append(paire)
-    print(f"   ⚠️  TAUX DE CHANGE INVENTÉ — {paire} indisponible ({motif}) : "
-          f"repli à {repli}. Les valorisations en devise, et donc la performance "
-          f"publiée, reposent sur un chiffre non mesuré.")
-    return repli
+    raise SystemExit(
+        f"❌ Taux de change {paire} indisponible ({motif}) — abandon SANS écrire. "
+        f"Le valoriser avec un taux inventé déplacerait le capital et la "
+        f"performance publiée sans que rien ne le signale.")
 
 
 def get_eur_usd_rate():
-    """Taux EUR/USD du jour via Yahoo Finance (EURUSD=X). Repli 1.10, annoncé."""
-    return _taux_ou_repli("EURUSD=X")
+    """Taux EUR/USD du jour via Yahoo (EURUSD=X). Échoue plutôt que d'inventer."""
+    return _taux_mesure("EURUSD=X")
 
 
 def get_eur_gbp_rate():
-    """Taux EUR/GBP du jour via Yahoo Finance (EURGBP=X). Repli 0.86, annoncé."""
-    return _taux_ou_repli("EURGBP=X")
+    """Taux EUR/GBP du jour via Yahoo (EURGBP=X). Échoue plutôt que d'inventer."""
+    return _taux_mesure("EURGBP=X")
 
 # LES SUFFIXES QUE detect_currency SAIT LIRE. Cette liste ne sert pas à la
 # déduction (les branches ci-dessous s'en chargent) : elle sert à la GARDE.
@@ -298,22 +307,28 @@ def detect_currency(ticker, market=""):
 _FX_PAIRS    = {"DKK": "EURDKK=X", "SEK": "EURSEK=X", "NOK": "EURNOK=X", "CHF": "EURCHF=X",
                 "JPY": "EURJPY=X", "KRW": "EURKRW=X",
                 "TWD": "EURTWD=X", "HKD": "EURHKD=X", "CAD": "EURCAD=X"}
-_FX_FALLBACK = {"DKK": 7.46, "SEK": 11.3, "NOK": 11.6, "CHF": 0.93,
-                "JPY": 170.0, "KRW": 1550.0,
-                # Repli seulement : le taux réel est cherché à chaque run. Le
-                # HKD est arrimé au USD dans une bande étroite, le TWD flotte.
-                "TWD": 35.5, "HKD": 9.05, "CAD": 1.60}
 _fx_cache    = {}
 
+# LA TABLE DE REPLI A ÉTÉ RETIRÉE, pas égarée. Elle portait un taux écrit en dur
+# par devise (DKK 7,46, JPY 170, KRW 1550…) servi en silence dès que la source
+# ne répondait pas — la même faute que le repli EUR/USD à 1,10, avec le même
+# effet : une valorisation fausse qui ne se distingue pas d'une vraie. Son cas
+# était même pire, puisque `_FX_FALLBACK.get(currency, 1.0)` rendait 1,0 pour
+# une devise absente de la table, c'est-à-dire traitait des yens comme des euros.
 def get_eur_rate(currency):
-    """Taux EUR→devise (convention Yahoo : EURXXX=X = nb XXX pour 1 EUR)."""
+    """Taux EUR→devise (convention Yahoo : EURXXX=X = nb XXX pour 1 EUR).
+
+    ÉCHEC BRUYANT si la paire n'est pas mesurable. Contrairement aux deux paires
+    majeures, cet appel est déjà PARESSEUX — il ne part que si une position porte
+    réellement cette devise — donc l'échec est exactement borné au cas où le taux
+    manque VRAIMENT au calcul."""
     if currency in _fx_cache:
         return _fx_cache[currency]
-    try:
-        v = last_valid_close(yf.Ticker(_FX_PAIRS[currency]).history(period="2d")["Close"])
-        rate = round(v, 4) if v else _FX_FALLBACK[currency]
-    except Exception:
-        rate = _FX_FALLBACK.get(currency, 1.0)
+    if currency not in _FX_PAIRS:
+        raise SystemExit(
+            f"❌ Devise {currency} sans paire de change connue — abandon SANS "
+            f"écrire. La convertir au pair traiterait ses montants comme des euros.")
+    rate = _taux_mesure(_FX_PAIRS[currency])
     _fx_cache[currency] = rate
     return rate
 
@@ -334,7 +349,17 @@ def to_eur(montant, currency, eur_usd, eur_gbp=0.86):
         return round(montant / eur_gbp, 2)
     if currency in _FX_PAIRS:   # DKK / SEK / NOK / CHF — fetch à la volée (cache par run)
         return round(montant / get_eur_rate(currency), 2)
-    return round(montant, 2)
+    if currency in ("EUR", "", None):
+        return round(montant, 2)
+    # LE PASSAGE AU PAIR ÉTAIT IMPLICITE, ET C'EST UN TAUX INVENTÉ COMME UN AUTRE.
+    # Cette ligne rendait le montant inchangé pour TOUTE devise inconnue, donc
+    # traitait des yens ou des wons comme des euros — un facteur 170 ou 1550.
+    # Aucune devise de l'univers publié n'est hors table aujourd'hui (USD, EUR,
+    # TWD, DKK, KRW, JPY, CHF, GBP, SEK, HKD y sont toutes), donc le trou n'est
+    # pas ouvert ; il l'était en puissance, et rien ne l'aurait signalé.
+    raise SystemExit(
+        f"❌ Devise {currency!r} sans conversion connue — abandon SANS écrire. "
+        f"La laisser passer au pair publierait ses montants comme des euros.")
 
 def maj_position(pos, eur_usd, eur_gbp=0.86):
     """

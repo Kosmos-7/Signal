@@ -359,7 +359,7 @@ def _decote_pct(prix, prix_tendance):
         return None
     return round((1 - prix / prix_tendance) * 100, 1)
 
-# ── PAYLOAD GRAPHIQUE (charts.json) ──────────────────────────────────────────
+# ── PAYLOAD GRAPHIQUE (charts/<TICKER>.json) ─────────────────────────────────
 def _mois(ts):
     """Abscisse compacte des graphes : mois flottant (année*12 + mois 0-based
     + fraction du jour, base 31). 2 décales suffisent (~9h de résolution)."""
@@ -1566,7 +1566,7 @@ def publier_charts(charts, a_publier, dossier=CHARTS_DIR, breakdowns=None):
                  est téléchargé en bloc au premier rendu : le breakdown ne pèse
                  que sur la fiche réellement ouverte (~2 Ko par fichier). Le
                  payload est copié, jamais muté — les dicts de `charts` sont
-                 partagés avec le monolithe charts.json transitionnel.
+                 partagés avec l'appelant, qui les réutilise pour l'archive.
 
     POURQUOI la purge : un titre qui quitte tous ses thèmes n'est plus jamais
     réécrit. Sans suppression explicite son graphe resterait indéfiniment dans
@@ -2629,7 +2629,7 @@ def score_ticker(ticker, vix=None):
         nom = themes.NOMS_AFFICHES.get(
             ticker, info.get("shortName") or info.get("longName") or ticker)
 
-        # ── Payload graphique (charts.json) — fail-soft : un graphe raté ne doit
+        # ── Payload graphique (charts/) — fail-soft : un graphe raté ne doit
         # JAMAIS faire échouer le scoring du ticker (le try englobant retournerait None).
         try:
             chart = {
@@ -3412,22 +3412,22 @@ def main():
         json.dump(output, f, ensure_ascii=False, indent=2, allow_nan=False)
     os.replace(tmp_path, "watchlist.json")
 
-    # charts.json — payload graphique du top 30, monolithique. TRANSITOIRE :
-    # index.html le charge encore au démarrage ; il fait doublon avec charts/
-    # (mêmes données, top 30 uniquement) et sera retiré une fois le front
-    # bascule sur le chargement paresseux. Séparateurs compacts, pas d'indent.
-    # Même contrat d'écriture atomique + allow_nan=False.
-    tmp_charts = "charts.json.tmp"
-    with open(tmp_charts, "w", encoding="utf-8") as f:
-        json.dump(charts, f, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
-    os.replace(tmp_charts, "charts.json")
-    print(f"📈 charts.json — {len(charts)} graphes (top 30, transitoire)")
+    # charts.json — RETIRÉ LE 10/08/2026. Ce monolithe du top 30 était annoncé
+    # « TRANSITOIRE : index.html le charge encore au démarrage ». Il ne le
+    # chargeait plus : les six points de chargement d'index.html ont été
+    # énumérés un par un, aucun ne le demandait, et la seule occurrence restante
+    # du nom dans le front était un commentaire racontant l'époque où il servait.
+    # La transition s'était terminée sans que personne referme la porte, et le
+    # fichier continuait d'être régénéré et commité — 645 Ko à chaque run de
+    # données, pour personne. Les fiches sont servies par charts/<TICKER>.json,
+    # écrit juste en dessous, à la demande et par titre.
 
     # ── charts/<TICKER>.json — un fichier par fiche ouvrable ────────────────
     # Périmètre : les titres tagués par un thème (par_ticker) UNION le top 30.
     # L'union n'est pas redondante : un titre peut être très bien noté sans
-    # appartenir à aucun thème, et sa fiche perdrait son graphe le jour où
-    # charts.json sera retiré.
+    # appartenir à aucun thème, et sa fiche aurait perdu son graphe le jour du
+    # retrait de charts.json — retrait effectué le 10/08/2026, cette union est
+    # donc désormais la SEULE source des graphiques du site.
     # Le breakdown complet voyage avec le graphe : une fiche thématique affiche
     # ainsi les MÊMES données qu'une fiche du top 30 dès que son graphique est
     # chargé (l'écart TSM/BLK constaté le 01/08 venait de là — universe.json ne

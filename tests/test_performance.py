@@ -153,25 +153,46 @@ check("le capital de départ ne se reconstitue qu'à un seul endroit",
       sum(_refont.values()) == 1 and _refont.get("portfolio_agent.py") == 1,
       f"{_refont}")
 
-print("\n— Un taux de change inventé ne peut plus être muet —")
+print("\n— Un taux de change absent arrête le run, il ne s'invente pas —")
 # 64 % du portefeuille est libellé en USD : le taux EUR/USD multiplie la valeur
 # de quinze positions sur vingt, donc capital_actuel, donc la performance
 # publiée. Le repli à 1,10 était servi EN SILENCE — rien ne distinguait « le
-# taux vaut vraiment 1,10 » de « la source n'a pas répondu ». C'est ce que
-# screener.py refuse explicitement pour le rendement du flux disponible : « on
-# retombe sur le trou assumé, jamais sur un chiffre calculé avec un taux
-# inventé ». Ici les bouchons rendent yfinance inutilisable : le repli DOIT
-# donc se déclencher, et il doit se voir.
-portfolio_agent.taux_replis_servis.clear()
-_usd = portfolio_agent.get_eur_usd_rate()
-_gbp = portfolio_agent.get_eur_gbp_rate()
-check("le repli rend la valeur documentée",
-      (_usd, _gbp) == (portfolio_agent.TAUX_REPLI["EURUSD=X"],
-                       portfolio_agent.TAUX_REPLI["EURGBP=X"]), f"{_usd} / {_gbp}")
-check("et il laisse une trace : un repli servi est un repli connu",
-      portfolio_agent.taux_replis_servis == ["EURUSD=X", "EURGBP=X"],
-      str(portfolio_agent.taux_replis_servis))
-portfolio_agent.taux_replis_servis.clear()
+# taux vaut vraiment 1,10 » de « la source n'a pas répondu ». Décision du
+# propriétaire du 10/08/2026 : le run échoue plutôt que de publier une
+# valorisation fondée sur un chiffre non mesuré. Le site garde alors les
+# chiffres de la veille, ce que update_prices fait déjà quand aucun prix n'est
+# récupéré.
+#
+# Les bouchons rendent yfinance inutilisable : ici la source est donc toujours
+# en panne, et c'est exactement le cas qu'on veut éprouver.
+
+
+def _echoue(fn, *a):
+    try:
+        fn(*a)
+    except SystemExit:
+        return True
+    except Exception:                                            # noqa: BLE001
+        return False
+    return False
+
+
+check("sans taux mesuré, EUR/USD arrête le run",
+      _echoue(portfolio_agent.get_eur_usd_rate))
+check("sans taux mesuré, EUR/GBP arrête le run",
+      _echoue(portfolio_agent.get_eur_gbp_rate))
+check("sans taux mesuré, une devise secondaire arrête le run",
+      _echoue(portfolio_agent.get_eur_rate, "DKK"))
+# Le passage au pair était implicite : toute devise inconnue rendait le montant
+# inchangé, donc traitait des yens comme des euros. L'euro, lui, passe.
+check("une devise sans conversion connue arrête le run",
+      _echoue(portfolio_agent.to_eur, 100.0, "XYZ", 1.1))
+check("l'euro, lui, traverse sans conversion",
+      portfolio_agent.to_eur(100.0, "EUR", 1.1) == 100.0)
+# Plus aucune table de taux écrits en dur : c'est elle qui rendait le silence
+# possible, et `\.get(devise, 1.0)` traitait une devise absente comme de l'euro.
+check("aucune table de taux de repli ne subsiste",
+      not hasattr(portfolio_agent, "_FX_FALLBACK"))
 # `except:` nu : il attrape aussi KeyboardInterrupt et SystemExit. Trois
 # subsistaient dans le module qui publie les nombres du portefeuille.
 _nus = {os.path.basename(p): len(re.findall(r"^\s*except\s*:",

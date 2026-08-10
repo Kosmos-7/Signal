@@ -5,6 +5,47 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### 645 Ko régénérés à chaque run, pour personne
+
+`charts.json` était annoncé dans le code comme « TRANSITOIRE : `index.html` le
+charge encore au démarrage ». Il ne le chargeait plus : les six points de
+chargement du front ont été énumérés un par un, aucun ne le demandait, et la
+seule occurrence restante du nom dans `index.html` était un commentaire racontant
+l'époque où il servait. **La transition s'était terminée sans que personne
+referme la porte.** Le monolithe continuait d'être régénéré à chaque run et
+commité — 645 Ko dans chaque commit de données, pour aucun lecteur.
+
+Il est retiré : le screener ne l'écrit plus, les deux workflows ne le commitent
+plus, le fichier sort du dépôt. Les fiches sont servies par
+`charts/<TICKER>.json`, à la demande et par titre — ce qui était précisément le
+but de la transition. Les commentaires qui le décrivaient encore au présent ont
+été corrigés plutôt que supprimés : celui qui raconte sa perte en v3.3.0 reste,
+c'est de l'histoire, pas une description.
+
+### Le repli de change devient un échec
+
+Suite de la décision du propriétaire : le repli n'est plus seulement bruyant, il
+n'existe plus. Quand le taux n'est pas mesurable, **le run s'arrête sans
+écrire** — le site garde les chiffres de la veille plutôt que d'en publier de
+faux, exactement comme `update_prices` le fait déjà quand aucun prix n'est
+récupéré.
+
+La table `_FX_FALLBACK` disparaît avec : elle portait un taux écrit en dur par
+devise (DKK 7,46, JPY 170, KRW 1550…) servi en silence, et son
+`.get(devise, 1.0)` traitait une devise absente de la table **comme de l'euro**.
+Le même trou existait à la fin de `to_eur`, où un `return round(montant, 2)`
+implicite laissait passer au pair toute devise inconnue — des yens comptés comme
+des euros, un facteur 170. Aucune devise de l'univers publié n'était hors table,
+donc le trou n'était pas ouvert ; il l'était en puissance, et rien ne l'aurait
+signalé.
+
+Une nuance est assumée et écrite : les deux paires majeures sont demandées avant
+qu'on sache quelles devises sont détenues, donc une panne sur la livre fera
+échouer un run même sans position britannique. Les deux paires viennent de la
+même source, et le dollar pèse 64 % du portefeuille — rendre l'appel paresseux
+pour épargner ce cas rare ajouterait une logique conditionnelle qui, elle,
+pourrait se tromper.
+
 ### Un taux de change inventé, servi en silence, sous 64 % du portefeuille
 
 `get_eur_usd_rate()` repliait sur **1,10** dès que Yahoo ne répondait pas — sans

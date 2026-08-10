@@ -61,7 +61,8 @@ jobs:
           # dépose une à chaque passage, mais notes/watchlist_archive/ est un
           # journal HEBDOMADAIRE. Y ajouter une entrée par jour ouvré en
           # changerait la nature sans que personne l'ait décidé.
-          git add portfolio.json watchlist.json universe.json charts.json charts/
+          # charts.json retiré le 10/08/2026 (le front ne le chargeait plus).
+          git add portfolio.json watchlist.json universe.json charts/
           if git diff --staged --quiet; then
             echo "Aucun changement (marché fermé ou jour férié)."
           else

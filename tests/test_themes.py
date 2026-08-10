@@ -348,8 +348,16 @@ _inconnus = sorted(t for t in _manipules
 check("aucun titre manipulé ne cote sur une place inconnue de la table",
       not _inconnus, str(_inconnus))
 _convertibles = _devises - {"EUR", "USD", "GBP"}
-check("chaque devise détectée hors EUR/USD/GBP a sa paire ET son repli",
-      _convertibles <= set(pa._FX_PAIRS) and _convertibles <= set(pa._FX_FALLBACK),
+# LA TABLE DE REPLI A DISPARU LE 10/08/2026, et ce contrôle ne lui survit qu'à
+# moitié : il exigeait « sa paire ET son repli ». Les taux écrits en dur ont été
+# retirés — ils étaient servis en silence dès que la source se taisait, et
+# `.get(devise, 1.0)` traitait une devise absente comme de l'euro. Le run échoue
+# désormais plutôt que d'inventer. Reste l'autre moitié, qui elle est toujours
+# vraie et toujours nécessaire : une devise que `detect_currency` sait produire
+# doit avoir sa paire de change, sinon la conversion s'arrête sur une devise que
+# le projet manipule pour de bon.
+check("chaque devise détectée hors EUR/USD/GBP a sa paire de change",
+      _convertibles <= set(pa._FX_PAIRS),
       str(sorted(_convertibles - set(pa._FX_PAIRS))))
 # LE VALIDATEUR AUSSI convertit des devises, et il l'a payé le 08/08/2026 :
 # TWD et HKD avaient été ajoutés à BORNES_PRIX et oubliés dans la table des
