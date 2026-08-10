@@ -897,6 +897,48 @@ check_connus("aucune fiche publiée n'est inatteignable depuis le site",
 check_connus("chaque ligne détenue au portefeuille a sa fiche",
              {t: "position ouverte sans fiche" for t in sorted(_detenues - set(FICHES))})
 
+# ── 11. LES ILLUSTRATIONS : UNE OBLIGATION LÉGALE, ET AUCUN CADRE CASSÉ ─────
+print("\n— Les illustrations tiennent-elles leurs promesses ? —")
+# RIEN NE VÉRIFIAIT CECI, et l'une des trois est une obligation légale, pas une
+# préférence : le front n'affiche l'attribution que si le champ `credit` existe
+# (« const cr=P.credit?… »), et les licences CC-BY et CC-BY-SA l'EXIGENT. Une
+# entrée sous CC-BY sans crédit publierait une photo en violation de sa licence,
+# en silence, sans que rien ne casse à l'écran.
+#
+# LES DEUX ENSEMBLES DOIVENT COÏNCIDER. Une légende sans image affiche un cadre
+# vide, une image sans légende n'est jamais rendue — le front sort avant
+# (« if(!P) return '' »), et l'octet téléchargé l'a été pour rien. Le contrôle
+# ne les rattache PAS aux fiches : `assets/titres/` n'est pas purgé quand
+# `charts/` l'est, et c'est voulu — le top 30 tourne, et une illustration
+# conservée évite de re-solliciter la source quand le titre revient.
+try:
+    _LEG = {k: v for k, v in json.load(
+        open("assets/titres/LEGENDES.json", encoding="utf-8")).items()
+        if isinstance(v, dict)}
+except Exception as _e:                                      # noqa: BLE001
+    _LEG = {}
+    ko.append(f"assets/titres/LEGENDES.json illisible ({_e})")
+_JPG = {os.path.basename(p)[:-len(".jpg")] for p in glob.glob("assets/titres/*.jpg")}
+check("chaque illustration a son image ET sa légende",
+      set(_LEG) == _JPG,
+      f"image sans légende : {sorted(_JPG - set(_LEG))[:5]} · "
+      f"légende sans image : {sorted(set(_LEG) - _JPG)[:5]}")
+# « BY » dans le nom de la licence = paternité exigée. La règle se lit sur les
+# licences RÉELLEMENT présentes (CC BY 2.0/2.5/3.0/4.0, CC BY-SA 2.0/3.0/4.0,
+# « CC BY-SA 3.0 de »), et laisse dehors celles qui ne l'exigent pas — domaine
+# public, CC0, marque du domaine public.
+_sans_credit = sorted(t for t, v in _LEG.items()
+                      if "BY" in (v.get("licence") or "").upper() and not v.get("credit"))
+check("toute licence exigeant la paternité porte son crédit",
+      not _sans_credit, str(_sans_credit))
+# Le nom du fichier d'origine est la SEULE pièce qui permette de vérifier qu'une
+# vignette illustre bien la société : quatre fois une image plausible s'est
+# révélée être le produit d'un concurrent (carte Supermicro pour Astera Labs,
+# boîtier Netgear pour Fortinet, bras Universal Robots pour Doosan, caméra IDS
+# pour Cognex). Sans ce champ, la vérification n'est plus possible du tout.
+_sans_source = sorted(t for t, v in _LEG.items() if not v.get("source"))
+check("chaque illustration nomme son fichier source", not _sans_source, str(_sans_source))
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:

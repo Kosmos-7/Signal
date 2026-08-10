@@ -5,6 +5,43 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Les illustrations : « 89 candidats » n'en font pas 89 d'utilisables
+
+Vingt-neuf fiches sur cent quarante-huit n'ont pas d'illustration. Le dossier est
+par ailleurs sain : cent trente-neuf images, cent trente-neuf légendes, aucun
+cadre vide, aucune image téléchargée pour n'être jamais rendue.
+
+**Le rapport de sonde surestime ce qui est exploitable.** Il compte 89 titres
+« avec candidat », mais un candidat est un résultat de recherche, pas une
+illustration. Il suffit de lire les noms de fichiers — la seule chose qui permette
+de vérifier qu'une vignette illustre bien la société — pour voir ce que ces
+candidats valent : *Arastra Gulch, Baker's Park. Silverton Quadrangle* pour Arista
+Networks, une photo de la mission *Apollo 14* pour ASE Group, un *recensement de
+1940* pour Blackstone, une carte marine du XVII<sup>e</sup> siècle pour Ibiden,
+*Buildings in Ōmori 10.jpg* pour Disco Corporation. Sur les 89, 37 n'ont aucun
+mot commun entre le nom de la société et le fichier proposé — mesure grossière,
+qui compte quelques faux négatifs (*Chicago.Mercantile.Exchange.jpg* pour CME est
+la bonne image), mais l'ordre de grandeur est là.
+
+C'est le piège qui a déjà coûté quatre fois : une carte Supermicro pour Astera
+Labs, un boîtier Netgear pour Fortinet, un bras Universal Robots pour Doosan, une
+caméra IDS pour Cognex. **Vingt-cinq des vingt-neuf fiches sans illustration n'ont
+par ailleurs jamais été sondées** — le rapport n'en couvre que 104.
+
+**Trois invariants figés, dont un légal.** Le front n'affiche l'attribution que si
+le champ `credit` existe, et les licences CC-BY et CC-BY-SA l'exigent : une entrée
+sous CC-BY sans crédit publierait une photo en violation de sa licence, en
+silence, sans que rien ne casse à l'écran. Rien ne le vérifiait. La vérification
+est rassurante — les 98 entrées sous licence BY sont toutes créditées, les 19
+visuels d'entreprise aussi, et les 14 sans crédit sont toutes en domaine public ou
+CC0, qui ne l'exigent pas — mais elle ne tenait à rien. Les deux autres contrôles
+exigent que les images et les légendes coïncident, et que chaque entrée nomme son
+fichier source, sans quoi la vérification de provenance devient impossible.
+
+Aucune illustration n'a été promue : Wikimedia est bloqué par le proxy de
+développement, et promouvoir sans lire le nom du fichier source est précisément
+l'erreur à ne pas refaire.
+
 ### L3Harris : ce n'est pas le changement d'exercice qui tronque, c'est le filtre
 
 La série de L3Harris s'arrête en 2019 pendant que ses trimestres vont jusqu'en
