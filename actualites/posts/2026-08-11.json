@@ -1,0 +1,164 @@
+{
+ "id": "2026-08-11",
+ "type": "quotidien",
+ "date": "2026-08-11",
+ "titre": "Marchés à l'arrêt, l'or en forme et le pétrole surveille l'Iran",
+ "chapeau": "Wall Street a peu bougé lundi, pendant que l'or enchaîne une troisième séance de hausse et que le pétrole monte sur fond de tensions américano-iraniennes.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-11.jpg",
+  "v": "8fdc7a18",
+  "legende": "Big Board of Trade",
+  "credit": "Amaury Laporte",
+  "licence": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Big_Board_of_Trade_(16914319605).jpg",
+  "fichier": "Big Board of Trade (16914319605).jpg",
+  "requete": "stock exchange display board"
+ },
+ "marches": {
+  "ref": "2026-08-10",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7753.10986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.05839757139619227,
+    "ref": "2026-08-10"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8726.0302734375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.12737436027076382,
+    "ref": "2026-08-10"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26605.359375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.31943719692597405,
+    "ref": "2026-08-10"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6535.6201171875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.18026527474081955,
+    "ref": "2026-08-10"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.698999881744385,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.03900003433227539,
+    "ref": "2026-08-10"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4361.7998046875,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.4860876915154233,
+    "ref": "2026-08-10"
+   }
+  ],
+  "mouvement": {
+   "libelle": "QUALCOMM Incorporated",
+   "valeur": 162.1699981689453,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -3.389730978623242,
+   "ref": "2026-08-10",
+   "ticker": "QCOM",
+   "nom": "QUALCOMM Incorporated"
+  }
+ },
+ "marches_texte": "La séance de lundi s'est résumée à un quasi-sur-place des indices américains : le S&P 500 cède 0,06 % à 7 753 points, le Nasdaq recule un peu plus franchement à -0,32 %. De ce côté de l'Atlantique, le CAC 40 (+0,13 %) et l'Euro Stoxx 50 (+0,18 %) s'en tirent légèrement mieux. L'or, lui, poursuit sa série avec +0,49 % à 4 361,80 $, et le rendement du Treasury à dix ans remonte à 4,699 %. La palme du mouvement du jour revient à Qualcomm, en repli de 3,39 %.",
+ "sections": [
+  {
+   "titre": "Or : trois séances de hausse, les chiffres d'inflation en ligne de mire",
+   "texte": "L'or progresse pour la troisième session consécutive, selon Reuters. Les investisseurs gardent un œil sur les prochaines publications d'inflation, qui pourraient donner le tempo aux métaux précieux dans les prochains jours.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Pétrole et actions asiatiques : l'impasse américano-iranienne s'invite",
+   "texte": "Les cours du pétrole progressent tandis que les marchés actions asiatiques dérivent sans direction claire, dans un contexte de blocage des négociations entre Washington et Téhéran, rapporte Reuters. La Chine, de son côté, joue un rôle d'amortisseur sur la demande de brut en Asie : selon Reuters, elle compense à elle seule les déséquilibres régionaux d'approvisionnement.",
+   "sources": [
+    1,
+    0
+   ]
+  },
+  {
+   "titre": "Meta avance sur les assistants IA personnels",
+   "texte": "Le dernier modèle d'intelligence artificielle de Meta marque une étape supplémentaire dans la vision de Mark Zuckerberg pour les assistants IA personnels, selon CNBC. L'annonce intervient dans une semaine déjà chargée pour le secteur technologique.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Washington resserre la surveillance des ingrédients alimentaires",
+   "texte": "Le département américain de la Santé (HHS) annonce un renforcement du contrôle des ingrédients alimentaires et engage une définition formelle des aliments ultra-transformés, rapporte CNBC. Cette initiative intervient alors que des interrogations grandissent sur la visibilité de la FDA en matière de sécurité alimentaire.",
+   "sources": [
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "China is balancing Asia's crude oil demand by itself - Reuters",
+   "resume": "China is balancing Asia's crude oil demand by itself  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNN0lBeUJuUi1Nek03cm1rOF9xMFhxS2RNa1NUNkxqQk9UT1dYOENkMHduLUx3ei12d3VQZmxLSlV6cFd3cDZXc05JcnJ3YnRXRjl2b3VMb2M0T1R3OUpVUnhfVWNxY1d0akVsQ1U0V1hkOEE1eUZWN2FySzNXcHRmLXJpNlR2SWlRekRYbkVld1VqNDI5S0RFdWFVUHBJQXF2bl9FMDZJUmotVzlfZlBidUhVTWpRTVMzYWZlTQ?oc=5",
+   "date": "2026-08-11 03:50"
+  },
+  {
+   "titre": "Oil prices rise, Asia stocks drift on US-Iran stalemate - Reuters",
+   "resume": "Oil prices rise, Asia stocks drift on US-Iran stalemate  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPRnpVTlc5WDU3ZUFOMTJjSFRLNGFCWUItblV4clc0UnVXUi05VVBaRkFleHpsdWtmcl9YZDRtN3BkaDhqUy1PTWx1aDhjalNDc09RNGh5eDFYN2FnTGxraUlhRWtFUnl0UTJrbV82Yi1CaFEyNmNwaHlvQVdobElUNEZVaw?oc=5",
+   "date": "2026-08-11 01:41"
+  },
+  {
+   "titre": "Gold rises for third straight session, inflation prints in focus - Reuters",
+   "resume": "Gold rises for third straight session, inflation prints in focus  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOQ3pfajk5NldmMDliSlhNU3ZYd1J6UGt3cWM4ZHBzTkxnYTVGbnVWU0ZOVFFqLUk2eFYyQnhxdUxiUFp5Y0lXTnpEOGIwMHBveTR5bzBvZmxjWTA4TmR6OUt0U1ZSd2V0dDhkMlg4TkpFdlFCSEtJN3BXYXJQMFZLZDgyZjR6UTRXeU5fRFZ1MHM1WXpCMEtTOF9CNmptQTJmNzBQN1JyMA?oc=5",
+   "date": "2026-08-11 00:48"
+  },
+  {
+   "titre": "Meta's latest model advances Zuckerberg's vision for personal AI assistants",
+   "resume": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/10/metas-latest-model-advances-zuckerbergs-vision-for-personal-ai-assistants.html",
+   "date": "2026-08-10 19:09"
+  },
+  {
+   "titre": "HHS moves to tighten oversight of food ingredients as safety concerns mount",
+   "resume": "HHS moves to tighten oversight of food ingredients and define ultra-processed foods as food safety concerns raise questions about FDA visibility.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/10/hhs-makes-announcements-on-gras-ultraprocessed-food.html",
+   "date": "2026-08-10 15:03"
+  }
+ ],
+ "genere_le": "2026-08-11 06:34 UTC"
+}
