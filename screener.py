@@ -3275,6 +3275,25 @@ def main():
             "v":            _bloc_pts(bd, "v"),
             "m":            _bloc_pts(bd, "m"),
             "couverture":   (bd.get("note") or {}).get("couverture"),
+            # ── MULTIPLES, MARGES ET CROISSANCE (12/08/2026) ──────────────
+            # Le contrat compact n'en portait aucun : les 118 fiches thématiques
+            # étaient rédigées sans un chiffre de valorisation, leur signature
+            # éditoriale rendait « na » stablement (donc muette), et le modèle
+            # écrivait des multiples de mémoire. Ces champs referment les deux
+            # trous, et rendent une publication de résultats VISIBLE par la
+            # signature : trimestre publié → paliers déplacés → fiche réécrite.
+            # Récit complet : CHANGELOG du 12/08. Garde : test_themes (AST,
+            # producteur/lecteurs) + test_donnees (signature non aveugle).
+            "per_fwd":          bd.get("forward_pe"),
+            "per_cur":          bd.get("trailing_pe"),
+            "fcf_yield_pct":    bd.get("fcf_yield_pct"),
+            "marge_nette_pct":  bd.get("net_margin_pct"),
+            "marge_fcf_pct":    bd.get("fcf_margin_pct"),
+            "croissance_ca_pct": bd.get("rev_growth_pct"),
+            "croissance_ca_fin": bd.get("rev_growth_fin"),
+            # Présence/absence seulement : la signature ne lit que le booléen,
+            # et le libellé complet vit dans charts/<T>.json.
+            "alerte":       bd.get("signal_dynamics_warning") or "",
             "themes":       ths,
             "top30":        t in top_tickers,
         }
