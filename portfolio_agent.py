@@ -746,6 +746,18 @@ def fusionner_univers_achetable(watchlist, universe):
                 "target_analysts":   u.get("analystes"),
                 "prix":         u.get("prix"),
                 "devise":       u.get("devise"),
+                # Multiples/marges/croissance (contrat compact du 12/08/2026) :
+                # sans eux l'agent pouvait proposer un titre thématique à l'achat
+                # sur le seul score, sans savoir à quel prix. Table miroir de
+                # generate_analyses.stock_depuis_universe(), tenue par test_themes.
+                "forward_pe":              u.get("per_fwd"),
+                "trailing_pe":             u.get("per_cur"),
+                "fcf_yield_pct":           u.get("fcf_yield_pct"),
+                "net_margin_pct":          u.get("marge_nette_pct"),
+                "fcf_margin_pct":          u.get("marge_fcf_pct"),
+                "rev_growth_pct":          u.get("croissance_ca_pct"),
+                "rev_growth_fin":          u.get("croissance_ca_fin"),
+                "signal_dynamics_warning": u.get("alerte") or "",
             },
         })
         ajoutes += 1

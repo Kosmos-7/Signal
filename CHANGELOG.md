@@ -37,6 +37,111 @@ empoisonné au-delà du mois courant produit un état final identique au pack
 sain — le futur n'est pas lisible, c'est vérifié. Rien ne quitte le
 navigateur : la sauvegarde vit en localStorage, exportable en JSON.
 
+### La watchlist « Espace » nommait un secteur, pas son sujet
+
+Le propriétaire l'a signalé : le vrai terme est **NewSpace** — « un sous-ensemble
+du secteur spatial qui fait son apparition au milieu de la décennie 2000 et qui
+se caractérise par l'apparition d'une nouvelle génération d'acteurs industriels,
+l'utilisation de technologies et de processus innovants, la recherche de nouveaux
+débouchés et de nouvelles méthodes de financement ». Un sous-ensemble, et un
+sous-ensemble défini **contre** ce qui le précédait.
+
+**Le changement n'est donc pas d'étiquette, il est de périmètre.** Prendre le mot
+au sérieux fait sortir de la liste les dix maîtres d'œuvre historiques (Lockheed,
+Northrop, L3Harris, RTX, BAE, Airbus, Thales, Safran, Leonardo, Kratos) et les
+quatre opérateurs de satellites qui les accompagnaient (SES, Eutelsat, Viasat,
+Iridium) : quatorze titres sur vingt.
+
+**Le texte de la liste l'avouait déjà** — « LA LISTE EST COUPÉE EN DEUX, et ses
+deux moitiés ne se comportent pas du tout pareil […] comparer les scores d'une
+moitié à l'autre n'a pas de sens ». Une watchlist qui écrit qu'elle mesure deux
+objets en mesure un de trop.
+
+**On retire une liste, pas des sociétés** : troisième emploi de cette phrase après
+la chaîne quantique et l'ex-thème financials. Les quatorze restent dans l'univers
+du screener, scorés et candidats au top 30 — six d'entre eux n'y existaient que
+par ce thème et sont désormais déclarés explicitement dans `screener.py`.
+
+**Un titre entre**, validé avant d'être écrit comme le prescrit
+`validate_tickers.py` : Voyager Technologies (~2,6 Md$, 1,2 an de cotation), qui
+construit Starlab — le débouché que la station spatiale internationale laissera
+vacant. Il ouvre avec Redwire un maillon « travailler en orbite ».
+
+**Onze candidats éprouvés contre Yahoo le 12/08, aucun deviné.** Quatre écartés
+sur la règle et non sur la taille — Globalstar, AeroVironment, Karman, Avio :
+une cotation neuve ne fait pas une génération neuve. Cinq écartés sous le
+milliard — Spire, Satellogic, Virgin Galactic, GomSpace, AAC Clyde — dont les
+deux seuls NewSpace européens cotés, qui pèsent le dixième du plus petit titre de
+la liste. Firefly reste au registre : son fournisseur ne rend aucune
+capitalisation, et plusieurs points de la note se calculent dessus.
+
+**Sept titres, donc, et une deuxième exception nommée** à la règle des vingt, à
+côté de « quantique ». Baisser le seuil aurait été plus simple ; nommer
+l'exception oblige la suivante à se justifier aussi.
+
+L'identifiant a suivi le nom, illustration et légendes comprises :
+`espace` → `newspace`.
+
+### Audit du 12/08 : les chiffres cités que rien ne surveillait
+
+Point de départ : « les fiches de CoreWeave et Nebius se mettent-elles à jour
+toutes seules ? » Les chiffres oui, chaque soir ; les textes non — et en
+cherchant pourquoi, l'audit a trouvé trois trous du même genre, un défaut dans
+son propre garde-fou, et un bug dans son propre instrument de mesure.
+
+**1. Le contrat compact ne portait aucun chiffre de valorisation.** 118 des 148
+fiches publiées sont rédigées depuis `universe.json`, sans PER, sans marge, sans
+croissance. Leur signature éditoriale calculait « donnée absente » quatre fois de
+suite, stablement, donc sans jamais rien signaler : le garde-fou du 09/08 ne
+protégeait que 30 fiches sur 148. Et privé de chiffres, le modèle en écrivait de
+mémoire — neuf fiches citent une marge brute, une marge opérationnelle ou un
+cours/ventes, grandeurs que le dépôt ne calcule nulle part et qu'aucun contrôle
+ne pourra jamais infirmer ; Teradyne va jusqu'à nommer une source jamais
+consultée. Le contrat porte désormais les sept grandeurs (test AST
+producteur/lecteurs à l'appui), et une publication de résultats déplace la
+signature, donc réécrit la fiche au run suivant — ce qui répond à la question de
+départ.
+
+Le cas Micron fixe le critère : « multiple forward autour de 6x, exercice 2027 »
+sans qu'aucun des deux figure dans son prompt — et les deux sont JUSTES (5,6x,
+2027). Rien ce jour-là n'aurait distingué ce 6 juste d'un 9 faux. Le critère
+n'est pas d'avoir raison, c'est d'avoir une source ; le guide le dit maintenant
+en ces termes.
+
+**2. Trois grandeurs vivaient dans l'entre-deux que la règle interdit.**
+La *décote vs tendance* (355 citations chiffrées, dix fois le RSI) passe hors
+chiffre : dirigée par le cours, non bornée, 14 fiches sur 144 avec plus de dix
+points d'écart en deux jours — la surveiller coûtait 46 réécritures/2 jours.
+Le *potentiel consensus* (145 citations, le chiffre le plus cité du site) passe
+hors chiffre AUSSI, mais son SIGNE entre dans la signature par tranches larges :
+« consensus modestement positif (8 %) » écrit sur Vestas face à −8,9 % est faux
+en mots, et retirer le nombre ne répare pas la phrase — quatre bascules de signe
+en deux jours, douze potentiels négatifs au 12/08. La *marge FCF* (27 citations)
+entre dans la signature pour zéro palier franchi en deux jours : une marge TTM ne
+bouge que quand l'entreprise publie. Le z-score passe au demi-sigma (la prose le
+cite au dixième, « neutre » couvrait ]−2σ, +2σ[).
+
+La règle générale que ces trois cas dégagent : **on surveille une grandeur à la
+finesse à laquelle la prose l'exprime.** Chiffrée → paliers serrés ; qualifiée →
+tranches ; tue → rien.
+
+**3. Le garde-fou et l'instrument avaient chacun leur défaut.** Le seuil du test
+prose/fiche valait `pas/2` en absolu — juste sur la distance au centre d'un
+palier, faux entre deux valeurs : une marge de 2,56 % → 5,09 % était dénoncée
+sans changement de palier, un rouge sans remède. Seuil au pas entier, propriété
+vérifiée par balayage (bornes négatives incluses) et non plus sur un point choisi
+par l'auteur du test. Et le motif `\d+[,.]?\d*` devant « surcote de 1 300 % »
+capturait « 300 » : le relevé accusait Advantest de 1 036 points d'écart qu'il a
+lui-même fabriqués. Tous les motifs passent par un lecteur de nombres français
+unique (séparateurs de milliers compris). Les tolérances descendent de
+`CHAMPS_VALO`, écrites une seule fois.
+
+**Conséquences d'exploitation.** `PROMPT_VERSION` est bumpé : le prochain run
+hebdomadaire réécrit les 148 fiches d'un coup (~14 min, ~4,50 $), puis le churn
+s'établit vers ~50 % du corpus par semaine (~2,30 $) — c'est le prix de textes
+qui suivent leurs chiffres. Registre CONNUS : 9 fiches hors périmètre inscrites,
+à vider au prochain run éditorial.
+
 ### Le maillon mémoire décrivait un oligopole en oubliant un de ses membres
 
 Kioxia manquait à l'infrastructure de l'IA, signalé par le propriétaire. Elle

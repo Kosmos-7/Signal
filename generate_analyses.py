@@ -281,6 +281,18 @@ def stock_depuis_universe(ticker, u, labels):
             "cross_days_ago":          u.get("cross_j"),
             "target_upside_pct":       u.get("upside_pct"),
             "target_analysts":         u.get("analystes"),
+            # Multiples, marges et croissance (contrat compact enrichi le
+            # 12/08/2026, cf. CHANGELOG). Ils entrent dans le prompt ET dans la
+            # signature ; la table miroir vit dans screener.py (producteur) et
+            # portfolio_agent.py (2e lecteur), tenues ensemble par test_themes.
+            "forward_pe":              u.get("per_fwd"),
+            "trailing_pe":             u.get("per_cur"),
+            "fcf_yield_pct":           u.get("fcf_yield_pct"),
+            "net_margin_pct":          u.get("marge_nette_pct"),
+            "fcf_margin_pct":          u.get("marge_fcf_pct"),
+            "rev_growth_pct":          u.get("croissance_ca_pct"),
+            "rev_growth_fin":          u.get("croissance_ca_fin"),
+            "signal_dynamics_warning": u.get("alerte") or "",
         },
     }
 
@@ -394,7 +406,12 @@ def bucket_score(score):
 
 # Version du style/prompt éditorial — bumper FORCE la régénération de toutes les fiches
 # (la signature change), p.ex. après un changement de ton ou d'exigence de chiffrage.
-PROMPT_VERSION = "2026-08-valo-dans-signature"  # multiples surveillés + socle unique
+PROMPT_VERSION = "2026-08-valo-toutes-fiches"  # chiffres fournis aux 148, décote hors chiffre
+# Bump DÉLIBÉRÉ du 12/08/2026 : plusieurs règles d'écriture changent le même jour
+# et 118 fiches reçoivent pour la première fois des multiples dans leur prompt.
+# Sans lui, le site aurait deux styles pendant des semaines ; avec lui, tout est
+# réécrit d'un coup au run suivant (cf. CHANGELOG).
+# Historique : "2026-08-valo-dans-signature" (multiples surveillés + socle unique).
 # Historique : "2026-08-sans-rsi-chiffre" (RSI/drawdown interdits de chiffre).
 # Historique : "2026-08-univers-2niveaux" (union watchlist+univers, prompt à 2 niveaux).
 # Bump du 08/08/2026 — sans lui, la règle « ne chiffre pas le RSI » ne s'appliquerait
@@ -410,6 +427,11 @@ CHAMPS_VALO = (
     ("trailing_pe",  "rel", 0.10),
     ("fcf_yield_pct", "abs", 1.0),
     ("net_margin_pct", "abs", 5.0),
+    # Marge FCF ajoutée le 12/08/2026 : citée par 27 fiches, fournie au prompt,
+    # surveillée par rien. Coût mesuré : zéro palier franchi en deux jours — une
+    # marge TTM ne bouge que quand l'entreprise publie, exactement le jour où le
+    # texte devient faux.
+    ("fcf_margin_pct", "abs", 5.0),
 )
 
 
@@ -476,21 +498,31 @@ def signature(stock, niveau):
       - score bucket     : note de synthèse par paliers de 5 (pilote resume + bull/bear)
       - cross_type       : golden / death / neutre  (régime narratif)
       - cross_days bucket: frais/recent/etabli/ancien (poids du signal, pas le J exact)
-      - regression bucket: survente / neutre / surchauffe (cadrage prix vs valeur)
+      - regression palier: z-score par tranches de 0,5σ (cadrage prix vs valeur).
+                           Trois régimes larges jusqu'au 12/08/2026 : la prose cite
+                           le z au dixième de sigma, « neutre » couvrait ]-2σ, +2σ[,
+                           un 0,9σ publié pouvait donc devenir 1,9σ sans réécriture.
       - rev_growth arrondi à 5% près : la dynamique de croissance change le discours
       - signal_dynamics_warning présent/absent : nuance "signal en transition"
-    Volontairement EXCLUS : rsi, fibo, drawdown au point de base près, val_pts —
-    et ceux-là sont, en contrepartie, INTERDITS DE CHIFFRE dans la prose. La règle
-    du projet est symétrique depuis le 09/08 : une grandeur est soit citable et
-    surveillée par la signature, soit hors signature et interdite de chiffre.
+    Volontairement EXCLUS : rsi, fibo, drawdown au point de base près, val_pts, et
+    depuis le 12/08/2026 la décote/surcote vs tendance — tous INTERDITS DE CHIFFRE
+    dans la prose en contrepartie. La règle du projet est symétrique depuis le
+    09/08 : une grandeur est soit citable et surveillée par la signature, soit hors
+    signature et interdite de chiffre.
     trop volatils d'un run à l'autre pour justifier un appel API coûteux (testé : un
-    RSI 49->72 + cross +1j + z +0.1σ + drawdown -99% ne change PAS la signature).
+    RSI 49->72 + cross +1j + drawdown -99% ne change PAS la signature).
+    La DÉCOTE a suivi la jurisprudence RSI le 12/08 : dirigée par le cours et non
+    bornée, trop volatile pour déclencher une réécriture, donc interdite de
+    chiffre (mesures au CHANGELOG). Le front l'affiche sous le graphique de
+    cours, recalculée chaque jour — sa vraie place.
     Également exclus : l'appartenance thématique. Un titre qui gagne ou perd un thème
     reste la même entreprise avec les mêmes chiffres — sa fiche n'a pas à être réécrite.
 
-    Sur un breakdown compact, rev_growth et le warning sont simplement absents : la
-    signature vaut "na"/"ok" de façon STABLE (elle ne clignote pas d'un run à l'autre),
-    et le churn reste piloté par score/cross/z.
+    LE BREAKDOWN COMPACT PORTE CES CHAMPS DEPUIS LE 12/08/2026 (cf. CHANGELOG :
+    les 118 fiches thématiques avaient une valorisation « na » stable, donc une
+    surveillance muette). Un "na" signifie désormais ce qu'il a toujours prétendu
+    signifier : la donnée n'existe pas chez l'émetteur — et un test refuse qu'une
+    fiche publiée porte "na" quand charts/<T>.json affiche la valeur.
 
     NB : le score passe par bucket_score(). Il reste une part de churn de frontière
     (un score qui oscille 72/73 traverse le palier 70/75) — assumée : la corriger
@@ -499,15 +531,32 @@ def signature(stock, niveau):
     """
     b = stock.get("breakdown", {}) or {}
 
+    # Z-SCORE PAR PALIERS DE 0,5σ (12/08/2026). La prose le cite au dixième de
+    # sigma, et l'ancien régime « neutre » couvrait ]-2σ, +2σ[ : un 0,9σ publié
+    # pouvait devenir 1,9σ sans réécriture. 0,5σ borne l'erreur à ±0,25σ, pour
+    # six régénérations de plus en deux jours mesurés. Les régimes narratifs se
+    # déduisent du palier (|palier| >= 4 ⇔ |z| >= 2σ).
     z = b.get("regression_z")
-    if z is None:
+    try:
+        z_bucket = str(int(round(float(z) / 0.5))) if z is not None else "na"
+    except (TypeError, ValueError):
         z_bucket = "na"
-    elif z <= -2.0:
-        z_bucket = "survente"
-    elif z >= 2.0:
-        z_bucket = "surchauffe"
-    else:
-        z_bucket = "neutre"
+
+    # LE POTENTIEL CONSENSUS, PAR TRANCHES LARGES ET SIGNÉES (12/08/2026). Cité
+    # par 115 fiches et dirigé par le cours, il est interdit de chiffre dans la
+    # prose (paliers fins : 61 réécritures/2 jours ; ces tranches : 18) mais son
+    # SIGNE reste surveillé — « consensus modestement positif » face à -8,9 % est
+    # faux en mots, et retirer le nombre ne répare pas la phrase. Règle générale
+    # dégagée (cf. CHANGELOG) : on surveille une grandeur à la finesse à laquelle
+    # la prose l'exprime — chiffrée, paliers serrés ; qualifiée, tranches ; tue,
+    # rien.
+    up = b.get("target_upside_pct")
+    try:
+        _u = float(up)
+        up_bucket = ("negatif" if _u < 0 else "faible" if _u < 10 else
+                     "moyen" if _u < 25 else "fort" if _u < 50 else "tres_fort")
+    except (TypeError, ValueError):
+        up_bucket = "na"
 
     rev = b.get("rev_growth_pct")
     try:
@@ -524,6 +573,7 @@ def signature(stock, niveau):
         str(b.get("cross_type", "")),
         bucket_cross_days(b.get("cross_days_ago")),
         z_bucket,
+        up_bucket,
         str(rev_bucket),
         warn,
         *bucket_valorisation(b),
@@ -743,30 +793,55 @@ def breakdown_block(stock, niveau):
             bouts.append(f"Zone Fibo : {fibo}")
         lines.append("- " + "   |   ".join(bouts))
 
-    # Fondamentaux — niveau complet uniquement (le compact ne les publie pas).
-    if any(b.get(k) is not None for k in ("rev_growth_pct", "net_margin_pct", "fcf_margin_pct")):
-        lines.append(
-            f"- Fondamentaux (PRÉCISE toujours la période dans la prose) : croissance CA "
-            f"{fmt(b.get('rev_growth_pct'),'%')} = dernier trimestre publié en glissement annuel (a/a)"
-            f"{(' au ' + b['mrq']) if b.get('mrq') else ''} · marge nette {fmt(b.get('net_margin_pct'),'%')} "
-            f"= TTM, 12 mois glissants · marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM"
-        )
+    # Fondamentaux — les deux niveaux depuis le 12/08/2026 : le contrat compact
+    # publie désormais croissance et marge nette, que 118 fiches sur 148 n'avaient
+    # jamais eues sous les yeux. La règle « une ligne n'est écrite QUE si la donnée
+    # existe » est inchangée ; c'est la donnée qui a cessé de manquer.
+    # CHAQUE GRANDEUR EST UN SEGMENT, ET UN SEGMENT SANS VALEUR DISPARAÎT
+    # (12/08/2026). En chaîne unique, une seule grandeur manquante écrivait
+    # « n/d » au milieu de la ligne — un trou nommé est une invitation à le
+    # combler. Gardé par test_donnees (« aucun trou nommé dans le prompt »).
+    _fonda = []
+    if b.get("rev_growth_pct") is not None:
+        _fonda.append(f"croissance CA {fmt(b.get('rev_growth_pct'),'%')} = dernier "
+                      f"trimestre publié en glissement annuel (a/a)"
+                      + (f" au {b['mrq']}" if b.get("mrq") else ""))
+    if b.get("net_margin_pct") is not None:
+        _fonda.append(f"marge nette {fmt(b.get('net_margin_pct'),'%')} = TTM, 12 mois glissants")
+    if b.get("fcf_margin_pct") is not None:
+        _fonda.append(f"marge FCF {fmt(b.get('fcf_margin_pct'),'%')} = TTM")
+    if _fonda:
+        lines.append("- Fondamentaux (PRÉCISE toujours la période dans la prose) : "
+                     + " · ".join(_fonda))
 
-    if any(b.get(k) is not None for k in ("forward_pe", "trailing_pe", "fcf_yield_pct")):
-        _peg_v4 = next((c.get("valeur") for c in ((b.get("note") or {}).get("criteres") or [])
-                        if c.get("id") == "peg" and c.get("pts") is not None), None)
+    _peg_v4 = next((c.get("valeur") for c in ((b.get("note") or {}).get("criteres") or [])
+                    if c.get("id") == "peg" and c.get("pts") is not None), None)
+    _valo = []
+    if b.get("forward_pe") is not None:
+        _valo.append(f"PER forward {fmt(b.get('forward_pe'),'x',1)}{_exercice_forward(stock)}")
+    if b.get("trailing_pe") is not None:
+        _valo.append(f"PER courant {fmt(b.get('trailing_pe'),'x',1)}")
+    if b.get("fcf_yield_pct") is not None:
+        _valo.append(f"FCF yield {fmt(b.get('fcf_yield_pct'),'%',1)}")
+    if _peg_v4 is not None:
+        _valo.append(f"PEG {fmt(_peg_v4,'',2)} (maison : PER forward ÷ "
+                     f"min(croissance attendue, démontrée))")
+    if b.get("regression_z") is not None:
+        _valo.append(f"z-score {fmt(b.get('regression_z'),'σ',1)}")
+    if _valo:
         lines.append(
-            f"- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple absent) : PER forward "
-            f"{fmt(b.get('forward_pe'),'x',1)}{_exercice_forward(stock)} · PER courant "
-            f"{fmt(b.get('trailing_pe'),'x',1)} · FCF yield "
-            f"{fmt(b.get('fcf_yield_pct'),'%',1)} · PEG {fmt(_peg_v4,'',2)} (maison : PER forward ÷ "
-            f"min(croissance attendue, démontrée)) · z-score "
-            f"{fmt(b.get('regression_z'),'σ',1)}. NB : un PER courant nettement supérieur au PER forward "
-            f"= bénéfices au creux de cycle (à expliquer, pas à confondre avec « cher »)."
+            "- Valorisation (CHIFFRE-la dans la prose ; n'invente AUCUN multiple "
+            "absent) : " + " · ".join(_valo)
+            + ". NB : un PER courant nettement supérieur au PER forward = bénéfices "
+              "au creux de cycle (à expliquer, pas à confondre avec « cher »)."
         )
 
     # Décote/surcote vs tendance + consensus (v3.3.0) — avec les garde-fous d'écriture :
     # jamais « marge de sécurité », caveat structurel obligatoire sur les extrêmes.
+    # Le nombre est fourni pour CADRER, plus pour être recopié (12/08/2026) :
+    # dirigé par le cours et non borné, il est trop volatile pour déclencher une
+    # réécriture, donc trop volatile pour être chiffré — jurisprudence RSI,
+    # mesures au CHANGELOG. L'écart chiffrable, c'est le z-score.
     dc = b.get("decote_pct")
     if dc is not None:
         sens = "décote" if dc >= 0 else "surcote"
@@ -780,15 +855,32 @@ def breakdown_block(stock, niveau):
             f"- {sens.capitalize()} vs tendance ({b.get('regression_window_years','?')} ans) : {abs(dc):.0f}% "
             + (f"(prix tendance {fmt(b.get('prix_tendance'),'',0)}). " if b.get("prix_tendance") is not None else "")
             + f"Tu PEUX la commenter dans `futur` ou `resume`, "
-              f"mais appelle-la « {sens} vs tendance », JAMAIS « marge de sécurité » (la référence est une trajectoire "
-              f"historique, pas une valeur intrinsèque).{caveat}"
+              f"mais SANS EN RECOPIER LE POURCENTAGE (recalculé chaque jour). "
+              f"Appelle-la « {sens} vs tendance », JAMAIS « marge de sécurité » "
+              f"(la référence est une trajectoire historique, pas une valeur "
+              f"intrinsèque). Pour chiffrer l'écart, utilise le z-score.{caveat}"
         )
 
+    # LE POTENTIEL CONSENSUS EST FOURNI POUR ÊTRE QUALIFIÉ, PAS RECOPIÉ
+    # (12/08/2026). C'était le chiffre le plus cité du site — 115 fiches sur 148 —
+    # et le moins surveillé : aucun palier, aucune règle. Il est pourtant dirigé
+    # par le cours, donc il bouge tous les jours. Samsung annonçait « un potentiel
+    # de 105 % » trois fois dans sa fiche, contre 84,7 % deux jours plus tard.
+    # Le SENS, lui, entre dans la signature par tranches larges : « le consensus
+    # est modestement positif (8 % de potentiel) » écrit sur Vestas fait face à un
+    # potentiel de -8,9 %, et cette phrase-là est fausse en mots. Voir signature().
     if b.get("target_upside_pct") is not None:
+        _u = b["target_upside_pct"]
+        _sens = ("NÉGATIF : le cours est AU-DESSUS de la cible moyenne" if _u < 0
+                 else "faible" if _u < 10 else "modéré" if _u < 25
+                 else "élevé" if _u < 50 else "très élevé")
         lines.append(
-            f"- Objectif consensus analystes : {fmt(b.get('target_upside_pct'),'%',0)} de potentiel "
-            f"({b.get('target_analysts') or '?'} analystes) — indicatif, biais optimiste structurel documenté ; "
-            f"si consensus et tendance long terme divergent fortement, ce désaccord mérite une phrase."
+            f"- Objectif consensus analystes : potentiel {_sens} "
+            f"({b.get('target_analysts') or '?'} analystes). NE RECOPIE PAS ce "
+            f"potentiel en pourcentage, il est recalculé chaque jour et ton texte "
+            f"ne l'est pas : dis-en le SENS. Indicatif, biais optimiste structurel "
+            f"documenté ; si consensus et tendance long terme divergent fortement, "
+            f"ce désaccord mérite une phrase."
         )
 
     warn = (b.get("signal_dynamics_warning") or "").strip()
@@ -967,13 +1059,22 @@ Date du jour : {today}.
   Dis ce que la note SIGNIFIE, jamais combien elle vaut. Les grandeurs stables
   (marge, croissance, multiple) restent les bienvenues : elles bougent lentement et
   elles portent du sens dans une phrase.
-- INTERDIT : chiffrer le RSI ou le drawdown 52 semaines. Ces deux-là sont recalculés
-  À CHAQUE RAFRAÎCHISSEMENT DES COURS, quotidiennement, alors que ton texte n'est
-  réécrit que lorsque le score, le croisement ou le z-score bougent. Un « RSI à 30 »
-  écrit aujourd'hui affronte un RSI à 39 sur la fiche dans trois jours. Ils te sont
-  donnés pour CADRER LE TON (survente ou surchauffe, proche ou loin des plus hauts),
-  jamais pour être recopiés : dis « en zone de survente », « à bonne distance de son
-  plus haut de l'année », pas le nombre.
+- INTERDIT : chiffrer le RSI, le drawdown 52 semaines, la décote/surcote vs
+  tendance ou le potentiel consensus. Ces quatre-là sont recalculés chaque jour,
+  ton texte non. Ils te sont donnés pour CADRER LE TON, jamais pour être
+  recopiés : dis « en zone de survente », « nettement au-dessus de sa tendance
+  décennale », « le consensus ne voit plus qu'un potentiel marginal », pas le
+  nombre. Pour chiffrer l'écart à la tendance, utilise le z-score : lui est
+  surveillé. ATTENTION AU SIGNE DU POTENTIEL : négatif = le cours est DÉJÀ
+  AU-DESSUS de la cible moyenne des analystes ; écrire « le consensus reste
+  positif » serait alors faux en mots, pas seulement en chiffres.
+- INTERDIT : citer une grandeur que les données ci-dessus ne te donnent PAS, même
+  si tu crois la connaître, et MÊME SI TU AS RAISON. La marge brute, la marge
+  opérationnelle et le ratio cours/ventes n'existent NULLE PART dans ce projet :
+  un tel nombre ne peut venir que de ta mémoire, et aucun contrôle ne pourra
+  jamais l'infirmer. Le critère n'est pas d'avoir raison, c'est d'avoir une
+  source : si le chiffre est fourni ci-dessus, cite-le ; sinon, écris la phrase
+  sans nombre.
 - INTERDIT : le tiret cadratin « — » comme ponctuation. C'est la signature la plus
   reconnaissable d'un texte de machine, et elle décrédibilise la fiche entière.
   Utilise une virgule pour une apposition, deux-points pour une explication, ou

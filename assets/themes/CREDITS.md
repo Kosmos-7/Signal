@@ -115,9 +115,12 @@ société qui n'est pas membre : on ne met aucun logo d'entreprise sur la
 vignette d'une liste sectorielle. Recadrer pour l'effacer était possible, et
 écarté aussi : on préfère une image non retouchée à une image amputée.
 
-## espace
+## newspace
 
-- Fichier : `assets/themes/espace.jpg`
+*(la watchlist s'appelait « espace » jusqu'au 12/08/2026 ; le fichier a été
+renommé avec elle, l'image et son crédit sont inchangés.)*
+
+- Fichier : `assets/themes/newspace.jpg`
 - Source : File:SpaceX Crew-8 Launch (KSC-20240303-PH-JBS01 0002).jpg
 - Page : https://commons.wikimedia.org/wiki/File:SpaceX_Crew-8_Launch_(KSC-20240303-PH-JBS01_0002).jpg
 - Licence : Public domain

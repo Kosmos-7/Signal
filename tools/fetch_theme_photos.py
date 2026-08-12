@@ -126,7 +126,7 @@ REQUETES = {
         "machine vision camera inspection conveyor",
         "warehouse automation mobile robots",
     ],
-    "espace": [
+    "newspace": [
         # LE SUJET LE MIEUX PHOTOGRAPHIÉ DU SITE, et pour une raison de droit :
         # les agences spatiales publiques versent leurs images au domaine
         # public. La NASA, l'ESA et la NOAA en produisent des milliers, prises

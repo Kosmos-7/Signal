@@ -1887,6 +1887,21 @@ UNIVERS += [
     "6902.T",                   # Denso — équipementier automobile, actionneurs
 ]
 
+# Troisième fois le même geste, pour la watchlist ESPACE devenue NEWSPACE le
+# 12/08/2026 (décision propriétaire). Le mot NewSpace désigne la génération
+# d'acteurs apparue au milieu des années 2000, donc PAS les maîtres d'œuvre
+# historiques ni les opérateurs de satellites qui les précédaient : quatorze
+# titres sont sortis de la LISTE. Huit d'entre eux (LMT, RTX, NOC, BA.L, AIR.PA,
+# HO.PA, SAF.PA, LDO.MI) appartiennent à l'univers historique ci-dessus et n'ont
+# besoin de rien. Les six autres n'y existaient QUE par le thème : sans cette
+# liste, six sociétés validées perdraient leur note et six fiches déjà publiées
+# deviendraient orphelines. On retire une liste, pas des sociétés.
+UNIVERS += [
+    "LHX", "KTOS",              # charges utiles militaires, systèmes sol
+    "IRDM", "VSAT",             # opérateurs historiques : IoT, voix de secours, haut débit
+    "SESG.PA", "ETL.PA",        # géostationnaires européens — Eutelsat porte OneWeb
+]
+
 UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 
 # ── JUSTIFICATION ─────────────────────────────────────────────────────────────
@@ -3260,6 +3275,25 @@ def main():
             "v":            _bloc_pts(bd, "v"),
             "m":            _bloc_pts(bd, "m"),
             "couverture":   (bd.get("note") or {}).get("couverture"),
+            # ── MULTIPLES, MARGES ET CROISSANCE (12/08/2026) ──────────────
+            # Le contrat compact n'en portait aucun : les 118 fiches thématiques
+            # étaient rédigées sans un chiffre de valorisation, leur signature
+            # éditoriale rendait « na » stablement (donc muette), et le modèle
+            # écrivait des multiples de mémoire. Ces champs referment les deux
+            # trous, et rendent une publication de résultats VISIBLE par la
+            # signature : trimestre publié → paliers déplacés → fiche réécrite.
+            # Récit complet : CHANGELOG du 12/08. Garde : test_themes (AST,
+            # producteur/lecteurs) + test_donnees (signature non aveugle).
+            "per_fwd":          bd.get("forward_pe"),
+            "per_cur":          bd.get("trailing_pe"),
+            "fcf_yield_pct":    bd.get("fcf_yield_pct"),
+            "marge_nette_pct":  bd.get("net_margin_pct"),
+            "marge_fcf_pct":    bd.get("fcf_margin_pct"),
+            "croissance_ca_pct": bd.get("rev_growth_pct"),
+            "croissance_ca_fin": bd.get("rev_growth_fin"),
+            # Présence/absence seulement : la signature ne lit que le booléen,
+            # et le libellé complet vit dans charts/<T>.json.
+            "alerte":       bd.get("signal_dynamics_warning") or "",
             "themes":       ths,
             "top30":        t in top_tickers,
         }

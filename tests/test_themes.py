@@ -42,7 +42,8 @@ def check(nom, cond, detail=""):
 print("— Taxonomie —")
 ids = [t["id"] for t in themes.THEMES]
 check("identifiants uniques", len(ids) == len(set(ids)))
-check("5 thèmes curés publiés (quantique et robotique le 08/08, espace le 09/08)",
+check("5 thèmes curés publiés (quantique et robotique le 08/08, espace le 09/08 "
+      "devenu newspace le 12/08)",
       len(themes.THEMES_CURES) == 5)
 check("chaque thème a thèse, inversion et biais",
       all(t.get("thesis") and t.get("inversion") and t.get("biais") for t in themes.THEMES))
@@ -55,7 +56,16 @@ check("les thèmes calculés publient leur règle en clair",
 # notables — et le dire est l'information principale de la page. Nommer
 # l'exception plutôt que baisser le seuil garde la règle mordante pour tous
 # les autres, et oblige la prochaine à être justifiée elle aussi.
-ETRIQUE_ADMIS = {"quantique"}
+# DEUXIÈME EXCEPTION, 12/08/2026 : « newspace ». Elle s'obtient par le même
+# raisonnement, et pas par un relâchement du seuil. Le thème s'appelait
+# « espace » et publiait vingt titres ; prendre le mot NewSpace au sérieux — la
+# génération d'acteurs née au milieu des années 2000 — en sort quatorze qui
+# appartiennent à ce qui la précédait. Ce qui reste est le sujet en entier :
+# quelques pure players cotés, plus ceux que le registre écarte sous le
+# milliard, plus SpaceX qui attend ses 200 séances. Baisser le seuil des vingt
+# aurait été plus simple ; nommer l'exception oblige la suivante à se justifier
+# aussi.
+ETRIQUE_ADMIS = {"quantique", "newspace"}
 check("aucun thème curé étriqué, hors exception nommée",
       all(len(t["tickers"]) >= 20 for t in themes.THEMES_CURES
           if t["id"] not in ETRIQUE_ADMIS),
@@ -115,11 +125,18 @@ check("aucune introduction de 2026 n'est déclarée avant d'avoir 200 séances",
       not (_jeunes & set(themes.univers_thematique())),
       str(sorted(_jeunes & set(themes.univers_thematique()))))
 
-print("\n— Le thème espace —")
-_e = themes.THEMES_BY_ID.get("espace")
+print("\n— Le thème NewSpace —")
+# Renommé le 12/08/2026 (demande du propriétaire) : « espace » nommait un
+# secteur, « NewSpace » nomme la génération d'acteurs apparue au milieu des
+# années 2000 — soit un SOUS-ENSEMBLE de ce secteur, défini contre ce qui le
+# précédait. Le slug a suivi, illustration et légendes comprises.
+_e = themes.THEMES_BY_ID.get("newspace")
 _et = set(_e["tickers"]) if _e else set()
-check("le thème espace existe et publie toute sa liste",
+check("le thème newspace existe et publie toute sa liste",
       _e is not None and "top" not in _e)
+check("l'ancien identifiant « espace » ne subsiste nulle part",
+      "espace" not in themes.THEMES_BY_ID,
+      str(sorted(themes.THEMES_BY_ID)))
 # LE PARADOXE DE CETTE LISTE, et son information principale : la plus grande
 # société spatiale du monde n'y figure pas. SpaceX cote depuis juin 2026 pour
 # ~1 755 Md$ — plus, à elle seule, que tout le reste de la watchlist réunie —
@@ -136,20 +153,53 @@ check("SpaceX n'est pas déclarée avant d'avoir ses 200 séances",
 # sur le titre le plus attendu du thème serait le pire des silences.
 check("l'absence de SpaceX est expliquée dans les biais",
       _e and "SpaceX" in _e["biais"] and "avril 2027" in _e["biais"])
-# LES DEUX MOITIÉS. Le spatial cotable oppose des pure players trop petits pour
-# le seuil du projet à des groupes de défense où l'espace est un département.
-# Comparer leurs scores n'a pas de sens, et le texte doit le dire.
-_me = {m["label"]: set(m["tickers"]) for m in (_e["maillons"] if _e else [])}
-_primes = next((v for k, v in _me.items() if "défense" in k.lower()), set())
-check("le maillon des maîtres d'œuvre porte les primes",
-      {"LMT", "NOC", "LHX"} <= _primes, str(sorted(_primes)))
+# CE QUE LE MOT EXCLUT est le contrôle central de ce thème, parce que c'est la
+# seule chose qui le sépare d'une liste « aérospatial et défense ». Le NewSpace
+# se définit CONTRE l'organisation qui le précédait : ni les dix maîtres d'œuvre
+# historiques, dont l'espace n'est qu'un département suivant des budgets
+# militaires, ni les quatre opérateurs de satellites qui sont ce qu'il a pris de
+# vitesse. Ces quatorze titres ont quitté la LISTE le 12/08/2026 ; le jour où
+# l'un d'eux y revient sans que la règle ait changé, le thème a recommencé à
+# nommer un secteur.
+_ANCIEN_MONDE = {"LMT", "NOC", "LHX", "RTX", "BA.L", "AIR.PA", "HO.PA",
+                 "SAF.PA", "LDO.MI", "KTOS",          # maîtres d'œuvre
+                 "IRDM", "VSAT", "SESG.PA", "ETL.PA"}  # opérateurs historiques
+check("aucun acteur d'avant la vague n'est dans la liste",
+      not (_ANCIEN_MONDE & _et), str(sorted(_ANCIEN_MONDE & _et)))
+# ... et ils doivent RESTER SCORÉS, comme la chaîne quantique du 08/08 et les
+# titres de l'ex-thème financials. Huit appartiennent à l'univers historique du
+# screener et n'ont besoin de rien ; les six autres n'y existaient QUE par ce
+# thème, et sans la liste ajoutée dans screener.py ils perdraient leur note et
+# leur graphe par simple effet de bord d'une décision de périmètre. On retire
+# une liste, pas des sociétés.
+check("les quatorze sortis restent dans l'univers du screener",
+      _ANCIEN_MONDE <= set(screener.UNIVERS),
+      str(sorted(_ANCIEN_MONDE - set(screener.UNIVERS))))
+# La règle d'entrée et ses exclusions doivent être ÉCRITES dans le texte que le
+# lecteur voit : une liste qui rétrécit de vingt à sept titres sans le dire est
+# une liste qui a l'air incomplète.
 # Comparaison insensible à la casse : le texte met ses avertissements en
 # capitales, et un test calé sur la casse se casse au premier reformatage.
 _biais_e = (_e["biais"] if _e else "").lower()
-check("le biais prévient qu'on ne compare pas les deux moitiés",
-      "coupée en deux" in _biais_e)
+check("le biais explique ce que le mot exclut, et nomme les sortis",
+      "ce que le mot exclut" in _biais_e
+      and "maîtres d'œuvre historiques" in _biais_e
+      and "opérateurs de satellites historiques" in _biais_e)
+check("le biais dit que les sortis restent scorés",
+      "restent scorés" in _biais_e)
 check("la dérogation de taille est annoncée",
       _e and "25 milliards" in _e["biais"])
+# LE NEWSPACE ACHETABLE EST AMÉRICAIN : le phénomène s'est propagé en Europe et
+# en Chine (c'est dans la définition), mais la vague européenne est restée
+# privée à deux micro-capitalisations près. Le lecteur qui cherche une
+# exposition européenne doit l'apprendre ici plutôt que de la chercher en vain.
+check("le biais dit où le NewSpace n'est pas achetable",
+      "europe" in _biais_e and "chine" in _biais_e)
+for _t, _cap in (("GOMX.ST", "0,2"), ("AAC.ST", "0,1")):
+    check(f"{_t} est au registre avec sa capitalisation mesurée",
+          _t in themes.ECARTES_VALIDATION
+          and _cap in themes.ECARTES_VALIDATION[_t],
+          themes.ECARTES_VALIDATION.get(_t, "absent"))
 # Le calcul en orbite est le sujet du moment ; il n'est presque pas achetable,
 # et la liste ne doit pas laisser croire l'inverse.
 check("le biais dit que le calcul en orbite n'est pas achetable",
@@ -433,6 +483,67 @@ check("un titre thématique est marqué comme tel", vrt["origine"] == "theme")
 check("son breakdown compact est exploitable", vrt["breakdown"]["prix"] == 120.0)
 check("univers vide = aucun ajout, pas de plantage",
       len(pa.fusionner_univers_achetable({"stocks": []}, {})) == 0)
+
+print("\n— Le contrat compact et ses deux lecteurs —")
+# POURQUOI CE CONTRÔLE EXISTE. universe.json est écrit à UN endroit (screener.py)
+# et relu à DEUX (portfolio_agent.fusionner_univers_achetable pour l'agent,
+# generate_analyses.stock_depuis_universe pour la prose). Les trois blocs se
+# recopient à la main, et rien ne les tenait ensemble : c'est ainsi que multiples,
+# marge et croissance ont manqué au contrat pendant des mois sans que personne ne
+# puisse le voir. 118 des 148 fiches publiées étaient rédigées sans le moindre
+# chiffre de valorisation, et le garde-fou censé les surveiller calculait « donnée
+# absente » quatre fois de suite, en silence.
+#
+# LA LISTE DES NON-LUS EST UNE DÉCLARATION, PAS UNE TOLÉRANCE. Un champ produit et
+# lu par personne est presque toujours un oubli ; les trois exceptions ci-dessous
+# sont des choix, chacun avec son motif. Ajouter un champ au producteur sans le
+# lire ni l'inscrire ici fait échouer ce test — c'est tout ce qu'on lui demande.
+import ast as _ast                                                  # noqa: E402
+
+_NON_LUS = {
+    "top30":   "marqueur de provenance, utile au front et aux outils, pas au moteur",
+    "themes":  "lu par les deux, mais par une autre voie (u.get('themes') côté "
+               "prose, listes de membres côté agent)",
+    "prix":    "délibérément hors prompt éditorial : il n'apporte rien à la prose "
+               "et invite au cours cible, que la charte interdit",
+    "devise":  "idem, elle n'a de sens qu'à côté d'un prix",
+    "croissance_ca_fin": "date de la période citée : le prompt la prend du champ "
+                         "mrq quand il l'a, l'agent n'en a pas l'usage",
+}
+
+
+def _cles_produites(chemin):
+    """Clés du dictionnaire compact écrit par screener.py, lues dans la SOURCE.
+
+    Par l'AST et non par regex : un dictionnaire imbriqué ou un commentaire
+    contenant des guillemets tromperait une expression régulière, et ce contrôle
+    n'a de valeur que s'il voit exactement ce que l'interpréteur voit."""
+    arbre = _ast.parse(open(chemin, encoding="utf-8").read())
+    for n in _ast.walk(arbre):
+        if not isinstance(n, _ast.Assign) or not isinstance(n.value, _ast.Dict):
+            continue
+        cible = n.targets[0]
+        if (isinstance(cible, _ast.Subscript)
+                and isinstance(cible.value, _ast.Name)
+                and cible.value.id == "par_ticker"):
+            return {k.value for k in n.value.keys
+                    if isinstance(k, _ast.Constant) and isinstance(k.value, str)}
+    return set()
+
+
+_produites = _cles_produites(os.path.join(RACINE, "screener.py"))
+check("le bloc compact de screener.py est retrouvé", len(_produites) > 10,
+      f"{len(_produites)} clés")
+for _fichier, _quoi in (("portfolio_agent.py", "l'agent"),
+                        ("generate_analyses.py", "la prose")):
+    _src = open(os.path.join(RACINE, _fichier), encoding="utf-8").read()
+    _lues = set(re.findall(r"""u\.get\(["'](\w+)["']""", _src))
+    _perdues = sorted(_produites - _lues - set(_NON_LUS))
+    check(f"aucun champ du contrat compact n'est perdu par {_quoi}",
+          not _perdues, f"produits mais jamais lus : {_perdues}")
+_orphelines = sorted(set(_NON_LUS) - _produites)
+check("la liste des champs non lus ne contient pas de fantôme",
+      not _orphelines, f"déclarés non lus mais plus produits : {_orphelines}")
 
 print("\n— Concentration thématique —")
 positions = [{"ticker": "VRT", "valeur_actuelle": 3000, "sector": "Industrie"},

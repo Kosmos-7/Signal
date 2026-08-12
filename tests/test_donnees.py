@@ -79,27 +79,23 @@ def sentinelle(nom, cas, tolerance, total):
 # faits FAIT ÉCHOUER le test à son tour. Sans cette moitié-là, un registre
 # devient un cimetière de silencieux — on y ajoute au fil des pannes et on n'en
 # retire jamais rien.
+# LES DEUX ENTRÉES DE L3HARRIS ONT ÉTÉ RETIRÉES LE 12/08/2026, ET RIEN N'EST
+# RÉPARÉ. Le titre a quitté la watchlist spatiale devenue NewSpace — un maître
+# d'œuvre historique n'appartient pas à la génération que le mot désigne — donc
+# il n'a plus de graphe publié, donc les deux défauts ne sont plus OBSERVABLES.
+# Le contrôle « registre à jour » exige alors leur retrait, et il a raison : ce
+# registre nomme des défauts constatés dans le corpus publié, pas des défauts
+# connus du monde. Ce que l'on sait reste écrit ici, pour le jour où LHX
+# reviendra par le top 30 :
+#   - la marge d'exercice ne venait pas de la série dessinée, parce que le filtre
+#     de clôture majoritaire (edgar.filtrer_cloture_majoritaire) écartait le
+#     régime post-2019 comme un fantôme : L3Harris est passée de juin à décembre
+#     à la fusion de 2019, et les dix exercices juin/juillet font la majorité ;
+#   - trois barres de chiffre d'affaires (2010:102, 2011:189, 2013:420 pour des
+#     exercices entre 5 005 et 5 012) venaient d'une erreur d'échelle au dépôt
+#     XBRL, que la SEC ne corrige pas.
+# Les deux appartiennent à la tâche #83, qui n'est pas close pour autant.
 CONNUS = {
-    "la marge d'exercice vient de la série que le graphique dessine": {
-        # CAUSE IDENTIFIÉE le 10/08 : ce n'est pas le changement d'exercice qui
-        # tronque la série, c'est le filtre de clôture majoritaire
-        # (edgar.filtrer_cloture_majoritaire) qui le prend pour un artefact.
-        # L3Harris est passée de juin à décembre à la fusion de 2019 ; les dix
-        # exercices juin/juillet font la majorité, donc c'est le NOUVEAU régime
-        # qui est écarté. La marge affichée est celle de l'exercice réel, la
-        # dernière barre celle de 2019 : l'écart en découle. Tâche #83.
-        "LHX": "filtre de clôture majoritaire : le régime post-2019 est écarté "
-               "comme un fantôme — tâche #83",
-    },
-    # Les trois barres fausses de L3Harris, distinctes de la troncature
-    # ci-dessus : erreur d'échelle au dépôt XBRL, que la SEC ne corrige pas. La
-    # cause exacte (quel concept a produit 102) demande de lire le greffe, que
-    # le proxy de développement bloque. Tâche #83.
-    "aucun chiffre d'affaires ne plonge d'un ordre de grandeur entre deux "
-    "exercices normaux": {
-        "LHX": "2010:102, 2011:189, 2013:420 entre 5 005 et 5 012 — erreur "
-               "d'échelle au dépôt XBRL, tâche #83",
-    },
     # TÂCHE #84 — L'INTERMITTENCE, PRISE SUR LE FAIT LE 12/08/2026. Ces cinq
     # entrées ont été retirées ce matin-là parce que les cinq fiches publiaient
     # leur rendement et que plus aucune du corpus n'en manquait : le contrôle
@@ -144,11 +140,45 @@ CONNUS = {
     # l'accord du propriétaire. En attendant, l'entrée disparaîtra d'elle-même au
     # prochain run éditorial du lundi, qui réécrit les textes — et le contrôle
     # « registre à jour » exigera alors de la retirer. C'est le comportement voulu.
+    # ANET inscrit le 12/08/2026 au soir, et c'est le cas ORDINAIRE que
+    # l'entrée précédente décrit en creux : republication du screener en cours de
+    # semaine (passage de la watchlist espace à NewSpace), donc des fiches
+    # rafraîchies sous une prose qui ne l'a pas été. Aucun résultat publié
+    # entre-temps ici, seulement un cours qui a bougé — la forme la plus banale
+    # de la péremption structurelle, et celle qui disparaîtra d'elle-même au
+    # prochain run éditorial du lundi.
     "aucun multiple cité ne diverge de la fiche": {
         "2330.TW": "PER courant cité 32,3 vs 28,2 en fiche — résultats publiés "
                    "entre deux runs, texte hebdomadaire non réécrit depuis",
+        "ANET":    "PER à terme cité 36,7 vs 40,8 en fiche — screener republié "
+                   "en cours de semaine, texte hebdomadaire non réécrit depuis",
     },
     "aucun texte ne dit indisponible un chiffre que la fiche affiche": {},
+    # NEUF FICHES CHIFFRENT UNE GRANDEUR QUE LE PROJET NE CALCULE PAS (12/08/2026).
+    # Marge brute, marge opérationnelle, cours/ventes : aucune de ces trois n'existe
+    # dans le dépôt, aucune n'a jamais été mise dans un prompt. Les nombres viennent
+    # de la mémoire du modèle, et Teradyne va jusqu'à leur donner une source —
+    # « relevé début août 2026 selon la presse spécialisée » — qui n'a jamais été
+    # consultée. Ce sont les seuls chiffres du site qu'aucun contrôle ne peut
+    # infirmer, puisqu'il n'existe rien à quoi les comparer.
+    # LA CAUSE EST CONNUE ET RÉPARÉE À LA SOURCE : ces neuf fiches sont thématiques,
+    # et leur prompt ne recevait AUCUN chiffre de valorisation avant le 12/08. Le
+    # modèle avait un jugement à chiffrer et rien pour le faire. Le contrat compact
+    # les lui donne désormais, et l'interdiction est nommée dans le guide, exemples
+    # à l'appui. Les neuf entrées disparaîtront au prochain run éditorial — le
+    # contrôle « registre à jour » exigera alors de les retirer.
+    "aucune prose ne chiffre une grandeur hors périmètre": {
+        "6857.T": "cours/ventes chiffrée à 10 — grandeur hors périmètre",
+        "6954.T": "marge opérationnelle chiffrée à 25 — grandeur hors périmètre",
+        "ACN":    "marge opérationnelle chiffrée à 16 — grandeur hors périmètre",
+        "AMD":    "marge brute chiffrée à 50 — grandeur hors périmètre",
+        "DELL":   "marge brute chiffrée à 23 — grandeur hors périmètre",
+        "ISRG":   "marge brute chiffrée à 65 — grandeur hors périmètre",
+        "LHX":    "marge opérationnelle chiffrée à 13 — grandeur hors périmètre",
+        "ON":     "marge brute chiffrée à 45 — grandeur hors périmètre",
+        "TER":    "cours/ventes chiffrée à 10,4 — grandeur hors périmètre",
+    },
+    "aucune fiche ne cache un chiffre que sa fiche affiche": {},
     # VIDÉ LE 10/08 : les quinze n'étaient pas inatteignables, c'est le contrôle
     # qui ne regardait pas la watchlist principale. Elles sont le top 30 non
     # tagué par un thème, ouvertes depuis la page d'accueil. Le registre n'avait
@@ -508,11 +538,19 @@ print("\n— Bandes de vraisemblance : une exception est permise, une dérive no
 # précédents, et il est structurel : la population suivie n'est plus celle sur
 # laquelle ces bandes ont été calées. Vérifiées une à une contre la série
 # publiée — les marges tiennent au dénominateur, jamais à l'unité.
+# RELEVÉE D'UN CRAN LE 12/08/2026, au resserrement de la watchlist espace en
+# NewSpace, et d'un seul : Voyager Technologies entre avec −124 % de marge de
+# flux. Le motif est celui des trois relèvements précédents, vérifié contre la
+# série publiée plutôt que supposé — chiffre d'affaires 136, 144 puis 166 M$,
+# résultat net −25, −62 puis −105 M$ : une société qui construit une station
+# orbitale avant de l'exploiter, pas une base qui a glissé d'un facteur mille.
+# Le retrait des quatorze titres d'avant la vague, tous profitables, ne change
+# rien au compte : ils étaient dans la bande, ils n'en sortaient pas.
 # La sentinelle garde tout son mordant : elle est calée sur le compte EXACT du
 # jour, donc le prochain titre qui sortira de la bande la fera tomber.
 BANDES = [
     ("marge nette d'exercice", "net_margin_exercice_pct", -60, 70, 13),
-    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 14),
+    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 15),
     ("conversion du bénéfice en cash", "conversion_pct", -200, 400, 8),
     ("PER courant", "trailing_pe", 1, 200, 10),
     ("rendement des capitaux propres", "roe_pct", -100, 150, 6),
@@ -757,6 +795,78 @@ sentinelle("citations chiffrées du RSI (recalculé chaque jour)",
 sentinelle("citations chiffrées du drawdown 52s (recalculé chaque jour)",
            cite_dd, 15, len(ANALYSES) or 1)
 
+# LA DÉCOTE REJOINT LES DEUX AUTRES (12/08/2026), et c'était de loin la plus
+# répandue : 357 occurrences chiffrées dans le corpus publié, contre 37 pour le
+# RSI. Le guide l'y invitait explicitement — « tu PEUX la commenter » — sans
+# qu'elle figure jamais dans la signature éditoriale. Aucun de ces 357 nombres
+# n'était donc surveillé.
+#
+# LE COÛT DE CE SILENCE, MESURÉ SUR LES FICHES EN LIGNE : sur 144 comparables,
+# 14 publient un écart faux de plus de dix points, et Advantest annonce une
+# surcote de 300 % là où sa fiche en calcule 1 336. Ce n'est pas une dérive de
+# quelques pour cent : la décote est dirigée par le cours et n'est pas bornée.
+# La mettre sous surveillance a été essayé et chiffré — 46 réécritures en deux
+# jours pour un palier de 10 points — puis écarté. Reste la jurisprudence RSI du
+# 08/08 : trop volatile pour déclencher une réécriture, trop volatile pour être
+# chiffrée. Le front l'affiche, lui, sous le graphique de cours, recalculée
+# chaque jour.
+#
+# LA TOLÉRANCE PART DE L'EXISTANT ET NE DOIT QUE DESCENDRE, comme les deux
+# au-dessus : ces textes datent d'avant l'interdiction et seront réécrits.
+cite_dec = []
+for t, a in ANALYSES.items():
+    for k, v in a.items():
+        if k.startswith("_") or not v:
+            continue
+        txt = v if isinstance(v, str) else " ".join(str(x) for x in v)
+        if re.search(r"(?:d[ée]cote|surcote)[^.;)]{0,40}?\d+[,.]?\d*\s*%", txt, re.I):
+            cite_dec.append(f"{t}.{k}")
+check("le générateur interdit aussi de chiffrer la décote",
+      "SANS EN RECOPIER LE POURCENTAGE"
+      in open("generate_analyses.py", encoding="utf-8").read())
+
+# LE POTENTIEL CONSENSUS, TROISIÈME GRANDEUR À PASSER HORS CHIFFRE (12/08/2026),
+# et c'était le nombre le plus cité du site : 115 fiches sur 148, contre 37 pour
+# le RSI. Il est dirigé par le cours (cible ÷ prix − 1), donc il bouge chaque
+# jour, et la signature l'ignorait totalement.
+#
+# CE QUI LE REND PLUS GRAVE QUE LA DÉCOTE : son SIGNE bascule. « Le consensus est
+# modestement positif (8 % de potentiel selon 24 analystes) » écrit sur Vestas
+# fait face à un potentiel de -8,9 % — la phrase est fausse EN MOTS, et retirer le
+# nombre ne la répare pas. Quatre titres ont changé de signe en deux jours (BX,
+# VWS.CO, ADBE, ACN), douze affichent un potentiel négatif aujourd'hui.
+#
+# D'OÙ LE TRAITEMENT EN DEUX TEMPS, qui n'avait jamais été appliqué à aucune autre
+# grandeur : le chiffre est interdit de prose, ET le sens entre dans la signature
+# par tranches larges (négatif / faible / moyen / fort / très fort). Des paliers
+# de 5 points coûteraient 61 réécritures en deux jours, de 10 points encore 40 ;
+# ces tranches-ci en coûtent 18. La règle que ce cas dégage vaut d'être retenue :
+# on surveille une grandeur à la finesse à laquelle la prose l'exprime.
+cite_up = []
+for t, a in ANALYSES.items():
+    for k, v in a.items():
+        if k.startswith("_") or not v:
+            continue
+        txt = v if isinstance(v, str) else " ".join(str(x) for x in v)
+        if re.search(r"potentiel[^.;)]{0,35}?\d+[,.]?\d*\s*%"
+                     r"|\d+[,.]?\d*\s*%\s*de potentiel", txt, re.I):
+            cite_up.append(f"{t}.{k}")
+check("le générateur interdit de chiffrer le potentiel consensus",
+      "NE RECOPIE PAS ce " in open("generate_analyses.py", encoding="utf-8").read())
+# La tolérance est l'EXISTANT EXACT (145 au 12/08), pas un chiffre rond confortable :
+# une tolérance plus large que le constat autorise silencieusement une aggravation.
+sentinelle("citations chiffrées du potentiel consensus (recalculé chaque jour)",
+           cite_up, 145, len(ANALYSES) or 1)
+check("le générateur interdit de citer une grandeur non fournie",
+      # La sentinelle porte sur la CLAUSE, pas sur les exemples : c'est « même si
+      # tu as raison » qui fait la règle. Micron l'a prouvé en écrivant un
+      # multiple juste, au bon exercice, qu'aucune donnée ne lui avait donné.
+      "MÊME SI TU AS RAISON"
+      in open("generate_analyses.py", encoding="utf-8").read())
+# Tolérance = l'existant exact au 12/08 (355), même raison que ci-dessous.
+sentinelle("citations chiffrées de la décote vs tendance (recalculée chaque jour)",
+           cite_dec, 355, len(ANALYSES) or 1)
+
 # ── 8. LE TEXTE PUBLIÉ EST-IL CELUI DE LA SOURCE ? ─────────────────────────
 # universe.json est un ARTEFACT : le screener le régénère depuis themes.py à
 # chaque run. Entre deux runs, une correction de texte dans themes.py ne se voit
@@ -799,6 +909,64 @@ check("chaque thème déclaré est réellement publié dans universe.json",
 
 # ── 9. LE TEXTE DIT-IL LES MÊMES CHIFFRES QUE LA FICHE ? ─────────────────────
 print("\n— La prose et les chiffres racontent-ils la même chose ? —")
+# LE GÉNÉRATEUR EST IMPORTÉ ICI, EN TÊTE DE SECTION, et non plus quarante lignes
+# plus bas (12/08/2026). Le contrôle de prose codait ses tolérances en dur sous
+# un commentaire qui affirmait le contraire : « le pas est calé sur la tolérance
+# du test, et ce couplage est le cœur du dispositif ». C'était vrai du seul PER
+# forward. La marge nette y était tolérée à 20 % RELATIFS quand la signature la
+# surveille à 5 points ABSOLUS : sur une marge de 5 %, le test dénonçait une
+# dérive d'un point que la signature laissait passer — donc un écart que rien ne
+# pouvait corriger, puisque aucune réécriture ne se déclenchait. Un contrôle
+# rouge sans remède est pire qu'un contrôle absent : il apprend à passer outre.
+# Les tolérances descendent maintenant de CHAMPS_VALO, une seule fois écrites.
+#
+# LES BOUCHONS D'ABORD : generate_analyses.py importe `anthropic`, que le runner
+# n'installe pas. Cette suite se contentait de lire du JSON et n'en avait jamais
+# eu besoin ; sans cette ligne, le contrôle échouait en intégration continue tout
+# en passant en local — la panne même qu'on venait de corriger sur PIL, reproduite
+# le jour même par celui qui la corrigeait.
+_ga = None
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import _bouchons
+    _bouchons.poser()
+    import importlib.util as _u
+    _sp = _u.spec_from_file_location("_ga", "generate_analyses.py")
+    _ga = _u.module_from_spec(_sp)
+    sys.modules["_ga"] = _ga
+    _sp.loader.exec_module(_ga)
+except Exception as _e:                                       # noqa: BLE001
+    check("generate_analyses.py est importable", False, f"{type(_e).__name__}: {_e}")
+
+_PAS = {c: (m, p) for c, m, p in (_ga.CHAMPS_VALO if _ga else ())}
+
+
+def _hors_tolerance(cle, v, ref):
+    """L'écart texte/fiche dépasse-t-il ce que le palier de signature laisse vivre ?
+
+    C'est LA définition du couplage : tout écart signalé ici doit avoir, par
+    construction, déjà changé le palier — donc déclenché une réécriture. Sinon le
+    contrôle rougit sans qu'aucun remède n'existe, et il apprend à passer outre.
+
+    LE SEUIL EST LE PAS ENTIER, DANS LES DEUX MODES. Premier jet : `pas / 2` en
+    absolu, au motif que `round()` arrondit au plus proche. Raisonnement juste sur
+    la distance au CENTRE d'un palier, faux sur la distance entre deux valeurs :
+    deux nombres du même palier peuvent être distants de presque `pas` tout entier.
+    Un balayage l'a montré en une seconde là où la relecture ne l'a pas vu — marge
+    nette 2,56 % puis 5,09 %, écart de 2,53 point donc signalé, et pourtant le même
+    palier des deux côtés. Le contrôle censé garantir un remède en refusait un.
+    Le mode relatif, lui, était bon dès le premier jet, et la vérification l'a
+    confirmé sur 1,4 million de couples.
+
+    CONSÉQUENCE À ASSUMER : le test tolère désormais 5 points de dérive sur une
+    marge, parce que la signature les tolère. Pour publier un chiffre plus serré,
+    c'est le PAS de CHAMPS_VALO qu'il faut resserrer, pas ce seuil — le resserrer
+    ici ne rendrait pas le texte plus juste, il rendrait l'alarme inutile."""
+    mode, pas = _PAS.get(cle, ("rel", 0.10))
+    if mode == "abs":
+        return abs(v - ref) > pas
+    return abs(v - ref) / abs(ref) > pas
+
 # LE DÉFAUT QUE CE TEST EXISTE POUR ATTRAPER. Le guide de rédaction impose de
 # chiffrer toute affirmation de valorisation ; la signature éditoriale, qui
 # décide des réécritures, ignorait ces mêmes multiples. Un texte pouvait donc
@@ -814,6 +982,22 @@ print("\n— La prose et les chiffres racontent-ils la même chose ? —")
 # cas vaut infiniment mieux que la relecture humaine qui n'en attrapait aucun.
 import re as _re
 _INTER = r"\s*(?:de |à |:)?\s*(?:<[^>]+>\s*)?"
+# UN NOMBRE FRANÇAIS PORTE UN SÉPARATEUR DE MILLIERS, et l'ignorer ne rate pas le
+# nombre : il en lit un AUTRE. Le motif `\d+[,.]?\d*` posé devant « surcote de
+# 1 300 % » échoue sur « 1 », recule, et capture « 300 » — un chiffre inventé de
+# toutes pièces par le test lui-même. C'est ainsi qu'Advantest est apparu dans un
+# relevé d'écarts comme annonçant 300 % contre 1 336 en fiche, soit 1 036 points
+# de divergence, alors que son texte dit « plus de 1 300 % » et a raison. Le
+# propriétaire a demandé une contre-vérification sur un autre titre ; c'est elle
+# qui a fait tomber celui-ci. Un test qui fabrique ses propres nombres est pire
+# qu'un test absent : il produit des preuves.
+_NB = r"\d[\d   ]*(?:[,.]\d+)?"
+
+
+def _nombre(s):
+    """Valeur d'un nombre écrit à la française, séparateurs de milliers compris."""
+    return float(_re.sub(r"[   ]", "", s).replace(",", "."))
+
 _MOTIFS = [
     # LES TOURNURES COMPTENT AUTANT QUE LES SEUILS, et il a fallu DEUX essais.
     # Le premier jet n'acceptait que « PER forward 15,6x » ; NVIDIA écrit « le PER
@@ -823,10 +1007,26 @@ _MOTIFS = [
     # contrôle « registre à jour » qui l'a dit : une entrée inscrite mais jamais
     # constatée signalait que le test ne voyait rien. Un registre qui refuse les
     # fantômes vérifie aussi le test lui-même.
-    (_re.compile(r"PER forward" + _INTER + r"(\d+[,.]?\d*)"),        "forward_pe",   0.10),
-    (_re.compile(r"PER pr[ée]visionnel" + _INTER + r"(\d+[,.]?\d*)"), "forward_pe",   0.10),
-    (_re.compile(r"PER courant" + _INTER + r"(\d+[,.]?\d*)"),         "trailing_pe",  0.10),
-    (_re.compile(r"marge nette (?:de |à )?(\d+[,.]?\d*)\s*%"),  "net_margin_pct", 0.20),
+    (_re.compile(r"PER forward" + _INTER + r"(" + _NB + r")"),        "forward_pe"),
+    (_re.compile(r"PER pr[ée]visionnel" + _INTER + r"(" + _NB + r")"), "forward_pe"),
+    (_re.compile(r"PER courant" + _INTER + r"(" + _NB + r")"),         "trailing_pe"),
+    (_re.compile(r"marge nette (?:de |à )?(" + _NB + r")\s*%"),        "net_margin_pct"),
+    (_re.compile(r"marge (?:FCF|de flux|du flux|de flux disponible)"
+                 + _INTER + r"(" + _NB + r")\s*%"),                   "fcf_margin_pct"),
+    # TROISIÈME ESSAI, 12/08/2026 : LES PÉRIPHRASES. Les quatre tournures
+    # ci-dessus nomment le ratio ; la prose ne s'y tient pas. Micron écrivait
+    # « le multiple forward autour de 6x » — le mot PER n'y est pas, le test ne
+    # voyait rien, et le nombre (5,6 en fiche) n'était comparé à rien. Le motif
+    # est le même que les deux essais précédents : ce n'est jamais le seuil qui
+    # manque, c'est la façon dont un rédacteur écrit réellement.
+    # L'intercalaire est plus large ici que _INTER, et c'est le point : Micron
+    # n'écrit ni « de » ni deux-points mais « autour de ». On accepte donc une
+    # quinzaine de caractères, à l'exclusion du point (qui finirait la phrase) et
+    # de tout chiffre (qui serait le vrai nombre, plus loin).
+    (_re.compile(r"multiple (?:forward|pr[ée]visionnel)[^.\d]{0,15}"
+                 r"(?:<[^>]+>\s*)?(" + _NB + r")\s*[x×]"),            "forward_pe"),
+    (_re.compile(r"multiple (?:courant|actuel)[^.\d]{0,15}"
+                 r"(?:<[^>]+>\s*)?(" + _NB + r")\s*[x×]"),            "trailing_pe"),
 ]
 _perimes, _lus = {}, 0
 for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
@@ -834,17 +1034,62 @@ for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
         continue
     _txt = json.dumps(_e, ensure_ascii=False)
     _b = (FICHES.get(_t) or {}).get("breakdown") or {}
-    for _rx, _cle, _tol in _MOTIFS:
+    for _rx, _cle in _MOTIFS:
         for _m in _rx.finditer(_txt):
             _lus += 1
-            _v = float(_m.group(1).replace(",", "."))
+            _v = _nombre(_m.group(1))
             _ref = _b.get(_cle)
             if _ref is None or _ref == 0:
                 continue
-            if abs(_v - _ref) / abs(_ref) > _tol:
+            if _hors_tolerance(_cle, _v, _ref):
                 _perimes[_t] = f"{_cle} : texte {_v} vs fiche {round(_ref, 1)}"
 print(f"  ({_lus} nombres lus dans la prose publiée)")
 check_connus("aucun multiple cité ne diverge de la fiche", _perimes)
+
+# ── LES GRANDEURS QUE LE PROJET NE CALCULE PAS ──────────────────────────────
+# Le contrôle ci-dessus compare un nombre cité à sa référence. Il ne peut RIEN
+# dire d'un nombre qui n'en a pas : la marge brute, la marge opérationnelle et le
+# ratio cours/ventes ne sont calculés nulle part dans ce dépôt, ne figurent dans
+# aucun prompt, et se trouvent pourtant dans la prose publiée — « les marges
+# brutes gravitent autour de 50 % » (AMD), « un ratio cours/ventes de 10,4x
+# relevé début août 2026 selon la presse spécialisée » (Teradyne). Ces nombres
+# viennent de la mémoire d'entraînement du modèle.
+#
+# C'EST LE PIRE CAS DE TOUS, et pour une raison précise : il échappe par
+# construction à tout le dispositif. Un multiple cité dérive et la signature le
+# rattrape ; une grandeur non calculée n'a ni palier, ni référence, ni date, ni
+# moyen d'être infirmée. Elle ne peut pas vieillir puisqu'elle n'a jamais été
+# vraie qu'à la mémoire près. La règle du projet — ne jamais publier un nombre
+# qu'on ne peut pas justifier — la vise directement, et rien ne l'appliquait.
+#
+# La correction vit dans le prompt (interdiction nommée, avec les trois exemples
+# relevés). Ce contrôle est la garde, et les entrées ci-dessous disparaîtront au
+# prochain run éditorial : le contrôle « registre à jour » l'exigera.
+_HORS_PERIMETRE = [
+    (_re.compile(r"marges? brutes?[^.]{0,60}?(" + _NB + r")\s*%", _re.I), "marge brute"),
+    (_re.compile(r"marges? op[ée]rationnelles?[^.]{0,60}?(" + _NB + r")\s*%", _re.I),
+     "marge opérationnelle"),
+    (_re.compile(r"(?:cours\s*/\s*ventes|prix\s*/\s*ventes|price[- ]to[- ]sales|\bP/S\b)"
+                 r"[^.]{0,40}?(" + _NB + r")\s*[x×]", _re.I), "cours/ventes"),
+    (_re.compile(r"EV\s*/\s*EBITDA[^.]{0,40}?(" + _NB + r")", _re.I), "EV/EBITDA"),
+]
+_inventes = {}
+for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
+    if not isinstance(_e, dict):
+        continue
+    # Balises retirées : la prose entoure ses nombres de <b>…</b>, et un motif qui
+    # les ignore rate exactement les chiffres mis en avant.
+    _txt = _re.sub(r"<[^>]+>", "", json.dumps(_e, ensure_ascii=False))
+    for _rx, _quoi in _HORS_PERIMETRE:
+        for _m in _rx.finditer(_txt):
+            # « des marges brutes plus élevées que la marge nette TTM de 54,8 % »
+            # attribue son nombre à la marge NETTE, qui est fournie : le contrôle
+            # ne doit pas le compter. On écarte donc toute capture qui traverse
+            # une grandeur légitime.
+            if _re.search(r"marge nette|FCF|flux disponible", _m.group(0), _re.I):
+                continue
+            _inventes[_t] = f"{_quoi} chiffrée à {_m.group(1)} — le projet ne la calcule pas"
+check_connus("aucune prose ne chiffre une grandeur hors périmètre", _inventes)
 # Et l'inverse, plus insidieux : le texte déclare un chiffre INDISPONIBLE alors
 # que la fiche l'affiche. C'est le cas exact de Samsung, et aucun contrôle de
 # valeur ne l'aurait vu puisqu'il n'y a pas de nombre à comparer.
@@ -866,27 +1111,43 @@ check_connus("aucun texte ne dit indisponible un chiffre que la fiche affiche",
 # dispositif : tout écart que ce test signalerait a, par construction, déjà
 # changé le palier — donc déclenché une réécriture. Si les deux se désaccordent,
 # on retrouve la situation d'avant, un texte périmé qu'aucune règle ne réveille.
-try:
-    # LES BOUCHONS D'ABORD. generate_analyses.py importe `anthropic`, que le
-    # runner n'installe pas — cette suite se contentait jusqu'ici de lire du
-    # JSON et n'en avait jamais eu besoin. Sans cette ligne, le contrôle des
-    # paliers échouait en intégration continue tout en passant en local : la
-    # panne même qu'on vient de corriger sur PIL, reproduite le jour même par
-    # celui qui la corrigeait.
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    import _bouchons
-    _bouchons.poser()
-    import importlib.util as _u
-    _sp = _u.spec_from_file_location("_ga", "generate_analyses.py")
-    _ga = _u.module_from_spec(_sp)
-    _sys_mod = __import__("sys").modules
-    _sys_mod["_ga"] = _ga
-    _sp.loader.exec_module(_ga)
-except Exception as _e:                                       # noqa: BLE001
-    check("generate_analyses.py est importable", False, f"{type(_e).__name__}: {_e}")
-else:
-    check("le pas des multiples est celui de la tolérance du test",
-          dict((c, p) for c, _m, p in _ga.CHAMPS_VALO)["forward_pe"] == 0.10)
+# (L'import a migré en tête de la section 9 : les tolérances en descendent.)
+if _ga is not None:
+    # LE COUPLAGE, ÉPROUVÉ CHAMP PAR CHAMP ET NON PLUS AFFIRMÉ. La version
+    # précédente vérifiait qu'une constante du test valait 0,10 comme celle du
+    # générateur : deux chiffres égaux, aucune propriété. Elle ne disait rien des
+    # trois autres champs, dont un — la marge nette — était réglé de travers dans
+    # les deux sens à la fois (relatif contre absolu, 20 % contre 5 points).
+    # Ce qui suit teste la seule chose qui compte : un écart JUSTE TOLÉRÉ par le
+    # test ne doit rien réveiller, et un écart JUSTE REFUSÉ doit avoir changé le
+    # palier. Sinon il existe un texte faux que rien ne peut réécrire.
+    # PAR BALAYAGE, ET NON SUR UNE VALEUR CHOISIE. La première version de ce
+    # contrôle prenait une référence unique (20,0) et un écart de 1,6 pas : les
+    # quatre champs passaient au vert alors que le seuil absolu était faux. Une
+    # valeur choisie par celui qui écrit le test tombe dans la région où le test
+    # marche — c'est sa définition. Le balayage, lui, va chercher les bords, et il
+    # a trouvé le contre-exemple (marge 2,56 → 5,09) en une seconde.
+    # LES BORNES COUVRENT DU NÉGATIF : une marge nette ou un flux disponible
+    # peuvent l'être, et c'est là que l'arithmétique des paliers est la plus
+    # fragile.
+    for _cle, _mode, _pas in _ga.CHAMPS_VALO:
+        _lo, _hi = (1.0, 120.0) if _mode == "rel" else (-40.0, 80.0)
+        _contre = []
+        for _i in range(1, 240):
+            _ref = _lo + (_hi - _lo) * _i / 240
+            _p0 = _ga.bucket_valorisation({_cle: _ref})
+            for _j in range(1, 240):
+                _v = _lo + (_hi - _lo) * _j / 240
+                if (_hors_tolerance(_cle, _v, _ref)
+                        and _ga.bucket_valorisation({_cle: _v}) == _p0):
+                    _contre.append((round(_ref, 2), round(_v, 2)))
+                    break
+            if _contre:
+                break
+        check(f"{_cle} : tout écart signalé par le test a changé le palier",
+              not _contre,
+              f"signalé mais même palier : réf {_contre[0][0]} → {_contre[0][1]}"
+              if _contre else "")
     _base = {"forward_pe": 20.0, "trailing_pe": 30.0,
              "fcf_yield_pct": 4.0, "net_margin_pct": 22.0}
     _s0 = _ga.bucket_valorisation(_base)
@@ -902,6 +1163,98 @@ else:
     check("les deux niveaux de fiche ont désormais le même socle de rubriques",
           _ga.CHAMPS_PAR_NIVEAU[_ga.NIVEAU_COMPLET]
           == _ga.CHAMPS_PAR_NIVEAU[_ga.NIVEAU_THEMATIQUE])
+
+    # ── LE DÉFAUT QUE TOUT CE DISPOSITIF N'AVAIT PAS VU ─────────────────────
+    # Les paliers ci-dessus sont justes, la signature les lit, le test les
+    # éprouve. Et pourtant, du 09 au 12/08/2026, le garde-fou ne protégeait que
+    # 30 des 148 fiches publiées : les 118 autres sont rédigées à partir de
+    # universe.json, dont le contrat compact ne portait AUCUN multiple. Pour
+    # elles, bucket_valorisation() rendait quatre fois "na", stablement, donc
+    # sans jamais rien signaler. Un contrôle qui ne peut pas devenir rouge n'est
+    # pas un contrôle, et celui-ci ne le pouvait pas là où vivaient quatre
+    # cinquièmes des textes.
+    #
+    # Rien dans les tests d'alors ne pouvait le dire, parce qu'ils éprouvaient la
+    # FONCTION sur des dictionnaires fabriqués — jamais le CHEMIN par lequel les
+    # vraies fiches y arrivent. Les deux contrôles qui suivent prennent ce chemin.
+    _compact = {"nom": "Essai", "score": 70, "secteur": "Technologie",
+                "per_fwd": 20.0, "per_cur": 30.0, "fcf_yield_pct": 4.0,
+                "marge_nette_pct": 22.0, "marge_fcf_pct": 19.0,
+                "croissance_ca_pct": 18.0, "alerte": ""}
+    _sv = _ga.bucket_valorisation(
+        _ga.stock_depuis_universe("ESSAI", _compact, {})["breakdown"])
+    check("un titre thématique chiffré n'a plus de valorisation aveugle",
+          "na" not in _sv, f"paliers rendus : {_sv}")
+    _sig = _ga.signature(_ga.stock_depuis_universe("ESSAI", _compact, {}),
+                         _ga.NIVEAU_THEMATIQUE)
+    check("sa croissance entre aussi dans la signature",
+          "|20|" in f"|{_sig}|".replace("||", "|"), _sig)
+    # Et la contre-épreuve : le contrat vidé de ces champs DOIT rendre "na". Sans
+    # elle, le contrôle ci-dessus passerait encore si stock_depuis_universe se
+    # mettait à inventer des valeurs par défaut.
+    _vide = _ga.bucket_valorisation(
+        _ga.stock_depuis_universe("ESSAI", {"nom": "x"}, {})["breakdown"])
+    check("un titre sans chiffres publiés rend autant de trous que de champs",
+          _vide == ["na"] * len(_ga.CHAMPS_VALO), _vide)
+
+    # ── AUCUN TROU NOMMÉ DANS LE PROMPT ────────────────────────────────────
+    # breakdown_block() promet dans sa toute première ligne de docstring qu'une
+    # ligne n'est écrite QUE si la donnée existe, « sans quoi le modèle aurait
+    # sous les yeux une liste de trous à commenter ». La promesse a tenu tant que
+    # les lignes Fondamentaux et Valorisation étaient réservées aux fiches
+    # complètes, qui portent toutes leurs grandeurs. Le jour où le contrat compact
+    # en a livré cinq sur sept, elles ont écrit « marge FCF n/d = TTM » et « PEG
+    # n/d » : la garde n'existait pas, et c'est la lecture à l'œil du prompt rendu
+    # qui l'a vu. Elle existe maintenant, et sur les deux niveaux.
+    _cas_compact = {"nom": "Essai", "score": 78, "secteur": "Industrie",
+                    "per_fwd": 41.2, "per_cur": 63.0, "fcf_yield_pct": 1.9,
+                    "marge_nette_pct": 11.4, "croissance_ca_pct": 28.3, "z": 1.1}
+    _bloc = _ga.breakdown_block(
+        _ga.stock_depuis_universe("ESSAI", _cas_compact, {}), _ga.NIVEAU_THEMATIQUE)
+    check("le prompt d'un titre thématique n'affiche aucun trou nommé",
+          "n/d" not in _bloc, [l for l in _bloc.split("\n") if "n/d" in l])
+    check("il porte quand même ses multiples", "PER forward 41.2x" in _bloc)
+    _nu = _ga.breakdown_block(
+        _ga.stock_depuis_universe("NU", {"nom": "Nu", "score": 50}, {}),
+        _ga.NIVEAU_THEMATIQUE)
+    check("un titre sans aucun chiffre n'a ni ligne Valorisation ni Fondamentaux",
+          "Valorisation" not in _nu and "Fondamentaux" not in _nu, _nu)
+    # Le niveau complet, lui, doit continuer à tout rendre : la découpe en
+    # segments ne devait rien retirer à ceux qui avaient déjà tout.
+    _complet = {"ticker": "C", "name": "Complet", "sector": "Tech", "score": 80,
+                "breakdown": {"forward_pe": 20.0, "trailing_pe": 25.0,
+                              "fcf_yield_pct": 4.0, "net_margin_pct": 22.0,
+                              "fcf_margin_pct": 18.0, "rev_growth_pct": 12.0,
+                              "regression_z": 0.4,
+                              "note": {"criteres": [{"id": "peg", "pts": 7,
+                                                     "valeur": 1.4}]}}}
+    _bc = _ga.breakdown_block(_complet, _ga.NIVEAU_COMPLET)
+    check("une fiche complète garde marge FCF et PEG dans son prompt",
+          "marge FCF 18.0%" in _bc and "PEG 1.40" in _bc, _bc)
+
+    # ── ET SUR LES FICHES RÉELLEMENT PUBLIÉES ───────────────────────────────
+    # Le contrôle ci-dessus porte sur le code. Celui-ci porte sur le site, et il
+    # est volontairement borné aux fiches écrites sous le PROMPT_VERSION COURANT.
+    # Motif : au moment où cette règle est écrite, les 148 fiches en ligne datent
+    # du contrat précédent et porteraient toutes le défaut. Un test rouge en
+    # permanence ne se lit plus, et l'exiger reviendrait à réclamer un run
+    # éditorial que le propriétaire seul décide de lancer. Borné au contrat
+    # courant, il est vide aujourd'hui et devient contraignant fiche par fiche, à
+    # mesure qu'elles sont réécrites : il ne peut jamais mentir dans l'intervalle.
+    _aveugles = {}
+    for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
+        if not isinstance(_e, dict):
+            continue
+        _s = (_e.get("_sig") or "").split("|")
+        if not _s or _s[0] != _ga.PROMPT_VERSION or len(_s) < 4 + len(_ga.CHAMPS_VALO):
+            continue
+        _reel = _ga.bucket_valorisation((FICHES.get(_t) or {}).get("breakdown") or {})
+        _trous = [c for (c, _m, _p), _ecrit, _att
+                  in zip(_ga.CHAMPS_VALO, _s[-len(_ga.CHAMPS_VALO):], _reel)
+                  if _ecrit == "na" and _att != "na"]
+        if _trous:
+            _aveugles[_t] = "surveillance absente sur " + ", ".join(_trous)
+    check_connus("aucune fiche ne cache un chiffre que sa fiche affiche", _aveugles)
 
 # ── 10. AUCUNE FICHE ORPHELINE, AUCUNE POSITION ORPHELINE ───────────────────
 print("\n— Chaque fiche publiée est-elle atteignable, chaque ligne détenue a-t-elle sa fiche ? —")
