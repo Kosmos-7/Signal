@@ -1,0 +1,164 @@
+{
+ "id": "2026-08-12",
+ "type": "quotidien",
+ "date": "2026-08-12",
+ "titre": "Pétrole et or en hausse, Wall Street dans le rouge avant l'inflation",
+ "chapeau": "Les tensions géopolitiques poussent l'or et le brut vers le haut. Les indices américains finissent en léger recul à la veille des chiffres d'inflation.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-12.jpg",
+  "v": "7d105746",
+  "legende": "The Tokyo Stock Exchange - main room 4",
+  "credit": "Kakidai",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Tokyo_Stock_Exchange_-_main_room_4.jpg",
+  "fichier": "The Tokyo Stock Exchange - main room 4.jpg",
+  "requete": "Tokyo Stock Exchange Arrows"
+ },
+ "marches": {
+  "ref": "2026-08-11",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7728.2001953125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.32128614721071164,
+    "ref": "2026-08-11"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8714.9404296875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.12708921929549194,
+    "ref": "2026-08-11"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26445.44921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.6010449022547737,
+    "ref": "2026-08-11"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6551.22021484375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.23869345795090754,
+    "ref": "2026-08-11"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.684000015258789,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.014999866485595703,
+    "ref": "2026-08-11"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4383.0,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.48604237383193893,
+    "ref": "2026-08-11"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Blackstone Inc.",
+   "valeur": 147.1699981689453,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 3.889590826199963,
+   "ref": "2026-08-11",
+   "ticker": "BX",
+   "nom": "Blackstone Inc."
+  }
+ },
+ "marches_texte": "Wall Street a terminé la journée du 11 août en territoire négatif : le S&P 500 cède 0,32 % à 7 728,20 points, le Nasdaq recule de 0,60 % à 26 445,45 points. De l'autre côté de l'Atlantique, l'Euro Stoxx 50 résiste mieux et grappille 0,24 %, tandis que le CAC 40 cède un discret 0,13 %. L'or, lui, progresse de 0,49 % à 4 383 dollars, porté selon Reuters par la montée des tensions géopolitiques à la veille des données d'inflation américaines. Meilleure performance de notre liste : Blackstone, qui bondit de 3,89 %.",
+ "sections": [
+  {
+   "titre": "Pétrole : les doutes sur un accord américano-iranien relancent les cours",
+   "texte": "Le brut repart à la hausse alors que les incertitudes autour d'un éventuel accord entre Washington et Téhéran alimentent les craintes sur l'offre mondiale, selon Reuters. Les tensions géopolitiques plus larges, qui pèsent également sur les marchés à la veille des chiffres de l'inflation américaine (CPI), contribuent elles aussi à soutenir les prix du pétrole et de l'or. Le métal jaune progresse à 4 383 dollars, dans ce contexte d'appétit pour les valeurs refuges.",
+   "sources": [
+    0,
+    2
+   ]
+  },
+  {
+   "titre": "Cardinal Health : objectifs de bénéfices revus à la hausse",
+   "texte": "Cardinal Health a publié des prévisions de bénéfices jugées solides, au point que CNBC indique relever son objectif de cours sur le titre. La publication trimestrielle n'était pas «totalement propre», selon les termes employés, mais la solidité de la rentabilité est présentée comme l'essentiel à retenir. Un résultat accueilli positivement dans un contexte de marché globalement hésitant.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Immobilier américain : la loi anti-investisseurs institutionnels fait débat",
+   "texte": "Le directeur général d'Invitation Homes, le plus grand propriétaire-bailleur de maisons individuelles aux États-Unis, a pris la parole sur la nouvelle loi interdisant aux grands investisseurs d'acheter des logements. Il reconnaît que cette mesure devrait faire baisser les prix immobiliers à long terme, mais pas immédiatement. Une nuance qui dit beaucoup sur la complexité du marché résidentiel américain.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Vaccin MMR : les experts douchent l'idée de scinder le vaccin triple",
+   "texte": "Donald Trump a évoqué la possibilité de séparer le vaccin contre la rougeole, les oreillons et la rubéole en injections distinctes. Des médecins et experts interrogés par CNBC estiment que cette approche n'a pas de fondement scientifique et a peu de chances de se concrétiser, tout en soulignant qu'elle comporterait des conséquences.",
+   "sources": [
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Oil, gold prices rise as geopolitical tensions mount before CPI - reuters.com",
+   "resume": "Oil, gold prices rise as geopolitical tensions mount before CPI  reuters.com",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQTnAyM2F1aXRKeVZFQU5yVzdLbmplRS1vV28zVXZ0Slo3bmszQjM1enJHU2RlOG5EZWtLYUNmVHdjcHprM19fTnhjUE8tV3VGTFBrelZXM1pOekphNVF1S3EtSTlDcDl5Skw0R19ud3U5NmdhWEk5eVJjV1dudFNhSlhoRQ?oc=5",
+   "date": "2026-08-12 02:19"
+  },
+  {
+   "titre": "Oil rises as doubts over US-Iran deal heighten supply concerns - reuters.com",
+   "resume": "Oil rises as doubts over US-Iran deal heighten supply concerns  reuters.com",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOajU2TkE4Zm1kOHlwM2hwX0VXeWJTNkFCblBrN0FuUDNfN1NMRFQ1NE1HREZGVE96UXMyajRlamxJaVZqMGxQNGRyZlBZQ2xnNVNEZjdBZ05zR25PWEFTNksxMk9iREoyNElfZ1h0aUdiTmFKdEJpZlJfUDk1d25ZTXptbnByMDFfRjk2R1oxZ29pNFZiQVhwTmRCaDIzUXdYSFlxZnl6aU05eG1WLWlQWg?oc=5",
+   "date": "2026-08-12 00:59"
+  },
+  {
+   "titre": "We're lifting our price target on Cardinal Health after issuing rosy profit guidance",
+   "resume": "The quarter wasn't totally clean, but strong profitability matters the most.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/11/were-lifting-our-price-target-on-cardinal-health-after-issuing-rosy-profit-guidance-.html",
+   "date": "2026-08-11 19:59"
+  },
+  {
+   "titre": "Invitation Homes CEO says ban on institutional homebuying will bring down prices, but not immediately",
+   "resume": "The CEO of the nation's largest single-family rental landlord said the new law banning large-scale investors from the market will lower prices in the long term.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/11/invitation-homes-ceo-institutional-homebuying-ban-prices.html",
+   "date": "2026-08-11 16:54"
+  },
+  {
+   "titre": "Trump wants to split the MMR vaccine. Experts say that's unlikely — and comes with consequences",
+   "resume": "Doctors and other experts say that splitting the measles, mumps and rubella shot has no scientific basis and is unlikely to get off the ground.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/11/mmr-vaccine-trump-wants-to-split-childhood-shot-up.html",
+   "date": "2026-08-11 16:50"
+  }
+ ],
+ "genere_le": "2026-08-12 06:58 UTC"
+}
