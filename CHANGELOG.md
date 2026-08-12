@@ -5,37 +5,19 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
-### Le site enseignait à lire un fonds ; il fait maintenant éprouver ce que ça coûte d'en tenir un
+### Un cinquième onglet a vécu quelques heures, et c'est l'historique qui le garde
 
-Cinquième onglet : **La Maison** (maison.html), un jeu de simulation où l'on
-gère une société de gestion fictive — un bureau isométrique qu'on meuble, une
-équipe qu'on recrute quand la trésorerie le permet, des thèses d'analystes
-qu'on tranche dans une boîte de dialogue. Les cours sont **réels** (80 titres
-du screener, rééchantillonnés au mois sur vingt ans dans `jeu/marche.json`,
-98 Ko), les identités sont **masquées** pendant la partie et révélées après
-coup — sinon quiconque connaît l'histoire de NVDA jouerait avec les réponses.
+Le jeu de simulation « La Maison » (#5), fusionné et déployé le 12/08 au soir,
+est retiré le même jour à la demande du propriétaire : le site n'embarque pas
+de jeu. Le retrait est un revert propre du merge — la page, le moteur, le
+rendu isométrique, le pack de marché, ses 48 tests et sa spécification
+restent dans l'historique git, prêts à revenir si la décision change.
 
-**Les chiffres du jeu sont ceux du dépôt et du métier**, pas ceux d'un jeu :
-exécution à 7,5 bps avec un gérant et 30 sans, ordre refusé sous 50 € (les
-mêmes constantes que config.py — un test compare les deux fichiers), 2 % de
-gestion prélevés au prorata mensuel, salaires chargés à 45 %. Les ordres de
-grandeur sont sourcés dans PROMPT_jeu_simulation.md §23, et chaque
-simplification du MVP est marquée « ⚠ MVP » dans le code (§25.2).
-
-**Deux promesses sont testées, pas seulement écrites** (tests/test_maison.py,
-48 vérifications qui REJOUENT le moteur sous node). La première : même graine
-+ mêmes décisions = même partie au centime — c'est ce qui rend une partie
-partageable par son adresse. La seconde est éditoriale : les cours étant
-réels, **aucun texte du jeu n'attribue un fait à une entreprise** — les
-thèses ne citent que des faits de prix, et les noms masqués sortent d'une
-liste fixe (un générateur de syllabes finirait par produire le nom d'une
-vraie société, à laquelle le jeu collerait des événements inventés).
-
-Le moteur (maison-moteur.js) ne touche ni au DOM, ni au réseau, ni à l'heure
-murale : il tourne à l'identique dans la page et dans la CI. Un pack
-empoisonné au-delà du mois courant produit un état final identique au pack
-sain — le futur n'est pas lisible, c'est vérifié. Rien ne quitte le
-navigateur : la sauvegarde vit en localStorage, exportable en JSON.
+Les quatre onglets retrouvent leur chrome d'avant, y compris les retouches
+qui n'existaient que pour loger le cinquième (le nom de la marque qui
+s'effaçait sous 480 px). Une correction survit au retrait, parce qu'elle
+n'appartenait pas au jeu : le README annonçait encore « PFU 30 % » alors que
+config.py porte 31,4 % depuis la LFSS 2026.
 
 ### La watchlist « Espace » nommait un secteur, pas son sujet
 

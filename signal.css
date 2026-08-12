@@ -226,22 +226,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
   header{gap:.5rem}
   nav a{padding:5px 5px}
 }
-/* CINQ ONGLETS NE TIENNENT PLUS À CÔTÉ DU NOM. L'ajout de « La Maison »
-   (12/08/2026) a porté la nav à ~330 px au plancher de lisibilité : sous
-   480 px, « Portefeuille IA » sortait de l'écran — sur les cinq pages à la
-   fois, mesuré à 360 px au navigateur. Trois gestes, et une ligne rouge :
-   · le NOM de la marque s'efface (l'icône reste, et reste le lien) ;
-   · l'en-tête et les liens resserrent leur RESPIRATION latérale — jamais la
-     police (plancher .72rem) ni la hauteur de cible tactile ;
-   · si une police de repli plus large qu'Inter déborde quand même, la nav
-     DÉFILE au lieu de couper le dernier onglet : un onglet hors d'atteinte
-     est une panne, un léger défilement n'est qu'un inconfort. */
-@media(max-width:480px){
-  .brand-name{display:none}
-  header{padding:.85rem .6rem;gap:.4rem}
-  nav{max-width:100%;overflow-x:auto}
-  nav a{padding:5px 3px}
-}
 
 /* ── Scrollbars discrètes ── */
 ::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
