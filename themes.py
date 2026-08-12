@@ -153,8 +153,24 @@ THEMES_CURES = [
                 # datait d'avant la scission dans son esprit. ~180 Md$ au boom
                 # NAND, 1,5 an d'historique : fiche avec avertissement
                 # régression, comme les néoclouds.
+                #
+                # 285A.T (Kioxia) ajouté le 12/08/2026, signalé absent par le
+                # propriétaire. C'est le MÊME OUBLI que SNDK, vu de l'autre côté :
+                # Kioxia et SanDisk exploitent EN COMMUN les usines NAND de
+                # Yokkaichi et Kitakami, et la liste retenait le partenaire coté
+                # à New York en laissant de côté celui coté à Tokyo. Les trois
+                # autres producteurs mondiaux — Micron, SK hynix, Samsung —
+                # étaient déjà là : le maillon décrivait un oligopole en oubliant
+                # un de ses membres.
+                # Profil quasi identique à celui de SanDisk, ce qui rend la
+                # décision d'alors directement applicable : ~182 Md$ et 1,6 an
+                # d'historique (introduite à Tokyo fin 2024), donc fiche avec
+                # avertissement de régression. Validé contre Yahoo AVANT d'être
+                # écrit ici — 1/1, JPY conforme au suffixe .T, secteur exploitable
+                # — ce qui est l'ordre que validate_tickers.py prescrit.
                 "label": "Mémoire & stockage",
-                "tickers": ["MU", "000660.KS", "005930.KS", "WDC", "SNDK", "STX", "NTAP", "4063.T"],
+                "tickers": ["MU", "000660.KS", "005930.KS", "WDC", "SNDK", "STX", "NTAP", "4063.T",
+                            "285A.T"],
             },
             {
                 # Ce qui relie les accélérateurs entre eux, et limite la taille

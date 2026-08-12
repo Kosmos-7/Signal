@@ -100,13 +100,21 @@ CONNUS = {
         "LHX": "2010:102, 2011:189, 2013:420 entre 5 005 et 5 012 — erreur "
                "d'échelle au dépôt XBRL, tâche #83",
     },
-    "une fiche qui publie une marge de flux publie aussi son rendement": {
-        "ALV.DE": "capitalisation rendue par intermittence par la source — tâche #84",
-        "MU":     "idem — tâche #84",
-        "SAF.PA": "idem — tâche #84",
-        "SIE.DE": "idem — tâche #84",
-        "WDC":    "idem — tâche #84",
-    },
+    # VIDÉ LE 12/08/2026 — TÂCHE #84 CLOSE PAR LES FAITS. Les cinq
+    # capitalisations (Allianz, Micron, Safran, Siemens, Western Digital)
+    # publient désormais leur rendement du flux disponible, et plus AUCUNE fiche
+    # du corpus n'en manque. C'est le contrôle « registre à jour » qui l'a exigé :
+    # laissées là, ces entrées auraient tu un défaut résolu, exactement ce que ce
+    # registre refuse d'être.
+    # LE MOTIF DE L'ORIGINE ÉTAIT LE BON : « rendue par intermittence par la
+    # source ». L'intermittence a cessé — pas parce qu'on l'a réparée. Le repli
+    # posé le 09/08 (cours × actions en circulation) n'avait rien changé les 09
+    # et 10/08, ce qui montrait que le nombre d'actions manquait aussi. On ne
+    # sait donc pas lequel des deux champs est revenu, et la sonde
+    # tools/sonde_capitalisation.py reste en place pour le jour où ils
+    # repartiront : elle distingue un champ absent d'un champ présent à null,
+    # et interroge trois chemins de la bibliothèque.
+    "une fiche qui publie une marge de flux publie aussi son rendement": {},
     # Ces textes datent d'AVANT l'entrée des multiples dans la signature : rien ne
     # les réveillait quand le multiple bougeait. Ils seront tous réécrits au
     # prochain run éditorial, et ces entrées devront alors disparaître — le

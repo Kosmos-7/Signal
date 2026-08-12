@@ -5,6 +5,44 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le maillon mémoire décrivait un oligopole en oubliant un de ses membres
+
+Kioxia manquait à l'infrastructure de l'IA, signalé par le propriétaire. Elle
+n'avait jamais été écartée non plus : ni dans le thème, ni dans l'univers, ni
+dans le registre des recalés à la validation. Ce n'était pas une décision,
+c'était un trou.
+
+**C'est le même oubli que SanDisk, vu de l'autre côté.** Kioxia et SanDisk
+exploitent **en commun** les usines NAND de Yokkaichi et Kitakami ; la liste
+retenait le partenaire coté à New York et laissait de côté celui coté à Tokyo.
+Les trois autres producteurs mondiaux — Micron, SK hynix, Samsung — y étaient
+déjà : le maillon décrivait un oligopole en oubliant un de ses membres.
+
+Le profil rend la décision d'alors directement applicable : **~182 Md$ et 1,6 an
+d'historique**, contre « ~180 Md$ au boom NAND, 1,5 an d'historique » écrit pour
+SanDisk en août. Même traitement, donc — fiche avec avertissement de régression.
+
+**Validée avant d'être écrite**, ce qui est l'ordre que `validate_tickers.py`
+prescrit noir sur blanc : « on ne déclare un ticker qu'une fois qu'on sait qu'il
+existe et qu'il passe les filtres ». Le runner a rendu 1/1, devise JPY conforme
+au suffixe `.T`, secteur exploitable, capitalisation très au-dessus du seuil.
+
+### Tâche #84 close par les faits
+
+Les cinq capitalisations qu'Allianz, Micron, Safran, Siemens et Western Digital
+ne servaient que par intermittence sont revenues : les cinq publient leur
+rendement du flux disponible, et **plus aucune fiche du corpus n'en manque**.
+
+C'est le contrôle « registre à jour » qui l'a exigé — laissées en place, ces cinq
+entrées auraient tu un défaut résolu, précisément ce que ce registre refuse
+d'être.
+
+**Le motif d'origine était le bon**, et on n'a rien réparé : « rendue par
+intermittence par la source ». Le repli posé le 09/08 n'avait rien changé les 09
+et 10/08, ce qui montrait que le nombre d'actions manquait aussi ; on ne sait
+donc pas lequel des deux champs est revenu. La sonde reste en place pour le jour
+où ils repartiront.
+
 ### « Chiffres publiés » s'ouvrait sur 2030
 
 La section ouvrait sur sa **dernière** colonne. En vue annuelle, la dernière
