@@ -91,9 +91,11 @@ dessin est original et produit par le code (§4).
 
 - **Isométrie 2:1 (dimétrique)** — la projection des jeux de tuiles classiques, celle qui donne
   des losanges deux fois plus larges que hauts et qui se code en trois lignes.
-- **Tuile de 32 × 16 px** (à `dpr` 1). Personnage **~26 px de haut**, soit un peu plus d'une
-  tuile et demie : assez pour lire une posture, assez petit pour en tenir vingt à l'écran.
-- **Plateau de départ : 12 × 9 tuiles.** Extensible jusqu'à **20 × 14** en louant de la surface.
+- **Tuile de 32 × 16 px** (à `dpr` 1), **une tuile = 2 m²**. Personnage **~26 px de haut**, soit
+  un peu plus d'une tuile et demie : assez pour lire une posture, assez petit pour en tenir
+  vingt à l'écran.
+- **Plateau de départ : 8 × 6 tuiles = 96 m²** (la taille réelle d'une boutique qui démarre,
+  cf. §5). Extensible jusqu'à **12 × 9** en louant des rangées de tuiles au même bailleur.
 - **Un plateau par étage**, jamais plusieurs à la fois. On change d'étage par un sélecteur
   vertical à gauche (RDC → R+1 → R+2…). Chaque étage ouvert a son loyer.
 - **Caméra fixe**, pas de rotation, pas de zoom libre — seulement deux échelles (×1, ×2) pour les
@@ -1042,3 +1044,48 @@ en gras » quand vous rouvrez un dossier qu'il avait signalé six mois plus tôt
 paragraphes de pédagogie. **Le fond ne blague jamais, les gens si.** C'est très exactement la
 consigne de ton du dépôt (`GUIDE_redaction_analyses.md` : « plume vivante avec une pointe d'esprit
 pince-sans-rire occasionnelle »), appliquée à des personnages.
+
+---
+
+## §25 — Le MVP : le périmètre exact de la première mise en production
+
+Le MVP est **le lot ① tel quel**, avec les précisions suivantes — figées ici pour qu'aucune ne
+se décide en silence pendant l'implémentation.
+
+### §25.1 — Ce qui est DANS le MVP
+- Le plateau 8×6 isométrique, les meubles (poste, machine à café, plante), le mode plan avec
+  contrôle de connexité, l'échelle ×1/×2, le pan tactile.
+- Toi + recrutements **analyste junior / analyste confirmé / gérant d'exécution**, avec la chaîne
+  complète : trésorerie → poste posé → candidature → arrivée par la porte.
+- Machine à états + A\* + marche, boîte de dialogue lettre à lettre, clic sur n'importe qui.
+- Le temps à deux horloges (jour ≈ 2 s à ×1, mois = 20 jours ouvrés), vitesses ×1/×2/×4, pause
+  auto quand une décision attend.
+- Le marché réel (`jeu/marche.json`), la VL, les frais de gestion 2 % prélevés au prorata
+  mensuel, l'exécution 7,5/30 bps, le refus < 50 €.
+- **Une seule famille d'arbitrage : la thèse** (entrée ET allègement/sortie d'une ligne),
+  fondée UNIQUEMENT sur des faits de prix + le secteur — jamais un fondamental inventé (§2 ③).
+- Les noms masqués (liste fixe), la révélation d'identité à la vente (> 1 an) et au bilan de
+  janvier.
+- Un bilan de janvier minimal (dialogue de l'hôte : brut / net / écart de frais, P&L société).
+- Le panneau (Fonds · Société · Équipe · Registre · Carnet), le carnet avec ~6 concepts
+  (`valeur liquidative`, `frais et traînée`, `écart brut/net`, `taille de position`,
+  `achat vs abonnement`, `point mort`).
+- Sauvegarde localStorage versionnée + export JSON + effacer ; reprise exacte au rechargement.
+- Chrome 5 onglets, tests du lot ①, accessibilité §15 (registre jouable, clavier, reduced-motion).
+
+### §25.2 — Les simplifications ASSUMÉES du MVP (chacune commentée dans le code)
+- **Démarrage hébergé d'office** (décision #8) : pas d'acte I, rétrocession **30 % ⚠️
+  approximation** sur les frais encaissés, pas de fonds propres réglementaires. Adresse fixe
+  1ʳᵉ couronne (450 €/m²/an sur 96 m² = 3 600 €/mois).
+- **Flux investisseurs simplifiés** : collecte/rachats mensuels = fonction bornée de la
+  performance décalée de 2 trimestres, ⚠️ approximation ; la vraie mécanique arrive au lot ②.
+- **Abonnement de données au niveau société** (base 280 € / LSEG 1 700 € / Bloomberg 2 500 €
+  par mois), pas encore par poste.
+- **Au-delà du pack (240 mois) : rebouclage modulo** sur l'historique, commenté comme provisoire
+  — le block bootstrap honnête est au lot ④.
+- Moral affiché mais sans départ ; pas de débauchage, pas d'imprévus (lot ③), pas d'audit (lot ④).
+
+### §25.3 — Mise en production
+Le MVP se livre sur la branche de travail, tests verts, puis passe en prod par **pull request
+vers `main`** (GitHub Pages sert `main`). La PR ne s'ouvre que sur demande explicite du
+propriétaire — c'est sa décision de mise en ligne, pas celle de l'agent.
