@@ -63,7 +63,7 @@ du 02-09/06/2026, cf. CHANGELOG 3.0.1).
 
 ## Fichiers clés
 
-- [config.py](config.py) — paramètres centralisés (frais 7,5 bps, PFU 30 %, WATCHLIST_SIZE, règles)
+- [config.py](config.py) — paramètres centralisés (frais 7,5 bps, PFU 31,4 % depuis la LFSS 2026, WATCHLIST_SIZE, règles)
 - [screener.py](screener.py) — scoring v3 + détection cross + régression log-linéaire (fenêtres 10/20/25 ans)
 - [portfolio_agent.py](portfolio_agent.py) — agent Claude 2 passes (Haiku analyse → Sonnet décisions) + règles non négociables appliquées en code (stop-loss R07/R08, mode panique sticky, concentration sectorielle, weekend, ticker ∈ watchlist, cash ≥ 0). Gestes : ouvrir/fermer, **rotation** (ventes exécutées avant achats, max 1/run), **renforcement** (PRU pondéré, plafond 20 %) et **allègement** (`allegement_pct`, PFU au prorata) — cf. CHANGELOG 3.1.0/3.2.0
 - [.claude/skills/portfolio-analyst/](.claude/skills/portfolio-analyst/) — skill d'analyse (méthodologie, biais, discipline de vente)

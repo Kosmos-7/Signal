@@ -5,6 +5,20 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Un cinquième onglet a vécu quelques heures, et c'est l'historique qui le garde
+
+Le jeu de simulation « La Maison » (#5), fusionné et déployé le 12/08 au soir,
+est retiré le même jour à la demande du propriétaire : le site n'embarque pas
+de jeu. Le retrait est un revert propre du merge — la page, le moteur, le
+rendu isométrique, le pack de marché, ses 48 tests et sa spécification
+restent dans l'historique git, prêts à revenir si la décision change.
+
+Les quatre onglets retrouvent leur chrome d'avant, y compris les retouches
+qui n'existaient que pour loger le cinquième (le nom de la marque qui
+s'effaçait sous 480 px). Une correction survit au retrait, parce qu'elle
+n'appartenait pas au jeu : le README annonçait encore « PFU 30 % » alors que
+config.py porte 31,4 % depuis la LFSS 2026.
+
 ### La watchlist « Espace » nommait un secteur, pas son sujet
 
 Le propriétaire l'a signalé : le vrai terme est **NewSpace** — « un sous-ensemble
