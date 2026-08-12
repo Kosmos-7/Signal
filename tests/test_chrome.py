@@ -20,6 +20,10 @@ voient qu'en COMPARANT. C'est exactement ce que fait ce fichier, sur le texte
 des fichiers, sans navigateur — la règle étant qu'une page ne redéfinit pas ce
 que le design system définit déjà.
 
+Depuis le 12/08/2026, le site compte un CINQUIÈME onglet (maison.html, le jeu
+La Maison) : les comparaisons portent désormais sur cinq pages, et les
+constats de 07/08 ci-dessus restent vrais tels qu'ils ont été mesurés.
+
     python tests/test_chrome.py
 """
 import os
@@ -42,7 +46,8 @@ def check(nom, cond, detail=""):
         print(f"  ❌ {nom} {detail}")
 
 
-PAGES = ["index.html", "actualites.html", "apprendre.html", "portfolio.html"]
+PAGES = ["index.html", "actualites.html", "apprendre.html", "maison.html",
+         "portfolio.html"]
 SRC = {p: open(p, encoding="utf-8").read() for p in PAGES}
 CSS = open("signal.css", encoding="utf-8").read()
 
@@ -131,13 +136,13 @@ for p in PAGES:
 # d'écran, qui liraient « image » à la place du nom de la section.
 print("\n— Les pictogrammes de la nav —")
 navsvg = {p: re.search(r"<nav>(.*?)</nav>", SRC[p], re.S).group(1) for p in PAGES}
-check("les quatre onglets ont chacun leur pictogramme",
-      all(v.count("<svg") == 4 for v in navsvg.values()),
+check("les cinq onglets ont chacun leur pictogramme",
+      all(v.count("<svg") == 5 for v in navsvg.values()),
       str({p: v.count("<svg") for p, v in navsvg.items()}))
 check("chaque pictogramme est masqué aux lecteurs d'écran",
-      all(v.count('aria-hidden="true"') == 4 for v in navsvg.values()),
+      all(v.count('aria-hidden="true"') == 5 for v in navsvg.values()),
       str({p: v.count('aria-hidden="true"') for p, v in navsvg.items()}))
-check("les mêmes quatre pictogrammes sur les quatre onglets",
+check("les mêmes cinq pictogrammes sur les cinq onglets",
       len({tuple(re.findall(r'<svg[^>]*>(.*?)</svg>', v, re.S))
            for v in navsvg.values()}) == 1)
 check("aucun pictogramme ne fige sa couleur dans le balisage",
@@ -282,7 +287,8 @@ if py and js:
 print("\n— Les scripts inline se parsent-ils ? —")
 try:
     import subprocess, tempfile                                    # noqa: E402
-    for page in ("index.html", "actualites.html", "portfolio.html", "apprendre.html"):
+    for page in ("index.html", "actualites.html", "portfolio.html",
+                 "apprendre.html", "maison.html"):
         chemin = os.path.join(RACINE, page)
         if not os.path.exists(chemin):
             continue

@@ -150,18 +150,23 @@
   /* Faits de prix pour les thèses — même garde anti-futur que prixTitre.
      RÈGLE §2 ③ : une thèse ne cite QUE des faits de cours. Jamais une marge,
      un carnet de commandes, une actualité : les cours sont réels, inventer un
-     fait reviendrait à l'attribuer plus tard à une société réelle. */
+     fait reviendrait à l'attribuer plus tard à une société réelle.
+
+     Le recul se prend sur le PACK, pas sur l'horloge de la partie : la
+     simulation démarre au moins 24 mois après t0 (marcheDepart), donc un
+     moisSim NÉGATIF est un cours d'avant la fondation — parfaitement
+     licite à regarder. Sans ça, les analystes de la première année
+     n'avaient « pas d'historique » et ne proposaient rien : un an de jeu
+     muet, constaté à la première partie jouée au navigateur. */
   function faitsPrix(state, pack, ticker) {
     var p0 = prixTitre(state, pack, ticker);
     if (p0 === null) return null;
     function perf(mois) {
-      var m = state.mois - mois;
-      if (m < 0) return null;
-      var p = prixTitre(state, pack, ticker, m);
+      var p = prixTitre(state, pack, ticker, state.mois - mois);
       return p === null ? null : (p0 / p - 1) * 100;
     }
     var haut = 0;
-    for (var k = Math.max(0, state.mois - 60); k <= state.mois; k++) {
+    for (var k = state.mois - 60; k <= state.mois; k++) {
       var p = prixTitre(state, pack, ticker, k);
       if (p !== null && p > haut) haut = p;
     }
@@ -446,18 +451,19 @@
       });
       return;
     }
-    /* Entrée : un candidat hors portefeuille, coté, avec 12 mois d'histoire. */
+    /* Entrée : un candidat hors portefeuille, coté — l'histoire nécessaire
+       au recul de 12 mois vient du pack (cf. faitsPrix), elle existe donc
+       dès le premier jour de la partie. */
     var essais = 0, choix = null;
     while (essais++ < 12 && !choix) {
       var t = pack.titres[tirerEntier(state, pack.titres.length)];
       if (state.fonds.positions[t.t]) continue;
       if (prixTitre(state, pack, t.t) === null) continue;
-      if (state.mois < 12) break;
       choix = t;
     }
     if (!choix) return;
     var f = faitsPrix(state, pack, choix.t);
-    if (!f || f.p3m === null) return;
+    if (!f || f.p3m === null || f.p12m === null) return;
     var lecture = f.p3m < -12
       ? 'Le repli me semble excessif au vu du reste du secteur — c’est un avis, pas un fait.'
       : f.p3m > 15
