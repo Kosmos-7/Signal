@@ -108,13 +108,21 @@ def construire(racine=RACINE, aujourd_hui=None):
         if trous * 100 > len(px) * MAX_TROUS_PCT:
             continue
         base = px[0]
+        vals = [round(v * BASE / base) for v in px]
+        # L'amplitude doit tenir dans l'entier : un cours tombé sous 1/2000e
+        # de sa base arrondirait à ZÉRO — et un zéro n'est pas un cours, c'est
+        # une faillite inventée. Constaté sur QUBT (penny stock multiplié par
+        # plusieurs milliers) : on ÉCARTE la série plutôt que de la déformer,
+        # même choix que le screener pour ses propres bornes.
+        if min(vals) < 1:
+            continue
         titres.append({
             "t": ticker,
             "n": meta.get("nom", ticker),
             "sec": meta["secteur"],
             "d": meta["devise"],
             "i0": debut - t0,
-            "px": [round(v * BASE / base) for v in px],
+            "px": vals,
         })
 
     # Les plus profonds d'abord (le jeu a besoin de longues histoires), puis
