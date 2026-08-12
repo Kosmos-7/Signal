@@ -281,12 +281,10 @@ def stock_depuis_universe(ticker, u, labels):
             "cross_days_ago":          u.get("cross_j"),
             "target_upside_pct":       u.get("upside_pct"),
             "target_analysts":         u.get("analystes"),
-            # Multiples, marge et croissance (contrat compact enrichi le
-            # 12/08/2026). Sans eux, bucket_valorisation() rendait `na` quatre
-            # fois pour les 118 fiches thématiques : le garde-fou du 09/08 ne
-            # couvrait que les 30 fiches du top 30, et le modèle, privé de
-            # chiffres, en écrivait de mémoire. Ces six champs referment les deux
-            # trous d'un coup — ils entrent dans le prompt ET dans la signature.
+            # Multiples, marges et croissance (contrat compact enrichi le
+            # 12/08/2026, cf. CHANGELOG). Ils entrent dans le prompt ET dans la
+            # signature ; la table miroir vit dans screener.py (producteur) et
+            # portfolio_agent.py (2e lecteur), tenues ensemble par test_themes.
             "forward_pe":              u.get("per_fwd"),
             "trailing_pe":             u.get("per_cur"),
             "fcf_yield_pct":           u.get("fcf_yield_pct"),
@@ -409,15 +407,10 @@ def bucket_score(score):
 # Version du style/prompt éditorial — bumper FORCE la régénération de toutes les fiches
 # (la signature change), p.ex. après un changement de ton ou d'exigence de chiffrage.
 PROMPT_VERSION = "2026-08-valo-toutes-fiches"  # chiffres fournis aux 148, décote hors chiffre
-# Bump du 12/08/2026. Il est ici DÉLIBÉRÉ et non subi : trois règles d'écriture
-# changent le même jour (la décote passe hors chiffre, citer une grandeur non
-# fournie devient explicitement interdit, le z-score est surveillé au demi-sigma),
-# et 118 fiches sur 148 vont recevoir pour la première fois des multiples dans leur
-# prompt. Les laisser se régénérer une par une au fil de la dérive aurait produit
-# un site à deux styles pendant des semaines, la moitié des fiches écrites sous
-# l'ancien contrat, l'autre sous le nouveau. Un bump réécrit tout d'un coup : c'est
-# le seul moment où la règle « ne jamais publier un nombre qu'on ne peut pas
-# justifier » redevient vraie partout en même temps.
+# Bump DÉLIBÉRÉ du 12/08/2026 : plusieurs règles d'écriture changent le même jour
+# et 118 fiches reçoivent pour la première fois des multiples dans leur prompt.
+# Sans lui, le site aurait deux styles pendant des semaines ; avec lui, tout est
+# réécrit d'un coup au run suivant (cf. CHANGELOG).
 # Historique : "2026-08-valo-dans-signature" (multiples surveillés + socle unique).
 # Historique : "2026-08-sans-rsi-chiffre" (RSI/drawdown interdits de chiffre).
 # Historique : "2026-08-univers-2niveaux" (union watchlist+univers, prompt à 2 niveaux).
@@ -434,14 +427,9 @@ CHAMPS_VALO = (
     ("trailing_pe",  "rel", 0.10),
     ("fcf_yield_pct", "abs", 1.0),
     ("net_margin_pct", "abs", 5.0),
-    # LA MARGE FCF REJOINT LA LISTE LE 12/08/2026. Elle était fournie au prompt,
-    # citée par 27 fiches publiées, et surveillée par rien : le dernier
-    # « entre-deux » de la règle du 09/08, resté là parce que personne n'avait
-    # compté qui la citait. Son entrée ne coûte rien et le chiffre le dit : sur
-    # deux jours de dérive réelle, ZÉRO fiche sur 147 change de palier. C'est
-    # attendu — une marge TTM ne bouge pas avec le cours, elle bouge quand
-    # l'entreprise PUBLIE. Ce qui en fait précisément le champ à surveiller : il
-    # ne s'agite jamais pour rien, et il se déplace exactement le jour où le
+    # Marge FCF ajoutée le 12/08/2026 : citée par 27 fiches, fournie au prompt,
+    # surveillée par rien. Coût mesuré : zéro palier franchi en deux jours — une
+    # marge TTM ne bouge que quand l'entreprise publie, exactement le jour où le
     # texte devient faux.
     ("fcf_margin_pct", "abs", 5.0),
 )
@@ -523,29 +511,18 @@ def signature(stock, niveau):
     signature et interdite de chiffre.
     trop volatils d'un run à l'autre pour justifier un appel API coûteux (testé : un
     RSI 49->72 + cross +1j + drawdown -99% ne change PAS la signature).
-    Le cas de la DÉCOTE mérite son motif écrit : elle était citée dans la prose
-    (« surcote vs tendance de 67 % ») sans figurer dans la signature — exactement
-    l'entre-deux que la règle interdit. Elle n'y est pas entrée pour autant : elle
-    est dirigée par le cours et non bornée (de -1336 % à +58 % sur l'univers publié
-    du 12/08), et la surveiller à 10 points près coûtait 46 régénérations en deux
-    jours pour 147 fiches. Trop volatile pour déclencher une réécriture, donc trop
-    volatile pour être chiffrée : c'est la jurisprudence RSI du 08/08, appliquée
-    telle quelle. Le nombre reste affiché par le front sous le graphique de cours,
-    où il est recalculé chaque jour — sa vraie place.
+    La DÉCOTE a suivi la jurisprudence RSI le 12/08 : dirigée par le cours et non
+    bornée, trop volatile pour déclencher une réécriture, donc interdite de
+    chiffre (mesures au CHANGELOG). Le front l'affiche sous le graphique de
+    cours, recalculée chaque jour — sa vraie place.
     Également exclus : l'appartenance thématique. Un titre qui gagne ou perd un thème
     reste la même entreprise avec les mêmes chiffres — sa fiche n'a pas à être réécrite.
 
-    LE BREAKDOWN COMPACT PORTE MAINTENANT CES CHAMPS (12/08/2026). Il ne les
-    portait pas, et ce silence était le défaut le plus grave du dispositif : 118
-    des 148 fiches publiées sont rédigées depuis universe.json, dont le contrat
-    compact ignorait multiples, marge et croissance. bucket_valorisation() rendait
-    donc "na" quatre fois pour elles — STABLEMENT, c'est-à-dire sans jamais rien
-    signaler. Le garde-fou du 09/08 existait et ne couvrait qu'un cinquième du
-    site, ce que ce commentaire présentait comme un fonctionnement normal.
-    Le contrat compact a été enrichi des six champs correspondants ; un "na"
-    signifie désormais ce qu'il a toujours prétendu signifier : la donnée n'existe
-    pas chez l'émetteur. Un test refuse qu'une fiche publiée porte "na" alors que
-    charts/<T>.json affiche la valeur.
+    LE BREAKDOWN COMPACT PORTE CES CHAMPS DEPUIS LE 12/08/2026 (cf. CHANGELOG :
+    les 118 fiches thématiques avaient une valorisation « na » stable, donc une
+    surveillance muette). Un "na" signifie désormais ce qu'il a toujours prétendu
+    signifier : la donnée n'existe pas chez l'émetteur — et un test refuse qu'une
+    fiche publiée porte "na" quand charts/<T>.json affiche la valeur.
 
     NB : le score passe par bucket_score(). Il reste une part de churn de frontière
     (un score qui oscille 72/73 traverse le palier 70/75) — assumée : la corriger
@@ -554,49 +531,25 @@ def signature(stock, niveau):
     """
     b = stock.get("breakdown", {}) or {}
 
-    # Z-SCORE PAR PALIERS DE 0,5σ (12/08/2026), au lieu des trois régimes
-    # survente / neutre / surchauffe qu'il portait jusque-là.
-    #
-    # Le motif est celui de la règle de symétrie du projet, appliquée à un
-    # chiffre qu'on avait laissé passer : la prose CITE le z-score au dixième de
-    # sigma — « une surcote de 33 % vs tendance et un z-score à 0,9σ » (ALAB),
-    # « z-score 1,1σ sur 8 ans » (VRT). Or le régime « neutre » couvrait tout
-    # l'intervalle ]-2σ, +2σ[ : un 0,9σ pouvait devenir 1,9σ sans que rien ne
-    # déclenche de réécriture, et le lecteur lisait un nombre faux du double.
-    #
-    # 0,5σ borne l'erreur du nombre publié à ±0,25σ, ce qui tient sur une
-    # décimale. Coût mesuré sur les fiches publiées, deux jours de dérive réelle
-    # (10 → 12/08) : 76 régénérations au lieu de 70, soit six fiches. Les régimes
-    # narratifs ne sont pas perdus, ils sont déduits du palier : |palier| >= 4
-    # équivaut exactement à |z| >= 2σ.
+    # Z-SCORE PAR PALIERS DE 0,5σ (12/08/2026). La prose le cite au dixième de
+    # sigma, et l'ancien régime « neutre » couvrait ]-2σ, +2σ[ : un 0,9σ publié
+    # pouvait devenir 1,9σ sans réécriture. 0,5σ borne l'erreur à ±0,25σ, pour
+    # six régénérations de plus en deux jours mesurés. Les régimes narratifs se
+    # déduisent du palier (|palier| >= 4 ⇔ |z| >= 2σ).
     z = b.get("regression_z")
     try:
         z_bucket = str(int(round(float(z) / 0.5))) if z is not None else "na"
     except (TypeError, ValueError):
         z_bucket = "na"
 
-    # LE POTENTIEL CONSENSUS, PAR TRANCHES LARGES ET SIGNÉES (12/08/2026).
-    #
-    # POURQUOI IL Y ENTRE. Il est cité par 115 fiches sur 148 — plus que tout autre
-    # chiffre du site — et la signature l'ignorait. Il est pourtant dirigé par le
-    # cours (cible ÷ prix − 1), donc il bouge tous les jours.
-    #
-    # POURQUOI PAR TRANCHES ET NON PAR PALIERS FINS. Mesuré sur deux jours de
-    # dérive réelle : des paliers de 5 points imposeraient 61 réécritures sur 147,
-    # de 10 points encore 40. Ces tranches-ci en coûtent 18. Le chiffre exact ne
-    # peut donc pas être maintenu vrai à un coût raisonnable, et il devient
-    # interdit de prose comme le RSI et la décote avant lui.
-    #
-    # POURQUOI, ALORS, LE SURVEILLER QUAND MÊME. C'est ce qui le distingue de la
-    # décote, et c'est le SIGNE. « Le consensus est modestement positif (8 % de
-    # potentiel) » écrit sur Vestas fait face à un potentiel de -8,9 % : la phrase
-    # est fausse EN MOTS, pas seulement en chiffres, et retirer le nombre ne la
-    # répare pas. Quatre titres ont changé de signe en deux jours (BX, VWS.CO,
-    # ADBE, ACN), et douze affichent aujourd'hui un potentiel négatif.
-    #
-    # LA RÈGLE GÉNÉRALE QUE CE CAS DÉGAGE : la signature doit surveiller une
-    # grandeur à la FINESSE À LAQUELLE LA PROSE L'EXPRIME. Chiffrée, il faut des
-    # paliers serrés ; qualifiée, des tranches suffisent ; tue, rien n'est dû.
+    # LE POTENTIEL CONSENSUS, PAR TRANCHES LARGES ET SIGNÉES (12/08/2026). Cité
+    # par 115 fiches et dirigé par le cours, il est interdit de chiffre dans la
+    # prose (paliers fins : 61 réécritures/2 jours ; ces tranches : 18) mais son
+    # SIGNE reste surveillé — « consensus modestement positif » face à -8,9 % est
+    # faux en mots, et retirer le nombre ne répare pas la phrase. Règle générale
+    # dégagée (cf. CHANGELOG) : on surveille une grandeur à la finesse à laquelle
+    # la prose l'exprime — chiffrée, paliers serrés ; qualifiée, tranches ; tue,
+    # rien.
     up = b.get("target_upside_pct")
     try:
         _u = float(up)
@@ -844,15 +797,10 @@ def breakdown_block(stock, niveau):
     # publie désormais croissance et marge nette, que 118 fiches sur 148 n'avaient
     # jamais eues sous les yeux. La règle « une ligne n'est écrite QUE si la donnée
     # existe » est inchangée ; c'est la donnée qui a cessé de manquer.
-    # CHAQUE GRANDEUR EST UN SEGMENT, ET UN SEGMENT SANS VALEUR DISPARAÎT. Ces
-    # deux lignes juxtaposaient trois et quatre grandeurs dans une seule chaîne :
-    # il suffisait qu'UNE manque pour qu'un « n/d » s'installe au milieu, ce que
-    # la règle en tête de cette fonction interdit depuis toujours. Le défaut est
-    # resté invisible tant que les deux lignes étaient réservées aux fiches
-    # complètes, qui portent tout ; il est apparu à la seconde où le contrat
-    # compact a livré cinq grandeurs sur sept (12/08/2026) : marge FCF et PEG,
-    # qu'il ne publie pas, écrivaient « n/d = TTM » et « PEG n/d (maison : …) »
-    # sous le nez du modèle. Un trou nommé est une invitation à le combler.
+    # CHAQUE GRANDEUR EST UN SEGMENT, ET UN SEGMENT SANS VALEUR DISPARAÎT
+    # (12/08/2026). En chaîne unique, une seule grandeur manquante écrivait
+    # « n/d » au milieu de la ligne — un trou nommé est une invitation à le
+    # combler. Gardé par test_donnees (« aucun trou nommé dans le prompt »).
     _fonda = []
     if b.get("rev_growth_pct") is not None:
         _fonda.append(f"croissance CA {fmt(b.get('rev_growth_pct'),'%')} = dernier "
@@ -890,17 +838,10 @@ def breakdown_block(stock, niveau):
 
     # Décote/surcote vs tendance + consensus (v3.3.0) — avec les garde-fous d'écriture :
     # jamais « marge de sécurité », caveat structurel obligatoire sur les extrêmes.
-    #
-    # LE NOMBRE EST FOURNI POUR CADRER, PLUS POUR ÊTRE RECOPIÉ (12/08/2026). Deux
-    # fiches publiées le chiffraient — « une surcote de 33 % vs tendance » (ALAB),
-    # « la surcote vs tendance de 67 % » (VRT) — alors que la signature éditoriale
-    # ne l'a jamais surveillé : le texte ne pouvait donc PAS être réécrit quand il
-    # bougeait. Le mettre sous surveillance a été mesuré et écarté : la décote est
-    # dirigée par le cours et non bornée (-1336 % à +58 % sur l'univers du 12/08),
-    # et un palier de 10 points imposait 46 réécritures en deux jours. Même
-    # arbitrage que le RSI le 08/08, mêmes mots : trop volatile pour déclencher une
-    # réécriture, donc trop volatile pour être chiffrée. Le z-score, lui, reste
-    # chiffrable — il est surveillé au demi-sigma depuis le même jour.
+    # Le nombre est fourni pour CADRER, plus pour être recopié (12/08/2026) :
+    # dirigé par le cours et non borné, il est trop volatile pour déclencher une
+    # réécriture, donc trop volatile pour être chiffré — jurisprudence RSI,
+    # mesures au CHANGELOG. L'écart chiffrable, c'est le z-score.
     dc = b.get("decote_pct")
     if dc is not None:
         sens = "décote" if dc >= 0 else "surcote"
@@ -914,10 +855,9 @@ def breakdown_block(stock, niveau):
             f"- {sens.capitalize()} vs tendance ({b.get('regression_window_years','?')} ans) : {abs(dc):.0f}% "
             + (f"(prix tendance {fmt(b.get('prix_tendance'),'',0)}). " if b.get("prix_tendance") is not None else "")
             + f"Tu PEUX la commenter dans `futur` ou `resume`, "
-              f"mais SANS EN RECOPIER LE POURCENTAGE (il est recalculé chaque jour, "
-              f"ton texte ne l'est pas) : écris « nettement au-dessus de sa tendance », "
-              f"pas le nombre. Appelle-la « {sens} vs tendance », JAMAIS « marge de "
-              f"sécurité » (la référence est une trajectoire historique, pas une valeur "
+              f"mais SANS EN RECOPIER LE POURCENTAGE (recalculé chaque jour). "
+              f"Appelle-la « {sens} vs tendance », JAMAIS « marge de sécurité » "
+              f"(la référence est une trajectoire historique, pas une valeur "
               f"intrinsèque). Pour chiffrer l'écart, utilise le z-score.{caveat}"
         )
 
@@ -1120,40 +1060,21 @@ Date du jour : {today}.
   (marge, croissance, multiple) restent les bienvenues : elles bougent lentement et
   elles portent du sens dans une phrase.
 - INTERDIT : chiffrer le RSI, le drawdown 52 semaines, la décote/surcote vs
-  tendance ou le potentiel consensus. Ces quatre-là sont recalculés
-  À CHAQUE RAFRAÎCHISSEMENT DES COURS,
-  quotidiennement, alors que ton texte n'est réécrit que lorsque le score, le
-  croisement, le z-score, un multiple ou la croissance bougent. Un « RSI à 30 »
-  écrit aujourd'hui affronte un RSI à 39 sur la fiche dans trois jours. Ils te sont
-  donnés pour CADRER LE TON (survente ou surchauffe, proche ou loin des plus hauts,
-  au-dessus ou au-dessous de sa trajectoire, consensus optimiste ou déjà dépassé),
-  jamais pour être recopiés : dis « en zone de survente », « à bonne distance de
-  son plus haut de l'année », « nettement au-dessus de sa tendance décennale »,
-  « le consensus ne voit plus qu'un potentiel marginal », pas le nombre. Pour
-  chiffrer l'écart à la tendance, le z-score est là pour ça : lui est surveillé au
-  demi-sigma.
-  ATTENTION AU SIGNE DU POTENTIEL CONSENSUS : quand il est négatif, le cours est
-  DÉJÀ AU-DESSUS de la cible moyenne des analystes. Écrire « le consensus reste
-  modestement positif » dans ce cas est faux en mots, pas seulement en chiffres.
-  Douze fiches sont dans ce cas au 12/08/2026, et quatre titres ont basculé d'un
-  signe à l'autre en deux jours.
+  tendance ou le potentiel consensus. Ces quatre-là sont recalculés chaque jour,
+  ton texte non. Ils te sont donnés pour CADRER LE TON, jamais pour être
+  recopiés : dis « en zone de survente », « nettement au-dessus de sa tendance
+  décennale », « le consensus ne voit plus qu'un potentiel marginal », pas le
+  nombre. Pour chiffrer l'écart à la tendance, utilise le z-score : lui est
+  surveillé. ATTENTION AU SIGNE DU POTENTIEL : négatif = le cours est DÉJÀ
+  AU-DESSUS de la cible moyenne des analystes ; écrire « le consensus reste
+  positif » serait alors faux en mots, pas seulement en chiffres.
 - INTERDIT : citer une grandeur que les données ci-dessus ne te donnent PAS, même
-  si tu crois la connaître, et MÊME SI TU AS RAISON. Relevé du 12/08/2026 sur les
-  fiches publiées : « un ratio cours/ventes de 10,4x (relevé début août 2026 selon
-  la presse spécialisée) » (Teradyne), « les marges brutes gravitent autour de 50 %,
-  nettement en deçà de Nvidia (~74 %) » (AMD), « la marge brute dépasse
-  structurellement 65 % » (Intuitive Surgical). Marge brute, marge opérationnelle et
-  ratio cours/ventes n'existent NULLE PART dans ce projet : ils ne sont ni
-  collectés, ni calculés, ni publiés. Ces nombres viennent de ta mémoire, aucun
-  contrôle ne peut les infirmer, et le premier va jusqu'à nommer une source qui n'a
-  jamais été consultée.
-  LE CAS SUBTIL, ET C'EST LUI QUI FIXE LA RÈGLE : Micron a écrit « le multiple
-  forward autour de 6x les bénéfices attendus pour l'exercice 2027 » sans qu'aucun
-  multiple ni aucun exercice ne figure dans son prompt. Le nombre était BON (5,6x
-  ce jour-là) et l'exercice AUSSI (2027, ce que le projet calcule de son côté).
-  Le critère n'est donc pas d'avoir raison : c'est d'avoir une source. Rien, ce
-  jour-là, n'aurait distingué ce 6 juste d'un 9 faux. Si le chiffre est dans les
-  données ci-dessus, cite-le ; sinon, écris la phrase sans nombre.
+  si tu crois la connaître, et MÊME SI TU AS RAISON. La marge brute, la marge
+  opérationnelle et le ratio cours/ventes n'existent NULLE PART dans ce projet :
+  un tel nombre ne peut venir que de ta mémoire, et aucun contrôle ne pourra
+  jamais l'infirmer. Le critère n'est pas d'avoir raison, c'est d'avoir une
+  source : si le chiffre est fourni ci-dessus, cite-le ; sinon, écris la phrase
+  sans nombre.
 - INTERDIT : le tiret cadratin « — » comme ponctuation. C'est la signature la plus
   reconnaissable d'un texte de machine, et elle décrédibilise la fiche entière.
   Utilise une virgule pour une apposition, deux-points pour une explication, ou

@@ -3260,31 +3260,15 @@ def main():
             "v":            _bloc_pts(bd, "v"),
             "m":            _bloc_pts(bd, "m"),
             "couverture":   (bd.get("note") or {}).get("couverture"),
-            # ── MULTIPLES, MARGE ET CROISSANCE ────────────────────────────
-            # Ajoutés le 12/08/2026. Ce contrat compact n'en portait aucun, et
-            # c'était le trou central du projet : 118 des 148 fiches publiées
-            # sont rédigées à partir de universe.json, donc sans le moindre
-            # chiffre de valorisation. Deux conséquences, mesurées et non
-            # supposées :
-            #
-            #  1. La signature éditoriale était AVEUGLE sur ces 118 fiches. Le
-            #     garde-fou posé le 09/08 (« un multiple cité doit être surveillé,
-            #     sinon il dérive sous le texte indéfiniment ») calculait
-            #     `na|na|na|na` pour elles — de façon stable, donc sans jamais
-            #     rien signaler. Le contrôle existait et ne protégeait qu'un
-            #     cinquième du site.
-            #  2. Le modèle rédactionnel n'avait AUCUN multiple sous les yeux et
-            #     en écrivait quand même : Micron « multiple forward autour de 6x »
-            #     (réel 5,6x), Teradyne « cours/ventes de 10,4x selon la presse
-            #     spécialisée », AMD « marges brutes autour de 50 % ». Aucun de
-            #     ces nombres n'avait été fourni : ils viennent de la mémoire du
-            #     modèle, ce que la charte interdit explicitement.
-            #
-            # Une publication de résultats devient également VISIBLE par la
-            # signature : la croissance du CA et la marge nette y entrent par
-            # paliers, un trimestre publié les déplace, la fiche est réécrite.
-            # Avant ce jour, un titre pouvait publier ses comptes sans que rien
-            # dans le texte ne bouge, faute de champ à comparer.
+            # ── MULTIPLES, MARGES ET CROISSANCE (12/08/2026) ──────────────
+            # Le contrat compact n'en portait aucun : les 118 fiches thématiques
+            # étaient rédigées sans un chiffre de valorisation, leur signature
+            # éditoriale rendait « na » stablement (donc muette), et le modèle
+            # écrivait des multiples de mémoire. Ces champs referment les deux
+            # trous, et rendent une publication de résultats VISIBLE par la
+            # signature : trimestre publié → paliers déplacés → fiche réécrite.
+            # Récit complet : CHANGELOG du 12/08. Garde : test_themes (AST,
+            # producteur/lecteurs) + test_donnees (signature non aveugle).
             "per_fwd":          bd.get("forward_pe"),
             "per_cur":          bd.get("trailing_pe"),
             "fcf_yield_pct":    bd.get("fcf_yield_pct"),

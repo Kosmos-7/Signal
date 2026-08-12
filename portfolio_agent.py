@@ -746,13 +746,10 @@ def fusionner_univers_achetable(watchlist, universe):
                 "target_analysts":   u.get("analystes"),
                 "prix":         u.get("prix"),
                 "devise":       u.get("devise"),
-                # Multiples/marge/croissance : publiés dans le contrat compact
-                # depuis le 12/08/2026. L'agent voyait jusque-là un titre
-                # thématique sans aucun chiffre de valorisation — il pouvait donc
-                # le proposer à l'achat sur le seul score, sans savoir à quel
-                # prix. Une seule table de correspondance dans le projet : ce
-                # bloc et celui de generate_analyses.stock_depuis_universe() se
-                # relisent ensemble, et un test le vérifie.
+                # Multiples/marges/croissance (contrat compact du 12/08/2026) :
+                # sans eux l'agent pouvait proposer un titre thématique à l'achat
+                # sur le seul score, sans savoir à quel prix. Table miroir de
+                # generate_analyses.stock_depuis_universe(), tenue par test_themes.
                 "forward_pe":              u.get("per_fwd"),
                 "trailing_pe":             u.get("per_cur"),
                 "fcf_yield_pct":           u.get("fcf_yield_pct"),

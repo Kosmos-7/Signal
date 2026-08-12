@@ -5,182 +5,65 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
-### Le garde-fou qui ne gardait qu'un cinquième du site
+### Audit du 12/08 : les chiffres cités que rien ne surveillait
 
-Question du propriétaire : CoreWeave et Nebius viennent de publier leurs
-résultats, les fiches se mettent-elles à jour toutes seules ? Les chiffres, oui,
-chaque soir. Les textes, non — et en cherchant pourquoi, on est tombé sur bien
-pire que le retard hebdomadaire attendu.
+Point de départ : « les fiches de CoreWeave et Nebius se mettent-elles à jour
+toutes seules ? » Les chiffres oui, chaque soir ; les textes non — et en
+cherchant pourquoi, l'audit a trouvé trois trous du même genre, un défaut dans
+son propre garde-fou, et un bug dans son propre instrument de mesure.
 
-**118 des 148 fiches publiées étaient rédigées sans le moindre chiffre de
-valorisation.** Elles viennent de `universe.json`, dont le contrat compact ne
-portait ni PER, ni marge, ni croissance. Deux conséquences, l'une invisible et
-l'autre déjà en ligne :
+**1. Le contrat compact ne portait aucun chiffre de valorisation.** 118 des 148
+fiches publiées sont rédigées depuis `universe.json`, sans PER, sans marge, sans
+croissance. Leur signature éditoriale calculait « donnée absente » quatre fois de
+suite, stablement, donc sans jamais rien signaler : le garde-fou du 09/08 ne
+protégeait que 30 fiches sur 148. Et privé de chiffres, le modèle en écrivait de
+mémoire — neuf fiches citent une marge brute, une marge opérationnelle ou un
+cours/ventes, grandeurs que le dépôt ne calcule nulle part et qu'aucun contrôle
+ne pourra jamais infirmer ; Teradyne va jusqu'à nommer une source jamais
+consultée. Le contrat porte désormais les sept grandeurs (test AST
+producteur/lecteurs à l'appui), et une publication de résultats déplace la
+signature, donc réécrit la fiche au run suivant — ce qui répond à la question de
+départ.
 
-- La signature éditoriale — le mécanisme qui décide quelles fiches réécrire —
-  calculait « donnée absente » quatre fois de suite pour ces 118 titres.
-  Stablement, donc **sans jamais rien signaler**. Le garde-fou posé le 09/08
-  (« un multiple cité doit être surveillé, sinon il dérive sous le texte
-  indéfiniment ») existait et protégeait 30 fiches sur 148.
-- Privé de chiffres alors que le guide lui impose de chiffrer tout jugement de
-  valorisation, le modèle en écrivait **de mémoire** : « un ratio cours/ventes de
-  10,4x relevé début août 2026 selon la presse spécialisée » (Teradyne), « les
-  marges brutes gravitent autour de 50 %, nettement en deçà de Nvidia (~74 %) »
-  (AMD), « la marge brute dépasse structurellement 65 % » (Intuitive Surgical).
-  Neuf fiches. Ce sont les seuls nombres du site qu'aucun contrôle ne pourra
-  jamais infirmer : marge brute, marge opérationnelle et cours/ventes ne sont ni
-  collectés, ni calculés, ni publiés — **zéro occurrence** dans tout le dépôt. Le
-  premier va jusqu'à nommer une source qui n'a jamais été consultée.
+Le cas Micron fixe le critère : « multiple forward autour de 6x, exercice 2027 »
+sans qu'aucun des deux figure dans son prompt — et les deux sont JUSTES (5,6x,
+2027). Rien ce jour-là n'aurait distingué ce 6 juste d'un 9 faux. Le critère
+n'est pas d'avoir raison, c'est d'avoir une source ; le guide le dit maintenant
+en ces termes.
 
-**Le cas Micron, qui a failli passer pour une fabrication.** Le propriétaire a
-demandé une contre-vérification sur ce titre, et il avait raison de la demander.
-Sa fiche écrit « le multiple forward autour de 6x les bénéfices attendus pour
-l'exercice 2027 » : aucun multiple, aucun exercice ne figurait dans son prompt —
-vérifié champ par champ sur le `universe.json` du run qui a écrit ce texte — mais
-le nombre est **bon** (5,6x ce jour-là, et encore aujourd'hui) et l'exercice
-**aussi** (2027, ce que `_exercice_forward()` calcule de son côté).
+**2. Trois grandeurs vivaient dans l'entre-deux que la règle interdit.**
+La *décote vs tendance* (355 citations chiffrées, dix fois le RSI) passe hors
+chiffre : dirigée par le cours, non bornée, 14 fiches sur 144 avec plus de dix
+points d'écart en deux jours — la surveiller coûtait 46 réécritures/2 jours.
+Le *potentiel consensus* (145 citations, le chiffre le plus cité du site) passe
+hors chiffre AUSSI, mais son SIGNE entre dans la signature par tranches larges :
+« consensus modestement positif (8 %) » écrit sur Vestas face à −8,9 % est faux
+en mots, et retirer le nombre ne répare pas la phrase — quatre bascules de signe
+en deux jours, douze potentiels négatifs au 12/08. La *marge FCF* (27 citations)
+entre dans la signature pour zéro palier franchi en deux jours : une marge TTM ne
+bouge que quand l'entreprise publie. Le z-score passe au demi-sigma (la prose le
+cite au dixième, « neutre » couvrait ]−2σ, +2σ[).
 
-C'est le meilleur exemple de la règle, pas une exception : le critère n'est pas
-d'avoir raison, c'est d'avoir une source. Rien, ce jour-là, n'aurait distingué ce
-6 juste d'un 9 faux. Et le correctif retire au modèle la raison d'improviser —
-son prompt contiendra désormais 5,6x.
+La règle générale que ces trois cas dégagent : **on surveille une grandeur à la
+finesse à laquelle la prose l'exprime.** Chiffrée → paliers serrés ; qualifiée →
+tranches ; tue → rien.
 
-Les tests ne pouvaient pas le voir, et le motif mérite d'être écrit : ils
-éprouvaient la fonction de paliers sur des dictionnaires fabriqués, jamais le
-**chemin** par lequel les vraies fiches y arrivent. Une fonction juste, appelée
-avec un dictionnaire vide, rend un résultat juste et inutile.
+**3. Le garde-fou et l'instrument avaient chacun leur défaut.** Le seuil du test
+prose/fiche valait `pas/2` en absolu — juste sur la distance au centre d'un
+palier, faux entre deux valeurs : une marge de 2,56 % → 5,09 % était dénoncée
+sans changement de palier, un rouge sans remède. Seuil au pas entier, propriété
+vérifiée par balayage (bornes négatives incluses) et non plus sur un point choisi
+par l'auteur du test. Et le motif `\d+[,.]?\d*` devant « surcote de 1 300 % »
+capturait « 300 » : le relevé accusait Advantest de 1 036 points d'écart qu'il a
+lui-même fabriqués. Tous les motifs passent par un lecteur de nombres français
+unique (séparateurs de milliers compris). Les tolérances descendent de
+`CHAMPS_VALO`, écrites une seule fois.
 
-**Le contrat compact porte désormais les sept grandeurs** (PER courant et
-prévisionnel, rendement du flux, marges nette et FCF, croissance du CA, alerte de
-dynamique). Un test AST tient ensemble le producteur et ses deux lecteurs, avec
-la liste déclarée — et motivée — des champs délibérément non lus.
-
-**Ce qui répond à la question de départ.** Une publication de résultats déplace
-la croissance, les marges et le PER courant : elle change donc maintenant la
-signature, et la fiche est réécrite au run suivant. Avant ce jour, un titre
-pouvait publier ses comptes sans que rien dans son texte ne bouge, faute de champ
-à comparer.
-
-### Le potentiel consensus : le chiffre le plus cité du site, le moins surveillé
-
-**115 fiches sur 148 le citent** — plus que le RSI, plus que la décote, plus que
-n'importe quel multiple. La signature l'ignorait entièrement. Il est pourtant
-dirigé par le cours (cible ÷ prix − 1), donc il bouge tous les jours : Samsung
-annonce « un potentiel de 105 % », trois fois dans sa fiche, contre 84,7 % deux
-jours plus tard.
-
-**Ce qui le rend plus grave que la décote, c'est le signe.** « Le consensus est
-modestement positif (8 % de potentiel selon 24 analystes) » écrit sur Vestas fait
-face à un potentiel de **−8,9 %** : le cours est passé au-dessus de la cible
-moyenne. La phrase est fausse **en mots**, et retirer le nombre ne la répare pas.
-Quatre titres ont changé de signe en deux jours ; douze affichent aujourd'hui un
-potentiel négatif.
-
-D'où un traitement en deux temps, appliqué à aucune autre grandeur jusqu'ici : le
-**chiffre** est interdit de prose, et le **sens** entre dans la signature par
-tranches larges (négatif / faible / moyen / fort / très fort). Des paliers de
-5 points coûteraient 61 réécritures en deux jours, de 10 points encore 40 ; ces
-tranches en coûtent 18, et seulement 3 de plus une fois croisées avec le reste de
-la signature.
-
-**La règle générale que ce cas dégage**, et qui vaut mieux que les trois
-jurisprudences séparées accumulées jusqu'ici : *on surveille une grandeur à la
-finesse à laquelle la prose l'exprime.* Chiffrée, il faut des paliers serrés ;
-qualifiée, des tranches suffisent ; tue, rien n'est dû.
-
-### Le garde-fou du couplage se réfutait lui-même sur la moitié de ses champs
-
-Le seuil au-delà duquel le test signale un écart texte/fiche était `pas / 2` pour
-les grandeurs en points (marges, rendement du flux). Raisonnement juste sur la
-distance au **centre** d'un palier, faux sur la distance entre **deux valeurs** :
-deux nombres du même palier peuvent être distants de presque un pas entier.
-
-Conséquence exacte : une marge nette passant de 2,56 % à 5,09 % était signalée
-comme périmée alors qu'elle n'avait pas changé de palier — donc qu'aucune
-réécriture ne pouvait la corriger. Le contrôle censé garantir un remède en
-refusait un, ce que le commentaire juste au-dessus interdisait en toutes lettres.
-
-Le seuil passe au pas entier, et le test qui vérifie la propriété passe **du
-point choisi au balayage**. C'est le vrai correctif : la version précédente
-prenait une référence unique (20,0) et un écart de 1,6 pas, valeurs choisies par
-celui-là même qui écrivait le test — elles tombaient donc dans la région où il
-marche. Le balayage a trouvé le contre-exemple en une seconde, sur des bornes qui
-descendent dans le négatif, là où l'arithmétique des paliers est la plus fragile.
-
-### Deux grandeurs citées que rien ne surveillait
-
-La règle du projet ne souffre pas d'exception : une grandeur est soit citable et
-surveillée, soit hors signature et interdite de chiffre. Deux vivaient entre les
-deux.
-
-**La décote vs tendance, 357 fois chiffrée dans le corpus** — dix fois plus que
-le RSI, que le projet a banni pour cette raison exacte le 08/08. Le guide y
-invitait explicitement (« tu PEUX la commenter ») sans qu'elle figure jamais dans
-la signature. Le coût de ce silence, mesuré sur les fiches en ligne : **sur 144
-comparables, 14 publient un écart de plus de dix points** en deux jours de dérive.
-Lumentum annonce une surcote de 552 % là où sa fiche en calcule 497,5, Coherent
-250 % contre 201,7. Ces deux nombres étaient EXACTS le jour où ils ont été écrits.
-
-**La première version de ce relevé accusait Advantest de 1 036 points d'écart, et
-c'était le test qui inventait.** Son motif lisait `\d+[,.]?\d*` devant « surcote
-de 1 300 % », butait sur le « 1 », reculait, et capturait « 300 ». Le texte
-d'Advantest dit « plus de 1 300 % » face à 1 336 en fiche : il a raison. Le
-séparateur de milliers français ne fait pas rater un nombre, il en fait lire un
-autre — et un test qui fabrique ses propres nombres est pire qu'un test absent,
-puisqu'il produit des preuves. C'est la contre-vérification demandée par le
-propriétaire sur un tout autre titre qui a fait tomber celle-ci.
-
-La mettre sous surveillance a été essayé, chiffré, puis écarté : la décote est
-dirigée par le cours et n'est pas bornée (de −1 336 % à +58 % sur l'univers du
-12/08), et un palier de 10 points imposait 46 réécritures en deux jours. Reste la
-jurisprudence RSI : trop volatile pour déclencher une réécriture, trop volatile
-pour être chiffrée. Elle passe hors chiffre ; le front l'affiche, lui, sous le
-graphique de cours, recalculée chaque jour — sa vraie place.
-
-**La marge FCF, elle, entre dans la signature** : citée par 27 fiches, fournie au
-prompt, surveillée par rien. Son entrée ne coûte rien et le chiffre le dit — sur
-deux jours de dérive réelle, **zéro** fiche sur 147 change de palier. C'est
-attendu : une marge TTM ne bouge pas avec le cours, elle bouge quand l'entreprise
-publie. Ce qui en fait exactement le champ à surveiller.
-
-Le z-score suit le même raisonnement dans l'autre sens : la prose le cite au
-dixième de sigma, la signature le rangeait dans un « neutre » qui couvre
-]−2σ, +2σ[. Un 0,9σ publié pouvait devenir 1,9σ sans réécriture. Il passe aux
-paliers de 0,5σ, pour six régénérations de plus en deux jours.
-
-### Le couplage était affirmé, il est maintenant éprouvé
-
-Le test qui compare la prose aux fiches portait en commentaire que « le pas est
-calé sur la tolérance du test, et ce couplage est le cœur du dispositif ».
-C'était vrai du seul PER forward. La marge nette y était tolérée à 20 %
-**relatifs** quand la signature la surveille à 5 points **absolus** : sur une
-marge de 5 %, le test dénonçait une dérive d'un point que la signature laissait
-passer — donc un écart que rien ne pouvait corriger, puisque aucune réécriture ne
-se déclenchait. Un contrôle rouge sans remède est pire qu'un contrôle absent : il
-apprend à passer outre.
-
-Les tolérances descendent maintenant de `CHAMPS_VALO`, et le couplage est testé
-champ par champ comme une propriété : un écart juste toléré ne doit rien
-réveiller, un écart juste refusé doit avoir changé le palier.
-
-Le détecteur de prose a aussi gagné son troisième essai. Les tournures qu'il
-connaissait nommaient le ratio ; les rédacteurs, non. « Le multiple forward autour
-de 6x » ne contenait pas le mot PER et passait à travers. Comme aux deux essais
-précédents, ce n'est jamais le seuil qui manque, c'est la façon dont on écrit
-réellement.
-
-### Un trou nommé est une invitation à le combler
-
-`breakdown_block()` promet dans sa première ligne qu'une ligne n'est écrite que
-si la donnée existe, « sans quoi le modèle aurait sous les yeux une liste de
-trous à commenter ». La promesse tenait tant que les lignes Fondamentaux et
-Valorisation étaient réservées aux fiches complètes, qui portent tout. À la
-seconde où le contrat compact a livré cinq grandeurs sur sept, elles ont écrit
-« marge FCF n/d = TTM » et « PEG n/d (maison : …) ».
-
-Chaque grandeur est devenue un segment, et un segment sans valeur disparaît.
-Aucune garde n'existait : c'est la lecture à l'œil du prompt rendu qui l'a vu.
-Elle existe maintenant, sur les deux niveaux de fiche.
+**Conséquences d'exploitation.** `PROMPT_VERSION` est bumpé : le prochain run
+hebdomadaire réécrit les 148 fiches d'un coup (~14 min, ~4,50 $), puis le churn
+s'établit vers ~50 % du corpus par semaine (~2,30 $) — c'est le prix de textes
+qui suivent leurs chiffres. Registre CONNUS : 9 fiches hors périmètre inscrites,
+à vider au prochain run éditorial.
 
 ### Le maillon mémoire décrivait un oligopole en oubliant un de ses membres
 
