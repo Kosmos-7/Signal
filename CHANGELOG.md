@@ -5,6 +5,112 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le garde-fou qui ne gardait qu'un cinquième du site
+
+Question du propriétaire : CoreWeave et Nebius viennent de publier leurs
+résultats, les fiches se mettent-elles à jour toutes seules ? Les chiffres, oui,
+chaque soir. Les textes, non — et en cherchant pourquoi, on est tombé sur bien
+pire que le retard hebdomadaire attendu.
+
+**118 des 148 fiches publiées étaient rédigées sans le moindre chiffre de
+valorisation.** Elles viennent de `universe.json`, dont le contrat compact ne
+portait ni PER, ni marge, ni croissance. Deux conséquences, l'une invisible et
+l'autre déjà en ligne :
+
+- La signature éditoriale — le mécanisme qui décide quelles fiches réécrire —
+  calculait « donnée absente » quatre fois de suite pour ces 118 titres.
+  Stablement, donc **sans jamais rien signaler**. Le garde-fou posé le 09/08
+  (« un multiple cité doit être surveillé, sinon il dérive sous le texte
+  indéfiniment ») existait et protégeait 30 fiches sur 148.
+- Privé de chiffres alors que le guide lui impose de chiffrer tout jugement de
+  valorisation, le modèle en écrivait **de mémoire** : « le multiple forward
+  autour de 6x » (Micron, réel 5,6x), « un ratio cours/ventes de 10,4x relevé
+  début août 2026 selon la presse spécialisée » (Teradyne), « les marges brutes
+  gravitent autour de 50 % » (AMD). Neuf fiches au total. Ce sont les seuls
+  nombres du site qu'aucun contrôle ne peut infirmer : marge brute, marge
+  opérationnelle et cours/ventes ne sont calculés **nulle part** dans ce dépôt.
+
+Les tests ne pouvaient pas le voir, et le motif mérite d'être écrit : ils
+éprouvaient la fonction de paliers sur des dictionnaires fabriqués, jamais le
+**chemin** par lequel les vraies fiches y arrivent. Une fonction juste, appelée
+avec un dictionnaire vide, rend un résultat juste et inutile.
+
+**Le contrat compact porte désormais les sept grandeurs** (PER courant et
+prévisionnel, rendement du flux, marges nette et FCF, croissance du CA, alerte de
+dynamique). Un test AST tient ensemble le producteur et ses deux lecteurs, avec
+la liste déclarée — et motivée — des champs délibérément non lus.
+
+**Ce qui répond à la question de départ.** Une publication de résultats déplace
+la croissance, les marges et le PER courant : elle change donc maintenant la
+signature, et la fiche est réécrite au run suivant. Avant ce jour, un titre
+pouvait publier ses comptes sans que rien dans son texte ne bouge, faute de champ
+à comparer.
+
+### Deux grandeurs citées que rien ne surveillait
+
+La règle du projet ne souffre pas d'exception : une grandeur est soit citable et
+surveillée, soit hors signature et interdite de chiffre. Deux vivaient entre les
+deux.
+
+**La décote vs tendance, 357 fois chiffrée dans le corpus** — dix fois plus que
+le RSI, que le projet a banni pour cette raison exacte le 08/08. Le guide y
+invitait explicitement (« tu PEUX la commenter ») sans qu'elle figure jamais dans
+la signature. Le coût de ce silence, mesuré sur les fiches en ligne : **sur 144
+comparables, 14 publient un écart faux de plus de dix points**, et Advantest
+annonce une surcote de 300 % là où sa fiche en calcule 1 336.
+
+La mettre sous surveillance a été essayé, chiffré, puis écarté : la décote est
+dirigée par le cours et n'est pas bornée (de −1 336 % à +58 % sur l'univers du
+12/08), et un palier de 10 points imposait 46 réécritures en deux jours. Reste la
+jurisprudence RSI : trop volatile pour déclencher une réécriture, trop volatile
+pour être chiffrée. Elle passe hors chiffre ; le front l'affiche, lui, sous le
+graphique de cours, recalculée chaque jour — sa vraie place.
+
+**La marge FCF, elle, entre dans la signature** : citée par 27 fiches, fournie au
+prompt, surveillée par rien. Son entrée ne coûte rien et le chiffre le dit — sur
+deux jours de dérive réelle, **zéro** fiche sur 147 change de palier. C'est
+attendu : une marge TTM ne bouge pas avec le cours, elle bouge quand l'entreprise
+publie. Ce qui en fait exactement le champ à surveiller.
+
+Le z-score suit le même raisonnement dans l'autre sens : la prose le cite au
+dixième de sigma, la signature le rangeait dans un « neutre » qui couvre
+]−2σ, +2σ[. Un 0,9σ publié pouvait devenir 1,9σ sans réécriture. Il passe aux
+paliers de 0,5σ, pour six régénérations de plus en deux jours.
+
+### Le couplage était affirmé, il est maintenant éprouvé
+
+Le test qui compare la prose aux fiches portait en commentaire que « le pas est
+calé sur la tolérance du test, et ce couplage est le cœur du dispositif ».
+C'était vrai du seul PER forward. La marge nette y était tolérée à 20 %
+**relatifs** quand la signature la surveille à 5 points **absolus** : sur une
+marge de 5 %, le test dénonçait une dérive d'un point que la signature laissait
+passer — donc un écart que rien ne pouvait corriger, puisque aucune réécriture ne
+se déclenchait. Un contrôle rouge sans remède est pire qu'un contrôle absent : il
+apprend à passer outre.
+
+Les tolérances descendent maintenant de `CHAMPS_VALO`, et le couplage est testé
+champ par champ comme une propriété : un écart juste toléré ne doit rien
+réveiller, un écart juste refusé doit avoir changé le palier.
+
+Le détecteur de prose a aussi gagné son troisième essai. Les tournures qu'il
+connaissait nommaient le ratio ; les rédacteurs, non. « Le multiple forward autour
+de 6x » ne contenait pas le mot PER et passait à travers. Comme aux deux essais
+précédents, ce n'est jamais le seuil qui manque, c'est la façon dont on écrit
+réellement.
+
+### Un trou nommé est une invitation à le combler
+
+`breakdown_block()` promet dans sa première ligne qu'une ligne n'est écrite que
+si la donnée existe, « sans quoi le modèle aurait sous les yeux une liste de
+trous à commenter ». La promesse tenait tant que les lignes Fondamentaux et
+Valorisation étaient réservées aux fiches complètes, qui portent tout. À la
+seconde où le contrat compact a livré cinq grandeurs sur sept, elles ont écrit
+« marge FCF n/d = TTM » et « PEG n/d (maison : …) ».
+
+Chaque grandeur est devenue un segment, et un segment sans valeur disparaît.
+Aucune garde n'existait : c'est la lecture à l'œil du prompt rendu qui l'a vu.
+Elle existe maintenant, sur les deux niveaux de fiche.
+
 ### Le maillon mémoire décrivait un oligopole en oubliant un de ses membres
 
 Kioxia manquait à l'infrastructure de l'IA, signalé par le propriétaire. Elle

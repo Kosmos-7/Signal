@@ -434,6 +434,67 @@ check("son breakdown compact est exploitable", vrt["breakdown"]["prix"] == 120.0
 check("univers vide = aucun ajout, pas de plantage",
       len(pa.fusionner_univers_achetable({"stocks": []}, {})) == 0)
 
+print("\n— Le contrat compact et ses deux lecteurs —")
+# POURQUOI CE CONTRÔLE EXISTE. universe.json est écrit à UN endroit (screener.py)
+# et relu à DEUX (portfolio_agent.fusionner_univers_achetable pour l'agent,
+# generate_analyses.stock_depuis_universe pour la prose). Les trois blocs se
+# recopient à la main, et rien ne les tenait ensemble : c'est ainsi que multiples,
+# marge et croissance ont manqué au contrat pendant des mois sans que personne ne
+# puisse le voir. 118 des 148 fiches publiées étaient rédigées sans le moindre
+# chiffre de valorisation, et le garde-fou censé les surveiller calculait « donnée
+# absente » quatre fois de suite, en silence.
+#
+# LA LISTE DES NON-LUS EST UNE DÉCLARATION, PAS UNE TOLÉRANCE. Un champ produit et
+# lu par personne est presque toujours un oubli ; les trois exceptions ci-dessous
+# sont des choix, chacun avec son motif. Ajouter un champ au producteur sans le
+# lire ni l'inscrire ici fait échouer ce test — c'est tout ce qu'on lui demande.
+import ast as _ast                                                  # noqa: E402
+
+_NON_LUS = {
+    "top30":   "marqueur de provenance, utile au front et aux outils, pas au moteur",
+    "themes":  "lu par les deux, mais par une autre voie (u.get('themes') côté "
+               "prose, listes de membres côté agent)",
+    "prix":    "délibérément hors prompt éditorial : il n'apporte rien à la prose "
+               "et invite au cours cible, que la charte interdit",
+    "devise":  "idem, elle n'a de sens qu'à côté d'un prix",
+    "croissance_ca_fin": "date de la période citée : le prompt la prend du champ "
+                         "mrq quand il l'a, l'agent n'en a pas l'usage",
+}
+
+
+def _cles_produites(chemin):
+    """Clés du dictionnaire compact écrit par screener.py, lues dans la SOURCE.
+
+    Par l'AST et non par regex : un dictionnaire imbriqué ou un commentaire
+    contenant des guillemets tromperait une expression régulière, et ce contrôle
+    n'a de valeur que s'il voit exactement ce que l'interpréteur voit."""
+    arbre = _ast.parse(open(chemin, encoding="utf-8").read())
+    for n in _ast.walk(arbre):
+        if not isinstance(n, _ast.Assign) or not isinstance(n.value, _ast.Dict):
+            continue
+        cible = n.targets[0]
+        if (isinstance(cible, _ast.Subscript)
+                and isinstance(cible.value, _ast.Name)
+                and cible.value.id == "par_ticker"):
+            return {k.value for k in n.value.keys
+                    if isinstance(k, _ast.Constant) and isinstance(k.value, str)}
+    return set()
+
+
+_produites = _cles_produites(os.path.join(RACINE, "screener.py"))
+check("le bloc compact de screener.py est retrouvé", len(_produites) > 10,
+      f"{len(_produites)} clés")
+for _fichier, _quoi in (("portfolio_agent.py", "l'agent"),
+                        ("generate_analyses.py", "la prose")):
+    _src = open(os.path.join(RACINE, _fichier), encoding="utf-8").read()
+    _lues = set(re.findall(r"""u\.get\(["'](\w+)["']""", _src))
+    _perdues = sorted(_produites - _lues - set(_NON_LUS))
+    check(f"aucun champ du contrat compact n'est perdu par {_quoi}",
+          not _perdues, f"produits mais jamais lus : {_perdues}")
+_orphelines = sorted(set(_NON_LUS) - _produites)
+check("la liste des champs non lus ne contient pas de fantôme",
+      not _orphelines, f"déclarés non lus mais plus produits : {_orphelines}")
+
 print("\n— Concentration thématique —")
 positions = [{"ticker": "VRT", "valeur_actuelle": 3000, "sector": "Industrie"},
              {"ticker": "ETN", "valeur_actuelle": 2500, "sector": "Industrie"},
