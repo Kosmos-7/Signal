@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Maison, Signal</title>
+<meta name="description" content="Fonde une société de gestion fictive : un bureau isométrique, une équipe à recruter, des cours réels, et les vrais ordres de grandeur du métier.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14' stroke='%2322d98a' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="signal.css">
+<style>
+  /* Palette du décor — l'exception argumentée du §4.1 : un diorama a besoin de
+     matières, un bureau entièrement cyan serait illisible. L'exception est
+     bornée à CES sept teintes, désaturées et sombres, dérivées du fond du
+     site ; maison-iso.js les lit ici et calcule lui-même les trois valeurs
+     d'éclairage (dessus / gauche / droite) — jamais écrites à la main.
+     L'information, elle, reste au design system : --ac pour ce qui compte,
+     --green/--red pour le seul P&L chiffré. */
+  html{--jm-sol:#12141d;--jm-cloison:#1a1e2b;--jm-bois:#2b2620;--jm-metal:#232733;--jm-papier:#3a3d4d;--jm-verdure:#1e2f26;--jm-verre:#1d2a38}
+
+  /* La scène est une application à en-tête FIXE, comme index.html — pas
+     d'élément main, pas de défilement de page (test_chrome exige sticky dès
+     qu'une page en pose un). Un en-tête fixe ne prend aucune place
+     dans le flux : on compense donc sa hauteur mesurée (81 px) explicitement,
+     le motif recopié EN ENTIER cette fois — le recopier à moitié est un bug
+     déjà survenu et documenté dans signal.css. z-index:1 : les rayures de
+     .scan (z2) passent PAR-DESSUS le canvas, comme partout ailleurs (§4.1). */
+  .jm-scene{position:fixed;top:5.6rem;left:0;right:0;bottom:0;z-index:1;display:flex}
+  .jm-zone{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}
+
+  /* Le badge dit la nature du jeu en permanence : la société est fausse, les
+     cours sont vrais. En or (--gold), la couleur de marque du « fictif ». */
+  .jm-badge{position:absolute;top:.55rem;left:50%;transform:translateX(-50%);z-index:8;pointer-events:none;color:var(--gold);border:1px solid rgba(232,168,32,.4);background:rgba(8,11,20,.78);border-radius:4px;padding:4px 11px;font:600 .58rem var(--mono);letter-spacing:1.6px;text-transform:uppercase;white-space:nowrap;max-width:calc(100% - 1rem);overflow:hidden;text-overflow:ellipsis}
+
+  .jm-cadre{flex:1;position:relative;min-height:120px}
+  .jm-cadre canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+  .jm-noscript{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;padding:2rem;text-align:center;color:var(--text2);font-size:.95rem;line-height:1.7}
+  .jm-outils{position:absolute;left:.6rem;top:.6rem;z-index:8;display:flex;gap:.45rem}
+
+  .jm-btn{font:600 .62rem var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--text2);background:rgba(8,11,20,.8);border:1px solid var(--line);border-radius:6px;padding:.45rem .7rem;cursor:pointer;transition:color .15s,border-color .15s}
+  .jm-btn:hover{color:var(--text);border-color:var(--ac)}
+  .jm-btn.on{color:var(--ac);border-color:var(--ac)}
+  .jm-btn:disabled{opacity:.45;cursor:not-allowed}
+  .jm-k{font:600 .55rem var(--mono);border:1px solid var(--line);border-radius:3px;padding:1px 4px;color:var(--text3);margin-left:.3rem}
+  /* Le focus se voit partout : le jeu se joue aussi entièrement au clavier (§15). */
+  .jm-scene button:focus-visible,.jm-scene a:focus-visible,.jm-scene input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+
+  /* ── La boîte de dialogue (§3.2) : UNE boîte, toujours au même endroit,
+     bord fin, fond opaque — c'est la seule surface de décision du jeu. ── */
+  .jm-dlg{flex:0 0 auto;margin:.55rem .6rem .6rem;border:1px solid var(--line);border-radius:8px;background:rgba(8,11,20,.96);padding:.75rem .95rem .8rem;min-height:118px;display:flex;flex-direction:column}
+  .jm-dlg-auteur{margin-bottom:.3rem;min-height:.9em}
+  .jm-dlg-texte{font-size:.95rem;line-height:1.55;color:var(--text);min-height:2.4em}
+  .jm-dlg-opts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem;max-height:30vh;overflow-y:auto}
+  .jm-opt{display:inline-flex;align-items:center;gap:.55rem;font-size:.85rem;color:var(--text);background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:6px;padding:.5rem .8rem;cursor:pointer;text-align:left;transition:border-color .15s}
+  .jm-opt:hover{border-color:var(--ac)}
+  .jm-opt.on{border-color:var(--ac);color:var(--ac)}
+  .jm-opt b{font:600 .6rem var(--mono);color:var(--ac);border:1px solid var(--line);border-radius:4px;padding:2px 6px;flex:none}
+  .jm-plan-coord{display:inline-flex;align-items:center;gap:.45rem;flex-wrap:wrap;font:.72rem var(--mono);color:var(--text3)}
+  .jm-plan-coord input{width:60px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:6px;color:var(--text);font:.8rem var(--mono);padding:.4rem .45rem}
+
+  /* ── Le panneau (§3.4) : il consulte, il ne décide pas. ── */
+  .jm-panneau{flex:0 0 340px;display:flex;flex-direction:column;min-height:0;border-left:1px solid var(--line);background:rgba(8,11,20,.6);backdrop-filter:blur(10px)}
+  .jm-barre{padding:.55rem .8rem .5rem;border-bottom:1px solid var(--line)}
+  .jm-barre-l1{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+  .jm-date{font:600 .62rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--text2)}
+  .jm-vitesses{display:flex;gap:.25rem}
+  .jm-vit{font:600 .6rem var(--mono);color:var(--text3);background:none;border:1px solid var(--line);border-radius:5px;padding:.3rem .5rem;cursor:pointer}
+  .jm-vit:hover{color:var(--text)}
+  .jm-vit.on{color:var(--ac);border-color:var(--ac)}
+  .jm-barre-l2{display:flex;gap:1.1rem;margin-top:.35rem;font:.66rem var(--mono);color:var(--text3);flex-wrap:wrap}
+  .jm-barre-l2 b{color:var(--text);font-weight:500}
+  .jm-depli{display:none;font:600 .7rem var(--mono);color:var(--text2);background:none;border:1px solid var(--line);border-radius:5px;padding:.3rem .55rem;cursor:pointer}
+
+  .jm-onglets{display:flex;border-bottom:1px solid var(--line)}
+  .jm-tab{position:relative;flex:1;background:none;border:0;border-bottom:2px solid transparent;color:var(--text3);font:600 .6rem var(--mono);letter-spacing:.5px;text-transform:uppercase;padding:.55rem .1rem;cursor:pointer;transition:color .15s}
+  .jm-tab:hover{color:var(--text2)}
+  .jm-tab.on{color:var(--text);border-bottom-color:var(--ac)}
+  .jm-dot{position:absolute;top:5px;right:7px;width:6px;height:6px;border-radius:50%;background:var(--ac);box-shadow:0 0 6px var(--ac)}
+
+  .jm-corps{flex:1;overflow-y:auto;padding:.8rem .8rem 1rem;min-height:0}
+  /* Six colonnes de métriques dans 340 px feraient des cases de 50 px : la
+     grille du design system est repliée à deux colonnes DANS le panneau
+     seulement — la classe et son vocabulaire restent ceux de signal.css. */
+  .jm-corps .metrics{grid-template-columns:repeat(2,1fr);margin:.5rem 0 1rem}
+  .jm-corps .card{padding:.75rem .85rem;margin-bottom:.6rem}
+  /* Même logique pour le pied de page : le texte est LE même (un test le
+     compare au mot près), seul son écrin s'adapte à la colonne. */
+  .jm-corps footer{padding:1rem 0 0;margin-top:2rem;border-top:1px solid var(--line)}
+
+  .jm-intro{font-size:.78rem;color:var(--text2);line-height:1.6;margin-bottom:.9rem}
+  .jm-note-panneau{font-size:.72rem;color:var(--text3);line-height:1.55;margin:.5rem 0 .9rem}
+  .jm-raison{font-size:.75rem;color:var(--text2);font-style:italic;line-height:1.5;margin:.3rem 0 .6rem}
+  .jm-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
+
+  .jm-ligne{display:grid;grid-template-columns:1fr auto auto;gap:.1rem .6rem;padding:.45rem 0;border-top:1px solid var(--line);font-size:.82rem;align-items:baseline}
+  .jm-l-nom{color:var(--text)}
+  .jm-l-sec{grid-column:1/4;font:.6rem var(--mono);letter-spacing:.5px;text-transform:uppercase;color:var(--text3)}
+  .jm-l-poids{font:.72rem var(--mono);color:var(--text2)}
+  .jm-l-pv{font:.72rem var(--mono);text-align:right}
+
+  .jm-p-h{display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem}
+  .jm-p-h b{font-size:.95rem;font-weight:500}
+  .jm-p-l{font-size:.74rem;color:var(--text3);line-height:1.5;margin:.25rem 0}
+  .jm-p-l b{color:var(--text2)}
+  .jm-ctx{border-color:var(--ac);font-size:.82rem;color:var(--text2);line-height:1.6}
+
+  .jm-abo{display:flex;align-items:baseline;gap:.55rem;padding:.45rem 0;border-top:1px solid var(--line);font-size:.8rem;color:var(--text2);cursor:pointer}
+  .jm-abo b{color:var(--text);font-weight:500}
+
+  .jm-reg{display:flex;gap:.55rem;padding:.4rem 0;border-top:1px solid var(--line);font-size:.78rem;color:var(--text2);line-height:1.5}
+  .jm-reg b{font:600 .62rem var(--mono);color:var(--text3);white-space:nowrap;padding-top:.15rem}
+
+  .jm-note h3{font-size:1.02rem;margin-bottom:.3rem}
+  .jm-note p{font-size:.8rem;color:var(--text2);line-height:1.6;margin-bottom:.4rem}
+  .jm-note a{color:var(--ac);font-size:.72rem;text-decoration:none}
+  .jm-note a:hover{text-decoration:underline}
+
+  /* Annonces pour lecteur d'écran : présent dans l'arbre, invisible à l'œil. */
+  .jm-vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* ── Mobile : le panneau devient une feuille dépliable en bas — le même
+     esprit que .tocm dans signal.css (va le lire), avec ses propres classes.
+     La barre de date/vitesse reste toujours visible ; la feuille s'ouvre
+     par-dessus le plateau, jamais à sa place. ── */
+  @media(max-width:900px){
+    /* Le badge repasse dans le flux : en absolu centré, il chevauchait les
+       boutons d'outils dès que la largeur manquait (vu à 360 px). */
+    .jm-badge{position:static;transform:none;align-self:center;margin:.5rem .5rem 0}
+    .jm-panneau{position:fixed;left:0;right:0;bottom:0;flex:none;width:auto;max-height:74vh;border-left:0;border-top:1px solid var(--line);background:rgba(10,10,18,.96);backdrop-filter:blur(9px);z-index:16}
+    .jm-onglets,.jm-corps{display:none}
+    .jm-panneau.on .jm-onglets{display:flex}
+    .jm-panneau.on .jm-corps{display:block;max-height:56vh}
+    .jm-depli{display:inline-flex}
+    /* La zone de jeu s'arrête au-dessus de la barre repliée, sinon la boîte
+       de dialogue passerait dessous. */
+    .jm-zone{padding-bottom:76px}
+    /* Le rembourrage EST la cible tactile (règle du dépôt) : ≥ 44 px partout. */
+    .jm-btn,.jm-vit,.jm-opt,.jm-tab,.jm-depli{min-height:44px}
+    .jm-vit,.jm-depli{min-width:44px}
+  }
+</style>
+</head>
+<body>
+
+<div id="fx" aria-hidden="true"></div>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="scan" aria-hidden="true"></div>
+<div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<header>
+  <a class="brand" href="index.html">
+    <span class="brand-icon">
+      <svg width="30" height="30" viewBox="0 0 28 28" fill="none">
+        <path d="M3.5 14 L7 14 L9.5 8.5 L13.5 20.5 L16.5 5 L20 14 L24.5 14" stroke="#22d98a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span class="brand-name">Signal</span>
+  </a>
+  <nav>
+    <a href="index.html#/"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="7" r="1.3"/><circle cx="5" cy="12" r="1.3"/><circle cx="5" cy="17" r="1.3"/><path d="M9.5 7h10M9.5 12h10M9.5 17h6"/></svg><span>Watchlists</span></a>
+    <a href="actualites.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 18.5H5.5A1.5 1.5 0 0 1 4 17V5.5h12.5z"/><path d="M16.5 9.5H20V17a1.5 1.5 0 0 1-3.5 0z"/><path d="M7 9.5h6.5M7 13.5h4.5"/></svg><span>Actualités</span></a>
+    <a href="apprendre.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.6C10.4 6.3 8.3 5.9 5.8 6.1v10.6c2.5-.2 4.6.2 6.2 1.5 1.6-1.3 3.7-1.7 6.2-1.5V6.1c-2.5-.2-4.6.2-6.2 1.5z"/><path d="M12 7.6v10.6"/></svg><span>Apprendre</span></a>
+    <a href="maison.html" class="active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5 19.5 9 12 13.5 4.5 9z"/><path d="M4.5 9v6L12 19.5l7.5-4.5V9"/><path d="M12 13.5v6"/></svg><span>La Maison</span></a>
+    <a href="portfolio.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="7.8" width="17" height="11.2" rx="2"/><path d="M9 7.8V6.4A1.4 1.4 0 0 1 10.4 5h3.2A1.4 1.4 0 0 1 15 6.4v1.4"/><path d="M3.5 12.4h17"/></svg><span>Portefeuille IA</span></a>
+  </nav>
+</header>
+
+<div class="jm-scene">
+  <div class="jm-zone">
+    <div class="jm-badge">Société et fonds 100 % fictifs · cours réels</div>
+    <div class="jm-cadre">
+      <canvas id="jm-jeu" aria-hidden="true"></canvas>
+      <noscript><div class="jm-noscript">La Maison est une simulation qui se joue entièrement dans le navigateur : elle a besoin de JavaScript. Tout le reste du site, lui, se lit très bien sans.</div></noscript>
+      <div class="jm-outils">
+        <button type="button" class="jm-btn" id="jm-echelle" aria-label="Changer l’échelle d’affichage">×2</button>
+        <button type="button" class="jm-btn" id="jm-plan-btn" aria-pressed="false">Plan<span class="jm-k">P</span></button>
+      </div>
+    </div>
+    <div class="jm-dlg" id="jm-dlg" role="region" aria-label="Dialogue">
+      <div class="eyebrow jm-dlg-auteur" id="jm-dlg-auteur"></div>
+      <div class="jm-dlg-texte" id="jm-dlg-texte">Chargement du marché…</div>
+      <div class="jm-dlg-opts" id="jm-dlg-opts"></div>
+    </div>
+  </div>
+
+  <div class="jm-panneau" id="jm-panneau">
+    <div class="jm-barre" id="jm-barre">
+      <div class="jm-barre-l1">
+        <span class="jm-date" id="jm-date">—</span>
+        <span class="jm-vitesses" role="group" aria-label="Vitesse du jeu">
+          <button type="button" class="jm-vit" data-vit="0" aria-label="Pause">⏸</button>
+          <button type="button" class="jm-vit on" data-vit="1">×1</button>
+          <button type="button" class="jm-vit" data-vit="2">×2</button>
+          <button type="button" class="jm-vit" data-vit="4">×4</button>
+        </span>
+        <button type="button" class="jm-depli" id="jm-depli" aria-expanded="false" aria-label="Ouvrir le panneau">▴</button>
+      </div>
+      <div class="jm-barre-l2"><span>Encours <b id="jm-encours">—</b></span><span>Société <b id="jm-treso">—</b></span></div>
+    </div>
+    <div class="jm-onglets" role="tablist" aria-label="Panneau de la maison">
+      <button class="jm-tab on" type="button" role="tab" aria-selected="true" data-tab="fonds">Fonds</button>
+      <button class="jm-tab" type="button" role="tab" aria-selected="false" data-tab="societe">Société</button>
+      <button class="jm-tab" type="button" role="tab" aria-selected="false" data-tab="equipe">Équipe</button>
+      <button class="jm-tab" type="button" role="tab" aria-selected="false" data-tab="registre">Registre</button>
+      <button class="jm-tab" type="button" role="tab" aria-selected="false" data-tab="carnet">Carnet<span class="jm-dot" hidden></span></button>
+    </div>
+    <div class="jm-corps" id="jm-corps">
+      <div class="jm-vue" id="jm-t-fonds">
+        <p class="jm-intro">Tu fondes une société de gestion — fictive — hébergée chez un tiers.<br>Les cours sont réels, les noms des sociétés sont masqués.<br>Ton équipe propose ; toi, tu tranches dans la boîte de dialogue, en bas.</p>
+        <div id="jm-dyn-fonds"></div>
+      </div>
+      <div class="jm-vue" id="jm-t-societe" hidden><div id="jm-dyn-societe"></div></div>
+      <div class="jm-vue" id="jm-t-equipe" hidden><div id="jm-dyn-equipe"></div></div>
+      <div class="jm-vue" id="jm-t-registre" hidden><div id="jm-dyn-registre"></div></div>
+      <div class="jm-vue" id="jm-t-carnet" hidden><div id="jm-dyn-carnet"></div></div>
+      <footer>
+        <div class="footer-legal">Signal est un service éditorial d'information financière. Contenu fourni à titre informatif uniquement. Ne constitue pas un conseil en investissement au sens AMF.</div>
+        <div class="footer-right">Bêta</div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<div class="jm-vh" aria-live="polite" id="jm-annonce"></div>
+
+<script src="signal-fx.js"></script>
+<script src="maison-moteur.js"></script>
+<script src="maison-iso.js"></script>
+<script src="maison-ui.js"></script>
+</body>
+</html>
