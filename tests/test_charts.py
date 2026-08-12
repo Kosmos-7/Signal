@@ -192,6 +192,29 @@ check("un refus est retourné, donc journalisé (jamais silencieux)", len(refuse
 # ── Garde anti-oubli du workflow CI ─────────────────────────────────────────
 # La commande n'est PAS recopiée ici : on l'extrait du YAML, sinon le test
 # validerait une garde qui aurait pu diverger de celle réellement exécutée.
+print("\n— Un outil qui importe le cœur du projet met la racine sur son chemin —")
+# UN RUN DE CI PERDU POUR UNE LIGNE. tools/sonde_titre.py a été écrit pour scorer
+# un titre hors univers ; lancé par `python tools/sonde_titre.py`, l'interpréteur
+# met `tools/` en tête du chemin et PAS la racine. Le job a installé toutes les
+# dépendances, appelé Yahoo, puis rendu « ModuleNotFoundError: No module named
+# 'screener' ». Les autres outils de tools/ n'ajoutaient que leur propre dossier,
+# parce qu'aucun n'importait le cœur du projet : le motif n'existait nulle part à
+# recopier, et rien ne signalait son absence.
+# Le contrôle est STATIQUE et se dérive du dossier : il ne connaît pas la liste
+# des outils, il la lit.
+_CŒUR = ("screener", "themes", "config", "portfolio_agent", "edgar", "note_v4",
+         "validate_tickers", "update_prices")
+_sans_racine = []
+for _p in sorted(glob.glob(os.path.join(RACINE, "tools", "*.py"))):
+    _src = open(_p, encoding="utf-8").read()
+    if not re.search(r"^\s*(?:import|from)\s+(?:%s)\b" % "|".join(_CŒUR), _src, re.M):
+        continue                                  # n'importe pas le cœur : rien à exiger
+    # la racine, c'est le PARENT du dossier du fichier — deux `dirname` imbriqués
+    if not re.search(r"sys\.path\.insert\([^)]*dirname\([^)]*dirname\(", _src):
+        _sans_racine.append(os.path.basename(_p))
+check("chaque outil important le cœur ajoute la racine à sys.path",
+      not _sans_racine, f"{_sans_racine} : ModuleNotFoundError au runtime")
+
 print("\n— Aucune entrée de dispatch ne tombe dans un shell —")
 # POURQUOI CETTE GARDE EXISTE. photos-marques.yml porte la leçon, écrite après
 # coup : « les "|" de "TICKER=a|b" avaient été pris pour des tubes et bash avait

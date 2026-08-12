@@ -39,6 +39,15 @@ import json
 import os
 import sys
 
+# LA RACINE DU DÉPÔT SUR LE CHEMIN — sans quoi `import screener` échoue.
+# Lancée par `python tools/sonde_titre.py`, l'interpréteur met `tools/` en tête
+# du chemin, pas la racine : le premier run a rendu « ModuleNotFoundError: No
+# module named 'screener' » après avoir installé toutes les dépendances. Les
+# autres outils de tools/ n'ajoutaient que leur PROPRE dossier, parce qu'aucun
+# n'importait le cœur du projet — cette sonde est la première, et le motif
+# n'existait donc nulle part à recopier.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 RAPPORT = "sonde_titre.json"
 
 
