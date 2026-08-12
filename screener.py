@@ -1887,6 +1887,21 @@ UNIVERS += [
     "6902.T",                   # Denso — équipementier automobile, actionneurs
 ]
 
+# Troisième fois le même geste, pour la watchlist ESPACE devenue NEWSPACE le
+# 12/08/2026 (décision propriétaire). Le mot NewSpace désigne la génération
+# d'acteurs apparue au milieu des années 2000, donc PAS les maîtres d'œuvre
+# historiques ni les opérateurs de satellites qui les précédaient : quatorze
+# titres sont sortis de la LISTE. Huit d'entre eux (LMT, RTX, NOC, BA.L, AIR.PA,
+# HO.PA, SAF.PA, LDO.MI) appartiennent à l'univers historique ci-dessus et n'ont
+# besoin de rien. Les six autres n'y existaient QUE par le thème : sans cette
+# liste, six sociétés validées perdraient leur note et six fiches déjà publiées
+# deviendraient orphelines. On retire une liste, pas des sociétés.
+UNIVERS += [
+    "LHX", "KTOS",              # charges utiles militaires, systèmes sol
+    "IRDM", "VSAT",             # opérateurs historiques : IoT, voix de secours, haut débit
+    "SESG.PA", "ETL.PA",        # géostationnaires européens — Eutelsat porte OneWeb
+]
+
 UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 
 # ── JUSTIFICATION ─────────────────────────────────────────────────────────────

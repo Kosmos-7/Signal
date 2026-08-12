@@ -5,6 +5,51 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La watchlist « Espace » nommait un secteur, pas son sujet
+
+Le propriétaire l'a signalé : le vrai terme est **NewSpace** — « un sous-ensemble
+du secteur spatial qui fait son apparition au milieu de la décennie 2000 et qui
+se caractérise par l'apparition d'une nouvelle génération d'acteurs industriels,
+l'utilisation de technologies et de processus innovants, la recherche de nouveaux
+débouchés et de nouvelles méthodes de financement ». Un sous-ensemble, et un
+sous-ensemble défini **contre** ce qui le précédait.
+
+**Le changement n'est donc pas d'étiquette, il est de périmètre.** Prendre le mot
+au sérieux fait sortir de la liste les dix maîtres d'œuvre historiques (Lockheed,
+Northrop, L3Harris, RTX, BAE, Airbus, Thales, Safran, Leonardo, Kratos) et les
+quatre opérateurs de satellites qui les accompagnaient (SES, Eutelsat, Viasat,
+Iridium) : quatorze titres sur vingt.
+
+**Le texte de la liste l'avouait déjà** — « LA LISTE EST COUPÉE EN DEUX, et ses
+deux moitiés ne se comportent pas du tout pareil […] comparer les scores d'une
+moitié à l'autre n'a pas de sens ». Une watchlist qui écrit qu'elle mesure deux
+objets en mesure un de trop.
+
+**On retire une liste, pas des sociétés** : troisième emploi de cette phrase après
+la chaîne quantique et l'ex-thème financials. Les quatorze restent dans l'univers
+du screener, scorés et candidats au top 30 — six d'entre eux n'y existaient que
+par ce thème et sont désormais déclarés explicitement dans `screener.py`.
+
+**Un titre entre**, validé avant d'être écrit comme le prescrit
+`validate_tickers.py` : Voyager Technologies (~2,6 Md$, 1,2 an de cotation), qui
+construit Starlab — le débouché que la station spatiale internationale laissera
+vacant. Il ouvre avec Redwire un maillon « travailler en orbite ».
+
+**Onze candidats éprouvés contre Yahoo le 12/08, aucun deviné.** Quatre écartés
+sur la règle et non sur la taille — Globalstar, AeroVironment, Karman, Avio :
+une cotation neuve ne fait pas une génération neuve. Cinq écartés sous le
+milliard — Spire, Satellogic, Virgin Galactic, GomSpace, AAC Clyde — dont les
+deux seuls NewSpace européens cotés, qui pèsent le dixième du plus petit titre de
+la liste. Firefly reste au registre : son fournisseur ne rend aucune
+capitalisation, et plusieurs points de la note se calculent dessus.
+
+**Sept titres, donc, et une deuxième exception nommée** à la règle des vingt, à
+côté de « quantique ». Baisser le seuil aurait été plus simple ; nommer
+l'exception oblige la suivante à se justifier aussi.
+
+L'identifiant a suivi le nom, illustration et légendes comprises :
+`espace` → `newspace`.
+
 ### Le maillon mémoire décrivait un oligopole en oubliant un de ses membres
 
 Kioxia manquait à l'infrastructure de l'IA, signalé par le propriétaire. Elle

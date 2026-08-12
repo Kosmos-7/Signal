@@ -35,6 +35,18 @@
 # qu'elle n'y figure pas — trente-neuf séances de cotation, quand la moyenne
 # mobile 200 jours en exige deux cents. Une watchlist qui s'ouvre en disant ce
 # qu'elle ne sait pas encore noter.
+# Il est devenu « NewSpace » le 12/08/2026 (demande du propriétaire), et le
+# changement n'est pas d'étiquette. « Espace » nomme un SECTEUR ; NewSpace nomme
+# la génération d'acteurs apparue au milieu des années 2000 — technologies et
+# procédés nouveaux, débouchés nouveaux, financements nouveaux — c'est-à-dire un
+# sous-ensemble de ce secteur, et un sous-ensemble défini CONTRE ce qui le
+# précédait. Prendre le mot au sérieux, c'est donc sortir de la liste les dix
+# maîtres d'œuvre historiques et les quatre opérateurs de satellites
+# historiques : quatorze titres, et la liste passe de vingt à sept. Elle mesure
+# en échange un seul objet, ce que sa version « espace » avouait ne pas faire
+# (« la liste est coupée en deux, et ses deux moitiés ne se comportent pas du
+# tout pareil »). Les quatorze restent scorés dans l'univers du screener, comme
+# la chaîne quantique et l'ex-thème financials avant eux.
 # Les thèmes retirés (santé, conso, défense, compounders, mémoire
 # et électrification en tant que thèses autonomes, décote et qualité calculées)
 # restent dans l'historique git — leur restauration est un revert, pas un
@@ -546,47 +558,117 @@ THEMES_CURES = [
         ],
     },
     {
-        "id": "espace",
-        "label": "Espace",
-        "sous_titre": "Ce que l'orbite basse rend enfin achetable",
+        "id": "newspace",
+        "label": "NewSpace",
+        "sous_titre": "La génération née après 2000, et elle seule",
         "kind": "these",
         "thesis": (
-            "L'espace est-il devenu une industrie ? Le coût du kilo en orbite a été "
-            "divisé par vingt en vingt ans, et des constellations facturent aujourd'hui "
-            "des abonnements. La liste suit qui vend l'accès, la liaison et l'image."
+            "Qu'achète-t-on quand on achète le NewSpace ? Pas le spatial, mais la "
+            "génération de sociétés apparue au milieu des années 2000 : procédés "
+            "nouveaux, débouchés nouveaux, financements nouveaux. Elle a fait tomber le "
+            "coût du kilo en orbite et facture des abonnements là où des agences "
+            "signaient des contrats. La liste suit l'accès à l'orbite, la liaison, "
+            "l'image et la station — pas les maisons qui les précédaient."
         ),
         "inversion": (
-            "Un seul acteur lance aujourd'hui la majorité de la masse mise en orbite, et il "
-            "est aussi le premier opérateur de constellation : ses concurrents lui achètent "
-            "leurs lancements en même temps qu'ils lui disputent ses clients. Si son avantage "
-            "de coût se creuse encore, la moitié de cette liste devient un ensemble de "
+            "Le NewSpace a une dépendance dont ses carnets de commandes ne disent rien : il "
+            "est né d'un argent bon marché — capital-risque, sociétés d'acquisition, "
+            "introductions — et la plupart de ces sociétés brûlent encore de la trésorerie. "
+            "Ce qui les tue n'est pas un client perdu, c'est une levée qui ne se fait pas. "
+            "S'y ajoute le paradoxe du leader : un seul acteur lance la majorité de la masse "
+            "mise en orbite et opère la première constellation, et ses concurrents lui "
+            "achètent leurs lancements en même temps qu'ils lui disputent ses clients — si "
+            "son avantage de coût se creuse encore, cette liste devient un ensemble de "
             "sous-traitants. L'inversion symétrique existe : un échec de vol prolongé ou une "
             "collision majeure en orbite basse renchérirait l'assurance et retarderait tout le "
             "monde. Et la demande publique — défense, agences — décide encore de la plupart "
             "des carnets : c'est une industrie dont le premier client vote son budget."
         ),
         "biais": (
-            "LA PLUS GRANDE SOCIÉTÉ SPATIALE DU MONDE N'EST PAS DANS CETTE LISTE, et son "
-            "absence est la première chose à savoir. SpaceX s'est introduite en bourse en "
+            "CE QUE LE MOT EXCLUT est la première chose à savoir, parce que c'est ce qui "
+            "sépare cette liste d'une liste « spatial ». Le NewSpace se définit CONTRE "
+            "l'organisation qui le précédait : entre ici une société née de la vague — le "
+            "spatial pour métier, un procédé qui casse un coût, des clients qui ne sont pas "
+            "seulement des agences, et une arrivée en bourse par les financements de cette "
+            "vague. En sortent les maîtres d'œuvre historiques (Lockheed, Northrop, "
+            "L3Harris, RTX, BAE, Airbus, Thales, Safran, Leonardo, Kratos), pour qui "
+            "l'espace est un département dont le cours suit des budgets militaires, et les "
+            "opérateurs de satellites historiques (SES, Eutelsat, Viasat, Iridium), qui "
+            "sont ce que le NewSpace a pris de vitesse. Ce ne sont pas des rejets : ces "
+            "quatorze titres restent scorés, candidats à la watchlist principale, et leurs "
+            "fiches restent en ligne — on retire une liste, pas des sociétés.\n\n"
+            "LA SOCIÉTÉ QUI A DONNÉ SA FORME AU PHÉNOMÈNE N'EST PAS DANS CETTE LISTE, et "
+            "c'est la deuxième chose à savoir. SpaceX s'est introduite en bourse en "
             "juin 2026 ; elle n'a pas encore les deux cents séances de cotation qu'exigent "
             "la moyenne mobile 200 jours et le RSI, sans lesquelles nous ne savons pas noter "
             "un titre. Elle entrera d'elle-même vers avril 2027. Rien d'éditorial là-dedans : "
             "c'est une impossibilité de mesure, et nous préférons le dire que publier une "
             "note que nous ne savons pas calculer.\n\n"
-            "LA LISTE EST COUPÉE EN DEUX, et ses deux moitiés ne se comportent pas du tout "
-            "pareil. D'un côté des pure players : petits, souvent sans bénéfice, portés par "
-            "des carnets de commandes plutôt que par des résultats. De l'autre des groupes de "
-            "défense où l'espace est un département parmi d'autres — profitables, suivis, "
-            "mais dont le cours réagit surtout à des budgets militaires. Comparer les scores "
-            "d'une moitié à l'autre n'a pas de sens : ils ne mesurent pas le même objet.\n\n"
-            "Dérogation de taille assumée. Le projet ne retient d'ordinaire que des sociétés "
-            "de plus de 25 milliards de dollars ; l'essentiel des pure players spatiaux pèse "
-            "entre un et douze. Appliquer le seuil ici ne filtrerait pas la liste, il la "
-            "réduirait aux seuls avionneurs — c'est-à-dire qu'il supprimerait le sujet.\n\n"
+            "LA LISTE EST COURTE PARCE QUE SON SUJET L'EST EN BOURSE. Le NewSpace compte des "
+            "centaines de sociétés ; celles qui sont cotées, notables et pas encore "
+            "microscopiques tiennent en quelques lignes. Dérogation de taille assumée, comme "
+            "sur la watchlist quantique : le projet ne retient d'ordinaire que des sociétés "
+            "de plus de 25 milliards de dollars, et ces pure players pèsent entre un et "
+            "quelques dizaines. Appliquer le seuil ne filtrerait pas la liste, il la "
+            "supprimerait. Sous le milliard en revanche on s'arrête, et le registre des "
+            "écartés nomme ceux qui n'y arrivent pas, capitalisation mesurée à l'appui.\n\n"
+            "LA NOTE LIT MAL CES SOCIÉTÉS, et mieux vaut le savoir avant de comparer des "
+            "scores. La plupart n'ont pas de bénéfice : leurs multiples sont vides ou "
+            "absurdes, leur marge de flux disponible est négative de plusieurs centaines de "
+            "pour cent, et la grille les classe en bas — ce qui est honnête sur le risque, "
+            "mais ne dit rien de l'exécution. Ce qui les pilote est ailleurs : un carnet de "
+            "commandes, une cadence de vol, un contrat d'agence. Depuis que les maîtres "
+            "d'œuvre en sont sortis, au moins la liste ne mélange plus deux objets ; elle "
+            "en mesure un seul, mal.\n\n"
+            "LE NEWSPACE ACHETABLE EST AMÉRICAIN, et ce n'est pas un choix de périmètre. Le "
+            "phénomène s'est propagé en Europe et en Chine, mais ses acteurs européens sont "
+            "restés privés à deux micro-capitalisations près, cotées à Stockholm et hors "
+            "d'échelle pour ce site, et les chinois ne sont pas accessibles depuis les places "
+            "que ce projet couvre. Un cas mérite d'être connu : la constellation OneWeb n'a "
+            "pas été introduite en bourse, elle a été absorbée par un opérateur historique — "
+            "on ne l'achète donc qu'en achetant Eutelsat, qui n'est plus dans cette liste.\n\n"
             "Enfin le calcul EN ORBITE, dont on parle beaucoup depuis 2026, n'est presque pas "
             "achetable : les sociétés qui y travaillent sont privées, et les cotées n'y "
             "participent que comme transporteurs ou fournisseurs de plateforme."
         ),
+        # RÈGLE D'ENTRÉE, écrite ici parce que le mot NewSpace ne veut rien dire
+        # sans elle — et qu'elle est ce qui empêche la liste de redevenir une
+        # liste « aérospatial et défense ». Entre un titre s'il réunit les
+        # quatre traits par lesquels le phénomène se définit :
+        #   - le spatial est son MÉTIER, pas un département ;
+        #   - il est né de la vague (fondé au milieu des années 2000 ou après,
+        #     ou créé par elle) ;
+        #   - il apporte un procédé ou un débouché que l'organisation
+        #     précédente n'avait pas — réutilisation, cadence, abonnement,
+        #     station privée ;
+        #   - il est arrivé en bourse par les financements de cette vague.
+        # La règle coupe dans les deux sens, et c'est à cela qu'on la reconnaît :
+        # elle fait entrer des sociétés de 1 à 3 Md$ que le seuil du projet
+        # écarterait, et elle fait SORTIR des groupes considérables dont
+        # l'exposition spatiale est réelle mais ancienne.
+        #
+        # QUATRE CANDIDATS TRANCHÉS DANS CE SENS le 12/08/2026, tous validés
+        # sans erreur contre Yahoo le même jour et écartés sur la seule règle —
+        # notés ici pour que la décision se relise. Aucun n'entre au registre
+        # des écartés plus bas : ce registre est celui des critères d'inclusion
+        # du projet (taille, historique, données manquantes), pas celui des
+        # choix de périmètre.
+        #   - Globalstar (~10,8 Md$), opérateur de constellation en orbite
+        #     basse — mais fondé en 1991, et c'est un client historique qui lui
+        #     a donné son second souffle, pas un procédé nouveau.
+        #   - AeroVironment (~9,8 Md$), drones et systèmes spatiaux depuis son
+        #     rachat de BlueHalo : société de 1971, dont le client est la
+        #     défense américaine.
+        #   - Karman (~8,4 Md$), structures et propulsion pour lanceurs et
+        #     missiles, introduite en 2025 mais formée par regroupement
+        #     d'ateliers anciens — une cotation neuve ne fait pas une
+        #     génération neuve.
+        #   - Avio (~1,7 Md$), le cas le plus disputé : c'est le lanceur
+        #     européen coté, mais héritier de Fiat Aviazione et bâti sur la
+        #     commande institutionnelle, c'est-à-dire l'exact contraire de ce
+        #     que le mot désigne.
+        # Tous quatre sont par ailleurs sous le seuil de 25 Md$ ; c'est la règle
+        # qui tranche, la taille ne fait que ne pas les rattraper.
         "maillons": [
             {
                 # ACCÈS À L'ORBITE. Le maillon qui commande tous les autres : sans
@@ -594,22 +676,28 @@ THEMES_CURES = [
                 # SpaceX met en orbite l'essentiel de la masse mondiale, et ses
                 # concurrents lui achètent des lancements. Un seul titre notable
                 # ici, ce qui est en soi la description du marché.
+                # Firefly, l'autre lanceur coté né de la vague, est au registre
+                # des écartés : son fournisseur de données ne rend aucune
+                # capitalisation, et plusieurs points de la note se calculent
+                # dessus.
                 "label": "Accès à l'orbite",
                 "tickers": ["RKLB"],
             },
             {
                 # CONSTELLATIONS ET CONNECTIVITÉ. Le seul endroit du spatial qui
-                # facture des abonnements plutôt que des contrats. Trois vagues
-                # s'y superposent : les historiques géostationnaires (SES,
-                # Eutelsat, Viasat) que l'orbite basse a pris de vitesse, les
-                # opérateurs de niche (Iridium, l'IoT et la voix de secours), et
-                # le pari du téléphone connecté directement au satellite, sans
-                # antenne, qu'AST SpaceMobile porte avec une soixantaine
-                # d'opérateurs partenaires.
-                # L'européen IRIS² court en arrière-plan de tout ce maillon :
-                # 10,6 Md€, dont SES et Eutelsat portent une part.
+                # facture des abonnements plutôt que des contrats — c'est le
+                # « nouveau débouché » de la définition, pris au mot.
+                # Les historiques géostationnaires (SES, Eutelsat, Viasat) et
+                # Iridium sont sortis d'ici le 12/08 avec la règle d'entrée : ils
+                # sont ce que l'orbite basse a pris de vitesse, pas ce qu'elle a
+                # fait naître, et l'européen IRIS² qui court en arrière-plan est
+                # une commande publique portée par deux d'entre eux.
+                # Reste le pari le plus pur de la liste : un téléphone ordinaire
+                # qui se connecte directement au satellite, sans antenne,
+                # qu'AST SpaceMobile porte avec une soixantaine d'opérateurs
+                # partenaires.
                 "label": "Constellations & connectivité",
-                "tickers": ["ASTS", "IRDM", "VSAT", "SESG.PA", "ETL.PA"],
+                "tickers": ["ASTS"],
             },
             {
                 # OBSERVER LA TERRE. L'imagerie est la première application
@@ -621,7 +709,21 @@ THEMES_CURES = [
                 # façon d'approcher ce sujet en bourse ; Starcloud et Axiom, qui
                 # ont fait voler les premiers nœuds, ne sont pas cotés.
                 "label": "Observer la Terre & calculer en orbite",
-                "tickers": ["PL", "RDW", "BKSY"],
+                "tickers": ["PL", "BKSY"],
+            },
+            {
+                # TRAVAILLER EN ORBITE. Le débouché que la station spatiale
+                # internationale laissera vacant à son retrait : des laboratoires
+                # et des stations privés, vendus à des agences comme à des
+                # industriels. Redwire fournit les composants et les expériences
+                # en microgravité ; Voyager construit Starlab, l'une des stations
+                # candidates à la succession, et s'est introduite en bourse en
+                # juin 2025 — moins de cinq ans d'historique, donc une fiche qui
+                # portera l'avertissement de régression, comme les néoclouds.
+                # C'est le maillon le plus jeune de la liste, et celui qui dépend
+                # le plus d'un calendrier public.
+                "label": "Travailler en orbite · infrastructure & stations",
+                "tickers": ["RDW", "VOYG"],
             },
             {
                 # ALLER SUR LA LUNE. Un maillon d'un seul titre, et assumé comme
@@ -630,21 +732,6 @@ THEMES_CURES = [
                 # agence, son horizon une mission, et son risque binaire.
                 "label": "Exploration lunaire",
                 "tickers": ["LUNR"],
-            },
-            {
-                # LES PRIMES. Ils ne sont pas là pour faire nombre : ce sont eux
-                # qui construisent les satellites lourds, les lanceurs
-                # institutionnels et les charges utiles militaires, et leurs
-                # carnets spatiaux sont plus gros que le chiffre d'affaires
-                # cumulé de tous les pure players ci-dessus. Mais l'espace y est
-                # un département : leur cours suit d'abord les budgets de
-                # défense, et le champ `biais` prévient qu'on ne compare pas
-                # leurs scores à ceux de la première moitié.
-                # Kratos est le plus spatial des dix et le plus petit — drones,
-                # systèmes sol, propulsion tactique.
-                "label": "Maîtres d'œuvre & défense spatiale",
-                "tickers": ["LMT", "NOC", "LHX", "RTX", "BA.L",
-                            "AIR.PA", "HO.PA", "SAF.PA", "LDO.MI", "KTOS"],
             },
         ],
     },
@@ -944,16 +1031,39 @@ ECARTES_VALIDATION = {
     # colonne serait vide sur sa fiche. Thales et Infineon portent le maillon.
 "ARQQ": "Arqit, capitalisation ~0,4 Md$ et aucun objectif consensus (colonne vide sur la fiche)",
 "LAES": "SEALSQ, capitalisation ~0,6 Md$ et 3,2 ans d'historique",
-    # ── Espace ────────────────────────────────────────────────────────────────
+    # ── NewSpace ──────────────────────────────────────────────────────────────
     # LA PLUS GROSSE INTRODUCTION EN BOURSE DE LA DÉCENNIE, et nous ne savons pas
     # la noter. SpaceX cote au Nasdaq depuis juin 2026 pour environ 1 755 Md$ —
-    # soit, à elle seule, plus que tout le reste de la watchlist spatiale
-    # réunie. Mesuré le 09/08/2026 : 39 séances. La moyenne mobile 200 jours et
+    # soit, à elle seule, plus que tout le reste de la watchlist réunie. Mesuré
+    # le 09/08/2026 : 39 séances. La moyenne mobile 200 jours et
     # le RSI en exigent 200, et le screener écarterait le titre au run. Ce n'est
     # pas un jugement sur la société, c'est une impossibilité de mesure — et
     # elle se lève toute seule vers avril 2027.
 "SPCX": "SpaceX, IPO du 16/06/2026 — 39 séances < 200 (MM200/RSI), éligible vers avril 2027",
-"FLY":  "Firefly Aerospace, introduite en 2025 — 1 an d'historique et capitalisation absente chez le fournisseur",
+    # Firefly a été REVALIDÉE le 12/08/2026 au moment du passage à NewSpace : son
+    # historique n'est plus l'obstacle (un an de cotation dépasse les 200 séances,
+    # et moins de cinq ans n'est plus qu'un avertissement depuis le 01/08). Ce qui
+    # bloque est la capitalisation, que le fournisseur ne rend pas — or le
+    # rendement du flux disponible se calcule dessus, et le seuil de taille se
+    # vérifie dessus. Précédent Arqit : on n'entre pas un titre dont une colonne
+    # de la fiche serait vide, à plus forte raison quand elle nourrit la note.
+"FLY":  "Firefly Aerospace, introduite en 2025 — capitalisation absente chez le fournisseur (revalidé le 12/08/2026), donc ni seuil vérifiable ni rendement du flux calculable",
+    # SOUS LE PLANCHER DU MILLIARD, mesuré le 12/08/2026. Ces cinq-là passent la
+    # règle d'entrée du thème sans discussion — le NewSpace est leur métier — et
+    # échouent sur la seule TAILLE. Le thème déroge déjà au seuil de 25 Md$ ; il
+    # s'arrête ici, au voisinage du milliard, parce qu'en dessous une société
+    # n'est plus dans la même classe de risque que le reste du site. Le titre le
+    # plus léger de la liste publiée en pèse 1,3.
+"SPIR":    "Spire Global, capitalisation ~0,6 Md$ — NewSpace par la règle, écarté sur la taille",
+"SATL":    "Satellogic, capitalisation ~0,9 Md$ — idem, et le plus proche du plancher",
+"SPCE":    "Virgin Galactic, capitalisation ~0,5 Md$ — idem",
+    # LES DEUX SEULS NEWSPACE EUROPÉENS COTÉS, et ils tiennent dans une PME.
+    # Ce n'est pas une lacune de ce registre, c'est le fait principal du sujet
+    # côté européen : la vague y est restée privée (Isar, Exotrail, ICEYE, The
+    # Exploration Company), et ce qui cote pèse le dixième du plus petit titre
+    # de la liste publiée. Le champ `biais` du thème le dit au lecteur.
+"GOMX.ST": "GomSpace, capitalisation ~0,2 Md$ — nanosatellites, Stockholm",
+"AAC.ST":  "AAC Clyde Space, capitalisation ~0,1 Md$ — idem",
     # ── Robotique ─────────────────────────────────────────────────────────────
     # Validés sans erreur le 08/08/2026 mais SOUS LE SEUIL de 25 Md$, et aucune
     # thèse ne les réclame assez fort pour justifier la dérogation accordée aux
