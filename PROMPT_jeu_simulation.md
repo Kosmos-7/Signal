@@ -4,7 +4,9 @@
 > racine du dépôt Signal. Tout ce qui suit s'adresse à l'agent qui va écrire le code.
 > **§0–§4** posent l'intention, l'objet visuel et la direction artistique · **§5–§12** décrivent
 > le jeu mécanique par mécanique · **§13–§18** sont des contraintes dures (le code sera refusé
-> s'il les viole) · **§19–§22** disent quand c'est fini.
+> s'il les viole) · **§19–§22** disent quand c'est fini · **§23 donne les chiffres réels avec
+> leurs sources, et dit lesquels ne sont pas vérifiés** · **§24 est le contrat de plaisir** :
+> lis-le avant §5, il gouverne tous les arbitrages entre réalisme et jouabilité.
 >
 > ⚠️ **C'est un gros morceau** — 4 000 à 6 000 lignes au total. Il est découpé en **quatre lots**
 > (§20) dont **le premier est jouable seul**. Ne commence pas par le milieu.
@@ -41,9 +43,13 @@ qu'on prend et les tuiles qu'on pose**, pas par des leçons.
 
 ## §1 — Mission en une phrase
 
-**« La Maison »** : un bureau isométrique qu'on remplit tuile par tuile, des gens qu'on embauche
-quand la trésorerie le permet et à qui on peut parler, un fonds qui grandit, et **une partie qui
-ne se termine jamais** — sauf par la faillite, qui est toujours possible.
+**« La Maison »** : on obtient le droit d'exister, on loue une adresse, on remplit un bureau
+isométrique tuile par tuile, on embauche quand la trésorerie le permet, on parle aux gens, le
+fonds grandit — et **la partie ne se termine jamais**, sauf par la faillite, qui est toujours
+possible.
+
+**Les chiffres du jeu sont des chiffres réels**, vérifiés et sourcés en **§23**. Ce n'est pas de
+la décoration : c'est ce qui fait que ce qu'on y comprend est transposable.
 
 ---
 
@@ -202,16 +208,37 @@ trésorerie → surface louée → mobilier posé → poste de travail libre →
 On ne peut **pas** embaucher sans poste libre. On ne peut pas poser de poste sans place. On ne
 peut pas prendre de place sans payer le loyer tous les mois, que le fonds gagne ou perde.
 
-| Objet | Coût | Récurrent | Ce qu'il apporte |
+**Une tuile vaut 2 m².** Plateau de départ **8 × 6 = 48 tuiles = 96 m²** — la taille réelle d'une
+boutique de gestion qui démarre à quatre ou cinq. Le loyer se calcule **au m² et par an**, comme
+en immobilier d'entreprise, à partir de l'adresse choisie à l'ouverture (§7.1) :
+
+| Adresse | Loyer réel | Sur 96 m² | Effet |
 |---|---|---|---|
-| **Surface** | — | **18 €/tuile/mois** | la place. Le loyer est le coût fixe qui tue les sociétés de gestion en bas de cycle |
+| **Paris QCA** (8ᵉ, 2ᵉ, 9ᵉ) | ~1 080 €/m²/an | **8 640 €/mois** | crédibilité auprès des institutionnels : +collecte |
+| **Paris hors QCA / 1ʳᵉ couronne** | ~450 €/m²/an | **3 600 €/mois** | neutre |
+| **2ᵉ couronne / région** | ~250 €/m²/an | **2 000 €/mois** | −collecte institutionnelle, +marge |
+
+*(Sources en §23. L'adresse est le premier arbitrage coût fixe / crédibilité du jeu, et il est
+irréversible pendant trois ans — c'est un bail.)*
+
+| Objet | Achat | Récurrent | Ce qu'il apporte |
+|---|---|---|---|
 | **Poste de travail** | 1 200 € | — | **obligatoire par personne employée** |
-| **Terminal de données** | 0 € | **900 €/mois** | +1 note de recherche par mois et par analyste. **Un abonnement, pas un achat** — c'est là qu'on découvre la différence |
+| **Terminal Bloomberg** | — | **2 500 €/mois par poste** | +2 notes/mois par analyste, données de qualité institutionnelle |
+| **LSEG Workspace** | — | **1 700 €/mois** | +1 note/mois par analyste |
+| **Flux de données de base** | — | **280 €/mois** | le minimum vital ; sans lui, l'analyste travaille à l'aveugle |
 | **Salle de réunion** (4 tuiles + table) | 3 500 € | — | débloque le **comité d'investissement** (§8.3) |
 | **Machine à café** | 400 € | 60 €/mois | +moral, et le lieu où circulent les rumeurs |
 | **Armoire d'archives** | 800 € | — | divise par deux le coût d'une inspection |
 | **Baie serveur** | 6 000 € | 200 €/mois | réduit fortement le risque d'incident informatique (§9) |
-| **Étage supplémentaire** | 15 000 € | loyer du plateau | 12 × 9 tuiles de plus |
+| **Étage supplémentaire** | 15 000 € | son propre loyer | 8 × 6 tuiles de plus |
+
+**Le terminal de données est l'exemple à traiter avec soin** : les trois niveaux existent
+vraiment, leurs prix sont réels, et l'écart entre le premier et le troisième — **2 220 €/mois,
+soit un demi-salaire** — est exactement le genre d'arbitrage que fait une vraie boutique. À
+écrire dans le carnet la première fois que le joueur souscrit : achat (immobilisation) contre
+abonnement (charge récurrente), et pourquoi le second est plus dangereux quand les revenus
+baissent.
 
 **À écrire dans le carnet la première fois que le joueur signe un abonnement :** achat
 (immobilisation) contre abonnement (charge récurrente), et pourquoi le second est plus dangereux
@@ -226,16 +253,28 @@ connexité, testée).
 
 ## §6 — Les gens : rôles, dialogue, et le chiffre qu'ils font exister
 
-| Recrue | Salaire indicatif | Ce qu'elle produit | Ce qu'elle **fait apparaître à l'écran** |
-|---|---|---|---|
-| **Analyste** | 4 500 €/mois | 1 à 3 notes/mois selon compétence et terminal | la fiche société : qualité, valorisation, thèse. **Sans analyste, tu n'as que le prix.** |
-| **Gérant d'exécution** | 5 500 €/mois | passe les ordres | coût d'exécution de **30 bps → 7,5 bps** (`config.py`) ; le carnet d'ordres |
-| **Risk manager** | 5 000 €/mois | contrôle a posteriori | volatilité, perte maximale, exposition sectorielle, poids par ligne |
-| **RCCI (conformité)** | 4 000 €/mois | contrôle du mandat | l'alerte de dérive **avant** la faute ; divise par 4 le coût d'une inspection |
-| **Relation investisseurs** | 4 500 € + variable | reporting, collecte | +40 % de collecte à performance égale ; **sans elle, le reporting te coûte une semaine d'arbitrages par trimestre** |
-| **Back-office** | 3 500 €/mois | règlement-livraison | supprime les erreurs de règlement (sinon 0,5 %/mois d'incident coûteux) |
-| **Quant** | 7 000 €/mois | attribution, audit | **la décomposition marché / secteur / sélection**, et l'audit du §11.3 |
-| **Assistant·e** | 2 800 €/mois | logistique | +moral collectif, absorbe une partie des imprévus administratifs |
+**Deux colonnes de salaire, et c'est délibéré** : le brut que la personne négocie, et **ce qu'elle
+te coûte vraiment** (+45 % de charges patronales pour un cadre — chiffre réel, §23). Le jeu
+affiche les deux, côte à côte, dès la première embauche. Beaucoup de joueurs découvriront le
+sujet ici avant de le découvrir ailleurs.
+
+| Recrue | Brut mensuel | **Coût employeur** | Ce qu'elle produit | Ce qu'elle **fait apparaître à l'écran** |
+|---|---|---|---|---|
+| **Analyste junior** | 3 800 € | **5 500 €** | 1 note/mois | la fiche société : qualité, valorisation, thèse. **Sans analyste, tu n'as que le prix.** |
+| **Analyste confirmé** | 5 500 € | **8 000 €** | 2 à 3 notes/mois | idem, en mieux et plus vite |
+| **Gérant d'exécution** | 6 500 € | **9 400 €** | passe les ordres | coût d'exécution de **30 bps → 7,5 bps** (`config.py`) ; le carnet d'ordres |
+| **Risk manager** | 5 500 € | **8 000 €** | contrôle a posteriori | volatilité, perte maximale, exposition sectorielle, poids par ligne |
+| **RCCI (conformité)** | 4 500 € | **6 500 €** | contrôle du mandat | l'alerte de dérive **avant** la faute ; divise par 4 le coût d'une inspection. **Obligatoire pour être agréé** (§7.1) |
+| **Relation investisseurs** | 4 500 € + variable | **6 500 €** + variable | reporting, collecte | +40 % de collecte à performance égale ; **sans elle, le reporting te coûte une semaine d'arbitrages par trimestre** |
+| **Back-office** | 3 200 € | **4 600 €** | règlement-livraison | supprime les erreurs de règlement (sinon 0,5 %/mois d'incident coûteux) |
+| **Quant** | 7 000 € | **10 100 €** | attribution, audit | **la décomposition marché / secteur / sélection**, et l'audit du §11.3 |
+| **Assistant·e** | 2 600 € | **3 800 €** | logistique | +moral collectif, absorbe une partie des imprévus administratifs |
+
+⚠️ **Fais le calcul avant d'équilibrer quoi que ce soit.** Cinq personnes ≈ **35 000 €/mois** de
+masse salariale chargée, plus le loyer, plus les données : une maison de cinq coûte autour de
+**500 000 € par an**. À 2 % de frais de gestion, il faut donc **~25 M€ d'encours pour payer
+l'équipe**, et davantage pour dégager un résultat. **C'est la contrainte qui gouverne tout le
+jeu** — et c'est la vraie (§23, marge d'exploitation du secteur : 21,2 % en 2024).
 
 Chacun porte : **compétence 1-5**, **moral 0-100**, **ancienneté**, **salaire**, et **une voix**
 (quelques traits qui font qu'on la reconnaît en trois répliques : le prudent, l'enthousiaste, le
@@ -254,9 +293,35 @@ sec, l'anxieux).
 
 ---
 
-## §7 — Le mandat : ce que le joueur écrit, et qui le tient
+## §7 — Acte I : obtenir le droit d'exister, puis écrire son mandat
 
-Avant le premier mois, cinq clauses choisies dans des listes (pas de champ libre) :
+### §7.1 — L'agrément (le premier acte, et il manquait complètement)
+
+**On ne crée pas une société de gestion en cliquant.** En France, gérer l'argent d'autrui exige
+un **agrément AMF de société de gestion de portefeuille**. Le jeu s'ouvre donc sur un choix réel,
+que tout fondateur de boutique affronte pour de bon :
+
+| Voie | Ce qu'il faut | Délai | Ce qu'on perd |
+|---|---|---|---|
+| **L'agrément en propre** | **125 000 € de capital social libéré en numéraire**, deux dirigeants, un programme d'activité, un RCCI, un dépositaire, un commissaire aux comptes, une RC pro | **3 mois** d'instruction AMF à compter du dossier complet — et il faut le monter avant | ta trésorerie de départ, et des mois |
+| **L'hébergement** chez une société de gestion tierce | un accord, une rétrocession sur les frais | quelques semaines | **une part de tes frais, et le fait de ne pas être maître chez toi** — l'hôte peut te dire non |
+
+*(Les deux existent réellement ; sources en §23.)* **Ce choix d'ouverture est excellent parce
+qu'il n'a pas de bonne réponse** : l'agrément coûte cher et lent mais te rend libre et crédible ;
+l'hébergement te met en marché en trois semaines mais ampute durablement ton économie et te
+soumet à quelqu'un. Les deux voies restent jouables jusqu'au bout, et **passer de l'hébergement à
+l'agrément plus tard est un objectif de milieu de partie** (§11.4).
+
+**Le dossier d'agrément est le tutoriel**, et il ne ressemble pas à un tutoriel : on remplit un
+dossier en répondant à des questions dans la boîte de dialogue — qui dirige, quelle stratégie,
+quels moyens, qui contrôle — et **ces réponses sont le mandat du §7.2**. On apprend le métier en
+le déclarant. L'AMF peut demander des compléments (une manche de plus) si le dossier est bâclé.
+
+**L'adresse se choisit ici aussi** (§5) : elle engage un bail de trois ans et pèse tous les mois.
+
+### §7.2 — Le mandat : ce que le joueur écrit, et qui le tient
+
+Cinq clauses choisies dans des listes (pas de champ libre) :
 
 1. **Univers** — Europe / États-Unis / Monde développé / un des cinq thèmes déjà écrits dans
    `universe.json` (réutilise-les, ils existent).
@@ -413,6 +478,30 @@ factuel, qui dit **laquelle des deux comptabilités a lâché** — et propose d
 gardant le carnet** (§11.1). C'est la seule fin du jeu, et elle n'est jamais une défaite morale :
 c'est le métier.
 
+### §10.5 — Les fonds propres réglementaires : la contrainte qui punit la croissance
+**C'est la meilleure mécanique du jeu, et elle est entièrement réelle.** Une société de gestion
+agréée doit maintenir en permanence des fonds propres au moins égaux au plus élevé de :
+
+- **125 000 €**, majorés de **0,02 % de l'encours au-delà de 250 M€** (plafonné à 10 M€) ;
+- **le quart des frais généraux annuels de l'exercice précédent.**
+
+Plus une **RC professionnelle**, ou des fonds propres supplémentaires d'au moins **0,01 % des
+encours** *(sources en §23)*.
+
+Lis la deuxième ligne deux fois : **chaque embauche augmente tes frais généraux, donc le capital
+que tu dois immobiliser l'année suivante.** Grandir consomme mécaniquement ta propre trésorerie,
+avant même que le premier salaire soit versé. Un joueur qui recrute cinq personnes sur une bonne
+année se retrouve douze mois plus tard en manque de fonds propres — et **c'est exactement ce qui
+arrive dans la vraie vie.**
+
+En cas de manquement : alerte du RCCI (si tu en as un), puis **injonction de l'AMF** — recapitaliser
+sur tes deniers, ou réduire la voilure. Le carnet nomme alors le concept `fonds propres
+réglementaires` et explique pourquoi il existe : il ne protège pas ton fonds, il protège **tes
+clients contre ta faillite à toi**.
+
+*(Voie hébergée : cette contrainte ne s'applique pas — c'est l'hôte qui la porte. C'est le
+principal avantage de l'hébergement, et il ne se révèle qu'ici, quand le joueur agréé souffre.)*
+
 ---
 
 ## §11 — Apprendre, dans un jeu qui ne finit jamais
@@ -467,13 +556,18 @@ Techniquement : le moteur tourne **sans DOM et sans interface** (§13), les 500 
 ### §11.4 — Les paliers (ce qui remplace les niveaux)
 Pas de fin, donc des **seuils d'encours** qui apportent chacun **un pouvoir et un problème** :
 
-| Encours | Ce qui s'ouvre | Ce qui se complique |
-|---|---|---|
-| **5 M€** | frais de gestion viables, 2ᵉ recrutement | le point mort de la société |
-| **25 M€** | clients institutionnels, 2ᵉ étage | reporting exigé, dépositaire plus cher |
-| **100 M€** | notoriété, recrutements de haut niveau | **capacité** : l'impact de marché devient sensible |
-| **500 M€** | pouvoir de négociation | contraintes réglementaires, inspections plus probables |
-| **1 Md€** | ta stratégie ne passe plus à cette taille | **il faut choisir : fermer le fonds, ou accepter de moins bien gérer** |
+Les seuils ci-dessous sont **calés sur l'économie réelle du métier** (§23), pas choisis pour être
+jolis. À 2 % de frais, l'encours × 2 % = ton chiffre d'affaires annuel — garde cette règle de
+trois à l'esprit en lisant la colonne de gauche.
+
+| Encours | Ce que ça rapporte | Ce qui s'ouvre | Ce qui se complique |
+|---|---|---|---|
+| **5 M€** | 100 k€/an | rien : **tu ne te paies pas** | tu vis sur ton capital. C'est la phase la plus dure, et elle est normale |
+| **25 M€** | 500 k€/an | l'équipe de cinq est payée | **le point mort**, tout juste. Un trimestre de rachats et tu repasses dessous |
+| **50 M€** | 1 M€/an | premier vrai résultat, clients institutionnels envisageables | reporting exigé, dépositaire plus cher, premières inspections possibles |
+| **100 M€** | 2 M€/an | notoriété, recrutements de haut niveau, 2ᵉ étage | **la capacité commence à mordre** sur les petites lignes |
+| **250 M€** | 5 M€/an | pouvoir de négociation sur tous tes prestataires | **le seuil réglementaire** : tes fonds propres exigés se majorent de 0,02 % de l'encours au-delà (§10.5) |
+| **1 Md€** | 20 M€/an | tu as gagné, au sens du métier | **ta stratégie ne passe plus cette taille — il faut choisir : fermer le fonds aux souscriptions, ou accepter de moins bien gérer** |
 
 **Le dernier palier est le sommet du jeu** : c'est le moment où « faire grandir le fonds » et
 « bien gérer » deviennent ouvertement incompatibles, et où le joueur doit choisir. Il n'y a pas de
@@ -686,6 +780,9 @@ eux, **si node manque, on l'écrit** (`⚠️ non vérifié (node indisponible)`
 | 21 | **Noms masqués** : liste fixe, sans doublon, attribution déterministe | idem |
 | 22 | **Intégrité du pack** : tout titre de `jeu/marche.json` existe dans `charts/`, aucune valeur non finie, grille strictement croissante, aucun orphelin | même garde que la purge de `charts/` |
 | 23 | **Les scripts inline de `maison.html` se parsent** (`node --check`) | une erreur de syntaxe a déjà mis le site entier en panne (09/08/2026) |
+| 24 | **Fonds propres réglementaires** : le plancher vaut bien `max(125 000 € + 0,02 % de l'encours au-delà de 250 M€, ¼ des frais généraux N−1)` ; une embauche en année N **relève le plancher en N+1** | c'est la mécanique du §10.5, et une formule fausse la transforme en décor |
+| 25 | **Voie hébergée** : aucune exigence de fonds propres, mais la rétrocession s'applique à **chaque** encaissement de frais | les deux voies doivent rester jouables jusqu'au bout, et différentes |
+| 26 | **Point mort** : avec l'équipe de cinq du §6 et un loyer QCA, la société est déficitaire sous ~25 M€ d'encours et bénéficiaire au-dessus | test d'**équilibrage**, pas de règle métier : il protège contre une dérive silencieuse des barèmes |
 
 ---
 
@@ -747,10 +844,12 @@ sauvegarde, le chrome à cinq onglets. Tests 1-3, 5-7, 9, 11-12, 18, 22-23.
 **Critère de fin de lot : on peut jouer trois ans sans s'ennuyer, et fermer l'onglet sans rien perdre.**
 
 ### Lot ② — « La maison »
-Tous les rôles et le déblocage des métriques. Le mandat et la dérive de style. Les meubles et
-l'étage supplémentaire. Les deux comptabilités et la cessation de paiement. Collecte, rachats,
-**vente forcée**. Moral, départs, débauchage. Les six familles d'arbitrages. Le comité
-d'investissement. Tests 4, 8, 10, 19.
+**L'acte I complet** (§7.1) : le choix agrément / hébergement, le dossier AMF comme tutoriel,
+l'adresse et son bail. Tous les rôles et le déblocage des métriques. Le mandat et la dérive de
+style. Les meubles et l'étage supplémentaire. Les deux comptabilités, **les fonds propres
+réglementaires** (§10.5) et la cessation de paiement. Collecte, rachats, **vente forcée**. Moral,
+départs, débauchage. Les six familles d'arbitrages. Le comité d'investissement.
+Tests 4, 8, 10, 19, 24-26.
 
 ### Lot ③ — « Les imprévus »
 Le paquet complet, les atténuateurs, les garde-fous, les cartes de chance. Les paliers d'encours
@@ -783,6 +882,9 @@ Tests 15-17.
 - [ ] Données au démarrage : **< 250 Ko**, mesuré, pas estimé. Aucun appel réseau autre que
       `jeu/marche.json` et la police. Rien ne quitte le navigateur.
 - [ ] **Aucun texte du jeu n'attribue un fait à une entreprise réelle.**
+- [ ] **Tout chiffre du §23.2 porte un `// approximation, non vérifiée` dans le code**, et aucun
+      n'est énoncé en jeu comme un fait du métier.
+- [ ] Les trois premières minutes se déroulent comme au §24.3, chronomètre en main.
 
 ---
 
@@ -806,8 +908,137 @@ réponse, et **écris dans ta livraison ce que tu as tranché** :
 | 5 | Capital de départ | **500 000 €** d'apport personnel + une première collecte de 2 à 5 M€ selon le mandat |
 | 6 | Vitesse : un mois ≈ 40 s à ×1 | à régler à la main au lot ① : c'est le réglage qui décide si le jeu est vivant ou pesant |
 | 7 | Nombre de titres dans le pack | **80** (~90 Ko), jusqu'à 120 si le poids le permet |
+| 8 | Le lot ① démarre-t-il par l'acte I (agrément) ? | **Non** : le lot ① démarre **déjà hébergé**, pour qu'on soit dans le bureau en trente secondes. L'acte I complet arrive au lot ② et devient alors le vrai début de partie |
+| 9 | Quand réalisme et plaisir s'opposent | **On garde le chiffre réel, on comprime le temps** (§24). Les trois mois d'instruction AMF durent une minute ; les 125 000 € en coûtent 125 000 |
 
 **Une dernière chose.** Si tu découvres en chemin qu'une de ces contraintes rend le jeu mauvais,
 **dis-le et argumente** au lieu de la contourner en silence. Ce dépôt documente ses erreurs et ses
 angles morts dans son CHANGELOG ; un désaccord motivé y a plus de valeur qu'une livraison qui fait
 comme si tout allait de soi.
+
+---
+
+## §23 — Le réalisme : ce qui est vérifié, ce qui ne l'est pas
+
+**Ce dépôt distingue partout ce qu'il a mesuré de ce qu'il suppose.** Ce jeu doit faire pareil.
+Les valeurs ci-dessous ont été vérifiées en août 2026 ; celles marquées ⚠️ ne l'ont pas été et
+**doivent porter un commentaire `// approximation, non vérifiée` dans le code**, ne jamais être
+présentées en jeu comme un fait, et être corrigées dès qu'une source sérieuse est trouvée.
+
+### §23.1 — Vérifié
+
+| Fait | Valeur | Source |
+|---|---|---|
+| Capital social minimum d'une SGP | **125 000 €**, libéré en numéraire | [Légifrance, RG AMF art. 317-2](https://www.legifrance.gouv.fr/codes/section_lc/JORFTEXT000000606599/LEGISCTA000027836030/2023-02-12) |
+| Fonds propres exigés | le plus élevé de : **125 000 € + 0,02 % de l'encours au-delà de 250 M€** (plafond 10 M€), ou **¼ des frais généraux de l'exercice précédent** | [Guide AIFM — Société de gestion, AMF](https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_professionnel/Guide%20AIFM%20-%20Societe%20de%20gestion.pdf) · [Légifrance](https://www.legifrance.gouv.fr/codes/section_lc/JORFTEXT000000606599/LEGISCTA000027836030/2023-02-12) |
+| Responsabilité civile professionnelle | RC pro **ou** fonds propres supplémentaires ≥ **0,01 % des encours** | Guide AIFM, AMF |
+| Délai d'instruction de l'agrément | **3 mois** à compter du dépôt du dossier complet | [Procédure d'agrément SGP — instruction AMF DOC-2008-03](https://www.amf-france.org/sites/institutionnel/files/private/2024-04/doc-2008-03_vf17_lancement_rosa_mu.pdf) |
+| Gérer pour compte de tiers **exige** l'agrément | oui ; pour compte propre, non | [AMF — Créer une société de gestion en France](https://www.amf-france.org/en/professionals/management-companies/my-relations-amf/create-investment-management-company-france) |
+| L'hébergement de fonds chez une SGP tierce existe | pratique courante, sociétés dédiées | [Wagram Fund Services](https://www.wagram-fs.com/) |
+| Nombre de SGP entrepreneuriales | **463** fin 2024 (−1 % sur un an) ; 106 filiales d'établissements de crédit (+4 %) | [Chiffres clés 2024 de la gestion d'actifs, AMF](https://www.amf-france.org/sites/institutionnel/files/private/2025-12/chiffres-cles-2024-gestion-actifs.pdf) |
+| Marge d'exploitation du secteur | **21,2 %** en 2024 | Chiffres clés 2024, AMF |
+| Terminal Bloomberg | **31 980 $/an/poste** (2025) ; ~28 320 $ en multi-poste, bail de 2 ans | [Bloomberg Terminal Pricing 2026](https://costbench.com/software/financial-data-terminals/bloomberg-terminal/) |
+| LSEG Workspace (ex-Refinitiv) | ~**22 000 $/an** ; version réduite dès ~3 600 $ | [Comparatif terminaux financiers](https://godeldiscount.com/blog/financial-terminal-pricing-comparison) |
+| Loyer de bureaux — Paris QCA | **~1 080 €/m²/an**, prime 1 230-1 250 | [Cushman & Wakefield, valeurs locatives 2025-2026](https://immobilier.cushmanwakefield.fr/nos-conseils/etude/valeurs-locatives-2025-bureaux-paris-idf-metro-rer) |
+| Loyer — 1ʳᵉ couronne / 2ᵉ couronne | **~450** / **~250 €/m²/an** | idem |
+| Charges patronales, cadre | **40 à 45 %** du brut hors allègements | [L'Expert-Comptable — charges patronales](https://www.l-expert-comptable.com/a/37341-les-charges-sociales-patronales.html) |
+| Salaire — analyste financier | ~**78 k€** brut/an en moyenne ; 3 800 € (débutant) à 8 200 €/mois (senior) | [Estimsalaire — analyste financier](https://estimsalaire.com/metiers/finance/analyste-financier.html) |
+| Salaire — gérant de portefeuille | **45 k€ à 120 k€**/an selon expérience et taille | [Journal du Net — portfolio manager](https://www.journaldunet.com/business/salaire/portfolio-manager/salaire-01184) |
+
+### §23.2 — ⚠️ Non vérifié — à marquer comme approximation dans le code
+
+| Fait supposé | Valeur employée | Ce qu'il faudrait |
+|---|---|---|
+| Frais de dépositaire | 2 à 5 bps de l'encours, avec un minimum forfaitaire | un barème réel ; les prospectus déposés à l'AMF (base GECO) les publient |
+| Valorisateur / administration de fonds | 2 à 4 bps, minimum forfaitaire | idem |
+| Commissaire aux comptes du fonds | 8 000 à 15 000 €/an | un barème réel |
+| Contribution annuelle AMF | proportionnelle à l'encours, avec un plancher | le barème officiel en vigueur |
+| Fréquence des contrôles SPOT / inspections | conditionnée à l'ancienneté et à l'encours | les rapports d'activité de l'AMF donnent le nombre de contrôles par an |
+| Part des SGP déficitaires | non trouvée | elle figure dans les Chiffres clés de l'AMF, dont le PDF n'était pas accessible depuis cet environnement |
+| Prix du mobilier de bureau | 1 200 € le poste, 3 500 € la salle de réunion | sans importance pour le réalisme ; à garder tel quel |
+
+**Règle générale :** un chiffre non vérifié n'a pas le droit d'apparaître dans une phrase du jeu
+qui l'énonce comme un fait du métier. Il peut gouverner l'équilibrage ; il ne peut pas enseigner.
+
+### §23.3 — La tension que ces chiffres créent, et comment la tenir
+
+**Le réalisme financier rend le début de partie très pauvre**, et il faut le savoir avant de
+coder. Un fonds de 5 M€ rapporte 100 000 € par an : **moins qu'un salaire chargé**. Les vraies
+boutiques vivent deux à quatre ans sur leur capital avant le point mort. Un jeu qui simule cela
+au rythme réel est injouable.
+
+**Trois leviers, dans cet ordre, et aucun autre :**
+1. **Comprimer le temps, jamais les montants** (§24). Les années maigres passent en quelques
+   minutes ; leur douleur reste chiffrée juste.
+2. **Ouvrir des revenus précoces qui existent vraiment** : mandats de gestion pour quelques
+   clients privés, conseil, gestion sous délégation. C'est ce que font les vraies boutiques, et
+   ça donne au joueur de quoi tenir sans qu'on lui offre d'argent gratuit.
+3. **L'hébergement** (§7.1) comme voie « facile » assumée : moins de capital immobilisé, mise en
+   marché rapide, au prix d'une rétrocession permanente.
+
+**Ce qu'il ne faut pas faire :** gonfler les frais de gestion, réduire les salaires, inventer une
+collecte initiale généreuse. Ce serait échanger la seule chose que ce jeu a à offrir — **des
+ordres de grandeur transposables** — contre un confort qu'on peut obtenir autrement.
+
+---
+
+## §24 — Le contrat de plaisir
+
+Le réalisme sans plaisir donne un tableur ; le plaisir sans réalisme donne un jeu de plus. Voici
+la règle d'arbitrage, et les trois boucles à tenir.
+
+### §24.1 — La règle
+> **Quand réalisme et plaisir s'opposent, on garde le chiffre et on comprime le temps.**
+
+Les 125 000 € coûtent 125 000 €. Les trois mois d'instruction AMF durent **une minute**. Le point
+mort arrive à 25 M€ d'encours pour de vrai, mais les trois années nécessaires passent en **vingt
+minutes**. On ne ment jamais sur un montant, on ment tout le temps sur la durée — et c'est
+exactement ce que fait n'importe quel bon jeu de gestion.
+
+### §24.2 — Les trois boucles
+- **30 secondes** — *je regarde et je comprends.* Quelqu'un traverse la pièce, un arc de
+  progression se remplit, une feuille monte l'escalier, un chiffre bouge dans le panneau.
+  **Aucune décision requise.** C'est le fond sonore visuel du jeu, et il doit être agréable à
+  regarder sans rien faire.
+- **5 minutes** — *je décide.* Une thèse arrive, une objection la contredit, je tranche dans la
+  boîte de dialogue ; j'achète un poste, j'embauche, je pose un meuble. **Il doit se passer
+  quelque chose qui demande un choix au moins une fois toutes les deux minutes**, sinon on
+  décroche.
+- **1 heure** — *j'ai construit quelque chose.* Un étage de plus, une personne de plus, un palier
+  franchi, une assemblée annuelle traversée, un concept compris qu'on n'avait pas au début.
+
+### §24.3 — Les trois premières minutes (à écrire au mot près, elles décident de tout)
+1. **0 s** — on est déjà dans le bureau, pas dans un menu. Un plateau presque vide, une personne :
+   toi. Le curseur clignote dans la boîte de dialogue.
+2. **20 s** — la première réplique donne **une chose à faire**, pas un cours : *« On a 500 000 €
+   et une pièce vide. Il nous faut quelqu'un qui sache lire un bilan. »*
+3. **60 s** — on achète un poste, on le pose, quelqu'un arrive **et traverse la pièce pour s'y
+   asseoir.** Ce moment-là est le crochet : la dépense a produit un corps qui bouge.
+4. **2 min** — la première note de recherche arrive, la première thèse, le premier choix.
+5. **3 min** — la première ligne en portefeuille, le premier mois qui passe, le premier chiffre
+   qui bouge tout seul.
+
+**Aucun texte pédagogique avant la cinquième minute.** Le carnet se remplit en silence ; on le
+lit quand on veut.
+
+### §24.4 — Les six règles anti-ennui
+1. **Rien n'attend le joueur sans le lui dire.** Une décision en attente met le jeu en pause et
+   la personne concernée est visible à l'écran.
+2. **Jamais deux minutes sans qu'il se passe quelque chose** — même minuscule : une réplique à la
+   machine à café, un cours qui décroche, une candidature spontanée.
+3. **Toute dépense produit un effet visible dans les cinq secondes.** On achète un poste : il
+   apparaît. On embauche : quelqu'un entre par la porte. Un chiffre qui bouge tout seul ne
+   récompense personne.
+4. **Aucun écran ne dépasse trois lignes** avant qu'on puisse agir.
+5. **Le joueur peut toujours dire « je ne fais rien ».** C'est une option, elle est souvent bonne,
+   et le jeu ne la punit jamais par principe.
+6. **L'échec est court et relançable.** La cessation de paiement (§10.4) tient en un écran, garde
+   le carnet, et propose de rouvrir une maison en gardant ce qu'on a compris.
+
+### §24.5 — Ce qui doit faire sourire
+Le jeu est sérieux sur les chiffres et **vivant sur les gens**. Les répliques peuvent avoir de
+l'humeur, du caractère, une pointe de sécheresse — un analyste qui répond « je vous l'avais mis
+en gras » quand vous rouvrez un dossier qu'il avait signalé six mois plus tôt vaut mieux que trois
+paragraphes de pédagogie. **Le fond ne blague jamais, les gens si.** C'est très exactement la
+consigne de ton du dépôt (`GUIDE_redaction_analyses.md` : « plume vivante avec une pointe d'esprit
+pince-sans-rire occasionnelle »), appliquée à des personnages.
