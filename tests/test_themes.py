@@ -167,10 +167,11 @@ _ANCIEN_MONDE = {"LMT", "NOC", "LHX", "RTX", "BA.L", "AIR.PA", "HO.PA",
 check("aucun acteur d'avant la vague n'est dans la liste",
       not (_ANCIEN_MONDE & _et), str(sorted(_ANCIEN_MONDE & _et)))
 # ... et ils doivent RESTER SCORÉS, comme la chaîne quantique du 08/08 et les
-# titres de l'ex-thème financials. Sans cela, quatorze sociétés validées
-# perdraient leur note et quatorze fiches publiées deviendraient orphelines par
-# simple effet de bord d'une décision de périmètre. On retire une liste, pas des
-# sociétés — six d'entre eux n'existaient dans l'univers que par ce thème.
+# titres de l'ex-thème financials. Huit appartiennent à l'univers historique du
+# screener et n'ont besoin de rien ; les six autres n'y existaient QUE par ce
+# thème, et sans la liste ajoutée dans screener.py ils perdraient leur note et
+# leur graphe par simple effet de bord d'une décision de périmètre. On retire
+# une liste, pas des sociétés.
 check("les quatorze sortis restent dans l'univers du screener",
       _ANCIEN_MONDE <= set(screener.UNIVERS),
       str(sorted(_ANCIEN_MONDE - set(screener.UNIVERS))))
