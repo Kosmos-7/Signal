@@ -812,7 +812,10 @@ check("le générateur interdit aussi de chiffrer la décote",
       "SANS EN RECOPIER LE POURCENTAGE"
       in open("generate_analyses.py", encoding="utf-8").read())
 check("le générateur interdit de citer une grandeur non fournie",
-      "n'existent nulle part dans ces données"
+      # La sentinelle porte sur la CLAUSE, pas sur les exemples : c'est « même si
+      # tu as raison » qui fait la règle. Micron l'a prouvé en écrivant un
+      # multiple juste, au bon exercice, qu'aucune donnée ne lui avait donné.
+      "MÊME SI TU AS RAISON"
       in open("generate_analyses.py", encoding="utf-8").read())
 sentinelle("citations chiffrées de la décote vs tendance (recalculée chaque jour)",
            cite_dec, 357, len(ANALYSES) or 1)
@@ -920,6 +923,22 @@ def _hors_tolerance(cle, v, ref):
 # cas vaut infiniment mieux que la relecture humaine qui n'en attrapait aucun.
 import re as _re
 _INTER = r"\s*(?:de |à |:)?\s*(?:<[^>]+>\s*)?"
+# UN NOMBRE FRANÇAIS PORTE UN SÉPARATEUR DE MILLIERS, et l'ignorer ne rate pas le
+# nombre : il en lit un AUTRE. Le motif `\d+[,.]?\d*` posé devant « surcote de
+# 1 300 % » échoue sur « 1 », recule, et capture « 300 » — un chiffre inventé de
+# toutes pièces par le test lui-même. C'est ainsi qu'Advantest est apparu dans un
+# relevé d'écarts comme annonçant 300 % contre 1 336 en fiche, soit 1 036 points
+# de divergence, alors que son texte dit « plus de 1 300 % » et a raison. Le
+# propriétaire a demandé une contre-vérification sur un autre titre ; c'est elle
+# qui a fait tomber celui-ci. Un test qui fabrique ses propres nombres est pire
+# qu'un test absent : il produit des preuves.
+_NB = r"\d[\d   ]*(?:[,.]\d+)?"
+
+
+def _nombre(s):
+    """Valeur d'un nombre écrit à la française, séparateurs de milliers compris."""
+    return float(_re.sub(r"[   ]", "", s).replace(",", "."))
+
 _MOTIFS = [
     # LES TOURNURES COMPTENT AUTANT QUE LES SEUILS, et il a fallu DEUX essais.
     # Le premier jet n'acceptait que « PER forward 15,6x » ; NVIDIA écrit « le PER
@@ -929,12 +948,12 @@ _MOTIFS = [
     # contrôle « registre à jour » qui l'a dit : une entrée inscrite mais jamais
     # constatée signalait que le test ne voyait rien. Un registre qui refuse les
     # fantômes vérifie aussi le test lui-même.
-    (_re.compile(r"PER forward" + _INTER + r"(\d+[,.]?\d*)"),         "forward_pe"),
-    (_re.compile(r"PER pr[ée]visionnel" + _INTER + r"(\d+[,.]?\d*)"), "forward_pe"),
-    (_re.compile(r"PER courant" + _INTER + r"(\d+[,.]?\d*)"),         "trailing_pe"),
-    (_re.compile(r"marge nette (?:de |à )?(\d+[,.]?\d*)\s*%"),        "net_margin_pct"),
+    (_re.compile(r"PER forward" + _INTER + r"(" + _NB + r")"),        "forward_pe"),
+    (_re.compile(r"PER pr[ée]visionnel" + _INTER + r"(" + _NB + r")"), "forward_pe"),
+    (_re.compile(r"PER courant" + _INTER + r"(" + _NB + r")"),         "trailing_pe"),
+    (_re.compile(r"marge nette (?:de |à )?(" + _NB + r")\s*%"),        "net_margin_pct"),
     (_re.compile(r"marge (?:FCF|de flux|du flux|de flux disponible)"
-                 + _INTER + r"(\d+[,.]?\d*)\s*%"),                   "fcf_margin_pct"),
+                 + _INTER + r"(" + _NB + r")\s*%"),                   "fcf_margin_pct"),
     # TROISIÈME ESSAI, 12/08/2026 : LES PÉRIPHRASES. Les quatre tournures
     # ci-dessus nomment le ratio ; la prose ne s'y tient pas. Micron écrivait
     # « le multiple forward autour de 6x » — le mot PER n'y est pas, le test ne
@@ -946,9 +965,9 @@ _MOTIFS = [
     # quinzaine de caractères, à l'exclusion du point (qui finirait la phrase) et
     # de tout chiffre (qui serait le vrai nombre, plus loin).
     (_re.compile(r"multiple (?:forward|pr[ée]visionnel)[^.\d]{0,15}"
-                 r"(?:<[^>]+>\s*)?(\d+[,.]?\d*)\s*[x×]"),            "forward_pe"),
+                 r"(?:<[^>]+>\s*)?(" + _NB + r")\s*[x×]"),            "forward_pe"),
     (_re.compile(r"multiple (?:courant|actuel)[^.\d]{0,15}"
-                 r"(?:<[^>]+>\s*)?(\d+[,.]?\d*)\s*[x×]"),            "trailing_pe"),
+                 r"(?:<[^>]+>\s*)?(" + _NB + r")\s*[x×]"),            "trailing_pe"),
 ]
 _perimes, _lus = {}, 0
 for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
@@ -959,7 +978,7 @@ for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):
     for _rx, _cle in _MOTIFS:
         for _m in _rx.finditer(_txt):
             _lus += 1
-            _v = float(_m.group(1).replace(",", "."))
+            _v = _nombre(_m.group(1))
             _ref = _b.get(_cle)
             if _ref is None or _ref == 0:
                 continue
@@ -988,12 +1007,12 @@ check_connus("aucun multiple cité ne diverge de la fiche", _perimes)
 # relevés). Ce contrôle est la garde, et les entrées ci-dessous disparaîtront au
 # prochain run éditorial : le contrôle « registre à jour » l'exigera.
 _HORS_PERIMETRE = [
-    (_re.compile(r"marges? brutes?[^.]{0,60}?(\d+[,.]?\d*)\s*%", _re.I), "marge brute"),
-    (_re.compile(r"marges? op[ée]rationnelles?[^.]{0,60}?(\d+[,.]?\d*)\s*%", _re.I),
+    (_re.compile(r"marges? brutes?[^.]{0,60}?(" + _NB + r")\s*%", _re.I), "marge brute"),
+    (_re.compile(r"marges? op[ée]rationnelles?[^.]{0,60}?(" + _NB + r")\s*%", _re.I),
      "marge opérationnelle"),
     (_re.compile(r"(?:cours\s*/\s*ventes|prix\s*/\s*ventes|price[- ]to[- ]sales|\bP/S\b)"
-                 r"[^.]{0,40}?(\d+[,.]?\d*)\s*[x×]", _re.I), "cours/ventes"),
-    (_re.compile(r"EV\s*/\s*EBITDA[^.]{0,40}?(\d+[,.]?\d*)", _re.I), "EV/EBITDA"),
+                 r"[^.]{0,40}?(" + _NB + r")\s*[x×]", _re.I), "cours/ventes"),
+    (_re.compile(r"EV\s*/\s*EBITDA[^.]{0,40}?(" + _NB + r")", _re.I), "EV/EBITDA"),
 ]
 _inventes = {}
 for _t, _e in (ANALYSES.items() if isinstance(ANALYSES, dict) else []):

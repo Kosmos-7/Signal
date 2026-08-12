@@ -23,12 +23,27 @@ l'autre déjà en ligne :
   (« un multiple cité doit être surveillé, sinon il dérive sous le texte
   indéfiniment ») existait et protégeait 30 fiches sur 148.
 - Privé de chiffres alors que le guide lui impose de chiffrer tout jugement de
-  valorisation, le modèle en écrivait **de mémoire** : « le multiple forward
-  autour de 6x » (Micron, réel 5,6x), « un ratio cours/ventes de 10,4x relevé
-  début août 2026 selon la presse spécialisée » (Teradyne), « les marges brutes
-  gravitent autour de 50 % » (AMD). Neuf fiches au total. Ce sont les seuls
-  nombres du site qu'aucun contrôle ne peut infirmer : marge brute, marge
-  opérationnelle et cours/ventes ne sont calculés **nulle part** dans ce dépôt.
+  valorisation, le modèle en écrivait **de mémoire** : « un ratio cours/ventes de
+  10,4x relevé début août 2026 selon la presse spécialisée » (Teradyne), « les
+  marges brutes gravitent autour de 50 %, nettement en deçà de Nvidia (~74 %) »
+  (AMD), « la marge brute dépasse structurellement 65 % » (Intuitive Surgical).
+  Neuf fiches. Ce sont les seuls nombres du site qu'aucun contrôle ne pourra
+  jamais infirmer : marge brute, marge opérationnelle et cours/ventes ne sont ni
+  collectés, ni calculés, ni publiés — **zéro occurrence** dans tout le dépôt. Le
+  premier va jusqu'à nommer une source qui n'a jamais été consultée.
+
+**Le cas Micron, qui a failli passer pour une fabrication.** Le propriétaire a
+demandé une contre-vérification sur ce titre, et il avait raison de la demander.
+Sa fiche écrit « le multiple forward autour de 6x les bénéfices attendus pour
+l'exercice 2027 » : aucun multiple, aucun exercice ne figurait dans son prompt —
+vérifié champ par champ sur le `universe.json` du run qui a écrit ce texte — mais
+le nombre est **bon** (5,6x ce jour-là, et encore aujourd'hui) et l'exercice
+**aussi** (2027, ce que `_exercice_forward()` calcule de son côté).
+
+C'est le meilleur exemple de la règle, pas une exception : le critère n'est pas
+d'avoir raison, c'est d'avoir une source. Rien, ce jour-là, n'aurait distingué ce
+6 juste d'un 9 faux. Et le correctif retire au modèle la raison d'improviser —
+son prompt contiendra désormais 5,6x.
 
 Les tests ne pouvaient pas le voir, et le motif mérite d'être écrit : ils
 éprouvaient la fonction de paliers sur des dictionnaires fabriqués, jamais le
@@ -56,8 +71,18 @@ deux.
 le RSI, que le projet a banni pour cette raison exacte le 08/08. Le guide y
 invitait explicitement (« tu PEUX la commenter ») sans qu'elle figure jamais dans
 la signature. Le coût de ce silence, mesuré sur les fiches en ligne : **sur 144
-comparables, 14 publient un écart faux de plus de dix points**, et Advantest
-annonce une surcote de 300 % là où sa fiche en calcule 1 336.
+comparables, 14 publient un écart de plus de dix points** en deux jours de dérive.
+Lumentum annonce une surcote de 552 % là où sa fiche en calcule 497,5, Coherent
+250 % contre 201,7. Ces deux nombres étaient EXACTS le jour où ils ont été écrits.
+
+**La première version de ce relevé accusait Advantest de 1 036 points d'écart, et
+c'était le test qui inventait.** Son motif lisait `\d+[,.]?\d*` devant « surcote
+de 1 300 % », butait sur le « 1 », reculait, et capturait « 300 ». Le texte
+d'Advantest dit « plus de 1 300 % » face à 1 336 en fiche : il a raison. Le
+séparateur de milliers français ne fait pas rater un nombre, il en fait lire un
+autre — et un test qui fabrique ses propres nombres est pire qu'un test absent,
+puisqu'il produit des preuves. C'est la contre-vérification demandée par le
+propriétaire sur un tout autre titre qui a fait tomber celle-ci.
 
 La mettre sous surveillance a été essayé, chiffré, puis écarté : la décote est
 dirigée par le cours et n'est pas bornée (de −1 336 % à +58 % sur l'univers du

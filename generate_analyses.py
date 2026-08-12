@@ -1084,15 +1084,22 @@ Date du jour : {today}.
   au-dessus de sa tendance décennale », pas le nombre. Pour chiffrer l'écart à la
   tendance, le z-score est là pour ça : lui est surveillé au demi-sigma.
 - INTERDIT : citer une grandeur que les données ci-dessus ne te donnent PAS, même
-  si tu crois la connaître. Relevé du 12/08/2026 sur les fiches publiées : « le
-  multiple forward autour de 6x » (Micron), « un ratio cours/ventes de 10,4x selon
-  la presse spécialisée » (Teradyne), « les marges brutes gravitent autour de 50 % »
-  (AMD). Aucun de ces trois nombres ne figurait dans le prompt : ils viennent de ta
-  mémoire d'entraînement. Le premier était juste au dixième près, ce qui est le
-  piège — un chiffre exact aujourd'hui et faux dans six mois, que rien ici ne peut
-  ni vérifier ni rafraîchir, parce que le projet ne calcule pas cette grandeur. La
-  marge BRUTE et le ratio cours/ventes n'existent nulle part dans ces données :
-  n'en écris jamais.
+  si tu crois la connaître, et MÊME SI TU AS RAISON. Relevé du 12/08/2026 sur les
+  fiches publiées : « un ratio cours/ventes de 10,4x (relevé début août 2026 selon
+  la presse spécialisée) » (Teradyne), « les marges brutes gravitent autour de 50 %,
+  nettement en deçà de Nvidia (~74 %) » (AMD), « la marge brute dépasse
+  structurellement 65 % » (Intuitive Surgical). Marge brute, marge opérationnelle et
+  ratio cours/ventes n'existent NULLE PART dans ce projet : ils ne sont ni
+  collectés, ni calculés, ni publiés. Ces nombres viennent de ta mémoire, aucun
+  contrôle ne peut les infirmer, et le premier va jusqu'à nommer une source qui n'a
+  jamais été consultée.
+  LE CAS SUBTIL, ET C'EST LUI QUI FIXE LA RÈGLE : Micron a écrit « le multiple
+  forward autour de 6x les bénéfices attendus pour l'exercice 2027 » sans qu'aucun
+  multiple ni aucun exercice ne figure dans son prompt. Le nombre était BON (5,6x
+  ce jour-là) et l'exercice AUSSI (2027, ce que le projet calcule de son côté).
+  Le critère n'est donc pas d'avoir raison : c'est d'avoir une source. Rien, ce
+  jour-là, n'aurait distingué ce 6 juste d'un 9 faux. Si le chiffre est dans les
+  données ci-dessus, cite-le ; sinon, écris la phrase sans nombre.
 - INTERDIT : le tiret cadratin « — » comme ponctuation. C'est la signature la plus
   reconnaissable d'un texte de machine, et elle décrédibilise la fiche entière.
   Utilise une virgule pour une apposition, deux-points pour une explication, ou
