@@ -1,0 +1,48 @@
+# .github/workflows/sonde-titre.yml
+# Score un titre HORS UNIVERS avec le scoring du dépôt, et publie le résultat
+# brut. Sert à répondre « analyse ce titre selon notre méthode » sans écrire un
+# seul chiffre de mémoire — ce que la doctrine du projet interdit.
+#
+# Elle ne touche à AUCUNE donnée publiée : le titre n'entre dans aucun thème,
+# aucune fiche n'est créée. C'est une lecture, pas une publication.
+#
+# Elle existe comme workflow parce que le proxy de développement bloque Yahoo.
+name: Sonder un titre hors univers
+
+on:
+  workflow_dispatch:
+    inputs:
+      tickers:
+        description: "TICKER,TICKER — symboles Yahoo (ex : REY.MI)"
+        type: string
+        required: true
+
+# Lecture seule : rien n'est commité, le rapport part en artefact.
+permissions:
+  contents: read
+
+jobs:
+  sonde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+      # Passé par l'environnement et non interpolé dans le shell : une entrée de
+      # dispatch ne doit jamais pouvoir injecter de commande (règle du dépôt,
+      # née d'un « | » pris pour un tube dans photos-marques.yml).
+      - name: Sonder
+        env:
+          TICKERS: ${{ inputs.tickers }}
+        run: python tools/sonde_titre.py --tickers "$TICKERS"
+      - name: Publier le rapport
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonde-titre
+          path: sonde_titre.json
+          retention-days: 7
