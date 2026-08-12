@@ -1,482 +1,599 @@
-# Prompt — « La Table » : jeu de simulation d'investissement pour Signal
+# Prompt — « La Maison » : simuler la création et la gestion d'un fonds, pour Signal
 
 > **Comment s'en servir.** Ce fichier est un prompt à coller tel quel dans Claude Code, à la
 > racine du dépôt Signal. Tout ce qui suit s'adresse à l'agent qui va écrire le code.
-> Les sections **§0 à §3** posent l'intention, **§4 à §11** sont des contraintes dures
-> (le code sera refusé s'il les viole), **§12 à §15** disent quand c'est fini.
+> **§0–§3** posent l'intention et l'objet visuel · **§4–§10** décrivent le jeu, mécanique par
+> mécanique · **§11–§16** sont des contraintes dures (le code sera refusé s'il les viole) ·
+> **§17–§20** disent quand c'est fini.
+>
+> ⚠️ **Ce jeu est un gros morceau** — compte 3 000 à 5 000 lignes au total. Il est découpé en
+> **trois lots** (§18) dont **le premier est jouable seul**. Ne commence pas par le milieu.
 
 ---
 
-## §0 — Rôle et posture
+## §0 — Rôle, et ce qu'il faut lire avant d'écrire une ligne
 
-Tu travailles sur **Signal** (https://kosmos-7.github.io/Signal/), un site statique publié sur
-GitHub Pages : screener d'actions, portefeuille fictif piloté par IA, page pédagogique.
-Posture éditoriale du projet, à ne jamais trahir : **neutre, aucune prétention d'alpha**, on
-applique des méthodes publiques avec discipline et **on publie ses erreurs**.
+Tu travailles sur **Signal** (https://kosmos-7.github.io/Signal/) : site statique sur GitHub
+Pages, screener d'actions, portefeuille fictif piloté par IA, page pédagogique. Posture du
+projet, à ne jamais trahir : **neutre, aucune prétention d'alpha**, méthodes publiques
+appliquées avec discipline, **erreurs publiées**.
 
-Tu ajoutes un **cinquième onglet** : un jeu de simulation d'investissement. Fun, éducatif,
-et doté d'une interface qui ne ressemble à aucune autre page du site — tout en restant
-manifestement du même site.
-
-**Lis ces fichiers AVANT d'écrire une ligne** (ils contiennent les règles que tu dois respecter,
-et l'esprit dans lequel elles ont été écrites) :
+Tu ajoutes un **cinquième onglet** : un simulateur où l'on **fonde une société de gestion**,
+qu'on **voit en coupe**, qu'on peuple de petits bonhommes qui travaillent, se déplacent,
+proposent, objectent, et posent des questions auxquelles il faut répondre.
 
 | Fichier | Ce que tu y cherches |
 |---|---|
-| `README.md` | l'architecture, les workflows, la posture |
-| `signal.css` | le design system entier — tokens, chrome, composants réutilisables |
+| `README.md` | architecture, workflows, posture |
+| `signal.css` | le design system entier — tokens, chrome, composants |
 | `actualites.html` (20 Ko) | le gabarit d'une page : `<head>`, chrome, footer, script inline |
 | `tests/test_chrome.py` | **les règles que ta page devra passer** — lis-le en entier |
 | `tests/_sans_bibliotheques.py` | pourquoi un test vert en local peut être rouge en CI |
-| `config.py` | frais de transaction, PFU, seuil minimal d'ordre |
-| `screener.py` §« PAYLOAD GRAPHIQUE » (~l.362) | le format exact de `charts/<TICKER>.json` |
-| `CHANGELOG.md` (les 100 premières lignes) | la **voix** du projet — tu écriras dedans |
-| `.claude/skills/portfolio-analyst/biases.md` | le vocabulaire des biais, que le jeu réutilise |
+| `config.py` | frais de transaction (7,5 bps), PFU (31,4 %), seuil d'ordre (50 €) |
+| `screener.py` §« PAYLOAD GRAPHIQUE » (~l.362) | format exact de `charts/<TICKER>.json` |
+| `universe.json` | `stocks` : 133 titres avec `nom`, `secteur`, `devise` — ta source d'identité |
+| `portfolio.html` | le vocabulaire déjà employé pour un portefeuille fictif |
+| `.claude/skills/portfolio-analyst/` | biais, discipline de vente, frameworks — le fond pédagogique |
+| `CHANGELOG.md` (100 premières lignes) | la **voix** du projet — tu écriras dedans |
 
 ---
 
 ## §1 — Mission en une phrase
 
-Ajouter à Signal **« La Table »** : un simulateur jouable en trente secondes, qui rejoue de
-**vraies séries de prix anonymisées** et qui, à la fin, montre au joueur **ce que ses propres
-gestes lui ont coûté** — frais, impôt, biais — comparé à ne rien faire du tout.
+**« La Maison »** : on fonde une société de gestion, on l'installe dans un immeuble qu'on voit
+**en coupe**, on l'agrandit, on l'équipe de gens qui produisent le travail — et on découvre en
+dix ans que **gérer l'argent des autres est deux métiers à la fois**, qui ne tirent pas dans le
+même sens.
 
 ---
 
-## §2 — Ce que le jeu doit être, et ce qu'il ne doit surtout pas être
+## §2 — La tension centrale (c'est le sujet du jeu, pas un détail d'équilibrage)
 
-**Il doit être :**
-- **honnête** : les prix sont réels, les frais et l'impôt sont ceux de `config.py`, la
-  comparaison « toi vs ne rien faire » est toujours affichée, jamais optionnelle ;
-- **court** : une partie = 2 à 4 minutes, pas de tutoriel de dix écrans, pas de compte, pas
-  d'inscription, pas de backend ;
-- **rejouable** : un défi du jour identique pour tout le monde, un résultat partageable en
-  texte ;
-- **pédagogique par la démonstration, jamais par le sermon** : le jeu ne dit pas « attention au
-  sur-trading », il te montre ta facture de frais à côté de ta performance.
+Le joueur tient **deux comptabilités séparées**, affichées côte à côte en permanence :
 
-**Il ne doit pas être :**
-- ❌ un entraînement au trading ni une promesse de compétence transférable — le message final
-  d'une partie n'est jamais « bien joué, tu as le nez » ;
-- ❌ un casino déguisé : pas d'argent réel, pas d'achat, pas de monnaie premium, pas de
-  mise qui grandit pour « se refaire », pas de récompense à la fréquence de jeu ;
-- ❌ un simulateur de CFD, de turbos ou de levier vendus comme normaux ;
-- ❌ un classement mondial (il n'y a pas de backend, et l'absence de classement est aussi le
-  bon choix : un tableau des scores transforme un exercice de lucidité en concours de chance).
-
-**Le mot « gambling » de la demande est traité ainsi : le hasard est le SUJET du jeu, pas son
-moteur commercial.** Le mode « La Pièce » (§3.2) est une démonstration mathématique du risque
-de ruine — le joueur y perd presque toujours, et il comprend pourquoi. C'est la seule forme
-sous laquelle un site d'information financière peut honnêtement mettre un casino sur une page.
-
----
-
-## §3 — Le concept : « La Table », trois modes
-
-Le nom joue sur le double sens : **la table de marché** et **la table de jeu**. La question que
-la page pose au visiteur, et à laquelle les trois modes répondent, est : *à laquelle des deux
-es-tu assis ?*
-
-### §3.1 — Mode 1 : « Le Rideau » (mode principal)
-
-Rejeu à l'aveugle d'une vraie série de prix.
-
-- Un titre est tiré au sort (graine reproductible, cf. §7.4) parmi ceux de `jeu/index.json`.
-- **Anonymat total pendant la partie** : ni nom, ni ticker, ni secteur, ni devise, ni dates.
-  La série est **rebasée à 100** au premier point (sinon le NVDA ajusté de 1999 à 0,036 $ vend
-  la mèche). L'axe du temps est en **semaines relatives** : `S+1`, `S+2`… jamais « mars 2020 ».
-- **104 semaines**, révélées une par une. À chaque semaine, le joueur ajuste son **exposition**
-  par crans de 25 % (0 / 25 / 50 / 75 / 100 % du capital), ou ne fait rien.
-- Capital de départ : **10 000 €** fictifs. Chaque changement d'exposition est un ordre :
-  **frais de 7,5 bps** appliqués au montant échangé (`config.py`), ordre refusé sous
-  **50 €** (`MIN_TRADE_EUR`).
-- À la fin : liquidation, **PFU de 31,4 %** sur la plus-value nette réalisée (§7.2).
-- **La révélation** (le moment de la partie) :
-  1. l'identité du titre, la vraie période, et son graphe en entier ;
-  2. **trois chiffres côte à côte** : ta performance nette · l'achat-conservation sur la
-     même fenêtre · le cash qui n'a rien fait ;
-  3. ce que tes gestes ont coûté : total des frais, impôt, et **l'écart entre ta performance
-     brute et nette** ;
-  4. **les 26 semaines suivantes**, celles que tu n'as pas jouées — pour que le joueur voie
-     que « avoir eu raison » a une date de péremption ;
-  5. un lien vers la fiche du titre (`index.html`) si le ticker est dans la watchlist.
-
-### §3.2 — Mode 2 : « La Pièce » (le mode hasard)
-
-Une pièce truquée **en ta faveur**, et qui te ruine quand même.
-
-- Règle : à chaque lancer, tu choisis la **fraction `f`** de ton capital que tu engages.
-  Pile → cette fraction fait **+50 %**. Face → elle fait **−40 %**. Pièce équilibrée.
-- L'espérance est **positive** (+5 % par lancer sur la fraction engagée) ; la **médiane** est
-  ruineuse : à `f = 100 %`, la croissance géométrique vaut √(1,5 × 0,6) − 1 ≈ **−5,1 % par
-  lancer**. Le maximum de croissance long terme est atteint à **`f* = 25 %`** (calcul de
-  Kelly : `0,25/(1+0,5f) = 0,20/(1−0,4f)` ⟹ `f = 0,25`). **Ces trois nombres doivent apparaître
-  dans le débriefing du mode, démontrés, pas assénés.**
-- **100 lancers.** Pendant que le joueur joue, **1 000 joueurs fantômes** jouent la même
-  fraction en parallèle, dessinés en nuage translucide derrière sa courbe. On voit en direct
-  la **moyenne** du nuage monter pendant que sa **médiane** s'effondre. C'est la leçon
-  centrale — moyenne d'ensemble ≠ moyenne temporelle — et elle se voit, elle ne se lit pas.
-- Écran de ruine (capital < 1 % du départ) : sobre, factuel, sans humour. Il dit combien de
-  lancers ont suffi, et rappelle que la pièce était favorable.
-- Lien explicite vers `apprendre.html` (sections risque / base rates).
-
-### §3.3 — Mode 3 : « Le Miroir » (le rapport, pas un mode jouable)
-
-Agrège **les parties du joueur** (stockées en `localStorage`, cf. §7.5) et lui renvoie son
-propre portrait, avec le vocabulaire exact de `.claude/skills/portfolio-analyst/biases.md` et
-du champ `biais_detectes` de `portfolio.json` :
-
-| Mesuré | Biais nommé si… |
+| **Le fonds** (l'argent des clients) | **La société de gestion** (ton argent) |
 |---|---|
-| durée moyenne de détention des gagnants ÷ celle des perdants | ratio < 1 → **effet de disposition** |
-| nombre de gestes par partie, croisé avec la performance nette | gestes ↑ et perf ↓ → **sur-trading** (chiffrer les frais) |
-| part des hausses d'exposition qui suivent 3 semaines de hausse | > 60 % → **chasse au momentum** |
-| part des liquidations totales après une baisse hebdo > 8 % | > 50 % → **vente de panique** |
-| taux de survie et perte maximale en mode Pièce | — → **risque de ruine mal dimensionné** |
+| valeur liquidative, performance nette, drawdown | frais encaissés − salaires − loyer − données − audit |
+| ce que gagnent les investisseurs | ce que tu gagnes, toi |
 
-Un biais n'est **jamais** nommé sous 5 parties : le dire sur 2 parties, c'est du bruit
-présenté comme un diagnostic — exactement ce que le projet reproche par ailleurs.
-Affiche le compteur : « 3 parties sur 5 avant le premier diagnostic ».
+Et elles s'opposent. Doubler l'encours double tes revenus **et** dégrade tes rendements (tu ne
+peux plus entrer et sortir sans bouger les prix, tu dois acheter des lignes que tu aimes moins).
+Un an de mauvaise performance ne te ruine pas — mais une vague de rachats, oui, parce que tes
+charges sont fixes et tes revenus proportionnels à un encours qui fond.
 
-### §3.4 — Le Défi du jour
+**On peut donc perdre de deux façons, et il faut les deux à l'écran :** le fonds peut être bon
+pendant que la société fait faillite, et la société peut prospérer sur un fonds médiocre. La
+seconde est le cas le plus fréquent dans la vraie vie ; le jeu doit le rendre atteignable, et
+le débrief doit le nommer. **C'est là que ce jeu appartient à Signal et à aucun autre site.**
 
-- Graine = la date du jour (UTC) → **tout le monde joue la même série**, sans backend.
-- **Une partie par jour** en mode défi (le mode libre reste illimité : la limite est là pour
-  que le défi veuille dire quelque chose, pas pour créer un rendez-vous compulsif).
-- Résultat **partageable en texte** (presse-papier), sans image, sans lien de tracking :
+**Ce n'est pas un jeu où l'on gagne.** Il n'y a pas de score final unique, pas d'étoiles, pas
+de « rang de gérant ». Il y a un bilan à dix ans, à plusieurs colonnes, et une distribution qui
+te dit ce que le hasard seul aurait produit à ta place (§10.4).
+
+---
+
+## §3 — L'objet visuel : la maison en coupe
+
+C'est la partie que tu ne dois pas rendre générique. Signal n'a pas besoin d'un tableau de bord
+de plus. **Toute la page est un immeuble vu en coupe**, dessiné au trait, et tout se passe
+dedans.
+
+### §3.1 — Le dessin
+
+- **Un plan de coupe en fil de fer**, comme un plan d'architecte ou un schéma de HUD : traits
+  fins `--ac` et `--line`, aucun aplat, aucune texture, aucun pixel-art coloré. Les rayures de
+  balayage de `.scan` passent par-dessus. Le résultat doit ressembler à **une page de Signal qui
+  aurait pris du volume**, jamais à un jeu mobile posé sur un site de finance.
+- **`<canvas>` 2D**, rendu à la main. Pas de bibliothèque, pas de moteur de jeu, pas de sprites
+  bitmap. Les meubles et les gens sont des tracés (`stroke`), donc ils héritent de la couleur —
+  exactement le raisonnement déjà écrit dans `signal.css` pour les icônes de nav.
+- **Résolution des figures : ~16 px de haut.** Une tête (cercle r≈2,5), un corps, deux jambes,
+  deux bras. L'animation de marche est un balancement, pas un cycle d'images. C'est assez pour
+  qu'on lise « quelqu'un traverse le plateau », et c'est tout ce qu'il faut.
+
+### §3.2 — Les étages, qui sont la progression
+
+L'immeuble **pousse vers le haut** au fur et à mesure. Chaque étage ouvert coûte un loyer
+mensuel et abrite une fonction :
 
 ```
-Signal · La Table — Défi du 12/08
-S1 ▁▂▃▅▇▇▅▃  net +4,2 %   ne rien faire +11,8 %
-▲▬▬▼▲▬▬▬  6 gestes · 34 € de frais
+   ┌──────────────────────────────┐
+   │  R+4  Ton bureau             │  toi · le mandat · les arbitrages
+   ├──────────────────────────────┤
+   │  R+3  Risque & conformité    │  débloque : volatilité, drawdown, contrôle du mandat
+   ├──────────────────────────────┤
+   │  R+2  La table               │  exécution des ordres · le carnet
+   ├──────────────────────────────┤
+   │  R+1  La recherche           │  les notes sur les sociétés
+   ├──────────────────────────────┤
+   │  RDC  Accueil & relation LP  │  souscriptions, rachats, reporting
+   └──────────────────────────────┘
+      sous-sol  Back-office        règlement-livraison, réconciliation
 ```
 
----
+Au démarrage : **le RDC et rien d'autre**, deux chaises, une plante, et toi. Un immeuble
+presque vide qui se remplit est la meilleure barre de progression jamais inventée — n'en ajoute
+pas une deuxième.
 
-## §4 — L'interface singulière : **le ruban**
+### §3.3 — Ce qui bouge
 
-C'est la partie que tu ne dois pas rendre générique. Signal n'a pas besoin d'un dashboard de
-plus : la page entière est **un seul objet**, un ruban horizontal, et tout se joue dessus.
+- Chaque bonhomme suit une **machine à états** : `au poste` · `en marche vers X` ·
+  `en réunion` · `à la machine à café` · `t'attend devant ton bureau` · `absent`.
+- Les déplacements suivent des **rails fixes** (couloirs + une cage d'escalier), avec des
+  points de passage. **Pas de recherche de chemin** : c'est un immeuble, pas un labyrinthe.
+- Un travail en cours = **un petit arc de progression** au-dessus du poste (le vocabulaire de
+  `.ring`, en miniature). Un travail fini = **une feuille qui monte l'escalier** jusqu'à ton
+  bureau. On doit pouvoir comprendre l'état de la boîte **sans lire un seul chiffre**.
+- Quand quelqu'un a une question pour toi, il **se lève, traverse, monte, et attend**. Une
+  bulle discrète au-dessus de la tête. Tant que tu ne réponds pas, **il attend et ne produit
+  rien** — c'est le coût de l'indécision, et il est visible, pas écrit.
 
-**Le ruban**
-- Une bande pleine largeur, ~50 vh, fond sombre, **rayures de balayage** héritées de `.scan`.
-- Le prix **arrive par la droite**, une semaine par tic, et le ruban **défile vers la gauche**,
-  comme un sismographe. Fenêtre glissante de ~60 semaines ; ce qui sort à gauche est perdu de
-  vue (c'est voulu : le joueur doit décider avec ce qu'il voit, pas relire l'historique).
-- **Deux traces sur la même bande** : le prix (trait fin, `--text2`) et **la valeur du
-  portefeuille du joueur** (trait `--ac`, avec la lueur du design system). Elles partent du même
-  point : l'écart entre les deux EST le jeu.
-- L'**exposition** est une aire ombrée sous la trace du joueur — 0 % : rien ; 100 % : pleine.
-  Le joueur voit son engagement, il n'a pas à s'en souvenir.
-- Au bord droit, un **curseur vertical** avec la pastille clignotante du design system
-  (`.ring .rl::before`).
-- Sous le ruban, **une seule ligne de console** en `--mono`, factuelle, mise à jour à chaque
-  tic : `S+42 · exposition 50 % · frais payés 3,20 € · latent +4,1 %`.
-- **Aucune fenêtre modale pendant la partie.** Rien ne recouvre le ruban.
+### §3.4 — Le panneau
 
-**Les gestes**
-- Clavier d'abord : `A` monter d'un cran · `V` descendre d'un cran · `0` tout vendre ·
-  `4` tout acheter · `Espace` pause/reprise · `→` avancer d'une semaine en pause · `R` rejouer.
-- Tactile : trois grandes cibles sous le ruban (`−`, `pause`, `+`) d'au moins **44 × 44 px**,
-  plus un glissement vertical sur le ruban pour changer l'exposition.
-- Défilement automatique à **1,2 s par semaine** par défaut, mise en pause instantanée.
-  Le rythme fait la tension : ne le remplace pas par un bouton « suivant » à cliquer 104 fois.
+À droite (en bas sur mobile), **un seul panneau contextuel** en typo Signal :
+le mois en cours, les deux comptabilités du §2, et le détail de ce qu'on a cliqué (une personne,
+un poste, une ligne du portefeuille, un événement). Rien d'autre. **Aucune fenêtre modale**
+sauf pour un arbitrage qui exige une réponse — et alors elle est sobre, centrée, et ne recouvre
+jamais l'immeuble en entier.
 
-**La révélation** (au lieu d'un écran de résultats classique)
-- **Le ruban se rembobine** en accéléré vers la gauche, puis **se déroule en entier**, compressé
-  pour tenir à l'écran ; **tes gestes apparaissent en place**, annotés (`▲ +25 %`, `▼ tout`),
-  avec le prix auquel ils sont partis. Le nom du titre s'écrit alors en haut, en `--serif`.
-- Les chiffres du §3.1 s'empilent **sous** le ruban, dans les composants existants
-  (`.metrics`, `.meter`, `.ring`) — c'est là que la page redevient du Signal pur.
+### §3.5 — Le temps
 
-**`prefers-reduced-motion`** : pas de défilement animé (le ruban avance par pas discrets), pas
-de pulsation de lueur, pas de rembobinage — la révélation s'affiche d'un coup. `signal-fx.js`
-respecte déjà ce réglage : fais pareil, ce n'est pas négociable.
+- **1 tic = 1 mois** (c'est le pas de la donnée réelle, cf. §9). Vitesses : **pause**, **×1**
+  (1 mois ≈ 2 s), **×3**. Barre d'espace = pause. Le jeu se met **automatiquement en pause**
+  quand quelqu'un attend une décision depuis plus d'un mois.
+- **Trimestre** = reporting aux investisseurs. **Année** = cristallisation des frais de
+  performance, entretiens, revalorisation des salaires, bilan de la société.
+- Une partie = **120 mois (10 ans)**, soit ~25 à 40 minutes avec les pauses.
 
 ---
 
-## §5 — Contraintes techniques dures
+## §4 — Les bonhommes : chacun débloque un métier ET un chiffre
 
-1. **Site statique, zéro backend, zéro build.** HTML + CSS + JavaScript classique (pas de
-   modules ES imposés, pas de bundler, pas de framework, pas de TypeScript).
-2. **Aucune dépendance externe au runtime.** Pas de CDN, pas de bibliothèque de graphes.
-   Seule exception, déjà en place sur les quatre onglets : la police Inter de Google Fonts,
-   avec **exactement la même requête** que les autres pages (un test le vérifie).
-3. **Le rendu est fait main** en `<canvas>` (le ruban défile : c'est le bon outil) ou en SVG.
-   `signal-fx.js` montre le niveau de canvas attendu dans ce dépôt.
-4. **Budget de poids** : la page doit être jouable après avoir téléchargé **moins de 150 Ko**
-   de données. Donc : **ne charge jamais** `analyses.json` (956 Ko), ni `watchlist.json`
-   (220 Ko), ni tout `charts/` (3,9 Mo). Tu charges **un manifeste léger** (§6) puis
-   **un seul** `charts/<TICKER>.json` par partie, à la demande — c'est déjà le motif d'`index.html`.
-5. **Deux fichiers de code**, pas un :
-   - `jeu-moteur.js` — **logique pure, zéro DOM, zéro `fetch`** : tirage, exécution des ordres,
-     frais, impôt, statistiques, détection de biais, format de partage. Se termine par
-     `if (typeof module !== 'undefined') module.exports = JEU;` pour être **testable sous node**.
-   - `jeu.html` — le gabarit + le script inline de rendu et d'entrées.
-   Cette séparation n'est pas cosmétique : elle est ce qui rend §11 possible.
-6. **Pas de fuite du futur.** La boucle de rendu ne doit **jamais** avoir accès au tableau
-   complet de la série. Le moteur expose une fonction qui **consomme** la série et ne rend que
-   la tranche `[0, i]` ; le rendu ne reçoit que cette tranche. Un test l'éprouve pour de vrai (§11).
-7. **Compatibilité** : navigateurs à jour, mobile inclus. Pas de `Date.now()` dans les calculs
-   de partie autre que la graine (§7.4) — sinon une partie n'est plus reproductible.
+**La règle de conception la plus importante du jeu : un chiffre n'existe à l'écran que si
+quelqu'un, dans la maison, le calcule.** Tant que tu n'as pas de risk manager, tu ne sais pas
+quelle est ta volatilité — pas « elle est masquée », **elle n'est pas là**. C'est la meilleure
+leçon d'organisation qu'un jeu de gestion puisse donner, et c'est ta mécanique de progression.
+
+| Recrue | Salaire indicatif | Ce qu'elle produit | Ce qu'elle **débloque à l'écran** |
+|---|---|---|---|
+| **Analyste** | 4 500 €/mois | 1 à 3 notes par mois selon compétence | la fiche société : qualité, valorisation, thèse. **Sans analyste, tu n'as que le prix.** |
+| **Gérant d'exécution** | 5 500 €/mois | passe les ordres | le coût d'exécution tombe de **30 bps à 7,5 bps** (`config.py`) ; le carnet d'ordres |
+| **Risk manager** | 5 000 €/mois | contrôle a posteriori | volatilité, drawdown, exposition sectorielle, poids max |
+| **RCCI (conformité)** | 4 000 €/mois | contrôle du mandat | l'alerte de dérive **avant** la faute ; divise par 4 le coût d'une inspection |
+| **Relation investisseurs** | 4 500 € + variable | reporting, collecte | +40 % de collecte à performance égale ; **sans elle, rédiger le reporting te coûte un mois d'arbitrages** |
+| **Back-office** | 3 500 €/mois | règlement-livraison | supprime les erreurs de règlement (sinon 0,5 %/mois de chance d'un incident coûteux) |
+| **Quant** (tardif) | 7 000 €/mois | attribution de performance | **la décomposition bêta / secteur / sélection** — cf. §10.3 |
+
+Chaque personne porte : **compétence (1-5)**, **moral (0-100)**, **ancienneté**, **salaire**.
+
+- Le moral baisse si on la surcharge, si on la contredit systématiquement, si les augmentations
+  ne viennent pas, ou si le fonds va mal et qu'on ne lui dit rien.
+- Sous 25 de moral, elle peut **partir** — et emporter la métrique qu'elle débloquait. Voir
+  disparaître son propre drawdown de l'écran parce que le risk manager a démissionné est une
+  leçon que personne n'oublie.
+- Un concurrent peut **débaucher** un bon élément : tu surenchéris ou tu le laisses partir.
+
+**Recruter n'est pas gratuit, et le jeu ne le laisse pas croire :** un mois de recherche, une
+prime d'arrivée, trois mois avant la pleine productivité. Embaucher au pire moment (après une
+grosse collecte, juste avant un retournement) est l'erreur classique du métier, et le jeu doit
+permettre de la commettre.
 
 ---
 
-## §6 — Contrat de données
+## §5 — La boucle : ce que le joueur fait vraiment
 
-### Ce qui existe déjà
+Chaque mois, dans l'ordre où ça arrive à l'écran :
 
-`charts/<TICKER>.json` (150 fichiers) contient, entre autres :
+1. **Le marché bouge** (données réelles, §9). Le portefeuille se revalorise. La ligne de vie du
+   fonds avance d'un pas.
+2. **Les gens produisent** : notes de recherche, contrôles de risque, reporting, exécution.
+3. **Des gens montent te voir** avec des propositions, des objections, des questions (§6).
+4. **Tu arbitres** : accepter/refuser une thèse, dimensionner une ligne, alléger, recruter,
+   licencier, ouvrir un étage, changer la grille de frais, accepter ou refuser de l'argent.
+5. **Les flux tombent** : souscriptions, rachats, frais prélevés, salaires payés.
+6. **Trimestre / année** : reporting, cristallisation, entretiens, bilan.
+
+**Ce que le joueur ne fait jamais** : cliquer sur des boutons « acheter » toute la journée. Le
+jeu ne récompense pas la fréquence. Un mois où l'on ne fait rien est un mois **valide et
+souvent bon**, et le débrief final doit pouvoir le dire.
+
+---
+
+## §6 — Le mandat, et les questions qu'on te pose
+
+### §6.1 — Le mandat, écrit à la création
+
+Avant le premier mois, le joueur rédige son mandat en **cinq clauses**, choisies dans des listes
+(pas de champ libre) :
+
+1. **Univers** — Europe / États-Unis / Monde développé / un thème du site (`universe.json` en
+   propose déjà cinq, réutilise-les).
+2. **Concentration** — nombre maximum de lignes (8 / 15 / 30) et poids maximum par ligne
+   (5 / 10 / 20 %).
+3. **Style** — qualité-croissance / décote / momentum / mixte. Le style **filtre les thèses**
+   que tes analystes te proposent : un fonds décote ne verra pas passer les mêmes dossiers.
+4. **Liquidité** — préavis de rachat (aucun / 30 jours / 90 jours) et poche de trésorerie
+   minimale (0 / 5 / 10 %). **Ce choix décide de ta survie en cas de panique** ; le joueur ne
+   le comprendra qu'au premier choc, et c'est exactement le but.
+5. **Grille de frais** — gestion 0 / 1 / 1,5 / 2 % et performance 0 / 10 / 20 % avec
+   *high-water mark*. Une grille chère finance la maison mais freine la collecte et pèse sur la
+   performance nette affichée. Arbitrage central, posé dès la première minute.
+
+**Le mandat te contraint et te protège.** Les investisseurs pardonnent une mauvaise année si tu
+es resté fidèle à ce qui est écrit ; ils partent si tu as dérivé, **même en gagnant** — c'est
+la *style drift*, et c'est une mécanique de premier plan, pas une note de bas de page.
+Changer le mandat en cours de route est possible, coûte de la confiance, et doit être justifié
+devant les LP au trimestre suivant.
+
+### §6.2 — Les questions
+
+Elles arrivent **portées par quelqu'un**, jamais par une notification anonyme. Six familles :
+
+| Famille | Qui | Exemple | Ce qu'on apprend |
+|---|---|---|---|
+| **Thèse** | analyste | « J'ai une ligne pour vous : marge à 34 %, dette nulle, le titre a baissé de 22 % sur un trimestre. On entre à combien ? » | dimensionner, prix ≠ valeur |
+| **Objection** | risk manager | « Trois lignes sur quatre sont dans le même secteur. Le mandat dit 25 %, on est à 41 %. » | corrélation, concentration |
+| **Mandat** | RCCI | « Ce dossier est hors univers. On l'écarte, ou on modifie le mandat ? » | dérive de style, discipline |
+| **Client** | RI | « Un investisseur menace de sortir : il ne comprend pas pourquoi on a raté la hausse. » | pression court terme, horizon |
+| **Équipe** | n'importe qui | « On me propose 30 % de plus ailleurs. » | coût du capital humain |
+| **Agence** | toi-même | « Un institutionnel apporte 50 M€. Notre stratégie ne passe pas cette taille. » | capacité, conflit d'intérêt |
+
+**Règles de rédaction des arbitrages, non négociables :**
+- **2 à 4 options, aucune évidente.** Si une option est objectivement meilleure, ce n'est pas un
+  arbitrage, c'est un quiz — supprime-la ou dégrade-la.
+- Chaque option affiche **son raisonnement**, pas son résultat. Jamais « +5 % de performance ».
+- **L'effet est en partie différé et bruité** : une bonne décision peut mal finir, et le jeu doit
+  parfois le faire. C'est le cœur de la pédagogie (Mauboussin, base rates) et le débrief final
+  l'expliquera (§10.4). **Ne triche pas dans l'autre sens non plus : ne fais pas systématiquement
+  échouer le joueur pour donner une leçon.** Le hasard est un vrai hasard, à graine reproductible.
+- Chaque option porte une **étiquette de concept** (`concentration`, `liquidité`, `frais`,
+  `dérive`, `capacité`, `biais_disposition`…) qui alimente le bilan.
+
+---
+
+## §7 — Les événements
+
+Trois portées, et **une interdiction absolue**.
+
+- **Portée marché** — les vrais chocs, dérivés **des données réelles** : « le marché a perdu
+  14 % en un mois », « ton secteur dominant a doublé en un an ». On **constate** ce que la série
+  a fait ; on ne l'invente pas.
+- **Portée fonds / société** — rachats en chaîne, gros investisseur qui arrive, inspection AMF,
+  incident de règlement, augmentation de loyer, démission, débauchage, procès d'un LP mécontent.
+  Générés par le moteur, à graine reproductible, avec des conditions de déclenchement lisibles
+  (ex. : une inspection devient possible après 3 ans d'existence ou 50 M€ d'encours).
+- **Portée ligne** — **uniquement des faits calculés** à partir de la série : variation, perte
+  maximale, poids devenu excessif, ligne devenue illiquide au vu de sa taille.
+
+🚫 **INTERDIT : fabriquer une actualité d'entreprise.** Les sociétés du jeu portent des **noms
+masqués** (§9.3) mais leurs **cours sont réels**, et l'identité est révélée à la fin. Inventer
+« cette société est visée par une enquête » reviendrait donc à coller, en différé, une fausse
+nouvelle sur une entreprise cotée réelle. **Aucun texte d'événement ne décrit ce qu'a fait une
+société : il ne décrit que ce que son cours a fait.** Un test vérifie cette règle (§16).
+
+---
+
+## §8 — Apprendre, progressivement
+
+Le jeu ne fait **jamais** de leçon avant l'expérience. L'ordre est : *ça t'arrive → tu réagis →
+on nomme ce qui vient de se passer → tu peux aller lire*.
+
+- **Le carnet** (un onglet du panneau) se remplit tout seul : chaque concept **rencontré** y
+  entre, daté, avec **la situation exacte de TA partie** qui l'a déclenché, une explication de
+  cinq lignes, et un lien vers la section correspondante d'`apprendre.html`
+  (ancres `#s1`…`#s12` — **vérifie l'ancre, ne la devine pas**).
+- Concepts à couvrir sur une partie complète, dans cet ordre d'apparition naturel :
+  `valeur liquidative` · `frais de gestion et effet de traînée` · `high-water mark` ·
+  `écart brut/net` · `diversification et corrélation` · `taille de position` ·
+  `drawdown` · `volatilité` · `illiquidité et rachats` · `vente forcée` ·
+  `dérive de style` · `bêta vs alpha` · `capacité d'une stratégie` ·
+  `conflit d'intérêt` · `biais de disposition` · `chance vs compétence`.
+- **Aucun texte pédagogique ne bloque le jeu.** Il s'ajoute au carnet, une pastille signale
+  qu'il y a du neuf, et c'est tout.
+
+---
+
+## §9 — Le modèle financier (à écrire juste, et à tester)
+
+### §9.1 — La valeur liquidative
+Parts de 100 € à l'ouverture. VL = (valeur des lignes + trésorerie − dettes) ÷ nombre de parts.
+Souscriptions et rachats se font **à la VL du mois**, en créant/annulant des parts — jamais en
+diluant les porteurs existants. **La performance affichée est celle de la part, pas de l'encours** :
+un fonds dont l'encours triple pendant que la part baisse est une situation banale, et le jeu
+doit pouvoir la produire.
+
+### §9.2 — Les frais
+- **Gestion** : taux annuel choisi, prélevé **mensuellement au prorata** sur l'encours moyen.
+  Il sort du fonds et entre dans la société : la même ligne, deux signes.
+- **Performance** : taux choisi, sur la hausse de la VL **au-dessus du plus haut historique**
+  (*high-water mark*), **cristallisée en fin d'année**. Après une perte, aucun frais de
+  performance tant que le plus haut n'est pas repassé. À implémenter exactement — c'est le point
+  où toutes les implémentations naïves se trompent, et c'est un test dédié.
+- **Transaction** : 7,5 bps par sens avec un gérant d'exécution, **30 bps sans** (§4).
+  Ordre refusé sous 50 € (`MIN_TRADE_EUR`).
+- **Impact de marché** : au-delà de 2 % de l'encours sur une ligne peu liquide, ajoute un coût
+  croissant. C'est ce qui rend la capacité (§6.2 « agence ») réelle plutôt que déclarative.
+- **Fiscalité** : le fonds n'est pas imposé sur ses plus-values ; **la société de gestion est
+  imposée sur son résultat** (25 %). Ne mélange pas les deux. Le PFU de `config.py` concerne le
+  portefeuille personnel du site, **pas ce jeu** — ne le recopie pas ici par réflexe.
+
+### §9.3 — La collecte et les rachats
+- La collecte suit la performance **avec deux trimestres de retard** — les flux suivent, ils
+  n'anticipent pas. Modulée par : ancienneté, présence d'un RI, régularité, fidélité au mandat.
+- Les rachats se déclenchent sur : drawdown > seuil, deux trimestres négatifs de suite, dérive
+  constatée, événement de marché, départ d'une figure connue de la maison.
+- **Si la trésorerie ne couvre pas les rachats, le moteur vend — de force, au cours du mois, en
+  commençant par le plus liquide.** Le joueur ne choisit pas. Cette ligne de code est la leçon
+  la plus chère du jeu : c'est la raison pour laquelle la clause de liquidité du §6.1 existait.
+
+### §9.4 — La société de gestion
+Recettes = frais encaissés. Charges = salaires (+ ~45 % de charges sociales) + loyer par étage
++ données + audit/dépositaire (fixe) + commissariat. **Trésorerie négative deux mois de suite =
+cessation de paiement**, fin de partie, avec un bilan qui explique laquelle des deux
+comptabilités a lâché.
+
+---
+
+## §10 — La fin de partie : le seul moment où le jeu parle franchement
+
+À 120 mois (ou à la faillite), un bilan en quatre écrans, dans l'ordre :
+
+### §10.1 — Les deux colonnes
+Ce que les investisseurs ont gagné (VL, net de tout) · ce que tu as gagné (résultat cumulé de
+la société). Plus **le rapport entre les deux** : combien d'euros de valeur créée pour un euro
+encaissé. La phrase peut être dure, elle doit rester factuelle.
+
+### §10.2 — Brut, net, indice
+Performance brute · nette de frais · celle d'un indice large sur la même période, et **l'écart
+imputable aux seuls frais**. Trois barres, la grammaire de couleur du §12, aucun commentaire.
+
+### §10.3 — L'attribution *(débloquée seulement si tu as embauché un quant)*
+Décomposition de la performance en **marché (bêta) / secteur / sélection / inexpliqué**.
+Pour beaucoup de parties, la sélection sera petite et le marché énorme. **Ne l'adoucis pas.**
+Si le joueur n'a jamais embauché de quant, l'écran affiche à la place : *« Personne ici n'a
+jamais calculé d'où venait la performance. C'était une décision, elle a un prix : celui de ne
+pas savoir. »*
+
+### §10.4 — Le contrefactuel (le clou)
+Le moteur **rejoue 500 parties** sur exactement le même marché, le même mandat et les mêmes
+événements, en décidant **au hasard** à chaque arbitrage. Il place le joueur dans la
+distribution obtenue :
+
+> *« Ta part a fait +47 % en dix ans. 500 gérants décidant au hasard avec ton mandat ont fait
+> entre −18 % et +96 %, médiane +39 %. Tu es au 61ᵉ centile. Sur dix ans et 43 décisions, cet
+> écart ne suffit pas à distinguer la compétence de la chance. »*
+
+C'est la conclusion la plus honnête qu'un jeu d'investissement puisse offrir, et c'est
+littéralement la posture affichée du site. **Elle n'est pas optionnelle.**
+Techniquement : le moteur est **sans DOM et rejouable sans interface** (§11), les 500 parties
+tournent **par tranches** avec une barre de progression — le calcul lui-même est un moment de
+jeu (« on rejoue 500 gérants… »).
+
+---
+
+## §11 — Contraintes techniques dures
+
+1. **Statique, zéro backend, zéro build.** HTML + CSS + JavaScript classique. Pas de framework,
+   pas de bundler, pas de TypeScript, pas de moteur de jeu, pas de CDN. Seule exception, déjà en
+   place sur les quatre onglets : la police Inter, avec **exactement la même requête**.
+2. **Trois fichiers de code**, et cette découpe n'est pas cosmétique — c'est ce qui rend §10.4
+   et §16 possibles :
+   - `maison-moteur.js` — **la simulation entière, sans DOM, sans `fetch`, sans horloge** :
+     marché, portefeuille, frais, flux, équipe, événements, arbitrages, bilan. Se termine par
+     `if (typeof module !== 'undefined') module.exports = MAISON;` pour tourner **sous node**.
+     Doit pouvoir jouer 500 parties de 120 mois **en moins de 2 secondes**.
+   - `maison-rendu.js` — le canvas : immeuble, mobilier, bonhommes, rails, animations. Ne
+     décide rien ; il **lit** un état et le dessine.
+   - `maison.html` — le gabarit, le panneau, les entrées clavier/tactile, la colle.
+3. **Le moteur est déterministe.** Générateur pseudo-aléatoire **à graine, écrit à la main**
+   (mulberry32, ~5 lignes). **`Math.random()` est interdit dans le moteur** et dans le rendu (les
+   scintillements décoratifs inclus : un décor non reproductible casse les captures de test).
+   Une partie = `graine + suite des décisions`. `maison.html#/p/<graine>` rejoue le même monde.
+4. **Aucune fuite du futur** : la boucle ne reçoit que la tranche `[0, mois]` de la matrice de
+   marché. Testé (§16).
+5. **Budget de données : < 250 Ko** pour démarrer une partie. Donc **ne charge jamais**
+   `analyses.json` (956 Ko), ni `watchlist.json` (220 Ko), ni les 150 `charts/*.json` (3,9 Mo).
+6. **Budget d'image : 60 fps sur un portable de 2020**, jusqu'à 25 bonhommes. Un seul `<canvas>`,
+   un seul `requestAnimationFrame`, aucun DOM créé dans la boucle de rendu. Le rendu se met en
+   **pause quand l'onglet est caché**.
+7. **Sauvegarde** : `localStorage`, clé unique `signal.maison.v1`, objet **versionné**
+   (`{v:1,…}`), sauvegarde automatique **à chaque trimestre** + bouton manuel, **une seule partie
+   en cours** + les bilans des 20 dernières terminées. **Tout accès enveloppé dans un
+   `try/catch`** (en navigation privée Safari, `setItem` lève, et le jeu doit rester jouable
+   sans mémoire). Bouton **« effacer mes données »** visible. Rien ne quitte le navigateur.
+
+---
+
+## §12 — Le contrat de données
+
+### §12.1 — Ce qui existe
+`charts/<TICKER>.json` (150 fichiers, ~24 Ko pièce). Mesuré sur le dépôt :
+**segment hebdomadaire = 104 points max** (730 jours), **segment mensuel : médiane 284 points,
+jusqu'à 752**. Le jeu se joue **au mois** : c'est le segment mensuel qui l'alimente, et il est
+largement assez profond pour une partie de 120 mois.
+
+Trois pièges, tous documentés dans `screener.py` (~l.362) — relis-le :
+- l'abscisse est un **mois flottant** (`année×12 + (mois−1) + (jour−1)/31`) ;
+- l'échantillonnage est **mixte** (hebdo sur 730 j, mensuel avant) : sépare les deux par l'écart
+  d'abscisse (≈ 0,23 entre deux points hebdo, ≈ 1,0 entre deux mensuels), ne suppose jamais un
+  pas régulier ;
+- les cours sont **ajustés** (splits, dividendes) et arrondis à 3 chiffres significatifs sous 1.
+
+`universe.json` → `stocks` : 133 tickers avec `nom`, `secteur`, `devise`. C'est ta source
+d'identité pour la révélation finale.
+
+### §12.2 — Ce que tu ajoutes : `jeu/marche.json`
+Un **pack de marché compact**, produit par `tools/jeu_marche.py` :
 
 ```jsonc
 {
-  "points": [[23988.97, 0.0362], ...],   // [abscisse, cours de clôture AJUSTÉ]
-  "mm21": [...], "mm200": [...],
-  "fonda": { "devise": "USD", "an": [...], "tr": [...] },
-  "breakdown": { ... }
-}
-```
-
-**Trois pièges, tous documentés dans `screener.py` (~l.362) — relis-le :**
-- L'abscisse est un **mois flottant** : `année × 12 + (mois − 1) + (jour − 1)/31`.
-  Donc `24319.32` ≈ août 2026. Convertis-la, ne l'invente pas.
-- L'échantillonnage est **mixte** : **hebdomadaire** sur les 730 derniers jours,
-  **mensuel** au-delà. Le mode Rideau se joue à la semaine → **n'utilise que le segment
-  hebdomadaire**, détecté par l'écart d'abscisse (≈ 0,23 entre deux points hebdo, ≈ 1,0 entre
-  deux points mensuels). Ne suppose jamais un pas régulier sur toute la série.
-- Les cours sont **ajustés** (splits, dividendes) et arrondis à 3 chiffres significatifs sous 1.
-  Rebaser à 100 règle le problème d'affichage ; ne le règle pas en multipliant par 1 000.
-
-⚠️ **Le segment hebdomadaire ne fait que ~104 points.** Une partie de 104 semaines consomme
-donc toute la fenêtre récente, et toutes les parties se ressemblent. **Décision par défaut à
-appliquer :** partie de **52 semaines** tirée dans le segment hebdomadaire, et **le mode « Long
-Rideau » (104 semaines) se joue sur le segment mensuel** (donc 104 mois ≈ 8 ans, un tic = un
-mois). Le libellé de l'axe suit (`S+n` ou `M+n`). Si tu trouves mieux, dis-le avant de coder.
-
-### Ce que tu ajoutes : `jeu/index.json`
-
-Un manifeste **minuscule** (< 15 Ko), produit par `tools/jeu_index.py`, contenant seulement ce
-qu'il faut pour tirer une partie et révéler l'identité à la fin :
-
-```json
-{
   "updated_at": "2026-08-12",
-  "series": [
-    {"t": "NVDA", "n": "NVIDIA", "s": "Semiconducteurs", "h": 104, "m": 312, "d": "USD"}
+  "t0": 22812,                 // abscisse du premier mois de la grille
+  "mois": 240,                 // longueur de la grille
+  "titres": [
+    {"t":"NVDA","sec":"Technologie","d":"USD","i0":0,"px":[100,104,97, …]}
   ]
 }
 ```
 
-`h` = points hebdo disponibles, `m` = points mensuels. **N'entrent que les titres** avec
-`h ≥ 60` (mode court) ou `m ≥ 130` (mode long). Le script :
-- lit `charts/*.json` et `watchlist.json` / `universe.json` pour les noms et secteurs ;
-- écrit **atomiquement** (motif `save_json_atomic`, `allow_nan=False` — voir `screener.py`) ;
-- **purge les orphelins** : un titre disparu de `charts/` sort du manifeste (même garde que la
-  purge de `charts/`) ;
-- est branché dans `.github/workflows/watchlist.yml`, **après** le screener, avant le commit.
+- **Grille de mois commune**, alignée sur l'abscisse `_mois`. Un titre entré en cours de route
+  porte son `i0` et une série plus courte : le moteur doit gérer les titres **non cotés au début
+  de la partie** (ils apparaissent, c'est réaliste et c'est gratuit).
+- Prix **rebasés à 100 au premier point du titre**, arrondis à l'entier. Sur 80 titres × 240
+  mois ≈ 19 200 nombres de 3-4 caractères → **~90 Ko**, très en dessous du budget, et bien moins
+  une fois servi compressé par GitHub Pages.
+- **Critère d'entrée** : au moins 150 points mensuels, un secteur connu, une devise connue.
+- Le script écrit **atomiquement** (`save_json_atomic`, `allow_nan=False` — voir `screener.py`),
+  **purge les orphelins**, et il est branché dans `.github/workflows/watchlist.yml` après le
+  screener, avant le commit, avec `git add jeu/`.
+
+### §12.3 — Le masquage des sociétés
+Pendant la partie, les sociétés portent **un nom fictif** et **leur vrai secteur**. Les cours
+sont réels. À la fin, la correspondance est révélée.
+
+- Les noms viennent d'une **liste fictive fixe** écrite dans le moteur (ex. `Ardyne Semiconducteurs`,
+  `Ligne Bleue Santé`, `Nordvale Énergie`…), **jamais générés par assemblage de syllabes** : un
+  générateur finira par produire le nom d'une vraie entreprise, et le jeu lui collera alors une
+  faillite inventée. L'attribution nom↔ticker est déterministe à partir de la graine.
+- Cette liste, et l'interdiction du §7, forment **une seule et même règle éditoriale** : le jeu
+  n'invente aucun fait sur aucune entreprise réelle.
 
 ---
 
-## §7 — Règles de simulation (le cœur, à tester)
+## §13 — Design system : réutiliser, et ne pas redéfinir
 
-### §7.1 — Exécution
-- Un changement d'exposition s'exécute **au cours de clôture de la semaine affichée**, jamais
-  à celui de la suivante, jamais à un cours intra-semaine (on ne l'a pas). Écris-le en
-  commentaire : c'est une hypothèse favorable au joueur, elle doit être assumée, pas cachée.
-- **Frais** : `montant_échangé × 7,5 / 10000`, à l'achat **et** à la vente séparément.
-- Ordre **refusé** si le montant échangé < 50 € (`MIN_TRADE_EUR`) — avec un retour visible
-  dans la ligne de console, sinon le joueur croit que le jeu a raté son geste.
-- Pas de vente à découvert, pas de levier, pas de position fractionnée par titre : **une seule
-  ligne**, celle de la série jouée. Le jeu porte sur la décision d'exposition, pas sur
-  l'allocation.
+**Réutilise tel quel** (`signal.css` est déjà chargé) : `.card`, `.sec`/`.sec-h`, `.eyebrow`,
+`.tag`, `.metrics`, `.meter`, `.ring`, `.gauge`, `.bar-track`/`.bar-fill`, `.sep`,
+`.pos`/`.neg`/`.neu`, `.type-cur`, et les keyframes `blink`/`rise`/`ringglow`.
 
-### §7.2 — Impôt
-- **PFU de 31,4 %** sur la plus-value nette réalisée, appliqué **à la liquidation finale**.
-- ⚠️ **Piège connu du dépôt : le `README.md` dit encore « PFU 30 % », `config.py` dit 31,4 %.**
-  `config.py` a raison (`PFU_RATE = 0.314`, LFSS 2026, vérifié le 08/08/2026). **La source de
-  vérité est `config.py`, jamais le README.** Profites-en pour corriger le README (§13).
-- Les moins-values de la partie s'imputent sur les plus-values de la **même partie**, jamais
-  d'une partie à l'autre.
+**Grammaire de couleur — la règle la plus facile à violer sans s'en apercevoir :**
+- `--ac` (#74b6df) est **le seul accent**. L'immeuble, les gens, les meubles, les traits : cyan
+  et niveaux de gris. **Un immeuble multicolore serait la faute la plus visible de la livraison.**
+- `--green` / `--red` sont **réservés au P&L factuel chiffré**. Interdits pour : un moral, une
+  jauge, un bouton, un état d'employé, une alerte, un mur, un bonhomme.
+- `--gold` : le badge « fictif », et lui seul.
+- **Aucune information ne passe par la couleur seule.** Le dépôt l'écrit noir sur blanc à propos
+  des pastilles d'Actualités (« la flèche est REDONDANTE avec la couleur, et c'est voulu »).
+  Un employé démoralisé se voit à sa **posture** et à une **icône**, pas à sa teinte.
 
-### §7.3 — Les repères imposés à l'écran
-Toute partie affiche, au même endroit et au même format : **ta performance nette**,
-**l'achat-conservation** sur la même fenêtre, **le cash**. Les trois, toujours, y compris quand
-le joueur gagne. C'est la promesse pédagogique du jeu ; ce n'est pas une option d'affichage.
-
-### §7.4 — Hasard reproductible
-- **Générateur pseudo-aléatoire à graine, écrit à la main** (mulberry32 ou xorshift32, ~5
-  lignes). `Math.random()` est **interdit** dans le moteur : une partie doit se rejouer à
-  l'identique à partir de sa graine.
-- Graine du **défi du jour** = hachage de la date UTC `AAAA-MM-JJ` (fonction de hachage
-  déterministe, écrite dans le moteur, testée).
-- Graine d'une partie libre = aléatoire, mais **écrite dans l'URL** : `jeu.html#/p/<graine>`.
-  Ouvrir ce lien rejoue exactement la même partie. C'est le partage, sans backend.
-- Le tirage doit couvrir **le titre ET la fenêtre de départ** : deux parties de graines
-  différentes sur le même titre ne doivent pas commencer au même endroit.
-
-### §7.5 — Persistance
-- `localStorage`, une seule clé : `signal.table.v1`, un objet **versionné** (`{v:1, parties:[…]}`)
-  avec migration silencieuse si `v` change plus tard.
-- **Plafond de 200 parties** conservées (les plus anciennes tombent) — sinon la clé grossit
-  sans fin.
-- Une partie stockée = graine, mode, date, gestes, performance nette/brute, frais, impôt,
-  repères. **Pas de données personnelles**, jamais rien envoyé nulle part.
-- **Toute lecture de `localStorage` est enveloppée dans un `try/catch`** : en navigation privée
-  Safari, un `setItem` peut lever, et le jeu doit rester jouable sans mémoire.
-- Un bouton **« effacer mon historique »**, visible, dans Le Miroir.
+**Ne redéfinis JAMAIS** dans `maison.html` les sélecteurs nus du chrome partagé — `.brand`,
+`.brand-name`, `.brand-icon`, `nav`, `nav a`, `nav a svg`, `.footer-legal`, `.footer-right`.
+**`tests/test_chrome.py` fait échouer la CI si tu le fais.** `header{position:…}` reste permis :
+ta page ne défile pas (l'immeuble occupe l'écran), donc **header `fixed`**, comme `index.html`
+— et alors tu compenses explicitement la hauteur, comme `index.html` le fait (`top:5.6rem`).
+Recopie le motif **en entier**, jamais à moitié : c'est un bug déjà survenu et documenté.
 
 ---
 
-## §8 — Design system : ce que tu réutilises, ce que tu n'as pas le droit de redéfinir
+## §14 — Accessibilité, mobile, et le registre
 
-**Tu réutilises tel quel** (`signal.css` est déjà chargé) : `.card`, `.sec` / `.sec-h`,
-`.eyebrow`, `.tag`, `.metrics`, `.meter`, `.ring`, `.gauge`, `.bar-track` / `.bar-fill`,
-`.sep`, `.pos` / `.neg` / `.neu`, `.type-cur`, les keyframes `blink` / `rise` / `ringglow`.
+Un jeu fait de petits bonhommes qui bougent est **par nature un jeu visuel**. On ne peut pas
+faire semblant du contraire ; on peut refuser d'en faire un jeu **exclusivement** visuel.
 
-**Grammaire de couleur — la règle la plus facile à violer sans s'en rendre compte :**
-- `--ac` (#74b6df, cyan) est **le seul accent**. Tout ce qui est interactif, actif, sélectionné,
-  en cours : cyan.
-- `--green` et `--red` sont **réservés au P&L factuel chiffré**. Interdits pour : un bouton
-  d'achat, un bouton de vente, une pastille de mode, un état de victoire, un fond de gain, une
-  trace de graphe. Un bouton « acheter » vert serait la faute la plus visible de toute la
-  livraison.
-- `--gold` : le badge « fictif » et lui seul.
-- **Aucune information ne passe par la couleur seule** (le dépôt le dit noir sur blanc à propos
-  des pastilles d'Actualités : « la flèche est REDONDANTE avec la couleur, et c'est voulu »).
-  Une hausse porte un signe et/ou une flèche, pas seulement une teinte.
-
-**Tu ne redéfinis JAMAIS** dans `jeu.html` les sélecteurs nus du chrome partagé —
-`.brand`, `.brand-name`, `.brand-icon`, `nav`, `nav a`, `nav a svg`, `.footer-legal`,
-`.footer-right`. **`tests/test_chrome.py` fait échouer la CI si tu le fais.**
-`header { position: … }` reste permis (ta page défile → `sticky`, avec `html,body{height:auto}`,
-comme `actualites.html` — recopie ce motif **en entier**, pas à moitié : c'est un bug déjà
-survenu et documenté dans le CSS).
+- **Le registre** : un onglet du panneau qui donne, **en texte et en permanence**, tout ce que
+  l'immeuble raconte en images — qui fait quoi, qui attend, ce qui vient de se passer, l'état des
+  deux comptabilités. **Toute la partie doit être jouable depuis le registre seul.** Ce n'est pas
+  un mode dégradé : c'est aussi la vue que préféreront les joueurs pressés.
+- **Clavier de bout en bout** : `Espace` pause · `1`/`2` vitesse · `Tab` circule entre les
+  personnes en attente · `Entrée` ouvre l'arbitrage · `1`-`4` choisissent une option ·
+  `C` le carnet · `R` le registre. Focus toujours visible.
+- Le `<canvas>` est `aria-hidden`. Un `aria-live="polite"` **sobre** annonce les arbitrages en
+  attente et les événements majeurs — **pas chaque mois qui passe**, sinon un lecteur d'écran
+  parle en continu pendant trente minutes.
+- **`prefers-reduced-motion`** : personne ne marche (les gens se **téléportent** entre leurs
+  états), pas de balancement, pas de lueur pulsée, pas de défilement. Le jeu reste entier.
+  `signal-fx.js` respecte déjà ce réglage — fais pareil, ce n'est pas négociable.
+- **Mobile ≥ 360 px** : l'immeuble passe en pile verticale à un étage visible à la fois (bandeau
+  d'étages en haut), le panneau devient une feuille dépliable — même motif que `.tocm` dans
+  `signal.css`, va le lire. Cibles tactiles ≥ 44 px. Aucun geste sans équivalent bouton.
+- Contraste ≥ 4,5:1 pour tout texte, y compris posé sur l'immeuble. Vérifie, ne suppose pas.
 
 ---
 
-## §9 — Accessibilité et mobile
+## §15 — Le cinquième onglet : la checklist exacte
 
-- **Jouable au clavier de bout en bout**, sans souris. Focus visible sur tous les contrôles.
-- Le ruban est un `<canvas>` **décoratif du point de vue de l'assistance** (`aria-hidden`) :
-  l'état du jeu est porté en parallèle par un `aria-live="polite"` **discret et poli** — il
-  annonce le résultat des gestes du joueur, **pas chaque semaine qui passe** (sinon un lecteur
-  d'écran parle en continu pendant deux minutes).
-- Cibles tactiles ≥ 44 px. Aucun geste indispensable qui n'ait pas d'équivalent bouton.
-- `prefers-reduced-motion` : cf. §4.
-- La page doit rester lisible et jouable à **360 px de large**. Le ruban se réduit en hauteur,
-  il ne se replie pas en tableau.
-- Contraste : le texte de la console sur le ruban doit tenir le **4,5:1**. Vérifie, ne suppose pas.
+`tests/test_chrome.py` compare **les quatre onglets entre eux** ; en ajouter un cinquième touche
+tous les fichiers ci-dessous.
 
----
-
-## §10 — Le cinquième onglet : la checklist exacte
-
-C'est ici qu'on casse des choses sans le voir. `tests/test_chrome.py` compare **les quatre
-onglets entre eux** ; en ajouter un cinquième touche **tous** les fichiers ci-dessous.
-
-1. **`jeu.html`** — nouvelle page. Doit porter, sous peine d'échec CI :
-   `rel="icon"` (le favicon en data-URI, **identique** aux autres) · `name="description"` ·
-   la **même** requête `fonts.googleapis.com/css2?family=Inter…` · `signal.css` ·
-   `signal-fx.js` · `.footer-legal` avec la mention AMF **au mot près** · `.footer-right`.
-   Plus le décor : `#fx`, `<canvas id="bg">`, `.scan`, `.frame` (les quatre `<i>`).
-2. **La nav, dans les CINQ pages** — même ordre, mêmes libellés partout, et
-   **« Portefeuille IA » doit rester la dernière entrée** (un test l'exige nommément).
-   Ordre cible :
-   `Watchlists · Actualités · Apprendre · La Table · Portefeuille IA`
-   Le lien : `<a href="jeu.html">`, avec un `<svg viewBox="0 0 24 24" aria-hidden="true">` en
+1. **`maison.html`** — nouvelle page. Doit porter, sous peine d'échec CI : `rel="icon"` (le
+   favicon en data-URI, **identique** aux autres) · `name="description"` · la **même** requête
+   `fonts.googleapis.com/css2?family=Inter…` · `signal.css` · `signal-fx.js` · `.footer-legal`
+   avec la mention AMF **au mot près** · `.footer-right`. Plus le décor : `#fx`,
+   `<canvas id="bg">`, `.scan`, `.frame` (les quatre `<i>`).
+2. **La nav, dans les CINQ pages** — même ordre, mêmes libellés partout, et **« Portefeuille IA »
+   doit rester la dernière entrée** (un test l'exige nommément). Ordre cible :
+   `Watchlists · Actualités · Apprendre · La Maison · Portefeuille IA`
+   Le lien : `<a href="maison.html">`, avec un `<svg viewBox="0 0 24 24" aria-hidden="true">` en
    **tracé** (`stroke:currentColor`, jamais de `fill`) et le libellé dans un `<span>` — sinon le
    test de nav ne le trouve pas et l'icône ne prend pas la couleur de l'onglet actif.
-   *Suggestion de glyphe : un jeton — cercle, cercle intérieur, quatre encoches. Lisible à 19 px,
-   et il dit « table de jeu » sans dire « casino ».*
-3. **`tests/test_chrome.py`** — ajouter `"jeu.html"` à `PAGES`, et **corriger les libellés qui
-   disent « les 4 onglets »**. Les contrôles spécifiques à `index.html` (`.home-h`, `top:5.6rem`,
-   `FD_RUPTURE`, colonne de repos) restent tels quels : ils ne concernent pas ta page.
-4. **`README.md`** — bloc « Architecture » (la page, `jeu-moteur.js`, `jeu/index.json`,
-   `tools/jeu_index.py`), « Fichiers clés », et la correction du PFU (§7.2).
-5. **`.github/workflows/watchlist.yml`** — appel de `tools/jeu_index.py` et `git add jeu/`.
-6. **`CHANGELOG.md`** — une entrée en tête (§13).
+   *Glyphe suggéré : un immeuble en coupe — un rectangle et deux lignes d'étage. Lisible à 19 px,
+   et il annonce exactement ce qu'on va voir.*
+3. **`tests/test_chrome.py`** — ajouter `"maison.html"` à `PAGES` et **corriger les libellés qui
+   disent « les 4 onglets »**. Les contrôles propres à `index.html` (`.home-h`, `top:5.6rem`,
+   `FD_RUPTURE`, colonne de repos) restent tels quels.
+4. **`README.md`** — bloc « Architecture » (la page, les deux JS, `jeu/marche.json`,
+   `tools/jeu_marche.py`) et « Fichiers clés ». Au passage : **le README annonce encore
+   « PFU 30 % » alors que `config.py` est à 31,4 %** depuis la LFSS 2026 — corrige-le.
+5. **`.github/workflows/watchlist.yml`** — génération du pack, `git add jeu/`.
+6. **`CHANGELOG.md`** — une entrée en tête (§17).
 
 ---
 
-## §11 — Tests : ce qu'il faut écrire, et comment le projet les écrit
+## §16 — Tests
 
 **Les tests de ce dépôt tournent HORS LIGNE, sans aucune dépendance installée**, sur chaque
-poussée (`.github/workflows/tests.yml`). Le style de la maison, à respecter :
-- un fichier `tests/test_jeu.py`, exécutable seul (`python tests/test_jeu.py`) ;
-- un **docstring qui explique POURQUOI le fichier existe** — pas ce qu'il fait, pourquoi ;
-- la fonction `check(nom, cond, detail)`, les `✅` / `❌`, le décompte final et
-  `sys.exit(1)` si rouge ;
-- **avant de croire un « tout est vert » local** : `PYTHONPATH=tests python3 tests/test_jeu.py`
-  (cf. `tests/_sans_bibliotheques.py`).
+poussée (`.github/workflows/tests.yml`). Style de la maison, à respecter : un fichier
+`tests/test_maison.py`, exécutable seul (`python tests/test_maison.py`), **un docstring qui
+explique POURQUOI le fichier existe** (pas ce qu'il fait), la fonction `check(nom, cond, detail)`,
+les `✅`/`❌`, le décompte final, `sys.exit(1)` si rouge. Et avant de croire un « tout est vert »
+local : **`PYTHONPATH=tests python3 tests/test_maison.py`** (cf. `tests/_sans_bibliotheques.py`).
 
-**Le moteur se teste POUR DE VRAI, sous node** — c'est le motif déjà utilisé par
-`test_chrome.py`, `test_charts.py` et `test_actualites.py` : on exécute le code livré, on ne le
-relit pas. Et comme eux, **si node manque, on l'écrit** (`⚠️ non vérifié (node indisponible)`),
-on ne fait pas semblant.
-
-Propriétés à éprouver, au minimum :
+**Le moteur se teste POUR DE VRAI, sous node** — motif déjà employé par `test_chrome.py`,
+`test_charts.py` et `test_actualites.py` : on exécute le code livré, on ne le relit pas. Et comme
+eux, **si node manque, on l'écrit** (`⚠️ non vérifié (node indisponible)`), on ne fait pas semblant.
 
 | # | Propriété | Pourquoi elle compte |
 |---|---|---|
-| 1 | **Reproductibilité** : même graine ⟹ même titre, même fenêtre, même suite de tirages | c'est ce qui rend le défi du jour et le partage d'URL possibles |
-| 2 | **Aucun `Math.random()`** dans `jeu-moteur.js` | une seule occurrence casse (1) en silence |
-| 3 | **Frais** : un aller-retour de 1 000 € coûte 1,50 € (15 bps), au centime | la promesse d'honnêteté du jeu |
-| 4 | **Le taux de frais et le PFU du JS égalent ceux de `config.py`** — parsés des deux fichiers et comparés | motif `FD_RUPTURE` de `test_chrome.py` : un doublon dérive toujours |
-| 5 | **PFU** : moins-value ⟹ impôt nul ; plus-value de 1 000 € ⟹ 314 € | idem |
-| 6 | **Ordre < 50 € refusé**, et l'exposition n'a pas bougé | un refus muet ferait croire à un bug |
-| 7 | **Pas de fuite du futur** : sur une série marquée, la tranche rendue au tic `i` ne contient aucun point > `i` | le mode entier perd son sens si le futur transpire |
-| 8 | **Buy & hold** recalculé indépendamment en Python ⟹ même résultat que le JS | le repère doit être juste, c'est le juge de la partie |
-| 9 | **Détection de biais** : jeux de gestes fabriqués ⟹ biais attendu ; et **aucun biais nommé sous 5 parties** | ne pas diagnostiquer du bruit |
-| 10 | **Pièce** : sur 10 000 lancers à graine fixe, moyenne > capital initial **et** médiane < capital initial | c'est la leçon du mode ; si elle ne tient pas, la démo ment |
-| 11 | **Manifeste** : tout ticker de `jeu/index.json` a un `charts/<T>.json`, et aucun orphelin | même garde que la purge de `charts/` |
-| 12 | **Segment hebdo/mensuel** correctement séparé sur des séries fabriquées (pas régulières) | le piège n°2 du §6 |
-| 13 | **Le script inline de `jeu.html` se parse** (`node --check`) | une erreur de syntaxe a déjà mis le site entier en panne (09/08/2026) |
-| 14 | **Format de partage** stable et sans donnée personnelle | ce qui part au presse-papier est public |
+| 1 | **Reproductibilité** : même graine + mêmes décisions ⟹ bilan identique au centime | tout le reste en dépend, à commencer par le contrefactuel |
+| 2 | **Aucun `Math.random()`** dans les deux JS | une seule occurrence casse (1) en silence |
+| 3 | **VL** : souscription et rachat à la VL du mois ne changent pas la VL des porteurs existants | la dilution est le bug classique, invisible à l'œil |
+| 4 | **High-water mark** : après −20 % puis +15 %, **aucun** frais de performance ; le HWM n'est franchi qu'au-delà de l'ancien plus haut | l'implémentation naïve se trompe ici à tous les coups |
+| 5 | **Frais de gestion** : 2 % l'an sur encours constant ⟹ 2 % ± 0,01 sur douze mois | le prorata mensuel est vite faux |
+| 6 | **Exécution** : 7,5 bps avec gérant, 30 bps sans ; refus sous 50 € | la promesse d'honnêteté du jeu |
+| 7 | **Les constantes du JS égalent celles de `config.py`** (parsées des deux fichiers, comparées) | motif `FD_RUPTURE` de `test_chrome.py` : un doublon dérive toujours |
+| 8 | **Rachat > trésorerie ⟹ vente forcée**, dans l'ordre de liquidité, et la VL en porte la trace | c'est la leçon centrale : si elle n'est pas juste, le jeu ment |
+| 9 | **Pas de fuite du futur** : sur une matrice marquée, l'état au mois `m` ne contient aucune donnée > `m` | sans ça, tout le jeu perd son sens |
+| 10 | **Faillite de la société** : trésorerie négative deux mois ⟹ fin de partie, même si le fonds performe | le §2 doit être atteignable, pas théorique |
+| 11 | **Contrefactuel** : 500 parties « au hasard » sur graine fixe ⟹ distribution stable, et un joueur qui ne fait rien tombe près de la médiane des « ne rien faire » | un contrefactuel biaisé produit une conclusion fausse et péremptoire |
+| 12 | **Performance** : 500 parties × 120 mois en **< 2 s** sous node | sinon l'écran final est injouable |
+| 13 | **Graphe de déblocage** : sans cycle, chaque métrique rattachée à un rôle, chaque concept du §8 atteignable en partie normale | un concept inatteignable est une promesse pédagogique non tenue |
+| 14 | **Événements** : chaque modèle porte une `portee` ; **aucun modèle de portée `ligne` ne contient de texte narratif** — uniquement des champs calculés | c'est la règle du §7, et elle est trop importante pour reposer sur la vigilance |
+| 15 | **Noms masqués** : la liste est fixe, sans doublon, et l'attribution nom↔ticker est déterministe | idem |
+| 16 | **Intégrité du pack** : tout titre de `jeu/marche.json` existe dans `charts/`, aucune valeur non finie, grille de mois strictement croissante, aucun orphelin | même garde que la purge de `charts/` |
+| 17 | **Sauvegarde** : un état v1 se relit ; un `localStorage` indisponible ne casse pas la partie | Safari privé |
+| 18 | **Les scripts inline de `maison.html` se parsent** (`node --check`) | une erreur de syntaxe a déjà mis le site entier en panne (09/08/2026) |
 
 ---
 
-## §12 — Textes et pédagogie
-
-- **Langue : français.** Ton du projet : précis, factuel, posé, une pointe d'esprit
-  pince-sans-rire **occasionnelle**, jamais de hype, jamais de reco déguisée
-  (cf. `GUIDE_redaction_analyses.md`).
-- **Chaque mode ouvre sur trois lignes maximum** : ce qu'on fait, comment on joue, ce qu'on
-  apprend. Personne ne lit le quatrième paragraphe d'un jeu.
-- **Le débriefing enseigne un point, un seul**, choisi selon ce qui s'est passé dans LA partie
-  jouée : coût des frais · effet de disposition · chasse au momentum · risque de ruine ·
-  « ne rien faire était mieux ». Renvoie vers la section correspondante d'`apprendre.html`
-  (ancres `#s1`…`#s12`) — **vérifie l'ancre, ne la devine pas**.
-- **Ce qu'on n'écrit jamais** : « bien joué, tu as du flair », un score de compétence, une
-  projection en euros réels, « avec cette stratégie tu aurais gagné X € ».
-- **Ce qu'on écrit à la place, quand le joueur gagne** : de combien il a battu l'achat-conservation,
-  et sur combien de parties ce résultat tiendrait du hasard.
-- **Le badge « fictif »** (`--gold`) est visible en permanence, et la page reprend la formule
-  éprouvée de `portfolio.html` : *« Capital 100 % fictif. Aucune somme réelle investie. Prix
-  réels du marché. »*
-
----
-
-## §13 — Livrables
+## §17 — Livrables, commits, changelog
 
 ```
-jeu.html                    la page (gabarit + rendu + entrées)
-jeu-moteur.js               logique pure, testable sous node, zéro DOM
-jeu/index.json              manifeste des séries jouables (généré, committé)
-tools/jeu_index.py          le générateur, atomique, avec purge des orphelins
-tests/test_jeu.py           la suite (§11)
-index.html                  + 5ᵉ entrée de nav
-actualites.html             + 5ᵉ entrée de nav
-apprendre.html              + 5ᵉ entrée de nav
-portfolio.html              + 5ᵉ entrée de nav
+maison.html                 gabarit, panneau, entrées, colle
+maison-moteur.js            la simulation — pure, sans DOM, rejouable sous node
+maison-rendu.js             le canvas — immeuble, meubles, bonhommes, rails
+jeu/marche.json             pack de marché compact (généré, committé)
+tools/jeu_marche.py         le générateur — atomique, avec purge des orphelins
+tests/test_maison.py        la suite (§16)
+index.html · actualites.html · apprendre.html · portfolio.html   + 5ᵉ entrée de nav
 tests/test_chrome.py        PAGES + libellés
-.github/workflows/watchlist.yml   génération du manifeste
+.github/workflows/watchlist.yml   génération du pack
 README.md                   architecture, fichiers clés, correction du PFU
 CHANGELOG.md                l'entrée
 ```
 
-**Commits** : français, préfixés à la manière du dépôt (`feat(jeu): …`, `fix(chrome): …`),
-**une phrase qui dit ce qui change pour le lecteur**, pas ce que fait le code.
-Regarde `git log --oneline -20` : le style y est sans ambiguïté.
+**Commits** : français, préfixés comme le dépôt (`feat(maison): …`, `fix(chrome): …`), **une
+phrase qui dit ce qui change pour le lecteur**, jamais ce que fait le code. Regarde
+`git log --oneline -20` : le style y est sans ambiguïté.
 
 **CHANGELOG** : une entrée en tête, titrée comme les autres — une phrase qui **raconte le
 problème ou la décision**, pas « ajout du jeu ». Ce dépôt écrit ses entrées comme des constats
@@ -487,44 +604,66 @@ problème ou la décision**, pas « ajout du jeu ». Ce dépôt écrit ses entr�
 
 ---
 
-## §14 — Définition du « terminé »
+## §18 — Les trois lots (respecte l'ordre)
 
-- [ ] `python tests/test_jeu.py` : vert, et **`PYTHONPATH=tests python3 tests/test_jeu.py`
-      aussi** (le runner n'a aucune bibliothèque tierce).
-- [ ] `for f in tests/test_*.py; do python $f; done` : **toutes** les suites vertes, y
-      compris `test_chrome.py` après l'ajout du cinquième onglet.
-- [ ] La nav est identique sur les cinq pages, « Portefeuille IA » toujours en dernier, et
-      le bandeau ne change pas de hauteur d'un onglet à l'autre.
-- [ ] Une partie complète se joue **au clavier seul**, et une autre **au doigt seul** à 360 px.
-- [ ] `prefers-reduced-motion` activé : la page reste jouable et n'anime rien.
-- [ ] Recharger `jeu.html#/p/<graine>` rejoue **exactement** la même partie.
-- [ ] Aucun `--green` / `--red` ailleurs que sur un chiffre de P&L. Relis ton CSS pour ça.
-- [ ] Poids des données téléchargées pour une partie : **< 150 Ko**, mesuré, pas estimé.
-- [ ] Le README décrit le jeu et **le PFU y est à 31,4 %**.
-- [ ] Aucune donnée ne quitte le navigateur. Aucun appel réseau autre que `jeu/index.json`,
-      `charts/<T>.json` et la police.
+### Lot ① — « La coupe » *(jouable et livrable seul)*
+Le RDC + un étage. Toi + **deux recrues** (analyste, exécution). Le temps qui passe, le marché
+réel, la VL, les frais de gestion, **un** type d'arbitrage (la thèse de l'analyste), les
+bonhommes qui marchent et qui montent te voir. Le pack de marché, le chrome à cinq onglets, le
+registre, la sauvegarde, et les tests 1-3, 5-7, 9, 16, 18.
+**Critère de fin de lot : on peut jouer dix ans et voir une VL, sans que ce soit ennuyeux.**
+
+### Lot ② — « La maison »
+Tous les rôles et le déblocage des métriques. Le mandat et la dérive de style. Les deux
+comptabilités et la faillite. Collecte, rachats, **vente forcée**. Moral, départs, débauchage.
+Les six familles d'arbitrages. Les étages qui s'ouvrent. Tests 4, 8, 10, 13-15, 17.
+
+### Lot ③ — « Le bilan »
+Le carnet et les seize concepts. Les quatre écrans de fin. L'attribution. **Le contrefactuel à
+500 parties.** Le partage en texte du bilan. Tests 11-12.
 
 ---
 
-## §15 — Hors périmètre, et décisions à confirmer
+## §19 — Définition du « terminé » (par lot)
+
+- [ ] `python tests/test_maison.py` vert, **et** `PYTHONPATH=tests python3 tests/test_maison.py`
+      vert (le runner n'a aucune bibliothèque tierce).
+- [ ] `for f in tests/test_*.py; do python $f; done` : **toutes** les suites vertes, y compris
+      `test_chrome.py` après l'ajout du cinquième onglet.
+- [ ] Nav identique sur les cinq pages, « Portefeuille IA » toujours en dernier, bandeau de
+      hauteur constante d'un onglet à l'autre.
+- [ ] Une partie complète se joue **au clavier seul**, une autre **au doigt seul à 360 px**, une
+      troisième **depuis le registre seul**.
+- [ ] `prefers-reduced-motion` activé : rien ne bouge, tout reste jouable.
+- [ ] Recharger `maison.html#/p/<graine>` rejoue le même monde.
+- [ ] 60 fps avec 25 bonhommes ; le rendu s'arrête quand l'onglet est caché.
+- [ ] Aucun `--green` / `--red` ailleurs que sur un chiffre de P&L. Relis ton CSS pour ça.
+- [ ] Données téléchargées pour démarrer : **< 250 Ko**, mesuré, pas estimé.
+- [ ] Aucun appel réseau autre que `jeu/marche.json` et la police. Rien ne quitte le navigateur.
+- [ ] **Aucun texte du jeu n'attribue un fait à une entreprise réelle** (§7, §12.3).
+
+---
+
+## §20 — Hors périmètre, et décisions à confirmer
 
 **Hors périmètre** (ne le fais pas, même si c'est tentant) : classement en ligne · comptes
-utilisateurs · multijoueur · portefeuille multi-titres · vente à découvert et levier ·
-génération d'images de partage · intégration au portefeuille IA réel · notifications ·
-sons (aucun son : le site est lu au bureau).
+utilisateurs · multijoueur · vente à découvert, levier, dérivés · marchés privés · crypto ·
+génération d'images de partage · lien avec le portefeuille IA réel · notifications · **sons**
+(aucun : ce site se lit au bureau) · animation d'ambiance coûteuse (météo, jour/nuit, foule).
 
-**Décisions à confirmer avant de coder** — propose ces valeurs par défaut, applique-les si on
-ne te répond pas, et **écris dans ta livraison ce que tu as tranché** :
+**Décisions à confirmer avant de coder** — propose ces valeurs par défaut, applique-les faute de
+réponse, et **écris dans ta livraison ce que tu as tranché** :
 
 | # | Question | Défaut proposé |
 |---|---|---|
-| 1 | Libellé de l'onglet : « La Table » (singulier, un peu cryptique) ou « Simulateur » (clair, plat) ? | **La Table**, avec un chapô qui l'explique dès la première ligne |
-| 2 | Durée d'une partie courte | **52 semaines** (cf. la contrainte du §6) |
-| 3 | Livrer les trois modes d'un coup, ou par lots ? | **Trois lots** : ① Le Rideau + chrome + tests ② La Pièce ③ Le Miroir + défi du jour. Chaque lot est livrable et testé seul. |
-| 4 | Capital fictif de départ | **10 000 €** — délibérément différent du capital du portefeuille IA, pour qu'on ne confonde jamais les deux |
-| 5 | Le mode Pièce en `−40 %/+50 %` | oui — c'est la seule paramétrisation qui donne à la fois EV positive, ruine médiane et un `f*` propre à 25 % |
+| 1 | Libellé de l'onglet : « La Maison » (le terme métier français, et l'objet qu'on voit) ou « Le Fonds » (plus explicite, plus plat) ? | **La Maison**, avec un chapô qui l'explique dès la première ligne |
+| 2 | Durée d'une partie | **120 mois**. Prévois un mode **48 mois** dès le lot ① : dix ans, c'est long pour une première partie |
+| 3 | Vue : coupe **plein écran** ou coupe + panneau latéral fixe ? | **Coupe + panneau**, panneau repliable ; sur mobile, feuille dépliable (motif `.tocm`) |
+| 4 | Sociétés masquées, ou vrais noms ? | **Masquées**, révélées à la fin — sinon celui qui connaît l'histoire de NVDA joue avec les réponses, et la règle du §7 devient intenable |
+| 5 | Capital de départ | **500 000 €** d'apport personnel + une première collecte de 2 à 5 M€ selon le mandat |
+| 6 | Nombre de titres dans le pack | **80** (~90 Ko). Monte à 120 si le poids le permet |
 
-**Une dernière chose.** Si en cours de route tu découvres qu'une de ces contraintes rend le jeu
-mauvais, **dis-le et argumente** au lieu de la contourner en silence. Ce dépôt documente ses
-erreurs et ses angles morts dans son CHANGELOG ; un désaccord motivé y a plus de valeur qu'une
-livraison qui fait semblant que tout allait de soi.
+**Une dernière chose.** Si tu découvres en chemin qu'une de ces contraintes rend le jeu mauvais,
+**dis-le et argumente** au lieu de la contourner en silence. Ce dépôt documente ses erreurs et
+ses angles morts dans son CHANGELOG ; un désaccord motivé y a plus de valeur qu'une livraison
+qui fait comme si tout allait de soi.
