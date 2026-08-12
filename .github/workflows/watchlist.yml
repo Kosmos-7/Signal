@@ -75,6 +75,13 @@ jobs:
         # pas. Idempotent, et sans appel réseau ni API.
         run: python tools/actualites.py --hebdo-seulement
 
+      - name: Pack de marché du jeu (jeu/marche.json)
+        # Relit charts/ (que le screener vient d'écrire) et le condense pour
+        # maison.html. Sans réseau ni clé. S'il était produit et oublié du
+        # commit, la garde anti-oubli ci-dessous l'attraperait : son pathspec
+        # '*.json' traverse aussi jeu/.
+        run: python tools/jeu_marche.py
+
       - name: Commit JSON files + archive snapshot
         run: |
           git config user.email "bot@signal.fr"
@@ -84,7 +91,7 @@ jobs:
           # le screener purge le graphe d'un titre sorti de tous ses thèmes.
           # charts.json a été retiré le 10/08/2026 : le front ne le chargeait
           # plus, les fiches sont servies par charts/<TICKER>.json.
-          git add watchlist.json universe.json portfolio.json analyses.json notes/watchlist_archive/ charts/ actualites/
+          git add watchlist.json universe.json portfolio.json analyses.json notes/watchlist_archive/ charts/ actualites/ jeu/
 
           # Garde anti-oubli : cette liste explicite a DÉJÀ laissé deux fichiers
           # au sol (charts.json en v3.3.0, universe.json en v3.5.0). Dans les deux
