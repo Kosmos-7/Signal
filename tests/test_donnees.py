@@ -100,21 +100,29 @@ CONNUS = {
         "LHX": "2010:102, 2011:189, 2013:420 entre 5 005 et 5 012 — erreur "
                "d'échelle au dépôt XBRL, tâche #83",
     },
-    # VIDÉ LE 12/08/2026 — TÂCHE #84 CLOSE PAR LES FAITS. Les cinq
-    # capitalisations (Allianz, Micron, Safran, Siemens, Western Digital)
-    # publient désormais leur rendement du flux disponible, et plus AUCUNE fiche
-    # du corpus n'en manque. C'est le contrôle « registre à jour » qui l'a exigé :
-    # laissées là, ces entrées auraient tu un défaut résolu, exactement ce que ce
-    # registre refuse d'être.
-    # LE MOTIF DE L'ORIGINE ÉTAIT LE BON : « rendue par intermittence par la
-    # source ». L'intermittence a cessé — pas parce qu'on l'a réparée. Le repli
-    # posé le 09/08 (cours × actions en circulation) n'avait rien changé les 09
-    # et 10/08, ce qui montrait que le nombre d'actions manquait aussi. On ne
-    # sait donc pas lequel des deux champs est revenu, et la sonde
-    # tools/sonde_capitalisation.py reste en place pour le jour où ils
-    # repartiront : elle distingue un champ absent d'un champ présent à null,
-    # et interroge trois chemins de la bibliothèque.
-    "une fiche qui publie une marge de flux publie aussi son rendement": {},
+    # TÂCHE #84 — L'INTERMITTENCE, PRISE SUR LE FAIT LE 12/08/2026. Ces cinq
+    # entrées ont été retirées ce matin-là parce que les cinq fiches publiaient
+    # leur rendement et que plus aucune du corpus n'en manquait : le contrôle
+    # « registre à jour » l'exigeait, et le constat était exact. Une demi-heure
+    # plus tard, un run du screener a rendu son rendement à Allianz et l'a repris
+    # aux quatre autres. Le défaut ne s'était pas résolu, il avait cligné.
+    # LES CINQ RESTENT DONC INSCRITES, y compris celles qui publient à cet
+    # instant : la liste nomme les titres que la source sert MAL, pas ceux qui
+    # sont en panne à la seconde où le test tourne. Le contrôle est marqué
+    # `intermittent` pour cette raison — voir check_connus.
+    # ON N'A TOUJOURS RIEN RÉPARÉ, et c'est écrit : le repli du 09/08 (cours ×
+    # actions en circulation) n'avait rien changé les 09 et 10/08, donc le nombre
+    # d'actions manque aussi quand la capitalisation manque. Lequel des deux
+    # revient, on l'ignore encore — tools/sonde_capitalisation.py est là pour le
+    # dire, et elle est faite pour ça : elle distingue un champ ABSENT d'un champ
+    # PRÉSENT À NULL et interroge trois chemins de la bibliothèque.
+    "une fiche qui publie une marge de flux publie aussi son rendement": {
+        "ALV.DE": "capitalisation servie par intermittence par la source — tâche #84",
+        "MU":     "idem — tâche #84",
+        "SAF.PA": "idem — tâche #84",
+        "SIE.DE": "idem — tâche #84",
+        "WDC":    "idem — tâche #84",
+    },
     # Ces textes datent d'AVANT l'entrée des multiples dans la signature : rien ne
     # les réveillait quand le multiple bougeait. Ils seront tous réécrits au
     # prochain run éditorial, et ces entrées devront alors disparaître — le
@@ -123,7 +131,23 @@ CONNUS = {
     # multiples désormais dans la signature, et les cinq écarts ont disparu.
     # C'est le contrôle « registre à jour » qui l'a exigé — un registre qui ne se
     # vide jamais est un cimetière de silencieux.
-    "aucun multiple cité ne diverge de la fiche": {},
+    # 2330.TW inscrit le 12/08/2026. La prose citait un PER courant de 32,3 ; la
+    # fiche en publie 28,2. CE N'EST PAS UNE DÉRIVE DE COURS, et la distinction
+    # compte : entre les deux runs le cours a MONTÉ (2 395 → 2 415) pendant que le
+    # multiple chutait de 13 %. Un PER qui baisse quand le prix monte, c'est le
+    # bénéfice qui bondit — TSMC a publié entre-temps.
+    # C'est donc la péremption structurelle que le projet connaît et n'a pas
+    # tranchée : la prose est HEBDOMADAIRE, les chiffres des fiches sont
+    # QUOTIDIENS, et un texte qui STOCKE un multiple vieillit dès que la donnée
+    # bouge. Le chantier « la prose référence au lieu de stocker » est la seule
+    # forme qui rendrait ce défaut impossible plutôt que surveillé ; il attend
+    # l'accord du propriétaire. En attendant, l'entrée disparaîtra d'elle-même au
+    # prochain run éditorial du lundi, qui réécrit les textes — et le contrôle
+    # « registre à jour » exigera alors de la retirer. C'est le comportement voulu.
+    "aucun multiple cité ne diverge de la fiche": {
+        "2330.TW": "PER courant cité 32,3 vs 28,2 en fiche — résultats publiés "
+                   "entre deux runs, texte hebdomadaire non réécrit depuis",
+    },
     "aucun texte ne dit indisponible un chiffre que la fiche affiche": {},
     # VIDÉ LE 10/08 : les quinze n'étaient pas inatteignables, c'est le contrôle
     # qui ne regardait pas la watchlist principale. Elles sont le top 30 non
@@ -147,16 +171,32 @@ CONNUS = {
 }
 
 
-def check_connus(nom, cas):
+def check_connus(nom, cas, intermittent=False):
     """Comme check(), mais avec un registre de défauts connus.
 
     `cas` : dict {clé -> détail lisible}. Échoue sur toute clé absente du
     registre (c'est une régression) ET sur toute entrée du registre qui n'est
     plus constatée (c'est un registre périmé, à nettoyer).
+
+    `intermittent` : le défaut VA ET VIENT, et la moitié « registre périmé » est
+    alors désactivée. AJOUTÉ LE 12/08/2026, APRÈS S'ÊTRE FAIT PRENDRE. Les cinq
+    capitalisations de la tâche #84 sont apparues COMPLÈTES un matin ; le registre
+    a donc été vidé, motif écrit à l'appui — « plus aucune fiche du corpus n'en
+    manque », ce qui était vrai à la seconde près. Le run du screener suivant, une
+    demi-heure plus tard, en a fait disparaître quatre sur cinq et rendu la
+    cinquième. Le motif d'origine disait pourtant exactement ce qu'il fallait
+    lire : « rendue par INTERMITTENCE par la source ».
+    Pour un défaut de cette nature, l'ensemble observé change à chaque run et la
+    garde anti-cimetière se retourne : elle exige de nettoyer un registre qui
+    redeviendra vrai au run d'après, et l'alarme sonne en permanence — ce que ce
+    fichier reproche par ailleurs à une CI rouge en continu.
+    LA MOITIÉ QUI COMPTE RESTE ENTIÈRE : toute occurrence NOUVELLE échoue. On ne
+    renonce qu'à exiger la disparition d'un défaut qui, par définition, ne
+    disparaît pas franchement.
     """
     connus = CONNUS.get(nom, {})
     nouveaux = {k: v for k, v in cas.items() if k not in connus}
-    disparus = [k for k in connus if k not in cas]
+    disparus = [] if intermittent else [k for k in connus if k not in cas]
     if nouveaux:
         check(nom, False, "NOUVEAUX : " + ", ".join(f"{k} ({v})" for k, v in
                                                     list(nouveaux.items())[:5]))
@@ -602,7 +642,12 @@ _sans_rdt = [t for t, d in FICHES.items()
              and (d.get("breakdown") or {}).get("fcf_margin_pct") is not None
              and (d.get("breakdown") or {}).get("fcf_yield_pct") is None]
 check_connus("une fiche qui publie une marge de flux publie aussi son rendement",
-             {t: "marge publiée, rendement absent" for t in _sans_rdt})
+             {t: "marge publiée, rendement absent" for t in _sans_rdt},
+             # La source sert ces capitalisations un run sur deux : l'ensemble
+             # observé change d'une exécution à l'autre, et exiger qu'il soit
+             # exactement celui du registre ferait rougir la CI en permanence
+             # pour un défaut déjà nommé. Cf. check_connus et la tâche #84.
+             intermittent=True)
 # Un multiple prévisionnel retiré pour cause de devise ne doit l'être QUE là où
 # la devise pose vraiment question : une société déficitaire n'a pas de PER
 # prévisionnel pour une raison qui n'a rien à voir, et le motif serait faux.

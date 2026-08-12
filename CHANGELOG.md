@@ -27,21 +27,51 @@ prescrit noir sur blanc : « on ne déclare un ticker qu'une fois qu'on sait qu'
 existe et qu'il passe les filtres ». Le runner a rendu 1/1, devise JPY conforme
 au suffixe `.T`, secteur exploitable, capitalisation très au-dessus du seuil.
 
-### Tâche #84 close par les faits
+### Tâche #84 : j'ai cru la clore, elle avait cligné
 
-Les cinq capitalisations qu'Allianz, Micron, Safran, Siemens et Western Digital
-ne servaient que par intermittence sont revenues : les cinq publient leur
-rendement du flux disponible, et **plus aucune fiche du corpus n'en manque**.
+Les cinq capitalisations d'Allianz, Micron, Safran, Siemens et Western Digital
+publiaient toutes leur rendement du flux disponible, et plus aucune fiche du
+corpus n'en manquait. Le contrôle « registre à jour » a donc exigé de vider ces
+cinq entrées, et le constat était exact — à la seconde près.
 
-C'est le contrôle « registre à jour » qui l'a exigé — laissées en place, ces cinq
-entrées auraient tu un défaut résolu, précisément ce que ce registre refuse
-d'être.
+**Une demi-heure plus tard, un run du screener a rendu son rendement à Allianz et
+l'a repris aux quatre autres.** Le défaut ne s'était pas résolu : il avait cligné.
+Le motif d'origine disait pourtant exactement ce qu'il fallait lire — « rendue par
+**intermittence** par la source ».
 
-**Le motif d'origine était le bon**, et on n'a rien réparé : « rendue par
-intermittence par la source ». Le repli posé le 09/08 n'avait rien changé les 09
-et 10/08, ce qui montrait que le nombre d'actions manquait aussi ; on ne sait
-donc pas lequel des deux champs est revenu. La sonde reste en place pour le jour
-où ils repartiront.
+**Les cinq sont réinscrites, y compris celles qui publient à cet instant** : la
+liste nomme les titres que la source sert mal, pas ceux qui sont en panne à la
+seconde où le test tourne.
+
+**Et le mécanisme du registre a été corrigé, pas contourné.** La garde
+anti-cimetière — celle qui exige de nettoyer une entrée qu'on ne constate plus —
+se retourne contre un défaut intermittent : elle réclame un nettoyage qui
+redeviendra faux au run suivant, et l'alarme sonne alors en permanence, ce que ce
+registre reproche par ailleurs à une CI rouge en continu. Un contrôle peut
+désormais se déclarer `intermittent`, ce qui désactive cette moitié-là **et elle
+seule** : toute occurrence nouvelle échoue toujours. Vérifié en rejouant la
+fonction sur les trois cas.
+
+On n'a toujours rien réparé, et c'est écrit : le repli du 09/08 n'avait rien
+changé les 09 et 10/08, donc le nombre d'actions manque aussi quand la
+capitalisation manque. Lequel des deux revient, on l'ignore — la sonde est faite
+pour le dire.
+
+### Un PER qui baisse pendant que le cours monte
+
+La prose de TSMC citait un PER courant de 32,3 ; la fiche en publie 28,2. Ce
+n'est pas une dérive de cours, et la distinction fait tout : entre les deux runs
+le cours a **monté** (2 395 → 2 415) pendant que le multiple chutait de 13 %. Un
+PER qui baisse quand le prix monte, c'est le bénéfice qui bondit — TSMC a publié
+entre-temps.
+
+C'est la péremption structurelle que le projet connaît et n'a pas tranchée : la
+prose est hebdomadaire, les chiffres des fiches sont quotidiens, et un texte qui
+**stocke** un multiple vieillit dès que la donnée bouge. Le chantier « la prose
+référence au lieu de stocker » est la seule forme qui rendrait ce défaut
+impossible au lieu de surveillé ; il attend une décision. En attendant, l'entrée
+disparaîtra d'elle-même au run éditorial du lundi, et le contrôle « registre à
+jour » exigera alors de la retirer.
 
 ### « Chiffres publiés » s'ouvrait sur 2030
 
