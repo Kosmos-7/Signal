@@ -811,14 +811,48 @@ for t, a in ANALYSES.items():
 check("le générateur interdit aussi de chiffrer la décote",
       "SANS EN RECOPIER LE POURCENTAGE"
       in open("generate_analyses.py", encoding="utf-8").read())
+
+# LE POTENTIEL CONSENSUS, TROISIÈME GRANDEUR À PASSER HORS CHIFFRE (12/08/2026),
+# et c'était le nombre le plus cité du site : 115 fiches sur 148, contre 37 pour
+# le RSI. Il est dirigé par le cours (cible ÷ prix − 1), donc il bouge chaque
+# jour, et la signature l'ignorait totalement.
+#
+# CE QUI LE REND PLUS GRAVE QUE LA DÉCOTE : son SIGNE bascule. « Le consensus est
+# modestement positif (8 % de potentiel selon 24 analystes) » écrit sur Vestas
+# fait face à un potentiel de -8,9 % — la phrase est fausse EN MOTS, et retirer le
+# nombre ne la répare pas. Quatre titres ont changé de signe en deux jours (BX,
+# VWS.CO, ADBE, ACN), douze affichent un potentiel négatif aujourd'hui.
+#
+# D'OÙ LE TRAITEMENT EN DEUX TEMPS, qui n'avait jamais été appliqué à aucune autre
+# grandeur : le chiffre est interdit de prose, ET le sens entre dans la signature
+# par tranches larges (négatif / faible / moyen / fort / très fort). Des paliers
+# de 5 points coûteraient 61 réécritures en deux jours, de 10 points encore 40 ;
+# ces tranches-ci en coûtent 18. La règle que ce cas dégage vaut d'être retenue :
+# on surveille une grandeur à la finesse à laquelle la prose l'exprime.
+cite_up = []
+for t, a in ANALYSES.items():
+    for k, v in a.items():
+        if k.startswith("_") or not v:
+            continue
+        txt = v if isinstance(v, str) else " ".join(str(x) for x in v)
+        if re.search(r"potentiel[^.;)]{0,35}?\d+[,.]?\d*\s*%"
+                     r"|\d+[,.]?\d*\s*%\s*de potentiel", txt, re.I):
+            cite_up.append(f"{t}.{k}")
+check("le générateur interdit de chiffrer le potentiel consensus",
+      "NE RECOPIE PAS ce " in open("generate_analyses.py", encoding="utf-8").read())
+# La tolérance est l'EXISTANT EXACT (145 au 12/08), pas un chiffre rond confortable :
+# une tolérance plus large que le constat autorise silencieusement une aggravation.
+sentinelle("citations chiffrées du potentiel consensus (recalculé chaque jour)",
+           cite_up, 145, len(ANALYSES) or 1)
 check("le générateur interdit de citer une grandeur non fournie",
       # La sentinelle porte sur la CLAUSE, pas sur les exemples : c'est « même si
       # tu as raison » qui fait la règle. Micron l'a prouvé en écrivant un
       # multiple juste, au bon exercice, qu'aucune donnée ne lui avait donné.
       "MÊME SI TU AS RAISON"
       in open("generate_analyses.py", encoding="utf-8").read())
+# Tolérance = l'existant exact au 12/08 (355), même raison que ci-dessous.
 sentinelle("citations chiffrées de la décote vs tendance (recalculée chaque jour)",
-           cite_dec, 357, len(ANALYSES) or 1)
+           cite_dec, 355, len(ANALYSES) or 1)
 
 # ── 8. LE TEXTE PUBLIÉ EST-IL CELUI DE LA SOURCE ? ─────────────────────────
 # universe.json est un ARTEFACT : le screener le régénère depuis themes.py à
@@ -897,15 +931,27 @@ _PAS = {c: (m, p) for c, m, p in (_ga.CHAMPS_VALO if _ga else ())}
 def _hors_tolerance(cle, v, ref):
     """L'écart texte/fiche dépasse-t-il ce que le palier de signature laisse vivre ?
 
-    C'est LA définition du couplage : tout écart signalé ici a, par construction,
-    déjà changé le palier — donc déclenché une réécriture. Un palier relatif de
-    pas `p` borne la dérive à `p` ; un palier absolu de pas `p` arrondit au plus
-    proche, donc borne la dérive à `p/2`. Les deux modes ne se confondent pas, et
-    c'est précisément la confusion qui a fait vivre la marge nette à côté de sa
-    propre règle."""
+    C'est LA définition du couplage : tout écart signalé ici doit avoir, par
+    construction, déjà changé le palier — donc déclenché une réécriture. Sinon le
+    contrôle rougit sans qu'aucun remède n'existe, et il apprend à passer outre.
+
+    LE SEUIL EST LE PAS ENTIER, DANS LES DEUX MODES. Premier jet : `pas / 2` en
+    absolu, au motif que `round()` arrondit au plus proche. Raisonnement juste sur
+    la distance au CENTRE d'un palier, faux sur la distance entre deux valeurs :
+    deux nombres du même palier peuvent être distants de presque `pas` tout entier.
+    Un balayage l'a montré en une seconde là où la relecture ne l'a pas vu — marge
+    nette 2,56 % puis 5,09 %, écart de 2,53 point donc signalé, et pourtant le même
+    palier des deux côtés. Le contrôle censé garantir un remède en refusait un.
+    Le mode relatif, lui, était bon dès le premier jet, et la vérification l'a
+    confirmé sur 1,4 million de couples.
+
+    CONSÉQUENCE À ASSUMER : le test tolère désormais 5 points de dérive sur une
+    marge, parce que la signature les tolère. Pour publier un chiffre plus serré,
+    c'est le PAS de CHAMPS_VALO qu'il faut resserrer, pas ce seuil — le resserrer
+    ici ne rendrait pas le texte plus juste, il rendrait l'alarme inutile."""
     mode, pas = _PAS.get(cle, ("rel", 0.10))
     if mode == "abs":
-        return abs(v - ref) > pas / 2.0
+        return abs(v - ref) > pas
     return abs(v - ref) / abs(ref) > pas
 
 # LE DÉFAUT QUE CE TEST EXISTE POUR ATTRAPER. Le guide de rédaction impose de
@@ -1062,17 +1108,33 @@ if _ga is not None:
     # Ce qui suit teste la seule chose qui compte : un écart JUSTE TOLÉRÉ par le
     # test ne doit rien réveiller, et un écart JUSTE REFUSÉ doit avoir changé le
     # palier. Sinon il existe un texte faux que rien ne peut réécrire.
+    # PAR BALAYAGE, ET NON SUR UNE VALEUR CHOISIE. La première version de ce
+    # contrôle prenait une référence unique (20,0) et un écart de 1,6 pas : les
+    # quatre champs passaient au vert alors que le seuil absolu était faux. Une
+    # valeur choisie par celui qui écrit le test tombe dans la région où le test
+    # marche — c'est sa définition. Le balayage, lui, va chercher les bords, et il
+    # a trouvé le contre-exemple (marge 2,56 → 5,09) en une seconde.
+    # LES BORNES COUVRENT DU NÉGATIF : une marge nette ou un flux disponible
+    # peuvent l'être, et c'est là que l'arithmétique des paliers est la plus
+    # fragile.
     for _cle, _mode, _pas in _ga.CHAMPS_VALO:
-        _ref = 20.0
-        _dedans = _ref * (1 + _pas * 0.4) if _mode == "rel" else _ref + _pas * 0.4
-        _dehors = _ref * (1 + _pas * 1.6) if _mode == "rel" else _ref + _pas * 1.6
-        _b0 = _ga.bucket_valorisation({_cle: _ref})
-        check(f"{_cle} : un écart toléré par le test ne réveille rien",
-              not _hors_tolerance(_cle, _dedans, _ref))
-        check(f"{_cle} : un écart refusé par le test a bien changé le palier",
-              _hors_tolerance(_cle, _dehors, _ref)
-              and _ga.bucket_valorisation({_cle: _dehors}) != _b0,
-              f"{_ref} → {_dehors}")
+        _lo, _hi = (1.0, 120.0) if _mode == "rel" else (-40.0, 80.0)
+        _contre = []
+        for _i in range(1, 240):
+            _ref = _lo + (_hi - _lo) * _i / 240
+            _p0 = _ga.bucket_valorisation({_cle: _ref})
+            for _j in range(1, 240):
+                _v = _lo + (_hi - _lo) * _j / 240
+                if (_hors_tolerance(_cle, _v, _ref)
+                        and _ga.bucket_valorisation({_cle: _v}) == _p0):
+                    _contre.append((round(_ref, 2), round(_v, 2)))
+                    break
+            if _contre:
+                break
+        check(f"{_cle} : tout écart signalé par le test a changé le palier",
+              not _contre,
+              f"signalé mais même palier : réf {_contre[0][0]} → {_contre[0][1]}"
+              if _contre else "")
     _base = {"forward_pe": 20.0, "trailing_pe": 30.0,
              "fcf_yield_pct": 4.0, "net_margin_pct": 22.0}
     _s0 = _ga.bucket_valorisation(_base)

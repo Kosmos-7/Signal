@@ -575,6 +575,36 @@ def signature(stock, niveau):
     except (TypeError, ValueError):
         z_bucket = "na"
 
+    # LE POTENTIEL CONSENSUS, PAR TRANCHES LARGES ET SIGNÉES (12/08/2026).
+    #
+    # POURQUOI IL Y ENTRE. Il est cité par 115 fiches sur 148 — plus que tout autre
+    # chiffre du site — et la signature l'ignorait. Il est pourtant dirigé par le
+    # cours (cible ÷ prix − 1), donc il bouge tous les jours.
+    #
+    # POURQUOI PAR TRANCHES ET NON PAR PALIERS FINS. Mesuré sur deux jours de
+    # dérive réelle : des paliers de 5 points imposeraient 61 réécritures sur 147,
+    # de 10 points encore 40. Ces tranches-ci en coûtent 18. Le chiffre exact ne
+    # peut donc pas être maintenu vrai à un coût raisonnable, et il devient
+    # interdit de prose comme le RSI et la décote avant lui.
+    #
+    # POURQUOI, ALORS, LE SURVEILLER QUAND MÊME. C'est ce qui le distingue de la
+    # décote, et c'est le SIGNE. « Le consensus est modestement positif (8 % de
+    # potentiel) » écrit sur Vestas fait face à un potentiel de -8,9 % : la phrase
+    # est fausse EN MOTS, pas seulement en chiffres, et retirer le nombre ne la
+    # répare pas. Quatre titres ont changé de signe en deux jours (BX, VWS.CO,
+    # ADBE, ACN), et douze affichent aujourd'hui un potentiel négatif.
+    #
+    # LA RÈGLE GÉNÉRALE QUE CE CAS DÉGAGE : la signature doit surveiller une
+    # grandeur à la FINESSE À LAQUELLE LA PROSE L'EXPRIME. Chiffrée, il faut des
+    # paliers serrés ; qualifiée, des tranches suffisent ; tue, rien n'est dû.
+    up = b.get("target_upside_pct")
+    try:
+        _u = float(up)
+        up_bucket = ("negatif" if _u < 0 else "faible" if _u < 10 else
+                     "moyen" if _u < 25 else "fort" if _u < 50 else "tres_fort")
+    except (TypeError, ValueError):
+        up_bucket = "na"
+
     rev = b.get("rev_growth_pct")
     try:
         rev_bucket = int(round(float(rev) / 5.0) * 5) if rev is not None else "na"
@@ -590,6 +620,7 @@ def signature(stock, niveau):
         str(b.get("cross_type", "")),
         bucket_cross_days(b.get("cross_days_ago")),
         z_bucket,
+        up_bucket,
         str(rev_bucket),
         warn,
         *bucket_valorisation(b),
@@ -890,11 +921,26 @@ def breakdown_block(stock, niveau):
               f"intrinsèque). Pour chiffrer l'écart, utilise le z-score.{caveat}"
         )
 
+    # LE POTENTIEL CONSENSUS EST FOURNI POUR ÊTRE QUALIFIÉ, PAS RECOPIÉ
+    # (12/08/2026). C'était le chiffre le plus cité du site — 115 fiches sur 148 —
+    # et le moins surveillé : aucun palier, aucune règle. Il est pourtant dirigé
+    # par le cours, donc il bouge tous les jours. Samsung annonçait « un potentiel
+    # de 105 % » trois fois dans sa fiche, contre 84,7 % deux jours plus tard.
+    # Le SENS, lui, entre dans la signature par tranches larges : « le consensus
+    # est modestement positif (8 % de potentiel) » écrit sur Vestas fait face à un
+    # potentiel de -8,9 %, et cette phrase-là est fausse en mots. Voir signature().
     if b.get("target_upside_pct") is not None:
+        _u = b["target_upside_pct"]
+        _sens = ("NÉGATIF : le cours est AU-DESSUS de la cible moyenne" if _u < 0
+                 else "faible" if _u < 10 else "modéré" if _u < 25
+                 else "élevé" if _u < 50 else "très élevé")
         lines.append(
-            f"- Objectif consensus analystes : {fmt(b.get('target_upside_pct'),'%',0)} de potentiel "
-            f"({b.get('target_analysts') or '?'} analystes) — indicatif, biais optimiste structurel documenté ; "
-            f"si consensus et tendance long terme divergent fortement, ce désaccord mérite une phrase."
+            f"- Objectif consensus analystes : potentiel {_sens} "
+            f"({b.get('target_analysts') or '?'} analystes). NE RECOPIE PAS ce "
+            f"potentiel en pourcentage, il est recalculé chaque jour et ton texte "
+            f"ne l'est pas : dis-en le SENS. Indicatif, biais optimiste structurel "
+            f"documenté ; si consensus et tendance long terme divergent fortement, "
+            f"ce désaccord mérite une phrase."
         )
 
     warn = (b.get("signal_dynamics_warning") or "").strip()
@@ -1073,16 +1119,24 @@ Date du jour : {today}.
   Dis ce que la note SIGNIFIE, jamais combien elle vaut. Les grandeurs stables
   (marge, croissance, multiple) restent les bienvenues : elles bougent lentement et
   elles portent du sens dans une phrase.
-- INTERDIT : chiffrer le RSI, le drawdown 52 semaines ou la décote/surcote vs
-  tendance. Ces trois-là sont recalculés À CHAQUE RAFRAÎCHISSEMENT DES COURS,
+- INTERDIT : chiffrer le RSI, le drawdown 52 semaines, la décote/surcote vs
+  tendance ou le potentiel consensus. Ces quatre-là sont recalculés
+  À CHAQUE RAFRAÎCHISSEMENT DES COURS,
   quotidiennement, alors que ton texte n'est réécrit que lorsque le score, le
   croisement, le z-score, un multiple ou la croissance bougent. Un « RSI à 30 »
   écrit aujourd'hui affronte un RSI à 39 sur la fiche dans trois jours. Ils te sont
   donnés pour CADRER LE TON (survente ou surchauffe, proche ou loin des plus hauts,
-  au-dessus ou au-dessous de sa trajectoire), jamais pour être recopiés : dis « en
-  zone de survente », « à bonne distance de son plus haut de l'année », « nettement
-  au-dessus de sa tendance décennale », pas le nombre. Pour chiffrer l'écart à la
-  tendance, le z-score est là pour ça : lui est surveillé au demi-sigma.
+  au-dessus ou au-dessous de sa trajectoire, consensus optimiste ou déjà dépassé),
+  jamais pour être recopiés : dis « en zone de survente », « à bonne distance de
+  son plus haut de l'année », « nettement au-dessus de sa tendance décennale »,
+  « le consensus ne voit plus qu'un potentiel marginal », pas le nombre. Pour
+  chiffrer l'écart à la tendance, le z-score est là pour ça : lui est surveillé au
+  demi-sigma.
+  ATTENTION AU SIGNE DU POTENTIEL CONSENSUS : quand il est négatif, le cours est
+  DÉJÀ AU-DESSUS de la cible moyenne des analystes. Écrire « le consensus reste
+  modestement positif » dans ce cas est faux en mots, pas seulement en chiffres.
+  Douze fiches sont dans ce cas au 12/08/2026, et quatre titres ont basculé d'un
+  signe à l'autre en deux jours.
 - INTERDIT : citer une grandeur que les données ci-dessus ne te donnent PAS, même
   si tu crois la connaître, et MÊME SI TU AS RAISON. Relevé du 12/08/2026 sur les
   fiches publiées : « un ratio cours/ventes de 10,4x (relevé début août 2026 selon

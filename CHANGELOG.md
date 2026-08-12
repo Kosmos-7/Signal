@@ -61,6 +61,52 @@ signature, et la fiche est réécrite au run suivant. Avant ce jour, un titre
 pouvait publier ses comptes sans que rien dans son texte ne bouge, faute de champ
 à comparer.
 
+### Le potentiel consensus : le chiffre le plus cité du site, le moins surveillé
+
+**115 fiches sur 148 le citent** — plus que le RSI, plus que la décote, plus que
+n'importe quel multiple. La signature l'ignorait entièrement. Il est pourtant
+dirigé par le cours (cible ÷ prix − 1), donc il bouge tous les jours : Samsung
+annonce « un potentiel de 105 % », trois fois dans sa fiche, contre 84,7 % deux
+jours plus tard.
+
+**Ce qui le rend plus grave que la décote, c'est le signe.** « Le consensus est
+modestement positif (8 % de potentiel selon 24 analystes) » écrit sur Vestas fait
+face à un potentiel de **−8,9 %** : le cours est passé au-dessus de la cible
+moyenne. La phrase est fausse **en mots**, et retirer le nombre ne la répare pas.
+Quatre titres ont changé de signe en deux jours ; douze affichent aujourd'hui un
+potentiel négatif.
+
+D'où un traitement en deux temps, appliqué à aucune autre grandeur jusqu'ici : le
+**chiffre** est interdit de prose, et le **sens** entre dans la signature par
+tranches larges (négatif / faible / moyen / fort / très fort). Des paliers de
+5 points coûteraient 61 réécritures en deux jours, de 10 points encore 40 ; ces
+tranches en coûtent 18, et seulement 3 de plus une fois croisées avec le reste de
+la signature.
+
+**La règle générale que ce cas dégage**, et qui vaut mieux que les trois
+jurisprudences séparées accumulées jusqu'ici : *on surveille une grandeur à la
+finesse à laquelle la prose l'exprime.* Chiffrée, il faut des paliers serrés ;
+qualifiée, des tranches suffisent ; tue, rien n'est dû.
+
+### Le garde-fou du couplage se réfutait lui-même sur la moitié de ses champs
+
+Le seuil au-delà duquel le test signale un écart texte/fiche était `pas / 2` pour
+les grandeurs en points (marges, rendement du flux). Raisonnement juste sur la
+distance au **centre** d'un palier, faux sur la distance entre **deux valeurs** :
+deux nombres du même palier peuvent être distants de presque un pas entier.
+
+Conséquence exacte : une marge nette passant de 2,56 % à 5,09 % était signalée
+comme périmée alors qu'elle n'avait pas changé de palier — donc qu'aucune
+réécriture ne pouvait la corriger. Le contrôle censé garantir un remède en
+refusait un, ce que le commentaire juste au-dessus interdisait en toutes lettres.
+
+Le seuil passe au pas entier, et le test qui vérifie la propriété passe **du
+point choisi au balayage**. C'est le vrai correctif : la version précédente
+prenait une référence unique (20,0) et un écart de 1,6 pas, valeurs choisies par
+celui-là même qui écrivait le test — elles tombaient donc dans la région où il
+marche. Le balayage a trouvé le contre-exemple en une seconde, sur des bornes qui
+descendent dans le négatif, là où l'arithmétique des paliers est la plus fragile.
+
 ### Deux grandeurs citées que rien ne surveillait
 
 La règle du projet ne souffre pas d'exception : une grandeur est soit citable et
