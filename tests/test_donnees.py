@@ -79,27 +79,23 @@ def sentinelle(nom, cas, tolerance, total):
 # faits FAIT ÉCHOUER le test à son tour. Sans cette moitié-là, un registre
 # devient un cimetière de silencieux — on y ajoute au fil des pannes et on n'en
 # retire jamais rien.
+# LES DEUX ENTRÉES DE L3HARRIS ONT ÉTÉ RETIRÉES LE 12/08/2026, ET RIEN N'EST
+# RÉPARÉ. Le titre a quitté la watchlist spatiale devenue NewSpace — un maître
+# d'œuvre historique n'appartient pas à la génération que le mot désigne — donc
+# il n'a plus de graphe publié, donc les deux défauts ne sont plus OBSERVABLES.
+# Le contrôle « registre à jour » exige alors leur retrait, et il a raison : ce
+# registre nomme des défauts constatés dans le corpus publié, pas des défauts
+# connus du monde. Ce que l'on sait reste écrit ici, pour le jour où LHX
+# reviendra par le top 30 :
+#   - la marge d'exercice ne venait pas de la série dessinée, parce que le filtre
+#     de clôture majoritaire (edgar.filtrer_cloture_majoritaire) écartait le
+#     régime post-2019 comme un fantôme : L3Harris est passée de juin à décembre
+#     à la fusion de 2019, et les dix exercices juin/juillet font la majorité ;
+#   - trois barres de chiffre d'affaires (2010:102, 2011:189, 2013:420 pour des
+#     exercices entre 5 005 et 5 012) venaient d'une erreur d'échelle au dépôt
+#     XBRL, que la SEC ne corrige pas.
+# Les deux appartiennent à la tâche #83, qui n'est pas close pour autant.
 CONNUS = {
-    "la marge d'exercice vient de la série que le graphique dessine": {
-        # CAUSE IDENTIFIÉE le 10/08 : ce n'est pas le changement d'exercice qui
-        # tronque la série, c'est le filtre de clôture majoritaire
-        # (edgar.filtrer_cloture_majoritaire) qui le prend pour un artefact.
-        # L3Harris est passée de juin à décembre à la fusion de 2019 ; les dix
-        # exercices juin/juillet font la majorité, donc c'est le NOUVEAU régime
-        # qui est écarté. La marge affichée est celle de l'exercice réel, la
-        # dernière barre celle de 2019 : l'écart en découle. Tâche #83.
-        "LHX": "filtre de clôture majoritaire : le régime post-2019 est écarté "
-               "comme un fantôme — tâche #83",
-    },
-    # Les trois barres fausses de L3Harris, distinctes de la troncature
-    # ci-dessus : erreur d'échelle au dépôt XBRL, que la SEC ne corrige pas. La
-    # cause exacte (quel concept a produit 102) demande de lire le greffe, que
-    # le proxy de développement bloque. Tâche #83.
-    "aucun chiffre d'affaires ne plonge d'un ordre de grandeur entre deux "
-    "exercices normaux": {
-        "LHX": "2010:102, 2011:189, 2013:420 entre 5 005 et 5 012 — erreur "
-               "d'échelle au dépôt XBRL, tâche #83",
-    },
     # TÂCHE #84 — L'INTERMITTENCE, PRISE SUR LE FAIT LE 12/08/2026. Ces cinq
     # entrées ont été retirées ce matin-là parce que les cinq fiches publiaient
     # leur rendement et que plus aucune du corpus n'en manquait : le contrôle
@@ -144,9 +140,18 @@ CONNUS = {
     # l'accord du propriétaire. En attendant, l'entrée disparaîtra d'elle-même au
     # prochain run éditorial du lundi, qui réécrit les textes — et le contrôle
     # « registre à jour » exigera alors de la retirer. C'est le comportement voulu.
+    # ANET inscrit le 12/08/2026 au soir, et c'est le cas ORDINAIRE que
+    # l'entrée précédente décrit en creux : republication du screener en cours de
+    # semaine (passage de la watchlist espace à NewSpace), donc des fiches
+    # rafraîchies sous une prose qui ne l'a pas été. Aucun résultat publié
+    # entre-temps ici, seulement un cours qui a bougé — la forme la plus banale
+    # de la péremption structurelle, et celle qui disparaîtra d'elle-même au
+    # prochain run éditorial du lundi.
     "aucun multiple cité ne diverge de la fiche": {
         "2330.TW": "PER courant cité 32,3 vs 28,2 en fiche — résultats publiés "
                    "entre deux runs, texte hebdomadaire non réécrit depuis",
+        "ANET":    "PER à terme cité 36,7 vs 40,8 en fiche — screener republié "
+                   "en cours de semaine, texte hebdomadaire non réécrit depuis",
     },
     "aucun texte ne dit indisponible un chiffre que la fiche affiche": {},
     # VIDÉ LE 10/08 : les quinze n'étaient pas inatteignables, c'est le contrôle
@@ -508,11 +513,19 @@ print("\n— Bandes de vraisemblance : une exception est permise, une dérive no
 # précédents, et il est structurel : la population suivie n'est plus celle sur
 # laquelle ces bandes ont été calées. Vérifiées une à une contre la série
 # publiée — les marges tiennent au dénominateur, jamais à l'unité.
+# RELEVÉE D'UN CRAN LE 12/08/2026, au resserrement de la watchlist espace en
+# NewSpace, et d'un seul : Voyager Technologies entre avec −124 % de marge de
+# flux. Le motif est celui des trois relèvements précédents, vérifié contre la
+# série publiée plutôt que supposé — chiffre d'affaires 136, 144 puis 166 M$,
+# résultat net −25, −62 puis −105 M$ : une société qui construit une station
+# orbitale avant de l'exploiter, pas une base qui a glissé d'un facteur mille.
+# Le retrait des quatorze titres d'avant la vague, tous profitables, ne change
+# rien au compte : ils étaient dans la bande, ils n'en sortaient pas.
 # La sentinelle garde tout son mordant : elle est calée sur le compte EXACT du
 # jour, donc le prochain titre qui sortira de la bande la fera tomber.
 BANDES = [
     ("marge nette d'exercice", "net_margin_exercice_pct", -60, 70, 13),
-    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 14),
+    ("marge de flux disponible", "fcf_margin_pct", -60, 70, 15),
     ("conversion du bénéfice en cash", "conversion_pct", -200, 400, 8),
     ("PER courant", "trailing_pe", 1, 200, 10),
     ("rendement des capitaux propres", "roe_pct", -100, 150, 6),
