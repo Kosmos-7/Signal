@@ -1,0 +1,172 @@
+{
+ "id": "2026-08-13",
+ "type": "quotidien",
+ "date": "2026-08-13",
+ "titre": "Wall Street en légère hausse, l'or brille, l'Europe hésite",
+ "chapeau": "Le S&P 500 et le Nasdaq terminent dans le vert, l'or touche 4 408 $, pendant que Paris et les Européens reculent légèrement.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-13.jpg",
+  "v": "6f8ef69c",
+  "legende": "Paternoster Square",
+  "credit": "gren",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Paternoster_Square.jpg",
+  "fichier": "Paternoster Square.jpg",
+  "requete": "London Stock Exchange Paternoster Square"
+ },
+ "marches": {
+  "ref": "2026-08-12",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7748.5,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.2626718275208857,
+    "ref": "2026-08-12"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8674.9404296875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.45898190954627466,
+    "ref": "2026-08-12"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26588.490234375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.5408908521152402,
+    "ref": "2026-08-12"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6533.990234375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.26300414126990146,
+    "ref": "2026-08-12"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.682000160217285,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.0019998550415039062,
+    "ref": "2026-08-12"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4408.89990234375,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.5909172334873375,
+    "ref": "2026-08-12"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Arista Networks, Inc.",
+   "valeur": 210.5,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 6.393729343564369,
+   "ref": "2026-08-12",
+   "ticker": "ANET",
+   "nom": "Arista Networks, Inc."
+  }
+ },
+ "marches_texte": "Wall Street a terminé la journée du 12 août dans le calme, avec un S&P 500 en hausse de 0,26 % à 7 748,50 points et un Nasdaq qui progresse un peu plus franchement à +0,54 %. De l'autre côté de l'Atlantique, le CAC 40 lâche 0,46 % à 8 674,94 points et l'Euro Stoxx 50 recule de 0,26 %. L'or, lui, ne boude pas son plaisir : +0,59 % à 4 408,90 $. La palme du mouvement du jour revient à Arista Networks, qui bondit de 6,39 % à 210,50 $.",
+ "sections": [
+  {
+   "titre": "Intel : le PDG sort le chéquier, les observateurs notent",
+   "texte": "Intel a annoncé cette semaine une importante opération de cession d'actions, et son PDG Lip-Bu Tan s'est révélé en être un acheteur significatif. L'information a été dévoilée lors d'un échange avec Jim Cramer sur CNBC, qui a qualifié Intel de son action favorite. Le geste du dirigeant, qui met la main à la poche dans sa propre vente d'actions, est le genre de signal que les marchés aiment regarder de près.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "CoreWeave : des puces Nvidia de six ans, et alors ?",
+   "texte": "CoreWeave fait face à un argument baissier récurrent sur le secteur de l'intelligence artificielle : les dépenses en infrastructures seraient excessives. L'entreprise apporte un contre-argument concret : elle observe une demande soutenue pour des puces Nvidia vieilles de six ans, ce qui, selon CNBC, contribue à justifier l'ampleur des investissements actuels dans les centres de données. Un élément de contexte qui anime le débat sur la valorisation des acteurs de la filière IA.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "L'or en forme, le pétrole moins",
+   "texte": "L'or poursuit sa progression et clôture à 4 408,90 $, dans un contexte où les données d'inflation récentes ont semblé plus modérées et où les anticipations sur les taux de la Fed évoluent, selon CNBC. Du côté du pétrole, le tableau est différent : les cours reculent, une perspective de demande plus faible l'emportant sur les inquiétudes liées aux tensions au Moyen-Orient concernant l'approvisionnement, d'après Reuters.",
+   "sources": [
+    0,
+    4
+   ]
+  },
+  {
+   "titre": "Menace balistique sur l'avion présidentiel américain",
+   "texte": "Une menace de missile jugée crédible a conduit à un changement discret d'aéronef pour le président Trump, selon une source citée par Reuters. L'agence relate également les conditions de voyage à bord de l'avion présidentiel en l'absence du président. Ces éléments sont rapportés à titre factuel.",
+   "sources": [
+    1,
+    2
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Oil eases as weaker demand outlook counters Mideast supply concerns - Reuters",
+   "resume": "Oil eases as weaker demand outlook counters Mideast supply concerns  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNRHRqOVFPR196RlJ0WTVZajZ6NHRpdmhmZ0EtSDMwTDVZVk5mX2JnVm9LVnFDQ2M4c08ybExVeldFQk9BdG9HVldTbnJFRDVjdTc3MF8wZmc4ck41bWd6Wng2SFowYjZrNW1UVzJuMDR4cnBUT0c2TXUteFR0cTFiVVY5bm5Da09NSDI4akNIcFY4NHRBRzkzNXNuZ1luQjNGUHFFdnVhT1RCNGlKMWx4MkgzdzhLdw?oc=5",
+   "date": "2026-08-13 01:08"
+  },
+  {
+   "titre": "Credible missile threat led to secret aircraft switch for Trump, source says - Reuters",
+   "resume": "Credible missile threat led to secret aircraft switch for Trump, source says  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOSlRqMEthQzJ3NWM2WVctYUhwMTlFekFyd0o3QVpnUkRoeUxUMGxSSThmVW1QT096QmVNUlRHZkxOUXM5M0tGdXBSRlIwbWFQbHFEdVdaR2lUVkdTaWRybHFZYzRtMk85LUNLMXF4bGFsZU1UVE54SXJsZWFRYnRmNlRoVVhWNUZVNm1OZmdlTHI3RlpYYWtULV9qZWFvVUtVMEl4aFByMDJXRHN0RHpxanJvNGY3cGNKN3Y5QUlncHljV193bEstMGFzTQ?oc=5",
+   "date": "2026-08-12 23:19"
+  },
+  {
+   "titre": "'If I go, you go, right?': Traveling on the presidential plane—without Trump - Reuters",
+   "resume": "'If I go, you go, right?': Traveling on the presidential plane—without Trump  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPVy1qZERoWkltdjF1bTJRWTZQaTJ6NVI1YVBVcVBQLXhuaFBoZ2o2bW9tNTlMR3VFNDlPSHdTUlZ6WkkzR1RkbXpMV1VYZUJRdk1Tano3emJQSGVVdUtlT3FWMWFrVjg3bFZlbUQzNlZuWDJ6M19pb0pjcDRoWjdoZW1iVk04MGRDd0RRSkZpUVJFaDZxem5JWE5SaXFfMVZBZmxub00xdk11SGZ3TFJuNzItSW9IaDB0dzBlVGp2R014eUZj?oc=5",
+   "date": "2026-08-12 23:06"
+  },
+  {
+   "titre": "CoreWeave counters a key bear case on the AI trade. What it means for our data center stocks",
+   "resume": "CoreWeave is seeing strong demand for six-year-old Nvidia chips, helping justify all the current AI capex.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/12/coreweave-counters-a-key-bear-case-on-the-ai-trade-what-it-means-for-our-data-center-stocks.html",
+   "date": "2026-08-12 20:16"
+  },
+  {
+   "titre": "How to trade gold prices as Fed rate hike and inflation odds shifts",
+   "resume": "Gold prices have been volatile in 2026, but a recent rally shows renewed investor interest amid tamer inflation data and changing Fed rate expectations.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/12/gold-prices-metals-fed-rate-hike-inflation.html",
+   "date": "2026-08-12 19:22"
+  },
+  {
+   "titre": "CEO of Intel just gave Jim Cramer one more reason to call it his favorite stock",
+   "resume": "Intel on Wednesday revealed CEO Lip-Bu Tan as a big buyer in the massive stock sale that the company announced this week.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/12/ceo-of-intel-just-gave-jim-cramer-one-more-reason-to-call-it-his-favorite-stock.html",
+   "date": "2026-08-12 18:38"
+  }
+ ],
+ "genere_le": "2026-08-13 07:02 UTC"
+}
