@@ -1,16 +1,18 @@
 /* ============================================================
    Signal — design system partagé (terminal · cyan neutre + HUD)
-   Une seule source de vérité : tokens + chrome + composants.
+   VERSION CLAIRE : même grammaire (accent cyan unique, serif/mono,
+   filets fins), sur fond papier. Une seule source de vérité.
    Couleur sémantique conservée UNIQUEMENT pour le P&L factuel (.pos/.neg).
    ============================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#06060b;
-  --text:#f2f3fc;--text2:#c6c6e0;--text3:#8a8aa6;
-  --ac:#74b6df;                  /* accent unique, neutre */
-  --green:#22d98a;--red:#f0556a; /* réservés au P&L factuel */
-  --gold:#e8a820;                /* marque / badge « fictif » */
-  --line:rgba(255,255,255,.07);
+  color-scheme:light;
+  --bg:#f4f6fa;
+  --text:#1d2233;--text2:#454c66;--text3:#616a86;
+  --ac:#266f9e;                  /* accent unique, neutre */
+  --green:#0b7c4b;--red:#cc3049; /* réservés au P&L factuel */
+  --gold:#8f6606;                /* marque / badge « fictif » */
+  --line:rgba(25,40,80,.13);
   --mono:'Courier New',monospace;
   --serif:Georgia,serif;
 }
@@ -20,11 +22,11 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:16px;-webkit-font-smoothing:antialiased}
 
 /* ── Fond + chrome HUD ── */
-#fx{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 130% 90% at 50% 0%,#0a1c2c 0%,#05101e 44%,#06060b 76%);pointer-events:none}
+#fx{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 130% 90% at 50% 0%,#dce9f5 0%,#ebf1f8 44%,#f4f6fa 76%);pointer-events:none}
 #bg{position:fixed;inset:0;z-index:1;pointer-events:none}
 .frame{display:none}   /* corners HUD retirés */
-.scan{position:fixed;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(120,180,230,.022) 0px,rgba(120,180,230,.022) 1px,transparent 1px,transparent 3px);mix-blend-mode:screen}
-.frame i{position:absolute;width:16px;height:16px;border:1px solid rgba(120,190,240,.45)}
+.scan{position:fixed;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(30,90,150,.028) 0px,rgba(30,90,150,.028) 1px,transparent 1px,transparent 3px);mix-blend-mode:multiply}
+.frame i{position:absolute;width:16px;height:16px;border:1px solid rgba(38,111,158,.45)}
 .frame i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}.frame i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
 .frame i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}.frame i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
 
@@ -34,7 +36,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,Bl
    sur celle-là. Le chrome ne doit pas dépendre du réglage de texte de la page
    qu'il coiffe. */
 header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem;line-height:1.6;background:transparent;border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s}
-header.scrolled{background:rgba(8,11,20,.62);border-bottom-color:var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+header.scrolled{background:rgba(247,250,253,.72);border-bottom-color:var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 /* Marque et nav : une seule définition pour les quatre onglets. Avant, deux
    pages surchargeaient localement ces règles et le bandeau changeait de
    taille en passant d'un onglet à l'autre — logo 28 px ici, 30 px là,
@@ -100,7 +102,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 .tag{display:inline-block;font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
 
 /* ── Carte ── */
-.card{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.3rem}
+.card{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.3rem}
 
 /* ── Anneau de score ── */
 .ring{position:relative;flex:0 0 auto}
@@ -114,7 +116,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
    rotation d'univers. */
 .ring .rp{font:.58rem var(--mono);letter-spacing:.6px;margin-top:5px;text-align:center;white-space:nowrap}
 .ring .rp-bas{color:var(--red)}
-.ring .rp-moyen{color:#e0995e}
+.ring .rp-moyen{color:#9d6414}
 .ring .rp-haut{color:var(--green)}
 .ring .rl{font:.56rem var(--mono);color:var(--text3);letter-spacing:2px;display:flex;align-items:center;gap:4px}
 .ring .rl::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ac);box-shadow:0 0 6px var(--ac);animation:blink 1.5s infinite}
@@ -122,8 +124,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 /* ── Jauge (curseur + repères) ── */
 .gauge{margin-bottom:.7rem}
 .gauge .gl{font:.62rem var(--mono);color:var(--text3);letter-spacing:.5px;text-transform:uppercase;display:flex;justify-content:space-between}.gauge .gl b{color:var(--text)}
-.gtrack{position:relative;height:5px;border-radius:3px;margin-top:6px;background:rgba(255,255,255,.07)}
-.gtick{position:absolute;top:0;width:1px;height:5px;background:rgba(255,255,255,.18)}
+.gtrack{position:relative;height:5px;border-radius:3px;margin-top:6px;background:rgba(28,50,100,.10)}
+.gtick{position:absolute;top:0;width:1px;height:5px;background:rgba(28,50,100,.28)}
 .gmark{position:absolute;top:-3px;width:2px;height:11px;background:var(--ac);box-shadow:0 0 6px var(--ac);border-radius:2px;transition:left .5s}
 
 /* ── Barre de progression (meter) ── */
@@ -132,11 +134,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
    .mval et NON .mv — cette dernière est le badge de mouvement au
    classement, dont la bordure et le padding débordaient ici. */
 .meter{display:grid;grid-template-columns:54px 1fr 58px;gap:9px;align-items:center;font:.64rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-bottom:8px}
-.meter .t{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.meter .t{height:4px;background:rgba(28,50,100,.10);border-radius:2px;overflow:hidden}
 .meter .f{display:block;height:4px;border-radius:2px;width:0;background:var(--ac);transition:width .8s cubic-bezier(.2,.8,.2,1)}
 .meter .mval{color:var(--text2);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 /* barre horizontale générique (alloc, poids…) */
-.bar-track{height:4px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.bar-track{height:4px;background:rgba(28,50,100,.10);border-radius:3px;overflow:hidden}
 .bar-fill{height:100%;border-radius:3px;background:var(--ac)}
 
 /* ── Bandeau de métriques ── */
@@ -160,7 +162,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 .type-cur::after{content:'▋';color:var(--ac);margin-left:1px;animation:blink .8s step-end infinite}
 
 /* ── Keyframes ── */
-@keyframes ringglow{0%,100%{filter:drop-shadow(0 0 6px rgba(116,182,223,.22))}50%{filter:drop-shadow(0 0 15px rgba(116,182,223,.5))}}
+@keyframes ringglow{0%,100%{filter:drop-shadow(0 0 6px rgba(38,111,158,.20))}50%{filter:drop-shadow(0 0 15px rgba(38,111,158,.38))}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
@@ -179,8 +181,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 .toc::-webkit-scrollbar{width:0}
 .toc-h{font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);padding:0 .45rem .6rem;border-bottom:1px solid var(--line);margin-bottom:.15rem}
 .toc a{position:relative;display:block;font:500 .84rem var(--serif);color:var(--text2);text-decoration:none;padding:.55rem 30px .55rem .45rem;border-bottom:1px solid var(--line);transition:padding-left .18s,color .18s,border-color .18s;line-height:1.25}
-.toc a:hover{color:#fff;padding-left:.72rem}
-.toc a.active{color:#fff;border-left:2px solid var(--ac);margin-left:-2px;padding-left:calc(.72rem - 2px)}
+.toc a:hover{color:#10141f;padding-left:.72rem}
+.toc a.active{color:#10141f;border-left:2px solid var(--ac);margin-left:-2px;padding-left:calc(.72rem - 2px)}
 .toc .tn{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);font:500 .82rem var(--serif);color:var(--text3)}
 .toc a.active .tn{color:var(--ac)}
 
@@ -196,22 +198,22 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
      pied de page. Le décalage haut correspond au header fixe. */
   .tocm{display:block;position:sticky;top:var(--tocm-top,58px);z-index:16;margin:0 0 -1px}
   .tocm-b{display:flex;align-items:center;gap:.6rem;width:100%;padding:.62rem 1rem;
-    background:rgba(10,10,18,.94);backdrop-filter:blur(9px);
+    background:rgba(247,249,252,.95);backdrop-filter:blur(9px);
     border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
     color:var(--text2);font:.76rem var(--mono);letter-spacing:.4px;text-align:left;cursor:pointer}
   .tocm-k{color:var(--text3);text-transform:uppercase;font-size:.6rem;letter-spacing:1.4px;flex:none}
-  .tocm-v{color:#fff;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tocm-v{color:#10141f;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .tocm-c{color:var(--text3);flex:none;transition:transform .2s}
   .tocm.on .tocm-c{transform:rotate(180deg)}
   /* La feuille se limite à 62 % de la hauteur : on doit toujours voir un bout
      de la page derrière, sinon on ne sait plus d'où on ouvre. */
-  .tocm-p{max-height:62vh;overflow-y:auto;background:rgba(10,10,18,.985);
+  .tocm-p{max-height:62vh;overflow-y:auto;background:rgba(247,249,252,.99);
     backdrop-filter:blur(9px);border-bottom:1px solid var(--line);padding:.3rem 0 .5rem}
   .tocm-h{font:600 .58rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;
     color:var(--text3);padding:.85rem 1rem .35rem}
   .tocm-p a{position:relative;display:block;font:500 .92rem var(--serif);color:var(--text2);
     text-decoration:none;padding:.6rem 2.6rem .6rem 1rem;border-bottom:1px solid var(--line)}
-  .tocm-p a.active{color:#fff;box-shadow:inset 2px 0 0 var(--ac)}
+  .tocm-p a.active{color:#10141f;box-shadow:inset 2px 0 0 var(--ac)}
   .tocm-p .tn{position:absolute;right:1rem;top:50%;transform:translateY(-50%);
     font:500 .8rem var(--serif);color:var(--text3)}
   .tocm-p a.active .tn{color:var(--ac)}
@@ -245,4 +247,4 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 }
 
 /* ── Scrollbars discrètes ── */
-::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:rgba(28,50,100,.22);border-radius:3px}
