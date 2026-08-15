@@ -552,7 +552,7 @@ let curWl=null,curList=[],curGroups=null;
 function mainMeta(){
   if(TBY[MAIN])return TBY[MAIN];
   return {id:MAIN,label:'Notre top 30',sous_titre:'Les meilleurs scores, toutes catégories',kind:'principale',
-thesis:"Où commencer ? Ici : les trente meilleurs scores de la semaine, toutes catégories confondues, sans présupposé de secteur ni de thème.",
+thesis:"Où commencer ? Ici : les trente meilleurs scores, tous secteurs confondus, renouvelés chaque semaine.",
     inversion:'',biais:'',regle_texte:'',declares:stocks.length,scores:stocks.length,
     couverture:1,status:'ok',members:stocks.map(s=>s.ticker)};
 }

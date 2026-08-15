@@ -76,6 +76,10 @@
 # FORME (08/2026) : chaque thèse OUVRE SUR LA QUESTION à laquelle la liste
 # répond, puis y répond court. Le lecteur sait en une ligne si cette liste le
 # concerne — c'est le « pourquoi cette page », pas le « comment c'est fait ».
+# Complétée le 15/08 (passe éditoriale du propriétaire) : la thèse se FERME
+# sur le pari. La dernière phrase dit à quoi l'on s'expose en entrant — c'est
+# elle qui répond « est-ce moi ? », pas la description du périmètre.
+# Et le site vouvoie, partout : le « ton courtier » du PEA était une coquille.
 #
 # CE QUE LES THÈMES NE SONT PAS
 # Ils ne sont justifiés par aucun backtest et ne prétendent améliorer aucune
@@ -400,13 +404,13 @@ THEMES_CURES = [
         "label": "Robots",
         # Le sous-titre énonce la RÈGLE d'entrée, pas un état du classement :
         # c'est la doctrine de description rappelée en tête de fichier.
-        "sous_titre": "Ceux dont les comptes bougent quand le nombre de robots bouge",
+        "sous_titre": "Les comptes qui bougent quand le nombre de robots bouge",
         "kind": "these",
         "thesis": (
             "Qui encaisse si les robots se multiplient ? Pas d'abord ceux qui les "
             "assemblent. Un bras d'usine et un humanoïde partagent les mêmes "
             "articulations, et ces pièces-là sortent d'une poignée d'ateliers. "
-            "La liste va du réducteur au robot fini."
+            "Le pari des pièces communes, pas celui du robot vedette."
         ),
         "inversion": (
             "Deux façons d'avoir tort, et elles sont opposées. Que l'humanoïde reste une "
@@ -564,11 +568,11 @@ THEMES_CURES = [
         "kind": "these",
         "thesis": (
             "Qu'achète-t-on quand on achète le NewSpace ? Pas le spatial, mais la "
-            "génération de sociétés apparue au milieu des années 2000 : procédés "
-            "nouveaux, débouchés nouveaux, financements nouveaux. Elle a fait tomber le "
-            "coût du kilo en orbite et facture des abonnements là où des agences "
-            "signaient des contrats. La liste suit l'accès à l'orbite, la liaison, "
-            "l'image et la station — pas les maisons qui les précédaient."
+            "génération de sociétés apparue au milieu des années 2000 — procédés, "
+            "débouchés et financements nouveaux — qui a fait tomber le coût du kilo "
+            "en orbite et vend des abonnements là où les agences signaient des "
+            "contrats. De l'accès à l'orbite à la station, la liste suit cette "
+            "génération — pas les maisons qui la précédaient."
         ),
         "inversion": (
             "Le NewSpace a une dépendance dont ses carnets de commandes ne disent rien : il "
@@ -950,7 +954,7 @@ THEMES_CURES.append({
     # Accenture, Adyen, SAP et ASML occupaient la moitié du haut de tableau.
     "biais": (
         "À vérifier avant tout ordre : l'éligibilité d'un titre et l'acceptation "
-        "de la ligne par ton courtier sont deux choses différentes. Plusieurs "
+        "de la ligne par votre courtier sont deux choses différentes. Plusieurs "
         "courtiers français refusent au PEA les lignes cotées à New York, ou "
         "n'acceptent que la ligne européenne. Et un certificat de dépôt (ADR) "
         "n'est jamais logeable, quel que soit le siège de l'émetteur.\n\n"
