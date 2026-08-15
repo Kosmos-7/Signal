@@ -5,6 +5,28 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Les images des watchlists changeaient de taille avec la longueur du texte
+
+Signalé par le propriétaire (15/08), et mesuré : sur l'accueil, l'image du
+top 30 faisait **189 px de haut**, celle du NewSpace **253 px** — soit 64 px
+d'écart pour la seule raison que la thèse du NewSpace compte quatre fois plus
+de signes. L'image est une colonne de flex étirée sur la hauteur de sa carte,
+et cette hauteur suivait le texte d'à côté. Six cartes, six formats.
+
+`grid-auto-rows:1fr` égalise les rangées sur la plus haute : **toutes les
+cartes prennent la même hauteur, donc toutes les images la même taille**.
+Aucune thèse n'est tronquée — la règle « la thèse s'affiche EN ENTIER » tient
+toujours — et aucune hauteur n'est écrite en dur : une liste dont le texte
+s'allonge repousse la rangée pour tout le monde. Sous 900 px rien ne change :
+l'image passe au-dessus du texte en 16/9 pleine largeur, elle était déjà
+identique d'une carte à l'autre.
+
+**Le vide, lui, a changé de place.** Les cartes courtes ont désormais du mou,
+et le `margin-top:auto` était porté par les pastilles de tickers : le blanc
+s'ouvrait EN PLEIN MILIEU de la carte. Il passe au pied de carte, seul
+épinglé en bas — le contenu se lit d'un bloc et le blanc se range juste
+au-dessus du filet, là où on l'attend.
+
 ### Le site vouvoie enfin partout, et l'accueil dit « Trouvez »
 
 **Deux voix pour un seul site.** L'accueil promettait « les opportunités qui
