@@ -14,30 +14,30 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: auto; }   /* rétablit le scroll naturel (header sticky) */
   :root {
-    --bg:         #06060b;
-    --surface:    rgba(255,255,255,0.022);
-    --surface2:   rgba(255,255,255,0.04);
-    --surface3:   rgba(255,255,255,0.07);
-    --border:     rgba(255,255,255,0.07);
-    --border2:    rgba(116,182,223,0.30);
-    --text:       #f2f3fc;
-    --text2:      #c6c6e0;
-    --text3:      #8a8aa6;
-    --ac:         #74b6df;
-    --ac-dim:     rgba(116,182,223,0.10);
-    --brand:      #74b6df;   /* or véritable : badge « fictif » + VIX vigilance uniquement */
-    --brand-dim:  rgba(116,182,223,0.10);
-    --gold:       #74b6df;   /* accent interactif → cyan ; l'or vrai vit dans --brand */
-    --gold2:      #4f8bb0;
-    --gold-dim:   rgba(116,182,223,0.10);
-    --green:      #22d98a;
-    --green-dim:  rgba(34,217,138,0.10);
-    --red:        #f0556a;
-    --red-dim:    rgba(240,85,106,0.10);
-    --blue:       #74b6df;
-    --blue-dim:   rgba(116,182,223,0.10);
-    --orange:     #74b6df;
-    --orange-dim: rgba(116,182,223,0.12);
+    --bg:         #f4f6fa;
+    --surface:    rgba(255,255,255,0.72);
+    --surface2:   rgba(28,50,100,0.05);
+    --surface3:   rgba(28,50,100,0.10);
+    --border:     rgba(25,40,80,0.13);
+    --border2:    rgba(38,111,158,0.35);
+    --text:       #1d2233;
+    --text2:      #454c66;
+    --text3:      #616a86;
+    --ac:         #266f9e;
+    --ac-dim:     rgba(38,111,158,0.10);
+    --brand:      #266f9e;   /* or véritable : badge « fictif » + VIX vigilance uniquement */
+    --brand-dim:  rgba(38,111,158,0.10);
+    --gold:       #266f9e;   /* accent interactif → cyan ; l'or vrai vit dans --brand */
+    --gold2:      #1d5a82;
+    --gold-dim:   rgba(38,111,158,0.10);
+    --green:      #0b7c4b;
+    --green-dim:  rgba(11,124,75,0.10);
+    --red:        #cc3049;
+    --red-dim:    rgba(204,48,73,0.10);
+    --blue:       #266f9e;
+    --blue-dim:   rgba(38,111,158,0.10);
+    --orange:     #266f9e;
+    --orange-dim: rgba(38,111,158,0.12);
     --radius:     10px;
     --radius-lg:  16px;
   }
@@ -59,23 +59,23 @@
   .hero { margin-bottom: 2rem; }
   .hero h1 {
     font-family: Georgia, serif; font-size: 1.85rem; font-weight: normal; letter-spacing: -0.5px; margin-bottom: 0.6rem;
-    background: linear-gradient(120deg, #eef0fb 30%, #74b6df 100%);
+    background: linear-gradient(120deg, #1d2233 30%, #266f9e 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .hero-sep {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(116,182,223,0.22), transparent);
+    background: linear-gradient(90deg, transparent, rgba(38,111,158,0.22), transparent);
     margin-bottom: 1.75rem;
   }
   .hero p { color: var(--text2); font-size: 0.93rem; max-width: 580px; line-height: 1.75; margin-bottom: 0.75rem; }
   .update-line { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); }
 
   /* ── PANIC ── */
-  .panic-banner { background: var(--orange-dim); border: 1px solid rgba(116,182,223,0.25); border-radius: var(--radius); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--orange); }
+  .panic-banner { background: var(--orange-dim); border: 1px solid rgba(38,111,158,0.25); border-radius: var(--radius); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--orange); }
 
   /* ── SURVIVAL ── */
-  .survival-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; position: relative; overflow: hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+  .survival-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; position: relative; overflow: hidden; }
   .survival-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
   .survival-block.alive::before { background: var(--green); }
   .survival-block.dead::before  { background: var(--red); }
@@ -92,13 +92,13 @@
   .vix-pill .vix-label { color: var(--text3); opacity: 0.75; text-transform: uppercase; letter-spacing: 0.4px; font-size: 0.68rem; }
   .vix-pill .vix-val   { color: var(--text); font-weight: 600; font-size: 0.82rem; }
   .vix-pill .vix-regime { font-size: 0.7rem; letter-spacing: 0.3px; }
-  .vix-pill.calme      { border-color: rgba(28,200,122,0.25); }
+  .vix-pill.calme      { border-color: rgba(11,124,75,0.25); }
   .vix-pill.calme .vix-regime      { color: var(--green); }
-  .vix-pill.vigilance  { border-color: rgba(116,182,223,0.25); }
+  .vix-pill.vigilance  { border-color: rgba(38,111,158,0.25); }
   .vix-pill.vigilance .vix-regime  { color: var(--brand); }
-  .vix-pill.stress     { border-color: rgba(116,182,223,0.30); }
+  .vix-pill.stress     { border-color: rgba(38,111,158,0.30); }
   .vix-pill.stress .vix-regime     { color: var(--orange); }
-  .vix-pill.panique    { border-color: rgba(240,84,84,0.35); background: var(--red-dim); }
+  .vix-pill.panique    { border-color: rgba(204,48,73,0.35); background: var(--red-dim); }
   .vix-pill.panique .vix-regime    { color: var(--red); font-weight: 700; }
   .status-pill { display: flex; align-items: center; gap: 6px; font-family: 'Courier New', monospace; font-size: 0.80rem; text-transform: uppercase; letter-spacing: 1px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; font-weight: 600; }
   .sdot { width: 7px; height: 7px; border-radius: 50%; }
@@ -108,25 +108,25 @@
   .pos-stats { font-family: 'Courier New', monospace; font-size: 0.73rem; color: var(--text3); margin: -4px 0 10px; }
   .pos-stats b { color: var(--text2); font-weight: 600; }
   .th { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; transition: border-color 0.15s; }
-  .th:hover { border-color: rgba(116,182,223,0.22); box-shadow: 0 0 16px rgba(116,182,223,0.05); }
+  .th:hover { border-color: rgba(38,111,158,0.22); box-shadow: 0 0 16px rgba(38,111,158,0.05); }
   .th-label { font-size: 0.78rem; font-weight: 500; color: var(--text2); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 5px; }
   .th-value { font-family: Georgia, serif; font-size: 1.35rem; line-height: 1; }
   .th-sub  { font-family: 'Courier New', monospace; font-size: 0.78rem; margin-top: 3px; color: var(--text3); }
 
   /* ── RULES ── */
-  .rules-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+  .rules-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; }
   .section-title { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 1rem; }
   .rules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .rule { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; transition: border-color 0.15s, box-shadow 0.15s; }
-  .rule:hover { border-color: var(--border2); box-shadow: 0 0 0 1px var(--border2), 0 4px 16px rgba(0,0,0,0.4); }
+  .rule:hover { border-color: var(--border2); box-shadow: 0 0 0 1px var(--border2), 0 4px 16px rgba(30,45,80,.14); }
   .rule-num { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--ac); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
   .rule-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
   .rule p { font-size: 0.83rem; color: var(--text2); line-height: 1.55; }
 
   /* ── KPI GRID ── */
   .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 1.75rem; }
-  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; position: relative; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
-  .kpi:hover { border-color: rgba(116,182,223,0.25); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(116,182,223,0.09), 0 0 24px rgba(116,182,223,0.06), 0 8px 28px rgba(0,0,0,0.5); }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; position: relative; transition: border-color 0.15s, box-shadow 0.15s; }
+  .kpi:hover { border-color: rgba(38,111,158,0.25); box-shadow: 0 0 0 1px rgba(38,111,158,0.09), 0 0 24px rgba(38,111,158,0.06), 0 8px 28px rgba(30,45,80,.15); }
   .kpi-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
   .kpi-label { font-size: 0.78rem; font-weight: 500; color: var(--text2); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 5px; }
   .kpi-info  { position: relative; display: inline-flex; align-items: center; justify-content: center; font-size: 0.70rem; color: var(--text3); cursor: help; opacity: 0.5; transition: opacity 0.15s, color 0.15s; flex-shrink: 0; }
@@ -139,7 +139,7 @@
     transform: translateX(-50%);
     width: 240px;
     max-width: calc(100vw - 2rem);
-    background: #141a28;   /* opaque : l'infobulle passe au-dessus de texte */
+    background: #ffffff;   /* opaque : l'infobulle passe au-dessus de texte */
     border: 1px solid var(--border2);
     border-radius: 8px;
     padding: 9px 12px;
@@ -151,7 +151,7 @@
     line-height: 1.55;
     text-align: left;
     white-space: normal;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04);
+    box-shadow: 0 8px 28px rgba(30,45,80,.18);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -195,7 +195,7 @@
    reste intact, et portfolio.json reste la source du post matérialisé. */
 #weekly-pick, #macro-news-block, #message-users { display: none !important; }
 #analyse-macro { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.analyse-lien { display:inline-block; margin-top:.7rem; font-family:'Courier New',monospace; font-size:.66rem; letter-spacing:1.4px; text-transform:uppercase; color:var(--accent, #74b6df); text-decoration:none; }
+.analyse-lien { display:inline-block; margin-top:.7rem; font-family:'Courier New',monospace; font-size:.66rem; letter-spacing:1.4px; text-transform:uppercase; color:var(--accent, #266f9e); text-decoration:none; }
 .analyse-lien:hover { text-decoration:underline; }
 
 /* ── MACRO NEWS, sources discrètes en pied du Raisonnement ── */
@@ -212,15 +212,15 @@
   .weekly-pick-inline {
     margin: 0.4rem 0 1.1rem;
     padding: 0.95rem 1rem;
-    background: linear-gradient(90deg, rgba(116,182,223,0.05) 0%, rgba(116,182,223,0.015) 100%);
-    border-left: 2px solid rgba(116,182,223,0.35);
+    background: linear-gradient(90deg, rgba(38,111,158,0.05) 0%, rgba(38,111,158,0.015) 100%);
+    border-left: 2px solid rgba(38,111,158,0.35);
     border-radius: 0 6px 6px 0;
   }
   .wp-label { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--ac); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.6rem; opacity: 0.85; }
   .wp-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.55rem; flex-wrap: wrap; }
   .wp-type { font-family: 'Courier New', monospace; font-size: 0.76rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; letter-spacing: 0.3px; }
-  .wp-type.t-achat { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.25); }
-  .wp-type.t-vente { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.25); }
+  .wp-type.t-achat { background: var(--green-dim); color: var(--green); border: 1px solid rgba(11,124,75,0.25); }
+  .wp-type.t-vente { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(204,48,73,0.25); }
   .wp-ticker { font-family: 'Courier New', monospace; font-size: 0.90rem; font-weight: 600; color: var(--text); }
   .wp-conv { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--ac); text-transform: uppercase; letter-spacing: 0.5px; }
   .wp-date { font-family: 'Courier New', monospace; font-size: 0.74rem; color: var(--text3); margin-left: auto; }
@@ -229,7 +229,7 @@
 
   /* ── ALLOC CHARTS ── */
   .alloc-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.75rem; }
-  .alloc-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem 0.6rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+  .alloc-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem 0.6rem; }
   .alloc-row   { margin-bottom: 9px; }
   .alloc-head  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
   .alloc-label { font-size: 0.80rem; color: var(--text2); }
@@ -240,7 +240,7 @@
   @media (max-width: 700px) { .alloc-grid { grid-template-columns: 1fr; } }
 
   /* ── CHART ── */
-  .chart-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+  .chart-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; }
   .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem; }
   .chart-header h2 { font-family: Georgia, serif; font-size: 0.95rem; font-weight: normal; color: var(--text2); }
   .legend { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -255,7 +255,7 @@
     color: var(--text3); cursor: pointer; transition: all 0.15s; line-height: 1;
   }
   .rng-btn:hover { border-color: var(--text2); color: var(--text2); }
-  .rng-btn.active { border-color: var(--ac); color: var(--ac); background: rgba(116,182,223,0.08); }
+  .rng-btn.active { border-color: var(--ac); color: var(--ac); background: rgba(38,111,158,0.08); }
   .chart-custom-range {
     display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; padding: 0.6rem 0.8rem;
     background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
@@ -264,14 +264,14 @@
   .chart-custom-range input[type=date] {
     background: var(--bg); border: 1px solid var(--border2); border-radius: 4px;
     padding: 4px 8px; color: var(--text2); font-family: 'Courier New', monospace; font-size: 0.78rem;
-    color-scheme: dark;
+    color-scheme: light;
   }
   .chart-custom-range button {
-    background: rgba(116,182,223,0.1); border: 1px solid rgba(116,182,223,0.4); border-radius: 100px;
+    background: rgba(38,111,158,0.1); border: 1px solid rgba(38,111,158,0.4); border-radius: 100px;
     padding: 4px 12px; color: var(--ac); font-family: 'Courier New', monospace; font-size: 0.72rem;
     cursor: pointer; transition: all 0.15s;
   }
-  .chart-custom-range button:hover { background: rgba(116,182,223,0.18); }
+  .chart-custom-range button:hover { background: rgba(38,111,158,0.18); }
   .chart-range-info { color: var(--text3); opacity: 0.7; font-size: 0.72rem; }
 
   /* ── SECTION ── */
@@ -279,10 +279,10 @@
 
   /* ── POSITIONS ── */
   .pos-header { display: grid; grid-template-columns: 1fr 50px 78px 78px 86px 78px 64px; gap: 8px; padding: 0 1rem 0.5rem; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
-  .pos-row { display: grid; grid-template-columns: 1fr 50px 78px 78px 86px 78px 64px; gap: 8px; align-items: center; padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-bottom: 5px; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
-  .pos-row:hover { border-color: var(--border2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px var(--border2), 0 8px 28px rgba(0,0,0,0.5); }
-  .pos-row.pos-positive { border-left: 3px solid rgba(28,200,122,0.35); }
-  .pos-row.pos-negative { border-left: 3px solid rgba(240,84,84,0.3); }
+  .pos-row { display: grid; grid-template-columns: 1fr 50px 78px 78px 86px 78px 64px; gap: 8px; align-items: center; padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-bottom: 5px; transition: border-color 0.15s, box-shadow 0.15s; }
+  .pos-row:hover { border-color: var(--border2); box-shadow: 0 0 0 1px var(--border2), 0 8px 28px rgba(30,45,80,.15); }
+  .pos-row.pos-positive { border-left: 3px solid rgba(11,124,75,0.35); }
+  .pos-row.pos-negative { border-left: 3px solid rgba(204,48,73,0.3); }
   .pos-pv { font-weight: 700; }
   .pos-pv.up { color: var(--green); }
   .pos-pv.dn { color: var(--red); }
@@ -290,8 +290,8 @@
   .pos-ticker { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); margin-top: 2px; }
   .mn { font-family: 'Courier New', monospace; font-size: 0.83rem; color: var(--text2); text-align: right; }
   .perf-badge { display: inline-flex; font-family: 'Courier New', monospace; font-size: 0.78rem; padding: 2px 8px; border-radius: 5px; font-weight: 600; }
-  .perf-up { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.2); }
-  .perf-dn { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.2); }
+  .perf-up { background: var(--green-dim); color: var(--green); border: 1px solid rgba(11,124,75,0.2); }
+  .perf-dn { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(204,48,73,0.2); }
   .poids-wrap { display: flex; align-items: center; gap: 5px; }
   .poids-bar  { flex: 1; height: 4px; background: var(--surface3); border-radius: 2px; overflow: hidden; }
   .poids-fill { height: 4px; border-radius: 2px; }
@@ -305,8 +305,8 @@
   /* ── CLAUDE ANALYSIS ── */
   .claude-section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 0.85rem; }
   .claude-section-title { font-family: Georgia, serif; font-size: 1.1rem; color: var(--text); }
-  .claude-section-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ac); box-shadow: 0 0 10px rgba(116,182,223,0.5); flex-shrink: 0; }
-  .claude-block { background: linear-gradient(135deg, var(--surface) 0%, rgba(116,182,223,0.025) 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 1.75rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 0 40px rgba(116,182,223,0.04); }
+  .claude-section-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ac); box-shadow: 0 0 10px rgba(38,111,158,0.5); flex-shrink: 0; }
+  .claude-block { background: linear-gradient(135deg, var(--surface) 0%, rgba(38,111,158,0.025) 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 1.75rem; box-shadow: 0 0 40px rgba(38,111,158,0.04); }
   .claude-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.1rem; flex-wrap: wrap; gap: 0.5rem; }
   .claude-title { font-family: Georgia, serif; font-size: 1rem; font-weight: normal; color: var(--text); }
   .conviction-badge { font-family: 'Courier New', monospace; font-size: 0.80rem; padding: 4px 13px; border-radius: 100px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
@@ -324,8 +324,8 @@
   .pacc-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); }
   .pacc-chips { display: flex; gap: 5px; flex-wrap: wrap; }
   .pacc-chip { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 7px; }
-  .pacc-chip-warn { color: var(--orange); border-color: rgba(245,158,11,0.25); background: rgba(245,158,11,0.07); }
-  .pacc-chip-block { color: var(--red); border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.07); }
+  .pacc-chip-warn { color: var(--orange); border-color: rgba(143,102,6,0.25); background: rgba(143,102,6,0.07); }
+  .pacc-chip-block { color: var(--red); border-color: rgba(204,48,73,0.25); background: rgba(204,48,73,0.07); }
   .pacc-arrow { font-size: 0.78rem; color: var(--text3); transition: transform 0.22s; flex-shrink: 0; }
   .pacc-arrow.open { transform: rotate(180deg); }
   .pacc-body { display: none; }
@@ -334,14 +334,14 @@
   .pacc-section-title { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.1px; color: var(--text3); margin-bottom: 0.75rem; }
 
   /* ── ORDERS ── */
-  .order-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-bottom: 5px; overflow: hidden; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
-  .order-card:hover { border-color: var(--border2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px var(--border2), 0 8px 28px rgba(0,0,0,0.5); }
+  .order-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-bottom: 5px; overflow: hidden; transition: border-color 0.15s, box-shadow 0.15s; }
+  .order-card:hover { border-color: var(--border2); box-shadow: 0 0 0 1px var(--border2), 0 8px 28px rgba(30,45,80,.15); }
   .order-header { display: grid; grid-template-columns: 95px 62px 1fr auto; gap: 10px; align-items: center; padding: 0.85rem 1rem; cursor: pointer; user-select: none; }
   .order-date { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); }
   .order-type { font-family: 'Courier New', monospace; font-size: 0.78rem; padding: 3px 8px; border-radius: 5px; text-align: center; letter-spacing: 0.3px; font-weight: 600; }
-  .type-achat  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.25); }
-  .type-vente  { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.25); }
-  .type-apport { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(116,182,223,0.25); }
+  .type-achat  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(11,124,75,0.25); }
+  .type-vente  { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(204,48,73,0.25); }
+  .type-apport { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(38,111,158,0.25); }
   .order-name { font-size: 0.90rem; font-weight: 600; color: var(--text); }
   .order-right { display: flex; align-items: center; gap: 8px; }
   .order-amount { font-family: 'Courier New', monospace; font-size: 0.82rem; color: var(--text3); white-space: nowrap; }
@@ -353,10 +353,10 @@
   .order-raison { font-size: 0.86rem; color: var(--text2); line-height: 1.65; }
   .order-correction-note {
     font-size: 0.82rem; color: var(--text2); line-height: 1.55;
-    background: var(--orange-dim); border: 1px solid rgba(116,182,223,0.25); border-radius: 8px;
+    background: var(--orange-dim); border: 1px solid rgba(38,111,158,0.25); border-radius: 8px;
     padding: 0.8rem 0.95rem; margin-bottom: 0.85rem;
   }
-  .order-correction-note.is-bug   { background: var(--red-dim);    border-color: rgba(240,84,84,0.25); }
+  .order-correction-note.is-bug   { background: var(--red-dim);    border-color: rgba(204,48,73,0.25); }
   .order-correction-note strong   { color: var(--orange); display: block; margin-bottom: 0.35rem; font-weight: 600; }
   .order-correction-note.is-bug strong { color: var(--red); }
 
@@ -367,36 +367,36 @@
   }
   .blocked-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; flex-wrap: wrap; font-family: 'Courier New', monospace; font-size: 0.78rem; }
   .blocked-action { padding: 2px 7px; border-radius: 4px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; opacity: 0.8; }
-  .blocked-action.a-achat { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.18); text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; }
-  .blocked-action.a-vente { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.18);   text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; }
+  .blocked-action.a-achat { background: var(--green-dim); color: var(--green); border: 1px solid rgba(11,124,75,0.18); text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; }
+  .blocked-action.a-vente { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(204,48,73,0.18);   text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; }
   .blocked-ticker { color: var(--text2); font-weight: 600; font-size: 0.84rem; }
-  .blocked-rule { color: var(--orange); background: rgba(116,182,223,0.1); border: 1px solid rgba(116,182,223,0.25); border-radius: 4px; padding: 1px 7px; font-size: 0.72rem; font-weight: 600; }
+  .blocked-rule { color: var(--orange); background: rgba(38,111,158,0.1); border: 1px solid rgba(38,111,158,0.25); border-radius: 4px; padding: 1px 7px; font-size: 0.72rem; font-weight: 600; }
   .blocked-conv { color: var(--text3); font-size: 0.72rem; margin-left: auto; }
   .blocked-why { font-size: 0.83rem; color: var(--text2); line-height: 1.55; margin-bottom: 0.4rem; }
   .blocked-claude-raison { font-size: 0.80rem; color: var(--text3); line-height: 1.55; font-style: italic; border-top: 1px dashed var(--border); padding-top: 0.45rem; }
   .blocked-claude-raison::before { content: 'Raisonnement Claude : '; font-style: normal; color: var(--text3); opacity: 0.7; font-family: 'Courier New', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* ── BIAIS ── */
-  .bias-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; margin-bottom: 1.75rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+  .bias-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; margin-bottom: 1.75rem; }
   .bias-title { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--orange); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.6rem; }
   .bias-item { font-size: 0.86rem; color: var(--text2); line-height: 1.65; padding: 4px 0; display: flex; gap: 8px; }
   .bias-item::before { content: '→'; color: var(--orange); flex-shrink: 0; }
 
   /* ── SHOW MORE ── */
   .btn-show { background:transparent; border:1px solid var(--border2); border-radius:100px; padding:0.5rem 1.5rem; font-size:0.8rem; color:var(--text2); cursor:pointer; transition:all 0.18s; font-family:inherit; }
-  .btn-show:hover { border-color:var(--ac); color:var(--ac); box-shadow:0 0 20px rgba(116,182,223,0.12); }
+  .btn-show:hover { border-color:var(--ac); color:var(--ac); box-shadow:0 0 20px rgba(38,111,158,0.12); }
 
   /* ── LEARNINGS ── */
   .learnings-block { margin-bottom: 1.75rem; }
   .learnings-intro { font-size: 0.86rem; color: var(--text3); margin-bottom: 1rem; line-height: 1.6; }
-  .learning-item { display: grid; grid-template-columns: 3px 1fr; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 5px; overflow: hidden; transition: border-color 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+  .learning-item { display: grid; grid-template-columns: 3px 1fr; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 5px; overflow: hidden; transition: border-color 0.15s; }
   .learning-item:hover { border-color: var(--border2); }
   .learning-accent { border-radius: 3px 0 0 3px; }
   .learning-body { padding: 0.75rem 0.9rem 0.75rem 0; }
   .learning-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.35rem; flex-wrap: wrap; }
   .learning-cat { font-family: 'Courier New', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 1px 7px; border-radius: 4px; font-weight: 700; }
-  .lcat-arch  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(116,182,223,0.2); }
-  .lcat-score { background: var(--ac-dim);  color: var(--ac);  border: 1px solid rgba(116,182,223,0.2); }
+  .lcat-arch  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(38,111,158,0.2); }
+  .lcat-score { background: var(--ac-dim);  color: var(--ac);  border: 1px solid rgba(38,111,158,0.2); }
   .lcat-ux    { background: var(--surface3);  color: var(--text3); border: 1px solid var(--border); }
   .learning-version { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); }
   .learning-date    { font-size: 0.78rem; color: var(--text3); margin-left: auto; opacity: 0.6; }
@@ -426,17 +426,17 @@
   .orders-filter { display:flex; gap:6px; margin-bottom:0.75rem; flex-wrap:wrap; }
   .flt-btn { background:transparent; border:1px solid var(--border2); border-radius:100px; padding:0.3rem 1rem; font-size:0.80rem; color:var(--text3); cursor:pointer; transition:all 0.15s; font-family:inherit; }
   .flt-btn:hover { border-color:var(--text2); color:var(--text2); }
-  .flt-btn.active { border-color:var(--ac); color:var(--ac); background:rgba(116,182,223,0.07); }
+  .flt-btn.active { border-color:var(--ac); color:var(--ac); background:rgba(38,111,158,0.07); }
 
   /* ── RÈGLES ACTIVES ── */
-  .regles-block { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18); border-radius: var(--radius); padding: 1rem 1.1rem; margin-bottom: 1.75rem; }
+  .regles-block { background: rgba(204,48,73,0.05); border: 1px solid rgba(204,48,73,0.18); border-radius: var(--radius); padding: 1rem 1.1rem; margin-bottom: 1.75rem; }
   .regles-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--red); margin-bottom: 0.65rem; }
-  .regle-item { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-top: 1px solid rgba(239,68,68,0.08); }
+  .regle-item { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-top: 1px solid rgba(204,48,73,0.08); }
   .regle-item:first-of-type { border-top: none; }
   .regle-icon { font-size: 0.78rem; margin-top: 2px; flex-shrink: 0; }
   .regle-msg  { font-size: 0.81rem; color: var(--text2); line-height: 1.5; }
   /* learning auto-généré */
-  .lcat-auto { background: rgba(100,100,120,0.15); color: var(--text3); border: 1px solid var(--border); font-family: 'Courier New', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 1px 7px; border-radius: 4px; font-weight: 700; }
+  .lcat-auto { background: rgba(90,100,130,.14); color: var(--text3); border: 1px solid var(--border); font-family: 'Courier New', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 1px 7px; border-radius: 4px; font-weight: 700; }
   .learning-weeks { font-size: 0.75rem; color: var(--red); opacity: 0.8; margin-left: 4px; }
 
   /* ── LEXIQUE ── */
@@ -452,7 +452,7 @@
 
   /* ── SKELETON ── */
   .skel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; position: relative; }
-  .skel::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent); animation:shimmer 1.4s infinite; }
+  .skel::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(28,50,100,.05),transparent); animation:shimmer 1.4s infinite; }
   @keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
 
   /* footer : entièrement hérité de signal.css (harmonisé) */
@@ -525,17 +525,17 @@
   .kpi-accent { display: none; }
 
   /* Survie / graphique : fond à peine teinté, bordure fine */
-  .survival-block, .chart-block { background: rgba(255,255,255,0.015); border: 1px solid var(--line); padding: 1.75rem; }
+  .survival-block, .chart-block { background: rgba(255,255,255,.6); border: 1px solid var(--line); padding: 1.75rem; }
 
   /* Positions : lignes qui coulent, séparées par un filet (plus de boîtes) */
   .pos-row { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; margin-bottom: 0; padding: 0.95rem 0.4rem; }
-  .pos-row:hover { background: rgba(255,255,255,0.02); }
+  .pos-row:hover { background: rgba(38,111,158,.05); }
   .pos-row.pos-positive, .pos-row.pos-negative { border-left: 0; }
   .pos-header { padding-bottom: 0.7rem; }
 
   /* Ordres : mêmes lignes coulantes */
   .order-card { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; margin-bottom: 0; }
-  .order-card:hover { background: rgba(255,255,255,0.02); }
+  .order-card:hover { background: rgba(38,111,158,.05); }
 
   /* Allocation : sans boîte */
   .alloc-grid { gap: 2.4rem; }
@@ -586,7 +586,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 <header>
   <a class="brand" href="index.html">
     <span class="brand-icon">
-      <svg width="30" height="30" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="14" r="9" fill="#74b6df" fill-opacity=".22"/><circle cx="14" cy="14" r="5" fill="#74b6df"/></svg>
+      <svg width="30" height="30" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="14" r="9" fill="#266f9e" fill-opacity=".22"/><circle cx="14" cy="14" r="5" fill="#266f9e"/></svg>
     </span>
     <span class="brand-name">Signal</span>
   </a>
@@ -681,8 +681,8 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
     <svg style="width:100%;overflow:visible" viewBox="0 0 600 200" id="perf-chart">
       <defs>
         <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#74b6df" stop-opacity="0.18"/>
-          <stop offset="100%" stop-color="#74b6df" stop-opacity="0"/>
+          <stop offset="0%"   stop-color="#266f9e" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#266f9e" stop-opacity="0"/>
         </linearGradient>
       </defs>
     </svg>
@@ -788,7 +788,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 
 <!-- v3.5.0, Fichier de données produit mais jamais publié (2e occurrence) -->
     <div class="learning-item">
-      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-accent" style="background:#d53131"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
@@ -803,7 +803,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 
 <!-- v3.2.1, Watchlist 100% EU publiée 24h (barre Yahoo NaN pré-ouverture US) -->
     <div class="learning-item">
-      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-accent" style="background:#d53131"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
@@ -818,7 +818,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 
 <!-- v3.1.0, Audit complet (sécurité + gardes d'exécution + scores EU) + rotations + incident import os -->
     <div class="learning-item">
-      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-accent" style="background:#d53131"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
@@ -845,7 +845,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
 
 <!-- v3.0.1, Incident NaN (site figé 8 jours) + correction du ledger des pertes -->
     <div class="learning-item">
-      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-accent" style="background:#d53131"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
@@ -868,7 +868,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
 
 <!-- v1.12, Bug exécution weekend + UX gain net post-liquidation + R01 graduée -->
     <div class="learning-item">
-      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-accent" style="background:#d53131"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Architecture</span>
@@ -891,7 +891,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
 
 <!-- v1.10, Skill integration + signal dynamics + cross-validation analystes -->
     <div class="learning-item">
-      <div class="learning-accent" style="background:#6366f1"></div>
+      <div class="learning-accent" style="background:#4f52d9"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Architecture</span>
@@ -905,7 +905,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#a855f7"></div>
+      <div class="learning-accent" style="background:#8f37e3"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-score">Méthodologie</span>
@@ -919,7 +919,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#a855f7"></div>
+      <div class="learning-accent" style="background:#8f37e3"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-score">Méthodologie</span>
@@ -934,7 +934,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
 
     <!-- v1.9 entries below -->
     <div class="learning-item">
-      <div class="learning-accent" style="background:#a855f7"></div>
+      <div class="learning-accent" style="background:#8f37e3"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-score">Méthodologie</span>
@@ -948,7 +948,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#a855f7"></div>
+      <div class="learning-accent" style="background:#8f37e3"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-score">Méthodologie</span>
@@ -962,7 +962,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#6366f1"></div>
+      <div class="learning-accent" style="background:#4f52d9"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Architecture</span>
@@ -976,7 +976,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#a855f7"></div>
+      <div class="learning-accent" style="background:#8f37e3"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-score">Méthodologie</span>
@@ -990,7 +990,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#a855f7"></div>
+      <div class="learning-accent" style="background:#8f37e3"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-score">Méthodologie</span>
@@ -1004,7 +1004,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#a855f7"></div>
+      <div class="learning-accent" style="background:#8f37e3"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-score">Méthodologie</span>
@@ -1018,7 +1018,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#a855f7"></div>
+      <div class="learning-accent" style="background:#8f37e3"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-score">Méthodologie</span>
@@ -1032,7 +1032,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#6366f1"></div>
+      <div class="learning-accent" style="background:#4f52d9"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Architecture</span>
@@ -1046,7 +1046,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#6366f1"></div>
+      <div class="learning-accent" style="background:#4f52d9"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Architecture</span>
@@ -1060,7 +1060,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#6366f1"></div>
+      <div class="learning-accent" style="background:#4f52d9"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Architecture</span>
@@ -1074,7 +1074,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#6366f1"></div>
+      <div class="learning-accent" style="background:#4f52d9"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Architecture</span>
@@ -1088,7 +1088,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     </div>
 
     <div class="learning-item">
-      <div class="learning-accent" style="background:#6366f1"></div>
+      <div class="learning-accent" style="background:#4f52d9"></div>
       <div class="learning-body">
         <div class="learning-header">
           <span class="learning-cat lcat-arch">Architecture</span>
@@ -1105,7 +1105,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
     <div id="learnings-more" style="display:none">
 
       <div class="learning-item">
-        <div class="learning-accent" style="background:#74b6df"></div>
+        <div class="learning-accent" style="background:#3179ab"></div>
         <div class="learning-body">
           <div class="learning-header">
             <span class="learning-cat lcat-score">Scoring</span>
@@ -1119,7 +1119,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
       </div>
 
       <div class="learning-item">
-        <div class="learning-accent" style="background:#74b6df"></div>
+        <div class="learning-accent" style="background:#3179ab"></div>
         <div class="learning-body">
           <div class="learning-header">
             <span class="learning-cat lcat-score">Scoring</span>
@@ -1133,7 +1133,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
       </div>
 
       <div class="learning-item">
-        <div class="learning-accent" style="background:#74b6df"></div>
+        <div class="learning-accent" style="background:#3179ab"></div>
         <div class="learning-body">
           <div class="learning-header">
             <span class="learning-cat lcat-score">Scoring</span>
@@ -1147,7 +1147,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
       </div>
 
       <div class="learning-item">
-        <div class="learning-accent" style="background:#74b6df"></div>
+        <div class="learning-accent" style="background:#3179ab"></div>
         <div class="learning-body">
           <div class="learning-header">
             <span class="learning-cat lcat-score">Scoring</span>
@@ -1161,7 +1161,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
       </div>
 
       <div class="learning-item">
-        <div class="learning-accent" style="background:#74b6df"></div>
+        <div class="learning-accent" style="background:#3179ab"></div>
         <div class="learning-body">
           <div class="learning-header">
             <span class="learning-cat lcat-score">Scoring</span>
@@ -1175,7 +1175,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
       </div>
 
       <div class="learning-item">
-        <div class="learning-accent" style="background:#74b6df"></div>
+        <div class="learning-accent" style="background:#3179ab"></div>
         <div class="learning-body">
           <div class="learning-header">
             <span class="learning-cat lcat-score">Scoring</span>
@@ -1189,7 +1189,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
       </div>
 
       <div class="learning-item">
-        <div class="learning-accent" style="background:#22c55e"></div>
+        <div class="learning-accent" style="background:#17a04b"></div>
         <div class="learning-body">
           <div class="learning-header">
             <span class="learning-cat lcat-ux">Interface</span>
@@ -1389,8 +1389,8 @@ function renderChart(history, capitalInitial = 20000) {
   for (let v = Math.ceil(rangeMin / step) * step; v <= rangeMax; v += step) {
     const y   = toY(v);
     const lbl = (v > 0 ? '+' : '') + v + ' %';
-    svg.appendChild(mk('line', { x1:40, y1:y, x2:560, y2:y, stroke:'#2a2a38', 'stroke-width':0.6, 'stroke-dasharray':'3,4' }));
-    svg.appendChild(mk('text', { x:34, y:y+3, 'font-family':'Courier New', 'font-size':7, fill:'#50506c', 'text-anchor':'end' })).textContent = lbl;
+    svg.appendChild(mk('line', { x1:40, y1:y, x2:560, y2:y, stroke:'#dde3ee', 'stroke-width':0.6, 'stroke-dasharray':'3,4' }));
+    svg.appendChild(mk('text', { x:34, y:y+3, 'font-family':'Courier New', 'font-size':7, fill:'#7b8398', 'text-anchor':'end' })).textContent = lbl;
   }
 
   // ── Courbe lissée (Catmull-Rom → cubic bezier, tension subtile) ───────────
@@ -1419,13 +1419,13 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
 
   // ── Aire dégradée + courbe lissée ─────────────────────────────────────────
   svg.appendChild(mk('path', { d: areaD, fill:'url(#chartGrad)' }));
-  svg.appendChild(mk('path', { d: pathD, fill:'none', stroke:'#74b6df', 'stroke-width':2.2, 'stroke-linejoin':'round', 'stroke-linecap':'round' }));
+  svg.appendChild(mk('path', { d: pathD, fill:'none', stroke:'#266f9e', 'stroke-width':2.2, 'stroke-linejoin':'round', 'stroke-linecap':'round' }));
 
   // ── Marqueurs d'injection (verticale + montant) ───────────────────────────
   pts.filter(p => p.note).forEach(p => {
-    svg.appendChild(mk('line', { x1:p.x, y1:yTop, x2:p.x, y2:yBot, stroke:'#74b6df', 'stroke-width':0.9, 'stroke-dasharray':'3,3', 'stroke-opacity':0.5 }));
+    svg.appendChild(mk('line', { x1:p.x, y1:yTop, x2:p.x, y2:yBot, stroke:'#266f9e', 'stroke-width':0.9, 'stroke-dasharray':'3,3', 'stroke-opacity':0.5 }));
     const amount = p.note.match(/[+\-]?\d+\s*k€?/i)?.[0] ?? '';
-    const t = mk('text', { x:p.x+4, y:yTop+9, 'font-family':'Courier New', 'font-size':7, fill:'#74b6df', 'fill-opacity':0.8, 'text-anchor':'start' });
+    const t = mk('text', { x:p.x+4, y:yTop+9, 'font-family':'Courier New', 'font-size':7, fill:'#266f9e', 'fill-opacity':0.8, 'text-anchor':'start' });
     t.textContent = amount ? '⊕ injection ' + amount : '⊕ injection';
     svg.appendChild(t);
   });
@@ -1448,7 +1448,7 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
     const d = new Date(p.date);
     svg.appendChild(mk('text', {
       x: p.x.toFixed(1), y: 197, 'font-family':'Courier New', 'font-size': 7.5,
-      fill: isLast ? '#74b6df' : '#50506c', 'text-anchor':'middle'
+      fill: isLast ? '#266f9e' : '#7b8398', 'text-anchor':'middle'
     })).textContent = d.toLocaleDateString('fr-FR', { day:'numeric', month:'short' });
   });
 
@@ -1456,11 +1456,11 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
   // Un seul point visible : le dernier (sert d'ancre visuelle pour la box %)
   svg.appendChild(mk('circle', {
     cx: last.x.toFixed(1), cy: last.y.toFixed(1), r: 3.5,
-    fill: '#74b6df', stroke: '#1a1200', 'stroke-width': 1.2
+    fill: '#266f9e', stroke: '#ffffff', 'stroke-width': 1.2
   }));
   const lastLbl = (last.cap >= 0 ? '+' : '') + last.cap.toFixed(1) + ' %';
-  svg.appendChild(mk('rect', { x:(last.x-28).toFixed(1), y:(last.y-19).toFixed(1), width:58, height:17, rx:4, fill:'#1a1200', stroke:'#74b6df', 'stroke-width':0.8, 'stroke-opacity':0.7 }));
-  const lt = mk('text', { x: last.x.toFixed(1), y:(last.y-6).toFixed(1), 'font-family':'Courier New', 'font-size':9.5, fill:'#74b6df', 'text-anchor':'middle', 'font-weight':'bold' });
+  svg.appendChild(mk('rect', { x:(last.x-28).toFixed(1), y:(last.y-19).toFixed(1), width:58, height:17, rx:4, fill:'#ffffff', stroke:'#266f9e', 'stroke-width':0.8, 'stroke-opacity':0.7 }));
+  const lt = mk('text', { x: last.x.toFixed(1), y:(last.y-6).toFixed(1), 'font-family':'Courier New', 'font-size':9.5, fill:'#266f9e', 'text-anchor':'middle', 'font-weight':'bold' });
   lt.textContent = lastLbl;
   svg.appendChild(lt);
 
@@ -1472,11 +1472,11 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
   // traiteraient chaque mouvement N fois.
   svg.style.touchAction = 'pan-y';
   const hover = mk('g', { style: 'display:none', 'pointer-events': 'none' });
-  const hLine = mk('line',   { x1:0, y1:yTop, x2:0, y2:yBot, stroke:'#74b6df', 'stroke-width':0.8, 'stroke-dasharray':'2,3', 'stroke-opacity':0.85 });
-  const hBox  = mk('rect',   { width:92, height:26, rx:4, fill:'#101724', stroke:'#74b6df', 'stroke-width':0.8, 'stroke-opacity':0.8 });
-  const hPerf = mk('text',   { 'font-family':'Courier New', 'font-size':9.5, fill:'#74b6df', 'text-anchor':'middle', 'font-weight':'bold' });
-  const hDate = mk('text',   { 'font-family':'Courier New', 'font-size':7,   fill:'#8a8aa6', 'text-anchor':'middle' });
-  const hDot  = mk('circle', { r:3.5, fill:'#74b6df', stroke:'#0a0e16', 'stroke-width':1.2 });
+  const hLine = mk('line',   { x1:0, y1:yTop, x2:0, y2:yBot, stroke:'#266f9e', 'stroke-width':0.8, 'stroke-dasharray':'2,3', 'stroke-opacity':0.85 });
+  const hBox  = mk('rect',   { width:92, height:26, rx:4, fill:'#ffffff', stroke:'#266f9e', 'stroke-width':0.8, 'stroke-opacity':0.8 });
+  const hPerf = mk('text',   { 'font-family':'Courier New', 'font-size':9.5, fill:'#266f9e', 'text-anchor':'middle', 'font-weight':'bold' });
+  const hDate = mk('text',   { 'font-family':'Courier New', 'font-size':7,   fill:'#616a86', 'text-anchor':'middle' });
+  const hDot  = mk('circle', { r:3.5, fill:'#266f9e', stroke:'#ffffff', 'stroke-width':1.2 });
   [hLine, hBox, hPerf, hDate, hDot].forEach(e => hover.appendChild(e));
   svg.appendChild(hover);
 
@@ -1509,18 +1509,18 @@ function renderAllocCharts(positions) {
 
   // ── Couleurs fixes par secteur ─────────────────────────────────────────────
   const SECTOR_COLOR = {
-    'Technologie':      '#74b6df',
-    'Semi-conducteurs': '#8a9bd8',
-    'Équip. semi.':     '#6a8fc0',
-    'Finance':          '#5fc9c0',
-    'Santé':            '#b59bd6',
-    'Industrie':        '#7fa8c4',
-    'Conso. cycl.':     '#c5aee2',
-    'Médias & IA':      '#6fcfe6',
-    'Énergie':          '#9db4c8',
-    'Immobilier':       '#aab4cc',
+    'Technologie':      '#3179ab',
+    'Semi-conducteurs': '#5b74c0',
+    'Équip. semi.':     '#4a72a8',
+    'Finance':          '#1f9187',
+    'Santé':            '#7d5bb0',
+    'Industrie':        '#55809f',
+    'Conso. cycl.':     '#9a77c8',
+    'Médias & IA':      '#2596b3',
+    'Énergie':          '#6e8ba3',
+    'Immobilier':       '#7a87a5',
   };
-  const FALLBACK = ['#74b6df','#5fc9c0','#8a9bd8','#b59bd6','#6fcfe6','#7fa8c4','#c5aee2','#9db4c8'];
+  const FALLBACK = ['#3179ab','#1f9187','#5b74c0','#7d5bb0','#2596b3','#55809f','#9a77c8','#6e8ba3'];
 
   // ── Mapping marché → région ────────────────────────────────────────────────
   const GEO_MAP = {
@@ -1531,12 +1531,12 @@ function renderAllocCharts(positions) {
     'TSX': 'Canada', 'JPX': 'Japon', 'ASX': 'Australie',
   };
   const GEO_COLOR = {
-    'États-Unis':  '#74b6df',
-    'Europe':      '#5fc9c0',
-    'Royaume-Uni': '#8a9bd8',
-    'Canada':      '#b59bd6',
-    'Japon':       '#6fcfe6',
-    'Autre':       '#6a6a86',
+    'États-Unis':  '#3179ab',
+    'Europe':      '#1f9187',
+    'Royaume-Uni': '#5b74c0',
+    'Canada':      '#7d5bb0',
+    'Japon':       '#2596b3',
+    'Autre':       '#6a7188',
   };
 
   // ── Agrégation ────────────────────────────────────────────────────────────
@@ -1606,8 +1606,8 @@ function renderOrder(o, idx) {
         <div class="order-date">${o.date}</div>
         <div class="order-type ${orderTypeClass(o.type)}">${o.type}</div>
         <div class="order-name">${o.nom}${o._allerRetour ? (o.type === 'VENTE'
-          ? ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug</span>'
-          : ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(116,182,223,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↻ corrigé</span>') : ''}${o._bug_weekend_exec ? ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug weekend</span>' : ''}</div>
+          ? ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(204,48,73,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug</span>'
+          : ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(38,111,158,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↻ corrigé</span>') : ''}${o._bug_weekend_exec ? ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(204,48,73,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug weekend</span>' : ''}</div>
         <div class="order-right">
           ${joursInfo}
           ${perfBadge}${scoreBadge}

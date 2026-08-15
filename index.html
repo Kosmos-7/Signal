@@ -35,7 +35,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      et on rend l'indicateur cliquable (défilement d'un écran). */
   .rail-more{display:none;flex:0 0 auto;width:100%;margin-top:.3rem;padding:.5rem .4rem;border:0;border-top:1px solid var(--line);background:none;font:600 .58rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--ac);cursor:pointer;text-align:center;transition:color .15s}
   .rail-more.on{display:block}
-  .rail-more:hover,.rail-more:focus-visible{color:#fff;outline:none}
+  .rail-more:hover,.rail-more:focus-visible{color:#10141f;outline:none}
   .rail-lex{display:block;margin-top:.4rem;padding:.65rem .4rem .1rem;border-top:1px solid var(--line);font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .15s;cursor:pointer;flex:0 0 auto}
   .rail-lex::before{content:'§ '}
   .rail-lex:hover,.rail-lex.active{color:var(--ac)}
@@ -54,12 +54,12 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      pas par la couleur. */
   .mv{display:inline-flex;align-items:center;gap:2px;font:600 .56rem var(--mono);letter-spacing:.4px;
       padding:1px 5px;border-radius:3px;border:1px solid var(--line);color:var(--text3);white-space:nowrap}
-  .mv-new{color:var(--ac);border-color:rgba(116,182,223,.45);letter-spacing:1px}
+  .mv-new{color:var(--ac);border-color:rgba(38,111,158,.45);letter-spacing:1px}
   .mv-up,.mv-down{color:var(--text2)}
   .rl-meta{flex-wrap:wrap}
   .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:.5rem .4rem;cursor:pointer;border-bottom:1px solid var(--line);transition:padding-left .18s,border-color .18s}
   .row:hover,.row.sel{padding-left:.7rem}.row.sel{border-left:2px solid var(--ac);margin-left:-2px;padding-left:calc(.7rem - 2px)}
-  .row .nm{font:500 .82rem var(--serif);line-height:1.2;color:var(--text2)}.row:hover .nm,.row.sel .nm{color:#fff}
+  .row .nm{font:500 .82rem var(--serif);line-height:1.2;color:var(--text2)}.row:hover .nm,.row.sel .nm{color:#10141f}
   .rl-meta{display:flex;align-items:center;gap:6px;margin-top:4px}
   .reg{font:600 .52rem var(--mono);letter-spacing:.5px;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:1px 4px}
   .sct{font:.58rem var(--mono);color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
@@ -73,7 +73,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      ici contre .74rem ailleurs, un écart invisible mais gratuit. */
   footer{width:100%;max-width:1060px;margin-top:.5rem;padding:1.4rem 1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:1.2rem;flex-wrap:wrap}
   @media(max-width:900px){footer{flex-direction:column;align-items:flex-start;gap:.5rem;padding:1.25rem 1rem}}
-  .stage::-webkit-scrollbar{width:5px}.stage::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+  .stage::-webkit-scrollbar{width:5px}.stage::-webkit-scrollbar-thumb{background:rgba(28,50,100,.22);border-radius:3px}
   .doc{width:100%;max-width:1060px;padding:.5rem 1.5rem 2.5rem;opacity:0;transition:opacity .35s}.doc.on{opacity:1}
   /* `min-width:0` : sans lui, un élément flex refuse de descendre sous la
      largeur de son contenu. Un nom de société long (Adyen, avec sa rangée de
@@ -93,7 +93,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   /* Illustration d'ACTIVITÉ en tête de fiche. La légende n'est pas décorative :
      elle dit ce que montre l'image (le maillon), pour qu'on ne la lise jamais
      comme une photo de la société elle-même. */
-  .d-illu{position:relative;margin:0 0 1.1rem;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.02)}
+  .d-illu{position:relative;margin:0 0 1.1rem;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.6)}
   /* Même proportion que les cartes de watchlist (16:9), qui est la bonne :
      une bande de 150 px écrasait le sujet. Plafonnée sur grand écran pour
      que l'image ne prenne pas le pas sur les chiffres de la fiche.
@@ -113,10 +113,10 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
     object-fit:cover;object-position:50% 30%}
   .d-illu figcaption{position:absolute;left:0;right:0;bottom:0;padding:.38rem .6rem;
     background:linear-gradient(0deg,rgba(6,6,11,.92),rgba(6,6,11,0));
-    font:600 .54rem var(--mono);letter-spacing:.6px;text-transform:uppercase;color:var(--text3)}
-  .d-illu figcaption b{color:var(--text2);font-weight:600}
+    font:600 .54rem var(--mono);letter-spacing:.6px;text-transform:uppercase;color:rgba(225,230,240,.85)}
+  .d-illu figcaption b{color:rgba(240,244,250,.95);font-weight:600}
   .d-illu .d-cred{display:block;margin-top:2px;font-size:.5rem;letter-spacing:.3px;
-    color:var(--text3);opacity:.8;text-transform:none}
+    color:rgba(225,230,240,.85);opacity:.8;text-transform:none}
   @media(max-width:900px){.d-illu img{max-height:none}}
   .d-tag{font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
   .d-reg{font:600 .6rem var(--mono);letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:4px;padding:4px 9px}
@@ -162,8 +162,8 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      du portefeuille : une bulle translucide est illisible sur du texte.
      tabindex la rend focalisable, donc tapable au doigt sur mobile. */
   .inf{position:relative;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid var(--line);border-radius:50%;font:600 9px var(--mono);color:var(--text3);cursor:help;user-select:none;vertical-align:middle}
-  .inf:hover,.inf:focus{color:var(--ac);border-color:rgba(116,182,223,.5);outline:none}
-  .inf .inf-tip{display:none;position:absolute;bottom:20px;right:-6px;z-index:30;background:#141a28;border:1px solid var(--line);border-radius:7px;padding:8px 12px;font:11px var(--mono);color:var(--text2);width:240px;line-height:1.6;white-space:normal;text-align:left;letter-spacing:0}
+  .inf:hover,.inf:focus{color:var(--ac);border-color:rgba(38,111,158,.5);outline:none}
+  .inf .inf-tip{display:none;position:absolute;bottom:20px;right:-6px;z-index:30;background:#ffffff;border:1px solid var(--line);border-radius:7px;padding:8px 12px;font:11px var(--mono);color:var(--text2);width:240px;line-height:1.6;white-space:normal;text-align:left;letter-spacing:0}
   .inf:hover .inf-tip,.inf:focus .inf-tip{display:block}
 
   .bbsec{margin-top:1.9rem}
@@ -180,7 +180,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .chx-svg{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair}
   .chx-axis{font-family:var(--mono);font-size:10px;fill:var(--text3)}
   .chx-blabel{font-family:var(--mono);font-size:9px;fill:var(--text3);opacity:.75}
-  .chx-tip{position:absolute;pointer-events:none;background:#14141f;border:1px solid var(--line);border-radius:6px;padding:7px 11px;font-family:var(--mono);font-size:11px;color:var(--text3);display:none;white-space:nowrap;line-height:1.7;z-index:3}
+  .chx-tip{position:absolute;pointer-events:none;background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:7px 11px;font-family:var(--mono);font-size:11px;color:var(--text3);display:none;white-space:nowrap;line-height:1.7;z-index:3}
   .chx-tip .d{color:var(--text2)}.chx-tip .c{color:var(--ac);font-weight:700}.chx-tip .t{color:var(--text2);font-weight:700}
   @media (max-width:640px){ .chx-tip{font-size:10px;padding:5px 8px;line-height:1.55} }
   /* `width:fit-content` : un bloc statique prend TOUTE la largeur par
@@ -190,24 +190,24 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
     width:fit-content;max-width:100%;padding:5px 10px;line-height:1.6}
   .chx-ctrl{display:flex;align-items:center;gap:10px;margin:10px 0 4px;flex-wrap:wrap}
   .chx-pbtn{font-family:var(--mono);font-size:.72rem;letter-spacing:1px;color:var(--text3);background:none;border:1px solid var(--line);border-radius:5px;padding:3px 12px;cursor:pointer}
-  .chx-pbtn.on{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
-  .chx-pbtn:hover{border-color:rgba(116,182,223,.35)}
+  .chx-pbtn.on{color:var(--ac);border-color:rgba(38,111,158,.5);background:rgba(38,111,158,.08)}
+  .chx-pbtn:hover{border-color:rgba(38,111,158,.35)}
   .chx-rlbl{font-family:var(--mono);font-size:.74rem;color:var(--text2);margin-left:auto}
   .chx-legend{font-family:var(--mono);font-size:.72rem;color:var(--text3);margin:2px 0 6px;letter-spacing:.3px}
-  .chx-load{font:.72rem var(--mono);color:var(--text3);letter-spacing:.6px;padding:2.2rem 0;text-align:center;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.012)}
-  .chx-band{display:inline-block;width:14px;height:9px;background:rgba(116,182,223,.10);border:1px solid rgba(116,182,223,.25);border-radius:2px;vertical-align:-1px}
+  .chx-load{font:.72rem var(--mono);color:var(--text3);letter-spacing:.6px;padding:2.2rem 0;text-align:center;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.6)}
+  .chx-band{display:inline-block;width:14px;height:9px;background:rgba(38,111,158,.10);border:1px solid rgba(38,111,158,.25);border-radius:2px;vertical-align:-1px}
   .chx-slider{position:relative;height:34px;margin:6px 6px 0}
-  .chx-slider .chx-track{position:absolute;left:0;right:0;top:15px;height:4px;background:rgba(255,255,255,.08);border-radius:2px}
-  .chx-slider .chx-sel{position:absolute;top:15px;height:4px;background:rgba(116,182,223,.45);border-radius:2px}
+  .chx-slider .chx-track{position:absolute;left:0;right:0;top:15px;height:4px;background:rgba(28,50,100,.10);border-radius:2px}
+  .chx-slider .chx-sel{position:absolute;top:15px;height:4px;background:rgba(38,111,158,.45);border-radius:2px}
   .chx-slider input[type=range]{position:absolute;left:0;right:0;top:0;width:100%;height:34px;background:none;-webkit-appearance:none;appearance:none;pointer-events:none;margin:0}
-  .chx-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;pointer-events:auto;width:16px;height:16px;border-radius:50%;background:#0d0d16;border:2px solid var(--ac);cursor:grab}
-  .chx-slider input[type=range]::-moz-range-thumb{pointer-events:auto;width:12px;height:12px;border-radius:50%;background:#0d0d16;border:2px solid var(--ac);cursor:grab}
+  .chx-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;pointer-events:auto;width:16px;height:16px;border-radius:50%;background:#ffffff;border:2px solid var(--ac);cursor:grab}
+  .chx-slider input[type=range]::-moz-range-thumb{pointer-events:auto;width:12px;height:12px;border-radius:50%;background:#ffffff;border:2px solid var(--ac);cursor:grab}
   .chx-mrow{font:.84rem var(--mono);color:var(--text2);margin-top:.9rem;letter-spacing:.2px}
   .chx-mrow .chx-k{color:var(--text3)}
   .chx-mrow .chx-v{font-weight:700;color:var(--ac)}
   .chx-mrow .chx-v2{font-weight:700;color:var(--text)}
   
-  .chx-warn{display:flex;gap:10px;align-items:flex-start;background:rgba(232,168,32,.06);border:1px solid rgba(232,168,32,.28);border-radius:8px;padding:10px 14px;margin:12px 0 0;font-size:.8rem;color:var(--text2);line-height:1.55}
+  .chx-warn{display:flex;gap:10px;align-items:flex-start;background:rgba(143,102,6,.06);border:1px solid rgba(143,102,6,.28);border-radius:8px;padding:10px 14px;margin:12px 0 0;font-size:.8rem;color:var(--text2);line-height:1.55}
   .chx-warn .chx-ic{flex:none;color:var(--gold);font-size:.95rem;margin-top:1px}
   .chx-warn b{color:var(--text)}
   /* ── Chiffres publiés (historique CA / résultat net) ── */
@@ -217,7 +217,7 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   /* Bande de la colonne survolée. Volontairement PAS de touch-action:none :
      au doigt, on veut pouvoir taper une colonne pour lire son montant sans
      perdre le défilement vertical de la page au-dessus du graphique. */
-  .fd-hi{fill:rgba(255,255,255,.055)}
+  .fd-hi{fill:rgba(28,50,100,.07)}
   /* Parent positionné de la carte flottante du relevé (façon Baggr). */
   .fd-cwrap{position:relative}
   .fd-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8rem}
@@ -239,21 +239,21 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
      peut porter un consensus de chiffre d'affaires et déjà notre arithmétique
      sur le bénéfice. Le grisé dit « c'est nous qui prolongeons ». */
   .fd-ext{color:var(--text3);font-style:italic}
-  .fd-stop{color:#f0c674;cursor:help;font-style:normal}
+  .fd-stop{color:#8f6606;cursor:help;font-style:normal}
   /* Tables dépliables : le graphique d'abord, les chiffres si on veut. */
   .fd-det{margin:8px 0 2px}
   .fd-det summary{cursor:pointer;list-style:none;display:inline-block;font-family:var(--mono);font-size:.74rem;letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:5px;padding:7px 14px;user-select:none}
   .fd-inline{font:.85rem var(--mono);color:var(--text2);margin:4px 0 10px;letter-spacing:.3px}
   .fd-inline i{color:var(--text3);font-style:normal;font-size:.72rem}
   .fd-det summary::-webkit-details-marker{display:none}
-  .fd-det summary:hover{border-color:rgba(116,182,223,.35)}
-  .fd-det[open] summary{color:var(--ac);border-color:rgba(116,182,223,.5);background:rgba(116,182,223,.08)}
+  .fd-det summary:hover{border-color:rgba(38,111,158,.35)}
+  .fd-det[open] summary{color:var(--ac);border-color:rgba(38,111,158,.5);background:rgba(38,111,158,.08)}
   .fd-det .fd-table{margin-top:10px}
   /* Trois tuiles seulement dans la section des chiffres : le bandeau partagé
      est calé sur six colonnes, il faut le redire ici sinon elles occupent la
      moitié gauche et laissent un vide à droite. */
   .fd-metrics{grid-template-columns:repeat(3,1fr);margin:1.1rem 0 0}
-  .fd-syn{font-size:.85rem;color:var(--text2);line-height:1.65;margin:6px 0 14px;border-left:2px solid rgba(116,182,223,.35);padding-left:12px}
+  .fd-syn{font-size:.85rem;color:var(--text2);line-height:1.65;margin:6px 0 14px;border-left:2px solid rgba(38,111,158,.35);padding-left:12px}
   .fd-syn p{margin:0 0 5px}
   .fd-syn b{color:var(--text)}
   @media (max-width:640px){ .fd-table{font-size:.7rem} .fd-d{font-size:.62rem} }
@@ -292,11 +292,11 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
   /* Une carte par ligne : à quatre par ligne, le texte devenait illisible et
      l'œil se perdait. On préfère scroller sur des cartes larges et respirées. */
   .tgrid{display:flex;flex-direction:column;gap:.85rem;margin:1.6rem 0 .4rem}
-  .tcard{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);overflow:hidden;text-decoration:none;color:inherit;transition:border-color .2s,background .2s,transform .2s}
-  .tcard:hover,.tcard:focus-visible{border-color:rgba(116,182,223,.42);background:rgba(255,255,255,.04);transform:translateY(-2px);outline:none}
+  .tcard{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.6);overflow:hidden;text-decoration:none;color:inherit;transition:border-color .2s,background .2s,transform .2s}
+  .tcard:hover,.tcard:focus-visible{border-color:rgba(38,111,158,.42);background:rgba(38,111,158,.05);transform:translateY(-2px);outline:none}
   .tc-img{position:relative;flex:0 0 auto;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(140deg,rgba(116,182,223,.14),rgba(116,182,223,.03) 55%,rgba(255,255,255,.015))}
-  .tc-img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.045) 0 1px,transparent 1px 9px)}
+    background:linear-gradient(140deg,rgba(38,111,158,.14),rgba(38,111,158,.03) 55%,rgba(255,255,255,.6))}
+  .tc-img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(28,50,100,.06) 0 1px,transparent 1px 9px)}
   .tc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
   /* Légende de l'illustration, comme sur les fiches : on dit ce que montre la
      photo. Sur la carte elle se pose en bas de l'image, au-dessus du liseré
@@ -304,8 +304,8 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
   .tc-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:.34rem .55rem;
     background:linear-gradient(0deg,rgba(6,6,11,.9),rgba(6,6,11,0));
     font:600 .54rem var(--mono);letter-spacing:.6px;text-transform:uppercase;
-    color:var(--text3);line-height:1.35}
-  .tc-cap b{color:var(--text2);font-weight:600}
+    color:rgba(225,230,240,.85);line-height:1.35}
+  .tc-cap b{color:rgba(240,244,250,.95);font-weight:600}
   .tc-cap i{display:block;font-style:normal;font-size:.5rem;letter-spacing:.3px;
     text-transform:none;opacity:.75;margin-top:1px}
   .tc-fb{position:relative;font:600 .6rem var(--mono);letter-spacing:2.4px;text-transform:uppercase;color:var(--text3);text-align:center;line-height:1.9;padding:0 14px;max-width:100%;overflow-wrap:anywhere}
@@ -334,10 +334,10 @@ son contenu, son intitulé et son étiquette PRINCIPALE, plutôt que par un
      habillage qui la ferait passer pour une catégorie à part. */
 
   /* bandeau de thème au-dessus de la fiche (remplace la vue liste supprimée) */
-  .tbar{border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.018);margin:.1rem 0 1.1rem}
+  .tbar{border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.6);margin:.1rem 0 1.1rem}
   .tbar>summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:.5rem .8rem;cursor:pointer;list-style:none}
   .tbar>summary::-webkit-details-marker{display:none}
-  .tbar>summary:hover{background:rgba(255,255,255,.025)}
+  .tbar>summary:hover{background:rgba(38,111,158,.05)}
   .tb-k{font:600 .53rem var(--mono);letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 6px}
   .tb-l{font-family:var(--serif);font-size:1rem;color:var(--text)}
   .tb-c{font:.62rem var(--mono);color:var(--text3);letter-spacing:.4px}
@@ -354,7 +354,7 @@ son contenu, son intitulé et son étiquette PRINCIPALE, plutôt que par un
   .crumb-cur{color:var(--text2)}
 
 /* bandeau de couverture partielle, neutre : trait + capitales mono, pas de teinte */
-  .cov-warn{border:1px solid var(--line);border-left:2px solid var(--text3);background:rgba(255,255,255,.03);border-radius:5px;padding:.5rem .7rem;font-size:.76rem;line-height:1.5;color:var(--text2)}
+  .cov-warn{border:1px solid var(--line);border-left:2px solid var(--text3);background:rgba(28,50,100,.05);border-radius:5px;padding:.5rem .7rem;font-size:.76rem;line-height:1.5;color:var(--text2)}
   .cov-warn b{display:block;font:600 .55rem var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
 
   /* ══ VUE D'UNE WATCHLIST (#/w/<id>) ═══════════════════════════════════ */
@@ -368,7 +368,7 @@ son contenu, son intitulé et son étiquette PRINCIPALE, plutôt que par un
   .wl-rule{margin-top:1rem;border:1px solid var(--line);border-left:2px solid var(--ac);border-radius:5px;padding:.6rem .85rem;font:.78rem var(--mono);color:var(--text2);line-height:1.55;max-width:900px}
   .wl-rule i{display:block;font:600 .55rem var(--mono);font-style:normal;letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
   .wl-notes{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem;max-width:900px}
-  .wl-note{border:1px solid var(--line);border-radius:8px;padding:.8rem .95rem;background:rgba(255,255,255,.018)}
+  .wl-note{border:1px solid var(--line);border-radius:8px;padding:.8rem .95rem;background:rgba(255,255,255,.6)}
   .wl-note h4{font:600 .56rem var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.4rem;font-family:var(--mono)}
   .wl-note p{font-size:.855rem;line-height:1.62;color:var(--text2)}
   .wl-cov{font:.64rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-top:1rem;text-transform:uppercase}
@@ -377,22 +377,22 @@ son contenu, son intitulé et son étiquette PRINCIPALE, plutôt que par un
   /* liste large : même grammaire que .row du rail, enrichie des tags de thèmes */
   .wl-listh{display:flex;justify-content:space-between;align-items:center;font:600 .58rem var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);margin:1.9rem 0 .2rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
   .wrow{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:.62rem .4rem;cursor:pointer;border-bottom:1px solid var(--line);transition:padding-left .18s,border-color .18s,background .18s}
-  .wrow:hover,.wrow.sel{padding-left:.7rem;background:rgba(255,255,255,.02)}
+  .wrow:hover,.wrow.sel{padding-left:.7rem;background:rgba(38,111,158,.05)}
   .wrow.sel{border-left:2px solid var(--ac);margin-left:-2px;padding-left:calc(.7rem - 2px)}
   .wr-n{font:.66rem var(--mono);color:var(--text3);letter-spacing:.5px}
   .wr-nm{font:500 .96rem var(--serif);line-height:1.2;color:var(--text2)}
-  .wrow:hover .wr-nm,.wrow.sel .wr-nm{color:#fff}
+  .wrow:hover .wr-nm,.wrow.sel .wr-nm{color:#10141f}
   .wr-tk{font:.62rem var(--mono);color:var(--text3);letter-spacing:.6px;margin-left:7px}
   .wr-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
   .ttag{font:600 .54rem var(--mono);letter-spacing:1.1px;text-transform:uppercase;color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:1px 6px;text-decoration:none;transition:color .15s,border-color .15s;white-space:nowrap}
-  .ttag:hover{color:var(--ac);border-color:rgba(116,182,223,.45)}
+  .ttag:hover{color:var(--ac);border-color:rgba(38,111,158,.45)}
   .wr-r{text-align:right}
   .wr-r .sc{font:500 1.02rem var(--serif);color:var(--text)}
   .wr-r .xx{font:.55rem var(--mono);color:var(--text3);letter-spacing:.5px;margin-top:1px;white-space:nowrap}
   .wl-empty{padding:2rem .4rem;color:var(--text3);font-size:.9rem}
 
   /* ── fiche d'un titre sans analyse éditoriale (hors watchlist principale) ── */
-  .lite-note{border:1px solid var(--line);border-left:2px solid var(--ac);border-radius:8px;padding:1rem 1.2rem;background:rgba(255,255,255,.02);max-width:900px}
+  .lite-note{border:1px solid var(--line);border-left:2px solid var(--ac);border-radius:8px;padding:1rem 1.2rem;background:rgba(255,255,255,.6);max-width:900px}
   .lite-note h4{font:600 .58rem var(--mono);letter-spacing:1.7px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;font-family:var(--mono)}
   .lite-note p{font-size:.93rem;line-height:1.7;color:var(--text2)}.lite-note p+p{margin-top:.5rem}
   .lite-note a{color:var(--ac);text-decoration:none}
@@ -471,7 +471,7 @@ de fond #fx (z-index:0) et devient invisible : c'était déjà le cas du
 <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <header>
-  <a class="brand" href="index.html"><span class="brand-icon"><svg width="30" height="30" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="14" r="9" fill="#74b6df" fill-opacity=".22"/><circle cx="14" cy="14" r="5" fill="#74b6df"/></svg></span><span class="brand-name">Signal</span></a>
+  <a class="brand" href="index.html"><span class="brand-icon"><svg width="30" height="30" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="14" r="9" fill="#266f9e" fill-opacity=".22"/><circle cx="14" cy="14" r="5" fill="#266f9e"/></svg></span><span class="brand-name">Signal</span></a>
   <nav>
     <a href="index.html#/" class="active"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="7" r="1.3"/><circle cx="5" cy="12" r="1.3"/><circle cx="5" cy="17" r="1.3"/><path d="M9.5 7h10M9.5 12h10M9.5 17h6"/></svg><span>Watchlists</span></a>
     <a href="actualites.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 18.5H5.5A1.5 1.5 0 0 1 4 17V5.5h12.5z"/><path d="M16.5 9.5H20V17a1.5 1.5 0 0 1-3.5 0z"/><path d="M7 9.5h6.5M7 13.5h4.5"/></svg><span>Actualités</span></a>
@@ -1035,7 +1035,7 @@ function drawChart(s){
     '<div class="chx-wrap"><svg class="chx-svg" id="chx-svg" viewBox="0 0 '+W+' '+H+'"></svg><div class="chx-tip" id="chx-tip"></div></div>'+
     '<div class="chx-ctrl"><span id="chx-periods">'+presets.map(([m,l],i)=>'<button class="chx-pbtn'+(m===WIN?' on':'')+'" data-m="'+m+'">'+l+'</button>').join(' ')+'</span><span class="chx-rlbl" id="chx-rlbl"></span></div>'+
     '<div class="chx-slider" id="chx-slider"><div class="chx-track"></div><div class="chx-sel" id="chx-sel"></div><input type="range" id="chx-r0"><input type="range" id="chx-r1"></div>'+
-    '<div class="chx-legend"><span style="color:var(--ac);font-weight:700">━</span> Cours&nbsp;&nbsp;<span style="color:var(--text2);font-weight:700">┅</span> <span id="chx-lgt">Tendance</span>&nbsp;&nbsp;<span style="color:#e0995e;font-weight:700">━</span> MM21&nbsp;&nbsp;<span style="color:#b59bd6;font-weight:700">━</span> MM200&nbsp;&nbsp;<span class="chx-band"></span> Canal ±1σ / ±2σ</div>'+
+    '<div class="chx-legend"><span style="color:var(--ac);font-weight:700">━</span> Cours&nbsp;&nbsp;<span style="color:var(--text2);font-weight:700">┅</span> <span id="chx-lgt">Tendance</span>&nbsp;&nbsp;<span style="color:#9d6414;font-weight:700">━</span> MM21&nbsp;&nbsp;<span style="color:#7d5bb0;font-weight:700">━</span> MM200&nbsp;&nbsp;<span class="chx-band"></span> Canal ±1σ / ±2σ</div>'+
     (dec!=null?'<div class="chx-mrow">'+[
       '<span class="chx-k">'+mlabel+' : </span><span class="chx-v" title="Prix de tendance : '+(b.prix_tendance!=null?Math.round(b.prix_tendance)+sym:'—')+'">'+Math.abs(dec).toFixed(0)+' %</span>',
       '<span class="chx-k">z = </span><span class="chx-v2">'+fs(zOff,1).replace('.',',')+'σ</span>'
@@ -1135,14 +1135,14 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
       :String(+(p/1000000).toFixed(1)).replace('.',',')+'M';
     const inD=TICKS.filter(p=>p>lo&&p<hi);const stride=Math.max(1,Math.ceil(inD.length/8));
     for(const p of inD.filter((_,i)=>i%stride===0)){
-      el('line',{x1:ML,x2:W-MR,y1:Y(p),y2:Y(p),stroke:'rgba(255,255,255,.06)'});
+      el('line',{x1:ML,x2:W-MR,y1:Y(p),y2:Y(p),stroke:'rgba(28,50,100,.10)'});
       el('text',{x:ML-6,y:Y(p)+3,'text-anchor':'end',class:'chx-axis'}).textContent=fmtAxe(p);}
     // axe X (années)
     const yrs=(t1v-t0v)/12,step=yrs>20?5:yrs>8?2:1;
     for(let y=Math.ceil(t0v/12);y*12<=t1v;y++)if(y%step===0)
       el('text',{x:X(y*12),y:H-7,'text-anchor':'middle',class:'chx-axis'}).textContent=y;
     if(hasBand){
-      const band=(k,op)=>el('polygon',{points:[[X(tb0),Y(trF(tb0)*Math.exp(k*F.sigma))],[X(tb1),Y(trF(tb1)*Math.exp(k*F.sigma))],[X(tb1),Y(trF(tb1)*Math.exp(-k*F.sigma))],[X(tb0),Y(trF(tb0)*Math.exp(-k*F.sigma))]].map(p=>p.join(',')).join(' '),fill:'#74b6df','fill-opacity':op,'clip-path':'url(#chx-plot)'});
+      const band=(k,op)=>el('polygon',{points:[[X(tb0),Y(trF(tb0)*Math.exp(k*F.sigma))],[X(tb1),Y(trF(tb1)*Math.exp(k*F.sigma))],[X(tb1),Y(trF(tb1)*Math.exp(-k*F.sigma))],[X(tb0),Y(trF(tb0)*Math.exp(-k*F.sigma))]].map(p=>p.join(',')).join(' '),fill:'#266f9e','fill-opacity':op,'clip-path':'url(#chx-plot)'});
       // Intensité ADAPTATIVE : sur 20 ans/MAX l'échelle log s'étire et le canal ne fait
 // plus que quelques dizaines de px, les opacités fixes devenaient illisibles.
       // Plus le canal est fin à l'écran, plus fonds et liserés sont soutenus.
@@ -1152,7 +1152,7 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
       // liserés des bords ±1σ/±2σ : gardent le canal lisible quand le zoom l'amincit
       for(const [k,op] of [[2,.14],[1,.22],[-1,.22],[-2,.14]])
         el('line',{x1:X(tb0),y1:Y(trF(tb0)*Math.exp(k*F.sigma)),x2:X(tb1),y2:Y(trF(tb1)*Math.exp(k*F.sigma)),
-          stroke:'#74b6df','stroke-width':1,opacity:Math.min(op*boost,.5),'clip-path':'url(#chx-plot)'});
+          stroke:'#266f9e','stroke-width':1,opacity:Math.min(op*boost,.5),'clip-path':'url(#chx-plot)'});
       // Étiquettes σ dans la MARGE droite, avec placement anti-collision : elles
       // glissent pour s'intercaler entre les pastilles. JAMAIS supprimées (les 4
       // repères σ doivent toujours être lisibles) : balayage large, et à défaut
@@ -1173,17 +1173,17 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
         if(spot==null)spot=best;
         if(spot!=null){placed.push({y:spot,h:9});
           el('text',{x:W-MR+5,y:spot+3,class:'chx-blabel'}).textContent=l;}}
-      el('line',{x1:X(tb0),y1:Y(trF(tb0)),x2:X(tb1),y2:Y(trF(tb1)),stroke:'#c6c6e0','stroke-width':2,'stroke-dasharray':'6 5',opacity:.85,'clip-path':'url(#chx-plot)'});
+      el('line',{x1:X(tb0),y1:Y(trF(tb0)),x2:X(tb1),y2:Y(trF(tb1)),stroke:'#454c66','stroke-width':2,'stroke-dasharray':'6 5',opacity:.85,'clip-path':'url(#chx-plot)'});
     }
     const mmLine=(serie,color)=>{const v=(serie||[]).filter(([t,p])=>t>=t0v&&t<=t1v&&p>0);
       if(v.length>1)el('polyline',{points:v.map(([t,p])=>X(t)+','+Y(p)).join(' '),fill:'none',stroke:color,'stroke-width':1.3,opacity:.7,'clip-path':'url(#chx-plot)'});};
-    mmLine(D.mm200,'#b59bd6');mmLine(D.mm21,'#e0995e');
-    el('polyline',{points:vis.map(([t,p])=>X(t)+','+Y(p)).join(' '),fill:'none',stroke:'#74b6df','stroke-width':2,'stroke-linejoin':'round','clip-path':'url(#chx-plot)'});
-    hoverG={cross:el('line',{y1:MT,y2:H-MB,stroke:'rgba(255,255,255,.18)','stroke-width':1,visibility:'hidden'}),
-      dotP:el('circle',{r:4,fill:'#74b6df',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'}),
-      dotT:el('circle',{r:4,fill:'#c6c6e0',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'}),
-      dot21:el('circle',{r:4,fill:'#e0995e',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'}),
-      dot200:el('circle',{r:4,fill:'#b59bd6',stroke:'#0d0d16','stroke-width':2,visibility:'hidden'})};
+    mmLine(D.mm200,'#7d5bb0');mmLine(D.mm21,'#9d6414');
+    el('polyline',{points:vis.map(([t,p])=>X(t)+','+Y(p)).join(' '),fill:'none',stroke:'#266f9e','stroke-width':2,'stroke-linejoin':'round','clip-path':'url(#chx-plot)'});
+    hoverG={cross:el('line',{y1:MT,y2:H-MB,stroke:'rgba(28,50,100,.28)','stroke-width':1,visibility:'hidden'}),
+      dotP:el('circle',{r:4,fill:'#266f9e',stroke:'#ffffff','stroke-width':2,visibility:'hidden'}),
+      dotT:el('circle',{r:4,fill:'#454c66',stroke:'#ffffff','stroke-width':2,visibility:'hidden'}),
+      dot21:el('circle',{r:4,fill:'#9d6414',stroke:'#ffffff','stroke-width':2,visibility:'hidden'}),
+      dot200:el('circle',{r:4,fill:'#7d5bb0',stroke:'#ffffff','stroke-width':2,visibility:'hidden'})};
     const officiel=Math.abs(t0v-T_OFF)<1.5&&t1v>=T_MAX-0.1;
     majWarn(officiel);
     document.getElementById('chx-rlbl').textContent=fmt(t0v)+' → '+fmt(t1v)+(officiel?' · fenêtre officielle du score':' · exploration');
@@ -1238,8 +1238,8 @@ else if(zv!=null&&zv>=2)zw='<div class="chx-warn"><span class="chx-ic">⚠</span
       '● Cours&nbsp;<span class="c">'+p.toFixed(p<10?2:0)+sym+'</span>',
       (tv?'◌ Tendance&nbsp;<span class="t">'+tv.toFixed(tv<10?2:0)+sym+'</span> <span class="chx-k">si le cours y revenait&nbsp;</span><span class="t">'+((tv/p-1)*100>0?'+':'')+((tv/p-1)*100).toFixed(0)+'&nbsp;%</span>'
           :'◌ <span class="chx-k">période trop courte pour une tendance</span>'),
-      (m21&&m200?'<span style="color:#e0995e">MM21 '+m21[1].toFixed(0)+sym+'</span>':''),
-      (m21&&m200?'<span style="color:#b59bd6">MM200 '+m200[1].toFixed(0)+sym+'</span>':'')
+      (m21&&m200?'<span style="color:#9d6414">MM21 '+m21[1].toFixed(0)+sym+'</span>':''),
+      (m21&&m200?'<span style="color:#7d5bb0">MM200 '+m200[1].toFixed(0)+sym+'</span>':'')
     ].filter(Boolean).join('<span class="chx-k">&nbsp;·&nbsp;</span>');
     /* LE RELEVÉ EST DOCKÉ, PARTOUT (décision du propriétaire, 07/08 : « je
        veux que le petit rectangle avec les metrics s'affiche en bas du graph
@@ -1616,15 +1616,15 @@ function fondaRender(s){
   const hVal=v=>LOGB?(Math.log(v)-_la)/(_lb-_la)*(H-PB-16):v*sc;
   const slot=W/n, bw=Math.min(34,slot*0.22);
   let bars='<defs><pattern id="fdhach" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">'+
-    '<line x1="0" y1="0" x2="0" y2="5" stroke="#74b6df" stroke-width="2.4"/></pattern>'+
+    '<line x1="0" y1="0" x2="0" y2="5" stroke="#266f9e" stroke-width="2.4"/></pattern>'+
     '<pattern id="fdhach2" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">'+
-    '<line x1="0" y1="0" x2="0" y2="5" stroke="#c6c6e0" stroke-width="2.4"/></pattern></defs>'+
+    '<line x1="0" y1="0" x2="0" y2="5" stroke="#454c66" stroke-width="2.4"/></pattern></defs>'+
     // La bande de survol est posée EN PREMIER : elle doit passer derrière les
     // barres, pas par-dessus.
     '<rect class="fd-hi" x="0" y="0" width="0" height="'+(H-PB+4)+'" visibility="hidden"/>'+
-    '<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="rgba(255,255,255,.10)"/>';
+    '<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="rgba(28,50,100,.14)"/>';
   if(projC.length){const xSep=slot*rows.length;
-    bars+='<line x1="'+xSep+'" x2="'+xSep+'" y1="4" y2="'+(H-PB+2)+'" stroke="rgba(255,255,255,.22)" stroke-dasharray="3 3"/>';}
+    bars+='<line x1="'+xSep+'" x2="'+xSep+'" y1="4" y2="'+(H-PB+2)+'" stroke="rgba(28,50,100,.32)" stroke-dasharray="3 3"/>';}
   /* ÉTIQUETTES : c'est la POLICE qui s'adapte, plus le nombre d'années.
      Le pas se déduisait de la place et sautait une colonne sur deux dès que
      ça serrait — le propriétaire veut voir chaque exercice (08/08/2026). On
@@ -1670,18 +1670,18 @@ function fondaRender(s){
     const sep='<span class="chx-k">&nbsp;·&nbsp;</span>';
     relH.push([
       '<span class="d">'+(o.pr?r.exercice+'&nbsp;· attendu':lab(r))+'</span>',
-      '<span style="color:#74b6df">'+(o.pr?'▨':'■')+'</span> CA&nbsp;<span class="c">'+fdMoney(r.ca,dev)+'</span> '+dlt('ca'),
+      '<span style="color:#266f9e">'+(o.pr?'▨':'■')+'</span> CA&nbsp;<span class="c">'+fdMoney(r.ca,dev)+'</span> '+dlt('ca'),
       (!o.pr&&r.rn!=null
-        ?'<span style="color:#c6c6e0">■</span> Résultat net&nbsp;<span class="t">'+fdMoney(r.rn,dev)+'</span> '+dlt('rn'):''),
+        ?'<span style="color:#454c66">■</span> Résultat net&nbsp;<span class="t">'+fdMoney(r.rn,dev)+'</span> '+dlt('rn'):''),
       (rnA!=null
-        ?'<span style="color:#c6c6e0">▨</span> Résultat net&nbsp;<span class="t">'+fdMoney(rnA,dev)+'</span> '+fdDelta({v:rnA},{v:rnPrec},'v'):''),
+        ?'<span style="color:#454c66">▨</span> Résultat net&nbsp;<span class="t">'+fdMoney(rnA,dev)+'</span> '+fdDelta({v:rnA},{v:rnPrec},'v'):''),
       (natTxt?'<i style="color:var(--text3);font-style:normal">'+natTxt+'</i>':'')
     ].filter(Boolean).join(sep));
     relX.push(slot*i+slot/2);
   });
   cols.forEach((o,i)=>{
     const r=o.v, cx=slot*i+slot/2, last=(i===rows.length-1), op=o.pr?0.9:(last?1:0.45);
-    const fCa=o.pr?'url(#fdhach)':'#74b6df';
+    const fCa=o.pr?'url(#fdhach)':'#266f9e';
     /* PLUS DE CÔNE (décision du propriétaire, 07/08 : « je préfère qu'on
        assume une position, on ne parle pas de haut de fourchette »). Il y
        avait ici un contour en pointillé au-dessus de la barre, seconde
@@ -1701,7 +1701,7 @@ function fondaRender(s){
     // visuel que le CA (plein = déposé, hachures = attendu).
     const rnV=o.pr?rnAtt(r):r.rn;
     if(rnV!=null){const h=hVal(rnV), neg=rnV<0;
-      bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':(o.pr?'url(#fdhach2)':'#c6c6e0'))+'" opacity="'+(neg?0.8:(o.pr?0.85:op*0.75))+'"/>';}
+      bars+='<rect x="'+(cx+2)+'" y="'+(h>=0?y0-h:y0)+'" width="'+bw+'" height="'+Math.max(2,Math.abs(h))+'" rx="3" fill="'+(neg?'var(--red)':(o.pr?'url(#fdhach2)':'#454c66'))+'" opacity="'+(neg?0.8:(o.pr?0.85:op*0.75))+'"/>';}
     if((n-1-i)%step===0||last){
       /* Le libellé de la DERNIÈRE colonne débordait du viewBox et sortait
          rogné (« 2030 » coupé au bord droit sur mobile) : centré, il déborde
@@ -1728,7 +1728,7 @@ function fondaRender(s){
             demi=txt.length*LARG_CAR/2;
       const anc=(cx+demi>W-1)?'end':(cx-demi<1?'start':'middle');
       const tx=anc==='end'?W-1:(anc==='start'?1:cx);
-      bars+='<text x="'+tx+'" y="'+(H-6)+'" text-anchor="'+anc+'" class="chx-axis" style="font-size:'+_ax.px+'px"'+(last?' fill="#c6c6e0"':(o.pr?' opacity=".65"':''))+'>'+txt+'</text>';}
+      bars+='<text x="'+tx+'" y="'+(H-6)+'" text-anchor="'+anc+'" class="chx-axis" style="font-size:'+_ax.px+'px"'+(last?' fill="#454c66"':(o.pr?' opacity=".65"':''))+'>'+txt+'</text>';}
   });
   // La table des chiffres est DÉPLIABLE (décision propriétaire du 06/08 : le
   // graphique d'abord, les chiffres si on veut) — son état survit aux bascules.
@@ -1758,7 +1758,7 @@ function fondaRender(s){
       '</div>'+
     '<div class="fd-cwrap"><svg class="fd-svg" id="fd-bars" viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>'+
     '<div class="chx-tip" id="fd-bars-tip"></div></div>'+
-    '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">■</span> Résultat net'+
+    '<div class="chx-legend"><span style="color:#266f9e;font-weight:700">■</span> CA&nbsp;&nbsp;<span style="color:#454c66;font-weight:700">■</span> Résultat net'+
       (projC.length?'&nbsp;&nbsp;<span style="font-weight:700">▨</span> attendu'+(projC.some(p=>rnAtt(p)!=null)?'':' (CA seul)'):'')+'</div>'+
     /* PLUS DE PHRASE « TRAJECTOIRE ATTENDUE » (décision du propriétaire,
        07/08). Elle disait quels exercices venaient du consensus, lesquels de
@@ -1806,7 +1806,7 @@ function fondaRender(s){
        le « i », plus étalée sous le graphique. */
     (perB?(perB.svg
       ?'<div class="fd-wrap"><div class="qh">Évolution du PER</div>'+perB.svg+
-        '<div class="chx-legend"><span style="color:#74b6df;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#74b6df;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#c6c6e0;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+
+        '<div class="chx-legend"><span style="color:#266f9e;font-weight:700">●</span> PER de l\'exercice&nbsp;&nbsp;<span style="color:#266f9e;font-weight:700">○</span> estimé (analystes)'+(perB.med!=null?'&nbsp;&nbsp;<span style="color:#454c66;font-weight:700">┅</span> médiane':'')+(perB.trous?'&nbsp;&nbsp;<span style="color:var(--red);font-weight:700">×</span> exercice sans multiple':'')+
         /* LA CONVERSION SE DIT, elle ne se devine pas. Cinq sociétés publient
            leurs comptes dans une devise et cotent dans une autre ; leurs
            multiples existent depuis le 08/08/2026 parce qu'on ramène le cours
@@ -1995,14 +1995,14 @@ function fdPerChart(F,fmtPer,W,b){
      compare au multiple du jour, et deux médianes différentes sur la même page
      seraient un contresens. Le nombre d'exercices est écrit à côté pour que le
      trait ne semble pas sortir de nulle part. */
-  if(med!=null){g+='<line x1="'+ML+'" x2="'+(W-MR+10)+'" y1="'+Y(med)+'" y2="'+Y(med)+'" stroke="rgba(198,198,224,.35)" stroke-dasharray="5 5"/>'
+  if(med!=null){g+='<line x1="'+ML+'" x2="'+(W-MR+10)+'" y1="'+Y(med)+'" y2="'+Y(med)+'" stroke="rgba(69,76,102,.35)" stroke-dasharray="5 5"/>'
     +'<text x="'+(W-MR+14)+'" y="'+(Y(med)+3)+'" class="chx-axis">m\u00e9d. '+Math.round(med)+'\u00d7</text>'
     +'<text x="'+(W-MR+14)+'" y="'+(Y(med)+14)+'" class="chx-axis" opacity=".65">sur\u00a0'+nMed+'</text>';}
   const segs=[];let cur=[pub[0]];
   for(let i=1;i<pub.length;i++){if(pub[i].an-pub[i-1].an===1)cur.push(pub[i]);else{segs.push(cur);cur=[pub[i]];}}
   segs.push(cur);
   segs.filter(sg=>sg.length>1).forEach(sg=>{
-    g+='<polyline points="'+sg.map(p=>X(p.an)+','+Yp(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-linejoin="round"/>';});
+    g+='<polyline points="'+sg.map(p=>X(p.an)+','+Yp(p.per)).join(' ')+'" fill="none" stroke="#266f9e" stroke-width="2" stroke-linejoin="round"/>';});
   /* Le connecteur pointillé ne part du dernier point publié QUE s'il touche
      le dernier exercice CONNU : sur une société qui a traversé des pertes,
      relier 2022 aux estimations par-dessus trois croix dessinerait une
@@ -2011,7 +2011,7 @@ function fdPerChart(F,fmtPer,W,b){
   const derAn=anAll.length?+anAll[anAll.length-1].fin.slice(0,4):(pub.length?pub[pub.length-1].an:0);
   const ancre=(pub.length&&pub[pub.length-1].an===derAn)?[pub[pub.length-1]]:[];
   if(est.length&&ancre.length+est.length>=2)
-    g+='<polyline points="'+ancre.concat(est).map(p=>X(p.an)+','+Yp(p.per)).join(' ')+'" fill="none" stroke="#74b6df" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
+    g+='<polyline points="'+ancre.concat(est).map(p=>X(p.an)+','+Yp(p.per)).join(' ')+'" fill="none" stroke="#266f9e" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>';
   trous.filter(t=>t.an>=a0&&t.an<=a1).forEach(t=>{
     g+='<text x="'+X(t.an)+'" y="'+(H-MB+2)+'" text-anchor="middle" fill="var(--red)" font-size="13" opacity=".8">\u00d7<title>'+t.an+' : '+t.txt+'</title></text>';});
   /* TOUTES LES VALEURS SONT ÉCRITES (décision du propriétaire, 07/08 :
@@ -2058,13 +2058,13 @@ function fdPerChart(F,fmtPer,W,b){
   const stepX=_axP.pas;
   pts.forEach((p,i)=>{
     const cx=X(p.an),cy=Yp(p.per);
-    g+=p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#06060b" stroke="#74b6df" stroke-width="2"/>'
-            :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#74b6df" stroke="#0d0d16" stroke-width="1.5"/>';
+    g+=p.est?'<circle cx="'+cx+'" cy="'+cy+'" r="4.5" fill="#f4f6fa" stroke="#266f9e" stroke-width="2"/>'
+            :'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#266f9e" stroke="#ffffff" stroke-width="1.5"/>';
     const enHaut=cx-dernierHaut>=ECART_VAL;
     if(enHaut||cx-dernierBas>=ECART_VAL){
       const ly=enHaut?Math.max(11,cy-10):Math.min(H-MB-4,cy+18);
       if(enHaut)dernierHaut=cx;else dernierBas=cx;
-      g+='<text x="'+cx+'" y="'+ly+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.est?'#8a8aa6':'#c6c6e0')+'">'+Math.round(p.per)+'\u00d7</text>';}
+      g+='<text x="'+cx+'" y="'+ly+'" text-anchor="middle" class="chx-axis"'+(p.est?' font-style="italic"':'')+' fill="'+(p.est?'#616a86':'#454c66')+'">'+Math.round(p.per)+'\u00d7</text>';}
     if((pts.length-1-i)%stepX===0&&cx-dernierAxe>=ECART_AXE){
       dernierAxe=cx;
       g+='<text x="'+cx+'" y="'+(H-4)+'" text-anchor="middle" class="chx-axis" style="font-size:'+_axP.px+'px"'+(p.est?' font-style="italic"':'')+'>FY'+String(p.an).slice(2)+'</text>';}
@@ -2227,7 +2227,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
        et les deux se lisent maintenant d'un seul regard, avant même le
        résumé. */
     '<div id="dzone">'+dataZone(s,b)+'</div>'+
-    '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div>'+(function(){const p=paliers(score);return p?'<div class="rp rp-'+p.ton+'">'+p.mot+'</div>':'';})()+'</div></div></div>'+
+    '<div class="ring"><svg width="138" height="138"><circle cx="69" cy="69" r="52" fill="none" stroke="rgba(28,50,100,.10)" stroke-width="6"/><circle cx="69" cy="69" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s ease" id="arc"/></svg><div class="rv"><div class="rl">SCORE</div><div class="rn" id="cu">0</div>'+(function(){const p=paliers(score);return p?'<div class="rp rp-'+p.ton+'">'+p.mot+'</div>':'';})()+'</div></div></div>'+
     '<div class="sep"></div><div id="rzone"></div>'+
     /* Les métriques des fiches COMPACTES restent dans le corps : leur
        bandeau de six tuiles n'a pas sa place dans l'en-tête, et la

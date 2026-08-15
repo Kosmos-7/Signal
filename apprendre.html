@@ -14,28 +14,28 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: auto; }   /* rétablit le scroll naturel (header sticky) */
   :root {
-    --bg:        #06060b;
-    --surface:   rgba(255,255,255,0.022);
-    --surface2:  rgba(255,255,255,0.04);
-    --surface3:  rgba(255,255,255,0.07);
-    --border:    rgba(255,255,255,0.07);
-    --border2:   rgba(116,182,223,0.30);
-    --text:      #f2f3fc;
-    --text2:     #c6c6e0;
-    --text3:     #8a8aa6;
-    --ac:        #74b6df;
-    --ac-dim:    rgba(116,182,223,0.10);
-    --gold:      #74b6df;   /* accent UI → cyan ; l'or pédagogique vit dans les SVG */
-    --gold2:     #4f8bb0;
-    --gold-dim:  rgba(116,182,223,0.10);
-    --green:     #74b6df;
-    --green-dim: rgba(116,182,223,0.10);
-    --red:       #74b6df;
-    --red-dim:   rgba(116,182,223,0.10);
-    --blue:      #74b6df;
-    --blue-dim:  rgba(116,182,223,0.10);
-    --orange:    #74b6df;
-    --orange-dim:rgba(116,182,223,0.12);
+    --bg:        #f4f6fa;
+    --surface:   rgba(255,255,255,0.72);
+    --surface2:  rgba(28,50,100,0.05);
+    --surface3:  rgba(28,50,100,0.10);
+    --border:    rgba(25,40,80,0.13);
+    --border2:   rgba(38,111,158,0.35);
+    --text:      #1d2233;
+    --text2:     #454c66;
+    --text3:     #616a86;
+    --ac:        #266f9e;
+    --ac-dim:    rgba(38,111,158,0.10);
+    --gold:      #266f9e;   /* accent UI → cyan ; l'or pédagogique vit dans les SVG */
+    --gold2:     #1d5a82;
+    --gold-dim:  rgba(38,111,158,0.10);
+    --green:     #266f9e;
+    --green-dim: rgba(38,111,158,0.10);
+    --red:       #266f9e;
+    --red-dim:   rgba(38,111,158,0.10);
+    --blue:      #266f9e;
+    --blue-dim:  rgba(38,111,158,0.10);
+    --orange:    #266f9e;
+    --orange-dim:rgba(38,111,158,0.12);
     --radius:    10px;
     --radius-lg: 16px;
   }
@@ -69,7 +69,7 @@
     line-height: 1.2;
     letter-spacing: -0.6px;
     margin-bottom: 0.85rem;
-    background: linear-gradient(120deg, #f2f3fc 30%, #74b6df 100%);
+    background: linear-gradient(120deg, #1d2233 30%, #266f9e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -77,7 +77,7 @@
   .hero p { color: var(--text2); font-size: 0.96rem; max-width: 560px; line-height: 1.75; }
   .hero-sep {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(116,182,223,0.22), transparent);
+    background: linear-gradient(90deg, transparent, rgba(38,111,158,0.22), transparent);
     margin: 1.5rem 0 2rem;
   }
 
@@ -119,12 +119,12 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 1.4rem 1.35rem;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    box-shadow: none;
     transition: border-color 0.18s, box-shadow 0.18s;
   }
   .brique-card:hover {
-    border-color: rgba(116,182,223,0.2);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 24px rgba(116,182,223,0.05);
+    border-color: rgba(38,111,158,0.2);
+    box-shadow: 0 0 24px rgba(38,111,158,0.05);
   }
   .brique-number {
     font-family: 'Courier New', monospace;
@@ -155,7 +155,7 @@
     border-radius: var(--radius-lg);
     padding: 1.5rem;
     margin-bottom: 1rem;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    box-shadow: none;
   }
   .scoring-row { margin-bottom: 1.4rem; }
   .scoring-row:last-child { margin-bottom: 0; }
@@ -222,8 +222,8 @@
     padding: 1px 6px;
     white-space: nowrap;
   }
-  .badge-in  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(116,182,223,0.25); }
-  .badge-out { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(116,182,223,0.25); }
+  .badge-in  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(38,111,158,0.25); }
+  .badge-out { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(38,111,158,0.25); }
 
 /* ── CONCEPT CARDS, 1 colonne pour confort de lecture ── */
   .concept-grid {
@@ -236,12 +236,12 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 1.25rem;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    box-shadow: none;
     transition: border-color 0.18s, box-shadow 0.18s;
   }
   .concept-card:hover {
     border-color: var(--border2);
-    box-shadow: 0 0 24px rgba(116,182,223,0.05);
+    box-shadow: 0 0 24px rgba(38,111,158,0.05);
   }
   .concept-label {
     font-family: 'Courier New', monospace;
@@ -313,7 +313,7 @@
     font-size: 0.54rem;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: rgba(232,236,242,0.88);
+    color: rgba(40,48,70,.88);
     display: flex;
     flex-wrap: wrap;
     gap: 0 0.5rem;
@@ -324,7 +324,7 @@
     font-size: 0.55rem;
     letter-spacing: 0.3px;
     text-transform: none;
-    color: rgba(232,236,242,0.5);
+    color: rgba(40,48,70,.55);
   }
   @media (max-width: 640px) {
     .sec-tete img { aspect-ratio: 16 / 7; }
@@ -338,7 +338,7 @@
     border-radius: var(--radius-lg);
     overflow: hidden;
     margin-bottom: 1rem;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    box-shadow: none;
   }
   .portfo-header {
     display: flex;
@@ -427,7 +427,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 1.25rem;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    box-shadow: none;
     position: relative;
     overflow: hidden;
     transition: border-color 0.18s;
@@ -519,7 +519,7 @@
   }
 
   /* Le brique-grid garde des cellules légères, mais à plat */
-  .brique-card { background: rgba(255,255,255,0.015); border: 1px solid var(--line); }
+  .brique-card { background: rgba(255,255,255,.6); border: 1px solid var(--line); }
 
   /* Plus d'air.
      LE PADDING HAUT EN EST EXCLU : il gouverne l'écart entre l'en-tête et la
@@ -570,7 +570,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 <header>
   <a class="brand" href="index.html">
     <span class="brand-icon">
-      <svg width="30" height="30" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="14" r="9" fill="#74b6df" fill-opacity=".22"/><circle cx="14" cy="14" r="5" fill="#74b6df"/></svg>
+      <svg width="30" height="30" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="14" r="9" fill="#266f9e" fill-opacity=".22"/><circle cx="14" cy="14" r="5" fill="#266f9e"/></svg>
     </span>
     <span class="brand-name">Signal</span>
   </a>
@@ -1283,39 +1283,39 @@ Un score élevé ne garantit pas une hausse imminente, il signale que plusieurs 
         <div class="concept-body">
 La MM21 (moyenne mobile (<span class="en">moving average</span>, MA) sur 21 jours) a dépassé la MM200 (moyenne sur 200 jours) il y a 12 jours. Concrètement : la dynamique court terme est désormais au-dessus de la dynamique long terme, un signal classique de retournement haussier. Historiquement, après un Golden Cross sur le S&P 500, le titre est en hausse dans ~66-72 % des cas sur les 60 jours suivants (la fenêtre la plus forte est les 10 premiers jours).
 
-          <div style="margin:1rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
+          <div style="margin:1rem 0;padding:1rem;background:#ffffff;border:1px solid var(--border);border-radius:var(--radius)">
             <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">JPMorgan Chase (JPM) · 200 derniers jours · données réelles</div>
             <svg viewBox="0 0 720 280" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
               <!-- repères Y axis -->
-              <line x1="60" y1="71.8"  x2="640" y2="71.8"  stroke="#21212e" stroke-width="0.5"/>
-              <line x1="60" y1="121.6" x2="640" y2="121.6" stroke="#21212e" stroke-width="0.5"/>
-              <line x1="60" y1="171.4" x2="640" y2="171.4" stroke="#21212e" stroke-width="0.5"/>
-              <line x1="60" y1="221.2" x2="640" y2="221.2" stroke="#21212e" stroke-width="0.5"/>
+              <line x1="60" y1="71.8"  x2="640" y2="71.8"  stroke="#e2e7f0" stroke-width="0.5"/>
+              <line x1="60" y1="121.6" x2="640" y2="121.6" stroke="#e2e7f0" stroke-width="0.5"/>
+              <line x1="60" y1="171.4" x2="640" y2="171.4" stroke="#e2e7f0" stroke-width="0.5"/>
+              <line x1="60" y1="221.2" x2="640" y2="221.2" stroke="#e2e7f0" stroke-width="0.5"/>
               <text x="38" y="74"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">325 $</text>
               <text x="38" y="124" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">300 $</text>
               <text x="38" y="174" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">275 $</text>
               <text x="38" y="224" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">250 $</text>
 
 <!-- cours close, bleu fiche, en arrière-plan -->
-              <path d="M 60.0,137.0 L 71.8,130.9 L 83.7,147.2 L 95.5,150.7 L 107.3,148.9 L 119.2,147.0 L 131.0,131.6 L 142.9,131.2 L 154.7,134.4 L 166.5,112.7 L 178.4,101.2 L 190.2,103.8 L 202.0,109.2 L 213.9,112.2 L 225.7,111.6 L 237.6,132.2 L 249.4,138.1 L 261.2,108.7 L 273.1,104.3 L 284.9,96.5 L 296.7,126.6 L 308.6,131.3 L 320.4,101.5 L 332.2,95.6 L 344.1,107.4 L 355.9,96.7 L 367.8,81.8 L 379.6,80.5 L 391.4,60.2 L 403.3,66.8 L 415.1,106.3 L 426.9,117.5 L 438.8,123.1 L 450.6,90.4 L 462.4,88.4 L 474.3,110.5 L 486.1,129.3 L 498.0,124.1 L 509.8,137.5 L 521.6,149.4 L 533.5,150.7 L 545.3,144.7 L 557.1,158.7 L 569.0,135.4 L 580.8,101.1 L 592.7,109.8 L 604.5,95.7 L 616.3,98.5 L 628.2,96.8 L 640.0,117.4" stroke="#74b6df" stroke-width="1.1" fill="none" opacity="0.55"/>
+              <path d="M 60.0,137.0 L 71.8,130.9 L 83.7,147.2 L 95.5,150.7 L 107.3,148.9 L 119.2,147.0 L 131.0,131.6 L 142.9,131.2 L 154.7,134.4 L 166.5,112.7 L 178.4,101.2 L 190.2,103.8 L 202.0,109.2 L 213.9,112.2 L 225.7,111.6 L 237.6,132.2 L 249.4,138.1 L 261.2,108.7 L 273.1,104.3 L 284.9,96.5 L 296.7,126.6 L 308.6,131.3 L 320.4,101.5 L 332.2,95.6 L 344.1,107.4 L 355.9,96.7 L 367.8,81.8 L 379.6,80.5 L 391.4,60.2 L 403.3,66.8 L 415.1,106.3 L 426.9,117.5 L 438.8,123.1 L 450.6,90.4 L 462.4,88.4 L 474.3,110.5 L 486.1,129.3 L 498.0,124.1 L 509.8,137.5 L 521.6,149.4 L 533.5,150.7 L 545.3,144.7 L 557.1,158.7 L 569.0,135.4 L 580.8,101.1 L 592.7,109.8 L 604.5,95.7 L 616.3,98.5 L 628.2,96.8 L 640.0,117.4" stroke="#266f9e" stroke-width="1.1" fill="none" opacity="0.55"/>
 
 <!-- MM200, courbe violette, lisse -->
-              <path d="M 60.0,229.8 L 71.8,226.3 L 83.7,223.3 L 95.5,220.6 L 107.3,217.8 L 119.2,215.0 L 131.0,212.1 L 142.9,209.5 L 154.7,207.2 L 166.5,204.7 L 178.4,202.1 L 190.2,199.2 L 202.0,196.3 L 213.9,193.4 L 225.7,190.5 L 237.6,188.0 L 249.4,185.6 L 261.2,182.3 L 273.1,180.1 L 284.9,177.9 L 296.7,176.1 L 308.6,174.8 L 320.4,173.4 L 332.2,171.9 L 344.1,169.9 L 355.9,167.5 L 367.8,164.6 L 379.6,160.6 L 391.4,156.8 L 403.3,153.3 L 415.1,150.4 L 426.9,147.4 L 438.8,144.2 L 450.6,140.2 L 462.4,136.9 L 474.3,134.3 L 486.1,131.9 L 498.0,129.9 L 509.8,128.5 L 521.6,127.3 L 533.5,126.3 L 545.3,125.2 L 557.1,124.1 L 569.0,123.0 L 580.8,121.7 L 592.7,120.5 L 604.5,119.4 L 616.3,118.3 L 628.2,117.1 L 640.0,116.1" stroke="#b59bd6" stroke-width="2.2" fill="none"/>
+              <path d="M 60.0,229.8 L 71.8,226.3 L 83.7,223.3 L 95.5,220.6 L 107.3,217.8 L 119.2,215.0 L 131.0,212.1 L 142.9,209.5 L 154.7,207.2 L 166.5,204.7 L 178.4,202.1 L 190.2,199.2 L 202.0,196.3 L 213.9,193.4 L 225.7,190.5 L 237.6,188.0 L 249.4,185.6 L 261.2,182.3 L 273.1,180.1 L 284.9,177.9 L 296.7,176.1 L 308.6,174.8 L 320.4,173.4 L 332.2,171.9 L 344.1,169.9 L 355.9,167.5 L 367.8,164.6 L 379.6,160.6 L 391.4,156.8 L 403.3,153.3 L 415.1,150.4 L 426.9,147.4 L 438.8,144.2 L 450.6,140.2 L 462.4,136.9 L 474.3,134.3 L 486.1,131.9 L 498.0,129.9 L 509.8,128.5 L 521.6,127.3 L 533.5,126.3 L 545.3,125.2 L 557.1,124.1 L 569.0,123.0 L 580.8,121.7 L 592.7,120.5 L 604.5,119.4 L 616.3,118.3 L 628.2,117.1 L 640.0,116.1" stroke="#7d5bb0" stroke-width="2.2" fill="none"/>
 
 <!-- MM21, courbe ambre, plus volatile -->
-              <path d="M 60.0,151.6 L 71.8,147.0 L 83.7,146.7 L 95.5,145.2 L 107.3,143.6 L 119.2,144.1 L 131.0,144.2 L 142.9,142.1 L 154.7,139.3 L 166.5,134.1 L 178.4,126.3 L 190.2,119.7 L 202.0,114.4 L 213.9,110.0 L 225.7,108.7 L 237.6,111.9 L 249.4,117.4 L 261.2,121.1 L 273.1,120.1 L 284.9,116.2 L 296.7,113.4 L 308.6,112.4 L 320.4,111.8 L 332.2,111.2 L 344.1,112.7 L 355.9,110.6 L 367.8,104.3 L 379.6,94.9 L 391.4,88.9 L 403.3,81.5 L 415.1,82.2 L 426.9,85.4 L 438.8,94.9 L 450.6,101.4 L 462.4,105.9 L 474.3,108.7 L 486.1,108.3 L 498.0,107.6 L 509.8,111.8 L 521.6,122.8 L 533.5,131.7 L 545.3,139.5 L 557.1,143.5 L 569.0,146.3 L 580.8,141.0 L 592.7,130.9 L 604.5,120.8 L 616.3,113.1 L 628.2,104.0 L 640.0,100.6" stroke="#e0995e" stroke-width="2.2" fill="none"/>
+              <path d="M 60.0,151.6 L 71.8,147.0 L 83.7,146.7 L 95.5,145.2 L 107.3,143.6 L 119.2,144.1 L 131.0,144.2 L 142.9,142.1 L 154.7,139.3 L 166.5,134.1 L 178.4,126.3 L 190.2,119.7 L 202.0,114.4 L 213.9,110.0 L 225.7,108.7 L 237.6,111.9 L 249.4,117.4 L 261.2,121.1 L 273.1,120.1 L 284.9,116.2 L 296.7,113.4 L 308.6,112.4 L 320.4,111.8 L 332.2,111.2 L 344.1,112.7 L 355.9,110.6 L 367.8,104.3 L 379.6,94.9 L 391.4,88.9 L 403.3,81.5 L 415.1,82.2 L 426.9,85.4 L 438.8,94.9 L 450.6,101.4 L 462.4,105.9 L 474.3,108.7 L 486.1,108.3 L 498.0,107.6 L 509.8,111.8 L 521.6,122.8 L 533.5,131.7 L 545.3,139.5 L 557.1,143.5 L 569.0,146.3 L 580.8,141.0 L 592.7,130.9 L 604.5,120.8 L 616.3,113.1 L 628.2,104.0 L 640.0,100.6" stroke="#9d6414" stroke-width="2.2" fill="none"/>
 
               <!-- Marqueur du Golden Cross (il y a 13j) -->
-              <line x1="605" y1="50" x2="605" y2="240" stroke="#22d98a" stroke-width="1" stroke-dasharray="3,4" opacity="0.6"/>
-              <circle cx="605" cy="119.2" r="6" fill="none" stroke="#22d98a" stroke-width="2"/>
-              <text x="540" y="44" fill="#22d98a" font-family="Inter,sans-serif" font-size="11" font-weight="600">↑ Golden Cross (il y a 13j)</text>
+              <line x1="605" y1="50" x2="605" y2="240" stroke="#0b7c4b" stroke-width="1" stroke-dasharray="3,4" opacity="0.6"/>
+              <circle cx="605" cy="119.2" r="6" fill="none" stroke="#0b7c4b" stroke-width="2"/>
+              <text x="540" y="44" fill="#0b7c4b" font-family="Inter,sans-serif" font-size="11" font-weight="600">↑ Golden Cross (il y a 13j)</text>
 
               <!-- Légendes -->
-              <line x1="60" y1="260" x2="80" y2="260" stroke="#e0995e" stroke-width="2.2"/>
-              <text x="86" y="263" fill="#e0995e" font-family="Courier New,monospace" font-size="11">MM21</text>
-              <line x1="160" y1="260" x2="180" y2="260" stroke="#b59bd6" stroke-width="2.2"/>
-              <text x="186" y="263" fill="#b59bd6" font-family="Courier New,monospace" font-size="11">MM200</text>
-              <line x1="270" y1="260" x2="290" y2="260" stroke="#74b6df" stroke-width="1.1" opacity="0.55"/>
+              <line x1="60" y1="260" x2="80" y2="260" stroke="#9d6414" stroke-width="2.2"/>
+              <text x="86" y="263" fill="#9d6414" font-family="Courier New,monospace" font-size="11">MM21</text>
+              <line x1="160" y1="260" x2="180" y2="260" stroke="#7d5bb0" stroke-width="2.2"/>
+              <text x="186" y="263" fill="#7d5bb0" font-family="Courier New,monospace" font-size="11">MM200</text>
+              <line x1="270" y1="260" x2="290" y2="260" stroke="#266f9e" stroke-width="1.1" opacity="0.55"/>
               <text x="296" y="263" fill="var(--text3)" font-family="Courier New,monospace" font-size="11">cours close</text>
 
               <!-- Axe temps -->
@@ -1324,7 +1324,7 @@ La MM21 (moyenne mobile (<span class="en">moving average</span>, MA) sur 21 jour
               <text x="640" y="278" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">aujourd'hui</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
-Données réelles JPM sur 200 jours. La MM21 (<span style="color:#e0995e;font-weight:600">ambre</span>, court terme) a oscillé plusieurs fois autour de la MM200 (<span style="color:#b59bd6;font-weight:600">violette</span>, long terme) : c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : la MM21 (310,6 $) est repassée au-dessus de la MM200 (302,8 $). Depuis la note v4, ce croisement n'est plus noté en tant qu'événement : c'est l'<em>écart</em> MM21/MM200 qui compte, en continu (ici +2,6 %, soit environ 4,6/6 sur la rampe du bloc momentum) — deux jours avant ou après le croisement, la note bouge à peine.
+Données réelles JPM sur 200 jours. La MM21 (<span style="color:#9d6414;font-weight:600">ambre</span>, court terme) a oscillé plusieurs fois autour de la MM200 (<span style="color:#7d5bb0;font-weight:600">violette</span>, long terme) : c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : la MM21 (310,6 $) est repassée au-dessus de la MM200 (302,8 $). Depuis la note v4, ce croisement n'est plus noté en tant qu'événement : c'est l'<em>écart</em> MM21/MM200 qui compte, en continu (ici +2,6 %, soit environ 4,6/6 sur la rampe du bloc momentum) — deux jours avant ou après le croisement, la note bouge à peine.
             </div>
           </div>
 
@@ -1340,28 +1340,28 @@ Le Z-score mesure l'écart entre le cours actuel et sa trajectoire long terme, e
           <br><br>
           Dans la note v4, la position z est une <strong>cloche symétrique</strong> du bloc momentum (6 pts) : plein tarif entre −1,5σ et +1σ, zéro aux extrêmes ±3σ, rampes continues entre les deux. Chaser un sommet à +2,5σ coûte autant que rattraper un couteau à −2,5σ — les anciennes pénalité CHASE et bonus décote, qui traitaient ces deux situations par des marches d'escalier, ont été absorbées par cette cloche. La surextension de Micron à +5σ vaut simplement 0/6, quels que soient ses fondamentaux (qui gardent, eux, leurs propres points).
 
-          <div style="margin:1rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
+          <div style="margin:1rem 0;padding:1rem;background:#ffffff;border:1px solid var(--border);border-radius:var(--radius)">
             <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Microsoft (MSFT) · 20 ans · pente +21,7 %/an · échelle log</div>
             <svg viewBox="0 0 720 280" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
 
 <!-- Canal de régression ±1σ/±2σ, même langage visuel que les graphiques des fiches -->
 
               <!-- bande ±2σ -->
-              <path d="M 60,190.2 L 640,60.0 L 640,99.8 L 60,230.0 Z" fill="#74b6df" opacity="0.05"/>
+              <path d="M 60,190.2 L 640,60.0 L 640,99.8 L 60,230.0 Z" fill="#266f9e" opacity="0.05"/>
 <!-- zone saine −0,5σ à +1,5σ, seul surlignage sémantique -->
-              <path d="M 60,195.2 L 640,64.9 L 640,84.8 L 60,215.1 Z" fill="#22d98a" opacity="0.07"/>
+              <path d="M 60,195.2 L 640,64.9 L 640,84.8 L 60,215.1 Z" fill="#0b7c4b" opacity="0.07"/>
               <!-- liserés σ -->
-              <line x1="60" y1="190.2" x2="640" y2="60.0" stroke="#74b6df" stroke-width="1" opacity="0.14"/>
-              <line x1="60" y1="200.2" x2="640" y2="69.9" stroke="#74b6df" stroke-width="1" opacity="0.22"/>
-              <line x1="60" y1="220.1" x2="640" y2="89.8" stroke="#74b6df" stroke-width="1" opacity="0.22"/>
-              <line x1="60" y1="230.0" x2="640" y2="99.8" stroke="#74b6df" stroke-width="1" opacity="0.14"/>
+              <line x1="60" y1="190.2" x2="640" y2="60.0" stroke="#266f9e" stroke-width="1" opacity="0.14"/>
+              <line x1="60" y1="200.2" x2="640" y2="69.9" stroke="#266f9e" stroke-width="1" opacity="0.22"/>
+              <line x1="60" y1="220.1" x2="640" y2="89.8" stroke="#266f9e" stroke-width="1" opacity="0.22"/>
+              <line x1="60" y1="230.0" x2="640" y2="99.8" stroke="#266f9e" stroke-width="1" opacity="0.14"/>
 
               <!-- Droite de régression long terme (trend log-linéaire) -->
-              <path d="M 60,210.1 L 640,79.9" stroke="#c6c6e0" stroke-width="1.6" stroke-dasharray="6,4" opacity="0.75"/>
+              <path d="M 60,210.1 L 640,79.9" stroke="#454c66" stroke-width="1.6" stroke-dasharray="6,4" opacity="0.75"/>
 
               <!-- Cours réel MSFT 20 ans (en log) -->
-              <path d="M 60.0,191.7 L 69.8,188.7 L 79.7,182.6 L 89.5,182.1 L 99.3,184.4 L 109.2,179.6 L 119.0,184.0 L 128.8,188.4 L 138.6,200.8 L 148.5,195.1 L 158.3,187.0 L 168.1,182.5 L 178.0,185.4 L 187.8,187.9 L 197.6,183.2 L 207.5,187.8 L 217.3,184.5 L 227.1,179.2 L 236.9,180.8 L 246.8,180.5 L 256.6,181.3 L 266.4,173.8 L 276.3,173.2 L 286.1,170.2 L 295.9,166.3 L 305.8,163.0 L 315.6,164.3 L 325.4,163.6 L 335.3,157.8 L 345.1,157.7 L 354.9,157.9 L 364.7,153.2 L 374.6,149.5 L 384.4,146.2 L 394.2,140.6 L 404.1,136.3 L 413.9,132.6 L 423.7,131.4 L 433.6,128.5 L 443.4,122.5 L 453.2,120.1 L 463.1,117.7 L 472.9,109.6 L 482.7,107.9 L 492.5,102.7 L 502.4,97.7 L 512.2,93.6 L 522.0,96.1 L 531.9,97.7 L 541.7,101.8 L 551.5,97.2 L 561.4,94.0 L 571.2,88.5 L 581.0,85.5 L 590.8,84.6 L 600.7,82.8 L 610.5,83.8 L 620.3,78.0 L 630.2,80.1 L 640.0,84.4" stroke="#74b6df" stroke-width="1.5" fill="none"/>
-              <circle cx="640" cy="84.4" r="4" fill="#74b6df" stroke="#fff" stroke-width="1.2"/>
+              <path d="M 60.0,191.7 L 69.8,188.7 L 79.7,182.6 L 89.5,182.1 L 99.3,184.4 L 109.2,179.6 L 119.0,184.0 L 128.8,188.4 L 138.6,200.8 L 148.5,195.1 L 158.3,187.0 L 168.1,182.5 L 178.0,185.4 L 187.8,187.9 L 197.6,183.2 L 207.5,187.8 L 217.3,184.5 L 227.1,179.2 L 236.9,180.8 L 246.8,180.5 L 256.6,181.3 L 266.4,173.8 L 276.3,173.2 L 286.1,170.2 L 295.9,166.3 L 305.8,163.0 L 315.6,164.3 L 325.4,163.6 L 335.3,157.8 L 345.1,157.7 L 354.9,157.9 L 364.7,153.2 L 374.6,149.5 L 384.4,146.2 L 394.2,140.6 L 404.1,136.3 L 413.9,132.6 L 423.7,131.4 L 433.6,128.5 L 443.4,122.5 L 453.2,120.1 L 463.1,117.7 L 472.9,109.6 L 482.7,107.9 L 492.5,102.7 L 502.4,97.7 L 512.2,93.6 L 522.0,96.1 L 531.9,97.7 L 541.7,101.8 L 551.5,97.2 L 561.4,94.0 L 571.2,88.5 L 581.0,85.5 L 590.8,84.6 L 600.7,82.8 L 610.5,83.8 L 620.3,78.0 L 630.2,80.1 L 640.0,84.4" stroke="#266f9e" stroke-width="1.5" fill="none"/>
+              <circle cx="640" cy="84.4" r="4" fill="#266f9e" stroke="#fff" stroke-width="1.2"/>
 
               <!-- Labels Y axis (échelle log) -->
               <text x="48"  y="195"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">20 $</text>
@@ -1370,11 +1370,11 @@ Le Z-score mesure l'écart entre le cours actuel et sa trajectoire long terme, e
               <text x="48"  y="85"   fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">403 $</text>
 
               <!-- Labels zones à droite -->
-              <text x="650" y="63"  fill="#74b6df" opacity="0.75" font-family="Courier New,monospace" font-size="10">+2σ</text>
-              <text x="650" y="73"  fill="#74b6df" font-family="Courier New,monospace" font-size="10">+1σ</text>
-              <text x="648" y="84"  fill="#22d98a" font-family="Courier New,monospace" font-size="10" font-weight="700">zone saine</text>
-              <text x="650" y="94"  fill="#74b6df" font-family="Courier New,monospace" font-size="10">−1σ</text>
-              <text x="650" y="104" fill="#74b6df" opacity="0.75" font-family="Courier New,monospace" font-size="10">−2σ</text>
+              <text x="650" y="63"  fill="#266f9e" opacity="0.75" font-family="Courier New,monospace" font-size="10">+2σ</text>
+              <text x="650" y="73"  fill="#266f9e" font-family="Courier New,monospace" font-size="10">+1σ</text>
+              <text x="648" y="84"  fill="#0b7c4b" font-family="Courier New,monospace" font-size="10" font-weight="700">zone saine</text>
+              <text x="650" y="94"  fill="#266f9e" font-family="Courier New,monospace" font-size="10">−1σ</text>
+              <text x="650" y="104" fill="#266f9e" opacity="0.75" font-family="Courier New,monospace" font-size="10">−2σ</text>
 
               <!-- Axe temps -->
               <text x="60"  y="260" fill="var(--text3)" font-family="Courier New,monospace" font-size="9">2006</text>
@@ -1383,11 +1383,11 @@ Le Z-score mesure l'écart entre le cours actuel et sa trajectoire long terme, e
 
               <!-- Légende -->
               <text x="60" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">cours MSFT (échelle log)</text>
-              <line x1="200" y1="273" x2="220" y2="273" stroke="#c6c6e0" stroke-width="1.6" stroke-dasharray="4,3"/>
+              <line x1="200" y1="273" x2="220" y2="273" stroke="#454c66" stroke-width="1.6" stroke-dasharray="4,3"/>
               <text x="226" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">droite de régression (+21,7 %/an)</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
-              Données réelles MSFT sur 20 ans, en échelle logarithmique (la tendance devient une droite, pente +21,7 %/an). Le cours <span style="color:#74b6df;font-weight:600">(bleu)</span> oscille autour de sa <span style="color:var(--text2);font-weight:600">droite de régression</span> : sous la tendance de 2008 à 2016, retour en 2017-2018, au-dessus en 2020-2021. Aujourd'hui : <span style="color:var(--gold);font-weight:600">−0,5σ</span>, sous la tendance mais dans la <span style="color:var(--green);font-weight:600">zone saine</span> (−0,5σ à +1,5σ). C'est le même canal ±1σ/±2σ que sur les graphiques des fiches de la watchlist.
+              Données réelles MSFT sur 20 ans, en échelle logarithmique (la tendance devient une droite, pente +21,7 %/an). Le cours <span style="color:#266f9e;font-weight:600">(bleu)</span> oscille autour de sa <span style="color:var(--text2);font-weight:600">droite de régression</span> : sous la tendance de 2008 à 2016, retour en 2017-2018, au-dessus en 2020-2021. Aujourd'hui : <span style="color:var(--gold);font-weight:600">−0,5σ</span>, sous la tendance mais dans la <span style="color:var(--green);font-weight:600">zone saine</span> (−0,5σ à +1,5σ). C'est le même canal ±1σ/±2σ que sur les graphiques des fiches de la watchlist.
             </div>
           </div>
 
@@ -1453,7 +1453,7 @@ C'est un proxy <strong>simple et systématique</strong>, applicable à tout titr
           <br><br>
           <strong>D'où viennent ces ratios ?</strong> De la <em>suite de Fibonacci</em> (1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89...), où chaque nombre est la somme des deux précédents. Quand on divise un nombre par le suivant, on tend vers <strong>0.618</strong> (l'inverse du nombre d'or Φ). Quand on divise par celui d'après, on tend vers <strong>0.382</strong>. Et 0.236 = 0.618 × 0.382. Le ratio 0.5 vient en réalité des travaux de Dow/Gann (pas de Fibonacci stricto sensu) mais est inclus par tradition.
 
-          <div style="margin:1rem 0;padding:0.8rem 1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius);font-family:'Courier New',monospace;font-size:0.78rem;color:var(--text2);line-height:1.7">
+          <div style="margin:1rem 0;padding:0.8rem 1rem;background:#ffffff;border:1px solid var(--border);border-radius:var(--radius);font-family:'Courier New',monospace;font-size:0.78rem;color:var(--text2);line-height:1.7">
             <span style="color:var(--text3)">Suite Fibonacci : 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144...</span><br>
             55 ÷ 89   ≈ <span style="color:var(--gold)">0.618</span> &nbsp;→ <span style="color:var(--gold)">Fibo 61.8%</span> (Golden Zone, 1/Φ)<br>
             34 ÷ 89   ≈ <span style="color:var(--green)">0.382</span> &nbsp;→ <span style="color:var(--green)">Fibo 38.2%</span> (= n ÷ n+2 dans la suite)<br>
@@ -1464,7 +1464,7 @@ C'est un proxy <strong>simple et systématique</strong>, applicable à tout titr
 
 <strong>Le calcul concret</strong> : on identifie le rally, son point bas (<em>swing low</em>) et son point haut (<em>swing high</em>). Puis chaque niveau Fibo se calcule par :
           <br><br>
-          <span style="font-family:'Courier New',monospace;font-size:0.85rem;color:var(--gold);background:#0a0a0f;padding:0.4rem 0.7rem;border-radius:4px;border-left:2px solid var(--gold);display:inline-block">
+          <span style="font-family:'Courier New',monospace;font-size:0.85rem;color:var(--gold);background:rgba(28,50,100,.05);padding:0.4rem 0.7rem;border-radius:4px;border-left:2px solid var(--gold);display:inline-block">
             niveau X% &nbsp;=&nbsp; swing_high &nbsp;−&nbsp; (swing_high − swing_low) × X%
           </span>
           <br><br>
@@ -1475,78 +1475,78 @@ C'est un proxy <strong>simple et systématique</strong>, applicable à tout titr
           <br>· Fibo 61.8% = 200 − 100 × 0.618 = <strong>138€</strong>
           <br>· Fibo 78.6% = 200 − 100 × 0.786 = <strong>121€</strong>
 
-          <div style="margin:1.2rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
+          <div style="margin:1.2rem 0;padding:1rem;background:#ffffff;border:1px solid var(--border);border-radius:var(--radius)">
             <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Exemple : action passée de 100€ à 200€ (rally +100%), corrigeant à 162€</div>
             <svg viewBox="0 0 720 320" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
 
               <!-- ZONES COLORÉES entre les niveaux Fibo (du peak en bas vers swing low) -->
 <!-- Zone 1 : 0% → 23.6% (peak à Fibo 23.6%), chase / FOMO -->
-              <rect x="50" y="50"  width="380" height="52"  fill="#f0556a" opacity="0.06"/>
+              <rect x="50" y="50"  width="380" height="52"  fill="#cc3049" opacity="0.06"/>
 <!-- Zone 2 : 23.6% → 38.2%, pullback léger -->
-              <rect x="50" y="102" width="380" height="32"  fill="#22d98a" opacity="0.06"/>
+              <rect x="50" y="102" width="380" height="32"  fill="#0b7c4b" opacity="0.06"/>
 <!-- Zone 3 : 38.2% → 50%, ZONE D'ENTRÉE CHARTISTE STANDARD ★ -->
-              <rect x="50" y="134" width="380" height="26"  fill="#22d98a" opacity="0.16"/>
+              <rect x="50" y="134" width="380" height="26"  fill="#0b7c4b" opacity="0.16"/>
 <!-- Zone 4 : 50% → 61.8%, Dow/Gann + transition vers Golden Zone -->
-              <rect x="50" y="160" width="380" height="26"  fill="#e8a820" opacity="0.11"/>
+              <rect x="50" y="160" width="380" height="26"  fill="#8f6606" opacity="0.11"/>
 <!-- Zone 5 : 61.8% → 78.6%, Golden Zone ★★ -->
-              <rect x="50" y="186" width="380" height="37"  fill="#e8a820" opacity="0.16"/>
+              <rect x="50" y="186" width="380" height="37"  fill="#8f6606" opacity="0.16"/>
 <!-- Zone 6 : 78.6% → 100%, rally annulé / ultime rempart -->
-              <rect x="50" y="223" width="380" height="47"  fill="#f0556a" opacity="0.10"/>
+              <rect x="50" y="223" width="380" height="47"  fill="#cc3049" opacity="0.10"/>
 
               <!-- axes -->
-              <line x1="50" y1="50"  x2="50"  y2="270" stroke="#33334e" stroke-width="1"/>
-              <line x1="50" y1="270" x2="430" y2="270" stroke="#33334e" stroke-width="1"/>
+              <line x1="50" y1="50"  x2="50"  y2="270" stroke="#b6c0d4" stroke-width="1"/>
+              <line x1="50" y1="270" x2="430" y2="270" stroke="#b6c0d4" stroke-width="1"/>
 
               <!-- niveaux Fibo (lignes horizontales pointillées) -->
-              <line x1="50" y1="50"  x2="430" y2="50"  stroke="#22d98a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.85"/>
-              <line x1="50" y1="102" x2="430" y2="102" stroke="#8888a8" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
-              <line x1="50" y1="134" x2="430" y2="134" stroke="#22d98a" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.7"/>
-              <line x1="50" y1="160" x2="430" y2="160" stroke="#a07010" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
-              <line x1="50" y1="186" x2="430" y2="186" stroke="#e8a820" stroke-width="1.6" stroke-dasharray="4,3" opacity="0.95"/>
-              <line x1="50" y1="223" x2="430" y2="223" stroke="#f87a20" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
-              <line x1="50" y1="270" x2="430" y2="270" stroke="#f0556a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+              <line x1="50" y1="50"  x2="430" y2="50"  stroke="#0b7c4b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.85"/>
+              <line x1="50" y1="102" x2="430" y2="102" stroke="#9aa2b8" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
+              <line x1="50" y1="134" x2="430" y2="134" stroke="#0b7c4b" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.7"/>
+              <line x1="50" y1="160" x2="430" y2="160" stroke="#8a650d" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
+              <line x1="50" y1="186" x2="430" y2="186" stroke="#8f6606" stroke-width="1.6" stroke-dasharray="4,3" opacity="0.95"/>
+              <line x1="50" y1="223" x2="430" y2="223" stroke="#cf5f10" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
+              <line x1="50" y1="270" x2="430" y2="270" stroke="#cc3049" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
 
               <!-- price curve : 100€ (départ) → 200€ (peak) → 162€ (correction) -->
-              <path d="M 50,270 Q 150,260 220,200 Q 290,130 360,50 L 360,50 Q 380,80 410,135" stroke="#74b6df" stroke-width="2.2" fill="none"/>
-              <circle cx="360" cy="50"  r="4" fill="#22d98a"/>
-              <circle cx="410" cy="135" r="5" fill="#e8a820" stroke="#fff" stroke-width="1.5"/>
-              <circle cx="50"  cy="270" r="3" fill="#f0556a"/>
+              <path d="M 50,270 Q 150,260 220,200 Q 290,130 360,50 L 360,50 Q 380,80 410,135" stroke="#266f9e" stroke-width="2.2" fill="none"/>
+              <circle cx="360" cy="50"  r="4" fill="#0b7c4b"/>
+              <circle cx="410" cy="135" r="5" fill="#8f6606" stroke="#fff" stroke-width="1.5"/>
+              <circle cx="50"  cy="270" r="3" fill="#cc3049"/>
 
               <!-- LABELS DE ZONE à l'intérieur du chart (taille moyenne, italique) -->
-              <text x="240" y="80"  fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">chase / FOMO</text>
-              <text x="240" y="123" fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">pullback léger</text>
-              <text x="180" y="153" fill="#22d98a" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">★ zone d'entrée saine</text>
-              <text x="160" y="178" fill="#a07010" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">démarcation Dow/Gann</text>
-              <text x="275" y="210" fill="#e8a820" font-family="Inter,sans-serif" font-size="11" font-weight="700" text-anchor="middle">★★ Golden Zone</text>
-              <text x="240" y="252" fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">rally annulé / ultime rempart</text>
+              <text x="240" y="80"  fill="#cc3049" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">chase / FOMO</text>
+              <text x="240" y="123" fill="#0b7c4b" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">pullback léger</text>
+              <text x="180" y="153" fill="#0b7c4b" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">★ zone d'entrée saine</text>
+              <text x="160" y="178" fill="#8a650d" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">démarcation Dow/Gann</text>
+              <text x="275" y="210" fill="#8f6606" font-family="Inter,sans-serif" font-size="11" font-weight="700" text-anchor="middle">★★ Golden Zone</text>
+              <text x="240" y="252" fill="#cc3049" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">rally annulé / ultime rempart</text>
 
               <!-- LABELS PRIX À DROITE (compact, deux lignes par niveau si besoin) -->
-              <text x="440" y="54"  fill="#22d98a" font-family="Courier New,monospace" font-size="11" font-weight="700">200€</text>
-              <text x="478" y="54"  fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing high (peak)</text>
+              <text x="440" y="54"  fill="#0b7c4b" font-family="Courier New,monospace" font-size="11" font-weight="700">200€</text>
+              <text x="478" y="54"  fill="#0b7c4b" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing high (peak)</text>
 
-              <text x="440" y="106" fill="#8888a8" font-family="Courier New,monospace" font-size="11">176€</text>
-              <text x="478" y="106" fill="#8888a8" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 23.6%</text>
+              <text x="440" y="106" fill="#9aa2b8" font-family="Courier New,monospace" font-size="11">176€</text>
+              <text x="478" y="106" fill="#9aa2b8" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 23.6%</text>
 
-              <text x="440" y="138" fill="#22d98a" font-family="Courier New,monospace" font-size="11" font-weight="700">162€</text>
-              <text x="478" y="138" fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-weight="600">Fibo 38.2% ← cours</text>
+              <text x="440" y="138" fill="#0b7c4b" font-family="Courier New,monospace" font-size="11" font-weight="700">162€</text>
+              <text x="478" y="138" fill="#0b7c4b" font-family="Inter,sans-serif" font-size="10" font-weight="600">Fibo 38.2% ← cours</text>
 
-              <text x="440" y="164" fill="#a07010" font-family="Courier New,monospace" font-size="11">150€</text>
-              <text x="478" y="164" fill="#a07010" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 50%</text>
+              <text x="440" y="164" fill="#8a650d" font-family="Courier New,monospace" font-size="11">150€</text>
+              <text x="478" y="164" fill="#8a650d" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 50%</text>
 
-              <text x="440" y="190" fill="#e8a820" font-family="Courier New,monospace" font-size="11" font-weight="700">138€</text>
-              <text x="478" y="190" fill="#e8a820" font-family="Inter,sans-serif" font-size="10" font-weight="600">Fibo 61.8% (Golden)</text>
+              <text x="440" y="190" fill="#8f6606" font-family="Courier New,monospace" font-size="11" font-weight="700">138€</text>
+              <text x="478" y="190" fill="#8f6606" font-family="Inter,sans-serif" font-size="10" font-weight="600">Fibo 61.8% (Golden)</text>
 
-              <text x="440" y="227" fill="#f87a20" font-family="Courier New,monospace" font-size="11">121€</text>
-              <text x="478" y="227" fill="#f87a20" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 78.6%</text>
+              <text x="440" y="227" fill="#cf5f10" font-family="Courier New,monospace" font-size="11">121€</text>
+              <text x="478" y="227" fill="#cf5f10" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 78.6%</text>
 
-              <text x="440" y="274" fill="#f0556a" font-family="Courier New,monospace" font-size="11" font-weight="700">100€</text>
-              <text x="478" y="274" fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing low</text>
+              <text x="440" y="274" fill="#cc3049" font-family="Courier New,monospace" font-size="11" font-weight="700">100€</text>
+              <text x="478" y="274" fill="#cc3049" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing low</text>
 
               <!-- Annotations sur la courbe -->
-              <text x="58" y="240" fill="#74b6df" font-family="Inter,sans-serif" font-size="10" font-style="italic">rally +100%</text>
-              <text x="375" y="42"  fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-weight="600">peak</text>
-              <text x="392" y="155" fill="#e8a820" font-family="Inter,sans-serif" font-size="10" font-style="italic">correction</text>
-              <text x="55"  y="285" fill="#f0556a" font-family="Inter,sans-serif" font-size="10">départ rally</text>
+              <text x="58" y="240" fill="#266f9e" font-family="Inter,sans-serif" font-size="10" font-style="italic">rally +100%</text>
+              <text x="375" y="42"  fill="#0b7c4b" font-family="Inter,sans-serif" font-size="10" font-weight="600">peak</text>
+              <text x="392" y="155" fill="#8f6606" font-family="Inter,sans-serif" font-size="10" font-style="italic">correction</text>
+              <text x="55"  y="285" fill="#cc3049" font-family="Inter,sans-serif" font-size="10">départ rally</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.5rem;font-style:italic">
 Le cours à 162€ se situe en <span style="color:var(--green);font-weight:600">zone Fibo 38.2%, zone d'entrée saine selon les chartistes</span>. Si la trend tient, le rebond se fera dans cette bande verte. Sinon le prochain palier est 150€ (50%, démarcation Dow/Gann), puis la <span style="color:var(--gold);font-weight:600">Golden Zone à 138€ (61.8%)</span>. Sous 121€ (78.6%), le rally est techniquement annulé, on entre dans la bande rouge.
@@ -1566,7 +1566,7 @@ Le cours à 162€ se situe en <span style="color:var(--green);font-weight:600">
           <br><br>
           <strong>Comment lire l'annotation Signal</strong> dans une fiche action :
           <br><br>
-          <div style="background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem 1rem;font-family:'Courier New',monospace;font-size:0.78rem;color:var(--text2);line-height:1.6">
+          <div style="background:#ffffff;border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem 1rem;font-family:'Courier New',monospace;font-size:0.78rem;color:var(--text2);line-height:1.6">
             Valorisation : <span style="color:var(--green)">−7% du top 52w · pullback sain (5/5)</span> <span style="color:var(--gold)">· zone Fibo 38.2%</span>
           </div>
           <br>
