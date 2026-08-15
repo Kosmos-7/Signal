@@ -1795,7 +1795,7 @@ async function loadPortfolio() {
     const _retard = d.updated_at && d.week && _sem(d.updated_at) !== d.week;
     document.getElementById('update-line').textContent =
       `Cours au ${d.updated_at} · analyse ${d.week}`
-      + (_retard ? ' — les arbitrages datent de cette semaine-là, pas d\'aujourd\'hui' : '');
+      + (_retard ? ', les arbitrages datent de cette semaine-là, pas d\'aujourd\'hui' : '');
     document.getElementById('footer-week').textContent = d.week;
     const heroCapEl = document.getElementById('hero-capital');
     if (heroCapEl) heroCapEl.textContent = fmtEur(d.capital_initial);
