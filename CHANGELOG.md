@@ -5,6 +5,43 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le site change de typographie, et les quatre onglets s'ouvrent pareil
+
+Demande du propriétaire (15/08) : « une police plus douce et ronde », dans
+l'esprit de celle de Google Cloud. Google Sans étant propriétaire, le site
+prend **Outfit** — l'équivalent libre le plus proche — et **Google Sans Code**,
+la mono ouverte par Google en 2025. Quatre maquettes ont été rendues sur les
+pages réelles avant de trancher ; la version retenue est la plus engagée : le
+site est **entièrement sans-serif**.
+
+**Georgia sort, et Courier New avec elle.** Les deux tokens gardent leurs noms
+— `--serif` et `--mono` sont écrits dans quatre fichiers et des centaines de
+règles — mais changent de valeur ; `--serif` ne désigne plus une serif, son nom
+survit pour ne pas réécrire tout le site. Au passage, **83 polices écrites en
+dur** ont été ramenées aux tokens : trois onglets déclaraient leur propre
+famille de corps de page, et Apprendre à lui seul portait 46 `Courier New`.
+Un test neuf interdit désormais tout retour en dur de `Georgia`, `Courier New`
+ou `Inter`, et vérifie que la requête de police est identique sur les quatre
+onglets — c'est ainsi que le site s'était retrouvé avec quatre typographies
+légèrement différentes.
+
+**Les quatre onglets ouvrent maintenant sur le même geste** : un titre centré
+plus grand, dont le PREMIER MOT porte un dégradé, et un sous-titre qui dit ce
+qu'on y trouve. Portefeuille et Apprendre avaient déjà un dégradé, mais il
+courait sur tout le titre ; il ne porte plus que le premier mot, et le patron
+`.page-h`/`.page-t`/`.page-lead` vit dans `signal.css`, pas dans les pages.
+
+| Onglet | Avant | Après |
+|---|---|---|
+| Watchlists | *Watchlists* | **Identifiez** votre prochain investissement |
+| Actualités | *Actualités* | **Suivez** ce qui bouge sur les marchés |
+| Apprendre | *Comprendre la bourse* | **Comprenez** la bourse, sans jargon |
+| Portefeuille IA | *Une IA contre l'indice* | **Observez** une IA à l'épreuve du marché |
+
+Le dégradé du premier mot est protégé par un `@supports` : sans
+`background-clip:text`, le mot reste dans l'accent au lieu de disparaître —
+un titre transparent est un titre absent.
+
 ### L'accueil se centre et va droit au but
 
 Dernière passe de copie du propriétaire (15/08) : **« Identifiez votre

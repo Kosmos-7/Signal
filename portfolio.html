@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='10' fill='%2374b6df' fill-opacity='.25'/%3E%3Ccircle cx='14' cy='14' r='6' fill='%2374b6df'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&family=Google+Sans+Code:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="signal.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,7 +43,7 @@
   }
   body {
     background: var(--bg);
-    color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+    color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
     position: relative;
   }
   /* fond géré par le chrome partagé (#fx / #bg / .scan / .frame via signal.css + signal-fx.js) */
@@ -55,21 +55,18 @@
 
   main { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem 6rem; position: relative; z-index: 1; }
 
-  /* ── HERO ── */
-  .hero { margin-bottom: 2rem; }
-  .hero h1 {
-    font-family: Georgia, serif; font-size: 1.85rem; font-weight: normal; letter-spacing: -0.5px; margin-bottom: 0.6rem;
-    background: linear-gradient(120deg, #eef0fb 30%, #74b6df 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  /* ── HERO ──
+     Le titre et le sous-titre viennent du patron partagé (.page-h/.page-t/
+     .page-lead dans signal.css) : mêmes tailles et même centrage que les trois
+     autres onglets. L'ancien dégradé courait sur TOUT le titre ; il ne porte
+     plus que le premier mot (classe .h-grad), traitement commun aux 4 pages. */
+  .page-h { margin-bottom: 2rem; }
   .hero-sep {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(116,182,223,0.22), transparent);
     margin-bottom: 1.75rem;
   }
-  .hero p { color: var(--text2); font-size: 0.93rem; max-width: 580px; line-height: 1.75; margin-bottom: 0.75rem; }
-  .update-line { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); }
+  .update-line { font-family: var(--mono); font-size: 0.80rem; color: var(--text3); }
 
   /* ── PANIC ── */
   .panic-banner { background: var(--orange-dim); border: 1px solid rgba(116,182,223,0.25); border-radius: var(--radius); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--orange); }
@@ -82,11 +79,11 @@
   .survival-block.panic::before { background: var(--orange); }
 
   .survival-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.1rem; flex-wrap: wrap; gap: 0.5rem; }
-  .survival-title { font-family: Georgia, serif; font-size: 1rem; font-weight: normal; }
+  .survival-title { font-family: var(--serif); font-size: 1rem; font-weight: normal; }
   .vix-pill {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 4px 10px; border-radius: 100px; border: 1px solid var(--border);
-    background: var(--surface2); font-family: 'Courier New', monospace; font-size: 0.74rem;
+    background: var(--surface2); font-family: var(--mono); font-size: 0.74rem;
     color: var(--text3); transition: all 0.15s;
   }
   .vix-pill .vix-label { color: var(--text3); opacity: 0.75; text-transform: uppercase; letter-spacing: 0.4px; font-size: 0.68rem; }
@@ -100,26 +97,26 @@
   .vix-pill.stress .vix-regime     { color: var(--orange); }
   .vix-pill.panique    { border-color: rgba(240,84,84,0.35); background: var(--red-dim); }
   .vix-pill.panique .vix-regime    { color: var(--red); font-weight: 700; }
-  .status-pill { display: flex; align-items: center; gap: 6px; font-family: 'Courier New', monospace; font-size: 0.80rem; text-transform: uppercase; letter-spacing: 1px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; font-weight: 600; }
+  .status-pill { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.80rem; text-transform: uppercase; letter-spacing: 1px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; font-weight: 600; }
   .sdot { width: 7px; height: 7px; border-radius: 50%; }
   .survival-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.25rem; }
 
   .threshold-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
-  .pos-stats { font-family: 'Courier New', monospace; font-size: 0.73rem; color: var(--text3); margin: -4px 0 10px; }
+  .pos-stats { font-family: var(--mono); font-size: 0.73rem; color: var(--text3); margin: -4px 0 10px; }
   .pos-stats b { color: var(--text2); font-weight: 600; }
   .th { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; transition: border-color 0.15s; }
   .th:hover { border-color: rgba(116,182,223,0.22); box-shadow: 0 0 16px rgba(116,182,223,0.05); }
   .th-label { font-size: 0.78rem; font-weight: 500; color: var(--text2); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 5px; }
-  .th-value { font-family: Georgia, serif; font-size: 1.35rem; line-height: 1; }
-  .th-sub  { font-family: 'Courier New', monospace; font-size: 0.78rem; margin-top: 3px; color: var(--text3); }
+  .th-value { font-family: var(--serif); font-size: 1.35rem; line-height: 1; }
+  .th-sub  { font-family: var(--mono); font-size: 0.78rem; margin-top: 3px; color: var(--text3); }
 
   /* ── RULES ── */
   .rules-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
-  .section-title { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 1rem; }
+  .section-title { font-family: var(--mono); font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 1rem; }
   .rules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .rule { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; transition: border-color 0.15s, box-shadow 0.15s; }
   .rule:hover { border-color: var(--border2); box-shadow: 0 0 0 1px var(--border2), 0 4px 16px rgba(0,0,0,0.4); }
-  .rule-num { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--ac); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
+  .rule-num { font-family: var(--mono); font-size: 0.75rem; color: var(--ac); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
   .rule-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
   .rule p { font-size: 0.83rem; color: var(--text2); line-height: 1.55; }
 
@@ -144,7 +141,7 @@
     border-radius: 8px;
     padding: 9px 12px;
     font-size: 0.76rem;
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: var(--sans);
     font-weight: 400;
     font-style: normal;
     color: var(--text2);
@@ -181,8 +178,8 @@
   .th:hover  .kpi-info::before { opacity: 1; visibility: visible; }
   .kpi:hover .kpi-info,
   .th:hover  .kpi-info { opacity: 1; color: var(--text2); }
-  .kpi-value { font-family: Georgia, serif; font-size: 1.45rem; line-height: 1; margin-bottom: 4px; }
-  .kpi-sub  { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); }
+  .kpi-value { font-family: var(--serif); font-size: 1.45rem; line-height: 1; margin-bottom: 4px; }
+  .kpi-sub  { font-family: var(--mono); font-size: 0.80rem; color: var(--text3); }
   .up  { color: var(--green); }
   .dn  { color: var(--red); }
   .neu { color: var(--text2); }
@@ -195,18 +192,18 @@
    reste intact, et portfolio.json reste la source du post matérialisé. */
 #weekly-pick, #macro-news-block, #message-users { display: none !important; }
 #analyse-macro { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.analyse-lien { display:inline-block; margin-top:.7rem; font-family:'Courier New',monospace; font-size:.66rem; letter-spacing:1.4px; text-transform:uppercase; color:var(--accent, #74b6df); text-decoration:none; }
+.analyse-lien { display:inline-block; margin-top:.7rem; font-family:var(--mono); font-size:.66rem; letter-spacing:1.4px; text-transform:uppercase; color:var(--accent, #74b6df); text-decoration:none; }
 .analyse-lien:hover { text-decoration:underline; }
 
 /* ── MACRO NEWS, sources discrètes en pied du Raisonnement ── */
   .macro-news-inline { margin-top: 1.1rem; padding-top: 0.85rem; border-top: 1px solid var(--border); opacity: 0.85; }
   .mn-item { padding: 4px 0; }
   .mn-resume { display: none; }  /* on n'affiche plus le résumé long, juste les titres */
-  .mn-headline { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); line-height: 1.5; }
+  .mn-headline { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); line-height: 1.5; }
   .mn-headline a { color: var(--text3); text-decoration: none; transition: color 0.15s; }
   .mn-headline a:hover { color: var(--ac); }
   .mn-meta-date { color: var(--text3); opacity: 0.6; }
-  .mn-source-note { margin-top: 0.5rem; font-family: 'Courier New', monospace; font-size: 0.68rem; color: var(--text3); opacity: 0.55; }
+  .mn-source-note { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.68rem; color: var(--text3); opacity: 0.55; }
 
 /* ── MOUVEMENT DE LA SEMAINE, intégré dans le flux newsletter (séparateur soft) ── */
   .weekly-pick-inline {
@@ -216,16 +213,16 @@
     border-left: 2px solid rgba(116,182,223,0.35);
     border-radius: 0 6px 6px 0;
   }
-  .wp-label { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--ac); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.6rem; opacity: 0.85; }
+  .wp-label { font-family: var(--mono); font-size: 0.72rem; color: var(--ac); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.6rem; opacity: 0.85; }
   .wp-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.55rem; flex-wrap: wrap; }
-  .wp-type { font-family: 'Courier New', monospace; font-size: 0.76rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; letter-spacing: 0.3px; }
+  .wp-type { font-family: var(--mono); font-size: 0.76rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; letter-spacing: 0.3px; }
   .wp-type.t-achat { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.25); }
   .wp-type.t-vente { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.25); }
-  .wp-ticker { font-family: 'Courier New', monospace; font-size: 0.90rem; font-weight: 600; color: var(--text); }
-  .wp-conv { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--ac); text-transform: uppercase; letter-spacing: 0.5px; }
-  .wp-date { font-family: 'Courier New', monospace; font-size: 0.74rem; color: var(--text3); margin-left: auto; }
+  .wp-ticker { font-family: var(--mono); font-size: 0.90rem; font-weight: 600; color: var(--text); }
+  .wp-conv { font-family: var(--mono); font-size: 0.72rem; color: var(--ac); text-transform: uppercase; letter-spacing: 0.5px; }
+  .wp-date { font-family: var(--mono); font-size: 0.74rem; color: var(--text3); margin-left: auto; }
   .wp-raison { font-size: 0.88rem; color: var(--text2); line-height: 1.65; margin-bottom: 0.5rem; }
-  .wp-meta { font-family: 'Courier New', monospace; font-size: 0.76rem; color: var(--text3); display: flex; gap: 12px; flex-wrap: wrap; }
+  .wp-meta { font-family: var(--mono); font-size: 0.76rem; color: var(--text3); display: flex; gap: 12px; flex-wrap: wrap; }
 
   /* ── ALLOC CHARTS ── */
   .alloc-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.75rem; }
@@ -233,25 +230,25 @@
   .alloc-row   { margin-bottom: 9px; }
   .alloc-head  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
   .alloc-label { font-size: 0.80rem; color: var(--text2); }
-  .alloc-pct   { font-family: 'Courier New', monospace; font-size: 0.74rem; color: var(--text3); }
+  .alloc-pct   { font-family: var(--mono); font-size: 0.74rem; color: var(--text3); }
   .alloc-bar   { height: 4px; background: var(--surface3); border-radius: 2px; overflow: hidden; }
   .alloc-fill  { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
-  .alloc-note  { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); margin-top: 6px; opacity: 0.7; }
+  .alloc-note  { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); margin-top: 6px; opacity: 0.7; }
   @media (max-width: 700px) { .alloc-grid { grid-template-columns: 1fr; } }
 
   /* ── CHART ── */
   .chart-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
   .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem; }
-  .chart-header h2 { font-family: Georgia, serif; font-size: 0.95rem; font-weight: normal; color: var(--text2); }
+  .chart-header h2 { font-family: var(--serif); font-size: 0.95rem; font-weight: normal; color: var(--text2); }
   .legend { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .li { display: flex; align-items: center; gap: 5px; font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--text3); }
+  .li { display: flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 0.78rem; color: var(--text3); }
   .ld { width: 10px; height: 2px; border-radius: 1px; }
 
   /* ── CHART · sélecteur de plage ── */
   .chart-range-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
   .rng-btn {
     background: transparent; border: 1px solid var(--border2); border-radius: 100px;
-    padding: 0.25rem 0.75rem; font-family: 'Courier New', monospace; font-size: 0.74rem;
+    padding: 0.25rem 0.75rem; font-family: var(--mono); font-size: 0.74rem;
     color: var(--text3); cursor: pointer; transition: all 0.15s; line-height: 1;
   }
   .rng-btn:hover { border-color: var(--text2); color: var(--text2); }
@@ -259,26 +256,26 @@
   .chart-custom-range {
     display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; padding: 0.6rem 0.8rem;
     background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
-    font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--text3); flex-wrap: wrap;
+    font-family: var(--mono); font-size: 0.78rem; color: var(--text3); flex-wrap: wrap;
   }
   .chart-custom-range input[type=date] {
     background: var(--bg); border: 1px solid var(--border2); border-radius: 4px;
-    padding: 4px 8px; color: var(--text2); font-family: 'Courier New', monospace; font-size: 0.78rem;
+    padding: 4px 8px; color: var(--text2); font-family: var(--mono); font-size: 0.78rem;
     color-scheme: dark;
   }
   .chart-custom-range button {
     background: rgba(116,182,223,0.1); border: 1px solid rgba(116,182,223,0.4); border-radius: 100px;
-    padding: 4px 12px; color: var(--ac); font-family: 'Courier New', monospace; font-size: 0.72rem;
+    padding: 4px 12px; color: var(--ac); font-family: var(--mono); font-size: 0.72rem;
     cursor: pointer; transition: all 0.15s;
   }
   .chart-custom-range button:hover { background: rgba(116,182,223,0.18); }
   .chart-range-info { color: var(--text3); opacity: 0.7; font-size: 0.72rem; }
 
   /* ── SECTION ── */
-  .sec-label { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .sec-label { font-family: var(--mono); font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
 
   /* ── POSITIONS ── */
-  .pos-header { display: grid; grid-template-columns: 1fr 50px 78px 78px 86px 78px 64px; gap: 8px; padding: 0 1rem 0.5rem; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+  .pos-header { display: grid; grid-template-columns: 1fr 50px 78px 78px 86px 78px 64px; gap: 8px; padding: 0 1rem 0.5rem; font-family: var(--mono); font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
   .pos-row { display: grid; grid-template-columns: 1fr 50px 78px 78px 86px 78px 64px; gap: 8px; align-items: center; padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-bottom: 5px; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
   .pos-row:hover { border-color: var(--border2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px var(--border2), 0 8px 28px rgba(0,0,0,0.5); }
   .pos-row.pos-positive { border-left: 3px solid rgba(28,200,122,0.35); }
@@ -287,33 +284,33 @@
   .pos-pv.up { color: var(--green); }
   .pos-pv.dn { color: var(--red); }
   .pos-name { font-weight: 600; font-size: 0.93rem; line-height: 1.2; }
-  .pos-ticker { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); margin-top: 2px; }
-  .mn { font-family: 'Courier New', monospace; font-size: 0.83rem; color: var(--text2); text-align: right; }
-  .perf-badge { display: inline-flex; font-family: 'Courier New', monospace; font-size: 0.78rem; padding: 2px 8px; border-radius: 5px; font-weight: 600; }
+  .pos-ticker { font-family: var(--mono); font-size: 0.80rem; color: var(--text3); margin-top: 2px; }
+  .mn { font-family: var(--mono); font-size: 0.83rem; color: var(--text2); text-align: right; }
+  .perf-badge { display: inline-flex; font-family: var(--mono); font-size: 0.78rem; padding: 2px 8px; border-radius: 5px; font-weight: 600; }
   .perf-up { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.2); }
   .perf-dn { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.2); }
   .poids-wrap { display: flex; align-items: center; gap: 5px; }
   .poids-bar  { flex: 1; height: 4px; background: var(--surface3); border-radius: 2px; overflow: hidden; }
   .poids-fill { height: 4px; border-radius: 2px; }
-  .poids-lbl  { font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--text3); min-width: 32px; text-align: right; }
+  .poids-lbl  { font-family: var(--mono); font-size: 0.78rem; color: var(--text3); min-width: 32px; text-align: right; }
 
   .liq-row { padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); margin-top: 6px; }
-  .liq-row .liq-label { font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--text3); }
-  .liq-row .liq-value { font-family: 'Courier New', monospace; font-size: 0.88rem; color: var(--blue); font-weight: 600; }
-  .liq-row .liq-pct   { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); margin-left: 8px; }
+  .liq-row .liq-label { font-family: var(--mono); font-size: 0.78rem; color: var(--text3); }
+  .liq-row .liq-value { font-family: var(--mono); font-size: 0.88rem; color: var(--blue); font-weight: 600; }
+  .liq-row .liq-pct   { font-family: var(--mono); font-size: 0.80rem; color: var(--text3); margin-left: 8px; }
 
   /* ── CLAUDE ANALYSIS ── */
   .claude-section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 0.85rem; }
-  .claude-section-title { font-family: Georgia, serif; font-size: 1.1rem; color: var(--text); }
+  .claude-section-title { font-family: var(--serif); font-size: 1.1rem; color: var(--text); }
   .claude-section-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ac); box-shadow: 0 0 10px rgba(116,182,223,0.5); flex-shrink: 0; }
   .claude-block { background: linear-gradient(135deg, var(--surface) 0%, rgba(116,182,223,0.025) 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 1.75rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 0 40px rgba(116,182,223,0.04); }
   .claude-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.1rem; flex-wrap: wrap; gap: 0.5rem; }
-  .claude-title { font-family: Georgia, serif; font-size: 1rem; font-weight: normal; color: var(--text); }
-  .conviction-badge { font-family: 'Courier New', monospace; font-size: 0.80rem; padding: 4px 13px; border-radius: 100px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+  .claude-title { font-family: var(--serif); font-size: 1rem; font-weight: normal; color: var(--text); }
+  .conviction-badge { font-family: var(--mono); font-size: 0.80rem; padding: 4px 13px; border-radius: 100px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
   .analyse-text { font-size: 1rem; color: var(--text2); line-height: 1.85; margin-bottom: 1.1rem; }
   .analyse-text p { margin: 0 0 0.95rem 0; }
   .analyse-text p:last-child { margin-bottom: 0; }
-  .analyse-text p:first-of-type::first-letter { font-family: Georgia, serif; font-size: 1.4em; color: var(--ac); font-weight: 600; padding-right: 1px; }
+  .analyse-text p:first-of-type::first-letter { font-family: var(--serif); font-size: 1.4em; color: var(--ac); font-weight: 600; padding-right: 1px; }
   .message-text { font-size: 0.88rem; color: var(--text3); line-height: 1.75; border-top: 1px solid var(--border); padding-top: 0.9rem; font-style: italic; }
 
   /* ── ACCORDION PORTFOLIO (transparence) ── */
@@ -321,9 +318,9 @@
   .pacc-trigger { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; cursor: pointer; background: var(--surface); transition: background 0.15s; gap: 1rem; }
   .pacc-trigger:hover { background: var(--surface2); }
   .pacc-trigger-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .pacc-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); }
+  .pacc-label { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); }
   .pacc-chips { display: flex; gap: 5px; flex-wrap: wrap; }
-  .pacc-chip { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 7px; }
+  .pacc-chip { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 7px; }
   .pacc-chip-warn { color: var(--orange); border-color: rgba(245,158,11,0.25); background: rgba(245,158,11,0.07); }
   .pacc-chip-block { color: var(--red); border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.07); }
   .pacc-arrow { font-size: 0.78rem; color: var(--text3); transition: transform 0.22s; flex-shrink: 0; }
@@ -331,21 +328,21 @@
   .pacc-body { display: none; }
   .pacc-body.open { display: block; }
   .pacc-section { padding: 1.25rem; border-top: 1px solid var(--border); }
-  .pacc-section-title { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.1px; color: var(--text3); margin-bottom: 0.75rem; }
+  .pacc-section-title { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.1px; color: var(--text3); margin-bottom: 0.75rem; }
 
   /* ── ORDERS ── */
   .order-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-bottom: 5px; overflow: hidden; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
   .order-card:hover { border-color: var(--border2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px var(--border2), 0 8px 28px rgba(0,0,0,0.5); }
   .order-header { display: grid; grid-template-columns: 95px 62px 1fr auto; gap: 10px; align-items: center; padding: 0.85rem 1rem; cursor: pointer; user-select: none; }
-  .order-date { font-family: 'Courier New', monospace; font-size: 0.80rem; color: var(--text3); }
-  .order-type { font-family: 'Courier New', monospace; font-size: 0.78rem; padding: 3px 8px; border-radius: 5px; text-align: center; letter-spacing: 0.3px; font-weight: 600; }
+  .order-date { font-family: var(--mono); font-size: 0.80rem; color: var(--text3); }
+  .order-type { font-family: var(--mono); font-size: 0.78rem; padding: 3px 8px; border-radius: 5px; text-align: center; letter-spacing: 0.3px; font-weight: 600; }
   .type-achat  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.25); }
   .type-vente  { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.25); }
   .type-apport { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(116,182,223,0.25); }
   .order-name { font-size: 0.90rem; font-weight: 600; color: var(--text); }
   .order-right { display: flex; align-items: center; gap: 8px; }
-  .order-amount { font-family: 'Courier New', monospace; font-size: 0.82rem; color: var(--text3); white-space: nowrap; }
-  .expand-hint { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text3); }
+  .order-amount { font-family: var(--mono); font-size: 0.82rem; color: var(--text3); white-space: nowrap; }
+  .expand-hint { font-family: var(--mono); font-size: 0.75rem; color: var(--text3); }
   .order-card:hover .expand-hint { color: var(--ac); }
   .order-detail { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
   .order-detail.open { max-height: 800px; }
@@ -365,7 +362,7 @@
     background: var(--surface2); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 0.85rem 1rem; margin-bottom: 6px;
   }
-  .blocked-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; flex-wrap: wrap; font-family: 'Courier New', monospace; font-size: 0.78rem; }
+  .blocked-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; flex-wrap: wrap; font-family: var(--mono); font-size: 0.78rem; }
   .blocked-action { padding: 2px 7px; border-radius: 4px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; opacity: 0.8; }
   .blocked-action.a-achat { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.18); text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; }
   .blocked-action.a-vente { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.18);   text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; }
@@ -374,11 +371,11 @@
   .blocked-conv { color: var(--text3); font-size: 0.72rem; margin-left: auto; }
   .blocked-why { font-size: 0.83rem; color: var(--text2); line-height: 1.55; margin-bottom: 0.4rem; }
   .blocked-claude-raison { font-size: 0.80rem; color: var(--text3); line-height: 1.55; font-style: italic; border-top: 1px dashed var(--border); padding-top: 0.45rem; }
-  .blocked-claude-raison::before { content: 'Raisonnement Claude : '; font-style: normal; color: var(--text3); opacity: 0.7; font-family: 'Courier New', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .blocked-claude-raison::before { content: 'Raisonnement Claude : '; font-style: normal; color: var(--text3); opacity: 0.7; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* ── BIAIS ── */
   .bias-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; margin-bottom: 1.75rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
-  .bias-title { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--orange); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.6rem; }
+  .bias-title { font-family: var(--mono); font-size: 0.75rem; color: var(--orange); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.6rem; }
   .bias-item { font-size: 0.86rem; color: var(--text2); line-height: 1.65; padding: 4px 0; display: flex; gap: 8px; }
   .bias-item::before { content: '→'; color: var(--orange); flex-shrink: 0; }
 
@@ -394,11 +391,11 @@
   .learning-accent { border-radius: 3px 0 0 3px; }
   .learning-body { padding: 0.75rem 0.9rem 0.75rem 0; }
   .learning-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.35rem; flex-wrap: wrap; }
-  .learning-cat { font-family: 'Courier New', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 1px 7px; border-radius: 4px; font-weight: 700; }
+  .learning-cat { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 1px 7px; border-radius: 4px; font-weight: 700; }
   .lcat-arch  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(116,182,223,0.2); }
   .lcat-score { background: var(--ac-dim);  color: var(--ac);  border: 1px solid rgba(116,182,223,0.2); }
   .lcat-ux    { background: var(--surface3);  color: var(--text3); border: 1px solid var(--border); }
-  .learning-version { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--text3); }
+  .learning-version { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); }
   .learning-date    { font-size: 0.78rem; color: var(--text3); margin-left: auto; opacity: 0.6; }
   .learning-title { font-size: 0.89rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
   .learning-prob { font-size: 0.81rem; color: var(--text3); line-height: 1.6; }
@@ -409,17 +406,17 @@
   /* ── P&L STRIP ── */
   .pnl-strip { display:flex; align-items:stretch; gap:0; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:0.75rem; overflow:hidden; }
   .pnl-main { padding:0.9rem 1.25rem; min-width:130px; border-right:1px solid var(--border); display:flex; flex-direction:column; justify-content:center; }
-  .pnl-headline { font-family:Georgia,serif; font-size:1.5rem; font-weight:normal; line-height:1; margin-bottom:3px; }
-  .pnl-headline-label { font-family:'Courier New',monospace; font-size:0.70rem; color:var(--text3); text-transform:uppercase; letter-spacing:1px; }
+  .pnl-headline { font-family:var(--serif); font-size:1.5rem; font-weight:normal; line-height:1; margin-bottom:3px; }
+  .pnl-headline-label { font-family:var(--mono); font-size:0.70rem; color:var(--text3); text-transform:uppercase; letter-spacing:1px; }
   .pnl-meta { flex:1; padding:0.9rem 1.1rem; display:flex; flex-direction:column; gap:8px; justify-content:center; }
   .pnl-winbar-row { display:flex; align-items:center; gap:8px; }
   .pnl-winbar { flex:1; height:5px; border-radius:3px; background:var(--surface3); overflow:hidden; display:flex; }
   .pnl-winbar-fill { height:100%; border-radius:3px 0 0 3px; transition:width 0.4s; }
-  .pnl-winbar-label { font-family:'Courier New',monospace; font-size:0.80rem; color:var(--text2); white-space:nowrap; }
+  .pnl-winbar-label { font-family:var(--mono); font-size:0.80rem; color:var(--text2); white-space:nowrap; }
   .pnl-stats-row { display:flex; gap:1.5rem; }
   .pnl-stat { display:flex; flex-direction:column; gap:1px; }
-  .pnl-stat-val { font-family:Georgia,serif; font-size:0.9rem; }
-  .pnl-stat-lbl { font-family:'Courier New',monospace; font-size:0.70rem; color:var(--text3); text-transform:uppercase; letter-spacing:0.8px; }
+  .pnl-stat-val { font-family:var(--serif); font-size:0.9rem; }
+  .pnl-stat-lbl { font-family:var(--mono); font-size:0.70rem; color:var(--text3); text-transform:uppercase; letter-spacing:0.8px; }
   @media(max-width:500px){ .pnl-strip { flex-direction:column; } .pnl-main { border-right:none; border-bottom:1px solid var(--border); } }
 
   /* ── FILTRE ORDRES ── */
@@ -436,13 +433,13 @@
   .regle-icon { font-size: 0.78rem; margin-top: 2px; flex-shrink: 0; }
   .regle-msg  { font-size: 0.81rem; color: var(--text2); line-height: 1.5; }
   /* learning auto-généré */
-  .lcat-auto { background: rgba(100,100,120,0.15); color: var(--text3); border: 1px solid var(--border); font-family: 'Courier New', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 1px 7px; border-radius: 4px; font-weight: 700; }
+  .lcat-auto { background: rgba(100,100,120,0.15); color: var(--text3); border: 1px solid var(--border); font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 1px 7px; border-radius: 4px; font-weight: 700; }
   .learning-weeks { font-size: 0.75rem; color: var(--red); opacity: 0.8; margin-left: 4px; }
 
   /* ── LEXIQUE ── */
   .lex-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .lex-item { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.85rem 1rem; }
-  .lex-term { font-family: 'Courier New', monospace; font-size: 0.80rem; font-weight: 700; color: var(--ac); letter-spacing: 0.3px; margin-bottom: 0.3rem; }
+  .lex-term { font-family: var(--mono); font-size: 0.80rem; font-weight: 700; color: var(--ac); letter-spacing: 0.3px; margin-bottom: 0.3rem; }
   .lex-def  { font-size: 0.83rem; color: var(--text2); line-height: 1.6; }
   .lex-def em { font-style: normal; color: var(--text3); }
   @media (max-width: 600px) { .lex-grid { grid-template-columns: 1fr; } }
@@ -506,7 +503,7 @@
      différents pour la même intention, et quatre écarts différents à l'écran
      (25, 40, 48 et 56 px). Mesuré au navigateur le 10/08/2026. */
   main { padding-top: 3rem; }
-  .hero { margin-bottom: 2.8rem; }
+  .page-h { margin-bottom: 2.8rem; }
   #survival-block, #claude-analysis, .chart-block, .kpi-grid,
   #positions, #alloc-charts, #orders, .pacc, .pnl-strip { margin-bottom: 2.8rem; }
 
@@ -548,10 +545,10 @@
 
   /* Texte de LECTURE en blanc net + taille/interligne alignés sur la watchlist
      (les labels, méta et mono restent volontairement dimmés pour la hiérarchie) */
-  .analyse-text, .hero p, .survival-desc, .wp-raison,
+  .analyse-text, .survival-desc, .wp-raison,
   .order-raison, .blocked-why, .bias-item, .lex-def { color: var(--text); }
   .analyse-text { font-size: 1.02rem; line-height: 1.78; }
-  .hero p, .survival-desc, .wp-raison, .order-raison, .blocked-why, .bias-item, .lex-def { line-height: 1.7; }
+  .survival-desc, .wp-raison, .order-raison, .blocked-why, .bias-item, .lex-def { line-height: 1.7; }
 
   /* Structure « scène » comme la watchlist : le contenu est centré dans l'espace
 situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas collé. */
@@ -562,7 +559,6 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
   }
   /* la largeur de LIGNE du texte reste lisible (plafonnée comme la watchlist) */
   .analyse-text { max-width: 1120px; }
-  .hero p { max-width: 760px; }
   .survival-desc { max-width: 960px; }
 
 /* Cyan/blanc partout, couleur gardée UNIQUEMENT pour le P&L (vert/rouge) + schémas */
@@ -571,7 +567,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
   .survival-block.alive::before, .survival-block.dead::before, .survival-block.panic::before { background: var(--ac); }
 
   /* Cohérence typo : paragraphes explicatifs homogènes (~watchlist) */
-  .hero p, .survival-desc, .wp-raison, .order-raison, .blocked-why, .bias-item, .lex-def, .rule p { font-size: 0.95rem; line-height: 1.7; }
+  .survival-desc, .wp-raison, .order-raison, .blocked-why, .bias-item, .lex-def, .rule p { font-size: 0.95rem; line-height: 1.7; }
   .kpi-label, .th-label, .alloc-label { font-size: 0.8rem; }
   .pos-ticker, .order-amount, .mn, .blocked-claude-raison, .learning-prob, .learning-fix, .regle-msg { font-size: 0.84rem; }
 </style>
@@ -611,9 +607,9 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 </nav>
 
 <main>
-  <div class="hero">
-    <h1>Une IA contre l'indice</h1>
-    <p>Une stratégie est facile à raconter une fois qu'on connaît la fin. Celle-ci est publiée avant, tenue en public, et comparée à l'ETF que n'importe qui pourrait acheter à la place. Capital fictif de <span id="hero-capital">20 000 €</span>, prix réels, chaque décision et chaque erreur écrites noir sur blanc.</p>
+  <div class="page-h">
+    <h1 class="page-t"><span class="h-grad">Observez</span> une IA à l'épreuve du marché</h1>
+    <p class="page-lead">Une stratégie est facile à raconter une fois qu'on connaît la fin. Celle-ci est publiée avant, tenue en public, et comparée à l'ETF que n'importe qui pourrait acheter à la place. Capital fictif de <span id="hero-capital">20 000 €</span>, prix réels, chaque décision et chaque erreur écrites noir sur blanc.</p>
     <div class="update-line" id="update-line">Chargement…</div>
   </div>
   <div class="hero-sep"></div>
@@ -686,7 +682,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
         </linearGradient>
       </defs>
     </svg>
-    <div style="text-align:center;padding:0.5rem 0 0;font-family:'Courier New',monospace;font-size:0.75rem;color:var(--text3)" id="chart-note">Chargement…</div>
+    <div style="text-align:center;padding:0.5rem 0 0;font-family:var(--mono);font-size:0.75rem;color:var(--text3)" id="chart-note">Chargement…</div>
   </div>
 
   <div id="positions" style="margin-bottom:1.75rem">
@@ -1247,7 +1243,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
           <div class="lex-item"><div class="lex-term">Z-score (σ)</div><div class="lex-def">Écart du cours à sa droite de régression long terme, en écarts-types. <em>−3.4σ</em> signifie que le cours est 3.4 déviations sous sa tendance : décote anormale, potentiel de rebond vers la moyenne mais aussi signe possible de détérioration fondamentale.</div></div>
 <div class="lex-item"><div class="lex-term">Golden Cross / Death Cross</div><div class="lex-def"><em>Golden Cross</em> : la MM21 passe au-dessus de la MM200, signal haussier. <em>Death Cross</em> : la MM21 passe sous la MM200, signal baissier. La durée depuis le croisement détermine la prime accordée : un signal récent (&lt;30j) est plus fort qu'un signal ancien (&gt;180j).</div></div>
         </div>
-        <div style="margin-top:0.75rem;font-family:'Courier New',monospace;font-size:0.75rem;color:var(--text3)">Définitions complètes des signaux → <a href="index.html#lexique" style="color:var(--ac);text-decoration:none">Lexique de la Watchlist ↗</a></div>
+        <div style="margin-top:0.75rem;font-family:var(--mono);font-size:0.75rem;color:var(--text3)">Définitions complètes des signaux → <a href="index.html#lexique" style="color:var(--ac);text-decoration:none">Lexique de la Watchlist ↗</a></div>
       </div>
     </div>
   </div>
@@ -1390,7 +1386,7 @@ function renderChart(history, capitalInitial = 20000) {
     const y   = toY(v);
     const lbl = (v > 0 ? '+' : '') + v + ' %';
     svg.appendChild(mk('line', { x1:40, y1:y, x2:560, y2:y, stroke:'#2a2a38', 'stroke-width':0.6, 'stroke-dasharray':'3,4' }));
-    svg.appendChild(mk('text', { x:34, y:y+3, 'font-family':'Courier New', 'font-size':7, fill:'#50506c', 'text-anchor':'end' })).textContent = lbl;
+    svg.appendChild(mk('text', { x:34, y:y+3, 'font-family':'Google Sans Code', 'font-size':7, fill:'#50506c', 'text-anchor':'end' })).textContent = lbl;
   }
 
   // ── Courbe lissée (Catmull-Rom → cubic bezier, tension subtile) ───────────
@@ -1425,7 +1421,7 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
   pts.filter(p => p.note).forEach(p => {
     svg.appendChild(mk('line', { x1:p.x, y1:yTop, x2:p.x, y2:yBot, stroke:'#74b6df', 'stroke-width':0.9, 'stroke-dasharray':'3,3', 'stroke-opacity':0.5 }));
     const amount = p.note.match(/[+\-]?\d+\s*k€?/i)?.[0] ?? '';
-    const t = mk('text', { x:p.x+4, y:yTop+9, 'font-family':'Courier New', 'font-size':7, fill:'#74b6df', 'fill-opacity':0.8, 'text-anchor':'start' });
+    const t = mk('text', { x:p.x+4, y:yTop+9, 'font-family':'Google Sans Code', 'font-size':7, fill:'#74b6df', 'fill-opacity':0.8, 'text-anchor':'start' });
     t.textContent = amount ? '⊕ injection ' + amount : '⊕ injection';
     svg.appendChild(t);
   });
@@ -1447,7 +1443,7 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
     const isLast = i === pts.length - 1;
     const d = new Date(p.date);
     svg.appendChild(mk('text', {
-      x: p.x.toFixed(1), y: 197, 'font-family':'Courier New', 'font-size': 7.5,
+      x: p.x.toFixed(1), y: 197, 'font-family':'Google Sans Code', 'font-size': 7.5,
       fill: isLast ? '#74b6df' : '#50506c', 'text-anchor':'middle'
     })).textContent = d.toLocaleDateString('fr-FR', { day:'numeric', month:'short' });
   });
@@ -1460,7 +1456,7 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
   }));
   const lastLbl = (last.cap >= 0 ? '+' : '') + last.cap.toFixed(1) + ' %';
   svg.appendChild(mk('rect', { x:(last.x-28).toFixed(1), y:(last.y-19).toFixed(1), width:58, height:17, rx:4, fill:'#1a1200', stroke:'#74b6df', 'stroke-width':0.8, 'stroke-opacity':0.7 }));
-  const lt = mk('text', { x: last.x.toFixed(1), y:(last.y-6).toFixed(1), 'font-family':'Courier New', 'font-size':9.5, fill:'#74b6df', 'text-anchor':'middle', 'font-weight':'bold' });
+  const lt = mk('text', { x: last.x.toFixed(1), y:(last.y-6).toFixed(1), 'font-family':'Google Sans Code', 'font-size':9.5, fill:'#74b6df', 'text-anchor':'middle', 'font-weight':'bold' });
   lt.textContent = lastLbl;
   svg.appendChild(lt);
 
@@ -1474,8 +1470,8 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
   const hover = mk('g', { style: 'display:none', 'pointer-events': 'none' });
   const hLine = mk('line',   { x1:0, y1:yTop, x2:0, y2:yBot, stroke:'#74b6df', 'stroke-width':0.8, 'stroke-dasharray':'2,3', 'stroke-opacity':0.85 });
   const hBox  = mk('rect',   { width:92, height:26, rx:4, fill:'#101724', stroke:'#74b6df', 'stroke-width':0.8, 'stroke-opacity':0.8 });
-  const hPerf = mk('text',   { 'font-family':'Courier New', 'font-size':9.5, fill:'#74b6df', 'text-anchor':'middle', 'font-weight':'bold' });
-  const hDate = mk('text',   { 'font-family':'Courier New', 'font-size':7,   fill:'#8a8aa6', 'text-anchor':'middle' });
+  const hPerf = mk('text',   { 'font-family':'Google Sans Code', 'font-size':9.5, fill:'#74b6df', 'text-anchor':'middle', 'font-weight':'bold' });
+  const hDate = mk('text',   { 'font-family':'Google Sans Code', 'font-size':7,   fill:'#8a8aa6', 'text-anchor':'middle' });
   const hDot  = mk('circle', { r:3.5, fill:'#74b6df', stroke:'#0a0e16', 'stroke-width':1.2 });
   [hLine, hBox, hPerf, hDate, hDot].forEach(e => hover.appendChild(e));
   svg.appendChild(hover);
@@ -1592,13 +1588,13 @@ function renderOrder(o, idx) {
     : (isVente && o.perf != null && o.montant ? Math.round(o.montant * o.perf / (100 + o.perf)) : null);
   const perfBadge = isVente && o.perf != null
     ? `<span class="perf-badge ${o.perf >= 0 ? 'perf-up' : 'perf-dn'}" style="font-size:0.78rem">${sign(o.perf)}${fmt(o.perf,1)} %</span>`
-      + (pnlEurVal != null ? `<span style="font-family:'Courier New',monospace;font-size:0.75rem;color:${pnlEurVal>=0?'var(--green)':'var(--red)'}">${sign(pnlEurVal)}${fmtEur(Math.abs(pnlEurVal))}</span>` : '')
+      + (pnlEurVal != null ? `<span style="font-family:var(--mono);font-size:0.75rem;color:${pnlEurVal>=0?'var(--green)':'var(--red)'}">${sign(pnlEurVal)}${fmtEur(Math.abs(pnlEurVal))}</span>` : '')
     : '';
   const scoreBadge = o.type === 'ACHAT' && o.score_watchlist
-    ? `<span style="font-family:'Courier New',monospace;font-size:0.75rem;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px">score ${o.score_watchlist}</span>`
+    ? `<span style="font-family:var(--mono);font-size:0.75rem;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px">score ${o.score_watchlist}</span>`
     : '';
   const joursInfo = isVente && o.jours != null
-    ? `<span style="font-family:'Courier New',monospace;font-size:0.75rem;color:var(--text3)">${o.jours}j</span>`
+    ? `<span style="font-family:var(--mono);font-size:0.75rem;color:var(--text3)">${o.jours}j</span>`
     : '';
   return `
     <div class="order-card">
@@ -1606,8 +1602,8 @@ function renderOrder(o, idx) {
         <div class="order-date">${o.date}</div>
         <div class="order-type ${orderTypeClass(o.type)}">${o.type}</div>
         <div class="order-name">${o.nom}${o._allerRetour ? (o.type === 'VENTE'
-          ? ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug</span>'
-          : ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(116,182,223,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↻ corrigé</span>') : ''}${o._bug_weekend_exec ? ' <span style="font-family:\'Courier New\',monospace;font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug weekend</span>' : ''}</div>
+          ? ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug</span>'
+          : ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(116,182,223,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↻ corrigé</span>') : ''}${o._bug_weekend_exec ? ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug weekend</span>' : ''}</div>
         <div class="order-right">
           ${joursInfo}
           ${perfBadge}${scoreBadge}
@@ -1758,7 +1754,7 @@ function renderOrdres(limit) {
   const hasMore = filtered.length > limit;
   document.getElementById('orders-list').innerHTML =
     shown.length === 0
-      ? '<div style="padding:1rem 0;color:var(--text3);font-size:0.88rem;font-family:\'Courier New\',monospace">Aucun ordre passé pour le moment.</div>'
+      ? '<div style="padding:1rem 0;color:var(--text3);font-size:0.88rem;font-family:var(--mono)">Aucun ordre passé pour le moment.</div>'
       : shown.map((o, i) => renderOrder(o, i)).join('') +
         (hasMore ? `<div style="text-align:center;padding:1rem 0"><button class="btn-show" onclick="renderOrdres(${limit + 10})">Voir les ${filtered.length - limit} suivants ↓</button></div>` : '');
 }

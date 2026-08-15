@@ -11,13 +11,29 @@
   --green:#22d98a;--red:#f0556a; /* réservés au P&L factuel */
   --gold:#e8a820;                /* marque / badge « fictif » */
   --line:rgba(255,255,255,.07);
-  --mono:'Courier New',monospace;
-  --serif:Georgia,serif;
+  /* TYPOGRAPHIE (15/08) : le site passe en géométrique ronde. --mono et
+     --serif gardent leurs NOMS — ils sont écrits dans quatre fichiers et des
+     centaines de règles — mais changent de valeur :
+     · --mono devient Google Sans Code, la mono ouverte par Google en 2025.
+       Elle porte les pastilles, les libellés et les chiffres : c'était le
+       Courier New qui « durcissait » le plus la page.
+     · --serif ne désigne plus une serif du tout. Georgia sort avec elle :
+       le site est désormais entièrement sans-serif, Outfit du titre au
+       chiffre. Le nom du token reste pour ne pas réécrire tout le site ;
+       sa police de repli, elle, est bien une sans-serif.
+     Les deux familles viennent de Google Fonts, chargées par les 4 pages. */
+  --mono:'Google Sans Code','DM Mono',ui-monospace,monospace;
+  --serif:'Outfit',-apple-system,'Segoe UI',sans-serif;
+  --sans:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  /* Dégradé du PREMIER MOT des titres. Il reste dans la famille de l'accent
+     — du bleu vers le presque-blanc du texte — pour ne pas introduire une
+     teinte de plus dans une charte qui n'en compte qu'une. */
+  --grad:linear-gradient(96deg,#74b6df 0%,#b0d9f3 55%,#eaf4fd 100%);
 }
 html,body{height:100%}
 html{scroll-behavior:smooth}
 :target{scroll-margin-top:6.1rem}   /* compense le header fixe lors d'un saut d'ancre */
-body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:16px;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
 
 /* ── Fond + chrome HUD ── */
 #fx{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 130% 90% at 50% 0%,#0a1c2c 0%,#05101e 44%,#06060b 76%);pointer-events:none}
@@ -84,7 +100,32 @@ footer{position:relative;z-index:5;border-top:1px solid var(--line);padding:1.4r
 .footer-right{font:.74rem/1.5 var(--mono);color:var(--text3);white-space:nowrap}
 
 /* ── Typo utilitaire ── */
-h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
+/* `font-weight:normal` venait de Georgia, dont le romain porte déjà un gros
+   titre. Outfit à 400 s'effiloche à cette taille : 500 lui rend le poids que
+   la serif donnait gratuitement, sans jamais aller jusqu'au gras. */
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.5px}
+
+/* ── En-tête de page : titre + sous-titre CENTRÉS (les quatre onglets) ──
+   Un seul patron, posé ici et pas dans chaque page : c'est exactement la
+   dérive que test_chrome traque sur le bandeau. La page d'accueil garde ses
+   classes .home-* (son rembourrage est vérifié au littéral) mais reprend les
+   mêmes tailles. */
+.page-h{text-align:center;max-width:960px;margin:0 auto}
+.page-t{font-family:var(--serif);font-size:3.2rem;font-weight:500;line-height:1.12;letter-spacing:-1.4px}
+.page-lead{font-size:1.02rem;color:var(--text2);line-height:1.7;margin:.85rem auto 0;max-width:720px}
+@media(max-width:700px){
+  .page-t{font-size:2.05rem;letter-spacing:-.8px}
+  .page-lead{font-size:.95rem}
+}
+/* PREMIER MOT DU TITRE EN DÉGRADÉ. Le repli n'est pas cosmétique : sans le
+   @supports, un navigateur sans background-clip:text afficherait un titre
+   TRANSPARENT, donc un titre absent. Hors support, le mot reste simplement
+   dans l'accent. */
+.h-grad{color:var(--ac)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .h-grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;
+          -webkit-text-fill-color:transparent;color:transparent}
+}
 .eyebrow{font:600 .6rem var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--ac)}
 .mono{font-family:var(--mono)}.serif{font-family:var(--serif)}
 

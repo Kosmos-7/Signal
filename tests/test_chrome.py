@@ -79,25 +79,37 @@ ATTENDUS = [
     ('rel="stylesheet" href="signal.css"', "signal.css"),
     ("signal-fx.js", "signal-fx.js"),
     ('name="description"', "une meta description"),
-    ("fonts.googleapis.com/css2", "la police Inter chargée"),
+    ("fonts.googleapis.com/css2", "les polices du design system chargées"),
 ]
 for motif, lib in ATTENDUS:
     manquants = [p for p in PAGES if motif not in SRC[p]]
     check(f"{lib} : présent sur les 4 onglets", not manquants, str(manquants))
 
-# Une page qui déclare Inter sans la charger tombe en police système : c'était
-# le cas d'Actualités, et rien ne le signalait.
-declare = [p for p in PAGES if "'Inter'" in SRC[p] or '"Inter"' in SRC[p]]
-charge = [p for p in PAGES if "family=Inter" in SRC[p]]
-check("aucune page ne déclare Inter sans la charger",
-      not set(declare) - set(charge), str(sorted(set(declare) - set(charge))))
+# LES DEUX FAMILLES DU DESIGN SYSTEM SONT CHARGÉES PARTOUT. Une page qui
+# déclare une police sans la charger tombe en police système : c'était le cas
+# d'Actualités, et rien ne le signalait.
+FAMILLES = [("family=Outfit", "Outfit"), ("Google+Sans+Code", "Google Sans Code")]
+for motif, lib in FAMILLES:
+    manquants = [p for p in PAGES if motif not in SRC[p]]
+    check(f"{lib} : chargée sur les 4 onglets", not manquants, str(manquants))
 
 # Le faux gras et le faux italique fabriqués par le navigateur ne ressemblent
-# pas aux vraies graisses : la même requête de police partout, ou rien.
-requetes = {re.search(r"family=Inter[^\"']*", SRC[p]).group(0)
-            for p in PAGES if "family=Inter" in SRC[p]}
+# pas aux vraies graisses : la même requête de police partout, ou rien. Le
+# motif ne cite plus une famille en particulier — il compare la requête ENTIÈRE,
+# et survit donc au prochain changement de police.
+requetes = {re.search(r"css2\?[^\"']*", SRC[p]).group(0)
+            for p in PAGES if "fonts.googleapis.com/css2" in SRC[p]}
 check("la même requête de police sur tous les onglets",
-      len(requetes) <= 1, str(sorted(requetes)))
+      len(requetes) == 1, str(sorted(requetes)))
+
+# AUCUNE PAGE NE FIGE UNE POLICE EN DUR. Les familles ne sont nommées qu'une
+# fois, dans les tokens de signal.css (--sans / --serif / --mono) ; une page qui
+# réécrit « Georgia » ou « Courier New » ne suivra pas le prochain changement,
+# et c'est exactement ainsi que le site s'est retrouvé avec quatre typographies
+# légèrement différentes avant le 15/08/2026.
+for nom in ("Courier New", "Georgia", "'Inter'"):
+    coupables = [p for p in PAGES if nom in SRC[p]]
+    check(f"aucune page ne fige « {nom} » en dur", not coupables, str(coupables))
 
 # ── 3. LA NAVIGATION : MÊME ORDRE, MÊMES CIBLES, UN SEUL ACTIF ─────────────
 print("\n— La navigation dit-elle la même chose partout ? —")
