@@ -137,22 +137,32 @@ check("le thème newspace existe et publie toute sa liste",
 check("l'ancien identifiant « espace » ne subsiste nulle part",
       "espace" not in themes.THEMES_BY_ID,
       str(sorted(themes.THEMES_BY_ID)))
-# LE PARADOXE DE CETTE LISTE, et son information principale : la plus grande
-# société spatiale du monde n'y figure pas. SpaceX cote depuis juin 2026 pour
-# ~1 755 Md$ — plus, à elle seule, que tout le reste de la watchlist réunie —
-# mais 39 séances contre 200 exigées par la MM200 et le RSI. La déclarer
-# produirait un thème amputé publié en silence ; on l'inscrit au registre avec
-# la date où son historique suffira, comme les cinq introductions quantiques.
-check("SpaceX est au registre, avec ses séances et sa date",
-      "SPCX" in themes.ECARTES_VALIDATION
-      and "200" in themes.ECARTES_VALIDATION["SPCX"]
-      and "2027" in themes.ECARTES_VALIDATION["SPCX"])
-check("SpaceX n'est pas déclarée avant d'avoir ses 200 séances",
-      "SPCX" not in _et)
-# ... et son absence doit être DITE au lecteur, en tête des biais. Un trou muet
-# sur le titre le plus attendu du thème serait le pire des silences.
-check("l'absence de SpaceX est expliquée dans les biais",
-      _e and "SpaceX" in _e["biais"] and "avril 2027" in _e["biais"])
+# SPACEX EST DANS LA LISTE DEPUIS LE 15/08/2026, sur décision du propriétaire,
+# et ces contrôles ont changé de sens le même jour : ils vérifiaient son
+# ABSENCE, ils vérifient maintenant que sa présence reste encadrée. Elle cote
+# depuis juin 2026 pour ~1 755 Md$, plus à elle seule que tout le reste de la
+# watchlist réunie, mais avec moins de 200 séances : sa MM200 est incalculable.
+check("SpaceX est déclarée dans la watchlist NewSpace", "SPCX" in _et)
+check("SpaceX est sortie du registre des écartés",
+      "SPCX" not in themes.ECARTES_VALIDATION)
+# LE GARDE-FOU EST L'AUTORISATION NOMMÉE. Un titre sans MM200 ne doit jamais
+# entrer par un plancher abaissé pour tout le monde : ce serait faire entrer
+# d'un coup toutes les introductions récentes et changer les watchlists en
+# silence. Il entre parce qu'il est inscrit, un par un, dans screener.
+_hist_ok = getattr(screener, "HIST_PARTIEL_OK", set())
+check("SpaceX est nommée dans l'autorisation d'historique partiel",
+      "SPCX" in _hist_ok)
+check("l'autorisation d'historique partiel reste une exception courte",
+      len(_hist_ok) <= 3, f"{len(_hist_ok)} titres : {sorted(_hist_ok)}")
+# ... et le lecteur doit SAVOIR que la note est incomplète. Publier une note
+# amputée sans le dire serait exactement ce que ce site refuse de faire.
+# Comparaison insensible à la casse : les intitulés de paragraphe du site sont
+# en capitales (« LA NOTE DE SPACEX EST INCOMPLÈTE »), et un test qui exigerait
+# « SpaceX » tel quel rougirait sur une simple mise en forme.
+_bi = (_e["biais"] if _e else "").casefold()
+check("la note incomplète de SpaceX est expliquée dans les biais",
+      "spacex" in _bi and "avril 2027" in _bi
+      and ("retiré" in _bi or "renormalise" in _bi))
 # CE QUE LE MOT EXCLUT est le contrôle central de ce thème, parce que c'est la
 # seule chose qui le sépare d'une liste « aérospatial et défense ». Le NewSpace
 # se définit CONTRE l'organisation qui le précédait : ni les dix maîtres d'œuvre

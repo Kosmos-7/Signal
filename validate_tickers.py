@@ -96,9 +96,21 @@ def valide(ticker):
         r["dernier_cours"] = round(float(close.iloc[-1]), 2)
         r["derniere_date"] = str(close.index[-1].date())
         if len(close) < SEANCES_MIN:
-            r["erreurs"].append(
-                f"{len(close)} séances < {SEANCES_MIN} requises — MM200/RSI incalculables, "
-                "le screener écarterait ce titre au run")
+            # L'historique court n'est plus une ERREUR pour les titres nommés
+            # dans screener.HIST_PARTIEL_OK : le screener les garde et la note
+            # retire son critère de tendance. Ça reste un AVERTISSEMENT, parce
+            # que la note qui en sortira repose sur moins de mesures, et que
+            # c'est vrai quoi qu'en dise l'autorisation.
+            try:
+                import screener as _sc
+                _autorise = ticker in getattr(_sc, "HIST_PARTIEL_OK", set())
+            except Exception:
+                _autorise = False
+            (r["avertissements"] if _autorise else r["erreurs"]).append(
+                f"{len(close)} séances < {SEANCES_MIN} requises, MM200 incalculable : "
+                + ("titre autorisé en historique partiel, critère de tendance retiré "
+                   "et note renormalisée" if _autorise
+                   else "le screener écarterait ce titre au run"))
         elif jours < ANNEES_REGRESSION * 365:
             r["avertissements"].append(
                 f"historique {r['annees_historique']} ans < {ANNEES_REGRESSION} ans : droite de "
