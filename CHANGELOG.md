@@ -5,6 +5,27 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le site vouvoie enfin partout, et l'accueil dit « Trouvez »
+
+**Deux voix pour un seul site.** L'accueil promettait « les opportunités qui
+vous ressemblent » pendant qu'Apprendre tutoyait sur **trente-neuf passages** :
+« si tu débutes », « ce que ton courtier affiche ». Personne ne l'avait vu,
+parce que ça ne se remarque qu'en passant d'un onglet à l'autre — le mode de
+panne habituel du chrome de ce site. Les trente-neuf tournures sont reprises,
+impératifs compris (« Imagine » → « Imaginez », « N'investis » → « N'investissez »,
+« vérifie » → « vérifiez »), et un test empêche désormais la quarantième.
+
+Il nomme **deux exceptions plutôt que de les deviner** : le `ton:` d'index.html
+est une clé JavaScript (le palier de lecture d'un score), et la section
+Transparence du portefeuille CITE mot pour mot le prompt envoyé à l'IA —
+le corriger falsifierait la citation. Les prompts eux-mêmes tutoient le
+modèle, pas le lecteur : hors périmètre.
+
+**Le titre de l'accueil passe à « Trouvez votre prochain investissement ».**
+« Identifiez » répétait mot pour mot le « pour identifier » du sous-titre
+juste en dessous ; le verbe plus court dit la même chose sans l'écho, et il
+nomme ce que le lecteur vient chercher plutôt que la méthode employée.
+
 ### Le site change de typographie, et les quatre onglets s'ouvrent pareil
 
 Demande du propriétaire (15/08) : « une police plus douce et ronde », dans
