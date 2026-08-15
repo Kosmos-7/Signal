@@ -5,6 +5,54 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Apprendre n'est plus un rouleau : douze cartes, une section à la fois
+
+Demande du propriétaire (15/08). La page pédagogique portait douze sections
+dans un seul document de près de deux mille lignes, et un sommaire pour s'y
+déplacer : une colonne fixe à gauche au-dessus de 1300 px, une barre
+dépliante en dessous. Ce sommaire disait où aller, il ne montrait jamais où
+l'on allait — douze libellés de trois mots. Et les douze images d'ouverture,
+déjà dans la page depuis `tools/photos_apprendre.py`, ne servaient qu'une fois
+qu'on était arrivé.
+
+**Les mêmes douze sections deviennent douze cartes illustrées**, rangées en
+deux rails qui défilent à l'horizontale : au doigt, à la souris qui glisse, ou
+avec deux flèches qui sautent d'un nombre entier de cartes. Une carte ouvre SA
+section, seule. À la fin de la section, les cartes reviennent, la suivante en
+tête, pour enchaîner sans remonter. Les deux groupes éditoriaux de l'ancien
+sommaire sont conservés tels quels : « La bourse » (01 à 07), « Signal en
+application » (08 à 12).
+
+**Aucune donnée n'est recopiée dans les cartes.** Le numéro, le titre et
+l'image sont LUS dans la section que la carte ouvre. C'est la règle que
+suivait déjà le sommaire mobile, et elle compte double ici : `photos_apprendre`
+réécrit les images et leurs légendes sans rien savoir des cartes, donc une
+seconde liste écrite à la main aurait divergé au premier passage du script.
+Le format des vignettes, lui, est un choix et non une distorsion : la bande
+d'origine est un 16/5 fait pour ouvrir une section sur 850 px de large ; à
+262 px elle deviendrait un filet de 82 px de haut. Le 16/9 rogne les côtés et
+garde le centre, là où le sujet est déjà placé.
+
+**Trois replis, parce qu'une page qui masque son contenu doit savoir le
+rendre.** Sans JavaScript, la page reste le rouleau complet de douze
+sections. Si le script du catalogue ne se charge pas, un filet posé au `load`
+relève le masquage et rend le même rouleau. Une ancre périmée (`#s99`) affiche
+le catalogue, jamais une page blanche. Les liens gardent leur `href="#s5"` :
+le clic milieu, le « copier l'adresse » et le bouton Précédent du navigateur
+fonctionnent sans une ligne de code, et le titre du document suit la section
+ouverte pour que l'historique ne soit pas douze fois « Apprendre, Signal ».
+
+**Le décalage de 262 px disparaît avec la colonne de gauche.** Le contenu
+était centré non pas dans la fenêtre mais dans l'espace situé après le
+sommaire ; le conserver aurait poussé la page de 131 px vers la droite sans
+raison. `signal-toc.js` n'est plus chargé par Apprendre, mais reste intact
+pour portfolio.html, qui garde son sommaire.
+
+Dix vérifications de plus dans `test_chrome.py`, dont celle qui compte : une
+section absente des rails serait injoignable. Le contrôle de syntaxe
+JavaScript, jusque-là limité aux scripts écrits DANS les pages, couvre
+maintenant les fichiers `.js` de la racine — même mode de panne, même filet.
+
 ### Les descriptions des watchlists tenaient de l'étiquette à l'article
 
 Demande du propriétaire (15/08) : « simple, court, clair, explicite ». Les

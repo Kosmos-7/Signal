@@ -536,20 +536,219 @@
   .concept-body, .portfo-body, .advice-body { font-size: 1rem; line-height: 1.75; }
   .brique-body { font-size: 0.95rem; line-height: 1.7; }
 
-  /* Structure « scène » comme la watchlist : le contenu est centré dans l'espace
-situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas collé. */
-  main { max-width: 1060px; }   /* même largeur que le doc de la watchlist */
-  @media (min-width: 1301px) {
-    /* centré dans la scène [262px → bord], exactement comme la watchlist */
-    main { max-width: 1060px; margin-left: calc(262px + (100vw - 1344px) / 2); margin-right: auto; }
-  }
+  /* Largeur de lecture : celle du document de la watchlist.
+     LE DÉCALAGE DE 262 PX A ÉTÉ RETIRÉ AVEC LE SOMMAIRE. Le contenu était
+     centré non pas dans la fenêtre mais dans l'espace situé après la colonne
+     de gauche, parce qu'une colonne de liens occupait cet espace au-dessus de
+     1300 px. Le catalogue de cartes l'a remplacée et ne vit plus dans la
+     gouttière : centrer dans une scène amputée d'un rail qui n'existe plus
+     aurait simplement poussé la page de 131 px vers la droite. */
+  main { max-width: 1060px; margin-left: auto; margin-right: auto; }
   /* la largeur de LIGNE du texte reste lisible (plafonnée comme la watchlist) */
   .section-sub, .scoring-desc, .scoring-note,
   .concept-body, .portfo-body, .advice-body { max-width: 1120px; }
 
   /* Cohérence typo : corps de lecture homogène (1rem partout) */
   .brique-body, .section-sub { font-size: 1rem; line-height: 1.75; }
+
+  /* ════════════════════════════════════════════════════════════
+     CATALOGUE, les douze sections en cartes qui défilent (15/08)
+     ════════════════════════════════════════════════════════════
+     La page n'est plus un rouleau de douze sections avec un sommaire à
+     côté : c'est un catalogue de cartes illustrées, puis UNE section à la
+     fois, puis les cartes à nouveau en bas pour enchaîner. Le comportement
+     et la lecture des cartes vivent dans apprendre-cartes.js ; ici, la
+     forme seulement.
+
+     `jsc` EST POSÉE EN TÊTE DE DOCUMENT, pas à la fin. Sans elle, les douze
+     sections s'affichent le temps que le script arrive en bas de page, et
+     l'on verrait le rouleau entier clignoter avant que le catalogue le
+     remplace. Corollaire : une page sans JavaScript, ou dont le script
+     échoue, n'a jamais cette classe et reste le rouleau complet, lisible. */
+  .jsc .section-block { display: none; }
+  .jsc .section-block.ouvert { display: block; }
+  .jsc .fil, .jsc .suite { display: none; }
+  .jsc.vue-chapitre .fil, .jsc.vue-chapitre .suite { display: block; }
+  .jsc.vue-chapitre .hero, .jsc.vue-chapitre .hub { display: none; }
+
+  /* ── LE RAIL ── */
+  .hub { margin-top: 2.4rem; }
+  .rail { margin-bottom: 2.8rem; }
+  .rail:last-child { margin-bottom: 0; }
+  .rail-h {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px;
+    margin-bottom: 0.9rem;
+  }
+  .rail-k {
+    font: 600 0.62rem var(--mono);
+    letter-spacing: 2px; text-transform: uppercase; color: var(--ac);
+  }
+  .rail-s { font-size: 0.86rem; color: var(--text3); }
+  /* La largeur d'une carte est déclarée ICI, une fois : les flèches en
+     dépendent autant que les cartes, puisqu'elles se calent sur la bande
+     d'image et non sur la hauteur totale du rail, titres compris. */
+  .rail-c { position: relative; --carte-l: min(262px, 68vw); }
+  /* Le rembourrage vertical n'est pas décoratif : la piste défile en x, donc
+     le navigateur y coupe aussi ce qui dépasse en y. Sans ces quelques
+     pixels, le contour d'une carte au clavier serait rogné en haut. */
+  .rail-p {
+    display: flex; gap: 14px;
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    padding: 3px 0 6px;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .rail-p::-webkit-scrollbar { height: 0; width: 0; }
+  .rail-p.prise { scroll-snap-type: none; cursor: grabbing; }
+  .rail-p.prise .carte { pointer-events: none; }
+
+  /* Les deux flèches sont un CONFORT DE SOURIS, pas la seule voie : le doigt
+     glisse, la souris glisse aussi, et la tabulation passe de carte en carte
+     en les faisant défiler d'elle-même. Elles s'effacent donc sur les écrans
+     tactiles, et disparaissent dès qu'il n'y a plus rien à atteindre de ce
+     côté. Le dégradé, lui, est ce qui les rend lisibles par-dessus une photo
+     claire, quelle que soit la photo. */
+  .rail-f {
+    position: absolute; top: 3px; height: calc(var(--carte-l) * 0.5625);
+    width: 46px; z-index: 3;
+    display: flex; align-items: center; justify-content: center;
+    border: 0; padding: 0; cursor: pointer;
+    color: var(--text); font-size: 1.6rem; line-height: 1;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .rail-f[hidden] { display: none; }
+  .rail-g { left: 0;  background: linear-gradient(90deg, rgba(6,6,11,0.92), rgba(6,6,11,0)); }
+  .rail-d { right: 0; background: linear-gradient(270deg, rgba(6,6,11,0.92), rgba(6,6,11,0)); }
+  .rail-f span {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 1px solid var(--border2); background: rgba(10,12,20,0.72);
+    padding-bottom: 3px;
+  }
+  @media (hover: hover) {
+    .rail-c:hover .rail-f, .rail-f:focus-visible { opacity: 1; }
+    .rail-f:hover span { border-color: var(--ac); background: rgba(116,182,223,0.18); }
+  }
+  @media (hover: none) { .rail-f { display: none; } }
+  /* Un rail qui tient déjà en entier n'a ni flèche ni bord à atteindre. */
+  .rail-c.fixe .rail-f { display: none; }
+
+  /* ── LA CARTE ──
+     Format 16/9 alors que la photo source est un 16/5 : c'est un CHOIX de
+     recadrage, pas une distorsion. La bande de 16/5 est faite pour ouvrir
+     une section sur 850 px de large ; à 262 px elle deviendrait un filet de
+     82 px de haut, trop mince pour qu'on y reconnaisse quoi que ce soit. Le
+     16/9 rogne les côtés et garde le centre, là où tools/photos_apprendre.py
+     a déjà placé le sujet en réglant son cadrage vertical. */
+  .carte {
+    flex: 0 0 var(--carte-l);
+    scroll-snap-align: start;
+    display: block; text-decoration: none; color: inherit;
+    -webkit-user-select: none; user-select: none;
+  }
+  .carte-vue {
+    display: block; position: relative; overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--line); border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .carte-vue img {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.78) saturate(0.9);
+    transition: filter 0.25s, transform 0.35s cubic-bezier(0.2,0.8,0.2,1);
+    -webkit-user-drag: none;
+  }
+  /* Le voile du bas n'est pas un ornement : il tient le contraste du badge
+     « À suivre » quelle que soit la photo qui passe dessous. */
+  .carte-vue::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(6,6,11,0) 42%, rgba(6,6,11,0.62) 100%);
+  }
+  .carte-b {
+    position: absolute; left: 10px; bottom: 10px; z-index: 2;
+    font: 600 0.56rem var(--mono); letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--text); background: rgba(116,182,223,0.22);
+    border: 1px solid var(--border2); border-radius: 4px; padding: 2px 7px;
+  }
+  .carte-n {
+    display: block; margin: 0.65rem 0 0.2rem;
+    font: 600 0.62rem var(--mono);
+    letter-spacing: 1.4px; text-transform: uppercase; color: var(--ac);
+  }
+  /* Deux lignes réservées d'office : les titres en font une ou deux, et sans
+     ce plancher les cartes d'une même rangée ne finissaient pas à la même
+     hauteur. Ce n'est pas une coupe, un titre de trois lignes s'affiche en
+     entier. */
+  .carte-t {
+    display: block; font-family: var(--serif); font-size: 1rem;
+    line-height: 1.3; min-height: 2.6em;
+    color: var(--text2); transition: color 0.18s;
+  }
+  .carte:hover .carte-vue { border-color: var(--border2); }
+  .carte:hover .carte-vue img { filter: brightness(1) saturate(1); transform: scale(1.06); }
+  .carte:hover .carte-t { color: var(--text); }
+  .carte:focus-visible { outline: none; }
+  .carte:focus-visible .carte-vue { border-color: var(--ac); box-shadow: 0 0 0 2px var(--ac); }
+  .carte:focus-visible .carte-t { color: var(--text); }
+
+  /* ── FIL DE LECTURE ET FIN DE SECTION ── */
+  .fil {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 1.9rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .fil-r {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 600 0.64rem var(--mono); letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--text2); text-decoration: none;
+    padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 100px;
+    transition: color 0.18s, border-color 0.18s;
+  }
+  .fil-r:hover { color: var(--text); border-color: var(--border2); }
+  .fil-p { font: 0.64rem var(--mono); letter-spacing: 1.4px; color: var(--text3); }
+  /* La section ouverte ne porte plus la marge qui la séparait de la suivante
+     dans le rouleau : il n'y a plus de suivante en dessous, mais un filet et
+     les cartes. Sans ça, 4,2 rem et 3,2 rem s'additionnaient en un trou. */
+  .jsc.vue-chapitre .section-block.ouvert { margin-bottom: 0; }
+  .suite { margin-top: 3.2rem; padding-top: 2.4rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 640px) {
+    /* La rangée touche les deux bords de l'écran : une carte coupée au bord
+       dit « ça glisse » mieux que n'importe quelle flèche, et c'est le seul
+       endroit où la marge de lecture nuit plutôt qu'elle n'aide. */
+    .rail-c { margin-left: -1rem; margin-right: -1rem; }
+    .rail-p { padding-left: 1rem; padding-right: 1rem; scroll-padding-left: 1rem; }
+    .rail-s { display: none; }
+    .fil { margin-bottom: 1.4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carte-vue img { transition: none; }
+    .carte:hover .carte-vue img { transform: none; }
+  }
 </style>
+<!-- POSÉE ICI ET NULLE PART AILLEURS. Cette classe commande tout le masquage
+     du catalogue (voir le bloc CATALOGUE ci-dessus). Écrite en tête de
+     document, elle s'applique avant le premier rendu : sans elle, les douze
+     sections s'afficheraient d'un bloc jusqu'à ce que le script de bas de
+     page les range. Un navigateur sans JavaScript ne l'obtient jamais et lit
+     la page entière, ce qui reste le bon repli. -->
+<script>
+document.documentElement.className += ' jsc';
+/* ET LE FILET SI LE SCRIPT DU BAS N'ARRIVE JAMAIS. Le masquage est posé
+   ici, sa levée l'est là-bas : un apprendre-cartes.js absent du déploiement
+   ou servi en 404 laisserait une page sans ses douze sections ET sans les
+   cartes pour les rouvrir. Au `load`, tout ce qui devait s'exécuter s'est
+   exécuté : si aucune carte n'a été construite, la classe tombe et la page
+   redevient le rouleau complet, lisible. */
+addEventListener('load', function () {
+  if (!document.querySelector('.hub .carte')) {
+    document.documentElement.classList.remove('jsc');
+  }
+});
+</script>
 </head>
 <body>
 
@@ -573,23 +772,6 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
   </nav>
 </header>
 
-<nav class="toc" aria-label="Sommaire">
-  <div class="toc-h">La bourse</div>
-  <a href="#s1"><span class="tn">01</span>Principes</a>
-  <a href="#s2"><span class="tn">02</span>Le marché</a>
-  <a href="#s3"><span class="tn">03</span>Fondamentaux</a>
-  <a href="#s4"><span class="tn">04</span>L'entreprise</a>
-  <a href="#s5"><span class="tn">05</span>Valorisation</a>
-  <a href="#s6"><span class="tn">06</span>Le rythme</a>
-  <a href="#s7"><span class="tn">07</span>Frais et impôts</a>
-  <div class="toc-h">Signal en application</div>
-  <a href="#s8"><span class="tn">08</span>L'algorithme</a>
-  <a href="#s9"><span class="tn">09</span>La fiche action</a>
-  <a href="#s10"><span class="tn">10</span>Portefeuille IA</a>
-  <a href="#s11"><span class="tn">11</span>Méthodologie</a>
-  <a href="#s12"><span class="tn">12</span>Pour aller plus loin</a>
-</nav>
-
 <main>
 
   <!-- HERO -->
@@ -599,12 +781,40 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
       <p class="page-lead">Comment fonctionne un marché, comment se lit une entreprise, et ce qui fait bouger un cours. Expliqué simplement, et sans rien vendre.</p>
     </div>
     <div class="scoring-note" style="margin-top:1.5rem">
-<strong>Par où commencer ?</strong> Les sept premières sections ne parlent pas de Signal : elles expliquent la bourse et les entreprises qui la composent, dans l'ordre où les questions se posent. Si vous débutez, lisez-les à la suite. Si vous cherchez une notion précise, le sommaire reste accessible à tout moment : en colonne sur la gauche, ou dans la barre en haut de l'écran si la place manque.
+<strong>Par où commencer ?</strong> Les sept premières sections ne parlent pas de Signal : elles expliquent la bourse et les entreprises qui la composent, dans l'ordre où les questions se posent. Si vous débutez, prenez-les dans l'ordre des cartes. Si vous cherchez une notion précise, ouvrez directement la sienne : chaque section se lit seule, et les autres reviennent à la fin de celle que vous lisez.
       <br><br>
 <strong>Et Signal dans tout ça ?</strong> Les sections 08 à 12 montrent comment ces idées sont appliquées ici, sur des titres réels et un portefeuille fictif dont les erreurs sont publiées. C'est un cas d'application, pas le sujet : ce que vous apprenez avant reste vrai ailleurs, avec ou sans ce site.
     </div>
     <div class="hero-sep"></div>
   </section>
+
+  <!-- CATALOGUE.
+       Les deux rangées portent les mêmes groupes éditoriaux que l'ancien
+       sommaire, et rien d'autre : ni titre, ni numéro, ni image de section
+       ne sont recopiés ici. apprendre-cartes.js les LIT dans les sections
+       elles-mêmes, ce qui évite qu'une carte et sa section se contredisent
+       après un passage de tools/photos_apprendre.py. Ajouter une section
+       revient donc à l'écrire, puis à poser son ancre dans le rail qui la
+       reçoit. Une ancre oubliée n'est pas perdue : le script range la
+       section dans la dernière rangée plutôt que de la rendre injoignable. -->
+  <div class="hub">
+    <section class="rail" data-sections="s1 s2 s3 s4 s5 s6 s7">
+      <div class="rail-h">
+        <span class="rail-k">La bourse</span>
+        <span class="rail-s">Sept sections qui ne parlent pas de Signal.</span>
+      </div>
+    </section>
+    <section class="rail" data-sections="s8 s9 s10 s11 s12">
+      <div class="rail-h">
+        <span class="rail-k">Signal en application</span>
+        <span class="rail-s">Les mêmes idées, appliquées ici, sur des titres réels.</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Fil de lecture d'une section : le retour au catalogue et la position
+       dans la série. Rempli par le script, invisible sur le catalogue. -->
+  <div class="fil"></div>
 
 <!-- SECTION 1, Les principes d'abord -->
   <section class="section-block" id="s1">
@@ -1834,6 +2044,11 @@ Chaque commit a un message explicite et la performance affichée sur le site est
     </div>
   </section>
 
+  <!-- Fin de section : les cartes reviennent, la suivante en tête, pour
+       enchaîner sans remonter chercher un sommaire. Rempli par le script,
+       invisible sur le catalogue. -->
+  <div class="suite"></div>
+
   <!-- Disclaimer final -->
   <div class="disclaimer">
     Signal est un service éditorial d'information financière. Le contenu de cette page est fourni à titre informatif et pédagogique uniquement. Il ne constitue pas un conseil en investissement au sens de l'AMF (Autorité des marchés financiers), ni une recommandation personnalisée d'achat ou de vente de valeurs mobilières. Toute décision d'investissement relève de la seule responsabilité du lecteur.
@@ -1847,7 +2062,7 @@ Chaque commit a un message explicite et la performance affichée sur le site est
 </footer>
 
 <script src="signal-fx.js"></script>
-<script src="signal-toc.js"></script>
+<script src="apprendre-cartes.js"></script>
 <script>
 /* La taille de l'univers était écrite en dur dans le texte : elle a menti dès
    le premier élargissement (210 annoncés pour 229 réels). Un chiffre qu'on

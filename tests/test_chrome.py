@@ -343,6 +343,49 @@ if py and js:
 # C'est le mode de panne le plus grave possible sur un site statique : total,
 # instantané, et invisible à tout contrôle qui ne fait que lire. Une seule
 # ligne de test le rend impossible — on donne le script à un analyseur.
+# ── 3 quinquies. LE CATALOGUE D'APPRENDRE ──────────────────────────────────
+# Demande du propriétaire (15/08/2026) : le sommaire de sections d'Apprendre
+# devient un catalogue de cartes illustrées, une section à la fois, et les
+# cartes reviennent en fin de section. Trois pannes silencieuses guettent une
+# page de ce genre, et aucune ne se voit en relisant le diff :
+#
+#   · une section qu'aucun rail ne liste devient INJOIGNABLE. Le script la
+#     rattrape en la rangeant dans la dernière rangée, mais elle se retrouve
+#     alors dans le mauvais groupe éditorial, sans que personne le remarque ;
+#   · le masquage des sections est posé par une classe en tête de document et
+#     levé par apprendre-cartes.js : si le fichier disparaît du dépôt, la page
+#     n'a plus ni sections ni cartes. Un filet au `load` la remet à plat, et
+#     ce test vérifie que les deux moitiés du mécanisme sont là ;
+#   · le sommaire partagé (signal-toc.js) reste utilisé par portfolio.html.
+#     Le retirer d'Apprendre ne doit pas le retirer de l'autre page.
+print("\n— Le catalogue de cartes d'Apprendre tient-il ? —")
+_AP = SRC["apprendre.html"]
+check("apprendre.html : plus de sommaire de sections",
+      'class="toc"' not in _AP and "signal-toc.js" not in _AP)
+check("portfolio.html : le sommaire partagé, lui, est intact",
+      'class="toc"' in SRC["portfolio.html"]
+      and "signal-toc.js" in SRC["portfolio.html"])
+check("apprendre.html : le script du catalogue est chargé",
+      "apprendre-cartes.js" in _AP
+      and os.path.exists(os.path.join(RACINE, "apprendre-cartes.js")))
+for _bloc in ('<div class="hub">', '<div class="fil">', '<div class="suite">'):
+    check(f"apprendre.html : le conteneur {_bloc} existe", _bloc in _AP)
+# La classe DOIT être posée avant le corps : après, les douze sections
+# s'afficheraient d'un bloc le temps que le script arrive.
+_pose = _AP.find("className += ' jsc'")
+check("apprendre.html : le masquage est posé avant <body>",
+      0 < _pose < _AP.find("<body>"), f"position : {_pose}")
+check("apprendre.html : et relevé si le catalogue ne se construit pas",
+      "classList.remove('jsc')" in _AP)
+_ancres = re.findall(r'<section class="section-block" id="(s\d+)">', _AP)
+_rails = re.findall(r'data-sections="([^"]+)"', _AP)
+_listees = " ".join(_rails).split()
+check("apprendre.html : les 12 sections sont dans un rail",
+      sorted(_ancres) == sorted(_listees),
+      f"sections={_ancres} rails={_listees}")
+check("apprendre.html : aucune section listée deux fois",
+      len(_listees) == len(set(_listees)), str(_listees))
+
 print("\n— Les scripts inline se parsent-ils ? —")
 try:
     import subprocess, tempfile                                    # noqa: E402
@@ -369,6 +412,20 @@ try:
                 mauvais.append(f"bloc {i} : " + " / ".join(premiere))
         check(f"{page} — {len(blocs)} bloc(s) de script se parsent",
               not mauvais, " ;; ".join(mauvais)[:400])
+
+    # ET LES SCRIPTS EXTERNES, POUR LA MÊME RAISON. Le contrôle ci-dessus ne
+    # regardait que le code écrit DANS les pages, alors que le chrome partagé,
+    # le sommaire et, depuis le 15/08, le catalogue de cartes d'Apprendre
+    # vivent dans des fichiers .js à la racine. Une erreur de syntaxe y a
+    # exactement la même conséquence qu'en ligne : le fichier entier ne se
+    # parse pas, et la page rend sans lui. Pour apprendre-cartes.js, « sans
+    # lui » voulait dire douze sections masquées et rien pour les rouvrir,
+    # jusqu'à ce que le repli du fichier remette la page à plat.
+    for _js in sorted(f for f in os.listdir(RACINE) if f.endswith(".js")):
+        r = subprocess.run(["node", "--check", os.path.join(RACINE, _js)],
+                           capture_output=True, text=True)
+        check(f"{_js} se parse", r.returncode == 0,
+              " / ".join([l for l in r.stderr.splitlines() if l.strip()][:3])[:300])
 except (OSError, subprocess.SubprocessError) as _e:
     print(f"  \u26a0\ufe0f  syntaxe JS non vérifiée (node indisponible : {type(_e).__name__})")
 
