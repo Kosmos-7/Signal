@@ -120,6 +120,12 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   @media(max-width:900px){.d-illu img{max-height:none}}
   .d-tag{font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
   .d-reg{font:600 .6rem var(--mono);letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:4px;padding:4px 9px}
+  /* Badge MAJ de la fiche. Caché tant que le payload graphique n'est pas là :
+     la date vient de t_last (dernier cours DU titre), pas d'une date de run
+     globale — un titre aux données en retard montre SA date. Une pastille
+     vide afficherait son cadre : .on ne s'ajoute qu'une fois le texte posé. */
+  .d-maj{display:none}
+  .d-maj.on{display:inline-block;font:600 .6rem var(--mono);letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:4px;padding:4px 9px;white-space:nowrap}
 
   .resume{font-size:1.04rem;line-height:1.75;color:var(--text);font-weight:400;max-width:1040px}.resume + .resume{margin-top:.75rem}
 
@@ -293,8 +299,6 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
   .home-t{font-family:var(--serif);font-size:2.7rem;line-height:1.15;letter-spacing:-1.2px;max-width:940px}
   @media(max-width:700px){.home-t{font-size:1.9rem}}
   .home-lead{font-size:1rem;color:var(--text2);line-height:1.7;margin-top:.7rem;max-width:660px}
-  .home-meta{font:.66rem var(--mono);color:var(--text3);letter-spacing:.6px;margin-top:.9rem;text-transform:uppercase}
-  .home-meta b{color:var(--text2);font-weight:600}
 
   /* Une carte par ligne : à quatre par ligne, le texte devenait illisible et
      l'œil se perdait. On préfère scroller sur des cartes larges et respirées. */
@@ -845,10 +849,11 @@ function showHome(){
   const doc=document.getElementById('doc');doc.classList.remove('on');
   const m=mainMeta();
   const others=U.themes.filter(t=>t&&t.id&&t.id!==MAIN);
-  // Volontairement sobre : la date et la semaine situent la fraîcheur des
-  // données, le décompte de titres scorés relevait du tableau de bord interne.
-  const meta=[U.updated_at?'Mise à jour '+sv(U.updated_at):'',U.week?sv(U.week):''
-  ].filter(Boolean).join(' · ');
+  // PLUS DE LIGNE DE FRAÎCHEUR GLOBALE ICI (demande du propriétaire, 15/08) :
+  // « Mise à jour <date> · Sem. N » parlait du produit, pas au lecteur, et une
+  // date unique mentait pour les titres dont les données n'ont pas suivi le
+  // run. La fraîcheur se lit désormais fiche par fiche — badge MAJ décodé du
+  // dernier cours du titre (t_last), dans buildChart.
   /* PLUS DE DESCRIPTION DE LA MÉTHODE ICI (décision du propriétaire, 08/08 :
      « ce texte n'est pas utile ici »). Combien de sociétés sont notées, sur
      quels continents, et selon quels critères : c'est le sujet d'Apprendre,
@@ -877,8 +882,7 @@ function showHome(){
     ?U.universe_scored+' sociétés notées, '+nbl+' listes thématiques : identifiez les opportunités qui vous ressemblent.'
     :'Identifiez les opportunités qui vous ressemblent.';
   doc.innerHTML='<div class="home-h"><div class="home-t">Gagnez du temps, identifiez de nouvelles opportunités.</div>'+
-    '<p class="home-lead">'+lead+'</p>'+
-    (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
+    '<p class="home-lead">'+lead+'</p>'+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
   const st=document.querySelector('.stage');if(st)st.scrollTop=0;
@@ -990,6 +994,16 @@ function buildChart(s){
   const tk=s.ticker;
   if(!(tk in CH))host.innerHTML='<div class="chx-load">Chargement du graphique…</div>';
   loadChart(tk).then(d=>{ if(sel&&sel.ticker!==tk)return;
+    // Badge MAJ : décodé du dernier point de cours (t_last, mois flottant
+    // année*12 + mois 0-based + (jour-1)/31 — l'inverse exact de
+    // screener._mois, arrondi 2 déc. ≈ 9 h de résolution, le jour est sûr).
+    if(d&&isFinite(d.t_last)){
+      const el=document.getElementById('dmaj');
+      if(el){const y=Math.floor(d.t_last/12),f=d.t_last-y*12,mo=Math.floor(f),
+        dj=Math.min(31,Math.round((f-mo)*31)+1);
+        el.textContent='MAJ '+y+'-'+String(mo+1).padStart(2,'0')+'-'+String(dj).padStart(2,'0');
+        el.classList.add('on');}
+    }
     // Le fichier charts/<TICKER>.json embarque le breakdown COMPLET du scoring
     // depuis le run d'août 2026. Pour un titre hors top 30 (breakdown compact
     // fabriqué depuis universe.json), on promeut la fiche au niveau du top 30
@@ -2243,7 +2257,7 @@ function render(s){const b=s.breakdown||{},a=A[s.ticker],doc=document.getElement
        au-dessus dans la foulée — le propriétaire préfère y entrer par
        l'image. */
     illuSociete(s.ticker)+
-    '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'</div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
+    '<div class="d-head"><div><div class="d-tk">'+sv(s.ticker)+'</div><div class="d-nm">'+sv(b.nom_complet||s.name)+' · '+sv(s.sector)+'</div><div class="d-tagrow"><span class="d-tag">'+stateTag(b)+'</span><span class="d-reg">'+region(s)+'</span>'+movTag(s)+'<span class="d-maj" id="dmaj"></span></div>'+(tt?'<div class="d-themes">'+tt+'</div>':'')+'</div>'+
     /* LA DÉCOMPOSITION EST DANS L'EN-TÊTE, entre l'identité et l'anneau
        (décision du propriétaire, 07/08, croquis à l'appui). C'est sa place
        logique : elle est la ventilation du nombre affiché juste à sa droite,

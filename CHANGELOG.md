@@ -5,6 +5,18 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### La fraîcheur se lit sur la fiche, plus en tête de page
+
+La ligne « Mise à jour <date> · Sem. N » quitte l'accueil (demande du
+propriétaire, 15/08) : elle parlait du produit, pas au lecteur, et une date
+unique mentait pour les titres dont les données n'ont pas suivi le run.
+
+À la place, chaque fiche porte son badge **MAJ** dans la rangée de pastilles,
+décodé du dernier cours DU titre — `t_last`, le mois flottant du payload
+graphique, dont le décodage JS est l'inverse exact de `screener._mois`. Un
+titre aux données en retard montre SA date, pas celle du run. Sans payload
+graphique, pas de badge : jamais de cadre vide.
+
 ### L'accueil et les listes parlent au lecteur, chiffres à l'appui
 
 Passe éditoriale du propriétaire (15/08), copie fournie mot pour mot. Le
