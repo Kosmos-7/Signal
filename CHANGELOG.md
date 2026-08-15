@@ -5,6 +5,29 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Les descriptions des watchlists tenaient de l'étiquette à l'article
+
+Demande du propriétaire (15/08) : « simple, court, clair, explicite ». Les
+thèses avaient dérivé de **101 à 387 signes**, du simple au quadruple. Sur la
+page d'accueil, six cartes côte à côte donnaient six formats de paragraphe :
+la plus longue se lisait comme un article quand la plus courte se lisait comme
+une étiquette.
+
+Elles tiennent désormais toutes **entre 142 et 161 signes**, dans une bande de
+120 à 175 que `test_themes` contrôle, descripteur du top 30 compris — celui-là
+vit dans `index.html` et pas dans `themes.py`, et c'est exactement le genre de
+texte qu'on oublie d'harmoniser parce qu'il est ailleurs. La forme ne change
+pas : une question, une réponse courte, et le pari en fin de phrase.
+
+Ce n'est pas de la place perdue. Le détail retiré vit dans `inversion` et
+`biais`, qui s'ouvrent sur la page du thème ; la carte n'a jamais eu à porter
+l'argumentaire complet.
+
+**Effet de bord bienvenu** : des thèses de même longueur donnent des cartes de
+même hauteur *naturelle*. L'égalisation de rangées posée le matin même n'a plus
+rien à rattraper, la carte passe de 255 à 212 pixels, et le mobile devient
+uniforme à son tour, sans blanc à combler.
+
 ### SpaceX entre dans la watchlist NewSpace, avec une note incomplète et dite
 
 Décision du propriétaire (15/08), maintenue après avoir été informé de ce

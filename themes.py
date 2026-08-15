@@ -81,6 +81,16 @@
 # elle qui répond « est-ce moi ? », pas la description du périmètre.
 # Et le site vouvoie, partout : le « ton courtier » du PEA était une coquille.
 #
+# LONGUEUR — DEUX PHRASES, PAS PLUS (15/08 : « simple, court, clair,
+# explicite »). Les thèses avaient dérivé de 101 à 387 signes, du simple au
+# quadruple : sur la page d'accueil, six cartes côte à côte donnaient six
+# formats de paragraphe, et la plus longue se lisait comme un article quand la
+# plus courte se lisait comme une étiquette. Elles tiennent désormais toutes
+# entre 120 et 175 signes, contrôlé par test_themes. Ce n'est pas de la place
+# perdue : le détail vit dans `inversion` et `biais`, qui s'ouvrent sur la page
+# du thème. La règle vaut aussi pour le descripteur de repli du top 30, écrit
+# dans index.html parce qu'il ne vient pas d'ici.
+#
 # PONCTUATION — PAS DE TIRET CADRATIN (15/08). La règle existait déjà, mais
 # seulement pour l'IA : generate_analyses.py l'interdit dans le prompt des
 # fiches (« la signature la plus reconnaissable d'un texte de machine »), et
@@ -350,9 +360,7 @@ THEMES_CURES = [
         "sous_titre": "Les sociétés dont c'est le seul métier",
         "kind": "these",
         "thesis": (
-            "À quoi ressemble un secteur qui n'a pas encore de client ? À cette "
-            "liste : les sociétés cotées dont l'informatique quantique est le "
-            "métier, et rien d'autre. Aucune n'est rentable, et c'est le sujet."
+            "À quoi ressemble un secteur sans client ? À cette liste : les sociétés dont le quantique est le seul métier. Aucune n'est rentable, et c'est le sujet."
         ),
         "inversion": (
             "La correction d'erreurs ne descend pas assez vite en coût : il faut toujours "
@@ -415,10 +423,7 @@ THEMES_CURES = [
         "sous_titre": "Les comptes qui bougent quand le nombre de robots bouge",
         "kind": "these",
         "thesis": (
-            "Qui encaisse si les robots se multiplient ? Pas d'abord ceux qui les "
-            "assemblent. Un bras d'usine et un humanoïde partagent les mêmes "
-            "articulations, et ces pièces-là sortent d'une poignée d'ateliers. "
-            "Le pari des pièces communes, pas celui du robot vedette."
+            "Qui encaisse si les robots se multiplient ? Pas ceux qui les assemblent, mais la poignée d'ateliers qui fournit leurs articulations. Le pari des pièces communes."
         ),
         "inversion": (
             "Deux façons d'avoir tort, et elles sont opposées. Que l'humanoïde reste une "
@@ -575,12 +580,7 @@ THEMES_CURES = [
         "sous_titre": "La génération née après 2000, et elle seule",
         "kind": "these",
         "thesis": (
-            "Qu'achète-t-on quand on achète le NewSpace ? Pas le spatial, mais la "
-            "génération de sociétés apparue au milieu des années 2000 (procédés, "
-            "débouchés et financements nouveaux), qui a fait tomber le coût du kilo "
-            "en orbite et vend des abonnements là où les agences signaient des "
-            "contrats. De l'accès à l'orbite à la station, la liste suit cette "
-            "génération, pas les maisons qui la précédaient."
+            "Qu'achète-t-on quand on achète le NewSpace ? Pas le spatial, mais la génération née après 2000, celle qui a fait tomber le coût du kilo en orbite."
         ),
         "inversion": (
             "Le NewSpace a une dépendance dont ses carnets de commandes ne disent rien : il "
@@ -951,10 +951,7 @@ THEMES_CURES.append({
     # publiés. Un texte qui cite des noms et des nombres devient faux tout seul,
     # la semaine suivante, sans que personne ne touche à rien.
     "thesis": (
-        "Que peut-on loger dans un PEA, l'enveloppe qui efface l'impôt sur le "
-        "revenu après cinq ans ? Bien plus que des actions françaises : jusqu'à "
-        "des valeurs cotées à New York. Les vingt meilleurs scores réellement "
-        "éligibles."
+        "Que loger dans un PEA, qui efface l'impôt sur le revenu après cinq ans ? Bien plus que des actions françaises : les vingt meilleurs scores éligibles."
     ),
     # Une contrainte fiscale ne s'invalide pas comme une thèse : ce qui la
     # périme, c'est un changement de droit ou de domicile, pas un retournement
