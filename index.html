@@ -305,7 +305,18 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
 
   /* Une carte par ligne : à quatre par ligne, le texte devenait illisible et
      l'œil se perdait. On préfère scroller sur des cartes larges et respirées. */
-  .tgrid{display:flex;flex-direction:column;gap:.85rem;margin:1.6rem 0 .4rem}
+  /* UNE SEULE HAUTEUR POUR TOUTES LES CARTES (demande du propriétaire, 15/08 :
+     « la taille des images change en fonction de la longueur du texte »).
+     C'était exact et mesuré : 189 px de haut pour l'image du top 30, 253 px
+     pour celle du NewSpace, dont la thèse fait quatre fois plus de signes.
+     L'image est une colonne de flex étirée sur la hauteur de sa carte, et
+     cette hauteur suivait le texte d'à côté.
+     `grid-auto-rows:1fr` égalise les rangées sur la plus haute : toutes les
+     cartes adoptent la même hauteur, donc toutes les images la même taille.
+     Aucune thèse n'est tronquée — la règle « la thèse s'affiche EN ENTIER »
+     tient toujours — et aucune hauteur n'est écrite en dur : une liste dont
+     le texte s'allonge repousse la rangée pour tout le monde. */
+  .tgrid{display:grid;grid-auto-rows:1fr;gap:.85rem;margin:1.6rem 0 .4rem}
   .tcard{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);overflow:hidden;text-decoration:none;color:inherit;transition:border-color .2s,background .2s,transform .2s}
   .tcard:hover,.tcard:focus-visible{border-color:rgba(116,182,223,.42);background:rgba(255,255,255,.04);transform:translateY(-2px);outline:none}
   .tc-img{position:relative;flex:0 0 auto;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;
@@ -330,10 +341,15 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
 /* La thèse s'affiche EN ENTIER sur la carte, elle est le contenu, pas un
      teaser. Les cartes ont des hauteurs différentes, et c'est très bien. */
   .tc-th{font-size:.855rem;line-height:1.55;color:var(--text2)}
-  .tc-top{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:.35rem}
+  /* Les cartes ayant toutes la même hauteur, les plus courtes ont du mou. Le
+     `margin-top:auto` était porté par les pastilles : le vide s'ouvrait alors
+     EN PLEIN MILIEU de la carte, entre la thèse et elles. Il passe au pied de
+     carte, qui reste seul épinglé en bas : le contenu se lit d'un bloc, et le
+     blanc se range là où on l'attend, juste au-dessus du filet. */
+  .tc-top{display:flex;flex-wrap:wrap;gap:5px;padding-top:.35rem}
   .tc-chip{font:.62rem var(--mono);color:var(--text3);border:1px solid var(--line);border-radius:3px;padding:2px 6px;letter-spacing:.3px;white-space:nowrap}
   .tc-chip b{color:var(--text2);font-weight:700;margin-left:5px}
-  .tc-f{display:flex;justify-content:space-between;align-items:center;gap:8px;font:.6rem var(--mono);color:var(--text3);letter-spacing:1px;text-transform:uppercase;border-top:1px solid var(--line);padding-top:.55rem}
+  .tc-f{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;font:.6rem var(--mono);color:var(--text3);letter-spacing:1px;text-transform:uppercase;border-top:1px solid var(--line);padding-top:.55rem}
   .tc-go{color:var(--text3);transition:color .2s}.tcard:hover .tc-go{color:var(--ac)}
 
   /* Toutes les cartes adoptent la mise en page horizontale : image à gauche,
@@ -415,8 +431,10 @@ son contenu, son intitulé et son étiquette PRINCIPALE, plutôt que par un
   /* repli mobile : rail + stage repassent en flux vertical */
   @media(max-width:900px){
     body.v-home .stage{left:auto}
-    .home-t{font-size:2.05rem}
-    .tgrid{gap:.85rem;margin-top:1.3rem}
+    /* Sous 900 px l'image passe AU-DESSUS du texte en 16/9 pleine largeur :
+       elle est donc déjà identique d'une carte à l'autre, et égaliser les
+       hauteurs n'ajouterait que du vide sous les thèses courtes. */
+    .tgrid{gap:.85rem;margin-top:1.3rem;grid-auto-rows:auto}
     /* sous 900 px la mise en page horizontale ne tient plus : image au-dessus */
     .tcard{flex-direction:column}
     .tc-img{width:auto;max-width:none;aspect-ratio:16/9;min-height:0;border-right:0;border-bottom:1px solid var(--line)}
