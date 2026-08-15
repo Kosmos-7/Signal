@@ -244,6 +244,33 @@ check("index.html : le dégagement mobile suit les DEUX hauteurs d'en-tête",
 check("et le resserrage de l'en-tête est bien à 700 px dans la feuille partagée",
       re.search(r"@media\(max-width:700px\)\{\s*header\{padding:", CSS) is not None)
 
+# ── 3 ter. LE SITE VOUVOIE, PARTOUT ────────────────────────────────────────
+# Décision du propriétaire (15/08/2026). L'accueil disait « les opportunités
+# qui vous ressemblent » pendant qu'Apprendre tutoyait sur trente-neuf
+# passages — deux voix pour un seul site, et personne ne l'avait vu parce que
+# ça ne se remarque qu'en passant d'un onglet à l'autre. Trente-neuf tournures
+# ont été reprises ; ce test empêche la quarantième.
+#
+# DEUX EXCEPTIONS LÉGITIMES, et elles sont nommées plutôt que devinées :
+# le `ton:` d'index.html est une CLÉ JavaScript (le palier de lecture d'un
+# score), et portfolio.html CITE mot pour mot le prompt envoyé à l'IA dans sa
+# section Transparence — le corriger falsifierait la citation. Les prompts
+# eux-mêmes (generate_analyses.py, portfolio_agent.py) tutoient le modèle et
+# non le lecteur : ils ne sont pas dans le périmètre.
+print("\n— Le site vouvoie-t-il partout ? —")
+_EXCEPTIONS = [
+    "ton:'bas'", "ton:'moyen'", "ton:'haut'", "p.ton",          # clés JS
+    "Historique de tes décisions",                              # prompt cité
+    "Évite de racheter un titre que tu viens de vendre",        # prompt cité
+]
+_TU = re.compile(r"(?<![\w'’-])(tu|ton|ta|tes|toi)(?![\w'’-])", re.I)
+for p in PAGES:
+    texte = SRC[p]
+    for exc in _EXCEPTIONS:
+        texte = texte.replace(exc, "")
+    trouve = [m.group(0) for m in _TU.finditer(texte)]
+    check(f"{p} : aucun tutoiement", not trouve, str(sorted(set(trouve))))
+
 # ── 4. LE PIED DE PAGE DIT LA MÊME CHOSE ───────────────────────────────────
 print("\n— Le pied de page est-il le même texte partout ? —")
 legals = {re.search(r'class="footer-legal">(.*?)</div>', SRC[p], re.S).group(1).strip()
