@@ -5,6 +5,20 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### L'accueil se centre et va droit au but
+
+Dernière passe de copie du propriétaire (15/08) : **« Identifiez votre
+prochain investissement »** en titre, et en sous-titre les livrables — « Des
+listes déjà filtrées, des fiches actions détaillées, tout ce dont vous avez
+besoin pour identifier simplement votre prochain investissement. » Un seul
+mot ajouté à la dictée : le « pour » de « besoin pour identifier », requis
+par la grammaire. Les chiffres dynamiques de la passe précédente (« 286
+sociétés notées, 6 listes ») sortent avec elle.
+
+Le bloc se centre — titre et sous-titre seulement : les cartes restent
+alignées à gauche, et le centrage vit sur `.home-t`/`.home-lead` plutôt que
+sur `.home-h`, dont test_chrome vérifie le littéral du rembourrage.
+
 ### La fraîcheur se lit sur la fiche, plus en tête de page
 
 La ligne « Mise à jour <date> · Sem. N » quitte l'accueil (demande du

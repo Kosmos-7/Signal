@@ -296,9 +296,13 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
      équilibrés au lieu de la laisser filer sur toute la scène. Et il descend
      d'un cran sous 700 px — un mot seul tenait à 2.7rem sur mobile, une
      phrase n'y tient plus. */
-  .home-t{font-family:var(--serif);font-size:2.7rem;line-height:1.15;letter-spacing:-1.2px;max-width:940px}
+  /* Bloc d'en-tête CENTRÉ (demande du propriétaire, 15/08). Le centrage vit
+     sur le titre et le sous-titre, pas sur .home-h : test_chrome vérifie le
+     littéral `.home-h{padding:1.875rem 0 0}` et les cartes en dessous
+     restent, elles, alignées à gauche. */
+  .home-t{font-family:var(--serif);font-size:2.7rem;line-height:1.15;letter-spacing:-1.2px;max-width:940px;margin:0 auto;text-align:center}
   @media(max-width:700px){.home-t{font-size:1.9rem}}
-  .home-lead{font-size:1rem;color:var(--text2);line-height:1.7;margin-top:.7rem;max-width:660px}
+  .home-lead{font-size:1rem;color:var(--text2);line-height:1.7;margin:.7rem auto 0;max-width:720px;text-align:center}
 
   /* Une carte par ligne : à quatre par ligne, le texte devenait illisible et
      l'œil se perdait. On préfère scroller sur des cartes larges et respirées. */
@@ -862,27 +866,18 @@ function showHome(){
      s'adresse au lecteur au lieu de parler du produit.
      Le décompte de l'univers disparaît avec la phrase : il n'était lu que là,
      et un nombre sans phrase pour le porter n'a nulle part où aller.
-     Seconde passe du propriétaire le 15/08, copie fournie mot pour mot : le
-     TITRE lui-même porte la promesse (« Gagnez du temps, identifiez de
-     nouvelles opportunités. ») et le sous-titre dit ce qu'on trouve — des
-     listes d'actions thématiques — et pour qui : des opportunités qui vous
-     ressemblent. « Watchlists » reste le nom de l'onglet dans la nav et dans
+     Titre et sous-titre sont la copie du propriétaire (15/08, plusieurs
+     passes dans la journée — l'historique détaillé est au CHANGELOG). État
+     retenu : le titre nomme le geste, le sous-titre les livrables (listes
+     déjà filtrées, fiches détaillées), et le bloc est CENTRÉ — décision du
+     même jour. Les chiffres dynamiques de la passe précédente (« 286
+     sociétés notées, 6 listes ») sortent avec elle. Un seul mot ajouté à la
+     dictée : le « pour » de « besoin pour identifier », requis par la
+     grammaire. « Watchlists » reste le nom de l'onglet dans la nav et dans
      le fil d'Ariane ; le titre de la page, lui, parle au lecteur. Toujours
-     « opportunité », jamais de promesse de performance : service éditorial.
-     Troisième passe (15/08, toujours la copie du propriétaire) : les chiffres
-     REVIENNENT sur l'accueil — retirés le 08/08 parce qu'« un nombre sans
-     phrase pour le porter n'a nulle part où aller », ils ont désormais leur
-     phrase : c'est la baseline elle-même qui les porte, comme preuve. Jamais
-     écrits en dur : l'univers tourne et des listes entrent et sortent chaque
-     semaine, un « 286 » figé serait faux dès le prochain run. Sans
-     universe.json, la phrase retombe sur sa version sans chiffres, comme le
-     reste de la page. */
-  const nbl=others.length+1;   // les thématiques + le top 30
-  const lead=(U.universe_scored&&others.length)
-    ?U.universe_scored+' sociétés notées, '+nbl+' listes thématiques : identifiez les opportunités qui vous ressemblent.'
-    :'Identifiez les opportunités qui vous ressemblent.';
-  doc.innerHTML='<div class="home-h"><div class="home-t">Gagnez du temps, identifiez de nouvelles opportunités.</div>'+
-    '<p class="home-lead">'+lead+'</p>'+'</div>'+
+     aucune promesse de performance : service éditorial. */
+  doc.innerHTML='<div class="home-h"><div class="home-t">Identifiez votre prochain investissement</div>'+
+    '<p class="home-lead">Des listes déjà filtrées, des fiches actions détaillées, tout ce dont vous avez besoin pour identifier simplement votre prochain investissement.</p>'+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
   const st=document.querySelector('.stage');if(st)st.scrollTop=0;
