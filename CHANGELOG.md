@@ -5,6 +5,35 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le logo rejoint la constellation, et la page Watchlists dit enfin pourquoi on vient
+
+Demande du propriétaire (15/08) : tester, à la place de la sparkline verte,
+**un point bleu qui clignote** — en écho au fond en constellation et au point
+qui bat à côté du score des fiches. Plus dynamique, et fidèle à l'idée du
+site : relier les points jusqu'à son prochain investissement.
+
+**Le logo est désormais le nœud le plus brillant de la constellation.** Mêmes
+deux disques que les nœuds du fond (noyau net + halo diffus), même accent
+`--ac` que le point du score. Seul le noyau clignote, sur la keyframe `blink`
+partagée — même tempo que le point du score, donc le même battement partout.
+Le halo reste allumé : un logo qui s'éteindrait à 25 % toutes les 1,5 s
+fatiguerait l'œil dans un en-tête permanent. Le favicon suit avec sa propre
+géométrie (noyau et halo plus larges) : à 16 px dans un onglet, les
+proportions du header donnaient un point trop discret.
+
+Le vert `#22d98a` disparaît du chrome mais reste où il est légitime : le P&L
+factuel (`.pos`) et les schémas pédagogiques d'Apprendre. Et
+`prefers-reduced-motion` coupe désormais les animations décoratives du CSS
+(point de marque, point du score, lueur de l'anneau, curseur machine à
+écrire) — le canvas de fond faisait déjà sa propre coupure.
+
+**La pitch de l'accueil devient un geste.** « En recherche d'opportunités
+d'investissement, ou simplement d'inspiration ? » posait une question molle ;
+la page répond maintenant : **« Reliez les points jusqu'à votre prochaine
+opportunité. »** Directe, adressée au lecteur, elle nomme le fil visuel du
+site et se termine sur ce qu'on vient y chercher. « Opportunité » et jamais
+« rentable » : service éditorial, aucune promesse de performance.
+
 ### Un cinquième onglet a vécu quelques heures, et c'est l'historique qui le garde
 
 Le jeu de simulation « La Maison » (#5), fusionné et déployé le 12/08 au soir,
