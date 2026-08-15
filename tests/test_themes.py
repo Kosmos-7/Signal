@@ -346,6 +346,26 @@ for t in themes.THEMES:
             fautifs.append(f"{t['id']}→{tk}")
 check("aucune description ne cite un ticker de sa propre liste", not fautifs, str(fautifs))
 
+# LES THÈSES ONT LA MÊME LONGUEUR, à une phrase près (15/08/2026). Elles
+# avaient dérivé de 101 à 387 signes : sur la page d'accueil, six cartes côte à
+# côte donnaient six formats de paragraphe. Le contrôle porte sur une BANDE et
+# non sur un nombre exact — on harmonise une lecture, on ne compte pas des
+# caractères. Le détail retiré n'est pas perdu : il vit dans `inversion` et
+# `biais`, qui s'ouvrent sur la page du thème.
+_MIN, _MAX = 120, 175
+_hors = [f"{t['id']} {len(t['thesis'])}" for t in themes.THEMES
+         if not (_MIN <= len(t["thesis"]) <= _MAX)]
+check(f"toutes les thèses tiennent entre {_MIN} et {_MAX} signes",
+      not _hors, str(_hors))
+# ... y compris celle du top 30, qui n'est pas dans ce fichier : son descripteur
+# de repli est écrit dans index.html, et c'est justement le genre de texte qu'on
+# oublie d'harmoniser parce qu'il vit ailleurs.
+_ix = open(os.path.join(RACINE, "index.html"), encoding="utf-8").read()
+_m30 = re.search(r'thesis:"([^"]+)"', _ix)
+check("la thèse du top 30 est dans la même bande",
+      _m30 is not None and _MIN <= len(_m30.group(1)) <= _MAX,
+      f"{len(_m30.group(1)) if _m30 else 'introuvable'} signes")
+
 print("\n— Univers dérivé —")
 u = set(themes.univers_thematique())
 check("les titres recalés par la validation sont absents",
