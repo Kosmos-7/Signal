@@ -5,6 +5,34 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### L'accueil et les listes parlent au lecteur, chiffres à l'appui
+
+Passe éditoriale du propriétaire (15/08), copie fournie mot pour mot. Le
+titre de l'accueil porte désormais la promesse — **« Gagnez du temps,
+identifiez de nouvelles opportunités. »** — et la baseline la prouve :
+**« 286 sociétés notées, 6 listes thématiques : identifiez les opportunités
+qui vous ressemblent. »** Les deux nombres sont calculés au rendu depuis
+`universe.json`, jamais écrits en dur : les chiffres retirés de l'accueil le
+08/08 (« un nombre sans phrase pour le porter n'a nulle part où aller »)
+reviennent AVEC leur phrase. Sans `universe.json`, repli sans chiffres.
+« Watchlist principale » devient **« Notre top 30 »** — sans point final, le
+libellé servant aussi en capitales dans le rail et le fil d'Ariane.
+
+**La doctrine de description gagne une règle** : la thèse se ferme sur le
+pari. La dernière phrase dit à quoi l'on s'expose en entrant — c'est elle qui
+répond « est-ce moi ? », pas la description du périmètre. Robots l'applique
+(« Le pari des pièces communes, pas celui du robot vedette. ») ; le NewSpace
+resserre quatre phrases en deux et se termine sur la génération plutôt que
+sur le périmètre ; le top 30 perd sa redondance (« toutes catégories
+confondues, sans présupposé de secteur ») pour « tous secteurs confondus,
+renouvelés chaque semaine ». Le sous-titre de Robots perd son ambiguïté
+(« Ceux dont les comptes bougent » laissait croire aux comptes des robots),
+et le biais du PEA cesse de tutoyer — le site vouvoie, partout.
+
+Les champs texte d'`universe.json` sont synchronisés dans le même commit,
+octet pour octet depuis `themes.py` : la prod n'attend pas le run
+hebdomadaire pour afficher les nouveaux textes.
+
 ### Le logo rejoint la constellation, et la page Watchlists dit enfin pourquoi on vient
 
 Demande du propriétaire (15/08) : tester, à la place de la sparkline verte,
