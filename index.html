@@ -284,7 +284,14 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
      Toucher au `top` de .stage aurait déplacé AUSSI les vues thématiques et les
      fiches, qui partagent ce conteneur ; .home-h ne sert qu'à l'accueil. */
   .home-h{padding:1.875rem 0 0}
-  .home-t{font-family:var(--serif);font-size:2.7rem;line-height:1;letter-spacing:-1.2px}
+  /* Le titre est une PHRASE depuis le 15/08 (« Gagnez du temps… »), plus un
+     mot seul : il peut passer sur deux lignes. line-height:1 collait les
+     lignes entre elles ; le max-width fait plier la phrase en deux segments
+     équilibrés au lieu de la laisser filer sur toute la scène. Et il descend
+     d'un cran sous 700 px — un mot seul tenait à 2.7rem sur mobile, une
+     phrase n'y tient plus. */
+  .home-t{font-family:var(--serif);font-size:2.7rem;line-height:1.15;letter-spacing:-1.2px;max-width:940px}
+  @media(max-width:700px){.home-t{font-size:1.9rem}}
   .home-lead{font-size:1rem;color:var(--text2);line-height:1.7;margin-top:.7rem;max-width:660px}
   .home-meta{font:.66rem var(--mono);color:var(--text3);letter-spacing:.6px;margin-top:.9rem;text-transform:uppercase}
   .home-meta b{color:var(--text2);font-weight:600}
@@ -847,14 +854,15 @@ function showHome(){
      s'adresse au lecteur au lieu de parler du produit.
      Le décompte de l'univers disparaît avec la phrase : il n'était lu que là,
      et un nombre sans phrase pour le porter n'a nulle part où aller.
-     Reformulée le 15/08 (« plus direct, plus orienté valeur ») : la question
-     molle devient un geste. Relier les points, c'est ce que le site montre
-     déjà partout — la constellation du fond, le point du logo, celui qui bat
-     à côté du score — et la phrase se termine sur ce que le lecteur vient
-     chercher. « Opportunité », jamais « investissement rentable » : service
-     éditorial, aucune promesse de performance. */
-  doc.innerHTML='<div class="home-h"><div class="home-t">Watchlists</div>'+
-    '<p class="home-lead">Reliez les points jusqu\'à votre prochaine opportunité.</p>'+
+     Seconde passe du propriétaire le 15/08, copie fournie mot pour mot : le
+     TITRE lui-même porte la promesse (« Gagnez du temps, identifiez de
+     nouvelles opportunités. ») et le sous-titre dit ce qu'on trouve — des
+     listes d'actions thématiques — et pour qui : des opportunités qui vous
+     ressemblent. « Watchlists » reste le nom de l'onglet dans la nav et dans
+     le fil d'Ariane ; le titre de la page, lui, parle au lecteur. Toujours
+     « opportunité », jamais de promesse de performance : service éditorial. */
+  doc.innerHTML='<div class="home-h"><div class="home-t">Gagnez du temps, identifiez de nouvelles opportunités.</div>'+
+    '<p class="home-lead">Accédez à des listes d\'actions thématiques pour vous permettre d\'identifier des opportunités qui vous ressemblent.</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
