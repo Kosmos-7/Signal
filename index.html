@@ -546,9 +546,12 @@ let curWl=null,curList=[],curGroups=null;
 
 // Descripteur de repli de la watchlist principale, universe.json peut le
 // fournir sous l'id « principale » ; sinon on l'écrit ici, factuellement.
+// « Notre top 30 » : copie du propriétaire (15/08), sans point final — le
+// libellé sert aussi en capitales dans le rail et dans le fil d'Ariane, où
+// une ponctuation de phrase deviendrait une coquille.
 function mainMeta(){
   if(TBY[MAIN])return TBY[MAIN];
-  return {id:MAIN,label:'Watchlist principale',sous_titre:'Les meilleurs scores, toutes catégories',kind:'principale',
+  return {id:MAIN,label:'Notre top 30',sous_titre:'Les meilleurs scores, toutes catégories',kind:'principale',
 thesis:"Où commencer ? Ici : les trente meilleurs scores de la semaine, toutes catégories confondues, sans présupposé de secteur ni de thème.",
     inversion:'',biais:'',regle_texte:'',declares:stocks.length,scores:stocks.length,
     couverture:1,status:'ok',members:stocks.map(s=>s.ticker)};
