@@ -965,9 +965,9 @@ function showLexique(){
     lexsec('La note',
       lexi('Note /100','Partition en quatre blocs qui ne comptent chaque information qu\'une fois : <em>Qualité 35</em> (les niveaux des comptes) + <em>Croissance 25</em> (leurs dérivées) + <em>Valorisation 25</em> (le cours rapporté aux comptes) + <em>Momentum 15</em> (le cours rapporté à lui-même). Rampes continues partout : aucun seuil-falaise. Une note élevée ne garantit pas une hausse imminente.')+
 lexi('Qualité · 35 pts','Les niveaux des comptes publiés : marge nette médiane pluriannuelle (9), rendement des capitaux propres (9), conversion du bénéfice en cash réel (7), dette rapportée aux capitaux propres (5), constance des bénéfices (5).')+
-lexi('Croissance · 25 pts','Les dérivées des comptes : croissance annuelle du CA (7) et du bénéfice par action, dilution comprise (7), régularité de la progression (4), croissance attendue par les analystes (7) — l\'estimé ne pèse jamais plus que le démontré.')+
-lexi('Valorisation · 25 pts','Le prix payé : PER face à sa propre médiane historique (8), PEG maison — PER prévisionnel ÷ la plus prudente des deux croissances (7), rendement des bénéfices attendus (5), rendement du cash (5) — remplacé pour les banques et assureurs par le cours rapporté aux actifs nets comptables, le multiple de référence des métiers de bilan.')+
-lexi('Momentum · 15 pts','Le cours face à lui-même, deux mesures : écart MM21/MM200 en continu (7), position dans le canal de régression en cloche symétrique — l\'étirement pénalise dans les deux sens (8). Le RSI n\'entre PAS dans la note : sur quatorze jours il mesure le bruit, pas la trajectoire — il reste affiché sous le graphique de cours, comme information.')+
+lexi('Croissance · 25 pts','Les dérivées des comptes : croissance annuelle du CA (7) et du bénéfice par action, dilution comprise (7), régularité de la progression (4), croissance attendue par les analystes (7) : l\'estimé ne pèse jamais plus que le démontré.')+
+lexi('Valorisation · 25 pts','Le prix payé : PER face à sa propre médiane historique (8), PEG maison (PER prévisionnel ÷ la plus prudente des deux croissances, 7), rendement des bénéfices attendus (5), rendement du cash (5), remplacé pour les banques et assureurs par le cours rapporté aux actifs nets comptables, le multiple de référence des métiers de bilan.')+
+lexi('Momentum · 15 pts','Le cours face à lui-même, deux mesures : écart MM21/MM200 en continu (7), position dans le canal de régression en cloche symétrique : l\'étirement pénalise dans les deux sens (8). Le RSI n\'entre PAS dans la note : sur quatorze jours il mesure le bruit, pas la trajectoire : il reste affiché sous le graphique de cours, comme information.')+
       lexi('Critère retiré','Quand une donnée est incalculable (FCF d\'une banque, historique trop court, devise comptable différente de la cotation), le critère est <em>retiré</em> et la note se renormalise sur le reste. Un trou de donnée n\'est jamais compté zéro.'))+
     lexsec('Signaux de timing',
 lexi('Golden Cross / Death Cross','<em>Golden Cross</em> : la MM21 passe au-dessus de la MM200, signal haussier. <em>Death Cross</em> : MM21 sous MM200, baissier. Plus le croisement est récent, plus le signal pèse.')+
@@ -979,7 +979,7 @@ lexi('Golden Cross / Death Cross','<em>Golden Cross</em> : la MM21 passe au-dess
       lexi('Croissance CA','Croissance du chiffre d\'affaires du <em>dernier trimestre publié</em>, comparé au même trimestre un an plus tôt (glissement annuel, « a/a »). Ce n\'est pas la croissance annuelle.')+
       lexi('Marge nette','Bénéfice net rapporté au chiffre d\'affaires, sur les <em>12 derniers mois glissants</em> (TTM).')+
 lexi('Marge FCF','Free cash-flow (trésorerie réellement générée) rapporté au CA, sur les <em>12 derniers mois</em> (TTM), plus difficile à maquiller comptablement que la marge nette.')+
-lexi('Écart à la trajectoire long terme','Écart du cours à sa droite de régression, en % de la valeur de tendance. Renommé en août 2026 : l\'ancien libellé « décote » empruntait le vocabulaire de la valorisation alors que cette mesure compare le cours à sa propre trajectoire passée, pas à la valeur de l\'entreprise — un titre très en-dessous de sa trajectoire peut rester cher au regard de ses bénéfices (cas Hermès). Un écart extrême peut signaler un changement structurel du business (cf. Apprendre).')+
+lexi('Écart à la trajectoire long terme','Écart du cours à sa droite de régression, en % de la valeur de tendance. Renommé en août 2026 : l\'ancien libellé « décote » empruntait le vocabulaire de la valorisation alors que cette mesure compare le cours à sa propre trajectoire passée, pas à la valeur de l\'entreprise : un titre très en-dessous de sa trajectoire peut rester cher au regard de ses bénéfices (cas Hermès). Un écart extrême peut signaler un changement structurel du business (cf. Apprendre).')+
 lexi('Objectif consensus','Moyenne des objectifs de cours des analystes, affichée en potentiel (%). Biais optimiste structurel documenté, indicatif uniquement, hors score.'));
   requestAnimationFrame(()=>doc.classList.add('on'));
 }
@@ -1792,7 +1792,7 @@ function fondaRender(s){
      Deux sociétés concernées aujourd'hui : NBIS et CRWV. */
   const _fwd=(s.breakdown||{}).forward_pe;
   const pertesAttendues=(_fwd!=null&&_fwd<0)
-    ?'<p class="fd-inline"><i>Les analystes attendent des <b>pertes</b> sur le prochain exercice : il n\'y a pas de multiple prévisionnel à tracer — un PER négatif ne veut rien dire. La courbe s\'arrête donc au dernier bénéfice connu.</i></p>':'';
+    ?'<p class="fd-inline"><i>Les analystes attendent des <b>pertes</b> sur le prochain exercice : il n\'y a pas de multiple prévisionnel à tracer : un PER négatif ne veut rien dire. La courbe s\'arrête donc au dernier bénéfice connu.</i></p>':'';
   host.innerHTML='<div class="fd-wrap"><div class="qh">Chiffres publiés</div>'+
     '<div class="fd-ctrl">'+
       '<button class="chx-pbtn'+(FD_MODE==='an'?' on':'')+'" data-fd="an"'+(an.length<2?' disabled':'')+'>Annuel</button>'+
@@ -1863,7 +1863,7 @@ function fondaRender(s){
            qui compare ce multiple à celui de son courtier doit savoir d'où
            vient l'écart — sinon le nombre est juste et incompréhensible. */
         ((F&&F.per_converti)?'&nbsp;&nbsp;<span style="color:var(--text3)">cours converti en '+F.per_converti.vers+(F.per_converti.rapport?', ramené à l\'action':'')+'</span>':'')+
-        '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Les points estimés, eux, sont au cours DU JOUR — un écart avec le dernier exercice vient donc autant du prix que des bénéfices.'+((((F&&F.an)||[]).some(function(e){return e.eps_derive;}))?' Un ou plusieurs exercices n\'ont pas de bénéfice PAR ACTION publié : il a été reconstitué en divisant le résultat net par le nombre d\'actions déduit des exercices voisins, et seulement là où ce nombre ne bouge pas de plus de 10 % autour du trou. Ailleurs le point reste absent — au bord d\'une série, il n\'y a rien pour l\'encadrer.':'')+((F&&F.per_converti)?' Cette société publie ses comptes en '+F.per_converti.vers+' mais cote en '+F.per_converti.de+' : le cours de chaque clôture est ramené en '+F.per_converti.vers+' au change de ce jour-là, sans quoi le quotient serait un taux de change déguisé en multiple. Les taux sont les nôtres, pas ceux que la société retient dans ses propres comparatifs.'+(F.per_converti.rapport?' Le titre coté ici est un certificat représentant '+F.per_converti.rapport+' actions ordinaires : son cours est divisé d\'autant, sans quoi le multiple serait '+F.per_converti.rapport+' fois trop élevé. Ce rapport est mesuré sur les bénéfices publiés, pas supposé.':'')+((F&&F.pe_prev_indecis)?' Les multiples ATTENDUS manquent pour une raison voisine : notre source n\'a pas déclaré, sur cette valeur, la monnaie dans laquelle elle exprime les prévisions des analystes. Quand le change est loin de 1, la croissance implicite du bénéfice le révèle et nous corrigeons ; ici les deux lectures sont également plausibles, et publier reviendrait à choisir au hasard entre deux nombres écartés de quelques dizaines de pour cent.':''):'')+'</span></span></div>'+
+        '&nbsp;&nbsp;<span class="inf" tabindex="0" aria-label="Comment lire ces multiples">i<span class="inf-tip">Chaque exercice est au cours que le marché cotait à sa clôture, divisé par le bénéfice publié cette année-là : c\'est ce qu\'on payait à l\'époque, et c\'est ce qui rend la médiane comparable. Les points estimés, eux, sont au cours DU JOUR : un écart avec le dernier exercice vient donc autant du prix que des bénéfices.'+((((F&&F.an)||[]).some(function(e){return e.eps_derive;}))?' Un ou plusieurs exercices n\'ont pas de bénéfice PAR ACTION publié : il a été reconstitué en divisant le résultat net par le nombre d\'actions déduit des exercices voisins, et seulement là où ce nombre ne bouge pas de plus de 10 % autour du trou. Ailleurs le point reste absent : au bord d\'une série, il n\'y a rien pour l\'encadrer.':'')+((F&&F.per_converti)?' Cette société publie ses comptes en '+F.per_converti.vers+' mais cote en '+F.per_converti.de+' : le cours de chaque clôture est ramené en '+F.per_converti.vers+' au change de ce jour-là, sans quoi le quotient serait un taux de change déguisé en multiple. Les taux sont les nôtres, pas ceux que la société retient dans ses propres comparatifs.'+(F.per_converti.rapport?' Le titre coté ici est un certificat représentant '+F.per_converti.rapport+' actions ordinaires : son cours est divisé d\'autant, sans quoi le multiple serait '+F.per_converti.rapport+' fois trop élevé. Ce rapport est mesuré sur les bénéfices publiés, pas supposé.':'')+((F&&F.pe_prev_indecis)?' Les multiples ATTENDUS manquent pour une raison voisine : notre source n\'a pas déclaré, sur cette valeur, la monnaie dans laquelle elle exprime les prévisions des analystes. Quand le change est loin de 1, la croissance implicite du bénéfice le révèle et nous corrigeons ; ici les deux lectures sont également plausibles, et publier reviendrait à choisir au hasard entre deux nombres écartés de quelques dizaines de pour cent.':''):'')+'</span></span></div>'+
         pertesAttendues+'</div>'
       :'<div class="fd-wrap"><div class="qh">'+(perB.queEst?'PER estimé (analystes)':'PER')+'</div>'+
         '<div class="fd-inline">'+perB.inline+'</div>'+
@@ -1966,7 +1966,7 @@ function fdPerChart(F,fmtPer,W,b){
     const motif=(!pub.length&&anEps.length>=2&&b&&b.devise&&F.devise&&b.devise!==F.devise)
       ? 'Aucun multiple historique : les comptes sont publiés en '+F.devise+' et le titre cote en '
         +b.devise+'. Nous ramenons d’ordinaire le cours dans la devise des comptes pour que le '
-        +'quotient garde un sens, mais ce taux de change nous manque ici — et un multiple calculé '
+        +'quotient garde un sens, mais ce taux de change nous manque ici, et un multiple calculé '
         +'avec un taux inventé vaudrait moins que le trou. Les '+anEps.length
         +' exercices concernés restent lisibles dans les chiffres publiés ci-dessus.'
       : null;
@@ -2136,7 +2136,7 @@ function periodNote(b){ const p=qLabel(b&&b.mrq);
      diffèrent. */
   const g=qLabel(b&&b.rev_growth_fin);
   if(g) t+=(p&&b.rev_growth_fin!==b.mrq)
-    ? ' La croissance du CA porte sur '+g.q+' (clos le '+g.d+'), dernier trimestre de notre historique — Yahoo publie ses marges avec un trimestre d\'avance sur ses états financiers.'
+    ? ' La croissance du CA porte sur '+g.q+' (clos le '+g.d+'), dernier trimestre de notre historique : Yahoo publie ses marges avec un trimestre d\'avance sur ses états financiers.'
     : ' La croissance du CA compare '+g.q+' au même trimestre un an plus tôt.';
   /* SANS DATE, ON LE DIT. Vingt-quatre fiches — des sociétés dont notre source
      ne publie aucune série trimestrielle — portent une croissance venue du
@@ -2151,7 +2151,7 @@ function periodNote(b){ const p=qLabel(b&&b.mrq);
   const ex=b&&b.net_margin_exercice_pct, tt=b&&b.net_margin_pct;
   if(ex!=null&&tt!=null&&Math.abs(ex-tt)>20)
     t+=' Attention : sur le dernier exercice CLOS, la marge nette était de '+f(ex,1)+
-       ' % — l\'écart avec les 12 mois glissants vient d\'un retournement en cours, pas d\'une erreur.';
+       ' %, l\'écart avec les 12 mois glissants vient d\'un retournement en cours, pas d\'une erreur.';
   return t; }
 /* Fiche d'un titre thématique hors watchlist principale : universe.json ne
    porte qu'un breakdown compact (ni fondamentaux détaillés, ni graphique, ni

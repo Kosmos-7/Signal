@@ -853,7 +853,7 @@ def calculer_regles_auto(portfolio):
                 "secteur":      cl,
                 "pct":          round(pct, 1),
                 "regime":       "info",
-                "message":      f"Cluster {cl} : {pct:.0f}% du capital — concentration à intégrer dans ton sizing (aucune réduction automatique, c'est toi qui arbitres)",
+                "message":      f"Cluster {cl} : {pct:.0f}% du capital, concentration à intégrer dans le sizing (aucune réduction automatique, l'arbitrage reste libre)",
                 "bloque":       False,
             })
 
@@ -1800,7 +1800,7 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 decisions_bloquees.append({
                     "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
                     "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
-                    "bloque_par": "max_positions", "explication_blocage": f"Plafond {MAX_POSITIONS} positions atteint ({len(positions)} ouvertes) — nouvel achat refusé",
+                    "bloque_par": "max_positions", "explication_blocage": f"Plafond {MAX_POSITIONS} positions atteint ({len(positions)} ouvertes), nouvel achat refusé",
                 })
                 continue
 
@@ -2039,7 +2039,7 @@ def main():
                 "pct":     c["pct"],
                 "regime":  "info",
                 "message": (f"Thème « {c['label']} » : {c['pct']:.0f}% du capital "
-                            f"({', '.join(c['tickers'])}) — ces titres suivent la MÊME thèse et "
+                            f"({', '.join(c['tickers'])}) : ces titres suivent la MÊME thèse et "
                             f"baissent ensemble, quelle que soit leur répartition sectorielle"),
                 "bloque":  False,
             })

@@ -81,6 +81,14 @@
 # elle qui répond « est-ce moi ? », pas la description du périmètre.
 # Et le site vouvoie, partout : le « ton courtier » du PEA était une coquille.
 #
+# PONCTUATION — PAS DE TIRET CADRATIN (15/08). La règle existait déjà, mais
+# seulement pour l'IA : generate_analyses.py l'interdit dans le prompt des
+# fiches (« la signature la plus reconnaissable d'un texte de machine »), et
+# les 148 fiches publiées n'en portent aucun. La copie écrite à la main, elle,
+# en comptait dix-huit dans ces seuls champs. Même règle pour tout le monde :
+# virgule pour une apposition, deux-points pour une explication, parenthèses
+# pour une incise, ou deux phrases. Le demi-cadratin « – » est proscrit aussi.
+#
 # CE QUE LES THÈMES NE SONT PAS
 # Ils ne sont justifiés par aucun backtest et ne prétendent améliorer aucune
 # performance. Ils structurent la lecture d'un univers trop large pour une
@@ -124,7 +132,7 @@ THEMES_CURES = [
             "l'électricité sous contrat et des bâtiments, qu'elles louent dix à vingt-cinq "
             "ans à un seul locataire, sur des baux non résiliables. Elles ont donc déjà "
             "VENDU ce qu'elles n'ont pas fini de construire, et leurs comptes d'aujourd'hui "
-            "ne montrent que la dépense — la note lit une société en perte là où le carnet "
+            "ne montrent que la dépense : la note lit une société en perte là où le carnet "
             "de commandes dit autre chose. C'est le seul endroit de cette liste où un score "
             "bas ne veut pas dire ce qu'il dit ailleurs.\n\n"
             "Deux dérogations les accompagnent, écrites plutôt que cachées. Le projet ne "
@@ -372,8 +380,8 @@ THEMES_CURES = [
             "levée ici, sans quoi la liste serait vide. Et ces titres ont moins de cinq ans "
             "de cotation : leur droite de tendance longue n'est pas exploitable, et leur "
             "fiche le dit.\n\n"
-            "Enfin, la liste ne dit rien de ceux qui VENDENT au secteur — cryogénie, "
-            "lasers, instruments, substrats — et qui sont pourtant les seuls à facturer "
+            "Enfin, la liste ne dit rien de ceux qui VENDENT au secteur (cryogénie, "
+            "lasers, instruments, substrats), et qui sont pourtant les seuls à facturer "
             "aujourd'hui. Plusieurs figurent dans la watchlist principale."
         ),
         # POURQUOI CETTE LISTE EST COURTE, ET POURQUOI ELLE VA S'ALLONGER.
@@ -419,7 +427,7 @@ THEMES_CURES = [
             "liste : que le goulot s'ouvre. Les constructeurs conçoivent déjà leurs "
             "propres actionneurs pour cesser de dépendre de leurs fournisseurs, et des "
             "concurrents chinois attaquent le réducteur de précision sur son propre "
-            "terrain — le jour où la pièce rare devient banale, la rente change de mains "
+            "terrain : le jour où la pièce rare devient banale, la rente change de mains "
             "sans qu'un seul robot de moins ne soit vendu. S'y ajoute un rappel qu'aucun "
             "récit n'annule : le robot industriel est un marché d'équipement, adossé à "
             "l'automobile et à l'électronique, et il sait reculer de trente pour cent en "
@@ -443,7 +451,7 @@ THEMES_CURES = [
             "courtier européen. Restent quelques pure players asiatiques de taille "
             "modeste et des constructeurs automobiles chez qui le robot ne pèse encore "
             "rien au compte de résultat. C'est une exposition de conviction, pas une "
-            "exposition mesurable — et sur ces quelques titres, la note vaut moins que "
+            "exposition mesurable, et sur ces quelques titres, la note vaut moins que "
             "sur le reste de la liste : une société dont le bénéfice frôle zéro affiche "
             "un multiple de plusieurs milliers, que la grille lit comme une valorisation "
             "extrême alors qu'il ne dit rien du tout. Le classement les place en bas, "
@@ -568,30 +576,30 @@ THEMES_CURES = [
         "kind": "these",
         "thesis": (
             "Qu'achète-t-on quand on achète le NewSpace ? Pas le spatial, mais la "
-            "génération de sociétés apparue au milieu des années 2000 — procédés, "
-            "débouchés et financements nouveaux — qui a fait tomber le coût du kilo "
+            "génération de sociétés apparue au milieu des années 2000 (procédés, "
+            "débouchés et financements nouveaux), qui a fait tomber le coût du kilo "
             "en orbite et vend des abonnements là où les agences signaient des "
             "contrats. De l'accès à l'orbite à la station, la liste suit cette "
-            "génération — pas les maisons qui la précédaient."
+            "génération, pas les maisons qui la précédaient."
         ),
         "inversion": (
             "Le NewSpace a une dépendance dont ses carnets de commandes ne disent rien : il "
-            "est né d'un argent bon marché — capital-risque, sociétés d'acquisition, "
-            "introductions — et la plupart de ces sociétés brûlent encore de la trésorerie. "
+            "est né d'un argent bon marché (capital-risque, sociétés d'acquisition, "
+            "introductions), et la plupart de ces sociétés brûlent encore de la trésorerie. "
             "Ce qui les tue n'est pas un client perdu, c'est une levée qui ne se fait pas. "
             "S'y ajoute le paradoxe du leader : un seul acteur lance la majorité de la masse "
             "mise en orbite et opère la première constellation, et ses concurrents lui "
-            "achètent leurs lancements en même temps qu'ils lui disputent ses clients — si "
+            "achètent leurs lancements en même temps qu'ils lui disputent ses clients : si "
             "son avantage de coût se creuse encore, cette liste devient un ensemble de "
             "sous-traitants. L'inversion symétrique existe : un échec de vol prolongé ou une "
             "collision majeure en orbite basse renchérirait l'assurance et retarderait tout le "
-            "monde. Et la demande publique — défense, agences — décide encore de la plupart "
+            "monde. Et la demande publique (défense, agences) décide encore de la plupart "
             "des carnets : c'est une industrie dont le premier client vote son budget."
         ),
         "biais": (
             "CE QUE LE MOT EXCLUT est la première chose à savoir, parce que c'est ce qui "
             "sépare cette liste d'une liste « spatial ». Le NewSpace se définit CONTRE "
-            "l'organisation qui le précédait : entre ici une société née de la vague — le "
+            "l'organisation qui le précédait : entre ici une société née de la vague : le "
             "spatial pour métier, un procédé qui casse un coût, des clients qui ne sont pas "
             "seulement des agences, et une arrivée en bourse par les financements de cette "
             "vague. En sortent les maîtres d'œuvre historiques (Lockheed, Northrop, "
@@ -600,7 +608,7 @@ THEMES_CURES = [
             "opérateurs de satellites historiques (SES, Eutelsat, Viasat, Iridium), qui "
             "sont ce que le NewSpace a pris de vitesse. Ce ne sont pas des rejets : ces "
             "quatorze titres restent scorés, candidats à la watchlist principale, et leurs "
-            "fiches restent en ligne — on retire une liste, pas des sociétés.\n\n"
+            "fiches restent en ligne : on retire une liste, pas des sociétés.\n\n"
             "LA SOCIÉTÉ QUI A DONNÉ SA FORME AU PHÉNOMÈNE N'EST PAS DANS CETTE LISTE, et "
             "c'est la deuxième chose à savoir. SpaceX s'est introduite en bourse en "
             "juin 2026 ; elle n'a pas encore les deux cents séances de cotation qu'exigent "
@@ -619,7 +627,7 @@ THEMES_CURES = [
             "LA NOTE LIT MAL CES SOCIÉTÉS, et mieux vaut le savoir avant de comparer des "
             "scores. La plupart n'ont pas de bénéfice : leurs multiples sont vides ou "
             "absurdes, leur marge de flux disponible est négative de plusieurs centaines de "
-            "pour cent, et la grille les classe en bas — ce qui est honnête sur le risque, "
+            "pour cent, et la grille les classe en bas, ce qui est honnête sur le risque, "
             "mais ne dit rien de l'exécution. Ce qui les pilote est ailleurs : un carnet de "
             "commandes, une cadence de vol, un contrat d'agence. Depuis que les maîtres "
             "d'œuvre en sont sortis, au moins la liste ne mélange plus deux objets ; elle "
@@ -628,10 +636,10 @@ THEMES_CURES = [
             "phénomène s'est propagé en Europe et en Chine, mais ses acteurs européens sont "
             "restés privés à deux micro-capitalisations près, cotées à Stockholm et hors "
             "d'échelle pour ce site, et ses acteurs chinois s'introduisent sur des places "
-            "qu'un courtier européen n'atteint pas — le mur que la watchlist robotique a "
+            "qu'un courtier européen n'atteint pas, le mur que la watchlist robotique a "
             "rencontré en août devant le premier constructeur d'humanoïdes coté à Shanghai. "
             "Un cas mérite d'être connu : la constellation OneWeb n'a "
-            "pas été introduite en bourse, elle a été absorbée par un opérateur historique — "
+            "pas été introduite en bourse, elle a été absorbée par un opérateur historique : "
             "on ne l'achète donc qu'en achetant Eutelsat, qui n'est plus dans cette liste.\n\n"
             "Enfin le calcul EN ORBITE, dont on parle beaucoup depuis 2026, n'est presque pas "
             "achetable : les sociétés qui y travaillent sont privées, et les cotées n'y "
@@ -885,7 +893,7 @@ PEA_INELIGIBLES = {
     # que publié avec une réserve que personne ne lira. Accessoirement le
     # symbole LIN.DE est mort depuis la sortie de cote de Francfort en 2023.
     "LIN.DE":  "Linde plc : siège en Irlande mais résidence fiscale au "
-               "Royaume-Uni — éligibilité contestée, écarté par prudence",
+               "Royaume-Uni, éligibilité contestée, écarté par prudence",
     # Les certificats de dépôt (ADR) ne sont pas des actions : quel que soit le
     # siège de l'émetteur sous-jacent, ils ne sont pas logeables au PEA.
     "BABA":    "Chine, et titre coté sous forme d'ADR",

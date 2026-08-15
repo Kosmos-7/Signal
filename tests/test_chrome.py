@@ -271,6 +271,31 @@ for p in PAGES:
     trouve = [m.group(0) for m in _TU.finditer(texte)]
     check(f"{p} : aucun tutoiement", not trouve, str(sorted(set(trouve))))
 
+# ── 3 quater. PAS DE TIRET CADRATIN DANS LA COPIE ──────────────────────────
+# Demande du propriétaire (15/08/2026). La règle existait déjà, mais pour la
+# MACHINE seulement : generate_analyses.py l'interdit dans le prompt des fiches
+# (« la signature la plus reconnaissable d'un texte de machine »), et les 148
+# fiches publiées n'en portaient aucun. La copie écrite à la main, elle, en
+# comptait une centaine. Même règle pour tout le monde.
+#
+# LE TEST NE REGARDE QUE CE QUI S'AFFICHE : commentaires HTML, blocs /* */ et
+# lignes // sont retirés d'abord — un commentaire de code n'est pas de la copie,
+# et l'y inclure aurait rendu le test intenable. Le « — » isolé reste autorisé :
+# ce n'est pas une ponctuation mais un SYMBOLE, celui de la donnée absente
+# (`v==null?'—'`) et de la variation plate. Le remplacer changerait la
+# convention d'affichage des chiffres, pas le style d'écriture.
+print("\n— Pas de tiret cadratin dans la copie ? —")
+for p in PAGES:
+    _t = re.sub(r"<!--.*?-->", "", SRC[p], flags=re.S)
+    _t = re.sub(r"/\*.*?\*/", "", _t, flags=re.S)
+    _t = re.sub(r"(?m)^\s*//.*$", "", _t)
+    _t = re.sub(r"(?m)\s+//[^'\"\n]*$", "", _t)
+    for _ph in ("'—'", '"—"', ">—<", "?'—':"):
+        _t = _t.replace(_ph, "")
+    _n = [_t[max(0, m.start() - 55):m.end() + 55].replace("\n", " ")
+          for m in re.finditer("—", _t)]
+    check(f"{p} : aucun tiret cadratin", not _n, str(_n[:2]))
+
 # ── 4. LE PIED DE PAGE DIT LA MÊME CHOSE ───────────────────────────────────
 print("\n— Le pied de page est-il le même texte partout ? —")
 legals = {re.search(r'class="footer-legal">(.*?)</div>', SRC[p], re.S).group(1).strip()
