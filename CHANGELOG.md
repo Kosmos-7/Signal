@@ -76,6 +76,27 @@ même hauteur *naturelle*. L'égalisation de rangées posée le matin même n'a 
 rien à rattraper, la carte passe de 255 à 212 pixels, et le mobile devient
 uniforme à son tour, sans blanc à combler.
 
+### SpaceX, deuxième tentative : c'était une AUTRE garde qui bloquait
+
+Le premier correctif ouvrait la garde de la MM200. Le run du 15/08 a montré
+qu'il n'avait rien changé : `[252/289] SPCX… ignoré`. Le titre était écarté
+**bien plus tôt**, par la garde d'entrée qui exige 50 barres d'historique. Deux
+mois de cotation ne font que ~43 séances, et le screener rendait `None` avant
+même de calculer une moyenne mobile.
+
+Le plancher passe à 25 barres pour les seuls titres nommés : c'est le minimum
+qui laisse la MM21 (21 séances) et le RSI (14) calculables. En dessous, plus
+rien n'est mesurable et le titre est écarté comme les autres.
+
+**Et la position dans le canal de régression est retirée elle aussi.** Un canal
+mesuré sur deux mois ne dit rien d'une tendance décennale ; la publier comme
+une note serait une fausse précision. Le bloc momentum devient donc
+entièrement non notable et la note se renormalise sur les 85 points restants,
+ce que le mécanisme prévoit explicitement pour un « historique trop court ».
+Simulé : 72 avec le momentum complet, 70 sans la tendance, **67 sans le bloc
+entier**. La valeur de régression reste publiée dans le breakdown comme
+information, elle ne note simplement plus.
+
 ### SpaceX entre dans la watchlist NewSpace, avec une note incomplète et dite
 
 Décision du propriétaire (15/08), maintenue après avoir été informé de ce

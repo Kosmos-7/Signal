@@ -1918,6 +1918,11 @@ UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 # L'ENTRÉE SE PÉRIME TOUTE SEULE : le jour où le titre atteint ses 200 séances,
 # la MM200 se calcule, le critère revient, et cette ligne ne sert plus à rien.
 # On la retire alors — elle ne fait jamais entrer un titre qui n'y est pas.
+# Plancher de barres pour ces titres. 21 séances pour la MM21, 14 pour le RSI :
+# 25 est le minimum qui laisse ces deux-là calculables. En dessous, on ne sait
+# plus rien dire du tout et le titre est écarté comme les autres.
+SEANCES_MIN_PARTIEL = 25
+
 HIST_PARTIEL_OK = {
     # Demande du propriétaire (15/08/2026). Plus grosse introduction de la
     # décennie et sujet même de la watchlist NewSpace : l'absence de la société
@@ -2134,7 +2139,11 @@ def score_ticker(ticker, vix=None):
         # Un titre à 3 % de rendement sur quinze ans encaissait ~35 % de
         # sous-estimation sur ses exercices les plus anciens.
         hist = data.history(period="max", auto_adjust=False)
-        if len(hist) < 50:
+        # 50 barres pour tout le monde, sauf les titres nommés en historique
+        # partiel : c'est CETTE garde qui écartait SPCX au run du 15/08, bien
+        # avant celle de la MM200 — deux mois de cotation ne font que ~43 séances.
+        _plancher = SEANCES_MIN_PARTIEL if ticker in HIST_PARTIEL_OK else 50
+        if len(hist) < _plancher:
             return None
 
         # Purge des barres sans cours AVANT tout calcul (même correctif que
@@ -2158,7 +2167,7 @@ def score_ticker(ticker, vix=None):
         brut   = hist["Close"].squeeze().reindex(close.index)
         brut   = brut[brut > 0]
         volume = hist["Volume"].squeeze().reindex(close.index).fillna(0)
-        if len(close) < 50:
+        if len(close) < _plancher:
             return None
         # yfinance retourne les prix UK en pence (GBp) — convertir en GBP
         try:
@@ -2996,7 +3005,12 @@ def score_ticker(ticker, vix=None):
             # « FCF absent » s'est éteint dès qu'on est allé chercher le FCF).
             "banque":         (yf_industry in _INDUSTRIES_BILAN),
             "meme_devise":    _meme_devise,
-            "z":              _n(regression_z),
+            # UN CANAL DE RÉGRESSION SUR DEUX MOIS NE MESURE RIEN. Pour un titre
+            # à historique partiel, la position y est donc retirée elle aussi :
+            # le bloc momentum devient entièrement non notable et la note se
+            # renormalise sur les 85 points restants. La valeur reste publiée
+            # dans le breakdown, comme information, mais elle ne note plus.
+            "z":              None if _partiel else _n(regression_z),
             "rsi":            _n(rsi),
             # mm200 à None (historique partiel) rend le critère NON NOTABLE :
             # note_v4 le retire et renormalise, il ne vaut surtout pas zéro.
