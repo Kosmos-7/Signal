@@ -14,6 +14,11 @@ Charte (signal.css) : fond #0d0d16 · accent #74b6df · ambre #e0995e · violet
 #b59bd6. Le vert et le rouge sont réservés au P&L factuel et n'apparaissent
 jamais ici.
 
+ATTENTION : cette palette date du thème SOMBRE. Le site est passé au clair
+(signal.css : fond #f4f6fa · accent #266f9e · ambre #9d6414 · violet #7d5bb0) ;
+les pages chargent aujourd'hui des photos (.jpg), pas ces planches. Relancer ce
+script produirait des planches sombres — réaligner la palette avant tout usage.
+
 Usage :  python3 tools/gen_theme_art.py [id ...]
 Sortie :  assets/themes/<id>.png  —  960x540, PNG-8 palettisé, < 60 Ko
 """
