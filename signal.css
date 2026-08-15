@@ -44,6 +44,16 @@ header.scrolled{background:rgba(8,11,20,.62);border-bottom-color:var(--line);bac
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
 .brand-icon{flex-shrink:0;display:flex}
 .brand-icon svg{width:30px;height:30px}
+/* La marque est le nœud le plus brillant de la constellation. Mêmes deux
+   disques que les nœuds du fond (signal-fx.js : noyau net + halo diffus),
+   même accent --ac que le point qui bat à côté du score des fiches. Seul le
+   NOYAU clignote, sur la keyframe partagée `blink` — même tempo que le point
+   du score, donc le même battement partout. Le halo, lui, reste allumé : un
+   logo qui tomberait à 25 % toutes les 1,5 s fatiguerait l'œil dans un
+   en-tête permanent, le halo statique fait office de plancher visuel sans
+   keyframe dédiée. Pas de drop-shadow non plus : le disque-halo à 22 % EST
+   la lueur, exactement comme sur les nœuds du canvas. */
+.brand-icon svg circle:last-child{animation:blink 1.5s infinite}
 .brand-name{font-family:var(--serif);font-size:1.4rem;letter-spacing:-.5px;color:var(--text)}
 nav{display:flex;gap:.25rem}
 /* Le rembourrage EST la cible tactile : sans lui le lien ne fait que la
@@ -153,6 +163,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:normal;letter-spacing:-.5px}
 @keyframes ringglow{0%,100%{filter:drop-shadow(0 0 6px rgba(116,182,223,.22))}50%{filter:drop-shadow(0 0 15px rgba(116,182,223,.5))}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Le clignotement est un ornement, pas une information : le noyau plein et
+   son halo disent déjà « nœud actif » sans bouger, et le chiffre du score se
+   suffit. Le canvas de fond fait déjà sa propre coupure (signal-fx.js). */
+@media(prefers-reduced-motion:reduce){
+  .brand-icon svg circle:last-child,.ring .rl::before,.ring svg,.type-cur::after{animation:none}
+}
 
 /* ── TOC : sommaire de sections (portfolio + apprendre) ──
    Flotte dans la gouttière gauche, à côté du contenu centré. Masqué quand la place manque. */
