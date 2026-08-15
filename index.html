@@ -11,7 +11,7 @@
 <!-- Mêmes graisses que les autres onglets : le 700 et l'italique manquaient
      ici, et le navigateur les fabriquait (faux gras) — d'où un rendu qui
      changeait en passant d'un onglet à l'autre. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&family=Google+Sans+Code:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="signal.css">
 <style>
   /* ── index (terminal watchlist) : mise en page propre à la page ── */
@@ -296,13 +296,12 @@ récupère toute la largeur. Aucune couleur nouvelle, les thèmes se
      équilibrés au lieu de la laisser filer sur toute la scène. Et il descend
      d'un cran sous 700 px — un mot seul tenait à 2.7rem sur mobile, une
      phrase n'y tient plus. */
-  /* Bloc d'en-tête CENTRÉ (demande du propriétaire, 15/08). Le centrage vit
-     sur le titre et le sous-titre, pas sur .home-h : test_chrome vérifie le
-     littéral `.home-h{padding:1.875rem 0 0}` et les cartes en dessous
-     restent, elles, alignées à gauche. */
-  .home-t{font-family:var(--serif);font-size:2.7rem;line-height:1.15;letter-spacing:-1.2px;max-width:940px;margin:0 auto;text-align:center}
-  @media(max-width:700px){.home-t{font-size:1.9rem}}
-  .home-lead{font-size:1rem;color:var(--text2);line-height:1.7;margin:.7rem auto 0;max-width:720px;text-align:center}
+  /* Le titre et le sous-titre de l'accueil ne sont plus décrits ici : ils
+     reprennent le patron .page-h/.page-t/.page-lead de signal.css, commun aux
+     quatre onglets (centrage, tailles, dégradé du premier mot). Ne reste que
+     le rembourrage, propre à cette page — c'est lui que test_chrome vérifie au
+     littéral, et lui seul qui diffère : l'accueil est la seule des quatre
+     pages dont l'en-tête est `fixed` à toutes les largeurs. */
 
   /* Une carte par ligne : à quatre par ligne, le texte devenait illisible et
      l'œil se perdait. On préfère scroller sur des cartes larges et respirées. */
@@ -876,8 +875,8 @@ function showHome(){
      grammaire. « Watchlists » reste le nom de l'onglet dans la nav et dans
      le fil d'Ariane ; le titre de la page, lui, parle au lecteur. Toujours
      aucune promesse de performance : service éditorial. */
-  doc.innerHTML='<div class="home-h"><div class="home-t">Identifiez votre prochain investissement</div>'+
-    '<p class="home-lead">Des listes déjà filtrées, des fiches actions détaillées, tout ce dont vous avez besoin pour identifier simplement votre prochain investissement.</p>'+'</div>'+
+  doc.innerHTML='<div class="home-h page-h"><h1 class="page-t"><span class="h-grad">Identifiez</span> votre prochain investissement</h1>'+
+    '<p class="page-lead">Des listes déjà filtrées, des fiches actions détaillées, tout ce dont vous avez besoin pour identifier simplement votre prochain investissement.</p>'+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
   const st=document.querySelector('.stage');if(st)st.scrollTop=0;

@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='10' fill='%2374b6df' fill-opacity='.25'/%3E%3Ccircle cx='14' cy='14' r='6' fill='%2374b6df'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&family=Google+Sans+Code:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="signal.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,7 +42,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--sans);
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -60,21 +60,13 @@
   main { max-width: 850px; margin: 0 auto; padding: 3rem 1.5rem 6rem; position: relative; z-index: 1; }
 
 
-  /* ── HERO ── */
+  /* ── HERO ──
+     Titre et sous-titre viennent du patron partagé (.page-h/.page-t/.page-lead
+     dans signal.css) : mêmes tailles et même centrage que les trois autres
+     onglets, dégradé sur le PREMIER MOT seulement (l'ancien courait sur tout
+     le titre). Le bloc « Par où commencer ? » reste hors du patron : c'est du
+     texte de lecture, il garde son alignement à gauche. */
   .hero { margin-bottom: 2.5rem; position: relative; }
-  .hero h1 {
-    font-family: Georgia, serif;
-    font-size: 2.1rem;
-    font-weight: normal;
-    line-height: 1.2;
-    letter-spacing: -0.6px;
-    margin-bottom: 0.85rem;
-    background: linear-gradient(120deg, #f2f3fc 30%, #74b6df 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero p { color: var(--text2); font-size: 0.96rem; max-width: 560px; line-height: 1.75; }
   .hero-sep {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(116,182,223,0.22), transparent);
@@ -83,7 +75,7 @@
 
   /* ── SECTION LABEL ── */
   .section-label {
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.72rem;
     color: var(--text3);
     text-transform: uppercase;
@@ -94,7 +86,7 @@
   /* ── SECTION BLOCK ── */
   .section-block { margin-bottom: 3rem; }
   .section-title {
-    font-family: Georgia, serif;
+    font-family: var(--serif);
     font-size: 1.3rem;
     font-weight: normal;
     margin-bottom: 0.5rem;
@@ -127,7 +119,7 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 24px rgba(116,182,223,0.05);
   }
   .brique-number {
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.72rem;
     color: var(--green);
     text-transform: uppercase;
@@ -171,7 +163,7 @@
     color: var(--text);
   }
   .scoring-pts {
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.80rem;
     color: var(--gold);
     font-weight: 600;
@@ -205,7 +197,7 @@
     margin-top: 1rem;
   }
   .scoring-note code {
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.80rem;
     color: var(--green);
     background: var(--green-dim);
@@ -215,7 +207,7 @@
   /* Mini-badges Entrer/Sortir cohérents avec ceux de la watchlist */
   .badge-in, .badge-out {
     display: inline-block;
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.78rem;
     font-weight: 600;
     border-radius: 4px;
@@ -244,7 +236,7 @@
     box-shadow: 0 0 24px rgba(116,182,223,0.05);
   }
   .concept-label {
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.72rem;
     color: var(--text3);
     text-transform: uppercase;
@@ -253,7 +245,7 @@
     display: block;
   }
   .concept-example {
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.83rem;
     color: var(--gold);
     font-weight: 600;
@@ -309,7 +301,7 @@
     position: absolute;
     left: 0; right: 0; bottom: 0;
     padding: 0 0.15rem 0.1rem;
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.54rem;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -377,7 +369,7 @@
     font-weight: 500;
   }
   .portfo-body code {
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.80rem;
     color: var(--blue);
     background: var(--blue-dim);
@@ -400,7 +392,7 @@
     text-align: center;
   }
   .kpi-mini-label {
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.68rem;
     color: var(--text3);
     text-transform: uppercase;
@@ -409,7 +401,7 @@
     margin-bottom: 0.25rem;
   }
   .kpi-mini-value {
-    font-family: Georgia, serif;
+    font-family: var(--serif);
     font-size: 0.95rem;
     color: var(--text);
     display: block;
@@ -462,7 +454,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1rem 1.25rem;
-    font-family: 'Courier New', monospace;
+    font-family: var(--mono);
     font-size: 0.80rem;
     color: var(--text3);
     line-height: 1.8;
@@ -494,7 +486,6 @@
   @media (max-width: 640px) {
     /* header, marque et nav : resserrage mobile hérité de signal.css */
     main { padding: 2rem 1rem 5rem; }
-    .hero h1 { font-size: 1.65rem; }
     .brique-grid { grid-template-columns: 1fr; }
     .concept-grid { grid-template-columns: 1fr; }
     .advice-grid  { grid-template-columns: 1fr; }
@@ -603,8 +594,10 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
 
   <!-- HERO -->
   <section class="hero">
-    <h1>Comprendre la bourse</h1>
-<p>Comment fonctionne un marché, comment se lit une entreprise, et ce qui fait bouger un cours. Expliqué simplement, sans jargon inutile, et sans rien vendre.</p>
+    <div class="page-h">
+      <h1 class="page-t"><span class="h-grad">Comprenez</span> la bourse, sans jargon</h1>
+      <p class="page-lead">Comment fonctionne un marché, comment se lit une entreprise, et ce qui fait bouger un cours. Expliqué simplement, et sans rien vendre.</p>
+    </div>
     <div class="scoring-note" style="margin-top:1.5rem">
 <strong>Par où commencer ?</strong> Les sept premières sections ne parlent pas de Signal : elles expliquent la bourse et les entreprises qui la composent, dans l'ordre où les questions se posent. Si tu débutes, lis-les à la suite. Si tu cherches une notion précise, le sommaire reste accessible à tout moment — en colonne sur la gauche, ou dans la barre en haut de l'écran si la place manque.
       <br><br>
@@ -1284,17 +1277,17 @@ Un score élevé ne garantit pas une hausse imminente, il signale que plusieurs 
 La MM21 (moyenne mobile (<span class="en">moving average</span>, MA) sur 21 jours) a dépassé la MM200 (moyenne sur 200 jours) il y a 12 jours. Concrètement : la dynamique court terme est désormais au-dessus de la dynamique long terme, un signal classique de retournement haussier. Historiquement, après un Golden Cross sur le S&P 500, le titre est en hausse dans ~66-72 % des cas sur les 60 jours suivants (la fenêtre la plus forte est les 10 premiers jours).
 
           <div style="margin:1rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
-            <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">JPMorgan Chase (JPM) · 200 derniers jours · données réelles</div>
+            <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">JPMorgan Chase (JPM) · 200 derniers jours · données réelles</div>
             <svg viewBox="0 0 720 280" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
               <!-- repères Y axis -->
               <line x1="60" y1="71.8"  x2="640" y2="71.8"  stroke="#21212e" stroke-width="0.5"/>
               <line x1="60" y1="121.6" x2="640" y2="121.6" stroke="#21212e" stroke-width="0.5"/>
               <line x1="60" y1="171.4" x2="640" y2="171.4" stroke="#21212e" stroke-width="0.5"/>
               <line x1="60" y1="221.2" x2="640" y2="221.2" stroke="#21212e" stroke-width="0.5"/>
-              <text x="38" y="74"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">325 $</text>
-              <text x="38" y="124" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">300 $</text>
-              <text x="38" y="174" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">275 $</text>
-              <text x="38" y="224" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">250 $</text>
+              <text x="38" y="74"  fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">325 $</text>
+              <text x="38" y="124" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">300 $</text>
+              <text x="38" y="174" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">275 $</text>
+              <text x="38" y="224" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">250 $</text>
 
 <!-- cours close, bleu fiche, en arrière-plan -->
               <path d="M 60.0,137.0 L 71.8,130.9 L 83.7,147.2 L 95.5,150.7 L 107.3,148.9 L 119.2,147.0 L 131.0,131.6 L 142.9,131.2 L 154.7,134.4 L 166.5,112.7 L 178.4,101.2 L 190.2,103.8 L 202.0,109.2 L 213.9,112.2 L 225.7,111.6 L 237.6,132.2 L 249.4,138.1 L 261.2,108.7 L 273.1,104.3 L 284.9,96.5 L 296.7,126.6 L 308.6,131.3 L 320.4,101.5 L 332.2,95.6 L 344.1,107.4 L 355.9,96.7 L 367.8,81.8 L 379.6,80.5 L 391.4,60.2 L 403.3,66.8 L 415.1,106.3 L 426.9,117.5 L 438.8,123.1 L 450.6,90.4 L 462.4,88.4 L 474.3,110.5 L 486.1,129.3 L 498.0,124.1 L 509.8,137.5 L 521.6,149.4 L 533.5,150.7 L 545.3,144.7 L 557.1,158.7 L 569.0,135.4 L 580.8,101.1 L 592.7,109.8 L 604.5,95.7 L 616.3,98.5 L 628.2,96.8 L 640.0,117.4" stroke="#74b6df" stroke-width="1.1" fill="none" opacity="0.55"/>
@@ -1312,16 +1305,16 @@ La MM21 (moyenne mobile (<span class="en">moving average</span>, MA) sur 21 jour
 
               <!-- Légendes -->
               <line x1="60" y1="260" x2="80" y2="260" stroke="#e0995e" stroke-width="2.2"/>
-              <text x="86" y="263" fill="#e0995e" font-family="Courier New,monospace" font-size="11">MM21</text>
+              <text x="86" y="263" fill="#e0995e" font-family="Google Sans Code,monospace" font-size="11">MM21</text>
               <line x1="160" y1="260" x2="180" y2="260" stroke="#b59bd6" stroke-width="2.2"/>
-              <text x="186" y="263" fill="#b59bd6" font-family="Courier New,monospace" font-size="11">MM200</text>
+              <text x="186" y="263" fill="#b59bd6" font-family="Google Sans Code,monospace" font-size="11">MM200</text>
               <line x1="270" y1="260" x2="290" y2="260" stroke="#74b6df" stroke-width="1.1" opacity="0.55"/>
-              <text x="296" y="263" fill="var(--text3)" font-family="Courier New,monospace" font-size="11">cours close</text>
+              <text x="296" y="263" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="11">cours close</text>
 
               <!-- Axe temps -->
-              <text x="60"  y="278" fill="var(--text3)" font-family="Courier New,monospace" font-size="9">−200j</text>
-              <text x="350" y="278" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="middle">−100j</text>
-              <text x="640" y="278" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">aujourd'hui</text>
+              <text x="60"  y="278" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9">−200j</text>
+              <text x="350" y="278" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="middle">−100j</text>
+              <text x="640" y="278" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">aujourd'hui</text>
             </svg>
             <div style="font-size:0.78rem;color:var(--text3);line-height:1.55;margin-top:0.6rem">
 Données réelles JPM sur 200 jours. La MM21 (<span style="color:#e0995e;font-weight:600">ambre</span>, court terme) a oscillé plusieurs fois autour de la MM200 (<span style="color:#b59bd6;font-weight:600">violette</span>, long terme) : c'est le réel, pas un schéma idéal. Le dernier <span style="color:var(--green);font-weight:600">Golden Cross</span> est apparu il y a 13 jours : la MM21 (310,6 $) est repassée au-dessus de la MM200 (302,8 $). Depuis la note v4, ce croisement n'est plus noté en tant qu'événement : c'est l'<em>écart</em> MM21/MM200 qui compte, en continu (ici +2,6 %, soit environ 4,6/6 sur la rampe du bloc momentum) — deux jours avant ou après le croisement, la note bouge à peine.
@@ -1341,7 +1334,7 @@ Le Z-score mesure l'écart entre le cours actuel et sa trajectoire long terme, e
           Dans la note v4, la position z est une <strong>cloche symétrique</strong> du bloc momentum (6 pts) : plein tarif entre −1,5σ et +1σ, zéro aux extrêmes ±3σ, rampes continues entre les deux. Chaser un sommet à +2,5σ coûte autant que rattraper un couteau à −2,5σ — les anciennes pénalité CHASE et bonus décote, qui traitaient ces deux situations par des marches d'escalier, ont été absorbées par cette cloche. La surextension de Micron à +5σ vaut simplement 0/6, quels que soient ses fondamentaux (qui gardent, eux, leurs propres points).
 
           <div style="margin:1rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
-            <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Microsoft (MSFT) · 20 ans · pente +21,7 %/an · échelle log</div>
+            <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Microsoft (MSFT) · 20 ans · pente +21,7 %/an · échelle log</div>
             <svg viewBox="0 0 720 280" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
 
 <!-- Canal de régression ±1σ/±2σ, même langage visuel que les graphiques des fiches -->
@@ -1364,22 +1357,22 @@ Le Z-score mesure l'écart entre le cours actuel et sa trajectoire long terme, e
               <circle cx="640" cy="84.4" r="4" fill="#74b6df" stroke="#fff" stroke-width="1.2"/>
 
               <!-- Labels Y axis (échelle log) -->
-              <text x="48"  y="195"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">20 $</text>
-              <text x="48"  y="151"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">55 $</text>
-              <text x="48"  y="118"  fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">148 $</text>
-              <text x="48"  y="85"   fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">403 $</text>
+              <text x="48"  y="195"  fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">20 $</text>
+              <text x="48"  y="151"  fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">55 $</text>
+              <text x="48"  y="118"  fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">148 $</text>
+              <text x="48"  y="85"   fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">403 $</text>
 
               <!-- Labels zones à droite -->
-              <text x="650" y="63"  fill="#74b6df" opacity="0.75" font-family="Courier New,monospace" font-size="10">+2σ</text>
-              <text x="650" y="73"  fill="#74b6df" font-family="Courier New,monospace" font-size="10">+1σ</text>
-              <text x="648" y="84"  fill="#22d98a" font-family="Courier New,monospace" font-size="10" font-weight="700">zone saine</text>
-              <text x="650" y="94"  fill="#74b6df" font-family="Courier New,monospace" font-size="10">−1σ</text>
-              <text x="650" y="104" fill="#74b6df" opacity="0.75" font-family="Courier New,monospace" font-size="10">−2σ</text>
+              <text x="650" y="63"  fill="#74b6df" opacity="0.75" font-family="Google Sans Code,monospace" font-size="10">+2σ</text>
+              <text x="650" y="73"  fill="#74b6df" font-family="Google Sans Code,monospace" font-size="10">+1σ</text>
+              <text x="648" y="84"  fill="#22d98a" font-family="Google Sans Code,monospace" font-size="10" font-weight="700">zone saine</text>
+              <text x="650" y="94"  fill="#74b6df" font-family="Google Sans Code,monospace" font-size="10">−1σ</text>
+              <text x="650" y="104" fill="#74b6df" opacity="0.75" font-family="Google Sans Code,monospace" font-size="10">−2σ</text>
 
               <!-- Axe temps -->
-              <text x="60"  y="260" fill="var(--text3)" font-family="Courier New,monospace" font-size="9">2006</text>
-              <text x="350" y="260" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="middle">2016</text>
-              <text x="640" y="260" fill="var(--text3)" font-family="Courier New,monospace" font-size="9" text-anchor="end">2026</text>
+              <text x="60"  y="260" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9">2006</text>
+              <text x="350" y="260" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="middle">2016</text>
+              <text x="640" y="260" fill="var(--text3)" font-family="Google Sans Code,monospace" font-size="9" text-anchor="end">2026</text>
 
               <!-- Légende -->
               <text x="60" y="276" fill="var(--text3)" font-family="Inter,sans-serif" font-size="10" font-style="italic">cours MSFT (échelle log)</text>
@@ -1453,7 +1446,7 @@ C'est un proxy <strong>simple et systématique</strong>, applicable à tout titr
           <br><br>
           <strong>D'où viennent ces ratios ?</strong> De la <em>suite de Fibonacci</em> (1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89...), où chaque nombre est la somme des deux précédents. Quand on divise un nombre par le suivant, on tend vers <strong>0.618</strong> (l'inverse du nombre d'or Φ). Quand on divise par celui d'après, on tend vers <strong>0.382</strong>. Et 0.236 = 0.618 × 0.382. Le ratio 0.5 vient en réalité des travaux de Dow/Gann (pas de Fibonacci stricto sensu) mais est inclus par tradition.
 
-          <div style="margin:1rem 0;padding:0.8rem 1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius);font-family:'Courier New',monospace;font-size:0.78rem;color:var(--text2);line-height:1.7">
+          <div style="margin:1rem 0;padding:0.8rem 1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius);font-family:var(--mono);font-size:0.78rem;color:var(--text2);line-height:1.7">
             <span style="color:var(--text3)">Suite Fibonacci : 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144...</span><br>
             55 ÷ 89   ≈ <span style="color:var(--gold)">0.618</span> &nbsp;→ <span style="color:var(--gold)">Fibo 61.8%</span> (Golden Zone, 1/Φ)<br>
             34 ÷ 89   ≈ <span style="color:var(--green)">0.382</span> &nbsp;→ <span style="color:var(--green)">Fibo 38.2%</span> (= n ÷ n+2 dans la suite)<br>
@@ -1464,7 +1457,7 @@ C'est un proxy <strong>simple et systématique</strong>, applicable à tout titr
 
 <strong>Le calcul concret</strong> : on identifie le rally, son point bas (<em>swing low</em>) et son point haut (<em>swing high</em>). Puis chaque niveau Fibo se calcule par :
           <br><br>
-          <span style="font-family:'Courier New',monospace;font-size:0.85rem;color:var(--gold);background:#0a0a0f;padding:0.4rem 0.7rem;border-radius:4px;border-left:2px solid var(--gold);display:inline-block">
+          <span style="font-family:var(--mono);font-size:0.85rem;color:var(--gold);background:#0a0a0f;padding:0.4rem 0.7rem;border-radius:4px;border-left:2px solid var(--gold);display:inline-block">
             niveau X% &nbsp;=&nbsp; swing_high &nbsp;−&nbsp; (swing_high − swing_low) × X%
           </span>
           <br><br>
@@ -1476,7 +1469,7 @@ C'est un proxy <strong>simple et systématique</strong>, applicable à tout titr
           <br>· Fibo 78.6% = 200 − 100 × 0.786 = <strong>121€</strong>
 
           <div style="margin:1.2rem 0;padding:1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius)">
-            <div style="font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Exemple : action passée de 100€ à 200€ (rally +100%), corrigeant à 162€</div>
+            <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.6rem">Exemple : action passée de 100€ à 200€ (rally +100%), corrigeant à 162€</div>
             <svg viewBox="0 0 720 320" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
 
               <!-- ZONES COLORÉES entre les niveaux Fibo (du peak en bas vers swing low) -->
@@ -1521,25 +1514,25 @@ C'est un proxy <strong>simple et systématique</strong>, applicable à tout titr
               <text x="240" y="252" fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic" text-anchor="middle">rally annulé / ultime rempart</text>
 
               <!-- LABELS PRIX À DROITE (compact, deux lignes par niveau si besoin) -->
-              <text x="440" y="54"  fill="#22d98a" font-family="Courier New,monospace" font-size="11" font-weight="700">200€</text>
+              <text x="440" y="54"  fill="#22d98a" font-family="Google Sans Code,monospace" font-size="11" font-weight="700">200€</text>
               <text x="478" y="54"  fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing high (peak)</text>
 
-              <text x="440" y="106" fill="#8888a8" font-family="Courier New,monospace" font-size="11">176€</text>
+              <text x="440" y="106" fill="#8888a8" font-family="Google Sans Code,monospace" font-size="11">176€</text>
               <text x="478" y="106" fill="#8888a8" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 23.6%</text>
 
-              <text x="440" y="138" fill="#22d98a" font-family="Courier New,monospace" font-size="11" font-weight="700">162€</text>
+              <text x="440" y="138" fill="#22d98a" font-family="Google Sans Code,monospace" font-size="11" font-weight="700">162€</text>
               <text x="478" y="138" fill="#22d98a" font-family="Inter,sans-serif" font-size="10" font-weight="600">Fibo 38.2% ← cours</text>
 
-              <text x="440" y="164" fill="#a07010" font-family="Courier New,monospace" font-size="11">150€</text>
+              <text x="440" y="164" fill="#a07010" font-family="Google Sans Code,monospace" font-size="11">150€</text>
               <text x="478" y="164" fill="#a07010" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 50%</text>
 
-              <text x="440" y="190" fill="#e8a820" font-family="Courier New,monospace" font-size="11" font-weight="700">138€</text>
+              <text x="440" y="190" fill="#e8a820" font-family="Google Sans Code,monospace" font-size="11" font-weight="700">138€</text>
               <text x="478" y="190" fill="#e8a820" font-family="Inter,sans-serif" font-size="10" font-weight="600">Fibo 61.8% (Golden)</text>
 
-              <text x="440" y="227" fill="#f87a20" font-family="Courier New,monospace" font-size="11">121€</text>
+              <text x="440" y="227" fill="#f87a20" font-family="Google Sans Code,monospace" font-size="11">121€</text>
               <text x="478" y="227" fill="#f87a20" font-family="Inter,sans-serif" font-size="10" font-style="italic">Fibo 78.6%</text>
 
-              <text x="440" y="274" fill="#f0556a" font-family="Courier New,monospace" font-size="11" font-weight="700">100€</text>
+              <text x="440" y="274" fill="#f0556a" font-family="Google Sans Code,monospace" font-size="11" font-weight="700">100€</text>
               <text x="478" y="274" fill="#f0556a" font-family="Inter,sans-serif" font-size="10" font-style="italic">swing low</text>
 
               <!-- Annotations sur la courbe -->
@@ -1566,7 +1559,7 @@ Le cours à 162€ se situe en <span style="color:var(--green);font-weight:600">
           <br><br>
           <strong>Comment lire l'annotation Signal</strong> dans une fiche action :
           <br><br>
-          <div style="background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem 1rem;font-family:'Courier New',monospace;font-size:0.78rem;color:var(--text2);line-height:1.6">
+          <div style="background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem 1rem;font-family:var(--mono);font-size:0.78rem;color:var(--text2);line-height:1.6">
             Valorisation : <span style="color:var(--green)">−7% du top 52w · pullback sain (5/5)</span> <span style="color:var(--gold)">· zone Fibo 38.2%</span>
           </div>
           <br>
