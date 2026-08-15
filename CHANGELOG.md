@@ -5,6 +5,34 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### SpaceX entre dans la watchlist NewSpace, avec une note incomplète et dite
+
+Décision du propriétaire (15/08), maintenue après avoir été informé de ce
+qu'elle coûte. SpaceX était au registre des écartés depuis son introduction du
+16/06/2026 : moins de 200 séances de cotation, donc pas de moyenne mobile 200
+jours, donc rejet au run.
+
+**Le blocage n'était pas éditorial mais technique.** Une garde anti-NaN du
+screener écartait le titre entier parce qu'une seule valeur manquait, alors
+que la note sait déjà faire : `note_v4` RETIRE un critère incalculable et
+renormalise prudemment sur le reste, exactement comme pour une banque sans
+flux de trésorerie. Mesuré sur un cas simulé : 72 avec la moyenne longue, 70
+sans elle, le bloc momentum passant de 15 points mesurés à 8. La note reste
+comparable, elle repose simplement sur moins de mesures.
+
+**L'ouverture est nommée, pas générale**, et c'est le point important :
+`screener.HIST_PARTIEL_OK` liste les titres autorisés un par un. Abaisser le
+plancher pour tout le monde aurait fait entrer d'un coup toutes les
+introductions récentes et changé toutes les watchlists en silence. Un test
+vérifie que cette liste reste courte, un autre que SpaceX y figure, un
+troisième que sa note incomplète est expliquée au lecteur dans les biais du
+thème. L'autorisation se périme d'elle-même vers avril 2027, quand la moyenne
+mobile 200 jours redeviendra calculable.
+
+Le paragraphe des biais qui annonçait son absence dit maintenant l'inverse, et
+pourquoi sa note est amputée : publier une note partielle sans le dire serait
+exactement ce que ce site refuse de faire.
+
 ### Les images des watchlists changeaient de taille avec la longueur du texte
 
 Signalé par le propriétaire (15/08), et mesuré : sur l'accueil, l'image du

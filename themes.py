@@ -609,13 +609,16 @@ THEMES_CURES = [
             "sont ce que le NewSpace a pris de vitesse. Ce ne sont pas des rejets : ces "
             "quatorze titres restent scorés, candidats à la watchlist principale, et leurs "
             "fiches restent en ligne : on retire une liste, pas des sociétés.\n\n"
-            "LA SOCIÉTÉ QUI A DONNÉ SA FORME AU PHÉNOMÈNE N'EST PAS DANS CETTE LISTE, et "
-            "c'est la deuxième chose à savoir. SpaceX s'est introduite en bourse en "
-            "juin 2026 ; elle n'a pas encore les deux cents séances de cotation qu'exigent "
-            "la moyenne mobile 200 jours et le RSI, sans lesquelles nous ne savons pas noter "
-            "un titre. Elle entrera d'elle-même vers avril 2027. Rien d'éditorial là-dedans : "
-            "c'est une impossibilité de mesure, et nous préférons le dire que publier une "
-            "note que nous ne savons pas calculer.\n\n"
+            "LA NOTE DE SPACEX EST INCOMPLÈTE, et c'est la deuxième chose à savoir. "
+            "Introduite en juin 2026, elle n'a pas encore les deux cents séances de "
+            "cotation qu'exige la moyenne mobile 200 jours : son critère de tendance "
+            "est donc RETIRÉ, et sa note se renormalise sur les points restants, "
+            "comme pour une banque dont le flux de trésorerie n'est pas calculable. "
+            "Sa note reste comparable aux autres, mais elle repose sur moins de "
+            "mesures : le momentum d'un titre sans moyenne longue n'est apprécié que "
+            "par sa position dans un canal de régression encore court. Le critère "
+            "revient de lui-même vers avril 2027, sans que personne n'ait à y "
+            "toucher. Nous préférons l'écrire que laisser croire à une note pleine.\n\n"
             "LA LISTE EST COURTE PARCE QUE SON SUJET L'EST EN BOURSE. Le NewSpace compte des "
             "centaines de sociétés ; celles qui sont cotées, notables et pas encore "
             "microscopiques tiennent en quelques lignes. Dérogation de taille assumée, comme "
@@ -686,16 +689,25 @@ THEMES_CURES = [
         "maillons": [
             {
                 # ACCÈS À L'ORBITE. Le maillon qui commande tous les autres : sans
-                # lanceur, rien ne vole. Il est aussi le plus concentré du site —
+                # lanceur, rien ne vole. Il est aussi le plus concentré du site :
                 # SpaceX met en orbite l'essentiel de la masse mondiale, et ses
-                # concurrents lui achètent des lancements. Un seul titre notable
-                # ici, ce qui est en soi la description du marché.
-                # Firefly, l'autre lanceur coté né de la vague, est au registre
+                # concurrents lui achètent des lancements.
+                #
+                # SPCX ENTRE LE 15/08/2026, sur décision du propriétaire, alors
+                # qu'elle n'a pas ses 200 séances de cotation. Elle est donc
+                # notée SANS son critère de tendance (MM200 incalculable) : la
+                # note se renormalise sur les 93 points restants, comme pour une
+                # banque sans FCF. Le mécanisme est celui du projet, pas une
+                # exception fabriquée pour elle ; ce qui est propre à ce titre,
+                # c'est l'autorisation nommée dans screener.HIST_PARTIEL_OK, et
+                # elle se périme d'elle-même vers avril 2027.
+                # Firefly, l'autre lanceur coté né de la vague, reste au registre
                 # des écartés : son fournisseur de données ne rend aucune
                 # capitalisation, et plusieurs points de la note se calculent
-                # dessus.
+                # dessus. Son cas n'est PAS celui de SpaceX : il manque une
+                # donnée de base, pas une profondeur d'historique qui viendra.
                 "label": "Accès à l'orbite",
-                "tickers": ["RKLB"],
+                "tickers": ["SPCX", "RKLB"],
             },
             {
                 # CONSTELLATIONS ET CONNECTIVITÉ. Le seul endroit du spatial qui
@@ -1046,14 +1058,17 @@ ECARTES_VALIDATION = {
 "ARQQ": "Arqit, capitalisation ~0,4 Md$ et aucun objectif consensus (colonne vide sur la fiche)",
 "LAES": "SEALSQ, capitalisation ~0,6 Md$ et 3,2 ans d'historique",
     # ── NewSpace ──────────────────────────────────────────────────────────────
-    # LA PLUS GROSSE INTRODUCTION EN BOURSE DE LA DÉCENNIE, et nous ne savons pas
-    # la noter. SpaceX cote au Nasdaq depuis juin 2026 pour environ 1 755 Md$ —
-    # soit, à elle seule, plus que tout le reste de la watchlist réunie. Mesuré
-    # le 09/08/2026 : 39 séances. La moyenne mobile 200 jours et
-    # le RSI en exigent 200, et le screener écarterait le titre au run. Ce n'est
-    # pas un jugement sur la société, c'est une impossibilité de mesure — et
-    # elle se lève toute seule vers avril 2027.
-"SPCX": "SpaceX, IPO du 16/06/2026 — 39 séances < 200 (MM200/RSI), éligible vers avril 2027",
+    # SPCX EST SORTIE DE CE REGISTRE LE 15/08/2026, sur décision du propriétaire.
+    # Elle y figurait depuis son introduction du 16/06/2026 : 39 séances mesurées
+    # le 09/08, contre les 200 qu'exige la moyenne mobile 200 jours, et le
+    # screener l'écartait au run. Ce n'était pas un jugement sur la société mais
+    # une garde technique, et elle bloquait plus large que nécessaire : la note
+    # sait retirer un critère incalculable et se renormaliser sur le reste.
+    # SpaceX est donc notée sans son critère de tendance, via l'autorisation
+    # nommée `screener.HIST_PARTIEL_OK` ; ce que la liste y gagne (la société qui
+    # a donné sa forme au phénomène) vaut mieux que sept points de momentum non
+    # mesurés, et le biais du thème le dit au lecteur. L'autorisation se périme
+    # d'elle-même vers avril 2027, quand la MM200 redeviendra calculable.
     # Firefly a été REVALIDÉE le 12/08/2026 au moment du passage à NewSpace : son
     # historique n'est plus l'obstacle (un an de cotation dépasse les 200 séances,
     # et moins de cinq ans n'est plus qu'un avertissement depuis le 01/08). Ce qui

@@ -1904,6 +1904,28 @@ UNIVERS += [
 
 UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 
+# ── HISTORIQUE PARTIEL ADMIS, TITRE PAR TITRE ────────────────────────────────
+# Un titre introduit depuis moins de 200 séances n'a pas de MM200, et la garde
+# technique du scoring l'écartait entièrement. Les titres listés ici sont notés
+# QUAND MÊME : le critère de tendance (7 points sur 100) est retiré, la note se
+# renormalise sur le reste, exactement comme pour une banque sans FCF.
+#
+# CE QUE ÇA COÛTE, ET IL FAUT LE SAVOIR : la note repose sur moins de mesures,
+# et le momentum d'un titre sans MM200 n'est mesuré que par sa position dans un
+# canal de régression encore court. Une note haute y est moins vérifiée qu'une
+# note haute obtenue sur dix-huit exercices et deux cents séances.
+#
+# L'ENTRÉE SE PÉRIME TOUTE SEULE : le jour où le titre atteint ses 200 séances,
+# la MM200 se calcule, le critère revient, et cette ligne ne sert plus à rien.
+# On la retire alors — elle ne fait jamais entrer un titre qui n'y est pas.
+HIST_PARTIEL_OK = {
+    # Demande du propriétaire (15/08/2026). Plus grosse introduction de la
+    # décennie et sujet même de la watchlist NewSpace : l'absence de la société
+    # qui a donné sa forme au phénomène coûtait plus à la liste que sept points
+    # de momentum non mesurés. Éligible sans dérogation vers avril 2027.
+    "SPCX",
+}
+
 # ── JUSTIFICATION ─────────────────────────────────────────────────────────────
 def generer_justification(nom, score, details, alertes):
     points = []
@@ -2158,12 +2180,38 @@ def score_ticker(ticker, vix=None):
         vol_recent = float(volume_2y.tail(20).mean())   # volume des 20 derniers jours
         vol_annual  = float(volume_2y.mean())            # moyenne sur 2 ans
 
+        # HISTORIQUE PARTIEL AUTORISÉ, TITRE PAR TITRE (décision du propriétaire,
+        # 15/08/2026). Un titre récemment introduit n'a pas ses 200 séances : la
+        # MM200 sort NaN et la garde ci-dessous l'écartait entièrement. Or la
+        # note sait déjà faire : note_v4 RETIRE le critère « tendance » quand
+        # `ecart_mm_pct` est absent et renormalise prudemment sur le reste,
+        # exactement comme pour une banque sans FCF. Ce n'était donc pas une
+        # règle éditoriale mais une garde technique, et elle bloquait plus large
+        # que nécessaire.
+        #
+        # L'OUVERTURE EST NOMMÉE, PAS GÉNÉRALE, et c'est délibéré : lever le
+        # plancher pour tous les titres jeunes ferait entrer d'un coup dans
+        # l'univers des dizaines d'introductions récentes et changerait toutes
+        # les watchlists en silence. Ici chaque titre est inscrit à la main,
+        # avec sa raison, et il perd 7 points de momentum sur 100 : sa note est
+        # renormalisée, donc comparable, mais elle repose sur moins de mesures.
+        # L'entrée se retire d'elle-même quand le titre atteint ses 200 séances.
+        _partiel = ticker in HIST_PARTIEL_OK and mm200 != mm200
+        if _partiel:
+            print(f"  ⚠ {ticker}: {len(close_2y)} barres < 200, MM200 indisponible "
+                  f"— critère de tendance retiré, note renormalisée")
+            mm200 = None
+
         # Garde NaN : le garde d'entrée n'exige que 50 barres alors que la MM200 en
-        # demande 200 — entre les deux, rolling() renvoie NaN, qui traverserait
+        # demande 200 ; entre les deux, rolling() renvoie NaN, qui traverserait
         # float()/round() sans lever et finirait sérialisé dans watchlist.json
         # (token NaN → JSON.parse échoue côté site, incident classe 3.0.1).
-        if any(v != v for v in (prix, mm21, mm200, rsi, vol_recent, vol_annual)):
-            print(f"  ✗ {ticker}: historique insuffisant pour MM200/RSI ({len(close_2y)} barres) — écarté")
+        # `mm200` vaut ici soit un flottant valide, soit None (jamais NaN) :
+        # None se sérialise en `null`, que le site sait déjà lire.
+        _a_verifier = (prix, mm21, rsi, vol_recent, vol_annual) if _partiel else \
+                      (prix, mm21, mm200, rsi, vol_recent, vol_annual)
+        if any(v != v for v in _a_verifier):
+            print(f"  ✗ {ticker}: historique insuffisant pour MM200/RSI ({len(close_2y)} barres), écarté")
             return None
 
         # ── Croisement MM21/MM200 (2 ans suffisent) — informationnel depuis v4
@@ -2590,7 +2638,9 @@ def score_ticker(ticker, vix=None):
             # Indicateurs techniques
             "rsi":                   round(rsi, 1),
             "mm21":                  round(mm21, 2),
-            "mm200":                 round(mm200, 2),
+            # None quand l'historique n'atteint pas 200 séances (HIST_PARTIEL_OK) :
+            # `null` dans le JSON, jamais NaN, et la fiche affiche « — ».
+            "mm200":                 round(mm200, 2) if mm200 is not None else None,
             # Régression
             "regression_z":          regression_z,
             "regression_signal":     reg_signal,
@@ -2948,7 +2998,9 @@ def score_ticker(ticker, vix=None):
             "meme_devise":    _meme_devise,
             "z":              _n(regression_z),
             "rsi":            _n(rsi),
-            "ecart_mm_pct":   (mm21 / mm200 - 1) * 100 if mm200 > 0 else None,
+            # mm200 à None (historique partiel) rend le critère NON NOTABLE :
+            # note_v4 le retire et renormalise, il ne vaut surtout pas zéro.
+            "ecart_mm_pct":   (mm21 / mm200 - 1) * 100 if (mm200 and mm200 > 0) else None,
         })
         score = note["total"]
         breakdown["note"] = note
