@@ -863,9 +863,21 @@ function showHome(){
      listes d'actions thématiques — et pour qui : des opportunités qui vous
      ressemblent. « Watchlists » reste le nom de l'onglet dans la nav et dans
      le fil d'Ariane ; le titre de la page, lui, parle au lecteur. Toujours
-     « opportunité », jamais de promesse de performance : service éditorial. */
+     « opportunité », jamais de promesse de performance : service éditorial.
+     Troisième passe (15/08, toujours la copie du propriétaire) : les chiffres
+     REVIENNENT sur l'accueil — retirés le 08/08 parce qu'« un nombre sans
+     phrase pour le porter n'a nulle part où aller », ils ont désormais leur
+     phrase : c'est la baseline elle-même qui les porte, comme preuve. Jamais
+     écrits en dur : l'univers tourne et des listes entrent et sortent chaque
+     semaine, un « 286 » figé serait faux dès le prochain run. Sans
+     universe.json, la phrase retombe sur sa version sans chiffres, comme le
+     reste de la page. */
+  const nbl=others.length+1;   // les thématiques + le top 30
+  const lead=(U.universe_scored&&others.length)
+    ?U.universe_scored+' sociétés notées, '+nbl+' listes thématiques : identifiez les opportunités qui vous ressemblent.'
+    :'Identifiez les opportunités qui vous ressemblent.';
   doc.innerHTML='<div class="home-h"><div class="home-t">Gagnez du temps, identifiez de nouvelles opportunités.</div>'+
-    '<p class="home-lead">Accédez à des listes d\'actions thématiques pour vous permettre d\'identifier des opportunités qui vous ressemblent.</p>'+
+    '<p class="home-lead">'+lead+'</p>'+
     (meta?'<div class="home-meta">'+meta+'</div>':'')+'</div>'+
     '<div class="tgrid">'+card(m,true)+others.map(t=>card(t,false)).join('')+'</div>'+
     (others.length?'':'<p class="wl-empty">Les watchlists thématiques ne sont pas encore publiées.</p>');
