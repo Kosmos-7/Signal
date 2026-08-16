@@ -1,10 +1,21 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-92 fiches sur 104 portent une photo de leur société : 58 montrent un
-produit ou une activité, 34 un lieu identifiable. 73 sont sous licence
-libre et 19 sous licence non établie. Les 12 autres n'affichent aucune illustration. Priorité au PRODUIT (puce, carte, terminal,
+113 fiches sur 139 portent une photo de leur société : 58 montrent un produit
+ou un site d'exploitation, 55 un lieu identifiable. 96 sont sous licence libre
+et 17 sous licence non établie. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
+
+**Les 26 fiches restantes ne sont plus nues** (16/08/2026) : elles affichent
+l'illustration de la watchlist depuis laquelle on les ouvre, nommée comme telle
+dans la légende : `Illustration de la watchlist « NewSpace » : aucune photo
+libre de la société`. Ces sept images sont documentées dans
+[`assets/themes/CREDITS.md`](../themes/CREDITS.md), toutes en domaine public ou
+CC0. Ce repli n'est pas un renoncement à chercher : dès qu'une photo de société
+entre dans `LEGENDES.json`, elle reprend la place, sans une ligne de code à
+changer. Il dit seulement qu'une fiche sur cinq ne restera pas sans image en
+attendant qu'un fonds libre veuille bien photographier Astera Labs, Credo, IREN
+ou Voyager.
 
 ## Sept sources, par ordre de découverte
 
