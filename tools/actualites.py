@@ -29,6 +29,31 @@ la tentation est de meubler. Règle inverse : moins de MIN_DEPECHES dépêches
 exploitables, pas de post du tout et sortie en erreur — le CI devient rouge,
 la page sert les posts existants. Jamais de demi-post.
 
+LA REDITE, ET POURQUOI ELLE N'ÉTAIT PAS UN BOGUE MAIS UN DÉFAUT DE CONCEPTION.
+Constat propriétaire du 16/08/2026 : quatre matins d'affilée, quatre titres qui
+disaient la même chose — « L'or flambe, l'Iran conditionne Ormuz », « l'or en
+forme et le pétrole surveille l'Iran », « Pétrole et or en hausse », « l'or
+brille ». Les CORPS, eux, étaient variés (Intel, CoreWeave, Verizon, Meta,
+Cardinal Health) : c'est le titre, et lui seul, qui retombait chaque jour sur la
+même couche. Trois mécanismes l'y poussaient, aucun n'était accidentel.
+  · Le prompt demandait « le fait dominant du jour ». Le fait dominant d'un
+    marché est une histoire LENTE : l'or monte pendant trois semaines, l'Iran
+    négocie pendant deux mois. Le fait dominant d'aujourd'hui est celui d'hier.
+  · Le tableau des clôtures est sous les yeux du modèle, et ses lignes matières
+    premières bougent mécaniquement plus que les indices (l'or fait 1,5 % quand
+    le S&P fait 0,3 %). « Cite les deux ou trois chiffres qui portent l'histoire
+    du jour » désignait donc l'or et le brut TOUS LES MATINS, par construction.
+  · Rien ne se souvenait de la veille. Les photos, elles, avaient déjà leur
+    mémoire (`photos_deja_utilisees`) et jusqu'à un détecteur de quasi-doublons,
+    précisément parce que la répétition visuelle avait été vue et corrigée. Le
+    texte n'avait jamais reçu le même traitement.
+Le correctif est de même nature que le reste du fichier : structurel, pas une
+consigne de politesse. Le modèle reçoit les titres déjà parus ET la liste des
+mots qui les portaient, un garde relit son titre, et les dépêches déjà citées
+sont écartées du tirage. Une seule prudence, qui prime sur tout : la redite
+n'est JAMAIS bloquante. Un post honnête qui répète vaut mieux que pas de post,
+et un vrai titre (décrochage, record) ne se sacrifie pas pour éviter un mot.
+
 IMMUABILITÉ. Un post publié ne se régénère pas, comme l'historique du
 portefeuille : le fichier existant fait échouer l'écriture (sauf --force,
 réservé au jour même). L'index, lui, se RECONSTRUIT à chaque run depuis les
@@ -52,6 +77,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 
@@ -127,6 +153,128 @@ SUJETS = {
 # Un post quotidien ne recommande rien. Ces deux racines n'ont aucune raison
 # honnête d'apparaître dans un compte rendu factuel.
 INTERDITS = ("recommand", "conseill")
+
+# ── Mémoire éditoriale : ce que le lecteur a déjà lu ─────────────────────────
+# Les trois nombres qui règlent l'anti-redite. MEMOIRE : combien de titres parus
+# le modèle voit. REDITE_FENETRE / REDITE_MIN : un mot est « épuisé » quand il a
+# porté REDITE_MIN des REDITE_FENETRE derniers titres — deux fois en trois
+# matins, ce n'est plus une nouvelle, c'est le décor. La fenêtre est courte
+# exprès : une histoire qui revient une semaine après avoir disparu est
+# redevenue une information.
+MEMOIRE = 5
+REDITE_FENETRE = 3
+REDITE_MIN = 2
+
+# LES FAMILLES DE MOTS, ÉCRITES À LA MAIN, COMME LA TABLE DES SUJETS. Sans
+# elles, le garde s'esquive au synonyme : interdire « or » ferait écrire « le
+# métal jaune », interdire « pétrole » ferait écrire « le brut », et le lecteur
+# lirait le même titre en croyant en lire un autre. On ne cherche pas à couvrir
+# la langue, seulement les poignées d'expressions qui reviennent réellement dans
+# un point marchés. Forme canonique : libellé lisible, puis ce qui la dit
+# autrement (sans accents, en minuscules : la comparaison se fait après
+# `_canoniser`).
+FAMILLES = {
+    "or":         ("l'or",        ("metal jaune", "once d or", "lingot")),
+    "petrole":    ("le pétrole",  ("or noir", "brent", "wti", "baril", "brut")),
+    "iran":       ("l'Iran",      ("teheran", "ormuz", "hormuz", "iranienne",
+                                   "iranien", "perse")),
+    "wallstreet": ("Wall Street", ("wall street", "s&p 500", "s&p", "nasdaq",
+                                   "dow jones", "dow")),
+    "fed":        ("la Fed",      ("reserve federale", "powell", "fomc")),
+    "inflation":  ("l'inflation", ("prix a la consommation", "hausse des prix",
+                                   "cpi")),
+    "bitcoin":    ("le bitcoin",  ("cryptomonnaie", "crypto", "btc")),
+    "dollar":     ("le dollar",   ("billet vert", "greenback")),
+}
+# Le remplacement se fait du plus long au plus court : « dow jones » avant
+# « dow », sinon la moitié de l'expression survit et ne se reconnaît plus.
+_VARIANTES = sorted(((v, c) for c, (_, vs) in FAMILLES.items() for v in vs),
+                    key=lambda x: -len(x[0]))
+
+# Grammaire pure : ces mots sont dans tous les titres et ne disent rien d'aucun.
+# Les verbes de mouvement (« monte », « recule », « hésite ») n'y sont PAS, et
+# c'est voulu : trois matins de « hausse » sont aussi une redite, même quand le
+# sujet change.
+VIDES = frozenset("""
+au aux avec ce ces cet cette comme dans de des du elle en encore entre est et
+etre eux il ils la le les leur leurs lui ma mais me mes moins mon ne nos notre
+nous on ont ou par pas plus pour qu que qui sa sans se ses si son sont sous sur
+ta tes ton tout toute toutes tous un une vos votre vous y
+""".split())
+
+
+def _sans_accents(s):
+    return "".join(c for c in unicodedata.normalize("NFD", s.lower())
+                   if unicodedata.category(c) != "Mn")
+
+
+def _canoniser(texte):
+    """Un titre ramené à sa langue de comparaison : sans accents, sans
+    apostrophes, les familles réduites à leur forme unique."""
+    t = re.sub(r"[’'`]", " ", _sans_accents(texte))
+    for variante, canon in _VARIANTES:
+        t = re.sub(rf"(?<![\w&]){re.escape(variante)}(?![\w&])", canon, t)
+    return t
+
+
+def mots_titre(titre):
+    """Les mots d'un titre qui disent de QUOI il parle. Pure.
+
+    Le pluriel tombe au-delà de quatre lettres (« marchés » et « marché » sont
+    le même mot ; « taux » et « gaz » ne sont pas des pluriels).
+    """
+    out = set()
+    for m in re.findall(r"[a-z0-9&]{2,}", _canoniser(titre)):
+        if len(m) > 4 and m.endswith("s"):
+            m = m[:-1]
+        if m not in VIDES and not m.isdigit():
+            out.add(m)
+    return frozenset(out)
+
+
+def mots_epuises(titres):
+    """Les mots qui ont porté REDITE_MIN des REDITE_FENETRE derniers titres. Pure."""
+    compte = {}
+    for t in titres[:REDITE_FENETRE]:
+        for m in mots_titre(t):
+            compte[m] = compte.get(m, 0) + 1
+    return frozenset(m for m, n in compte.items() if n >= REDITE_MIN)
+
+
+def libelles(canons, titres):
+    """Les mots épuisés dans la graphie que le lecteur a sous les yeux. Pure.
+
+    On parle au modèle en français, pas en jetons internes : « le pétrole »,
+    pas « petrole ». Les regroupements tiennent leur libellé de FAMILLES, les
+    autres mots le tiennent des titres eux-mêmes, là où ils ont été écrits.
+    """
+    vus = {}
+    for t in titres:
+        for brut in re.findall(r"[^\W\d_]{2,}", t, re.UNICODE):
+            for c in mots_titre(brut):
+                vus.setdefault(c, brut)
+    return [FAMILLES[c][0] if c in FAMILLES else vus.get(c, c)
+            for c in sorted(canons)]
+
+
+def defauts_redite(post, epuises, titres=()):
+    """Ce que le titre re-sert des matins précédents. Pure, et NON BLOQUANT.
+
+    Séparé de `valider_post` par principe, pas par commodité : les défauts de
+    validation portent sur la VÉRITÉ du post (une section sans source, un
+    chiffre inventé) et un post faux ne se publie pas. Une redite, elle, ne
+    rend le post ni faux ni malhonnête, seulement ennuyeux. Elle vaut une
+    seconde tentative, jamais un matin sans post.
+    """
+    if not isinstance(post, dict) or not epuises:
+        return []
+    revenus = mots_titre(post.get("titre") or "") & epuises
+    if not revenus:
+        return []
+    return ["le titre reprend " + ", ".join(f"« {l} »" for l in libelles(revenus, titres))
+            + " : ces mots portaient déjà les titres des derniers matins. Change "
+              "d'ANGLE, pas de synonyme — un autre fait des dépêches, pas le même "
+              "fait dit autrement"]
 
 
 # ── Validation (pure, testable hors ligne) ───────────────────────────────────
@@ -265,6 +413,45 @@ def reconstruire_index():
     return len(entrees)
 
 
+def _quotidiens_recents(n):
+    """Les n derniers posts quotidiens parus, du plus récent au plus ancien.
+
+    ON FILTRE AVANT DE TRONQUER, comme `posts_sans_photo` a dû apprendre à le
+    faire : trié à l'envers, « hebdo-2026-33 » passe devant « 2026-08-13 », et
+    couper les n premiers FICHIERS rendrait une mémoire vide un lundi sur deux.
+    """
+    out = []
+    for chemin in sorted(glob.glob(os.path.join(POSTS, "*.json")), reverse=True):
+        try:
+            d = json.load(open(chemin, encoding="utf-8"))
+        except Exception:                                      # noqa: BLE001
+            continue
+        if d.get("type") == "quotidien":
+            out.append(d)
+        if len(out) >= n:
+            break
+    return out
+
+
+def titres_recents(n=MEMOIRE):
+    """Ce que le lecteur a lu ces derniers matins : date, titre, sujet."""
+    return [{"date": d.get("date") or d.get("id"), "titre": d.get("titre") or "",
+             "sujet": d.get("sujet")} for d in _quotidiens_recents(n)]
+
+
+def depeches_deja_citees(n=REDITE_FENETRE):
+    """Les URL des dépêches citées par les n derniers posts quotidiens.
+
+    Le 11/08, « China is balancing Asia's crude oil demand by itself » a été
+    publiée deux matins de suite : la fenêtre Finnhub de 24 h chevauche celle de
+    la veille, et rien ne s'en souvenait. Une dépêche déjà servie n'est pas une
+    information, c'est une archive. Une SUITE d'histoire, elle, arrive sous une
+    autre URL et passe sans encombre : on n'écarte que le littéralement déjà lu.
+    """
+    return frozenset(s.get("url") for d in _quotidiens_recents(n)
+                     for s in (d.get("sources") or []) if s.get("url"))
+
+
 def ecrire_post(post, force=False):
     os.makedirs(POSTS, exist_ok=True)
     chemin = os.path.join(POSTS, f"{post['id']}.json")
@@ -279,7 +466,22 @@ def ecrire_post(post, force=False):
 
 # ── Dépêches ─────────────────────────────────────────────────────────────────
 
-def depeches_recentes(fenetre_h):
+def trier_depeches(candidates, deja):
+    """Les dépêches inédites d'abord, les déjà servies en RÉSERVE. Pure.
+
+    La mémoire ne jette pas, elle déclasse. Écarter sèchement les dépêches de la
+    veille pourrait faire passer un matin creux sous MIN_DEPECHES et annuler un
+    post qui avait de quoi s'écrire : le remède serait pire que la redite. Elles
+    ne remontent donc que si les inédites ne suffisent pas, et dans cet ordre.
+    """
+    inedites = [d for d in candidates if d["url"] not in deja]
+    revues = [d for d in candidates if d["url"] in deja]
+    if len(inedites) >= MIN_DEPECHES:
+        return inedites[:MAX_DEPECHES], len(revues)
+    return (inedites + revues[:MIN_DEPECHES - len(inedites)])[:MAX_DEPECHES], 0
+
+
+def depeches_recentes(fenetre_h, deja=frozenset()):
     import requests
     cle = os.environ.get("FINNHUB_API_KEY", "")
     if not cle:
@@ -290,7 +492,7 @@ def depeches_recentes(fenetre_h):
     if r.status_code != 200:
         raise SystemExit(f"Finnhub HTTP {r.status_code} — pas de post")
     seuil = datetime.now(timezone.utc) - timedelta(hours=fenetre_h)
-    vues, par_source, retenues = set(), {}, []
+    vues, par_source, candidates = set(), {}, []
     for a in r.json()[:200] if isinstance(r.json(), list) else []:
         url = a.get("url") or ""
         if not url or url in vues:
@@ -305,15 +507,22 @@ def depeches_recentes(fenetre_h):
             continue          # un titre sans contenu ne permet que de broder
         vues.add(url)
         par_source[src] = par_source.get(src, 0) + 1
-        retenues.append({
+        candidates.append({
             "titre": a["headline"].strip(),
             "resume": a["summary"].strip(),
             "source": src,
             "url": url,
             "date": datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m-%d %H:%M"),
         })
-        if len(retenues) >= MAX_DEPECHES:
+        # ON NE S'ARRÊTE PLUS À MAX_DEPECHES ICI. Le plafond borne ce qui part
+        # dans le prompt, pas ce qu'on regarde : couper le tirage avant la
+        # mémoire ferait choisir parmi quatorze dépêches dont la moitié a déjà
+        # servi, et la variété se jouerait sur ce qui reste.
+        if len(candidates) >= MAX_DEPECHES * 2:
             break
+    retenues, ecartees = trier_depeches(candidates, deja)
+    if ecartees:
+        print(f"   {ecartees} dépêche(s) déjà citée(s) ces jours-ci, écartée(s)")
     return retenues
 
 
@@ -348,16 +557,54 @@ il saute. Pas de tiret cadratin (—) dans les textes.
 
 Réponds UNIQUEMENT avec un objet JSON :
 {{
-  "titre": "…(8-90 caractères, le fait dominant du jour)",
+  "titre": "…(8-90 caractères, ce que CE matin apporte de neuf)",
   "chapeau": "…(40-300 caractères, résumé pour la carte de la page d'accueil)",
   "sujet": "un parmi : {sujets}",{champ_marches}
   "sections": [
     {{"titre": "…", "texte": "…(3-6 phrases)", "sources": [indices des dépêches utilisées]}}
   ]
 }}
-{consigne_marches}
+Le `sujet` suit ce dont le post PARLE, pas le genre de l'exercice : il choisit \
+l'illustration, et un post dont le cœur est une puce, un baril ou une banque \
+centrale ne s'illustre pas d'une corbeille.
+{consigne_marches}{bloc_memoire}
 DÉPÊCHES ({n}) :
 {corps}{bloc_marches}"""
+
+# LE BLOC QUI CASSE LA BOUCLE. Il ne dit pas « varie un peu » : il montre au
+# modèle ce que le lecteur a déjà lu, nomme les mots usés, et rappelle où vit
+# le décor permanent des marchés — dans le tableau, qui est déjà affiché.
+BLOC_MEMOIRE = """
+## LES MATINS PRÉCÉDENTS (le lecteur les a lus)
+{lignes}{uses}
+Un titre dit ce qui a CHANGÉ. Les cours de l'or, du brut, l'état de Wall Street \
+et les tensions au long cours reviennent tous les matins : ils ont déjà leur \
+place, le tableau des clôtures et le paragraphe `marches` juste en dessous. Le \
+titre et le chapeau, eux, portent ce que les dépêches d'AUJOURD'HUI apportent \
+de neuf. Un titre qui aurait pu être écrit hier soir n'est pas un titre.
+UNE EXCEPTION, ET UNE SEULE : si le fait du jour EST le mouvement de marché \
+lui-même (un décrochage, un record, un renversement de tendance), c'est le \
+titre, et tu l'écris sans hésiter. On ne renonce jamais à un vrai titre pour \
+éviter une répétition. Ce qu'on refuse, c'est le titre par défaut.
+"""
+
+
+def bloc_memoire(recents, epuises):
+    """Le bloc de prompt qui porte la mémoire des matins passés. Pure."""
+    if not recents:
+        return ""
+    lignes = "\n".join(
+        f"- {r['date']} · {r['titre']}"
+        + (f"  [illustré en « {r['sujet']} »]" if r.get("sujet") else "")
+        for r in recents)
+    uses = ""
+    if epuises:
+        mots = ", ".join(libelles(epuises, [r["titre"] for r in recents]))
+        uses = ("\n\nCes mots ont porté au moins deux des trois derniers titres : "
+                f"{mots}. Ils ont fait leur temps en tête d'affiche. Ne les "
+                "reprends pas dans le titre du jour, et ne les remplace pas par "
+                "un synonyme : va chercher un AUTRE fait dans les dépêches.")
+    return BLOC_MEMOIRE.format(lignes=lignes, uses=uses)
 
 # Le paragraphe qui accompagne le tableau. Il n'existe QUE si le tableau existe :
 # demander un commentaire de marché sans chiffres reviendrait à demander du vent,
@@ -388,11 +635,12 @@ Corrige EXACTEMENT ces points, sans rien changer d'autre à ta démarche :
 """
 
 
-def rediger(deps, marches=None, defauts=None):
+def rediger(deps, marches=None, defauts=None, memoire=""):
     """`defauts` : ce que la tentative précédente a raté. Le commentaire de
     main() promettait depuis toujours que « le modèle reçoit ses défauts, pas
     nous » — c'était faux, la seconde tentative était un simple tirage au sort
-    avec le même prompt. Elle est maintenant ce qu'elle prétendait être."""
+    avec le même prompt. Elle est maintenant ce qu'elle prétendait être.
+    `memoire` : le bloc des matins déjà parus, rendu par `bloc_memoire`."""
     from anthropic import Anthropic
     from marches import bloc_prompt
     corps = "\n".join(f"[{i}] {d['titre']} — {d['resume']} ({d['source']}, {d['date']})"
@@ -404,6 +652,7 @@ def rediger(deps, marches=None, defauts=None):
             sujets=", ".join(SUJETS), n=len(deps), corps=corps,
             champ_marches=CHAMP_MARCHES if bloc else "",
             consigne_marches=CONSIGNE_MARCHES if bloc else "",
+            bloc_memoire=memoire,
             bloc_marches=bloc) + (_RETOUR.format(defauts="\n".join(
                 "- " + x for x in defauts)) if defauts else "")}])
     brut = msg.content[0].text.strip()
@@ -650,11 +899,18 @@ def main():
     # veille et la nuit. La fenêtre suit le calendrier, pas l'inverse.
     fenetre = 72 if aujourdhui.weekday() == 0 else 24
 
-    deps = depeches_recentes(fenetre)
+    deps = depeches_recentes(fenetre, depeches_deja_citees())
     print(f"{len(deps)} dépêches exploitables (fenêtre {fenetre} h)")
     if len(deps) < MIN_DEPECHES:
         raise SystemExit(f"Moins de {MIN_DEPECHES} dépêches : pas de post aujourd'hui. "
                          "Un post honnête ne se remplit pas, il s'annule.")
+
+    recents = titres_recents()
+    epuises = mots_epuises([r["titre"] for r in recents])
+    memoire = bloc_memoire(recents, epuises)
+    if epuises:
+        print(f"   mémoire : {len(recents)} titres parus, mots épuisés — "
+              + ", ".join(libelles(epuises, [r["titre"] for r in recents])))
 
     # LE TABLEAU AVANT LE TEXTE. Le modèle doit commenter des clôtures qu'il a
     # sous les yeux ; les mesurer après coup produirait un commentaire écrit à
@@ -663,15 +919,26 @@ def main():
     from marches import releve
     marches = None if a.sans_marches else releve()
 
-    post = rediger(deps, marches)
+    post = rediger(deps, marches, memoire=memoire)
     defauts = valider_post(post, len(deps), marches)
-    if defauts:
+    redites = defauts_redite(post, epuises, [r["titre"] for r in recents])
+    if defauts or redites:
         # Une seule seconde chance : le modèle reçoit ses défauts, pas nous.
-        print("⚠ post rejeté :", "; ".join(defauts), "— nouvelle tentative")
-        post = rediger(deps, marches, defauts)
-        defauts = valider_post(post, len(deps), marches)
-        if defauts:
-            raise SystemExit("Post invalide après 2 tentatives : " + "; ".join(defauts))
+        print("⚠ post rejeté :", "; ".join(defauts + redites), "— nouvelle tentative")
+        second = rediger(deps, marches, defauts + redites, memoire)
+        d2 = valider_post(second, len(deps), marches)
+        if not d2:
+            # La seconde est juste : elle gagne, redite corrigée ou non.
+            post, defauts = second, d2
+            redites = defauts_redite(second, epuises, [r["titre"] for r in recents])
+        elif defauts:
+            raise SystemExit("Post invalide après 2 tentatives : " + "; ".join(d2))
+        else:
+            # LA PREMIÈRE ÉTAIT VRAIE, SEULEMENT REDONDANTE, ET LA SECONDE EST
+            # FAUSSE. On garde la première : renoncer au post du matin parce
+            # qu'un mot revenait serait payer une gêne au prix d'une panne.
+            print(f"::warning::seconde tentative invalide ({'; '.join(d2)}) — "
+                  "la première est publiée telle quelle")
 
     pid = aujourdhui.isoformat()
     utilises = sorted({i for s in post["sections"] for i in s["sources"]})
@@ -694,6 +961,11 @@ def main():
     chemin = ecrire_post(complet, force=a.force)
     print(f"post écrit : {chemin} ({len(post['sections'])} sections, "
           f"{len(utilises)} sources, photo {'oui' if complet['photo'] else 'non'})")
+    if redites:
+        # Jaune dans l'onglet Actions, comme le post sans photo : la redite
+        # passée n'est pas une panne, mais elle ne doit pas s'installer en
+        # silence — c'est exactement ainsi qu'on a tenu quatre matins.
+        print("::warning::redite de titre publiée — " + "; ".join(redites))
     if not (complet["photo"] or a.sans_photo):
         # ::warning:: est rendu en jaune dans l'onglet Actions et remonte dans le
         # résumé du run. Sans lui, un post sans photo se lit « success » comme un

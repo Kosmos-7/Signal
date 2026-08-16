@@ -5,6 +5,70 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Les actualités se répétaient : quatre matins, quatre fois l'or
+
+Constat du propriétaire (16/08) : « c'est très redondant d'un jour à l'autre,
+en tous cas sur les titres… or pétrole Iran ». Vérification faite, c'était
+exact et c'était **le titre seul**. Du 10 au 13 août : « L'or flambe, l'Iran
+conditionne Ormuz », « l'or en forme et le pétrole surveille l'Iran »,
+« Pétrole et or en hausse », « l'or brille ». Quatre fois l'or, trois fois le
+pétrole ou l'Iran. Les **corps**, eux, étaient variés — Verizon en panne, Meta
+et ses assistants, Cardinal Health, la loi sur l'immobilier locatif, le PDG
+d'Intel, CoreWeave. La matière était là ; elle ne montait jamais en titre.
+
+**Trois mécanismes l'empêchaient, aucun n'était accidentel.** Le prompt
+demandait « le fait dominant du jour », or le fait dominant d'un marché est une
+histoire LENTE : l'or monte pendant trois semaines, l'Iran négocie pendant deux
+mois, et le fait dominant d'aujourd'hui est celui d'hier. Le tableau des
+clôtures, lui, est sous les yeux du modèle, et ses lignes matières premières
+bougent mécaniquement plus que les indices — l'or fait 1,5 % quand le S&P fait
+0,3 % — si bien que « cite les chiffres qui portent l'histoire du jour »
+désignait l'or et le brut **tous les matins, par construction**. Enfin rien ne
+se souvenait de la veille : les photos avaient déjà leur mémoire et jusqu'à un
+détecteur de quasi-doublons, précisément parce que la répétition visuelle avait
+été vue et corrigée un an plus tôt ; le texte n'avait jamais reçu le même
+traitement.
+
+**Le modèle voit désormais ce que le lecteur a lu.** Les cinq derniers titres
+parus entrent dans le prompt avec leur date et leur illustration, suivis des
+mots qui ont porté au moins deux des trois derniers — « l'or », « le pétrole »,
+« Wall Street » — et de la seule chose qui compte : un titre dit ce qui a
+CHANGÉ, le décor permanent des marchés a déjà sa place dans le tableau et son
+paragraphe, juste en dessous.
+
+**Un garde relit le titre, et il n'esquive pas au synonyme.** Interdire « or »
+sans interdire « métal jaune » aurait produit une réécriture, pas un autre
+sujet, et le lecteur aurait relu le même titre en croyant en lire un autre :
+huit familles écrites à la main ramènent « brent », « brut » et « baril » au
+pétrole, « Ormuz » et « Téhéran » à l'Iran, « Nasdaq » et « S&P 500 » à Wall
+Street. Le pluriel et l'accent ne font pas un mot neuf. Sur les quatre titres
+d'août, le garde rattrape le troisième et le quatrième.
+
+**Et il ne peut pas coûter un matin.** C'est la décision qui gouverne le reste :
+la redite est séparée de la validation par principe, pas par commodité. Un
+chiffre inventé rend le post FAUX et un post faux ne se publie pas ; une redite
+le rend seulement ennuyeux. Elle vaut donc une seconde tentative, jamais un
+matin sans post — et si cette seconde tentative revient fausse, c'est la
+première, vraie mais redondante, qui est publiée, avec un `::warning::` jaune
+dans l'onglet Actions pour que la répétition ne s'installe pas en silence. Une
+exception est écrite noir sur blanc dans le prompt : quand le fait du jour EST
+le mouvement de marché — un décrochage, un record, un renversement — c'est le
+titre, et on ne renonce jamais à un vrai titre pour éviter un mot.
+
+**Deux effets de bord réparés au passage.** Les dépêches déjà citées les trois
+derniers matins sortent du tirage : le 11 août, « China is balancing Asia's
+crude oil demand by itself » avait été publiée deux jours de suite, la fenêtre
+Finnhub de 24 h chevauchant celle de la veille. Là encore la mémoire déclasse
+au lieu de jeter — sous le minimum de dépêches, les déjà servies remontent
+plutôt que d'annuler un post qui avait de quoi s'écrire. Et le `sujet`, qui
+choisit l'illustration et valait « marches » quatre fois sur quatre, doit
+maintenant suivre ce dont le post PARLE : un post dont le cœur est une puce ou
+une banque centrale ne s'illustre pas d'une corbeille.
+
+Vingt-six vérifications de plus dans `test_actualites.py`, dont le banc d'essai
+qui compte : les quatre vrais titres d'août, dans l'ordre de parution. Un garde
+anti-redite qui ne rattrape pas la redite constatée ne servirait à rien.
+
 ### Plus une seule fiche sans image, et la légende dit laquelle
 
 Demande du propriétaire (16/08) : une photo sur chaque fiche, peu importe la
