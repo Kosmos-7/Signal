@@ -49,6 +49,17 @@
   "source": "File:Einstein-Hubo.jpg",
   "v": "0a51ec3a"
  },
+ "285A.T": {
+  "credit": "Photo : Kioxia",
+  "legende": "SSD d'entreprise Kioxia, mémoire BiCS FLASH",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://www.kioxia.com/en-jp/top.html",
+  "recupere_le": "2026-08-16",
+  "source": "https://www.kioxia.com/content/dam/kioxia/shared/top/img/top_hero_010_en_sp.png",
+  "type": "produit",
+  "v": "09ff04f9"
+ },
  "4062.T": {
   "credit": "Michael KR · CC BY-SA 4.0",
   "legende": "Filtre à particules Ibiden monté sur un moteur Peugeot",
@@ -65,6 +76,17 @@
   "page": "https://commons.wikimedia.org/w/index.php?curid=54658191",
   "source": "Shin-Etsu Chemical Isobe , Gunma - panoramio (1)",
   "v": "b79f4d3b"
+ },
+ "454910.KS": {
+  "credit": "Photo : Doosan Robotics",
+  "legende": "Cobot Doosan en palettisation",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://www.doosanrobotics.com/en/products",
+  "recupere_le": "2026-08-16",
+  "source": "https://www.doosanrobotics.com/images/main/youtube-thumbnail-1.webp",
+  "type": "produit",
+  "v": "6259a5c1"
  },
  "6268.T": {
   "credit": "Petteri Aimonen",
@@ -98,6 +120,17 @@
   "page": "https://commons.wikimedia.org/wiki/File:Rolling-element_bearing_(plain).png",
   "source": "File:Rolling-element bearing (plain).png",
   "v": "2e9539ac"
+ },
+ "6481.T": {
+  "credit": "Photo : THK",
+  "legende": "Vis à billes, guidage linéaire et roulement à rouleaux croisés THK",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://www.thk.com/?q=eng/node/16",
+  "recupere_le": "2026-08-16",
+  "source": "https://www.thk.com/jp/assets/images/corporate/mainvisual_pc_2502_en.png",
+  "type": "produit",
+  "v": "81a0e3f0"
  },
  "6506.T": {
   "credit": "Hetarllen Mumriken · CC BY-SA 2.0",
@@ -134,6 +167,17 @@
   "source": "https://www.advantest.com/img/top/img-top-1.png",
   "type": "produit",
   "v": "5879be5d"
+ },
+ "6861.T": {
+  "credit": "Photo : Keyence",
+  "legende": "Amplificateurs de capteurs Keyence",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://www.keyence.com/products/",
+  "recupere_le": "2026-08-16",
+  "source": "https://www.keyence.com/Images/products_sp-n_v_2297119.png",
+  "type": "produit",
+  "v": "93148eb3"
  },
  "6954.T": {
   "credit": "Steve Jurvetson · CC BY 2.0",
@@ -295,6 +339,17 @@
   "source": "File:ASML headquarters Veldhoven.jpg",
   "v": "f99f3cc9"
  },
+ "ASTS": {
+  "credit": "Photo : AST SpaceMobile",
+  "legende": "L'antenne BlueWalker 3 d'AST SpaceMobile en salle d'intégration",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://ast-science.com/company/",
+  "recupere_le": "2026-08-16",
+  "source": "https://ast-science.com/wp-content/uploads/2025/11/2022-03-18-BlueWalker-3-BW3-array-Microns.jpg",
+  "type": "produit",
+  "v": "7577f220"
+ },
  "ASX": {
   "credit": "Klaus Folberth",
   "legende": "Circuits intégrés encapsulés — le métier d'ASE",
@@ -336,6 +391,17 @@
   "page": "https://commons.wikimedia.org/wiki/File:Bloom_Energy_Servers.jpg",
   "source": "File:Bloom Energy Servers.jpg",
   "v": "dae2df45"
+ },
+ "BKSY": {
+  "credit": "Photo : BlackSky",
+  "legende": "Navires au mouillage, image prise par la constellation BlackSky",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://www.blacksky.com/technology/",
+  "recupere_le": "2026-08-16",
+  "source": "https://blacksky.com/wp-content/uploads/2026/02/DaytimeImagery-1280x720.png",
+  "type": "produit",
+  "v": "df795a57"
  },
  "BNP.PA": {
   "credit": "GFreihalter",
@@ -389,6 +455,17 @@
   "source": "https://www.constellationenergy.com/content/dam/constellationenergy/images/about/locations/locations-open-graph-images/calvert-og.jpg",
   "v": "be8f203e"
  },
+ "CI": {
+  "credit": "Photo : The Cigna Group",
+  "legende": "Siège du Cigna Group",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://www.thecignagroup.com/about-us",
+  "recupere_le": "2026-08-16",
+  "source": "https://www.thecignagroup.com/static/www-thecignagroup-com/images/about-us/about-us-4-lg@2x.jpg",
+  "type": "lieu",
+  "v": "3cfb1cbc"
+ },
  "CIEN": {
   "credit": "C0pMer · CC BY-SA 4.0",
   "legende": "Châssis optique Ciena 6500",
@@ -416,6 +493,28 @@
   "source": "https://www.coherent.com/content/dam/coherent/site/en/images/photography/lasers/products-lasers-950px.jpg",
   "type": "produit",
   "v": "1d803976"
+ },
+ "CORZ": {
+  "credit": "Photo : Core Scientific",
+  "legende": "Vue d'architecte du campus de Denton, au Texas",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://corescientific.com/high-density-data-centers/",
+  "recupere_le": "2026-08-16",
+  "source": "https://corescientific.com/wp-content/uploads/2025/05/Denton-Rendering-Thumbnail.jpg",
+  "type": "lieu",
+  "v": "f743ae67"
+ },
+ "CRDO": {
+  "credit": "Photo : Credo Technology Group",
+  "legende": "Câble électrique actif 800G de Credo",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://www.credosemi.com/products/",
+  "recupere_le": "2026-08-16",
+  "source": "https://credosemi.com/wp-content/uploads/AEC-800G@2x-2-1024x1024.png",
+  "type": "produit",
+  "v": "0df82126"
  },
  "CRM": {
   "credit": "jurvetson · CC BY 2.0",
@@ -1137,6 +1236,17 @@
   "source": "File:Credit card terminal in Laos.jpg",
   "type": "produit",
   "v": "8ec5aae4"
+ },
+ "VOYG": {
+  "credit": "Photo : Voyager Technologies",
+  "legende": "Charges utiles en orbite, vues depuis la Station spatiale internationale",
+  "licence": "Licence non établie, visuel publié par la société",
+  "origine": "site officiel",
+  "page": "https://www.voyagertechnologies.com/newsroom/",
+  "recupere_le": "2026-08-16",
+  "source": "https://voyagertechnologies.com/wp-content/uploads/2026/05/spaceliintech-1-1024x576.jpg",
+  "type": "produit",
+  "v": "fe8f707b"
  },
  "VRT": {
   "credit": "Photo : Vertiv",

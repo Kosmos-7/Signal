@@ -5,6 +5,47 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Dix fiches gagnent une vraie photo de leur société
+
+Suite immédiate de « Plus une seule fiche sans image », et décision du
+propriétaire (16/08) : puisque le fonds libre est vide pour ces titres-là, on va
+chercher les visuels que les sociétés publient elles-mêmes. C'est la **septième
+source**, déjà outillée et déjà appliquée à dix fiches en août —
+`tools/photos_web.py`, une image retenue seulement si elle est servie par le
+domaine de la société, provenance consignée, crédit « Photo : <société> »
+affiché sur la fiche.
+
+Vingt-deux des vingt-six sociétés n'avaient aucune page déclarée. Elles en ont
+désormais. Sur les vingt-six interrogées, seize ont rendu quelque chose et
+**dix sont publiées** : Kioxia, Doosan Robotics, THK, Keyence, AST SpaceMobile,
+BlackSky, The Cigna Group, Core Scientific, Credo et Voyager Technologies.
+
+**Ce qui a été REFUSÉ compte autant.** Un site d'entreprise sert d'abord sa
+communication : Astera Labs et Applied Digital n'ont rendu que leur logo sur
+fond dégradé, SpaceX son seul mot-signe, MSCI une bannière « Careers at MSCI »,
+Fortinet six diagrammes produits et deux badges Gartner, qui appartiennent à
+Gartner et non à Fortinet. DISCO n'a rendu qu'un schéma coté de sa scie DAD3650.
+Un logo ne montre ni objet ni lieu : la règle de juillet tient, ces six-là
+gardent l'illustration de leur watchlist.
+
+Dix autres n'ont rien rendu, pour des raisons qui se lisent dans le journal du
+run : Booking, IREN et Mastercard répondent 403 à tout client automatisé, Cognex
+429, Intuitive Machines ne rend que des redirections ; Cipher, PDD, Quantum
+Computing et TeraWulf servent leurs visuels depuis un domaine tiers, que le
+garde-fou refuse par construction ; Rockwell a rendu 41 images dont pas une
+n'atteint 700 × 380.
+
+**Deux légendes disent ce que l'image est, pas ce qu'on aimerait.** Celle de
+Core Scientific annonce une *vue d'architecte* : le fichier d'origine s'appelle
+`Denton-Rendering-Thumbnail.jpg`, et présenter un rendu comme une photo aurait
+été un mensonge de plus petite taille mais de même nature que les logos qu'on
+refuse. Celle de BlackSky dit que l'image a été *prise par la constellation* :
+c'est le produit de la société, une image satellite, pas une photo de ses murs.
+
+Le compte passe de 113 à **123 fiches sur 139** avec une photo de leur société.
+Les seize autres gardent le repli de watchlist, et le garde-fou de couverture
+reste vert : zéro fiche nue, mesuré au navigateur sur les 156 chemins routables.
+
 ### Les actualités se répétaient : quatre matins, quatre fois l'or
 
 Constat du propriétaire (16/08) : « c'est très redondant d'un jour à l'autre,
