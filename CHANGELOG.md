@@ -5,6 +5,36 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### SpaceX : le site officiel était le mauvais endroit où chercher
+
+Demande du propriétaire, le jour même : **SpaceX avant tout le reste.** La
+campagne des sites officiels venait justement de rendre, pour SPCX, son seul
+mot-signe — `spacex.com` est une application JavaScript dont l'HTML servi ne
+contient qu'une image, l'`og:image`. Aucune obstination sur ce site n'y changera
+rien.
+
+C'est le fonds LIBRE qui avait la réponse depuis le début. Une recherche
+ponctuelle sur Commons (`photos_marques.py --termes`, sept requêtes : Falcon 9,
+Falcon Heavy, Dragon, Starship, atterrissage du premier étage, grappe Starlink,
+booster) a rendu **huit candidats, tous sous licence libre**. La fiche SPCX
+revient donc au domaine du libre et non à celui des visuels non établis, ce qui
+est le meilleur résultat possible.
+
+**Le choix s'est joué sur le cadrage, et le motif mérite d'être écrit.** Le
+candidat le plus spectaculaire était un Starship complet sur son pas de tir.
+Mais la fiche recadre en 16:9 avec un ancrage à 30 % du haut, règle commune aux
+cent et quelques illustrations : le nez du vaisseau tombait hors cadre et il ne
+restait qu'un cylindre d'acier. On ne recadre pas photo par photo — on choisit
+l'image dont le sujet survit au cadrage commun. Le premier étage de Falcon 9
+couché sur son transporteur y tient entier, suies de rentrée et grilles
+comprises (Olga Ernst, CC BY-SA 4.0).
+
+Quinze fiches gardent le repli de watchlist. Note au passage : celle de SPCX
+affichait déjà un Falcon 9 — l'illustration de la watchlist NewSpace est un
+décollage de nuit de la mission Crew-8. Elle était honnêtement légendée comme
+l'image de la liste ; elle est désormais remplacée par une photo légendée comme
+celle de la société.
+
 ### Dix fiches gagnent une vraie photo de leur société
 
 Suite immédiate de « Plus une seule fiche sans image », et décision du

@@ -1,19 +1,19 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-123 fiches sur 139 portent une photo de leur société : 66 montrent un produit
-ou un site d'exploitation, 57 un lieu identifiable. 96 sont sous licence libre
+124 fiches sur 139 portent une photo de leur société : 67 montrent un produit
+ou un site d'exploitation, 57 un lieu identifiable. 97 sont sous licence libre
 et 27 sous licence non établie. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
-**Les 16 fiches restantes ne sont plus nues** (16/08/2026) : elles affichent
+**Les 15 fiches restantes ne sont plus nues** (16/08/2026) : elles affichent
 l'illustration de la watchlist depuis laquelle on les ouvre, nommée comme telle
 dans la légende : `Illustration de la watchlist « NewSpace » : aucune photo
 libre de la société`. Ces sept images sont documentées dans
 [`assets/themes/CREDITS.md`](../themes/CREDITS.md), toutes en domaine public ou
 CC0. Ce repli n'est pas un renoncement à chercher : dès qu'une photo de société
 entre dans `LEGENDES.json`, elle reprend la place, sans une ligne de code à
-changer — c'est exactement ce qui vient d'arriver à dix d'entre elles.
+changer — c'est exactement ce qui vient d'arriver à onze d'entre elles.
 
 ## Sept sources, par ordre de découverte
 
@@ -140,8 +140,33 @@ le journal du run et qu'aucune obstination ne réglera depuis un runner : BKNG,
 IREN et MA répondent 403 à tout client automatisé, CGNX 429, LUNR ne suit que
 des redirections 302 ; CIFR, PDD, QUBT et WULF servent leurs visuels depuis un
 domaine tiers, que le garde-fou refuse par construction ; ROK a rendu 41 images
-dont pas une n'atteint 700 × 380. Ces seize-là gardent l'illustration de leur
-watchlist.
+dont pas une n'atteint 700 × 380.
+
+### SPCX : le site officiel était le mauvais endroit où chercher
+
+Demande du propriétaire, le jour même : SpaceX avant tout le reste. Or
+`spacex.com` est une application JavaScript, dont l'HTML servi ne contient
+qu'une seule image — l'`og:image`, c'est-à-dire le mot-signe. Aucune
+obstination sur ce site n'y changera rien.
+
+C'est le fonds LIBRE qui a la réponse, et il l'avait depuis le début : Commons
+regorge de photos de matériel SpaceX. Une recherche ponctuelle
+(`photos_marques.py --termes`) sur sept requêtes — Falcon 9, Falcon Heavy,
+Dragon, Starship, atterrissage du premier étage, grappe Starlink, booster — a
+rendu huit candidats, tous sous licence libre. **La fiche SPCX est donc revenue
+au domaine du libre, pas à celui des visuels non établis**, ce qui est le
+meilleur résultat possible.
+
+Le choix entre les huit s'est joué sur le CADRAGE, et le motif mérite d'être
+écrit. Le plus spectaculaire était un Starship complet sur son pas de tir. Mais
+la fiche recadre en 16:9 avec un ancrage à 30 % du haut, règle commune aux cent
+et quelques illustrations : le nez du vaisseau tombait hors cadre et il ne
+restait qu'un cylindre d'acier. On ne recadre pas photo par photo — on choisit
+donc l'image dont le sujet survit au cadrage commun. Le premier étage de Falcon
+9 couché sur son transporteur y tient entier, suies de rentrée et grilles
+comprises.
+
+Ces quinze fiches-là gardent l'illustration de leur watchlist.
 
 Deux légendes disent ce que l'image est, et pas ce qu'on aimerait qu'elle soit.
 Celle de CORZ annonce une **vue d'architecte** — le fichier d'origine s'appelle
@@ -199,7 +224,7 @@ aucun assombrissement, contrairement à toutes les autres : la chaîne ramène
 normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 89 % des pixels sont ici déjà sombres et l'appliquer aurait écrasé le sujet.
 
-## Photos publiées (66 produits, 36 lieux)
+## Photos publiées (67 produits, 36 lieux)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -919,6 +944,14 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Source : Synopsys Headquarters Mountain View
 - Page : https://commons.wikimedia.org/w/index.php?curid=118340795
 - Licence : CC0 1.0
+
+### SPCX — Premier étage de Falcon 9 sur son transporteur
+
+- Nature : produit
+- Fichier : `assets/titres/SPCX.jpg`
+- Source : File:Transport of Falcon 9, SpaceX.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Transport_of_Falcon_9,_SpaceX.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Olga Ernst · CC BY-SA 4.0
 
 ### SPGI — Siège de S&P Global, 55 Water Street à New York
 
