@@ -69,6 +69,47 @@ Vingt-six vérifications de plus dans `test_actualites.py`, dont le banc d'essai
 qui compte : les quatre vrais titres d'août, dans l'ordre de parution. Un garde
 anti-redite qui ne rattrape pas la redite constatée ne servirait à rien.
 
+### Plus une seule fiche sans image, et la légende dit laquelle
+
+Demande du propriétaire (16/08) : une photo sur chaque fiche, peu importe la
+méthode. Le compte exact au moment de la demande : **26 fiches sur 139**
+n'affichaient rien du tout. Ce n'était pas un oubli. La règle en vigueur était
+« la société ou rien », et elle tenait tant qu'on croyait combler les trous un
+par un. Six campagnes de recherche plus tard, le fonds libre n'a toujours rien
+sur Astera Labs, Credo, IREN, Voyager ou Kioxia, et ce qu'il rapporte pour ces
+titres-là est pire que le vide : les produits de leurs **concurrents**. Une
+carte Supermicro pour Astera Labs, un boîtier Netgear pour Fortinet, un bras
+Universal Robots pour Doosan, une caméra IDS pour Cognex — quatre fois, la
+garde `source` de `test_donnees` a arrêté la publication. Elles ont été
+réexaminées une à une avant cette décision : aucune n'est publiable.
+
+**Une fiche sans photo de société affiche désormais l'illustration de la
+watchlist depuis laquelle on l'ouvre.** Le chemin de la fiche la désigne déjà
+(`#/w/<watchlist>/<TICKER>`) : on montre l'image de la liste qu'on est en train
+de parcourir, pas une image de secteur devinée. Les sept illustrations existent,
+elles sont en domaine public ou CC0, et elles sont créditées depuis toujours
+dans `assets/themes/`.
+
+**L'objection d'origine est traitée, pas contournée.** Ce qui avait fait retirer
+les photos de secteur en juillet, c'est qu'une image d'activité peut se lire
+comme une photo du titre. La légende du repli l'empêche en toutes lettres :
+« Illustration de la watchlist « NewSpace » : aucune photo libre de la
+société ». Elle ne répète pas le nom du titre — il est écrit trois centimètres
+plus bas dans l'en-tête, et les raisons sociales de `universe.json` arrivent
+tronquées à 22 signes par le fournisseur de données ; « Intuitive Machines, In »
+dans une légende aurait été une coquille pour tout le monde.
+
+**Le trou se referme aussi par l'autre bout.** Une photo de société qui répond
+404 (fichier retiré, cache empoisonné) retirait le cadre ; elle bascule
+maintenant sur le même repli.
+
+Trois vérifications de plus dans `test_donnees.py`. La première est la seule qui
+compte vraiment : elle contrôle que **chaque watchlist publiée** a son image et
+sa légende, puisque c'est ce qui rend le repli total. Surveiller les 139 titres
+un par un aurait été surveiller la conséquence ; les sept listes sont la cause.
+Mesuré sur les 156 chemins de fiche réellement routables du site : 113 photos de
+société, 26 replis, **zéro fiche nue**.
+
 ### Apprendre n'est plus un rouleau : douze cartes, une section à la fois
 
 Demande du propriétaire (15/08). La page pédagogique portait douze sections

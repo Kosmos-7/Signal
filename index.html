@@ -117,6 +117,13 @@ titres dessous, on croit avoir tout vu. Ici on écrit COMBIEN il en reste,
   .d-illu figcaption b{color:var(--text2);font-weight:600}
   .d-illu .d-cred{display:block;margin-top:2px;font-size:.5rem;letter-spacing:.3px;
     color:var(--text3);opacity:.8;text-transform:none}
+  /* Repli : l'illustration de la watchlist, faute de photo de la société. Sa
+     légende est plus longue que celle d'une photo de société (elle nomme la
+     liste ET dit qu'on n'a pas de photo du titre) et peut tomber sur deux
+     lignes : le dégradé remonte donc plus haut, sinon la deuxième ligne se lit
+     sur l'image nue. */
+  .d-illu.d-repli figcaption{padding-top:1.4rem;
+    background:linear-gradient(0deg,rgba(6,6,11,.95) 55%,rgba(6,6,11,0))}
   @media(max-width:900px){.d-illu img{max-height:none}}
   .d-tag{font:600 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border:1px solid var(--line);color:var(--text2);border-radius:4px}
   .d-reg{font:600 .6rem var(--mono);letter-spacing:1px;color:var(--text3);border:1px solid var(--line);border-radius:4px;padding:4px 9px}
@@ -804,18 +811,29 @@ function railMore(){
 /* Photographies libres de droits (domaine public), une par watchlist. Provenance
    et licences dans assets/themes/CREDITS.md. Le repli textuel reste en place :
    une image qui ne charge pas laisse le libellé, jamais un cadre vide. */
-/* Illustration de la fiche : UNIQUEMENT une photo de la société elle-même.
-   Rien d'autre. Une photo de secteur ne dit pas de quelle entreprise on parle,
-   et un logo ne montre ni objet ni lieu : les deux ont été essayés puis
-   retirés. Absente si l'on n'a pas de photo, ou si l'image ne charge pas :
-   jamais de cadre vide. */
+/* Illustration de la fiche : d'ABORD une photo de la société elle-même, et à
+   défaut celle de la watchlist ouverte. TOUTE fiche porte une image.
+
+   CE QUI A CHANGÉ, ET POURQUOI. La règle précédente était « la société ou
+   rien » : une photo de secteur ne dit pas de quelle entreprise on parle, un
+   logo ne montre ni objet ni lieu, les deux ont été essayés puis retirés. Elle
+   tenait tant qu'on croyait combler les trous un par un. Ce n'est pas ce qui
+   s'est passé : vingt-six fiches sur cent trente-neuf restaient nues, et pas
+   par négligence — Commons n'a rien de libre sur Astera Labs, Credo, IREN ou
+   Voyager, et les six campagnes de recherche ont ramené, pour ces titres-là,
+   les produits de leurs CONCURRENTS (carte Supermicro pour Astera Labs,
+   boîtier Netgear pour Fortinet, bras Universal Robots pour Doosan, caméra IDS
+   pour Cognex — cf. la garde de tests/test_donnees.py). Attendre plus longtemps
+   revenait à laisser une fiche sur cinq sans image.
+
+   CE QUI NE CHANGE PAS. Une image d'activité ne doit JAMAIS se lire comme une
+   photo du titre : c'est le fond de l'objection, et il reste valable. Le repli
+   est donc explicitement nommé dans sa légende — la watchlist, pas la société,
+   et le fait qu'on n'a pas de photo libre de celle-ci. Le lecteur sait ce qu'il
+   regarde, ce qui était le seul enjeu. */
 function illuSociete(tk){
   const P=PHOTOS[tk];
-  // Pas de photo de la société, pas d'illustration. Une image d'activité
-  // montrerait le secteur et pas l'entreprise : elle n'apprend rien de ce
-  // titre-ci, et une fiche sans illustration vaut mieux qu'une illustration
-  // qui ne parle pas d'elle. Jamais de cadre vide non plus : on ne rend rien.
-  if(!P) return '';
+  if(!P) return illuRepli();
   // Le crédit d'auteur n'est pas relégué dans un fichier que personne n'ouvre :
   // les licences CC-BY et CC-BY-SA l'exigent, il s'affiche donc sur la fiche.
   const cr=P.credit?'<span class="d-cred">'+sv(P.credit)+'</span>':'';
@@ -823,10 +841,44 @@ function illuSociete(tk){
   // chemin, donc le navigateur et le CDN servaient leur copie en cache et l'on
   // voyait l'ANCIENNE image sous la NOUVELLE legende. Une image inchangee garde
   // son adresse et reste en cache ; seule celle qui change est rechargee.
+  // Une image qui ne charge PAS ne vide plus le cadre : elle bascule sur le
+  // repli de watchlist (illuBascule), sinon un 404 rouvrirait le trou que ce
+  // repli existe précisément pour fermer.
   return '<figure class="d-illu"><img src="assets/titres/'+encodeURIComponent(tk)+
     '.jpg'+(P.v?'?v='+encodeURIComponent(P.v):'')+
-    '" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
+    '" alt="" loading="lazy" onerror="illuBascule(this)">'+
     '<figcaption><b>'+sv(P.legende)+'</b>'+cr+'</figcaption></figure>';
+}
+/* Le repli : l'illustration de la watchlist depuis laquelle la fiche est
+   ouverte. Elle existe pour les sept listes, elle est déjà créditée dans
+   assets/themes/LEGENDES.json, et le chemin de la fiche la désigne sans
+   ambiguïté (#/w/<watchlist>/<TICKER>) — on montre donc l'image de la liste
+   qu'on est en train de parcourir, pas une image de secteur devinée.
+   La légende porte les deux informations qui empêchent la méprise : de quelle
+   watchlist vient l'image, et qu'on n'a pas de photo libre de la société. Elle
+   ne répète PAS le nom du titre : il est écrit en toutes lettres dans l'en-tête,
+   trois centimètres plus bas, et les raisons sociales de universe.json sont
+   tronquées à 22 caractères par le fournisseur de données — « Intuitive
+   Machines, In » dans une légende serait une coquille pour tout le monde. */
+function illuRepli(){
+  const id=(curWl&&PHOTOS_TH[curWl.id])?curWl.id:MAIN;
+  const P=PHOTOS_TH[id];
+  if(!P) return '';                    // registre des thèmes absent : rien à replier
+  const lab=(wlMeta(id)||{}).label||id;
+  const bas=[P.legende,P.credit,P.licence].filter(Boolean).join(' · ');
+  return '<figure class="d-illu d-repli"><img src="assets/themes/'+encodeURIComponent(id)+
+    '.jpg'+(P.v?'?v='+encodeURIComponent(P.v):'')+
+    '" alt="" loading="lazy" onerror="this.closest(\'.d-illu\').remove()">'+
+    '<figcaption><b>Illustration de la watchlist « '+sv(lab)+
+    ' » : aucune photo libre de la société</b>'+
+    (bas?'<span class="d-cred">'+sv(bas)+'</span>':'')+'</figcaption></figure>';
+}
+// Photo de société introuvable au chargement (fichier absent, cache empoisonné,
+// CDN qui répond 404) : on remplace le cadre par le repli au lieu de le retirer.
+function illuBascule(img){
+  const fig=img.closest('.d-illu');if(!fig)return;
+  const rep=illuRepli();
+  if(rep)fig.outerHTML=rep;else fig.remove();
 }
 function themeImg(id,label){
   const P=PHOTOS_TH[id];
