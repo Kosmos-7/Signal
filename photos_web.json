@@ -1,4 +1,645 @@
 {
- "societes": 0,
- "detail": {}
+ "societes": 16,
+ "detail": {
+  "285A.T": {
+   "candidats": [
+    {
+     "image": "https://www.kioxia.com/content/dam/kioxia/shared/business/img/business_hero_001_en_pc.png",
+     "page": "https://www.kioxia.com/en-jp/business.html",
+     "domaine": "kioxia.com",
+     "dimensions": "1126x400",
+     "conditions": "non établies",
+     "credit": "Kioxia",
+     "poids": 32195
+    },
+    {
+     "image": "https://www.kioxia.com/content/dam/kioxia/shared/about/img/about_hero_001_en_pc.png",
+     "page": "https://www.kioxia.com/en-jp/about.html",
+     "domaine": "kioxia.com",
+     "dimensions": "1126x400",
+     "conditions": "non établies",
+     "credit": "Kioxia",
+     "poids": 24259
+    },
+    {
+     "image": "https://www.kioxia.com/content/dam/kioxia/en-jp/top/img/top_hero_011_en_pc.png",
+     "page": "https://www.kioxia.com/en-jp/top.html",
+     "domaine": "kioxia.com",
+     "dimensions": "1280x500",
+     "conditions": "non établies",
+     "credit": "Kioxia",
+     "poids": 47925
+    },
+    {
+     "image": "https://www.kioxia.com/content/dam/kioxia/en-jp/top/img/top_hero_011_en_sp.png",
+     "page": "https://www.kioxia.com/en-jp/top.html",
+     "domaine": "kioxia.com",
+     "dimensions": "750x750",
+     "conditions": "non établies",
+     "credit": "Kioxia",
+     "poids": 58443
+    },
+    {
+     "image": "https://www.kioxia.com/content/dam/kioxia/shared/top/img/top_hero_010_en_pc.png",
+     "page": "https://www.kioxia.com/en-jp/top.html",
+     "domaine": "kioxia.com",
+     "dimensions": "1280x500",
+     "conditions": "non établies",
+     "credit": "Kioxia",
+     "poids": 65883
+    },
+    {
+     "image": "https://www.kioxia.com/content/dam/kioxia/shared/top/img/top_hero_010_en_sp.png",
+     "page": "https://www.kioxia.com/en-jp/top.html",
+     "domaine": "kioxia.com",
+     "dimensions": "750x750",
+     "conditions": "non établies",
+     "credit": "Kioxia",
+     "poids": 66120
+    }
+   ]
+  },
+  "454910.KS": {
+   "candidats": [
+    {
+     "image": "https://www.doosanrobotics.com/images/sns-img.png",
+     "page": "https://www.doosanrobotics.com/en/products",
+     "domaine": "doosanrobotics.com",
+     "dimensions": "1200x630",
+     "conditions": "non établies",
+     "credit": "Doosan Robotics",
+     "poids": 6237
+    },
+    {
+     "image": "https://www.doosanrobotics.com/images/main/youtube-thumbnail-1.webp",
+     "page": "https://www.doosanrobotics.com/en/products",
+     "domaine": "doosanrobotics.com",
+     "dimensions": "1075x605",
+     "conditions": "non établies",
+     "credit": "Doosan Robotics",
+     "poids": 62180
+    },
+    {
+     "image": "https://www.doosanrobotics.com/images/main/youtube-thumbnail-3.webp",
+     "page": "https://www.doosanrobotics.com/en/products",
+     "domaine": "doosanrobotics.com",
+     "dimensions": "1075x605",
+     "conditions": "non établies",
+     "credit": "Doosan Robotics",
+     "poids": 46512
+    },
+    {
+     "image": "https://www.doosanrobotics.com/images/main/youtube-thumbnail-4.webp",
+     "page": "https://www.doosanrobotics.com/en/products",
+     "domaine": "doosanrobotics.com",
+     "dimensions": "1075x605",
+     "conditions": "non établies",
+     "credit": "Doosan Robotics",
+     "poids": 73680
+    },
+    {
+     "image": "https://www.doosanrobotics.com/images/main/youtube-thumbnail-5.webp",
+     "page": "https://www.doosanrobotics.com/en/products",
+     "domaine": "doosanrobotics.com",
+     "dimensions": "1075x605",
+     "conditions": "non établies",
+     "credit": "Doosan Robotics",
+     "poids": 50182
+    },
+    {
+     "image": "https://www.doosanrobotics.com/images/main/youtube-thumbnail-6.webp",
+     "page": "https://www.doosanrobotics.com/en/products",
+     "domaine": "doosanrobotics.com",
+     "dimensions": "1075x605",
+     "conditions": "non établies",
+     "credit": "Doosan Robotics",
+     "poids": 71637
+    }
+   ]
+  },
+  "6146.T": {
+   "candidats": [
+    {
+     "image": "https://www.disco.co.jp/eg/products/dicer/img/dad3650_2.png",
+     "page": "https://www.disco.co.jp/eg/products/dicer/dad3650.html",
+     "domaine": "disco.co.jp",
+     "dimensions": "1001x1001",
+     "conditions": "non établies",
+     "credit": "DISCO Corporation",
+     "poids": 31951
+    }
+   ]
+  },
+  "6481.T": {
+   "candidats": [
+    {
+     "image": "https://www.thk.com/jp/assets/images/corporate/mainvisual_pc_2502_en.png",
+     "page": "https://www.thk.com/?q=eng/node/16",
+     "domaine": "thk.com",
+     "dimensions": "1920x480",
+     "conditions": "non établies",
+     "credit": "THK",
+     "poids": 30148
+    },
+    {
+     "image": "https://www.thk.com/jp/assets/images/journal/img_products_20241008_1_sda-vz_1_en.jpg",
+     "page": "https://www.thk.com/jp/en/journal/products/article-07082024-1.html",
+     "domaine": "thk.com",
+     "dimensions": "1300x728",
+     "conditions": "non établies",
+     "credit": "THK",
+     "poids": 70020
+    },
+    {
+     "image": "https://www.thk.com/jp/assets/images/journal/img_products_20241008_1_sda-vz_5_en.jpg",
+     "page": "https://www.thk.com/jp/en/journal/products/article-07082024-1.html",
+     "domaine": "thk.com",
+     "dimensions": "1000x429",
+     "conditions": "non établies",
+     "credit": "THK",
+     "poids": 34642
+    },
+    {
+     "image": "https://www.thk.com/jp/assets/images/journal/img_products_20241008_1_sda-vz_7_en.png",
+     "page": "https://www.thk.com/jp/en/journal/products/article-07082024-1.html",
+     "domaine": "thk.com",
+     "dimensions": "915x584",
+     "conditions": "non établies",
+     "credit": "THK",
+     "poids": 58407
+    },
+    {
+     "image": "https://www.thk.com/jp/assets/images/journal/img_products_20241008_1_sda-vz_8_en.png",
+     "page": "https://www.thk.com/jp/en/journal/products/article-07082024-1.html",
+     "domaine": "thk.com",
+     "dimensions": "1218x708",
+     "conditions": "non établies",
+     "credit": "THK",
+     "poids": 48669
+    }
+   ]
+  },
+  "6861.T": {
+   "candidats": [
+    {
+     "image": "https://www.keyence.com/Images/products_sp-n_v_2297119.png",
+     "page": "https://www.keyence.com/products/",
+     "domaine": "keyence.com",
+     "dimensions": "800x740",
+     "conditions": "non établies",
+     "credit": "Keyence",
+     "poids": 33635
+    },
+    {
+     "image": "https://www.keyence.com/Images/products_nr-x_1958649.png",
+     "page": "https://www.keyence.com/products/",
+     "domaine": "keyence.com",
+     "dimensions": "800x740",
+     "conditions": "non établies",
+     "credit": "Keyence",
+     "poids": 30828
+    }
+   ]
+  },
+  "ALAB": {
+   "candidats": [
+    {
+     "image": "https://www.asteralabs.com/wp-content/uploads/2025/09/ALAB_OGImage.jpg",
+     "page": "https://www.asteralabs.com/products/",
+     "domaine": "asteralabs.com",
+     "dimensions": "1200x630",
+     "conditions": "non établies",
+     "credit": "Astera Labs",
+     "poids": 111344
+    },
+    {
+     "image": "https://www.asteralabs.com/wp-content/uploads/2026/02/cosmos-dev-kit-hero.jpg",
+     "page": "https://www.asteralabs.com/products/cosmos-dev-kit/",
+     "domaine": "asteralabs.com",
+     "dimensions": "2560x818",
+     "conditions": "non établies",
+     "credit": "Astera Labs",
+     "poids": 67481
+    }
+   ]
+  },
+  "APLD": {
+   "candidats": [
+    {
+     "image": "https://ir.applieddigital.com/_assets/_0d036ffb66b2bfe154912829a47150be/appliedblockchaininc/db/2921/26523/social_image_resized.jpg",
+     "page": "https://ir.applieddigital.com/news-events/press-releases/detail/152/applied-digital-reaches-significant-milestone-surpassing-1",
+     "domaine": "applieddigital.com",
+     "dimensions": "1200x627",
+     "conditions": "non établies",
+     "credit": "Applied Digital",
+     "poids": 32616
+    }
+   ]
+  },
+  "ASTS": {
+   "candidats": [
+    {
+     "image": "https://ast-science.com/wp-content/uploads/2025/10/Spectrum-edited-1.jpg",
+     "page": "https://ast-science.com/spacemobile-network/",
+     "domaine": "ast-science.com",
+     "dimensions": "998x805",
+     "conditions": "non établies",
+     "credit": "AST SpaceMobile",
+     "poids": 63844
+    },
+    {
+     "image": "https://ast-science.com/wp-content/uploads/2025/10/Untitled-1-1-1.png",
+     "page": "https://ast-science.com/",
+     "domaine": "ast-science.com",
+     "dimensions": "996x926",
+     "conditions": "non établies",
+     "credit": "AST SpaceMobile",
+     "poids": 66416
+    },
+    {
+     "image": "https://ast-science.com/wp-content/uploads/2025/11/2022-03-18-BlueWalker-3-BW3-array-Microns.jpg",
+     "page": "https://ast-science.com/company/",
+     "domaine": "ast-science.com",
+     "dimensions": "2000x1439",
+     "conditions": "non établies",
+     "credit": "AST SpaceMobile",
+     "poids": 143119
+    }
+   ]
+  },
+  "BKSY": {
+   "candidats": [
+    {
+     "image": "https://blacksky.com/wp-content/uploads/2025/10/Gen-3-Spectra-Laptop.png",
+     "page": "https://www.blacksky.com/technology/",
+     "domaine": "blacksky.com",
+     "dimensions": "1080x720",
+     "conditions": "non établies",
+     "credit": "BlackSky",
+     "poids": 57024
+    },
+    {
+     "image": "https://blacksky.com/wp-content/uploads/2025/10/Gen-3-Spectra-Laptop-1024x683.png",
+     "page": "https://www.blacksky.com/technology/",
+     "domaine": "blacksky.com",
+     "dimensions": "1024x683",
+     "conditions": "non établies",
+     "credit": "BlackSky",
+     "poids": 46109
+    },
+    {
+     "image": "https://blacksky.com/wp-content/uploads/2026/02/DaytimeImagery-1280x720.png",
+     "page": "https://www.blacksky.com/technology/",
+     "domaine": "blacksky.com",
+     "dimensions": "1280x720",
+     "conditions": "non établies",
+     "credit": "BlackSky",
+     "poids": 49206
+    },
+    {
+     "image": "https://blacksky.com/wp-content/uploads/2026/03/Inner-Mongolia-Stereo2-1280x720.png",
+     "page": "https://www.blacksky.com/technology/",
+     "domaine": "blacksky.com",
+     "dimensions": "1280x720",
+     "conditions": "non établies",
+     "credit": "BlackSky",
+     "poids": 98529
+    },
+    {
+     "image": "https://blacksky.com/wp-content/uploads/2026/02/NTI-Astana-Khazakstan-2-1280x720.png",
+     "page": "https://www.blacksky.com/technology/",
+     "domaine": "blacksky.com",
+     "dimensions": "1280x720",
+     "conditions": "non établies",
+     "credit": "BlackSky",
+     "poids": 88530
+    },
+    {
+     "image": "https://blacksky.com/wp-content/uploads/2026/03/AREA_Gen-2_Australia_Nhulunbuy_BSG-AREA-116-20260211-232009-0000000000-1-1280x720.jpg",
+     "page": "https://www.blacksky.com/technology/",
+     "domaine": "blacksky.com",
+     "dimensions": "1280x720",
+     "conditions": "non établies",
+     "credit": "BlackSky",
+     "poids": 75559
+    }
+   ]
+  },
+  "CI": {
+   "candidats": [
+    {
+     "image": "https://www.thecignagroup.com/static/www-thecignagroup-com/images/about-us/about-us-2-lg@2x.jpg",
+     "page": "https://www.thecignagroup.com/about-us",
+     "domaine": "thecignagroup.com",
+     "dimensions": "840x473",
+     "conditions": "non établies",
+     "credit": "The Cigna Group",
+     "poids": 55687
+    },
+    {
+     "image": "https://www.thecignagroup.com/static/www-thecignagroup-com/images/about-us/about-us-3-lg@2x.jpg",
+     "page": "https://www.thecignagroup.com/about-us",
+     "domaine": "thecignagroup.com",
+     "dimensions": "840x472",
+     "conditions": "non établies",
+     "credit": "The Cigna Group",
+     "poids": 61442
+    },
+    {
+     "image": "https://www.thecignagroup.com/static/www-thecignagroup-com/images/about-us/about-us-4-lg@2x.jpg",
+     "page": "https://www.thecignagroup.com/about-us",
+     "domaine": "thecignagroup.com",
+     "dimensions": "840x472",
+     "conditions": "non établies",
+     "credit": "The Cigna Group",
+     "poids": 120535
+    },
+    {
+     "image": "https://www.thecignagroup.com/static/www-thecignagroup-com/images/about-us/about-us-5-lg@2x.jpg",
+     "page": "https://www.thecignagroup.com/about-us",
+     "domaine": "thecignagroup.com",
+     "dimensions": "1176x1176",
+     "conditions": "non établies",
+     "credit": "The Cigna Group",
+     "poids": 94953
+    },
+    {
+     "image": "https://www.thecignagroup.com/static/www-thecignagroup-com/images/1050x591-tcg-america-250.jpg",
+     "page": "https://www.thecignagroup.com/",
+     "domaine": "thecignagroup.com",
+     "dimensions": "1050x591",
+     "conditions": "non établies",
+     "credit": "The Cigna Group",
+     "poids": 77702
+    },
+    {
+     "image": "https://www.thecignagroup.com/static/www-thecignagroup-com/images/tcg-6-lg@x2.jpg",
+     "page": "https://www.thecignagroup.com/",
+     "domaine": "thecignagroup.com",
+     "dimensions": "1312x1264",
+     "conditions": "non établies",
+     "credit": "The Cigna Group",
+     "poids": 35292
+    }
+   ]
+  },
+  "CORZ": {
+   "candidats": [
+    {
+     "image": "https://corescientific.com/wp-content/uploads/2025/05/Core-Ograph-Image.png",
+     "page": "https://corescientific.com/news",
+     "domaine": "corescientific.com",
+     "dimensions": "1280x740",
+     "conditions": "non établies",
+     "credit": "Core Scientific",
+     "poids": 12650
+    },
+    {
+     "image": "https://corescientific.com/wp-content/uploads/2025/03/2-AdobeStock_267083580-2-1024x576.png",
+     "page": "https://corescientific.com/",
+     "domaine": "corescientific.com",
+     "dimensions": "1024x576",
+     "conditions": "non établies",
+     "credit": "Core Scientific",
+     "poids": 66224
+    },
+    {
+     "image": "https://corescientific.com/wp-content/uploads/2025/03/Join-the-Team-Thats-Driving-Digital-Innovation.jpg",
+     "page": "https://corescientific.com/careers/",
+     "domaine": "corescientific.com",
+     "dimensions": "1640x625",
+     "conditions": "non établies",
+     "credit": "Core Scientific",
+     "poids": 71460
+    },
+    {
+     "image": "https://corescientific.com/wp-content/uploads/2025/03/Img-Data-Centers-1024x390.webp",
+     "page": "https://corescientific.com/high-density-data-centers/",
+     "domaine": "corescientific.com",
+     "dimensions": "1024x390",
+     "conditions": "non établies",
+     "credit": "Core Scientific",
+     "poids": 56371
+    },
+    {
+     "image": "https://corescientific.com/wp-content/uploads/2025/05/Denton-Rendering-Thumbnail.jpg",
+     "page": "https://corescientific.com/high-density-data-centers/",
+     "domaine": "corescientific.com",
+     "dimensions": "1112x704",
+     "conditions": "non établies",
+     "credit": "Core Scientific",
+     "poids": 132257
+    },
+    {
+     "image": "https://corescientific.com/wp-content/uploads/2025/08/prs_6-800.jpg",
+     "page": "https://corescientific.com/high-density-data-centers/",
+     "domaine": "corescientific.com",
+     "dimensions": "800x450",
+     "conditions": "non établies",
+     "credit": "Core Scientific",
+     "poids": 75041
+    }
+   ]
+  },
+  "CRDO": {
+   "candidats": [
+    {
+     "image": "https://credosemi.com/wp-content/uploads/Credo-Site-Image.jpg",
+     "page": "https://www.credosemi.com/products/",
+     "domaine": "credosemi.com",
+     "dimensions": "1200x630",
+     "conditions": "non établies",
+     "credit": "Credo Technology Group",
+     "poids": 14033
+    },
+    {
+     "image": "https://credosemi.com/wp-content/themes/credosemi/assets/img/png/video-bg1.png",
+     "page": "https://www.credosemi.com/products/",
+     "domaine": "credosemi.com",
+     "dimensions": "710x960",
+     "conditions": "non établies",
+     "credit": "Credo Technology Group",
+     "poids": 39776
+    },
+    {
+     "image": "https://credosemi.com/wp-content/uploads/AEC-800G@2x-2-1024x1024.png",
+     "page": "https://www.credosemi.com/products/",
+     "domaine": "credosemi.com",
+     "dimensions": "1024x1024",
+     "conditions": "non établies",
+     "credit": "Credo Technology Group",
+     "poids": 30856
+    },
+    {
+     "image": "https://credosemi.com/wp-content/uploads/Credo-ZeroFlap-Optics-800G-OSFP-RHS.png",
+     "page": "https://www.credosemi.com/products/",
+     "domaine": "credosemi.com",
+     "dimensions": "10000x7306",
+     "conditions": "non établies",
+     "credit": "Credo Technology Group",
+     "poids": 42343
+    },
+    {
+     "image": "https://credosemi.com/wp-content/uploads/Credo-Cardinal-Optical-DSP-1024x758.jpg",
+     "page": "https://www.credosemi.com/products/",
+     "domaine": "credosemi.com",
+     "dimensions": "1024x758",
+     "conditions": "non établies",
+     "credit": "Credo Technology Group",
+     "poids": 37788
+    },
+    {
+     "image": "https://credosemi.com/wp-content/uploads/Teslawafer-1-1024x850.png",
+     "page": "https://www.credosemi.com/products/",
+     "domaine": "credosemi.com",
+     "dimensions": "1024x850",
+     "conditions": "non établies",
+     "credit": "Credo Technology Group",
+     "poids": 27730
+    }
+   ]
+  },
+  "FTNT": {
+   "candidats": [
+    {
+     "image": "https://www.fortinet.com/content/dam/fortinet/images/partners/nvidia-overview.png",
+     "page": "https://www.fortinet.com/",
+     "domaine": "fortinet.com",
+     "dimensions": "1200x675",
+     "conditions": "non établies",
+     "credit": "Fortinet",
+     "poids": 74995
+    },
+    {
+     "image": "http://www.fortinet.com/content/dam/fortinet/images/diagrams/fgd-ent-bundle.png",
+     "page": "http://www.fortinet.com/products/next-generation-firewall",
+     "domaine": "fortinet.com",
+     "dimensions": "1380x901",
+     "conditions": "non établies",
+     "credit": "Fortinet",
+     "poids": 31449
+    },
+    {
+     "image": "http://www.fortinet.com/content/dam/fortinet/images/diagrams/fgd-utp-bundle.png",
+     "page": "http://www.fortinet.com/products/next-generation-firewall",
+     "domaine": "fortinet.com",
+     "dimensions": "1380x901",
+     "conditions": "non établies",
+     "credit": "Fortinet",
+     "poids": 33049
+    },
+    {
+     "image": "http://www.fortinet.com/content/dam/fortinet/images/diagrams/fgd-atp-bundle.png",
+     "page": "http://www.fortinet.com/products/next-generation-firewall",
+     "domaine": "fortinet.com",
+     "dimensions": "1380x901",
+     "conditions": "non établies",
+     "credit": "Fortinet",
+     "poids": 25503
+    },
+    {
+     "image": "http://www.fortinet.com/content/dam/fortinet/images/awards/gartner-customers-choice-2024.png",
+     "page": "http://www.fortinet.com/products/next-generation-firewall",
+     "domaine": "fortinet.com",
+     "dimensions": "1988x1667",
+     "conditions": "non établies",
+     "credit": "Fortinet",
+     "poids": 51791
+    },
+    {
+     "image": "http://www.fortinet.com/content/dam/fortinet/images/diagrams/diagram-analyst-report-gartner-mq-hmf.jpg",
+     "page": "http://www.fortinet.com/products/next-generation-firewall",
+     "domaine": "fortinet.com",
+     "dimensions": "786x709",
+     "conditions": "non établies",
+     "credit": "Fortinet",
+     "poids": 18342
+    }
+   ]
+  },
+  "MSCI": {
+   "candidats": [
+    {
+     "image": "https://careers.msci.com/application/themes/thirty_three/assets/dist/img/msci-careers-opengraph.jpg",
+     "page": "https://www.msci.com/careers",
+     "domaine": "msci.com",
+     "dimensions": "1200x630",
+     "conditions": "non établies",
+     "credit": "MSCI",
+     "poids": 55135
+    }
+   ]
+  },
+  "SPCX": {
+   "candidats": [
+    {
+     "image": "https://www.spacex.com/assets/images/share.jpg",
+     "page": "https://www.spacex.com/vehicles/falcon-9/",
+     "domaine": "spacex.com",
+     "dimensions": "800x800",
+     "conditions": "non établies",
+     "credit": "SpaceX",
+     "poids": 9302
+    }
+   ]
+  },
+  "VOYG": {
+   "candidats": [
+    {
+     "image": "https://voyagertechnologies.com/wp-content/uploads/2026/05/Voyager-Technologies-OG-Image.png",
+     "page": "https://www.voyagertechnologies.com/newsroom/",
+     "domaine": "voyagertechnologies.com",
+     "dimensions": "1440x902",
+     "conditions": "non établies",
+     "credit": "Voyager Technologies",
+     "poids": 26473
+    },
+    {
+     "image": "https://voyagertechnologies.com/wp-content/uploads/2026/08/solidrocket-1-1024x576.jpg",
+     "page": "https://www.voyagertechnologies.com/newsroom/",
+     "domaine": "voyagertechnologies.com",
+     "dimensions": "1024x576",
+     "conditions": "non établies",
+     "credit": "Voyager Technologies",
+     "poids": 31202
+    },
+    {
+     "image": "https://voyagertechnologies.com/wp-content/uploads/2026/07/mission-managment-voyager-1024x576.jpeg",
+     "page": "https://www.voyagertechnologies.com/newsroom/",
+     "domaine": "voyagertechnologies.com",
+     "dimensions": "1024x576",
+     "conditions": "non établies",
+     "credit": "Voyager Technologies",
+     "poids": 49103
+    },
+    {
+     "image": "https://voyagertechnologies.com/wp-content/uploads/2026/02/voyager-740x1024.png",
+     "page": "https://www.voyagertechnologies.com/newsroom/",
+     "domaine": "voyagertechnologies.com",
+     "dimensions": "740x1024",
+     "conditions": "non établies",
+     "credit": "Voyager Technologies",
+     "poids": 20325
+    },
+    {
+     "image": "https://voyagertechnologies.com/wp-content/uploads/2026/05/burn-n-go-article-sm-1024x550.png",
+     "page": "https://www.voyagertechnologies.com/newsroom/",
+     "domaine": "voyagertechnologies.com",
+     "dimensions": "1024x550",
+     "conditions": "non établies",
+     "credit": "Voyager Technologies",
+     "poids": 59534
+    },
+    {
+     "image": "https://voyagertechnologies.com/wp-content/uploads/2026/05/spaceliintech-1-1024x576.jpg",
+     "page": "https://www.voyagertechnologies.com/newsroom/",
+     "domaine": "voyagertechnologies.com",
+     "dimensions": "1024x576",
+     "conditions": "non établies",
+     "credit": "Voyager Technologies",
+     "poids": 47951
+    }
+   ]
+  }
+ }
 }
