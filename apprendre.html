@@ -568,7 +568,16 @@
   .jsc .section-block { display: none; }
   .jsc .section-block.ouvert { display: block; }
   .jsc .fil, .jsc .suite { display: none; }
-  .jsc.vue-chapitre .fil, .jsc.vue-chapitre .suite { display: block; }
+  /* CHAQUE BLOC REVIENT DANS SON PROPRE MODE D'AFFICHAGE, et c'est tout
+     l'intérêt de les séparer : `.fil` est une barre flex qui écarte la
+     pastille de retour et la position, `.suite` est un bloc ordinaire. Les
+     avoir remis tous les deux en `display:block` d'une seule règle écrasait
+     le `display:flex` de `.fil` (0,3,0 contre 0,1,0) : la barre cessait
+     d'être un conteneur flex, `space-between` et `gap` ne s'appliquaient
+     plus, et les deux libellés se touchaient, à 0 px l'un de l'autre.
+     Signalé sur mobile, où la barre est la plus étroite. */
+  .jsc.vue-chapitre .fil { display: flex; }
+  .jsc.vue-chapitre .suite { display: block; }
   .jsc.vue-chapitre .hero, .jsc.vue-chapitre .hub { display: none; }
 
   /* ── LE RAIL ── */

@@ -53,6 +53,16 @@ section absente des rails serait injoignable. Le contrôle de syntaxe
 JavaScript, jusque-là limité aux scripts écrits DANS les pages, couvre
 maintenant les fichiers `.js` de la racine — même mode de panne, même filet.
 
+**Correctif dans la foulée, signalé sur mobile : la règle qui MONTRE écrasait
+la règle qui DISPOSE.** Le fil de lecture était rendu visible par un
+`.jsc.vue-chapitre .fil{display:block}` écrit d'un trait avec celui de
+`.suite`. Plus spécifique (0,3,0) que le `.fil{display:flex}` du composant
+(0,1,0), il gagnait : la barre cessait d'être un conteneur flex, et
+`space-between` comme `gap` tombaient avec elle. Mesuré : la pastille de
+retour et « Section 1 sur 12 » à **0 px** l'une de l'autre, donc collées, sur
+la largeur où la barre a le moins de place. Chaque bloc retrouve son propre
+mode d'affichage, et un test fixe l'invariant au littéral.
+
 ### Les descriptions des watchlists tenaient de l'étiquette à l'article
 
 Demande du propriétaire (15/08) : « simple, court, clair, explicite ». Les

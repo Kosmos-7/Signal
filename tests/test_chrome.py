@@ -377,6 +377,16 @@ check("apprendre.html : le masquage est posé avant <body>",
       0 < _pose < _AP.find("<body>"), f"position : {_pose}")
 check("apprendre.html : et relevé si le catalogue ne se construit pas",
       "classList.remove('jsc')" in _AP)
+# LA RÈGLE QUI MONTRE NE DOIT PAS ÉCRASER LA RÈGLE QUI DISPOSE. Le fil de
+# lecture était rendu visible par un `.jsc.vue-chapitre .fil{display:block}`
+# rangé avec celui de `.suite` : plus spécifique (0,3,0) que le
+# `.fil{display:flex}` du composant (0,1,0), il gagnait, la barre cessait
+# d'être un conteneur flex, et `space-between` comme `gap` tombaient avec.
+# Résultat mesuré : la pastille de retour et la position à 0 px l'une de
+# l'autre, signalé sur mobile où la barre est la plus étroite.
+check("apprendre.html : la barre de lecture reste un conteneur flex",
+      re.search(r"\.jsc\.vue-chapitre \.fil\s*\{[^}]*display:\s*flex", _AP)
+      is not None)
 _ancres = re.findall(r'<section class="section-block" id="(s\d+)">', _AP)
 _rails = re.findall(r'data-sections="([^"]+)"', _AP)
 _listees = " ".join(_rails).split()
