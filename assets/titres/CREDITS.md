@@ -1,21 +1,19 @@
 # Photos de sociétés — provenance, licences et arbitrage
 
-113 fiches sur 139 portent une photo de leur société : 58 montrent un produit
-ou un site d'exploitation, 55 un lieu identifiable. 96 sont sous licence libre
-et 17 sous licence non établie. Priorité au PRODUIT (puce, carte, terminal,
+124 fiches sur 139 portent une photo de leur société : 67 montrent un produit
+ou un site d'exploitation, 57 un lieu identifiable. 97 sont sous licence libre
+et 27 sous licence non établie. Priorité au PRODUIT (puce, carte, terminal,
 machine) sur le SITE : le die d'un circuit gravé par TSMC dit ce qu'est un
 fondeur, un immeuble de verre ne dit rien.
 
-**Les 26 fiches restantes ne sont plus nues** (16/08/2026) : elles affichent
+**Les 15 fiches restantes ne sont plus nues** (16/08/2026) : elles affichent
 l'illustration de la watchlist depuis laquelle on les ouvre, nommée comme telle
 dans la légende : `Illustration de la watchlist « NewSpace » : aucune photo
 libre de la société`. Ces sept images sont documentées dans
 [`assets/themes/CREDITS.md`](../themes/CREDITS.md), toutes en domaine public ou
 CC0. Ce repli n'est pas un renoncement à chercher : dès qu'une photo de société
 entre dans `LEGENDES.json`, elle reprend la place, sans une ligne de code à
-changer. Il dit seulement qu'une fiche sur cinq ne restera pas sans image en
-attendant qu'un fonds libre veuille bien photographier Astera Labs, Credo, IREN
-ou Voyager.
+changer — c'est exactement ce qui vient d'arriver à onze d'entre elles.
 
 ## Sept sources, par ordre de découverte
 
@@ -118,6 +116,66 @@ Services où le camion d'un tiers occupe le premier plan.
 
 Sociétés concernées : ANET, CEG, COHR, GEV, LITE, LRCX, TCEHY, VRT, VST, ZTS.
 
+### Deuxième campagne, 16/08/2026 : dix fiches de plus
+
+Le repli de watchlist a fermé le trou, il ne l'a pas comblé. Le propriétaire a
+donc rouvert cette source pour les 26 fiches sans photo de société. Vingt-deux
+d'entre elles n'avaient aucune page déclarée ; elles en ont désormais, dans
+`tools/photos_web_pages.json`.
+
+Sur 26 sociétés interrogées, 16 ont rendu quelque chose et **10 sont publiées** :
+285A.T, 454910.KS, 6481.T, 6861.T, ASTS, BKSY, CI, CORZ, CRDO, VOYG.
+
+**Les six autres ont été écartées à l'œil, et c'est le cœur du travail.** Un
+site d'entreprise sert d'abord sa communication : ALAB et APLD n'ont rendu que
+leur logo sur fond dégradé, SPCX son seul mot-signe, MSCI une bannière
+« Careers at MSCI », FTNT six diagrammes produits et deux badges Gartner —
+lesquels appartiennent d'ailleurs à Gartner et non à Fortinet. 6146.T n'a rendu
+qu'un schéma coté de sa scie DAD3650, une planche technique et non une photo.
+Un logo ne montre ni objet ni lieu : c'est la décision de la section suivante,
+et elle tient.
+
+**Dix sociétés n'ont rien rendu du tout**, pour des raisons qui se lisent dans
+le journal du run et qu'aucune obstination ne réglera depuis un runner : BKNG,
+IREN et MA répondent 403 à tout client automatisé, CGNX 429, LUNR ne suit que
+des redirections 302 ; CIFR, PDD, QUBT et WULF servent leurs visuels depuis un
+domaine tiers, que le garde-fou refuse par construction ; ROK a rendu 41 images
+dont pas une n'atteint 700 × 380.
+
+### SPCX : le site officiel était le mauvais endroit où chercher
+
+Demande du propriétaire, le jour même : SpaceX avant tout le reste. Or
+`spacex.com` est une application JavaScript, dont l'HTML servi ne contient
+qu'une seule image — l'`og:image`, c'est-à-dire le mot-signe. Aucune
+obstination sur ce site n'y changera rien.
+
+C'est le fonds LIBRE qui a la réponse, et il l'avait depuis le début : Commons
+regorge de photos de matériel SpaceX. Une recherche ponctuelle
+(`photos_marques.py --termes`) sur sept requêtes — Falcon 9, Falcon Heavy,
+Dragon, Starship, atterrissage du premier étage, grappe Starlink, booster — a
+rendu huit candidats, tous sous licence libre. **La fiche SPCX est donc revenue
+au domaine du libre, pas à celui des visuels non établis**, ce qui est le
+meilleur résultat possible.
+
+Le choix entre les huit s'est joué sur le CADRAGE, et le motif mérite d'être
+écrit. Le plus spectaculaire était un Starship complet sur son pas de tir. Mais
+la fiche recadre en 16:9 avec un ancrage à 30 % du haut, règle commune aux cent
+et quelques illustrations : le nez du vaisseau tombait hors cadre et il ne
+restait qu'un cylindre d'acier. On ne recadre pas photo par photo — on choisit
+donc l'image dont le sujet survit au cadrage commun. Le premier étage de Falcon
+9 couché sur son transporteur y tient entier, suies de rentrée et grilles
+comprises.
+
+Ces quinze fiches-là gardent l'illustration de leur watchlist.
+
+Deux légendes disent ce que l'image est, et pas ce qu'on aimerait qu'elle soit.
+Celle de CORZ annonce une **vue d'architecte** — le fichier d'origine s'appelle
+`Denton-Rendering-Thumbnail.jpg`, et présenter un rendu comme une photo aurait
+été un mensonge de plus petite taille mais de même nature que les logos qu'on
+refuse. Celle de BKSY dit que l'image a été **prise par la constellation
+BlackSky** : c'est une image satellite, donc le produit de la société et non une
+photo de ses locaux.
+
 ## Ni logo, ni illustration d'activité : décisions du propriétaire du dépôt
 
 Une huitième passe a récupéré onze logos depuis Wikidata P154, pour les fiches
@@ -131,10 +189,15 @@ poussée d'un cran : une photo de salle blanche légendée « Illustration :
 fonderie et packaging » montre un SECTEUR, pas l'entreprise dont on lit la
 fiche. Elle n'apprenait donc rien sur ce titre-ci.
 
-La règle qui s'applique désormais est sans repli : la fiche affiche une PHOTO
-CONCRETE DU MONDE REEL montrant CETTE société, ou bien elle n'affiche rien.
-Seize fiches sont dans ce dernier cas et le resteront tant qu'on n'aura pas
-trouvé mieux, ce qui est un état honnête et non un manque à combler.
+La règle qui s'applique à l'ILLUSTRATION DE SOCIÉTÉ n'a pas bougé d'un pouce :
+c'est une PHOTO CONCRETE DU MONDE REEL montrant CETTE société, ou rien. Ce qui
+a changé le 16/08/2026, c'est ce que « rien » donne à l'écran. La fiche affiche
+alors l'illustration de la watchlist depuis laquelle on l'ouvre, et sa légende
+dit en toutes lettres de quelle liste elle vient et qu'on n'a pas de photo de la
+société — l'objection ci-dessus tenait à la MÉPRISE possible, pas à l'image, et
+une légende qui la nomme la lève. Aucun logo n'est revenu pour autant, et aucune
+photo de secteur ne s'est glissée dans `LEGENDES.json` : le registre des photos
+de sociétés reste ce qu'il était, la page ne reste simplement plus vide.
 
 Ont été supprimés pour qu'une exécution distraite ne les réintroduise pas :
 l'outil des logos et son workflow, le module tools/activites.py, les dix-huit
@@ -161,7 +224,7 @@ aucun assombrissement, contrairement à toutes les autres : la chaîne ramène
 normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 89 % des pixels sont ici déjà sombres et l'appliquer aurait écrasé le sujet.
 
-## Photos publiées (58 produits, 34 lieux)
+## Photos publiées (67 produits, 36 lieux)
 
 ### 000660.KS — Puce mémoire SK hynix
 
@@ -179,6 +242,15 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Page : https://commons.wikimedia.org/wiki/File:Samsung_headquarters.jpg
 - Licence : CC BY-SA 2.0 — crédit affiché : Oskar Alexanderson · CC BY-SA 2.0
 
+### 285A.T — SSD d'entreprise Kioxia, mémoire BiCS FLASH
+
+- Nature : produit
+- Fichier : `assets/titres/285A.T.jpg`
+- Source : https://www.kioxia.com/content/dam/kioxia/shared/top/img/top_hero_010_en_sp.png
+- Page : https://www.kioxia.com/en-jp/top.html
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Kioxia
+- Origine : site officiel, le 2026-08-16
+
 ### 4062.T — Filtre à particules Ibiden monté sur un moteur Peugeot
 
 - Nature : produit
@@ -195,6 +267,24 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Page : https://commons.wikimedia.org/w/index.php?curid=54658191
 - Licence : CC BY-SA 3.0 — crédit affiché : Kaz Ish · CC BY-SA 3.0
 
+### 454910.KS — Cobot Doosan en palettisation
+
+- Nature : produit
+- Fichier : `assets/titres/454910.KS.jpg`
+- Source : https://www.doosanrobotics.com/images/main/youtube-thumbnail-1.webp
+- Page : https://www.doosanrobotics.com/en/products
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Doosan Robotics
+- Origine : site officiel, le 2026-08-16
+
+### 6481.T — Vis à billes, guidage linéaire et roulement à rouleaux croisés THK
+
+- Nature : produit
+- Fichier : `assets/titres/6481.T.jpg`
+- Source : https://www.thk.com/jp/assets/images/corporate/mainvisual_pc_2502_en.png
+- Page : https://www.thk.com/?q=eng/node/16
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : THK
+- Origine : site officiel, le 2026-08-16
+
 ### 6857.T — Testeur Advantest V93000 EXA Scale
 
 - Nature : produit
@@ -203,6 +293,15 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Page : https://www.advantest.com/en/
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Advantest
 - Origine : site officiel, le 2026-08-02
+
+### 6861.T — Amplificateurs de capteurs Keyence
+
+- Nature : produit
+- Fichier : `assets/titres/6861.T.jpg`
+- Source : https://www.keyence.com/Images/products_sp-n_v_2297119.png
+- Page : https://www.keyence.com/products/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Keyence
+- Origine : site officiel, le 2026-08-16
 
 ### 8035.T — Usine Tokyo Electron de Nirasaki, au pied des Alpes japonaises
 
@@ -319,6 +418,15 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Page : https://commons.wikimedia.org/wiki/File:ASML_headquarters_Veldhoven.jpg
 - Licence : Public domain
 
+### ASTS — L'antenne BlueWalker 3 d'AST SpaceMobile en salle d'intégration
+
+- Nature : produit
+- Fichier : `assets/titres/ASTS.jpg`
+- Source : https://ast-science.com/wp-content/uploads/2025/11/2022-03-18-BlueWalker-3-BW3-array-Microns.jpg
+- Page : https://ast-science.com/company/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : AST SpaceMobile
+- Origine : site officiel, le 2026-08-16
+
 ### AVGO — Puce Broadcom BCM7019 vue au microscope
 
 - Nature : produit
@@ -342,6 +450,15 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Source : Chip-enabled Bank of America BankAmericard Visa Signature Credit Card
 - Page : https://www.flickr.com/photos/51526368@N03/16293806432
 - Licence : CC BY 2.0 — crédit affiché : Aranami · CC BY 2.0
+
+### BKSY — Navires au mouillage, image prise par la constellation BlackSky
+
+- Nature : produit
+- Fichier : `assets/titres/BKSY.jpg`
+- Source : https://blacksky.com/wp-content/uploads/2026/02/DaytimeImagery-1280x720.png
+- Page : https://www.blacksky.com/technology/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : BlackSky
+- Origine : site officiel, le 2026-08-16
 
 ### BX — Siège de Blackstone, New York
 
@@ -385,6 +502,15 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Constellation Energy
 - Origine : site officiel, le 2026-08-02
 
+### CI — Siège du Cigna Group
+
+- Nature : lieu
+- Fichier : `assets/titres/CI.jpg`
+- Source : https://www.thecignagroup.com/static/www-thecignagroup-com/images/about-us/about-us-4-lg@2x.jpg
+- Page : https://www.thecignagroup.com/about-us
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : The Cigna Group
+- Origine : site officiel, le 2026-08-16
+
 ### CIEN — Châssis optique Ciena 6500
 
 - Nature : produit
@@ -409,6 +535,24 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Page : https://www.coherent.com/lasers
 - Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Coherent
 - Origine : site officiel, le 2026-08-02
+
+### CORZ — Vue d'architecte du campus de Denton, au Texas
+
+- Nature : lieu
+- Fichier : `assets/titres/CORZ.jpg`
+- Source : https://corescientific.com/wp-content/uploads/2025/05/Denton-Rendering-Thumbnail.jpg
+- Page : https://corescientific.com/high-density-data-centers/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Core Scientific
+- Origine : site officiel, le 2026-08-16
+
+### CRDO — Câble électrique actif 800G de Credo
+
+- Nature : produit
+- Fichier : `assets/titres/CRDO.jpg`
+- Source : https://credosemi.com/wp-content/uploads/AEC-800G@2x-2-1024x1024.png
+- Page : https://www.credosemi.com/products/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Credo Technology Group
+- Origine : site officiel, le 2026-08-16
 
 ### CRM — Marc Benioff présentant Salesforce en ouverture de Dreamforce
 
@@ -801,6 +945,14 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Page : https://commons.wikimedia.org/w/index.php?curid=118340795
 - Licence : CC0 1.0
 
+### SPCX — Premier étage de Falcon 9 sur son transporteur
+
+- Nature : produit
+- Fichier : `assets/titres/SPCX.jpg`
+- Source : File:Transport of Falcon 9, SpaceX.jpg
+- Page : https://commons.wikimedia.org/wiki/File:Transport_of_Falcon_9,_SpaceX.jpg
+- Licence : CC BY-SA 4.0 — crédit affiché : Olga Ernst · CC BY-SA 4.0
+
 ### SPGI — Siège de S&P Global, 55 Water Street à New York
 
 - Nature : site
@@ -875,6 +1027,15 @@ normalement la luminosité à 74 % pour poser une photo claire sur fond noir, or
 - Source : File:Credit card terminal in Laos.jpg
 - Page : https://commons.wikimedia.org/wiki/File:Credit_card_terminal_in_Laos.jpg
 - Licence : CC BY-SA 4.0 — crédit affiché : Basile Morin · CC BY-SA 4.0
+
+### VOYG — Charges utiles en orbite, vues depuis la Station spatiale internationale
+
+- Nature : produit
+- Fichier : `assets/titres/VOYG.jpg`
+- Source : https://voyagertechnologies.com/wp-content/uploads/2026/05/spaceliintech-1-1024x576.jpg
+- Page : https://www.voyagertechnologies.com/newsroom/
+- Licence : Licence non établie, visuel publié par la société — crédit affiché : Photo : Voyager Technologies
+- Origine : site officiel, le 2026-08-16
 
 ### VRT — Onduleur Liebert de Vertiv
 
