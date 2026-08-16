@@ -1345,6 +1345,57 @@ check("toute licence exigeant la paternité porte son crédit",
 _sans_source = sorted(t for t, v in _LEG.items() if not v.get("source"))
 check("chaque illustration nomme son fichier source", not _sans_source, str(_sans_source))
 
+# ── 12. AUCUNE FICHE NUE : LE REPLI DOIT ÊTRE TOTAL ─────────────────────────
+print("\n— Toute fiche porte-t-elle une image ? —")
+# LA RÈGLE A CHANGÉ LE 16/08/2026 : toute fiche porte une illustration. Avant,
+# une fiche sans photo de société n'en avait aucune, et elles étaient VINGT-SIX
+# sur cent trente-neuf — pas par négligence, mais parce que Commons n'a rien de
+# libre sur Astera Labs, Credo, IREN ou Voyager, et que les campagnes de
+# recherche ne rapportaient, pour ces titres-là, que des produits de
+# concurrents (cf. la garde sur `source`, juste au-dessus).
+#
+# Le repli est l'illustration de la WATCHLIST ouverte, nommée comme telle dans
+# la légende. Il ne vaut donc que si TOUTE watchlist publiée a son image et sa
+# légende : sans elles, `illuRepli` sort à vide et la fiche redevient nue. C'est
+# précisément ce que ce bloc vérifie — la couverture des sept listes, pas celle
+# des cent trente-neuf titres, parce que c'est la couverture des listes qui rend
+# l'autre inutile à surveiller.
+try:
+    _LEG_TH = {k: v for k, v in json.load(
+        open("assets/themes/LEGENDES.json", encoding="utf-8")).items()
+        if isinstance(v, dict)}
+except Exception as _e:                                      # noqa: BLE001
+    _LEG_TH = {}
+    ko.append(f"assets/themes/LEGENDES.json illisible ({_e})")
+# « principale » n'est pas un thème de universe.json : c'est le top 30, dont le
+# descripteur est écrit dans index.html (mainMeta). Il porte pourtant des fiches
+# — celles du top 30 non taguées — et doit donc être illustré comme les autres.
+_LISTES = {"principale"} | {t["id"] for t in (_U.get("themes") or [])
+                            if isinstance(t, dict) and t.get("id")}
+_muettes = {i: "assets/themes/%s.jpg absent" % i for i in sorted(_LISTES)
+            if not os.path.exists(f"assets/themes/{i}.jpg")}
+_muettes.update({i: "légende absente de assets/themes/LEGENDES.json"
+                 for i in sorted(_LISTES) if i not in _LEG_TH})
+check("chaque watchlist publiée a l'image qui sert de repli à ses fiches",
+      not _muettes, str(_muettes))
+# Et le front doit RÉELLEMENT replier. Le contrôle est textuel — il n'y a pas de
+# navigateur ici — mais il vise la seule ligne qui puisse rouvrir le trou : un
+# retour à vide quand la société n'a pas de photo.
+try:
+    _IDX = open("index.html", encoding="utf-8").read()
+except Exception as _e:                                      # noqa: BLE001
+    _IDX = ""
+    ko.append(f"index.html illisible ({_e})")
+_bloc = _IDX[_IDX.find("function illuSociete("):_IDX.find("function illuRepli(")]
+check("la fiche sans photo de société se replie au lieu de ne rien rendre",
+      bool(_bloc) and "illuRepli()" in _bloc and "return ''" not in _bloc,
+      "illuSociete n'appelle plus illuRepli, ou rend à nouveau une chaîne vide")
+# Une photo qui répond 404 (fichier retiré, cache empoisonné) ne doit pas non
+# plus vider le cadre : elle bascule sur le repli. C'est le même trou, par
+# l'autre bout.
+check("une photo de société qui ne charge pas bascule sur le repli",
+      "illuBascule(this)" in _bloc and "function illuBascule(" in _IDX)
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} vérifications passées")
 if ko:
