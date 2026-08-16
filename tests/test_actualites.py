@@ -63,6 +63,106 @@ check("zéro ou six sections sont rejetées",
 check("chaque sujet a ses requêtes d'illustration",
       all(isinstance(v, list) and v for v in A.SUJETS.values()))
 
+print("\n— Anti-redite : un titre dit ce qui a CHANGÉ —")
+# LES QUATRE VRAIS TITRES DU 10 AU 13 AOÛT 2026, dans l'ordre de parution.
+# C'est le constat propriétaire qui a ouvert le sujet : quatre matins, quatre
+# fois l'or, trois fois le pétrole ou l'Iran. Ils servent de banc d'essai, parce
+# qu'un garde anti-redite qui ne rattrape pas la redite constatée ne sert à rien.
+REDITE = [
+    "L'or flambe, l'Iran conditionne Ormuz : matinée chargée",
+    "Marchés à l'arrêt, l'or en forme et le pétrole surveille l'Iran",
+    "Pétrole et or en hausse, Wall Street dans le rouge avant l'inflation",
+    "Wall Street en légère hausse, l'or brille, l'Europe hésite",
+]
+_avant = list(reversed(REDITE[:3]))          # du plus récent au plus ancien
+
+
+def _redite(titre, passes):
+    return A.defauts_redite({"titre": titre}, A.mots_epuises(passes), passes)
+
+
+check("l'apostrophe et la capitale ne font pas deux mots différents",
+      A.mots_titre("L'or flambe") == A.mots_titre("l’or flambe") == {"or", "flambe"},
+      f"→ {sorted(A.mots_titre(chr(76) + chr(39) + 'or flambe'))}")
+check("le pluriel ne fait pas un mot neuf au-delà de quatre lettres",
+      "marche" in A.mots_titre("Marchés à l'arrêt") and "taux" in A.mots_titre("Les taux"))
+check("la grammaire ne compte pas comme sujet",
+      not (A.mots_titre("Le pétrole dans le rouge") & {"le", "dans"}))
+check("un mot qui porte deux des trois derniers titres est épuisé",
+      A.mots_epuises(_avant) == {"or", "iran", "petrole"},
+      f"→ {sorted(A.mots_epuises(_avant))}")
+check("un mot vu une seule fois reste disponible",
+      "inflation" not in A.mots_epuises(_avant))
+check("la fenêtre s'arrête à trois titres, une histoire qui revient plus tard "
+      "est redevenue une information",
+      A.mots_epuises(["Or", "X", "Y", "Or"]) == frozenset())
+check("le quatrième titre réel est bien vu comme une redite",
+      _redite(REDITE[3], _avant))
+check("le troisième aussi, avec deux titres seulement derrière lui",
+      _redite(REDITE[2], list(reversed(REDITE[:2]))))
+# L'ESQUIVE PAR SYNONYME EST LA SEULE FAÇON DONT CE GARDE POUVAIT ÊTRE INUTILE :
+# interdire « or » sans interdire « métal jaune », c'est demander une réécriture,
+# pas un autre sujet, et le lecteur relit le même titre en croyant en lire un autre.
+check("« le métal jaune » et « le brut » ne passent pas là où « or » et "
+      "« pétrole » sont bloqués",
+      _redite("Le métal jaune s'envole, le brut suit à Téhéran", _avant))
+check("Ormuz, Téhéran et l'Iran sont la même tête d'affiche",
+      A.mots_titre("Ormuz") == A.mots_titre("Téhéran") == A.mots_titre("l'Iran"))
+check("Nasdaq et S&P 500 sont Wall Street, pas trois sujets",
+      A.mots_titre("Le Nasdaq grimpe") == A.mots_titre("Le S&P 500 grimpe")
+      == A.mots_titre("Wall Street grimpe"))
+check("un vrai autre sujet passe sans encombre",
+      not _redite("Intel : le PDG achète, CoreWeave défend ses puces", _avant))
+check("sans mémoire, aucun titre n'est une redite",
+      not A.defauts_redite({"titre": REDITE[0]}, frozenset(), []))
+check("le garde ne plante pas sur un post malformé",
+      A.defauts_redite("texte nu", {"or"}, []) == []
+      and A.defauts_redite({}, {"or"}, []) == [])
+check("les mots épuisés sont nommés en français, pas en jetons internes",
+      A.libelles(A.mots_epuises(_avant), _avant) == ["l'Iran", "l'or", "le pétrole"],
+      f"→ {A.libelles(A.mots_epuises(_avant), _avant)}")
+check("un mot hors famille garde la graphie du titre où il a été lu",
+      A.libelles({"europe"}, ["l'Europe hésite"]) == ["Europe"])
+
+_recents = [{"date": "2026-08-13", "titre": REDITE[3], "sujet": "marches"},
+            {"date": "2026-08-12", "titre": REDITE[2], "sujet": "marches"}]
+_bloc = A.bloc_memoire(_recents, A.mots_epuises([r["titre"] for r in _recents]))
+check("le bloc de prompt montre les titres parus et leur sujet",
+      REDITE[3] in _bloc and "2026-08-12" in _bloc and "marches" in _bloc)
+check("le bloc nomme les mots usés",
+      "l'or" in _bloc and "Wall Street" in _bloc)
+check("le bloc réserve le cas du vrai titre de marché",
+      "décrochage" in _bloc and "record" in _bloc)
+check("pas d'archive, pas de bloc", A.bloc_memoire([], frozenset()) == "")
+check("des titres sans mot usé donnent un bloc sans liste d'interdits",
+      "ont porté au moins deux" not in A.bloc_memoire(
+          [{"date": "d", "titre": "Intel achète", "sujet": "tech"}], frozenset()))
+# Le bloc part dans un `str.format` : un accolade oubliée casserait le post du
+# matin sans qu'aucun test hors ligne ne l'ait vu.
+check("le prompt se rend entièrement, mémoire comprise",
+      "LES MATINS PRÉCÉDENTS" in A.PROMPT.format(
+          sujets="marches", n=1, corps="[0] x", champ_marches="",
+          consigne_marches="", bloc_memoire=_bloc, bloc_marches=""))
+
+print("\n— Une dépêche déjà servie n'est pas une information —")
+_deps = [{"url": f"u{i}", "titre": f"T{i}"} for i in range(8)]
+_gardees, _ecartees = A.trier_depeches(_deps, {"u0", "u3"})
+check("les dépêches déjà citées sortent du tirage",
+      [d["url"] for d in _gardees] == ["u1", "u2", "u4", "u5", "u6", "u7"]
+      and _ecartees == 2)
+check("l'ordre des inédites est conservé (la plus fraîche d'abord)",
+      A.trier_depeches(_deps, frozenset())[0] == _deps)
+# LA MÉMOIRE DÉCLASSE, ELLE NE JETTE PAS. Un matin creux où la moitié des
+# dépêches a déjà servi ne doit pas passer sous MIN_DEPECHES et annuler un post
+# qui avait de quoi s'écrire : le remède serait pire que la redite.
+_maigre, _ = A.trier_depeches(_deps[:6], {"u0", "u1", "u2"})
+check("sous le minimum, les déjà servies remontent plutôt que d'annuler le post",
+      len(_maigre) == A.MIN_DEPECHES
+      and [d["url"] for d in _maigre[:3]] == ["u3", "u4", "u5"])
+check("le plafond du prompt tient toujours",
+      len(A.trier_depeches([{"url": f"v{i}"} for i in range(40)],
+                           frozenset())[0]) == A.MAX_DEPECHES)
+
 print("\n— Immuabilité et index —")
 tmp = tempfile.mkdtemp()
 cwd = os.getcwd()
