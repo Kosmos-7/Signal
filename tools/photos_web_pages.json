@@ -1257,5 +1257,451 @@
    "conditions": "salle de presse",
    "credit": "KLA"
   }
+ ],
+ "285A.T": [
+  {
+   "page": "https://www.kioxia.com/en-jp/business.html",
+   "domaine": "kioxia.com",
+   "conditions": "non établies",
+   "credit": "Kioxia"
+  },
+  {
+   "page": "https://www.kioxia.com/en-jp/about/news.html",
+   "domaine": "kioxia.com",
+   "conditions": "non établies",
+   "credit": "Kioxia"
+  },
+  {
+   "page": "https://www.kioxia.com/en-jp/about.html",
+   "domaine": "kioxia.com",
+   "conditions": "non établies",
+   "credit": "Kioxia"
+  },
+  {
+   "page": "https://www.kioxia.com/en-jp/top.html",
+   "domaine": "kioxia.com",
+   "conditions": "non établies",
+   "credit": "Kioxia"
+  }
+ ],
+ "454910.KS": [
+  {
+   "page": "https://www.doosanrobotics.com/en/products",
+   "domaine": "doosanrobotics.com",
+   "conditions": "non établies",
+   "credit": "Doosan Robotics"
+  },
+  {
+   "page": "https://www.doosanrobotics.com/en/about/news",
+   "domaine": "doosanrobotics.com",
+   "conditions": "non établies",
+   "credit": "Doosan Robotics"
+  },
+  {
+   "page": "https://www.doosanrobotics.com/en",
+   "domaine": "doosanrobotics.com",
+   "conditions": "non établies",
+   "credit": "Doosan Robotics"
+  }
+ ],
+ "6481.T": [
+  {
+   "page": "https://www.thk.com/",
+   "domaine": "thk.com",
+   "conditions": "non établies",
+   "credit": "THK"
+  },
+  {
+   "page": "https://www.thk.com/?q=eng/node/16",
+   "domaine": "thk.com",
+   "conditions": "non établies",
+   "credit": "THK"
+  },
+  {
+   "page": "https://www.thk.com/?q=eng/node/4972",
+   "domaine": "thk.com",
+   "conditions": "non établies",
+   "credit": "THK"
+  }
+ ],
+ "6861.T": [
+  {
+   "page": "https://www.keyence.com/products/",
+   "domaine": "keyence.com",
+   "conditions": "non établies",
+   "credit": "Keyence"
+  },
+  {
+   "page": "https://www.keyence.com/company/",
+   "domaine": "keyence.com",
+   "conditions": "non établies",
+   "credit": "Keyence"
+  },
+  {
+   "page": "https://www.keyence.com/",
+   "domaine": "keyence.com",
+   "conditions": "non établies",
+   "credit": "Keyence"
+  }
+ ],
+ "ALAB": [
+  {
+   "page": "https://www.asteralabs.com/products/",
+   "domaine": "asteralabs.com",
+   "conditions": "non établies",
+   "credit": "Astera Labs"
+  },
+  {
+   "page": "https://www.asteralabs.com/newsroom/",
+   "domaine": "asteralabs.com",
+   "conditions": "non établies",
+   "credit": "Astera Labs"
+  },
+  {
+   "page": "https://www.asteralabs.com/",
+   "domaine": "asteralabs.com",
+   "conditions": "non établies",
+   "credit": "Astera Labs"
+  }
+ ],
+ "APLD": [
+  {
+   "page": "https://www.applieddigital.com/data-centers/",
+   "domaine": "applieddigital.com",
+   "conditions": "non établies",
+   "credit": "Applied Digital"
+  },
+  {
+   "page": "https://www.applieddigital.com/news/",
+   "domaine": "applieddigital.com",
+   "conditions": "non établies",
+   "credit": "Applied Digital"
+  },
+  {
+   "page": "https://www.applieddigital.com/",
+   "domaine": "applieddigital.com",
+   "conditions": "non établies",
+   "credit": "Applied Digital"
+  }
+ ],
+ "ASTS": [
+  {
+   "page": "https://ast-science.com/spacemobile-network/",
+   "domaine": "ast-science.com",
+   "conditions": "non établies",
+   "credit": "AST SpaceMobile"
+  },
+  {
+   "page": "https://ast-science.com/newsroom/",
+   "domaine": "ast-science.com",
+   "conditions": "non établies",
+   "credit": "AST SpaceMobile"
+  },
+  {
+   "page": "https://ast-science.com/",
+   "domaine": "ast-science.com",
+   "conditions": "non établies",
+   "credit": "AST SpaceMobile"
+  }
+ ],
+ "BKNG": [
+  {
+   "page": "https://www.bookingholdings.com/about/",
+   "domaine": "bookingholdings.com",
+   "conditions": "non établies",
+   "credit": "Booking Holdings"
+  },
+  {
+   "page": "https://www.bookingholdings.com/news/",
+   "domaine": "bookingholdings.com",
+   "conditions": "non établies",
+   "credit": "Booking Holdings"
+  },
+  {
+   "page": "https://www.bookingholdings.com/",
+   "domaine": "bookingholdings.com",
+   "conditions": "non établies",
+   "credit": "Booking Holdings"
+  }
+ ],
+ "BKSY": [
+  {
+   "page": "https://www.blacksky.com/technology/",
+   "domaine": "blacksky.com",
+   "conditions": "non établies",
+   "credit": "BlackSky"
+  },
+  {
+   "page": "https://www.blacksky.com/news/",
+   "domaine": "blacksky.com",
+   "conditions": "non établies",
+   "credit": "BlackSky"
+  },
+  {
+   "page": "https://www.blacksky.com/",
+   "domaine": "blacksky.com",
+   "conditions": "non établies",
+   "credit": "BlackSky"
+  }
+ ],
+ "CGNX": [
+  {
+   "page": "https://www.cognex.com/products",
+   "domaine": "cognex.com",
+   "conditions": "non établies",
+   "credit": "Cognex"
+  },
+  {
+   "page": "https://www.cognex.com/company/news-events",
+   "domaine": "cognex.com",
+   "conditions": "non établies",
+   "credit": "Cognex"
+  },
+  {
+   "page": "https://www.cognex.com/",
+   "domaine": "cognex.com",
+   "conditions": "non établies",
+   "credit": "Cognex"
+  }
+ ],
+ "CI": [
+  {
+   "page": "https://www.thecignagroup.com/newsroom",
+   "domaine": "thecignagroup.com",
+   "conditions": "non établies",
+   "credit": "The Cigna Group"
+  },
+  {
+   "page": "https://www.thecignagroup.com/about-us",
+   "domaine": "thecignagroup.com",
+   "conditions": "non établies",
+   "credit": "The Cigna Group"
+  },
+  {
+   "page": "https://www.thecignagroup.com/",
+   "domaine": "thecignagroup.com",
+   "conditions": "non établies",
+   "credit": "The Cigna Group"
+  }
+ ],
+ "CIFR": [
+  {
+   "page": "https://www.ciphermining.com/data-centers",
+   "domaine": "ciphermining.com",
+   "conditions": "non établies",
+   "credit": "Cipher Mining"
+  },
+  {
+   "page": "https://www.ciphermining.com/news",
+   "domaine": "ciphermining.com",
+   "conditions": "non établies",
+   "credit": "Cipher Mining"
+  },
+  {
+   "page": "https://www.ciphermining.com/",
+   "domaine": "ciphermining.com",
+   "conditions": "non établies",
+   "credit": "Cipher Mining"
+  }
+ ],
+ "CORZ": [
+  {
+   "page": "https://corescientific.com/data-centers",
+   "domaine": "corescientific.com",
+   "conditions": "non établies",
+   "credit": "Core Scientific"
+  },
+  {
+   "page": "https://corescientific.com/news",
+   "domaine": "corescientific.com",
+   "conditions": "non établies",
+   "credit": "Core Scientific"
+  },
+  {
+   "page": "https://corescientific.com/",
+   "domaine": "corescientific.com",
+   "conditions": "non établies",
+   "credit": "Core Scientific"
+  }
+ ],
+ "CRDO": [
+  {
+   "page": "https://www.credosemi.com/products/",
+   "domaine": "credosemi.com",
+   "conditions": "non établies",
+   "credit": "Credo Technology Group"
+  },
+  {
+   "page": "https://www.credosemi.com/news/",
+   "domaine": "credosemi.com",
+   "conditions": "non établies",
+   "credit": "Credo Technology Group"
+  },
+  {
+   "page": "https://www.credosemi.com/",
+   "domaine": "credosemi.com",
+   "conditions": "non établies",
+   "credit": "Credo Technology Group"
+  }
+ ],
+ "FTNT": [
+  {
+   "page": "https://www.fortinet.com/products",
+   "domaine": "fortinet.com",
+   "conditions": "non établies",
+   "credit": "Fortinet"
+  },
+  {
+   "page": "https://www.fortinet.com/corporate/about-us/newsroom",
+   "domaine": "fortinet.com",
+   "conditions": "non établies",
+   "credit": "Fortinet"
+  },
+  {
+   "page": "https://www.fortinet.com/",
+   "domaine": "fortinet.com",
+   "conditions": "non établies",
+   "credit": "Fortinet"
+  }
+ ],
+ "IREN": [
+  {
+   "page": "https://iren.com/data-centers",
+   "domaine": "iren.com",
+   "conditions": "non établies",
+   "credit": "IREN"
+  },
+  {
+   "page": "https://iren.com/news",
+   "domaine": "iren.com",
+   "conditions": "non établies",
+   "credit": "IREN"
+  },
+  {
+   "page": "https://iren.com/",
+   "domaine": "iren.com",
+   "conditions": "non établies",
+   "credit": "IREN"
+  }
+ ],
+ "LUNR": [
+  {
+   "page": "https://www.intuitivemachines.com/lunar-access",
+   "domaine": "intuitivemachines.com",
+   "conditions": "non établies",
+   "credit": "Intuitive Machines"
+  },
+  {
+   "page": "https://www.intuitivemachines.com/news",
+   "domaine": "intuitivemachines.com",
+   "conditions": "non établies",
+   "credit": "Intuitive Machines"
+  },
+  {
+   "page": "https://www.intuitivemachines.com/",
+   "domaine": "intuitivemachines.com",
+   "conditions": "non établies",
+   "credit": "Intuitive Machines"
+  }
+ ],
+ "QUBT": [
+  {
+   "page": "https://quantumcomputinginc.com/technology",
+   "domaine": "quantumcomputinginc.com",
+   "conditions": "non établies",
+   "credit": "Quantum Computing Inc."
+  },
+  {
+   "page": "https://quantumcomputinginc.com/news",
+   "domaine": "quantumcomputinginc.com",
+   "conditions": "non établies",
+   "credit": "Quantum Computing Inc."
+  },
+  {
+   "page": "https://quantumcomputinginc.com/",
+   "domaine": "quantumcomputinginc.com",
+   "conditions": "non établies",
+   "credit": "Quantum Computing Inc."
+  }
+ ],
+ "ROK": [
+  {
+   "page": "https://www.rockwellautomation.com/en-us/products.html",
+   "domaine": "rockwellautomation.com",
+   "conditions": "non établies",
+   "credit": "Rockwell Automation"
+  },
+  {
+   "page": "https://www.rockwellautomation.com/en-us/company/news.html",
+   "domaine": "rockwellautomation.com",
+   "conditions": "non établies",
+   "credit": "Rockwell Automation"
+  },
+  {
+   "page": "https://www.rockwellautomation.com/",
+   "domaine": "rockwellautomation.com",
+   "conditions": "non établies",
+   "credit": "Rockwell Automation"
+  }
+ ],
+ "SPCX": [
+  {
+   "page": "https://www.spacex.com/vehicles/falcon-9/",
+   "domaine": "spacex.com",
+   "conditions": "non établies",
+   "credit": "SpaceX"
+  },
+  {
+   "page": "https://www.spacex.com/launches/",
+   "domaine": "spacex.com",
+   "conditions": "non établies",
+   "credit": "SpaceX"
+  },
+  {
+   "page": "https://www.spacex.com/",
+   "domaine": "spacex.com",
+   "conditions": "non établies",
+   "credit": "SpaceX"
+  }
+ ],
+ "VOYG": [
+  {
+   "page": "https://www.voyagertechnologies.com/newsroom/",
+   "domaine": "voyagertechnologies.com",
+   "conditions": "non établies",
+   "credit": "Voyager Technologies"
+  },
+  {
+   "page": "https://www.voyagertechnologies.com/about/",
+   "domaine": "voyagertechnologies.com",
+   "conditions": "non établies",
+   "credit": "Voyager Technologies"
+  },
+  {
+   "page": "https://www.voyagertechnologies.com/",
+   "domaine": "voyagertechnologies.com",
+   "conditions": "non établies",
+   "credit": "Voyager Technologies"
+  }
+ ],
+ "WULF": [
+  {
+   "page": "https://www.terawulf.com/facilities",
+   "domaine": "terawulf.com",
+   "conditions": "non établies",
+   "credit": "TeraWulf"
+  },
+  {
+   "page": "https://www.terawulf.com/news",
+   "domaine": "terawulf.com",
+   "conditions": "non établies",
+   "credit": "TeraWulf"
+  },
+  {
+   "page": "https://www.terawulf.com/",
+   "domaine": "terawulf.com",
+   "conditions": "non établies",
+   "credit": "TeraWulf"
+  }
  ]
 }
