@@ -1,0 +1,60 @@
+{
+ "id": "hebdo-2026-34",
+ "type": "hebdo",
+ "date": "2026-08-17",
+ "titre": "L'analyse du portefeuille · Sem. 34 · 2026",
+ "chapeau": "Cette semaine du 11 au 17 août, deux signaux macro dominaient l'agenda : l'inflation américaine qui continue de modérer sans surprise, et la montée des tensions géopolitiques autour de l'Iran, avec les taux du Treasury 10 ans grimpant de 2 points de base à 4.661% sous l'effet …",
+ "sujet": null,
+ "photo": null,
+ "conviction": "haussier",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Cette semaine du 11 au 17 août, deux signaux macro dominaient l'agenda : l'inflation américaine qui continue de modérer sans surprise, et la montée des tensions géopolitiques autour de l'Iran, avec les taux du Treasury 10 ans grimpant de 2 points de base à 4.661% sous l'effet des menaces de sanctions supplémentaires. Les négociations sur le détroit d'Ormuz piétinent, ce qui crée une prime de risque sur le pétrole sans pour autant déclencher de panique sur les marchés actions, le VIX restant à 14.97, en régime calme.\n\nConcrètement pour Signal, ces données sont plutôt neutres à légèrement favorables : une inflation qui modère sans nouvelle vague de resserrement de la Fed, c'est le scénario de base qui justifie nos positions croissance. Le portefeuille affiche une performance nette de +36.44% depuis la création, avec un écart au benchmark MSCI World de +20.34 points de pourcentage. Le capital actuel est de 35 039 euros. La semaine a surtout été une semaine de gestion interne plutôt que d'opportunité externe.\n\nDeux décisions cette semaine. Première : la sortie d'ORSTED.CO. Détenu depuis 82 jours, le titre a franchi -16.1% depuis l'achat, dépassant le seuil du stop-loss R06 (-15% après 90 jours). La thèse initiale reposait sur un Golden Cross frais à J+17, signal qui est maintenant stalé à 99 jours sans que le rebond attendu se soit matérialisé. Sortir avec 8 jours d'avance sur le seuil des 90 jours était justifié par la conviction forte que la dynamique ne se retourne pas. Avantage fiscal : la perte de 185 euros devient un crédit d'impôt de ~58 euros utilisable 10 ans. Deuxième : l'entrée sur BX (Blackstone) avec un Golden Cross à J+4, fenêtre signal optimale, val=4/5 en zone Fibo 38.2%, et un profil Finance qui réduit marginalement notre concentration Tech/IA à 46%.\n\nLearning de la semaine : ORSTED.CO rappelle que les Golden Cross sur des secteurs en transformation réglementaire (énergie éolienne offshore) méritent une pondération plus faible au départ. La thèse technique était solide, le contexte sectoriel l'était moins. Prendre note pour les futurs setups sur des titres exposés à des risques réglementaires ou de taux d'intérêt structurels.\n\nPour la semaine à venir, vous surveillerez les données de ventes au détail américaines et tout commentaire de membres de la Fed sur la trajectoire des taux. ADBE (#1 watchlist, score 85, rebond mean-reversion sur Death Cross stale de 999 jours) reste sous surveillance : le signal_dynamics_warning indique une pente MM21 fortement positive mais le cours reste largement sous la MM200, typiquement un Setup B qui exige patience et confirmation avant entrée.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Semaine calme sur les marchés, mais une décision de discipline s'imposait : nous sortons d'ORSTED.CO à -16.1% après 82 jours, déclenchant le stop-loss automatique R06. La thèse d'entrée (Golden Cross frais + décote z=-1.7sigma) ne s'est pas matérialisée, et attendre encore 8 jours aurait été de la rationalisation. La perte de 185 euros est convertie en crédit d'impôt de ~58 euros sur futurs gains, ce qui atténue partiellement l'impact. En contrepartie, nous entrons sur Blackstone (BX) avec un Golden Cross à J+4 en fenêtre optimale, val=4/5 en zone Fibo 38.2%, et un profil qui diversifie légèrement notre concentration Tech/IA. Le portefeuille reste à 20 lignes, performance nette à +36.44%, écart au benchmark +20.34 points de pourcentage.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Treasury yields rise as U.S. threatens Iran with more economic sanctions",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/14/treasury-yields-us-iran-economic-sanctions.html",
+   "date": "2026-08-14",
+   "resume": "Les taux des bons du Trésor américain à 10 ans ont progressé de 2 points de base à 4.661% suite aux menaces de nouvelles sanctions économiques américaines contre l'Iran."
+  },
+  {
+   "titre": "Oil prices rally, US data dents chances of Fed rate hike - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE14MHZSdkQ3TzZONVh4dW9nU1B5RlNOZHJSdzN1eVlQV3Eycm14NGZhb2F0QWdneVhPR2VqLWVVR1Bkb3lqTldGa3JVTXR0eGdFVi12UTJVTi1pTWVNVWhHX2tCUUJ1b21hT0dkampGU0Ric1d2WHAyclRfSQ?oc=5",
+   "date": "2026-08-14",
+   "resume": "Les prix du pétrole ont rebondi tandis que des données américaines solides réduisent les anticipations de hausse des taux de la Fed."
+  },
+  {
+   "titre": "Oil struggles for direction as US-Iran talks stall, Hormuz shipping slows - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPNmNqanA3WXVHU3JvRVRoZnVBYUpwUmRGbkxCYTNHLW9EeTFhbTdFcjFqM2JtZVctcTd6TzhEYnJUekhXQURDRXkzUXNNRlF4OEN3S2VQZ1ZIZ0c5OHo0d3RWdG01Z1o5amVMZFk0cGdUOGV1enVQYVVzTWtQVl9rTHhyM1RaeGxOd0RUNEM5NWJCMW91WFpITmp6TmlKOWF4RUYtMTRBQVpYX0pqZ0Q3UjNKVHIzZGc?oc=5",
+   "date": "2026-08-17",
+   "resume": "Les négociations entre les États-Unis et l'Iran sont dans l'impasse et le trafic maritime dans le détroit d'Ormuz ralentit, pesant sur les prix du pétrole."
+  },
+  {
+   "titre": "Inflation moderated as Intel and Nvidia fueled the AI trade in last week's market",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/15/inflation-moderated-as-intel-and-nvidia-fueled-the-ai-trade-in-last-week-market.html",
+   "date": "2026-08-15",
+   "resume": "L'inflation américaine a continué de modérer la semaine passée, pendant que les développements autour de Nvidia et de l'IA ont alimenté les records de Wall Street."
+  },
+  {
+   "titre": "Asian stocks rise as US inflation, tech spur gains",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-13/asian-stocks-set-for-gains-as-us-inflation-cools-markets-wrap",
+   "date": "2026-08-14",
+   "resume": "Les marchés asiatiques ont progressé de 0.5% grâce à la modération de l'inflation américaine, portant ainsi les valeurs technologiques pour une quatrième semaine consécutive de hausse."
+  }
+ ],
+ "genere_le": "2026-08-17"
+}
