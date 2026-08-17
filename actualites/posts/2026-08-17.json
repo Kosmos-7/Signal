@@ -1,0 +1,172 @@
+{
+ "id": "2026-08-17",
+ "type": "quotidien",
+ "date": "2026-08-17",
+ "titre": "Jane Street perd pour la première fois depuis dix ans, Alibaba dépasse Meta en IA",
+ "chapeau": "Un fonds IA plombe le trading firm Jane Street ; les modèles d'Alibaba franchissent 3 milliards de téléchargements. En Asie, le pétrole élevé pèse sur les places.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-17.jpg",
+  "v": "0af4ef49",
+  "legende": "No Known Restrictions Trading Floor, New York Stock Exchange",
+  "credit": "Carol M. Highsmith",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:No_Known_Restrictions_Trading_Floor,_New_York_Stock_Exchange_(Highsmith_LOC)_(6718386525).jpg",
+  "fichier": "No Known Restrictions Trading Floor, New York Stock Exchange (Highsmith LOC) (6718386525).jpg",
+  "requete": "New York Stock Exchange trading floor"
+ },
+ "marches": {
+  "ref": "2026-08-14",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7785.759765625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.1696433557729704,
+    "ref": "2026-08-14"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8636.7998046875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.1590621452075953,
+    "ref": "2026-08-14"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26729.16015625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.2755999697154101,
+    "ref": "2026-08-14"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6539.58984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.08983878775301055,
+    "ref": "2026-08-14"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.696000099182129,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.05500030517578125,
+    "ref": "2026-08-14"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4380.39990234375,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.38499872379513894,
+    "ref": "2026-08-14"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Broadcom Inc.",
+   "valeur": 392.989990234375,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -5.9427544527747385,
+   "ref": "2026-08-14",
+   "ticker": "AVGO",
+   "nom": "Broadcom Inc."
+  }
+ },
+ "marches_texte": "Les clôtures du 14 août dessinent une journée sans éclat : S&P 500 à 7 785,76 (-0,17 %), Nasdaq à 26 729,16 (-0,28 %), et les Européens dans le même registre discret, l'Euro Stoxx 50 perdant à peine 0,09 %. Le vrai mouvement du tableau, c'est Broadcom, qui lâche 5,94 % - de loin la plus grande secousse de la liste. Le taux du Treasury à dix ans remonte à 4,696 %, et l'or grappille +0,38 % supplémentaire, fidèle à ses habitudes du moment.",
+ "sections": [
+  {
+   "titre": "Jane Street : première perte mensuelle en dix ans",
+   "texte": "La firme de trading Jane Street enregistre sa première perte mensuelle depuis une décennie. Le revers est venu d'un fonds spécialisé dans l'intelligence artificielle, pris dans la volatilité des marchés actions. L'incident a contraint la société à réévaluer ses expositions au risque. Il intervient alors que Jane Street prépare par ailleurs un refinancement de dette de plusieurs milliards de dollars.",
+   "sources": [
+    6
+   ]
+  },
+  {
+   "titre": "Alibaba passe Meta et Google au compteur des téléchargements d'IA",
+   "texte": "Les modèles d'IA ouverts d'Alibaba ont franchi les 3 milliards de téléchargements, dépassant Meta et Google selon Bloomberg. Ces modèles dits « open » peuvent être téléchargés, personnalisés et utilisés comme briques de construction pour de nouveaux produits. Le nombre de téléchargements et de modèles dérivés est devenu l'une des mesures d'influence dans la course à l'IA entre les États-Unis et la Chine.",
+   "sources": [
+    8
+   ]
+  },
+  {
+   "titre": "Pétrole élevé, Ormuz ralenti : l'Asie fait du surplace",
+   "texte": "Les négociations de paix entre les États-Unis et l'Iran sont dans l'impasse, et le trafic maritime dans le détroit d'Ormuz ralentit, ce qui pousse le brut à la hausse. Dans ce contexte, les places asiatiques ont marqué le pas, selon Reuters. Les actions indiennes ont elles aussi reculé sous la pression de cours du pétrole qui restent élevés.",
+   "sources": [
+    1,
+    2,
+    0
+   ]
+  },
+  {
+   "titre": "Reliance et Rolls-Royce s'associent pour les moteurs de combat indiens",
+   "texte": "Le conglomérat indien Reliance et le motoriste britannique Rolls-Royce ont annoncé un partenariat autour du programme de moteur pour chasseur avancé de l'Inde. La collaboration envisagée s'inscrit dans la volonté de New Delhi de renforcer son autonomie en matière de technologie de défense. L'Inde prépare le développement d'un avion de combat de nouvelle génération à double motorisation.",
+   "sources": [
+    7
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Indian shares fall as crude remains at elevated levels - Reuters",
+   "resume": "Indian shares fall as crude remains at elevated levels  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQQUZOZ3VuQ2NHZWRMbVF4TE5WRlFMeWp5c3N6SlY4T2Y3ajV1YjdjaE9JLU5tTHVlaENLbV81NUxncUdhRWcxQXg1bUVIVlF0cHRJYzQ2RFB1VTRwMlNWRlNQbXpMSUhtMTFFcUtJaUJfRU5GUU9iQkl4QXRqM0dnYk9YS25NUDFBeFo2N0tST1c5elFsMDRXM1pPNnNCUW03eWRPNlFFZ2R1V2M?oc=5",
+   "date": "2026-08-17 02:21"
+  },
+  {
+   "titre": "Asian shares mark time as Gulf war keeps oil prices up - Reuters",
+   "resume": "Asian shares mark time as Gulf war keeps oil prices up  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNNl9yb3JkT21xaHcxVWgydjJJc1lLNU5LNDBicTBWTm1YekxBb0VJRUI5MWo2Qm9Ic0NfY3p4LU9BcXVQeUpZVkZ4Uk50dERwb01aOW0tM1ZVaHlDa2VIaEVOSmlGWG9PYWxNNDdRbDJtQzVrQ29RZVV5a3dBb1l0NGozaw?oc=5",
+   "date": "2026-08-17 01:17"
+  },
+  {
+   "titre": "Oil rises as US-Iran peace talks stall, Hormuz shipping slows - Reuters",
+   "resume": "Oil rises as US-Iran peace talks stall, Hormuz shipping slows  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPNmNqanA3WXVHU3JvRVRoZnVBYUpwUmRGbkxCYTNHLW9EeTFhbTdFcjFqM2JtZVctcTd6TzhEYnJUekhXQURDRXkzUXNNRlF4OEN3S2VQZ1ZIZ0c5OHo0d3RWdG01Z1o5amVMZFk0cGdUOGV1enVQYVVzTWtQVl9rTHhyM1RaeGxOd0RUNEM5NWJCMW91WFpITmp6TmlKOWF4RUYtMTRBQVpYX0pqZ0Q3UjNKVHIzZGc?oc=5",
+   "date": "2026-08-17 00:31"
+  },
+  {
+   "titre": "Jane Street faces first monthly loss in a decade after AI fund setback",
+   "resume": "The setback came amid volatile equity markets, forcing the trading firm to reassess risk exposures while preparing a multibillion-dollar debt refinancing",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-14/jane-street-took-15-billion-loss-in-july-as-ai-stocks-slumped",
+   "date": "2026-08-15 16:01"
+  },
+  {
+   "titre": "Reliance, Rolls-Royce team up for India’s advanced fighter jet engine programme",
+   "resume": "The proposed collaboration comes as India seeks greater self-reliance in defence technology and prepares to develop next-generation twin-engine combat aircraft",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-14/reliance-taps-rolls-royce-to-make-fighter-jet-engines-in-india",
+   "date": "2026-08-15 14:20"
+  },
+  {
+   "titre": "Alibaba AI models hit 3 billion downloads, passing Meta, Google",
+   "resume": "Open models can be downloaded, customised and used as building blocks for new AI products; that has made download and derivative-model figures one measure of influence in the US-China AI race",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-15/alibaba-ai-models-hit-3-billion-downloads-passing-meta-google",
+   "date": "2026-08-15 10:02"
+  }
+ ],
+ "genere_le": "2026-08-17 06:05 UTC"
+}
