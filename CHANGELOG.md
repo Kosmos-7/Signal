@@ -22,11 +22,26 @@ et +144 M$ : il resterait au quatrième une perte de **7 161 M$ pour 1 006 M$ de
 ventes**, treize fois le plus gros résultat annuel jamais publié par la société
 et trente-et-une fois la somme de ses trois autres trimestres. Le flux
 disponible du dernier exercice complet vaut −105 M$, pas −6,9 Md$. Le consensus
-attend 8,23 $ de BPA l'exercice suivant. Le seul détecteur du système avait bien
-tiqué — la confiance de la fiche est tombée à 0,9 sur une discordance de marge
-Yahoo/Finnhub le jour même — mais le TEXTE de l'alerte n'est publié que pour le
-top 30, et Lumentum est un titre thématique : l'alerte est morte dans un champ
-`confiance` que personne ne lit.
+attend 8,23 $ de BPA l'exercice suivant. Et le bilan publié le même jour ne suit
+pas : l'actif net par action vaut **41,47 $ avant comme après** (bilans au 28/03
+puis au 27/06) pour une base d'actions stable, soit ~3,1 Md$ de fonds propres
+des deux côtés du trimestre — une perte de 6,9 Md$ ne traverse pas 3,1 Md$ de
+fonds propres en les laissant intacts. Le bloc n'est pas simplement périmé : le
+rapport dette/fonds propres, lui, a bien changé ce jour-là (111 % → 36 %).
+
+**Rien ne l'avait signalé.** La contre-vérification Yahoo/Finnhub est hors de
+cause, dans les deux sens : la confiance de la fiche valait **déjà 0,9 avant la
+publication** (et 0,8 la veille), elle ne dit donc rien de ce chiffre-là. Aucun
+autre garde ne pouvait le voir. Celui d'`edgar` n'écarte qu'un résultat
+**positif** cent fois plus petit que ses deux voisins (cas SCHW) ; la garde
+d'échelle de `completer_fonda` ne compare que des chiffres d'affaires, et celui
+de l'exercice était juste (3 014 contre 1 645, ×1,8) ; `ajuster_eps_splits`
+n'aurait rien trouvé non plus, car **résultat et BPA sont cohérents entre eux**
+— leur quotient donne 74,6 M d'actions, dans la continuité des 68,4, 67,2 et
+70,3 M des exercices précédents. Ce n'est pas une erreur d'échelle : les deux
+faits viennent du même contexte, faux ou vrai ensemble. Quant à `note_v4`, il
+écarte silencieusement toute marge annuelle au-delà de ±100 % : le seul endroit
+qui aurait pu crier était précisément celui qui se taisait.
 
 **Ce que ça coûtait, mesuré.** La note est tombée à 27 puis 31 : rendement des
 capitaux propres à 0/9 (−240 %), conversion en cash à 0/7, un exercice de plus
@@ -45,11 +60,25 @@ trimestre résiduel (résultat ET chiffre d'affaires) et l'écarte quand il fran
 dix fois le plus gros résultat annuel connu de la société. Le résultat et le BPA
 quittent l'entrée, le chiffre d'affaires reste (les trimestres le corroborent),
 et le motif est écrit DANS l'exercice, affiché sous le graphique des chiffres
-publiés. Nous ne savons pas lequel des deux ment : une charge non monétaire
-véritable et une erreur de tagage de l'émetteur ont exactement cette tête, la SEC
-ne corrige pas le XBRL, et le rapport annuel n'est pas interrogeable depuis le
-conteneur. C'est la doctrine d'`ajuster_eps_splits` mot pour mot : on ne devine
-pas lequel est faux, on ne publie ni l'un ni l'autre.
+publiés.
+
+**Et ce n'est pas un verdict.** Deux lectures tiennent encore : une erreur de
+tagage de l'émetteur, ou une charge NON MONÉTAIRE réelle concentrée sur le
+quatrième trimestre (dépréciation, bons de souscription à un client, extinction
+ou conversion induite de convertibles quand le titre fait ×8) — celle-là
+expliquerait le cash immobile, pas les fonds propres inchangés. La SEC ne corrige
+pas le XBRL, Yahoo et Finnhub retraitent le même document, et le rapport annuel
+n'est pas interrogeable depuis le conteneur (proxy). La règle ne déclare donc pas
+le chiffre faux : elle constate qu'il est indécidable et refuse de le faire vivre
+comme un résultat d'EXPLOITATION — car même vrai, une charge exceptionnelle non
+monétaire n'est ni une marge nette de −230 % ni un ROE de −240 %. Le montant
+refusé reste lisible dans l'entrée et sur la fiche. C'est la doctrine
+d'`ajuster_eps_splits` mot pour mot : on ne devine pas lequel est faux, on ne
+publie ni l'un ni l'autre. **Le jour où le dépôt est lisible** (accès au greffe,
+ou communiqué du 14/08 sous les yeux), deux issues : le chiffre est confirmé et
+il faudra le publier AVEC son caractère exceptionnel plutôt que le noter comme
+une exploitation ; il est corrigé, et l'entrée fraîche remplace l'écartée toute
+seule au run suivant.
 
 **Les deux seuils sont mesurés, puis figés.** Sur les 139 fiches publiées, 119
 exercices portent les trois trimestres nécessaires. Résidu rapporté à son CA :

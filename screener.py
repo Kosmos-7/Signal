@@ -830,17 +830,43 @@ def ecarter_resultat_contredit(fonda):
     (« la société brûle encore du cash »), sur un chiffre que les comptes de la
     même page contredisaient.
 
-    CE QU'ON NE SAIT PAS, ET QU'ON N'INVENTE PAS. Lequel des deux ment ? Le
-    dépôt peut porter une charge non monétaire véritable comme une erreur de
-    tagage de l'émetteur — la SEC ne corrige pas le XBRL (cf. edgar), et Yahoo
-    comme Finnhub retraitent ce même document. Le seul détecteur du système
-    l'avait d'ailleurs vu : la confiance de la fiche est tombée à 0,9 le jour
-    de la publication, sur une discordance de marge Yahoo/Finnhub — mais le
-    texte de l'alerte n'est publié que pour le top 30, et LITE est un titre
-    thématique. Sans le rapport annuel lui-même, la question ne se tranche pas.
-    C'est mot pour mot la situation d'`edgar.ajuster_eps_splits` quand le
-    résultat net et le BPA sont incompatibles : on ne devine pas lequel est
-    faux, on ne publie ni l'un ni l'autre.
+    CE N'EST PAS UNE ERREUR D'ÉCHELLE, et c'est ce qui la rend indétectable
+    localement. Résultat et BPA sont COHÉRENTS ENTRE EUX : leur quotient donne
+    74,6 M d'actions, dans la continuité des exercices précédents (68,4 puis
+    67,2 puis 70,3 M). Un ×1000 de tagage aurait cassé ce rapport, et le garde
+    d'`ajuster_eps_splits` l'aurait vu ; ici les deux faits viennent du même
+    contexte, faux ou vrai ensemble.
+
+    LE BILAN PUBLIÉ LE MÊME JOUR NE SUIT PAS. L'actif net par action de la
+    source vaut 41,47 $ AVANT (bilan au 28/03) comme APRÈS (bilan au 27/06), et
+    la base d'actions n'a pas bougé : les capitaux propres valent donc ~3,1 Md$
+    des deux côtés du trimestre. Une perte de 6,9 Md$ ne traverse pas 3,1 Md$
+    de fonds propres en les laissant intacts. Le rapport dette/fonds propres,
+    lui, a bien été rafraîchi ce jour-là (111 % → 36 %) : le bloc du bilan
+    n'est donc pas simplement périmé, il est incompatible avec le compte de
+    résultat qu'on nous donne.
+
+    CE QU'ON NE SAIT PAS, ET QU'ON N'INVENTE PAS. Lequel ment ? Deux lectures
+    tiennent encore debout. (1) Une erreur de tagage de l'émetteur : la SEC ne
+    corrige pas le XBRL (cf. edgar), et Yahoo comme Finnhub retraitent ce même
+    document — ce ne sont pas des sources indépendantes. (2) Une charge NON
+    MONÉTAIRE réelle et massive, concentrée sur le quatrième trimestre
+    (dépréciation, bons de souscription émis à un client, extinction ou
+    conversion induite d'obligations convertibles quand le titre fait ×8) :
+    elle expliquerait que le cash ne bouge pas, mais pas des fonds propres
+    inchangés. Et rien ne l'avait signalée : la confiance de la fiche valait
+    déjà 0,9 AVANT la publication (0,8 la veille) — la contre-vérification
+    Yahoo/Finnhub ne dit donc rien de ce chiffre-là. Sans le rapport annuel
+    lui-même, la question ne se tranche pas.
+
+    D'OÙ LE REFUS, QUI N'EST PAS UN VERDICT. La règle ne déclare pas le chiffre
+    faux : elle constate qu'il est indécidable et refuse de le faire vivre
+    comme un résultat d'exploitation — car même vrai, une charge non monétaire
+    d'un exercice n'est pas une marge nette de −230 % ni un ROE de −240 %. Le
+    montant refusé reste lisible dans l'entrée et sur la fiche. C'est mot pour
+    mot la posture d'`edgar.ajuster_eps_splits` quand résultat net et BPA sont
+    incompatibles : on ne devine pas lequel est faux, on ne publie ni l'un ni
+    l'autre.
 
     CE QUE FAIT LA RÈGLE. Pour chaque exercice qui porte un résultat net et un
     chiffre d'affaires, on cherche dans la MÊME série les trimestres du même
@@ -3233,9 +3259,9 @@ def score_ticker(ticker, vix=None):
         # AUCUN MAILLON NE REMPLIT UN TROU QUI EST UN REFUS. La chaîne est
         # écrite pour une ABSENCE — la source muette — et elle ne sait pas la
         # distinguer d'une DÉCISION : Finnhub aurait rempli la marge que nous
-        # venons d'écarter par sa propre valeur, celle-là même dont la
-        # discordance avec Yahoo avait fait tomber la confiance de la fiche.
-        # Substituer le chiffre du tiers qui n'est pas d'accord, c'est trancher
+        # venons d'écarter par sa propre valeur, alors qu'il retraite le même
+        # dépôt que Yahoo et n'a donc rien d'un arbitre indépendant.
+        # Substituer le chiffre d'un tiers non indépendant, c'est trancher
         # au jugé la question qu'on vient de déclarer indécidable. C'est mot
         # pour mot la leçon de `pe_prev_indecis` dans fusionner_fonda : un
         # retrait est une décision, et la reprendre l'annule.
