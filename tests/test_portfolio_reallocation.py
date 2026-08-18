@@ -169,7 +169,9 @@ check("allegement_pct='50%' (string) est compris comme 50",
 
 print("— Allègement : rejets fail-loud (l'ancien code vendait TOUT en silence) —")
 for brut_pct, libelle in [("cinquante", "illisible"), (150, "hors bornes >100"),
-                          (0, "zéro"), (-5, "négatif")]:
+                          (0, "zéro"), (-5, "négatif"),
+                          (0.33, "fraction 0-1 (le modèle a émis la fraction, pas le %)"),
+                          (99.5, "entre 99 et 100")]:
     PRIX.clear(); PRIX["AAA"] = 20.0
     pf = portefeuille([ligne("AAA", 10, 10.0, 100.0)])
     pos, liq, ordres, bloques = executer([vente("AAA", pct=brut_pct)], pf)
@@ -247,6 +249,34 @@ pos, liq, ordres, bloques = executer(
     analyse={"positions_analyse": {"AAA": {"delta_these": "Rien de fondamental"}}})
 check("stop-loss catastrophe (-30%) : exempté du verrou, la vente passe",
       len(ordres) == 1 and ordres[0]["type"] == "VENTE")
+
+# Dédup stop-loss : si l'IA propose ELLE-MÊME la vente du titre en stop-loss,
+# sa décision est marquée _stop_loss_type (l'ancienne dédup la laissait vente
+# ordinaire : le veto passe 1 ou un allegement_pct pouvaient annuler ou
+# fractionner une sortie pourtant obligatoire).
+PRIX.clear(); PRIX["AAA"] = 14.0
+pos, liq, ordres, bloques = executer(
+    [vente("AAA", pct=50, conviction="modérée")],
+    portefeuille([ligne("AAA", 10, 20.0, 200.0, date_achat="2026-07-20")]),
+    analyse={"positions_analyse": {"AAA": {"delta_these": "Rien de fondamental"}}})
+check("l'IA vend un titre en stop-loss catastrophe : sortie TOTALE quand même "
+      "(allegement_pct purgé, veto et R01 bypassés)",
+      len(ordres) == 1 and ordres[0]["qte"] == 10 and not pos
+      and not ordres[0].get("allegement"))
+
+# L'exemption du veto pour les allègements : trim de concentration <90j,
+# conviction forte, passe 1 « Rien de fondamental » : le trim PASSE (son
+# déclencheur est le poids, orthogonal au delta de thèse). La sortie TOTALE
+# dans la même situation reste bloquée (testée plus haut).
+PRIX.clear(); PRIX["AAA"] = 25.0
+pos, liq, ordres, bloques = executer(
+    [vente("AAA", pct=40, conviction="forte")],
+    portefeuille([ligne("AAA", 10, 10.0, 100.0, date_achat="2026-07-20")]),
+    analyse={"positions_analyse": {"AAA": {"delta_these": "Rien de fondamental, seul le poids a dérivé"}}})
+check("allègement de concentration <90j + « Rien de fondamental » : autorisé "
+      "(le veto ne s'applique qu'aux sorties totales)",
+      len(ordres) == 1 and ordres[0].get("allegement") is True
+      and pos and pos[0]["quantite"] == 6)
 
 print("— Garde prix aberrant sur RENFORT : le PRU n'est plus empoisonnable —")
 PRIX.clear(); PRIX["BBB"] = 100.0   # ×10 vs le dernier prix connu de la ligne

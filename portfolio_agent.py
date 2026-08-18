@@ -946,19 +946,26 @@ def construire_prompt_analyse(portfolio, watchlist, contexte, macro_news=None):
     capital   = portfolio.get("capital_actuel", 0)
     today     = str(date.today())
 
+    # Score de la semaine par ticker : l'analyste doit pouvoir contrôler une
+    # condition de vente du type « score de la semaine sous 50 » — sans lui,
+    # la promesse « la passe d'analyse dira si une condition est déclenchée »
+    # était invérifiable pour toute condition basée sur le score.
+    _scores_semaine = {s["ticker"]: s.get("score") for s in watchlist.get("stocks", [])}
     pos_lines = []
     for p in positions:
         date_achat   = p.get("date_achat", today)
         jours        = (datetime.today() - datetime.strptime(date_achat, "%Y-%m-%d")).days if date_achat else 0
         raison_achat = p.get("raison_achat", "Non documentée")
-        # Poids : même donnée que la passe 2 — l'analyste doit voir la concentration
-        # pour signaler un surpoids dans `risques`, pas seulement la perf.
+        # Poids et secteur : mêmes données que la passe 2 — l'analyste doit voir
+        # la concentration pour signaler un surpoids dans `risques`, pas seulement la perf.
         poids_pct = (p.get("valeur_actuelle", 0) / capital * 100) if capital > 0 else 0
+        score_semaine = _scores_semaine.get(p["ticker"])
+        score_str = f"score semaine {score_semaine}/100" if score_semaine is not None else "hors watchlist cette semaine"
         cond_vente = p.get("conditions_vente") or []
         cond_str = ("\n    Conditions de vente pré-définies (dis dans delta_these si l'une est DÉCLENCHÉE) : "
                     + " | ".join(f"{i+1}) {c}" for i, c in enumerate(cond_vente))) if cond_vente else ""
         pos_lines.append(
-            f"  {p['ticker']} ({p['nom']}) — perf {p.get('performance',0):+.1f}% — poids {poids_pct:.1f}% — {jours}j détenus\n"
+            f"  {p['ticker']} ({p['nom']}) [{p.get('sector','—')}] — perf {p.get('performance',0):+.1f}% — poids {poids_pct:.1f}% — {jours}j détenus — {score_str}\n"
             f"    Thèse d'achat originale : {raison_achat[:250]}{cond_str}"
         )
 
@@ -1373,7 +1380,7 @@ automatiquement chaque semaine.
    - ALLÉGER : une décision VENTE avec le champ optionnel `"allegement_pct"` (nombre entre 1 et 99) ne vend que ce pourcentage de la position, arrondi au titre entier. Le PFU ne s'applique qu'à la plus-value de la fraction vendue ; le PRU et la date d'origine de la ligne sont conservés. Si le reliquat vaudrait moins de 100€, la vente devient totale (anti-poussière). Un allègement reste une VENTE : Règle 01 (90j / conviction forte) et friction fiscale (Règle 10) s'appliquent pleinement.
      · Déclencheurs LÉGITIMES (au moins un, à nommer dans `raison`) : poids ≥ 15% du capital après un rally (risque de concentration, pas opinion sur le titre) ; surcote extrême (z > +2σ) avec fondamentaux intacts ; thèse PARTIELLEMENT affaiblie où réduire est plus honnête que sortir ; financer une opportunité nettement supérieure sans fermer une thèse intacte.
      · Tailles utiles : 25% (ajustement), 33% (surpoids net), 50% (thèse abîmée mais vivante). Jamais moins de 25% : frais + PFU rendent le geste symbolique. La quantité est arrondie au titre entier — sur une petite ligne le pourcentage RÉALISÉ peut s'écarter du demandé (il est journalisé), et une ligne d'1 titre n'est PAS allégeable (toute vente y est totale — le moteur le journalise comme tel).
-     · INTERDITS : « sécuriser mes gains » sans usage alternatif du capital identifié (disposition effect — le PFU rend ce réflexe structurellement perdant, cf. Règle 10) ; alléger un perdant pour soulager la douleur (les stop-loss R06 s'en chargent, en sortie totale) ; un `allegement_pct` hors de 1-99 ou illisible est REJETÉ par le moteur (la vente n'a pas lieu).
+     · INTERDITS : « sécuriser mes gains » sans usage alternatif du capital identifié (disposition effect — le PFU rend ce réflexe structurellement perdant, cf. Règle 10) ; alléger un perdant pour soulager la douleur (les stop-loss R06 s'en chargent, en sortie totale) ; un `allegement_pct` hors de 1-99 ou illisible est REJETÉ par le moteur (la vente n'a pas lieu — seule exception : 100, traité comme vente totale explicite).
      · Dans un compte-titres, l'allègement est un outil de GESTION DU RISQUE DE CONCENTRATION, pas de prise de gains : chiffre le PFU de la fraction cédée (affiché par ligne dans l'état du portefeuille) face au risque que tu réduis.
 14. **Décote/surcote vs tendance = information, JAMAIS un signal seul** : c'est l'écart du cours à sa droite de régression long terme (trajectoire historique — PAS une valeur intrinsèque), affiché dans la watchlist. Décote extrême (z < -2σ) : le marché price peut-être un changement STRUCTUREL du business — risque de value trap ; n'achète jamais sur la décote seule, exige des fondamentaux intacts (bloc qualité /35 de la note) et une thèse documentée. Surcote extrême (z > +2σ) : acheter ou renforcer revient à payer très au-dessus de la trajectoire historique — risque de rally chase, justification exceptionnelle requise. L'objectif consensus affiché porte un biais optimiste structurel documenté — ne le traite jamais comme un prix cible fiable.
 
@@ -1477,6 +1484,9 @@ tu DOIS dans le champ "raison" :
   1. Citer la thèse d'achat originale
   2. Expliquer précisément ce qui a CONCRÈTEMENT changé (pas les mêmes signaux relus différemment)
   3. Si le delta_these de la passe 1 indique "Rien de fondamental", la vente est interdite
+     (vérifié en code — sorties TOTALES uniquement : un ALLÈGEMENT valide échappe à ce
+     point 3, son déclencheur légitime est le poids de la ligne, pas un delta de thèse ;
+     il reste soumis aux points 1-2 et à la Règle 01 comme toute vente < 90j)
 
 Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, selon ce format exact :
 
@@ -1491,7 +1501,7 @@ Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, selon ce format 
       "score_watchlist": 0,
       "montant_eur": 1200,
       "allegement_pct": 50,
-      "conditions_vente": ["Stop thèse : perte du design win IA chez le client principal", "Score watchlist < 50 trois semaines de suite"]
+      "conditions_vente": ["Stop thèse : perte du design win IA chez le client principal", "Score watchlist de la semaine sous 50"]
     }}
   ],
   "analyse_macro": "TEXTE NEWSLETTER (200-350 mots, 4-6 paragraphes courts SÉPARÉS PAR UN DOUBLE SAUT DE LIGNE `\\n\\n` — c'est NON-NÉGOCIABLE, sinon le rendu HTML produit un mur de texte illisible). Chaque paragraphe = 2 à 4 phrases, une idée par paragraphe. C'est CE QUE LE LECTEUR LIT chaque semaine sur le site. Adresse-toi DIRECTEMENT à lui ('vous', pas 'on' ni 'l'investisseur'). Ton : analyste rigoureux mais avec un brin d'humour décalé pour contraster avec les chiffres sérieux — pense à un Howard Marks qui aurait lu Charlie Munger ET aurait un sens de la formule. Tu peux te permettre une métaphore, une vanne fine sur les marchés, un clin d'œil. Pas de sarcasme méchant, pas de blagues lourdes. Reste pro mais vivant. STRUCTURE en paragraphes distincts (chacun séparé par `\\n\\n`) : §1 accroche sur l'événement de la semaine (cite EXPLICITEMENT le contenu des news macro reçues plus haut — pas juste le titre, le chiffre : si CPI à 2.4%, dis 2.4%, pas 'inflation reste centrale') ; §2 ce que ça veut dire concrètement pour le portefeuille + chiffres clés (perf {perf:+.2f}%, écart au benchmark {vs:+.2f}pp recopiés depuis ÉTAT ACTUEL) ; §3 éléments méthodologiques qui ont guidé tes décisions (R7, val_pts, signal_dynamics_warning si pertinent — sinon zappe) ; §4 biais ou learning de la semaine (s'il y en a un saillant, sinon zappe) ; §5 mot pour la semaine à venir (ce que vous surveillerez). NE PAS commencer par 'Sur la semaine écoulée du X au Y' (trop bureaucratique — préfère une accroche éditoriale qui glisse la date naturellement) mais l'ancrage temporel reste obligatoire dans les 2 premières phrases. Évite les formulations creuses ('le marché reste un paramètre central', 'l'attention est portée à...') — sois précis et concret. RAPPEL CRITIQUE : DOUBLE SAUT DE LIGNE `\\n\\n` entre chaque paragraphe, sinon le site rend un bloc compact.",
@@ -1507,7 +1517,7 @@ Pour `news_resumes_fr` : un résumé français concis (1 phrase, 15-25 mots max,
 
 `allegement_pct` est OPTIONNEL et ne concerne que les VENTES partielles (Règle 13) : omets-le pour une vente totale ou un achat. Un nombre entre 1 et 99 uniquement — toute autre valeur est REJETÉE par le moteur (la vente n'a pas lieu, elle est journalisée dans les décisions bloquées), à la seule exception de 100, traité comme une vente totale explicite. Un ACHAT sur un titre déjà détenu est automatiquement traité comme un renforcement.
 
-`conditions_vente` est OPTIONNEL et ne concerne que l'ACHAT d'une NOUVELLE ligne : 2 à 4 conditions de vente pré-définies, écrites AVANT que la position bouge (discipline anti-loss-aversion du skill : on décide des sorties à froid). Chacune doit être FALSIFIABLE — un événement ou un seuil observable ("earnings miss avec révision baissière du consensus", "perte du contrat X", "score watchlist < 50 trois semaines de suite"), pas un sentiment. Elles te seront réinjectées à chaque run tant que la ligne vit, et la passe d'analyse dira si l'une est déclenchée. Ignoré pour un renforcement (les conditions d'origine restent).
+`conditions_vente` est OPTIONNEL et ne concerne que l'ACHAT d'une NOUVELLE ligne : 2 à 4 conditions de vente pré-définies, écrites AVANT que la position bouge (discipline anti-loss-aversion du skill : on décide des sorties à froid). Chacune doit être FALSIFIABLE — un événement ou un seuil observable ("earnings miss avec révision baissière du consensus", "perte du contrat X", "score watchlist de la semaine sous 50"), pas un sentiment. CONTRÔLABLE EN UN RUN : le système n'a pas de mémoire d'historique des scores, une condition à fenêtre glissante ("trois semaines de suite") ne pourra pas être vérifiée. Elles te seront réinjectées à chaque run tant que la ligne vit, et la passe d'analyse dira si l'une est déclenchée. Ignoré pour un renforcement (les conditions d'origine restent).
 
 N'inclus que les décisions actionnables (achats et ventes). Les positions conservées sans changement n'ont pas besoin d'apparaître, sauf si tu veux commenter spécifiquement leur situation.
 """
@@ -1592,20 +1602,35 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
     # Les stop-loss catastrophe (R08) ignorent en plus le mode panique (cf. boucle ci-dessous).
     for ticker_sl, (sl_type, perf_sl, jours_sl) in stop_loss_tickers.items():
         pos_sl = next((p for p in positions if p["ticker"] == ticker_sl), None)
-        if pos_sl and not any(d.get("ticker") == ticker_sl and d.get("action","").upper() == "VENTE" for d in decisions):
-            if sl_type == "catastrophe":
-                raison_sl = (f"Stop-loss CATASTROPHE Règle 08 — {perf_sl:.1f}% depuis l'achat ({jours_sl}j). "
-                             f"Seuil −25% atteint, vente forcée sans condition de durée ni mode panique.")
-            else:
-                raison_sl = f"Stop-loss automatique Règle 07 — {perf_sl:.1f}% depuis {jours_sl}j. Seuil −15% atteint après 90+ jours."
-            decisions.insert(0, {
-                "action": "VENTE",
-                "ticker": ticker_sl,
-                "nom": pos_sl.get("nom", ticker_sl),
-                "raison": raison_sl,
-                "conviction": "forte",
-                "_stop_loss_type": sl_type,  # marqueur pour bypass mode panique côté VENTE
-            })
+        if pos_sl is None:
+            continue
+        # Si Claude propose DÉJÀ une vente sur ce ticker, sa décision DEVIENT le
+        # stop-loss : on la marque _stop_loss_type au lieu de sauter l'injection.
+        # Sans ce marquage, la vente de Claude restait une vente ordinaire et les
+        # rejets discrétionnaires (veto passe 1, allegement_pct invalide, mode
+        # panique) pouvaient annuler un stop-loss pourtant obligatoire — et un
+        # allegement_pct laissé sur la décision aurait fait d'une sortie forcée
+        # une sortie partielle. Un stop-loss est TOTAL et inconditionnel.
+        dec_existante = next((d for d in decisions
+                              if d.get("ticker") == ticker_sl and d.get("action", "").upper() == "VENTE"), None)
+        if dec_existante is not None:
+            dec_existante["_stop_loss_type"] = sl_type
+            if dec_existante.pop("allegement_pct", None) is not None:
+                print(f"  ℹ️  {ticker_sl} : allegement_pct ignoré — le stop-loss {sl_type} impose une sortie totale")
+            continue
+        if sl_type == "catastrophe":
+            raison_sl = (f"Stop-loss CATASTROPHE Règle 08 — {perf_sl:.1f}% depuis l'achat ({jours_sl}j). "
+                         f"Seuil −25% atteint, vente forcée sans condition de durée ni mode panique.")
+        else:
+            raison_sl = f"Stop-loss automatique Règle 07 — {perf_sl:.1f}% depuis {jours_sl}j. Seuil −15% atteint après 90+ jours."
+        decisions.insert(0, {
+            "action": "VENTE",
+            "ticker": ticker_sl,
+            "nom": pos_sl.get("nom", ticker_sl),
+            "raison": raison_sl,
+            "conviction": "forte",
+            "_stop_loss_type": sl_type,  # marqueur pour bypass mode panique côté VENTE
+        })
 
     # ── Rotations : les VENTES s'exécutent avant les ACHATS du même run ────
     # `liquidites` est crédité au fil de la boucle : en triant les ventes en tête
@@ -1653,9 +1678,19 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 # la vente est interdite ». Annoncé au modèle depuis des mois, jamais
                 # vérifié en code — une vente <90j passait sur la seule conviction
                 # 'forte', même quand l'analyste de la passe 1 venait d'écrire que
-                # rien n'avait changé. Les stop-loss (_stop_loss_type) sont exemptés :
-                # ce sont des règles mécaniques, pas des thèses.
-                if not dec.get("_stop_loss_type"):
+                # rien n'avait changé. Deux exemptions : les stop-loss
+                # (_stop_loss_type — règles mécaniques, pas des thèses), et les
+                # ALLÈGEMENTS valides (1-99) — leur déclencheur canonique est le
+                # POIDS de la ligne, orthogonal au delta de thèse : sur un rally
+                # de concentration, la passe 1 écrit honnêtement « Rien de
+                # fondamental » et bloquerait le trim que la doctrine recommande.
+                # R01 (conviction forte) continue de s'appliquer aux allègements.
+                try:
+                    _pct_trim = float(str(dec.get("allegement_pct")).replace("%", "").replace(",", ".").strip())
+                except (TypeError, ValueError):
+                    _pct_trim = None
+                est_allegement = _pct_trim is not None and 1 <= _pct_trim <= 99
+                if not dec.get("_stop_loss_type") and not est_allegement:
                     delta_p1 = ((analyse or {}).get("positions_analyse", {})
                                 .get(ticker, {}).get("delta_these", "") or "").strip()
                     if delta_p1.lower().startswith("rien de fondamental"):
@@ -1669,7 +1704,10 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                         })
                         continue
                 conviction = dec.get("conviction", "modérée")
-                if conviction != "forte":
+                # Un stop-loss bypasse R01 par construction (les ventes injectées
+                # portent conviction='forte' ; une décision de Claude TAGUÉE
+                # stop-loss garde sa conviction d'origine, elle doit passer aussi).
+                if conviction != "forte" and not dec.get("_stop_loss_type"):
                     print(f"  ⏳ VENTE {ticker} bloquée — {jours}j < 90j et conviction non forte (Règle 01)")
                     raison = f"[BLOQUÉ — Règle 01 : {jours}j détenus < 90j requis] " + raison
                     dec["raison"] = raison
@@ -1720,7 +1758,7 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                     allegement_pct = float(str(raw_pct).replace("%", "").replace(",", ".").strip())
                 except (TypeError, ValueError):
                     allegement_pct = float("nan")
-                if allegement_pct != allegement_pct or not (0 < allegement_pct <= 100):
+                if allegement_pct != allegement_pct or not (1 <= allegement_pct <= 99 or allegement_pct == 100):
                     print(f"  🚫 VENTE {ticker} refusée — allegement_pct invalide ({raw_pct!r}, attendu 1-99)")
                     decisions_bloquees.append({
                         "date": today, "action_tentee": "VENTE", "ticker": ticker, "nom": nom,

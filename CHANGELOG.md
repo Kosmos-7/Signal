@@ -18,11 +18,11 @@ avait trois causes vérifiables.
 ligne pèse 16 % du capital après son rally » — et le poids était la seule
 donnée que le prompt ne montrait pas, alors que le site l'affiche depuis
 toujours. L'agent aurait dû le recalculer de tête à chaque run ; il ne l'a
-jamais fait. Les deux passes voient désormais le poids de chaque ligne, le PFU
-latent d'une cession, le secteur, et le score de LA SEMAINE à côté du score
-d'entrée (l'ancien libellé « score watchlist actuel » affichait un score figé
-à l'achat — une condition de vente « score < 50 trois semaines » était
-invérifiable). Et le surpoids parle avant le mur : dès 15 %, une règle
+jamais fait. Les deux passes voient désormais le poids, le secteur et le score
+de LA SEMAINE de chaque ligne (l'ancien libellé « score watchlist actuel »
+affichait un score figé à l'achat — une condition de vente basée sur le score
+était invérifiable) ; la passe de décision voit en plus le PFU latent d'une
+cession, donnée d'arbitrage qui n'a pas sa place dans l'analyse neutre. Et le surpoids parle avant le mur : dès 15 %, une règle
 informative met l'allègement sur la table ; au-delà de 20 %, le blocage du
 renforcement dit explicitement « allège, ou justifie le maintien ».
 
@@ -50,13 +50,20 @@ chaque run, que la passe d'analyse doit contrôler — la discipline « décider
 des sorties à froid » de selling.md, enfin outillée.
 
 **Quatre mensonges mécaniques corrigés au passage** (audit du même jour) :
-un `allegement_pct` illisible (« 50% » en string) devenait une vente TOTALE
-silencieuse — le journal aurait contredit la raison publiée ; désormais rejet
-fail-loud journalisé, et quand l'anti-poussière convertit légitimement un
-allègement en vente totale (reliquat < 100 €, ligne d'un titre), l'ordre porte
-le motif et le site l'explique, demandé ET réalisé. La règle anti-contradiction
-(« si la passe 1 dit "Rien de fondamental", la vente est interdite ») n'était
-jamais vérifiée — un veto en code la fait respecter, stop-loss exemptés. La
+un `allegement_pct` illisible devenait une vente TOTALE silencieuse — le
+journal aurait contredit la raison publiée ; désormais les formes évidentes
+(« 50% » en string, virgule décimale) sont normalisées et exécutées comme
+demandé, tout le reste (illisible, hors bornes 1-99 — à l'exception de 100,
+vente totale explicite) est REJETÉ fail-loud et journalisé, et quand
+l'anti-poussière convertit légitimement un allègement en vente totale
+(reliquat < 100 €, ligne d'un titre), l'ordre porte le motif et le site
+l'explique, demandé ET réalisé. La règle anti-contradiction (« si la passe 1
+dit "Rien de fondamental", la vente est interdite ») n'était jamais vérifiée —
+un veto en code la fait respecter sur les sorties TOTALES ; les stop-loss en
+sont exemptés (y compris quand l'IA propose elle-même la vente d'un titre en
+stop-loss : sa décision est marquée comme telle et redevient inconditionnelle),
+et les allègements aussi — leur déclencheur légitime est le poids de la ligne,
+que la passe 1 conclue ou non « rien de fondamental » sur la thèse. La
 Règle 9 décrivait une file d'attente à l'ouverture qui n'a jamais existé —
 elle dit maintenant la vérité : exécution immédiate au dernier close connu, et
 une décision refusée le weekend n'est PAS mémorisée. Les pertes reportables
@@ -66,9 +73,15 @@ jamais — requalifiées en suivi informatif.
 **Le site sait enfin raconter une réallocation.** Badge « ↘ allègement X % »
 avec note détaillée (fraction cédée, PFU au prorata, PRU et date conservés),
 badge « ↗ renfort », et l'heuristique aller-retour ne peut plus étiqueter
-« ⚠ bug » un allègement qui finance un renfort le même jour. Le fallback P&L
-des vieilles ventes, qui mélangeait un montant net d'impôt avec une perf en
-devise native, est supprimé : mieux vaut aucun chiffre qu'un chiffre inventé.
+« ⚠ bug » un ordre de réallocation : le seul cas concerné — alléger PUIS
+renforcer le même titre le même jour — est un geste délibéré, mais coûteux
+(frais + PFU pour revenir en partie au point de départ), et il reçoit son
+propre avertissement « ↔ » dans la note de détail au lieu de l'étiquette bug.
+Le palier surpoids s'affiche avec ℹ️ et non plus le 🚫 de blocage dur
+(défaut de rendu préexistant que le nouveau palier aurait rendu permanent).
+Le fallback P&L des vieilles ventes, qui mélangeait un montant net d'impôt
+avec une perf en devise native, est supprimé : mieux vaut aucun chiffre qu'un
+chiffre inventé.
 
 62 vérifications hermétiques de plus dans `test_portfolio_reallocation.py`
 (proratisation fiscale, PRU, anti-poussière, rejets, veto passe 1, garde

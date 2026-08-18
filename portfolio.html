@@ -744,7 +744,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
         <div class="pacc-section-title">Les règles que l'IA s'impose</div>
         <div class="rules-grid">
           <div class="rule"><div class="rule-num">Règle 01 · Patience</div><div class="rule-title">Aucune vente avant 90 jours</div><p>Sauf signal fondamental majeur. Évite la surréaction aux fluctuations normales.</p></div>
-          <div class="rule"><div class="rule-num">Règle 02 · Taille</div><div class="rule-title">Maximum 20 % sur un titre</div><p>Aucune conviction ne justifie une concentration excessive du capital. Dès 15 %, le surpoids est signalé à l'IA à chaque run : elle allège, ou justifie explicitement le maintien.</p></div>
+          <div class="rule"><div class="rule-num">Règle 02 · Taille</div><div class="rule-title">Maximum 20 % sur un titre</div><p>Aucune conviction ne justifie une concentration excessive du capital. Dès 15 %, le surpoids est signalé à l'IA à chaque run ; au-delà de 20 %, le renforcement est bloqué et elle doit alléger ou justifier explicitement le maintien.</p></div>
           <div class="rule"><div class="rule-num">Règle 03 · Calme</div><div class="rule-title">Zéro ajustement en panique</div><p>Si le CAC40 chute de plus de 5 % sur la semaine, l'IA n'agit pas.</p></div>
           <div class="rule"><div class="rule-num">Règle 04 · Honnêteté</div><div class="rule-title">Chaque décision documentée</div><p>Chaque achat et vente est expliqué avec les données qui ont motivé la décision.</p></div>
           <div class="rule"><div class="rule-num">Règle 05 · Sources</div><div class="rule-title">Données multi-sources</div><p>Yahoo Finance pour le momentum, Finnhub pour valider les fondamentaux.</p></div>
@@ -1649,6 +1649,7 @@ Cet ordre a été déclenché par un run manuel le samedi 23 mai 2026 alors que 
                 <strong>↘ Vente partielle (Règle 13).</strong>
                 ${o.allegement_pct} % de la ligne cédée (${o.qte} titre${o.qte>1?'s':''}, ${o.qte_restante} conservé${o.qte_restante>1?'s':''})${o.allegement_demande_pct != null && Math.round(o.allegement_demande_pct) !== Math.round(o.allegement_pct) ? ` (l'IA demandait ${fmt(o.allegement_demande_pct,0)} %, arrondi au titre entier)` : ''}.
                 Le PFU ne porte que sur la plus-value de la fraction vendue${o.impot_pfu_eur > 0 ? ` (${fmtEur(o.impot_pfu_eur)} ici)` : ''} ; le prix de revient et la date de détention d'origine sont conservés sur le reste de la ligne. Le % de perf affiché est celui de la ligne entière.
+                ${o._reallocAR ? `<br><br><strong>↔ Attention :</strong> ce titre a aussi été renforcé le même jour. Alléger puis racheter la même ligne paye frais et PFU pour revenir en partie au point de départ, la friction de ce geste doit être justifiée dans le raisonnement ci-dessous.` : ''}
               </div>` : ''}
           ${o.allegement_converti_total ? `<div class="order-correction-note">
                 <strong>Allègement demandé, vente totale exécutée.</strong>
@@ -1656,7 +1657,8 @@ Cet ordre a été déclenché par un run manuel le samedi 23 mai 2026 alors que 
               </div>` : ''}
           ${o.renforcement ? `<div class="order-correction-note">
                 <strong>↗ Renforcement d'une ligne existante (Règle 13).</strong>
-                La position passe à ${o.qte_totale} titres, prix de revient moyen pondéré ${o.pru_apres} ${o.currency === 'EUR' ? '€' : o.currency === 'USD' ? '$' : '£'}. La date de détention d'origine est conservée : le compteur des 90 jours ne repart pas.
+                La position passe à ${o.qte_totale} titres, prix de revient moyen pondéré ${o.pru_apres} ${o.currency === 'EUR' ? '€' : o.currency === 'USD' ? '$' : o.currency === 'GBP' ? '£' : o.currency}. La date de détention d'origine est conservée : le compteur des 90 jours ne repart pas.
+                ${o._reallocAR ? `<br><br><strong>↔ Attention :</strong> ce titre a aussi été allégé le même jour. Racheter ce qu'on vient de vendre paye frais et PFU pour revenir en partie au point de départ, la friction de ce geste doit être justifiée dans le raisonnement ci-dessous.` : ''}
               </div>` : ''}
           <div class="order-raison">${escHtml(o.raison || '')}</div>
         </div>
@@ -1987,23 +1989,32 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
 
     const allOrdres = d.ordres || [];
     // Détecter aller-retours (achat + vente même ticker même date).
-    // Les ordres de réallocation (Règle 13) en sont EXCLUS : un allègement qui
-    // finance un renfort le même jour est le fonctionnement prévu, pas le
-    // flip-flop historique que ce badge documente, et l'étiqueter « ⚠ bug »
-    // saperait la confiance dans un geste parfaitement délibéré.
-    const _arMap = {};
+    // Les ordres de réallocation (Règle 13) sont sortis du badge « ⚠ bug » : le
+    // seul cas qu'ils peuvent former, c'est allègement + renfort du MÊME titre
+    // le même jour, un geste délibéré, pas le flip-flop historique que ce badge
+    // documente. Mais ce geste-là paye frais + PFU pour revenir en partie au
+    // point de départ : il reçoit son propre marqueur (_reallocAR), affiché dans
+    // la note de détail, plutôt que de disparaître ou d'être étiqueté bug.
+    const _arMap = {}, _reMap = {};
     allOrdres.forEach(o => {
+      const key = `${o.ticker}_${o.date}`;
       if ((o.type === 'ACHAT' || o.type === 'VENTE') && !o.allegement && !o.renforcement) {
-        const key = `${o.ticker}_${o.date}`;
         if (!_arMap[key]) _arMap[key] = { achat: false, vente: false };
         if (o.type === 'ACHAT') _arMap[key].achat = true;
         if (o.type === 'VENTE') _arMap[key].vente = true;
+      }
+      if (o.allegement || o.renforcement) {
+        if (!_reMap[key]) _reMap[key] = { alleg: false, renf: false };
+        if (o.allegement) _reMap[key].alleg = true;
+        if (o.renforcement) _reMap[key].renf = true;
       }
     });
     allOrdres.forEach(o => {
       const key = `${o.ticker}_${o.date}`;
       o._allerRetour = !o.allegement && !o.renforcement
         && !!(_arMap[key] && _arMap[key].achat && _arMap[key].vente);
+      o._reallocAR = (o.allegement || o.renforcement)
+        && !!(_reMap[key] && _reMap[key].alleg && _reMap[key].renf);
     });
     window._allOrdres = allOrdres;
     renderOrdres(5);
@@ -2060,8 +2071,11 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
     if (regles.length > 0) {
       document.getElementById('regles-section').style.display = 'block';
       document.getElementById('regles-items').innerHTML = regles.map(r => {
-          const isSoft = r.regime === 'soft';
-          const icon = isSoft ? '⚠️' : '🚫';
+          // Trois régimes, alignés sur _regle_icon côté moteur : une règle purement
+          // informative (palier surpoids 15-20 %, liquidités faibles) s'affichait
+          // avec le 🚫 de blocage dur, un pseudo-blocage qui contredisait son texte.
+          const icon = (r.bloque === false || r.regime === 'info') ? 'ℹ️'
+            : (r.regime === 'soft' || r.regime === 'forte_requise') ? '⚠️' : '🚫';
           return `<div class="regle-item"><span class="regle-icon">${icon}</span><span class="regle-msg">${escHtml(r.message || '')}</span></div>`;
         }
 
