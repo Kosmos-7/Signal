@@ -44,6 +44,7 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 import json
+import math
 import os
 import re
 import sys
@@ -395,7 +396,15 @@ def calcul_momentum_intrants(close_series):
             return None, None, None
         ratio = math.log(num) / max(vol_ann, 0.10)
         return round(ratio, 2), round((num - 1) * 100, 1), round(vol_ann * 100, 1)
-    except Exception:
+    except Exception as e:
+        # FAIL-SOFT MAIS BRUYANT. Un titre à la série biscornue ne doit pas
+        # faire tomber le run — mais un retour None silencieux retirerait le
+        # critère de la note sans que personne le voie. La première version de
+        # cette fonction utilisait `math` sans que le module soit importé au
+        # niveau global (il ne l'était qu'en local, l. 845) : le NameError
+        # était avalé ici, et TOUS les titres perdaient le critère momentum
+        # sans un mot. Attrapé en simulation avant la première mise en prod.
+        print(f"  ⚠️  momentum non calculable ({type(e).__name__}: {e})")
         return None, None, None
 
 def reg_signal_label(z):
