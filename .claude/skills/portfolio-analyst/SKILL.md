@@ -46,6 +46,20 @@ Avant d'émettre un verdict d'achat/conserve/vente, faire ces 5 checks mécaniqu
 4. **Calibration conservative au premier passage** — par défaut conviction "modérée" tant qu'au moins un signal est ambigu. Réserver "forte" aux cas où technique + fondamental + dynamique + base rate sont concordants ET aucune inflexion récente.
 5. **Sur arrivée d'info nouvelle en cours de session, re-dériver de zéro** — pas d'ajustement à la marge du verdict précédent (auto-anchoring sur son propre output). Reset, recompute, recompare.
 
+## Réallocation : discipline trim & renfort
+
+Une ligne existante s'ajuste dans les deux sens — ce n'est ni un achat ni une sortie, et chaque sens a ses conditions. Détail complet : `selling.md` section allègement, `opportunities.md` scale-in.
+
+**Alléger (vente partielle)** — déclencheurs légitimes, au moins un requis :
+- Poids ≥ 15% du capital après un rally : c'est un problème de **concentration**, pas une opinion sur le titre
+- Surcote extrême (z > +2σ) avec fondamentaux intacts — dégonfler sans sortir de la thèse
+- Thèse **partiellement** affaiblie : réduire est plus honnête que sortir ou que tenir à 100%
+- Financer une opportunité nettement supérieure sans fermer une thèse intacte
+
+Tailles utiles : **25%** (ajustement), **33%** (surpoids net), **50%** (thèse abîmée mais vivante). Jamais moins de 25% — frais + impôt rendent le geste symbolique. Sur compte-titres, l'allègement est un outil de **gestion du risque de concentration, pas de prise de gains** : la plus-value latente n'est jamais imposée tant qu'on ne vend pas, donc « sécuriser ses gains » sans usage alternatif du capital identifié a un coût fiscal certain contre un bénéfice hypothétique — c'est le disposition effect en habits respectables (cf. `selling.md`).
+
+**Renforcer** — uniquement sur éléments NOUVEAUX (résultats publiés, thèse confirmée par des faits, décote accrue avec fonda intacts), jamais pour « moyenner à la baisse » sans catalyseur documenté. Le compteur de détention ne repart pas ; le plafond de 20% par ligne s'applique au total.
+
 ## Quand t'invoquer (triggers)
 
 Le skill se déclenche pour les questions liées à investissement personnel :

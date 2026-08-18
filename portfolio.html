@@ -744,13 +744,13 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
         <div class="pacc-section-title">Les règles que l'IA s'impose</div>
         <div class="rules-grid">
           <div class="rule"><div class="rule-num">Règle 01 · Patience</div><div class="rule-title">Aucune vente avant 90 jours</div><p>Sauf signal fondamental majeur. Évite la surréaction aux fluctuations normales.</p></div>
-          <div class="rule"><div class="rule-num">Règle 02 · Taille</div><div class="rule-title">Maximum 20 % sur un titre</div><p>Aucune conviction ne justifie une concentration excessive du capital.</p></div>
+          <div class="rule"><div class="rule-num">Règle 02 · Taille</div><div class="rule-title">Maximum 20 % sur un titre</div><p>Aucune conviction ne justifie une concentration excessive du capital. Dès 15 %, le surpoids est signalé à l'IA à chaque run : elle allège, ou justifie explicitement le maintien.</p></div>
           <div class="rule"><div class="rule-num">Règle 03 · Calme</div><div class="rule-title">Zéro ajustement en panique</div><p>Si le CAC40 chute de plus de 5 % sur la semaine, l'IA n'agit pas.</p></div>
           <div class="rule"><div class="rule-num">Règle 04 · Honnêteté</div><div class="rule-title">Chaque décision documentée</div><p>Chaque achat et vente est expliqué avec les données qui ont motivé la décision.</p></div>
           <div class="rule"><div class="rule-num">Règle 05 · Sources</div><div class="rule-title">Données multi-sources</div><p>Yahoo Finance pour le momentum, Finnhub pour valider les fondamentaux.</p></div>
           <div class="rule"><div class="rule-num">Règle 06 · Stop-loss</div><div class="rule-title">−15 % après 90 jours = sortie</div><p>Une position en perte ≥ 15 % détenue depuis plus de 90 jours est vendue automatiquement, hors mode panique.</p></div>
 <div class="rule"><div class="rule-num">Règle 07 · Catastrophe</div><div class="rule-title">−25 % = sortie immédiate</div><p>Si une position perd 25 % ou plus, vente forcée sans condition de durée, même en mode panique. Garde-fou contre les effondrements rapides.</p></div>
-<div class="rule"><div class="rule-num">Règle 08 · Réallocation</div><div class="rule-title">Rotations &amp; tailles sous contrainte</div><p>Vendre pour financer mieux (1 rotation max par run), renforcer une ligne sous le plafond des 20 %, alléger avec impôt au prorata de la fraction vendue, la friction frais + PFU doit être justifiée à chaque fois.</p></div>
+<div class="rule"><div class="rule-num">Règle 08 · Réallocation</div><div class="rule-title">Rotations &amp; tailles sous contrainte</div><p>Vendre pour financer mieux (1 rotation max par run), renforcer une ligne sous le plafond des 20 % (y compris un titre détenu sorti de la watchlist), alléger de 25 à 50 % avec impôt au prorata de la fraction vendue, prix de revient et date d'origine conservés. La friction frais + PFU doit être justifiée à chaque fois : l'allègement gère un risque de concentration, il ne « prend » pas des gains.</p></div>
 <div class="rule"><div class="rule-num">Règle 09 · Sizing</div><div class="rule-title">L'IA dimensionne ses achats</div><p>Le montant de chaque achat est choisi par l'IA elle-même, pas par une formule, jusqu'à 100 % des liquidités si l'opportunité le justifie. Garde-fous : jamais de cash négatif, 20 % max par ligne, et au-delà de 65 % sur un même secteur, une conviction forte explicitement assumée est exigée.</p></div>
         </div>
       </div>
@@ -1233,7 +1233,7 @@ Incident du 20/07 : corrigé en 1 ligne dans l'heure, et c'est le nouveau design
           <div class="lex-item"><div class="lex-term">Drawdown max</div><div class="lex-def">Perte maximale enregistrée depuis un pic du portefeuille, en %. Mesure le <em>pire scénario traversé</em> : un drawdown de −15% signifie que la valeur a chuté de 15% depuis son plus haut avant de se redresser. Indicateur de risque clé, indépendant de la performance finale.</div></div>
 <div class="lex-item"><div class="lex-term">P&amp;L réalisé</div><div class="lex-def">Profit and Loss, gain ou perte <em>effectivement encaissé</em> sur les positions fermées. Distinct du P&amp;L latent (positions ouvertes), qui peut encore s'inverser. Seul le P&amp;L réalisé est définitif.</div></div>
           <div class="lex-item"><div class="lex-term">Performance en € vs devise locale</div><div class="lex-def">Pour les titres en USD ou GBP, la performance affichée est <em>calculée en euros</em> et intègre la variation du taux de change. Un titre qui monte de +5% en dollars sur une période où le dollar baisse de 10% affiche −5% en €. C'est la performance réelle pour un investisseur en zone euro.</div></div>
-<div class="lex-item"><div class="lex-term">Poids (% du portefeuille)</div><div class="lex-def">Part d'une position dans la valeur totale. <em>Règle 02</em> : aucun titre ne dépasse 20% du capital. Un poids élevé amplifie l'impact de chaque variation, à la hausse comme à la baisse.</div></div>
+<div class="lex-item"><div class="lex-term">Poids (% du portefeuille)</div><div class="lex-def">Part d'une position dans la valeur totale. <em>Règle 02</em> : aucun achat ni renfort ne peut porter un titre au-delà de 20% du capital ; une ligne peut en revanche dériver au-delà par appréciation du cours ; dans ce cas le renforcement est bloqué et l'IA doit alléger ou justifier le maintien. Un poids élevé amplifie l'impact de chaque variation, à la hausse comme à la baisse.</div></div>
         </div>
       </div>
       <div class="pacc-section">
@@ -1583,15 +1583,27 @@ function orderTypeClass(t) {
 
 function renderOrder(o, idx) {
   const isVente = o.type === 'VENTE';
-  const pnlEurVal = isVente && o.pnl_eur != null
-    ? o.pnl_eur
-    : (isVente && o.perf != null && o.montant ? Math.round(o.montant * o.perf / (100 + o.perf)) : null);
+  // P&L d'une vente : uniquement les champs écrits par le backend (pnl_eur /
+  // plus_value_eur). L'ancien fallback reconstruisait un chiffre FAUX en
+  // mélangeant un montant EUR net d'impôt avec une perf en devise native :
+  // mieux vaut aucun chiffre qu'un chiffre inventé.
+  const pnlEurVal = isVente ? (o.pnl_eur ?? o.plus_value_eur ?? null) : null;
   const perfBadge = isVente && o.perf != null
     ? `<span class="perf-badge ${o.perf >= 0 ? 'perf-up' : 'perf-dn'}" style="font-size:0.78rem">${sign(o.perf)}${fmt(o.perf,1)} %</span>`
       + (pnlEurVal != null ? `<span style="font-family:var(--mono);font-size:0.75rem;color:${pnlEurVal>=0?'var(--green)':'var(--red)'}">${sign(pnlEurVal)}${fmtEur(Math.abs(pnlEurVal))}</span>` : '')
     : '';
   const scoreBadge = o.type === 'ACHAT' && o.score_watchlist
     ? `<span style="font-family:var(--mono);font-size:0.75rem;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px">score ${o.score_watchlist}</span>`
+    : '';
+  // Réallocation (Règle 13) : un allègement laisse la ligne ouverte, un renfort
+  // grossit une ligne existante : sans badge, la carte se lit comme une vente
+  // sèche ou un achat de novo et le journal semble contredire le tableau des positions.
+  const reallocBadge = o.allegement
+    ? `<span style="font-family:var(--mono);font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(116,182,223,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↘ allègement ${fmt(o.allegement_pct,0)} %</span>`
+    : o.renforcement
+    ? `<span style="font-family:var(--mono);font-size:0.72rem;color:var(--ac);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;vertical-align:middle">↗ renfort</span>`
+    : o.allegement_converti_total
+    ? `<span style="font-family:var(--mono);font-size:0.72rem;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;vertical-align:middle">allègement → vente totale</span>`
     : '';
   const joursInfo = isVente && o.jours != null
     ? `<span style="font-family:var(--mono);font-size:0.75rem;color:var(--text3)">${o.jours}j</span>`
@@ -1601,7 +1613,7 @@ function renderOrder(o, idx) {
       <div class="order-header" onclick="toggleOrder(${idx})">
         <div class="order-date">${o.date}</div>
         <div class="order-type ${orderTypeClass(o.type)}">${o.type}</div>
-        <div class="order-name">${o.nom}${o._allerRetour ? (o.type === 'VENTE'
+        <div class="order-name">${o.nom}${reallocBadge ? ' ' + reallocBadge : ''}${o._allerRetour ? (o.type === 'VENTE'
           ? ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug</span>'
           : ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(116,182,223,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↻ corrigé</span>') : ''}${o._bug_weekend_exec ? ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug weekend</span>' : ''}</div>
         <div class="order-right">
@@ -1632,6 +1644,19 @@ function renderOrder(o, idx) {
 Cet ordre a été déclenché par un run manuel le samedi 23 mai 2026 alors que tous les marchés étaient fermés. En réalité, aucun broker n'aurait pu exécuter cette vente avant l'ouverture du lundi suivant, le prix réalisé serait probablement différent du prix de clôture vendredi affiché ici.
                 <br><br>Cause racine : <code>executer_decisions()</code> ne vérifiait pas le jour de la semaine avant d'appliquer les décisions. Corrigé depuis (commit <a href="https://github.com/Kosmos-7/Signal/commit/12dae5e" target="_blank" style="color:var(--red);text-decoration:underline">12dae5e</a>) : un guard en tête de fonction reporte toute décision ACHAT/VENTE proposée samedi/dimanche au prochain jour ouvré (motif <code>marche_ferme_weekend</code> dans <code>decisions_bloquees</code>).
                 <br><br>L'ordre est conservé dans l'historique pour transparence méthodologique (Signal documente ses erreurs au lieu de les masquer).
+              </div>` : ''}
+          ${o.allegement ? `<div class="order-correction-note">
+                <strong>↘ Vente partielle (Règle 13).</strong>
+                ${o.allegement_pct} % de la ligne cédée (${o.qte} titre${o.qte>1?'s':''}, ${o.qte_restante} conservé${o.qte_restante>1?'s':''})${o.allegement_demande_pct != null && Math.round(o.allegement_demande_pct) !== Math.round(o.allegement_pct) ? ` (l'IA demandait ${fmt(o.allegement_demande_pct,0)} %, arrondi au titre entier)` : ''}.
+                Le PFU ne porte que sur la plus-value de la fraction vendue${o.impot_pfu_eur > 0 ? ` (${fmtEur(o.impot_pfu_eur)} ici)` : ''} ; le prix de revient et la date de détention d'origine sont conservés sur le reste de la ligne. Le % de perf affiché est celui de la ligne entière.
+              </div>` : ''}
+          ${o.allegement_converti_total ? `<div class="order-correction-note">
+                <strong>Allègement demandé, vente totale exécutée.</strong>
+                L'IA demandait un allègement de ${fmt(o.allegement_demande_pct,0)} %, mais ${escHtml(o.allegement_converti_total)} : le moteur a converti en vente totale plutôt que de laisser une ligne résiduelle insignifiante. Journalisé ici pour que le journal ne contredise pas la raison ci-dessous.
+              </div>` : ''}
+          ${o.renforcement ? `<div class="order-correction-note">
+                <strong>↗ Renforcement d'une ligne existante (Règle 13).</strong>
+                La position passe à ${o.qte_totale} titres, prix de revient moyen pondéré ${o.pru_apres} ${o.currency === 'EUR' ? '€' : o.currency === 'USD' ? '$' : '£'}. La date de détention d'origine est conservée : le compteur des 90 jours ne repart pas.
               </div>` : ''}
           <div class="order-raison">${escHtml(o.raison || '')}</div>
         </div>
@@ -1961,10 +1986,14 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
     renderAllocCharts(pos);
 
     const allOrdres = d.ordres || [];
-    // Détecter aller-retours (achat + vente même ticker même date)
+    // Détecter aller-retours (achat + vente même ticker même date).
+    // Les ordres de réallocation (Règle 13) en sont EXCLUS : un allègement qui
+    // finance un renfort le même jour est le fonctionnement prévu, pas le
+    // flip-flop historique que ce badge documente, et l'étiqueter « ⚠ bug »
+    // saperait la confiance dans un geste parfaitement délibéré.
     const _arMap = {};
     allOrdres.forEach(o => {
-      if (o.type === 'ACHAT' || o.type === 'VENTE') {
+      if ((o.type === 'ACHAT' || o.type === 'VENTE') && !o.allegement && !o.renforcement) {
         const key = `${o.ticker}_${o.date}`;
         if (!_arMap[key]) _arMap[key] = { achat: false, vente: false };
         if (o.type === 'ACHAT') _arMap[key].achat = true;
@@ -1973,7 +2002,8 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
     });
     allOrdres.forEach(o => {
       const key = `${o.ticker}_${o.date}`;
-      o._allerRetour = !!(_arMap[key] && _arMap[key].achat && _arMap[key].vente);
+      o._allerRetour = !o.allegement && !o.renforcement
+        && !!(_arMap[key] && _arMap[key].achat && _arMap[key].vente);
     });
     window._allOrdres = allOrdres;
     renderOrdres(5);

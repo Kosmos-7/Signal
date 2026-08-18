@@ -89,6 +89,41 @@ Liste des raisons valables, par ordre de robustesse :
 - *"Mon ami a vendu"* — herding
 - *"Death Cross frais"* si `signal_dynamics_warning` indique transition — attendre confirmation (golden cross qui se reforme OU cours qui repasse durablement sous MM200) avant de trancher
 
+## Allègement partiel (trim) — la vente qui n'est pas une sortie
+
+Le trim était mentionné en creux (« vendre une fraction (25-50%) suffit ») sans jamais être formalisé — résultat mesuré côté Signal : 0 allègement en 42 ordres, alors que la mécanique existait. La doctrine, maintenant explicite :
+
+### Déclencheurs légitimes (au moins un requis, à nommer dans la justification)
+
+1. **Poids ≥ 15% du capital** après un rally — problème de concentration, pas d'opinion sur le titre. C'est le déclencheur canonique : le rebalancing de la raison valable n°3 ci-dessus, appliqué AVANT le mur des 20%
+2. **Surcote extrême** (z > +2σ vs tendance) avec fondamentaux intacts — dégonfler l'exposition au re-rating sans sortir de la thèse
+3. **Thèse partiellement affaiblie** — un pilier sur trois a cédé : réduire est plus honnête que sortir (sur-réaction) ou tenir à 100% (déni)
+4. **Financement d'une opportunité nettement supérieure** quand le cash manque et qu'aucune position n'a de thèse cassée
+
+### Tailles
+
+| Fraction | Cas |
+|---|---|
+| 25% | Ajustement de poids, thèse intacte |
+| 33% | Surpoids net (≥ 15%), rally étendu |
+| 50% | Thèse abîmée mais vivante |
+
+Jamais moins de 25% : frais + fiscalité rendent le geste symbolique. Jamais de trim sur une ligne d'un titre — indivisible, toute vente y est totale.
+
+### Le test net d'impôt (compte-titres)
+
+Sur compte-titres ordinaire, chaque euro de plus-value RÉALISÉE paye ~31,4% de PFU ; la plus-value LATENTE ne paye rien, indéfiniment. L'allègement est donc un outil de **gestion du risque de concentration**, jamais de « prise de gains » :
+
+> Alléger 33% d'une ligne à +100% qui pèse 16% du capital = payer ~31,4% d'impôt sur un tiers du gain, CONTRE une réduction mesurable du risque de concentration (16% → ~11%). Le coût est certain, le bénéfice est une réduction de variance — le trade est défendable.
+>
+> « Sécuriser ses gains » sans usage alternatif du capital identifié = payer le même impôt certain contre un bénéfice **hypothétique** (la peur que ça baisse). C'est le disposition effect en habits respectables — voir Symptôme 1 ci-dessus.
+
+### Ce qu'un trim n'est PAS
+
+- **Pas un demi-stop-loss** : alléger un perdant pour « soulager la douleur » combine le pire des deux mondes (on garde le risque ET on cristallise une partie de la perte sans la discipline mécanique de R07/R08)
+- **Pas un timing de marché** : « ça a trop monté, ça va corriger » sans thèse de retournement documentée reste du market timing, en fraction comme en totalité
+- **Pas un compromis émotionnel** : si l'analyse dit vendre, vendre ; trimmer parce qu'on n'ose pas trancher est une non-décision déguisée
+
 ## Test du miroir
 
 Pour chaque vente envisagée, écrire dans un journal :

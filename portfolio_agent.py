@@ -858,14 +858,32 @@ def calculer_regles_auto(portfolio):
             })
 
     # R2 — Position individuelle > 20% du capital (déjà en portefeuille)
+    # Palier 15-20% ajouté 2026-08 : R2 ne disait rien jusqu'à 20% puis bloquait
+    # sec — le surpoids n'était jamais signalé AVANT le mur, et l'allègement (R13),
+    # dont c'est le déclencheur canonique, n'a jamais été utilisé (0 en 42 ordres).
+    # Le palier est informatif (aucun blocage) : il met le sujet sur la table du run.
     for p in positions:
         pct = p.get("valeur_actuelle", 0) / capital * 100
         if pct > 20:
             regles.append({
                 "type":    "position_oversized",
                 "ticker":  p["ticker"],
-                "message": f"{p['ticker']} représente {pct:.0f}% du capital > 20% — renforcement bloqué",
+                "pct":     round(pct, 1),
+                "message": (f"{p['ticker']} représente {pct:.0f}% du capital > 20% — renforcement bloqué. "
+                            f"L'allègement (Règle 13) est le levier prévu pour ce cas : allège, "
+                            f"ou justifie explicitement le maintien du surpoids dans analyse_macro"),
                 "bloque":  True,
+            })
+        elif pct >= 15:
+            regles.append({
+                "type":    "position_surpoids",
+                "ticker":  p["ticker"],
+                "pct":     round(pct, 1),
+                "regime":  "info",
+                "message": (f"{p['ticker']} pèse {pct:.1f}% du capital (zone 15-20%) — information : "
+                            f"le renforcement sera bloqué à 20% (R2) ; si cette concentration n'est "
+                            f"plus voulue, l'allègement partiel (Règle 13) est fait pour ça"),
+                "bloque":  False,
             })
 
     # R3 — Liquidités faibles : INFORMATIF depuis 2026-07 (plus aucun blocage).
@@ -925,6 +943,7 @@ def construire_prompt_analyse(portfolio, watchlist, contexte, macro_news=None):
     avec les mêmes données selon l'angle de lecture du moment.
     """
     positions = portfolio.get("positions", [])
+    capital   = portfolio.get("capital_actuel", 0)
     today     = str(date.today())
 
     pos_lines = []
@@ -932,9 +951,15 @@ def construire_prompt_analyse(portfolio, watchlist, contexte, macro_news=None):
         date_achat   = p.get("date_achat", today)
         jours        = (datetime.today() - datetime.strptime(date_achat, "%Y-%m-%d")).days if date_achat else 0
         raison_achat = p.get("raison_achat", "Non documentée")
+        # Poids : même donnée que la passe 2 — l'analyste doit voir la concentration
+        # pour signaler un surpoids dans `risques`, pas seulement la perf.
+        poids_pct = (p.get("valeur_actuelle", 0) / capital * 100) if capital > 0 else 0
+        cond_vente = p.get("conditions_vente") or []
+        cond_str = ("\n    Conditions de vente pré-définies (dis dans delta_these si l'une est DÉCLENCHÉE) : "
+                    + " | ".join(f"{i+1}) {c}" for i, c in enumerate(cond_vente))) if cond_vente else ""
         pos_lines.append(
-            f"  {p['ticker']} ({p['nom']}) — perf {p.get('performance',0):+.1f}% — {jours}j détenus\n"
-            f"    Thèse d'achat originale : {raison_achat[:250]}"
+            f"  {p['ticker']} ({p['nom']}) — perf {p.get('performance',0):+.1f}% — poids {poids_pct:.1f}% — {jours}j détenus\n"
+            f"    Thèse d'achat originale : {raison_achat[:250]}{cond_str}"
         )
 
     top10_lines = []
@@ -1073,6 +1098,11 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
         derniere_maj_str = derniere_maj
 
     # Format positions — inclut la thèse d'achat originale pour éviter les contradictions
+    # Score de LA SEMAINE par ticker : l'ancien libellé « score watchlist actuel »
+    # affichait en réalité score_entree, figé à l'achat — une condition de vente du
+    # type « score < 50 trois semaines » était invérifiable, et un titre sorti du
+    # top 30 gardait éternellement son score d'époque. On affiche les deux.
+    _scores_semaine = {s["ticker"]: s.get("score") for s in watchlist.get("stocks", [])}
     pos_lines = []
     for p in positions:
         date_achat   = p.get("date_achat", "")
@@ -1088,13 +1118,29 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
         px_achat_eur = round(p.get("montant_investi", p["prix_achat"]) / qte, 2)
         px_actuel_eur = round(p.get("valeur_actuelle", 0) / qte, 2)
         pv_latente = p.get("valeur_actuelle", 0) - p.get("montant_investi", 0)
+        # Poids de la ligne — LE déclencheur canonique de la Règle 13 (allègement)
+        # et la borne du renforcement (R2). Calculé et publié depuis toujours
+        # (pos["poids"], affiché sur le site), mais jamais montré au décideur :
+        # l'agent devait le recalculer de tête, il ne l'a jamais fait — 0 allègement
+        # en 42 ordres. Le PFU latent chiffre la friction R10 d'une cession de la ligne.
+        poids_pct = (p.get("valeur_actuelle", 0) / capital * 100) if capital > 0 else 0
+        pfu_str = f" (PFU ~{pv_latente * config.PFU_RATE:.0f}€ si cession totale)" if pv_latente > 0 else ""
+        un_titre_str = " ⚠ ligne d'1 titre : tout allègement serait une vente totale" if p["quantite"] == 1 else ""
+        cond_vente = p.get("conditions_vente") or []
+        cond_str = ("\n    → Conditions de vente pré-définies : " + " | ".join(
+            f"{i+1}) {c}" for i, c in enumerate(cond_vente))) if cond_vente else ""
+        score_semaine = _scores_semaine.get(p["ticker"])
+        score_str = (f"score {p.get('score_entree', '?')}/100 à l'entrée → {score_semaine}/100 cette semaine"
+                     if score_semaine is not None
+                     else f"score {p.get('score_entree', '?')}/100 à l'entrée (hors watchlist cette semaine — renforcement possible, prix live)")
         pos_lines.append(
-            f"  - {p['ticker']} ({p['nom']}) : {p['quantite']} titres, "
+            f"  - {p['ticker']} ({p['nom']}) [{p.get('sector','—')}] : {p['quantite']} titres, "
             f"acheté à {px_achat_eur}€/titre ({p.get('montant_investi',0):.0f}€ investis), "
             f"actuel {px_actuel_eur}€/titre ({p.get('valeur_actuelle',0):.0f}€), "
-            f"perf {p.get('performance', 0):+.1f}% (€) soit {pv_latente:+.0f}€ latents, {jours}j détenus, "
-            f"score watchlist actuel: {p.get('score_entree', '?')}/100{etat_str}\n"
-            f"    → Thèse d'achat : {raison_achat[:200]}{delta_str}"
+            f"poids {poids_pct:.1f}% du capital, "
+            f"perf {p.get('performance', 0):+.1f}% (€) soit {pv_latente:+.0f}€ latents{pfu_str}, {jours}j détenus, "
+            f"{score_str}{etat_str}{un_titre_str}\n"
+            f"    → Thèse d'achat : {raison_achat[:200]}{delta_str}{cond_str}"
         )
 
     # Synthèse marché issue de la passe 1
@@ -1294,10 +1340,12 @@ def construire_prompt(portfolio, watchlist, contexte, analyse=None, macro_news=N
     # voit automatiquement les changements. Évite la duplication contenu skill ↔ code.
     skill_discipline = load_skill_discipline()
     skill_section = f"""## DISCIPLINE D'ANALYSE (skill portfolio-analyst — autorité méthodologique)
-Les sections "Persona", "5 mantras", "Pré-flight avant tout verdict" et "Ce que tu NE FAIS PAS"
-ci-dessous sont l'autorité méthodologique. Les sections sur les outils (Données disponibles,
-WebSearch, etc.) ne s'appliquent pas à ton contexte d'agent — ignore-les. Les triggers
-ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
+Les sections "Persona", "5 mantras", "Pré-flight avant tout verdict", "Réallocation :
+discipline trim & renfort" et "Ce que tu NE FAIS PAS" ci-dessous sont l'autorité méthodologique. Les sections sur les outils (Données disponibles,
+WebSearch, « Protocole obligatoire de chargement modules », etc.) ne s'appliquent pas à ton
+contexte d'agent — tu n'as pas de Read tool ni d'accès yfinance, la doctrine utile est déjà
+dans ce prompt : ignore-les. Les triggers ne s'appliquent pas non plus, tu es invoqué
+automatiquement chaque semaine.
 
 {skill_discipline}
 
@@ -1316,13 +1364,17 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 6. Stop-loss automatique : -15% après 90 jours, ou -25% sans condition de durée
 7. **Signal en transition** : si un titre watchlist a un `signal_dynamics_warning` non-vide (death cross qui se résorbe, golden cross qui s'affaiblit, rebond mean-reversion sur cross stale, affaiblissement post-rally), traiter le cross technique comme **ambigu** — ne pas vendre/acheter sur ce signal seul. Croiser avec fonda et delta_these.
 8. **Cross-validation analystes / cours** : pour les titres en zone d'incertitude (score 30-65), si le consensus analystes est très favorable mais le cours en dégradation 6-12m, suspecter une dégradation des données screener (effet change, périmètre M&A, désync data) — ne pas conclure trop vite sur la base du score seul. Re-lire la justification.
-9. **Heures de marché** : tes décisions sont enregistrées au moment du run, mais l'exécution réelle attend l'ouverture du marché du titre. Si tu décides un ACHAT NVDA (US) à 8h UTC un lundi, l'ordre attendra 14h30 UTC (+6h30) pour s'exécuter — le prix peut bouger entre temps. Tiens-en compte : ne pas paniquer sur des données pré-ouverture, et si tous les marchés concernés sont fermés (weekend, jour férié), privilégier l'attente de la prochaine ouverture sauf urgence (stop-loss catastrophe).
+9. **Heures de marché** : tes ordres sont exécutés IMMÉDIATEMENT au dernier cours de clôture connu — il n'existe PAS de file d'attente à l'ouverture. Pour un run lundi 8h UTC, un ordre sur un titre US s'exécute donc au close du vendredi : le marché peut rouvrir ailleurs, cet écart est un coût de simulation assumé. Tiens-en compte : ne panique pas sur des données pré-ouverture, et sache qu'un weekend ou jour de fermeture, une garde mécanique refuse tout ordre — ta décision n'est alors PAS mémorisée, elle devra être reprise au prochain run si elle tient toujours (seuls les stop-loss se redéclenchent mécaniquement).
 10. **Friction fiscale (PFU 31,4 %)** : Signal est sur compte-titres ordinaire français. Chaque VENTE en plus-value paye 31,4 % de PFU sur le gain. Conséquence : une vente "neutre" pour réinvestir ailleurs PERD 31,4 % du gain réalisé. Avant de proposer une vente sur position en gain, vérifie que l'alternative a un avantage attendu net suffisant pour couvrir cette friction (règle empirique : ne pas vendre un +20% pour acheter un titre dont l'edge espéré est < 10%). Les positions en perte ne sont PAS pénalisées fiscalement et la perte devient même un crédit d'impôt utilisable 10 ans. Les plus-values LATENTES (positions non vendues) ne sont JAMAIS imposées — le buy & hold long terme est structurellement avantagé.
 11. **VIX = indicateur contextuel non scoré** : le VIX est désormais affiché dans la section CONTEXTE DE MARCHÉ comme indicateur d'ambiance macro, MAIS il n'influence plus mécaniquement le scoring du screener (choix de neutralité — on n'applique aucune mécanique de régime de marché au scoring). Tu es libre de t'en servir comme contexte qualitatif dans `analyse_macro` ("VIX à 22 cette semaine, vigilance modérée — j'ai privilégié les positions qualité"), mais ne traite pas le VIX comme une règle d'enforcement. Les scores du screener sont ce qu'ils sont, indépendamment du VIX.
 12. **Rotation autorisée quand le cash manque** : si une opportunité watchlist te semble NETTEMENT supérieure à une position détenue et que les liquidités ne permettent pas de l'acheter, tu peux proposer une rotation — une VENTE + un ACHAT dans le même run. Le moteur exécute toutes les ventes AVANT les achats : le produit de la vente (net de frais et de PFU) finance directement l'achat du même run. Conditions STRICTES : (a) la position vendue respecte la Règle 01 — 90 jours de détention, ou signal fondamental documenté avec conviction forte ; (b) dans les DEUX champs `raison`, nomme explicitement la rotation et compare la position sortante au titre entrant (scores screener, thèse, potentiel) : "Rotation : je vends X (score 62, thèse affaiblie car …) pour financer Y (score 88, …)" ; (c) applique la Règle 10 — l'avantage attendu du titre entrant doit dépasser la friction totale (frais aller-retour + 31,4 % de PFU sur la plus-value de la vente) ; (d) maximum UNE rotation par run — c'est un arbitrage d'exception, pas un outil de churn : dans le doute, conserver. Précision : cette limite ne concerne QUE les rotations (vente destinée à financer un achat). Les ventes motivées par leur propre thèse — thèse d'achat invalidée, stop-loss, dégradation fondamentale — ne sont pas des rotations et ne sont pas limitées en nombre : elles restent régies par les Règles 01, 06 et 10. Tu peux donc, dans un même run, vendre une position sur thèse cassée ET opérer une rotation.
 13. **Réallocation (renforcement / allègement)** : tu peux ajuster la TAILLE d'une ligne existante, pas seulement ouvrir/fermer.
-   - RENFORCER : une décision ACHAT sur un titre déjà détenu renforce la ligne — prix de revient moyen pondéré, la date de détention d'origine est conservée (le compteur des 90 jours ne repart pas). Plafond mécanique : la ligne ne peut jamais dépasser 20% du capital (Règle 02, appliquée en code). Renforce UNIQUEMENT sur des éléments NOUVEAUX (résultats publiés, thèse confirmée par des faits, décote accrue avec fonda intacts) — jamais pour « moyenner à la baisse » une position en perte sans catalyseur documenté (biais d'engagement classique).
-   - ALLÉGER : une décision VENTE avec le champ optionnel `"allegement_pct"` (nombre entre 1 et 99) ne vend que ce pourcentage de la position, arrondi au titre entier. Le PFU ne s'applique qu'à la plus-value de la fraction vendue ; le PRU et la date d'origine de la ligne sont conservés. Si le reliquat vaudrait moins de 100€, la vente devient totale (anti-poussière). Un allègement reste une VENTE : Règle 01 (90j / conviction forte) et friction fiscale (Règle 10) s'appliquent pleinement. Usage typique : dégonfler une position qui approche les 20% après un fort rally, sans sortir de la thèse.
+   - RENFORCER : une décision ACHAT sur un titre déjà détenu renforce la ligne — prix de revient moyen pondéré, la date de détention d'origine est conservée (le compteur des 90 jours ne repart pas). Un titre DÉTENU reste renforçable même s'il est sorti de la watchlist de la semaine (le moteur va chercher son prix en direct). Plafond mécanique : aucun flux ENTRANT ne peut porter la ligne au-delà de 20% du capital (Règle 02, appliquée en code) — mais une ligne PEUT dériver au-delà par simple appréciation du cours : dans ce cas le renforcement est bloqué, le surpoids t'est signalé (dès 15%), et c'est à toi d'alléger ou de justifier le maintien. Renforce UNIQUEMENT sur des éléments NOUVEAUX (résultats publiés, thèse confirmée par des faits, décote accrue avec fonda intacts) — jamais pour « moyenner à la baisse » une position en perte sans catalyseur documenté (biais d'engagement classique).
+   - ALLÉGER : une décision VENTE avec le champ optionnel `"allegement_pct"` (nombre entre 1 et 99) ne vend que ce pourcentage de la position, arrondi au titre entier. Le PFU ne s'applique qu'à la plus-value de la fraction vendue ; le PRU et la date d'origine de la ligne sont conservés. Si le reliquat vaudrait moins de 100€, la vente devient totale (anti-poussière). Un allègement reste une VENTE : Règle 01 (90j / conviction forte) et friction fiscale (Règle 10) s'appliquent pleinement.
+     · Déclencheurs LÉGITIMES (au moins un, à nommer dans `raison`) : poids ≥ 15% du capital après un rally (risque de concentration, pas opinion sur le titre) ; surcote extrême (z > +2σ) avec fondamentaux intacts ; thèse PARTIELLEMENT affaiblie où réduire est plus honnête que sortir ; financer une opportunité nettement supérieure sans fermer une thèse intacte.
+     · Tailles utiles : 25% (ajustement), 33% (surpoids net), 50% (thèse abîmée mais vivante). Jamais moins de 25% : frais + PFU rendent le geste symbolique. La quantité est arrondie au titre entier — sur une petite ligne le pourcentage RÉALISÉ peut s'écarter du demandé (il est journalisé), et une ligne d'1 titre n'est PAS allégeable (toute vente y est totale — le moteur le journalise comme tel).
+     · INTERDITS : « sécuriser mes gains » sans usage alternatif du capital identifié (disposition effect — le PFU rend ce réflexe structurellement perdant, cf. Règle 10) ; alléger un perdant pour soulager la douleur (les stop-loss R06 s'en chargent, en sortie totale) ; un `allegement_pct` hors de 1-99 ou illisible est REJETÉ par le moteur (la vente n'a pas lieu).
+     · Dans un compte-titres, l'allègement est un outil de GESTION DU RISQUE DE CONCENTRATION, pas de prise de gains : chiffre le PFU de la fraction cédée (affiché par ligne dans l'état du portefeuille) face au risque que tu réduis.
 14. **Décote/surcote vs tendance = information, JAMAIS un signal seul** : c'est l'écart du cours à sa droite de régression long terme (trajectoire historique — PAS une valeur intrinsèque), affiché dans la watchlist. Décote extrême (z < -2σ) : le marché price peut-être un changement STRUCTUREL du business — risque de value trap ; n'achète jamais sur la décote seule, exige des fondamentaux intacts (bloc qualité /35 de la note) et une thèse documentée. Surcote extrême (z > +2σ) : acheter ou renforcer revient à payer très au-dessus de la trajectoire historique — risque de rally chase, justification exceptionnelle requise. L'objectif consensus affiché porte un biais optimiste structurel documenté — ne le traite jamais comme un prix cible fiable.
 
 ## DATE & MOMENT DU RUN
@@ -1348,7 +1400,8 @@ ne s'appliquent pas non plus, tu es invoqué automatiquement chaque semaine.
 ## FRICTION RÉELLE (frais transaction + fiscalité française)
 - Frais transaction cumulés depuis création : {frais_cum:.2f}€ ({config.TRANSACTION_COST_BPS} bps one-way × turnover)
 - Impôts PFU cumulés versés au fisc        : {impots_cum:.2f}€ (31,4 % sur plus-values réalisées sur compte-titres)
-- Pertes reportables fiscalement (10 ans)  : {pertes_cum:.2f}€ → crédit d'impôt théorique = {pertes_cum * config.PFU_RATE:.0f}€ utilisable sur futurs gains
+- Pertes reportables fiscalement (10 ans)  : {pertes_cum:.2f}€ → crédit d'impôt théorique = {pertes_cum * config.PFU_RATE:.0f}€ (SUIVI INFORMATIF UNIQUEMENT : le moteur ne compense PAS le PFU avec ce crédit — chaque plus-value réalisée paye plein taux dans la simulation, ne compte pas ce crédit dans tes arbitrages)
+- PFU latent si liquidation totale aujourd'hui : {portfolio.get('pfu_latent_si_liquidation', 0):.0f}€ (l'impôt que paierait la vente de tout le portefeuille — déjà affiché au lecteur du site)
 - Signal est un COMPTE-TITRES ORDINAIRE français : 31,4 % de PFU sur chaque plus-value réalisée à la VENTE.
   Les plus-values LATENTES (positions non vendues) ne sont PAS imposées.
   → Conséquence directe : buy & hold long terme est structurellement favorisé. Une vente "neutre"
@@ -1437,7 +1490,8 @@ Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, selon ce format 
       "conviction": "forte" | "modérée" | "faible",
       "score_watchlist": 0,
       "montant_eur": 1200,
-      "allegement_pct": 50
+      "allegement_pct": 50,
+      "conditions_vente": ["Stop thèse : perte du design win IA chez le client principal", "Score watchlist < 50 trois semaines de suite"]
     }}
   ],
   "analyse_macro": "TEXTE NEWSLETTER (200-350 mots, 4-6 paragraphes courts SÉPARÉS PAR UN DOUBLE SAUT DE LIGNE `\\n\\n` — c'est NON-NÉGOCIABLE, sinon le rendu HTML produit un mur de texte illisible). Chaque paragraphe = 2 à 4 phrases, une idée par paragraphe. C'est CE QUE LE LECTEUR LIT chaque semaine sur le site. Adresse-toi DIRECTEMENT à lui ('vous', pas 'on' ni 'l'investisseur'). Ton : analyste rigoureux mais avec un brin d'humour décalé pour contraster avec les chiffres sérieux — pense à un Howard Marks qui aurait lu Charlie Munger ET aurait un sens de la formule. Tu peux te permettre une métaphore, une vanne fine sur les marchés, un clin d'œil. Pas de sarcasme méchant, pas de blagues lourdes. Reste pro mais vivant. STRUCTURE en paragraphes distincts (chacun séparé par `\\n\\n`) : §1 accroche sur l'événement de la semaine (cite EXPLICITEMENT le contenu des news macro reçues plus haut — pas juste le titre, le chiffre : si CPI à 2.4%, dis 2.4%, pas 'inflation reste centrale') ; §2 ce que ça veut dire concrètement pour le portefeuille + chiffres clés (perf {perf:+.2f}%, écart au benchmark {vs:+.2f}pp recopiés depuis ÉTAT ACTUEL) ; §3 éléments méthodologiques qui ont guidé tes décisions (R7, val_pts, signal_dynamics_warning si pertinent — sinon zappe) ; §4 biais ou learning de la semaine (s'il y en a un saillant, sinon zappe) ; §5 mot pour la semaine à venir (ce que vous surveillerez). NE PAS commencer par 'Sur la semaine écoulée du X au Y' (trop bureaucratique — préfère une accroche éditoriale qui glisse la date naturellement) mais l'ancrage temporel reste obligatoire dans les 2 premières phrases. Évite les formulations creuses ('le marché reste un paramètre central', 'l'attention est portée à...') — sois précis et concret. RAPPEL CRITIQUE : DOUBLE SAUT DE LIGNE `\\n\\n` entre chaque paragraphe, sinon le site rend un bloc compact.",
@@ -1451,14 +1505,16 @@ Pour `news_resumes_fr` : un résumé français concis (1 phrase, 15-25 mots max,
 
 `montant_eur` est OBLIGATOIRE pour chaque ACHAT (cf. section SIZING) : le montant en euros que tu engages, borné mécaniquement par les liquidités, R2 (20%/ligne) et le minimum de 100€. Ignoré pour VENTE et CONSERVER.
 
-`allegement_pct` est OPTIONNEL et ne concerne que les VENTES partielles (Règle 13) : omets-le pour une vente totale ou un achat. Un ACHAT sur un titre déjà détenu est automatiquement traité comme un renforcement.
+`allegement_pct` est OPTIONNEL et ne concerne que les VENTES partielles (Règle 13) : omets-le pour une vente totale ou un achat. Un nombre entre 1 et 99 uniquement — toute autre valeur est REJETÉE par le moteur (la vente n'a pas lieu, elle est journalisée dans les décisions bloquées), à la seule exception de 100, traité comme une vente totale explicite. Un ACHAT sur un titre déjà détenu est automatiquement traité comme un renforcement.
+
+`conditions_vente` est OPTIONNEL et ne concerne que l'ACHAT d'une NOUVELLE ligne : 2 à 4 conditions de vente pré-définies, écrites AVANT que la position bouge (discipline anti-loss-aversion du skill : on décide des sorties à froid). Chacune doit être FALSIFIABLE — un événement ou un seuil observable ("earnings miss avec révision baissière du consensus", "perte du contrat X", "score watchlist < 50 trois semaines de suite"), pas un sentiment. Elles te seront réinjectées à chaque run tant que la ligne vit, et la passe d'analyse dira si l'une est déclenchée. Ignoré pour un renforcement (les conditions d'origine restent).
 
 N'inclus que les décisions actionnables (achats et ventes). Les positions conservées sans changement n'ont pas besoin d'apparaître, sauf si tu veux commenter spécifiquement leur situation.
 """
     return prompt
 
 # ── EXÉCUTION DES DÉCISIONS ──────────────────────────────────────────────────
-def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd=1.10, eur_gbp=0.86, regles_auto=None):
+def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd=1.10, eur_gbp=0.86, regles_auto=None, analyse=None):
     """
     Prend les décisions de Claude et les exécute.
     Toutes les valeurs monétaires sont stockées en EUR (conversion USD→EUR via eur_usd).
@@ -1502,7 +1558,7 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                     "raison_claude":     dec.get("raison", ""),
                     "conviction":        dec.get("conviction", "modérée"),
                     "bloque_par":        "marche_ferme_weekend",
-                    "explication_blocage": f"Run du {today} ({jours_fr[weekday]}) — tous les marchés sont fermés (weekend). Aucun ordre n'est physiquement exécutable. La décision est reportée au prochain run ouvré (lundi 8h UTC).",
+                    "explication_blocage": f"Run du {today} ({jours_fr[weekday]}) — tous les marchés sont fermés (weekend). Aucun ordre n'est physiquement exécutable. La décision n'est PAS mémorisée : l'agent redécidera librement au prochain run ouvré (les stop-loss, eux, se redéclenchent mécaniquement à chaque run).",
                 })
         print(f"  🛑 Weekend ({jours_fr[weekday]}) — {sum(1 for d in decisions if d.get('action','').upper() in ('ACHAT','VENTE'))} décision(s) reportée(s) au prochain jour ouvré (aucun ordre exécutable hors marchés)")
         return positions, liquidites, [], decisions_bloquees
@@ -1592,6 +1648,26 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
 
             # Règle 01 : 90 jours minimum
             if jours < 90:
+                # Verrou anti-contradiction (règle anti-contradiction du prompt) :
+                # « si le delta_these de la passe 1 indique "Rien de fondamental",
+                # la vente est interdite ». Annoncé au modèle depuis des mois, jamais
+                # vérifié en code — une vente <90j passait sur la seule conviction
+                # 'forte', même quand l'analyste de la passe 1 venait d'écrire que
+                # rien n'avait changé. Les stop-loss (_stop_loss_type) sont exemptés :
+                # ce sont des règles mécaniques, pas des thèses.
+                if not dec.get("_stop_loss_type"):
+                    delta_p1 = ((analyse or {}).get("positions_analyse", {})
+                                .get(ticker, {}).get("delta_these", "") or "").strip()
+                    if delta_p1.lower().startswith("rien de fondamental"):
+                        print(f"  🚫 VENTE {ticker} bloquée — passe 1 : « {delta_p1[:60]} » (verrou anti-contradiction, {jours}j < 90j)")
+                        decisions_bloquees.append({
+                            "date": today, "action_tentee": "VENTE", "ticker": ticker, "nom": nom,
+                            "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                            "bloque_par": "R01_delta",
+                            "explication_blocage": f"Vente à {jours}j < 90j alors que l'analyse de passe 1 conclut « {delta_p1[:120]} » — la règle anti-contradiction interdit de vendre sur les mêmes signaux relus différemment, quelle que soit la conviction affichée",
+                            "jours_detention": jours,
+                        })
+                        continue
                 conviction = dec.get("conviction", "modérée")
                 if conviction != "forte":
                     print(f"  ⏳ VENTE {ticker} bloquée — {jours}j < 90j et conviction non forte (Règle 01)")
@@ -1630,23 +1706,47 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
 
             # ── Allègement partiel (réallocation) : champ optionnel allegement_pct ──
             # 1-99 = vendre ce pourcentage de la position (arrondi au titre entier).
-            # Absent/invalide/100 = vente totale (comportement historique inchangé).
+            # Absent ou exactement 100 = vente totale (comportement historique).
+            # ILLISIBLE OU HORS BORNES = VENTE REFUSÉE, pas vente totale : l'ancien
+            # parse silencieux transformait "50%" (string) en vente TOTALE alors que
+            # le modèle venait d'écrire dans `raison` qu'il n'en vendait que la moitié
+            # — le journal aurait contredit le texte publié. Même philosophie
+            # fail-loud que la garde prix aberrant : dans le doute, on ne vend pas.
             qte_totale = pos["quantite"]
-            try:
-                allegement_pct = float(dec.get("allegement_pct")) if dec.get("allegement_pct") is not None else None
-            except (TypeError, ValueError):
-                allegement_pct = None
+            raw_pct = dec.get("allegement_pct")
+            allegement_pct = None
+            if raw_pct is not None:
+                try:
+                    allegement_pct = float(str(raw_pct).replace("%", "").replace(",", ".").strip())
+                except (TypeError, ValueError):
+                    allegement_pct = float("nan")
+                if allegement_pct != allegement_pct or not (0 < allegement_pct <= 100):
+                    print(f"  🚫 VENTE {ticker} refusée — allegement_pct invalide ({raw_pct!r}, attendu 1-99)")
+                    decisions_bloquees.append({
+                        "date": today, "action_tentee": "VENTE", "ticker": ticker, "nom": nom,
+                        "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                        "bloque_par": "allegement_pct_invalide",
+                        "explication_blocage": f"allegement_pct={raw_pct!r} illisible ou hors bornes (attendu : nombre entre 1 et 99) — vendre la totalité alors qu'un allègement partiel était demandé contredirait la raison publiée, la vente est refusée par sécurité",
+                    })
+                    continue
             qte_vendue = qte_totale
             allegement = False
-            if allegement_pct is not None and 0 < allegement_pct < 100:
+            allegement_demande_pct = None
+            allegement_converti = None  # motif si l'allègement demandé devient une vente totale
+            if allegement_pct is not None and allegement_pct < 100:
+                allegement_demande_pct = round(allegement_pct, 1)
                 qte_vendue = max(1, int(round(qte_totale * allegement_pct / 100)))
                 reliquat = qte_totale - qte_vendue
                 valeur_reliquat_eur = to_eur(prix_vente * reliquat, currency, eur_usd, eur_gbp)
                 if reliquat < 1 or valeur_reliquat_eur < 100:
                     # Anti-poussière : plutôt que laisser une ligne résiduelle insignifiante
                     # (frais fixes proportionnellement lourds, bruit dans le dashboard),
-                    # l'allègement devient une vente totale — journalisé dans l'ordre.
-                    print(f"  ℹ️  Allègement {ticker} {allegement_pct:.0f}% → reliquat {valeur_reliquat_eur:.0f}€ < 100€ : vente totale")
+                    # l'allègement devient une vente totale — journalisé dans l'ordre
+                    # (allegement_converti_total) pour que le site puisse l'expliquer
+                    # au lieu de laisser le journal contredire la raison publiée.
+                    allegement_converti = (f"ligne d'1 titre — indivisible" if qte_totale == 1
+                                           else f"reliquat {valeur_reliquat_eur:.0f}€ < 100€ (anti-poussière)")
+                    print(f"  ℹ️  Allègement {ticker} {allegement_pct:.0f}% → {allegement_converti} : vente totale")
                     qte_vendue = qte_totale
                 else:
                     allegement = True
@@ -1703,8 +1803,14 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
             }
             if allegement:
                 ordre["allegement"]     = True
-                ordre["allegement_pct"] = round(fraction * 100, 1)
+                ordre["allegement_pct"] = round(fraction * 100, 1)  # RÉALISÉ (arrondi au titre entier)
+                ordre["allegement_demande_pct"] = allegement_demande_pct  # demandé par l'agent
                 ordre["qte_restante"]   = pos["quantite"]
+            elif allegement_converti:
+                # Allègement demandé mais physiquement impossible : la vente est totale
+                # et le journal doit le DIRE, sinon il contredit la raison publiée.
+                ordre["allegement_demande_pct"]  = allegement_demande_pct
+                ordre["allegement_converti_total"] = allegement_converti
             nouveaux_ordres.append(ordre)
             sym = "€" if currency == "EUR" else "$" if currency == "USD" else "£"
             tax_str = f", PFU {impot_pfu_eur:.0f}€" if impot_pfu_eur > 0 else ""
@@ -1722,23 +1828,32 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 })
                 continue
 
+            # Déjà en portefeuille ? → RENFORCEMENT (réallocation), plafonné par R2.
+            # Historiquement bloqué (deja_en_portefeuille) alors que la règle R2 et le
+            # plafond de positions étaient écrits comme si le renforcement existait.
+            pos_existante = next((p for p in positions if p["ticker"] == ticker), None)
+
             # Garde anti-hallucination : la consigne « tickers watchlist uniquement »
             # n'existait que dans le prompt. En code : un ticker hors watchlist passait
             # avec sector="—" et échappait définitivement à la règle de concentration R1.
-            if ticker not in stock_map:
+            # EXCEPTION (2026-08) : un ticker DÉTENU n'est pas une hallucination — la
+            # ligne existe, son secteur et sa devise sont connus, et get_prix est live.
+            # L'ancien garde rendait le renforcement inatteignable pour toute position
+            # sortie du top 30 de la semaine (10 lignes sur 20 au moment du constat),
+            # pendant que le prompt promettait « un ACHAT sur un titre détenu renforce
+            # la ligne » : moitié du livre hors d'atteinte, 0 renforcement en 42 ordres.
+            if ticker not in stock_map and pos_existante is None:
                 print(f"  ✗ ACHAT {ticker} bloqué — hors watchlist (ticker inconnu ou halluciné)")
                 decisions_bloquees.append({
                     "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
                     "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
                     "bloque_par": "hors_watchlist",
-                    "explication_blocage": f"{ticker} ne figure pas dans la watchlist de la semaine — seuls les titres screenés sont achetables",
+                    "explication_blocage": f"{ticker} ne figure pas dans la watchlist de la semaine — seuls les titres screenés ou déjà détenus sont achetables",
                 })
                 continue
+            if ticker not in stock_map:
+                print(f"  ℹ️  ACHAT {ticker} — hors watchlist cette semaine mais ligne détenue : renforcement autorisé (prix live)")
 
-            # Déjà en portefeuille ? → RENFORCEMENT (réallocation), plafonné par R2.
-            # Historiquement bloqué (deja_en_portefeuille) alors que la règle R2 et le
-            # plafond de positions étaient écrits comme si le renforcement existait.
-            pos_existante = next((p for p in positions if p["ticker"] == ticker), None)
             if pos_existante is not None:
                 poids_actuel = (pos_existante.get("valeur_actuelle", 0) / capital * 100) if capital > 0 else 0
                 headroom_r2  = capital * POIDS_MAX - pos_existante.get("valeur_actuelle", 0)
@@ -1766,7 +1881,9 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 #   - regime=info           → aucune contrainte, l'agent size en connaissance
                 #   - regime=forte_requise  → achat >65% possible SEULEMENT avec conviction forte
                 stock_tmp = stock_map.get(ticker, {})
-                sect_tick = stock_tmp.get("sector", "")
+                # Renfort d'un titre hors watchlist : le secteur vient de la position
+                # (sinon R1 serait silencieusement esquivée sur ces renforts).
+                sect_tick = stock_tmp.get("sector", "") or (pos_existante or {}).get("sector", "")
                 cluster_tick = cluster_for(sect_tick) if sect_tick else ""
                 cluster_rule = next(
                     (r for r in regles_auto
@@ -1852,6 +1969,25 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                 })
                 continue
 
+            # Garde anti-aberration sur RENFORT (même contrat que côté VENTE) : un prix
+            # ×3/÷3 vs le dernier connu de la ligne est presque toujours une erreur de
+            # données (GBp non converti, split non ajusté). Sans cette garde, le prix
+            # corrompu entrait dans le PRU moyen pondéré — empoisonnement définitif de
+            # la base fiscale, et faux stop-loss possible au run suivant.
+            if pos_existante is not None:
+                prev_connu = pos_existante.get("prix_actuel")
+                if prev_connu and prev_connu == prev_connu and prev_connu > 0:
+                    ratio = prix / prev_connu
+                    if ratio > 3 or ratio < 1 / 3:
+                        print(f"  🚨 RENFORCEMENT {ticker} bloqué — prix {prix} aberrant vs {prev_connu} (×{ratio:.2f})")
+                        decisions_bloquees.append({
+                            "date": today, "action_tentee": "ACHAT", "ticker": ticker, "nom": nom,
+                            "raison_claude": raison, "conviction": dec.get("conviction", "modérée"),
+                            "bloque_par": "prix_aberrant",
+                            "explication_blocage": f"Prix d'achat {prix} incohérent avec le dernier prix connu de la ligne {prev_connu} (×{ratio:.2f}) — probable erreur de données (devise/split), renforcement refusé pour protéger le PRU",
+                        })
+                        continue
+
             stock    = stock_map.get(ticker, {})
             # Renforcement : réutilise la devise stockée de la ligne (cohérence du PRU)
             currency = (pos_existante.get("currency") if pos_existante is not None else None) \
@@ -1924,6 +2060,15 @@ def executer_decisions(decisions_claude, portfolio, watchlist, contexte, eur_usd
                     "score_entree":    stock.get("score", dec.get("score_watchlist", 0)),
                     "raison_achat":    raison,      # thèse d'achat originale — réinjectée si vente envisagée
                 }
+                # Conditions de vente pré-définies (discipline selling.md : les sorties
+                # se décident À FROID, avant que la position bouge). Réinjectées dans
+                # les prompts à chaque run tant que la ligne vit. Bornées en nombre et
+                # en longueur — c'est un contrat de sortie, pas un deuxième champ raison.
+                cv = dec.get("conditions_vente")
+                if isinstance(cv, list):
+                    cv = [str(c).strip()[:220] for c in cv if str(c).strip()][:5]
+                    if cv:
+                        nouvelle_pos["conditions_vente"] = cv
                 positions.append(nouvelle_pos)
 
             sym = "€" if currency == "EUR" else "$" if currency == "USD" else "£"
@@ -2104,7 +2249,8 @@ Ne jamais inclure de balises markdown ou de backticks.""",
 
     # ── Exécution des décisions (avec enforcement mécanique Niveau 2)
     positions, liquidites, nouveaux_ordres, decisions_bloquees = executer_decisions(
-        decisions_claude, portfolio, watchlist, contexte, eur_usd, eur_gbp, regles_auto=regles_auto
+        decisions_claude, portfolio, watchlist, contexte, eur_usd, eur_gbp,
+        regles_auto=regles_auto, analyse=analyse
     )
 
     # ── Recalcul final — valeur_actuelle et performance en EUR

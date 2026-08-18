@@ -5,6 +5,82 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Alléger, renforcer : la capacité existait, personne ne pouvait la piloter
+
+Question du propriétaire (18/08) : l'IA sait-elle trimer une position, prendre
+une partie de ses gains ? Réponse mesurée : la mécanique existait depuis la
+v3.2.0 (allègement par `allegement_pct`, renforcement par ACHAT sur titre
+détenu) et n'avait **jamais servi** — 0 allègement, 0 renforcement en 42
+ordres. Ce n'était pas un refus de l'agent, c'était un non-pilotage, et il
+avait trois causes vérifiables.
+
+**Le déclencheur était invisible.** Un trim se décide sur un POIDS — « cette
+ligne pèse 16 % du capital après son rally » — et le poids était la seule
+donnée que le prompt ne montrait pas, alors que le site l'affiche depuis
+toujours. L'agent aurait dû le recalculer de tête à chaque run ; il ne l'a
+jamais fait. Les deux passes voient désormais le poids de chaque ligne, le PFU
+latent d'une cession, le secteur, et le score de LA SEMAINE à côté du score
+d'entrée (l'ancien libellé « score watchlist actuel » affichait un score figé
+à l'achat — une condition de vente « score < 50 trois semaines » était
+invérifiable). Et le surpoids parle avant le mur : dès 15 %, une règle
+informative met l'allègement sur la table ; au-delà de 20 %, le blocage du
+renforcement dit explicitement « allège, ou justifie le maintien ».
+
+**La moitié du livre était hors d'atteinte.** Le garde anti-hallucination
+rejetait tout ACHAT hors watchlist hebdo — y compris un titre DÉTENU sorti du
+top 30, soit 10 lignes sur 20 au moment du constat, pendant que le prompt
+promettait « un ACHAT sur un titre détenu renforce la ligne ». Un ticker
+détenu n'est pas une hallucination : la ligne existe, sa devise et son secteur
+sont connus, le prix est fetché en direct. Le renforcement de ces lignes est
+désormais autorisé (R1 s'y applique via le secteur de la position, et une
+garde ×3/÷3 protège le PRU d'un prix corrompu — même contrat que côté vente).
+
+**La doctrine n'existait pas.** selling.md effleurait le sujet en une
+parenthèse (« vendre une fraction (25-50 %) suffit ») jamais promue en règle.
+Le trim a maintenant sa section complète (déclencheurs légitimes, tailles
+25/33/50 %, interdits, test net d'impôt) dans selling.md ET dans SKILL.md —
+distinction qui compte : seul SKILL.md est injecté dans le run hebdo, les
+modules ne le sont pas. Le cœur de la doctrine : sur compte-titres,
+l'allègement gère un risque de CONCENTRATION, il ne « prend » pas des gains —
+« sécuriser » sans usage alternatif du capital, c'est payer 31,4 % d'impôt
+certain contre un bénéfice hypothétique, le disposition effect en habits
+respectables. S'y ajoutent les `conditions_vente` : l'agent peut désormais
+pré-définir à l'achat 2-4 conditions de sortie falsifiables, réinjectées à
+chaque run, que la passe d'analyse doit contrôler — la discipline « décider
+des sorties à froid » de selling.md, enfin outillée.
+
+**Quatre mensonges mécaniques corrigés au passage** (audit du même jour) :
+un `allegement_pct` illisible (« 50% » en string) devenait une vente TOTALE
+silencieuse — le journal aurait contredit la raison publiée ; désormais rejet
+fail-loud journalisé, et quand l'anti-poussière convertit légitimement un
+allègement en vente totale (reliquat < 100 €, ligne d'un titre), l'ordre porte
+le motif et le site l'explique, demandé ET réalisé. La règle anti-contradiction
+(« si la passe 1 dit "Rien de fondamental", la vente est interdite ») n'était
+jamais vérifiée — un veto en code la fait respecter, stop-loss exemptés. La
+Règle 9 décrivait une file d'attente à l'ouverture qui n'a jamais existé —
+elle dit maintenant la vérité : exécution immédiate au dernier close connu, et
+une décision refusée le weekend n'est PAS mémorisée. Les pertes reportables
+étaient présentées comme un crédit « utilisable » que le moteur n'utilise
+jamais — requalifiées en suivi informatif.
+
+**Le site sait enfin raconter une réallocation.** Badge « ↘ allègement X % »
+avec note détaillée (fraction cédée, PFU au prorata, PRU et date conservés),
+badge « ↗ renfort », et l'heuristique aller-retour ne peut plus étiqueter
+« ⚠ bug » un allègement qui finance un renfort le même jour. Le fallback P&L
+des vieilles ventes, qui mélangeait un montant net d'impôt avec une perf en
+devise native, est supprimé : mieux vaut aucun chiffre qu'un chiffre inventé.
+
+62 vérifications hermétiques de plus dans `test_portfolio_reallocation.py`
+(proratisation fiscale, PRU, anti-poussière, rejets, veto passe 1, garde
+weekend, paliers, présence effective des données de pilotage dans les deux
+prompts). L'audit a relevé d'autres écarts dits/faits qui restent ouverts et
+documentés : la limite « 1 rotation par run » n'est pas comptée en code, la
+concentration sectorielle s'évalue sur un instantané pré-run, rien ne se
+souvient d'un run à l'autre (biais détectés, analyses, décisions bloquées),
+la transparence fiscale du journal n'est pas rendue par le site, et trois
+numérotations de règles coexistent (site, prompt, code). Chantiers notés,
+pas commencés — chacun mérite sa propre entrée ici.
+
 ### Les actualités se répétaient : quatre matins, quatre fois l'or
 
 Constat du propriétaire (16/08) : « c'est très redondant d'un jour à l'autre,
