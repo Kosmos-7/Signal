@@ -508,6 +508,42 @@ for _nom, _serie, _attendu in (
 ):
     check(_nom, bool(_creux_interieurs(_serie)) == _attendu)
 
+# ── UN EXERCICE QUE SES PROPRES TRIMESTRES CONTREDISENT ─────────────────────
+# LE DÉFAUT DU 17/08/2026, VU PAR LE PROPRIÉTAIRE AVANT TOUT CONTRÔLE : « il y
+# a un problème sur les bénéfices FY26 de Lumentum ». Le greffe rendait
+# −6 935 M$ de résultat net pour l'exercice clos le 27/06 — soit −230 % de
+# marge — quand les trois trimestres du même exercice, sur la même fiche,
+# disaient +4, +78 et +144. Rien ne l'a arrêté : la marge d'exercice était
+# cohérente avec la série (le test d'à côté passait), l'ordre de grandeur du
+# CA était juste (celui du dessus aussi), et la seule alerte du système — une
+# discordance de marge Yahoo/Finnhub — n'est publiée que pour le top 30.
+#
+# CE CONTRÔLE LIT CE QUI EST PUBLIÉ et rejoue la règle du screener dessus : sur
+# une copie, pour ne rien modifier, et par APPEL, pour qu'il ne puisse pas
+# diverger de la règle qu'il vérifie. Toute occurrence est NOUVELLE par
+# construction — le run qui publie applique la règle — donc le registre reste
+# vide : si ce contrôle rougit, c'est qu'une donnée est passée par un chemin
+# qui ne l'applique pas.
+print("\n— Un exercice publié est-il contredit par ses propres trimestres ? —")
+_contredits = {}
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, RACINE)
+    import _bouchons as _b_ec
+    _b_ec.poser()
+    import copy as _copy
+    import screener as _sc
+    for _t, _d in FICHES.items():
+        _bloc = _copy.deepcopy(_d.get("fonda") or {})
+        for _e in _sc.ecarter_resultat_contredit(_bloc):
+            _contredits[_t] = (f"{_e['fin']} : résultat {_e['ecarte']['rn']} M "
+                               f"contre {_e['ca']} M de CA")
+except Exception as _e:                                       # noqa: BLE001
+    check("screener.ecarter_resultat_contredit est jouable sur les fiches",
+          False, f"{type(_e).__name__}: {_e}")
+check_connus("aucun exercice publié n'est contredit par ses propres trimestres",
+             _contredits)
+
 # ── 5. SENTINELLES DE VRAISEMBLANCE ────────────────────────────────────────
 print("\n— Bandes de vraisemblance : une exception est permise, une dérive non —")
 # LES DEUX TOLÉRANCES RELEVÉES LE 08/08/2026 le sont pour une raison écrite,

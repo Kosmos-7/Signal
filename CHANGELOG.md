@@ -5,6 +5,98 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Lumentum perdait 6,9 Md$ pendant que ses trimestres gagnaient 226 M$
+
+Question du propriétaire (18/08) : « j'ai l'impression qu'il y a un problème
+sur les bénéfices FY26 de Lumentum ». Il y en avait un, publié depuis quatre
+jours. Le greffe rend, pour l'exercice clos le 27/06/2026, un résultat net de
+**−6 935 M$** et un BPA de **−92,96 $** sur 3 014 M$ de chiffre d'affaires,
+soit **−230 % de marge nette**. La marge glissante de Yahoo est passée de
++17,7 % à −230,1 % le 14 août, jour de la publication des résultats ; l'exercice
+lui-même est entré par EDGAR le 17. Ce n'est pas une seconde source qui
+confirme : les deux retraitent le MÊME dépôt.
+
+**Les comptes de la même fiche disaient autre chose, et personne ne les avait
+mis face à face.** Les trois trimestres publiés de cet exercice donnent +4, +78
+et +144 M$ : il resterait au quatrième une perte de **7 161 M$ pour 1 006 M$ de
+ventes**, treize fois le plus gros résultat annuel jamais publié par la société
+et trente-et-une fois la somme de ses trois autres trimestres. Le flux
+disponible du dernier exercice complet vaut −105 M$, pas −6,9 Md$. Le consensus
+attend 8,23 $ de BPA l'exercice suivant. Le seul détecteur du système avait bien
+tiqué — la confiance de la fiche est tombée à 0,9 sur une discordance de marge
+Yahoo/Finnhub le jour même — mais le TEXTE de l'alerte n'est publié que pour le
+top 30, et Lumentum est un titre thématique : l'alerte est morte dans un champ
+`confiance` que personne ne lit.
+
+**Ce que ça coûtait, mesuré.** La note est tombée à 27 puis 31 : rendement des
+capitaux propres à 0/9 (−240 %), conversion en cash à 0/7, un exercice de plus
+compté en perte dans la constance, et surtout trois critères de croissance et de
+valorisation devenus « non calculables » parce qu'un BPA de −92,96 $ casse toute
+trajectoire. La fiche éditoriale, elle, a bâti sa thèse dessus : « la société
+brûle encore du cash », « marge nette de −230 % », en bull comme en bear. Un
+chiffre faux ne se contente pas de fausser une case, il se propage jusqu'à la
+prose.
+
+**La règle : un exercice que ses propres trimestres contredisent est publié sans
+son résultat.** `screener.ecarter_resultat_contredit` cherche, pour chaque
+exercice, les trois trimestres du même exercice dans la même série, en déduit le
+trimestre résiduel (résultat ET chiffre d'affaires) et l'écarte quand il franchit
+**deux** seuils : plus de trois fois son propre chiffre d'affaires, ET plus de
+dix fois le plus gros résultat annuel connu de la société. Le résultat et le BPA
+quittent l'entrée, le chiffre d'affaires reste (les trimestres le corroborent),
+et le motif est écrit DANS l'exercice, affiché sous le graphique des chiffres
+publiés. Nous ne savons pas lequel des deux ment : une charge non monétaire
+véritable et une erreur de tagage de l'émetteur ont exactement cette tête, la SEC
+ne corrige pas le XBRL, et le rapport annuel n'est pas interrogeable depuis le
+conteneur. C'est la doctrine d'`ajuster_eps_splits` mot pour mot : on ne devine
+pas lequel est faux, on ne publie ni l'un ni l'autre.
+
+**Les deux seuils sont mesurés, puis figés.** Sur les 139 fiches publiées, 119
+exercices portent les trois trimestres nécessaires. Résidu rapporté à son CA :
+médiane 0,21, p90 0,40, deuxième plus haut **4,00** (Applied Digital, exercice
+clos en mai 2024). Résidu rapporté au plus gros résultat annuel connu : médiane
+0,16, p90 0,34, deuxième plus haut **3,22** (SanDisk, FY26). Lumentum est à
+**7,12 et 13,12**. Les deux conditions sont exigées ENSEMBLE, et c'est ce qui
+fait la sélectivité : une petite société qui perd quatre fois son CA trimestriel
+reste dans l'ordre de grandeur de son propre historique, un géant qui publie un
+trimestre exceptionnel reste dans l'ordre de grandeur de son chiffre d'affaires.
+**Un exercice sur 119** franchit les deux. Le test se tait quand il ne peut pas
+conclure : moins de trois trimestres, ou une série trimestrielle qui couvre déjà
+tout l'exercice (l'écart accuserait alors la série trimestrielle autant que
+l'exercice, cf. les quatre trimestres de Schwab déposés ×1000 trop petits).
+
+**Un résultat écarté l'est PARTOUT.** Le retirer du graphique en le laissant
+vivre dans les ratios glissants aurait été le publier sous un autre nom : la
+marge nette TTM était le quotient exact du résultat écarté par le CA du même
+exercice, et le ROE en dérivait. Les deux sont retirés avec lui — sur MESURE, pas
+sur soupçon : seulement si la marge glissante coïncide à moins d'un point avec
+celle de l'exercice écarté. Une société dont le douze-mois-glissant a déjà tourné
+la page garde le sien. Et aucun maillon suivant ne comble ce trou : Finnhub
+aurait remplacé la marge par sa propre valeur, celle-là même dont la discordance
+avait fait tomber la confiance — trancher au jugé la question qu'on vient de
+déclarer indécidable. Un retrait est une décision, la reprendre l'annule (leçon
+`pe_prev_indecis`). La note retire donc ses critères avec leur motif et se
+renormalise : **35/100 sur 26 points de qualité notables**, au lieu de 31 sur des
+zéros muets.
+
+**La règle est rejouée à la fusion**, par appel et non par recopie, sinon
+l'exercice écarté ressusciterait le jour où le run courant ne le produit plus
+(EDGAR muet) — c'est exactement le sort du filtre de clôture majoritaire, et la
+même correction. Elle est idempotente, et un dépôt corrigé revient au run suivant
+avec son résultat : l'entrée fraîche remplace l'écartée.
+
+Mis à jour ensemble : `screener.py` (règle, seuils, propagation aux ratios),
+`index.html` (le motif sous le graphique), `apprendre.html` (la pédagogie du
+retrait), les données publiées de LITE (fiche + carte compacte, la règle
+appliquée à ce qui était déjà en ligne), sa fiche éditoriale (les seules phrases
+qui affirmaient le chiffre écarté ; sa signature a changé, le run hebdomadaire la
+réécrira entièrement), et les tests : treize cas dans `test_charts.py` (dont
+Lumentum, Applied Digital et SanDisk sur leurs chiffres réels) et un invariant
+permanent dans `test_donnees.py` qui rejoue la règle sur TOUT ce qui est publié
+— registre vide, donc toute occurrence est une régression.
+
+---
+
 ### Le momentum notait une altitude : Kioxia à 15/15 en plein krach
 
 Question du propriétaire (17/08) : « le momentum de Kioxia n'est-il pas biaisé

@@ -787,6 +787,145 @@ def completer_eps(an, ecart_max=ECART_BASE_ACTIONS):
     return faits
 
 
+# ── UN EXERCICE CONTREDIT PAR SES PROPRES TRIMESTRES ─────────────────────────
+# Les deux seuils sont MESURÉS puis FIGÉS (l'idiome du 07/08 : jamais de
+# percentile vivant, l'exercice d'un titre ne dépend pas de ceux des autres).
+# Relevé du 18/08/2026 sur les 139 fiches publiées — 119 exercices portent les
+# trois trimestres qu'il faut pour être testés :
+#   · résidu ÷ CA du résidu   : médiane 0,21 · p90 0,40 · 2ᵉ plus haut 4,00
+#     (APLD, exercice clos en mai 2024) · plus haut 7,12 (LITE FY26)
+#   · résidu ÷ plus gros |résultat annuel| connu : médiane 0,16 · p90 0,34 ·
+#     2ᵉ plus haut 3,22 (SNDK FY26) · plus haut 13,12 (LITE FY26)
+# Les deux conditions sont exigées ENSEMBLE, et c'est ce qui fait la sélectivité :
+# une petite société qui perd quatre fois son chiffre d'affaires trimestriel
+# (APLD) reste dans l'ordre de grandeur de son propre historique ; un géant qui
+# publie un trimestre exceptionnel (SNDK) reste dans l'ordre de grandeur de son
+# chiffre d'affaires. Un seul exercice des 119 franchit les deux.
+RESIDU_SUR_CA = 3
+RESIDU_SUR_HISTORIQUE = 10
+
+# Même table que FD_SYM côté fiche : le motif est écrit ici mais lu là-bas, et
+# deux conventions de devise sur la même page se verraient.
+SIGLE_DEVISE = {"USD": "$", "EUR": "€", "GBP": "£", "JPY": "¥", "KRW": "₩",
+                "TWD": "NT$", "CHF": "CHF", "SEK": "kr", "DKK": "kr",
+                "NOK": "kr"}
+
+
+def ecarter_resultat_contredit(fonda):
+    """Retire le RÉSULTAT NET d'un exercice que les trimestres du même exercice
+    contredisent. Le chiffre d'affaires reste, le motif s'écrit dans l'entrée.
+
+    LE CAS QUI L'A FAIT ÉCRIRE — question du propriétaire, 18/08 : « il y a un
+    problème sur les bénéfices FY26 de Lumentum ». Le greffe rendait, pour
+    l'exercice clos le 27/06/2026, un résultat net de −6 935 M$ et un BPA de
+    −92,96 $ sur 3 014 M$ de chiffre d'affaires : une marge nette de −230 %,
+    reprise à l'identique par la marge glissante de Yahoo — qui retraite le
+    même dépôt, ce n'est donc pas une seconde source. Les TROIS TRIMESTRES du
+    même exercice, lus dans la même série, disent +4, +78 et +144 M$ : il
+    resterait au quatrième une perte de 7 161 M$ pour 1 006 M$ de ventes,
+    treize fois le plus gros résultat annuel jamais publié par la société. Le
+    flux disponible du dernier exercice complet (−105 M$) ne montre rien de
+    tel, et le consensus attend 8,23 $ de BPA l'exercice suivant. La note est
+    tombée à 27 puis 31 et la fiche éditoriale a construit sa thèse dessus
+    (« la société brûle encore du cash »), sur un chiffre que les comptes de la
+    même page contredisaient.
+
+    CE QU'ON NE SAIT PAS, ET QU'ON N'INVENTE PAS. Lequel des deux ment ? Le
+    dépôt peut porter une charge non monétaire véritable comme une erreur de
+    tagage de l'émetteur — la SEC ne corrige pas le XBRL (cf. edgar), et Yahoo
+    comme Finnhub retraitent ce même document. Le seul détecteur du système
+    l'avait d'ailleurs vu : la confiance de la fiche est tombée à 0,9 le jour
+    de la publication, sur une discordance de marge Yahoo/Finnhub — mais le
+    texte de l'alerte n'est publié que pour le top 30, et LITE est un titre
+    thématique. Sans le rapport annuel lui-même, la question ne se tranche pas.
+    C'est mot pour mot la situation d'`edgar.ajuster_eps_splits` quand le
+    résultat net et le BPA sont incompatibles : on ne devine pas lequel est
+    faux, on ne publie ni l'un ni l'autre.
+
+    CE QUE FAIT LA RÈGLE. Pour chaque exercice qui porte un résultat net et un
+    chiffre d'affaires, on cherche dans la MÊME série les trimestres du même
+    exercice (clôture dans les 360 jours qui le précèdent). Il en faut
+    exactement trois : le quatrième n'est jamais déposé en durée trimestrielle
+    et se DÉDUIT (exercice − les trois), ce qui donne un trimestre résiduel
+    complet — résultat net et chiffre d'affaires. Le résidu doit ressembler à
+    un trimestre : son CA entre 5 % et 60 % de celui de l'exercice, sinon les
+    deux séries ne se recouvrent pas et le test ne dit RIEN (c'est le cas des
+    séries trimestrielles à l'échelle fausse, SCHW ×1000, qui accuseraient
+    sinon un exercice parfaitement bon).
+
+    Le résultat de l'exercice est alors écarté quand le résidu franchit les
+    DEUX seuils mesurés au-dessus : plus de trois fois son propre chiffre
+    d'affaires, ET plus de dix fois le plus gros résultat annuel connu de la
+    société. `rn`, `eps` et le multiple d'époque qui en dérive quittent
+    l'entrée ; `ca` reste — il est corroboré par les trimestres, lui.
+
+    CE QU'ELLE NE FAIT PAS. Elle ne dit rien d'un exercice sans trimestres
+    connus : la moitié de l'univers est dans ce cas et un soupçon n'est pas une
+    mesure. Elle ne touche jamais au chiffre d'affaires. Elle n'écrase pas la
+    source : un dépôt corrigé revient au run suivant avec son résultat, et
+    l'entrée fraîche remplace l'écartée (fusion par date de clôture). Elle est
+    idempotente — un exercice déjà écarté n'a plus de `rn` à écarter.
+
+    Mutation en place, rend la liste des exercices écartés. Pure, testable
+    hors ligne."""
+    an = (fonda or {}).get("an") or []
+    tr = (fonda or {}).get("tr") or []
+    dev = (fonda or {}).get("devise") or ""
+    ecartes = []
+
+    def _j(iso):
+        return date(*map(int, iso.split("-"))).toordinal()
+
+    def _m(v, signe=True):
+        """Montant en millions, à la convention de la fiche (cf. fdMoney) :
+        au-delà du millier on parle en milliards, avec la décimale."""
+        sym = SIGLE_DEVISE.get(dev, dev + " ")
+        if abs(v) >= 1000:
+            txt = ("{:+,.1f}" if signe else "{:,.1f}").format(v / 1000)
+            txt = txt.replace(",", " ").replace(".", ",") + f" Md{sym}"
+        else:
+            txt = ("{:+,.0f}" if signe else "{:,.0f}").format(v)
+            txt = txt.replace(",", " ") + f" M{sym}"
+        return txt.replace("-", "−")     # le signe moins de la fiche
+
+    for e in an:
+        if e.get("rn") is None or not e.get("ca") or e["ca"] <= 0:
+            continue
+        qs = [q for q in tr
+              if q.get("rn") is not None and q.get("ca") is not None
+              and 0 <= _j(e["fin"]) - _j(q["fin"]) < 360]
+        if len(qs) != 3:
+            continue
+        ca_res = e["ca"] - sum(q["ca"] for q in qs)
+        if not (0.05 * e["ca"] <= ca_res <= 0.60 * e["ca"]):
+            continue
+        rn_res = e["rn"] - sum(q["rn"] for q in qs)
+        autres = [abs(x["rn"]) for x in an
+                  if x is not e and x.get("rn") is not None]
+        if not autres:
+            continue
+        if not (abs(rn_res) > RESIDU_SUR_CA * ca_res
+                and abs(rn_res) > RESIDU_SUR_HISTORIQUE * max(autres)):
+            continue
+        motif = (
+            f"Exercice publié sans son résultat net. Le résultat déposé "
+            f"({_m(e['rn'])}) est contredit par les trimestres du même "
+            f"exercice ({_m(sum(q['rn'] for q in qs))} cumulés sur trois) : "
+            f"il resterait au dernier trimestre {_m(rn_res)} pour "
+            f"{_m(ca_res, signe=False)} de ventes, soit "
+            f"{abs(rn_res) / max(autres):.0f} fois le plus gros résultat "
+            f"annuel connu de la société. Nous ne savons pas lequel des deux "
+            f"est faux, et nous n'en publions aucun. Le chiffre d'affaires, "
+            f"lui, est corroboré par les trimestres et reste tracé.")
+        e["ecarte"] = {"rn": e.pop("rn"), "motif": motif}
+        if e.get("eps") is not None:
+            e["ecarte"]["eps"] = e.pop("eps")
+        e.pop("eps_derive", None)
+        e.pop("per", None)          # le multiple d'époque dérivait du BPA écarté
+        ecartes.append(e)
+    return ecartes
+
+
 def per_historique(an, prix_a_la_date, meme_devise, actions_actuelles=None,
                    taux=None, rapport=None):
     """Ajoute le PER de chaque exercice : cours de clôture de l'exercice / BPA
@@ -1535,6 +1674,16 @@ def fusionner_fonda(ancien, nouveau, max_an=edgar.MAX_EXERCICES,
         if cle == "an":
             dedup = edgar.filtrer_cloture_majoritaire(dedup)
         out[cle] = dedup[-borne:]
+    # MÊME RAISON, MÊME REMÈDE, pour le résultat d'exercice contredit par ses
+    # trimestres : un exercice écarté aujourd'hui a pu être publié hier avec
+    # son résultat, et l'ancienne entrée survivrait à la fusion le jour où le
+    # run courant ne le produit plus (EDGAR muet, réseau en panne). La règle
+    # est REJOUÉE sur l'union — par appel, jamais par recopie — et elle est
+    # idempotente : un exercice déjà écarté n'a plus de résultat à écarter.
+    try:
+        ecarter_resultat_contredit(out)
+    except Exception:
+        pass                          # fail-soft : la fusion prime sur la règle
     # PER prévisionnels : ce sont des estimations COURANTES, le run le plus
     # récent fait foi ; à défaut (Yahoo muet un jour), on garde les anciennes,
     # leurs étiquettes d'exercice rendent tout vieillissement visible.
@@ -2862,6 +3011,22 @@ def score_ticker(ticker, vix=None):
                             print(f"   Apport {ticker}: +{len(fonda['an']) - avant_a} exercices (source au fichier)")
                 except Exception as e:
                     print(f"  ⚠️  {ticker}: apport en échec ({type(e).__name__})")
+                # LA SÉRIE EST COMPLÈTE : ON LA CONFRONTE À ELLE-MÊME. Ici et
+                # pas plus tôt — le test a besoin des trimestres de la fenêtre
+                # Yahoo ET des exercices d'EDGAR, donc des trois sources
+                # réunies. Ici et pas plus tard non plus : les BPA reconstitués
+                # et les multiples d'époque qui suivent dériveraient d'un
+                # résultat qu'on s'apprête à écarter.
+                # Fail-soft comme ses voisines : une série mal formée fait
+                # perdre la règle, jamais le titre entier.
+                try:
+                    for _e in ecarter_resultat_contredit(fonda):
+                        print(f"  ⚠️  {ticker}: exercice {_e['fin']} publié sans "
+                              f"résultat net ({_e['ecarte']['rn']} M contredits "
+                              f"par ses propres trimestres)")
+                except Exception as e:
+                    print(f"  ⚠️  {ticker}: contrôle exercice/trimestres en "
+                          f"échec ({type(e).__name__})")
                 # PER par exercice + deux exercices à venir. Fail-soft aussi.
                 try:
                     # Cours COTÉ à l'époque (`brut`, splits seuls), jamais la
@@ -3017,6 +3182,42 @@ def score_ticker(ticker, vix=None):
             return v if isinstance(v, (int, float)) and v == v and np.isfinite(v) else None
         _f = fonda if isinstance(fonda, dict) else {}
 
+        # UN RÉSULTAT ÉCARTÉ L'EST PARTOUT, PAS SEULEMENT DANS SA SÉRIE.
+        # Retirer le résultat d'un exercice du graphique et le laisser vivre
+        # dans les RATIOS GLISSANTS reviendrait à le publier quand même, sous
+        # un autre nom : la marge nette TTM de Lumentum (−230,1 %) était le
+        # quotient exact du résultat écarté par le chiffre d'affaires du même
+        # exercice, et le rendement des capitaux propres (−240 %) en dérivait
+        # de même. Yahoo n'est pas une seconde source ici — il retraite le
+        # dépôt que nous venons de refuser.
+        # LA CONDITION EST UNE MESURE, PAS UNE SUPPOSITION : on ne retire les
+        # deux ratios que si la marge glissante COÏNCIDE avec celle de
+        # l'exercice écarté (moins d'un point d'écart). Une société dont le
+        # douze-mois-glissant a déjà tourné la page porte un autre chiffre,
+        # et celui-là est à elle.
+        # LE MOTIF N'EST PAS RECOPIÉ DANS LE BREAKDOWN, et c'est délibéré : il
+        # vit déjà dans l'exercice écarté, que la fiche dessine. Deux copies
+        # d'un même texte sont deux textes qui divergent — la leçon du filtre
+        # de clôture, tirée un peu plus haut dans ce fichier.
+        _ex_ecarte = next((e for e in reversed(_f.get("an") or [])
+                           if e.get("ecarte") and e.get("ca")), None)
+        _marge_refusee = False
+        if _ex_ecarte is not None:
+            _m_ecartee = _ex_ecarte["ecarte"]["rn"] / _ex_ecarte["ca"]
+            if margins_raw is not None and abs(margins_raw - _m_ecartee) < 0.01:
+                _marge_refusee = True
+                margins_raw = margins = None
+                roe = None
+                breakdown["roe_pct"] = None
+                # La justification lit `details`, renseigné plus haut : sans
+                # cette ligne elle continuerait de raisonner sur la marge
+                # refusée. Zéro est la valeur d'absence de cette fonction.
+                details["net_margin"] = 0
+                alertes.append(
+                    f"Résultat de l'exercice {_ex_ecarte['fin']} écarté "
+                    f"(contredit par ses propres trimestres) : marge nette "
+                    f"glissante et rendement des capitaux propres retirés avec lui")
+
         # ── Fin de la CHAÎNE DES SOURCES ────────────────────────────────────
         # 1. résumé Yahoo → 2. états financiers (plus haut) → 3. comptes
         # publiés (Yahoo + EDGAR) → 4. Finnhub, US seulement, en dernier.
@@ -3029,6 +3230,18 @@ def score_ticker(ticker, vix=None):
         fonda_source += [s + ":comptes" for s in _src3]
         _nm_raw, debt_eq_raw, _src4 = chainer_finnhub(fh_data, _nm_raw, debt_eq_raw)
         fonda_source += [s + ":finnhub" for s in _src4]
+        # AUCUN MAILLON NE REMPLIT UN TROU QUI EST UN REFUS. La chaîne est
+        # écrite pour une ABSENCE — la source muette — et elle ne sait pas la
+        # distinguer d'une DÉCISION : Finnhub aurait rempli la marge que nous
+        # venons d'écarter par sa propre valeur, celle-là même dont la
+        # discordance avec Yahoo avait fait tomber la confiance de la fiche.
+        # Substituer le chiffre du tiers qui n'est pas d'accord, c'est trancher
+        # au jugé la question qu'on vient de déclarer indécidable. C'est mot
+        # pour mot la leçon de `pe_prev_indecis` dans fusionner_fonda : un
+        # retrait est une décision, et la reprendre l'annule.
+        if _marge_refusee:
+            _nm_raw = None
+            fonda_source.append("marge:ecartee")
         if _nm_raw is not None and margins_raw is None:
             margins = _nm_raw          # le score consomme la valeur chaînée
         breakdown["net_margin_pct"] = (round(_nm_raw * 100, 1)

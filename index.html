@@ -1873,6 +1873,14 @@ function fondaRender(s){
        que rien ne dise pourquoi. Le motif reste dans la donnée publiée
        (`ca_arret`), prêt à être réaffiché si l'absence gêne. */
     (function(){const syn=fdSynthese(an,_rupt.coupe,dev);return syn.length?'<div class="fd-syn">'+syn.map(x=>'<p>'+x+'</p>').join('')+'</div>':'';})()+
+    /* UN EXERCICE PUBLIÉ SANS SON RÉSULTAT NET LE DIT — sinon la barre
+       manquante passe pour un trou de source, alors que c'est une DÉCISION.
+       Le motif est écrit par le screener, dans l'exercice lui-même
+       (`ecarte.motif`) : il nomme le chiffre refusé, les trimestres qui le
+       contredisent, et pourquoi nous ne publions ni l'un ni l'autre. Il n'est
+       recopié nulle part ailleurs — la fiche le lit là où il vit. */
+    (function(){const ec=(an||[]).filter(function(e){return e&&e.ecarte&&e.ecarte.motif;});
+      return ec.map(function(e){return '<p class="fd-inline"><i>'+e.ecarte.motif+'</i></p>';}).join('');})()+
     /* LES TROIS FONDAMENTAUX FRAIS, à côté des exercices qu'ils prolongent
        (déplacés le 07/08 : ils flottaient dans une rangée de tuiles isolée).
        Ils disent où en est la société AUJOURD'HUI là où le graphique et les

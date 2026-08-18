@@ -1653,6 +1653,109 @@ check("limite connue (#83) : un changement d'exercice de six mois écarte le "
       len(_apres) == 10 and all(e["fin"][5:7] == "06" for e in _apres),
       f"{len(_apres)} exercices retenus, mois {sorted({e['fin'][5:7] for e in _apres})}")
 
+print("\n— Un exercice contredit par ses propres trimestres —")
+# LE CAS RÉEL, chiffres du dépôt tel qu'il a été publié le 17/08/2026 : le
+# greffe rend −6 935 M$ pour l'exercice clos le 27/06 quand les trois
+# trimestres du même exercice disent +4, +78 et +144. Le trimestre qui reste
+# perdrait 7 161 M$ sur 1 006 M$ de ventes. La marge nette de la fiche est
+# passée de +17,7 % à −230,1 % en un jour, la note de 31 à 27, et la fiche
+# éditoriale a bâti sa thèse dessus.
+_LITE_AN = [{"fin": "2023-06-30", "ca": 1767, "rn": -132, "eps": -1.93},
+            {"fin": "2024-06-30", "ca": 1359, "rn": -546, "eps": -8.12},
+            {"fin": "2025-06-30", "ca": 1645, "rn": 26, "eps": 0.37, "per": 256.9},
+            {"fin": "2026-06-27", "src": "edgar", "ca": 3014, "rn": -6935,
+             "eps": -92.96}]
+_LITE = {"devise": "USD", "an": _LITE_AN,
+         "tr": [{"fin": "2025-09-30", "ca": 534, "rn": 4},
+                {"fin": "2025-12-31", "ca": 666, "rn": 78},
+                {"fin": "2026-03-31", "ca": 808, "rn": 144}]}
+_ecartes = screener.ecarter_resultat_contredit(_LITE)
+check("le résultat contredit par ses trimestres est écarté",
+      len(_ecartes) == 1 and "rn" not in _LITE_AN[3], str(_LITE_AN[3]))
+check("le bénéfice par action part avec lui : il portait le même résultat",
+      "eps" not in _LITE_AN[3], str(_LITE_AN[3]))
+check("le chiffre d'affaires reste : les trimestres le corroborent",
+      _LITE_AN[3]["ca"] == 3014, str(_LITE_AN[3]))
+check("les deux valeurs refusées restent lisibles dans l'entrée",
+      _LITE_AN[3]["ecarte"]["rn"] == -6935
+      and _LITE_AN[3]["ecarte"]["eps"] == -92.96, str(_LITE_AN[3].get("ecarte")))
+check("le motif nomme le chiffre refusé et ce qui le contredit",
+      all(m in _LITE_AN[3]["ecarte"]["motif"]
+          for m in ("−6,9 Md$", "+226 M$", "−7,2 Md$")),
+      _LITE_AN[3]["ecarte"]["motif"])
+check("les exercices antérieurs ne sont pas touchés",
+      _LITE_AN[2]["rn"] == 26 and _LITE_AN[1]["rn"] == -546)
+check("la règle est idempotente : un exercice déjà écarté ne l'est pas deux fois",
+      screener.ecarter_resultat_contredit(_LITE) == [])
+# LES DEUX SEUILS SONT EXIGÉS ENSEMBLE, et voici les deux cas qui le prouvent —
+# tous deux réels, tous deux publiés aujourd'hui. Applied Digital perd quatre
+# fois le chiffre d'affaires de son trimestre résiduel (exercice clos en mai
+# 2024) : c'est une petite société qui perd beaucoup, pas une donnée fausse —
+# l'ordre de grandeur reste le sien.
+_APLD = {"devise": "USD",
+         "an": [{"fin": "2023-05-31", "ca": 55, "rn": -45},
+                {"fin": "2024-05-31", "ca": 137, "rn": -149},
+                {"fin": "2025-05-31", "ca": 144, "rn": -231}],
+         "tr": [{"fin": "2023-08-31", "ca": 36, "rn": -11},
+                {"fin": "2023-11-30", "ca": 42, "rn": -11},
+                {"fin": "2024-02-29", "ca": 43, "rn": -63}]}
+check("perdre quatre fois son CA trimestriel ne suffit pas à être écarté",
+      screener.ecarter_resultat_contredit(_APLD) == []
+      and _APLD["an"][1]["rn"] == -149)
+# SanDisk, à l'inverse : son quatrième trimestre pèse trois fois le plus gros
+# résultat annuel de son histoire (+6 903 M$), mais il reste très en deçà de
+# son propre chiffre d'affaires (8 965 M$). Un trimestre exceptionnel n'est pas
+# une donnée fausse.
+_SNDK = {"devise": "USD",
+         "an": [{"fin": "2024-06-30", "ca": 6663, "rn": -672},
+                {"fin": "2025-06-30", "ca": 7355, "rn": -1641},
+                {"fin": "2026-07-03", "ca": 20248, "rn": 11433, "eps": 73.76}],
+         "tr": [{"fin": "2025-09-30", "ca": 2308, "rn": 112},
+                {"fin": "2025-12-31", "ca": 3025, "rn": 803},
+                {"fin": "2026-03-31", "ca": 5950, "rn": 3615}]}
+check("un trimestre exceptionnel mais proportionné à son CA reste publié",
+      screener.ecarter_resultat_contredit(_SNDK) == []
+      and _SNDK["an"][2]["rn"] == 11433)
+# LE TEST SE TAIT QUAND IL NE PEUT PAS CONCLURE. Une série trimestrielle qui
+# couvre déjà tout l'exercice ne laisse aucun trimestre résiduel à mesurer :
+# l'écart qu'on lirait alors accuserait la série trimestrielle (échelle fausse,
+# SCHW ×1000) autant que l'exercice, et on ne sait pas laquelle.
+_COUVERT = {"devise": "USD",
+            "an": [{"fin": "2024-12-31", "ca": 100, "rn": 10},
+                   {"fin": "2025-12-31", "ca": 300, "rn": 5000}],
+            "tr": [{"fin": "2025-03-31", "ca": 100, "rn": 1},
+                   {"fin": "2025-06-30", "ca": 100, "rn": 1},
+                   {"fin": "2025-09-30", "ca": 100, "rn": 1}]}
+check("un exercice déjà couvert par ses trimestres n'est pas jugé",
+      screener.ecarter_resultat_contredit(_COUVERT) == []
+      and _COUVERT["an"][1]["rn"] == 5000)
+check("deux trimestres et demi ne font pas un exercice : rien n'est écarté",
+      screener.ecarter_resultat_contredit(
+          {"devise": "USD",
+           "an": [{"fin": "2024-12-31", "ca": 100, "rn": 10},
+                  {"fin": "2025-12-31", "ca": 400, "rn": -9000}],
+           "tr": [{"fin": "2025-03-31", "ca": 100, "rn": 1},
+                  {"fin": "2025-06-30", "ca": 100, "rn": 1}]}) == [])
+# Les seuils sont MESURÉS puis FIGÉS : les desserrer sans mesurer à nouveau
+# ferait rentrer les 118 autres exercices testables un à un.
+check("les deux seuils restent ceux qui ont été mesurés",
+      (screener.RESIDU_SUR_CA, screener.RESIDU_SUR_HISTORIQUE) == (3, 10),
+      f"{screener.RESIDU_SUR_CA} / {screener.RESIDU_SUR_HISTORIQUE}")
+# LA RÈGLE EST REJOUÉE À LA FUSION. Sans ça, l'exercice écarté aujourd'hui
+# ressusciterait le jour où le run courant ne le produit plus (EDGAR muet) :
+# l'ancienne entrée, elle, porte encore son résultat.
+_ANCIEN = {"devise": "USD",
+           "an": [{"fin": "2025-06-30", "ca": 1645, "rn": 26},
+                  {"fin": "2026-06-27", "ca": 3014, "rn": -6935, "eps": -92.96}],
+           "tr": [{"fin": "2025-09-30", "ca": 534, "rn": 4},
+                  {"fin": "2025-12-31", "ca": 666, "rn": 78},
+                  {"fin": "2026-03-31", "ca": 808, "rn": 144}]}
+_fus = screener.fusionner_fonda(copy.deepcopy(_ANCIEN), {"devise": "USD", "an": [],
+                                                         "tr": []})
+check("un exercice écarté ne ressuscite pas par la fusion",
+      "rn" not in _fus["an"][-1] and _fus["an"][-1].get("ecarte"),
+      str(_fus["an"][-1]))
+
 print("\n— La fusion ne perd rien de ce qui est déjà publié —")
 # LA PANNE DU 07/08, ÉPROUVÉE SUR LES DONNÉES RÉELLES. `fusionner_fonda`
 # reconstruit le bloc de zéro : tout champ qu'elle ne recopie pas explicitement
