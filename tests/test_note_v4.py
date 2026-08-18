@@ -49,7 +49,12 @@ CTX_TEMOIN = {
     "net_margin_pct": 24.0, "fcf_margin_pct": 22.0, "fcf_yield_pct": 3.0,
     "roe": 0.28, "debt_eq": 45.0,
     "banque": False, "meme_devise": True,
-    "z": 0.4, "rsi": 55.0, "ecart_mm_pct": 2.5,
+    # Bloc momentum v4.1 (17/08/2026) : quatre intrants, tous présents pour
+    # que le témoin garde une couverture pleine.
+    "mom_ratio": 1.1, "mom_pct": 28.0, "mom_vol_pct": 25.0,
+    "drawdown_52w_pct": -4.0,
+    "z": 0.4, "reg_seances": 2520,
+    "pente_mm21_pct": 1.2,
 }
 
 
@@ -116,8 +121,8 @@ n = calcule_note(CTX_TEMOIN)
 check("total dans [0,100]", 0 <= n["total"] <= 100, str(n["total"]))
 check("compounder bien noté (≥70)", n["total"] >= 70, str(n["total"]))
 check("couverture pleine", n["couverture"] == 100, str(n["couverture"]))
-check("15 critères émis (le RSI a quitté la note le 07/08)",
-      len(n["criteres"]) == 15, str(len(n["criteres"])))
+check("17 critères émis (RSI sorti le 07/08, bloc momentum recomposé le 17/08)",
+      len(n["criteres"]) == 17, str(len(n["criteres"])))
 check("le RSI n'est plus un critère noté",
       not any(c["id"] == "rsi" for c in n["criteres"]))
 check("4 blocs, tous notés",
@@ -337,48 +342,94 @@ check("sans estimation, le PEG utilise la croissance démontrée",
       c_peg3["pts"] is not None and abs(c_peg3["valeur"] - 24.0 / c_bpa["valeur"]) <= 0.02)
 
 print("\n— Renormalisation entre blocs (données minimales) —")
-# Seulement du momentum PLEIN (écart ≥+5 % = haut de rampe) : Q, C, V vides
-# → total = momentum renormalisé sur 100
-# ±15 depuis le 07/08 : il faut un vrai écart de tendance pour le plein.
-nm = calcule_note({"z": 0.0, "rsi": 50.0, "ecart_mm_pct": 20.0})
+# Seulement du momentum PLEIN sur ses quatre critères : Q, C, V vides
+# → total = momentum renormalisé sur 100.
+nm = calcule_note({"mom_ratio": 1.0, "mom_pct": 30.0, "mom_vol_pct": 30.0,
+                   "drawdown_52w_pct": -2.0, "z": 0.0, "reg_seances": 2520,
+                   "pente_mm21_pct": 5.0})
 check("blocs sans donnée → pts None",
       all(nm["blocs"][b]["pts"] is None for b in ("q", "c", "v")))
 check("total renormalisé sur les blocs restants (momentum plein → 100)",
       nm["total"] == 100, str(nm["total"]))
-check("couverture basse le signale", nm["couverture"] < 25, str(nm["couverture"]))
+check("couverture basse le signale", nm["couverture"] < 30, str(nm["couverture"]))
 # Rien du tout : total 0, pas d'exception
 nz = calcule_note({})
 check("contexte vide → total 0 sans exception", nz["total"] == 0)
 check("contexte vide → couverture 0", nz["couverture"] == 0)
 
-print("\n— Momentum : symétrie de la cloche z —")
+print("\n— Momentum : symétrie de la cloche z (3 pts depuis le 17/08) —")
 haut = calcule_note(dict(CTX_TEMOIN, z=2.0))
 bas = calcule_note(dict(CTX_TEMOIN, z=-2.25))
 pz_haut = next(c for c in haut["criteres"] if c["id"] == "position")["pts"]
 pz_bas = next(c for c in bas["criteres"] if c["id"] == "position")["pts"]
-check("étirement haussier pénalisé (z=+2 → 4/8)", pz_haut == 4.0, str(pz_haut))
-check("étirement baissier pénalisé (z=−2,25 → 4/8)", pz_bas == 4.0, str(pz_bas))
+check("étirement haussier pénalisé (z=+2 → 1,5/3)", pz_haut == 1.5, str(pz_haut))
+check("étirement baissier pénalisé (z=−2,25 → 1,5/3)", pz_bas == 1.5, str(pz_bas))
 
-# ── Calibration mesurée sur l'univers publié (audit du 07/08) ──────────────
-print("\n— Les rampes notent-elles vraiment, ou distribuent-elles ? —")
-# Un critère dont la rampe est plus étroite que la dispersion de l'univers
-# cesse de classer et devient un interrupteur. Ces trois-là ne notaient que
-# 11 à 19 % des titres ; les seuils sont désormais ceux de la population.
+print("\n— Momentum v4.1 : gardes et bornes des quatre critères —")
 _p = lambda ctx, cid: next(c["pts"] for c in calcule_note(ctx)["criteres"]
                            if c["id"] == cid)
-check("tendance : la médiane de l'univers (+10 %) est NOTÉE, pas plafonnée",
-      0 < _p(dict(CTX_TEMOIN, ecart_mm_pct=10.0), "tendance") < 7,
-      str(_p(dict(CTX_TEMOIN, ecart_mm_pct=10.0), "tendance")))
-check("tendance : ±15 % reste le plein et le zéro",
-      _p(dict(CTX_TEMOIN, ecart_mm_pct=15.0), "tendance") == 7.0
-      and _p(dict(CTX_TEMOIN, ecart_mm_pct=-15.0), "tendance") == 0.0)
+_motif = lambda ctx, cid: next(c["motif"] for c in calcule_note(ctx)["criteres"]
+                               if c["id"] == cid)
+# momentum : la cloche donne le plein à la médiane de l'univers (0,77) et
+# REDESCEND sur les événements — le ×22 post-IPO de Kioxia (ratio 3,17)
+# n'atteint plus le plein, c'est la raison d'être de la refonte.
+check("momentum : la médiane de l'univers (0,77) est au plateau (6/6)",
+      _p(dict(CTX_TEMOIN, mom_ratio=0.77), "momentum") == 6.0)
+_kx = _p(dict(CTX_TEMOIN, mom_ratio=3.17), "momentum")
+check("momentum : un ×22 post-IPO (ratio 3,17) redescend, strictement entre 0 et 6",
+      0 < _kx < 6, str(_kx))
+check("momentum : plein exact aux bornes du plateau (0,3 et 2,0)",
+      _p(dict(CTX_TEMOIN, mom_ratio=0.3), "momentum") == 6.0
+      and _p(dict(CTX_TEMOIN, mom_ratio=2.0), "momentum") == 6.0)
+check("momentum : zéro exact aux bornes externes (−1,5 et 3,5)",
+      _p(dict(CTX_TEMOIN, mom_ratio=-1.5), "momentum") == 0.0
+      and _p(dict(CTX_TEMOIN, mom_ratio=3.5), "momentum") == 0.0)
+check("momentum absent → retrait motivé (13 mois)",
+      "treize mois" in _motif(dict(CTX_TEMOIN, mom_ratio=None), "momentum"))
+# sommet : rampe −40/−5, référence OBSERVÉE
+check("sommet : au plus haut (0 %) → plein exact 4",
+      _p(dict(CTX_TEMOIN, drawdown_52w_pct=0.0), "sommet") == 4.0)
+check("sommet : la médiane de l'univers (−19,2 %) est NOTÉE, pas plafonnée",
+      0 < _p(dict(CTX_TEMOIN, drawdown_52w_pct=-19.2), "sommet") < 4)
+check("sommet : −40 % → zéro exact",
+      _p(dict(CTX_TEMOIN, drawdown_52w_pct=-40.0), "sommet") == 0.0)
+check("sommet absent (moins de 252 séances) → retrait motivé",
+      "52 semaines" in _motif(dict(CTX_TEMOIN, drawdown_52w_pct=None), "sommet"))
+# position : la garde de fenêtre se joue en séances NON arrondies
+check("position : fenêtre 1259 séances → retirée avec motif « 5 ans »",
+      "5 ans" in _motif(dict(CTX_TEMOIN, reg_seances=1259), "position"))
+check("position : fenêtre 1260 séances → notée",
+      _p(dict(CTX_TEMOIN, reg_seances=1260), "position") is not None)
+check("position : z sans fenêtre → retirée, jamais notée à l'aveugle",
+      _motif(dict(CTX_TEMOIN, reg_seances=None), "position") is not None)
+# dynamique : bornes p10/p90, plein/zéro stricts
+check("dynamique : −3,5 % → zéro exact et +4,5 % → plein exact",
+      _p(dict(CTX_TEMOIN, pente_mm21_pct=-3.5), "dynamique") == 0.0
+      and _p(dict(CTX_TEMOIN, pente_mm21_pct=4.5), "dynamique") == 2.0)
+check("dynamique : la médiane de l'univers (+0,86 %) est NOTÉE, pas plafonnée",
+      0 < _p(dict(CTX_TEMOIN, pente_mm21_pct=0.86), "dynamique") < 2)
+check("dynamique absente → retrait motivé, jamais un zéro silencieux",
+      _motif(dict(CTX_TEMOIN, pente_mm21_pct=None), "dynamique") is not None)
+# le cas fondateur, rejoué de bout en bout : Kioxia au 17/08/2026
+_kiox = calcule_note({"mom_ratio": 3.17, "mom_pct": 2115.0, "mom_vol_pct": 98.0,
+                      "drawdown_52w_pct": -43.1, "z": -0.47, "reg_seances": 420,
+                      "pente_mm21_pct": -8.26})
+check("Kioxia en plein krach ne peut plus saturer le bloc (2,9/15, était 15/15)",
+      _kiox["blocs"]["m"]["pts"] == 2.9, str(_kiox["blocs"]["m"]["pts"]))
+
+# ── Calibration mesurée sur l'univers publié (audits du 07/08 et 17/08) ─────
+print("\n— Les rampes notent-elles vraiment, ou distribuent-elles ? —")
+# Un critère dont la rampe est plus étroite que la dispersion de l'univers
+# cesse de classer et devient un interrupteur ; les seuils sont ceux de la
+# population. (Les bornes momentum v4.1 sont testées plus haut, critère par
+# critère — l'écart MM21/MM200 a quitté la note le 17/08.)
 # BPA publié 7,79 ; PER 28,7 sur un cours de 300 ⇒ BPA estimé 10,45, soit
 # +34 % — exactement la médiane des attentes relevée sur l'univers publié.
 _att = _p(dict(CTX_TEMOIN, pe_prev=[{"exercice": 2026, "per": 28.7}], prix=300.0),
           "attendu")
 check("attendu : la médiane des attentes (+34 %) est NOTÉE, pas plafonnée",
       0 < _att < 7, str(_att))
-check("le momentum reste sur 15 après le retrait du RSI",
+check("le momentum reste sur 15 après sa recomposition du 17/08",
       calcule_note(CTX_TEMOIN)["blocs"]["m"]["max"] == 15)
 # Les trois autres rampes dont la borne haute finissait SOUS la médiane de
 # l'univers publié : un critère qui donne son maximum au titre médian ne classe

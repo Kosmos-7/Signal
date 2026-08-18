@@ -5,6 +5,83 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Le momentum notait une altitude : Kioxia à 15/15 en plein krach
+
+Question du propriétaire (17/08) : « le momentum de Kioxia n'est-il pas biaisé
+par son historique de cours très limité ? Pourquoi 15/15 ? » Vérification
+faite : biaisé, et pire que la question. Le titre affichait un momentum
+**parfait** six semaines après un krach de −43 %, pente MM21 à −8,3 %, avec
+l'alerte « affaiblissement post-rally » publiée sur la même fiche.
+
+**La cause n'était pas la fenêtre courte, c'était la référence.** Les deux
+critères du bloc — écart MM21/MM200 en rampe, cloche z — mesuraient une
+altitude contre des références qui SUIVENT le cours. La droite de régression,
+refittée chaque jour sur vingt mois de rampe post-IPO, portait une pente de
++279 %/an : entre juin et août elle est passée de 37 900 à 74 800 ¥ pendant
+que le cours chutait de 108 600 à 61 840. Le z restait « sain » parce que la
+référence courait après le titre. Mesuré sur les 140 fiches : 55 % des
+fenêtres ≤ 3 ans étaient à 15/15, contre 4 % des autres ; et la corrélation
+du bloc avec la seule mesure de vitesse du pipeline (la pente MM21, calculée,
+publiée, jamais notée) était **négative** (−0,15). Un bloc nommé « momentum »
+notait l'inverse du mouvement. Le site, lui, affichait déjà « droite de
+régression non utilisable en l'état » sous 5 ans de fenêtre — à côté d'un
+8/8 assis sur cette même droite.
+
+**Le bloc est recomposé en quatre critères, chaque référence OBSERVÉE.**
+Rendement des douze derniers mois, dernier mois écarté, divisé par la
+volatilité hebdomadaire annualisée, noté en CLOCHE (6 pts — plein de 0,3 à
+2,0 par unité de risque, nul sous −1,5 et au-delà de 3,5) : la construction
+académique du momentum (Jegadeesh & Titman 1993, Carhart 1997, ajustement au
+risque façon MSCI), avec deux écarts délibérés et documentés dans le code —
+le numérateur min(P, P₋₁ₘ)/P₋₁₃ₘ, parce qu'un krach du dernier mois doit
+compter immédiatement là où le « saut » académique l'aurait caché un mois ;
+et la cloche plutôt que la rampe, parce qu'au-delà de +2 par unité de risque
+on ne mesure plus une tendance mais un événement — la doctrine anti-chase
+change de référence, pas de camp. Distance au plus haut 52 semaines (4 pts,
+George & Hwang 2004), le seul critère ASSUMÉ asymétrique de la note : une
+ancre observée ne se déplace pas quand le titre monte. Cloche z inchangée
+(3 pts) mais bridée aux fenêtres ≥ 1260 séances NON arrondies — la note
+s'aligne enfin sur le bandeau de sa propre fiche. Vélocité MM21 sur cinq
+séances (2 pts), champ dédié et nullable — jamais le slope_mm21_pct de
+detect_cross, qui vaut 0.0 par défaut : un zéro silencieux. Le RSI (07/08)
+et l'écart MM21/MM200 (17/08) restent affichés, hors note. Les titres à
+historique partiel perdent le bloc ENTIER, doctrine du 15/08 conservée.
+
+**Ce que la calibration a mesuré** (17/08, 140 fiches, zone hebdomadaire
+W-FRI des charts — même estimateur que la production ; à re-vérifier sur
+cours quotidiens : `tools/calibration_momentum.py --source yfinance`, le
+réseau de la session de refonte ne portait pas Yahoo) : moyenne du bloc
+9,9/15 contre 10,2 avant — les seuils de raison_sortie (« quasi-nul » < 4,
+« dégradé » < 7) gardent leur sens et ne bougent pas. Dispersion/max 0,203
+contre 0,219 : plus faible, et c'est assumé — le RSI avait été exécuté pour
+dispersion 0,17 ET contribution négative au classement ; ici les extrêmes
+artificiels disparaissent, le classement reste. Les onze 15/15 s'étalent de
+2,9 à 15 dans un ordre lisible : les tendances intactes restent en haut
+(6645.T garde son 15/15 — plus haut historique, pente +5 %, ratio 0,91 —
+le score parfait redevient possible quand quatre mesures indépendantes le
+disent), les cassées tombent (Kioxia 2,9/15, note ~58 au lieu de 70 ;
+SanDisk, ALAB, ARM autour de 4-9). Premier run : reclassement massif attendu
+et VOULU — les « Momentum dégradé » de la semaine de bascule sont un artefact
+de migration, pas une dégradation de marché.
+
+**Une leçon de méthode, écrite dans note_v4 pour la prochaine fois.** Les
+SIGNAUX viennent de la littérature — jamais d'un backtest sur nos 140
+survivants corrélés, qui ne peut rien prouver (data-snooping : Sullivan,
+Timmermann & White 1999). Les SEUILS viennent de la population, mesurés puis
+FIGÉS (l'idiome du 07/08 : jamais de percentile vivant, la note d'un titre ne
+dépend pas des autres). L'univers ne sert qu'à VÉRIFIER la mécanique. Mis à
+jour ensemble : note_v4.py, screener.py (intrants + breakdown), lexique
+index.html, apprendre.html (l'asymétrie du sommet y est une décision
+documentée), methodology.md (qui décrivait encore le barème v3),
+config.py (vix_multiplier redocumenté : contextuel, jamais appliqué — le
+risque entre dans la note une seule fois, par le σ du critère momentum),
+tests (112, dont le cas Kioxia rejoué de bout en bout), et
+tools/calibration_momentum.py avec sa règle de revisite : re-mesurer à
+chaque changement d'univers > 10 titres ou tous les six mois, ne jamais
+déplacer une borne en silence.
+
+---
+
 ### Les actualités se répétaient : quatre matins, quatre fois l'or
 
 Constat du propriétaire (16/08) : « c'est très redondant d'un jour à l'autre,

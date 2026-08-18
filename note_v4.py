@@ -154,8 +154,15 @@ def calcule_note(ctx):
       debt_eq         dette/CP en % (échelle yfinance ×100)
       banque          bool — banque/assurance : FCF et levier sans objet
       meme_devise     bool — devise comptable == cotation (ADR : False)
-      z / rsi         position vs tendance 10 ans (σ) / RSI
-      ecart_mm_pct    (MM21/MM200 − 1) × 100 — le régime de tendance en continu
+      mom_ratio       rendement 12-1 (numérateur min(P, P−1m)/P−13m) ÷ σ hebdo
+                      annualisé — le scalaire noté par la cloche « momentum »
+      mom_pct / mom_vol_pct   ses deux composantes, pour la phrase (%)
+      drawdown_52w_pct  distance au plus haut 52 semaines (négatif ou 0) —
+                      None sous 252 séances de cotation
+      z               position vs sa droite de régression log (σ)
+      reg_seances     fenêtre EFFECTIVE de cette régression, en séances non
+                      arrondies — la cloche du z exige ≥ 1260 (5 ans)
+      pente_mm21_pct  vélocité de la MM21 sur 5 séances (%)
 
     Retourne {total, blocs:{q,c,v,m:{pts,max,dispo}}, criteres:[...],
     couverture} — criteres porte (id, bloc, pts, max, valeur, phrase) et les
@@ -414,43 +421,125 @@ def calcule_note(ctx):
 
     # ═ MOMENTUM /15 — cours ÷ cours ═
     #
-    # DEUX CRITÈRES, PLUS TROIS. Le RSI en a été retiré le 07/08/2026 après
-    # mesure sur l'univers publié, et pour quatre raisons qui vont dans le même
-    # sens : il donnait le maximum à 82 % des titres (sa cloche 35-65 couvre
-    # jusqu'au huitième décile d'un univers qui va de 35 à 78) ; sa dispersion
-    # rapportée à son maximum était la plus faible de toute la grille (0,17) ;
-    # sa contribution au CLASSEMENT était NÉGATIVE (−0,5 %) ; et un oscillateur
-    # à quatorze jours n'a pas de pouvoir prédictif établi sur l'horizon de ce
-    # portefeuille, qui se juge en mois. Trois points distribués à presque tout
-    # le monde ne notaient rien et diluaient le reste.
+    # QUATRE CRITÈRES DEPUIS LE 17/08/2026. La recomposition part d'un cas
+    # mesuré : Kioxia à 15/15 en plein krach de −43 %, parce que les deux
+    # anciens critères (écart MM21/MM200, cloche z) mesuraient une ALTITUDE
+    # contre des références qui suivent le cours — une droite de régression
+    # refittée sur 20 mois de rampe post-IPO montait plus vite que le titre ne
+    # chutait. Corrélation du bloc avec la seule mesure de vitesse du
+    # pipeline : −0,15. Un bloc nommé « momentum » notait l'inverse.
     #
-    # Il reste AFFICHÉ sur la fiche, avec ses repères 30/70 : c'est une
-    # information de marché légitime. Elle n'entre simplement pas dans un score
-    # qu'on prétend défendable.
-    em = ctx.get("ecart_mm_pct")
-    if em is not None:
-        # Rampe portée de ±5 à ±15 : ±5 % d'écart entre deux moyennes mobiles
-        # est du bruit, pas une tendance. L'ancienne bornait 82 % de l'univers
-        # à l'une de ses deux extrémités et n'en notait que 18 %. À ±15 %, plus
-        # de la moitié des titres est réellement classée, et le seuil garde un
-        # sens : un cours 15 % au-dessus de sa moyenne longue est en tendance
-        # franche, 15 % en dessous aussi, dans l'autre sens.
-        ajoute("m", "tendance", 7, rampe(em, -15, 15, 7), round(em, 1),
-               f"Moyenne 21 jours à {_fr(em)} % de la moyenne 200 jours")
-    else:
-        ajoute("m", "tendance", 7, None, None, None, "tendance non calculable")
+    # LA MÉTHODE DE LA REFONTE, pour la prochaine fois : les SIGNAUX viennent
+    # de la littérature (Jegadeesh & Titman 1993 et Carhart 1997 pour le
+    # rendement 12 mois hors dernier mois ; Jegadeesh 1990 pour la réversion
+    # du dernier mois ; George & Hwang 2004 pour le plus haut 52 semaines ;
+    # MSCI Momentum pour la division par la volatilité ; Barroso &
+    # Santa-Clara 2015 et Daniel & Moskowitz 2016 pour les krachs du momentum
+    # nu) — jamais d'un backtest sur nos 140 survivants corrélés, qui ne peut
+    # rien prouver (data-snooping : Sullivan, Timmermann & White 1999). Les
+    # SEUILS viennent de la population mesurée puis sont FIGÉS ici (l'idiome
+    # des rampes du 07/08) : pas de percentile vivant, la note d'un titre ne
+    # dépend jamais des autres. L'univers ne sert qu'à VÉRIFIER la mécanique.
+    # Calibration du 17/08/2026 : 140 fiches, zone hebdomadaire W-FRI des
+    # charts — à re-vérifier sur cours quotidiens complets via
+    # tools/calibration_momentum.py (le réseau de la session ne portait pas
+    # Yahoo). Moyenne du bloc mesurée : 9,9/15 (10,2 avant), dispersion/max
+    # 0,203 (0,219 avant) — plus faible, et c'est ASSUMÉ : le RSI a été retiré
+    # pour dispersion 0,17 ET contribution négative au classement ; ici la
+    # dispersion cède 0,016 parce que les extrêmes artificiels disparaissent,
+    # pas parce que le critère cesse de classer.
+    #
+    # LE PRINCIPE UNIFICATEUR : chaque référence est OBSERVÉE (un cours d'il y
+    # a treize mois, un plus haut de 52 semaines), jamais AJUSTÉE sur les
+    # données du titre — une référence ajustée court après le cours, c'est le
+    # défaut qui a produit Kioxia. Le canal de régression survit, mais bridé
+    # aux fenêtres qui veulent dire quelque chose.
 
-    z = ctx.get("z")
-    if z is not None:
-        # cloche SYMÉTRIQUE : plein entre −1,5σ et +1σ, nul à ±3σ — l'excès
-        # d'étirement pénalise dans les deux sens, l'asymétrie pro-momentum
-        # mesurée en v3 disparaît. C'est le meilleur critère du bloc (il classe
-        # réellement la moitié de l'univers et pèse 8,6 % du classement) : il
-        # hérite du point libéré par le RSI.
-        ajoute("m", "position", 8, cloche(z, -3, -1.5, 1, 3, 8), round(z, 2),
-               f"À {_fr(z)}σ de sa tendance décennale")
+    # 1. Le rendement réalisé, par unité de risque, EN CLOCHE (6 pts). Le
+    # numérateur min(P, P−1m)/P−13m et le σ sont calculés par le screener
+    # (calcul_momentum_intrants, où les choix sont documentés). La cloche —
+    # plein de 0,3 à 2,0, nul sous −1,5 et au-delà de 3,5 (p5/p35/p85/p97 de
+    # la population) — donne le plein à 47 % de l'univers, comme la cloche z
+    # qu'elle remplace en critère principal. Au-delà de +2 par unité de
+    # risque, on ne mesure plus une tendance mais un événement (rampe
+    # post-IPO, squeeze) : l'excès redescend vers zéro, doctrine anti-chase
+    # inchangée, référence changée.
+    mr = ctx.get("mom_ratio")
+    if mr is not None:
+        mp, mv = ctx.get("mom_pct"), ctx.get("mom_vol_pct")
+        if mp is not None and mv is not None:
+            ph = (f"{'+' if mp >= 0 else ''}{_fr(mp, 0)} % en douze mois "
+                  f"(dernier mois écarté) pour {_fr(mv, 0)} % de volatilité annuelle")
+        else:
+            ph = f"Rendement annuel à {_fr(mr, 2)} par unité de risque"
+        ajoute("m", "momentum", 6, cloche(mr, -1.5, 0.3, 2.0, 3.5, 6),
+               round(mr, 2), ph)
     else:
-        ajoute("m", "position", 8, None, None, None, "régression indisponible")
+        ajoute("m", "momentum", 6, None, None, None,
+               "moins de treize mois de cotation — rendement annuel non mesurable")
+
+    # 2. La distance au plus haut 52 semaines (4 pts) — l'ancre d'altitude
+    # LÉGITIME : observée, elle ne se déplace pas quand le titre monte
+    # (George & Hwang 2004, qui bat le 12-1 dans leur échantillon). Rampe
+    # −40 %/−5 % ≈ p10/p85 de la population. Critère ASSUMÉ asymétrique —
+    # l'anti-chase du bloc vit dans les deux cloches, pas ici. Le screener
+    # passe None sous 252 séances : le « plus haut 52 semaines » d'un titre
+    # coté huit mois est le plus haut de sa courte vie, un post-IPO y serait
+    # toujours « près de son sommet ».
+    dd = ctx.get("drawdown_52w_pct")
+    if dd is not None:
+        ajoute("m", "sommet", 4, rampe(dd, -40, -5, 4), round(dd, 1),
+               "Au plus haut de ses 52 dernières semaines" if dd >= 0 else
+               f"À {_fr(abs(dd))} % sous son plus haut de 52 semaines")
+    else:
+        ajoute("m", "sommet", 4, None, None, None,
+               "moins d'un an de cotation — plus haut 52 semaines non représentatif")
+
+    # 3. La position dans le canal de régression (3 pts) — cloche symétrique
+    # inchangée, mais retenue SEULEMENT si la fenêtre effective atteint 5 ans
+    # (1260 séances, non arrondies : 4 ans et demi ne « passent » pas par
+    # round()). C'est le seuil que la fiche affichait déjà (« droite non
+    # utilisable en l'état, 5 ans minimum ») pendant que la note, elle,
+    # donnait 8/8 dessus — la note s'aligne enfin sur son propre bandeau.
+    z = ctx.get("z")
+    seances = ctx.get("reg_seances")
+    if z is not None and seances is not None and seances >= 1260:
+        ajoute("m", "position", 3, cloche(z, -3, -1.5, 1, 3, 3), round(z, 2),
+               f"À {_fr(z)}σ de sa tendance sur {round(seances / 252)} ans")
+    elif z is not None:
+        if seances is None:
+            _motif_pos = "fenêtre de régression inconnue — canal non retenu"
+        else:
+            _annees = seances / 252
+            _motif_pos = (f"fenêtre de régression de {_fr(_annees)} "
+                          f"an{'s' if _annees >= 2 else ''} — canal non "
+                          "significatif sous 5 ans")
+        ajoute("m", "position", 3, None, None, None, _motif_pos)
+    else:
+        ajoute("m", "position", 3, None, None, None, "régression indisponible")
+
+    # 4. La vélocité de la MM21 sur cinq séances (2 pts) — le détecteur de
+    # retournement RÉCENT, complément exact du rendement 12-1 qui est aveugle
+    # au dernier mois par construction. Poids faible : la fenêtre d'un mois
+    # est la zone de réversion documentée, ce critère confirme ou coupe, il
+    # ne porte pas le bloc. Rampe −3,5 %/+4,5 % = p10/p90 de la population.
+    # L'intrant est un champ dédié et nullable — jamais le slope_mm21_pct de
+    # detect_cross, qui vaut 0.0 par défaut (zéro silencieux, interdit ici).
+    pente = ctx.get("pente_mm21_pct")
+    if pente is not None:
+        ajoute("m", "dynamique", 2, rampe(pente, -3.5, 4.5, 2), round(pente, 2),
+               f"Moyenne 21 jours en {'hausse' if pente >= 0 else 'baisse'} de "
+               f"{_fr(abs(pente))} % sur cinq séances")
+    else:
+        ajoute("m", "dynamique", 2, None, None, None,
+               "vélocité court terme non calculable")
+
+    # Le RSI, retiré le 07/08/2026, reste hors note : cloche 35-65 qui donnait
+    # le maximum à 82 % des titres, dispersion 0,17, contribution NÉGATIVE au
+    # classement. L'écart MM21/MM200 l'a rejoint le 17/08 : son information
+    # (l'altitude de moyen terme) est portée par le rendement 12-1 et le
+    # sommet, avec de meilleures références. Tous deux restent affichés sur
+    # la fiche, comme information de marché.
 
     # ═ Agrégation : renormalisation par bloc, puis sur les blocs notés ═
     #

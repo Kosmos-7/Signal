@@ -17,8 +17,9 @@ Croissance   (25) = dérivées des comptes : TCAM CA (7) + TCAM BPA (7)
                     + régularité (4) + attendu analystes (7, borné ≤ démontré)
 Valorisation (25) = cours ÷ comptes : PER vs sa médiane d'époque (8)
                     + PEG maison (7) + rdt bénéfices (5) + rdt cash (5)
-Momentum     (15) = cours ÷ cours : écart MM21/MM200 (6) + cloche z (6)
-                    + cloche RSI (3)
+Momentum     (15) = cours ÷ cours : rendement 12-1 ÷ volatilité en cloche (6)
+                    + distance au plus haut 52 s (4) + cloche z, fenêtre ≥ 5 ans (3)
+                    + vélocité MM21 5 séances (2) — recomposé le 17/08/2026
 Hors note    cross MM, val_pts (drawdown 52w), Fibonacci, VIX, consensus,
              confiance Finnhub : informationnels (l'IC du timing v3 était
              NÉGATIF, −0,33 — mesuré sur 24 archives hebdomadaires)
@@ -344,6 +345,58 @@ def calcul_regression(close_series, holdout_days=20):
         return round(z_score, 2), round(pente_annuelle, 1), prix_tendance, std_r
     except Exception:
         return 0.0, 0.0, None, None
+
+# ── MOMENTUM RÉALISÉ : rendement 12-1 rapporté à la volatilité ────────────────
+def calcul_momentum_intrants(close_series):
+    """
+    Intrants du critère « momentum » de la note (bloc m, recomposé 17/08/2026) :
+    rendement des douze derniers mois, dernier mois écarté, rapporté à la
+    volatilité annualisée du titre — la construction standard du facteur
+    (Jegadeesh & Titman 1993 ; Carhart 1997 : formation t−12 → t−2 ; ajustement
+    au risque : méthodologie MSCI Momentum, rendement ÷ σ hebdomadaire).
+
+    DEUX ÉCARTS DÉLIBÉRÉS à la lettre académique, pour un usage mono-titre
+    recalculé chaque jour :
+    · le numérateur est min(P, P₁ₘ)/P₁₃ₘ — le saut du dernier mois protège du
+      bruit de la HAUSSE récente (réversion courte, Jegadeesh 1990) mais un
+      krach du dernier mois doit compter immédiatement : sans le min(), le
+      critère note un crash avec un mois de retard (mesuré sur Kioxia 08/2026 :
+      le saut nu cachait exactement le mois du −43 %) ;
+    · le ratio est ensuite noté en CLOCHE par note_v4, pas en rampe : au-delà
+      de ~+2 par unité de risque, on ne mesure plus une tendance mais un
+      événement (rampe post-IPO, squeeze), et l'excès redescend vers 0 —
+      c'est la doctrine anti-chase du bloc, posée sur une référence OBSERVÉE
+      (le cours d'il y a treize mois) qui, elle, ne court pas après le titre.
+
+    σ : écart-type des rendements log hebdomadaires (resample W-FRI) sur les
+    ~2 dernières années, annualisé ×√52 — au moins 40 rendements exigés, sinon
+    retrait. Le plancher 0.10 est une pure garde de division : le minimum
+    mesuré sur l'univers du 17/08/2026 est 0.18 (calibration, cf.
+    tools/calibration_momentum.py).
+
+    Retourne (ratio, rendement_pct, vol_pct) ou (None, None, None) si
+    l'historique est insuffisant (< 274 séances = 13 mois de bourse).
+    """
+    try:
+        close = close_series.dropna()
+        close = close[close > 0]
+        if len(close) < 274:                      # 12 mois notés + 1 sauté
+            return None, None, None
+        prix  = float(close.iloc[-1])
+        p_1m  = float(close.iloc[-22])            # ~21 séances = 1 mois
+        p_13m = float(close.iloc[-274])
+        num   = min(prix, p_1m) / p_13m
+        hebdo = close.iloc[-505:].resample("W-FRI").last().dropna()
+        r_heb = np.log(hebdo).diff().dropna()
+        if len(r_heb) < 40:
+            return None, None, None
+        vol_ann = float(r_heb.std(ddof=1)) * math.sqrt(52)
+        if not np.isfinite(vol_ann) or num <= 0:
+            return None, None, None
+        ratio = math.log(num) / max(vol_ann, 0.10)
+        return round(ratio, 2), round((num - 1) * 100, 1), round(vol_ann * 100, 1)
+    except Exception:
+        return None, None, None
 
 def reg_signal_label(z):
     if   z >  2.0: return "surachat"
@@ -1907,16 +1960,18 @@ UNIVERS = sorted(set(UNIVERS) | set(themes.univers_thematique()))
 # ── HISTORIQUE PARTIEL ADMIS, TITRE PAR TITRE ────────────────────────────────
 # Un titre introduit depuis moins de 200 séances n'a pas de MM200, et la garde
 # technique du scoring l'écartait entièrement. Les titres listés ici sont notés
-# QUAND MÊME : le critère de tendance (7 points sur 100) est retiré, la note se
-# renormalise sur le reste, exactement comme pour une banque sans FCF.
+# QUAND MÊME : le bloc momentum ENTIER (15 points sur 100) est retiré — deux
+# mois de cotation ne mesurent ni un rendement annuel, ni un plus haut 52
+# semaines, ni un canal — et la note se renormalise sur les 85 points
+# restants, exactement comme pour une banque sans FCF.
 #
-# CE QUE ÇA COÛTE, ET IL FAUT LE SAVOIR : la note repose sur moins de mesures,
-# et le momentum d'un titre sans MM200 n'est mesuré que par sa position dans un
-# canal de régression encore court. Une note haute y est moins vérifiée qu'une
-# note haute obtenue sur dix-huit exercices et deux cents séances.
+# CE QUE ÇA COÛTE, ET IL FAUT LE SAVOIR : la note repose sur moins de mesures.
+# Une note haute y est moins vérifiée qu'une note haute obtenue sur dix-huit
+# exercices et deux cents séances.
 #
-# L'ENTRÉE SE PÉRIME TOUTE SEULE : le jour où le titre atteint ses 200 séances,
-# la MM200 se calcule, le critère revient, et cette ligne ne sert plus à rien.
+# L'ENTRÉE SE PÉRIME TOUTE SEULE : les critères du bloc reviennent un à un à
+# mesure que l'historique pousse (vélocité et sommet à 252 séances, rendement
+# 12-1 à 274, canal à 5 ans), et cette ligne ne sert plus à rien.
 # On la retire alors — elle ne fait jamais entrer un titre qui n'y est pas.
 # Plancher de barres pour ces titres. 21 séances pour la MM21, 14 pour le RSI :
 # 25 est le minimum qui laisse ces deux-là calculables. En dessous, on ne sait
@@ -2000,7 +2055,7 @@ def generer_justification(nom, score, details, alertes):
         zone_str = f", {fibo_zone}" if fibo_zone and "Fibo" in fibo_zone else ""
         points.append(f"pullback sain {dd52w:+.1f}% sous le top 52w (zone d'entrée favorable{zone_str})")
     elif val_pts == 0 and dd52w is not None and dd52w >= -3:
-        # Près du top — risque de chase (la note v4 le paie en continu via la cloche z du bloc momentum)
+        # Près du top — risque de chase (la note le paie en continu via la cloche du rendement 12-1 et celle du z)
         points.append(f"⚠ près du top 52w ({dd52w:+.1f}%) — risque de chase")
     elif val_pts == 0 and dd52w is not None and dd52w <= -30:
         # Chute libre
@@ -2192,23 +2247,24 @@ def score_ticker(ticker, vix=None):
         # HISTORIQUE PARTIEL AUTORISÉ, TITRE PAR TITRE (décision du propriétaire,
         # 15/08/2026). Un titre récemment introduit n'a pas ses 200 séances : la
         # MM200 sort NaN et la garde ci-dessous l'écartait entièrement. Or la
-        # note sait déjà faire : note_v4 RETIRE le critère « tendance » quand
-        # `ecart_mm_pct` est absent et renormalise prudemment sur le reste,
-        # exactement comme pour une banque sans FCF. Ce n'était donc pas une
-        # règle éditoriale mais une garde technique, et elle bloquait plus large
-        # que nécessaire.
+        # note sait déjà faire : chaque intrant momentum absent retire son
+        # critère avec motif et renormalise prudemment sur le reste, exactement
+        # comme pour une banque sans FCF. Ce n'était donc pas une règle
+        # éditoriale mais une garde technique, et elle bloquait plus large que
+        # nécessaire.
         #
         # L'OUVERTURE EST NOMMÉE, PAS GÉNÉRALE, et c'est délibéré : lever le
         # plancher pour tous les titres jeunes ferait entrer d'un coup dans
         # l'univers des dizaines d'introductions récentes et changerait toutes
         # les watchlists en silence. Ici chaque titre est inscrit à la main,
-        # avec sa raison, et il perd 7 points de momentum sur 100 : sa note est
-        # renormalisée, donc comparable, mais elle repose sur moins de mesures.
-        # L'entrée se retire d'elle-même quand le titre atteint ses 200 séances.
+        # avec sa raison, et il perd le bloc momentum entier (15 points sur
+        # 100) : sa note est renormalisée, donc comparable, mais elle repose
+        # sur moins de mesures. L'entrée se retire d'elle-même quand
+        # l'historique atteint les planchers des critères (252 à 274 séances).
         _partiel = ticker in HIST_PARTIEL_OK and mm200 != mm200
         if _partiel:
             print(f"  ⚠ {ticker}: {len(close_2y)} barres < 200, MM200 indisponible "
-                  f"— critère de tendance retiré, note renormalisée")
+                  f"— bloc momentum retiré, note renormalisée")
             mm200 = None
 
         # Garde NaN : le garde d'entrée n'exige que 50 barres alors que la MM200 en
@@ -2225,6 +2281,20 @@ def score_ticker(ticker, vix=None):
 
         # ── Croisement MM21/MM200 (2 ans suffisent) — informationnel depuis v4
         cross_info = detect_cross(close_2y, volume_2y)
+
+        # ── Vélocité MM21 sur 5 séances — champ DÉDIÉ et nullable pour la note.
+        # detect_cross calcule la même grandeur mais son slope_mm21_pct vaut
+        # 0.0 par défaut (jamais None) : un zéro silencieux, acceptable pour un
+        # warning d'affichage, interdit dans la note (« un trou de donnée n'est
+        # jamais compté zéro »). On recalcule donc ici avec le contrat None.
+        _mm21_s = close_2y.rolling(21).mean().dropna()
+        pente_mm21 = (float((_mm21_s.iloc[-1] - _mm21_s.iloc[-6])
+                            / _mm21_s.iloc[-6] * 100)
+                      if len(_mm21_s) >= 6 and float(_mm21_s.iloc[-6]) > 0
+                      else None)
+
+        # ── Momentum réalisé 12-1 ajusté du risque (critère « momentum »)
+        mom_ratio, mom_pct, mom_vol_pct = calcul_momentum_intrants(close)
 
         info = data.info
 
@@ -2661,6 +2731,12 @@ def score_ticker(ticker, vix=None):
             # avant, on republiait la fenêtre doctrine même quand le z venait d'un fallback
             "regression_window_years":  round(len(close_reg) / 252),
             "regression_window_reason": reg_window_reason,
+            # Intrants du critère « momentum » (bloc m v4.1) — publiés pour
+            # qu'un audit recalcule la note sans relancer le screener.
+            "mom_12_1_pct":      mom_pct,       # rendement 12-1, min(P, P-1m)/P-13m
+            "mom_vol_ann_pct":   mom_vol_pct,   # σ hebdo annualisé, ~2 ans
+            "mom_ratio":         mom_ratio,     # le scalaire noté (cloche)
+            "pente_mm21_5j_pct": round(pente_mm21, 2) if pente_mm21 is not None else None,
             # Cours et devise natifs — nécessaires aux vues thématiques, qui
             # affichent des titres hors top 30 (donc absents de watchlist.json).
             # GBp est déjà converti en GBP plus haut : la devise publiée ici est
@@ -3005,16 +3081,31 @@ def score_ticker(ticker, vix=None):
             # « FCF absent » s'est éteint dès qu'on est allé chercher le FCF).
             "banque":         (yf_industry in _INDUSTRIES_BILAN),
             "meme_devise":    _meme_devise,
-            # UN CANAL DE RÉGRESSION SUR DEUX MOIS NE MESURE RIEN. Pour un titre
-            # à historique partiel, la position y est donc retirée elle aussi :
-            # le bloc momentum devient entièrement non notable et la note se
-            # renormalise sur les 85 points restants. La valeur reste publiée
-            # dans le breakdown, comme information, mais elle ne note plus.
-            "z":              None if _partiel else _n(regression_z),
-            "rsi":            _n(rsi),
-            # mm200 à None (historique partiel) rend le critère NON NOTABLE :
-            # note_v4 le retire et renormalise, il ne vaut surtout pas zéro.
-            "ecart_mm_pct":   (mm21 / mm200 - 1) * 100 if (mm200 and mm200 > 0) else None,
+            # ── Bloc momentum (recomposé 17/08/2026) — quatre intrants, tous
+            # nullables, chacun avec sa propre garde d'historique. UN TITRE À
+            # HISTORIQUE PARTIEL (HIST_PARTIEL_OK) N'EN NOTE AUCUN : deux mois
+            # de cotation ne mesurent ni un rendement annuel, ni un plus haut
+            # 52 semaines, ni un canal — le bloc entier reste non notable et la
+            # note se renormalise sur les 85 points restants (décision du
+            # 15/08, conservée). Les valeurs restent publiées dans le
+            # breakdown, comme information.
+            # `rsi` et `ecart_mm_pct` ont quitté le ctx avec la recomposition :
+            # plus aucun critère ne les lit (le RSI depuis le 07/08, l'écart
+            # MM depuis le 17/08 — tous deux restent affichés sur la fiche).
+            "z":               None if _partiel else _n(regression_z),
+            # Fenêtre EFFECTIVE de la régression en séances, non arrondie :
+            # la garde « ≥ 5 ans » de note_v4 se joue sur 1260 séances, pas
+            # sur un round() qui ferait passer 4 ans et demi pour 5.
+            "reg_seances":     None if _partiel else len(close_reg),
+            "mom_ratio":       None if _partiel else _n(mom_ratio),
+            "mom_pct":         None if _partiel else _n(mom_pct),
+            "mom_vol_pct":     None if _partiel else _n(mom_vol_pct),
+            # Plus haut 52 semaines : représentatif seulement avec 252 séances
+            # — en deçà, c'est le plus haut d'une vie boursière trop courte
+            # (un post-IPO est toujours « près de son sommet »), retiré.
+            "drawdown_52w_pct": (None if (_partiel or len(close) < 252)
+                                 else _n(round(drawdown_52w_pct, 1))),
+            "pente_mm21_pct":  None if _partiel else _n(pente_mm21),
         })
         score = note["total"]
         breakdown["note"] = note
@@ -3105,6 +3196,10 @@ def raison_sortie(prev_stock, current_stock=None):
         return (_blocs.get(b) or {}).get("pts")
     mo = _bloc("m")
     if mo is not None:
+        # Seuils 4 et 7 : calibrés sur une moyenne de bloc ~10. Revérifiés le
+        # 17/08/2026 lors de la recomposition du bloc (moyenne mesurée 9,9,
+        # p5 ≈ 3,8, p20 ≈ 7 — tools/calibration_momentum.py) : ils gardent
+        # exactement le même sens, on ne les bouge pas.
         if mo < 4:
             parts.append(f"Momentum quasi-nul ({mo:.0f}/15) — tendance qui s'essouffle")
         elif mo < 7 and new_score is not None and new_score < prev_score:

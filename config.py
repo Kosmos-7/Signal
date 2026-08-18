@@ -179,9 +179,15 @@ VIX_DAMPENER_ENABLED   = False  # désactivé Phase 3 — VIX reste info context
 
 
 def vix_multiplier(vix: float | None) -> float:
-    """Retourne le multiplier à appliquer aux points momentum du screener.
+    """Valeur PUREMENT CONTEXTUELLE — n'est appliquée à AUCUN score.
 
-    Si VIX_DAMPENER_ENABLED=False ou si vix est None/invalide → 1.0 (no-op).
+    Son point d'application dans score_ticker a été retiré par la refonte v3
+    (cf. note ci-dessus) ; seul portfolio_agent.py la lit encore, comme
+    information de régime passée au prompt. Doctrine depuis le 17/08/2026 :
+    le risque entre dans la note UNE seule fois, par la volatilité du titre au
+    dénominateur du critère momentum (note_v4, bloc m) — rebrancher ce
+    multiplier sur le bloc compterait le risque deux fois. Si vix est
+    None/invalide ou le dampener désactivé → 1.0 (no-op).
     """
     if not VIX_DAMPENER_ENABLED:
         return 1.0

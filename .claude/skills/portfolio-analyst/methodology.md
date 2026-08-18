@@ -17,6 +17,21 @@ Pondération calibrée par l'expérience (le projet Signal applique cette logiqu
 
 > **Note v3 (juin 2026)** — La structure est passée de 3 piliers (Momentum 45 / Fondamentaux 50 / Analystes 5) à 4 composantes (Qualité 45 / Valorisation 30 / Timing 22 / Analystes 3). Les sections détaillées ci-dessous sont alignées sur l'échelle v3 (mise à jour 2026-06-10). La philosophie : qualité + prix pilotent, le timing borne le risque. `val_pts` et le VIX sont informationnels (hors score).
 
+> ⚠️ **LA NOTE EN PRODUCTION EST LA v4 (Qualité 35 / Croissance 25 / Valorisation 25 / Momentum 15), moteur `note_v4.calcule_note`** — les barèmes v3 ci-dessous (cross 10, RSI 2, volume 3…) sont conservés comme grille de LECTURE manuelle des signaux, plus comme barème. Pour noter un titre exactement comme le screener : `from screener import score_ticker`. Hors dépôt, appliquer les formules du bloc ci-dessous.
+
+## Bloc Momentum de la note v4.1 (15 pts — recomposé le 17/08/2026)
+
+Quatre critères, calculés par `screener.score_ticker` et notés par `note_v4.calcule_note`. Principe : **chaque référence est observée** (un cours d'il y a 13 mois, un plus haut 52 semaines), jamais ajustée sur les données du titre — une droite de régression refittée court après le cours (pathologie mesurée : Kioxia 15/15 en plein krach de −43 %, fenêtre 2 ans, pente refittée +279 %/an).
+
+| Critère | Pts | Formule | Garde |
+|---|---|---|---|
+| `momentum` | 6 | `cloche(ln(min(P, P₋₁ₘ)/P₋₁₃ₘ) / max(σ, 0.10) ; −1,5 ; 0,3 ; 2,0 ; 3,5)` — σ = écart-type des rendements log hebdo (W-FRI) sur ~2 ans × √52 | retiré sous 274 séances |
+| `sommet` | 4 | `rampe(drawdown_52w_pct ; −40 ; −5)` | retiré sous 252 séances |
+| `position` | 3 | `cloche(z ; −3 ; −1,5 ; 1 ; 3)` — le z de `calcul_regression`, inchangé | retiré si fenêtre effective < 1260 séances (5 ans) |
+| `dynamique` | 2 | `rampe(pente MM21 sur 5 séances ; −3,5 ; +4,5)` | retiré si incalculable (jamais un 0 silencieux) |
+
+Sources : Jegadeesh & Titman (1993) et Carhart (1997) pour le 12-1 ; Jegadeesh (1990) pour la réversion du dernier mois — d'où le `min()` : le saut du dernier mois protège du bruit de la *hausse* récente, mais un krach récent compte immédiatement ; MSCI Momentum Indexes pour la division par σ ; George & Hwang (2004) pour le plus haut 52 semaines (critère assumé asymétrique — l'anti-chase vit dans les deux cloches) ; Barroso & Santa-Clara (2015), Daniel & Moskowitz (2016) pour les krachs du momentum non ajusté du risque. Bornes figées sur les percentiles de l'univers du 17/08/2026 (`tools/calibration_momentum.py`) ; un critère incalculable est **retiré avec motif** et le bloc se renormalise (NEUTRE 0,55). La section 1.4 ci-dessous (fiabilité du z selon la fenêtre) reste valable — la note l'applique désormais **mécaniquement** via la garde 5 ans.
+
 **Approche neutre — aucune prétention d'alpha.** Méthodes publiques appliquées avec discipline ; mise à l'épreuve par l'observation du portefeuille IA en réel, pas par backtest. Le scoring est un **outil de discipline et d'attention sélective** (filtrage chase de rally, identification Setup B, structuration des décisions), pas un générateur d'alpha.
 
 ### Risque = perte permanente de capital, pas volatilité (Marks / Buffett)
