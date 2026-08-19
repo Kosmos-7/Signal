@@ -1,0 +1,136 @@
+{
+ "id": "2026-08-19",
+ "type": "quotidien",
+ "date": "2026-08-19",
+ "titre": "Hormuz paralyse le trafic, les taux américains inquiètent",
+ "chapeau": "Le détroit d'Ormuz ralentit, le pétrole grimpe encore, et les rendements obligataires américains accélèrent leur course vers le haut. Les marchés digèrent mal.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-08-19.jpg",
+  "v": "48d2298c",
+  "legende": "Solarpunk Cargo Ship in a storm",
+  "credit": "Jacob coffin",
+  "licence": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Solarpunk_Cargo_Ship_in_a_storm.png",
+  "fichier": "Solarpunk Cargo Ship in a storm.png",
+  "requete": "cargo ship containers sea"
+ },
+ "marches": {
+  "ref": "2026-08-18",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7691.759765625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.688184372561568,
+    "ref": "2026-08-18"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8509.3603515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.8186775725029053,
+    "ref": "2026-08-18"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26289.7109375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.3330846929753382,
+    "ref": "2026-08-18"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6468.169921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.9536903517341612,
+    "ref": "2026-08-18"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.705999851226807,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.018000125885009766,
+    "ref": "2026-08-18"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4366.0,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -1.1725249440352163,
+    "ref": "2026-08-18"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Monolithic Power Syste",
+   "valeur": 1333.1800537109375,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -5.84820070018509,
+   "ref": "2026-08-18",
+   "ticker": "MPWR",
+   "nom": "Monolithic Power Syste"
+  }
+ },
+ "marches_texte": "La journée du 18 août a été rouge sur toute la ligne : le Nasdaq a cédé 1,33 %, le S&P 500 0,69 %, et les places européennes ont suivi avec le CAC 40 à -0,82 % et l'Euro Stoxx 50 à -0,95 %. L'or lui-même a reculé de 1,17 %, signe que la séance n'a pas été celle du refuge classique. Le taux du Treasury à dix ans s'établit à 4,706 %, en très légère détente sur la journée, mais sa montée depuis juin reste au cœur des préoccupations.",
+ "sections": [
+  {
+   "titre": "Le détroit d'Ormuz au ralenti",
+   "texte": "Le trafic maritime dans le détroit d'Ormuz continue de ralentir, selon Reuters, en raison d'une incertitude persistante sur la sécurité de ce passage stratégique. La dépêche ne précise pas de chiffres de trafic, mais décrit une situation qui s'installe dans la durée. Le pétrole prolonge sa hausse dans ce contexte, les exportations via le détroit restant sous le signe de l'incertitude. Il n'est pas question pour l'instant d'une fermeture, mais l'hésitation des opérateurs est réelle.",
+   "sources": [
+    1,
+    2
+   ]
+  },
+  {
+   "titre": "Les taux américains montent, et le timing dérange",
+   "texte": "Les rendements de la dette publique américaine sont en forte hausse depuis juin, selon CNBC, qui recense plusieurs facteurs derrière ce mouvement. Les observatoires du marché obligataire estiment que la conjonction de ces variables rend cette poussée particulièrement inconfortable. Le Treasury à dix ans affiche 4,706 % à la clôture du 18 août. L'article de CNBC souligne que le moment choisi par les taux pour grimper n'est pas des plus favorables, sans toutefois préciser davantage les causes.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Hormuz traffic slows as uncertainty over waterway persists - Reuters",
+   "resume": "Hormuz traffic slows as uncertainty over waterway persists  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPYldMdWw5dWFaM0VrQzE2U1ZvSTc2VHhrVmdJNmRDV3h6dUtUTGFmS01FRjdMeHJBaExMNEgzYWxGMlZEQlpQSEwycU5zMXZGckUtT3BHY1cwaTNiT0JhZVBIbnVZTFp5OTRwLUJmbFlpdWJMdlRiZjV5OWtYM3pBOUpXSFphWFlsRVF2YVhoWTBQcnQ0UFF2QXV2enNuRlZJa1ROMUtFaHhwN0M0ZVE?oc=5",
+   "date": "2026-08-19 03:39"
+  },
+  {
+   "titre": "Oil extends climb on prolonged Hormuz export uncertainty - Reuters",
+   "resume": "Oil extends climb on prolonged Hormuz export uncertainty  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOSkdUVWxmeFlpYXd4VjhyeHhvNjBmaVlPbVdFemxvNTJHaExLNWhQbzNXeTN5QkVkWVh4aVU4ODJCWnFGazJnQklMejNuVnpPaHFUN1JEM1lFZ3FZaG96ME00QWdZN1JmYW5fN1lXNmV6dDVZUWxFWlJYc05BaEtzbEpGbXlqSHoxRnB3dTQ2NnZXX0tzRENESXFhRDlGSmxNT01LMWhSWQ?oc=5",
+   "date": "2026-08-19 00:39"
+  },
+  {
+   "titre": "U.S. government debt yields are surging at a bad time. Here's what's behind the move",
+   "resume": "Fixed income market watchers ascribe a run that began in June to a number of variables.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/18/us-government-debt-yields-are-surging-at-a-bad-time-heres-whats-behind-the-move.html",
+   "date": "2026-08-18 17:26"
+  }
+ ],
+ "genere_le": "2026-08-19 06:02 UTC"
+}
