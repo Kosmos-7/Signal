@@ -1,0 +1,150 @@
+{
+ "id": "2026-08-20",
+ "type": "quotidien",
+ "date": "2026-08-20",
+ "titre": "L'or s'envole de 2,83 %, Wall Street retient son souffle",
+ "chapeau": "L'or grimpe nettement pendant que les indices américains et européens font du surplace. Trump brandit des sanctions économiques contre les soutiens de Téhéran.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-20.jpg",
+  "v": "f2983ede",
+  "legende": "London Stock Exchange geograph-3066495-by-Ben-Brooksbank",
+  "credit": "Ben Brooksbank",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:London_Stock_Exchange_geograph-3066495-by-Ben-Brooksbank.jpg",
+  "fichier": "London Stock Exchange geograph-3066495-by-Ben-Brooksbank.jpg",
+  "requete": "London Stock Exchange Paternoster Square"
+ },
+ "marches": {
+  "ref": "2026-08-19",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7707.97998046875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.21087781389428267,
+    "ref": "2026-08-19"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8501.91015625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.08755294175703801,
+    "ref": "2026-08-19"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26331.08984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.15739582054885423,
+    "ref": "2026-08-19"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6444.4599609375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.36656366829996534,
+    "ref": "2026-08-19"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.6529998779296875,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.05299997329711914,
+    "ref": "2026-08-19"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4489.39990234375,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.8263834709974804,
+    "ref": "2026-08-19"
+   }
+  ],
+  "mouvement": {
+   "libelle": "NetApp, Inc.",
+   "valeur": 194.47999572753906,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -4.997318475313761,
+   "ref": "2026-08-19",
+   "ticker": "NTAP",
+   "nom": "NetApp, Inc."
+  }
+ },
+ "marches_texte": "La séance du 19 août ressemble à un tableau pointilliste : beaucoup de micro-mouvements, un seul grand trait. Ce grand trait, c'est l'or, qui bondit de +2,83 % à 4 489,40 $, pendant que le S&P 500 (+0,21 %) et le Nasdaq (+0,16 %) se contentent de faire de la figuration. En Europe, le CAC 40 cède 0,09 % et l'Euro Stoxx 50 recule de 0,37 %, sans drama particulier. Côté taux, le Treasury 10 ans reflue légèrement à 4,653 %, ce qui ne bouleverse pas non plus le paysage.",
+ "sections": [
+  {
+   "titre": "Trump sort le carnet de sanctions",
+   "texte": "Donald Trump a averti mercredi que tout pays soutenant l'Iran s'exposerait à des conséquences économiques, selon Reuters. La menace vise à resserrer l'étau diplomatique autour de Téhéran dans un contexte de tensions persistantes. Parallèlement, les prix du pétrole sont restés stables pendant que les investisseurs évaluaient les perspectives du conflit américano-iranien, toujours selon Reuters. L'attentisme domine : ni euphorie, ni panique, juste une vigilance appliquée.",
+   "sources": [
+    0,
+    1
+   ]
+  },
+  {
+   "titre": "Gaza : 206 millions de dollars pour une force de sécurité, sans accord de paix en vue",
+   "texte": "Les États-Unis ont annoncé un financement de 206 millions de dollars destiné à une force de sécurité pour Gaza, alors que le plan de paix reste dans l'impasse, rapporte Reuters. La décision illustre la difficulté de dissocier le volet humanitaire et sécuritaire des négociations politiques, qui n'avancent pas.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Broadcom dans le viseur après que Marvell s'invite chez Google",
+   "texte": "Du côté des valeurs technologiques, la situation de Broadcom est scrutée de près après que Marvell a renforcé sa position auprès de Google, un client clé commun aux deux entreprises, selon CNBC. La concurrence sur ce segment attire l'attention des analystes, qui réexaminent le dossier Broadcom à la lumière de cette évolution.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Trump warns of economic consequences for any country that supports Iran - Reuters",
+   "resume": "Trump warns of economic consequences for any country that supports Iran  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQc0t6ejR6ZDNSMllnR0lXWC1vV3ZyTXoxUDEyeHRXczFpRWtRbzEyWmdkRVRqWi1oZzJEaEF6UnAxcHItbXZ6Z1hKTzBQV2hPOUVFQml3Wk80T1F2UmFRSzIwakhFR2hKbmp3MFJ6LUFDX1BHV3BKeDZxYXdaT2wwWi1kaU5LbkFaX19IekRKSGNUT0VBc1FQeWVRdUxLd0U3V1I5WjZoMmtIcXZUQnRBczZKcTFZa19zUVE?oc=5",
+   "date": "2026-08-20 02:29"
+  },
+  {
+   "titre": "Oil prices steady as investors assess US-Iran war outlook - Reuters",
+   "resume": "Oil prices steady as investors assess US-Iran war outlook  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOM1ZTcG5JRHQxeFFrOEd6Q0s4eWdFZGZwRmUyaFlPQkEwWEFLZ2xtLUJxMDFGRzZEZ1VEMjA5MjlMazgtZkJRM01FRXJ3Yk5wZUJSRW8yUEc5THM4VEZBd3V0LVhiRHBBWExnTElPMTRCX3d1ODhKR2lDdHVDVktTZS1BTUtuLXN2ZGRwUmpnNzhEdDJBZnp3cHExVndUYWlrenVEOXI0dVppdw?oc=5",
+   "date": "2026-08-20 01:11"
+  },
+  {
+   "titre": "US provides $206 million for Gaza force despite deadlocked peace plan - Reuters",
+   "resume": "US provides $206 million for Gaza force despite deadlocked peace plan  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSDlEb1ZYVnh6OFBkdGh1aW9EQi1CUnQyMTl3dFpBenBWRXJlR0NLLVdQeU9jOHQ4amlnQVpmNk5GVDBLVXhaZXFHUXVrNVhldlEwSWZPNGlDS0JEeHZULXpkbFJNVFBZX284a3hPNHJQT3Zzdnd1WnNGX3lFRVRYYy1jYk5TMzlWcWM0M3pzbTNqTUdORUNlTWJTTjdnZDVfLWxmaUlxVzh0cjZPQ1V4eGQzMA?oc=5",
+   "date": "2026-08-19 21:50"
+  },
+  {
+   "titre": "Where we stand on Broadcom after Marvell muscles in on its key customer Google",
+   "resume": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/19/where-we-stand-on-broadcom-as-shares-dip-on-googles-deal-with-marvell.html",
+   "date": "2026-08-19 18:58"
+  }
+ ],
+ "genere_le": "2026-08-20 06:02 UTC"
+}
