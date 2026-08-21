@@ -1,0 +1,158 @@
+{
+ "id": "2026-08-21",
+ "type": "quotidien",
+ "date": "2026-08-21",
+ "titre": "Hyundai monte la cadence en Géorgie, Wall Street glisse",
+ "chapeau": "Le constructeur coréen annonce une hausse de production aux États-Unis. Pendant ce temps, le S&P 500 et le Nasdaq terminent dans le rouge.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-21.jpg",
+  "v": "4d3a1cff",
+  "legende": "Wall-Street-Sign-New-York",
+  "credit": "Acediscovery",
+  "licence": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wall-Street-Sign-New-York.jpg",
+  "fichier": "Wall-Street-Sign-New-York.jpg",
+  "requete": "Wall Street street sign"
+ },
+ "marches": {
+  "ref": "2026-08-20",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7641.16015625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.866891512277727,
+    "ref": "2026-08-20"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8453.08984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.574227574777543,
+    "ref": "2026-08-20"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26067.169921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.0023129442841674,
+    "ref": "2026-08-20"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6422.06005859375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.34758385465228964,
+    "ref": "2026-08-20"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.696000099182129,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.043000221252441406,
+    "ref": "2026-08-20"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4516.2998046875,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.5991870390006147,
+    "ref": "2026-08-20"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Blackstone Inc.",
+   "valeur": 141.35000610351562,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -2.577703720982376,
+   "ref": "2026-08-20",
+   "ticker": "BX",
+   "nom": "Blackstone Inc."
+  }
+ },
+ "marches_texte": "La séance du 20 août s'est terminée en ordre dispersé mais orientée à la baisse : le S&P 500 cède 0,87 % à 7 641,16 points, le Nasdaq lâche 1,00 % à 26 067,17 points, tandis que les indices européens résistent un peu mieux, le CAC 40 perdant 0,57 % et l'Euro Stoxx 50 seulement 0,35 %. Le taux du Treasury 10 ans remonte à 4,696 %, et l'or grappille encore 0,60 % à 4 516,30 dollars. La palme de la pire séance revient à Blackstone, en repli de 2,58 %.",
+ "sections": [
+  {
+   "titre": "Hyundai accélère aux États-Unis",
+   "texte": "Le PDG de Hyundai a annoncé à CNBC une augmentation de la production dans la nouvelle usine de Géorgie, une capacité supplémentaire qui n'avait pas encore été rendue publique. Cette décision s'inscrit dans le plan d'investissement du groupe en Amérique, qui prévoit d'y injecter 26 milliards de dollars d'ici 2028. Le constructeur coréen confirme ainsi sa volonté d'ancrer durablement une partie de sa chaîne de production sur le sol américain.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Les Lakers à 12,5 milliards : le sport-spectacle bat un nouveau record",
+   "texte": "La vente en cours des Los Angeles Lakers pour 12,5 milliards de dollars ferait figure de référence dans le monde du sport professionnel américain. Selon CNBC, cette transaction pousserait la valorisation moyenne d'une franchise NBA à 6,68 milliards de dollars, soit une hausse de 21 %. Les Golden State Warriors conserveraient leur place de franchise la plus valorisée du championnat. Le théâtre des marchés n'est décidément pas le seul endroit où les chiffres donnent le vertige.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Tensions géopolitiques : pétrole et sanctions en toile de fond",
+   "texte": "Le brut s'oriente vers une deuxième semaine consécutive de hausse, la situation autour du détroit d'Ormuz continuant de peser sur l'offre disponible selon Reuters. Les États-Unis ont par ailleurs annoncé leur intention d'imposer ce qu'ils qualifient de « sanctions les plus sévères de l'histoire » contre l'Iran. Parallèlement, des médiateurs dans le dossier de Gaza ont indiqué que de récentes frappes israéliennes compromettent les efforts en vue d'un accord, à un moment qu'ils décrivent comme critique.",
+   "sources": [
+    0,
+    1,
+    2
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Oil set for second weekly rise as unsettled US-Iran war crimps supply - Reuters",
+   "resume": "Oil set for second weekly rise as unsettled US-Iran war crimps supply  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPbEh1QVJmcTNtSE1PMURxNmRBT3RIWHhVTmtwZDRiMk5yUzJtc2xuNHFlQXF1a3VJS3FQckxIY3Y2VjhFejlkNDZnLTY0R0prazZHb194Y19sRDdjUVJtNHlMT0lwSHRRcU5UM2VBTFZpVHBDZEl1OGFWbUkxX1pacWhMYUtFQ0pRbGVRYVNYcy1zSUNZVWtxNW4zczc0YVhZVkFWUHJwRWlFQl8zQUR3dFNIU1o?oc=5",
+   "date": "2026-08-21 01:50"
+  },
+  {
+   "titre": "US says it will impose 'toughest sanctions in history' on Iran - Reuters",
+   "resume": "US says it will impose 'toughest sanctions in history' on Iran  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNN2ZEV0ttbXhQZHVsUVNRYTBoVkczUHp5MVN5ME9vWGo4ajVmWmhMUXBwdkVVaXo3MjZlSEpyTC0wWWtvaGdYZkttakoyazRFMXBCM1ZUVmZ4TldhaUF2WU1QdTgtR3NwaFlMa016ZGJ6UjBaTmZGZjVTN011RXFNWktVcm44QUxMbHE4WVNyOWpNUkJwNzVKLW0wUTdQSUZCdGNrT1NkWXZPMzVJ?oc=5",
+   "date": "2026-08-20 23:59"
+  },
+  {
+   "titre": "Gaza mediators say latest Israeli strikes undermine efforts to end conflict at critical stage - Reuters",
+   "resume": "Gaza mediators say latest Israeli strikes undermine efforts to end conflict at critical stage  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPUGViZ2w0cXVmUjBqbEFKeEFsdUY1YWNiWlBobmpkejVKWng5N3lINFFZOGdNQ2JzaV90bXBFQVpLaWVDRXZOMmQtOXA0d09XNEZmdExMbFFPZGNsaTc3QUVKQktwOU5DNnliZ0dDdVFNaGdsUVNyOWdHRkh1VFBjQkNfUklTZTRZMzhDb05xaHZUNGdURlZxSUJBZ3RCVHZtbThfaFRObk1SM0VYX3ZZS09jelpvOGMzSVktZDNocEpKOVU?oc=5",
+   "date": "2026-08-20 23:53"
+  },
+  {
+   "titre": "The Los Angeles Lakers sold for $12.5 billion. Here’s what every NBA team is now worth",
+   "resume": "The pending $12.5 billion Lakers sale would lift CNBC’s average NBA team valuation 21% to $6.68 billion, with the Warriors still No. 1.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/20/heres-how-the-los-angeles-lakers-12point5b-sale-impacts-the-value-of-all-30-nba-teams.html",
+   "date": "2026-08-20 20:28"
+  },
+  {
+   "titre": "Hyundai to increase U.S. production at new Georgia plant, CEO tells CNBC",
+   "resume": "The previously undisclosed capacity increase is part of Hyundai's plan to invest $26 billion in the U.S. through 2028.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/20/hyundai-georgia-metaplant-us-production.html",
+   "date": "2026-08-20 19:59"
+  }
+ ],
+ "genere_le": "2026-08-21 06:03 UTC"
+}
