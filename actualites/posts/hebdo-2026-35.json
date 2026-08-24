@@ -1,0 +1,67 @@
+{
+ "id": "hebdo-2026-35",
+ "type": "hebdo",
+ "date": "2026-08-24",
+ "titre": "L'analyse du portefeuille · Sem. 35 · 2026",
+ "chapeau": "En ce lundi 24 août, les marchés digèrent une semaine agitée : l'échec des négociations commerciales USA-Canada a débouché sur des tarifs douaniers de 50% sur certaines exportations canadiennes, actés vendredi. Ce n'est pas un détail : c'est une escalade concrète du protection…",
+ "sujet": null,
+ "photo": null,
+ "conviction": "haussier",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "En ce lundi 24 août, les marchés digèrent une semaine agitée : l'échec des négociations commerciales USA-Canada a débouché sur des tarifs douaniers de 50% sur certaines exportations canadiennes, actés vendredi. Ce n'est pas un détail : c'est une escalade concrète du protectionnisme nord-américain, dans un contexte où les taux longs américains restent stubbornement élevés et où le dollar s'affaiblit, renvoyant l'or vers ses plus hauts de trois mois. Bitcoin passe les 75 000 dollars en Asie. Le message collectif de ces signaux est celui d'un marché qui cherche des refuges alternatifs face à l'incertitude institutionnelle américaine.\n\nPour Signal, la semaine s'est soldée sur un MSCI World en repli de -1.8%, tandis que le portefeuille reste à +33.99% net depuis la création, avec un écart au benchmark de +20.37 points de pourcentage. Le VIX à 15.87 indique un régime de calme relatif malgré les bruits géopolitiques, ce qui permet d'opérer sans contrainte de panique (R03 non déclenchée). Les liquidités avant décisions s'établissent à 9085 euros.\n\nDeux décisions actionnables cette semaine : un renforcement NVDA sur pullback -8.8% avec val=5/5 en zone Fibo 23.6%, c'est le setup d'entrée documenté dans la méthodologie. Un renforcement marginal AVGO à titre de soutien, mais volontairement limité à 500 euros car val=1/5 seulement (retracement Fibo 50% en zone profonde) : je refuse de moyenner à la baisse par biais d'engagement sans catalyseur fondamental, donc la taille est réduite en conséquence. Le cluster Infrastructure IA représente 33% du capital, le cluster Tech global 45% : j'assume ce positionnement concentré, mais je reste sous le seuil de friction réglementaire à 65%.\n\nUn point méthodologique à retenir cette semaine : plusieurs positions présentent des Death Cross actifs et longs (META 191j, ADBE 999j en watchlist). La règle R7 rappelle que ces signaux ne sont pas exploitables seuls quand la dynamique est ambiguë. Pour META notamment, la pente MM21 est négative (-3.3%) : ce n'est pas un rebond mean-reversion classique (Setup B), c'est une tendance baissière en cours. Conservation sans renforcement, surveillance du retour au-dessus de MM200 comme signal de confirmation.\n\nSemaine à venir : le discours de Jerome Powell à Jackson Hole et les données d'inflation américaine seront les deux catalyseurs à surveiller. Un CPI en surprise haussière ou un ton restrictif de la Fed rebattrait les cartes sur les valorisations tech. Positions à surveiller prioritairement : BKNG (Golden Cross 12j, surcote modérée +0.8σ, la fenêtre signal se referme), et INTU en watchlist avec son signal_dynamics_warning de rebond mean-reversion sur Death Cross stale de 204j, Setup B potentiel mais les liquidités post-renforcement seront contraintes.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Cette semaine, deux renforcements dans le portefeuille. NVDA d'abord : le titre est revenu sur un pullback de -8.8% en zone Fibo 23.6%, ce qui constitue exactement le type d'entrée que la méthodologie valide (val=5/5). La thèse infrastructure IA reste intacte à 234 jours de détention. Deuxième renforcement, beaucoup plus modeste : AVGO, en perte de -11.3% depuis l'achat il y a 116 jours. Je résiste à l'envie de renforcer fortement une position perdante sans catalyseur clair, ce serait du biais d'engagement classique. Les 500 euros engagés sont un signal de confiance minimale dans la thèse, pas une conviction forte. Le macro de la semaine est dominé par la rupture des négociations USA-Canada et les tarifs à 50% qui en découlent, ainsi que par l'or et Bitcoin qui montent en refuges alternatifs face à l'incertitude institutionnelle. Le portefeuille affiche +33.99% net et conserve 20.37 points d'écart sur le MSCI World depuis janvier 2026. Les marchés US sont fermés au moment de ce run et les ordres attendront l'ouverture à 14h30 UTC.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Indian shares extend cautious trade on concerns over Iran sanctions - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPM09QeWVZWGJNRTU2Y2hDN2lmLVhsZDN1OHVDeG1GODlEY2M4cjdMOUM3YkJBbzRYTXJkMHVSSkdpdXE5dllmcy11WVRPU1MxMXVxcnZMZHFzYTFCdXpfYWZJNU51TC1jY0ZyQkltTVhYMTRsYWpYYXBVWWstalVXTktkTlBiblNrSE5iZjRnRXpsNnJQdDVUT2ExVVRKSlgwOWcyU2F1bVJ1dG9IRUdqVzd5Yw?oc=5",
+   "date": "2026-08-24",
+   "resume": "Les marchés indiens reculent prudemment en raison de craintes liées aux sanctions américaines contre l'Iran."
+  },
+  {
+   "titre": "Gold hits over 3-month high ahead of US inflation data, Fed chair speech - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNUkZtQVBPdjlyb21JaVBxeFRicDFEeHVNQ21pZzdGQnlSMUpFYV80MEl3RjJUbF9tYWxmdkZqY2NpaXh5S0NPd1lhbFZxUHZMVVFkTHNyNktCX2hrUU5KN3hjcWRUVTlaQ0hwcmVoMV9VZjBmUkFjMGtTUUY5MXBwRDRFWXBwQnhZTzU1dV81LThOaTNZR1BLVDRGU1JtbDczRjVweFByWkVQbWhhX3VwYTlJZ0VYblU?oc=5",
+   "date": "2026-08-24",
+   "resume": "L'or atteint un plus haut de trois mois avant des données d'inflation américaine et le discours du président de la Fed."
+  },
+  {
+   "titre": "U.S.-Canada trade talks collapse, ushering in wave of new tariffs",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/22/us-canada-trade-talks-collapse-ushering-in-wave-of-new-tariffs.html",
+   "date": "2026-08-22",
+   "resume": "Les négociations commerciales USA-Canada ont échoué, entraînant l'entrée en vigueur de tarifs douaniers américains de 50% sur certains produits canadiens."
+  },
+  {
+   "titre": "EAM Jaishankar to visit Russia amid Trump’s tariff threat",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-22/india-s-foreign-minister-to-visit-russia-amid-us-tariff-threat",
+   "date": "2026-08-22",
+   "resume": "Le ministre indien des Affaires étrangères se rend en Russie alors que Trump menace d'imposer des tarifs secondaires de 100% aux pays achetant de l'énergie russe."
+  },
+  {
+   "titre": "Gold rebounds as bond jitters, debt fears and weaker dollar revive bullion demand",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/21/gold-prices-us-debt-dollar.html",
+   "date": "2026-08-21",
+   "resume": "L'or rebondit porté par les craintes sur la dette américaine, la faiblesse du dollar et la hausse des rendements obligataires."
+  },
+  {
+   "titre": "Bitcoin leaps past $75,000 as crypto rally continues in Asia",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-21/bitcoin-leaps-past-75-000-as-crypto-rally-continues-in-asia",
+   "date": "2026-08-21",
+   "resume": "Bitcoin dépasse 75 000 dollars en Asie dans un contexte d'optimisme autour des plans de gestion de la dette américaine et des discussions crypto de Trump."
+  }
+ ],
+ "genere_le": "2026-08-24"
+}
