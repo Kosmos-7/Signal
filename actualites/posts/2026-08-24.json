@@ -1,0 +1,181 @@
+{
+ "id": "2026-08-24",
+ "type": "quotidien",
+ "date": "2026-08-24",
+ "titre": "Jackson Hole et Nvidia : la semaine commence avec deux cartouches en chambre",
+ "chapeau": "Le discours inaugural de Kevin Warsh à Jackson Hole et les résultats de Nvidia concentrent toute l'attention. L'or continue sa course, les indices finissent dans le vert.",
+ "sujet": "banques-centrales",
+ "photo": {
+  "src": "actualites/photos/2026-08-24.jpg",
+  "v": "7f5649ab",
+  "legende": "The Bank of England on Threadneedle Street - geograph.org.uk - 3898553",
+  "credit": "Steve Daniels",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Bank_of_England_on_Threadneedle_Street_-_geograph.org.uk_-_3898553.jpg",
+  "fichier": "The Bank of England on Threadneedle Street - geograph.org.uk - 3898553.jpg",
+  "requete": "Bank of England Threadneedle Street"
+ },
+ "marches": {
+  "ref": "2026-08-21",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7674.3701171875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.4346193543703738,
+    "ref": "2026-08-21"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8484.4296875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.3707501556152498,
+    "ref": "2026-08-21"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26180.4609375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.4346118737267626,
+    "ref": "2026-08-21"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6462.22021484375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.6253469429370915,
+    "ref": "2026-08-21"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.73799991607666,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.04199981689453125,
+    "ref": "2026-08-21"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4624.10009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.3869162285653247,
+    "ref": "2026-08-21"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Goldman Sachs Group, I",
+   "valeur": 1039.280029296875,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 3.7257364773733155,
+   "ref": "2026-08-21",
+   "ticker": "GS",
+   "nom": "Goldman Sachs Group, I"
+  }
+ },
+ "marches_texte": "La séance du 21 août s'est terminée en légère hausse des deux côtés de l'Atlantique : S&P 500 et Nasdaq ont progressé de 0,43 %, le CAC 40 de 0,37 %, l'Euro Stoxx 50 de 0,63 %. L'or poursuit sa série avec +2,39 % à 4 624,10 $, au plus haut depuis plus de trois mois selon Reuters. Du côté des taux, le Treasury à dix ans remonte à 4,738 %, en hausse de 0,042 point. Goldman Sachs signe la meilleure performance de notre liste avec +3,73 %.",
+ "sections": [
+  {
+   "titre": "Jackson Hole : le vrai patron de la semaine, c'est Warsh",
+   "texte": "Deux événements dominent l'agenda de la semaine : les résultats de Nvidia et le discours de Kevin Warsh à Jackson Hole. Ce sera la première allocution du président de la Fed dans ce symposium très surveillé. Ann Miletti, d'Allspring, juge que Jackson Hole représente un risque plus important pour les investisseurs que les chiffres de Nvidia. La publication des données d'inflation américaines est également attendue dans ce calendrier chargé.",
+   "sources": [
+    4,
+    6,
+    0
+   ]
+  },
+  {
+   "titre": "L'or au plus haut depuis plus de trois mois",
+   "texte": "L'once d'or a atteint son niveau le plus élevé depuis plus de trois mois, selon Reuters, à la veille des données d'inflation américaines et du discours du président de la Fed à Jackson Hole. Le métal jaune affiche +2,39 % sur notre relevé de clôture à 4 624,10 $. Reuters souligne que les investisseurs jonglent simultanément entre guerres économiques, guerres commerciales et conflits réels.",
+   "sources": [
+    0,
+    1
+   ]
+  },
+  {
+   "titre": "United Airlines : le PDG Scott Kirby parle mégafusions et intelligence artificielle",
+   "texte": "Scott Kirby, directeur général d'United Airlines depuis dix ans, s'est confié à CNBC dans un entretien large autour de l'avenir de la compagnie. Il a évoqué ses projets de grandes fusions dans le secteur aérien ainsi que le rôle croissant de l'intelligence artificielle dans les opérations du groupe. Aucun chiffre ni calendrier précis n'a été communiqué dans la dépêche.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Inde : nucléaire local et diplomatie russe",
+   "texte": "Des entreprises indiennes choisissent de se tourner vers des réacteurs nucléaires de conception locale afin d'accélérer les procédures d'approbation et de sécuriser leurs chaînes d'approvisionnement, selon Bloomberg. En parallèle, le ministre des Affaires étrangères indien Subrahmanyam Jaishankar doit se rendre en Russie, une visite qui intervient alors que le président américain Donald Trump a menacé d'imposer des droits de douane secondaires de 100 % aux pays achetant du pétrole, du gaz et de l'uranium russes.",
+   "sources": [
+    8,
+    7
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Gold hits over 3-month high ahead of US inflation data, Fed chair speech - Reuters",
+   "resume": "Gold hits over 3-month high ahead of US inflation data, Fed chair speech  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNUkZtQVBPdjlyb21JaVBxeFRicDFEeHVNQ21pZzdGQnlSMUpFYV80MEl3RjJUbF9tYWxmdkZqY2NpaXh5S0NPd1lhbFZxUHZMVVFkTHNyNktCX2hrUU5KN3hjcWRUVTlaQ0hwcmVoMV9VZjBmUkFjMGtTUUY5MXBwRDRFWXBwQnhZTzU1dV81LThOaTNZR1BLVDRGU1JtbDczRjVweFByWkVQbWhhX3VwYTlJZ0VYblU?oc=5",
+   "date": "2026-08-24 04:39"
+  },
+  {
+   "titre": "Mixing economic wars, trade wars and actual wars - Reuters",
+   "resume": "Mixing economic wars, trade wars and actual wars  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE0zYlNwM05renFqUDNLaGZkdl9sa0cxLXJDTmhLcXYwRG1aYjlLR1c4QjlGbGtqY3pNaXhMR1E4cnJLLU1VcjNfR2h4anE4RTFqVDk2Y3AwWTY5TVZnZnFkRjZVR0tGaGQ0REJpZXljSElWQWFsRnZGY2NUT0t1M1k?oc=5",
+   "date": "2026-08-24 04:34"
+  },
+  {
+   "titre": "Here are the 2 big things we're watching in the stock market this week",
+   "resume": "Nvidia reports earnings, and Fed Chairman Kevin Warsh is set to deliver his first Jackson Hole speech.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/23/here-are-the-2-big-things-were-watching-in-the-stock-market-this-week.html",
+   "date": "2026-08-23 16:56"
+  },
+  {
+   "titre": "After 10 years at United, CEO Scott Kirby is thinking big about the future of his airline from JFK to AI",
+   "resume": "United Airlines CEO Scott Kirby talked to CNBC in a wide-ranging interview about his proposed airline megadeals, AI and the future of the carrier.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/23/united-airlines-ceo-scott-kirby.html",
+   "date": "2026-08-23 12:00"
+  },
+  {
+   "titre": "Allspring’s Miletti sees Jackson Hole as bigger risk than Nvidia",
+   "resume": "Allspring's Ann Miletti warns that Jackson Hole poses a greater risk to investors than Nvidia's earnings.",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-21/allspring-s-miletti-sees-jackson-hole-as-bigger-risk-than-nvidia",
+   "date": "2026-08-22 16:07"
+  },
+  {
+   "titre": "EAM Jaishankar to visit Russia amid Trump’s tariff threat",
+   "resume": "Jaishankar’s Russia trip comes at a time when US President Donald Trump has threatened to impose a secondary 100% tariff on countries that buy oil, gas and uranium from Russia",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-22/india-s-foreign-minister-to-visit-russia-amid-us-tariff-threat",
+   "date": "2026-08-22 11:35"
+  },
+  {
+   "titre": "Nuclear power: Domestic companies to opt for locally-designed reactors to avoid delays",
+   "resume": "Indian companies are adopting locally-designed nuclear reactors to expedite approvals and enhance supply chain efficiency in energy projects.",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-21/top-india-utilities-bank-on-local-reactors-for-nuclear-expansion",
+   "date": "2026-08-22 08:40"
+  }
+ ],
+ "genere_le": "2026-08-24 06:23 UTC"
+}
