@@ -1,0 +1,149 @@
+{
+ "id": "2026-08-25",
+ "type": "quotidien",
+ "date": "2026-08-25",
+ "titre": "Ellison butte sur les antitrust, le pétrole cherche son équilibre",
+ "chapeau": "Le rachat de WBD par Paramount accroche sur un obstacle juridique, le brut se stabilise sous le poids des nouvelles sanctions américaines contre l'Iran.",
+ "sujet": "marches",
+ "photo": null,
+ "marches": {
+  "ref": "2026-08-24",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7652.85986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.2802868975275989,
+    "ref": "2026-08-24"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8453.009765625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.37032450067080597,
+    "ref": "2026-08-24"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 25980.189453125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.7649654635688172,
+    "ref": "2026-08-24"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6447.97998046875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.2203613294126083,
+    "ref": "2026-08-24"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.703999996185303,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.03399991989135742,
+    "ref": "2026-08-24"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4640.7998046875,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.3611450158640453,
+    "ref": "2026-08-24"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Mastercard Incorporate",
+   "valeur": 599.8599853515625,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 3.3119164195848185,
+   "ref": "2026-08-24",
+   "ticker": "MA",
+   "nom": "Mastercard Incorporate"
+  }
+ },
+ "marches_texte": "Les indices terminent la séance du 24 août en léger repli, sans grand drame : le Nasdaq cède -0,76 %, le S&P 500 -0,28 %, le CAC 40 -0,37 %. Le taux du Treasury à dix ans reflue un peu, à 4,704 %, tandis que l'or tient bon à 4 640,80 $. Dans ce tableau plutôt terne, Mastercard se distingue franchement avec +3,31 %, le meilleur mouvement de la liste.",
+ "sections": [
+  {
+   "titre": "Six mois de guerre, et presque la moitié du pétrole mondial vient de zones de conflit",
+   "texte": "Six mois après le début du conflit avec l'Iran, Reuters signale qu'environ la moitié des flux pétroliers mondiaux transitent désormais par des zones de guerre. Dans ce contexte, les cours du brut se stabilisent ce matin, les investisseurs cherchant à mesurer l'impact des dernières sanctions américaines imposées à Téhéran. Le dollar, lui, peine à trouver une direction, pris entre ces mêmes sanctions et les rachats de bons du Trésor américain qui alimentent l'incertitude sur les changes.",
+   "sources": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "titre": "Paramount-WBD : David Ellison face au dernier obstacle, et il est costaud",
+   "texte": "David Ellison, PDG de Paramount, se retrouve à la dernière étape avant de finaliser le rachat de Warner Bros. Discovery, mais un groupe de procureurs généraux d'États américains a lancé un défi antitrust qui bloque l'opération. Selon CNBC, Ellison est en train d'explorer d'autres pistes pour faire aboutir la transaction. Le dossier reste donc ouvert, sans date de résolution visible pour l'instant.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Les Lakers à 12,5 milliards : le sport professionnel repousse ses propres limites",
+   "texte": "Les Los Angeles Lakers viennent d'établir un nouveau record mondial pour la vente d'une franchise sportive professionnelle, à 12,5 milliards de dollars. Josh Harris, propriétaire des 76ers de Philadelphie et des Commanders de Washington, a déclaré à CNBC que l'équipe vaut « chaque centième » de ce montant. Un chiffre qui illustre l'appétit persistant des grands investisseurs pour les actifs sportifs premium.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Six months into Iran war, almost half of global oil flows from war zones - Reuters",
+   "resume": "Six months into Iran war, almost half of global oil flows from war zones  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPV0VHRE5tclJ6Z1NRR0l2S3JOMURfLUFMY2hVMkZOUTNSdWJsS2pXejZFbkFOX3YyVE9GTDdscFlpWUVMY3hBRExLS0dVUk1qWEFuZC0yb09zYW5UYVF2NVc0c2Y0OExPMWdXSHVsMzNLcy1sRmEwTW5ON3gxY0h1MXF2MGRtRExBTllHdnF5NncwTzNGXzh1QUtWMjg2MTBCWWFYZHczYWt1R2pKZzF4NFUzRkN1dw?oc=5",
+   "date": "2026-08-25 05:05"
+  },
+  {
+   "titre": "Oil steadies as investors weigh impact of latest US sanctions on Iran - Reuters",
+   "resume": "Oil steadies as investors weigh impact of latest US sanctions on Iran  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPeWVpMEdoenRuUHdzUlpxOG1xdVdSMTItdmhxNk5MUGc3YmdGLXl0S2EwYkNYVDV6LUJtaE96QkVuUFhqQzdORlVFdmRJTDRFaTVtSlNTZlh6OE9rQ0ZqdzJOWmQzbjVtWHJxZjFZNmo0VVlzRDRnYzJ1UklrQ0lNOHNCZWdZRVgtdXFZVnZGNXdlQVd2TlN0UjFhS2NNYjByTHBnZTY1NVpXNExJeGdObFllQ2lSYjNzRGw3aGh1ZFBuNmFnaUE?oc=5",
+   "date": "2026-08-25 04:22"
+  },
+  {
+   "titre": "Dollar struggles for traction as markets weigh Iran sanctions, Treasury buybacks - Reuters",
+   "resume": "Dollar struggles for traction as markets weigh Iran sanctions, Treasury buybacks  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxORld4THVaUUFJWlFtRmRFeTI5SlliZ2ladnZNa2htLS1yeXBwcGY2UjFSVE5heHlycC11ay1KR0pLRTJKVGk4bUp2cVVwcXZsUE5kR0JCM0hTRGlRZk5WT1pDWnhfd0JKcjFkbUhlNHVRd3lpWkV4bmtDUG9CSGJCWFhuTFFfY04yb2FIOGtNYkxhS1N0SlJVaXhFTVN1ak51Z1lvaDVSaEVsb2J0UEFjM2w4THk1SzdY?oc=5",
+   "date": "2026-08-25 01:31"
+  },
+  {
+   "titre": "Los Angeles Lakers worth 'every bit' of $12.5 billion price tag: 76ers and Commanders owner Josh Harris",
+   "resume": "The Los Angeles Lakers set a new record for a professional team sale price at $12.5 billion, and sports investor Josh Harris said the team is worth \"every bit.\"",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/24/los-angeles-lakers-worth-every-bit-of-12point5-billion-price-tag-76ers-and-commanders-owner-josh-harris.html",
+   "date": "2026-08-24 22:51"
+  },
+  {
+   "titre": "Paramount CEO David Ellison is at the final hurdle before buying WBD. So far, he can't clear it",
+   "resume": "An antitrust challenge by a group of state attorneys general has left Paramount CEO David Ellison hunting for avenues to get his deal for WBD done.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/24/paramount-ceo-david-ellison-wbd-acquisition-final-hurdle.html",
+   "date": "2026-08-24 21:56"
+  }
+ ],
+ "genere_le": "2026-08-25 06:03 UTC"
+}
