@@ -5,7 +5,16 @@
  "titre": "Ellison butte sur les antitrust, le pétrole cherche son équilibre",
  "chapeau": "Le rachat de WBD par Paramount accroche sur un obstacle juridique, le brut se stabilise sous le poids des nouvelles sanctions américaines contre l'Iran.",
  "sujet": "marches",
- "photo": null,
+ "photo": {
+  "src": "actualites/photos/2026-08-25.jpg",
+  "v": "df94e69c",
+  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo…",
+  "credit": "Kondo Atsushi",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
+  "fichier": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in March 2009.jpg",
+  "requete": "stock exchange display board"
+ },
  "marches": {
   "ref": "2026-08-24",
   "lignes": [

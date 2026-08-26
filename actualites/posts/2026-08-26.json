@@ -1,0 +1,178 @@
+{
+ "id": "2026-08-26",
+ "type": "quotidien",
+ "date": "2026-08-26",
+ "titre": "Hormuz se rouvre (peut-être), le pétrole dégringole de 2 dollars",
+ "chapeau": "Des négociations entre l'Iran et Oman pour rouvrir le détroit de Hormuz font chuter les cours du brut. Pendant ce temps, les marchés obligataires reprennent leur souffle.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-08-26.jpg",
+  "v": "a2073460",
+  "legende": "Sailors and Marines look on as the amphibious transport dock ship USS…",
+  "credit": "Official Navy Page from United States of America\n\nMC3 Ian Carver/U.S. Navy",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Sailors_and_Marines_look_on_as_the_amphibious_transport_dock_ship_USS_New_York_(LPD_21)_transits_the_Suez_Canal..jpg",
+  "fichier": "Sailors and Marines look on as the amphibious transport dock ship USS New York (LPD 21) transits the Suez Canal..jpg",
+  "requete": "Suez Canal ship transit"
+ },
+ "marches": {
+  "ref": "2026-08-25",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7677.27978515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.31909537494823126,
+    "ref": "2026-08-25"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8439.2001953125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.16336867808502936,
+    "ref": "2026-08-25"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26151.30078125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.6586223261909973,
+    "ref": "2026-08-25"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6455.6298828125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.1186402930362987,
+    "ref": "2026-08-25"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.638999938964844,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.06500005722045898,
+    "ref": "2026-08-25"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4638.10009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.05817331375775196,
+    "ref": "2026-08-25"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Intuit Inc.",
+   "valeur": 357.4599914550781,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -3.3683016653248403,
+   "ref": "2026-08-25",
+   "ticker": "INTU",
+   "nom": "Intuit Inc."
+  }
+ },
+ "marches_texte": "Wall Street finit la séance du 25 août dans le vert, le Nasdaq en tête à +0,66 %, le S&P 500 à +0,32 %. L'Europe est partagée : l'Euro Stoxx 50 grignote +0,12 % tandis que le CAC 40 cède -0,16 %. Côté taux, le Treasury 10 ans recule à 4,639 %, en baisse de 0,065 point, ce qui coïncide avec les paris massifs sur un rebond obligataire signalés en options. Intuit est le mouvement le plus marqué de notre liste, avec un repli de 3,37 %.",
+ "sections": [
+  {
+   "titre": "Hormuz : l'Iran et Oman discutent, le brut baisse de 2 dollars",
+   "texte": "Des négociations entre l'Iran et Oman pour rouvrir le détroit de Hormuz ont fait chuter les prix du pétrole de 2 dollars lors de la séance du 25 août, selon Reuters. Le détroit, point de passage stratégique pour les exportations d'hydrocarbures, était paralysé depuis les tensions évoquées ces derniers jours. La réaction de Téhéran à l'issue de ces pourparlers reste, selon Reuters, l'élément clé à surveiller. Les sanctions américaines, décrites par la même source comme moins décisives qu'annoncé, n'ont pas suffi à enrayer la baisse des cours.",
+   "sources": [
+    0,
+    2
+   ]
+  },
+  {
+   "titre": "Nucléaire saoudien : Trump saisit le Congrès, mais pose une condition",
+   "texte": "Donald Trump a transmis au Congrès américain un accord nucléaire civil avec l'Arabie saoudite, tout en précisant que Riyad devra reconnaître Israël pour que le texte aboutisse, selon Reuters. L'initiative place le dossier entre les mains des législateurs américains. La condition posée ajoute une inconnue diplomatique à un accord déjà complexe.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Obligations : les options parient sur la fin de la correction",
+   "texte": "Sur le marché des options, des positions massives misent sur un rebond des obligations américaines, rapporte CNBC. L'adage cité par le média : « les actions flottent sur une mer d'obligations. » Le repli du rendement du Treasury 10 ans à 4,639 % en clôture s'inscrit dans ce contexte. Rien ne garantit que ces paris se concrétisent, mais leur ampleur est jugée notable par les observateurs interrogés par CNBC.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "CrowdStrike et Salesforce : les résultats du soir vont trancher",
+   "texte": "CrowdStrike et Salesforce publient leurs résultats mercredi soir, et CNBC souligne que ces deux publications constituent un vrai test pour leurs rallyes récents. Les questions portent sur la solidité des chiffres sous-jacents, au-delà des dynamiques de cours. Les réponses sont attendues après la clôture de Wall Street.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Crypto : la loi de régulation peu probable cette année selon les traders Kalshi",
+   "texte": "Les traders de la plateforme de prédiction Kalshi jugent peu probable que le Clarity Act, le projet de loi américain sur la régulation des cryptomonnaies, devienne loi avant la fin de l'année, selon CNBC. La Maison-Blanche a pourtant poussé le Congrès à adopter ce texte. L'écart entre l'ambition affichée et les anticipations du marché de prédiction est, pour l'heure, manifeste.",
+   "sources": [
+    4
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Bessent's D-Day sanctions are more Anzio, but Iran response is key - Reuters",
+   "resume": "Bessent's D-Day sanctions are more Anzio, but Iran response is key  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQMkhfQWZkQ3NjME44ZDJlVHBscXZyUVJFclJBN0Vha2M2Tk9HNjA3R3IwUDhfZUJRcWVKV2ZFZDQzbWpmalNENWZMZFNOZUZfbHNIbktZVmxaelAxMmhvT083NjM4eHhhblJqSU1HQ1JyU2Q1YW9UdkdSZlUzMFAxTDZaa3BzeUUxMjVzTEdZbFA2X0Q5NmFrTEhGMU5HSXNlTU45Rkdoa09jNVdsbGdiQ3hESGJyQVFRdkdNU0dJei1KT21vN2ZlQw?oc=5",
+   "date": "2026-08-26 03:28"
+  },
+  {
+   "titre": "Trump sends Saudi nuclear deal to Congress but says Riyadh must recognize Israel - Reuters",
+   "resume": "Trump sends Saudi nuclear deal to Congress but says Riyadh must recognize Israel  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOQlo4djdVdDNyZ2pOQWpMS2ZnblpzdUhoSzZRRGxpR29YSW1PUl9JUmNNYzgtSXZtbDh0a0xxekVuNlVYTWVGWS1RdkE2RXdqVGJFdGE0Z2l3V0ZvaE1hWGFjNHo2RXJjOGw1RFhOSkJnTGpuMHJId1BqcTRDRmhERkZWMGh0bDMzaWpHMTVHZ05UN29UbzZMTG5Valh1dkgwbFNRZFZqRmFZU3dVdXlpbkpZVm5vVzhQeEZEWEtaOHEzeTZ1VUE?oc=5",
+   "date": "2026-08-25 23:24"
+  },
+  {
+   "titre": "Oil prices fall $2 on Iran-Oman talks to reopen Strait of Hormuz - Reuters",
+   "resume": "Oil prices fall $2 on Iran-Oman talks to reopen Strait of Hormuz  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNWGpaTWZvaVNwRmNHZEJSYm5oVkZEanpaNEMyLXlEQUZWM0dDSVVycmxLdlJXUXg0MVlCVTN4SUptQ3pqUWg1dlVYV1k3aTgwWlhYMTZHcURfcEZZR1BydDNIVVBQbXhkendYWnRzbWJSbWVndmpyYnljV3ZpVlE3X2dmNmxPMjYyMWJQQ1VCUWs1RmR1UWdIY1ZGTXRiNzlKbmN1WGtBX2Y3TG5LUDBfVW1Ud0ZkVWhMbWc?oc=5",
+   "date": "2026-08-25 23:03"
+  },
+  {
+   "titre": "2 of our software stocks face major tests of whether their rallies are for real",
+   "resume": "Here are the questions we are looking to answer when CrowdStrike and Salesforce report earnings Wednesday evening.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/25/2-of-our-software-stocks-face-major-tests-of-whether-their-rallies-are-for-real.html",
+   "date": "2026-08-25 20:27"
+  },
+  {
+   "titre": "Kalshi traders see low likelihood of major crypto bill becoming law this year",
+   "resume": "The White House has pushed for Congress to pass the Clarity Act, a bill on crypto regulation. Kalshi traders see little chance the bill becomes law this year.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/25/kalshi-traders-see-low-likelihood-of-major-crypto-bill-becoming-law-this-year.html",
+   "date": "2026-08-25 19:52"
+  },
+  {
+   "titre": "Bond rout ending? Massive bets on bond rally dominate options market",
+   "resume": "There's an old Wall Street adage: Stocks float on a sea of bonds. Options traders are betting the tide is going out.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/25/bond-rout-ending-massive-bets-on-bond-rally-dominate-options-market-.html",
+   "date": "2026-08-25 19:42"
+  }
+ ],
+ "genere_le": "2026-08-26 06:05 UTC"
+}
