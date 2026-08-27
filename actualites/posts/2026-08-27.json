@@ -1,0 +1,164 @@
+{
+ "id": "2026-08-27",
+ "type": "quotidien",
+ "date": "2026-08-27",
+ "titre": "Le Canada épargne le homard américain, Salesforce s'envole de 21 %",
+ "chapeau": "Ottawa exclut les fruits de mer américains de ses tarifs de représailles. Côté marchés, Salesforce bondit de 21 % et tire le Nasdaq vers le haut.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-08-27.jpg",
+  "v": "8fdc7a18",
+  "legende": "Big Board of Trade",
+  "credit": "Amaury Laporte",
+  "licence": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Big_Board_of_Trade_(16914319605).jpg",
+  "fichier": "Big Board of Trade (16914319605).jpg",
+  "requete": "stock exchange display board"
+ },
+ "marches": {
+  "ref": "2026-08-27",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7735.31005859375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.7766048929015408,
+    "ref": "2026-08-27"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8319.8701171875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.6841523159633152,
+    "ref": "2026-08-27"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26527.349609375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.519890404586049,
+    "ref": "2026-08-27"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6424.72998046875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.7110508572392733,
+    "ref": "2026-08-27"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.659999847412109,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.004000186920166016,
+    "ref": "2026-08-27"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4664.0,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.4309904287024666,
+    "ref": "2026-08-27"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Salesforce, Inc.",
+   "valeur": 249.1999969482422,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 21.194437732681326,
+   "ref": "2026-08-27",
+   "ticker": "CRM",
+   "nom": "Salesforce, Inc."
+  }
+ },
+ "marches_texte": "Wall Street a terminé dans le vert : le S&P 500 gagne +0,78 % à 7 735,31 points, le Nasdaq fait mieux encore avec +1,52 % à 26 527,35. De l'autre côté de l'Atlantique, l'ambiance est moins festive : le CAC 40 cède -1,68 % à 8 319,87 et l'Euro Stoxx 50 recule de -0,71 % à 6 424,73. L'or continue sa progression à 4 664 $, en hausse de +1,43 %. La star du jour reste Salesforce, qui s'adjuge +21,19 % à 249,20 $.",
+ "sections": [
+  {
+   "titre": "Salesforce, Nvidia, CrowdStrike : le tiercé gagnant de la séance",
+   "texte": "Salesforce est le grand mouvement de la journée, avec un bond de plus de 21 % à 249,20 $, du jamais-vu sur notre liste de suivi. Nvidia et CrowdStrike ont également figuré parmi les belles performances du jour, selon CNBC. Ces trois noms ont offert aux investisseurs une séance de rêve, portant le Nasdaq à +1,52 %. Le CAC 40 et l'Euro Stoxx 50, eux, n'ont pas eu droit au même scénario.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Les family offices parient gros sur les actions",
+   "texte": "Les bureaux de gestion des grandes fortunes familiales affichent un positionnement résolument haussier sur les marchés actions, selon le CNBC Family Office Portfolio Tracker. Le suivi couvre des centaines de family offices pour un total de 1 400 milliards de dollars d'actifs. Un signal d'appétit pour le risque qui n'est pas passé inaperçu.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Ottawa préserve le homard : le Canada exclut les fruits de mer américains de ses tarifs de rétorsion",
+   "texte": "Le Canada a décidé d'exclure les produits de la mer américains de ses tarifs de représailles, selon Reuters. Une exception notable dans le bras de fer commercial entre Ottawa et Washington, qui évite à la filière halieutique américaine une taxe supplémentaire. La décision illustre la complexité des négociations tarifaires entre les deux voisins, où chaque ligne de produit peut faire l'objet d'un traitement particulier.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Guerre en Iran : l'OPEP+ perd la main, la Chine en profite",
+   "texte": "Après six mois de conflit, la guerre impliquant l'Iran a atteint une forme d'impasse coûteuse, selon Reuters. Dans ce contexte, l'OPEP+ voit son influence sur le marché pétrolier s'éroder, tandis que la Chine renforce la sienne, toujours selon Reuters. Ces développements géopolitiques continuent de peser sur les équilibres du marché de l'énergie.",
+   "sources": [
+    3,
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "We went 3 for 3 — what we learned from wins at Nvidia, Salesforce, and CrowdStrike",
+   "resume": "The Investing Club holds its \"Morning Meeting\" every weekday at 10:20 a.m. ET.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/27/we-went-3-for-3-what-we-learned-from-wins-at-nvidia-salesforce-and-crowdstrike.html",
+   "date": "2026-08-27 15:17"
+  },
+  {
+   "titre": "Family offices are making a bullish bet on the stock market, according to CNBC Family Office Portfolio Tracker",
+   "resume": "The data includes the portfolios of hundreds of family offices, representing a total of $1.4 trillion in assets.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/27/family-offices-making-bullish-bet-on-stocks-according-to-cnbc-tracker.html",
+   "date": "2026-08-27 13:40"
+  },
+  {
+   "titre": "After six months, the Iran war has reached its endgame - a costly stalemate - Reuters",
+   "resume": "After six months, the Iran war has reached its endgame - a costly stalemate  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPanlhWGJGcHdKencyMnlRUHBUejVOZlByMTJjWm8wSVVOdWRZV3FBQUlFNFI1WXVqTUdQaEtFeEJkeHl4aTEwaXJmd0MwTFY4VmJOMS02cWJ6ZGZzVEczaGFNelFqdmJoeFNhMGlzNzVzQ3hQOVFtejNvRXZqcVBQek5zY2l2VERfVlk4aHd3WXQ4YTc0MVhIdXF6ZHA4bFVBRlNNWXlKS0ZnbU1JdFo3MWFzMDg?oc=5",
+   "date": "2026-08-27 10:54"
+  },
+  {
+   "titre": "Canada excludes US seafood from retaliatory tariffs - Reuters",
+   "resume": "Canada excludes US seafood from retaliatory tariffs  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQX0p0OFRPcVc3Q084cGZoNWw1ZHJ6NGRZb0JWMFdzUW9VU09rQnM2LTRKbVQtV1hPVDJ6V2s1em9YaElyNjJkellVQm9EUV9CanVIR0Y1SWRDLVBCaVByZVVTcXNGcUw4NmpIOEh2aC1zWkpyTG00MlhYYmNQNlBTYnFULUlWVDEzdEprUEtJVG1lQkloanc?oc=5",
+   "date": "2026-08-27 08:24"
+  },
+  {
+   "titre": "OPEC+ loses oil market sway in Iran war as China gains influence - Reuters",
+   "resume": "OPEC+ loses oil market sway in Iran war as China gains influence  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOdzQ5cjA0LVhLZTN3aEpkcDBvMXNmV3BnTHVtMFBzZnFfN05PSXFjZFAyUTZ3OEtBTnVCRDhIQXkwbGMwUFZSSTBLek9IbmNqTG16bGdlVlVjOHZ1ZER2c3Z5aXJuaV95ZFFObV9XZlYwNHNqdXcxN2FzeVRkSDF1OURPRThrUHhjOThzTEFyY1NBSG10Zlh4VXRTQWhzMXg3TGJINkRyWGhHLTd1NHc?oc=5",
+   "date": "2026-08-27 07:14"
+  }
+ ],
+ "genere_le": "2026-08-27 16:49 UTC"
+}
