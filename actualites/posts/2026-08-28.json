@@ -1,0 +1,164 @@
+{
+ "id": "2026-08-28",
+ "type": "quotidien",
+ "date": "2026-08-28",
+ "titre": "QatarEnergy coupe le gaz à l'Italie, Apple rallonge la facture",
+ "chapeau": "La guerre en Iran prive Edison de livraisons jusqu'en novembre. Pendant ce temps, Apple augmente ses abonnements et Wall Street termine dans le rouge.",
+ "sujet": "energie",
+ "photo": {
+  "src": "actualites/photos/2026-08-28.jpg",
+  "v": "097bbcd4",
+  "legende": "High-voltage power line",
+  "credit": "Tiraspolsky",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:High-voltage_power_line.jpg",
+  "fichier": "High-voltage power line.jpg",
+  "requete": "high voltage transmission lines"
+ },
+ "marches": {
+  "ref": "2026-08-28",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7707.10986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.3088914921605844,
+    "ref": "2026-08-28"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8401.1796875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.977293745782493,
+    "ref": "2026-08-28"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 26402.779296875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.5220921864917293,
+    "ref": "2026-08-28"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6485.669921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.9485214412357887,
+    "ref": "2026-08-28"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.72599983215332,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.053999900817871094,
+    "ref": "2026-08-28"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4526.39990234375,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -1.807065306621376,
+    "ref": "2026-08-28"
+   }
+  ],
+  "mouvement": {
+   "libelle": "PayPal Holdings, Inc.",
+   "valeur": 53.88999938964844,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -12.331221214457596,
+   "ref": "2026-08-28",
+   "ticker": "PYPL",
+   "nom": "PayPal Holdings, Inc."
+  }
+ },
+ "marches_texte": "Wall Street termine en légère baisse : le S&P 500 cède 0,31 % à 7 707 points, le Nasdaq recule de 0,52 % à 26 402 points. L'Europe fait mieux, avec le CAC 40 en hausse de 0,98 % et l'Euro Stoxx 50 à +0,95 %. À noter : PayPal décroche de 12,33 %, le plus fort mouvement de la séance sur notre liste, pendant que l'or, lui, lâche 1,81 % à 4 526 dollars.",
+ "sections": [
+  {
+   "titre": "QatarEnergy suspend ses livraisons de gaz à Edison",
+   "texte": "QatarEnergy a annulé ses livraisons de gaz naturel destinées à l'Italien Edison jusqu'au début du mois de novembre, en raison de la guerre en Iran. La décision illustre concrètement comment le conflit perturbe les chaînes d'approvisionnement énergétiques au-delà du seul détroit d'Hormuz. Par ailleurs, l'Iran a appelé d'autres nations à ne pas rejoindre les nouvelles sanctions américaines, tandis que des médiateurs se concentrent sur la réouverture du détroit.",
+   "sources": [
+    2,
+    5
+   ]
+  },
+  {
+   "titre": "Six mois de guerre en Iran : Washington frappe des banques égyptiennes",
+   "texte": "Alors que le conflit en Iran entre dans son sixième mois, les États-Unis ont sanctionné des succursales de banques égyptiennes accusées de contourner les mesures restrictives visant Téhéran. Ces sanctions illustrent l'extension géographique de la pression financière américaine dans la région.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Apple alourdit la note de ses abonnés",
+   "texte": "Apple a relevé les prix de ses abonnements Apple TV et Apple One aux États-Unis. La hausse fait suite à celle d'Apple Music en juillet dernier, que le groupe avait justifiée par l'augmentation des coûts de licence. Les abonnés américains verront donc leur facture grimper sur plusieurs services à la fois.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "La génération Z préfère le PMU aux marchés",
+   "texte": "Selon une enquête relayée par CNBC, 52 % des investisseurs de la génération Z ont redirigé une partie de leur argent destiné à l'investissement vers les paris sportifs. Un chiffre qui interpelle, même si le théâtre des marchés n'est pas toujours avare en sensations fortes.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Apple hikes subscription prices for Apple TV and Apple One in the U.S.",
+   "resume": "Apple raised prices for Apple Music by $1 per month in July, citing licensing costs.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/28/apple-tv-one-price-hike-us.html",
+   "date": "2026-08-28 16:57"
+  },
+  {
+   "titre": "QatarEnergy cancels gas deliveries to Italy's Edison until early November over Iran war - Reuters",
+   "resume": "QatarEnergy cancels gas deliveries to Italy's Edison until early November over Iran war  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSGdXSEJxeEtGbnA4SWdCRkkyMFM4VFhkS0hHT1F5cGw3TGg1LXZneGR4Z2JBRzNjdldsUlZNMlp5T1I4RDBRLWJoUlptMms4MXVzVmhLOXJndHI3U2E0OTcwTXprQmFRSkRYMzFxRzMzZExybFVWcTBlZGduN18zZmVJcWxnR3QzcU9iclR3b3g5OUdBZ0twWlJnUnZkbGVyN2hvNFVHRWZjYW9jMmtxbUtIVlotOC10UjVfWkln?oc=5",
+   "date": "2026-08-28 16:47"
+  },
+  {
+   "titre": "52% of Gen Z investors have redirected investing money to sports bets",
+   "resume": "Some Gen Z investors are choosing gambling on sports over investing for their future.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/28/sports-betting-gen-z-investors.html",
+   "date": "2026-08-28 16:10"
+  },
+  {
+   "titre": "US hits Egyptian bank branches with Iran sanctions as war marks six months - Reuters",
+   "resume": "US hits Egyptian bank branches with Iran sanctions as war marks six months  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOZnRmTktBaHNUcXJSeXVoMEhUSDg0QlpTRkFGcllGUW5zcW84bE81NjQxTWZ0VjBSNHpxZjBnRkNmVHAyZkFaNkYtYXZ4R1VaRlpIVHF0YVIwZ3BfY1ByZVdKM0RPOXBNMnJzTDkyVnF6b0FnNlRFQ0ozTk02cWY0dHZPYm40TUY2TVlSUklxWUJWVkdZdXNYX21TM05QV1R4dnBxU3pWekdVelEwWXZObHNn?oc=5",
+   "date": "2026-08-28 15:56"
+  },
+  {
+   "titre": "Iran urges other nations not to join new US sanctions, mediators focus on reopening strait - Reuters",
+   "resume": "Iran urges other nations not to join new US sanctions, mediators focus on reopening strait  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxObFhWQ0dIN3p1bUEzcUdpNlN2VFhmaWRhUk5zbkhfWE45U2swM1ViQ0RvRHhxZjJfT2xaUEhnWU9jZ3MzRXl3bXdabG1mM0xpTmdoRzZEQ3dRNDJOVEpTUnJfX3lCV0s4b2RPSzhPbXlZSllrb1l6SjA0NVRVRzNRR0pBYWFwTWdPU0xtOTduNnUyd3hpZjFUUDZUb1NnMkRoanl1Z2V5SjIwYWpubGc?oc=5",
+   "date": "2026-08-28 15:29"
+  }
+ ],
+ "genere_le": "2026-08-28 17:42 UTC"
+}
