@@ -1,0 +1,67 @@
+{
+ "id": "hebdo-2026-36",
+ "type": "hebdo",
+ "date": "2026-08-31",
+ "titre": "L'analyse du portefeuille · Sem. 36 · 2026",
+ "chapeau": "Cette dernière semaine d'août 2026 s'est ouverte sur une déclaration de Kevin Warsh qui mérite d'être lue attentivement : le nouveau président de la Fed a indiqué que l'inflation sous-jacente 'n'a pas significativement progressé vers les 2%', maintenant ouverte la possibilité …",
+ "sujet": null,
+ "photo": null,
+ "conviction": "haussier",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Cette dernière semaine d'août 2026 s'est ouverte sur une déclaration de Kevin Warsh qui mérite d'être lue attentivement : le nouveau président de la Fed a indiqué que l'inflation sous-jacente 'n'a pas significativement progressé vers les 2%', maintenant ouverte la possibilité d'une hausse de taux en septembre. Ce n'est pas encore un engagement, mais le signal est hawkish et tranche avec l'ambiance VIX à 14.1 qui régnait en fin de semaine dernière. Les marchés semblent jouer la carte Warsh avec une sérénité qui laisse perplexe.\n\nPour le portefeuille Signal, la semaine se termine avec une performance nette de +36.03% depuis le lancement, soit +22.82 points d'écart au benchmark MSCI World. Le capital atteint 34 935 euros après 93 euros de friction cumulée (frais et PFU). La semaine a été calme en termes de volatilité (VIX 15.26, régime normal), ce qui facilite les décisions sans pression de panique.\n\nDeux décisions cette semaine. Première : une rotation ETN vers ADBE. ETN est en perte de -7.1% après 123 jours sans catalyseur visible, et ADBE affiche ce lundi un Golden Cross à J+0, z=-1.7sigma sous régression avec val=4/5 (drawdown -20.5% sous le top 52w) : c'est le setup d'entrée le plus propre vu depuis plusieurs semaines. La rotation est fiscalement neutre : ETN en perte ne génère aucun PFU et produit même un crédit d'impôt reportable. Deuxième : un renforcement NVDA sur un pullback val=5/5 en zone Fibo 23.6%, à z=+0.1sigma. Signal propre, mais dimensionné prudemment vu la concentration thème IA-infra déjà à 38% du capital.\n\nLe risque macro à surveiller : si Warsh confirme une hausse en septembre, les multiples élevés des titres tech (NVDA, ADBE, AVGO) subiraient une pression de re-rating. Ce n'est pas encore le scénario central, mais un portefeuille à 51% sur le cluster Tech et IA doit en tenir compte. La diversification reste insuffisante pour résister confortablement à un choc de taux.\n\nSemaine prochaine : la décision de la Fed en septembre approche. Vous surveillerez les données PCE (indicateur de prédilection de la Fed) et les déclarations des autres membres du FOMC pour calibrer si Warsh embarque l'institution avec lui ou s'il reste un faucon solitaire. Et bien sûr, ADBE publie ses résultats trimestriels en septembre : le timing du Golden Cross J+0 est soit excellent soit ironique selon ce que les chiffres révèleront.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Ce lundi 31 août, deux décisions : une rotation et un renforcement.\n\nRotation ETN vers ADBE : Eaton Corporation est en portefeuille depuis 123 jours à -7.1%, sans catalyseur qui aurait dû corriger la trajectoire. Adobe présente ce matin un Golden Cross à J+0 (le signal le plus frais possible selon notre méthodologie), avec un prix compressé à -1.7 écart-type sous sa tendance historique et un drawdown de -20.5% sous son plus haut 52 semaines : c'est le type de setup que l'on attend. La rotation est fiscalement propre : ETN en perte ne génère aucune imposition, et produit même un crédit d'impôt utilisable sur 10 ans.\n\nRenforcement NVDA : le titre est en portefeuille depuis 241 jours avec +53.3% de gain. Le pullback récent de -6.7% sous le top 52 semaines place NVDA dans la zone Fibo 23.6%, niveau de retracement sain sur un trend haussier. Le score reste à 86/100 et le momentum est intact. J'engage environ 1 200 euros, dimensionnement volontairement prudent compte tenu de la concentration déjà élevée sur le thème IA-infrastructure (38% du capital).\n\nPoint macro : les déclarations de Warsh cette semaine maintiennent une hausse de taux possible en septembre. Ce n'est pas encore le scénario de base, mais un portefeuille concentré sur la tech doit en tenir compte. Pas de panique, mais vigilance accrue sur les multiples.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Bank of England's Bailey sees 'subdued' second-round inflation effects for now - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPb2QydWdoanp1clRlWTVBQW9mRFZhcVBPWEJkcHB5M0RjSWRLTXJjcjNHbUU3cFJ4dHpNbFhXcjN0elBrWnVFSHYtZFJ2cEUxQ2FMWm1YRVFQZlJONE9LQ1pHTnRJNXVfcHNqc1ZhakxiVkdvdFhSNWo2ZEFJMXdPZWVhcy0teHNkRVJiNVk2LTdpX2piWFpIZzdhU0xnYk0yWVZqdkh5VV9weUpfS1VxZE9pYw?oc=5",
+   "date": "2026-08-28",
+   "resume": "Le gouverneur de la Banque d'Angleterre, Bailey, estime que les effets de second tour de l'inflation restent contenus pour l'instant."
+  },
+  {
+   "titre": "Stock traders warm up to Warsh as volatility index touches year-to-date low",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/28/stock-traders-warm-up-to-warsh-as-volatility-index-touches-year-to-date-low.html",
+   "date": "2026-08-28",
+   "resume": "Le VIX a touché un plus bas annuel à 14.1, signe que les marchés accueillent favorablement la nomination de Warsh à la Fed."
+  },
+  {
+   "titre": "Fed Chair Kevin Warsh says inflation isn’t slowing, vows to reach 2% target",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-28/warsh-says-inflation-isn-t-slowing-vows-to-hit-to-2-target",
+   "date": "2026-08-28",
+   "resume": "Le président de la Fed Kevin Warsh juge que l'inflation sous-jacente n'a pas suffisamment reculé, rendant une hausse de taux en septembre possible."
+  },
+  {
+   "titre": "Qatar's first-quarter GDP falls 7% as Iran war weighs on energy production - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUDRKOEZ0M3JrM0M1RTFRSHZubzF4SF9UX21fUWNJNjJIc1pSZnVORnIxaHNzdENEbEtiLV85NG9sQVlDdjBaWW00ZlpDUzhzT0RGbHdScUliNnlsUlEzNHpaSHNXTEx4S1pyTm5MRGNERDQ1czI1dzZkOG4xVkVPTUVpb1ZiaEk0b1FIY2c3OURDYUpETjItd19sbHpXMDRubDhiRGNVZFQ3X2hLTFhMbmo2bExSc3NXRmlFSQ?oc=5",
+   "date": "2026-08-31",
+   "resume": "Le PIB du Qatar a chuté de 7% au premier trimestre 2026, sous l'effet de la guerre en Iran qui pèse sur la production énergétique."
+  },
+  {
+   "titre": "Warsh’s inflation warning sets up September showdown for the Fed",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-28/warsh-s-inflation-warning-sets-up-september-showdown-for-the-fed",
+   "date": "2026-08-29",
+   "resume": "L'avertissement de Warsh sur l'inflation prépare un bras de fer au sein de la Fed pour la réunion de septembre, certains membres préférant attendre de nouvelles données."
+  },
+  {
+   "titre": "Bessent attacks Warren over yen intervention query, offers ‘Foreign Exchange for Dummies’ lesson",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/28/bessent-warren-yen-intervention-treasury-japan.html",
+   "date": "2026-08-28",
+   "resume": "Treasury has not disclosed how much yen it bought, the execution rate or the current value of the position, despite Warren’s requests for details."
+  }
+ ],
+ "genere_le": "2026-08-31"
+}
