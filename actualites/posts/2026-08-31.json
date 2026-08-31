@@ -1,0 +1,186 @@
+{
+ "id": "2026-08-31",
+ "type": "quotidien",
+ "date": "2026-08-31",
+ "titre": "L'Iran écarte la menace sur Kharg, le pétrole résiste quand même",
+ "chapeau": "Téhéran balaie les menaces trumpiennes sur son hub pétrolier clé, mais le brut reste sous pression en ce dernier jour d'août.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-08-31.jpg",
+  "v": "3ff289ce",
+  "legende": "Port bow view of the Russian merchant container ship CHITA underway.…",
+  "credit": "Department of Defense. American Forces Information Service. Defense Visual Infor",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Port_bow_view_of_the_Russian_merchant_container_ship_CHITA_underway._The_ship_has_numerous_commercial_vehicles_as_deck_cargo_-_DPLA_-_e120d3e0e4cf053032385cc8b2eca1fe.jpeg",
+  "fichier": "Port bow view of the Russian merchant container ship CHITA underway. The ship has numerous commercial vehicles as deck cargo - DPLA - e120d3e0e4cf053032385cc8b2eca1fe.jpeg",
+  "requete": "cargo ship containers sea"
+ },
+ "marches": {
+  "ref": "2026-08-31",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8413.9697265625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.1522409892211938,
+    "ref": "2026-08-31"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6473.52978515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.18718400512186872,
+    "ref": "2026-08-31"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4510.10009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.7145887609066214,
+    "ref": "2026-08-31"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 88.72000122070312,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.6606162288869678,
+    "ref": "2026-08-31"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.160092830657959,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.47563568768976133,
+    "ref": "2026-08-31"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 78330.6796875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.6429253071361095,
+    "ref": "2026-08-31"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Vestas Wind Systems A/",
+   "valeur": 211.5,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -2.3996294515334875,
+   "ref": "2026-08-31",
+   "ticker": "VWS.CO",
+   "nom": "Vestas Wind Systems A/"
+  }
+ },
+ "marches_texte": "Le dernier jour d'août s'achève en ordre dispersé : le CAC 40 grappille +0,15 % à 8 413,97 points, tandis que l'Euro Stoxx 50 cède -0,19 % à 6 473,53. L'or continue sa course solitaire à 4 510,10 $ (+0,71 %), pendant que le Brent recule à 88,72 $ (-0,66 %) malgré l'agitation géopolitique. Côté cryptos, le bitcoin tient à 78 331 $ (+0,64 %), et Vestas Wind Systems signe la plus mauvaise performance du tableau avec -2,40 %.",
+ "sections": [
+  {
+   "titre": "Kharg dans le viseur, Téhéran hausse les épaules",
+   "texte": "L'Iran a rejeté ce dimanche les publications de Donald Trump évoquant une attaque contre Kharg, le hub énergétique névralgique du pays. Reuters rapporte que Téhéran a balayé ces déclarations sans plus de précision. Le sujet reste grave : Kharg concentre une part majeure des exportations pétrolières iraniennes. Les marchés européens ont terminé en légère baisse et le pétrole a rebondi en séance, selon Reuters, avant de clôturer en territoire négatif.",
+   "sources": [
+    1,
+    2
+   ]
+  },
+  {
+   "titre": "La Grèce commande son parapluie à 3,5 milliards",
+   "texte": "Athènes s'apprête à signer un contrat de 3,5 milliards de dollars avec Israël pour l'acquisition d'un système de défense aérienne, selon Reuters. La Grèce renforce ainsi son arsenal dans un environnement régional tendu. Aucun détail sur le calendrier de livraison ni sur le système exact n'est précisé dans la dépêche.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Washington et la presse : accréditations sous pression au G20",
+   "texte": "Le Trésor américain a refusé des accréditations G20 à des journalistes du New York Times, du Wall Street Journal et de Bloomberg, selon CNBC. Donald Trump en a profité pour critiquer NBC à propos d'un commentaire électoral. L'accès de la presse aux sommets économiques internationaux se retrouve ainsi au centre d'un bras de fer entre l'administration et plusieurs grands médias.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "La semaine qui vient : emplois, Broadcom et Palo Alto Networks",
+   "texte": "La rentrée de septembre s'annonce chargée : Broadcom et Palo Alto Networks publieront leurs résultats, et les chiffres de l'emploi américain seront au menu, rappelle CNBC. Un analyste de la chaîne note par ailleurs que plusieurs indicateurs de marché se rapprochent de seuils jugés déterminants, invitant à une vigilance accrue à l'entame du mois.",
+   "sources": [
+    5,
+    0
+   ]
+  },
+  {
+   "titre": "Népal : au moins 690 morts, des milliers de disparus",
+   "texte": "Les inondations au Népal ont fait au moins 690 morts confirmés, et plus de 3 000 personnes restent portées disparues, selon des chiffres communiqués par le Népal et la Chine à Bloomberg. Les autorités népalaises avertissent que de nouvelles crues menacent de perturber les opérations de secours. La situation demeure critique.",
+   "sources": [
+    7
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Santoli: Why investors should be on high alert heading into September",
+   "resume": "Investors should be on high alert because various key market metrics are coiling near consequential thresholds.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/31/santoli-why-investors-should-be-on-high-alert-heading-into-september.html",
+   "date": "2026-08-31 11:00"
+  },
+  {
+   "titre": "Iran dismisses Trump's post of attack on key energy hub of Kharg - Reuters",
+   "resume": "Iran dismisses Trump's post of attack on key energy hub of Kharg  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxORVQzSG1hcjZUa3F4dlBHbmczSFliQ3d6ZVgtWjl6RzgtYjE4cGtXNjhpRHhmU0pBb1FSQl9iUHN5b0FUZHFMX0JDSFNONERPQ0c0T2Z6ejBFWE9jUldMUU9sVzJKT1Z0R0JaWGFUaHZUdnNtcVEwclRIZ29vZnpqd1JJOHg1Qmx2cHZ0TVMtVEtjWEdNbE1kZDY4cGxUNlRxYkpsVm1UUnZ3RjE2Z3cwRlQ3WVRWU0hO?oc=5",
+   "date": "2026-08-31 10:09"
+  },
+  {
+   "titre": "Europe stocks edge lower as oil jumps; monthly gain in sight - Reuters",
+   "resume": "Europe stocks edge lower as oil jumps; monthly gain in sight  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNZzdFeEJfZ24zM2Yxemdobk42RnA2M1RVTWMwdWZ1NDA1X21PTS04d3BMWVZwTkNUTGRCNWdmS2phTUhJdUVZR29TMWVBU3dqUkhtVFdZRVgtUEM5WldFRlNFcGh4U05tdGYtN21pam5uU1hzd19aSlFGaXRzbXlMWFp2ZmZDMXdQeXc3QVRXdDM4UHg4OVlUODdmLTNCVk5PQzZEaQ?oc=5",
+   "date": "2026-08-31 08:30"
+  },
+  {
+   "titre": "Greece to sign $3.5 billion deal with Israel for air defence system - Reuters",
+   "resume": "Greece to sign $3.5 billion deal with Israel for air defence system  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNQ1dlU0gtRGI4eHloUUNwdUg0T1BtRVBabF9IRHdWbUxQWmstVE54M0Fuc0VSX0x1eXI0b1BoTmhnVWhzOUtRUGdZSjJoZWZiNGUzTmozU2UxcWpTZkVZTVJrOUpvZXl4R1BkckYzdnp3dnpXb3pCRjNCUGFNaFpKM044RHgyUlEybHMwRXNBRXNDem1vNDg1YTZOYW9hZXNVeFBzbmJqczdNT0RKbS1YeEVWckFpSmlYOVFqbVN3?oc=5",
+   "date": "2026-08-31 07:17"
+  },
+  {
+   "titre": "Trump criticizes NBC over election comment as Treasury denies some NYT, WSJ and Bloomberg reporters G20 credentials",
+   "resume": "Trump's attack on NBC comes after the Treasury barred journalists from The New York Times, The Wall Street Journal and Bloomberg from attending the G20.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/30/trump-nbc-election-comment-treasury-g20-reporter-access.html",
+   "date": "2026-08-30 16:55"
+  },
+  {
+   "titre": "Here are the 3 big things we're watching in the stock market in the week ahead",
+   "resume": "Broadcom and Palo Alto Networks report. Plus, it's jobs week.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/30/here-are-the-3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+   "date": "2026-08-30 14:54"
+  },
+  {
+   "titre": "Nepal warns of more floods as rescue efforts risk disruption",
+   "resume": "At least 690 people have been confirmed dead, while over 3,000 are still unaccounted for, according to figures provided by Nepal and China",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-30/nepal-warns-of-more-floods-as-rescue-efforts-risk-disruption",
+   "date": "2026-08-30 04:25"
+  }
+ ],
+ "genere_le": "2026-08-31 11:50 UTC"
+}
