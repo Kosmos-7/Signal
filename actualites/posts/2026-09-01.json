@@ -1,0 +1,164 @@
+{
+ "id": "2026-09-01",
+ "type": "quotidien",
+ "date": "2026-09-01",
+ "titre": "Les taux hypothécaires américains au plus haut depuis juin 2025, portés par le pétrole",
+ "chapeau": "Le conflit avec l'Iran fait grimper le brut, et avec lui les taux immobiliers américains. Les marchés européens terminent dans le rouge.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-09-01.jpg",
+  "v": "2720a363",
+  "legende": "G 531, DL 43 and 50 freight train parked in the Junee Railway Station…",
+  "credit": "Bidgee",
+  "licence": "CC BY-SA 3.0 au",
+  "page": "https://commons.wikimedia.org/wiki/File:G_531,_DL_43_and_50_freight_train_parked_in_the_Junee_Railway_Station_yard_(3).jpg",
+  "fichier": "G 531, DL 43 and 50 freight train parked in the Junee Railway Station yard (3).jpg",
+  "requete": "freight railway container yard"
+ },
+ "marches": {
+  "ref": "2026-09-01",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8302.990234375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.3780642585038095,
+    "ref": "2026-09-01"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6373.02978515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.7340996166251207,
+    "ref": "2026-09-01"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4431.0,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.002258979802847262,
+    "ref": "2026-09-01"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 92.20999908447266,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.9007639090593689,
+    "ref": "2026-09-01"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1598236560821533,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.08002858810437785,
+    "ref": "2026-09-01"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 77984.5390625,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.7181458541061096,
+    "ref": "2026-09-01"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ADYEN",
+   "valeur": 1031.199951171875,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -1.5466939912714017,
+   "ref": "2026-09-01",
+   "ticker": "ADYEN.AS",
+   "nom": "ADYEN"
+  }
+ },
+ "marches_texte": "Les places européennes ont clôturé en repli : le CAC 40 cède 0,38 % à 8 303 points, l'Euro Stoxx 50 recule davantage à -0,73 %. Le Brent est le vrai moteur du jour, en hausse de 1,90 % à 92,21 dollars, tandis que l'or reste stable et le bitcoin efface 0,72 %.",
+ "sections": [
+  {
+   "titre": "Pétrole en hausse, taux immobiliers dans son sillage",
+   "texte": "Les nouvelles attaques au Moyen-Orient ont poussé les prix du pétrole à la hausse, entraînant avec eux les taux hypothécaires américains à leur niveau le plus élevé depuis juin 2025, selon CNBC. L'attente d'un repli des taux cette année a été contrariée par la guerre avec l'Iran et la remontée du brut qui en découle. Un enchaînement que les marchés immobiliers américains n'avaient pas prévu en début d'année.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Les réserves stratégiques américaines s'essoufflent",
+   "texte": "Selon Reuters, les réserves pétrolières stratégiques américaines, déjà entamées, perdent de leur efficacité comme levier de pression à mesure que le conflit avec l'Iran se prolonge. Un outil traditionnellement utilisé pour peser sur les prix du brut qui se retrouve donc moins puissant au moment où on en aurait le plus besoin.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Kharg Island : Trump envoyait un message, selon Vance",
+   "texte": "Le vice-président américain JD Vance a déclaré à Reuters que la publication de Donald Trump au sujet de l'île de Kharg visait à envoyer un message à l'Iran. La déclaration intervient dans un contexte de tensions persistantes autour de l'infrastructure pétrolière iranienne.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Eli Lilly mise sur les fusions-acquisitions, GE Vernova dans la tourmente",
+   "texte": "Eli Lilly entend utiliser les bénéfices engrangés grâce au marché de l'obésité pour financer de nouvelles opérations de fusions-acquisitions, selon CNBC. Du côté de GE Vernova, des remarques d'Elon Musk ont pesé sur le titre en fin de séance. Citadel, de son côté, juge que le rapport risque/rendement de l'achat de protection sur les marchés actions est actuellement attractif, à l'entame d'un mois historiquement difficile.",
+   "sources": [
+    0,
+    1
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Risk-reward outlook for stocks is getting worse as historically tough month kicks off, says Citadel",
+   "resume": "The risk-reward of buying protection in the equity market looks compelling.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/31/risk-reward-outlook-for-stocks-is-getting-worse-says-citadel.html",
+   "date": "2026-08-31 19:09"
+  },
+  {
+   "titre": "Lilly taps obesity windfall for more M&A. Plus, Elon Musk remarks pull GE Vernova lower",
+   "resume": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/31/lilly-taps-obesity-windfall-for-more-ma-plus-elon-musk-remarks-pull-ge-vernova-lower.html",
+   "date": "2026-08-31 18:27"
+  },
+  {
+   "titre": "Mortgage rates surge to the highest since June 2025 as new Middle East attacks push oil prices up",
+   "resume": "The expectation had been for falling rates this year, but the war with Iran and its resulting rise in oil prices upended that.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/08/31/mortgage-rates-surge-middle-east-attacks-oil.html",
+   "date": "2026-08-31 17:56"
+  },
+  {
+   "titre": "Trump was sending message to Iran with Kharg Island post, says Vance - Reuters",
+   "resume": "Trump was sending message to Iran with Kharg Island post, says Vance  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPeElJSjJGWk5EandMUHVfb3J5dmhzdzh2eVNWQjdZYnFPaGFzMmNLX2N1c21TQzFtb0tfeTRhTlBJMnlUVThxR1FqNXg2Q0pTanRSMnVlY0s5RDNqcHhqVVE3YjVrTnlTWGVXd3hERnc0N0lsdmJLcEM2Yk5EUnBKSnI4UUZKeDkwY2ZFVm1aRFJYRG8yR3hRV0RzZFhucUNzdnNjcTJGN3lPdVdPQXVwYmVOUHdzS01zRVE?oc=5",
+   "date": "2026-08-31 15:46"
+  },
+  {
+   "titre": "Depleted US oil stash loses potency as Iran war grinds on - Reuters",
+   "resume": "Depleted US oil stash loses potency as Iran war grinds on  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQVUhmd2cwQ2lLMjFlWXpza0hEZWhGZU1NcGg2eGJ3Y0x4OVA0YWhIUVptWmcxVnU0V0hKRnRJR1FQSU5WT2M4aUZDRngzSDVpczVybkN5dUEyZ0FrdFFSaVlxZ0I2WjVLTEprenVzY2VCdFN2c0NXQXhldWxzN1daOGNya2RjMkZsSHN2ZXhuS19kdXJvS3VBYkk4OFVIYmtyN2JoRFJR?oc=5",
+   "date": "2026-08-31 15:33"
+  }
+ ],
+ "genere_le": "2026-09-01 10:27 UTC"
+}
