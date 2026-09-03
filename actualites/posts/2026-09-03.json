@@ -1,0 +1,164 @@
+{
+ "id": "2026-09-03",
+ "type": "quotidien",
+ "date": "2026-09-03",
+ "titre": "La NBA suspend un milliardaire, Johnson & Johnson grimpe, l'or file à 4 473 $",
+ "chapeau": "Sanctions record en NBA, rally Johnson & Johnson et rotation tech : le menu du jour, servi avec un or en nette hausse.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-09-03.jpg",
+  "v": "7d105746",
+  "legende": "The Tokyo Stock Exchange - main room 4",
+  "credit": "Kakidai",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Tokyo_Stock_Exchange_-_main_room_4.jpg",
+  "fichier": "The Tokyo Stock Exchange - main room 4.jpg",
+  "requete": "Tokyo Stock Exchange Arrows"
+ },
+ "marches": {
+  "ref": "2026-09-03",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8257.0595703125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.28464395623964767,
+    "ref": "2026-09-03"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6350.64990234375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.18075650804397927,
+    "ref": "2026-09-03"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4473.39990234375,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.452880068869097,
+    "ref": "2026-09-03"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 96.44999694824219,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.8574712102639014,
+    "ref": "2026-09-03"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1609008312225342,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.1160886394127716,
+    "ref": "2026-09-03"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 77625.6171875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.4206191726866173,
+    "ref": "2026-09-03"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ASM International N.V.",
+   "valeur": 780.7999877929688,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -2.1063174908734226,
+   "ref": "2026-09-03",
+   "ticker": "ASM.AS",
+   "nom": "ASM International N.V."
+  }
+ },
+ "marches_texte": "Le CAC 40 termine en légère baisse à 8 257 points (-0,28 %), dans le sillage d'un Euro Stoxx 50 quasi stable (-0,18 %). L'or est la pièce maîtresse du tableau, à 4 473,40 $ (+2,45 %), très loin devant les autres mouvements. Du côté des valeurs individuelles, ASM International signe la plus forte secousse de la séance avec -2,11 %.",
+ "sections": [
+  {
+   "titre": "En NBA aussi, les amendes se comptent en milliards",
+   "texte": "La ligue de basket américaine a suspendu Steve Ballmer, propriétaire des Los Angeles Clippers, pour une durée d'un an dans le cadre d'une enquête sur le plafond salarial liée au dossier Kawhi Leonard. La franchise écope en parallèle d'une amende de 30 millions de dollars et d'une pénalité sportive de taille : cinq premiers choix de draft perdus, à raison d'un par an à partir de 2029. Un palmarès peu enviable.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Johnson & Johnson : la course aux records n'est pas terminée",
+   "texte": "Jim Cramer se range du côté d'UBS : le rally du titre Johnson & Johnson aurait encore de la marge. Les deux estiment que les moteurs de la hausse restent intacts, sans que la dépêche précise lesquels en détail. Un consensus rare entre un banquier et un animateur télé, ce qui mérite au moins d'être noté.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Tech : pas d'abandon, juste un peu de tri",
+   "texte": "Jim Cramer tempère les inquiétudes sur la tech : selon lui, les investisseurs ne fuient pas l'intelligence artificielle ni les valeurs technologiques. Ils sortent simplement des titres aux valorisations élevées pour se repositionner sur des noms moins chers. Une rotation, pas une capitulation.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Iran : escalade militaire et incertitude sur le brut",
+   "texte": "Les tensions liées au conflit en Iran soulèvent des inquiétudes croissantes quant au bilan civil, selon Reuters. Sur les marchés, le Brent recule par rapport à ses récents points hauts, les investisseurs pesant l'incertitude entourant les frappes américaines contre l'Iran. L'indice clôture tout de même en territoire positif à 96,45 $ (+0,86 %).",
+   "sources": [
+    1,
+    2
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Iran war escalation raises concern over civilian death toll - Reuters",
+   "resume": "Iran war escalation raises concern over civilian death toll  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQZmJEcTdhQU9kcW41Z2J6enVZU2NHQ253eVV1VDJKOXBSTTJfbGhfVi1wbTQ0U1gzRllLb2xUUV9LRGRZaWpvaUlSWWRwQTdBaXdNY2x1Z3pxU1U1WjJSdzdKWGR6a2FLSXN6dnBPQ3NhM1hwUkxOZlIyd0dDX0ZycjdVSlpEUFN5N1NQbWR2UW1oRHNBU3BTZENPbGotQVFOSmdfUUFJNERYbEZTVzU3WDlrUQ?oc=5",
+   "date": "2026-09-03 08:24"
+  },
+  {
+   "titre": "Oil falls from recent highs as investors weigh uncertainty over US-Iran strikes - Reuters",
+   "resume": "Oil falls from recent highs as investors weigh uncertainty over US-Iran strikes  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQVk5vakhhby03N0RCUHNMTU1jY1F4OGdsMmt2cThTLW5hU0VNM181YUVwYW1wSlJsbGoweDQtd3ROSTFfMDhUSGpWMHI5WG9qeTByTGJpVTRZaER0dGlwZ1BULXVRUzlPemRSOC1ranltaDQ0QjJ4OWMwWTRrNjJ6eDdkaExIMjFiVDJlbUxZcTU2Sk1DRE1uNTR5SkdPM0VJanktVUI1RkNpcXoxRkxBN1lkUDRnUQ?oc=5",
+   "date": "2026-09-03 08:12"
+  },
+  {
+   "titre": "Jim Cramer says investors aren't ditching tech — they just want cheaper stocks",
+   "resume": "CNBC's Jim Cramer said investors aren’t abandoning AI or technology stocks — they’re rotating out of high-multiple names and into cheaper stocks.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/02/cramer-says-investors-arent-ditching-tech-they-want-cheaper-stocks.html",
+   "date": "2026-09-02 23:09"
+  },
+  {
+   "titre": "NBA suspends Clippers owner Ballmer for one year in Kawhi Leonard salary cap probe",
+   "resume": "The NBA also fined the Los Angeles Clippers $30 million and said the team will forfeit five first-round picks, one in each year in drafts starting in 2029.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/02/nba-suspends-clippers-ballmer-kawhi-leonard-salary-cap.html",
+   "date": "2026-09-02 20:59"
+  },
+  {
+   "titre": "J&J's run to record highs hasn't reached the finish line yet. Here are the key drivers",
+   "resume": "Jim Cramer agrees with UBS: The rally in Johnson & Johnson shares still has room to run.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/02/jjs-run-to-record-highs-hasnt-reached-the-finish-line-yet-here-are-the-key-drivers.html",
+   "date": "2026-09-02 20:53"
+  }
+ ],
+ "genere_le": "2026-09-03 10:05 UTC"
+}
