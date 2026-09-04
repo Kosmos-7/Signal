@@ -1,0 +1,166 @@
+{
+ "id": "2026-09-04",
+ "type": "quotidien",
+ "date": "2026-09-04",
+ "titre": "Adobe change de patron, le Bitcoin bondit de 5 %",
+ "chapeau": "Anil Chakravarthy prend les rênes d'Adobe. Pendant ce temps, le Bitcoin s'offre la meilleure séance de la semaine et les indices européens finissent à l'arrêt.",
+ "sujet": "tech",
+ "photo": {
+  "src": "actualites/photos/2026-09-04.jpg",
+  "v": "18c40924",
+  "legende": "DALL·E 2025-01-31 21.58.22 - A realistic image of the interior of a…",
+  "credit": "Cbrasil0",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:DALL%C2%B7E_2025-01-31_21.58.22_-_A_realistic_image_of_the_interior_of_a_modern_data_center._The_scene_features_long_rows_of_tall,_sleek_server_racks_filled_with_blinking_LED_lights._T.webp",
+  "fichier": "DALL·E 2025-01-31 21.58.22 - A realistic image of the interior of a modern data center. The scene features long rows of tall, sleek server racks filled with blinking LED lights. T.webp",
+  "requete": "data center server racks"
+ },
+ "marches": {
+  "ref": "2026-09-04",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8283.1796875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.03886733651735937,
+    "ref": "2026-09-04"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6379.60986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.0466892051925924,
+    "ref": "2026-09-04"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4514.10009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.49869540195773415,
+    "ref": "2026-09-04"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 95.3499984741211,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.17797128865126724,
+    "ref": "2026-09-04"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.16225004196167,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.3207804508624544,
+    "ref": "2026-09-04"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 81117.0625,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": 4.937338173347694,
+    "ref": "2026-09-04"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Vestas Wind Systems A/",
+   "valeur": 215.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 2.089265797229682,
+   "ref": "2026-09-04",
+   "ticker": "VWS.CO",
+   "nom": "Vestas Wind Systems A/"
+  }
+ },
+ "marches_texte": "Les indices européens ont terminé la semaine en mode stationnaire : le CAC 40 cède 0,04 % à 8 283 points, l'Euro Stoxx 50 lâche 0,05 %. La vraie animation vient d'ailleurs : le Bitcoin grimpe de 4,94 % à 81 117 $, et l'or continue sa marche à 4 514 $, en hausse de 0,50 %. Le Brent recule légèrement à 95,35 $, malgré une semaine globalement orientée à la hausse sous l'effet des tensions au Moyen-Orient.",
+ "sections": [
+  {
+   "titre": "Adobe tourne la page Narayen",
+   "texte": "Adobe a annoncé qu'Anil Chakravarthy succédera à Shantanu Narayen à la tête du groupe. Narayen avait annoncé son départ en mars dernier, après avoir dirigé l'entreprise pendant près de deux décennies. Chakravarthy hérite d'un groupe qui, selon CNBC, a su résister aux inquiétudes liées aux disruptions de l'intelligence artificielle. La passation de pouvoir marque une nouvelle ère pour l'éditeur californien.",
+   "sources": [
+    3,
+    4
+   ]
+  },
+  {
+   "titre": "Nvidia lorgne Hugging Face : le précédent Microsoft en tête",
+   "texte": "L'éventuelle acquisition de Hugging Face par Nvidia n'est pas sans précédent dans le monde de la Big Tech, rappelle CNBC. Les analystes évoquent notamment un accord passé par Microsoft comme point de comparaison pour décrypter la logique industrielle d'une telle opération. L'appétit des géants de la puces pour les plateformes d'IA open source continue de structurer les grandes manœuvres du secteur.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Frappe sur un mariage en Iran : enquête américaine ouverte",
+   "texte": "Les États-Unis ont ouvert une enquête après qu'une analyse a montré qu'une frappe meurtrière sur un mariage en Iran était vraisemblablement un tir direct d'une munition américaine, selon Reuters. Les hostilités entre Washington et Téhéran continuent de peser sur les marchés pétroliers, qui s'apprêtent à enregistrer un gain hebdomadaire. Le Brent termine la séance à 95,35 $, en légère baisse sur la journée mais en hausse sur la semaine.",
+   "sources": [
+    0,
+    1,
+    2
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Oil prices set for weekly gain as US-Iran hostilities intensify - Reuters",
+   "resume": "Oil prices set for weekly gain as US-Iran hostilities intensify  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOQVZJdUE0TzFvS2xtSUJLOVUxZUVRZVRpMi1aUlNuSFZzX3h5TW4zSGJya0w3SjFlSno4QUlvdU90cHBBOS1xRllCZjR2aVRnUW16ZmQyN3M1SlRVSl9BYlk2Z2dvWGIzdEo3cXdTZjdWZkIzYXRNRzk3ZkM2cWMwN2ZWMVh1T09pNnRKVVAwRDhNSnJnSTFwVi1MZXdMNUNwOFJTU215REpkR1V0X1pVa09vNkVHeG9oX2lpVjdoTVl1ajI5MzU0dUN3?oc=5",
+   "date": "2026-09-04 01:28"
+  },
+  {
+   "titre": "US probes Iran wedding strike that analysis shows was likely direct hit by US munition - Reuters",
+   "resume": "US probes Iran wedding strike that analysis shows was likely direct hit by US munition  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPdWJyTEVVNzlNV2lCVktTZkk3dHZpYUFndlRkdTVXMzlnR0hEMXZYVnN5U3V5dC1JMEpWVDMwZng4YjhUc3pfOVpiNWNwdDRwbHY1TFhMLWZFZFh3YlF2SVEwYnJjNGkzTlpGR0hsRkwyMkQ4QVRSdmV4Ykxtd0xZamtOYkNNUV90TzhWdnF5ejhGRGhxSHgtcmp0SGdFVkhUa2owblM0QnN0aDRpeXlnRlBHUDdqZnE5TmRjd2FuR1dyVE5qY3VsNFJHWQ?oc=5",
+   "date": "2026-09-03 23:57"
+  },
+  {
+   "titre": "Deadly strike on Iranian wedding was likely a direct hit by a US munition, analysis shows - Reuters",
+   "resume": "Deadly strike on Iranian wedding was likely a direct hit by a US munition, analysis shows  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQUEFXVU5xRXZGVUVkV3B2TUVQcTBseVZsSGd0blBwQktIaGlIc3R5TzMtNXFISkFTb1VOdlhWOXBmQ052RWFuT1pQaXJqQndNaXB3TmhLQTZPQXNQSFFXQ3JGY0NBdE1RY09razBPZFh2VnJiYmlBSld3akdLeHZxbVA5bWNqVWFycjFlUHFNd3VPdE4tYTFVaWxmdDBoOUlxUk80X0dkbkFqOV9SU3lxNkFsd0JGZnB5Qk9SV3JGWkxRWlhn?oc=5",
+   "date": "2026-09-03 22:13"
+  },
+  {
+   "titre": "Adobe names Anil Chakravarthy as CEO, replacing Shantanu Narayen",
+   "resume": "Adobe announced Anil Chakravarthy as its next CEO, replacing Shantanu Narayen, who announced his departure last March.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/03/adobe-anil-chakravarthy-ceo.html",
+   "date": "2026-09-03 20:29"
+  },
+  {
+   "titre": "We're lifting our price targets on 2 stocks that have shaken off AI disruption concerns",
+   "resume": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/03/were-lifting-our-price-targets-on-2-stocks-that-have-shaken-off-ai-disruption-concerns.html",
+   "date": "2026-09-03 18:27"
+  },
+  {
+   "titre": "What's behind Nvidia buying Hugging Face? A past Microsoft deal offers clues",
+   "resume": "This is nothing new to the world of Big Tech.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/03/whats-behind-nvidia-buying-hugging-face-look-to-microsoft.html",
+   "date": "2026-09-03 18:14"
+  }
+ ],
+ "genere_le": "2026-09-04 09:56 UTC"
+}
