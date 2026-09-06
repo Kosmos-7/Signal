@@ -409,27 +409,6 @@
     },
     {
       "date": "2026-08-31",
-      "type": "VENTE",
-      "ticker": "ETN",
-      "nom": "Eaton Corporation, PLC",
-      "qte": 1,
-      "prix": 400.335,
-      "currency": "USD",
-      "montant": 344.32,
-      "montant_brut_eur": 344.58,
-      "frais_vente_eur": 0.2584,
-      "plus_value_eur": -26.68,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 26.68,
-      "perf": -7.02,
-      "pnl_eur": -26.68,
-      "jours": 123,
-      "raison": "Rotation pour financer ADBE. ETN est détenu depuis 123 jours (Règle 01 respectée), en perte de -7.1% (-26 euros latents). Thèse originale : score 93/100 à l'entrée watchlist le 30 avril, exposition infrastructure IA et énergie industrielle. Ce qui a changé : le score est redescendu à 93/100 mais la position n'a pas participé au rally et reste en perte sur 4 mois, tandis que ADBE offre un Golden Cross J+0 avec une décote z=-1.7sigma et un setup d'entrée nettement supérieur. La position en perte ne génère aucun PFU et produit un crédit d'impôt (perte reportable), ce qui rend la rotation fiscalement neutre à favorable. C'est une rotation d'exception justifiée : thèse affaiblie par l'absence de performance sur 4 mois, remplacée par un signal technique et fondamental plus fort.",
-      "conviction": "forte",
-      "source": "Claude AI"
-    },
-    {
-      "date": "2026-08-31",
       "type": "ACHAT",
       "ticker": "ADBE",
       "nom": "Adobe Inc.",
@@ -961,6 +940,27 @@
       "renforcement": true,
       "pru_apres": 156.9559,
       "qte_totale": 34
+    },
+    {
+      "date": "2026-08-31",
+      "type": "VENTE",
+      "ticker": "ETN",
+      "nom": "Eaton Corporation, PLC",
+      "qte": 1,
+      "prix": 400.335,
+      "currency": "USD",
+      "montant": 344.32,
+      "montant_brut_eur": 344.58,
+      "frais_vente_eur": 0.2584,
+      "plus_value_eur": -26.68,
+      "impot_pfu_eur": 0.0,
+      "perte_reportable_eur": 26.68,
+      "perf": -7.02,
+      "pnl_eur": -26.68,
+      "jours": 123,
+      "raison": "Rotation pour financer ADBE. ETN est détenu depuis 123 jours (Règle 01 respectée), en perte de -7.1% (-26 euros latents). Thèse originale : score 93/100 à l'entrée watchlist le 30 avril, exposition infrastructure IA et énergie industrielle. Ce qui a changé : le score est redescendu à 93/100 mais la position n'a pas participé au rally et reste en perte sur 4 mois, tandis que ADBE offre un Golden Cross J+0 avec une décote z=-1.7sigma et un setup d'entrée nettement supérieur. La position en perte ne génère aucun PFU et produit un crédit d'impôt (perte reportable), ce qui rend la rotation fiscalement neutre à favorable. C'est une rotation d'exception justifiée : thèse affaiblie par l'absence de performance sur 4 mois, remplacée par un signal technique et fondamental plus fort.",
+      "conviction": "forte",
+      "source": "Claude AI"
     },
     {
       "date": "2026-08-24",
@@ -1514,27 +1514,6 @@
     },
     {
       "date": "2026-08-17",
-      "type": "VENTE",
-      "ticker": "ORSTED.CO",
-      "nom": "Orsted A/S",
-      "qte": 52,
-      "prix": 138.6,
-      "currency": "DKK",
-      "montant": 963.45,
-      "montant_brut_eur": 964.17,
-      "frais_vente_eur": 0.7231,
-      "plus_value_eur": -187.16,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 187.16,
-      "perf": -15.62,
-      "pnl_eur": -187.16,
-      "jours": 82,
-      "raison": "Détenu depuis 82 jours, ORSTED.CO affiche -16.1% depuis l'achat, franchissant le seuil du stop-loss automatique R06 (-15% après 90 jours, ou -25% sans condition). Nous sommes à 8 jours du seuil de 90 jours, mais la perte dépasse déjà -15% et la dynamique ne montre aucun signe de retournement : score watchlist tombé à 81/100 mais Golden Cross de 17 jours qui date du jour d'achat est maintenant à 99 jours, la thèse technique s'est progressivement érodée. La thèse d'achat était un Golden Cross frais à J+17 avec z=-1.7sigma : le signal technique est désormais stale et la décote s'est encore creusée sans rebond. Position en perte : aucune friction fiscale PFU, et la perte de 185 euros devient un crédit d'impôt utilisable 10 ans. Sortie totale.",
-      "conviction": "forte",
-      "source": "Claude AI"
-    },
-    {
-      "date": "2026-08-17",
       "type": "ACHAT",
       "ticker": "BX",
       "nom": "Blackstone Inc.",
@@ -1784,6 +1763,27 @@
       }
     },
     {
+      "date": "2026-08-17",
+      "type": "VENTE",
+      "ticker": "ORSTED.CO",
+      "nom": "Orsted A/S",
+      "qte": 52,
+      "prix": 138.6,
+      "currency": "DKK",
+      "montant": 963.45,
+      "montant_brut_eur": 964.17,
+      "frais_vente_eur": 0.7231,
+      "plus_value_eur": -187.16,
+      "impot_pfu_eur": 0.0,
+      "perte_reportable_eur": 187.16,
+      "perf": -15.62,
+      "pnl_eur": -187.16,
+      "jours": 82,
+      "raison": "Détenu depuis 82 jours, ORSTED.CO affiche -16.1% depuis l'achat, franchissant le seuil du stop-loss automatique R06 (-15% après 90 jours, ou -25% sans condition). Nous sommes à 8 jours du seuil de 90 jours, mais la perte dépasse déjà -15% et la dynamique ne montre aucun signe de retournement : score watchlist tombé à 81/100 mais Golden Cross de 17 jours qui date du jour d'achat est maintenant à 99 jours, la thèse technique s'est progressivement érodée. La thèse d'achat était un Golden Cross frais à J+17 avec z=-1.7sigma : le signal technique est désormais stale et la décote s'est encore creusée sans rebond. Position en perte : aucune friction fiscale PFU, et la perte de 185 euros devient un crédit d'impôt utilisable 10 ans. Sortie totale.",
+      "conviction": "forte",
+      "source": "Claude AI"
+    },
+    {
       "date": "2026-08-10",
       "type": "ACHAT",
       "ticker": "BKNG",
@@ -2020,6 +2020,18 @@
           "couverture": 93
         }
       }
+    },
+    {
+      "date": "2026-08-03",
+      "type": "APPORT",
+      "ticker": "—",
+      "nom": "Versement",
+      "qte": 0,
+      "prix": 0,
+      "montant": 10000.0,
+      "sens": "credit",
+      "raison": "Versement de 10000 € enregistré dans le registre des injections mais jamais journalisé, contrairement à celui du 05/05/2026. Entré dans le périmètre de performance le 2026-08-10, au premier run hebdomadaire suivant : un versement ne compte ni comme gain ni comme perte, il déplace seulement la base sur laquelle la performance se mesure ensuite.",
+      "source": "Registre des versements"
     },
     {
       "date": "2026-07-31",
@@ -2809,6 +2821,22 @@
     },
     {
       "date": "2026-05-05",
+      "type": "ACHAT",
+      "ticker": "LLY",
+      "nom": "Eli Lilly and Company",
+      "qte": 1,
+      "prix": 967.93,
+      "currency": "USD",
+      "montant": 828.41,
+      "raison": "LLY score 89/100 avec un Golden Cross solide de 139 jours confirmé, un z-score de +0.5σ (légèrement au-dessus de la régression mais en zone saine) et une croissance CA solide. Le portefeuille manque d'exposition au secteur Santé, ce qui constitue un défaut de diversification sectorielle. 1 titre LLY pour une entrée prudente sur ce secteur défensif/growth.",
+      "conviction": "modérée",
+      "source": "Claude AI",
+      "score_watchlist": 89,
+      "montant_brut_eur": 827.79,
+      "frais_achat_eur": 0.6208
+    },
+    {
+      "date": "2026-05-05",
       "type": "VENTE",
       "ticker": "ADI",
       "nom": "Analog Devices, Inc.",
@@ -2830,22 +2858,6 @@
     },
     {
       "date": "2026-05-05",
-      "type": "ACHAT",
-      "ticker": "LLY",
-      "nom": "Eli Lilly and Company",
-      "qte": 1,
-      "prix": 967.93,
-      "currency": "USD",
-      "montant": 828.41,
-      "raison": "LLY score 89/100 avec un Golden Cross solide de 139 jours confirmé, un z-score de +0.5σ (légèrement au-dessus de la régression mais en zone saine) et une croissance CA solide. Le portefeuille manque d'exposition au secteur Santé, ce qui constitue un défaut de diversification sectorielle. 1 titre LLY pour une entrée prudente sur ce secteur défensif/growth.",
-      "conviction": "modérée",
-      "source": "Claude AI",
-      "score_watchlist": 89,
-      "montant_brut_eur": 827.79,
-      "frais_achat_eur": 0.6208
-    },
-    {
-      "date": "2026-05-05",
       "type": "APPORT",
       "ticker": "—",
       "nom": "Apport de capital",
@@ -2853,54 +2865,6 @@
       "prix": 0,
       "montant": 10000,
       "raison": "Injection de 10 000 € de liquidités supplémentaires. Capital total porté à 20 000 €. Les fonds sont immédiatement disponibles pour saisir de nouvelles opportunités identifiées dans la watchlist."
-    },
-    {
-      "date": "2026-04-30",
-      "type": "VENTE",
-      "ticker": "MSFT",
-      "nom": "Microsoft",
-      "qte": 5,
-      "prix": 399.75,
-      "montant": 1997.25,
-      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
-      "montant_brut_eur": 1998.75,
-      "frais_vente_eur": 1.4991,
-      "plus_value_eur": -4.25,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 4.25,
-      "pnl_eur": -4.25
-    },
-    {
-      "date": "2026-04-30",
-      "type": "VENTE",
-      "ticker": "AIR.PA",
-      "nom": "Airbus",
-      "qte": 10,
-      "prix": 174.88,
-      "montant": 1688.59,
-      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
-      "montant_brut_eur": 1748.8,
-      "frais_vente_eur": 1.3116,
-      "plus_value_eur": 196.33,
-      "impot_pfu_eur": 58.9,
-      "perte_reportable_eur": 0.0,
-      "pnl_eur": 196.33
-    },
-    {
-      "date": "2026-04-30",
-      "type": "VENTE",
-      "ticker": "MC.PA",
-      "nom": "LVMH",
-      "qte": 2,
-      "prix": 451.4,
-      "montant": 902.12,
-      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
-      "montant_brut_eur": 902.8,
-      "frais_vente_eur": 0.6771,
-      "plus_value_eur": -298.78,
-      "impot_pfu_eur": 0.0,
-      "perte_reportable_eur": 298.78,
-      "pnl_eur": -298.78
     },
     {
       "date": "2026-04-30",
@@ -3011,6 +2975,54 @@
       "frais_achat_eur": 0.3889
     },
     {
+      "date": "2026-04-30",
+      "type": "VENTE",
+      "ticker": "MSFT",
+      "nom": "Microsoft",
+      "qte": 5,
+      "prix": 399.75,
+      "montant": 1997.25,
+      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
+      "montant_brut_eur": 1998.75,
+      "frais_vente_eur": 1.4991,
+      "plus_value_eur": -4.25,
+      "impot_pfu_eur": 0.0,
+      "perte_reportable_eur": 4.25,
+      "pnl_eur": -4.25
+    },
+    {
+      "date": "2026-04-30",
+      "type": "VENTE",
+      "ticker": "AIR.PA",
+      "nom": "Airbus",
+      "qte": 10,
+      "prix": 174.88,
+      "montant": 1688.59,
+      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
+      "montant_brut_eur": 1748.8,
+      "frais_vente_eur": 1.3116,
+      "plus_value_eur": 196.33,
+      "impot_pfu_eur": 58.9,
+      "perte_reportable_eur": 0.0,
+      "pnl_eur": 196.33
+    },
+    {
+      "date": "2026-04-30",
+      "type": "VENTE",
+      "ticker": "MC.PA",
+      "nom": "LVMH",
+      "qte": 2,
+      "prix": 451.4,
+      "montant": 902.12,
+      "raison": "Sortie de watchlist après 118j, Règle 01 respectée",
+      "montant_brut_eur": 902.8,
+      "frais_vente_eur": 0.6771,
+      "plus_value_eur": -298.78,
+      "impot_pfu_eur": 0.0,
+      "perte_reportable_eur": 298.78,
+      "pnl_eur": -298.78
+    },
+    {
       "date": "2026-02-15",
       "type": "VENTE",
       "ticker": "SAP.DE",
@@ -3085,6 +3097,18 @@
       "raison": "Entrée watchlist, score 94/100 · Semi-conducteurs",
       "montant_brut_eur": 2300.0,
       "frais_achat_eur": 1.725
+    },
+    {
+      "date": "2026-01-02",
+      "type": "APPORT",
+      "ticker": "—",
+      "nom": "Capital de départ",
+      "qte": 0,
+      "prix": 0,
+      "montant": 10000.0,
+      "sens": "credit",
+      "raison": "Dotation initiale du portefeuille. Le compte espèces commence ici : c'est le premier mouvement du livre, et il n'y figurait pas. Son absence rendait le journal des ordres incapable de reconstituer la trésorerie d'une date passée, alors que c'est précisément ce qu'un journal sert à faire.",
+      "source": "Registre des versements"
     }
   ],
   "biais_detectes": [
@@ -3176,14 +3200,20 @@
       "perf": 0.0,
       "capital": 10000.0,
       "benchmark_cac40": 0.0,
-      "benchmark_msci": 0.0
+      "benchmark_msci": 0.0,
+      "liquidites": 0.0,
+      "valeur_positions": 10000.0,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-04-30",
       "perf": 32.28,
       "capital": 13228.0,
       "benchmark_cac40": -0.8,
-      "benchmark_msci": 4.0
+      "benchmark_msci": 4.0,
+      "liquidites": 422.06,
+      "valeur_positions": 12805.94,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-05",
@@ -3191,483 +3221,690 @@
       "capital": 22107.39,
       "benchmark_cac40": -2.05,
       "benchmark_msci": 4.85,
-      "note": "Injection +10k€ · LLY +AMD"
+      "note": "Injection +10k€ · LLY +AMD",
+      "liquidites": 3757.16,
+      "valeur_positions": 18350.23,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-06",
       "perf": 23.55,
       "capital": 22560.34,
       "benchmark_cac40": 1.27,
-      "benchmark_msci": 7.57
+      "benchmark_msci": 7.57,
+      "liquidites": 2671.6,
+      "valeur_positions": 19888.74,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-07",
       "perf": 25.44,
       "capital": 22903.83,
       "benchmark_cac40": 0.08,
-      "benchmark_msci": 7.43
+      "benchmark_msci": 7.43,
+      "liquidites": 2433.26,
+      "valeur_positions": 20470.57,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-10",
       "perf": 25.35,
       "capital": 22888.74,
       "benchmark_cac40": -1.01,
-      "benchmark_msci": 7.39
+      "benchmark_msci": 7.39,
+      "liquidites": 2433.26,
+      "valeur_positions": 20455.48,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-11",
       "perf": 25.67,
       "capital": 22946.53,
       "benchmark_cac40": -1.69,
-      "benchmark_msci": 7.73
+      "benchmark_msci": 7.73,
+      "liquidites": 2433.26,
+      "valeur_positions": 20513.27,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-12",
       "perf": 25.6,
       "capital": 22932.93,
       "benchmark_cac40": -2.17,
-      "benchmark_msci": 7.47
+      "benchmark_msci": 7.47,
+      "liquidites": 2433.26,
+      "valeur_positions": 20499.67,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-13",
       "perf": 25.53,
       "capital": 22920.73,
       "benchmark_cac40": -2.55,
-      "benchmark_msci": 8.24
+      "benchmark_msci": 8.24,
+      "liquidites": 2433.26,
+      "valeur_positions": 20487.47,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-14",
       "perf": 26.02,
       "capital": 23010.03,
       "benchmark_cac40": -1.7,
-      "benchmark_msci": 8.79
+      "benchmark_msci": 8.79,
+      "liquidites": 2433.26,
+      "valeur_positions": 20576.77,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-15",
       "perf": 27.31,
       "capital": 23246.0,
       "benchmark_cac40": -2.52,
-      "benchmark_msci": 8.75
+      "benchmark_msci": 8.75,
+      "liquidites": 2433.26,
+      "valeur_positions": 20812.74,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-16",
       "perf": 26.39,
       "capital": 23077.73,
       "benchmark_cac40": -2.96,
-      "benchmark_msci": 8.75
+      "benchmark_msci": 8.75,
+      "liquidites": 2433.26,
+      "valeur_positions": 20644.47,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-18",
       "perf": 26.41,
       "capital": 23082.64,
       "benchmark_cac40": -2.53,
-      "benchmark_msci": 8.17
+      "benchmark_msci": 8.17,
+      "liquidites": 2433.26,
+      "valeur_positions": 20649.38,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-19",
       "perf": 27.02,
       "capital": 23192.98,
       "benchmark_cac40": -1.65,
-      "benchmark_msci": 8.33
+      "benchmark_msci": 8.33,
+      "liquidites": 2433.26,
+      "valeur_positions": 20759.72,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-20",
       "perf": 27.06,
       "capital": 23200.88,
       "benchmark_cac40": -1.97,
-      "benchmark_msci": 8.63
+      "benchmark_msci": 8.63,
+      "liquidites": 2433.26,
+      "valeur_positions": 20767.62,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-21",
       "perf": 28.53,
       "capital": 23468.13,
       "benchmark_cac40": -1.16,
-      "benchmark_msci": 9.06
+      "benchmark_msci": 9.06,
+      "liquidites": 2433.26,
+      "valeur_positions": 21034.87,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-22",
       "perf": 27.95,
       "capital": 23362.32,
       "benchmark_cac40": -0.85,
-      "benchmark_msci": 9.9
+      "benchmark_msci": 9.9,
+      "liquidites": 2433.26,
+      "valeur_positions": 20929.06,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-23",
       "perf": 28.77,
       "capital": 23511.77,
       "benchmark_cac40": -0.97,
-      "benchmark_msci": 10.36
+      "benchmark_msci": 10.36,
+      "liquidites": 2433.26,
+      "valeur_positions": 21078.51,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-24",
       "perf": 28.67,
       "capital": 23495.09,
       "benchmark_cac40": -0.97,
-      "benchmark_msci": 10.36
+      "benchmark_msci": 10.36,
+      "liquidites": 2433.26,
+      "valeur_positions": 21061.83,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-25",
       "perf": 29.19,
       "capital": 23588.67,
       "benchmark_cac40": 0.77,
-      "benchmark_msci": 10.94
+      "benchmark_msci": 10.94,
+      "liquidites": 2495.82,
+      "valeur_positions": 21092.85,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-27",
       "perf": 28.26,
       "capital": 23418.7,
       "benchmark_cac40": 0.15,
-      "benchmark_msci": 10.33
+      "benchmark_msci": 10.33,
+      "liquidites": 1345.21,
+      "valeur_positions": 22073.49,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-28",
       "perf": 28.11,
       "capital": 23393.04,
       "benchmark_cac40": -0.33,
-      "benchmark_msci": 10.27
+      "benchmark_msci": 10.27,
+      "liquidites": 1345.21,
+      "valeur_positions": 22047.83,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-29",
       "perf": 29.04,
       "capital": 23562.74,
       "benchmark_cac40": 0.73,
-      "benchmark_msci": 11.05
+      "benchmark_msci": 11.05,
+      "liquidites": 1345.21,
+      "valeur_positions": 22217.53,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-30",
       "perf": 30.26,
       "capital": 23785.5,
       "benchmark_cac40": -0.14,
-      "benchmark_msci": 10.87
+      "benchmark_msci": 10.87,
+      "liquidites": 1345.21,
+      "valeur_positions": 22440.29,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-05-31",
       "perf": 30.26,
       "capital": 23785.5,
       "benchmark_cac40": -0.14,
-      "benchmark_msci": 10.87
+      "benchmark_msci": 10.87,
+      "liquidites": 1345.21,
+      "valeur_positions": 22440.29,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-01",
       "perf": 33.09,
       "capital": 24300.8,
       "benchmark_cac40": -0.59,
-      "benchmark_msci": 11.18
+      "benchmark_msci": 11.18,
+      "liquidites": 1345.21,
+      "valeur_positions": 22955.59,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-02",
       "perf": 32.68,
       "capital": 24225.86,
       "benchmark_cac40": 0.17,
-      "benchmark_msci": 11.66
+      "benchmark_msci": 11.66,
+      "liquidites": 1345.21,
+      "valeur_positions": 22880.65,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-03",
       "perf": 30.99,
       "capital": 23918.82,
       "benchmark_cac40": -0.55,
-      "benchmark_msci": 11.29
+      "benchmark_msci": 11.29,
+      "liquidites": 1345.21,
+      "valeur_positions": 22573.61,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-04",
       "perf": 32.18,
       "capital": 24135.59,
       "benchmark_cac40": 0.6,
-      "benchmark_msci": 11.31
+      "benchmark_msci": 11.31,
+      "liquidites": 1345.21,
+      "valeur_positions": 22790.38,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-05",
       "perf": 27.81,
       "capital": 23337.65,
       "benchmark_cac40": 0.28,
-      "benchmark_msci": 10.79
+      "benchmark_msci": 10.79,
+      "liquidites": 1345.21,
+      "valeur_positions": 21992.44,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-08",
       "perf": 29.88,
       "capital": 23715.24,
       "benchmark_cac40": 0.05,
-      "benchmark_msci": 10.15
+      "benchmark_msci": 10.15,
+      "liquidites": 1345.21,
+      "valeur_positions": 22370.03,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-09",
       "perf": 28.45,
       "capital": 23454.68,
       "benchmark_cac40": 0.1,
-      "benchmark_msci": 8.63
+      "benchmark_msci": 8.63,
+      "liquidites": 1345.21,
+      "valeur_positions": 22109.47,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-10",
       "perf": 26.61,
       "capital": 23118.22,
       "benchmark_cac40": 0.1,
-      "benchmark_msci": 8.63
+      "benchmark_msci": 8.63,
+      "liquidites": 1345.21,
+      "valeur_positions": 21773.01,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-11",
       "perf": 26.78,
       "capital": 23150.08,
       "benchmark_cac40": -0.41,
-      "benchmark_msci": 8.42
+      "benchmark_msci": 8.42,
+      "liquidites": 1345.21,
+      "valeur_positions": 21804.87,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-12",
       "perf": 28.13,
       "capital": 23394.93,
       "benchmark_cac40": 0.07,
-      "benchmark_msci": 8.59
+      "benchmark_msci": 8.59,
+      "liquidites": 1345.21,
+      "valeur_positions": 22049.72,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-15",
       "perf": 31.18,
       "capital": 23952.82,
       "benchmark_cac40": 1.9,
-      "benchmark_msci": 10.4
+      "benchmark_msci": 10.4,
+      "liquidites": 1345.21,
+      "valeur_positions": 22607.61,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-16",
       "perf": 29.96,
       "capital": 23729.14,
       "benchmark_cac40": 2.3,
-      "benchmark_msci": 11.63
+      "benchmark_msci": 11.63,
+      "liquidites": 1345.21,
+      "valeur_positions": 22383.93,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-17",
       "perf": 28.77,
       "capital": 23512.4,
       "benchmark_cac40": 3.08,
-      "benchmark_msci": 11.5
+      "benchmark_msci": 11.5,
+      "liquidites": 1345.21,
+      "valeur_positions": 22167.19,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-18",
       "perf": 30.9,
       "capital": 23901.46,
       "benchmark_cac40": 2.87,
-      "benchmark_msci": 11.58
+      "benchmark_msci": 11.58,
+      "liquidites": 1345.21,
+      "valeur_positions": 22556.25,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-19",
       "perf": 30.79,
       "capital": 23881.52,
       "benchmark_cac40": 2.87,
-      "benchmark_msci": 11.97
+      "benchmark_msci": 11.97,
+      "liquidites": 1345.21,
+      "valeur_positions": 22536.31,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-22",
       "perf": 30.3,
       "capital": 23792.44,
       "benchmark_cac40": 2.76,
-      "benchmark_msci": 12.11
+      "benchmark_msci": 12.11,
+      "liquidites": 1345.21,
+      "valeur_positions": 22447.23,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-23",
       "perf": 29.21,
       "capital": 23593.71,
       "benchmark_cac40": 2.5,
-      "benchmark_msci": 12.34
+      "benchmark_msci": 12.34,
+      "liquidites": 1345.21,
+      "valeur_positions": 22248.5,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-24",
       "perf": 27.22,
       "capital": 23229.89,
       "benchmark_cac40": 1.78,
-      "benchmark_msci": 11.37
+      "benchmark_msci": 11.37,
+      "liquidites": 1345.21,
+      "valeur_positions": 21884.68,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-25",
       "perf": 26.14,
       "capital": 23031.86,
       "benchmark_cac40": 2.32,
-      "benchmark_msci": 12.1
+      "benchmark_msci": 12.1,
+      "liquidites": 1345.21,
+      "valeur_positions": 21686.65,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-26",
       "perf": 27.53,
       "capital": 23286.9,
       "benchmark_cac40": 2.88,
-      "benchmark_msci": 11.48
+      "benchmark_msci": 11.48,
+      "liquidites": 1345.21,
+      "valeur_positions": 21941.69,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-29",
       "perf": 27.75,
       "capital": 23326.55,
       "benchmark_cac40": 2.31,
-      "benchmark_msci": 11.17
+      "benchmark_msci": 11.17,
+      "liquidites": 1345.21,
+      "valeur_positions": 21981.34,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-06-30",
       "perf": 29.68,
       "capital": 23678.39,
       "benchmark_cac40": 2.1,
-      "benchmark_msci": 11.29
+      "benchmark_msci": 11.29,
+      "liquidites": 1345.21,
+      "valeur_positions": 22333.18,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-01",
       "perf": 32.51,
       "capital": 24196.1,
       "benchmark_cac40": 2.55,
-      "benchmark_msci": 12.32
+      "benchmark_msci": 12.32,
+      "liquidites": 1345.21,
+      "valeur_positions": 22850.89,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-02",
       "perf": 30.65,
       "capital": 23855.77,
       "benchmark_cac40": 1.73,
-      "benchmark_msci": 13.08
+      "benchmark_msci": 13.08,
+      "liquidites": 1345.21,
+      "valeur_positions": 22510.56,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-03",
       "perf": 30.04,
       "capital": 23745.13,
       "benchmark_cac40": 3.41,
-      "benchmark_msci": 12.56
+      "benchmark_msci": 12.56,
+      "liquidites": 1345.21,
+      "valeur_positions": 22399.92,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-06",
       "perf": 32.3,
       "capital": 24157.25,
       "benchmark_cac40": 3.82,
-      "benchmark_msci": 12.97
+      "benchmark_msci": 12.97,
+      "liquidites": 1345.21,
+      "valeur_positions": 22812.04,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-07",
       "perf": 32.92,
       "capital": 24269.52,
       "benchmark_cac40": 3.47,
-      "benchmark_msci": 13.5
+      "benchmark_msci": 13.5,
+      "liquidites": 1345.21,
+      "valeur_positions": 22924.31,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-08",
       "perf": 30.69,
       "capital": 23863.85,
       "benchmark_cac40": 2.94,
-      "benchmark_msci": 12.65
+      "benchmark_msci": 12.65,
+      "liquidites": 1345.21,
+      "valeur_positions": 22518.64,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-09",
       "perf": 31.34,
       "capital": 23982.46,
       "benchmark_cac40": 0.7,
-      "benchmark_msci": 11.84
+      "benchmark_msci": 11.84,
+      "liquidites": 1345.21,
+      "valeur_positions": 22637.25,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-10",
       "perf": 33.77,
       "capital": 24424.75,
       "benchmark_cac40": 1.6,
-      "benchmark_msci": 12.93
+      "benchmark_msci": 12.93,
+      "liquidites": 1345.21,
+      "valeur_positions": 23079.54,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-13",
       "perf": 32.73,
       "capital": 24235.58,
       "benchmark_cac40": 1.75,
-      "benchmark_msci": 13.32
+      "benchmark_msci": 13.32,
+      "liquidites": 1345.21,
+      "valeur_positions": 22890.37,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-14",
       "perf": 32.81,
       "capital": 24251.08,
       "benchmark_cac40": 2.07,
-      "benchmark_msci": 13.46
+      "benchmark_msci": 13.46,
+      "liquidites": 1345.21,
+      "valeur_positions": 22905.87,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-15",
       "perf": 33.23,
       "capital": 24326.92,
       "benchmark_cac40": 2.09,
-      "benchmark_msci": 13.24
+      "benchmark_msci": 13.24,
+      "liquidites": 1345.21,
+      "valeur_positions": 22981.71,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-16",
       "perf": 32.44,
       "capital": 24182.41,
       "benchmark_cac40": 2.28,
-      "benchmark_msci": 13.46
+      "benchmark_msci": 13.46,
+      "liquidites": 1345.21,
+      "valeur_positions": 22837.2,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-17",
       "perf": 31.96,
       "capital": 24096.01,
       "benchmark_cac40": 2.23,
-      "benchmark_msci": 13.42
+      "benchmark_msci": 13.42,
+      "liquidites": 1345.21,
+      "valeur_positions": 22750.8,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-20",
       "perf": 31.22,
       "capital": 23960.85,
       "benchmark_cac40": 1.75,
-      "benchmark_msci": 12.18
+      "benchmark_msci": 12.18,
+      "liquidites": 1804.29,
+      "valeur_positions": 22156.56,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-21",
       "perf": 31.36,
       "capital": 23985.75,
       "benchmark_cac40": 1.77,
-      "benchmark_msci": 12.5
+      "benchmark_msci": 12.5,
+      "liquidites": 1804.29,
+      "valeur_positions": 22181.46,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-22",
       "perf": 32.07,
       "capital": 24115.87,
       "benchmark_cac40": 2.05,
-      "benchmark_msci": 12.94
+      "benchmark_msci": 12.94,
+      "liquidites": 1804.29,
+      "valeur_positions": 22311.58,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-23",
       "perf": 30.99,
       "capital": 23918.7,
       "benchmark_cac40": 2.96,
-      "benchmark_msci": 13.19
+      "benchmark_msci": 13.19,
+      "liquidites": 1804.29,
+      "valeur_positions": 22114.41,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-24",
       "perf": 31.1,
       "capital": 23937.86,
       "benchmark_cac40": 1.27,
-      "benchmark_msci": 11.79
+      "benchmark_msci": 11.79,
+      "liquidites": 1804.29,
+      "valeur_positions": 22133.57,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-27",
       "perf": 30.66,
       "capital": 23858.28,
       "benchmark_cac40": 1.27,
-      "benchmark_msci": 12.57
+      "benchmark_msci": 12.57,
+      "liquidites": 1804.29,
+      "valeur_positions": 22053.99,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-28",
       "perf": 29.07,
       "capital": 23567.25,
       "benchmark_cac40": 2.57,
-      "benchmark_msci": 12.03
+      "benchmark_msci": 12.03,
+      "liquidites": 1804.29,
+      "valeur_positions": 21762.96,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-29",
       "perf": 27.33,
       "capital": 23249.46,
       "benchmark_cac40": 3.22,
-      "benchmark_msci": 12.47
+      "benchmark_msci": 12.47,
+      "liquidites": 1804.29,
+      "valeur_positions": 21445.17,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-30",
       "perf": 26.99,
       "capital": 23187.08,
       "benchmark_cac40": 2.6,
-      "benchmark_msci": 11.71
+      "benchmark_msci": 11.71,
+      "liquidites": 1804.29,
+      "valeur_positions": 21382.79,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-07-31",
       "perf": 28.75,
       "capital": 23509.75,
       "benchmark_cac40": 3.54,
-      "benchmark_msci": 11.08
+      "benchmark_msci": 11.08,
+      "liquidites": 726.21,
+      "valeur_positions": 22783.54,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-01",
       "perf": 28.75,
       "capital": 23509.9,
       "benchmark_cac40": 3.84,
-      "benchmark_msci": 11.65
+      "benchmark_msci": 11.65,
+      "liquidites": 726.21,
+      "valeur_positions": 22783.69,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-03",
@@ -3675,161 +3912,230 @@
       "capital": 33853.29,
       "benchmark_cac40": 3.84,
       "benchmark_msci": 11.65,
-      "note": "Injection +10k€"
+      "note": "Injection +10k€",
+      "liquidites": 10726.21,
+      "valeur_positions": 23127.08,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-04",
       "perf": 32.12,
       "capital": 34123.81,
       "benchmark_cac40": 5.11,
-      "benchmark_msci": 13.34
+      "benchmark_msci": 13.34,
+      "liquidites": 10726.21,
+      "valeur_positions": 23397.6,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-05",
       "perf": 33.28,
       "capital": 34335.39,
       "benchmark_cac40": 5.75,
-      "benchmark_msci": 14.8
+      "benchmark_msci": 14.8,
+      "liquidites": 10726.21,
+      "valeur_positions": 23609.18,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-07",
       "perf": 33.93,
       "capital": 34454.67,
       "benchmark_cac40": 6.16,
-      "benchmark_msci": 15.12
+      "benchmark_msci": 15.12,
+      "liquidites": 10726.21,
+      "valeur_positions": 23728.46,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-10",
       "perf": 34.59,
       "capital": 34565.54,
       "benchmark_cac40": 6.34,
-      "benchmark_msci": 15.57
+      "benchmark_msci": 15.57,
+      "liquidites": 9612.74,
+      "valeur_positions": 24952.8,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-11",
       "perf": 34.64,
       "capital": 34577.72,
       "benchmark_cac40": 6.48,
-      "benchmark_msci": 15.66
+      "benchmark_msci": 15.66,
+      "liquidites": 9612.74,
+      "valeur_positions": 24964.98,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-12",
       "perf": 35.31,
       "capital": 34749.75,
       "benchmark_cac40": 6.34,
-      "benchmark_msci": 15.62
+      "benchmark_msci": 15.62,
+      "liquidites": 9612.74,
+      "valeur_positions": 25137.01,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-13",
       "perf": 36.15,
       "capital": 34966.39,
       "benchmark_cac40": 5.85,
-      "benchmark_msci": 15.7
+      "benchmark_msci": 15.7,
+      "liquidites": 9612.74,
+      "valeur_positions": 25353.65,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-14",
       "perf": 36.58,
       "capital": 35075.86,
       "benchmark_cac40": 5.56,
-      "benchmark_msci": 16.24
+      "benchmark_msci": 16.24,
+      "liquidites": 9612.74,
+      "valeur_positions": 25463.12,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-17",
       "perf": 34.84,
       "capital": 34629.72,
       "benchmark_cac40": 5.39,
-      "benchmark_msci": 15.76
+      "benchmark_msci": 15.76,
+      "liquidites": 9459.08,
+      "valeur_positions": 25170.64,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-18",
       "perf": 34.99,
       "capital": 34668.67,
       "benchmark_cac40": 4.69,
-      "benchmark_msci": 15.61
+      "benchmark_msci": 15.61,
+      "liquidites": 9459.08,
+      "valeur_positions": 25209.59,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-19",
       "perf": 34.15,
       "capital": 34452.04,
       "benchmark_cac40": 3.83,
-      "benchmark_msci": 14.47
+      "benchmark_msci": 14.47,
+      "liquidites": 9459.08,
+      "valeur_positions": 24992.96,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-20",
       "perf": 33.39,
       "capital": 34258.24,
       "benchmark_cac40": 3.74,
-      "benchmark_msci": 14.06
+      "benchmark_msci": 14.06,
+      "liquidites": 9459.08,
+      "valeur_positions": 24799.16,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-21",
       "perf": 33.69,
       "capital": 34335.39,
       "benchmark_cac40": 3.15,
-      "benchmark_msci": 13.32
+      "benchmark_msci": 13.32,
+      "liquidites": 9459.08,
+      "valeur_positions": 24876.31,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-24",
       "perf": 33.35,
       "capital": 34246.57,
       "benchmark_cac40": 3.53,
-      "benchmark_msci": 13.64
+      "benchmark_msci": 13.64,
+      "liquidites": 7669.61,
+      "valeur_positions": 26576.96,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-25",
       "perf": 33.62,
       "capital": 34316.86,
       "benchmark_cac40": 3.15,
-      "benchmark_msci": 13.39
+      "benchmark_msci": 13.39,
+      "liquidites": 7669.61,
+      "valeur_positions": 26647.25,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-27",
       "perf": 33.43,
       "capital": 34267.23,
       "benchmark_cac40": 3.26,
-      "benchmark_msci": 13.67
+      "benchmark_msci": 13.67,
+      "liquidites": 7669.61,
+      "valeur_positions": 26597.62,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-28",
       "perf": 36.7,
       "capital": 35106.86,
       "benchmark_cac40": 1.52,
-      "benchmark_msci": 13.8
+      "benchmark_msci": 13.8,
+      "liquidites": 7669.61,
+      "valeur_positions": 27437.25,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-29",
       "perf": 36.62,
       "capital": 35087.92,
       "benchmark_cac40": 1.52,
-      "benchmark_msci": 13.8
+      "benchmark_msci": 13.8,
+      "liquidites": 7669.61,
+      "valeur_positions": 27418.31,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-08-31",
       "perf": 35.97,
       "capital": 34921.07,
       "benchmark_cac40": 1.7,
-      "benchmark_msci": 13.87
+      "benchmark_msci": 13.87,
+      "liquidites": 5120.38,
+      "valeur_positions": 29800.69,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-09-01",
       "perf": 36.81,
       "capital": 35135.89,
       "benchmark_cac40": 2.51,
-      "benchmark_msci": 15.18
+      "benchmark_msci": 15.18,
+      "liquidites": 5120.38,
+      "valeur_positions": 30015.51,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-09-02",
       "perf": 34.76,
       "capital": 34609.33,
       "benchmark_cac40": 1.7,
-      "benchmark_msci": 15.18
+      "benchmark_msci": 15.18,
+      "liquidites": 5120.38,
+      "valeur_positions": 29488.95,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-09-03",
       "perf": 34.37,
       "capital": 34509.44,
       "benchmark_cac40": 1.3,
-      "benchmark_msci": 13.72
+      "benchmark_msci": 13.72,
+      "liquidites": 5120.38,
+      "valeur_positions": 29389.06,
+      "valeur_positions_source": "reconstituee"
     },
     {
       "date": "2026-09-04",
@@ -3837,7 +4143,9 @@
       "capital": 35131.16,
       "benchmark_cac40": 1.11,
       "benchmark_msci": 14.86,
-      "note": "Régularisation de trésorerie +374.10 € (bases de change réparées sans le cash)"
+      "note": "Régularisation de trésorerie +374.10 € (bases de change réparées sans le cash)",
+      "liquidites": 5120.38,
+      "valeur_positions": 30010.78
     }
   ],
   "max_drawdown": -8.47,
@@ -3847,5 +4155,6 @@
   "total_resultat_realise": -937.77,
   "pfu_rate": 0.314,
   "ecart_tresorerie": -0.0,
-  "plus_value_nette_si_liquidation": 6046.42
+  "plus_value_nette_si_liquidation": 6046.42,
+  "valeur_positions": 30010.78
 }

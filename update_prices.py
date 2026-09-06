@@ -156,10 +156,14 @@ def main():
 
     # ── Upsert performance_history pour aujourd'hui
     history = portfolio.get("performance_history", [])
+    # Le point porte sa décomposition, pas seulement son total : `capital` seul ne
+    # permettait pas de tracer la valeur des lignes hors liquidités.
     today_entry = {
         "date":            today,
         "perf":            performance,
         "capital":         capital_actuel,
+        "valeur_positions": agr["valeur_positions"],
+        "liquidites":      round(liquidites, 2),
         "benchmark_cac40": bench_cac,
         "benchmark_msci":  bench_msci,
     }
@@ -181,8 +185,8 @@ def main():
     performance_post_liquidation = _perf_twr(portfolio, capital_post_liquidation)
 
     # ── Le livre boucle-t-il ? liquidités + Σ bases = versé + réalisé ────────
-    # Le compteur cumulé fait foi : `ordres` est plafonné à 50 entrées, un
-    # invariant assis dessus casserait le jour où le journal se tronque.
+    # Le compteur cumulé fait foi : `ordres` est plafonné, un invariant assis
+    # dessus casserait le jour où le journal se tronque.
     total_resultat_realise = portfolio.get(
         "total_resultat_realise", resultat_realise_net(portfolio.get("ordres", [])))
     ecart = ecart_tresorerie(capital_initial, liquidites, positions, total_resultat_realise)
@@ -215,6 +219,7 @@ def main():
     portfolio["pertes_imputees_si_liquidation"] = agr["pertes_imputees_si_liquidation"]
     # Grandeurs que le site LIT au lieu de les déduire par soustraction
     portfolio["total_investi"]             = agr["total_investi"]
+    portfolio["valeur_positions"]          = agr["valeur_positions"]
     portfolio["plus_value_latente_totale"] = agr["plus_value_latente_totale"]
     portfolio["total_resultat_realise"]    = round(total_resultat_realise, 2)
     portfolio["ecart_tresorerie"]          = ecart

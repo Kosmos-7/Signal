@@ -72,14 +72,40 @@ recalculé), et `plus_value_latente_eur` pouvait rester périmée après un
 allègement ou un renfort si le prix du jour manquait, le dashboard préférant le
 champ stocké au calcul.
 
+**Le journal des ordres devient le registre de trésorerie.** Il lui manquait le
+capital de départ ET le versement du 03/08 : seul celui du 05/05 y figurait, si
+bien que le registre des versements et le journal racontaient deux histoires du
+même compte. Les deux entrées sont ajoutées, les apports totalisent maintenant
+exactement le capital versé, et un test l'exige. Le plafond passe de 50 à 120
+opérations, et les mouvements de CAISSE (versements, régularisations) n'y sont
+plus jamais soumis : ce sont eux qui portent la structure du compte. Le journal
+en portait 47 sur 50, il aurait commencé à perdre ses entrées d'amorçage la
+semaine suivante.
+
+**Chaque point d'historique porte enfin sa décomposition.**
+`performance_history` ne gardait que `capital` (positions + cash) : la valeur des
+lignes hors liquidités n'existait nulle part. Elle a été reconstituée à rebours
+sur les 95 points depuis le journal des ordres
+(`notes/archive/backfill_valeur_positions_2026_09_06.py`), et chaque run l'écrit
+désormais. La reconstitution retombe AU CENTIME sur les deux grandeurs mesurées
+du jour ; un seul point, celui de l'amorçage, est borné à cash nul parce que le
+livre de départ est incohérent avec lui-même (10 984 € d'achats pour 10 000 € de
+capital, bien avant tout ce qui est vérifiable). Les points reconstitués portent
+`valeur_positions_source: "reconstituee"` : la distinction entre mesuré et
+reconstitué reste lisible pour toujours.
+
 **Côté affichage.** La carte « Valeur du portefeuille » laisse la place à
-« Gain en euros » (+5 131 €, sous-titre « +3 548 € net si tout vendu »), à côté
-de « Performance » en pourcents : la performance se lit désormais dans les deux
-unités. Le graphique bascule entre **%** et **€**, la série en euros retranchant
-le capital VERSÉ à la date de chaque point, donc insensible aux versements comme
-l'indice pondéré par le temps. Les marqueurs verticaux « ⊕ injection +10 k€ »
-sont retirés : les deux séries ne bougent pas ce jour-là, et souligner un
-non-événement raconte le contraire de ce que le graphe mesure. Le compteur de
+« Plus-value latente » (+6 069 €, sous-titre « sur 23 942 € investis »), à côté
+de « Performance » en pourcents : le rendement se lit en pourcents, le gain en
+euros. Le graphique bascule entre **%** et **€**, la série en euros traçant le
+montant du portefeuille HORS liquidités ; le titre suit l'unité, parce qu'un
+montant sous « Performance depuis le lancement » ferait lire les marches des
+deux versements comme du rendement. Les graduations d'axes disparaissent au
+profit du réticule, qui donne valeur et date au survol ou au doigt, et la courbe
+récupère la place. La pastille « En avance sur le marché » est retirée : elle
+énonçait ce que les deux cartes montrent côte à côte, +36,8 % contre +14,9 % ;
+le liseré coloré en tête de bloc porte le même signal sans le dire. Les
+marqueurs verticaux « ⊕ injection +10 k€ » sont retirés. Le compteur de
 positions annonçait « 30 011 € investis » là où 23 942 € avaient été engagés :
 c'était la valeur de marché, et l'écart de 6 069 € était la plus-value latente,
 citée deux fois dans la même phrase.

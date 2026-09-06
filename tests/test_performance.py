@@ -431,10 +431,15 @@ check("le graphique ne trace plus de marqueur d'injection",
       and "'⊕ injection '" not in _html)
 check("le graphique bascule entre pourcents et euros",
       "setChartUnit('pct'" in _html and "setChartUnit('eur'" in _html)
-check("la série en euros retranche le capital versé à la date du point",
-      "verseALaDate" in _html)
-check("la carte « Valeur du portefeuille » a laissé la place au gain en euros",
-      "Valeur du portefeuille <span" not in _html and "Gain en euros <span" in _html)
+
+check("la carte « Valeur du portefeuille » a laissé la place à la plus-value latente",
+      "Valeur du portefeuille <span" not in _html and "Plus-value latente <span" in _html)
+check("le verdict « en avance sur le marché » ne double plus les deux cartes",
+      "En avance sur le marché" not in _html and "status-pill\" style" not in _html)
+check("le graphe n'affiche plus de graduations d'axes",
+      "function fmtAxe" not in _html and "'text-anchor':'end'" not in _html)
+check("la série en euros trace le montant des lignes, hors liquidités",
+      "h.valeur_positions" in _html and "verseALaDate" not in _html)
 check("le site lit le résultat réalisé au lieu de le déduire",
       "d.total_resultat_realise" in _html
       and "gainLatent - pvLatenteTotale" not in _html)
@@ -444,6 +449,58 @@ check("l'infobulle n'est plus rognée par le bloc qui la contient",
       ".survival-block { background: var(--surface); border: 1px solid var(--border); "
       "border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; "
       "position: relative; box-shadow" in _html)
+
+
+print("\n— Le journal des ordres est le registre de trésorerie —")
+# IL N'Y AVAIT NI LE CAPITAL DE DÉPART NI LE VERSEMENT D'AOÛT. Seul celui du
+# 05/05 était journalisé : le registre des versements et le journal des ordres
+# racontaient deux histoires différentes du même compte. Reconstituer les
+# liquidités d'une date passée demandait alors de rustiner deux trous à la main.
+_apports = [o for o in d["ordres"] if o.get("type") == "APPORT"]
+check("chaque versement du registre a son entrée au journal",
+      len(_apports) == len(d["injections"]) + 1,
+      f"{len(_apports)} apports pour {len(d['injections'])} injections + le départ")
+check("les versements journalisés totalisent le capital versé",
+      abs(sum(o["montant"] for o in _apports) - d["capital_initial"]) < 0.01,
+      f"{sum(o['montant'] for o in _apports)} vs {d['capital_initial']}")
+_dates_inj = {i["date"] for i in d["injections"]}
+check("chaque injection datée retrouve son apport au journal",
+      _dates_inj <= {o["date"] for o in _apports})
+# Le plafond ne doit JAMAIS emporter un mouvement de caisse : c'est lui qui
+# porte la structure du compte, et il est rare et minuscule.
+_faux = ([{"type": "ACHAT", "date": "2026-01-%02d" % (i % 28 + 1)} for i in range(300)]
+         + [{"type": "APPORT", "date": "2020-01-01"},
+            {"type": "CORRECTION", "date": "2020-01-02"}])
+_garde = portfolio_agent.tronquer_ordres(_faux)
+check("la troncature du journal épargne les versements et régularisations",
+      sum(1 for o in _garde if o["type"] in ("APPORT", "CORRECTION")) == 2
+      and len(_garde) == portfolio_agent.PLAFOND_ORDRES + 2)
+check("le journal publié tient sous son plafond",
+      sum(1 for o in d["ordres"] if o["type"] not in ("APPORT", "CORRECTION"))
+      <= portfolio_agent.PLAFOND_ORDRES)
+
+print("\n— Chaque point d'historique porte sa décomposition —")
+# `capital` seul ne permettait pas de tracer la valeur des lignes hors cash : il
+# a fallu reconstituer huit mois de trésorerie à rebours depuis le journal. Un
+# total dont on ne garde pas les termes est un total qu'on ne saura pas
+# redécouper plus tard.
+_h = d["performance_history"]
+check("tous les points portent valeur_positions et liquidites",
+      all("valeur_positions" in x and "liquidites" in x for x in _h),
+      str([x["date"] for x in _h if "valeur_positions" not in x][:3]))
+_incoh = [x["date"] for x in _h
+          if abs(x["valeur_positions"] + x["liquidites"] - x["capital"]) > 0.011]
+check("positions + liquidités = capital, à chaque point", not _incoh, str(_incoh[:3]))
+check("ni cash ni positions négatifs dans l'historique",
+      all(x["liquidites"] >= 0 and x["valeur_positions"] >= 0 for x in _h))
+check("le dernier point porte les grandeurs MESURÉES du jour",
+      _h[-1]["valeur_positions"] == d["valeur_positions"]
+      and _h[-1]["liquidites"] == d["liquidites"]
+      and "valeur_positions_source" not in _h[-1])
+check("les points reconstitués sont marqués comme tels",
+      all(x.get("valeur_positions_source") == "reconstituee" for x in _h[:-1]))
+check("la valeur des positions publiée est la somme des lignes",
+      d["valeur_positions"] == round(sum(p["valeur_actuelle"] for p in d["positions"]), 2))
 
 
 total = ok + len(ko)

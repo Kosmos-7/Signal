@@ -438,6 +438,29 @@ def sync_plus_value_latente(positions):
     return positions
 
 
+# Le journal est le REGISTRE DE TRÉSORERIE du portefeuille, pas seulement une
+# liste d'opérations à afficher. C'est lui qui permet de reconstituer les
+# liquidités d'une date passée — ce qu'il a fallu faire sur huit mois le
+# 06/09/2026 pour tracer la valeur des lignes hors cash. Un plafond qui laisse
+# tomber les entrées les plus anciennes détruit cette capacité, définitivement.
+#
+# Le plafond passe de 50 à 120 entrées (environ 9 Ko de JSON par tranche de dix
+# ordres, à peser contre le poids de la page), et les mouvements de CAISSE —
+# versements et régularisations — n'y sont JAMAIS soumis : ils sont rares,
+# minuscules, et ce sont eux qui portent la structure du compte. Au 06/09/2026
+# le journal en portait trois pour 47 opérations de marché.
+PLAFOND_ORDRES = 120
+TYPES_CAISSE   = ("APPORT", "CORRECTION")
+
+
+def tronquer_ordres(ordres):
+    """Garde les `PLAFOND_ORDRES` opérations les plus récentes, et TOUT le cash."""
+    marche = [o for o in ordres if o.get("type") not in TYPES_CAISSE]
+    caisse = [o for o in ordres if o.get("type") in TYPES_CAISSE]
+    garde  = marche[:PLAFOND_ORDRES] + caisse
+    return sorted(garde, key=lambda o: o.get("date", ""), reverse=True)
+
+
 def resultat_realise_net(ordres):
     """Résultat des ventes déjà passées, LU dans le journal.
 
@@ -470,7 +493,7 @@ def ecart_tresorerie(capital_verse, liquidites, positions, realise_net):
     daté du 06/09/2026).
 
     `realise_net` est le COMPTEUR CUMULÉ, pas la somme du journal : `ordres` est
-    plafonné à 50 entrées et en portait déjà 47. Faire reposer un invariant sur
+    plafonné et en portait déjà 47 sur 50. Faire reposer un invariant sur
     une liste tronquée, c'est le programmer pour qu'il casse — ici la semaine
     suivante, en bloquant la publication. Même raison que total_frais_payes.
     """
@@ -2282,9 +2305,9 @@ Ne jamais inclure de balises markdown ou de backticks.""",
             f"   Une base fiscale ou un cash a été modifié sans son symétrique.")
     if abs(ecart) > 0.02:
         print(f"   ℹ️  Écart de trésorerie résiduel : {ecart:+.2f}€ (arrondis)")
-    # Tant que le journal est complet, il recoupe le compteur. Une fois tronqué
-    # (plus de 50 ordres), seul le compteur fait foi et ce contrôle se tait.
-    if len(tous_ordres) <= 50:
+    # Tant que le journal est complet, il recoupe le compteur. Une fois tronqué,
+    # seul le compteur fait foi et ce contrôle se tait.
+    if len(tous_ordres) <= PLAFOND_ORDRES:
         journal = resultat_realise_net(tous_ordres)
         if abs(journal - total_resultat_realise) > 0.05:
             print(f"   ⚠️  Résultat réalisé : compteur {total_resultat_realise:.2f}€ "
@@ -2292,8 +2315,15 @@ Ne jamais inclure de balises markdown ou de backticks.""",
 
     # ── Historique de performance (upsert : toujours la valeur finale du jour) ──
     history = portfolio.get("performance_history", [])
+    # LE POINT PORTE SA DÉCOMPOSITION, PAS SEULEMENT SON TOTAL. `capital` seul
+    # ne permet pas de tracer la valeur des lignes hors liquidités : il a fallu
+    # reconstituer huit mois de trésorerie à rebours depuis le journal des ordres
+    # pour l'obtenir une fois (notes/archive/backfill_valeur_positions_2026_09_06.py).
+    # Un total dont on ne garde pas les termes est un total qu'on ne saura pas
+    # redécouper plus tard.
     today_entry = {
         "date": today, "perf": performance, "capital": capital_actuel,
+        "valeur_positions": agr["valeur_positions"], "liquidites": round(liquidites, 2),
         "benchmark_cac40": bench_cac, "benchmark_msci": bench_msci
     }
     idx_today = next((i for i, h in enumerate(history) if h.get("date") == today), None)
@@ -2343,6 +2373,7 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         # Elles sont mesurées ici, une fois, à côté des chiffres dont elles
         # dépendent.
         "total_investi":             agr["total_investi"],       # Σ bases fiscales ouvertes
+        "valeur_positions":          agr["valeur_positions"],    # capital HORS liquidités
         "plus_value_latente_totale": agr["plus_value_latente_totale"],
         "total_resultat_realise":    total_resultat_realise,     # ventes encaissées, net PFU
         "ecart_tresorerie":          ecart,                      # 0,00 = le livre boucle
@@ -2376,7 +2407,7 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         "positions":           sorted(positions, key=lambda x: -x.get("performance", 0)),
         "liquidites":          round(liquidites, 2),
         "pct_liquidites":      round(liquidites / capital_actuel * 100, 1) if capital_actuel > 0 else 0,
-        "ordres":              tous_ordres[:50],
+        "ordres":              tronquer_ordres(tous_ordres),
         "biais_detectes":      decisions_claude.get("biais_detectes", []),
         "regles_actives":      regles_auto,
         # Décisions tentées par Claude mais rejetées par les règles mécaniques.
