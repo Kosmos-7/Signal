@@ -308,6 +308,144 @@ if _hebdo:
     check("aucun champ du run quotidien n'est jeté par le run hebdomadaire",
           not _clignotants, f"clignotants : {_clignotants}")
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+print("\n— Le livre boucle : liquidités + bases = versé + réalisé —")
+# CETTE IDENTITÉ EST VRAIE PAR CONSTRUCTION, ET ELLE ÉTAIT FAUSSE DE 374,10 €.
+# Deux migrations de change ont réécrit `montant_investi` sur sept lignes sans
+# jamais corriger le cash débité à l'achat. Rien ne l'a vu, parce que le
+# dashboard DÉDUISAIT le résultat réalisé par soustraction : l'écart y tombait,
+# étiqueté « résultat réalisé sur les ventes passées » — −1 311,87 € affichés
+# quand les douze ventes du journal totalisaient −937,77 €. Un chiffre déduit
+# d'un autre n'est le contrôle de personne.
+_verse   = d["capital_initial"]
+_realise = d.get("total_resultat_realise")
+check("le résultat réalisé est publié, pas déduit à l'affichage", _realise is not None)
+_ecart = portfolio_agent.ecart_tresorerie(_verse, d["liquidites"], d["positions"],
+                                          _realise or 0)
+check("l'identité de trésorerie tient à moins de 2 centimes",
+      abs(_ecart) < 0.02, f"écart {_ecart:+.2f} €")
+check("l'écart de trésorerie est publié, donc recoupable",
+      abs(d.get("ecart_tresorerie", 99)) < 0.02, str(d.get("ecart_tresorerie")))
+# Tant que le journal n'est pas tronqué (plafond 50), il recoupe le compteur.
+if len(d["ordres"]) <= 50:
+    check("le compteur de résultat réalisé recoupe le journal des ordres",
+          abs(portfolio_agent.resultat_realise_net(d["ordres"]) - _realise) < 0.05,
+          f"{portfolio_agent.resultat_realise_net(d['ordres'])} vs {_realise}")
+check("le capital publié est bien liquidités + valeur des positions",
+      d["capital_actuel"] == round(
+          sum(p["valeur_actuelle"] for p in d["positions"]) + d["liquidites"], 2))
+
+print("\n— La plus-value latente ne survit jamais à la ligne qu'elle décrit —")
+# Le champ n'était écrit que par maj_position(), qui rend False sans rien
+# toucher quand un prix manque. Un allègement ou un renfort passé ce jour-là
+# laissait la plus-value de l'ANCIENNE ligne, et le dashboard préfère le champ
+# stocké au calcul : il publiait le faux.
+_perime = [p["ticker"] for p in d["positions"]
+           if p.get("plus_value_latente_eur") is not None
+           and abs(p["plus_value_latente_eur"]
+                   - round(p["valeur_actuelle"] - p["montant_investi"], 2)) > 0.011]
+check("chaque plus-value latente vaut valeur − base", not _perime, f"périmées : {_perime}")
+_perf_ko = [p["ticker"] for p in d["positions"]
+            if p["montant_investi"] > 0
+            and abs(p["performance"] - round(
+                (p["valeur_actuelle"] - p["montant_investi"]) / p["montant_investi"] * 100, 2)) > 0.011]
+check("chaque performance de ligne est celle de sa base en euros", not _perf_ko, f"{_perf_ko}")
+check("le total de plus-value latente est publié et exact",
+      d.get("plus_value_latente_totale") == round(
+          sum(p["plus_value_latente_eur"] for p in d["positions"]), 2))
+check("le total investi publié est la somme des bases, pas la valeur de marché",
+      d.get("total_investi") == round(
+          sum(p["montant_investi"] for p in d["positions"]), 2))
+
+_pos_test = [{"ticker": "X", "quantite": 2, "montant_investi": 100.0,
+              "valeur_actuelle": 150.0, "plus_value_latente_eur": 999.0,
+              "performance": 999.0}]
+portfolio_agent.sync_plus_value_latente(_pos_test)
+check("sync_plus_value_latente répare une valeur périmée",
+      _pos_test[0]["plus_value_latente_eur"] == 50.0 and _pos_test[0]["performance"] == 50.0)
+
+print("\n— Une base fiscale n'est jamais réécrite au taux du jour —")
+# La migration GBP décidait avec le taux DU JOUR : `prix_achat × qte / eur_gbp`
+# recalculé à chaque run, comparé au seuil 0,97. LSEG.L était à 0,9934 du seuil.
+# Une hausse de 2,4 % de la livre rallumait la migration sur une base DÉJÀ
+# correcte, amputait la plus-value latente de 46 € et changeait une base fiscale
+# sans qu'aucune transaction ait eu lieu. Les deux migrations sont retirées :
+# on signale, on ne réécrit plus.
+_src_agent = open(os.path.join(RACINE, "portfolio_agent.py"), encoding="utf-8").read()
+check("plus aucune migration ne réécrit montant_investi dans maj_position",
+      "pos[\"montant_investi\"] = correct_eur" not in _src_agent
+      and "pos[\"montant_investi\"] = to_eur(native" not in _src_agent)
+# Le détecteur qui la remplace : une base à moins de 40 % de son estimation au
+# taux du jour est presque sûrement de la devise native prise pour des euros.
+_natif = []
+for _p in d["positions"]:
+    if _p.get("currency") in ("EUR", "", None):
+        continue
+    _est = config.perf_ponderee_temps and _p["montant_investi"]  # garde le linter tranquille
+    _brut = _p["prix_achat"] * _p["quantite"]
+    _impl = _brut / _p["montant_investi"] if _p["montant_investi"] else 0
+    # taux implicite d'achat plausible : entre 0,1 (DKK) et 2 ; jamais ~1 pour
+    # une devise dont le taux courant est loin de 1.
+    if abs(_impl - 1) < 0.02 and _p["currency"] in ("USD", "GBP"):
+        _natif.append(_p["ticker"])
+check("aucune base fiscale ne ressemble à de la devise native non convertie",
+      not _natif, f"suspectes : {_natif}")
+
+print("\n— Le PFU d'une liquidation porte sur le résultat NET —")
+_liq = config.apply_liquidation_cost_and_tax
+check("une liquidation en perte ne paie aucun impôt",
+      _liq([(100.0, 200.0)], 0.0)["impot_pfu_eur"] == 0.0)
+check("une moins-value en compense une plus-value dans la même cession",
+      _liq([(200.0, 100.0), (100.0, 200.0)], 0.0)["impot_pfu_eur"] == 0.0)
+check("sans perte à imputer, une ligne unique retombe sur le calcul de vente",
+      _liq([(1000.0, 500.0)], 0.0)["impot_pfu_eur"]
+      == config.apply_sell_cost_and_tax(1000.0, 500.0)["impot_pfu_eur"])
+_r = _liq([(1000.0, 500.0)], 200.0)
+check("les pertes reportables s'imputent avant l'impôt",
+      _r["pertes_imputees_eur"] == 200.0
+      and _r["impot_pfu_eur"] == round(_r["base_imposable_eur"] * config.PFU_RATE, 2))
+check("une liquidation en perte alimente le stock de pertes reportables",
+      _liq([(100.0, 200.0)], 50.0)["pertes_reportables_restantes_eur"] > 50.0)
+check("le portefeuille publié impute bien ses pertes reportables",
+      d.get("pertes_imputees_si_liquidation", 0) > 0
+      if d.get("total_pertes_reportables", 0) > 0
+         and d.get("plus_value_nette_si_liquidation", 0) > 0 else True)
+_agr = portfolio_agent.agregats_derives(d["positions"], d["liquidites"],
+                                        d["total_pertes_reportables"])
+check("le capital post-liquidation publié est celui du calcul groupé",
+      d["capital_post_liquidation"] == _agr["capital_post_liquidation"],
+      f"{d['capital_post_liquidation']} vs {_agr['capital_post_liquidation']}")
+check("le PFU latent publié est celui du calcul groupé",
+      d["pfu_latent_si_liquidation"] == _agr["pfu_latent_si_liquidation"])
+check("la performance brute suit le capital du jour",
+      d["performance_brute"] == twr(injections,
+                                    d["capital_actuel"] + d["total_frais_payes"]
+                                    + d["total_impots_payes"], cap_depart),
+      f"{d['performance_brute']}")
+
+print("\n— Ce que le graphique de performance ne montre plus —")
+_html = open(os.path.join(RACINE, "portfolio.html"), encoding="utf-8").read()
+check("le graphique ne trace plus de marqueur d'injection",
+      "pts.filter(p => p.note)" not in _html
+      and "'⊕ injection '" not in _html)
+check("le graphique bascule entre pourcents et euros",
+      "setChartUnit('pct'" in _html and "setChartUnit('eur'" in _html)
+check("la série en euros retranche le capital versé à la date du point",
+      "verseALaDate" in _html)
+check("la carte « Valeur du portefeuille » a laissé la place au gain en euros",
+      "Valeur du portefeuille <span" not in _html and "Gain en euros <span" in _html)
+check("le site lit le résultat réalisé au lieu de le déduire",
+      "d.total_resultat_realise" in _html
+      and "gainLatent - pvLatenteTotale" not in _html)
+check("le taux du PFU n'est plus redéclaré en dur dans la page",
+      "* 0.30" not in _html)
+check("l'infobulle n'est plus rognée par le bloc qui la contient",
+      ".survival-block { background: var(--surface); border: 1px solid var(--border); "
+      "border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; "
+      "position: relative; box-shadow" in _html)
+
+
 total = ok + len(ko)
 print(f"\n{ok}/{total} tests passés")
 if ko:

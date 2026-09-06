@@ -384,26 +384,31 @@ def maj_position(pos, eur_usd, eur_gbp=0.86):
     pos["prix_actuel"]     = prix
     pos["valeur_actuelle"] = to_eur(prix * pos["quantite"], currency, eur_usd, eur_gbp)
 
-    # ── Migration GBP : 2 anciennes formules incorrectes existent dans les positions
-    # historiques. La formule correcte (montant / eur_gbp) donne ~1.16× la valeur
-    # GBP native. Toute position GBP dont montant_investi est strictement inférieur
-    # à 0.97× la valeur correcte a été stockée avec une ancienne formule → recompute.
-    if currency == "GBP":
-        native_gbp  = round(pos["prix_achat"] * pos["quantite"], 2)
-        correct_eur = round(native_gbp / eur_gbp, 2)
-        stored      = pos.get("montant_investi", 0)
-        if stored > 0 and stored < correct_eur * 0.97:
-            print(f"  🔧 {pos['ticker']} montant_investi migré : {stored:.2f}€ → {correct_eur:.2f}€ (ancienne formule GBP)")
-            pos["montant_investi"] = correct_eur
-
-    # ── Correction legacy USD : montant_investi stocké en USD natif
-    elif currency == "USD":
-        LEGACY_CUTOFF = "2026-05-05"
-        if pos.get("date_achat", "9999") < LEGACY_CUTOFF:
-            native = round(pos["prix_achat"] * pos["quantite"], 2)
-            stored = pos.get("montant_investi", 0)
-            if stored > 0 and abs(stored - native) / (native + 1) < 0.05:
-                pos["montant_investi"] = to_eur(native, currency, eur_usd, eur_gbp)
+    # ── LES DEUX MIGRATIONS DE BASE FISCALE ONT ÉTÉ RETIRÉES LE 06/09/2026 ──
+    # Elles réécrivaient `montant_investi` en place quand il ressemblait à une
+    # ancienne formule de change. Deux défauts, dont un armé :
+    #
+    #  1. la version GBP décidait au TAUX DU JOUR : `prix_achat × qte / eur_gbp`
+    #     recalculé à chaque run, comparé au seuil 0,97. LSEG.L était à 0,9934 du
+    #     seuil — une hausse de 2,4 % de la livre suffisait à rallumer la
+    #     migration sur une base DÉJÀ correcte, à amputer la plus-value latente
+    #     de 46 € et à changer une base fiscale sans qu'aucune transaction ait eu
+    #     lieu. Puis à recommencer à chaque nouveau plus-bas.
+    #  2. les deux reconstruisaient la base depuis `prix_achat × quantite`, donc
+    #     au taux du jour au lieu du taux d'achat, et SANS les frais d'achat —
+    #     alors que la base fiscale les inclut partout ailleurs.
+    #
+    # Les lignes historiques sont migrées depuis longtemps ; toute ligne ouverte
+    # depuis le 05/05/2026 est enregistrée en euros dès l'achat. Il ne reste donc
+    # rien à réparer, seulement quelque chose à SURVEILLER. On ne réécrit plus
+    # rien en silence : on signale, et tests/test_performance.py refuse de
+    # publier un portefeuille dont une base ressemble à de la devise native.
+    if currency not in ("EUR", "", None) and pos.get("montant_investi", 0) > 0:
+        estime_eur = to_eur(pos["prix_achat"] * pos["quantite"], currency, eur_usd, eur_gbp)
+        if estime_eur > 0 and abs(pos["montant_investi"] - estime_eur) / estime_eur > 0.40:
+            print(f"  ⚠️  {pos['ticker']} : base fiscale {pos['montant_investi']:.2f}€ contre "
+                  f"{estime_eur:.2f}€ estimés au taux du jour (écart > 40 %) — devise non "
+                  f"convertie à l'enregistrement ? Aucune réécriture automatique, à vérifier.")
 
     # Performance en € — cohérent avec valeur_actuelle et montant_investi (tous deux en EUR)
     if pos.get("montant_investi", 0) > 0:
@@ -413,6 +418,101 @@ def maj_position(pos, eur_usd, eur_gbp=0.86):
         # Plus-value latente en € (avant PFU) — affichée sur chaque ligne du site
         pos["plus_value_latente_eur"] = round(pos["valeur_actuelle"] - pos["montant_investi"], 2)
     return True
+
+
+def sync_plus_value_latente(positions):
+    """`plus_value_latente_eur` ne survit jamais à la ligne qu'elle décrit.
+
+    Le champ n'était écrit que par maj_position(), qui rend False sans rien
+    toucher quand le prix n'est pas récupérable. Un allègement ou un renfort
+    exécuté ce jour-là changeait `quantite`, `montant_investi` et
+    `valeur_actuelle` en laissant la plus-value de l'ANCIENNE ligne — et le
+    dashboard préfère le champ stocké au calcul (`?? `), donc il publiait le
+    faux. La valeur est dérivée : on la redérive, toujours, en dernier.
+    """
+    for pos in positions:
+        base = pos.get("montant_investi", 0)
+        if base > 0:
+            pos["plus_value_latente_eur"] = round(pos.get("valeur_actuelle", 0) - base, 2)
+            pos["performance"] = round((pos.get("valeur_actuelle", 0) - base) / base * 100, 2)
+    return positions
+
+
+def resultat_realise_net(ordres):
+    """Résultat des ventes déjà passées, LU dans le journal.
+
+    Le dashboard l'obtenait par soustraction : écart au capital versé moins
+    plus-value latente. Une identité tautologique — le reste y tombait quoi
+    qu'il arrive. Le 04/09/2026 elle affichait −1 311,87 € de « résultat réalisé
+    sur les ventes passées » quand les douze ventes du journal totalisaient
+    −937,77 € : les 374 € d'écart étaient une incohérence de trésorerie, publiée
+    comme une perte de trading. Un chiffre mesuré ne se déduit pas d'un autre.
+
+    Chaque `plus_value_eur` est déjà nette des frais de vente et calculée sur une
+    base fiscale qui inclut les frais d'achat ; il ne reste qu'à retrancher le PFU
+    effectivement payé.
+    """
+    return round(sum(o.get("plus_value_eur", 0) - o.get("impot_pfu_eur", 0)
+                     for o in ordres or [] if o.get("type") == "VENTE"), 2)
+
+
+def ecart_tresorerie(capital_verse, liquidites, positions, realise_net):
+    """L'identité comptable du modèle, en euros. Zéro = le livre est bouclé.
+
+        liquidités + Σ bases fiscales ouvertes = versé + résultat réalisé
+
+    Elle est vraie PAR CONSTRUCTION : le cash sort d'un achat exactement du
+    montant qui entre en base, et une vente retire exactement la base qu'elle
+    déclare. Toute violation signale qu'une base ou un cash a été réécrit sans
+    son symétrique — c'est ce qui s'est produit quand les migrations de change
+    ont réparé sept bases fiscales sans jamais rendre au cash les euros
+    correspondants (374,10 € au 04/09/2026, régularisés par un ordre CORRECTION
+    daté du 06/09/2026).
+
+    `realise_net` est le COMPTEUR CUMULÉ, pas la somme du journal : `ordres` est
+    plafonné à 50 entrées et en portait déjà 47. Faire reposer un invariant sur
+    une liste tronquée, c'est le programmer pour qu'il casse — ici la semaine
+    suivante, en bloquant la publication. Même raison que total_frais_payes.
+    """
+    bases = round(sum(p.get("montant_investi", 0) for p in positions or []), 2)
+    return round(liquidites + bases - capital_verse - realise_net, 2)
+
+
+def agregats_derives(positions, liquidites, total_pertes_reportables):
+    """Tout ce qui se déduit des positions et du cash, calculé UNE fois.
+
+    portfolio.json a deux écrivains — l'agent le lundi, update_prices chaque
+    soirée ouvrée. Chaque grandeur dupliquée entre les deux est une grandeur qui
+    finit par diverger : `performance_brute` l'a fait pendant quatre jours en
+    septembre 2026 (36,35 publié contre 35,71 recalculé) parce que seul l'agent
+    la rafraîchissait.
+    """
+    val_positions = round(sum(p.get("valeur_actuelle", 0) for p in positions), 2)
+    total_investi = round(sum(p.get("montant_investi", 0) for p in positions), 2)
+    capital_actuel = round(val_positions + liquidites, 2)
+    liq = config.apply_liquidation_cost_and_tax(
+        [(p.get("valeur_actuelle", 0),
+          p.get("montant_investi", p.get("valeur_actuelle", 0))) for p in positions],
+        total_pertes_reportables,
+    )
+    # `pertes_si_liquidation` garde son sens d'origine — le stock de moins-values
+    # latentes ligne à ligne, une information sur l'état du livre. Ce n'est PLUS
+    # ce qui échappe au PFU : depuis apply_liquidation_cost_and_tax, ces pertes
+    # s'imputent sur les plus-values de la même cession avant impôt.
+    pertes_lignes = round(sum(max(0.0, p.get("montant_investi", 0) - p.get("valeur_actuelle", 0))
+                              for p in positions), 2)
+    return {
+        "valeur_positions":         val_positions,
+        "total_investi":            total_investi,
+        "plus_value_latente_totale": round(val_positions - total_investi, 2),
+        "capital_actuel":           capital_actuel,
+        "capital_post_liquidation": round(liquidites + liq["cash_recupere_eur"], 2),
+        "frais_si_liquidation":     liq["frais_vente_eur"],
+        "pfu_latent_si_liquidation": liq["impot_pfu_eur"],
+        "pertes_si_liquidation":    pertes_lignes,
+        "plus_value_nette_si_liquidation": liq["plus_value_nette_eur"],
+        "pertes_imputees_si_liquidation": liq["pertes_imputees_eur"],
+    }
 
 def market_status(now_utc=None):
     """Statut d'ouverture des marchés majeurs au moment du run.
@@ -2110,6 +2210,10 @@ Ne jamais inclure de balises markdown ou de backticks.""",
     # ── Recalcul final — valeur_actuelle et performance en EUR
     for pos in positions:
         maj_position(pos, eur_usd, eur_gbp)
+    # maj_position rend False sans rien toucher quand le prix manque : la
+    # plus-value latente d'une ligne allégée ou renforcée ce jour-là resterait
+    # celle de l'ancienne ligne. Elle est dérivée, on la redérive.
+    sync_plus_value_latente(positions)
 
     val_positions  = sum(p.get("valeur_actuelle", 0) for p in positions)
     capital_actuel = round(val_positions + liquidites, 2)
@@ -2131,13 +2235,20 @@ Ne jamais inclure de balises markdown ou de backticks.""",
     total_frais_payes      = portfolio.get("total_frais_payes", 0.0)
     total_impots_payes     = portfolio.get("total_impots_payes", 0.0)
     total_pertes_reportables = portfolio.get("total_pertes_reportables", 0.0)
+    # Résultat des ventes déjà encaissées. Compteur et non somme du journal :
+    # `ordres` est plafonné à 50 et le site publie ce chiffre.
+    total_resultat_realise = portfolio.get(
+        "total_resultat_realise", resultat_realise_net(portfolio.get("ordres", [])))
     for o in nouveaux_ordres:
         total_frais_payes      += o.get("frais_achat_eur", 0) + o.get("frais_vente_eur", 0)
         total_impots_payes     += o.get("impot_pfu_eur", 0)
         total_pertes_reportables += o.get("perte_reportable_eur", 0)
+        if o.get("type") == "VENTE":
+            total_resultat_realise += o.get("plus_value_eur", 0) - o.get("impot_pfu_eur", 0)
     total_frais_payes      = round(total_frais_payes, 2)
     total_impots_payes     = round(total_impots_payes, 2)
     total_pertes_reportables = round(total_pertes_reportables, 2)
+    total_resultat_realise = round(total_resultat_realise, 2)
 
     # Performance brute (pédagogique) : ce qu'on aurait sans aucune friction
     performance_brute  = _perf_twr(portfolio, capital_actuel + total_frais_payes + total_impots_payes)
@@ -2149,28 +2260,35 @@ Ne jamais inclure de balises markdown ou de backticks.""",
     #   - frais de vente (15bps × 0.5) sur chaque position
     #   - PFU (config.PFU_RATE) sur chaque plus-value latente (les pertes latentes créent du crédit fiscal)
     # → capital_post_liquidation = liquidités + Σ(brut - frais_vente - PFU_latent)
-    cash_post_liq               = float(liquidites)
-    frais_si_liquidation        = 0.0
-    pfu_latent_si_liquidation   = 0.0
-    pertes_si_liquidation       = 0.0
-    for pos in positions:
-        brut = pos.get("valeur_actuelle", 0)
-        # Même fallback de base fiscale que le chemin de vente (cohérence du PFU) :
-        # reconstitution depuis prix_achat×quantité si le champ legacy manque.
-        base = pos.get("montant_investi") or to_eur(
-            pos["prix_achat"] * pos["quantite"],
-            pos.get("currency") or detect_currency(pos["ticker"], pos.get("market", "")),
-            eur_usd, eur_gbp)
-        r = config.apply_sell_cost_and_tax(brut, base)
-        cash_post_liq             += r["cash_recupere_eur"]
-        frais_si_liquidation      += r["frais_vente_eur"]
-        pfu_latent_si_liquidation += r["impot_pfu_eur"]
-        pertes_si_liquidation     += r["perte_reportable_eur"]
-    capital_post_liquidation   = round(cash_post_liq, 2)
-    frais_si_liquidation       = round(frais_si_liquidation, 2)
-    pfu_latent_si_liquidation  = round(pfu_latent_si_liquidation, 2)
-    pertes_si_liquidation      = round(pertes_si_liquidation, 2)
+    agr = agregats_derives(positions, liquidites, total_pertes_reportables)
+    capital_post_liquidation     = agr["capital_post_liquidation"]
+    frais_si_liquidation         = agr["frais_si_liquidation"]
+    pfu_latent_si_liquidation    = agr["pfu_latent_si_liquidation"]
+    pertes_si_liquidation        = agr["pertes_si_liquidation"]
+    pertes_imputees_si_liquidation = agr["pertes_imputees_si_liquidation"]
     performance_post_liquidation = _perf_twr(portfolio, capital_post_liquidation)
+
+    # ── Le livre boucle-t-il ? ────────────────────────────────────────────────
+    # liquidités + Σ bases ouvertes = versé + résultat réalisé. Une violation
+    # veut dire qu'un cash ou une base a bougé sans son symétrique — on refuse
+    # de publier plutôt que d'enfouir l'écart dans un « résultat réalisé » que
+    # personne ne recoupe.
+    ecart = ecart_tresorerie(CAPITAL_INITIAL, liquidites, positions, total_resultat_realise)
+    if abs(ecart) > 1.0:
+        raise SystemExit(
+            f"❌ Trésorerie incohérente de {ecart:+.2f}€ — abandon SANS écrire.\n"
+            f"   liquidités {liquidites:.2f} + bases {agr['total_investi']:.2f} "
+            f"≠ versé {CAPITAL_INITIAL:.2f} + réalisé {total_resultat_realise:.2f}\n"
+            f"   Une base fiscale ou un cash a été modifié sans son symétrique.")
+    if abs(ecart) > 0.02:
+        print(f"   ℹ️  Écart de trésorerie résiduel : {ecart:+.2f}€ (arrondis)")
+    # Tant que le journal est complet, il recoupe le compteur. Une fois tronqué
+    # (plus de 50 ordres), seul le compteur fait foi et ce contrôle se tait.
+    if len(tous_ordres) <= 50:
+        journal = resultat_realise_net(tous_ordres)
+        if abs(journal - total_resultat_realise) > 0.05:
+            print(f"   ⚠️  Résultat réalisé : compteur {total_resultat_realise:.2f}€ "
+                  f"contre journal {journal:.2f}€")
 
     # ── Historique de performance (upsert : toujours la valeur finale du jour) ──
     history = portfolio.get("performance_history", [])
@@ -2218,12 +2336,25 @@ Ne jamais inclure de balises markdown ou de backticks.""",
         "total_frais_payes":   total_frais_payes,        # cumulé depuis création
         "total_impots_payes":  total_impots_payes,       # cumulé depuis création (PFU)
         "total_pertes_reportables": total_pertes_reportables,  # pertes utilisables fiscalement sur 10 ans
+        # LE SITE NE DÉDUIT PLUS, IL LIT. Ces quatre grandeurs étaient
+        # reconstituées en JavaScript par soustraction — « résultat réalisé =
+        # écart au capital versé moins plus-value latente » — donc n'importe
+        # quelle incohérence du livre y atterrissait, étiquetée perte de trading.
+        # Elles sont mesurées ici, une fois, à côté des chiffres dont elles
+        # dépendent.
+        "total_investi":             agr["total_investi"],       # Σ bases fiscales ouvertes
+        "plus_value_latente_totale": agr["plus_value_latente_totale"],
+        "total_resultat_realise":    total_resultat_realise,     # ventes encaissées, net PFU
+        "ecart_tresorerie":          ecart,                      # 0,00 = le livre boucle
+        "pfu_rate":                  config.PFU_RATE,            # que le front ne le redéclare pas
         # Post-liquidation : cash réel si tout vendu maintenant (= réponse honnête au gain net)
         "capital_post_liquidation":     capital_post_liquidation,
         "performance_post_liquidation": performance_post_liquidation,
         "frais_si_liquidation":         frais_si_liquidation,
         "pfu_latent_si_liquidation":    pfu_latent_si_liquidation,
         "pertes_si_liquidation":        pertes_si_liquidation,
+        "plus_value_nette_si_liquidation": agr["plus_value_nette_si_liquidation"],
+        "pertes_imputees_si_liquidation": pertes_imputees_si_liquidation,
         # Phase 2 — Cache VIX pour fallback si fetch échoue au run suivant
         "last_known_vix":      contexte.get("vix"),
         "last_known_vix_source": contexte.get("vix_source"),

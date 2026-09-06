@@ -16,23 +16,23 @@
     }
   ],
   "capital_initial": 30000.0,
-  "capital_actuel": 34757.06,
-  "performance": 35.34,
-  "performance_brute": 36.35,
+  "capital_actuel": 35131.16,
+  "performance": 36.79,
+  "performance_brute": 37.16,
   "total_frais_payes": 36.27,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 1075.2,
-  "capital_post_liquidation": 32689.47,
-  "performance_post_liquidation": 27.29,
+  "capital_post_liquidation": 33547.69,
+  "performance_post_liquidation": 30.63,
   "frais_si_liquidation": 22.51,
-  "pfu_latent_si_liquidation": 2045.11,
-  "pertes_si_liquidation": 466.63,
+  "pfu_latent_si_liquidation": 1560.96,
+  "pertes_si_liquidation": 461.46,
   "last_known_vix": 14.53,
   "last_known_vix_source": "live",
   "last_known_vix_updated_at": "2026-09-04",
   "benchmark_cac40": 1.11,
   "benchmark_msci": 14.86,
-  "vs_benchmark": 20.48,
+  "vs_benchmark": 21.93,
   "mode_panique": false,
   "perf_cac_semaine": -1.4,
   "positions": [
@@ -50,7 +50,7 @@
       "valeur_actuelle": 4270.2,
       "performance": 118.82,
       "score_entree": 88,
-      "poids": 12.3,
+      "poids": 12.2,
       "plus_value_latente_eur": 2318.74
     },
     {
@@ -68,7 +68,7 @@
       "performance": 55.4,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression, la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
-      "poids": 4.9,
+      "poids": 4.8,
       "plus_value_latente_eur": 606.7
     },
     {
@@ -85,7 +85,7 @@
       "valeur_actuelle": 6739.73,
       "performance": 46.8,
       "score_entree": 94,
-      "poids": 19.4,
+      "poids": 19.2,
       "plus_value_latente_eur": 2148.48,
       "frais_achat_eur": 1.95
     },
@@ -104,7 +104,7 @@
       "performance": 44.57,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée, profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
-      "poids": 4.5,
+      "poids": 4.4,
       "plus_value_latente_eur": 481.42
     },
     {
@@ -172,7 +172,7 @@
       "valeur_actuelle": 645.5,
       "performance": 13.26,
       "score_entree": 93,
-      "poids": 1.9,
+      "poids": 1.8,
       "plus_value_latente_eur": 75.59
     },
     {
@@ -206,7 +206,7 @@
       "valeur_actuelle": 1135.6,
       "performance": 8.32,
       "score_entree": 84,
-      "poids": 3.3,
+      "poids": 3.2,
       "plus_value_latente_eur": 87.21
     },
     {
@@ -242,7 +242,7 @@
       "valeur_actuelle": 965.74,
       "performance": 5.64,
       "score_entree": 93,
-      "poids": 2.8,
+      "poids": 2.7,
       "plus_value_latente_eur": 51.57
     },
     {
@@ -259,7 +259,7 @@
       "valeur_actuelle": 1061.47,
       "performance": 1.58,
       "score_entree": 84,
-      "poids": 3.1,
+      "poids": 3.0,
       "plus_value_latente_eur": 16.55
     },
     {
@@ -294,7 +294,7 @@
       "performance": -2.81,
       "score_entree": 83,
       "raison_achat": "Score 83/100 avec Golden Cross frais (9j), fenêtre signal optimale, et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
-      "poids": 4.2,
+      "poids": 4.1,
       "plus_value_latente_eur": -41.94
     },
     {
@@ -389,12 +389,24 @@
       "score_entree": 82,
       "raison_achat": "Golden Cross frais à J+2 avec confirmation volume : c'est exactement la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant, volume validé). Score 82/100, z=+0.9σ légèrement au-dessus de sa régression mais la surcote reste modérée (20%), et val=2/5 indique un drawdown de -5.5% sous le top 52w, ce qui offre un point d'entrée encore acceptable. Secteur consommation cyclique non corrélé à la concentration IA/Tech déjà lourde du portefeuille (45% Tech + 35% infra-IA), ce qui apporte une diversification réelle. Consensus analystes favorable (+11%), profil de croissance solide pour un acteur dominant des plateformes de voyage. J'engage environ 1 200 euros soit 3.5% du capital, sizing modéré cohérent avec la légère surcote z et le manque de drapeau fondamental récent à croiser.",
       "plus_value_latente_eur": -115.5,
-      "poids": 2.9
+      "poids": 2.8
     }
   ],
-  "liquidites": 4746.28,
-  "pct_liquidites": 13.7,
+  "liquidites": 5120.38,
+  "pct_liquidites": 14.6,
   "ordres": [
+    {
+      "date": "2026-09-06",
+      "type": "CORRECTION",
+      "ticker": "—",
+      "nom": "Régularisation de trésorerie",
+      "qte": 0,
+      "prix": 0,
+      "montant": 374.1,
+      "sens": "credit",
+      "raison": "Le compte espèces rattrape les bases fiscales. Deux migrations de change ont réparé le montant investi de sept lignes achetées avant le 05/05/2026, quand la devise native était encore enregistrée comme si c'étaient des euros, sans jamais corriger le cash débité à l'achat. Six lignes en dollars (NVDA, JPM, V, BLK, AMZN, AVGO) sous-évaluaient les liquidités de 776,15 €, LSEG.L les surévaluait de 377,68 €. L'identité liquidités + bases ouvertes = capital versé + résultat réalisé était donc fausse de 374,10 €, et le site publiait cet écart comme une perte sur les ventes passées. Liquidités portées de 4 746,28 € à 5 120,38 €. Aucun titre n'a changé de main, aucun cours n'a bougé : c'est une correction d'écriture, datée du jour où elle a été passée.",
+      "source": "Régularisation comptable"
+    },
     {
       "date": "2026-08-31",
       "type": "VENTE",
@@ -3821,11 +3833,19 @@
     },
     {
       "date": "2026-09-04",
-      "perf": 35.34,
-      "capital": 34757.06,
+      "perf": 36.79,
+      "capital": 35131.16,
       "benchmark_cac40": 1.11,
-      "benchmark_msci": 14.86
+      "benchmark_msci": 14.86,
+      "note": "Régularisation de trésorerie +374.10 € (bases de change réparées sans le cash)"
     }
   ],
-  "max_drawdown": -8.47
+  "max_drawdown": -8.47,
+  "pertes_imputees_si_liquidation": 1075.2,
+  "total_investi": 23941.85,
+  "plus_value_latente_totale": 6068.93,
+  "total_resultat_realise": -937.77,
+  "pfu_rate": 0.314,
+  "ecart_tresorerie": -0.0,
+  "plus_value_nette_si_liquidation": 6046.42
 }

@@ -5,6 +5,93 @@ Format inspiré de [keepachangelog.com](https://keepachangelog.com/fr/).
 
 ---
 
+### Sept bases fiscales réparées, un compte espèces oublié
+
+Question du propriétaire (06/09) : « vérifie le calcul Valeur du portefeuille et
+plus-value latente ». Les deux formules sont justes et réconcilient à l'euro
+près. Le défaut était ailleurs, et il n'était pas visible en les regardant.
+
+**Les titres achetés avant le 05/05/2026 étaient enregistrés en devise native
+comptée comme des euros.** Deux migrations, dans `maj_position`, avaient réparé
+`montant_investi` sur sept lignes. Aucune n'a touché au cash débité à l'achat.
+NVIDIA, 02/01/2026 : le journal sort 2 301,72 « € » pour 2 300 $ de titres, la
+migration ramène la base à 1 981,90 €, et les 319,82 € restent perdus pour le
+compte espèces. Six lignes USD sous-évaluaient les liquidités de 776,15 €,
+LSEG.L les surévaluait de 377,68 €. Net : **374,10 € manquants**, donc un
+capital publié trop bas de la même somme et une performance sous-estimée de
+1,45 point.
+
+**Rien ne l'a signalé, parce que le chiffre de contrôle était une
+soustraction.** Le site n'affichait pas le résultat réalisé, il le DÉDUISAIT :
+écart au capital versé moins plus-value latente. Une identité toujours vraie,
+dans laquelle n'importe quelle incohérence du livre tombe sans bruit. Elle
+annonçait « −1 311,87 € de résultat réalisé sur les ventes passées » quand les
+douze ventes du journal totalisaient −937,77 €. Un chiffre obtenu par
+soustraction n'est le contrôle de personne.
+
+**L'identité comptable devient un invariant vérifié.** `liquidités + Σ bases
+ouvertes = capital versé + résultat réalisé` : vraie par construction, elle est
+maintenant calculée (`portfolio_agent.ecart_tresorerie`), publiée à côté des
+chiffres qu'elle contrôle (`ecart_tresorerie` dans portfolio.json), et les DEUX
+écrivains du fichier refusent de publier tant qu'elle ne tient pas. Elle repose
+sur un compteur cumulé (`total_resultat_realise`) et non sur la somme du
+journal : `ordres` est plafonné à 50 entrées et en portait 47, un invariant assis
+dessus aurait bloqué la publication la semaine suivante. Le compte espèces est
+régularisé par un ordre `CORRECTION` daté, visible dans le journal du site, pas
+par une retouche silencieuse (`notes/archive/regularisation_tresorerie_2026_09_06.py`).
+
+**Trois autres défauts sortis du même audit.**
+
+1. *La réparation GBP pouvait se rallumer toute seule.* Elle comparait la base
+   stockée à `prix_achat × qte / eur_gbp` recalculé AU TAUX DU JOUR, seuil 0,97.
+   LSEG.L était à 0,9934 : une hausse de 2,4 % de la livre réécrivait une base
+   déjà correcte, amputait la plus-value latente de 46 € et changeait une base
+   fiscale sans qu'aucune transaction ait eu lieu, puis recommençait à chaque
+   nouveau plus-bas. Les deux migrations sont RETIRÉES. À leur place, une alerte :
+   une base à plus de 40 % de son estimation au taux du jour est signalée, jamais
+   réécrite. Un test refuse de publier un portefeuille dont une base ressemble à
+   de la devise native.
+
+2. *Le PFU d'une liquidation totale était calculé ligne à ligne.* Il taxait
+   chaque plus-value isolément et laissait les moins-values sans emploi :
+   2 045,11 € annoncés sur un portefeuille portant 461 € de moins-values latentes
+   et 1 075 € de pertes déjà réalisées dans l'année. Le fisc ne regarde pas les
+   lignes une à une (art. 150-0 D 11 CGI). `config.apply_liquidation_cost_and_tax`
+   impute les unes puis les autres avant impôt : 1 560,96 €, soit **484 € de
+   moins**, et un gain net si tout vendu qui passe de +2 689 € à +3 548 €.
+
+3. *L'infobulle qui expliquait tout cela était rognée de 38 %.* Mesurée au
+   navigateur en 1280×900 : 208 px de haut, 78 px coupés par l'`overflow: hidden`
+   du bloc parent, qui ne servait qu'à arrondir une barre de 3 px portant déjà son
+   propre `border-radius`. Le texte commençait au milieu d'une phrase. Invisible
+   en mobile, où la grille passe en colonne et la carte descend assez bas.
+
+**Deux défauts mineurs traités au passage :** `performance_brute` n'était
+rafraîchie que par le run hebdomadaire (36,35 % publié le 04/09 contre 35,71 %
+recalculé), et `plus_value_latente_eur` pouvait rester périmée après un
+allègement ou un renfort si le prix du jour manquait, le dashboard préférant le
+champ stocké au calcul.
+
+**Côté affichage.** La carte « Valeur du portefeuille » laisse la place à
+« Gain en euros » (+5 131 €, sous-titre « +3 548 € net si tout vendu »), à côté
+de « Performance » en pourcents : la performance se lit désormais dans les deux
+unités. Le graphique bascule entre **%** et **€**, la série en euros retranchant
+le capital VERSÉ à la date de chaque point, donc insensible aux versements comme
+l'indice pondéré par le temps. Les marqueurs verticaux « ⊕ injection +10 k€ »
+sont retirés : les deux séries ne bougent pas ce jour-là, et souligner un
+non-événement raconte le contraire de ce que le graphe mesure. Le compteur de
+positions annonçait « 30 011 € investis » là où 23 942 € avaient été engagés :
+c'était la valeur de marché, et l'écart de 6 069 € était la plus-value latente,
+citée deux fois dans la même phrase.
+
+**Résiduel assumé.** Les taux de change du 02/01 et du 30/04/2026 ne sont pas
+récupérables depuis le runner. Deux aller-retours du journal gardent donc un
+écart d'unité : ADI (perte publiée −62,20 €, réelle ≈ −3,40 €) et MSFT (−4,25 €
+pour ≈ −3,66 €). Ils rendent le résultat réalisé légèrement trop négatif, donc
+la régularisation plutôt conservatrice. Ils ne cassent aucune cohérence du jour.
+
+---
+
 ### Le momentum notait une altitude : Kioxia à 15/15 en plein krach
 
 Question du propriétaire (17/08) : « le momentum de Kioxia n'est-il pas biaisé

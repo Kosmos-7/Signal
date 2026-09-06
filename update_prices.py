@@ -31,6 +31,11 @@ import config
 from portfolio_agent import (
     get_eur_usd_rate, get_eur_gbp_rate, maj_position,
     calc_max_drawdown, save_json_atomic,
+    # Les grandeurs dérivées sont calculées par l'agent ET par ce script. Toute
+    # formule recopiée finit par diverger : performance_brute l'a fait pendant
+    # quatre jours en septembre 2026 parce que seul l'agent la rafraîchissait.
+    sync_plus_value_latente, agregats_derives, ecart_tresorerie,
+    resultat_realise_net,
     # `_perf_twr` est importée malgré son souligné : c'est la SEULE formule de
     # performance du projet, et la partager vaut mieux que respecter une marque
     # de privauté en la recopiant. Un test vérifie que les deux modules tiennent
@@ -84,9 +89,15 @@ def main():
         # une panne de feed en "mise à jour réussie".
         raise SystemExit(f"❌ 0/{len(positions)} prix récupérés — abandon sans écrire")
 
+    # `plus_value_latente_eur` est dérivée de valeur_actuelle et montant_investi :
+    # on la redérive après le refresh plutôt que de faire confiance au stocké,
+    # que maj_position laisse intact quand un prix n'est pas récupérable.
+    sync_plus_value_latente(positions)
+
     # ── Recalcule capital et performance globale
-    val_positions   = sum(p.get("valeur_actuelle", 0) for p in positions)
-    capital_actuel  = round(val_positions + liquidites, 2)
+    agr             = agregats_derives(positions, liquidites,
+                                       portfolio.get("total_pertes_reportables", 0.0))
+    capital_actuel  = agr["capital_actuel"]
     # Performance ponderee par le temps : les injections de capital n'y entrent
     # pas (decision proprietaire du 03/08/2026, methode dans config.py).
     #
@@ -166,20 +177,20 @@ def main():
 
     # ── Capital post-liquidation (cash réel si tout vendu aujourd'hui — recalculé chaque jour)
     # Voir portfolio_agent.main() pour la logique détaillée.
-    cash_post_liq             = float(liquidites)
-    frais_si_liquidation      = 0.0
-    pfu_latent_si_liquidation = 0.0
-    pertes_si_liquidation     = 0.0
-    for pos in positions:
-        brut = pos.get("valeur_actuelle", 0)
-        base = pos.get("montant_investi", brut)
-        r = config.apply_sell_cost_and_tax(brut, base)
-        cash_post_liq             += r["cash_recupere_eur"]
-        frais_si_liquidation      += r["frais_vente_eur"]
-        pfu_latent_si_liquidation += r["impot_pfu_eur"]
-        pertes_si_liquidation     += r["perte_reportable_eur"]
-    capital_post_liquidation     = round(cash_post_liq, 2)
+    capital_post_liquidation     = agr["capital_post_liquidation"]
     performance_post_liquidation = _perf_twr(portfolio, capital_post_liquidation)
+
+    # ── Le livre boucle-t-il ? liquidités + Σ bases = versé + réalisé ────────
+    # Le compteur cumulé fait foi : `ordres` est plafonné à 50 entrées, un
+    # invariant assis dessus casserait le jour où le journal se tronque.
+    total_resultat_realise = portfolio.get(
+        "total_resultat_realise", resultat_realise_net(portfolio.get("ordres", [])))
+    ecart = ecart_tresorerie(capital_initial, liquidites, positions, total_resultat_realise)
+    if abs(ecart) > 1.0:
+        raise SystemExit(
+            f"❌ Trésorerie incohérente de {ecart:+.2f}€ — abandon SANS écrire.\n"
+            f"   liquidités {liquidites:.2f} + bases {agr['total_investi']:.2f} "
+            f"≠ versé {capital_initial:.2f} + réalisé {total_resultat_realise:.2f}")
 
     # ── Met à jour le portfolio (sans toucher aux champs hebdo)
     portfolio["updated_at"]      = today
@@ -197,9 +208,24 @@ def main():
     # Post-liquidation virtuel (mis à jour quotidiennement car positions fluctuent)
     portfolio["capital_post_liquidation"]     = capital_post_liquidation
     portfolio["performance_post_liquidation"] = performance_post_liquidation
-    portfolio["frais_si_liquidation"]         = round(frais_si_liquidation, 2)
-    portfolio["pfu_latent_si_liquidation"]    = round(pfu_latent_si_liquidation, 2)
-    portfolio["pertes_si_liquidation"]        = round(pertes_si_liquidation, 2)
+    portfolio["frais_si_liquidation"]         = agr["frais_si_liquidation"]
+    portfolio["pfu_latent_si_liquidation"]    = agr["pfu_latent_si_liquidation"]
+    portfolio["pertes_si_liquidation"]        = agr["pertes_si_liquidation"]
+    portfolio["plus_value_nette_si_liquidation"] = agr["plus_value_nette_si_liquidation"]
+    portfolio["pertes_imputees_si_liquidation"] = agr["pertes_imputees_si_liquidation"]
+    # Grandeurs que le site LIT au lieu de les déduire par soustraction
+    portfolio["total_investi"]             = agr["total_investi"]
+    portfolio["plus_value_latente_totale"] = agr["plus_value_latente_totale"]
+    portfolio["total_resultat_realise"]    = round(total_resultat_realise, 2)
+    portfolio["ecart_tresorerie"]          = ecart
+    portfolio["pfu_rate"]                  = config.PFU_RATE
+    # performance_brute n'était rafraîchie que par le run hebdomadaire : publiée
+    # à 36,35 % le 04/09 quand sa propre formule en donnait 35,71 sur le capital
+    # du jour. Un chiffre à deux auteurs a besoin de deux mises à jour.
+    portfolio["performance_brute"] = _perf_twr(
+        portfolio,
+        capital_actuel + portfolio.get("total_frais_payes", 0.0)
+                       + portfolio.get("total_impots_payes", 0.0))
     # VIX (quotidien) — info contextuelle, n'influence pas le scoring (cf config.VIX_DAMPENER_ENABLED)
     if vix_value is not None:
         portfolio["last_known_vix"]            = vix_value

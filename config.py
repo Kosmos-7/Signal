@@ -154,6 +154,61 @@ def apply_sell_cost_and_tax(
     }
 
 
+def apply_liquidation_cost_and_tax(
+    lignes: list[tuple[float, float]],
+    pertes_reportables_eur: float = 0.0,
+) -> dict:
+    """Frais + PFU d'une cession de TOUTES les lignes le même jour.
+
+    CE N'EST PAS LA SOMME DE `apply_sell_cost_and_tax` LIGNE À LIGNE, ET C'EST
+    TOUT L'INTÉRÊT. Appliquée ligne à ligne, cette fonction taxe chaque
+    plus-value isolément et laisse les moins-values sans emploi : au 04/09/2026,
+    2 045,11 € de PFU annoncés sur un portefeuille qui portait 466,63 € de
+    moins-values latentes et 1 075,20 € de pertes déjà réalisées dans l'année.
+    Le fisc, lui, ne regarde pas les lignes une à une.
+
+    Le PFU porte sur le résultat NET de l'année (art. 150-0 D 11 CGI) :
+      1. les moins-values de la cession s'imputent sur ses plus-values ;
+      2. le reliquat des pertes ANTÉRIEURES de l'année (et des dix précédentes)
+         s'impute sur ce qui reste ;
+      3. le PFU ne frappe que le solde positif.
+    Une liquidation qui finit en perte ne paie rien — et n'a jamais rien payé,
+    même quand la formule ligne à ligne prétendait le contraire.
+
+    Args:
+        lignes: (brut_vente_eur, base_fiscale_eur) pour chaque position cédée
+        pertes_reportables_eur: pertes déjà réalisées et non encore imputées
+
+    Returns:
+        frais_vente_eur, plus_value_nette_eur (après frais, avant imputation),
+        pertes_imputees_eur, base_imposable_eur, impot_pfu_eur,
+        cash_recupere_eur, pertes_reportables_restantes_eur
+    """
+    brut_total  = round(sum(b for b, _ in lignes), 2)
+    frais_total = round(sum(cost_one_way_eur(b) for b, _ in lignes), 2)
+    base_totale = round(sum(base for _, base in lignes), 2)
+    plus_value_nette = round(brut_total - frais_total - base_totale, 2)
+
+    reportables = max(0.0, float(pertes_reportables_eur))
+    pertes_imputees = round(min(max(plus_value_nette, 0.0), reportables), 2)
+    base_imposable  = round(max(0.0, plus_value_nette - pertes_imputees), 2)
+    impot = tax_on_gain_eur(base_imposable)
+
+    # Une liquidation en perte ALIMENTE le stock de pertes reportables au lieu
+    # de le consommer : c'est un crédit d'impôt futur, pas une dépense.
+    restantes = round(reportables - pertes_imputees + max(0.0, -plus_value_nette), 2)
+
+    return {
+        "frais_vente_eur": frais_total,
+        "plus_value_nette_eur": plus_value_nette,
+        "pertes_imputees_eur": pertes_imputees,
+        "base_imposable_eur": base_imposable,
+        "impot_pfu_eur": impot,
+        "cash_recupere_eur": round(brut_total - frais_total - impot, 2),
+        "pertes_reportables_restantes_eur": restantes,
+    }
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # PHASE 2 — VIX (indicateur contextuel, dampener DÉSACTIVÉ)
 # ─────────────────────────────────────────────────────────────────────────────

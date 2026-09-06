@@ -72,7 +72,15 @@
   .panic-banner { background: var(--orange-dim); border: 1px solid rgba(116,182,223,0.25); border-radius: var(--radius); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--orange); }
 
   /* ── SURVIVAL ── */
-  .survival-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; position: relative; overflow: hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+  /* PAS D'overflow:hidden ICI. Il ne servait qu'à arrondir la barre de 3 px du
+     ::before — qui porte DÉJÀ son propre border-radius et se clippe donc seule.
+     En échange il rognait les infobulles : mesurée au navigateur en 1280×900 le
+     06/09/2026, celle de la première carte faisait 208 px de haut et se faisait
+     couper de 78 px, soit 38 % du texte. L'infobulle commençait au milieu d'une
+     phrase, et c'est toute la première moitié — celle qui décompose l'écart —
+     qui était invisible. Le défaut ne se voyait qu'en desktop : en mobile la
+     grille passe en colonne et la carte descend assez bas pour tenir. */
+  .survival-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; position: relative; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
   .survival-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
   .survival-block.alive::before { background: var(--green); }
   .survival-block.dead::before  { background: var(--red); }
@@ -134,7 +142,7 @@
     bottom: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
-    width: 240px;
+    width: 300px;
     max-width: calc(100vw - 2rem);
     background: #141a28;   /* opaque : l'infobulle passe au-dessus de texte */
     border: 1px solid var(--border2);
@@ -246,6 +254,11 @@
 
   /* ── CHART · sélecteur de plage ── */
   .chart-range-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+  /* Unité et plage sont deux réglages du même graphe : même gabarit de bouton,
+     séparés par un filet pour qu'on ne les lise pas comme une seule liste. */
+  .chart-tabs-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .chart-tabs-group > .chart-range-tabs + .chart-range-tabs { border-left: 1px solid var(--border); padding-left: 10px; }
+  .unit-btn { min-width: 30px; }
   .rng-btn {
     background: transparent; border: 1px solid var(--border2); border-radius: 100px;
     padding: 0.25rem 0.75rem; font-family: var(--mono); font-size: 0.74rem;
@@ -339,6 +352,7 @@
   .type-achat  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(28,200,122,0.25); }
   .type-vente  { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(240,84,84,0.25); }
   .type-apport { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(116,182,223,0.25); }
+  .type-correction { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(116,182,223,0.25); }
   .order-name { font-size: 0.90rem; font-weight: 600; color: var(--text); }
   .order-right { display: flex; align-items: center; gap: 8px; }
   .order-amount { font-family: var(--mono); font-size: 0.82rem; color: var(--text3); white-space: nowrap; }
@@ -657,6 +671,11 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
   <div class="chart-block" id="chart">
     <div class="chart-header">
       <h2>Performance depuis le lancement</h2>
+      <div class="chart-tabs-group">
+      <div class="chart-range-tabs" role="tablist" aria-label="Unité">
+        <button class="rng-btn unit-btn active" data-unit="pct" onclick="setChartUnit('pct', this)" title="Performance en pourcentage, pondérée par le temps">%</button>
+        <button class="rng-btn unit-btn" data-unit="eur" onclick="setChartUnit('eur', this)" title="Gain cumulé en euros, hors versements">€</button>
+      </div>
       <div class="chart-range-tabs" role="tablist" aria-label="Plage temporelle">
         <button class="rng-btn" data-range="1d" onclick="setChartRange('1d', this)">1J</button>
         <button class="rng-btn" data-range="1w" onclick="setChartRange('1w', this)">1S</button>
@@ -664,6 +683,7 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
         <button class="rng-btn" data-range="1y" onclick="setChartRange('1y', this)">1A</button>
         <button class="rng-btn active" data-range="max" onclick="setChartRange('max', this)">Max</button>
         <button class="rng-btn" data-range="custom" onclick="setChartRange('custom', this)">Plage…</button>
+      </div>
       </div>
     </div>
     <div class="chart-custom-range" id="chart-custom-range" style="display:none">
@@ -781,6 +801,21 @@ situé APRÈS le rail (et non centré dans toute la fenêtre), équilibré, pas 
   <div class="learnings-block" style="margin-bottom:0">
 
     <!-- Learnings principaux toujours visibles (v1.7+) -->
+
+<!-- v3.6.0, Le cash n'avait pas suivi la réparation des bases fiscales -->
+    <div class="learning-item">
+      <div class="learning-accent" style="background:#ef4444"></div>
+      <div class="learning-body">
+        <div class="learning-header">
+          <span class="learning-cat lcat-arch">Données &amp; robustesse</span>
+          <span class="learning-version">v3.6.0</span>
+          <span class="learning-date">6 septembre 2026</span>
+        </div>
+<div class="learning-title">Sept bases fiscales réparées, un compte espèces oublié, et un contrôle qui ne contrôlait rien</div>
+<div class="learning-prob">Les titres achetés avant le 5 mai 2026 étaient enregistrés dans leur devise d'origine comptée comme des euros. Une réparation automatique avait corrigé le montant investi de sept lignes, mais jamais le cash débité à l'achat : NVIDIA, par exemple, avait vu 2 301,72 « euros » sortir du compte pour 2 300 dollars de titres, et seule la base a été ramenée à 1 981,90 €. Le compte espèces sous-évaluait donc le portefeuille de 374,10 €. Rien ne l'a signalé pendant des mois, pour une raison de fond : le site n'affichait pas ce chiffre, il le <strong>déduisait</strong>. Le « résultat réalisé sur les ventes passées » était obtenu par soustraction (écart au capital versé moins plus-value latente), une identité toujours vraie dans laquelle n'importe quelle incohérence tombait sans bruit. Elle annonçait −1 311,87 € quand les douze ventes du journal en totalisaient −937,77. Trois autres défauts sont sortis du même audit : la réparation des bases GBP décidait au taux du jour et pouvait se rallumer toute seule sur une ligne déjà correcte (2,4 % de hausse de la livre suffisaient) ; le PFU d'une liquidation totale était calculé ligne à ligne, donc ignorait 1 075 € de pertes déjà réalisées et 461 € de moins-values latentes, soit 484 € d'impôt annoncés en trop ; et l'infobulle qui expliquait tout cela était rognée de 38 % par le cadre qui la contenait, en desktop seulement.</div>
+<div class="learning-fix">Le compte espèces est régularisé par un ordre <code>CORRECTION</code> daté et visible dans le journal, pas par une retouche silencieuse. Surtout, l'identité comptable du modèle (liquidités + bases ouvertes = capital versé + résultat réalisé) devient un <strong>invariant vérifié</strong> : les deux programmes qui écrivent les chiffres du site refusent désormais de publier tant qu'elle ne tient pas, l'écart est publié à côté des chiffres qu'il contrôle, et un test le rejoue à chaque intégration. Le résultat réalisé est compté au fil des ventes au lieu d'être déduit. Les deux réparations de change sont retirées et remplacées par une alerte : on ne réécrit plus une base fiscale automatiquement, on la signale. Le PFU de liquidation impute les moins-values et les pertes reportables avant impôt, comme le fait le fisc. Corollaire retenu : un chiffre obtenu par soustraction n'est le contrôle de personne, et un correctif qui touche une moitié d'une écriture double doit toucher l'autre.</div>
+      </div>
+    </div>
 
 <!-- v3.5.0, Fichier de données produit mais jamais publié (2e occurrence) -->
     <div class="learning-item">
@@ -1269,9 +1304,61 @@ function sign(n)      { return n >= 0 ? '+' : ''; }
 // `_fullHistory` stocke toute l'historique chargée depuis portfolio.json
 // pour permettre de re-filtrer sans refetch quand l'utilisateur change la vue.
 let _fullHistory   = [];
-let _capitalInit   = 20000;
 let _currentRange  = 'max';
 let _currentCustom = null;  // { from: 'YYYY-MM-DD', to: 'YYYY-MM-DD' }
+let _chartUnit     = 'pct'; // 'pct' = indice pondéré par le temps · 'eur' = gain cumulé
+let _injections    = [];    // versements, pour reconstituer le capital versé à une date
+let _capitalVerse  = 10000; // création + versements
+
+// Capital VERSÉ à une date donnée : le total actuel moins les versements
+// postérieurs. C'est ce qui rend la courbe en euros insensible aux injections —
+// le jour d'un versement, le capital saute de +10 000 € et le versé aussi, donc
+// le gain ne bouge pas. L'utilisateur voit sa performance, pas ses virements.
+function verseALaDate(dateStr) {
+  return (_injections || []).reduce(
+    (t, i) => t - (i.date > dateStr ? (i.montant || 0) : 0), _capitalVerse);
+}
+
+// Valeur tracée pour un point d'historique, selon l'unité choisie.
+function valeurPoint(h, prevPerf) {
+  if (_chartUnit === 'eur') {
+    return h.capital != null ? h.capital - verseALaDate(h.date) : null;
+  }
+  return h.perf != null ? h.perf : prevPerf;
+}
+
+function fmtValeur(v, decimales = 1) {
+  return _chartUnit === 'eur'
+    ? (v >= 0 ? '+' : '−') + fmtEur(Math.abs(v))
+    : (v >= 0 ? '+' : '') + v.toFixed(decimales) + ' %';
+}
+
+// Étiquettes d'axe : les euros passent en k€ au-delà du millier, sinon le
+// libellé déborde à gauche de la grille.
+function fmtAxe(v) {
+  if (_chartUnit !== 'eur') return (v > 0 ? '+' : '') + v + ' %';
+  const a = Math.abs(v), s = v > 0 ? '+' : v < 0 ? '−' : '';
+  return a >= 1000
+    ? s + (a / 1000).toLocaleString('fr-FR', { maximumFractionDigits: 1 }) + ' k€'
+    : s + a.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + ' €';
+}
+
+// Pas de grille « rond » (1, 2, 5 × 10ⁿ) pour ~6 lignes. L'échelle en pourcents
+// était câblée en dur (span > 30 ? 10 : …) : illisible dès qu'on trace des euros.
+function pasDeGrille(span) {
+  if (!(span > 0)) return 1;
+  const brut = span / 6;
+  const mag  = Math.pow(10, Math.floor(Math.log10(brut)));
+  const norm = brut / mag;
+  return (norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10) * mag;
+}
+
+function setChartUnit(unit, btn) {
+  _chartUnit = unit;
+  document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  rerenderChart();
+}
 
 const RANGE_DAYS = { '1d': 1, '1w': 7, '1m': 30, '1y': 365 };
 const RANGE_LBL  = { '1d': '1 jour', '1w': '1 semaine', '1m': '1 mois', '1y': '1 an', 'max': 'depuis le lancement', 'custom': 'plage personnalisée' };
@@ -1335,18 +1422,18 @@ function rerenderChart() {
   if (filtered.length < 2) {
 // Plage trop courte pour la granularité quotidienne, fallback gracieux
     const fallback = _fullHistory.slice(-Math.max(2, filtered.length));
-    renderChart(fallback, _capitalInit);
+    renderChart(fallback);
     if (note) {
 note.textContent = `Pas assez de points sur cette plage : affichage des ${fallback.length} derniers.`;
     }
     return;
   }
 
-  renderChart(filtered, _capitalInit);
+  renderChart(filtered);
   if (note) note.textContent = '';
 }
 
-function renderChart(history, capitalInitial = 20000) {
+function renderChart(history) {
   const svg  = document.getElementById('perf-chart');
   const ns   = 'http://www.w3.org/2000/svg';
   const mk   = (tag, attrs) => { const e = document.createElementNS(ns, tag); Object.entries(attrs).forEach(([k,v]) => e.setAttribute(k,v)); return e; };
@@ -1355,22 +1442,37 @@ function renderChart(history, capitalInitial = 20000) {
 // ── Clear SVG content (preserve <defs>), pour permettre les re-renders ────
   Array.from(svg.children).forEach(child => { if (child.tagName.toLowerCase() !== 'defs') svg.removeChild(child); });
 
-  // ── Capital en € ──────────────────────────────────────────────────────────
-  // La courbe trace l'INDICE DE PERFORMANCE (série perf, pondérée par le
-  // temps), pas le capital : un virement de +10 k€ faisait sauter la courbe
-  // d'un graphe intitulé « Performance » — un flux n'est pas un rendement.
-  // Repli si un point n'a pas de perf : on reporte la dernière connue.
-  let prevPerf = null;
-  const caps = history.map(h => { if (h.perf != null) { prevPerf = h.perf; return h.perf; } return prevPerf ?? 0; });
+  // ── La série tracée ───────────────────────────────────────────────────────
+  // Jamais le CAPITAL BRUT : un virement de +10 k€ faisait sauter la courbe d'un
+  // graphe intitulé « Performance », or un flux n'est pas un rendement.
+  //   · en %   : l'indice pondéré par le temps (série perf) ;
+  //   · en €   : le gain cumulé, capital moins capital VERSÉ à cette date — donc
+  //              insensible aux versements lui aussi, le jour d'une injection les
+  //              deux termes montent ensemble.
+  // Repli si un point manque : on reporte la dernière valeur connue.
+  let prev = null;
+  const caps = history.map(h => {
+    const v = valeurPoint(h, prev);
+    if (v != null) prev = v;
+    return v ?? prev ?? 0;
+  });
 
-  // ── Plage Y adaptative (%) ────────────────────────────────────────────────
+  // ── Plage Y adaptative ────────────────────────────────────────────────────
+  // La marge vaut 8 % de l'amplitude, plus un pas de grille entier comme avant.
+  // L'ancienne version arrondissait les bornes au pas : avec un pas de 2 000 €
+  // pour une courbe qui monte de 0 à 5 131 €, elle annonçait un plancher à
+  // −2 k€ que le portefeuille n'a jamais approché et n'utilisait que la moitié
+  // de la hauteur. Le pas se calcule ENSUITE, sur la plage marges comprises,
+  // sinon une série plate (amplitude nulle, plage 1 jour) donnerait un pas de 1
+  // et mille lignes de grille sur un graphe en euros.
   const rawMin  = Math.min(...caps);
   const rawMax  = Math.max(...caps);
   const span    = rawMax - rawMin;
-  const step    = span > 30 ? 10 : span > 15 ? 5 : span > 8 ? 2 : 1;
-  const rangeMin = Math.floor(rawMin / step) * step - step;
-  const rangeMax = Math.ceil(rawMax  / step) * step + step;
+  const marge   = span > 0 ? span * 0.08 : Math.max(Math.abs(rawMax) * 0.05, 1);
+  const rangeMin = rawMin - marge;
+  const rangeMax = rawMax + marge;
   const range   = rangeMax - rangeMin;
+  const step    = pasDeGrille(range);
 
   const toY = v => yTop + (1 - (v - rangeMin) / range) * (yBot - yTop);
   const n   = history.length;
@@ -1384,7 +1486,7 @@ function renderChart(history, capitalInitial = 20000) {
   // ── Grille Y (%) ──────────────────────────────────────────────────────────
   for (let v = Math.ceil(rangeMin / step) * step; v <= rangeMax; v += step) {
     const y   = toY(v);
-    const lbl = (v > 0 ? '+' : '') + v + ' %';
+    const lbl = fmtAxe(Math.round(v * 1e6) / 1e6);
     svg.appendChild(mk('line', { x1:40, y1:y, x2:560, y2:y, stroke:'#2a2a38', 'stroke-width':0.6, 'stroke-dasharray':'3,4' }));
     svg.appendChild(mk('text', { x:34, y:y+3, 'font-family':'Google Sans Code', 'font-size':7, fill:'#50506c', 'text-anchor':'end' })).textContent = lbl;
   }
@@ -1417,14 +1519,12 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
   svg.appendChild(mk('path', { d: areaD, fill:'url(#chartGrad)' }));
   svg.appendChild(mk('path', { d: pathD, fill:'none', stroke:'#74b6df', 'stroke-width':2.2, 'stroke-linejoin':'round', 'stroke-linecap':'round' }));
 
-  // ── Marqueurs d'injection (verticale + montant) ───────────────────────────
-  pts.filter(p => p.note).forEach(p => {
-    svg.appendChild(mk('line', { x1:p.x, y1:yTop, x2:p.x, y2:yBot, stroke:'#74b6df', 'stroke-width':0.9, 'stroke-dasharray':'3,3', 'stroke-opacity':0.5 }));
-    const amount = p.note.match(/[+\-]?\d+\s*k€?/i)?.[0] ?? '';
-    const t = mk('text', { x:p.x+4, y:yTop+9, 'font-family':'Google Sans Code', 'font-size':7, fill:'#74b6df', 'fill-opacity':0.8, 'text-anchor':'start' });
-    t.textContent = amount ? '⊕ injection ' + amount : '⊕ injection';
-    svg.appendChild(t);
-  });
+  // ── PAS DE MARQUEUR D'INJECTION ───────────────────────────────────────────
+  // Les verticales « ⊕ injection +10 k€ » ont été retirées le 06/09/2026. Les
+  // deux séries tracées sont insensibles aux versements par construction : rien
+  // ne se passe sur la courbe ce jour-là, et une barre qui souligne un
+  // non-événement raconte le contraire de ce que le graphe mesure. Le champ
+  // `note` reste dans portfolio.json — c'est le registre, pas l'affichage.
 
   // ── Axe X : labels espacés (1er, dernier, ~4 intermédiaires) ──────────────
   // Évite l'effet "alphabet soup" quand on a 14+ points en empilant les dates.
@@ -1454,8 +1554,9 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
     cx: last.x.toFixed(1), cy: last.y.toFixed(1), r: 3.5,
     fill: '#74b6df', stroke: '#1a1200', 'stroke-width': 1.2
   }));
-  const lastLbl = (last.cap >= 0 ? '+' : '') + last.cap.toFixed(1) + ' %';
-  svg.appendChild(mk('rect', { x:(last.x-28).toFixed(1), y:(last.y-19).toFixed(1), width:58, height:17, rx:4, fill:'#1a1200', stroke:'#74b6df', 'stroke-width':0.8, 'stroke-opacity':0.7 }));
+  const lastLbl = fmtValeur(last.cap);
+  const boxW    = _chartUnit === 'eur' ? 76 : 58;
+  svg.appendChild(mk('rect', { x:(last.x - boxW/2).toFixed(1), y:(last.y-19).toFixed(1), width:boxW, height:17, rx:4, fill:'#1a1200', stroke:'#74b6df', 'stroke-width':0.8, 'stroke-opacity':0.7 }));
   const lt = mk('text', { x: last.x.toFixed(1), y:(last.y-6).toFixed(1), 'font-family':'Google Sans Code', 'font-size':9.5, fill:'#74b6df', 'text-anchor':'middle', 'font-weight':'bold' });
   lt.textContent = lastLbl;
   svg.appendChild(lt);
@@ -1490,7 +1591,7 @@ const t = 0.18; // tension modérée, courbe douce sans overshoot
     hBox.setAttribute('x', bx.toFixed(1));      hBox.setAttribute('y', by.toFixed(1));
     hPerf.setAttribute('x', (bx + 46).toFixed(1)); hPerf.setAttribute('y', (by + 12).toFixed(1));
     hDate.setAttribute('x', (bx + 46).toFixed(1)); hDate.setAttribute('y', (by + 22).toFixed(1));
-    hPerf.textContent = (p.cap >= 0 ? '+' : '') + p.cap.toFixed(1) + ' %';
+    hPerf.textContent = fmtValeur(p.cap);
     hDate.textContent = new Date(p.date + 'T12:00:00')
       .toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
     hover.style.display = '';
@@ -1578,8 +1679,16 @@ function orderTypeClass(t) {
   if (t === 'ACHAT')  return 'type-achat';
   if (t === 'VENTE')  return 'type-vente';
   if (t === 'APPORT') return 'type-apport';
+  if (t === 'CORRECTION') return 'type-correction';
   return 'type-achat';
 }
+
+// La colonne du badge fait 62 px, taillée pour ACHAT / VENTE / APPORT.
+// « CORRECTION » y débordait sur le nom de l'ordre. Le type reste CORRECTION
+// dans les données (c'est lui qui porte le sens et les filtres), seul le badge
+// se raccourcit — le libellé complet est juste à côté, dans le nom.
+const ORDER_TYPE_LABEL = { CORRECTION: 'RÉGUL.' };
+function orderTypeLabel(t) { return ORDER_TYPE_LABEL[t] || t; }
 
 function renderOrder(o, idx) {
   const isVente = o.type === 'VENTE';
@@ -1600,7 +1709,7 @@ function renderOrder(o, idx) {
     <div class="order-card">
       <div class="order-header" onclick="toggleOrder(${idx})">
         <div class="order-date">${o.date}</div>
-        <div class="order-type ${orderTypeClass(o.type)}">${o.type}</div>
+        <div class="order-type ${orderTypeClass(o.type)}" title="${o.type}">${orderTypeLabel(o.type)}</div>
         <div class="order-name">${o.nom}${o._allerRetour ? (o.type === 'VENTE'
           ? ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug</span>'
           : ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(116,182,223,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">↻ corrigé</span>') : ''}${o._bug_weekend_exec ? ' <span style="font-family:var(--mono);font-size:0.72rem;color:var(--red);background:var(--red-dim);border:1px solid rgba(240,84,84,0.25);border-radius:4px;padding:1px 6px;vertical-align:middle">⚠ bug weekend</span>' : ''}</div>
@@ -1832,37 +1941,47 @@ async function loadPortfolio() {
     }
 
     // Stocke l'historique full pour permettre les re-renders sur changement de plage
-    _fullHistory = workingHistory;
-    _capitalInit = d.capital_initial;
-    rerenderChart();  // utilise _currentRange (défaut 'max')
+    _fullHistory  = workingHistory;
+    // Le registre des versements : il sert à reconstituer le capital versé à
+    // chaque date, donc à tracer un gain en euros que les injections ne font pas
+    // sauter.
+    _injections   = d.injections || [];
+    _capitalVerse = d.capital_initial;
+    rerenderChart();  // utilise _currentRange (défaut 'max') et _chartUnit ('pct')
 
     if (d.mode_panique) document.getElementById('panic-banner').style.display = 'block';
 
 // Bloc Performance vs MSCI, comparaison neutre, plus de dramatisation "survie"
-    const investi   = d.capital_actuel - d.liquidites;
-    const pvLatenteTotale = (d.positions || []).reduce((t, p) =>
-      t + (p.plus_value_latente_eur ?? ((p.valeur_actuelle ?? 0) - (p.montant_investi ?? 0))), 0);
+    //
+    // LE SITE LIT, IL NE DÉDUIT PLUS. Ces grandeurs étaient reconstituées ici par
+    // soustraction — « résultat réalisé = écart au capital versé moins plus-value
+    // latente » — une identité tautologique où n'importe quelle incohérence du
+    // livre atterrissait, étiquetée perte de trading. Le 04/09/2026 elle
+    // affichait −1 311,87 € quand les douze ventes du journal totalisaient
+    // −937,77 €. Elles sont désormais mesurées côté Python, à côté des chiffres
+    // dont elles dépendent (portfolio_agent.agregats_derives). Les `??` gardent
+    // le repli le temps qu'un run republie le fichier.
+    const totalInvesti      = d.total_investi ?? (d.positions || [])
+      .reduce((t, p) => t + (p.montant_investi ?? 0), 0);
+    const valeurPositions   = d.capital_actuel - d.liquidites;
+    const pvLatenteTotale   = d.plus_value_latente_totale ?? (valeurPositions - totalInvesti);
+    const gainRealise       = d.total_resultat_realise ?? 0;
     const signE = v => (v >= 0 ? '+' : '−') + fmtEur(Math.abs(v));
-    const pctInvesti = (100 - d.pct_liquidites).toFixed(1);
     const nbNeutres = d.nb_neutres ?? (d.nb_positions - d.nb_positives - d.nb_negatives);
-    const nSub = nbNeutres > 0
-      ? `<span class="up">${d.nb_positives} en gain</span> · <span style="color:var(--text3)">${nbNeutres} neutre${nbNeutres>1?'s':''}</span> · <span class="dn">${d.nb_negatives} en perte</span>`
-      : `<span class="up">${d.nb_positives} en gain</span> · <span class="dn">${d.nb_negatives} en perte</span>`;
 
     // Gain net : on distingue PLUS-VALUE LATENTE (mark-to-market) de POST-LIQUIDATION (cash réel après cession totale)
     // C'est la grosse subtilité fiscale : les +95% sur NVDA ne sont pas "encaissés" tant qu'on n'a pas vendu.
-    // Si on vendait tout aujourd'hui : capital_post_liquidation = liquidités + Σ(brut - frais_vente - PFU sur plus-value latente)
     const capPostLiq         = d.capital_post_liquidation ?? d.capital_actuel;      // fallback rétrocompat
-    const perfPostLiq        = d.performance_post_liquidation ?? d.performance;
     const gainLatent         = d.capital_actuel - d.capital_initial;                 // mark-to-market
     const gainPostLiq        = capPostLiq - d.capital_initial;                       // après cession totale
     const pfuLatent          = d.pfu_latent_si_liquidation ?? 0;
     const fraisLatent        = d.frais_si_liquidation ?? 0;
-    const fraisCum           = d.total_frais_payes ?? 0;
-    const impotsCum          = d.total_impots_payes ?? 0;
-    const creditReportable   = (d.total_pertes_reportables ?? 0) * 0.30;
-    const fricTotalSiVendu   = fraisCum + impotsCum + fraisLatent + pfuLatent;
-    const gainRealise        = gainLatent - pvLatenteTotale;   // gain net − latent = réalisé net
+    const pertesImputees     = d.pertes_imputees_si_liquidation ?? 0;
+    // Le gain rapporté au capital VERSÉ. Il diffère de la performance pondérée
+    // par le temps, et l'écart n'est pas une erreur : les deux versements de
+    // 10 000 € sont arrivés en mai et en août, ils n'ont pas travaillé toute la
+    // période. C'est LA question que pose la carte, elle mérite sa réponse.
+    const rendementVerse     = d.capital_initial > 0 ? gainLatent / d.capital_initial * 100 : 0;
 
     const sb    = document.getElementById('survival-block');
     const panic = d.mode_panique;
@@ -1898,14 +2017,14 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
       </div>
       <div class="threshold-row">
         <div class="th">
-          <div class="th-label">Valeur du portefeuille <span class="kpi-info" data-tip="Actions au cours du jour + liquidités, en euros. L'écart avec le capital versé se décompose en ${signE(pvLatenteTotale)} de plus-value latente sur les positions ouvertes (le détail est dans le tableau) et ${signE(gainRealise)} de résultat réalisé sur les ventes passées, frais (${fmtEur(fraisCum)}) et impôts (${fmtEur(impotsCum)}) déduits. Attention : la plus-value latente n'a pas encore été imposée. Tout vendu aujourd'hui, le gain NET serait de ${signE(gainPostLiq)} après PFU et frais de vente.">ⓘ</span></div>
-          <div class="th-value">${fmtEur(d.capital_actuel)}</div>
-          <div class="th-sub">versé ${fmtEur(d.capital_initial)} · <span class="${gainLatent>=0?'up':'dn'}">${sign(gainLatent)}${fmtEur(Math.abs(gainLatent))}</span></div>
-        </div>
-        <div class="th">
-          <div class="th-label">Notre performance <span class="kpi-info" data-tip="Performance pondérée par le temps depuis le lancement : les versements et retraits n'y comptent ni comme gain ni comme perte">ⓘ</span></div>
+          <div class="th-label">Performance <span class="kpi-info" data-tip="Pondérée par le temps : un versement n'y compte ni comme gain ni comme perte. Rapporté au capital versé, le gain n'est que de ${sign(rendementVerse)}${fmt(rendementVerse,1)} %, et ce n'est pas une contradiction : les deux versements de 10 000 € sont arrivés en mai et en août, ils n'ont pas travaillé toute la période. Cette mesure-ci répond à « la stratégie a-t-elle fait mieux que le marché ». L'autre répond à « combien a rapporté l'argent que j'ai mis ».">ⓘ</span></div>
           <div class="th-value ${d.performance>=0?'up':'dn'}">${sign(d.performance)}${fmt(d.performance,1)} %</div>
           <div class="th-sub">depuis le lancement, jan. 2026</div>
+        </div>
+        <div class="th">
+          <div class="th-label">Gain en euros <span class="kpi-info" data-tip="Actions au dernier cours plus liquidités, moins les ${fmtEur(d.capital_initial)} versés. Se décompose en ${signE(pvLatenteTotale)} de plus-value latente sur les positions ouvertes (détail dans le tableau) et ${signE(gainRealise)} déjà encaissés sur les ventes passées, nets des frais et du PFU payés dessus. La plus-value latente n'a pas encore été imposée : tout vendu au dernier cours, il resterait ${signE(gainPostLiq)} net, après ${fmtEur(pfuLatent)} de PFU et ${fmtEur(fraisLatent)} de frais de vente.">ⓘ</span></div>
+          <div class="th-value ${gainLatent>=0?'up':'dn'}">${signE(gainLatent)}</div>
+          <div class="th-sub">${signE(gainPostLiq)} net si tout vendu</div>
         </div>
         <div class="th">
           <div class="th-label">Marché mondial <span class="kpi-info" data-tip="Ce qu'aurait rapporté un simple ETF MSCI World sur la même période, sans gestion active">ⓘ</span></div>
@@ -1919,8 +2038,12 @@ vixPillHtml = `<div class="vix-pill ${vixClass}" title="VIX, indice de volatilit
 // positions en en-tete du tableau des positions. La bande de cinq cartes qui
 // portait tout ca a ete retiree le 03/08/2026 : elle doublonnait chaque info.
 
+    // « X € investis » affichait capital − liquidités, c'est-à-dire la VALEUR DE
+    // MARCHÉ des lignes, pas la somme mise dessus. Au 04/09/2026 : 30 011 €
+    // annoncés investis pour 23 942 € réellement engagés — et les 6 069 € d'écart
+    // étaient la plus-value latente, citée deux fois dans la même phrase.
     document.getElementById('pos-stats').innerHTML =
-      `<b>${d.nb_positions} positions</b> · <span class="${pvLatenteTotale>=0?'up':'dn'}">${signE(pvLatenteTotale)} de plus-value latente</span> · ${d.nb_positives} en gain, ${d.nb_negatives} en perte${nbNeutres > 0 ? `, ${nbNeutres} neutre${nbNeutres>1?'s':''}` : ''} · <b>${fmtEur(investi)}</b> investis (${pctInvesti} %) · <b>${fmtEur(d.liquidites)}</b> de liquidités (${fmt(d.pct_liquidites,1)} %)`;
+      `<b>${d.nb_positions} positions</b> · <b>${fmtEur(totalInvesti)}</b> investis, <b>${fmtEur(valeurPositions)}</b> au marché · <span class="${pvLatenteTotale>=0?'up':'dn'}">${signE(pvLatenteTotale)} de plus-value latente</span> · ${d.nb_positives} en gain, ${d.nb_negatives} en perte${nbNeutres > 0 ? `, ${nbNeutres} neutre${nbNeutres>1?'s':''}` : ''} · <b>${fmtEur(d.liquidites)}</b> de liquidités (${fmt(d.pct_liquidites,1)} %)`;
 
 // Positions, perf calculée en € + tri desc
     const pos = d.positions || [];
