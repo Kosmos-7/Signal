@@ -1,0 +1,164 @@
+{
+ "id": "2026-09-07",
+ "type": "quotidien",
+ "date": "2026-09-07",
+ "titre": "L'Iran annonce une zone restreinte dans le Golfe, l'or grimpe encore",
+ "chapeau": "Nouvelle tension dans le Golfe, les grands gérants reconstituent leurs stocks d'or : les marchés terminent la semaine à l'équilibre, mais le métal jaune, lui, ne chôme pas.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-09-07.jpg",
+  "v": "118ad9d6",
+  "legende": "Port cranes, Container-Terminal Bremerhaven",
+  "credit": "Olga Ernst",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Port_cranes,_Container-Terminal_Bremerhaven.jpg",
+  "fichier": "Port cranes, Container-Terminal Bremerhaven.jpg",
+  "requete": "container port cranes"
+ },
+ "marches": {
+  "ref": "2026-09-07",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8285.1904296875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.07755860835674837,
+    "ref": "2026-09-07"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6385.990234375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.108556502502421,
+    "ref": "2026-09-07"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4476.60009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.0564877654115912,
+    "ref": "2026-09-07"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 96.27999877929688,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.0,
+    "ref": "2026-09-07"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1627906560897827,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.0034958095392748564,
+    "ref": "2026-09-07"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 79436.9921875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": -1.1363461790139746,
+    "ref": "2026-09-07"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ASM International N.V.",
+   "valeur": 844.4000244140625,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 2.3267101215473844,
+   "ref": "2026-09-07",
+   "ticker": "ASM.AS",
+   "nom": "ASM International N.V."
+  }
+ },
+ "marches_texte": "Les indices européens ont terminé la semaine quasi à l'arrêt : le CAC 40 grappille +0,08 % à 8 285 points, l'Euro Stoxx 50 cède un petit -0,11 %. Le Brent et l'euro-dollar n'ont pas bougé d'un cil, tandis que le Bitcoin recule de -1,14 %. La vraie histoire du tableau, c'est l'or à 4 476,60 $, en hausse de +1,06 %, et ASM International qui signe la meilleure performance de notre liste avec +2,33 %.",
+ "sections": [
+  {
+   "titre": "Le Golfe, toujours le Golfe",
+   "texte": "L'Iran a annoncé qu'il allait délimiter une nouvelle zone restreinte dans le Golfe dans les prochains jours, selon Reuters. Dans le même temps, les Émirats arabes unis déclarent avoir construit des routes commerciales et énergétiques alternatives à la suite des attaques iraniennes, indique un responsable émirati cité par Reuters. La région reste donc un foyer de tensions actives, avec des répercussions directes sur les flux de commerce et d'énergie.",
+   "sources": [
+    0,
+    1
+   ]
+  },
+  {
+   "titre": "Liban : frappes israéliennes meurtrières dans le sud",
+   "texte": "Des frappes israéliennes sur une ville du sud du Liban ont tué 11 personnes, selon l'agence de presse officielle libanaise, rapporte Reuters. Ce bilan est factuel et sobrement transmis.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Ukraine : une pause de trois jours sur le fil",
+   "texte": "Des pourparlers ont débuté entre des envoyés américains et Vladimir Poutine, qui a qualifié la situation de « pas simple ». Le porte-parole du Kremlin Dmitry Peskov a confirmé que Moscou avait reçu l'information selon laquelle Kiev accepterait également un cessez-le-feu de trois jours et y répondrait favorablement, d'après Bloomberg.",
+   "sources": [
+    6
+   ]
+  },
+  {
+   "titre": "L'or fait le plein, les grands gérants aussi",
+   "texte": "Les plus grands gestionnaires d'actifs mondiaux reconstituent leurs positions en or, anticipant une valeur à long terme malgré les mesures anti-inflation de la Fed et la hausse des taux, selon Bloomberg. Le métal jaune clôture à 4 476,60 $, en hausse de +1,06 % sur la séance. Dans ce contexte de tensions géopolitiques multiples, l'appétit pour la valeur refuge ne semble pas près de se tarir.",
+   "sources": [
+    7
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "UAE builds alternative trade, energy routes after Iran attacks, official says - reuters.com",
+   "resume": "UAE builds alternative trade, energy routes after Iran attacks, official says  reuters.com",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNX2k1aEFKNWUzaXRzZXlkTVZNb3MyOTZoSjBoa2N5Zmtpd1Z2VVRWbV9JcnNHN0hkS1ZPRXEyb1UxdGMzN1pFNUFCUmpPVTNvQndsa3c1TzBwNEVvVXNLVXZjNGVnbzF6TUdGS2N5SVdLT2k2Nlk1TmREb0ZlTVp1cGlLRzJTMWJqLTN4VVRiY2s1emV6YldrQnJHQWRmZFBKRUdDalJjb1lFM1NxaHI2eDdWWFN1R0tydFJYOUh3Z0phb0paZUNRMw?oc=5",
+   "date": "2026-09-07 08:46"
+  },
+  {
+   "titre": "Iran says to announce new restricted zone in the Gulf in the coming days - reuters.com",
+   "resume": "Iran says to announce new restricted zone in the Gulf in the coming days  reuters.com",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQM292TDh2Uk9IeUlEeFNFY1UyeFM3OFZzd2w1S013bEtmVnhXYmdfT0ptV1ZfTlRTRXBLVzFZdmZ6T0d2cVdkZHAtbmhFTjlHUmJRQkRVZDhwMGJZZUM2MEpBS041SmhGcEhWZTlQemFBcjRaNkwyWkhhUlNFc1dNZEVyQ1R0YzFnRm5ZNHd3VU5NV01EeWZVZjJrUW5VWGF2X2R1U0xzSFEwbE9iY1E?oc=5",
+   "date": "2026-09-07 06:57"
+  },
+  {
+   "titre": "Israeli strikes on southern Lebanese town kill 11, state news agency says - reuters.com",
+   "resume": "Israeli strikes on southern Lebanese town kill 11, state news agency says  reuters.com",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPSDNtVzFxN3MtVEs4UWxoWnA0ekJKVC1EWThJR1hiQ2FvN1d2LU40NXRDaUJGMGRLeF9KaHY1R3dTSmdTRHhHdG9uNTIzZXRRRWVoWW43d0dxM3ZoSTNMM2xEQlhlV011OWlpSHdxTDlmWjl4MW9VQ1ktN3hqU3lEU3dnVUV3XzQzWGZjU3ZBNnNBQVhOek9OeHZ1WnFZb2RacWhmVXdiSGM5Q3FwbmFtcGN6OTJpZF9kNk5YWGladzg?oc=5",
+   "date": "2026-09-07 06:48"
+  },
+  {
+   "titre": "Putin tells US envoys war situation ‘Not Simple’ as talks begin",
+   "resume": "Kremlin spokesman Dmitry Peskov confirmed the Kremlin had received information that Kyiv would also halt fire for three days, and would reciprocate",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-09-05/us-envoys-arrive-in-moscow-with-proposal-to-end-war-in-ukraine",
+   "date": "2026-09-06 06:49"
+  },
+  {
+   "titre": "World’s biggest money managers are rebuilding gold positions",
+   "resume": "Major money managers are increasing gold holdings, anticipating long-term value despite Fed's inflation measures and rising interest rates.",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-09-04/world-s-biggest-money-managers-are-rebuilding-gold-positions",
+   "date": "2026-09-05 16:16"
+  }
+ ],
+ "genere_le": "2026-09-07 10:43 UTC"
+}
