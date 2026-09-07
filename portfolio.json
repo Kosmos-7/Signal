@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-04",
-  "week": "Sem. 36 · 2026",
+  "updated_at": "2026-09-07",
+  "week": "Sem. 37 · 2026",
   "injections": [
     {
       "date": "2026-05-05",
@@ -16,25 +16,33 @@
     }
   ],
   "capital_initial": 30000.0,
-  "capital_actuel": 35131.16,
-  "performance": 36.79,
-  "performance_brute": 37.16,
+  "capital_actuel": 35255.67,
+  "performance": 37.28,
+  "performance_brute": 37.65,
   "total_frais_payes": 36.27,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 1075.2,
-  "capital_post_liquidation": 33547.69,
-  "performance_post_liquidation": 30.63,
-  "frais_si_liquidation": 22.51,
-  "pfu_latent_si_liquidation": 1560.96,
-  "pertes_si_liquidation": 461.46,
-  "last_known_vix": 14.53,
+  "total_investi": 23941.85,
+  "valeur_positions": 30135.29,
+  "plus_value_latente_totale": 6193.44,
+  "total_resultat_realise": -937.77,
+  "ecart_tresorerie": -0.0,
+  "pfu_rate": 0.314,
+  "capital_post_liquidation": 33633.04,
+  "performance_post_liquidation": 30.96,
+  "frais_si_liquidation": 22.6,
+  "pfu_latent_si_liquidation": 1600.03,
+  "pertes_si_liquidation": 494.91,
+  "plus_value_nette_si_liquidation": 6170.84,
+  "pertes_imputees_si_liquidation": 1075.2,
+  "last_known_vix": 15.16,
   "last_known_vix_source": "live",
-  "last_known_vix_updated_at": "2026-09-04",
-  "benchmark_cac40": 1.11,
-  "benchmark_msci": 14.86,
-  "vs_benchmark": 21.93,
+  "last_known_vix_updated_at": "2026-09-07",
+  "benchmark_cac40": 1.39,
+  "benchmark_msci": 14.46,
+  "vs_benchmark": 22.82,
   "mode_panique": false,
-  "perf_cac_semaine": -1.4,
+  "perf_cac_semaine": -0.31,
   "positions": [
     {
       "ticker": "ASML.AS",
@@ -44,14 +52,14 @@
       "currency": "EUR",
       "date_achat": "2026-01-02",
       "prix_achat": 650.0,
-      "prix_actuel": 1423.4,
+      "prix_actuel": 1502.8,
       "quantite": 3,
       "montant_investi": 1951.46,
-      "valeur_actuelle": 4270.2,
-      "performance": 118.82,
+      "valeur_actuelle": 4508.4,
+      "performance": 131.03,
       "score_entree": 88,
-      "poids": 12.2,
-      "plus_value_latente_eur": 2318.74
+      "poids": 12.8,
+      "plus_value_latente_eur": 2556.94
     },
     {
       "ticker": "NOW",
@@ -64,12 +72,12 @@
       "prix_actuel": 141.26,
       "quantite": 14,
       "montant_investi": 1095.08,
-      "valeur_actuelle": 1701.78,
-      "performance": 55.4,
+      "valeur_actuelle": 1699.73,
+      "performance": 55.22,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression, la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
       "poids": 4.8,
-      "plus_value_latente_eur": 606.7
+      "plus_value_latente_eur": 604.65
     },
     {
       "ticker": "NVDA",
@@ -82,11 +90,11 @@
       "prix_actuel": 230.36,
       "quantite": 34,
       "montant_investi": 4591.25,
-      "valeur_actuelle": 6739.73,
-      "performance": 46.8,
+      "valeur_actuelle": 6731.62,
+      "performance": 46.62,
       "score_entree": 94,
-      "poids": 19.2,
-      "plus_value_latente_eur": 2148.48,
+      "poids": 19.1,
+      "plus_value_latente_eur": 2140.37,
       "frais_achat_eur": 1.95
     },
     {
@@ -100,12 +108,12 @@
       "prix_actuel": 259.23,
       "quantite": 7,
       "montant_investi": 1080.07,
-      "valeur_actuelle": 1561.49,
-      "performance": 44.57,
+      "valeur_actuelle": 1559.61,
+      "performance": 44.4,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée, profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
       "poids": 4.4,
-      "plus_value_latente_eur": 481.42
+      "plus_value_latente_eur": 479.54
     },
     {
       "ticker": "AMD",
@@ -118,11 +126,11 @@
       "prix_actuel": 477.57,
       "quantite": 3,
       "montant_investi": 876.48,
-      "valeur_actuelle": 1232.86,
-      "performance": 40.66,
+      "valeur_actuelle": 1231.38,
+      "performance": 40.49,
       "score_entree": 85,
       "poids": 3.5,
-      "plus_value_latente_eur": 356.38
+      "plus_value_latente_eur": 354.9
     },
     {
       "ticker": "LLY",
@@ -135,11 +143,11 @@
       "prix_actuel": 1149.36,
       "quantite": 1,
       "montant_investi": 828.41,
-      "valeur_actuelle": 989.04,
-      "performance": 19.39,
+      "valeur_actuelle": 987.85,
+      "performance": 19.25,
       "score_entree": 89,
       "poids": 2.8,
-      "plus_value_latente_eur": 160.63
+      "plus_value_latente_eur": 159.44
     },
     {
       "ticker": "JPM",
@@ -152,11 +160,11 @@
       "prix_actuel": 358.64,
       "quantite": 2,
       "montant_investi": 540.75,
-      "valeur_actuelle": 617.23,
-      "performance": 14.14,
+      "valeur_actuelle": 616.48,
+      "performance": 14.0,
       "score_entree": 95,
-      "poids": 1.8,
-      "plus_value_latente_eur": 76.48
+      "poids": 1.7,
+      "plus_value_latente_eur": 75.73
     },
     {
       "ticker": "V",
@@ -169,28 +177,11 @@
       "prix_actuel": 375.07,
       "quantite": 2,
       "montant_investi": 569.91,
-      "valeur_actuelle": 645.5,
-      "performance": 13.26,
+      "valeur_actuelle": 644.73,
+      "performance": 13.13,
       "score_entree": 93,
       "poids": 1.8,
-      "plus_value_latente_eur": 75.59
-    },
-    {
-      "ticker": "ADYEN.AS",
-      "nom": "ADYEN",
-      "market": "AMS",
-      "sector": "Technologie",
-      "currency": "EUR",
-      "date_achat": "2026-04-30",
-      "prix_achat": 958.5,
-      "prix_actuel": 1043.0,
-      "quantite": 1,
-      "montant_investi": 959.22,
-      "valeur_actuelle": 1043.0,
-      "performance": 8.73,
-      "score_entree": 93,
-      "poids": 3.0,
-      "plus_value_latente_eur": 83.78
+      "plus_value_latente_eur": 74.82
     },
     {
       "ticker": "DB1.DE",
@@ -200,14 +191,14 @@
       "currency": "EUR",
       "date_achat": "2026-05-05",
       "prix_achat": 261.9,
-      "prix_actuel": 283.9,
+      "prix_actuel": 279.1,
       "quantite": 4,
       "montant_investi": 1048.39,
-      "valeur_actuelle": 1135.6,
-      "performance": 8.32,
+      "valeur_actuelle": 1116.4,
+      "performance": 6.49,
       "score_entree": 84,
       "poids": 3.2,
-      "plus_value_latente_eur": 87.21
+      "plus_value_latente_eur": 68.01
     },
     {
       "ticker": "SPGI",
@@ -221,12 +212,12 @@
       "quantite": 3,
       "montant_investi": 1078.08,
       "frais_achat_eur": 0.808,
-      "valeur_actuelle": 1144.94,
-      "performance": 6.2,
+      "valeur_actuelle": 1143.56,
+      "performance": 6.07,
       "score_entree": 77,
       "raison_achat": "SPGI affiche un Golden Cross frais à J+1 avec confirmation volume : c'est la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant). Score 77/100, z=-1.4σ sous sa droite de régression (décote de 35% sur tendance) et val=4/5 avec DD-21.8% : le timing d'entrée est propre, on est dans une zone Fibo acceptable, pas au top 52w. Secteur Finance (hors cluster Tech&IA saturé à 62%), pas de restriction sectorielle. Consensus +25% d'upside analystes. Le contexte macro de taux stables (Fed hold cette semaine) est favorable aux plateformes de données financières comme SPGI dont les revenus d'indices et de ratings sont structurellement résistants. Liquidités disponibles : 1430€, position initiale modeste (1 titre ~env. 400-500€ range estimé) pour rester au-dessus du plancher de 5% cash. Conviction modérée : Golden Cross J+1 est le meilleur signal timing de la semaine hors cluster saturé.",
-      "poids": 3.3,
-      "plus_value_latente_eur": 66.86
+      "poids": 3.2,
+      "plus_value_latente_eur": 65.48
     },
     {
       "ticker": "BLK",
@@ -239,11 +230,28 @@
       "prix_actuel": 1122.29,
       "quantite": 1,
       "montant_investi": 914.17,
-      "valeur_actuelle": 965.74,
-      "performance": 5.64,
+      "valeur_actuelle": 964.58,
+      "performance": 5.51,
       "score_entree": 93,
       "poids": 2.7,
-      "plus_value_latente_eur": 51.57
+      "plus_value_latente_eur": 50.41
+    },
+    {
+      "ticker": "ADYEN.AS",
+      "nom": "ADYEN",
+      "market": "AMS",
+      "sector": "Technologie",
+      "currency": "EUR",
+      "date_achat": "2026-04-30",
+      "prix_achat": 958.5,
+      "prix_actuel": 1002.0,
+      "quantite": 1,
+      "montant_investi": 959.22,
+      "valeur_actuelle": 1002.0,
+      "performance": 4.46,
+      "score_entree": 93,
+      "poids": 2.8,
+      "plus_value_latente_eur": 42.78
     },
     {
       "ticker": "META",
@@ -256,11 +264,11 @@
       "prix_actuel": 616.77,
       "quantite": 2,
       "montant_investi": 1044.92,
-      "valeur_actuelle": 1061.47,
-      "performance": 1.58,
+      "valeur_actuelle": 1060.2,
+      "performance": 1.46,
       "score_entree": 84,
       "poids": 3.0,
-      "plus_value_latente_eur": 16.55
+      "plus_value_latente_eur": 15.28
     },
     {
       "ticker": "AMZN",
@@ -273,29 +281,11 @@
       "prix_actuel": 258.51,
       "quantite": 2,
       "montant_investi": 446.82,
-      "valeur_actuelle": 444.9,
-      "performance": -0.43,
+      "valeur_actuelle": 444.37,
+      "performance": -0.55,
       "score_entree": 90,
       "poids": 1.3,
-      "plus_value_latente_eur": -1.92
-    },
-    {
-      "ticker": "LSEG.L",
-      "nom": "London Stock Exchange Group",
-      "market": "LSE",
-      "sector": "Finance",
-      "currency": "GBP",
-      "date_achat": "2026-05-07",
-      "prix_achat": 92.16,
-      "prix_actuel": 88.98,
-      "quantite": 14,
-      "montant_investi": 1492.64,
-      "valeur_actuelle": 1450.7,
-      "performance": -2.81,
-      "score_entree": 83,
-      "raison_achat": "Score 83/100 avec Golden Cross frais (9j), fenêtre signal optimale, et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
-      "poids": 4.1,
-      "plus_value_latente_eur": -41.94
+      "plus_value_latente_eur": -2.45
     },
     {
       "ticker": "DDOG",
@@ -309,12 +299,30 @@
       "quantite": 4,
       "montant_investi": 763.89,
       "frais_achat_eur": 0.5725,
-      "valeur_actuelle": 732.91,
-      "performance": -4.06,
+      "valeur_actuelle": 732.03,
+      "performance": -4.17,
       "score_entree": 80,
       "raison_achat": "Score 80/100, #8 watchlist. Golden Cross frais 9j avec confirmation volume, fenêtre signal optimale selon la méthodologie (val=0/5 noté, mais le Golden Cross Day-9 volume-confirmé est le signal le plus fiable de la watchlist cette semaine). Pente MM21 à +13.1%, momentum le plus dynamique du tableau. Z=+1.2σ légèrement au-dessus de régression, acceptable. ATTENTION : DDOG appartient au cluster Tech&IA (59% déjà). La soft cap R01 s'applique : sizing réduit ×0.17. Liquidités disponibles : 2886€. Sizing normal théorique ~5% = ~1177€ → ×0.17 = ~200€, soit environ 1-2 titres selon le cours. Je justifie la conviction 'forte' sur le Golden Cross volume-confirmé Day-9 + pente MM21 exceptionnelle, ce qui porte le sizing plancher à 50% du normal selon la règle soft cap conviction forte : ~588€. Val=0/5 (collé au top 52w, DD-0.0%) est un frein réel, l'entrée n'est pas idéale sur le timing chartiste, mais le signal de momentum justifie l'exception à sizing réduit.",
       "poids": 2.1,
-      "plus_value_latente_eur": -30.98
+      "plus_value_latente_eur": -31.86
+    },
+    {
+      "ticker": "LSEG.L",
+      "nom": "London Stock Exchange Group",
+      "market": "LSE",
+      "sector": "Finance",
+      "currency": "GBP",
+      "date_achat": "2026-05-07",
+      "prix_achat": 92.16,
+      "prix_actuel": 87.36,
+      "quantite": 14,
+      "montant_investi": 1492.64,
+      "valeur_actuelle": 1423.8,
+      "performance": -4.61,
+      "score_entree": 83,
+      "raison_achat": "Score 83/100 avec Golden Cross frais (9j), fenêtre signal optimale, et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
+      "poids": 4.0,
+      "plus_value_latente_eur": -68.84
     },
     {
       "ticker": "BX",
@@ -328,11 +336,11 @@
       "quantite": 9,
       "montant_investi": 1117.11,
       "frais_achat_eur": 0.8372,
-      "valeur_actuelle": 1054.43,
-      "performance": -5.61,
+      "valeur_actuelle": 1053.16,
+      "performance": -5.72,
       "score_entree": 80,
       "raison_achat": "BX affiche un Golden Cross frais à J+4 avec confirmation volume, exactement dans la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant, volume validé). Score 80/100, z=-0.4sigma légèrement sous sa droite de régression, ce qui offre un point d'entrée propre sans surcote. Setup A (bull cycle) combiné à un signal technique de qualité : val=4/5 avec drawdown -20.6% depuis le top 52 semaines, en zone Fibo 38.2%, ce qui constitue un retracement standard et un timing d'entrée favorable. Secteur Finance, non corrélé à la concentration Tech/IA qui pèse déjà 46% du capital : cette entrée améliore marginalement la diversification thématique. Le portefeuille est plein à 20 lignes, mais la vente d'ORSTED.CO libère une place et du cash. J'engage environ 1 150 euros soit 3.3% du capital, conviction modérée car Golden Cross très récent (J+4) et peu de recul sur la dynamique post-cross. Je préserve des liquidités pour optionalité.",
-      "plus_value_latente_eur": -62.68,
+      "plus_value_latente_eur": -63.95,
       "poids": 3.0
     },
     {
@@ -343,14 +351,14 @@
       "currency": "USD",
       "date_achat": "2026-04-30",
       "prix_achat": 390.83,
-      "prix_actuel": 357.895,
+      "prix_actuel": 357.9,
       "quantite": 2,
       "montant_investi": 672.11,
-      "valeur_actuelle": 615.95,
-      "performance": -8.36,
+      "valeur_actuelle": 615.21,
+      "performance": -8.47,
       "score_entree": 100,
-      "poids": 1.8,
-      "plus_value_latente_eur": -56.16,
+      "poids": 1.7,
+      "plus_value_latente_eur": -56.9,
       "frais_achat_eur": 0.24
     },
     {
@@ -365,12 +373,12 @@
       "quantite": 7,
       "montant_investi": 1757.62,
       "frais_achat_eur": 1.3172,
-      "valeur_actuelle": 1605.34,
-      "performance": -8.66,
+      "valeur_actuelle": 1603.41,
+      "performance": -8.77,
       "score_entree": 87,
       "raison_achat": "ADBE affiche un Golden Cross frais à J+0 ce lundi, soit la fenêtre signal optimale par excellence selon la méthodologie. Score 87/100, z=-1.7sigma sous sa droite de régression (décote de 47% sur la tendance), val=4/5 avec un drawdown de -20.5% sous le top 52w : le setup d'entrée est propre, prix compressé avec momentum naissant. Le portefeuille est à 20/20 lignes, donc cet achat nécessite une rotation. Je vends ETN (score 93/100 mais détenu depuis 123 jours à -7.1%, thèse IA-infra moins différenciante que ADBE sur la croissance logicielle, et la friction fiscale est nulle vu la perte latente) pour financer ADBE. Rotation : je vends ETN (score 93/100, -7.1% depuis l'achat il y a 123 jours, thèse infrastructure IA générique, pas de catalyseur immédiat identifié) pour financer ADBE (score 87/100, Golden Cross J+0, z=-1.7sigma, décote forte, setup d'entrée optimal). Aucune friction fiscale : ETN est en perte latente, donc la vente ne déclenche pas de PFU mais génère un crédit d'impôt utilisable. J'engage environ 1 800 euros soit environ 5% du capital, conviction forte sur la qualité du setup technique et fondamental.",
-      "plus_value_latente_eur": -152.28,
-      "poids": 4.6
+      "plus_value_latente_eur": -154.21,
+      "poids": 4.5
     },
     {
       "ticker": "BKNG",
@@ -384,16 +392,16 @@
       "quantite": 6,
       "montant_investi": 1113.47,
       "frais_achat_eur": 0.8345,
-      "valeur_actuelle": 997.97,
-      "performance": -10.37,
+      "valeur_actuelle": 996.77,
+      "performance": -10.48,
       "score_entree": 82,
       "raison_achat": "Golden Cross frais à J+2 avec confirmation volume : c'est exactement la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant, volume validé). Score 82/100, z=+0.9σ légèrement au-dessus de sa régression mais la surcote reste modérée (20%), et val=2/5 indique un drawdown de -5.5% sous le top 52w, ce qui offre un point d'entrée encore acceptable. Secteur consommation cyclique non corrélé à la concentration IA/Tech déjà lourde du portefeuille (45% Tech + 35% infra-IA), ce qui apporte une diversification réelle. Consensus analystes favorable (+11%), profil de croissance solide pour un acteur dominant des plateformes de voyage. J'engage environ 1 200 euros soit 3.5% du capital, sizing modéré cohérent avec la légère surcote z et le manque de drapeau fondamental récent à croiser.",
-      "plus_value_latente_eur": -115.5,
+      "plus_value_latente_eur": -116.7,
       "poids": 2.8
     }
   ],
   "liquidites": 5120.38,
-  "pct_liquidites": 14.6,
+  "pct_liquidites": 14.5,
   "ordres": [
     {
       "date": "2026-09-06",
@@ -3112,24 +3120,25 @@
     }
   ],
   "biais_detectes": [
-    "Concentration thématique IA-infra (38% du capital) : risque de corrélation sous-estimée entre NVDA, ADBE, AVGO, AMD, META, ASML, AMZN, ETN",
-    "Action bias potentiel sur le renforcement NVDA : le val=5/5 est réel mais le contexte macro hawkish (Warsh) aurait pu justifier d'attendre"
+    "Biais d'action : tentation de sortir de ADBE/BKNG/BX sur pertes latentes sans catalyseur fondamental (Règle 01 bloque légitimement cette impulsion)",
+    "Biais de disposition : tendance à vouloir couper les pertes trop tôt sur des thèses techniques encore valides",
+    "Concentration implicite : 41% sur la thèse infrastructure IA sans que la corrélation interne soit toujours visible dans la répartition sectorielle affichée"
   ],
   "regles_actives": [
     {
       "type": "concentration_sectorielle",
       "secteur": "Tech & IA",
-      "pct": 50.7,
+      "pct": 58.8,
       "regime": "info",
-      "message": "Cluster Tech & IA : 51% du capital, concentration à intégrer dans le sizing (aucune réduction automatique, l'arbitrage reste libre)",
+      "message": "Cluster Tech & IA : 59% du capital, concentration à intégrer dans le sizing (aucune réduction automatique, l'arbitrage reste libre)",
       "bloque": false
     },
     {
       "type": "concentration_thematique",
       "theme": "infra-ia",
-      "pct": 38.0,
+      "pct": 41.4,
       "regime": "info",
-      "message": "Thème « Infrastructure de l'IA » : 38% du capital (ASML.AS, NVDA, AMD, AMZN, META, AVGO, ETN) : ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
+      "message": "Thème « Infrastructure de l'IA » : 41% du capital (ASML.AS, NVDA, AMD, META, AMZN, AVGO) : ces titres suivent la MÊME thèse et baissent ensemble, quelle que soit leur répartition sectorielle",
       "bloque": false
     }
   ],
@@ -3140,59 +3149,51 @@
   "nb_neutres": 0,
   "macro_news": [
     {
-      "headline": "Bank of England's Bailey sees 'subdued' second-round inflation effects for now - Reuters",
-      "summary": "Bank of England's Bailey sees 'subdued' second-round inflation effects for now  Reuters",
-      "date": "2026-08-28",
-      "source": "Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPb2QydWdoanp1clRlWTVBQW9mRFZhcVBPWEJkcHB5M0RjSWRLTXJjcjNHbUU3cFJ4dHpNbFhXcjN0elBrWnVFSHYtZFJ2cEUxQ2FMWm1YRVFQZlJONE9LQ1pHTnRJNXVfcHNqc1ZhakxiVkdvdFhSNWo2ZEFJMXdPZWVhcy0teHNkRVJiNVk2LTdpX2piWFpIZzdhU0xnYk0yWVZqdkh5VV9weUpfS1VxZE9pYw?oc=5",
-      "resume_fr": "Le gouverneur de la Banque d'Angleterre, Bailey, estime que les effets de second tour de l'inflation restent contenus pour l'instant."
-    },
-    {
-      "headline": "Stock traders warm up to Warsh as volatility index touches year-to-date low",
-      "summary": "The Cboe Volatility Index (VIX), which measures the price of 30-day options on the S&P 500 Index, fell to as low as 14.1.",
-      "date": "2026-08-28",
+      "headline": "2-year yield rises to highest since January 2025 after hot jobs report boosts expectations that the Fed could raise rates",
+      "summary": "Treasury yields rose as the hot jobs report along with sticky inflation may give the Fed more cover to hike interest rates in September.",
+      "date": "2026-09-04",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/08/28/stock-traders-warm-up-to-warsh-as-volatility-index-touches-year-to-date-low.html",
-      "resume_fr": "Le VIX a touché un plus bas annuel à 14.1, signe que les marchés accueillent favorablement la nomination de Warsh à la Fed."
+      "url": "https://www.cnbc.com/2026/09/04/treasurys-bonds-nonfarm-payrolls-unemployment-data.html",
+      "resume_fr": "Un rapport emploi solide aux Etats-Unis pousse les taux à 2 ans à leur plus haut depuis janvier 2025 et ravive les anticipations d'une hausse de taux Fed en septembre."
     },
     {
-      "headline": "Fed Chair Kevin Warsh says inflation isn’t slowing, vows to reach 2% target",
-      "summary": "Fed Chair Kevin Warsh says underlying inflation has not meaningfully improved, keeping a September rate hike possible as policymakers assess price pressures.",
-      "date": "2026-08-28",
+      "headline": "World’s biggest money managers are rebuilding gold positions",
+      "summary": "Major money managers are increasing gold holdings, anticipating long-term value despite Fed's inflation measures and rising interest rates.",
+      "date": "2026-09-05",
       "source": "Bloomberg",
-      "url": "https://www.bloomberg.com/news/articles/2026-08-28/warsh-says-inflation-isn-t-slowing-vows-to-hit-to-2-target",
-      "resume_fr": "Le président de la Fed Kevin Warsh juge que l'inflation sous-jacente n'a pas suffisamment reculé, rendant une hausse de taux en septembre possible."
+      "url": "https://www.bloomberg.com/news/articles/2026-09-04/world-s-biggest-money-managers-are-rebuilding-gold-positions",
+      "resume_fr": "Les grands gestionnaires d'actifs mondiaux reconstituent leurs positions en or en anticipant une valeur refuge durable malgré la politique monétaire restrictive de la Fed."
     },
     {
-      "headline": "Qatar's first-quarter GDP falls 7% as Iran war weighs on energy production - Reuters",
-      "summary": "Qatar's first-quarter GDP falls 7% as Iran war weighs on energy production  Reuters",
-      "date": "2026-08-31",
+      "headline": "COMMENTARY: China's crude oil imports stayed weak in August. Can this continue? - Reuters",
+      "summary": "COMMENTARY: China's crude oil imports stayed weak in August. Can this continue?  Reuters",
+      "date": "2026-09-07",
       "source": "Reuters",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUDRKOEZ0M3JrM0M1RTFRSHZubzF4SF9UX21fUWNJNjJIc1pSZnVORnIxaHNzdENEbEtiLV85NG9sQVlDdjBaWW00ZlpDUzhzT0RGbHdScUliNnlsUlEzNHpaSHNXTEx4S1pyTm5MRGNERDQ1czI1dzZkOG4xVkVPTUVpb1ZiaEk0b1FIY2c3OURDYUpETjItd19sbHpXMDRubDhiRGNVZFQ3X2hLTFhMbmo2bExSc3NXRmlFSQ?oc=5",
-      "resume_fr": "Le PIB du Qatar a chuté de 7% au premier trimestre 2026, sous l'effet de la guerre en Iran qui pèse sur la production énergétique."
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQNjJvZmc3M0wteXQ1VzNhSUZHY3p4eGl4UjNUWC1BYi16ajFCbzZYUlBfV0tQajNaSVFvWVRWTmY5WlhpT1hPb0JwRUF4OHY2NG96bl9xTVppUTFyZUN3clpMLTJfNnRhenNsTVVuUXlXZmxxMDV6R00tQk1MWVBkOTlUdi1uOUxuV1l2WnZaODZESnNLWVdzM0RxSFlQZTF5ZWhiUkZtSExpWmQ5cGZ1M0dnTTdjNjNRR3hqV21pT3lOMlZlZEJRQ0lB?oc=5",
+      "resume_fr": "Les importations chinoises de pétrole brut sont restées faibles en août 2026, posant la question de la durabilité de cette tendance baissière sur la demande."
     },
     {
-      "headline": "Warsh’s inflation warning sets up September showdown for the Fed",
-      "summary": "Warsh didn’t signal that such a move is a done deal, and some Fed officials continue to say they are willing to wait and assess new data before making any decision",
-      "date": "2026-08-29",
-      "source": "Bloomberg",
-      "url": "https://www.bloomberg.com/news/articles/2026-08-28/warsh-s-inflation-warning-sets-up-september-showdown-for-the-fed",
-      "resume_fr": "L'avertissement de Warsh sur l'inflation prépare un bras de fer au sein de la Fed pour la réunion de septembre, certains membres préférant attendre de nouvelles données."
+      "headline": "Morning Bid: Diesel the real spoiler for US inflation doves - reuters.com",
+      "summary": "Morning Bid: Diesel the real spoiler for US inflation doves  reuters.com",
+      "date": "2026-09-07",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBkVEpMZWxDcWdjVkVYRGdtakVZSGxsWVZfR2N5eFR4UTBRTzZWTmxMZXF3REFZeHBkelU2YXJQb21JZEtGNVNqQld1eTYxV3VpLXFzT1VEVEtQVUNxa3VQTW5mdE1OQ2JocmNrdW80bktWQWxfY2w2SmoxV2dfOWs?oc=5",
+      "resume_fr": "Le diesel est identifié comme le principal obstacle à une désinflation aux Etats-Unis, compliquant la tâche des partisans d'un assouplissement monétaire rapide."
     },
     {
-      "headline": "Bessent attacks Warren over yen intervention query, offers ‘Foreign Exchange for Dummies’ lesson",
-      "summary": "Treasury has not disclosed how much yen it bought, the execution rate or the current value of the position, despite Warren’s requests for details.",
-      "date": "2026-08-28",
+      "headline": "Judge weighs how to dismiss Reflecting Pool vandalism charge against Olympian",
+      "summary": "President Trump has said damage to the Reflecting Pool was due to vandalism, not to a flawed installation of a new liner as prosecutors say.",
+      "date": "2026-09-04",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/08/28/bessent-warren-yen-intervention-treasury-japan.html",
-      "resume_fr": ""
+      "url": "https://www.cnbc.com/2026/09/04/reflecting-pool-hearn-doj-trump-pirro.html",
+      "resume_fr": "Un juge américain examine comment rejeter une charge de vandalisme contre un athlète olympique liée au Reflecting Pool de Washington."
     }
   ],
   "analyse_claude": {
-    "analyse_macro": "Cette dernière semaine d'août 2026 s'est ouverte sur une déclaration de Kevin Warsh qui mérite d'être lue attentivement : le nouveau président de la Fed a indiqué que l'inflation sous-jacente 'n'a pas significativement progressé vers les 2%', maintenant ouverte la possibilité d'une hausse de taux en septembre. Ce n'est pas encore un engagement, mais le signal est hawkish et tranche avec l'ambiance VIX à 14.1 qui régnait en fin de semaine dernière. Les marchés semblent jouer la carte Warsh avec une sérénité qui laisse perplexe.\n\nPour le portefeuille Signal, la semaine se termine avec une performance nette de +36.03% depuis le lancement, soit +22.82 points d'écart au benchmark MSCI World. Le capital atteint 34 935 euros après 93 euros de friction cumulée (frais et PFU). La semaine a été calme en termes de volatilité (VIX 15.26, régime normal), ce qui facilite les décisions sans pression de panique.\n\nDeux décisions cette semaine. Première : une rotation ETN vers ADBE. ETN est en perte de -7.1% après 123 jours sans catalyseur visible, et ADBE affiche ce lundi un Golden Cross à J+0, z=-1.7sigma sous régression avec val=4/5 (drawdown -20.5% sous le top 52w) : c'est le setup d'entrée le plus propre vu depuis plusieurs semaines. La rotation est fiscalement neutre : ETN en perte ne génère aucun PFU et produit même un crédit d'impôt reportable. Deuxième : un renforcement NVDA sur un pullback val=5/5 en zone Fibo 23.6%, à z=+0.1sigma. Signal propre, mais dimensionné prudemment vu la concentration thème IA-infra déjà à 38% du capital.\n\nLe risque macro à surveiller : si Warsh confirme une hausse en septembre, les multiples élevés des titres tech (NVDA, ADBE, AVGO) subiraient une pression de re-rating. Ce n'est pas encore le scénario central, mais un portefeuille à 51% sur le cluster Tech et IA doit en tenir compte. La diversification reste insuffisante pour résister confortablement à un choc de taux.\n\nSemaine prochaine : la décision de la Fed en septembre approche. Vous surveillerez les données PCE (indicateur de prédilection de la Fed) et les déclarations des autres membres du FOMC pour calibrer si Warsh embarque l'institution avec lui ou s'il reste un faucon solitaire. Et bien sûr, ADBE publie ses résultats trimestriels en septembre : le timing du Golden Cross J+0 est soit excellent soit ironique selon ce que les chiffres révèleront.",
-    "conviction_globale": "haussier",
-    "message_utilisateurs": "Ce lundi 31 août, deux décisions : une rotation et un renforcement.\n\nRotation ETN vers ADBE : Eaton Corporation est en portefeuille depuis 123 jours à -7.1%, sans catalyseur qui aurait dû corriger la trajectoire. Adobe présente ce matin un Golden Cross à J+0 (le signal le plus frais possible selon notre méthodologie), avec un prix compressé à -1.7 écart-type sous sa tendance historique et un drawdown de -20.5% sous son plus haut 52 semaines : c'est le type de setup que l'on attend. La rotation est fiscalement propre : ETN en perte ne génère aucune imposition, et produit même un crédit d'impôt utilisable sur 10 ans.\n\nRenforcement NVDA : le titre est en portefeuille depuis 241 jours avec +53.3% de gain. Le pullback récent de -6.7% sous le top 52 semaines place NVDA dans la zone Fibo 23.6%, niveau de retracement sain sur un trend haussier. Le score reste à 86/100 et le momentum est intact. J'engage environ 1 200 euros, dimensionnement volontairement prudent compte tenu de la concentration déjà élevée sur le thème IA-infrastructure (38% du capital).\n\nPoint macro : les déclarations de Warsh cette semaine maintiennent une hausse de taux possible en septembre. Ce n'est pas encore le scénario de base, mais un portefeuille concentré sur la tech doit en tenir compte. Pas de panique, mais vigilance accrue sur les multiples.",
-    "nb_decisions": 3
+    "analyse_macro": "Ce lundi 8 septembre, le signal macro dominant de la semaine est venu vendredi avec un rapport emploi américain solide qui a fait remonter les rendements des T-bonds à 2 ans à leur plus haut depuis janvier 2025. Le marché commence à pricer une possible hausse des taux Fed en septembre, retournement que peu anticipaient il y a encore deux semaines.\n\nCette perspective d'un resserrement monétaire supplémentaire n'est pas neutre pour Signal : le portefeuille est concentré à 59% sur la tech et 41% sur l'infrastructure IA, deux clusters particulièrement sensibles aux taux longs. Le benchmark MSCI World progresse de +0.5% sur la semaine et de +14.5% depuis le lancement. Signal affiche +37.28% net depuis la création, soit +21.93 points d'écart au benchmark. Ces chiffres sont bons, mais la composition du portefeuille appelle à la vigilance dans ce contexte de remontée potentielle des taux.\n\nSide note méthodologique : cette semaine ne génère aucun achat. Pas parce que la watchlist est vide (ADBE reste #1 à 86/100, CB #4 à 83/100 avec val=5/5), mais parce que le portefeuille est à 20 lignes sur 20 et que les liquidités disponibles (5 120 euros) seraient utilisées pour renforcer des lignes existantes ou ouvrir une rotation. Avant tout renforcement ou rotation, la question R10 s'impose : la friction fiscale (31.4% de PFU sur les plus-values réalisées) + la concentration déjà élevée plaident pour l'inaction disciplinée. ADBE à -8.8% depuis 7 jours : douloureux, mais le stop-loss n'est pas atteint et la Règle 01 (90j) interdit toute sortie sans signal fondamental documenté, dont aucun n'est apparu.\n\nLe biais à surveiller cette semaine est le biais d'action face à une position inconfortable (ADBE, BKNG, BX toutes en rouge). L'inaction est une décision, et le process ici est de ne pas sortir d'une thèse intacte sous la pression de pertes latentes à court terme.\n\nPour la semaine à venir : la décision Fed de septembre sera le catalyseur principal. Si une hausse est confirmée, les multiples tech pourraient se comprimer davantage. Je surveille les niveaux de stop-loss sur ADBE (-15% serait le prochain signal d'alerte à environ 195 euros de cours) et BKNG (-15% après les 90 jours de détention). CB (#4 watchlist, val=5/5, pullback -6%) reste le candidat le plus propre si une place se libère ou si une rotation se justifie.",
+    "conviction_globale": "neutre",
+    "message_utilisateurs": "Semaine sans transaction cette semaine, ce qui est une décision à part entière. Trois éléments l'expliquent.\n\nPremier point : le portefeuille est à 20 lignes sur 20, le plafond mécanique. Toute nouvelle entrée exigerait une rotation (vendre quelque chose pour acheter autre chose), avec la friction fiscale de 31.4% sur les plus-values réalisées. Ce coût est réel et doit être compensé par un avantage net suffisant du titre entrant.\n\nDeuxième point : les positions récentes (ADBE, BKNG, BX) sont en légère perte mais aucune ne franchit les seuils de stop-loss. La Règle 01 (90 jours minimum de détention) les protège d'une sortie émotionnelle. ADBE en particulier, acheté il y a 7 jours à -8.8%, reste au-dessus du seuil critique de -15%, avec une thèse technique toujours intacte (Golden Cross J+4, score 87/100, décote de régression réelle).\n\nTroisième point : le contexte macro s'est durci vendredi avec un rapport emploi solide qui a poussé les rendements américains à 2 ans à leur plus haut depuis janvier 2025 et ravivé les anticipations d'une hausse Fed en septembre. Ce n'est pas le moment idéal pour renforcer des thèses tech concentrées.\n\nLa performance nette du portefeuille reste à +37.28% depuis la création, soit +21.93 points au-dessus du MSCI World. Ce coussin existe précisément pour traverser des semaines calmes sans avoir à agir.",
+    "nb_decisions": 4
   },
   "performance_history": [
     {
@@ -4146,15 +4147,16 @@
       "note": "Régularisation de trésorerie +374.10 € (bases de change réparées sans le cash)",
       "liquidites": 5120.38,
       "valeur_positions": 30010.78
+    },
+    {
+      "date": "2026-09-07",
+      "perf": 37.28,
+      "capital": 35255.67,
+      "valeur_positions": 30135.29,
+      "liquidites": 5120.38,
+      "benchmark_cac40": 1.39,
+      "benchmark_msci": 14.46
     }
   ],
-  "max_drawdown": -8.47,
-  "pertes_imputees_si_liquidation": 1075.2,
-  "total_investi": 23941.85,
-  "plus_value_latente_totale": 6068.93,
-  "total_resultat_realise": -937.77,
-  "pfu_rate": 0.314,
-  "ecart_tresorerie": -0.0,
-  "plus_value_nette_si_liquidation": 6046.42,
-  "valeur_positions": 30010.78
+  "max_drawdown": -8.47
 }

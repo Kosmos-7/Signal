@@ -1,0 +1,60 @@
+{
+ "id": "hebdo-2026-37",
+ "type": "hebdo",
+ "date": "2026-09-07",
+ "titre": "L'analyse du portefeuille · Sem. 37 · 2026",
+ "chapeau": "Ce lundi 8 septembre, le signal macro dominant de la semaine est venu vendredi avec un rapport emploi américain solide qui a fait remonter les rendements des T-bonds à 2 ans à leur plus haut depuis janvier 2025. Le marché commence à pricer une possible hausse des taux Fed en s…",
+ "sujet": null,
+ "photo": null,
+ "conviction": "neutre",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Ce lundi 8 septembre, le signal macro dominant de la semaine est venu vendredi avec un rapport emploi américain solide qui a fait remonter les rendements des T-bonds à 2 ans à leur plus haut depuis janvier 2025. Le marché commence à pricer une possible hausse des taux Fed en septembre, retournement que peu anticipaient il y a encore deux semaines.\n\nCette perspective d'un resserrement monétaire supplémentaire n'est pas neutre pour Signal : le portefeuille est concentré à 59% sur la tech et 41% sur l'infrastructure IA, deux clusters particulièrement sensibles aux taux longs. Le benchmark MSCI World progresse de +0.5% sur la semaine et de +14.5% depuis le lancement. Signal affiche +37.28% net depuis la création, soit +21.93 points d'écart au benchmark. Ces chiffres sont bons, mais la composition du portefeuille appelle à la vigilance dans ce contexte de remontée potentielle des taux.\n\nSide note méthodologique : cette semaine ne génère aucun achat. Pas parce que la watchlist est vide (ADBE reste #1 à 86/100, CB #4 à 83/100 avec val=5/5), mais parce que le portefeuille est à 20 lignes sur 20 et que les liquidités disponibles (5 120 euros) seraient utilisées pour renforcer des lignes existantes ou ouvrir une rotation. Avant tout renforcement ou rotation, la question R10 s'impose : la friction fiscale (31.4% de PFU sur les plus-values réalisées) + la concentration déjà élevée plaident pour l'inaction disciplinée. ADBE à -8.8% depuis 7 jours : douloureux, mais le stop-loss n'est pas atteint et la Règle 01 (90j) interdit toute sortie sans signal fondamental documenté, dont aucun n'est apparu.\n\nLe biais à surveiller cette semaine est le biais d'action face à une position inconfortable (ADBE, BKNG, BX toutes en rouge). L'inaction est une décision, et le process ici est de ne pas sortir d'une thèse intacte sous la pression de pertes latentes à court terme.\n\nPour la semaine à venir : la décision Fed de septembre sera le catalyseur principal. Si une hausse est confirmée, les multiples tech pourraient se comprimer davantage. Je surveille les niveaux de stop-loss sur ADBE (-15% serait le prochain signal d'alerte à environ 195 euros de cours) et BKNG (-15% après les 90 jours de détention). CB (#4 watchlist, val=5/5, pullback -6%) reste le candidat le plus propre si une place se libère ou si une rotation se justifie.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Semaine sans transaction cette semaine, ce qui est une décision à part entière. Trois éléments l'expliquent.\n\nPremier point : le portefeuille est à 20 lignes sur 20, le plafond mécanique. Toute nouvelle entrée exigerait une rotation (vendre quelque chose pour acheter autre chose), avec la friction fiscale de 31.4% sur les plus-values réalisées. Ce coût est réel et doit être compensé par un avantage net suffisant du titre entrant.\n\nDeuxième point : les positions récentes (ADBE, BKNG, BX) sont en légère perte mais aucune ne franchit les seuils de stop-loss. La Règle 01 (90 jours minimum de détention) les protège d'une sortie émotionnelle. ADBE en particulier, acheté il y a 7 jours à -8.8%, reste au-dessus du seuil critique de -15%, avec une thèse technique toujours intacte (Golden Cross J+4, score 87/100, décote de régression réelle).\n\nTroisième point : le contexte macro s'est durci vendredi avec un rapport emploi solide qui a poussé les rendements américains à 2 ans à leur plus haut depuis janvier 2025 et ravivé les anticipations d'une hausse Fed en septembre. Ce n'est pas le moment idéal pour renforcer des thèses tech concentrées.\n\nLa performance nette du portefeuille reste à +37.28% depuis la création, soit +21.93 points au-dessus du MSCI World. Ce coussin existe précisément pour traverser des semaines calmes sans avoir à agir.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "2-year yield rises to highest since January 2025 after hot jobs report boosts expectations that the Fed could raise rates",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/04/treasurys-bonds-nonfarm-payrolls-unemployment-data.html",
+   "date": "2026-09-04",
+   "resume": "Un rapport emploi solide aux Etats-Unis pousse les taux à 2 ans à leur plus haut depuis janvier 2025 et ravive les anticipations d'une hausse de taux Fed en septembre."
+  },
+  {
+   "titre": "World’s biggest money managers are rebuilding gold positions",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-09-04/world-s-biggest-money-managers-are-rebuilding-gold-positions",
+   "date": "2026-09-05",
+   "resume": "Les grands gestionnaires d'actifs mondiaux reconstituent leurs positions en or en anticipant une valeur refuge durable malgré la politique monétaire restrictive de la Fed."
+  },
+  {
+   "titre": "COMMENTARY: China's crude oil imports stayed weak in August. Can this continue? - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQNjJvZmc3M0wteXQ1VzNhSUZHY3p4eGl4UjNUWC1BYi16ajFCbzZYUlBfV0tQajNaSVFvWVRWTmY5WlhpT1hPb0JwRUF4OHY2NG96bl9xTVppUTFyZUN3clpMLTJfNnRhenNsTVVuUXlXZmxxMDV6R00tQk1MWVBkOTlUdi1uOUxuV1l2WnZaODZESnNLWVdzM0RxSFlQZTF5ZWhiUkZtSExpWmQ5cGZ1M0dnTTdjNjNRR3hqV21pT3lOMlZlZEJRQ0lB?oc=5",
+   "date": "2026-09-07",
+   "resume": "Les importations chinoises de pétrole brut sont restées faibles en août 2026, posant la question de la durabilité de cette tendance baissière sur la demande."
+  },
+  {
+   "titre": "Morning Bid: Diesel the real spoiler for US inflation doves - reuters.com",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBkVEpMZWxDcWdjVkVYRGdtakVZSGxsWVZfR2N5eFR4UTBRTzZWTmxMZXF3REFZeHBkelU2YXJQb21JZEtGNVNqQld1eTYxV3VpLXFzT1VEVEtQVUNxa3VQTW5mdE1OQ2JocmNrdW80bktWQWxfY2w2SmoxV2dfOWs?oc=5",
+   "date": "2026-09-07",
+   "resume": "Le diesel est identifié comme le principal obstacle à une désinflation aux Etats-Unis, compliquant la tâche des partisans d'un assouplissement monétaire rapide."
+  },
+  {
+   "titre": "Judge weighs how to dismiss Reflecting Pool vandalism charge against Olympian",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/04/reflecting-pool-hearn-doj-trump-pirro.html",
+   "date": "2026-09-04",
+   "resume": "Un juge américain examine comment rejeter une charge de vandalisme contre un athlète olympique liée au Reflecting Pool de Washington."
+  }
+ ],
+ "genere_le": "2026-09-07"
+}
