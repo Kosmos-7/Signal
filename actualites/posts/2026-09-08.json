@@ -1,0 +1,144 @@
+{
+ "id": "2026-09-08",
+ "type": "quotidien",
+ "date": "2026-09-08",
+ "titre": "Les Houthis frappent des installations saoudiennes, le Brent bondit",
+ "chapeau": "Des attaques au Yémen blessent 73 personnes et perturbent l'énergie saoudienne. Le Brent monte de plus de 2 %. Inflation et nouveau patron d'Apple aussi au programme cette semaine.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-09-08.jpg",
+  "v": "48d2298c",
+  "legende": "Solarpunk Cargo Ship in a storm",
+  "credit": "Jacob coffin",
+  "licence": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Solarpunk_Cargo_Ship_in_a_storm.png",
+  "fichier": "Solarpunk Cargo Ship in a storm.png",
+  "requete": "cargo ship containers sea"
+ },
+ "marches": {
+  "ref": "2026-09-08",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8289.5302734375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.20009410383730616,
+    "ref": "2026-09-08"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6397.10986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.10743881302032454,
+    "ref": "2026-09-08"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4449.39990234375,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.4424601228143466,
+    "ref": "2026-09-08"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 98.41000366210938,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.212302565245271,
+    "ref": "2026-09-08"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1615750789642334,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.01509875209994286,
+    "ref": "2026-09-08"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 78696.546875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.5299882124996877,
+    "ref": "2026-09-08"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ADYEN",
+   "valeur": 995.5,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -3.029415188538946,
+   "ref": "2026-09-08",
+   "ticker": "ADYEN.AS",
+   "nom": "ADYEN"
+  }
+ },
+ "marches_texte": "Le Brent termine à 98,41 dollars, en hausse de 2,21 %, porté par les tensions dans le Golfe. L'or progresse modestement à 4 449,40 dollars (+0,44 %), tandis que le CAC 40 cède 0,20 % à 8 289,53 points et l'Euro Stoxx 50 recule de 0,11 %. Du côté des valeurs, Adyen enregistre le plus fort repli de notre liste avec -3,03 %.",
+ "sections": [
+  {
+   "titre": "Installations saoudiennes touchées, 73 blessés",
+   "texte": "Des attaques menées par les Houthis ont perturbé des infrastructures énergétiques en Arabie Saoudite et blessé 73 personnes, selon les autorités citées par Reuters. L'incident survient dans un contexte régional déjà tendu, après que l'Iran a menacé des représailles à la suite de frappes américaines, ralentissant la circulation dans le détroit d'Ormuz. Reuters rapporte que le trafic dans le détroit a effectivement diminué à la suite de ces menaces iraniennes. La roupie indienne a reculé face au dollar, le pétrole approchant un plus haut de six semaines, avant que la banque centrale indienne n'intervienne pour limiter les pertes.",
+   "sources": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "titre": "Une semaine raccourcie, mais chargée : inflation et Apple en vedette",
+   "texte": "Selon CNBC, la semaine de trading écourtée par un jour férié sera dominée par la publication de données d'inflation. Le nouveau directeur général d'Apple fait également face à son premier grand test, selon la même source. Ces deux dossiers figurent parmi les trois points que les observateurs de marché suivront de près dans les jours à venir.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Houthi attacks disrupt Saudi energy facilities, wound 73, authorities say - Reuters",
+   "resume": "Houthi attacks disrupt Saudi energy facilities, wound 73, authorities say  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQbXB6MGlpMW50OElMY1FiZ2hXYlNmbmI0ZG8xT2RLc0FOWG9IazNMVDdfdTdILUJINFYweFF5VFFOQldXU3k2T0NSekpIOVhyT050UXR3TzRGTEk4TGlnLVhJQ2s2LWRmamNyRGwyT3ZyU1gwQVlSYU5hQ3hBUHo2bTBwckJNQXlqSTQySzhhUV9WR0laNjZJVEktLXpiMF93N3hrYmRRejBXRFlPVmNrTTJJZ0w1NlhITEE?oc=5",
+   "date": "2026-09-08 04:19"
+  },
+  {
+   "titre": "Rupee slips as oil nears six-week high, RBI intervention limits losses - Reuters",
+   "resume": "Rupee slips as oil nears six-week high, RBI intervention limits losses  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNa05iLVFENGVBNnNsMDFGeFJfdFJOVXVGRFU5LUw1UUtLLXYzZ2gzZjBwaHkzZDN1SFRjNElJQnVvek9LOVpISW02UHpTRkk5ektMbXFYQ1VCTHI0QkRFY0kzSmtNZG52cTVpSjdEb3F1VlJ6RHI1YnVzNmMtZWNwSnA4ZTBtVlAwWXo0RG52dnQ4X0tQVVdrakpNS3UyeWhSZHJpLWVIR1NZdlAtaUpQMTA1MlU5NDVoNGk0RTBlVE8?oc=5",
+   "date": "2026-09-08 02:56"
+  },
+  {
+   "titre": "Hormuz traffic slows after Iran threatens retaliation for US attacks - Reuters",
+   "resume": "Hormuz traffic slows after Iran threatens retaliation for US attacks  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPLVZqbU1CYlBIcWpOcEhmWWNHbk1PaUxMa1REWVpsUnpHcEgySUVnWDZ5cFJJbG9tZ1IyV1A1UXFocFEzQkRZVmNNWVNkVlEzZWc4TExyVnNvdWJ2Tjg3a0swQUlKbXo3VzlncDNqZ2w2MUJVLVpJRVBFcXdlR3lpSW5CMVZneGtYcG51MWJZSkpLZmhpSzlrLUNoUXFXTlhQSm8xS25kdEhKM1VOa2pFdV85dnBRNENqWXc?oc=5",
+   "date": "2026-09-08 02:53"
+  },
+  {
+   "titre": "Here are the 3 big things we're watching in this holiday-shortened trading week",
+   "resume": "The week will be dominated by inflation data. Plus, Apple's new CEO has his first big test.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/07/here-are-the-3-big-things-were-watching-in-this-holiday-shortened-trading-week.html",
+   "date": "2026-09-07 23:31"
+  }
+ ],
+ "genere_le": "2026-09-08 10:05 UTC"
+}
