@@ -1,0 +1,151 @@
+{
+ "id": "2026-09-09",
+ "type": "quotidien",
+ "date": "2026-09-09",
+ "titre": "Le Brent franchit les 100 dollars, l'Europe encaisse",
+ "chapeau": "Le brut dépasse le seuil symbolique des 100 dollars sur fond de tensions au Moyen-Orient, et les Bourses européennes terminent dans le rouge.",
+ "sujet": "energie",
+ "photo": {
+  "src": "actualites/photos/2026-09-09.jpg",
+  "v": "2c843606",
+  "legende": "Wind Turbines, Baltic Sea",
+  "credit": "John Samuel",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wind_Turbines,_Baltic_Sea.jpg",
+  "fichier": "Wind Turbines, Baltic Sea.jpg",
+  "requete": "offshore wind farm turbines sea"
+ },
+ "marches": {
+  "ref": "2026-09-09",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8211.0400390625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.2856537724423232,
+    "ref": "2026-09-09"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6325.2900390625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.3703033582931607,
+    "ref": "2026-09-09"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4433.2998046875,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.8966954919190057,
+    "ref": "2026-09-09"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 100.76000213623047,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.9003309031779017,
+    "ref": "2026-09-09"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1627906560897827,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.002317005518471506,
+    "ref": "2026-09-09"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 79005.1875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.7223605890676005,
+    "ref": "2026-09-09"
+   }
+  ],
+  "mouvement": {
+   "libelle": "DEUTSCHE BOERSE AG    ",
+   "valeur": 273.3999938964844,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -2.392007162097365,
+   "ref": "2026-09-09",
+   "ticker": "DB1.DE",
+   "nom": "DEUTSCHE BOERSE AG    "
+  }
+ },
+ "marches_texte": "Le CAC 40 cède 1,29 % à 8 211 points et l'Euro Stoxx 50 recule de 1,37 % à 6 325 points : les indices européens terminent en nette baisse. Le Brent est la figure du jour avec +2,90 % à 100,76 dollars, repassant au-dessus du seuil des 100 dollars. L'or progresse de son côté de 0,90 % à 4 433 dollars, tandis que Bitcoin et l'euro face au dollar bougent peu.",
+ "sections": [
+  {
+   "titre": "Le Brent au-dessus de 100 dollars : un seuil qui fait parler",
+   "texte": "Le baril de Brent a franchi la barre des 100 dollars ce mardi matin, selon Reuters, en raison d'une intensification du conflit au Moyen-Orient. Les dépêches font état de nouvelles frappes qui alimentent les craintes sur l'approvisionnement en pétrole. Ce niveau symbolique n'avait pas été atteint depuis plusieurs mois, et son franchissement a visiblement pesé sur l'humeur des marchés européens tout au long de la séance.",
+   "sources": [
+    1,
+    2
+   ]
+  },
+  {
+   "titre": "Le détroit d'Ormuz sous surveillance",
+   "texte": "Le trafic maritime via le détroit d'Ormuz reste en dessous de sa moyenne des dix derniers jours, selon des données citées par Reuters. Ce goulet d'étranglement stratégique, par lequel transite une part importante des exportations pétrolières mondiales, concentre l'attention des opérateurs. Le ralentissement du trafic dans ce passage contribue aux inquiétudes sur les risques d'approvisionnement évoqués par les dépêches.",
+   "sources": [
+    0,
+    2
+   ]
+  },
+  {
+   "titre": "Les valeurs énergétiques américaines aux avant-postes",
+   "texte": "Outre-Atlantique, les valeurs énergétiques du S&P 500 s'approchaient de nouveaux plus hauts sur cinquante-deux semaines en séance de lundi, selon CNBC. La remontée du brut au-dessus de 90 dollars avait déjà suscité un regain d'intérêt pour le secteur dans les marchés d'options, où une valeur alternative du secteur de l'énergie aurait dépassé SpaceX en popularité selon la même source. La poursuite de la hausse du Brent jusqu'à 100 dollars renforce ce contexte favorable au secteur.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Shipping traffic via Strait of Hormuz stays below 10-day average, data shows - Reuters",
+   "resume": "Shipping traffic via Strait of Hormuz stays below 10-day average, data shows  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQbXlWYlQ0MW1KT1g0U01lVldVbGtRWFU5U1FNVDllbEIwU3U2WElRSmw5QUg2Q2w3TUVUNDBUdWRSNWx1emlYRXdjLXY2NFk2VVgzTWExUHM0TTBHRGxKdlJ6Y0tPSUlvTXFoQzU5THV6b2dLbExKbkxaV1VtamZkRkdkMnpZTlAwNXlxVUxnNkZOdzRwX0MyTUNvN1lWVTV5WmtCX01iSmR2QkdESzl4VWlwbndRVkNfQUVBZm9DdDFFc1BK?oc=5",
+   "date": "2026-09-09 09:35"
+  },
+  {
+   "titre": "Brent crude rises above $100 a barrel as Middle East conflict intensifies - Reuters",
+   "resume": "Brent crude rises above $100 a barrel as Middle East conflict intensifies  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNcV81aHB4Z3dteWpsZGxOM01KRFFXZ3hhZlBUUlJUb3Y0QXVXaWpfSXJxRGx0R2Z2LXRrb25jYWJBTUNxc3llTFNVdmRoQzkxRjlLc0czRUxKczdyYU8temtJbXJRUXNOUGpuRkdXenNZTFVLX3ZhUkFQZ191cjV3amlwZ0RocHBoUHNZYzVfZy1pSlFNNGlma0NMMFVvRFIxSXNUOTRyYnNDWU1qc0JxWmpDRHMyTmVj?oc=5",
+   "date": "2026-09-09 09:10"
+  },
+  {
+   "titre": "Oil nears $100 as fresh Middle East strikes raise supply risks - Reuters",
+   "resume": "Oil nears $100 as fresh Middle East strikes raise supply risks  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNUzVwcURFOW5QT2VTVW5YdFV2a2NPRGh1YkFoaTV2VUE0MXhES2gwR1ptSldNN29OZUZOLUQ2NlFUZUNpYjRFV25nTTR5cW03ZEFmX1BzMzViNGI5VXhWMWhtZHU1SDNxQ1Iyc2lDcEZOYnVpU3JMUVE4Uk9IUkVyYUdjd2ppV01LbDZESEQzWDBaZHZyOEpCem9yRkw0YUhnTVpuSVlzc01jVWszdVJSWg?oc=5",
+   "date": "2026-09-09 08:44"
+  },
+  {
+   "titre": "This alternative energy stock is more popular than SpaceX in the options pits. Here's why",
+   "resume": "Crude oil is back above $90 and energy stocks in the S&P 500 index are approaching fresh 52-week highs.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/08/bloom-energy-is-trading-more-options-than-spacex.html",
+   "date": "2026-09-08 20:23"
+  }
+ ],
+ "genere_le": "2026-09-09 10:07 UTC"
+}
