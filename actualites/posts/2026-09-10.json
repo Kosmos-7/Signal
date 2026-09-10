@@ -1,0 +1,164 @@
+{
+ "id": "2026-09-10",
+ "type": "quotidien",
+ "date": "2026-09-10",
+ "titre": "Le consommateur américain tient bon malgré l'essence chère",
+ "chapeau": "Bank of America voit ses clients dépenser et rembourser normalement. Pendant ce temps, Trump promet 5 000 $ aux électeurs républicains et le VIX attire les couvertures.",
+ "sujet": "macro",
+ "photo": {
+  "src": "actualites/photos/2026-09-10.jpg",
+  "v": "293297b3",
+  "legende": "Workers drive Forkloaders laden with USAID goods inside a large…",
+  "credit": "U.S. Department of Agriculture",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Workers_drive_Forkloaders_laden_with_USAID_goods_inside_a_large_warehouse_-_20110826-FS-LSC-0108_-_Flickr_-_USDAgov.jpg",
+  "fichier": "Workers drive Forkloaders laden with USAID goods inside a large warehouse - 20110826-FS-LSC-0108 - Flickr - USDAgov.jpg",
+  "requete": "warehouse logistics forklift pallets"
+ },
+ "marches": {
+  "ref": "2026-09-10",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8165.43994140625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.1075196080661556,
+    "ref": "2026-09-10"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6300.009765625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.18300218743895574,
+    "ref": "2026-09-10"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4437.10009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.4778101824331975,
+    "ref": "2026-09-10"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 102.33000183105469,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.1066127425287753,
+    "ref": "2026-09-10"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1637378931045532,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.08611054095956198,
+    "ref": "2026-09-10"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 77931.6484375,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.4189585951949339,
+    "ref": "2026-09-10"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ADYEN",
+   "valeur": 933.2999877929688,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -1.9230756896248056,
+   "ref": "2026-09-10",
+   "ticker": "ADYEN.AS",
+   "nom": "ADYEN"
+  }
+ },
+ "marches_texte": "Le CAC 40 finit presque à l'équilibre à 8 165 points (+0,11 %), tandis que l'Euro Stoxx 50 cède légèrement à 6 300 points (-0,18 %). L'or progresse encore à 4 437 $ (+0,48 %) et le Brent reste ferme au-dessus de 102 $ (+1,11 %). Côté valeurs, Adyen signe le plus fort recul de notre tableau avec -1,92 %.",
+ "sections": [
+  {
+   "titre": "Le consommateur américain : costaud malgré la pompe",
+   "texte": "Brian Moynihan, directeur général de Bank of America, affirme que les données de la banque montrent que les dépenses de consommation et le crédit restent sains malgré la hausse des prix de l'essence. Un signal notable à l'heure où le Brent dépasse les 100 dollars depuis hier. La résilience du consommateur américain, mesurée au quotidien par les flux de la banque, est donc le fait saillant de cette matinée côté macro.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Trump, 5 000 dollars et la fin de la guerre : les annonces du jour",
+   "texte": "Donald Trump promet un versement de 5 000 dollars aux Américains si les républicains remportent les élections de mi-mandat, selon Reuters, alors que Mike Vance se tient prêt dans les coulisses. Par ailleurs, Trump déclare que la guerre contre l'Iran prendra fin après les élections de mi-mandat et menace d'attaquer Pickaxe Mountain, rapporte Reuters. Ces déclarations interviennent dans un contexte géopolitique toujours tendu dans la région.",
+   "sources": [
+    1,
+    2
+   ]
+  },
+  {
+   "titre": "VIX : les investisseurs se couvrent avant une période agitée",
+   "texte": "Les grands mouvements des rendements obligataires américains ces derniers mois ramènent l'attention sur le VIX, l'indice de volatilité du CBOE, et sur le Merrill Lynch Option Volatility Estimate. Selon CNBC, des couvertures commencent à se mettre en place à l'approche d'une partie du calendrier historiquement volatile. Le marché des options reflète une prudence croissante, sans que les indices actions n'en témoignent encore franchement.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Contournement de sanctions : un milliard de dollars de marchandises chinoises vers l'Iran",
+   "texte": "Une enquête exclusive de Reuters révèle comment un système de contournement des sanctions d'un milliard de dollars a permis à des marchandises chinoises de continuer à affluer vers l'Iran. L'ampleur du dispositif décrit illustre la complexité du respect des sanctions internationales dans un contexte de tensions géopolitiques persistantes.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "'Fear gauge' VIX is starting to attract hedges into historically volatile part of calendar",
+   "resume": "Big moves in Treasury yields over the past couple of months have led to a renewed focus on the CBOE Volatility Index and the Merrill Lynch Option Volatility Estimate.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/10/fear-gauge-vix-hedges-volatility-stocks.html",
+   "date": "2026-09-10 08:41"
+  },
+  {
+   "titre": "Trump touts $5,000 payout if Republicans win as Vance waits in wings - Reuters",
+   "resume": "Trump touts $5,000 payout if Republicans win as Vance waits in wings  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxObTBDWU8wZ01YSnowWGVWbUFZQ0ozZlZaSzRYWFhuaUdxajB6T05JS29iX180anZIUWdKUUE4SjZGdzN1cmc3Tmx2bjMtT0Z4TE55bGQ1NjYxUThlU21OTnZvbVJxeTNXVjZZcXJrdG1pQzRMTnVqeGUzcVY5aGluV1V0YTh0UlN1eVBScUZTajd4S0tCaFNEWGltbE9jRHk5eS1rTFVkRHg?oc=5",
+   "date": "2026-09-10 07:55"
+  },
+  {
+   "titre": "Trump says Iran war to end after US midterm elections, threatens to attack Pickaxe Mountain - Reuters",
+   "resume": "Trump says Iran war to end after US midterm elections, threatens to attack Pickaxe Mountain  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQX1VBYmFiQnhuQWRpWDFRNjQ3ZzBFUTEzUmxneFZQTmtfOHducTVIZlU3LXFwRjVSbS1EYTNjMVY1dGlzODdfblBPSzFqWm90bWhfeFBUVVlDdjN2YUFoS1VNekY4U1VHcW1WTXQzS1ZTYjI2YzZ1OFFaZzJMZm9DTEpWY25jMlJsOHNUYklSbkR3Z2pNc1ZUcUNhN3VnWHdIV2U5RklKVldodktsWE5rczRlMVFfZzJZV3VJSzlhdEpRV1VzLXc2Sw?oc=5",
+   "date": "2026-09-10 06:13"
+  },
+  {
+   "titre": "EXCLUSIVE: How a billion-dollar sanctions dodge kept Chinese goods flowing to Iran - Reuters",
+   "resume": "EXCLUSIVE: How a billion-dollar sanctions dodge kept Chinese goods flowing to Iran  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPQXdBWlltZS1pUU8wZnFqc21wUDExNGZub0prbEtxYTNwS2J3UU91eTQ4aXZTUGNwWjdGZGxVZUNiY2dHbXVNbl9tNE4zSlVqVDJaZFlmMkZ6Slo3RndJczlqMTlsYlVGOEEteGNreDFjR0JabWhJaTNCTHNtUUozWDFVSm56QldwaXFjbnBQZWlxdGtsVFdmcDFDTHNjMzBaN2NkNlNzUGV0MXhZR3hBdmFUMV9LLU9ZYWxBTW5n?oc=5",
+   "date": "2026-09-10 06:05"
+  },
+  {
+   "titre": "Bank of America CEO says the consumer remains resilient despite rising gas prices",
+   "resume": "Bank of America CEO Brian Moynihan said the bank’s data shows consumer spending and credit remain healthy despite rising gasoline prices.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/09/bank-of-america-ceo-consumer-resilient-despite-rising-gas.html",
+   "date": "2026-09-09 22:53"
+  }
+ ],
+ "genere_le": "2026-09-10 10:03 UTC"
+}
