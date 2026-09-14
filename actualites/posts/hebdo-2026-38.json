@@ -1,0 +1,67 @@
+{
+ "id": "hebdo-2026-38",
+ "type": "hebdo",
+ "date": "2026-09-14",
+ "titre": "L'analyse du portefeuille · Sem. 38 · 2026",
+ "chapeau": "Ce lundi 14 septembre s'ouvre sur deux signaux qui se télescopent : d'un côté les Treasurys américains qui se stabilisaient vendredi après des niveaux multi-annuels, les traders attendant les données CPI de la semaine ; de l'autre, un sell-off matinal sur les valeurs IA suite …",
+ "sujet": null,
+ "photo": null,
+ "conviction": "neutre",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Ce lundi 14 septembre s'ouvre sur deux signaux qui se télescopent : d'un côté les Treasurys américains qui se stabilisaient vendredi après des niveaux multi-annuels, les traders attendant les données CPI de la semaine ; de l'autre, un sell-off matinal sur les valeurs IA suite à des 'safety warnings' relayés par CNBC, ce qui se traduit par une pression immédiate sur les positions Tech du portefeuille.\n\nLe contexte géopolitique ajoute une couche de complexité : l'Iran s'apprête à dévoiler aux nations du Golfe un accord de Hormuz négocié avec Oman pour un couloir maritime alternatif, alors que les Houthis intensifient leur emprise sur la mer Rouge et que l'Arabie Saoudite a fermé un pipeline. Le pétrole est un risque de second ordre pour ce portefeuille (pas d'exposition directe), mais la prime de risque géopolitique reste une variable de contexte à surveiller, notamment pour BKNG (voyages) et les titres à beta élevé.\n\nSur le plan de la performance : le portefeuille affiche +33.12% net depuis le lancement, contre +12.69% pour le MSCI World, soit un écart de +20.54 points de pourcentage. Le capital actuel s'établit à 34 189€ pour 95€ de friction cumulée (frais et PFU). La semaine a été rouge : CAC40 à -2.6%, MSCI World à -1.0%. Le VIX à 17.62 reste en régime calme, ce qui confirme que la correction actuelle est une rotation de sentiment sur le secteur IA plutôt qu'une panique systémique.\n\nDeux ventes cette semaine, assumées et documentées. BKNG à -17.3% après 35 jours : l'entrée avait été faite sur un Golden Cross avec z=+0.9σ légèrement au-dessus de la régression, une alerte que j'aurais dû peser davantage à l'époque. AVGO voit apparaître un Death Cross Day-0 cette semaine avec une pente MM21 à -3.8%, signal baissier actif confirmé après 137 jours de détention. Les deux positions étaient en perte : pas de friction PFU, et les moins-values rejoignent les 1 075€ de pertes reportables (crédit d'impôt théorique en hausse). Sur les achats : renforcement ciblé sur ADBE (score 85, z=-2.0σ, val=4/5, mean-reversion Setup B activé malgré la dynamique cross en transition) et mini-renforcement sur NVDA sous le plafond des 20% du capital.\n\nPour la semaine à venir, trois points de surveillance : (1) la décision de la Fed mercredi et les suivantes en UK et Japon (Bloomberg signale une 'rate-hike fever' qui pourrait recastér le paysage monétaire du second semestre 2026) ; (2) l'évolution du Death Cross AVGO et la pente MM21 d'ADBE (si elle reste négative 2 semaines de plus, le signal de transition devient un signal de sortie) ; (3) la ligne BX détenue depuis 28 jours à -10.6% : pas encore au seuil de stop-loss mais à surveiller, le Golden Cross initial est en train d'être testé.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Semaine chargée sur le front macro et chargée en décisions. Deux stops cette semaine : BKNG à -17.3% après 35 jours (l'entrée sur un z=+0.9σ était une erreur de process que j'assume, la dynamique ne s'est jamais retournée) et AVGO avec un Death Cross Day-0 apparu cette semaine après 137 jours de détention. Les deux pertes alimentent notre stock de moins-values reportables fiscalement (credit d'impôt utilisable 10 ans). En contrepartie, renforcement d'ADBE (score 85, décote de 52% sur sa tendance longue, zone Fibo propre) et mini-renforcement de NVDA sous le plafond des 20% du capital. Le portefeuille reste à +33.12% net contre +12.69% pour le MSCI World depuis le lancement. La semaine à venir sera dominée par trois décisions de banques centrales (Fed mercredi, BoE jeudi, BoJ vendredi), dans un contexte où Bloomberg parle de 'rate-hike fever' dans le G7 : c'est le vrai catalyseur à surveiller pour nos positions Tech et Finance.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Treasury yields steady as traders await consumer inflation data amid oil price pressure",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/11/us-treasurys-bonds-yields.html",
+   "date": "2026-09-11",
+   "resume": "Les rendements des Treasurys américains se stabilisent vendredi avant les données CPI très attendues, après une hausse marquée vers des niveaux multi-annuels."
+  },
+  {
+   "titre": "AI stocks tumble on safety warnings. How to proceed — including 2 names on our shopping list",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/09/14/ai-stocks-tumble-on-safety-warnings-how-to-proceed-including-2-names-on-our-shopping-list.html",
+   "date": "2026-09-14",
+   "resume": "Les valeurs IA chutent ce lundi suite à des avertissements de sécurité, CNBC propose une feuille de route dont deux titres en opportunité."
+  },
+  {
+   "titre": "Morning Bid: Shipping oil gets ever harder, costlier - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOYmJCUUMxaW05Wm0yazVud3pVRFlHLTJKai13QUcxaUhtX2dlTEJPcV9XOWZGSnRzdFRXejctZE1sUGZrcEd3Sy1JOUZxVktnQW9hVl9vbTVSdEhldXBEaUxQTlJRanQyWDFpQXNaTlE1UWUwaVgzMU8yTmF2dzFGYUNuUQ?oc=5",
+   "date": "2026-09-14",
+   "resume": "Les coûts et la complexité du transport maritime pétrolier augmentent sensiblement dans le contexte géopolitique actuel."
+  },
+  {
+   "titre": "Iran is set to unveil Hormuz Agreement to Gulf Nations on Monday",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-09-13/uae-iran-leaders-meet-as-push-to-resolve-hormuz-standoff-grows",
+   "date": "2026-09-13",
+   "resume": "L'Iran s'apprête à révéler aux pays du Golfe un accord avec Oman pour un nouveau couloir maritime temporaire via le détroit d'Hormuz."
+  },
+  {
+   "titre": "All eyes on Warsh as rate-hike fever spreads across G7 central banks",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-09-12/all-eyes-on-warsh-as-rate-hike-fever-spreads-across-g7-central-banks",
+   "date": "2026-09-13",
+   "resume": "Trois grandes banques centrales (Fed, BoE, BoJ) décident cette semaine dans un contexte de contagion hawkish au sein du G7."
+  },
+  {
+   "titre": "Saudis shut down oil pipeline as Houthis tighten grip on Red Sea shipping - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQczRVMDVmcFFkMWs3TDRSemk1SnA1SW1NSTRmaGU3VXRmbDlvUnlGTll6VHRRYWxjOTl1N3QzcFhIYWs5RjJaRGRmclRQYmpLdW8tNHNXWExZTnpmSklXaFU4YWJvOC1EcEpvcDdQVnpfWnBYT3l6X1pCRW9Bc19YQzNmYnFrbHBNQXd4aE1nVkpKWktoTjFoM2dSa1BGMnlSb3dVMnJhOFVTRHRrXzlHSFVXTDFvZVNzQ19r?oc=5",
+   "date": "2026-09-12",
+   "resume": "L'Arabie Saoudite ferme un oléoduc alors que les Houthis renforcent leur contrôle sur les routes maritimes en mer Rouge."
+  }
+ ],
+ "genere_le": "2026-09-14"
+}
