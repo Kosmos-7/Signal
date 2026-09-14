@@ -1,0 +1,170 @@
+{
+ "id": "2026-09-14",
+ "type": "quotidien",
+ "date": "2026-09-14",
+ "titre": "Fed, Bank of England, Japon : trois banques centrales, une semaine pour tout changer",
+ "chapeau": "Trois décisions de taux en trois jours dès mercredi. Le G7 monétaire entre en scène pendant qu'AirBaltic dépose le bilan.",
+ "sujet": "banques-centrales",
+ "photo": {
+  "src": "actualites/photos/2026-09-14.jpg",
+  "v": "7f5649ab",
+  "legende": "The Bank of England on Threadneedle Street - geograph.org.uk - 3898553",
+  "credit": "Steve Daniels",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Bank_of_England_on_Threadneedle_Street_-_geograph.org.uk_-_3898553.jpg",
+  "fichier": "The Bank of England on Threadneedle Street - geograph.org.uk - 3898553.jpg",
+  "requete": "Bank of England Threadneedle Street"
+ },
+ "marches": {
+  "ref": "2026-09-14",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8128.56982421875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.6259368562960413,
+    "ref": "2026-09-14"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6270.22021484375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.8681192163019132,
+    "ref": "2026-09-14"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4332.2001953125,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.778709140192472,
+    "ref": "2026-09-14"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 107.30999755859375,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.5810122669811095,
+    "ref": "2026-09-14"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.154334545135498,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.5737060399826103,
+    "ref": "2026-09-14"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 77904.59375,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.387900949276096,
+    "ref": "2026-09-14"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ASM International N.V.",
+   "valeur": 751.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -9.539871240965573,
+   "ref": "2026-09-14",
+   "ticker": "ASM.AS",
+   "nom": "ASM International N.V."
+  }
+ },
+ "marches_texte": "Le CAC 40 cède 0,63 % à 8 128 points et l'Euro Stoxx 50 recule de 0,87 % : l'Europe termine dans le rouge, plombée notamment par ASM International qui décroche de 9,54 %, le plus fort mouvement de la séance. L'or lâche lui aussi du terrain (-0,78 % à 4 332 $) tandis que le Brent poursuit sa marche en avant, à 107,31 $ (+2,58 %). Seul le Bitcoin résiste, en hausse de 1,39 % à 77 905 $.",
+ "sections": [
+  {
+   "titre": "La semaine où les banques centrales du G7 jouent collectif",
+   "texte": "Mercredi, la Réserve fédérale américaine ouvre le bal ; la Banque d'Angleterre et la Banque du Japon lui emboîtent le pas les jours suivants. Selon Bloomberg, ces trois décisions pourraient « reconfigurer le paysage de la politique monétaire mondiale pour le reste de 2026 et au-delà ». Tous les regards convergent vers Kevin Warsh alors que ce que Bloomberg appelle la « fièvre de hausse des taux » se propage au sein du G7. Les marchés ont de quoi occuper leur week-end.",
+   "sources": [
+    7
+   ]
+  },
+  {
+   "titre": "AirBaltic à genoux : les coûts de guerre ont eu raison de la compagnie",
+   "texte": "La compagnie aérienne lettone AirBaltic a déposé une demande de protection au titre du Chapter 11 américain. Reuters impute directement cette faillite aux coûts liés au conflit avec l'Iran, qui ont rendu l'exploitation insoutenable. La compagnie rejoint ainsi la liste des victimes économiques collatérales d'un conflit qui pèse aussi sur les routes maritimes.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Acheminer du pétrole : de plus en plus compliqué, de plus en plus cher",
+   "texte": "Reuters souligne ce matin que le transport maritime de pétrole devient « toujours plus difficile et toujours plus coûteux ». Cette contrainte logistique s'ajoute à la pression déjà exercée sur les prix du brut, visible dans la clôture du Brent à 107,31 $. Les tensions autour des routes d'approvisionnement restent donc un facteur structurant du marché pétrolier.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Oracle taille encore dans ses effectifs : 2,8 milliards de dollars de coût total",
+   "texte": "Le « Plan de restructuration 2026 » d'Oracle s'alourdit : 700 millions de dollars supplémentaires viennent s'ajouter à la facture, portant l'estimation totale à 2,8 milliards de dollars, essentiellement en indemnités de licenciement. Bloomberg précise que ces coûts sont liés à de nouvelles suppressions de postes annoncées par le groupe.",
+   "sources": [
+    8
+   ]
+  },
+  {
+   "titre": "Anthropic tire la sonnette d'alarme, les chipmakers regardent ailleurs",
+   "texte": "L'avertissement lancé par Anthropic sur les risques liés à l'intelligence artificielle aurait pu secouer le secteur des semi-conducteurs. Mais selon Bloomberg, des investisseurs comme Gary Tan, gérant chez Allspring Global Investments à Singapour, doutent que ces développements aient « des effets durables sur l'industrie ». Les échanges commerciaux dans le secteur sont jugés intacts pour l'heure.",
+   "sources": [
+    6
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "AirBaltic files for Chapter 11 bankruptcy as Iran war costs bite - Reuters",
+   "resume": "AirBaltic files for Chapter 11 bankruptcy as Iran war costs bite  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOSTBsQlVVMThMRmZ6a3gxOE5lRG1fbENPRnEwUmlWN3pXNUdGT1ZhMDZOQnFMbGZWZUk5ZTQzYUd0VVByOXdZVy01ZE85UTJ2dVBIZW1EX0ZzZjVaRjRyc09PTkpGQlJQc0JGQmh3b1J0NkllWFItWHhaNTVIRUxrbEJVaWQyVkpfcm0zcks0X1ZZdw?oc=5",
+   "date": "2026-09-14 06:47"
+  },
+  {
+   "titre": "Morning Bid: Shipping oil gets ever harder, costlier - Reuters",
+   "resume": "Morning Bid: Shipping oil gets ever harder, costlier  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOYmJCUUMxaW05Wm0yazVud3pVRFlHLTJKai13QUcxaUhtX2dlTEJPcV9XOWZGSnRzdFRXejctZE1sUGZrcEd3Sy1JOUZxVktnQW9hVl9vbTVSdEhldXBEaUxQTlJRanQyWDFpQXNaTlE1UWUwaVgzMU8yTmF2dzFGYUNuUQ?oc=5",
+   "date": "2026-09-14 04:33"
+  },
+  {
+   "titre": "Anthropic’s AI warning may weigh on chips, but trade seen intact",
+   "resume": "Investors including Gary Tan, a portfolio manager at Allspring Global Investments in Singapore, are doubtful the latest developments will have long-lasting effects on the industry.",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-09-13/anthropic-s-ai-warning-may-weigh-on-chips-but-trade-seen-intact",
+   "date": "2026-09-13 08:37"
+  },
+  {
+   "titre": "All eyes on Warsh as rate-hike fever spreads across G7 central banks",
+   "resume": "Three decisions, starting with the US Federal Reserve on Wednesday and followed on successive days by peers in the UK and Japan, may recast the global monetary policy landscape for the rest of 2026 and beyond.",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-09-12/all-eyes-on-warsh-as-rate-hike-fever-spreads-across-g7-central-banks",
+   "date": "2026-09-13 08:25"
+  },
+  {
+   "titre": "Oracle to spend an additional $700 million on more job cuts",
+   "resume": "Oracle’s “2026 Restructuring Plan” job cuts are now estimated to cost about $2.8 billion, primarily in severance payments to laid-off employees",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-09-11/oracle-boosts-layoffs-plan-by-700-million",
+   "date": "2026-09-12 05:12"
+  }
+ ],
+ "genere_le": "2026-09-14 10:58 UTC"
+}
