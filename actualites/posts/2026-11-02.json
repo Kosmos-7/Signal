@@ -1,0 +1,172 @@
+{
+ "id": "2026-11-02",
+ "type": "quotidien",
+ "date": "2026-11-02",
+ "titre": "Midterms, humeur maussade et Brent en chute : le marché fait ses comptes",
+ "chapeau": "Les électeurs américains boudent l'économie avant les midterms, le Brent décroche de près de 10 %, et l'or tient le cap. Le menu du lundi matin.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-02.jpg",
+  "v": "df94e69c",
+  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo…",
+  "credit": "Kondo Atsushi",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
+  "fichier": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in March 2009.jpg",
+  "requete": "stock exchange display board"
+ },
+ "marches": {
+  "ref": "2026-11-02",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 7976.10986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.08394514872891813,
+    "ref": "2026-11-02"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6131.97998046875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.01092624363468662,
+    "ref": "2026-11-02"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.916999816894531,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.012000083923339844,
+    "ref": "2026-11-02"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3941.5,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.0926183980933124,
+    "ref": "2026-11-02"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 106.52999877929688,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -9.444067211827248,
+    "ref": "2026-11-02"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1223344802856445,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.3625163991579838,
+    "ref": "2026-11-02"
+   }
+  ],
+  "mouvement": {
+   "libelle": "TSMC",
+   "valeur": 2330.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -1.6877637130801686,
+   "ref": "2026-11-02",
+   "ticker": "2330.TW",
+   "nom": "TSMC"
+  }
+ },
+ "marches_texte": "Les indices européens ont terminé quasi à l'arrêt, le CAC 40 grappillant 0,08 % à 7 976 points et l'Euro Stoxx 50 s'offrant un symbolique +0,01 %. Le vrai mouvement du jour est ailleurs : le Brent a plongé de 9,44 % à 106,53 dollars, rappelant que les marchés de l'énergie peuvent aussi descendre vite. L'or, lui, progresse de 1,09 % à 3 941,50 dollars, et l'euro gagne du terrain face au dollar à 1,1223 $.",
+ "sections": [
+  {
+   "titre": "Le Brent dévisse de près de 10 % : les importations asiatiques en cause",
+   "texte": "La chute du Brent à 106,53 dollars constitue le signal le plus fort de la séance. Selon une analyse Reuters, les importations asiatiques de pétrole brut sont revenues à leurs niveaux d'avant-guerre, mais les importations de carburants raffinés restent à la traîne. Ce décalage entre brut et produits raffinés dessine une demande moins homogène qu'il n'y paraît en surface, ce qui pèse sur les prix.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Midterms : les Américains votent avec le moral dans les chaussettes",
+   "texte": "À la veille des élections de mi-mandat, les électeurs américains affichent un moral économique dégradé, selon Reuters. Cette humeur sombre pourrait peser sur le scrutin, dont les résultats sont attendus dans les prochains jours. En Michigan, la représentante démocrate Haley Stevens, qui avait perdu la primaire sénatoriale face à Abdul El-Sayed, a choisi d'apporter son soutien au républicain Rogers plutôt qu'à El-Sayed.",
+   "sources": [
+    0,
+    5
+   ]
+  },
+  {
+   "titre": "La Chine pousse au dialogue sur le Moyen-Orient",
+   "texte": "Le ministre des Affaires étrangères chinois a appelé au dialogue pour résoudre le conflit au Moyen-Orient, selon Reuters. Pékin réaffirme ainsi son positionnement diplomatique dans une région dont les tensions continuent d'influencer les marchés de l'énergie.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "La tech et l'IA en recul : TSMC signe le plus fort repli du jour",
+   "texte": "TSMC termine en tête des baisses avec -1,69 % à 2 330,00 dollars. Dans ce contexte, CNBC note que « la rotation est réelle » sur le segment de l'intelligence artificielle, avec un essoufflement du trade IA et un déplacement des flux au-delà des seuls titres liés aux centres de données. La semaine à venir sera chargée : résultats d'entreprises, élections et données sur l'emploi sont au programme.",
+   "sources": [
+    3,
+    4
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "US voters in a sour economic mood heading into midterm elections - Reuters",
+   "resume": "US voters in a sour economic mood heading into midterm elections  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNUGRVbTNjVkVkWHA5anlUV0l1YUhUUjM2Zy1DOGg0T2l2V0Zqajl2TzVpUW5Wc2s1ZkF6eTRNSmNNMWZCUEZqM0ZjUHNKQ0NkZkNGdlY3U2xHcWhBTUdzcXBnd2p2Z0VjUWFiQ3JRYkdvbTR2NUdnZUlnZHU4ZjY0OTIxa0NSbGhXWE1Yc1A5VmZHQVQ3aEJzcHhHNFVqVTNFa3RKazBydW9TbnBEUlo0aEM4THZmQQ?oc=5",
+   "date": "2026-11-02 11:40"
+  },
+  {
+   "titre": "China's foreign minister pushes for dialogue to resolve Middle East conflict - Reuters",
+   "resume": "China's foreign minister pushes for dialogue to resolve Middle East conflict  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNNVJGdUotaWhuOVFjZ2VTVHZ5bkxnbmVXd3BUS0JEenI2QkpMYXJSVUxpUGJrNHpaMkFtZ244cE93RWhCWExKTmJFdm5FbFZEck14aVdnaW0tdU5DdHY0UUk3TkpqbW5vb1RzMW85Z1VkZHFBSnlRMkRVUTlxRDgyR2Z1N3BBSkRsdzI2Mm9WQmxjaFpiOUpqR3k5WjRZUVVZaUtGWGVscXhlS01PZjBUTWRMNHpIU28?oc=5",
+   "date": "2026-11-02 11:25"
+  },
+  {
+   "titre": "COMMENTARY: Asia's crude oil imports back to pre-war levels but refined fuels lag - Reuters",
+   "resume": "COMMENTARY: Asia's crude oil imports back to pre-war levels but refined fuels lag  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNUjRWdTdnRzAwR2xkSU04ZHlmbHh0eXg5Wm8xS1k5Q2hLYWRWbWdOVzd4ckZHcjZkYktZVHEyV29yQ25XNE9Ga0Y3TG5Dc3Awd054Y2o3MU5rLTNZNmRRTkZXVjdyZWJNYnM4bVczRU1RRmlqOW5JOVZCVWpJSXFDazBHWm5hUXhGb2FGS2xUN3Q5cFFQelVqazAxYXNDamdDZ0pINE5mQUE3VGhFdDcxZkZ4cUdSOFVQTWRsdXl6LXdMTUpIWnFLQ0VB?oc=5",
+   "date": "2026-11-02 11:17"
+  },
+  {
+   "titre": "The AI trade has broken down. How we got here and what investors should expect next",
+   "resume": "The rotation is real, and so are the opportunities beyond data center stocks.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/01/cramer-the-ai-trade-has-broken-down-how-we-got-here-what-to-expect.html",
+   "date": "2026-11-01 22:25"
+  },
+  {
+   "titre": "Here are 3 big things we're watching in the stock market in the week ahead",
+   "resume": "The market could use a few victories in the days ahead, which will be filled with more earnings, an election, and jobs data.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/01/3-big-things-were-watching-in-the-stock-market-this-week.html",
+   "date": "2026-11-01 18:12"
+  },
+  {
+   "titre": "Democratic Rep. Stevens endorses Rogers over El-Sayed in Michigan Senate election",
+   "resume": "Haley Stevens had lost the Democratic nomination for Senate in Michigan to Abdul El-Sayed earlier this year.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/01/michigan-senate-stevens-rogers-endorsement-el-sayed.html",
+   "date": "2026-11-01 17:59"
+  }
+ ],
+ "genere_le": "2026-11-02 13:50 UTC"
+}
