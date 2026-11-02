@@ -1,0 +1,53 @@
+{
+ "id": "hebdo-2026-45",
+ "type": "hebdo",
+ "date": "2026-11-02",
+ "titre": "L'analyse du portefeuille · Sem. 45 · 2026",
+ "chapeau": "Cette semaine du 27 octobre au 2 novembre, les marchés ont navigué dans un calme de surface trompeur : le VIX à 19.49 est jugé 'non réactif' par les options traders selon CNBC, ce qui signifie soit que le marché a vraiment digéré les risques, soit que la complaisance s'install…",
+ "sujet": null,
+ "photo": null,
+ "conviction": "neutre",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Cette semaine du 27 octobre au 2 novembre, les marchés ont navigué dans un calme de surface trompeur : le VIX à 19.49 est jugé 'non réactif' par les options traders selon CNBC, ce qui signifie soit que le marché a vraiment digéré les risques, soit que la complaisance s'installe. Les nouvelles macro sont dominées par l'énergie : les Émirats arabes unis annoncent une hausse de leurs exportations pétrolières après s'être libérés des quotas OPEP, et les importations asiatiques de brut reviennent aux niveaux d'avant-guerre, même si les carburants raffinés restent à la traîne. Rien qui bouleverse directement la thèse tech.\n\nLe portefeuille affiche +35.48% net depuis la création, avec un écart au benchmark MSCI World de +17.76 points de pourcentage. Le MSCI World a perdu -0.4% sur la semaine, ce qui est cohérent avec un environnement où les flux défensifs (énergie, matières premières) reprennent de la voix. La semaine a été calme pour Signal : une seule décision d'achat, un renforcement mesuré de NVDA.\n\nMéthodologiquement, deux signaux ont guidé la semaine. Sur NVDA, le val=3/5 avec drawdown de -13.6% en zone Fibo 38.2% est précisément le type de setup d'entrée propre que la méthodologie identifie : ni en chute libre, ni collé au top 52w. Sur ADBE, R7 est pleinement active : le Death Cross de 27 jours est en résorption (pente MM21 positive, spread tendu) mais pas encore résorbé. Je ne vends pas sur un signal ambigu, et je ne renforce pas sans confirmation. La patience est une position.\n\nLe point de surveillance de la semaine est BX : détenu depuis 77 jours à -13.1%, le titre approche mécaniquement du seuil de stop-loss R06 (-15% après 90 jours). Dans 13 jours, si la performance ne se redresse pas, la vente sera déclenchée. Ce n'est pas une décision émotionnelle, c'est la règle qui parle.\n\nPour la semaine prochaine, je garde un oeil sur la résorption du Death Cross ADBE, sur le comportement de BX, et sur tout signal macro lié aux taux (aucune réunion Fed dans l'immédiat, mais les données emploi US de vendredi 7 novembre seront cruciales pour le sentiment). Les liquidités résiduelles après ce run restent autour de 3 500€, préservant l'optionalité pour une opportunité de qualité.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Semaine calme sur Signal : une décision d'achat, deux positions sous surveillance. J'ai renforcé NVDA sur un setup d'entrée propre (drawdown -13.6% en zone Fibo 38.2%, Golden Cross actif depuis 136 jours, z=-0.3σ), en engageant environ 1 200€ soit 3.4% du capital. Le montant est délibérément mesuré pour ne pas épuiser les liquidités alors que la concentration thématique Infrastructure IA est déjà à 40% du capital : je l'assume, mais avec discipline. Sur ADBE, la règle R7 s'applique : le Death Cross de 27 jours est en résorption mais pas encore résolu, donc ni vente ni renforcement. La position (-5.3% après 63 jours) reste loin des seuils de stop-loss. BX est le dossier à surveiller : -13.1% après 77 jours, et dans 13 jours la règle de stop-loss automatique à -15% après 90 jours entre en jeu. Les règles sont là pour que ces décisions soient prises à froid, pas dans l'urgence. Le portefeuille termine la semaine à 34 793€ nets, avec un écart au benchmark de +17.76 points de pourcentage.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Freed from OPEC quotas, UAE says oil exports have risen as it hosts industry event - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcnd0cjROV01YdUV5VG9tVnV6NVpybjJpa1E1TnFOV3g2V2xhMmpmcGJQdXctakdyMVVmZk9hbTZvYnZ6aDJ2RDhoSU12Z2NoYlBRekRWNmlrSWdlblpJa0tKelN5VjFVVUhDWV85enFsam91QXFRWVdUUzNEYmZSTDhaWVBRUFE2MTBVRFY5XzhvR2NDZXVXeXZROVoxdkJQcm91cnZqQUJEWmJLNkJ6R0UwLWJvYU5MQ21sNXZpeEN3S3c?oc=5",
+   "date": "2026-11-02",
+   "resume": "Les Emirats arabes unis annoncent une hausse de leurs exportations pétrolières depuis leur sortie des quotas OPEP, en marge d'un événement sectoriel."
+  },
+  {
+   "titre": "Wall Street's Fear Index is doing something strange. Here's what it means for stocks",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/02/wall-streets-fear-index-is-doing-something-strange-heres-what-it-means-for-stocks.html",
+   "date": "2026-11-02",
+   "resume": "Le VIX est jugé 'non réactif' par les traders d'options, suscitant des interrogations sur ce que ce calme inhabituel signale pour les actions."
+  },
+  {
+   "titre": "COMMENTARY: Asia's crude oil imports back to pre-war levels but refined fuels lag - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNUjRWdTdnRzAwR2xkSU04ZHlmbHh0eXg5Wm8xS1k5Q2hLYWRWbWdOVzd4ckZHcjZkYktZVHEyV29yQ25XNE9Ga0Y3TG5Dc3Awd054Y2o3MU5rLTNZNmRRTkZXVjdyZWJNYnM4bVczRU1RRmlqOW5JOVZCVWpJSXFDazBHWm5hUXhGb2FGS2xUN3Q5cFFQelVqazAxYXNDamdDZ0pINE5mQUE3VGhFdDcxZkZ4cUdSOFVQTWRsdXl6LXdMTUpIWnFLQ0VB?oc=5",
+   "date": "2026-11-02",
+   "resume": "Les importations asiatiques de brut sont revenues aux niveaux d'avant-guerre, mais les importations de carburants raffinés restent en retard, selon Reuters."
+  },
+  {
+   "titre": "SpaceX loses bid to toss NAACP lawsuit over Memphis data center air pollution",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/10/31/xai-naacp-clean-air-act-lawsuit-dismissal.html",
+   "date": "2026-10-31",
+   "resume": "SpaceX perd une procédure judiciaire pour faire rejeter une plainte de la NAACP concernant la pollution atmosphérique de ses centres de données à Memphis."
+  }
+ ],
+ "genere_le": "2026-11-02"
+}
