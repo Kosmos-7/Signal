@@ -1,0 +1,164 @@
+{
+ "id": "2026-11-03",
+ "type": "quotidien",
+ "date": "2026-11-03",
+ "titre": "Des frigos piratés, un rachat bouclé et le dollar qui attend",
+ "chapeau": "Cyberattaque sur les supermarchés européens, Kimberly-Clark avale Kenvue, et le dollar hésite entre Moyen-Orient et midterms.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-03.jpg",
+  "v": "8fdc7a18",
+  "legende": "Big Board of Trade",
+  "credit": "Amaury Laporte",
+  "licence": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Big_Board_of_Trade_(16914319605).jpg",
+  "fichier": "Big Board of Trade (16914319605).jpg",
+  "requete": "stock exchange display board"
+ },
+ "marches": {
+  "ref": "2026-11-03",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8038.759765625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.1109657037767231,
+    "ref": "2026-11-03"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6154.33984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.35168399655581645,
+    "ref": "2026-11-03"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3932.39990234375,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.9371270253258991,
+    "ref": "2026-11-03"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 105.0,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.21953170211236728,
+    "ref": "2026-11-03"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1184431314468384,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.24717257567222647,
+    "ref": "2026-11-03"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 77259.5625,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.759371611585649,
+    "ref": "2026-11-03"
+   }
+  ],
+  "mouvement": {
+   "libelle": "TSMC",
+   "valeur": 2295.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -1.502145922746781,
+   "ref": "2026-11-03",
+   "ticker": "2330.TW",
+   "nom": "TSMC"
+  }
+ },
+ "marches_texte": "Les indices européens terminent quasi à l'équilibre : le CAC 40 cède 0,11 % à 8 038,76 points, l'Euro Stoxx 50 recule un peu plus à -0,35 %. L'or souffle après sa course, en repli de 0,94 % à 3 932,40 dollars, tandis que le Brent grappille 0,22 % à 105,00 dollars dans un contexte de tensions géopolitiques. Le bitcoin progresse discrètement à 77 260 dollars (+0,76 %), et TSMC signe le plus fort mouvement de la liste avec -1,50 %.",
+ "sections": [
+  {
+   "titre": "Frappe américaine sur l'île de Qeshm : le brut réagit",
+   "texte": "Selon Reuters, le pétrole a progressé après des informations faisant état d'une frappe américaine sur l'île iranienne de Qeshm. Le Brent clôture à 105,00 dollars, en légère hausse. Le dollar, lui, reste hésitant, pris entre les risques liés au Moyen-Orient et l'incertitude des midterms américains, selon la même source.",
+   "sources": [
+    2,
+    3
+   ]
+  },
+  {
+   "titre": "Des hackers mettent les frigos en chauffe dans les supermarchés européens",
+   "texte": "Des cybercriminels ont pris le contrôle à distance de réfrigérateurs dans des supermarchés européens, en élevant leur température pour provoquer la détérioration des aliments, rapporte CNBC. Les grandes surfaces du continent se retrouvent ainsi au cœur d'une nouvelle vague de cyberattaques ciblant des infrastructures du quotidien. Une opération dont les conséquences sont bien concrètes : de la nourriture gâchée, des rayons à vider en urgence.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Kimberly-Clark boucle le rachat de Kenvue",
+   "texte": "Kimberly-Clark a finalisé l'acquisition de Kenvue, le fabricant du Tylenol, selon CNBC. Le groupe a présenté un plan destiné à améliorer sa croissance et ses résultats à la suite de cette opération. Le détail de la stratégie post-acquisition reste à préciser dans les prochaines communications.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Inde : la Bourse profite d'un pétrole moins cher et de bons résultats",
+   "texte": "Les marchés actions indiens ont prolongé leurs gains, portés par le recul des prix du pétrole et des publications de résultats solides, selon Reuters. Un double soutien qui tranche avec l'hésitation observée sur les places européennes ce jour.",
+   "sources": [
+    1
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Supermarket fridges are under attack in Europe — here's what's happening",
+   "resume": "European supermarkets have become the center of another cyberattack, with hackers remotely heating fridges and spoiling food.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/03/supermarket-fridges-hack-cyberattack-europe.html",
+   "date": "2026-11-03 12:11"
+  },
+  {
+   "titre": "Indian shares extend gains on softer oil, strong earnings - Reuters",
+   "resume": "Indian shares extend gains on softer oil, strong earnings  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPcVNvY0lPbFp1SlNTR1BlbUstUy1iMUtZcGJzSTBxLXVBdEpWajhoT0RuWklLUkxfM1dFd1pWLVJxMnlaQzFnQzVyMUJEVC1sbVJGbmJTd2p5RGhNaldxbkNicjBvNWJ4dXoxS3RobzN6NTRzeDM5TV9fME1FTTJWM1JaNVNvM0JsSGRXTWQ1TG03MmlGZU43TVJyS1NHT0xGRWRpXy1ETkx1Q1E?oc=5",
+   "date": "2026-11-03 02:38"
+  },
+  {
+   "titre": "Oil edges up after report of US strike on Iran's Qeshm Island - Reuters",
+   "resume": "Oil edges up after report of US strike on Iran's Qeshm Island  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQTFpzbEJURFlBbkE1RzNfclduVWpDY29HaWY3dnZJNUFuTHFsckZXSU5iTGJHdUFzQkVmeVhvdk9IME9Hdkxwc0NQZzg4dFFzckltYVlzcGdWY2xhYmJWMWlMVmFyNml3YmFoSDBZMGdPZWlpU25IM3UtMW5iR3d1dGZrMGF4SzQ2MklEeG5lWU1iRUZjVDd5Nnhjc0dQamdDdEtUc3NMcFZDMTQ?oc=5",
+   "date": "2026-11-03 01:27"
+  },
+  {
+   "titre": "Dollar drifts on Mideast, midterm risks; Aussie dips after expected RBA hike - Reuters",
+   "resume": "Dollar drifts on Mideast, midterm risks; Aussie dips after expected RBA hike  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNE1RdnJYYmVzdzBUWE9zZW5SdkhKVG0wVFlSTmFzUkpOanNhVWc0Nk5DZzJNaUN4azRHUVFnVTFWSEJpT1ByOUJ6Ny1zdlVqanJ5SUpHY1dMWDJ3M0pLWk1ZcUN0MmlLMUlGT01xSkN5VHZzc1NMUVZvaG42Rm9wTV9zejhTeUktb2d0dWpDb1B3dW5oNHJKaHVtLVAzem9qOUFCM05jT2lzQ0ZJSDl5QXVQQnZfT3JwblRZZWpfWnhmRlE?oc=5",
+   "date": "2026-11-03 01:10"
+  },
+  {
+   "titre": "Kimberly-Clark closes its acquisition of Tylenol maker Kenvue. What to expect next",
+   "resume": "Kimberly-Clark has a plan improve growth and earnings following its acquisition of Kenvue",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/02/kimberly-clark-closes-its-acquisition-of-tylenol-maker-kenvue-what-to-expect-next.html",
+   "date": "2026-11-02 21:35"
+  }
+ ],
+ "genere_le": "2026-11-03 13:00 UTC"
+}
