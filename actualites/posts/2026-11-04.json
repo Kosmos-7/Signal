@@ -1,0 +1,126 @@
+{
+ "id": "2026-11-04",
+ "type": "quotidien",
+ "date": "2026-11-04",
+ "titre": "Midterms : victoire démocrate, marchés en ordre dispersé",
+ "chapeau": "Le Congrès américain bascule côté démocrate. L'or s'envole, le Brent recule, l'Europe fait le dos rond dans le vert.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-11-04.jpg",
+  "v": "3ff289ce",
+  "legende": "Port bow view of the Russian merchant container ship CHITA underway.…",
+  "credit": "Department of Defense. American Forces Information Service. Defense Visual Infor",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Port_bow_view_of_the_Russian_merchant_container_ship_CHITA_underway._The_ship_has_numerous_commercial_vehicles_as_deck_cargo_-_DPLA_-_e120d3e0e4cf053032385cc8b2eca1fe.jpeg",
+  "fichier": "Port bow view of the Russian merchant container ship CHITA underway. The ship has numerous commercial vehicles as deck cargo - DPLA - e120d3e0e4cf053032385cc8b2eca1fe.jpeg",
+  "requete": "cargo ship containers sea"
+ },
+ "marches": {
+  "ref": "2026-11-04",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8153.169921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.6565427310243557,
+    "ref": "2026-11-04"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6243.919921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.6170378730741806,
+    "ref": "2026-11-04"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4052.5,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.844891392611518,
+    "ref": "2026-11-04"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 101.29000091552734,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -2.229727406000666,
+    "ref": "2026-11-04"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 78240.6171875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.1578896757892747,
+    "ref": "2026-11-04"
+   }
+  ],
+  "mouvement": {
+   "libelle": "HSBC HOLDINGS PLC ORD ",
+   "valeur": 1316.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 4.610492845786964,
+   "ref": "2026-11-04",
+   "ticker": "HSBA.L",
+   "nom": "HSBC HOLDINGS PLC ORD "
+  }
+ },
+ "marches_texte": "Le CAC 40 a terminé en hausse de 1,66 % à 8 153 points, l'Euro Stoxx 50 dans son sillage à +1,62 %. L'or a nettement progressé à 4 052,50 dollars (+2,84 %), tandis que le Brent a cédé 2,23 % à 101,29 dollars. HSBC Holdings signe le plus fort mouvement du jour avec un gain de 4,61 %.",
+ "sections": [
+  {
+   "titre": "Le Congrès bascule : ce que disent les marchés",
+   "texte": "Selon Reuters, les démocrates ont remporté une majorité au Congrès américain. Ce résultat vient s'ajouter aux inquiétudes déjà présentes sur les marchés concernant l'Iran, l'intelligence artificielle et la dette, toujours selon la même dépêche. La réaction des marchés actions européens reste pour l'heure positive, sans que les dépêches disponibles n'en expliquent précisément la mécanique.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Téhéran, Jérusalem : les répercussions géopolitiques s'enchaînent",
+   "texte": "Des responsables iraniens ont exprimé leur satisfaction à la suite du résultat électoral américain, selon Reuters. En Israël, des rivaux du Premier ministre Netanyahu ont saisi l'occasion du basculement du Congrès pour réclamer son départ, rapporte également Reuters. Ces développements s'inscrivent dans un contexte géopolitique tendu qui mérite d'être suivi avec attention.",
+   "sources": [
+    1,
+    2
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Democratic sweep adds new twist to markets' Iran, AI, and debt worries - Reuters",
+   "resume": "Democratic sweep adds new twist to markets' Iran, AI, and debt worries  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQa19fZ0FrSFljZ2xPQlpBRmJ4NUFwcGZfME5lOGRNYnVKb2dtdldILTNDRHBwM3c1YzRiWVpXVUY1c3NzWVlINHAweEFjTUNaeTZwNjc3Q2swM2U4ZEk3SWJvdHJkVEQ4dUU4WEFnaEhoMDFONGhSd1I3TkthSkRmbWtQUzRBRjRuNGprcEEweUJTb3RXRktwaHZKMVlEM1RyaGZTVUluX3o5dXRlcElQVS1XVVVuTlE2?oc=5",
+   "date": "2026-11-04 12:07"
+  },
+  {
+   "titre": "Iranian officials gloat as US voters deal blow to Trump - Reuters",
+   "resume": "Iranian officials gloat as US voters deal blow to Trump  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQaERuaWNXaEtzV2Vjb0RCZUZiWkx1VE52SGpCLTBjaFI4THBXUUJGWTF0Y2kzMHZvY3FrTVlKRmJaRkFYSmgyb21EczFNeUxuQ1dPT2JpRXRGN3JaRmtIeW90Y0xRam5BdUdlVkswTHFqa2NjR3lxVHRHWWlzdUNtVTNDbTh1bW5uR0lRR0MteWFNTU9Jd010NHNGaTRweGlOdS1MZGlB?oc=5",
+   "date": "2026-11-04 11:51"
+  },
+  {
+   "titre": "Netanyahu rivals seize on Democrats' sweep of US Congress, seeking his ouster - Reuters",
+   "resume": "Netanyahu rivals seize on Democrats' sweep of US Congress, seeking his ouster  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPMXFMUXhNOFRueTBpaDBRdk9WX0pJUW5DT21NakZ4WHlIZERjUWpfZHdjUkZ5OTRlSml1WnFNOGIxUEpBakFJbG90ZnFZMFh0Y2VwMGJ0VWJXVWZyMnBMWk5pMGpEa2NyQUN1dExweU1wYVhIdUtFUVBWcEViMlFTS2VBZDNaQmRsU0dfQ09Gd1FKOE9WN2ZDeFlTYjdlQ2k0QnJXeUpUeWgzWENBTkoyTmlwa2lvRkRuRURnZUFsdkw?oc=5",
+   "date": "2026-11-04 11:44"
+  }
+ ],
+ "genere_le": "2026-11-04 13:16 UTC"
+}
