@@ -1,0 +1,150 @@
+{
+ "id": "2026-11-05",
+ "type": "quotidien",
+ "date": "2026-11-05",
+ "titre": "Le pétrole plonge vers des niveaux post-pandémie, l'or résiste",
+ "chapeau": "Le brut repart à la baisse sur fond de détente géopolitique autour de l'Iran. L'or tient, le Bitcoin recule légèrement.",
+ "sujet": "energie",
+ "photo": {
+  "src": "actualites/photos/2026-11-05.jpg",
+  "v": "097bbcd4",
+  "legende": "High-voltage power line",
+  "credit": "Tiraspolsky",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:High-voltage_power_line.jpg",
+  "fichier": "High-voltage power line.jpg",
+  "requete": "high voltage transmission lines"
+ },
+ "marches": {
+  "ref": "2026-11-05",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8259.8603515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.0023393989569938,
+    "ref": "2026-11-05"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6302.330078125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.584452798099527,
+    "ref": "2026-11-05"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4126.10009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.3037097386754235,
+    "ref": "2026-11-05"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 97.41999816894531,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.959200318205894,
+    "ref": "2026-11-05"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1222084760665894,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.13241760357430735,
+    "ref": "2026-11-05"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 79616.6875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.980783194358036,
+    "ref": "2026-11-05"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ASML HOLDING",
+   "valeur": 1299.800048828125,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -2.825951513736698,
+   "ref": "2026-11-05",
+   "ticker": "ASML.AS",
+   "nom": "ASML HOLDING"
+  }
+ },
+ "marches_texte": "Le CAC 40 termine en hausse à 8 259,86 points (+1,00 %), entraînant dans son sillage un Euro Stoxx 50 plus mesuré à +0,58 %. L'or progresse à 4 126,10 $ (+1,30 %), tandis que le Brent affiche paradoxalement +2,96 % à 97,42 $ sur la séance, même si les analystes signalent une trajectoire baissière de fond vers des niveaux vus lors de la pandémie. ASML Holding est la plus forte variation négative de notre liste, à -2,83 %.",
+ "sections": [
+  {
+   "titre": "Le brut sur une pente glissante",
+   "texte": "Selon Reuters, le pétrole se dirige vers une chute comparable à celle de l'ère pandémique. En Asie, les indices de référence du fioul lourd ont reculé nettement, les marchés intégrant une possible désescalade autour de l'Iran. C'est ce que Reuters décrit comme une décote liée à un « potentiel apaisement du conflit iranien ». Le mouvement illustre à quel point les anticipations géopolitiques peuvent peser sur les cours, même en l'absence de faits confirmés.",
+   "sources": [
+    2,
+    3
+   ]
+  },
+  {
+   "titre": "Les marchés de prédiction, grands gagnants de la nuit électorale",
+   "texte": "Selon CNBC, les marchés de prédiction ont projeté les résultats des midterms bien avant les grands médias, s'imposant comme des sources rapides et fiables. La vague démocrate qu'ils annonçaient s'est confirmée. Ces plateformes cherchent ainsi à consolider leur crédibilité comme outils d'information en temps réel.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Victoire démocrate : l'économie, elle, ne change pas de cap",
+   "texte": "CNBC le formule sans détour : « les grandes forces qui façonnent l'économie ne vont pas changer simplement parce que le parti au pouvoir a changé. » L'analyse souligne que le résultat des midterms, aussi net soit-il, ne modifie pas les fondamentaux économiques sous-jacents. Un rappel sobre après une nuit agitée.",
+   "sources": [
+    0
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Here's what the Democratic election rout could mean for the U.S. economy",
+   "resume": "The biggest forces shaping the economy aren't going to change just because the party in power did.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/05/emocratic-midterm-economy.html",
+   "date": "2026-11-05 12:11"
+  },
+  {
+   "titre": "PODCAST: Oil heads for pandemic-era fall - Reuters",
+   "resume": "PODCAST: Oil heads for pandemic-era fall  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPTUN4a1BScS1wZnluYTlzUWEwR0EtSUhnWU9VMGtEMkc3Y21FenVPbDU3X0dkak83aDh3VmFYdzltcVVuN3F3ZFJrLWwxeWxmZDZ1ZlNNeG9uY1FfQXdoc0xMYUh1T3hHeV9Ib3BtNGpRLXBPQVYxd3h1aEoxVklTVjlsOW01bXdTX3JJUzJrbGxwdzRKckk0?oc=5",
+   "date": "2026-11-05 10:47"
+  },
+  {
+   "titre": "Asia fuel oil benchmarks slump as market prices in potential Iran war de-escalation - Reuters",
+   "resume": "Asia fuel oil benchmarks slump as market prices in potential Iran war de-escalation  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQOURmMHZvcURoTHdPckpVdEYtMVA3WTktOGNLOGpHeTRZcGZ4OWZjQ2tHQTlTYy15N05pZ0VPemlkZEozUGdHTU9ieDdvZlEyU2dBbzZtbzVPNDVaaGVGNktHTGg0Nk5GbU9kYnVTN291Zkp4NV9Idk05OTNKR1FFckUtVnFfX25tWkRYd1A3VEdrME1YQjFzVzF2VDk1T1Fnc2RRdEZMZzZPNWN1YVVtX2MyTzV0SlA4eWMzOFVlQ0NBY3p2VXpsZQ?oc=5",
+   "date": "2026-11-05 10:13"
+  },
+  {
+   "titre": "Prediction markets cement their status after forecasting Democratic sweep of Congress",
+   "resume": "Prediction markets projected election results well before media outlets in an effort to position themselves as fast, reliable news sources.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/04/prediction-markets-2026-midterms-election-results.html",
+   "date": "2026-11-04 21:57"
+  }
+ ],
+ "genere_le": "2026-11-05 13:29 UTC"
+}
