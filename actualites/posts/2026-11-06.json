@@ -1,0 +1,143 @@
+{
+ "id": "2026-11-06",
+ "type": "quotidien",
+ "date": "2026-11-06",
+ "titre": "Tech en déroute, frais de port en hausse : un vendredi sous pression",
+ "chapeau": "La tech chute, les petits retailers souffrent de la flambée des coûts de transport, et les marchés s'inquiètent de la croissance. Le tout avec un café, si possible.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-06.jpg",
+  "v": "7d105746",
+  "legende": "The Tokyo Stock Exchange - main room 4",
+  "credit": "Kakidai",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Tokyo_Stock_Exchange_-_main_room_4.jpg",
+  "fichier": "The Tokyo Stock Exchange - main room 4.jpg",
+  "requete": "Tokyo Stock Exchange Arrows"
+ },
+ "marches": {
+  "ref": "2026-11-06",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8061.9501953125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.7478787650856036,
+    "ref": "2026-11-06"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6135.490234375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.5413493949394594,
+    "ref": "2026-11-06"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4070.60009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -1.0429051256533366,
+    "ref": "2026-11-06"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 98.06999969482422,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.22382868923991467,
+    "ref": "2026-11-06"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1166945695877075,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.6052487358819594,
+    "ref": "2026-11-06"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 75729.359375,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.2801681214477472,
+    "ref": "2026-11-06"
+   }
+  ],
+  "mouvement": {
+   "libelle": "TSMC",
+   "valeur": 2135.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -4.6875,
+   "ref": "2026-11-06",
+   "ticker": "2330.TW",
+   "nom": "TSMC"
+  }
+ },
+ "marches_texte": "Le CAC 40 a cédé 1,75 % à 8 061,95 points et l'Euro Stoxx 50 a reculé de 1,54 % à 6 135,49 points : la séance a été difficile des deux côtés du Rhin. L'or lui-même n'a pas joué son rôle de valeur refuge habituel, en repli de 1,04 % à 4 070,60 $. Le mouvement le plus marqué de notre liste revient à TSMC, qui a décroché de 4,69 % à 2 135,00, illustrant à lui seul la déprime du secteur technologique décrite par les dépêches du jour.",
+ "sections": [
+  {
+   "titre": "La tech perd de l'altitude, et ce n'est pas une turbulence passagère",
+   "texte": "Les marchés s'inquiètent simultanément des perspectives de croissance et de l'inflation, tandis que la correction du secteur technologique s'accélère. Reuters décrit un mouvement de double peine : les opérateurs n'arrivent pas à trancher entre le scénario « croissance molle » et le scénario « inflation tenace », ce qui les rend nerveux sur les deux fronts à la fois. TSMC cristallise cette anxiété avec une chute de 4,69 % en séance. Le tableau des clôtures confirme que la contagion a touché l'ensemble des places européennes.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Noël approche, les frais de port aussi",
+   "texte": "La hausse des coûts de carburant fait bondir les tarifs d'expédition, et ce sont les petits et moyens détaillants qui en paient le prix le plus fort. Selon CNBC, ils abordent la saison des fêtes dans un état de fragilité inhabituel, coincés entre des marges déjà minces et des frais logistiques en forte progression. Les grandes enseignes, elles, disposent de volumes suffisants pour négocier ou absorber le choc. Le Brent clôture à 98,07 $, en léger repli de 0,22 % sur la journée, mais la pression sur les coûts de transport reste bien présente.",
+   "sources": [
+    0,
+    5
+   ]
+  },
+  {
+   "titre": "Le pétrole tient, le Moyen-Orient veille",
+   "texte": "Le baril de Brent termine la semaine en baisse, mais les craintes d'une perturbation des approvisionnements liée aux tensions au Moyen-Orient posent un plancher sous les cours, selon Reuters. La semaine s'annonce globalement négative pour le brut, même si ces préoccupations géopolitiques limitent l'ampleur du repli. Le Brent clôture à 98,07 $, en recul de 0,22 % sur la journée.",
+   "sources": [
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Small retailers brace for 'huge hit' this holiday season as shipping costs spike",
+   "resume": "As shipping costs surge due to high fuel prices, smaller and medium-sized retailers struggle to keep up, and they face a difficult holiday season.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/06/small-business-holiday-shipping-costs.html",
+   "date": "2026-11-06 12:00"
+  },
+  {
+   "titre": "Markets fret over growth and inflation, just as tech rout gains speed - Reuters",
+   "resume": "Markets fret over growth and inflation, just as tech rout gains speed  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxONUh4V2hzQnA1Rk9zNTN6d3ZxcVZycGZQVmNUNjR3NmpXSmphZHh4LWZvaGJmTTVEWDdBc0lNWmZyUUp3MTFndk5uZl80Qnk0QXotRmo5S1g0MVhDejlwMjJlczNLVWY1eHRLZ1c4dExyOUNqdjJPaUFhVnE2WC16QUc4aTVfUlAwQUtKMktZYi1STk94cXBnSXF5OEQ?oc=5",
+   "date": "2026-11-06 05:09"
+  },
+  {
+   "titre": "Oil set for sharp weekly drop but Middle East supply concerns provide floor - Reuters",
+   "resume": "Oil set for sharp weekly drop but Middle East supply concerns provide floor  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOR0loTjAtWUlkbnpIR2huZE8zWWkxZHZIZlprNlQ5Z3BSaGUxcnE1ZDdqbXFuOHFpQVdrbzEyNnRUSGR4ZDh3SEpqQkpqX2NZa0JlZjEyZlp3RElJMFlhVDRLLTZ3MzRuV2NuTXR3SjhQejExMVR4eE10YThVcmJYaTdNYmt1SjJfeG10NlJRRFB1SFNQUlRSanFrYzBFUjlZNjBGMjhxSi1MZG1sd19kWGU0Ykt5bmR4by1B?oc=5",
+   "date": "2026-11-06 02:49"
+  }
+ ],
+ "genere_le": "2026-11-06 13:14 UTC"
+}
