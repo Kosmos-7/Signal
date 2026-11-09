@@ -1,0 +1,172 @@
+{
+ "id": "2026-11-09",
+ "type": "quotidien",
+ "date": "2026-11-09",
+ "titre": "Immobilier américain gelé, inflation et CoreWeave en embuscade",
+ "chapeau": "Le marché américain a ses yeux rivés sur les chiffres d'inflation et les résultats de CoreWeave. Pendant ce temps, les acheteurs de maison attendent toujours que les vendeurs baissent leurs prix.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-09.jpg",
+  "v": "6f8ef69c",
+  "legende": "Paternoster Square",
+  "credit": "gren",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Paternoster_Square.jpg",
+  "fichier": "Paternoster Square.jpg",
+  "requete": "London Stock Exchange Paternoster Square"
+ },
+ "marches": {
+  "ref": "2026-11-09",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8226.8603515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.079498114786829,
+    "ref": "2026-11-09"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6269.35009765625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.6021395306731794,
+    "ref": "2026-11-09"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.8429999351501465,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.01600027084350586,
+    "ref": "2026-11-09"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4129.5,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.3399126104875803,
+    "ref": "2026-11-09"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 93.68000030517578,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -4.719283364575414,
+    "ref": "2026-11-09"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1201971769332886,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.23412383571114692,
+    "ref": "2026-11-09"
+   }
+  ],
+  "mouvement": {
+   "libelle": "TSMC",
+   "valeur": 2235.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 4.683840749414521,
+   "ref": "2026-11-09",
+   "ticker": "2330.TW",
+   "nom": "TSMC"
+  }
+ },
+ "marches_texte": "Les Bourses européennes ont terminé la semaine en forme : l'Euro Stoxx 50 progresse de +1,60 % et le CAC 40 de +1,08 %. Du côté des matières premières, l'or tient bon à 4 129,50 $ (+1,34 %), tandis que le Brent décroche de -4,72 % à 93,68 $. Le taux américain à dix ans recule légèrement à 4,843 %, et l'euro cède un peu de terrain face au dollar à 1,1202 $.",
+ "sections": [
+  {
+   "titre": "Immobilier américain : les vendeurs font la tête, les stocks s'accumulent",
+   "texte": "Le marché immobilier américain reste profondément grippé en octobre. Les annonces de logements s'accumulent, mais les vendeurs refusent de revoir leurs prix à la baisse. Après un mois de septembre déjà difficile, la situation ne montre pas de signe de dégel. L'acheteur potentiel, lui, attend toujours son heure.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "La semaine à venir : inflation et CoreWeave dans le viseur",
+   "texte": "Deux rendez-vous occuperont le devant de la scène boursière dans la semaine qui s'ouvre : les données d'inflation et les résultats de CoreWeave. Ces deux éléments sont présentés comme les principaux facteurs susceptibles d'orienter le marché actions américain. Les investisseurs auront de quoi s'occuper entre deux cafés.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Thanksgiving en avion : les miles coûtent plus cher cette année",
+   "texte": "Voyager pour Thanksgiving en utilisant ses miles aériens revient plus cher qu'en 2025. Les tarifs aériens sont en hausse et la demande reste soutenue, selon CNBC. Certaines routes s'avèrent nettement plus onéreuses que d'autres, les écarts entre les destinations les plus chères et les moins chères restant significatifs.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Tensions au Moyen-Orient : pourparlers au point mort, alerte à Riyad levée",
+   "texte": "L'Arabie saoudite a indiqué que le danger était passé à Riyad après une alerte survenue au lendemain d'une attaque houthie. Sur le front diplomatique, l'Iran défend une proposition de deux jours pour des pourparlers de paix, après le rejet de ses conditions par Washington. Trump doit rencontrer le Qatar, médiateur dans le dossier iranien, mais aucun accord imminent n'est attendu.",
+   "sources": [
+    1,
+    2,
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Home listings pile up in October, but sellers won't slash prices",
+   "resume": "After a rough month in September, the housing market remained in a deep freeze in October as listings piled up. Sellers are still reluctant to cut prices.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/09/home-listings-pile-up-in-october-but-sellers-wont-slash-prices.html",
+   "date": "2026-11-09 13:54"
+  },
+  {
+   "titre": "Trump to meet Iran war mediator Qatar, no imminent deal seen to end the war - Reuters",
+   "resume": "Trump to meet Iran war mediator Qatar, no imminent deal seen to end the war  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOX0pwQmJtMVdmZDY2NVhWalgxSHZ0d0NvUzJ4cldzTHFQUmdHSERzZENUOXljYldMbFpRa3J5d0VhbkNtZGJVM1paVkFWZ1ZHZTFOQlNkNm5xZ2tkc0FYQkxvQkU3RHc5cm9lcjFXSzdCNlE5QjNXNnRoZktjUHhGRTRGOXZYbWZtUXlTaFBXN096VFZrTDBQQll5ZDJaZDlPdUlueEtHaGMyQ1ZnWHdxQll3UWI3WHdYZmc?oc=5",
+   "date": "2026-11-09 11:46"
+  },
+  {
+   "titre": "Iran defends two-day proposal for peace talks after US rejects conditions - Reuters",
+   "resume": "Iran defends two-day proposal for peace talks after US rejects conditions  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQQTF0eFRFOUtERE9BUEU4Sy13ZnpyT0pVdUo1aHRYY3ctUThfVzFOTlFmdlJvS1NYOExsalBydmhoQkpVOXRaVC1TTjZ0cDFVRWtnS2x1MGthR2RiQnQ3WC10emY1ck8yTUxZVU5LVHVmUmdkM2k0S2NEbWdKOEk5QnE3WGhBazc3aEpZaFdBMS1jVUJoOE81QXJHLU1HbGJMLXROZUlXa245Z0NIS05FSA?oc=5",
+   "date": "2026-11-09 09:19"
+  },
+  {
+   "titre": "Saudi Arabia says danger passed in Riyadh after alert, day after Houthi attack - Reuters",
+   "resume": "Saudi Arabia says danger passed in Riyadh after alert, day after Houthi attack  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPRFo2NjBsd2ZzTWNuTGtJOWZvbGVUanhLN0p2V1owR092a3o2emVkZllMWjc3YkF5aTJubFhzU3d2Z0FDT09FVWRyanJjdHVydVBkTkxDVmNjaERnYmljaDRZcUJGRTZUdDkxNFhhT3dXaW9RUS1McGc1eXZGT29yVm8wVWpNU25CenRqb3RJQmJIS3RickZfRnhBeEJFclppT3B2SVl4eXJMLXR3V0pTdjFpWHNLQWZpSFViMTVSM01WaE1QNXg0?oc=5",
+   "date": "2026-11-09 07:15"
+  },
+  {
+   "titre": "Here are the 2 big things we're watching in the stock market in the week ahead",
+   "resume": "CoreWeave earnings and inflation data will take center stage.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/08/here-are-the-2-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+   "date": "2026-11-08 17:40"
+  },
+  {
+   "titre": "Using miles to fly for Thanksgiving? These are the most expensive and cheapest routes",
+   "resume": "Thanksgiving airfare will cost more than last year as fares rise and strong demand continues.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/08/frequent-flyer-miles-points-thanksgiving.html",
+   "date": "2026-11-08 13:00"
+  }
+ ],
+ "genere_le": "2026-11-09 14:21 UTC"
+}
