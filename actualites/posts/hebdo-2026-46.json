@@ -1,0 +1,53 @@
+{
+ "id": "hebdo-2026-46",
+ "type": "hebdo",
+ "date": "2026-11-09",
+ "titre": "L'analyse du portefeuille · Sem. 46 · 2026",
+ "chapeau": "Cette semaine du 3 au 9 novembre, les marchés ont digéré deux signaux contradictoires : une baisse du pétrole qui atténue les craintes inflationnistes (l'or progresse en écho, les actions indiennes touchent un plus haut de 8 mois), et une attention croissante portée aux résult…",
+ "sujet": null,
+ "photo": null,
+ "conviction": "neutre",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Cette semaine du 3 au 9 novembre, les marchés ont digéré deux signaux contradictoires : une baisse du pétrole qui atténue les craintes inflationnistes (l'or progresse en écho, les actions indiennes touchent un plus haut de 8 mois), et une attention croissante portée aux résultats CoreWeave ainsi qu'aux prochaines données d'inflation américaine, selon CNBC. Le VIX à 20.27 reste en zone de vigilance modérée : pas de panique, mais pas de complaisance non plus.\n\nCôté portefeuille, la semaine s'achève sur une performance nette de +29.86% depuis la création (brut : +28.92%), avec un écart au benchmark MSCI World de +13.73 points de pourcentage. Le capital actuel est de 33 351€. Le portefeuille reste concentré sur la tech et l'IA : 58% du capital sur ce cluster, dont 39% sur la thèse 'infrastructure IA' (ASML, AMD, NVDA, AMZN, META). C'est une conviction assumée, pas un accident.\n\nDeux décisions actives cette semaine : un renforcement sur ADBE et un renforcement sur NVDA. ADBE affiche un Golden Cross frais à J+1 (fenêtre signal optimale) avec un z-score à -2.1 sigma et un val=5/5, soit exactement le setup d'entrée type B décrit dans la méthodologie. Le renforcement n'est pas un averaging aveugle : c'est un signal technique nouveau sur une thèse intacte. NVDA bénéficie d'une décote modérée (-0.7 sigma) mais le signal_dynamics_warning (affaiblissement post-rally, pente MM21 négative) modère la conviction, d'où un sizing inférieur.\n\nPoint de vigilance à documenter honnêtement : DDOG est à -15.9% après 168 jours, au-delà du seuil de stop-loss automatique R06. Je maintiens cette semaine avec une conviction faible, mais c'est un choix conscient qui sera revu au prochain run. BX franchit les 90 jours dans 6 jours : si la perte reste à ce niveau, R06 s'appliquera mécaniquement.\n\nPour la semaine à venir, vous surveillerez les données d'inflation américaine et les résultats CoreWeave (cités par CNBC comme les deux catalyseurs majeurs), qui pourraient faire bouger la thèse IA dans un sens ou dans l'autre. Sur DDOG et BX, la décision de sortie ou de maintien ne pourra plus être différée.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Deux renforcements cette semaine : ADBE sur Golden Cross frais J+1 avec décote -2.1 sigma (setup d'entrée propre, val=5/5), et NVDA sur décote modérée -0.7 sigma, avec une conviction tempérée par l'affaiblissement du signal technique (pente MM21 négative). Le portefeuille reste à +29.86% net depuis la création, soit +13.73 points au-dessus du MSCI World. Je dois être transparent sur un point de discipline : DDOG est à -15.9% après 168 jours, au-delà du seuil de stop-loss R06. Je le documente ici et le traiterai au prochain run. BX arrive dans 6 jours à sa fenêtre des 90 jours : si la perte se maintient, la sortie sera mécanique. Deux semaines difficiles à venir sur ces deux lignes, et le journal en rendra compte honnêtement.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Gold gains as lower oil prices ease inflation fears - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNbEdIVXlJc2RaUEw2RmFrR2FZcXYzYlBKUG9Cdl9WUVFfalVxT0hGcGFCdW1DS3JMT2daanhDYktBeXVGNGt5TGlsOGZJVWVSMFpnT3ZVa2RBUjZYakRlVlQ3SXd1ZkpTQVNXVkpoNUZoemdycWY0MG02dVk0cWRuWG4taG5VMm9kbEluSHctTVZVMXJwWXNWSWdVcmxQeWtRSW1EWDQ2dTJ6QVV2TzhoeQ?oc=5",
+   "date": "2026-11-09",
+   "resume": "La baisse des cours du pétrole atténue les craintes inflationnistes et soutient la hausse du cours de l'or."
+  },
+  {
+   "titre": "Indian shares inch higher to close at 8-month high as crude oil drops - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxObkM4eVdiUXpCc3Jld1NOSlRzMEFUeHcxb09peUlKS3ZFNTVLS2lwMFE0T0x1NV94RGowQjZEM0luODhHRFNZWWxaX2w2Y0Rqc1d5X2tXYlRwcU5wMVMxNHNjeWVXZEZSNkYtV1JEV29LeDE2bEVRMnNBbUVNNGV5cjNlYVYydGhKT3Awc2VVeEY3WTZSbWJjak43bmpTdmJjR2ZSU01fSXhCeFNVNXlYeGxPODh2UUlHQ1FRb3VNSzc?oc=5",
+   "date": "2026-11-09",
+   "resume": "Les actions indiennes progressent vers un plus haut de 8 mois portées par la baisse du brut."
+  },
+  {
+   "titre": "Here are the 2 big things we're watching in the stock market in the week ahead",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/08/here-are-the-2-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+   "date": "2026-11-08",
+   "resume": "Les résultats de CoreWeave et les données d'inflation américaine seront les deux points de focus des marchés la semaine prochaine."
+  },
+  {
+   "titre": "Family offices boost startup investments in October, backing women's health and caregivers",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/06/family-offices-boost-startup-investments-in-october.html",
+   "date": "2026-11-06",
+   "resume": "Les family offices ont accru leurs investissements dans les startups en octobre, notamment dans la santé féminine et les aidants."
+  }
+ ],
+ "genere_le": "2026-11-09"
+}
