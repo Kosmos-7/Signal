@@ -1,0 +1,166 @@
+{
+ "id": "2026-11-10",
+ "type": "quotidien",
+ "date": "2026-11-10",
+ "titre": "Scandale Nvidia, frigos piratés et le Brent qui dégringole",
+ "chapeau": "Les valeurs chip rebondissent malgré une mauvaise nouvelle Nvidia, l'Iran convoqué à Paris pour une cyberattaque de supermarchés, et le pétrole continue de souffrir.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-10.jpg",
+  "v": "0af4ef49",
+  "legende": "No Known Restrictions Trading Floor, New York Stock Exchange",
+  "credit": "Carol M. Highsmith",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:No_Known_Restrictions_Trading_Floor,_New_York_Stock_Exchange_(Highsmith_LOC)_(6718386525).jpg",
+  "fichier": "No Known Restrictions Trading Floor, New York Stock Exchange (Highsmith LOC) (6718386525).jpg",
+  "requete": "New York Stock Exchange trading floor"
+ },
+ "marches": {
+  "ref": "2026-11-10",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8314.1201171875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.9816272262305599,
+    "ref": "2026-11-10"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6353.2001953125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.9975438649329085,
+    "ref": "2026-11-10"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.953999996185303,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.09000015258789062,
+    "ref": "2026-11-10"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4051.800048828125,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -1.5238777779043626,
+    "ref": "2026-11-10"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 89.6500015258789,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -3.1543676985758653,
+    "ref": "2026-11-10"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1188185214996338,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.36697624450139843,
+    "ref": "2026-11-10"
+   }
+  ],
+  "mouvement": {
+   "libelle": "TSMC",
+   "valeur": 2285.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 2.237136465324385,
+   "ref": "2026-11-10",
+   "ticker": "2330.TW",
+   "nom": "TSMC"
+  }
+ },
+ "marches_texte": "Le CAC 40 et l'Euro Stoxx 50 ont terminé dans le vert, à respectivement +0,98 % et +1,00 %, dans la lignée du rebond des semi-conducteurs outre-Atlantique. TSMC signe le plus fort mouvement de notre liste avec +2,24 %. Du côté des mauvaises nouvelles, le Brent recule de 3,15 % à 89,65 $ et l'or cède 1,52 % à 4 051,80 $, tandis que le taux américain à dix ans grimpe à 4,954 %, en hausse de 0,090 point.",
+ "sections": [
+  {
+   "titre": "Les puces rebondissent sur mauvaise nouvelle : le vieux cliché de Wall Street fait son numéro",
+   "texte": "« Les marchés font leur creux sur les mauvaises nouvelles » : le dicton est assez malin pour survivre à ses propres démentis, et il a remis le couvert lundi. Selon CNBC, les valeurs de semi-conducteurs ont rallié malgré le scandale en cours autour de Nvidia, illustrant ce réflexe classique où la mauvaise nouvelle libère la pression accumulée. TSMC, avec +2,24 %, incarne ce rebond dans notre tableau des clôtures. CNBC rappelle que ce type de maxime « se révèle vrai juste assez souvent pour rester un cliché de Wall Street en bonne santé ».",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Frigos piratés, Iran convoqué : la France hausse le ton",
+   "texte": "La France a convoqué l'ambassadeur iranien après une cyberattaque ciblant des réfrigérateurs de supermarchés, selon Reuters. Paris a assorti la convocation d'un avertissement de réponse. Par ailleurs, Reuters rapporte que des avions militaires américains ont été évacués d'une deuxième base britannique en raison d'une menace iranienne. Le Premier ministre du Qatar a également effectué un arrêt non planifié au G7 pour informer les Européens à la suite de discussions avec Donald Trump, selon Reuters.",
+   "sources": [
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "titre": "Skydance taille dans le vif, Children's Place cherche repreneur",
+   "texte": "Skydance a détaillé un plan de réduction des coûts de 6 milliards de dollars pour la nouvelle entité issue de la fusion avec Paramount, selon CNBC. Ces annonces accompagnaient la publication des résultats du troisième trimestre. De son côté, la chaîne de vêtements pour enfants Children's Place a déposé le bilan en vertu du chapitre 11 de la loi américaine sur les faillites et cherche des repreneurs potentiels, les offres devant être déposées avant le 9 décembre, toujours selon CNBC.",
+   "sources": [
+    4,
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "'Markets bottom on bad news' maxim rings true as chip stocks rally amid Nvidia scandal",
+   "resume": "The cliche is one of those smart-sounding rules of thumb that proves true just often enough to remain a Wall Street cliché in good standing.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/10/chip-stocks-rally-nvidia-scandal.html",
+   "date": "2026-11-10 13:19"
+  },
+  {
+   "titre": "France summons Iran envoy over supermarket fridge hack, warns of response - Reuters",
+   "resume": "France summons Iran envoy over supermarket fridge hack, warns of response  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPbFRPZy1SWjNiT21UM05JSTBmN3JnWW9Gb3pweVRYSFhxZzNfRlBtbEpCNEZ6VHJQZnhpaFZaZ05jTkpWOTNWaGhZMVlISGdxSzlVX2xKRmE2VXZzTmZ3ZElya0ZLQUs1UVM4MXRMNnR3al84MXZOREM1SzhjZHAzTTJYVkpiMzFTOUJ0VC1SNnJvRE5KTEVpUkE2SkJ1RklfSjREc1BzdGV5aGlWaElrYXVDUUt4bmh0dFE?oc=5",
+   "date": "2026-11-10 09:52"
+  },
+  {
+   "titre": "Qatari PM makes unscheduled stop at G7 to brief Europeans post Trump talks - Reuters",
+   "resume": "Qatari PM makes unscheduled stop at G7 to brief Europeans post Trump talks  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPMm1PTnVENERxQ3laRzBVcGVRVkQ0eHVqMDZzRllQSU4tSFphMU1QS3RzSDVld29NUWVjZDkwWlQ2MXJXVng2bDEyLVFRaXY5c0E2VV9udlZUYlFUT2FpR25tSjdkTXdxSnBoYmsycXBUbTh6U3VVbTJ0anhqN2xjSllSYUFKeDRud25PdDBXS0xhcl8zSFFVdDVBcTNVWnRLVUgxR193cG5JRTNSWW1rTmlrMGNwcTYyOU1tVnVZRQ?oc=5",
+   "date": "2026-11-10 08:29"
+  },
+  {
+   "titre": "US aircraft evacuated from second British base due to Iran threat, WSJ reports - Reuters",
+   "resume": "US aircraft evacuated from second British base due to Iran threat, WSJ reports  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPNFRRSTBsbG02aEtlczAwSUpUMTd3ZkFRQUp6emg3SHZpclZSTXZiQUl6TWRMUVJuZ0U5T1MtdFhkblNEYWtiN1B5YnBtNnVaSVFyV1NqTk5Jd1g5SHU5eWFjWk45TWVYLUdJbi0zb2R2c2tZMXlvT2tZMVRaUjd1ek51NTFQcWJ2SXpMMkZqZ29UbkRkTWlyNmpleE5aOTJlZ3FDb21FQVRyNlVoalM3MWVUdw?oc=5",
+   "date": "2026-11-10 04:58"
+  },
+  {
+   "titre": "Skydance outlines its $6 billion in planned cost savings. Here's the breakdown",
+   "resume": "The updates came alongside a third-quarter earnings report for the legacy Paramount Skydance.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/09/skydance-cost-savings-breakdown.html",
+   "date": "2026-11-09 21:28"
+  },
+  {
+   "titre": "Children’s Place files for bankruptcy protection, seeks buyer",
+   "resume": "The Children's Place has filed for chapter 11 bankruptcy protection and is seeking bids from potential new owners by Dec. 9.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/09/childrens-place-chapter-11-sale.html",
+   "date": "2026-11-09 20:57"
+  }
+ ],
+ "genere_le": "2026-11-10 13:46 UTC"
+}
