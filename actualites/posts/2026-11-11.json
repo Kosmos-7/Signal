@@ -1,0 +1,156 @@
+{
+ "id": "2026-11-11",
+ "type": "quotidien",
+ "date": "2026-11-11",
+ "titre": "Le consommateur américain fatigue, le Brent rebondit",
+ "chapeau": "Les ventes au détail américaines progressent au rythme le plus lent depuis près d'un an. Pendant ce temps, le Brent reprend 2 % et l'Inde reçoit une bonne note de Moody's.",
+ "sujet": "macro",
+ "photo": {
+  "src": "actualites/photos/2026-11-11.jpg",
+  "v": "be3a5369",
+  "legende": "Various electrical household items in a German supermarket",
+  "credit": "Pittigrilli",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Various_electrical_household_items_in_a_German_supermarket.jpg",
+  "fichier": "Various electrical household items in a German supermarket.jpg",
+  "requete": "supermarket shelf prices"
+ },
+ "marches": {
+  "ref": "2026-11-11",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8303.9501953125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.30633661095852016,
+    "ref": "2026-11-11"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6369.35986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.6556668409020795,
+    "ref": "2026-11-11"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 4051.0,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.5161046369939263,
+    "ref": "2026-11-11"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 93.47000122070312,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 2.1641746673574733,
+    "ref": "2026-11-11"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1134617328643799,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.7827633575396182,
+    "ref": "2026-11-11"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 73835.8671875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.15701277265417396,
+    "ref": "2026-11-11"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ASM International N.V.",
+   "valeur": 727.5999755859375,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 6.968533156168073,
+   "ref": "2026-11-11",
+   "ticker": "ASM.AS",
+   "nom": "ASM International N.V."
+  }
+ },
+ "marches_texte": "Les Bourses européennes terminent dans le vert, l'Euro Stoxx 50 gagnant 0,66 % à 6 369 points, le CAC 40 se contentant d'un plus modeste +0,31 % à 8 304 points. La vraie animation vient des matières premières : le Brent rebondit de 2,16 % à 93,47 dollars, et l'or grignote 0,52 % à 4 051 dollars. Côté valeurs, ASM International s'offre la palme du jour avec un bond de près de 7 %.",
+ "sections": [
+  {
+   "titre": "Le consommateur américain sourit, mais les dents grincent",
+   "texte": "Les ventes au détail américaines ont progressé en octobre à leur rythme le plus lent depuis près d'un an, selon le CNBC/NRF Retail Monitor. Les Américains continuent de dépenser, certes, mais les prix élevés laissent des traces visibles. Un tableau qui ressemble à quelqu'un qui fait bonne figure au restaurant tout en regardant discrètement l'addition.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Moody's mise sur l'Inde",
+   "texte": "L'agence de notation Moody's a relevé sa prévision de croissance pour l'Inde, estimant que l'économie est bien positionnée pour maintenir une croissance proche de 7 %. Une note encourageante pour la troisième économie la plus peuplée du monde, dans un contexte mondial qui ne déborde pas d'optimisme.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Iran : Téhéran refuse tout transfert de matière nucléaire",
+   "texte": "Le chef de la sécurité iranien a déclaré que l'Iran n'autorisera pas le transfert de matières nucléaires enrichies hors du pays. Cette position ferme intervient dans un contexte de tensions persistantes autour du dossier nucléaire iranien.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Washington et ses participations privées dans le viseur des démocrates",
+   "texte": "Selon un recensement de l'Institut CATO, l'administration Trump détenait une forme de participation en capital dans 41 entreprises privées en novembre. Des élus démocrates cherchent désormais des leviers pour compliquer ces positions, ouvrant un front politico-financier à surveiller.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Consumers are showing signs of strain even as they keep spending, CNBC/NRF Retail Monitor shows",
+   "resume": "Retail sales rose at their slowest pace in nearly a year in October as American consumers showed signs of strain from high prices.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/11/october-retail-sales-cnbc-nrf-2026.html",
+   "date": "2026-11-11 12:27"
+  },
+  {
+   "titre": "Iran will not allow enriched nuclear material to leave the country, security chief says - Reuters",
+   "resume": "Iran will not allow enriched nuclear material to leave the country, security chief says  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNSmRMSFZZUld1UEFab291N25WYXZVNENjbmtrWVU0OEEwZm84Z2RONXZHM0JnY2FId2ROLTRvek9lWmZiSFNQNlMwVVpVQ0Q1V3NsSDk1alc5Z0JoMExVY3NpYjVSVDhXd3RtYmo2M2lsdHoydlUteHlDMkp5QlZsWGQxam1JUXFuRkV0UHhOTVB0ZWtxeUhCTkNHNkRMMG5TaUdQaHBUYTlmMkhBRjBWUkZUTlNMVU1ISzFfVlduXzBJd3p0U0psdDNTa1F4Zw?oc=5",
+   "date": "2026-11-11 12:04"
+  },
+  {
+   "titre": "How Democrats could snarl Trump administration stakes in private-sector companies",
+   "resume": "The Trump administration had established some form of equity position in 41 companies as of November, according to the CATO Institute's tally.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/11/trump-company-equity-takes.html",
+   "date": "2026-11-11 11:00"
+  },
+  {
+   "titre": "Moody's lifts India growth forecast, sees economy well positioned to sustain near 7% growth - Reuters",
+   "resume": "Moody's lifts India growth forecast, sees economy well positioned to sustain near 7% growth  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPb1Bhc253SGlMZGdtdjFTWk9raTg0ckVuNEJuM0YycUtidDd4dll4Z2RIM0t3TXlxX1hvZnpxZG1FanQzOTFDeW9BalFwLTVrSnRGbDJVa0tzMHNQZUdkR3pwQUZMYTlDOFhCOGhuSzgyZW1aQkVCcE9rRkhUU3Jtd3dmbW1PMV9Gd0NCZHNRN2xfeUdmeFZxb2cxTEp0VjhNRFVnWWlmNW40WUFJQUlpNzNnS1g0QTA2Vi0tYkRIb09paUxB?oc=5",
+   "date": "2026-11-11 07:38"
+  }
+ ],
+ "genere_le": "2026-11-11 12:57 UTC"
+}
