@@ -1,0 +1,164 @@
+{
+ "id": "2026-11-12",
+ "type": "quotidien",
+ "date": "2026-11-12",
+ "titre": "Scout Motors et 212 000 réservations : le retour du 4x4 américain",
+ "chapeau": "Scout Motors approche de l'ouverture de son usine avec un carnet bien rempli, pendant que le détroit d'Ormuz s'invite dans l'actualité géopolitique.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-12.jpg",
+  "v": "f2983ede",
+  "legende": "London Stock Exchange geograph-3066495-by-Ben-Brooksbank",
+  "credit": "Ben Brooksbank",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:London_Stock_Exchange_geograph-3066495-by-Ben-Brooksbank.jpg",
+  "fichier": "London Stock Exchange geograph-3066495-by-Ben-Brooksbank.jpg",
+  "requete": "London Stock Exchange Paternoster Square"
+ },
+ "marches": {
+  "ref": "2026-11-12",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8359.7197265625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.3222132230240767,
+    "ref": "2026-11-12"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6389.52978515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.06038035345800484,
+    "ref": "2026-11-12"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 5.046000003814697,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.04799985885620117,
+    "ref": "2026-11-12"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3902.300048828125,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -2.4546919428040246,
+    "ref": "2026-11-12"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 93.51000213623047,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.8085381443809421,
+    "ref": "2026-11-12"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1086474657058716,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.7383564870676613,
+    "ref": "2026-11-12"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Vestas Wind Systems A/",
+   "valeur": 196.85000610351562,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 3.035856037221062,
+   "ref": "2026-11-12",
+   "ticker": "VWS.CO",
+   "nom": "Vestas Wind Systems A/"
+  }
+ },
+ "marches_texte": "Le CAC 40 termine en légère hausse à 8 359,72 points (+0,32 %), tandis que l'Euro Stoxx 50 finit quasi stable à 6 389,53 points (-0,06 %). L'or recule nettement à 3 902,30 $ (-2,45 %), et le Brent remonte à 93,51 $ (+0,81 %). Le taux américain à dix ans franchit le seuil des 5 %, à 5,046 %, et l'euro cède du terrain face au dollar à 1,1086 $.",
+ "sections": [
+  {
+   "titre": "Scout Motors : 212 000 réservations avant même l'ouverture",
+   "texte": "Le constructeur Scout Motors a enregistré environ 212 000 réservations pour son pickup Terra et son SUV Traveler, selon les déclarations de son PDG Scott Keogh à CNBC. L'usine de Caroline du Sud, dont l'investissement atteint deux milliards de dollars, approche de son achèvement. Un carnet de commandes solide avant même que la première voiture ne sorte de chaîne.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Détroit d'Ormuz : deux tankers touchés",
+   "texte": "Deux pétroliers ont été mis hors d'état de naviguer par des explosions dans le détroit d'Ormuz, selon les Gardiens de la révolution iraniens (IRGC) rapportés par Reuters. Par ailleurs, l'Afrique du Sud signale une baisse de ses exportations d'agrumes, imputée conjointement aux perturbations liées à la guerre en Iran et à de mauvaises conditions météorologiques.",
+   "sources": [
+    3,
+    4
+   ]
+  },
+  {
+   "titre": "Nvidia : Jim Cramer dit être « attristé » par les rumeurs",
+   "texte": "Le présentateur Jim Cramer a déclaré mercredi soir être attristé par un article indiquant que le conseil d'administration de Nvidia se préparerait à se séparer de son PDG Jensen Huang. L'information, déjà évoquée lors des matins précédents, continue d'alimenter les discussions autour du groupe.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Syndicats américains : la facture politique arrive",
+   "texte": "Les syndicats américains, qui ont dépensé des millions de dollars et mobilisé des milliers de membres pour soutenir les démocrates lors des élections de mi-mandat de 2026, réclament désormais des actes concrets en échange de leur engagement, selon CNBC.",
+   "sources": [
+    0
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Unions helped Democrats win big in 2026. Now they want action",
+   "resume": "Unions spent millions of dollars and mobilized thousands of members to get out the vote for Democrats in the midterm election. Now they want to see action.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/12/democrats-unions-midterms-2026.html",
+   "date": "2026-11-12 13:09"
+  },
+  {
+   "titre": "Scout Motors has 212,000 vehicle reservations as $2 billion South Carolina plant nears completion",
+   "resume": "Scout Motors has roughly 212,000 reservations for its Terra pickup and Traveler SUV, CEO Scott Keogh told CNBC.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/12/scout-motors-reservations-south-carolina-plant.html",
+   "date": "2026-11-12 11:30"
+  },
+  {
+   "titre": "South Africa's citrus exports fall on Iran war disruption, bad weather - Reuters",
+   "resume": "South Africa's citrus exports fall on Iran war disruption, bad weather  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQSEdMeVJPU1FqTUdleG5McVVJdTBkTXpIbng3bnEzRi1ZWUlSNWFfUExHbnZsc1h4Tm5Nb2k5b1JoWllINEhReExZbndMbTFXZ0JhcUNQWHZrYjlzcGFoRWNuc1FELUk0ekRTVmJub1dYUkNYdzIyZWowRWpITERUWXVScnhBVjlQU2ozWmdmNkhOUUY2U3dQQ1R2OVN5WHNLaFc0NWdVUndrZVRjanpEbVo1Z3o?oc=5",
+   "date": "2026-11-12 08:54"
+  },
+  {
+   "titre": "Two oil tankers 'disabled' by explosions in Strait of Hormuz, IRGC says - Reuters",
+   "resume": "Two oil tankers 'disabled' by explosions in Strait of Hormuz, IRGC says  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDQ2cWxyeTFpazFaX1ZNM2RoS0t2ZVpEa0JpMElTZVFMUElROEF5c20tMlU0dEszWFlEdkhfR2VOb3hEQmo3MjRtdVlSaEhkZnpKXzExbE5QcXItQ3Z6REoyY1Fpak9IUUplYWp6NTQ2UjBiNVk1WDN0MmJjaFRkOHNLdDYxMU9xOWhuMnVaTlNiVXJNTlhLYV9EZEpnd1oxYmF0cG82b2VkMURkYnkzZkZBX0hhWHM?oc=5",
+   "date": "2026-11-12 08:17"
+  },
+  {
+   "titre": "Cramer's stance on Nvidia's stock amid reports that CEO Jensen Huang may be ousted",
+   "resume": "Jim Cramer said Wednesday night that he was saddened by a news report that indicated Nvidia's board of directors is preparing to fire Huang.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/11/jim-cramer-jensen-huang-nvidia-stock-advice.html",
+   "date": "2026-11-12 01:14"
+  }
+ ],
+ "genere_le": "2026-11-12 13:59 UTC"
+}
