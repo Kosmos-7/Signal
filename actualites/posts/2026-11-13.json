@@ -1,0 +1,172 @@
+{
+ "id": "2026-11-13",
+ "type": "quotidien",
+ "date": "2026-11-13",
+ "titre": "Mine dans le Détroit d'Ormuz, Lutnick convoqué au Sénat : les marchés encaissent",
+ "chapeau": "Un tanker GNL touché en Méditerranée, le secrétaire au Commerce rattrapé par l'affaire Nvidia : la journée avait de quoi secouer. Les indices ont à peine bronché.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-11-13.jpg",
+  "v": "118ad9d6",
+  "legende": "Port cranes, Container-Terminal Bremerhaven",
+  "credit": "Olga Ernst",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Port_cranes,_Container-Terminal_Bremerhaven.jpg",
+  "fichier": "Port cranes, Container-Terminal Bremerhaven.jpg",
+  "requete": "container port cranes"
+ },
+ "marches": {
+  "ref": "2026-11-13",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8356.4697265625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.058490781336628814,
+    "ref": "2026-11-13"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6387.60986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.17768640036700184,
+    "ref": "2026-11-13"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3891.10009765625,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.1492818766950675,
+    "ref": "2026-11-13"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 96.08000183105469,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.27134433005483816,
+    "ref": "2026-11-13"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1054610013961792,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.3659049556075934,
+    "ref": "2026-11-13"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 69153.1796875,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": -3.0693831513704706,
+    "ref": "2026-11-13"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ASML HOLDING",
+   "valeur": 1358.199951171875,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -1.3509657899911922,
+   "ref": "2026-11-13",
+   "ticker": "ASML.AS",
+   "nom": "ASML HOLDING"
+  }
+ },
+ "marches_texte": "Le CAC 40 et l'Euro Stoxx 50 ont terminé quasiment à l'équilibre, à -0,06 % et -0,18 % respectivement. Le Brent tient au-dessus de 96 $, en légère hausse de +0,27 %, malgré les nouvelles du détroit d'Ormuz. C'est le Bitcoin qui a le plus bougé dans notre tableau, cédant 3,07 % à 69 153 $, tandis qu'ASML Holding signe le plus fort recul des valeurs suivies, à -1,35 %.",
+ "sections": [
+  {
+   "titre": "Un tanker GNL touché par une mine dans le détroit d'Ormuz",
+   "texte": "L'Iran a annoncé qu'un tanker transportant du GNL a heurté une mine et subi une explosion dans le détroit d'Ormuz. L'information a été rapportée par Reuters ce 13 novembre. Le détroit d'Ormuz est un point de passage stratégique pour les exportations d'hydrocarbures de la région. L'AIEA, de son côté, indique dans un rapport qu'elle est « de plus en plus préoccupée » par le site d'enrichissement iranien. Ces deux événements survenus le même matin dessinent un contexte géopolitique tendu autour de l'Iran.",
+   "sources": [
+    4,
+    5
+   ]
+  },
+  {
+   "titre": "Marché pétrolier : le surplus revient, selon l'AIE",
+   "texte": "L'Agence internationale de l'énergie indique que le marché mondial du pétrole se dirige vers un excédent, à mesure que les exportations des pays du Golfe se redressent. Cette évaluation publiée ce 13 novembre tranche avec les tensions géopolitiques du détroit d'Ormuz survenues le même jour. Le Brent clôture à 96,08 $, en hausse de +0,27 % selon notre relevé.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Affaire Nvidia : le secrétaire au Commerce Howard Lutnick convoqué au Sénat",
+   "texte": "Howard Lutnick, secrétaire au Commerce, a accepté de témoigner devant la commission bancaire du Sénat américain. La convocation fait suite aux révélations sur l'affaire Jensen Huang, PDG de Nvidia, impliquant une prétendue espionne chinoise et des questions sur les ventes de puces à la Chine. L'affaire, déjà présente dans nos colonnes, franchit un nouveau palier institutionnel avec l'entrée en scène d'un membre du gouvernement.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Hockey sur glace : les franchises NHL valent en moyenne 2,71 milliards de dollars",
+   "texte": "Selon le classement CNBC des valorisations NHL 2026, la valeur moyenne d'une franchise de la ligue est désormais de 2,71 milliards de dollars, soit 23 % de plus qu'un an plus tôt. La ligue négocie par ailleurs son prochain contrat de droits médias, qui sera le premier grand test de la valeur des droits sportifs hors NFL dans la nouvelle ère des médias.",
+   "sources": [
+    1,
+    2
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "World oil market is returning to surplus as Gulf exports recover, IEA says - Reuters",
+   "resume": "World oil market is returning to surplus as Gulf exports recover, IEA says  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOcWtzQXhRVUlUbWQ0VVloOTVjekFCcC1XQlNXNWNRcERHNDFEbnBNTTFhZjV3Qjk5bGxCaDhoRFE1Yi1mdGNoR3JCVXY5MmQ0ODVnUWRabHowUDhYSUNKOXV5X0lLQzRBbWNabUFMTzVlMzBNOUUyWTgyeUg1cW5sRjJtUHo3TldPOEY4S19xOGwwYjlkemFibktTVTltVF94WUg5ekdJczcyUlBHOHZ0V3EtdWdjU0JOVkY4?oc=5",
+   "date": "2026-11-13 11:34"
+  },
+  {
+   "titre": "NHL’s next media deal will test the league’s strength",
+   "resume": "How do the world's biggest media companies judge the value of non-NFL rights? The NHL is giving us our first window into a new era in media values.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/13/nhls-next-media-deal-will-test-the-leagues-strength.html",
+   "date": "2026-11-13 11:34"
+  },
+  {
+   "titre": "CNBC's Official NHL Team Valuations 2026: How the 32 franchises stack up",
+   "resume": "The average NHL team is worth $2.71 billion, 23% more than a year ago.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/13/cnbcs-official-nhl-team-valuations-2026-how-the-32-clubs-stack-up.html",
+   "date": "2026-11-13 11:07"
+  },
+  {
+   "titre": "Nvidia scandal draws in Commerce Secretary Lutnick, who reportedly agrees to testify about China chip sales",
+   "resume": "Commerce Secretary Lutnick will testify before the Senate Banking Committee following revelations about Jensen Huang's affair with an alleged Chinese spy.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/13/nvidia-scandal-lutnick-chip-sales.html",
+   "date": "2026-11-13 10:54"
+  },
+  {
+   "titre": "IAEA increasingly concerned about Iranian enrichment plant, its report says - Reuters",
+   "resume": "IAEA increasingly concerned about Iranian enrichment plant, its report says  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOcEw4cVpnMkIxMTVtZEJlQmN3OHlsLUxxZnQxMWlfV3VfWTBYeHA2VEpBVWxpZk9TejdSaDgzazdlQUlMZy00aEhmZS1GYnhpVmU1bzdQTWM2VUJqd2dOWWowa1VQSWppQVdYSi1PVm0zX2J1b1hFU1QwaGs5N3lDZkJ3bEY5OG9Tai15M3VoRXVycFVBWjYwWjQ5dUhDcEJ4SWFHSXZxNDg5b2k2OG1DUVBoTHBDWE84dmVfZXc4WQ?oc=5",
+   "date": "2026-11-13 09:25"
+  },
+  {
+   "titre": "Iran says tanker carrying LNG hit mine, suffered explosion in Hormuz - Reuters",
+   "resume": "Iran says tanker carrying LNG hit mine, suffered explosion in Hormuz  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPbWY4UFhVeWZBSkUteDV4dHd0b3cyU3czTkdkU3ZLbU9zZzlhOGhTcDlDcTlmSVlKVUZFZDhwTWdmdG9zQkJHZ05jaXVad0ZpVGdsTHJvZ0VRT3Q4cXRMZFZ5cFpkR0Y5dmo4b3dlQ0F4RUVxZFFGanB4M1cxZmJlSERVQ0dQVDNWbVFVV2pJZ09XNG5DWlV2Zk4xdi1xRm9jUjhzVFl1akd1QQ?oc=5",
+   "date": "2026-11-13 07:00"
+  }
+ ],
+ "genere_le": "2026-11-13 13:26 UTC"
+}
