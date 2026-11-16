@@ -1,0 +1,53 @@
+{
+ "id": "hebdo-2026-47",
+ "type": "hebdo",
+ "date": "2026-11-16",
+ "titre": "L'analyse du portefeuille · Sem. 47 · 2026",
+ "chapeau": "Cette semaine du 10 au 16 novembre, les marchés naviguent en eaux relativement calmes : le MSCI World gagne +1.2% sur la semaine, le CAC40 +1.4%, et le VIX se stabilise à 22.29, dans la zone de vigilance modérée (20-25) mais sans signaux d'alarme. Du côté macro, deux éléments …",
+ "sujet": null,
+ "photo": null,
+ "conviction": "neutre",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Cette semaine du 10 au 16 novembre, les marchés naviguent en eaux relativement calmes : le MSCI World gagne +1.2% sur la semaine, le CAC40 +1.4%, et le VIX se stabilise à 22.29, dans la zone de vigilance modérée (20-25) mais sans signaux d'alarme.\n\nDu côté macro, deux éléments retiennent l'attention : le dollar prolonge son rally pendant que le yen encaisse mollement des données GDP japonaises décevantes, et le pétrole brut recule vers les 87$ sur anticipation d'un surplus au T4. Ces dynamiques sont favorables à la consommation américaine mais ajoutent une pression sur les marges des exportateurs asiatiques exposés aux matières premières. Pour Signal, l'exposition directe reste marginale.\n\nSur le portefeuille : performance nette à +28.30% depuis la création, soit +11.76 points de pourcentage d'avance sur le MSCI World. Deux décisions cette semaine. Premièrement, je coupe BX (Blackstone) après 91 jours à -14.6% : le seuil de stop-loss à -15% est quasi-atteint, aucun catalyseur de retournement visible, et la thèse du Golden Cross frais de septembre ne s'est tout simplement pas matérialisée. Deuxièmement, je renforce ADBE (Adobe) déjà en portefeuille depuis 77 jours. Le signal_dynamics_warning indique un Golden Cross en affaiblissement (pente MM21 négative), ce qui déclenche R7 : je traite le cross comme ambigu et ne l'utilise pas seul. C'est la décote en régression (z=-2.0σ, -52% sous la tendance) couplée à un val=5/5 qui emporte la conviction.\n\nLearning de la semaine : BX illustre une fois de plus le piège du Golden Cross frais sans confirmation fondamentale. Le momentum d'entrée était là sur le papier, mais le titre n'avait aucun catalyseur opérationnel sous-jacent pour soutenir la thèse. La méthodologie dit \"timing comme garde-fou, pas comme moteur\" : c'est à relire avant chaque entrée sur signal technique pur.\n\nPour la semaine à venir, je surveille NVDA qui vient de décrocher son Death Cross à J+2 avec une pente MM21 à -6.3% : la position est détenue depuis 318 jours avec +0% de performance latente, ce qui est décevant. Aucune action immédiate (90 jours atteints, mais le stop-loss à -15% n'est pas approché), mais le signal mérite une attention soutenue au prochain run.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Semaine du 16 novembre : deux mouvements ciblés cette semaine. Je coupe Blackstone (BX) après 91 jours de détention à -14.6% : le stop-loss à -15% est quasiment atteint, le Golden Cross de septembre n'a pas tenu ses promesses, et aucun catalyseur ne justifie d'attendre davantage. La perte est un crédit d'impôt utilisable 10 ans. Je renforce Adobe (ADBE), déjà en portefeuille depuis 77 jours, en m'appuyant sur sa décote importante en régression (z=-2.0σ) et son entrée en zone val=5/5. Attention : le Golden Cross montre des signes d'affaiblissement (R7 déclenchée), donc j'ai croisé avec les fondamentaux avant de décider, pas conclu sur le seul signal technique. Le portefeuille affiche +28.30% net depuis la création, avec +11.76 points d'avance sur le MSCI World. NVDA entre dans ma zone de surveillance avec un Death Cross tout frais à J+2 : pas d'action cette semaine, mais c'est un signal à suivre.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Dollar extends rally, yen looks past soft Japan GDP data - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPZkdhelNXT1laWnBWei1ZTGMybnc1U1FxOUtGdjdoaGxDX29kd0pvc3FoLVhYdVh4SkdQdGN1cFU1UjVmb0lGWlJsdTlJOHppUjh0eGVrTFJBajZxUV9CVWFrN0F5S0RqVVpMWlR4ZW05R0duTFdvZjJNbGNhcEl2V002d0xWejFMRmR2ZjRDanBqZndnZndWOF96b3NxdVdaWnp4LWdzQ1RhdEdXdkhfcUJaSQ?oc=5",
+   "date": "2026-11-16",
+   "resume": "Le dollar américain prolonge son rally tandis que le yen résiste aux mauvaises données de croissance japonaise."
+  },
+  {
+   "titre": "South African rand slides to seven-month low ahead of inflation, rate decision - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQZHJUYnA3N1BkeU9GR3djUy1pMzFjNHlJNjJXZWVFb3IwVkJFR1NCV0RwVkFhRld3YjNqam9RWWZTMVc1dnY2WHlOWkZNSzZtOHRqUDQyaTY2MXQxdjEwb1J2dm1Xb1ZVaFhrZURLR2xJbG5rRmlHZkdld01FMEFvak5tbG1MWjFDRk5rWlNHUHdjWVNiSWxYaUdfZV9UTUFpWEpnQjdyXy1LcUg2Vm5CRDdsN241clFaMTdoeXBB?oc=5",
+   "date": "2026-11-13",
+   "resume": "Le rand sud-africain chute à un plus bas de sept mois avant des données d'inflation et une décision de taux attendues."
+  },
+  {
+   "titre": "U.S. crude oil declines to $87 a barrel on recovering Middle East exports",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/16/us-crude-oil-declines-to-87-a-barrel-on-recovering-middle-east-exports.html",
+   "date": "2026-11-16",
+   "resume": "Le pétrole brut américain recule vers 87 dollars le baril en raison d'anticipations de surplus au quatrième trimestre."
+  },
+  {
+   "titre": "Big-ticket holiday items may be harder to find as shipping costs rise",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/16/holiday-big-ticket-inventory-shipping-costs.html",
+   "date": "2026-11-16",
+   "resume": "Les articles de grande valeur pourraient manquer pour les fêtes de fin d'année aux États-Unis en raison de la hausse des coûts de transport et d'une gestion prudente des stocks."
+  }
+ ],
+ "genere_le": "2026-11-16"
+}
