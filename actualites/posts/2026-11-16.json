@@ -1,0 +1,136 @@
+{
+ "id": "2026-11-16",
+ "type": "quotidien",
+ "date": "2026-11-16",
+ "titre": "Colette Kress au pied du mur : les premiers résultats post-Jensen Huang",
+ "chapeau": "Moins d'une semaine après le départ abrupt de Jensen Huang, la CEO par intérim de Nvidia passe son baptême du feu avec la publication des résultats trimestriels.",
+ "sujet": "tech",
+ "photo": {
+  "src": "actualites/photos/2026-11-16.jpg",
+  "v": "ae99e776",
+  "legende": "Precision Wafer Processing in a Cleanroom",
+  "credit": "ResearchFrontier",
+  "licence": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Precision_Wafer_Processing_in_a_Cleanroom.png",
+  "fichier": "Precision Wafer Processing in a Cleanroom.png",
+  "requete": "semiconductor wafer cleanroom"
+ },
+ "marches": {
+  "ref": "2026-11-16",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8392.8603515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.2861805762679112,
+    "ref": "2026-11-16"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6381.2900390625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.08720755328876909,
+    "ref": "2026-11-16"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 5.134999752044678,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.01900005340576172,
+    "ref": "2026-11-16"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3872.0,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.36796049323152585,
+    "ref": "2026-11-16"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 94.23999786376953,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -1.6694475534829814,
+    "ref": "2026-11-16"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.1013215780258179,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.33480445197684044,
+    "ref": "2026-11-16"
+   }
+  ],
+  "mouvement": {
+   "libelle": "TSMC",
+   "valeur": 2215.0,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -5.74468085106383,
+   "ref": "2026-11-16",
+   "ticker": "2330.TW",
+   "nom": "TSMC"
+  }
+ },
+ "marches_texte": "Le CAC 40 termine en légère hausse à 8 392,86 points (+0,29 %), tandis que l'Euro Stoxx 50 cède un dixième de pour cent à 6 381,29. Côté matières premières, le Brent recule de 1,67 % à 94,24 $, et l'or efface 0,37 % à 3 872 $. La séance est surtout marquée par TSMC, dont le titre décroche de 5,74 % pour clôturer à 2 215,00 : c'est le plus fort mouvement de la liste du jour.",
+ "sections": [
+  {
+   "titre": "Nvidia sans Jensen : Colette Kress entre en scène",
+   "texte": "Le théâtre de l'IA s'offre un nouveau premier rôle. Moins d'une semaine après le départ abrupt de Jensen Huang, la directrice financière devenue CEO par intérim Colette Kress doit affronter la publication des résultats de Nvidia. Selon CNBC, ce rapport constitue un test majeur pour elle. La semaine s'annonce décisive pour l'ensemble du secteur de l'IA : Anthropic partagera également la vedette, selon CNBC, dans ce que la chaîne qualifie de \"semaine pivot\" pour le dossier.",
+   "sources": [
+    0,
+    5
+   ]
+  },
+  {
+   "titre": "Fêtes de fin d'année : les rayons pourraient être moins garnis",
+   "texte": "Les cadeaux coûteux risquent de se faire rares sous les sapins cette année. Des dirigeants du secteur du transport interrogés par CNBC signalent que les distributeurs adoptent une stratégie prudente sur leurs stocks de fin d'année, en réponse à la hausse des coûts de transport. Concrètement, cela se traduit par des commandes plus légères et, potentiellement, des ruptures sur les articles à prix élevé.",
+   "sources": [
+    1
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Nvidia's Colette Kress confronts key questions in first earnings report since Jensen Huang’s exit",
+   "resume": "Less than a week after Jensen Huang's abrupt departure, Nvidia interim CEO Colette Kress faces a major test with earnings.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/16/nvidia-earnings-jensen-huang-resignation.html",
+   "date": "2026-11-16 12:00"
+  },
+  {
+   "titre": "Big-ticket holiday items may be harder to find as shipping costs rise",
+   "resume": "Transportation executives said they're seeing retailers be cautious on their holiday inventory strategy.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/16/holiday-big-ticket-inventory-shipping-costs.html",
+   "date": "2026-11-16 12:00"
+  },
+  {
+   "titre": "3 big things we're watching in the stock market in the week ahead",
+   "resume": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/15/3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+   "date": "2026-11-15 15:26"
+  }
+ ],
+ "genere_le": "2026-11-16 13:59 UTC"
+}
