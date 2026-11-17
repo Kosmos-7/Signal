@@ -1,0 +1,166 @@
+{
+ "id": "2026-11-17",
+ "type": "quotidien",
+ "date": "2026-11-17",
+ "titre": "Anthropic en Bourse, Nvidia sous les projecteurs : la tech retient son souffle",
+ "chapeau": "L'IPO d'Anthropic et les résultats Nvidia concentrent toute l'attention. En mer d'Oman, un tanker attaqué, équipage introuvable.",
+ "sujet": "tech",
+ "photo": {
+  "src": "actualites/photos/2026-11-17.jpg",
+  "v": "18c40924",
+  "legende": "DALL·E 2025-01-31 21.58.22 - A realistic image of the interior of a…",
+  "credit": "Cbrasil0",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:DALL%C2%B7E_2025-01-31_21.58.22_-_A_realistic_image_of_the_interior_of_a_modern_data_center._The_scene_features_long_rows_of_tall,_sleek_server_racks_filled_with_blinking_LED_lights._T.webp",
+  "fichier": "DALL·E 2025-01-31 21.58.22 - A realistic image of the interior of a modern data center. The scene features long rows of tall, sleek server racks filled with blinking LED lights. T.webp",
+  "requete": "data center server racks"
+ },
+ "marches": {
+  "ref": "2026-11-17",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7405.419921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.150607248214123,
+    "ref": "2026-11-17"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8256.169921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.1473907821479885,
+    "ref": "2026-11-17"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 24462.935546875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.19104315667618693,
+    "ref": "2026-11-17"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6268.2998046875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.260962167135423,
+    "ref": "2026-11-17"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 5.14300012588501,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.02200031280517578,
+    "ref": "2026-11-17"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3868.199951171875,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.3944965266513107,
+    "ref": "2026-11-17"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Salesforce, Inc.",
+   "valeur": 202.01010131835938,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -5.967462832671323,
+   "ref": "2026-11-17",
+   "ticker": "CRM",
+   "nom": "Salesforce, Inc."
+  }
+ },
+ "marches_texte": "Wall Street a terminé quasi à l'équilibre : le S&P 500 cède 0,15 % à 7 405,42 points et le Nasdaq 0,19 % à 24 462,94 points, les futures tech ayant progressé en séance dans l'attente des résultats Nvidia. L'Europe a moins bien résisté, le CAC 40 reculant de 1,15 % et l'Euro Stoxx 50 de 1,26 %. Le Treasury 10 ans remonte à 5,143 %, l'or gagne 0,39 % à 3 868,20 $, et la plus forte secousse du jour revient à Salesforce, qui lâche 5,97 %.",
+ "sections": [
+  {
+   "titre": "Nvidia et Anthropic : deux rendez-vous qui font battre la Silicon Valley",
+   "texte": "Les futures du Nasdaq progressaient en amont de la séance, portés par l'attente des résultats Nvidia et l'annonce de l'introduction en Bourse d'Anthropic. Pour CNBC, la journée de publication des résultats Nvidia est tout simplement « énorme ». Du côté d'Anthropic, l'IPO est présentée comme un passage obligé : des centaines de milliards de dollars sont investis dans des startups d'IA, et les investisseurs en capital-risque attendent une sortie qui pourrait ouvrir la voie à de nombreuses introductions plus petites. L'investisseur Steve Eisman, connu pour son pari contre les subprimes, était attendu sur CNBC pour commenter Nvidia, Anthropic et la thèse haussière sur l'IA.",
+   "sources": [
+    0,
+    1,
+    2,
+    4
+   ]
+  },
+  {
+   "titre": "Tanker attaqué au nord de Khasab : l'équipage est introuvable",
+   "texte": "L'UKMTO (United Kingdom Maritime Trade Operations) a signalé qu'une deuxième attaque a visé un tanker au nord de Khasab, dans la région du sultanat d'Oman. L'équipage est à ce stade introuvable. L'incident s'ajoute à une série de tensions en mer d'Oman qui pèsent sur la navigation dans la zone.",
+   "sources": [
+    5
+   ]
+  },
+  {
+   "titre": "Washington prend au sérieux un signalement de complot à la bombe sale iranienne",
+   "texte": "Donald Trump a déclaré que les États-Unis prenaient au sérieux un rapport faisant état d'un possible complot iranien impliquant une bombe sale à Washington. L'information est rapportée par Reuters sans précision supplémentaire sur la nature ou l'origine du signalement.",
+   "sources": [
+    3
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Jim Cramer's top 10 things to watch in the stock market Tuesday",
+   "resume": "Can't understate how huge this Nvidia earnings day is.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/17/jim-cramers-top-10-things-to-watch-in-the-stock-market-tuesday.html",
+   "date": "2026-11-17 14:00"
+  },
+  {
+   "titre": "Anthropic IPO: For hundreds of billions of dollars flowing into AI startups, a big debut is a must",
+   "resume": "Venture investors are sitting on big gains from the AI buildout. Anthropic's IPO could set the stage for many smaller AI startups seeking exits.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/17/anthropic-ipo-ai-venture-capital.html",
+   "date": "2026-11-17 13:15"
+  },
+  {
+   "titre": "'Big Short' investor Steve Eisman to discuss Nvidia, Anthropic and AI bull on CNBC",
+   "resume": "Steve Eisman is appearing on \"Squawk Box\" on Tuesday.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/17/big-short-investor-steve-eisman-to-discuss-nvidia-anthropic-and-ai-bull-on-cnbc.html",
+   "date": "2026-11-17 13:13"
+  },
+  {
+   "titre": "Trump says US taking seriously report of possible Iranian dirty bomb plot in Washington - Reuters",
+   "resume": "Trump says US taking seriously report of possible Iranian dirty bomb plot in Washington  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOQVVnUzJMMDJJUTh1NTl4Vy1VU2U0bjEzVkRGWFBtamliVkRZQkZud2VuZ25YSDc0VzM5aXhQWWN2YTBFSTRaV1BSNUE3aWp5bmpsV0ZSMDMyT2YxcW5LekhIVEt6Tm9Od1ItNUs1U0ZOd2tfeTJSdkJhVVEtbUFzV2d0Z1NGa0doNGljVlhVOUJNS1UwYXFjVVRxMEY2OTRGY1lHQzcxRTlXR2VnVkh3QjRENEd0VTFPMjRJdmk3bVpXUEVWS3RV?oc=5",
+   "date": "2026-11-17 13:08"
+  },
+  {
+   "titre": "Nasdaq futures rise as tech stocks firm up ahead of Nvidia results, Anthropic IPO - Reuters",
+   "resume": "Nasdaq futures rise as tech stocks firm up ahead of Nvidia results, Anthropic IPO  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOemNySVhGbms1VkxVYXFsTFdtdVh1MjNQQk16Y1ZfNGFHMFhDRWUtZldZRzJzSWxpNlBLWVpTenJnU2FHZndaVUlEclFtQVNvTzJBWTNpM1p0N3dmWjlyMEFKbkowZkpSanhVcEVLUjZfOWxNcW5OZVFuLTNFNF93ZDd4b0wxX1VzNlJPODdqc0xob1ZrR0xuQkJ6bExvNDdQMk5saFVSdkVBZw?oc=5",
+   "date": "2026-11-17 12:36"
+  },
+  {
+   "titre": "Crew of tanker unaccounted for after second attack north of Oman's Khasab, UKMTO says - Reuters",
+   "resume": "Crew of tanker unaccounted for after second attack north of Oman's Khasab, UKMTO says  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQYW55RnRFY2o3QVQ5M0ZRRElNUGhWUlhPaDkyODFYbEprTWw5NHhyTUFKSDQ5RE1TOWZWaElmSkY0UnZZeGUyMnFRbXpaOHo2SkxyaTFDUEowd3ZVUS1VaG9TRF9aTmNldHJyUGZtNnFuc2E2NGd0c0NNeDB5ai1rUTVQXzhZNzA5QUlUcTFINUJBZEYzMVRtREg5TTdCWjA2aEFXdWoydENMbTJyTlo3MDJxSHJTTnhlSm53YjJaTmFrRHV3ZEE?oc=5",
+   "date": "2026-11-17 09:47"
+  }
+ ],
+ "genere_le": "2026-11-17 14:53 UTC"
+}
