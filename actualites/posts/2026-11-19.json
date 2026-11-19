@@ -1,0 +1,178 @@
+{
+ "id": "2026-11-19",
+ "type": "quotidien",
+ "date": "2026-11-19",
+ "titre": "Anthropic entre en Bourse, l'or continue de dégringoler",
+ "chapeau": "L'IPO record d'Anthropic sur le Nasdaq et la glissade de l'or sont les faits marquants de ce jeudi matin.",
+ "sujet": "tech",
+ "photo": {
+  "src": "actualites/photos/2026-11-19.jpg",
+  "v": "d96ed701",
+  "legende": "Ultima Electronics Artec HTDY-00001 - board-9253",
+  "credit": "Raimond Spekking",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Ultima_Electronics_Artec_HTDY-00001_-_board-9253.jpg",
+  "fichier": "Ultima Electronics Artec HTDY-00001 - board-9253.jpg",
+  "requete": "electronics assembly line"
+ },
+ "marches": {
+  "ref": "2026-11-19",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7383.4599609375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.8169456824328677,
+    "ref": "2026-11-19"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8137.83984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.11035254557646439,
+    "ref": "2026-11-19"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 24816.259765625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.581583260573809,
+    "ref": "2026-11-19"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6170.35009765625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.2593264414987047,
+    "ref": "2026-11-19"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 5.085000038146973,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.01900005340576172,
+    "ref": "2026-11-19"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3715.699951171875,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.700177766793403,
+    "ref": "2026-11-19"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Micron Technology, Inc",
+   "valeur": 745.4450073242188,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 5.696398071715938,
+   "ref": "2026-11-19",
+   "ticker": "MU",
+   "nom": "Micron Technology, Inc"
+  }
+ },
+ "marches_texte": "Wall Street a terminé la séance du 19 novembre en nette hausse : le Nasdaq a progressé de +1,58 % à 24 816 points, le S&P 500 de +0,82 % à 7 383 points. Le mouvement le plus franc de notre liste revient à Micron Technology, en bond de +5,70 %. Côté européen, le CAC 40 a cédé un discret -0,11 %, tandis que l'or a glissé de -0,70 % à 3 715,70 $.",
+ "sections": [
+  {
+   "titre": "Anthropic s'invite au Nasdaq : l'IPO qui fait parler les family offices",
+   "texte": "Anthropic s'apprête à faire ses débuts sur le Nasdaq dans ce que CNBC qualifie d'entrée en Bourse « record ». L'événement ne se limite pas aux parquets : selon CNBC, le flot de richesses généré par l'IA et cette IPO en particulier accélère la création d'une nouvelle génération de family offices, plus légers et conçus pour l'ère de l'intelligence artificielle. Le théâtre des marchés se prépare donc à accueillir un nouvel acteur, et les coulisses se réorganisent déjà en conséquence.",
+   "sources": [
+    0,
+    1
+   ]
+  },
+  {
+   "titre": "L'or : une mauvaise année qui s'arrange... mal",
+   "texte": "L'or recule encore, et CNBC le dit sans détour : c'est une mauvaise année qui empire. La hausse des taux d'intérêt et le renforcement du dollar modifient l'attrait du métal précieux pour les investisseurs, selon CNBC, qui rappelle que le mouvement part de son record de janvier. La glissade de -0,70 % en clôture du 19 novembre s'inscrit dans cette dynamique plus large.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Méthane : Bruxelles repousse l'échéance de deux ans",
+   "texte": "Les pays de l'Union européenne et le Parlement européen se sont accordés pour reporter de deux ans l'entrée en vigueur de la réglementation européenne sur le méthane, selon Reuters. Le délai exact et les modalités pratiques de ce report n'ont pas été précisés dans la dépêche.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Trump et l'Iran : « on verra ce qui se passe »",
+   "texte": "Donald Trump a déclaré que les États-Unis « verraient ce qui se passe » concernant le conflit avec l'Iran après le 1er janvier, selon Reuters. Cette formulation, sibylline par nature, ne s'accompagne d'aucune précision supplémentaire dans la dépêche.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "Données financières de retraités new-yorkais compromises",
+   "texte": "Des pirates informatiques ont accédé aux données financières d'anciens agents de la ville de New York, selon un rapport de Politico relayé par Reuters. L'ampleur exacte de la violation et l'identité des responsables ne sont pas précisées dans la dépêche.",
+   "sources": [
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Jim Cramer's top 10 things to watch in the stock market Thursday",
+   "resume": "Anthropic is set to make its record-breaking Nasdaq debut.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/19/jim-cramers-top-10-things-to-watch-in-the-stock-market-thursday.html",
+   "date": "2026-11-19 14:00"
+  },
+  {
+   "titre": "Anthropic IPO, AI wealth spawn a new, leaner kind of family office",
+   "resume": "The Anthropic IPO and a flood of AI wealth are spurring the creation of new family offices built for the era of artificial intelligence.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/19/anthropic-ipo-ai-wealth-spawn-a-new-leaner-kind-of-family-office.html",
+   "date": "2026-11-19 14:00"
+  },
+  {
+   "titre": "Gold's bad year is getting worse. Why its price keeps falling",
+   "resume": "Gold has fallen sharply from its January record as higher interest rates and a stronger dollar change the investment case for the precious metal.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/19/gold-prices-fall-fed-rates-dollar.html",
+   "date": "2026-11-19 13:37"
+  },
+  {
+   "titre": "EU countries, Parliament agree to delay EU methane regulation by two years - Reuters",
+   "resume": "EU countries, Parliament agree to delay EU methane regulation by two years  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOWlc2MHpUb3VmbGltejJydzV6TVc3bVFyZTdEYVlkZmVKTVlwOVhyMHVyQnp5b21RTHIybHJ6WHl3c3pTNFhHTlRmOUpMVVdaaXZhZVlFeWtKbTZTbjdNdndrVWIwcVljRDVJM3dIdDFmaWM4YUZobldOZkJ2c3AzV19GT1NoaDdFcFhfUGZobEpKX2ZmQy1KUUhYQmF6U09XcnpDSWNtVUJzMzhEN1ZZOHJFZDcyWGllRFJpZVNmYw?oc=5",
+   "date": "2026-11-19 13:29"
+  },
+  {
+   "titre": "Trump says US will 'see what happens' in conflict with Iran after January 1 - Reuters",
+   "resume": "Trump says US will 'see what happens' in conflict with Iran after January 1  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNQkkzQVk3M3pnOXRWVlFCMmVzUEN0alhCS0gzQUhYNkhCMDhCOUM0N0tmMFpZNVNKcnVNbktaYXV5MV9ERm13WHoxTEVtUGRMUkZwT3dJZmlRZ2pyRE1WMGoyZW1VcXVWdTVRTmxZV1RISHNXWE9YY1BUUC1EWlJWRWRsYzlGTXo0WmhjaUxiUnAyMDl2OU9mWmliYndLd0htWGVLYWFUUldMOUIzLV9TSnBB?oc=5",
+   "date": "2026-11-19 12:13"
+  },
+  {
+   "titre": "Hackers access financial data of retired NYC government workers, Politico reports - Reuters",
+   "resume": "Hackers access financial data of retired NYC government workers, Politico reports  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQLWRPejl6dU81Ty1UaWYxU1h1MUowcElUOHdPM1Q0TE9XNENtRldiSGpTMVgxWVVSdVVuT2hBTXJDd19FREF0akZaMEx3NWVvbmhKUVMtUFdNWTBUbThDc1QxaDljeGlxalp2cy0xelkzM0R2Nl9FN0pmX3p3VjM3R0Rfb3Z5NGZCSDJtQ1ZGbUdSSGxWVDVQd2pXalRvSnlOazVvc1BYSGlBT0FGT0hRbXdHcDVSVXFTamhz?oc=5",
+   "date": "2026-11-19 11:09"
+  }
+ ],
+ "genere_le": "2026-11-19 14:41 UTC"
+}
