@@ -1,0 +1,158 @@
+{
+ "id": "2026-11-20",
+ "type": "quotidien",
+ "date": "2026-11-20",
+ "titre": "Shutdown, guerre avec l'Iran, APEC sans accord : les marchés européens trinquent",
+ "chapeau": "Le CAC 40 cède 1,46 %, l'Euro Stoxx 50 perd plus de 2 %, l'or et le brut reculent fortement. En toile de fond : un Congrès américain divisé et un sommet APEC sans résultats concrets.",
+ "sujet": "geopolitique",
+ "photo": {
+  "src": "actualites/photos/2026-11-20.jpg",
+  "v": "48d2298c",
+  "legende": "Solarpunk Cargo Ship in a storm",
+  "credit": "Jacob coffin",
+  "licence": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Solarpunk_Cargo_Ship_in_a_storm.png",
+  "fichier": "Solarpunk Cargo Ship in a storm.png",
+  "requete": "cargo ship containers sea"
+ },
+ "marches": {
+  "ref": "2026-11-20",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 7962.89990234375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.4582863526532392,
+    "ref": "2026-11-20"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 5984.919921875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -2.108977704586267,
+    "ref": "2026-11-20"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.986000061035156,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.06599998474121094,
+    "ref": "2026-11-20"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3576.5,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -2.957536290869624,
+    "ref": "2026-11-20"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 89.06999969482422,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -3.16373511187746,
+    "ref": "2026-11-20"
+   },
+   {
+    "cle": "eurusd",
+    "libelle": "Euro / dollar",
+    "valeur": 1.0990219116210938,
+    "dec": 4,
+    "unite": "$",
+    "type": "pct",
+    "variation": 0.16594976743781772,
+    "ref": "2026-11-20"
+   }
+  ],
+  "mouvement": {
+   "libelle": "ASML HOLDING",
+   "valeur": 1208.5999755859375,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -6.179163064982687,
+   "ref": "2026-11-20",
+   "ticker": "ASML.AS",
+   "nom": "ASML HOLDING"
+  }
+ },
+ "marches_texte": "La séance du 20 novembre a été difficile en Europe : l'Euro Stoxx 50 a lâché 2,11 % à 5 984,92 points, le CAC 40 reculant de son côté de 1,46 % à 7 962,90 points. ASML Holding a signé le plus fort mouvement de notre liste avec une chute de 6,18 % à 1 208,60 euros. L'or a poursuivi sa correction à 3 576,50 dollars (-2,96 %) et le Brent a reflué à 89,07 dollars (-3,16 %).",
+ "sections": [
+  {
+   "titre": "Washington en mode survie budgétaire",
+   "texte": "Le Congrès américain peine à éviter un shutdown fédéral, selon Reuters. Les débats sont paralysés par des divisions profondes autour du conflit avec l'Iran. L'issue reste incertaine à l'heure où les élus tentent de trouver un accord avant l'échéance budgétaire.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "APEC à Shenzhen : beaucoup de réunions, peu de résultats",
+   "texte": "Le sommet de l'APEC à Shenzhen s'est achevé sans avancées concrètes sur les grands dossiers commerciaux et technologiques entre les États-Unis et la Chine, selon des analystes cités par CNBC. Les tensions autour de Taïwan et de la tech restent entières au retour de Trump d'Asie. La rencontre trilatérale très médiatisée n'a pas produit d'engagements mesurables. Du côté européen, la réunion entre Trump, Xi et Poutine a suscité de vives inquiétudes, selon Reuters.",
+   "sources": [
+    2,
+    5
+   ]
+  },
+  {
+   "titre": "Anthropic : l'IPO record tient, la question du lendemain aussi",
+   "texte": "Les banques coordinatrices de l'introduction en Bourse d'Anthropic ont exercé leur option de surallocation (le « greenshoe »), portant le montant total levé à 93,5 milliards de dollars, selon CNBC. Au total, 1 127 000 000 actions ont été vendues au prix d'introduction de 83 dollars par action. La question qui anime les observateurs ce vendredi : le titre peut-il se maintenir au-dessus de ce prix de référence lors de ses premiers échanges ?",
+   "sources": [
+    1,
+    0
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Our top 10 things to watch in the stock market Friday",
+   "resume": "Can Anthropic stay above its IPO price of $83?",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/20/our-top-10-things-to-watch-in-the-stock-market-friday.html",
+   "date": "2026-11-20 14:06"
+  },
+  {
+   "titre": "Anthropic raises $93.5 billion total as underwriters scoop up ‘greenshoe’ overallotment",
+   "resume": "The AI company sold an aggregate of 1,127,000,000 shares at $83 per share in the record IPO.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/20/anthropic-ipo-greenshoe.html",
+   "date": "2026-11-20 13:31"
+  },
+  {
+   "titre": "U.S.-China trade, Taiwan and tech tensions remain unresolved as Trump returns from Asia",
+   "resume": "Analysts note few concrete outcomes from the high-profile trilateral and other meetings for APEC in Shenzhen this week.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/20/apec-summit-trump-xi-china-trade-taiwan.html",
+   "date": "2026-11-20 13:29"
+  },
+  {
+   "titre": "Congress struggles to avert US shutdown as Iran war divides lawmakers - Reuters",
+   "resume": "Congress struggles to avert US shutdown as Iran war divides lawmakers  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPUDZZTmpNTGpqLUMwR0JBZUJuaVBuMDAwYVpVanpkNTJDSGpNMEkxdXlSX1JkSDJpaG1SNUlmMnJZTHZ2Y192UmFKSjlGazN5UE9hZEJfcmFwdzVGWFE0QWk3OXBGWEpudkV5bTdiLVEwWjJicDFrTHJWVGVQT2RNMlBYZ3pMMmhQTHhKRnJ1QktWbGhVWWxRb0paRGZvdVNDdlRJNEd1N1lEbG9LOU1mTURPZE9CZlVvUk5j?oc=5",
+   "date": "2026-11-20 11:39"
+  },
+  {
+   "titre": "PODCAST: Anthropic IPO, Europe bristles over Trump-Xi-Putin meeting and Meta's muse - Reuters",
+   "resume": "PODCAST: Anthropic IPO, Europe bristles over Trump-Xi-Putin meeting and Meta's muse  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxObW5FRmZabmpDZzNyS1BwaUNycnNRXzBhVHlURXQxTk9ocEZ6bnZPRGJuWGdYZTlLWlhHd2JrNU5vandDSF9ZdGpMZG0zWmxYcWJsSWlOQmVoQVZRX2dkNWVQWWUtZldyclZOTHBQZWUwaDNGOGFDNFdSSnpaaDgtTGxvVlZ2WW1WWjVORkl6OFRzNHpUZDY1WGQ2Nm5jUmVzUHh0RDlPQ2tud19CcjdmZDRRMA?oc=5",
+   "date": "2026-11-20 11:32"
+  }
+ ],
+ "genere_le": "2026-11-20 14:21 UTC"
+}
