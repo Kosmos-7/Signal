@@ -1,0 +1,60 @@
+{
+ "id": "hebdo-2026-48",
+ "type": "hebdo",
+ "date": "2026-11-23",
+ "titre": "L'analyse du portefeuille · Sem. 48 · 2026",
+ "chapeau": "Cette semaine du 17 au 23 novembre a eu la forme d'un mauvais film d'horreur avec un twist inattendu au générique de fin: CAC40 à -3.7%, MSCI World à -2.6%, VIX qui spike vendredi jusqu'à 27, et le lundi matin, les futures Nasdaq repartent à la hausse comme si rien ne s'était …",
+ "sujet": null,
+ "photo": null,
+ "conviction": "neutre",
+ "sections": [
+  {
+   "titre": "Le raisonnement de la semaine",
+   "texte": "Cette semaine du 17 au 23 novembre a eu la forme d'un mauvais film d'horreur avec un twist inattendu au générique de fin: CAC40 à -3.7%, MSCI World à -2.6%, VIX qui spike vendredi jusqu'à 27, et le lundi matin, les futures Nasdaq repartent à la hausse comme si rien ne s'était passé. CNBC parle déjà d'un 'VIX buy signal historique'. On a vu ce film: la résurrection peut être réelle, ou ce peut être la fausse accalmie avant le dernier rebondissement.\n\nPour le portefeuille Signal, la semaine se conclut avec une performance nette cumulative de +24.39% depuis la création, soit +2.40 points de pourcentage au-dessus du MSCI World depuis le lancement. Capital actuel: 31947€. Les frais et impôts cumulés atteignent 101€. Le contexte macro dégradé (PMI France en downturn flagrant selon Reuters, Eurozone stable mais fragile) fragilise particulièrement nos positions européennes: DB1.DE et LSEG.L méritent une surveillance accrue dans ce contexte.\n\nSur le plan méthodologique, deux éléments ont guidé les décisions cette semaine. D'abord, R6 (stop-loss): ADYEN.AS à -14.2% après 207 jours approche le seuil des -15%, sans thèse documentée et sans catalyseur de retournement identifiable. La vente s'impose par discipline, pas par panique, et la perte réalisée génère un crédit d'impôt de 136€ utilisable 10 ans. Ensuite, R7 sur les Death Cross récents: ASML (4j), NVDA (7j) et ADBE (3j) affichent tous des signaux en transition que je traite comme ambigus, conformément à la règle: on ne vend pas un Golden Cross frais de vendredi qui se transforme en Death Cross le lundi suivant sans chercher la confirmation sur plusieurs semaines.\n\nUn apprentissage à retenir de cette période: ADBE illustre le piège du Golden Cross J+0. Achetée il y a 84 jours sur un signal 'fenêtre optimale', la position est à -11.1% et le Golden Cross a cédé la place à un Death Cross en 3 mois. Ce n'est pas que le signal était faux: c'est que le marché a tranché différemment. Le process était correct (Golden Cross frais, décote régression, score 87/100). L'outcome est décevant. Ces deux informations ne se contredisent pas.\n\nPour la semaine à venir, deux points de vigilance: ADBE atteint les 90 jours dans 6 jours, ce qui lèvera la contrainte R01 et ouvrira la question de la vente si le Death Cross se confirme. Et les futures Nasdaq en hausse ce lundi sont à surveiller: si le rebond tient, les positions en distribution technique (ASML, NVDA) pourraient stabiliser. Sinon, le spike VIX de vendredi n'était qu'un prélude.",
+   "sources": []
+  },
+  {
+   "titre": "Le mot aux lecteurs",
+   "texte": "Cette semaine, une seule vente et une seule ouverture de ligne. ADYEN.AS sort du portefeuille à -14.2% après 207 jours: le stop-loss approchait, la thèse n'avait jamais été documentée, aucun catalyseur de retournement n'est identifiable. La perte de 136€ est réalisée, mais elle devient un crédit d'impôt utilisable 10 ans, ce qui est la seule consolation fiscale disponible.\n\nLe produit de cette vente finance partiellement l'entrée sur ANET (Arista Networks), acteur de l'infrastructure réseau IA, avec un Golden Cross actif et un point d'entrée en zone Fibo 23.6% sous le top 52 semaines. Conviction modérée: le signal est mature (155 jours), pas frais, ce qui nuance l'enthousiasme.\n\nJe conserve environ 2300€ de liquidités en réserve, notamment parce que ADBE atteint les 90 jours de détention dans 6 jours. Si la situation technique ne s'améliore pas d'ici là (Death Cross à 3 jours actif, -11.1% depuis l'achat), la question de la sortie se posera sérieusement la semaine prochaine. Pas de décision précipitée aujourd'hui: la règle des 90 jours existe précisément pour éviter les sorties émotionnelles sur signal de court terme.\n\nPerformance nette cumulative du portefeuille depuis le lancement: +24.39%, soit +2.40 points au-dessus du MSCI World. On avance.",
+   "sources": []
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Jim Cramer's top 10 things to watch in the stock market Monday",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/23/jim-cramers-top-10-things-to-watch-in-the-stock-market-monday.html",
+   "date": "2026-11-23",
+   "resume": "Les futures du Nasdaq rebondissent fortement lundi matin après une semaine difficile sur les marchés américains."
+  },
+  {
+   "titre": "Wall Street's 'Fear Gauge' just flashed a buy sign",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/23/wall-streets-fear-gauge-just-flashed-a-buy-sign.html",
+   "date": "2026-11-23",
+   "resume": "Le VIX a connu un spike vendredi qui, historiquement, a souvent signalé une opportunité d'achat à court terme selon CNBC."
+  },
+  {
+   "titre": "Euro zone growth holds steady but France's deepening downturn clouds outlook, PMI shows - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQOEhfNVZTQlltZUg0ejVieWVmYU9HcnlPVVYzZGFiUnRLS0pTa1V1WC13RHVwWEI5MWsxNWN6Ti0wcWhhczJQN0Z5bTlnazdzd013Sm16Ulk5MnpheVJkNlI5anF5SE5Jb1ZwazJfVEVGU2pMZjNjbkNWUXR3ME1ZdTBuZHowWmRDd01sZWdNQmVSRVAwbHJSbEtPcE5FY0V0SDhoUC13UDRFRmFJLTgtOTEzbGFObElkTVkyVWsyYkdEdw?oc=5",
+   "date": "2026-11-23",
+   "resume": "La croissance de la zone euro se maintient en novembre mais le fort ralentissement économique de la France assombrit les perspectives, selon les PMI."
+  },
+  {
+   "titre": "India factory demand offsets weaker services growth in November, PMI shows - Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQZGFzYjBlVjh2dEFSYXUtMEFxNXN2UUJDXzUzTklZckxOekhkUEtfSDVxX1FhRHRwZzcxSEZnZUljTjhpbmRSZmkxMzk1bFRGa1BBY0JXT25sRVlRMGk2VHVudTJTamx2YkRFaFNuWTFqTnZ0NWRKd0JqLTdzTFg4NWdqLWM2czNyQjNHV3huRlBhSEJvNVdPcWxEMHZQTVdsZjNPQWs4RUFuVmlYVmlYY1ZPRWxtQmMtVXc?oc=5",
+   "date": "2026-11-23",
+   "resume": "En Inde, la demande manufacturière compense un ralentissement des services en novembre, selon les indices PMI."
+  },
+  {
+   "titre": "AI selloff spurs haven demand for Yen, Franc as Dollar slips",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-11-20/ai-selloff-boosts-haven-demand-for-yen-franc-as-dollar-slips",
+   "date": "2026-11-21",
+   "resume": "Le yen et le franc suisse ont progressé vendredi en valeur refuge, sur fond de ventes liées au secteur IA et de recul du dollar."
+  }
+ ],
+ "genere_le": "2026-11-23"
+}
