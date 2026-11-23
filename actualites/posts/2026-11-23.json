@@ -1,0 +1,164 @@
+{
+ "id": "2026-11-23",
+ "type": "quotidien",
+ "date": "2026-11-23",
+ "titre": "Le Nasdaq bondit de presque 7 % : la semaine se referme sur un sacré rebond",
+ "chapeau": "Wall Street clôture en fanfare après une semaine difficile. Nasdaq +6,83 %, S&P 500 +5 %, Nvidia +32,60 % : les indices reprennent leur souffle, et pas qu'un peu.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-23.jpg",
+  "v": "df94e69c",
+  "legende": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo…",
+  "credit": "Kondo Atsushi",
+  "licence": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shinko_Securities%27s_electronic_stock_board_nearby_Yaesu_side_of_Tokyo_Station_in_March_2009.jpg",
+  "fichier": "Shinko Securities's electronic stock board nearby Yaesu side of Tokyo Station in March 2009.jpg",
+  "requete": "stock exchange display board"
+ },
+ "marches": {
+  "ref": "2026-11-23",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7256.18994140625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 5.004056179839589,
+    "ref": "2026-11-23"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8057.7998046875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.6404377621330137,
+    "ref": "2026-11-23"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 24161.853515625,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 6.827046811829561,
+    "ref": "2026-11-23"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.934000015258789,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": 0.021999835968017578,
+    "ref": "2026-11-23"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3671.800048828125,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 4.449000137369906,
+    "ref": "2026-11-23"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 86.43000030517578,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -6.632817770217339,
+    "ref": "2026-11-23"
+   }
+  ],
+  "mouvement": {
+   "libelle": "NVIDIA Corporation",
+   "valeur": 166.4550018310547,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 32.60177124968426,
+   "ref": "2026-11-23",
+   "ticker": "NVDA",
+   "nom": "NVIDIA Corporation"
+  }
+ },
+ "marches_texte": "La séance du 23 novembre ressemble à un soulagement collectif : le S&P 500 reprend 5,00 % à 7 256,19 points, le Nasdaq s'envole de 6,83 % à 24 161,85 points. L'or profite lui aussi de l'ambiance refuge et gagne 4,45 % à 3 671,80 $. Le Brent, à l'inverse, décroche de 6,63 % à 86,43 $. Sur notre tableau, le mouvement du jour appartient sans conteste à Nvidia, qui clôture à 166,46 $ après un bond de 32,60 %.",
+ "sections": [
+  {
+   "titre": "Le VIX avait crié au loup – les marchés ont rebondi",
+   "texte": "Vendredi a vu le fameux « Fear Gauge » de Wall Street, le VIX, enregistrer un pic important. Selon CNBC, ce type de spike a historiquement signalé des points d'entrée. Les futures du Nasdaq repartaient déjà à la hausse dès lundi matin, selon la même source, après ce que Jim Cramer qualifiait lui-même de « semaine brutale » pour les actions. La mécanique est classique : la peur monte, puis les acheteurs reviennent.",
+   "sources": [
+    1,
+    2
+   ]
+  },
+  {
+   "titre": "Le yen et le franc suisse retrouvent des couleurs",
+   "texte": "Le repli des valeurs liées à l'intelligence artificielle en début de semaine avait déclenché une demande de valeurs refuges. Le yen a ainsi gagné 0,7 % face au dollar vendredi, tandis que le franc suisse mettait fin à une série de huit séances consécutives de baisse avec un rebond de 0,4 %, selon Bloomberg. Le dollar, lui, a glissé dans le mouvement.",
+   "sources": [
+    7
+   ]
+  },
+  {
+   "titre": "Un chercheur d'Anthropic et la conjecture de Riemann : vraiment ?",
+   "texte": "Le mathématicien Levent Alpöge, chercheur chez Anthropic, a publié vendredi sur son site personnel une preuve supposée de l'hypothèse de Riemann, l'un des problèmes non résolus les plus célèbres des mathématiques, en s'appuyant sur du code Lean généré avec Claude, selon Bloomberg. La communauté mathématique n'a pas encore rendu son verdict. L'hypothèse de Riemann est l'un des sept « problèmes du millénaire » dont la résolution est assortie d'un prix d'un million de dollars.",
+   "sources": [
+    6
+   ]
+  },
+  {
+   "titre": "Le crédit privé indien lève 720 millions de dollars",
+   "texte": "Le milliardaire indien PV Krishna Reddy a bouclé un financement de 720 millions de dollars en crédit privé pour le rachat de Megha Engineering and Infrastructures (MEIL), via une opération multi-tranches et multi-actifs, selon Bloomberg. L'opération illustre la montée en puissance du financement non bancaire en Inde pour des transactions de grande envergure et de structure complexe.",
+   "sources": [
+    8
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Jim Cramer's top 10 things to watch in the stock market Monday",
+   "resume": "Nasdaq futures are ripping Monday morning after a brutal week for stocks.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/23/jim-cramers-top-10-things-to-watch-in-the-stock-market-monday.html",
+   "date": "2026-11-23 14:17"
+  },
+  {
+   "titre": "Wall Street's 'Fear Gauge' just flashed a buy sign",
+   "resume": "Friday's huge VIX spike could be signaling a buying opportunity, if history is any indication",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/23/wall-streets-fear-gauge-just-flashed-a-buy-sign.html",
+   "date": "2026-11-23 14:14"
+  },
+  {
+   "titre": "Anthropic researcher claims to solve Riemann Problem with Claude",
+   "resume": "Mathematician Levent Alpöge claimed on his personal site Friday to have a proof of the Riemann hypothesis, sharing Lean code he says supports the claim",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-11-21/anthropic-researcher-claims-to-solve-riemann-problem-with-claude",
+   "date": "2026-11-21 16:08"
+  },
+  {
+   "titre": "AI selloff spurs haven demand for Yen, Franc as Dollar slips",
+   "resume": "The yen gained 0.7% against the dollar Friday, while the franc snapped an eight-day losing streak to rise 0.4%",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-11-20/ai-selloff-boosts-haven-demand-for-yen-franc-as-dollar-slips",
+   "date": "2026-11-21 14:37"
+  },
+  {
+   "titre": "Indian billionaire PV Krishna Reddy raises $720 million in private credit for Megha buyout",
+   "resume": "Private-credit lenders back the MEIL buyout via a multi-tranche, cross-asset deal, highlighting India’s growing reliance on non-bank funding for large, complex transactions",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-11-20/billionaire-raises-720-million-private-credit-for-megha-buyout",
+   "date": "2026-11-21 10:59"
+  }
+ ],
+ "genere_le": "2026-11-23 16:28 UTC"
+}
