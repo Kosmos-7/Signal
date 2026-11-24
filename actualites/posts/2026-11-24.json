@@ -1,0 +1,164 @@
+{
+ "id": "2026-11-24",
+ "type": "quotidien",
+ "date": "2026-11-24",
+ "titre": "Jensen Huang convoqué à Washington le jour même où Nvidia lance ses nouveaux produits",
+ "chapeau": "Le PDG de Nvidia joue sur deux tableaux simultanément. Pendant ce temps, le Nasdaq cède 2,21 % et l'or recule de 2,37 %.",
+ "sujet": "tech",
+ "photo": {
+  "src": "actualites/photos/2026-11-24.jpg",
+  "v": "78b1bd71",
+  "legende": "Robot arm picks up cylindrical objects in a factory setting",
+  "credit": "Shixart1985",
+  "licence": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Robot_arm_picks_up_cylindrical_objects_in_a_factory_setting.jpg",
+  "fichier": "Robot arm picks up cylindrical objects in a factory setting.jpg",
+  "requete": "robotic arm factory automation"
+ },
+ "marches": {
+  "ref": "2026-11-24",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7167.1201171875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.9679170925055682,
+    "ref": "2026-11-24"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8032.08984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.15848668522475828,
+    "ref": "2026-11-24"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 23556.986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -2.2108091914490644,
+    "ref": "2026-11-24"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 5993.2001953125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.33789477364884,
+    "ref": "2026-11-24"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.883999824523926,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.034000396728515625,
+    "ref": "2026-11-24"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3565.0,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -2.3662130868846187,
+    "ref": "2026-11-24"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Micron Technology, Inc",
+   "valeur": 629.6099853515625,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -11.034340187721266,
+   "ref": "2026-11-24",
+   "ticker": "MU",
+   "nom": "Micron Technology, Inc"
+  }
+ },
+ "marches_texte": "La séance du 24 novembre laisse des traces : le Nasdaq lâche 2,21 %, le S&P 500 recule de 0,97 %, et l'Euro Stoxx 50 cède 1,34 %. L'or, lui, décroche de 2,37 % à 3 565 dollars. La palme du jour revient à Micron Technology, qui plonge de 11,03 % — de loin le plus fort mouvement de la séance. Seul le CAC 40 résiste mieux que les autres, avec un repli limité à 0,16 %.",
+ "sections": [
+  {
+   "titre": "Jensen Huang entre la salle de conférence et la salle d'audition",
+   "texte": "Jensen Huang est de retour aux commandes de Nvidia, et son agenda du 24 novembre illustre bien la complexité du personnage : il présente de nouveaux produits à la conférence GTC tout en étant convoqué à Washington pour répondre aux questions des élus. Selon CNBC, il doit à la fois défendre l'entreprise sur le plan législatif et en assurer le développement commercial. La journée double casquette par excellence.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "OakNorth décroche une licence bancaire américaine",
+   "texte": "La banque numérique britannique OakNorth, soutenue par Jared Kushner, a obtenu une charte bancaire nationale américaine. L'objectif affiché est de s'implanter aux États-Unis dans un contexte de concurrence croissante entre banques digitales internationales, selon CNBC.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Irak : Bagdad et Erbil s'affrontent sur les champs pétroliers kurdes",
+   "texte": "Le Premier ministre irakien a ordonné au ministère du Pétrole de prendre en charge la gestion des champs pétroliers situés dans les zones sous contrôle kurde. Les autorités kurdes ont rejeté cette décision, selon Reuters. Le dossier ravive les tensions récurrentes entre gouvernement central et région autonome du Kurdistan irakien.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Gaza : frappe israélienne sur un responsable sécuritaire du Hamas",
+   "texte": "Une frappe aérienne israélienne a tué un haut responsable de la sécurité du Hamas à Gaza, selon des sources Hamas citées par Reuters. Par ailleurs, l'envoyé américain a déclaré n'être « pas certain » que l'aide militaire américaine à Israël prendrait fin cette année, comme l'avait promis Donald Trump, toujours selon Reuters.",
+   "sources": [
+    4,
+    5
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Iraqi PM orders ministry to manage oilfields in areas under Kurdish control, Kurds reject move - Reuters",
+   "resume": "Iraqi PM orders ministry to manage oilfields in areas under Kurdish control, Kurds reject move  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQT0ttY1ZZa0d3ajhmMUVZYmhrdHNGd0E4aC0wQWswZzc0UkFrcndsZ3pJUkJQMVF3Rlp0cjdGdkc2bG5XY093OWx6QWdtQVlJMVpRN2QzUUZicGRBZEROT2JUZEdQUTRpWHBpYzNXMVVwN1FQbmZpVmZfTm1leHQzclpZSkdsRk9MWHBzZEpaSlFoVjd0QzZQMnl2SDladHhlTzFmYkhmT2xPSlRTc2o2VmY2ZThoQ0dxbl94NXAxaXFWTHBNb1V6bzhXRTFPQQ?oc=5",
+   "date": "2026-11-24 15:47"
+  },
+  {
+   "titre": "Jensen Huang faces DC grilling the same day Nvidia releases new products at GTC",
+   "resume": "Jensen Huang is back as CEO of Nvidia and immediately faces the challenge of leading the chip giant and defending himself in Washington.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/24/jensen-huang-nvidia-congress-gtc.html",
+   "date": "2026-11-24 15:47"
+  },
+  {
+   "titre": "Kushner-backed OakNorth secures U.S. bank charter as global digital banks push into America",
+   "resume": "U.K. digital bank OakNorth has secured a U.S. national bank charter as it seeks to expand amid growing competition from international rivals.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/24/oaknorth-us-bank-charter.html",
+   "date": "2026-11-24 15:34"
+  },
+  {
+   "titre": "Israeli airstrike kills senior Hamas security official in Gaza, Hamas sources say - Reuters",
+   "resume": "Israeli airstrike kills senior Hamas security official in Gaza, Hamas sources say  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQVmdOUHJwNXRuX1lxb1VPQ19jS0kxSmZCbWNMZ01tbXRiYVU2Ujl3V0JxUnRHTGxUZXVZeVUzTGRIZ01VWTZGTWRQZngwSVVxVjJuRnN1QnExNkxFVmMxTkRBeGdWdnk5S1VKNkRIN1c2WkJmSWhwZmhva195Ql96RjJNNmlBeWFpUHJXd21GS1Q0dkRDUnJwR01SeEtIbUR5NDJVa1JFQ0hKMlNwRjFXd3g3TEg1blhmV2tIXzl4cnpoei1FSWg2YlZoOA?oc=5",
+   "date": "2026-11-24 10:59"
+  },
+  {
+   "titre": "US envoy 'not certain' military aid to Israel will end this year as Trump promised - Reuters",
+   "resume": "US envoy 'not certain' military aid to Israel will end this year as Trump promised  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNRVBIRjVvdm1kSlZiZHR3Q2M0aEw4UTRvR2p0eGpXVFJ6ZE5wcm52UjZkaXh1UGE2VWhpajc2aGxTT2l1UGxQQ05RTVZERHJvaHF0YVhsMkZVYWpNWkttMlBRN1piVTc1RnlYbXFqcWczVjlpSG5mZXhqMVh4bG5yekFpMzE4VG9nclNucXFValJZY0MzY0JZaE9KNlM2dWJJYm1YNEpfWlZrQXFaU0c3bzBaRDFVc05tT0RB?oc=5",
+   "date": "2026-11-24 10:37"
+  }
+ ],
+ "genere_le": "2026-11-24 16:24 UTC"
+}
