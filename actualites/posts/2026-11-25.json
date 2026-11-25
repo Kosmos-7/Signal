@@ -1,0 +1,158 @@
+{
+ "id": "2026-11-25",
+ "type": "quotidien",
+ "date": "2026-11-25",
+ "titre": "Le Nasdaq lâche plus de 4 % : l'IA plombe Wall Street",
+ "chapeau": "Les valeurs d'intelligence artificielle ont mené la baisse mercredi. Le Nasdaq a cédé 4,18 %, entraînant le S&P 500 dans son sillage.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-25.jpg",
+  "v": "8fdc7a18",
+  "legende": "Big Board of Trade",
+  "credit": "Amaury Laporte",
+  "licence": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Big_Board_of_Trade_(16914319605).jpg",
+  "fichier": "Big Board of Trade (16914319605).jpg",
+  "requete": "stock exchange display board"
+ },
+ "marches": {
+  "ref": "2026-11-25",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7003.08984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -2.7495838032329094,
+    "ref": "2026-11-25"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8012.490234375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -0.3482374728880755,
+    "ref": "2026-11-25"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 22741.255859375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -4.180932310650836,
+    "ref": "2026-11-25"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 5913.1298828125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": -1.5095521198467756,
+    "ref": "2026-11-25"
+   },
+   {
+    "cle": "t10",
+    "libelle": "Treasury 10 ans",
+    "valeur": 4.815999984741211,
+    "dec": 3,
+    "unite": "%",
+    "type": "pts",
+    "variation": -0.08799982070922852,
+    "ref": "2026-11-25"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3473.199951171875,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -2.4902426683442154,
+    "ref": "2026-11-25"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Lam Research Corporati",
+   "valeur": 173.22500610351562,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": -11.691984670891356,
+   "ref": "2026-11-25",
+   "ticker": "LRCX",
+   "nom": "Lam Research Corporati"
+  }
+ },
+ "marches_texte": "La séance de mercredi a été sévère : le Nasdaq a reculé de 4,18 % à 22 741 points, et le S&P 500 a lâché 2,75 % pour clôturer juste au-dessus des 7 000 points. Les Européens ont mieux résisté, le CAC 40 ne cédant que 0,35 %, mais l'Euro Stoxx 50 a tout de même reflué de 1,51 %. Côté valeurs individuelles, Lam Research a enregistré la plus forte chute de notre liste avec -11,69 %, à 173,23 dollars.",
+ "sections": [
+  {
+   "titre": "L'IA trinque, les futures donnaient le ton dès le matin",
+   "texte": "Selon Reuters, les futures sur le Nasdaq glissaient déjà de plus de 2 % en matinée, sur fond d'approfondissement des pertes liées à l'intelligence artificielle et d'une attention particulière portée aux données d'inflation à venir. CNBC confirmait de son côté que Wall Street s'orientait vers une ouverture nettement dans le rouge. Le résultat en clôture a confirmé ces craintes : le Nasdaq a finalement perdu 4,18 % sur la séance.",
+   "sources": [
+    5,
+    3
+   ]
+  },
+  {
+   "titre": "Les centres de données dans le viseur des États ?",
+   "texte": "La plateforme de paris Kalshi signalait mercredi que ses traders jugeaient désormais probable qu'au moins quatre États américains imposent un moratoire sur la construction de centres de données cette année. Fait notable : ces probabilités avaient baissé après que les démocrates ont remporté le Congrès et plusieurs postes de gouverneur, selon CNBC. Un risque réglementaire supplémentaire pour un secteur déjà malmené en séance.",
+   "sources": [
+    0
+   ]
+  },
+  {
+   "titre": "Proche-Orient et Irak : deux développements sécuritaires à noter",
+   "texte": "Une frappe israélienne a tué un responsable du Hamas, sa femme et ses enfants, selon Reuters. Par ailleurs, la Cour suprême irakienne a autorisé Bagdad à déployer des troupes pour sécuriser les frontières dans la région du Kurdistan, selon la même source.",
+   "sources": [
+    2,
+    4
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Kalshi traders say the odds of states imposing data center moratoriums is more likely than not",
+   "resume": "After Democrats swept Congress and key governor races, Kalshi traders lowered the odds that at least four states would pause data center build-out this year.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/25/kalshi-traders-say-the-odds-of-states-imposing-data-center-moratoriums-is-more-likely-than-not.html",
+   "date": "2026-11-25 15:18"
+  },
+  {
+   "titre": "Israeli strike kills Hamas official, his wife and children - Reuters",
+   "resume": "Israeli strike kills Hamas official, his wife and children  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOYjNlV0dRZTd0cDZJZVBnNFl6VUpTMDFlQlFIY0tJQzR5ZmNrYm9lNS1kMTRYbEpyM2FNMWp6Qms1NGh4VTU0YkxQN0NaY1FRV1diOENoQmdIQjJ0eU12VGZfamhNWHpsZUQ0MXczanBWZW1uWUZsVXpwcElhR2RXdG80RTBIcjZ1WjVHYW94MUhfUDI5dTA0ODZWRlBiVkFYNlhwR1RSaW1OZ2M?oc=5",
+   "date": "2026-11-25 14:19"
+  },
+  {
+   "titre": "Our top 10 things to watch in the stock market Wednesday",
+   "resume": "We're headed for a sharply lower open on Wall Street.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/25/our-top-10-things-to-watch-in-the-stock-market-wednesday.html",
+   "date": "2026-11-25 14:15"
+  },
+  {
+   "titre": "Iraq's top court says Baghdad can deploy troops to secure borders in Kurdistan region - Reuters",
+   "resume": "Iraq's top court says Baghdad can deploy troops to secure borders in Kurdistan region  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPeGlKWlRMLUx5SDRZY3FLU3VLM19RX2JqVko0T3dBakVEVHVldFVtQ21MbGo2WEEzUXU1clEteTVvWWh3bkdkQzZPX3RSemt5eWlBVjJQZy1RdjNjNnlpT19ZZUd0ekFDc3JuVHZKVWJfX2VtTlBzU3ZTTHlBX3dkV1NNVXA4NmJMVlRGX3FidmJsa0VacW5fQ2E1ZHBZTnJrN2pVc1BkUk1aZVliX2lMdHJBcUFaYlh5WmY3a05aSVZYN1hKemFtTGFUMG0?oc=5",
+   "date": "2026-11-25 13:25"
+  },
+  {
+   "titre": "Nasdaq futures slide over 2% as AI losses deepen; inflation data in focus - Reuters",
+   "resume": "Nasdaq futures slide over 2% as AI losses deepen; inflation data in focus  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNdUdBTGhVT2V5cDcydUZMX2NTdTkxVDBJSHdCMUgwNXBibGhQc28zdktpLXA2dGVUYzRzV3hpMld1U29KempSNUswd2dNYVdITlFxV2NycEkwbnlpZkdPSDNicVRKM3NCU2l0M0hoWU13UTZkbTAtX2JFempxaUtFbjdTZGMxT2lXM2g3dkR4cy1UYnVfZ09kOWpTNGxtUEZZOTRPaXhENlZ6OGt2ZF94d0RCVjdOSldfc0E?oc=5",
+   "date": "2026-11-25 12:54"
+  }
+ ],
+ "genere_le": "2026-11-25 16:02 UTC"
+}
