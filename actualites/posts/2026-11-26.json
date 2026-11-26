@@ -1,0 +1,146 @@
+{
+ "id": "2026-11-26",
+ "type": "quotidien",
+ "date": "2026-11-26",
+ "titre": "S&P menace la note de crédit de Nvidia, l'OPEC+ se retrouve en désaccord avant sa réunion",
+ "chapeau": "L'agence de notation pointe des risques de gouvernance chez Nvidia. Pendant ce temps, les membres de l'OPEC+ peinent à s'entendre sur les quotas 2027, et le Brent recule nettement.",
+ "sujet": "energie",
+ "photo": {
+  "src": "actualites/photos/2026-11-26.jpg",
+  "v": "e7dccc1e",
+  "legende": "Wind turbine at offshore wind farm Nordsee Ost 2019",
+  "credit": "Indium115",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wind_turbine_at_offshore_wind_farm_Nordsee_Ost_2019.jpg",
+  "fichier": "Wind turbine at offshore wind farm Nordsee Ost 2019.jpg",
+  "requete": "offshore wind farm turbines sea"
+ },
+ "marches": {
+  "ref": "2026-11-26",
+  "lignes": [
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8122.2099609375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.7748123234122035,
+    "ref": "2026-11-26"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6025.5498046875,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 2.223950024577832,
+    "ref": "2026-11-26"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3600.5,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 1.8298532235531417,
+    "ref": "2026-11-26"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 91.41000366210938,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -3.3823030626765114,
+    "ref": "2026-11-26"
+   },
+   {
+    "cle": "bitcoin",
+    "libelle": "Bitcoin",
+    "valeur": 60324.87109375,
+    "dec": 0,
+    "unite": "$",
+    "type": "pct",
+    "variation": -0.0883234771656445,
+    "ref": "2026-11-26"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Siemens Energy AG     ",
+   "valeur": 118.19999694824219,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 5.104035132934704,
+   "ref": "2026-11-26",
+   "ticker": "ENR.DE",
+   "nom": "Siemens Energy AG     "
+  }
+ },
+ "marches_texte": "Les places européennes ont terminé en belle forme : le CAC 40 a gagné +1,77 % à 8 122,21 points, et l'Euro Stoxx 50 a bondi de +2,22 % à 6 025,55 points. Le Brent, lui, a décroché de -3,38 % à 91,41 dollars, dans un contexte de tensions au sein de l'OPEC+ à la veille d'une réunion clé sur les quotas 2027. L'or a repris des couleurs à +1,83 %, tandis que le Bitcoin est resté quasi stable à -0,09 %.",
+ "sections": [
+  {
+   "titre": "S&P Global sort le carton jaune pour Nvidia",
+   "texte": "S&P Global Ratings a indiqué que la note de crédit de Nvidia pourrait être abaissée d'un cran. L'agence pointe des risques de management et de gouvernance qu'elle juge « croissants » au sein du groupe. Une mise en garde qui arrive alors que le fabricant de puces graphiques était déjà sous les projecteurs à Washington ces derniers jours. Siemens Energy AG, de son côté, termine en tête de notre relevé avec une hausse de +5,10 % à 118,20 euros.",
+   "sources": [
+    4
+   ]
+  },
+  {
+   "titre": "OPEC+ : la réunion de dimanche s'annonce animée",
+   "texte": "Les membres de l'OPEC+ n'ont pas réussi à s'entendre sur les capacités de production avant leur réunion de dimanche consacrée aux quotas 2027, selon des sources citées par Reuters. Ces désaccords persistent à l'intérieur du groupe, sans qu'un compromis ne soit encore en vue. Le Brent a cédé -3,38 % à 91,41 dollars à la clôture, ce qui illustre assez bien l'incertitude qui règne sur l'offre.",
+   "sources": [
+    2
+   ]
+  },
+  {
+   "titre": "Norse Atlantic en turbulences sévères",
+   "texte": "La compagnie aérienne Norse Atlantic a suspendu ses vols et averti d'un risque de faillite, selon Reuters. La situation est préoccupante pour les passagers concernés et pour les créanciers de la compagnie. Aucun détail supplémentaire sur les causes ou le calendrier n'a été communiqué à ce stade.",
+   "sources": [
+    1
+   ]
+  },
+  {
+   "titre": "Israël : des discussions de coalition progressent",
+   "texte": "En Israël, Gadi Eisenkot a conclu un accord avec une faction de gauche dans le cadre de négociations de coalition en cours, selon Reuters. Ces pourparlers semblent gagner en dynamisme, même si aucun accord global n'a encore été annoncé.",
+   "sources": [
+    0
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Israel's Eisenkot reaches deal with left-wing faction as coalition talks gain steam - Reuters",
+   "resume": "Israel's Eisenkot reaches deal with left-wing faction as coalition talks gain steam  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOQnltOGlBZG16OU1LUGlBS25WVUFhN2VnM0NhWHpzTlVscC1iOE5kdFZnaGhBbmNOdm80b05IQWttZm9MV0liVmZzVE56bXVxSHJXYXBmMktWSVQwZ2hfNmVGdWVJQmp5RkRtS1dXR0wwT0pXX1dFdUM5dDJrUWNTNHVsYjRNWXBWcmx3RTlqQ0ZQNEJWWFVxalA1Z0tkRExSbGJVOWpWX1pMY25aZHB3VnlvTWF0QUNvaElpM0FORVM5a1ZPa05mWDBXQQ?oc=5",
+   "date": "2026-11-26 14:50"
+  },
+  {
+   "titre": "Airline Norse Atlantic flags bankruptcy risk as flights suspended - Reuters",
+   "resume": "Airline Norse Atlantic flags bankruptcy risk as flights suspended  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNelVSdGZIMFMxelZ3SVpNZHYyYzRTZWN4S010bExkN0lmVVk5eng2VWp0VUszQXhGVDF5TUFxTDQzSXFuNmxHazV3d1VSR1BWMFRIeFBMQzJDeUM0RG5Cazhya0dpdDA2ZzJDSnd0WGVvVGItS0ttemdLUGhUbUwwbjBWbUk2VktZQUxsa0haX290d21lVFg5Ri1UZ0FkcFo1ZUpnSUNTd1ZudHJWYnQ5T0U4X0w2aExZRXBSOE9ETlEwa2ljRmxF?oc=5",
+   "date": "2026-11-26 13:58"
+  },
+  {
+   "titre": "OPEC+ oil capacity disputes persist ahead of Sunday meeting on 2027 quotas, sources say - Reuters",
+   "resume": "OPEC+ oil capacity disputes persist ahead of Sunday meeting on 2027 quotas, sources say  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPRWNNN09tM1phcUhhRlFRRTlHaW0yYU5fQUxJUVFEZjl5cEdhaHRnOGNwRkl6QUZTWEhNeU16Vnk5bHhNQ3JSd0FXNDlHZkdDVTV4ZkVsbUpQUFV4VWdobEhfdlpHOUt4SEJadFRpNHlYZTZRZFdBaEZKYnUyTHJ0eHlyWjE1a1FjenhuYWtoZHJJSHVPYVhjSlprNF81NkNiMlpQNUpBcy1kcHd3eEFaRjZHczhHV3RIWlJRaHZOQlBXUQ?oc=5",
+   "date": "2026-11-26 13:02"
+  },
+  {
+   "titre": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
+   "resume": "S&P Global Ratings said Nvidia's credit rating could be cut by one notch as it flagged \"rising\" management and governance risk at the chipmaker.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/26/nvidia-market-governance-risk.html",
+   "date": "2026-11-26 02:57"
+  }
+ ],
+ "genere_le": "2026-11-26 15:46 UTC"
+}
