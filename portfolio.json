@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26",
+  "updated_at": "2026-11-27",
   "week": "Sem. 48 · 2026",
   "injections": [
     {
@@ -16,31 +16,31 @@
     }
   ],
   "capital_initial": 30000.0,
-  "capital_actuel": 31251.09,
-  "performance": 21.68,
-  "performance_brute": 22.08,
+  "capital_actuel": 31001.51,
+  "performance": 20.71,
+  "performance_brute": 21.11,
   "total_frais_payes": 43.55,
   "total_impots_payes": 58.9,
   "total_pertes_reportables": 1771.43,
   "total_investi": 25092.57,
-  "valeur_positions": 27977.66,
-  "plus_value_latente_totale": 2885.09,
+  "valeur_positions": 27728.08,
+  "plus_value_latente_totale": 2635.51,
   "total_resultat_realise": -1634.0,
   "ecart_tresorerie": 0.0,
   "pfu_rate": 0.314,
-  "capital_post_liquidation": 30887.01,
-  "performance_post_liquidation": 20.27,
-  "frais_si_liquidation": 20.98,
-  "pfu_latent_si_liquidation": 343.1,
-  "pertes_si_liquidation": 713.26,
-  "plus_value_nette_si_liquidation": 2864.11,
+  "capital_post_liquidation": 30715.92,
+  "performance_post_liquidation": 19.6,
+  "frais_si_liquidation": 20.8,
+  "pfu_latent_si_liquidation": 264.79,
+  "pertes_si_liquidation": 726.22,
+  "plus_value_nette_si_liquidation": 2614.71,
   "pertes_imputees_si_liquidation": 1771.43,
-  "last_known_vix": 28.29,
+  "last_known_vix": 26.8,
   "last_known_vix_source": "live",
-  "last_known_vix_updated_at": "2026-11-26",
-  "benchmark_cac40": -2.62,
-  "benchmark_msci": 11.9,
-  "vs_benchmark": 9.78,
+  "last_known_vix_updated_at": "2026-11-27",
+  "benchmark_cac40": -1.06,
+  "benchmark_msci": 9.81,
+  "vs_benchmark": 10.9,
   "mode_panique": false,
   "perf_cac_semaine": -3.68,
   "positions": [
@@ -52,14 +52,14 @@
       "currency": "EUR",
       "date_achat": "2026-01-02",
       "prix_achat": 650.0,
-      "prix_actuel": 1201.2,
+      "prix_actuel": 1131.6,
       "quantite": 3,
       "montant_investi": 1951.46,
-      "valeur_actuelle": 3603.6,
-      "performance": 84.66,
+      "valeur_actuelle": 3394.8,
+      "performance": 73.96,
       "score_entree": 88,
-      "poids": 11.5,
-      "plus_value_latente_eur": 1652.14
+      "poids": 11.0,
+      "plus_value_latente_eur": 1443.34
     },
     {
       "ticker": "LLY",
@@ -72,11 +72,11 @@
       "prix_actuel": 1392.22,
       "quantite": 1,
       "montant_investi": 828.41,
-      "valeur_actuelle": 1269.69,
-      "performance": 53.27,
+      "valeur_actuelle": 1268.31,
+      "performance": 53.1,
       "score_entree": 89,
       "poids": 4.1,
-      "plus_value_latente_eur": 441.28
+      "plus_value_latente_eur": 439.9
     },
     {
       "ticker": "V",
@@ -89,11 +89,11 @@
       "prix_actuel": 424.39,
       "quantite": 2,
       "montant_investi": 569.91,
-      "valeur_actuelle": 774.08,
-      "performance": 35.82,
+      "valeur_actuelle": 773.23,
+      "performance": 35.68,
       "score_entree": 93,
       "poids": 2.5,
-      "plus_value_latente_eur": 204.17
+      "plus_value_latente_eur": 203.32
     },
     {
       "ticker": "AMD",
@@ -106,11 +106,11 @@
       "prix_actuel": 406.03,
       "quantite": 3,
       "montant_investi": 876.48,
-      "valeur_actuelle": 1110.89,
-      "performance": 26.74,
+      "valeur_actuelle": 1109.67,
+      "performance": 26.61,
       "score_entree": 85,
       "poids": 3.6,
-      "plus_value_latente_eur": 234.41
+      "plus_value_latente_eur": 233.19
     },
     {
       "ticker": "DB1.DE",
@@ -120,14 +120,14 @@
       "currency": "EUR",
       "date_achat": "2026-05-05",
       "prix_achat": 261.9,
-      "prix_actuel": 316.4,
+      "prix_actuel": 312.7,
       "quantite": 4,
       "montant_investi": 1048.39,
-      "valeur_actuelle": 1265.6,
-      "performance": 20.72,
+      "valeur_actuelle": 1250.8,
+      "performance": 19.31,
       "score_entree": 84,
       "poids": 4.0,
-      "plus_value_latente_eur": 217.21
+      "plus_value_latente_eur": 202.41
     },
     {
       "ticker": "SPGI",
@@ -141,12 +141,12 @@
       "quantite": 3,
       "montant_investi": 1078.08,
       "frais_achat_eur": 0.808,
-      "valeur_actuelle": 1260.57,
-      "performance": 16.93,
+      "valeur_actuelle": 1259.2,
+      "performance": 16.8,
       "score_entree": 77,
       "raison_achat": "SPGI affiche un Golden Cross frais à J+1 avec confirmation volume : c'est la fenêtre signal optimale selon la méthodologie (cross récent, momentum naissant). Score 77/100, z=-1.4σ sous sa droite de régression (décote de 35% sur tendance) et val=4/5 avec DD-21.8% : le timing d'entrée est propre, on est dans une zone Fibo acceptable, pas au top 52w. Secteur Finance (hors cluster Tech&IA saturé à 62%), pas de restriction sectorielle. Consensus +25% d'upside analystes. Le contexte macro de taux stables (Fed hold cette semaine) est favorable aux plateformes de données financières comme SPGI dont les revenus d'indices et de ratings sont structurellement résistants. Liquidités disponibles : 1430€, position initiale modeste (1 titre ~env. 400-500€ range estimé) pour rester au-dessus du plancher de 5% cash. Conviction modérée : Golden Cross J+1 est le meilleur signal timing de la semaine hors cluster saturé.",
-      "poids": 4.0,
-      "plus_value_latente_eur": 182.49
+      "poids": 4.1,
+      "plus_value_latente_eur": 181.12
     },
     {
       "ticker": "CRM",
@@ -159,12 +159,12 @@
       "prix_actuel": 197.21,
       "quantite": 7,
       "montant_investi": 1080.07,
-      "valeur_actuelle": 1258.98,
-      "performance": 16.56,
+      "valeur_actuelle": 1257.6,
+      "performance": 16.44,
       "score_entree": 80,
       "raison_achat": "CRM score 80/100, z=-2.4σ sous régression avec Death Cross mais RSI favorable et croissance CA modérée, profil similaire à NOW/INTU mais avec moins d'écart de régression. Les liquidités disponibles (3375€) permettent l'achat d'environ 1-2 titres à ~200-250€ estimé. La semaine macro est haussière (+2.1% MSCI World) et le portefeuille surperforme largement le benchmark (+11.4pp YTD), ce qui autorise une prise de risque mesurée sur une décote fondamentale documentée. Achat de 2 titres recommandé pour conserver des liquidités de sécurité.",
-      "poids": 4.0,
-      "plus_value_latente_eur": 178.91
+      "poids": 4.1,
+      "plus_value_latente_eur": 177.53
     },
     {
       "ticker": "BLK",
@@ -177,11 +177,11 @@
       "prix_actuel": 1141.86,
       "quantite": 1,
       "montant_investi": 914.17,
-      "valeur_actuelle": 1041.37,
-      "performance": 13.91,
+      "valeur_actuelle": 1040.23,
+      "performance": 13.79,
       "score_entree": 93,
-      "poids": 3.3,
-      "plus_value_latente_eur": 127.2
+      "poids": 3.4,
+      "plus_value_latente_eur": 126.06
     },
     {
       "ticker": "LSEG.L",
@@ -191,15 +191,15 @@
       "currency": "GBP",
       "date_achat": "2026-05-07",
       "prix_achat": 92.16,
-      "prix_actuel": 99.62,
+      "prix_actuel": 99.48,
       "quantite": 14,
       "montant_investi": 1492.64,
-      "valeur_actuelle": 1667.08,
-      "performance": 11.69,
+      "valeur_actuelle": 1664.54,
+      "performance": 11.52,
       "score_entree": 83,
       "raison_achat": "Score 83/100 avec Golden Cross frais (9j), fenêtre signal optimale, et prix sous régression (-1.1σ), offrant un point d'entrée encore favorable avant retour à la moyenne. Secteur financier infrastructure de marché défensif, non représenté dans le portefeuille. Les liquidités disponibles (3173€) permettent une entrée initiale mesurée.",
-      "poids": 5.3,
-      "plus_value_latente_eur": 174.44
+      "poids": 5.4,
+      "plus_value_latente_eur": 171.9
     },
     {
       "ticker": "NOW",
@@ -212,12 +212,12 @@
       "prix_actuel": 92.16,
       "quantite": 14,
       "montant_investi": 1095.08,
-      "valeur_actuelle": 1176.69,
-      "performance": 7.45,
+      "valeur_actuelle": 1175.4,
+      "performance": 7.33,
       "score_entree": 82,
       "raison_achat": "Score watchlist 82/100 avec un z=-3.4σ sous sa droite de régression, la décote est significative et représente une opportunité d'entrée à prix compressé. Death Cross présent depuis 190j mais RSI en zone favorable et croissance CA solide suggèrent un potentiel de retour vers la moyenne. Avec 5486€ de liquidités disponibles, j'achète 1 titre pour initier une position sans surpondérer un seul secteur tech.",
       "poids": 3.8,
-      "plus_value_latente_eur": 81.61
+      "plus_value_latente_eur": 80.32
     },
     {
       "ticker": "JPM",
@@ -230,11 +230,11 @@
       "prix_actuel": 316.74,
       "quantite": 2,
       "montant_investi": 540.75,
-      "valeur_actuelle": 577.73,
-      "performance": 6.84,
+      "valeur_actuelle": 577.1,
+      "performance": 6.72,
       "score_entree": 95,
-      "poids": 1.8,
-      "plus_value_latente_eur": 36.98
+      "poids": 1.9,
+      "plus_value_latente_eur": 36.35
     },
     {
       "ticker": "META",
@@ -247,11 +247,11 @@
       "prix_actuel": 609.89,
       "quantite": 2,
       "montant_investi": 1044.92,
-      "valeur_actuelle": 1112.43,
-      "performance": 6.46,
+      "valeur_actuelle": 1111.21,
+      "performance": 6.34,
       "score_entree": 84,
       "poids": 3.6,
-      "plus_value_latente_eur": 67.51
+      "plus_value_latente_eur": 66.29
     },
     {
       "ticker": "AMZN",
@@ -264,11 +264,11 @@
       "prix_actuel": 244.43,
       "quantite": 2,
       "montant_investi": 446.82,
-      "valeur_actuelle": 445.84,
-      "performance": -0.22,
+      "valeur_actuelle": 445.35,
+      "performance": -0.33,
       "score_entree": 90,
       "poids": 1.4,
-      "plus_value_latente_eur": -0.98
+      "plus_value_latente_eur": -1.47
     },
     {
       "ticker": "NVDA",
@@ -281,11 +281,11 @@
       "prix_actuel": 149.3,
       "quantite": 42,
       "montant_investi": 5929.08,
-      "valeur_actuelle": 5718.74,
-      "performance": -3.55,
+      "valeur_actuelle": 5712.49,
+      "performance": -3.65,
       "score_entree": 94,
-      "poids": 18.3,
-      "plus_value_latente_eur": -210.34,
+      "poids": 18.4,
+      "plus_value_latente_eur": -216.59,
       "frais_achat_eur": 2.95
     },
     {
@@ -300,12 +300,12 @@
       "quantite": 24,
       "montant_investi": 5537.42,
       "frais_achat_eur": 4.15,
-      "valeur_actuelle": 5096.14,
-      "performance": -7.97,
+      "valeur_actuelle": 5090.57,
+      "performance": -8.07,
       "score_entree": 87,
       "raison_achat": "ADBE affiche un Golden Cross frais à J+0 ce lundi, soit la fenêtre signal optimale par excellence selon la méthodologie. Score 87/100, z=-1.7sigma sous sa droite de régression (décote de 47% sur la tendance), val=4/5 avec un drawdown de -20.5% sous le top 52w : le setup d'entrée est propre, prix compressé avec momentum naissant. Le portefeuille est à 20/20 lignes, donc cet achat nécessite une rotation. Je vends ETN (score 93/100 mais détenu depuis 123 jours à -7.1%, thèse IA-infra moins différenciante que ADBE sur la croissance logicielle, et la friction fiscale est nulle vu la perte latente) pour financer ADBE. Rotation : je vends ETN (score 93/100, -7.1% depuis l'achat il y a 123 jours, thèse infrastructure IA générique, pas de catalyseur immédiat identifié) pour financer ADBE (score 87/100, Golden Cross J+0, z=-1.7sigma, décote forte, setup d'entrée optimal). Aucune friction fiscale : ETN est en perte latente, donc la vente ne déclenche pas de PFU mais génère un crédit d'impôt utilisable. J'engage environ 1 800 euros soit environ 5% du capital, conviction forte sur la qualité du setup technique et fondamental.",
-      "plus_value_latente_eur": -441.28,
-      "poids": 16.3
+      "plus_value_latente_eur": -446.85,
+      "poids": 16.4
     },
     {
       "ticker": "ANET",
@@ -319,16 +319,16 @@
       "quantite": 4,
       "montant_investi": 658.89,
       "frais_achat_eur": 0.4938,
-      "valeur_actuelle": 598.23,
-      "performance": -9.21,
+      "valeur_actuelle": 597.58,
+      "performance": -9.31,
       "score_entree": 84,
       "raison_achat": "Je mobilise le produit de la vente ADYEN.AS (environ 823€ libérés) pour ouvrir une position sur ANET. Score 84/100, Golden Cross actif depuis 155 jours, z=+0.7sigma (légère surcote régression, acceptable), spread +7.8%, pente +0.7%, consensus +40%. Le timing est 'acceptable' selon la fiche (val=3/5, DD-17.5% sous top 52w en zone Fibo 23.6%): pas une entrée parfaite, mais propre. La thèse: ANET est un acteur de premier plan de l'infrastructure réseau IA (thème infra-ia), titre non détenu en portefeuille, qui ouvre une nouvelle ligne (je passe à 17/20). Le VIX à 27 et les futures Nasdaq en hausse ce lundi indiquent une normalisation possible après le spike de vendredi, ce qui rend l'entrée moins risquée qu'en plein stress. J'engage environ 820€ soit 2.6% du capital, conviction modérée compte tenu du Golden Cross non frais (155j, signal mature) et de la légère surcote régression. Je n'engage PAS toute la liquidité disponible: je conserve environ 2300€ de réserve pour optionalité, notamment si ADBE déclenche un stop-loss à J+90 dans 6 jours. Montant 820€, poids portefeuille 2.6%.",
-      "plus_value_latente_eur": -60.66,
+      "plus_value_latente_eur": -61.31,
       "poids": 1.9
     }
   ],
   "liquidites": 3273.43,
-  "pct_liquidites": 10.5,
+  "pct_liquidites": 10.6,
   "ordres": [
     {
       "date": "2026-11-23",
@@ -6354,6 +6354,15 @@
       "liquidites": 3273.43,
       "benchmark_cac40": -2.62,
       "benchmark_msci": 11.9
+    },
+    {
+      "date": "2026-11-27",
+      "perf": 20.71,
+      "capital": 31001.51,
+      "valeur_positions": 27728.08,
+      "liquidites": 3273.43,
+      "benchmark_cac40": -1.06,
+      "benchmark_msci": 9.81
     }
   ],
   "max_drawdown": -18.12
