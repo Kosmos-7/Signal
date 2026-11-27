@@ -1,0 +1,172 @@
+{
+ "id": "2026-11-27",
+ "type": "quotidien",
+ "date": "2026-11-27",
+ "titre": "Norse Atlantic s'effondre, Black Friday résiste : drôle de vendredi",
+ "chapeau": "La compagnie Norse Atlantic dépose le bilan, les marchés font la fête pour le Black Friday. L'or monte, le brut plonge.",
+ "sujet": "marches",
+ "photo": {
+  "src": "actualites/photos/2026-11-27.jpg",
+  "v": "7d105746",
+  "legende": "The Tokyo Stock Exchange - main room 4",
+  "credit": "Kakidai",
+  "licence": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Tokyo_Stock_Exchange_-_main_room_4.jpg",
+  "fichier": "The Tokyo Stock Exchange - main room 4.jpg",
+  "requete": "Tokyo Stock Exchange Arrows"
+ },
+ "marches": {
+  "ref": "2026-11-27",
+  "lignes": [
+   {
+    "cle": "sp500",
+    "libelle": "S&P 500",
+    "valeur": 7246.580078125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.8882395796206652,
+    "ref": "2026-11-27"
+   },
+   {
+    "cle": "cac40",
+    "libelle": "CAC 40",
+    "valeur": 8155.08984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 0.5716006190272601,
+    "ref": "2026-11-27"
+   },
+   {
+    "cle": "nasdaq",
+    "libelle": "Nasdaq",
+    "valeur": 23869.083984375,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.2010751966929256,
+    "ref": "2026-11-27"
+   },
+   {
+    "cle": "stoxx",
+    "libelle": "Euro Stoxx 50",
+    "valeur": 6080.85986328125,
+    "dec": 2,
+    "unite": "",
+    "type": "pct",
+    "variation": 1.0992931752624657,
+    "ref": "2026-11-27"
+   },
+   {
+    "cle": "or",
+    "libelle": "Or",
+    "valeur": 3657.5,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": 3.4419353326331383,
+    "ref": "2026-11-27"
+   },
+   {
+    "cle": "petrole",
+    "libelle": "Brent",
+    "valeur": 91.1500015258789,
+    "dec": 2,
+    "unite": "$",
+    "type": "pct",
+    "variation": -3.6571177065335387,
+    "ref": "2026-11-27"
+   }
+  ],
+  "mouvement": {
+   "libelle": "Micron Technology, Inc",
+   "valeur": 626.3099975585938,
+   "dec": 2,
+   "unite": "",
+   "type": "pct",
+   "variation": 4.167982961928274,
+   "ref": "2026-11-27",
+   "ticker": "MU",
+   "nom": "Micron Technology, Inc"
+  }
+ },
+ "marches_texte": "Le Black Friday s'est avéré festif pour les indices : le Nasdaq a progressé de +1,20 % à 23 869 points et le S&P 500 de +0,89 % à 7 246 points, pendant que les Européens n'étaient pas en reste avec l'Euro Stoxx 50 à +1,10 %. L'or a brillé de son côté avec un bond de +3,44 % à 3 657,50 $, tandis que le Brent a nettement reculé de -3,66 % à 91,15 $. Dans notre liste, c'est Micron Technology qui a signé la meilleure performance de la séance à +4,17 %.",
+ "sections": [
+  {
+   "titre": "Norse Atlantic : la faillite qui a fait escale",
+   "texte": "L'unité norvégienne de la compagnie aérienne Norse Atlantic a déclaré la faillite, selon Reuters. La compagnie a suspendu ses vols, le conflit avec l'Iran ayant pesé lourd sur ses opérations. Une filiale en difficulté, des vols à l'arrêt : le dossier est sobre et sans détour.",
+   "sources": [
+    1,
+    5
+   ]
+  },
+  {
+   "titre": "Trump et l'OTAN : appel à la retenue côté russe",
+   "texte": "Donald Trump et le chef de l'OTAN ont conjointement appelé la Russie à éviter toute action susceptible d'élargir le conflit en Ukraine, rapporte Reuters. L'appel a été lancé ce matin, sans détail supplémentaire sur les circonstances ou les réponses obtenues.",
+   "sources": [
+    3
+   ]
+  },
+  {
+   "titre": "Black Friday : les consommateurs cherchent les bonnes affaires",
+   "texte": "L'inflation pousse les consommateurs à traquer les promotions, mais les enseignes anticipent tout de même des dépenses solides pour le Black Friday et au-delà, selon CNBC. Les marchés américains étaient sur une trajectoire record pour ce vendredi de grande braderie. Dans le même temps, Anthropic cherchait à retrouver son prix d'introduction en Bourse, selon CNBC.",
+   "sources": [
+    0,
+    4
+   ]
+  },
+  {
+   "titre": "Vos appareils tombent en panne plus vite, et coûtent plus cher",
+   "texte": "Une étude citée par CNBC indique que les biens durables, des voitures aux téléviseurs connectés, sont devenus moins fiables, même alors que leurs prix ont augmenté. Le constat touche un large éventail de produits de consommation. Une tendance que les acheteurs du Black Friday apprécieront modérément.",
+   "sources": [
+    2
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "titre": "Top 10 things to watch in the stock market on Black Friday",
+   "resume": "Stocks are on pace for a record Black Friday as Anthropic tries to regain its IPO price.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/investingclub/2026/11/27/top-10-things-to-watch-in-the-stock-market-on-black-friday.html",
+   "date": "2026-11-27 14:28"
+  },
+  {
+   "titre": "Airline Norse Atlantic's Norwegian operating unit declares bankruptcy - Reuters",
+   "resume": "Airline Norse Atlantic's Norwegian operating unit declares bankruptcy  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOZjF6SXBzRmpCeHczaU9VZnNGczNjcWtlMXNCMUFrTUxfbUViN3cxUXpPbFU0YVRTQzU0aEY5MGdLY1hnU2I1R21jd2tYNnIyLVVLeEtoSEY2WjZKNTE0QkdLWWFzcmkySGFYUWE4Vmh3OVpzLWJ3V25LX18zSUJ4TS1TcExrVFFoUUVvOS13NmF1dUZJWVo1S2hLRlZaNmMzTWh1dDFsTHpXUzlzN2lWQ01sc1VVR0hOUzlZSTJ3?oc=5",
+   "date": "2026-11-27 13:37"
+  },
+  {
+   "titre": "It’s not just you: Durable goods are getting less reliable, from sputtering cars to glitching smart TVs",
+   "resume": "A wide swath of consumer products are becoming less reliable and durable, even as their prices rise, research shows.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/make-it/2026/11/27/durable-goods-reliability-cars-appliances-tvs.html",
+   "date": "2026-11-27 13:05"
+  },
+  {
+   "titre": "Trump and NATO chief urge Russia to avoid actions that widen Ukraine war - Reuters",
+   "resume": "Trump and NATO chief urge Russia to avoid actions that widen Ukraine war  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOcVE1ZllSR0xRNHFVUjR0WWJjQXF2MllxbUV3WUQ2Vno2WFFCbzkyODBvWjE1WmtscC1rdkVLdVJXUDhUUXFiMDZQbS01akV2UjhQQUFwMWp2aWdrdm5ZQy11b0tvX3BkSVU1WmdUV2J4N2l0UF9tcHVqRzBuWkxhRUVsU1FtMTl1aEhRWkx3RFI2VDlraEhKemFOV0ZEX0todDFpTTBsTndhZk0zclNaWk5lNA?oc=5",
+   "date": "2026-11-27 11:13"
+  },
+  {
+   "titre": "Inflation has shoppers hunting for value. That bodes well for Black Friday",
+   "resume": "Even as consumers face macroeconomic headwinds, retailers are expecting robust holiday spending through Black Friday and beyond.",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/27/black-friday-2026-inflation-value-deals.html",
+   "date": "2026-11-27 11:00"
+  },
+  {
+   "titre": "Norse Atlantic files for bankruptcy, halts flights as Iran war jolts airlines - Reuters",
+   "resume": "Norse Atlantic files for bankruptcy, halts flights as Iran war jolts airlines  Reuters",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUFZ5amdzZG00RTRadGk1NlNDb0JFeTNseGJid3dwNWtNTFBvaVQ1LVdnSUs1Rkk3Uy1tTlNDVVBmMkRkV1QxU3lGcHR2ZzU0bG9PMlM4OXphZHpVVVBXNS14WnRNX2xsWEZrSXV4TjRHUlZFWUlEYldEY1NFZlRqa2xjNUE2T0l5cWJ3MTU4aGo3Qk91WVcwdHdtZWdkTEZ2bWdnUGxrVHdOYmZ4ZDVMOGtWc2U5S2ZuM1FjRQ?oc=5",
+   "date": "2026-11-27 07:39"
+  }
+ ],
+ "genere_le": "2026-11-27 15:35 UTC"
+}
